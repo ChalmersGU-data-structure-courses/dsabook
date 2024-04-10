@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Cliff Shaffer" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Nick Smallbone" />
+  <title>DSABook – Analysis of Open Addressing</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../bookstyle.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+      },
+      "HTML-CSS": {
+        scale: "80",
+      }
+    });
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Up:</span> <a href="8-hashing.html" accesskey="u" rel="up">Hashing</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="8.9-open-addressing-deletion.html" accesskey="n" rel="next">Open Addressing, Deletion</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Previous:</span> <a href="8.7-improved-collision-resolution.html" accesskey="p" rel="previous">Improved Collision Resolution</a>
+</span>
+</div>
+</nav>
+<section id="analysis-of-open-addressing" class="level2"
+data-number="8.8">
+<h2 data-number="8.8"><span class="header-section-number">8.8</span>
+Analysis of Open Addressing</h2>
+<p>How efficient is hashing? We can measure hashing performance in terms
+of the number of record accesses required when performing an operation.
+The primary operations of concern are insertion, deletion, and search.
+It is useful to distinguish between successful and unsuccessful
+searches. Before a record can be deleted, it must be found. Thus, the
+number of accesses required to delete a record is equivalent to the
+number required to successfully search for it. To insert a record, an
+empty slot along the record’s probe sequence must be found. This is
+equivalent to an unsuccessful search for the record (recall that a
+successful search for the record during insertion should generate an
+error because two records with the same key are not allowed to be stored
+in the table).</p>
+<p>When the hash table is empty, the first record inserted will always
+find its home position free. Thus, it will require only one record
+access to find a free slot. If all records are stored in their home
+positions, then successful searches will also require only one record
+access. As the table begins to fill up, the probability that a record
+can be inserted into its home position decreases. If a record hashes to
+an occupied slot, then the collision resolution policy must locate
+another slot in which to store it. Finding records not stored in their
+home position also requires additional record accesses as the record is
+searched for along its probe sequence. As the table fills up, more and
+more records are likely to be located ever further from their home
+positions.</p>
+<p>From this discussion, we see that the expected cost of hashing is a
+function of how full the table is. Define the <a href="10-glossary.html#load-factor" class="term">load
+factor</a> for the table as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>=</mo><mi>N</mi><mi>/</mi><mi>M</mi></mrow><annotation encoding="application/x-tex">\alpha = N/M</annotation></semantics></math>,
+where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>
+is the number of records currently in the table.</p>
+<p>An estimate of the expected cost for an insertion (or an unsuccessful
+search) can be derived analytically as a function of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>
+in the case where we assume that the probe sequence follows a random
+permutation of the slots in the hash table. Assuming that every slot in
+the table has equal probability of being the home slot for the next
+record, the probability of finding the home position occupied is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>.
+The probability of finding both the home position occupied and the next
+slot on the probe sequence occupied is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>N</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>N</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>M</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>M</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">(N(N-1))/(M(M-1))</annotation></semantics></math>.
+The probability of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+collisions is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>N</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>N</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi><mi>.</mi><mi>.</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>N</mi><mo>−</mo><mi>i</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>M</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>M</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi><mi>.</mi><mi>.</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>M</mi><mo>−</mo><mi>i</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">(N(N-1) ... (N-i+1))/(M(M-1) ... (M-i+1))</annotation></semantics></math>.
+If
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>
+are large, then this is approximately
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>N</mi><mi>/</mi><mi>M</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>i</mi></msup><annotation encoding="application/x-tex">(N/M)^i</annotation></semantics></math>.
+The expected number of probes is one plus the sum over
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>&gt;</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i &gt;= 1</annotation></semantics></math>
+of the probability of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+collisions, which is approximately</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mn>1</mn><mo>+</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mo accent="false">∞</mo></munderover><msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>N</mi><mi>/</mi><mi>M</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>i</mi></msup></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mn>1</mn><mi>/</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>α</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr></mtable><annotation encoding="application/x-tex">
+\begin{eqnarray}
+1 + \sum_{i=1}^\infty (N/M)^i &amp;=&amp; 1/(1-\alpha)
+\end{eqnarray}
+</annotation></semantics></math></p>
+<p>The cost for a successful search (or a deletion) has the same cost as
+originally inserting that record. However, the expected value for the
+insertion cost depends on the value of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>
+not at the time of deletion, but rather at the time of the original
+insertion. We can derive an estimate of this cost (essentially an
+average over all the insertion costs) by integrating from 0 to the
+current value of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>,
+yielding a result of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mi>/</mi><mi>α</mi><mo stretchy="true" form="postfix">)</mo></mrow><msub><mo>log</mo><mi>e</mi></msub><mn>1</mn><mi>/</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>α</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">(1/\alpha) \log_e 1/(1-\alpha).</annotation></semantics></math></p>
+<p>It is important to realize that these equations represent the
+expected cost for operations when using the unrealistic assumption that
+the probe sequence is based on a random permutation of the slots in the
+hash table. We thereby avoid all the expense that results from a
+less-than-perfect collision resolution policy. Thus, these costs are
+lower-bound estimates in the average case. The true average cost under
+linear probing is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>+</mo><mn>1</mn><mi>/</mi><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>α</mi><mo stretchy="true" form="postfix">)</mo></mrow><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\frac{1}{2}(1 + 1/(1-\alpha)^2)</annotation></semantics></math>
+for insertions or unsuccessful searches and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>+</mo><mn>1</mn><mi>/</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>α</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\frac{1}{2}(1 + 1/(1-\alpha))</annotation></semantics></math>
+for deletions or successful searches.</p>
+<div id="HashPlot">
+<div class="odsafig" width="400" data-align="center"
+data-capalign="justify" data-figwidth="90%" alt="Hashing analysis plot">
+<p>Images/hashplot.png</p>
+<p>A plot showing the growth rate of the cost for insertion and deletion
+into a hash table as the load factor increases.</p>
+</div>
+</div>
+<p><a href="8.8-analysis-of-open-addressing.html#HashPlot">Figure
+#HashPlot</a> shows how the expected number of record accesses grows as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>
+grows. The horizontal axis is the value for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>
+, the vertical axis is the expected number of accesses to the hash
+table. Solid lines show the cost for “random” probing (a theoretical
+lower bound on the cost), while dashed lines show the cost for linear
+probing (a relatively poor collision resolution strategy). The two
+leftmost lines show the cost for insertion (equivalently, unsuccessful
+search); the two rightmost lines show the cost for deletion
+(equivalently, successful search).</p>
+<p>From the figure, you should see that the cost for hashing when the
+table is not too full is typically close to one record access. This is
+extraordinarily efficient, much better than binary search which requires
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>log</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n</annotation></semantics></math>
+record accesses. As
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>
+increases, so does the expected cost. For small values of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>,
+the expected cost is low. It remains below two until the hash table is
+about half full. When the table is nearly empty, adding a new record to
+the table does not increase the cost of future search operations by
+much. However, the additional search cost caused by each additional
+insertion increases rapidly once the table becomes half full. Based on
+this analysis, the rule of thumb is to design a hashing system so that
+the hash table never gets above about half full, because beyond that
+point performance will degrade rapidly. This requires that the
+implementor have some idea of how many records are likely to be in the
+table at maximum loading, and select the table size accordingly. The
+goal should be to make the table small enough so that it does not waste
+a lot of space on the one hand, while making it big enough to keep
+performance good on the other.</p>
+<p>
+<div id="HashAnalSumm" class="embedContainer">
+<iframe id="HashAnalSumm_iframe" aria-label="HashAnalSumm" src="../interactive/Hashing/HashAnalSumm.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</section>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Cliff Shaffer" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Nick Smallbone" />
+  <title>DSABook – Binary Tree Guided Information Flow</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../bookstyle.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+      },
+      "HTML-CSS": {
+        scale: "80",
+      }
+    });
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Up:</span> <a href="6-binary-search-trees.html" accesskey="u" rel="up">Binary Search Trees</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="6.3-balanced-trees.html" accesskey="n" rel="next">Balanced Trees</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Previous:</span> <a href="6.1-binary-search-tree-definition.html" accesskey="p" rel="previous">Binary Search Tree Definition</a>
+</span>
+</div>
+</nav>
+<section id="binary-tree-guided-information-flow" class="level2"
+data-number="6.2">
+<h2 data-number="6.2"><span class="header-section-number">6.2</span>
+Binary Tree Guided Information Flow</h2>
+<p>When writing a recursive method to solve a problem that requires
+traversing a binary tree, we want to make sure that we are visiting the
+required nodes (no more and no less).</p>
+<p>So far, we have seen several tree traversals that visited every node
+of the tree. We also saw the BST search, insert, and remove routines,
+that each go down a single path of the tree. <a href="10-glossary.html#guided-traversal" class="term">Guided
+traversal</a> refers to a problem that does not require visiting
+every node in the tree, though it typically requires looking at more
+than one path through the tree. This means that the recursive function
+is making some decision at each node that sometimes lets it avoid
+visiting one or both of its children. The decision is typically based on
+the value of the current node. Many problems that require information
+flow on binary search trees are “guided” in this way.</p>
+<section id="example-39" class="level4 unnumbered topic">
+<h4 class="unnumbered">Example</h4>
+<p>An extreme example is finding the minimum value in a BST. A bad
+solution to this problem would visit every node of the tree. However, we
+can take advantage of the BST property to avoid visiting most nods in
+the tree. You know that the values greater than the root are always in
+the right subtree, and those values less than the root are in the left
+subtree. Thus, at each node we need only visit the left subtree until we
+reach a leaf node.</p>
+</section>
+<p>Here is a problem that typically needs to visit more than just a
+single path, but not all of the nodes.</p>
+<p>
+<div id="IneffBinaryTreeRangeCON" class="ssAV" data-short-name="IneffBinaryTreeRangeCON" data-long-name="Inefficient Binary Tree Traversal on Range Slide Show" alt="Inefficient Binary Tree Traversal on Range Slide Show" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<section id="binary-search-tree-small-count-exercise" class="level3"
+data-number="6.2.1">
+<h3 data-number="6.2.1"><span class="header-section-number">6.2.1</span>
+Binary Search Tree Small Count Exercise</h3>
+<div class="extrtoolembed" data-workout_id="64">
+<p>‘Binary Search Tree Small Count Exercise’</p>
+</div>
+</section>
+</section>
+<script type="text/javascript" src="../interactive/BTRecurTutor/IneffBinaryTreeRangeCON.js"></script>
+</body>
+</html>

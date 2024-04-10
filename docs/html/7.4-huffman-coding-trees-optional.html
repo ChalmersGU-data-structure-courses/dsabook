@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Cliff Shaffer" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Nick Smallbone" />
+  <title>DSABook – Huffman Coding Trees (optional)</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #ffffff;
+        color: #a0a0a0;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+    div.sourceCode
+      { color: #1f1c1b; background-color: #ffffff; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #1f1c1b; } /* Normal */
+    code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+    code span.an { color: #ca60ca; } /* Annotation */
+    code span.at { color: #0057ae; } /* Attribute */
+    code span.bn { color: #b08000; } /* BaseN */
+    code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+    code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #924c9d; } /* Char */
+    code span.cn { color: #aa5500; } /* Constant */
+    code span.co { color: #898887; } /* Comment */
+    code span.cv { color: #0095ff; } /* CommentVar */
+    code span.do { color: #607880; } /* Documentation */
+    code span.dt { color: #0057ae; } /* DataType */
+    code span.dv { color: #b08000; } /* DecVal */
+    code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+    code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #b08000; } /* Float */
+    code span.fu { color: #644a9b; } /* Function */
+    code span.im { color: #ff5500; } /* Import */
+    code span.in { color: #b08000; } /* Information */
+    code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+    code span.op { color: #1f1c1b; } /* Operator */
+    code span.ot { color: #006e28; } /* Other */
+    code span.pp { color: #006e28; } /* Preprocessor */
+    code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #ff5500; } /* SpecialString */
+    code span.st { color: #bf0303; } /* String */
+    code span.va { color: #0057ae; } /* Variable */
+    code span.vs { color: #bf0303; } /* VerbatimString */
+    code span.wa { color: #bf0303; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../bookstyle.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+      },
+      "HTML-CSS": {
+        scale: "80",
+      }
+    });
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+<link href="../interactive/DataStructures/huffman.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Binary/huffmanCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Development/TreeTrieCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Binary/HuffProofCON.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Up:</span> <a href="7-priority-queues.html" accesskey="u" rel="up">Priority queues</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="7.5-priority-queues-chapter-summary.html" accesskey="n" rel="next">Priority Queues Chapter Summary</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Previous:</span> <a href="7.3-heapsort.html" accesskey="p" rel="previous">Heapsort</a>
+</span>
+</div>
+</nav>
+<section id="huffman-coding-trees-optional" class="level2"
+data-number="7.4">
+<h2 data-number="7.4"><span class="header-section-number">7.4</span>
+Huffman Coding Trees (optional)</h2>
+<p>One can often gain an improvement in space requirements in exchange
+for a penalty in running time. There are many situations where this is a
+desirable tradeoff. A typical example is storing files on disk. If the
+files are not actively used, the owner might wish to compress them to
+save space. Later, they can be uncompressed for use, which costs some
+time, but only once.</p>
+<p>We often represent a set of items in a computer program by assigning
+a unique code to each item. For example, the standard <a href="10-glossary.html#ascii-character-coding" class="term">ASCII coding</a> scheme
+assigns a unique eight-bit value to each character. It takes a certain
+minimum number of bits to provide enough unique codes so that we have a
+different one for each character. For example, it takes
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">⌈</mo><mi>l</mi><mi>o</mi><mi>g</mi><mspace width="0.222em"></mspace><mn>128</mn><mo stretchy="true" form="postfix">⌉</mo></mrow><annotation encoding="application/x-tex">\left\lceil log\ 128\right\rceil</annotation></semantics></math>
+or seven bits to provide the 128 unique codes needed to represent the
+128 symbols of the ASCII character set.</p>
+<p>The requirement for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">⌈</mo><mi>l</mi><mi>o</mi><mi>g</mi><mspace width="0.222em"></mspace><mi>n</mi><mo stretchy="true" form="postfix">⌉</mo></mrow><annotation encoding="application/x-tex">\left \lceil log\ n \right\rceil</annotation></semantics></math>
+bits to represent
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+unique code values assumes that all codes will be the same length, as
+are ASCII codes. These are called <a href="10-glossary.html#fixed-length-coding" class="term">fixed-length codes</a>. If all characters were used equally
+often, then a fixed-length coding scheme is the most space efficient
+method. However, you are probably aware that not all characters are used
+equally often in many applications. For example, the various letters in
+an English language document have greatly different frequencies of
+use.</p>
+<p><a href="7.4-huffman-coding-trees-optional.html#Freq">Table #Freq</a>
+shows the relative frequencies of the letters of the alphabet. From this
+table we can see that the letter ‘E’ appears about 60 times more often
+than the letter ‘Z’. In normal ASCII, the words “DEED” and “MUCK”
+require the same amount of space (four bytes). It would seem that words
+such as “DEED”, which are composed of relatively common letters, should
+be storable in less space than words such as “MUCK”, which are composed
+of relatively uncommon letters.</p>
+<div id="Freq">
+<section id="table-2" class="level4 unnumbered topic">
+<h4 class="unnumbered">Table</h4>
+<p>Relative frequencies for the 26 letters of the alphabet as they
+appear in a selected set of English documents. “Frequency” represents
+the expected frequency of occurrence per 1000 letters, ignoring
+case.</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Letter</th>
+<th style="text-align: center;">Frequency</th>
+<th style="text-align: center;">Letter</th>
+<th style="text-align: center;">Frequency</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">A</td>
+<td style="text-align: center;">77</td>
+<td style="text-align: center;">N</td>
+<td style="text-align: center;">67</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">B</td>
+<td style="text-align: center;">17</td>
+<td style="text-align: center;">O</td>
+<td style="text-align: center;">67</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">32</td>
+<td style="text-align: center;">P</td>
+<td style="text-align: center;">20</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">D</td>
+<td style="text-align: center;">42</td>
+<td style="text-align: center;">Q</td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">E</td>
+<td style="text-align: center;">120</td>
+<td style="text-align: center;">R</td>
+<td style="text-align: center;">59</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">24</td>
+<td style="text-align: center;">S</td>
+<td style="text-align: center;">67</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">G</td>
+<td style="text-align: center;">17</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">85</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">H</td>
+<td style="text-align: center;">50</td>
+<td style="text-align: center;">U</td>
+<td style="text-align: center;">37</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">I</td>
+<td style="text-align: center;">76</td>
+<td style="text-align: center;">V</td>
+<td style="text-align: center;">12</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">J</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">W</td>
+<td style="text-align: center;">22</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">K</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">L</td>
+<td style="text-align: center;">42</td>
+<td style="text-align: center;">Y</td>
+<td style="text-align: center;">22</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">M</td>
+<td style="text-align: center;">24</td>
+<td style="text-align: center;">Z</td>
+<td style="text-align: center;">2</td>
+</tr>
+</tbody>
+</table>
+</section>
+</div>
+<p>If some characters are used more frequently than others, is it
+possible to take advantage of this fact and somehow assign them shorter
+codes? The price could be that other characters require longer codes,
+but this might be worthwhile if such characters appear rarely enough.
+This concept is at the heart of file compression techniques in common
+use today. The next section presents one such approach to assigning <a href="10-glossary.html#variable-length-coding" class="term">variable-length codes</a>,
+called <a href="10-glossary.html#huffman-codes" class="term">Huffman coding</a>. While
+it is not commonly used in its simplest form for file compression (there
+are better methods), Huffman coding gives the flavor of such coding
+schemes. One motivation for studying Huffman coding is because it
+provides our first opportunity to see a type of tree structure referred
+to as a <a href="10-glossary.html#search-trie" class="term">search trie</a>.</p>
+<p>To keep things simple, the following examples for building Huffman
+trees uses a <a href="10-glossary.html#sorted-list" class="term">sorted list</a> to keep the partial
+Huffman trees ordered by frequency. But a real implementation would use
+a <a href="10-glossary.html#priority-queue" class="term">priority queue</a> keyed by the frequencies.</p>
+<section id="building-huffman-coding-trees" class="level3"
+data-number="7.4.1">
+<h3 data-number="7.4.1"><span class="header-section-number">7.4.1</span>
+Building Huffman Coding Trees</h3>
+<p>Huffman coding assigns codes to characters such that the length of
+the code depends on the relative frequency or <a href="10-glossary.html#weight" class="term">weight</a> of the corresponding character. Thus, it is a
+variable-length code. If the estimated frequencies for letters match the
+actual frequency found in an encoded message, then the length of that
+message will typically be less than if a fixed-length code had been
+used. The Huffman code for each letter is derived from a full binary
+tree called the <a href="10-glossary.html#huffman-coding-tree" class="term">Huffman coding tree</a>, or simply
+the <a href="10-glossary.html#huffman-tree" class="term">Huffman tree</a>. Each leaf of the Huffman
+tree corresponds to a letter, and we define the weight of the leaf node
+to be the weight (frequency) of its associated letter. The goal is to
+build a tree with the <a href="10-glossary.html#minimum-external-path-weight" class="term">minimum external path
+weight</a>. Define the <a href="10-glossary.html#weighted-path-length" class="term">weighted path length</a>
+of a leaf to be its weight times its depth. The binary tree with minimum
+external path weight is the one with the minimum sum of weighted path
+lengths for the given set of leaves. A letter with high weight should
+have low depth, so that it will count the least against the total path
+length. As a result, another letter might be pushed deeper in the tree
+if it has less weight.</p>
+<p>The process of building the Huffman tree for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+letters is quite simple. First, create a collection of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+initial Huffman trees, each of which is a single leaf node containing
+one of the letters. Put the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+partial trees onto a priority queue organized by weight (frequency).
+Next, remove the first two trees (the ones with lowest weight) from the
+priority queue. Join these two trees together to create a new tree whose
+root has the two trees as children, and whose weight is the sum of the
+weights of the two trees. Put this new tree back into the priority
+queue. This process is repeated until all of the partial Huffman trees
+have been combined into one.</p>
+<div id="FreqExamp">
+<section id="table-3" class="level4 unnumbered topic">
+<h4 class="unnumbered">Table</h4>
+<p>The relative frequencies for eight selected letters.</p>
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Letter</strong></td>
+<td style="text-align: center;">C</td>
+<td style="text-align: center;">D</td>
+<td style="text-align: center;">E</td>
+<td style="text-align: center;">K</td>
+<td style="text-align: center;">L</td>
+<td style="text-align: center;">M</td>
+<td style="text-align: center;">U</td>
+<td style="text-align: center;">Z</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Frequency</strong></td>
+<td style="text-align: center;">32</td>
+<td style="text-align: center;">42</td>
+<td style="text-align: center;">120</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">42</td>
+<td style="text-align: center;">24</td>
+<td style="text-align: center;">37</td>
+<td style="text-align: center;">2</td>
+</tr>
+</tbody>
+</table>
+</section>
+</div>
+<p>The following slideshow illustrates the Huffman tree construction
+process for the eight letters of <a
+href="7.4-huffman-coding-trees-optional.html#FreqExamp">Table
+#FreqExamp</a>.</p>
+<p>
+<div id="huffmanBuildCON" class="ssAV" data-short-name="huffmanBuildCON" data-long-name="Huffman Coding Tree Slideshow: Build" alt="Huffman Coding Tree Slideshow: Build" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>Here is the implementation for the Huffman Tree class.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="at">@total_ordering</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> HuffTree:</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, elem<span class="op">=</span><span class="va">None</span>, left<span class="op">=</span><span class="va">None</span>, right<span class="op">=</span><span class="va">None</span>, weight<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.elem <span class="op">=</span> elem</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.left <span class="op">=</span> left</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.right <span class="op">=</span> right</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.weight <span class="op">=</span> weight</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> is_leaf(<span class="va">self</span>):</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.left <span class="kw">is</span> <span class="va">None</span> <span class="kw">or</span> <span class="va">self</span>.right <span class="kw">is</span> <span class="va">None</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__lt__</span>(<span class="va">self</span>, other):</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.weight <span class="op">&lt;</span> other.weight</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__eq__</span>(<span class="va">self</span>, other):</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.weight <span class="op">==</span> other.weight</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> HuffTree <span class="kw">implements</span> <span class="bu">Comparable</span><span class="op">&lt;</span>HuffTree<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">char</span> element<span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">int</span> weight<span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> HuffTree left<span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> HuffTree right<span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">HuffTree</span><span class="op">(</span><span class="dt">char</span> el<span class="op">,</span> <span class="dt">int</span> wt<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        element <span class="op">=</span> el<span class="op">;</span> weight <span class="op">=</span> wt<span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">HuffTree</span><span class="op">(</span>HuffTree l<span class="op">,</span> HuffTree r<span class="op">,</span> <span class="dt">int</span> wt<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        left <span class="op">=</span> l<span class="op">;</span> right <span class="op">=</span> r<span class="op">;</span> weight <span class="op">=</span> wt<span class="op">;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">isLeaf</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> left <span class="op">==</span> <span class="kw">null</span> <span class="op">||</span> right <span class="op">==</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">compareTo</span><span class="op">(</span>HuffTree other<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">Integer</span><span class="op">.</span><span class="fu">compare</span><span class="op">(</span><span class="kw">this</span><span class="op">.</span><span class="fu">weight</span><span class="op">,</span> other<span class="op">.</span><span class="fu">weight</span><span class="op">);</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Here is the implementation for the tree-building process.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_huff_tree(frequencies):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    huff_heap <span class="op">=</span> MinHeap()</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Initialise the heap with singleton Huffman trees</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ch, freq <span class="kw">in</span> frequencies.items():</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        huff_heap.add(HuffTree(elem<span class="op">=</span>ch, weight<span class="op">=</span>freq))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># While at least two trees left on heap</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> huff_heap.size() <span class="op">&gt;</span> <span class="dv">1</span>:</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        t1 <span class="op">=</span> huff_heap.removeMin()</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        t2 <span class="op">=</span> huff_heap.removeMin()</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        t3 <span class="op">=</span> HuffTree(left<span class="op">=</span>t1, right<span class="op">=</span>t2, weight<span class="op">=</span>t1.weight <span class="op">+</span> t2.weight)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Return new tree to the heap</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        huff_heap.add(t3)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Return the final Huffman tree</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> huff_heap.removeMin() </span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="dt">static</span> HuffTree <span class="fu">buildHuffTree</span><span class="op">(</span><span class="bu">Map</span><span class="op">&lt;</span><span class="bu">Character</span><span class="op">,</span> <span class="bu">Integer</span><span class="op">&gt;</span> frequencies<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    MinHeap<span class="op">&lt;</span>HuffTree<span class="op">&gt;</span> huffHeap <span class="op">=</span> <span class="kw">new</span> MinHeap<span class="op">&lt;&gt;();</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">char</span> ch <span class="op">:</span> frequencies<span class="op">)</span> <span class="op">{</span> <span class="co">// Initialise the heap with singleton Huffman trees</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> freq <span class="op">=</span> frequencies<span class="op">.</span><span class="fu">get</span><span class="op">(</span>ch<span class="op">);</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        huffHeap<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="kw">new</span> <span class="fu">HuffTree</span><span class="op">(</span>ch<span class="op">,</span> freq<span class="op">));</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>huffHeap<span class="op">.</span><span class="fu">size</span><span class="op">()</span> <span class="op">&gt;</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span> <span class="co">// While at least two trees left on heap</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        HuffTree t1 <span class="op">=</span> huffHeap<span class="op">.</span><span class="fu">removeMin</span><span class="op">();</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        HuffTree t2 <span class="op">=</span> huffHeap<span class="op">.</span><span class="fu">removeMin</span><span class="op">();</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        HuffTree t3 <span class="op">=</span> <span class="kw">new</span> <span class="fu">HuffTree</span><span class="op">(</span>t1<span class="op">,</span> t2<span class="op">,</span> t1<span class="op">.</span><span class="fu">weight</span> <span class="op">+</span> t2<span class="op">.</span><span class="fu">weight</span><span class="op">);</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        huffHeap<span class="op">.</span><span class="fu">add</span><span class="op">(</span>t3<span class="op">);</span>         <span class="co">// Return new tree to heap</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> huffHeap<span class="op">.</span><span class="fu">removeMin</span><span class="op">();</span>  <span class="co">// Return the final Huffman tree</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><code>buildHuffTree</code> takes as input <code>frequencies</code>, a
+map that tells how many times each character occurs in the text to be
+compressed. It first initialises a min-heap of Huffman trees, creating
+one singleton Huffman tree from each character.</p>
+<p>The main body of <code>buildHuffTree</code> consists of a while loop
+that does the following: It takes the first two trees off the heap, and
+creates a new tree by making them subtrees. The weight of the new tree
+is the sum of the two children trees. Finally, it adds the new tree to
+the min-heap.</p>
+</section>
+<section id="assigning-and-using-huffman-codes" class="level3"
+data-number="7.4.2">
+<h3 data-number="7.4.2"><span class="header-section-number">7.4.2</span>
+Assigning and Using Huffman Codes</h3>
+<p>Once the Huffman tree has been constructed, it is an easy matter to
+assign codes to individual letters. Beginning at the root, we assign
+either a ‘0’ or a ‘1’ to each edge in the tree. ‘0’ is assigned to edges
+connecting a node with its left child, and ‘1’ to edges connecting a
+node with its right child. This process is illustrated by the following
+slideshow.</p>
+<p>
+<div id="huffmanLabelCON" class="ssAV" data-short-name="huffmanLabelCON" data-long-name="Huffman Coding Tree Slideshow: Label Edges" alt="Huffman Coding Tree Slideshow: Label Edges" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>Now that we see how the edges associate with bits in the code, it is
+a simple matter to generate the codes for each letter (since each letter
+corresponds to a leaf node in the tree).</p>
+<p>
+<div id="huffmanCodesCON" class="ssAV" data-short-name="huffmanCodesCON" data-long-name="Huffman Coding Tree Slideshow: Setting Codes" alt="Huffman Coding Tree Slideshow: Setting Codes" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>Now that we have a code for each letter, encoding a text message is
+done by replacing each letter of the message with its binary code. A
+lookup table can be used for this purpose.</p>
+</section>
+<section id="decoding" class="level3" data-number="7.4.3">
+<h3 data-number="7.4.3"><span class="header-section-number">7.4.3</span>
+Decoding</h3>
+<p>A set of codes is said to meet the <a href="10-glossary.html#prefix-property" class="term">prefix
+property</a> if no code in the set is the prefix of another. The
+prefix property guarantees that there will be no ambiguity in how a bit
+string is decoded. In other words, once we reach the last bit of a code
+during the decoding process, we know which letter it is the code for.
+Huffman codes certainly have the prefix property because any prefix for
+a code would correspond to an internal node, while all codes correspond
+to leaf nodes.</p>
+<p>When we decode a character using the Huffman coding tree, we follow a
+path through the tree dictated by the bits in the code string. Each ‘0’
+bit indicates a left branch while each ‘1’ bit indicates a right branch.
+The following slideshow shows an example for how to decode a message by
+traversing the tree appropriately.</p>
+<p>
+<div id="huffmanDecodeCON" class="ssAV" data-short-name="huffmanDecodeCON" data-long-name="Huffman Coding Tree Slideshow: Decoding" alt="Huffman Coding Tree Slideshow: Decoding" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>
+<div id="HuffmanDecodePRO" class="embedContainer">
+<iframe id="HuffmanDecodePRO_iframe" aria-label="HuffmanDecodePRO" src="../interactive/Binary/HuffmanDecodePRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</section>
+<section id="how-efficient-is-huffman-coding" class="level3"
+data-number="7.4.4">
+<h3 data-number="7.4.4"><span class="header-section-number">7.4.4</span>
+How efficient is Huffman coding?</h3>
+<p>In theory, Huffman coding is an optimal coding method whenever the
+true frequencies are known, and the frequency of a letter is independent
+of the context of that letter in the message. In practice, the
+frequencies of letters in an English text document do change depending
+on context. For example, while E is the most commonly used letter of the
+alphabet in English documents, T is more common as the first letter of a
+word. This is why most commercial compression utilities do not use
+Huffman coding as their primary coding method, but instead use
+techniques that take advantage of the context for the letters.</p>
+<p>Another factor that affects the compression efficiency of Huffman
+coding is the relative frequencies of the letters. Some frequency
+patterns will save no space as compared to fixed-length codes; others
+can result in great compression. In general, Huffman coding does better
+when there is large variation in the frequencies of letters.</p>
+<section id="example-42" class="level4 unnumbered topic">
+<h4 class="unnumbered">Example</h4>
+<p>In the particular case of the frequencies shown in <a
+href="7.4-huffman-coding-trees-optional.html#Freq">Table #Freq</a>, we
+can determine the expected savings from Huffman coding if the actual
+frequencies of a coded message match the expected frequencies. Because
+the sum of the frequencies is 306 and E has frequency 120, we expect it
+to appear 120 times in a message containing 306 letters. An actual
+message might or might not meet this expectation. Letters D, L, and U
+have code lengths of three, and together are expected to appear 121
+times in 306 letters. Letter C has a code length of four, and is
+expected to appear 32 times in 306 letters. Letter M has a code length
+of five, and is expected to appear 24 times in 306 letters. Finally,
+letters K and Z have code lengths of six, and together are expected to
+appear only 9 times in 306 letters. The average expected cost per
+character is simply the sum of the cost for each character
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>c</mi><mi>i</mi></msub><annotation encoding="application/x-tex">c_i</annotation></semantics></math>)
+times the probability of its occurring
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>p</mi><mi>i</mi></msub><annotation encoding="application/x-tex">p_i</annotation></semantics></math>),
+or
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>c</mi><mn>1</mn></msub><msub><mi>p</mi><mn>1</mn></msub><mo>+</mo><msub><mi>c</mi><mn>2</mn></msub><msub><mi>p</mi><mn>2</mn></msub><mo>+</mo><mi>⋯</mi><mo>+</mo><msub><mi>c</mi><mi>n</mi></msub><msub><mi>p</mi><mi>n</mi></msub><mi>.</mi></mrow><annotation encoding="application/x-tex">c_1 p_1 + c_2 p_2 + \cdots + c_n p_n.</annotation></semantics></math>
+This can be reorganized as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac><mrow><msub><mi>c</mi><mn>1</mn></msub><msub><mi>f</mi><mn>1</mn></msub><mo>+</mo><msub><mi>c</mi><mn>2</mn></msub><msub><mi>f</mi><mn>2</mn></msub><mo>+</mo><mi>⋯</mi><mo>+</mo><msub><mi>c</mi><mi>n</mi></msub><msub><mi>f</mi><mi>n</mi></msub></mrow><msub><mi>f</mi><mi>T</mi></msub></mfrac><annotation encoding="application/x-tex">\frac{c_1 f_1 + c_2 f_2 + \cdots + c_n f_n}{f_T}</annotation></semantics></math>,
+where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>f</mi><mi>i</mi></msub><annotation encoding="application/x-tex">f_i</annotation></semantics></math>
+is the (relative) frequency of letter
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>f</mi><mi>T</mi></msub><annotation encoding="application/x-tex">f_T</annotation></semantics></math>
+is the total for all letter frequencies. For this set of frequencies,
+the expected cost per letter is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">[</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>×</mo><mn>120</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>3</mn><mo>×</mo><mn>121</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>4</mn><mo>×</mo><mn>32</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>5</mn><mo>×</mo><mn>24</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>6</mn><mo>×</mo><mn>9</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">]</mo></mrow><mi>/</mi><mn>306</mn><mo>=</mo><mn>785</mn><mi>/</mi><mn>306</mn><mo>≈</mo><mn>2.57</mn><mi>.</mi></mrow><annotation encoding="application/x-tex">[(1 \times 120) + (3 \times 121) + (4 \times 32) + (5 \times 24) + (6 \times 9)]/306 = 785/306 \approx 2.57.</annotation></semantics></math></p>
+<p>A fixed-length code for these eight characters would require
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>log</mo><mn>8</mn><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">\log 8 = 3</annotation></semantics></math>
+bits per letter as opposed to about 2.57 bits per letter for Huffman
+coding. Thus, Huffman coding is expected to save about 14% for this set
+of letters.</p>
+</section>
+<p>Huffman coding for all ASCII symbols should do better than this
+example. The letters of <a
+href="7.4-huffman-coding-trees-optional.html#Freq">Table #Freq</a> are
+atypical in that there are too many common letters compared to the
+number of rare letters. Huffman coding for all 26 letters would yield an
+expected cost of 4.29 bits per letter. The equivalent fixed-length code
+would require about five bits. This is somewhat unfair to fixed-length
+coding because there is actually room for 32 codes in five bits, but
+only 26 letters. More generally, Huffman coding of a typical text file
+will save around 40% over ASCII coding if we charge ASCII coding at
+eight bits per character. Huffman coding for a binary file (such as a
+compiled executable) would have a very different set of distribution
+frequencies and so would have a different space savings. Most commercial
+compression programs use two or three coding schemes to adjust to
+different types of files.</p>
+<p>In decoding example, “DEED” was coded in 8 bits, a saving of 33% over
+the twelve bits required from a fixed-length coding. However, “MUCK”
+would require 18 bits, more space than required by the corresponding
+fixed-length coding. The problem is that “MUCK” is composed of letters
+that are not expected to occur often. If the message does not match the
+expected frequencies of the letters, than the length of the encoding
+will not be as expected either.</p>
+<p>You can use the following visualization to create a huffman tree for
+your own set of letters and frequencies.</p>
+<p>
+<div id="huffmanCustomBuildAV" class="embedContainer">
+<iframe id="huffmanCustomBuildAV_iframe" aria-label="huffmanCustomBuildAV" src="../interactive/Binary/huffmanCustomBuildAV.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</section>
+<section id="trees-versus-tries-optional" class="level3"
+data-number="7.4.5">
+<h3 data-number="7.4.5"><span class="header-section-number">7.4.5</span>
+Trees versus Tries (optional)</h3>
+<p>We see that all letters with codes beginning with ‘0’ are stored in
+the left branch, while all letters with codes beginning with ‘1’ are
+stored in the right branch. Contrast this with storing records in a BST.
+There, all records with key value less than the root value are stored in
+the left branch, while all records with key values greater than the root
+are stored in the right branch.</p>
+<p>Recall that the Huffman coding tree stored in the left branch all
+letters whose codes start with 0, and in the right branch all letters
+whose codes start with 1. We can use this same concept to store records
+in a search tree that is slightly different from the behavior of a BST.
+We can view all keys stored as appearing on a numberline. The BST splits
+the numberline based on the positions of key values as it receives them.
+In contrast, we could split key values based on their binary
+reprsentation similar to what the Huffman coding tree does. The
+following slideshows present this in more detail.</p>
+<p>
+<div id="TreeTimelineCON" class="ssAV" data-short-name="TreeTimelineCON" data-long-name="Tree timeline Slideshow" alt="Tree timeline Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<div class="line-block"></div>
+<p>
+<div id="TrieTimelineCON" class="ssAV" data-short-name="TrieTimelineCON" data-long-name="Trie timeline Slideshow" alt="Trie timeline Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</section>
+<section id="proof-of-optimality-for-huffman-coding" class="level3"
+data-number="7.4.6">
+<h3 data-number="7.4.6"><span class="header-section-number">7.4.6</span>
+Proof of Optimality for Huffman Coding</h3>
+<p>Huffman tree building is an example of a <a href="10-glossary.html#greedy-algorithm" class="term">greedy
+algorithm</a>. At each step, the algorithm makes a “greedy” decision
+to merge the two subtrees with least weight. This makes the algorithm
+simple, but does it give the desired result? This section concludes with
+a proof that the Huffman tree indeed gives the most efficient
+arrangement for the set of letters. The proof requires the following
+lemma.</p>
+<p><strong>Lemma:</strong> For any Huffman tree built by function
+<code>buildHuff</code> containing at least two letters, the two letters
+with least frequency are stored in sibling nodes whose depth is at least
+as deep as any other leaf nodes in the tree.</p>
+<p><strong>Proof:</strong> Call the two letters with least frequency
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>l</mi><mn>1</mn></msub><annotation encoding="application/x-tex">l_1</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>l</mi><mn>2</mn></msub><annotation encoding="application/x-tex">l_2</annotation></semantics></math>.
+They must be siblings because <code>buildHuff</code> selects them in the
+first step of the construction process. Assume that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>l</mi><mn>1</mn></msub><annotation encoding="application/x-tex">l_1</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>l</mi><mn>2</mn></msub><annotation encoding="application/x-tex">l_2</annotation></semantics></math>
+are not the deepest nodes in the tree. In this case, the Huffman tree
+must either look as shown in <a
+href="7.4-huffman-coding-trees-optional.html#HProof">Figure #HProof</a>,
+or effectively symmetrical to this. For this situation to occur, the
+parent of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>l</mi><mn>1</mn></msub><annotation encoding="application/x-tex">l_1</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>l</mi><mn>2</mn></msub><annotation encoding="application/x-tex">l_2</annotation></semantics></math>,
+labeled
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>,
+must have greater weight than the node labeled
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>.
+Otherwise, function <code>buildHuff</code> would have selected node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>
+in place of node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
+as the child of node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>U</mi><annotation encoding="application/x-tex">U</annotation></semantics></math>.
+However, this is impossible because
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>l</mi><mn>1</mn></msub><annotation encoding="application/x-tex">l_1</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>l</mi><mn>2</mn></msub><annotation encoding="application/x-tex">l_2</annotation></semantics></math>
+are the letters with least frequency.</p>
+<div id="HProof">
+<p>
+<div id="HuffProofCON" class="ssAV" data-short-name="HuffProofCON" data-long-name="Binary/HuffProofCON" alt="Binary/HuffProofCON" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>An impossible Huffman tree, showing the situation where the two nodes
+with least weight,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>l</mi><mn>1</mn></msub><annotation encoding="application/x-tex">l_1</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>l</mi><mn>2</mn></msub><annotation encoding="application/x-tex">l_2</annotation></semantics></math>,
+are not the deepest nodes in the tree. Triangles represent subtrees.</p>
+</div>
+<p>Here is the proof.</p>
+<blockquote>
+<p><strong>Theorem:</strong> Function <code>buildHuff</code> builds the
+Huffman tree with the minimum external path weight for the given set of
+letters.</p>
+<p><strong>Proof:</strong> The proof is by induction on
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
+the number of letters.</p>
+<ul>
+<li><strong>Base Case:</strong> For
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">n = 2</annotation></semantics></math>,
+the Huffman tree must have the minimum external path weight because
+there are only two possible trees, each with identical weighted path
+lengths for the two leaves.</li>
+<li><strong>Induction Hypothesis:</strong> Assume that any tree created
+by <code>buildHuff</code> that contains
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>
+leaves has minimum external path length.</li>
+<li><strong>Induction Step:</strong> Given a Huffman tree
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐓</mi><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>
+built by <code>buildHuff</code> with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+leaves,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>≥</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">n \geq 2</annotation></semantics></math>,
+suppose that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>w</mi><mn>1</mn></msub><mo>≤</mo><msub><mi>w</mi><mn>2</mn></msub><mo>≤</mo><mi>.</mi><mi>.</mi><mi>.</mi><mo>≤</mo><msub><mi>w</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">w_1 \leq w_2 \leq ... \leq w_n</annotation></semantics></math>
+where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>w</mi><mn>1</mn></msub><annotation encoding="application/x-tex">w_1</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>w</mi><mi>n</mi></msub><annotation encoding="application/x-tex">w_n</annotation></semantics></math>
+are the weights of the letters. Call
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>
+the parent of the letters with frequencies
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>w</mi><mn>1</mn></msub><annotation encoding="application/x-tex">w_1</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>w</mi><mn>2</mn></msub><annotation encoding="application/x-tex">w_2</annotation></semantics></math>.
+From the lemma, we know that the leaf nodes containing the letters with
+frequencies
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>w</mi><mn>1</mn></msub><annotation encoding="application/x-tex">w_1</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>w</mi><mn>2</mn></msub><annotation encoding="application/x-tex">w_2</annotation></semantics></math>
+are as deep as any nodes in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐓</mi><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>.
+If any other leaf nodes in the tree were deeper, we could reduce their
+weighted path length by swapping them with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>w</mi><mn>1</mn></msub><annotation encoding="application/x-tex">w_1</annotation></semantics></math>
+or
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>w</mi><mn>2</mn></msub><annotation encoding="application/x-tex">w_2</annotation></semantics></math>.
+But the lemma tells us that no such deeper nodes exist. Call
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐓</mi><mi>′</mi></mrow><annotation encoding="application/x-tex">\mathbf{T}&#39;</annotation></semantics></math>
+the Huffman tree that is identical to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐓</mi><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>
+except that node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>
+is replaced with a leaf node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mi>′</mi></mrow><annotation encoding="application/x-tex">V&#39;</annotation></semantics></math>
+whose weight is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>w</mi><mn>1</mn></msub><mo>+</mo><msub><mi>w</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">w_1 + w_2</annotation></semantics></math>.
+By the induction hypothesis,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐓</mi><mi>′</mi></mrow><annotation encoding="application/x-tex">\mathbf{T}&#39;</annotation></semantics></math>
+has minimum external path length. Returning the children to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi><mi>′</mi></mrow><annotation encoding="application/x-tex">V&#39;</annotation></semantics></math>
+restores tree
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐓</mi><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>,
+which must also have minimum external path length.</li>
+</ul>
+<p>Thus by mathematical induction, function <code>buildHuff</code>
+creates the Huffman tree with minimum external path length.</p>
+</blockquote>
+</section>
+</section>
+<script type="text/javascript" src="../interactive/DataStructures/huffman.js"></script>
+<script type="text/javascript" src="../interactive/Binary/huffmanBuildCON.js"></script>
+<script type="text/javascript" src="../interactive/Binary/huffmanLabelCON.js"></script>
+<script type="text/javascript" src="../interactive/Binary/huffmanCodesCON.js"></script>
+<script type="text/javascript" src="../interactive/Binary/huffmanDecodeCON.js"></script>
+<script type="text/javascript" src="../interactive/Development/TreeTimelineCON.js"></script>
+<script type="text/javascript" src="../interactive/Development/TrieTimelineCON.js"></script>
+<script type="text/javascript" src="../interactive/Binary/HuffProofCON.js"></script>
+</body>
+</html>

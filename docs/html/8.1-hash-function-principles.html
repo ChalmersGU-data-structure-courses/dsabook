@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Cliff Shaffer" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Nick Smallbone" />
+  <title>DSABook – Hash Function Principles</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../bookstyle.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+      },
+      "HTML-CSS": {
+        scale: "80",
+      }
+    });
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Up:</span> <a href="8-hashing.html" accesskey="u" rel="up">Hashing</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="8.2-sample-hash-functions.html" accesskey="n" rel="next">Sample Hash Functions</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Previous:</span> <a href="8-hashing.html" accesskey="p" rel="previous">Hashing</a>
+</span>
+</div>
+</nav>
+<section id="hash-function-principles" class="level2" data-number="8.1">
+<h2 data-number="8.1"><span class="header-section-number">8.1</span>
+Hash Function Principles</h2>
+<p>Hashing generally takes records whose key values come from a large
+range and stores those records in a table with a relatively small number
+of slots. Collisions occur when two records hash to the same slot in the
+table. If we are careful – or lucky – when selecting a hash function,
+then the actual number of collisions will be few. Unfortunately, even
+under the best of circumstances, collisions are nearly unavoidable. To
+illustrate, consider a classroom full of students. What is the
+probability that some pair of students shares the same birthday (i.e.,
+the same day of the year, not necessarily the same year)? If there are
+23 students, then the odds are about even that two will share a
+birthday. This is despite the fact that there are 365 days in which
+students can have birthdays (ignoring leap years). On most days, no
+student in the class has a birthday. With more students, the probability
+of a shared birthday increases. The mapping of students to days based on
+their birthday is similar to assigning records to slots in a table (of
+size 365) using the birthday as a hash function. Note that this
+observation tells us nothing about <em>which</em> students share a
+birthday, or on <em>which</em> days of the year shared birthdays
+fall.</p>
+<p>Try it for yourself. You can use the calculator to see the
+probability of a collision. The default values are set to show the
+number of people in a room such that the chance of a duplicate is just
+over 50%. But you can set any table size and any number of records to
+determine the probability of a collision under those conditions.</p>
+<p>
+<div id="Birthday" class="embedContainer">
+<iframe id="Birthday_iframe" aria-label="Birthday" src="../interactive/Hashing/Birthday.html" width="100%" height="177" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+<!-- <div id="Birthday" class="embedContainer">
+<iframe aria-label="Birthday" src="../../exercises/Hashing/Birthday.html" scrolling="no" width="100%" height="177">
+Your browser does not support iframes.
+</iframe>
+</div> -->
+<p>Use the calculator to answer the following questions.</p>
+<p>
+<div id="BirthdayFIB" class="embedContainer">
+<iframe id="BirthdayFIB_iframe" aria-label="BirthdayFIB" src="../interactive/Hashing/BirthdayFIB.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+<!-- <div id="BirthdayFIB" class="embedContainer">
+<iframe id="BirthdayFIB_iframe" aria-label="BirthdayFIB" src="../../exercises/Hashing/BirthdayFIB.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div> -->
+<p>To be practical, a database organized by hashing must store records
+in a hash table that is not so large that it wastes space. To balance
+time and space efficiency, this means that the hash table should be <a
+href="8.8-analysis-of-open-addressing.html#analysis-of-open-addressing">around
+half full</a>. Because collisions are extremely likely to occur under
+these conditions (by chance, any record inserted into a table that is
+half full should have a collision half of the time), does this mean that
+we need not worry about how well a hash function does at avoiding
+collisions? Absolutely not. The difference between using a good hash
+function and a bad hash function makes a big difference in practice in
+the number of records that must be examined when searching or inserting
+to the table. Technically, any function that maps all possible key
+values to a slot in the hash table is a hash function. In the extreme
+case, even a function that maps all records to the same slot in the
+array is a hash function, but it does nothing to help us find records
+during a search operation.</p>
+<p>We would like to pick a hash function that maps keys to slots in a
+way that makes each slot in the hash table have equal probablility of
+being filled for the actual set keys being used. Unfortunately, we
+normally have no control over the distribution of key values for the
+actual records in a given database or collection. So how well any
+particular hash function does depends on the actual distribution of the
+keys used within the allowable key range. In some cases, incoming data
+are well distributed across their key range. For example, if the input
+is a set of random numbers selected uniformly from the key range, any
+hash function that assigns the key range so that each slot in the hash
+table receives an equal share of the range will likely also distribute
+the input records uniformly within the table. However, in many
+applications the incoming records are highly clustered or otherwise
+poorly distributed. When input records are not well distributed
+throughout the key range it can be difficult to devise a hash function
+that does a good job of distributing the records throughout the table,
+especially if the input distribution is not known in advance.</p>
+<p>There are many reasons why data values might be poorly
+distributed.</p>
+<ol type="1">
+<li>Natural frequency distributions tend to follow a common pattern
+where a few of the entities occur frequently while most entities occur
+relatively rarely. For example, consider the populations of the 100
+largest cities in the United States. If you plot these populations on a
+numberline, most of them will be clustered toward the low side, with a
+few outliers on the high side. This is an example of a Zipf
+distribution. Viewed the other way, the home town for a given person is
+far more likely to be a particular large city than a particular small
+town.</li>
+<li>Collected data are likely to be skewed in some way. Field samples
+might be rounded to, say, the nearest 5 (i.e., all numbers end in 5 or
+0).</li>
+<li>If the input is a collection of common English words, the beginning
+letter will be poorly distributed.</li>
+</ol>
+<p>Note that for items 2 and 3 on this list, either high- or low-order
+bits of the key are poorly distributed.</p>
+<p>When designing hash functions, we are generally faced with one of two
+situations:</p>
+<ol type="1">
+<li>We know nothing about the distribution of the incoming keys. In this
+case, we wish to select a hash function that evenly distributes the key
+range across the hash table, while avoiding obvious opportunities for
+clustering such as hash functions that are sensitive to the high- or
+low-order bits of the key value.</li>
+<li>We know something about the distribution of the incoming keys. In
+this case, we should use a distribution-dependent hash function that
+avoids assigning clusters of related key values to the same hash table
+slot. For example, if hashing English words, we should <em>not</em> hash
+on the value of the first character because this is likely to be
+unevenly distributed.</li>
+</ol>
+<p>In the next module, you will see several examples of hash functions
+that illustrate these points.</p>
+</section>
+</body>
+</html>

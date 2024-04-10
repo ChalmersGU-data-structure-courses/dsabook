@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Cliff Shaffer" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Nick Smallbone" />
+  <title>DSABook – The Union/Find Algorithm (optional)</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #ffffff;
+        color: #a0a0a0;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+    div.sourceCode
+      { color: #1f1c1b; background-color: #ffffff; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #1f1c1b; } /* Normal */
+    code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+    code span.an { color: #ca60ca; } /* Annotation */
+    code span.at { color: #0057ae; } /* Attribute */
+    code span.bn { color: #b08000; } /* BaseN */
+    code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+    code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #924c9d; } /* Char */
+    code span.cn { color: #aa5500; } /* Constant */
+    code span.co { color: #898887; } /* Comment */
+    code span.cv { color: #0095ff; } /* CommentVar */
+    code span.do { color: #607880; } /* Documentation */
+    code span.dt { color: #0057ae; } /* DataType */
+    code span.dv { color: #b08000; } /* DecVal */
+    code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+    code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #b08000; } /* Float */
+    code span.fu { color: #644a9b; } /* Function */
+    code span.im { color: #ff5500; } /* Import */
+    code span.in { color: #b08000; } /* Information */
+    code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+    code span.op { color: #1f1c1b; } /* Operator */
+    code span.ot { color: #006e28; } /* Other */
+    code span.pp { color: #006e28; } /* Preprocessor */
+    code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #ff5500; } /* SpecialString */
+    code span.st { color: #bf0303; } /* String */
+    code span.va { color: #0057ae; } /* Variable */
+    code span.vs { color: #bf0303; } /* VerbatimString */
+    code span.wa { color: #bf0303; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../bookstyle.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+      },
+      "HTML-CSS": {
+        scale: "80",
+      }
+    });
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+<link href="../interactive/General/UFCON.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Up:</span> <a href="5-binary-trees.html" accesskey="u" rel="up">Binary Trees</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="5.14-sequential-tree-representations-optional.html" accesskey="n" rel="next">Sequential Tree Representations (optional)</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Previous:</span> <a href="5.12-general-trees-optional.html" accesskey="p" rel="previous">General Trees (optional)</a>
+</span>
+</div>
+</nav>
+<section id="the-unionfind-algorithm-optional" class="level2"
+data-number="5.13">
+<h2 data-number="5.13"><span class="header-section-number">5.13</span>
+The Union/Find Algorithm (optional)</h2>
+<p><a href="10-glossary.html#general-tree" class="term">General trees</a> are trees
+whose <a href="10-glossary.html#internal-node" class="term">internal nodes</a> have no
+fixed number of <a href="10-glossary.html#child" class="term">children</a>. Compared to
+general trees, <a href="10-glossary.html#binary-tree" class="term">binary trees</a> are
+relatively easy to implement because each internal node of a binary tree
+can just store two pointers to reach its (potential) children. In a
+general tree, we have to deal with the fact that a given node might have
+no children or few children or many children.</p>
+<p>Even in a general tree, each node can have only one <a href="10-glossary.html#parent" class="term">parent</a>. If we didn’t need to go from a node to its
+children, but instead only needed to go from a node to its parent, then
+implementing a node would be easy. A simple way to represent such a
+general tree would be to store for each node only a pointer to that
+node’s parent. We will call this the <a href="10-glossary.html#parent-pointer-representation" class="term">parent pointer
+representation</a> for general trees. Clearly this implementation is
+not general purpose, because it is inadequate for such important
+operations as finding the leftmost child or the right sibling for a
+node. Thus, it may seem to be a poor idea to implement a general tree in
+this way. However, the parent pointer implementation stores precisely
+the information required to answer the following, useful question:
+<strong>Given two nodes, are they in the same tree?</strong> To answer
+this question, we need only follow the series of parent pointers from
+each node to its respective root. If both nodes reach the same root,
+then they must be in the same tree. If the roots are different, then the
+two nodes are not in the same tree. The process of finding the ultimate
+root for a given node we will call <a href="10-glossary.html#find" class="term">FIND</a>.</p>
+<section id="parent-pointer-trees" class="level3" data-number="5.13.1">
+<h3 data-number="5.13.1"><span
+class="header-section-number">5.13.1</span> Parent Pointer Trees</h3>
+<p>The parent pointer representation is most often used to maintain a
+collection of <a href="10-glossary.html#disjoint-sets" class="term">disjoint sets</a>. Two disjoint sets
+share no members in common (their intersection is empty). A collection
+of disjoint sets partitions some objects such that every object is in
+exactly one of the disjoint sets. There are two basic operations that we
+wish to support:</p>
+<ol type="1">
+<li>Determine if two objects are in the same set (the FIND operation),
+and</li>
+<li>Merge two sets together.</li>
+</ol>
+<p>Because two merged sets are united, the merging operation is called
+<a href="10-glossary.html#union" class="term">UNION</a> and the whole process of determining if
+two objects are in the same set and then merging the sets goes by the
+name <a href="10-glossary.html#union-find" class="term">UNION/FIND</a>.</p>
+<p>To implement UNION/FIND, we represent each disjoint set with a
+separate general tree. Two objects are in the same disjoint set if they
+are in the same tree. Every node of the tree (except for the root) has
+precisely one parent. Thus, each node requires the same space to
+represent it. The collection of objects is typically stored in an array,
+where each element of the array corresponds to one object, and each
+element stores the object’s value (or a pointer to the object). The
+objects also correspond to nodes in the various disjoint trees (one tree
+for each disjoint set), so we also store the parent value with each
+object in the array. Those nodes that are the roots of their respective
+trees store an appropriate indicator. Note that this representation
+means that a single array is being used to implement a collection of
+trees. This makes it easy to merge trees together with UNION
+operations.</p>
+<p>Here is an implementation for parent pointer trees and the UNION/FIND
+process.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># General Tree implementation for UNION/FIND</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ParPtrTree:</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, size) {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Each node is its own root to start</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.array <span class="op">=</span> [<span class="op">-</span><span class="dv">1</span>] <span class="op">*</span> size</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Merge two subtrees if they are different</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> UNION(<span class="va">self</span>, a, b):</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        root1 <span class="op">=</span> <span class="va">self</span>.FIND(a)  <span class="co"># Find root of node a</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        root2 <span class="op">=</span> <span class="va">self</span>.FIND(b)  <span class="co"># Find root of node b</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> root1 <span class="op">!=</span> root2:    <span class="co"># Merge two trees</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.array[root1] <span class="op">=</span> root2</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Return the root of curr&#39;s tree</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> FIND(<span class="va">self</span>, curr):</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="va">self</span>.array[curr] <span class="op">!=</span> <span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>            curr <span class="op">=</span> <span class="va">self</span>.array[curr]</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> curr           <span class="co"># Now at root</span></span></code></pre></div>
+<p>The <code>ParPtrTree</code> class has an array where each array
+position corresponds to one object in some collection. Each array
+element stores the array index for its parent. There are two main
+methods to implement. Method <code>UNION</code> merges two sets
+together, where each set corresponds to a tree. Method <code>FIND</code>
+is used to find the ultimate root for a node.</p>
+<p>An application using the UNION/FIND operations should store a set of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+objects, where each object is assigned a unique index in the range 0 to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>.
+The indices refer to the corresponding parent pointers in the array.
+Class <code>ParPtrTree</code> creates and initializes the UNION/FIND
+array, and methods <code>UNION</code> and <code>FIND</code> take array
+indices as inputs.</p>
+<div id="UFfig">
+<p>
+<div id="UFfigCON" class="ssAV" data-short-name="UFfigCON" data-long-name="General/UFfigCON" alt="General/UFfigCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>The parent pointer array implementation. Each node corresponds to a
+position in the node array, which stores its value and a pointer to its
+parent. The parent pointers are represented by an array index
+corresponding to the position of the parent. The root of any tree stores
+a special value, such as -1. This is represented graphically in the
+figure by a slash in the “Parent’s Index” box. This figure shows two
+trees stored in the same parent pointer array, one rooted at
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>
+(with a total of 9 nodes), and the other rooted at
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>J</mi><annotation encoding="application/x-tex">J</annotation></semantics></math>
+(with a total of 1 node).</p>
+</div>
+</section>
+<section id="equivalence-classes" class="level3" data-number="5.13.2">
+<h3 data-number="5.13.2"><span
+class="header-section-number">5.13.2</span> Equivalence Classes</h3>
+<p>Consider the problem of assigning the members of a set to disjoint
+subsets called <a href="10-glossary.html#equivalence-class" class="term">equivalence
+classes</a>. Recall that an <a href="10-glossary.html#equivalence-relation" class="term">equivalence
+relation</a> is <a href="10-glossary.html#reflexive" class="term">reflexive</a>, <a href="10-glossary.html#symmetric" class="term">symmetric</a>, and <a href="10-glossary.html#transitive" class="term">transitive</a>.
+Thus, if objects
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
+are equivalent, and objects
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>
+are equivalent, then we must be able to recognize that objects
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>
+are also equivalent. In this representation, since
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
+are equivalent, they must be in the same tree. Likewise for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>.
+We can recognize that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>
+are equivalent because they must also be in the same tree.</p>
+<p>There are many practical uses for disjoint sets and representing
+equivalences. For example, consider this graph of ten nodes labeled
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+through
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>J</mi><annotation encoding="application/x-tex">J</annotation></semantics></math>.</p>
+<div id="UFconcom">
+<p>
+<div id="UFconcomCON" class="ssAV" data-short-name="UFconcomCON" data-long-name="General/UFconcomCON" alt="General/UFconcomCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>A graph with two connected components. The tree of <a
+href="5.13-the-unionfind-algorithm-optional.html#UFfig">Figure
+#UFfig</a> shows the corresponding tree structure resulting form
+processing the edges to determine the connected components.</p>
+</div>
+<p>Notice that for nodes
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+through
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>I</mi><annotation encoding="application/x-tex">I</annotation></semantics></math>,
+there is some series of edges that connects any pair of these nodes, but
+node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>J</mi><annotation encoding="application/x-tex">J</annotation></semantics></math>
+is disconnected from the rest of the nodes. Such a graph might be used
+to represent connections such as wires between components on a circuit
+board, or roads between cities. We can consider two nodes of the graph
+to be equivalent if there is a path between them. Thus, nodes
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>H</mi><annotation encoding="application/x-tex">H</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>E</mi><annotation encoding="application/x-tex">E</annotation></semantics></math>
+would be considered as equivalent, but
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>J</mi><annotation encoding="application/x-tex">J</annotation></semantics></math>
+is not equivalent to any other. A subset of equivalent (connected) edges
+in a graph is called a <a href="10-glossary.html#connected-component" class="term">connected component</a>.
+The goal is to quickly classify the objects into disjoint sets that
+correspond to the connected components.</p>
+<p>Another use for UNION/FIND occurs in <a href="10-glossary.html#kruskals-algorithm" class="term">Kruskal’s
+algorithm</a> for computing the <a href="10-glossary.html#minimal-cost-spanning-tree" class="term">minimal-cost
+spanning tree</a> for a <a href="10-glossary.html#graph" class="term">graph</a>. That
+algorithm seeks to select the cheapest subset of the edges that still
+connects all of the nodes in the graph. It does so by processing all
+edges of the graph from shortest to longest, only adding an edge to the
+connecting subset if it does not connect two nodes that already have
+some series of edges connecting them.</p>
+<p>The input to the UNION/FIND algorithm is typically a series of
+equivalence pairs. In the case of the connected components example, the
+equivalence pairs would simply be the set of edges in the graph. An
+equivalence pair might say that object
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>
+is equivalent to object
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>.
+If so,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+are placed in the same subset. If a later equivalence relates
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>,
+then by implication
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>
+is also equivalent to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>.
+Thus, an equivalence pair may cause two subsets to merge, each of which
+contains several objects.</p>
+<p>Equivalence classes can be managed efficiently with the UNION/FIND
+algorithm. Initially, each object is at the root of its own tree. An
+equivalence pair is processed by checking to see if both objects of the
+pair are in the same tree by calling <code>FIND</code> on each of them.
+If their roots are the same, then no change need be made because the
+objects are already in the same equivalence class. Otherwise, the two
+equivalence classes should be merged by the <code>UNION</code>
+method.</p>
+<p>The parent pointer representation places no limit on the number of
+nodes that can share a parent. To make equivalence processing as
+efficient as possible, the distance from each node to the root of its
+respective tree should be as small as possible. Thus, we would like to
+keep the height of the trees small when merging two equivalence classes
+together. Ideally, each tree would have all nodes pointing directly to
+the root. Achieving this goal all the time would require too much
+additional processing to be worth the effort, so we must settle for
+getting as close as possible.</p>
+</section>
+<section id="weighted-union" class="level3" data-number="5.13.3">
+<h3 data-number="5.13.3"><span
+class="header-section-number">5.13.3</span> Weighted Union</h3>
+<p>A low-cost approach to reducing the height is to be smart about how
+two trees are joined together. One simple technique, called the <a href="10-glossary.html#weighted-union-rule" class="term">weighted union rule</a>, joins the tree with fewer nodes
+to the tree with more nodes by making the smaller tree’s root point to
+the root of the bigger tree. This will limit the total depth of the tree
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>,
+because the depth of nodes only in the smaller tree will now increase by
+one, and the depth of the deepest node in the combined tree can only be
+at most one deeper than the deepest node before the trees were combined.
+The total number of nodes in the combined tree is therefore at least
+twice the number in the smaller subtree. Thus, the depth of any node can
+be increased at most
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>log</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n</annotation></semantics></math>
+times when
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+equivalences are processed (since each addition to the depth must be
+accompanied by at least doubling the size of the tree).</p>
+<p>Here is an implementation for the UNION method when using weighted
+union.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> UNION(<span class="va">self</span>, a, b):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>        root1 <span class="op">=</span> <span class="va">self</span>.FIND(a)   <span class="co"># Find root of node a</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        root2 <span class="op">=</span> <span class="va">self</span>.FIND(b)   <span class="co"># Find root of node b</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> root1 <span class="op">!=</span> root2:     <span class="co"># Merge with weighted union</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">self</span>.weights[root2] <span class="op">&gt;</span> <span class="va">self</span>.weights[root1]:</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.array[root1] <span class="op">=</span> root2</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.weights[root2] <span class="op">+=</span> <span class="va">self</span>.weights[root1]</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.array[root2] <span class="op">=</span> root1<span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.weights[root1] <span class="op">+=</span> <span class="va">self</span>.weights[root2]<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">UNION</span><span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> root1 <span class="op">=</span> <span class="fu">FIND</span><span class="op">(</span>a<span class="op">);</span>     <span class="co">// Find root of node a</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> root2 <span class="op">=</span> <span class="fu">FIND</span><span class="op">(</span>b<span class="op">);</span>     <span class="co">// Find root of node b</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>root1 <span class="op">!=</span> root2<span class="op">)</span> <span class="op">{</span>          <span class="co">// Merge with weighted union</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> <span class="op">(</span>weights<span class="op">[</span>root2<span class="op">]</span> <span class="op">&gt;</span> weights<span class="op">[</span>root1<span class="op">])</span> <span class="op">{</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        array<span class="op">[</span>root1<span class="op">]</span> <span class="op">=</span> root2<span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        weights<span class="op">[</span>root2<span class="op">]</span> <span class="op">+=</span> weights<span class="op">[</span>root1<span class="op">];</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>      <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        array<span class="op">[</span>root2<span class="op">]</span> <span class="op">=</span> root1<span class="op">;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        weights<span class="op">[</span>root1<span class="op">]</span> <span class="op">+=</span> weights<span class="op">[</span>root2<span class="op">];</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>      <span class="op">}</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">UNION</span><span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> root1 <span class="op">=</span> <span class="fu">FIND</span><span class="op">(</span>a<span class="op">);</span>     <span class="co">// Find root of node a</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> root2 <span class="op">=</span> <span class="fu">FIND</span><span class="op">(</span>b<span class="op">);</span>     <span class="co">// Find root of node b</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>root1 <span class="op">!=</span> root2<span class="op">)</span> <span class="op">{</span>    <span class="co">// Merge with weighted union</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>weights<span class="op">[</span>root2<span class="op">]</span> <span class="op">&gt;</span> weights<span class="op">[</span>root1<span class="op">])</span> <span class="op">{</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                array<span class="op">[</span>root1<span class="op">]</span> <span class="op">=</span> root2<span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                weights<span class="op">[</span>root2<span class="op">]</span> <span class="op">+=</span> weights<span class="op">[</span>root1<span class="op">];</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                array<span class="op">[</span>root2<span class="op">]</span> <span class="op">=</span> root1<span class="op">;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                weights<span class="op">[</span>root1<span class="op">]</span> <span class="op">+=</span> weights<span class="op">[</span>root2<span class="op">];</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<p>The following slideshow illustrates a series of UNION operations with
+weighted union.</p>
+<p>
+<div id="UFCON" class="ssAV" data-short-name="UFCON" data-long-name="Union/Find Example" alt="Union/Find Example" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</section>
+<section id="path-compression" class="level3" data-number="5.13.4">
+<h3 data-number="5.13.4"><span
+class="header-section-number">5.13.4</span> Path Compression</h3>
+<p>The weighted union rule helps to minimize the depth of the tree, but
+we can do better than this. <a href="10-glossary.html#path-compression" class="term">Path compression</a>
+is a method that tends to create extremely shallow trees. Path
+compression takes place while finding the root for a given node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>.
+Call this root
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>.
+Path compression resets the parent of every node on the path from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+to point directly to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>.
+This can be implemented by first finding
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>.
+A second pass is then made along the path from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>,
+assigning the parent field of each node encountered to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>.
+Alternatively, a recursive algorithm can be implemented as follows. This
+version of <code>FIND</code> not only returns the root of the current
+node, but also makes all ancestors of the current node point to the
+root.</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Return the root of curr&#39;s tree with path compression</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> FIND(<span class="va">self</span>, curr):</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>.array[curr] <span class="op">==</span> <span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> curr        <span class="co"># At root</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.array[curr] <span class="op">=</span> <span class="va">self</span>.FIND(<span class="va">self</span>.array[curr])</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.array[curr]<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Return the root of curr&#39;s tree with path compression</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">int</span> <span class="fu">FIND</span><span class="op">(</span><span class="dt">int</span> curr<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>array<span class="op">[</span>curr<span class="op">]</span> <span class="op">==</span> <span class="op">-</span><span class="dv">1</span><span class="op">)</span> <span class="cf">return</span> curr<span class="op">;</span> <span class="co">// At root</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    array<span class="op">[</span>curr<span class="op">]</span> <span class="op">=</span> <span class="fu">FIND</span><span class="op">(</span>array<span class="op">[</span>curr<span class="op">]);</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> array<span class="op">[</span>curr<span class="op">];</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Return the root of curr&#39;s tree with path compression</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">FIND</span><span class="op">(</span><span class="dt">int</span> curr<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>array<span class="op">[</span>curr<span class="op">]</span> <span class="op">==</span> <span class="op">-</span><span class="dv">1</span><span class="op">)</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> curr<span class="op">;</span>         <span class="co">// At root</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        array<span class="op">[</span>curr<span class="op">]</span> <span class="op">=</span> <span class="fu">FIND</span><span class="op">(</span>array<span class="op">[</span>curr<span class="op">]);</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> array<span class="op">[</span>curr<span class="op">];</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<p>The following slide show illustrates path compression using the last
+step in the previous example.</p>
+<p>
+<div id="pathcompCON" class="ssAV" data-short-name="pathcompCON" data-long-name="Union/Find Path Compression Example" alt="Union/Find Path Compression Example" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>Path compression keeps the cost of each FIND operation very close to
+constant.</p>
+<p>To be more precise about what is meant by “very close to constant”,
+the cost of path compression for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+FIND operations on
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+nodes (when combined with the weighted union rule for joining sets) is
+approximately
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><msup><mo>log</mo><mo>*</mo></msup><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log^* n)</annotation></semantics></math>.
+The notation
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mo>log</mo><mo>*</mo></msup><mi>n</mi></mrow><annotation encoding="application/x-tex">\log^* n</annotation></semantics></math>
+means the number of times that the log of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+must be taken before
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>≤</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n \leq 1</annotation></semantics></math>.
+For example,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mo>log</mo><mo>*</mo></msup><mn>65536</mn></mrow><annotation encoding="application/x-tex">\log^* 65536</annotation></semantics></math>
+is 4 because
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>log</mo><mn>65536</mn><mo>=</mo><mn>16</mn><mo>,</mo><mo>log</mo><mn>16</mn><mo>=</mo><mn>4</mn><mo>,</mo><mo>log</mo><mn>4</mn><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">\log 65536 = 16, \log 16 = 4, \log 4 = 2</annotation></semantics></math>,
+and finally
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>log</mo><mn>2</mn><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\log 2 = 1</annotation></semantics></math>.
+Thus,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mo>log</mo><mo>*</mo></msup><mi>n</mi></mrow><annotation encoding="application/x-tex">\log^* n</annotation></semantics></math>
+grows <em>very</em> slowly, so the cost for a series of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+FIND operations is very close to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.</p>
+<p>Note that this does not mean that the tree resulting from processing
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+equivalence pairs necessarily has depth
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mo>log</mo><mo>*</mo></msup><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log^* n)</annotation></semantics></math>.
+One can devise a series of equivalence operations that yields
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math>
+depth for the resulting tree. However, many of the equivalences in such
+a series will look only at the roots of the trees being merged,
+requiring little processing time. The <em>total</em> amount of
+processing time required for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+operations will be
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><msup><mo>log</mo><mo>*</mo></msup><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log^* n)</annotation></semantics></math>,
+yielding nearly constant time for each equivalence operation. This is an
+example of <a href="10-glossary.html#amortized-analysis" class="term">amortized analysis</a>.</p>
+<p>The expression
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mo>log</mo><mo>*</mo></msup><mi>n</mi></mrow><annotation encoding="application/x-tex">\log^* n</annotation></semantics></math>
+is closely related to the inverse of Ackermann’s function. For more
+information about Ackermann’s function and the cost of path compression
+for UNION/FIND, see <a
+href="5.13-the-unionfind-algorithm-optional.html#Tarjan75"
+class="citation">[Tarjan75]</a>. The survey article by Galil &amp;
+Italiano <a
+href="5.13-the-unionfind-algorithm-optional.html#GalilItaliano91"
+class="citation">[GalilItaliano91]</a> covers many aspects of the
+equivalence class problem.</p>
+<p>
+<div id="UnionFindPRO" class="embedContainer">
+<iframe id="UnionFindPRO_iframe" aria-label="UnionFindPRO" src="../interactive/General/UnionFindPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+<div id="citations">
+<dl>
+<dt><span id="GalilItaliano91"
+class="citation-label">GalilItaliano91</span></dt>
+<dd>
+<p>Zvi Galil and Giuseppe F. Italiano, “Data Structures and Algorithms
+for Disjoint Set Union Problems”, <em>Computing Surveys 23</em>,
+3(September 1991), 319-344.</p>
+</dd>
+<dt><span id="Tarjan75" class="citation-label">Tarjan75</span></dt>
+<dd>
+<p>Robert E. Tarjan, “On the efficiency of a good but not linear set
+merging algorithm”, <em>Journal of the ACM 22</em>, 2(April 1975),
+215-225.</p>
+</dd>
+</dl>
+</div>
+</section>
+</section>
+<script type="text/javascript" src="../interactive/General/UFfigCON.js"></script>
+<script type="text/javascript" src="../interactive/General/UFconcomCON.js"></script>
+<script type="text/javascript" src="../interactive/General/UFCON.js"></script>
+<script type="text/javascript" src="../interactive/General/pathcompCON.js"></script>
+</body>
+</html>

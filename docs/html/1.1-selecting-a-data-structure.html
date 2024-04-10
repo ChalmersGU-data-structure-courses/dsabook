@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Cliff Shaffer" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Nick Smallbone" />
+  <title>DSABook – Selecting a Data Structure</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../bookstyle.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+      },
+      "HTML-CSS": {
+        scale: "80",
+      }
+    });
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Up:</span> <a href="1-introduction.html" accesskey="u" rel="up">Introduction</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="1.2-abstract-data-types.html" accesskey="n" rel="next">Abstract Data Types</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Previous:</span> <a href="1-introduction.html" accesskey="p" rel="previous">Introduction</a>
+</span>
+</div>
+</nav>
+<section id="selecting-a-data-structure" class="level2"
+data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span>
+Selecting a Data Structure</h2>
+<p>It should go without saying that people write programs to solve
+problems. However, sometimes programmers forget this. So it is crucial
+to keep this truism in mind when selecting a <a href="10-glossary.html#data-structure" class="term">data
+structure</a> to solve a particular <a href="10-glossary.html#problem" class="term">problem</a>. Only by first analyzing the problem to
+determine the performance goals that must be achieved can there be any
+hope of selecting the right data structure for the job. Poor program
+designers ignore this analysis step and apply a data structure that they
+are familiar with but which is inappropriate to the problem. The result
+is typically a slow program. Conversely, there is no sense in adopting a
+complex representation to “improve” a program that can meet its
+performance goals when implemented using a simpler design.</p>
+<p>When selecting a data structure to solve a problem, you should follow
+these steps.</p>
+<ol type="1">
+<li>Analyze your problem to determine the <a href="10-glossary.html#basic-operation" class="term">basic operations</a> that must be supported. Examples of
+basic operations include inserting a data item into the data structure,
+deleting a data item from the data structure, and finding a specified
+data item.</li>
+<li>Quantify the resource constraints for each operation.</li>
+<li>Select the data structure that best meets these requirements.</li>
+</ol>
+<p>This three-step approach to selecting a data structure
+operationalizes a data-centered view of the design process. The first
+concern is for the data and the operations to be performed on them, the
+next concern is the representation of those data, and the final concern
+is the implementation of that representation.</p>
+<p>Resource constraints on certain key operations, such as search,
+inserting data records, and deleting data records, normally drive the
+data structure selection process. Many issues relating to the relative
+importance of these operations are addressed by the following three
+questions, which you should ask yourself whenever you must choose a data
+structure.</p>
+<ol type="1">
+<li>Are all data items inserted into the data structure at the
+beginning, or are insertions interspersed with other operations? Static
+applications (where the data are loaded at the beginning and never
+change) typically get by with simpler data structures to get an
+efficient implementation, while dynamic applications often require
+something more complicated.</li>
+<li>Can data items be deleted? If so, this will probably make the
+implementation more complicated.</li>
+<li>Are all data items processed in some well-defined order, or is
+searching for specific data items allowed? “Random access” search
+generally requires more complex data structures.</li>
+</ol>
+<p>Each data structure has associated costs and benefits. In practice,
+it is hardly ever true that one data structure is better than another
+for use in all situations. If one data structure or algorithm is
+superior to another in all respects, the inferior one will usually have
+long been forgotten. For nearly every data structure and algorithm
+presented in this book, you will see examples of where it is the best
+choice. Some of the examples might surprise you.</p>
+<p>A data structure requires a certain amount of space for each data
+item it stores, a certain amount of time to perform a single basic
+operation, and a certain amount of programming effort. Each problem has
+constraints on available space and time. Each solution to a problem
+makes use of the basic operations in some relative proportion, and the
+data structure selection process must account for this. Only after a
+careful analysis of your problem’s characteristics can you determine the
+best data structure for the task.</p>
+<section id="example-bank" class="level4 unnumbered topic">
+<h4 class="unnumbered">Example: Bank</h4>
+<p>A bank must support many types of transactions with its customers,
+but we will examine a simple model where customers wish to open
+accounts, close accounts, and add money or withdraw money from accounts.
+We can consider this problem at two distinct levels: (1) the
+requirements for the physical infrastructure and workflow process that
+the bank uses in its interactions with its customers, and (2) the
+requirements for the database system that manages the accounts.</p>
+<p>The typical customer opens and closes accounts far less often than
+accessing the account. Customers are willing to spend many minutes
+during the process of opening or closing the account, but are typically
+not willing to wait more than a brief time for individual account
+transactions such as a deposit or withdrawal. These observations can be
+considered as informal specifications for the time constraints on the
+problem.</p>
+<p>It is common practice for banks to provide two tiers of service.
+Human tellers or automated teller machines (ATMs) support customer
+access to account balances and updates such as deposits and withdrawals.
+Special service representatives are typically provided (during
+restricted hours) to handle opening and closing accounts. Teller and ATM
+transactions are expected to take little time. Opening or closing an
+account can take much longer (perhaps up to an hour from the customer’s
+perspective).</p>
+<p>From a database perspective, we see that ATM transactions do not
+modify the database significantly. For simplicity, assume that if money
+is added or removed, this transaction simply changes the value stored in
+an account record. Adding a new account to the database is allowed to
+take several minutes. Deleting an account need have no time constraint,
+because from the customer’s point of view all that matters is that all
+the money be returned (equivalent to a withdrawal). From the bank’s
+point of view, the account record might be removed from the database
+system after business hours, or at the end of the monthly account
+cycle.</p>
+<p>When considering the choice of data structure to use in the database
+system that manages customer accounts, we see that a data structure that
+has little concern for the cost of deletion, but is highly efficient for
+search and moderately efficient for insertion, should meet the resource
+constraints imposed by this problem. Records are accessible by unique
+account number (sometimes called an <a href="10-glossary.html#exact-match-query" class="term">exact-match
+query</a>). One data structure that meets these requirements is the
+<a href="8-hashing.html#hashing" class="term">hash table</a>. Hash
+tables allow for extremely fast exact-match search. A record can be
+modified quickly when the modification does not affect its space
+requirements. Hash tables also support efficient insertion of new
+records. While deletions can also be supported efficiently, too many
+deletions lead to some degradation in performance for the remaining
+operations. However, the hash table can be reorganized periodically to
+restore the system to peak efficiency. Such reorganization can occur
+offline so as not to affect ATM transactions.</p>
+</section>
+<section id="example-databases" class="level4 unnumbered topic">
+<h4 class="unnumbered">Example: Databases</h4>
+<p>A company is developing a database system containing information
+about cities and towns in the United States. There are many thousands of
+cities and towns, and the database program should allow users to find
+information about a particular place by name (another example of an
+exact-match query). Users should also be able to find all places that
+match a particular value or range of values for attributes such as
+location or population size. This is known as a <a href="10-glossary.html#range-query" class="term">range
+query</a>.</p>
+<p>A reasonable database system must answer queries quickly enough to
+satisfy the patience of a typical user. For an exact-match query, a few
+seconds is satisfactory. If the database is meant to support range
+queries that can return many cities that match the query specification,
+the user might tolerate the entire operation to take longer, perhaps on
+the order of a minute. To meet this requirement, it will be necessary to
+support operations that process range queries efficiently by processing
+all cities in the range as a batch, rather than as a series of
+operations on individual cities.</p>
+<p>The hash table suggested in the previous example is inappropriate for
+implementing our city database, because it cannot perform efficient
+range queries. The <a href="10-glossary.html#b-tree" class="term">B-tree</a> supports large
+databases, insertion and deletion of data records, and range queries.
+However, a simple <a href="10-glossary.html#linear-index" class="term">linear index</a> would be more
+appropriate if the database is created once, and then never changed,
+such as an atlas distributed on a CD or accessed from a website.</p>
+</section>
+<section id="introduction-summary-questions" class="level3"
+data-number="1.1.1">
+<h3 data-number="1.1.1"><span class="header-section-number">1.1.1</span>
+Introduction Summary Questions</h3>
+<p>
+<div id="IntroSumm" class="embedContainer">
+<iframe id="IntroSumm_iframe" aria-label="IntroSumm" src="../interactive/Background/IntroSumm.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</section>
+</section>
+</body>
+</html>

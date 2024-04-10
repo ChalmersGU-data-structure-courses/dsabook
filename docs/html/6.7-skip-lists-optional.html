@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Cliff Shaffer" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Nick Smallbone" />
+  <title>DSABook – Skip Lists (optional)</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #ffffff;
+        color: #a0a0a0;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+    div.sourceCode
+      { color: #1f1c1b; background-color: #ffffff; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #1f1c1b; } /* Normal */
+    code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+    code span.an { color: #ca60ca; } /* Annotation */
+    code span.at { color: #0057ae; } /* Attribute */
+    code span.bn { color: #b08000; } /* BaseN */
+    code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+    code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #924c9d; } /* Char */
+    code span.cn { color: #aa5500; } /* Constant */
+    code span.co { color: #898887; } /* Comment */
+    code span.cv { color: #0095ff; } /* CommentVar */
+    code span.do { color: #607880; } /* Documentation */
+    code span.dt { color: #0057ae; } /* DataType */
+    code span.dv { color: #b08000; } /* DecVal */
+    code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+    code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #b08000; } /* Float */
+    code span.fu { color: #644a9b; } /* Function */
+    code span.im { color: #ff5500; } /* Import */
+    code span.in { color: #b08000; } /* Information */
+    code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+    code span.op { color: #1f1c1b; } /* Operator */
+    code span.ot { color: #006e28; } /* Other */
+    code span.pp { color: #006e28; } /* Preprocessor */
+    code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #ff5500; } /* SpecialString */
+    code span.st { color: #bf0303; } /* String */
+    code span.va { color: #0057ae; } /* Variable */
+    code span.vs { color: #bf0303; } /* VerbatimString */
+    code span.wa { color: #bf0303; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../bookstyle.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+      },
+      "HTML-CSS": {
+        scale: "80",
+      }
+    });
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+<link href="../interactive/DataStructures/SkipList.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/SearchStruct/SkipListIntroCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/SearchStruct/SkipListInsertCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/SearchStruct/SkipListRmvCON.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Up:</span> <a href="6-binary-search-trees.html" accesskey="u" rel="up">Binary Search Trees</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="6.8-binary-search-tree-chapter-summary.html" accesskey="n" rel="next">Binary Search Tree Chapter Summary</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Previous:</span> <a href="6.6-the-splay-tree-optional.html" accesskey="p" rel="previous">The Splay Tree (optional)</a>
+</span>
+</div>
+</nav>
+<section id="skip-lists-optional" class="level2" data-number="6.7">
+<h2 data-number="6.7"><span class="header-section-number">6.7</span>
+Skip Lists (optional)</h2>
+<p>This module presents a probabilistic search structure called the
+<a href="10-glossary.html#skip-list" class="term">skip list</a>. Like the <a href="10-glossary.html#bst" class="term">BST</a>, skip lists are designed to overcome a basic
+limitation of array-based and linked lists: Either search or update
+operations require linear time. The skip list is an example of a <a href="10-glossary.html#probabilistic-data-structure" class="term">probabilistic data structure</a>, because it makes some
+of its decisions at random.</p>
+<p>Skip lists provide an alternative to the BST and related tree
+structures. The primary problem with the BST is that it may easily
+become unbalanced. The <a href="10-glossary.html#2-3-tree" class="term">2-3 Tree</a> is guaranteed
+to remain balanced regardless of the order in which data values are
+inserted, but it is rather complicated to implement. The <a href="10-glossary.html#avl-tree" class="term">AVL tree</a> and the <a href="10-glossary.html#splay-tree" class="term">splay
+tree</a> are also guaranteed to provide good performance, but at the
+cost of added complexity as compared to the BST. The skip list is easier
+to implement than known balanced tree structures. The skip list is not
+guaranteed to provide good performance (where good performance is
+defined as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math>
+search, insertion, and deletion time), but it will provide good
+performance with extremely high probability (unlike the BST which has a
+good chance of performing poorly). As such it represents a good
+compromise between difficulty of implementation and performance.</p>
+<p>
+<div id="SkipListIntroCON" class="ssAV" data-short-name="SkipListIntroCON" data-long-name="SearchStruct/SkipListIntroCON" alt="SearchStruct/SkipListIntroCON" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>We can continue adding pointers to selected nodes in this way -– give
+a third pointer to every fourth node, give a fourth pointer to every
+eighth node, and so on – until we reach the ultimate of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>log</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n</annotation></semantics></math>
+pointers in the first and middle nodes for a list of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+nodes. To search, start with the bottom row of pointers, going as far as
+possible and skipping many nodes at a time. Then, shift up to shorter
+and shorter steps as required. With this arrangement, the worst-case
+number of accesses is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math>.</p>
+<p>We will store with each skip list node an array named
+<code>forward</code> that stores the pointers. Position
+<code>forward[0]</code> stores a level 0 pointer,
+<code>forward[1]</code> stores a level 1 pointer, and so on. It also
+uses a KVPair to store the key and record for the node. The SkipNode
+class follows:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="kw">class</span> SkipNode <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> KVPair rec<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> SkipNode<span class="op">[]</span> forward<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">Object</span> <span class="fu">element</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> rec<span class="op">.</span><span class="fu">value</span><span class="op">();</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">Comparable</span> <span class="fu">key</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> rec<span class="op">.</span><span class="fu">key</span><span class="op">();</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">SkipNode</span><span class="op">(</span><span class="bu">Comparable</span> key<span class="op">,</span> <span class="bu">Object</span> elem<span class="op">,</span> <span class="dt">int</span> level<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>      rec <span class="op">=</span> <span class="kw">new</span> <span class="fu">KVPair</span><span class="op">(</span>key<span class="op">,</span> elem<span class="op">);</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>      forward <span class="op">=</span> <span class="kw">new</span> SkipNode<span class="op">[</span>level <span class="op">+</span> <span class="dv">1</span><span class="op">];</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> level<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        forward<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>      <span class="op">}</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">String</span> <span class="fu">toString</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> rec<span class="op">.</span><span class="fu">toString</span><span class="op">();</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">class</span> SkipNode<span class="op">&lt;</span>K <span class="kw">extends</span> <span class="bu">Comparable</span><span class="op">&lt;</span>K<span class="op">&gt;,</span> E<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>        <span class="kw">private</span> KVPair<span class="op">&lt;</span>K<span class="op">,</span> E<span class="op">&gt;</span> rec<span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="kw">private</span> SkipNode<span class="op">&lt;</span>K<span class="op">,</span> E<span class="op">&gt;[]</span> forward<span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="kw">public</span> E <span class="fu">element</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> rec<span class="op">.</span><span class="fu">value</span><span class="op">();</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="kw">public</span> K <span class="fu">key</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> rec<span class="op">.</span><span class="fu">key</span><span class="op">();</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">@SuppressWarnings</span><span class="op">(</span><span class="st">&quot;unchecked&quot;</span><span class="op">)</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="kw">public</span> <span class="fu">SkipNode</span><span class="op">(</span>K key<span class="op">,</span> E elem<span class="op">,</span> <span class="dt">int</span> level<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>            rec <span class="op">=</span> <span class="kw">new</span> KVPair<span class="op">&lt;</span>K<span class="op">,</span> E<span class="op">&gt;(</span>key<span class="op">,</span> elem<span class="op">);</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>            forward <span class="op">=</span> <span class="kw">new</span> SkipNode<span class="op">[</span>level <span class="op">+</span> <span class="dv">1</span><span class="op">];</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> level<span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>                forward<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        <span class="kw">public</span> <span class="bu">String</span> <span class="fu">toString</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> rec<span class="op">.</span><span class="fu">toString</span><span class="op">();</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<p>The skip list object includes data member <code>level</code> that
+stores the highest level for any node currently in the skip list. The
+skip list stores a header node named <code>head</code> with
+<code>level+1</code> pointers where the head level is initially 0 and
+the level is set to -1 for the empty list. The start of the SkipList
+class follows:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SkipList <span class="kw">implements</span> <span class="bu">Dictionary</span> <span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> SkipNode head<span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="dt">int</span> level<span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="dt">int</span> size<span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">static</span> <span class="kw">private</span> <span class="bu">Random</span> ran <span class="op">=</span> <span class="kw">new</span> <span class="bu">Random</span><span class="op">();</span> <span class="co">// Hold the Random class object</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="fu">SkipList</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    head <span class="op">=</span> <span class="kw">new</span> <span class="fu">SkipNode</span><span class="op">(</span><span class="kw">null</span><span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    level <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    size <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SkipList<span class="op">&lt;</span>K <span class="kw">extends</span> <span class="bu">Comparable</span><span class="op">&lt;</span>K<span class="op">&gt;,</span> E<span class="op">&gt;</span> <span class="kw">implements</span> <span class="bu">Dictionary</span><span class="op">&lt;</span>K<span class="op">,</span> E<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> SkipNode<span class="op">&lt;</span>K<span class="op">,</span> E<span class="op">&gt;</span> head<span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> level<span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> size<span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">static</span> <span class="kw">private</span> <span class="bu">Random</span> ran <span class="op">=</span> <span class="kw">new</span> <span class="bu">Random</span><span class="op">();</span> <span class="co">// Hold the Random class object</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">SkipList</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        head <span class="op">=</span> <span class="kw">new</span> SkipNode<span class="op">&lt;</span>K<span class="op">,</span> E<span class="op">&gt;(</span><span class="kw">null</span><span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        level <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        size <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<p>The <code>find</code> function works as follows.</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Return the (first) matching matching element if one exists, null otherwise</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="bu">Object</span> <span class="fu">find</span><span class="op">(</span><span class="bu">Comparable</span> key<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    SkipNode x <span class="op">=</span> head<span class="op">;</span> <span class="co">// Dummy header node</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> level<span class="op">;</span> i <span class="op">&gt;=</span> <span class="dv">0</span><span class="op">;</span> i<span class="op">--)</span> <span class="op">{</span> <span class="co">// For each level...</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>      <span class="cf">while</span> <span class="op">((</span>x<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">]</span> <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="op">(</span>x<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">].</span><span class="fu">key</span><span class="op">().</span><span class="fu">compareTo</span><span class="op">(</span>key<span class="op">)</span> <span class="op">&lt;</span> <span class="dv">0</span><span class="op">))</span> <span class="op">{</span> <span class="co">// go forward</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> x<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">];</span> <span class="co">// Go one last step</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>      <span class="op">}</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> x<span class="op">.</span><span class="fu">forward</span><span class="op">[</span><span class="dv">0</span><span class="op">];</span> <span class="co">// Move to actual record, if it exists</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">((</span>x <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="op">(</span>x<span class="op">.</span><span class="fu">key</span><span class="op">().</span><span class="fu">compareTo</span><span class="op">(</span>key<span class="op">)</span> <span class="op">==</span> <span class="dv">0</span><span class="op">))</span> <span class="op">{</span> <span class="cf">return</span> x<span class="op">.</span><span class="fu">element</span><span class="op">();</span> <span class="op">}</span> <span class="co">// Got it</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="op">{</span> <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span> <span class="op">}</span> <span class="co">// Its not there</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Return the (first) matching matching element if one exists, null otherwise</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> E <span class="fu">find</span><span class="op">(</span>K key<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        SkipNode<span class="op">&lt;</span>K<span class="op">,</span> E<span class="op">&gt;</span> x <span class="op">=</span> head<span class="op">;</span> <span class="co">// Dummy header node</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> level<span class="op">;</span> i <span class="op">&gt;=</span> <span class="dv">0</span><span class="op">;</span> i<span class="op">--)</span> <span class="co">// For each level...</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">while</span> <span class="op">((</span>x<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">]</span> <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="op">(</span>x<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">].</span><span class="fu">key</span><span class="op">().</span><span class="fu">compareTo</span><span class="op">(</span>key<span class="op">)</span> <span class="op">&lt;</span> <span class="dv">0</span><span class="op">))</span> <span class="co">// go forward</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                x <span class="op">=</span> x<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">];</span> <span class="co">// Go one last step</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> x<span class="op">.</span><span class="fu">forward</span><span class="op">[</span><span class="dv">0</span><span class="op">];</span> <span class="co">// Move to actual record, if it exists</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">((</span>x <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="op">(</span>x<span class="op">.</span><span class="fu">key</span><span class="op">().</span><span class="fu">compareTo</span><span class="op">(</span>key<span class="op">)</span> <span class="op">==</span> <span class="dv">0</span><span class="op">))</span> <span class="cf">return</span> x<span class="op">.</span><span class="fu">element</span><span class="op">();</span> <span class="co">// Got it</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span> <span class="co">// Its not there</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<p>The ideal skip list is organized so that (if the head node is not
+counted) half of the nodes have only one pointer, one quarter have two,
+one eighth have three, and so on. And ideally, the distances would be
+equally spaced; in effect this is a “perfectly balanced” skip list.
+Maintaining such balance would be expensive during the normal process of
+insertions and deletions. The key to skip lists is that we do not worry
+about any of this. Whenever inserting a node, we assign it a level
+(i.e., some number of pointers). The assignment is random, using a
+geometric distribution yielding a 50% probability that the node will
+have one pointer, a 25% probability that it will have two, and so on.
+The following function determines the level based on such a
+distribution.</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Pick a level using a geometric distribution</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> <span class="fu">randomLevel</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> lev<span class="op">;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span>lev <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">abs</span><span class="op">(</span>ran<span class="op">.</span><span class="fu">nextInt</span><span class="op">())</span> <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span><span class="op">;</span> lev<span class="op">++)</span> <span class="op">{</span> <span class="co">// ran is random generator</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>      <span class="op">;</span> <span class="co">// Do nothing</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> lev<span class="op">;</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Pick a level using a geometric distribution</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="fu">randomLevel</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> lev<span class="op">;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span>lev <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">abs</span><span class="op">(</span>ran<span class="op">.</span><span class="fu">nextInt</span><span class="op">())</span> <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span><span class="op">;</span> lev<span class="op">++)</span> <span class="co">// ran is random generator</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>            <span class="op">;</span> <span class="co">// Do nothing</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> lev<span class="op">;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<p>Once the proper level for the node has been determined, the next step
+is to find where the node should be inserted and link it in as
+appropriate at all of its levels. Here is an implementation for
+inserting a new value into the skip list followed by a visualization of
+the process. Note that we build an <code>update</code> array as we
+progress through the skip list, so that we can update the pointers for
+the nodes that will precede the one being inserted.</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>  <span class="co">/**</span> Insert a key<span class="co">,</span> element pair into the skip list <span class="co">*/</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">insert</span><span class="op">(</span><span class="bu">Comparable</span> key<span class="op">,</span> <span class="bu">Object</span> elem<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> newLevel <span class="op">=</span> <span class="fu">randomLevel</span><span class="op">();</span> <span class="co">// New node&#39;s level</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>newLevel <span class="op">&gt;</span> level<span class="op">)</span> <span class="op">{</span> <span class="co">// If new node is deeper</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">adjustHead</span><span class="op">(</span>newLevel<span class="op">);</span> <span class="co">// adjust the header</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Track end of level</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    SkipNode<span class="op">[]</span> update <span class="op">=</span> <span class="kw">new</span> SkipNode<span class="op">[</span>level <span class="op">+</span> <span class="dv">1</span><span class="op">];</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    SkipNode x <span class="op">=</span> head<span class="op">;</span> <span class="co">// Start at header node</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> level<span class="op">;</span> i <span class="op">&gt;=</span> <span class="dv">0</span><span class="op">;</span> i<span class="op">--)</span> <span class="op">{</span> <span class="co">// Find insert position</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>      <span class="cf">while</span> <span class="op">((</span>x<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">]</span> <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="op">(</span>x<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">].</span><span class="fu">key</span><span class="op">().</span><span class="fu">compareTo</span><span class="op">(</span>key<span class="op">)</span> <span class="op">&lt;</span> <span class="dv">0</span><span class="op">))</span> <span class="op">{</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> x<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>      <span class="op">}</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>      update<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> x<span class="op">;</span> <span class="co">// Track end at level i</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="kw">new</span> <span class="fu">SkipNode</span><span class="op">(</span>key<span class="op">,</span> elem<span class="op">,</span> newLevel<span class="op">);</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;=</span> newLevel<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span> <span class="co">// Splice into list</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>      x<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> update<span class="op">[</span>i<span class="op">].</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">];</span> <span class="co">// Who x points to</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>      update<span class="op">[</span>i<span class="op">].</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> x<span class="op">;</span> <span class="co">// Who points to x</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    size<span class="op">++;</span> <span class="co">// Increment dictionary size</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="dt">void</span> <span class="fu">adjustHead</span><span class="op">(</span><span class="dt">int</span> newLevel<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    SkipNode temp <span class="op">=</span> head<span class="op">;</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    head <span class="op">=</span> <span class="kw">new</span> <span class="fu">SkipNode</span><span class="op">(</span><span class="kw">null</span><span class="op">,</span> <span class="kw">null</span><span class="op">,</span> newLevel<span class="op">);</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;=</span> level<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>      head<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> temp<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    level <span class="op">=</span> newLevel<span class="op">;</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>    <span class="co">/**</span> Insert a key<span class="co">,</span> element pair into the skip list <span class="co">*/</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">insert</span><span class="op">(</span>K key<span class="op">,</span> E elem<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> newLevel <span class="op">=</span> <span class="fu">randomLevel</span><span class="op">();</span> <span class="co">// New node&#39;s level</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>newLevel <span class="op">&gt;</span> level<span class="op">)</span> <span class="co">// If new node is deeper</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">adjustHead</span><span class="op">(</span>newLevel<span class="op">);</span> <span class="co">// adjust the header</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Track end of level</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        SkipNode<span class="op">&lt;</span>K<span class="op">,</span> E<span class="op">&gt;[]</span> update <span class="op">=</span> <span class="kw">new</span> SkipNode<span class="op">[</span>level <span class="op">+</span> <span class="dv">1</span><span class="op">];</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        SkipNode<span class="op">&lt;</span>K<span class="op">,</span> E<span class="op">&gt;</span> x <span class="op">=</span> head<span class="op">;</span> <span class="co">// Start at header node</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> level<span class="op">;</span> i <span class="op">&gt;=</span> <span class="dv">0</span><span class="op">;</span> i<span class="op">--)</span> <span class="op">{</span> <span class="co">// Find insert position</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">while</span> <span class="op">((</span>x<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">]</span> <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="op">(</span>x<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">].</span><span class="fu">key</span><span class="op">().</span><span class="fu">compareTo</span><span class="op">(</span>key<span class="op">)</span> <span class="op">&lt;</span> <span class="dv">0</span><span class="op">))</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>                x <span class="op">=</span> x<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>            update<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> x<span class="op">;</span> <span class="co">// Track end at level i</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> <span class="kw">new</span> SkipNode<span class="op">&lt;</span>K<span class="op">,</span> E<span class="op">&gt;(</span>key<span class="op">,</span> elem<span class="op">,</span> newLevel<span class="op">);</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;=</span> newLevel<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span> <span class="co">// Splice into list</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>            x<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> update<span class="op">[</span>i<span class="op">].</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">];</span> <span class="co">// Who x points to</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>            update<span class="op">[</span>i<span class="op">].</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> x<span class="op">;</span> <span class="co">// Who points to x</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>        size<span class="op">++;</span> <span class="co">// Increment dictionary size</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">adjustHead</span><span class="op">(</span><span class="dt">int</span> newLevel<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>        SkipNode<span class="op">&lt;</span>K<span class="op">,</span> E<span class="op">&gt;</span> temp <span class="op">=</span> head<span class="op">;</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>        head <span class="op">=</span> <span class="kw">new</span> SkipNode<span class="op">&lt;</span>K<span class="op">,</span> E<span class="op">&gt;(</span><span class="kw">null</span><span class="op">,</span> <span class="kw">null</span><span class="op">,</span> newLevel<span class="op">);</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;=</span> level<span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>            head<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> temp<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>        level <span class="op">=</span> newLevel<span class="op">;</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<p>
+<div id="SkipListInsertCON" class="ssAV" data-short-name="SkipListInsertCON" data-long-name="SearchStruct/SkipListInsertCON" alt="SearchStruct/SkipListInsertCON" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>The <code>remove</code> function is similar to insertion in that the
+<code>update</code> array is built as part of searching for the record
+to be deleted. Then those nodes specified by the update array have their
+forward pointers adjusted to point around the node being deleted.</p>
+<p>
+<div id="SkipListRmvCON" class="ssAV" data-short-name="SkipListRmvCON" data-long-name="SearchStruct/SkipListRmvCON" alt="SearchStruct/SkipListRmvCON" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>A newly inserted node could have a high level generated by
+<code>randomLevel</code>, or a low level. It is possible that many nodes
+in the skip list could have many pointers, leading to unnecessary insert
+cost and yielding poor (i.e.,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math>)
+performance during search, because not many nodes will be skipped.
+Conversely, too many nodes could have a low level. In the worst case,
+all nodes could be at level 0, equivalent to a regular linked list. If
+so, search will again require
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math>
+time. However, the probability that performance will be poor is quite
+low. There is only one chance in 1024 that ten nodes in a row will be at
+level 0. The motto of probabilistic data structures such as the skip
+list is “Don’t worry, be happy”. We simply accept the results of
+<code>randomLevel</code> and expect that probability will eventually
+work in our favor. The advantage of this approach is that the algorithms
+are simple, while requiring only
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math>
+time for all operations in the average case. For a skip list of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
+the expected memory usage is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>n</mi></mrow><annotation encoding="application/x-tex">2n</annotation></semantics></math>.
+This is because a level
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>l</mi><annotation encoding="application/x-tex">l</annotation></semantics></math>
+node needs
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">l+1</annotation></semantics></math>
+forward pointers, but occurs with probability
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><mi>l</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></msup><annotation encoding="application/x-tex">2^{(l+1)}</annotation></semantics></math>.
+So a skip list is expected to have
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mo>∑</mo><mrow><mi>l</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>l</mi><mo>=</mo><mi>∞</mi></mrow></msubsup><mrow><mo stretchy="true" form="prefix">(</mo><mi>l</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><msup><mn>2</mn><mrow><mo stretchy="true" form="prefix">(</mo><mi>l</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></msup></mrow><annotation encoding="application/x-tex">\sum_{l=0}^{l=\infty} (l+1)/2^{(l+1)}</annotation></semantics></math>
+pointers, which is 2. Thus, the number of pointers needed by both the
+BST and the skip list are expected to be the same.</p>
+<p>In practice, the skip list will probably have better performance than
+a BST storing the same data. The BST can have bad performance caused by
+the order in which data are inserted. For example, if
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+nodes are inserted into a BST in ascending order of their key values,
+then the BST will look like a linked list with the deepest node at depth
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>.
+If the data inserted over the life of the BST could be randomly ordered,
+then the probability distribution for the cost of the insert and search
+operations would be similar to that of the skip list. The problem for
+the BST is that this randomization does not happen in fact, but rather
+the BST is constrained by the actual order of inputs and searches.</p>
+<p>In contrast, the skip list’s performance does not depend on the order
+in which values are inserted into the list. In a sense, the data are
+“randomized” automatically as part of the skip list’s probabilistic
+behavior when the depths of the nodes are selected. As the number of
+nodes in the skip list increases, the probability of encountering the
+worst case decreases geometrically. Thus, the skip list illustrates a
+tension between the theoretical worst case (in this case,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math>
+for a skip list operation), and a rapidly increasing probability of
+average-case performance of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math>,
+that characterizes probabilistic data structures.</p>
+</section>
+<script type="text/javascript" src="../interactive/DataStructures/SkipList.js"></script>
+<script type="text/javascript" src="../interactive/SearchStruct/SkipListIntroCON.js"></script>
+<script type="text/javascript" src="../interactive/SearchStruct/SkipListInsertCON.js"></script>
+<script type="text/javascript" src="../interactive/SearchStruct/SkipListRmvCON.js"></script>
+</body>
+</html>

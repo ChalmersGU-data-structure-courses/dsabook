@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Cliff Shaffer" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Nick Smallbone" />
+  <title>DSABook – Hashing</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../bookstyle.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+      },
+      "HTML-CSS": {
+        scale: "80",
+      }
+    });
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+<link href="../interactive/Hashing/hashIntroCON.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Up:</span> <a href="index.html" accesskey="u" rel="up">Data Structures and Algorithms</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="8.1-hash-function-principles.html" accesskey="n" rel="next">Hash Function Principles</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Previous:</span> <a href="7.5-priority-queues-chapter-summary.html" accesskey="p" rel="previous">Priority Queues Chapter Summary</a>
+</span>
+</div>
+</nav>
+<section id="hashing" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span>
+Hashing</h1>
+<p>Hashing is a method for storing and retrieving records from a
+database. It lets you insert, delete, and search for records based on a
+search key value. When properly implemented, these operations can be
+performed in constant time. In fact, a properly tuned hash system
+typically looks at only one or two records for each search, insert, or
+delete operation. This is better than the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>
+cost required to do a binary search on a sorted array of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+records, or the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>
+cost required to do an operation on a binary search tree. However, even
+though hashing is based on a very simple idea, it is surprisingly
+difficult to implement properly. Designers need to pay careful attention
+to all of the details involved with implementing a hash system.</p>
+<p>A hash system stores records in an array called a <a href="10-glossary.html#hash-table" class="term">hash table</a>, which we will call <code>HT</code>.
+Hashing works by performing a computation on a search key <code>K</code>
+in a way that is intended to identify the position in <code>HT</code>
+that contains the record with key <code>K</code>. The function that does
+this calculation is called the <a href="10-glossary.html#hash-function" class="term">hash function</a>,
+and will be denoted by the letter <strong>h</strong>. Since hashing
+schemes place records in the table in whatever order satisfies the needs
+of the address calculation, records are not ordered by value. A position
+in the hash table is also known as a <a href="10-glossary.html#slot" class="term">slot</a>. The
+number of slots in hash table <code>HT</code> will be denoted by the
+variable
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>
+with slots numbered from 0 to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">M-1</annotation></semantics></math>.</p>
+<p>The goal for a hashing system is to arrange things such that, for any
+key value <code>K</code> and some hash function
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>h</mi><annotation encoding="application/x-tex">h</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>=</mo><mi>𝐡</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>K</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">i = \mathbf{h}(K)</annotation></semantics></math>
+is a slot in the table such that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>&lt;</mo><mo>=</mo><mi>i</mi><mo>&lt;</mo><mi>M</mi></mrow><annotation encoding="application/x-tex">0 &lt;= i &lt; M</annotation></semantics></math>,
+and we have the key of the record stored at <code>HT[i]</code> equal to
+<code>K</code>.</p>
+<p>Hashing is not good for applications where multiple records with the
+same key value are permitted. Hashing is not a good method for answering
+range searches. In other words, we cannot easily find all records (if
+any) whose key values fall within a certain range. Nor can we easily
+find the record with the minimum or maximum key value, or visit the
+records in key order. Hashing is most appropriate for answering the
+question, ‘What record, if any, has key value <code>K</code>?’
+<strong>For applications where all search is done by exact-match
+queries, hashing is the search method of choice because it is extremely
+efficient when implemented correctly.</strong> As this tutorial shows,
+however, there are many approaches to hashing and it is easy to devise
+an inefficient implementation. Hashing is suitable for both in-memory
+and disk-based searching and is one of the two most widely used methods
+for organizing large databases stored on disk (the other is the
+B-tree).</p>
+<p>As a simple (though unrealistic) example of hashing, consider storing
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+records, each with a unique key value in the range 0 to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>.
+A record with key <code>k</code> can be stored in <code>HT[k]</code>,
+and so the hash function is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐡</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">\mathbf{h}(k) = k</annotation></semantics></math>.
+To find the record with key value <code>k</code>, look in
+<code>HT[k]</code>.</p>
+<p>
+<div id="hashIntroCON" class="ssAV" data-short-name="hashIntroCON" data-long-name="Hashing Intro Slideshow" alt="Hashing Intro Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>In most applications, there are many more values in the key range
+than there are slots in the hash table. For a more realistic example,
+suppose the key can take any value in the range 0 to 65,535 (i.e., the
+key is a two-byte unsigned integer), and that we expect to store
+approximately 1000 records at any given time. It is impractical in this
+situation to use a hash table with 65,536 slots, because then the vast
+majority of the slots would be left empty. Instead, we must devise a
+hash function that allows us to store the records in a much smaller
+table. Because the key range is larger than the size of the table, at
+least some of the slots must be mapped to from multiple key values.
+Given a hash function <strong>h</strong> and two keys
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>1</mn></msub><annotation encoding="application/x-tex">k_1</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>2</mn></msub><annotation encoding="application/x-tex">k_2</annotation></semantics></math>,
+if
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐡</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>k</mi><mn>1</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>β</mi><mo>=</mo><mi>𝐡</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>k</mi><mn>2</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathbf{h}(k_1) = \beta = \mathbf{h}(k_2)</annotation></semantics></math>
+where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>
+is a slot in the table, then we say that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>1</mn></msub><annotation encoding="application/x-tex">k_1</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>2</mn></msub><annotation encoding="application/x-tex">k_2</annotation></semantics></math>
+have a <a href="10-glossary.html#collision" class="term">collision</a> at slot
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>
+under hash function <strong>h</strong>.</p>
+<p>Finding a record with key value <code>K</code> in a database
+organized by hashing follows a two-step procedure:</p>
+<ol type="1">
+<li>Compute the table location
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐡</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>K</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathbf{h}(K)</annotation></semantics></math>.</li>
+<li>Starting with slot
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐡</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>K</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathbf{h}(K)</annotation></semantics></math>,
+locate the record containing key <code>K</code> using (if necessary) a
+<a href="10-glossary.html#collision-resolution" class="term">collision resolution</a> policy.</li>
+</ol>
+</section>
+<script type="text/javascript" src="../interactive/Hashing/hashIntroCON.js"></script>
+</body>
+</html>

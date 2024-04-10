@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Cliff Shaffer" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Nick Smallbone" />
+  <title>DSABook – Information Flow in Recursive Functions</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #ffffff;
+        color: #a0a0a0;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+    div.sourceCode
+      { color: #1f1c1b; background-color: #ffffff; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #1f1c1b; } /* Normal */
+    code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+    code span.an { color: #ca60ca; } /* Annotation */
+    code span.at { color: #0057ae; } /* Attribute */
+    code span.bn { color: #b08000; } /* BaseN */
+    code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+    code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #924c9d; } /* Char */
+    code span.cn { color: #aa5500; } /* Constant */
+    code span.co { color: #898887; } /* Comment */
+    code span.cv { color: #0095ff; } /* CommentVar */
+    code span.do { color: #607880; } /* Documentation */
+    code span.dt { color: #0057ae; } /* DataType */
+    code span.dv { color: #b08000; } /* DecVal */
+    code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+    code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #b08000; } /* Float */
+    code span.fu { color: #644a9b; } /* Function */
+    code span.im { color: #ff5500; } /* Import */
+    code span.in { color: #b08000; } /* Information */
+    code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+    code span.op { color: #1f1c1b; } /* Operator */
+    code span.ot { color: #006e28; } /* Other */
+    code span.pp { color: #006e28; } /* Preprocessor */
+    code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #ff5500; } /* SpecialString */
+    code span.st { color: #bf0303; } /* String */
+    code span.va { color: #0057ae; } /* Variable */
+    code span.vs { color: #bf0303; } /* VerbatimString */
+    code span.wa { color: #bf0303; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../bookstyle.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+      },
+      "HTML-CSS": {
+        scale: "80",
+      }
+    });
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+<link href="../interactive/Binary/WriteTrav.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Up:</span> <a href="5-binary-trees.html" accesskey="u" rel="up">Binary Trees</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="5.8-binary-tree-space-requirements-optional.html" accesskey="n" rel="next">Binary Tree Space Requirements (optional)</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Previous:</span> <a href="5.6-implementing-tree-traversals.html" accesskey="p" rel="previous">Implementing Tree Traversals</a>
+</span>
+</div>
+</nav>
+<section id="information-flow-in-recursive-functions" class="level2"
+data-number="5.7">
+<h2 data-number="5.7"><span class="header-section-number">5.7</span>
+Information Flow in Recursive Functions</h2>
+<p>Handling information flow in a recursive function can be a challenge.
+In any given function, we might need to be concerned with either or both
+of:</p>
+<blockquote>
+<ol type="1">
+<li>Passing down the correct information needed by the function to do
+its work,</li>
+<li>Returning (passing up) information to the recursive function’s
+caller.</li>
+</ol>
+</blockquote>
+<p>Any given problems might need to do either or both. Here are some
+examples and exercises.</p>
+<section id="local" class="level3" data-number="5.7.1">
+<h3 data-number="5.7.1"><span class="header-section-number">5.7.1</span>
+Local</h3>
+<p>Local traversal involves going to each node in the tree to do some
+operation. Such functions need no information from the parent (other
+than a pointer to the current node), and pass no information back.
+Examples include preorder traversal and incrementing the value of every
+node by one.</p>
+</section>
+<section id="passing-down-information" class="level3"
+data-number="5.7.2">
+<h3 data-number="5.7.2"><span class="header-section-number">5.7.2</span>
+Passing Down Information</h3>
+<p>Slightly more complicated is the situation where every node needs the
+same piece of information to be passed to it. An example would be
+incrementing the value for all nodes by some amount. In this case, the
+value parameter is simply passed on unchanged in all recursive
+calls.</p>
+<p>Many functions need information that changes from node to node. A
+simple example is a function to set the value for each node of the tree
+to be its depth. In this case, the depth is passed as a parameter to the
+function, and each recursive call must adjust that value (by adding
+one).</p>
+</section>
+<section id="binary-tree-set-depth-exercise" class="level3"
+data-number="5.7.3">
+<h3 data-number="5.7.3"><span class="header-section-number">5.7.3</span>
+Binary Tree Set Depth Exercise</h3>
+<div class="extrtoolembed" data-workout_id="66">
+<p>‘Binary Tree Set Depth Exercise’</p>
+</div>
+</section>
+<section id="collect-and-return" class="level3" data-number="5.7.4">
+<h3 data-number="5.7.4"><span class="header-section-number">5.7.4</span>
+Collect-and-return</h3>
+<p>Collect-and-return requires that we communicate information back up
+the tree to the caller. Simple examples are to count the number of nodes
+in a tree, or to sum the values of all the nodes.</p>
+<section id="example-38" class="level4 unnumbered topic">
+<h4 class="unnumbered">Example</h4>
+<p>Consider the problem of counting (and returning) the number of nodes
+in a binary tree. The key insight is that the total count for any
+(non-empty) subtree is one for the root plus the counts for the left and
+right subtrees. Where do left and right subtree counts come from? Calls
+to function <code>count</code> on the subtrees will compute this for us.
+Thus, we can implement <code>count</code> as follows.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> count(root):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> node <span class="kw">is</span> <span class="va">None</span>: <span class="cf">return</span> <span class="dv">0</span>  <span class="co"># No nodes to count</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">+</span> count(node.left()) <span class="op">+</span> count(node.right())</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">int</span> <span class="fu">count</span><span class="op">(</span>BinNode root<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>root <span class="op">==</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span> <span class="op">}</span>  <span class="co">// Nothing to count</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">1</span> <span class="op">+</span> <span class="fu">count</span><span class="op">(</span>root<span class="op">.</span><span class="fu">left</span><span class="op">())</span> <span class="op">+</span> <span class="fu">count</span><span class="op">(</span>root<span class="op">.</span><span class="fu">right</span><span class="op">());</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="dt">int</span> <span class="fu">count</span><span class="op">(</span>BinNode<span class="op">&lt;</span>E<span class="op">&gt;</span> root<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>root <span class="op">==</span> <span class="kw">null</span><span class="op">)</span> <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span>  <span class="co">// Nothing to count</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">+</span> <span class="fu">count</span><span class="op">(</span>root<span class="op">.</span><span class="fu">left</span><span class="op">())</span> <span class="op">+</span> <span class="fu">count</span><span class="op">(</span>root<span class="op">.</span><span class="fu">right</span><span class="op">());</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>The following solution is correct but inefficient as it does
+redundant checks on the left and the right child of each visited
+node.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ineff_count(root):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> root <span class="kw">is</span> <span class="va">None</span>: <span class="cf">return</span> <span class="dv">0</span>   <span class="co"># Nothing to count</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    count <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> root.left() <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        count <span class="op">+=</span> ineff_count(root.left())</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> root.right() <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        count <span class="op">+=</span> ineff_count(root.right())</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> root.left() <span class="kw">is</span> <span class="va">None</span> <span class="kw">and</span> root.right() <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">+</span> count</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">int</span> <span class="fu">ineff_count</span><span class="op">(</span>BinNode root<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>root <span class="op">==</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span> <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span> <span class="op">}</span>  <span class="co">// Nothing to count</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> count <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>root<span class="op">.</span><span class="fu">left</span><span class="op">()</span> <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    count <span class="op">=</span> <span class="dv">1</span> <span class="op">+</span> <span class="fu">ineff_count</span><span class="op">(</span>root<span class="op">.</span><span class="fu">left</span><span class="op">());</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>root<span class="op">.</span><span class="fu">right</span><span class="op">()</span> <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    count <span class="op">=</span> <span class="dv">1</span> <span class="op">+</span> <span class="fu">ineff_count</span><span class="op">(</span>root<span class="op">.</span><span class="fu">right</span><span class="op">());</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span>  </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>root<span class="op">.</span><span class="fu">left</span><span class="op">()</span> <span class="op">==</span> <span class="kw">null</span> <span class="op">&amp;&amp;</span> root<span class="op">.</span><span class="fu">right</span><span class="op">()</span> <span class="op">==</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">1</span> <span class="op">+</span> count<span class="op">;</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="dt">int</span> <span class="fu">ineff_count</span><span class="op">(</span>BinNode<span class="op">&lt;</span>E<span class="op">&gt;</span> root<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>root <span class="op">==</span> <span class="kw">null</span><span class="op">)</span> <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span>  <span class="co">// Nothing to count</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> count <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>root<span class="op">.</span><span class="fu">left</span><span class="op">()</span> <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        count <span class="op">+=</span> <span class="fu">ineff_count</span><span class="op">(</span>root<span class="op">.</span><span class="fu">left</span><span class="op">());</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>root<span class="op">.</span><span class="fu">right</span><span class="op">()</span> <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        count <span class="op">+=</span> <span class="fu">ineff_count</span><span class="op">(</span>root<span class="op">.</span><span class="fu">right</span><span class="op">());</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>root<span class="op">.</span><span class="fu">left</span><span class="op">()</span> <span class="op">==</span> <span class="kw">null</span> <span class="op">&amp;&amp;</span> root<span class="op">.</span><span class="fu">right</span><span class="op">()</span> <span class="op">==</span> <span class="kw">null</span><span class="op">)</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">+</span> count<span class="op">;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</section>
+<p>When you write a recursive function that returns a value, such as
+counting the number of nodes in the subtree, you have to make sure that
+your function actually returns a value. A common mistake is to make a
+recursive call and not capture the returned value. Another common
+mistake is to not return a value.</p>
+<p>
+<div id="BinaryTreeMistakesCON" class="ssAV" data-short-name="BinaryTreeMistakesCON" data-long-name="Binary Tree Common Mistakes Slideshow" alt="Binary Tree Common Mistakes Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</section>
+<section id="binary-tree-check-sum-exercise" class="level3"
+data-number="5.7.5">
+<h3 data-number="5.7.5"><span class="header-section-number">5.7.5</span>
+Binary Tree Check Sum Exercise</h3>
+<div class="extrtoolembed" data-workout_id="71">
+<p>‘Binary Tree Check Sum Exercise’</p>
+</div>
+</section>
+<section id="binary-tree-leaf-nodes-count-exercise" class="level3"
+data-number="5.7.6">
+<h3 data-number="5.7.6"><span class="header-section-number">5.7.6</span>
+Binary Tree Leaf Nodes Count Exercise</h3>
+<div class="extrtoolembed" data-workout_id="72">
+<p>‘Binary Tree Leaf Nodes Count Exercise’</p>
+</div>
+</section>
+<section id="binary-tree-sum-nodes-exercise" class="level3"
+data-number="5.7.7">
+<h3 data-number="5.7.7"><span class="header-section-number">5.7.7</span>
+Binary Tree Sum Nodes Exercise</h3>
+<div class="extrtoolembed" data-workout_id="68">
+<p>‘Binary Tree Sum Nodes Exercise’</p>
+</div>
+</section>
+<section id="combining-information-flows" class="level3"
+data-number="5.7.8">
+<h3 data-number="5.7.8"><span class="header-section-number">5.7.8</span>
+Combining Information Flows</h3>
+<p>Many functions require both that information be passed in, and that
+information be passed back. Let’s start with a relatively simple case.
+If we want to check if some node in the tree has a particular value,
+that value has to be passed down, and the count has to be passed back
+up. The downward flow is simple, as the value being checked for never
+changes. The information passed up has the simple collect-and-return
+style: Return True if and only if one of the children returns True.</p>
+</section>
+<section id="binary-tree-check-value-exercise" class="level3"
+data-number="5.7.9">
+<h3 data-number="5.7.9"><span class="header-section-number">5.7.9</span>
+Binary Tree Check Value Exercise</h3>
+<div class="extrtoolembed" data-workout_id="65">
+<p>‘Binary Tree Check Value Exercise’</p>
+</div>
+</section>
+<section id="combination-problems" class="level3" data-number="5.7.10">
+<h3 data-number="5.7.10"><span
+class="header-section-number">5.7.10</span> Combination Problems</h3>
+<p>Slightly more complicated problems combine what we have seen so far.
+Information passing down the tree changes from node to node. Data passed
+back up the tree uses the collect-and-return paradigm.</p>
+</section>
+<section id="binary-tree-height-exercise" class="level3"
+data-number="5.7.11">
+<h3 data-number="5.7.11"><span
+class="header-section-number">5.7.11</span> Binary Tree Height
+Exercise</h3>
+<div class="extrtoolembed" data-workout_id="70">
+<p>‘Binary Tree Height Exercise’</p>
+</div>
+</section>
+<section id="binary-tree-get-difference-exercise" class="level3"
+data-number="5.7.12">
+<h3 data-number="5.7.12"><span
+class="header-section-number">5.7.12</span> Binary Tree Get Difference
+Exercise</h3>
+<div class="extrtoolembed" data-workout_id="73">
+<p>‘Binary Tree Get Difference Exercise’</p>
+</div>
+</section>
+<section id="binary-tree-has-path-sum-exercise" class="level3"
+data-number="5.7.13">
+<h3 data-number="5.7.13"><span
+class="header-section-number">5.7.13</span> Binary Tree Has Path Sum
+Exercise</h3>
+<div class="extrtoolembed" data-workout_id="67">
+<p>‘Binary Tree Has Path Sum Exercise’</p>
+</div>
+</section>
+</section>
+<script type="text/javascript" src="../interactive/Binary/BinaryTreeMistakesCON.js"></script>
+</body>
+</html>

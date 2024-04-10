@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Cliff Shaffer" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Nick Smallbone" />
+  <title>DSABook – Balanced Trees</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../bookstyle.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+      },
+      "HTML-CSS": {
+        scale: "80",
+      }
+    });
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Up:</span> <a href="6-binary-search-trees.html" accesskey="u" rel="up">Binary Search Trees</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="6.4-the-avl-tree.html" accesskey="n" rel="next">The AVL Tree</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Previous:</span> <a href="6.2-binary-tree-guided-information-flow.html" accesskey="p" rel="previous">Binary Tree Guided Information Flow</a>
+</span>
+</div>
+</nav>
+<section id="balanced-trees" class="level2" data-number="6.3">
+<h2 data-number="6.3"><span class="header-section-number">6.3</span>
+Balanced Trees</h2>
+<p>The <a href="10-glossary.html#binary-search-tree" class="term">Binary Search Tree</a> has a serious
+deficiency for practical use as a search structure. That is the fact
+that it can easily become unbalanced, so that some nodes are deep in the
+tree. In fact, it is possible for a BST with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+nodes to have a depth of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
+making it no faster to search in the worst case than a linked list. If
+we could keep the tree balanced in some way, then search cost would only
+be
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math>,
+a huge improvement.</p>
+<p>One solution to this problem is to adopt another search tree
+structure instead of using a BST at all. An example of such an
+alternative tree structure is the <a href="10-glossary.html#2-3-tree" class="term">2-3 Tree</a> or
+the <a href="10-glossary.html#b-tree" class="term">B-Tree</a>. But another alternative would be
+to modify the BST access functions in some way to guarantee that the
+tree performs well. This is an appealing concept, and the concept works
+well for heaps, whose access functions maintain the heap in the shape of
+a complete binary tree. Unfortunately, the heap keeps its balanced shape
+at the cost of weaker restrictions on the relative values of a node and
+its children, making it a bad search structure. And requiring that the
+BST always be in the shape of a complete binary tree requires excessive
+modification to the tree during update, as we see in this example.</p>
+<div id="balanceBST">
+<div class="odsafig" width="500" data-align="center"
+data-capalign="justify" data-figwidth="90%"
+alt="An attempt to re-balance a BST after insertion can be expensive">
+<p>Images/BSTBal.png</p>
+<p>An attempt to re-balance a BST after insertion can be expensive. (a)
+A BST with six nodes in the shape of a complete binary tree. (b) A node
+with value 1 is inserted into the BST of (a). To maintain both the
+complete binary tree shape and the BST property, a major reorganization
+of the tree is required.</p>
+</div>
+</div>
+<p>If we are willing to weaken the balance requirements, we can come up
+with alternative update routines that perform well both in terms of cost
+for the update and in balance for the resulting tree structure. <a
+href="6.4-the-avl-tree.html#the-avl-tree">The AVL tree</a> works in this
+way, using insertion and deletion routines altered from those of the BST
+to ensure that, for every node, the depths of the left and right
+subtrees differ by at most one.</p>
+<p>A different approach to improving the performance of the BST is to
+not require that the tree always be balanced, but rather to expend some
+effort toward making the BST more balanced every time it is accessed.
+This is a little like the idea of path compression used by the <a href="10-glossary.html#union-find" class="term">UNION/FIND</a> algorithm. One example of such a
+compromise is called the <a
+href="6.6-the-splay-tree-optional.html#the-splay-tree-optional">splay
+tree</a>.</p>
+<p>The [Red-Black Tree] is also a binary tree, but it uses a different
+balancing mechanism.</p>
+</section>
+</body>
+</html>

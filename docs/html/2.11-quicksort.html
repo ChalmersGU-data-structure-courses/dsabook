@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Cliff Shaffer" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Nick Smallbone" />
+  <title>DSABook – Quicksort</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #ffffff;
+        color: #a0a0a0;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+    div.sourceCode
+      { color: #1f1c1b; background-color: #ffffff; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #1f1c1b; } /* Normal */
+    code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+    code span.an { color: #ca60ca; } /* Annotation */
+    code span.at { color: #0057ae; } /* Attribute */
+    code span.bn { color: #b08000; } /* BaseN */
+    code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+    code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #924c9d; } /* Char */
+    code span.cn { color: #aa5500; } /* Constant */
+    code span.co { color: #898887; } /* Comment */
+    code span.cv { color: #0095ff; } /* CommentVar */
+    code span.do { color: #607880; } /* Documentation */
+    code span.dt { color: #0057ae; } /* DataType */
+    code span.dv { color: #b08000; } /* DecVal */
+    code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+    code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #b08000; } /* Float */
+    code span.fu { color: #644a9b; } /* Function */
+    code span.im { color: #ff5500; } /* Import */
+    code span.in { color: #b08000; } /* Information */
+    code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+    code span.op { color: #1f1c1b; } /* Operator */
+    code span.ot { color: #006e28; } /* Other */
+    code span.pp { color: #006e28; } /* Preprocessor */
+    code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #ff5500; } /* SpecialString */
+    code span.st { color: #bf0303; } /* String */
+    code span.va { color: #0057ae; } /* Variable */
+    code span.vs { color: #bf0303; } /* VerbatimString */
+    code span.wa { color: #bf0303; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../bookstyle.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+      },
+      "HTML-CSS": {
+        scale: "80",
+      }
+    });
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+<link href="../interactive/Sorting/quicksortCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Sorting/QuickSortPartitionAnalysisCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Sorting/QuickSortWorstCaseCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Sorting/QuickSortBestCaseCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Sorting/QuickSortAverageCaseCON.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Up:</span> <a href="2-arrays-searching-and-sorting.html" accesskey="u" rel="up">Arrays: searching and sorting</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="2.12-an-empirical-comparison-of-sorting-algorithms.html" accesskey="n" rel="next">An Empirical Comparison of Sorting Algorithms</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Previous:</span> <a href="2.10-implementing-mergesort.html" accesskey="p" rel="previous">Implementing Mergesort</a>
+</span>
+</div>
+</nav>
+<section id="quicksort" class="level2" data-number="2.11">
+<h2 data-number="2.11"><span class="header-section-number">2.11</span>
+Quicksort</h2>
+<p>While Mergesort uses the most obvious form of divide and conquer
+(split the list in half then sort the halves), this is not the only way
+that we can break down the sorting problem. We saw that doing the merge
+step for Mergesort when using an array implementation is not so easy. So
+perhaps a different divide and conquer strategy might turn out to be
+more efficient?</p>
+<p><a href="10-glossary.html#quicksort" class="term">Quicksort</a> is aptly named because, when
+properly implemented, it is one of the fastest known general-purpose
+in-memory sorting algorithms in the average case. It does not require
+the extra array needed by Mergesort, so it is space efficient as well.
+Quicksort is widely used, and is typically the algorithm implemented in
+a library sort routine such as the UNIX <code>qsort</code> function.
+Interestingly, Quicksort is hampered by exceedingly poor worst-case
+performance, thus making it inappropriate for certain applications.</p>
+<p>Quicksort first selects a value called the <a href="10-glossary.html#pivot" class="term">pivot</a>. Assume that the input array contains
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+records with key values less than the pivot. The records are then
+rearranged in such a way that the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+values less than the pivot are placed in the first, or leftmost,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+positions in the array, the pivot itself is placed at index
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>,
+and the values greater than or equal to the pivot are placed in the
+last, or rightmost,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mi>k</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-k-1</annotation></semantics></math>
+positions. This is called a <a href="10-glossary.html#partition" class="term">partition</a> of the
+array. The values placed in a given partition need not (and typically
+will not) be sorted with respect to each other. All that is required is
+that all values end up in the correct partition. The pivot value itself
+is placed in position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>.
+Quicksort then proceeds to sort the resulting subarrays now on either
+side of the pivot, one of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+and the other of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mi>k</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-k-1</annotation></semantics></math>.
+How are these values sorted? Because Quicksort is such a good algorithm,
+using Quicksort on the subarrays would be appropriate.</p>
+<p>Unlike some of the sorts that we have seen earlier in this chapter,
+Quicksort might not seem very “natural” in that it is not an approach
+that a person is likely to use to sort real objects. But it should not
+be too surprising that a really efficient sort for huge numbers of
+abstract objects on a computer would be rather different from our
+experiences with sorting a relatively few physical objects.</p>
+<p>Here is an implementation for Quicksort. Parameters <code>left</code>
+and <code>right</code> define the left and right indices, respectively,
+for the subarray being sorted. The initial call to
+<code>quickSort</code> would be
+<code>quickSort(array, 0, n-1)</code>.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> quickSort(A, left, right):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> left <span class="op">&gt;=</span> right:                          <span class="co"># Base case: Subarray length is &lt;= 1</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    pivot <span class="op">=</span> findPivot(A, left, right)          <span class="co"># Pick a pivot index</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    pivot <span class="op">=</span> partition(A, left, right, pivot)   <span class="co"># Partition the subarray; update pivot with its new position</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    quickSort(A, left, pivot<span class="op">-</span><span class="dv">1</span>)                <span class="co"># Sort left partition</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    quickSort(A, pivot<span class="op">+</span><span class="dv">1</span>, right)               <span class="co"># Sort right partition</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="dt">static</span> <span class="op">&lt;</span>E <span class="kw">extends</span> <span class="bu">Comparable</span><span class="op">&lt;</span>E<span class="op">&gt;&gt;</span> <span class="dt">void</span> <span class="fu">quickSort</span><span class="op">(</span>E<span class="op">[]</span> A<span class="op">,</span> <span class="dt">int</span> left<span class="op">,</span> <span class="dt">int</span> right<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>left <span class="op">&gt;=</span> right<span class="op">)</span>                          <span class="co">// Base case: Subarray length is &lt;= 1</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> pivot <span class="op">=</span> <span class="fu">findPivot</span><span class="op">(</span>A<span class="op">,</span> left<span class="op">,</span> right<span class="op">);</span>      <span class="co">// Pick a pivot index</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    pivot <span class="op">=</span> <span class="fu">partition</span><span class="op">(</span>A<span class="op">,</span> left<span class="op">,</span> right<span class="op">,</span> pivot<span class="op">);</span>   <span class="co">// Partition the subarray; update pivot with its new position</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">quickSort</span><span class="op">(</span>A<span class="op">,</span> left<span class="op">,</span> pivot<span class="op">-</span><span class="dv">1</span><span class="op">);</span>                <span class="co">// Sort left partition</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">quickSort</span><span class="op">(</span>A<span class="op">,</span> pivot<span class="op">+</span><span class="dv">1</span><span class="op">,</span> right<span class="op">);</span>               <span class="co">// Sort right partition</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Function <code>partition</code> will move records to the appropriate
+partition and then return the final position of the pivot. This is the
+correct position of the pivot in the final, sorted array. By doing so,
+we guarantee that at least one value (the pivot) will not be processed
+in the recursive calls to <code>quickSort</code>. Even if a bad pivot is
+selected, yielding a completely empty partition to one side of the
+pivot, the larger partition will contain at most
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>
+records.</p>
+<p>Selecting a pivot can be done in many ways. The simplest is to use
+the first key. However, if the input is sorted or reverse sorted, this
+will produce a poor partitioning with all values to one side of the
+pivot. One simple way to avoid this problem is to select the middle
+position in the array. Here is a simple <code>findPivot</code> function
+implementing this idea. Note that later in the chapter we will switch to
+a better pivot selection strategy.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> findPivot(A, i, j):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Not-so-good pivot selection: always choose the middle element.&quot;&quot;&quot;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (i <span class="op">+</span> j) <span class="op">//</span> <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="op">&lt;</span>E <span class="kw">extends</span> <span class="bu">Comparable</span><span class="op">&lt;</span>E<span class="op">&gt;&gt;</span> <span class="dt">int</span> <span class="fu">findPivot</span><span class="op">(</span>E<span class="op">[]</span> A<span class="op">,</span> <span class="dt">int</span> i<span class="op">,</span> <span class="dt">int</span> j<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Not-so-good pivot selection: always choose the middle element.</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">(</span>i <span class="op">+</span> j<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>
+<div id="QuicksortPivotPRO" class="embedContainer">
+<iframe id="QuicksortPivotPRO_iframe" aria-label="QuicksortPivotPRO" src="../interactive/Sorting/QuicksortPivotPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+<section id="partition" class="level3" data-number="2.11.1">
+<h3 data-number="2.11.1"><span
+class="header-section-number">2.11.1</span> Partition</h3>
+<p>We now turn to function <code>partition</code>. If we knew in advance
+how many keys are less than the pivot, <code>partition</code> could
+simply copy records with key values less than the pivot to the low end
+of the array, and records with larger keys to the high end. Because we
+do not know in advance how many keys are less than the pivot, we use a
+clever algorithm that moves indices inwards from the ends of the
+subarray, swapping values as necessary until the two indices meet.</p>
+<p>Since Quicksort is a recursive algorithm, we will not only partition
+the whole array, but also part of the array. Therefore
+<code>partition</code> needs the positions of the leftmost and rightmost
+elements in the subarray that we will partition.</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> partition(A, left, right, pivot):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    swap(A, left, pivot)   <span class="co"># Put pivot at the leftmost index</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    pivot <span class="op">=</span> left</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    left <span class="op">+=</span> <span class="dv">1</span>              <span class="co"># Start partitioning from the element after the pivot</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    pivotValue <span class="op">=</span> A[pivot]</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Move `left` right as far as possible. Stop if equal to pivot!</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Also stop if `left` moves past `right` – this is important, </span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        <span class="co"># so that `left` stops if it moves past the end of the array.</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> left <span class="op">&lt;=</span> right <span class="kw">and</span> A[left] <span class="op">&lt;</span> pivotValue:</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>            left <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Move `right` left as far as possible. Stop if equal to pivot!</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Also stop if `right` moves all the way left to `left`,</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># see above for why.</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> left <span class="op">&lt;=</span> right <span class="kw">and</span> A[right] <span class="op">&gt;</span> pivotValue:</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>            right <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Stop here if `left` and `right` passed each other.</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> left <span class="op">&gt;</span> right:</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Otherwise, swap the elements and move `left` and `right` on by 1.</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>        swap(A, left, right)</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>        left <span class="op">+=</span> <span class="dv">1</span><span class="op">;</span> right <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    swap(A, pivot, right)   <span class="co"># Finally, move the pivot into place</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> right            <span class="co"># Return the position of the pivot</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="op">&lt;</span>E <span class="kw">extends</span> <span class="bu">Comparable</span><span class="op">&lt;</span>E<span class="op">&gt;&gt;</span> <span class="dt">int</span> <span class="fu">partition</span><span class="op">(</span>E<span class="op">[]</span> A<span class="op">,</span> <span class="dt">int</span> left<span class="op">,</span> <span class="dt">int</span> right<span class="op">,</span> <span class="dt">int</span> pivot<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Util</span><span class="op">.</span><span class="fu">swap</span><span class="op">(</span>A<span class="op">,</span> left<span class="op">,</span> pivot<span class="op">);</span>   <span class="co">// Put pivot at the leftmost index</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    pivot <span class="op">=</span> left<span class="op">;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    left<span class="op">++;</span>                 <span class="co">// Start partitioning from the element after the pivot</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    E pivotValue <span class="op">=</span> A<span class="op">[</span>pivot<span class="op">];</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span><span class="kw">true</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Move `left` right as far as possible. Stop if equal to pivot!</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Also stop if `left` moves past `right` – this is important,</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        <span class="co">// so that `left` stops if it moves past the end of the array.</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="op">(</span>left <span class="op">&lt;=</span> right <span class="op">&amp;&amp;</span> A<span class="op">[</span>left<span class="op">].</span><span class="fu">compareTo</span><span class="op">(</span>pivotValue<span class="op">)</span> <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> </span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>            left<span class="op">++;</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Move `right` left as far as possible. Stop if equal to pivot!</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Also stop if `right` moves all the way left to `left`,</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        <span class="co">// see above for why.</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="op">(</span>left <span class="op">&lt;=</span> right <span class="op">&amp;&amp;</span> A<span class="op">[</span>right<span class="op">].</span><span class="fu">compareTo</span><span class="op">(</span>pivotValue<span class="op">)</span> <span class="op">&gt;</span> <span class="dv">0</span><span class="op">)</span> </span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>            right<span class="op">--;</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Stop here if `left` and `right` passed each other.</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>left <span class="op">&gt;</span> right<span class="op">)</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Otherwise, swap the elements and move `left` and `right` on by 1.</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Util</span><span class="op">.</span><span class="fu">swap</span><span class="op">(</span>A<span class="op">,</span> left<span class="op">,</span> right<span class="op">);</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>        left<span class="op">++;</span> right<span class="op">--;</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Util</span><span class="op">.</span><span class="fu">swap</span><span class="op">(</span>A<span class="op">,</span> pivot<span class="op">,</span> right<span class="op">);</span>   <span class="co">// Finally, move the pivot into place</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> right<span class="op">;</span>            <span class="co">// Return the position of the pivot</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>The function <code>partition</code> first puts the pivot at the
+leftmost position in the subarray, and increases <code>left</code> by
+one (so that the pivot is not included in the partitioning loop).</p>
+<p>Then it moves <code>left</code> to the right until it finds a value
+which is larger than (or equal to) the pivot; and then it moves
+<code>right</code> to the left until it finds a value which is smaller
+than (or equal to) the pivot.</p>
+<p>It breaks out of the loop if <code>left</code> and <code>right</code>
+passed each other; otherwise it swaps the <code>left</code> and
+<code>right</code> elements, moves the indices one step and continues
+with the loop.</p>
+<p>Finally, it puts the pivot at its correct position, by swapping with
+<code>right</code>.</p>
+<p>
+<div id="quicksortCON" class="ssAV" data-short-name="quicksortCON" data-long-name="Quicksort Partition Slideshow" alt="Quicksort Partition Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>
+<div id="QuicksortPartitPRO" class="embedContainer">
+<iframe id="QuicksortPartitPRO_iframe" aria-label="QuicksortPartitPRO" src="../interactive/Sorting/QuicksortPartitPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+<p>And here is a visualization illustrating the running time analysis of
+the partition function</p>
+<p>
+<div id="QuickSortPartitionAnalysisCON" class="ssAV" data-short-name="QuickSortPartitionAnalysisCON" data-long-name="Quicksort Partition Analysis Slideshow" alt="Quicksort Partition Analysis Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</section>
+<section id="putting-it-together" class="level3" data-number="2.11.2">
+<h3 data-number="2.11.2"><span
+class="header-section-number">2.11.2</span> Putting It Together</h3>
+<p>Here is a visualization for the entire Quicksort algorithm. This
+visualization shows you how the logical decomposition caused by the
+partitioning process works. In the visualization, the separate
+sub-partitions are separated out to match the recursion tree. In
+reality, there is only a single array involved (as you will see in the
+proficiency exercise that follows the visualization).</p>
+<p>
+<div id="quicksortAV" class="embedContainer">
+<iframe id="quicksortAV_iframe" aria-label="quicksortAV" src="../interactive/Sorting/quicksortAV.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+<p>Here is a complete proficiency exercise to see how well you
+understand Quicksort.</p>
+<p>
+<div id="quicksortPRO" class="embedContainer">
+<iframe id="quicksortPRO_iframe" aria-label="quicksortPRO" src="../interactive/Sorting/quicksortPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</section>
+<section id="quicksort-analysis" class="level3" data-number="2.11.3">
+<h3 data-number="2.11.3"><span
+class="header-section-number">2.11.3</span> Quicksort Analysis</h3>
+<p>This visualization explains the worst-case running time of
+Quicksort</p>
+<p>
+<div id="QuickSortWorstCaseCON" class="ssAV" data-short-name="QuickSortWorstCaseCON" data-long-name="Quicksort Worst Case Analysis Slideshow" alt="Quicksort Worst Case Analysis Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>This is terrible, no better than Insertion or Selection Sort. When
+will this worst case occur? Only when each pivot yields a bad
+partitioning of the array. If the pivot values are selected at random,
+then this is extremely unlikely to happen. When selecting the middle
+position of the current subarray, it is still unlikely to happen. It
+does not take many good partitionings for Quicksort to work fairly
+well.</p>
+<p>This visualization explains the best-case running time of Quick
+Sort</p>
+<p>
+<div id="QuickSortBestCaseCON" class="ssAV" data-short-name="QuickSortBestCaseCON" data-long-name="Quicksort Best Case Analysis Slideshow" alt="Quicksort Best Case Analysis Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>Quicksort’s average-case behavior falls somewhere between the
+extremes of worst and best case. Average-case analysis considers the
+cost for all possible arrangements of input, summing the costs and
+dividing by the number of cases. We make one reasonable simplifying
+assumption: At each partition step, the pivot is equally likely to end
+in any position in the (sorted) array. In other words, the pivot is
+equally likely to break an array into partitions of sizes 0 and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>,
+or 1 and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">n-2</annotation></semantics></math>,
+and so on.</p>
+<p>Given this assumption, the average-case cost is computed from the
+following equation:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mi>𝐓</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mi>c</mi><mi>n</mi><mo>+</mo><mfrac><mn>1</mn><mi>n</mi></mfrac><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></munderover><mrow><mo stretchy="true" form="prefix">[</mo><mi>𝐓</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>𝐓</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo>−</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">]</mo></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><mi>𝐓</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>𝐓</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mi>c</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">
+\begin{eqnarray}
+\mathbf{T}(n) &amp;=&amp; cn + \frac{1}{n}\sum_{k=0}^{n-1}[\mathbf{T}(k) + \mathbf{T}(n - 1 - k)]
+\\
+\mathbf{T}(0) = \mathbf{T}(1) &amp;=&amp; c
+\end{eqnarray}
+</annotation></semantics></math></p>
+<p>This visualization will help you to understand how this recurrence
+relation was formed.</p>
+<p>
+<div id="QuickSortAverageCaseCON" class="ssAV" data-short-name="QuickSortAverageCaseCON" data-long-name="Quicksort Average Case Analysis Slideshow" alt="Quicksort Average Case Analysis Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>This is an unusual situation that the average case cost and the worst
+case cost have asymptotically different growth rates. Consider what
+“average case” actually means. We compute an average cost for inputs of
+size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+by summing up for every possible input of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+the product of the running time cost of that input times the probability
+that that input will occur. To simplify things, we assumed that every
+permutation is equally likely to occur. Thus, finding the average means
+summing up the cost for every permutation and dividing by the number of
+permutations (which is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>!</mi></mrow><annotation encoding="application/x-tex">n!</annotation></semantics></math>).
+We know that some of these
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>!</mi></mrow><annotation encoding="application/x-tex">n!</annotation></semantics></math>
+inputs cost
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>.
+But the sum of all the permutation costs has to be
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mi>!</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">(n!)(O(n \log n))</annotation></semantics></math>.
+Given the extremely high cost of the worst inputs, there must be very
+few of them. In fact, there cannot be a constant fraction of the inputs
+with cost
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>.
+If even, say, 1% of the inputs have cost
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>,
+this would lead to an average cost of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>.
+Thus, as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+grows, the fraction of inputs with high cost must be going toward a
+limit of zero. We can conclude that Quicksort will run fast if we can
+avoid those very few bad input permutations. This is why picking a good
+pivot is so important.</p>
+</section>
+<section id="pivots-in-practice" class="level3" data-number="2.11.4">
+<h3 data-number="2.11.4"><span
+class="header-section-number">2.11.4</span> Pivots in practice</h3>
+<p>Perhaps the most important choice in implementing Quicksort is how to
+choose the pivot. Choosing a bad pivot can result in all elements of the
+array ending up in the same partition, in which case Quicksort ends up
+taking quadratic time.</p>
+<p>Choosing the <em>first</em> or the <em>last</em> element of the array
+is a bad strategy. If the input array is sorted, then the first element
+of the array will also be the smallest element. Hence all elements of
+the array will end up in the “greater than pivot” partition. Worse, the
+exact same thing will happen in all the recursive calls to Quicksort.
+Hence the partitioning will be as bad as possible, and Quicksort will
+end up taking quadratic time. You sometimes see implementations of
+Quicksort that use the first element as the pivot, but this is a bad
+idea!</p>
+<p>Above, we picked the <em>middle</em> element of the array, to avoid
+this problem. This works well enough, but in practice, more
+sophisticated strategies are used.</p>
+<p>The theoretically best choice of pivot is one that divides the array
+equally in two, i.e. the median element of the array. However, the
+median of an array is difficult to compute (unless you sort the array
+first!) Instead, many Quicksort implementations use a strategy called
+<em>median-of-three</em>. In median-of-three, we pick elements from
+three positions in the array: the <em>first</em> position, the
+<em>middle</em> position and the <em>last</em> position. Then we take
+the median of these three elements. For example, given the array
+<code>3, 1, 4, 1, 5, 9, 2</code>, we pick out the elements
+<code>3</code> (first position), <code>1</code> (middle position) and
+<code>2</code> (last position). The median of 3, 1 and 2 is 2, so we
+pick 2 as the pivot.</p>
+<p>Median-of-three is not guaranteed to pick a good pivot: there are
+cases where it partitions the input array badly. However, these bad
+cases do not seem to occur in practice. In practice, median-of-three
+picks good pivots, and it is also cheap to implement. It is used by most
+real-world Quicksort implementations.</p>
+<p>Another good approach is to pick a random element of the array as the
+pivot. This makes it somewhat unlikely to get a poor partitioning.
+What’s more, if we do get a poor partitioning, it is likely that in the
+recursive call to <code>quickSort</code>, we will choose a different
+pivot and get a better partitioning. Unlike median-of-three, this
+approach is theoretically sound: there are no input arrays which make it
+work badly. Another way to get the same effect is to pick e.g. the first
+element as the pivot, but to <em>shuffle</em> the array before sorting,
+rearranging it into a random order. The array only needs to be shuffled
+once before Quicksort begins, not in every recursive call.</p>
+</section>
+<section id="more-practical-improvements" class="level3"
+data-number="2.11.5">
+<h3 data-number="2.11.5"><span
+class="header-section-number">2.11.5</span> More practical
+improvements</h3>
+<p>A significant improvement can be gained by recognizing that Quicksort
+is relatively slow when
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+is small. This might not seem to be relevant if most of the time we sort
+large arrays, nor should it matter how long Quicksort takes in the rare
+instance when a small array is sorted because it will be fast anyway.
+But you should notice that Quicksort itself sorts many, many small
+arrays! This happens as a natural by-product of the divide and conquer
+approach.</p>
+<p>A simple improvement might then be to replace Quicksort with a faster
+sort for small subarrays, say Insertion Sort or Selection Sort. However,
+there is an even better-–and still simpler-–optimization. When Quicksort
+partitions are below a certain size, do nothing! The values within that
+partition will be out of order. However, we do know that all values in
+the array to the left of the partition are smaller than all values in
+the partition. All values in the array to the right of the partition are
+greater than all values in the partition. Thus, even if Quicksort only
+gets the values to “nearly” the right locations, the array will be close
+to sorted. This is an ideal situation in which to take advantage of the
+best-case performance of Insertion Sort. The final step is a single call
+to Insertion Sort to process the entire array, putting the records into
+final sorted order. At what size should we switch to Insertion Sort? The
+answer can only be determined by empirical testing, but on modern
+machines the answer is probably somewhere between 10 and 100.</p>
+<p>The last speedup to be considered reduces the cost of making
+recursive calls. Quicksort is inherently recursive, because each
+Quicksort operation must sort two sublists. Thus, there is no simple way
+to turn Quicksort into an iterative algorithm. However, Quicksort can be
+implemented using a stack to imitate recursion, as the amount of
+information that must be stored is small. We need not store copies of a
+subarray, only the subarray bounds. Furthermore, the stack depth can be
+kept small if care is taken on the order in which Quicksort’s recursive
+calls are executed. We can also place the code for
+<code>findPivot</code> and <code>partition</code> inline to eliminate
+the remaining function calls. Note however that by not processing smal
+sublists of size nine or less as suggested above, most of the function
+calls will already have been eliminated. Thus, eliminating the remaining
+function calls will yield only a modest speedup.</p>
+<p>
+<div id="QuicksortSumm" class="embedContainer">
+<iframe id="QuicksortSumm_iframe" aria-label="QuicksortSumm" src="../interactive/Sorting/QuicksortSumm.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</section>
+</section>
+<script type="text/javascript" src="../interactive/Sorting/quicksortCODE.js"></script>
+<script type="text/javascript" src="../interactive/Sorting/quicksortCON.js"></script>
+<script type="text/javascript" src="../interactive/Sorting/QuickSortPartitionAnalysisCON.js"></script>
+<script type="text/javascript" src="../interactive/Sorting/QuickSortWorstCaseCON.js"></script>
+<script type="text/javascript" src="../interactive/Sorting/QuickSortBestCaseCON.js"></script>
+<script type="text/javascript" src="../interactive/Sorting/QuickSortAverageCaseCON.js"></script>
+</body>
+</html>

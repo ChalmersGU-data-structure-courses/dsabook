@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Cliff Shaffer" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Nick Smallbone" />
+  <title>DSABook – Common Misunderstandings</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../bookstyle.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+      },
+      "HTML-CSS": {
+        scale: "80",
+      }
+    });
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+<link href="../interactive/AlgAnal/MisunderstandingsGraphCON.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Up:</span> <a href="3-algorithm-analysis.html" accesskey="u" rel="up">Algorithm Analysis</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="3.10-multiple-parameters.html" accesskey="n" rel="next">Multiple Parameters</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Previous:</span> <a href="3.8-analyzing-problems.html" accesskey="p" rel="previous">Analyzing Problems</a>
+</span>
+</div>
+</nav>
+<section id="common-misunderstandings" class="level2" data-number="3.9">
+<h2 data-number="3.9"><span class="header-section-number">3.9</span>
+Common Misunderstandings</h2>
+<p><a href="10-glossary.html#asymptotic-analysis" class="term">Asymptotic analysis</a> is one of the most
+intellectually difficult topics that undergraduate computer science
+majors are confronted with. Most people find <a href="10-glossary.html#growth-rate" class="term">growth rates</a> and asymptotic analysis confusing and so
+develop misconceptions about either the concepts or the terminology. It
+helps to know what the standard points of confusion are, in hopes of
+avoiding them.</p>
+<p>One problem with differentiating the concepts of <a href="10-glossary.html#upper-bound" class="term">upper</a> and <a href="10-glossary.html#lower-bound" class="term">lower bounds</a> is that, for most algorithms that you will
+encounter, it is easy to recognize the true growth rate for that
+algorithm. Given complete knowledge about a cost function, the upper and
+lower bound for that cost function are always the same. Thus, the
+distinction between an upper and a lower bound is only worthwhile when
+you have incomplete knowledge about the thing being measured. If this
+distinction is still not clear, then you should <a
+href="3.8-analyzing-problems.html#analyzing-problems">read about
+analyzing problems</a>. We use
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Θ</mi><annotation encoding="application/x-tex">\Theta</annotation></semantics></math>-notation
+to indicate that there is no meaningful difference between what we know
+about the growth rates of the upper and lower bound (which is usually
+the case for simple algorithms).</p>
+<p>It is a common mistake to confuse the concepts of upper bound or
+lower bound on the one hand, and <a href="10-glossary.html#worst-case" class="term">worst case</a> or
+<a href="10-glossary.html#best-case" class="term">best case</a> on the other. The best, worst, or <a href="10-glossary.html#average-case" class="term">average cases</a> each <strong>define
+a cost</strong> for a specific input instance (or specific set of
+instances for the average case). In contrast, upper and lower bounds
+describe our understanding of the <strong>growth rate</strong> for that
+cost measure. So to define the growth rate for an algorithm or problem,
+we need to determine what we are measuring (the best, worst, or average
+case) and also our description for what we know about the growth rate of
+that cost measure (big-Oh,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Ω</mi><annotation encoding="application/x-tex">\Omega</annotation></semantics></math>,
+or
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Θ</mi><annotation encoding="application/x-tex">\Theta</annotation></semantics></math>).</p>
+<p>The upper bound for an algorithm is not the same as the worst case
+for that algorithm for a given input of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.
+What is being bounded is not the actual cost (which you can determine
+for a given value of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>),
+but rather the <strong>growth rate</strong> for the cost. There cannot
+be a growth rate for a single point, such as a particular value of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.
+The growth <strong>rate</strong> applies to the <strong>change</strong>
+in cost as a <strong>change</strong> in input size occurs. Likewise, the
+lower bound is not the same as the best case for a given size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.</p>
+<p>Another common misconception is thinking that the best case for an
+algorithm occurs when the input size is as small as possible, or that
+the worst case occurs when the input size is as large as possible. What
+is correct is that best- and worse-case instances exist for each
+possible size of input. That is, for all inputs of a given size, say
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>,
+one (or more) of the inputs of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+is the best and one (or more) of the inputs of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+is the worst. Often (but not always!), we can characterize the best
+input case for an arbitrary size, and we can characterize the worst
+input case for an arbitrary size. Ideally, we can determine the growth
+rate for the characterized best, worst, and average cases as the input
+size grows.</p>
+<section id="example-20" class="level4 unnumbered topic">
+<h4 class="unnumbered">Example</h4>
+<p>What is the growth rate of the best case for sequential search? For
+any array of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
+the best case occurs when the value we are looking for appears in the
+first position of the array. This is true regardless of the size of the
+array. Thus, the best case (for arbitrary size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>)
+occurs when the desired value is in the first of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+positions, and its cost is 1. It is <em>not</em> correct to say that the
+best case occurs when
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n=1</annotation></semantics></math>.</p>
+</section>
+<p>
+<div id="MisunderstandingsGraphCON" class="ssAV" data-short-name="MisunderstandingsGraphCON" data-long-name="Example's graph Visualization" alt="Example's graph Visualization" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>
+<div id="MisSumm" class="embedContainer">
+<iframe id="MisSumm_iframe" aria-label="MisSumm" src="../interactive/AlgAnal/MisSumm.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</section>
+<script type="text/javascript" src="../interactive/AlgAnal/MisunderstandingsGraphCON.js"></script>
+</body>
+</html>

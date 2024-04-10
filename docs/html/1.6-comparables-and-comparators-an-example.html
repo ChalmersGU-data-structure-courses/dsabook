@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Cliff Shaffer" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Nick Smallbone" />
+  <title>DSABook – Comparables and Comparators: An Example</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #ffffff;
+        color: #a0a0a0;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+    div.sourceCode
+      { color: #1f1c1b; background-color: #ffffff; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #1f1c1b; } /* Normal */
+    code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+    code span.an { color: #ca60ca; } /* Annotation */
+    code span.at { color: #0057ae; } /* Attribute */
+    code span.bn { color: #b08000; } /* BaseN */
+    code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+    code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #924c9d; } /* Char */
+    code span.cn { color: #aa5500; } /* Constant */
+    code span.co { color: #898887; } /* Comment */
+    code span.cv { color: #0095ff; } /* CommentVar */
+    code span.do { color: #607880; } /* Documentation */
+    code span.dt { color: #0057ae; } /* DataType */
+    code span.dv { color: #b08000; } /* DecVal */
+    code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+    code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #b08000; } /* Float */
+    code span.fu { color: #644a9b; } /* Function */
+    code span.im { color: #ff5500; } /* Import */
+    code span.in { color: #b08000; } /* Information */
+    code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+    code span.op { color: #1f1c1b; } /* Operator */
+    code span.ot { color: #006e28; } /* Other */
+    code span.pp { color: #006e28; } /* Preprocessor */
+    code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #ff5500; } /* SpecialString */
+    code span.st { color: #bf0303; } /* String */
+    code span.va { color: #0057ae; } /* Variable */
+    code span.vs { color: #bf0303; } /* VerbatimString */
+    code span.wa { color: #bf0303; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../bookstyle.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+      },
+      "HTML-CSS": {
+        scale: "80",
+      }
+    });
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Up:</span> <a href="1-introduction.html" accesskey="u" rel="up">Introduction</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="2-arrays-searching-and-sorting.html" accesskey="n" rel="next">Arrays: searching and sorting</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Previous:</span> <a href="1.5-comparables-comparators-and-key-value-pairs.html" accesskey="p" rel="previous">Comparables, Comparators and Key-Value Pairs</a>
+</span>
+</div>
+</nav>
+<section id="comparables-and-comparators-an-example" class="level2"
+data-number="1.6">
+<h2 data-number="1.6"><span class="header-section-number">1.6</span>
+Comparables and Comparators: An Example</h2>
+<p><em>Note</em>: This example treats comparables and comparators, as
+they work in Java. Python code is also included, but since Python thinks
+of comparisons in a different way, the code is not always
+transferrable.</p>
+<section id="comparables-and-comparators-in-java" class="level3"
+data-number="1.6.1">
+<h3 data-number="1.6.1"><span class="header-section-number">1.6.1</span>
+Comparables and comparators in Java</h3>
+<p>In Java there are two main ways of comparing objects. The one that
+most people find easier to understand is <em>comparable</em>. But there
+is an alternative, <em>comparator</em>, which is very useful.</p>
+<p>As a running example we use a class for persons:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Person <span class="kw">implements</span> <span class="bu">Comparable</span><span class="op">&lt;</span>Person<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="bu">String</span> givenName<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="bu">String</span> familyName<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> birthYear<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">//...</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Also, let’s create an array of persons that we can use later:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="bu">ArrayList</span><span class="op">&lt;</span>Person<span class="op">&gt;</span> <span class="fu">getPeople</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">ArrayList</span><span class="op">&lt;</span>Person<span class="op">&gt;</span> people <span class="op">=</span> <span class="kw">new</span> <span class="bu">ArrayList</span><span class="op">&lt;&gt;();</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    people<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">&quot;Unsuk&quot;</span><span class="op">,</span> <span class="st">&quot;Chin&quot;</span><span class="op">,</span> <span class="dv">1961</span><span class="op">));</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    people<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">&quot;Anna&quot;</span><span class="op">,</span> <span class="st">&quot;Thorvaldsdóttir&quot;</span><span class="op">,</span> <span class="dv">1977</span><span class="op">));</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    people<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">&quot;Andrea&quot;</span><span class="op">,</span> <span class="st">&quot;Tarrodi&quot;</span><span class="op">,</span> <span class="dv">1981</span><span class="op">));</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    people<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">&quot;Diana&quot;</span><span class="op">,</span> <span class="st">&quot;Čemerytė&quot;</span><span class="op">,</span> <span class="dv">1974</span><span class="op">));</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    people<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">&quot;Elfrida&quot;</span><span class="op">,</span> <span class="st">&quot;Andrée&quot;</span><span class="op">,</span> <span class="dv">1841</span><span class="op">));</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    people<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">&quot;Guy&quot;</span><span class="op">,</span> <span class="st">&quot;d’Hardelot&quot;</span><span class="op">,</span> <span class="dv">1858</span><span class="op">));</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    people<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">&quot;Nadia&quot;</span><span class="op">,</span> <span class="st">&quot;Boulanger&quot;</span><span class="op">,</span> <span class="dv">1887</span><span class="op">));</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    people<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">&quot;Lili&quot;</span><span class="op">,</span> <span class="st">&quot;Boulanger&quot;</span><span class="op">,</span> <span class="dv">1893</span><span class="op">));</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> people<span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Now we can print the list:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">ArrayList</span><span class="op">&lt;</span>Person<span class="op">&gt;</span> people <span class="op">=</span> <span class="fu">getPeople</span><span class="op">();</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span>Person p <span class="op">:</span> people<span class="op">)</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>p<span class="op">);</span></span></code></pre></div>
+<p>Which results in:</p>
+<blockquote>
+<div class="line-block">Unsuk Chin (1961)<br />
+Anna Thorvaldsdóttir (1977)<br />
+Andrea Tarrodi (1981)<br />
+Diana Čemerytė (1974)<br />
+Elfrida Andrée (1841)<br />
+Guy d’Hardelot (1857)<br />
+Nadia Boulanger (1887)<br />
+Lili Boulanger (1893)</div>
+</blockquote>
+</section>
+<section id="comparables-1" class="level3" data-number="1.6.2">
+<h3 data-number="1.6.2"><span class="header-section-number">1.6.2</span>
+Comparables</h3>
+<p>With the <strong>Comparable</strong> interface we can define the
+“natural ordering” for a class (<a
+href="https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html">Java
+8 Comparable</a>). Recall the interface for comparables from <a
+href="1.3-all-adts-used-in-this-book.html#all-adts-used-in-this-book">the
+course API</a>:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Note: This is the same as the java.lang.Comparable interface</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Comparable</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="fu">compareTo</span><span class="op">(</span>E other<span class="op">);</span>  <span class="co">// Returns &lt;0  if  this &lt; other,</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                             <span class="co">//      or  0  if  this == other,</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                             <span class="co">//      or &gt;0  if  this &gt; other.</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Let’s say that we want the natural ordering to be to compare persons
+by their family name. Then we let <code>Person</code> implement the
+<code>Comparable</code> interface by overriding
+<code>.compareTo(…)</code>:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Person <span class="kw">implements</span> <span class="bu">Comparable</span><span class="op">&lt;</span>Person<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...as above...</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">compareTo</span><span class="op">(</span>Person other<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="kw">this</span><span class="op">.</span><span class="fu">familyName</span><span class="op">().</span><span class="fu">compareTo</span><span class="op">(</span>other<span class="op">.</span><span class="fu">familyName</span><span class="op">());</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Now we can sort our people array according to family name:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>people <span class="op">=</span> <span class="fu">getPeople</span><span class="op">();</span> <span class="co">// reset the people list</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">Collections</span><span class="op">.</span><span class="fu">sort</span><span class="op">(</span>people<span class="op">);</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span>Person p <span class="op">:</span> people<span class="op">)</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>p<span class="op">);</span></span></code></pre></div>
+<p>Resulting in:</p>
+<blockquote>
+<div class="line-block">Elfrida Andrée (1841)<br />
+Nadia Boulanger (1887)<br />
+Lili Boulanger (1893)<br />
+Unsuk Chin (1961)<br />
+Andrea Tarrodi (1981)<br />
+Anna Thorvaldsdóttir (1977)<br />
+Guy d’Hardelot (1857)<br />
+Diana Čemerytė (1974)</div>
+</blockquote>
+<p>Two things to note, which we address later:</p>
+<ol type="1">
+<li>Guy d’Hardelot and Diana Čemerytė come last – this is because
+<code>.compareTo(…)</code> gives a case-sensitive ordering and doesn’t
+care ignore diacritics.</li>
+<li>Nadia Boulanger comes before Lili, even though L comes before N in
+the alphabet.</li>
+</ol>
+</section>
+<section id="comparators-the-old-way" class="level3"
+data-number="1.6.3">
+<h3 data-number="1.6.3"><span class="header-section-number">1.6.3</span>
+Comparators, the old way</h3>
+<p>What if we sometimes want to sort the list according to some other
+ordering, e.g., birth year or given name? Enter <em>comparators</em>,
+and here is the interface (<a
+href="https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html">Java
+8 Comparator</a>):</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Note: This is a subset of the java.util.Comparator interface</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Comparator</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="fu">compare</span><span class="op">(</span>E one<span class="op">,</span> E other<span class="op">);</span>  <span class="co">// Returns &lt;0  if  one &lt; other,</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                                  <span class="co">//      or  0  if  one == other,</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                                  <span class="co">//      or &gt;0  if  one &gt; other.</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>To use this we have to implement a separate class for each ordering
+we want to use. Here’s one for comparing by birth year:</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BirthYearComparator <span class="kw">implements</span> <span class="bu">Comparator</span><span class="op">&lt;</span>Person<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">compare</span><span class="op">(</span>Person one<span class="op">,</span> Person other<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">Integer</span><span class="op">.</span><span class="fu">compare</span><span class="op">(</span>one<span class="op">.</span><span class="fu">birthYear</span><span class="op">(),</span> other<span class="op">.</span><span class="fu">birthYear</span><span class="op">());</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p><em>Notes</em>:</p>
+<ol type="1">
+<li>Don’t compare numbers by using subtraction! This might lead to
+overflow and rounding errors. Instead use the static
+<code>.compare(…)</code> methods that are built into the number classes
+(<code>Integer</code>, <code>Double</code>, etc).</li>
+<li>Since numbers are not objects, you cannot use
+<code>one.birthYear.compareTo(…)</code>. You can do
+<code>new Integer(one.birthYear).compareTo(…)</code>, or you can use
+<code>Integer.compare(…)</code> as above.</li>
+</ol>
+<p>And here’s the class for comparing by given name:</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> GivenNameComparator <span class="kw">implements</span> <span class="bu">Comparator</span><span class="op">&lt;</span>Person<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">compare</span><span class="op">(</span>Person one<span class="op">,</span> Person other<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> one<span class="op">.</span><span class="fu">givenName</span><span class="op">().</span><span class="fu">compareTo</span><span class="op">(</span>other<span class="op">.</span><span class="fu">givenName</span><span class="op">());</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>To use them you have to first create an object, i.e., instantiate the
+comparator:</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">Comparator</span><span class="op">&lt;</span>Person<span class="op">&gt;</span> byBirthYear <span class="op">=</span> <span class="kw">new</span> <span class="fu">BirthYearComparator</span><span class="op">();</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>people <span class="op">=</span> <span class="fu">getPeople</span><span class="op">();</span> <span class="co">// reset the people list</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">Collections</span><span class="op">.</span><span class="fu">sort</span><span class="op">(</span>people<span class="op">,</span> byBirthYear<span class="op">);</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span>Person p <span class="op">:</span> people<span class="op">)</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>p<span class="op">);</span></span></code></pre></div>
+<p>Result:</p>
+<blockquote>
+<div class="line-block">Elfrida Andrée (1841)<br />
+Guy d’Hardelot (1857)<br />
+Nadia Boulanger (1887)<br />
+Lili Boulanger (1893)<br />
+Unsuk Chin (1961)<br />
+Diana Čemerytė (1974)<br />
+Anna Thorvaldsdóttir (1977)<br />
+Andrea Tarrodi (1981)</div>
+</blockquote>
+<p>And similar for given names:</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">Comparator</span><span class="op">&lt;</span>Person<span class="op">&gt;</span> byGivenName <span class="op">=</span> <span class="kw">new</span> <span class="fu">GivenNameComparator</span><span class="op">();</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>people <span class="op">=</span> <span class="fu">getPeople</span><span class="op">();</span> <span class="co">// reset the people list</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">Collections</span><span class="op">.</span><span class="fu">sort</span><span class="op">(</span>people<span class="op">,</span> byGivenName<span class="op">);</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span>Person p <span class="op">:</span> people<span class="op">)</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>p<span class="op">);</span></span></code></pre></div>
+<p>Result:</p>
+<blockquote>
+<div class="line-block">Andrea Tarrodi (1981)<br />
+Anna Thorvaldsdóttir (1977)<br />
+Diana Čemerytė (1974)<br />
+Elfrida Andrée (1841)<br />
+Guy d’Hardelot (1857)<br />
+Lili Boulanger (1893)<br />
+Nadia Boulanger (1887)<br />
+Unsuk Chin (1961)</div>
+</blockquote>
+</section>
+<section id="comparators-the-new-functional-interface-in-java-8"
+class="level3" data-number="1.6.4">
+<h3 data-number="1.6.4"><span class="header-section-number">1.6.4</span>
+Comparators, the new functional interface in Java 8</h3>
+<p>Since Java 8, there’s a functional interface which can be used to
+build comparators (and many other things). So we don’t have to write the
+class definitions, and instead write similarly to we would do in Python
+or Haskell:</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>byGivenName <span class="op">=</span> <span class="op">(</span>one<span class="op">,</span> other<span class="op">)</span> <span class="op">-&gt;</span> one<span class="op">.</span><span class="fu">givenName</span><span class="op">().</span><span class="fu">compareTo</span><span class="op">(</span>other<span class="op">.</span><span class="fu">givenName</span><span class="op">());</span></span></code></pre></div>
+<p>Yay! That’s a lot nicer than the clumsy class definition
+(<code>class BirthYearComparator implements Comparator&lt;Person&gt;</code>,
+etc).</p>
+</section>
+<section id="comparing-fields-using-key-extractors" class="level3"
+data-number="1.6.5">
+<h3 data-number="1.6.5"><span class="header-section-number">1.6.5</span>
+Comparing fields using key extractors</h3>
+<p>In many cases (including our example case), we only want to compare
+some fields in a class. Then we can use <em>key extractors</em> to
+simplify even more:</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>byGivenName <span class="op">=</span> <span class="bu">Comparator</span><span class="op">.</span><span class="fu">comparing</span><span class="op">(</span>Person<span class="op">::</span>givenName<span class="op">);</span></span></code></pre></div>
+<ul>
+<li><em>Note</em>: We use <code>.comparingInt(…)</code> when defining
+<code>byBirthYear</code>. It’s not strictly necessary (i.e., we can use
+<code>.comparing(…)</code>), but it makes things slightly more
+efficient.</li>
+</ul>
+</section>
+<section id="comparing-several-fields" class="level3"
+data-number="1.6.6">
+<h3 data-number="1.6.6"><span class="header-section-number">1.6.6</span>
+Comparing several fields</h3>
+<p>Remember the natural ordering? The problem with only comparing the
+family name is that if two persons have the same name they keep their
+internal order. So, Nadia Boulanger comes before Lili Boulanger even
+though L precedes N in the alphabet.</p>
+<p>What we want is to be able to compare several fields. The old and
+not-so-good solution is to use clumsy if-then-elses, like this:</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> FullNameComparator <span class="kw">implements</span> <span class="bu">Comparator</span><span class="op">&lt;</span>Person<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">compare</span><span class="op">(</span>Person one<span class="op">,</span> Person other<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> cmp <span class="op">=</span> one<span class="op">.</span><span class="fu">familyName</span><span class="op">().</span><span class="fu">compareTo</span><span class="op">(</span>other<span class="op">.</span><span class="fu">familyName</span><span class="op">());</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>cmp <span class="op">!=</span> <span class="dv">0</span><span class="op">)</span> <span class="cf">return</span> cmp<span class="op">;</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>        cmp <span class="op">=</span> one<span class="op">.</span><span class="fu">givenName</span><span class="op">().</span><span class="fu">compareTo</span><span class="op">(</span>other<span class="op">.</span><span class="fu">givenName</span><span class="op">());</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>cmp <span class="op">!=</span> <span class="dv">0</span><span class="op">)</span> <span class="cf">return</span> cmp<span class="op">;</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>After this we can instantiate a specific comparator:</p>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">Comparator</span><span class="op">&lt;</span>Person<span class="op">&gt;</span> byFullName <span class="op">=</span> <span class="kw">new</span> <span class="fu">FullNameComparator</span><span class="op">();</span></span></code></pre></div>
+<p>If we have many fields this gets quite cumbersome (and error-prone).
+But using the functional interface, and the magic
+<code>.thenComparing(…)</code> method, it’s really easy:</p>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>byFullName <span class="op">=</span> <span class="bu">Comparator</span><span class="op">.</span><span class="fu">comparing</span><span class="op">(</span>Person<span class="op">::</span>familyName<span class="op">)</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">thenComparing</span><span class="op">(</span>Person<span class="op">::</span>givenName<span class="op">);</span></span></code></pre></div>
+<p>And here it is in action:</p>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>people <span class="op">=</span> <span class="fu">getPeople</span><span class="op">();</span> <span class="co">// reset the people list</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">Collections</span><span class="op">.</span><span class="fu">sort</span><span class="op">(</span>people<span class="op">,</span> byFullName<span class="op">);</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span>Person p <span class="op">:</span> people<span class="op">)</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>p<span class="op">);</span></span></code></pre></div>
+<p>Result:</p>
+<blockquote>
+<div class="line-block">Elfrida Andrée (1841)<br />
+Lili Boulanger (1893)<br />
+Nadia Boulanger (1887)<br />
+Unsuk Chin (1961)<br />
+Andrea Tarrodi (1981)<br />
+Anna Thorvaldsdóttir (1977)<br />
+Guy d’Hardelot (1857)<br />
+Diana Čemerytė (1974)</div>
+</blockquote>
+<p>As you can see, Lili now comes before Nadia. But there’s still the
+problem with Guy and Diana coming last in the list.</p>
+</section>
+<section id="case-insensitive-and-language-specific-comparisons"
+class="level3" data-number="1.6.7">
+<h3 data-number="1.6.7"><span class="header-section-number">1.6.7</span>
+Case-insensitive and language-specific comparisons</h3>
+<p>The Java <strong>String</strong> class has a method
+<code>.compareToIgnoringCase(…)</code> which is what it sounds like.</p>
+<p>But you shouldn’t use it if you’re serious about handling text
+correctly. This is because strings are no longer ASCII, but Unicode. And
+Unicode is a beast of its own – it knows how to write hundreds of
+different alphabets with diacritics and other special characters.
+(Unicode even knows about bidirectional text (left-to-right vs
+right-to-left), but we won’t discuss that here).</p>
+<p>Now, correct string sorting depends on your locale. E.g., in Swedish
+we put Å, Ä, Ö at the end of the alphabet, while Á, Ô, È are mixed
+together with A, O, E, respectively. Also, it’s common to mix V and W in
+Swedish dictionaries. German on the other hand mixes Ä, Ö with A, O. And
+it sorts ß together with S.</p>
+<p>So, here’s how to define a correct comparator for Swedish, which
+ignores case differences and orders according to Swedish locale:</p>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="bu">Collator</span> swedishLocale <span class="op">=</span> <span class="bu">Collator</span><span class="op">.</span><span class="fu">getInstance</span><span class="op">(</span><span class="kw">new</span> <span class="bu">Locale</span><span class="op">(</span><span class="st">&quot;sv&quot;</span><span class="op">,</span> <span class="st">&quot;SE&quot;</span><span class="op">));</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>swedishLocale<span class="op">.</span><span class="fu">setStrength</span><span class="op">(</span><span class="bu">Collator</span><span class="op">.</span><span class="fu">PRIMARY</span><span class="op">);</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="bu">Comparator</span><span class="op">&lt;</span>Person<span class="op">&gt;</span> bySwedishLocale <span class="op">=</span> </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Comparator</span><span class="op">.</span><span class="fu">comparing</span><span class="op">(</span>Person<span class="op">::</span>familyName<span class="op">,</span> swedishLocale<span class="op">)</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">thenComparing</span><span class="op">(</span>Person<span class="op">::</span>givenName<span class="op">,</span> swedishLocale<span class="op">);</span></span></code></pre></div>
+<p>And in action:</p>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>people <span class="op">=</span> <span class="fu">getPeople</span><span class="op">();</span> <span class="co">// reset the people list</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="bu">Collections</span><span class="op">.</span><span class="fu">sort</span><span class="op">(</span>people<span class="op">,</span> bySwedishLocale<span class="op">);</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span>Person p <span class="op">:</span> people<span class="op">)</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>p<span class="op">);</span></span></code></pre></div>
+<p>Result:</p>
+<blockquote>
+<div class="line-block">Elfrida Andrée (1841)<br />
+Lili Boulanger (1893)<br />
+Nadia Boulanger (1887)<br />
+Diana Čemerytė (1974)<br />
+Unsuk Chin (1961)<br />
+Guy d’Hardelot (1857)<br />
+Andrea Tarrodi (1981)<br />
+Anna Thorvaldsdóttir (1977)</div>
+</blockquote>
+<p>Finally Diana Čemerytė and Guy d’Hardelot find their right places in
+the list!</p>
+</section>
+<section id="and-what-about-the-names" class="level3"
+data-number="1.6.8">
+<h3 data-number="1.6.8"><span class="header-section-number">1.6.8</span>
+…and what about the names?</h3>
+<p>The names are taken from here: <a
+href="https://female-composers.forts.se/"
+class="uri">https://female-composers.forts.se/</a></p>
+</section>
+<section id="running-the-program" class="level3" data-number="1.6.9">
+<h3 data-number="1.6.9"><span class="header-section-number">1.6.9</span>
+Running the program</h3>
+<p>Here is the full source code. Just compile and run it without any
+arguments:</p>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.*;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">text</span><span class="op">.</span><span class="im">Collator</span><span class="op">;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Person <span class="kw">implements</span> <span class="bu">Comparable</span><span class="op">&lt;</span>Person<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="bu">String</span> givenName<span class="op">;</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="bu">String</span> familyName<span class="op">;</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> birthYear<span class="op">;</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Constructor</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Person</span><span class="op">(</span><span class="bu">String</span> given<span class="op">,</span> <span class="bu">String</span> family<span class="op">,</span> <span class="dt">int</span> birth<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>        givenName  <span class="op">=</span> given<span class="op">;</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>        familyName <span class="op">=</span> family<span class="op">;</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>        birthYear  <span class="op">=</span> birth<span class="op">;</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Getters</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">String</span> <span class="fu">givenName</span><span class="op">()</span>  <span class="op">{</span> <span class="cf">return</span> givenName  <span class="op">;</span> <span class="op">}</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">String</span> <span class="fu">familyName</span><span class="op">()</span> <span class="op">{</span> <span class="cf">return</span> familyName <span class="op">;</span> <span class="op">}</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">int</span>    <span class="fu">birthYear</span><span class="op">()</span>  <span class="op">{</span> <span class="cf">return</span> birthYear  <span class="op">;</span> <span class="op">}</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Pretty-printing</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">String</span> <span class="fu">toString</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="fu">givenName</span><span class="op">()</span> <span class="op">+</span> <span class="st">&quot; &quot;</span> <span class="op">+</span> <span class="fu">familyName</span><span class="op">()</span> <span class="op">+</span> <span class="st">&quot; (&quot;</span> <span class="op">+</span> <span class="fu">birthYear</span><span class="op">()</span> <span class="op">+</span> <span class="st">&quot;)&quot;</span><span class="op">;</span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Natural ordering</span></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...as above...</span></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">compareTo</span><span class="op">(</span>Person other<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="kw">this</span><span class="op">.</span><span class="fu">familyName</span><span class="op">().</span><span class="fu">compareTo</span><span class="op">(</span>other<span class="op">.</span><span class="fu">familyName</span><span class="op">());</span></span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BirthYearComparator <span class="kw">implements</span> <span class="bu">Comparator</span><span class="op">&lt;</span>Person<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">compare</span><span class="op">(</span>Person one<span class="op">,</span> Person other<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">Integer</span><span class="op">.</span><span class="fu">compare</span><span class="op">(</span>one<span class="op">.</span><span class="fu">birthYear</span><span class="op">(),</span> other<span class="op">.</span><span class="fu">birthYear</span><span class="op">());</span></span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> GivenNameComparator <span class="kw">implements</span> <span class="bu">Comparator</span><span class="op">&lt;</span>Person<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">compare</span><span class="op">(</span>Person one<span class="op">,</span> Person other<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> one<span class="op">.</span><span class="fu">givenName</span><span class="op">().</span><span class="fu">compareTo</span><span class="op">(</span>other<span class="op">.</span><span class="fu">givenName</span><span class="op">());</span></span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> FullNameComparator <span class="kw">implements</span> <span class="bu">Comparator</span><span class="op">&lt;</span>Person<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">compare</span><span class="op">(</span>Person one<span class="op">,</span> Person other<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> cmp <span class="op">=</span> one<span class="op">.</span><span class="fu">familyName</span><span class="op">().</span><span class="fu">compareTo</span><span class="op">(</span>other<span class="op">.</span><span class="fu">familyName</span><span class="op">());</span></span>
+<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>cmp <span class="op">!=</span> <span class="dv">0</span><span class="op">)</span> <span class="cf">return</span> cmp<span class="op">;</span></span>
+<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a>        cmp <span class="op">=</span> one<span class="op">.</span><span class="fu">givenName</span><span class="op">().</span><span class="fu">compareTo</span><span class="op">(</span>other<span class="op">.</span><span class="fu">givenName</span><span class="op">());</span></span>
+<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>cmp <span class="op">!=</span> <span class="dv">0</span><span class="op">)</span> <span class="cf">return</span> cmp<span class="op">;</span></span>
+<span id="cb20-53"><a href="#cb20-53" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb20-55"><a href="#cb20-55" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb20-56"><a href="#cb20-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-57"><a href="#cb20-57" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> ComparatorExample <span class="op">{</span></span>
+<span id="cb20-58"><a href="#cb20-58" aria-hidden="true" tabindex="-1"></a>    <span class="dt">static</span> <span class="bu">ArrayList</span><span class="op">&lt;</span>Person<span class="op">&gt;</span> <span class="fu">getPeople</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb20-59"><a href="#cb20-59" aria-hidden="true" tabindex="-1"></a>        <span class="bu">ArrayList</span><span class="op">&lt;</span>Person<span class="op">&gt;</span> people <span class="op">=</span> <span class="kw">new</span> <span class="bu">ArrayList</span><span class="op">&lt;&gt;();</span></span>
+<span id="cb20-60"><a href="#cb20-60" aria-hidden="true" tabindex="-1"></a>        people<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">&quot;Unsuk&quot;</span><span class="op">,</span> <span class="st">&quot;Chin&quot;</span><span class="op">,</span> <span class="dv">1961</span><span class="op">));</span></span>
+<span id="cb20-61"><a href="#cb20-61" aria-hidden="true" tabindex="-1"></a>        people<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">&quot;Anna&quot;</span><span class="op">,</span> <span class="st">&quot;Thorvaldsdóttir&quot;</span><span class="op">,</span> <span class="dv">1977</span><span class="op">));</span></span>
+<span id="cb20-62"><a href="#cb20-62" aria-hidden="true" tabindex="-1"></a>        people<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">&quot;Andrea&quot;</span><span class="op">,</span> <span class="st">&quot;Tarrodi&quot;</span><span class="op">,</span> <span class="dv">1981</span><span class="op">));</span></span>
+<span id="cb20-63"><a href="#cb20-63" aria-hidden="true" tabindex="-1"></a>        people<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">&quot;Diana&quot;</span><span class="op">,</span> <span class="st">&quot;Čemerytė&quot;</span><span class="op">,</span> <span class="dv">1974</span><span class="op">));</span></span>
+<span id="cb20-64"><a href="#cb20-64" aria-hidden="true" tabindex="-1"></a>        people<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">&quot;Elfrida&quot;</span><span class="op">,</span> <span class="st">&quot;Andrée&quot;</span><span class="op">,</span> <span class="dv">1841</span><span class="op">));</span></span>
+<span id="cb20-65"><a href="#cb20-65" aria-hidden="true" tabindex="-1"></a>        people<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">&quot;Guy&quot;</span><span class="op">,</span> <span class="st">&quot;d’Hardelot&quot;</span><span class="op">,</span> <span class="dv">1858</span><span class="op">));</span></span>
+<span id="cb20-66"><a href="#cb20-66" aria-hidden="true" tabindex="-1"></a>        people<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">&quot;Nadia&quot;</span><span class="op">,</span> <span class="st">&quot;Boulanger&quot;</span><span class="op">,</span> <span class="dv">1887</span><span class="op">));</span></span>
+<span id="cb20-67"><a href="#cb20-67" aria-hidden="true" tabindex="-1"></a>        people<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">&quot;Lili&quot;</span><span class="op">,</span> <span class="st">&quot;Boulanger&quot;</span><span class="op">,</span> <span class="dv">1893</span><span class="op">));</span></span>
+<span id="cb20-68"><a href="#cb20-68" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> people<span class="op">;</span></span>
+<span id="cb20-69"><a href="#cb20-69" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb20-70"><a href="#cb20-70" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb20-71"><a href="#cb20-71" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb20-72"><a href="#cb20-72" aria-hidden="true" tabindex="-1"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">### No order&quot;</span><span class="op">);</span></span>
+<span id="cb20-73"><a href="#cb20-73" aria-hidden="true" tabindex="-1"></a>        <span class="bu">ArrayList</span><span class="op">&lt;</span>Person<span class="op">&gt;</span> people <span class="op">=</span> <span class="fu">getPeople</span><span class="op">();</span></span>
+<span id="cb20-74"><a href="#cb20-74" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span>Person p <span class="op">:</span> people<span class="op">)</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>p<span class="op">);</span></span>
+<span id="cb20-75"><a href="#cb20-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-76"><a href="#cb20-76" aria-hidden="true" tabindex="-1"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">### Natural ordering&quot;</span><span class="op">);</span></span>
+<span id="cb20-77"><a href="#cb20-77" aria-hidden="true" tabindex="-1"></a>        people <span class="op">=</span> <span class="fu">getPeople</span><span class="op">();</span> <span class="co">// reset the people list</span></span>
+<span id="cb20-78"><a href="#cb20-78" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Collections</span><span class="op">.</span><span class="fu">sort</span><span class="op">(</span>people<span class="op">);</span></span>
+<span id="cb20-79"><a href="#cb20-79" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span>Person p <span class="op">:</span> people<span class="op">)</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>p<span class="op">);</span></span>
+<span id="cb20-80"><a href="#cb20-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-81"><a href="#cb20-81" aria-hidden="true" tabindex="-1"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">### Ordered by birth year (pre-Java-8 solution)&quot;</span><span class="op">);</span></span>
+<span id="cb20-82"><a href="#cb20-82" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Comparator</span><span class="op">&lt;</span>Person<span class="op">&gt;</span> byBirthYear <span class="op">=</span> <span class="kw">new</span> <span class="fu">BirthYearComparator</span><span class="op">();</span></span>
+<span id="cb20-83"><a href="#cb20-83" aria-hidden="true" tabindex="-1"></a>        people <span class="op">=</span> <span class="fu">getPeople</span><span class="op">();</span> <span class="co">// reset the people list</span></span>
+<span id="cb20-84"><a href="#cb20-84" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Collections</span><span class="op">.</span><span class="fu">sort</span><span class="op">(</span>people<span class="op">,</span> byBirthYear<span class="op">);</span></span>
+<span id="cb20-85"><a href="#cb20-85" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span>Person p <span class="op">:</span> people<span class="op">)</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>p<span class="op">);</span></span>
+<span id="cb20-86"><a href="#cb20-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-87"><a href="#cb20-87" aria-hidden="true" tabindex="-1"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">### Ordered by birth year (functional solution)&quot;</span><span class="op">);</span></span>
+<span id="cb20-88"><a href="#cb20-88" aria-hidden="true" tabindex="-1"></a>        byBirthYear <span class="op">=</span> <span class="op">(</span>one<span class="op">,</span> other<span class="op">)</span> <span class="op">-&gt;</span> <span class="bu">Integer</span><span class="op">.</span><span class="fu">compare</span><span class="op">(</span>one<span class="op">.</span><span class="fu">birthYear</span><span class="op">(),</span> other<span class="op">.</span><span class="fu">birthYear</span><span class="op">());</span></span>
+<span id="cb20-89"><a href="#cb20-89" aria-hidden="true" tabindex="-1"></a>        people <span class="op">=</span> <span class="fu">getPeople</span><span class="op">();</span> <span class="co">// reset the people list</span></span>
+<span id="cb20-90"><a href="#cb20-90" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Collections</span><span class="op">.</span><span class="fu">sort</span><span class="op">(</span>people<span class="op">,</span> byBirthYear<span class="op">);</span></span>
+<span id="cb20-91"><a href="#cb20-91" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span>Person p <span class="op">:</span> people<span class="op">)</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>p<span class="op">);</span></span>
+<span id="cb20-92"><a href="#cb20-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-93"><a href="#cb20-93" aria-hidden="true" tabindex="-1"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">### Ordered by birth year (using a key extractor)&quot;</span><span class="op">);</span></span>
+<span id="cb20-94"><a href="#cb20-94" aria-hidden="true" tabindex="-1"></a>        byBirthYear <span class="op">=</span> <span class="bu">Comparator</span><span class="op">.</span><span class="fu">comparingInt</span><span class="op">(</span>Person<span class="op">::</span>birthYear<span class="op">);</span></span>
+<span id="cb20-95"><a href="#cb20-95" aria-hidden="true" tabindex="-1"></a>        people <span class="op">=</span> <span class="fu">getPeople</span><span class="op">();</span> <span class="co">// reset the people list</span></span>
+<span id="cb20-96"><a href="#cb20-96" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Collections</span><span class="op">.</span><span class="fu">sort</span><span class="op">(</span>people<span class="op">,</span> byBirthYear<span class="op">);</span></span>
+<span id="cb20-97"><a href="#cb20-97" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span>Person p <span class="op">:</span> people<span class="op">)</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>p<span class="op">);</span></span>
+<span id="cb20-98"><a href="#cb20-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-99"><a href="#cb20-99" aria-hidden="true" tabindex="-1"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">### Ordered by given name (pre-Java-8 solution)&quot;</span><span class="op">);</span></span>
+<span id="cb20-100"><a href="#cb20-100" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Comparator</span><span class="op">&lt;</span>Person<span class="op">&gt;</span> byGivenName <span class="op">=</span> <span class="kw">new</span> <span class="fu">GivenNameComparator</span><span class="op">();</span></span>
+<span id="cb20-101"><a href="#cb20-101" aria-hidden="true" tabindex="-1"></a>        people <span class="op">=</span> <span class="fu">getPeople</span><span class="op">();</span> <span class="co">// reset the people list</span></span>
+<span id="cb20-102"><a href="#cb20-102" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Collections</span><span class="op">.</span><span class="fu">sort</span><span class="op">(</span>people<span class="op">,</span> byGivenName<span class="op">);</span></span>
+<span id="cb20-103"><a href="#cb20-103" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span>Person p <span class="op">:</span> people<span class="op">)</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>p<span class="op">);</span></span>
+<span id="cb20-104"><a href="#cb20-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-105"><a href="#cb20-105" aria-hidden="true" tabindex="-1"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">### Ordered by given name (functional solution)&quot;</span><span class="op">);</span></span>
+<span id="cb20-106"><a href="#cb20-106" aria-hidden="true" tabindex="-1"></a>        byGivenName <span class="op">=</span> <span class="op">(</span>one<span class="op">,</span> other<span class="op">)</span> <span class="op">-&gt;</span> one<span class="op">.</span><span class="fu">givenName</span><span class="op">().</span><span class="fu">compareTo</span><span class="op">(</span>other<span class="op">.</span><span class="fu">givenName</span><span class="op">());</span></span>
+<span id="cb20-107"><a href="#cb20-107" aria-hidden="true" tabindex="-1"></a>        people <span class="op">=</span> <span class="fu">getPeople</span><span class="op">();</span> <span class="co">// reset the people list</span></span>
+<span id="cb20-108"><a href="#cb20-108" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Collections</span><span class="op">.</span><span class="fu">sort</span><span class="op">(</span>people<span class="op">,</span> byGivenName<span class="op">);</span></span>
+<span id="cb20-109"><a href="#cb20-109" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span>Person p <span class="op">:</span> people<span class="op">)</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>p<span class="op">);</span></span>
+<span id="cb20-110"><a href="#cb20-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-111"><a href="#cb20-111" aria-hidden="true" tabindex="-1"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">### Ordered by given name (using a key extractor)&quot;</span><span class="op">);</span></span>
+<span id="cb20-112"><a href="#cb20-112" aria-hidden="true" tabindex="-1"></a>        byGivenName <span class="op">=</span> <span class="bu">Comparator</span><span class="op">.</span><span class="fu">comparing</span><span class="op">(</span>Person<span class="op">::</span>givenName<span class="op">);</span></span>
+<span id="cb20-113"><a href="#cb20-113" aria-hidden="true" tabindex="-1"></a>        people <span class="op">=</span> <span class="fu">getPeople</span><span class="op">();</span> <span class="co">// reset the people list</span></span>
+<span id="cb20-114"><a href="#cb20-114" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Collections</span><span class="op">.</span><span class="fu">sort</span><span class="op">(</span>people<span class="op">,</span> byGivenName<span class="op">);</span></span>
+<span id="cb20-115"><a href="#cb20-115" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span>Person p <span class="op">:</span> people<span class="op">)</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>p<span class="op">);</span></span>
+<span id="cb20-116"><a href="#cb20-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-117"><a href="#cb20-117" aria-hidden="true" tabindex="-1"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">### Ordered by full name: family name + given name (pre-Java-8 solution)&quot;</span><span class="op">);</span></span>
+<span id="cb20-118"><a href="#cb20-118" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Comparator</span><span class="op">&lt;</span>Person<span class="op">&gt;</span> byFullName <span class="op">=</span> <span class="kw">new</span> <span class="fu">FullNameComparator</span><span class="op">();</span></span>
+<span id="cb20-119"><a href="#cb20-119" aria-hidden="true" tabindex="-1"></a>        people <span class="op">=</span> <span class="fu">getPeople</span><span class="op">();</span> <span class="co">// reset the people list</span></span>
+<span id="cb20-120"><a href="#cb20-120" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Collections</span><span class="op">.</span><span class="fu">sort</span><span class="op">(</span>people<span class="op">,</span> byFullName<span class="op">);</span></span>
+<span id="cb20-121"><a href="#cb20-121" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span>Person p <span class="op">:</span> people<span class="op">)</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>p<span class="op">);</span></span>
+<span id="cb20-122"><a href="#cb20-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-123"><a href="#cb20-123" aria-hidden="true" tabindex="-1"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">### Ordered by full name: family name + given name (using key extractors and thenComparing)&quot;</span><span class="op">);</span></span>
+<span id="cb20-124"><a href="#cb20-124" aria-hidden="true" tabindex="-1"></a>        byFullName <span class="op">=</span> <span class="bu">Comparator</span><span class="op">.</span><span class="fu">comparing</span><span class="op">(</span>Person<span class="op">::</span>familyName<span class="op">)</span></span>
+<span id="cb20-125"><a href="#cb20-125" aria-hidden="true" tabindex="-1"></a>            <span class="op">.</span><span class="fu">thenComparing</span><span class="op">(</span>Person<span class="op">::</span>givenName<span class="op">);</span></span>
+<span id="cb20-126"><a href="#cb20-126" aria-hidden="true" tabindex="-1"></a>        people <span class="op">=</span> <span class="fu">getPeople</span><span class="op">();</span> <span class="co">// reset the people list</span></span>
+<span id="cb20-127"><a href="#cb20-127" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Collections</span><span class="op">.</span><span class="fu">sort</span><span class="op">(</span>people<span class="op">,</span> byFullName<span class="op">);</span></span>
+<span id="cb20-128"><a href="#cb20-128" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span>Person p <span class="op">:</span> people<span class="op">)</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>p<span class="op">);</span></span>
+<span id="cb20-129"><a href="#cb20-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-130"><a href="#cb20-130" aria-hidden="true" tabindex="-1"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">### Ordered by Swedish locale, case-insensitive&quot;</span><span class="op">);</span></span>
+<span id="cb20-131"><a href="#cb20-131" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Collator</span> swedishLocale <span class="op">=</span> <span class="bu">Collator</span><span class="op">.</span><span class="fu">getInstance</span><span class="op">(</span><span class="kw">new</span> <span class="bu">Locale</span><span class="op">(</span><span class="st">&quot;sv&quot;</span><span class="op">,</span> <span class="st">&quot;SE&quot;</span><span class="op">));</span></span>
+<span id="cb20-132"><a href="#cb20-132" aria-hidden="true" tabindex="-1"></a>        swedishLocale<span class="op">.</span><span class="fu">setStrength</span><span class="op">(</span><span class="bu">Collator</span><span class="op">.</span><span class="fu">PRIMARY</span><span class="op">);</span></span>
+<span id="cb20-133"><a href="#cb20-133" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Comparator</span><span class="op">&lt;</span>Person<span class="op">&gt;</span> bySwedishLocale <span class="op">=</span> </span>
+<span id="cb20-134"><a href="#cb20-134" aria-hidden="true" tabindex="-1"></a>            <span class="bu">Comparator</span><span class="op">.</span><span class="fu">comparing</span><span class="op">(</span>Person<span class="op">::</span>familyName<span class="op">,</span> swedishLocale<span class="op">)</span></span>
+<span id="cb20-135"><a href="#cb20-135" aria-hidden="true" tabindex="-1"></a>            <span class="op">.</span><span class="fu">thenComparing</span><span class="op">(</span>Person<span class="op">::</span>givenName<span class="op">,</span> swedishLocale<span class="op">);</span></span>
+<span id="cb20-136"><a href="#cb20-136" aria-hidden="true" tabindex="-1"></a>        people <span class="op">=</span> <span class="fu">getPeople</span><span class="op">();</span> <span class="co">// reset the people list</span></span>
+<span id="cb20-137"><a href="#cb20-137" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Collections</span><span class="op">.</span><span class="fu">sort</span><span class="op">(</span>people<span class="op">,</span> bySwedishLocale<span class="op">);</span></span>
+<span id="cb20-138"><a href="#cb20-138" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span>Person p <span class="op">:</span> people<span class="op">)</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>p<span class="op">);</span></span>
+<span id="cb20-139"><a href="#cb20-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-140"><a href="#cb20-140" aria-hidden="true" tabindex="-1"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">### Ordered by Swedish locale, given name first&quot;</span><span class="op">);</span></span>
+<span id="cb20-141"><a href="#cb20-141" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Comparator</span><span class="op">&lt;</span>Person<span class="op">&gt;</span> bySwedishGivenName <span class="op">=</span> </span>
+<span id="cb20-142"><a href="#cb20-142" aria-hidden="true" tabindex="-1"></a>            <span class="bu">Comparator</span><span class="op">.</span><span class="fu">comparing</span><span class="op">(</span>Person<span class="op">::</span>givenName<span class="op">,</span> swedishLocale<span class="op">)</span></span>
+<span id="cb20-143"><a href="#cb20-143" aria-hidden="true" tabindex="-1"></a>            <span class="op">.</span><span class="fu">thenComparing</span><span class="op">(</span>Person<span class="op">::</span>familyName<span class="op">,</span> swedishLocale<span class="op">);</span></span>
+<span id="cb20-144"><a href="#cb20-144" aria-hidden="true" tabindex="-1"></a>        people <span class="op">=</span> <span class="fu">getPeople</span><span class="op">();</span> <span class="co">// reset the people list</span></span>
+<span id="cb20-145"><a href="#cb20-145" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Collections</span><span class="op">.</span><span class="fu">sort</span><span class="op">(</span>people<span class="op">,</span> bySwedishGivenName<span class="op">);</span></span>
+<span id="cb20-146"><a href="#cb20-146" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span>Person p <span class="op">:</span> people<span class="op">)</span> <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>p<span class="op">);</span></span>
+<span id="cb20-147"><a href="#cb20-147" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb20-148"><a href="#cb20-148" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</section>
+</section>
+</body>
+</html>

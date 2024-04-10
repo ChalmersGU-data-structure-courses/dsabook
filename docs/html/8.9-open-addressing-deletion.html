@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Cliff Shaffer" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Nick Smallbone" />
+  <title>DSABook – Open Addressing, Deletion</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #ffffff;
+        color: #a0a0a0;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+    div.sourceCode
+      { color: #1f1c1b; background-color: #ffffff; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #1f1c1b; } /* Normal */
+    code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+    code span.an { color: #ca60ca; } /* Annotation */
+    code span.at { color: #0057ae; } /* Attribute */
+    code span.bn { color: #b08000; } /* BaseN */
+    code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+    code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #924c9d; } /* Char */
+    code span.cn { color: #aa5500; } /* Constant */
+    code span.co { color: #898887; } /* Comment */
+    code span.cv { color: #0095ff; } /* CommentVar */
+    code span.do { color: #607880; } /* Documentation */
+    code span.dt { color: #0057ae; } /* DataType */
+    code span.dv { color: #b08000; } /* DecVal */
+    code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+    code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #b08000; } /* Float */
+    code span.fu { color: #644a9b; } /* Function */
+    code span.im { color: #ff5500; } /* Import */
+    code span.in { color: #b08000; } /* Information */
+    code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+    code span.op { color: #1f1c1b; } /* Operator */
+    code span.ot { color: #006e28; } /* Other */
+    code span.pp { color: #006e28; } /* Preprocessor */
+    code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #ff5500; } /* SpecialString */
+    code span.st { color: #bf0303; } /* String */
+    code span.va { color: #0057ae; } /* Variable */
+    code span.vs { color: #bf0303; } /* VerbatimString */
+    code span.wa { color: #bf0303; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../bookstyle.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+      },
+      "HTML-CSS": {
+        scale: "80",
+      }
+    });
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Up:</span> <a href="8-hashing.html" accesskey="u" rel="up">Hashing</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="8.10-hash-tables-in-real-life-optional.html" accesskey="n" rel="next">Hash Tables in Real Life (optional)</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Previous:</span> <a href="8.8-analysis-of-open-addressing.html" accesskey="p" rel="previous">Analysis of Open Addressing</a>
+</span>
+</div>
+</nav>
+<section id="open-addressing-deletion" class="level2" data-number="8.9">
+<h2 data-number="8.9"><span class="header-section-number">8.9</span>
+Open Addressing, Deletion</h2>
+<section id="deletion-in-an-open-addressing-hash-table" class="level3"
+data-number="8.9.1">
+<h3 data-number="8.9.1"><span class="header-section-number">8.9.1</span>
+Deletion in an open addressing hash table</h3>
+<p>When deleting records from a hash table, there are two important
+considerations.</p>
+<ol type="1">
+<li>Deleting a record must not hinder later searches. In other words,
+the search process must still pass through the newly emptied slot to
+reach records whose probe sequence passed through this slot. Thus, the
+delete process cannot simply mark the slot as empty, because this will
+isolate records further down the probe sequence.</li>
+<li>We do not want to make positions in the hash table unusable because
+of deletion. The freed slot should be available to a future
+insertion.</li>
+</ol>
+<p>Both of these problems can be resolved by placing a special mark in
+place of the deleted record, called a <a href="10-glossary.html#tombstone" class="term">tombstone</a>. The tombstone indicates that a record
+once occupied the slot but does so no longer. If a tombstone is
+encountered when searching along a probe sequence, the search procedure
+continues with the search. When a tombstone is encountered during
+insertion, that slot can be used to store the new record. However, to
+avoid inserting duplicate keys, it will still be necessary for the
+search procedure to follow the probe sequence until a truly empty
+position has been found, simply to verify that a duplicate is not in the
+table. However, the new record would actually be inserted into the slot
+of the first tombstone encountered.</p>
+<p>
+<div id="hashdelCON" class="ssAV" data-short-name="hashdelCON" data-long-name="Hash Deletion Slideshow" alt="Hash Deletion Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>Here is a practice exercise.</p>
+<p>
+<div id="HashingDelPRO" class="embedContainer">
+<iframe id="HashingDelPRO_iframe" aria-label="HashingDelPRO" src="../interactive/Hashing/HashingDelPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+<p>The use of tombstones allows searches to work correctly and allows
+reuse of deleted slots. However, after a series of intermixed insertion
+and deletion operations, some slots will contain tombstones. This will
+tend to lengthen the average distance from a record’s home position to
+the record itself, beyond where it could be if the tombstones did not
+exist. A typical database application will first load a collection of
+records into the hash table and then progress to a phase of intermixed
+insertions and deletions. After the table is loaded with the initial
+collection of records, the first few deletions will lengthen the average
+probe sequence distance for records (it will add tombstones). Over time,
+the average distance will reach an equilibrium point because insertions
+will tend to decrease the average distance by filling in tombstone
+slots. For example, after initially loading records into the database,
+the average path distance might be 1.2 (i.e., an average of 0.2 accesses
+per search beyond the home position will be required). After a series of
+insertions and deletions, this average distance might increase to 1.6
+due to tombstones. This seems like a small increase, but it is three
+times longer on average beyond the home position than before
+deletions.</p>
+<p>Two possible solutions to this problem are</p>
+<ol type="1">
+<li>Do a local reorganization upon deletion to try to shorten the
+average path length. For example, after deleting a key, continue to
+follow the probe sequence of that key and swap records further down the
+probe sequence into the slot of the recently deleted record (being
+careful not to remove any key from its probe sequence). This will not
+work for all collision resolution policies.</li>
+<li>Periodically rehash the table by reinserting all records into a new
+hash table. Not only will this remove the tombstones, but it also
+provides an opportunity to place the most frequently accessed records
+into their home positions.</li>
+</ol>
+<p>Note that since we are using a dynamic array when implementing hash
+tables, this can be viewed as a version of the second solution above
+(because all tombstones will be removed when the internal array is
+resized).</p>
+</section>
+<section id="simple-implementation-of-deletion" class="level3"
+data-number="8.9.2">
+<h3 data-number="8.9.2"><span class="header-section-number">8.9.2</span>
+Simple implementation of deletion</h3>
+<p>Here is a simple implementation of deletion in a HashMap using
+tombstones.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> remove(<span class="va">self</span>, key):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> <span class="va">self</span>._hashAndProbe(key)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        elem <span class="op">=</span> <span class="va">self</span>._internalTable[i]</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> elem <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">None</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        removed <span class="op">=</span> elem.value</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        elem.key <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        elem.value <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._mapSize <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._numDeleted <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>._mapSize <span class="op">&lt;</span> <span class="va">self</span>._minLoadFactor <span class="op">*</span> <span class="bu">len</span>(<span class="va">self</span>._internalTable):</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._resizeTable(<span class="bu">len</span>(<span class="va">self</span>._internalTable) <span class="op">/</span> <span class="va">self</span>._capacityMultiplier)<span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> removed</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> V <span class="fu">remove</span><span class="op">(</span>K key<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> i <span class="op">=</span> <span class="fu">hashAndProbe</span><span class="op">(</span>key<span class="op">);</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        KVPair<span class="op">&lt;</span>K<span class="op">,</span>V<span class="op">&gt;</span> elem <span class="op">=</span> internalTable<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>elem <span class="op">==</span> <span class="kw">null</span><span class="op">)</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        V removed <span class="op">=</span> elem<span class="op">.</span><span class="fu">value</span><span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        elem<span class="op">.</span><span class="fu">key</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        elem<span class="op">.</span><span class="fu">value</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        mapSize<span class="op">--;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        numDeleted<span class="op">++;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>mapSize <span class="op">&lt;</span> MinLoadFactor <span class="op">*</span> internalTable<span class="op">.</span><span class="fu">length</span><span class="op">)</span> </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>            <span class="fu">resizeTable</span><span class="op">((</span><span class="dt">int</span><span class="op">)</span> <span class="op">(</span>internalTable<span class="op">.</span><span class="fu">length</span> <span class="op">/</span> CapacityMultiplier<span class="op">));</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> removed<span class="op">;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span>            </span></code></pre></div>
+<p>Since we are using an internal array of <strong>KVPair</strong>,
+there are actually two possible empty entries, and we use this to encode
+the tombstones:</p>
+<ul>
+<li>If the table cell is empty (<code>null</code>), then it is
+unoccupied.</li>
+<li>If the cell contains a <strong>KVPair</strong>, where the key is
+<code>null</code>, then it is a tombstone.</li>
+</ul>
+<p>So, when we remove an entry, we do not remove the
+<strong>KVPair</strong>, but instead set the key (and the value) to
+<code>null</code>. This will make the cell a tombstone.</p>
+<p>The current code has one problem: Adding new entries will never make
+use of the tombstones, but will only insert into completely empty cells.
+It is possible to fix this by implementing a sligthly different version
+of <code>hashAndProbe</code>, which will only be used by the
+<code>put</code> method. This is left as an exercise to the reader.</p>
+</section>
+<section id="two-load-factors" class="level3" data-number="8.9.3">
+<h3 data-number="8.9.3"><span class="header-section-number">8.9.3</span>
+Two load factors</h3>
+<p>When we have tombstones in our table, there are two possible ways of
+thinking about the load factor – depending on if we want to include the
+deleted cells or not. And both variants are useful!</p>
+<ul>
+<li>When adding elements, we need to know if there are too few
+completely empty slots left, giving the load factor
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>+</mo><mi>D</mi><mi>/</mi><mi>M</mi></mrow><annotation encoding="application/x-tex">N + D / M</annotation></semantics></math>
+(where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>
+is the number of occupied cells and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>
+the number of tombstones).</li>
+<li>When deleting elements, we need to know if there are too few
+occupied slots, giving the load factor
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mi>/</mi><mi>M</mi></mrow><annotation encoding="application/x-tex">N / M</annotation></semantics></math>.</li>
+</ul>
+</section>
+<section id="hashing-deletion-summary-questions" class="level3"
+data-number="8.9.4">
+<h3 data-number="8.9.4"><span class="header-section-number">8.9.4</span>
+Hashing Deletion Summary Questions</h3>
+<p>Now here are some practice questions.</p>
+<p>
+<div id="HashDelSumm" class="embedContainer">
+<iframe id="HashDelSumm_iframe" aria-label="HashDelSumm" src="../interactive/Hashing/HashDelSumm.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+<p>Congratulations! You have reached the end of the hashing tutorial. In
+summary, a properly tuned hashing system will return records with an
+average cost of less than two record accesses. This makes it the most
+effective way known to store a database of records to support
+exact-match queries. Unfortunately, hashing is not effective when
+implementing range queries, or answering questions like “Which record in
+the collection has the smallest key value?”</p>
+</section>
+</section>
+<script type="text/javascript" src="../interactive/Hashing/hashdelCON.js"></script>
+</body>
+</html>

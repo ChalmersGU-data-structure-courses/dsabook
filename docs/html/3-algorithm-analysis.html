@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Cliff Shaffer" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Nick Smallbone" />
+  <title>DSABook – Algorithm Analysis</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../bookstyle.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+      },
+      "HTML-CSS": {
+        scale: "80",
+      }
+    });
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Up:</span> <a href="index.html" accesskey="u" rel="up">Data Structures and Algorithms</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="3.1-problems-algorithms-and-programs.html" accesskey="n" rel="next">Problems, Algorithms, and Programs</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Previous:</span> <a href="2.15-sorting-summary-exercises.html" accesskey="p" rel="previous">Sorting: Summary Exercises</a>
+</span>
+</div>
+</nav>
+<section id="algorithm-analysis" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span>
+Algorithm Analysis</h1>
+<p>How long will a program take when I run it on a dataset ten times as
+large? If a particular program is slow, is it badly implemented or is it
+solving a hard problem? What order of improvement can I expect if I
+switch to a better algorithm? Questions like these ask us to consider
+the difficulty of a problem and the efficiency of approaches to solving
+it.</p>
+<p>This chapter introduces the motivation, basic notation, and
+fundamental techniques of algorithm analysis. We focus on a methodology
+known as <a href="10-glossary.html#asymptotic-algorithm-analysis" class="term">asymptotic algorithm analysis</a>, or
+simply <a href="10-glossary.html#asymptotic-analysis" class="term">asymptotic analysis</a>.</p>
+<p>Asymptotic analysis estimates the resource consumption of an
+algorithm, called its <a href="10-glossary.html#complexity" class="term">complexity</a>. Here,
+resource consumption can mean runtime, memory use, API calls, or any
+other measure. Instead of computing this resource consumption exactly,
+asymptotic analysis is only interested in its <a href="10-glossary.html#growth-rate" class="term">growth
+rate</a> (also called <a href="10-glossary.html#order-of-growth" class="term">order of growth</a>). The
+growth rate is what determines the resource consumption for large
+inputs. Thankfully, growth rate expressions are relatively easy to
+compare. This allows us decide which of two algorithms is better at
+solving the same problem. Asymptotic analysis also gives algorithm
+designers a tool for estimating whether a proposed solution is likely to
+meet the resource constraints for a problem before they implement an
+actual program.</p>
+<p>After reading this chapter, you should understand:</p>
+<ul>
+<li>The concept of <a href="10-glossary.html#complexity" class="term">complexity</a> of an algorithm,
+the resource usage of an algorithm as a function of an input parameter.
+Different kinds of complexity such as <a href="10-glossary.html#worst-case" class="term">worst-case</a> and <a href="10-glossary.html#average-case" class="term">average-case</a>.</li>
+<li>The concept of <a href="10-glossary.html#growth-rate" class="term">growth rate</a> or <a href="10-glossary.html#order-of-growth" class="term">order of growth</a> of a (mathematical) function. How to
+compute and compare growth rates of functions. Notations such as <a href="10-glossary.html#big-oh-notation" class="term">big-Oh</a> to describe upper and
+lower bounds of growth rates.</li>
+<li>The <a href="10-glossary.html#asymptotic-complexity" class="term">asymptotic complexity</a> of an algorithm,
+which is the growth rate of its complexity. Sometimes, this is just
+called the growth rate of the algorithm.</li>
+<li>The difference between the asymptotic complexity of an <a href="10-glossary.html#algorithm" class="term">algorithm</a> (or program) and that of a <a href="10-glossary.html#problem" class="term">problem</a>. The latter is the best asymptotic
+complexity over all algorithms that solve the problem.</li>
+</ul>
+<p>The chapter concludes with a brief discussion of the practical
+difficulties encountered when empirically measuring the cost of a
+program, and some principles for code tuning to improve program
+efficiency.</p>
+</section>
+</body>
+</html>

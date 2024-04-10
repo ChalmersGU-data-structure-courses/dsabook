@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Cliff Shaffer" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Nick Smallbone" />
+  <title>DSABook – Optimizing Sort Algorithms with Code Tuning
+(optional)</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #ffffff;
+        color: #a0a0a0;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+    div.sourceCode
+      { color: #1f1c1b; background-color: #ffffff; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #1f1c1b; } /* Normal */
+    code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+    code span.an { color: #ca60ca; } /* Annotation */
+    code span.at { color: #0057ae; } /* Attribute */
+    code span.bn { color: #b08000; } /* BaseN */
+    code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+    code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #924c9d; } /* Char */
+    code span.cn { color: #aa5500; } /* Constant */
+    code span.co { color: #898887; } /* Comment */
+    code span.cv { color: #0095ff; } /* CommentVar */
+    code span.do { color: #607880; } /* Documentation */
+    code span.dt { color: #0057ae; } /* DataType */
+    code span.dv { color: #b08000; } /* DecVal */
+    code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+    code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #b08000; } /* Float */
+    code span.fu { color: #644a9b; } /* Function */
+    code span.im { color: #ff5500; } /* Import */
+    code span.in { color: #b08000; } /* Information */
+    code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+    code span.op { color: #1f1c1b; } /* Operator */
+    code span.ot { color: #006e28; } /* Other */
+    code span.pp { color: #006e28; } /* Preprocessor */
+    code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #ff5500; } /* SpecialString */
+    code span.st { color: #bf0303; } /* String */
+    code span.va { color: #0057ae; } /* Variable */
+    code span.vs { color: #bf0303; } /* VerbatimString */
+    code span.wa { color: #bf0303; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../bookstyle.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+      },
+      "HTML-CSS": {
+        scale: "80",
+      }
+    });
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Up:</span> <a href="2-arrays-searching-and-sorting.html" accesskey="u" rel="up">Arrays: searching and sorting</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="2.9-mergesort.html" accesskey="n" rel="next">Mergesort</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Previous:</span> <a href="2.7-the-cost-of-exchange-sorting-optional.html" accesskey="p" rel="previous">The Cost of Exchange Sorting (optional)</a>
+</span>
+</div>
+</nav>
+<section id="optimizing-sort-algorithms-with-code-tuning-optional"
+class="level2" data-number="2.8">
+<h2 data-number="2.8"><span class="header-section-number">2.8</span>
+Optimizing Sort Algorithms with Code Tuning (optional)</h2>
+<p>Since sorting is such an important application, it is natural for
+programmers to want to optimize their sorting code to run faster. Of
+course all quadratic sorts (Insertion Sort, Bubble Sort and Selection
+Sort) are relatively slow. Each has (as the name “quadratic suggests)
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^2)</annotation></semantics></math>
+worst case running time. The best way to speed them up is to find a
+better sorting algorithm. Nonetheless, there have been many suggestions
+given over the years about how to speed up one or another of these
+particular algorithms. There are useful lessons to be learned about code
+tuning by seeing which of these ideas actually turn out to give better
+performance. It is also interesting to see the relative performance of
+the three algorithms, as well as how various programming languages
+compare.</p>
+<section id="insertion-sort-1" class="level3" data-number="2.8.1">
+<h3 data-number="2.8.1"><span class="header-section-number">2.8.1</span>
+Insertion Sort</h3>
+<p>We start by trying to speed up Insertion Sort. Recall that Insertion
+Sort repeatedly moves an element toward the beginning of the sorted part
+of the list until it encounters a key with lesser value. In the original
+code, this is done with a series of swap operations. There is a better
+alternative than continuously swapping the record to the left until a
+smaller value is found. This is to move the current record to a
+temporary variable, and then shift all of the records with greater value
+one step to the right. Since swap requires three assignments per element
+and shifting requires only one assignment per element, we can hope that
+this will yield a big improvement. Of course, the amount of improvement
+that we actually get will depend on how much movement there is among the
+records. If the list is already nearly sorted, then there will be few
+swaps anyway. Here is an implementation for Insertion Sort using this
+optimization.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> insertionSortShift(A):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(A)): <span class="co"># Insert i&#39;th record</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        temp <span class="op">=</span> A[i]</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        j <span class="op">=</span> i</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> j <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> temp <span class="op">&lt;</span> A[j<span class="op">-</span><span class="dv">1</span>]:</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            A[j] <span class="op">=</span> A[j<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>            j <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        A[j] <span class="op">=</span> temp</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Instead of swapping, &quot;shift&quot; the values down the array</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="dt">static</span> <span class="op">&lt;</span>T <span class="kw">extends</span> <span class="bu">Comparable</span><span class="op">&lt;</span>T<span class="op">&gt;&gt;</span> <span class="dt">void</span> <span class="fu">insertionSortShift</span><span class="op">(</span>T<span class="op">[]</span> A<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;</span> A<span class="op">.</span><span class="fu">length</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Insert i&#39;th record.</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        T temp <span class="op">=</span> A<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> j <span class="op">=</span> i<span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="op">(</span>j <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> temp<span class="op">.</span><span class="fu">compareTo</span><span class="op">(</span>A<span class="op">[</span>j<span class="op">-</span><span class="dv">1</span><span class="op">])</span> <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>            A<span class="op">[</span>j<span class="op">]</span> <span class="op">=</span> A<span class="op">[</span>j<span class="op">-</span><span class="dv">1</span><span class="op">];</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>            j<span class="op">--;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        A<span class="op">[</span>j<span class="op">]</span> <span class="op">=</span> temp<span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Now, you can test whether you understand how this works.</p>
+<p>
+<div id="insertionSortWithoutSwapPRO" class="embedContainer">
+<iframe id="insertionSortWithoutSwapPRO_iframe" aria-label="insertionSortWithoutSwapPRO" src="../interactive/Sorting/insertionSortWithoutSwapPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+<section id="OptimizeTable" class="level4 unnumbered topic">
+<h4 class="unnumbered">Table: Empirical comparison</h4>
+<p>Empirical comparison of proposed optimizations to quadratic sort
+implementations. Each sorting algorithm is run on a random integer array
+with 10,000 items. Times are in milliseconds. The arrays being sorted
+use the Comparable interface in languages that support this.</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Sort</th>
+<th style="text-align: center;">Java </th>
+<th style="text-align: center;">Processing</th>
+<th style="text-align: center;">Javascript</th>
+<th style="text-align: center;">Python</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Insertion sort</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Standard</td>
+<td style="text-align: center;">60</td>
+<td style="text-align: center;">26</td>
+<td style="text-align: center;">118</td>
+<td style="text-align: center;">11,220</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Shifting</td>
+<td style="text-align: center;">41</td>
+<td style="text-align: center;">18</td>
+<td style="text-align: center;">77</td>
+<td style="text-align: center;">5,100</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Bubble sort</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Standard</td>
+<td style="text-align: center;">202</td>
+<td style="text-align: center;">149</td>
+<td style="text-align: center;">303</td>
+<td style="text-align: center;">12,700 </td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Check swaps</td>
+<td style="text-align: center;">230</td>
+<td style="text-align: center;">152</td>
+<td style="text-align: center;">327</td>
+<td style="text-align: center;">13,275</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Selection sort</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Standard</td>
+<td style="text-align: center;">104</td>
+<td style="text-align: center;">65</td>
+<td style="text-align: center;">158</td>
+<td style="text-align: center;">4,000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Check swaps</td>
+<td style="text-align: center;">104</td>
+<td style="text-align: center;">65</td>
+<td style="text-align: center;">155</td>
+<td style="text-align: center;">4,050</td>
+</tr>
+</tbody>
+</table>
+</section>
+<p><a
+href="2.8-optimizing-sort-algorithms-with-code-tuning-optional.html#OptimizeTable">The
+table above</a> shows the relative costs for a number of optimizations
+in four programming languages: Java, JavaScipt, Processing, and
+Python.</p>
+<p>The programming language that you use can have a big influence on the
+runtime for a program. Perhaps the greatest distinction is whether your
+language is compiled or not. Java, C++, and Processing are normally
+compiled, while JavaScript and Python are normally interpreted. This can
+make a huge difference in whether a given code change will actually
+speed the program up or not. In the case of the “shift” vs “swap”
+choice, shifting always turns out to be a big improvement. This is more
+true for the interpreted languages JavaScript and Python than for Java
+and Processing, but still an improvement either way. But the biggest
+effect that we see is that Python takes over 100 times as long to
+execute the same program as Java.</p>
+<p>Some languages have peculiarities that it pays to be aware of. It
+turns out that there is a big difference in JavaScript between using
+<code>i &lt; n</code> or <code>i != n</code> to test termination of a
+loop.</p>
+</section>
+<section id="bubble-sort" class="level3" data-number="2.8.2">
+<h3 data-number="2.8.2"><span class="header-section-number">2.8.2</span>
+Bubble Sort</h3>
+<p>Turning to Bubble Sort, the first thing we should notice from this
+table is that it is far slower on random input than Insertion Sort.
+Let’s consider a possible improvement that is sometimes suggested for
+Bubble Sort. That is to check during each iteration of the outer loop to
+see if any swaps took place during that iteration, and quit if not
+(since we know the list is ordered at this point). We can improve on
+this idea even more by recognizing that if the last swap done affects
+the values at positions
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i+1</annotation></semantics></math>,
+no swaps could happen to values at positions greater than
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>.
+Thus, we never need to check higher-positioned values again, which could
+save many iterations even if there are a few swaps lower down. Here is
+code to implement this approach.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> bubbleCheckSwap(A):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">len</span>(A) <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> n <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        newn <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            <span class="co"># if this pair is out of order</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> A[i] <span class="op">&gt;</span> A[i<span class="op">+</span><span class="dv">1</span>]:</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                swap(A, i, i<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                newn <span class="op">=</span> i</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        n <span class="op">=</span> newn</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="op">&lt;</span>E <span class="kw">extends</span> <span class="bu">Comparable</span><span class="op">&lt;</span>E<span class="op">&gt;&gt;</span> <span class="dt">void</span> <span class="fu">bubbleSortOpt</span><span class="op">(</span>E<span class="op">[]</span> A<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> n <span class="op">=</span> A<span class="op">.</span><span class="fu">length</span> <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>n <span class="op">&gt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> newn <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>            <span class="co">// If this pair is out of order.</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>A<span class="op">[</span>i<span class="op">].</span><span class="fu">compareTo</span><span class="op">(</span>A<span class="op">[</span>i<span class="op">+</span><span class="dv">1</span><span class="op">])</span> <span class="op">&gt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                <span class="bu">Util</span><span class="op">.</span><span class="fu">swap</span><span class="op">(</span>A<span class="op">,</span> i<span class="op">,</span> i<span class="op">+</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                newn <span class="op">=</span> i<span class="op">;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        n <span class="op">=</span> newn<span class="op">;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>The problem with this idea is that a considerable amount of effort
+(relatively speaking) is required to track the position for the last
+swap within the inner loop. This tracking process has a cost, and that
+cost is worthwhile only if the amount of work it saves is greater than
+the amout of work that it causes. Unfortunately, as the table shows, in
+the average case it just is not worth the time. Modifying the code
+simply by removing the tracking steps (and so not getting either the
+cost of tracking or the benefit of avoiding some of the key comparisons)
+is faster in the average case. Of course, whether this is always true
+will depend on how much it costs to extract the record keys and compare
+them, which depends on the details of the record type and the sort
+implementation. In our test implementation we are sorting integer values
+and so the cost to compare records is lower than it would be if we had
+to get a field out of a more complex object.</p>
+<p>It is also true that tracking the last swap position can
+substantially improve the best case cost. In fact, tracking the last
+swap position makes the best case cost of Bubble Sort to be only
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math>.
+But going out of one’s way to artificially improve the best case has
+dubious value if doing so imposes additional cost on nearly all other
+inputs. Note that we could nominally convert <em>any</em> sorting
+algorithm to have a best-case cost of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math>
+by simply adding code at the beginning that checks if the list is
+already sorted. It should be obvious that this is a waste of time, even
+though it has the (small) possibility of winning big. Unlike Insertion
+Sort whose best case cost is naturally
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math>
+and whose time increases in proportion to how “out of order” the list
+is, the number of iterations avoided by swap checking in Bubble Sort is
+sensitive to the detailed placements of the out-of-order records. In
+fact, if we took a sorted list and moved the smallest value to the end,
+then there would be no benefit from swap checking whatsoever.</p>
+</section>
+<section id="selection-sort-1" class="level3" data-number="2.8.3">
+<h3 data-number="2.8.3"><span class="header-section-number">2.8.3</span>
+Selection Sort</h3>
+<p>Finally, let’s consider Selection Sort. The table shows foremost that
+Selection Sort can be viewed as a far better optimization to Bubble Sort
+than tracking the last swap position. That is, tracking the position of
+the largest element and performing one swap to put it into place is a
+far better optimization to Bubble Sort than tracking the position of the
+last swap seen. The table also shows that Selection Sort is faster in
+the average case than Insertion Sort when implemented in Python.
+Evidently, the cost to swap is high for Python.</p>
+<p>Our original Selection Sort implementation is written to make a call
+to <code>swap</code> even if the current record is already in its
+correct location. For example, if the record with the largest value is
+already in the rightmost array position, then <code>selectionSort</code>
+will still call <code>swap</code> with the two position parameters being
+the same. The net effect is that the work done by <code>swap</code> will
+not change anything in the array, and this is a waste of time. Thus, the
+total number of swaps done by Selection Sort is always
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>
+in the best, average and worst cases. It might seem like a good idea to
+test if the positions are the same before calling <code>swap</code>,
+especially since Selection Sort’s claim to fame is its low number of
+swaps. Actually, we can’t expect this to ever make much difference since
+we are talking about
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math>
+actions within
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^2)</annotation></semantics></math>
+total steps, an inconsequential fraction. The other consideration is
+whether this is could typically be expected to save time even when just
+considering the time needed to do the swaps. Doing the check to see if a
+swap is necessary also takes some time. It is only worthwhile to test if
+the time required by the test is more than made up for by the work saved
+when the unnecessary swap was avoided. For randomly ordered input, it is
+probably more expensive to test this condition before every swap than to
+just do the swap. If the input records are already sorted, then all of
+the swaps are unnecessary and it would be (trivially) faster to test.
+But in the average case, few swaps will be saved this way and the
+“optimization” might actually slow down the program (but only
+slightly).</p>
+<p>For all of these sorting algorithms, the <code>swap</code> function
+call might be a key part of the cost since it is called so many times. A
+simple way to speed things up is to replace this function call with the
+code that the function would perform. Depending on the language,
+compiler, and operating system, one might expect to save between 5 and
+10 percent of the total time by doing so.</p>
+<p>Another important consideration is the type of data object being
+used. For Processing and Java, we use a simple Integer wrapper object
+that supports the Comparable interface. This means that some
+dereferencing of the key value from an object is required, which is a
+typical expectation in a realistic application of a sorting function.
+However, if we were to sort a simple array of <code>int</code> values,
+the cost for all sorting algorithms will be less than half that shown.
+If we use a the more complicated <code>KVPair</code> objects, the costs
+will more than double over those shown in the table.</p>
+</section>
+</section>
+</body>
+</html>

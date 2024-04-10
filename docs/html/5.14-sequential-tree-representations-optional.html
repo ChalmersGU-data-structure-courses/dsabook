@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Cliff Shaffer" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Nick Smallbone" />
+  <title>DSABook – Sequential Tree Representations (optional)</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../bookstyle.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+      },
+      "HTML-CSS": {
+        scale: "80",
+      }
+    });
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+<link href="../interactive/Binary/BinExampCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/General/SequentialTreeCON.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Up:</span> <a href="5-binary-trees.html" accesskey="u" rel="up">Binary Trees</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="6-binary-search-trees.html" accesskey="n" rel="next">Binary Search Trees</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Previous:</span> <a href="5.13-the-unionfind-algorithm-optional.html" accesskey="p" rel="previous">The Union/Find Algorithm (optional)</a>
+</span>
+</div>
+</nav>
+<section id="sequential-tree-representations-optional" class="level2"
+data-number="5.14">
+<h2 data-number="5.14"><span class="header-section-number">5.14</span>
+Sequential Tree Representations (optional)</h2>
+<p>Next we consider a fundamentally different approach to implementing
+trees. The goal is to store a series of node values with the minimum
+information needed to reconstruct the tree structure. This approach,
+known as a <a href="10-glossary.html#sequential-tree-representation" class="term">sequential tree representation</a>, has
+the advantage of saving space because no pointers are stored. It has the
+disadvantage that accessing any node in the tree requires sequentially
+processing all nodes that appear before it in the node list. In other
+words, node access must start at the beginning of the node list,
+processing nodes sequentially in whatever order they are stored until
+the desired node is reached. Thus, one primary virtue of the other
+implementations discussed in this section is lost: efficient access
+(typically
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math>
+time) to arbitrary nodes in the tree. Sequential tree implementations
+are ideal for archiving trees on disk for later use because they save
+space, and the tree structure can be reconstructed as needed for later
+processing.</p>
+<p>Sequential tree implementations can be used to <a href="10-glossary.html#serialization" class="term">serialize</a> a tree structure.
+Serialization is the process of storing an object as a series of bytes,
+typically so that the data structure can be transmitted between
+computers. This capability is important when using data structures in a
+distributed processing environment.</p>
+<p>A sequential tree implementation typically stores the node values as
+they would be enumerated by a preorder traversal, along with sufficient
+information to describe the tree’s shape. If the tree has restricted
+form, for example if it is a full binary tree, then less information
+about structure typically needs to be stored. A general tree, because it
+has the most flexible shape, tends to require the most additional shape
+information. There are many possible sequential tree implementation
+schemes. We will begin by describing methods appropriate to binary
+trees, then generalize to an implementation appropriate to a general
+tree structure.</p>
+<p>Because every node of a binary tree is either a leaf or has two
+(possibly empty) children, we can take advantage of this fact to
+implicitly represent the tree’s structure. The most straightforward
+sequential tree implementation lists every node value as it would be
+enumerated by a preorder traversal. Unfortunately, the node values alone
+do not provide enough information to recover the shape of the tree. In
+particular, as we read the series of node values, we do not know when a
+leaf node has been reached. However, we can treat all non-empty nodes as
+internal nodes with two (possibly empty) children. Only NULL values will
+be interpreted as leaf nodes, and these can be listed explicitly. Such
+an augmented node list provides enough information to recover the tree
+structure.</p>
+<div id="BinExampb">
+<p>
+<div id="BinExampCON" class="ssAV" data-short-name="BinExampCON" data-long-name="Binary/BinExampCON" alt="Binary/BinExampCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>Sample binary tree for sequential tree implementation examples.</p>
+</div>
+<p>
+<div id="SequentialTreeCON" class="ssAV" data-short-name="SequentialTreeCON" data-long-name="First sequential representation Slideshow" alt="First sequential representation Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>
+<div id="SequentialTreePRO" class="embedContainer">
+<iframe id="SequentialTreePRO_iframe" aria-label="SequentialTreePRO" src="../interactive/General/SequentialTreePRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+<section id="alternative-sequential-representation" class="level3"
+data-number="5.14.1">
+<h3 data-number="5.14.1"><span
+class="header-section-number">5.14.1</span> Alternative Sequential
+Representation</h3>
+<p>To illustrate the difficulty involved in using the sequential tree
+representation for processing, consider searching for the right child of
+the root node. We must first move sequentially through the node list of
+the left subtree. Only at this point do we reach the value of the root’s
+right child. Clearly the sequential representation is space efficient,
+but not time efficient for descending through the tree along some
+arbitrary path.</p>
+<p>Assume that each node value takes a constant amount of space. An
+example would be if the node value is a positive integer and
+<code>null</code> is indicated by the value zero. From the <a href="10-glossary.html#full-binary-tree-theorem" class="term">Full Binary Tree Theorem</a>, we know that the size of
+the node list will be about twice the number of nodes (i.e., the
+overhead fraction is 1/2). The extra space is required by the
+<code>null</code> pointers. We should be able to store the node list
+more compactly. However, any sequential implementation must recognize
+when a leaf node has been reached, that is, a leaf node indicates the
+end of a subtree. One way to do this is to explicitly list with each
+node whether it is an internal node or a leaf. If a node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
+is an internal node, then we know that its two children (which may be
+subtrees) immediately follow
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
+in the node list. If
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
+is a leaf node, then the next node in the list is the right child of
+some ancestor of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>,
+not the right child of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>.
+In particular, the next node will be the child of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
+‘s most recent ancestor that has not yet seen its right child. However,
+this assumes that each internal node does in fact have two children, in
+other words, that the tree is full. Empty children must be indicated in
+the node list explicitly. Assume that internal nodes are marked with a
+prime (’) and that leaf nodes show no mark. Empty children of internal
+nodes are indicated by “/”, but the (empty) children of leaf nodes are
+not represented at all. Note that a full binary tree stores no
+<code>null</code> values with this implementation, and so requires less
+overhead.</p>
+<p>
+<div id="SequentialTreeAltCON" class="ssAV" data-short-name="SequentialTreeAltCON" data-long-name="Second sequential representation Slideshow" alt="Second sequential representation Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>Storing
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+extra bits can be a considerable savings over storing
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+<code>null</code> values. In the example above, each node was shown with
+a mark if it is internal, or no mark if it is a leaf. This requires that
+each node value has space to store the mark bit. This might be true if,
+for example, the node value were stored as a 4-byte integer but the
+range of the values sored was small enough so that not all bits are
+used. An example would be if all node values must be positive. Then the
+high-order (sign) bit of the integer value could be used as the mark
+bit.</p>
+<p>
+<div id="SequentialTreeAltPRO" class="embedContainer">
+<iframe id="SequentialTreeAltPRO_iframe" aria-label="SequentialTreeAltPRO" src="../interactive/General/SequentialTreeAltPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</section>
+<section id="bit-vector-representation" class="level3"
+data-number="5.14.2">
+<h3 data-number="5.14.2"><span
+class="header-section-number">5.14.2</span> Bit Vector
+Representation</h3>
+<p>Another approach is to store a separate bit vector to represent the
+status of each node. In this case, each node of the tree corresponds to
+one bit in the bit vector. A value of “1” could indicate an internal
+node, and “0” could indicate a leaf node.</p>
+<p>
+<div id="SequentialTreeBitsCON" class="ssAV" data-short-name="SequentialTreeBitsCON" data-long-name="Bit vector sequential representation Slideshow" alt="Bit vector sequential representation Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>
+<div id="SequentialTreeBitVectorPRO" class="embedContainer">
+<iframe id="SequentialTreeBitVectorPRO_iframe" aria-label="SequentialTreeBitVectorPRO" src="../interactive/General/SequentialTreeBitVectorPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</section>
+<section id="general-tree-sequential-representation" class="level3"
+data-number="5.14.3">
+<h3 data-number="5.14.3"><span
+class="header-section-number">5.14.3</span> General Tree Sequential
+Representation</h3>
+<p>Storing general trees by means of a sequential implementation
+requires that more explicit structural information be included with the
+node list. Not only must the general tree implementation indicate
+whether a node is leaf or internal, it must also indicate how many
+children the node has. Alternatively, the implementation can indicate
+when a node’s child list has come to an end. The next example dispenses
+with marks for internal or leaf nodes. Instead it includes a special
+mark (we will use the “)” symbol) to indicate the end of a child list.
+All leaf nodes are followed by a “)” symbol because they have no
+children. A leaf node that is also the last child for its parent would
+indicate this by two or more successive “)” symbols.</p>
+<p>
+<div id="SequentialGenTreeCON" class="ssAV" data-short-name="SequentialGenTreeCON" data-long-name="General Tree sequential representation Slideshow" alt="General Tree sequential representation Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>Note that this representation for serializing general trees cannot be
+used for binary trees. This is because a binary tree is not merely a
+restricted form of general tree with at most two children. Every binary
+tree node has a left and a right child, though either or both might be
+empty. So this representation cannot let us distinguish whether node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>
+in <a
+href="5.14-sequential-tree-representations-optional.html#BinExampb">Figure
+#BinExampb</a> is the left or right child of node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>.</p>
+<p>
+<div id="SequentialTreeGenTreePRO" class="embedContainer">
+<iframe id="SequentialTreeGenTreePRO_iframe" aria-label="SequentialTreeGenTreePRO" src="../interactive/General/SequentialTreeGenTreePRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</section>
+</section>
+<script type="text/javascript" src="../interactive/Binary/BinExampCON.js"></script>
+<script type="text/javascript" src="../interactive/General/SequentialTreeCON.js"></script>
+<script type="text/javascript" src="../interactive/General/SequentialTreeAltCON.js"></script>
+<script type="text/javascript" src="../interactive/General/SequentialTreeBitsCON.js"></script>
+<script type="text/javascript" src="../interactive/General/SequentialGenTreeCON.js"></script>
+</body>
+</html>

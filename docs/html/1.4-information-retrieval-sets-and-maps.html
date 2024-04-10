@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Cliff Shaffer" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Nick Smallbone" />
+  <title>DSABook – Information retrieval: Sets and Maps</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #ffffff;
+        color: #a0a0a0;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+    div.sourceCode
+      { color: #1f1c1b; background-color: #ffffff; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #1f1c1b; } /* Normal */
+    code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+    code span.an { color: #ca60ca; } /* Annotation */
+    code span.at { color: #0057ae; } /* Attribute */
+    code span.bn { color: #b08000; } /* BaseN */
+    code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+    code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #924c9d; } /* Char */
+    code span.cn { color: #aa5500; } /* Constant */
+    code span.co { color: #898887; } /* Comment */
+    code span.cv { color: #0095ff; } /* CommentVar */
+    code span.do { color: #607880; } /* Documentation */
+    code span.dt { color: #0057ae; } /* DataType */
+    code span.dv { color: #b08000; } /* DecVal */
+    code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+    code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #b08000; } /* Float */
+    code span.fu { color: #644a9b; } /* Function */
+    code span.im { color: #ff5500; } /* Import */
+    code span.in { color: #b08000; } /* Information */
+    code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+    code span.op { color: #1f1c1b; } /* Operator */
+    code span.ot { color: #006e28; } /* Other */
+    code span.pp { color: #006e28; } /* Preprocessor */
+    code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #ff5500; } /* SpecialString */
+    code span.st { color: #bf0303; } /* String */
+    code span.va { color: #0057ae; } /* Variable */
+    code span.vs { color: #bf0303; } /* VerbatimString */
+    code span.wa { color: #bf0303; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../bookstyle.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+      },
+      "HTML-CSS": {
+        scale: "80",
+      }
+    });
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Up:</span> <a href="1-introduction.html" accesskey="u" rel="up">Introduction</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="1.5-comparables-comparators-and-key-value-pairs.html" accesskey="n" rel="next">Comparables, Comparators and Key-Value Pairs</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Previous:</span> <a href="1.3-all-adts-used-in-this-book.html" accesskey="p" rel="previous">All ADTs Used in This Book</a>
+</span>
+</div>
+</nav>
+<section id="information-retrieval-sets-and-maps" class="level2"
+data-number="1.4">
+<h2 data-number="1.4"><span class="header-section-number">1.4</span>
+Information retrieval: Sets and Maps</h2>
+<p>Many programming tasks involve <em>finding the right piece of
+information</em> in a large dataset. That is, we have a collection of
+items, and we want to quickly retrieve the items matching certain
+criteria. Here are some examples of information retrieval problems:</p>
+<ul>
+<li><em>Spell-checking:</em> Given a set containing all valid English
+words, check if a given string is present in the set (i.e. is a valid
+word).</li>
+<li><em>Database lookup:</em> Given a list of people, find the person
+with a given <em>personnummer</em>.</li>
+<li><em>Search engine:</em> Given a collection of documents (e.g. web
+pages), find all web pages containing a given word.</li>
+<li><em>Between X and Y:</em> Given a list of all Swedish towns and
+their populations, find the towns whose population is between 1,000 and
+2,000.</li>
+</ul>
+<p>All of these problems can be solved using two ADTs, the <em>set</em>
+and the <em>map</em>. Both ADTs can be used to maintain a collection of
+<em>records</em>. They provide operations for finding records, adding
+records, and removing records from the collection. In this section we
+will see what sets and maps are, and how to use them to solve the four
+problems above.</p>
+<p>You may have already used sets and maps in programming, because
+almost every programming language provides an implementation for them.
+For example, Java provides the <a
+href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/HashSet.html">HashSet</a>
+and <a
+href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/HashMap.html">HashMap</a>
+classes, and Python provides <a
+href="https://docs.python.org/3/tutorial/datastructures.html#sets">sets</a>
+and <a
+href="https://docs.python.org/3/tutorial/datastructures.html#dictionaries">dictionaries</a>
+(another word for maps) as part of its standard library.</p>
+<section id="spell-checking-sets" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1"><span class="header-section-number">1.4.1</span>
+Spell-checking: Sets</h3>
+<p>A <em>set</em> represents a collection of items, where we can
+<em>add</em> and <em>remove</em> items, and <em>check</em> if a given
+item is present in the set. A set cannot contain duplicate items: if we
+try to add an item that is already present, nothing happens, and the set
+is left unchanged. Recall the interface for sets from <a
+href="1.3-all-adts-used-in-this-book.html#all-adts-used-in-this-book">the
+course API</a>:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Set(Collection):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> add(<span class="va">self</span>, x):      <span class="st">&quot;&quot;&quot;Adds x to the set. Returns true if the element wasn&#39;t already in the set.&quot;&quot;&quot;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> remove(<span class="va">self</span>, x):   <span class="st">&quot;&quot;&quot;Removes x from the set. Returns true if the element was in the set.&quot;&quot;&quot;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> contains(<span class="va">self</span>, x): <span class="st">&quot;&quot;&quot;Returns true if x is in the set.&quot;&quot;&quot;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Note: __iter__() can yield the elements in any order.</span></span></code></pre></div>
+<p>We can use a set for the spell-checking example:</p>
+<ul>
+<li>Given a set containing all valid English words, check if a given
+string is present in the set (i.e. is a valid word).</li>
+</ul>
+<p>To create the spell-checking dictionary, we start with an initially
+empty set, and then call <code>add</code> repeatedly to add each valid
+word to the set. Then to spell-check a given word, we just call
+<code>contains</code>.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SpellChecker:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, list_of_valid_words):</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Convert the list of words into a set.</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.set_of_valid_words <span class="op">=</span> Set()</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> word <span class="kw">in</span> list_of_valid_words:</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.set_of_valid_words.add(word)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> is_valid_word(<span class="va">self</span>, word):</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.set_of_valid_words.contains(word)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&#39;__main__&#39;</span>:</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create a new spell checker.</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    checker <span class="op">=</span> SpellChecker([<span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>])</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Select some words to spell check. </span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If there are no command-line arguments, default to testing &quot;dog&quot; and &quot;kat&quot;.</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    list_of_words_to_check <span class="op">=</span> sys.argv[<span class="dv">1</span>:] <span class="cf">if</span> <span class="bu">len</span>(sys.argv) <span class="op">&gt;</span> <span class="dv">1</span> <span class="cf">else</span> [<span class="st">&quot;dog&quot;</span>, <span class="st">&quot;kat&quot;</span>]</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Now we can spell-check a word easily.</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> word <span class="kw">in</span> list_of_words_to_check:</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> checker.is_valid_word(word):</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(word, <span class="st">&quot;is valid&quot;</span>)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(word, <span class="st">&quot;is INVALID&quot;</span>)</span></code></pre></div>
+</section>
+<section id="database-lookup-maps" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2"><span class="header-section-number">1.4.2</span>
+Database lookup: Maps</h3>
+<p>A <em>map</em> represents a set of <em>keys</em>, where each key has
+an associated <em>value</em>. We can <em>add</em> and <em>remove</em>
+keys, but when we add a key we must specify what <em>value</em> we want
+to associated with it. We can <em>check</em> if a given key is present
+in the map. We can also <em>look up</em> a key to find the associated
+value.</p>
+<p>A map cannot contain duplicate <em>keys</em>, so each key is
+associated with exactly one value. If we call <code>put(k,v)</code>, but
+the key <code>k</code> is already present, then the value associated
+with <code>k</code> gets changed to <code>v</code>. On the other hand, a
+map <em>can</em> contain duplicate <em>values</em>: two keys can have
+the same value. Recall the interface for maps from <a
+href="1.3-all-adts-used-in-this-book.html#all-adts-used-in-this-book">the
+course API</a>:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Map(Iterable):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> put(<span class="va">self</span>, key, value):  <span class="st">&quot;&quot;&quot;Sets the value of the given key. Returns the previous value, or None.&quot;&quot;&quot;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get(<span class="va">self</span>, key):         <span class="st">&quot;&quot;&quot;Returns the value associated with the given key, or None if the key is not there.&quot;&quot;&quot;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> remove(<span class="va">self</span>, key):      <span class="st">&quot;&quot;&quot;Removes and returns the value associated with the given key, or None if there is no key.&quot;&quot;&quot;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> containsKey(<span class="va">self</span>, key): <span class="st">&quot;&quot;&quot;Returns true if the key has an associated value.&quot;&quot;&quot;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> isEmpty(<span class="va">self</span>):          <span class="st">&quot;&quot;&quot;Returns true if there are no keys.&quot;&quot;&quot;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> size(<span class="va">self</span>):             <span class="st">&quot;&quot;&quot;Returns the number of keys (i.e., the number of key/value pairs).&quot;&quot;&quot;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Note: __iter__() can yield the keys in any order.</span></span></code></pre></div>
+<p>The map is a perfect match for our database example:</p>
+<ul>
+<li>Given a list of people, find the person with a given
+<em>personnummer</em>.</li>
+</ul>
+<p>Here, the key should be a personnummer, and the value should be a
+record containing information about that person. If the personnummer is
+stored in a field <code>pnr</code>, then to put a person <code>p</code>
+in the database we call <code>database.put(p.pnr, p)</code>. To find the
+person with personnummer <code>pnr</code> we call
+<code>database.get(pnr)</code>.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Person:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, pnr, name):</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.pnr  <span class="op">=</span> pnr    <span class="co"># personnummer</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.name <span class="op">=</span> name   <span class="co"># person&#39;s name</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> PersonDatabase:</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.database <span class="op">=</span> Map()</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> put(<span class="va">self</span>, p):</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">&quot;&quot;&quot;Put the person in the database.&quot;&quot;&quot;</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.database.put(p.pnr, p)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> remove(<span class="va">self</span>, p):</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        <span class="co">&quot;&quot;&quot;Remove a person from the database.&quot;&quot;&quot;</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.database.remove(p.pnr)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> find(<span class="va">self</span>, pnr):</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        <span class="co">&quot;&quot;&quot;Find the person who has a given personnummer.&quot;&quot;&quot;</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.database.get(pnr)</span></code></pre></div>
+</section>
+<section id="search-engine-multimaps" class="level3"
+data-number="1.4.3">
+<h3 data-number="1.4.3"><span class="header-section-number">1.4.3</span>
+Search engine: Multimaps</h3>
+<p>Maps have the restriction that each key has only one value. However,
+sometimes we want to store a list of records, where some records might
+have the same key. Then we want something like a map, but where a key
+can have multiple values associated with it. This structure is called a
+<em>multimap</em>.</p>
+<p>Unfortunately, most programming languages do not provide a multimap
+data structure. Instead, we can implement it ourselves. The idea is to
+use a map, where the key is a word, and the value is not a document but
+a <em>set</em> of documents.</p>
+<p>A multimap is the perfect data structure for our search engine
+example:</p>
+<ul>
+<li>Given a collection of documents (e.g. web pages), find all web pages
+containing a given word.</li>
+</ul>
+<p>To find all documents containing a given word, we will build a
+multimap, where the key is a word, and the values are all documents
+containing that word. Then, searching for a word will just mean looking
+it up in the multimap.</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We model a document as a list of words.</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Document:</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, contents):</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.contents <span class="op">=</span> contents</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SearchEngine:</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.database <span class="op">=</span> Map()</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> add(<span class="va">self</span>, doc):</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">&quot;&quot;&quot;Add a new document to the database.&quot;&quot;&quot;</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> word <span class="kw">in</span> doc.contents:</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Get the set of documents containing this word.</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>            <span class="bu">set</span> <span class="op">=</span> <span class="va">self</span>.database.get(word)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="bu">set</span> <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>                <span class="co"># This is the first document containing this word.</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>                <span class="bu">set</span> <span class="op">=</span> Set()</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Add the document to the set.</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>            <span class="bu">set</span>.add(doc)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.database.put(word, <span class="bu">set</span>)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> find(<span class="va">self</span>, word):</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>        <span class="co">&quot;&quot;&quot;Find all documents containing a given word.&quot;&quot;&quot;</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>.database.containsKey(word):</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">self</span>.database.get(word)</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>            <span class="co"># If the word is not found, return an empty set rather than None.</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> Set()</span></code></pre></div>
+</section>
+<section id="between-x-and-y-sorted-sets-and-maps" class="level3"
+data-number="1.4.4">
+<h3 data-number="1.4.4"><span class="header-section-number">1.4.4</span>
+Between X and Y: Sorted Sets and Maps</h3>
+<p>Consider the final example problem:</p>
+<ul>
+<li>Given a list of all Swedish towns and their populations, find the
+towns whose population is between 1,000 and 2,000.</li>
+</ul>
+<p>One way to solve this problem would be to use a multimap. The key
+would be a population number, and the values would be all towns having
+that population. Then we could find the required towns by making a
+sequence of calls to <code>contains</code>:</p>
+<ul>
+<li><code>contains(1000)</code> - find all towns with 1,000
+population</li>
+<li><code>contains(1001)</code> - find all towns with 1,001
+population</li>
+<li><code>contains(1002)</code> - find all towns with 1,002
+population</li>
+<li>etc.</li>
+</ul>
+<p>But this is not a sensible approach. We would need to make ~1,000
+calls to <code>contains</code>, and if we wanted to instead find all
+cities in the USA having a population of between 1 and 2 million, we
+would need to make ~1,000,000 calls.</p>
+<p>There is a better way. If the towns are stored in an array, and
+sorted by population, we can use the following algorithm:</p>
+<ul>
+<li>Find the position in the array of the <em>first</em> town that has a
+population of <em>at least</em> 1,000. (We will see in the section about
+<a href="2.1-searching-in-an-array.html#binary-search">binary search</a>
+that it is possible to find this position efficiently.)</li>
+<li>Find the position in the array of the <em>last</em> town that has a
+population of <em>at most</em> 2,000.</li>
+<li>Now return all towns between those two positions in the array.</li>
+</ul>
+<p>This is an example of a <em>range query</em>: given a map, finding
+all items whose key lies in a given range. Some map implementations
+support answering range queries efficiently; we say that these data
+structures implement <em>sorted maps</em>.</p>
+<p>Apart from range queries, sorted maps support several other
+operations that take advantage of the natural order of the keys:</p>
+<ul>
+<li><p>Finding the <em>smallest</em> or <em>largest</em> key in the
+map.</p></li>
+<li><p>Finding the <em>closest</em> key to a given one. Given a key
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+(which may or may not be in the map), then:</p>
+<ul>
+<li>The <em>successor</em> of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+is the next key after
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+in the map, i.e. the smallest key
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mi>′</mi></mrow><annotation encoding="application/x-tex">k\prime</annotation></semantics></math>
+such that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>&lt;</mo><mi>k</mi><mi>′</mi></mrow><annotation encoding="application/x-tex">k &lt; k\prime</annotation></semantics></math>.</li>
+<li>The <em>predecessor</em> of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+is the previous key before
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+in the map, i.e. the greatest key
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mi>′</mi></mrow><annotation encoding="application/x-tex">k\prime</annotation></semantics></math>
+such that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mi>′</mi><mo>&lt;</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">k\prime &lt; k</annotation></semantics></math>.</li>
+</ul>
+<p>A variant which is sometimes useful is <em>floor</em> and
+<em>ceiling</em>:</p>
+<ul>
+<li>The <em>floor</em> of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+is the greatest key
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mi>′</mi></mrow><annotation encoding="application/x-tex">k\prime</annotation></semantics></math>
+such that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mi>′</mi><mo>≤</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">k\prime \leq k</annotation></semantics></math>.
+If
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+is in the map, then the floor of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+is just
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>;
+otherwise it is the predecessor of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>.</li>
+<li>The <em>ceiling</em> of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+is the least key
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mi>′</mi></mrow><annotation encoding="application/x-tex">k\prime</annotation></semantics></math>
+such that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>≤</mo><mi>k</mi><mi>′</mi></mrow><annotation encoding="application/x-tex">k \leq k\prime</annotation></semantics></math>.
+If
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+is in the map, then the ceiling of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+is just
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>;
+otherwise it is the successor of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>.</li>
+</ul></li>
+</ul>
+<p>Recall the interface for sorted maps from <a
+href="1.3-all-adts-used-in-this-book.html#all-adts-used-in-this-book">the
+course API</a>:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SortedMap(Map):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> firstKey(<span class="va">self</span>):                <span class="st">&quot;&quot;&quot;Returns the first (smallest) key. Raises an exception if the map is empty.&quot;&quot;&quot;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> lastKey(<span class="va">self</span>):                 <span class="st">&quot;&quot;&quot;Returns the last (largest) key. Raises an exception if the map is empty.&quot;&quot;&quot;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> floorKey(<span class="va">self</span>, key):           <span class="st">&quot;&quot;&quot;Returns the closest key &lt;= k, or None if there is no key.&quot;&quot;&quot;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> ceilingKey(<span class="va">self</span>, key):         <span class="st">&quot;&quot;&quot;Returns the closest key &gt;= k, or None if there is no key.&quot;&quot;&quot;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> lowerKey(<span class="va">self</span>, key):           <span class="st">&quot;&quot;&quot;Returns the closest key &lt; k, or None if there is no such element.&quot;&quot;&quot;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> higherKey(<span class="va">self</span>, key):          <span class="st">&quot;&quot;&quot;Returns the closest key &gt; k, or None if there is no such element.&quot;&quot;&quot;</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> keysBetween(<span class="va">self</span>, key1, key2): <span class="st">&quot;&quot;&quot;Returns all keys k such that k1 &lt;= k &lt;= k2.&quot;&quot;&quot;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Note: __iter__() should yield the keys in order.</span></span></code></pre></div>
+<p>As well as a sorted map, it is also possible to have a <em>sorted
+set</em>. Recall the interface for sorted sets from <a
+href="1.3-all-adts-used-in-this-book.html#all-adts-used-in-this-book">the
+course API</a>:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SortedSet(Set):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> first(<span class="va">self</span>):            <span class="st">&quot;&quot;&quot;Returns the first (smallest) element. Raises an exception if the set is empty.&quot;&quot;&quot;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> last(<span class="va">self</span>):             <span class="st">&quot;&quot;&quot;Returns the last (largest) element. Raises an exception if the set is empty.&quot;&quot;&quot;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> floor(<span class="va">self</span>, x):         <span class="st">&quot;&quot;&quot;Returns the closest element &lt;= x, or None if there is no such element.&quot;&quot;&quot;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> ceiling(<span class="va">self</span>, x):       <span class="st">&quot;&quot;&quot;Returns the closest element &gt;= x, or None if there is no such element.&quot;&quot;&quot;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> lower(<span class="va">self</span>, x):         <span class="st">&quot;&quot;&quot;Returns the closest element &lt; x, or None if there is no such element.&quot;&quot;&quot;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> higher(<span class="va">self</span>, x):        <span class="st">&quot;&quot;&quot;Returns the closest element &gt; x, or None if there is no such element.&quot;&quot;&quot;</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> between(<span class="va">self</span>, x1, x2):  <span class="st">&quot;&quot;&quot;Returns all elements x such that x1 &lt;= x &lt;= x2.&quot;&quot;&quot;</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Note: __iter__() should yield the elements in order.</span></span></code></pre></div>
+<p>Here is how to use a sorted map ADT to find all Swedish towns having
+between 1,000 and 2,000 population. As there may be towns that have the
+same population, we need a <em>multimap</em>. As before, we solve this
+by having the key be a population number and the value be a set of
+towns.</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> City:</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name, population):</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.name <span class="op">=</span> name</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.population <span class="op">=</span> population</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> CityPopulations:</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Similar to the search engine, use a map where the value is a list of cities.</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.cities <span class="op">=</span> SortedMap()</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> add(<span class="va">self</span>, city):</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>        <span class="co">&quot;&quot;&quot;Add a new city to the database.&quot;&quot;&quot;</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Get the set of documents containing this city</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">set</span> <span class="op">=</span> <span class="va">self</span>.cities.get(city.population)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">set</span> <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>            <span class="co"># This is the first city with this population</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>            <span class="bu">set</span> <span class="op">=</span> Set()</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add the city to the set</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>        <span class="bu">set</span>.add(city)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.cities.put(city.population, <span class="bu">set</span>)</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> findBetween(<span class="va">self</span>, lower, upper):</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>        <span class="co">&quot;&quot;&quot;Find all cities with a population between lower and upper&quot;&quot;&quot;</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> Set()</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>        <span class="co"># The range query returns a set of keys, i.e. populations.</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> population <span class="kw">in</span> <span class="va">self</span>.cities.keysBetween(lower, upper):</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>            <span class="co"># cities.get(population) returns the list of cities with that population.</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> city <span class="kw">in</span> <span class="va">self</span>.cities.get(population):</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>                result.add(city)</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> result</span></code></pre></div>
+</section>
+<section id="how-to-implement-sets-and-maps" class="level3"
+data-number="1.4.5">
+<h3 data-number="1.4.5"><span class="header-section-number">1.4.5</span>
+How to implement sets and maps</h3>
+<p>Sets and maps are useful in a huge variety of computer programs, and
+are perhaps the most useful of all data structures. But how can we
+design a class that implements a set or a map, in such a way that
+adding, removing and searching can be done efficiently? In this book we
+will see several different ways of implementing sets and maps.</p>
+<p>In Chapter <a
+href="2-arrays-searching-and-sorting.html#arrays-searching-and-sorting">Arrays:
+Searching and Sorting</a>, we will see how to implement a set using an
+array. By sorting the items in the array, it is possible to look up
+information efficiently. However, it turns out that adding and removing
+items is quite expensive. An array is a suitable way of storing a set or
+a map if its contents never changes.</p>
+<p>In Chapter <a
+href="6-binary-search-trees.html#binary-search-trees">Search Trees</a>,
+we learn about <em>balanced binary search trees (BSTs)</em>, a data
+structure for sets and maps where adding, removing and searching are all
+efficient. BSTs also support the <em>sorted map</em> operations that we
+used in our final example.</p>
+<p>In Chapter <a href="8-hashing.html#hashing">Hash Tables</a>, we learn
+about <em>hash tables</em>, another way to implement the set and map
+ADTs. In a hash table, <code>add</code>, <code>remove</code> and
+<code>contains</code> are even faster than in a BST, but hash tables are
+somewhat harder to use than BSTs, and do not support the <em>sorted
+map</em> operations.</p>
+<p>Balanced BSTs and hash tables are the main ways that sets and maps
+are implemented in practice. Almost every programming language provides
+sets and maps as a built-in feature, based on one of these technologies.
+For example, Java’s <a
+href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/HashSet.html">HashSet</a>,
+<a
+href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/HashMap.html">HashMap</a>,
+<a
+href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/TreeSet.html">TreeSet</a>
+and <a
+href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/TreeMap.html">TreeMap</a>,
+and Python’s: <a
+href="https://docs.python.org/3/tutorial/datastructures.html#sets">sets</a>
+and <a
+href="https://docs.python.org/3/tutorial/datastructures.html#dictionaries">dictionaries</a>.
+By the end of this book you will understand how all of these work.</p>
+</section>
+</section>
+</body>
+</html>

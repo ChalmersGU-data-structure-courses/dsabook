@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Cliff Shaffer" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Nick Smallbone" />
+  <title>DSABook – Sorting</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../bookstyle.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+      },
+      "HTML-CSS": {
+        scale: "80",
+      }
+    });
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Up:</span> <a href="2-arrays-searching-and-sorting.html" accesskey="u" rel="up">Arrays: searching and sorting</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="2.3-sorting-terminology-and-notation.html" accesskey="n" rel="next">Sorting Terminology and Notation</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Previous:</span> <a href="2.1-searching-in-an-array.html" accesskey="p" rel="previous">Searching in an Array</a>
+</span>
+</div>
+</nav>
+<section id="sorting" class="level2" data-number="2.2">
+<h2 data-number="2.2"><span class="header-section-number">2.2</span>
+Sorting</h2>
+<p>We have seen that, when an array is sorted in ascending order,
+<em>binary search</em> can be used to find items in it efficiently. But
+what about when we have a collection of data that is not in any order?
+If we will often need to search for items in the data, it makes sense to
+<em>sort the data</em> first. In this chapter we will study algorithms
+for sorting arrays in ascending order.</p>
+<p>We sort many things in our everyday lives: A handful of cards when
+playing Bridge; bills and other piles of paper; jars of spices; and so
+on. And we have many intuitive strategies that we can use to do the
+sorting, depending on how many objects we have to sort and how hard they
+are to move around. Sorting is also one of the most frequently performed
+computing tasks. We might sort the records in a database so that we can
+search the collection efficiently. We might sort customer records by zip
+code so that when we print an advertisement we can then mail them more
+cheaply. We might use sorting to help an algorithm to solve some other
+problem. For example, <a
+href="9.5-minimal-cost-spanning-trees.html#kruskals-algorithm">Kruskal’s
+algorithm</a> to find [minimal-cost spanning trees] must sort the edges
+of a graph by their lengths before it can process them.</p>
+<p>Because sorting is so important, naturally it has been studied
+intensively and many algorithms have been devised. Some of these
+algorithms are straightforward adaptations of schemes we use in everyday
+life. For example, a natural way to sort your cards in a bridge hand is
+to go from left to right, and place each card in turn in its correct
+position relative to the other cards that you have already sorted. This
+is the idea behind <a
+href="2.4-insertion-sort.html#insertion-sort">Insertion Sort</a>. Other
+sorting algorithms are totally alien to how humans do things, having
+been invented to sort thousands or even millions of records stored on
+the computer. For example, no normal person would use <a
+href="2.11-quicksort.html#quicksort">Quicksort</a> to order a pile of
+bills by date, even though Quicksort is the standard sorting algorithm
+of choice for most software libraries. After years of study, there are
+still unsolved problems related to sorting. New algorithms are still
+being developed and refined for special-purpose applications.</p>
+<p>Along with introducing this central problem in computer science,
+studying sorting algorithms helps us to understand issues in algorithm
+design and analysis. For example, the sorting algorithms in this chapter
+show multiple approaches to using <a href="10-glossary.html#divide-and-conquer" class="term">divide and
+conquer</a>. In particular, there are multiple ways to do the
+dividing. <a href="2.9-mergesort.html#mergesort">Mergesort</a> divides a
+list in half. <a href="2.11-quicksort.html#quicksort">Quicksort</a>
+divides a list into big values and small values. <a href="10-glossary.html#radix-sort" class="term">Radix Sort</a> divides the problem by working on one
+digit of the key at a time. Sorting algorithms can also illustrate a
+wide variety of algorithm analysis techniques. Quicksort illustrates
+that it is possible for an algorithm to have an <a href="10-glossary.html#average-case" class="term">average case</a> whose growth rate is significantly
+smaller than its <a href="10-glossary.html#worst-case" class="term">worst case</a>. It is possible to
+speed up one sorting algorithm (such as <a href="10-glossary.html#shellsort" class="term">Shellsort</a> or <a
+href="2.11-quicksort.html#quicksort">Quicksort</a>) by taking advantage
+of the <a href="10-glossary.html#best-case" class="term">best case</a> behavior of another algorithm
+(Insertion Sort). Special case behavior by some sorting algorithms makes
+them a good solution for special niche applications (<a
+href="7.3-heapsort.html#heapsort">Heapsort</a>). Sorting provides an
+example of an important technique for analyzing the lower bound for a
+problem. <a href="10-glossary.html#external-sort" class="term">External Sorting</a>
+refers to the process of sorting large files stored on disk.</p>
+<p>This chapter covers several standard algorithms appropriate for
+sorting a collection of records that fit into the computer’s main
+memory. It begins with a discussion of three simple, but relatively
+slow, algorithms that require
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^2)</annotation></semantics></math>
+time in the average and worst cases to sort
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+records. Several algorithms with considerably better performance are
+then presented, some with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log n)</annotation></semantics></math>
+worst-case running time. The final sorting method presented requires
+only
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math>
+worst-case time under special conditions (but it cannot run that fast in
+the general case). The chapter concludes with a proof that sorting in
+general requires
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Omega(n \log n)</annotation></semantics></math>
+time in the worst case.</p>
+</section>
+</body>
+</html>

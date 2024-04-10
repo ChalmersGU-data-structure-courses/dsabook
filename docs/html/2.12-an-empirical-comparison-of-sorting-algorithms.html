@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Cliff Shaffer" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Nick Smallbone" />
+  <title>DSABook – An Empirical Comparison of Sorting Algorithms</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../bookstyle.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+      },
+      "HTML-CSS": {
+        scale: "80",
+      }
+    });
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Up:</span> <a href="2-arrays-searching-and-sorting.html" accesskey="u" rel="up">Arrays: searching and sorting</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="2.13-lower-bounds-for-sorting-optional.html" accesskey="n" rel="next">Lower Bounds for Sorting (optional)</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Previous:</span> <a href="2.11-quicksort.html" accesskey="p" rel="previous">Quicksort</a>
+</span>
+</div>
+</nav>
+<section id="an-empirical-comparison-of-sorting-algorithms"
+class="level2" data-number="2.12">
+<h2 data-number="2.12"><span class="header-section-number">2.12</span>
+An Empirical Comparison of Sorting Algorithms</h2>
+<p>Which sorting algorithm is fastest? Asymptotic complexity analysis
+lets us distinguish between
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^2)</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log n)</annotation></semantics></math>
+algorithms, but it does not help distinguish between algorithms with the
+same asymptotic complexity. Nor does asymptotic analysis say anything
+about which algorithm is best for sorting small lists. For answers to
+these questions, we can turn to empirical testing.</p>
+<section id="SortCompTable" class="level4 unnumbered topic">
+<h4 class="unnumbered">Table</h4>
+<p>Empirical comparison of sorting algorithms run on a 3.4 GHz Intel
+Pentium 4 CPU running Linux. All times shown are milliseconds.</p>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 11%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 11%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Sort</th>
+<th style="text-align: right;">10</th>
+<th style="text-align: right;">100</th>
+<th style="text-align: right;">1K</th>
+<th style="text-align: right;">10K</th>
+<th style="text-align: right;">100K</th>
+<th style="text-align: right;">1M</th>
+<th style="text-align: right;">Up</th>
+<th style="text-align: right;">Down</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Insertion</td>
+<td style="text-align: right;">0.00023</td>
+<td style="text-align: right;">0.007</td>
+<td style="text-align: right;">0.66</td>
+<td style="text-align: right;">64.98</td>
+<td style="text-align: right;">7381</td>
+<td style="text-align: right;">674420</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">129.1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bubble</td>
+<td style="text-align: right;">0.00035</td>
+<td style="text-align: right;">0.020</td>
+<td style="text-align: right;">2.25</td>
+<td style="text-align: right;">277.94</td>
+<td style="text-align: right;">27691</td>
+<td style="text-align: right;">2820680</td>
+<td style="text-align: right;">70.6</td>
+<td style="text-align: right;">108.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Selection</td>
+<td style="text-align: right;">0.00039</td>
+<td style="text-align: right;">0.012</td>
+<td style="text-align: right;">0.69</td>
+<td style="text-align: right;">72.47</td>
+<td style="text-align: right;">7356</td>
+<td style="text-align: right;">780000</td>
+<td style="text-align: right;">69.8</td>
+<td style="text-align: right;">69.6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Merge</td>
+<td style="text-align: right;">0.00050</td>
+<td style="text-align: right;">0.010</td>
+<td style="text-align: right;">0.12</td>
+<td style="text-align: right;">1.61</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">219</td>
+<td style="text-align: right;">0.8</td>
+<td style="text-align: right;">0.8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Quick</td>
+<td style="text-align: right;">0.00048</td>
+<td style="text-align: right;">0.008</td>
+<td style="text-align: right;">0.11</td>
+<td style="text-align: right;">1.37</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">162</td>
+<td style="text-align: right;">0.4</td>
+<td style="text-align: right;">0.4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Quick (opt)</td>
+<td style="text-align: right;">0.00031</td>
+<td style="text-align: right;">0.006</td>
+<td style="text-align: right;">0.09</td>
+<td style="text-align: right;">1.14</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">143</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">0.4</td>
+</tr>
+</tbody>
+</table>
+</section>
+<p><a
+href="2.12-an-empirical-comparison-of-sorting-algorithms.html#SortCompTable">The
+table above</a> shows timing results for actual implementations of the
+sorting algorithms presented in this chapter. The algorithms compared
+include <a href="2.4-insertion-sort.html#insertion-sort">Insertion
+Sort</a>, <a
+href="2.8-optimizing-sort-algorithms-with-code-tuning-optional.html#bubble-sort">Bubble
+Sort</a>, <a href="2.6-selection-sort.html#selection-sort">Selection
+Sort</a>, <a href="2.11-quicksort.html#quicksort">Quicksort</a>, and <a
+href="2.9-mergesort.html#mergesort">Mergesort</a>.</p>
+<p>For Quicksort, two versions are compared: the basic implementation
+and an optimized version that does not partition sublists below length
+nine (with Insertion Sort performed at the end).</p>
+<p>Except for the rightmost columns, the input to each algorithm is a
+random array of integers. This affects the timing for some of the
+sorting algorithms. For example, Selection Sort is not being used to
+best advantage because the record size is small, so it does not get the
+best possible showing.</p>
+<p>The various sorting algorithms are shown for lists of sizes 10, 100,
+1000, 10,000, 100,000, and 1,000,000. The final two columns of each
+table show the performance for the algorithms on inputs of size 10,000
+where the numbers are in ascending (sorted) and descending (reverse
+sorted) order, respectively. These columns demonstrate best-case
+performance for some algorithms and worst-case performance for others.
+They also show that for some algorithms, the order of input has little
+effect.</p>
+<p>These figures show a number of interesting results. As expected, the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>
+sorts are quite poor performers for large arrays. Insertion Sort is by
+far the best of this group, unless the array is already reverse sorted.
+Optimized Quicksort is clearly the best overall algorithm for all but
+lists of 10 records. Even for small arrays, optimized Quicksort performs
+well because it does one partition step before calling Insertion Sort.
+In general, optimizing the various algorithms makes a noticeable
+improvement for larger array sizes.</p>
+<p>Here are a few multiple choice questions that ask you to compare the
+sorting algorithms that we learned about in this chapter.</p>
+<p>
+<div id="SortAlgCompSumm" class="embedContainer">
+<iframe id="SortAlgCompSumm_iframe" aria-label="SortAlgCompSumm" src="../interactive/Sorting/SortAlgCompSumm.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</section>
+</body>
+</html>

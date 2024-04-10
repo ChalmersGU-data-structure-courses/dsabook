@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Cliff Shaffer" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Nick Smallbone" />
+  <title>DSABook – Problems, Algorithms, and Programs</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../bookstyle.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+      },
+      "HTML-CSS": {
+        scale: "80",
+      }
+    });
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+<link href="../interactive/AlgAnal/ProblemAlgorithmCON.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Up:</span> <a href="3-algorithm-analysis.html" accesskey="u" rel="up">Algorithm Analysis</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="3.2-comparing-algorithms.html" accesskey="n" rel="next">Comparing Algorithms</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Previous:</span> <a href="3-algorithm-analysis.html" accesskey="p" rel="previous">Algorithm Analysis</a>
+</span>
+</div>
+</nav>
+<section id="problems-algorithms-and-programs" class="level2"
+data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span>
+Problems, Algorithms, and Programs</h2>
+<section id="problems" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1"><span class="header-section-number">3.1.1</span>
+Problems</h3>
+<p>Programmers commonly deal with problems, algorithms, and computer
+programs. These are three distinct concepts.</p>
+<p>As your intuition would suggest, a <a href="10-glossary.html#problem" class="term">problem</a>
+is a task to be performed. It is best thought of in terms of inputs and
+matching outputs. A problem definition should not include any
+constraints on <em>how</em> the problem is to be solved. The solution
+method should be developed only after the problem is precisely defined
+and thoroughly understood. However, a problem definition should include
+constraints on the resources that may be consumed by any acceptable
+solution. For any problem to be solved by a computer, there are always
+such constraints, whether stated or implied. For example, any computer
+program may use only the main memory and disk space available, and it
+must run in a “reasonable” amount of time.</p>
+<p>Problems can be viewed as functions in the mathematical sense. A
+<a href="10-glossary.html#function" class="term">function</a> is a matching between inputs (the
+<a href="10-glossary.html#domain" class="term">domain</a>) and outputs (the <a href="10-glossary.html#range" class="term">range</a>). An input to a function might be a single
+value or a collection of information. The values making up an input are
+called the <a href="10-glossary.html#parameter" class="term">parameters</a> of the
+function. A specific selection of values for the parameters is called an
+<a href="10-glossary.html#problem-instance" class="term">instance</a> of the problem.
+For example, the input parameter to a sorting function might be an array
+of integers. A particular array of integers, with a given size and
+specific values for each position in the array, would be an instance of
+the sorting problem. Different instances might generate the same output.
+However, any problem instance must always result in the same output
+every time the function is computed using that particular input.</p>
+<p>This concept of all problems behaving like mathematical functions
+might not match your intuition for the behavior of computer programs.
+You might know of programs to which you can give the same input value on
+two separate occasions, and two different outputs will result. For
+example, if you type <code>date</code> to a typical Linux command line
+prompt, you will get the current date. Naturally the date will be
+different on different days, even though the same command is given.
+However, there is obviously more to the input for the date program than
+the command that you type to run the program. The date program computes
+a function. In other words, on any particular day there can only be a
+single answer returned by a properly running date program on a
+completely specified input. For all computer programs, the output is
+completely determined by the program’s full set of inputs. Even a
+“random number generator” is completely determined by its inputs
+(although some random number generating systems appear to get around
+this by accepting a random input from a physical process beyond the
+user’s control). The limits to what functions can be implemented by
+programs is part of the domain of <a href="10-glossary.html#computability" class="term">Computability</a>.</p>
+</section>
+<section id="algorithms" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2"><span class="header-section-number">3.1.2</span>
+Algorithms</h3>
+<p>An <a href="10-glossary.html#algorithm" class="term">algorithm</a> is a method or a process
+followed to solve a problem. If the problem is viewed as a function,
+then an algorithm is an implementation for the function that transforms
+an input to the corresponding output. A problem can be solved by many
+different algorithms. A given algorithm solves only one problem (i.e.,
+computes a particular function). OpenDSA modules cover many problems,
+and for several of these problems we will see more than one algorithm.
+For the important problem of sorting there are over a dozen commonly
+known algorithms!</p>
+<p>The advantage of knowing several solutions to a problem is that
+solution
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐀</mi><annotation encoding="application/x-tex">\mathbf{A}</annotation></semantics></math>
+might be more efficient than solution
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐁</mi><annotation encoding="application/x-tex">\mathbf{B}</annotation></semantics></math>
+for a specific variation of the problem, or for a specific class of
+inputs to the problem, while solution
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐁</mi><annotation encoding="application/x-tex">\mathbf{B}</annotation></semantics></math>
+might be more efficient than
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐀</mi><annotation encoding="application/x-tex">\mathbf{A}</annotation></semantics></math>
+for another variation or class of inputs. For example, one sorting
+algorithm might be the best for sorting a small collection of integers
+(which is important if you need to do this many times). Another might be
+the best for sorting a large collection of integers. A third might be
+the best for sorting a collection of variable-length strings.</p>
+<p>By definition, something can only be called an algorithm if it has
+all of the following properties.</p>
+<ol type="1">
+<li>It must be <em>correct</em>. In other words, it must compute the
+desired function, converting each input to the correct output. Note that
+every algorithm implements some function, because every algorithm maps
+every input to some output (even if that output is a program crash). At
+issue here is whether a given algorithm implements the <em>intended</em>
+function.</li>
+<li>It is composed of a series of <em>concrete steps</em>. Concrete
+means that the action described by that step is completely understood -–
+and doable -– by the person or machine that must perform the algorithm.
+Each step must also be doable in a finite amount of time. Thus, the
+algorithm gives us a “recipe” for solving the problem by performing a
+series of steps, where each such step is within our capacity to perform.
+The ability to perform a step can depend on who or what is intended to
+execute the recipe. For example, the steps of a cookie recipe in a
+cookbook might be considered sufficiently concrete for instructing a
+human cook, but not for programming an automated cookie-making
+factory.</li>
+<li>There can be <em>no ambiguity</em> as to which step will be
+performed next. Often it is the next step of the algorithm description.
+Selection (e.g., the <code>if</code> statement) is normally a part of
+any language for describing algorithms. Selection allows a choice for
+which step will be performed next, but the selection process is
+unambiguous at the time when the choice is made.</li>
+<li>It must be composed of a <em>finite</em> number of steps. If the
+description for the algorithm were made up of an infinite number of
+steps, we could never hope to write it down, nor implement it as a
+computer program. Most languages for describing algorithms (including
+English and “pseudocode”) provide some way to perform repeated actions,
+known as iteration. Examples of iteration in programming languages
+include the <code>while</code> and <code>for</code> loop constructs.
+Iteration allows for short descriptions, with the number of steps
+actually performed controlled by the input.</li>
+<li>It must <em>terminate</em>. In other words, it may not go into an
+infinite loop.</li>
+</ol>
+</section>
+<section id="programs" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3"><span class="header-section-number">3.1.3</span>
+Programs</h3>
+<p>We often think of a computer <a href="10-glossary.html#program" class="term">program</a> as an
+instance, or concrete representation, of an algorithm in some
+programming language. Algorithms are usually presented in terms of
+programs, or parts of programs. Naturally, there are many programs that
+are instances of the same algorithm, because any modern computer
+programming language can be used to implement the same collection of
+algorithms (although some programming languages can make life easier for
+the programmer). To simplify presentation, people often use the terms
+“algorithm” and “program” interchangeably, despite the fact that they
+are really separate concepts. By definition, an algorithm must provide
+sufficient detail that it can be converted into a program when
+needed.</p>
+<p>The requirement that an algorithm must terminate means that not all
+computer programs meet the technical definition of an algorithm. Your
+operating system is one such program. However, you can think of the
+various tasks for an operating system (each with associated inputs and
+outputs) as individual problems, each solved by specific algorithms
+implemented by a part of the operating system program, and each one of
+which terminates once its output is produced.</p>
+</section>
+<section id="summary" class="level3" data-number="3.1.4">
+<h3 data-number="3.1.4"><span class="header-section-number">3.1.4</span>
+Summary</h3>
+<p>To summarize: A <a href="10-glossary.html#problem" class="term">problem</a> is a function or a
+mapping of inputs to outputs. An <a href="10-glossary.html#algorithm" class="term">algorithm</a> is
+a recipe for solving a problem whose steps are concrete and unambiguous.
+Algorithms must be correct, of finite length, and must terminate for all
+inputs. A <a href="10-glossary.html#program" class="term">program</a> is an instantiation of an
+algorithm in a programming language. The following slideshow should help
+you to visualize the differences.</p>
+<p>
+<div id="ProblemAlgorithmCON" class="ssAV" data-short-name="ProblemAlgorithmCON" data-long-name="Problem, Algorithm, and Program definitions Slideshow" alt="Problem, Algorithm, and Program definitions Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</section>
+<section id="summary-questions" class="level3" data-number="3.1.5">
+<h3 data-number="3.1.5"><span class="header-section-number">3.1.5</span>
+Summary Questions</h3>
+<p>
+<div id="AnalPrelimSumm" class="embedContainer">
+<iframe id="AnalPrelimSumm_iframe" aria-label="AnalPrelimSumm" src="../interactive/AlgAnal/AnalPrelimSumm.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</section>
+</section>
+<script type="text/javascript" src="../interactive/AlgAnal/ProblemAlgorithmCON.js"></script>
+</body>
+</html>

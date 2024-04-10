@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Cliff Shaffer" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Nick Smallbone" />
+  <title>DSABook – Faster Computer, or Faster Algorithm?</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../bookstyle.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+      },
+      "HTML-CSS": {
+        scale: "80",
+      }
+    });
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Up:</span> <a href="3-algorithm-analysis.html" accesskey="u" rel="up">Algorithm Analysis</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="3.5-asymptotic-analysis-and-upper-bounds.html" accesskey="n" rel="next">Asymptotic Analysis and Upper Bounds</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Previous:</span> <a href="3.3-best-worst-and-average-cases.html" accesskey="p" rel="previous">Best, Worst, and Average Cases</a>
+</span>
+</div>
+</nav>
+<section id="faster-computer-or-faster-algorithm" class="level2"
+data-number="3.4">
+<h2 data-number="3.4"><span class="header-section-number">3.4</span>
+Faster Computer, or Faster Algorithm?</h2>
+<p>Imagine that you have a problem to solve, and you know of an
+algorithm whose running time is proportional to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>n</mi><mn>2</mn></msup><annotation encoding="application/x-tex">n^2</annotation></semantics></math>
+where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+is a measure of the input size. Unfortunately, the resulting program
+takes ten times too long to run. If you replace your current computer
+with a new one that is ten times faster, will the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>n</mi><mn>2</mn></msup><annotation encoding="application/x-tex">n^2</annotation></semantics></math>
+algorithm become acceptable? If the problem size remains the same, then
+perhaps the faster computer will allow you to get your work done quickly
+enough even with an algorithm having a high growth rate. But a funny
+thing happens to most people who get a faster computer. They don’t run
+the same problem faster. They run a bigger problem! Say that on your old
+computer you were content to sort 10,000 records because that could be
+done by the computer during your lunch break. On your new computer you
+might hope to sort 100,000 records in the same time. You won’t be back
+from lunch any sooner, so you are better off solving a larger problem.
+And because the new machine is ten times faster, you would like to sort
+ten times as many records.</p>
+<p>If your algorithm’s growth rate is linear (i.e., if the equation that
+describes the running time on input size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐓</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>c</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">\mathbf{T}(n) = cn</annotation></semantics></math>
+for some constant
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>),
+then 100,000 records on the new machine will be sorted in the same time
+as 10,000 records on the old machine. If the algorithm’s growth rate is
+greater than
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">cn</annotation></semantics></math>,
+such as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>c</mi><mn>1</mn></msub><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">c_1n^2</annotation></semantics></math>,
+then you will <em>not</em> be able to do a problem ten times the size in
+the same amount of time on a machine that is ten times faster.</p>
+<p>How much larger a problem can be solved in a given amount of time by
+a faster computer? Assume that the new machine is ten times faster than
+the old. Say that the old machine could solve a problem of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+in an hour. What is the largest problem that the new machine can solve
+in one hour? The following table shows how large a problem can be solved
+on the two machines for five running-time functions.</p>
+<div id="Speedups">
+<section id="table-1" class="level4 unnumbered topic">
+<h4 class="unnumbered">Table</h4>
+<p>The increase in problem size that can be run in a fixed period of
+time on a computer that is ten times faster. The first column lists the
+right-hand sides for five growth rate equations. For the purpose of this
+example, arbitrarily assume that the old machine can run 10,000 basic
+operations in one hour. The second column shows the maximum value for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+that can be run in 10,000 basic operations on the old machine. The third
+column shows the value for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>′</mi></mrow><annotation encoding="application/x-tex">n&#39;</annotation></semantics></math>,
+the new maximum size for the problem that can be run in the same time on
+the new machine that is ten times faster. Variable
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>′</mi></mrow><annotation encoding="application/x-tex">n&#39;</annotation></semantics></math>
+is the greatest size for the problem that can run in 100,000 basic
+operations. The fourth column shows how the size of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+changed to become
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>′</mi></mrow><annotation encoding="application/x-tex">n&#39;</annotation></semantics></math>
+on the new machine. The fifth column shows the increase in the problem
+size as the ratio of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>′</mi></mrow><annotation encoding="application/x-tex">n&#39;</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">f(n)</th>
+<th style="text-align: center;">n</th>
+<th style="text-align: center;">n’</th>
+<th style="text-align: center;">Change</th>
+<th style="text-align: center;">n’/n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>10</mn><mi>n</mi></mrow><annotation encoding="application/x-tex">10 n</annotation></semantics></math></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1000</mn><annotation encoding="application/x-tex">1000</annotation></semantics></math></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>10</mn><mo>,</mo><mn>000</mn></mrow><annotation encoding="application/x-tex">10,000</annotation></semantics></math></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>′</mi><mo>=</mo><mn>10</mn><mi>n</mi></mrow><annotation encoding="application/x-tex">n&#39; = 10n</annotation></semantics></math></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>10</mn><annotation encoding="application/x-tex">10</annotation></semantics></math></td>
+</tr>
+<tr class="even">
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>20</mn><mi>n</mi></mrow><annotation encoding="application/x-tex">20 n</annotation></semantics></math></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>500</mn><annotation encoding="application/x-tex">500</annotation></semantics></math></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>5000</mn><annotation encoding="application/x-tex">5000</annotation></semantics></math></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>′</mi><mo>=</mo><mn>10</mn><mi>n</mi></mrow><annotation encoding="application/x-tex">n&#39; = 10n</annotation></semantics></math></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>10</mn><annotation encoding="application/x-tex">10</annotation></semantics></math></td>
+</tr>
+<tr class="odd">
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn><mi>n</mi><mo>log</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">5 n \log n</annotation></semantics></math></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>250</mn><annotation encoding="application/x-tex">250</annotation></semantics></math></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1842</mn><annotation encoding="application/x-tex">1842</annotation></semantics></math></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msqrt><mn>10</mn></msqrt><mi>n</mi><mo>&lt;</mo><mi>n</mi><mi>′</mi><mo>&lt;</mo><mn>10</mn><mi>n</mi></mrow><annotation encoding="application/x-tex">\sqrt{10} n &lt; n&#39; &lt; 10n</annotation></semantics></math></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>7.4</mn><annotation encoding="application/x-tex">7.4</annotation></semantics></math></td>
+</tr>
+<tr class="even">
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">2 n^2</annotation></semantics></math></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>70</mn><annotation encoding="application/x-tex">70</annotation></semantics></math></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>223</mn><annotation encoding="application/x-tex">223</annotation></semantics></math></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>′</mi><mo>=</mo><msqrt><mn>10</mn></msqrt><mi>n</mi></mrow><annotation encoding="application/x-tex">n&#39; = \sqrt{10} n</annotation></semantics></math></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>3.2</mn><annotation encoding="application/x-tex">3.2</annotation></semantics></math></td>
+</tr>
+<tr class="odd">
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mi>n</mi></msup><annotation encoding="application/x-tex">2^n</annotation></semantics></math></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>13</mn><annotation encoding="application/x-tex">13</annotation></semantics></math></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>16</mn><annotation encoding="application/x-tex">16</annotation></semantics></math></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>′</mi><mo>=</mo><mi>n</mi><mo>+</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">n&#39; = n + 3</annotation></semantics></math></td>
+<td style="text-align: center;">–</td>
+</tr>
+</tbody>
+</table>
+</section>
+</div>
+<p>This table illustrates many important points. The first two equations
+are both linear; only the value of the constant factor has changed. In
+both cases, the machine that is ten times faster gives an increase in
+problem size by a factor of ten. In other words, while the value of the
+constant does affect the absolute size of the problem that can be solved
+in a fixed amount of time, it does not affect the <em>improvement</em>
+in problem size (as a proportion to the original size) gained by a
+faster computer. This relationship holds true regardless of the
+algorithm’s growth rate: Constant factors never affect the relative
+improvement gained by a faster computer.</p>
+<p>An algorithm with time equation
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐓</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>2</mn><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\mathbf{T}(n) = 2n^2</annotation></semantics></math>
+does not receive nearly as great an improvement from the faster machine
+as an algorithm with linear growth rate. Instead of an improvement by a
+factor of ten, the improvement is only the square root of that:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msqrt><mn>10</mn></msqrt><mo>≈</mo><mn>3.16</mn></mrow><annotation encoding="application/x-tex">\sqrt{10} \approx 3.16</annotation></semantics></math>.
+Thus, the algorithm with higher growth rate not only solves a smaller
+problem in a given time in the first place, it <em>also</em> receives
+less of a speedup from a faster computer. As computers get ever faster,
+the disparity in problem sizes becomes ever greater.</p>
+<p>The algorithm with growth rate
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐓</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>5</mn><mi>n</mi><mo>log</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">\mathbf{T}(n) = 5 n \log n</annotation></semantics></math>
+improves by a greater amount than the one with quadratic growth rate,
+but not by as great an amount as the algorithms with linear growth
+rates.</p>
+<p>Note that something special happens in the case of the algorithm
+whose running time grows exponentially. If you look at its plot on a
+graph, the curve for the algorithm whose time is proportional to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mi>n</mi></msup><annotation encoding="application/x-tex">2^n</annotation></semantics></math>
+goes up very quickly as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+grows. The increase in problem size on the machine ten times as fast is
+about
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>+</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">n + 3</annotation></semantics></math>
+(to be precise, it is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>+</mo><msub><mo>log</mo><mn>2</mn></msub><mn>10</mn></mrow><annotation encoding="application/x-tex">n + \log_2 10</annotation></semantics></math>).
+The increase in problem size for an algorithm with exponential growth
+rate is by a constant addition, not by a multiplicative factor. Because
+the old value of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+was 13, the new problem size is 16. If next year you buy another
+computer ten times faster yet, then the new computer (100 times faster
+than the original computer) will only run a problem of size 19. If you
+had a second program whose growth rate is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mi>n</mi></msup><annotation encoding="application/x-tex">2^n</annotation></semantics></math>
+and for which the original computer could run a problem of size 1000 in
+an hour, than a machine ten times faster can run a problem only of size
+1003 in an hour! Thus, an exponential growth rate is radically different
+than the other growth rates shown in the table. The significance of this
+difference is an important topic in <a href="10-glossary.html#computational-complexity-theory" class="term">computational
+complexity theory</a>.</p>
+<p>Instead of buying a faster computer, consider what happens if you
+replace an algorithm whose running time is proportional to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>n</mi><mn>2</mn></msup><annotation encoding="application/x-tex">n^2</annotation></semantics></math>
+with a new algorithm whose running time is proportional to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>log</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">n \log n</annotation></semantics></math>.
+In a graph relating growth rate functions to input size, a fixed amount
+of time would appear as a horizontal line. If the line for the amount of
+time available to solve your problem is above the point at which the
+curves for the two growth rates in question meet, then the algorithm
+whose running time grows less quickly is faster. An algorithm with
+running time
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐓</mi><mi>n</mi><mo>=</mo><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\mathbf{T}n=n^2</annotation></semantics></math>
+requires
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1024</mn><mo>×</mo><mn>1024</mn><mo>=</mo><mn>1</mn><mo>,</mo><mn>048</mn><mo>,</mo><mn>576</mn></mrow><annotation encoding="application/x-tex">1024 \times 1024 = 1,048,576</annotation></semantics></math>
+time steps for an input of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>1024</mn></mrow><annotation encoding="application/x-tex">n=1024</annotation></semantics></math>.
+An algorithm with running time
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐓</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>n</mi><mo>log</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">\mathbf{T}(n) = n \log n</annotation></semantics></math>
+requires
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1024</mn><mo>×</mo><mn>10</mn><mo>=</mo><mn>10</mn><mo>,</mo><mn>240</mn></mrow><annotation encoding="application/x-tex">1024 \times 10 = 10,240</annotation></semantics></math>
+time steps for an input of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>1024</mn></mrow><annotation encoding="application/x-tex">n = 1024</annotation></semantics></math>,
+which is an improvement of much more than a factor of ten when compared
+to the algorithm with running time
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐓</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\mathbf{T}(n) = n^2</annotation></semantics></math>.
+Because
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>n</mi><mn>2</mn></msup><mo>&gt;</mo><mn>10</mn><mi>n</mi><mo>log</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">n^2 &gt; 10 n \log n</annotation></semantics></math>
+whenever
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>&gt;</mo><mn>58</mn></mrow><annotation encoding="application/x-tex">n &gt; 58</annotation></semantics></math>,
+if the typical problem size is larger than 58 for this example, then you
+would be much better off changing algorithms instead of buying a
+computer ten times faster. Furthermore, when you do buy a faster
+computer, an algorithm with a slower growth rate provides a greater
+benefit in terms of larger problem size that can run in a certain time
+on the new computer.</p>
+<p>
+<div id="FasterCorASumm" class="embedContainer">
+<iframe id="FasterCorASumm_iframe" aria-label="FasterCorASumm" src="../interactive/AlgAnal/FasterCorASumm.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</section>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Cliff Shaffer" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Nick Smallbone" />
+  <title>DSABook – Introduction</title>
+  <style>
+    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
+    span.navlink { flex: 1; }
+    span.navlink-label { display: inline-block; min-width: 4em; }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../bookstyle.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+      },
+      "HTML-CSS": {
+        scale: "80",
+      }
+    });
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+</head>
+<body>
+<nav id="sitenav">
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Up:</span> <a href="index.html" accesskey="u" rel="up">Data Structures and Algorithms</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
+</span>
+</div>
+<div class="sitenav">
+<span class="navlink">
+<span class="navlink-label">Next:</span> <a href="1.1-selecting-a-data-structure.html" accesskey="n" rel="next">Selecting a Data Structure</a>
+</span>
+<span class="navlink">
+<span class="navlink-label">Previous:</span> <a href="index.html" accesskey="p" rel="previous">Data Structures and Algorithms</a>
+</span>
+</div>
+</nav>
+<section id="introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span>
+Introduction</h1>
+<p>How many cities with more than 250,000 people lie within 500 miles of
+Dallas, Texas? How many people in my company make over $100,000 per
+year? Can we connect all of our telephone customers with less than 1,000
+miles of cable? To answer questions like these, it is not enough to have
+the necessary information. We must organize that information in a way
+that allows us to find the answers in time to satisfy our needs.</p>
+<p>Representing information is fundamental to computer science. The
+primary purpose of most computer programs is not to perform
+calculations, but to store and retrieve information – usually as fast as
+possible. For this reason, the study of data structures and the
+algorithms that manipulate them is at the heart of computer science. And
+that is what this book is about – helping you to understand how to
+structure information to support efficient processing.</p>
+<p>Any course on Data Structures and Algorithms will try to teach you
+about three things:</p>
+<ol type="1">
+<li>It will present a collection of commonly used data structures and
+algorithms. These form a programmer’s basic “toolkit”. For many
+problems, some data structure or algorithm in the toolkit will provide a
+good solution. We focus on data structures and algorithms that have
+proven over time to be most useful.</li>
+<li>It will introduce the idea of tradeoffs, and reinforce the concept
+that there are costs and benefits associated with every data structure
+or algorithm. This is done by describing, for each data structure, the
+amount of space and time required for typical operations. For each
+algorithm, we examine the time required for key input types.</li>
+<li>It will teach you how to measure the effectiveness of a data
+structure or algorithm. Only through such measurement can you determine
+which data structure in your toolkit is most appropriate for a new
+problem. The techniques presented also allow you to judge the merits of
+new data structures that you or others might invent.</li>
+</ol>
+<p>There are often many approaches to solving a problem. How do we
+choose between them? At the heart of computer program design are two
+(sometimes conflicting) goals:</p>
+<ol type="1">
+<li>To design an algorithm that is easy to understand, code, and
+debug.</li>
+<li>To design an algorithm that makes efficient use of the computer’s
+resources.</li>
+</ol>
+<p>Ideally, the resulting program is true to both of these goals. We
+might say that such a program is “elegant.” While the algorithms and
+program code examples presented here attempt to be elegant in this
+sense, it is not the purpose of this book to explicitly treat issues
+related to goal (1). These are primarily concerns for the discipline of
+Software Engineering. Rather, we mostly focus on issues relating to goal
+(2).</p>
+<p>How do we measure efficiency? Our method for evaluating the
+efficiency of an algorithm or computer program is called <a href="10-glossary.html#asymptotic-analysis" class="term">asymptotic analysis</a>. Asymptotic analysis also gives
+a way to define the inherent difficulty of a problem. Throughout the
+book we use asymptotic analysis techniques to estimate the time cost for
+every algorithm presented. This allows you to see how each algorithm
+compares to other algorithms for solving the same problem in terms of
+its efficiency.</p>
+<section id="a-philosophy-of-data-structures" class="level3 unnumbered">
+<h3 class="unnumbered">A Philosophy of Data Structures</h3>
+<p>You might think that with ever more powerful computers, program
+efficiency is becoming less important. After all, processor speed and
+memory size still continue to improve. Won’t today’s efficiency problem
+be solved by tomorrow’s hardware?</p>
+<p>As we develop more powerful computers, our history so far has always
+been to use that additional computing power to tackle more complex
+problems, be it in the form of more sophisticated user interfaces,
+bigger problem sizes, or new problems previously deemed computationally
+infeasible. More complex problems demand more computation, making the
+need for efficient programs even greater. Unfortunately, as tasks become
+more complex, they become less like our everyday experience. So today’s
+computer scientists must be trained to have a thorough understanding of
+the principles behind efficient program design, because their ordinary
+life experiences often do not apply when designing computer
+programs.</p>
+<p>In the most general sense, a <a href="10-glossary.html#data-structure" class="term">data structure</a>
+is any data representation and its associated operations. Even an
+integer or floating point number stored on the computer can be viewed as
+a simple data structure. More commonly, people use the term “data
+structure” to mean an organization or structuring for a collection of
+data items. A sorted list of integers stored in an array is an example
+of such a structuring. These ideas are explored further in a discussion
+of <a href="1.2-abstract-data-types.html#abstract-data-types">Abstract
+Data Types</a>.</p>
+<p>Given sufficient space to store a collection of <a href="10-glossary.html#data-item" class="term">data item</a>s, it is always possible to search for
+specified items within the collection, print or otherwise process the
+data items in any desired order, or modify the value of any particular
+data item. The most obvious example is an unsorted array containing all
+of the data items. It is possible to perform all necessary operations on
+an unsorted array. However, using the proper data structure can make the
+difference between a program running in a few seconds and one requiring
+many days. For example, searching for a given record in a <a href="10-glossary.html#hash-table" class="term">hash table</a> is much faster than searching for it in
+an unsorted array.</p>
+<p>A solution is said to be <a href="10-glossary.html#efficient" class="term">efficient</a> if it
+solves the problem within the required <a href="10-glossary.html#resource-constraints" class="term">resource
+constraints</a>. Examples of resource constraints include the total
+space available to store the data – possibly divided into separate main
+memory and disk space constraints – and the time allowed to perform each
+subtask. A solution is sometimes said to be efficient if it requires
+fewer resources than known alternatives, regardless of whether it meets
+any particular requirements. The <a href="10-glossary.html#cost" class="term">cost</a> of a
+solution is the amount of resources that the solution consumes. Most
+often, cost is measured in terms of one key resource such as time, with
+the implied assumption that the solution meets the other resource
+constraints.</p>
+</section>
+</section>
+</body>
+</html>
