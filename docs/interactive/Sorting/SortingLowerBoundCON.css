@@ -1,0 +1,36 @@
+#SortingLowerBoundCON {
+  height: 550px;
+}
+
+#SortingLowerBoundCON .rotated {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+#SortingLowerBoundCON .greenNode{
+  fill: green; 
+  opacity: 0.5 !important;
+}
+
+#SortingLowerBoundCON .redNode{
+  fill: red; 
+  opacity: 0.5 !important; 
+}
+
+#SortingLowerBoundCON .smallLabel{
+  font-size: 12px; 
+  text-align: center;
+}
+
+#SortingLowerBoundCON .mediumLabel{
+  font-size: 16px; 
+  text-align: center;   
+}
+
+#SortingLowerBoundCON orangeFill{
+  fill: orange; 
+  opacity: 0.5 !important;
+}

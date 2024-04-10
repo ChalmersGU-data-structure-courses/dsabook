@@ -1,0 +1,84 @@
+<!--
+    Linked List Deletion mini-proficiency exercise.
+    Written by Junyang Chen and Cliff Shaffer
+  -->
+
+<!DOCTYPE html>
+<html data-require="jsav math LinkedList-Remove-PRO LinkList">
+  <head>
+    <title>Linked List Deletion Proficiency Exercise</title>
+    <script src="../../lib/require-2.1.14.min.js"></script>
+    <script src="../../khan-exercises/local-only/main.js" ></script>
+    <style>
+      #LinkedList-Remove-PRO .bgColor {
+        font-size: 130%;
+        background-color: yellow;
+      }
+      #LinkedList-Remove-PRO .hidePointerArea .jsavlistnode {
+        padding: 0;
+      }
+      #LinkedList-Remove-PRO .hidePointerArea .jsavpointerarea {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body data-height="700" data-width="950">
+
+    <div class="exercise">
+      <div class="vars">
+        <var id="arr_size">Khan.randRange(5, 7)</var>
+        <var id="curr_pos">Khan.randRange(1, arr_size-2)</var>
+        <var id="JSAV">LinkedListRemovePRO.initJSAV(arr_size, curr_pos)</var>
+      </div>
+
+      <div class="problems">
+        <div id="LinkedList-Remove-PROp"> <!-- Supresses answer box -->
+          <p class="problem">Your task in this exercise is to show the
+            behavior for Linked list deletion. You must delete the element
+            in the given position.
+          </p>
+          <div class="question">
+            <p> To move an element value from one node to another, click on it (to
+              highlight it), then click on the element position in the node where
+              you want it to go.
+              Do the same to set the "return" value – click on an element (to highlight it),
+              and then click on the return box to set it to the highlighted value.
+              You can make a node's "next" pointer point to "null" by
+              first clicking the pointer for the node and then
+              clicking the "Make Null" button.
+            </p>
+            <p> To change a pointer, click on its box (on the right
+              side of the node) to highlight it, then click on the node that you
+              want it to point to.
+              Note that you can you can only assign pointers to nodes that are visible to the algorithm!
+              The visible nodes are new nodes, and the one pointed to by <b>prev</b>, and their successors.
+              To move the <b>prev</b> pointer forward, click the "Move Forward" button.
+            </p>
+            <input id="reset" type="button" value="Reset" />
+            <input id="MoveForward" type="button" value="Move Forward" />
+            <input id="MakeNull" type="button" value="Make Null" />
+            <div id="LinkedList-Remove-PRO" class="jsavcanvas"></div>
+          </div>
+          <div class="solution" data-type="custom">
+            <div class="guess"> [LinkedListRemovePRO.userInput] </div>
+            <div class="validator-function">
+              if (!LinkedListRemovePRO.checkAnswer(arr_size, curr_pos) && !guess[0]) {
+                return ""; // User did not click, and correct answer is not
+                           // initial array state
+              } else {return LinkedListRemovePRO.checkAnswer(arr_size, curr_pos);}
+            </div>
+          </div>
+          <div class="hints">
+            <p>Point the prev pointer to the node <em>before</em> the node
+              where you want to insert the value.</p>
+            <p>Now you can copy the value to delete to the return box.</p>
+            <p>Finally, you have to redirect the <b>next</b> pointer for the <b>prev</b>.</p>
+            <p>And don't forget to set the pointer of the node to be deleted to null
+              (for garbage collection).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

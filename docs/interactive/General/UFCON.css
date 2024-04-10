@@ -1,0 +1,21 @@
+#UFfigCON  .jsavcanvas{
+  height: 360px;
+}
+
+#UFconcomCON {
+  height: 250px;
+}
+
+#ufCON .jsavcode{
+  margin-top: 20px;
+  margin-left: 50px;
+  width: 520px;
+}
+
+#pathcompCON {
+  height: 455px;
+}
+
+#pathcompCON .jsavoutput.jsavline {
+  height: 60px;
+}

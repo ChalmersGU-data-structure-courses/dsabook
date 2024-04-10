@@ -1,0 +1,15 @@
+.jsavindex.jsavarrow.leftarrow::before {
+  border-color: blue transparent transparent;
+}
+
+.jsavindex.jsavarrow.rightarrow::before {
+  border-color: red transparent transparent;
+}
+
+.jsavindex.jsavarrow.leftrightarrow::before {
+  border-color: #CC00FF transparent transparent;
+}
+
+.jsavindex.jsavarrow::before {
+  left: 9px;
+}

@@ -1,0 +1,47 @@
+#aqueueFirstCON {
+  height: 225px;
+}
+
+#aqueueFirstCON .jsavoutput.jsavline {
+  height: 40px;
+}
+
+#aqueueDriftCON {
+  height: 250px;
+}
+
+#aqueueDriftCON .jsavoutput.jsavline {
+  height: 60px;
+}
+
+#aqueueBadCON {
+  height: 250px;
+}
+
+#aqueueBadCON .jsavoutput.jsavline {
+  height: 55px;
+}
+
+#aqueueCircularCON {
+  height: 420px;
+}
+
+#aqueueCircularCON .jsavoutput.jsavline {
+  height: 50px;
+}
+
+#aqueueEmptyCON {
+  height: 380px;
+}
+
+#aqueueEmptyCON .jsavoutput.jsavline {
+  height: 70px;
+}
+
+#aqueueVarCON {
+  height: 410px;
+}
+
+#aqueueVarCON .jsavoutput.jsavline {
+  height: 30px;
+}

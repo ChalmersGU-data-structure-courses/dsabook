@@ -1,0 +1,6 @@
+
+# Don't include files/directories starting with "_local" or "_private"
+_local*
+_private*
+
+
