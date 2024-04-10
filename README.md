@@ -24,3 +24,15 @@ just run the bash script `make.sh`.
 It will build HTML files in the directory `docs/html`. 
 This is the only directory that will be updated by the script.
 
+### Testing the website
+
+Most of the interactive exercises need to be on a webserver to work.
+Simplest is to start one inside the `docs` directory:
+```
+cd docs
+python -m http.server
+```
+
+And then browse to <https://localhost:8000/>.
+
+
