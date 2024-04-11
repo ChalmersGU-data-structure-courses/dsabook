@@ -178,8 +178,8 @@ program.</p>
 <p>The term <a href="10-glossary.html#data-structure" class="term">data structure</a> often refers to
 data stored in a computer’s main memory. The related term <a href="10-glossary.html#file-structure" class="term">file structure</a> often refers to the organization of
 data on peripheral storage, such as a disk drive or CD.</p>
-<section id="example" class="level4 unnumbered topic">
-<h4 class="unnumbered">Example</h4>
+<section id="example-a" class="level4 unnumbered topic">
+<h4 class="unnumbered">Example A</h4>
 <p>The mathematical concept of an integer, along with operations that
 manipulate integers, form a data type. The <code>int</code> variable
 type is a physical representation of the abstract integer. The
@@ -192,8 +192,8 @@ unacceptable, then some other representation for the ADT “integer” must
 be devised, and a new implementation must be used for the associated
 operations.</p>
 </section>
-<section id="example-1" class="level4 unnumbered topic">
-<h4 class="unnumbered">Example</h4>
+<section id="example-b" class="level4 unnumbered topic">
+<h4 class="unnumbered">Example B</h4>
 <p>An ADT for a list of integers might specify the following
 operations:</p>
 <ol type="1">
@@ -217,8 +217,8 @@ implementation could be efficient for small datasets (thousands of
 elements), while another implementation is more efficient for large
 datasets (millions of elements). Therefore there is usually a need for
 several different implementations of the same ADT.</p>
-<section id="example-2" class="level4 unnumbered topic">
-<h4 class="unnumbered">Example</h4>
+<section id="example-c" class="level4 unnumbered topic">
+<h4 class="unnumbered">Example C</h4>
 <p>Two popular implementations for large disk-based database
 applications are <a href="8-hashing.html#hashing">hashing</a> and the
 <a href="10-glossary.html#b-tree" class="term">B-tree</a>. Both support efficient insertion and
@@ -234,8 +234,8 @@ updating and searching a large collection of records.</p>
 </section>
 <p>The concept of an ADT can help us to focus on key issues even in
 non-computing applications.</p>
-<section id="example-3" class="level4 unnumbered topic">
-<h4 class="unnumbered">Example</h4>
+<section id="example-d" class="level4 unnumbered topic">
+<h4 class="unnumbered">Example D</h4>
 <p>When operating a car, the primary activities are steering,
 accelerating, and braking. On nearly all passenger cars, you steer by
 turning the steering wheel, accelerate by pushing the gas pedal, and
@@ -259,8 +259,8 @@ related to other pieces of information or other labels. This collection
 can in turn be given a label, forming a hierarchy of concepts and
 labels. This hierarchy of labels allows us to focus on important issues
 while ignoring unnecessary details.</p>
-<section id="example-4" class="level4 unnumbered topic">
-<h4 class="unnumbered">Example</h4>
+<section id="example-e" class="level4 unnumbered topic">
+<h4 class="unnumbered">Example E</h4>
 <p>We apply the label “hard drive” to a collection of hardware that
 manipulates data on a particular type of storage device, and we apply
 the label “CPU” to the hardware that controls execution of computer
@@ -277,8 +277,8 @@ think in terms of operations on the data type without concern for the
 data structure’s implementation. Without this ability to simplify your
 thinking about a complex program, you would have no hope of
 understanding or implementing it.</p>
-<section id="example-5" class="level4 unnumbered topic">
-<h4 class="unnumbered">Example</h4>
+<section id="example-f" class="level4 unnumbered topic">
+<h4 class="unnumbered">Example F</h4>
 <p>Consider the design for a relatively simple database system stored on
 disk. Typically, records on disk in such a program are accessed through
 a <a href="10-glossary.html#buffer-pool" class="term">buffer pool</a> rather than directly. Variable
@@ -312,7 +312,8 @@ associated data type’s logical form. Some sections of this book focus on
 physical implementations for a given data structure. Other sections use
 the logical ADT for the data structure in the context of a higher-level
 task.</p>
-<div id="DataType">
+<section id="figure-g" class="level4 unnumbered topic">
+<h4 class="unnumbered">Figure G</h4>
 <p>
 <div id="ADTCON" class="ssAV" data-short-name="ADTCON" data-long-name="Design/ADTCON" alt="Design/ADTCON" tabIndex="-1">
 <div class="jsavcanvas"></div>
@@ -320,7 +321,7 @@ task.</p>
 </p>
 <p>The relationship between data items, abstract data types, and data
 structures.</p>
-</div>
+</section>
 <p>As we saw, the ADT defines the logical form of the data type, while
 the data structure implements the physical form of the data type. Users
 of an ADT are typically programmers working in the same language as the
@@ -329,8 +330,8 @@ as a component in another application. The interface to an ADT is also
 commonly referred to as the Application Programmer Interface, or API,
 for the ADT. The interface becomes a form of communication between two
 programmers.</p>
-<section id="example-6" class="level4 unnumbered topic">
-<h4 class="unnumbered">Example</h4>
+<section id="example-h" class="level4 unnumbered topic">
+<h4 class="unnumbered">Example H</h4>
 <p>A particular programming environment might provide a library that
 includes a <a href="10-glossary.html#list" class="term">list</a> class. The logical form of the
 list is defined by the public functions, their inputs, and their outputs

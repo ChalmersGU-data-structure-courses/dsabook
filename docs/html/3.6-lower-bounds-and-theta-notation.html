@@ -230,7 +230,7 @@ href="#fn1" class="footnote-ref" id="fnref1"
 role="doc-noteref"><sup>1</sup></a></p>
 </blockquote>
 <div id="AAnalEx">
-<section id="example-13" class="level4 unnumbered topic">
+<section id="example-6" class="level4 unnumbered topic">
 <h4 class="unnumbered">Example</h4>
 <p>Assume
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐓</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msub><mi>c</mi><mn>1</mn></msub><msup><mi>n</mi><mn>2</mn></msup><mo>+</mo><msub><mi>c</mi><mn>2</mn></msub><mi>n</mi></mrow><annotation encoding="application/x-tex">\mathbf{T}(n) = c_1 n^2 + c_2 n</annotation></semantics></math>
@@ -390,7 +390,7 @@ because
 grows faster. If the limit goes to some constant other than zero, then
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(n) = \Theta(g(n))</annotation></semantics></math>
 because both grow at the same rate.</p>
-<section id="example-14" class="level4 unnumbered topic">
+<section id="example-7" class="level4 unnumbered topic">
 <h4 class="unnumbered">Example</h4>
 <p>If
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">f(n) = n^2</annotation></semantics></math>
@@ -478,8 +478,13 @@ for
 Motivation for this alternate definition can be found in the following
 example.</p>
 <p>Assume a particular algorithm has the following behavior:</p>
-<p>mathbf{T}(n) = left{ begin{array}{ll} n &amp; mbox{for all odd}n geq
-1\ n^2/100 &amp; mbox{for all even}n geq 0 end{array} right.</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐓</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mrow><mo stretchy="true" form="prefix">{</mo><mtable><mtr><mtd columnalign="left" style="text-align: left"><mi>n</mi></mtd><mtd columnalign="left" style="text-align: left"><mtext mathvariant="normal">for all odd</mtext><mspace width="0.222em"></mspace><mi>n</mi><mo>≥</mo><mn>1</mn></mtd></mtr><mtr><mtd columnalign="left" style="text-align: left"><msup><mi>n</mi><mn>2</mn></msup><mi>/</mi><mn>100</mn></mtd><mtd columnalign="left" style="text-align: left"><mtext mathvariant="normal">for all even</mtext><mspace width="0.222em"></mspace><mi>n</mi><mo>≥</mo><mn>0</mn></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+\mathbf{T}(n) = \left\{ \begin{array}{ll}
+n  &amp; \mbox{for all odd}\ n \geq 1\\
+n^2/100 &amp; \mbox{for all even}\ n \geq 0
+\end{array}
+\right.
+</annotation></semantics></math></p>
 <p>From this definition,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>n</mi><mn>2</mn></msup><mi>/</mi><mn>100</mn><mo>≥</mo><mfrac><mn>1</mn><mn>100</mn></mfrac><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">n^2/100 \geq \frac{1}{100} n^2</annotation></semantics></math>
 for all even
