@@ -2,9 +2,9 @@
 ## Asymptotic Analysis and Upper Bounds
 
 :::: {#RunTimeGraph2}
-<inlineav id="GrowthRatesCON" src="AlgAnal/GrowthRatesCON.js" script="DataStructures/Plot.js" name="DataStructures/Plot.js AlgAnal/GrowthRatesCON" links="AlgAnal/GrowthRatesCON.css" static/>
+<inlineav id="GrowthRatesCON" src="AlgAnal/GrowthRatesCON.js" script="DataStructures/Plot.js" name="DataStructures/Plot.js AlgAnal/GrowthRatesCON" links="AlgAnal/GrowthRatesCON.css" height="450px" static/>
 
-<inlineav id="GrowthRatesZoomCON" src="AlgAnal/GrowthRatesZoomCON.js" script="DataStructures/Plot.js" name="DataStructures/Plot.js AlgAnal/GrowthRatesZoomCON" links="AlgAnal/GrowthRatesZoomCON.css" static/>
+<inlineav id="GrowthRatesZoomCON" src="AlgAnal/GrowthRatesZoomCON.js" script="DataStructures/Plot.js" name="DataStructures/Plot.js AlgAnal/GrowthRatesZoomCON" links="AlgAnal/GrowthRatesZoomCON.css" height="420px" static/>
 
 Two views of a graph illustrating the growth rates for six equations.
 The bottom view shows in detail the lower-left portion of the top view.
@@ -204,9 +204,6 @@ $n$.
 From now on, we will use these simplifying rules when discussing the
 cost for a program or algorithm.
 
-::: only
-CS2
-
 ### Tight Bounds
 
 The definition for big-Oh allows us to greatly overestimate the cost for
@@ -222,15 +219,12 @@ have sufficient knowledge about an algorithm to be sure that we know the
 cost to within a constant factor. OpenDSA modules use $\Theta$ notation
 in preference to big-Oh notation whenever our state of knowledge makes
 that possible.
-:::
 
 ### Summary
 
-<inlineav id="UpperBoundCON" src="AlgAnal/UpperBoundCON.js" name="Upper Bounds visualization" links="AlgAnal/UpperBoundCON.css"/>
+<inlineav id="UpperBoundCON" src="AlgAnal/UpperBoundCON.js" name="Upper Bounds visualization" links="AlgAnal/UpperBoundCON.css" height="500px"/>
 
-| 
-
-<inlineav id="SimpleCostsCON" src="AlgAnal/SimpleCostsCON.js" name="AlgAnal/SimpleCostsCON" links="AlgAnal/SimpleCostsCON.css"/>
+<inlineav id="SimpleCostsCON" src="AlgAnal/SimpleCostsCON.js" name="AlgAnal/SimpleCostsCON" links="AlgAnal/SimpleCostsCON.css" height="900px" static/>
 
 ### Practice Questions
 
