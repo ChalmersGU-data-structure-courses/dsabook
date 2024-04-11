@@ -77,7 +77,7 @@ data stored in a computer's main memory. The related term
 organization of data on peripheral storage, such as a disk drive or CD.
 
 ::: topic
-#### Example {-}
+#### Example A {-}
 
 The mathematical concept of an integer, along with operations that
 manipulate integers, form a data type. The `int` variable type is a
@@ -91,7 +91,7 @@ new implementation must be used for the associated operations.
 :::
 
 ::: topic
-#### Example {-}
+#### Example B {-}
 
 An ADT for a list of integers might specify the following operations:
 
@@ -118,7 +118,7 @@ datasets (millions of elements). Therefore there is usually a need for
 several different implementations of the same ADT.
 
 ::: topic
-#### Example {-}
+#### Example C {-}
 
 Two popular implementations for large disk-based database applications
 are [hashing] and
@@ -138,7 +138,7 @@ The concept of an ADT can help us to focus on key issues even in
 non-computing applications.
 
 ::: topic
-#### Example {-}
+#### Example D {-}
 
 When operating a car, the primary activities are steering, accelerating,
 and braking. On nearly all passenger cars, you steer by turning the
@@ -166,7 +166,7 @@ hierarchy of labels allows us to focus on important issues while
 ignoring unnecessary details.
 
 ::: topic
-#### Example {-}
+#### Example E {-}
 
 We apply the label "hard drive" to a collection of hardware that
 manipulates data on a particular type of storage device, and we apply
@@ -187,7 +187,7 @@ thinking about a complex program, you would have no hope of
 understanding or implementing it.
 
 ::: topic
-#### Example {-}
+#### Example F {-}
 
 Consider the design for a relatively simple database system stored on
 disk. Typically, records on disk in such a program are accessed through
@@ -222,7 +222,9 @@ on physical implementations for a given data structure. Other sections
 use the logical ADT for the data structure in the context of a
 higher-level task.
 
-:::: {#DataType}
+:::: topic
+#### Figure G {-}
+
 <inlineav id="ADTCON" src="Design/ADTCON.js" name="Design/ADTCON" links="Design/ADTCON.css" static/>
 
 The relationship between data items, abstract data types, and data
@@ -239,7 +241,7 @@ for the ADT. The interface becomes a form of communication between two
 programmers.
 
 ::: topic
-#### Example {-}
+#### Example H {-}
 
 A particular programming environment might provide a library that
 includes a [list]{.term} class. The logical form
