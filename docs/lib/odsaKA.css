@@ -25,6 +25,7 @@ div.exercises-card {
 
 body {
   min-width: 0;
+  background-color: #ffe;  /* same color as in bookstyle.css */
 }
 
 #page-container {

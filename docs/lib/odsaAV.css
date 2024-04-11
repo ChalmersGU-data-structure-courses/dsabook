@@ -551,11 +551,10 @@ form {
 
 /* Style for the div containing the entire AV or exercise */
 #container {
-
-  /*border: 1px solid black;
-  background-color: #efe;*/
-  border: 1px solid #B6C0B2;
-  background-color: #E2EEDD;
+  border: none;
+  background-color: transparent;
+  /* border: 1px solid #B6C0B2;
+  background-color: #E2EEDD; */
   padding: 5px;
   overflow: hidden;
 }

@@ -88,10 +88,6 @@ svg {
     max-width: 100%;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    margin-top: 1.4em;
-}
-
 h5, h6 {
     font-size: 1em;
     font-style: italic;
@@ -130,8 +126,8 @@ code {
 div.sourceCode {
     border-radius: 10px;
     border: black 1px solid;
-    margin: 1em -1em;
-    background-color: #ffe;
+    margin: 1em 0;
+    background-color: #fee;
 }
 
 .sourceCode {
@@ -228,18 +224,18 @@ div.hanging-indent {
     text-indent: -1.5em;
 }
 
-.topic {
+.topic, div.embedContainer, div.jsavcontainer {
     border-radius: 10px;
     border: black 1px solid;
-    background-color: lightgoldenrodyellow;
-    margin: 1em -1em;
+    background-color: #ffe;
+    margin: 1em 0;
     padding: 0 1em;
 }
 
-.topic > :first-child {
-    margin-top: 1em;
+.topic .jsavcontainer {
+    background-color: transparent;
+    border: none;
 }
-
 
 .term, .term:visited {
     color: darkgreen;
