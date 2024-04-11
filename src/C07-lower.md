@@ -45,8 +45,13 @@ $\Omega$ is symmetric with the definition of big-Oh.
 
     Assume a particular algorithm has the following behavior:
 
-    mathbf{T}(n) = left{ begin{array}{ll} n & mbox{for all odd}n geq 1\\
-    n\^2/100 & mbox{for all even}n geq 0 end{array} right.
+    $$
+    \mathbf{T}(n) = \left\{ \begin{array}{ll}
+    n  & \mbox{for all odd}\ n \geq 1\\
+    n^2/100 & \mbox{for all even}\ n \geq 0
+    \end{array}
+    \right.
+    $$
 
     From this definition, $n^2/100 \geq \frac{1}{100} n^2$ for all even
     $n \geq 0$. So, $\mathbf{T}(n) \geq c n^2$ for an infinite number of
