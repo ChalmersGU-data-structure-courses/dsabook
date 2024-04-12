@@ -24,36 +24,32 @@ classes which act as interfaces, and call them abstract classes.
 ### Basic Abstract Data Types
 
 These include comparables:
-```python
-# Note: by implementing these methods,
-# one can use the standard Python comparison operators (==, !=, <, <=, >, >=).
+```pseudo
 class Comparable:
-    def __eq__(self, other): """Test if self == other."""
-    def __ne__(self, other): """Test if self != other."""
-    def __lt__(self, other): """Test if self < other."""
-    def __le__(self, other): """Test if self <= other."""
-    def __gt__(self, other): """Test if self > other."""
-    def __ge__(self, other): """Test if self >= other."""
+    // Note: all of these operators return a boolean.
+    this == other  
+    this != other  
+    this < other   
+    this <= other  
+    this > other   
+    this >= other  
 ```
 
 And iterators and iterables:
-```python
-# Note: by implementing these methods,
-# one can loop over the elements in a standard Python for-loop.
+```pseudo
 class Iterator:
-    def __iter__(self): """Returns the iterator itself."""
-    def __next__(self): """Returns the next item. Raises StopIteration if there are no more elements."""
+    next():    """Returns the next item."""
+    hasNext(): """Returns true if there are more elements."""
 
 class Iterable:
-    def __iter__(self): """Returns a new iterator."""
+    iter():    """Returns a new iterator."""
 ```
 
 As well as collections:
-```python
-class Collection(Iterable):
-    def isEmpty(self):  """Returns true if the collection is empty."""
-    def size(self):     """Returns the number of elements in this collection."""
-```
+
+    class Collection extends Iterable:
+        isEmpty():  // Returns true if the collection is empty.
+        size():     // Returns the number of elements in this collection.
 
 ### Lists
 

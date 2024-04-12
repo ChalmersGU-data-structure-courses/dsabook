@@ -354,22 +354,23 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a hr
 <span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Return the top 100 transactions.</span></span>
 <span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> top100():</span>
 <span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pq.iterator()</span></code></pre></div>
-<pre class="pseudocode"><code>class Top100Transactions
-    // Assume that the Transaction class implements comparisons
-    // by comparing the value of the transaction.
-    pq : PriorityQueue(Transaction) = new MinHeap()
-
-    // Add a new transaction to the priority queue.
-    add(transaction:Transaction)
-        pq.add(transaction)
-        // If the priority queue grows to 101 transactions,
-        // cut it down to 100 by removing the smallest-valued one.
-        if pq.size() &gt; 100
-            pq.removeMin()
-
-    // Return the top 100 transactions.
-    top100() : Iterator(Transaction)
-        return pq.iterator()</code></pre>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode pseudocode"><code class="sourceCode pseudo"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Top100Transactions</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Assume that the Transaction class implements comparisons</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// by comparing the value of the transaction.</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    pq : PriorityQueue(Transaction) <span class="op">=</span> <span class="kw">new</span> MinHeap()</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Add a new transaction to the priority queue.</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    add(transaction:Transaction)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        pq.add(transaction)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="co">// If the priority queue grows to 101 transactions,</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        <span class="co">// cut it down to 100 by removing the smallest-valued one.</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> pq.size() <span class="op">&gt;</span> <span class="dv">100</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>            pq.removeMin()</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Return the top 100 transactions.</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    top100() : Iterator(Transaction)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pq.<span class="bu">iterator</span>()</span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre
 class="sourceCode java"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Top100Transactions <span class="op">{</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Assume that the Transaction class implements Comparable</span></span>

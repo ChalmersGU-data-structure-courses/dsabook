@@ -62,6 +62,11 @@ chunk-template: "%s-%i.html"
 # section-1.1-introduction.html. The characters / and \ are not allowed in chunk templates and will be ignored. 
 # The default is %s-%i.html.
 
+syntax-definitions: [pseudo.xml]
+# Instructs pandoc to load a KDE XML syntax definition file, which will be used for syntax highlighting 
+# of appropriately marked code blocks. This can be used to add support for new languages or to use altered
+# syntax definitions for existing languages. This option may be repeated to add multiple syntax definitions.
+
 indented-code-classes: [python]
 # Specify classes to use for indented code blocks–for example, perl,numberLines or haskell. 
 # Multiple classes may be separated by spaces or commas.

@@ -271,35 +271,36 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a hr
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> right_child_index(i):</span>
 <span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">2</span><span class="op">*</span>i<span class="op">+</span><span class="dv">2</span></span></code></pre></div>
-<pre class="pseudocode"><code>Algorithm 1 Heapsort(A)
-    // Convert the array to a heap
-    BuildHeap(A)
-
-    // Repeatedly find and remove the minimum element
-    heapsize = A.size
-    while heapsize &gt; 0
-        Swap(A[0], A[heapsize - 1])
-        heapsize -= 1
-        SiftDown(A, 0)
-
-// Standard sift-down method for max heaps
-Algorithm 2 SiftDown(A, i)
-    while Left-child-index(i) &lt; heapsize
-        l = Left-child-index(i)
-        r = Right-child-index(i)
-        if A[l] &gt; A[i]
-            largest = l
-        else
-            largest = i
-
-        if r &lt; heapsize and A[r] &gt; A[largest]
-            largest = r
-
-        if largest = i
-            return
-        else
-            Swap(A[i], A[largest])
-            i = largest</code></pre>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudocode"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Algorithm <span class="dv">1</span> Heapsort(A)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Convert the array to a heap</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    BuildHeap(A)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Repeatedly find and remove the minimum element</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    heapsize <span class="op">=</span> A.size</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> heapsize <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        Swap(A[<span class="dv">0</span>], A[heapsize <span class="op">-</span> <span class="dv">1</span>])</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        heapsize <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        SiftDown(A, <span class="dv">0</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">// Standard sift-down method for max heaps</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>Algorithm <span class="dv">2</span> SiftDown(A, i)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> Left<span class="op">-</span>child<span class="op">-</span>index(i) <span class="op">&lt;</span> heapsize</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        l <span class="op">=</span> Left<span class="op">-</span>child<span class="op">-</span>index(i)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        r <span class="op">=</span> Right<span class="op">-</span>child<span class="op">-</span>index(i)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> A[l] <span class="op">&gt;</span> A[i]</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>            largest <span class="op">=</span> l</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>            largest <span class="op">=</span> i</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> r <span class="op">&lt;</span> heapsize <span class="kw">and</span> A[r] <span class="op">&gt;</span> A[largest]</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>            largest <span class="op">=</span> r</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> largest <span class="op">=</span> i</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>            Swap(A[i], A[largest])</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>            i <span class="op">=</span> largest</span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre
 class="sourceCode java"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">void</span> <span class="fu">heapsort</span><span class="op">(</span><span class="dt">int</span><span class="op">[]</span> a<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Convert the array to a heap</span></span>
