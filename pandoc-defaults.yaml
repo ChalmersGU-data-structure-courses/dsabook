@@ -62,7 +62,7 @@ chunk-template: "%s-%i.html"
 # section-1.1-introduction.html. The characters / and \ are not allowed in chunk templates and will be ignored. 
 # The default is %s-%i.html.
 
-syntax-definitions: [pseudo.xml]
+syntax-definitions: [extra/pseudo.xml]
 # Instructs pandoc to load a KDE XML syntax definition file, which will be used for syntax highlighting 
 # of appropriately marked code blocks. This can be used to add support for new languages or to use altered
 # syntax definitions for existing languages. This option may be repeated to add multiple syntax definitions.
@@ -77,8 +77,7 @@ reference-location: document
 # the end of the current (top-level) block, the current section, or the document. The default is document.
 
 
-include-in-header:
-  - opendsa-header.html
+include-in-header: [extra/opendsa-header.html]
 # Include contents of FILE, verbatim, at the end of the header.
 # This can be used, for example, to include special CSS or JavaScript in HTML documents.
 
