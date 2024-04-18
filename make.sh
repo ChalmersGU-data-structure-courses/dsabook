@@ -9,7 +9,7 @@ time pandoc --defaults=pandoc-defaults.yaml --output=$OUT "${SOURCES[@]}"
 echo
 
 echo "Postprocessing output"
-time python postprocess.py
+time python extra/postprocess.py
 echo
 
 # Checking links using library: https://github.com/untitaker/hyperlink
