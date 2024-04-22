@@ -3,7 +3,7 @@ import re
 from pathlib import Path
 from html.parser import HTMLParser
 
-HTML = Path("docs/html")
+HTML = Path("./docs/html")
 
 def mkid(s: str):
     s = s.lower()
@@ -33,11 +33,11 @@ for f in HTML.glob("*.html"):
 # Animations and exercises from OpenDSA
 
 class MyTagParser(HTMLParser):
-    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]):
+    def handle_starttag(self, tag: str, attrs):
         self.tag = tag
         self.attrs = dict(attrs)
 
-def parse_tag(s: str) -> tuple[str, dict[str, str]]:
+def parse_tag(s: str):
     p = MyTagParser()
     p.feed(s)
     return (p.tag, p.attrs) # type: ignore
@@ -46,7 +46,7 @@ def parse_tag(s: str) -> tuple[str, dict[str, str]]:
 match_tag = re.compile(r"<(inlineav|avembed) [^<>]*/>")
 
 
-templates: dict[str, str] = {}
+templates = {}
 
 templates["avembed"] = """
 <div id="{id}" class="embedContainer">
@@ -72,8 +72,8 @@ templates["inlineav-static"] = """
 """
 
 
-scripts: list[str] = []
-links: list[str] = []
+scripts = []
+links = []
 
 def convert_interactive(s: str) -> str:
     tag, attrs = parse_tag(s)
@@ -106,3 +106,5 @@ for f in HTML.glob("*.html"):
         tag = f'<link href="../interactive/{ln}" rel="stylesheet" type="text/css"/>'
         s = re.sub(r"</head>", f'{tag}\n</head>', s)
     open(f, "w").write(s)
+
+import sidelinks

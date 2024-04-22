@@ -22,7 +22,6 @@ html {
 
 body {
     margin: 0 auto;
-    max-width: 900px;
     padding-left: 50px;
     padding-right: 50px;
     padding-top: 50px;
@@ -31,6 +30,33 @@ body {
     overflow-wrap: break-word;
     font-kerning: normal;
     text-align: justify;
+}
+
+section {
+    max-width: 900px;
+}
+
+.nav-scroll-header {
+    position: fixed;
+    width: 25%;
+}
+
+.nav-scroll {
+    overflow-y: scroll;
+    max-height: 80vh;
+    max-width: 80%;
+}
+
+.display-none {
+    display: none;
+}
+
+.nav-btn {
+    padding: 0;
+    margin: 0;
+    overflow: hidden; 
+    white-space: nowrap; 
+    text-overflow: ellipsis;
 }
 
 @media (max-width: 600px) {
