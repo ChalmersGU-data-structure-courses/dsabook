@@ -10,12 +10,23 @@ $(document).ready(function () {
     // Find the current, previous, and next anchors
     var previous = null;
     var next = null;
+    var top = null;
     var previousTitle = null;
     var nextTitle = null;
+    var topTitle = null;
 
     for (var i = 0; i < current.length; i++) {
         var a = current[i].href.split("#")[0].split("/").pop();
         var b = window.location.pathname.split("/").pop();
+
+        var bIsTop = b.match(/^\d+-/);
+    
+        // If it starts with a whole number followed by a -, it's a top-level section
+        if (a.match(/^\d+-/) && !bIsTop) {
+            top = current[i].href;
+            topTitle = current[i].innerText;
+        }
+
         console.log(a, b);
         if (a == b) {
             next = current[i + 1].href;
@@ -47,6 +58,8 @@ $(document).ready(function () {
     // Make the background white
     $(".nav-scroll").css("background-color", "white");
 
+    var topRow = $('#top-nav');
+
 
     var index = $("<a class=\"col-8\" >Table of Contents ⬈</a>");
     index.click(function () {
@@ -56,24 +69,13 @@ $(document).ready(function () {
     var rowI = $("<div class=\"row\"></div>");
     rowI.append(index);
 
-    // Add a botton to collapse the TOC
-    var button = $("<a class=\"col-8\">(hide)</a>");
-
-    button.click(function () {
-        $(toc).toggleClass("display-none");
-        if ($(toc).hasClass("display-none")) {
-            button.text("(show)");
-        } else {
-            button.text("(hide)");
-        }
-    });
-
     var row = $("<div class=\"row\"></div>");
-    row.append(button);
 
     $(".nav-scroll-header").prepend(row);
 
     $(".nav-scroll-header").prepend(rowI);
+
+    var toCopy = [];
 
     if (next !== null) {
         var bnext = $("<p class=\"col-10 nav-btn\">Next: <a href=\"" + next + "\">" + nextTitle + "</a></p>");
@@ -81,6 +83,7 @@ $(document).ready(function () {
         rowN.append(bnext);
 
         $(".nav-scroll-header").prepend(rowN);
+        toCopy.push(rowN);
     }
 
     if (previous !== null) {
@@ -89,17 +92,20 @@ $(document).ready(function () {
         rowP.append(bprev);
 
         $(".nav-scroll-header").prepend(rowP);
+        toCopy.push(rowP);
     }
 
-    // Hide everything except the index button if the screen is too small (actively)
-    $(window).resize(function () {
-        if ($(window).width() < 768) {
-            $(toc).addClass("display-none");
-            button.text("(show)");
-        } else {
-            $(toc).removeClass("display-none");
-            button.text("(hide)");
-        }
-    });
+    if (topTitle !== null) {
+        var btop = $("<p class=\"col-10 nav-btn\">Top: <a href=\"" + top + "\">" + topTitle + "</a></p>");
+        var rowT = $("<div class=\"row\"></div>");
+        rowT.append(btop);
+
+        $(".nav-scroll-header").prepend(rowT);
+        toCopy.push(rowT);
+    }
+
+    for (var i = toCopy.length - 1; i >= 0; i--) {
+        topRow.append(toCopy[i].clone());
+    }
 
 });
