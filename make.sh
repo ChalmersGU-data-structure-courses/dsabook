@@ -9,7 +9,7 @@ rm -rf $temp
 mkdir -p $temp/src
 
 echo "Preprocessing: src/*.md -> $temp/src/*.md"
-time python3 extra/preprocess.py $temp/src src/*.md
+time python3 extra/preprocess.py $temp/src src/X01-glossary.md src/*.md
 echo
 
 echo "Running pandoc: $temp/src/*.md -> $temp/html/*.html"
