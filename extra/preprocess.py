@@ -67,17 +67,20 @@ def read_glossary(contents: str) -> list[list[str]]:
 
 def print_glossary(glossary: list[list[str]]) -> str:
     """Print the glossary into a Markdown string: sorted and with #identifiers"""
+    def dfn(term: str) -> str: 
+        return f"[{term}]{{.dfn #{mkid(term)}}}"
+
     glosslist: list[str] = []
-    for gloss in list(glossary):
-        body = gloss.pop()
+    for term, *aliases, body in list(glossary):
+        dfnterm = dfn(term)
+        if aliases:
+            dfnterm += " (" + ", ".join(map(dfn, aliases)) + ")"
         glosslist.append(
-            " <br/> ".join(f"[{term}]{{.dfn #{mkid(term)}}}" for term in gloss) + 
-            "\n\n:   " + body.replace("\n", "\n    ")
+            f"{dfnterm}\n\n:   " + body.replace("\n", "\n    ")
         )
-        for alias in gloss[1:]:
+        for alias in aliases:
             glosslist.append(
-                f"[{alias}]{{.dfn}}" +
-                f"\n\n:   See [{gloss[0]}]{{.term}}"
+                f"[{alias}]{{.dfn}}\n\n:   See [{term}]{{.term}}"
             )
     glosslist.sort(key=str.casefold)
     return "\n\n" + "\n\n".join(glosslist) + "\n\n"
