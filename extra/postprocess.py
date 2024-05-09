@@ -1,39 +1,36 @@
 
 import re
+import sys
 from pathlib import Path
 from html.parser import HTMLParser
 
-HTML = Path("docs/html")
 
-def mkid(s: str):
-    s = s.lower()
-    s = s.replace("*", "-star").replace("+", "-plus")
-    s = re.sub(r"['‘’“”" r'"]', "", s)
-    s = re.sub(r"\W+", "-", s)
-    s = s.strip("-")
-    return s
-
-
-# Glossary stuff
-
-glossary: Path = next(HTML.glob("*-glossary.html"))
-
-s = open(glossary).read()
-s = re.sub(r'<dt>([^<>]+)</dt>', lambda m: f'<dt><dfn id="{mkid(m[1])}">{m[1]}</dfn></dt>', s)
-s = re.sub(r'<dd>[\s.…]*</dd>\s*', '', s)
-open(glossary, "w").write(s)
-
-for f in HTML.glob("*.html"):
-    s = open(f).read()
-    s = re.sub(r'<span\s+class="term">([^<>]+)</span>', lambda m: f'<a href="#{mkid(m[1])}" class="term">{m[1]}</a>', s)
-    s = re.sub(r'<a\s+href="#([^"]+)"\s+class="term">', lambda m: f'<a href="{glossary.name}#{m[1]}" class="term">', s)
-    open(f, "w").write(s)
+def main(outdir: str, *infiles: str):
+    """Postprocess each of the infiles and write their result in the outdir folder"""
+    for inf in infiles:
+        with open(inf) as IN:
+            contents = IN.read()
+        contents = postprocess(contents)
+        outf = Path(outdir) / Path(inf).name
+        with open(outf, "w") as OUT:
+            print(contents, file=OUT)
 
 
-# Animations and exercises from OpenDSA
+def postprocess(contents: str) -> str:
+    """Take a HTML string and return a HTML string"""
+    contents = convert_animations(contents)
+    return contents
+
+
+###############################################################################
+## Include code to make OpenDSA animations and exercises work
+
+# Matching pseudo-HTML tags for animations and exercises
+
+match_tag = re.compile(r"<(inlineav|avembed) [^<>]*/>")
 
 class MyTagParser(HTMLParser):
-    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]):
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str|None]]):
         self.tag = tag
         self.attrs = dict(attrs)
 
@@ -43,8 +40,7 @@ def parse_tag(s: str) -> tuple[str, dict[str, str]]:
     return (p.tag, p.attrs) # type: ignore
 
 
-match_tag = re.compile(r"<(inlineav|avembed) [^<>]*/>")
-
+# HTML templates for the different animations and exercises
 
 templates: dict[str, str] = {}
 
@@ -72,37 +68,42 @@ templates["inlineav-static"] = """
 """
 
 
-scripts: list[str] = []
-links: list[str] = []
+def convert_animations(contents: str) -> str:
+    """Convert each animation using its template, and include necessary scripts and stylesheets"""
+    scripts: list[str] = []
+    links: list[str] = []
 
-def convert_interactive(s: str) -> str:
-    tag, attrs = parse_tag(s)
-    scr = attrs.get("script")
-    if scr and scr not in scripts:
-        scripts.append(scr)
-    if tag == "inlineav":
-        scripts.append(attrs["src"])
-    if attrs.get('links'):
-        for link in attrs['links'].split():
-            if link not in links:
-                links.append(link)
-    if "static" in attrs:
-        tag += "-static"
-    attrs.setdefault("width", "100%")
-    attrs.setdefault("height", "600")
-    tmpl = templates[tag]
-    return tmpl.format(**attrs)
+    def convert(m: re.Match[str]) -> str:
+        tag, attrs = parse_tag(m[0])
+        scr = attrs.get("script")
+        if scr and scr not in scripts:
+            scripts.append(scr)
+        if tag == "inlineav":
+            scripts.append(attrs["src"])
+        if attrs.get('links'):
+            for link in attrs['links'].split():
+                if link not in links:
+                    links.append(link)
+        if "static" in attrs:
+            tag += "-static"
+        attrs.setdefault("width", "100%")
+        attrs.setdefault("height", "600")
+        tmpl = templates[tag]
+        return tmpl.format(**attrs)
 
-
-for f in HTML.glob("*.html"):
-    scripts.clear()
-    links.clear()
-    s = open(f).read()
-    s = match_tag.sub(lambda m: convert_interactive(m[0]), s)
+    contents = match_tag.sub(convert, contents)
     for scr in scripts:
         tag = f'<script type="text/javascript" src="../interactive/{scr}"></script>'
-        s = re.sub(r"</body>", f'{tag}\n</body>', s)
+        contents = re.sub(r"</body>", f'{tag}\n</body>', contents)
     for ln in links:
         tag = f'<link href="../interactive/{ln}" rel="stylesheet" type="text/css"/>'
-        s = re.sub(r"</head>", f'{tag}\n</head>', s)
-    open(f, "w").write(s)
+        contents = re.sub(r"</head>", f'{tag}\n</head>', contents)
+    return contents
+
+        
+###############################################################################
+## Calling from the command-line
+
+if __name__ == '__main__':
+    main(*sys.argv[1:])
+

@@ -1,15 +1,24 @@
 #!/bin/bash
 
-SOURCES=(src/*.md)
-OUT=docs/html
+# exit on error:
+set -e
 
-rm -rf $OUT
-echo "Running pandoc"
-time pandoc --defaults=pandoc-defaults.yaml --output=$OUT "${SOURCES[@]}"
+temp=_temp
+
+rm -rf $temp
+mkdir -p $temp/src
+
+echo "Preprocessing: src/*.md -> $temp/src/*.md"
+time python3 extra/preprocess.py $temp/src src/*.md
 echo
 
-echo "Postprocessing output"
-time python extra/postprocess.py
+echo "Running pandoc: $temp/src/*.md -> $temp/html/*.html"
+time pandoc --defaults=pandoc-defaults.yaml --output=$temp/html $temp/src/*.md
+echo
+
+rm docs/html/*
+echo "Postprocessing: $temp/html/*.html -> docs/html/*.html"
+time python3 extra/postprocess.py docs/html $temp/html/*.html
 echo
 
 # Checking links using library: https://github.com/untitaker/hyperlink
