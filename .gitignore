@@ -1,6 +1,17 @@
 
-# Don't include files/directories starting with "_local" or "_private"
+# Temporary files/directories
 _local*
 _private*
+_temp*
+*~
+*.bak
+\#*#
+.#*
 
+# MacOS-specific files
+.DS_Store
+
+# Cached and compiled Python files
+__pycache__/
+*.py[cod]
 
