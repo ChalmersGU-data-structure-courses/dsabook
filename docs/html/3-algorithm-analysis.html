@@ -124,34 +124,49 @@ the difficulty of a problem and the efficiency of approaches to solving
 it.</p>
 <p>This chapter introduces the motivation, basic notation, and
 fundamental techniques of algorithm analysis. We focus on a methodology
-known as <a href="10-glossary.html#asymptotic-algorithm-analysis" class="term">asymptotic algorithm analysis</a>, or
-simply <a href="10-glossary.html#asymptotic-analysis" class="term">asymptotic analysis</a>.</p>
+known as <a href="10-glossary.html#asymptotic-algorithm-analysis"
+class="term">asymptotic algorithm analysis</a>, or simply <a
+href="10-glossary.html#asymptotic-analysis" class="term">asymptotic
+analysis</a>.</p>
 <p>Asymptotic analysis estimates the resource consumption of an
-algorithm, called its <a href="10-glossary.html#complexity" class="term">complexity</a>. Here,
-resource consumption can mean runtime, memory use, API calls, or any
-other measure. Instead of computing this resource consumption exactly,
-asymptotic analysis is only interested in its <a href="10-glossary.html#growth-rate" class="term">growth
-rate</a> (also called <a href="10-glossary.html#order-of-growth" class="term">order of growth</a>). The
-growth rate is what determines the resource consumption for large
-inputs. Thankfully, growth rate expressions are relatively easy to
-compare. This allows us decide which of two algorithms is better at
-solving the same problem. Asymptotic analysis also gives algorithm
+algorithm, called its <a href="10-glossary.html#complexity"
+class="term">complexity</a>. Here, resource consumption can mean
+runtime, memory use, API calls, or any other measure. Instead of
+computing this resource consumption exactly, asymptotic analysis is only
+interested in its <a href="10-glossary.html#growth-rate"
+class="term">growth rate</a> (also called <a
+href="10-glossary.html#order-of-growth" class="term">order of
+growth</a>). The growth rate is what determines the resource consumption
+for large inputs. Thankfully, growth rate expressions are relatively
+easy to compare. This allows us decide which of two algorithms is better
+at solving the same problem. Asymptotic analysis also gives algorithm
 designers a tool for estimating whether a proposed solution is likely to
 meet the resource constraints for a problem before they implement an
 actual program.</p>
 <p>After reading this chapter, you should understand:</p>
 <ul>
-<li>The concept of <a href="10-glossary.html#complexity" class="term">complexity</a> of an algorithm,
-the resource usage of an algorithm as a function of an input parameter.
-Different kinds of complexity such as <a href="10-glossary.html#worst-case" class="term">worst-case</a> and <a href="10-glossary.html#average-case" class="term">average-case</a>.</li>
-<li>The concept of <a href="10-glossary.html#growth-rate" class="term">growth rate</a> or <a href="10-glossary.html#order-of-growth" class="term">order of growth</a> of a (mathematical) function. How to
-compute and compare growth rates of functions. Notations such as <a href="10-glossary.html#big-oh-notation" class="term">big-Oh</a> to describe upper and
-lower bounds of growth rates.</li>
-<li>The <a href="10-glossary.html#asymptotic-complexity" class="term">asymptotic complexity</a> of an algorithm,
-which is the growth rate of its complexity. Sometimes, this is just
-called the growth rate of the algorithm.</li>
-<li>The difference between the asymptotic complexity of an <a href="10-glossary.html#algorithm" class="term">algorithm</a> (or program) and that of a <a href="10-glossary.html#problem" class="term">problem</a>. The latter is the best asymptotic
-complexity over all algorithms that solve the problem.</li>
+<li>The concept of <a href="10-glossary.html#complexity"
+class="term">complexity</a> of an algorithm, the resource usage of an
+algorithm as a function of an input parameter. Different kinds of
+complexity such as <a href="10-glossary.html#worst-case"
+class="term">worst-case</a> and <a href="10-glossary.html#average-case"
+class="term">average-case</a>.</li>
+<li>The concept of <a href="10-glossary.html#growth-rate"
+class="term">growth rate</a> or <a
+href="10-glossary.html#order-of-growth" class="term">order of growth</a>
+of a (mathematical) function. How to compute and compare growth rates of
+functions. Notations such as <a href="10-glossary.html#big-oh-notation"
+class="term">big-Oh</a> to describe upper and lower bounds of growth
+rates.</li>
+<li>The <a href="10-glossary.html#asymptotic-complexity"
+class="term">asymptotic complexity</a> of an algorithm, which is the
+growth rate of its complexity. Sometimes, this is just called the growth
+rate of the algorithm.</li>
+<li>The difference between the asymptotic complexity of an <a
+href="10-glossary.html#algorithm" class="term">algorithm</a> (or
+program) and that of a <a href="10-glossary.html#problem"
+class="term">problem</a>. The latter is the best asymptotic complexity
+over all algorithms that solve the problem.</li>
 </ul>
 <p>The chapter concludes with a brief discussion of the practical
 difficulties encountered when empirically measuring the cost of a
@@ -160,3 +175,4 @@ efficiency.</p>
 </section>
 </body>
 </html>
+

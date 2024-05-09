@@ -173,7 +173,8 @@ it provides a useful model for proving lower bounds on other problems.
 Finally, knowing a lower bound for sorting gives us a lower bound in
 turn for other problems whose solution could be made to work as the
 basis for a sorting algorithm. The process of deriving asymptotic bounds
-for one problem from the asymptotic bounds of another is called a <a href="10-glossary.html#reduction" class="term">reduction</a>.</p>
+for one problem from the asymptotic bounds of another is called a <a
+href="10-glossary.html#reduction" class="term">reduction</a>.</p>
 <p>All of the sorting algorithms we have studied make decisions based on
 the direct comparison of two key values. For example, Insertion Sort
 sequentially compares the value to be inserted into the sorted list
@@ -194,14 +195,16 @@ leaves is shown to be in
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Omega(n \log n)</annotation></semantics></math>.</p>
 <p>Before presenting the proof of an
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Omega(n \log n)</annotation></semantics></math>
-lower bound for sorting, we first must define the concept of a <a href="10-glossary.html#decision-tree" class="term">decision tree</a>. A decision tree is a binary tree that
-can model the processing for any algorithm that makes binary decisions.
-Each (binary) decision is represented by a branch in the tree. For the
-purpose of modeling sorting algorithms, we count all comparisons of key
-values as decisions. If two keys are compared and the first is less than
-the second, then this is modeled as a left branch in the decision tree.
-In the case where the first value is greater than the second, the
-algorithm takes the right branch.</p>
+lower bound for sorting, we first must define the concept of a <a
+href="10-glossary.html#decision-tree" class="term">decision tree</a>. A
+decision tree is a binary tree that can model the processing for any
+algorithm that makes binary decisions. Each (binary) decision is
+represented by a branch in the tree. For the purpose of modeling sorting
+algorithms, we count all comparisons of key values as decisions. If two
+keys are compared and the first is less than the second, then this is
+modeled as a left branch in the decision tree. In the case where the
+first value is greater than the second, the algorithm takes the right
+branch.</p>
 <p>Here is a Visualization that illustrates decision trees and the
 sorting lower bound proof.</p>
 <p>
@@ -241,3 +244,4 @@ Your browser does not support iframes.
 <script type="text/javascript" src="../interactive/Sorting/SortingLowerBoundCON.js"></script>
 </body>
 </html>
+

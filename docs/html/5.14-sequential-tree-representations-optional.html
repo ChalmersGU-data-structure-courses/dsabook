@@ -122,25 +122,26 @@ Sequential Tree Representations (optional)</h2>
 <p>Next we consider a fundamentally different approach to implementing
 trees. The goal is to store a series of node values with the minimum
 information needed to reconstruct the tree structure. This approach,
-known as a <a href="10-glossary.html#sequential-tree-representation" class="term">sequential tree representation</a>, has
-the advantage of saving space because no pointers are stored. It has the
-disadvantage that accessing any node in the tree requires sequentially
-processing all nodes that appear before it in the node list. In other
-words, node access must start at the beginning of the node list,
-processing nodes sequentially in whatever order they are stored until
-the desired node is reached. Thus, one primary virtue of the other
-implementations discussed in this section is lost: efficient access
-(typically
+known as a <a href="10-glossary.html#sequential-tree-representation"
+class="term">sequential tree representation</a>, has the advantage of
+saving space because no pointers are stored. It has the disadvantage
+that accessing any node in the tree requires sequentially processing all
+nodes that appear before it in the node list. In other words, node
+access must start at the beginning of the node list, processing nodes
+sequentially in whatever order they are stored until the desired node is
+reached. Thus, one primary virtue of the other implementations discussed
+in this section is lost: efficient access (typically
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math>
 time) to arbitrary nodes in the tree. Sequential tree implementations
 are ideal for archiving trees on disk for later use because they save
 space, and the tree structure can be reconstructed as needed for later
 processing.</p>
-<p>Sequential tree implementations can be used to <a href="10-glossary.html#serialization" class="term">serialize</a> a tree structure.
-Serialization is the process of storing an object as a series of bytes,
-typically so that the data structure can be transmitted between
-computers. This capability is important when using data structures in a
-distributed processing environment.</p>
+<p>Sequential tree implementations can be used to <a
+href="10-glossary.html#serialization" class="term">serialize</a> a tree
+structure. Serialization is the process of storing an object as a series
+of bytes, typically so that the data structure can be transmitted
+between computers. This capability is important when using data
+structures in a distributed processing environment.</p>
 <p>A sequential tree implementation typically stores the node values as
 they would be enumerated by a preorder traversal, along with sufficient
 information to describe the tree’s shape. If the tree has restricted
@@ -200,14 +201,16 @@ but not time efficient for descending through the tree along some
 arbitrary path.</p>
 <p>Assume that each node value takes a constant amount of space. An
 example would be if the node value is a positive integer and
-<code>null</code> is indicated by the value zero. From the <a href="10-glossary.html#full-binary-tree-theorem" class="term">Full Binary Tree Theorem</a>, we know that the size of
-the node list will be about twice the number of nodes (i.e., the
-overhead fraction is 1/2). The extra space is required by the
-<code>null</code> pointers. We should be able to store the node list
-more compactly. However, any sequential implementation must recognize
-when a leaf node has been reached, that is, a leaf node indicates the
-end of a subtree. One way to do this is to explicitly list with each
-node whether it is an internal node or a leaf. If a node
+<code>null</code> is indicated by the value zero. From the <a
+href="10-glossary.html#full-binary-tree-theorem" class="term">Full
+Binary Tree Theorem</a>, we know that the size of the node list will be
+about twice the number of nodes (i.e., the overhead fraction is 1/2).
+The extra space is required by the <code>null</code> pointers. We should
+be able to store the node list more compactly. However, any sequential
+implementation must recognize when a leaf node has been reached, that
+is, a leaf node indicates the end of a subtree. One way to do this is to
+explicitly list with each node whether it is an internal node or a leaf.
+If a node
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
 is an internal node, then we know that its two children (which may be
 subtrees) immediately follow
@@ -333,3 +336,4 @@ Your browser does not support iframes.
 <script type="text/javascript" src="../interactive/General/SequentialGenTreeCON.js"></script>
 </body>
 </html>
+

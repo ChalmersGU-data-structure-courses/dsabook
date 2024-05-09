@@ -236,27 +236,32 @@ allows efficient access to those data. To provide efficient access, it
 may be necessary to store additional information about where the data
 are within the data structure. For example, each node of a linked list
 must store a pointer to the next value on the list. All such information
-stored in addition to the actual data values is referred to as <a href="10-glossary.html#overhead" class="term">overhead</a>. Ideally, overhead should be kept to a
-minimum while allowing maximum access. The need to maintain a balance
-between these opposing goals is what makes the study of data structures
-so interesting.</p>
-<p>One important aspect of algorithm design is referred to as the <a href="10-glossary.html#space-time-tradeoff" class="term">space/time tradeoff</a> principle. The space/time
-tradeoff principle says that one can often achieve a reduction in time
-if one is willing to sacrifice space or vice versa. Many programs can be
-modified to reduce storage requirements by “packing” or encoding
-information. “Unpacking” or decoding the information requires additional
-time. Thus, the resulting program uses less space but runs slower.
-Conversely, many programs can be modified to pre-store results or
-reorganize information to allow faster running time at the expense of
-greater storage requirements. Typically, such changes in time and space
-are both by a constant factor.</p>
-<p>A classic example of a space/time tradeoff is the <a href="10-glossary.html#lookup-table" class="term">lookup table</a>. A lookup table pre-stores the value of
-a function that would otherwise be computed each time it is needed. For
-example, 12! is the greatest value for the factorial function that can
-be stored in a 32-bit <code>int</code> variable. If you are writing a
-program that often computes factorials, it is likely to be much more
-time efficient to simply pre-compute and store the 12 values in a table.
-Whenever the program needs the value of
+stored in addition to the actual data values is referred to as <a
+href="10-glossary.html#overhead" class="term">overhead</a>. Ideally,
+overhead should be kept to a minimum while allowing maximum access. The
+need to maintain a balance between these opposing goals is what makes
+the study of data structures so interesting.</p>
+<p>One important aspect of algorithm design is referred to as the <a
+href="10-glossary.html#space-time-tradeoff" class="term">space/time
+tradeoff</a> principle. The space/time tradeoff principle says that one
+can often achieve a reduction in time if one is willing to sacrifice
+space or vice versa. Many programs can be modified to reduce storage
+requirements by “packing” or encoding information. “Unpacking” or
+decoding the information requires additional time. Thus, the resulting
+program uses less space but runs slower. Conversely, many programs can
+be modified to pre-store results or reorganize information to allow
+faster running time at the expense of greater storage requirements.
+Typically, such changes in time and space are both by a constant
+factor.</p>
+<p>A classic example of a space/time tradeoff is the <a
+href="10-glossary.html#lookup-table" class="term">lookup table</a>. A
+lookup table pre-stores the value of a function that would otherwise be
+computed each time it is needed. For example, 12! is the greatest value
+for the factorial function that can be stored in a 32-bit
+<code>int</code> variable. If you are writing a program that often
+computes factorials, it is likely to be much more time efficient to
+simply pre-compute and store the 12 values in a table. Whenever the
+program needs the value of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>!</mi></mrow><annotation encoding="application/x-tex">n!</annotation></semantics></math>
 it can simply check the lookup table. (If
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>&gt;</mo><mn>12</mn></mrow><annotation encoding="application/x-tex">n &gt; 12</annotation></semantics></math>,
@@ -279,8 +284,9 @@ this is a special case where there are
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
 integers whose values are a permutation of the integers from 0 to
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>.
-This is an example of a <a href="10-glossary.html#binsort" class="term">binsort</a>. Binsort
-assigns each value to an array position corresponding to its value.</p>
+This is an example of a <a href="10-glossary.html#binsort"
+class="term">binsort</a>. Binsort assigns each value to an array
+position corresponding to its value.</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="op">=</span> <span class="dv">0</span> ... <span class="bu">len</span>(A)<span class="op">-</span><span class="dv">1</span>:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    B[A[i]] <span class="op">=</span> A[i]</span></code></pre></div>
@@ -314,19 +320,22 @@ However, it requires more time to run than the first code fragment. On
 my computer the second version takes nearly twice as long to run as the
 first, but it only requires half the space.</p>
 <p>A second principle for the relationship between a program’s space and
-time requirements applies to programs that process information <a href="10-glossary.html#file-processing" class="term">stored on disk</a>. Strangely
-enough, the disk-based space/time tradeoff principle is almost the
-reverse of the space/time tradeoff principle for programs using main
+time requirements applies to programs that process information <a
+href="10-glossary.html#file-processing" class="term">stored on disk</a>.
+Strangely enough, the disk-based space/time tradeoff principle is almost
+the reverse of the space/time tradeoff principle for programs using main
 memory.</p>
-<p>The <a href="10-glossary.html#disk-based-space-time-tradeoff" class="term">disk-based space/time tradeoff</a>
-principle states that the smaller you can make your disk storage
-requirements, the faster your program will run. This is because the time
-to read information from disk is enormous compared to computation time,
-so almost any amount of additional computation needed to unpack the data
-is going to be less than the disk-reading time saved by reducing the
-storage requirements. Naturally this principle does not hold true in all
-cases, but it is good to keep in mind when designing programs that
-process information stored on disk.</p>
+<p>The <a href="10-glossary.html#disk-based-space-time-tradeoff"
+class="term">disk-based space/time tradeoff</a> principle states that
+the smaller you can make your disk storage requirements, the faster your
+program will run. This is because the time to read information from disk
+is enormous compared to computation time, so almost any amount of
+additional computation needed to unpack the data is going to be less
+than the disk-reading time saved by reducing the storage requirements.
+Naturally this principle does not hold true in all cases, but it is good
+to keep in mind when designing programs that process information stored
+on disk.</p>
 </section>
 </body>
 </html>
+

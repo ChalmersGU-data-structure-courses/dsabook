@@ -255,15 +255,15 @@ data-number="3.2.2">
 <h3 data-number="3.2.2"><span class="header-section-number">3.2.2</span>
 Basic Operations and Input Size</h3>
 <p>Of primary consideration when estimating an algorithm’s performance
-is the number of <a href="10-glossary.html#basic-operation" class="term">basic
-operations</a> required by the algorithm to process an input of a
-certain size. The terms “basic operations” and “size” are both rather
-vague and depend on the algorithm being analyzed. Size is often the
-number of inputs processed. For example, when comparing sorting
-algorithms the size of the problem is typically measured by the number
-of records to be sorted. A basic operation must have the property that
-its time to complete does not depend on the particular values of its
-operands. Adding or comparing two integer variables are examples of
+is the number of <a href="10-glossary.html#basic-operation"
+class="term">basic operations</a> required by the algorithm to process
+an input of a certain size. The terms “basic operations” and “size” are
+both rather vague and depend on the algorithm being analyzed. Size is
+often the number of inputs processed. For example, when comparing
+sorting algorithms the size of the problem is typically measured by the
+number of records to be sorted. A basic operation must have the property
+that its time to complete does not depend on the particular values of
+its operands. Adding or comparing two integer variables are examples of
 basic operations in most programming languages. Summing the contents of
 an array containing
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
@@ -377,7 +377,9 @@ Thus, the equation for this algorithm is simply</p>
 </annotation></semantics></math></p>
 <p>indicating that the size of the input
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-has no effect on the running time. This is called a <a href="10-glossary.html#constant-running-time" class="term">constant running time</a>.</p>
+has no effect on the running time. This is called a <a
+href="10-glossary.html#constant-running-time" class="term">constant
+running time</a>.</p>
 </section>
 <section id="example-2" class="level4 unnumbered topic">
 <h4 class="unnumbered">Example</h4>
@@ -421,12 +423,12 @@ Thus, we say that the running time is
 <section id="growth-rates" class="level3" data-number="3.2.3">
 <h3 data-number="3.2.3"><span class="header-section-number">3.2.3</span>
 Growth Rates</h3>
-<p>The <a href="10-glossary.html#growth-rate" class="term">growth rate</a> for an algorithm is the
-rate at which the cost of the algorithm grows as the size of its input
-grows. The following figure shows a graph for six equations, each meant
-to describe the running time for a particular program or algorithm. A
-variety of growth rates that are representative of typical algorithms
-are shown.</p>
+<p>The <a href="10-glossary.html#growth-rate" class="term">growth
+rate</a> for an algorithm is the rate at which the cost of the algorithm
+grows as the size of its input grows. The following figure shows a graph
+for six equations, each meant to describe the running time for a
+particular program or algorithm. A variety of growth rates that are
+representative of typical algorithms are shown.</p>
 <div id="RunTimeGraph">
 <p>
 <div id="GrowthRatesCON" class="ssAV" data-short-name="GrowthRatesCON" data-long-name="DataStructures/Plot.js AlgAnal/GrowthRatesCON" alt="DataStructures/Plot.js AlgAnal/GrowthRatesCON" tabIndex="-1">
@@ -451,8 +453,9 @@ are graphed by straight lines. A growth rate of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">cn</annotation></semantics></math>
 (for
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>
-any positive constant) is often referred to as a <a href="10-glossary.html#linear-growth-rate" class="term">linear growth rate</a> or running time. This means that
-as the value of
+any positive constant) is often referred to as a <a
+href="10-glossary.html#linear-growth-rate" class="term">linear growth
+rate</a> or running time. This means that as the value of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
 grows, the running time of the algorithm grows in the same proportion.
 Doubling the value of
@@ -460,13 +463,14 @@ Doubling the value of
 roughly doubles the running time. An algorithm whose running-time
 equation has a highest-order term containing a factor of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>n</mi><mn>2</mn></msup><annotation encoding="application/x-tex">n^2</annotation></semantics></math>
-is said to have a <a href="10-glossary.html#quadratic-growth-rate" class="term">quadratic growth rate</a>. In
-the figure, the line labeled
+is said to have a <a href="10-glossary.html#quadratic-growth-rate"
+class="term">quadratic growth rate</a>. In the figure, the line labeled
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">2n^2</annotation></semantics></math>
 represents a quadratic growth rate. The line labeled
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mi>n</mi></msup><annotation encoding="application/x-tex">2^n</annotation></semantics></math>
-represents an <a href="10-glossary.html#exponential-growth-rate" class="term">exponential growth rate</a>. This
-name comes from the fact that
+represents an <a href="10-glossary.html#exponential-growth-rate"
+class="term">exponential growth rate</a>. This name comes from the fact
+that
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
 appears in the exponent. The line labeled
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>!</mi></mrow><annotation encoding="application/x-tex">n!</annotation></semantics></math>
@@ -708,3 +712,4 @@ other.</p>
 <script type="text/javascript" src="../interactive/AlgAnal/GrowthRatesZoomCON.js"></script>
 </body>
 </html>
+

@@ -122,7 +122,8 @@ record
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
 with key value
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mi>R</mi></msub><annotation encoding="application/x-tex">k_R</annotation></semantics></math>
-has a <a href="10-glossary.html#home-position" class="term">home position</a> that is
+has a <a href="10-glossary.html#home-position" class="term">home
+position</a> that is
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="bold">𝐡</mtext><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>k</mi><mi>R</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\textbf{h}(k_R)</annotation></semantics></math>,
 the slot computed by the hash function. If
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
@@ -135,7 +136,8 @@ the collision resolution policy to determine which slot that will be.
 Naturally, the same policy must be followed during search as during
 insertion, so that any record not found in its home position can be
 recovered by repeating the collision resolution process.</p>
-<p>One implementation for closed hashing groups hash table slots into <a href="10-glossary.html#bucket" class="term">buckets</a>. The
+<p>One implementation for closed hashing groups hash table slots into <a
+href="10-glossary.html#bucket" class="term">buckets</a>. The
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>
 slots of the hash table are divided into
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
@@ -144,11 +146,12 @@ buckets, with each bucket consisting of
 slots. The hash function assigns each record to the first slot within
 one of the buckets. If this slot is already occupied, then the bucket
 slots are searched sequentially until an open slot is found. If a bucket
-is entirely full, then the record is stored in an <a href="10-glossary.html#overflow-bucket" class="term">overflow bucket</a> of infinite capacity at the end of
-the table. All buckets share the same overflow bucket. A good
-implementation will use a hash function that distributes the records
-evenly among the buckets so that as few records as possible go into the
-overflow bucket.</p>
+is entirely full, then the record is stored in an <a
+href="10-glossary.html#overflow-bucket" class="term">overflow bucket</a>
+of infinite capacity at the end of the table. All buckets share the same
+overflow bucket. A good implementation will use a hash function that
+distributes the records evenly among the buckets so that as few records
+as possible go into the overflow bucket.</p>
 <p>When searching for a record, the first step is to hash the key to
 determine which bucket should contain the record. The records in this
 bucket are then searched. If the desired key value is not found and the
@@ -213,3 +216,4 @@ Your browser does not support iframes.
 <script type="text/javascript" src="../interactive/Hashing/buckethashCON2.js"></script>
 </body>
 </html>
+

@@ -123,30 +123,34 @@ Problems, Algorithms, and Programs</h2>
 Problems</h3>
 <p>Programmers commonly deal with problems, algorithms, and computer
 programs. These are three distinct concepts.</p>
-<p>As your intuition would suggest, a <a href="10-glossary.html#problem" class="term">problem</a>
-is a task to be performed. It is best thought of in terms of inputs and
-matching outputs. A problem definition should not include any
-constraints on <em>how</em> the problem is to be solved. The solution
-method should be developed only after the problem is precisely defined
-and thoroughly understood. However, a problem definition should include
-constraints on the resources that may be consumed by any acceptable
-solution. For any problem to be solved by a computer, there are always
-such constraints, whether stated or implied. For example, any computer
-program may use only the main memory and disk space available, and it
-must run in a “reasonable” amount of time.</p>
-<p>Problems can be viewed as functions in the mathematical sense. A
-<a href="10-glossary.html#function" class="term">function</a> is a matching between inputs (the
-<a href="10-glossary.html#domain" class="term">domain</a>) and outputs (the <a href="10-glossary.html#range" class="term">range</a>). An input to a function might be a single
-value or a collection of information. The values making up an input are
-called the <a href="10-glossary.html#parameter" class="term">parameters</a> of the
+<p>As your intuition would suggest, a <a href="10-glossary.html#problem"
+class="term">problem</a> is a task to be performed. It is best thought
+of in terms of inputs and matching outputs. A problem definition should
+not include any constraints on <em>how</em> the problem is to be solved.
+The solution method should be developed only after the problem is
+precisely defined and thoroughly understood. However, a problem
+definition should include constraints on the resources that may be
+consumed by any acceptable solution. For any problem to be solved by a
+computer, there are always such constraints, whether stated or implied.
+For example, any computer program may use only the main memory and disk
+space available, and it must run in a “reasonable” amount of time.</p>
+<p>Problems can be viewed as functions in the mathematical sense. A <a
+href="10-glossary.html#function" class="term">function</a> is a matching
+between inputs (the <a href="10-glossary.html#domain"
+class="term">domain</a>) and outputs (the <a
+href="10-glossary.html#range" class="term">range</a>). An input to a
+function might be a single value or a collection of information. The
+values making up an input are called the <a
+href="10-glossary.html#parameter" class="term">parameters</a> of the
 function. A specific selection of values for the parameters is called an
-<a href="10-glossary.html#problem-instance" class="term">instance</a> of the problem.
-For example, the input parameter to a sorting function might be an array
-of integers. A particular array of integers, with a given size and
-specific values for each position in the array, would be an instance of
-the sorting problem. Different instances might generate the same output.
-However, any problem instance must always result in the same output
-every time the function is computed using that particular input.</p>
+<a href="10-glossary.html#problem-instance" class="term">instance</a> of
+the problem. For example, the input parameter to a sorting function
+might be an array of integers. A particular array of integers, with a
+given size and specific values for each position in the array, would be
+an instance of the sorting problem. Different instances might generate
+the same output. However, any problem instance must always result in the
+same output every time the function is computed using that particular
+input.</p>
 <p>This concept of all problems behaving like mathematical functions
 might not match your intuition for the behavior of computer programs.
 You might know of programs to which you can give the same input value on
@@ -164,20 +168,22 @@ completely determined by the program’s full set of inputs. Even a
 (although some random number generating systems appear to get around
 this by accepting a random input from a physical process beyond the
 user’s control). The limits to what functions can be implemented by
-programs is part of the domain of <a href="10-glossary.html#computability" class="term">Computability</a>.</p>
+programs is part of the domain of <a
+href="10-glossary.html#computability"
+class="term">Computability</a>.</p>
 </section>
 <section id="algorithms" class="level3" data-number="3.1.2">
 <h3 data-number="3.1.2"><span class="header-section-number">3.1.2</span>
 Algorithms</h3>
-<p>An <a href="10-glossary.html#algorithm" class="term">algorithm</a> is a method or a process
-followed to solve a problem. If the problem is viewed as a function,
-then an algorithm is an implementation for the function that transforms
-an input to the corresponding output. A problem can be solved by many
-different algorithms. A given algorithm solves only one problem (i.e.,
-computes a particular function). OpenDSA modules cover many problems,
-and for several of these problems we will see more than one algorithm.
-For the important problem of sorting there are over a dozen commonly
-known algorithms!</p>
+<p>An <a href="10-glossary.html#algorithm" class="term">algorithm</a> is
+a method or a process followed to solve a problem. If the problem is
+viewed as a function, then an algorithm is an implementation for the
+function that transforms an input to the corresponding output. A problem
+can be solved by many different algorithms. A given algorithm solves
+only one problem (i.e., computes a particular function). OpenDSA modules
+cover many problems, and for several of these problems we will see more
+than one algorithm. For the important problem of sorting there are over
+a dozen commonly known algorithms!</p>
 <p>The advantage of knowing several solutions to a problem is that
 solution
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐀</mi><annotation encoding="application/x-tex">\mathbf{A}</annotation></semantics></math>
@@ -235,18 +241,18 @@ infinite loop.</li>
 <section id="programs" class="level3" data-number="3.1.3">
 <h3 data-number="3.1.3"><span class="header-section-number">3.1.3</span>
 Programs</h3>
-<p>We often think of a computer <a href="10-glossary.html#program" class="term">program</a> as an
-instance, or concrete representation, of an algorithm in some
-programming language. Algorithms are usually presented in terms of
-programs, or parts of programs. Naturally, there are many programs that
-are instances of the same algorithm, because any modern computer
-programming language can be used to implement the same collection of
-algorithms (although some programming languages can make life easier for
-the programmer). To simplify presentation, people often use the terms
-“algorithm” and “program” interchangeably, despite the fact that they
-are really separate concepts. By definition, an algorithm must provide
-sufficient detail that it can be converted into a program when
-needed.</p>
+<p>We often think of a computer <a href="10-glossary.html#program"
+class="term">program</a> as an instance, or concrete representation, of
+an algorithm in some programming language. Algorithms are usually
+presented in terms of programs, or parts of programs. Naturally, there
+are many programs that are instances of the same algorithm, because any
+modern computer programming language can be used to implement the same
+collection of algorithms (although some programming languages can make
+life easier for the programmer). To simplify presentation, people often
+use the terms “algorithm” and “program” interchangeably, despite the
+fact that they are really separate concepts. By definition, an algorithm
+must provide sufficient detail that it can be converted into a program
+when needed.</p>
 <p>The requirement that an algorithm must terminate means that not all
 computer programs meet the technical definition of an algorithm. Your
 operating system is one such program. However, you can think of the
@@ -258,13 +264,15 @@ which terminates once its output is produced.</p>
 <section id="summary" class="level3" data-number="3.1.4">
 <h3 data-number="3.1.4"><span class="header-section-number">3.1.4</span>
 Summary</h3>
-<p>To summarize: A <a href="10-glossary.html#problem" class="term">problem</a> is a function or a
-mapping of inputs to outputs. An <a href="10-glossary.html#algorithm" class="term">algorithm</a> is
-a recipe for solving a problem whose steps are concrete and unambiguous.
-Algorithms must be correct, of finite length, and must terminate for all
-inputs. A <a href="10-glossary.html#program" class="term">program</a> is an instantiation of an
-algorithm in a programming language. The following slideshow should help
-you to visualize the differences.</p>
+<p>To summarize: A <a href="10-glossary.html#problem"
+class="term">problem</a> is a function or a mapping of inputs to
+outputs. An <a href="10-glossary.html#algorithm"
+class="term">algorithm</a> is a recipe for solving a problem whose steps
+are concrete and unambiguous. Algorithms must be correct, of finite
+length, and must terminate for all inputs. A <a
+href="10-glossary.html#program" class="term">program</a> is an
+instantiation of an algorithm in a programming language. The following
+slideshow should help you to visualize the differences.</p>
 <p>
 <div id="ProblemAlgorithmCON" class="ssAV" data-short-name="ProblemAlgorithmCON" data-long-name="Problem, Algorithm, and Program definitions Slideshow" alt="Problem, Algorithm, and Program definitions Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
@@ -289,3 +297,4 @@ Your browser does not support iframes.
 <script type="text/javascript" src="../interactive/AlgAnal/ProblemAlgorithmCON.js"></script>
 </body>
 </html>
+

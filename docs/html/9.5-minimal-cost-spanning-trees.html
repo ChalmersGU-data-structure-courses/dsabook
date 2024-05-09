@@ -186,8 +186,9 @@
 data-number="9.5">
 <h2 data-number="9.5"><span class="header-section-number">9.5</span>
 Minimal Cost Spanning Trees</h2>
-<p>The <a href="10-glossary.html#minimal-cost-spanning-tree" class="term">minimal-cost spanning tree</a> (MCST)
-problem takes as input a connected, undirected graph
+<p>The <a href="10-glossary.html#minimal-cost-spanning-tree"
+class="term">minimal-cost spanning tree</a> (MCST) problem takes as
+input a connected, undirected graph
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐆</mi><annotation encoding="application/x-tex">\mathbf{G}</annotation></semantics></math>,
 where each edge has a distance or weight measure attached. The MCST is
 also called <em>minimum spanning tree</em> (MST).</p>
@@ -229,8 +230,10 @@ to form a different MCST with equal cost.</p>
 <h3 data-number="9.5.1"><span class="header-section-number">9.5.1</span>
 Prim’s Algorithm</h3>
 <p>The first of our two algorithms for finding MCSTs is commonly
-referred to as <a href="10-glossary.html#prims-algorithm" class="term">Prim’s algorithm</a>. Prim’s
-algorithm is very simple. Start with any Vertex
+referred to as <a
+href="9.5-minimal-cost-spanning-trees.html#prims-algorithm"
+class="term">Prim’s algorithm</a>. Prim’s algorithm is very simple.
+Start with any Vertex
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>
 in the graph, setting the MCST to be
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>
@@ -317,10 +320,12 @@ the MCST.</p>
 class="level3" data-number="9.5.2">
 <h3 data-number="9.5.2"><span class="header-section-number">9.5.2</span>
 Prim’s Algorithm, Priority Queue Implementation</h3>
-<p>Alternatively, we can implement Prim’s algorithm using a <a href="10-glossary.html#priority-queue" class="term">priority queue</a> to find the next closest vertex, as
-shown next. As with the priority queue version of Dijkstra’s algorithm,
-the <a href="10-glossary.html#heap" class="term">heap</a> stores <code>DijkElem</code>
-objects.</p>
+<p>Alternatively, we can implement Prim’s algorithm using a <a
+href="10-glossary.html#priority-queue" class="term">priority queue</a>
+to find the next closest vertex, as shown next. As with the priority
+queue version of Dijkstra’s algorithm, the <a
+href="10-glossary.html#heap" class="term">heap</a> stores
+<code>DijkElem</code> objects.</p>
 <div class="sourceCode" id="cb4"><pre
 class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Prims MCST algorithm: priority queue version</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">void</span> <span class="op">&lt;</span>V<span class="op">&gt;</span> <span class="fu">PrimPQ</span><span class="op">(</span>Graph G<span class="op">,</span> V s<span class="op">,</span> <span class="bu">Map</span><span class="op">&lt;</span>V<span class="op">,</span><span class="bu">Double</span><span class="op">&gt;</span> D<span class="op">,</span> <span class="bu">Map</span><span class="op">&lt;</span>V<span class="op">,</span>V<span class="op">&gt;</span> Parent<span class="op">)</span> <span class="op">{</span></span>
@@ -468,14 +473,16 @@ Your browser does not support iframes.
 <section id="kruskals-algorithm" class="level3" data-number="9.5.3">
 <h3 data-number="9.5.3"><span class="header-section-number">9.5.3</span>
 Kruskal’s Algorithm</h3>
-<p>Our next MCST algorithm is commonly referred to as <a href="10-glossary.html#kruskals-algorithm" class="term">Kruskal’s algorithm</a>. Kruskal’s algorithm is also a
+<p>Our next MCST algorithm is commonly referred to as <a
+href="9.5-minimal-cost-spanning-trees.html#kruskals-algorithm"
+class="term">Kruskal’s algorithm</a>. Kruskal’s algorithm is also a
 simple, greedy algorithm. First partition the set of vertices into
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="true" form="postfix">|</mo></mrow><annotation encoding="application/x-tex">|\mathbf{V}|</annotation></semantics></math>
-<a href="10-glossary.html#union-find" class="term">disjoint sets</a>, each consisting of
-one vertex. Then process the edges in order of weight. An edge is added
-to the MCST, and two disjoint sets combined, if the edge connects two
-vertices in different disjoint sets. This process is repeated until only
-one disjoint set remains.</p>
+<a href="10-glossary.html#union-find" class="term">disjoint sets</a>,
+each consisting of one vertex. Then process the edges in order of
+weight. An edge is added to the MCST, and two disjoint sets combined, if
+the edge connects two vertices in different disjoint sets. This process
+is repeated until only one disjoint set remains.</p>
 <p>
 <div id="kruskalCON" class="ssAV" data-short-name="kruskalCON" data-long-name="Kruskal Slideshow" alt="Kruskal Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
@@ -486,15 +493,15 @@ one disjoint set remains.</p>
 </p>
 <p>The edges can be processed in order of weight by putting them in an
 array and then sorting the array. Another possibility is to use a
-<em>minimum</em> <a href="10-glossary.html#priority-queue" class="term">priority queue</a>, similar to
-what we did in <a
+<em>minimum</em> <a href="10-glossary.html#priority-queue"
+class="term">priority queue</a>, similar to what we did in <a
 href="9.5-minimal-cost-spanning-trees.html#prims-algorithm">Prim’s
 algorithm</a>.</p>
 <p>The only tricky part to this algorithm is determining if two vertices
 belong to the same equivalence class. Fortunately, the ideal algorithm
-is available for the purpose – the <a href="10-glossary.html#union-find" class="term">UNION/FIND</a>
-algorithm. Here is an implementation for Kruskal’s algorithm. Note that
-since the MCST will never have more than
+is available for the purpose – the <a href="10-glossary.html#union-find"
+class="term">UNION/FIND</a> algorithm. Here is an implementation for
+Kruskal’s algorithm. Note that since the MCST will never have more than
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="true" form="postfix">|</mo></mrow><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">|\mathbf{V}|-1</annotation></semantics></math>
 edges, we can return as soon as the MCST contains enough edges.</p>
 <div class="sourceCode" id="cb5"><pre
@@ -549,3 +556,4 @@ Your browser does not support iframes.
 <script type="text/javascript" src="../interactive/Graph/kruskalCON.js"></script>
 </body>
 </html>
+

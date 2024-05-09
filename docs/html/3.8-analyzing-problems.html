@@ -117,17 +117,21 @@
 <h2 data-number="3.8"><span class="header-section-number">3.8</span>
 Analyzing Problems</h2>
 <p>You most often use the techniques of “algorithm” analysis to analyze
-an <a href="10-glossary.html#algorithm" class="term">algorithm</a>, or the instantiation of an
-algorithm as a <a href="10-glossary.html#program" class="term">program</a>. You can also use these
-same techniques to analyze the cost of a <a href="10-glossary.html#problem" class="term">problem</a>. The key question that we want to ask is:
-How hard is a problem? Certainly we should expect that in some sense,
-the problem of sorting a list of records is harder than the problem of
-searching a list of records for a given key value. Certainly the
-algorithms that we know for sorting some records seem to be more
-expensive than the algorithms that we know for searching those same
-records.</p>
-<p>What we need are useful definitions for the <a href="10-glossary.html#upper-bound" class="term">upper
-bound</a> and <a href="10-glossary.html#lower-bound" class="term">lower bound</a> of a problem.</p>
+an <a href="10-glossary.html#algorithm" class="term">algorithm</a>, or
+the instantiation of an algorithm as a <a
+href="10-glossary.html#program" class="term">program</a>. You can also
+use these same techniques to analyze the cost of a <a
+href="10-glossary.html#problem" class="term">problem</a>. The key
+question that we want to ask is: How hard is a problem? Certainly we
+should expect that in some sense, the problem of sorting a list of
+records is harder than the problem of searching a list of records for a
+given key value. Certainly the algorithms that we know for sorting some
+records seem to be more expensive than the algorithms that we know for
+searching those same records.</p>
+<p>What we need are useful definitions for the <a
+href="10-glossary.html#upper-bound" class="term">upper bound</a> and <a
+href="10-glossary.html#lower-bound" class="term">lower bound</a> of a
+problem.</p>
 <p>One might start by thinking that the upper bound for a problem is how
 hard any algorithm can be for the problem. But we can make algorithms as
 bad as we want, so that is not useful. Instead, what is useful is to say
@@ -204,8 +208,9 @@ knowledge, we now have a lower bound in
 and an upper bound in
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>.
 Should we search for a faster algorithm? Many have tried, without
-success. Fortunately (or perhaps unfortunately?), <a href="10-glossary.html#sorting-lower-bound" class="term">we can prove that</a> any
-sorting algorithm must have running time in
+success. Fortunately (or perhaps unfortunately?), <a
+href="10-glossary.html#sorting-lower-bound" class="term">we can prove
+that</a> any sorting algorithm must have running time in
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Omega(n \log n)</annotation></semantics></math>
 in the worst case.<a href="#fn1" class="footnote-ref" id="fnref1"
 role="doc-noteref"><sup>1</sup></a> This proof is one of the most
@@ -248,3 +253,4 @@ href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </section>
 </body>
 </html>
+

@@ -191,12 +191,14 @@ Sequential Search</h3>
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
 objects that stores a particular value, you cannot really do better than
 simply looking through the array from the beginning and move toward the
-end until you find what you are looking for. This algorithm is called
-<a href="10-glossary.html#sequential-search" class="term">sequential search</a>. If you do find it, we call
-this a <a href="10-glossary.html#successful-search" class="term">successful search</a>. If the value is not
-in the array, eventually you will reach the end. We will call this an
-<a href="10-glossary.html#unsuccessful-search" class="term">unsuccessful search</a>. Here is a simple
-implementation for sequential search.</p>
+end until you find what you are looking for. This algorithm is called <a
+href="2.1-searching-in-an-array.html#sequential-search"
+class="term">sequential search</a>. If you do find it, we call this a <a
+href="10-glossary.html#successful-search" class="term">successful
+search</a>. If the value is not in the array, eventually you will reach
+the end. We will call this an <a
+href="10-glossary.html#unsuccessful-search" class="term">unsuccessful
+search</a>. Here is a simple implementation for sequential search.</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Return the position of an element in a list.</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># If the element is not found, return -1.</span></span>
@@ -209,9 +211,10 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a hr
 run. But we do not really care exactly how long a particular program
 will run on a particular computer. We just want some sort of estimate
 that will let us compare one approach to solving a problem with another.
-This is the basic idea of <a href="10-glossary.html#algorithm-analysis" class="term">algorithm analysis</a>.
-In the case of sequential search, it is easy to see that if the value is
-in position
+This is the basic idea of <a
+href="3-algorithm-analysis.html#algorithm-analysis"
+class="term">algorithm analysis</a>. In the case of sequential search,
+it is easy to see that if the value is in position
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
 of the array, then sequential search will look at
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
@@ -220,11 +223,15 @@ look at
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
 values if the array holds
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-values. This would be called the <a href="10-glossary.html#worst-case" class="term">worst case</a>
-for sequential search. Since the amount of work is proportional to
+values. This would be called the <a href="10-glossary.html#worst-case"
+class="term">worst case</a> for sequential search. Since the amount of
+work is proportional to
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
-we say that the worst case for sequential search has <a href="10-glossary.html#linear-growth-rate" class="term">linear cost</a>. For this
-reason, the sequential search algorithm is sometimes called <a href="10-glossary.html#linear-search" class="term">linear search</a>.</p>
+we say that the worst case for sequential search has <a
+href="10-glossary.html#linear-growth-rate" class="term">linear cost</a>.
+For this reason, the sequential search algorithm is sometimes called <a
+href="10-glossary.html#linear-search" class="term">linear
+search</a>.</p>
 </section>
 <section id="binary-search" class="level3" data-number="2.1.2">
 <h3 data-number="2.1.2"><span class="header-section-number">2.1.2</span>
@@ -233,7 +240,8 @@ Binary Search</h3>
 value in an unsorted array.<a href="#fn1" class="footnote-ref"
 id="fnref1" role="doc-noteref"><sup>1</sup></a> But if the array is
 sorted in increasing order by value, then we can do much better. We use
-a process called <a href="10-glossary.html#binary-search" class="term">binary search</a>.</p>
+a process called <a href="2.1-searching-in-an-array.html#binary-search"
+class="term">binary search</a>.</p>
 <p>Binary search begins by examining the value in the middle position of
 the array; call this position
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">mid</annotation></semantics></math>
@@ -317,16 +325,23 @@ role="doc-endnotes">
 <li id="fn1"><p>It seems to be really “obvious” that sequential search
 is the best that you can do on an unsorted array. But writing a
 convincing proof that no algorithm could ever be discovered that is
-better is surprisingly difficult. This is an example of a <a href="10-glossary.html#lower-bounds-proof" class="term">lower bounds proof</a> to find the cost for the best
-possible <a href="10-glossary.html#algorithm" class="term">algorithm</a> to solve the <a href="10-glossary.html#problem" class="term">problem</a> of search in an unsorted array.<a
-href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>It is possible to <a href="10-glossary.html#search-lower-bound" class="term">prove</a> that binary search is the most efficient
-algorithm possible in the worst case when searching in a sorted array.
-This is even more difficult than proving that sequential search is the
-most efficient algorithm possible on an unsorted array.<a href="#fnref2"
-class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+better is surprisingly difficult. This is an example of a <a
+href="10-glossary.html#lower-bounds-proof" class="term">lower bounds
+proof</a> to find the cost for the best possible <a
+href="10-glossary.html#algorithm" class="term">algorithm</a> to solve
+the <a href="10-glossary.html#problem" class="term">problem</a> of
+search in an unsorted array.<a href="#fnref1" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>It is possible to <a
+href="10-glossary.html#search-lower-bound" class="term">prove</a> that
+binary search is the most efficient algorithm possible in the worst case
+when searching in a sorted array. This is even more difficult than
+proving that sequential search is the most efficient algorithm possible
+on an unsorted array.<a href="#fnref2" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 <script type="text/javascript" src="../interactive/Searching/binarySearchCON.js"></script>
 </body>
 </html>
+

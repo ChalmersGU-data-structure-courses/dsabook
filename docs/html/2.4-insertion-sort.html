@@ -192,7 +192,9 @@ this is to look at the first two bills and put them in order. Then take
 the third bill and put it into the right position with respect to the
 first two, and so on. As you take each bill, you would add it to the
 sorted pile that you have already made. This simple approach is the
-inspiration for our first sorting algorithm, called <a href="10-glossary.html#insertion-sort" class="term">Insertion Sort</a>.</p>
+inspiration for our first sorting algorithm, called <a
+href="2.4-insertion-sort.html#insertion-sort" class="term">Insertion
+Sort</a>.</p>
 <p>Insertion Sort iterates through a list of records. For each
 iteration, the current record is inserted in turn at the correct
 position within a sorted list composed of those records already
@@ -226,9 +228,10 @@ simple as possible, our visualizations will show the array as though it
 stored simple integers rather than more complex records. But you should
 realize that in practice, there is rarely any point to sorting an array
 of simple integers. Nearly always we want to sort more complex records
-that each have a <a href="10-glossary.html#key" class="term">key</a> value. In such cases we
-must have a way to associate a key value with a record. The sorting
-algorithms will simply assume that the records are <a href="10-glossary.html#comparable" class="term">comparable</a>.)</p>
+that each have a <a href="10-glossary.html#key" class="term">key</a>
+value. In such cases we must have a way to associate a key value with a
+record. The sorting algorithms will simply assume that the records are
+<a href="10-glossary.html#comparable" class="term">comparable</a>.)</p>
 </div>
 <p>Here we see the first few iterations of Insertion Sort.</p>
 <p>
@@ -302,8 +305,9 @@ slight. And even when the input is not perfectly sorted, Insertion
 Sort’s cost goes up in proportion to the number of inversions. So a
 “nearly sorted” list will always be cheap to sort with Insertion Sort.
 Examples of algorithms that take advantage of Insertion Sort’s
-near-best-case running time are <a href="10-glossary.html#shellsort" class="term">Shellsort</a> and
-<a href="2.11-quicksort.html#quicksort">Quicksort</a>.</p>
+near-best-case running time are <a href="10-glossary.html#shellsort"
+class="term">Shellsort</a> and <a
+href="2.11-quicksort.html#quicksort">Quicksort</a>.</p>
 <p>Counting comparisons or swaps yields similar results. Each time
 through the inner <code>for</code> loop yields both a comparison and a
 swap, except the last (i.e., the comparison that fails the inner
@@ -352,3 +356,4 @@ algorithm to use.</p>
 <script type="text/javascript" src="../interactive/Sorting/InsertionSortAverageCaseCON.js"></script>
 </body>
 </html>
+

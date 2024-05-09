@@ -148,17 +148,21 @@ operations that matters, not whether the tree is balanced. Maintaining
 balance is really done only for the sake of reaching this time
 efficiency goal.</p>
 <p>The splay tree access functions operate in a manner reminiscent of
-the <a href="10-glossary.html#move-to-front" class="term">move-to-front</a> rule for <a href="10-glossary.html#self-organizing-list" class="term">self-organizing lists</a>, and
-of the path compression technique for managing a series of <a href="10-glossary.html#union-find" class="term">Union/Find</a> operations. These access functions tend
-to make the tree more balanced, but an individual access will not
+the <a href="10-glossary.html#move-to-front"
+class="term">move-to-front</a> rule for <a
+href="10-glossary.html#self-organizing-list"
+class="term">self-organizing lists</a>, and of the path compression
+technique for managing a series of <a href="10-glossary.html#union-find"
+class="term">Union/Find</a> operations. These access functions tend to
+make the tree more balanced, but an individual access will not
 necessarily result in a more balanced tree.</p>
 <p>Whenever a node
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
 is accessed (e.g., when
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
 is inserted, deleted, or is the goal of a search), the splay tree
-performs a process called <a href="10-glossary.html#splaying" class="term">splaying</a>. Splaying
-moves
+performs a process called <a href="10-glossary.html#splaying"
+class="term">splaying</a>. Splaying moves
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
 to the root of the BST. When
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
@@ -166,13 +170,14 @@ is being deleted, splaying moves the parent of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
 to the root. As in the AVL tree, a splay of node
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
-consists of a series of <a href="10-glossary.html#rotation" class="term">rotations</a>.
-A rotation moves
+consists of a series of <a href="10-glossary.html#rotation"
+class="term">rotations</a>. A rotation moves
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
 higher in the tree by adjusting its position with respect to its parent
 and grandparent. A side effect of the rotations is a tendency to balance
 the tree. There are three types of rotation.</p>
-<p>A <a href="10-glossary.html#single-rotation" class="term">single rotation</a> is performed only if
+<p>A <a href="10-glossary.html#single-rotation" class="term">single
+rotation</a> is performed only if
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
 is a child of the root node. The single rotation is illustrated by <a
 href="6.6-the-splay-tree-optional.html#SingProm">Figure #SingProm</a>.
@@ -278,8 +283,10 @@ and
 are altered as appropriate to maintain the BST property.</p>
 </div>
 </div>
-<p>The other double rotation is known as a <a href="10-glossary.html#zigzig" class="term">zigzig</a> rotation. A zigzig rotation takes place when
-either of the following two conditions are met:</p>
+<p>The other double rotation is known as a <a
+href="10-glossary.html#zigzig" class="term">zigzig</a> rotation. A
+zigzig rotation takes place when either of the following two conditions
+are met:</p>
 <ol type="1">
 <li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
 is the left child of
@@ -374,3 +381,4 @@ same splay operations would take place.</p>
 </section>
 </body>
 </html>
+

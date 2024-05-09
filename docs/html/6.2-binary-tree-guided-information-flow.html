@@ -122,14 +122,15 @@ traversing a binary tree, we want to make sure that we are visiting the
 required nodes (no more and no less).</p>
 <p>So far, we have seen several tree traversals that visited every node
 of the tree. We also saw the BST search, insert, and remove routines,
-that each go down a single path of the tree. <a href="10-glossary.html#guided-traversal" class="term">Guided
-traversal</a> refers to a problem that does not require visiting
-every node in the tree, though it typically requires looking at more
-than one path through the tree. This means that the recursive function
-is making some decision at each node that sometimes lets it avoid
-visiting one or both of its children. The decision is typically based on
-the value of the current node. Many problems that require information
-flow on binary search trees are “guided” in this way.</p>
+that each go down a single path of the tree. <a
+href="10-glossary.html#guided-traversal" class="term">Guided
+traversal</a> refers to a problem that does not require visiting every
+node in the tree, though it typically requires looking at more than one
+path through the tree. This means that the recursive function is making
+some decision at each node that sometimes lets it avoid visiting one or
+both of its children. The decision is typically based on the value of
+the current node. Many problems that require information flow on binary
+search trees are “guided” in this way.</p>
 <section id="example-32" class="level4 unnumbered topic">
 <h4 class="unnumbered">Example</h4>
 <p>An extreme example is finding the minimum value in a BST. A bad
@@ -162,3 +163,4 @@ Binary Search Tree Small Count Exercise</h3>
 <script type="text/javascript" src="../interactive/BTRecurTutor/IneffBinaryTreeRangeCON.js"></script>
 </body>
 </html>
+

@@ -194,10 +194,12 @@ field, with the type of the field depending on the application. The most
 common node implementation includes a value field and pointers to the
 two children.</p>
 <p>Here is a simple implementation for binary tree nodes. When we need
-to support search structures such as the <a href="10-glossary.html#binary-search-tree" class="term">Binary
-Search Tree</a>, the node will typically store a <a href="10-glossary.html#key-value-pair" class="term">key-value pair</a>. Every <code>BinaryTreeNode</code>
-object also has two pointers, one to its left child and another to its
-right child.</p>
+to support search structures such as the <a
+href="10-glossary.html#binary-search-tree" class="term">Binary Search
+Tree</a>, the node will typically store a <a
+href="10-glossary.html#key-value-pair" class="term">key-value pair</a>.
+Every <code>BinaryTreeNode</code> object also has two pointers, one to
+its left child and another to its right child.</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Binary tree node implementation</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BinaryTreeNode:</span>
@@ -294,12 +296,18 @@ understanding of recursion and so indicate poor programming. If you are
 inclined toward using a parent pointer, consider if there is a more
 efficient implementation possible.</p>
 <p>An important decision in the design of a pointer-based node
-implementation is whether the same class definition will be used for <a href="10-glossary.html#leaf-node" class="term">leaves</a> and <a href="10-glossary.html#internal-node" class="term">internal nodes</a>. Using the same class for both will
-simplify the implementation, but might be an inefficient use of space.
-Some applications require data values only for the leaves. Other
-applications require one type of value for the leaves and another for
-the internal nodes. Examples include the <a href="10-glossary.html#binary-trie" class="term">binary
-trie</a>, the <a href="10-glossary.html#pr-quadtree" class="term">PR Quadtree</a>, the <a href="10-glossary.html#huffman-coding-tree" class="term">Huffman coding tree</a>, and the <a href="10-glossary.html#expression-tree" class="term">expression tree</a> illustrated by <a
+implementation is whether the same class definition will be used for <a
+href="10-glossary.html#leaf-node" class="term">leaves</a> and <a
+href="10-glossary.html#internal-node" class="term">internal nodes</a>.
+Using the same class for both will simplify the implementation, but
+might be an inefficient use of space. Some applications require data
+values only for the leaves. Other applications require one type of value
+for the leaves and another for the internal nodes. Examples include the
+<a href="10-glossary.html#binary-trie" class="term">binary trie</a>, the
+<a href="10-glossary.html#pr-quadtree" class="term">PR Quadtree</a>, the
+<a href="10-glossary.html#huffman-coding-tree" class="term">Huffman
+coding tree</a>, and the <a href="10-glossary.html#expression-tree"
+class="term">expression tree</a> illustrated by <a
 href="5.3-binary-tree-node-implementations.html#DiffNodes">Figure
 #DiffNodes</a>. By definition, only internal nodes have non-empty
 children. If we use the same node implementation for both internal and
@@ -334,19 +342,23 @@ character symbol. In contrast, leaves store variable names or numbers,
 which is considerably larger in order to handle the wider range of
 possible values. At the same time, leaf nodes need not store child
 pointers.</p>
-<p><a href="10-glossary.html#object-oriented-programming-paradigm" class="term">Object-oriented languages</a> allow us to differentiate
-leaf from internal nodes through the use of a <a href="10-glossary.html#class-hierarchy" class="term">class
-hierarchy</a>. A <a href="10-glossary.html#base-class" class="term">base class</a> provides a
-general definition for an object, and a <a href="10-glossary.html#subclass" class="term">subclass</a> modifies a base class to add more detail. A
-base class can be declared for binary tree nodes in general, with
-subclasses defined for the internal and leaf nodes. The base class in
-the following code is named <code>VarBinNode</code>. It includes a
-virtual member function named <code>isLeaf</code>, which indicates the
-node type. Subclasses for the internal and leaf node types each
-implement <code>isLeaf</code>. Internal nodes store child pointers of
-the base class type; they do not distinguish their children’s actual
-subclass. Whenever a node is examined, its version of
-<code>isLeaf</code> indicates the node’s subclass.</p>
+<p><a href="10-glossary.html#object-oriented-programming-paradigm"
+class="term">Object-oriented languages</a> allow us to differentiate
+leaf from internal nodes through the use of a <a
+href="10-glossary.html#class-hierarchy" class="term">class
+hierarchy</a>. A <a href="10-glossary.html#base-class" class="term">base
+class</a> provides a general definition for an object, and a <a
+href="10-glossary.html#subclass" class="term">subclass</a> modifies a
+base class to add more detail. A base class can be declared for binary
+tree nodes in general, with subclasses defined for the internal and leaf
+nodes. The base class in the following code is named
+<code>VarBinNode</code>. It includes a virtual member function named
+<code>isLeaf</code>, which indicates the node type. Subclasses for the
+internal and leaf node types each implement <code>isLeaf</code>.
+Internal nodes store child pointers of the base class type; they do not
+distinguish their children’s actual subclass. Whenever a node is
+examined, its version of <code>isLeaf</code> indicates the node’s
+subclass.</p>
 <div class="sourceCode" id="cb6"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Base class for expression tree nodes</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> VarBinNode:</span>
@@ -512,3 +524,4 @@ appropriate, as shown in function <code>traverse</code>.</p>
 <script type="text/javascript" src="../interactive/Binary/expressionTraversalCON.js"></script>
 </body>
 </html>
+

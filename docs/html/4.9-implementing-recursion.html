@@ -184,7 +184,8 @@
 <h2 data-number="4.9"><span class="header-section-number">4.9</span>
 Implementing Recursion</h2>
 <p>WARNING! You should not read this section unless you are already
-comfortable with implementing <a href="10-glossary.html#recursion" class="term">recursive functions</a>. One of the biggest hang-ups for
+comfortable with implementing <a href="10-glossary.html#recursion"
+class="term">recursive functions</a>. One of the biggest hang-ups for
 students learning recursion is too much focus on the recursive
 “process”. The right way to think about recursion is to just think about
 the return value that the recursive call gives back. Thinking about
@@ -199,11 +200,15 @@ Call stacks for implementing recursion</h3>
 <p>Perhaps the most common computer application that uses <a
 href="4.8-stacks.html#stacks">stacks</a> is not even visible to its
 users. This is the implementation of subroutine calls in most
-programming language <a href="10-glossary.html#runtime-environment" class="term">runtime
-environments</a>. A subroutine call is normally implemented by <a href="10-glossary.html#push" class="term">pushing</a> necessary information about the
-subroutine (including the return address, parameters, and local
-variables) onto a stack. This information is called an <a href="10-glossary.html#activation-record" class="term">activation record</a>. Further subroutine calls add to
-the stack. Each return from a subroutine <a href="10-glossary.html#pop" class="term">pops</a> the top activation record off the stack. As an
+programming language <a href="10-glossary.html#runtime-environment"
+class="term">runtime environments</a>. A subroutine call is normally
+implemented by <a href="10-glossary.html#push" class="term">pushing</a>
+necessary information about the subroutine (including the return
+address, parameters, and local variables) onto a stack. This information
+is called an <a href="10-glossary.html#activation-record"
+class="term">activation record</a>. Further subroutine calls add to the
+stack. Each return from a subroutine <a href="10-glossary.html#pop"
+class="term">pops</a> the top activation record off the stack. As an
 example, here is a recursive implementation for the factorial
 function.</p>
 <div class="sourceCode" id="cb1"><pre
@@ -464,3 +469,4 @@ correct order.</p>
 </section>
 </body>
 </html>
+

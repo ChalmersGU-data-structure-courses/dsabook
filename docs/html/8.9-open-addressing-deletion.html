@@ -200,16 +200,18 @@ of deletion. The freed slot should be available to a future
 insertion.</li>
 </ol>
 <p>Both of these problems can be resolved by placing a special mark in
-place of the deleted record, called a <a href="10-glossary.html#tombstone" class="term">tombstone</a>. The tombstone indicates that a record
-once occupied the slot but does so no longer. If a tombstone is
-encountered when searching along a probe sequence, the search procedure
-continues with the search. When a tombstone is encountered during
-insertion, that slot can be used to store the new record. However, to
-avoid inserting duplicate keys, it will still be necessary for the
-search procedure to follow the probe sequence until a truly empty
-position has been found, simply to verify that a duplicate is not in the
-table. However, the new record would actually be inserted into the slot
-of the first tombstone encountered.</p>
+place of the deleted record, called a <a
+href="10-glossary.html#tombstone" class="term">tombstone</a>. The
+tombstone indicates that a record once occupied the slot but does so no
+longer. If a tombstone is encountered when searching along a probe
+sequence, the search procedure continues with the search. When a
+tombstone is encountered during insertion, that slot can be used to
+store the new record. However, to avoid inserting duplicate keys, it
+will still be necessary for the search procedure to follow the probe
+sequence until a truly empty position has been found, simply to verify
+that a duplicate is not in the table. However, the new record would
+actually be inserted into the slot of the first tombstone
+encountered.</p>
 <p>
 <div id="hashdelCON" class="ssAV" data-short-name="hashdelCON" data-long-name="Hash Deletion Slideshow" alt="Hash Deletion Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
@@ -360,3 +362,4 @@ the collection has the smallest key value?”</p>
 <script type="text/javascript" src="../interactive/Hashing/hashdelCON.js"></script>
 </body>
 </html>
+

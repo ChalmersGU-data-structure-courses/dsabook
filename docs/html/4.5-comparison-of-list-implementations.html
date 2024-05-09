@@ -128,18 +128,21 @@ choose?</p>
 space whether they are simple integers or large objects with many
 fields. Any container data structure like a list then requires some
 additional space to organize the elements being stored. This additional
-space is called <a href="10-glossary.html#overhead" class="term">overhead</a>.</p>
-<p><a href="10-glossary.html#array-based-list" class="term">Array-based lists</a> have
-the disadvantage that their size must be predetermined before the array
-can be allocated. Static array-based lists cannot grow beyond their
-predetermined size, but dynamic lists will automatically reallocate the
-array when needed. However, when the list has recently been reallocated,
-a substantial amount of space might be tied up in a largely empty array.
-This empty space is the overhead required by the array-based list. <a href="10-glossary.html#linked-list" class="term">Linked lists</a> have the advantage
-that they only need space for the objects actually on the list. There is
-no limit to the number of elements in either a linked list or a dynamic
-array-based list, as long as there is <a href="10-glossary.html#free-store" class="term">free
-store</a> memory available.</p>
+space is called <a href="10-glossary.html#overhead"
+class="term">overhead</a>.</p>
+<p><a href="10-glossary.html#array-based-list" class="term">Array-based
+lists</a> have the disadvantage that their size must be predetermined
+before the array can be allocated. Static array-based lists cannot grow
+beyond their predetermined size, but dynamic lists will automatically
+reallocate the array when needed. However, when the list has recently
+been reallocated, a substantial amount of space might be tied up in a
+largely empty array. This empty space is the overhead required by the
+array-based list. <a href="10-glossary.html#linked-list"
+class="term">Linked lists</a> have the advantage that they only need
+space for the objects actually on the list. There is no limit to the
+number of elements in either a linked list or a dynamic array-based
+list, as long as there is <a href="10-glossary.html#free-store"
+class="term">free store</a> memory available.</p>
 <p>The amount of space required by a linked list is directly
 proportional to the number of elements
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.
@@ -277,3 +280,4 @@ listobject.c</a>]</li>
 </section>
 </body>
 </html>
+

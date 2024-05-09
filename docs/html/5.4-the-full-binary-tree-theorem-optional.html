@@ -118,14 +118,16 @@
 data-number="5.4">
 <h2 data-number="5.4"><span class="header-section-number">5.4</span> The
 Full Binary Tree Theorem (optional)</h2>
-<p>Some binary tree implementations store data only at the <a href="10-glossary.html#leaf-node" class="term">leaf nodes</a>, using the <a href="10-glossary.html#internal-node" class="term">internal nodes</a> to provide
-structure to the tree. By definition, a leaf node does not need to store
-pointers to its (empty) <a href="10-glossary.html#child" class="term">children</a>. More
-generally, binary tree implementations might require some amount of
-space for internal nodes, and a different amount for leaf nodes. Thus,
-to compute the space required by such implementations, it is useful to
-know the minimum and maximum fraction of the nodes that are leaves in a
-tree containing
+<p>Some binary tree implementations store data only at the <a
+href="10-glossary.html#leaf-node" class="term">leaf nodes</a>, using the
+<a href="10-glossary.html#internal-node" class="term">internal nodes</a>
+to provide structure to the tree. By definition, a leaf node does not
+need to store pointers to its (empty) <a href="10-glossary.html#child"
+class="term">children</a>. More generally, binary tree implementations
+might require some amount of space for internal nodes, and a different
+amount for leaf nodes. Thus, to compute the space required by such
+implementations, it is useful to know the minimum and maximum fraction
+of the nodes that are leaves in a tree containing
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
 internal nodes.</p>
 <p>Unfortunately, this fraction is not fixed. A binary tree of
@@ -161,7 +163,9 @@ nodes.</p>
 <p><strong>Full Binary Tree Theorem:</strong> The number of leaves in a
 non-empty full binary tree is one more than the number of internal
 nodes.</p>
-<p><strong>Proof:</strong> The proof is by <a href="10-glossary.html#proof-by-induction" class="term">mathematical induction</a> on
+<p><strong>Proof:</strong> The proof is by <a
+href="10-glossary.html#proof-by-induction" class="term">mathematical
+induction</a> on
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
 the number of internal nodes. This is an example of the style of
 induction proof where we reduce from an arbitrary instance of size
@@ -307,3 +311,4 @@ children must be empty.</p>
 <script type="text/javascript" src="../interactive/Binary/UnaryTreeExampleCON.js"></script>
 </body>
 </html>
+

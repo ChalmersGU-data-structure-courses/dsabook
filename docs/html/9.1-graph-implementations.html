@@ -186,12 +186,15 @@ Graph Implementations</h2>
 <section id="graph-api" class="level3" data-number="9.1.1">
 <h3 data-number="9.1.1"><span class="header-section-number">9.1.1</span>
 Graph API</h3>
-<p>We next turn to the problem of implementing a general-purpose <a href="10-glossary.html#graph" class="term">graph</a> class. There are two traditional approaches to
-representing graphs: The <a href="10-glossary.html#adjacency-matrix" class="term">adjacency matrix</a> and
-the <a href="10-glossary.html#adjacency-list" class="term">adjacency list</a>. In this module we will
-show actual implementations for each approach. We will begin with an
-interface defining an ADT for graphs that a given implementation must
-meet.</p>
+<p>We next turn to the problem of implementing a general-purpose <a
+href="10-glossary.html#graph" class="term">graph</a> class. There are
+two traditional approaches to representing graphs: The <a
+href="9.1-graph-implementations.html#adjacency-matrix"
+class="term">adjacency matrix</a> and the <a
+href="9.1-graph-implementations.html#adjacency-list"
+class="term">adjacency list</a>. In this module we will show actual
+implementations for each approach. We will begin with an interface
+defining an ADT for graphs that a given implementation must meet.</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Graph:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> addVertex(<span class="va">self</span>, v):     <span class="st">&quot;&quot;&quot;Adds the vertex v to the graph. Returns true if it wasn&#39;t already in the graph.&quot;&quot;&quot;</span></span>
@@ -412,9 +415,11 @@ graphs. This implementation uses a generic type for vertices, so that
 you can use strings or anything else.</p>
 <p>Its main data structure is a map from vertices to sets of edges.
 Exactly which kind of map or set we use can depend on our needs, but in
-this implementation we use a <a href="10-glossary.html#separate-chaining" class="term">separate chaining</a>
-hash map, backed with a set implemented as a <a href="10-glossary.html#linked-list" class="term">linked
-list</a>.</p>
+this implementation we use a <a
+href="8.3-separate-chaining.html#separate-chaining"
+class="term">separate chaining</a> hash map, backed with a set
+implemented as a <a href="10-glossary.html#linked-list"
+class="term">linked list</a>.</p>
 <p>So, for each vertex, we store a linked list of all the edges
 originating from that vertex. This makes the method
 <code>outgoingEdges</code> very efficient, because the only thing we
@@ -511,3 +516,4 @@ class="sourceCode java"><code class="sourceCode java"><span id="cb7-1"><a href="
 </section>
 </body>
 </html>
+

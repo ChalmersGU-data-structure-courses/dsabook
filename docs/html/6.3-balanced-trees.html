@@ -116,10 +116,11 @@
 <section id="balanced-trees" class="level2" data-number="6.3">
 <h2 data-number="6.3"><span class="header-section-number">6.3</span>
 Balanced Trees</h2>
-<p>The <a href="10-glossary.html#binary-search-tree" class="term">Binary Search Tree</a> has a serious
-deficiency for practical use as a search structure. That is the fact
-that it can easily become unbalanced, so that some nodes are deep in the
-tree. In fact, it is possible for a BST with
+<p>The <a href="10-glossary.html#binary-search-tree" class="term">Binary
+Search Tree</a> has a serious deficiency for practical use as a search
+structure. That is the fact that it can easily become unbalanced, so
+that some nodes are deep in the tree. In fact, it is possible for a BST
+with
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
 nodes to have a depth of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
@@ -130,12 +131,13 @@ be
 a huge improvement.</p>
 <p>One solution to this problem is to adopt another search tree
 structure instead of using a BST at all. An example of such an
-alternative tree structure is the <a href="10-glossary.html#2-3-tree" class="term">2-3 Tree</a> or
-the <a href="10-glossary.html#b-tree" class="term">B-Tree</a>. But another alternative would be
-to modify the BST access functions in some way to guarantee that the
-tree performs well. This is an appealing concept, and the concept works
-well for heaps, whose access functions maintain the heap in the shape of
-a complete binary tree. Unfortunately, the heap keeps its balanced shape
+alternative tree structure is the <a href="10-glossary.html#2-3-tree"
+class="term">2-3 Tree</a> or the <a href="10-glossary.html#b-tree"
+class="term">B-Tree</a>. But another alternative would be to modify the
+BST access functions in some way to guarantee that the tree performs
+well. This is an appealing concept, and the concept works well for
+heaps, whose access functions maintain the heap in the shape of a
+complete binary tree. Unfortunately, the heap keeps its balanced shape
 at the cost of weaker restrictions on the relative values of a node and
 its children, making it a bad search structure. And requiring that the
 BST always be in the shape of a complete binary tree requires excessive
@@ -162,8 +164,9 @@ subtrees differ by at most one.</p>
 <p>A different approach to improving the performance of the BST is to
 not require that the tree always be balanced, but rather to expend some
 effort toward making the BST more balanced every time it is accessed.
-This is a little like the idea of path compression used by the <a href="10-glossary.html#union-find" class="term">UNION/FIND</a> algorithm. One example of such a
-compromise is called the <a
+This is a little like the idea of path compression used by the <a
+href="10-glossary.html#union-find" class="term">UNION/FIND</a>
+algorithm. One example of such a compromise is called the <a
 href="6.6-the-splay-tree-optional.html#the-splay-tree-optional">splay
 tree</a>.</p>
 <p>The [Red-Black Tree] is also a binary tree, but it uses a different
@@ -171,3 +174,4 @@ balancing mechanism.</p>
 </section>
 </body>
 </html>
+

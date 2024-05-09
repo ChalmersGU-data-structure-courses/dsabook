@@ -214,14 +214,15 @@ before continuing on, it is instructive to investigate what makes these
 three sorts so slow. The crucial bottleneck is that only
 <em>adjacent</em> records are compared. Thus, comparisons and moves (for
 Insertion and Bubble Sort) are by single steps. Swapping adjacent
-records is called an <a href="10-glossary.html#exchange" class="term">exchange</a>. Thus, these
-sorts are sometimes referred to as an <a href="10-glossary.html#exchange-sort" class="term">exchange
-sort</a>. The cost of any exchange sort can be at best the total
-number of steps that the records in the array must move to reach their
+records is called an <a href="10-glossary.html#exchange"
+class="term">exchange</a>. Thus, these sorts are sometimes referred to
+as an <a href="10-glossary.html#exchange-sort" class="term">exchange
+sort</a>. The cost of any exchange sort can be at best the total number
+of steps that the records in the array must move to reach their
 “correct” location. Recall that this is at least the number of
-inversions for the record, where an <a href="10-glossary.html#inversion" class="term">inversion</a>
-occurs when a record with key value greater than the current record’s
-key value appears before it.</p>
+inversions for the record, where an <a href="10-glossary.html#inversion"
+class="term">inversion</a> occurs when a record with key value greater
+than the current record’s key value appears before it.</p>
 <p>
 <div id="FindInversionsPRO" class="embedContainer">
 <iframe id="FindInversionsPRO_iframe" aria-label="FindInversionsPRO" src="../interactive/Sorting/FindInversionsPRO.html" width="100%" height="600" scrolling="no">
@@ -252,3 +253,4 @@ Your browser does not support iframes.
 <script type="text/javascript" src="../interactive/Sorting/ExchangeSortCON.js"></script>
 </body>
 </html>
+

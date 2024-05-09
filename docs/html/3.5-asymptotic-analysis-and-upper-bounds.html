@@ -152,8 +152,9 @@ is surpassed by
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">2 n^2</annotation></semantics></math>
 once
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">n = 10</annotation></semantics></math>.
-The additional factor of two for the linear <a href="10-glossary.html#growth-rate" class="term">growth
-rate</a> does not much matter. It only doubles the
+The additional factor of two for the linear <a
+href="10-glossary.html#growth-rate" class="term">growth rate</a> does
+not much matter. It only doubles the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>-coordinate
 for the intersection point. In general, changes to a constant factor in
 either equation only shift <em>where</em> the two curves cross, not
@@ -167,11 +168,12 @@ constants. For these reasons, we usually ignore the constants when we
 want an estimate of the growth rate for the running time or other
 resource requirements of an algorithm. This simplifies the analysis and
 keeps us thinking about the most important aspect: the growth rate. This
-is called <a href="10-glossary.html#asymptotic-algorithm-analysis" class="term">asymptotic algorithm analysis</a>. To be
-precise, asymptotic analysis refers to the study of an algorithm as the
-input size “gets big” or reaches a limit (in the calculus sense).
-However, it has proved to be so useful to ignore all constant factors
-that asymptotic analysis is used for most algorithm comparisons.</p>
+is called <a href="10-glossary.html#asymptotic-algorithm-analysis"
+class="term">asymptotic algorithm analysis</a>. To be precise,
+asymptotic analysis refers to the study of an algorithm as the input
+size “gets big” or reaches a limit (in the calculus sense). However, it
+has proved to be so useful to ignore all constant factors that
+asymptotic analysis is used for most algorithm comparisons.</p>
 <p>In rare situations, it is not reasonable to ignore the constants.
 When comparing algorithms meant to run on small values of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
@@ -183,27 +185,28 @@ performance. There are rare cases where the constants for two algorithms
 under comparison can differ by a factor of 1000 or more, making the one
 with lower growth rate impractical for typical problem sizes due to its
 large constant. Asymptotic analysis is a form of “back of the envelope”
-<a href="10-glossary.html#estimation" class="term">estimation</a> for algorithm resource consumption.
-It provides a simplified model of the running time or other resource
-needs of an algorithm. This simplification usually helps you understand
-the behavior of your algorithms. Just be aware of the limitations to
-asymptotic analysis in the rare situation where the constant is
-important.</p>
+<a href="10-glossary.html#estimation" class="term">estimation</a> for
+algorithm resource consumption. It provides a simplified model of the
+running time or other resource needs of an algorithm. This
+simplification usually helps you understand the behavior of your
+algorithms. Just be aware of the limitations to asymptotic analysis in
+the rare situation where the constant is important.</p>
 <section id="upper-bounds" class="level3" data-number="3.5.1">
 <h3 data-number="3.5.1"><span class="header-section-number">3.5.1</span>
 Upper Bounds</h3>
 <p>Several terms are used to describe the running-time equation for an
 algorithm. These terms – and their associated symbols – indicate
 precisely what aspect of the algorithm’s behavior is being described.
-One is the <a href="10-glossary.html#upper-bound" class="term">upper bound</a> for the growth of the
-algorithm’s running time. It indicates the upper or highest growth rate
-that the algorithm can have.</p>
+One is the <a href="10-glossary.html#upper-bound" class="term">upper
+bound</a> for the growth of the algorithm’s running time. It indicates
+the upper or highest growth rate that the algorithm can have.</p>
 <p>Because the phrase “has an upper bound to its growth rate of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(n)</annotation></semantics></math>”
 is long and often used when discussing algorithms, we adopt a special
-notation, called <a href="10-glossary.html#big-oh-notation" class="term">big-Oh notation</a>. If the upper
-bound for an algorithm’s growth rate (for, say, the worst case) is
-(f(n)), then we would write that this algorithm is “in the set
+notation, called <a href="10-glossary.html#big-oh-notation"
+class="term">big-Oh notation</a>. If the upper bound for an algorithm’s
+growth rate (for, say, the worst case) is (f(n)), then we would write
+that this algorithm is “in the set
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(f(n))</annotation></semantics></math>
 in the worst case” (or just “in
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(f(n))</annotation></semantics></math>
@@ -518,3 +521,4 @@ Your browser does not support iframes.
 <script type="text/javascript" src="../interactive/AlgAnal/SimpleCostsCON.js"></script>
 </body>
 </html>
+

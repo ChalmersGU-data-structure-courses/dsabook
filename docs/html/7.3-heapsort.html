@@ -208,17 +208,21 @@ take advantage of the fact that sorting is a special-purpose application
 in that all of the values to be stored are available at the start. This
 means that we do not necessarily need to insert one value at a time into
 the tree structure.</p>
-<p><a href="10-glossary.html#heapsort" class="term">Heapsort</a> is based on the <a href="10-glossary.html#heap" class="term">heap</a> data structure. Heapsort has all of the
-advantages just listed. The complete binary tree is balanced, its array
-representation is space efficient, and we can load all values into the
-tree at once, taking advantage of the efficient <code>buildheap</code>
-function. The asymptotic performance of Heapsort when all of the records
-have unique key values is
+<p><a href="7.3-heapsort.html#heapsort" class="term">Heapsort</a> is
+based on the <a href="10-glossary.html#heap" class="term">heap</a> data
+structure. Heapsort has all of the advantages just listed. The complete
+binary tree is balanced, its array representation is space efficient,
+and we can load all values into the tree at once, taking advantage of
+the efficient <code>buildheap</code> function. The asymptotic
+performance of Heapsort when all of the records have unique key values
+is
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log n)</annotation></semantics></math>
 in the best, average, and worst cases. It is not as fast as Quicksort in
 the average case (by a constant factor), but Heapsort has special
-properties that will make it particularly useful for <a href="10-glossary.html#external-sort" class="term">external sorting</a> algorithms, used
-when sorting data sets too large to fit in main memory.</p>
+properties that will make it particularly useful for <a
+href="10-glossary.html#external-sort" class="term">external sorting</a>
+algorithms, used when sorting data sets too large to fit in main
+memory.</p>
 <p>
 <div id="heapsortCON" class="ssAV" data-short-name="heapsortCON" data-long-name="Heapsort Slideshow" alt="Heapsort Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
@@ -414,12 +418,14 @@ find the
 largest-valued records using one of the other sorting methods described
 earlier (many of which would require sorting all of the array first).
 One situation where we are able to take advantage of this concept is in
-the implementation of <a href="10-glossary.html#kruskals-algorithm" class="term">Kruskal’s algorithm</a> for
-<a href="10-glossary.html#minimal-cost-spanning-tree" class="term">minimal-cost spanning
-trees</a>. That algorithm requires that edges be visited in ascending
-order (so, use a min-heap), but this process stops as soon as the MST is
-complete. Thus, only a relatively small fraction of the edges need be
-sorted.</p>
+the implementation of <a
+href="9.5-minimal-cost-spanning-trees.html#kruskals-algorithm"
+class="term">Kruskal’s algorithm</a> for <a
+href="10-glossary.html#minimal-cost-spanning-tree"
+class="term">minimal-cost spanning trees</a>. That algorithm requires
+that edges be visited in ascending order (so, use a min-heap), but this
+process stops as soon as the MST is complete. Thus, only a relatively
+small fraction of the edges need be sorted.</p>
 <p>Another special case arises when all of the records being sorted have
 the same key value. This represents the best case for Heapsort. This is
 because removing the smallest value requires only constant time, since
@@ -438,3 +444,4 @@ Your browser does not support iframes.
 <script type="text/javascript" src="../interactive/Sorting/HeapSortAnalysisCON.js"></script>
 </body>
 </html>
+

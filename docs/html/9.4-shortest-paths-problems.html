@@ -188,9 +188,10 @@ Shortest-Paths Problems</h2>
 data-number="9.4.1">
 <h3 data-number="9.4.1"><span class="header-section-number">9.4.1</span>
 Shortest-Paths on Unweighted Graphs</h3>
-<p>If you have an unweighted graph, the <a href="10-glossary.html#shortest-path" class="term">shortest
-path</a> between two vertices is the smallest number of edges you
-have to pass to get from one of the vertices to the other.</p>
+<p>If you have an unweighted graph, the <a
+href="10-glossary.html#shortest-path" class="term">shortest path</a>
+between two vertices is the smallest number of edges you have to pass to
+get from one of the vertices to the other.</p>
 <p>If you agument the <a
 href="9.2-graph-traversals.html#breadth-first-search">breadth-first
 search</a> algorithm to remember which vertex a visited vertex came
@@ -206,12 +207,15 @@ Shortest-Paths on Weighted Graphs</h3>
 its distance. We can model a road network as a directed graph whose
 edges are labeled with real numbers. These numbers represent the
 distance (or other cost metric, such as travel time) between two
-vertices. These labels may be called <a href="10-glossary.html#weight" class="term">weights</a>, <a href="10-glossary.html#cost" class="term">costs</a>, or <a href="10-glossary.html#distance" class="term">distances</a>, depending on the
-application. Given such a graph, a typical problem is to find the total
-length of the shortest path between two specified vertices. This is not
-a trivial problem, because the shortest path may not be along the edge
-(if any) connecting two vertices, but rather may be along a path
-involving one or more intermediate vertices.</p>
+vertices. These labels may be called <a href="10-glossary.html#weight"
+class="term">weights</a>, <a href="10-glossary.html#cost"
+class="term">costs</a>, or <a href="10-glossary.html#distance"
+class="term">distances</a>, depending on the application. Given such a
+graph, a typical problem is to find the total length of the shortest
+path between two specified vertices. This is not a trivial problem,
+because the shortest path may not be along the edge (if any) connecting
+two vertices, but rather may be along a path involving one or more
+intermediate vertices.</p>
 <p>For example, in <a
 href="9.4-shortest-paths-problems.html#DistExamp">Figure #DistExamp</a>,
 the cost of the path from
@@ -282,7 +286,9 @@ positive.</p>
 data-number="9.4.3">
 <h3 data-number="9.4.3"><span class="header-section-number">9.4.3</span>
 Single-Source Shortest Paths</h3>
-<p>We will now present an algorithm to solve the <a href="10-glossary.html#single-source-shortest-paths-problem" class="term">single-source shortest paths problem</a>. Given Vertex
+<p>We will now present an algorithm to solve the <a
+href="10-glossary.html#single-source-shortest-paths-problem"
+class="term">single-source shortest paths problem</a>. Given Vertex
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
 in Graph
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐆</mi><annotation encoding="application/x-tex">\mathbf{G}</annotation></semantics></math>,
@@ -484,18 +490,18 @@ time. Every time we modify
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐃</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>X</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathbf{D}(X)</annotation></semantics></math>,
 we could reorder
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
-in the heap by deleting and reinserting it. This is an example of a
-<a href="10-glossary.html#priority-queue" class="term">priority queue</a> with priority update. To
-implement true priority updating, we would need to store with each
-vertex its position within the heap so that we can remove its old
-distances whenever it is updated by processing new edges. A simpler
-approach is to add the new (always smaller) distance value for a given
-vertex as a new record in the heap. The smallest value for a given
-vertex currently in the heap will be found first, and greater distance
-values found later will be ignored because the vertex will already be
-marked as <strong>visited</strong>. The only disadvantage to repeatedly
-inserting distance values in this way is that it will raise the number
-of elements in the heap from
+in the heap by deleting and reinserting it. This is an example of a <a
+href="10-glossary.html#priority-queue" class="term">priority queue</a>
+with priority update. To implement true priority updating, we would need
+to store with each vertex its position within the heap so that we can
+remove its old distances whenever it is updated by processing new edges.
+A simpler approach is to add the new (always smaller) distance value for
+a given vertex as a new record in the heap. The smallest value for a
+given vertex currently in the heap will be found first, and greater
+distance values found later will be ignored because the vertex will
+already be marked as <strong>visited</strong>. The only disadvantage to
+repeatedly inserting distance values in this way is that it will raise
+the number of elements in the heap from
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="true" form="postfix">|</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(|\mathbf{V}|)</annotation></semantics></math>
 to
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">|</mo><mi>𝐄</mi><mo stretchy="true" form="postfix">|</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(|\mathbf{E}|)</annotation></semantics></math>
@@ -558,3 +564,4 @@ Your browser does not support iframes.
 <script type="text/javascript" src="../interactive/Graph/DijkstraCON.js"></script>
 </body>
 </html>
+

@@ -187,14 +187,17 @@ Separate Chaining, or Open Hashing</h2>
 <p>While the goal of a hash function is to minimize collisions, some
 collisions are unavoidable in practice. Thus, hashing implementations
 must include some form of collision resolution policy. Collision
-resolution techniques can be broken into two classes: <a href="10-glossary.html#separate-chaining" class="term">separate chaining</a> (also called open hashing) and
-<a href="10-glossary.html#open-addressing" class="term">open addressing</a> (also called closed hashing).
-(Yes, it is confusing when “open hashing” means the opposite of “open
-addressing”, but unfortunately, that is the way it is.) The difference
-between the two has to do with whether collisions are stored outside the
-table (separate chaining/open hashing), or whether collisions result in
-storing one of the records at another slot in the table (open
-addressing/closed hashing).</p>
+resolution techniques can be broken into two classes: <a
+href="8.3-separate-chaining.html#separate-chaining"
+class="term">separate chaining</a> (also called open hashing) and <a
+href="8.6-open-addressing.html#open-addressing" class="term">open
+addressing</a> (also called closed hashing). (Yes, it is confusing when
+“open hashing” means the opposite of “open addressing”, but
+unfortunately, that is the way it is.) The difference between the two
+has to do with whether collisions are stored outside the table (separate
+chaining/open hashing), or whether collisions result in storing one of
+the records at another slot in the table (open addressing/closed
+hashing).</p>
 <p>The simplest form of separate chaining defines each slot in the hash
 table to be the head of a linked list. All records that hash to a
 particular slot are placed on that slot’s linked list. The following
@@ -224,7 +227,8 @@ positions in the table, yielding on average
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mi>/</mi><mi>M</mi></mrow><annotation encoding="application/x-tex">N/M</annotation></semantics></math>
 records for each list. This value,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mi>/</mi><mi>M</mi></mrow><annotation encoding="application/x-tex">N/M</annotation></semantics></math>,
-is commonly called the <a href="10-glossary.html#load-factor" class="term">load factor</a>.</p>
+is commonly called the <a href="10-glossary.html#load-factor"
+class="term">load factor</a>.</p>
 <p>Assuming that the table has more slots than there are records to be
 stored, we can hope that few slots will contain more than one record. In
 the case where a list is empty or has only one record, a search requires
@@ -241,12 +245,14 @@ way is difficult, because members of a given linked list might be stored
 on different disk blocks. This would result in multiple disk accesses
 when searching for a particular key value, which defeats the purpose of
 using hashing.</p>
-<p>There are similarities between separate chaining and <a href="10-glossary.html#binsort" class="term">Binsort</a>. One way to view separate chaining is that
-each record is simply placed in a bin. While multiple records may hash
-to the same bin, this initial binning should still greatly reduce the
-number of records accessed by a search operation. In a similar fashion,
-a simple Binsort reduces the number of records in each bin to a small
-number that can be sorted in some other way.</p>
+<p>There are similarities between separate chaining and <a
+href="10-glossary.html#binsort" class="term">Binsort</a>. One way to
+view separate chaining is that each record is simply placed in a bin.
+While multiple records may hash to the same bin, this initial binning
+should still greatly reduce the number of records accessed by a search
+operation. In a similar fashion, a simple Binsort reduces the number of
+records in each bin to a small number that can be sorted in some other
+way.</p>
 <section id="alternatives-to-a-linked-list" class="level3"
 data-number="8.3.1">
 <h3 data-number="8.3.1"><span class="header-section-number">8.3.1</span>
@@ -674,3 +680,4 @@ class="sourceCode java"><code class="sourceCode java"><span id="cb16-1"><a href=
 <script type="text/javascript" src="../interactive/Hashing/openhashCON.js"></script>
 </body>
 </html>
+

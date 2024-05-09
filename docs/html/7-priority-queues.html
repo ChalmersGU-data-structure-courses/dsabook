@@ -183,14 +183,16 @@
 <section id="priority-queues" class="level1" data-number="7">
 <h1 data-number="7"><span class="header-section-number">7</span>
 Priority queues</h1>
-<p>So far we have seen two <a href="10-glossary.html#adt" class="term">ADTs</a> that
-represent a collection of objects, and support adding and removing
-objects:</p>
+<p>So far we have seen two <a href="10-glossary.html#adt"
+class="term">ADTs</a> that represent a collection of objects, and
+support adding and removing objects:</p>
 <ul>
-<li><a href="10-glossary.html#stack" class="term">Stacks</a>, where the object removed
-is always the one <em>most recently</em> inserted (<a href="10-glossary.html#lifo" class="term">LIFO</a>).</li>
-<li><a href="10-glossary.html#queue" class="term">Queues</a>, where the object removed
-is always the one <em>first</em> inserted (<a href="10-glossary.html#fifo" class="term">FIFO</a>).</li>
+<li><a href="10-glossary.html#stack" class="term">Stacks</a>, where the
+object removed is always the one <em>most recently</em> inserted (<a
+href="10-glossary.html#lifo" class="term">LIFO</a>).</li>
+<li><a href="10-glossary.html#queue" class="term">Queues</a>, where the
+object removed is always the one <em>first</em> inserted (<a
+href="10-glossary.html#fifo" class="term">FIFO</a>).</li>
 </ul>
 <p>There are many situations, both in real life and in computing
 applications, where we wish to choose the next “most important” from a
@@ -198,13 +200,16 @@ collection of people, tasks, or objects. For example, doctors in a
 hospital emergency room often choose to see next the “most critical”
 patient rather than the one who arrived first. When scheduling programs
 for execution in a multitasking operating system, at any given moment
-there might be several programs (usually called <a href="10-glossary.html#job" class="term">jobs</a>) ready to run. The next job selected is the one
-with the highest <a href="10-glossary.html#priority" class="term">priority</a>. Priority is
+there might be several programs (usually called <a
+href="10-glossary.html#job" class="term">jobs</a>) ready to run. The
+next job selected is the one with the highest <a
+href="10-glossary.html#priority" class="term">priority</a>. Priority is
 indicated by a particular value associated with the job (and might
 change while the job remains in the wait list).</p>
 <p>When a collection of objects is organized by importance or priority,
-we call this a <a href="10-glossary.html#priority-queue" class="term">priority queue</a>. A priority
-queue supports the following operations:</p>
+we call this a <a href="10-glossary.html#priority-queue"
+class="term">priority queue</a>. A priority queue supports the following
+operations:</p>
 <ul>
 <li>adding a new object to the priority queue</li>
 <li>removing the <em>smallest</em> object from the priority queue.</li>
@@ -401,3 +406,4 @@ transactions, then the complexity of <code>add</code> is
 </section>
 </body>
 </html>
+

@@ -234,8 +234,9 @@ sequence should be a random permutation of the hash table positions.
 Unfortunately, we cannot actually select the next position in the probe
 sequence at random, because we would not be able to duplicate this same
 probe sequence when searching for the key. However, we can do something
-similar called <a href="10-glossary.html#pseudo-random-probing" class="term">pseudo-random probing</a>. In
-pseudo-random probing, the
+similar called <a
+href="8.7-improved-collision-resolution.html#pseudo-random-probing"
+class="term">pseudo-random probing</a>. In pseudo-random probing, the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
 th slot in the probe sequence is
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mtext mathvariant="bold">𝐡</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>K</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><msub><mi>r</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mspace width="0.444em"></mspace><mo>mod</mo><mspace width="0.222em"></mspace><mi>M</mi></mrow></mrow><annotation encoding="application/x-tex">(\textbf{h}(K) + r_i) \mod M</annotation></semantics></math>
@@ -286,8 +287,9 @@ function.</p>
 <h3 data-number="8.7.3"><span class="header-section-number">8.7.3</span>
 Quadratic Probing</h3>
 <p>Another probe function that eliminates primary clustering is called
-<a href="10-glossary.html#quadratic-probing" class="term">quadratic probing</a>. Here the probe function is
-some quadratic function
+<a href="8.7-improved-collision-resolution.html#quadratic-probing"
+class="term">quadratic probing</a>. Here the probe function is some
+quadratic function
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="bold">𝐩</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>K</mi><mo>,</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msub><mi>c</mi><mn>1</mn></msub><msup><mi>i</mi><mn>2</mn></msup><mo>+</mo><msub><mi>c</mi><mn>2</mn></msub><mi>i</mi><mo>+</mo><msub><mi>c</mi><mn>3</mn></msub></mrow><annotation encoding="application/x-tex">\textbf{p}(K, i) = c_1 i^2 + c_{2}i + c_3</annotation></semantics></math>
 for some choice of constants
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>c</mi><mn>1</mn></msub><annotation encoding="application/x-tex">c_1</annotation></semantics></math>,
@@ -366,7 +368,9 @@ its input parameter
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>K</mi><annotation encoding="application/x-tex">K</annotation></semantics></math>
 for these collision resolution methods. If the hash function generates a
 cluster at a particular home position, then the cluster remains under
-pseudo-random and quadratic probing. This problem is called <a href="10-glossary.html#secondary-clustering" class="term">secondary clustering</a>.</p>
+pseudo-random and quadratic probing. This problem is called <a
+href="10-glossary.html#secondary-clustering" class="term">secondary
+clustering</a>.</p>
 <p>To avoid secondary clustering, we need to have the probe sequence
 make use of the original key value in its decision-making process. A
 simple technique for doing this is to return to linear probing by a
@@ -375,7 +379,9 @@ determined by a second hash function,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mtext mathvariant="bold">𝐡</mtext><mn>2</mn></msub><annotation encoding="application/x-tex">\textbf{h}_2</annotation></semantics></math>.
 Thus, the probe sequence would be of the form
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="bold">𝐩</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>K</mi><mo>,</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>i</mi><mo>*</mo><msub><mtext mathvariant="bold">𝐡</mtext><mn>2</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>K</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\textbf{p}(K, i) = i * \textbf{h}_2(K)</annotation></semantics></math>.
-This method is called <a href="10-glossary.html#double-hashing" class="term">double hashing</a>.</p>
+This method is called <a
+href="8.7-improved-collision-resolution.html#double-hashing"
+class="term">double hashing</a>.</p>
 <p>There are important restrictions on
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>h</mi><mn>2</mn></msub><annotation encoding="application/x-tex">h_2</annotation></semantics></math>.
 Most importantly, the value returned by
@@ -505,3 +511,4 @@ role="doc-backlink">↩︎</a></p></li>
 <script type="text/javascript" src="../interactive/Hashing/collisionCON8.js"></script>
 </body>
 </html>
+

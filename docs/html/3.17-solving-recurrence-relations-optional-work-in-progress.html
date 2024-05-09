@@ -540,12 +540,14 @@ converges to</p>
 class="header-section-number">3.17.2</span> Expanding Recurrences</h3>
 <p>Estimating bounds is effective if you only need an approximation to
 the answer. More precise techniques are required to find an exact
-solution. One approach is called <a href="10-glossary.html#expanding-the-recurrence" class="term">expanding the
-recurrence</a>. In this method, the smaller terms on the right side
+solution. One approach is called <a
+href="10-glossary.html#expanding-the-recurrence" class="term">expanding
+the recurrence</a>. In this method, the smaller terms on the right side
 of the equation are in turn replaced by their definition. This is the
 expanding step. These terms are again expanded, and so on, until a full
-series with no recurrence results. This yields a <a href="10-glossary.html#summation" class="term">summation</a>, and techniques for solving summations can
-then be used.</p>
+series with no recurrence results. This yields a <a
+href="10-glossary.html#summation" class="term">summation</a>, and
+techniques for solving summations can then be used.</p>
 <p>
 <div id="ExpandRecurrenceCON" class="ssAV" data-short-name="ExpandRecurrenceCON" data-long-name="Divide-and-Conquer Expansion Slideshow" alt="Divide-and-Conquer Expansion Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
@@ -594,8 +596,9 @@ Recurrences</h3>
 <p>The third approach to solving recurrences is to take advantage of
 known theorems that provide the solution for classes of recurrences. Of
 particular practical use is a theorem that gives the answer for a class
-known as <a href="10-glossary.html#divide-and-conquer-recurrences" class="term">divide-and-conquer recurrences</a>. These
-have the form</p>
+known as <a
+href="3.17-solving-recurrence-relations-optional-work-in-progress.html#divide-and-conquer-recurrences"
+class="term">divide-and-conquer recurrences</a>. These have the form</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mi>𝐓</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>a</mi><mi>𝐓</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mi>/</mi><mi>b</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>c</mi><msup><mi>n</mi><mi>k</mi></msup></mtd><mtd columnalign="center" style="text-align: center"><mo>;</mo></mtd><mtd columnalign="left" style="text-align: left"><mi>𝐓</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>c</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">
 \begin{eqnarray}
 \mathbf{T}(n) = a\mathbf{T}(n/b) + cn^k &amp;;&amp; \mathbf{T}(1) = c
@@ -662,7 +665,8 @@ depends on the ratio
 There are three cases.</p>
 <ol type="1">
 <li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>&lt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">r&lt;1</annotation></semantics></math>.
-From Equation (4) of Module <a href="10-glossary.html#summation" class="term">summation</a>,</p>
+From Equation (4) of Module <a href="10-glossary.html#summation"
+class="term">summation</a>,</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mi>m</mi></munderover><msup><mi>r</mi><mi>i</mi></msup><mo>&lt;</mo><mn>1</mn><mi>/</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>r</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="0.222em"></mspace><mtext mathvariant="normal">a constant</mtext></mrow><annotation encoding="application/x-tex">
 \sum_{i=0}^{m} r^i &lt; 1/(1-r),\ \textrm{a constant}
 </annotation></semantics></math></p>
@@ -692,7 +696,8 @@ we have</p>
 \mathbf{T}(n) = \Theta(n^{\log_ba}\log_b n) = \Theta(n^k\log_b n)
 </annotation></semantics></math></p></li>
 <li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>&gt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">r&gt;1</annotation></semantics></math>.
-From Equation (5) of Module <a href="10-glossary.html#summation" class="term">summation</a>,</p>
+From Equation (5) of Module <a href="10-glossary.html#summation"
+class="term">summation</a>,</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mi>m</mi></munderover><msup><mi>r</mi><mi>i</mi></msup><mo>=</mo><mfrac><mrow><msup><mi>r</mi><mrow><mi>m</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>−</mo><mn>1</mn></mrow><mrow><mi>r</mi><mo>−</mo><mn>1</mn></mrow></mfrac><mo>=</mo><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>r</mi><mi>m</mi></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
 \sum_{i=0}^{m} r^i = \frac{r^{m+1} - 1}{r - 1} = \Theta(r^m)
 </annotation></semantics></math></p>
@@ -705,8 +710,8 @@ From Equation (5) of Module <a href="10-glossary.html#summation" class="term">su
 </annotation></semantics></math></p></li>
 </ol>
 <p>We can summarize the above derivation as the following theorem,
-sometimes referred to as the <a href="10-glossary.html#master-theorem" class="term">Master
-Theorem</a>.</p>
+sometimes referred to as the <a href="10-glossary.html#master-theorem"
+class="term">Master Theorem</a>.</p>
 <div id="RecurThm">
 <section id="theorem" class="level4 unnumbered topic">
 <h4 class="unnumbered">Theorem</h4>
@@ -803,10 +808,11 @@ This yields</p>
 \mathbf{T}(n) &amp;=&amp; cn + \frac{2}{n}\sum_{k=0}^{n-1} \mathbf{T}(k)
 \end{eqnarray}
 </annotation></semantics></math></p>
-<p>This form is known as a <a href="10-glossary.html#recurrence-with-full-history" class="term">recurrence with full
-history</a>. The key to solving such a recurrence is to cancel out
-the summation terms. The shifting method for summations provides a way
-to do this. Multiply both sides by
+<p>This form is known as a <a
+href="10-glossary.html#recurrence-with-full-history"
+class="term">recurrence with full history</a>. The key to solving such a
+recurrence is to cancel out the summation terms. The shifting method for
+summations provides a way to do this. Multiply both sides by
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
 and subtract the result from the formula for
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>𝐓</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">n\mathbf{T}(n+1)</annotation></semantics></math>:</p>
@@ -851,7 +857,8 @@ so we can simplify the result. Expanding the recurrence, we get</p>
 </annotation></semantics></math></p>
 <p>for
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>ℋ</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><annotation encoding="application/x-tex">\mathcal{H}_{n+1}</annotation></semantics></math>,
-the Harmonic Series. From Equation (10) of Module <a href="10-glossary.html#summation" class="term">summation</a>,
+the Harmonic Series. From Equation (10) of Module <a
+href="10-glossary.html#summation" class="term">summation</a>,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ℋ</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathcal{H}_{n+1} = \Theta(\log n)</annotation></semantics></math>,
 so the final solution is
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log n)</annotation></semantics></math>.</p>
@@ -861,3 +868,4 @@ so the final solution is
 <script type="text/javascript" src="../interactive/AlgAnal/DandCRecurrenceCON.js"></script>
 </body>
 </html>
+

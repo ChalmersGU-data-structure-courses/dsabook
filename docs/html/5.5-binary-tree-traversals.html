@@ -188,16 +188,20 @@ Binary Tree Traversals</h2>
 <p>Often we wish to process a binary tree by “visiting” each of its
 nodes, each time performing a specific action such as printing the
 contents of the node. Any process for visiting all of the nodes in some
-order is called a <a href="10-glossary.html#traversal" class="term">traversal</a>. Any traversal
-that lists every node in the tree exactly once is called an <a href="10-glossary.html#enumeration" class="term">enumeration</a> of the tree’s nodes. Some applications
-do not require that the nodes be visited in any particular order as long
-as each node is visited precisely once. For other applications, nodes
-must be visited in an order that preserves some relationship.</p>
+order is called a <a href="10-glossary.html#traversal"
+class="term">traversal</a>. Any traversal that lists every node in the
+tree exactly once is called an <a href="10-glossary.html#enumeration"
+class="term">enumeration</a> of the tree’s nodes. Some applications do
+not require that the nodes be visited in any particular order as long as
+each node is visited precisely once. For other applications, nodes must
+be visited in an order that preserves some relationship.</p>
 <section id="preorder-traversal" class="level3" data-number="5.5.1">
 <h3 data-number="5.5.1"><span class="header-section-number">5.5.1</span>
 Preorder Traversal</h3>
 <p>For example, we might wish to make sure that we visit any given node
-<em>before</em> we visit its children. This is called a <a href="10-glossary.html#preorder-traversal" class="term">preorder traversal</a>.</p>
+<em>before</em> we visit its children. This is called a <a
+href="5.5-binary-tree-traversals.html#preorder-traversal"
+class="term">preorder traversal</a>.</p>
 <div id="BinTravExample">
 <p>
 <div id="BinExampCON" class="ssAV" data-short-name="BinExampCON" data-long-name="Binary/BinExampCON" alt="Binary/BinExampCON" tabIndex="-1">
@@ -232,8 +236,9 @@ we visit its children (and their subtrees). For example, this would be
 necessary if we wish to return all nodes in the tree to free store. We
 would like to delete the children of a node before deleting the node
 itself. But to do that requires that the children’s children be deleted
-first, and so on. This is called a <a href="10-glossary.html#postorder-traversal" class="term">postorder
-traversal</a>.</p>
+first, and so on. This is called a <a
+href="5.5-binary-tree-traversals.html#postorder-traversal"
+class="term">postorder traversal</a>.</p>
 <section id="example-28" class="level4 unnumbered topic">
 <h4 class="unnumbered">Example</h4>
 <p>The postorder enumeration for the tree of <a
@@ -252,10 +257,13 @@ href="5.5-binary-tree-traversals.html#BinTravExample">Figure
 <section id="inorder-traversal" class="level3" data-number="5.5.3">
 <h3 data-number="5.5.3"><span class="header-section-number">5.5.3</span>
 Inorder Traversal</h3>
-<p>An <a href="10-glossary.html#inorder-traversal" class="term">inorder traversal</a> first visits the left
-child (including its entire subtree), then visits the node, and finally
-visits the right child (including its entire subtree). The <a href="10-glossary.html#binary-search-tree" class="term">binary search tree</a> makes use of this traversal to
-print all nodes in ascending order of value.</p>
+<p>An <a href="5.5-binary-tree-traversals.html#inorder-traversal"
+class="term">inorder traversal</a> first visits the left child
+(including its entire subtree), then visits the node, and finally visits
+the right child (including its entire subtree). The <a
+href="10-glossary.html#binary-search-tree" class="term">binary search
+tree</a> makes use of this traversal to print all nodes in ascending
+order of value.</p>
 <section id="example-29" class="level4 unnumbered topic">
 <h4 class="unnumbered">Example</h4>
 <p>The inorder enumeration for the tree of <a
@@ -356,3 +364,4 @@ Your browser does not support iframes.
 <script type="text/javascript" src="../interactive/Binary/inorderCON.js"></script>
 </body>
 </html>
+
