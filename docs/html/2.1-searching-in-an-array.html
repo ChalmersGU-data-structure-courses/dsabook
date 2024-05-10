@@ -192,12 +192,15 @@ Sequential Search</h3>
 objects that stores a particular value, you cannot really do better than
 simply looking through the array from the beginning and move toward the
 end until you find what you are looking for. This algorithm is called <a
-href="2.1-searching-in-an-array.html#sequential-search"
-class="term">sequential search</a>. If you do find it, we call this a <a
-href="10-glossary.html#successful-search" class="term">successful
+href="2.1-searching-in-an-array.html#sequential-search" class="term"
+title="The simplest search algorithm: In an array, simply look at the array elements in the order that they appear.">sequential
+search</a>. If you do find it, we call this a <a
+href="10-glossary.html#successful-search" class="term"
+title="When searching for a key value in a collection of records, we might find it. If so, we call this a successful search. The alternative is an unsuccessful search.">successful
 search</a>. If the value is not in the array, eventually you will reach
 the end. We will call this an <a
-href="10-glossary.html#unsuccessful-search" class="term">unsuccessful
+href="10-glossary.html#unsuccessful-search" class="term"
+title="When searching for a key value in a collection of records, we might not find it. If so, we call this an unsuccessful search. Usually we require that this means that no record in the collection actually has that key value (though a probabilistic algorithm for search might not require this to be true). The alternative to an unsuccessful search is a successful search.">unsuccessful
 search</a>. Here is a simple implementation for sequential search.</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Return the position of an element in a list.</span></span>
@@ -212,9 +215,10 @@ run. But we do not really care exactly how long a particular program
 will run on a particular computer. We just want some sort of estimate
 that will let us compare one approach to solving a problem with another.
 This is the basic idea of <a
-href="3-algorithm-analysis.html#algorithm-analysis"
-class="term">algorithm analysis</a>. In the case of sequential search,
-it is easy to see that if the value is in position
+href="3-algorithm-analysis.html#algorithm-analysis" class="term"
+title="A method for estimating the efficiency of an algorithm or computer program by identifying its asymptotic complexity, the growth rate of its complexity function. Asymptotic analysis also gives a way to define the inherent difficulty of a problem. We frequently use the term algorithm analysis to mean the same thing.">algorithm
+analysis</a>. In the case of sequential search, it is easy to see that
+if the value is in position
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
 of the array, then sequential search will look at
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
@@ -224,14 +228,17 @@ look at
 values if the array holds
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
 values. This would be called the <a href="10-glossary.html#worst-case"
-class="term">worst case</a> for sequential search. Since the amount of
-work is proportional to
+class="term"
+title="In algorithm analysis, specifically complexity of an algorithm, the problem instance from among all problem instances for a given input size $n$ that has the greatest cost. Every input size $n$ has its own worst case. We **never** consider the worst case as removed from input size.">worst
+case</a> for sequential search. Since the amount of work is proportional
+to
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
 we say that the worst case for sequential search has <a
-href="10-glossary.html#linear-growth-rate" class="term">linear cost</a>.
-For this reason, the sequential search algorithm is sometimes called <a
-href="10-glossary.html#linear-search" class="term">linear
-search</a>.</p>
+href="10-glossary.html#linear-growth-rate" class="term"
+title="For input size $n$, a growth rate of $cn$ (for $c$ any positive constant). In other words, the cost of the associated function is linear on the input size.">linear
+cost</a>. For this reason, the sequential search algorithm is sometimes
+called <a href="10-glossary.html#linear-search" class="term"
+title="Another name for sequential search.">linear search</a>.</p>
 </section>
 <section id="binary-search" class="level3" data-number="2.1.2">
 <h3 data-number="2.1.2"><span class="header-section-number">2.1.2</span>
@@ -241,7 +248,9 @@ value in an unsorted array.<a href="#fn1" class="footnote-ref"
 id="fnref1" role="doc-noteref"><sup>1</sup></a> But if the array is
 sorted in increasing order by value, then we can do much better. We use
 a process called <a href="2.1-searching-in-an-array.html#binary-search"
-class="term">binary search</a>.</p>
+class="term"
+title="A standard recursive algorithm for finding the record with a given search key value within a sorted list. It runs in $O(\log n)$ time. At each step, look at the middle of the current sublist, and throw away the half of the records whose keys are either too small or too large.">binary
+search</a>.</p>
 <p>Binary search begins by examining the value in the middle position of
 the array; call this position
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">mid</annotation></semantics></math>
@@ -326,16 +335,20 @@ role="doc-endnotes">
 is the best that you can do on an unsorted array. But writing a
 convincing proof that no algorithm could ever be discovered that is
 better is surprisingly difficult. This is an example of a <a
-href="10-glossary.html#lower-bounds-proof" class="term">lower bounds
-proof</a> to find the cost for the best possible <a
-href="10-glossary.html#algorithm" class="term">algorithm</a> to solve
-the <a href="10-glossary.html#problem" class="term">problem</a> of
-search in an unsorted array.<a href="#fnref1" class="footnote-back"
+href="10-glossary.html#lower-bounds-proof" class="term"
+title="A proof regarding the lower bound, with this term most typically referring to the lower bound for any possible algorithm to solve a given problem. Many problems have a simple lower bound based on the concept that the minimum amount of processing is related to looking at all of the problem&#39;s input. However, some problems have a higher lower bound than that. For example, the lower bound for the problem of sorting ($\Omega(n \log n)$) is greater than the input size to sorting ($n$). Proving such &#39;non-trivial&#39; lower bounds for problems is notoriously difficult.">lower
+bounds proof</a> to find the cost for the best possible <a
+href="10-glossary.html#algorithm" class="term"
+title="A method or a process followed to solve a problem.">algorithm</a>
+to solve the <a href="10-glossary.html#problem" class="term"
+title="A task to be performed. It is best thought of as a function or a mapping of inputs to outputs.">problem</a>
+of search in an unsorted array.<a href="#fnref1" class="footnote-back"
 role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>It is possible to <a
-href="10-glossary.html#search-lower-bound" class="term">prove</a> that
-binary search is the most efficient algorithm possible in the worst case
-when searching in a sorted array. This is even more difficult than
+href="10-glossary.html#search-lower-bound" class="term"
+title="The problem of searching in an array has provable lower bounds for specific variations of the problem. For an unsorted array, it is $\Omega(n)$ comparisons in the worst case, typically proved using an adversary argument. For a sorted array, it is $\Omega(\log n)$ in the worst case, typically proved using an argument similar to the sorting lower bound proof. Indeed, it is possible to search a sorted array in the average case in $O(\log n)$ time.">prove</a>
+that binary search is the most efficient algorithm possible in the worst
+case when searching in a sorted array. This is even more difficult than
 proving that sequential search is the most efficient algorithm possible
 on an unsorted array.<a href="#fnref2" class="footnote-back"
 role="doc-backlink">↩︎</a></p></li>

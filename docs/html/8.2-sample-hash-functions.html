@@ -227,16 +227,17 @@ key value by 100. Thus, all keys in the range 0 to 99 would hash to slot
 0, keys 100 to 199 would hash to slot 1, and so on. In other words, this
 hash function “bins” the first 100 keys to the first slot, the next 100
 keys to the second slot, and so on.</p>
-<p><a href="8.2-sample-hash-functions.html#binning"
-class="term">Binning</a> in this way has the problem that it will
-cluster together keys if the distribution does not divide evenly on the
-high-order bits. In the above example, if more records have keys in the
-range 900-999 (first digit 9) than have keys in the range 100-199 (first
-digit 1), more records will hash to slot 9 than to slot 1. Likewise, if
-we pick too big a value for the key range and the actual key values are
-all relatively small, then most records will hash to slot 0. A similar,
-analogous problem arises if we were instead hashing strings based on the
-first letter in the string.</p>
+<p><a href="8.2-sample-hash-functions.html#binning" class="term"
+title="In hashing, binning is a type of hash function. Say we are given keys in the range 0 to 999, and have a hash table of size 10. In this case, a possible hash function might simply divide the key value by 100. Thus, all keys in the range 0 to 99 would hash to slot 0, keys 100 to 199 would hash to slot 1, and so on. In other words, this hash function &#39;bins&#39; the first 100 keys to the first slot, the next 100 keys to the second slot, and so on. This approach tends to make the hash function dependent on the distribution of the high-order bits of the keys.">Binning</a>
+in this way has the problem that it will cluster together keys if the
+distribution does not divide evenly on the high-order bits. In the above
+example, if more records have keys in the range 900-999 (first digit 9)
+than have keys in the range 100-199 (first digit 1), more records will
+hash to slot 9 than to slot 1. Likewise, if we pick too big a value for
+the key range and the actual key values are all relatively small, then
+most records will hash to slot 0. A similar, analogous problem arises if
+we were instead hashing strings based on the first letter in the
+string.</p>
 <p>
 <div id="hashFuncExCON2" class="ssAV" data-short-name="hashFuncExCON2" data-long-name="Hash Function Slideshow 2" alt="Hash Function Slideshow 2" tabIndex="-1">
 <span class="jsavcounter"></span>
@@ -299,7 +300,8 @@ alt="Binning vs. Mod Function">
 <h3 data-number="8.2.3"><span class="header-section-number">8.2.3</span>
 The Mid-Square Method</h3>
 <p>A good hash function to use with integer key values is the <a
-href="10-glossary.html#mid-square-method" class="term">mid-square
+href="10-glossary.html#mid-square-method" class="term"
+title="In hashing, an approach to implementing a hash function. The key value is squared, and some number of bits from the middle of the resulting value are extracted as the hash code. Some care must be taken to extract bits that tend to actually be in the middle of the resulting value, which requires some understanding of the typical key values. When done correctly, this has the advantage of having the hash code be affected by all bits of the key">mid-square
 method</a>. The mid-square method squares the key value, and then takes
 out the middle
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>
@@ -373,7 +375,9 @@ is small compared to the resulting summations, then this hash function
 should do a good job of distributing strings evenly among the hash table
 slots, because it gives equal weight to all characters in the string.
 This is an example of the <a href="10-glossary.html#folding-method"
-class="term">folding method</a> to designing a hash function.</p>
+class="term"
+title="In hashing, an approach to implementing a hash function. Most typically used when the key is a string, the folding method breaks the string into pieces (perhaps each letter is a piece, or a small series of letters is a piece), converts the letter(s) to an integer value (typically by using its underlying encoding value), and summing up the pieces.">folding
+method</a> to designing a hash function.</p>
 <p>As with many other hash functions, the final step is to apply the
 modulus operator to the result, using table size
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>

@@ -195,11 +195,13 @@ common node implementation includes a value field and pointers to the
 two children.</p>
 <p>Here is a simple implementation for binary tree nodes. When we need
 to support search structures such as the <a
-href="10-glossary.html#binary-search-tree" class="term">Binary Search
-Tree</a>, the node will typically store a <a
-href="10-glossary.html#key-value-pair" class="term">key-value pair</a>.
-Every <code>BinaryTreeNode</code> object also has two pointers, one to
-its left child and another to its right child.</p>
+href="10-glossary.html#binary-search-tree" class="term"
+title="A binary tree that imposes the following constraint on its node values: The search key value for any node $A$ must be greater than the (key) values for all nodes in the left subtree of $A$, and less than the key values for all nodes in the right subtree of $A$. Some convention must be adopted if multiple nodes with the same key value are permitted, typically these are required to be in the right subtree.">Binary
+Search Tree</a>, the node will typically store a <a
+href="10-glossary.html#key-value-pair" class="term"
+title="A standard solution for solving the problem of how to relate a key value to a record (or how to find the key for a given record) within the context of a particular index. The idea is to simply store as records in the index pairs of keys and records. Specifically, the index will typically store a copy of the key along with a reference to the record. The other standard solution to this problem is to pass a comparator function to the index.">key-value
+pair</a>. Every <code>BinaryTreeNode</code> object also has two
+pointers, one to its left child and another to its right child.</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Binary tree node implementation</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BinaryTreeNode:</span>
@@ -297,17 +299,26 @@ inclined toward using a parent pointer, consider if there is a more
 efficient implementation possible.</p>
 <p>An important decision in the design of a pointer-based node
 implementation is whether the same class definition will be used for <a
-href="10-glossary.html#leaf-node" class="term">leaves</a> and <a
-href="10-glossary.html#internal-node" class="term">internal nodes</a>.
-Using the same class for both will simplify the implementation, but
-might be an inefficient use of space. Some applications require data
-values only for the leaves. Other applications require one type of value
-for the leaves and another for the internal nodes. Examples include the
-<a href="10-glossary.html#binary-trie" class="term">binary trie</a>, the
-<a href="10-glossary.html#pr-quadtree" class="term">PR Quadtree</a>, the
-<a href="10-glossary.html#huffman-coding-tree" class="term">Huffman
+href="10-glossary.html#leaf-node" class="term"
+title="In a binary tree, leaf node is any node that has two empty children. (Note that a binary tree is defined so that every node has two children, and that is why the leaf node has to have two empty children, rather than no children.) In a general tree, any node is a leaf node if it has no children.">leaves</a>
+and <a href="10-glossary.html#internal-node" class="term"
+title="In a tree, any node that has at least one non-empty child is an internal node.">internal
+nodes</a>. Using the same class for both will simplify the
+implementation, but might be an inefficient use of space. Some
+applications require data values only for the leaves. Other applications
+require one type of value for the leaves and another for the internal
+nodes. Examples include the <a href="10-glossary.html#binary-trie"
+class="term"
+title="A binary tree whose structure is that of a trie. Generally this is an implementation for a search tree. This means that the search key values are thought of a binary digits, with the digit in the position corresponding to this a node&#39;s level in the tree indicating a left branch if it is &#39;0&#39;, or a right branch if it is &#39;1&#39;. Examples include the Huffman coding tree and the Bintree.">binary
+trie</a>, the <a href="10-glossary.html#pr-quadtree" class="term"
+title="A type of quadtree that stores point data in two dimensions. The root of the PR quadtree represents some square region of 2d space. If that space stores more than one data point, then the region is decomposed into four equal subquadrants, each represented recursively by a subtree of the PR quadtree. Since many leaf nodes of the PR quadtree will contain no data points, implementation often makes use of the Flyweight design pattern. Related to the bintree.">PR
+Quadtree</a>, the <a href="10-glossary.html#huffman-coding-tree"
+class="term"
+title="A Huffman coding tree is a full binary tree that is used to represent letters (or other symbols) efficiently. Each letter is associated with a node in the tree, and is then given a Huffman code based on the position of the associated node. A Huffman coding tree is an example of a binary trie.">Huffman
 coding tree</a>, and the <a href="10-glossary.html#expression-tree"
-class="term">expression tree</a> illustrated by <a
+class="term"
+title="A tree structure meant to represent a mathematical expression. Internal nodes of the expression tree are operators in the expression, with the subtrees being the sub-expressions that are its operand. All leaf nodes are operands.">expression
+tree</a> illustrated by <a
 href="5.3-binary-tree-node-implementations.html#DiffNodes">Figure
 #DiffNodes</a>. By definition, only internal nodes have non-empty
 children. If we use the same node implementation for both internal and
@@ -343,15 +354,19 @@ which is considerably larger in order to handle the wider range of
 possible values. At the same time, leaf nodes need not store child
 pointers.</p>
 <p><a href="10-glossary.html#object-oriented-programming-paradigm"
-class="term">Object-oriented languages</a> allow us to differentiate
-leaf from internal nodes through the use of a <a
-href="10-glossary.html#class-hierarchy" class="term">class
-hierarchy</a>. A <a href="10-glossary.html#base-class" class="term">base
+class="term"
+title="An approach to problem-solving where all computations are carried out using objects.">Object-oriented
+languages</a> allow us to differentiate leaf from internal nodes through
+the use of a <a href="10-glossary.html#class-hierarchy" class="term"
+title="In object-oriented programming, a set of classes and their interrelationships. One of the classes is the base class, and the others are subclasses that inherit either directly or indirectly from the base class.">class
+hierarchy</a>. A <a href="10-glossary.html#base-class" class="term"
+title="In object-oriented programming, a class from which another class inherits. The class that inherits is called a subclass.">base
 class</a> provides a general definition for an object, and a <a
-href="10-glossary.html#subclass" class="term">subclass</a> modifies a
-base class to add more detail. A base class can be declared for binary
-tree nodes in general, with subclasses defined for the internal and leaf
-nodes. The base class in the following code is named
+href="10-glossary.html#subclass" class="term"
+title="In object-oriented programming, any class within a class hierarchy that inherits from some other class.">subclass</a>
+modifies a base class to add more detail. A base class can be declared
+for binary tree nodes in general, with subclasses defined for the
+internal and leaf nodes. The base class in the following code is named
 <code>VarBinNode</code>. It includes a virtual member function named
 <code>isLeaf</code>, which indicates the node type. Subclasses for the
 internal and leaf node types each implement <code>isLeaf</code>.

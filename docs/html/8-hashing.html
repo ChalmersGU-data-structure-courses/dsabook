@@ -133,18 +133,21 @@ though hashing is based on a very simple idea, it is surprisingly
 difficult to implement properly. Designers need to pay careful attention
 to all of the details involved with implementing a hash system.</p>
 <p>A hash system stores records in an array called a <a
-href="10-glossary.html#hash-table" class="term">hash table</a>, which we
-will call <code>HT</code>. Hashing works by performing a computation on
-a search key <code>K</code> in a way that is intended to identify the
-position in <code>HT</code> that contains the record with key
-<code>K</code>. The function that does this calculation is called the <a
-href="10-glossary.html#hash-function" class="term">hash function</a>,
-and will be denoted by the letter <strong>h</strong>. Since hashing
-schemes place records in the table in whatever order satisfies the needs
-of the address calculation, records are not ordered by value. A position
-in the hash table is also known as a <a href="10-glossary.html#slot"
-class="term">slot</a>. The number of slots in hash table <code>HT</code>
-will be denoted by the variable
+href="10-glossary.html#hash-table" class="term"
+title="The data structure (usually an array) that stores data records for lookup using hashing.">hash
+table</a>, which we will call <code>HT</code>. Hashing works by
+performing a computation on a search key <code>K</code> in a way that is
+intended to identify the position in <code>HT</code> that contains the
+record with key <code>K</code>. The function that does this calculation
+is called the <a href="10-glossary.html#hash-function" class="term"
+title="In a hash system, the function that converts a key value to a position in the hash table. The hope is that this position in the hash table contains the record that matches the key value.">hash
+function</a>, and will be denoted by the letter <strong>h</strong>.
+Since hashing schemes place records in the table in whatever order
+satisfies the needs of the address calculation, records are not ordered
+by value. A position in the hash table is also known as a <a
+href="10-glossary.html#slot" class="term"
+title="In hashing, a position in a hash table.">slot</a>. The number of
+slots in hash table <code>HT</code> will be denoted by the variable
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>
 with slots numbered from 0 to
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">M-1</annotation></semantics></math>.</p>
@@ -210,7 +213,8 @@ is a slot in the table, then we say that
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>1</mn></msub><annotation encoding="application/x-tex">k_1</annotation></semantics></math>
 and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>2</mn></msub><annotation encoding="application/x-tex">k_2</annotation></semantics></math>
-have a <a href="10-glossary.html#collision" class="term">collision</a>
+have a <a href="10-glossary.html#collision" class="term"
+title="In a hash system, this refers to the case where two search keys are mapped by the hash function to the same slot in the hash table. This can happen on insertion or search when another record has already been hashed to that slot. In this case, a closed hash system will require a process known as collision resolution to find the location of the desired record.">collision</a>
 at slot
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>
 under hash function <strong>h</strong>.</p>
@@ -222,8 +226,9 @@ organized by hashing follows a two-step procedure:</p>
 <li>Starting with slot
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐡</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>K</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathbf{h}(K)</annotation></semantics></math>,
 locate the record containing key <code>K</code> using (if necessary) a
-<a href="8.6-open-addressing.html#collision-resolution"
-class="term">collision resolution</a> policy.</li>
+<a href="8.6-open-addressing.html#collision-resolution" class="term"
+title="The outcome of a collision resolution policy.">collision
+resolution</a> policy.</li>
 </ol>
 </section>
 <script type="text/javascript" src="../interactive/Hashing/hashIntroCON.js"></script>

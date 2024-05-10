@@ -185,56 +185,67 @@
 data-number="5.13">
 <h2 data-number="5.13"><span class="header-section-number">5.13</span>
 The Union/Find Algorithm (optional)</h2>
-<p><a href="10-glossary.html#general-tree" class="term">General
+<p><a href="10-glossary.html#general-tree" class="term"
+title="A tree in which any given node can have any number of children. This is in contrast to, for example, a binary tree where each node has a fixed number of children (some of which might be `null`). General tree nodes tend to be harder to implement for this reason.">General
 trees</a> are trees whose <a href="10-glossary.html#internal-node"
-class="term">internal nodes</a> have no fixed number of <a
-href="10-glossary.html#child" class="term">children</a>. Compared to
-general trees, <a href="10-glossary.html#binary-tree"
-class="term">binary trees</a> are relatively easy to implement because
-each internal node of a binary tree can just store two pointers to reach
-its (potential) children. In a general tree, we have to deal with the
-fact that a given node might have no children or few children or many
-children.</p>
+class="term"
+title="In a tree, any node that has at least one non-empty child is an internal node.">internal
+nodes</a> have no fixed number of <a href="10-glossary.html#child"
+class="term"
+title="In a tree, the set of nodes directly pointed to by a node $R$ are the children of $R$.">children</a>.
+Compared to general trees, <a href="10-glossary.html#binary-tree"
+class="term"
+title="A finite set of nodes which is either empty, or else has a root node together two binary trees, called the left and right subtrees, which are disjoint from each other and from the root.">binary
+trees</a> are relatively easy to implement because each internal node of
+a binary tree can just store two pointers to reach its (potential)
+children. In a general tree, we have to deal with the fact that a given
+node might have no children or few children or many children.</p>
 <p>Even in a general tree, each node can have only one <a
-href="10-glossary.html#parent" class="term">parent</a>. If we didn’t
-need to go from a node to its children, but instead only needed to go
-from a node to its parent, then implementing a node would be easy. A
-simple way to represent such a general tree would be to store for each
-node only a pointer to that node’s parent. We will call this the <a
-href="10-glossary.html#parent-pointer-representation"
-class="term">parent pointer representation</a> for general trees.
-Clearly this implementation is not general purpose, because it is
-inadequate for such important operations as finding the leftmost child
-or the right sibling for a node. Thus, it may seem to be a poor idea to
-implement a general tree in this way. However, the parent pointer
-implementation stores precisely the information required to answer the
-following, useful question: <strong>Given two nodes, are they in the
-same tree?</strong> To answer this question, we need only follow the
-series of parent pointers from each node to its respective root. If both
-nodes reach the same root, then they must be in the same tree. If the
-roots are different, then the two nodes are not in the same tree. The
-process of finding the ultimate root for a given node we will call <a
-href="10-glossary.html#find" class="term">FIND</a>.</p>
+href="10-glossary.html#parent" class="term"
+title="In a tree, the node $P$ that directly links to a node $A$ is the parent of $A$. $A$ is the child of $P$.">parent</a>.
+If we didn’t need to go from a node to its children, but instead only
+needed to go from a node to its parent, then implementing a node would
+be easy. A simple way to represent such a general tree would be to store
+for each node only a pointer to that node’s parent. We will call this
+the <a href="10-glossary.html#parent-pointer-representation"
+class="term"
+title="For trees, a node implementation where each node stores only a pointer to its parent, rather than to its children. This makes it easy to go up the tree toward the root, but not down the tree toward the leaves. This is most appropriate for solving the UNION/FIND problem.">parent
+pointer representation</a> for general trees. Clearly this
+implementation is not general purpose, because it is inadequate for such
+important operations as finding the leftmost child or the right sibling
+for a node. Thus, it may seem to be a poor idea to implement a general
+tree in this way. However, the parent pointer implementation stores
+precisely the information required to answer the following, useful
+question: <strong>Given two nodes, are they in the same tree?</strong>
+To answer this question, we need only follow the series of parent
+pointers from each node to its respective root. If both nodes reach the
+same root, then they must be in the same tree. If the roots are
+different, then the two nodes are not in the same tree. The process of
+finding the ultimate root for a given node we will call <a
+href="10-glossary.html#find" class="term"
+title="One half of the UNION/FIND algorithm for managing disjoint sets. It is the process of moving upwards in a tree to find the tree&#39;s root.">FIND</a>.</p>
 <section id="parent-pointer-trees" class="level3" data-number="5.13.1">
 <h3 data-number="5.13.1"><span
 class="header-section-number">5.13.1</span> Parent Pointer Trees</h3>
 <p>The parent pointer representation is most often used to maintain a
-collection of <a href="10-glossary.html#disjoint-sets"
-class="term">disjoint sets</a>. Two disjoint sets share no members in
-common (their intersection is empty). A collection of disjoint sets
-partitions some objects such that every object is in exactly one of the
-disjoint sets. There are two basic operations that we wish to
-support:</p>
+collection of <a href="10-glossary.html#disjoint-sets" class="term"
+title="A collection of sets, any pair of which share no elements in common. A collection of disjoint sets partitions some objects such that every object is in exactly one of the disjoint sets.">disjoint
+sets</a>. Two disjoint sets share no members in common (their
+intersection is empty). A collection of disjoint sets partitions some
+objects such that every object is in exactly one of the disjoint sets.
+There are two basic operations that we wish to support:</p>
 <ol type="1">
 <li>Determine if two objects are in the same set (the FIND operation),
 and</li>
 <li>Merge two sets together.</li>
 </ol>
 <p>Because two merged sets are united, the merging operation is called
-<a href="10-glossary.html#union" class="term">UNION</a> and the whole
-process of determining if two objects are in the same set and then
-merging the sets goes by the name <a href="10-glossary.html#union-find"
-class="term">UNION/FIND</a>.</p>
+<a href="10-glossary.html#union" class="term"
+title="One half of the UNION/FIND algorithm for managing disjoint sets. It is the process of merging two trees that are represented using the parent pointer representation by making the root for one of the trees set its parent pointer to the root of the other tree.">UNION</a>
+and the whole process of determining if two objects are in the same set
+and then merging the sets goes by the name <a
+href="10-glossary.html#union-find" class="term"
+title="A process for mainining a collection of disjoint sets. The FIND operation determines which disjoint set a given object resides in, and the UNION operation combines two disjoint sets when it is determined that they are members of the same equivalence class under some equivalence relation.">UNION/FIND</a>.</p>
 <p>To implement UNION/FIND, we represent each disjoint set with a
 separate general tree. Two objects are in the same disjoint set if they
 are in the same tree. Every node of the tree (except for the root) has
@@ -307,13 +318,18 @@ trees stored in the same parent pointer array, one rooted at
 <h3 data-number="5.13.2"><span
 class="header-section-number">5.13.2</span> Equivalence Classes</h3>
 <p>Consider the problem of assigning the members of a set to disjoint
-subsets called <a href="10-glossary.html#equivalence-class"
-class="term">equivalence classes</a>. Recall that an <a
-href="10-glossary.html#equivalence-relation" class="term">equivalence
-relation</a> is <a href="10-glossary.html#reflexive"
-class="term">reflexive</a>, <a href="10-glossary.html#symmetric"
-class="term">symmetric</a>, and <a href="10-glossary.html#transitive"
-class="term">transitive</a>. Thus, if objects
+subsets called <a href="10-glossary.html#equivalence-class" class="term"
+title="An equivalence relation can be used to partition a set into equivalence classes.">equivalence
+classes</a>. Recall that an <a
+href="10-glossary.html#equivalence-relation" class="term"
+title="Relation $R$ is an equivalence relation on set $\mathbf{S}$ if it is reflexive, symmetric, and transitive.">equivalence
+relation</a> is <a href="10-glossary.html#reflexive" class="term"
+title="In set notation, binary relation $R$ on set $S$ is reflexive if $aRa$ for all $a \in \mathbf{S}$.">reflexive</a>,
+<a href="10-glossary.html#symmetric" class="term"
+title="In set notation, relation $R$ is symmetric if whenever $aRb$, then $bRa$, for all $a, b \in \mathbf{S}$.">symmetric</a>,
+and <a href="10-glossary.html#transitive" class="term"
+title="In set notation, relation $R$ is transitive if whenever $aRb$ and $bRc$, then $aRc$, for all $a, b, c \in \mathbf{S}$.">transitive</a>.
+Thus, if objects
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
 and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
@@ -373,20 +389,24 @@ would be considered as equivalent, but
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>J</mi><annotation encoding="application/x-tex">J</annotation></semantics></math>
 is not equivalent to any other. A subset of equivalent (connected) edges
 in a graph is called a <a href="10-glossary.html#connected-component"
-class="term">connected component</a>. The goal is to quickly classify
-the objects into disjoint sets that correspond to the connected
-components.</p>
+class="term"
+title="In an undirected graph, a subset of the nodes such that each node in the subset can be reached from any other node in that subset.">connected
+component</a>. The goal is to quickly classify the objects into disjoint
+sets that correspond to the connected components.</p>
 <p>Another use for UNION/FIND occurs in <a
 href="9.5-minimal-cost-spanning-trees.html#kruskals-algorithm"
-class="term">Kruskal’s algorithm</a> for computing the <a
-href="10-glossary.html#minimal-cost-spanning-tree"
-class="term">minimal-cost spanning tree</a> for a <a
-href="10-glossary.html#graph" class="term">graph</a>. That algorithm
-seeks to select the cheapest subset of the edges that still connects all
-of the nodes in the graph. It does so by processing all edges of the
-graph from shortest to longest, only adding an edge to the connecting
-subset if it does not connect two nodes that already have some series of
-edges connecting them.</p>
+class="term"
+title="An algorithm for computing the MCST of a graph. During processing, it makes use of the UNION/FIND process to efficiently determine of two vertices are within the same subgraph.">Kruskal’s
+algorithm</a> for computing the <a
+href="10-glossary.html#minimal-cost-spanning-tree" class="term"
+title="Abbreviated as MCST, or sometimes as MST. Derived from a weighted graph, the MCST is the subset of the graph&#39;s edges that maintains the connectivitiy of the graph while having lowest total cost (as defined by the sum of the weights of the edges in the MCST). The result is referred to as a tree because it would never have a cycle (since an edge could be removed from the cycle and still preserve connectivity). Two algorithms to solve this problem are Prim&#39;s algorithm and Kruskal&#39;s algorithm.">minimal-cost
+spanning tree</a> for a <a href="10-glossary.html#graph" class="term"
+title="A graph $\mathbf{G} = (\mathbf{V}, \mathbf{E})$ consists of a set of vertices $\mathbf{V}$ and a set of edges $\mathbf{E}$, such that each edge in $\mathbf{E}$ is a connection between a pair of vertices in $\mathbf{V}$.">graph</a>.
+That algorithm seeks to select the cheapest subset of the edges that
+still connects all of the nodes in the graph. It does so by processing
+all edges of the graph from shortest to longest, only adding an edge to
+the connecting subset if it does not connect two nodes that already have
+some series of edges connecting them.</p>
 <p>The input to the UNION/FIND algorithm is typically a series of
 equivalence pairs. In the case of the connected components example, the
 equivalence pairs would simply be the set of edges in the graph. An
@@ -431,10 +451,11 @@ getting as close as possible.</p>
 class="header-section-number">5.13.3</span> Weighted Union</h3>
 <p>A low-cost approach to reducing the height is to be smart about how
 two trees are joined together. One simple technique, called the <a
-href="10-glossary.html#weighted-union-rule" class="term">weighted union
-rule</a>, joins the tree with fewer nodes to the tree with more nodes by
-making the smaller tree’s root point to the root of the bigger tree.
-This will limit the total depth of the tree to
+href="10-glossary.html#weighted-union-rule" class="term"
+title="When merging two disjoint sets using the UNION/FIND algorithm, the weighted union rule is used to determine which subtree&#39;s root points to the other. The root of the subtree with fewer nodes will be set to point to the root of the subtree with more nodes. In this way, the average depth of nodes in the resulting tree will be less than if the assignment had been made in the other direction.">weighted
+union rule</a>, joins the tree with fewer nodes to the tree with more
+nodes by making the smaller tree’s root point to the root of the bigger
+tree. This will limit the total depth of the tree to
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>,
 because the depth of nodes only in the smaller tree will now increase by
 one, and the depth of the deepest node in the combined tree can only be
@@ -505,9 +526,11 @@ class="header-section-number">5.13.4</span> Path Compression</h3>
 <p>The weighted union rule helps to minimize the depth of the tree, but
 we can do better than this. <a
 href="5.13-the-unionfind-algorithm-optional.html#path-compression"
-class="term">Path compression</a> is a method that tends to create
-extremely shallow trees. Path compression takes place while finding the
-root for a given node
+class="term"
+title="When implementing the UNION/FIND algorithm, path compression is a local optimization step that can be performed during the FIND step. Once the root of the tree for the current object has been found, the path to the root can be traced a second time, with all objects in the tree made to point directly to the root. This reduces the depth of the tree from typically $\Theta(\log n)$ to nearly constant.">Path
+compression</a> is a method that tends to create extremely shallow
+trees. Path compression takes place while finding the root for a given
+node
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>.
 Call this root
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>.
@@ -603,8 +626,9 @@ processing time required for
 operations will be
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><msup><mo>log</mo><mo>*</mo></msup><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log^* n)</annotation></semantics></math>,
 yielding nearly constant time for each equivalence operation. This is an
-example of <a href="10-glossary.html#amortized-analysis"
-class="term">amortized analysis</a>.</p>
+example of <a href="10-glossary.html#amortized-analysis" class="term"
+title="Analysing the amortized complexity of an algorithm or term:problem.">amortized
+analysis</a>.</p>
 <p>The expression
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mo>log</mo><mo>*</mo></msup><mi>n</mi></mrow><annotation encoding="application/x-tex">\log^* n</annotation></semantics></math>
 is closely related to the inverse of Ackermann’s function. For more

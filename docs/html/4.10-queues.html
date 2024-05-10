@@ -185,22 +185,25 @@
 <section id="queues" class="level2" data-number="4.10">
 <h2 data-number="4.10"><span class="header-section-number">4.10</span>
 Queues</h2>
-<p>Like the stack, the <a href="10-glossary.html#queue"
-class="term">queue</a> is a list-like structure that provides restricted
-access to its elements. Queue elements may only be inserted at the back
-(called an <a href="10-glossary.html#enqueue" class="term">enqueue</a>
+<p>Like the stack, the <a href="10-glossary.html#queue" class="term"
+title="A list-like structure in which elements are inserted only at one end, and removed only from the other one end.">queue</a>
+is a list-like structure that provides restricted access to its
+elements. Queue elements may only be inserted at the back (called an <a
+href="10-glossary.html#enqueue" class="term"
+title="A specialized term used to indicate inserting an element onto a queue.">enqueue</a>
 operation) and removed from the front (called a <a
-href="10-glossary.html#dequeue" class="term">dequeue</a> operation).
-Queues operate like standing in line at a movie theater ticket counter.
-If nobody cheats, then newcomers go to the back of the line. The person
-at the front of the line is the next to be served. Thus, queues release
-their elements in order of arrival. In Britain, a line of people is
-called a “queue”, and getting into line to wait for service is called
-“queuing up”. Accountants have used queues since long before the
-existence of computers. They call a queue a “FIFO” list, which stands
-for “First-In, First-Out”. Here is a sample queue ADT. This section
-presents two implementations for queues: the array-based queue and the
-linked queue.</p>
+href="10-glossary.html#dequeue" class="term"
+title="A specialized term used to indicate removing an element from a queue.">dequeue</a>
+operation). Queues operate like standing in line at a movie theater
+ticket counter. If nobody cheats, then newcomers go to the back of the
+line. The person at the front of the line is the next to be served.
+Thus, queues release their elements in order of arrival. In Britain, a
+line of people is called a “queue”, and getting into line to wait for
+service is called “queuing up”. Accountants have used queues since long
+before the existence of computers. They call a queue a “FIFO” list,
+which stands for “First-In, First-Out”. Here is a sample queue ADT. This
+section presents two implementations for queues: the array-based queue
+and the linked queue.</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Queue(Collection):</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> enqueue(<span class="va">self</span>, x): <span class="st">&quot;&quot;&quot;Enqueues x at the end of the queue.&quot;&quot;&quot;</span></span>
@@ -276,7 +279,8 @@ states. However, there are only
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
 possible values for <code>rear</code> unless we invent a special case
 for, say, empty queues. This is an example of the <a
-href="10-glossary.html#pigeonhole-principle" class="term">Pigeonhole
+href="10-glossary.html#pigeonhole-principle" class="term"
+title="A commonly used lemma in mathematics. A typical variant states: When $n+1$ objects are stored in $n$ locations, at least one of the locations must store two or more of the objects.">Pigeonhole
 Principle</a>. The Pigeonhole Principle states that, given
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
 pigeonholes and

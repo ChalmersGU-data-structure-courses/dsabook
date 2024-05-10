@@ -185,14 +185,15 @@
 Implementing Recursion</h2>
 <p>WARNING! You should not read this section unless you are already
 comfortable with implementing <a href="10-glossary.html#recursion"
-class="term">recursive functions</a>. One of the biggest hang-ups for
-students learning recursion is too much focus on the recursive
-“process”. The right way to think about recursion is to just think about
-the return value that the recursive call gives back. Thinking about
-<em>how</em> that answer is computed just gets in the way of
-understanding. There are good reasons to understand how recursion is
-implemented, but helping you to write recursive functions is not one of
-them.</p>
+class="term"
+title="The process of using recursive calls. An algorithm is recursive if it calls itself to do part of its work. See recursion.">recursive
+functions</a>. One of the biggest hang-ups for students learning
+recursion is too much focus on the recursive “process”. The right way to
+think about recursion is to just think about the return value that the
+recursive call gives back. Thinking about <em>how</em> that answer is
+computed just gets in the way of understanding. There are good reasons
+to understand how recursion is implemented, but helping you to write
+recursive functions is not one of them.</p>
 <section id="call-stacks-for-implementing-recursion" class="level3"
 data-number="4.9.1">
 <h3 data-number="4.9.1"><span class="header-section-number">4.9.1</span>
@@ -201,16 +202,20 @@ Call stacks for implementing recursion</h3>
 href="4.8-stacks.html#stacks">stacks</a> is not even visible to its
 users. This is the implementation of subroutine calls in most
 programming language <a href="10-glossary.html#runtime-environment"
-class="term">runtime environments</a>. A subroutine call is normally
-implemented by <a href="10-glossary.html#push" class="term">pushing</a>
+class="term"
+title="The environment in which a program (of a particular programming language) executes. The runtime environment handles such activities as managing the runtime stack, the free store, and the garbage collector, and it conducts the execution of the program.">runtime
+environments</a>. A subroutine call is normally implemented by <a
+href="10-glossary.html#push" class="term"
+title="A specialized term used to indicate inserting an element onto a stack.">pushing</a>
 necessary information about the subroutine (including the return
 address, parameters, and local variables) onto a stack. This information
-is called an <a href="10-glossary.html#activation-record"
-class="term">activation record</a>. Further subroutine calls add to the
-stack. Each return from a subroutine <a href="10-glossary.html#pop"
-class="term">pops</a> the top activation record off the stack. As an
-example, here is a recursive implementation for the factorial
-function.</p>
+is called an <a href="10-glossary.html#activation-record" class="term"
+title="The entity that is stored on the runtime stack during program execution. It stores any active local variable and the return address from which a new subroutine is being called, so that this information can be recovered when the subroutine terminates.">activation
+record</a>. Further subroutine calls add to the stack. Each return from
+a subroutine <a href="10-glossary.html#pop" class="term"
+title="A specialized term used to indicate removing an element from a stack.">pops</a>
+the top activation record off the stack. As an example, here is a
+recursive implementation for the factorial function.</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Recursively compute and return n!</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> factorial_recursive(n):</span>

@@ -128,21 +128,24 @@ choose?</p>
 space whether they are simple integers or large objects with many
 fields. Any container data structure like a list then requires some
 additional space to organize the elements being stored. This additional
-space is called <a href="10-glossary.html#overhead"
-class="term">overhead</a>.</p>
-<p><a href="10-glossary.html#array-based-list" class="term">Array-based
+space is called <a href="10-glossary.html#overhead" class="term"
+title="All information stored by a data structure aside from the actual data. For example, the pointer fields in a linked list or BST, or the unused positions in an array-based list.">overhead</a>.</p>
+<p><a href="10-glossary.html#array-based-list" class="term"
+title="An implementation for the list ADT that uses an array to store the list elements. Typical implementations fix the array size at creation of the list, and the overhead is the number of array positions that are presently unused.">Array-based
 lists</a> have the disadvantage that their size must be predetermined
 before the array can be allocated. Static array-based lists cannot grow
 beyond their predetermined size, but dynamic lists will automatically
 reallocate the array when needed. However, when the list has recently
 been reallocated, a substantial amount of space might be tied up in a
 largely empty array. This empty space is the overhead required by the
-array-based list. <a href="10-glossary.html#linked-list"
-class="term">Linked lists</a> have the advantage that they only need
-space for the objects actually on the list. There is no limit to the
-number of elements in either a linked list or a dynamic array-based
-list, as long as there is <a href="10-glossary.html#free-store"
-class="term">free store</a> memory available.</p>
+array-based list. <a href="10-glossary.html#linked-list" class="term"
+title="An implementation for the list ADT that uses dynamic allocation of link nodes to store the list elements. Common variants are the singly linked list, doubly linked list and circular list. The overhead required is the pointers in each link node.">Linked
+lists</a> have the advantage that they only need space for the objects
+actually on the list. There is no limit to the number of elements in
+either a linked list or a dynamic array-based list, as long as there is
+<a href="10-glossary.html#free-store" class="term"
+title="Space available to a program during runtime to be used for dynamic allocation of objects. The free store is distinct from the runtime stack. The free store is sometimes referred to as the heap, which can be confusing because heap more often refers to a specific data structure. Most programming languages provide functions to allocate (and maybe to deallocate) objects from the free store, such as `new` in C++ and Java.">free
+store</a> memory available.</p>
 <p>The amount of space required by a linked list is directly
 proportional to the number of elements
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.

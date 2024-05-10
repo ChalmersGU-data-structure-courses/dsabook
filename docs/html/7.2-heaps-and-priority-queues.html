@@ -194,16 +194,19 @@ hospital emergency room often choose to see next the “most critical”
 patient rather than the one who arrived first. When scheduling programs
 for execution in a multitasking operating system, at any given moment
 there might be several programs (usually called <a
-href="10-glossary.html#job" class="term">jobs</a>) ready to run. The
-next job selected is the one with the highest <a
-href="10-glossary.html#priority" class="term">priority</a>. Priority is
-indicated by a particular value associated with the job (and might
-change while the job remains in the wait list).</p>
+href="10-glossary.html#job" class="term"
+title="Common name for processes or tasks to be run by an operating system. They typically need to be processed in order of importance, and so are kept organized by a priority queue. Another common use for this term is for a collection of tasks to be ordered by a topological sort.">jobs</a>)
+ready to run. The next job selected is the one with the highest <a
+href="10-glossary.html#priority" class="term"
+title="A quantity assigned to each of a collection of jobs or tasks that indicate importance for order of processing. For example, in an operating system, there could be a collection of processes (jobs) ready to run. The operating system must select the next task to execute, based on their priorities.">priority</a>.
+Priority is indicated by a particular value associated with the job (and
+might change while the job remains in the wait list).</p>
 <p>When a collection of objects is organized by importance or priority,
-we call this a <a href="10-glossary.html#priority-queue"
-class="term">priority queue</a>. A normal queue data structure will not
-implement a priority queue efficiently because search for the element
-with highest priority will take
+we call this a <a href="10-glossary.html#priority-queue" class="term"
+title="An ADT whose primary operations of insert of records, and deletion of the greatest (or, in an alternative implementation, the least) valued record. Most often implemented using the heap data structure. The name comes from a common application where the records being stored represent tasks, with the ordering values based on the priorities of the tasks.">priority
+queue</a>. A normal queue data structure will not implement a priority
+queue efficiently because search for the element with highest priority
+will take
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math>
 time. A list, whether sorted or not, will also require
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math>
@@ -219,42 +222,48 @@ the BST will become unbalanced, leading to bad performance. Instead, we
 would like to find a data structure that is guaranteed to have good
 performance for this special application.</p>
 <p>This section presents the <a href="10-glossary.html#heap"
-class="term">heap</a><a href="#fn1" class="footnote-ref" id="fnref1"
+class="term"
+title="This term has two different meanings. Uncommonly, it is a synonym for free store. Most often it is used to refer to a particular data structure. This data structure is a complete binary tree with the requirement that every node has a value greater than its children (called a max heap), or else the requirement that every node has a value less than its children (called a min heap). Since it is a complete binary tree, a heap is nearly always implemented using an array rather than an explicit tree structure. To add a new value to a heap, or to remove the extreme value (the max value in a max-heap or min value in a min-heap) and update the heap, takes $\Theta(\log n)$ time in the worst case. However, if given all of the values in an unordered array, the values can be re-arranged to form a heap in only $\Theta(n)$ time. Due to its space and time efficiency, the heap is a popular choice for implementing a priority queue.">heap</a><a
+href="#fn1" class="footnote-ref" id="fnref1"
 role="doc-noteref"><sup>1</sup></a> data structure. A heap is defined by
 two properties. First, it is a complete binary tree, so heaps are nearly
 always implemented using the <a
 href="7.1-array-implementation-for-complete-binary-trees.html#array-implementation-for-complete-binary-trees">array
 representation for complete binary trees</a>. Second, the values stored
-in a heap are <a href="10-glossary.html#partial-order"
-class="term">partially ordered</a>. This means that there is a
-relationship between the value stored at any node and the values of its
-children. There are two variants of the heap, depending on the
-definition of this relationship.</p>
-<p>A <a href="10-glossary.html#max-heap" class="term">max heap</a> has
-the property that every node stores a value that is <em>greater</em>
-than or equal to the value of either of its children. Because the root
-has a value greater than or equal to its children, which in turn have
-values greater than or equal to their children, the root stores the
-maximum of all values in the tree.</p>
-<p>A <a href="10-glossary.html#min-heap" class="term">min heap</a> has
-the property that every node stores a value that is <em>less</em> than
-or equal to that of its children. Because the root has a value less than
-or equal to its children, which in turn have values less than or equal
-to their children, the root stores the minimum of all values in the
-tree.</p>
+in a heap are <a href="10-glossary.html#partial-order" class="term"
+title="In set notation, a binary relation is called a partial order if it is antisymmetric and transitive. If the relation is also reflexive, then it is a non-strict partial order. Alternatively, if the relation is also irreflexive, then it is a strict partial order.">partially
+ordered</a>. This means that there is a relationship between the value
+stored at any node and the values of its children. There are two
+variants of the heap, depending on the definition of this
+relationship.</p>
+<p>A <a href="10-glossary.html#max-heap" class="term"
+title="A heap where every node has a key value greater than its children. As a consequence, the node with maximum key value is at the root.">max
+heap</a> has the property that every node stores a value that is
+<em>greater</em> than or equal to the value of either of its children.
+Because the root has a value greater than or equal to its children,
+which in turn have values greater than or equal to their children, the
+root stores the maximum of all values in the tree.</p>
+<p>A <a href="10-glossary.html#min-heap" class="term"
+title="A heap where every node has a key value less than its children. As a consequence, the node with minimum key value is at the root.">min
+heap</a> has the property that every node stores a value that is
+<em>less</em> than or equal to that of its children. Because the root
+has a value less than or equal to its children, which in turn have
+values less than or equal to their children, the root stores the minimum
+of all values in the tree.</p>
 <p>Note that there is no necessary relationship between the value of a
 node and that of its sibling in either the min heap or the max heap. For
 example, it is possible that the values for all nodes in the left
 subtree of the root are greater than the values for every node of the
 right subtree. We can contrast BSTs and heaps by the strength of their
 ordering relationships. A BST defines a <a
-href="10-glossary.html#total-order" class="term">total order</a> on its
-nodes in that, given the positions for any two nodes in the tree, the
-one to the “left” (equivalently, the one appearing earlier in an inorder
-traversal) has a smaller key value than the one to the “right”. In
-contrast, a heap implements a partial order. Given their positions, we
-can determine the relative order for the key values of two nodes in the
-heap <em>only</em> if one is a descendant of the other.</p>
+href="10-glossary.html#total-order" class="term"
+title="A binary relation on a set where every pair of distinct elements in the set are comparable (that is, one can determine which of the two is greater than the other).">total
+order</a> on its nodes in that, given the positions for any two nodes in
+the tree, the one to the “left” (equivalently, the one appearing earlier
+in an inorder traversal) has a smaller key value than the one to the
+“right”. In contrast, a heap implements a partial order. Given their
+positions, we can determine the relative order for the key values of two
+nodes in the heap <em>only</em> if one is a descendant of the other.</p>
 <p>Min heaps and max heaps both have their uses. For example, the
 Heapsort uses the max heap, while the Replacement Selection algorithm
 used for external sorting uses a min heap. The examples in the rest of
@@ -763,8 +772,10 @@ total distances that elements can go is therefore</p>
 \end{eqnarray}
 </annotation></semantics></math></p>
 <p>The summation on the right <a href="10-glossary.html#summation"
-class="term">is known</a> to have a closed-form solution of
-approximately 2, so this algorithm takes
+class="term"
+title="The sum of costs for some function applied to a range of parameter values. Often written using Sigma notation. For example, the sum of the integers from 1 to $n$ can be written as $\sum_{i=1}^{n} i$.">is
+known</a> to have a closed-form solution of approximately 2, so this
+algorithm takes
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math>
 time in the worst case. This is far better than building the heap one
 element at a time, which would cost
@@ -840,9 +851,12 @@ their priority value as the ordering key) when needed. Method
 executed.</p>
 <p>Priority queues can be helpful for solving graph problems such as the
 <a href="10-glossary.html#single-source-shortest-paths-problem"
-class="term">single-source shortest paths problem</a> and finding the <a
-href="10-glossary.html#minimal-cost-spanning-tree"
-class="term">minimal-cost spanning tree</a>.</p>
+class="term"
+title="Given a graph with weights or distances on the edges, and a designated start vertex $s$, find the shortest path from $s$ to every other vertex in the graph. One algorithm to solve this problem is Dijkstra&#39;s algorithm.">single-source
+shortest paths problem</a> and finding the <a
+href="10-glossary.html#minimal-cost-spanning-tree" class="term"
+title="Abbreviated as MCST, or sometimes as MST. Derived from a weighted graph, the MCST is the subset of the graph&#39;s edges that maintains the connectivitiy of the graph while having lowest total cost (as defined by the sum of the weights of the edges in the MCST). The result is referred to as a tree because it would never have a cycle (since an edge could be removed from the cycle and still preserve connectivity). Two algorithms to solve this problem are Prim&#39;s algorithm and Kruskal&#39;s algorithm.">minimal-cost
+spanning tree</a>.</p>
 <p>For a story about Priority Queues and dragons, see <a
 href="http://computationaltales.blogspot.com/2011/04/stacks-queues-priority-queues-and.html">Computational
 Fairy Tales: Stacks, Queues, Priority Queues, and the Prince’s Complaint
@@ -884,7 +898,8 @@ role="doc-endnotes">
 <hr />
 <ol>
 <li id="fn1"><p>Note that the term “heap” is also sometimes used to
-refer to <a href="10-glossary.html#free-store" class="term">free
+refer to <a href="10-glossary.html#free-store" class="term"
+title="Space available to a program during runtime to be used for dynamic allocation of objects. The free store is distinct from the runtime stack. The free store is sometimes referred to as the heap, which can be confusing because heap more often refers to a specific data structure. Most programming languages provide functions to allocate (and maybe to deallocate) objects from the free store, such as `new` in C++ and Java.">free
 store</a>.<a href="#fnref1" class="footnote-back"
 role="doc-backlink">↩︎</a></p></li>
 </ol>

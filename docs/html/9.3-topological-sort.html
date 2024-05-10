@@ -196,8 +196,9 @@ indicate a conflicting series of prerequisites that could not be
 completed without violating at least one prerequisite. The process of
 laying out the vertices of a DAG in a linear order to meet the
 prerequisite rules is called a <a
-href="9.3-topological-sort.html#topological-sort"
-class="term">topological sort</a>.</p>
+href="9.3-topological-sort.html#topological-sort" class="term"
+title="The process of laying out the vertices of a DAG in a linear order such that no vertex $A$ in the order is preceded by a vertex that can be reached by a (directed) path from $A$. Usually the (directed) edges in the graph define a prerequisite system, and the goal of the topological sort is to list the vertices in an order such that no prerequisites are violated.">topological
+sort</a>.</p>
 <p><a href="9.3-topological-sort.html#TopSort">Figure #TopSort</a>
 illustrates the problem. An acceptable topological sort for this example
 is J1, J2, J3, J4, J5, J6, J7. However, other orders are also

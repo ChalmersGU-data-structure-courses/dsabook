@@ -196,7 +196,8 @@ save space. Later, they can be uncompressed for use, which costs some
 time, but only once.</p>
 <p>We often represent a set of items in a computer program by assigning
 a unique code to each item. For example, the standard <a
-href="10-glossary.html#ascii-character-coding" class="term">ASCII
+href="10-glossary.html#ascii-character-coding" class="term"
+title="*American Standard Code for Information Interchange*. A commonly used method for encoding characters using a binary code. Standard ASCII uses an 8-bit code to represent upper and lower case letters, digits, some punctuation, and some number of non-printing characters (such as carrage return). Now largely replaced by UTF-8 encoding.">ASCII
 coding</a> scheme assigns a unique eight-bit value to each character. It
 takes a certain minimum number of bits to provide enough unique codes so
 that we have a different one for each character. For example, it takes
@@ -209,7 +210,8 @@ bits to represent
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
 unique code values assumes that all codes will be the same length, as
 are ASCII codes. These are called <a
-href="10-glossary.html#fixed-length-coding" class="term">fixed-length
+href="10-glossary.html#fixed-length-coding" class="term"
+title="Given a collection of objects, a fixed-length coding scheme assigns a code to each object in the collection using codes that are all of the same length. Standard ASCII and Unicode representations for characters are both examples of fixed-length coding schemes. This is in contrast to variable-length coding.">fixed-length
 codes</a>. If all characters were used equally often, then a
 fixed-length coding scheme is the most space efficient method. However,
 you are probably aware that not all characters are used equally often in
@@ -328,44 +330,54 @@ codes? The price could be that other characters require longer codes,
 but this might be worthwhile if such characters appear rarely enough.
 This concept is at the heart of file compression techniques in common
 use today. The next section presents one such approach to assigning <a
-href="10-glossary.html#variable-length-coding"
-class="term">variable-length codes</a>, called <a
-href="10-glossary.html#huffman-codes" class="term">Huffman coding</a>.
-While it is not commonly used in its simplest form for file compression
-(there are better methods), Huffman coding gives the flavor of such
-coding schemes. One motivation for studying Huffman coding is because it
-provides our first opportunity to see a type of tree structure referred
-to as a <a href="10-glossary.html#search-trie" class="term">search
+href="10-glossary.html#variable-length-coding" class="term"
+title="Given a collection of objects, a variable-length coding scheme assigns a code to each object in the collection using codes that can be of different lengths. Typically this is done in a way such that the objects that are most likely to be used have the shortest codes, with the goal of minimizing the total space needed to represent a sequence of objects, such as when representing the characters in a document. Huffman coding is an example of a variable-length coding scheme. This is in contrast to fixed-length coding.">variable-length
+codes</a>, called <a href="10-glossary.html#huffman-codes" class="term"
+title="The codes given to a collection of letters (or other symbols) through the process of Huffman coding. Huffman coding uses a Huffman coding tree to generate the codes. The codes can be of variable length, such that the letters which are expected to appear most frequently are shorter. Huffman coding is optimal whenever the true frequencies are known, and the frequency of a letter is independent of the context of that letter in the message.">Huffman
+coding</a>. While it is not commonly used in its simplest form for file
+compression (there are better methods), Huffman coding gives the flavor
+of such coding schemes. One motivation for studying Huffman coding is
+because it provides our first opportunity to see a type of tree
+structure referred to as a <a href="10-glossary.html#search-trie"
+class="term" title="Any search tree that is a trie.">search
 trie</a>.</p>
 <p>To keep things simple, the following examples for building Huffman
-trees uses a <a href="10-glossary.html#sorted-list" class="term">sorted
+trees uses a <a href="10-glossary.html#sorted-list" class="term"
+title="A list where the records stored in the list are arranged so that their key values are in ascending order. If the list uses an array-based list implementation, then it can use binary search for a cost of $\Theta(\log n)$. But both insertion and deletion will be require $\Theta(n)$ time.">sorted
 list</a> to keep the partial Huffman trees ordered by frequency. But a
 real implementation would use a <a
-href="10-glossary.html#priority-queue" class="term">priority queue</a>
-keyed by the frequencies.</p>
+href="10-glossary.html#priority-queue" class="term"
+title="An ADT whose primary operations of insert of records, and deletion of the greatest (or, in an alternative implementation, the least) valued record. Most often implemented using the heap data structure. The name comes from a common application where the records being stored represent tasks, with the ordering values based on the priorities of the tasks.">priority
+queue</a> keyed by the frequencies.</p>
 <section id="building-huffman-coding-trees" class="level3"
 data-number="7.4.1">
 <h3 data-number="7.4.1"><span class="header-section-number">7.4.1</span>
 Building Huffman Coding Trees</h3>
 <p>Huffman coding assigns codes to characters such that the length of
 the code depends on the relative frequency or <a
-href="10-glossary.html#weight" class="term">weight</a> of the
-corresponding character. Thus, it is a variable-length code. If the
-estimated frequencies for letters match the actual frequency found in an
-encoded message, then the length of that message will typically be less
-than if a fixed-length code had been used. The Huffman code for each
-letter is derived from a full binary tree called the <a
-href="10-glossary.html#huffman-coding-tree" class="term">Huffman coding
-tree</a>, or simply the <a href="10-glossary.html#huffman-tree"
-class="term">Huffman tree</a>. Each leaf of the Huffman tree corresponds
-to a letter, and we define the weight of the leaf node to be the weight
-(frequency) of its associated letter. The goal is to build a tree with
-the <a href="10-glossary.html#minimum-external-path-weight"
-class="term">minimum external path weight</a>. Define the <a
-href="10-glossary.html#weighted-path-length" class="term">weighted path
-length</a> of a leaf to be its weight times its depth. The binary tree
-with minimum external path weight is the one with the minimum sum of
-weighted path lengths for the given set of leaves. A letter with high
+href="10-glossary.html#weight" class="term"
+title="A cost or distance most often associated with an edge in a graph.">weight</a>
+of the corresponding character. Thus, it is a variable-length code. If
+the estimated frequencies for letters match the actual frequency found
+in an encoded message, then the length of that message will typically be
+less than if a fixed-length code had been used. The Huffman code for
+each letter is derived from a full binary tree called the <a
+href="10-glossary.html#huffman-coding-tree" class="term"
+title="A Huffman coding tree is a full binary tree that is used to represent letters (or other symbols) efficiently. Each letter is associated with a node in the tree, and is then given a Huffman code based on the position of the associated node. A Huffman coding tree is an example of a binary trie.">Huffman
+coding tree</a>, or simply the <a href="10-glossary.html#huffman-tree"
+class="term"
+title="Shorter form of the term Huffman coding tree.">Huffman tree</a>.
+Each leaf of the Huffman tree corresponds to a letter, and we define the
+weight of the leaf node to be the weight (frequency) of its associated
+letter. The goal is to build a tree with the <a
+href="10-glossary.html#minimum-external-path-weight" class="term"
+title="Given a collection of objects, each associated with a leaf node in a tree, the binary tree with minimum external path weight is the one with the minimum sum of weighted path lengths for the given set of leaves. This concept is used to create a Huffman coding tree, where a letter with high weight should have low depth, so that it will count the least against the total path length. As a result, another letter might be pushed deeper in the tree if it has less weight.">minimum
+external path weight</a>. Define the <a
+href="10-glossary.html#weighted-path-length" class="term"
+title="Given a tree, and given a weight for each leaf in the tree, the weighted path length for a leaf is its weight times its depth.">weighted
+path length</a> of a leaf to be its weight times its depth. The binary
+tree with minimum external path weight is the one with the minimum sum
+of weighted path lengths for the given set of leaves. A letter with high
 weight should have low depth, so that it will count the least against
 the total path length. As a result, another letter might be pushed
 deeper in the tree if it has less weight.</p>
@@ -548,13 +560,14 @@ lookup table can be used for this purpose.</p>
 <h3 data-number="7.4.3"><span class="header-section-number">7.4.3</span>
 Decoding</h3>
 <p>A set of codes is said to meet the <a
-href="10-glossary.html#prefix-property" class="term">prefix property</a>
-if no code in the set is the prefix of another. The prefix property
-guarantees that there will be no ambiguity in how a bit string is
-decoded. In other words, once we reach the last bit of a code during the
-decoding process, we know which letter it is the code for. Huffman codes
-certainly have the prefix property because any prefix for a code would
-correspond to an internal node, while all codes correspond to leaf
+href="10-glossary.html#prefix-property" class="term"
+title="Given a collection of strings, the collection has the prefix property if no string in the collection is a prefix for another string in the collection. The significance is that, given a long string composed of members of the collection, it can be uniquely decomposed into the constituent members. An example of such a collection of strings with the prefix property is a set of Huffman codes.">prefix
+property</a> if no code in the set is the prefix of another. The prefix
+property guarantees that there will be no ambiguity in how a bit string
+is decoded. In other words, once we reach the last bit of a code during
+the decoding process, we know which letter it is the code for. Huffman
+codes certainly have the prefix property because any prefix for a code
+would correspond to an internal node, while all codes correspond to leaf
 nodes.</p>
 <p>When we decode a character using the Huffman coding tree, we follow a
 path through the tree dictated by the bits in the code string. Each ‘0’
@@ -707,7 +720,8 @@ data-number="7.4.6">
 <h3 data-number="7.4.6"><span class="header-section-number">7.4.6</span>
 Proof of Optimality for Huffman Coding</h3>
 <p>Huffman tree building is an example of a <a
-href="10-glossary.html#greedy-algorithm" class="term">greedy
+href="10-glossary.html#greedy-algorithm" class="term"
+title="An algorithm that makes locally optimal choices at each step.">greedy
 algorithm</a>. At each step, the algorithm makes a “greedy” decision to
 merge the two subtrees with least weight. This makes the algorithm
 simple, but does it give the desired result? This section concludes with

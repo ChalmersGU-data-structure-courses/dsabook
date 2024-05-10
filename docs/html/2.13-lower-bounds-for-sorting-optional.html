@@ -174,7 +174,8 @@ Finally, knowing a lower bound for sorting gives us a lower bound in
 turn for other problems whose solution could be made to work as the
 basis for a sorting algorithm. The process of deriving asymptotic bounds
 for one problem from the asymptotic bounds of another is called a <a
-href="10-glossary.html#reduction" class="term">reduction</a>.</p>
+href="10-glossary.html#reduction" class="term"
+title="In algorithm analysis, the process of deriving asymptotic bounds for one problem from the asymptotic bounds of another. In particular, if problem A can be used to solve problem B, and problem A is proved to be in $O(f(n))$, then problem B must also be in $O(f(n))$. Reductions are often used to show that certain problems are at least as expensive as sorting, or that certain problems are NP-Complete.">reduction</a>.</p>
 <p>All of the sorting algorithms we have studied make decisions based on
 the direct comparison of two key values. For example, Insertion Sort
 sequentially compares the value to be inserted into the sorted list
@@ -196,9 +197,10 @@ leaves is shown to be in
 <p>Before presenting the proof of an
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Omega(n \log n)</annotation></semantics></math>
 lower bound for sorting, we first must define the concept of a <a
-href="10-glossary.html#decision-tree" class="term">decision tree</a>. A
-decision tree is a binary tree that can model the processing for any
-algorithm that makes binary decisions. Each (binary) decision is
+href="10-glossary.html#decision-tree" class="term"
+title="A theoretical construct for modeling the behavior of algorithms. Each point at which the algorithm makes a decision (such as an if statement) is modeled by a branch in the tree that represents the algorithms behavior. Decision trees can be used in lower bounds proofs, such as the proof that sorting requires $\Omega(n \log n)$ comparisons in the worst case.">decision
+tree</a>. A decision tree is a binary tree that can model the processing
+for any algorithm that makes binary decisions. Each (binary) decision is
 represented by a branch in the tree. For the purpose of modeling sorting
 algorithms, we count all comparisons of key values as decisions. If two
 keys are compared and the first is less than the second, then this is

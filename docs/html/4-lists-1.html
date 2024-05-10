@@ -121,20 +121,23 @@ records, or job descriptions for example – the simplest and most
 effective approach might be to put them in a list. Only when you have to
 organize and search through a large number of things do more
 sophisticated data structures like <a
-href="10-glossary.html#search-tree" class="term">search trees</a> become
-necessary. Many applications don’t require any form of search, and they
-do not require that an ordering be placed on the objects being stored.
-Some applications require that actions be performed in a strict
-chronological order, processing objects in the order that they arrived,
-or perhaps processing objects in the reverse of the order that they
-arrived. For all these situations, a simple list structure is
-appropriate.</p>
+href="10-glossary.html#search-tree" class="term"
+title="A tree data structure that makes search by key value more efficient. A type of container, it is common to implement an index using a search tree. A good search tree implementation will guarentee that insertion, deletion, and search operations are all $\Theta(\log n)$.">search
+trees</a> become necessary. Many applications don’t require any form of
+search, and they do not require that an ordering be placed on the
+objects being stored. Some applications require that actions be
+performed in a strict chronological order, processing objects in the
+order that they arrived, or perhaps processing objects in the reverse of
+the order that they arrived. For all these situations, a simple list
+structure is appropriate.</p>
 <p>This chapter describes representations both for lists and for two
 important list-like structures called the <a
-href="10-glossary.html#stack" class="term">stack</a> and the <a
-href="10-glossary.html#queue" class="term">queue</a>. Along with
-presenting these fundamental data structures, the other goals of the
-chapter are to:</p>
+href="10-glossary.html#stack" class="term"
+title="A list-like structure in which elements may be inserted or removed from only one end.">stack</a>
+and the <a href="10-glossary.html#queue" class="term"
+title="A list-like structure in which elements are inserted only at one end, and removed only from the other one end.">queue</a>.
+Along with presenting these fundamental data structures, the other goals
+of the chapter are to:</p>
 <ol type="1">
 <li>Give examples that show the separation of a logical representation
 in the form of an ADT from a physical implementation as a data

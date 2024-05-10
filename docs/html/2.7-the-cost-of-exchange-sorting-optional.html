@@ -214,15 +214,19 @@ before continuing on, it is instructive to investigate what makes these
 three sorts so slow. The crucial bottleneck is that only
 <em>adjacent</em> records are compared. Thus, comparisons and moves (for
 Insertion and Bubble Sort) are by single steps. Swapping adjacent
-records is called an <a href="10-glossary.html#exchange"
-class="term">exchange</a>. Thus, these sorts are sometimes referred to
-as an <a href="10-glossary.html#exchange-sort" class="term">exchange
+records is called an <a href="10-glossary.html#exchange" class="term"
+title="A swap of adjacent records in an array.">exchange</a>. Thus,
+these sorts are sometimes referred to as an <a
+href="10-glossary.html#exchange-sort" class="term"
+title="A sort that relies solely on exchanges (swaps of adjacent records) to reorder the list. insertion sort and bubble sort are examples of exchange sorts. All exchange sorts require $\Theta(n^2)$ time in the worst case.">exchange
 sort</a>. The cost of any exchange sort can be at best the total number
 of steps that the records in the array must move to reach their
 “correct” location. Recall that this is at least the number of
 inversions for the record, where an <a href="10-glossary.html#inversion"
-class="term">inversion</a> occurs when a record with key value greater
-than the current record’s key value appears before it.</p>
+class="term"
+title="A measure of how disordered a series of values is. For each element $X$ in the series, count one inversion for each element to left of $X$ that is greater than the value of $X$ (and so must ultimately be moved to the right of $X$ during a sorting process).">inversion</a>
+occurs when a record with key value greater than the current record’s
+key value appears before it.</p>
 <p>
 <div id="FindInversionsPRO" class="embedContainer">
 <iframe id="FindInversionsPRO_iframe" aria-label="FindInversionsPRO" src="../interactive/Sorting/FindInversionsPRO.html" width="100%" height="600" scrolling="no">

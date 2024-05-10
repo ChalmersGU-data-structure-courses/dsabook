@@ -119,12 +119,16 @@ class="level2" data-number="7.1">
 <h2 data-number="7.1"><span class="header-section-number">7.1</span>
 Array Implementation for Complete Binary Trees</h2>
 <p>From the <a href="10-glossary.html#full-binary-tree-theorem"
-class="term">full binary tree theorem</a>, we know that a large fraction
-of the space in a typical binary tree node implementation is devoted to
-structural <a href="10-glossary.html#overhead"
-class="term">overhead</a>, not to storing data. This module presents a
-simple, compact implementation for <a
-href="10-glossary.html#complete-binary-tree" class="term">complete
+class="term"
+title="This theorem states that the number of leaves in a non-empty full binary tree is one more than the number of internal nodes. Equivalently, then number of null pointers in a standard pointer-based implementation for binary tree nodes is one more than the number of nodes in the binary tree.">full
+binary tree theorem</a>, we know that a large fraction of the space in a
+typical binary tree node implementation is devoted to structural <a
+href="10-glossary.html#overhead" class="term"
+title="All information stored by a data structure aside from the actual data. For example, the pointer fields in a linked list or BST, or the unused positions in an array-based list.">overhead</a>,
+not to storing data. This module presents a simple, compact
+implementation for <a href="10-glossary.html#complete-binary-tree"
+class="term"
+title="A binary tree where the nodes are filled in row by row, with the bottom row filled in left to right. Due to this requirement, there is only one tree of $n$ nodes for any value of $n$. Since storing the records in an array in row order leads to a simple mapping from a node&#39;s position in the array to its parent, siblings, and children, the array representation is most commonly used to implement the complete binary tree. The heap data structure is a complete binary tree with partial ordering constraints on the node values.">complete
 binary trees</a>. Recall that complete binary trees have all levels
 except the bottom filled out completely, and the bottom level has all of
 its nodes filled in from left to right. Thus, a complete binary tree of
@@ -135,8 +139,10 @@ develop a special implementation for it. However, the complete binary
 tree has practical uses, the most important being the <a
 href="7.2-heaps-and-priority-queues.html#heaps-and-priority-queues">heap</a>
 data structure. Heaps are often used to implement <a
-href="10-glossary.html#priority-queue" class="term">priority queues</a>
-and for <a href="10-glossary.html#external-sort" class="term">external
+href="10-glossary.html#priority-queue" class="term"
+title="An ADT whose primary operations of insert of records, and deletion of the greatest (or, in an alternative implementation, the least) valued record. Most often implemented using the heap data structure. The name comes from a common application where the records being stored represent tasks, with the ordering values based on the priorities of the tasks.">priority
+queues</a> and for <a href="10-glossary.html#external-sort" class="term"
+title="A sorting algorithm that is applied to data stored in peripheral storage such as on a disk drive. This is in contrast to an internal sort that works on data stored in main memory.">external
 sorting algorithms</a>.</p>
 <p>We begin by assigning numbers to the node positions in the complete
 binary tree, level by level, from left to right as shown in <a

@@ -200,8 +200,8 @@ routines so as to maintain the balance property. Of course, to be
 practical, we must be able to implement the revised update routines in
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math>
 time. To maintain the balance property, we are going to use what are
-called <a href="10-glossary.html#rotation"
-class="term">rotations</a>.</p>
+called <a href="10-glossary.html#rotation" class="term"
+title="In the AVL tree and splay tree, a rotation is a local operation performed on a node, its children, and its grandchildren that can result in reordering their relationship. The goal of performing a rotation is to make the tree more balanced.">rotations</a>.</p>
 <section id="rotations" class="level3" data-number="6.4.1">
 <h3 data-number="6.4.1"><span class="header-section-number">6.4.1</span>
 Rotations</h3>
@@ -312,11 +312,14 @@ node.</p>
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>
 time. It turns out that we can do this using a series of rotations.
 Cases 1 and 4 can be fixed using a <a
-href="10-glossary.html#single-rotation" class="term">single
+href="10-glossary.html#single-rotation" class="term"
+title="A type of rebalancing operation used by the splay tree and AVL tree.">single
 rotation</a>, as shown in <a
 href="6.4-the-avl-tree.html#AVLsingle">Figure #AVLsingle</a>. Cases 2
 and 3 can be fixed using a <a href="10-glossary.html#double-rotation"
-class="term">double rotation</a>, as shown in <a
+class="term"
+title="A type of rebalancing operation used by the splay tree and AVL tree.">double
+rotation</a>, as shown in <a
 href="6.4-the-avl-tree.html#AVLdouble">Figure #AVLdouble</a>.</p>
 <div id="AVLsingle">
 <div class="odsafig" width="500" data-align="center"

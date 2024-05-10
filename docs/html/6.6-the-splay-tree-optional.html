@@ -148,21 +148,25 @@ operations that matters, not whether the tree is balanced. Maintaining
 balance is really done only for the sake of reaching this time
 efficiency goal.</p>
 <p>The splay tree access functions operate in a manner reminiscent of
-the <a href="10-glossary.html#move-to-front"
-class="term">move-to-front</a> rule for <a
-href="10-glossary.html#self-organizing-list"
-class="term">self-organizing lists</a>, and of the path compression
-technique for managing a series of <a href="10-glossary.html#union-find"
-class="term">Union/Find</a> operations. These access functions tend to
-make the tree more balanced, but an individual access will not
-necessarily result in a more balanced tree.</p>
+the <a href="10-glossary.html#move-to-front" class="term"
+title="A heuristic used to maintain a self-organizing list. Under this heuristic, whenever a record is accessed it is moved to the front of the list. Analogous to the least recently used heuristic for maintaining a buffer pool.">move-to-front</a>
+rule for <a href="10-glossary.html#self-organizing-list" class="term"
+title="A list that, over a series of search operations, will make use of some heuristic to re-order its elements in an effort to improve search times. Generally speaking, search is done sequentially from the beginning, but the self-organizing heuristic will attempt to put the records that are most likely to be searched for at or near the front of the list. While typically not as efficient as binary search on a sorted list, self-organizing lists do not require that the list be sorted (and so do not pay the cost of doing the sorting operation).">self-organizing
+lists</a>, and of the path compression technique for managing a series
+of <a href="10-glossary.html#union-find" class="term"
+title="A process for mainining a collection of disjoint sets. The FIND operation determines which disjoint set a given object resides in, and the UNION operation combines two disjoint sets when it is determined that they are members of the same equivalence class under some equivalence relation.">Union/Find</a>
+operations. These access functions tend to make the tree more balanced,
+but an individual access will not necessarily result in a more balanced
+tree.</p>
 <p>Whenever a node
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
 is accessed (e.g., when
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
 is inserted, deleted, or is the goal of a search), the splay tree
 performs a process called <a href="10-glossary.html#splaying"
-class="term">splaying</a>. Splaying moves
+class="term"
+title="The act of performing an rebalancing operation on a splay tree.">splaying</a>.
+Splaying moves
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
 to the root of the BST. When
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
@@ -170,13 +174,15 @@ is being deleted, splaying moves the parent of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
 to the root. As in the AVL tree, a splay of node
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
-consists of a series of <a href="10-glossary.html#rotation"
-class="term">rotations</a>. A rotation moves
+consists of a series of <a href="10-glossary.html#rotation" class="term"
+title="In the AVL tree and splay tree, a rotation is a local operation performed on a node, its children, and its grandchildren that can result in reordering their relationship. The goal of performing a rotation is to make the tree more balanced.">rotations</a>.
+A rotation moves
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
 higher in the tree by adjusting its position with respect to its parent
 and grandparent. A side effect of the rotations is a tendency to balance
 the tree. There are three types of rotation.</p>
-<p>A <a href="10-glossary.html#single-rotation" class="term">single
+<p>A <a href="10-glossary.html#single-rotation" class="term"
+title="A type of rebalancing operation used by the splay tree and AVL tree.">single
 rotation</a> is performed only if
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
 is a child of the root node. The single rotation is illustrated by <a
@@ -284,9 +290,10 @@ are altered as appropriate to maintain the BST property.</p>
 </div>
 </div>
 <p>The other double rotation is known as a <a
-href="10-glossary.html#zigzig" class="term">zigzig</a> rotation. A
-zigzig rotation takes place when either of the following two conditions
-are met:</p>
+href="10-glossary.html#zigzig" class="term"
+title="A type of rebalancing operation used by splay trees.">zigzig</a>
+rotation. A zigzig rotation takes place when either of the following two
+conditions are met:</p>
 <ol type="1">
 <li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
 is the left child of

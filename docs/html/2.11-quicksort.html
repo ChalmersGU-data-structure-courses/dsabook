@@ -194,18 +194,20 @@ that we can break down the sorting problem. We saw that doing the merge
 step for Mergesort when using an array implementation is not so easy. So
 perhaps a different divide and conquer strategy might turn out to be
 more efficient?</p>
-<p><a href="2.11-quicksort.html#quicksort" class="term">Quicksort</a> is
-aptly named because, when properly implemented, it is one of the fastest
-known general-purpose in-memory sorting algorithms in the average case.
-It does not require the extra array needed by Mergesort, so it is space
-efficient as well. Quicksort is widely used, and is typically the
-algorithm implemented in a library sort routine such as the UNIX
-<code>qsort</code> function. Interestingly, Quicksort is hampered by
-exceedingly poor worst-case performance, thus making it inappropriate
-for certain applications.</p>
+<p><a href="2.11-quicksort.html#quicksort" class="term"
+title="A sort that is $\Theta(n \log n)$ in the best and average cases, though $\Theta(n^2)$ in the worst case. However, a reasonable implmentation will make the worst case occur under exceedingly rare circumstances. Due to its tight inner loop, it tends to run better than any other known sort in general cases. Thus, it is a popular sort to use in code libraries. It works by divide and conquer, by selecting a pivot value, splitting the list into parts that are either less than or greater than the pivot, and then sorting the two parts.">Quicksort</a>
+is aptly named because, when properly implemented, it is one of the
+fastest known general-purpose in-memory sorting algorithms in the
+average case. It does not require the extra array needed by Mergesort,
+so it is space efficient as well. Quicksort is widely used, and is
+typically the algorithm implemented in a library sort routine such as
+the UNIX <code>qsort</code> function. Interestingly, Quicksort is
+hampered by exceedingly poor worst-case performance, thus making it
+inappropriate for certain applications.</p>
 <p>Quicksort first selects a value called the <a
-href="10-glossary.html#pivot" class="term">pivot</a>. Assume that the
-input array contains
+href="10-glossary.html#pivot" class="term"
+title="In Quicksort, the value that is used to split the list into sublists, one with lesser values than the pivot, the other with greater values than the pivot.">pivot</a>.
+Assume that the input array contains
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
 records with key values less than the pivot. The records are then
 rearranged in such a way that the
@@ -218,10 +220,12 @@ and the values greater than or equal to the pivot are placed in the
 last, or rightmost,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mi>k</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-k-1</annotation></semantics></math>
 positions. This is called a <a href="2.11-quicksort.html#partition"
-class="term">partition</a> of the array. The values placed in a given
-partition need not (and typically will not) be sorted with respect to
-each other. All that is required is that all values end up in the
-correct partition. The pivot value itself is placed in position
+class="term"
+title="In Quicksort, the process of splitting a list into two sublists, such that one sublist has values less than the pivot value, and the other with values greater than the pivot. This process takes $\Theta(i)$ time on a sublist of length $i$.">partition</a>
+of the array. The values placed in a given partition need not (and
+typically will not) be sorted with respect to each other. All that is
+required is that all values end up in the correct partition. The pivot
+value itself is placed in position
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>.
 Quicksort then proceeds to sort the resulting subarrays now on either
 side of the pivot, one of size

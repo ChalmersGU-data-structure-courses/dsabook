@@ -187,8 +187,10 @@ data-number="9.5">
 <h2 data-number="9.5"><span class="header-section-number">9.5</span>
 Minimal Cost Spanning Trees</h2>
 <p>The <a href="10-glossary.html#minimal-cost-spanning-tree"
-class="term">minimal-cost spanning tree</a> (MCST) problem takes as
-input a connected, undirected graph
+class="term"
+title="Abbreviated as MCST, or sometimes as MST. Derived from a weighted graph, the MCST is the subset of the graph&#39;s edges that maintains the connectivitiy of the graph while having lowest total cost (as defined by the sum of the weights of the edges in the MCST). The result is referred to as a tree because it would never have a cycle (since an edge could be removed from the cycle and still preserve connectivity). Two algorithms to solve this problem are Prim&#39;s algorithm and Kruskal&#39;s algorithm.">minimal-cost
+spanning tree</a> (MCST) problem takes as input a connected, undirected
+graph
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐆</mi><annotation encoding="application/x-tex">\mathbf{G}</annotation></semantics></math>,
 where each edge has a distance or weight measure attached. The MCST is
 also called <em>minimum spanning tree</em> (MST).</p>
@@ -231,9 +233,9 @@ to form a different MCST with equal cost.</p>
 Prim’s Algorithm</h3>
 <p>The first of our two algorithms for finding MCSTs is commonly
 referred to as <a
-href="9.5-minimal-cost-spanning-trees.html#prims-algorithm"
-class="term">Prim’s algorithm</a>. Prim’s algorithm is very simple.
-Start with any Vertex
+href="9.5-minimal-cost-spanning-trees.html#prims-algorithm" class="term"
+title="A greedy algorithm for computing the MCST of a graph. It is nearly identical to Dijkstra&#39;s algorithm for solving the single-source shortest paths problem, with the only difference being the calculation done to update the best-known distance.">Prim’s
+algorithm</a>. Prim’s algorithm is very simple. Start with any Vertex
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>
 in the graph, setting the MCST to be
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>
@@ -321,11 +323,13 @@ class="level3" data-number="9.5.2">
 <h3 data-number="9.5.2"><span class="header-section-number">9.5.2</span>
 Prim’s Algorithm, Priority Queue Implementation</h3>
 <p>Alternatively, we can implement Prim’s algorithm using a <a
-href="10-glossary.html#priority-queue" class="term">priority queue</a>
-to find the next closest vertex, as shown next. As with the priority
-queue version of Dijkstra’s algorithm, the <a
-href="10-glossary.html#heap" class="term">heap</a> stores
-<code>DijkElem</code> objects.</p>
+href="10-glossary.html#priority-queue" class="term"
+title="An ADT whose primary operations of insert of records, and deletion of the greatest (or, in an alternative implementation, the least) valued record. Most often implemented using the heap data structure. The name comes from a common application where the records being stored represent tasks, with the ordering values based on the priorities of the tasks.">priority
+queue</a> to find the next closest vertex, as shown next. As with the
+priority queue version of Dijkstra’s algorithm, the <a
+href="10-glossary.html#heap" class="term"
+title="This term has two different meanings. Uncommonly, it is a synonym for free store. Most often it is used to refer to a particular data structure. This data structure is a complete binary tree with the requirement that every node has a value greater than its children (called a max heap), or else the requirement that every node has a value less than its children (called a min heap). Since it is a complete binary tree, a heap is nearly always implemented using an array rather than an explicit tree structure. To add a new value to a heap, or to remove the extreme value (the max value in a max-heap or min value in a min-heap) and update the heap, takes $\Theta(\log n)$ time in the worst case. However, if given all of the values in an unordered array, the values can be re-arranged to form a heap in only $\Theta(n)$ time. Due to its space and time efficiency, the heap is a popular choice for implementing a priority queue.">heap</a>
+stores <code>DijkElem</code> objects.</p>
 <div class="sourceCode" id="cb4"><pre
 class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Prims MCST algorithm: priority queue version</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">void</span> <span class="op">&lt;</span>V<span class="op">&gt;</span> <span class="fu">PrimPQ</span><span class="op">(</span>Graph G<span class="op">,</span> V s<span class="op">,</span> <span class="bu">Map</span><span class="op">&lt;</span>V<span class="op">,</span><span class="bu">Double</span><span class="op">&gt;</span> D<span class="op">,</span> <span class="bu">Map</span><span class="op">&lt;</span>V<span class="op">,</span>V<span class="op">&gt;</span> Parent<span class="op">)</span> <span class="op">{</span></span>
@@ -475,14 +479,17 @@ Your browser does not support iframes.
 Kruskal’s Algorithm</h3>
 <p>Our next MCST algorithm is commonly referred to as <a
 href="9.5-minimal-cost-spanning-trees.html#kruskals-algorithm"
-class="term">Kruskal’s algorithm</a>. Kruskal’s algorithm is also a
-simple, greedy algorithm. First partition the set of vertices into
+class="term"
+title="An algorithm for computing the MCST of a graph. During processing, it makes use of the UNION/FIND process to efficiently determine of two vertices are within the same subgraph.">Kruskal’s
+algorithm</a>. Kruskal’s algorithm is also a simple, greedy algorithm.
+First partition the set of vertices into
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="true" form="postfix">|</mo></mrow><annotation encoding="application/x-tex">|\mathbf{V}|</annotation></semantics></math>
-<a href="10-glossary.html#union-find" class="term">disjoint sets</a>,
-each consisting of one vertex. Then process the edges in order of
-weight. An edge is added to the MCST, and two disjoint sets combined, if
-the edge connects two vertices in different disjoint sets. This process
-is repeated until only one disjoint set remains.</p>
+<a href="10-glossary.html#union-find" class="term"
+title="A process for mainining a collection of disjoint sets. The FIND operation determines which disjoint set a given object resides in, and the UNION operation combines two disjoint sets when it is determined that they are members of the same equivalence class under some equivalence relation.">disjoint
+sets</a>, each consisting of one vertex. Then process the edges in order
+of weight. An edge is added to the MCST, and two disjoint sets combined,
+if the edge connects two vertices in different disjoint sets. This
+process is repeated until only one disjoint set remains.</p>
 <p>
 <div id="kruskalCON" class="ssAV" data-short-name="kruskalCON" data-long-name="Kruskal Slideshow" alt="Kruskal Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
@@ -493,15 +500,18 @@ is repeated until only one disjoint set remains.</p>
 </p>
 <p>The edges can be processed in order of weight by putting them in an
 array and then sorting the array. Another possibility is to use a
-<em>minimum</em> <a href="10-glossary.html#priority-queue"
-class="term">priority queue</a>, similar to what we did in <a
+<em>minimum</em> <a href="10-glossary.html#priority-queue" class="term"
+title="An ADT whose primary operations of insert of records, and deletion of the greatest (or, in an alternative implementation, the least) valued record. Most often implemented using the heap data structure. The name comes from a common application where the records being stored represent tasks, with the ordering values based on the priorities of the tasks.">priority
+queue</a>, similar to what we did in <a
 href="9.5-minimal-cost-spanning-trees.html#prims-algorithm">Prim’s
 algorithm</a>.</p>
 <p>The only tricky part to this algorithm is determining if two vertices
 belong to the same equivalence class. Fortunately, the ideal algorithm
 is available for the purpose – the <a href="10-glossary.html#union-find"
-class="term">UNION/FIND</a> algorithm. Here is an implementation for
-Kruskal’s algorithm. Note that since the MCST will never have more than
+class="term"
+title="A process for mainining a collection of disjoint sets. The FIND operation determines which disjoint set a given object resides in, and the UNION operation combines two disjoint sets when it is determined that they are members of the same equivalence class under some equivalence relation.">UNION/FIND</a>
+algorithm. Here is an implementation for Kruskal’s algorithm. Note that
+since the MCST will never have more than
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="true" form="postfix">|</mo></mrow><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">|\mathbf{V}|-1</annotation></semantics></math>
 edges, we can return as soon as the MCST contains enough edges.</p>
 <div class="sourceCode" id="cb5"><pre

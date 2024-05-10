@@ -186,16 +186,20 @@ data-number="9.6">
 All-Pairs Shortest Paths (optional)</h2>
 <p>We next consider the problem of finding the shortest distance between
 all pairs of vertices in the graph, called the <a
-href="10-glossary.html#all-pairs-shortest-paths-problem"
-class="term">all-pairs shortest paths problem</a>. To be precise, for
-every
+href="10-glossary.html#all-pairs-shortest-paths-problem" class="term"
+title="Given a graph with weights or distances on the edges, find the shortest paths between every pair of vertices in the graph. One approach to solving this problem is Floyd&#39;s algorithm, which uses the dynamic programming algorithmic technique.">all-pairs
+shortest paths problem</a>. To be precise, for every
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo>,</mo><mi>v</mi><mo>∈</mo><mi>𝐕</mi></mrow><annotation encoding="application/x-tex">u, v \in \mathbf{V}</annotation></semantics></math>,
 calculate
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>u</mi><mo>,</mo><mi>v</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">d(u, v)</annotation></semantics></math>.</p>
 <p>One solution is to run <a href="10-glossary.html#dijkstras-algorithm"
-class="term">Dijkstra’s algorithm</a> for finding the <a
+class="term"
+title="An algorithm to solve the single-source shortest paths problem in a graph. This is a greedy algorithm. It is nearly identical to Prim&#39;s algorithm for finding a minimal-cost spanning tree, with the only difference being the calculation done to update the best-known distance.">Dijkstra’s
+algorithm</a> for finding the <a
 href="10-glossary.html#single-source-shortest-paths-problem"
-class="term">shortest path</a>
+class="term"
+title="Given a graph with weights or distances on the edges, and a designated start vertex $s$, find the shortest path from $s$ to every other vertex in the graph. One algorithm to solve this problem is Dijkstra&#39;s algorithm.">shortest
+path</a>
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="true" form="postfix">|</mo></mrow><annotation encoding="application/x-tex">|\mathbf{V}|</annotation></semantics></math>
 times, each time computing the shortest path from a different start
 vertex. If
@@ -219,8 +223,9 @@ problem is organizing the search process so that we do not repeatedly
 solve the same subproblems. We will do this organization through the use
 of the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>-path.
-Define a <a href="10-glossary.html#k-path" class="term">k-path</a> from
-vertex
+Define a <a href="10-glossary.html#k-path" class="term"
+title="In Floyd&#39;s algorithm, a k-path is a path between two vertices $i$ and $j$ that can only go through vertices with an index value less than or equal to $k$.">k-path</a>
+from vertex
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>
 to vertex
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math>

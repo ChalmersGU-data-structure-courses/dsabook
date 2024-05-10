@@ -187,23 +187,26 @@
 Graph Traversals</h2>
 <p>Many graph applications need to visit the vertices of a graph in some
 specific order based on the graph’s topology. This is known as a graph
-<a href="10-glossary.html#traversal" class="term">traversal</a> and is
-similar in concept to a <a href="10-glossary.html#tree-traversal"
-class="term">tree traversal</a>. Recall that tree traversals visit every
-node exactly once, in some specified order such as preorder, inorder, or
-postorder. Multiple tree traversals exist because various applications
-require the nodes to be visited in a particular order. For example, to
-print a BST’s nodes in ascending order requires an inorder traversal as
-opposed to some other traversal. Standard graph traversal orders also
-exist. Each is appropriate for solving certain problems. For example,
-many problems in artificial intelligence programming are modeled using
-graphs. The problem domain might consist of a large collection of
-states, with connections between various pairs of states. Solving this
-sort of problem requires getting from a specified start state to a
-specified goal state by moving between states only through the
-connections. Typically, the start and goal states are not directly
-connected. To solve this problem, the vertices of the graph must be
-searched in some organized manner.</p>
+<a href="10-glossary.html#traversal" class="term"
+title="Any process for visiting all of the objects in a collection (such as a tree or graph) in some order.">traversal</a>
+and is similar in concept to a <a href="10-glossary.html#tree-traversal"
+class="term"
+title="A traversal performed on a tree. Traditional tree traversals include preorder and postorder traversals for both binary and general trees, and inorder traversal that is most appropriate for a BST.">tree
+traversal</a>. Recall that tree traversals visit every node exactly
+once, in some specified order such as preorder, inorder, or postorder.
+Multiple tree traversals exist because various applications require the
+nodes to be visited in a particular order. For example, to print a BST’s
+nodes in ascending order requires an inorder traversal as opposed to
+some other traversal. Standard graph traversal orders also exist. Each
+is appropriate for solving certain problems. For example, many problems
+in artificial intelligence programming are modeled using graphs. The
+problem domain might consist of a large collection of states, with
+connections between various pairs of states. Solving this sort of
+problem requires getting from a specified start state to a specified
+goal state by moving between states only through the connections.
+Typically, the start and goal states are not directly connected. To
+solve this problem, the vertices of the graph must be searched in some
+organized manner.</p>
 <p>Graph traversal algorithms typically begin with a start vertex and
 attempt to visit the remaining vertices from there. Graph traversals
 must deal with a number of troublesome cases. First, it might not be
@@ -245,8 +248,9 @@ one of the graph traversals described next.</p>
 <h3 data-number="9.2.1"><span class="header-section-number">9.2.1</span>
 Depth-First Search</h3>
 <p>Our first method for organized graph traversal is called <a
-href="9.2-graph-traversals.html#depth-first-search"
-class="term">depth-first search</a> (DFS). Whenever a vertex
+href="9.2-graph-traversals.html#depth-first-search" class="term"
+title="A graph traversal algorithm. Whenever a $v$ is visited during the traversal, DFS will recursively visit all of $v$ &#39;s unvisited neighbors.">depth-first
+search</a> (DFS). Whenever a vertex
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>
 is visited during the search, DFS will recursively visit all of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>
@@ -257,7 +261,8 @@ to a stack. The next vertex to be visited is determined by popping the
 stack and following that edge. The effect is to follow one branch
 through the graph to its conclusion, then it will back up and follow
 another branch, and so on. The DFS process can be used to define a <a
-href="10-glossary.html#depth-first-search-tree" class="term">depth-first
+href="10-glossary.html#depth-first-search-tree" class="term"
+title="A tree that can be defined by the operation of a depth-first search (DFS) on a graph. This tree would consist of the nodes of the graph and a subset of the edges of the graph that was followed during the DFS.">depth-first
 search tree</a>. This tree is composed of the edges that were followed
 to any new (unvisited) vertex during the traversal, and leaves out the
 edges that lead to already visited vertices. DFS can be applied to
@@ -305,7 +310,8 @@ that a vertex be processed before ones further along in the DFS.
 Alternatively, some applications require activity <em>after</em> the
 remaining vertices are processed; hence the call to function
 <code>PostVisit</code>. This would be a natural opportunity to make use
-of the <a href="10-glossary.html#visitor" class="term">visitor</a>
+of the <a href="10-glossary.html#visitor" class="term"
+title="A design pattern where a traversal process is given a function (known as the visitor) that is applied to every object in the collection being traversed. For example, a generic tree or graph traversal might be designed such that it takes a function parameter, where that function is applied to each node.">visitor</a>
 design pattern.</p>
 <p>The following visualization shows a random graph each time that you
 start it, so that you can see the behavior on different examples. It can
@@ -335,13 +341,13 @@ Your browser does not support iframes.
 <h3 data-number="9.2.2"><span class="header-section-number">9.2.2</span>
 Breadth-First Search</h3>
 <p>Our second graph traversal algorithm is known as a <a
-href="9.2-graph-traversals.html#breadth-first-search"
-class="term">breadth-first search</a> (BFS). BFS examines all vertices
-connected to the start vertex before visiting vertices further away. BFS
-is implemented similarly to DFS, except that a queue replaces the
-recursion stack. Note that if the graph is a tree and the start vertex
-is at the root, BFS is equivalent to visiting vertices level by level
-from top to bottom.</p>
+href="9.2-graph-traversals.html#breadth-first-search" class="term"
+title="A graph traversal algorithm. As the name implies, all immediate neighbors for a node are visited before any more-distant nodes are visited. BFS is driven by a queue. A start vertex is placed on the queue. Then, until the queue is empty, a node is taken off the queue, visited, and and then any unvisited neighbors are placed onto the queue.">breadth-first
+search</a> (BFS). BFS examines all vertices connected to the start
+vertex before visiting vertices further away. BFS is implemented
+similarly to DFS, except that a queue replaces the recursion stack. Note
+that if the graph is a tree and the start vertex is at the root, BFS is
+equivalent to visiting vertices level by level from top to bottom.</p>
 <p>This visualization shows a graph and the result of performing a BFS
 on it, resulting in a breadth-first search tree.</p>
 <p>

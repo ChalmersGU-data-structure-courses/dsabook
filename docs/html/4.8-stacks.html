@@ -184,26 +184,33 @@
 <section id="stacks" class="level2" data-number="4.8">
 <h2 data-number="4.8"><span class="header-section-number">4.8</span>
 Stacks</h2>
-<p>The <a href="10-glossary.html#stack" class="term">stack</a> is a
-list-like structure in which elements may be inserted or removed from
-only one end. While this restriction makes stacks less flexible than
-lists, it also makes stacks both efficient (for those operations they
-can do) and easy to implement. Many applications require only the
+<p>The <a href="10-glossary.html#stack" class="term"
+title="A list-like structure in which elements may be inserted or removed from only one end.">stack</a>
+is a list-like structure in which elements may be inserted or removed
+from only one end. While this restriction makes stacks less flexible
+than lists, it also makes stacks both efficient (for those operations
+they can do) and easy to implement. Many applications require only the
 limited form of insert and remove operations that stacks provide. In
 such cases, it is more efficient to use the simpler stack data structure
 rather than the generic list.</p>
 <p>Despite their restrictions, stacks have many uses. Thus, a special
 vocabulary for stacks has developed. Accountants used stacks long before
 the invention of the computer. They called the stack a “<a
-href="10-glossary.html#lifo" class="term">LIFO</a>” list, which stands
-for “Last-In, First-Out.” Note that one implication of the LIFO policy
-is that stacks remove elements in reverse order of their arrival.</p>
+href="10-glossary.html#lifo" class="term"
+title="Abbreviation for &#39;last-in, first-out&#39;. This is the access paradigm for a stack, and an old terminolgy for the stack is &#39;LIFO list&#39;.">LIFO</a>”
+list, which stands for “Last-In, First-Out.” Note that one implication
+of the LIFO policy is that stacks remove elements in reverse order of
+their arrival.</p>
 <p>The accessible element of the stack is called the <code>top</code>
 element. Elements are not said to be inserted, they are <a
-href="10-glossary.html#push" class="term">pushed</a> onto the stack.
-When removed, an element is said to be <a href="10-glossary.html#pop"
-class="term">popped</a> from the stack. Here is our <a
-href="10-glossary.html#adt" class="term">ADT</a> for stacks:</p>
+href="10-glossary.html#push" class="term"
+title="A specialized term used to indicate inserting an element onto a stack.">pushed</a>
+onto the stack. When removed, an element is said to be <a
+href="10-glossary.html#pop" class="term"
+title="A specialized term used to indicate removing an element from a stack.">popped</a>
+from the stack. Here is our <a href="10-glossary.html#adt" class="term"
+title="Abbreviated ADT. The specification of a data type within some language, independent of an implementation. The interface for the ADT is defined in terms of a type and a set of operations on that type. The behavior of each operation is determined by its inputs and outputs. An ADT does not specify *how* the data type is implemented. These implementation details are hidden from the user of the ADT and protected from outside access, a concept referred to as encapsulation.">ADT</a>
+for stacks:</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Stack(Collection):</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> push(<span class="va">self</span>, x): <span class="st">&quot;&quot;&quot;Pushes x on top of the stack.&quot;&quot;&quot;</span></span>
@@ -220,9 +227,11 @@ class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>As with lists, there are many variations on stack implementation. The
 two main approaches are the <a href="10-glossary.html#array-based-stack"
-class="term">array-based stack</a> and the <a
-href="4.8-stacks.html#linked-list-stacks">linked stack</a>, which are
-analogous to array-based and linked lists, respectively.</p>
+class="term"
+title="Analogous to an array-based list, this uses an array to store the elements when implementing the stack ADT.">array-based
+stack</a> and the <a href="4.8-stacks.html#linked-list-stacks">linked
+stack</a>, which are analogous to array-based and linked lists,
+respectively.</p>
 <section id="dynamic-array-based-stacks" class="level3"
 data-number="4.8.1">
 <h3 data-number="4.8.1"><span class="header-section-number">4.8.1</span>

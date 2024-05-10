@@ -186,7 +186,8 @@ class="level2" data-number="3.18">
 <h2 data-number="3.18"><span class="header-section-number">3.18</span>
 Amortized Analysis (optional) (WORK IN PROGRESS)</h2>
 <p>This module presents the concept of <a
-href="10-glossary.html#amortized-analysis" class="term">amortized
+href="10-glossary.html#amortized-analysis" class="term"
+title="Analysing the amortized complexity of an algorithm or term:problem.">amortized
 analysis</a>, which is the analysis for a series of operations taken as
 a whole. In particular, amortized analysis allows us to deal with the
 situation where the worst-case cost for
@@ -295,14 +296,15 @@ Analysis that focuses on single operations cannot deal with this global
 limit, and so we turn to amortized analysis to model the entire series
 of operations.</p>
 <p>The key to an amortized analysis of this problem lies in the concept
-of <a href="10-glossary.html#potential" class="term">potential</a>. At
-any given time, a certain number of items may be on the stack. The cost
-for <span class="title-ref">multipop</span> can be no more than this
-number of items. Each call to <span class="title-ref">push</span> places
-another item on the stack, which can be removed by only a single <span
-class="title-ref">multipop</span> operation. Thus, each call to <span
-class="title-ref">push</span> raises the potential of the stack by one
-item. The sum of costs for all calls to <span
+of <a href="10-glossary.html#potential" class="term"
+title="A concept in amortized complexity for operations on a data structure. We choose a *potential function* that associates an arbitrary non-negative value of *stored cost* (stored energy) with each state of the data structure. We then define the amortized cost of a run of the operation to be its cost as given by the the cost model plus the change in potential. The complexity modified this way is called amortized complexity. An example is adding an element to a dynamic array. When the dynamic array is not full, adding an element is quick and we store some of that saved cost by increasing the potential. When the dynamic array is full capacity, we perform an expensive reallocation, but compensate that cost by resetting the potential from a high value to zero. Let us define the potential of a dynamic array with capacity $c$ and size $n$ to be $max(2n-c,0)$. Assuming we double the capacity on reallocation, the operation of adding an element then has constant amortized complexity. The concept comes from potential energy in physics. For example, in the graviational field of the earth, kinetic energy may be stored as potential energy.">potential</a>.
+At any given time, a certain number of items may be on the stack. The
+cost for <span class="title-ref">multipop</span> can be no more than
+this number of items. Each call to <span class="title-ref">push</span>
+places another item on the stack, which can be removed by only a single
+<span class="title-ref">multipop</span> operation. Thus, each call to
+<span class="title-ref">push</span> raises the potential of the stack by
+one item. The sum of costs for all calls to <span
 class="title-ref">multipop</span> can never be more than the total
 potential of the stack (aside from a constant time cost associated with
 each call to <span class="title-ref">multipop</span> itself).</p>
@@ -331,8 +333,10 @@ partition, doing so would reduce the number of times that the while loop
 can be further executed.</p>
 <p>Our final example uses amortized analysis to prove a relationship
 between the cost of the <a href="10-glossary.html#move-to-front"
-class="term">move-to-front</a> self-organizing list heuristic and the
-cost for the optimal static ordering of the list.</p>
+class="term"
+title="A heuristic used to maintain a self-organizing list. Under this heuristic, whenever a record is accessed it is moved to the front of the list. Analogous to the least recently used heuristic for maintaining a buffer pool.">move-to-front</a>
+self-organizing list heuristic and the cost for the optimal static
+ordering of the list.</p>
 <p>Recall that, for a series of search operations, the minimum cost for
 a static list results when the list is sorted by frequency of access to
 its records. This is the optimal ordering for the records if we never

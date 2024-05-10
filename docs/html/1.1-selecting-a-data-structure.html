@@ -120,21 +120,24 @@ Selecting a Data Structure</h2>
 <p>It should go without saying that people write programs to solve
 problems. However, sometimes programmers forget this. So it is crucial
 to keep this truism in mind when selecting a <a
-href="10-glossary.html#data-structure" class="term">data structure</a>
-to solve a particular <a href="10-glossary.html#problem"
-class="term">problem</a>. Only by first analyzing the problem to
-determine the performance goals that must be achieved can there be any
-hope of selecting the right data structure for the job. Poor program
-designers ignore this analysis step and apply a data structure that they
-are familiar with but which is inappropriate to the problem. The result
-is typically a slow program. Conversely, there is no sense in adopting a
-complex representation to “improve” a program that can meet its
-performance goals when implemented using a simpler design.</p>
+href="10-glossary.html#data-structure" class="term"
+title="The implementation for an ADT.">data structure</a> to solve a
+particular <a href="10-glossary.html#problem" class="term"
+title="A task to be performed. It is best thought of as a function or a mapping of inputs to outputs.">problem</a>.
+Only by first analyzing the problem to determine the performance goals
+that must be achieved can there be any hope of selecting the right data
+structure for the job. Poor program designers ignore this analysis step
+and apply a data structure that they are familiar with but which is
+inappropriate to the problem. The result is typically a slow program.
+Conversely, there is no sense in adopting a complex representation to
+“improve” a program that can meet its performance goals when implemented
+using a simpler design.</p>
 <p>When selecting a data structure to solve a problem, you should follow
 these steps.</p>
 <ol type="1">
 <li>Analyze your problem to determine the <a
-href="10-glossary.html#basic-operation" class="term">basic
+href="10-glossary.html#basic-operation" class="term"
+title="Examples of basic operations include inserting a data item into the data structure, deleting a data item from the data structure, and finding a specified data item.">basic
 operations</a> that must be supported. Examples of basic operations
 include inserting a data item into the data structure, deleting a data
 item from the data structure, and finding a specified data item.</li>
@@ -220,17 +223,19 @@ has little concern for the cost of deletion, but is highly efficient for
 search and moderately efficient for insertion, should meet the resource
 constraints imposed by this problem. Records are accessible by unique
 account number (sometimes called an <a
-href="10-glossary.html#exact-match-query" class="term">exact-match
+href="10-glossary.html#exact-match-query" class="term"
+title="Records are accessed by unique identifier.">exact-match
 query</a>). One data structure that meets these requirements is the <a
-href="8-hashing.html#hashing" class="term">hash table</a>. Hash tables
-allow for extremely fast exact-match search. A record can be modified
-quickly when the modification does not affect its space requirements.
-Hash tables also support efficient insertion of new records. While
-deletions can also be supported efficiently, too many deletions lead to
-some degradation in performance for the remaining operations. However,
-the hash table can be reorganized periodically to restore the system to
-peak efficiency. Such reorganization can occur offline so as not to
-affect ATM transactions.</p>
+href="8-hashing.html#hashing" class="term"
+title="A search method that uses a hash function to convert a search key value into a position within a hash table. In a properly implemented hash system, that position in the table will have high probability of containing the record that matches the key value. Sometimes, the hash function will return a position that does not store the desired key, due to a process called collision. In that case, the desired record is found through a process known as collision resolution.">hash
+table</a>. Hash tables allow for extremely fast exact-match search. A
+record can be modified quickly when the modification does not affect its
+space requirements. Hash tables also support efficient insertion of new
+records. While deletions can also be supported efficiently, too many
+deletions lead to some degradation in performance for the remaining
+operations. However, the hash table can be reorganized periodically to
+restore the system to peak efficiency. Such reorganization can occur
+offline so as not to affect ATM transactions.</p>
 </section>
 <section id="example-databases" class="level4 unnumbered topic">
 <h4 class="unnumbered">Example: Databases</h4>
@@ -241,7 +246,9 @@ information about a particular place by name (another example of an
 exact-match query). Users should also be able to find all places that
 match a particular value or range of values for attributes such as
 location or population size. This is known as a <a
-href="10-glossary.html#range-query" class="term">range query</a>.</p>
+href="10-glossary.html#range-query" class="term"
+title="Records are returned if their relevant key value falls within a specified range.">range
+query</a>.</p>
 <p>A reasonable database system must answer queries quickly enough to
 satisfy the patience of a typical user. For an exact-match query, a few
 seconds is satisfactory. If the database is meant to support range
@@ -253,13 +260,15 @@ all cities in the range as a batch, rather than as a series of
 operations on individual cities.</p>
 <p>The hash table suggested in the previous example is inappropriate for
 implementing our city database, because it cannot perform efficient
-range queries. The <a href="10-glossary.html#b-tree"
-class="term">B-tree</a> supports large databases, insertion and deletion
-of data records, and range queries. However, a simple <a
-href="10-glossary.html#linear-index" class="term">linear index</a> would
-be more appropriate if the database is created once, and then never
-changed, such as an atlas distributed on a CD or accessed from a
-website.</p>
+range queries. The <a href="10-glossary.html#b-tree" class="term"
+title="A method for indexing a large collection of records. A B-tree is a balanced tree that typically has high branching factor (commonly as much as 100 children per internal node), causing the tree to be very shallow. When stored on disk, the node size is selected to be same as the desired unit of I/O (hence some multiple of the disk sector size). This makes it easy to gain access to the record associated with a given search key stored in the tree with few disk accesses. The most commonly implemented variant of the B-tree is the B+ tree.">B-tree</a>
+supports large databases, insertion and deletion of data records, and
+range queries. However, a simple <a href="10-glossary.html#linear-index"
+class="term"
+title="A form of indexing that stores key-value pairs in a sorted array. Typically this is used for an index to a large collection of records stored on disk, where the linear index itself might be on disk or in main memory. It allows for efficient search (including for range queries), but it is not good for inserting and deleting entries in the array. Therefore, it is an ideal indexing structure for when the system needs to do range queries but the collection of records never changes once the linear index has been created.">linear
+index</a> would be more appropriate if the database is created once, and
+then never changed, such as an atlas distributed on a CD or accessed
+from a website.</p>
 </section>
 <section id="introduction-summary-questions" class="level3"
 data-number="1.1.1">

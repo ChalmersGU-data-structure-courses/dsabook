@@ -255,15 +255,16 @@ data-number="3.2.2">
 <h3 data-number="3.2.2"><span class="header-section-number">3.2.2</span>
 Basic Operations and Input Size</h3>
 <p>Of primary consideration when estimating an algorithm’s performance
-is the number of <a href="10-glossary.html#basic-operation"
-class="term">basic operations</a> required by the algorithm to process
-an input of a certain size. The terms “basic operations” and “size” are
-both rather vague and depend on the algorithm being analyzed. Size is
-often the number of inputs processed. For example, when comparing
-sorting algorithms the size of the problem is typically measured by the
-number of records to be sorted. A basic operation must have the property
-that its time to complete does not depend on the particular values of
-its operands. Adding or comparing two integer variables are examples of
+is the number of <a href="10-glossary.html#basic-operation" class="term"
+title="Examples of basic operations include inserting a data item into the data structure, deleting a data item from the data structure, and finding a specified data item.">basic
+operations</a> required by the algorithm to process an input of a
+certain size. The terms “basic operations” and “size” are both rather
+vague and depend on the algorithm being analyzed. Size is often the
+number of inputs processed. For example, when comparing sorting
+algorithms the size of the problem is typically measured by the number
+of records to be sorted. A basic operation must have the property that
+its time to complete does not depend on the particular values of its
+operands. Adding or comparing two integer variables are examples of
 basic operations in most programming languages. Summing the contents of
 an array containing
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
@@ -378,7 +379,8 @@ Thus, the equation for this algorithm is simply</p>
 <p>indicating that the size of the input
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
 has no effect on the running time. This is called a <a
-href="10-glossary.html#constant-running-time" class="term">constant
+href="10-glossary.html#constant-running-time" class="term"
+title="The cost of a function whose running time is not related to its input size. In Theta notation, this is traditionally written as $\Theta(1)$.">constant
 running time</a>.</p>
 </section>
 <section id="example-2" class="level4 unnumbered topic">
@@ -423,7 +425,8 @@ Thus, we say that the running time is
 <section id="growth-rates" class="level3" data-number="3.2.3">
 <h3 data-number="3.2.3"><span class="header-section-number">3.2.3</span>
 Growth Rates</h3>
-<p>The <a href="10-glossary.html#growth-rate" class="term">growth
+<p>The <a href="10-glossary.html#growth-rate" class="term"
+title="The rate at which a function grows. How quickly the function grows when its input grows. Also called its order of growth. A function $f$ has growth rate bounded by a function $g$ if the values of $f$ are eventually bounded by those of $g$ up to some constant factor. We often shorten this (somewhat confusingly) by saying that $f$ has growth rate $g$ or that $f$ has order of growth $g$. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \leq c g(n)$ for all $n \geq n_0$. We then say that $f$ has growth rate less or equal that of $g$ and write $f \in O(g)$ (big-Oh notation). This defines the preorder of growth rates. In algorithm analysis, we sometimes speak of the growth rate of an algorithm. By that, we mean the growth rate of the complexity of the algorithm, the rate at which the cost of the algorithm grows as the size of its input grows. This is also called the asymptotic complexity of that algorithm.">growth
 rate</a> for an algorithm is the rate at which the cost of the algorithm
 grows as the size of its input grows. The following figure shows a graph
 for six equations, each meant to describe the running time for a
@@ -454,8 +457,9 @@ are graphed by straight lines. A growth rate of
 (for
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>
 any positive constant) is often referred to as a <a
-href="10-glossary.html#linear-growth-rate" class="term">linear growth
-rate</a> or running time. This means that as the value of
+href="10-glossary.html#linear-growth-rate" class="term"
+title="For input size $n$, a growth rate of $cn$ (for $c$ any positive constant). In other words, the cost of the associated function is linear on the input size.">linear
+growth rate</a> or running time. This means that as the value of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
 grows, the running time of the algorithm grows in the same proportion.
 Doubling the value of
@@ -464,13 +468,16 @@ roughly doubles the running time. An algorithm whose running-time
 equation has a highest-order term containing a factor of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>n</mi><mn>2</mn></msup><annotation encoding="application/x-tex">n^2</annotation></semantics></math>
 is said to have a <a href="10-glossary.html#quadratic-growth-rate"
-class="term">quadratic growth rate</a>. In the figure, the line labeled
+class="term"
+title="A growth rate function of the form $cn^2$ where $n$ is the input size and $c$ is a constant.">quadratic
+growth rate</a>. In the figure, the line labeled
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">2n^2</annotation></semantics></math>
 represents a quadratic growth rate. The line labeled
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mi>n</mi></msup><annotation encoding="application/x-tex">2^n</annotation></semantics></math>
 represents an <a href="10-glossary.html#exponential-growth-rate"
-class="term">exponential growth rate</a>. This name comes from the fact
-that
+class="term"
+title="A growth rate function where $n$ (the input size) appears in the exponent. For example, $2^n$.">exponential
+growth rate</a>. This name comes from the fact that
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
 appears in the exponent. The line labeled
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>!</mi></mrow><annotation encoding="application/x-tex">n!</annotation></semantics></math>

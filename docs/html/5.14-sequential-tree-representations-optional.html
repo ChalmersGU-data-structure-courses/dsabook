@@ -123,23 +123,26 @@ Sequential Tree Representations (optional)</h2>
 trees. The goal is to store a series of node values with the minimum
 information needed to reconstruct the tree structure. This approach,
 known as a <a href="10-glossary.html#sequential-tree-representation"
-class="term">sequential tree representation</a>, has the advantage of
-saving space because no pointers are stored. It has the disadvantage
-that accessing any node in the tree requires sequentially processing all
-nodes that appear before it in the node list. In other words, node
-access must start at the beginning of the node list, processing nodes
-sequentially in whatever order they are stored until the desired node is
-reached. Thus, one primary virtue of the other implementations discussed
-in this section is lost: efficient access (typically
+class="term"
+title="A representation that stores a series of node values with the minimum information needed to reconstruct the tree structure. This is a technique for serializing a tree.">sequential
+tree representation</a>, has the advantage of saving space because no
+pointers are stored. It has the disadvantage that accessing any node in
+the tree requires sequentially processing all nodes that appear before
+it in the node list. In other words, node access must start at the
+beginning of the node list, processing nodes sequentially in whatever
+order they are stored until the desired node is reached. Thus, one
+primary virtue of the other implementations discussed in this section is
+lost: efficient access (typically
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math>
 time) to arbitrary nodes in the tree. Sequential tree implementations
 are ideal for archiving trees on disk for later use because they save
 space, and the tree structure can be reconstructed as needed for later
 processing.</p>
 <p>Sequential tree implementations can be used to <a
-href="10-glossary.html#serialization" class="term">serialize</a> a tree
-structure. Serialization is the process of storing an object as a series
-of bytes, typically so that the data structure can be transmitted
+href="10-glossary.html#serialization" class="term"
+title="The process of taking a data structure in memory and representing it as a sequence of bytes. This is sometimes done in order to transmit the data structure across a network or store the data structure in a stream, such as on disk. Deserialization reconstructs the original data structure from the serialized representation.">serialize</a>
+a tree structure. Serialization is the process of storing an object as a
+series of bytes, typically so that the data structure can be transmitted
 between computers. This capability is important when using data
 structures in a distributed processing environment.</p>
 <p>A sequential tree implementation typically stores the node values as
@@ -202,7 +205,8 @@ arbitrary path.</p>
 <p>Assume that each node value takes a constant amount of space. An
 example would be if the node value is a positive integer and
 <code>null</code> is indicated by the value zero. From the <a
-href="10-glossary.html#full-binary-tree-theorem" class="term">Full
+href="10-glossary.html#full-binary-tree-theorem" class="term"
+title="This theorem states that the number of leaves in a non-empty full binary tree is one more than the number of internal nodes. Equivalently, then number of null pointers in a standard pointer-based implementation for binary tree nodes is one more than the number of nodes in the binary tree.">Full
 Binary Tree Theorem</a>, we know that the size of the node list will be
 about twice the number of nodes (i.e., the overhead fraction is 1/2).
 The extra space is required by the <code>null</code> pointers. We should

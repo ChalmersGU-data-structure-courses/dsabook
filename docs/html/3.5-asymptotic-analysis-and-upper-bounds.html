@@ -153,8 +153,9 @@ is surpassed by
 once
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">n = 10</annotation></semantics></math>.
 The additional factor of two for the linear <a
-href="10-glossary.html#growth-rate" class="term">growth rate</a> does
-not much matter. It only doubles the
+href="10-glossary.html#growth-rate" class="term"
+title="The rate at which a function grows. How quickly the function grows when its input grows. Also called its order of growth. A function $f$ has growth rate bounded by a function $g$ if the values of $f$ are eventually bounded by those of $g$ up to some constant factor. We often shorten this (somewhat confusingly) by saying that $f$ has growth rate $g$ or that $f$ has order of growth $g$. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \leq c g(n)$ for all $n \geq n_0$. We then say that $f$ has growth rate less or equal that of $g$ and write $f \in O(g)$ (big-Oh notation). This defines the preorder of growth rates. In algorithm analysis, we sometimes speak of the growth rate of an algorithm. By that, we mean the growth rate of the complexity of the algorithm, the rate at which the cost of the algorithm grows as the size of its input grows. This is also called the asymptotic complexity of that algorithm.">growth
+rate</a> does not much matter. It only doubles the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>-coordinate
 for the intersection point. In general, changes to a constant factor in
 either equation only shift <em>where</em> the two curves cross, not
@@ -169,11 +170,13 @@ want an estimate of the growth rate for the running time or other
 resource requirements of an algorithm. This simplifies the analysis and
 keeps us thinking about the most important aspect: the growth rate. This
 is called <a href="10-glossary.html#asymptotic-algorithm-analysis"
-class="term">asymptotic algorithm analysis</a>. To be precise,
-asymptotic analysis refers to the study of an algorithm as the input
-size “gets big” or reaches a limit (in the calculus sense). However, it
-has proved to be so useful to ignore all constant factors that
-asymptotic analysis is used for most algorithm comparisons.</p>
+class="term"
+title="A method for estimating the efficiency of an algorithm or computer program by identifying its asymptotic complexity, the growth rate of its complexity function. Asymptotic analysis also gives a way to define the inherent difficulty of a problem. We frequently use the term algorithm analysis to mean the same thing.">asymptotic
+algorithm analysis</a>. To be precise, asymptotic analysis refers to the
+study of an algorithm as the input size “gets big” or reaches a limit
+(in the calculus sense). However, it has proved to be so useful to
+ignore all constant factors that asymptotic analysis is used for most
+algorithm comparisons.</p>
 <p>In rare situations, it is not reasonable to ignore the constants.
 When comparing algorithms meant to run on small values of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
@@ -185,9 +188,10 @@ performance. There are rare cases where the constants for two algorithms
 under comparison can differ by a factor of 1000 or more, making the one
 with lower growth rate impractical for typical problem sizes due to its
 large constant. Asymptotic analysis is a form of “back of the envelope”
-<a href="10-glossary.html#estimation" class="term">estimation</a> for
-algorithm resource consumption. It provides a simplified model of the
-running time or other resource needs of an algorithm. This
+<a href="10-glossary.html#estimation" class="term"
+title="As a technical skill, this is the process of generating a rough estimate in order to evaluate the feasibility of a proposed solution. This is sometimes known as &#39;back of the napkin&#39; or &#39;back of the envelope&#39; calculation. The estimation process can be formalized as (1) determine the major parameters that affect the problem, (2) derive an equation that relates the parameters to the problem, then (3) select values for the parameters and apply the equation to yield an estimated solution.">estimation</a>
+for algorithm resource consumption. It provides a simplified model of
+the running time or other resource needs of an algorithm. This
 simplification usually helps you understand the behavior of your
 algorithms. Just be aware of the limitations to asymptotic analysis in
 the rare situation where the constant is important.</p>
@@ -197,16 +201,18 @@ Upper Bounds</h3>
 <p>Several terms are used to describe the running-time equation for an
 algorithm. These terms – and their associated symbols – indicate
 precisely what aspect of the algorithm’s behavior is being described.
-One is the <a href="10-glossary.html#upper-bound" class="term">upper
+One is the <a href="10-glossary.html#upper-bound" class="term"
+title="An upper bound for a growth rate $f$ is any growth rate $g$ that is greater than or equal to it. Formally, there are constants $n_0 \geq 0$ and $C &gt; 0$ such that $f(n) \leq C g(n)$ for all $n \geq n_0$. We also write $f \in O(g)$ or slightly imprecisely $f(n) \in O(g(n))$ (this is big-Oh notation). Usually, we are interested in finding an upper bound $g$ that has a simple expression compared to $f$, but is still sharp (there is not much room for improvement). In algorithm analysis, an upper bound for an algorithm is an upper bound for the asymptotic complexity of the algorithm, the growth rate of its complexity. In practice, we are looking for the best possible upper bound that has a simple mathematical expression. For example, we may write $T(n) \in O(n^2)$ if $T$ is the (time) complexity of the algorithm to say that the complexity is quadratic, i.e. the asymptoptic complexity of the algorithm has as upper bound the growth rate given by squaring.">upper
 bound</a> for the growth of the algorithm’s running time. It indicates
 the upper or highest growth rate that the algorithm can have.</p>
 <p>Because the phrase “has an upper bound to its growth rate of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(n)</annotation></semantics></math>”
 is long and often used when discussing algorithms, we adopt a special
-notation, called <a href="10-glossary.html#big-oh-notation"
-class="term">big-Oh notation</a>. If the upper bound for an algorithm’s
-growth rate (for, say, the worst case) is (f(n)), then we would write
-that this algorithm is “in the set
+notation, called <a href="10-glossary.html#big-oh-notation" class="term"
+title="For growth rates $f$ and $g$, we write $f \in O(g)$ to say that $g$ is an upper bound for $f$. The notation can be made sense of by defining O(g) as the set of functions with growth rate less than or equal to that of g. The notation is often somewhat imprecisely used as $f(n) \in O(g(n))$ or even $f(n) = O(g(n))$.">big-Oh
+notation</a>. If the upper bound for an algorithm’s growth rate (for,
+say, the worst case) is (f(n)), then we would write that this algorithm
+is “in the set
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(f(n))</annotation></semantics></math>
 in the worst case” (or just “in
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(f(n))</annotation></semantics></math>

@@ -166,7 +166,8 @@ Software Engineering. Rather, we mostly focus on issues relating to goal
 (2).</p>
 <p>How do we measure efficiency? Our method for evaluating the
 efficiency of an algorithm or computer program is called <a
-href="10-glossary.html#asymptotic-analysis" class="term">asymptotic
+href="10-glossary.html#asymptotic-analysis" class="term"
+title="A method for estimating the efficiency of an algorithm or computer program by identifying its asymptotic complexity, the growth rate of its complexity function. Asymptotic analysis also gives a way to define the inherent difficulty of a problem. We frequently use the term algorithm analysis to mean the same thing.">asymptotic
 analysis</a>. Asymptotic analysis also gives a way to define the
 inherent difficulty of a problem. Throughout the book we use asymptotic
 analysis techniques to estimate the time cost for every algorithm
@@ -190,40 +191,48 @@ the principles behind efficient program design, because their ordinary
 life experiences often do not apply when designing computer
 programs.</p>
 <p>In the most general sense, a <a
-href="10-glossary.html#data-structure" class="term">data structure</a>
-is any data representation and its associated operations. Even an
-integer or floating point number stored on the computer can be viewed as
-a simple data structure. More commonly, people use the term “data
-structure” to mean an organization or structuring for a collection of
-data items. A sorted list of integers stored in an array is an example
-of such a structuring. These ideas are explored further in a discussion
-of <a href="1.2-abstract-data-types.html#abstract-data-types">Abstract
-Data Types</a>.</p>
+href="10-glossary.html#data-structure" class="term"
+title="The implementation for an ADT.">data structure</a> is any data
+representation and its associated operations. Even an integer or
+floating point number stored on the computer can be viewed as a simple
+data structure. More commonly, people use the term “data structure” to
+mean an organization or structuring for a collection of data items. A
+sorted list of integers stored in an array is an example of such a
+structuring. These ideas are explored further in a discussion of <a
+href="1.2-abstract-data-types.html#abstract-data-types">Abstract Data
+Types</a>.</p>
 <p>Given sufficient space to store a collection of <a
-href="10-glossary.html#data-item" class="term">data item</a>s, it is
-always possible to search for specified items within the collection,
-print or otherwise process the data items in any desired order, or
-modify the value of any particular data item. The most obvious example
-is an unsorted array containing all of the data items. It is possible to
-perform all necessary operations on an unsorted array. However, using
-the proper data structure can make the difference between a program
-running in a few seconds and one requiring many days. For example,
-searching for a given record in a <a href="10-glossary.html#hash-table"
-class="term">hash table</a> is much faster than searching for it in an
-unsorted array.</p>
+href="10-glossary.html#data-item" class="term"
+title="A piece of information or a record whose value is drawn from a type.">data
+item</a>s, it is always possible to search for specified items within
+the collection, print or otherwise process the data items in any desired
+order, or modify the value of any particular data item. The most obvious
+example is an unsorted array containing all of the data items. It is
+possible to perform all necessary operations on an unsorted array.
+However, using the proper data structure can make the difference between
+a program running in a few seconds and one requiring many days. For
+example, searching for a given record in a <a
+href="10-glossary.html#hash-table" class="term"
+title="The data structure (usually an array) that stores data records for lookup using hashing.">hash
+table</a> is much faster than searching for it in an unsorted array.</p>
 <p>A solution is said to be <a href="10-glossary.html#efficient"
-class="term">efficient</a> if it solves the problem within the required
-<a href="10-glossary.html#resource-constraints" class="term">resource
+class="term"
+title="A solution is said to be efficient if it solves the problem within the required resource constraints. A solution is sometimes said to be efficient if it requires fewer resources than known alternatives, regardless of whether it meets any particular requirements.">efficient</a>
+if it solves the problem within the required <a
+href="10-glossary.html#resource-constraints" class="term"
+title="Examples of resource constraints include the total space available to store the data (possibly divided into separate main memory and disk space constraints) and the time allowed to perform each subtask.">resource
 constraints</a>. Examples of resource constraints include the total
 space available to store the data – possibly divided into separate main
 memory and disk space constraints – and the time allowed to perform each
 subtask. A solution is sometimes said to be efficient if it requires
 fewer resources than known alternatives, regardless of whether it meets
 any particular requirements. The <a href="10-glossary.html#cost"
-class="term">cost</a> of a solution is the amount of resources that the
-solution consumes. Most often, cost is measured in terms of one key
-resource such as time, with the implied assumption that the solution
-meets the other resource constraints.</p>
+class="term"
+title="The amount of resources that given run of an algorithm consumes.">cost</a>
+of a solution is the amount of resources that the solution consumes.
+Most often, cost is measured in terms of one key resource such as time,
+with the implied assumption that the solution meets the other resource
+constraints.</p>
 </section>
 </section>
 </body>

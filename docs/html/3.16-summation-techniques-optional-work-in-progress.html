@@ -124,9 +124,10 @@ Summation Techniques (optional) (WORK IN PROGRESS)</h2>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>i</mi></mrow><annotation encoding="application/x-tex">
 \sum_{i=1}^n i
 </annotation></semantics></math></p>
-<p>An easy <a href="10-glossary.html#proof-by-induction"
-class="term">proof by induction</a> shows that this summation has the
-well-known closed form
+<p>An easy <a href="10-glossary.html#proof-by-induction" class="term"
+title="A mathematical proof technique similar to recursion. It is used to prove a parameterized theorem $S(n)$, that is, a theorem where there is a induction variable involved (such as the sum of the numbers from 1 to $n$). One first proves that the theorem holds true for a base case, then one proves the implication that whenever $S(n)$ is true then $S(n+1)$ is also true. Another variation is strong induction.">proof
+by induction</a> shows that this summation has the well-known closed
+form
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n(n+1)/2</annotation></semantics></math>.
 But while induction is a good technique for proving that a proposed
 closed-form expression is correct, how do we find a candidate
@@ -187,7 +188,8 @@ terms, the summation is less than
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>n</mi><mn>2</mn></msup><annotation encoding="application/x-tex">n^2</annotation></semantics></math>.
 If we are lucky, the closed form solution is a polynomial. Using that as
 a working assumption, we can invoke a technique called <a
-href="10-glossary.html#guess-and-test" class="term">guess-and-test</a>.
+href="10-glossary.html#guess-and-test" class="term"
+title="A technique used when trying to determine the closed-form solution for a summation or recurrence relation. Given a hypothesis for the closed-form solution, if it is correct, then it is often relatively easy to prove that using induction.">guess-and-test</a>.
 We will guess that the closed-form solution for this summation is a
 polynomial. That means that we are guessing that it is of the form
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>c</mi><mn>1</mn></msub><msup><mi>n</mi><mn>2</mn></msup><mo>+</mo><msub><mi>c</mi><mn>2</mn></msub><mi>n</mi><mo>+</mo><msub><mi>c</mi><mn>3</mn></msub></mrow><annotation encoding="application/x-tex">c_1 n^2 + c_2 n + c_3</annotation></semantics></math>
@@ -256,12 +258,13 @@ any positive integer. Why is this not a universal approach to solving
 summations? Because many summations do not have a polynomial as their
 closed form solution.</p>
 <p>A more general approach is based on the <a
-href="10-glossary.html#subtract-and-guess"
-class="term">subtract-and-guess</a> or <a
-href="10-glossary.html#divide-and-guess"
-class="term">divide-and-guess</a> strategies. One form of
-subtract-and-guess is known as the <a
-href="10-glossary.html#shifting-method" class="term">shifting
+href="10-glossary.html#subtract-and-guess" class="term"
+title="A technique for finding a closed-form solution to a summation or recurrence relation.">subtract-and-guess</a>
+or <a href="10-glossary.html#divide-and-guess" class="term"
+title="A technique for finding a closed-form solution to a summation or recurrence relation.">divide-and-guess</a>
+strategies. One form of subtract-and-guess is known as the <a
+href="10-glossary.html#shifting-method" class="term"
+title="A technique for finding a closed-form solution to a summation or recurrence relation.">shifting
 method</a>. The shifting method subtracts the summation from a variation
 on the summation. The variation selected for the subtraction should be
 one that makes most of the terms cancel out. To solve sum

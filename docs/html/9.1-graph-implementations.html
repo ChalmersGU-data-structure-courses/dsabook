@@ -187,14 +187,17 @@ Graph Implementations</h2>
 <h3 data-number="9.1.1"><span class="header-section-number">9.1.1</span>
 Graph API</h3>
 <p>We next turn to the problem of implementing a general-purpose <a
-href="10-glossary.html#graph" class="term">graph</a> class. There are
-two traditional approaches to representing graphs: The <a
-href="9.1-graph-implementations.html#adjacency-matrix"
-class="term">adjacency matrix</a> and the <a
-href="9.1-graph-implementations.html#adjacency-list"
-class="term">adjacency list</a>. In this module we will show actual
-implementations for each approach. We will begin with an interface
-defining an ADT for graphs that a given implementation must meet.</p>
+href="10-glossary.html#graph" class="term"
+title="A graph $\mathbf{G} = (\mathbf{V}, \mathbf{E})$ consists of a set of vertices $\mathbf{V}$ and a set of edges $\mathbf{E}$, such that each edge in $\mathbf{E}$ is a connection between a pair of vertices in $\mathbf{V}$.">graph</a>
+class. There are two traditional approaches to representing graphs: The
+<a href="9.1-graph-implementations.html#adjacency-matrix" class="term"
+title="An implementation for a graph that uses a 2-dimensional array where each row and each column corresponds to a vertex in the graph. A given row and column in the matrix corresponds to an edge from the vertex corresponding to the row to the vertex corresponding to the column.">adjacency
+matrix</a> and the <a
+href="9.1-graph-implementations.html#adjacency-list" class="term"
+title="An implementation for a graph that uses an (array-based) list to represent the vertices of the graph, and each vertex is in turn represented by a (linked) list of the vertices that are neighbors.">adjacency
+list</a>. In this module we will show actual implementations for each
+approach. We will begin with an interface defining an ADT for graphs
+that a given implementation must meet.</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Graph:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> addVertex(<span class="va">self</span>, v):     <span class="st">&quot;&quot;&quot;Adds the vertex v to the graph. Returns true if it wasn&#39;t already in the graph.&quot;&quot;&quot;</span></span>
@@ -416,10 +419,12 @@ you can use strings or anything else.</p>
 <p>Its main data structure is a map from vertices to sets of edges.
 Exactly which kind of map or set we use can depend on our needs, but in
 this implementation we use a <a
-href="8.3-separate-chaining.html#separate-chaining"
-class="term">separate chaining</a> hash map, backed with a set
-implemented as a <a href="10-glossary.html#linked-list"
-class="term">linked list</a>.</p>
+href="8.3-separate-chaining.html#separate-chaining" class="term"
+title="In hashing, a synonym for open hashing">separate chaining</a>
+hash map, backed with a set implemented as a <a
+href="10-glossary.html#linked-list" class="term"
+title="An implementation for the list ADT that uses dynamic allocation of link nodes to store the list elements. Common variants are the singly linked list, doubly linked list and circular list. The overhead required is the pointers in each link node.">linked
+list</a>.</p>
 <p>So, for each vertex, we store a linked list of all the edges
 originating from that vertex. This makes the method
 <code>outgoingEdges</code> very efficient, because the only thing we

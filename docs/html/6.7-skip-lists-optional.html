@@ -188,25 +188,32 @@
 <h2 data-number="6.7"><span class="header-section-number">6.7</span>
 Skip Lists (optional)</h2>
 <p>This module presents a probabilistic search structure called the <a
-href="10-glossary.html#skip-list" class="term">skip list</a>. Like the
-<a href="10-glossary.html#bst" class="term">BST</a>, skip lists are
-designed to overcome a basic limitation of array-based and linked lists:
-Either search or update operations require linear time. The skip list is
-an example of a <a href="10-glossary.html#probabilistic-data-structure"
-class="term">probabilistic data structure</a>, because it makes some of
-its decisions at random.</p>
+href="10-glossary.html#skip-list" class="term"
+title="A form of linked list that adds additional links to improve the cost of fundamental operations like insert, delete, and search. It is a probabilistic data structure since it adds the additional links using a probabilistic algorithm. It can implement a dictionary more efficiently than a BST, and is roughly as difficult to implement.">skip
+list</a>. Like the <a href="10-glossary.html#bst" class="term"
+title="A binary tree that imposes the following constraint on its node values: The search key value for any node $A$ must be greater than the (key) values for all nodes in the left subtree of $A$, and less than the key values for all nodes in the right subtree of $A$. Some convention must be adopted if multiple nodes with the same key value are permitted, typically these are required to be in the right subtree.">BST</a>,
+skip lists are designed to overcome a basic limitation of array-based
+and linked lists: Either search or update operations require linear
+time. The skip list is an example of a <a
+href="10-glossary.html#probabilistic-data-structure" class="term"
+title="Any data structure that uses probabilistic algorithms to perform its operations. A good example is the skip list.">probabilistic
+data structure</a>, because it makes some of its decisions at
+random.</p>
 <p>Skip lists provide an alternative to the BST and related tree
 structures. The primary problem with the BST is that it may easily
-become unbalanced. The <a href="10-glossary.html#2-3-tree"
-class="term">2-3 Tree</a> is guaranteed to remain balanced regardless of
-the order in which data values are inserted, but it is rather
-complicated to implement. The <a href="10-glossary.html#avl-tree"
-class="term">AVL tree</a> and the <a href="10-glossary.html#splay-tree"
-class="term">splay tree</a> are also guaranteed to provide good
-performance, but at the cost of added complexity as compared to the BST.
-The skip list is easier to implement than known balanced tree
-structures. The skip list is not guaranteed to provide good performance
-(where good performance is defined as
+become unbalanced. The <a href="10-glossary.html#2-3-tree" class="term"
+title="A specialized form of the B-tree where each internal node has either 2 children or 3 children. Key values are ordered to maintain the binary search tree property. The 2-3 tree is always height balanced, and its insert, search, and remove operations all have $\Theta(\log n)$ cost.">2-3
+Tree</a> is guaranteed to remain balanced regardless of the order in
+which data values are inserted, but it is rather complicated to
+implement. The <a href="10-glossary.html#avl-tree" class="term"
+title="A variant implementation for the BST, which differs from the standard BST in that it uses modified insert and remove methods in order to keep the tree balanced. Similar to a splay tree in that it uses the concept of rotations in the insert and remove operations.">AVL
+tree</a> and the <a href="10-glossary.html#splay-tree" class="term"
+title="A variant implementation for the BST, which differs from the standard BST in that it uses modified insert and remove methods in order to keep the tree balanced. Similar to an AVL tree in that it uses the concept of rotations in the insert and remove operations. While a splay tree does not guarentee that the tree is balanced, it does guarentee that a series of $n$ operations on the tree will have a total cost of $\Theta(n \log n)$ cost, meaning that any given operation can be viewed as having amortized cost of $\Theta(\log n)$.">splay
+tree</a> are also guaranteed to provide good performance, but at the
+cost of added complexity as compared to the BST. The skip list is easier
+to implement than known balanced tree structures. The skip list is not
+guaranteed to provide good performance (where good performance is
+defined as
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math>
 search, insertion, and deletion time), but it will provide good
 performance with extremely high probability (unlike the BST which has a
