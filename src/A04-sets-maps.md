@@ -26,9 +26,9 @@ maps are, and how to use them to solve the four problems above.
 You may have already used sets and maps in programming, because almost
 every programming language provides an implementation for them. For
 example, Java provides the
-[HashSet](https://docs.oracle.com/javase/8/docs/api/index.html?java/util/HashSet.html)
+[HashSet](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/HashSet.html)
 and
-[HashMap](https://docs.oracle.com/javase/8/docs/api/index.html?java/util/HashMap.html)
+[HashMap](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/HashMap.html)
 classes, and Python provides
 [sets](https://docs.python.org/3/tutorial/datastructures.html#sets) and
 [dictionaries](https://docs.python.org/3/tutorial/datastructures.html#dictionaries)
@@ -360,11 +360,11 @@ Balanced BSTs and hash tables are the main ways that sets and maps are
 implemented in practice. Almost every programming language provides sets
 and maps as a built-in feature, based on one of these technologies. For
 example, Java's
-[HashSet](https://docs.oracle.com/javase/8/docs/api/index.html?java/util/HashSet.html),
-[HashMap](https://docs.oracle.com/javase/8/docs/api/index.html?java/util/HashMap.html),
-[TreeSet](https://docs.oracle.com/javase/8/docs/api/index.html?java/util/TreeSet.html)
+[HashSet](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/HashSet.html),
+[HashMap](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/HashMap.html),
+[TreeSet](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/TreeSet.html)
 and
-[TreeMap](https://docs.oracle.com/javase/8/docs/api/index.html?java/util/TreeMap.html),
+[TreeMap](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/TreeMap.html),
 and Python's:
 [sets](https://docs.python.org/3/tutorial/datastructures.html#sets) and
 [dictionaries](https://docs.python.org/3/tutorial/datastructures.html#dictionaries).

@@ -247,9 +247,9 @@ To make linked lists useful, we need an enhanced iterator interface,
 where we can move forwards and backwards in the list, and add/remove
 nodes through this enhanced iterator. In the standard Java API, this
 kind of iterator is called a
-[ListIterator](https://docs.oracle.com/javase/8/docs/api/java/util/ListIterator.html),
+[ListIterator](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/ListIterator.html),
 which is part of Java's standard
-[LinkedList](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html).
+[LinkedList](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/LinkedList.html).
 
 ### Linked List: Full code
 

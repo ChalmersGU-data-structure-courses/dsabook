@@ -58,7 +58,7 @@ Which results in:
 
 With the **Comparable** interface we can define the "natural ordering"
 for a class ([Java 8
-Comparable](https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html)).
+Comparable](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Comparable.html)).
 Recall the interface for comparables from
 [the course API](#all-adts-used-in-this-book):
 ```java
@@ -113,7 +113,7 @@ Two things to note, which we address later:
 What if we sometimes want to sort the list according to some other
 ordering, e.g., birth year or given name? Enter *comparators*, and here
 is the interface ([Java 8
-Comparator](https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html)):
+Comparator](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Comparator.html)):
 ```java
 // Note: This is a subset of the java.util.Comparator interface
 interface Comparator<E> {

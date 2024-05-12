@@ -85,9 +85,9 @@ Second, our list API is not the best for linked lists. If we instead
 could have a pointer to the "current" list node, and have methods for
 moving forward and backward in the list, several of the operations can
 be constant time. In the Java standard API this is called a
-[ListIterator](https://docs.oracle.com/javase/8/docs/api/java/util/ListIterator.html),
+[ListIterator](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/ListIterator.html),
 which is part of Java's standard
-[LinkedList](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html).
+[LinkedList](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/LinkedList.html).
 
 But these advanced list iterators are not part of this course, and in
 fact there are not many algorithms where list iterators are particularly
@@ -103,7 +103,7 @@ All serious languages have dynamic list implementations. Here are how
 they are implemented in Java and Python:
 
 -   In Java,
-    [java.util.ArrayList](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html)
+    [java.util.ArrayList](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/ArrayList.html)
     implements dynamic arrays, meaning that the internal array grows
     automatically when necessary. The growth factor is 50%, so that if
     the array has size 1024, it will grow with another 512 elements.
@@ -112,7 +112,7 @@ they are implemented in Java and Python:
     However, the ArrayList will never shrink automatically, but instead
     it's up to the programmer to decide when to shrink it.
 -   Java's
-    [java.util.LinkedList](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html)
+    [java.util.LinkedList](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/LinkedList.html)
     implements [doubly-linked lists](#doubly-linked-lists-optional), so that the iterator can move forward and backward
     through the list. \[[Source:
     LinkedList.java](https://github.com/openjdk/jdk/blob/961dcffc862a4830fbf26791835a98c12d4b513e/src/java.base/share/classes/java/util/LinkedList.java#L974-L984)\]

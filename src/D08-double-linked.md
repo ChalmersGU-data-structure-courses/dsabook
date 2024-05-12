@@ -78,10 +78,10 @@ class DoubleLinkedList<E> implements List<E> {
 
 The main advantage with doubly linked lists are that we can implement
 more advanced iterators
-([ListIterator](https://docs.oracle.com/javase/8/docs/api/java/util/ListIterator.html)
+([ListIterator](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/ListIterator.html)
 in the Java standard API) that can move forward and backward through a
 list. In fact, Java's standard
-[LinkedList](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html)
+[LinkedList](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/LinkedList.html)
 is implemented as a doubly linked list.
 
 ### Implementation of the list methods
