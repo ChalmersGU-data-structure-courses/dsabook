@@ -72,8 +72,8 @@ unsuccessful searches and $\frac{1}{2}(1 + 1/(1-\alpha))$ for deletions or
 successful searches.
 
 :::: {#HashPlot}
-::: {.odsafig width="400" align="center" capalign="justify" figwidth="90%" alt="Hashing analysis plot"}
-Images/hashplot.png
+::: figure
+![Hashing analysis plot](images/hashplot.png){width=400}
 
 A plot showing the growth rate of the cost for insertion and deletion
 into a hash table as the load factor increases.

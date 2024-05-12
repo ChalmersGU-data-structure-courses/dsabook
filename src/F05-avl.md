@@ -18,7 +18,7 @@ use what are called [rotations](#rotation){.term}.
 ### Rotations
 
 Rotation is an operation that takes a node in the tree and moves it one
-level higher. [Figure #SingProm](#SingProm)
+level higher. [Figure #SingleRotation](#SingleRotation)
 illustrates rotation. Here, $P$ and $S$ are nodes, while $A$, $B$ and
 $C$ represent subtrees.
 
@@ -34,11 +34,11 @@ A *left rotation* is the opposite process: starting from the tree in
 that a right rotation tends to make the tree more right-leaning, while a
 left rotation tends to make it more left-leaning.
 
-:::: {#Rotation}
-::: {.odsafig width="500" align="center" capalign="justify" figwidth="90%" alt="Rotation"}
-Images/SingRot.png
+:::: {#SingleRotation}
+::: figure
+![Rotation](images/SingRot.png){width=500}
 
-Rotation. In a rotation, node $S$ is promoted to the root, rotating with
+In a rotation, node $S$ is promoted to the root, rotating with
 node $P$. Because the value of $S$ is less than the value of $P$, $P$
 must become $S$ 's right child. The positions of subtrees $A$, $B$, and
 $C$ are altered as appropriate to maintain the BST property, but the
@@ -55,8 +55,8 @@ right-leaning, and a left rotation makes it more left-leaning.
 ### AVL tree insertion
 
 :::: {#AVLinsert}
-::: {.odsafig width="500" align="center" capalign="justify" figwidth="90%" alt="An insertion that violates the AVL tree balance property"}
-Images/AVLins.png
+::: figure
+![An insertion that violates the AVL tree balance property](images/AVLins.png){width=500}
 
 Example of an insert operation that violates the AVL tree balance
 property. Prior to the insert operation, all nodes of the tree are
@@ -91,8 +91,8 @@ Cases 2 and 3 can be fixed using a [double rotation]{.term},
 as shown in [Figure #AVLdouble](#AVLdouble).
 
 :::: {#AVLsingle}
-::: {.odsafig width="500" align="center" capalign="justify" figwidth="90%" alt="AVL tree single rotation"}
-Images/AVLSingRot.png
+::: figure
+![AVL tree single rotation](images/AVLSingRot.png){width=500}
 
 A single rotation in an AVL tree. This operation occurs when the excess
 node (in subtree $A$) is in the left child of the left child of the
@@ -105,8 +105,8 @@ same way.
 ::::
 
 :::: {#AVLdouble}
-::: {.odsafig width="500" align="center" capalign="justify" figwidth="90%" alt="AVL tree double rotation"}
-Images/AVLDblRot.png
+::: figure
+![AVL tree double rotation](images/AVLDblRot.png){width=500}
 
 A double rotation in an AVL tree. This operation occurs when the excess
 node (in subtree $B$) is in the right child of the left child of the

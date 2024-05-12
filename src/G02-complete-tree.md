@@ -27,8 +27,8 @@ table lists the array indices for the children, parent, and siblings of
 each node in the figure.
 
 :::: {#BinArray}
-::: {.odsafig width="400" align="center" capalign="justify" figwidth="90%" alt="Complete binary tree node numbering"}
-Images/BinArray.png
+::: figure
+![Complete binary tree node numbering](images/BinArray.png){width=400}
 
 A complete binary tree of 12 nodes, numbered starting from 0.
 :::

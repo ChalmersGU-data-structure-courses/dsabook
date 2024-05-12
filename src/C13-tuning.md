@@ -131,11 +131,7 @@ distinct from empirical comparison of two competitors because the
 purpose of the simulation is to perform analysis that might otherwise be
 too difficult. A good example of this appears in the following figure.
 
-:::: {#HashPlot2}
-::: {.odsafig width="400" align="center" capalign="justify" figwidth="90%" alt="Hashing analysis plot"}
-Images/hashplot.png
-:::
-::::
+![Hashing analysis plot](images/hashplot.png){width=400}
 
 This figure shows the cost for inserting or deleting a record from a
 [hash table](#hashing)

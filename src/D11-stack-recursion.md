@@ -55,11 +55,7 @@ static long factorial_recursive(int n) {
 
 Here is an illustration for how the internal processing works.
 
-:::: {#RecurStack}
-::: {.odsafig width="500" align="center" capalign="justify" figwidth="90%" alt="Implementing recursion with a stack"}
-Images/RecurSta.png
-:::
-::::
+![Implementing recursion with a stack](images/RecurSta.png){width=500}
 
 $\beta$ values indicate the address of the program instruction to return
 to after completing the current function call. On each recursive

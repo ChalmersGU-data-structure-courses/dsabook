@@ -6,8 +6,8 @@ Two functions of $n$ have different
 goes to infinity their ratio either goes to infinity or goes to zero.
 
 :::: {#RunTimeGraph}
-::: {.odsafig width="500" align="center" capalign="justify" figwidth="90%" alt="The growth rates for five equations"}
-Images/plot.png
+::: figure
+![The growth rates for five equations](images/plot.png){width=500}
 
 Two views of a graph illustrating the growth rates for six equations.
 The bottom view shows in detail the lower-left portion of the top view.

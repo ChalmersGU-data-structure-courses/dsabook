@@ -95,8 +95,8 @@ near the tails, and some are near the center. Thus, each table slot is
 equally likely (roughly) to get a key value.
 
 :::: {#HashNormal}
-::: {.odsafig width="800" align="center" capalign="center" figwidth="90%" alt="Binning vs. Mod Function"}
-Images/HashNormal.png
+::: figure
+![Binning vs. Mod Function](images/HashNormal.png){width=800}
 
 A comparison of binning vs. modulus as a hash function.
 :::
@@ -123,8 +123,8 @@ if the key values all tend to be small numbers, then their squares will
 only affect the low-order digits of the hash value.
 
 :::: {#MidSquareFig}
-::: {.odsafig width="70" align="center" capalign="justify" figwidth="90%" alt="Mid-square method example"}
-Images/MidSquare.png
+::: figure
+![Mid-square method example](images/MidSquare.png){width=70}
 
 An example of the mid-square method. This image shows the traditional
 gradeschool long multiplication process. The value being squared is

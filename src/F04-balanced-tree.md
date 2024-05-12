@@ -23,8 +23,8 @@ shape of a complete binary tree requires excessive modification to the
 tree during update, as we see in this example.
 
 :::: {#balanceBST}
-::: {.odsafig width="500" align="center" capalign="justify" figwidth="90%" alt="An attempt to re-balance a BST after insertion can be expensive"}
-Images/BSTBal.png
+::: figure
+![An attempt to re-balance a BST after insertion can be expensive](images/BSTBal.png){width=500}
 
 An attempt to re-balance a BST after insertion can be expensive. (a) A
 BST with six nodes in the shape of a complete binary tree. (b) A node

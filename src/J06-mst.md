@@ -182,8 +182,8 @@ have been added), but does this tree have minimum cost?
 > Prim's algorithm must be correct. 
 
 :::: {#PrimProof}
-::: {.odsafig width="400" align="center" capalign="justify" figwidth="90%" alt="Prim's MCST algorithm proof"}
-Images/PrimMST.png
+::: figure
+![Prim's MCST algorithm proof](images/PrimMST.png){width=400}
 
 Prim's MCST algorithm proof. The left oval contains that portion of the
 graph where Prim's MCST and the "true" MCST $\mathbf{T}$ agree. The

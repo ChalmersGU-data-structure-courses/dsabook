@@ -51,8 +51,8 @@ in fact the splay tree single rotation is identical to the
 AVL tree single rotation.
 
 :::: {#SingProm}
-::: {.odsafig width="500" align="center" capalign="justify" figwidth="90%" alt="Splay tree single rotation"}
-Images/SingRot.png
+::: figure
+![Splay tree single rotation](images/SingRot.png){width=500}
 
 Splay tree single rotation. This rotation takes place only when the node
 being splayed is a child of the root. Here, node $S$ is promoted to the
@@ -85,8 +85,8 @@ zigzag. The zigzag rotation is illustrated by
 [Figure #ZigZag](#ZigZag).
 
 :::: {#ZigZag}
-::: {.odsafig width="500" align="center" capalign="justify" figwidth="90%" alt="Splay tree zigzag rotation"}
-Images/ZigZag.png
+::: figure
+![Splay tree zigzag rotation](images/ZigZag.png){width=500}
 
 Splay tree zigzag rotation. (a) The original tree with $S$, $P$, and $G$
 in zigzag formation. (b) The tree after the rotation takes place. The
@@ -111,8 +111,8 @@ in fact the zigzig rotation is identical to the AVL tree double
 rotation.
 
 :::: {#ZigZig}
-::: {.odsafig width="500" align="center" capalign="justify" figwidth="90%" alt="Splay tree zigzig rotation"}
-Images/ZigZig.png
+::: figure
+![Splay tree zigzig rotation](images/ZigZig.png){width=500}
 
 Splay tree zigzig rotation. (a) The original tree with $S$, $P$, and $G$
 in zigzig formation. (b) The tree after the rotation takes place. The
@@ -151,8 +151,8 @@ Notice that the splaying process has made the tree shallower.
 :::
 
 :::: {#SplayEx}
-::: {.odsafig width="500" align="center" capalign="justify" figwidth="90%" alt="Example of search in a splay tree"}
-Images/SplayEx.png
+::: figure
+![Example of search in a splay tree](images/SplayEx.png){width=500}
 
 Example of splaying after performing a search in a splay tree. After
 finding the node with key value 89, that node is splayed to the root by
