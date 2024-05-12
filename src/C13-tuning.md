@@ -21,9 +21,9 @@ Occasionally, you can get an even bigger speedup by converting from a
 symbolic representation of the data to a numeric coding scheme on which
 you can do direct computation.
 
-::: {.todo type="text"}
+<!-- TODO
 Give an example of this type of representational change.
-:::
+-->
 
 Here are some suggestions for ways to speed up your programs by code
 tuning. The most important thing to realize is that most statements in a

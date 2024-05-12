@@ -34,8 +34,5 @@ path, but not all of the nodes.
 
 <inlineav id="IneffBinaryTreeRangeCON" src="BTRecurTutor/IneffBinaryTreeRangeCON.js" name="Inefficient Binary Tree Traversal on Range Slide Show"/>
 
-### Binary Search Tree Small Count Exercise
+<!-- ### Binary Search Tree Small Count Exercise -->
 
-::: {.extrtoolembed workout_id="64"}
-'Binary Search Tree Small Count Exercise'
-:::

@@ -34,11 +34,7 @@ its depth. In this case, the depth is passed as a parameter to the
 function, and each recursive call must adjust that value (by adding
 one).
 
-### Binary Tree Set Depth Exercise
-
-::: {.extrtoolembed workout_id="66"}
-'Binary Tree Set Depth Exercise'
-:::
+<!-- ### Binary Tree Set Depth Exercise -->
 
 ### Collect-and-return
 
@@ -136,23 +132,12 @@ mistake is to not return a value.
 
 <inlineav id="BinaryTreeMistakesCON" src="Binary/BinaryTreeMistakesCON.js" name="Binary Tree Common Mistakes Slideshow" links="Binary/WriteTrav.css"/>
 
-### Binary Tree Check Sum Exercise
+<!-- ### Binary Tree Check Sum Exercise -->
 
-::: {.extrtoolembed workout_id="71"}
-'Binary Tree Check Sum Exercise'
-:::
+<!-- ### Binary Tree Leaf Nodes Count Exercise -->
 
-### Binary Tree Leaf Nodes Count Exercise
+<!-- ### Binary Tree Sum Nodes Exercise -->
 
-::: {.extrtoolembed workout_id="72"}
-'Binary Tree Leaf Nodes Count Exercise'
-:::
-
-### Binary Tree Sum Nodes Exercise
-
-::: {.extrtoolembed workout_id="68"}
-'Binary Tree Sum Nodes Exercise'
-:::
 
 ### Combining Information Flows
 
@@ -164,11 +149,7 @@ up. The downward flow is simple, as the value being checked for never
 changes. The information passed up has the simple collect-and-return
 style: Return True if and only if one of the children returns True.
 
-### Binary Tree Check Value Exercise
-
-::: {.extrtoolembed workout_id="65"}
-'Binary Tree Check Value Exercise'
-:::
+<!-- ### Binary Tree Check Value Exercise -->
 
 ### Combination Problems
 
@@ -176,20 +157,8 @@ Slightly more complicated problems combine what we have seen so far.
 Information passing down the tree changes from node to node. Data passed
 back up the tree uses the collect-and-return paradigm.
 
-### Binary Tree Height Exercise
+<!-- ### Binary Tree Height Exercise -->
 
-::: {.extrtoolembed workout_id="70"}
-'Binary Tree Height Exercise'
-:::
+<!-- ### Binary Tree Get Difference Exercise -->
 
-### Binary Tree Get Difference Exercise
-
-::: {.extrtoolembed workout_id="73"}
-'Binary Tree Get Difference Exercise'
-:::
-
-### Binary Tree Has Path Sum Exercise
-
-::: {.extrtoolembed workout_id="67"}
-'Binary Tree Has Path Sum Exercise'
-:::
+<!-- ### Binary Tree Has Path Sum Exercise -->

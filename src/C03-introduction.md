@@ -316,11 +316,11 @@ Costs for representative growth rates.
 
 <avembed id="GrowthRatesPRO" src="AlgAnal/GrowthRatesPRO.html" type="ka" name="Growth Rates Ordering Exercise"/>
 
-::: {.todo type="AV"}
+<!-- TODO
 To make students more engaged in the GrowthRates exercise, we may need a
 tool that allows students to input two growth rate functions. Then the
 tool should plot the graph of both functions and mark their crossing
 point. The student also should be allowed to play with the constant
 values for both functions and see that this only changes the crossing
-point but doesn't change which function grows faster than the other.
-:::
+point but doesn't change which function grows faster than the other. 
+-->

@@ -1,5 +1,3 @@
-::: {.avmetadata author="Cliff Shaffer" satisfies="list summary" requires="array-based list; linked list; array-based stack; linked stack; array-based queue; linked queue;" topic="Linear structures"}
-:::
 
 ## Linear Structure Summary Exercises
 

@@ -1,11 +1,11 @@
 
 ## Solving Recurrence Relations (optional) (WORK IN PROGRESS)
 
-::: {.todo type="Equation cross-reference"}
+<!-- TODO
 Throughout this module, there are references to equations, both on this
 page and in the Summations module. These should be made into proper
 cross-references rather than hard-coded equation numbers.
-:::
+-->
 
 Recurrence relations are often used to model the cost of recursive
 functions. For example, the standard
