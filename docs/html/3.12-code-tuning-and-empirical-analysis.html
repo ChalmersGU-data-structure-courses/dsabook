@@ -144,9 +144,9 @@ or more. Even speedups by a factor of five to ten are not uncommon.
 Occasionally, you can get an even bigger speedup by converting from a
 symbolic representation of the data to a numeric coding scheme on which
 you can do direct computation.</p>
-<div class="todo" type="text">
-<p>Give an example of this type of representational change.</p>
-</div>
+<!-- TODO
+Give an example of this type of representational change.
+-->
 <p>Here are some suggestions for ways to speed up your programs by code
 tuning. The most important thing to realize is that most statements in a
 program do not have much effect on the running time of that program.
@@ -253,12 +253,11 @@ distinct from empirical comparison of two competitors because the
 purpose of the simulation is to perform analysis that might otherwise be
 too difficult. A good example of this appears in the following
 figure.</p>
-<div id="HashPlot2">
-<div class="odsafig" width="400" data-align="center"
-data-capalign="justify" data-figwidth="90%" alt="Hashing analysis plot">
-<p>Images/hashplot.png</p>
-</div>
-</div>
+<figure>
+<img src="images/hashplot.png" width="400"
+alt="Hashing analysis plot" />
+<figcaption aria-hidden="true">Hashing analysis plot</figcaption>
+</figure>
 <p>This figure shows the cost for inserting or deleting a record from a
 <a href="8-hashing.html#hashing">hash table</a> under two different
 assumptions for the policy used to find a free slot in the table. The

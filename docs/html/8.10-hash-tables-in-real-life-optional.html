@@ -234,11 +234,11 @@ That’s a hashtable DoS attack!</p>
 It relies on the fact that the following two strings have the same
 hashcode:</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;Aa&quot;</span>.hashCode() <span class="op">==</span> <span class="st">&quot;BB&quot;</span>.hashCode() <span class="op">==</span> <span class="dv">2112</span></span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;Aa&quot;</span>.hashCode() <span class="op">==</span> <span class="st">&quot;BB&quot;</span>.hashCode() <span class="op">==</span> <span class="dv">2112</span></span></code></pre></div>
 <p>Therefore, all same-length repetitions of “Aa” and “BB” have the same
 hash code:</p>
 <div class="sourceCode" id="cb2"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;AaAaAaAaAa&quot;</span>, <span class="st">&quot;AaAaAaAaBB&quot;</span>, <span class="st">&quot;AaAaAaBBAa&quot;</span>, <span class="st">&quot;AaAaAaBBBB&quot;</span>, ...,</span>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;AaAaAaAaAa&quot;</span>, <span class="st">&quot;AaAaAaAaBB&quot;</span>, <span class="st">&quot;AaAaAaBBAa&quot;</span>, <span class="st">&quot;AaAaAaBBBB&quot;</span>, ...,</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;BBBBBBAaAa&quot;</span>, <span class="st">&quot;BBBBBBAaBB&quot;</span>, <span class="st">&quot;BBBBBBBBAa&quot;</span>, <span class="st">&quot;BBBBBBBBBB&quot;</span></span></code></pre></div>
 <p>There are
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mi>k</mi></msup><annotation encoding="application/x-tex">2^k</annotation></semantics></math>

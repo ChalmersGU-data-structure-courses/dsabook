@@ -208,13 +208,15 @@ Basic Abstract Data Types</h3>
 <p>These include comparables:</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Comparable:</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Note: all of these operators return a boolean.</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">this</span> <span class="op">==</span> other  </span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">this</span> <span class="op">!=</span> other  </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">this</span> <span class="op">&lt;</span> other   </span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="va">this</span> <span class="op">&lt;=</span> other  </span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="va">this</span> <span class="op">&gt;</span> other   </span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">this</span> <span class="op">&gt;=</span> other  </span></code></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Returns an integer: negative (smaller), 0 (equal), positive (larger)</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">this</span>.compareTo(other)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// All of these operators return a boolean:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">this</span> <span class="op">==</span> other  </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="va">this</span> <span class="op">!=</span> other  </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="va">this</span> <span class="op">&lt;</span> other   </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">this</span> <span class="op">&lt;=</span> other  </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="va">this</span> <span class="op">&gt;</span> other   </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="va">this</span> <span class="op">&gt;=</span> other  </span></code></pre></div>
 <p>And iterators and iterables:</p>
 <div class="sourceCode" id="cb2"><pre
 class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Iterator:</span>
@@ -225,9 +227,9 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a hr
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    iter():    <span class="st">&quot;&quot;&quot;Returns a new iterator.&quot;&quot;&quot;</span></span></code></pre></div>
 <p>As well as collections:</p>
 <div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Collection extends Iterable:</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    isEmpty():  <span class="op">//</span> Returns true <span class="cf">if</span> the collection <span class="kw">is</span> empty.</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    size():     <span class="op">//</span> Returns the number of elements <span class="kw">in</span> this collection.</span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Collection <span class="kw">extends</span> Iterable:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    isEmpty():  <span class="co">// Returns true if the collection is empty.</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    size():     <span class="co">// Returns the number of elements in this collection.</span></span></code></pre></div>
 </section>
 <section id="lists" class="level3" data-number="1.3.2">
 <h3 data-number="1.3.2"><span class="header-section-number">1.3.2</span>

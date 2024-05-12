@@ -257,11 +257,11 @@ edges that originate in the given vertex. To get the neighbors you can
 simply call <code>e.end</code> for each outgoing edge <code>e</code>.
 The following lines appear in many graph algorithms:</p>
 <div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> each edge e <span class="kw">in</span> G.outgoingEdges(v):</span>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> each edge e in G.outgoingEdges(v):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    w <span class="op">=</span> e.end</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> w <span class="kw">is</span> <span class="kw">not</span> <span class="kw">in</span> visited:</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> w <span class="kw">is</span> <span class="kw">not</span> in visited:</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        add w to visited</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        ...do something <span class="cf">with</span> v, w, <span class="kw">or</span> e...</span></code></pre></div>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        ...do something with v, w, <span class="kw">or</span> e...</span></code></pre></div>
 <p>Here, <code>visited</code> is a set of vertices to keep track that we
 don’t visit a vertex twice.</p>
 <p>It is reasonably straightforward to implement our graph ADT using

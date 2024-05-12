@@ -206,9 +206,8 @@ title="In the AVL tree and splay tree, a rotation is a local operation performed
 <h3 data-number="6.4.1"><span class="header-section-number">6.4.1</span>
 Rotations</h3>
 <p>Rotation is an operation that takes a node in the tree and moves it
-one level higher. <a
-href="6.6-the-splay-tree-optional.html#SingProm">Figure #SingProm</a>
-illustrates rotation. Here,
+one level higher. <a href="6.4-the-avl-tree.html#SingleRotation">Figure
+#SingleRotation</a> illustrates rotation. Here,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>
 and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
@@ -238,11 +237,13 @@ tree in (b), transforming it to the tree in (a), by lifting node
 up. Notice that a right rotation tends to make the tree more
 right-leaning, while a left rotation tends to make it more
 left-leaning.</p>
-<div id="Rotation">
-<div class="odsafig" width="500" data-align="center"
-data-capalign="justify" data-figwidth="90%" alt="Rotation">
-<p>Images/SingRot.png</p>
-<p>Rotation. In a rotation, node
+<div id="SingleRotation">
+<div class="figure">
+<figure>
+<img src="images/SingRot.png" width="500" alt="Rotation" />
+<figcaption aria-hidden="true">Rotation</figcaption>
+</figure>
+<p>In a rotation, node
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
 is promoted to the root, rotating with node
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>.
@@ -275,10 +276,13 @@ makes it more left-leaning.</p>
 <h3 data-number="6.4.2"><span class="header-section-number">6.4.2</span>
 AVL tree insertion</h3>
 <div id="AVLinsert">
-<div class="odsafig" width="500" data-align="center"
-data-capalign="justify" data-figwidth="90%"
-alt="An insertion that violates the AVL tree balance property">
-<p>Images/AVLins.png</p>
+<div class="figure">
+<figure>
+<img src="images/AVLins.png" width="500"
+alt="An insertion that violates the AVL tree balance property" />
+<figcaption aria-hidden="true">An insertion that violates the AVL tree
+balance property</figcaption>
+</figure>
 <p>Example of an insert operation that violates the AVL tree balance
 property. Prior to the insert operation, all nodes of the tree are
 balanced (i.e., the depths of the left and right subtrees for every node
@@ -322,10 +326,12 @@ title="A type of rebalancing operation used by the splay tree and AVL tree.">dou
 rotation</a>, as shown in <a
 href="6.4-the-avl-tree.html#AVLdouble">Figure #AVLdouble</a>.</p>
 <div id="AVLsingle">
-<div class="odsafig" width="500" data-align="center"
-data-capalign="justify" data-figwidth="90%"
-alt="AVL tree single rotation">
-<p>Images/AVLSingRot.png</p>
+<div class="figure">
+<figure>
+<img src="images/AVLSingRot.png" width="500"
+alt="AVL tree single rotation" />
+<figcaption aria-hidden="true">AVL tree single rotation</figcaption>
+</figure>
 <p>A single rotation in an AVL tree. This operation occurs when the
 excess node (in subtree
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>)
@@ -338,10 +344,12 @@ the unbalanced node is handled in the same way.</p>
 </div>
 </div>
 <div id="AVLdouble">
-<div class="odsafig" width="500" data-align="center"
-data-capalign="justify" data-figwidth="90%"
-alt="AVL tree double rotation">
-<p>Images/AVLDblRot.png</p>
+<div class="figure">
+<figure>
+<img src="images/AVLDblRot.png" width="500"
+alt="AVL tree double rotation" />
+<figcaption aria-hidden="true">AVL tree double rotation</figcaption>
+</figure>
 <p>A double rotation in an AVL tree. This operation occurs when the
 excess node (in subtree
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>)

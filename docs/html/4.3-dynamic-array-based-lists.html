@@ -218,8 +218,8 @@ class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="
 resize, which means that we add the following if-clause to the
 <code>add</code> method:</p>
 <div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> listSize <span class="op">&gt;=</span> size of internalArray</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    resizeArray(size of internalArray <span class="op">*</span> <span class="dv">2</span>)</span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> listSize <span class="op">&gt;=</span> size <span class="kw">of</span> internalArray</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    resizeArray(size <span class="kw">of</span> internalArray <span class="op">*</span> <span class="dv">2</span>)</span></code></pre></div>
 <p>That’s the only difference from the <code>add</code> method from
 <strong>StaticArrayList</strong>. So the dynamic <code>add</code> method
 will look like this.</p>
@@ -276,9 +276,9 @@ resize it more often.</p>
 <p>We will explore these tradeoffs by looking at the performance of the
 following small program under different resizing strategies:</p>
 <div class="sourceCode" id="cb6"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span> <span class="op">=</span> new dynamic array <span class="bu">list</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="fl">1.</span>..n:</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">list</span>.add(i)</span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>list <span class="op">=</span> <span class="kw">new</span> dynamic array list</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i in <span class="fl">1.</span>..n:</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    list.add(i)</span></code></pre></div>
 <p>The program builds a list of length <span class="title-ref">n</span>
 by repeatedly calling
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mi>d</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">add</annotation></semantics></math>.
@@ -295,8 +295,8 @@ amount</h4>
 <p>What happens if we only grow the internal array by 1 element when we
 resize it?</p>
 <div class="sourceCode" id="cb7"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> listSize <span class="op">&gt;=</span> size of internalArray</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    resizeArray(size of internalArray <span class="op">+</span> <span class="dv">1</span>)</span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> listSize <span class="op">&gt;=</span> size <span class="kw">of</span> internalArray</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    resizeArray(size <span class="kw">of</span> internalArray <span class="op">+</span> <span class="dv">1</span>)</span></code></pre></div>
 <p>Every time we call <code>add</code>, the internal array will be
 resized. Resizing the array takes linear time, because if the internal
 array has size
@@ -548,8 +548,8 @@ we shrink the internal array! E.g., we can shrink the array (i.e., halve
 it), when it is only 1/3 full. So we can add the following lines to the
 end of the <code>remove</code> method:</p>
 <div class="sourceCode" id="cb8"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> listSize <span class="op">&lt;=</span> size of internalArray <span class="op">*</span> <span class="dv">1</span><span class="op">/</span><span class="dv">3</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    resizeArray(size of internalArray <span class="op">*</span> <span class="dv">1</span><span class="op">/</span><span class="dv">2</span>)</span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> listSize <span class="op">&lt;=</span> size <span class="kw">of</span> internalArray <span class="op">*</span> <span class="dv">1</span><span class="op">/</span><span class="dv">3</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    resizeArray(size <span class="kw">of</span> internalArray <span class="op">*</span> <span class="dv">1</span><span class="op">/</span><span class="dv">2</span>)</span></code></pre></div>
 <p>That’s the only difference from the
 <code>StaticArrayList.remove</code> method.</p>
 <p>Note that the factors 1/3 and 1/2 are not important, as explained

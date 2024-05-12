@@ -263,11 +263,11 @@ seeking not the next closest vertex to the start vertex, but rather the
 next closest vertex to any vertex currently in the MCST. Thus the
 following lines in Djikstra’s algorithm:</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (D.get(w) <span class="op">&gt;</span> D.get(v) <span class="op">+</span> e.weight)</span>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (D.get(w) <span class="op">&gt;</span> D.get(v) <span class="op">+</span> e.weight)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    D.put(w, D.get(v) <span class="op">+</span> e.weight)</span></code></pre></div>
 <p>are replaced with the following lines in Prim’s algorithm:</p>
 <div class="sourceCode" id="cb2"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (D.get(w) <span class="op">&gt;</span> e.weight)</span>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (D.get(w) <span class="op">&gt;</span> e.weight)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    D.put(w, e.weight)</span></code></pre></div>
 <p>The following code shows an implementation for Prim’s algorithm that
 searches the distance matrix for the next closest vertex.</p>
@@ -445,10 +445,12 @@ Thus, it is a contradiction that Prim’s algorithm would have selected
 the wrong edge, and thus, Prim’s algorithm must be correct.</p>
 </blockquote>
 <div id="PrimProof">
-<div class="odsafig" width="400" data-align="center"
-data-capalign="justify" data-figwidth="90%"
-alt="Prim&#39;s MCST algorithm proof">
-<p>Images/PrimMST.png</p>
+<div class="figure">
+<figure>
+<img src="images/PrimMST.png" width="400"
+alt="Prim’s MCST algorithm proof" />
+<figcaption aria-hidden="true">Prim’s MCST algorithm proof</figcaption>
+</figure>
 <p>Prim’s MCST algorithm proof. The left oval contains that portion of
 the graph where Prim’s MCST and the “true” MCST
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐓</mi><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>
