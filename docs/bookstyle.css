@@ -71,7 +71,7 @@ body {
     }
 }
 
-p, ol, ul {
+p, ol, ul, figcaption {
     margin: 1em 0;
 }
 
@@ -224,14 +224,21 @@ div.hanging-indent {
     text-indent: -1.5em;
 }
 
-.topic, div.embedContainer, div.jsavcontainer {
+figure {
+    text-align: center;
+    font-style: italic;
+}
+
+.topic, .figure, div.embedContainer, div.jsavcontainer {
     border-radius: 10px;
     border: black 1px solid;
-    background-color: #ffe;
     margin: 1em 0;
     padding: 0 1em;
 }
 
+.topic, div.embedContainer, div.jsavcontainer {
+    background-color: #ffe;
+}
 .topic .jsavcontainer {
     background-color: transparent;
     border: none;
