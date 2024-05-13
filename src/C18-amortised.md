@@ -33,14 +33,12 @@ a 1, and the increment operation is done. Below is an implementation for
 the increment operation, assuming that a binary number of length $n$ is
 stored in array [A]{.title-ref} of length $n$.
 
-```python
-i = 0
-while i < len(A) and A[i] == 1:
-    A[i] = 0
-    i += 1
-if i < len(A):
-    A[i] = 1
-```
+    i = 0
+    while i < length(A) and A[i] == 1:
+        A[i] = 0
+        i += 1
+    if i < length(A):
+        A[i] = 1
 
 If we count from 0 through $2^n - 1$, (requiring a counter with at least
 $n$ bits), what is the average cost for an increment operation in terms

@@ -23,10 +23,10 @@ $(document).ready(function() {
 };
 
   var pseudo = av.code([
-    "Sequential(elements:E[]) : integer",
+    "function searchMaxIndex(A):",
     "    maxIndex = 1",
-    "    for i = 2, 3, ..., size of elements-1",
-    "        if elements[i] > elements[maxIndex]",
+    "    for i = 2, 3, ..., size of A - 1:",
+    "        if A[i] > A[maxIndex]:",
     "            maxIndex = i",
     "return maxIndex",
   ], {lineNumbers: false}).hide();

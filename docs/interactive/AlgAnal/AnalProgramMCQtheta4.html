@@ -12,14 +12,13 @@
         <div id="AnalProgramMCQtheta4p">
           <p class="question"> Determine <code>\Theta</code> for the
             following code fragment in the average case. Assume that all
-            variables are of type "int".
+            variables are integers.
             <pre>
-              for (i = 0; i &lt; n - 1; i++)
-                for (j = i + 1; j &lt; n; j++) {
-                  tmp = AA[i][j];
-                  AA[i][j] = AA[j][i];
-                  AA[j][i] = tmp;
-                }
+              for i in 0 ... n-2:
+                  for j in i+1 ... n-1:
+                      tmp = AA[i][j]
+                      AA[i][j] = AA[j][i]
+                      AA[j][i] = tmp
             </pre>
           </p>
 

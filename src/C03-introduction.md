@@ -95,44 +95,15 @@ in turn, saving the position of the largest value seen so far. This
 algorithm is called the *largest-value sequential search* and is
 illustrated by the following function:
 
-```python
-# Return position of largest value in integer array A
-def largest(A):
-    currlarge = 0                 # Position of largest element seen
-    for i in range(1, A.length):  # For each element
-        if A[currlarge] < A[i]:   # if A[i] is larger
-             currlarge = i        # remember its position
-    return currlarge              # Return largest position
-```
+    // Return position of largest value in integer array A
+    function largest(A):
+        currlarge = 0                 // Position of largest element seen.
+        for i in 1 ... length(A):     // For each element,
+            if A[currlarge] < A[i]:   // if A[i] is larger,
+                currlarge = i         // remember its position.
+        return currlarge              // Return largest position
 
-```java
-// Return position of largest value in integer array A
-static int largest(int[] A) {
-  int currlarge = 0;             // Position of largest element seen
-  for (int i=1; i<A.length; i++) { // For each element
-    if (A[currlarge] < A[i]) {    //   if A[i] is larger
-       currlarge = i;            //     remember its position
-    }
-  }
-  return currlarge;              // Return largest position
-}
-```
-
-```java
-// Return position of largest value in integer array A
-static int largest(int[] A) {
-    int currlarge = 0;               // Position of largest element seen
-    for (int i=1; i<A.length; i++) { // For each element
-        if (A[currlarge] < A[i])     // if A[i] is larger
-            currlarge = i;           // remember its position
-    }
-    return currlarge;                // Return largest position
-}
-```
-
-
-
-Here, the size of the problem is `A.length`, the number of integers
+Here, the size of the problem is `length(A)`, the number of integers
 stored in array `A`. The basic operation is to compare an integer's
 value to that of the largest value seen so far. It is reasonable to
 assume that it takes a fixed amount of time to do one such comparison,
@@ -196,32 +167,10 @@ time. This is called a [constant running time]{.term}.
 
 Consider the following code:
 
-```python
-sum = 0
-for i in range(n):
-    for j in range(n):
-        sum += 1
-```
-
-```java
-sum = 0;
-for (i=1; i<=n; i++) {
-  for (j=1; j<=n; j++) {
-    sum++;
-  }
-}
-```
-
-```java
-sum = 0;
-for (i=1; i<=n; i++) {
-    for (j=1; j<=n; j++) {
-        sum++;
-    }
-}
-```
-
-
+    sum = 0
+    for i in 0 ... n-1:
+        for j in 0 ... n-1:
+            sum = sum+1
 
 What is the running time for this code fragment? Clearly it takes longer
 to run when $n$ is larger. The basic operation in this example is the

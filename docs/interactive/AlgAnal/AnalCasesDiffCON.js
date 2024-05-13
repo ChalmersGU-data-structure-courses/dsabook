@@ -25,13 +25,11 @@ $(document).ready(function() {
   };
 
   var pseudo = av.code([
-    "// Return the position of an element in a list.",
-    "// If the element is not found, return -1.",
-    "sequentialSearch(elements:E[], e:E) : integer",
-    "    for i = 1, 2, ..., size of elements - 1 // For each element",
-    "        if elements[i] == e                 // if we found it",
-    "            return i                        // return its position",
-    "    return -1                               // Otherwise, return -1",
+    "function sequentialSearch(A, e):",
+    "    for i = 1, 2, ..., size of A - 1:",
+    "        if A[i] == e:",
+    "            return i",
+    "    return -1",
   ], {lineNumbers: false,
       tags: {
         "comparison": 3,

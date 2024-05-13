@@ -28,3 +28,9 @@
   font-weight: bold;
   font-size: 16px;
 }
+
+.jsavcode {
+  position: absolute;
+  left: 400px;
+  top: 80px;
+}

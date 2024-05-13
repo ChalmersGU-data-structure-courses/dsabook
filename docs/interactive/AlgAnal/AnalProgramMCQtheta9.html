@@ -12,14 +12,14 @@
         <div id="AnalProgramMCQtheta9p">
           <p class="question"> Determine <code>\Theta</code> for the
             following code fragment in the average case. Assume that all
-            variables are of type "int".
+            variables are integers.
             <pre>
-              sum = 0;
-              if (EVEN(n))
-                for (i = 0; i &lt; n; i++)
-                  sum++;
-              else
-                sum = sum + n;
+              sum = 0
+              if EVEN(n):
+                  for i in 0 ... n-1:
+                      sum = sum + 1
+              else:
+                  sum = sum + n
             </pre>
           </p>
 

@@ -19,19 +19,7 @@ We will make use of the algorithm analysis simplifying rules:
 
 We begin with an analysis of a simple assignment to an integer variable.
 
-```python
-a = b
-```
-
-```java
-a = b;
-```
-
-```java
-a = b;
-```
-
-
+    a = b
 
 Because the assignment statement takes constant time, it is $\Theta(1)$.
 ::::
@@ -43,26 +31,9 @@ Because the assignment statement takes constant time, it is $\Theta(1)$.
 
 Consider a simple `for` loop.
 
-```python
-sum = 0
-for i in range(n):
-    sum += n
-```
-
-```java
-sum = 0;
-for (i=1; i<=n; i++) {
-   sum += n;
-}
-```
-
-```java
-sum = 0;
-for (i=1; i<=n; i++)
-    sum += n;
-```
-
-
+    sum = 0
+    for i in 0 ... n-1:
+        sum = sum + n
 
 The first line is $\Theta(1)$. The `for` loop is repeated $n$ times. The
 third line takes constant time so, by simplifying rule (4), the total
@@ -78,39 +49,13 @@ $\Theta(n)$.
 We now analyze a code fragment with several `for` loops, some of which
 are nested.
 
-```python
-sum = 0
-for j in range(n):     # First for loop
-    for i in range(j): # is a double loop
-        sum += 1
-for k in range(n):     # Second for loop
-    A[k] = k
-```
 
-```java
-sum = 0;
-for (j=1; j<=n; j++) {     // First for loop
-  for (i=1; i<=j; i++) {  //   is a double loop
-    sum++;
-  }
-}
-for (k=0; k<n; k++) {      // Second for loop
-   A[k] = k;
-}
-```
-
-```java
-sum = 0;
-for (j=1; j<=n; j++) {     // First for loop
-    for (i=1; i<=j; i++) { // is a double loop
-        sum++;
-    }
-}
-for (k=0; k<n; k++) {      // Second for loop
-    A[k] = k;
-}
-```
-
+    sum = 0
+    for j in 0 ... n-1:     // First for loop
+        for i in 0 ... j-1: // is a double loop.
+            sum = sum + 1
+    for k in 0 ... n-1:     // Second for loop.
+        A[k] = k
 
 
 This code fragment has three separate statements: the first assignment
@@ -146,55 +91,19 @@ $\Theta(c_1 + c_2 n + c_3 n^2)$ is simply $\Theta(n^2)$.
 
 Compare the asymptotic analysis for the following two code fragments.
 
-```python
-sum1 = 0
-for i in range(n):     # First double loop
-    for j in range(n): # do n times
-        sum1 += 1
+    sum1 = 0
+    for i in 0 ... n-1:      // First double loop.
+        for j in 0 ... n-1:  // Do n times.
+            sum1 = sum1 + 1
 
-sum2 = 0
-for i in range(n)      # Second double loop
-    for j in range(i): # do i times
-        sum2 += 1
-```
-
-```java
-sum1 = 0;
-for (i=1; i<=n; i++) {     // First double loop
-  for (j=1; j<=n; j++) {  //   do n times
-    sum1++;
-  }
-}
-
-sum2 = 0;
-for (i=1; i<=n; i++) {     // Second double loop
-  for (j=1; j<=i; j++) {  //   do i times
-    sum2++;
-  }
-}
-```
-
-```java
-sum1 = 0;
-for (i=1; i<=n; i++) {     // First double loop
-    for (j=1; j<=n; j++) { // do n times
-        sum1++;
-    }
-}
-
-sum2 = 0;
-for (i=1; i<=n; i++) {     // Second double loop
-    for (j=1; j<=i; j++) { // do i times
-        sum2++;
-    }
-}
-```
-
-
+    sum2 = 0
+    for i in 0 ... n-1       // Second double loop.
+        for j in 0 ... i-1:  // Do i times.
+            sum2 = sum2 + 1
 
 In the first double loop, the inner `for` loop always executes $n$
 times. Because the outer loop executes $n$ times, it should be obvious
-that the statement `sum1++` is executed precisely $n^2$ times. The
+that the statement `sum1=sum1+1` is executed precisely $n^2$ times. The
 second loop is similar to the one analyzed in the previous example, with
 cost $\sum_{j = 1}^{n} j$. This is approximately $\frac{1}{2} n^2$.
 Thus, both double loops cost $\Theta(n^2)$, though the second requires
@@ -207,55 +116,19 @@ about half the time of the first.
 Not all doubly nested `for` loops are $\Theta(n^2)$. The following pair
 of nested loops illustrates this fact.
 
-```python
-sum1 = 0
-k = 1
-while k <= n:          # Do log n times
-    for j in range(n): # do n times
-        sum1 += 1
-    k *= 2
+    sum1 = 0
+    k = 1
+    while k <= n:            // Do log n times.
+        for j in 0 ... n-1:  // Do n times.
+            sum1 = sum1 + 1
+        k = k * 2
 
-sum2 = 0
-k = 1
-while k <= n:          # Do log n times
-    for j in range(k): # do k times
-        sum2 += 1
-    k *= 2
-```
-
-```java
-sum1 = 0;
-for (k=1; k<=n; k*=2) {    // Do log n times
-  for (j=1; j<=n; j++) {  // Do n times
-    sum1++;
-  }
-}
-
-sum2 = 0;
-for (k=1; k<=n; k*=2) {    // Do log n times
-  for (j=1; j<=k; j++) {  // Do k times
-    sum2++;
-  }
-}
-```
-
-```java
-sum1 = 0;
-for (k=1; k<=n; k*=2) {    // Do log n times
-    for (j=1; j<=n; j++) { // do n times
-        sum1++;
-    }
-}
-
-sum2 = 0;
-for (k=1; k<=n; k*=2) {    // Do log n times
-    for (j=1; j<=k; j++) { // do k times
-        sum2++;
-    }
-}
-```
-
-
+    sum2 = 0
+    k = 1
+    while k <= n:            // Do log n times.
+        for j in 0 ... k-1:  // Do k times.
+            sum2 = sum2 + 1
+        k = k * 2
 
 When analyzing these two code fragments, we will assume that $n$ is a
 power of two. The first code fragment has its outer `for` loop executed

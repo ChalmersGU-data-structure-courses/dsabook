@@ -136,13 +136,11 @@ unsatisfying big-Oh and $\Omega$ analyses. Even some "simple" programs
 are hard to analyze. Nobody currently knows the true upper or lower
 bounds for the following code fragment.
 
-```python
-while n > 1:
-    if ODD(n):
-        n = 3 * n + 1
-    else:
-        n = n / 2
-```
+    while n > 1:
+        if ODD(n):
+            n = 3 * n + 1
+        else:
+            n = n / 2
 
 While some textbooks and programmers will casually say that an algorithm
 is "order of" or "big-Oh" of some cost function, it is generally

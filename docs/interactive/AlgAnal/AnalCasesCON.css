@@ -37,3 +37,9 @@
   font-family:Helvetica, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif !important;
   font-size: 14px;
 }
+
+.jsavcode {
+  position: absolute;
+  left: 400px;
+  top: 80px;
+}

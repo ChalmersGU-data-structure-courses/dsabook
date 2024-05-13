@@ -14,13 +14,14 @@ times each value appears in the picture. Assume that the picture is a
 rectangle with $P$ pixels. A pseudocode algorithm to solve the problem
 follows.
 
-```python
-for i = 0 ... C-1:            # Initialize count
-    count[i] = 0
-    for i = 0 ... P-1:        # Look at all of the pixels
-        count[value(i)] += 1  # Increment a pixel value count
-    sort(count)               # Sort pixel value counts
-```
+    // Initialize the counts:
+    for i in 0 ... C-1:
+        count[i] = 0
+    // Increment the pixel value count for each of the pixels:
+    for i in 0 ... P-1:
+        count[value(i)] = count[value(i)]+1  
+    // Sort the pixel value counts:
+    sort(count)
 
 In this example, `count` is an array of size `C` that stores the number
 of pixels for each color value. Function `value(i)` returns the color
