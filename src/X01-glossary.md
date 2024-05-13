@@ -174,7 +174,7 @@ second letter.
 
 Analysing the [amortized complexity]{.term}
 of an [algorithm]{.term} or
-term:[problem]{.title-ref}.
+[problem]{.term}.
 
 ### amortized complexity
 
@@ -442,9 +442,9 @@ of small, unuseable memory blocks.
 For [growth rates](#growth-rate){.term} $f$
 and $g$, we write $f \in O(g)$ to say that $g$ is an
 [upper bound]{.term} for $f$. The notation
-can be made sense of by defining [O(g)]{.title-ref} as the set of
+can be made sense of by defining $O(g)$ as the set of
 functions with growth rate less than or equal to that of
-[g]{.title-ref}. The notation is often somewhat imprecisely used as
+$g$. The notation is often somewhat imprecisely used as
 $f(n) \in O(g(n))$ or even $f(n) = O(g(n))$.
 
 ### binary insert sort
@@ -1010,7 +1010,7 @@ component and an imaginary component.
 After fixing a [cost model]{.term} for a
 problem, we can calculate the complexity function of an algorithm.
 This sends an input size $n$ to the cost of running the algorithm on
-input of that size. For each fixed [n]{.title-ref}, we consider only
+input of that size. For each fixed $n$, we consider only
 the [worst-case]{.term} input of
 size $n$. This defines the worst-case complexity of the algorithm.
 There is also the [average-case]{.term}
@@ -2212,7 +2212,7 @@ An algorithm that makes locally optimal choices at each step.
 ### order of growth
 
 The rate at which a function grows. How quickly the function grows
-when its input grows. Also called its [order of growth]{.title-ref}.
+when its input grows. Also called its *order of growth*.
 
 A function $f$ has growth rate bounded by a function $g$ if the
 values of $f$ are eventually bounded by those of $g$ up to some
@@ -3087,7 +3087,7 @@ local storage.
 
 ### logarithm
 
-The [logarithm]{.title-ref} of base $b$ for value $y$ is the power
+The *logarithm* of base $b$ for value $y$ is the power
 to which $b$ is raised to get $y$.
 
 ### logical file
@@ -3610,9 +3610,9 @@ would be a tree with $2^3$ or eight branches.
 For [growth rates](#growth-rate){.term} $f$
 and $g$, we write $f \in \Omega(g)$ to say that $g$ is a
 [lower bound]{.term} for $f$. The notation
-can be made sense of by defining [Omega(g)]{.title-ref} as the set
+can be made sense of by defining $\Omega(g)$ as the set
 of functions with growth rate greater than or equal to that of
-[g]{.title-ref}. The notation is often somewhat imprecisely used as
+$g$. The notation is often somewhat imprecisely used as
 $f(n) \in \Omega(g(n))$ or even $f(n) = \Omega(g(n))$.
 
 ### open addressing

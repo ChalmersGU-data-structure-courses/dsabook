@@ -63,9 +63,9 @@ vertices and edges by the methods `addVertex` and `addEdge`. Normally
 you don't have to add vertices explicitly, because `addEdge` should do
 that for you if necessary.
 
-Given an edge, we can use the attributes [start]{.title-ref} and
-[end]{.title-ref} to know the adjacent vertices, and
-[weight]{.title-ref} to know the weight. Note that these attributes are
+Given an edge, we can use the attributes *start* and
+*end* to know the adjacent vertices, and
+*weight* to know the weight. Note that these attributes are
 **final**, which means that they cannot be changed after initialisation.
 
 Nearly every graph algorithm presented in this chapter will require

@@ -100,11 +100,11 @@ following small program under different resizing strategies:
     for i in 1...n:
         list.add(i)
 
-The program builds a list of length [n]{.title-ref} by repeatedly
+The program builds a list of length *n* by repeatedly
 calling $add$. In this case, we could have used a static array-based
 list of capacity $n$. So we would like the dynamic array-based list to
 have comparable performance to the static array-based list. This means
-that the program ought to take [linear time]{.title-ref}.
+that the program ought to take *linear time*.
 
 #### Growing by a constant amount
 
@@ -139,7 +139,7 @@ The array size is initially 1, so we get the following calls to
 
 In total, there are $1+2+...+(n-1)$ element copy operations, which is
 equal to $n(n-1)/2 = (n^2-n)/2$. This means that the program takes
-[quadratic time]{.title-ref}, not linear!
+*quadratic time*, not linear!
 
 Suppose for example that $n = 1,000,000$. Using the formula above, the
 number of times an array element gets copied is
@@ -213,12 +213,12 @@ just proved the following result.
 times starting from an empty dynamic array list causes fewer than $2n$
 elements to be copied.
 
-In short, the overhead of using a dynamic array list is at most [two
-array elements copied per element that we add]{.title-ref}. But copying
+In short, the overhead of using a dynamic array list is at most 
+*two array elements copied per element that we add*. But copying
 an array element is an extremely cheap operation, so dynamic array lists
 implemented using array doubling have almost no overhead, compared to
 static array lists. In particular, the complexity of our example program
-is [linear]{.title-ref}, just as we wanted.
+is *linear*, just as we wanted.
 
 What happens if we instead grow the array by 50%? In fact, it still
 works out fine - the program takes linear time to run. To see this, you
@@ -226,9 +226,8 @@ can use the same argument as above, but instead of using the formula
 $2^0+2^1+...+2^k = 2^{k+1}$, you have to use the formula for a general
 [geometric
 progression](https://en.wikipedia.org/wiki/Geometric_progression). What
-you get is an overhead of [three elements copied per element
-added]{.title-ref}. In fact, Java `ArrayLists` grow the array by 50% on
-resizing.
+you get is an overhead of *three elements copied per element added*. 
+In fact, Java `ArrayLists` grow the array by 50% on resizing.
 
 In fact, **growing the array by any constant factor** works, because the
 same geometric progression reasoning applies. We can calculate the exact

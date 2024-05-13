@@ -89,13 +89,11 @@ static void <V> Prim(Graph<V> G, V s, Map<V,Double> D, Map<V,V> Parent) {
 }
 ```
 
-
-
-For each vertex $I$, when $I$ is processed by Prim's algorithm, an edge
-going to $I$ is added to the MCST that we are building. Array `V[I]`
-stores the previously visited vertex that is closest to Vertex
-[I]{.title-ref}. This information lets us know which edge goes into the
-MCST when Vertex $I$ is processed. The implementation above also
+For each vertex *e*, when *e* is processed by Prim's algorithm, an edge
+going to *e* is added to the MCST that we are building. Array `V[e]`
+stores the previously visited vertex that is closest to Vertex *e*. 
+This information lets us know which edge goes into the
+MCST when Vertex *e* is processed. The implementation above also
 contains calls to `AddEdgetoMST` to indicate which edges are actually
 added to the MCST.
 

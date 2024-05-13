@@ -192,7 +192,7 @@ sibling, and so on.
 
 Using the General Tree ADT shown above, here is an implementation to
 print the nodes of a general tree in preorder. Note the
-[while]{.title-ref} loop at the end, which processes the list of
+*while* loop at the end, which processes the list of
 children by beginning with the leftmost child, then repeatedly moving to
 the next child until calling `next` returns `null`.
 

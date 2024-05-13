@@ -476,8 +476,8 @@ $$
 \end{eqnarray}
 $$
 
-The $cn$ term is an upper bound on the [findpivot]{.title-ref} and
-[partition]{.title-ref} steps. This equation comes from assuming that
+The $cn$ term is an upper bound on the *findpivot* and
+*partition* steps. This equation comes from assuming that
 the partitioning element is equally likely to occur in any position $k$.
 It can be simplified by observing that the two recurrence terms
 $\mathbf{T}(k)$ and $\mathbf{T}(n - 1 - k)$ are equivalent, because one simply

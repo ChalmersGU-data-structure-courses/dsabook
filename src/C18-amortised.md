@@ -31,7 +31,7 @@ lower-order (rightmost) bit toward the high-order (leftmost) bit,
 changing 1s to 0s until the first 0 is encountered. This 0 is changed to
 a 1, and the increment operation is done. Below is an implementation for
 the increment operation, assuming that a binary number of length $n$ is
-stored in array [A]{.title-ref} of length $n$.
+stored in array **A** of length $n$.
 
     i = 0
     while i < length(A) and A[i] == 1:
@@ -65,38 +65,38 @@ In other words, the average number of bits flipped on each increment is
 increments.
 
 A useful concept for amortized analysis is illustrated by a simple
-variation on the stack data structure, where the [pop]{.title-ref}
+variation on the stack data structure, where the *pop*
 function is slightly modified to take a second parameter $k$ indicating
 that $k$ pop operations are to be performed.
 
-The "local" worst-case analysis for [multipop]{.title-ref} is
+The "local" worst-case analysis for *multipop* is
 $\Theta(n)$ for $n$ elements in the stack. Thus, if there are $m_1$
-calls to [push]{.title-ref} and $m_2$ calls to [multipop]{.title-ref},
+calls to *push* and $m_2$ calls to *multipop*,
 then the naive worst-case cost for the series of operation is
 $m_1 + m_2\cdot n = m_1 + m_2 \cdot m_1$. This analysis is unreasonably
 pessimistic. Clearly it is not really possible to pop $m_1$ elements
-each time [multipop]{.title-ref} is called. Analysis that focuses on
+each time *multipop* is called. Analysis that focuses on
 single operations cannot deal with this global limit, and so we turn to
 amortized analysis to model the entire series of operations.
 
 The key to an amortized analysis of this problem lies in the concept of
 [potential]{.term}. At any given time, a certain
-number of items may be on the stack. The cost for [multipop]{.title-ref}
+number of items may be on the stack. The cost for *multipop*
 can be no more than this number of items. Each call to
-[push]{.title-ref} places another item on the stack, which can be
-removed by only a single [multipop]{.title-ref} operation. Thus, each
-call to [push]{.title-ref} raises the potential of the stack by one
-item. The sum of costs for all calls to [multipop]{.title-ref} can never
+*push* places another item on the stack, which can be
+removed by only a single *multipop* operation. Thus, each
+call to *push* raises the potential of the stack by one
+item. The sum of costs for all calls to *multipop* can never
 be more than the total potential of the stack (aside from a constant
-time cost associated with each call to [multipop]{.title-ref} itself).
+time cost associated with each call to *multipop* itself).
 
-The amortized cost for any series of [push]{.title-ref} and
-[multipop]{.title-ref} operations is the sum of three costs. First, each
-of the [push]{.title-ref} operations takes constant time. Second, each
-[multipop]{.title-ref} operation takes a constant time in overhead,
+The amortized cost for any series of *push* and
+*multipop* operations is the sum of three costs. First, each
+of the *push* operations takes constant time. Second, each
+*multipop* operation takes a constant time in overhead,
 regardless of the number of items popped on that call. Finally, we count
-the sum of the potentials expended by all [multipop]{.title-ref}
-operations, which is at most $m_1$, the number of [push]{.title-ref}
+the sum of the potentials expended by all *multipop*
+operations, which is at most $m_1$, the number of *push*
 operations. This total cost can therefore be expressed as
 
 $$

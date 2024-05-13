@@ -121,7 +121,7 @@ The AVL tree insert algorithm begins with a normal BST insert. Then as
 the recursion unwinds up the tree, we perform the appropriate rotation
 on any node that is found to be unbalanced. Deletion is similar;
 however, consideration for unbalanced nodes must begin at the level of
-the [deletemin]{.title-ref} operation.
+the *deleteMin* operation.
 
 ::: topic
 #### Example {-}

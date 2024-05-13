@@ -58,7 +58,7 @@ Splay tree single rotation. This rotation takes place only when the node
 being splayed is a child of the root. Here, node $S$ is promoted to the
 root, rotating with node $P$. Because the value of $S$ is less than the
 value of $P$, $P$ must become $S$ 's right child. The positions of
-subtrees $A$, $B$, and ;math:[C]{.title-ref} are altered as appropriate
+subtrees $A$, $B$, and $C$ are altered as appropriate
 to maintain the BST property, but the contents of these subtrees remains
 unchanged. (a) The original tree with $P$ as the parent. (b) The tree
 after a rotation takes place. Performing a single rotation a second time
