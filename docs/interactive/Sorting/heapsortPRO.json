@@ -34,11 +34,5 @@
   "params": {
     "JXOP-feedback": "continuous",
     "JXOP-fixmode": "fix"
-  },
-  "code": {
-    "pseudo": {
-      "url": "../../SourceCode/Pseudo/Sorting/Heapsort.txt",
-      "tags": {}
-    }
   }
 }

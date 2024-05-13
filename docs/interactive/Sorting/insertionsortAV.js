@@ -8,17 +8,26 @@ $(document).ready(function() {
   // Load the config object with interpreter and code created by odsaUtils.js
   var config = ODSA.UTILS.loadConfig(),
       interpret = config.interpreter,       // get the interpreter
-      code = config.code,                   // get the code object
       settings = config.getSettings();      // Settings for the AV
 
+      var code = [
+        "function insertionSort(A):",
+        "    for i in 1 ... length(A)-1:",
+        "        j = i",
+        "        while j > 0 and A[j] < A[j-1]:",
+        "            swap(A, j, j-1)",
+        "            j = j-1",
+      ];
+      var tags = {
+        "sig": 1,
+        "outloop": 2,
+        "inloop": 4,
+        "swap": 5,
+        "end": 10
+      };
+    
   // Placeholder text translation needs to be set explicitly
   $("#arrayValues").attr("placeholder", interpret("av_arrValsPlaceholder"));
-
-  // add the layout setting preference
-  var arrayLayout =
-      settings.add("layout",
-                   {type: "select", options: {bar: "Bar", array: "Array"},
-                     label: "Array layout: ", value: "bar"});
 
   // Initialize the arraysize dropdown list
   ODSA.AV.initArraySize(5, 16, 8);
@@ -75,10 +84,10 @@ $(document).ready(function() {
       av = new JSAV($(".avcontainer"), {settings: settings});
 
       // Create a new array using the layout the user has selected
-      arr = av.ds.array(arrValues, {indexed: true, layout: arrayLayout.val()});
+      arr = av.ds.array(arrValues, {indexed: true, layout: "bar"});
 
       // Create the pseudocode display object
-      pseudo = av.code(code);
+      pseudo = av.code(code, {lineNumbers: false, tags: tags});
       av.umsg(interpret("av_c1"));
       av.displayInit();
       insertionsort();

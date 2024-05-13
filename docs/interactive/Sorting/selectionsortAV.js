@@ -8,7 +8,6 @@ $(document).ready(function() {
   // Load the config object with interpreter and code created by odsaUtils.js
   var config = ODSA.UTILS.loadConfig(),
       interpret = config.interpreter,       // get the interpreter
-      code = config.code,                   // get the code object
       settings = config.getSettings();      // Settings for the AV
 
   var code = [

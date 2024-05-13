@@ -8,14 +8,23 @@ $(document).ready(function() {
   // Load the config object with interpreter and code created by odsaUtils.js
   var config = ODSA.UTILS.loadConfig(),
       interpret = config.interpreter,       // get the interpreter
-      code = config.code,                   // get the code object
       settings = config.getSettings();      // Settings for the AV
 
-  // add the layout setting preference
-  var arrayLayout =
-      settings.add("layout",
-                   {type: "select", options: {bar: "Bar", array: "Array"},
-                     label: "Array layout: ", value: "bar"});
+  var code = [
+    "function bubbleSort(A):",
+    "    for i in 0 ... length(A)-2:",
+    "        for j in 1 ... length(A)-i:",
+    "            if A[j-1] > A[j]:",
+    "                swap(A, j-1, j)",
+  ];
+  var tags = {
+    "sig": 1,
+    "outloop": 2,
+    "inloop": 3,
+    "compare": 4,
+    "swap": 5,
+    "end": 9
+  };
 
   // Initialize the arraysize dropdown list
   ODSA.AV.initArraySize(5, 16, 8);
@@ -71,8 +80,8 @@ $(document).ready(function() {
       av = new JSAV($(".avcontainer"), {settings: settings});
 
       // Create a new array using the layout the user has selected
-      arr = av.ds.array(arrValues, {indexed: true, layout: arrayLayout.val()});
-      pseudo = av.code(code);
+      arr = av.ds.array(arrValues, {indexed: true, layout: "bar"});
+      pseudo = av.code(code, {lineNumbers: false, tags: tags});
       av.umsg("Starting Bubble Sort");
       av.displayInit();
       bubblesort();
