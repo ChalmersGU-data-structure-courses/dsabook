@@ -57,22 +57,22 @@ empty set, and then call `add` repeatedly to add each valid word to the
 set. Then to spell-check a given word, we just call `contains`.
 
     class SpellChecker:
-        SpellChecker(list_of_valid_words):
+        SpellChecker(listOfValidWords):
             // Convert the list of words into a set.
-            this.set_of_valid_words = new Set()
-            for word in list_of_valid_words:
-                this.set_of_valid_words.add(word)
+            this.setOfValidWords = new Set()
+            for each word in listOfValidWords:
+                this.setOfValidWords.add(word)
 
-        is_valid_word(word):
-            return this.set_of_valid_words.contains(word)
+        isValidWord(word):
+            return this.setOfValidWords.contains(word)
 
-    function main(list_of_words_to_check):
+    function main(listOfWordsToCheck):
         // Create a new spell checker.
         checker = new SpellChecker(["cat", "dog"])
 
         // Now we can spell-check a word easily.
-        for word in list_of_words_to_check:
-            if checker.is_valid_word(word):
+        for each word in listOfWordsToCheck:
+            if checker.isValidWord(word):
                 print(word, "is valid")
             else:
                 print(word, "is INVALID")
@@ -166,7 +166,7 @@ the multimap.
 
         add(doc):
             // Add a new document to the database.
-            for word in doc.contents:
+            for each word in doc.contents:
                 // Get the set of documents containing this word.
                 set = this.database.get(word)
                 if set is null:
@@ -302,9 +302,9 @@ having the key be a population number and the value be a set of towns.
             // Find all cities with a population between lower and upper
             result = new Set()
             // The range query returns a set of keys, i.e. populations.
-            for population in this.cities.keysBetween(lower, upper):
+            for each population in this.cities.keysBetween(lower, upper):
                 // cities.get(population) returns the list of cities with that population.
-                for city in this.cities.get(population):
+                for each city in this.cities.get(population):
                     result.add(city)
             return result
 

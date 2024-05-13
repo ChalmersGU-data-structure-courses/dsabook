@@ -38,16 +38,16 @@ These include comparables:
 And iterators and iterables:
 
     interface Iterator:
-        next()     // Returns the next item. Fails if there are no more items.
+        next()      // Returns the next item. Fails if there are no more items.
 
     interface Iterable:
-        iter()     // Returns a new iterator.
+        iterator()  // Returns a new iterator.
 
 As well as collections:
 
     interface Collection extends Iterable:
-        isEmpty()   // Returns true if the collection is empty.
-        size()      // Returns the number of elements in this collection.
+        isEmpty()  // Returns true if the collection is empty.
+        size()     // Returns the number of elements in this collection.
 
 ### Lists
 

@@ -15,10 +15,10 @@ rectangle with $P$ pixels. A pseudocode algorithm to solve the problem
 follows.
 
     // Initialize the counts:
-    for i in 0 ... C-1:
+    for i = 0 to C-1:
         count[i] = 0
     // Increment the pixel value count for each of the pixels:
-    for i in 0 ... P-1:
+    for i = 0 to P-1:
         count[value(i)] = count[value(i)]+1  
     // Sort the pixel value counts:
     sort(count)

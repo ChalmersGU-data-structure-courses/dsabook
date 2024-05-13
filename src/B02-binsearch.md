@@ -16,7 +16,7 @@ Here is a simple implementation for sequential search.
     // Return the position of an element in an array A.
     // If the element is not found, return -1.
     function sequentialSearch(A, e):
-        for i in 0 ... length(A)-1:   // For each element in A,
+        for i = 0 to length(A)-1:   // For each element in A,
             if A[i] == e:             // if we found it
                 return i              // return this position.
         return -1                     // Otherwise, return -1.

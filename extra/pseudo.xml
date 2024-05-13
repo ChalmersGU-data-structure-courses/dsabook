@@ -62,38 +62,37 @@
 			<item>function</item>
 			<item>constructor</item>
 			<item>method</item>
-			<item>delete</item>
 			<item>global</item>
 			<item>lambda</item>
 		</list>
 		<list name="operators">
 			<item>and</item>
-			<item>contains</item>
 			<item>extends</item>
+			<item>implements</item>
 			<item>is</item>
 			<item>in</item>
 			<item>not</item>
 			<item>new</item>
 			<item>or</item>
 			<item>of</item>
+			<item>all</item>
+			<item>each</item>
+			<item>every</item>
+			<item>any</item>
+			<item>to</item>
+			<item>downto</item>
 		</list>
 		<list name="flow">
 			<item>assert</item>
 			<item>break</item>
-			<item>break out of loop</item>
 			<item>continue</item>
-			<item>continue next iteration</item>
-			<item>continue with next iteration</item>
 			<item>else</item>
-			<item>else if</item>
 			<item>otherwise</item>
-			<item>catch error</item>
+			<item>catch</item>
+			<item>error</item>
 			<item>for</item>
-			<item>for each</item>
-			<item>for all</item>
 			<item>if</item>
-			<item>do nothing</item>
-			<item>throw error</item>
+			<item>throw</item>
 			<item>return</item>
 			<item>try</item>
 			<item>while</item>
@@ -134,6 +133,8 @@
 			<item>Object</item>
 			<item>Pair</item>
 			<item>PriorityQueue</item>
+			<item>MinPriorityQueue</item>
+			<item>MaxPriorityQueue</item>
 			<item>Queue</item>
 			<item>Set</item>
 			<item>SortedMap</item>
@@ -141,44 +142,68 @@
 			<item>Tuple</item>
 			<item>Type</item>
 
+			<!-- standard ADT methods -->
+			<item>next</item>
+			<item>compareTo</item>
+			<item>iterator</item>
+			<item>isEmpty</item>
+			<item>size</item>
+			<item>add</item>
+			<item>get</item>
+			<item>set</item>
+			<item>append</item>
+			<item>push</item>
+			<item>pop</item>
+			<item>peek</item>
+			<item>enqueue</item>
+			<item>dequeue</item>
+			<item>remove</item>
+			<item>removeMin</item>
+			<item>removeMax</item>
+			<item>delete</item>
+			<item>deleteMin</item>
+			<item>deleteMax</item>
+			<item>getMin</item>
+			<item>getMax</item>
+			<item>put</item>
+			<item>containsKey</item>
+			<item>contains</item>
+
+			<!-- common functions -->
 			<item>abs</item>
-			<item>all</item>
-			<item>any</item>
 			<item>char</item>
 			<item>compare</item>
 			<item>enumerate</item>
 			<item>evaluate</item>
 			<item>filter</item>
+			<item>map</item>
 			<item>format</item>
 			<item>hash</item>
-			<item>hex</item>
 			<item>instance</item>
-			<item>instance of</item>
-			<item>is instance of</item>
 			<item>subclass</item>
-			<item>is subclass of</item>
-			<item>iterator</item>
 			<item>length</item>
 			<item>max</item>
 			<item>min</item>
-			<item>next</item>
 			<item>open</item>
+			<item>close</item>
+			<item>file</item>
 			<item>ord</item>
 			<item>power</item>
 			<item>print</item>
 			<item>range</item>
-			<item>reduce</item>
 			<item>reversed</item>
+			<item>integer</item>
+			<item>int</item>
+			<item>float</item>
 			<item>round</item>
 			<item>slice</item>
 			<item>sorted</item>
 			<item>string</item>
 			<item>sum</item>
-			<item>unicode</item>
-			<item>zip</item>
 		</list>
 		<list name="specialvars">
 			<item>none</item>
+			<item>nothing</item>
 			<item>null</item>
 			<item>true</item>
 			<item>false</item>
@@ -187,15 +212,7 @@
 		</list>
 		<!-- <list name="bindings"></list> -->
 		<!-- <list name="overloaders"></list> -->
-		<list name="exceptions">
-			<!--
-				Exceptions list resources used:
-				- http://docs.python.org/2.7/library/exceptions.html#exception-hierarchy
-				- http://docs.python.org/3.10/library/exceptions.html#exception-hierarchy
-			-->
-			<item>Error</item>
-			<item>Exception</item>
-		</list>
+		<!-- <list name="exceptions"></list> -->
 		<contexts>
 			<context name="Normal" attribute="Normal Text" lineEndContext="#stay">
 				<DetectSpaces attribute="Normal Text"/>
@@ -215,7 +232,7 @@
 				<keyword attribute="Flow Control Keyword" String="flow_yield" context="yield"/>
 				<keyword attribute="Flow Control Keyword" String="patternmatching" context="Pattern Matching" lookAhead="1" firstNonSpace="1"/>
 				<keyword attribute="Import" String="import" context="#stay"/>
-				<keyword attribute="Exceptions" String="exceptions" context="#stay"/>
+				<!-- <keyword attribute="Exceptions" String="exceptions" context="#stay"/> -->
 				<!-- <keyword attribute="Overloaders" String="overloaders" context="#stay"/> -->
 				<!-- <keyword attribute="Extensions" String="bindings" context="#stay"/> -->
 
@@ -655,7 +672,7 @@
 			<itemData name="Builtin Function" defStyleNum="dsBuiltIn" spellChecking="false"/>
 			<itemData name="Special Variable" defStyleNum="dsVariable" spellChecking="false"/>
 			<!-- <itemData name="Extensions" defStyleNum="dsExtension" spellChecking="false"/> -->
-			<itemData name="Exceptions" defStyleNum="dsPreprocessor" spellChecking="false"/>
+			<!-- <itemData name="Exceptions" defStyleNum="dsPreprocessor" spellChecking="false"/> -->
 			<!-- <itemData name="Overloaders" defStyleNum="dsFunction" spellChecking="false"/> -->
 			<itemData name="Import" defStyleNum="dsImport" spellChecking="false"/>
 			<itemData name="Float" defStyleNum="dsFloat" spellChecking="false"/>

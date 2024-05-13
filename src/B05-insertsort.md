@@ -18,7 +18,7 @@ implementation. The input is an array named `A` that stores $n$ records.
 :::: {#introduction}
 
     function insertionSort(A):
-        for i in 1 ... length(A)-1:
+        for i = 1 to length(A)-1:
             // Move the i'th element to its correct position.
             j = i
             while j > 0 and A[j] < A[j-1]:

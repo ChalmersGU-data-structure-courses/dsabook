@@ -162,6 +162,10 @@ code.pseudo .co {
     font-style: italic;
 }
 
+code.pseudo .bu {
+    font-weight: normal;
+}
+
 hr {
     background-color: #1a1a1a;
     border: none;

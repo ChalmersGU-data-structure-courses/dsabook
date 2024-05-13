@@ -26,9 +26,9 @@ number of swaps required will be $n-1$ (we get the last record in place
 Here is an implementation for Selection Sort.
 
     function selectionSort(A):
-        for i in 0 ... length(A)-1:        // Select i'th biggest element
+        for i = 0 to length(A)-1:        // Select i'th biggest element
             bigindex = i                   // Current biggest index
-            for j in 0 ... len(A)-i:       // Find the max value
+            for j = 0 to len(A)-i:       // Find the max value
                 if A[j] > A[bigindex]:     // Found something bigger  
                     bigindex = j           // Remember bigger index
             swap(A, bigindex, len(A)-i-1)  // Put it into place

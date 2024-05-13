@@ -32,7 +32,7 @@ swaps anyway. Here is an implementation for Insertion Sort using this
 optimization.
 
     function insertionSortShift(A):
-        for i in 1 ... length(A)-1:
+        for i = 1 to length(A)-1:
             temp = A[i]
             j = i
             while j > 0 and temp < A[j-1]:
@@ -106,7 +106,7 @@ lower down. Here is code to implement this approach.
         n = length(A) - 1
         while n > 0:
             newn = 0
-            for i in 0 ... n-1:
+            for i = 0 to n-1:
                 // Check if this pair is out of order:
                 if A[i] > A[i+1]:
                     swap(A, i, i+1)

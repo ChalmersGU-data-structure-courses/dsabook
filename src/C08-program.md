@@ -32,7 +32,7 @@ Because the assignment statement takes constant time, it is $\Theta(1)$.
 Consider a simple `for` loop.
 
     sum = 0
-    for i in 0 ... n-1:
+    for i = 0 to n-1:
         sum = sum + n
 
 The first line is $\Theta(1)$. The `for` loop is repeated $n$ times. The
@@ -51,10 +51,10 @@ are nested.
 
 
     sum = 0
-    for j in 0 ... n-1:     // First for loop
-        for i in 0 ... j-1: // is a double loop.
+    for j = 0 to n-1:     // First for loop
+        for i = 0 to j-1: // is a double loop.
             sum = sum + 1
-    for k in 0 ... n-1:     // Second for loop.
+    for k = 0 to n-1:     // Second for loop.
         A[k] = k
 
 
@@ -92,13 +92,13 @@ $\Theta(c_1 + c_2 n + c_3 n^2)$ is simply $\Theta(n^2)$.
 Compare the asymptotic analysis for the following two code fragments.
 
     sum1 = 0
-    for i in 0 ... n-1:      // First double loop.
-        for j in 0 ... n-1:  // Do n times.
+    for i = 0 to n-1:      // First double loop.
+        for j = 0 to n-1:  // Do n times.
             sum1 = sum1 + 1
 
     sum2 = 0
-    for i in 0 ... n-1       // Second double loop.
-        for j in 0 ... i-1:  // Do i times.
+    for i = 0 to n-1       // Second double loop.
+        for j = 0 to i-1:  // Do i times.
             sum2 = sum2 + 1
 
 In the first double loop, the inner `for` loop always executes $n$
@@ -119,14 +119,14 @@ of nested loops illustrates this fact.
     sum1 = 0
     k = 1
     while k <= n:            // Do log n times.
-        for j in 0 ... n-1:  // Do n times.
+        for j = 0 to n-1:  // Do n times.
             sum1 = sum1 + 1
         k = k * 2
 
     sum2 = 0
     k = 1
     while k <= n:            // Do log n times.
-        for j in 0 ... k-1:  // Do k times.
+        for j = 0 to k-1:  // Do k times.
             sum2 = sum2 + 1
         k = k * 2
 
