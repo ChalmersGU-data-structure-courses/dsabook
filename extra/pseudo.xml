@@ -81,6 +81,7 @@
 			<item>any</item>
 			<item>to</item>
 			<item>downto</item>
+			<item>times</item>
 		</list>
 		<list name="flow">
 			<item>assert</item>

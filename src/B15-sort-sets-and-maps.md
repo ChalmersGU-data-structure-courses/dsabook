@@ -10,9 +10,9 @@ In the [introduction](#information-retrieval-sets-and-maps) chapter we learnt ab
         contains(x)  // Returns true if x is in the set.
 
     interface Map extends Iterable:
-        put(key, value)   // Sets the value of the given key. Returns the previous value, or None.
-        get(key)          // Returns the value associated with the given key, or None if the key is not there.
-        remove(key)       // Removes and returns the value associated with the given key, or None if there is no key.
+        put(key, value)   // Sets the value of the given key. Returns the previous value, or nothing.
+        get(key)          // Returns the value associated with the given key, or nothing if the key is not there.
+        remove(key)       // Removes and returns the value associated with the given key, or nothing if there is no key.
         containsKey(key)  // Returns true if the key has an associated value.
         isEmpty()         // Returns true if there are no keys.
         size()            // Returns the number of keys (i.e., the number of key/value pairs).
@@ -55,19 +55,19 @@ search. As a reminder, here are the relevant operations:
     interface SortedSet extends Set:
         first()          // Returns the first (smallest) element. Raises an exception if the set is empty.
         last()           // Returns the last (largest) element. Raises an exception if the set is empty.
-        floor(x)         // Returns the closest element <= x, or None if there is no such element.
-        ceiling(x)       // Returns the closest element >= x, or None if there is no such element.
-        lower(x)         // Returns the closest element < x, or None if there is no such element.
-        higher(x)        // Returns the closest element > x, or None if there is no such element.
+        floor(x)         // Returns the closest element <= x, or nothing if there is no such element.
+        ceiling(x)       // Returns the closest element >= x, or nothing if there is no such element.
+        lower(x)         // Returns the closest element < x, or nothing if there is no such element.
+        higher(x)        // Returns the closest element > x, or nothing if there is no such element.
         between(x1, x2)  // Returns all elements x such that x1 <= x <= x2.
 
     interface SortedMap extends Map:
         firstKey()               // Returns the first (smallest) key. Raises an exception if the map is empty.
         lastKey()                // Returns the last (largest) key. Raises an exception if the map is empty.
-        floorKey(key)            // Returns the closest key <= k, or None if there is no key.
-        ceilingKey(key)          // Returns the closest key >= k, or None if there is no key.
-        lowerKey(key)            // Returns the closest key < k, or None if there is no such element.
-        higherKey(key)           // Returns the closest key > k, or None if there is no such element.
+        floorKey(key)            // Returns the closest key <= k, or nothing if there is no key.
+        ceilingKey(key)          // Returns the closest key >= k, or nothing if there is no key.
+        lowerKey(key)            // Returns the closest key < k, or nothing if there is no such element.
+        higherKey(key)           // Returns the closest key > k, or nothing if there is no such element.
         keysBetween(key1, key2)  // Returns all keys k such that k1 <= k <= k2.
 
 

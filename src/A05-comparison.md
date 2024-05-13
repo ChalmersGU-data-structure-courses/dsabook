@@ -116,16 +116,9 @@ integers. But to be useful, a real sorting algorithm typically has to
 deal with the fact that it is sorting a collection of records. A
 general-purpose sorting routine meant to operate on multiple record
 types would have to be written in a way to deal with the generic
-comparison problem. To illustrate, here is an example of
-[Insertion Sort] implemented to work on an array that stores records that
-support the `Comparable` interface:
-
-    function insertionSort(A):
-        for i = 0 to A.size()-1:
-            j = i
-            while j > 0 and A[j] < A[j-1]:
-                swap(A, j, j-1)
-                j = j-1
+comparison problem. 
+But as long as the elements of the array supports the **Comparable** 
+interface, we can still use the standard comparison operators when sorting.
 
 
 ### Review questions

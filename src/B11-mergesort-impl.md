@@ -53,7 +53,7 @@ subarray being sorted. The initial call to `mergeSort` would be
         mid = int((left + right) / 2)     // Select midpoint
         mergeSort(A, temp, left, mid)     // Mergesort first half
         mergeSort(A, temp, mid+1, right)  // Mergesort second half
-        for i = left to right:          // Copy subarray to temp
+        for i = left to right:            // Copy subarray to temp
             temp[i] = A[i]
         // Do the merge operation back to A
         i1 = left
@@ -62,10 +62,10 @@ subarray being sorted. The initial call to `mergeSort` would be
             if i1 == mid+1:               // Left sublist exhausted
                 A[curr] = temp[i2]
                 i2 = i2+1
-            elif i2 > right:              // Right sublist exhausted
+            else if i2 > right:           // Right sublist exhausted
                 A[curr] = temp[i1]
                 i1 = i1+1
-            elif temp[i1] <= temp[i2]:    // Get smaller value
+            else if temp[i1] <= temp[i2]: // Get smaller value
                 A[curr] = temp[i1]
                 i1 = i1+1
             else:
