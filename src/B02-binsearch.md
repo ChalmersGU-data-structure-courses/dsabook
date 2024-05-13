@@ -16,7 +16,7 @@ Here is a simple implementation for sequential search.
     // Return the position of an element in an array A.
     // If the element is not found, return -1.
     function sequentialSearch(A, e):
-        for i = 0 to length(A)-1:   // For each element in A,
+        for i = 0 to A.size()-1:   // For each element in A,
             if A[i] == e:             // if we found it
                 return i              // return this position.
         return -1                     // Otherwise, return -1.
@@ -76,7 +76,7 @@ Here is the method in pseudocode:
     // If the element is not found, return -1.
     function binarySearch(A, e):
         low = 0
-        high = length(A) - 1
+        high = A.size() - 1
         while low <= high:               // Stop when low and high meet.
             mid = int((low + high) / 2)  // Check middle of subarray.
             if A[mid] < e:

@@ -34,10 +34,10 @@ the increment operation, assuming that a binary number of length $n$ is
 stored in array **A** of length $n$.
 
     i = 0
-    while i < length(A) and A[i] == 1:
+    while i < A.size() and A[i] == 1:
         A[i] = 0
         i += 1
-    if i < length(A):
+    if i < A.size():
         A[i] = 1
 
 If we count from 0 through $2^n - 1$, (requiring a counter with at least

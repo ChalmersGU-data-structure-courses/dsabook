@@ -32,7 +32,7 @@ swaps anyway. Here is an implementation for Insertion Sort using this
 optimization.
 
     function insertionSortShift(A):
-        for i = 1 to length(A)-1:
+        for i = 1 to A.size()-1:
             temp = A[i]
             j = i
             while j > 0 and temp < A[j-1]:
@@ -103,7 +103,7 @@ lower down. Here is code to implement this approach.
 
 
     function bubbleCheckSwap(A):
-        n = length(A) - 1
+        n = A.size() - 1
         while n > 0:
             newn = 0
             for i = 0 to n-1:

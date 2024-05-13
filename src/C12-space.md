@@ -89,7 +89,7 @@ permutation of the integers from 0 to $n-1$. This is an example of a
 [binsort]{.term}. Binsort
 assigns each value to an array position corresponding to its value.
 
-    for i = 0 to length(A)-1:
+    for i = 0 to A.size()-1:
         B[A[i]] = A[i]
 
 This is efficient and requires $\Theta(n)$ time. However, it also
@@ -97,7 +97,7 @@ requires two arrays of size $n$. Next is a code fragment that places the
 permutation in order but does so within the same array (thus it is an
 example of an "in place" sort).
 
-    for i = 0 to length(A)-1:
+    for i = 0 to A.size()-1:
         while A[i] != i:
             // Swap element A[i] with A[A[i]]:
             swap(A, i, A[i])

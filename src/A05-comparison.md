@@ -121,7 +121,7 @@ comparison problem. To illustrate, here is an example of
 support the `Comparable` interface:
 
     function insertionSort(A):
-        for i = 0 to length(A)-1:
+        for i = 0 to A.size()-1:
             j = i
             while j > 0 and A[j] < A[j-1]:
                 swap(A, j, j-1)
