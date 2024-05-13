@@ -185,13 +185,13 @@ Stack:
 
 Queue:
 
--   The Java API has an interface
+:   The Java API has an interface
     [Queue](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Queue.html)
     which uses different method names.
 
 PriorityQueue:
 
--   We define priority queues as an interface
+:   We define priority queues as an interface
     (because there are several possible implementations), but in the
     Java API it's a single class
     [PriorityQueue](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/PriorityQueue.html)
@@ -201,7 +201,7 @@ PriorityQueue:
 
 Set, SortedSet, Map, SortedMap:
 
--   These interfaces are similar to 
+:   These interfaces are similar to 
     [Set](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Set.html),
     [SortedSet](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/SortedSet.html),
     [Map](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html)
@@ -212,7 +212,7 @@ Set, SortedSet, Map, SortedMap:
 
 Graph:
 
--   There is no interface (or class) for graphs in the standard Java API.
+:   There is no interface (or class) for graphs in the standard Java API.
 
 
 <!-- TODO 
