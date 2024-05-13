@@ -1,54 +1,21 @@
 
 ## Arrays as Sets or Maps
 
-In Chapter [Introduction] we learnt about
+In the [introduction](#information-retrieval-sets-and-maps) chapter we learnt about
 *sets* and *maps*, two of the most important ADTs.
 
-```python
-class Set(Collection):
-    def add(self, x):      """Adds x to the set. Returns true if the element wasn't already in the set."""
-    def remove(self, x):   """Removes x from the set. Returns true if the element was in the set."""
-    def contains(self, x): """Returns true if x is in the set."""
-    # Note: __iter__() can yield the elements in any order.
-```
+    class Set extends Collection:
+        add(x)       // Adds x to the set. Returns true if the element wasn't already in the set.
+        remove(x)    // Removes x from the set. Returns true if the element was in the set.
+        contains(x)  // Returns true if x is in the set.
 
-```java
-// Note: This is a subset of java.util.Set
-interface Set<E> extends Collection<E> {
-    boolean add(E x);       // Adds x to the set. Returns true if the element wasn't already in the set.
-    boolean remove(E x);    // Removes x from the set. Returns true if the element was in the set.
-    boolean contains(E x);  // Returns true if x is in the set.
-    // Note: iterator() can yield the elements in any order.
-}
-```
-
-
-
-```python
-class Map(Iterable):
-    def put(self, key, value):  """Sets the value of the given key. Returns the previous value, or None."""
-    def get(self, key):         """Returns the value associated with the given key, or None if the key is not there."""
-    def remove(self, key):      """Removes and returns the value associated with the given key, or None if there is no key."""
-    def containsKey(self, key): """Returns true if the key has an associated value."""
-    def isEmpty(self):          """Returns true if there are no keys."""
-    def size(self):             """Returns the number of keys (i.e., the number of key/value pairs)."""
-    # Note: __iter__() can yield the keys in any order.
-```
-
-```java
-// Note: This is a subset of java.util.Map, where
-// `iterator` iterates over the keys, and replaces the more complicated `keySet`.
-interface Map<K, V> extends Iterable<K> {
-    V put(K key, V value);       // Sets the value of the given key. Returns the previous value, or null.
-    V get(K key);                // Returns the value associated with the given key, or null if the key is not there.
-    V remove(K key);             // Removes and returns the value associated with the given key, or null if there is no key.
-    boolean containsKey(K key);  // Returns true if the key has an associated value.
-    boolean isEmpty();           // Returns true if there are no keys.
-    int size();                  // Returns the number of keys (i.e., the number of key/value pairs).
-    // Note: iterator() can yield the keys in any order.
-}
-```
-
+    class Map extends Iterable:
+        put(key, value)   // Sets the value of the given key. Returns the previous value, or None.
+        get(key)          // Returns the value associated with the given key, or None if the key is not there.
+        remove(key)       // Removes and returns the value associated with the given key, or None if there is no key.
+        containsKey(key)  // Returns true if the key has an associated value.
+        isEmpty()         // Returns true if there are no keys.
+        size()            // Returns the number of keys (i.e., the number of key/value pairs).
 
 
 We can implement either of these ADTs using an array. For a set, we can
@@ -85,62 +52,23 @@ Sorted arrays also support the *sorted set* and *sorted map* operations
 such as *range queries* -- these can also be implemented using binary
 search. As a reminder, here are the relevant operations:
 
-```python
-class SortedSet(Set):
-    def first(self):            """Returns the first (smallest) element. Raises an exception if the set is empty."""
-    def last(self):             """Returns the last (largest) element. Raises an exception if the set is empty."""
-    def floor(self, x):         """Returns the closest element <= x, or None if there is no such element."""
-    def ceiling(self, x):       """Returns the closest element >= x, or None if there is no such element."""
-    def lower(self, x):         """Returns the closest element < x, or None if there is no such element."""
-    def higher(self, x):        """Returns the closest element > x, or None if there is no such element."""
-    def between(self, x1, x2):  """Returns all elements x such that x1 <= x <= x2."""
-    # Note: __iter__() should yield the elements in order.
-```
+    class SortedSet extends Set:
+        first()          // Returns the first (smallest) element. Raises an exception if the set is empty.
+        last()           // Returns the last (largest) element. Raises an exception if the set is empty.
+        floor(x)         // Returns the closest element <= x, or None if there is no such element.
+        ceiling(x)       // Returns the closest element >= x, or None if there is no such element.
+        lower(x)         // Returns the closest element < x, or None if there is no such element.
+        higher(x)        // Returns the closest element > x, or None if there is no such element.
+        between(x1, x2)  // Returns all elements x such that x1 <= x <= x2.
 
-```java
-// Note: This is a subset of java.util.SortedSet, where
-// `floor` and `ceiling` are borrowed from java.util.NavigableSet.
-interface SortedSet<E> extends Set<E> {
-    E first();                        // Returns the first (smallest) element. Raises an exception if the set is empty.
-    E last();                         // Returns the last (largest) element. Raises an exception if the set is empty.
-    E floor(E x);                     // Returns the closest element <= x, or null if there is no such element.
-    E ceiling(E x);                   // Returns the closest element >= x, or null if there is no such element.
-    E lower(E x);                     // Returns the closest element < x, or null if there is no such element.
-    E higher(E x);                    // Returns the closest element > x, or null if there is no such element.
-    Iterator<E> between(E x1, E x2);  // Returns all elements x such that x1 <= x <= x2.
-    // Note: iterator() should yield the elements in order.
-}
-```
-
-
-
-```python
-class SortedMap(Map):
-    def firstKey(self):                """Returns the first (smallest) key. Raises an exception if the map is empty."""
-    def lastKey(self):                 """Returns the last (largest) key. Raises an exception if the map is empty."""
-    def floorKey(self, key):           """Returns the closest key <= k, or None if there is no key."""
-    def ceilingKey(self, key):         """Returns the closest key >= k, or None if there is no key."""
-    def lowerKey(self, key):           """Returns the closest key < k, or None if there is no such element."""
-    def higherKey(self, key):          """Returns the closest key > k, or None if there is no such element."""
-    def keysBetween(self, key1, key2): """Returns all keys k such that k1 <= k <= k2."""
-    # Note: __iter__() should yield the keys in order.
-```
-
-```java
-// Note: This is a subset of java.util.SortedMap, where
-// `floorKey` and `ceilingKey` are borrowed from java.util.NavigableMap.
-interface SortedMap<K, V> extends Map<K, V> {
-    K firstKey();                         // Returns the first (smallest) key. Raises an exception if the map is empty.
-    K lastKey();                          // Returns the last (largest) key. Raises an exception if the map is empty.
-    K floorKey(K key);                    // Returns the closest key <= k, or null if there is no key.
-    K ceilingKey(K key);                  // Returns the closest key >= k, or null if there is no key.
-    K lowerKey(K k);                      // Returns the closest key < k, or null if there is no such element.
-    K higherKey(K k);                     // Returns the closest key > k, or null if there is no such element.
-    Iterator<K> keysBetween(K k1, K k2);  // Returns all keys such that k1 <= k <= k2.
-    // Note: iterator() should yield the keys in order.
-}
-```
-
+    class SortedMap extends Map:
+        firstKey()               // Returns the first (smallest) key. Raises an exception if the map is empty.
+        lastKey()                // Returns the last (largest) key. Raises an exception if the map is empty.
+        floorKey(key)            // Returns the closest key <= k, or None if there is no key.
+        ceilingKey(key)          // Returns the closest key >= k, or None if there is no key.
+        lowerKey(key)            // Returns the closest key < k, or None if there is no such element.
+        higherKey(key)           // Returns the closest key > k, or None if there is no such element.
+        keysBetween(key1, key2)  // Returns all keys k such that k1 <= k <= k2.
 
 
 Sorted arrays can also be useful in cases where we always add *many*

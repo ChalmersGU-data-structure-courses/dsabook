@@ -25,29 +25,13 @@ Likewise, each succeeding pass through the array compares adjacent
 records, looking at one less record toward the end than did the
 preceding pass. Here is an implementation.
 
-```python
-def bubbleSort(A):
-    for i in range (len(A)-1):   # Insert i'th record
-        for j in range(1, len(A)-i):
-            if A[j-1] > A[j]:
-                swap(A, j-1, j)
-```
+    function bubbleSort(A):
+        for i in 0 ... length(A)-2:
+            // Bubble up the i'th element
+            for j in 1 ... length(A)-i:
+                if A[j-1] > A[j]:
+                    swap(A, j-1, j)
 
-```java
-public static <T extends Comparable<T>> void bubbleSort(T[] A) {
-    for (int i = 0; i < A.length-1; i++) {
-        // Insert i'th record.
-        for (int j = 1; j < A.length-i; j++) {
-            if (A[j-1].compareTo(A[j]) > 0)
-                Util.swap(A, j-1, j);
-        }
-    }
-}
-```
-
-
-
-| 
 
 <inlineav id="bubblesortS1CON" src="Sorting/bubblesortS1CON.js" name="Bubble Sort Slideshow 1"/>
 

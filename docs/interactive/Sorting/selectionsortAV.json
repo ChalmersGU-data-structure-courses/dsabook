@@ -20,52 +20,5 @@
       "av_c9": "Now swap the next biggest element into place.",
       "av_c10": "Done this pass."
     }
-  },
-  "code" : {
-    "c++": {
-      "url": "../../SourceCode/C++/Sorting/Selectionsort.cpp",
-      "startAfter": "/* *** ODSATag: Selectionsort *** */",
-      "endBefore": "/* *** ODSAendTag: Selectionsort *** */",
-      "tags": {
-        "sig": 1,
-        "outloop": 2,
-        "initbig": 3,
-        "inloop": 4,
-        "compare": 5,
-        "setbig": 6,
-        "swap": 7,
-        "end": 9
-      }
-    },
-    "java": {
-      "url": "../../SourceCode/Java/Sorting/Selectionsort.java",
-      "startAfter": "/* *** ODSATag: Selectionsort *** */",
-      "endBefore": "/* *** ODSAendTag: Selectionsort *** */",
-      "tags": {
-        "sig": 1,
-        "outloop": 2,
-        "initbig": 3,
-        "inloop": 4,
-        "compare": 5,
-        "setbig": 6,
-        "swap": 7,
-        "end": 9
-      }
-    },
-    "java_generic": {
-      "url": "../../SourceCode/Java_Generic/Sorting/Selectionsort.java",
-      "startAfter": "/* *** ODSATag: Selectionsort *** */",
-      "endBefore": "/* *** ODSAendTag: Selectionsort *** */",
-      "tags": {
-        "sig": 1,
-        "outloop": 2,
-        "initbig": 3,
-        "inloop": 4,
-        "compare": 5,
-        "setbig": 6,
-        "swap": 7,
-        "end": 9
-      }
-    }
   }
 }

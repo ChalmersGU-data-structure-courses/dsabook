@@ -13,15 +13,13 @@ the value is not in the array, eventually you will reach the end. We
 will call this an [unsuccessful search]{.term}.
 Here is a simple implementation for sequential search.
 
-```python
-# Return the position of an element in a list.
-# If the element is not found, return -1.
-def sequentialSearch(elements, e):
-    for i = 0 ... len(elements)-1:  # For each element
-        if elements[i] == e:        # if we found it
-            return i                # return this position
-    return -1                       # Otherwise, return -1
-```
+    // Return the position of an element in an array A.
+    // If the element is not found, return -1.
+    function sequentialSearch(A, e):
+        for i in 0 ... length(A)-1:   // For each element in A,
+            if A[i] == e:             // if we found it
+                return i              // return this position.
+        return -1                     // Otherwise, return -1.
 
 It is natural to ask how long a program or algorithm will take to run.
 But we do not really care exactly how long a particular program will run
@@ -70,30 +68,28 @@ looks at the middle position in that part of the array where value $K$
 may exist. The value at this position again allows us to eliminate half
 of the remaining positions from consideration. This process repeats
 until either the desired value is found, or there are no positions
-remaining in the array that might contain the value $K$. Here is an
-illustration of the binary search method.
+remaining in the array that might contain the value $K$. 
+
+Here is the method in pseudocode:
+
+    // Return the position of an element in an array A.
+    // If the element is not found, return -1.
+    function binarySearch(A, e):
+        low = 0
+        high = length(A) - 1
+        while low <= high:               // Stop when low and high meet.
+            mid = int((low + high) / 2)  // Check middle of subarray.
+            if A[mid] < e:
+                low = mid + 1            // In right half.
+            else if A[mid] > e:
+                high = mid - 1           // In left half.
+            else:
+                return mid               // Found it.
+        return -1                        // Search value not in array.
+
+And here is an illustration of the binary search method.
 
 <inlineav id="binarySearchCON" src="Searching/binarySearchCON.js" name="Binary Search Algorithm Slideshow" links="Searching/binarySearchCON.css"/>
-
-And here is the method in more programming languages:
-
-```python
-# Return the position of an element in a list.
-# If the element is not found, return -1.
-def binarySearch(elements, e):
-    low = 0
-    high = len(elements) - 1
-    while low <= high:               # Stop when low and high meet
-        mid = int((low + high) / 2)  # Check middle of subarray
-        if elements[mid] < e:
-            low = mid + 1            # In right half
-        else if elements[mid] > e:
-            high = mid - 1           # In left half
-        else:
-            return mid               # Found it
-    return -1                        # Search value not in array
-```
-
 
 With the right math techniques, it is not too hard to show that the cost
 of binary search on an array of $n$ values is at most $\log_2 n$. This
@@ -108,4 +104,6 @@ $\log_2 n$ times before we reach 1.[^B02b]
     even more difficult than proving that sequential search is the most
     efficient algorithm possible on an unsorted array.
 
-<avembed id="binarySearchPRO" src="Searching/binarySearchPRO.html" type="pe" name="Binary Search Proficiency Exercise"/>
+<!-- TODO: this currently doesn't work
+<avembed id="binarySearchPRO" src="Searching/binarySearchPRO.html" type="pe" name="Binary Search Proficiency Exercise"/> 
+-->

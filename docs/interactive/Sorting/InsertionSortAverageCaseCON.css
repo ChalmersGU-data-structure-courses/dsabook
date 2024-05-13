@@ -1,5 +1,5 @@
 #InsertionSortAverageCaseCON{
-  height: 350px;
+  height: 400px;
 }
 
 .largeLabel{
@@ -10,8 +10,4 @@
 .mediumLabel{
 	font-size: 16px;
 	text-align: left;
-}
-
-#InsertionSortAverageCaseCON .jsavcode {
-  margin-top: -50px;
 }

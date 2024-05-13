@@ -1,6 +1,12 @@
 
 ## Selection Sort
 
+<!-- TODO
+This version selects the largest element and puts it in the end,
+which is different from Wikipedia, Programiz, etc.
+They selects the smallest element and puts it at the front.
+-->
+
 Consider again the problem of sorting a pile of phone bills for the past
 year. Another intuitive approach might be to look through the pile until
 you find the bill for January, and pull that out. Then look through the
@@ -19,29 +25,13 @@ number of swaps required will be $n-1$ (we get the last record in place
 
 Here is an implementation for Selection Sort.
 
-```python
-def selectionSort(A):
-    for i in range(len(A)-1):          # Select i'th biggest record
-        bigindex = 0                   # Current biggest index
-        for j in range (1, len(A)-i):  # Find the max value
-            if A[j] > A[bigindex]:     # Found something bigger  
-                bigindex = j           # Remember bigger index
-        swap(A, bigindex, len(A)-i-1)  # Put it into place
-```
-
-```java
-static <E extends Comparable<E>> void selectionSort(E[] A) {
-    for (int i = 0; i < A.length-1; i++) {       // Select i'th biggest record
-        int bigindex = 0;                        // Current biggest index
-        for (int j = 1; j < A.length-i; j++) {   // Find the max value
-            if (A[j].compareTo(A[bigindex]) > 0) // Found something bigger
-                bigindex = j;                    // Remember bigger index
-        }
-        Util.swap(A, bigindex, A.length-i-1);         // Put it into place
-    }
-}
-```
-
+    function selectionSort(A):
+        for i in 0 ... length(A)-1:        // Select i'th biggest element
+            bigindex = i                   // Current biggest index
+            for j in 0 ... len(A)-i:       // Find the max value
+                if A[j] > A[bigindex]:     // Found something bigger  
+                    bigindex = j           // Remember bigger index
+            swap(A, bigindex, len(A)-i-1)  // Put it into place
 
 
 Consider the example of the following array.

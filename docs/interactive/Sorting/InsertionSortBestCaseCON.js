@@ -15,12 +15,12 @@ $(document).ready(function() {
   };
 
   var pseudo = av.code([
-    "def insertionsort(A):",
-    "    for i in range(len(A)):  # Insert i'th record",
+    "function insertionSort(A):",
+    "    for i in 1 ... length(A)-1:",
     "        j = i",
     "        while j > 0 and A[j] < A[j-1]:",
     "            swap(A, j, j-1)",
-    "            j -= 1",
+    "            j = j-1",
   ], {lineNumbers: false,
       tags: {
         "sig": 1,
@@ -50,13 +50,13 @@ $(document).ready(function() {
   // Slide3
   pseudo.show();
   av.umsg(interpret["sc3"]);
-  pseudo.highlight("loop2");
+  pseudo.highlight("inloop");
   av.step();
 
   // Slide4
   av.umsg(interpret["sc4"]);
-  pseudo.unhighlight("loop2");
-  pseudo.highlight("loop1");
+  pseudo.unhighlight("inloop");
+  pseudo.highlight("outloop");
   av.g.rect(leftAlign, topAlign, 50, 20);
   av.label("$i=1$",  {top: "240px", left: 330});
   av.g.rect(leftAlign + rectWidth, topAlign, 50, 20);
@@ -88,5 +88,6 @@ $(document).ready(function() {
 
   //Slide 5
   av.umsg(interpret["sc5"]);
+  pseudo.unhighlight("outloop");
   av.recorded();
 });

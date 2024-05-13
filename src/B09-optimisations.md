@@ -31,33 +31,14 @@ records. If the list is already nearly sorted, then there will be few
 swaps anyway. Here is an implementation for Insertion Sort using this
 optimization.
 
-```python
-def insertionSortShift(A):
-    for i in range(1, len(A)): # Insert i'th record
-        temp = A[i]
-        j = i
-        while j > 0 and temp < A[j-1]:
-            A[j] = A[j-1]
-            j -= 1
-        A[j] = temp
-```
-
-```java
-// Instead of swapping, "shift" the values down the array
-public static <T extends Comparable<T>> void insertionSortShift(T[] A) {
-    for (int i = 1; i < A.length; i++) {
-        // Insert i'th record.
-        T temp = A[i];
-        int j = i;
-        while (j > 0 && temp.compareTo(A[j-1]) < 0) {
-            A[j] = A[j-1];
-            j--;
-        }
-        A[j] = temp;
-    }
-}
-```
-
+    function insertionSortShift(A):
+        for i in 1 ... length(A)-1:
+            temp = A[i]
+            j = i
+            while j > 0 and temp < A[j-1]:
+                A[j] = A[j-1]
+                j = j-1
+            A[j] = temp
 
 
 Now, you can test whether you understand how this works.
@@ -120,36 +101,17 @@ greater than $i$. Thus, we never need to check higher-positioned values
 again, which could save many iterations even if there are a few swaps
 lower down. Here is code to implement this approach.
 
-```python
-def bubbleCheckSwap(A):
-    n = len(A) - 1
-    while n > 0:
-        newn = 0
-        for i in range(n):
-            # if this pair is out of order
-            if A[i] > A[i+1]:
-                swap(A, i, i+1)
-                newn = i
-        n = newn
-```
 
-```java
-static <E extends Comparable<E>> void bubbleSortOpt(E[] A) {
-    int n = A.length - 1;
-    while (n > 0) {
-        int newn = 0;
-        for (int i = 0; i < n; i++) {
-            // If this pair is out of order.
-            if (A[i].compareTo(A[i+1]) > 0) {
-                Util.swap(A, i, i+1);
-                newn = i;
-            }
-        }
-        n = newn;
-    }
-}
-```
-
+    function bubbleCheckSwap(A):
+        n = length(A) - 1
+        while n > 0:
+            newn = 0
+            for i in 0 ... n-1:
+                // Check if this pair is out of order:
+                if A[i] > A[i+1]:
+                    swap(A, i, i+1)
+                    newn = i
+            n = newn
 
 
 The problem with this idea is that a considerable amount of effort

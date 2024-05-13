@@ -16,28 +16,14 @@ sorted list composed of those records already processed. Here is an
 implementation. The input is an array named `A` that stores $n$ records.
 
 :::: {#introduction}
-```python
-def insertionSort(A):
-    for i in range(len(A)):  # Insert i'th record
-        j = i
-        while j > 0 and A[j] < A[j-1]:
-            swap(A, j, j-1)
-            j -= 1
-```
 
-```java
-public static <T extends Comparable<T>> void insertionSort(T[] A) {
-    for (int i = 1; i < A.length; i++) {
-        // Insert i'th record.
-        int j = i;
-        while (j > 0 && A[j].compareTo(A[j-1]) < 0) {
-            Util.swap(A, j, j-1);
-            j--;
-        }
-    }
-}
-```
-
+    function insertionSort(A):
+        for i in 1 ... length(A)-1:
+            // Move the i'th element to its correct position.
+            j = i
+            while j > 0 and A[j] < A[j-1]:
+                swap(A, j, j-1)
+                j = j-1
 
 ::::
 
@@ -70,13 +56,15 @@ smaller keys.
 
 ### Insertion Sort Analysis
 
+Here is an explanation of the worst case cost of insertion sort:
+
 <inlineav id="InsertionSortWorstCaseCON" src="Sorting/InsertionSortWorstCaseCON.js" name="Insertion Sort Worst Case Slideshow" links="Sorting/InsertionSortWorstCaseCON.css"/>
 
-| 
+And here is an explanation of the cost of the best case:
 
 <inlineav id="InsertionSortBestCaseCON" src="Sorting/InsertionSortBestCaseCON.js" name="Insertion Sort Best Case Slideshow" links="Sorting/InsertionSortBestCaseCON.css"/>
 
-| 
+And here is the average case cost:
 
 <inlineav id="InsertionSortAverageCaseCON" src="Sorting/InsertionSortAverageCaseCON.js" name="Insertion Sort Average Case Slideshow" links="Sorting/InsertionSortAverageCaseCON.css"/>
 

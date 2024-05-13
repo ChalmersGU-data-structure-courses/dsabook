@@ -1,6 +1,12 @@
 #BubbleSortAnalysisCON {
   height: 450px;
 }
+#BubbleSortAnalysisCON .jsavcode {
+  position: absolute;
+  top: 150px;
+  left: 250px;
+}
+
 .rotated {
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);

@@ -11,17 +11,31 @@ $(document).ready(function() {
       code = config.code,                   // get the code object
       settings = config.getSettings();      // Settings for the AV
 
-  // Placeholder text translation needs to be set explicitly
-  $("#arrayValues").attr("placeholder", interpret("av_arrValsPlaceholder"));
+  var code = [
+    "function selectionSort(A):",
+    "    for i in 0 ... length(A)-1:        // Select i'th biggest element",
+    "        bigindex = i                   // Current biggest index",
+    "        for j in 0 ... len(A)-i:       // Find the max value",
+    "            if A[j] > A[bigindex]:     // Found something bigger  ",
+    "                bigindex = j           // Remember bigger index",
+    "        swap(A, bigindex, len(A)-i-1)  // Put it into place",
+  ];
+  var tags = {
+    "sig": 1,
+    "outloop": 2,
+    "initbig": 3,
+    "inloop": 4,
+    "compare": 5,
+    "setbig": 6,
+    "swap": 7,
+    "end": 9
+  };
 
   // Placeholder text translation needs to be set explicitly
   $("#arrayValues").attr("placeholder", interpret("av_arrValsPlaceholder"));
 
-  // add the layout setting preference
-  var arrayLayout =
-      settings.add("layout",
-                   {type: "select", options: {bar: "Bar", array: "Array"},
-                     label: "Array layout: ", value: "bar"});
+  // Placeholder text translation needs to be set explicitly
+  $("#arrayValues").attr("placeholder", interpret("av_arrValsPlaceholder"));
 
   // Initialize the arraysize dropdown list
   ODSA.AV.initArraySize(5, 16, 8);
@@ -92,11 +106,12 @@ $(document).ready(function() {
       ODSA.AV.reset(true);
       av = new JSAV($(".avcontainer"), {settings: settings});
 
-      // Create a new array using the layout the user has selected
-      arr = av.ds.array(arrValues, {indexed: true, layout: arrayLayout.val()});
+      // Create a new array using the bar layout
+      arr = av.ds.array(arrValues, {indexed: true, layout: "bar"});
 
       // Create the pseudocode display object
-      pseudo = av.code(code);
+      pseudo = av.code(code, {lineNumbers: false, tags: tags});
+
       av.umsg(interpret("av_c1"));
       av.displayInit();
       selectionsort();

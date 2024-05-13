@@ -47,62 +47,30 @@ temporarily copy records during the merge process. Parameters `left` and
 subarray being sorted. The initial call to `mergeSort` would be
 `mergeSort(array, temparray, 0, n-1)`.
 
-```python
-def mergeSort(A, temp, left, right):
-    if left == right:                 # List has one record
-        return
-    mid = (left + right) // 2         # Select midpoint
-    mergeSort(A, temp, left, mid)     # Mergesort first half
-    mergeSort(A, temp, mid+1, right)  # Mergesort second half
-    for i in range(left, right+1):    # Copy subarray to temp
-        temp[i] = A[i]
-    # Do the merge operation back to A
-    i1 = left
-    i2 = mid + 1
-    for curr in range(left, right+1):
-        if i1 == mid+1:               # Left sublist exhausted
-            A[curr] = temp[i2]
-            i2 += 1
-        elif i2 > right:              # Right sublist exhausted
-            A[curr] = temp[i1]
-            i1 += 1
-        elif temp[i1] <= temp[i2]:    # Get smaller value
-            A[curr] = temp[i1]
-            i1 += 1
-        else:
-            A[curr] = temp[i2]
-            i2 += 1
-```
-
-```java
-public static <T extends Comparable<T>> void mergeSort(T[] A, T[] temp, int left, int right) {
-    if (left == right)                   // List has one record
-        return;
-    int mid = (left + right) / 2;        // Select midpoint
-    mergeSort(A, temp, left, mid);       // Mergesort first half
-    mergeSort(A, temp, mid+1, right);    // Mergesort second half
-    for (int i = left; i <= right; i++)  // Copy subarray to temp
-        temp[i] = A[i];
-    // Do the merge operation back to A
-    int i1 = left;
-    int i2 = mid + 1;
-    for (int curr = left; curr <= right; curr++) {
-        if (i1 == mid+1) {               // Left sublist exhausted
-            A[curr] = temp[i2];
-            i2++;
-        } else if (i2 > right) {         // Right sublist exhausted
-            A[curr] = temp[i1];
-            i1++;
-        } else if (temp[i1].compareTo(temp[i2]) <= 0) {  // Get smaller value
-            A[curr] = temp[i1];
-            i1++;
-        } else {
-            A[curr] = temp[i2];
-            i2++;
-        }
-    }
-}
-```
+    function mergeSort(A, temp, left, right):
+        if left == right:                 // List has one record
+            return
+        mid = int((left + right) / 2)     // Select midpoint
+        mergeSort(A, temp, left, mid)     // Mergesort first half
+        mergeSort(A, temp, mid+1, right)  // Mergesort second half
+        for i in left ... right:          // Copy subarray to temp
+            temp[i] = A[i]
+        // Do the merge operation back to A
+        i1 = left
+        i2 = mid + 1
+        for curr in left ... right:
+            if i1 == mid+1:               // Left sublist exhausted
+                A[curr] = temp[i2]
+                i2 = i2+1
+            elif i2 > right:              // Right sublist exhausted
+                A[curr] = temp[i1]
+                i1 = i1+1
+            elif temp[i1] <= temp[i2]:    // Get smaller value
+                A[curr] = temp[i1]
+                i1 = i1+1
+            else:
+                A[curr] = temp[i2]
+                i2 = i2+1
 
 
 
