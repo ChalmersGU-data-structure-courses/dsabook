@@ -4,12 +4,12 @@
 In the [introduction](#information-retrieval-sets-and-maps) chapter we learnt about
 *sets* and *maps*, two of the most important ADTs.
 
-    class Set extends Collection:
+    interface Set extends Collection:
         add(x)       // Adds x to the set. Returns true if the element wasn't already in the set.
         remove(x)    // Removes x from the set. Returns true if the element was in the set.
         contains(x)  // Returns true if x is in the set.
 
-    class Map extends Iterable:
+    interface Map extends Iterable:
         put(key, value)   // Sets the value of the given key. Returns the previous value, or None.
         get(key)          // Returns the value associated with the given key, or None if the key is not there.
         remove(key)       // Removes and returns the value associated with the given key, or None if there is no key.
@@ -52,7 +52,7 @@ Sorted arrays also support the *sorted set* and *sorted map* operations
 such as *range queries* -- these can also be implemented using binary
 search. As a reminder, here are the relevant operations:
 
-    class SortedSet extends Set:
+    interface SortedSet extends Set:
         first()          // Returns the first (smallest) element. Raises an exception if the set is empty.
         last()           // Returns the last (largest) element. Raises an exception if the set is empty.
         floor(x)         // Returns the closest element <= x, or None if there is no such element.
@@ -61,7 +61,7 @@ search. As a reminder, here are the relevant operations:
         higher(x)        // Returns the closest element > x, or None if there is no such element.
         between(x1, x2)  // Returns all elements x such that x1 <= x <= x2.
 
-    class SortedMap extends Map:
+    interface SortedMap extends Map:
         firstKey()               // Returns the first (smallest) key. Raises an exception if the map is empty.
         lastKey()                // Returns the last (largest) key. Raises an exception if the map is empty.
         floorKey(key)            // Returns the closest key <= k, or None if there is no key.

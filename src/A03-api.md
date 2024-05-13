@@ -17,15 +17,14 @@ see the end of this module.
 (interfaces) in the same way as Java does. Instead they use a concept
 called [Duck Typing](https://en.wikipedia.org/wiki/Duck_typing), which
 means that it's enough to just implement the required methods -- you
-don't need a formal interface. However, in this course we will still
-pretend that there are interfaces, in Python too. So, we will define
-classes which act as interfaces, and call them abstract classes.
+don't need a formal interface. However, in this course book we will still
+pretend that there are interfaces, even in Python.
 
 ### Basic Abstract Data Types
 
 These include comparables:
 
-    class Comparable:
+    interface Comparable:
         // Returns an integer: negative (smaller), 0 (equal), positive (larger)
         this.compareTo(other)
         // All of these operators return a boolean:
@@ -38,15 +37,15 @@ These include comparables:
 
 And iterators and iterables:
 
-    class Iterator:
+    interface Iterator:
         next()     // Returns the next item. Fails if there are no more items.
 
-    class Iterable:
+    interface Iterable:
         iter()     // Returns a new iterator.
 
 As well as collections:
 
-    class Collection extends Iterable:
+    interface Collection extends Iterable:
         isEmpty()   // Returns true if the collection is empty.
         size()      // Returns the number of elements in this collection.
 
@@ -54,28 +53,29 @@ As well as collections:
 
 General lists:
 
-    class List extends Collection:
+    interface List extends Collection:
         add(i, x)  // Adds x at position i; where 0 <= i <= size.
         get(i)     // Returns the element at position i; where 0 <= i < size.
         set(i, x)  // Replaces the value at position i with x; where 0 <= i < size.
         remove(i)  // Removes the element at position i; where 0 <= i < size.
 
 Stacks:
-    class Stack extends Collection:
+
+    interface Stack extends Collection:
         push(x)    // Pushes x on top of the stack.
         pop()      // Pops the top of the stack and returns it. Raises an exception if the stack is empty.
         peek()     // Returns the top element, without removing it. Raises an exception if the stack is empty.
 
 Queues:
 
-    class Queue extends Collection:
+    interface Queue extends Collection:
         enqueue(x)  // Enqueues x at the end of the queue.
         dequeue()   // Dequeues the frontmost element. Raises an exception if the queue is empty.
         peek()      // Returns the frontmost element, without removing it. Raises an exception if the queue is empty.
 
 Priority queues:
 
-    class PriorityQueue extends Collection:
+    interface PriorityQueue extends Collection:
         add(x)       // Adds x to the priority queue.
         removeMin()  // Removes and returns the minimum element. Raises an exception if the priority queue is empty.
         getMin()     // Returns the minimum element, without removing it. Raises an exception if the priority queue is empty.
@@ -85,14 +85,14 @@ Priority queues:
 
 Sets with no internal order:
 
-    class Set extends Collection:
+    interface Set extends Collection:
         add(x)       // Adds x to the set. Returns true if the element wasn't already in the set.
         remove(x)    // Removes x from the set. Returns true if the element was in the set.
         contains(x)  // Returns true if x is in the set.
 
 Sets where the elements are sorted:
 
-    class SortedSet extends Set:
+    interface SortedSet extends Set:
         first()          // Returns the first (smallest) element. Raises an exception if the set is empty.
         last()           // Returns the last (largest) element. Raises an exception if the set is empty.
         floor(x)         // Returns the closest element <= x, or None if there is no such element.
@@ -108,7 +108,7 @@ Maps are also called dictionaries or associative arrays.
 
 Maps with no internal order:
 
-    class Map extends Iterable:
+    interface Map extends Iterable:
         put(key, value)   // Sets the value of the given key. Returns the previous value, or None.
         get(key)          // Returns the value associated with the given key, or None if the key is not there.
         remove(key)       // Removes and returns the value associated with the given key, or None if there is no key.
@@ -118,7 +118,7 @@ Maps with no internal order:
 
 Maps where the keys are sorted:
 
-    class SortedMap extends Map:
+    interface SortedMap extends Map:
         firstKey()               // Returns the first (smallest) key. Raises an exception if the map is empty.
         lastKey()                // Returns the last (largest) key. Raises an exception if the map is empty.
         floorKey(key)            // Returns the closest key <= k, or None if there is no key.
@@ -132,7 +132,7 @@ Maps where the keys are sorted:
 
 Finally, graphs:
 
-    class Graph:
+    interface Graph:
         addVertex(v)      // Adds the vertex v to the graph. Returns true if it wasn't already in the graph.
         addEdge(e)        // Adds the edge e to the graph. Returns true if it wasn't already in the graph.
         vertices()        // Returns a Collection of all vertices in the graph.
@@ -140,7 +140,7 @@ Finally, graphs:
         vertexCount()     // Returns the number of vertices in the graph.
         edgeCount()       // Returns the number of edges in the graph.
 
-    class Edge:
+    interface Edge:
         start    // start vertex
         end      // end vertex
         weight   // weight, defaults to 1.0

@@ -42,7 +42,7 @@ cannot contain duplicate items: if we try to add an item that is already
 present, nothing happens, and the set is left unchanged. Recall the
 interface for sets from [the course API](#all-adts-used-in-this-book):
 
-    class Set extends Collection:
+    interface Set extends Collection:
         add(x)       // Adds x to the set. Returns true if the element wasn't already in the set.
         remove(x)    // Removes x from the set. Returns true if the element was in the set.
         contains(x)  // Returns true if x is in the set.
@@ -63,7 +63,7 @@ set. Then to spell-check a given word, we just call `contains`.
             for word in list_of_valid_words:
                 this.set_of_valid_words.add(word)
 
-        method is_valid_word(word):
+        is_valid_word(word):
             return this.set_of_valid_words.contains(word)
 
     function main(list_of_words_to_check):
@@ -92,7 +92,7 @@ other hand, a map *can* contain duplicate *values*: two keys can have
 the same value. Recall the interface for maps from
 [the course API](#all-adts-used-in-this-book):
 
-    class Map extends Iterable:
+    interface Map extends Iterable:
         put(key, value)   // Sets the value of the given key. Returns the previous value, or None.
         get(key)          // Returns the value associated with the given key, or None if the key is not there.
         remove(key)       // Removes and returns the value associated with the given key, or None if there is no key.
@@ -119,15 +119,15 @@ call `database.get(pnr)`.
         PersonDatabase():
             this.database = new Map()
 
-        method put(p):
+        put(p):
             // Put the person in the database.
             this.database.put(p.pnr, p)
 
-        method remove(p):
+        remove(p):
             // Remove a person from the database.
             this.database.remove(p.pnr)
 
-        method find(pnr):
+        find(pnr):
             // Find the person who has a given personnummer.
             return this.database.get(pnr)
 
@@ -164,7 +164,7 @@ the multimap.
         SearchEngine():
             this.database = new Map()
 
-        method add(doc):
+        add(doc):
             // Add a new document to the database.
             for word in doc.contents:
                 // Get the set of documents containing this word.
@@ -177,7 +177,7 @@ the multimap.
                 set.add(doc)
                 this.database.put(word, set)
 
-        method find(word):
+        find(word):
             // Find all documents containing a given word.
             if this.database.containsKey(word):
                 return this.database.get(word)
@@ -249,7 +249,7 @@ that take advantage of the natural order of the keys:
 Recall the interface for sorted maps from
 [the course API](#all-adts-used-in-this-book):
 
-    class SortedMap extends Map:
+    interface SortedMap extends Map:
         firstKey()               // Returns the first (smallest) key. Raises an exception if the map is empty.
         lastKey()                // Returns the last (largest) key. Raises an exception if the map is empty.
         floorKey(key)            // Returns the closest key <= k, or None if there is no key.
@@ -262,7 +262,7 @@ As well as a sorted map, it is also possible to have a *sorted set*.
 Recall the interface for sorted sets from
 [the course API](#all-adts-used-in-this-book):
 
-    class SortedSet extends Set:
+    interface SortedSet extends Set:
         first()          // Returns the first (smallest) element. Raises an exception if the set is empty.
         last()           // Returns the last (largest) element. Raises an exception if the set is empty.
         floor(x)         // Returns the closest element <= x, or None if there is no such element.
@@ -286,7 +286,7 @@ having the key be a population number and the value be a set of towns.
         CityPopulations():
             this.cities = new SortedMap()
 
-        method add(city):
+        add(city):
             // Add a new city to the database.
             // Get the set of documents containing this city
             set = this.cities.get(city.population)
@@ -298,7 +298,7 @@ having the key be a population number and the value be a set of towns.
             set.add(city)
             this.cities.put(city.population, set)
 
-        method findBetween(lower, upper):
+        findBetween(lower, upper):
             // Find all cities with a population between lower and upper
             result = new Set()
             // The range query returns a set of keys, i.e. populations.

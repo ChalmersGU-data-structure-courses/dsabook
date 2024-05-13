@@ -54,11 +54,13 @@
 		</list>
 		<list name="defs">
 			<item>abstract</item>
+			<item>interface</item>
 			<item>class</item>
 			<item>subclass</item>
 			<item>declare</item>
 			<item>define</item>
 			<item>function</item>
+			<item>constructor</item>
 			<item>method</item>
 			<item>delete</item>
 			<item>global</item>

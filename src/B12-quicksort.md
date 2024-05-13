@@ -91,7 +91,7 @@ whole array, but also part of the array. Therefore `partition` needs the
 positions of the leftmost and rightmost elements in the subarray that we
 will partition.
 
-    def partition(A, left, right, pivot):
+    function partition(A, left, right, pivot):
         swap(A, left, pivot)   // Put pivot at the leftmost index
         pivot = left
         left = left+1          // Start partitioning from the element after the pivot
