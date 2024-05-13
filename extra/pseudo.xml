@@ -110,25 +110,46 @@
 			<item>case</item>
 		</list>
 		<list name="builtinfuncs">
+			<!-- builtin classes -->
+			<item>Array</item>
+			<item>Boolean</item>
+			<item>Collection</item>
+			<item>Comparable</item>
+			<item>Comparator</item>
+			<item>Dictionary</item>
+			<item>Edge</item>
+			<item>File</item>
+			<item>Float</item>
+			<item>Graph</item>
+			<item>Int</item>
+			<item>Integer</item>
+			<item>Iterable</item>
+			<item>Iterator</item>
+			<item>KVPair</item>
+			<item>List</item>
+			<item>Map</item>
+			<item>Number</item>
+			<item>Object</item>
+			<item>Pair</item>
+			<item>PriorityQueue</item>
+			<item>Queue</item>
+			<item>Set</item>
+			<item>SortedMap</item>
+			<item>SortedSet</item>
+			<item>Tuple</item>
+			<item>Type</item>
+
 			<item>abs</item>
 			<item>all</item>
 			<item>any</item>
-			<item>Boolean</item>
-			<item>Bytes</item>
 			<item>char</item>
 			<item>compare</item>
-			<item>Dictionary</item>
 			<item>enumerate</item>
 			<item>evaluate</item>
-			<item>File</item>
 			<item>filter</item>
-			<item>Float</item>
 			<item>format</item>
 			<item>hash</item>
 			<item>hex</item>
-			<item>Int</item>
-			<item>Integer</item>
-			<item>Number</item>
 			<item>instance</item>
 			<item>instance of</item>
 			<item>is instance of</item>
@@ -136,13 +157,9 @@
 			<item>is subclass of</item>
 			<item>iterator</item>
 			<item>length</item>
-			<item>List</item>
-			<item>Array</item>
-			<item>map</item>
 			<item>max</item>
 			<item>min</item>
 			<item>next</item>
-			<item>Object</item>
 			<item>open</item>
 			<item>ord</item>
 			<item>power</item>
@@ -151,13 +168,10 @@
 			<item>reduce</item>
 			<item>reversed</item>
 			<item>round</item>
-			<item>Set</item>
 			<item>slice</item>
 			<item>sorted</item>
 			<item>string</item>
 			<item>sum</item>
-			<item>Tuple</item>
-			<item>Type</item>
 			<item>unicode</item>
 			<item>zip</item>
 		</list>
