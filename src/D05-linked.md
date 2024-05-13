@@ -25,56 +25,26 @@ has a single pointer to the next node on the list.
 
 <inlineav id="LinkedList-Iteration-CON" src="ChalmersGU/LinkedList-Iteration-CON.js" name="Linked List Slideshow 1" links="ChalmersGU/CGU-Styles.css"/>
 
-Our class for linked lists contains two private variables, one pointer
+Our class for linked lists contains two instance variables, one pointer
 to the head of the list, and a variable storing the number of elements.
 (This second variable is in theory unnecessary, but it improves the
 efficiency of getting the list size).
 
-```python
-class LinkedList(List):
-    def __init__(self):
-        self._head = None    # Pointer to list header
-        self._listSize = 0   # Size of list
-```
-
-```java
-class LinkedList<E> implements List<E> {
-    private Node head;      // Pointer to list header
-    private int listSize;   // Size of list
-
-    LinkedList() {
-        head = null;
-        listSize = 0;
-    }
-```
+    class LinkedList implements List:
+        LinkedList():
+            this.head = null    // Pointer to list header
+            this.listSize = 0   // Size of list
 
 
-
-Here is our implementation for list nodes, an inner private class
-`Node`. Objects in the `Node` class contain a field `elem` to store the
+Here is our implementation for list nodes, the class `Node`. 
+Objects in the `Node` class contain a field `elem` to store the
 element value, and a field `next` to store a pointer to the next node on
 the list.
 
-```python
-# Python does not have internal classes, so we have to make the list node standalone.
-class LinkedListNode:
-    def __init__(self, elem, next):
-        self.elem = elem   # Value for this node
-        self.next = next   # Pointer to next node in list
-```
-
-```java
-    private class Node {
-        E elem;       // Value for this node
-        Node next;    // Pointer to next node in list
-
-        Node(E elem, Node next) {
-            this.elem = elem;
-            this.next = next;
-        }
-    }
-```
-
+    class Node:
+        Node(elem, next):
+            this.elem = elem   // Value for this node
+            this.next = next   // Pointer to next node in list
 
 
 ### Getting and setting values
@@ -82,44 +52,23 @@ class LinkedListNode:
 If we want to get or set the value at a certain index, we simply iterate
 through the nodes in sequence until we get to the node we want.
 
-```python
-    def get(self, i):
-        if not (0 <= i < self._listSize): raise IndexError("list index out of range")
-        current = self._head
-        for _ in range(i):
-            current = current.next
-        return current.elem
+    class LinkedList implements List:
+        ...
+        get(i):
+            if not (0 <= i < this.listSize): 
+                throw error "list index out of range"
+            current = this.head
+            repeat i times:
+                current = current.next
+            return current.elem
 
-    def set(self, i, x):
-        if not (0 <= i < self._listSize): raise IndexError("list index out of range")
-        current = self._head
-        for _ in range(i):
-            current = current.next
-        old = current.elem
-        current.elem = x
-        return old
-```
-
-```java
-    public E get(int i) {
-        if (!(0 <= i && i < listSize)) throw new IndexOutOfBoundsException("list index out of range");
-        Node current = head;
-        for (int k = 0; k < i; k++)
-            current = current.next;
-        return current.elem;
-    }
-
-    public E set(int i, E x) {
-        if (!(0 <= i && i < listSize)) throw new IndexOutOfBoundsException("list index out of range");
-        Node current = head;
-        for (int k = 0; k < i; k++)
-            current = current.next;
-        E old = current.elem;
-        current.elem = x;
-        return old;
-    }
-```
-
+        set(i, x):
+            if not (0 <= i < this.listSize): 
+                throw error "list index out of range"
+            current = this.head
+            repeat i times:
+                current = current.next
+            current.elem = x
 
 
 ### Adding and removing nodes
@@ -149,34 +98,19 @@ beginning of a list, and appending at the end.
 
 Here's the code for addition.
 
-```python
-    def add(self, i, x):
-        if not (0 <= i <= self._listSize): raise IndexError("list index out of range")
-        if i == 0:
-            self._head = LinkedListNode(x, self._head)
-        else:
-            prev = self._head
-            for _ in range(i-1):
-                prev = prev.next
-            prev.next = LinkedListNode(x, prev.next)
-        self._listSize += 1
-```
-
-```java
-    public void add(int i, E x) {
-        if (!(0 <= i && i <= listSize)) throw new IndexOutOfBoundsException("list index out of range");
-        if (i == 0) {
-            head = new Node(x, head);
-        } else {
-            Node prev = head;
-            for (int k = 0; k < i-1; k++)
-                prev = prev.next;
-            prev.next = new Node(x, prev.next);
-        }
-        listSize++;
-    }
-```
-
+    class LinkedList implements List:
+        ...
+        add(i, x):
+            if not (0 <= i <= this.listSize):
+                throw error "list index out of range"
+            if i == 0:
+                this.head = new Node(x, this.head)
+            else:
+                prev = this.head
+                repeat i-1 times:
+                    prev = prev.next
+                prev.next = new Node(x, prev.next)
+            this.listSize = this.listSize + 1
 
 
 Here's an exercise for adding a value to a linked list.
@@ -189,43 +123,23 @@ Here's an exercise for adding a value to a linked list.
 
 Here's the code for deletion:
 
-```python
-    def remove(self, i):
-        if not (0 <= i < self._listSize): raise IndexError("list index out of range")
-        if i == 0:
-            removed = self._head
-            self._head = removed.next
-        else:
-            prev = self._head
-            for _ in range(i-1):
-                prev = prev.next
-            removed = prev.next
-            prev.next = removed.next
-        removed.next = None   # For garbage collection
-        self._listSize -= 1
-        return removed.elem
-```
-
-```java
-    public E remove(int i) {
-        if (!(0 <= i && i < listSize)) throw new IndexOutOfBoundsException("list index out of range");
-        Node removed;
-        if (i == 0) {
-            removed = head;
-            head = removed.next;
-        } else {
-            Node prev = head;
-            for (int k = 0; k < i-1; k++)
-                prev = prev.next;
-            removed = prev.next;
-            prev.next = removed.next;
-        }
-        removed.next = null;   // For garbage collection
-        listSize--;
-        return removed.elem;
-    }
-```
-
+    class LinkedList implements List:
+        ...
+        remove(self, i):
+            if not (0 <= i < this.listSize):
+                throw error "list index out of range"
+            if i == 0:
+                removed = this.head
+                this.head = removed.next
+            else:
+                prev = this.head
+                repeat i-1 times:
+                    prev = prev.next
+                removed = prev.next
+                prev.next = removed.next
+            removed.next = null   // For garbage collection
+            this.listSize = this.listSize - 1
+            return removed.elem
 
 
 And here's an exercise.
@@ -250,200 +164,4 @@ kind of iterator is called a
 [ListIterator](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/ListIterator.html),
 which is part of Java's standard
 [LinkedList](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/LinkedList.html).
-
-### Linked List: Full code
-
-Finally, here is the full source code for the class `LinkedList`.
-
-```python
-#/* *** ODSATag: LinkedListVars *** */
-class LinkedList(List):
-    def __init__(self):
-        self._head = None    # Pointer to list header
-        self._listSize = 0   # Size of list
-#/* *** ODSAendTag: LinkedListVars *** */
-
-#/* *** ODSATag: LinkedListGetSet *** */
-    def get(self, i):
-        if not (0 <= i < self._listSize): raise IndexError("list index out of range")
-        current = self._head
-        for _ in range(i):
-            current = current.next
-        return current.elem
-
-    def set(self, i, x):
-        if not (0 <= i < self._listSize): raise IndexError("list index out of range")
-        current = self._head
-        for _ in range(i):
-            current = current.next
-        old = current.elem
-        current.elem = x
-        return old
-#/* *** ODSAendTag: LinkedListGetSet *** */
-
-#/* *** ODSATag: LinkedListAdd *** */
-    def add(self, i, x):
-        if not (0 <= i <= self._listSize): raise IndexError("list index out of range")
-        if i == 0:
-            self._head = LinkedListNode(x, self._head)
-        else:
-            prev = self._head
-            for _ in range(i-1):
-                prev = prev.next
-            prev.next = LinkedListNode(x, prev.next)
-        self._listSize += 1
-#/* *** ODSAendTag: LinkedListAdd *** */
-
-#/* *** ODSATag: LinkedListRemove *** */
-    def remove(self, i):
-        if not (0 <= i < self._listSize): raise IndexError("list index out of range")
-        if i == 0:
-            removed = self._head
-            self._head = removed.next
-        else:
-            prev = self._head
-            for _ in range(i-1):
-                prev = prev.next
-            removed = prev.next
-            prev.next = removed.next
-        removed.next = None   # For garbage collection
-        self._listSize -= 1
-        return removed.elem
-#/* *** ODSAendTag: LinkedListRemove *** */
-
-    def isEmpty(self):
-        return self._listSize == 0
-
-    def size(self):
-        return self._listSize
-
-#/* *** ODSATag: LinkedListIterator *** */
-    def __iter__(self):
-        current = self._head
-        while current is not None:
-            yield current.elem
-            current = current.next
-#/* *** ODSAendTag: LinkedListIterator *** */
-
-
-#/* *** ODSATag: LinkedListNode *** */
-# Python does not have internal classes, so we have to make the list node standalone.
-class LinkedListNode:
-    def __init__(self, elem, next):
-        self.elem = elem   # Value for this node
-        self.next = next   # Pointer to next node in list
-#/* *** ODSAendTag: LinkedListNode *** */
-```
-
-```java
-/* *** ODSATag: LinkedListVars *** */
-class LinkedList<E> implements List<E> {
-    private Node head;      // Pointer to list header
-    private int listSize;   // Size of list
-
-    LinkedList() {
-        head = null;
-        listSize = 0;
-    }
-/* *** ODSAendTag: LinkedListVars *** */
-
-/* *** ODSATag: LinkedListNode *** */
-    private class Node {
-        E elem;       // Value for this node
-        Node next;    // Pointer to next node in list
-
-        Node(E elem, Node next) {
-            this.elem = elem;
-            this.next = next;
-        }
-    }
-/* *** ODSAendTag: LinkedListNode *** */
-
-/* *** ODSATag: LinkedListGetSet *** */
-    public E get(int i) {
-        if (!(0 <= i && i < listSize)) throw new IndexOutOfBoundsException("list index out of range");
-        Node current = head;
-        for (int k = 0; k < i; k++)
-            current = current.next;
-        return current.elem;
-    }
-
-    public E set(int i, E x) {
-        if (!(0 <= i && i < listSize)) throw new IndexOutOfBoundsException("list index out of range");
-        Node current = head;
-        for (int k = 0; k < i; k++)
-            current = current.next;
-        E old = current.elem;
-        current.elem = x;
-        return old;
-    }
-/* *** ODSAendTag: LinkedListGetSet *** */
-
-/* *** ODSATag: LinkedListAdd *** */
-    public void add(int i, E x) {
-        if (!(0 <= i && i <= listSize)) throw new IndexOutOfBoundsException("list index out of range");
-        if (i == 0) {
-            head = new Node(x, head);
-        } else {
-            Node prev = head;
-            for (int k = 0; k < i-1; k++)
-                prev = prev.next;
-            prev.next = new Node(x, prev.next);
-        }
-        listSize++;
-    }
-/* *** ODSAendTag: LinkedListAdd *** */
-
-/* *** ODSATag: LinkedListRemove *** */
-    public E remove(int i) {
-        if (!(0 <= i && i < listSize)) throw new IndexOutOfBoundsException("list index out of range");
-        Node removed;
-        if (i == 0) {
-            removed = head;
-            head = removed.next;
-        } else {
-            Node prev = head;
-            for (int k = 0; k < i-1; k++)
-                prev = prev.next;
-            removed = prev.next;
-            prev.next = removed.next;
-        }
-        removed.next = null;   // For garbage collection
-        listSize--;
-        return removed.elem;
-    }
-/* *** ODSAendTag: LinkedListRemove *** */
-
-    public boolean isEmpty() {
-        return listSize == 0;
-    }
-
-    public int size() {
-        return listSize;
-    }
-
-
-/* *** ODSATag: LinkedListIterator *** */
-    public Iterator<E> iterator() {
-        return new LinkedListIterator();
-    }
-
-    private class LinkedListIterator implements Iterator<E> {
-        private Node current;
-        LinkedListIterator() {
-            current = head;
-        }
-        public boolean hasNext() {
-            return current != null;
-        }
-        public E next() {
-            E x = current.elem;
-            current = current.next;
-            return x;
-        }
-    }
-/* *** ODSAendTag: LinkedListIterator *** */
-}
-```
-
 

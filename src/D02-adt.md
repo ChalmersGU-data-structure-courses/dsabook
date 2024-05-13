@@ -55,20 +55,9 @@ A collection contains a number of elements, and it supports only two
 things: we can inquire how many elements it contains, and we can iterate
 through all elements, one at the time (i.e., it is Iterable).
 
-```python
-class Collection(Iterable):
-    def isEmpty(self):  """Returns true if the collection is empty."""
-    def size(self):     """Returns the number of elements in this collection."""
-```
-
-```java
-// Note: This is a subset of java.util.Collection
-interface Collection<E> extends Iterable<E> {
-    boolean isEmpty();  // Returns true if the collection is empty.
-    int size();         // Returns the number of elements in this collection.
-}
-```
-
+    interface Collection extends Iterable:
+        isEmpty()   // Returns true if the collection is empty.
+        size()      // Returns the number of elements in this collection.
 
 
 Note that this very interface will not be implemented as it is, but
@@ -115,57 +104,37 @@ four main operations we want to support:
 Apart from these four, we also want to be able to loop through the list
 elements in order (i.e., an `iterator` over the elements).
 
-```python
-class List(Collection):
-    def add(self, i, x): """Adds x at position i; where 0 <= i <= size."""
-    def get(self, i):    """Returns the element at position i; where 0 <= i < size."""
-    def set(self, i, x): """Replaces the value at position i with x; where 0 <= i < size."""
-    def remove(self, i): """Removes the element at position i; where 0 <= i < size."""
-    # Note: __iter__() should yield the elements starting from position 0.
-```
-
-```java
-// Note: This is a subset of java.util.List
-interface List<E> extends Collection<E> {
-    void add(int i, E x);  // Adds x at position i; where 0 <= i <= size.
-    E get(int i);          // Returns the element at position i; where 0 <= i < size.
-    E set(int i, E x);     // Replaces the value at position i with x; where 0 <= i < size..
-    E remove(int i);       // Removes the element at position i; where 0 <= i < size..
-    // Note: iterator() should yield the elements starting from position 0.
-}
-```
+    interface List extends Collection:
+        add(i, x)  // Adds x at position i; where 0 <= i <= size.
+        get(i)     // Returns the element at position i; where 0 <= i < size.
+        set(i, x)  // Replaces the value at position i with x; where 0 <= i < size.
+        remove(i)  // Removes the element at position i; where 0 <= i < size.
 
 <inlineav id="ListADT-Positions-CON" src="ChalmersGU/ListADT-Positions-CON.js" name="List ADT Positions Slideshow" links="ChalmersGU/CGU-Styles.css"/>
 
 The `List` member functions allow you to build a list with elements in
 any desired order, and to access any desired position in the list.
 
-A list can be iterated through as follows:
+A list `L` can be iterated through as follows:
 
-```java
-Iterator<E> it = L.iterator();
-while (it.hasNext()) {
-    E elem = it.next();
-    doSomething(elem);
-}
-```
+    iter = L.iterator()
+    elem = iter.next()
+    while elem:
+        doSomething(elem)
+        elem = iter.next()
 
-
-
-Both Java and Python has syntactic sugar for iterators, so the same
-iteration can be written like this:
-
-```java
-for (E elem : L) {
-    doSomething(elem);
-}
-```
-
-
-
-In this example, each element of the list in turn is stored in `it`, and
-passed to the `doSomething` function. The loop terminates when the
+In this example, each element of the list in turn is stored in `iter`, 
+and passed to the `doSomething` function. The loop terminates when the
 current position reaches the end of the list.
+
+(Note that the loop looks slightly different in Java and Python, 
+because of how they implement iterators.)
+
+Many languages, including Java and Python, has syntactic sugar for iterators, 
+so the same iteration can be written something like this:
+
+    for each elem in L:
+        doSomething(elem)
 
 The list class declaration presented here is just one of many possible
 interpretations for lists. Our list interface provides most of the
@@ -176,18 +145,12 @@ if there is an occurrence of a given element in the list, and `false`
 otherwise. The `find` method needs no knowledge about the specific list
 implementation, just the list ADT.
 
-```java
-// Return true if k is in list L, false otherwise.
-static <E> boolean find(List<E> L, E k) {
-    for (E n : L) {
-        if (k.equals(n))
-            return true;  // Found k
-    }
-    return false;         // k not found
-}
-```
-
-
+    // Return true if k is in list L, false otherwise.
+    function find(L, k):
+        for each n in L:
+            if k == n:
+                return true  // Found k.
+        return false         // k not found.
 
 There are two standard approaches to implementing lists, the
 [array-based list](#static-array-based-lists), and the

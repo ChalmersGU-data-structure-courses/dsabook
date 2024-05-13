@@ -11,67 +11,43 @@ How can we modify our class to allow for any number of elements? One
 solution is to create a larger internal array whenever the capacity is
 exceeded, and copy over all elements to the new one.
 
-```python
-    def _resizeArray(self, newCapacity):
-        if newCapacity < self._minCapacity: return
-        newArray = [None] * int(newCapacity)
-        for i in range(self._listSize):
-            newArray[i] = self._internalArray[i]
-        self._internalArray = newArray
-```
-
-```java
-    private void resizeArray(int newCapacity) {
-        if (newCapacity < MinCapacity) return;
-        @SuppressWarnings("unchecked")
-        E[] newArray = (E[]) new Object[newCapacity];
-        for (int i = 0; i < listSize; i++)
-            newArray[i] = internalArray[i];
-        internalArray = newArray;
-    }
-```
+    class DynamicArrayList implements List:
+        ...
+        resizeArray(newCapacity):
+            if newCapacity < minimumCapacity: 
+                return
+            newArray = new Array(newCapacity)
+            for i = 0 to this.listSize-1:
+                newArray[i] = this.internalArray[i]
+            this.internalArray = newArray
 
 
+So, how large should the new internal array be? For now, let's 
+**double the size of the internal array** when we need to resize, 
+which means that we add the following if-clause to the `add` method:
 
-So, how large should the new internal array be? For now, let's **double
-the size of the internal array** when we need to resize, which means
-that we add the following if-clause to the `add` method:
-
-    if listSize >= size of internalArray
-        resizeArray(size of internalArray * 2)
+        if listSize >= internalArray.size()
+            resizeArray(internalArray.size() * 2)
 
 That's the only difference from the `add` method from
 **StaticArrayList**. So the dynamic `add` method will look like this.
 
-```python
-    def add(self, i, x):
-        if not (0 <= i <= self._listSize): raise IndexError("list index out of range")
-        if self._listSize >= len(self._internalArray):
-            self._resizeArray(len(self._internalArray) * self._capacityMultiplier)
-        self._listSize += 1
-        for k in reversed(range(i+1, self._listSize)):
-            self._internalArray[k] = self._internalArray[k-1]
-        self._internalArray[i] = x
-```
-
-```java
-    public void add(int i, E x) {
-        if (!(0 <= i && i <= listSize)) throw new IndexOutOfBoundsException("list index out of range");
-        if (listSize >= internalArray.length)
-            resizeArray((int) (internalArray.length * CapacityMultiplier));
-        listSize++;
-        for (int k = listSize-1; k > i; k--)
-            internalArray[k] = internalArray[k-1];
-        internalArray[i] = x;
-    }
-```
-
+    class DynamicArrayList implements List:
+        ...
+        add(i, x):
+            if not (0 <= i <= this.listSize):
+                throw error "list index out of range"
+            if this.listSize >= this.internalArray.size()
+                this.resizeArray(this.internalArray.size() * 2)
+            this.listSize = this.listSize + 1
+            for k = this.listSize-1 downto i+1:
+                this.internalArray[k] = this.internalArray[k-1]
+            this.internalArray[i] = x
 
 
 As explained below, we don't have to double the size, but we can
 multiply by 3 or 1.5 or 1.1. The important point is that we don't add a
-constant number, but increase the size by a factor. This factor is the
-`CapacityMultiplier` in the code above.
+constant number, but increase the size by a factor. 
 
 <inlineav id="DynamicArrayList-Append-CON" src="ChalmersGU/DynamicArrayList-Append-CON.js" name="Dynamic Array-based List Addition Slideshow" links="ChalmersGU/CGU-Styles.css"/>
 
@@ -96,8 +72,8 @@ resize it more often.
 We will explore these tradeoffs by looking at the performance of the
 following small program under different resizing strategies:
 
-    list = new dynamic array list
-    for i in 1...n:
+    list = new DynamicArrayList
+    for i = 1 to n:
         list.add(i)
 
 The program builds a list of length *n* by repeatedly
@@ -111,8 +87,8 @@ that the program ought to take *linear time*.
 What happens if we only grow the internal array by 1 element when we
 resize it?
 
-    if listSize >= size of internalArray
-        resizeArray(size of internalArray + 1)
+    if listSize >= internalArray.size()
+        resizeArray(internalArray.size() + 1)
 
 Every time we call `add`, the internal array will be resized. Resizing
 the array takes linear time, because if the internal array has size $n$,
@@ -307,8 +283,8 @@ shrink the internal array! E.g., we can shrink the array (i.e., halve
 it), when it is only 1/3 full. So we can add the following lines to the
 end of the `remove` method:
 
-    if listSize <= size of internalArray * 1/3
-        resizeArray(size of internalArray * 1/2)
+    if listSize <= internalArray.size() * 1/3:
+        resizeArray(internalArray.size * 1/2)
 
 That's the only difference from the `StaticArrayList.remove` method.
 
@@ -317,204 +293,23 @@ before. The only thing that matters is that the minimum load factor
 (1/3) is smaller than the shrinking factor (1/2). So the dynamic
 `remove` method will look like this.
 
-```python
-    def remove(self, i):
-        if not (0 <= i < self._listSize): raise IndexError("list index out of range")
-        x = self._internalArray[i]
-        for k in range(i+1, self._listSize):
-            self._internalArray[k-1] = self._internalArray[k]
-        self._listSize -= 1
-        self._internalArray[self._listSize] = None   # For garbage collection
-        if self._listSize <= len(self._internalArray) * self._minLoadFactor:
-            self._resizeArray(len(self._internalArray) / self._capacityMultiplier)
-        return x
-```
-
-```java
-    public E remove(int i) {
-        if (!(0 <= i && i < listSize)) throw new IndexOutOfBoundsException("list index out of range");
-        E x = internalArray[i];
-        for (int k = i+1; k < listSize; k++)
-            internalArray[k-1] = internalArray[k];
-        listSize--;
-        internalArray[listSize] = null;   // For garbage collection
-        if (listSize <= internalArray.length * MinLoadFactor)
-            resizeArray((int) (internalArray.length / CapacityMultiplier));
-        return x;
-    }
-```
-
-
+    class DynamicArrayList implements List:
+        ...
+        remove(i):
+            if not (0 <= i < this.listSize):
+                throw error "list index out of range"
+            x = this.internalArray[i]
+            for k = i+1 to this.listSize-1:
+                this.internalArray[k-1] = this.internalArray[k]
+            this.listSize = this.listSize - 1
+            this.internalArray[this.listSize] = null   // For garbage collection
+            if this.listSize <= size of this.internalArray * 1/3:
+                this.resizeArray(this.internalArray.size() * 1/2)
+            return x
 
 | 
 
 <inlineav id="DynamicArrayList-Remove-CON" src="ChalmersGU/DynamicArrayList-Remove-CON.js" name="Dynamic Array-based List Deletion Slideshow" links="ChalmersGU/CGU-Styles.css"/>
-
-### Dynamic Array-based List: Full code
-
-Finally, here is the full source code for the class `DynamicArrayList`.
-Note that now the constructor doesn't take any capacity argument, since
-the internal array will automatically grow when needed.
-
-In this example, we set the capacity multiplier to 1.5, meaning that we
-grow by 50% and shrink by 33% on every resize. The minimum load factor
-is set to 50% (which is smaller than 1/1.5 = 67%), and the minimum array
-capacity is 8. All these constants can be changed at will.
-
-```python
-#/* *** ODSATag: DynamicArrayListInit *** */
-class DynamicArrayList(List):
-    _minCapacity = 8            # Minimum capacity of internalArray
-    _minLoadFactor = 0.5        # Must be smaller than 1/CapacityMultiplier
-    _capacityMultiplier = 1.5   # Factor to grow/shrink the capacity
-
-    def __init__(self):
-        self._internalArray = [None] * self._minCapacity   # Internal array containing the list elements
-        self._listSize = 0                                 # Size of list
-#/* *** ODSAendTag: DynamicArrayListInit *** */
-
-#/* *** ODSATag: DynamicArrayListGetSet *** */
-    def get(self, i):
-        if not (0 <= i < self._listSize): raise IndexError("list index out of range")
-        return self._internalArray[i]
-
-    def set(self, i, x):
-        if not (0 <= i < self._listSize): raise IndexError("list index out of range")
-        old = self._internalArray[i]
-        self._internalArray[i] = x
-        return old
-#/* *** ODSAendTag: DynamicArrayListGetSet *** */
-
-#/* *** ODSATag: DynamicArrayListAdd *** */
-    def add(self, i, x):
-        if not (0 <= i <= self._listSize): raise IndexError("list index out of range")
-        if self._listSize >= len(self._internalArray):
-            self._resizeArray(len(self._internalArray) * self._capacityMultiplier)
-        self._listSize += 1
-        for k in reversed(range(i+1, self._listSize)):
-            self._internalArray[k] = self._internalArray[k-1]
-        self._internalArray[i] = x
-#/* *** ODSAendTag: DynamicArrayListAdd *** */
-
-#/* *** ODSATag: DynamicArrayListRemove *** */
-    def remove(self, i):
-        if not (0 <= i < self._listSize): raise IndexError("list index out of range")
-        x = self._internalArray[i]
-        for k in range(i+1, self._listSize):
-            self._internalArray[k-1] = self._internalArray[k]
-        self._listSize -= 1
-        self._internalArray[self._listSize] = None   # For garbage collection
-        if self._listSize <= len(self._internalArray) * self._minLoadFactor:
-            self._resizeArray(len(self._internalArray) / self._capacityMultiplier)
-        return x
-#/* *** ODSAendTag: DynamicArrayListRemove *** */
-
-#/* *** ODSATag: DynamicArrayListResize *** */
-    def _resizeArray(self, newCapacity):
-        if newCapacity < self._minCapacity: return
-        newArray = [None] * int(newCapacity)
-        for i in range(self._listSize):
-            newArray[i] = self._internalArray[i]
-        self._internalArray = newArray
-#/* *** ODSAendTag: DynamicArrayListResize *** */
-
-    def isEmpty(self):
-        return self._listSize == 0
-
-    def size(self):
-        return self._listSize
-
-#/* *** ODSATag: DynamicArrayListIterator *** */
-    def __iter__(self):
-        for i in range(self._listSize):
-            yield self._internalArray[i]
-#/* *** ODSAendTag: DynamicArrayListIterator *** */
-```
-
-```java
-/* *** ODSATag: DynamicArrayListInit *** */
-class DynamicArrayList<E> implements List<E> {
-    private E[] internalArray;   // Internal array containing the list elements
-    private int listSize;        // Size of list
-
-    static int MinCapacity = 8;               // Minimum capacity of internalArray
-    static double MinLoadFactor = 0.5;        // Must be smaller than 1/CapacityMultiplier
-    static double CapacityMultiplier = 1.5;   // Factor to grow/shrink the capacity
-
-    @SuppressWarnings("unchecked")
-    public DynamicArrayList() {
-        internalArray = (E[]) new Object[MinCapacity];
-        listSize = 0;
-    }
-/* *** ODSAendTag: DynamicArrayListInit *** */
-
-/* *** ODSATag: DynamicArrayListGetSet *** */
-    public E get(int i) {
-        if (!(0 <= i && i < listSize)) throw new IndexOutOfBoundsException("list index out of range");
-        return internalArray[i];
-    }
-
-    public E set(int i, E x) {
-        if (!(0 <= i && i < listSize)) throw new IndexOutOfBoundsException("list index out of range");
-        E old = internalArray[i];
-        internalArray[i] = x;
-        return old;
-    }
-/* *** ODSAendTag: DynamicArrayListGetSet *** */
-
-/* *** ODSATag: DynamicArrayListAdd *** */
-    public void add(int i, E x) {
-        if (!(0 <= i && i <= listSize)) throw new IndexOutOfBoundsException("list index out of range");
-        if (listSize >= internalArray.length)
-            resizeArray((int) (internalArray.length * CapacityMultiplier));
-        listSize++;
-        for (int k = listSize-1; k > i; k--)
-            internalArray[k] = internalArray[k-1];
-        internalArray[i] = x;
-    }
-/* *** ODSAendTag: DynamicArrayListAdd *** */
-
-/* *** ODSATag: DynamicArrayListRemove *** */
-    public E remove(int i) {
-        if (!(0 <= i && i < listSize)) throw new IndexOutOfBoundsException("list index out of range");
-        E x = internalArray[i];
-        for (int k = i+1; k < listSize; k++)
-            internalArray[k-1] = internalArray[k];
-        listSize--;
-        internalArray[listSize] = null;   // For garbage collection
-        if (listSize <= internalArray.length * MinLoadFactor)
-            resizeArray((int) (internalArray.length / CapacityMultiplier));
-        return x;
-    }
-/* *** ODSAendTag: DynamicArrayListRemove *** */
-
-/* *** ODSATag: DynamicArrayListResize *** */
-    private void resizeArray(int newCapacity) {
-        if (newCapacity < MinCapacity) return;
-        @SuppressWarnings("unchecked")
-        E[] newArray = (E[]) new Object[newCapacity];
-        for (int i = 0; i < listSize; i++)
-            newArray[i] = internalArray[i];
-        internalArray = newArray;
-    }
-/* *** ODSAendTag: DynamicArrayListResize *** */
-
-    public boolean isEmpty() {
-        return listSize == 0;
-    }
-
-    public int size() {
-        return listSize;
-    }
-
-/* *** ODSATag: DynamicArrayListIterator *** */
-    public Iterator<E> iterator() {
-        return Arrays.stream(internalArray, 0, listSize).iterator();
-    }
-/* *** ODSAendTag: DynamicArrayListIterator *** */
-}
-```
-
 
 
 [^D04a]: You can get a precise number by using the formula for an

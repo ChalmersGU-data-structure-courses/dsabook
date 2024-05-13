@@ -12,6 +12,17 @@ and remove from them. How can this be implemented? Well, what we
 elements are added or removed. So instead we will use an underlying
 array which is larger than we need.
 
+### Important note about Python lists {-}
+
+Python doesn't have arrays -- i.e., fixed size constant-time access arrays 
+like C, Java and most other languages have.
+
+Instead, Python has *lists*, and they are actually precisely the kind of 
+dynamic array-based lists that we are describe in this section and the next.
+So a Python `list` is implemented using fixed-size arrays, but when you program 
+in Python you cannot access these arrays because they are hidden from 
+the programmer. 
+
 ### Internal variables
 
 Because of that will need two internal variables: the underlying array,
@@ -22,27 +33,14 @@ size counter is set to 0 because there are no elements yet.
 
 <inlineav id="StaticArrayList-Vars-CON" src="ChalmersGU/StaticArrayList-Vars-CON.js" name="Static Array-based List Variables Slideshow"/>
 
+    class StaticArrayList implements List:
+        StaticArrayList(capacity):
+            this.internalArray = new Array(capacity)  // Internal array containing the list elements
+            this.listSize = 0                         // Size of list
 
-```python
-class StaticArrayList(List):
-    def __init__(self, capacity):
-        self._internalArray = [None] * capacity   # Internal array containing the list elements
-        self._listSize = 0                        # Size of list
-```
-
-```java
-class StaticArrayList<E> implements List<E> {
-    private E[] internalArray;   // Internal array containing the list elements
-    private int listSize;        // Size of list
-
-    @SuppressWarnings("unchecked")
-    public StaticArrayList(int capacity) {
-        internalArray = (E[]) new Object[capacity];
-        listSize = 0;
-    }
-```
-
-
+*Note*: in Python you cannot create an array with a certain capacity. 
+You can simulate it by creating a list with a number of empty elements:
+`[None] * capacity`, but this is not a real fixed-size array as explained just above.
 
 ### Getting and setting values
 
@@ -53,32 +51,17 @@ Random access to any element in the list is quick and easy.
 As you can see below, there are no loops in the methods `get` and `set`,
 which means that both require $\Theta(1)$ time.
 
-```python
-    def get(self, i):
-        if not (0 <= i < self._listSize): raise IndexError("list index out of range")
-        return self._internalArray[i]
+    class StaticArrayList implements List:
+        ...
+        get(i):
+            if not (0 <= i < this.listSize): 
+                throw error "list index out of range"
+            return this.internalArray[i]
 
-    def set(self, i, x):
-        if not (0 <= i < self._listSize): raise IndexError("list index out of range")
-        old = self._internalArray[i]
-        self._internalArray[i] = x
-        return old
-```
-
-```java
-    public E get(int i) {
-        if (!(0 <= i && i < listSize)) throw new IndexOutOfBoundsException("list index out of range");
-        return internalArray[i];
-    }
-
-    public E set(int i, E x) {
-        if (!(0 <= i && i < listSize)) throw new IndexOutOfBoundsException("list index out of range");
-        E old = internalArray[i];
-        internalArray[i] = x;
-        return old;
-    }
-```
-
+        set(i, x):
+            if not (0 <= i < this.listSize): 
+                throw error "list index out of range"
+            this.internalArray[i] = x
 
 
 ### Adding elements
@@ -101,27 +84,17 @@ $n - i - 1$ elements must shift toward the tail to leave room for the
 new element. In the worst case, adding elements requires moving all $n$
 elements, which is $\Theta(n)$.
 
-```python
-    def add(self, i, x):
-        if not (self._listSize < len(self._internalArray)): raise IndexError("list capacity exceeded")
-        if not (0 <= i <= self._listSize):                  raise IndexError("list index out of range")
-        self._listSize += 1
-        for k in reversed(range(i+1, self._listSize)):
-            self._internalArray[k] = self._internalArray[k-1]
-        self._internalArray[i] = x
-```
-
-```java
-    public void add(int i, E x) {
-        if (!(listSize < internalArray.length)) throw new IndexOutOfBoundsException("list capacity exceeded");
-        if (!(0 <= i && i <= listSize))         throw new IndexOutOfBoundsException("list index out of range");
-        listSize++;
-        for (int k = listSize-1; k > i; k--)
-            internalArray[k] = internalArray[k-1];
-        internalArray[i] = x;
-    }
-```
-
+    class StaticArrayList implements List:
+        ...
+        add(i, x):
+            if not (this.listSize < this.internalArray.size()):
+                throw error "list capacity exceeded"
+            if not (0 <= i <= this.listSize):
+                throw error "list index out of range"
+            this.listSize = this.listSize + 1
+            for k = this.listSize-1 downto i+1:
+                this.internalArray[k] = this.internalArray[k-1]
+            this.internalArray[i] = x
 
 
 #### Add Practice Exericse
@@ -141,29 +114,17 @@ must shift toward the head, as shown in the following slideshow.
 In the worst case, insertion or removal each requires moving all $n$
 elements, which is $\Theta(n)$.
 
-```python
-    def remove(self, i):
-        if not (0 <= i < self._listSize): raise IndexError("list index out of range")
-        x = self._internalArray[i]
-        for k in range(i+1, self._listSize):
-            self._internalArray[k-1] = self._internalArray[k]
-        self._listSize -= 1
-        self._internalArray[self._listSize] = None   # For garbage collection
-        return x
-```
-
-```java
-    public E remove(int i) {
-        if (!(0 <= i && i < listSize)) throw new IndexOutOfBoundsException("list index out of range");
-        E x = internalArray[i];
-        for (int k = i+1; k < listSize; k++)
-            internalArray[k-1] = internalArray[k];
-        listSize--;
-        internalArray[listSize] = null;   // For garbage collection
-        return x;
-    }
-```
-
+    class StaticArrayList implements List:
+        ...
+        remove(i):
+            if not (0 <= i < this.listSize):
+                throw error "list index out of range"
+            x = this.internalArray[i]
+            for k = i+1 to this.listSize-1:
+                this.internalArray[k-1] = this.internalArray[k]
+            this.listSize = this.listSize - 1
+            this.internalArray[this.listSize] = null  // For garbage collection
+            return x
 
 
 #### Remove Practice Exericise
@@ -173,124 +134,4 @@ elements, which is $\Theta(n)$.
 ### Static Array-based List Summary Questions
 
 <avembed id="StaticArrayList-Summary-QUIZ" src="ChalmersGU/StaticArrayList-Summary-QUIZ.html" type="ka" name="Static Array-based List Summary"/>
-
-### Static Array-based List: Full code
-
-Finally, here is the full source code for the class `StaticArrayList`.
-
-```python
-#/* *** ODSATag: StaticArrayListInit *** */
-class StaticArrayList(List):
-    def __init__(self, capacity):
-        self._internalArray = [None] * capacity   # Internal array containing the list elements
-        self._listSize = 0                        # Size of list
-#/* *** ODSAendTag: StaticArrayListInit *** */
-
-#/* *** ODSATag: StaticArrayListGetSet *** */
-    def get(self, i):
-        if not (0 <= i < self._listSize): raise IndexError("list index out of range")
-        return self._internalArray[i]
-
-    def set(self, i, x):
-        if not (0 <= i < self._listSize): raise IndexError("list index out of range")
-        old = self._internalArray[i]
-        self._internalArray[i] = x
-        return old
-#/* *** ODSAendTag: StaticArrayListGetSet *** */
-
-#/* *** ODSATag: StaticArrayListAdd *** */
-    def add(self, i, x):
-        if not (self._listSize < len(self._internalArray)): raise IndexError("list capacity exceeded")
-        if not (0 <= i <= self._listSize):                  raise IndexError("list index out of range")
-        self._listSize += 1
-        for k in reversed(range(i+1, self._listSize)):
-            self._internalArray[k] = self._internalArray[k-1]
-        self._internalArray[i] = x
-#/* *** ODSAendTag: StaticArrayListAdd *** */
-
-#/* *** ODSATag: StaticArrayListRemove *** */
-    def remove(self, i):
-        if not (0 <= i < self._listSize): raise IndexError("list index out of range")
-        x = self._internalArray[i]
-        for k in range(i+1, self._listSize):
-            self._internalArray[k-1] = self._internalArray[k]
-        self._listSize -= 1
-        self._internalArray[self._listSize] = None   # For garbage collection
-        return x
-#/* *** ODSAendTag: StaticArrayListRemove *** */
-
-    def isEmpty(self):
-        return self._listSize == 0
-
-    def size(self):
-        return self._listSize
-
-    def __iter__(self):
-        raise NotImplementedException("Left as an exercise.")
-```
-
-```java
-/* *** ODSATag: StaticArrayListInit *** */
-class StaticArrayList<E> implements List<E> {
-    private E[] internalArray;   // Internal array containing the list elements
-    private int listSize;        // Size of list
-
-    @SuppressWarnings("unchecked")
-    public StaticArrayList(int capacity) {
-        internalArray = (E[]) new Object[capacity];
-        listSize = 0;
-    }
-/* *** ODSAendTag: StaticArrayListInit *** */
-
-/* *** ODSATag: StaticArrayListGetSet *** */
-    public E get(int i) {
-        if (!(0 <= i && i < listSize)) throw new IndexOutOfBoundsException("list index out of range");
-        return internalArray[i];
-    }
-
-    public E set(int i, E x) {
-        if (!(0 <= i && i < listSize)) throw new IndexOutOfBoundsException("list index out of range");
-        E old = internalArray[i];
-        internalArray[i] = x;
-        return old;
-    }
-/* *** ODSAendTag: StaticArrayListGetSet *** */
-
-/* *** ODSATag: StaticArrayListAdd *** */
-    public void add(int i, E x) {
-        if (!(listSize < internalArray.length)) throw new IndexOutOfBoundsException("list capacity exceeded");
-        if (!(0 <= i && i <= listSize))         throw new IndexOutOfBoundsException("list index out of range");
-        listSize++;
-        for (int k = listSize-1; k > i; k--)
-            internalArray[k] = internalArray[k-1];
-        internalArray[i] = x;
-    }
-/* *** ODSAendTag: StaticArrayListAdd *** */
-
-/* *** ODSATag: StaticArrayListRemove *** */
-    public E remove(int i) {
-        if (!(0 <= i && i < listSize)) throw new IndexOutOfBoundsException("list index out of range");
-        E x = internalArray[i];
-        for (int k = i+1; k < listSize; k++)
-            internalArray[k-1] = internalArray[k];
-        listSize--;
-        internalArray[listSize] = null;   // For garbage collection
-        return x;
-    }
-/* *** ODSAendTag: StaticArrayListRemove *** */
-
-    public boolean isEmpty() {
-        return listSize == 0;
-    }
-
-    public int size() {
-        return listSize;
-    }
-
-    public Iterator<E> iterator() {
-        throw new UnsupportedOperationException("Left as an exercise.");
-    }
-}
-```
-
 
