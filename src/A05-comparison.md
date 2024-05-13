@@ -95,12 +95,13 @@ records and extracting keys is for various map implementations and
 sorting algorithms. Here is a simple class for representing key-value
 pairs:
 
-```python
-class KVPair:
-    def __init__(self, key, value):
-        self.key = key
-        self.value = value
-```
+    class KVPair:
+        key    // the search key
+        value  // the value associated with the key
+
+Note that in Python it's probably easier to just use a pair `(key,value)`,
+but not all languages (read: Java) have that possibility.
+So we declare a class **KVPair** thart we will use in our example code.
 
 Using this we can easily implement a **Map** from an underlying
 **List**, which we will discuss further in the
@@ -119,14 +120,13 @@ comparison problem. To illustrate, here is an example of
 [Insertion Sort] implemented to work on an array that stores records that
 support the `Comparable` interface:
 
-```python
-def insertionSort(A):
-    for i in range(len(A)):  # Insert i'th record
-        j = i
-        while j > 0 and A[j] < A[j-1]:
-            swap(A, j, j-1)
-            j -= 1
-```
+    function insertionSort(A):
+        for i in 0 ... length(A)-1:
+            j = i
+            while j > 0 and A[j] < A[j-1]:
+                swap(A, j, j-1)
+                j = j-1
+
 
 ### Review questions
 

@@ -42,13 +42,10 @@ cannot contain duplicate items: if we try to add an item that is already
 present, nothing happens, and the set is left unchanged. Recall the
 interface for sets from [the course API](#all-adts-used-in-this-book):
 
-```python
-class Set(Collection):
-    def add(self, x):      """Adds x to the set. Returns true if the element wasn't already in the set."""
-    def remove(self, x):   """Removes x from the set. Returns true if the element was in the set."""
-    def contains(self, x): """Returns true if x is in the set."""
-    # Note: __iter__() can yield the elements in any order.
-```
+    class Set extends Collection:
+        add(x)       // Adds x to the set. Returns true if the element wasn't already in the set.
+        remove(x)    // Removes x from the set. Returns true if the element was in the set.
+        contains(x)  // Returns true if x is in the set.
 
 We can use a set for the spell-checking example:
 
@@ -59,32 +56,26 @@ To create the spell-checking dictionary, we start with an initially
 empty set, and then call `add` repeatedly to add each valid word to the
 set. Then to spell-check a given word, we just call `contains`.
 
-```python
-class SpellChecker:
-    def __init__(self, list_of_valid_words):
-        # Convert the list of words into a set.
-        self.set_of_valid_words = Set()
-        for word in list_of_valid_words:
-            self.set_of_valid_words.add(word)
+    class SpellChecker:
+        SpellChecker(list_of_valid_words):
+            // Convert the list of words into a set.
+            this.set_of_valid_words = new Set()
+            for word in list_of_valid_words:
+                this.set_of_valid_words.add(word)
 
-    def is_valid_word(self, word):
-        return self.set_of_valid_words.contains(word)
+        method is_valid_word(word):
+            return this.set_of_valid_words.contains(word)
 
-if __name__ == '__main__':
-    # Create a new spell checker.
-    checker = SpellChecker(["cat", "dog"])
+    function main(list_of_words_to_check):
+        // Create a new spell checker.
+        checker = new SpellChecker(["cat", "dog"])
 
-    # Select some words to spell check. 
-    # If there are no command-line arguments, default to testing "dog" and "kat".
-    list_of_words_to_check = sys.argv[1:] if len(sys.argv) > 1 else ["dog", "kat"]
-
-    # Now we can spell-check a word easily.
-    for word in list_of_words_to_check:
-        if checker.is_valid_word(word):
-            print(word, "is valid")
-        else:
-            print(word, "is INVALID")
-```
+        // Now we can spell-check a word easily.
+        for word in list_of_words_to_check:
+            if checker.is_valid_word(word):
+                print(word, "is valid")
+            else:
+                print(word, "is INVALID")
 
 ### Database lookup: Maps
 
@@ -101,16 +92,13 @@ other hand, a map *can* contain duplicate *values*: two keys can have
 the same value. Recall the interface for maps from
 [the course API](#all-adts-used-in-this-book):
 
-```python
-class Map(Iterable):
-    def put(self, key, value):  """Sets the value of the given key. Returns the previous value, or None."""
-    def get(self, key):         """Returns the value associated with the given key, or None if the key is not there."""
-    def remove(self, key):      """Removes and returns the value associated with the given key, or None if there is no key."""
-    def containsKey(self, key): """Returns true if the key has an associated value."""
-    def isEmpty(self):          """Returns true if there are no keys."""
-    def size(self):             """Returns the number of keys (i.e., the number of key/value pairs)."""
-    # Note: __iter__() can yield the keys in any order.
-```
+    class Map extends Iterable:
+        put(key, value)   // Sets the value of the given key. Returns the previous value, or None.
+        get(key)          // Returns the value associated with the given key, or None if the key is not there.
+        remove(key)       // Removes and returns the value associated with the given key, or None if there is no key.
+        containsKey(key)  // Returns true if the key has an associated value.
+        isEmpty()         // Returns true if there are no keys.
+        size()            // Returns the number of keys (i.e., the number of key/value pairs).
 
 The map is a perfect match for our database example:
 
@@ -122,28 +110,27 @@ in a field `pnr`, then to put a person `p` in the database we call
 `database.put(p.pnr, p)`. To find the person with personnummer `pnr` we
 call `database.get(pnr)`.
 
-```python
-class Person:
-    def __init__(self, pnr, name):
-        self.pnr  = pnr    # personnummer
-        self.name = name   # person's name
+    class Person:
+        Person(pnr, name):
+            this.pnr  = pnr    // personnummer
+            this.name = name   // person's name
 
-class PersonDatabase:
-    def __init__(self):
-        self.database = Map()
+    class PersonDatabase:
+        PersonDatabase():
+            this.database = new Map()
 
-    def put(self, p):
-        """Put the person in the database."""
-        self.database.put(p.pnr, p)
+        method put(p):
+            // Put the person in the database.
+            this.database.put(p.pnr, p)
 
-    def remove(self, p):
-        """Remove a person from the database."""
-        self.database.remove(p.pnr)
+        method remove(p):
+            // Remove a person from the database.
+            this.database.remove(p.pnr)
 
-    def find(self, pnr):
-        """Find the person who has a given personnummer."""
-        return self.database.get(pnr)
-```
+        method find(pnr):
+            // Find the person who has a given personnummer.
+            return this.database.get(pnr)
+
 
 ### Search engine: Multimaps
 
@@ -168,37 +155,36 @@ where the key is a word, and the values are all documents containing
 that word. Then, searching for a word will just mean looking it up in
 the multimap.
 
-```python
-# We model a document as a list of words.
-class Document:
-    def __init__(self, contents):
-        self.contents = contents
+    class Document:
+        // We model a document as a list of words.
+        Document(contents):
+            this.contents = contents
 
-class SearchEngine:
-    def __init__(self):
-        self.database = Map()
+    class SearchEngine:
+        SearchEngine():
+            this.database = new Map()
 
-    def add(self, doc):
-        """Add a new document to the database."""
-        for word in doc.contents:
-            # Get the set of documents containing this word.
-            set = self.database.get(word)
-            if set is None:
-                # This is the first document containing this word.
-                set = Set()
+        method add(doc):
+            // Add a new document to the database.
+            for word in doc.contents:
+                // Get the set of documents containing this word.
+                set = this.database.get(word)
+                if set is null:
+                    // This is the first document containing this word.
+                    set = new Set()
 
-            # Add the document to the set.
-            set.add(doc)
-            self.database.put(word, set)
+                // Add the document to the set.
+                set.add(doc)
+                this.database.put(word, set)
 
-    def find(self, word):
-        """Find all documents containing a given word."""
-        if self.database.containsKey(word):
-            return self.database.get(word)
-        else:
-            # If the word is not found, return an empty set rather than None.
-            return Set()
-```
+        method find(word):
+            // Find all documents containing a given word.
+            if this.database.containsKey(word):
+                return this.database.get(word)
+            else:
+                // If the word is not found, return an empty set.
+                return new Set()
+
 
 ### Between X and Y: Sorted Sets and Maps
 
@@ -263,72 +249,64 @@ that take advantage of the natural order of the keys:
 Recall the interface for sorted maps from
 [the course API](#all-adts-used-in-this-book):
 
-```python
-class SortedMap(Map):
-    def firstKey(self):                """Returns the first (smallest) key. Raises an exception if the map is empty."""
-    def lastKey(self):                 """Returns the last (largest) key. Raises an exception if the map is empty."""
-    def floorKey(self, key):           """Returns the closest key <= k, or None if there is no key."""
-    def ceilingKey(self, key):         """Returns the closest key >= k, or None if there is no key."""
-    def lowerKey(self, key):           """Returns the closest key < k, or None if there is no such element."""
-    def higherKey(self, key):          """Returns the closest key > k, or None if there is no such element."""
-    def keysBetween(self, key1, key2): """Returns all keys k such that k1 <= k <= k2."""
-    # Note: __iter__() should yield the keys in order.
-```
+    class SortedMap extends Map:
+        firstKey()               // Returns the first (smallest) key. Raises an exception if the map is empty.
+        lastKey()                // Returns the last (largest) key. Raises an exception if the map is empty.
+        floorKey(key)            // Returns the closest key <= k, or None if there is no key.
+        ceilingKey(key)          // Returns the closest key >= k, or None if there is no key.
+        lowerKey(key)            // Returns the closest key < k, or None if there is no such element.
+        higherKey(key)           // Returns the closest key > k, or None if there is no such element.
+        keysBetween(key1, key2)  // Returns all keys k such that k1 <= k <= k2.
 
 As well as a sorted map, it is also possible to have a *sorted set*.
 Recall the interface for sorted sets from
 [the course API](#all-adts-used-in-this-book):
 
-```python
-class SortedSet(Set):
-    def first(self):            """Returns the first (smallest) element. Raises an exception if the set is empty."""
-    def last(self):             """Returns the last (largest) element. Raises an exception if the set is empty."""
-    def floor(self, x):         """Returns the closest element <= x, or None if there is no such element."""
-    def ceiling(self, x):       """Returns the closest element >= x, or None if there is no such element."""
-    def lower(self, x):         """Returns the closest element < x, or None if there is no such element."""
-    def higher(self, x):        """Returns the closest element > x, or None if there is no such element."""
-    def between(self, x1, x2):  """Returns all elements x such that x1 <= x <= x2."""
-    # Note: __iter__() should yield the elements in order.
-```
+    class SortedSet extends Set:
+        first()          // Returns the first (smallest) element. Raises an exception if the set is empty.
+        last()           // Returns the last (largest) element. Raises an exception if the set is empty.
+        floor(x)         // Returns the closest element <= x, or None if there is no such element.
+        ceiling(x)       // Returns the closest element >= x, or None if there is no such element.
+        lower(x)         // Returns the closest element < x, or None if there is no such element.
+        higher(x)        // Returns the closest element > x, or None if there is no such element.
+        between(x1, x2)  // Returns all elements x such that x1 <= x <= x2.
 
 Here is how to use a sorted map ADT to find all Swedish towns having
 between 1,000 and 2,000 population. As there may be towns that have the
 same population, we need a *multimap*. As before, we solve this by
 having the key be a population number and the value be a set of towns.
 
-```python
-class City:
-    def __init__(self, name, population):
-        self.name = name
-        self.population = population
+    class City:
+        City(name, population):
+            this.name = name
+            this.population = population
 
-class CityPopulations:
-    # Similar to the search engine, use a map where the value is a list of cities.
-    def __init__(self):
-        self.cities = SortedMap()
+    class CityPopulations:
+        // Similar to the search engine, use a map where the value is a list of cities.
+        CityPopulations():
+            this.cities = new SortedMap()
 
-    def add(self, city):
-        """Add a new city to the database."""
-        # Get the set of documents containing this city
-        set = self.cities.get(city.population)
-        if set is None:
-            # This is the first city with this population
-            set = Set()
+        method add(city):
+            // Add a new city to the database.
+            // Get the set of documents containing this city
+            set = this.cities.get(city.population)
+            if set is null:
+                // This is the first city with this population
+                set = new Set()
 
-        # Add the city to the set
-        set.add(city)
-        self.cities.put(city.population, set)
+            // Add the city to the set
+            set.add(city)
+            this.cities.put(city.population, set)
 
-    def findBetween(self, lower, upper):
-        """Find all cities with a population between lower and upper"""
-        result = Set()
-        # The range query returns a set of keys, i.e. populations.
-        for population in self.cities.keysBetween(lower, upper):
-            # cities.get(population) returns the list of cities with that population.
-            for city in self.cities.get(population):
-                result.add(city)
-        return result
-```
+        method findBetween(lower, upper):
+            // Find all cities with a population between lower and upper
+            result = new Set()
+            // The range query returns a set of keys, i.e. populations.
+            for population in this.cities.keysBetween(lower, upper):
+                // cities.get(population) returns the list of cities with that population.
+                for city in this.cities.get(population):
+                    result.add(city)
+            return result
 
 ### How to implement sets and maps
 

@@ -24,140 +24,127 @@ classes which act as interfaces, and call them abstract classes.
 ### Basic Abstract Data Types
 
 These include comparables:
-```pseudo
-class Comparable:
-    // Note: all of these operators return a boolean.
-    this == other  
-    this != other  
-    this < other   
-    this <= other  
-    this > other   
-    this >= other  
-```
+
+    class Comparable:
+        // Returns an integer: negative (smaller), 0 (equal), positive (larger)
+        this.compareTo(other)
+        // All of these operators return a boolean:
+        this == other  
+        this != other  
+        this < other   
+        this <= other  
+        this > other   
+        this >= other  
 
 And iterators and iterables:
-```pseudo
-class Iterator:
-    next():    """Returns the next item."""
-    hasNext(): """Returns true if there are more elements."""
 
-class Iterable:
-    iter():    """Returns a new iterator."""
-```
+    class Iterator:
+        next()     // Returns the next item. Fails if there are no more items.
+
+    class Iterable:
+        iter()     // Returns a new iterator.
 
 As well as collections:
 
     class Collection extends Iterable:
-        isEmpty():  // Returns true if the collection is empty.
-        size():     // Returns the number of elements in this collection.
+        isEmpty()   // Returns true if the collection is empty.
+        size()      // Returns the number of elements in this collection.
 
 ### Lists
 
 General lists:
-```python
-class List(Collection):
-    def add(self, i, x): """Adds x at position i; where 0 <= i <= size."""
-    def get(self, i):    """Returns the element at position i; where 0 <= i < size."""
-    def set(self, i, x): """Replaces the value at position i with x; where 0 <= i < size."""
-    def remove(self, i): """Removes the element at position i; where 0 <= i < size."""
-    # Note: __iter__() should yield the elements starting from position 0.
-```
+
+    class List extends Collection:
+        add(i, x)  // Adds x at position i; where 0 <= i <= size.
+        get(i)     // Returns the element at position i; where 0 <= i < size.
+        set(i, x)  // Replaces the value at position i with x; where 0 <= i < size.
+        remove(i)  // Removes the element at position i; where 0 <= i < size.
 
 Stacks:
-```python
-class Stack(Collection):
-    def push(self, x): """Pushes x on top of the stack."""
-    def pop(self):     """Pops the top of the stack and returns it. Raises an exception if the stack is empty."""
-    def peek(self):    """Returns the top element, without removing it. Raises an exception if the stack is empty."""
-    # Note: __iter__() should yield the elements starting from the top of the stack.
-```
+    class Stack extends Collection:
+        push(x)    // Pushes x on top of the stack.
+        pop()      // Pops the top of the stack and returns it. Raises an exception if the stack is empty.
+        peek()     // Returns the top element, without removing it. Raises an exception if the stack is empty.
 
 Queues:
-```python
-class Queue(Collection):
-    def enqueue(self, x): """Enqueues x at the end of the queue."""
-    def dequeue(self):    """Dequeues the frontmost element. Raises an exception if the queue is empty."""
-    def peek(self):       """Returns the frontmost element, without removing it. Raises an exception if the queue is empty."""
-    # Note: __iter__() should yield the elements starting from the frontmost element.
-```
+
+    class Queue extends Collection:
+        enqueue(x)  // Enqueues x at the end of the queue.
+        dequeue()   // Dequeues the frontmost element. Raises an exception if the queue is empty.
+        peek()      // Returns the frontmost element, without removing it. Raises an exception if the queue is empty.
 
 Priority queues:
-```python
-class PriorityQueue(Collection):
-    def add(self, x):    """Adds x to the priority queue."""
-    def removeMin(self): """Removes and returns the minimum element. Raises an exception if the priority queue is empty."""
-    def getMin(self):    """Returns the minimum element, without removing it. Raises an exception if the priority queue is empty."""
-    # Note: __iter__() can yield the elements in any order, but the minimum element should come first.
-```
+
+    class PriorityQueue extends Collection:
+        add(x)       // Adds x to the priority queue.
+        removeMin()  // Removes and returns the minimum element. Raises an exception if the priority queue is empty.
+        getMin()     // Returns the minimum element, without removing it. Raises an exception if the priority queue is empty.
+
 
 ### Sets
 
 Sets with no internal order:
-```python
-class Set(Collection):
-    def add(self, x):      """Adds x to the set. Returns true if the element wasn't already in the set."""
-    def remove(self, x):   """Removes x from the set. Returns true if the element was in the set."""
-    def contains(self, x): """Returns true if x is in the set."""
-    # Note: __iter__() can yield the elements in any order.
-```
+
+    class Set extends Collection:
+        add(x)       // Adds x to the set. Returns true if the element wasn't already in the set.
+        remove(x)    // Removes x from the set. Returns true if the element was in the set.
+        contains(x)  // Returns true if x is in the set.
 
 Sets where the elements are sorted:
-```python
-class SortedSet(Set):
-    def first(self):            """Returns the first (smallest) element. Raises an exception if the set is empty."""
-    def last(self):             """Returns the last (largest) element. Raises an exception if the set is empty."""
-    def floor(self, x):         """Returns the closest element <= x, or None if there is no such element."""
-    def ceiling(self, x):       """Returns the closest element >= x, or None if there is no such element."""
-    def lower(self, x):         """Returns the closest element < x, or None if there is no such element."""
-    def higher(self, x):        """Returns the closest element > x, or None if there is no such element."""
-    def between(self, x1, x2):  """Returns all elements x such that x1 <= x <= x2."""
-    # Note: __iter__() should yield the elements in order.
-```
+
+    class SortedSet extends Set:
+        first()          // Returns the first (smallest) element. Raises an exception if the set is empty.
+        last()           // Returns the last (largest) element. Raises an exception if the set is empty.
+        floor(x)         // Returns the closest element <= x, or None if there is no such element.
+        ceiling(x)       // Returns the closest element >= x, or None if there is no such element.
+        lower(x)         // Returns the closest element < x, or None if there is no such element.
+        higher(x)        // Returns the closest element > x, or None if there is no such element.
+        between(x1, x2)  // Returns all elements x such that x1 <= x <= x2.
+
 
 ### Maps or Dictionaries
 
 Maps are also called dictionaries or associative arrays.
 
 Maps with no internal order:
-```python
-class Map(Iterable):
-    def put(self, key, value):  """Sets the value of the given key. Returns the previous value, or None."""
-    def get(self, key):         """Returns the value associated with the given key, or None if the key is not there."""
-    def remove(self, key):      """Removes and returns the value associated with the given key, or None if there is no key."""
-    def containsKey(self, key): """Returns true if the key has an associated value."""
-    def isEmpty(self):          """Returns true if there are no keys."""
-    def size(self):             """Returns the number of keys (i.e., the number of key/value pairs)."""
-    # Note: __iter__() can yield the keys in any order.
-```
+
+    class Map extends Iterable:
+        put(key, value)   // Sets the value of the given key. Returns the previous value, or None.
+        get(key)          // Returns the value associated with the given key, or None if the key is not there.
+        remove(key)       // Removes and returns the value associated with the given key, or None if there is no key.
+        containsKey(key)  // Returns true if the key has an associated value.
+        isEmpty()         // Returns true if there are no keys.
+        size()            // Returns the number of keys (i.e., the number of key/value pairs).
 
 Maps where the keys are sorted:
-```python
-class SortedMap(Map):
-    def firstKey(self):                """Returns the first (smallest) key. Raises an exception if the map is empty."""
-    def lastKey(self):                 """Returns the last (largest) key. Raises an exception if the map is empty."""
-    def floorKey(self, key):           """Returns the closest key <= k, or None if there is no key."""
-    def ceilingKey(self, key):         """Returns the closest key >= k, or None if there is no key."""
-    def lowerKey(self, key):           """Returns the closest key < k, or None if there is no such element."""
-    def higherKey(self, key):          """Returns the closest key > k, or None if there is no such element."""
-    def keysBetween(self, key1, key2): """Returns all keys k such that k1 <= k <= k2."""
-    # Note: __iter__() should yield the keys in order.
-```
+
+    class SortedMap extends Map:
+        firstKey()               // Returns the first (smallest) key. Raises an exception if the map is empty.
+        lastKey()                // Returns the last (largest) key. Raises an exception if the map is empty.
+        floorKey(key)            // Returns the closest key <= k, or None if there is no key.
+        ceilingKey(key)          // Returns the closest key >= k, or None if there is no key.
+        lowerKey(key)            // Returns the closest key < k, or None if there is no such element.
+        higherKey(key)           // Returns the closest key > k, or None if there is no such element.
+        keysBetween(key1, key2)  // Returns all keys k such that k1 <= k <= k2.
+
 
 ### Graphs
 
 Finally, graphs:
-```python
-class Graph:
-    def addVertex(self, v):     """Adds the vertex v to the graph. Returns true if it wasn't already in the graph."""
-    def addEdge(self, e):       """Adds the edge e to the graph. Returns true if it wasn't already in the graph."""
-    def vertices(self):         """Returns a Collection of all vertices in the graph."""
-    def outgoingEdges(self, v): """Returns a Collection of the edges that originates in vertex v."""
-    def vertexCount(self):      """Returns the number of vertices in the graph."""
-    def edgeCount(self):        """Returns the number of edges in the graph."""
 
-from collections import namedtuple
-Edge = namedtuple('Edge', ['start', 'end', 'weight'], defaults=[1.0])
-```
+    class Graph:
+        addVertex(v)      // Adds the vertex v to the graph. Returns true if it wasn't already in the graph.
+        addEdge(e)        // Adds the edge e to the graph. Returns true if it wasn't already in the graph.
+        vertices()        // Returns a Collection of all vertices in the graph.
+        outgoingEdges(v)  // Returns a Collection of the edges that originates in vertex v.
+        vertexCount()     // Returns the number of vertices in the graph.
+        edgeCount()       // Returns the number of edges in the graph.
+
+    class Edge:
+        start    // start vertex
+        end      // end vertex
+        weight   // weight, defaults to 1.0
+
 
 ### Comparison with the standard Java API
 

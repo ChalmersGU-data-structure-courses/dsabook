@@ -157,6 +157,11 @@ pre code {
     overflow-wrap: normal;
 }
 
+code.pseudo .co {
+    font-family: "PT Serif", Georgia, serif;
+    font-style: italic;
+}
+
 hr {
     background-color: #1a1a1a;
     border: none;

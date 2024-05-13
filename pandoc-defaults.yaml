@@ -67,7 +67,7 @@ syntax-definitions: [extra/pseudo.xml]
 # of appropriately marked code blocks. This can be used to add support for new languages or to use altered
 # syntax definitions for existing languages. This option may be repeated to add multiple syntax definitions.
 
-indented-code-classes: [python]
+indented-code-classes: [pseudo]
 # Specify classes to use for indented code blocks–for example, perl,numberLines or haskell. 
 # Multiple classes may be separated by spaces or commas.
 
