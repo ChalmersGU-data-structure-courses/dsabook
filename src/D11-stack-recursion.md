@@ -30,8 +30,6 @@ factorial function.
 
     // Recursively compute and return n!
     function factorialRecursive(n):
-        if n < 0: 
-            throw error "Argument must be >= 0"
         if n <= 1:
             return 1  // Base case: return base solution
         else:
@@ -85,8 +83,6 @@ As a simple example of replacing recursion with a stack, consider the
 following non-recursive version of the factorial function.
 
     function factorialStack(n):
-        if n < 0: 
-            throw error "Argument must be >= 0"
         S = new LinkedStack()
         while n > 1:
             S.push(n)

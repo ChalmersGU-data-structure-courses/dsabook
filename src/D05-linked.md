@@ -55,16 +55,14 @@ through the nodes in sequence until we get to the node we want.
     class LinkedList implements List:
         ...
         get(i):
-            if not (0 <= i < this.listSize): 
-                throw error "list index out of range"
+            precondition: 0 <= i < this.listSize
             current = this.head
             repeat i times:
                 current = current.next
             return current.elem
 
         set(i, x):
-            if not (0 <= i < this.listSize): 
-                throw error "list index out of range"
+            precondition: 0 <= i < this.listSize
             current = this.head
             repeat i times:
                 current = current.next
@@ -101,8 +99,7 @@ Here's the code for addition.
     class LinkedList implements List:
         ...
         add(i, x):
-            if not (0 <= i <= this.listSize):
-                throw error "list index out of range"
+            precondition: 0 <= i <= this.listSize
             if i == 0:
                 this.head = new Node(x, this.head)
             else:
@@ -126,8 +123,7 @@ Here's the code for deletion:
     class LinkedList implements List:
         ...
         remove(self, i):
-            if not (0 <= i < this.listSize):
-                throw error "list index out of range"
+            precondition: 0 <= i < this.listSize
             if i == 0:
                 removed = this.head
                 this.head = removed.next

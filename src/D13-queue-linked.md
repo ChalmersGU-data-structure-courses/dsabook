@@ -38,8 +38,7 @@ queue, to be able to add new elements efficiently.
     class LinkedQueue implements Queue:
         ...
         dequeue():
-            if not (this.queueSize > 0): 
-                throw error "dequeue from empty queue"
+            precondition: this.queueSize > 0
             removed = this.front
             this.front = removed.next
             removed.next = null  // For garbage collection

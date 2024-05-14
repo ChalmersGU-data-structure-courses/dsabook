@@ -62,8 +62,7 @@ tail.
     class DoubleLinkedList implements List:
         ...
         add(i, x):
-            if not (0 <= i <= this.listSize):
-                throw error "list index out of range"
+            precondition: 0 <= i <= this.listSize
             if this.listSize == 0:
                 this.head = this.tail = new DoubleNode(x, null, null)
             else if i == 0:
@@ -93,8 +92,7 @@ remove the head or the tail.
     class DoubleLinkedList implements List:
         ...
         remove(i):
-            if not (0 <= i < this.listSize):
-                throw error "list index out of range"
+            precondition: 0 <= i < this.listSize
             if i == 0:
                 removed = this.head
                 this.head = removed.next

@@ -54,13 +54,11 @@ which means that both require $\Theta(1)$ time.
     class StaticArrayList implements List:
         ...
         get(i):
-            if not (0 <= i < this.listSize): 
-                throw error "list index out of range"
+            precondition: 0 <= i < this.listSize
             return this.internalArray[i]
 
         set(i, x):
-            if not (0 <= i < this.listSize): 
-                throw error "list index out of range"
+            precondition: 0 <= i < this.listSize
             this.internalArray[i] = x
 
 
@@ -87,10 +85,7 @@ elements, which is $\Theta(n)$.
     class StaticArrayList implements List:
         ...
         add(i, x):
-            if not (this.listSize < this.internalArray.size()):
-                throw error "list capacity exceeded"
-            if not (0 <= i <= this.listSize):
-                throw error "list index out of range"
+            precondition: 0 <= i <= this.listSize < this.internalArray.size()
             this.listSize = this.listSize + 1
             for k = this.listSize-1 downto i+1:
                 this.internalArray[k] = this.internalArray[k-1]
@@ -117,8 +112,7 @@ elements, which is $\Theta(n)$.
     class StaticArrayList implements List:
         ...
         remove(i):
-            if not (0 <= i < this.listSize):
-                throw error "list index out of range"
+            precondition: 0 <= i < this.listSize
             x = this.internalArray[i]
             for k = i+1 to this.listSize-1:
                 this.internalArray[k-1] = this.internalArray[k]

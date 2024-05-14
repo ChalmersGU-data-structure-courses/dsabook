@@ -73,8 +73,7 @@ is which end of the array should represent the top of the stack.
     class DynamicArrayStack implements Stack:
         ...
         pop():
-            if not (this.stackSize > 0): 
-                throw error "pop from empty stack"
+            precondition: this.stackSize > 0
             this.stackSize = this.stackSize - 1
             x = this.internalArray[this.stackSize]
             this.internalArray[this.stackSize] = null  // For garbage collection

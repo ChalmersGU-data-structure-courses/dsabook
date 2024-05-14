@@ -41,8 +41,7 @@ Stack nodes are exactly the same as the
     class LinkedStack implements Stack:
         ...
         pop():
-            if not (this.stackSize > 0): 
-                throw error "pop from empty stack"
+            precondition: this.stackSize > 0
             removed = this.top
             this.top = removed.next
             removed.next = null   # For garbage collection

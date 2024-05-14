@@ -111,8 +111,7 @@ internal array).
     class DynamicArrayQueue implements Queue:
         ...
         dequeue():
-            if not (this.queueSize > 0): 
-                throw error "dequeue from empty queue"
+            precondition: this.queueSize > 0
             this.queueSize = this.queueSize - 1
             x = this.internalArray[this.front]
             this.internalArray[this.front] = null  // For garbage collection

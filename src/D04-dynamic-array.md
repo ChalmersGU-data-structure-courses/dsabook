@@ -35,8 +35,7 @@ That's the only difference from the `add` method from
     class DynamicArrayList implements List:
         ...
         add(i, x):
-            if not (0 <= i <= this.listSize):
-                throw error "list index out of range"
+            precondition: 0 <= i <= this.listSize
             if this.listSize >= this.internalArray.size()
                 this.resizeArray(this.internalArray.size() * 2)
             this.listSize = this.listSize + 1
@@ -296,8 +295,7 @@ before. The only thing that matters is that the minimum load factor
     class DynamicArrayList implements List:
         ...
         remove(i):
-            if not (0 <= i < this.listSize):
-                throw error "list index out of range"
+            precondition: 0 <= i < this.listSize
             x = this.internalArray[i]
             for k = i+1 to this.listSize-1:
                 this.internalArray[k-1] = this.internalArray[k]
