@@ -18,8 +18,8 @@ arbitrary number of children, they become much harder to implement than
 binary trees. We consider such trees in this chapter. To distinguish
 them from binary trees, we use the term [general tree]{.term}.
 
-In this module we will examine general tree terminology and define a
-basic ADT for general trees.
+In this module we will examine general tree terminology and define 
+a basic class for general trees.
 
 ### General Tree Definitions and Terminology
 
@@ -61,8 +61,8 @@ Before discussing general tree implementations, we should first make
 precise what operations such implementations must support. Any
 implementation must be able to initialize a tree. Given a tree, we need
 access to the root of that tree. There must be some way to access the
-children of a node. In the case of the ADT for binary tree nodes, this
-was done by providing member functions that give explicit access to the
+children of a node. In the case of binary tree nodes, this
+was done by providing instance variables for the
 left and right child pointers. Unfortunately, because we do not know in
 advance how many children a given node will have in the general tree, we
 cannot give explicit functions to access each child. An alternative must
@@ -74,91 +74,19 @@ returns the number of children for a given node would support the
 ability to access any node or process all children of a node.
 Unfortunately, this view of access tends to bias the choice for node
 implementations in favor of an array-based approach, because these
-functions favor random access to a list of children. In practice, an
-implementation based on a linked list is often preferred.
+functions favor random access to a list of children.
 
-An alternative is to provide access to the first (or leftmost) child of
-a node, and to provide access to the next (or right) sibling of a node.
-Here are the class declarations for general trees and their nodes. Based
-on these two access functions, the children of a node can be traversed
-like a list. Trying to find the next sibling of the rightmost sibling
-would return `null`.
+An alternative is to provide access to a **List** of the children pointers.
+This list can be an array-based list or a linked list or even a dynamic
+function generating the children on demand. The only thing we will assume is 
+that it follows the **List** ADT, as described in the section about 
+[the List ADT].
 
-```python
-# General tree node ADT
-class GTNode:
-    def value(self): raise NotImplementedError
-    def isLeaf(self): raise NotImplementedError
-    def parent(self): raise NotImplementedError
-    def leftmostChild(self): raise NotImplementedError
-    def rightSibling(self): raise NotImplementedError
-    def setValue(self, value): raise NotImplementedError
-    def setParent(self, par): raise NotImplementedError
-    def insertFirst(self, n): raise NotImplementedError
-    def insertNext(self, n): raise NotImplementedError
-    def removeFirst(self): raise NotImplementedError
-    def removeNext(self): raise NotImplementedError
-
-# General tree ADT
-class GenTree:
-    def clear(self): raise NotImplementedError
-    def root(self): raise NotImplementedError
-    def newRoot(self, value, first, sib): raise NotImplementedError
-    def newLeftChild(self, value): raise NotImplementedError
-```
-
-```java
-// General tree node ADT
-public interface GTNode {
-  public Object value();
-  public boolean isLeaf();
-  public GTNode parent();
-  public GTNode leftmostChild();
-  public GTNode rightSibling();
-  public void setValue(Object value);
-  public void setParent(GTNode par);
-  public void insertFirst(GTNode n);
-  public void insertNext(GTNode n);
-  public void removeFirst();
-  public void removeNext();
-}
-
-// General tree ADT
-public interface GenTree {
-  public void clear();      // Clear the tree
-  public GTNode root();     // Return the root
-  // Make the tree have a new root, give first child and sib
-  public void newroot(Object value, GTNode first, GTNode sib);
-  public void newleftchild(E value); // Add left child
-}
-```
-
-```java
-// General tree node ADT
-public interface GTNode<E> {
-    public E value();
-    public boolean isLeaf();
-    public GTNode<E> parent();
-    public GTNode<E> leftmostChild();
-    public GTNode<E> rightSibling();
-    public void setValue(E value);
-    public void setParent(GTNode<E> par);
-    public void insertFirst(GTNode<E> n);
-    public void insertNext(GTNode<E> n);
-    public void removeFirst();
-    public void removeNext();
-}
-
-// General tree ADT
-public interface GenTree<E> {
-    public void clear();       // Clear the tree
-    public GTNode<E> root();   // Return the root
-    // Make the tree have a new root, give first child and sib
-    public void newRoot(E value, GTNode<E> first, GTNode<E> sib);
-    public void newLeftChild(E value); // Add left child
-}
-```
-
+    // General tree nodes
+    class GTNode:
+        GTNode(elem, children):
+            this.elem = elem          // This is the value, just as for binary nodes
+            this.children = children  // This is a List of GTNodes
 
 
 ### General Tree Traversals
@@ -190,49 +118,18 @@ sibling, and so on.
 
 <inlineav id="GenTreePostTravCON" src="General/GenTreePostTravCON.js" name="General Tree Postorder Traversal Slideshow" links="General/GenTreeCON.css"/>
 
-Using the General Tree ADT shown above, here is an implementation to
-print the nodes of a general tree in preorder. Note the
-*while* loop at the end, which processes the list of
-children by beginning with the leftmost child, then repeatedly moving to
-the next child until calling `next` returns `null`.
+Using the General Tree class shown above, here are implementations to
+process the nodes of a general tree in preorder and in postorder. 
+The code is very simple, but this is because we defer all the complexity
+to the underlying **List** implementation of the children.
 
-```python
-# Preorder traversal for general trees
-def preorder(rt):
-    PrintNode(rt)
-    if not rt.isLeaf():
-        temp = rt.leftmostChild()
-        while temp is not None
-            preorder(temp)
-            temp = temp.rightSibling()
-```
+    function preorder(node):
+        process(node)
+        for each child in node.children:
+            preorder(child)
 
-```java
-// Preorder traversal for general trees
-static void preorder(GTNode rt) {
-  PrintNode(rt);
-  if (!rt.isLeaf()) {
-    GTNode temp = rt.leftmostChild();
-    while (temp != null) {
-      preorder(temp);
-      temp = temp.rightSibling();
-    }
-  }
-}
-```
-
-```java
-// Preorder traversal for general trees
-static void preorder(GTNode<E> node) {
-    PrintNode(node);
-    if (!node.isLeaf()) {
-        GTNode<E> temp = node.leftmostChild();
-        while (temp != null) {
-            preorder(temp);
-            temp = temp.rightSibling();
-        }
-    }
-}
-```
-
+    function postorder(node):
+        for each child in node.children:
+            postorder(child)
+        process(node)
 

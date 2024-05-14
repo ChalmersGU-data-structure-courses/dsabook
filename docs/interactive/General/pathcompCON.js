@@ -11,7 +11,7 @@ $(document).ready(function () {
   var arr = new Array(10);
   //Initializing the parent pointer
   for (ind = 0; ind < arr.length; ind++) {
-    arr[ind] = "/";
+    arr[ind] = "-";
   }
   var parents = av.ds.array(arr, {left: 280, top: 0});
 

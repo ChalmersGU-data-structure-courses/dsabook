@@ -3,7 +3,7 @@
 // Written by Mohammed Farghally and Cliff Shaffer
 // Union/Find example
 $(document).ready(function () {
-  var av_name = "ufCON";
+  var av_name = "UFCON";
   var ind;
   var av = new JSAV(av_name);
 
@@ -12,29 +12,26 @@ $(document).ready(function () {
   for (ind = 0; ind < arr.length; ind++) {
     arr[ind] = String.fromCharCode(ind + 65);
   }
-  var labels = av.ds.array(arr, {left: 620, top: 0, width: 40, indexed: true,
+  var labels = av.ds.array(arr, {left: 720, top: 0, width: 40, indexed: true,
                                  layout: 'vertical'});
 
   //Initializing the parent pointer
   for (ind = 0; ind < arr.length; ind++) {
-    arr[ind] = "/";
+    arr[ind] = "-";
   }
-  var parents = av.ds.array(arr, {left: 675, top: 0, width: 40, layout: 'vertical'});
+  var parents = av.ds.array(arr, {left: 780, top: 0, width: 40, layout: 'vertical'});
 
   var pseudo = av.code([
-    "public void UNION(int a, int b) {",
-    "   int root1 = FIND(a);     // Find root of node a",
-    "   int root2 = FIND(b);     // Find root of node b",
-    "   if (root1 != root2) {    // Merge with weighted union",
-    "       if (weights[root2] > weights[root1]) {",
-    "           array[root1] = root2;",
-    "           weights[root2] += weights[root1];",
-    "       } else {",
-    "           array[root2] = root1;",
-    "           weights[root1] += weights[root2];",
-    "       }",
-    "   }",
-    "}",
+    "UNION(a, b):",
+    "    root1 = this.FIND(a)   // Find root of node a",
+    "    root2 = this.FIND(b)   // Find root of node b",
+    "    if root1 != root2:     // Merge with weighted union",
+    "        if this.weights[root2] > this.weights[root1]:",
+    "            this.array[root1] = root2",
+    "            this.weights[root2] = this.weights[root2] + self.weights[root1]",
+    "        else:",
+    "            self.array[root2] = root1",
+    "            self.weights[root1] = self.weights[root1] + self.weights[root2]",
   ], {lineNumbers: false,
       tags: {
         "sig": 2,

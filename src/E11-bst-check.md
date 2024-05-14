@@ -29,41 +29,21 @@ is legal for a given node. That information might come from any of the
 node's ancestors. Thus, relevant range information must be passed down
 the tree. We can implement this function as follows.
 
-```python
-def checkBST(node, low, high):
-    if node is None: return True  # Empty subtree
+    function checkBST(node, low, high):
+        if node is null:
+            return true  // Base case: empty subtree
 
-    rootval = node.value()
-    if rootval <= low or rootval >= high:
-        return False  # Out of range
+        rootval = node.elem
+        if rootval <= low or rootval >= high:
+            return false  // Value out of range
 
-    return (checkBST(node.left(), low, rootval) and  # Check left subtree
-            checkBST(node.right(), rootval, high))   # Check right subtree
-```
+        return (checkBST(node.left, low, rootval) and  // Check left subtree
+                checkBST(node.right, rootval, high))   // Check right subtree
 
-```java
-static boolean checkBST(BSTNode rt, Comparable low, Comparable high) {
-  if (rt == null) return true; // Empty subtree
-  Comparable rootval = rt.value();
-  if ((rootval.compareTo(low) <= 0) || (rootval.compareTo(high) > 0))
-    return false; // Out of range
-  if (!checkBST(rt.left(), low, rootval))
-    return false; // Left side failed
-  return checkBST(rt.right(), rootval, high);
-}
-```
+How should we call this function on a given tree? 
+Or in other words, what should be the initial `low` and `high` values?
+If we don't have any other constraints we can let the initial range be
+as large as possible, so we call the function like this:
 
-```java
-static <E extends Comparable<E>> boolean checkBST(BinNode<E> node, E low, E high) {
-    if (node == null) return true;  // Empty subtree
-
-    E rootval = node.value();
-    if (rootval.compareTo(low) <= 0 || rootval.compareTo(high) >= 0)
-        return false;  // Out of range
-
-    return checkBST(node.left(), low, rootval)    // Check left subtree
-        && checkBST(node.right(), rootval, high); // Check right subtree
-}
-```
-
+    checkBST(tree, -∞, ∞)
 

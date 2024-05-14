@@ -6,10 +6,10 @@
   height: 250px;
 }
 
-#ufCON .jsavcode{
+#UFCON .jsavcode{
   margin-top: 20px;
-  margin-left: 50px;
-  width: 520px;
+  margin-left: 20px;
+  width: 656px;
 }
 
 #pathcompCON {
@@ -19,3 +19,4 @@
 #pathcompCON .jsavoutput.jsavline {
   height: 60px;
 }
+

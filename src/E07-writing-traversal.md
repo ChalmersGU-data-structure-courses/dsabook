@@ -17,47 +17,23 @@ the current node, and only make the recursive call for a non-null child.
 
 Recall the basic preorder traversal function.
 
-```python
-def preorder(node):
-    if node is None: return  # Empty subtree - do nothing
-    visit(node)                # Visit root node
-    preorder(node.left())    # Process all nodes in left
-    preorder(node.right())   # Process all nodes in right
-```
-
-```java
-static <E> void preorder(BinNode<E> node) {
-    if (node == null) return;  // Empty subtree - do nothing
-    visit(node);               // Visit root node
-    preorder(node.left());     // Process all nodes in left
-    preorder(node.right());    // Process all nodes in right
-}
-```
-
-
+    function preorder(node):
+        if node is not null:      // Only continue if this is a tree
+            visit(node)           // Visit root node
+            preorder(node.left)   // Process all nodes in left subtree
+            preorder(node.right)  // Process all nodes in right subtree
 
 Here is an alternate design for the preorder traversal, in which the
 left and right pointers of the current node are checked so that the
 recursive call is made only on non-empty children.
 
-```python
-# This is a bad idea
-def preorder2(node):
-    visit(node)
-    if node.left() is not None: preorder2(node.left())
-    if node.right() is not None: preorder2(node.right())
-```
-
-```java
-// This is a bad idea
-static <E> void preorder2(BinNode<E> node) {
-    visit(node);
-    if (node.left()  != null) preorder2(node.left());
-    if (node.right() != null) preorder2(node.right());
-}
-```
-
-
+    // This is a bad idea:
+    function preorder2(node):
+        visit(node)
+        if node.left is not null:
+            preorder2(node.left)
+        if node.right is not null:
+            preorder2(node.right)
 
 At first, it might appear that `preorder2` is more efficient than
 `preorder`, because it makes only half as many recursive calls (since it
@@ -109,55 +85,19 @@ Consider the problem of incrementing the value for each node in a binary
 tree. The following solution has an error, since it does redundant
 manipulation to the left and the right children of each node.
 
-```python
-def ineff_BTinc(root);
-    if root is not None:
-        root.setValue(root.value() + 1)
-        if root.left() is not None:
-            root.left().setValue(root.left().value() + 1)
-            ineff_BTinc(root.left().left())
-        if root.right() is not None:
-            root.right().setValue(root.right().value() + 1)
-            ineff_BTinc(root.right().right())
-```
-
-```java
-static void ineff_BTinc(BinNode root) {
-  if (root != null) {
-      root.setValue((int)(root.value()) + 1);
-    if (root.left() != null) {
-      root.left().setValue((int)(root.left().value()) + 1);
-      ineff_BTinc(root.left().left());
-    }
-    if (root.right() != null) {
-      root.right().setValue((int)(root.right().value()) + 1);
-      ineff_BTinc(root.right().right());
-    }
-  }
-}
-```
-
-```java
-static void ineff_BTinc(BinNode<Integer> root) {
-    if (root != null) {
-        root.setValue(root.value() + 1);
-        if (root.left() != null) {
-            root.left().setValue(root.left().value() + 1);
-            ineff_BTinc(root.left().left());
-        }
-        if (root.right() != null) {
-            root.right().setValue(root.right().value() + 1);
-            ineff_BTinc(root.right().right());
-        }
-    }
-}
-```
-
-
+    function inefficient_increment(node):
+        if node is not null:
+            node.elem = node.elem + 1
+            if node.left is not null:
+                node.left.elem = node.left.elem + 1
+                inefficient_increment(node.left.left)
+            if node.right is not null:
+                node.right.elem = node.right.elem + 1
+                inefficient_increment(node.right.right)
 
 The efficient solution should not explicitly set the child values that
 way. Changing the value of a node does not depend on the child values.
-So the function should simply increment the root value, and make
+So the function should simply increment the node value, and make
 recursive calls on the children.
 ::::
 

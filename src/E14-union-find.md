@@ -39,8 +39,7 @@ A collection of disjoint sets partitions some objects such that every
 object is in exactly one of the disjoint sets. There are two basic
 operations that we wish to support:
 
-1.  Determine if two objects are in the same set (the FIND operation),
-    and
+1.  Determine if two objects are in the same set (the FIND operation), and
 2.  Merge two sets together.
 
 Because two merged sets are united, the merging operation is called
@@ -62,31 +61,30 @@ trees store an appropriate indicator. Note that this representation
 means that a single array is being used to implement a collection of
 trees. This makes it easy to merge trees together with UNION operations.
 
-Here is an implementation for parent pointer trees and the UNION/FIND
-process.
+Here is an implementation for parent pointer trees and the UNION/FIND process.
 
-```python
-# General Tree implementation for UNION/FIND
-class ParPtrTree:
-    def __init__(self, size) {
-        # Each node is its own root to start
-        self.array = [-1] * size
+    // General Tree implementation for UNION/FIND
+    class ParentPointerTree:
+        ParentPointerTree(size):
+            // Each node is its own root to start
+            this.array = new Array(size)
+            for i = 0 to size-1:
+                this.array[i] = -1  // We use -1 to say that this is a root
 
-    # Merge two subtrees if they are different
-    def UNION(self, a, b):
-        root1 = self.FIND(a)  # Find root of node a
-        root2 = self.FIND(b)  # Find root of node b
-        if root1 != root2:    # Merge two trees
-            self.array[root1] = root2
+        // Merge two subtrees if they are different:
+        UNION(a, b):
+            root1 = this.FIND(a)  // Find root of node a
+            root2 = this.FIND(b)  // Find root of node b
+            if root1 != root2:    // Merge two trees
+                this.array[root1] = root2
 
-    # Return the root of curr's tree
-    def FIND(self, curr):
-        while self.array[curr] != -1:
-            curr = self.array[curr]
-        return curr           # Now at root
-```
+        // Return the root of current's tree
+        FIND(current):
+            while this.array[current] != -1:
+                current = self.array[current]
+            return current  // Now we are at the root
 
-The `ParPtrTree` class has an array where each array position
+The `ParentPointerTree` class has an array where each array position
 corresponds to one object in some collection. Each array element stores
 the array index for its parent. There are two main methods to implement.
 Method `UNION` merges two sets together, where each set corresponds to a
@@ -95,7 +93,7 @@ tree. Method `FIND` is used to find the ultimate root for a node.
 An application using the UNION/FIND operations should store a set of $n$
 objects, where each object is assigned a unique index in the range 0 to
 $n-1$. The indices refer to the corresponding parent pointers in the
-array. Class `ParPtrTree` creates and initializes the UNION/FIND array,
+array. Class `ParentPointerTree` creates and initializes the UNION/FIND array,
 and methods `UNION` and `FIND` take array indices as inputs.
 
 :::: {#UFfig}
@@ -203,54 +201,20 @@ $\log n$ times when $n$ equivalences are processed (since each addition
 to the depth must be accompanied by at least doubling the size of the
 tree).
 
-Here is an implementation for the UNION method when using weighted
-union.
+Here is an implementation for the UNION method when using weighted union.
 
-```python
-    def UNION(self, a, b):
-        root1 = self.FIND(a)   # Find root of node a
-        root2 = self.FIND(b)   # Find root of node b
-        if root1 != root2:     # Merge with weighted union
-            if self.weights[root2] > self.weights[root1]:
-                self.array[root1] = root2
-                self.weights[root2] += self.weights[root1]
-            else:
-                self.array[root2] = root1;
-                self.weights[root1] += self.weights[root2];
-```
-
-```java
-  public void UNION(int a, int b) {
-    int root1 = FIND(a);     // Find root of node a
-    int root2 = FIND(b);     // Find root of node b
-    if (root1 != root2) {          // Merge with weighted union
-      if (weights[root2] > weights[root1]) {
-        array[root1] = root2;
-        weights[root2] += weights[root1];
-      } else {
-        array[root2] = root1;
-        weights[root1] += weights[root2];
-      }
-    }
-  }
-```
-
-```java
-    public void UNION(int a, int b) {
-        int root1 = FIND(a);     // Find root of node a
-        int root2 = FIND(b);     // Find root of node b
-        if (root1 != root2) {    // Merge with weighted union
-            if (weights[root2] > weights[root1]) {
-                array[root1] = root2;
-                weights[root2] += weights[root1];
-            } else {
-                array[root2] = root1;
-                weights[root1] += weights[root2];
-            }
-        }
-    }
-```
-
+    class ParentPointerTree:
+        ...
+        UNION(a, b):
+            root1 = this.FIND(a)   // Find root of node a
+            root2 = this.FIND(b)   // Find root of node b
+            if root1 != root2:     // Merge with weighted union
+                if this.weights[root2] > this.weights[root1]:
+                    this.array[root1] = root2
+                    this.weights[root2] = this.weights[root2] + this.weights[root1]
+                else:
+                    this.array[root2] = root1
+                    this.weights[root1] = this.weights[root1] + this.weights[root2]
 
 
 The following slideshow illustrates a series of UNION operations with
@@ -273,34 +237,15 @@ Alternatively, a recursive algorithm can be implemented as follows. This
 version of `FIND` not only returns the root of the current node, but
 also makes all ancestors of the current node point to the root.
 
-```python
-    # Return the root of curr's tree with path compression
-    def FIND(self, curr):
-        if self.array[curr] == -1:
-            return curr        # At root
-        self.array[curr] = self.FIND(self.array[curr])
-        return self.array[curr];
-```
-
-```java
-  // Return the root of curr's tree with path compression
-  public int FIND(int curr) {
-    if (array[curr] == -1) return curr; // At root
-    array[curr] = FIND(array[curr]);
-    return array[curr];
-  }
-```
-
-```java
-    // Return the root of curr's tree with path compression
-    public int FIND(int curr) {
-        if (array[curr] == -1)
-            return curr;         // At root
-        array[curr] = FIND(array[curr]);
-        return array[curr];
-    }
-```
-
+    class ParentPointerTree:
+        ...
+        // Return the root of current's tree with path compression
+        FIND(current):
+            if this.array[current] == -1:
+                return current  // Base case: we are at the root
+            else:
+                this.array[current] = this.FIND(this.array[current])
+                return this.array[current]
 
 
 The following slide show illustrates path compression using the last
@@ -333,23 +278,9 @@ of [amortized analysis]{.term}.
 The expression $\log^* n$ is closely related to the inverse of
 Ackermann's function. For more information about Ackermann's function
 and the cost of path compression for UNION/FIND, see
-[\[Tarjan75\]](#Tarjan75){.citation}. The survey article by Galil &
-Italiano [\[GalilItaliano91\]](#GalilItaliano91){.citation} covers many
-aspects of the equivalence class problem.
+\[[Tarjan, 1975](#tarjan75){.citation}\]. 
+The survey article by \[[Galil & Italiano, 1991](#galilitaliano91){.citation}\] 
+covers many aspects of the equivalence class problem.
 
 <avembed id="UnionFindPRO" src="General/UnionFindPRO.html" type="pe" name="Union/Find Proficiency Exercise"/>
 
-::: {#citations}
-
-[GalilItaliano91]{#GalilItaliano91 .citation-label}
-
-:   Zvi Galil and Giuseppe F. Italiano, "Data Structures and Algorithms
-    for Disjoint Set Union Problems", *Computing Surveys 23*,
-    3(September 1991), 319-344.
-
-[Tarjan75]{#Tarjan75 .citation-label}
-
-:   Robert E. Tarjan, "On the efficiency of a good but not linear set
-    merging algorithm", *Journal of the ACM 22*, 2(April 1975),
-    215-225.
-:::

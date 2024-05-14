@@ -52,75 +52,26 @@ right subtrees. Where do left and right subtree counts come from? Calls
 to function `count` on the subtrees will compute this for us. Thus, we
 can implement `count` as follows.
 
-```python
-def count(root):
-    if node is None: return 0  # No nodes to count
-    return 1 + count(node.left()) + count(node.right())
-```
-
-```java
-static int count(BinNode root) {
-  if (root == null) { return 0; }  // Nothing to count
-  return 1 + count(root.left()) + count(root.right());
-}
-```
-
-```java
-static <E> int count(BinNode<E> root) {
-    if (root == null) return 0;  // Nothing to count
-    return 1 + count(root.left()) + count(root.right());
-}
-```
-
-
+    function count(node):
+        if node is null: 
+            return 0
+        return 1 + count(node.left) + count(node.right)
 
 The following solution is correct but inefficient as it does redundant
 checks on the left and the right child of each visited node.
 
-```python
-def ineff_count(root):
-    if root is None: return 0   # Nothing to count
-    count = 0
-    if root.left() is not None:
-        count += ineff_count(root.left())
-    if root.right() is not None:
-        count += ineff_count(root.right())
-    if root.left() is None and root.right() is None:
-        return 1
-    return 1 + count
-```
-
-```java
-static int ineff_count(BinNode root) {
-  if (root == null) { return 0; }  // Nothing to count
-  int count = 0;
-  if (root.left() != null) {
-    count = 1 + ineff_count(root.left());
-  }
-  if (root.right() != null) {
-    count = 1 + ineff_count(root.right());
-  }  
-  if (root.left() == null && root.right() == null) {
-    return 1;
-  }
-  return 1 + count;
-}
-```
-
-```java
-static <E> int ineff_count(BinNode<E> root) {
-    if (root == null) return 0;  // Nothing to count
-    int count = 0;
-    if (root.left() != null)
-        count += ineff_count(root.left());
-    if (root.right() != null)
-        count += ineff_count(root.right());
-    if (root.left() == null && root.right() == null)
-        return 1;
-    return 1 + count;
-}
-```
-
+    function inefficient_count(node):
+        if node is null: 
+            return 0
+        count = 0
+        if node.left is not null:
+            count = count + inefficient_count(node.left)
+        if node.right is not null:
+            count = count + inefficient_count(node.right)
+        if node.left is null and node.right is null:
+            return 1
+        else:
+            return 1 + count
 
 :::::
 

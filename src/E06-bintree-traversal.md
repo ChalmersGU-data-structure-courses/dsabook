@@ -12,17 +12,17 @@ order as long as each node is visited precisely once. For other
 applications, nodes must be visited in an order that preserves some
 relationship.
 
-### Preorder Traversal
-
-For example, we might wish to make sure that we visit any given node
-*before* we visit its children. This is called a
-[preorder traversal]{.term}.
-
 :::: {#BinTravExample}
 <inlineav id="BinExampCON" src="Binary/BinExampCON.js" name="Binary/BinExampCON" links="Binary/BinExampCON.css" static/>
 
 A binary tree for traversal examples.
 ::::
+
+### Preorder Traversal
+
+For example, we might wish to make sure that we visit any given node
+*before* we visit its children. This is called a
+[preorder traversal]{.term}.
 
 ::: topic
 #### Example {-}
@@ -81,24 +81,11 @@ node of the tree. The traversal function visits `node` and its children
 specifies that `node` be visited before its children. This can easily be
 implemented as follows.
 
-```python
-def preorder(node):
-    if node is None: return  # Empty subtree - do nothing
-    visit(node)                # Visit root node
-    preorder(node.left())    # Process all nodes in left
-    preorder(node.right())   # Process all nodes in right
-```
-
-```java
-static <E> void preorder(BinNode<E> node) {
-    if (node == null) return;  // Empty subtree - do nothing
-    visit(node);               // Visit root node
-    preorder(node.left());     // Process all nodes in left
-    preorder(node.right());    // Process all nodes in right
-}
-```
-
-
+    function preorder(node):
+        if node is not null:      // Only continue if this is a tree
+            visit(node)           // Visit root node
+            preorder(node.left)   // Process all nodes in left subtree
+            preorder(node.right)  // Process all nodes in right subtree
 
 Function `preorder` first checks that the tree is not empty (if it is,
 then the traversal is done and `preorder` simply returns). Otherwise,

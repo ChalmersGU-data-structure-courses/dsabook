@@ -37,7 +37,7 @@
       labels = jsav.ds.array(arr, {left: 250, top: topoffset + 46, indexed: true});
       //Initializing the parent pointer
       for (i = 0; i < arr.length; i++) {
-        arr[i] = "/";
+        arr[i] = "-";
       }
       parents = jsav.ds.array(arr, {left: 250, top: topoffset + 0});
       initTree();
