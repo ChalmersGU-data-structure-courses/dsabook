@@ -110,6 +110,8 @@ is called on the right subtree, visiting all nodes in the right subtree.
 Postorder and inorder traversals are similar. They simply change the
 order in which the node and its children are visited, as appropriate.
 
+### Preorder Traversal Practice
+
 <avembed id="btTravPreorderPRO" src="Binary/btTravPreorderPRO.html" type="pe" name="Binary Tree Preorder Traversal Exercise"/>
 
 ### Postorder Traversal Practice

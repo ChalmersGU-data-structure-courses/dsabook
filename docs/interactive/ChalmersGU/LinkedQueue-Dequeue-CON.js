@@ -6,13 +6,13 @@ $(document).ready(function() {
   var av_name = "LinkedQueue-Dequeue-CON";
   var av = new JSAV(av_name);
   var pseudo = av.code([
-    "dequeue() : E",
+    "dequeue():",
     "    // Precondition: queueSize > 0",
-    "    removed : Node = front",
+    "    removed = front",
     "    front = removed.next",
     "    removed.next = null   // For garbage collection",
-    "    queueSize -= 1",
-    "    if queueSize == 0",
+    "    queueSize = queueSize - 1",
+    "    if queueSize == 0:",
     "        rear = null",
     "    return removed.elem",
   ], {lineNumbers: false});

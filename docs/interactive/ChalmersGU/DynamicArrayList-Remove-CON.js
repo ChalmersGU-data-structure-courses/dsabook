@@ -14,17 +14,16 @@ $(document).ready(function() {
       arrow1_x = 22 + nodeWidth;
 
   var pseudo = av.code([
-    "remove(i:int) : E",
+    "remove(i):",
     "    // Precondition: 0 <= i < listSize",
-    "    x : E = internalArray[i]",
-    "    for k in i+1, i+2, ..., listSize-1",
-    "        internalArray[k] = internalArray[k+1]",
-    "    listSize -= 1",
-    "    internalArray[listSize] = null   // For garbage collection",
-    "    if listSize < size of internalArray * MinLoadFactor",
-    "        resizeArray(size of internalArray / CapacityMultiplier)",
+    "    x = internalArray[i]",
+    "    for k in i+1 to listSize-1:",
+    "        internalArray[k-1] = internalArray[k]",
+    "    listSize = listSize - 1",
+    "    internalArray[listSize] = null",
+    "    if listSize < size of internalArray * 1/3:",
+    "        resizeArray(size of internalArray * 1/2)",
     "    return x",
-    "add(i:int, x:E)",
   ], {lineNumbers: false});
 
   var arr = av.ds.array(arrValues, {indexed: true, top: 20, left: 10});

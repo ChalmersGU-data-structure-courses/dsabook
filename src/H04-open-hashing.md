@@ -64,7 +64,7 @@ each bin to a small number that can be sorted in some other way.
 
 There is nothing that requires us to use a linked list as the underlying
 data structure, it could be a dynamic array or a balanced search tree
-too. (In fact, Java 8's hash tables use a combination of linked lists
+too. (In fact, Java's hash tables use a combination of linked lists
 and balanced trees).
 
 Conceptually, a hash table can use any kind of collection data structure

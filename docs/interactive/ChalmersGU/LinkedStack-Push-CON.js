@@ -5,9 +5,9 @@ $(document).ready(function() {
   var av_name = "LinkedStack-Push-CON";
   var av = new JSAV(av_name);
   var pseudo = av.code([
-    "push(x:E)",
+    "push(x):",
     "    top = new Node(x, top)",
-    "    stackSize += 1",
+    "    stackSize = stackSize + 1",
   ], {lineNumbers: false});
 
   // Relative offsets

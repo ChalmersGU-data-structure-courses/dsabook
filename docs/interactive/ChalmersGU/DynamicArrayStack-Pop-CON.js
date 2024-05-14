@@ -10,13 +10,13 @@ $(document).ready(function() {
   var av_name = "DynamicArrayStack-Pop-CON";
   var av = new JSAV(av_name);
   var pseudo = av.code([
-    "pop() : E",
+    "pop():",
     "    // Precondition: stackSize > 0",
-    "    stackSize -= 1",
-    "    x : E = internalArray[stackSize]",
-    "    internalArray[stackSize] = null   // For garbage collection",
-    "    if stackSize < size of internalArray * MinLoadFactor",
-    "        resizeArray(size of internalArray / CapacityMultiplier)",
+    "    stackSize = stackSize - 1",
+    "    x = internalArray[stackSize]",
+    "    internalArray[stackSize] = null",
+    "    if stackSize < size of internalArray * 1/3:",
+    "        resizeArray(size of internalArray * 1/2)",
     "    return x",
   ], {lineNumbers: false});
 

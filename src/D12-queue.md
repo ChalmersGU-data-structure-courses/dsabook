@@ -80,7 +80,7 @@ pointer (modulus the size of the internal array), and `dequeue`
 increments the front pointer.
 
     class DynamicArrayQueue implements Queue:
-        def DynamicArrayQueue():
+        DynamicArrayQueue():
             this.internalArray = new Array(8)  // Internal array containing the queue elements
             this.queueSize = 0                 // Size of queue, and index of the next free slot
             this.front = 0                     // Index of front element
@@ -136,8 +136,6 @@ one for lists and queues.
     class DynamicArrayQueue implements Queue:
         ...
         resizeArray(newCapacity):
-            if newCapacity < 8: 
-                return
             newArray = new Array(newCapacity)
             for i in 0 to this.queueSize-1:
                 j = (i + this.front) % this.internalArray.size()

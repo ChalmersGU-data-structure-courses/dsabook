@@ -5,19 +5,19 @@ $(document).ready(function() {
   var av_name = "LinkedList-Remove-CON";
   var av = new JSAV(av_name);
   var pseudo = av.code([
-    "remove(i:int) : E",
+    "remove(i):",
     "    // Precondition: 0 <= i < listSize",
-    "    if i == 0",
-    "        removed : Node = head",
+    "    if i == 0:",
+    "        removed = head",
     "        head = removed.next",
-    "    else",
-    "        prev : Node = head",
+    "    else:",
+    "        prev = head",
     "        repeat i-1 times",
     "            prev = prev.next",
-    "        removed : Node = prev.next",
+    "        removed = prev.next",
     "        prev.next = removed.next",
-    "    removed.next = null   // For garbage collection",
-    "    listSize -= 1",
+    "    removed.next = null",
+    "    listSize = listSize - 1",
     "    return removed.elem",
   ], {lineNumbers: false});
 

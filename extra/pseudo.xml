@@ -138,6 +138,7 @@
 			<item>MinPriorityQueue</item>
 			<item>MaxPriorityQueue</item>
 			<item>Queue</item>
+			<item>Stack</item>
 			<item>Set</item>
 			<item>SortedMap</item>
 			<item>SortedSet</item>

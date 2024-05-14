@@ -28,7 +28,7 @@ calls add to the stack. Each return from a subroutine
 off the stack. As an example, here is a recursive implementation for the
 factorial function.
 
-    // Recursively compute and return n!
+    // Recursively compute and return n-factoral (n!)
     function factorialRecursive(n):
         if n <= 1:
             return 1  // Base case: return base solution
@@ -122,12 +122,7 @@ function, which cannot be done iteratively.
 Here is a recursive implementation for Towers of Hanoi.
 
     // Compute the moves to solve a Tower of Hanoi puzzle.
-    // Function move does (or prints) the actual move of a disk
-    // from one pole to another.
-    //  - n: The number of disks
-    //  - start: The start pole
-    //  - goal: The goal pole
-    //  - temp: The other pole
+    // Function 'move' does (or prints) the actual move of a disk from one pole to another.
     function TOH_recursive(n, start, goal, temp):
         if n == 0:                             // Base case
             return
@@ -135,34 +130,25 @@ Here is a recursive implementation for Towers of Hanoi.
         move(start, goal)                      // Move bottom disk to goal
         TOH_recursive(n-1, temp, goal, start)  // Recursive call: n-1 rings
 
-`TOH` makes two recursive calls: one to move $n-1$ rings off the bottom
+`TOH_recursive` makes two recursive calls: one to move $n-1$ rings off the bottom
 ring, and another to move these $n-1$ rings back to the goal pole. We
 can eliminate the recursion by using a stack to store a representation
-of the three operations that `TOH` must perform: two recursive calls and
+of the three operations that `TOH_recursive` must perform: two recursive calls and
 a move operation. To do so, we must first come up with a representation
 of the various operations, implemented as a class whose objects will be
 stored on the stack.
 
     function TOH_stack(n, start, goal, temp):
         S = new LinkedStack()
-        S.push(new TOH_object(TOH, n, start, goal, temp))
+        S.push( <TOH, n, start, goal, temp> )
         while S.size() > 0:
-            it = S.pop()         // Get next task
-            if it.op == MOVE:    // Do a move
+            it = S.pop()       // Get next task
+            if it.op == MOVE:  // Do a move
                 move(it.start, it.goal)
             else if it.num > 0:  // Imitate TOH recursive solution (in reverse)
-                S.push(TOH_object(TOH, it.num-1, it.temp, it.goal, it.start));
-                S.push(TOH_object(MOVE, 0, it.start, it.goal));   # A move to do
-                S.push(TOH_object(TOH, it.num-1, it.start, it.temp, it.goal));
-
-    class TOH_object:
-        TOH_object(o, n, s, g, t=null):
-            this.op = o
-            this.num = n
-            this.start = s
-            this.goal = g
-            this.temp = t
-
+                S.push( <TOH, it.num-1, it.temp, it.goal, it.start> )
+                S.push( <MOVE, 0, it.start, it.goal> )
+                S.push( <TOH, it.num-1, it.start, it.temp, it.goal> )
 
 We first enumerate the possible operations MOVE and TOH, to indicate
 calls to the `move` function and recursive calls to `TOH`, respectively.

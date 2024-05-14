@@ -5,16 +5,16 @@ $(document).ready(function() {
   var av_name = "LinkedList-AddSpecial-CON";
   var av = new JSAV(av_name);
   var pseudo = av.code([
-    "add(i:int, x:E)",
+    "add(i, x):",
     "    // Precondition: 0 <= i <= listSize",
-    "    if i == 0",
+    "    if i == 0:",
     "        head = new Node(x, head)",
-    "    else",
-    "        prev : Node = head",
-    "        repeat i-1 times",
+    "    else:",
+    "        prev = head",
+    "        repeat i-1 times:",
     "            prev = prev.next",
     "        prev.next = new Node(x, prev.next)",
-    "    listSize += 1",
+    "    listSize = listSize + 1",
   ], {lineNumbers: false});
 
   // Offsets

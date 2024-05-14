@@ -60,9 +60,12 @@ is which end of the array should represent the top of the stack.
         ...
         push(x):
             if this.stackSize >= this.internalArray.size():
-                this.resizeArray(this.internalArray.size() * 2)  // Any factor >1 works here
+                this.resizeArray(this.internalArray.size() * 2)
             this.internalArray[this.stackSize] = x
             this.stackSize = this.stackSize + 1
+
+Note that any resizing factor >1 works, and in fact it is probably better to use something like 1.5 or even 1.1
+(because this will save memory without losing too much efficiency).
 
 <avembed id="DynamicArrayStack-Push-PRO" src="ChalmersGU/DynamicArrayStack-Push-PRO.html" type="ka" name="Array-based Stack Push Exercise"/>
 
@@ -80,6 +83,10 @@ is which end of the array should represent the top of the stack.
             if this.stackSize <= this.internalArray.size() * 1/3:
                 this.resizeArray(this.internalArray.size() * 1/2)
             return x
+
+Note that the factors 1/3 and 1/2 are not set in stone. The only requirement is that
+the minimum load factor 1/3 must be smaller than the shrinking factor 1/2,
+which in turn must be <1.
 
 <avembed id="DynamicArrayStack-Pop-PRO" src="ChalmersGU/DynamicArrayStack-Pop-PRO.html" type="ka" name="Array-based Stack Pop Exercise"/>
 

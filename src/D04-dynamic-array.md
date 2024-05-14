@@ -14,8 +14,6 @@ exceeded, and copy over all elements to the new one.
     class DynamicArrayList implements List:
         ...
         resizeArray(newCapacity):
-            if newCapacity < minimumCapacity: 
-                return
             newArray = new Array(newCapacity)
             for i = 0 to this.listSize-1:
                 newArray[i] = this.internalArray[i]
@@ -107,7 +105,7 @@ The array size is initially 1, so we get the following calls to
 -   `resizeArray(2)`, copying 1 element
 -   `resizeArray(3)`, copying 2 elements
 -   `resizeArray(4)`, copying 3 elements
--   \...
+-   ...
 -   `resizeArray(n-2)`, copying $n-3$ elements
 -   `resizeArray(n-1)`, copying $n-2$ elements
 -   `resizeArray(n)`, copying $n-1$ elements
@@ -267,7 +265,7 @@ and deletions:
 -   remove it
 -   append another one
 -   remove it
--   \...
+-   ...
 
 If we're unlucky and the initial list is full, then the first append
 will have to resize the array. Then when we remove that element, the

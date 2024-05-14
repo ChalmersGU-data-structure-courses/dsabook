@@ -44,7 +44,7 @@ Stack nodes are exactly the same as the
             precondition: this.stackSize > 0
             removed = this.top
             this.top = removed.next
-            removed.next = null   # For garbage collection
+            removed.next = null  // For garbage collection
             this.stackSize = this.stackSize - 1
             return removed.elem
 
