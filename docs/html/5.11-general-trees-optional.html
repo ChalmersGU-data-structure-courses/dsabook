@@ -203,7 +203,7 @@ href="10-glossary.html#general-tree" class="term"
 title="A tree in which any given node can have any number of children. This is in contrast to, for example, a binary tree where each node has a fixed number of children (some of which might be `null`). General tree nodes tend to be harder to implement for this reason.">general
 tree</a>.</p>
 <p>In this module we will examine general tree terminology and define a
-basic ADT for general trees.</p>
+basic class for general trees.</p>
 <section id="general-tree-definitions-and-terminology" class="level3"
 data-number="5.11.1">
 <h3 data-number="5.11.1"><span
@@ -310,95 +310,31 @@ Nodes</h3>
 precise what operations such implementations must support. Any
 implementation must be able to initialize a tree. Given a tree, we need
 access to the root of that tree. There must be some way to access the
-children of a node. In the case of the ADT for binary tree nodes, this
-was done by providing member functions that give explicit access to the
-left and right child pointers. Unfortunately, because we do not know in
-advance how many children a given node will have in the general tree, we
-cannot give explicit functions to access each child. An alternative must
-be found that works for an unknown number of children.</p>
+children of a node. In the case of binary tree nodes, this was done by
+providing instance variables for the left and right child pointers.
+Unfortunately, because we do not know in advance how many children a
+given node will have in the general tree, we cannot give explicit
+functions to access each child. An alternative must be found that works
+for an unknown number of children.</p>
 <p>One choice would be to provide a function that takes as its parameter
 the index for the desired child. That combined with a function that
 returns the number of children for a given node would support the
 ability to access any node or process all children of a node.
 Unfortunately, this view of access tends to bias the choice for node
 implementations in favor of an array-based approach, because these
-functions favor random access to a list of children. In practice, an
-implementation based on a linked list is often preferred.</p>
-<p>An alternative is to provide access to the first (or leftmost) child
-of a node, and to provide access to the next (or right) sibling of a
-node. Here are the class declarations for general trees and their nodes.
-Based on these two access functions, the children of a node can be
-traversed like a list. Trying to find the next sibling of the rightmost
-sibling would return <code>null</code>.</p>
+functions favor random access to a list of children.</p>
+<p>An alternative is to provide access to a <strong>List</strong> of the
+children pointers. This list can be an array-based list or a linked list
+or even a dynamic function generating the children on demand. The only
+thing we will assume is that it follows the <strong>List</strong> ADT,
+as described in the section about <a
+href="4.1-the-list-adt.html#the-list-adt">the List ADT</a>.</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># General tree node ADT</span></span>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// General tree nodes</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> GTNode:</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> value(<span class="va">self</span>): <span class="cf">raise</span> <span class="pp">NotImplementedError</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> isLeaf(<span class="va">self</span>): <span class="cf">raise</span> <span class="pp">NotImplementedError</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> parent(<span class="va">self</span>): <span class="cf">raise</span> <span class="pp">NotImplementedError</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> leftmostChild(<span class="va">self</span>): <span class="cf">raise</span> <span class="pp">NotImplementedError</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> rightSibling(<span class="va">self</span>): <span class="cf">raise</span> <span class="pp">NotImplementedError</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> setValue(<span class="va">self</span>, value): <span class="cf">raise</span> <span class="pp">NotImplementedError</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> setParent(<span class="va">self</span>, par): <span class="cf">raise</span> <span class="pp">NotImplementedError</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> insertFirst(<span class="va">self</span>, n): <span class="cf">raise</span> <span class="pp">NotImplementedError</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> insertNext(<span class="va">self</span>, n): <span class="cf">raise</span> <span class="pp">NotImplementedError</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> removeFirst(<span class="va">self</span>): <span class="cf">raise</span> <span class="pp">NotImplementedError</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> removeNext(<span class="va">self</span>): <span class="cf">raise</span> <span class="pp">NotImplementedError</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># General tree ADT</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> GenTree:</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> clear(<span class="va">self</span>): <span class="cf">raise</span> <span class="pp">NotImplementedError</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> root(<span class="va">self</span>): <span class="cf">raise</span> <span class="pp">NotImplementedError</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> newRoot(<span class="va">self</span>, value, first, sib): <span class="cf">raise</span> <span class="pp">NotImplementedError</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> newLeftChild(<span class="va">self</span>, value): <span class="cf">raise</span> <span class="pp">NotImplementedError</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// General tree node ADT</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">interface</span> GTNode <span class="op">{</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="bu">Object</span> <span class="fu">value</span><span class="op">();</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">isLeaf</span><span class="op">();</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> GTNode <span class="fu">parent</span><span class="op">();</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> GTNode <span class="fu">leftmostChild</span><span class="op">();</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> GTNode <span class="fu">rightSibling</span><span class="op">();</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setValue</span><span class="op">(</span><span class="bu">Object</span> value<span class="op">);</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setParent</span><span class="op">(</span>GTNode par<span class="op">);</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">insertFirst</span><span class="op">(</span>GTNode n<span class="op">);</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">insertNext</span><span class="op">(</span>GTNode n<span class="op">);</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">removeFirst</span><span class="op">();</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">removeNext</span><span class="op">();</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">// General tree ADT</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">interface</span> GenTree <span class="op">{</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">clear</span><span class="op">();</span>      <span class="co">// Clear the tree</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> GTNode <span class="fu">root</span><span class="op">();</span>     <span class="co">// Return the root</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Make the tree have a new root, give first child and sib</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">newroot</span><span class="op">(</span><span class="bu">Object</span> value<span class="op">,</span> GTNode first<span class="op">,</span> GTNode sib<span class="op">);</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">newleftchild</span><span class="op">(</span>E value<span class="op">);</span> <span class="co">// Add left child</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// General tree node ADT</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">interface</span> GTNode<span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> E <span class="fu">value</span><span class="op">();</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">isLeaf</span><span class="op">();</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> GTNode<span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="fu">parent</span><span class="op">();</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> GTNode<span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="fu">leftmostChild</span><span class="op">();</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> GTNode<span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="fu">rightSibling</span><span class="op">();</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setValue</span><span class="op">(</span>E value<span class="op">);</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setParent</span><span class="op">(</span>GTNode<span class="op">&lt;</span>E<span class="op">&gt;</span> par<span class="op">);</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">insertFirst</span><span class="op">(</span>GTNode<span class="op">&lt;</span>E<span class="op">&gt;</span> n<span class="op">);</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">insertNext</span><span class="op">(</span>GTNode<span class="op">&lt;</span>E<span class="op">&gt;</span> n<span class="op">);</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">removeFirst</span><span class="op">();</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">removeNext</span><span class="op">();</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co">// General tree ADT</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">interface</span> GenTree<span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">clear</span><span class="op">();</span>       <span class="co">// Clear the tree</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> GTNode<span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="fu">root</span><span class="op">();</span>   <span class="co">// Return the root</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Make the tree have a new root, give first child and sib</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">newRoot</span><span class="op">(</span>E value<span class="op">,</span> GTNode<span class="op">&lt;</span>E<span class="op">&gt;</span> first<span class="op">,</span> GTNode<span class="op">&lt;</span>E<span class="op">&gt;</span> sib<span class="op">);</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">newLeftChild</span><span class="op">(</span>E value<span class="op">);</span> <span class="co">// Add left child</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    GTNode(elem, children):</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.elem <span class="op">=</span> elem          <span class="co">// This is the value, just as for binary nodes</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.children <span class="op">=</span> children  <span class="co">// This is a List of GTNodes</span></span></code></pre></div>
 </section>
 <section id="general-tree-traversals" class="level3"
 data-number="5.11.3">
@@ -456,45 +392,20 @@ right sibling, and then to that node’s right sibling, and so on.</p>
 <div class="jsavcanvas"></div>
 </div>
 </p>
-<p>Using the General Tree ADT shown above, here is an implementation to
-print the nodes of a general tree in preorder. Note the <span
-class="title-ref">while</span> loop at the end, which processes the list
-of children by beginning with the leftmost child, then repeatedly moving
-to the next child until calling <code>next</code> returns
-<code>null</code>.</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Preorder traversal for general trees</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> preorder(rt):</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    PrintNode(rt)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> rt.isLeaf():</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        temp <span class="op">=</span> rt.leftmostChild()</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> temp <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>            preorder(temp)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>            temp <span class="op">=</span> temp.rightSibling()</span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Preorder traversal for general trees</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">void</span> <span class="fu">preorder</span><span class="op">(</span>GTNode rt<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">PrintNode</span><span class="op">(</span>rt<span class="op">);</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(!</span>rt<span class="op">.</span><span class="fu">isLeaf</span><span class="op">())</span> <span class="op">{</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    GTNode temp <span class="op">=</span> rt<span class="op">.</span><span class="fu">leftmostChild</span><span class="op">();</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>temp <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">preorder</span><span class="op">(</span>temp<span class="op">);</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>      temp <span class="op">=</span> temp<span class="op">.</span><span class="fu">rightSibling</span><span class="op">();</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Preorder traversal for general trees</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">void</span> <span class="fu">preorder</span><span class="op">(</span>GTNode<span class="op">&lt;</span>E<span class="op">&gt;</span> node<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">PrintNode</span><span class="op">(</span>node<span class="op">);</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(!</span>node<span class="op">.</span><span class="fu">isLeaf</span><span class="op">())</span> <span class="op">{</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        GTNode<span class="op">&lt;</span>E<span class="op">&gt;</span> temp <span class="op">=</span> node<span class="op">.</span><span class="fu">leftmostChild</span><span class="op">();</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="op">(</span>temp <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>            <span class="fu">preorder</span><span class="op">(</span>temp<span class="op">);</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>            temp <span class="op">=</span> temp<span class="op">.</span><span class="fu">rightSibling</span><span class="op">();</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Using the General Tree class shown above, here are implementations to
+process the nodes of a general tree in preorder and in postorder. The
+code is very simple, but this is because we defer all the complexity to
+the underlying <strong>List</strong> implementation of the children.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> preorder(node):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    process(node)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> child <span class="kw">in</span> node.children:</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        preorder(child)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> postorder(node):</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> child <span class="kw">in</span> node.children:</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        postorder(child)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    process(node)</span></code></pre></div>
 </section>
 </section>
 <script type="text/javascript" src="../interactive/General/GenTreeCON.js"></script>

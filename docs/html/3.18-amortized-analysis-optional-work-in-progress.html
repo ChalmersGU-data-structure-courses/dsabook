@@ -187,7 +187,7 @@ class="level2" data-number="3.18">
 Amortized Analysis (optional) (WORK IN PROGRESS)</h2>
 <p>This module presents the concept of <a
 href="10-glossary.html#amortized-analysis" class="term"
-title="Analysing the amortized complexity of an algorithm or term:problem.">amortized
+title="Analysing the amortized complexity of an algorithm or problem.">amortized
 analysis</a>, which is the analysis for a series of operations taken as
 a whole. In particular, amortized analysis allows us to deal with the
 situation where the worst-case cost for
@@ -227,14 +227,14 @@ changing 1s to 0s until the first 0 is encountered. This 0 is changed to
 a 1, and the increment operation is done. Below is an implementation for
 the increment operation, assuming that a binary number of length
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-is stored in array <span class="title-ref">A</span> of length
+is stored in array <strong>A</strong> of length
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> i <span class="op">&lt;</span> <span class="bu">len</span>(A) <span class="kw">and</span> A[i] <span class="op">==</span> <span class="dv">1</span>:</span>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> i <span class="op">&lt;</span> A.<span class="bu">size</span>() <span class="kw">and</span> A[i] <span class="op">==</span> <span class="dv">1</span>:</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    A[i] <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    i <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> i <span class="op">&lt;</span> <span class="bu">len</span>(A):</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> i <span class="op">&lt;</span> A.<span class="bu">size</span>():</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    A[i] <span class="op">=</span> <span class="dv">1</span></span></code></pre></div>
 <p>If we count from 0 through
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mi>n</mi></msup><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2^n - 1</annotation></semantics></math>,
@@ -269,57 +269,50 @@ for a series of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mi>n</mi></msup><annotation encoding="application/x-tex">2^n</annotation></semantics></math>
 increments.</p>
 <p>A useful concept for amortized analysis is illustrated by a simple
-variation on the stack data structure, where the <span
-class="title-ref">pop</span> function is slightly modified to take a
-second parameter
+variation on the stack data structure, where the <em>pop</em> function
+is slightly modified to take a second parameter
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
 indicating that
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
 pop operations are to be performed.</p>
-<p>The “local” worst-case analysis for <span
-class="title-ref">multipop</span> is
+<p>The “local” worst-case analysis for <em>multipop</em> is
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math>
 for
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
 elements in the stack. Thus, if there are
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>m</mi><mn>1</mn></msub><annotation encoding="application/x-tex">m_1</annotation></semantics></math>
-calls to <span class="title-ref">push</span> and
+calls to <em>push</em> and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>m</mi><mn>2</mn></msub><annotation encoding="application/x-tex">m_2</annotation></semantics></math>
-calls to <span class="title-ref">multipop</span>, then the naive
-worst-case cost for the series of operation is
+calls to <em>multipop</em>, then the naive worst-case cost for the
+series of operation is
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mn>1</mn></msub><mo>+</mo><msub><mi>m</mi><mn>2</mn></msub><mo>⋅</mo><mi>n</mi><mo>=</mo><msub><mi>m</mi><mn>1</mn></msub><mo>+</mo><msub><mi>m</mi><mn>2</mn></msub><mo>⋅</mo><msub><mi>m</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">m_1 + m_2\cdot n = m_1 + m_2 \cdot m_1</annotation></semantics></math>.
 This analysis is unreasonably pessimistic. Clearly it is not really
 possible to pop
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>m</mi><mn>1</mn></msub><annotation encoding="application/x-tex">m_1</annotation></semantics></math>
-elements each time <span class="title-ref">multipop</span> is called.
-Analysis that focuses on single operations cannot deal with this global
-limit, and so we turn to amortized analysis to model the entire series
-of operations.</p>
+elements each time <em>multipop</em> is called. Analysis that focuses on
+single operations cannot deal with this global limit, and so we turn to
+amortized analysis to model the entire series of operations.</p>
 <p>The key to an amortized analysis of this problem lies in the concept
 of <a href="10-glossary.html#potential" class="term"
 title="A concept in amortized complexity for operations on a data structure. We choose a *potential function* that associates an arbitrary non-negative value of *stored cost* (stored energy) with each state of the data structure. We then define the amortized cost of a run of the operation to be its cost as given by the the cost model plus the change in potential. The complexity modified this way is called amortized complexity. An example is adding an element to a dynamic array. When the dynamic array is not full, adding an element is quick and we store some of that saved cost by increasing the potential. When the dynamic array is full capacity, we perform an expensive reallocation, but compensate that cost by resetting the potential from a high value to zero. Let us define the potential of a dynamic array with capacity $c$ and size $n$ to be $max(2n-c,0)$. Assuming we double the capacity on reallocation, the operation of adding an element then has constant amortized complexity. The concept comes from potential energy in physics. For example, in the graviational field of the earth, kinetic energy may be stored as potential energy.">potential</a>.
 At any given time, a certain number of items may be on the stack. The
-cost for <span class="title-ref">multipop</span> can be no more than
-this number of items. Each call to <span class="title-ref">push</span>
-places another item on the stack, which can be removed by only a single
-<span class="title-ref">multipop</span> operation. Thus, each call to
-<span class="title-ref">push</span> raises the potential of the stack by
-one item. The sum of costs for all calls to <span
-class="title-ref">multipop</span> can never be more than the total
-potential of the stack (aside from a constant time cost associated with
-each call to <span class="title-ref">multipop</span> itself).</p>
-<p>The amortized cost for any series of <span
-class="title-ref">push</span> and <span
-class="title-ref">multipop</span> operations is the sum of three costs.
-First, each of the <span class="title-ref">push</span> operations takes
-constant time. Second, each <span class="title-ref">multipop</span>
-operation takes a constant time in overhead, regardless of the number of
-items popped on that call. Finally, we count the sum of the potentials
-expended by all <span class="title-ref">multipop</span> operations,
+cost for <em>multipop</em> can be no more than this number of items.
+Each call to <em>push</em> places another item on the stack, which can
+be removed by only a single <em>multipop</em> operation. Thus, each call
+to <em>push</em> raises the potential of the stack by one item. The sum
+of costs for all calls to <em>multipop</em> can never be more than the
+total potential of the stack (aside from a constant time cost associated
+with each call to <em>multipop</em> itself).</p>
+<p>The amortized cost for any series of <em>push</em> and
+<em>multipop</em> operations is the sum of three costs. First, each of
+the <em>push</em> operations takes constant time. Second, each
+<em>multipop</em> operation takes a constant time in overhead,
+regardless of the number of items popped on that call. Finally, we count
+the sum of the potentials expended by all <em>multipop</em> operations,
 which is at most
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>m</mi><mn>1</mn></msub><annotation encoding="application/x-tex">m_1</annotation></semantics></math>,
-the number of <span class="title-ref">push</span> operations. This total
-cost can therefore be expressed as</p>
+the number of <em>push</em> operations. This total cost can therefore be
+expressed as</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>m</mi><mn>1</mn></msub><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>m</mi><mn>2</mn></msub><mo>+</mo><msub><mi>m</mi><mn>1</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>m</mi><mn>1</mn></msub><mo>+</mo><msub><mi>m</mi><mn>2</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr></mtable><annotation encoding="application/x-tex">
 \begin{eqnarray}
 m_1 + (m_2 + m_1) &amp;=&amp; \Theta(m_1 + m_2)

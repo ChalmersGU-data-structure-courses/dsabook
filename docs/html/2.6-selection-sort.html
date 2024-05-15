@@ -185,6 +185,11 @@
 <section id="selection-sort" class="level2" data-number="2.6">
 <h2 data-number="2.6"><span class="header-section-number">2.6</span>
 Selection Sort</h2>
+<!-- TODO
+This version selects the largest element and puts it in the end,
+which is different from Wikipedia, Programiz, etc.
+They selects the smallest element and puts it at the front.
+-->
 <p>Consider again the problem of sorting a pile of phone bills for the
 past year. Another intuitive approach might be to look through the pile
 until you find the bill for January, and pull that out. Then look
@@ -211,24 +216,13 @@ number of swaps required will be
 (we get the last record in place “for free”).</p>
 <p>Here is an implementation for Selection Sort.</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> selectionSort(A):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(A)<span class="op">-</span><span class="dv">1</span>):          <span class="co"># Select i&#39;th biggest record</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        bigindex <span class="op">=</span> <span class="dv">0</span>                   <span class="co"># Current biggest index</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span> (<span class="dv">1</span>, <span class="bu">len</span>(A)<span class="op">-</span>i):  <span class="co"># Find the max value</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> A[j] <span class="op">&gt;</span> A[bigindex]:     <span class="co"># Found something bigger  </span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                bigindex <span class="op">=</span> j           <span class="co"># Remember bigger index</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        swap(A, bigindex, <span class="bu">len</span>(A)<span class="op">-</span>i<span class="op">-</span><span class="dv">1</span>)  <span class="co"># Put it into place</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="op">&lt;</span>E <span class="kw">extends</span> <span class="bu">Comparable</span><span class="op">&lt;</span>E<span class="op">&gt;&gt;</span> <span class="dt">void</span> <span class="fu">selectionSort</span><span class="op">(</span>E<span class="op">[]</span> A<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> A<span class="op">.</span><span class="fu">length</span><span class="op">-</span><span class="dv">1</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span>       <span class="co">// Select i&#39;th biggest record</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> bigindex <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>                        <span class="co">// Current biggest index</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> j <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> j <span class="op">&lt;</span> A<span class="op">.</span><span class="fu">length</span><span class="op">-</span>i<span class="op">;</span> j<span class="op">++)</span> <span class="op">{</span>   <span class="co">// Find the max value</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>A<span class="op">[</span>j<span class="op">].</span><span class="fu">compareTo</span><span class="op">(</span>A<span class="op">[</span>bigindex<span class="op">])</span> <span class="op">&gt;</span> <span class="dv">0</span><span class="op">)</span> <span class="co">// Found something bigger</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                bigindex <span class="op">=</span> j<span class="op">;</span>                    <span class="co">// Remember bigger index</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Util</span><span class="op">.</span><span class="fu">swap</span><span class="op">(</span>A<span class="op">,</span> bigindex<span class="op">,</span> A<span class="op">.</span><span class="fu">length</span><span class="op">-</span>i<span class="op">-</span><span class="dv">1</span><span class="op">);</span>         <span class="co">// Put it into place</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> selectionSort(A):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="op">=</span> <span class="dv">0</span> <span class="kw">to</span> A.<span class="bu">size</span>()<span class="op">-</span><span class="dv">1</span>:             <span class="co">// Select i&#39;th biggest element</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        bigindex <span class="op">=</span> i                     <span class="co">// Current biggest index</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="op">=</span> <span class="dv">0</span> <span class="kw">to</span> A.<span class="bu">size</span>()<span class="op">-</span>i:         <span class="co">// Find the max value</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> A[j] <span class="op">&gt;</span> A[bigindex]:       <span class="co">// Found something bigger  </span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                bigindex <span class="op">=</span> j             <span class="co">// Remember bigger index</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        swap(A, bigindex, A.<span class="bu">size</span>()<span class="op">-</span>i<span class="op">-</span><span class="dv">1</span>)  <span class="co">// Put it into place</span></span></code></pre></div>
 <p>Consider the example of the following array.</p>
 <p>
 <div id="selectionsortS1CON" class="ssAV" data-short-name="selectionsortS1CON" data-long-name="Selection Sort Slideshow 1" alt="Selection Sort Slideshow 1" tabIndex="-1">

@@ -185,9 +185,8 @@ data-number="1.6">
 <h2 data-number="1.6"><span class="header-section-number">1.6</span>
 Comparables and Comparators: An Example</h2>
 <p><em>Note</em>: This example treats comparables and comparators, as
-they work in Java. Python code is also included, but since Python thinks
-of comparisons in a different way, the code is not always
-transferrable.</p>
+they work in Java. (A similar example for Python is on the TODO
+list.)</p>
 <section id="comparables-and-comparators-in-java" class="level3"
 data-number="1.6.1">
 <h3 data-number="1.6.1"><span class="header-section-number">1.6.1</span>
@@ -238,8 +237,8 @@ Lili Boulanger (1893)</div>
 Comparables</h3>
 <p>With the <strong>Comparable</strong> interface we can define the
 “natural ordering” for a class (<a
-href="https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html">Java
-8 Comparable</a>). Recall the interface for comparables from <a
+href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Comparable.html">Java
+11 Comparable</a>). Recall the interface for comparables from <a
 href="1.3-all-adts-used-in-this-book.html#all-adts-used-in-this-book">the
 course API</a>:</p>
 <div class="sourceCode" id="cb4"><pre
@@ -292,8 +291,8 @@ Comparators, the old way</h3>
 <p>What if we sometimes want to sort the list according to some other
 ordering, e.g., birth year or given name? Enter <em>comparators</em>,
 and here is the interface (<a
-href="https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html">Java
-8 Comparator</a>):</p>
+href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Comparator.html">Java
+11 Comparator</a>):</p>
 <div class="sourceCode" id="cb7"><pre
 class="sourceCode java"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Note: This is a subset of the java.util.Comparator interface</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Comparator</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="op">{</span></span>
@@ -363,10 +362,10 @@ Nadia Boulanger (1887)<br />
 Unsuk Chin (1961)</div>
 </blockquote>
 </section>
-<section id="comparators-the-new-functional-interface-in-java-8"
+<section id="comparators-the-functional-interface-in-java"
 class="level3" data-number="1.6.4">
 <h3 data-number="1.6.4"><span class="header-section-number">1.6.4</span>
-Comparators, the new functional interface in Java 8</h3>
+Comparators, the functional interface in Java</h3>
 <p>Since Java 8, there’s a functional interface which can be used to
 build comparators (and many other things). So we don’t have to write the
 class definitions, and instead write similarly to we would do in Python

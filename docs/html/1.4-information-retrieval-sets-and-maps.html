@@ -209,9 +209,9 @@ problems above.</p>
 <p>You may have already used sets and maps in programming, because
 almost every programming language provides an implementation for them.
 For example, Java provides the <a
-href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/HashSet.html">HashSet</a>
+href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/HashSet.html">HashSet</a>
 and <a
-href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/HashMap.html">HashMap</a>
+href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/HashMap.html">HashMap</a>
 classes, and Python provides <a
 href="https://docs.python.org/3/tutorial/datastructures.html#sets">sets</a>
 and <a
@@ -228,11 +228,10 @@ is left unchanged. Recall the interface for sets from <a
 href="1.3-all-adts-used-in-this-book.html#all-adts-used-in-this-book">the
 course API</a>:</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Set(Collection):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> add(<span class="va">self</span>, x):      <span class="st">&quot;&quot;&quot;Adds x to the set. Returns true if the element wasn&#39;t already in the set.&quot;&quot;&quot;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> remove(<span class="va">self</span>, x):   <span class="st">&quot;&quot;&quot;Removes x from the set. Returns true if the element was in the set.&quot;&quot;&quot;</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> contains(<span class="va">self</span>, x): <span class="st">&quot;&quot;&quot;Returns true if x is in the set.&quot;&quot;&quot;</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Note: __iter__() can yield the elements in any order.</span></span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Set</span> <span class="kw">extends</span> <span class="bu">Collection</span>:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">add</span>(x)       <span class="co">// Adds x to the set. Returns true if the element wasn&#39;t already in the set.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">remove</span>(x)    <span class="co">// Removes x from the set. Returns true if the element was in the set.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">contains</span>(x)  <span class="co">// Returns true if x is in the set.</span></span></code></pre></div>
 <p>We can use a set for the spell-checking example:</p>
 <ul>
 <li>Given a set containing all valid English words, check if a given
@@ -243,30 +242,26 @@ empty set, and then call <code>add</code> repeatedly to add each valid
 word to the set. Then to spell-check a given word, we just call
 <code>contains</code>.</p>
 <div class="sourceCode" id="cb2"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SpellChecker:</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, list_of_valid_words):</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Convert the list of words into a set.</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.set_of_valid_words <span class="op">=</span> Set()</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> word <span class="kw">in</span> list_of_valid_words:</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.set_of_valid_words.add(word)</span>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SpellChecker:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    SpellChecker(listOfValidWords):</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Convert the list of words into a set.</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.setOfValidWords <span class="op">=</span> <span class="kw">new</span> <span class="bu">Set</span>()</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="kw">each</span> word <span class="kw">in</span> listOfValidWords:</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>            <span class="va">this</span>.setOfValidWords.<span class="bu">add</span>(word)</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> is_valid_word(<span class="va">self</span>, word):</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.set_of_valid_words.contains(word)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    isValidWord(word):</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">this</span>.setOfValidWords.<span class="bu">contains</span>(word)</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&#39;__main__&#39;</span>:</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create a new spell checker.</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    checker <span class="op">=</span> SpellChecker([<span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>])</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> main(listOfWordsToCheck):</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Create a new spell checker.</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    checker <span class="op">=</span> <span class="kw">new</span> SpellChecker([<span class="st">&quot;cat&quot;</span>, <span class="st">&quot;dog&quot;</span>])</span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Select some words to spell check. </span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If there are no command-line arguments, default to testing &quot;dog&quot; and &quot;kat&quot;.</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    list_of_words_to_check <span class="op">=</span> sys.argv[<span class="dv">1</span>:] <span class="cf">if</span> <span class="bu">len</span>(sys.argv) <span class="op">&gt;</span> <span class="dv">1</span> <span class="cf">else</span> [<span class="st">&quot;dog&quot;</span>, <span class="st">&quot;kat&quot;</span>]</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Now we can spell-check a word easily.</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> word <span class="kw">in</span> list_of_words_to_check:</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> checker.is_valid_word(word):</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(word, <span class="st">&quot;is valid&quot;</span>)</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(word, <span class="st">&quot;is INVALID&quot;</span>)</span></code></pre></div>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Now we can spell-check a word easily.</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> word <span class="kw">in</span> listOfWordsToCheck:</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> checker.isValidWord(word):</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(word, <span class="st">&quot;is valid&quot;</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(word, <span class="st">&quot;is INVALID&quot;</span>)</span></code></pre></div>
 </section>
 <section id="database-lookup-maps" class="level3" data-number="1.4.2">
 <h3 data-number="1.4.2"><span class="header-section-number">1.4.2</span>
@@ -286,14 +281,13 @@ the same value. Recall the interface for maps from <a
 href="1.3-all-adts-used-in-this-book.html#all-adts-used-in-this-book">the
 course API</a>:</p>
 <div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Map(Iterable):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> put(<span class="va">self</span>, key, value):  <span class="st">&quot;&quot;&quot;Sets the value of the given key. Returns the previous value, or None.&quot;&quot;&quot;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get(<span class="va">self</span>, key):         <span class="st">&quot;&quot;&quot;Returns the value associated with the given key, or None if the key is not there.&quot;&quot;&quot;</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> remove(<span class="va">self</span>, key):      <span class="st">&quot;&quot;&quot;Removes and returns the value associated with the given key, or None if there is no key.&quot;&quot;&quot;</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> containsKey(<span class="va">self</span>, key): <span class="st">&quot;&quot;&quot;Returns true if the key has an associated value.&quot;&quot;&quot;</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> isEmpty(<span class="va">self</span>):          <span class="st">&quot;&quot;&quot;Returns true if there are no keys.&quot;&quot;&quot;</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> size(<span class="va">self</span>):             <span class="st">&quot;&quot;&quot;Returns the number of keys (i.e., the number of key/value pairs).&quot;&quot;&quot;</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Note: __iter__() can yield the keys in any order.</span></span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Map</span> <span class="kw">extends</span> <span class="bu">Iterable</span>:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">put</span>(key, value)   <span class="co">// Sets the value of the given key. Returns the previous value, or nothing.</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">get</span>(key)          <span class="co">// Returns the value associated with the given key, or nothing if the key is not there.</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">remove</span>(key)       <span class="co">// Removes and returns the value associated with the given key, or nothing if there is no key.</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">containsKey</span>(key)  <span class="co">// Returns true if the key has an associated value.</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">isEmpty</span>()         <span class="co">// Returns true if there are no keys.</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span>()            <span class="co">// Returns the number of keys (i.e., the number of key/value pairs).</span></span></code></pre></div>
 <p>The map is a perfect match for our database example:</p>
 <ul>
 <li>Given a list of people, find the person with a given
@@ -306,26 +300,26 @@ in the database we call <code>database.put(p.pnr, p)</code>. To find the
 person with personnummer <code>pnr</code> we call
 <code>database.get(pnr)</code>.</p>
 <div class="sourceCode" id="cb4"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Person:</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, pnr, name):</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.pnr  <span class="op">=</span> pnr    <span class="co"># personnummer</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.name <span class="op">=</span> name   <span class="co"># person&#39;s name</span></span>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Person:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    Person(pnr, name):</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.pnr  <span class="op">=</span> pnr    <span class="co">// personnummer</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.name <span class="op">=</span> name   <span class="co">// person&#39;s name</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> PersonDatabase:</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.database <span class="op">=</span> Map()</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    PersonDatabase():</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.database <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>()</span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> put(<span class="va">self</span>, p):</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">&quot;&quot;&quot;Put the person in the database.&quot;&quot;&quot;</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.database.put(p.pnr, p)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">put</span>(p):</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Put the person in the database.</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.database.<span class="bu">put</span>(p.pnr, p)</span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> remove(<span class="va">self</span>, p):</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        <span class="co">&quot;&quot;&quot;Remove a person from the database.&quot;&quot;&quot;</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.database.remove(p.pnr)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">remove</span>(p):</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Remove a person from the database.</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.database.<span class="bu">remove</span>(p.pnr)</span>
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> find(<span class="va">self</span>, pnr):</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        <span class="co">&quot;&quot;&quot;Find the person who has a given personnummer.&quot;&quot;&quot;</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.database.get(pnr)</span></code></pre></div>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    find(pnr):</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Find the person who has a given personnummer.</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">this</span>.database.<span class="bu">get</span>(pnr)</span></code></pre></div>
 </section>
 <section id="search-engine-multimaps" class="level3"
 data-number="1.4.3">
@@ -351,35 +345,35 @@ multimap, where the key is a word, and the values are all documents
 containing that word. Then, searching for a word will just mean looking
 it up in the multimap.</p>
 <div class="sourceCode" id="cb5"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We model a document as a list of words.</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Document:</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, contents):</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.contents <span class="op">=</span> contents</span>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Document:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// We model a document as a list of words.</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    Document(contents):</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.contents <span class="op">=</span> contents</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SearchEngine:</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.database <span class="op">=</span> Map()</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    SearchEngine():</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.database <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>()</span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> add(<span class="va">self</span>, doc):</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">&quot;&quot;&quot;Add a new document to the database.&quot;&quot;&quot;</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> word <span class="kw">in</span> doc.contents:</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Get the set of documents containing this word.</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>            <span class="bu">set</span> <span class="op">=</span> <span class="va">self</span>.database.get(word)</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="bu">set</span> <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>                <span class="co"># This is the first document containing this word.</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>                <span class="bu">set</span> <span class="op">=</span> Set()</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">add</span>(doc):</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Add a new document to the database.</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="kw">each</span> word <span class="kw">in</span> doc.contents:</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>            <span class="co">// Get the set of documents containing this word.</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>            <span class="bu">set</span> <span class="op">=</span> <span class="va">this</span>.database.<span class="bu">get</span>(word)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="bu">set</span> <span class="kw">is</span> <span class="va">null</span>:</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>                <span class="co">// This is the first document containing this word.</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>                <span class="bu">set</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">Set</span>()</span>
 <span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Add the document to the set.</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>            <span class="bu">set</span>.add(doc)</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.database.put(word, <span class="bu">set</span>)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>            <span class="co">// Add the document to the set.</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>            <span class="bu">set</span>.<span class="bu">add</span>(doc)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>            <span class="va">this</span>.database.<span class="bu">put</span>(word, <span class="bu">set</span>)</span>
 <span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> find(<span class="va">self</span>, word):</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>        <span class="co">&quot;&quot;&quot;Find all documents containing a given word.&quot;&quot;&quot;</span></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>.database.containsKey(word):</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">self</span>.database.get(word)</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    find(word):</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Find all documents containing a given word.</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">this</span>.database.<span class="bu">containsKey</span>(word):</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">this</span>.database.<span class="bu">get</span>(word)</span>
 <span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>            <span class="co"># If the word is not found, return an empty set rather than None.</span></span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> Set()</span></code></pre></div>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>            <span class="co">// If the word is not found, return an empty set.</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="kw">new</span> <span class="bu">Set</span>()</span></code></pre></div>
 </section>
 <section id="between-x-and-y-sorted-sets-and-maps" class="level3"
 data-number="1.4.4">
@@ -485,65 +479,63 @@ otherwise it is the successor of
 href="1.3-all-adts-used-in-this-book.html#all-adts-used-in-this-book">the
 course API</a>:</p>
 <div class="sourceCode" id="cb6"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SortedMap(Map):</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> firstKey(<span class="va">self</span>):                <span class="st">&quot;&quot;&quot;Returns the first (smallest) key. Raises an exception if the map is empty.&quot;&quot;&quot;</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> lastKey(<span class="va">self</span>):                 <span class="st">&quot;&quot;&quot;Returns the last (largest) key. Raises an exception if the map is empty.&quot;&quot;&quot;</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> floorKey(<span class="va">self</span>, key):           <span class="st">&quot;&quot;&quot;Returns the closest key &lt;= k, or None if there is no key.&quot;&quot;&quot;</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> ceilingKey(<span class="va">self</span>, key):         <span class="st">&quot;&quot;&quot;Returns the closest key &gt;= k, or None if there is no key.&quot;&quot;&quot;</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> lowerKey(<span class="va">self</span>, key):           <span class="st">&quot;&quot;&quot;Returns the closest key &lt; k, or None if there is no such element.&quot;&quot;&quot;</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> higherKey(<span class="va">self</span>, key):          <span class="st">&quot;&quot;&quot;Returns the closest key &gt; k, or None if there is no such element.&quot;&quot;&quot;</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> keysBetween(<span class="va">self</span>, key1, key2): <span class="st">&quot;&quot;&quot;Returns all keys k such that k1 &lt;= k &lt;= k2.&quot;&quot;&quot;</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Note: __iter__() should yield the keys in order.</span></span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">SortedMap</span> <span class="kw">extends</span> <span class="bu">Map</span>:</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    firstKey()               <span class="co">// Returns the first (smallest) key.</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    lastKey()                <span class="co">// Returns the last (largest) key.</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    floorKey(key)            <span class="co">// Returns the closest key &lt;= k, or nothing if there is no key.</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    ceilingKey(key)          <span class="co">// Returns the closest key &gt;= k, or nothing if there is no key.</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    lowerKey(key)            <span class="co">// Returns the closest key &lt; k, or nothing if there is no such element.</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    higherKey(key)           <span class="co">// Returns the closest key &gt; k, or nothing if there is no such element.</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    keysBetween(key1, key2)  <span class="co">// Returns all keys k such that k1 &lt;= k &lt;= k2.</span></span></code></pre></div>
 <p>As well as a sorted map, it is also possible to have a <em>sorted
 set</em>. Recall the interface for sorted sets from <a
 href="1.3-all-adts-used-in-this-book.html#all-adts-used-in-this-book">the
 course API</a>:</p>
 <div class="sourceCode" id="cb7"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SortedSet(Set):</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> first(<span class="va">self</span>):            <span class="st">&quot;&quot;&quot;Returns the first (smallest) element. Raises an exception if the set is empty.&quot;&quot;&quot;</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> last(<span class="va">self</span>):             <span class="st">&quot;&quot;&quot;Returns the last (largest) element. Raises an exception if the set is empty.&quot;&quot;&quot;</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> floor(<span class="va">self</span>, x):         <span class="st">&quot;&quot;&quot;Returns the closest element &lt;= x, or None if there is no such element.&quot;&quot;&quot;</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> ceiling(<span class="va">self</span>, x):       <span class="st">&quot;&quot;&quot;Returns the closest element &gt;= x, or None if there is no such element.&quot;&quot;&quot;</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> lower(<span class="va">self</span>, x):         <span class="st">&quot;&quot;&quot;Returns the closest element &lt; x, or None if there is no such element.&quot;&quot;&quot;</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> higher(<span class="va">self</span>, x):        <span class="st">&quot;&quot;&quot;Returns the closest element &gt; x, or None if there is no such element.&quot;&quot;&quot;</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> between(<span class="va">self</span>, x1, x2):  <span class="st">&quot;&quot;&quot;Returns all elements x such that x1 &lt;= x &lt;= x2.&quot;&quot;&quot;</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Note: __iter__() should yield the elements in order.</span></span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">SortedSet</span> <span class="kw">extends</span> <span class="bu">Set</span>:</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    first()          <span class="co">// Returns the first (smallest) element.</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    last()           <span class="co">// Returns the last (largest) element.</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    floor(x)         <span class="co">// Returns the closest element &lt;= x, or nothing if there is no such element.</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    ceiling(x)       <span class="co">// Returns the closest element &gt;= x, or nothing if there is no such element.</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    lower(x)         <span class="co">// Returns the closest element &lt; x, or nothing if there is no such element.</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    higher(x)        <span class="co">// Returns the closest element &gt; x, or nothing if there is no such element.</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    between(x1, x2)  <span class="co">// Returns all elements x such that x1 &lt;= x &lt;= x2.</span></span></code></pre></div>
 <p>Here is how to use a sorted map ADT to find all Swedish towns having
 between 1,000 and 2,000 population. As there may be towns that have the
 same population, we need a <em>multimap</em>. As before, we solve this
 by having the key be a population number and the value be a set of
 towns.</p>
 <div class="sourceCode" id="cb8"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> City:</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, name, population):</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.name <span class="op">=</span> name</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.population <span class="op">=</span> population</span>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> City:</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    City(name, population):</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.name <span class="op">=</span> name</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.population <span class="op">=</span> population</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> CityPopulations:</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Similar to the search engine, use a map where the value is a list of cities.</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.cities <span class="op">=</span> SortedMap()</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Similar to the search engine, use a map where the value is a list of cities.</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    CityPopulations():</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.cities <span class="op">=</span> <span class="kw">new</span> <span class="bu">SortedMap</span>()</span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> add(<span class="va">self</span>, city):</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>        <span class="co">&quot;&quot;&quot;Add a new city to the database.&quot;&quot;&quot;</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Get the set of documents containing this city</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">set</span> <span class="op">=</span> <span class="va">self</span>.cities.get(city.population)</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">set</span> <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>            <span class="co"># This is the first city with this population</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>            <span class="bu">set</span> <span class="op">=</span> Set()</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">add</span>(city):</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Add a new city to the database.</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Get the set of documents containing this city</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">set</span> <span class="op">=</span> <span class="va">this</span>.cities.<span class="bu">get</span>(city.population)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">set</span> <span class="kw">is</span> <span class="va">null</span>:</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>            <span class="co">// This is the first city with this population</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>            <span class="bu">set</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">Set</span>()</span>
 <span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add the city to the set</span></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>        <span class="bu">set</span>.add(city)</span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.cities.put(city.population, <span class="bu">set</span>)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Add the city to the set</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>        <span class="bu">set</span>.<span class="bu">add</span>(city)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.cities.<span class="bu">put</span>(city.population, <span class="bu">set</span>)</span>
 <span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> findBetween(<span class="va">self</span>, lower, upper):</span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>        <span class="co">&quot;&quot;&quot;Find all cities with a population between lower and upper&quot;&quot;&quot;</span></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> Set()</span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>        <span class="co"># The range query returns a set of keys, i.e. populations.</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> population <span class="kw">in</span> <span class="va">self</span>.cities.keysBetween(lower, upper):</span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>            <span class="co"># cities.get(population) returns the list of cities with that population.</span></span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> city <span class="kw">in</span> <span class="va">self</span>.cities.get(population):</span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>                result.add(city)</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    findBetween(lower, upper):</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Find all cities with a population between lower and upper</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> <span class="kw">new</span> <span class="bu">Set</span>()</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>        <span class="co">// The range query returns a set of keys, i.e. populations.</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="kw">each</span> population <span class="kw">in</span> <span class="va">this</span>.cities.keysBetween(lower, upper):</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>            <span class="co">// cities.get(population) returns the list of cities with that population.</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> <span class="kw">each</span> city <span class="kw">in</span> <span class="va">this</span>.cities.<span class="bu">get</span>(population):</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>                result.<span class="bu">add</span>(city)</span>
 <span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> result</span></code></pre></div>
 </section>
 <section id="how-to-implement-sets-and-maps" class="level3"
@@ -578,13 +570,13 @@ map</em> operations.</p>
 are implemented in practice. Almost every programming language provides
 sets and maps as a built-in feature, based on one of these technologies.
 For example, Java’s <a
-href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/HashSet.html">HashSet</a>,
+href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/HashSet.html">HashSet</a>,
 <a
-href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/HashMap.html">HashMap</a>,
+href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/HashMap.html">HashMap</a>,
 <a
-href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/TreeSet.html">TreeSet</a>
+href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/TreeSet.html">TreeSet</a>
 and <a
-href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/TreeMap.html">TreeMap</a>,
+href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/TreeMap.html">TreeMap</a>,
 and Python’s: <a
 href="https://docs.python.org/3/tutorial/datastructures.html#sets">sets</a>
 and <a

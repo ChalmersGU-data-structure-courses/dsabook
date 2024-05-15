@@ -257,15 +257,9 @@ more general kind of ADT, which we will call collections.</p>
 things: we can inquire how many elements it contains, and we can iterate
 through all elements, one at the time (i.e., it is Iterable).</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Collection(Iterable):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> isEmpty(<span class="va">self</span>):  <span class="st">&quot;&quot;&quot;Returns true if the collection is empty.&quot;&quot;&quot;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> size(<span class="va">self</span>):     <span class="st">&quot;&quot;&quot;Returns the number of elements in this collection.&quot;&quot;&quot;</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Note: This is a subset of java.util.Collection</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Collection</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="kw">extends</span> <span class="bu">Iterable</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">boolean</span> <span class="fu">isEmpty</span><span class="op">();</span>  <span class="co">// Returns true if the collection is empty.</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="fu">size</span><span class="op">();</span>         <span class="co">// Returns the number of elements in this collection.</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Collection</span> <span class="kw">extends</span> <span class="bu">Iterable</span>:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">isEmpty</span>()   <span class="co">// Returns true if the collection is empty.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span>()      <span class="co">// Returns the number of elements in this collection.</span></span></code></pre></div>
 <p>Note that this very interface will not be implemented as it is, but
 instead we will use this as a base interface that we extend in different
 ways, e.g., for lists or sets or priority queues.</p>
@@ -309,22 +303,12 @@ position <code>i</code>, thus increasing the size of the list</li>
 <p>Apart from these four, we also want to be able to loop through the
 list elements in order (i.e., an <code>iterator</code> over the
 elements).</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> List(Collection):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> add(<span class="va">self</span>, i, x): <span class="st">&quot;&quot;&quot;Adds x at position i; where 0 &lt;= i &lt;= size.&quot;&quot;&quot;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get(<span class="va">self</span>, i):    <span class="st">&quot;&quot;&quot;Returns the element at position i; where 0 &lt;= i &lt; size.&quot;&quot;&quot;</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="bu">set</span>(<span class="va">self</span>, i, x): <span class="st">&quot;&quot;&quot;Replaces the value at position i with x; where 0 &lt;= i &lt; size.&quot;&quot;&quot;</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> remove(<span class="va">self</span>, i): <span class="st">&quot;&quot;&quot;Removes the element at position i; where 0 &lt;= i &lt; size.&quot;&quot;&quot;</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Note: __iter__() should yield the elements starting from position 0.</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Note: This is a subset of java.util.List</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">List</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="kw">extends</span> <span class="bu">Collection</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> <span class="fu">add</span><span class="op">(</span><span class="dt">int</span> i<span class="op">,</span> E x<span class="op">);</span>  <span class="co">// Adds x at position i; where 0 &lt;= i &lt;= size.</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    E <span class="fu">get</span><span class="op">(</span><span class="dt">int</span> i<span class="op">);</span>          <span class="co">// Returns the element at position i; where 0 &lt;= i &lt; size.</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    E <span class="fu">set</span><span class="op">(</span><span class="dt">int</span> i<span class="op">,</span> E x<span class="op">);</span>     <span class="co">// Replaces the value at position i with x; where 0 &lt;= i &lt; size..</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    E <span class="fu">remove</span><span class="op">(</span><span class="dt">int</span> i<span class="op">);</span>       <span class="co">// Removes the element at position i; where 0 &lt;= i &lt; size..</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Note: iterator() should yield the elements starting from position 0.</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">List</span> <span class="kw">extends</span> <span class="bu">Collection</span>:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">add</span>(i, x)  <span class="co">// Adds x at position i; where 0 &lt;= i &lt;= size.</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">get</span>(i)     <span class="co">// Returns the element at position i; where 0 &lt;= i &lt; size.</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">set</span>(i, x)  <span class="co">// Replaces the value at position i with x; where 0 &lt;= i &lt; size.</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">remove</span>(i)  <span class="co">// Removes the element at position i; where 0 &lt;= i &lt; size.</span></span></code></pre></div>
 <p>
 <div id="ListADT-Positions-CON" class="ssAV" data-short-name="ListADT-Positions-CON" data-long-name="List ADT Positions Slideshow" alt="List ADT Positions Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
@@ -336,23 +320,24 @@ class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="
 <p>The <code>List</code> member functions allow you to build a list with
 elements in any desired order, and to access any desired position in the
 list.</p>
-<p>A list can be iterated through as follows:</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">Iterator</span><span class="op">&lt;</span>E<span class="op">&gt;</span> it <span class="op">=</span> L<span class="op">.</span><span class="fu">iterator</span><span class="op">();</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="op">(</span>it<span class="op">.</span><span class="fu">hasNext</span><span class="op">())</span> <span class="op">{</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    E elem <span class="op">=</span> it<span class="op">.</span><span class="fu">next</span><span class="op">();</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">doSomething</span><span class="op">(</span>elem<span class="op">);</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>Both Java and Python has syntactic sugar for iterators, so the same
-iteration can be written like this:</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span>E elem <span class="op">:</span> L<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">doSomething</span><span class="op">(</span>elem<span class="op">);</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>A list <code>L</code> can be iterated through as follows:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>iter <span class="op">=</span> L.<span class="bu">iterator</span>()</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>elem <span class="op">=</span> iter.<span class="bu">next</span>()</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> elem:</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    doSomething(elem)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    elem <span class="op">=</span> iter.<span class="bu">next</span>()</span></code></pre></div>
 <p>In this example, each element of the list in turn is stored in
-<code>it</code>, and passed to the <code>doSomething</code> function.
+<code>iter</code>, and passed to the <code>doSomething</code> function.
 The loop terminates when the current position reaches the end of the
 list.</p>
+<p>(Note that the loop looks slightly different in Java and Python,
+because of how they implement iterators.)</p>
+<p>Many languages, including Java and Python, has syntactic sugar for
+iterators, so the same iteration can be written something like this:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="kw">each</span> elem <span class="kw">in</span> L:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    doSomething(elem)</span></code></pre></div>
 <p>The list class declaration presented here is just one of many
 possible interpretations for lists. Our list interface provides most of
 the operations that one naturally expects to perform on lists and serves
@@ -362,15 +347,13 @@ return <code>true</code> if there is an occurrence of a given element in
 the list, and <code>false</code> otherwise. The <code>find</code> method
 needs no knowledge about the specific list implementation, just the list
 ADT.</p>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Return true if k is in list L, false otherwise.</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="dt">boolean</span> <span class="fu">find</span><span class="op">(</span><span class="bu">List</span><span class="op">&lt;</span>E<span class="op">&gt;</span> L<span class="op">,</span> E k<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span>E n <span class="op">:</span> L<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>k<span class="op">.</span><span class="fu">equals</span><span class="op">(</span>n<span class="op">))</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span>  <span class="co">// Found k</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span>         <span class="co">// k not found</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Return true if k is in list L, false otherwise.</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> find(L, k):</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> n <span class="kw">in</span> L:</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> k <span class="op">==</span> n:</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">true</span>  <span class="co">// Found k.</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">false</span>         <span class="co">// k not found.</span></span></code></pre></div>
 <p>There are two standard approaches to implementing lists, the <a
 href="4.2-static-array-based-lists.html#static-array-based-lists">array-based
 list</a>, and the <a href="4.4-linked-lists.html#linked-lists">linked

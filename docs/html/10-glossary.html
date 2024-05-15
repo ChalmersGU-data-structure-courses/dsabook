@@ -176,7 +176,7 @@
 <span class="navlink-label">Next:</span> <a href="11-bibliography.html" accesskey="n" rel="next">Bibliography</a>
 </span>
 <span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="9.7-graph-concepts-summary.html" accesskey="p" rel="previous">Graph Concepts Summary</a>
+<span class="navlink-label">Previous:</span> <a href="9.8-graph-concepts-summary.html" accesskey="p" rel="previous">Graph Concepts Summary</a>
 </span>
 </div>
 </nav>
@@ -428,13 +428,14 @@ class="term"
 title="A modification to the notion of complexity for operations on a data structure where, for each fixed input size, one does not just look at the cost of a single run of the operation, but its amortized cost over sufficiently long series of operations of the same kind. This can be made precise without considering averages by introducing potentials.">amortized
 complexity</a> of an <a href="10-glossary.html#algorithm" class="term"
 title="A method or a process followed to solve a problem.">algorithm</a>
-or term:<span class="title-ref">problem</span>.</p>
+or <a href="10-glossary.html#problem" class="term"
+title="A task to be performed. It is best thought of as a function or a mapping of inputs to outputs.">problem</a>.</p>
 </dd>
 <dt><dfn id="amortized-complexity">amortized complexity</dfn></dt>
 <dd>
 <p>A modification to the notion of <a href="10-glossary.html#complexity"
 class="term"
-title="After fixing a cost model for a problem, we can calculate the complexity function of an algorithm. This sends an input size $n$ to the cost of running the algorithm on input of that size. For each fixed n, we consider only the worst-case input of size $n$. This defines the worst-case complexity of the algorithm. There is also the average-case and best-case complexity, which are defined similarly. We speak of time complexity, space complexity, etc. depending on what kind of cost our cost model captures. Here, time refers to runtime and space refers to memory/storage. The case of time complexity is the default, so we omit the word &#39;time&#39;.">complexity</a>
+title="After fixing a cost model for a problem, we can calculate the complexity function of an algorithm. This sends an input size $n$ to the cost of running the algorithm on input of that size. For each fixed $n$, we consider only the worst-case input of size $n$. This defines the worst-case complexity of the algorithm. There is also the average-case and best-case complexity, which are defined similarly. We speak of time complexity, space complexity, etc. depending on what kind of cost our cost model captures. Here, time refers to runtime and space refers to memory/storage. The case of time complexity is the default, so we omit the word &#39;time&#39;.">complexity</a>
 for operations on a data structure where, for each fixed input size, one
 does not just look at the cost of a single run of the operation, but its
 <a href="10-glossary.html#amortized-cost" class="term"
@@ -454,7 +455,7 @@ made precise without considering averages by introducing <a
 href="10-glossary.html#potential" class="term"
 title="A concept in amortized complexity for operations on a data structure. We choose a *potential function* that associates an arbitrary non-negative value of *stored cost* (stored energy) with each state of the data structure. We then define the amortized cost of a run of the operation to be its cost as given by the the cost model plus the change in potential. The complexity modified this way is called amortized complexity. An example is adding an element to a dynamic array. When the dynamic array is not full, adding an element is quick and we store some of that saved cost by increasing the potential. When the dynamic array is full capacity, we perform an expensive reallocation, but compensate that cost by resetting the potential from a high value to zero. Let us define the potential of a dynamic array with capacity $c$ and size $n$ to be $max(2n-c,0)$. Assuming we double the capacity on reallocation, the operation of adding an element then has constant amortized complexity. The concept comes from potential energy in physics. For example, in the graviational field of the earth, kinetic energy may be stored as potential energy.">potentials</a>.</p>
 <p>In <a href="10-glossary.html#amortized-analysis" class="term"
-title="Analysing the amortized complexity of an algorithm or term:problem.">amortized
+title="Analysing the amortized complexity of an algorithm or problem.">amortized
 analysis</a>, gives rise to the notion of <a
 href="10-glossary.html#amortized-complexity" class="term"
 title="A modification to the notion of complexity for operations on a data structure where, for each fixed input size, one does not just look at the cost of a single run of the operation, but its amortized cost over sufficiently long series of operations of the same kind. This can be made precise without considering averages by introducing potentials.">amortized
@@ -579,7 +580,7 @@ program by identifying its <a
 href="10-glossary.html#asymptotic-complexity" class="term"
 title="The growth rate or order of growth of the complexity of an algorithm or problem. There are several independent categories of qualifiers for (asymptotic) complexity: - time complexity (default), space complexity, complexity in some other cost, - worst case (default), average case, best case, - whether to use amortized complexity.">asymptotic
 complexity</a>, the <a href="10-glossary.html#growth-rate" class="term"
-title="The rate at which a function grows. How quickly the function grows when its input grows. Also called its order of growth. A function $f$ has growth rate bounded by a function $g$ if the values of $f$ are eventually bounded by those of $g$ up to some constant factor. We often shorten this (somewhat confusingly) by saying that $f$ has growth rate $g$ or that $f$ has order of growth $g$. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \leq c g(n)$ for all $n \geq n_0$. We then say that $f$ has growth rate less or equal that of $g$ and write $f \in O(g)$ (big-Oh notation). This defines the preorder of growth rates. In algorithm analysis, we sometimes speak of the growth rate of an algorithm. By that, we mean the growth rate of the complexity of the algorithm, the rate at which the cost of the algorithm grows as the size of its input grows. This is also called the asymptotic complexity of that algorithm.">growth
+title="The rate at which a function grows. How quickly the function grows when its input grows. Also called its *order of growth*. A function $f$ has growth rate bounded by a function $g$ if the values of $f$ are eventually bounded by those of $g$ up to some constant factor. We often shorten this (somewhat confusingly) by saying that $f$ has growth rate $g$ or that $f$ has order of growth $g$. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \leq c g(n)$ for all $n \geq n_0$. We then say that $f$ has growth rate less or equal that of $g$ and write $f \in O(g)$ (big-Oh notation). This defines the preorder of growth rates. In algorithm analysis, we sometimes speak of the growth rate of an algorithm. By that, we mean the growth rate of the complexity of the algorithm, the rate at which the cost of the algorithm grows as the size of its input grows. This is also called the asymptotic complexity of that algorithm.">growth
 rate</a> of its complexity function. Asymptotic analysis also gives a
 way to define the inherent difficulty of a <a
 href="10-glossary.html#problem" class="term"
@@ -590,11 +591,11 @@ thing.</p>
 <dt><dfn id="asymptotic-complexity">asymptotic complexity</dfn></dt>
 <dd>
 <p>The <a href="10-glossary.html#growth-rate" class="term"
-title="The rate at which a function grows. How quickly the function grows when its input grows. Also called its order of growth. A function $f$ has growth rate bounded by a function $g$ if the values of $f$ are eventually bounded by those of $g$ up to some constant factor. We often shorten this (somewhat confusingly) by saying that $f$ has growth rate $g$ or that $f$ has order of growth $g$. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \leq c g(n)$ for all $n \geq n_0$. We then say that $f$ has growth rate less or equal that of $g$ and write $f \in O(g)$ (big-Oh notation). This defines the preorder of growth rates. In algorithm analysis, we sometimes speak of the growth rate of an algorithm. By that, we mean the growth rate of the complexity of the algorithm, the rate at which the cost of the algorithm grows as the size of its input grows. This is also called the asymptotic complexity of that algorithm.">growth
+title="The rate at which a function grows. How quickly the function grows when its input grows. Also called its *order of growth*. A function $f$ has growth rate bounded by a function $g$ if the values of $f$ are eventually bounded by those of $g$ up to some constant factor. We often shorten this (somewhat confusingly) by saying that $f$ has growth rate $g$ or that $f$ has order of growth $g$. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \leq c g(n)$ for all $n \geq n_0$. We then say that $f$ has growth rate less or equal that of $g$ and write $f \in O(g)$ (big-Oh notation). This defines the preorder of growth rates. In algorithm analysis, we sometimes speak of the growth rate of an algorithm. By that, we mean the growth rate of the complexity of the algorithm, the rate at which the cost of the algorithm grows as the size of its input grows. This is also called the asymptotic complexity of that algorithm.">growth
 rate</a> or <a href="10-glossary.html#order-of-growth" class="term"
-title="The rate at which a function grows. How quickly the function grows when its input grows. Also called its order of growth. A function $f$ has growth rate bounded by a function $g$ if the values of $f$ are eventually bounded by those of $g$ up to some constant factor. We often shorten this (somewhat confusingly) by saying that $f$ has growth rate $g$ or that $f$ has order of growth $g$. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \leq c g(n)$ for all $n \geq n_0$. We then say that $f$ has growth rate less or equal that of $g$ and write $f \in O(g)$ (big-Oh notation). This defines the preorder of growth rates. In algorithm analysis, we sometimes speak of the growth rate of an algorithm. By that, we mean the growth rate of the complexity of the algorithm, the rate at which the cost of the algorithm grows as the size of its input grows. This is also called the asymptotic complexity of that algorithm.">order
+title="The rate at which a function grows. How quickly the function grows when its input grows. Also called its *order of growth*. A function $f$ has growth rate bounded by a function $g$ if the values of $f$ are eventually bounded by those of $g$ up to some constant factor. We often shorten this (somewhat confusingly) by saying that $f$ has growth rate $g$ or that $f$ has order of growth $g$. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \leq c g(n)$ for all $n \geq n_0$. We then say that $f$ has growth rate less or equal that of $g$ and write $f \in O(g)$ (big-Oh notation). This defines the preorder of growth rates. In algorithm analysis, we sometimes speak of the growth rate of an algorithm. By that, we mean the growth rate of the complexity of the algorithm, the rate at which the cost of the algorithm grows as the size of its input grows. This is also called the asymptotic complexity of that algorithm.">order
 of growth</a> of the <a href="10-glossary.html#complexity" class="term"
-title="After fixing a cost model for a problem, we can calculate the complexity function of an algorithm. This sends an input size $n$ to the cost of running the algorithm on input of that size. For each fixed n, we consider only the worst-case input of size $n$. This defines the worst-case complexity of the algorithm. There is also the average-case and best-case complexity, which are defined similarly. We speak of time complexity, space complexity, etc. depending on what kind of cost our cost model captures. Here, time refers to runtime and space refers to memory/storage. The case of time complexity is the default, so we omit the word &#39;time&#39;.">complexity</a>
+title="After fixing a cost model for a problem, we can calculate the complexity function of an algorithm. This sends an input size $n$ to the cost of running the algorithm on input of that size. For each fixed $n$, we consider only the worst-case input of size $n$. This defines the worst-case complexity of the algorithm. There is also the average-case and best-case complexity, which are defined similarly. We speak of time complexity, space complexity, etc. depending on what kind of cost our cost model captures. Here, time refers to runtime and space refers to memory/storage. The case of time complexity is the default, so we omit the word &#39;time&#39;.">complexity</a>
 of an algorithm or problem. There are several independent categories of
 qualifiers for (asymptotic) complexity:</p>
 <ul>
@@ -613,7 +614,7 @@ title="In algorithm analysis, specifically complexity of an algorithm, the probl
 case</a>,</li>
 <li>whether to use <a href="10-glossary.html#amortized-analysis"
 class="term"
-title="Analysing the amortized complexity of an algorithm or term:problem.">amortized
+title="Analysing the amortized complexity of an algorithm or problem.">amortized
 complexity</a>.</li>
 </ul>
 </dd>
@@ -642,7 +643,7 @@ class="term"
 title="A method for estimating the efficiency of an algorithm or computer program by identifying its asymptotic complexity, the growth rate of its complexity function. Asymptotic analysis also gives a way to define the inherent difficulty of a problem. We frequently use the term algorithm analysis to mean the same thing.">algorithm
 analysis</a>, specifically <a href="10-glossary.html#complexity"
 class="term"
-title="After fixing a cost model for a problem, we can calculate the complexity function of an algorithm. This sends an input size $n$ to the cost of running the algorithm on input of that size. For each fixed n, we consider only the worst-case input of size $n$. This defines the worst-case complexity of the algorithm. There is also the average-case and best-case complexity, which are defined similarly. We speak of time complexity, space complexity, etc. depending on what kind of cost our cost model captures. Here, time refers to runtime and space refers to memory/storage. The case of time complexity is the default, so we omit the word &#39;time&#39;.">complexity</a>
+title="After fixing a cost model for a problem, we can calculate the complexity function of an algorithm. This sends an input size $n$ to the cost of running the algorithm on input of that size. For each fixed $n$, we consider only the worst-case input of size $n$. This defines the worst-case complexity of the algorithm. There is also the average-case and best-case complexity, which are defined similarly. We speak of time complexity, space complexity, etc. depending on what kind of cost our cost model captures. Here, time refers to runtime and space refers to memory/storage. The case of time complexity is the default, so we omit the word &#39;time&#39;.">complexity</a>
 of an algorithm, the average of the costs for all <a
 href="10-glossary.html#problem-instance" class="term"
 title="A specific selection of values for the parameters to a problem. In other words, a specific set of inputs to a problem. A given problem instance has a size under some cost model.">problem
@@ -762,7 +763,7 @@ storage.</p>
 <p>A <a href="10-glossary.html#heuristic" class="term"
 title="A way to solve a problem that is not guarenteed to be optimal. While it might not be guarenteed to be optimal, it is generally expected (by the agent employing the heuristic) to provide a reasonably efficient solution.">heuristic</a>
 for brute-force search of a solution space. It is essentially a <a
-href="9.2-graph-traversals.html#depth-first-search" class="term"
+href="9.3-graph-traversals.html#depth-first-search" class="term"
 title="A graph traversal algorithm. Whenever a $v$ is visited during the traversal, DFS will recursively visit all of $v$ &#39;s unvisited neighbors.">depth-first
 search</a> of the solution space. This can be improved using a <a
 href="10-glossary.html#branch-and-bounds-algorithm" class="term"
@@ -851,7 +852,7 @@ class="term"
 title="A method for estimating the efficiency of an algorithm or computer program by identifying its asymptotic complexity, the growth rate of its complexity function. Asymptotic analysis also gives a way to define the inherent difficulty of a problem. We frequently use the term algorithm analysis to mean the same thing.">algorithm
 analysis</a>, specifically <a href="10-glossary.html#complexity"
 class="term"
-title="After fixing a cost model for a problem, we can calculate the complexity function of an algorithm. This sends an input size $n$ to the cost of running the algorithm on input of that size. For each fixed n, we consider only the worst-case input of size $n$. This defines the worst-case complexity of the algorithm. There is also the average-case and best-case complexity, which are defined similarly. We speak of time complexity, space complexity, etc. depending on what kind of cost our cost model captures. Here, time refers to runtime and space refers to memory/storage. The case of time complexity is the default, so we omit the word &#39;time&#39;.">complexity</a>
+title="After fixing a cost model for a problem, we can calculate the complexity function of an algorithm. This sends an input size $n$ to the cost of running the algorithm on input of that size. For each fixed $n$, we consider only the worst-case input of size $n$. This defines the worst-case complexity of the algorithm. There is also the average-case and best-case complexity, which are defined similarly. We speak of time complexity, space complexity, etc. depending on what kind of cost our cost model captures. Here, time refers to runtime and space refers to memory/storage. The case of time complexity is the default, so we omit the word &#39;time&#39;.">complexity</a>
 of an algorithm, the <a href="10-glossary.html#problem-instance"
 class="term"
 title="A specific selection of values for the parameters to a problem. In other words, a specific set of inputs to a problem. A given problem instance has a size under some cost model.">problem
@@ -886,7 +887,7 @@ fragmentation</a> in the form of small, unuseable memory blocks.</p>
 </dd>
 <dt><dfn>BFS</dfn></dt>
 <dd>
-<p>See <a href="9.2-graph-traversals.html#breadth-first-search"
+<p>See <a href="9.3-graph-traversals.html#breadth-first-search"
 class="term"
 title="A graph traversal algorithm. As the name implies, all immediate neighbors for a node are visited before any more-distant nodes are visited. BFS is driven by a queue. A start vertex is placed on the queue. Then, until the queue is empty, a node is taken off the queue, visited, and and then any unvisited neighbors are placed onto the queue.">breadth-first
 search</a></p>
@@ -894,7 +895,7 @@ search</a></p>
 <dt><dfn id="big-oh-notation">big-Oh notation</dfn></dt>
 <dd>
 <p>For <a href="10-glossary.html#growth-rate" class="term"
-title="The rate at which a function grows. How quickly the function grows when its input grows. Also called its order of growth. A function $f$ has growth rate bounded by a function $g$ if the values of $f$ are eventually bounded by those of $g$ up to some constant factor. We often shorten this (somewhat confusingly) by saying that $f$ has growth rate $g$ or that $f$ has order of growth $g$. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \leq c g(n)$ for all $n \geq n_0$. We then say that $f$ has growth rate less or equal that of $g$ and write $f \in O(g)$ (big-Oh notation). This defines the preorder of growth rates. In algorithm analysis, we sometimes speak of the growth rate of an algorithm. By that, we mean the growth rate of the complexity of the algorithm, the rate at which the cost of the algorithm grows as the size of its input grows. This is also called the asymptotic complexity of that algorithm.">growth
+title="The rate at which a function grows. How quickly the function grows when its input grows. Also called its *order of growth*. A function $f$ has growth rate bounded by a function $g$ if the values of $f$ are eventually bounded by those of $g$ up to some constant factor. We often shorten this (somewhat confusingly) by saying that $f$ has growth rate $g$ or that $f$ has order of growth $g$. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \leq c g(n)$ for all $n \geq n_0$. We then say that $f$ has growth rate less or equal that of $g$ and write $f \in O(g)$ (big-Oh notation). This defines the preorder of growth rates. In algorithm analysis, we sometimes speak of the growth rate of an algorithm. By that, we mean the growth rate of the complexity of the algorithm, the rate at which the cost of the algorithm grows as the size of its input grows. This is also called the asymptotic complexity of that algorithm.">growth
 rates</a>
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>f</mi><annotation encoding="application/x-tex">f</annotation></semantics></math>
 and
@@ -907,13 +908,53 @@ is an <a href="10-glossary.html#upper-bound" class="term"
 title="An upper bound for a growth rate $f$ is any growth rate $g$ that is greater than or equal to it. Formally, there are constants $n_0 \geq 0$ and $C &gt; 0$ such that $f(n) \leq C g(n)$ for all $n \geq n_0$. We also write $f \in O(g)$ or slightly imprecisely $f(n) \in O(g(n))$ (this is big-Oh notation). Usually, we are interested in finding an upper bound $g$ that has a simple expression compared to $f$, but is still sharp (there is not much room for improvement). In algorithm analysis, an upper bound for an algorithm is an upper bound for the asymptotic complexity of the algorithm, the growth rate of its complexity. In practice, we are looking for the best possible upper bound that has a simple mathematical expression. For example, we may write $T(n) \in O(n^2)$ if $T$ is the (time) complexity of the algorithm to say that the complexity is quadratic, i.e. the asymptoptic complexity of the algorithm has as upper bound the growth rate given by squaring.">upper
 bound</a> for
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>f</mi><annotation encoding="application/x-tex">f</annotation></semantics></math>.
-The notation can be made sense of by defining <span
-class="title-ref">O(g)</span> as the set of functions with growth rate
-less than or equal to that of <span class="title-ref">g</span>. The
-notation is often somewhat imprecisely used as
+The notation can be made sense of by defining
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>g</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(g)</annotation></semantics></math>
+as the set of functions with growth rate less than or equal to that of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>g</mi><annotation encoding="application/x-tex">g</annotation></semantics></math>.
+The notation is often somewhat imprecisely used as
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>∈</mo><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(n) \in O(g(n))</annotation></semantics></math>
 or even
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(n) = O(g(n))</annotation></semantics></math>.</p>
+</dd>
+<dt><dfn id="binary-heap">binary heap</dfn> (<dfn
+id="heap">heap</dfn>)</dt>
+<dd>
+<p>The head data structure is a <a
+href="10-glossary.html#complete-binary-tree" class="term"
+title="A binary tree where the nodes are filled in row by row, with the bottom row filled in left to right. Due to this requirement, there is only one tree of $n$ nodes for any value of $n$. Since storing the records in an array in row order leads to a simple mapping from a node&#39;s position in the array to its parent, siblings, and children, the array representation is most commonly used to implement the complete binary tree. The heap data structure is a complete binary tree with partial ordering constraints on the node values.">complete
+binary tree</a> with the requirement that every <a
+href="10-glossary.html#node" class="term"
+title="The objects that make up a linked structure such as a linked list or binary tree. Typically, nodes are allocated using dynamic memory allocation. In graph terminology, the nodes are more commonly called vertices.">node</a>
+has a value greater than its <a href="10-glossary.html#child"
+class="term"
+title="In a tree, the set of nodes directly pointed to by a node $R$ are the children of $R$.">children</a>
+(called a <a href="10-glossary.html#max-heap" class="term"
+title="A heap where every node has a key value greater than its children. As a consequence, the node with maximum key value is at the root.">max
+heap</a>), or else the requirement that every node has a value less than
+its children (called a <a href="10-glossary.html#min-heap" class="term"
+title="A heap where every node has a key value less than its children. As a consequence, the node with minimum key value is at the root.">min
+heap</a>). Since it is a complete binary tree, a heap is nearly always
+implemented using an <a href="10-glossary.html#array" class="term"
+title="A data type that is used to store elements in consecutive memory locations and refers to them by an index.">array</a>
+rather than an explicit tree structure. To add a new value to a heap, or
+to remove the extreme value (the max value in a max-heap or min value in
+a min-heap) and update the heap, takes
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math>
+time in the <a href="10-glossary.html#worst-case" class="term"
+title="In algorithm analysis, specifically complexity of an algorithm, the problem instance from among all problem instances for a given input size $n$ that has the greatest cost. Every input size $n$ has its own worst case. We **never** consider the worst case as removed from input size.">worst
+case</a>. However, if given all of the values in an unordered array, the
+values can be re-arranged to form a heap in only
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math>
+time. Due to its space and time efficiency, the heap is a popular choice
+for implementing a <a href="10-glossary.html#priority-queue"
+class="term"
+title="An ADT whose primary operations of insert of records, and deletion of the greatest (or, in an alternative implementation, the least) valued record. Most often implemented using the heap data structure. The name comes from a common application where the records being stored represent tasks, with the ordering values based on the priorities of the tasks.">priority
+queue</a>.</p>
+<p>Uncommonly, <em>heap</em> is a synonym for <a
+href="10-glossary.html#free-store" class="term"
+title="Space available to a program during runtime to be used for dynamic allocation of objects. The free store is distinct from the runtime stack. The free store is sometimes referred to as the heap, which can be confusing because heap more often refers to a specific data structure. Most programming languages provide functions to allocate (and maybe to deallocate) objects from the free store, such as `new` in C++ and Java.">free
+store</a>.</p>
 </dd>
 <dt><dfn id="binary-insert-sort">binary insert sort</dfn></dt>
 <dd>
@@ -1767,7 +1808,7 @@ and <a href="10-glossary.html#child" class="term"
 title="In a tree, the set of nodes directly pointed to by a node $R$ are the children of $R$.">children</a>,
 the array representation is most commonly used to implement the complete
 binary tree. The <a href="10-glossary.html#heap" class="term"
-title="This term has two different meanings. Uncommonly, it is a synonym for free store. Most often it is used to refer to a particular data structure. This data structure is a complete binary tree with the requirement that every node has a value greater than its children (called a max heap), or else the requirement that every node has a value less than its children (called a min heap). Since it is a complete binary tree, a heap is nearly always implemented using an array rather than an explicit tree structure. To add a new value to a heap, or to remove the extreme value (the max value in a max-heap or min value in a min-heap) and update the heap, takes $\Theta(\log n)$ time in the worst case. However, if given all of the values in an unordered array, the values can be re-arranged to form a heap in only $\Theta(n)$ time. Due to its space and time efficiency, the heap is a popular choice for implementing a priority queue.">heap</a>
+title="The head data structure is a complete binary tree with the requirement that every node has a value greater than its children (called a max heap), or else the requirement that every node has a value less than its children (called a min heap). Since it is a complete binary tree, a heap is nearly always implemented using an array rather than an explicit tree structure. To add a new value to a heap, or to remove the extreme value (the max value in a max-heap or min value in a min-heap) and update the heap, takes $\Theta(\log n)$ time in the worst case. However, if given all of the values in an unordered array, the values can be re-arranged to form a heap in only $\Theta(n)$ time. Due to its space and time efficiency, the heap is a popular choice for implementing a priority queue. Uncommonly, *heap* is a synonym for free store.">heap</a>
 data structure is a complete binary tree with partial ordering
 constraints on the node values.</p>
 </dd>
@@ -1792,8 +1833,9 @@ model</a> for a problem, we can calculate the complexity function of an
 algorithm. This sends an input size
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
 to the cost of running the algorithm on input of that size. For each
-fixed <span class="title-ref">n</span>, we consider only the <a
-href="10-glossary.html#worst-case" class="term"
+fixed
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
+we consider only the <a href="10-glossary.html#worst-case" class="term"
 title="In algorithm analysis, specifically complexity of an algorithm, the problem instance from among all problem instances for a given input size $n$ that has the greatest cost. Every input size $n$ has its own worst case. We **never** consider the worst case as removed from input size.">worst-case</a>
 input of size
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.
@@ -2030,14 +2072,14 @@ the <a href="10-glossary.html#cost" class="term"
 title="The amount of resources that given run of an algorithm consumes.">cost</a>
 to run the algorithm on a given input, and from there determine the <a
 href="10-glossary.html#complexity" class="term"
-title="After fixing a cost model for a problem, we can calculate the complexity function of an algorithm. This sends an input size $n$ to the cost of running the algorithm on input of that size. For each fixed n, we consider only the worst-case input of size $n$. This defines the worst-case complexity of the algorithm. There is also the average-case and best-case complexity, which are defined similarly. We speak of time complexity, space complexity, etc. depending on what kind of cost our cost model captures. Here, time refers to runtime and space refers to memory/storage. The case of time complexity is the default, so we omit the word &#39;time&#39;.">complexity</a>
+title="After fixing a cost model for a problem, we can calculate the complexity function of an algorithm. This sends an input size $n$ to the cost of running the algorithm on input of that size. For each fixed $n$, we consider only the worst-case input of size $n$. This defines the worst-case complexity of the algorithm. There is also the average-case and best-case complexity, which are defined similarly. We speak of time complexity, space complexity, etc. depending on what kind of cost our cost model captures. Here, time refers to runtime and space refers to memory/storage. The case of time complexity is the default, so we omit the word &#39;time&#39;.">complexity</a>
 of the algorithm.</p>
 <p>By default, the cost model approximates the runtime of the program.
 To stress this, we also speak of time complexity. It is also possible to
 model other kinds of costs. In the case of memory/storage, we speak of
 space complexity.</p>
 <p>Looking at the <a href="10-glossary.html#growth-rate" class="term"
-title="The rate at which a function grows. How quickly the function grows when its input grows. Also called its order of growth. A function $f$ has growth rate bounded by a function $g$ if the values of $f$ are eventually bounded by those of $g$ up to some constant factor. We often shorten this (somewhat confusingly) by saying that $f$ has growth rate $g$ or that $f$ has order of growth $g$. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \leq c g(n)$ for all $n \geq n_0$. We then say that $f$ has growth rate less or equal that of $g$ and write $f \in O(g)$ (big-Oh notation). This defines the preorder of growth rates. In algorithm analysis, we sometimes speak of the growth rate of an algorithm. By that, we mean the growth rate of the complexity of the algorithm, the rate at which the cost of the algorithm grows as the size of its input grows. This is also called the asymptotic complexity of that algorithm.">growth
+title="The rate at which a function grows. How quickly the function grows when its input grows. Also called its *order of growth*. A function $f$ has growth rate bounded by a function $g$ if the values of $f$ are eventually bounded by those of $g$ up to some constant factor. We often shorten this (somewhat confusingly) by saying that $f$ has growth rate $g$ or that $f$ has order of growth $g$. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \leq c g(n)$ for all $n \geq n_0$. We then say that $f$ has growth rate less or equal that of $g$ and write $f \in O(g)$ (big-Oh notation). This defines the preorder of growth rates. In algorithm analysis, we sometimes speak of the growth rate of an algorithm. By that, we mean the growth rate of the complexity of the algorithm, the rate at which the cost of the algorithm grows as the size of its input grows. This is also called the asymptotic complexity of that algorithm.">growth
 rate</a> of the complexity function tells us the <a
 href="10-glossary.html#asymptotic-complexity" class="term"
 title="The growth rate or order of growth of the complexity of an algorithm or problem. There are several independent categories of qualifiers for (asymptotic) complexity: - time complexity (default), space complexity, complexity in some other cost, - worst case (default), average case, best case, - whether to use amortized complexity.">asymptotic
@@ -2255,7 +2297,7 @@ relatively high.</p>
 <p>A <a href="10-glossary.html#tree" class="term"
 title="A tree $\mathbf{T}$ is a finite set of one or more nodes such that there is one designated node $R$, called the root of $\mathbf{T}$. If the set $(\mathbf{T} -{R})$ is not empty, these nodes are partitioned into $n &gt; 0$ disjoint sets $\mathbf{T}_0$, $\mathbf{T}_1$, ..., $\mathbf{T}_{n-1}$, each of which is a tree, and whose roots $R_1, R_2, ..., R_n$, respectively, are children of $R$.">tree</a>
 that can be defined by the operation of a <a
-href="9.2-graph-traversals.html#depth-first-search" class="term"
+href="9.3-graph-traversals.html#depth-first-search" class="term"
 title="A graph traversal algorithm. Whenever a $v$ is visited during the traversal, DFS will recursively visit all of $v$ &#39;s unvisited neighbors.">depth-first
 search</a> (DFS) on a <a href="10-glossary.html#graph" class="term"
 title="A graph $\mathbf{G} = (\mathbf{V}, \mathbf{E})$ consists of a set of vertices $\mathbf{V}$ and a set of edges $\mathbf{E}$, such that each edge in $\mathbf{E}$ is a connection between a pair of vertices in $\mathbf{V}$.">graph</a>.
@@ -2410,7 +2452,7 @@ finite automata</a></p>
 </dd>
 <dt><dfn>DFS</dfn></dt>
 <dd>
-<p>See <a href="9.2-graph-traversals.html#depth-first-search"
+<p>See <a href="9.3-graph-traversals.html#depth-first-search"
 class="term"
 title="A graph traversal algorithm. Whenever a $v$ is visited during the traversal, DFS will recursively visit all of $v$ &#39;s unvisited neighbors.">depth-first
 search</a></p>
@@ -2473,7 +2515,7 @@ title="A graph $\mathbf{G} = (\mathbf{V}, \mathbf{E})$ consists of a set of vert
 This is a <a href="10-glossary.html#greedy-algorithm" class="term"
 title="An algorithm that makes locally optimal choices at each step.">greedy
 algorithm</a>. It is nearly identical to <a
-href="9.5-minimal-cost-spanning-trees.html#prims-algorithm" class="term"
+href="9.6-minimal-cost-spanning-trees.html#prims-algorithm" class="term"
 title="A greedy algorithm for computing the MCST of a graph. It is nearly identical to Dijkstra&#39;s algorithm for solving the single-source shortest paths problem, with the only difference being the calculation done to update the best-known distance.">Prim’s
 algorithm</a> for finding a <a
 href="10-glossary.html#minimal-cost-spanning-tree" class="term"
@@ -3042,7 +3084,7 @@ recurrence with a copy of recurrence.</p>
 <dt><dfn id="exponential-growth-rate">exponential growth rate</dfn></dt>
 <dd>
 <p>A <a href="10-glossary.html#growth-rate" class="term"
-title="The rate at which a function grows. How quickly the function grows when its input grows. Also called its order of growth. A function $f$ has growth rate bounded by a function $g$ if the values of $f$ are eventually bounded by those of $g$ up to some constant factor. We often shorten this (somewhat confusingly) by saying that $f$ has growth rate $g$ or that $f$ has order of growth $g$. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \leq c g(n)$ for all $n \geq n_0$. We then say that $f$ has growth rate less or equal that of $g$ and write $f \in O(g)$ (big-Oh notation). This defines the preorder of growth rates. In algorithm analysis, we sometimes speak of the growth rate of an algorithm. By that, we mean the growth rate of the complexity of the algorithm, the rate at which the cost of the algorithm grows as the size of its input grows. This is also called the asymptotic complexity of that algorithm.">growth
+title="The rate at which a function grows. How quickly the function grows when its input grows. Also called its *order of growth*. A function $f$ has growth rate bounded by a function $g$ if the values of $f$ are eventually bounded by those of $g$ up to some constant factor. We often shorten this (somewhat confusingly) by saying that $f$ has growth rate $g$ or that $f$ has order of growth $g$. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \leq c g(n)$ for all $n \geq n_0$. We then say that $f$ has growth rate less or equal that of $g$ and write $f \in O(g)$ (big-Oh notation). This defines the preorder of growth rates. In algorithm analysis, we sometimes speak of the growth rate of an algorithm. By that, we mean the growth rate of the complexity of the algorithm, the rate at which the cost of the algorithm grows as the size of its input grows. This is also called the asymptotic complexity of that algorithm.">growth
 rate</a> function where
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
 (the input size) appears in the exponent. For example,
@@ -3423,10 +3465,10 @@ href="10-glossary.html#runtime-stack" class="term"
 title="The place where an activation record is stored when a subroutine is called during a program&#39;s runtime.">runtime
 stack</a>. The free store is sometimes referred to as the <a
 href="10-glossary.html#heap" class="term"
-title="This term has two different meanings. Uncommonly, it is a synonym for free store. Most often it is used to refer to a particular data structure. This data structure is a complete binary tree with the requirement that every node has a value greater than its children (called a max heap), or else the requirement that every node has a value less than its children (called a min heap). Since it is a complete binary tree, a heap is nearly always implemented using an array rather than an explicit tree structure. To add a new value to a heap, or to remove the extreme value (the max value in a max-heap or min value in a min-heap) and update the heap, takes $\Theta(\log n)$ time in the worst case. However, if given all of the values in an unordered array, the values can be re-arranged to form a heap in only $\Theta(n)$ time. Due to its space and time efficiency, the heap is a popular choice for implementing a priority queue.">heap</a>,
+title="The head data structure is a complete binary tree with the requirement that every node has a value greater than its children (called a max heap), or else the requirement that every node has a value less than its children (called a min heap). Since it is a complete binary tree, a heap is nearly always implemented using an array rather than an explicit tree structure. To add a new value to a heap, or to remove the extreme value (the max value in a max-heap or min value in a min-heap) and update the heap, takes $\Theta(\log n)$ time in the worst case. However, if given all of the values in an unordered array, the values can be re-arranged to form a heap in only $\Theta(n)$ time. Due to its space and time efficiency, the heap is a popular choice for implementing a priority queue. Uncommonly, *heap* is a synonym for free store.">heap</a>,
 which can be confusing because <a href="10-glossary.html#heap"
 class="term"
-title="This term has two different meanings. Uncommonly, it is a synonym for free store. Most often it is used to refer to a particular data structure. This data structure is a complete binary tree with the requirement that every node has a value greater than its children (called a max heap), or else the requirement that every node has a value less than its children (called a min heap). Since it is a complete binary tree, a heap is nearly always implemented using an array rather than an explicit tree structure. To add a new value to a heap, or to remove the extreme value (the max value in a max-heap or min value in a min-heap) and update the heap, takes $\Theta(\log n)$ time in the worst case. However, if given all of the values in an unordered array, the values can be re-arranged to form a heap in only $\Theta(n)$ time. Due to its space and time efficiency, the heap is a popular choice for implementing a priority queue.">heap</a>
+title="The head data structure is a complete binary tree with the requirement that every node has a value greater than its children (called a max heap), or else the requirement that every node has a value less than its children (called a min heap). Since it is a complete binary tree, a heap is nearly always implemented using an array rather than an explicit tree structure. To add a new value to a heap, or to remove the extreme value (the max value in a max-heap or min value in a min-heap) and update the heap, takes $\Theta(\log n)$ time in the worst case. However, if given all of the values in an unordered array, the values can be re-arranged to form a heap in only $\Theta(n)$ time. Due to its space and time efficiency, the heap is a popular choice for implementing a priority queue. Uncommonly, *heap* is a synonym for free store.">heap</a>
 more often refers to a specific data structure. Most programming
 languages provide functions to allocate (and maybe to deallocate)
 objects from the free store, such as <code>new</code> in C++ and
@@ -3599,8 +3641,7 @@ is a connection between a pair of vertices in
 id="order-of-growth">order of growth</dfn>)</dt>
 <dd>
 <p>The rate at which a function grows. How quickly the function grows
-when its input grows. Also called its <span class="title-ref">order of
-growth</span>.</p>
+when its input grows. Also called its <em>order of growth</em>.</p>
 <p>A function
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>f</mi><annotation encoding="application/x-tex">f</annotation></semantics></math>
 has growth rate bounded by a function
@@ -3640,9 +3681,9 @@ analysis</a>, we sometimes speak of the growth rate of an <a
 href="10-glossary.html#algorithm" class="term"
 title="A method or a process followed to solve a problem.">algorithm</a>.
 By that, we mean the <a href="10-glossary.html#growth-rate" class="term"
-title="The rate at which a function grows. How quickly the function grows when its input grows. Also called its order of growth. A function $f$ has growth rate bounded by a function $g$ if the values of $f$ are eventually bounded by those of $g$ up to some constant factor. We often shorten this (somewhat confusingly) by saying that $f$ has growth rate $g$ or that $f$ has order of growth $g$. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \leq c g(n)$ for all $n \geq n_0$. We then say that $f$ has growth rate less or equal that of $g$ and write $f \in O(g)$ (big-Oh notation). This defines the preorder of growth rates. In algorithm analysis, we sometimes speak of the growth rate of an algorithm. By that, we mean the growth rate of the complexity of the algorithm, the rate at which the cost of the algorithm grows as the size of its input grows. This is also called the asymptotic complexity of that algorithm.">growth
+title="The rate at which a function grows. How quickly the function grows when its input grows. Also called its *order of growth*. A function $f$ has growth rate bounded by a function $g$ if the values of $f$ are eventually bounded by those of $g$ up to some constant factor. We often shorten this (somewhat confusingly) by saying that $f$ has growth rate $g$ or that $f$ has order of growth $g$. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \leq c g(n)$ for all $n \geq n_0$. We then say that $f$ has growth rate less or equal that of $g$ and write $f \in O(g)$ (big-Oh notation). This defines the preorder of growth rates. In algorithm analysis, we sometimes speak of the growth rate of an algorithm. By that, we mean the growth rate of the complexity of the algorithm, the rate at which the cost of the algorithm grows as the size of its input grows. This is also called the asymptotic complexity of that algorithm.">growth
 rate</a> of the <a href="10-glossary.html#complexity" class="term"
-title="After fixing a cost model for a problem, we can calculate the complexity function of an algorithm. This sends an input size $n$ to the cost of running the algorithm on input of that size. For each fixed n, we consider only the worst-case input of size $n$. This defines the worst-case complexity of the algorithm. There is also the average-case and best-case complexity, which are defined similarly. We speak of time complexity, space complexity, etc. depending on what kind of cost our cost model captures. Here, time refers to runtime and space refers to memory/storage. The case of time complexity is the default, so we omit the word &#39;time&#39;.">complexity</a>
+title="After fixing a cost model for a problem, we can calculate the complexity function of an algorithm. This sends an input size $n$ to the cost of running the algorithm on input of that size. For each fixed $n$, we consider only the worst-case input of size $n$. This defines the worst-case complexity of the algorithm. There is also the average-case and best-case complexity, which are defined similarly. We speak of time complexity, space complexity, etc. depending on what kind of cost our cost model captures. Here, time refers to runtime and space refers to memory/storage. The case of time complexity is the default, so we omit the word &#39;time&#39;.">complexity</a>
 of the algorithm, the rate at which the cost of the <a
 href="10-glossary.html#algorithm" class="term"
 title="A method or a process followed to solve a problem.">algorithm</a>
@@ -3838,43 +3879,11 @@ preceeds the first element of the list. Its purpose is to simplify the
 code implementation by reducing the number of special cases that must be
 programmed for.</p>
 </dd>
-<dt><dfn id="heap">heap</dfn></dt>
+<dt><dfn>heap</dfn></dt>
 <dd>
-<p>This term has two different meanings. Uncommonly, it is a synonym for
-<a href="10-glossary.html#free-store" class="term"
-title="Space available to a program during runtime to be used for dynamic allocation of objects. The free store is distinct from the runtime stack. The free store is sometimes referred to as the heap, which can be confusing because heap more often refers to a specific data structure. Most programming languages provide functions to allocate (and maybe to deallocate) objects from the free store, such as `new` in C++ and Java.">free
-store</a>. Most often it is used to refer to a particular data
-structure. This data structure is a <a
-href="10-glossary.html#complete-binary-tree" class="term"
-title="A binary tree where the nodes are filled in row by row, with the bottom row filled in left to right. Due to this requirement, there is only one tree of $n$ nodes for any value of $n$. Since storing the records in an array in row order leads to a simple mapping from a node&#39;s position in the array to its parent, siblings, and children, the array representation is most commonly used to implement the complete binary tree. The heap data structure is a complete binary tree with partial ordering constraints on the node values.">complete
-binary tree</a> with the requirement that every <a
-href="10-glossary.html#node" class="term"
-title="The objects that make up a linked structure such as a linked list or binary tree. Typically, nodes are allocated using dynamic memory allocation. In graph terminology, the nodes are more commonly called vertices.">node</a>
-has a value greater than its <a href="10-glossary.html#child"
-class="term"
-title="In a tree, the set of nodes directly pointed to by a node $R$ are the children of $R$.">children</a>
-(called a <a href="10-glossary.html#max-heap" class="term"
-title="A heap where every node has a key value greater than its children. As a consequence, the node with maximum key value is at the root.">max
-heap</a>), or else the requirement that every node has a value less than
-its children (called a <a href="10-glossary.html#min-heap" class="term"
-title="A heap where every node has a key value less than its children. As a consequence, the node with minimum key value is at the root.">min
-heap</a>). Since it is a complete binary tree, a heap is nearly always
-implemented using an <a href="10-glossary.html#array" class="term"
-title="A data type that is used to store elements in consecutive memory locations and refers to them by an index.">array</a>
-rather than an explicit tree structure. To add a new value to a heap, or
-to remove the extreme value (the max value in a max-heap or min value in
-a min-heap) and update the heap, takes
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math>
-time in the <a href="10-glossary.html#worst-case" class="term"
-title="In algorithm analysis, specifically complexity of an algorithm, the problem instance from among all problem instances for a given input size $n$ that has the greatest cost. Every input size $n$ has its own worst case. We **never** consider the worst case as removed from input size.">worst
-case</a>. However, if given all of the values in an unordered array, the
-values can be re-arranged to form a heap in only
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math>
-time. Due to its space and time efficiency, the heap is a popular choice
-for implementing a <a href="10-glossary.html#priority-queue"
-class="term"
-title="An ADT whose primary operations of insert of records, and deletion of the greatest (or, in an alternative implementation, the least) valued record. Most often implemented using the heap data structure. The name comes from a common application where the records being stored represent tasks, with the ordering values based on the priorities of the tasks.">priority
-queue</a>.</p>
+<p>See <a href="10-glossary.html#binary-heap" class="term"
+title="The head data structure is a complete binary tree with the requirement that every node has a value greater than its children (called a max heap), or else the requirement that every node has a value less than its children (called a min heap). Since it is a complete binary tree, a heap is nearly always implemented using an array rather than an explicit tree structure. To add a new value to a heap, or to remove the extreme value (the max value in a max-heap or min value in a min-heap) and update the heap, takes $\Theta(\log n)$ time in the worst case. However, if given all of the values in an unordered array, the values can be re-arranged to form a heap in only $\Theta(n)$ time. Due to its space and time efficiency, the heap is a popular choice for implementing a priority queue. Uncommonly, *heap* is a synonym for free store.">binary
+heap</a></p>
 </dd>
 <dt><dfn id="heapsort">heapsort</dfn></dt>
 <dd>
@@ -4410,7 +4419,7 @@ kept organized by a <a href="10-glossary.html#priority-queue"
 class="term"
 title="An ADT whose primary operations of insert of records, and deletion of the greatest (or, in an alternative implementation, the least) valued record. Most often implemented using the heap data structure. The name comes from a common application where the records being stored represent tasks, with the ordering values based on the priorities of the tasks.">priority
 queue</a>. Another common use for this term is for a collection of tasks
-to be ordered by a <a href="9.3-topological-sort.html#topological-sort"
+to be ordered by a <a href="9.4-topological-sort.html#topological-sort"
 class="term"
 title="The process of laying out the vertices of a DAG in a linear order such that no vertex $A$ in the order is preceded by a vertex that can be reached by a (directed) path from $A$. Usually the (directed) edges in the graph define a prerequisite system, and the goal of the topological sort is to list the vertices in an order such that no prerequisites are violated.">topological
 sort</a>.</p>
@@ -4979,7 +4988,7 @@ title="The concept of keeping selected data in main memory. The goal is to have 
 </dd>
 <dt><dfn id="logarithm">logarithm</dfn></dt>
 <dd>
-<p>The <span class="title-ref">logarithm</span> of base
+<p>The <em>logarithm</em> of base
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>
 for value
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math>
@@ -5025,7 +5034,7 @@ tradeoff</a>.</p>
 <dd>
 <p>An lower bound for a <a href="10-glossary.html#growth-rate"
 class="term"
-title="The rate at which a function grows. How quickly the function grows when its input grows. Also called its order of growth. A function $f$ has growth rate bounded by a function $g$ if the values of $f$ are eventually bounded by those of $g$ up to some constant factor. We often shorten this (somewhat confusingly) by saying that $f$ has growth rate $g$ or that $f$ has order of growth $g$. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \leq c g(n)$ for all $n \geq n_0$. We then say that $f$ has growth rate less or equal that of $g$ and write $f \in O(g)$ (big-Oh notation). This defines the preorder of growth rates. In algorithm analysis, we sometimes speak of the growth rate of an algorithm. By that, we mean the growth rate of the complexity of the algorithm, the rate at which the cost of the algorithm grows as the size of its input grows. This is also called the asymptotic complexity of that algorithm.">growth
+title="The rate at which a function grows. How quickly the function grows when its input grows. Also called its *order of growth*. A function $f$ has growth rate bounded by a function $g$ if the values of $f$ are eventually bounded by those of $g$ up to some constant factor. We often shorten this (somewhat confusingly) by saying that $f$ has growth rate $g$ or that $f$ has order of growth $g$. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \leq c g(n)$ for all $n \geq n_0$. We then say that $f$ has growth rate less or equal that of $g$ and write $f \in O(g)$ (big-Oh notation). This defines the preorder of growth rates. In algorithm analysis, we sometimes speak of the growth rate of an algorithm. By that, we mean the growth rate of the complexity of the algorithm, the rate at which the cost of the algorithm grows as the size of its input grows. This is also called the asymptotic complexity of that algorithm.">growth
 rate</a>
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>f</mi><annotation encoding="application/x-tex">f</annotation></semantics></math>
 is any growth rate
@@ -5043,7 +5052,7 @@ We also write
 or slightly imprecisely
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>∈</mo><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(n) \in \Omega(g(n))</annotation></semantics></math>
 (this is <a href="10-glossary.html#omega-notation" class="term"
-title="For growth rates $f$ and $g$, we write $f \in \Omega(g)$ to say that $g$ is a lower bound for $f$. The notation can be made sense of by defining Omega(g) as the set of functions with growth rate greater than or equal to that of g. The notation is often somewhat imprecisely used as $f(n) \in \Omega(g(n))$ or even $f(n) = \Omega(g(n))$.">Omega
+title="For growth rates $f$ and $g$, we write $f \in \Omega(g)$ to say that $g$ is a lower bound for $f$. The notation can be made sense of by defining $\Omega(g)$ as the set of functions with growth rate greater than or equal to that of $g$. The notation is often somewhat imprecisely used as $f(n) \in \Omega(g(n))$ or even $f(n) = \Omega(g(n))$.">Omega
 notation</a>).</p>
 <p>Usually, we are interested in finding a lower bound
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>g</mi><annotation encoding="application/x-tex">g</annotation></semantics></math>
@@ -5058,7 +5067,7 @@ href="10-glossary.html#asymptotic-complexity" class="term"
 title="The growth rate or order of growth of the complexity of an algorithm or problem. There are several independent categories of qualifiers for (asymptotic) complexity: - time complexity (default), space complexity, complexity in some other cost, - worst case (default), average case, best case, - whether to use amortized complexity.">asymptotic
 complexity</a> of the algorithm, the growth rate of its <a
 href="10-glossary.html#complexity" class="term"
-title="After fixing a cost model for a problem, we can calculate the complexity function of an algorithm. This sends an input size $n$ to the cost of running the algorithm on input of that size. For each fixed n, we consider only the worst-case input of size $n$. This defines the worst-case complexity of the algorithm. There is also the average-case and best-case complexity, which are defined similarly. We speak of time complexity, space complexity, etc. depending on what kind of cost our cost model captures. Here, time refers to runtime and space refers to memory/storage. The case of time complexity is the default, so we omit the word &#39;time&#39;.">complexity</a>.</p>
+title="After fixing a cost model for a problem, we can calculate the complexity function of an algorithm. This sends an input size $n$ to the cost of running the algorithm on input of that size. For each fixed $n$, we consider only the worst-case input of size $n$. This defines the worst-case complexity of the algorithm. There is also the average-case and best-case complexity, which are defined similarly. We speak of time complexity, space complexity, etc. depending on what kind of cost our cost model captures. Here, time refers to runtime and space refers to memory/storage. The case of time complexity is the default, so we omit the word &#39;time&#39;.">complexity</a>.</p>
 </dd>
 <dt><dfn id="lower-bounds-proof">lower bounds proof</dfn></dt>
 <dd>
@@ -5158,7 +5167,7 @@ graph.</p>
 <dt><dfn id="max-heap">max heap</dfn></dt>
 <dd>
 <p>A <a href="10-glossary.html#heap" class="term"
-title="This term has two different meanings. Uncommonly, it is a synonym for free store. Most often it is used to refer to a particular data structure. This data structure is a complete binary tree with the requirement that every node has a value greater than its children (called a max heap), or else the requirement that every node has a value less than its children (called a min heap). Since it is a complete binary tree, a heap is nearly always implemented using an array rather than an explicit tree structure. To add a new value to a heap, or to remove the extreme value (the max value in a max-heap or min value in a min-heap) and update the heap, takes $\Theta(\log n)$ time in the worst case. However, if given all of the values in an unordered array, the values can be re-arranged to form a heap in only $\Theta(n)$ time. Due to its space and time efficiency, the heap is a popular choice for implementing a priority queue.">heap</a>
+title="The head data structure is a complete binary tree with the requirement that every node has a value greater than its children (called a max heap), or else the requirement that every node has a value less than its children (called a min heap). Since it is a complete binary tree, a heap is nearly always implemented using an array rather than an explicit tree structure. To add a new value to a heap, or to remove the extreme value (the max value in a max-heap or min value in a min-heap) and update the heap, takes $\Theta(\log n)$ time in the worst case. However, if given all of the values in an unordered array, the values can be re-arranged to form a heap in only $\Theta(n)$ time. Due to its space and time efficiency, the heap is a popular choice for implementing a priority queue. Uncommonly, *heap* is a synonym for free store.">heap</a>
 where every <a href="10-glossary.html#node" class="term"
 title="The objects that make up a linked structure such as a linked list or binary tree. Typically, nodes are allocated using dynamic memory allocation. In graph terminology, the nodes are more commonly called vertices.">node</a>
 has a <a href="10-glossary.html#key" class="term"
@@ -5421,7 +5430,7 @@ hash code be affected by all bits of the key</p>
 <dt><dfn id="min-heap">min heap</dfn></dt>
 <dd>
 <p>A <a href="10-glossary.html#heap" class="term"
-title="This term has two different meanings. Uncommonly, it is a synonym for free store. Most often it is used to refer to a particular data structure. This data structure is a complete binary tree with the requirement that every node has a value greater than its children (called a max heap), or else the requirement that every node has a value less than its children (called a min heap). Since it is a complete binary tree, a heap is nearly always implemented using an array rather than an explicit tree structure. To add a new value to a heap, or to remove the extreme value (the max value in a max-heap or min value in a min-heap) and update the heap, takes $\Theta(\log n)$ time in the worst case. However, if given all of the values in an unordered array, the values can be re-arranged to form a heap in only $\Theta(n)$ time. Due to its space and time efficiency, the heap is a popular choice for implementing a priority queue.">heap</a>
+title="The head data structure is a complete binary tree with the requirement that every node has a value greater than its children (called a max heap), or else the requirement that every node has a value less than its children (called a min heap). Since it is a complete binary tree, a heap is nearly always implemented using an array rather than an explicit tree structure. To add a new value to a heap, or to remove the extreme value (the max value in a max-heap or min value in a min-heap) and update the heap, takes $\Theta(\log n)$ time in the worst case. However, if given all of the values in an unordered array, the values can be re-arranged to form a heap in only $\Theta(n)$ time. Due to its space and time efficiency, the heap is a popular choice for implementing a priority queue. Uncommonly, *heap* is a synonym for free store.">heap</a>
 where every <a href="10-glossary.html#node" class="term"
 title="The objects that make up a linked structure such as a linked list or binary tree. Typically, nodes are allocated using dynamic memory allocation. In graph terminology, the nodes are more commonly called vertices.">node</a>
 has a <a href="10-glossary.html#key" class="term"
@@ -5463,10 +5472,10 @@ class="term"
 title="In graph terminology, a cycle is a path of length three or more that connects some vertex $v_1$ to itself.">cycle</a>
 (since an edge could be removed from the cycle and still preserve
 connectivity). Two algorithms to solve this problem are <a
-href="9.5-minimal-cost-spanning-trees.html#prims-algorithm" class="term"
+href="9.6-minimal-cost-spanning-trees.html#prims-algorithm" class="term"
 title="A greedy algorithm for computing the MCST of a graph. It is nearly identical to Dijkstra&#39;s algorithm for solving the single-source shortest paths problem, with the only difference being the calculation done to update the best-known distance.">Prim’s
 algorithm</a> and <a
-href="9.5-minimal-cost-spanning-trees.html#kruskals-algorithm"
+href="9.6-minimal-cost-spanning-trees.html#kruskals-algorithm"
 class="term"
 title="An algorithm for computing the MCST of a graph. During processing, it makes use of the UNION/FIND process to efficiently determine of two vertices are within the same subgraph.">Kruskal’s
 algorithm</a>.</p>
@@ -5807,7 +5816,7 @@ or eight branches.</p>
 <dt><dfn id="omega-notation">Omega notation</dfn></dt>
 <dd>
 <p>For <a href="10-glossary.html#growth-rate" class="term"
-title="The rate at which a function grows. How quickly the function grows when its input grows. Also called its order of growth. A function $f$ has growth rate bounded by a function $g$ if the values of $f$ are eventually bounded by those of $g$ up to some constant factor. We often shorten this (somewhat confusingly) by saying that $f$ has growth rate $g$ or that $f$ has order of growth $g$. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \leq c g(n)$ for all $n \geq n_0$. We then say that $f$ has growth rate less or equal that of $g$ and write $f \in O(g)$ (big-Oh notation). This defines the preorder of growth rates. In algorithm analysis, we sometimes speak of the growth rate of an algorithm. By that, we mean the growth rate of the complexity of the algorithm, the rate at which the cost of the algorithm grows as the size of its input grows. This is also called the asymptotic complexity of that algorithm.">growth
+title="The rate at which a function grows. How quickly the function grows when its input grows. Also called its *order of growth*. A function $f$ has growth rate bounded by a function $g$ if the values of $f$ are eventually bounded by those of $g$ up to some constant factor. We often shorten this (somewhat confusingly) by saying that $f$ has growth rate $g$ or that $f$ has order of growth $g$. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \leq c g(n)$ for all $n \geq n_0$. We then say that $f$ has growth rate less or equal that of $g$ and write $f \in O(g)$ (big-Oh notation). This defines the preorder of growth rates. In algorithm analysis, we sometimes speak of the growth rate of an algorithm. By that, we mean the growth rate of the complexity of the algorithm, the rate at which the cost of the algorithm grows as the size of its input grows. This is also called the asymptotic complexity of that algorithm.">growth
 rates</a>
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>f</mi><annotation encoding="application/x-tex">f</annotation></semantics></math>
 and
@@ -5820,9 +5829,11 @@ is a <a href="10-glossary.html#lower-bound" class="term"
 title="An lower bound for a growth rate $f$ is any growth rate $g$ that is less than or equal to it. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \geq c g(n)$ for all $n \geq n_0$. We also write $f \in \Omega(g)$ or slightly imprecisely $f(n) \in \Omega(g(n))$ (this is Omega notation). Usually, we are interested in finding a lower bound $g$ that has a simple expression compared to $f$, but is still sharp (there is not much room for improvement). In algorithm analysis, a lower bound for an algorithm is a lower bound for the asymptotic complexity of the algorithm, the growth rate of its complexity.">lower
 bound</a> for
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>f</mi><annotation encoding="application/x-tex">f</annotation></semantics></math>.
-The notation can be made sense of by defining <span
-class="title-ref">Omega(g)</span> as the set of functions with growth
-rate greater than or equal to that of <span class="title-ref">g</span>.
+The notation can be made sense of by defining
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>g</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Omega(g)</annotation></semantics></math>
+as the set of functions with growth rate greater than or equal to that
+of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>g</mi><annotation encoding="application/x-tex">g</annotation></semantics></math>.
 The notation is often somewhat imprecisely used as
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>∈</mo><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(n) \in \Omega(g(n))</annotation></semantics></math>
 or even
@@ -5891,7 +5902,7 @@ cheapest order.</p>
 <dt><dfn>order of growth</dfn></dt>
 <dd>
 <p>See <a href="10-glossary.html#growth-rate" class="term"
-title="The rate at which a function grows. How quickly the function grows when its input grows. Also called its order of growth. A function $f$ has growth rate bounded by a function $g$ if the values of $f$ are eventually bounded by those of $g$ up to some constant factor. We often shorten this (somewhat confusingly) by saying that $f$ has growth rate $g$ or that $f$ has order of growth $g$. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \leq c g(n)$ for all $n \geq n_0$. We then say that $f$ has growth rate less or equal that of $g$ and write $f \in O(g)$ (big-Oh notation). This defines the preorder of growth rates. In algorithm analysis, we sometimes speak of the growth rate of an algorithm. By that, we mean the growth rate of the complexity of the algorithm, the rate at which the cost of the algorithm grows as the size of its input grows. This is also called the asymptotic complexity of that algorithm.">growth
+title="The rate at which a function grows. How quickly the function grows when its input grows. Also called its *order of growth*. A function $f$ has growth rate bounded by a function $g$ if the values of $f$ are eventually bounded by those of $g$ up to some constant factor. We often shorten this (somewhat confusingly) by saying that $f$ has growth rate $g$ or that $f$ has order of growth $g$. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \leq c g(n)$ for all $n \geq n_0$. We then say that $f$ has growth rate less or equal that of $g$ and write $f \in O(g)$ (big-Oh notation). This defines the preorder of growth rates. In algorithm analysis, we sometimes speak of the growth rate of an algorithm. By that, we mean the growth rate of the complexity of the algorithm, the rate at which the cost of the algorithm grows as the size of its input grows. This is also called the asymptotic complexity of that algorithm.">growth
 rate</a></p>
 </dd>
 <dt><dfn id="out-degree">out degree</dfn></dt>
@@ -6322,7 +6333,7 @@ href="10-glossary.html#cost-model" class="term"
 title="In algorithm analysis, a definition for the cost of each basic operation performed by the algorithm, along with a definition for the size of the input. Having these definitions allows us to calculate the cost to run the algorithm on a given input, and from there determine the complexity of the algorithm. By default, the cost model approximates the runtime of the program. To stress this, we also speak of time complexity. It is also possible to model other kinds of costs. In the case of memory/storage, we speak of space complexity. Looking at the growth rate of the complexity function tells us the asymptotic complexity of the algorithm. A cost model would be considered &#39;good&#39; if it yields predictions that conform to our understanding of reality.">cost
 model</a> plus the change in potential. The <a
 href="10-glossary.html#complexity" class="term"
-title="After fixing a cost model for a problem, we can calculate the complexity function of an algorithm. This sends an input size $n$ to the cost of running the algorithm on input of that size. For each fixed n, we consider only the worst-case input of size $n$. This defines the worst-case complexity of the algorithm. There is also the average-case and best-case complexity, which are defined similarly. We speak of time complexity, space complexity, etc. depending on what kind of cost our cost model captures. Here, time refers to runtime and space refers to memory/storage. The case of time complexity is the default, so we omit the word &#39;time&#39;.">complexity</a>
+title="After fixing a cost model for a problem, we can calculate the complexity function of an algorithm. This sends an input size $n$ to the cost of running the algorithm on input of that size. For each fixed $n$, we consider only the worst-case input of size $n$. This defines the worst-case complexity of the algorithm. There is also the average-case and best-case complexity, which are defined similarly. We speak of time complexity, space complexity, etc. depending on what kind of cost our cost model captures. Here, time refers to runtime and space refers to memory/storage. The case of time complexity is the default, so we omit the word &#39;time&#39;.">complexity</a>
 modified this way is called <a
 href="10-glossary.html#amortized-complexity" class="term"
 title="A modification to the notion of complexity for operations on a data structure where, for each fixed input size, one does not just look at the cost of a single run of the operation, but its amortized cost over sufficiently long series of operations of the same kind. This can be made precise without considering averages by introducing potentials.">amortized
@@ -6503,7 +6514,7 @@ th of the unit circle in the complex plain.</p>
 the greatest (or, in an alternative implementation, the least) valued
 record. Most often implemented using the <a href="10-glossary.html#heap"
 class="term"
-title="This term has two different meanings. Uncommonly, it is a synonym for free store. Most often it is used to refer to a particular data structure. This data structure is a complete binary tree with the requirement that every node has a value greater than its children (called a max heap), or else the requirement that every node has a value less than its children (called a min heap). Since it is a complete binary tree, a heap is nearly always implemented using an array rather than an explicit tree structure. To add a new value to a heap, or to remove the extreme value (the max value in a max-heap or min value in a min-heap) and update the heap, takes $\Theta(\log n)$ time in the worst case. However, if given all of the values in an unordered array, the values can be re-arranged to form a heap in only $\Theta(n)$ time. Due to its space and time efficiency, the heap is a popular choice for implementing a priority queue.">heap</a>
+title="The head data structure is a complete binary tree with the requirement that every node has a value greater than its children (called a max heap), or else the requirement that every node has a value less than its children (called a min heap). Since it is a complete binary tree, a heap is nearly always implemented using an array rather than an explicit tree structure. To add a new value to a heap, or to remove the extreme value (the max value in a max-heap or min value in a min-heap) and update the heap, takes $\Theta(\log n)$ time in the worst case. However, if given all of the values in an unordered array, the values can be re-arranged to form a heap in only $\Theta(n)$ time. Due to its space and time efficiency, the heap is a popular choice for implementing a priority queue. Uncommonly, *heap* is a synonym for free store.">heap</a>
 data structure. The name comes from a common application where the
 records being stored represent tasks, with the ordering values based on
 the <a href="10-glossary.html#priority" class="term"
@@ -7195,7 +7206,7 @@ href="10-glossary.html#working-memory" class="term"
 title="The portion of main memory available to an algorithm for its use. Typically refers to main memory made available to an algorithm that is operating on large amounts of data stored in peripheral storage, the working memory represents space that can hold some subset of the total data being processed.">working
 memory</a>, replacement selection will unload the <a
 href="10-glossary.html#heap" class="term"
-title="This term has two different meanings. Uncommonly, it is a synonym for free store. Most often it is used to refer to a particular data structure. This data structure is a complete binary tree with the requirement that every node has a value greater than its children (called a max heap), or else the requirement that every node has a value less than its children (called a min heap). Since it is a complete binary tree, a heap is nearly always implemented using an array rather than an explicit tree structure. To add a new value to a heap, or to remove the extreme value (the max value in a max-heap or min value in a min-heap) and update the heap, takes $\Theta(\log n)$ time in the worst case. However, if given all of the values in an unordered array, the values can be re-arranged to form a heap in only $\Theta(n)$ time. Due to its space and time efficiency, the heap is a popular choice for implementing a priority queue.">heap</a>
+title="The head data structure is a complete binary tree with the requirement that every node has a value greater than its children (called a max heap), or else the requirement that every node has a value less than its children (called a min heap). Since it is a complete binary tree, a heap is nearly always implemented using an array rather than an explicit tree structure. To add a new value to a heap, or to remove the extreme value (the max value in a max-heap or min value in a min-heap) and update the heap, takes $\Theta(\log n)$ time in the worst case. However, if given all of the values in an unordered array, the values can be re-arranged to form a heap in only $\Theta(n)$ time. Due to its space and time efficiency, the heap is a popular choice for implementing a priority queue. Uncommonly, *heap* is a synonym for free store.">heap</a>
 by sending records to an output stream, and seek to bring new records
 into the heap from the input stream in preference to shrinking the heap
 size whenever possible.</p>
@@ -7970,7 +7981,7 @@ that the values of their key fields are in non-decreasing order.</p>
 <dt><dfn id="space-complexity">space complexity</dfn></dt>
 <dd>
 <p>The <a href="10-glossary.html#complexity" class="term"
-title="After fixing a cost model for a problem, we can calculate the complexity function of an algorithm. This sends an input size $n$ to the cost of running the algorithm on input of that size. For each fixed n, we consider only the worst-case input of size $n$. This defines the worst-case complexity of the algorithm. There is also the average-case and best-case complexity, which are defined similarly. We speak of time complexity, space complexity, etc. depending on what kind of cost our cost model captures. Here, time refers to runtime and space refers to memory/storage. The case of time complexity is the default, so we omit the word &#39;time&#39;.">complexity</a>
+title="After fixing a cost model for a problem, we can calculate the complexity function of an algorithm. This sends an input size $n$ to the cost of running the algorithm on input of that size. For each fixed $n$, we consider only the worst-case input of size $n$. This defines the worst-case complexity of the algorithm. There is also the average-case and best-case complexity, which are defined similarly. We speak of time complexity, space complexity, etc. depending on what kind of cost our cost model captures. Here, time refers to runtime and space refers to memory/storage. The case of time complexity is the default, so we omit the word &#39;time&#39;.">complexity</a>
 of an <a href="10-glossary.html#algorithm" class="term"
 title="A method or a process followed to solve a problem.">algorithm</a>
 or <a href="10-glossary.html#problem" class="term"
@@ -8463,7 +8474,7 @@ match.</p>
 <dt><dfn id="time-complexity">time complexity</dfn></dt>
 <dd>
 <p>The <a href="10-glossary.html#complexity" class="term"
-title="After fixing a cost model for a problem, we can calculate the complexity function of an algorithm. This sends an input size $n$ to the cost of running the algorithm on input of that size. For each fixed n, we consider only the worst-case input of size $n$. This defines the worst-case complexity of the algorithm. There is also the average-case and best-case complexity, which are defined similarly. We speak of time complexity, space complexity, etc. depending on what kind of cost our cost model captures. Here, time refers to runtime and space refers to memory/storage. The case of time complexity is the default, so we omit the word &#39;time&#39;.">complexity</a>
+title="After fixing a cost model for a problem, we can calculate the complexity function of an algorithm. This sends an input size $n$ to the cost of running the algorithm on input of that size. For each fixed $n$, we consider only the worst-case input of size $n$. This defines the worst-case complexity of the algorithm. There is also the average-case and best-case complexity, which are defined similarly. We speak of time complexity, space complexity, etc. depending on what kind of cost our cost model captures. Here, time refers to runtime and space refers to memory/storage. The case of time complexity is the default, so we omit the word &#39;time&#39;.">complexity</a>
 of an <a href="10-glossary.html#algorithm" class="term"
 title="A method or a process followed to solve a problem.">algorithm</a>
 or <a href="10-glossary.html#problem" class="term"
@@ -8949,7 +8960,7 @@ array</a>.</p>
 <dd>
 <p>An upper bound for a <a href="10-glossary.html#growth-rate"
 class="term"
-title="The rate at which a function grows. How quickly the function grows when its input grows. Also called its order of growth. A function $f$ has growth rate bounded by a function $g$ if the values of $f$ are eventually bounded by those of $g$ up to some constant factor. We often shorten this (somewhat confusingly) by saying that $f$ has growth rate $g$ or that $f$ has order of growth $g$. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \leq c g(n)$ for all $n \geq n_0$. We then say that $f$ has growth rate less or equal that of $g$ and write $f \in O(g)$ (big-Oh notation). This defines the preorder of growth rates. In algorithm analysis, we sometimes speak of the growth rate of an algorithm. By that, we mean the growth rate of the complexity of the algorithm, the rate at which the cost of the algorithm grows as the size of its input grows. This is also called the asymptotic complexity of that algorithm.">growth
+title="The rate at which a function grows. How quickly the function grows when its input grows. Also called its *order of growth*. A function $f$ has growth rate bounded by a function $g$ if the values of $f$ are eventually bounded by those of $g$ up to some constant factor. We often shorten this (somewhat confusingly) by saying that $f$ has growth rate $g$ or that $f$ has order of growth $g$. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \leq c g(n)$ for all $n \geq n_0$. We then say that $f$ has growth rate less or equal that of $g$ and write $f \in O(g)$ (big-Oh notation). This defines the preorder of growth rates. In algorithm analysis, we sometimes speak of the growth rate of an algorithm. By that, we mean the growth rate of the complexity of the algorithm, the rate at which the cost of the algorithm grows as the size of its input grows. This is also called the asymptotic complexity of that algorithm.">growth
 rate</a>
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>f</mi><annotation encoding="application/x-tex">f</annotation></semantics></math>
 is any growth rate
@@ -8967,7 +8978,7 @@ We also write
 or slightly imprecisely
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>∈</mo><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(n) \in O(g(n))</annotation></semantics></math>
 (this is <a href="10-glossary.html#big-oh-notation" class="term"
-title="For growth rates $f$ and $g$, we write $f \in O(g)$ to say that $g$ is an upper bound for $f$. The notation can be made sense of by defining O(g) as the set of functions with growth rate less than or equal to that of g. The notation is often somewhat imprecisely used as $f(n) \in O(g(n))$ or even $f(n) = O(g(n))$.">big-Oh
+title="For growth rates $f$ and $g$, we write $f \in O(g)$ to say that $g$ is an upper bound for $f$. The notation can be made sense of by defining $O(g)$ as the set of functions with growth rate less than or equal to that of $g$. The notation is often somewhat imprecisely used as $f(n) \in O(g(n))$ or even $f(n) = O(g(n))$.">big-Oh
 notation</a>).</p>
 <p>Usually, we are interested in finding an upper bound
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>g</mi><annotation encoding="application/x-tex">g</annotation></semantics></math>
@@ -8982,7 +8993,7 @@ analysis</a>, an upper bound for an algorithm is an upper bound for the
 title="The growth rate or order of growth of the complexity of an algorithm or problem. There are several independent categories of qualifiers for (asymptotic) complexity: - time complexity (default), space complexity, complexity in some other cost, - worst case (default), average case, best case, - whether to use amortized complexity.">asymptotic
 complexity</a> of the algorithm, the growth rate of its <a
 href="10-glossary.html#complexity" class="term"
-title="After fixing a cost model for a problem, we can calculate the complexity function of an algorithm. This sends an input size $n$ to the cost of running the algorithm on input of that size. For each fixed n, we consider only the worst-case input of size $n$. This defines the worst-case complexity of the algorithm. There is also the average-case and best-case complexity, which are defined similarly. We speak of time complexity, space complexity, etc. depending on what kind of cost our cost model captures. Here, time refers to runtime and space refers to memory/storage. The case of time complexity is the default, so we omit the word &#39;time&#39;.">complexity</a>.
+title="After fixing a cost model for a problem, we can calculate the complexity function of an algorithm. This sends an input size $n$ to the cost of running the algorithm on input of that size. For each fixed $n$, we consider only the worst-case input of size $n$. This defines the worst-case complexity of the algorithm. There is also the average-case and best-case complexity, which are defined similarly. We speak of time complexity, space complexity, etc. depending on what kind of cost our cost model captures. Here, time refers to runtime and space refers to memory/storage. The case of time complexity is the default, so we omit the word &#39;time&#39;.">complexity</a>.
 In practice, we are looking for the best possible upper bound that has a
 simple mathematical expression. For example, we may write
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>∈</mo><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">T(n) \in O(n^2)</annotation></semantics></math>
@@ -9150,7 +9161,7 @@ class="term"
 title="A method for estimating the efficiency of an algorithm or computer program by identifying its asymptotic complexity, the growth rate of its complexity function. Asymptotic analysis also gives a way to define the inherent difficulty of a problem. We frequently use the term algorithm analysis to mean the same thing.">algorithm
 analysis</a>, specifically <a href="10-glossary.html#complexity"
 class="term"
-title="After fixing a cost model for a problem, we can calculate the complexity function of an algorithm. This sends an input size $n$ to the cost of running the algorithm on input of that size. For each fixed n, we consider only the worst-case input of size $n$. This defines the worst-case complexity of the algorithm. There is also the average-case and best-case complexity, which are defined similarly. We speak of time complexity, space complexity, etc. depending on what kind of cost our cost model captures. Here, time refers to runtime and space refers to memory/storage. The case of time complexity is the default, so we omit the word &#39;time&#39;.">complexity</a>
+title="After fixing a cost model for a problem, we can calculate the complexity function of an algorithm. This sends an input size $n$ to the cost of running the algorithm on input of that size. For each fixed $n$, we consider only the worst-case input of size $n$. This defines the worst-case complexity of the algorithm. There is also the average-case and best-case complexity, which are defined similarly. We speak of time complexity, space complexity, etc. depending on what kind of cost our cost model captures. Here, time refers to runtime and space refers to memory/storage. The case of time complexity is the default, so we omit the word &#39;time&#39;.">complexity</a>
 of an algorithm, the <a href="10-glossary.html#problem-instance"
 class="term"
 title="A specific selection of values for the parameters to a problem. In other words, a specific set of inputs to a problem. A given problem instance has a size under some cost model.">problem

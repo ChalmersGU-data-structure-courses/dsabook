@@ -292,7 +292,7 @@ title="A sort that works by taking each record and placing it into a bin based o
 Binsort assigns each value to an array position corresponding to its
 value.</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="op">=</span> <span class="dv">0</span> ... <span class="bu">len</span>(A)<span class="op">-</span><span class="dv">1</span>:</span>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="op">=</span> <span class="dv">0</span> <span class="kw">to</span> A.<span class="bu">size</span>()<span class="op">-</span><span class="dv">1</span>:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    B[A[i]] <span class="op">=</span> A[i]</span></code></pre></div>
 <p>This is efficient and requires
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math>
@@ -301,9 +301,10 @@ time. However, it also requires two arrays of size
 Next is a code fragment that places the permutation in order but does so
 within the same array (thus it is an example of an “in place” sort).</p>
 <div class="sourceCode" id="cb2"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="op">=</span> <span class="dv">0</span> ... <span class="bu">len</span>(A)<span class="op">-</span><span class="dv">1</span>:</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> A[i] <span class="op">!=</span> i:    <span class="co"># Swap element A[i] with A[A[i]]</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        swap(A, i, A[i])</span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="op">=</span> <span class="dv">0</span> <span class="kw">to</span> A.<span class="bu">size</span>()<span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> A[i] <span class="op">!=</span> i:</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Swap element A[i] with A[A[i]]:</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        swap(A, i, A[i])</span></code></pre></div>
 <p>Function <code>swap(A, i, j)</code> exchanges elements <code>i</code>
 and <code>j</code> in array <code>A</code>. It may not be obvious that
 the second code fragment actually sorts the array. To see that this does

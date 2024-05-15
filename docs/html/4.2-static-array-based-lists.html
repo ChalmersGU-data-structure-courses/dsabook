@@ -194,6 +194,17 @@ to and remove from them. How can this be implemented? Well, what we
 <em>don’t</em> want to do is to create a completely new array every time
 elements are added or removed. So instead we will use an underlying
 array which is larger than we need.</p>
+<section id="important-note-about-python-lists"
+class="level3 unnumbered">
+<h3 class="unnumbered">Important note about Python lists</h3>
+<p>Python doesn’t have arrays – i.e., fixed size constant-time access
+arrays like C, Java and most other languages have.</p>
+<p>Instead, Python has <em>lists</em>, and they are actually precisely
+the kind of dynamic array-based lists that we are describe in this
+section and the next. So a Python <code>list</code> is implemented using
+fixed-size arrays, but when you program in Python you cannot access
+these arrays because they are hidden from the programmer.</p>
+</section>
 <section id="internal-variables" class="level3" data-number="4.2.1">
 <h3 data-number="4.2.1"><span class="header-section-number">4.2.1</span>
 Internal variables</h3>
@@ -212,20 +223,14 @@ elements yet.</p>
 </div>
 </p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> StaticArrayList(List):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, capacity):</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._internalArray <span class="op">=</span> [<span class="va">None</span>] <span class="op">*</span> capacity   <span class="co"># Internal array containing the list elements</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._listSize <span class="op">=</span> <span class="dv">0</span>                        <span class="co"># Size of list</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> StaticArrayList<span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="kw">implements</span> <span class="bu">List</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> E<span class="op">[]</span> internalArray<span class="op">;</span>   <span class="co">// Internal array containing the list elements</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> listSize<span class="op">;</span>        <span class="co">// Size of list</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">@SuppressWarnings</span><span class="op">(</span><span class="st">&quot;unchecked&quot;</span><span class="op">)</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">StaticArrayList</span><span class="op">(</span><span class="dt">int</span> capacity<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        internalArray <span class="op">=</span> <span class="op">(</span>E<span class="op">[])</span> <span class="kw">new</span> <span class="bu">Object</span><span class="op">[</span>capacity<span class="op">];</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        listSize <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> StaticArrayList <span class="kw">implements</span> <span class="bu">List</span>:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    StaticArrayList(capacity):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.internalArray <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(capacity)  <span class="co">// Internal array containing the list elements</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.listSize <span class="op">=</span> <span class="dv">0</span>                         <span class="co">// Size of list</span></span></code></pre></div>
+<p><em>Note</em>: in Python you cannot create an array with a certain
+capacity. You can simulate it by creating a list with a number of empty
+elements: <code>[None] * capacity</code>, but this is not a real
+fixed-size array as explained just above.</p>
 </section>
 <section id="getting-and-setting-values" class="level3"
 data-number="4.2.2">
@@ -244,28 +249,16 @@ Getting and setting values</h3>
 <code>get</code> and <code>set</code>, which means that both require
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(1)</annotation></semantics></math>
 time.</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get(<span class="va">self</span>, i):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> (<span class="dv">0</span> <span class="op">&lt;=</span> i <span class="op">&lt;</span> <span class="va">self</span>._listSize): <span class="cf">raise</span> <span class="pp">IndexError</span>(<span class="st">&quot;list index out of range&quot;</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._internalArray[i]</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="bu">set</span>(<span class="va">self</span>, i, x):</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> (<span class="dv">0</span> <span class="op">&lt;=</span> i <span class="op">&lt;</span> <span class="va">self</span>._listSize): <span class="cf">raise</span> <span class="pp">IndexError</span>(<span class="st">&quot;list index out of range&quot;</span>)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        old <span class="op">=</span> <span class="va">self</span>._internalArray[i]</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._internalArray[i] <span class="op">=</span> x</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> old</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> E <span class="fu">get</span><span class="op">(</span><span class="dt">int</span> i<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!(</span><span class="dv">0</span> <span class="op">&lt;=</span> i <span class="op">&amp;&amp;</span> i <span class="op">&lt;</span> listSize<span class="op">))</span> <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">IndexOutOfBoundsException</span><span class="op">(</span><span class="st">&quot;list index out of range&quot;</span><span class="op">);</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> internalArray<span class="op">[</span>i<span class="op">];</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> E <span class="fu">set</span><span class="op">(</span><span class="dt">int</span> i<span class="op">,</span> E x<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!(</span><span class="dv">0</span> <span class="op">&lt;=</span> i <span class="op">&amp;&amp;</span> i <span class="op">&lt;</span> listSize<span class="op">))</span> <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">IndexOutOfBoundsException</span><span class="op">(</span><span class="st">&quot;list index out of range&quot;</span><span class="op">);</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        E old <span class="op">=</span> internalArray<span class="op">[</span>i<span class="op">];</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        internalArray<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> x<span class="op">;</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> old<span class="op">;</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> StaticArrayList <span class="kw">implements</span> <span class="bu">List</span>:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">get</span>(i):</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">precondition</span>: <span class="dv">0</span> <span class="op">&lt;=</span> i <span class="op">&lt;</span> <span class="va">this</span>.listSize</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">this</span>.internalArray[i]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">set</span>(i, x):</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">precondition</span>: <span class="dv">0</span> <span class="op">&lt;=</span> i <span class="op">&lt;</span> <span class="va">this</span>.listSize</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.internalArray[i] <span class="op">=</span> x</span></code></pre></div>
 </section>
 <section id="adding-elements" class="level3" data-number="4.2.3">
 <h3 data-number="4.2.3"><span class="header-section-number">4.2.3</span>
@@ -302,23 +295,15 @@ In the worst case, adding elements requires moving all
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
 elements, which is
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math>.</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> add(<span class="va">self</span>, i, x):</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> (<span class="va">self</span>._listSize <span class="op">&lt;</span> <span class="bu">len</span>(<span class="va">self</span>._internalArray)): <span class="cf">raise</span> <span class="pp">IndexError</span>(<span class="st">&quot;list capacity exceeded&quot;</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> (<span class="dv">0</span> <span class="op">&lt;=</span> i <span class="op">&lt;=</span> <span class="va">self</span>._listSize):                  <span class="cf">raise</span> <span class="pp">IndexError</span>(<span class="st">&quot;list index out of range&quot;</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._listSize <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">reversed</span>(<span class="bu">range</span>(i<span class="op">+</span><span class="dv">1</span>, <span class="va">self</span>._listSize)):</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._internalArray[k] <span class="op">=</span> <span class="va">self</span>._internalArray[k<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._internalArray[i] <span class="op">=</span> x</span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">add</span><span class="op">(</span><span class="dt">int</span> i<span class="op">,</span> E x<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!(</span>listSize <span class="op">&lt;</span> internalArray<span class="op">.</span><span class="fu">length</span><span class="op">))</span> <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">IndexOutOfBoundsException</span><span class="op">(</span><span class="st">&quot;list capacity exceeded&quot;</span><span class="op">);</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!(</span><span class="dv">0</span> <span class="op">&lt;=</span> i <span class="op">&amp;&amp;</span> i <span class="op">&lt;=</span> listSize<span class="op">))</span>         <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">IndexOutOfBoundsException</span><span class="op">(</span><span class="st">&quot;list index out of range&quot;</span><span class="op">);</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        listSize<span class="op">++;</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> k <span class="op">=</span> listSize<span class="op">-</span><span class="dv">1</span><span class="op">;</span> k <span class="op">&gt;</span> i<span class="op">;</span> k<span class="op">--)</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>            internalArray<span class="op">[</span>k<span class="op">]</span> <span class="op">=</span> internalArray<span class="op">[</span>k<span class="op">-</span><span class="dv">1</span><span class="op">];</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        internalArray<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> x<span class="op">;</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> StaticArrayList <span class="kw">implements</span> <span class="bu">List</span>:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">add</span>(i, x):</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">precondition</span>: <span class="dv">0</span> <span class="op">&lt;=</span> i <span class="op">&lt;=</span> <span class="va">this</span>.listSize <span class="op">&lt;</span> <span class="va">this</span>.internalArray.<span class="bu">size</span>()</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.listSize <span class="op">=</span> <span class="va">this</span>.listSize <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> k <span class="op">=</span> <span class="va">this</span>.listSize<span class="op">-</span><span class="dv">1</span> <span class="kw">downto</span> i<span class="op">+</span><span class="dv">1</span>:</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            <span class="va">this</span>.internalArray[k] <span class="op">=</span> <span class="va">this</span>.internalArray[k<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.internalArray[i] <span class="op">=</span> x</span></code></pre></div>
 <section id="add-practice-exericse" class="level4"
 data-number="4.2.3.1">
 <h4 data-number="4.2.3.1"><span
@@ -356,25 +341,17 @@ slideshow.</p>
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
 elements, which is
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math>.</p>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> remove(<span class="va">self</span>, i):</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> (<span class="dv">0</span> <span class="op">&lt;=</span> i <span class="op">&lt;</span> <span class="va">self</span>._listSize): <span class="cf">raise</span> <span class="pp">IndexError</span>(<span class="st">&quot;list index out of range&quot;</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> <span class="va">self</span>._internalArray[i]</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(i<span class="op">+</span><span class="dv">1</span>, <span class="va">self</span>._listSize):</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._internalArray[k<span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> <span class="va">self</span>._internalArray[k]</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._listSize <span class="op">-=</span> <span class="dv">1</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._internalArray[<span class="va">self</span>._listSize] <span class="op">=</span> <span class="va">None</span>   <span class="co"># For garbage collection</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x</span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> E <span class="fu">remove</span><span class="op">(</span><span class="dt">int</span> i<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!(</span><span class="dv">0</span> <span class="op">&lt;=</span> i <span class="op">&amp;&amp;</span> i <span class="op">&lt;</span> listSize<span class="op">))</span> <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">IndexOutOfBoundsException</span><span class="op">(</span><span class="st">&quot;list index out of range&quot;</span><span class="op">);</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        E x <span class="op">=</span> internalArray<span class="op">[</span>i<span class="op">];</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> k <span class="op">=</span> i<span class="op">+</span><span class="dv">1</span><span class="op">;</span> k <span class="op">&lt;</span> listSize<span class="op">;</span> k<span class="op">++)</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>            internalArray<span class="op">[</span>k<span class="op">-</span><span class="dv">1</span><span class="op">]</span> <span class="op">=</span> internalArray<span class="op">[</span>k<span class="op">];</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        listSize<span class="op">--;</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        internalArray<span class="op">[</span>listSize<span class="op">]</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span>   <span class="co">// For garbage collection</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x<span class="op">;</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> StaticArrayList <span class="kw">implements</span> <span class="bu">List</span>:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">remove</span>(i):</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">precondition</span>: <span class="dv">0</span> <span class="op">&lt;=</span> i <span class="op">&lt;</span> <span class="va">this</span>.listSize</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> <span class="va">this</span>.internalArray[i]</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> k <span class="op">=</span> i<span class="op">+</span><span class="dv">1</span> <span class="kw">to</span> <span class="va">this</span>.listSize<span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>            <span class="va">this</span>.internalArray[k<span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> <span class="va">this</span>.internalArray[k]</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.listSize <span class="op">=</span> <span class="va">this</span>.listSize <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.internalArray[<span class="va">this</span>.listSize] <span class="op">=</span> <span class="va">null</span>  <span class="co">// For garbage collection</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x</span></code></pre></div>
 <section id="remove-practice-exericise" class="level4"
 data-number="4.2.4.1">
 <h4 data-number="4.2.4.1"><span
@@ -400,124 +377,6 @@ Your browser does not support iframes.
 </iframe>
 </div>
 </p>
-</section>
-<section id="static-array-based-list-full-code" class="level3"
-data-number="4.2.6">
-<h3 data-number="4.2.6"><span class="header-section-number">4.2.6</span>
-Static Array-based List: Full code</h3>
-<p>Finally, here is the full source code for the class
-<code>StaticArrayList</code>.</p>
-<div class="sourceCode" id="cb9"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: StaticArrayListInit *** */</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> StaticArrayList(List):</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, capacity):</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._internalArray <span class="op">=</span> [<span class="va">None</span>] <span class="op">*</span> capacity   <span class="co"># Internal array containing the list elements</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._listSize <span class="op">=</span> <span class="dv">0</span>                        <span class="co"># Size of list</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: StaticArrayListInit *** */</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: StaticArrayListGetSet *** */</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get(<span class="va">self</span>, i):</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> (<span class="dv">0</span> <span class="op">&lt;=</span> i <span class="op">&lt;</span> <span class="va">self</span>._listSize): <span class="cf">raise</span> <span class="pp">IndexError</span>(<span class="st">&quot;list index out of range&quot;</span>)</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._internalArray[i]</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="bu">set</span>(<span class="va">self</span>, i, x):</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> (<span class="dv">0</span> <span class="op">&lt;=</span> i <span class="op">&lt;</span> <span class="va">self</span>._listSize): <span class="cf">raise</span> <span class="pp">IndexError</span>(<span class="st">&quot;list index out of range&quot;</span>)</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>        old <span class="op">=</span> <span class="va">self</span>._internalArray[i]</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._internalArray[i] <span class="op">=</span> x</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> old</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: StaticArrayListGetSet *** */</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: StaticArrayListAdd *** */</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> add(<span class="va">self</span>, i, x):</span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> (<span class="va">self</span>._listSize <span class="op">&lt;</span> <span class="bu">len</span>(<span class="va">self</span>._internalArray)): <span class="cf">raise</span> <span class="pp">IndexError</span>(<span class="st">&quot;list capacity exceeded&quot;</span>)</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> (<span class="dv">0</span> <span class="op">&lt;=</span> i <span class="op">&lt;=</span> <span class="va">self</span>._listSize):                  <span class="cf">raise</span> <span class="pp">IndexError</span>(<span class="st">&quot;list index out of range&quot;</span>)</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._listSize <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">reversed</span>(<span class="bu">range</span>(i<span class="op">+</span><span class="dv">1</span>, <span class="va">self</span>._listSize)):</span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._internalArray[k] <span class="op">=</span> <span class="va">self</span>._internalArray[k<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._internalArray[i] <span class="op">=</span> x</span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: StaticArrayListAdd *** */</span></span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: StaticArrayListRemove *** */</span></span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> remove(<span class="va">self</span>, i):</span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> (<span class="dv">0</span> <span class="op">&lt;=</span> i <span class="op">&lt;</span> <span class="va">self</span>._listSize): <span class="cf">raise</span> <span class="pp">IndexError</span>(<span class="st">&quot;list index out of range&quot;</span>)</span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> <span class="va">self</span>._internalArray[i]</span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(i<span class="op">+</span><span class="dv">1</span>, <span class="va">self</span>._listSize):</span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._internalArray[k<span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> <span class="va">self</span>._internalArray[k]</span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._listSize <span class="op">-=</span> <span class="dv">1</span></span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._internalArray[<span class="va">self</span>._listSize] <span class="op">=</span> <span class="va">None</span>   <span class="co"># For garbage collection</span></span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x</span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: StaticArrayListRemove *** */</span></span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> isEmpty(<span class="va">self</span>):</span>
-<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._listSize <span class="op">==</span> <span class="dv">0</span></span>
-<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> size(<span class="va">self</span>):</span>
-<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._listSize</span>
-<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__iter__</span>(<span class="va">self</span>):</span>
-<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> NotImplementedException(<span class="st">&quot;Left as an exercise.&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: StaticArrayListInit *** */</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> StaticArrayList<span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="kw">implements</span> <span class="bu">List</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> E<span class="op">[]</span> internalArray<span class="op">;</span>   <span class="co">// Internal array containing the list elements</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> listSize<span class="op">;</span>        <span class="co">// Size of list</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">@SuppressWarnings</span><span class="op">(</span><span class="st">&quot;unchecked&quot;</span><span class="op">)</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">StaticArrayList</span><span class="op">(</span><span class="dt">int</span> capacity<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        internalArray <span class="op">=</span> <span class="op">(</span>E<span class="op">[])</span> <span class="kw">new</span> <span class="bu">Object</span><span class="op">[</span>capacity<span class="op">];</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        listSize <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: StaticArrayListInit *** */</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: StaticArrayListGetSet *** */</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> E <span class="fu">get</span><span class="op">(</span><span class="dt">int</span> i<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!(</span><span class="dv">0</span> <span class="op">&lt;=</span> i <span class="op">&amp;&amp;</span> i <span class="op">&lt;</span> listSize<span class="op">))</span> <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">IndexOutOfBoundsException</span><span class="op">(</span><span class="st">&quot;list index out of range&quot;</span><span class="op">);</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> internalArray<span class="op">[</span>i<span class="op">];</span></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> E <span class="fu">set</span><span class="op">(</span><span class="dt">int</span> i<span class="op">,</span> E x<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!(</span><span class="dv">0</span> <span class="op">&lt;=</span> i <span class="op">&amp;&amp;</span> i <span class="op">&lt;</span> listSize<span class="op">))</span> <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">IndexOutOfBoundsException</span><span class="op">(</span><span class="st">&quot;list index out of range&quot;</span><span class="op">);</span></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>        E old <span class="op">=</span> internalArray<span class="op">[</span>i<span class="op">];</span></span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>        internalArray<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> x<span class="op">;</span></span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> old<span class="op">;</span></span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: StaticArrayListGetSet *** */</span></span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: StaticArrayListAdd *** */</span></span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">add</span><span class="op">(</span><span class="dt">int</span> i<span class="op">,</span> E x<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!(</span>listSize <span class="op">&lt;</span> internalArray<span class="op">.</span><span class="fu">length</span><span class="op">))</span> <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">IndexOutOfBoundsException</span><span class="op">(</span><span class="st">&quot;list capacity exceeded&quot;</span><span class="op">);</span></span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!(</span><span class="dv">0</span> <span class="op">&lt;=</span> i <span class="op">&amp;&amp;</span> i <span class="op">&lt;=</span> listSize<span class="op">))</span>         <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">IndexOutOfBoundsException</span><span class="op">(</span><span class="st">&quot;list index out of range&quot;</span><span class="op">);</span></span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>        listSize<span class="op">++;</span></span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> k <span class="op">=</span> listSize<span class="op">-</span><span class="dv">1</span><span class="op">;</span> k <span class="op">&gt;</span> i<span class="op">;</span> k<span class="op">--)</span></span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>            internalArray<span class="op">[</span>k<span class="op">]</span> <span class="op">=</span> internalArray<span class="op">[</span>k<span class="op">-</span><span class="dv">1</span><span class="op">];</span></span>
-<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>        internalArray<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> x<span class="op">;</span></span>
-<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: StaticArrayListAdd *** */</span></span>
-<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: StaticArrayListRemove *** */</span></span>
-<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> E <span class="fu">remove</span><span class="op">(</span><span class="dt">int</span> i<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!(</span><span class="dv">0</span> <span class="op">&lt;=</span> i <span class="op">&amp;&amp;</span> i <span class="op">&lt;</span> listSize<span class="op">))</span> <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">IndexOutOfBoundsException</span><span class="op">(</span><span class="st">&quot;list index out of range&quot;</span><span class="op">);</span></span>
-<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>        E x <span class="op">=</span> internalArray<span class="op">[</span>i<span class="op">];</span></span>
-<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> k <span class="op">=</span> i<span class="op">+</span><span class="dv">1</span><span class="op">;</span> k <span class="op">&lt;</span> listSize<span class="op">;</span> k<span class="op">++)</span></span>
-<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>            internalArray<span class="op">[</span>k<span class="op">-</span><span class="dv">1</span><span class="op">]</span> <span class="op">=</span> internalArray<span class="op">[</span>k<span class="op">];</span></span>
-<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>        listSize<span class="op">--;</span></span>
-<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>        internalArray<span class="op">[</span>listSize<span class="op">]</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span>   <span class="co">// For garbage collection</span></span>
-<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x<span class="op">;</span></span>
-<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: StaticArrayListRemove *** */</span></span>
-<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">isEmpty</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> listSize <span class="op">==</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">size</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> listSize<span class="op">;</span></span>
-<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">Iterator</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="fu">iterator</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a>        <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">UnsupportedOperationException</span><span class="op">(</span><span class="st">&quot;Left as an exercise.&quot;</span><span class="op">);</span></span>
-<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 </section>
 <script type="text/javascript" src="../interactive/ChalmersGU/StaticArrayList-Vars-CON.js"></script>

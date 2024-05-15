@@ -173,16 +173,16 @@
 </div>
 <div class="sitenav">
 <span class="navlink">
-<span class="navlink-label">Next:</span> <a href="9.7-graph-concepts-summary.html" accesskey="n" rel="next">Graph Concepts Summary</a>
+<span class="navlink-label">Next:</span> <a href="9.8-graph-concepts-summary.html" accesskey="n" rel="next">Graph Concepts Summary</a>
 </span>
 <span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="9.5-minimal-cost-spanning-trees.html" accesskey="p" rel="previous">Minimal Cost Spanning Trees</a>
+<span class="navlink-label">Previous:</span> <a href="9.6-minimal-cost-spanning-trees.html" accesskey="p" rel="previous">Minimal Cost Spanning Trees</a>
 </span>
 </div>
 </nav>
 <section id="all-pairs-shortest-paths-optional" class="level2"
-data-number="9.6">
-<h2 data-number="9.6"><span class="header-section-number">9.6</span>
+data-number="9.7">
+<h2 data-number="9.7"><span class="header-section-number">9.7</span>
 All-Pairs Shortest Paths (optional)</h2>
 <p>We next consider the problem of finding the shortest distance between
 all pairs of vertices in the graph, called the <a
@@ -239,7 +239,7 @@ A 0-path is defined to be a direct edge from
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>
 to
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math>.
-<a href="9.6-all-pairs-shortest-paths-optional.html#FloydExamp">Figure
+<a href="9.7-all-pairs-shortest-paths-optional.html#FloydExamp">Figure
 #FloydExamp</a> illustrates the concept of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>-paths.</p>
 <div id="FloydExamp">
@@ -292,54 +292,31 @@ a triple loop. Here is the implementation for Floyd’s algorithm. At the
 end of the algorithm, array <code>D</code> stores the all-pairs shortest
 distances.</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute all-pairs shortest paths</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> floyd(G):</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Initialize D with weights</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    D <span class="op">=</span> {}</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> G.vertices():</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        D[i] <span class="op">=</span> {j : <span class="dv">0</span> <span class="cf">if</span> i<span class="op">==</span>j <span class="cf">else</span> <span class="bu">float</span>(<span class="st">&quot;inf&quot;</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> j <span class="kw">in</span> G.vertices()}</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> edge <span class="kw">in</span> G.outgoingEdges(i):</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>            D[i][edge.end] <span class="op">=</span> edge.weight</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Compute all k-paths</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k <span class="kw">in</span> G.vertices():</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> G.vertices():</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> j <span class="kw">in</span> G.vertices():</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                dist <span class="op">=</span> D[i][k] <span class="op">+</span> D[k][j]</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> D[i][j] <span class="op">&gt;</span> dist:</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>                    D[i][j] <span class="op">=</span> dist</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> D</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span> Compute all<span class="co">-</span>pairs shortest paths <span class="co">*/</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">void</span> <span class="bu">Map</span><span class="op">&lt;</span>V<span class="op">,</span><span class="bu">Map</span><span class="op">&lt;</span>V<span class="op">,</span><span class="bu">Double</span><span class="op">&gt;&gt;</span> <span class="fu">Floyd</span><span class="op">(</span>Graph<span class="op">&lt;</span>V<span class="op">&gt;</span> G<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Initialize D with weights</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Map</span><span class="op">&lt;</span>V<span class="op">,</span><span class="bu">Map</span><span class="op">&lt;</span>V<span class="op">,</span><span class="bu">Double</span><span class="op">&gt;&gt;</span> D <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span><span class="op">&lt;&gt;();</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span>V i <span class="op">:</span> G<span class="op">.</span><span class="fu">vertices</span><span class="op">())</span> <span class="op">{</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Map</span><span class="op">&lt;</span>V<span class="op">,</span><span class="bu">Double</span><span class="op">&gt;</span> imap <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span><span class="op">&lt;&gt;();</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        D<span class="op">.</span><span class="fu">put</span><span class="op">(</span>i<span class="op">,</span> imap<span class="op">);</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span>V j <span class="op">:</span> G<span class="op">.</span><span class="fu">vertices</span><span class="op">())</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>            imap<span class="op">.</span><span class="fu">put</span><span class="op">(</span>j<span class="op">,</span> i<span class="op">.</span><span class="fu">equals</span><span class="op">(</span>j<span class="op">)</span> <span class="op">?</span> <span class="dv">0</span> <span class="op">:</span> <span class="bu">Double</span><span class="op">.</span><span class="fu">POSITIVE_INFINITY</span><span class="op">);</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span>edge <span class="op">:</span> G<span class="op">.</span><span class="fu">outgoingEdges</span><span class="op">(</span>i<span class="op">))</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            imap<span class="op">.</span><span class="fu">put</span><span class="op">(</span>edge<span class="op">.</span><span class="fu">end</span><span class="op">,</span> edge<span class="op">.</span><span class="fu">weight</span><span class="op">);</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Compute all k-paths</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span>V k <span class="op">:</span> G<span class="op">.</span><span class="fu">vertices</span><span class="op">())</span> <span class="op">{</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Map</span><span class="op">&lt;</span>V<span class="op">,</span><span class="bu">Double</span><span class="op">&gt;</span> kmap <span class="op">=</span> D<span class="op">.</span><span class="fu">get</span><span class="op">(</span>k<span class="op">);</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span>V i <span class="op">:</span> G<span class="op">.</span><span class="fu">vertices</span><span class="op">())</span> <span class="op">{</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>            <span class="bu">Map</span><span class="op">&lt;</span>V<span class="op">,</span><span class="bu">Double</span><span class="op">&gt;</span> imap <span class="op">=</span> D<span class="op">.</span><span class="fu">get</span><span class="op">(</span>i<span class="op">);</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> <span class="op">(</span>V j <span class="op">:</span> G<span class="op">.</span><span class="fu">vertices</span><span class="op">())</span> <span class="op">{</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>                <span class="dt">double</span> dist <span class="op">=</span> imap<span class="op">.</span><span class="fu">get</span><span class="op">(</span>k<span class="op">)</span> <span class="op">+</span> kmap<span class="op">.</span><span class="fu">get</span><span class="op">(</span>j<span class="op">);</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="op">(</span>imap<span class="op">.</span><span class="fu">get</span><span class="op">(</span>j<span class="op">)</span> <span class="op">&gt;</span> dist<span class="op">)</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>                    imap<span class="op">.</span><span class="fu">put</span><span class="op">(</span>j<span class="op">,</span> dist<span class="op">);</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> D<span class="op">;</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Compute all-pairs shortest paths</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> floyd(G):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Initialize D with weights</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    D <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>()</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> i <span class="kw">in</span> G.vertices():</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        imap <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>()</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        D.<span class="bu">put</span>(i, imap)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="kw">each</span> j <span class="kw">in</span> G.vertices():</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> i <span class="op">==</span> j:</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                imap.<span class="bu">put</span>(j, <span class="dv">0</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                imap.<span class="bu">put</span>(j, ∞)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="kw">each</span> e <span class="kw">in</span> G.outgoingEdges(i):</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>            imap.<span class="bu">put</span>(e.end, e.weight)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Compute all k-paths</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> k <span class="kw">in</span> G.vertices():</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        kmap <span class="op">=</span> D.<span class="bu">get</span>(k)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="kw">each</span> i <span class="kw">in</span> G.vertices():</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>            imap <span class="op">=</span> D.<span class="bu">get</span>(i)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> <span class="kw">each</span> j <span class="kw">in</span> G.vertices():</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>                dist <span class="op">=</span> imap.<span class="bu">get</span>(k) <span class="op">+</span> kmap.<span class="bu">get</span>(j)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> dist <span class="op">&lt;</span> imap.<span class="bu">get</span>(j):</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>                    imap.<span class="bu">put</span>(j, dist)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> D</span></code></pre></div>
 <p>Clearly this algorithm requires
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mrow><mo stretchy="true" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="true" form="postfix">|</mo></mrow><mn>3</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(|\mathbf{V}|^3)</annotation></semantics></math>
 running time, and it is the best choice for dense graphs because it is

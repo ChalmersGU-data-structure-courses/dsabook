@@ -273,46 +273,33 @@ Simple implementation of deletion</h3>
 <p>Here is a simple implementation of deletion in a HashMap using
 tombstones.</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> remove(<span class="va">self</span>, key):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> <span class="va">self</span>._hashAndProbe(key)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        elem <span class="op">=</span> <span class="va">self</span>._internalTable[i]</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> elem <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">None</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        removed <span class="op">=</span> elem.value</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        elem.key <span class="op">=</span> <span class="va">None</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        elem.value <span class="op">=</span> <span class="va">None</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._mapSize <span class="op">-=</span> <span class="dv">1</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._numDeleted <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>._mapSize <span class="op">&lt;</span> <span class="va">self</span>._minLoadFactor <span class="op">*</span> <span class="bu">len</span>(<span class="va">self</span>._internalTable):</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._resizeTable(<span class="bu">len</span>(<span class="va">self</span>._internalTable) <span class="op">/</span> <span class="va">self</span>._capacityMultiplier)<span class="op">;</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> removed</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> V <span class="fu">remove</span><span class="op">(</span>K key<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> i <span class="op">=</span> <span class="fu">hashAndProbe</span><span class="op">(</span>key<span class="op">);</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        KVPair<span class="op">&lt;</span>K<span class="op">,</span>V<span class="op">&gt;</span> elem <span class="op">=</span> internalTable<span class="op">[</span>i<span class="op">];</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>elem <span class="op">==</span> <span class="kw">null</span><span class="op">)</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        V removed <span class="op">=</span> elem<span class="op">.</span><span class="fu">value</span><span class="op">;</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        elem<span class="op">.</span><span class="fu">key</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        elem<span class="op">.</span><span class="fu">value</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        mapSize<span class="op">--;</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        numDeleted<span class="op">++;</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>mapSize <span class="op">&lt;</span> MinLoadFactor <span class="op">*</span> internalTable<span class="op">.</span><span class="fu">length</span><span class="op">)</span> </span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>            <span class="fu">resizeTable</span><span class="op">((</span><span class="dt">int</span><span class="op">)</span> <span class="op">(</span>internalTable<span class="op">.</span><span class="fu">length</span> <span class="op">/</span> CapacityMultiplier<span class="op">));</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> removed<span class="op">;</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span>            </span></code></pre></div>
-<p>Since we are using an internal array of <strong>KVPair</strong>,
-there are actually two possible empty entries, and we use this to encode
-the tombstones:</p>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> OpenAddressingHashMap <span class="kw">implements</span> <span class="bu">Map</span>:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">remove</span>(key):</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> <span class="va">this</span>.hashAndProbe(key)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">this</span>.keys[i] <span class="kw">is</span> <span class="va">null</span>:  <span class="co">// The key isn&#39;t there</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">null</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        removed <span class="op">=</span> <span class="va">this</span>.values[i].value</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> removed <span class="kw">is</span> <span class="va">null</span>:  <span class="co">// The key is already removed</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">null</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.values[i] <span class="op">=</span> <span class="va">null</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.mapSize <span class="op">=</span> <span class="va">this</span>.mapSize <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.numDeleted <span class="op">=</span> <span class="va">this</span>.numDeleted <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">this</span>.mapSize <span class="op">&lt;</span> minLoadFactor <span class="op">*</span> <span class="va">this</span>.keys.<span class="bu">size</span>():</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>            <span class="va">this</span>.resizeTable(<span class="va">this</span>.keys.<span class="bu">size</span>() <span class="op">/</span> capacityMultiplier)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> removed</span></code></pre></div>
+<p>Since we are using two internal arrays (one for the keys and one for
+the value), there are actually two possible ways of storing empty
+entries, and we use this to encode the tombstones:</p>
 <ul>
-<li>If the table cell is empty (<code>null</code>), then it is
+<li>If the keys cell is empty (<code>keys[i] is null</code>), then it is
 unoccupied.</li>
-<li>If the cell contains a <strong>KVPair</strong>, where the key is
-<code>null</code>, then it is a tombstone.</li>
+<li>If the values cell is empy (<code>values[i] is null</code>), then it
+is a tombstone.</li>
 </ul>
-<p>So, when we remove an entry, we do not remove the
-<strong>KVPair</strong>, but instead set the key (and the value) to
-<code>null</code>. This will make the cell a tombstone.</p>
+<p>So, when we remove an entry, we do not remove the key, but instead
+set the value to <code>null</code>. This will make the cell a
+tombstone.</p>
 <p>The current code has one problem: Adding new entries will never make
 use of the tombstones, but will only insert into completely empty cells.
 It is possible to fix this by implementing a sligthly different version

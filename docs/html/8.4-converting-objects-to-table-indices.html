@@ -196,23 +196,13 @@ x-ray images. This is done by requiring a class to implement a hash
 method (called <code>hashCode()</code> in Java, and
 <code>__hash__()</code> in Python).</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Person:</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, first, last):</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.firstName <span class="op">=</span> first</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.lastName <span class="op">=</span> last</span>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Person:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    Person(first, last):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.firstName <span class="op">=</span> first</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.lastName <span class="op">=</span> last</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__hash__</span>(<span class="va">self</span>):</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Note: The function ``hash(x)`` calls ``x.__hash__()``</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">hash</span>(<span class="va">self</span>.firstName) <span class="op">+</span> <span class="bu">hash</span>(<span class="va">self</span>.lastName)</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Person <span class="op">{</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">String</span> firstName<span class="op">;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">String</span> lastName<span class="op">;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">hashCode</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> firstName<span class="op">.</span><span class="fu">hashCode</span><span class="op">()</span> <span class="op">+</span> lastName<span class="op">.</span><span class="fu">hashCode</span><span class="op">();</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    hashCode():</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">this</span>.firstName.hashCode() <span class="op">+</span> <span class="va">this</span>.lastName.hashCode()</span></code></pre></div>
 <p>Now, the problem is that these classes have no idea how large the
 internal hash table should be, i.e., which interval
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mi>…</mi><mi>M</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0\ldots M-1</annotation></semantics></math>
@@ -254,18 +244,19 @@ modulo
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>,
 we might get a negative result. A negative index is not suitable as a
 table index, so first we have to make the hash code positive.</p>
-<p>One way to do this is to mask off the sign bit. Java integers are
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><msup><mn>2</mn><mn>31</mn></msup><mo>≤</mo><mi>h</mi><mo>&lt;</mo><msup><mn>2</mn><mn>31</mn></msup></mrow><annotation encoding="application/x-tex">-2^{31}\leq h&lt;2^{31}</annotation></semantics></math>,
-so we can use <code>h &amp; 0x7fffffff</code>. (Python uses arbitrary
-size hash values, but it works fine to truncate them to 31 bits as we
-have done here).</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _hash(<span class="va">self</span>, key):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (<span class="bu">hash</span>(key) <span class="op">&amp;</span> <span class="bn">0x7fffffff</span>) <span class="op">%</span> <span class="bu">len</span>(<span class="va">self</span>._internalTable)</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> <span class="fu">hash</span><span class="op">(</span>K key<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="op">(</span>key<span class="op">.</span><span class="fu">hashCode</span><span class="op">()</span> <span class="op">&amp;</span> <span class="bn">0x7fffffff</span><span class="op">)</span> <span class="op">%</span> internalTable<span class="op">.</span><span class="fu">length</span><span class="op">;</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<p>One way to do this is to mask off the sign bit. Most programming
+languages use integers in the range
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><msup><mn>2</mn><mn>31</mn></msup><mi>…</mi><mi>h</mi><mo>&lt;</mo><msup><mn>2</mn><mn>31</mn></msup></mrow><annotation encoding="application/x-tex">-2^{31}\ldots h&lt;2^{31}</annotation></semantics></math>.
+In these cases we can e.g. use <code>hashCode &amp; 0x7fffffff</code> to
+make the hash code positive. (Python and some other languages use
+arbitrary size integers, but it works fine to truncate them to 31 bits
+as we do here).</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SeparateChainingHashMap <span class="kw">implements</span> <span class="bu">Map</span>:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">hash</span>(key):</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        h <span class="op">=</span> key.hashCode() <span class="op">&amp;</span> <span class="bn">0x7fffffff</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> h <span class="op">%</span> <span class="va">this</span>.bins.<span class="bu">size</span>()</span></code></pre></div>
 </section>
 <section id="the-hash-code-never-changes" class="level3"
 data-number="8.4.4">

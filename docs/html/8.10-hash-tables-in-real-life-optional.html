@@ -192,18 +192,22 @@ data-number="8.10.1">
 class="header-section-number">8.10.1</span> Algorithmic complexity
 attacks</h3>
 <p>As we wrote in the chapter introduction:</p>
+<blockquote>
 <p>“When properly implemented, these operations can be performed in
 constant time. (...) However, even though hashing is based on a very
 simple idea, it is surprisingly difficult to implement properly.”</p>
+</blockquote>
 <p>This difficulty can be (and has been) exploited for malicious attacks
 on systems, so called algorithmic complexity attacks. We’ll leave the
 word to Adam Jacobson and David Renardy to give an introduction to the
 problems (please read the whole text, it’s an easy read):</p>
+<blockquote>
 <p>“An Algorithmic Complexity (AC) attack is a resource exhaustion
 attack that takes advantage of worst-case performance in server-side
 algorithms.” (<a
 href="https://twosixtech.com/algorithmic-complexity-vulnerabilities-an-introduction"
 class="uri">https://twosixtech.com/algorithmic-complexity-vulnerabilities-an-introduction</a>)</p>
+</blockquote>
 <p>As you can see, hash tables even have a category of itself
 (“Hashtable DoS Attacks”). They only mention separate chaining (“These
 hash tables utilized a linked list”), but the same problem arises for
@@ -218,11 +222,10 @@ data-number="8.10.2">
 class="header-section-number">8.10.2</span> Breaking hash functions</h3>
 <p>Java’s default algorithm for calculating a hash code from a string
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>s</mi><annotation encoding="application/x-tex">s</annotation></semantics></math>
-looks like this:
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>s</mi><mn>0</mn></msub><mo>⋅</mo><msup><mn>31</mn><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>+</mo><msub><mi>s</mi><mn>1</mn></msub><mo>⋅</mo><msup><mn>31</mn><mrow><mi>n</mi><mo>−</mo><mn>2</mn></mrow></msup><mo>+</mo><mi>.</mi><mi>.</mi><mi>.</mi><mo>+</mo><msub><mi>s</mi><mrow><mi>n</mi><mo>−</mo><mn>2</mn></mrow></msub><mo>⋅</mo><msup><mn>31</mn><mn>1</mn></msup><mo>+</mo><msub><mi>s</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>⋅</mo><msup><mn>31</mn><mn>0</mn></msup></mrow><annotation encoding="application/x-tex">s_0\cdot 31^{n-1} + s_1\cdot 31^{n-2} + ... + s_{n-2}\cdot 31^1 + s_{n-1}\cdot 31^0</annotation></semantics></math>.
-(Source: <a
+looks like this (see the code for <a
 href="https://github.com/openjdk/jdk/blob/9f75d5ce500886b32175cc541939b7f0eee190ca/src/java.base/share/classes/java/lang/StringUTF16.java#L414-L420">hashCode()
-in StringUTF16.java</a>).</p>
+in StringUTF16.java</a>):</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>s</mi><mn>0</mn></msub><mo>⋅</mo><msup><mn>31</mn><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>+</mo><msub><mi>s</mi><mn>1</mn></msub><mo>⋅</mo><msup><mn>31</mn><mrow><mi>n</mi><mo>−</mo><mn>2</mn></mrow></msup><mo>+</mo><mi>.</mi><mi>.</mi><mi>.</mi><mo>+</mo><msub><mi>s</mi><mrow><mi>n</mi><mo>−</mo><mn>2</mn></mrow></msub><mo>⋅</mo><msup><mn>31</mn><mn>1</mn></msup><mo>+</mo><msub><mi>s</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>⋅</mo><msup><mn>31</mn><mn>0</mn></msup></mrow><annotation encoding="application/x-tex"> s_0\cdot 31^{n-1} + s_1\cdot 31^{n-2} + ... + s_{n-2}\cdot 31^1 + s_{n-1}\cdot 31^0 </annotation></semantics></math></p>
 <p>This works well in practice, <em>if you assume that your data is
 normal</em>! But an attacker does not use normal data – instead they
 deliberately create data that will break the system. For example,
@@ -234,12 +237,12 @@ That’s a hashtable DoS attack!</p>
 It relies on the fact that the following two strings have the same
 hashcode:</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;Aa&quot;</span>.hashCode() <span class="op">==</span> <span class="st">&quot;BB&quot;</span>.hashCode() <span class="op">==</span> <span class="dv">2112</span></span></code></pre></div>
+class="sourceCode java"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Aa&quot;</span><span class="op">.</span><span class="fu">hashCode</span><span class="op">()</span> <span class="op">==</span> <span class="st">&quot;BB&quot;</span><span class="op">.</span><span class="fu">hashCode</span><span class="op">()</span> <span class="op">==</span> <span class="dv">2112</span></span></code></pre></div>
 <p>Therefore, all same-length repetitions of “Aa” and “BB” have the same
 hash code:</p>
 <div class="sourceCode" id="cb2"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;AaAaAaAaAa&quot;</span>, <span class="st">&quot;AaAaAaAaBB&quot;</span>, <span class="st">&quot;AaAaAaBBAa&quot;</span>, <span class="st">&quot;AaAaAaBBBB&quot;</span>, ...,</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;BBBBBBAaAa&quot;</span>, <span class="st">&quot;BBBBBBAaBB&quot;</span>, <span class="st">&quot;BBBBBBBBAa&quot;</span>, <span class="st">&quot;BBBBBBBBBB&quot;</span></span></code></pre></div>
+class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;AaAaAaAaAa&quot;</span><span class="op">,</span> <span class="st">&quot;AaAaAaAaBB&quot;</span><span class="op">,</span> <span class="st">&quot;AaAaAaBBAa&quot;</span><span class="op">,</span> <span class="st">&quot;AaAaAaBBBB&quot;</span><span class="op">,</span> <span class="kw">...</span><span class="op">,</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;BBBBBBAaAa&quot;</span><span class="op">,</span> <span class="st">&quot;BBBBBBAaBB&quot;</span><span class="op">,</span> <span class="st">&quot;BBBBBBBBAa&quot;</span><span class="op">,</span> <span class="st">&quot;BBBBBBBBBB&quot;</span></span></code></pre></div>
 <p>There are
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mi>k</mi></msup><annotation encoding="application/x-tex">2^k</annotation></semantics></math>
 possible strings with

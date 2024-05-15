@@ -228,9 +228,9 @@ href="4.10-queues.html#queues">queues</a> later.</p>
 could have a pointer to the “current” list node, and have methods for
 moving forward and backward in the list, several of the operations can
 be constant time. In the Java standard API this is called a <a
-href="https://docs.oracle.com/javase/8/docs/api/java/util/ListIterator.html">ListIterator</a>,
+href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/ListIterator.html">ListIterator</a>,
 which is part of Java’s standard <a
-href="https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html">LinkedList</a>.</p>
+href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/LinkedList.html">LinkedList</a>.</p>
 <p>But these advanced list iterators are not part of this course, and in
 fact there are not many algorithms where list iterators are particularly
 useful.</p>
@@ -254,7 +254,7 @@ How are lists implemented in the standard libraries?</h3>
 they are implemented in Java and Python:</p>
 <ul>
 <li>In Java, <a
-href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">java.util.ArrayList</a>
+href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/ArrayList.html">java.util.ArrayList</a>
 implements dynamic arrays, meaning that the internal array grows
 automatically when necessary. The growth factor is 50%, so that if the
 array has size 1024, it will grow with another 512 elements. [<a
@@ -263,7 +263,7 @@ ArrayList.java</a>] However, the ArrayList will never shrink
 automatically, but instead it’s up to the programmer to decide when to
 shrink it.</li>
 <li>Java’s <a
-href="https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html">java.util.LinkedList</a>
+href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/LinkedList.html">java.util.LinkedList</a>
 implements <a
 href="4.7-doubly-linked-lists-optional.html#doubly-linked-lists-optional">doubly-linked
 lists</a>, so that the iterator can move forward and backward through

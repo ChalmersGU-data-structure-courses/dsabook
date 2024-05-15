@@ -205,19 +205,10 @@ which stands for “First-In, First-Out”. Here is a sample queue ADT. This
 section presents two implementations for queues: the array-based queue
 and the linked queue.</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Queue(Collection):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> enqueue(<span class="va">self</span>, x): <span class="st">&quot;&quot;&quot;Enqueues x at the end of the queue.&quot;&quot;&quot;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> dequeue(<span class="va">self</span>):    <span class="st">&quot;&quot;&quot;Dequeues the frontmost element. Raises an exception if the queue is empty.&quot;&quot;&quot;</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> peek(<span class="va">self</span>):       <span class="st">&quot;&quot;&quot;Returns the frontmost element, without removing it. Raises an exception if the queue is empty.&quot;&quot;&quot;</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Note: __iter__() should yield the elements starting from the frontmost element.</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Note: This is a subset of java.util.Queue; and it uses different method names.</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Queue</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="kw">extends</span> <span class="bu">Collection</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> <span class="fu">enqueue</span><span class="op">(</span>E x<span class="op">);</span>  <span class="co">// Enqueues x at the end of the queue.</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    E <span class="fu">dequeue</span><span class="op">();</span>        <span class="co">// Dequeues the frontmost element. Raises an exception if the queue is empty.</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    E <span class="fu">peek</span><span class="op">();</span>           <span class="co">// Returns the frontmost element, without removing it. Raises an exception if the queue is empty.</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Note: iterator() should yield the elements starting from the frontmost element.</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Queue</span> <span class="kw">extends</span> <span class="bu">Collection</span>:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">enqueue</span>(x)  <span class="co">// Enqueues x at the end of the queue.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">dequeue</span>()   <span class="co">// Dequeues the frontmost element.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">peek</span>()      <span class="co">// Returns the frontmost element, without removing it.</span></span></code></pre></div>
 <section id="array-based-queues" class="level3" data-number="4.10.1">
 <h3 data-number="4.10.1"><span
 class="header-section-number">4.10.1</span> Array-Based Queues</h3>
@@ -319,35 +310,13 @@ defined to be toward the higher-numbered positions. Thus,
 <code>enqueue</code> increments the rear pointer (modulus the size of
 the internal array), and <code>dequeue</code> increments the front
 pointer.</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> DynamicArrayQueue(Queue):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    _minCapacity <span class="op">=</span> <span class="dv">8</span>            <span class="co"># Minimum capacity of internalArray</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    _minLoadFactor <span class="op">=</span> <span class="fl">0.5</span>        <span class="co"># Must be smaller than 1/CapacityMultiplier</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    _capacityMultiplier <span class="op">=</span> <span class="fl">1.5</span>   <span class="co"># Factor to grow/shrink the capacity</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._internalArray <span class="op">=</span> [<span class="va">None</span>] <span class="op">*</span> <span class="va">self</span>._minCapacity   <span class="co"># Internal array containing the queue elements</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._queueSize <span class="op">=</span> <span class="dv">0</span>                                <span class="co"># Size of queue, and index of the next free slot</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._front <span class="op">=</span> <span class="dv">0</span>                                    <span class="co"># Index of front element</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._rear <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>                                    <span class="co"># Index of rear element</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> DynamicArrayQueue<span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="kw">implements</span> <span class="bu">Queue</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> E<span class="op">[]</span> internalArray<span class="op">;</span>   <span class="co">// Internal array containing the queue elements</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> queueSize<span class="op">;</span>       <span class="co">// Size of queue, and index of the next free slot</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> front<span class="op">;</span>           <span class="co">// Index of front element</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> rear<span class="op">;</span>            <span class="co">// Index of rear element</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">static</span> <span class="dt">int</span> MinCapacity <span class="op">=</span> <span class="dv">8</span><span class="op">;</span>               <span class="co">// Minimum capacity of internalArray</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">static</span> <span class="dt">double</span> MinLoadFactor <span class="op">=</span> <span class="fl">0.5</span><span class="op">;</span>        <span class="co">// Must be smaller than 1/CapacityMultiplier</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">static</span> <span class="dt">double</span> CapacityMultiplier <span class="op">=</span> <span class="fl">1.5</span><span class="op">;</span>   <span class="co">// Factor to grow/shrink the capacity</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">@SuppressWarnings</span><span class="op">(</span><span class="st">&quot;unchecked&quot;</span><span class="op">)</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">DynamicArrayQueue</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        internalArray <span class="op">=</span> <span class="op">(</span>E<span class="op">[])</span> <span class="kw">new</span> <span class="bu">Object</span><span class="op">[</span>MinCapacity<span class="op">];</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        queueSize <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        front <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        rear <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> DynamicArrayQueue <span class="kw">implements</span> <span class="bu">Queue</span>:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    DynamicArrayQueue():</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.internalArray <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(<span class="dv">8</span>)  <span class="co">// Internal array containing the queue elements</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.queueSize <span class="op">=</span> <span class="dv">0</span>                 <span class="co">// Size of queue, and index of the next free slot</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.front <span class="op">=</span> <span class="dv">0</span>                     <span class="co">// Index of front element</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.rear <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>                     <span class="co">// Index of rear element</span></span></code></pre></div>
 <p>Implemening the member functions is mostly straightforward.</p>
 </section>
 <section id="enqueueing-an-element" class="level4"
@@ -356,21 +325,15 @@ data-number="4.10.1.3">
 class="header-section-number">4.10.1.3</span> Enqueueing an element</h4>
 <p>When enqueueing, we increase the <code>rear</code> pointer (modulo
 the size of the internal array to make it circular).</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> enqueue(<span class="va">self</span>, x):</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>._queueSize <span class="op">&gt;=</span> <span class="bu">len</span>(<span class="va">self</span>._internalArray):</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._resizeArray(<span class="bu">len</span>(<span class="va">self</span>._internalArray) <span class="op">*</span> <span class="va">self</span>._capacityMultiplier)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._rear <span class="op">=</span> (<span class="va">self</span>._rear <span class="op">+</span> <span class="dv">1</span>) <span class="op">%</span> <span class="bu">len</span>(<span class="va">self</span>._internalArray)   <span class="co"># Circular increment</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._internalArray[<span class="va">self</span>._rear] <span class="op">=</span> x</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._queueSize <span class="op">+=</span> <span class="dv">1</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">enqueue</span><span class="op">(</span>E x<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>queueSize <span class="op">&gt;=</span> internalArray<span class="op">.</span><span class="fu">length</span><span class="op">)</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">resizeArray</span><span class="op">((</span><span class="dt">int</span><span class="op">)</span> <span class="op">(</span>internalArray<span class="op">.</span><span class="fu">length</span> <span class="op">*</span> CapacityMultiplier<span class="op">));</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        rear <span class="op">=</span> <span class="op">(</span>rear <span class="op">+</span> <span class="dv">1</span><span class="op">)</span> <span class="op">%</span> internalArray<span class="op">.</span><span class="fu">length</span><span class="op">;</span>   <span class="co">// Circular increment</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        internalArray<span class="op">[</span>rear<span class="op">]</span> <span class="op">=</span> x<span class="op">;</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        queueSize<span class="op">++;</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> DynamicArrayQueue <span class="kw">implements</span> <span class="bu">Queue</span>:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">enqueue</span>(x):</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">this</span>.queueSize <span class="op">&gt;=</span> <span class="va">this</span>.internalArray.<span class="bu">size</span>():</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>            <span class="va">this</span>.resizeArray(<span class="va">this</span>.internalArray.<span class="bu">size</span>() <span class="op">*</span> <span class="dv">2</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.rear <span class="op">=</span> (<span class="va">this</span>.rear <span class="op">+</span> <span class="dv">1</span>) <span class="op">%</span> <span class="va">this</span>.internalArray.<span class="bu">size</span>()  <span class="co">// Circular increment</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.internalArray[<span class="va">this</span>.rear] <span class="op">=</span> x</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.queueSize <span class="op">=</span> <span class="va">this</span>.queueSize <span class="op">+</span> <span class="dv">1</span></span></code></pre></div>
 </section>
 <section id="dequeueing-an-element" class="level4"
 data-number="4.10.1.4">
@@ -378,27 +341,18 @@ data-number="4.10.1.4">
 class="header-section-number">4.10.1.4</span> Dequeueing an element</h4>
 <p>When dequeueing, we increase the <code>front</code> pointer (modulo
 the size of the internal array).</p>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> dequeue(<span class="va">self</span>):</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> (<span class="va">self</span>._queueSize <span class="op">&gt;</span> <span class="dv">0</span>): <span class="cf">raise</span> <span class="pp">IndexError</span>(<span class="st">&quot;dequeue from empty queue&quot;</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._queueSize <span class="op">-=</span> <span class="dv">1</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> <span class="va">self</span>._internalArray[<span class="va">self</span>._front]</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._internalArray[<span class="va">self</span>._front] <span class="op">=</span> <span class="va">None</span>   <span class="co"># For garbage collection</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._front <span class="op">=</span> (<span class="va">self</span>._front <span class="op">+</span> <span class="dv">1</span>) <span class="op">%</span> <span class="bu">len</span>(<span class="va">self</span>._internalArray)   <span class="co"># Circular increment</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>._queueSize <span class="op">&lt;=</span> <span class="bu">len</span>(<span class="va">self</span>._internalArray) <span class="op">*</span> <span class="va">self</span>._minLoadFactor:</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._resizeArray(<span class="bu">len</span>(<span class="va">self</span>._internalArray) <span class="op">/</span> <span class="va">self</span>._capacityMultiplier)</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x</span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> E <span class="fu">dequeue</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!(</span>queueSize <span class="op">&gt;</span> <span class="dv">0</span><span class="op">))</span> <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">NoSuchElementException</span><span class="op">(</span><span class="st">&quot;dequeue from empty queue&quot;</span><span class="op">);</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        queueSize<span class="op">--;</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        E x <span class="op">=</span> internalArray<span class="op">[</span>front<span class="op">];</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        internalArray<span class="op">[</span>front<span class="op">]</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span>   <span class="co">// For garbage collection</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        front <span class="op">=</span> <span class="op">(</span>front <span class="op">+</span> <span class="dv">1</span><span class="op">)</span> <span class="op">%</span> internalArray<span class="op">.</span><span class="fu">length</span><span class="op">;</span>   <span class="co">// Circular increment</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>queueSize <span class="op">&lt;=</span> internalArray<span class="op">.</span><span class="fu">length</span> <span class="op">*</span> MinLoadFactor<span class="op">)</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>            <span class="fu">resizeArray</span><span class="op">((</span><span class="dt">int</span><span class="op">)</span> <span class="op">(</span>internalArray<span class="op">.</span><span class="fu">length</span> <span class="op">/</span> CapacityMultiplier<span class="op">));</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x<span class="op">;</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> DynamicArrayQueue <span class="kw">implements</span> <span class="bu">Queue</span>:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">dequeue</span>():</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">precondition</span>: <span class="va">this</span>.queueSize <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.queueSize <span class="op">=</span> <span class="va">this</span>.queueSize <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> <span class="va">this</span>.internalArray[<span class="va">this</span>.front]</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.internalArray[<span class="va">this</span>.front] <span class="op">=</span> <span class="va">null</span>  <span class="co">// For garbage collection</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.front <span class="op">=</span> (<span class="va">this</span>.front <span class="op">+</span> <span class="dv">1</span>) <span class="op">%</span> <span class="va">this</span>.internalArray.<span class="bu">size</span>()  <span class="co">// Circular increment</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">this</span>.queueSize <span class="op">&lt;=</span> <span class="va">this</span>.internalArray.<span class="bu">size</span>() <span class="op">*</span> <span class="dv">1</span><span class="op">/</span><span class="dv">3</span>:</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>            <span class="va">this</span>.resizeArray(<span class="va">this</span>.internalArray.<span class="bu">size</span>()) <span class="op">*</span> <span class="dv">1</span><span class="op">/</span><span class="dv">2</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x</span></code></pre></div>
 </section>
 <section id="resizing-the-internal-array-1" class="level4"
 data-number="4.10.1.5">
@@ -413,26 +367,17 @@ middle of the queue.</p>
 pointers so that we copy the first queue element to position 0 of the
 new array, the second to position 1, etc. Apart from that, the
 implementation is similar to the one for lists and queues.</p>
-<div class="sourceCode" id="cb9"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _resizeArray(<span class="va">self</span>, newCapacity):</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> newCapacity <span class="op">&lt;</span> <span class="va">self</span>._minCapacity: <span class="cf">return</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>        newArray <span class="op">=</span> [<span class="va">None</span>] <span class="op">*</span> <span class="bu">int</span>(newCapacity)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="va">self</span>._queueSize):</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>            newArray[i] <span class="op">=</span> <span class="va">self</span>._internalArray[(i <span class="op">+</span> <span class="va">self</span>._front) <span class="op">%</span> <span class="bu">len</span>(<span class="va">self</span>._internalArray)]</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._internalArray <span class="op">=</span> newArray</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._front <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._rear <span class="op">=</span> <span class="va">self</span>._queueSize<span class="op">-</span><span class="dv">1</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">resizeArray</span><span class="op">(</span><span class="dt">int</span> newCapacity<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>newCapacity <span class="op">&lt;</span> MinCapacity<span class="op">)</span> <span class="cf">return</span><span class="op">;</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">@SuppressWarnings</span><span class="op">(</span><span class="st">&quot;unchecked&quot;</span><span class="op">)</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>        E<span class="op">[]</span> newArray <span class="op">=</span> <span class="op">(</span>E<span class="op">[])</span> <span class="kw">new</span> <span class="bu">Object</span><span class="op">[</span>newCapacity<span class="op">];</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> queueSize<span class="op">;</span> i<span class="op">++)</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>            newArray<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> internalArray<span class="op">[(</span>i <span class="op">+</span> front<span class="op">)</span> <span class="op">%</span> internalArray<span class="op">.</span><span class="fu">length</span><span class="op">];</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        internalArray <span class="op">=</span> newArray<span class="op">;</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        front <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        rear <span class="op">=</span> queueSize<span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> DynamicArrayQueue <span class="kw">implements</span> <span class="bu">Queue</span>:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    resizeArray(newCapacity):</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        newArray <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(newCapacity)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="dv">0</span> <span class="kw">to</span> <span class="va">this</span>.queueSize<span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>            j <span class="op">=</span> (i <span class="op">+</span> <span class="va">this</span>.front) <span class="op">%</span> <span class="va">this</span>.internalArray.<span class="bu">size</span>()</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>            newArray[i] <span class="op">=</span> <span class="va">this</span>.internalArray[j]</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.internalArray <span class="op">=</span> newArray</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.front <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.rear <span class="op">=</span> <span class="va">this</span>.queueSize<span class="op">-</span><span class="dv">1</span></span></code></pre></div>
 </section>
 <section id="array-based-queue-practice-exercises" class="level4"
 data-number="4.10.1.6">
@@ -454,158 +399,6 @@ Your browser does not support iframes.
 </div>
 </p>
 </section>
-<section id="array-based-queues-full-implementation" class="level4"
-data-number="4.10.1.7">
-<h4 data-number="4.10.1.7"><span
-class="header-section-number">4.10.1.7</span> Array-based Queues, Full
-Implementation</h4>
-<p>Here is an array-based queue implementation.</p>
-<div class="sourceCode" id="cb11"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: DynamicArrayQueueInit *** */</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> DynamicArrayQueue(Queue):</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    _minCapacity <span class="op">=</span> <span class="dv">8</span>            <span class="co"># Minimum capacity of internalArray</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    _minLoadFactor <span class="op">=</span> <span class="fl">0.5</span>        <span class="co"># Must be smaller than 1/CapacityMultiplier</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    _capacityMultiplier <span class="op">=</span> <span class="fl">1.5</span>   <span class="co"># Factor to grow/shrink the capacity</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._internalArray <span class="op">=</span> [<span class="va">None</span>] <span class="op">*</span> <span class="va">self</span>._minCapacity   <span class="co"># Internal array containing the queue elements</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._queueSize <span class="op">=</span> <span class="dv">0</span>                                <span class="co"># Size of queue, and index of the next free slot</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._front <span class="op">=</span> <span class="dv">0</span>                                    <span class="co"># Index of front element</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._rear <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>                                    <span class="co"># Index of rear element</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: DynamicArrayQueueInit *** */</span></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: DynamicArrayQueueEnqueue *** */</span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> enqueue(<span class="va">self</span>, x):</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>._queueSize <span class="op">&gt;=</span> <span class="bu">len</span>(<span class="va">self</span>._internalArray):</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._resizeArray(<span class="bu">len</span>(<span class="va">self</span>._internalArray) <span class="op">*</span> <span class="va">self</span>._capacityMultiplier)</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._rear <span class="op">=</span> (<span class="va">self</span>._rear <span class="op">+</span> <span class="dv">1</span>) <span class="op">%</span> <span class="bu">len</span>(<span class="va">self</span>._internalArray)   <span class="co"># Circular increment</span></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._internalArray[<span class="va">self</span>._rear] <span class="op">=</span> x</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._queueSize <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: DynamicArrayQueueEnqueue *** */</span></span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: DynamicArrayQueuePeek *** */</span></span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> peek(<span class="va">self</span>):</span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> (<span class="va">self</span>._queueSize <span class="op">&gt;</span> <span class="dv">0</span>): <span class="cf">raise</span> <span class="pp">IndexError</span>(<span class="st">&quot;peek from empty queue&quot;</span>)</span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._internalArray[<span class="va">self</span>._front]</span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: DynamicArrayQueuePeek *** */</span></span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: DynamicArrayQueueDequeue *** */</span></span>
-<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> dequeue(<span class="va">self</span>):</span>
-<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> (<span class="va">self</span>._queueSize <span class="op">&gt;</span> <span class="dv">0</span>): <span class="cf">raise</span> <span class="pp">IndexError</span>(<span class="st">&quot;dequeue from empty queue&quot;</span>)</span>
-<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._queueSize <span class="op">-=</span> <span class="dv">1</span></span>
-<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> <span class="va">self</span>._internalArray[<span class="va">self</span>._front]</span>
-<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._internalArray[<span class="va">self</span>._front] <span class="op">=</span> <span class="va">None</span>   <span class="co"># For garbage collection</span></span>
-<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._front <span class="op">=</span> (<span class="va">self</span>._front <span class="op">+</span> <span class="dv">1</span>) <span class="op">%</span> <span class="bu">len</span>(<span class="va">self</span>._internalArray)   <span class="co"># Circular increment</span></span>
-<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>._queueSize <span class="op">&lt;=</span> <span class="bu">len</span>(<span class="va">self</span>._internalArray) <span class="op">*</span> <span class="va">self</span>._minLoadFactor:</span>
-<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._resizeArray(<span class="bu">len</span>(<span class="va">self</span>._internalArray) <span class="op">/</span> <span class="va">self</span>._capacityMultiplier)</span>
-<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x</span>
-<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: DynamicArrayQueueDequeue *** */</span></span>
-<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: DynamicArrayQueueResize *** */</span></span>
-<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _resizeArray(<span class="va">self</span>, newCapacity):</span>
-<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> newCapacity <span class="op">&lt;</span> <span class="va">self</span>._minCapacity: <span class="cf">return</span></span>
-<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a>        newArray <span class="op">=</span> [<span class="va">None</span>] <span class="op">*</span> <span class="bu">int</span>(newCapacity)</span>
-<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="va">self</span>._queueSize):</span>
-<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a>            newArray[i] <span class="op">=</span> <span class="va">self</span>._internalArray[(i <span class="op">+</span> <span class="va">self</span>._front) <span class="op">%</span> <span class="bu">len</span>(<span class="va">self</span>._internalArray)]</span>
-<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._internalArray <span class="op">=</span> newArray</span>
-<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._front <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._rear <span class="op">=</span> <span class="va">self</span>._queueSize<span class="op">-</span><span class="dv">1</span></span>
-<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: DynamicArrayQueueResize *** */</span></span>
-<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> isEmpty(<span class="va">self</span>):</span>
-<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._queueSize <span class="op">==</span> <span class="dv">0</span></span>
-<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> size(<span class="va">self</span>):</span>
-<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._queueSize</span>
-<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: DynamicArrayQueueIterator *** */</span></span>
-<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__iter__</span>(<span class="va">self</span>):</span>
-<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="va">self</span>._front, <span class="va">self</span>._front <span class="op">+</span> <span class="va">self</span>._queueSize):</span>
-<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a>            <span class="cf">yield</span> <span class="va">self</span>._internalArray[i <span class="op">%</span> <span class="bu">len</span>(<span class="va">self</span>._internalArray)]</span>
-<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: DynamicArrayQueueIterator *** */</span></span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: DynamicArrayQueueInit *** */</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> DynamicArrayQueue<span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="kw">implements</span> <span class="bu">Queue</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> E<span class="op">[]</span> internalArray<span class="op">;</span>   <span class="co">// Internal array containing the queue elements</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> queueSize<span class="op">;</span>       <span class="co">// Size of queue, and index of the next free slot</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> front<span class="op">;</span>           <span class="co">// Index of front element</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> rear<span class="op">;</span>            <span class="co">// Index of rear element</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">static</span> <span class="dt">int</span> MinCapacity <span class="op">=</span> <span class="dv">8</span><span class="op">;</span>               <span class="co">// Minimum capacity of internalArray</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">static</span> <span class="dt">double</span> MinLoadFactor <span class="op">=</span> <span class="fl">0.5</span><span class="op">;</span>        <span class="co">// Must be smaller than 1/CapacityMultiplier</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">static</span> <span class="dt">double</span> CapacityMultiplier <span class="op">=</span> <span class="fl">1.5</span><span class="op">;</span>   <span class="co">// Factor to grow/shrink the capacity</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">@SuppressWarnings</span><span class="op">(</span><span class="st">&quot;unchecked&quot;</span><span class="op">)</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">DynamicArrayQueue</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>        internalArray <span class="op">=</span> <span class="op">(</span>E<span class="op">[])</span> <span class="kw">new</span> <span class="bu">Object</span><span class="op">[</span>MinCapacity<span class="op">];</span></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>        queueSize <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>        front <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>        rear <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: DynamicArrayQueueInit *** */</span></span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: DynamicArrayQueueEnqueue *** */</span></span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">enqueue</span><span class="op">(</span>E x<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>queueSize <span class="op">&gt;=</span> internalArray<span class="op">.</span><span class="fu">length</span><span class="op">)</span></span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>            <span class="fu">resizeArray</span><span class="op">((</span><span class="dt">int</span><span class="op">)</span> <span class="op">(</span>internalArray<span class="op">.</span><span class="fu">length</span> <span class="op">*</span> CapacityMultiplier<span class="op">));</span></span>
-<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>        rear <span class="op">=</span> <span class="op">(</span>rear <span class="op">+</span> <span class="dv">1</span><span class="op">)</span> <span class="op">%</span> internalArray<span class="op">.</span><span class="fu">length</span><span class="op">;</span>   <span class="co">// Circular increment</span></span>
-<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>        internalArray<span class="op">[</span>rear<span class="op">]</span> <span class="op">=</span> x<span class="op">;</span></span>
-<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>        queueSize<span class="op">++;</span></span>
-<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: DynamicArrayQueueEnqueue *** */</span></span>
-<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: DynamicArrayQueuePeek *** */</span></span>
-<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> E <span class="fu">peek</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!(</span>queueSize <span class="op">&gt;</span> <span class="dv">0</span><span class="op">))</span> <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">NoSuchElementException</span><span class="op">(</span><span class="st">&quot;peek from empty queue&quot;</span><span class="op">);</span></span>
-<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> internalArray<span class="op">[</span>front<span class="op">];</span></span>
-<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: DynamicArrayQueuePeek *** */</span></span>
-<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: DynamicArrayQueueDequeue *** */</span></span>
-<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> E <span class="fu">dequeue</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!(</span>queueSize <span class="op">&gt;</span> <span class="dv">0</span><span class="op">))</span> <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">NoSuchElementException</span><span class="op">(</span><span class="st">&quot;dequeue from empty queue&quot;</span><span class="op">);</span></span>
-<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>        queueSize<span class="op">--;</span></span>
-<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>        E x <span class="op">=</span> internalArray<span class="op">[</span>front<span class="op">];</span></span>
-<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a>        internalArray<span class="op">[</span>front<span class="op">]</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span>   <span class="co">// For garbage collection</span></span>
-<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a>        front <span class="op">=</span> <span class="op">(</span>front <span class="op">+</span> <span class="dv">1</span><span class="op">)</span> <span class="op">%</span> internalArray<span class="op">.</span><span class="fu">length</span><span class="op">;</span>   <span class="co">// Circular increment</span></span>
-<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>queueSize <span class="op">&lt;=</span> internalArray<span class="op">.</span><span class="fu">length</span> <span class="op">*</span> MinLoadFactor<span class="op">)</span></span>
-<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a>            <span class="fu">resizeArray</span><span class="op">((</span><span class="dt">int</span><span class="op">)</span> <span class="op">(</span>internalArray<span class="op">.</span><span class="fu">length</span> <span class="op">/</span> CapacityMultiplier<span class="op">));</span></span>
-<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x<span class="op">;</span></span>
-<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: DynamicArrayQueueDequeue *** */</span></span>
-<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: DynamicArrayQueueResize *** */</span></span>
-<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">resizeArray</span><span class="op">(</span><span class="dt">int</span> newCapacity<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>newCapacity <span class="op">&lt;</span> MinCapacity<span class="op">)</span> <span class="cf">return</span><span class="op">;</span></span>
-<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a>        <span class="at">@SuppressWarnings</span><span class="op">(</span><span class="st">&quot;unchecked&quot;</span><span class="op">)</span></span>
-<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a>        E<span class="op">[]</span> newArray <span class="op">=</span> <span class="op">(</span>E<span class="op">[])</span> <span class="kw">new</span> <span class="bu">Object</span><span class="op">[</span>newCapacity<span class="op">];</span></span>
-<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> queueSize<span class="op">;</span> i<span class="op">++)</span></span>
-<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a>            newArray<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> internalArray<span class="op">[(</span>i <span class="op">+</span> front<span class="op">)</span> <span class="op">%</span> internalArray<span class="op">.</span><span class="fu">length</span><span class="op">];</span></span>
-<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a>        internalArray <span class="op">=</span> newArray<span class="op">;</span></span>
-<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a>        front <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a>        rear <span class="op">=</span> queueSize<span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
-<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: DynamicArrayQueueResize *** */</span></span>
-<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">isEmpty</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> queueSize <span class="op">==</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">size</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb12-69"><a href="#cb12-69" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> queueSize<span class="op">;</span></span>
-<span id="cb12-70"><a href="#cb12-70" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb12-71"><a href="#cb12-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-72"><a href="#cb12-72" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: DynamicArrayQueueIterator *** */</span></span>
-<span id="cb12-73"><a href="#cb12-73" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">Iterator</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="fu">iterator</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb12-74"><a href="#cb12-74" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>front <span class="op">+</span> queueSize <span class="op">&lt;=</span> internalArray<span class="op">.</span><span class="fu">length</span><span class="op">)</span></span>
-<span id="cb12-75"><a href="#cb12-75" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="bu">Arrays</span><span class="op">.</span><span class="fu">stream</span><span class="op">(</span>internalArray<span class="op">,</span> front<span class="op">,</span> front <span class="op">+</span> queueSize<span class="op">).</span><span class="fu">iterator</span><span class="op">();</span></span>
-<span id="cb12-76"><a href="#cb12-76" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span></span>
-<span id="cb12-77"><a href="#cb12-77" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> Stream<span class="op">.</span><span class="fu">concat</span><span class="op">(</span><span class="bu">Arrays</span><span class="op">.</span><span class="fu">stream</span><span class="op">(</span>internalArray<span class="op">,</span> front<span class="op">,</span> internalArray<span class="op">.</span><span class="fu">length</span><span class="op">),</span></span>
-<span id="cb12-78"><a href="#cb12-78" aria-hidden="true" tabindex="-1"></a>                                 <span class="bu">Arrays</span><span class="op">.</span><span class="fu">stream</span><span class="op">(</span>internalArray<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> rear<span class="op">+</span><span class="dv">1</span><span class="op">)).</span><span class="fu">iterator</span><span class="op">();</span></span>
-<span id="cb12-79"><a href="#cb12-79" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb12-80"><a href="#cb12-80" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: DynamicArrayQueueIterator *** */</span></span>
-<span id="cb12-81"><a href="#cb12-81" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-</section>
 </section>
 <section id="linked-queues" class="level3" data-number="4.10.2">
 <h3 data-number="4.10.2"><span
@@ -621,24 +414,12 @@ queue, to be able to add new elements efficiently.</p>
 <div class="jsavcanvas"></div>
 </div>
 </p>
-<div class="line-block"></div>
-<div class="sourceCode" id="cb13"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LinkedQueue(Queue):</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._front <span class="op">=</span> <span class="va">None</span>    <span class="co"># Pointer to front queue node</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._rear <span class="op">=</span> <span class="va">None</span>     <span class="co"># Pointer to rear queue node</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._queueSize <span class="op">=</span> <span class="dv">0</span>   <span class="co"># Size of queue</span></span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LinkedQueue<span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="kw">implements</span> <span class="bu">Queue</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="bu">Node</span> front<span class="op">;</span>      <span class="co">// Pointer to front queue node</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="bu">Node</span> rear<span class="op">;</span>       <span class="co">// Pointer to rear queue node</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> queueSize<span class="op">;</span>   <span class="co">// Size of queue</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">LinkedQueue</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>        front <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>        rear <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>        queueSize <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LinkedQueue <span class="kw">implements</span> <span class="bu">Queue</span>:</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    LinkedQueue():</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.front <span class="op">=</span> <span class="va">null</span>   <span class="co">// Pointer to front queue node</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.rear <span class="op">=</span> <span class="va">null</span>    <span class="co">// Pointer to rear queue node</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.queueSize <span class="op">=</span> <span class="dv">0</span>  <span class="co">// Size of queue</span></span></code></pre></div>
 <section id="enqueueing-elements" class="level4" data-number="4.10.2.1">
 <h4 data-number="4.10.2.1"><span
 class="header-section-number">4.10.2.1</span> Enqueueing Elements</h4>
@@ -650,27 +431,17 @@ class="header-section-number">4.10.2.1</span> Enqueueing Elements</h4>
 <div class="jsavcanvas"></div>
 </div>
 </p>
-<div class="line-block"></div>
-<div class="sourceCode" id="cb15"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> enqueue(<span class="va">self</span>, x):</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>        newRear <span class="op">=</span> LinkedQueueNode(x, <span class="va">None</span>)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>._queueSize <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._front <span class="op">=</span> newRear</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._rear.<span class="bu">next</span> <span class="op">=</span> newRear</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._rear <span class="op">=</span> newRear</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._queueSize <span class="op">+=</span> <span class="dv">1</span></span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">enqueue</span><span class="op">(</span>E x<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Node</span> newRear <span class="op">=</span> <span class="kw">new</span> <span class="bu">Node</span><span class="op">(</span>x<span class="op">,</span> <span class="kw">null</span><span class="op">);</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>queueSize <span class="op">==</span> <span class="dv">0</span><span class="op">)</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>            front <span class="op">=</span> newRear<span class="op">;</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>            rear<span class="op">.</span><span class="fu">next</span> <span class="op">=</span> newRear<span class="op">;</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>        rear <span class="op">=</span> newRear<span class="op">;</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        queueSize<span class="op">++;</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
-<div class="line-block"></div>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LinkedQueue <span class="kw">implements</span> <span class="bu">Queue</span>:</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">enqueue</span>(x):</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        newRear <span class="op">=</span> <span class="kw">new</span> Node(x, <span class="va">null</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">this</span>.queueSize <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>            <span class="va">this</span>.front <span class="op">=</span> newRear</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>            <span class="va">this</span>.rear.<span class="bu">next</span> <span class="op">=</span> newRear</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.rear <span class="op">=</span> newRear</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.queueSize <span class="op">=</span> <span class="va">this</span>.queueSize <span class="op">+</span> <span class="dv">1</span></span></code></pre></div>
 <p>
 <div id="LinkedQueue-Enqueue-PRO" class="embedContainer">
 <iframe id="LinkedQueue-Enqueue-PRO_iframe" aria-label="LinkedQueue-Enqueue-PRO" src="../interactive/ChalmersGU/LinkedQueue-Enqueue-PRO.html" width="100%" height="600" scrolling="no">
@@ -690,29 +461,18 @@ class="header-section-number">4.10.2.2</span> Dequeueing Elements</h4>
 <div class="jsavcanvas"></div>
 </div>
 </p>
-<div class="line-block"></div>
-<div class="sourceCode" id="cb17"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> dequeue(<span class="va">self</span>):</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> (<span class="va">self</span>._queueSize <span class="op">&gt;</span> <span class="dv">0</span>): <span class="cf">raise</span> <span class="pp">IndexError</span>(<span class="st">&quot;dequeue from empty queue&quot;</span>)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>        removed <span class="op">=</span> <span class="va">self</span>._front</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._front <span class="op">=</span> removed.<span class="bu">next</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>        removed.<span class="bu">next</span> <span class="op">=</span> <span class="va">None</span>   <span class="co"># For garbage collection</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._queueSize <span class="op">-=</span> <span class="dv">1</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>._queueSize <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._rear <span class="op">=</span> <span class="va">None</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> removed.elem</span></code></pre></div>
-<div class="sourceCode" id="cb18"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> E <span class="fu">dequeue</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!(</span>queueSize <span class="op">&gt;</span> <span class="dv">0</span><span class="op">))</span> <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">NoSuchElementException</span><span class="op">(</span><span class="st">&quot;dequeue from empty queue&quot;</span><span class="op">);</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Node</span> removed <span class="op">=</span> front<span class="op">;</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>        front <span class="op">=</span> removed<span class="op">.</span><span class="fu">next</span><span class="op">;</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>        removed<span class="op">.</span><span class="fu">next</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span>   <span class="co">// For garbage collection</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>        queueSize<span class="op">--;</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>queueSize <span class="op">==</span> <span class="dv">0</span><span class="op">)</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>            rear <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> removed<span class="op">.</span><span class="fu">elem</span><span class="op">;</span></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
-<div class="line-block"></div>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LinkedQueue <span class="kw">implements</span> <span class="bu">Queue</span>:</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">dequeue</span>():</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">precondition</span>: <span class="va">this</span>.queueSize <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        removed <span class="op">=</span> <span class="va">this</span>.front</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.front <span class="op">=</span> removed.<span class="bu">next</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        removed.<span class="bu">next</span> <span class="op">=</span> <span class="va">null</span>  <span class="co">// For garbage collection</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.queueSize <span class="op">=</span> <span class="va">this</span>.queueSize <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">this</span>.queueSize <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>            <span class="va">this</span>.rear <span class="op">=</span> <span class="va">null</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> removed.elem</span></code></pre></div>
 <p>
 <div id="LinkedQueue-Dequeue-PRO" class="embedContainer">
 <iframe id="LinkedQueue-Dequeue-PRO_iframe" aria-label="LinkedQueue-Dequeue-PRO" src="../interactive/ChalmersGU/LinkedQueue-Dequeue-PRO.html" width="100%" height="600" scrolling="no">
@@ -720,160 +480,6 @@ Your browser does not support iframes.
 </iframe>
 </div>
 </p>
-</section>
-<section id="linked-queue-full-implementation" class="level4"
-data-number="4.10.2.3">
-<h4 data-number="4.10.2.3"><span
-class="header-section-number">4.10.2.3</span> Linked Queue, Full
-Implementation</h4>
-<p>Here is the full implementation for linked queues.</p>
-<div class="sourceCode" id="cb19"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: LinkedQueueInit *** */</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LinkedQueue(Queue):</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._front <span class="op">=</span> <span class="va">None</span>    <span class="co"># Pointer to front queue node</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._rear <span class="op">=</span> <span class="va">None</span>     <span class="co"># Pointer to rear queue node</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._queueSize <span class="op">=</span> <span class="dv">0</span>   <span class="co"># Size of queue</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: LinkedQueueInit *** */</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: LinkedQueueEnqueue *** */</span></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> enqueue(<span class="va">self</span>, x):</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>        newRear <span class="op">=</span> LinkedQueueNode(x, <span class="va">None</span>)</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>._queueSize <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._front <span class="op">=</span> newRear</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._rear.<span class="bu">next</span> <span class="op">=</span> newRear</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._rear <span class="op">=</span> newRear</span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._queueSize <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: LinkedQueueEnqueue *** */</span></span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: LinkedQueuePeek *** */</span></span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> peek(<span class="va">self</span>):</span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> (<span class="va">self</span>._queueSize <span class="op">&gt;</span> <span class="dv">0</span>): <span class="cf">raise</span> <span class="pp">IndexError</span>(<span class="st">&quot;peek from empty queue&quot;</span>)</span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._front.elem</span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: LinkedQueuePeek *** */</span></span>
-<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: LinkedQueueDequeue *** */</span></span>
-<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> dequeue(<span class="va">self</span>):</span>
-<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> (<span class="va">self</span>._queueSize <span class="op">&gt;</span> <span class="dv">0</span>): <span class="cf">raise</span> <span class="pp">IndexError</span>(<span class="st">&quot;dequeue from empty queue&quot;</span>)</span>
-<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>        removed <span class="op">=</span> <span class="va">self</span>._front</span>
-<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._front <span class="op">=</span> removed.<span class="bu">next</span></span>
-<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>        removed.<span class="bu">next</span> <span class="op">=</span> <span class="va">None</span>   <span class="co"># For garbage collection</span></span>
-<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._queueSize <span class="op">-=</span> <span class="dv">1</span></span>
-<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>._queueSize <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._rear <span class="op">=</span> <span class="va">None</span></span>
-<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> removed.elem</span>
-<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: LinkedQueueDequeue *** */</span></span>
-<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> isEmpty(<span class="va">self</span>):</span>
-<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._queueSize <span class="op">==</span> <span class="dv">0</span></span>
-<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> size(<span class="va">self</span>):</span>
-<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._queueSize</span>
-<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: LinkedQueueIterator *** */</span></span>
-<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__iter__</span>(<span class="va">self</span>):</span>
-<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>        current <span class="op">=</span> <span class="va">self</span>._front</span>
-<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> current <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
-<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a>            <span class="cf">yield</span> current.elem</span>
-<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a>            current <span class="op">=</span> current.<span class="bu">next</span></span>
-<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: LinkedQueueIterator *** */</span></span>
-<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-53"><a href="#cb19-53" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: LinkedQueueNode *** */</span></span>
-<span id="cb19-54"><a href="#cb19-54" aria-hidden="true" tabindex="-1"></a><span class="co"># Python does not have internal classes, so we have to make the queue node standalone.</span></span>
-<span id="cb19-55"><a href="#cb19-55" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LinkedQueueNode:</span>
-<span id="cb19-56"><a href="#cb19-56" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, elem, <span class="bu">next</span>):</span>
-<span id="cb19-57"><a href="#cb19-57" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.elem <span class="op">=</span> elem   <span class="co"># Value for this node</span></span>
-<span id="cb19-58"><a href="#cb19-58" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.<span class="bu">next</span> <span class="op">=</span> <span class="bu">next</span>   <span class="co"># Pointer to next node in queue</span></span>
-<span id="cb19-59"><a href="#cb19-59" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: LinkedQueueNode *** */</span></span></code></pre></div>
-<div class="sourceCode" id="cb20"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: LinkedQueueInit *** */</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LinkedQueue<span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="kw">implements</span> <span class="bu">Queue</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="bu">Node</span> front<span class="op">;</span>      <span class="co">// Pointer to front queue node</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="bu">Node</span> rear<span class="op">;</span>       <span class="co">// Pointer to rear queue node</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> queueSize<span class="op">;</span>   <span class="co">// Size of queue</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">LinkedQueue</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>        front <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>        rear <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>        queueSize <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: LinkedQueueInit *** */</span></span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: LinkedQueueNode *** */</span></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="kw">class</span> <span class="bu">Node</span> <span class="op">{</span></span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>        E elem<span class="op">;</span>       <span class="co">// Value for this node</span></span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Node</span> next<span class="op">;</span>    <span class="co">// Pointer to next node in queue</span></span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Node</span><span class="op">(</span>E elem<span class="op">,</span> <span class="bu">Node</span> next<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>            <span class="kw">this</span><span class="op">.</span><span class="fu">elem</span> <span class="op">=</span> elem<span class="op">;</span></span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>            <span class="kw">this</span><span class="op">.</span><span class="fu">next</span> <span class="op">=</span> next<span class="op">;</span></span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: LinkedQueueNode *** */</span></span>
-<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: LinkedQueueEnqueue *** */</span></span>
-<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">enqueue</span><span class="op">(</span>E x<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Node</span> newRear <span class="op">=</span> <span class="kw">new</span> <span class="bu">Node</span><span class="op">(</span>x<span class="op">,</span> <span class="kw">null</span><span class="op">);</span></span>
-<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>queueSize <span class="op">==</span> <span class="dv">0</span><span class="op">)</span></span>
-<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>            front <span class="op">=</span> newRear<span class="op">;</span></span>
-<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span></span>
-<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>            rear<span class="op">.</span><span class="fu">next</span> <span class="op">=</span> newRear<span class="op">;</span></span>
-<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>        rear <span class="op">=</span> newRear<span class="op">;</span></span>
-<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>        queueSize<span class="op">++;</span></span>
-<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: LinkedQueueEnqueue *** */</span></span>
-<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: LinkedQueuePeek *** */</span></span>
-<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> E <span class="fu">peek</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!(</span>queueSize <span class="op">&gt;</span> <span class="dv">0</span><span class="op">))</span> <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">NoSuchElementException</span><span class="op">(</span><span class="st">&quot;peek from empty queue&quot;</span><span class="op">);</span></span>
-<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> front<span class="op">.</span><span class="fu">elem</span><span class="op">;</span></span>
-<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: LinkedQueuePeek *** */</span></span>
-<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: LinkedQueueDequeue *** */</span></span>
-<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> E <span class="fu">dequeue</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!(</span>queueSize <span class="op">&gt;</span> <span class="dv">0</span><span class="op">))</span> <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">NoSuchElementException</span><span class="op">(</span><span class="st">&quot;dequeue from empty queue&quot;</span><span class="op">);</span></span>
-<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Node</span> removed <span class="op">=</span> front<span class="op">;</span></span>
-<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a>        front <span class="op">=</span> removed<span class="op">.</span><span class="fu">next</span><span class="op">;</span></span>
-<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a>        removed<span class="op">.</span><span class="fu">next</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span>   <span class="co">// For garbage collection</span></span>
-<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a>        queueSize<span class="op">--;</span></span>
-<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>queueSize <span class="op">==</span> <span class="dv">0</span><span class="op">)</span></span>
-<span id="cb20-53"><a href="#cb20-53" aria-hidden="true" tabindex="-1"></a>            rear <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> removed<span class="op">.</span><span class="fu">elem</span><span class="op">;</span></span>
-<span id="cb20-55"><a href="#cb20-55" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb20-56"><a href="#cb20-56" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: LinkedQueueDequeue *** */</span></span>
-<span id="cb20-57"><a href="#cb20-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-58"><a href="#cb20-58" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">isEmpty</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb20-59"><a href="#cb20-59" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> queueSize <span class="op">==</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb20-60"><a href="#cb20-60" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb20-61"><a href="#cb20-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-62"><a href="#cb20-62" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">size</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb20-63"><a href="#cb20-63" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> queueSize<span class="op">;</span></span>
-<span id="cb20-64"><a href="#cb20-64" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb20-65"><a href="#cb20-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-66"><a href="#cb20-66" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: LinkedQueueIterator *** */</span></span>
-<span id="cb20-67"><a href="#cb20-67" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">Iterator</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="fu">iterator</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb20-68"><a href="#cb20-68" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="kw">new</span> <span class="fu">LinkedQueueIterator</span><span class="op">();</span></span>
-<span id="cb20-69"><a href="#cb20-69" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb20-70"><a href="#cb20-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-71"><a href="#cb20-71" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="kw">class</span> LinkedQueueIterator <span class="kw">implements</span> <span class="bu">Iterator</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb20-72"><a href="#cb20-72" aria-hidden="true" tabindex="-1"></a>        <span class="kw">private</span> <span class="bu">Node</span> current<span class="op">;</span></span>
-<span id="cb20-73"><a href="#cb20-73" aria-hidden="true" tabindex="-1"></a>        <span class="fu">LinkedQueueIterator</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb20-74"><a href="#cb20-74" aria-hidden="true" tabindex="-1"></a>            current <span class="op">=</span> front<span class="op">;</span></span>
-<span id="cb20-75"><a href="#cb20-75" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb20-76"><a href="#cb20-76" aria-hidden="true" tabindex="-1"></a>        <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">hasNext</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb20-77"><a href="#cb20-77" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> current <span class="op">!=</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb20-78"><a href="#cb20-78" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb20-79"><a href="#cb20-79" aria-hidden="true" tabindex="-1"></a>        <span class="kw">public</span> E <span class="fu">next</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb20-80"><a href="#cb20-80" aria-hidden="true" tabindex="-1"></a>            E x <span class="op">=</span> current<span class="op">.</span><span class="fu">elem</span><span class="op">;</span></span>
-<span id="cb20-81"><a href="#cb20-81" aria-hidden="true" tabindex="-1"></a>            current <span class="op">=</span> current<span class="op">.</span><span class="fu">next</span><span class="op">;</span></span>
-<span id="cb20-82"><a href="#cb20-82" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> x<span class="op">;</span></span>
-<span id="cb20-83"><a href="#cb20-83" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb20-84"><a href="#cb20-84" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb20-85"><a href="#cb20-85" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: LinkedQueueIterator *** */</span></span>
-<span id="cb20-86"><a href="#cb20-86" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
 </section>
 <section id="comparison-of-array-based-and-linked-queues" class="level3"

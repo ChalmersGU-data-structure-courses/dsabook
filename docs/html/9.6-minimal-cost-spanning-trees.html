@@ -175,16 +175,16 @@
 </div>
 <div class="sitenav">
 <span class="navlink">
-<span class="navlink-label">Next:</span> <a href="9.6-all-pairs-shortest-paths-optional.html" accesskey="n" rel="next">All-Pairs Shortest Paths (optional)</a>
+<span class="navlink-label">Next:</span> <a href="9.7-all-pairs-shortest-paths-optional.html" accesskey="n" rel="next">All-Pairs Shortest Paths (optional)</a>
 </span>
 <span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="9.4-shortest-paths-problems.html" accesskey="p" rel="previous">Shortest-Paths Problems</a>
+<span class="navlink-label">Previous:</span> <a href="9.5-shortest-paths-problems.html" accesskey="p" rel="previous">Shortest-Paths Problems</a>
 </span>
 </div>
 </nav>
 <section id="minimal-cost-spanning-trees" class="level2"
-data-number="9.5">
-<h2 data-number="9.5"><span class="header-section-number">9.5</span>
+data-number="9.6">
+<h2 data-number="9.6"><span class="header-section-number">9.6</span>
 Minimal Cost Spanning Trees</h2>
 <p>The <a href="10-glossary.html#minimal-cost-spanning-tree"
 class="term"
@@ -212,7 +212,7 @@ Thus, the MCST is a free tree with
 edges. The name “minimum-cost spanning tree” comes from the fact that
 the required set of edges forms a tree, it spans the vertices (i.e., it
 connects them together), and it has minimum cost. <a
-href="9.5-minimal-cost-spanning-trees.html#MCSTdgm">Figure #MCSTdgm</a>
+href="9.6-minimal-cost-spanning-trees.html#MCSTdgm">Figure #MCSTdgm</a>
 shows the MCST for an example graph.</p>
 <div id="MCSTdgm">
 <p>
@@ -228,12 +228,12 @@ could be replaced with edge
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>D</mi><mo>,</mo><mi>F</mi><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(D, F)</annotation></semantics></math>
 to form a different MCST with equal cost.</p>
 </div>
-<section id="prims-algorithm" class="level3" data-number="9.5.1">
-<h3 data-number="9.5.1"><span class="header-section-number">9.5.1</span>
+<section id="prims-algorithm" class="level3" data-number="9.6.1">
+<h3 data-number="9.6.1"><span class="header-section-number">9.6.1</span>
 Prim’s Algorithm</h3>
 <p>The first of our two algorithms for finding MCSTs is commonly
 referred to as <a
-href="9.5-minimal-cost-spanning-trees.html#prims-algorithm" class="term"
+href="9.6-minimal-cost-spanning-trees.html#prims-algorithm" class="term"
 title="A greedy algorithm for computing the MCST of a graph. It is nearly identical to Dijkstra&#39;s algorithm for solving the single-source shortest paths problem, with the only difference being the calculation done to update the best-known distance.">Prim’s
 algorithm</a>. Prim’s algorithm is very simple. Start with any Vertex
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>
@@ -263,52 +263,42 @@ seeking not the next closest vertex to the start vertex, but rather the
 next closest vertex to any vertex currently in the MCST. Thus the
 following lines in Djikstra’s algorithm:</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (D.get(w) <span class="op">&gt;</span> D.get(v) <span class="op">+</span> e.weight)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    D.put(w, D.get(v) <span class="op">+</span> e.weight)</span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dist <span class="op">=</span> D.<span class="bu">get</span>(v) <span class="op">+</span> e.weight</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> dist <span class="op">&lt;</span> D.<span class="bu">get</span>(w):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    D.<span class="bu">put</span>(w, dist)</span></code></pre></div>
 <p>are replaced with the following lines in Prim’s algorithm:</p>
 <div class="sourceCode" id="cb2"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (D.get(w) <span class="op">&gt;</span> e.weight)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    D.put(w, e.weight)</span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> e.weight <span class="op">&lt;</span> D.<span class="bu">get</span>(w):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    D.<span class="bu">put</span>(w, e.weight)</span></code></pre></div>
 <p>The following code shows an implementation for Prim’s algorithm that
 searches the distance matrix for the next closest vertex.</p>
 <div class="sourceCode" id="cb3"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Compute shortest distances to the MCST, store them in D.</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Parent[i] will hold the index for the vertex that is i&#39;s parent in the MCST</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">void</span> <span class="op">&lt;</span>V<span class="op">&gt;</span> <span class="fu">Prim</span><span class="op">(</span>Graph<span class="op">&lt;</span>V<span class="op">&gt;</span> G<span class="op">,</span> V s<span class="op">,</span> <span class="bu">Map</span><span class="op">&lt;</span>V<span class="op">,</span><span class="bu">Double</span><span class="op">&gt;</span> D<span class="op">,</span> <span class="bu">Map</span><span class="op">&lt;</span>V<span class="op">,</span>V<span class="op">&gt;</span> Parent<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Set</span><span class="op">&lt;</span>V<span class="op">&gt;</span> visited <span class="op">=</span> <span class="kw">new</span> <span class="bu">Set</span><span class="op">&lt;&gt;();</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span>V v <span class="op">:</span> G<span class="op">.</span><span class="fu">vertices</span><span class="op">())</span>     <span class="co">// Initialize</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        D<span class="op">.</span><span class="fu">put</span><span class="op">(</span>v<span class="op">,</span> <span class="bu">Double</span><span class="op">.</span><span class="fu">POSITIVE_INFINITY</span><span class="op">);</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    D<span class="op">.</span><span class="fu">put</span><span class="op">(</span>s<span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i<span class="op">=</span><span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> G<span class="op">.</span><span class="fu">vertexCount</span><span class="op">();</span> i<span class="op">++)</span> <span class="op">{</span>   <span class="co">// Process the vertices</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        V v <span class="op">=</span> <span class="fu">minVertex</span><span class="op">(</span>G<span class="op">,</span> D<span class="op">);</span>   <span class="co">// Find next-closest vertex</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        visited<span class="op">.</span><span class="fu">add</span><span class="op">(</span>v<span class="op">);</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>D<span class="op">.</span><span class="fu">get</span><span class="op">(</span>v<span class="op">)</span> <span class="op">==</span> <span class="bu">Double</span><span class="op">.</span><span class="fu">POSITIVE_INFINITY</span><span class="op">)</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span><span class="op">;</span>              <span class="co">// Unreachable</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!</span>v<span class="op">.</span><span class="fu">equals</span><span class="op">(</span>s<span class="op">))</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>            <span class="fu">AddEdgetoMST</span><span class="op">(</span>Parent<span class="op">.</span><span class="fu">get</span><span class="op">(</span>v<span class="op">),</span> v<span class="op">);</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span>Edge<span class="op">&lt;</span>V<span class="op">&gt;</span> e <span class="op">:</span> G<span class="op">.</span><span class="fu">outgoingEdges</span><span class="op">(</span>v<span class="op">))</span> <span class="op">{</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>            V w <span class="op">=</span> e<span class="op">.</span><span class="fu">end</span><span class="op">;</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>D<span class="op">.</span><span class="fu">get</span><span class="op">(</span>w<span class="op">)</span> <span class="op">&gt;</span> e<span class="op">.</span><span class="fu">weight</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>                D<span class="op">.</span><span class="fu">put</span><span class="op">(</span>w<span class="op">,</span> e<span class="op">.</span><span class="fu">weight</span><span class="op">);</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>                Parent<span class="op">.</span><span class="fu">put</span><span class="op">(</span>w<span class="op">,</span> v<span class="op">);</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>For each vertex
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>I</mi><annotation encoding="application/x-tex">I</annotation></semantics></math>,
-when
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>I</mi><annotation encoding="application/x-tex">I</annotation></semantics></math>
-is processed by Prim’s algorithm, an edge going to
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>I</mi><annotation encoding="application/x-tex">I</annotation></semantics></math>
-is added to the MCST that we are building. Array <code>V[I]</code>
-stores the previously visited vertex that is closest to Vertex <span
-class="title-ref">I</span>. This information lets us know which edge
-goes into the MCST when Vertex
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>I</mi><annotation encoding="application/x-tex">I</annotation></semantics></math>
-is processed. The implementation above also contains calls to
-<code>AddEdgetoMST</code> to indicate which edges are actually added to
-the MCST.</p>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Compute shortest distances to the MCST, store them in D.</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">// parent.get(v) will hold the index for the vertex that is v&#39;s parent in the MCST</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> Prim(G, s):</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    visited <span class="op">=</span> <span class="kw">new</span> <span class="bu">Set</span>()</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    parent <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>()</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    D <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>()</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> v <span class="kw">in</span> G.vertices():</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        D.<span class="bu">put</span>(v, ∞)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    D.<span class="bu">put</span>(s, <span class="dv">0</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">repeat</span> G.vertxCount() <span class="kw">times</span>:  <span class="co">// Process the vertices</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        v <span class="op">=</span> minVertex(G, D, visited)  <span class="co">// Find next-closest vertex</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        visited.<span class="bu">add</span>(v)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> D.<span class="bu">get</span>(v) <span class="op">==</span> ∞:</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> parent</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="kw">each</span> e <span class="kw">in</span> G.outgoingEdges(v):</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>            w <span class="op">=</span> e.end</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> e.weight <span class="op">&lt;</span> D.<span class="bu">get</span>(w):</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>                D.<span class="bu">put</span>(w, e.weight)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>                parent.<span class="bu">put</span>(w, v)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> parent</span></code></pre></div>
+<p>For each vertex <em>e</em>, when <em>e</em> is processed by Prim’s
+algorithm, an edge going to <em>e</em> is added to the MCST that we are
+building. Array <code>V[e]</code> stores the previously visited vertex
+that is closest to Vertex <em>e</em>. This information lets us know
+which edge goes into the MCST when Vertex <em>e</em> is processed.</p>
 <p>
 <div id="primCON" class="ssAV" data-short-name="primCON" data-long-name="Prim's Minimum Cost Spanning Tree Algorithm Slideshow" alt="Prim's Minimum Cost Spanning Tree Algorithm Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
@@ -319,8 +309,8 @@ the MCST.</p>
 </p>
 </section>
 <section id="prims-algorithm-priority-queue-implementation"
-class="level3" data-number="9.5.2">
-<h3 data-number="9.5.2"><span class="header-section-number">9.5.2</span>
+class="level3" data-number="9.6.2">
+<h3 data-number="9.6.2"><span class="header-section-number">9.6.2</span>
 Prim’s Algorithm, Priority Queue Implementation</h3>
 <p>Alternatively, we can implement Prim’s algorithm using a <a
 href="10-glossary.html#priority-queue" class="term"
@@ -328,39 +318,34 @@ title="An ADT whose primary operations of insert of records, and deletion of the
 queue</a> to find the next closest vertex, as shown next. As with the
 priority queue version of Dijkstra’s algorithm, the <a
 href="10-glossary.html#heap" class="term"
-title="This term has two different meanings. Uncommonly, it is a synonym for free store. Most often it is used to refer to a particular data structure. This data structure is a complete binary tree with the requirement that every node has a value greater than its children (called a max heap), or else the requirement that every node has a value less than its children (called a min heap). Since it is a complete binary tree, a heap is nearly always implemented using an array rather than an explicit tree structure. To add a new value to a heap, or to remove the extreme value (the max value in a max-heap or min value in a min-heap) and update the heap, takes $\Theta(\log n)$ time in the worst case. However, if given all of the values in an unordered array, the values can be re-arranged to form a heap in only $\Theta(n)$ time. Due to its space and time efficiency, the heap is a popular choice for implementing a priority queue.">heap</a>
+title="The head data structure is a complete binary tree with the requirement that every node has a value greater than its children (called a max heap), or else the requirement that every node has a value less than its children (called a min heap). Since it is a complete binary tree, a heap is nearly always implemented using an array rather than an explicit tree structure. To add a new value to a heap, or to remove the extreme value (the max value in a max-heap or min value in a min-heap) and update the heap, takes $\Theta(\log n)$ time in the worst case. However, if given all of the values in an unordered array, the values can be re-arranged to form a heap in only $\Theta(n)$ time. Due to its space and time efficiency, the heap is a popular choice for implementing a priority queue. Uncommonly, *heap* is a synonym for free store.">heap</a>
 stores <code>DijkElem</code> objects.</p>
 <div class="sourceCode" id="cb4"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Prims MCST algorithm: priority queue version</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">void</span> <span class="op">&lt;</span>V<span class="op">&gt;</span> <span class="fu">PrimPQ</span><span class="op">(</span>Graph G<span class="op">,</span> V s<span class="op">,</span> <span class="bu">Map</span><span class="op">&lt;</span>V<span class="op">,</span><span class="bu">Double</span><span class="op">&gt;</span> D<span class="op">,</span> <span class="bu">Map</span><span class="op">&lt;</span>V<span class="op">,</span>V<span class="op">&gt;</span> Parent<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    MinHeap H <span class="op">=</span> <span class="kw">new</span> <span class="fu">MinHeap</span><span class="op">();</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    H<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="kw">new</span> <span class="fu">KVPair</span><span class="op">(</span><span class="dv">0</span><span class="op">,</span> s<span class="op">));</span>   <span class="co">// Initial vertex</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Set</span><span class="op">&lt;</span>V<span class="op">&gt;</span> visited <span class="op">=</span> <span class="kw">new</span> <span class="bu">Set</span><span class="op">&lt;&gt;();</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span>V v <span class="op">:</span> G<span class="op">.</span><span class="fu">vertices</span><span class="op">())</span>  <span class="co">// Initialize distance</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        D<span class="op">.</span><span class="fu">put</span><span class="op">(</span>v<span class="op">,</span> <span class="bu">Double</span><span class="op">.</span><span class="fu">POSITIVE_INFINITY</span><span class="op">);</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    D<span class="op">.</span><span class="fu">put</span><span class="op">(</span>s<span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(!</span>H<span class="op">.</span><span class="fu">isEmpty</span><span class="op">())</span> <span class="op">{</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        V v <span class="op">=</span> H<span class="op">.</span><span class="fu">removeMin</span><span class="op">().</span><span class="fu">value</span><span class="op">();</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!</span>visited<span class="op">.</span><span class="fu">contains</span><span class="op">(</span>v<span class="op">))</span> <span class="op">{</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>            visited<span class="op">.</span><span class="fu">add</span><span class="op">(</span>v<span class="op">);</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>D<span class="op">.</span><span class="fu">get</span><span class="op">(</span>v<span class="op">)</span> <span class="op">==</span> <span class="bu">Double</span><span class="op">.</span><span class="fu">POSITIVE_INFINITY</span><span class="op">)</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span><span class="op">;</span>     <span class="co">// Unreachable</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(!</span>v<span class="op">.</span><span class="fu">equals</span><span class="op">(</span>s<span class="op">))</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>                <span class="fu">AddEdgetoMST</span><span class="op">(</span>Parent<span class="op">.</span><span class="fu">get</span><span class="op">(</span>v<span class="op">),</span> v<span class="op">);</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> <span class="op">(</span>Edge<span class="op">&lt;</span>V<span class="op">&gt;</span> e <span class="op">:</span> G<span class="op">.</span><span class="fu">outgoingEdges</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>                V w <span class="op">=</span> e<span class="op">.</span><span class="fu">end</span><span class="op">;</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="op">(</span>D<span class="op">.</span><span class="fu">get</span><span class="op">(</span>w<span class="op">)</span> <span class="op">&gt;</span> e<span class="op">.</span><span class="fu">weight</span><span class="op">)</span> <span class="op">{</span> <span class="co">// Update D</span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>                    D<span class="op">.</span><span class="fu">put</span><span class="op">(</span>w<span class="op">,</span> e<span class="op">.</span><span class="fu">weight</span><span class="op">);</span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>                    Parent<span class="op">.</span><span class="fu">put</span><span class="op">(</span>w<span class="op">,</span> v<span class="op">);</span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>                    H<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="kw">new</span> <span class="fu">KVPair</span><span class="op">(</span>D<span class="op">.</span><span class="fu">get</span><span class="op">(</span>W<span class="op">),</span> w<span class="op">));</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>                <span class="op">}</span></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Prim&#39;s MCST algorithm: priority queue version</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> PrimPQ(G, s):</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    visited <span class="op">=</span> <span class="kw">new</span> <span class="bu">Set</span>()</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    parent <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>()</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    D <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>()</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (v : G.vertices())</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        D.<span class="bu">put</span>(v, ∞)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    D.<span class="bu">put</span>(s, <span class="dv">0</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    agenda <span class="op">=</span> <span class="kw">new</span> <span class="bu">PriorityQueue</span>()</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    agenda.<span class="bu">add</span>(<span class="kw">new</span> <span class="bu">KVPair</span>(<span class="dv">0</span>, s))</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="kw">not</span> agenda.<span class="bu">isEmpty</span>():</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        v <span class="op">=</span> agenda.<span class="bu">removeMin</span>().value</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> v <span class="kw">not</span> <span class="kw">in</span> visited:</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>            visited.<span class="bu">add</span>(v)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> D.<span class="bu">get</span>(v) <span class="op">==</span> ∞:</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> parent</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> <span class="kw">each</span> e <span class="kw">in</span> G.outgoingEdges():</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>                w <span class="op">=</span> e.end</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> e.weight <span class="op">&lt;</span> D.<span class="bu">get</span>(w):</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>                    D.<span class="bu">put</span>(w, e.weight)</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>                    parent.<span class="bu">put</span>(w, v)</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>                    agenda.<span class="bu">add</span>(<span class="kw">new</span> <span class="bu">KVPair</span>(e.weight, w))</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> parent</span></code></pre></div>
 <p>Prim’s algorithm is an example of a greedy algorithm. At each step in
 the <code>for</code> loop, we select the least-cost edge that connects
 some marked vertex to some unmarked vertex. The algorithm does not
@@ -435,7 +420,7 @@ must be of lower cost than edge
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mi>j</mi></msub><annotation encoding="application/x-tex">e_j</annotation></semantics></math>,
 because Prim’s algorithm did not generate an MCST. This situation is
 illustrated in <a
-href="9.5-minimal-cost-spanning-trees.html#PrimProof">Figure
+href="9.6-minimal-cost-spanning-trees.html#PrimProof">Figure
 #PrimProof</a>. However, Prim’s algorithm would have selected the
 least-cost edge available. It would have selected
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>e</mi><mi>′</mi></mrow><annotation encoding="application/x-tex">e&#39;</annotation></semantics></math>,
@@ -476,11 +461,11 @@ Your browser does not support iframes.
 </div>
 </p>
 </section>
-<section id="kruskals-algorithm" class="level3" data-number="9.5.3">
-<h3 data-number="9.5.3"><span class="header-section-number">9.5.3</span>
+<section id="kruskals-algorithm" class="level3" data-number="9.6.3">
+<h3 data-number="9.6.3"><span class="header-section-number">9.6.3</span>
 Kruskal’s Algorithm</h3>
 <p>Our next MCST algorithm is commonly referred to as <a
-href="9.5-minimal-cost-spanning-trees.html#kruskals-algorithm"
+href="9.6-minimal-cost-spanning-trees.html#kruskals-algorithm"
 class="term"
 title="An algorithm for computing the MCST of a graph. During processing, it makes use of the UNION/FIND process to efficiently determine of two vertices are within the same subgraph.">Kruskal’s
 algorithm</a>. Kruskal’s algorithm is also a simple, greedy algorithm.
@@ -505,7 +490,7 @@ array and then sorting the array. Another possibility is to use a
 <em>minimum</em> <a href="10-glossary.html#priority-queue" class="term"
 title="An ADT whose primary operations of insert of records, and deletion of the greatest (or, in an alternative implementation, the least) valued record. Most often implemented using the heap data structure. The name comes from a common application where the records being stored represent tasks, with the ordering values based on the priorities of the tasks.">priority
 queue</a>, similar to what we did in <a
-href="9.5-minimal-cost-spanning-trees.html#prims-algorithm">Prim’s
+href="9.6-minimal-cost-spanning-trees.html#prims-algorithm">Prim’s
 algorithm</a>.</p>
 <p>The only tricky part to this algorithm is determining if two vertices
 belong to the same equivalence class. Fortunately, the ideal algorithm
@@ -517,29 +502,26 @@ since the MCST will never have more than
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="true" form="postfix">|</mo></mrow><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">|\mathbf{V}|-1</annotation></semantics></math>
 edges, we can return as soon as the MCST contains enough edges.</p>
 <div class="sourceCode" id="cb5"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Kruskal&#39;s MST algorithm</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">void</span> <span class="op">&lt;</span>V<span class="op">&gt;</span> <span class="fu">Kruskal</span><span class="op">(</span>Graph<span class="op">&lt;</span>V<span class="op">&gt;</span> G<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    ParPtrTree A <span class="op">=</span> <span class="kw">new</span> <span class="fu">ParPtrTree</span><span class="op">();</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span>V v <span class="op">:</span> G<span class="op">.</span><span class="fu">vertices</span><span class="op">())</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        A<span class="op">.</span><span class="fu">MAKE_SET</span><span class="op">(</span>v<span class="op">);</span>   <span class="co">// Create one singleton set for each vertex</span></span>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Kruskal&#39;s MCST algorithm</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> Kruskal(G):</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    A <span class="op">=</span> <span class="kw">new</span> ParentPointerTree()</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> v <span class="kw">in</span> G.vertices():</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        A.MAKE_SET(v)  <span class="co">// Create one singleton set for each vertex</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    Edge<span class="op">&lt;</span>V<span class="op">&gt;[]</span> E <span class="op">=</span> <span class="kw">new</span> Edge<span class="op">&lt;&gt;[</span>edgeCount<span class="op">];</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span>V v <span class="op">:</span> G<span class="op">.</span><span class="fu">vertices</span><span class="op">())</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span>Edge<span class="op">&lt;</span>V<span class="op">&gt;</span> edge <span class="op">:</span> G<span class="op">.</span><span class="fu">outgoingEdges</span><span class="op">(</span>v<span class="op">))</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>            E<span class="op">.</span><span class="fu">append</span><span class="op">(</span>edge<span class="op">);</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Arrays</span><span class="op">.</span><span class="fu">sort</span><span class="op">(</span>E<span class="op">,</span> weightComparator<span class="op">);</span>       <span class="co">// Sort the edges by increasing weight</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> numEdgesInMST <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span>Edge<span class="op">&lt;</span>V<span class="op">&gt;</span> edge <span class="op">:</span> E<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>A<span class="op">.</span><span class="fu">FIND</span><span class="op">(</span>edge<span class="op">.</span><span class="fu">start</span><span class="op">)</span> <span class="op">!=</span> A<span class="op">.</span><span class="fu">FIND</span><span class="op">(</span>edge<span class="op">.</span><span class="fu">end</span><span class="op">))</span> <span class="op">{</span>  <span class="co">// If the vertices are not connected</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>            <span class="fu">AddEdgetoMST</span><span class="op">(</span>edge<span class="op">);</span>             <span class="co">// Add this edge to the MCST</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>            numEdgesInMST<span class="op">++;</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>numEdgesInMST <span class="op">&gt;=</span> G<span class="op">.</span><span class="fu">vertexCount</span><span class="op">()-</span><span class="dv">1</span><span class="op">)</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span><span class="op">;</span>                     <span class="co">// Stop when the MST has |V|-1 edges</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>            A<span class="op">.</span><span class="fu">UNION</span><span class="op">(</span>edge<span class="op">.</span><span class="fu">start</span><span class="op">,</span> edge<span class="op">.</span><span class="fu">end</span><span class="op">);</span>  <span class="co">// Connect the two vertices</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    edges <span class="op">=</span> <span class="kw">new</span> <span class="bu">PriorityQueue</span>()</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> v <span class="kw">in</span> G.vertices():</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="kw">each</span> e <span class="kw">in</span> G.outgoingEdges(v):</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>            edges.<span class="bu">add</span>(<span class="kw">new</span> <span class="bu">KVPair</span>(e.weight, e))</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    numEdgesInMCST <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="kw">not</span> edges.<span class="bu">isEmpty</span>():</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        e <span class="op">=</span> edges.<span class="bu">removeMin</span>()</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> A.FIND(e.start) <span class="op">!=</span> A.FIND(e.end):  <span class="co">// If the vertices are not connected...</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>            AddEdgetoMCST(edge)               <span class="co">// ...add this edge to the MCST</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>            numEdgesInMCST <span class="op">=</span> numEdgesInMCST <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> numEdgesInMCST <span class="op">&gt;=</span> G.vertexCount()<span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> A                      <span class="co">// Stop when the MCST has |V|-1 edges</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>            A.UNION(e.start, e.end)           <span class="co">// Connect the two vertices</span></span></code></pre></div>
 <p>Kruskal’s algorithm is dominated by the time required to process the
 edges. The <code>FIND</code> and <code>UNION</code> functions are nearly
 constant in time if path compression and weighted union is used. Thus,

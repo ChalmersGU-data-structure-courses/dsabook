@@ -198,11 +198,14 @@ appears in the picture. Assume that the picture is a rectangle with
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>
 pixels. A pseudocode algorithm to solve the problem follows.</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="op">=</span> <span class="dv">0</span> ... C<span class="op">-</span><span class="dv">1</span>:            <span class="co"># Initialize count</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    count[i] <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="op">=</span> <span class="dv">0</span> ... P<span class="op">-</span><span class="dv">1</span>:        <span class="co"># Look at all of the pixels</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        count[value(i)] <span class="op">+=</span> <span class="dv">1</span>  <span class="co"># Increment a pixel value count</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    sort(count)               <span class="co"># Sort pixel value counts</span></span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Initialize the counts:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="op">=</span> <span class="dv">0</span> <span class="kw">to</span> C<span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    count[i] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Increment the pixel value count for each of the pixels:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="op">=</span> <span class="dv">0</span> <span class="kw">to</span> P<span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    count[value(i)] <span class="op">=</span> count[value(i)]<span class="op">+</span><span class="dv">1</span>  </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">// Sort the pixel value counts:</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>sort(count)</span></code></pre></div>
 <p>In this example, <code>count</code> is an array of size
 <code>C</code> that stores the number of pixels for each color value.
 Function <code>value(i)</code> returns the color value for pixel

@@ -183,44 +183,23 @@
 <section id="arrays-as-sets-or-maps" class="level2" data-number="2.14">
 <h2 data-number="2.14"><span class="header-section-number">2.14</span>
 Arrays as Sets or Maps</h2>
-<p>In Chapter <a
-href="1-introduction.html#introduction">Introduction</a> we learnt about
-<em>sets</em> and <em>maps</em>, two of the most important ADTs.</p>
+<p>In the <a
+href="1.4-information-retrieval-sets-and-maps.html#information-retrieval-sets-and-maps">introduction</a>
+chapter we learnt about <em>sets</em> and <em>maps</em>, two of the most
+important ADTs.</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Set(Collection):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> add(<span class="va">self</span>, x):      <span class="st">&quot;&quot;&quot;Adds x to the set. Returns true if the element wasn&#39;t already in the set.&quot;&quot;&quot;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> remove(<span class="va">self</span>, x):   <span class="st">&quot;&quot;&quot;Removes x from the set. Returns true if the element was in the set.&quot;&quot;&quot;</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> contains(<span class="va">self</span>, x): <span class="st">&quot;&quot;&quot;Returns true if x is in the set.&quot;&quot;&quot;</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Note: __iter__() can yield the elements in any order.</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Note: This is a subset of java.util.Set</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Set</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="kw">extends</span> <span class="bu">Collection</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">boolean</span> <span class="fu">add</span><span class="op">(</span>E x<span class="op">);</span>       <span class="co">// Adds x to the set. Returns true if the element wasn&#39;t already in the set.</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">boolean</span> <span class="fu">remove</span><span class="op">(</span>E x<span class="op">);</span>    <span class="co">// Removes x from the set. Returns true if the element was in the set.</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">boolean</span> <span class="fu">contains</span><span class="op">(</span>E x<span class="op">);</span>  <span class="co">// Returns true if x is in the set.</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Note: iterator() can yield the elements in any order.</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Map(Iterable):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> put(<span class="va">self</span>, key, value):  <span class="st">&quot;&quot;&quot;Sets the value of the given key. Returns the previous value, or None.&quot;&quot;&quot;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get(<span class="va">self</span>, key):         <span class="st">&quot;&quot;&quot;Returns the value associated with the given key, or None if the key is not there.&quot;&quot;&quot;</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> remove(<span class="va">self</span>, key):      <span class="st">&quot;&quot;&quot;Removes and returns the value associated with the given key, or None if there is no key.&quot;&quot;&quot;</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> containsKey(<span class="va">self</span>, key): <span class="st">&quot;&quot;&quot;Returns true if the key has an associated value.&quot;&quot;&quot;</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> isEmpty(<span class="va">self</span>):          <span class="st">&quot;&quot;&quot;Returns true if there are no keys.&quot;&quot;&quot;</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> size(<span class="va">self</span>):             <span class="st">&quot;&quot;&quot;Returns the number of keys (i.e., the number of key/value pairs).&quot;&quot;&quot;</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Note: __iter__() can yield the keys in any order.</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Note: This is a subset of java.util.Map, where</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">// `iterator` iterates over the keys, and replaces the more complicated `keySet`.</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Map</span><span class="op">&lt;</span>K<span class="op">,</span> V<span class="op">&gt;</span> <span class="kw">extends</span> <span class="bu">Iterable</span><span class="op">&lt;</span>K<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    V <span class="fu">put</span><span class="op">(</span>K key<span class="op">,</span> V value<span class="op">);</span>       <span class="co">// Sets the value of the given key. Returns the previous value, or null.</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    V <span class="fu">get</span><span class="op">(</span>K key<span class="op">);</span>                <span class="co">// Returns the value associated with the given key, or null if the key is not there.</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    V <span class="fu">remove</span><span class="op">(</span>K key<span class="op">);</span>             <span class="co">// Removes and returns the value associated with the given key, or null if there is no key.</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">boolean</span> <span class="fu">containsKey</span><span class="op">(</span>K key<span class="op">);</span>  <span class="co">// Returns true if the key has an associated value.</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">boolean</span> <span class="fu">isEmpty</span><span class="op">();</span>           <span class="co">// Returns true if there are no keys.</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="fu">size</span><span class="op">();</span>                  <span class="co">// Returns the number of keys (i.e., the number of key/value pairs).</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Note: iterator() can yield the keys in any order.</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Set</span> <span class="kw">extends</span> <span class="bu">Collection</span>:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">add</span>(x)       <span class="co">// Adds x to the set. Returns true if the element wasn&#39;t already in the set.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">remove</span>(x)    <span class="co">// Removes x from the set. Returns true if the element was in the set.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">contains</span>(x)  <span class="co">// Returns true if x is in the set.</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Map</span> <span class="kw">extends</span> <span class="bu">Iterable</span>:</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">put</span>(key, value)   <span class="co">// Sets the value of the given key. Returns the previous value, or nothing.</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">get</span>(key)          <span class="co">// Returns the value associated with the given key, or nothing if the key is not there.</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">remove</span>(key)       <span class="co">// Removes and returns the value associated with the given key, or nothing if there is no key.</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">containsKey</span>(key)  <span class="co">// Returns true if the key has an associated value.</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">isEmpty</span>()         <span class="co">// Returns true if there are no keys.</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span>()            <span class="co">// Returns the number of keys (i.e., the number of key/value pairs).</span></span></code></pre></div>
 <p>We can implement either of these ADTs using an array. For a set, we
 can use an array of elements. For a map, we have two choices:</p>
 <ul>
@@ -256,52 +235,24 @@ items in it. Sorted arrays also support the <em>sorted set</em> and
 <em>sorted map</em> operations such as <em>range queries</em> – these
 can also be implemented using binary search. As a reminder, here are the
 relevant operations:</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SortedSet(Set):</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> first(<span class="va">self</span>):            <span class="st">&quot;&quot;&quot;Returns the first (smallest) element. Raises an exception if the set is empty.&quot;&quot;&quot;</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> last(<span class="va">self</span>):             <span class="st">&quot;&quot;&quot;Returns the last (largest) element. Raises an exception if the set is empty.&quot;&quot;&quot;</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> floor(<span class="va">self</span>, x):         <span class="st">&quot;&quot;&quot;Returns the closest element &lt;= x, or None if there is no such element.&quot;&quot;&quot;</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> ceiling(<span class="va">self</span>, x):       <span class="st">&quot;&quot;&quot;Returns the closest element &gt;= x, or None if there is no such element.&quot;&quot;&quot;</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> lower(<span class="va">self</span>, x):         <span class="st">&quot;&quot;&quot;Returns the closest element &lt; x, or None if there is no such element.&quot;&quot;&quot;</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> higher(<span class="va">self</span>, x):        <span class="st">&quot;&quot;&quot;Returns the closest element &gt; x, or None if there is no such element.&quot;&quot;&quot;</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> between(<span class="va">self</span>, x1, x2):  <span class="st">&quot;&quot;&quot;Returns all elements x such that x1 &lt;= x &lt;= x2.&quot;&quot;&quot;</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Note: __iter__() should yield the elements in order.</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Note: This is a subset of java.util.SortedSet, where</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">// `floor` and `ceiling` are borrowed from java.util.NavigableSet.</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">SortedSet</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="kw">extends</span> <span class="bu">Set</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    E <span class="fu">first</span><span class="op">();</span>                        <span class="co">// Returns the first (smallest) element. Raises an exception if the set is empty.</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    E <span class="fu">last</span><span class="op">();</span>                         <span class="co">// Returns the last (largest) element. Raises an exception if the set is empty.</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    E <span class="fu">floor</span><span class="op">(</span>E x<span class="op">);</span>                     <span class="co">// Returns the closest element &lt;= x, or null if there is no such element.</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    E <span class="fu">ceiling</span><span class="op">(</span>E x<span class="op">);</span>                   <span class="co">// Returns the closest element &gt;= x, or null if there is no such element.</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    E <span class="fu">lower</span><span class="op">(</span>E x<span class="op">);</span>                     <span class="co">// Returns the closest element &lt; x, or null if there is no such element.</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    E <span class="fu">higher</span><span class="op">(</span>E x<span class="op">);</span>                    <span class="co">// Returns the closest element &gt; x, or null if there is no such element.</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Iterator</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="fu">between</span><span class="op">(</span>E x1<span class="op">,</span> E x2<span class="op">);</span>  <span class="co">// Returns all elements x such that x1 &lt;= x &lt;= x2.</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Note: iterator() should yield the elements in order.</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SortedMap(Map):</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> firstKey(<span class="va">self</span>):                <span class="st">&quot;&quot;&quot;Returns the first (smallest) key. Raises an exception if the map is empty.&quot;&quot;&quot;</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> lastKey(<span class="va">self</span>):                 <span class="st">&quot;&quot;&quot;Returns the last (largest) key. Raises an exception if the map is empty.&quot;&quot;&quot;</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> floorKey(<span class="va">self</span>, key):           <span class="st">&quot;&quot;&quot;Returns the closest key &lt;= k, or None if there is no key.&quot;&quot;&quot;</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> ceilingKey(<span class="va">self</span>, key):         <span class="st">&quot;&quot;&quot;Returns the closest key &gt;= k, or None if there is no key.&quot;&quot;&quot;</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> lowerKey(<span class="va">self</span>, key):           <span class="st">&quot;&quot;&quot;Returns the closest key &lt; k, or None if there is no such element.&quot;&quot;&quot;</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> higherKey(<span class="va">self</span>, key):          <span class="st">&quot;&quot;&quot;Returns the closest key &gt; k, or None if there is no such element.&quot;&quot;&quot;</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> keysBetween(<span class="va">self</span>, key1, key2): <span class="st">&quot;&quot;&quot;Returns all keys k such that k1 &lt;= k &lt;= k2.&quot;&quot;&quot;</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Note: __iter__() should yield the keys in order.</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Note: This is a subset of java.util.SortedMap, where</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">// `floorKey` and `ceilingKey` are borrowed from java.util.NavigableMap.</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">SortedMap</span><span class="op">&lt;</span>K<span class="op">,</span> V<span class="op">&gt;</span> <span class="kw">extends</span> <span class="bu">Map</span><span class="op">&lt;</span>K<span class="op">,</span> V<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    K <span class="fu">firstKey</span><span class="op">();</span>                         <span class="co">// Returns the first (smallest) key. Raises an exception if the map is empty.</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    K <span class="fu">lastKey</span><span class="op">();</span>                          <span class="co">// Returns the last (largest) key. Raises an exception if the map is empty.</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    K <span class="fu">floorKey</span><span class="op">(</span>K key<span class="op">);</span>                    <span class="co">// Returns the closest key &lt;= k, or null if there is no key.</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    K <span class="fu">ceilingKey</span><span class="op">(</span>K key<span class="op">);</span>                  <span class="co">// Returns the closest key &gt;= k, or null if there is no key.</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    K <span class="fu">lowerKey</span><span class="op">(</span>K k<span class="op">);</span>                      <span class="co">// Returns the closest key &lt; k, or null if there is no such element.</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    K <span class="fu">higherKey</span><span class="op">(</span>K k<span class="op">);</span>                     <span class="co">// Returns the closest key &gt; k, or null if there is no such element.</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Iterator</span><span class="op">&lt;</span>K<span class="op">&gt;</span> <span class="fu">keysBetween</span><span class="op">(</span>K k1<span class="op">,</span> K k2<span class="op">);</span>  <span class="co">// Returns all keys such that k1 &lt;= k &lt;= k2.</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Note: iterator() should yield the keys in order.</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">SortedSet</span> <span class="kw">extends</span> <span class="bu">Set</span>:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    first()          <span class="co">// Returns the first (smallest) element.</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    last()           <span class="co">// Returns the last (largest) element.</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    floor(x)         <span class="co">// Returns the closest element &lt;= x, or nothing if there is no such element.</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    ceiling(x)       <span class="co">// Returns the closest element &gt;= x, or nothing if there is no such element.</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    lower(x)         <span class="co">// Returns the closest element &lt; x, or nothing if there is no such element.</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    higher(x)        <span class="co">// Returns the closest element &gt; x, or nothing if there is no such element.</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    between(x1, x2)  <span class="co">// Returns all elements x such that x1 &lt;= x &lt;= x2.</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">SortedMap</span> <span class="kw">extends</span> <span class="bu">Map</span>:</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    firstKey()               <span class="co">// Returns the first (smallest) key.</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    lastKey()                <span class="co">// Returns the last (largest) key.</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    floorKey(key)            <span class="co">// Returns the closest key &lt;= k, or nothing if there is no key.</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    ceilingKey(key)          <span class="co">// Returns the closest key &gt;= k, or nothing if there is no key.</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    lowerKey(key)            <span class="co">// Returns the closest key &lt; k, or nothing if there is no such element.</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    higherKey(key)           <span class="co">// Returns the closest key &gt; k, or nothing if there is no such element.</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    keysBetween(key1, key2)  <span class="co">// Returns all keys k such that k1 &lt;= k &lt;= k2.</span></span></code></pre></div>
 <p>Sorted arrays can also be useful in cases where we always add
 <em>many</em> items in one go. Given a sorted array
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>,

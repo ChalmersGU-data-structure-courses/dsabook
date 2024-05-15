@@ -230,58 +230,30 @@ define the left and right indices, respectively, for the subarray being
 sorted. The initial call to <code>mergeSort</code> would be
 <code>mergeSort(array, temparray, 0, n-1)</code>.</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mergeSort(A, temp, left, right):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> left <span class="op">==</span> right:                 <span class="co"># List has one record</span></span>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> mergeSort(A, temp, left, right):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> left <span class="op">==</span> right:                 <span class="co">// List has one record</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    mid <span class="op">=</span> (left <span class="op">+</span> right) <span class="op">//</span> <span class="dv">2</span>         <span class="co"># Select midpoint</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    mergeSort(A, temp, left, mid)     <span class="co"># Mergesort first half</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    mergeSort(A, temp, mid<span class="op">+</span><span class="dv">1</span>, right)  <span class="co"># Mergesort second half</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(left, right<span class="op">+</span><span class="dv">1</span>):    <span class="co"># Copy subarray to temp</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    mid <span class="op">=</span> <span class="bu">int</span>((left <span class="op">+</span> right) <span class="op">/</span> <span class="dv">2</span>)     <span class="co">// Select midpoint</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    mergeSort(A, temp, left, mid)     <span class="co">// Mergesort first half</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    mergeSort(A, temp, mid<span class="op">+</span><span class="dv">1</span>, right)  <span class="co">// Mergesort second half</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="op">=</span> left <span class="kw">to</span> right:            <span class="co">// Copy subarray to temp</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        temp[i] <span class="op">=</span> A[i]</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Do the merge operation back to A</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Do the merge operation back to A</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    i1 <span class="op">=</span> left</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    i2 <span class="op">=</span> mid <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> curr <span class="kw">in</span> <span class="bu">range</span>(left, right<span class="op">+</span><span class="dv">1</span>):</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i1 <span class="op">==</span> mid<span class="op">+</span><span class="dv">1</span>:               <span class="co"># Left sublist exhausted</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> curr <span class="op">=</span> left <span class="kw">to</span> right:</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i1 <span class="op">==</span> mid<span class="op">+</span><span class="dv">1</span>:               <span class="co">// Left sublist exhausted</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>            A[curr] <span class="op">=</span> temp[i2]</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>            i2 <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> i2 <span class="op">&gt;</span> right:              <span class="co"># Right sublist exhausted</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>            i2 <span class="op">=</span> i2<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> i2 <span class="op">&gt;</span> right:           <span class="co">// Right sublist exhausted</span></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>            A[curr] <span class="op">=</span> temp[i1]</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>            i1 <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> temp[i1] <span class="op">&lt;=</span> temp[i2]:    <span class="co"># Get smaller value</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>            i1 <span class="op">=</span> i1<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> temp[i1] <span class="op">&lt;=</span> temp[i2]: <span class="co">// Get smaller value</span></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>            A[curr] <span class="op">=</span> temp[i1]</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>            i1 <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>            i1 <span class="op">=</span> i1<span class="op">+</span><span class="dv">1</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>            A[curr] <span class="op">=</span> temp[i2]</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>            i2 <span class="op">+=</span> <span class="dv">1</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="dt">static</span> <span class="op">&lt;</span>T <span class="kw">extends</span> <span class="bu">Comparable</span><span class="op">&lt;</span>T<span class="op">&gt;&gt;</span> <span class="dt">void</span> <span class="fu">mergeSort</span><span class="op">(</span>T<span class="op">[]</span> A<span class="op">,</span> T<span class="op">[]</span> temp<span class="op">,</span> <span class="dt">int</span> left<span class="op">,</span> <span class="dt">int</span> right<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>left <span class="op">==</span> right<span class="op">)</span>                   <span class="co">// List has one record</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> mid <span class="op">=</span> <span class="op">(</span>left <span class="op">+</span> right<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span>        <span class="co">// Select midpoint</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mergeSort</span><span class="op">(</span>A<span class="op">,</span> temp<span class="op">,</span> left<span class="op">,</span> mid<span class="op">);</span>       <span class="co">// Mergesort first half</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mergeSort</span><span class="op">(</span>A<span class="op">,</span> temp<span class="op">,</span> mid<span class="op">+</span><span class="dv">1</span><span class="op">,</span> right<span class="op">);</span>    <span class="co">// Mergesort second half</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> left<span class="op">;</span> i <span class="op">&lt;=</span> right<span class="op">;</span> i<span class="op">++)</span>  <span class="co">// Copy subarray to temp</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        temp<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> A<span class="op">[</span>i<span class="op">];</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Do the merge operation back to A</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> i1 <span class="op">=</span> left<span class="op">;</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> i2 <span class="op">=</span> mid <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> curr <span class="op">=</span> left<span class="op">;</span> curr <span class="op">&lt;=</span> right<span class="op">;</span> curr<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>i1 <span class="op">==</span> mid<span class="op">+</span><span class="dv">1</span><span class="op">)</span> <span class="op">{</span>               <span class="co">// Left sublist exhausted</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>            A<span class="op">[</span>curr<span class="op">]</span> <span class="op">=</span> temp<span class="op">[</span>i2<span class="op">];</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>            i2<span class="op">++;</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>i2 <span class="op">&gt;</span> right<span class="op">)</span> <span class="op">{</span>         <span class="co">// Right sublist exhausted</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>            A<span class="op">[</span>curr<span class="op">]</span> <span class="op">=</span> temp<span class="op">[</span>i1<span class="op">];</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>            i1<span class="op">++;</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>temp<span class="op">[</span>i1<span class="op">].</span><span class="fu">compareTo</span><span class="op">(</span>temp<span class="op">[</span>i2<span class="op">])</span> <span class="op">&lt;=</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span>  <span class="co">// Get smaller value</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>            A<span class="op">[</span>curr<span class="op">]</span> <span class="op">=</span> temp<span class="op">[</span>i1<span class="op">];</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>            i1<span class="op">++;</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>            A<span class="op">[</span>curr<span class="op">]</span> <span class="op">=</span> temp<span class="op">[</span>i2<span class="op">];</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>            i2<span class="op">++;</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>            i2 <span class="op">=</span> i2<span class="op">+</span><span class="dv">1</span></span></code></pre></div>
 <p>Here is a visualization for the merge step.</p>
 <p>
 <div id="mergeImplS1CON" class="ssAV" data-short-name="mergeImplS1CON" data-long-name="Mergesort Implementation Slideshow 1" alt="Mergesort Implementation Slideshow 1" tabIndex="-1">

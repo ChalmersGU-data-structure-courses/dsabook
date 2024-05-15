@@ -205,23 +205,13 @@ processed. Here is an implementation. The input is an array named
 records.</p>
 <div id="introduction">
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> insertionSort(A):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(A)):  <span class="co"># Insert i&#39;th record</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        j <span class="op">=</span> i</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> j <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> A[j] <span class="op">&lt;</span> A[j<span class="op">-</span><span class="dv">1</span>]:</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>            swap(A, j, j<span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            j <span class="op">-=</span> <span class="dv">1</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="dt">static</span> <span class="op">&lt;</span>T <span class="kw">extends</span> <span class="bu">Comparable</span><span class="op">&lt;</span>T<span class="op">&gt;&gt;</span> <span class="dt">void</span> <span class="fu">insertionSort</span><span class="op">(</span>T<span class="op">[]</span> A<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;</span> A<span class="op">.</span><span class="fu">length</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Insert i&#39;th record.</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> j <span class="op">=</span> i<span class="op">;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="op">(</span>j <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> A<span class="op">[</span>j<span class="op">].</span><span class="fu">compareTo</span><span class="op">(</span>A<span class="op">[</span>j<span class="op">-</span><span class="dv">1</span><span class="op">])</span> <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>            <span class="bu">Util</span><span class="op">.</span><span class="fu">swap</span><span class="op">(</span>A<span class="op">,</span> j<span class="op">,</span> j<span class="op">-</span><span class="dv">1</span><span class="op">);</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>            j<span class="op">--;</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> insertionSort(A):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="op">=</span> <span class="dv">1</span> <span class="kw">to</span> A.<span class="bu">size</span>()<span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Move the i&#39;th element to its correct position.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        j <span class="op">=</span> i</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> j <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> A[j] <span class="op">&lt;</span> A[j<span class="op">-</span><span class="dv">1</span>]:</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            swap(A, j, j<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>            j <span class="op">=</span> j<span class="op">-</span><span class="dv">1</span></span></code></pre></div>
 </div>
 <div id="practice">
 <p>(Note that to make the explanation for these sorting algorithms as
@@ -271,6 +261,7 @@ Your browser does not support iframes.
 data-number="2.4.1">
 <h3 data-number="2.4.1"><span class="header-section-number">2.4.1</span>
 Insertion Sort Analysis</h3>
+<p>Here is an explanation of the worst case cost of insertion sort:</p>
 <p>
 <div id="InsertionSortWorstCaseCON" class="ssAV" data-short-name="InsertionSortWorstCaseCON" data-long-name="Insertion Sort Worst Case Slideshow" alt="Insertion Sort Worst Case Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
@@ -279,7 +270,7 @@ Insertion Sort Analysis</h3>
 <div class="jsavcanvas"></div>
 </div>
 </p>
-<div class="line-block"></div>
+<p>And here is an explanation of the cost of the best case:</p>
 <p>
 <div id="InsertionSortBestCaseCON" class="ssAV" data-short-name="InsertionSortBestCaseCON" data-long-name="Insertion Sort Best Case Slideshow" alt="Insertion Sort Best Case Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
@@ -288,7 +279,7 @@ Insertion Sort Analysis</h3>
 <div class="jsavcanvas"></div>
 </div>
 </p>
-<div class="line-block"></div>
+<p>And here is the average case cost:</p>
 <p>
 <div id="InsertionSortAverageCaseCON" class="ssAV" data-short-name="InsertionSortAverageCaseCON" data-long-name="Insertion Sort Average Case Slideshow" alt="Insertion Sort Average Case Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>

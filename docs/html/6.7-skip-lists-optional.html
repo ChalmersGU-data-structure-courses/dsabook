@@ -241,114 +241,40 @@ number of accesses is
 <p>We will store with each skip list node an array named
 <code>forward</code> that stores the pointers. Position
 <code>forward[0]</code> stores a level 0 pointer,
-<code>forward[1]</code> stores a level 1 pointer, and so on. It also
-uses a KVPair to store the key and record for the node. The SkipNode
-class follows:</p>
+<code>forward[1]</code> stores a level 1 pointer, and so on:</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="kw">class</span> SkipNode <span class="op">{</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> KVPair rec<span class="op">;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> SkipNode<span class="op">[]</span> forward<span class="op">;</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">Object</span> <span class="fu">element</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> rec<span class="op">.</span><span class="fu">value</span><span class="op">();</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">Comparable</span> <span class="fu">key</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> rec<span class="op">.</span><span class="fu">key</span><span class="op">();</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">SkipNode</span><span class="op">(</span><span class="bu">Comparable</span> key<span class="op">,</span> <span class="bu">Object</span> elem<span class="op">,</span> <span class="dt">int</span> level<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>      rec <span class="op">=</span> <span class="kw">new</span> <span class="fu">KVPair</span><span class="op">(</span>key<span class="op">,</span> elem<span class="op">);</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>      forward <span class="op">=</span> <span class="kw">new</span> SkipNode<span class="op">[</span>level <span class="op">+</span> <span class="dv">1</span><span class="op">];</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> level<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        forward<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>      <span class="op">}</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">String</span> <span class="fu">toString</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> rec<span class="op">.</span><span class="fu">toString</span><span class="op">();</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">class</span> SkipNode<span class="op">&lt;</span>K <span class="kw">extends</span> <span class="bu">Comparable</span><span class="op">&lt;</span>K<span class="op">&gt;,</span> E<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>        <span class="kw">private</span> KVPair<span class="op">&lt;</span>K<span class="op">,</span> E<span class="op">&gt;</span> rec<span class="op">;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="kw">private</span> SkipNode<span class="op">&lt;</span>K<span class="op">,</span> E<span class="op">&gt;[]</span> forward<span class="op">;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="kw">public</span> E <span class="fu">element</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> rec<span class="op">.</span><span class="fu">value</span><span class="op">();</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="kw">public</span> K <span class="fu">key</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> rec<span class="op">.</span><span class="fu">key</span><span class="op">();</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">@SuppressWarnings</span><span class="op">(</span><span class="st">&quot;unchecked&quot;</span><span class="op">)</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="kw">public</span> <span class="fu">SkipNode</span><span class="op">(</span>K key<span class="op">,</span> E elem<span class="op">,</span> <span class="dt">int</span> level<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>            rec <span class="op">=</span> <span class="kw">new</span> KVPair<span class="op">&lt;</span>K<span class="op">,</span> E<span class="op">&gt;(</span>key<span class="op">,</span> elem<span class="op">);</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>            forward <span class="op">=</span> <span class="kw">new</span> SkipNode<span class="op">[</span>level <span class="op">+</span> <span class="dv">1</span><span class="op">];</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> level<span class="op">;</span> i<span class="op">++)</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>                forward<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        <span class="kw">public</span> <span class="bu">String</span> <span class="fu">toString</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> rec<span class="op">.</span><span class="fu">toString</span><span class="op">();</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SkipNode:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    SkipNode(key, value, level):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.key <span class="op">=</span> key</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.value <span class="op">=</span> value</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.forward <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(level <span class="op">+</span> <span class="dv">1</span>)</span></code></pre></div>
 <p>The skip list object includes data member <code>level</code> that
 stores the highest level for any node currently in the skip list. The
 skip list stores a header node named <code>head</code> with
 <code>level+1</code> pointers where the head level is initially 0 and
 the level is set to -1 for the empty list. The start of the SkipList
 class follows:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SkipList <span class="kw">implements</span> <span class="bu">Map</span>:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    SkipList():</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.head <span class="op">=</span> <span class="kw">new</span> SkipNode(<span class="va">null</span>, <span class="va">null</span>, <span class="dv">0</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.level <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.listSize <span class="op">=</span> <span class="dv">0</span></span></code></pre></div>
+<p>The <code>get</code> method works as follows.</p>
 <div class="sourceCode" id="cb3"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SkipList <span class="kw">implements</span> <span class="bu">Dictionary</span> <span class="op">{</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> SkipNode head<span class="op">;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="dt">int</span> level<span class="op">;</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="dt">int</span> size<span class="op">;</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">static</span> <span class="kw">private</span> <span class="bu">Random</span> ran <span class="op">=</span> <span class="kw">new</span> <span class="bu">Random</span><span class="op">();</span> <span class="co">// Hold the Random class object</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="fu">SkipList</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    head <span class="op">=</span> <span class="kw">new</span> <span class="fu">SkipNode</span><span class="op">(</span><span class="kw">null</span><span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    level <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    size <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SkipList<span class="op">&lt;</span>K <span class="kw">extends</span> <span class="bu">Comparable</span><span class="op">&lt;</span>K<span class="op">&gt;,</span> E<span class="op">&gt;</span> <span class="kw">implements</span> <span class="bu">Dictionary</span><span class="op">&lt;</span>K<span class="op">,</span> E<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> SkipNode<span class="op">&lt;</span>K<span class="op">,</span> E<span class="op">&gt;</span> head<span class="op">;</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> level<span class="op">;</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> size<span class="op">;</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">static</span> <span class="kw">private</span> <span class="bu">Random</span> ran <span class="op">=</span> <span class="kw">new</span> <span class="bu">Random</span><span class="op">();</span> <span class="co">// Hold the Random class object</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">SkipList</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        head <span class="op">=</span> <span class="kw">new</span> SkipNode<span class="op">&lt;</span>K<span class="op">,</span> E<span class="op">&gt;(</span><span class="kw">null</span><span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        level <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        size <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
-<p>The <code>find</code> function works as follows.</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Return the (first) matching matching element if one exists, null otherwise</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="bu">Object</span> <span class="fu">find</span><span class="op">(</span><span class="bu">Comparable</span> key<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    SkipNode x <span class="op">=</span> head<span class="op">;</span> <span class="co">// Dummy header node</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> level<span class="op">;</span> i <span class="op">&gt;=</span> <span class="dv">0</span><span class="op">;</span> i<span class="op">--)</span> <span class="op">{</span> <span class="co">// For each level...</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>      <span class="cf">while</span> <span class="op">((</span>x<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">]</span> <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="op">(</span>x<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">].</span><span class="fu">key</span><span class="op">().</span><span class="fu">compareTo</span><span class="op">(</span>key<span class="op">)</span> <span class="op">&lt;</span> <span class="dv">0</span><span class="op">))</span> <span class="op">{</span> <span class="co">// go forward</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> x<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">];</span> <span class="co">// Go one last step</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>      <span class="op">}</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> x<span class="op">.</span><span class="fu">forward</span><span class="op">[</span><span class="dv">0</span><span class="op">];</span> <span class="co">// Move to actual record, if it exists</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">((</span>x <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="op">(</span>x<span class="op">.</span><span class="fu">key</span><span class="op">().</span><span class="fu">compareTo</span><span class="op">(</span>key<span class="op">)</span> <span class="op">==</span> <span class="dv">0</span><span class="op">))</span> <span class="op">{</span> <span class="cf">return</span> x<span class="op">.</span><span class="fu">element</span><span class="op">();</span> <span class="op">}</span> <span class="co">// Got it</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="op">{</span> <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span> <span class="op">}</span> <span class="co">// Its not there</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Return the (first) matching matching element if one exists, null otherwise</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> E <span class="fu">find</span><span class="op">(</span>K key<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        SkipNode<span class="op">&lt;</span>K<span class="op">,</span> E<span class="op">&gt;</span> x <span class="op">=</span> head<span class="op">;</span> <span class="co">// Dummy header node</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> level<span class="op">;</span> i <span class="op">&gt;=</span> <span class="dv">0</span><span class="op">;</span> i<span class="op">--)</span> <span class="co">// For each level...</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">while</span> <span class="op">((</span>x<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">]</span> <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="op">(</span>x<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">].</span><span class="fu">key</span><span class="op">().</span><span class="fu">compareTo</span><span class="op">(</span>key<span class="op">)</span> <span class="op">&lt;</span> <span class="dv">0</span><span class="op">))</span> <span class="co">// go forward</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                x <span class="op">=</span> x<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">];</span> <span class="co">// Go one last step</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> x<span class="op">.</span><span class="fu">forward</span><span class="op">[</span><span class="dv">0</span><span class="op">];</span> <span class="co">// Move to actual record, if it exists</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">((</span>x <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="op">(</span>x<span class="op">.</span><span class="fu">key</span><span class="op">().</span><span class="fu">compareTo</span><span class="op">(</span>key<span class="op">)</span> <span class="op">==</span> <span class="dv">0</span><span class="op">))</span> <span class="cf">return</span> x<span class="op">.</span><span class="fu">element</span><span class="op">();</span> <span class="co">// Got it</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span> <span class="co">// Its not there</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SkipList <span class="kw">implements</span> <span class="bu">Map</span>:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Look up the value associated with a key.</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">get</span>(key):</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> <span class="va">this</span>.head  <span class="co">// Dummy header node</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="op">=</span> <span class="va">this</span>.level <span class="kw">downto</span> <span class="dv">0</span>:  <span class="co">// For each level...</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">while</span> x.forward[i] <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span> <span class="kw">and</span> key <span class="op">&gt;</span> x.forward[i].key:  <span class="co">// ...go forward</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                x <span class="op">=</span> x.forward[i]  <span class="co">// Go one last step</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> x.forward[<span class="dv">0</span>]  <span class="co">// Move to actual record, if it exists</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> x <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span> <span class="kw">and</span> key <span class="op">==</span> x.key:</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> x.value  <span class="co">// Got it</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">null</span>  <span class="co">// It&#39;s not there</span></span></code></pre></div>
 <p>The ideal skip list is organized so that (if the head node is not
 counted) half of the nodes have only one pointer, one quarter have two,
 one eighth have three, and so on. And ideally, the distances would be
@@ -361,23 +287,14 @@ geometric distribution yielding a 50% probability that the node will
 have one pointer, a 25% probability that it will have two, and so on.
 The following function determines the level based on such a
 distribution.</p>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Pick a level using a geometric distribution</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> <span class="fu">randomLevel</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> lev<span class="op">;</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span>lev <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">abs</span><span class="op">(</span>ran<span class="op">.</span><span class="fu">nextInt</span><span class="op">())</span> <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span><span class="op">;</span> lev<span class="op">++)</span> <span class="op">{</span> <span class="co">// ran is random generator</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>      <span class="op">;</span> <span class="co">// Do nothing</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> lev<span class="op">;</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Pick a level using a geometric distribution</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="fu">randomLevel</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> lev<span class="op">;</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span>lev <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">abs</span><span class="op">(</span>ran<span class="op">.</span><span class="fu">nextInt</span><span class="op">())</span> <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span><span class="op">;</span> lev<span class="op">++)</span> <span class="co">// ran is random generator</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>            <span class="op">;</span> <span class="co">// Do nothing</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> lev<span class="op">;</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SkipList <span class="kw">implements</span> <span class="bu">Map</span>:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    randomLevel():</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        level <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> random() <span class="op">&lt;</span> <span class="fl">0.5</span>:</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>            level <span class="op">=</span> level <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> lev</span></code></pre></div>
 <p>Once the proper level for the node has been determined, the next step
 is to find where the node should be inserted and link it in as
 appropriate at all of its levels. Here is an implementation for
@@ -385,67 +302,38 @@ inserting a new value into the skip list followed by a visualization of
 the process. Note that we build an <code>update</code> array as we
 progress through the skip list, so that we can update the pointers for
 the nodes that will precede the one being inserted.</p>
-<div class="sourceCode" id="cb9"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>  <span class="co">/**</span> Insert a key<span class="co">,</span> element pair into the skip list <span class="co">*/</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">insert</span><span class="op">(</span><span class="bu">Comparable</span> key<span class="op">,</span> <span class="bu">Object</span> elem<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> newLevel <span class="op">=</span> <span class="fu">randomLevel</span><span class="op">();</span> <span class="co">// New node&#39;s level</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>newLevel <span class="op">&gt;</span> level<span class="op">)</span> <span class="op">{</span> <span class="co">// If new node is deeper</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">adjustHead</span><span class="op">(</span>newLevel<span class="op">);</span> <span class="co">// adjust the header</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Track end of level</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    SkipNode<span class="op">[]</span> update <span class="op">=</span> <span class="kw">new</span> SkipNode<span class="op">[</span>level <span class="op">+</span> <span class="dv">1</span><span class="op">];</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    SkipNode x <span class="op">=</span> head<span class="op">;</span> <span class="co">// Start at header node</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> level<span class="op">;</span> i <span class="op">&gt;=</span> <span class="dv">0</span><span class="op">;</span> i<span class="op">--)</span> <span class="op">{</span> <span class="co">// Find insert position</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>      <span class="cf">while</span> <span class="op">((</span>x<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">]</span> <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="op">(</span>x<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">].</span><span class="fu">key</span><span class="op">().</span><span class="fu">compareTo</span><span class="op">(</span>key<span class="op">)</span> <span class="op">&lt;</span> <span class="dv">0</span><span class="op">))</span> <span class="op">{</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> x<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">];</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>      <span class="op">}</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>      update<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> x<span class="op">;</span> <span class="co">// Track end at level i</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="kw">new</span> <span class="fu">SkipNode</span><span class="op">(</span>key<span class="op">,</span> elem<span class="op">,</span> newLevel<span class="op">);</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;=</span> newLevel<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span> <span class="co">// Splice into list</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>      x<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> update<span class="op">[</span>i<span class="op">].</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">];</span> <span class="co">// Who x points to</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>      update<span class="op">[</span>i<span class="op">].</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> x<span class="op">;</span> <span class="co">// Who points to x</span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    size<span class="op">++;</span> <span class="co">// Increment dictionary size</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="dt">void</span> <span class="fu">adjustHead</span><span class="op">(</span><span class="dt">int</span> newLevel<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    SkipNode temp <span class="op">=</span> head<span class="op">;</span></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    head <span class="op">=</span> <span class="kw">new</span> <span class="fu">SkipNode</span><span class="op">(</span><span class="kw">null</span><span class="op">,</span> <span class="kw">null</span><span class="op">,</span> newLevel<span class="op">);</span></span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;=</span> level<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>      head<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> temp<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">];</span></span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    level <span class="op">=</span> newLevel<span class="op">;</span></span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>    <span class="co">/**</span> Insert a key<span class="co">,</span> element pair into the skip list <span class="co">*/</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">insert</span><span class="op">(</span>K key<span class="op">,</span> E elem<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> newLevel <span class="op">=</span> <span class="fu">randomLevel</span><span class="op">();</span> <span class="co">// New node&#39;s level</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>newLevel <span class="op">&gt;</span> level<span class="op">)</span> <span class="co">// If new node is deeper</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">adjustHead</span><span class="op">(</span>newLevel<span class="op">);</span> <span class="co">// adjust the header</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Track end of level</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        SkipNode<span class="op">&lt;</span>K<span class="op">,</span> E<span class="op">&gt;[]</span> update <span class="op">=</span> <span class="kw">new</span> SkipNode<span class="op">[</span>level <span class="op">+</span> <span class="dv">1</span><span class="op">];</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        SkipNode<span class="op">&lt;</span>K<span class="op">,</span> E<span class="op">&gt;</span> x <span class="op">=</span> head<span class="op">;</span> <span class="co">// Start at header node</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> level<span class="op">;</span> i <span class="op">&gt;=</span> <span class="dv">0</span><span class="op">;</span> i<span class="op">--)</span> <span class="op">{</span> <span class="co">// Find insert position</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">while</span> <span class="op">((</span>x<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">]</span> <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="op">(</span>x<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">].</span><span class="fu">key</span><span class="op">().</span><span class="fu">compareTo</span><span class="op">(</span>key<span class="op">)</span> <span class="op">&lt;</span> <span class="dv">0</span><span class="op">))</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>                x <span class="op">=</span> x<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">];</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>            update<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> x<span class="op">;</span> <span class="co">// Track end at level i</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> <span class="kw">new</span> SkipNode<span class="op">&lt;</span>K<span class="op">,</span> E<span class="op">&gt;(</span>key<span class="op">,</span> elem<span class="op">,</span> newLevel<span class="op">);</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;=</span> newLevel<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span> <span class="co">// Splice into list</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>            x<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> update<span class="op">[</span>i<span class="op">].</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">];</span> <span class="co">// Who x points to</span></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>            update<span class="op">[</span>i<span class="op">].</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> x<span class="op">;</span> <span class="co">// Who points to x</span></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>        size<span class="op">++;</span> <span class="co">// Increment dictionary size</span></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">adjustHead</span><span class="op">(</span><span class="dt">int</span> newLevel<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>        SkipNode<span class="op">&lt;</span>K<span class="op">,</span> E<span class="op">&gt;</span> temp <span class="op">=</span> head<span class="op">;</span></span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>        head <span class="op">=</span> <span class="kw">new</span> SkipNode<span class="op">&lt;</span>K<span class="op">,</span> E<span class="op">&gt;(</span><span class="kw">null</span><span class="op">,</span> <span class="kw">null</span><span class="op">,</span> newLevel<span class="op">);</span></span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;=</span> level<span class="op">;</span> i<span class="op">++)</span></span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>            head<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> temp<span class="op">.</span><span class="fu">forward</span><span class="op">[</span>i<span class="op">];</span></span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>        level <span class="op">=</span> newLevel<span class="op">;</span></span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SkipList <span class="kw">implements</span> <span class="bu">Map</span>:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Add a key-value pair, or update the value associated with an existing key. </span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">put</span>(key, value):</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        newLevel <span class="op">=</span> <span class="va">this</span>.randomLevel()  <span class="co">// New node&#39;s level</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> newLevel <span class="op">&gt;</span> <span class="va">this</span>.level:  <span class="co">// If new node is deeper...</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>            <span class="va">this</span>.adjustHead(newLevel)  <span class="co">// ...adjust the header</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Track end of level:</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        update <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(<span class="va">this</span>.level <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> <span class="va">this</span>.head  <span class="co">// Start at header node</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="op">=</span> level <span class="kw">downto</span> <span class="dv">0</span>:  <span class="co">// Find insert position</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">while</span> x.forward[i] <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span> <span class="kw">and</span> key <span class="op">&gt;</span> x.forward[i].key:</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>                x <span class="op">=</span> x.forward[i]</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>            update[i] <span class="op">=</span> x  <span class="co">// Track end at level i</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> x.forward[<span class="dv">0</span>]  <span class="co">// Move to actual record, if it exists</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> x <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span> <span class="kw">and</span> key <span class="op">==</span> x.key:</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>            x.value <span class="op">=</span> value  <span class="co">// The key exists: update the value</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>            <span class="co">// Otherwise, create a new node and insert it into place:</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>            y <span class="op">=</span> <span class="kw">new</span> SkipNode(key, value, newLevel)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> i <span class="op">=</span> <span class="dv">0</span> <span class="kw">to</span> newLevel:  <span class="co">// Splice into list</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>                y.forward[i] <span class="op">=</span> update[i].forward[i]  <span class="co">// Who y points to</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>                update[i].forward[i] <span class="op">=</span> y  <span class="co">// Who points to y</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>            <span class="va">this</span>.listSize <span class="op">=</span> <span class="va">this</span>.listSize <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    adjustHead(newLevel):</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>        temp <span class="op">=</span> <span class="va">this</span>.head</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.head <span class="op">=</span> <span class="kw">new</span> SkipNode(<span class="va">null</span>, <span class="va">null</span>, newLevel)</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="dv">0</span> <span class="kw">to</span> <span class="va">this</span>.level:</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>            <span class="va">this</span>.head.forward[i] <span class="op">=</span> temp.forward[i]</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.level <span class="op">=</span> newLevel</span></code></pre></div>
 <p>
 <div id="SkipListInsertCON" class="ssAV" data-short-name="SkipListInsertCON" data-long-name="SearchStruct/SkipListInsertCON" alt="SearchStruct/SkipListInsertCON" tabIndex="-1">
 <span class="jsavcounter"></span>

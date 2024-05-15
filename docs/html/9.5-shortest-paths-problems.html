@@ -174,19 +174,19 @@
 </div>
 <div class="sitenav">
 <span class="navlink">
-<span class="navlink-label">Next:</span> <a href="9.5-minimal-cost-spanning-trees.html" accesskey="n" rel="next">Minimal Cost Spanning Trees</a>
+<span class="navlink-label">Next:</span> <a href="9.6-minimal-cost-spanning-trees.html" accesskey="n" rel="next">Minimal Cost Spanning Trees</a>
 </span>
 <span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="9.3-topological-sort.html" accesskey="p" rel="previous">Topological Sort</a>
+<span class="navlink-label">Previous:</span> <a href="9.4-topological-sort.html" accesskey="p" rel="previous">Topological Sort</a>
 </span>
 </div>
 </nav>
-<section id="shortest-paths-problems" class="level2" data-number="9.4">
-<h2 data-number="9.4"><span class="header-section-number">9.4</span>
+<section id="shortest-paths-problems" class="level2" data-number="9.5">
+<h2 data-number="9.5"><span class="header-section-number">9.5</span>
 Shortest-Paths Problems</h2>
 <section id="shortest-paths-on-unweighted-graphs" class="level3"
-data-number="9.4.1">
-<h3 data-number="9.4.1"><span class="header-section-number">9.4.1</span>
+data-number="9.5.1">
+<h3 data-number="9.5.1"><span class="header-section-number">9.5.1</span>
 Shortest-Paths on Unweighted Graphs</h3>
 <p>If you have an unweighted graph, the <a
 href="10-glossary.html#shortest-path" class="term"
@@ -194,15 +194,15 @@ title="Given a graph with distances or weights on the edges, the shortest path b
 path</a> between two vertices is the smallest number of edges you have
 to pass to get from one of the vertices to the other.</p>
 <p>If you agument the <a
-href="9.2-graph-traversals.html#breadth-first-search">breadth-first
+href="9.3-graph-traversals.html#breadth-first-search">breadth-first
 search</a> algorithm to remember which vertex a visited vertex came
 from, if will give you the shortest path between the start vertex and
 any other vertex. However, things become sligthly more complicated if
 the graph is weighted.</p>
 </section>
 <section id="shortest-paths-on-weighted-graphs" class="level3"
-data-number="9.4.2">
-<h3 data-number="9.4.2"><span class="header-section-number">9.4.2</span>
+data-number="9.5.2">
+<h3 data-number="9.5.2"><span class="header-section-number">9.5.2</span>
 Shortest-Paths on Weighted Graphs</h3>
 <p>On a road map, a road connecting two towns is typically labeled with
 its distance. We can model a road network as a directed graph whose
@@ -221,7 +221,7 @@ vertices. This is not a trivial problem, because the shortest path may
 not be along the edge (if any) connecting two vertices, but rather may
 be along a path involving one or more intermediate vertices.</p>
 <p>For example, in <a
-href="9.4-shortest-paths-problems.html#DistExamp">Figure #DistExamp</a>,
+href="9.5-shortest-paths-problems.html#DistExamp">Figure #DistExamp</a>,
 the cost of the path from
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
 to
@@ -287,8 +287,8 @@ positive.</p>
 </div>
 </section>
 <section id="single-source-shortest-paths" class="level3"
-data-number="9.4.3">
-<h3 data-number="9.4.3"><span class="header-section-number">9.4.3</span>
+data-number="9.5.3">
+<h3 data-number="9.5.3"><span class="header-section-number">9.5.3</span>
 Single-Source Shortest Paths</h3>
 <p>We will now present an algorithm to solve the <a
 href="10-glossary.html#single-source-shortest-paths-problem"
@@ -419,8 +419,9 @@ in
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐕</mi><annotation encoding="application/x-tex">\mathbf{V}</annotation></semantics></math>.
 The elements of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐃</mi><annotation encoding="application/x-tex">\mathbf{D}</annotation></semantics></math>
-are initialized to the value <code>INFINITE</code>. Vertices are
-processed in order of distance from
+are initialized to the value
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>∞</mi><annotation encoding="application/x-tex">\infty</annotation></semantics></math>
+(positive infinity). Vertices are processed in order of distance from
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>.
 Whenever a vertex
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>
@@ -433,24 +434,25 @@ of
 Here is an implementation for Dijkstra’s algorithm. At the end, array
 <code>D</code> will contain the shortest distance values.</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Compute shortest path distances from s, store them in D</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">void</span> <span class="op">&lt;</span>V<span class="op">&gt;</span> <span class="fu">Dijkstra</span><span class="op">(</span>Graph<span class="op">&lt;</span>V<span class="op">&gt;</span> G<span class="op">,</span> V s<span class="op">,</span> <span class="bu">Map</span><span class="op">&lt;</span>V<span class="op">,</span><span class="bu">Double</span><span class="op">&gt;</span> D<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Set</span><span class="op">&lt;</span>V<span class="op">&gt;</span> visited <span class="op">=</span> <span class="kw">new</span> <span class="bu">Set</span><span class="op">&lt;&gt;();</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span>V v <span class="op">:</span> G<span class="op">.</span><span class="fu">vertices</span><span class="op">())</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        D<span class="op">.</span><span class="fu">put</span><span class="op">(</span>v<span class="op">,</span> <span class="bu">Double</span><span class="op">.</span><span class="fu">POSITIVE_INFINITY</span><span class="op">);</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    D<span class="op">.</span><span class="fu">put</span><span class="op">(</span>s<span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i<span class="op">=</span><span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> G<span class="op">.</span><span class="fu">vertexCount</span><span class="op">();</span> i<span class="op">++)</span> <span class="op">{</span>   <span class="co">// Process the vertices</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        V v <span class="op">=</span> <span class="fu">minVertex</span><span class="op">(</span>G<span class="op">,</span> D<span class="op">);</span>   <span class="co">// Find next-closest vertex</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        visited<span class="op">.</span><span class="fu">add</span><span class="op">(</span>v<span class="op">);</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>D<span class="op">.</span><span class="fu">get</span><span class="op">(</span>v<span class="op">)</span> <span class="op">==</span> <span class="bu">Double</span><span class="op">.</span><span class="fu">POSITIVE_INFINITY</span><span class="op">)</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span><span class="op">;</span>              <span class="co">// Unreachable</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span>Edge<span class="op">&lt;</span>V<span class="op">&gt;</span> e <span class="op">:</span> G<span class="op">.</span><span class="fu">outgoingEdges</span><span class="op">(</span>v<span class="op">))</span> <span class="op">{</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            V w <span class="op">=</span> e<span class="op">.</span><span class="fu">end</span><span class="op">;</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>D<span class="op">.</span><span class="fu">get</span><span class="op">(</span>w<span class="op">)</span> <span class="op">&gt;</span> D<span class="op">.</span><span class="fu">get</span><span class="op">(</span>v<span class="op">)</span> <span class="op">+</span> e<span class="op">.</span><span class="fu">weight</span><span class="op">)</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                D<span class="op">.</span><span class="fu">put</span><span class="op">(</span>w<span class="op">,</span> D<span class="op">.</span><span class="fu">get</span><span class="op">(</span>v<span class="op">)</span> <span class="op">+</span> e<span class="op">.</span><span class="fu">weight</span><span class="op">);</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Compute shortest path distances from s</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> Dijkstra(G, s):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    visited <span class="op">=</span> <span class="kw">new</span> <span class="bu">Set</span>()</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    D <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>()</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> v <span class="kw">in</span> G.vertices():</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        D.<span class="bu">put</span>(v, ∞)  <span class="co">// Initialise distances</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    D.<span class="bu">put</span>(s, <span class="dv">0</span>)  <span class="co">// The distance from s to s is 0</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">repeat</span> G.vertxCount() <span class="kw">times</span>:  <span class="co">// Process the vertices</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        v <span class="op">=</span> minVertex(G, D, visited)  <span class="co">// Find next-closest vertex</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        visited.<span class="bu">add</span>(v)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> D.<span class="bu">get</span>(v) <span class="op">==</span> ∞:</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> D  <span class="co">// Vertex v is unreachable</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="kw">each</span> e <span class="kw">in</span> G.outgoingEdges(v):</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>            w <span class="op">=</span> e.end</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>            dist <span class="op">=</span> D.<span class="bu">get</span>(v) <span class="op">+</span> e.weight</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> dist <span class="op">&lt;</span> D.<span class="bu">get</span>(w): <span class="co">// If the new distance is shorter...</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>                D.<span class="bu">put</span>(w, dist)  <span class="co">// ...update w with the new distance</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> D</span></code></pre></div>
 <p>
 <div id="DijkstraCON" class="ssAV" data-short-name="DijkstraCON" data-long-name="Dijkstra Slideshow" alt="Dijkstra Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
@@ -466,19 +468,14 @@ through the list of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="true" form="postfix">|</mo></mrow><annotation encoding="application/x-tex">|\mathbf{V}|</annotation></semantics></math>
 vertices searching for the minimum value, as follows:</p>
 <div class="sourceCode" id="cb2"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Find the unvisited vertex with the smalled distance</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> V <span class="fu">minVertex</span><span class="op">(</span>Graph G<span class="op">&lt;</span>V<span class="op">&gt;,</span> <span class="bu">Map</span><span class="op">&lt;</span>V<span class="op">,</span><span class="bu">Double</span><span class="op">&gt;</span> D<span class="op">,</span> <span class="bu">Set</span><span class="op">&lt;</span>V<span class="op">&gt;</span> visited<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    V minV <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span>v <span class="op">:</span> G<span class="op">.</span><span class="fu">vertices</span><span class="op">())</span> <span class="op">{</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!</span>visited<span class="op">.</span><span class="fu">contains</span><span class="op">(</span>v<span class="op">))</span> <span class="op">{</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>minV <span class="op">==</span> <span class="kw">null</span><span class="op">)</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                minV <span class="op">=</span> v<span class="op">;</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>D<span class="op">.</span><span class="fu">get</span><span class="op">(</span>v<span class="op">)</span> <span class="op">&lt;</span> D<span class="op">.</span><span class="fu">get</span><span class="op">(</span>minV<span class="op">))</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                minV <span class="op">=</span> v<span class="op">;</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> minV<span class="op">;</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Find the unvisited vertex with the smalled distance</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> minVertex(G, D, visited):</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    minV <span class="op">=</span> <span class="va">null</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> v <span class="kw">in</span> G.vertices():</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> v <span class="kw">not</span> <span class="kw">in</span> visited:</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> minV <span class="kw">is</span> <span class="va">null</span> <span class="kw">or</span> D.<span class="bu">get</span>(v) <span class="op">&lt;</span> D.<span class="bu">get</span>(minV):</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                minV <span class="op">=</span> v</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> minV</span></code></pre></div>
 <p>Because this scan is done
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="true" form="postfix">|</mo></mrow><annotation encoding="application/x-tex">|\mathbf{V}|</annotation></semantics></math>
 times, and because each edge requires a constant-time update to
@@ -520,34 +517,30 @@ the <code>KVPair</code> class to store key-value pairs in the heap, with
 the edge weight as the key and the target vertex as the value. here is
 the implementation for Dijkstra’s algorithm using a heap.</p>
 <div class="sourceCode" id="cb3"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Dijkstra&#39;s shortest-paths: priority queue version</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">void</span> <span class="op">&lt;</span>V<span class="op">&gt;</span> <span class="fu">DijkstraPQ</span><span class="op">(</span>Graph G<span class="op">,</span> V s<span class="op">,</span> <span class="bu">Map</span><span class="op">&lt;</span>V<span class="op">,</span><span class="bu">Double</span><span class="op">&gt;</span> D<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    MinHeap H <span class="op">=</span> <span class="kw">new</span> <span class="fu">MinHeap</span><span class="op">();</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    H<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="kw">new</span> <span class="fu">KVPair</span><span class="op">(</span><span class="dv">0</span><span class="op">,</span> s<span class="op">));</span>   <span class="co">// Initial vertex</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Set</span><span class="op">&lt;</span>V<span class="op">&gt;</span> visited <span class="op">=</span> <span class="kw">new</span> <span class="bu">Set</span><span class="op">&lt;&gt;();</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span>V v <span class="op">:</span> G<span class="op">.</span><span class="fu">vertices</span><span class="op">())</span>  <span class="co">// Initialize distance</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        D<span class="op">.</span><span class="fu">put</span><span class="op">(</span>v<span class="op">,</span> <span class="bu">Double</span><span class="op">.</span><span class="fu">POSITIVE_INFINITY</span><span class="op">);</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    D<span class="op">.</span><span class="fu">put</span><span class="op">(</span>s<span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Dijkstra&#39;s shortest-paths: priority queue version</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> DijkstraPQ(G, s):</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    visited <span class="op">=</span> <span class="kw">new</span> <span class="bu">Set</span>()</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    D <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>()</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (V v : G.vertices())</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        D.<span class="bu">put</span>(v, ∞)  <span class="co">// Initialize distance</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    D.<span class="bu">put</span>(s, <span class="dv">0</span>)  <span class="co">// The distance from s to s is 0</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    agenda <span class="op">=</span> <span class="kw">new</span> <span class="bu">PriorityQueue</span>()</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    agenda.<span class="bu">add</span>(<span class="kw">new</span> <span class="bu">KVPair</span>(<span class="dv">0</span>, s))  <span class="co">// Initial vertex</span></span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(!</span>H<span class="op">.</span><span class="fu">isEmpty</span><span class="op">())</span> <span class="op">{</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        V v <span class="op">=</span> H<span class="op">.</span><span class="fu">removeMin</span><span class="op">().</span><span class="fu">value</span><span class="op">();</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!</span>visited<span class="op">.</span><span class="fu">contains</span><span class="op">(</span>v<span class="op">))</span> <span class="op">{</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>            visited<span class="op">.</span><span class="fu">add</span><span class="op">(</span>v<span class="op">);</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>D<span class="op">.</span><span class="fu">get</span><span class="op">(</span>v<span class="op">)</span> <span class="op">==</span> <span class="bu">Double</span><span class="op">.</span><span class="fu">POSITIVE_INFINITY</span><span class="op">)</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span><span class="op">;</span>     <span class="co">// Unreachable</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> <span class="op">(</span>Edge<span class="op">&lt;</span>V<span class="op">&gt;</span> e <span class="op">:</span> G<span class="op">.</span><span class="fu">outgoingEdges</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>                V w <span class="op">=</span> e<span class="op">.</span><span class="fu">end</span><span class="op">;</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="op">(</span>D<span class="op">.</span><span class="fu">get</span><span class="op">(</span>w<span class="op">)</span> <span class="op">&gt;</span> D<span class="op">.</span><span class="fu">get</span><span class="op">(</span>v<span class="op">)</span> <span class="op">+</span> e<span class="op">.</span><span class="fu">weight</span><span class="op">)</span> <span class="op">{</span> <span class="co">// Update D</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>                    D<span class="op">.</span><span class="fu">put</span><span class="op">(</span>w<span class="op">,</span> D<span class="op">.</span><span class="fu">get</span><span class="op">(</span>v<span class="op">)</span> <span class="op">+</span> e<span class="op">.</span><span class="fu">weight</span><span class="op">);</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>                    H<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="kw">new</span> <span class="fu">KVPair</span><span class="op">(</span>D<span class="op">.</span><span class="fu">get</span><span class="op">(</span>W<span class="op">),</span> w<span class="op">));</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>                <span class="op">}</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>Using <code>MinVertex</code> to scan the vertex list for the minimum
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="kw">not</span> agenda.<span class="bu">isEmpty</span>():</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        v <span class="op">=</span> agenda.<span class="bu">removeMin</span>().value</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> v <span class="kw">not</span> <span class="kw">in</span> visited:</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>            visited.<span class="bu">add</span>(v)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> D.<span class="bu">get</span>(v) <span class="op">==</span> ∞:</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> D  <span class="co">// Vertex v is unreachable</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> <span class="kw">each</span> e <span class="kw">in</span> G.outgoingEdges():</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>                w <span class="op">=</span> e.end</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>                dist <span class="op">=</span> D.<span class="bu">get</span>(v) <span class="op">+</span> e.weight</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> dist <span class="op">&lt;</span> D.<span class="bu">get</span>(w): <span class="co">// If the new distance is shorter...</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>                    D.<span class="bu">put</span>(w, dist)  <span class="co">// ...update w with the new distance...</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>                    agenda.<span class="bu">add</span>(<span class="kw">new</span> <span class="bu">KVPair</span>(dist, w))  <span class="co">// ...and add it to the agenda</span></span></code></pre></div>
+<p>Using <code>minVertex</code> to scan the vertex list for the minimum
 value is more efficient when the graph is dense, that is, when
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">|</mo><mi>𝐄</mi><mo stretchy="true" form="postfix">|</mo></mrow><annotation encoding="application/x-tex">|\mathbf{E}|</annotation></semantics></math>
 approaches

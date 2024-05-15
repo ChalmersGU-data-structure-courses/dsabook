@@ -202,34 +202,22 @@ the current node, and only make the recursive call for a non-null
 child.</p>
 <p>Recall the basic preorder traversal function.</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> preorder(node):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> node <span class="kw">is</span> <span class="va">None</span>: <span class="cf">return</span>  <span class="co"># Empty subtree - do nothing</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    visit(node)                <span class="co"># Visit root node</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    preorder(node.left())    <span class="co"># Process all nodes in left</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    preorder(node.right())   <span class="co"># Process all nodes in right</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="dt">void</span> <span class="fu">preorder</span><span class="op">(</span>BinNode<span class="op">&lt;</span>E<span class="op">&gt;</span> node<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>node <span class="op">==</span> <span class="kw">null</span><span class="op">)</span> <span class="cf">return</span><span class="op">;</span>  <span class="co">// Empty subtree - do nothing</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">visit</span><span class="op">(</span>node<span class="op">);</span>               <span class="co">// Visit root node</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">preorder</span><span class="op">(</span>node<span class="op">.</span><span class="fu">left</span><span class="op">());</span>     <span class="co">// Process all nodes in left</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">preorder</span><span class="op">(</span>node<span class="op">.</span><span class="fu">right</span><span class="op">());</span>    <span class="co">// Process all nodes in right</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> preorder(node):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> node <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span>:      <span class="co">// Only continue if this is a tree</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        visit(node)           <span class="co">// Visit root node</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        preorder(node.left)   <span class="co">// Process all nodes in left subtree</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        preorder(node.right)  <span class="co">// Process all nodes in right subtree</span></span></code></pre></div>
 <p>Here is an alternate design for the preorder traversal, in which the
 left and right pointers of the current node are checked so that the
 recursive call is made only on non-empty children.</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is a bad idea</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> preorder2(node):</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    visit(node)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> node.left() <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>: preorder2(node.left())</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> node.right() <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>: preorder2(node.right())</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// This is a bad idea</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="dt">void</span> <span class="fu">preorder2</span><span class="op">(</span>BinNode<span class="op">&lt;</span>E<span class="op">&gt;</span> node<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">visit</span><span class="op">(</span>node<span class="op">);</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>node<span class="op">.</span><span class="fu">left</span><span class="op">()</span>  <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="fu">preorder2</span><span class="op">(</span>node<span class="op">.</span><span class="fu">left</span><span class="op">());</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>node<span class="op">.</span><span class="fu">right</span><span class="op">()</span> <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="fu">preorder2</span><span class="op">(</span>node<span class="op">.</span><span class="fu">right</span><span class="op">());</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// This is a bad idea:</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> preorder2(node):</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    visit(node)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> node.left <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span>:</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        preorder2(node.left)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> node.right <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span>:</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        preorder2(node.right)</span></code></pre></div>
 <p>At first, it might appear that <code>preorder2</code> is more
 efficient than <code>preorder</code>, because it makes only half as many
 recursive calls (since it won’t try to call on a null pointer). On the
@@ -281,47 +269,19 @@ own base case handle it.</p>
 binary tree. The following solution has an error, since it does
 redundant manipulation to the left and the right children of each
 node.</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ineff_BTinc(root)<span class="op">;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> root <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        root.setValue(root.value() <span class="op">+</span> <span class="dv">1</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> root.left() <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>            root.left().setValue(root.left().value() <span class="op">+</span> <span class="dv">1</span>)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>            ineff_BTinc(root.left().left())</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> root.right() <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>            root.right().setValue(root.right().value() <span class="op">+</span> <span class="dv">1</span>)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>            ineff_BTinc(root.right().right())</span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">void</span> <span class="fu">ineff_BTinc</span><span class="op">(</span>BinNode root<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>root <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>      root<span class="op">.</span><span class="fu">setValue</span><span class="op">((</span><span class="dt">int</span><span class="op">)(</span>root<span class="op">.</span><span class="fu">value</span><span class="op">())</span> <span class="op">+</span> <span class="dv">1</span><span class="op">);</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>root<span class="op">.</span><span class="fu">left</span><span class="op">()</span> <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>      root<span class="op">.</span><span class="fu">left</span><span class="op">().</span><span class="fu">setValue</span><span class="op">((</span><span class="dt">int</span><span class="op">)(</span>root<span class="op">.</span><span class="fu">left</span><span class="op">().</span><span class="fu">value</span><span class="op">())</span> <span class="op">+</span> <span class="dv">1</span><span class="op">);</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ineff_BTinc</span><span class="op">(</span>root<span class="op">.</span><span class="fu">left</span><span class="op">().</span><span class="fu">left</span><span class="op">());</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>root<span class="op">.</span><span class="fu">right</span><span class="op">()</span> <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>      root<span class="op">.</span><span class="fu">right</span><span class="op">().</span><span class="fu">setValue</span><span class="op">((</span><span class="dt">int</span><span class="op">)(</span>root<span class="op">.</span><span class="fu">right</span><span class="op">().</span><span class="fu">value</span><span class="op">())</span> <span class="op">+</span> <span class="dv">1</span><span class="op">);</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ineff_BTinc</span><span class="op">(</span>root<span class="op">.</span><span class="fu">right</span><span class="op">().</span><span class="fu">right</span><span class="op">());</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">void</span> <span class="fu">ineff_BTinc</span><span class="op">(</span>BinNode<span class="op">&lt;</span><span class="bu">Integer</span><span class="op">&gt;</span> root<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>root <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        root<span class="op">.</span><span class="fu">setValue</span><span class="op">(</span>root<span class="op">.</span><span class="fu">value</span><span class="op">()</span> <span class="op">+</span> <span class="dv">1</span><span class="op">);</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>root<span class="op">.</span><span class="fu">left</span><span class="op">()</span> <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>            root<span class="op">.</span><span class="fu">left</span><span class="op">().</span><span class="fu">setValue</span><span class="op">(</span>root<span class="op">.</span><span class="fu">left</span><span class="op">().</span><span class="fu">value</span><span class="op">()</span> <span class="op">+</span> <span class="dv">1</span><span class="op">);</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>            <span class="fu">ineff_BTinc</span><span class="op">(</span>root<span class="op">.</span><span class="fu">left</span><span class="op">().</span><span class="fu">left</span><span class="op">());</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>root<span class="op">.</span><span class="fu">right</span><span class="op">()</span> <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>            root<span class="op">.</span><span class="fu">right</span><span class="op">().</span><span class="fu">setValue</span><span class="op">(</span>root<span class="op">.</span><span class="fu">right</span><span class="op">().</span><span class="fu">value</span><span class="op">()</span> <span class="op">+</span> <span class="dv">1</span><span class="op">);</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>            <span class="fu">ineff_BTinc</span><span class="op">(</span>root<span class="op">.</span><span class="fu">right</span><span class="op">().</span><span class="fu">right</span><span class="op">());</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> inefficient_increment(node):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> node <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span>:</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        node.elem <span class="op">=</span> node.elem <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> node.left <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span>:</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>            node.left.elem <span class="op">=</span> node.left.elem <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            inefficient_increment(node.left.left)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> node.right <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span>:</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>            node.right.elem <span class="op">=</span> node.right.elem <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>            inefficient_increment(node.right.right)</span></code></pre></div>
 <p>The efficient solution should not explicitly set the child values
 that way. Changing the value of a node does not depend on the child
-values. So the function should simply increment the root value, and make
+values. So the function should simply increment the node value, and make
 recursive calls on the children.</p>
 </section>
 <p>In rare problems, you might need to explicitly check if the children

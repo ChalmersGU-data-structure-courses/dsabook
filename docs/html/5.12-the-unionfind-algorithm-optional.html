@@ -263,26 +263,28 @@ operations.</p>
 <p>Here is an implementation for parent pointer trees and the UNION/FIND
 process.</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># General Tree implementation for UNION/FIND</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ParPtrTree:</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, size) {</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Each node is its own root to start</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.array <span class="op">=</span> [<span class="op">-</span><span class="dv">1</span>] <span class="op">*</span> size</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Merge two subtrees if they are different</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> UNION(<span class="va">self</span>, a, b):</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        root1 <span class="op">=</span> <span class="va">self</span>.FIND(a)  <span class="co"># Find root of node a</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        root2 <span class="op">=</span> <span class="va">self</span>.FIND(b)  <span class="co"># Find root of node b</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> root1 <span class="op">!=</span> root2:    <span class="co"># Merge two trees</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.array[root1] <span class="op">=</span> root2</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Return the root of curr&#39;s tree</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> FIND(<span class="va">self</span>, curr):</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="va">self</span>.array[curr] <span class="op">!=</span> <span class="op">-</span><span class="dv">1</span>:</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>            curr <span class="op">=</span> <span class="va">self</span>.array[curr]</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> curr           <span class="co"># Now at root</span></span></code></pre></div>
-<p>The <code>ParPtrTree</code> class has an array where each array
-position corresponds to one object in some collection. Each array
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// General Tree implementation for UNION/FIND</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ParentPointerTree:</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    ParentPointerTree(<span class="bu">size</span>):</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Each node is its own root to start</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.array <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(<span class="bu">size</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="op">=</span> <span class="dv">0</span> <span class="kw">to</span> <span class="bu">size</span><span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>            <span class="va">this</span>.array[i] <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>  <span class="co">// We use -1 to say that this is a root</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Merge two subtrees if they are different:</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    UNION(a, b):</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        root1 <span class="op">=</span> <span class="va">this</span>.FIND(a)  <span class="co">// Find root of node a</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        root2 <span class="op">=</span> <span class="va">this</span>.FIND(b)  <span class="co">// Find root of node b</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> root1 <span class="op">!=</span> root2:    <span class="co">// Merge two trees</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>            <span class="va">this</span>.array[root1] <span class="op">=</span> root2</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Return the root of current&#39;s tree</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    FIND(current):</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="va">this</span>.array[current] <span class="op">!=</span> <span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>            current <span class="op">=</span> self.array[current]</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> current  <span class="co">// Now we are at the root</span></span></code></pre></div>
+<p>The <code>ParentPointerTree</code> class has an array where each
+array position corresponds to one object in some collection. Each array
 element stores the array index for its parent. There are two main
 methods to implement. Method <code>UNION</code> merges two sets
 together, where each set corresponds to a tree. Method <code>FIND</code>
@@ -292,9 +294,9 @@ is used to find the ultimate root for a node.</p>
 objects, where each object is assigned a unique index in the range 0 to
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>.
 The indices refer to the corresponding parent pointers in the array.
-Class <code>ParPtrTree</code> creates and initializes the UNION/FIND
-array, and methods <code>UNION</code> and <code>FIND</code> take array
-indices as inputs.</p>
+Class <code>ParentPointerTree</code> creates and initializes the
+UNION/FIND array, and methods <code>UNION</code> and <code>FIND</code>
+take array indices as inputs.</p>
 <div id="UFfig">
 <p>
 <div id="UFfigCON" class="ssAV" data-short-name="UFfigCON" data-long-name="General/UFfigCON" alt="General/UFfigCON" tabIndex="-1">
@@ -394,7 +396,7 @@ title="In an undirected graph, a subset of the nodes such that each node in the 
 component</a>. The goal is to quickly classify the objects into disjoint
 sets that correspond to the connected components.</p>
 <p>Another use for UNION/FIND occurs in <a
-href="9.5-minimal-cost-spanning-trees.html#kruskals-algorithm"
+href="9.6-minimal-cost-spanning-trees.html#kruskals-algorithm"
 class="term"
 title="An algorithm for computing the MCST of a graph. During processing, it makes use of the UNION/FIND process to efficiently determine of two vertices are within the same subgraph.">Kruskal’s
 algorithm</a> for computing the <a
@@ -471,44 +473,18 @@ accompanied by at least doubling the size of the tree).</p>
 <p>Here is an implementation for the UNION method when using weighted
 union.</p>
 <div class="sourceCode" id="cb2"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> UNION(<span class="va">self</span>, a, b):</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>        root1 <span class="op">=</span> <span class="va">self</span>.FIND(a)   <span class="co"># Find root of node a</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        root2 <span class="op">=</span> <span class="va">self</span>.FIND(b)   <span class="co"># Find root of node b</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> root1 <span class="op">!=</span> root2:     <span class="co"># Merge with weighted union</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">self</span>.weights[root2] <span class="op">&gt;</span> <span class="va">self</span>.weights[root1]:</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.array[root1] <span class="op">=</span> root2</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.weights[root2] <span class="op">+=</span> <span class="va">self</span>.weights[root1]</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.array[root2] <span class="op">=</span> root1<span class="op">;</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.weights[root1] <span class="op">+=</span> <span class="va">self</span>.weights[root2]<span class="op">;</span></span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">UNION</span><span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> root1 <span class="op">=</span> <span class="fu">FIND</span><span class="op">(</span>a<span class="op">);</span>     <span class="co">// Find root of node a</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> root2 <span class="op">=</span> <span class="fu">FIND</span><span class="op">(</span>b<span class="op">);</span>     <span class="co">// Find root of node b</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>root1 <span class="op">!=</span> root2<span class="op">)</span> <span class="op">{</span>          <span class="co">// Merge with weighted union</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> <span class="op">(</span>weights<span class="op">[</span>root2<span class="op">]</span> <span class="op">&gt;</span> weights<span class="op">[</span>root1<span class="op">])</span> <span class="op">{</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        array<span class="op">[</span>root1<span class="op">]</span> <span class="op">=</span> root2<span class="op">;</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        weights<span class="op">[</span>root2<span class="op">]</span> <span class="op">+=</span> weights<span class="op">[</span>root1<span class="op">];</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>      <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        array<span class="op">[</span>root2<span class="op">]</span> <span class="op">=</span> root1<span class="op">;</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        weights<span class="op">[</span>root1<span class="op">]</span> <span class="op">+=</span> weights<span class="op">[</span>root2<span class="op">];</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>      <span class="op">}</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">UNION</span><span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> root1 <span class="op">=</span> <span class="fu">FIND</span><span class="op">(</span>a<span class="op">);</span>     <span class="co">// Find root of node a</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> root2 <span class="op">=</span> <span class="fu">FIND</span><span class="op">(</span>b<span class="op">);</span>     <span class="co">// Find root of node b</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>root1 <span class="op">!=</span> root2<span class="op">)</span> <span class="op">{</span>    <span class="co">// Merge with weighted union</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>weights<span class="op">[</span>root2<span class="op">]</span> <span class="op">&gt;</span> weights<span class="op">[</span>root1<span class="op">])</span> <span class="op">{</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                array<span class="op">[</span>root1<span class="op">]</span> <span class="op">=</span> root2<span class="op">;</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                weights<span class="op">[</span>root2<span class="op">]</span> <span class="op">+=</span> weights<span class="op">[</span>root1<span class="op">];</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                array<span class="op">[</span>root2<span class="op">]</span> <span class="op">=</span> root1<span class="op">;</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                weights<span class="op">[</span>root1<span class="op">]</span> <span class="op">+=</span> weights<span class="op">[</span>root2<span class="op">];</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ParentPointerTree:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    UNION(a, b):</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        root1 <span class="op">=</span> <span class="va">this</span>.FIND(a)   <span class="co">// Find root of node a</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        root2 <span class="op">=</span> <span class="va">this</span>.FIND(b)   <span class="co">// Find root of node b</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> root1 <span class="op">!=</span> root2:     <span class="co">// Merge with weighted union</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">this</span>.weights[root2] <span class="op">&gt;</span> <span class="va">this</span>.weights[root1]:</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                <span class="va">this</span>.array[root1] <span class="op">=</span> root2</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                <span class="va">this</span>.weights[root2] <span class="op">=</span> <span class="va">this</span>.weights[root2] <span class="op">+</span> <span class="va">this</span>.weights[root1]</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                <span class="va">this</span>.array[root2] <span class="op">=</span> root1</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                <span class="va">this</span>.weights[root1] <span class="op">=</span> <span class="va">this</span>.weights[root1] <span class="op">+</span> <span class="va">this</span>.weights[root2]</span></code></pre></div>
 <p>The following slideshow illustrates a series of UNION operations with
 weighted union.</p>
 <p>
@@ -552,28 +528,16 @@ Alternatively, a recursive algorithm can be implemented as follows. This
 version of <code>FIND</code> not only returns the root of the current
 node, but also makes all ancestors of the current node point to the
 root.</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Return the root of curr&#39;s tree with path compression</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> FIND(<span class="va">self</span>, curr):</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>.array[curr] <span class="op">==</span> <span class="op">-</span><span class="dv">1</span>:</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> curr        <span class="co"># At root</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.array[curr] <span class="op">=</span> <span class="va">self</span>.FIND(<span class="va">self</span>.array[curr])</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.array[curr]<span class="op">;</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Return the root of curr&#39;s tree with path compression</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">int</span> <span class="fu">FIND</span><span class="op">(</span><span class="dt">int</span> curr<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>array<span class="op">[</span>curr<span class="op">]</span> <span class="op">==</span> <span class="op">-</span><span class="dv">1</span><span class="op">)</span> <span class="cf">return</span> curr<span class="op">;</span> <span class="co">// At root</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    array<span class="op">[</span>curr<span class="op">]</span> <span class="op">=</span> <span class="fu">FIND</span><span class="op">(</span>array<span class="op">[</span>curr<span class="op">]);</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> array<span class="op">[</span>curr<span class="op">];</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Return the root of curr&#39;s tree with path compression</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">FIND</span><span class="op">(</span><span class="dt">int</span> curr<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>array<span class="op">[</span>curr<span class="op">]</span> <span class="op">==</span> <span class="op">-</span><span class="dv">1</span><span class="op">)</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> curr<span class="op">;</span>         <span class="co">// At root</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        array<span class="op">[</span>curr<span class="op">]</span> <span class="op">=</span> <span class="fu">FIND</span><span class="op">(</span>array<span class="op">[</span>curr<span class="op">]);</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> array<span class="op">[</span>curr<span class="op">];</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> ParentPointerTree:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Return the root of current&#39;s tree with path compression</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    FIND(current):</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">this</span>.array[current] <span class="op">==</span> <span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> current  <span class="co">// Base case: we are at the root</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>            <span class="va">this</span>.array[current] <span class="op">=</span> <span class="va">this</span>.FIND(<span class="va">this</span>.array[current])</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">this</span>.array[current]</span></code></pre></div>
 <p>The following slide show illustrates path compression using the last
 step in the previous example.</p>
 <p>
@@ -627,19 +591,17 @@ operations will be
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><msup><mo>log</mo><mo>*</mo></msup><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log^* n)</annotation></semantics></math>,
 yielding nearly constant time for each equivalence operation. This is an
 example of <a href="10-glossary.html#amortized-analysis" class="term"
-title="Analysing the amortized complexity of an algorithm or term:problem.">amortized
+title="Analysing the amortized complexity of an algorithm or problem.">amortized
 analysis</a>.</p>
 <p>The expression
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mo>log</mo><mo>*</mo></msup><mi>n</mi></mrow><annotation encoding="application/x-tex">\log^* n</annotation></semantics></math>
 is closely related to the inverse of Ackermann’s function. For more
 information about Ackermann’s function and the cost of path compression
-for UNION/FIND, see <a
-href="5.12-the-unionfind-algorithm-optional.html#Tarjan75"
-class="citation">[Tarjan75]</a>. The survey article by Galil &amp;
-Italiano <a
-href="5.12-the-unionfind-algorithm-optional.html#GalilItaliano91"
-class="citation">[GalilItaliano91]</a> covers many aspects of the
-equivalence class problem.</p>
+for UNION/FIND, see [<a href="11-bibliography.html#tarjan75"
+class="citation">Tarjan, 1975</a>]. The survey article by [<a
+href="11-bibliography.html#galilitaliano91" class="citation">Galil &amp;
+Italiano, 1991</a>] covers many aspects of the equivalence class
+problem.</p>
 <p>
 <div id="UnionFindPRO" class="embedContainer">
 <iframe id="UnionFindPRO_iframe" aria-label="UnionFindPRO" src="../interactive/General/UnionFindPRO.html" width="100%" height="600" scrolling="no">
@@ -647,23 +609,6 @@ Your browser does not support iframes.
 </iframe>
 </div>
 </p>
-<div id="citations">
-<dl>
-<dt><span id="GalilItaliano91"
-class="citation-label">GalilItaliano91</span></dt>
-<dd>
-<p>Zvi Galil and Giuseppe F. Italiano, “Data Structures and Algorithms
-for Disjoint Set Union Problems”, <em>Computing Surveys 23</em>,
-3(September 1991), 319-344.</p>
-</dd>
-<dt><span id="Tarjan75" class="citation-label">Tarjan75</span></dt>
-<dd>
-<p>Robert E. Tarjan, “On the efficiency of a good but not linear set
-merging algorithm”, <em>Journal of the ACM 22</em>, 2(April 1975),
-215-225.</p>
-</dd>
-</dl>
-</div>
 </section>
 </section>
 <script type="text/javascript" src="../interactive/General/UFfigCON.js"></script>

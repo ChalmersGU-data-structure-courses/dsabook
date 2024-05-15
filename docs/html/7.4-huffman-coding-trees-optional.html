@@ -441,78 +441,42 @@ href="7.4-huffman-coding-trees-optional.html#FreqExamp">Table
 </p>
 <p>Here is the implementation for the Huffman Tree class.</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="at">@total_ordering</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> HuffTree:</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, elem<span class="op">=</span><span class="va">None</span>, left<span class="op">=</span><span class="va">None</span>, right<span class="op">=</span><span class="va">None</span>, weight<span class="op">=</span><span class="va">None</span>):</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.elem <span class="op">=</span> elem</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.left <span class="op">=</span> left</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.right <span class="op">=</span> right</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.weight <span class="op">=</span> weight</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> is_leaf(<span class="va">self</span>):</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.left <span class="kw">is</span> <span class="va">None</span> <span class="kw">or</span> <span class="va">self</span>.right <span class="kw">is</span> <span class="va">None</span></span>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> HuffTree <span class="kw">implements</span> <span class="bu">Comparable</span>:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    HuffTree(elem, left, right, weight):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.elem <span class="op">=</span> elem</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.left <span class="op">=</span> left</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.right <span class="op">=</span> right</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.weight <span class="op">=</span> weight</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Huffman trees are compared using their &#39;weight&#39;:</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">compareTo</span>(other):</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">this</span>.weight.<span class="bu">compareTo</span>(other.weight)</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__lt__</span>(<span class="va">self</span>, other):</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.weight <span class="op">&lt;</span> other.weight</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__eq__</span>(<span class="va">self</span>, other):</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.weight <span class="op">==</span> other.weight</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> HuffTree <span class="kw">implements</span> <span class="bu">Comparable</span><span class="op">&lt;</span>HuffTree<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">char</span> element<span class="op">;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">int</span> weight<span class="op">;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> HuffTree left<span class="op">;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> HuffTree right<span class="op">;</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">HuffTree</span><span class="op">(</span><span class="dt">char</span> el<span class="op">,</span> <span class="dt">int</span> wt<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        element <span class="op">=</span> el<span class="op">;</span> weight <span class="op">=</span> wt<span class="op">;</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">HuffTree</span><span class="op">(</span>HuffTree l<span class="op">,</span> HuffTree r<span class="op">,</span> <span class="dt">int</span> wt<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        left <span class="op">=</span> l<span class="op">;</span> right <span class="op">=</span> r<span class="op">;</span> weight <span class="op">=</span> wt<span class="op">;</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">isLeaf</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> left <span class="op">==</span> <span class="kw">null</span> <span class="op">||</span> right <span class="op">==</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">compareTo</span><span class="op">(</span>HuffTree other<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">Integer</span><span class="op">.</span><span class="fu">compare</span><span class="op">(</span><span class="kw">this</span><span class="op">.</span><span class="fu">weight</span><span class="op">,</span> other<span class="op">.</span><span class="fu">weight</span><span class="op">);</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...or for all comparison operators:</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    (<span class="va">this</span> <span class="op">&lt;</span> other) <span class="op">=</span> (<span class="va">this</span>.weight <span class="op">&lt;</span> other.weight)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    (<span class="va">this</span> <span class="op">==</span> other) <span class="op">=</span> (<span class="va">this</span>.weight <span class="op">==</span> other.weight)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    (...etc...)</span></code></pre></div>
 <p>Here is the implementation for the tree-building process.</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_huff_tree(frequencies):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    huff_heap <span class="op">=</span> MinHeap()</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Initialise the heap with singleton Huffman trees</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ch, freq <span class="kw">in</span> frequencies.items():</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        huff_heap.add(HuffTree(elem<span class="op">=</span>ch, weight<span class="op">=</span>freq))</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># While at least two trees left on heap</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> huff_heap.size() <span class="op">&gt;</span> <span class="dv">1</span>:</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        t1 <span class="op">=</span> huff_heap.removeMin()</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        t2 <span class="op">=</span> huff_heap.removeMin()</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        t3 <span class="op">=</span> HuffTree(left<span class="op">=</span>t1, right<span class="op">=</span>t2, weight<span class="op">=</span>t1.weight <span class="op">+</span> t2.weight)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Return new tree to the heap</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        huff_heap.add(t3)</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Return the final Huffman tree</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> huff_heap.removeMin() </span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="dt">static</span> HuffTree <span class="fu">buildHuffTree</span><span class="op">(</span><span class="bu">Map</span><span class="op">&lt;</span><span class="bu">Character</span><span class="op">,</span> <span class="bu">Integer</span><span class="op">&gt;</span> frequencies<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    MinHeap<span class="op">&lt;</span>HuffTree<span class="op">&gt;</span> huffHeap <span class="op">=</span> <span class="kw">new</span> MinHeap<span class="op">&lt;&gt;();</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">char</span> ch <span class="op">:</span> frequencies<span class="op">)</span> <span class="op">{</span> <span class="co">// Initialise the heap with singleton Huffman trees</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> freq <span class="op">=</span> frequencies<span class="op">.</span><span class="fu">get</span><span class="op">(</span>ch<span class="op">);</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        huffHeap<span class="op">.</span><span class="fu">add</span><span class="op">(</span><span class="kw">new</span> <span class="fu">HuffTree</span><span class="op">(</span>ch<span class="op">,</span> freq<span class="op">));</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>huffHeap<span class="op">.</span><span class="fu">size</span><span class="op">()</span> <span class="op">&gt;</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span> <span class="co">// While at least two trees left on heap</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        HuffTree t1 <span class="op">=</span> huffHeap<span class="op">.</span><span class="fu">removeMin</span><span class="op">();</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        HuffTree t2 <span class="op">=</span> huffHeap<span class="op">.</span><span class="fu">removeMin</span><span class="op">();</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        HuffTree t3 <span class="op">=</span> <span class="kw">new</span> <span class="fu">HuffTree</span><span class="op">(</span>t1<span class="op">,</span> t2<span class="op">,</span> t1<span class="op">.</span><span class="fu">weight</span> <span class="op">+</span> t2<span class="op">.</span><span class="fu">weight</span><span class="op">);</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        huffHeap<span class="op">.</span><span class="fu">add</span><span class="op">(</span>t3<span class="op">);</span>         <span class="co">// Return new tree to heap</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> huffHeap<span class="op">.</span><span class="fu">removeMin</span><span class="op">();</span>  <span class="co">// Return the final Huffman tree</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> buildHuffTree(frequencies):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Initialise a min heap with singleton Huffman trees</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    huffHeap <span class="op">=</span> <span class="kw">new</span> MinHeap()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> <span class="bu">char</span> <span class="kw">in</span> frequencies:</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        freq <span class="op">=</span> frequencies.<span class="bu">get</span>(<span class="bu">char</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        huffHeap.<span class="bu">add</span>(<span class="kw">new</span> HuffTree(elem<span class="op">=</span><span class="bu">char</span>, weight<span class="op">=</span>freq))</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// While there are at least two trees left on heap</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> huffHeap.<span class="bu">size</span>() <span class="op">&gt;</span> <span class="dv">1</span>:</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Remove the two minimum ones</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        t1 <span class="op">=</span> huffHeap.<span class="bu">removeMin</span>()</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        t2 <span class="op">=</span> huffHeap.<span class="bu">removeMin</span>()</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        weight <span class="op">=</span> t1.weight <span class="op">+</span> t2.weight</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Combine the trees and add the new tree to the heap</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        t3 <span class="op">=</span> <span class="kw">new</span> HuffTree(left<span class="op">=</span>t1, right<span class="op">=</span>t2, weight<span class="op">=</span>weight)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        huffHeap.<span class="bu">add</span>(t3)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Return the final Huffman tree</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> huffHeap.<span class="bu">removeMin</span>() </span></code></pre></div>
 <p><code>buildHuffTree</code> takes as input <code>frequencies</code>, a
 map that tells how many times each character occurs in the text to be
 compressed. It first initialises a min-heap of Huffman trees, creating
@@ -670,13 +634,15 @@ expected frequencies of the letters, than the length of the encoding
 will not be as expected either.</p>
 <p>You can use the following visualization to create a huffman tree for
 your own set of letters and frequencies.</p>
-<p>
+<!-- TODO: this doesn't work
+
 <div id="huffmanCustomBuildAV" class="embedContainer">
 <iframe id="huffmanCustomBuildAV_iframe" aria-label="huffmanCustomBuildAV" src="../interactive/Binary/huffmanCustomBuildAV.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
+-->
 </section>
 <section id="trees-versus-tries-optional" class="level3"
 data-number="7.4.5">
@@ -767,9 +733,6 @@ are the letters with least frequency.</p>
 <div id="HProof">
 <p>
 <div id="HuffProofCON" class="ssAV" data-short-name="HuffProofCON" data-long-name="Binary/HuffProofCON" alt="Binary/HuffProofCON" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
 </p>

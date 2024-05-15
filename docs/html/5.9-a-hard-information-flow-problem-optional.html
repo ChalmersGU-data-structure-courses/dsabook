@@ -227,36 +227,22 @@ information might come from any of the node’s ancestors. Thus, relevant
 range information must be passed down the tree. We can implement this
 function as follows.</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> checkBST(node, low, high):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> node <span class="kw">is</span> <span class="va">None</span>: <span class="cf">return</span> <span class="va">True</span>  <span class="co"># Empty subtree</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    rootval <span class="op">=</span> node.value()</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> rootval <span class="op">&lt;=</span> low <span class="kw">or</span> rootval <span class="op">&gt;=</span> high:</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">False</span>  <span class="co"># Out of range</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (checkBST(node.left(), low, rootval) <span class="kw">and</span>  <span class="co"># Check left subtree</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>            checkBST(node.right(), rootval, high))   <span class="co"># Check right subtree</span></span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> checkBST(node, low, high):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> node <span class="kw">is</span> <span class="va">null</span>:</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">true</span>  <span class="co">// Base case: empty subtree</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    rootval <span class="op">=</span> node.elem</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> rootval <span class="op">&lt;=</span> low <span class="kw">or</span> rootval <span class="op">&gt;=</span> high:</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">false</span>  <span class="co">// Value out of range</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (checkBST(node.left, low, rootval) <span class="kw">and</span>  <span class="co">// Check left subtree</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>            checkBST(node.right, rootval, high))   <span class="co">// Check right subtree</span></span></code></pre></div>
+<p>How should we call this function on a given tree? Or in other words,
+what should be the initial <code>low</code> and <code>high</code>
+values? If we don’t have any other constraints we can let the initial
+range be as large as possible, so we call the function like this:</p>
 <div class="sourceCode" id="cb2"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">boolean</span> <span class="fu">checkBST</span><span class="op">(</span>BSTNode rt<span class="op">,</span> <span class="bu">Comparable</span> low<span class="op">,</span> <span class="bu">Comparable</span> high<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>rt <span class="op">==</span> <span class="kw">null</span><span class="op">)</span> <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span> <span class="co">// Empty subtree</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="bu">Comparable</span> rootval <span class="op">=</span> rt<span class="op">.</span><span class="fu">value</span><span class="op">();</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">((</span>rootval<span class="op">.</span><span class="fu">compareTo</span><span class="op">(</span>low<span class="op">)</span> <span class="op">&lt;=</span> <span class="dv">0</span><span class="op">)</span> <span class="op">||</span> <span class="op">(</span>rootval<span class="op">.</span><span class="fu">compareTo</span><span class="op">(</span>high<span class="op">)</span> <span class="op">&gt;</span> <span class="dv">0</span><span class="op">))</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span> <span class="co">// Out of range</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(!</span><span class="fu">checkBST</span><span class="op">(</span>rt<span class="op">.</span><span class="fu">left</span><span class="op">(),</span> low<span class="op">,</span> rootval<span class="op">))</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span> <span class="co">// Left side failed</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="fu">checkBST</span><span class="op">(</span>rt<span class="op">.</span><span class="fu">right</span><span class="op">(),</span> rootval<span class="op">,</span> high<span class="op">);</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="op">&lt;</span>E <span class="kw">extends</span> <span class="bu">Comparable</span><span class="op">&lt;</span>E<span class="op">&gt;&gt;</span> <span class="dt">boolean</span> <span class="fu">checkBST</span><span class="op">(</span>BinNode<span class="op">&lt;</span>E<span class="op">&gt;</span> node<span class="op">,</span> E low<span class="op">,</span> E high<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>node <span class="op">==</span> <span class="kw">null</span><span class="op">)</span> <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span>  <span class="co">// Empty subtree</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    E rootval <span class="op">=</span> node<span class="op">.</span><span class="fu">value</span><span class="op">();</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>rootval<span class="op">.</span><span class="fu">compareTo</span><span class="op">(</span>low<span class="op">)</span> <span class="op">&lt;=</span> <span class="dv">0</span> <span class="op">||</span> rootval<span class="op">.</span><span class="fu">compareTo</span><span class="op">(</span>high<span class="op">)</span> <span class="op">&gt;=</span> <span class="dv">0</span><span class="op">)</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span>  <span class="co">// Out of range</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">checkBST</span><span class="op">(</span>node<span class="op">.</span><span class="fu">left</span><span class="op">(),</span> low<span class="op">,</span> rootval<span class="op">)</span>    <span class="co">// Check left subtree</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        <span class="op">&amp;&amp;</span> <span class="fu">checkBST</span><span class="op">(</span>node<span class="op">.</span><span class="fu">right</span><span class="op">(),</span> rootval<span class="op">,</span> high<span class="op">);</span> <span class="co">// Check right subtree</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>checkBST(tree, <span class="op">-</span>∞, ∞)</span></code></pre></div>
 </section>
 <script type="text/javascript" src="../interactive/BTRecurTutor/BSTCheckCON.js"></script>
 </body>

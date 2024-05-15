@@ -191,7 +191,7 @@ Notation</h2>
 <h3 data-number="3.6.1"><span class="header-section-number">3.6.1</span>
 Lower Bounds</h3>
 <p><a href="10-glossary.html#big-oh-notation" class="term"
-title="For growth rates $f$ and $g$, we write $f \in O(g)$ to say that $g$ is an upper bound for $f$. The notation can be made sense of by defining O(g) as the set of functions with growth rate less than or equal to that of g. The notation is often somewhat imprecisely used as $f(n) \in O(g(n))$ or even $f(n) = O(g(n))$.">Big-Oh
+title="For growth rates $f$ and $g$, we write $f \in O(g)$ to say that $g$ is an upper bound for $f$. The notation can be made sense of by defining $O(g)$ as the set of functions with growth rate less than or equal to that of $g$. The notation is often somewhat imprecisely used as $f(n) \in O(g(n))$ or even $f(n) = O(g(n))$.">Big-Oh
 notation</a> describes an upper bound. In other words, big-Oh notation
 states a claim about the greatest amount of some resource (usually time)
 that is required by an algorithm for some class of inputs of size
@@ -341,7 +341,7 @@ analyses. Even some “simple” programs are hard to analyze. Nobody
 currently knows the true upper or lower bounds for the following code
 fragment.</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> n <span class="op">&gt;</span> <span class="dv">1</span>:</span>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> n <span class="op">&gt;</span> <span class="dv">1</span>:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> ODD(n):</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        n <span class="op">=</span> <span class="dv">3</span> <span class="op">*</span> n <span class="op">+</span> <span class="dv">1</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>

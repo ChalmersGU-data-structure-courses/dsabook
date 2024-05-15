@@ -286,10 +286,13 @@ records and extracting keys is for various map implementations and
 sorting algorithms. Here is a simple class for representing key-value
 pairs:</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> KVPair:</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, key, value):</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.key <span class="op">=</span> key</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.value <span class="op">=</span> value</span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> <span class="bu">KVPair</span>:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    key    <span class="co">// the search key</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    value  <span class="co">// the value associated with the key</span></span></code></pre></div>
+<p>Note that in Python it’s probably easier to just use a pair
+<code>(key,value)</code>, but not all languages (read: Java) have that
+possibility. So we declare a class <strong>KVPair</strong> thart we will
+use in our example code.</p>
 <p>Using this we can easily implement a <strong>Map</strong> from an
 underlying <strong>List</strong>, which we will discuss further in the
 <a
@@ -307,17 +310,9 @@ integers. But to be useful, a real sorting algorithm typically has to
 deal with the fact that it is sorting a collection of records. A
 general-purpose sorting routine meant to operate on multiple record
 types would have to be written in a way to deal with the generic
-comparison problem. To illustrate, here is an example of <a
-href="2.4-insertion-sort.html#insertion-sort">Insertion Sort</a>
-implemented to work on an array that stores records that support the
-<code>Comparable</code> interface:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> insertionSort(A):</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(A)):  <span class="co"># Insert i&#39;th record</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        j <span class="op">=</span> i</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> j <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> A[j] <span class="op">&lt;</span> A[j<span class="op">-</span><span class="dv">1</span>]:</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>            swap(A, j, j<span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>            j <span class="op">-=</span> <span class="dv">1</span></span></code></pre></div>
+comparison problem. But as long as the elements of the array supports
+the <strong>Comparable</strong> interface, we can still use the standard
+comparison operators when sorting.</p>
 </section>
 <section id="review-questions" class="level3" data-number="1.5.5">
 <h3 data-number="1.5.5"><span class="header-section-number">1.5.5</span>
@@ -329,6 +324,7 @@ Your browser does not support iframes.
 </iframe>
 </div>
 </p>
+<!-- TODO: make a similar Python example -->
 </section>
 </section>
 </body>

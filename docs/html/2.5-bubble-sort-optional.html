@@ -214,22 +214,12 @@ on the second pass. Likewise, each succeeding pass through the array
 compares adjacent records, looking at one less record toward the end
 than did the preceding pass. Here is an implementation.</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> bubbleSort(A):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span> (<span class="bu">len</span>(A)<span class="op">-</span><span class="dv">1</span>):   <span class="co"># Insert i&#39;th record</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(A)<span class="op">-</span>i):</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> A[j<span class="op">-</span><span class="dv">1</span>] <span class="op">&gt;</span> A[j]:</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                swap(A, j<span class="op">-</span><span class="dv">1</span>, j)</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="dt">static</span> <span class="op">&lt;</span>T <span class="kw">extends</span> <span class="bu">Comparable</span><span class="op">&lt;</span>T<span class="op">&gt;&gt;</span> <span class="dt">void</span> <span class="fu">bubbleSort</span><span class="op">(</span>T<span class="op">[]</span> A<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> A<span class="op">.</span><span class="fu">length</span><span class="op">-</span><span class="dv">1</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Insert i&#39;th record.</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> j <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> j <span class="op">&lt;</span> A<span class="op">.</span><span class="fu">length</span><span class="op">-</span>i<span class="op">;</span> j<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>A<span class="op">[</span>j<span class="op">-</span><span class="dv">1</span><span class="op">].</span><span class="fu">compareTo</span><span class="op">(</span>A<span class="op">[</span>j<span class="op">])</span> <span class="op">&gt;</span> <span class="dv">0</span><span class="op">)</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                <span class="bu">Util</span><span class="op">.</span><span class="fu">swap</span><span class="op">(</span>A<span class="op">,</span> j<span class="op">-</span><span class="dv">1</span><span class="op">,</span> j<span class="op">);</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<div class="line-block"></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> bubbleSort(A):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="op">=</span> <span class="dv">0</span> <span class="kw">to</span> A.<span class="bu">size</span>()<span class="op">-</span><span class="dv">2</span>:</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Bubble up the i&#39;th element</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="op">=</span> <span class="dv">1</span> <span class="kw">to</span> A.<span class="bu">size</span>()<span class="op">-</span>i:</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> A[j<span class="op">-</span><span class="dv">1</span>] <span class="op">&gt;</span> A[j]:</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                swap(A, j<span class="op">-</span><span class="dv">1</span>, j)</span></code></pre></div>
 <p>
 <div id="bubblesortS1CON" class="ssAV" data-short-name="bubblesortS1CON" data-long-name="Bubble Sort Slideshow 1" alt="Bubble Sort Slideshow 1" tabIndex="-1">
 <span class="jsavcounter"></span>

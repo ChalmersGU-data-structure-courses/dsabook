@@ -175,15 +175,15 @@
 </div>
 <div class="sitenav">
 <span class="navlink">
-<span class="navlink-label">Next:</span> <a href="9.4-shortest-paths-problems.html" accesskey="n" rel="next">Shortest-Paths Problems</a>
+<span class="navlink-label">Next:</span> <a href="9.5-shortest-paths-problems.html" accesskey="n" rel="next">Shortest-Paths Problems</a>
 </span>
 <span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="9.2-graph-traversals.html" accesskey="p" rel="previous">Graph Traversals</a>
+<span class="navlink-label">Previous:</span> <a href="9.3-graph-traversals.html" accesskey="p" rel="previous">Graph Traversals</a>
 </span>
 </div>
 </nav>
-<section id="topological-sort" class="level2" data-number="9.3">
-<h2 data-number="9.3"><span class="header-section-number">9.3</span>
+<section id="topological-sort" class="level2" data-number="9.4">
+<h2 data-number="9.4"><span class="header-section-number">9.4</span>
 Topological Sort</h2>
 <p>Assume that we need to schedule a series of tasks, such as classes or
 construction jobs, where we cannot start one task until after its
@@ -196,10 +196,10 @@ indicate a conflicting series of prerequisites that could not be
 completed without violating at least one prerequisite. The process of
 laying out the vertices of a DAG in a linear order to meet the
 prerequisite rules is called a <a
-href="9.3-topological-sort.html#topological-sort" class="term"
+href="9.4-topological-sort.html#topological-sort" class="term"
 title="The process of laying out the vertices of a DAG in a linear order such that no vertex $A$ in the order is preceded by a vertex that can be reached by a (directed) path from $A$. Usually the (directed) edges in the graph define a prerequisite system, and the goal of the topological sort is to list the vertices in an order such that no prerequisites are violated.">topological
 sort</a>.</p>
-<p><a href="9.3-topological-sort.html#TopSort">Figure #TopSort</a>
+<p><a href="9.4-topological-sort.html#TopSort">Figure #TopSort</a>
 illustrates the problem. An acceptable topological sort for this example
 is J1, J2, J3, J4, J5, J6, J7. However, other orders are also
 acceptable, such as J1, J3, J2, J6, J4, J5, J7.</p>
@@ -212,13 +212,13 @@ acceptable, such as J1, J3, J2, J6, J4, J5, J7.</p>
 <p>An example graph for topological sort. Seven tasks have dependencies
 as shown by the directed graph.</p>
 </div>
-<section id="depth-first-solution" class="level3" data-number="9.3.1">
-<h3 data-number="9.3.1"><span class="header-section-number">9.3.1</span>
+<section id="depth-first-solution" class="level3" data-number="9.4.1">
+<h3 data-number="9.4.1"><span class="header-section-number">9.4.1</span>
 Depth-first solution</h3>
 <p>A topological sort may be found by performing a DFS on the graph.
 When a vertex is visited, no action is taken (i.e., function
-<code>PreVisit</code> does nothing). When the recursion pops back to
-that vertex, function <code>PostVisit</code> adds the vertex to a stack.
+<code>preVisit</code> does nothing). When the recursion pops back to
+that vertex, function <code>postVisit</code> adds the vertex to a stack.
 In the end, the stack is returned to the caller.</p>
 <p>The reason that we use a stack is that this algorithm produces the
 vertices in reverse topological order. And if we pop the elements in the
@@ -228,29 +228,24 @@ does not matter where the sort starts, as long as all vertices are
 visited in the end. Here is implementation for the DFS-based
 algorithm.</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="op">&lt;</span>V<span class="op">&gt;</span> <span class="bu">Stack</span><span class="op">&lt;</span>V<span class="op">&gt;</span> <span class="fu">topsortDFS</span><span class="op">(</span>Graph<span class="op">&lt;</span>V<span class="op">&gt;</span> G<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Set</span><span class="op">&lt;</span>V<span class="op">&gt;</span> visited <span class="op">=</span> <span class="kw">new</span> MapSet<span class="op">&lt;</span>V<span class="op">&gt;();</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Stack</span><span class="op">&lt;</span>V<span class="op">&gt;</span> sortedVertices <span class="op">=</span> <span class="kw">new</span> LinkedStack<span class="op">&lt;</span>V<span class="op">&gt;();</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span>V v <span class="op">:</span> G<span class="op">.</span><span class="fu">vertices</span><span class="op">())</span> <span class="op">{</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!</span>visited<span class="op">.</span><span class="fu">contains</span><span class="op">(</span>v<span class="op">))</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            <span class="fu">topsortHelperDFS</span><span class="op">(</span>G<span class="op">,</span> v<span class="op">,</span> sortedVertices<span class="op">,</span> visited<span class="op">);</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sortedVertices<span class="op">;</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="op">&lt;</span>V<span class="op">&gt;</span> <span class="dt">void</span> <span class="fu">topsortHelperDFS</span><span class="op">(</span>Graph<span class="op">&lt;</span>V<span class="op">&gt;</span> G<span class="op">,</span> V v<span class="op">,</span> <span class="bu">Stack</span><span class="op">&lt;</span>V<span class="op">&gt;</span> sortedVertices<span class="op">,</span> <span class="bu">Set</span><span class="op">&lt;</span>V<span class="op">&gt;</span> visited<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(!</span>visited<span class="op">.</span><span class="fu">contains</span><span class="op">(</span>v<span class="op">))</span> <span class="op">{</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        visited<span class="op">.</span><span class="fu">add</span><span class="op">(</span>v<span class="op">);</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span>Edge<span class="op">&lt;</span>V<span class="op">&gt;</span> edge <span class="op">:</span> G<span class="op">.</span><span class="fu">outgoingEdges</span><span class="op">(</span>v<span class="op">))</span> <span class="op">{</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>            V w <span class="op">=</span> edge<span class="op">.</span><span class="fu">end</span><span class="op">;</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>            <span class="fu">topsortHelperDFS</span><span class="op">(</span>G<span class="op">,</span> w<span class="op">,</span> sortedVertices<span class="op">,</span> visited<span class="op">);</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        sortedVertices<span class="op">.</span><span class="fu">push</span><span class="op">(</span>v<span class="op">);</span> <span class="co">// PostVisit</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> topsortDFS(G):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    visited <span class="op">=</span> <span class="kw">new</span> <span class="bu">Set</span>()</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    sortedVertices <span class="op">=</span> <span class="kw">new</span> <span class="bu">Stack</span>()</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> v <span class="kw">in</span> G.vertices():</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> v <span class="kw">not</span> <span class="kw">in</span> visited:</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            topsortHelperDFS(G, v, sortedVertices, visited)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sortedVertices</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> topsortHelperDFS(G, v, sortedVertices, visited):</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> v <span class="kw">not</span> <span class="kw">in</span> visited:</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        visited.<span class="bu">add</span>(v)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="kw">each</span> edge <span class="kw">in</span> G.outgoingEdges(v):</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            w <span class="op">=</span> edge.end</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>            topsortHelperDFS(G, w, sortedVertices, visited)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        sortedVertices.<span class="bu">push</span>(v)  <span class="co">// postVisit</span></span></code></pre></div>
 <p>Using this algorithm starting at J1 and visiting adjacent neighbors
 in alphabetic order, vertices of the graph in <a
-href="9.3-topological-sort.html#TopSort">Figure #TopSort</a> are pushed
+href="9.4-topological-sort.html#TopSort">Figure #TopSort</a> are pushed
 to the stack in the order J7, J5, J4, J6, J2, J3, J1. Popping them one
 by one yields the topological sort J1, J3, J2, J6, J4, J5, J7.</p>
 <p>Here is another example.</p>
@@ -264,8 +259,8 @@ by one yields the topological sort J1, J3, J2, J6, J4, J5, J7.</p>
 </p>
 </section>
 <section id="queue-based-solution-optional" class="level3"
-data-number="9.3.2">
-<h3 data-number="9.3.2"><span class="header-section-number">9.3.2</span>
+data-number="9.4.2">
+<h3 data-number="9.4.2"><span class="header-section-number">9.4.2</span>
 Queue-based Solution (optional)</h3>
 <p>We can implement topological sort using a queue instead of recursion,
 as follows.</p>
@@ -287,43 +282,40 @@ does not violate some prerequisite). The order in which the vertices are
 added to the final list is the correct one, so if traverse the final
 list we will get the elements in topological order. Applying the queue
 version of topological sort to the graph of <a
-href="9.3-topological-sort.html#TopSort">Figure #TopSort</a> produces
+href="9.4-topological-sort.html#TopSort">Figure #TopSort</a> produces
 J1, J2, J3, J6, J4, J5, J7. Here is an implementation for the
 algorithm.</p>
 <div class="sourceCode" id="cb2"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="op">&lt;</span>V<span class="op">&gt;</span> <span class="bu">Queue</span><span class="op">&lt;</span>V<span class="op">&gt;</span> <span class="fu">topsortBFS</span><span class="op">(</span>Graph<span class="op">&lt;</span>V<span class="op">&gt;</span> G<span class="op">)</span> <span class="op">{</span></span>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> topsortBFS(G):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Initialize the prerequisite counts</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Map</span><span class="op">&lt;</span>V<span class="op">,</span> <span class="bu">Integer</span><span class="op">&gt;</span> Count <span class="op">=</span> <span class="kw">new</span> SeparateChainingHashMap<span class="op">&lt;&gt;();</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span>V v <span class="op">:</span> G<span class="op">.</span><span class="fu">vertices</span><span class="op">())</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        Count<span class="op">.</span><span class="fu">put</span><span class="op">(</span>v<span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span>V v <span class="op">:</span> G<span class="op">.</span><span class="fu">vertices</span><span class="op">())</span> <span class="op">{</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span>Edge<span class="op">&lt;</span>V<span class="op">&gt;</span> edge <span class="op">:</span> G<span class="op">.</span><span class="fu">outgoingEdges</span><span class="op">(</span>v<span class="op">))</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>            <span class="co">// Add one to v&#39;s prereq count</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>            Count<span class="op">.</span><span class="fu">put</span><span class="op">(</span>edge<span class="op">.</span><span class="fu">end</span><span class="op">,</span> Count<span class="op">.</span><span class="fu">get</span><span class="op">(</span>edge<span class="op">.</span><span class="fu">end</span><span class="op">)</span> <span class="op">+</span> <span class="dv">1</span><span class="op">);</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    counts <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> v <span class="kw">in</span> G.vertices():</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        counts.<span class="bu">put</span>(v, <span class="dv">0</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> v <span class="kw">in</span> G.vertices():</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="kw">each</span> edge <span class="kw">in</span> G.outgoingEdges(v):</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>            <span class="co">// Add one to v&#39;s prerequisite count</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>            newCount <span class="op">=</span> counts.<span class="bu">get</span>(edge.end) <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>            counts.<span class="bu">put</span>(edge.end, newCount)</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Initialize the queue</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Queue</span><span class="op">&lt;</span>V<span class="op">&gt;</span> Q <span class="op">=</span> <span class="kw">new</span> LinkedQueue<span class="op">&lt;&gt;();</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span>V v <span class="op">:</span> G<span class="op">.</span><span class="fu">vertices</span><span class="op">())</span> <span class="op">{</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        <span class="co">// V has no prerequisites</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>Count<span class="op">.</span><span class="fu">get</span><span class="op">(</span>v<span class="op">)</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>            Q<span class="op">.</span><span class="fu">enqueue</span><span class="op">(</span>v<span class="op">);</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Process the vertices</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Queue</span><span class="op">&lt;</span>V<span class="op">&gt;</span> sortedVertices <span class="op">=</span> <span class="kw">new</span> LinkedQueue<span class="op">&lt;</span>V<span class="op">&gt;();</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(!</span>Q<span class="op">.</span><span class="fu">isEmpty</span><span class="op">())</span> <span class="op">{</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        V v <span class="op">=</span> Q<span class="op">.</span><span class="fu">dequeue</span><span class="op">();</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        <span class="co">// PreVisit for vertex v</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        sortedVertices<span class="op">.</span><span class="fu">enqueue</span><span class="op">(</span>v<span class="op">);</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span>Edge<span class="op">&lt;</span>V<span class="op">&gt;</span> edge <span class="op">:</span> G<span class="op">.</span><span class="fu">outgoingEdges</span><span class="op">(</span>v<span class="op">))</span> <span class="op">{</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>            Count<span class="op">.</span><span class="fu">put</span><span class="op">(</span>edge<span class="op">.</span><span class="fu">end</span><span class="op">,</span> Count<span class="op">.</span><span class="fu">get</span><span class="op">(</span>edge<span class="op">.</span><span class="fu">end</span><span class="op">)</span> <span class="op">-</span> <span class="dv">1</span><span class="op">);</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>Count<span class="op">.</span><span class="fu">get</span><span class="op">(</span>edge<span class="op">.</span><span class="fu">end</span><span class="op">)</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>                Q<span class="op">.</span><span class="fu">enqueue</span><span class="op">(</span>edge<span class="op">.</span><span class="fu">end</span><span class="op">);</span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sortedVertices<span class="op">;</span></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    Q <span class="op">=</span> <span class="kw">new</span> <span class="bu">Queue</span>()</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> v <span class="kw">in</span> G.vertices():</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Only add vertices that have no prerequisites</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> counts.<span class="bu">get</span>(v) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>            Q.<span class="bu">enqueue</span>(v)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Process the vertices</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    sortedVertices <span class="op">=</span> <span class="kw">new</span> <span class="bu">Queue</span>()</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="kw">not</span> Q.<span class="bu">isEmpty</span>():</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        v <span class="op">=</span> Q.<span class="bu">dequeue</span>()</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        sortedVertices.<span class="bu">enqueue</span>(v)  <span class="co">// preVisit</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="kw">each</span> edge <span class="kw">in</span> G.outgoingEdges(v):</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>            newCount <span class="op">=</span> counts.<span class="bu">get</span>(edge.end) <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>            counts.<span class="bu">put</span>(edge.end, newCount)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> counts.<span class="bu">get</span>(edge.end) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>                Q.<span class="bu">enqueue</span>(edge.end)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sortedVertices</span></code></pre></div>
 <p>
 <div id="topSortQCON" class="ssAV" data-short-name="topSortQCON" data-long-name="topSortQCON Slideshow" alt="topSortQCON Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>

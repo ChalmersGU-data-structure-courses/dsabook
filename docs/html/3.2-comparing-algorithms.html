@@ -282,35 +282,14 @@ position of the largest value seen so far. This algorithm is called the
 <em>largest-value sequential search</em> and is illustrated by the
 following function:</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Return position of largest value in integer array A</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> largest(A):</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    currlarge <span class="op">=</span> <span class="dv">0</span>                 <span class="co"># Position of largest element seen</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, A.length):  <span class="co"># For each element</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> A[currlarge] <span class="op">&lt;</span> A[i]:   <span class="co"># if A[i] is larger</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>             currlarge <span class="op">=</span> i        <span class="co"># remember its position</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> currlarge              <span class="co"># Return largest position</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Return position of largest value in integer array A</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">int</span> <span class="fu">largest</span><span class="op">(</span><span class="dt">int</span><span class="op">[]</span> A<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> currlarge <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>             <span class="co">// Position of largest element seen</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i<span class="op">=</span><span class="dv">1</span><span class="op">;</span> i<span class="op">&lt;</span>A<span class="op">.</span><span class="fu">length</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span> <span class="co">// For each element</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>A<span class="op">[</span>currlarge<span class="op">]</span> <span class="op">&lt;</span> A<span class="op">[</span>i<span class="op">])</span> <span class="op">{</span>    <span class="co">//   if A[i] is larger</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>       currlarge <span class="op">=</span> i<span class="op">;</span>            <span class="co">//     remember its position</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> currlarge<span class="op">;</span>              <span class="co">// Return largest position</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Return position of largest value in integer array A</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">int</span> <span class="fu">largest</span><span class="op">(</span><span class="dt">int</span><span class="op">[]</span> A<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> currlarge <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>               <span class="co">// Position of largest element seen</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i<span class="op">=</span><span class="dv">1</span><span class="op">;</span> i<span class="op">&lt;</span>A<span class="op">.</span><span class="fu">length</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span> <span class="co">// For each element</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>A<span class="op">[</span>currlarge<span class="op">]</span> <span class="op">&lt;</span> A<span class="op">[</span>i<span class="op">])</span>     <span class="co">// if A[i] is larger</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            currlarge <span class="op">=</span> i<span class="op">;</span>           <span class="co">// remember its position</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> currlarge<span class="op">;</span>                <span class="co">// Return largest position</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>Here, the size of the problem is <code>A.length</code>, the number of
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Return position of largest value in integer array A</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> largest(A):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    currlarge <span class="op">=</span> <span class="dv">0</span>                 <span class="co">// Position of largest element seen.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="op">=</span> <span class="dv">1</span> <span class="kw">to</span> A.<span class="bu">size</span>():     <span class="co">// For each element,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> A[currlarge] <span class="op">&lt;</span> A[i]:   <span class="co">// if A[i] is larger,</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            currlarge <span class="op">=</span> i         <span class="co">// remember its position.</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> currlarge              <span class="co">// Return largest position</span></span></code></pre></div>
+<p>Here, the size of the problem is <code>A.size()</code>, the number of
 integers stored in array <code>A</code>. The basic operation is to
 compare an integer’s value to that of the largest value seen so far. It
 is reasonable to assume that it takes a fixed amount of time to do one
@@ -386,25 +365,11 @@ running time</a>.</p>
 <section id="example-2" class="level4 unnumbered topic">
 <h4 class="unnumbered">Example</h4>
 <p>Consider the following code:</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sum</span> <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(n):</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span> <span class="op">+=</span> <span class="dv">1</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sum <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span>i<span class="op">=</span><span class="dv">1</span><span class="op">;</span> i<span class="op">&lt;=</span>n<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span>j<span class="op">=</span><span class="dv">1</span><span class="op">;</span> j<span class="op">&lt;=</span>n<span class="op">;</span> j<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    sum<span class="op">++;</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sum <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span>i<span class="op">=</span><span class="dv">1</span><span class="op">;</span> i<span class="op">&lt;=</span>n<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span>j<span class="op">=</span><span class="dv">1</span><span class="op">;</span> j<span class="op">&lt;=</span>n<span class="op">;</span> j<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        sum<span class="op">++;</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sum</span> <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="op">=</span> <span class="dv">0</span> <span class="kw">to</span> n<span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="op">=</span> <span class="dv">0</span> <span class="kw">to</span> n<span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span> <span class="op">=</span> <span class="bu">sum</span><span class="op">+</span><span class="dv">1</span></span></code></pre></div>
 <p>What is the running time for this code fragment? Clearly it takes
 longer to run when
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
@@ -426,7 +391,7 @@ Thus, we say that the running time is
 <h3 data-number="3.2.3"><span class="header-section-number">3.2.3</span>
 Growth Rates</h3>
 <p>The <a href="10-glossary.html#growth-rate" class="term"
-title="The rate at which a function grows. How quickly the function grows when its input grows. Also called its order of growth. A function $f$ has growth rate bounded by a function $g$ if the values of $f$ are eventually bounded by those of $g$ up to some constant factor. We often shorten this (somewhat confusingly) by saying that $f$ has growth rate $g$ or that $f$ has order of growth $g$. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \leq c g(n)$ for all $n \geq n_0$. We then say that $f$ has growth rate less or equal that of $g$ and write $f \in O(g)$ (big-Oh notation). This defines the preorder of growth rates. In algorithm analysis, we sometimes speak of the growth rate of an algorithm. By that, we mean the growth rate of the complexity of the algorithm, the rate at which the cost of the algorithm grows as the size of its input grows. This is also called the asymptotic complexity of that algorithm.">growth
+title="The rate at which a function grows. How quickly the function grows when its input grows. Also called its *order of growth*. A function $f$ has growth rate bounded by a function $g$ if the values of $f$ are eventually bounded by those of $g$ up to some constant factor. We often shorten this (somewhat confusingly) by saying that $f$ has growth rate $g$ or that $f$ has order of growth $g$. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \leq c g(n)$ for all $n \geq n_0$. We then say that $f$ has growth rate less or equal that of $g$ and write $f \in O(g)$ (big-Oh notation). This defines the preorder of growth rates. In algorithm analysis, we sometimes speak of the growth rate of an algorithm. By that, we mean the growth rate of the complexity of the algorithm, the rate at which the cost of the algorithm grows as the size of its input grows. This is also called the asymptotic complexity of that algorithm.">growth
 rate</a> for an algorithm is the rate at which the cost of the algorithm
 grows as the size of its input grows. The following figure shows a graph
 for six equations, each meant to describe the running time for a
