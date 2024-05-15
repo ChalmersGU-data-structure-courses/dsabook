@@ -8,20 +8,11 @@ In this module we give some examples of simple hash functions.
 Consider the following hash function used to hash integers to a table of
 sixteen slots.
 
-```python
-    def hashInt(x):
+    function hashInt(x):
         return x % 16
-```
-
-```java
-    int hashInt(int x) {
-        return x % 16;
-    }
-```
 
 
-
-Here "%" is the symbol for the mod function.
+Here "%" is the symbol for the [mod] function.
 
 <inlineav id="hashFuncExCON1" src="Hashing/hashFuncExCON1.js" name="Hash Function Slideshow 1"/>
 
@@ -148,23 +139,11 @@ Here is a little calculator for you to see how this works. Start with
 Now we will examine some hash functions suitable for storing strings of
 characters. We start with a simple summation function.
 
-```python
-    def hashString(s, M):
+    function hashString(string, M):
         sum = 0
-        for c in s:
-            sum += ord(c)
+        for each char in string:
+            sum = sum + ord(char)
         return sum % M
-```
-
-```java
-    int hashString(String s, int M) {
-        int sum = 0;
-        for (char c : s.toCharArray())
-            sum += c;
-        return sum % M;
-    }
-```
-
 
 
 This function sums the ASCII values of the letters in a string. If the
@@ -198,26 +177,13 @@ Now you can try it out with this calculator.
 
 If we instead multiply the hash with a prime number, before adding the
 next character, we get a much better distribution of the hash codes.
-This is Java's default hash code for strings, where the prime number is
-31.
+This is Java's default hash code for strings, where the prime number is 31.
 
-```python
-    def hashStringImproved(s, M):
+    function hashStringImproved(string, M):
         sum = 0
-        for c in s:
-            sum = 31 * sum + ord(c)
+        for char in string:
+            sum = 31 * sum + ord(char)
         return sum % M
-```
-
-```java
-    int hashStringImproved(String s, int M) {
-        int sum = 0;
-        for (char c : s.toCharArray())
-            sum = 31 * sum + c;
-        return sum % M;
-    }
-```
-
 
 
 Mathematically, the hash function is

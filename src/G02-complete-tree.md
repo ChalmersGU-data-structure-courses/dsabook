@@ -1,5 +1,5 @@
 
-## Array Implementation for Complete Binary Trees
+## Array Representation for Complete Binary Trees
 
 From the [full binary tree theorem]{.term}, 
 we know that a large fraction of the space in a typical

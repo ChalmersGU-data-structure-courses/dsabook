@@ -74,51 +74,33 @@ resized).
 Here is a simple implementation of deletion in a HashMap using
 tombstones.
 
-```python
-    def remove(self, key):
-        i = self._hashAndProbe(key)
-        elem = self._internalTable[i]
-        if elem is None:
-            return None
-        removed = elem.value
-        elem.key = None
-        elem.value = None
-        self._mapSize -= 1
-        self._numDeleted += 1
-        if self._mapSize < self._minLoadFactor * len(self._internalTable):
-            self._resizeTable(len(self._internalTable) / self._capacityMultiplier);
-        return removed
-```
 
-```java
-    public V remove(K key) {
-        int i = hashAndProbe(key);
-        KVPair<K,V> elem = internalTable[i];
-        if (elem == null)
-            return null;
-        V removed = elem.value;
-        elem.key = null;
-        elem.value = null;
-        mapSize--;
-        numDeleted++;
-        if (mapSize < MinLoadFactor * internalTable.length) 
-            resizeTable((int) (internalTable.length / CapacityMultiplier));
-        return removed;
-    }            
-```
+    class OpenAddressingHashMap implements Map:
+        ...
+        remove(key):
+            i = this.hashAndProbe(key)
+            if this.keys[i] is null:  // The key isn't there
+                return null
+            removed = this.values[i].value
+            if removed is null:  // The key is already removed
+                return null
+            this.values[i] = null
+            this.mapSize = this.mapSize - 1
+            this.numDeleted = this.numDeleted + 1
+            if this.mapSize < minLoadFactor * this.keys.size():
+                this.resizeTable(this.keys.size() / capacityMultiplier)
+            return removed
 
 
+Since we are using two internal arrays (one for the keys and one for the value),
+there are actually two possible ways of storing empty entries, 
+and we use this to encode the tombstones:
 
-Since we are using an internal array of **KVPair**, there are actually
-two possible empty entries, and we use this to encode the tombstones:
+-   If the keys cell is empty (`keys[i] is null`), then it is unoccupied.
+-   If the values cell is empy (`values[i] is null`), then it is a tombstone.
 
--   If the table cell is empty (`null`), then it is unoccupied.
--   If the cell contains a **KVPair**, where the key is `null`, then it
-    is a tombstone.
-
-So, when we remove an entry, we do not remove the **KVPair**, but
-instead set the key (and the value) to `null`. This will make the cell a
-tombstone.
+So, when we remove an entry, we do not remove the key, but 
+instead set the value to `null`. This will make the cell a tombstone.
 
 The current code has one problem: Adding new entries will never make use
 of the tombstones, but will only insert into completely empty cells. It

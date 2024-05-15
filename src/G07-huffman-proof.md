@@ -27,7 +27,7 @@ However, this is impossible because $l_1$ and $l_2$ are the letters with
 least frequency.
 
 :::: {#HProof}
-<inlineav id="HuffProofCON" src="Binary/HuffProofCON.js" name="Binary/HuffProofCON" links="Binary/HuffProofCON.css"/>
+<inlineav id="HuffProofCON" src="Binary/HuffProofCON.js" name="Binary/HuffProofCON" links="Binary/HuffProofCON.css" static/>
 
 An impossible Huffman tree, showing the situation where the two nodes
 with least weight, $l_1$ and $l_2$, are not the deepest nodes in the

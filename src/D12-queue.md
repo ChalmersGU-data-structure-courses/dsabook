@@ -19,8 +19,8 @@ linked queue.
 
     interface Queue extends Collection:
         enqueue(x)  // Enqueues x at the end of the queue.
-        dequeue()   // Dequeues the frontmost element. Raises an exception if the queue is empty.
-        peek()      // Returns the frontmost element, without removing it. Raises an exception if the queue is empty.
+        dequeue()   // Dequeues the frontmost element.
+        peek()      // Returns the frontmost element, without removing it.
 
 
 ### Array-Based Queues

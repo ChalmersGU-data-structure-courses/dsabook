@@ -25,19 +25,19 @@ values are inserted in the order 37, 24, 42, 7, 2, 40, 42, 32, 120. Tree
 2, 32, 37, 24, 40.
 ::::
 
-Here is a class declaration for the BST:
+Here is a class declaration for the BST Map:
 
-```python
-class BSTMap:
-    root : Node = None
-    treeSize : int = 0
+    class BSTMap implements Map:
+        BSTMap():
+            this.root = null
+            this.treeSize = 0
 
-class Node:
-    key   : Key
-    value : Value
-    left  : Node
-    right : Node
-```
+    class BSTNode:
+        BSTNode(key, value):
+            this.key = key      // the key that are used for looking up values
+            this.value = value  // the value associated with the key
+            this.left = null    // the left subtree, initially null
+            this.right = null   // the right subtree, initially null
 
 
 ### BST Search
@@ -52,22 +52,21 @@ parameters are the root of a subtree and the search key. Member
 `getHelper` has the desired form for this recursive subroutine and is
 implemented as follows.
 
-```python
-class BSTMap:
-    ...
-    def get(key):
-        return getHelper(this.root, key)
+    class BSTMap implements Map:
+        ...
+        get(key):
+            return getHelper(this.root, key)
 
-    def getHelper(node, key):
-        if node is None:
-            return None
-        else if node.key > key:
-            return getHelper(node.left, key)
-        else if node.key < key:
-            return getHelper(node.right, key)
-        else: # node.key == key
-            return node.value
-```
+        getHelper(node, key):
+            if node is null:
+                return null
+            else if key < node.key:
+                return getHelper(node.left, key)
+            else if key > node.key:
+                return getHelper(node.right, key)
+            else: // key == node.key
+                return node.value
+
 
 <inlineav id="BSTsearchCON" src="Binary/BSTsearchCON.js" name="BST Search Slideshow" links="Binary/BSTCON.css"/>
 
@@ -77,28 +76,23 @@ class BSTMap:
 
 Now we look at how to insert a new node into the BST.
 
-```python
-class BSTMap:
-    ...
-    def put(key, value):
-        [newRoot, oldValue] = putHelper(this.root, key, value)
-        if oldValue is None:
-            this.treeSize += 1
-        this.root = newRoot
-        return oldValue
+    class BSTMap implements Map:
+        ...
+        put(key, value):
+            this.root = this.putHelper(this.root, key, value)
 
-    def putHelper(node, key, value):
-        if node is None:
-            return [Node(key, value, None, None), None]
-        else if node.key > key:
-            [node.left, oldValue] = putHelper(node.left, key, value)
-        else if node.key < key:
-            [node.right, oldValue] = putHelper(node.right, key, value)
-        else: # node.key == key
-            oldValue = node.value
-            node.value = value
-        return [node, oldValue]
-```
+        putHelper(node, key, value):
+            // Helper method for 'put', returns the updated node.
+            if node is null:
+                this.treeSize = this.treeSize + 1
+                return new BSTNode(key, value)
+            else if key < node.key:
+                node.left = this.putHelper(node.left, key, value)
+            else if key > node.key:
+                node.right = this.putHelper(node.right, key, value)
+            else: // key == node.key
+                node.value = value
+            return node
 
 
 <inlineav id="BSTinsertCON" src="Binary/BSTinsertCON.js" name="BST Insert Slideshow" links="Binary/BSTCON.css"/>
@@ -138,13 +132,12 @@ individually. Before tackling the general node removal process, we need
 a useful companion method, `largestNode`, which returns a pointer to the
 node containing the maximum value in the subtree.
 
-```python
-    def largestNode(node):
-        while node.right is not None:
-            node = node.right
-        return node
-```
-
+    class BSTMap implements Map:
+        ...
+        largestNode(node):
+            while node.right is not null:
+                node = node.right
+            return node
 
 Now we are ready for the `removeHelper` method. Removing a node with
 given key value $R$ from the BST requires that we first find $R$ and
@@ -187,39 +180,34 @@ Search Tree Property if equal values appear in the left subtree.
 
 The code for removal is shown here.
 
-```python
-class BSTMap:
-    ...
-    def remove(key):
-        this.root, oldValue = removeHelper(this.root, key)
-        if oldValue is not None:
-            this.treeSize -= 1
-        return oldValue
+    class BSTMap:
+        ...
+        remove(key):
+            this.root = removeHelper(this.root, key)
 
-    def removeHelper(node, key):
-        """Helper method for 'remove'.
-        Returns the updated node, and the value previously associated with the key."""
-        if node is None:
-            return [None, None]
-        else if node.key > key:
-            [node.left, oldValue] = BSTMap.removeHelper(node.left, key)
-            return [node, oldValue]
-        else if node.key < key:
-            [node.right, oldValue] = BSTMap.removeHelper(node.right, key)
-            return [node, oldValue]
-        else: # node.key == key
-            if node.left is None:
-                return [node.right, node.value]
-            else if node.right is None:
-                return [node.left, node.value]
-            else:
-                predecessor = largestNode(node.left)
-                oldValue = node.value
-                node.key = predecessor.key
-                node.value = predecessor.value
-                [node.left, _] = removeHelper(node.left, predecessor.key)
-                return [node, oldValue]
-```
+        removeHelper(node, key):
+            // Helper method for 'remove', returns the updated node.
+            if node is null:
+                return null
+            else if key < node.key:
+                node.left = this.removeHelper(node.left, key)
+                return node
+            else if key > node.key:
+                node.right = this.removeHelper(node.right, key)
+                return node
+            else: // key == node.key
+                if node.left is null:
+                    this.treeSize = this.treeSize - 1
+                    return node.right
+                else if node.right is null:
+                    this.treeSize = this.treeSize - 1
+                    return node.left
+                else:
+                    predecessor = this.largestNode(node.left)
+                    node.key = predecessor.key
+                    node.value = predecessor.value
+                    node.left = this.removeHelper(node.left, predecessor.key)
+                    return node
 
 
 <avembed id="BSTremovePRO" src="Binary/BSTremovePRO.html" type="pe" name="BST Remove Proficiency Exercise"/>
@@ -256,14 +244,11 @@ exactly once.
 Below is an example traversal, named `printHelper`. It performs an
 inorder traversal on the BST to print the node keys, in sorted order.
 
-```python
-    def printHelper(node):
-        if node is not None: 
-            print_helper(node.left)
+    function printHelper(node):
+        if node is not null: 
+            printHelper(node.left)
             print(node.key)
             printHelper(node.right)
-```
-
 
 While the BST is simple to implement and efficient when the tree is
 balanced, the possibility of its being unbalanced is a serious

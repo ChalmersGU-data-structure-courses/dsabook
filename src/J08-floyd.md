@@ -50,59 +50,31 @@ Floyd's algorithm simply checks all of the possibilities in a triple
 loop. Here is the implementation for Floyd's algorithm. At the end of
 the algorithm, array `D` stores the all-pairs shortest distances.
 
-```python
-# Compute all-pairs shortest paths
-def floyd(G):
-    # Initialize D with weights
-    D = {}
-    for i in G.vertices():
-        D[i] = {j : 0 if i==j else float("inf")
-                for j in G.vertices()}
-        for edge in G.outgoingEdges(i):
-            D[i][edge.end] = edge.weight
+    // Compute all-pairs shortest paths
+    function floyd(G):
+        // Initialize D with weights
+        D = new Map()
+        for each i in G.vertices():
+            imap = new Map()
+            D.put(i, imap)
+            for each j in G.vertices():
+                if i == j:
+                    imap.put(j, 0)
+                else:
+                    imap.put(j, ∞)
+            for each e in G.outgoingEdges(i):
+                imap.put(e.end, e.weight)
 
-    # Compute all k-paths
-    for k in G.vertices():
-        for i in G.vertices():
-            for j in G.vertices():
-                dist = D[i][k] + D[k][j]
-                if D[i][j] > dist:
-                    D[i][j] = dist
-
-    return D
-```
-
-```java
-/** Compute all-pairs shortest paths */
-static void Map<V,Map<V,Double>> Floyd(Graph<V> G) {
-    // Initialize D with weights
-    Map<V,Map<V,Double>> D = new Map<>();
-    for (V i : G.vertices()) {
-        Map<V,Double> imap = new Map<>();
-        D.put(i, imap);
-        for (V j : G.vertices())
-            imap.put(j, i.equals(j) ? 0 : Double.POSITIVE_INFINITY);
-        for (edge : G.outgoingEdges(i))
-            imap.put(edge.end, edge.weight);
-    }
-
-    // Compute all k-paths
-    for (V k : G.vertices()) {
-        Map<V,Double> kmap = D.get(k);
-        for (V i : G.vertices()) {
-            Map<V,Double> imap = D.get(i);
-            for (V j : G.vertices()) {
-                double dist = imap.get(k) + kmap.get(j);
-                if (imap.get(j) > dist)
-                    imap.put(j, dist);
-            }
-        }
-    }
-
-    return D;
-}
-```
-
+        // Compute all k-paths
+        for each k in G.vertices():
+            kmap = D.get(k)
+            for each i in G.vertices():
+                imap = D.get(i)
+                for each j in G.vertices():
+                    dist = imap.get(k) + kmap.get(j)
+                    if dist < imap.get(j):
+                        imap.put(j, dist)
+        return D
 
 
 Clearly this algorithm requires $\Theta(|\mathbf{V}|^3)$ running time,

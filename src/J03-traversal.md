@@ -45,23 +45,11 @@ regardless of whether the graph is directed or undirected. To ensure
 visiting all vertices, `graphTraverse` could be called as follows on a
 graph $\mathbf{G}$:
 
-```python
-def graphTraverse(G):
-    Visited = Set()
-    for each vertex v in G.vertices():
-        if not Visited.contains(v):
-            doTraversal(G, v, Visited)
-```
-
-```java
-static void <V> graphTraverse(Graph<V> G) {
-    Set<V> visited = new Set<V>();
-    for (V v : G.vertices())
-        if (!visited.contains(v))
-            doTraversal(G, v, visited);
-```
-
-
+    function graphTraverse(G):
+        visited = Set()
+        for each Vertex v in G.vertices():
+            if v not in visited:
+                doTraversal(G, v, visited)
 
 The function `doTraversal` might be implemented by using one of the
 graph traversals described next.
@@ -95,37 +83,21 @@ it, resulting in a depth-first search tree.
 
 Here is an implementation for the DFS algorithm.
 
-```python
-def traverseDFS(G, v, visited):
-    if v not in visited:
-        visited.add(v)
-        PreVisit(G, v)
-        for edge in G.outgoingEdges(v):
-            traverseDFS(G, edge.end, visited)
-        PostVisit(G, v)
-```
+    function traverseDFS(G, v, visited):
+        if v not in visited:
+            visited.add(v)
+            preVisit(G, v)
+            for each edge in G.outgoingEdges(v):
+                traverseDFS(G, edge.end, visited)
+            postVisit(G, v)
 
-```java
-static void <V> traverseDFS(Graph<V> G, V v, Set<V> visited) {
-    if (!visited.contains(v)) {
-        PreVisit(G, v);
-        visited.add(v);
-        for (Edge<V> edge : G.outgoingEdges(v))
-            traverseDFS(G, edge.end, visited);
-        PostVisit(G, v);
-    }
-}
-```
-
-
-
-This implementation contains calls to functions `PreVisit` and
-`PostVisit`. These functions specify what activity should take place
+This implementation contains calls to functions `preVisit` and
+`postVisit`. These functions specify what activity should take place
 during the search. Just as a preorder tree traversal requires action
 before the subtrees are visited, some graph traversals require that a
 vertex be processed before ones further along in the DFS. Alternatively,
 some applications require activity *after* the remaining vertices are
-processed; hence the call to function `PostVisit`. This would be a
+processed; hence the call to function `postVisit`. This would be a
 natural opportunity to make use of the
 [visitor]{.term} design pattern.
 
@@ -161,40 +133,20 @@ it, resulting in a breadth-first search tree.
 <inlineav id="BFSCON" src="Graph/BFSCON.js" name="Breadth-First Search Slideshow" links="Graph/BFSCON.css"/>
 
 Here is an implementation for BFS. Note that it's not possible to call
-`PostVisit` in BFS traversal, because you cannot know when the adjacent
+`postVisit` in BFS traversal, because you cannot know when the adjacent
 edges (the "children") have been traversed.
 
-```python
-def traverseBFS(G, v, visited):
-    agenda = Queue()
-    agenda.enqueue(v)
-    while not agenda.isEmpty()
-        v = agenda.dequeue()
-        if not visited.contains(v):
-            visited.add(v)
-            PreVisit(G, v)
-            for edge in G.outgoingEdges(v):
-                agenda.enqueue(edge.end)
-            # PostVisit is not possible in a stack/queue based version!
-```
-
-```java
-static void <V> traverseBFS(Graph<V> G, V start, Set<V> visited) {
-    Queue<V> agenda = new Queue<>();
-    agenda.enqueue(start);
-    while (!agenda.isEmpty()) {
-        V v = agenda.dequeue();
-        if (!visited.contains(v)) {
-            visited.add(v);
-            PreVisit(G, v);
-            for (Edge<V> edge : G.outgoingEdges(v))
-                agenda.enqueue(edge.end);
-            // PostVisit is not possible in a stack/queue based version!
-        }
-    }
-}
-```
-
+    function traverseBFS(G, v, visited):
+        agenda = Queue()
+        agenda.enqueue(v)
+        while not agenda.isEmpty()
+            v = agenda.dequeue()
+            if v not in visited:
+                visited.add(v)
+                preVisit(G, v)
+                for each edge in G.outgoingEdges(v):
+                    agenda.enqueue(edge.end)
+                // postVisit is not possible in a stack or queue based version!
 
 
 *Fun fact*: If you replace the queue with a stack (and the

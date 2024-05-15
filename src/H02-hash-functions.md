@@ -28,23 +28,9 @@ probability of a collision under those conditions.
 
 <avembed id="Birthday" src="Hashing/Birthday.html" type="ss" name="Birthday Problem Calculator" height="177"/>
 
-<!-- <div id="Birthday" class="embedContainer">
-<iframe aria-label="Birthday" src="../../exercises/Hashing/Birthday.html" scrolling="no" width="100%" height="177">
-Your browser does not support iframes.
-</iframe>
-</div> -->
-
-
 Use the calculator to answer the following questions.
 
 <avembed id="BirthdayFIB" src="Hashing/BirthdayFIB.html" type="ka" name="Birthday Problem Exercise"/>
-
-<!-- <div id="BirthdayFIB" class="embedContainer">
-<iframe id="BirthdayFIB_iframe" aria-label="BirthdayFIB" src="../../exercises/Hashing/BirthdayFIB.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
-</div> -->
-
 
 To be practical, a database organized by hashing must store records in a
 hash table that is not so large that it wastes space. To balance time

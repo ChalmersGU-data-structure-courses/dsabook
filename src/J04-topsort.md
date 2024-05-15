@@ -28,9 +28,9 @@ shown by the directed graph.
 ### Depth-first solution
 
 A topological sort may be found by performing a DFS on the graph. When a
-vertex is visited, no action is taken (i.e., function `PreVisit` does
+vertex is visited, no action is taken (i.e., function `preVisit` does
 nothing). When the recursion pops back to that vertex, function
-`PostVisit` adds the vertex to a stack. In the end, the stack is
+`postVisit` adds the vertex to a stack. In the end, the stack is
 returned to the caller.
 
 The reason that we use a stack is that this algorithm produces the
@@ -41,30 +41,21 @@ So the DFS algorithm yields a topological sort in reverse order. It does
 not matter where the sort starts, as long as all vertices are visited in
 the end. Here is implementation for the DFS-based algorithm.
 
-```java
-static <V> Stack<V> topsortDFS(Graph<V> G) {
-    Set<V> visited = new MapSet<V>();
-    Stack<V> sortedVertices = new LinkedStack<V>();
-    for (V v : G.vertices()) {
-        if (!visited.contains(v))
-            topsortHelperDFS(G, v, sortedVertices, visited);
-    }
-    return sortedVertices;
-}
+    function topsortDFS(G):
+        visited = new Set()
+        sortedVertices = new Stack()
+        for each v in G.vertices():
+            if v not in visited:
+                topsortHelperDFS(G, v, sortedVertices, visited)
+        return sortedVertices
 
-static <V> void topsortHelperDFS(Graph<V> G, V v, Stack<V> sortedVertices, Set<V> visited) {
-    if (!visited.contains(v)) {
-        visited.add(v);
-        for (Edge<V> edge : G.outgoingEdges(v)) {
-            V w = edge.end;
-            topsortHelperDFS(G, w, sortedVertices, visited);
-        }
-        sortedVertices.push(v); // PostVisit
-    }
-}
-```
-
-
+    function topsortHelperDFS(G, v, sortedVertices, visited):
+        if v not in visited:
+            visited.add(v)
+            for each edge in G.outgoingEdges(v):
+                w = edge.end
+                topsortHelperDFS(G, w, sortedVertices, visited)
+            sortedVertices.push(v)  // postVisit
 
 Using this algorithm starting at J1 and visiting adjacent neighbors in
 alphabetic order, vertices of the graph in 
@@ -78,8 +69,7 @@ Here is another example.
 
 ### Queue-based Solution (optional)
 
-We can implement topological sort using a queue instead of recursion, as
-follows.
+We can implement topological sort using a queue instead of recursion, as follows.
 
 First visit all edges, counting the number of edges that lead to each
 vertex (i.e., count the number of prerequisites for each vertex). All
@@ -98,42 +88,35 @@ sort to the graph of [Figure #TopSort](#TopSort)
 produces J1, J2, J3, J6, J4, J5, J7. Here is an
 implementation for the algorithm.
 
-```java
-static <V> Queue<V> topsortBFS(Graph<V> G) {
-    // Initialize the prerequisite counts
-    Map<V, Integer> Count = new SeparateChainingHashMap<>();
-    for (V v : G.vertices())
-        Count.put(v, 0);
-    for (V v : G.vertices()) {
-        for (Edge<V> edge : G.outgoingEdges(v))
-            // Add one to v's prereq count
-            Count.put(edge.end, Count.get(edge.end) + 1);
-    }
+    function topsortBFS(G):
+        // Initialize the prerequisite counts
+        counts = new Map()
+        for each v in G.vertices():
+            counts.put(v, 0)
+        for each v in G.vertices():
+            for each edge in G.outgoingEdges(v):
+                // Add one to v's prerequisite count
+                newCount = counts.get(edge.end) + 1
+                counts.put(edge.end, newCount)
 
-    // Initialize the queue
-    Queue<V> Q = new LinkedQueue<>();
-    for (V v : G.vertices()) {
-        // V has no prerequisites
-        if (Count.get(v) == 0)
-            Q.enqueue(v);
-    }
+        // Initialize the queue
+        Q = new Queue()
+        for each v in G.vertices():
+            // Only add vertices that have no prerequisites
+            if counts.get(v) == 0:
+                Q.enqueue(v)
 
-    // Process the vertices
-    Queue<V> sortedVertices = new LinkedQueue<V>();
-    while (!Q.isEmpty()) {
-        V v = Q.dequeue();
-        // PreVisit for vertex v
-        sortedVertices.enqueue(v);
-        for (Edge<V> edge : G.outgoingEdges(v)) {
-            Count.put(edge.end, Count.get(edge.end) - 1);
-            if (Count.get(edge.end) == 0)
-                Q.enqueue(edge.end);
-        }
-    }
-    return sortedVertices;
-}
-```
+        // Process the vertices
+        sortedVertices = new Queue()
+        while not Q.isEmpty():
+            v = Q.dequeue()
+            sortedVertices.enqueue(v)  // preVisit
+            for each edge in G.outgoingEdges(v):
+                newCount = counts.get(edge.end) - 1
+                counts.put(edge.end, newCount)
+                if counts.get(edge.end) == 0:
+                    Q.enqueue(edge.end)
 
-
+        return sortedVertices
 
 <inlineav id="topSortQCON" src="Graph/topSortQCON.js" name="topSortQCON Slideshow" links="Graph/topSortQCON.css"/>

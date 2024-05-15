@@ -49,8 +49,6 @@
 	<highlighting>
 		<list name="import">
 			<item>import</item>
-			<item>from</item>
-			<item>as</item>
 		</list>
 		<list name="defs">
 			<item>abstract</item>
@@ -82,6 +80,7 @@
 			<item>to</item>
 			<item>downto</item>
 			<item>times</item>
+			<item>where</item>
 		</list>
 		<list name="flow">
 			<item>assert</item>

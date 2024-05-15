@@ -2359,12 +2359,10 @@ element of the list. Its purpose is to simplify the code
 implementation by reducing the number of special cases that must be
 programmed for.
 
+### binary heap
 ### heap
 
-This term has two different meanings. Uncommonly, it is a synonym
-for [free store]{.term}. Most often it is
-used to refer to a particular data structure. This data structure is
-a [complete binary tree]{.term} with the
+The head data structure is a [complete binary tree]{.term} with the
 requirement that every [node]{.term} has a
 value greater than its [children](#child){.term}
 (called a [max heap]{.term}),
@@ -2380,6 +2378,8 @@ of the values in an unordered array, the values can be re-arranged
 to form a heap in only $\Theta(n)$ time. Due to its space and time
 efficiency, the heap is a popular choice for implementing a
 [priority queue]{.term}.
+
+Uncommonly, *heap* is a synonym for [free store]{.term}.
 
 ### heapsort
 

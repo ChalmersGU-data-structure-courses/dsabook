@@ -8,19 +8,18 @@ and Python implement hashing and hash tables internally.
 
 As we wrote in the chapter introduction:
 
-"When properly implemented, these operations can be performed in
-constant time. (\...) However, even though hashing is based on a very
-simple idea, it is surprisingly difficult to implement properly."
+> "When properly implemented, these operations can be performed in
+> constant time. (\...) However, even though hashing is based on a very
+> simple idea, it is surprisingly difficult to implement properly."
 
 This difficulty can be (and has been) exploited for malicious attacks on
 systems, so called algorithmic complexity attacks. We'll leave the word
 to Adam Jacobson and David Renardy to give an introduction to the
 problems (please read the whole text, it's an easy read):
 
-"An Algorithmic Complexity (AC) attack is a resource exhaustion attack
-that takes advantage of worst-case performance in server-side
-algorithms."
-(<https://twosixtech.com/algorithmic-complexity-vulnerabilities-an-introduction>)
+> "An Algorithmic Complexity (AC) attack is a resource exhaustion attack
+> that takes advantage of worst-case performance in server-side algorithms."
+> (<https://twosixtech.com/algorithmic-complexity-vulnerabilities-an-introduction>)
 
 As you can see, hash tables even have a category of itself ("Hashtable
 DoS Attacks"). They only mention separate chaining ("These hash tables
@@ -34,10 +33,11 @@ functions.
 ### Breaking hash functions
 
 Java's default algorithm for calculating a hash code from a string $s$
-looks like this:
-$s_0\cdot 31^{n-1} + s_1\cdot 31^{n-2} + ... + s_{n-2}\cdot 31^1 + s_{n-1}\cdot 31^0$.
-(Source: [hashCode() in
-StringUTF16.java](https://github.com/openjdk/jdk/blob/9f75d5ce500886b32175cc541939b7f0eee190ca/src/java.base/share/classes/java/lang/StringUTF16.java#L414-L420)).
+looks like this
+(see the code for [hashCode() in
+StringUTF16.java](https://github.com/openjdk/jdk/blob/9f75d5ce500886b32175cc541939b7f0eee190ca/src/java.base/share/classes/java/lang/StringUTF16.java#L414-L420)):
+
+$$ s_0\cdot 31^{n-1} + s_1\cdot 31^{n-2} + ... + s_{n-2}\cdot 31^1 + s_{n-1}\cdot 31^0 $$
 
 This works well in practice, *if you assume that your data is normal*!
 But an attacker does not use normal data -- instead they deliberately
@@ -51,13 +51,17 @@ It's really easy to break Java's string hash function if you want to.
 It relies on the fact that the following two strings have the same
 hashcode:
 
-    "Aa".hashCode() == "BB".hashCode() == 2112
+```java
+"Aa".hashCode() == "BB".hashCode() == 2112
+```
 
 Therefore, all same-length repetitions of "Aa" and "BB" have the
 same hash code:
 
-    "AaAaAaAaAa", "AaAaAaAaBB", "AaAaAaBBAa", "AaAaAaBBBB", ...,
-    "BBBBBBAaAa", "BBBBBBAaBB", "BBBBBBBBAa", "BBBBBBBBBB"
+```java
+"AaAaAaAaAa", "AaAaAaAaBB", "AaAaAaBBAa", "AaAaAaBBBB", ...,
+"BBBBBBAaAa", "BBBBBBAaBB", "BBBBBBBBAa", "BBBBBBBBBB"
+```
 
 There are $2^k$ possible strings with $k$ repetitions of "Aa" resp.
 "BB", and all these strings have the same hash code! An attacker could

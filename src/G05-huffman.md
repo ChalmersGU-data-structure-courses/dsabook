@@ -137,90 +137,43 @@ process for the eight letters of [Table #FreqExamp](#FreqExamp).
 
 Here is the implementation for the Huffman Tree class.
 
-```python
-@total_ordering
-class HuffTree:
-    def __init__(self, elem=None, left=None, right=None, weight=None):
-        self.elem = elem
-        self.left = left
-        self.right = right
-        self.weight = weight
+    class HuffTree implements Comparable:
+        HuffTree(elem, left, right, weight):
+            this.elem = elem
+            this.left = left
+            this.right = right
+            this.weight = weight
 
-    def is_leaf(self):
-        return self.left is None or self.right is None
+        // Huffman trees are compared using their 'weight':
+        compareTo(other):
+            return this.weight.compareTo(other.weight)
 
-    def __lt__(self, other):
-        return self.weight < other.weight
-
-    def __eq__(self, other):
-        return self.weight == other.weight
-```
-
-```java
-class HuffTree implements Comparable<HuffTree> {
-    public char element;
-    public int weight;
-    public HuffTree left;
-    public HuffTree right;
-
-    HuffTree(char el, int wt) {
-        element = el; weight = wt;
-    }
-
-    HuffTree(HuffTree l, HuffTree r, int wt) {
-        left = l; right = r; weight = wt;
-    }
-
-    public boolean isLeaf() {
-        return left == null || right == null;
-    }
-
-    public int compareTo(HuffTree other) {
-        return Integer.compare(this.weight, other.weight);
-    }
-}
-```
-
-
+        // ...or for all comparison operators:
+        (this < other) = (this.weight < other.weight)
+        (this == other) = (this.weight == other.weight)
+        (...etc...)
 
 Here is the implementation for the tree-building process.
 
-```python
-def build_huff_tree(frequencies):
-    huff_heap = MinHeap()
-    # Initialise the heap with singleton Huffman trees
-    for ch, freq in frequencies.items():
-        huff_heap.add(HuffTree(elem=ch, weight=freq))
+    function buildHuffTree(frequencies):
+        // Initialise a min heap with singleton Huffman trees
+        huffHeap = new MinHeap()
+        for each char in frequencies:
+            freq = frequencies.get(char)
+            huffHeap.add(new HuffTree(elem=char, weight=freq))
 
-    # While at least two trees left on heap
-    while huff_heap.size() > 1:
-        t1 = huff_heap.removeMin()
-        t2 = huff_heap.removeMin()
-        t3 = HuffTree(left=t1, right=t2, weight=t1.weight + t2.weight)
-        # Return new tree to the heap
-        huff_heap.add(t3)
+        // While there are at least two trees left on heap
+        while huffHeap.size() > 1:
+            // Remove the two minimum ones
+            t1 = huffHeap.removeMin()
+            t2 = huffHeap.removeMin()
+            weight = t1.weight + t2.weight
+            // Combine the trees and add the new tree to the heap
+            t3 = new HuffTree(left=t1, right=t2, weight=weight)
+            huffHeap.add(t3)
 
-    # Return the final Huffman tree
-    return huff_heap.removeMin() 
-```
-
-```java
-public static HuffTree buildHuffTree(Map<Character, Integer> frequencies) {
-    MinHeap<HuffTree> huffHeap = new MinHeap<>();
-    for (char ch : frequencies) { // Initialise the heap with singleton Huffman trees
-        int freq = frequencies.get(ch);
-        huffHeap.add(new HuffTree(ch, freq));
-    }
-    while (huffHeap.size() > 1) { // While at least two trees left on heap
-        HuffTree t1 = huffHeap.removeMin();
-        HuffTree t2 = huffHeap.removeMin();
-        HuffTree t3 = new HuffTree(t1, t2, t1.weight + t2.weight);
-        huffHeap.add(t3);         // Return new tree to heap
-    }
-    return huffHeap.removeMin();  // Return the final Huffman tree
-}
-```
-
+        // Return the final Huffman tree
+        return huffHeap.removeMin() 
 
 
 `buildHuffTree` takes as input `frequencies`, a map that tells how many
@@ -348,5 +301,6 @@ will not be as expected either.
 You can use the following visualization to create a huffman tree for
 your own set of letters and frequencies.
 
+<!-- TODO: this doesn't work
 <avembed id="huffmanCustomBuildAV" src="Binary/huffmanCustomBuildAV.html" type="ss" name="Huffman Custom Build"/>
-
+-->

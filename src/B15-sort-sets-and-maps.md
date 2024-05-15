@@ -53,8 +53,8 @@ such as *range queries* -- these can also be implemented using binary
 search. As a reminder, here are the relevant operations:
 
     interface SortedSet extends Set:
-        first()          // Returns the first (smallest) element. Raises an exception if the set is empty.
-        last()           // Returns the last (largest) element. Raises an exception if the set is empty.
+        first()          // Returns the first (smallest) element.
+        last()           // Returns the last (largest) element.
         floor(x)         // Returns the closest element <= x, or nothing if there is no such element.
         ceiling(x)       // Returns the closest element >= x, or nothing if there is no such element.
         lower(x)         // Returns the closest element < x, or nothing if there is no such element.
@@ -62,8 +62,8 @@ search. As a reminder, here are the relevant operations:
         between(x1, x2)  // Returns all elements x such that x1 <= x <= x2.
 
     interface SortedMap extends Map:
-        firstKey()               // Returns the first (smallest) key. Raises an exception if the map is empty.
-        lastKey()                // Returns the last (largest) key. Raises an exception if the map is empty.
+        firstKey()               // Returns the first (smallest) key.
+        lastKey()                // Returns the last (largest) key.
         floorKey(key)            // Returns the closest key <= k, or nothing if there is no key.
         ceilingKey(key)          // Returns the closest key >= k, or nothing if there is no key.
         lowerKey(key)            // Returns the closest key < k, or nothing if there is no such element.

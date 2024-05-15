@@ -32,26 +32,10 @@ queue supports the following operations:
 In this chapter, we will see how to implement a priority queue so that
 both adding and removing the minimum take $O(\log n)$ time.
 
-```python
-class PriorityQueue(Collection):
-    def add(self, x):    """Adds x to the priority queue."""
-    def removeMin(self): """Removes and returns the minimum element. Raises an exception if the priority queue is empty."""
-    def getMin(self):    """Returns the minimum element, without removing it. Raises an exception if the priority queue is empty."""
-    # Note: __iter__() can yield the elements in any order, but the minimum element should come first.
-```
-
-```java
-// Note: This is an interface, while java.util.PriorityQueue is a class
-// implementing the Queue interface (so different method names)!
-interface PriorityQueue<E> extends Collection<E> {
-    void add(E x);  // Adds x to the priority queue.
-    E removeMin();  // Removes and returns the minimum element. Raises an exception if the priority queue is empty.
-    E getMin();     // Returns the minimum element, without removing it. Raises an exception if the priority queue is empty.
-    // Note: iterator() can yield the elements in any order, but the minimum element should come first.
-}
-```
-
-
+    interface PriorityQueue extends Collection:
+        add(x)       // Adds x to the priority queue.
+        removeMin()  // Removes and returns the minimum element.
+        getMin()     // Returns the minimum element, without removing it.
 
 Note that this API assumes that the priority queue orders the elements
 in *ascending* order. There is also the possibility of ordering in
@@ -72,30 +56,12 @@ sort a list of items:
 
 Here is an implementation of this algorithm in code:
 
-```python
-def pqSort(array):
-    pq = MinHeap()
-    # MinHeap is a class that implements the priority queue ADT;
-    # we will see how it works in the next section.
-    for item in array:
-        pq.add(item)
-    for i in range(len(array)):
-        array[i] = pq.removeMin()
-```
-
-```java
-public static <E extends Comparable<E>> void pqSort(E[] array) {
-    // MinHeap is a class that implements the priority queue ADT;
-    // we will see how it works in the next section.
-    PriorityQueue<E> pq = new MinHeap<E>();
-    for (E item : array)
-        pq.add(item);
-    for (int i = 0; i < array.length; i++)
-        array[i] = pq.removeMin();
-}
-```
-
-
+    function pqSort(array):
+        pq = new PriorityQueue()
+        for each item in array:
+            pq.add(item)
+        for i = 0 to array.size()-1:
+            array[i] = pq.removeMin()
 
 What is the time complexity of this algorithm? Well, for an input list
 of size $n$, the algorithm calls `add` $n$ times and `removeMin` $n$
@@ -152,67 +118,23 @@ the new transaction to the priority queue. This might make the priority
 queue grow to 101 transactions. If so, we remove the lowest-valued
 transaction. Here it is in code:
 
-```python
-class Top100Transactions:
-    # Assume that the Transaction class implements comparisons
-    # by comparing the value of the transaction.
-    def __init__(self):
-        self.pq = MinHeap()
+    class Top100Transactions:
+        // Assume that the Transaction class implements comparisons
+        // by comparing the value of the transaction.
+        Top100Transactions():
+            this.pq = new PriorityQueue()
 
-    # Add a new transaction to the priority queue.
-    def add(transaction):
-        pq.add(transaction)
-        # If the priority queue grows to 101 transactions,
-        # cut it down to 100 by removing the smallest-valued one.
-        if pq.size() > 100:
-            pq.removeMin()
+        // Add a new transaction to the priority queue.
+        add(transaction):
+            pq.add(transaction)
+            // If the priority queue grows to 101 transactions,
+            // cut it down to 100 by removing the smallest-valued one.
+            if pq.size() > 100:
+                pq.removeMin()
 
-    # Return the top 100 transactions.
-    def top100():
-        return pq.iterator()
-```
-
-```pseudocode
-class Top100Transactions
-    // Assume that the Transaction class implements comparisons
-    // by comparing the value of the transaction.
-    pq : PriorityQueue(Transaction) = new MinHeap()
-
-    // Add a new transaction to the priority queue.
-    add(transaction:Transaction)
-        pq.add(transaction)
-        // If the priority queue grows to 101 transactions,
-        // cut it down to 100 by removing the smallest-valued one.
-        if pq.size() > 100
-            pq.removeMin()
-
-    // Return the top 100 transactions.
-    top100() : Iterator(Transaction)
-        return pq.iterator()
-```
-
-```java
-class Top100Transactions {
-    // Assume that the Transaction class implements Comparable
-    // by comparing the value of the transaction.
-    private PriorityQueue<Transaction> pq = new MinHeap<>();
-
-    // Add a new transaction to the priority queue.
-    public void add(Transaction transaction) {
-        pq.add(transaction);
-        // If the priority queue grows to 101 transactions,
-        // cut it down to 100 by removing the smallest-valued one.
-        if (pq.size() > 100)
-            pq.removeMin();
-    }
-
-    // Return the top 100 transactions.
-    public Iterator<Transaction> top100() {
-        return pq.iterator();
-    }
-}
-```
-
+        // Return the top 100 transactions.
+        top100():
+            return pq.iterator()
 
 
 What is the complexity of `add`? Well, in fact it takes constant time,

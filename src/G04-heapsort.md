@@ -32,7 +32,7 @@ the tree structure.
 Heapsort has all of the advantages just listed. The complete binary tree
 is balanced, its array representation is space efficient, and we can
 load all values into the tree at once, taking advantage of the efficient
-`buildheap` function. The asymptotic performance of Heapsort when all of
+`buildHeap` function. The asymptotic performance of Heapsort when all of
 the records have unique key values is $\Theta(n \log n)$ in the best,
 average, and worst cases. It is not as fast as Quicksort in the average
 case (by a constant factor), but Heapsort has special properties that
@@ -44,143 +44,43 @@ used when sorting data sets too large to fit in main memory.
 
 A complete implementation is as follows.
 
-```python
-def heapsort(a):
-    # Convert the array to a heap
-    build_heap(a)
 
-    # Repeatedly find and remove the minimum element
-    heapsize = len(a)
-    while heapsize > 0:
-        a[0], a[heapsize - 1] = a[heapsize - 1], a[0]
-        heapsize -= 1
-        sift_down(a, heapsize, 0)
+    function heapsort(a):
+        // Convert the array to a heap:
+        buildHeap(a)
 
-def build_heap(a):
-    # Go backwards from the first non-leaf, sifting down each one
-    for i in reversed(range(len(a)//2)):
-        sift_down(a, len(a), i)
+        // Repeatedly find and remove the minimum element
+        for heapsize = a.size()-1 downto 0:
+            a[0], a[heapsize] = a[heapsize], a[0]
+            siftDown(a, heapsize, 0)
 
-# Standard sift-down method for max heaps
-def sift_down(a, heapsize, i):
-    while left_child_index(i) < heapsize:
-        l = left_child_index(i)
-        r = right_child_index(i)
+    function buildHeap(a):
+        // Go backwards from the first non-leaf, sifting down each one
+        heapsize = a.size()
+        for i = heapsize/2-1 downto 0:
+            siftDown(a, heapsize, i)
 
-        if a[l] > a[i]:
-            largest = l
-        else:
-            largest = i
+    function siftDown(a, heapsize, i):
+        // Standard sift-down method for max heaps
+        left = 2*i + 1
+        while left < heapsize:
+            right = left + 1
 
-        if r < heapsize and a[r] > a[largest]:
-            largest = r
+            if a[left] > a[i]:
+                largest = left
+            else:
+                largest = i
 
-        if largest == i:
-            return
-        else:
-            a[i], a[largest] = a[largest], a[i]
-            i = largest
+            if right < heapsize and a[right] > a[largest]:
+                largest = right
 
-# Left and right child indexes.
-def left_child_index(i):
-    return 2*i+1
+            if largest == i:
+                return
+            else:
+                a[i], a[largest] = a[largest], a[i]
+                i = largest
 
-def right_child_index(i):
-    return 2*i+2
-```
-
-```pseudocode
-Algorithm 1 Heapsort(A)
-    // Convert the array to a heap
-    BuildHeap(A)
-
-    // Repeatedly find and remove the minimum element
-    heapsize = A.size
-    while heapsize > 0
-        Swap(A[0], A[heapsize - 1])
-        heapsize -= 1
-        SiftDown(A, 0)
-
-// Standard sift-down method for max heaps
-Algorithm 2 SiftDown(A, i)
-    while Left-child-index(i) < heapsize
-        l = Left-child-index(i)
-        r = Right-child-index(i)
-        if A[l] > A[i]
-            largest = l
-        else
-            largest = i
-
-        if r < heapsize and A[r] > A[largest]
-            largest = r
-
-        if largest = i
-            return
-        else
-            Swap(A[i], A[largest])
-            i = largest
-```
-
-```java
-static void heapsort(int[] a) {
-    // Convert the array to a heap
-    buildHeap(a);
-
-    // Repeatedly find and remove the minimum element
-    int heapsize = a.length;
-    while (heapsize > 0) {
-        swap(a, 0, heapsize - 1);
-        heapsize--;
-        siftDown(a, heapsize, 0);
-    }
-}
-    
-static void buildHeap(int[] a) {
-    // Go backwards from the first non-leaf, sifting down each one
-    for (int i = a.length/2; i >= 0; i--)
-        siftDown(a, a.length, i);
-}
-
-// Standard sift-down method for max heaps
-static void siftDown(int[] a, int heapsize, int i) {
-    while (leftChildIndex(i) < heapsize) {
-        int l = leftChildIndex(i);
-        int r = rightChildIndex(i);
-        int largest;
-
-        if (a[l] > a[i])
-            largest = l;
-        else
-            largest = i;
-
-        if (r < heapsize && a[r] > a[largest])
-            largest = r;
-
-        if (largest == i)
-            return;
-        else {
-            swap(a, i, largest);
-            i = largest;
-        }
-    }
-}
-
-static int leftChildIndex(int i) {
-    return 2*i+1;
-}
-
-static int rightChildIndex(int i) {
-    return 2*i+2;
-}
-
-// Swap index i and j
-static void swap(int[] a, int i, int j) {
-    int temp = a[i];
-    a[i] = a[j];
-    a[j] = temp;
-}
-```
-
+            left = 2*i + 1
 
 
 Here is a warmup practice exercise for Heapsort.

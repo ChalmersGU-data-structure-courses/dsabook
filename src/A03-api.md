@@ -63,22 +63,22 @@ Stacks:
 
     interface Stack extends Collection:
         push(x)    // Pushes x on top of the stack.
-        pop()      // Pops the top of the stack and returns it. Raises an exception if the stack is empty.
-        peek()     // Returns the top element, without removing it. Raises an exception if the stack is empty.
+        pop()      // Pops the top of the stack and returns it.
+        peek()     // Returns the top element, without removing it.
 
 Queues:
 
     interface Queue extends Collection:
         enqueue(x)  // Enqueues x at the end of the queue.
-        dequeue()   // Dequeues the frontmost element. Raises an exception if the queue is empty.
-        peek()      // Returns the frontmost element, without removing it. Raises an exception if the queue is empty.
+        dequeue()   // Dequeues the frontmost element.
+        peek()      // Returns the frontmost element, without removing it.
 
 Priority queues:
 
     interface PriorityQueue extends Collection:
         add(x)       // Adds x to the priority queue.
-        removeMin()  // Removes and returns the minimum element. Raises an exception if the priority queue is empty.
-        getMin()     // Returns the minimum element, without removing it. Raises an exception if the priority queue is empty.
+        removeMin()  // Removes and returns the minimum element.
+        getMin()     // Returns the minimum element, without removing it.
 
 
 ### Sets
@@ -93,8 +93,8 @@ Sets with no internal order:
 Sets where the elements are sorted:
 
     interface SortedSet extends Set:
-        first()          // Returns the first (smallest) element. Raises an exception if the set is empty.
-        last()           // Returns the last (largest) element. Raises an exception if the set is empty.
+        first()          // Returns the first (smallest) element.
+        last()           // Returns the last (largest) element.
         floor(x)         // Returns the closest element <= x, or nothing if there is no such element.
         ceiling(x)       // Returns the closest element >= x, or nothing if there is no such element.
         lower(x)         // Returns the closest element < x, or nothing if there is no such element.
@@ -119,8 +119,8 @@ Maps with no internal order:
 Maps where the keys are sorted:
 
     interface SortedMap extends Map:
-        firstKey()               // Returns the first (smallest) key. Raises an exception if the map is empty.
-        lastKey()                // Returns the last (largest) key. Raises an exception if the map is empty.
+        firstKey()               // Returns the first (smallest) key.
+        lastKey()                // Returns the last (largest) key.
         floorKey(key)            // Returns the closest key <= k, or nothing if there is no key.
         ceilingKey(key)          // Returns the closest key >= k, or nothing if there is no key.
         lowerKey(key)            // Returns the closest key < k, or nothing if there is no such element.

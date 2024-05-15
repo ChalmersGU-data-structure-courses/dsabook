@@ -23,8 +23,8 @@ removed, an element is said to be [popped](#pop){.term} from the stack. Here is 
 
     interface Stack extends Collection:
         push(x)    // Pushes x on top of the stack.
-        pop()      // Pops the top of the stack and returns it. Raises an exception if the stack is empty.
-        peek()     // Returns the top element, without removing it. Raises an exception if the stack is empty.
+        pop()      // Pops the top of the stack and returns it.
+        peek()     // Returns the top element, without removing it.
 
 As with lists, there are many variations on stack implementation. The
 two main approaches are the [array-based stack]{.term} and the

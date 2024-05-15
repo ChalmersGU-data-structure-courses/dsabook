@@ -52,50 +52,45 @@ seeking not the next closest vertex to the start vertex, but rather the
 next closest vertex to any vertex currently in the MCST. Thus the
 following lines in Djikstra's algorithm:
 
-    if (D.get(w) > D.get(v) + e.weight)
-        D.put(w, D.get(v) + e.weight)
+    dist = D.get(v) + e.weight
+    if dist < D.get(w):
+        D.put(w, dist)
 
 are replaced with the following lines in Prim's algorithm:
 
-    if (D.get(w) > e.weight)
+    if e.weight < D.get(w):
         D.put(w, e.weight)
 
 The following code shows an implementation for Prim's algorithm that
 searches the distance matrix for the next closest vertex.
 
-```java
-// Compute shortest distances to the MCST, store them in D.
-// Parent[i] will hold the index for the vertex that is i's parent in the MCST
-static void <V> Prim(Graph<V> G, V s, Map<V,Double> D, Map<V,V> Parent) {
-    Set<V> visited = new Set<>();
-    for (V v : G.vertices())     // Initialize
-        D.put(v, Double.POSITIVE_INFINITY);
-    D.put(s, 0);
-    for (int i=0; i < G.vertexCount(); i++) {   // Process the vertices
-        V v = minVertex(G, D);   // Find next-closest vertex
-        visited.add(v);
-        if (D.get(v) == Double.POSITIVE_INFINITY)
-            return;              // Unreachable
-        if (!v.equals(s))
-            AddEdgetoMST(Parent.get(v), v);
-        for (Edge<V> e : G.outgoingEdges(v)) {
-            V w = e.end;
-            if (D.get(w) > e.weight) {
-                D.put(w, e.weight);
-                Parent.put(w, v);
-            }
-        }
-    }
-}
-```
+    // Compute shortest distances to the MCST, store them in D.
+    // parent.get(v) will hold the index for the vertex that is v's parent in the MCST
+    function Prim(G, s):
+        visited = new Set()
+        parent = new Map()
+        D = new Map()
+        for each v in G.vertices():
+            D.put(v, ∞)
+        D.put(s, 0)
+
+        repeat G.vertxCount() times:  // Process the vertices
+            v = minVertex(G, D, visited)  // Find next-closest vertex
+            visited.add(v)
+            if D.get(v) == ∞:
+                return parent
+            for each e in G.outgoingEdges(v):
+                w = e.end
+                if e.weight < D.get(w):
+                    D.put(w, e.weight)
+                    parent.put(w, v)
+        return parent
 
 For each vertex *e*, when *e* is processed by Prim's algorithm, an edge
 going to *e* is added to the MCST that we are building. Array `V[e]`
 stores the previously visited vertex that is closest to Vertex *e*. 
 This information lets us know which edge goes into the
-MCST when Vertex *e* is processed. The implementation above also
-contains calls to `AddEdgetoMST` to indicate which edges are actually
-added to the MCST.
+MCST when Vertex *e* is processed.
 
 <inlineav id="primCON" src="Graph/primCON.js" name="Prim's Minimum Cost Spanning Tree Algorithm Slideshow" links="Graph/primCON.css"/>
 
@@ -107,39 +102,31 @@ vertex, as shown next. As with the priority queue version of Dijkstra's
 algorithm, the [heap]{.term} stores `DijkElem`
 objects.
 
-```java
-// Prims MCST algorithm: priority queue version
-static void <V> PrimPQ(Graph G, V s, Map<V,Double> D, Map<V,V> Parent) {
-    MinHeap H = new MinHeap();
-    H.add(new KVPair(0, s));   // Initial vertex
+    // Prim's MCST algorithm: priority queue version
+    function PrimPQ(G, s):
+        visited = new Set()
+        parent = new Map()
+        D = new Map()
+        for (v : G.vertices())
+            D.put(v, ∞)
+        D.put(s, 0)
 
-    Set<V> visited = new Set<>();
+        agenda = new PriorityQueue()
+        agenda.add(new KVPair(0, s))
 
-    for (V v : G.vertices())  // Initialize distance
-        D.put(v, Double.POSITIVE_INFINITY);
-    D.put(s, 0);
-
-    while (!H.isEmpty()) {
-        V v = H.removeMin().value();
-        if (!visited.contains(v)) {
-            visited.add(v);
-            if (D.get(v) == Double.POSITIVE_INFINITY)
-                return;     // Unreachable
-            if (!v.equals(s))
-                AddEdgetoMST(Parent.get(v), v);
-            for (Edge<V> e : G.outgoingEdges) {
-                V w = e.end;
-                if (D.get(w) > e.weight) { // Update D
-                    D.put(w, e.weight);
-                    Parent.put(w, v);
-                    H.add(new KVPair(D.get(W), w));
-                }
-            }
-        }
-    }
-}
-```
-
+        while not agenda.isEmpty():
+            v = agenda.removeMin().value
+            if v not in visited:
+                visited.add(v)
+                if D.get(v) == ∞:
+                    return parent
+                for each e in G.outgoingEdges():
+                    w = e.end
+                    if e.weight < D.get(w):
+                        D.put(w, e.weight)
+                        parent.put(w, v)
+                        agenda.add(new KVPair(e.weight, w))
+        return parent
 
 
 Prim's algorithm is an example of a greedy algorithm. At each step in

@@ -10,28 +10,13 @@ decide how to hash strings, and x-ray images can decide how to hash
 x-ray images. This is done by requiring a class to implement a hash
 method (called `hashCode()` in Java, and `__hash__()` in Python).
 
-```python
-class Person:
-    def __init__(self, first, last):
-        self.firstName = first
-        self.lastName = last
+    class Person:
+        Person(first, last):
+            this.firstName = first
+            this.lastName = last
 
-    def __hash__(self):
-        # Note: The function ``hash(x)`` calls ``x.__hash__()``
-        return hash(self.firstName) + hash(self.lastName)
-```
-
-```java
-class Person {
-    public String firstName;
-    public String lastName;
-
-    public int hashCode() {
-        return firstName.hashCode() + lastName.hashCode();
-    }
-}
-```
-
+        hashCode():
+            return this.firstName.hashCode() + this.lastName.hashCode()
 
 
 Now, the problem is that these classes have no idea how large the
@@ -58,23 +43,17 @@ However, in Java and Python, integers are signed, so the method
 $M$, we might get a negative result. A negative index is not suitable as
 a table index, so first we have to make the hash code positive.
 
-One way to do this is to mask off the sign bit. Java integers are
-$-2^{31}\leq h<2^{31}$, so we can use `h & 0x7fffffff`. (Python uses
-arbitrary size hash values, but it works fine to truncate them to 31
-bits as we have done here).
+One way to do this is to mask off the sign bit. 
+Most programming languages use integers in the range $-2^{31}\ldots h<2^{31}$.
+In these cases we can e.g. use `hashCode & 0x7fffffff` to make the hash code positive. 
+(Python and some other languages use arbitrary size integers, but it works fine to 
+truncate them to 31 bits as we do here).
 
-```python
-    def _hash(self, key):
-        return (hash(key) & 0x7fffffff) % len(self._internalTable)
-```
-
-```java
-    private int hash(K key) {
-        return (key.hashCode() & 0x7fffffff) % internalTable.length;
-    }
-```
-
-
+    class SeparateChainingHashMap implements Map:
+        ...
+        hash(key):
+            h = key.hashCode() & 0x7fffffff
+            return h % this.bins.size()
 
 ### The hash code never changes
 

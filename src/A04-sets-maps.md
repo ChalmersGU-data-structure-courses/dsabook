@@ -250,8 +250,8 @@ Recall the interface for sorted maps from
 [the course API](#all-adts-used-in-this-book):
 
     interface SortedMap extends Map:
-        firstKey()               // Returns the first (smallest) key. Raises an exception if the map is empty.
-        lastKey()                // Returns the last (largest) key. Raises an exception if the map is empty.
+        firstKey()               // Returns the first (smallest) key.
+        lastKey()                // Returns the last (largest) key.
         floorKey(key)            // Returns the closest key <= k, or nothing if there is no key.
         ceilingKey(key)          // Returns the closest key >= k, or nothing if there is no key.
         lowerKey(key)            // Returns the closest key < k, or nothing if there is no such element.
@@ -263,8 +263,8 @@ Recall the interface for sorted sets from
 [the course API](#all-adts-used-in-this-book):
 
     interface SortedSet extends Set:
-        first()          // Returns the first (smallest) element. Raises an exception if the set is empty.
-        last()           // Returns the last (largest) element. Raises an exception if the set is empty.
+        first()          // Returns the first (smallest) element.
+        last()           // Returns the last (largest) element.
         floor(x)         // Returns the closest element <= x, or nothing if there is no such element.
         ceiling(x)       // Returns the closest element >= x, or nothing if there is no such element.
         lower(x)         // Returns the closest element < x, or nothing if there is no such element.

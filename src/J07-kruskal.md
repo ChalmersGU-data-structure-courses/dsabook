@@ -20,38 +20,31 @@ array and then sorting the array. Another possibility is to use a
 
 The only tricky part to this algorithm is determining if two vertices
 belong to the same equivalence class. Fortunately, the ideal algorithm
-is available for the purpose -- 
-the [UNION/FIND]{.term} algorithm.
+is available for the purpose -- the [UNION/FIND]{.term} algorithm.
 Here is an implementation for Kruskal's algorithm. Note that since the
 MCST will never have more than $|\mathbf{V}|-1$ edges, we can return as
 soon as the MCST contains enough edges.
 
-```java
-// Kruskal's MST algorithm
-static void <V> Kruskal(Graph<V> G) {
-    ParPtrTree A = new ParPtrTree();
-    for (V v : G.vertices())
-        A.MAKE_SET(v);   // Create one singleton set for each vertex
+    // Kruskal's MCST algorithm
+    function Kruskal(G):
+        A = new ParentPointerTree()
+        for each v in G.vertices():
+            A.MAKE_SET(v)  // Create one singleton set for each vertex
 
-    Edge<V>[] E = new Edge<>[edgeCount];
-    for (V v : G.vertices())
-        for (Edge<V> edge : G.outgoingEdges(v))
-            E.append(edge);
-    Arrays.sort(E, weightComparator);       // Sort the edges by increasing weight
+        edges = new PriorityQueue()
+        for each v in G.vertices():
+            for each e in G.outgoingEdges(v):
+                edges.add(new KVPair(e.weight, e))
 
-    int numEdgesInMST = 0;
-    for (Edge<V> edge : E) {
-        if (A.FIND(edge.start) != A.FIND(edge.end)) {  // If the vertices are not connected
-            AddEdgetoMST(edge);             // Add this edge to the MCST
-            numEdgesInMST++;
-            if (numEdgesInMST >= G.vertexCount()-1)
-                return;                     // Stop when the MST has |V|-1 edges
-            A.UNION(edge.start, edge.end);  // Connect the two vertices
-        }
-    }
-}
-```
-
+        numEdgesInMCST = 0
+        while not edges.isEmpty():
+            e = edges.removeMin()
+            if A.FIND(e.start) != A.FIND(e.end):  // If the vertices are not connected...
+                AddEdgetoMCST(edge)               // ...add this edge to the MCST
+                numEdgesInMCST = numEdgesInMCST + 1
+                if numEdgesInMCST >= G.vertexCount()-1:
+                    return A                      // Stop when the MCST has |V|-1 edges
+                A.UNION(e.start, e.end)           // Connect the two vertices
 
 
 Kruskal's algorithm is dominated by the time required to process the

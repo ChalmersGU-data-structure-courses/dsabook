@@ -128,7 +128,7 @@ A [free tree]{.term} is a connected, undirected
 graph with no simple cycles. An equivalent definition is that a free
 tree is connected and has $|\mathbf{V}| - 1$ edges.
 
-### Graph Representations
+## Graph Representations
 
 There are two commonly used methods for representing graphs. The
 [adjacency matrix]{.term} for a graph is a

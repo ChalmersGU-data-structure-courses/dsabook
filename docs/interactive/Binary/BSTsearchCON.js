@@ -23,16 +23,15 @@ $(document).ready(function () {
   };
 
   var pseudo = av.code([
-    "V getHelper(Node node, K key) {",
-    "    if (node == null)",
-    "        return null;",
-    "    if (node.key.compareTo(key) > 0)",
-    "        return getHelper(node.left, key);",
-    "    else if (node.key.compareTo(key) < 0)",
-    "        return getHelper(node.right, key);",
-    "    else // node.key == key",
-    "        return node.value;",
-    "}",
+    "getHelper(node, key):",
+    "    if node is null:",
+    "        return null",
+    "    else if key < node.key:",
+    "        return getHelper(node.left, key)",
+    "    else if key > node.key:",
+    "        return getHelper(node.right, key)",
+    "    else: // key == node.key",
+    "        return node.value",
   ], {lineNumbers: false,
       tags: {
         "sig": 1,

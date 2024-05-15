@@ -90,7 +90,7 @@ constant time.
 Here we will show the implementation of a **hash map**. Implementing a
 hash set is very similar, and even simpler.
 
-A separate chaining hash map consists of an internal array of key-value
+A separate chaining hash map consists of an internal array `bins` of key-value
 maps. We don't have to specify what kind of maps just yet, but we will
 use a simple [linked list map](#implementing-maps-using-lists) 
 because the idea is that each bin will only contain a couple
@@ -103,51 +103,29 @@ initial minimum capacity, and then let every array cell be a new empty
 linked list map. Note that we put the initialisation in a private method
 of its own, so that we can reuse it when resizing the table.
 
-```python
-class SeparateChainingHashMap(Map):
-```
+    class SeparateChainingHashMap implements Map:
+        SeparateChainingHashMap():
+            this.initialise(minCapacity)
 
-```java
-class SeparateChainingHashMap<K, V> implements Map<K, V> {
-    Map<K, V>[] internalTable;
-    int mapSize;
+        initialise(capacity):
+            this.bins = new Array(capacity)
+            this.mapSize = 0
 
-    SeparateChainingHashMap() {
-        initialiseTable(MinCapacity);
-    }
-
-    @SuppressWarnings("unchecked")
-    private void initialiseTable(int capacity) {
-        internalTable = (Map<K, V>[]) new LinkedMap[capacity];
-        mapSize = 0;
-    }
-
-    private Map<K, V> lookupBin(int i) {
-        Map<K, V> bin = internalTable[i];
-        if (bin == null)
-            bin = internalTable[i] = new LinkedMap<>();
-        return bin;
-    }
-```
-
-
+        lookupBin(i):
+            bin = this.bins[i]
+            if bin == null:
+                bin = new LinkedListMap()
+                this.bins[i] = bin
+            return bin
 
 To get the value for a key, we called the table index for the key, and
 then look up the key in the underlying map at that position.
 
-```python
-    def get(self, key):
-        i = self._hash(key)
-        return self._internalTable[i].get(key)
-```
-
-```java
-    public V get(K key) {
-        int i = hash(key);
-        return lookupBin(i).get(key);
-    }        
-```
-
+    class SeparateChainingHashMap implements Map:
+        ...
+        get(key):
+            i = this.hash(key)
+            return this.bins[i].get(key)
 
 
 To set a value for a key, we calculate the table index for the key, and
@@ -157,31 +135,16 @@ and then we know that the number of key/value pairs have been increased.
 We also have to check if the load factor becomes too large, and then we
 make the internal table larger by a factor.
 
-```python
-    def put(self, key, value):
-        i = self._hash(key)
-        old = self._internalTable[i].put(key, value)
-        if old is None:
-            self._mapSize += 1
-            if self.loadFactor() > self._maxLoadFactor:
-                self._resizeTable(len(self._internalTable) * self._capacityMultiplier)
-        return old
-```
-
-```java
-    public V put(K key, V value) {
-        int i = hash(key);
-        V old = lookupBin(i).put(key, value);
-        if (old == null) {
-            mapSize++;
-            if (loadFactor() > MaxLoadFactor)
-                resizeTable((int) (internalTable.length * CapacityMultiplier));
-        }
-        return old;
-    }
-```
-
-
+    class SeparateChainingHashMap implements Map:
+        ...
+        def put(key, value):
+            i = this.hash(key)
+            old = this.bins[i].put(key, value)
+            if old is null:
+                this.mapSize = this.mapSize + 1
+                if this.loadFactor() > maxLoadFactor:
+                    this.resizeTable(this.bins.size() * capacityMultiplier)
+            return old
 
 To remove a value, we do the same: find the underlying map for the key,
 and remove the key/value pair. If we actually removed the key (i.e., if
@@ -189,31 +152,16 @@ it existed in the map), then we decrease the map size. We also check if
 the table becomes too sparse, and then decrease the internal table by a
 factor.
 
-```python
-    def remove(self, key):
-        i = self._hash(key)
-        removed = self._internalTable[i].remove(key)
-        if removed is not None:
-            self._mapSize -= 1
-            if self.loadFactor() < self._minLoadFactor:
-                self._resizeTable(len(self._internalTable) / self._capacityMultiplier)
-        return removed
-```
-
-```java
-    public V remove(K key) {
-        int i = hash(key);
-        V removed = lookupBin(i).remove(key);
-        if (removed != null) {
-            mapSize--;
-            if (loadFactor() < MinLoadFactor) 
-                resizeTable((int) (internalTable.length / CapacityMultiplier));
-        }
-        return removed;
-    }            
-```
-
-
+    class SeparateChainingHashMap implements Map:
+        ...
+        def remove(key):
+            i = this.hash(key)
+            removed = this.bins[i].remove(key)
+            if removed is not null:
+                this.mapSize = this.mapSize - 1
+                if this.loadFactor() < minLoadFactor:
+                    this.resizeTable(this.bins.size() / capacityMultiplier)
+            return removed
 
 The constants for min and max load factors, and the resizing factor, are
 a bit arbitrary. With the following values, we ensure that the table on
@@ -223,35 +171,19 @@ these values leads to more better memory usage, but also more conflicts
 each time we resize the table. Increasing this value means that resizing
 will happen less often, but instead the memory usage will increase.
 
-```python
-    _minCapacity = 8
-    _minLoadFactor = 0.5
-    _maxLoadFactor = 2.0
-    _capacityMultiplier = 1.5
-```
-
-```java
-    static int MinCapacity = 8;
-    static double MinLoadFactor = 0.5;
-    static double MaxLoadFactor = 2.0;
-    static double CapacityMultiplier = 1.5;
-```
-
-
+    class SeparateChainingHashMap implements Map:
+        ...
+        minCapacity = 8
+        minLoadFactor = 0.5
+        maxLoadFactor = 2.0
+        capacityMultiplier = 1.5
 
 The load factor $N/M$ is easy to calculate.
 
-```python
-    def loadFactor(self):
-        return self._mapSize / len(self._internalTable)
-```
-
-```java
-    public double loadFactor() {
-        return (double) mapSize / internalTable.length;
-    }
-```
-
+    class SeparateChainingHashMap implements Map:
+        ...
+        loadFactor():
+            return this.mapSize / this.bins.size()
 
 
 ### Resizing the internal table
@@ -263,251 +195,18 @@ temporary variable, and reinitialise the table to the new capacity. Then
 we iterate through all bins and entries in the old table, and simply
 insert them again into the new resized table.
 
-```python
-    def _resizeTable(self, newCapacity):
-        if newCapacity < self._minCapacity: return
-        oldTable = self._internalTable
-        self._initialiseTable(int(newCapacity))
-        for bin in oldTable:
-            for k in bin:
-                self.put(k, bin.get(k))
-```
-
-```java
-    private void resizeTable(int newCapacity) {
-        if (newCapacity < MinCapacity) return;
-        Map<K, V>[] oldTable = internalTable;
-        initialiseTable(newCapacity);
-        for (Map<K, V> bin : oldTable)
-            if (bin != null)
-                for (K k : bin)
-                    put(k, bin.get(k));
-    }
-```
-
+    class SeparateChainingHashMap implements Map:
+        ...
+        def resizeTable(newCapacity):
+            if newCapacity >= this.minCapacity: 
+                oldBins = this.bins
+                this.initialiseTable(newCapacity)
+                for each bin in oldBins:
+                    for each k in bin:
+                        this.put(k, bin.get(k))
 
 
 ### Exercise
 
 <avembed id="OpenHashPRO" src="Hashing/OpenHashPRO.html" type="ka" name="Separate Chaining Proficiency Exercise"/>
-
-### Full implementation
-
-Here is the full implementation for separate chaining hash tables.
-
-```python
-#/* *** ODSATag: Header *** */
-class SeparateChainingHashMap(Map):
-#/* *** ODSAendTag: Header *** */
-#/* *** ODSATag: Constants *** */
-    _minCapacity = 8
-    _minLoadFactor = 0.5
-    _maxLoadFactor = 2.0
-    _capacityMultiplier = 1.5
-#/* *** ODSAendTag: Constants *** */
-
-#/* *** ODSATag: Constructor *** */
-    def __init__(self):
-        self._initialiseTable(self._minCapacity)
-
-    def _initialiseTable(self, capacity):
-        capacity = int(capacity)
-        self._internalTable = [None] * capacity
-        for i in range(capacity):
-            self._internalTable[i] = LinkedMap()
-        self._mapSize = 0
-#/* *** ODSAendTag: Constructor *** */
-
-#/* *** ODSATag: HashIndex *** */
-    def _hash(self, key):
-        return (hash(key) & 0x7fffffff) % len(self._internalTable)
-#/* *** ODSAendTag: HashIndex *** */
-
-#/* *** ODSATag: Put *** */
-    def put(self, key, value):
-        i = self._hash(key)
-        old = self._internalTable[i].put(key, value)
-        if old is None:
-            self._mapSize += 1
-            if self.loadFactor() > self._maxLoadFactor:
-                self._resizeTable(len(self._internalTable) * self._capacityMultiplier)
-        return old
-#/* *** ODSAendTag: Put *** */
-
-#/* *** ODSATag: Get *** */
-    def get(self, key):
-        i = self._hash(key)
-        return self._internalTable[i].get(key)
-#/* *** ODSAendTag: Get *** */
-
-#/* *** ODSATag: Remove *** */
-    def remove(self, key):
-        i = self._hash(key)
-        removed = self._internalTable[i].remove(key)
-        if removed is not None:
-            self._mapSize -= 1
-            if self.loadFactor() < self._minLoadFactor:
-                self._resizeTable(len(self._internalTable) / self._capacityMultiplier)
-        return removed
-#/* *** ODSAendTag: Remove *** */
-
-    def containsKey(self, key):
-        i = self._hash(key)
-        return self._internalTable[i].containsKey(key)
-
-#/* *** ODSATag: Resize *** */
-    def _resizeTable(self, newCapacity):
-        if newCapacity < self._minCapacity: return
-        oldTable = self._internalTable
-        self._initialiseTable(int(newCapacity))
-        for bin in oldTable:
-            for k in bin:
-                self.put(k, bin.get(k))
-#/* *** ODSAendTag: Resize *** */
-
-    def isEmpty(self):
-        return self._mapSize == 0
-
-    def size(self):
-        return self._mapSize
-
-#/* *** ODSATag: LoadFactor *** */
-    def loadFactor(self):
-        return self._mapSize / len(self._internalTable)
-#/* *** ODSAendTag: LoadFactor *** */
-
-    def __iter__(self):
-        for bin in self._internalTable:
-            for key in bin:
-                yield key
-```
-
-```java
-/* *** ODSATag: Header *** */
-class SeparateChainingHashMap<K, V> implements Map<K, V> {
-    Map<K, V>[] internalTable;
-    int mapSize;
-
-    SeparateChainingHashMap() {
-        initialiseTable(MinCapacity);
-    }
-
-    @SuppressWarnings("unchecked")
-    private void initialiseTable(int capacity) {
-        internalTable = (Map<K, V>[]) new LinkedMap[capacity];
-        mapSize = 0;
-    }
-
-    private Map<K, V> lookupBin(int i) {
-        Map<K, V> bin = internalTable[i];
-        if (bin == null)
-            bin = internalTable[i] = new LinkedMap<>();
-        return bin;
-    }
-/* *** ODSAendTag: Header *** */
-
-/* *** ODSATag: Constants *** */
-    static int MinCapacity = 8;
-    static double MinLoadFactor = 0.5;
-    static double MaxLoadFactor = 2.0;
-    static double CapacityMultiplier = 1.5;
-/* *** ODSAendTag: Constants *** */
-
-/* *** ODSATag: HashIndex *** */
-    private int hash(K key) {
-        return (key.hashCode() & 0x7fffffff) % internalTable.length;
-    }
-/* *** ODSAendTag: HashIndex *** */
-
-/* *** ODSATag: Put *** */
-    public V put(K key, V value) {
-        int i = hash(key);
-        V old = lookupBin(i).put(key, value);
-        if (old == null) {
-            mapSize++;
-            if (loadFactor() > MaxLoadFactor)
-                resizeTable((int) (internalTable.length * CapacityMultiplier));
-        }
-        return old;
-    }
-/* *** ODSAendTag: Put *** */
-
-/* *** ODSATag: Get *** */
-    public V get(K key) {
-        int i = hash(key);
-        return lookupBin(i).get(key);
-    }        
-/* *** ODSAendTag: Get *** */
-
-/* *** ODSATag: Remove *** */
-    public V remove(K key) {
-        int i = hash(key);
-        V removed = lookupBin(i).remove(key);
-        if (removed != null) {
-            mapSize--;
-            if (loadFactor() < MinLoadFactor) 
-                resizeTable((int) (internalTable.length / CapacityMultiplier));
-        }
-        return removed;
-    }            
-/* *** ODSAendTag: Remove *** */
-
-    public boolean containsKey(K key) {
-        int i = hash(key);
-        return lookupBin(i).containsKey(key);
-    }
-
-/* *** ODSATag: Resize *** */
-    private void resizeTable(int newCapacity) {
-        if (newCapacity < MinCapacity) return;
-        Map<K, V>[] oldTable = internalTable;
-        initialiseTable(newCapacity);
-        for (Map<K, V> bin : oldTable)
-            if (bin != null)
-                for (K k : bin)
-                    put(k, bin.get(k));
-    }
-/* *** ODSAendTag: Resize *** */
-
-    public boolean isEmpty() {
-        return mapSize == 0;
-    }
-
-    public int size() {
-        return mapSize;
-    }
-
-/* *** ODSATag: LoadFactor *** */
-    public double loadFactor() {
-        return (double) mapSize / internalTable.length;
-    }
-/* *** ODSAendTag: LoadFactor *** */
-
-    public Iterator<K> iterator() {
-        return new HashMapIterator();
-    }
-
-    private class HashMapIterator implements Iterator<K> {
-        private int bucketIndex;
-        private Iterator<K> bucketIterator;
-        HashMapIterator() {
-            bucketIndex = 0;
-            bucketIterator = lookupBin(bucketIndex).iterator();
-        }
-        public boolean hasNext() {
-            while (!bucketIterator.hasNext()) {
-                bucketIndex++;
-                if (bucketIndex >= internalTable.length) return false;
-                bucketIterator = lookupBin(bucketIndex).iterator();
-            }
-            return true;
-        }
-        public K next() {
-            hasNext();
-            return bucketIterator.next();
-        }
-    }
-}
-```
-
 

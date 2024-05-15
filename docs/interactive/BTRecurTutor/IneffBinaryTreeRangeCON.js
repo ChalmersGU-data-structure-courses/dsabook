@@ -7,20 +7,19 @@ $(document).ready(function () {
   var av = new JSAV(av_name);
 
   var pseudo = av.code([
-    "int range(Node root, int min, int max) {",
-    "    if (root == null)",
-    "        return 0;",
-    "    int result = 0;",
-    "    if (min <= root.key && root.key <= max)",
-    "        result += + 1;",
-    "    result += range(root.left, min, max); ",
-    "    result += range(root.right, min, max);",
-    "    return result;",
-    "}",
+    "function range(node, min, max):",
+    "    if node == null:",
+    "        return 0",
+    "    result = 0;",
+    "    if min <= node.key <= max:",
+    "        result = result + 1",
+    "    result = result + range(node.left, min, max)",
+    "    result = result + range(node.right, min, max)",
+    "    return result",
   ], {lineNumbers: false});
 
   // Slide 1
-  av.umsg("Suppose that you want to write a recursive function named range that, given a root to a BST, a key value min, and a key value max, returns the number of nodes having key values that fall between min and max. Function range should visit as few nodes in the BST as possible. An inefficient solution is shown.");
+  av.umsg("Suppose that you want to write a recursive function named range that, given a BST tree node, a key value min, and a key value max, returns the number of nodes having key values that fall between min and max. The function range should visit as few nodes in the BST as possible. An inefficient solution is shown.");
   av.displayInit();
 
   // Slide 2
@@ -71,7 +70,7 @@ $(document).ready(function () {
   av.step();
    
   // Slide 7
-  av.umsg("The code is not efficient because it does not avoid vsiting un-needed nodes. The code will visit the whole right sub-tree even though it is not needed.");
+  av.umsg("The code is not efficient because it does not avoid visiting un-needed nodes. The code will visit the whole right sub-tree even though it is not needed.");
   var label3 = av.label("The range function should be written in a way that avoid traversing this side for the given range.", {left: 550, top: btTop + 50}); 
   var el1= av.g.ellipse(442, btTop + 108, 50 , 50).css({fill: "red", opacity: 0.4});
   av.step();
@@ -110,18 +109,17 @@ $(document).ready(function () {
   pseudo.hide();
 
   var pseudo2 = av.code([
-    "int range(Node root, int min, int max) {",
-    "    if (root == null)",
-    "        return 0;",
-    "    int result = 0;",
-    "    if (min <= root.key && root.key <= max)",
-    "        result += 1;",
-    "    if (min < root.key)",
-    "        result += range(root.left, min, max); ",
-    "    if (root.key < max)",
-    "        result += range(root.right, min, max);",
-    "    return result;",
-    "}",
+    "function range(node, min, max):",
+    "    if node == null:",
+    "        return 0",
+    "    result = 0;",
+    "    if min <= node.key <= max:",
+    "        result = result + 1",
+    "    if min < node.key:",
+    "        result = result + range(node.left, min, max)",
+    "    if node.key < max:",
+    "        result = result + range(node.right, min, max)",
+    "    return result",
   ], {lineNumbers: false});
 
   el2.hide();

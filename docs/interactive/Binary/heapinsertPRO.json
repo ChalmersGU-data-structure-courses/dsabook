@@ -8,25 +8,10 @@
       "#about": "About",
       "av_insert_values": "Insert values",
       "av_c1": "Inserting "
-    },
-    "fi": {
-      ".avTitle": "Lisäys binäärikekoon",
-      "av_Authors": "Ville Karavirta",
-      ".instructLabel": "Ohjeet:",
-      ".instructions": "Lisää vasemmassa yläkulmassa olevan tietovuon avaimet alun perin tyhjään <b>minimikekoon</b>. Keko on esitetty sekä taulukkona (todellinen toteutus) että binääripuuna (looginen esitysmuoto). Voit päivittää rakennetta klikkaamalla kumpaa tahansa esitysmuotoa. Avaimet lisätään klikkaamalla tyhjää solmua. Jokaisen lisäyksen jälkeen kekoehto tulee palauttaa voimaan. Kahden avaimen paikkaa keossa voidaan vaihtaa klikkaamalla niitä peräkkäin.",
-      "#about": "Lisätietoa",
-      "av_insert_values": "Lisättävät avaimet",
-      "av_c1": "Lisätään "
     }
   },
   "params": {
     "JXOP-feedback": "continuous",
     "JXOP-fixmode": "undo"
-  },
-  "code": {
-    "pseudo": {
-      "url": "../../SourceCode/Pseudo/Binary/HeapInsert.txt",
-      "tags": {}
-    }
   }
 }
