@@ -7,7 +7,7 @@
   background-color: #FFC0CB;
 }
 .jsavcontainer {
-  background-color: #eed;
+  background-color: transparent;
   margin: 0 auto;
   border: 0;
   width: 850px;
@@ -193,5 +193,5 @@ svg {
 }
 
 tt {
-  background-color: #eed;
+  background-color: transparent;
 }

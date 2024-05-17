@@ -1,12 +1,31 @@
 
 @media print {
     :root {
-        --text-color: black;
-        --html-bgcolor: white;
-        --body-bgcolor: transparent;
-        --box-bgcolor: transparent;
-        --code-bgcolor: transparent;
-        --border-color: grey;
+        --font-size: 10pt;
+
+        --body-bgcolor: Transparent;
+        --border-color: Silver;
+        --box-bgcolor: Transparent;
+        --code-bgcolor: Transparent;
+        --html-bgcolor: White;
+        --link-color: Black;
+        --quote-color: DimGrey;
+        --term-color: Black;
+        --text-color: Black;
+
+        --code-alert-color: Black;
+        --code-builtin-color: Black;
+        --code-comment-color: DimGrey;
+        --code-number-color: Black;
+        --code-oper-color: Black;
+        --code-string-color: Black;
+        --code-variable-color: Black;
+        --linenumber-color: DimGrey;
+        }
+
+    body {
+        max-width: none;
+        border: none;
     }
 
     #sitenav, iframe, script {
@@ -24,5 +43,6 @@
 
     a {
         color: inherit;
+        text-decoration: none;
     }
 }

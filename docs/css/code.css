@@ -1,0 +1,155 @@
+
+/* CSS for source code and syntax highlighting.
+These are modified from Pandoc's default CSS, 
+which doesn't support light/dark mode 
+*/
+
+code {
+    font-family: var(--code-font);
+    /* font-size: 90%; */
+    margin: 0;
+    hyphens: manual;
+    white-space: pre-wrap;
+}
+
+div.sourceCode {
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    margin: var(--block-margin) 0;
+    background-color: var(--code-bgcolor);
+}
+
+pre.sourceCode {
+    margin: 0;
+}
+
+.sourceCode {
+    overflow: visible;
+}
+
+pre {
+    padding: var(--block-margin);
+    overflow: auto;
+}
+
+pre code {
+    padding: 0;
+    overflow: visible;
+    overflow-wrap: normal;
+}
+
+code.sourceCode > span {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+pre > code.sourceCode > span {
+    line-height: 1.25;
+}
+
+pre > code.sourceCode > span:empty {
+    height: 1.2em;
+}
+
+
+@media screen {
+    div.sourceCode {
+        overflow: auto;
+    }
+}
+
+@media print {
+    pre > code.sourceCode {
+        white-space: pre-wrap;
+    }
+
+    pre > code.sourceCode > span {
+        display: inline-block;
+        text-indent: -5em;
+        padding-left: 5em;
+    }
+}
+
+pre.numberSource code {
+    counter-reset: source-line 0;
+}
+pre.numberSource code > span {
+    position: relative;
+    left: -4em;
+    counter-increment: source-line;
+}
+pre.numberSource code > span > a:first-child::before {
+    content: counter(source-line);
+    position: relative;
+    left: -1em;
+    text-align: right;
+    vertical-align: baseline;
+    border: none;
+    display: inline-block;
+    user-select: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; 
+    padding: 0 4px;
+    width: 4em;
+    color: var(--linenumber-color);
+}
+pre.numberSource {
+    margin-left: 3em;
+    border-left: 1px solid var(--linenumber-color);
+    padding-left: 4px;
+}
+
+
+:root {
+    --code-alert-color: Crimson;
+    --code-builtin-color: DarkBlue;
+    --code-comment-color: Sienna;
+    --code-number-color: Blue;
+    --code-oper-color: Brown;
+    --code-string-color: Green;
+    --code-variable-color: DarkViolet;
+    --linenumber-color: Grey;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --code-alert-color: Tomato;
+        --code-builtin-color: LightSkyBlue;
+        --code-comment-color: Tan;
+        --code-number-color: PaleTurquoise;
+        --code-oper-color: LightCoral;
+        --code-string-color: LightGreen;
+        --code-variable-color: Violet;
+        --linenumber-color: LightGrey;
+    }
+}
+
+code span.al { color: var(--code-alert-color); } /* Alert */
+code span.an { color: var(--code-comment-color); font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: var(--code-builtin-color); } /* Attribute */
+code span.bn { color: var(--code-number-color); } /* BaseN */
+code span.bu { color: var(--code-builtin-color); } /* BuiltIn */
+code span.cf { color: var(--code-builtin-color); font-weight: bold; } /* ControlFlow */
+code span.ch { color: var(--code-string-color); } /* Char */
+code span.cn { color: var(--code-comment-color); } /* Constant */
+code span.co { color: var(--code-comment-color); font-style: italic; font-family: var(--text-font); } /* Comment */
+code span.cv { color: var(--code-comment-color); font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: var(--code-comment-color); font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: var(--code-builtin-color); } /* DataType */
+code span.dv { color: var(--code-number-color); } /* DecVal */
+code span.er { color: var(--code-alert-color); font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: var(--code-number-color); } /* Float */
+code span.fu { color: var(--code-builtin-color); font-weight: bold; } /* Function */
+code span.im { color: var(--code-builtin-color); } /* Import */
+code span.in { color: var(--code-comment-color); font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: var(--code-builtin-color); font-weight: bold; } /* Keyword */
+code span.op { color: var(--code-oper-color); font-weight: bold; } /* Operator */
+code span.ot { color: var(--code-comment-color); } /* Other */
+code span.pp { color: var(--code-comment-color); font-style: italic; } /* Preprocessor */
+code span.re { } /* RegionMarker */
+code span.sc { color: var(--code-oper-color); font-weight: bold; } /* SpecialChar */
+code span.ss { color: var(--code-string-color); } /* SpecialString */
+code span.st { color: var(--code-string-color); } /* String */
+code span.va { color: var(--code-variable-color); } /* Special variable */
+code span.vs { color: var(--code-string-color); } /* VerbatimString */
+code span.wa { color: var(--code-comment-color); font-weight: bold; font-style: italic; } /* Warning */
+

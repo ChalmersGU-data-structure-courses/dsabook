@@ -31,14 +31,16 @@ template: extra/book-template.html
 css: 
   - ../css/main.css
   - ../css/book.css
+  - ../css/code.css
   - ../css/quiz.css
   - ../css/mobile.css
+  - ../css/print.css
 # Link to a CSS style sheet. This option can be used repeatedly to include multiple files.
 
 table-of-contents: true
 toc-depth: 2
 
-highlight-style: tango
+# highlight-style: tango
 # pandoc --list-highlight-styles
 # pygments, tango, espresso, zenburn, kate, monochrome, breezedark, haddock
 

@@ -107,6 +107,9 @@ ol, ul {
 li {
     margin: 0.5rem 0;
 }
+li.jsavcodeline {
+    margin: 0;
+}
 
 li > ol, li > ul {
     margin-top: 0;
@@ -130,47 +133,6 @@ blockquote {
     padding-left: var(--block-margin);
     border-left: 2px solid var(--border-color);
     color: var(--quote-color);
-}
-
-/* Source code */
-
-code {
-    font-family: var(--code-font);
-    /* font-size: 90%; */
-    margin: 0;
-    hyphens: manual;
-    white-space: pre-wrap;
-}
-
-div.sourceCode {
-    border-radius: var(--border-radius);
-    border: 1px solid var(--border-color);
-    margin: var(--block-margin) 0;
-    background-color: var(--code-bgcolor);
-}
-
-.sourceCode {
-    overflow: visible;
-}
-
-pre {
-    padding: var(--block-margin);
-    overflow: auto;
-}
-
-pre code {
-    padding: 0;
-    overflow: visible;
-    overflow-wrap: normal;
-}
-
-code.pseudo .co {
-    font-family: var(--text-font);
-    font-style: italic;
-}
-
-code.pseudo .bu {
-    font-weight: normal;
 }
 
 /* Tables */
@@ -205,29 +167,11 @@ td {
 
 /* Images, figures */
 
-img {
-    max-width: 100%;
-}
-
 figure {
     text-align: center;
     font-style: italic;
 }
 
-div.columns {
-    display: flex;
-    gap: min(4vw, 1.5rem);
-}
-
-div.column {
-    flex: auto;
-    overflow-x: auto;
-}
-
-div.hanging-indent {
-    margin-left: 1.5rem;
-    text-indent: -1.5rem;
-}
 
 /* Highlighted blocks */
 
@@ -241,9 +185,15 @@ div.hanging-indent {
 .topic, div.embedContainer, div.jsavcontainer {
     background-color: var(--box-bgcolor);
 }
+
 .topic .jsavcontainer {
     background-color: transparent;
     border: none;
+}
+@media (prefers-color-scheme: dark) {
+    div.jsavcontainer {
+        background-color: antiqueWhite;
+    }
 }
 
 /* Links */

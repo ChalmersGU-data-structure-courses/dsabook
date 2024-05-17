@@ -1,35 +1,34 @@
 @charset "utf-8";
 
 :root {
-    --text-color: black;
-    --quote-color: darkSlateGrey;
-    --link-color: darkRed;
-    --term-color: darkGreen;
-    --html-bgcolor: antiqueWhite;
-    --body-bgcolor: #fffefa;
-    --box-bgcolor: floralWhite;
-    --code-bgcolor: floralWhite;
-    --border-color: fireBrick;
-
     --font-size: 12pt;
-    --text-font: "PT Serif", Georgia, serif;
-    --code-font: "PT Mono", Courier, monospace;
-
+    --text-font: Georgia, serif;
+    --code-font: Courier, "Courier New", monospace;
     --border-radius: 1rem;
     --block-margin: 1rem;
+
+    --body-bgcolor: #FFFEFA;
+    --border-color: FireBrick;
+    --box-bgcolor: FloralWhite;
+    --code-bgcolor: FloralWhite;
+    --html-bgcolor: AntiqueWhite;
+    --link-color: DarkRed;
+    --quote-color: DarkSlateGrey;
+    --term-color: DarkGreen;
+    --text-color: Black;
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --text-color: white;
-        --quote-color: antiqueWhite;
-        --link-color: pink;
-        --term-color: lightGreen;
-        --html-bgcolor: black;
-        --body-bgcolor: #201000;
-        --box-bgcolor: #421;
-        --code-bgcolor: #421;
-        --border-color: sandyBrown;
+        --body-bgcolor: Black;
+        --border-color: SandyBrown;
+        --box-bgcolor: #201810;
+        --code-bgcolor: #201810;
+        --html-bgcolor: Black;
+        --link-color: SandyBrown;
+        --quote-color: AntiqueWhite;
+        --term-color: PaleGreen;
+        --text-color: White;
     }    
 }
 
@@ -58,8 +57,12 @@ h1, h2, h3, h4, button, input, label {
 p, h1, h2, h3, h4, h5, h6 {
 	overflow-wrap: break-word;
 }
-img, picture, video, canvas, svg {
+picture, video, canvas, svg {
 	display: block;
+	max-width: 100%;
+}
+img {
+	display: inline-block;
 	max-width: 100%;
 }
 

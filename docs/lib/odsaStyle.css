@@ -24,9 +24,9 @@
 }
 
 .invisnode { /* Make a tree node invisible in a slideshow */
-  background-color: #eed;
-  color: #eed;
-  border-color: #eed;
+  background-color: transparent;
+  color: transparent;
+  border-color: transparent;
   box-shadow: 2px 2px 2px rgba(120, 120, 120, 0.0);
 }
 
@@ -38,8 +38,8 @@
 
 /* Make a slideshow tree node invisible (except for label) */
 .clearnode {
-  background-color: #eed;
-  border-color: #eed;
+  background-color: transparent;
+  border-color: transparent;
   box-shadow: 2px 2px 2px rgba(120, 120, 120, 0.0);
 }
 
