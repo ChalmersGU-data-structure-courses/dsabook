@@ -31,6 +31,7 @@ template: extra/book-template.html
 css: 
   - ../css/main.css
   - ../css/book.css
+  - ../css/quiz.css
   - ../css/mobile.css
 # Link to a CSS style sheet. This option can be used repeatedly to include multiple files.
 
@@ -83,6 +84,7 @@ reference-location: document
 
 include-in-header: 
   - extra/opendsa-header.html
+  - extra/quiz-header.html
 # Include contents of FILE, verbatim, at the end of the header.
 # This can be used, for example, to include special CSS or JavaScript in HTML documents.
 

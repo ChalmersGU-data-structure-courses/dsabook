@@ -1,0 +1,38 @@
+
+.quiz {
+    background-color: var(--box-bgcolor);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    margin: var(--block-margin) 0;
+    padding: 0 var(--block-margin);
+}
+
+.quiz .correct {
+    background-color: #8f8;
+}
+
+.quiz .wrong {
+    background-color: #f66;
+}
+
+@media (prefers-color-scheme: dark) {
+    .quiz .correct {
+        background-color: green;
+    }
+    .quiz .wrong {
+        background-color: red;
+    }
+}
+
+/* The extra [class] is a hack that increases specificity enough to override a similar rule in reveal.js */
+ul.task-list[class] {
+    list-style: none;
+}
+
+ul.task-list li input[type="checkbox"] {
+    font-size: inherit;
+    width: 1rem;
+    margin: 0.2rem 0.4rem 0.4rem -1.4rem;
+    vertical-align: middle;
+}
+
