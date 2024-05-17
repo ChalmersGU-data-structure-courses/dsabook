@@ -1,0 +1,261 @@
+
+html {
+    font-size: var(--font-size);
+    font-family: var(--text-font);
+    color: var(--text-color);
+    background-color: var(--html-bgcolor);
+}
+
+body {
+    background-color: var(--body-bgcolor);
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: 3rem;
+    hyphens: auto;
+    overflow-wrap: break-word;
+    font-kerning: normal;
+    text-align: justify;
+    border: 1px solid var(--border-color);
+}
+
+/* Navigation menu */
+
+#sitenav div.sitenav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#sitenav span.navlink {
+    flex: 1;
+}
+
+#sitenav span.navlink-label {
+    display: inline-block;
+    min-width: 4rem;
+}
+
+/* Front page */
+
+#title-block-header {
+    margin-bottom: calc(4 * var(--block-margin));
+    text-align: center;
+}
+
+#title-block-header .author {
+    margin: 0;
+}
+
+#TOC li {
+    list-style: none;
+    margin: 0;
+}
+
+#TOC ul {
+    padding-left: calc(1.5 * var(--block-margin));
+}
+
+#TOC > ul {
+    padding-left: 0;
+}
+
+#TOC a:not(:hover) {
+    text-decoration: none;
+}
+
+/* Assorted elements */
+
+svg {
+    height: auto;
+    max-width: 100%;
+}
+
+hr {
+    background-color: var(--border-color);
+    border: none;
+    height: 2px;
+    margin: var(--block-margin) 0;
+}
+
+/* Blocks */
+
+h1, h2, h3, h4, h5, h6, p, ol, ul, dl, figcaption {
+    margin: var(--block-margin) 0;
+}
+
+/* Headings */
+
+h1 { font-size: 1.6rem; }
+h2 { font-size: 1.2rem; }
+h3 { font-size: 1.1rem; }
+
+h4, h5, h6 { 
+    font-size: 1rem; 
+    font-style: italic;
+}
+
+h6 {
+    font-weight: normal;
+}
+
+/* Lists and blockquotes */
+
+ol, ul {
+    padding-left: 2rem;
+}
+
+li {
+    margin: 0.5rem 0;
+}
+
+li > ol, li > ul {
+    margin-top: 0;
+}
+
+dt {
+    font-style: italic;
+}
+
+dd {
+    margin-left: 2rem;
+}
+
+dd > p:first-child {
+    margin-top: 0.2rem;
+}
+
+blockquote {
+    margin: var(--block-margin) 0;
+    margin-right: 2rem;
+    padding-left: var(--block-margin);
+    border-left: 2px solid var(--border-color);
+    color: var(--quote-color);
+}
+
+/* Source code */
+
+code {
+    font-family: var(--code-font);
+    /* font-size: 90%; */
+    margin: 0;
+    hyphens: manual;
+    white-space: pre-wrap;
+}
+
+div.sourceCode {
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    margin: var(--block-margin) 0;
+    background-color: var(--code-bgcolor);
+}
+
+.sourceCode {
+    overflow: visible;
+}
+
+pre {
+    padding: var(--block-margin);
+    overflow: auto;
+}
+
+pre code {
+    padding: 0;
+    overflow: visible;
+    overflow-wrap: normal;
+}
+
+code.pseudo .co {
+    font-family: var(--text-font);
+    font-style: italic;
+}
+
+code.pseudo .bu {
+    font-weight: normal;
+}
+
+/* Tables */
+
+table {
+    margin: var(--block-margin) 0;
+    border-collapse: collapse;
+    width: 100%;
+    overflow-x: auto;
+    display: block;
+    font-variant-numeric: lining-nums tabular-nums;
+}
+
+table caption {
+    margin-bottom: calc(0.75 * var(--block-margin));
+}
+
+tbody {
+    margin-top: calc(0.5 * var(--block-margin));
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+th {
+    border-top: 1px solid var(--border-color);
+    padding: calc(0.25 * var(--block-margin)) calc(0.5 * var(--block-margin));
+}
+
+td {
+    padding: calc(0.125 * var(--block-margin)) calc(0.5 * var(--block-margin));
+}
+
+/* Images, figures */
+
+img {
+    max-width: 100%;
+}
+
+figure {
+    text-align: center;
+    font-style: italic;
+}
+
+div.columns {
+    display: flex;
+    gap: min(4vw, 1.5rem);
+}
+
+div.column {
+    flex: auto;
+    overflow-x: auto;
+}
+
+div.hanging-indent {
+    margin-left: 1.5rem;
+    text-indent: -1.5rem;
+}
+
+/* Highlighted blocks */
+
+.topic, .figure, div.embedContainer, div.jsavcontainer {
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    margin: var(--block-margin) 0;
+    padding: 0 var(--block-margin);
+}
+
+.topic, div.embedContainer, div.jsavcontainer {
+    background-color: var(--box-bgcolor);
+}
+.topic .jsavcontainer {
+    background-color: transparent;
+    border: none;
+}
+
+/* Links */
+
+a, a:visited {
+    color: var(--link-color);
+}
+
+.smallcaps {
+    font-variant: small-caps;
+}
+
+.term, .term:visited {
+    color: var(--term-color);
+}

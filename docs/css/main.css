@@ -1,0 +1,67 @@
+@charset "utf-8";
+
+:root {
+    --text-color: black;
+    --quote-color: darkSlateGrey;
+    --link-color: darkRed;
+    --term-color: darkGreen;
+    --html-bgcolor: antiqueWhite;
+    --body-bgcolor: #fffefa;
+    --box-bgcolor: floralWhite;
+    --code-bgcolor: floralWhite;
+    --border-color: fireBrick;
+
+    --font-size: 12pt;
+    --text-font: "PT Serif", Georgia, serif;
+    --code-font: "PT Mono", Courier, monospace;
+
+    --border-radius: 1rem;
+    --block-margin: 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-color: white;
+        --quote-color: antiqueWhite;
+        --link-color: pink;
+        --term-color: lightGreen;
+        --html-bgcolor: black;
+        --body-bgcolor: #201000;
+        --box-bgcolor: #421;
+        --code-bgcolor: #421;
+        --border-color: sandyBrown;
+    }    
+}
+
+/* A mixture of the following two CSS resets:
+   - Josh Comeau: https://www.joshwcomeau.com/css/custom-css-reset/
+   - Andy Bell: https://piccalil.li/blog/a-more-modern-css-reset/
+*/
+
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+* {
+	margin: 0;
+	padding: 0;
+}
+input, button, textarea, select {
+	font: inherit;
+}
+body {
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4, button, input, label {
+  	line-height: 1.1;
+}
+p, h1, h2, h3, h4, h5, h6 {
+	overflow-wrap: break-word;
+}
+img, picture, video, canvas, svg {
+	display: block;
+	max-width: 100%;
+}
+
+/* End CSS reset */
+

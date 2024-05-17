@@ -1,0 +1,28 @@
+
+@media print {
+    :root {
+        --text-color: black;
+        --html-bgcolor: white;
+        --body-bgcolor: transparent;
+        --box-bgcolor: transparent;
+        --code-bgcolor: transparent;
+        --border-color: grey;
+    }
+
+    #sitenav, iframe, script {
+        display: none;
+    }
+
+    p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h1, h2, h3, h4 {
+        page-break-after: avoid;
+    }
+
+    a {
+        color: inherit;
+    }
+}
