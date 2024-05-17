@@ -1,4 +1,100 @@
 
+/* Script for handling simple online quizzes.
+Just import this file in your html header like this:
+<script type="text/javascript" src="path/to/quizhandler.js"></script>
+
+Here's how you write quizzes. 
+- A quiz has to be inside a <div class="quiz">
+  and each question inside a <div class="question">
+- You can use most form <input> elements
+- Correct answers are written as values to the inputs, or marked as checked
+- Hints are speficied as <li> list items inside a <div class="hints">
+- This script removes all markings and inserts buttons for checking answers 
+  and moving to the next question
+
+
+Here's an example:
+
+<div class="quiz">
+<div class="question">
+What's the meaning of life? <input type="text" value="42" placeholder="Type your answer"/>
+<div class="hints">
+<ul>
+<li>It's a number</li>
+<li>Have you read The hitch-hiker's guide to the galaxy?</li>
+</li>
+</div>
+</div>
+
+<div class="question">
+<p>Here are some radio buttons: 
+<label><input type="radio" name="radio"/> A is wrong </label>
+<label><input type="radio" name="radio" checked/> B is correct </label>
+<label><input type="radio" name="radio"/> C is wrong </label>
+</p>
+
+<p>And some multiple-value checkboxes:
+<label><input type="checkbox" name="radio"/> X is correct </label>
+<label><input type="checkbox" name="radio" checked/> Y is wrong </label>
+<label><input type="checkbox" name="radio"/> Z is correct </label>
+</p>
+
+<p>And a drop-down menu: <select>
+<option value="" disabled>Select something</option>
+<option>Monkeys</option>
+<option>Horses</option>
+<option selected>Ants</option>
+</select>
+</div>
+
+<div class="question">
+</div>
+If you put input elements inside HTML lists (ul and ol), the list items are shuffled:
+<ul>
+<li><label><input type="checkbox" name="radio"/> X is correct</label></li>
+<li><label><input type="checkbox" name="radio" checked/> Y is wrong</label></li>
+<li><label><input type="checkbox" name="radio"/> Z is correct</label></li>
+</ul>
+</div>
+</div>
+
+
+Pandoc Markdown is well supported... here's an example:
+
+:::::::::: quiz ::::::::::
+::::: question
+A tool for measuring the efficiency of an algorithm or problem is:
+
+- [x] Algorithm analysis
+- [ ] The system clock
+- [ ] A profiler
+- [ ] Empirical analysis
+
+::: hints
+- A profiler works on a program, not an algorithm.
+- The system clock works on a program, not an algorithm.
+- Empirical analysis works on a program, not an algorithm.
+- Algorithm analysis estimates the cost of an algorithm or problem.
+:::
+:::::
+
+::::: question
+Which of these is NOT a definition for efficiency in a computer program?
+
+- [x] It runs in linear time
+- [ ] It solves the problem within the required resource contraints
+- [ ] It requires fewer resources than known alternatives
+
+::: hints
+- One definition for an efficient program is that it runs within the required resource constraints.
+- One definition for an efficient program is that it requires fewer resources than known alternatives.
+- Many efficient programs require more than linear time. Sometimes linear time is not efficient for a given problem.
+:::
+:::::
+::::::::::::::::::::::::::::::
+
+*/
+
 class QuizHandler {
     constructor() {
         for (let quiz of this.getQuizzes()) {
@@ -50,6 +146,8 @@ class QuizHandler {
             input.disabled = false;
             input.value = "";
             input.checked = false;
+            input.classList.remove('correct');
+            input.classList.remove('wrong');
             for (let label of input.labels) {
                 label.classList.remove('correct');
                 label.classList.remove('wrong');
@@ -93,6 +191,8 @@ class QuizHandler {
             for (let input of this.getInputs(quest)) {
                 input.disabled = true;
                 let correct = input.dataset.solution === this.getAnswer(input);
+                input.classList.toggle('correct', correct);
+                input.classList.toggle('wrong', !correct);
                 for (let label of input.labels) {
                     label.classList.toggle('correct', correct);
                     label.classList.toggle('wrong', !correct);
@@ -119,18 +219,14 @@ class QuizHandler {
         }
     }
 
-    shuffleArray(array) {
-        for (let i = array.length-1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i+1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-    }
-
     shuffleListItems(quest) {
-        // Idea from here: https://stackoverflow.com/a/11972692
+        // Fisher-Yates shuffle, modified from here: https://stackoverflow.com/a/11972692
         for (let list of quest.querySelectorAll('ul, ol')) {
-            for (let i = list.children.length; i >= 0; i--) {
-                list.appendChild(list.children[Math.random() * i | 0]);
+            if (!list.closest('.hints')) {
+                // Only shuffle the list items if they are not among the hints.
+                for (let i = list.children.length; i >= 0; i--) {
+                    list.appendChild(list.children[Math.random() * i | 0]);
+                }
             }
         }
     }
