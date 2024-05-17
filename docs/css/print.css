@@ -23,12 +23,24 @@
         --linenumber-color: DimGrey;
         }
 
-    body {
-        max-width: none;
-        border: none;
+    @page { 
+        size: auto;
+        margin: 25mm 25mm 25mm 25mm;  
     }
 
-    #sitenav, iframe, script {
+    body { 
+        margin: 0;
+        padding: 0;
+    } 
+
+    main {
+        max-width: none;
+        border: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    header, footer, iframe, script {
         display: none;
     }
 

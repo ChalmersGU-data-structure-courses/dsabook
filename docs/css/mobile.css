@@ -1,7 +1,8 @@
 
 @media (max-width: 600px) {
-    body {
+    header, footer, main {
         padding: 1rem;
-        border: none;
+        border-left: none;
+        border-right: none;
     }
 }

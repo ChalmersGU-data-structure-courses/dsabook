@@ -7,32 +7,51 @@ html {
 }
 
 body {
-    background-color: var(--body-bgcolor);
-    max-width: 60rem;
-    margin: 0 auto;
-    padding: 3rem;
     hyphens: auto;
     overflow-wrap: break-word;
     font-kerning: normal;
     text-align: justify;
+}
+
+header, footer, main {
+    max-width: 60rem;
+    margin: 0 auto;
+}
+
+main {
+    padding: 1rem 3rem;
+    background-color: var(--body-bgcolor);
     border: 1px solid var(--border-color);
 }
 
 /* Navigation menu */
 
-#sitenav div.sitenav {
+header nav h1 {
+    font-size: 1.2rem;
+    font-weight: normal;
+}
+
+header nav, footer nav {
+    margin: 1rem 3rem;
+}
+
+nav.sitenav {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 
-#sitenav span.navlink {
-    flex: 1;
+nav.sitenav a {
+    text-decoration: none;
 }
 
-#sitenav span.navlink-label {
-    display: inline-block;
-    min-width: 4rem;
+nav.sitenav .navbutton {
+    margin: 0 0.4rem;
+    padding: 0.2rem 0.4rem;
+    background-color: var(--body-bgcolor);
+    border: 1px solid var(--border-color);
+    border-radius: calc(var(--border-radius)/2);
 }
 
 /* Front page */
@@ -182,7 +201,7 @@ figure {
     padding: 0 var(--block-margin);
 }
 
-.topic, div.embedContainer, div.jsavcontainer {
+.figure, .topic, div.embedContainer, div.jsavcontainer {
     background-color: var(--box-bgcolor);
 }
 
