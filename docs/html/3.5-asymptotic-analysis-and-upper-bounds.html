@@ -8,26 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Asymptotic Analysis and Upper Bounds</title>
-  <style>
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-  </style>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -100,27 +86,30 @@
 <link href="../interactive/AlgAnal/UpperBoundCON.css" rel="stylesheet" type="text/css"/>
 <link href="../interactive/AlgAnal/SimpleCostsCON.css" rel="stylesheet" type="text/css"/>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="3-algorithm-analysis.html" accesskey="u" rel="up">Algorithm Analysis</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div class="navlink"></div>
+<h1 class="navlink navbutton"><a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div class="navlink"></div>
+</nav>
+<nav class="sitenav">
+<div class="navlink">
+<a href="3.4-faster-computer-or-faster-algorithm.html" class="navbutton">&lt;&lt;</a>
+<a href="3.4-faster-computer-or-faster-algorithm.html" accesskey="p" rel="previous">Faster Computer, or Faster Algorithm?</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="3.4-faster-computer-or-faster-algorithm.html" accesskey="p" rel="previous">Faster Computer, or Faster Algorithm?</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="3.6-lower-bounds-and-theta-notation.html" accesskey="n" rel="next">Lower Bounds and
+<div class="navlink">
+<a href="3.6-lower-bounds-and-theta-notation.html" accesskey="n" rel="next">Lower Bounds and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Θ</mi><annotation encoding="application/x-tex">\Theta</annotation></semantics></math>
 Notation</a>
-</span>
+<a href="3.6-lower-bounds-and-theta-notation.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="asymptotic-analysis-and-upper-bounds" class="level2"
 data-number="3.5">
 <h2 data-number="3.5"><span class="header-section-number">3.5</span>
@@ -522,6 +511,23 @@ Your browser does not support iframes.
 </p>
 </section>
 </section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="3.4-faster-computer-or-faster-algorithm.html" class="navbutton">&lt;&lt;</a>
+<a href="3.4-faster-computer-or-faster-algorithm.html" accesskey="p" rel="previous">Faster Computer, or Faster Algorithm?</a>
+</div>
+<div class="navlink">
+<a href="3.6-lower-bounds-and-theta-notation.html" accesskey="n" rel="next">Lower Bounds and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Θ</mi><annotation encoding="application/x-tex">\Theta</annotation></semantics></math>
+Notation</a>
+<a href="3.6-lower-bounds-and-theta-notation.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 <script type="text/javascript" src="../interactive/DataStructures/Plot.js"></script>
 <script type="text/javascript" src="../interactive/AlgAnal/GrowthRatesCON.js"></script>
 <script type="text/javascript" src="../interactive/AlgAnal/GrowthRatesZoomCON.js"></script>
