@@ -27,36 +27,37 @@ $if(math)$
   $math$
 $endif$
 </head>
+
 <body>
 $for(include-before)$
 $include-before$
 $endfor$
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-$if(up.url)$
-<span class="navlink-label">Up:</span> <a href="$up.url$" accesskey="u" rel="up">$up.title$</a>
-$endif$
-</span>
-<span class="navlink">
+
+<header>
 $if(top)$
-<span class="navlink-label">Top:</span> <a href="$top.url$" accesskey="t" rel="top">$top.title$</a>
+<nav class="sitenav">
+<div class="navlink"></div>
+<h1 class="navlink navbutton"><a href="$top.url$" accesskey="t" rel="top">$top.title$</a></h1>
+<div class="navlink"></div>
+</nav>
 $endif$
-</span>
-</div>
-<div class="sitenav">
-<span class="navlink">
+<nav class="sitenav">
+<div class="navlink">
 $if(previous.url)$
-<span class="navlink-label">Previous:</span> <a href="$previous.url$" accesskey="p" rel="previous">$previous.title$</a>
+<a href="$previous.url$" class="navbutton">&lt;&lt;</a>
+<a href="$previous.url$" accesskey="p" rel="previous">$previous.title$</a>
 $endif$
-</span>
-<span class="navlink">
+</div>
+<div class="navlink">
 $if(next.url)$
-<span class="navlink-label">Next:</span> <a href="$next.url$" accesskey="n" rel="next">$next.title$</a>
+<a href="$next.url$" accesskey="n" rel="next">$next.title$</a>
+<a href="$next.url$" class="navbutton">&gt;&gt;</a>
 $endif$
-</span>
 </div>
 </nav>
+</header>
+
+<main>
 $if(top)$
 $-- only print title block if this is NOT the top page
 $else$
@@ -90,6 +91,25 @@ $table-of-contents$
 </nav>
 $endif$
 $body$
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+$if(previous.url)$
+<a href="$previous.url$" class="navbutton">&lt;&lt;</a>
+<a href="$previous.url$" accesskey="p" rel="previous">$previous.title$</a>
+$endif$
+</div>
+<div class="navlink">
+$if(next.url)$
+<a href="$next.url$" accesskey="n" rel="next">$next.title$</a>
+<a href="$next.url$" class="navbutton">&gt;&gt;</a>
+$endif$
+</div>
+</nav>
+</footer>
+
 $for(include-after)$
 $include-after$
 $endfor$
