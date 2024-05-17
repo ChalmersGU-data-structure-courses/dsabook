@@ -149,7 +149,7 @@ form.signin p, form.signin span {
 }
 
 label {
-  display: block;
+  /* display: block; */
 }
 
 .data td {
