@@ -120,7 +120,3 @@ comparison problem.
 But as long as the elements of the array supports the **Comparable** 
 interface, we can still use the standard comparison operators when sorting.
 
-
-### Review questions
-
-<avembed id="CompareSumm" src="Design/CompareSumm.html" type="ka" name="Record Comparison Summary Exercise"/>
