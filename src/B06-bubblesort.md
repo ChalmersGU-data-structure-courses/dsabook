@@ -67,8 +67,3 @@ can expect this to occur for about half the comparisons in the average
 case, leading to $\Theta(n^2)$ for the expected number of swaps. The
 actual number of swaps performed by Bubble Sort will be identical to
 that performed by Insertion Sort.
-
-Here are some review questions to check your understanding of Bubble
-Sort.
-
-<avembed id="BubsortSumm" src="Sorting/BubsortSumm.html" type="ka" name="Bubble Sort Summary Exercise"/>
