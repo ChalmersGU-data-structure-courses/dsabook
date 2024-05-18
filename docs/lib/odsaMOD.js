@@ -1470,11 +1470,11 @@
       // MathJax processing to the JSAV message field
       $elem.on("jsav-message", function () {
         // invoke MathJax to do conversion again
-        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        typeof MathJax !== 'undefined' && MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
       });
       $(".avcontainer").on("jsav-updatecounter", function () {
         // invoke MathJax to do conversion again
-        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        typeof MathJax !== 'undefined' && MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
       });
     }
   }
@@ -1503,13 +1503,13 @@
     ltiIframeResize();
     // becaue MathJax might take long time to load and render the page, we inforce calling
     // ltiIframeResize to readjust canvas iframe
-    MathJax.Hub.Queue(ltiIframeResize);
+    typeof MathJax !== 'undefined' && MathJax.Hub.Queue(ltiIframeResize);
   });
 
   var ANIMATION_EVENTS = ["jsav-backward", "jsav-forward", "jsav-begin", "jsav-end"];
   $('body').on('jsav-log-event', function (_event, eventData) {
     if (ANIMATION_EVENTS.includes(eventData.type.toString())) {
-      MathJax.Hub.Queue(["Typeset", MathJax.Hub])
+      typeof MathJax !== 'undefined' && MathJax.Hub.Queue(["Typeset", MathJax.Hub])
     }
   })
 

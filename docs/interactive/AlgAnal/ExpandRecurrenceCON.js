@@ -33,10 +33,10 @@ $(document).ready(function() {
 
   av = new JSAV(av_name);
   labelSet = new Array();
-  MathJax.Hub.Config({tex2jax: {inlineMath: [["$", "$"], ["\\(", "\\)"]]}});
+  typeof MathJax !== 'undefined' && MathJax.Hub.Config({tex2jax: {inlineMath: [["$", "$"], ["\\(", "\\)"]]}});
   $(".avcontainer").on("jsav-message", function() {
     // invoke MathJax to do conversion again
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    typeof MathJax !== 'undefined' && MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
   });
 
   // Slide 1
