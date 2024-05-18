@@ -77,5 +77,3 @@ subarray being sorted. The initial call to `mergeSort` would be
 Here is a visualization for the merge step.
 
 <inlineav id="mergeImplS1CON" src="Sorting/mergeImplS1CON.js" name="Mergesort Implementation Slideshow 1"/>
-
-<avembed id="MergesortSumm" src="Sorting/MergesortSumm.html" type="ka" name="Mergesort Summary Exercise"/>
