@@ -88,16 +88,16 @@
 
 <header>
 <nav class="sitenav">
-<div class="navlink"></div>
-<h1 class="navlink navbutton"><a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
-<div class="navlink"></div>
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
 </nav>
 <nav class="sitenav">
-<div class="navlink">
+<div>
 <a href="2-arrays-searching-and-sorting.html" class="navbutton">&lt;&lt;</a>
 <a href="2-arrays-searching-and-sorting.html" accesskey="p" rel="previous">Arrays: searching and sorting</a>
 </div>
-<div class="navlink">
+<div>
 <a href="2.2-sorting.html" accesskey="n" rel="next">Sorting</a>
 <a href="2.2-sorting.html" class="navbutton">&gt;&gt;</a>
 </div>
@@ -131,9 +131,9 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a hr
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">// If the element is not found, return -1.</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> sequentialSearch(A, e):</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="op">=</span> <span class="dv">0</span> <span class="kw">to</span> A.<span class="bu">size</span>()<span class="op">-</span><span class="dv">1</span>:   <span class="co">// For each element in A,</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> A[i] <span class="op">==</span> e:             <span class="co">// if we found it</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> i              <span class="co">// return this position.</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span>                     <span class="co">// Otherwise, return -1.</span></span></code></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> A[i] <span class="op">==</span> e:          <span class="co">// if we found it</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> i           <span class="co">// return this position.</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span>                  <span class="co">// Otherwise, return -1.</span></span></code></pre></div>
 <p>It is natural to ask how long a program or algorithm will take to
 run. But we do not really care exactly how long a particular program
 will run on a particular computer. We just want some sort of estimate

@@ -17,9 +17,9 @@ Here is a simple implementation for sequential search.
     // If the element is not found, return -1.
     function sequentialSearch(A, e):
         for i = 0 to A.size()-1:   // For each element in A,
-            if A[i] == e:             // if we found it
-                return i              // return this position.
-        return -1                     // Otherwise, return -1.
+            if A[i] == e:          // if we found it
+                return i           // return this position.
+        return -1                  // Otherwise, return -1.
 
 It is natural to ask how long a program or algorithm will take to run.
 But we do not really care exactly how long a particular program will run
