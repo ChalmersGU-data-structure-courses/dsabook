@@ -54,5 +54,3 @@ algorithms end up sorting lots of small lists as well.
 Finally, some situations require that a sorting algorithm use as little
 memory as possible. We will call attention to sorting algorithms that
 require significant extra memory beyond the input array.
-
-<avembed id="SortIntroSumm" src="Sorting/SortIntroSumm.html" type="ka" name="Sorting Intro Summary"/>
