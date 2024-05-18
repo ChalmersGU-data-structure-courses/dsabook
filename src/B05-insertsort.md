@@ -105,11 +105,6 @@ we might need to do many, many sorts on very small arrays. You should
 spend some time right now trying to think of a situation where you will
 need to sort many small arrays. Actually, it happens a lot.
 
-<avembed id="InssortSumm" src="Sorting/InssortSumm.html" type="ka" name="Insertion Sort Summary Exercise"/>
-
-See for a discussion on how the relative costs of search and insert can
-affect what is the best sort algorithm to use.
-
 See [Computational Fairy Tales: Why Tailors Use Insertion Sort][FAIRYTALES] for a discussion on how the relative costs of
 search and insert can affect what is the best sort algorithm to use.
 
