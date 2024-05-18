@@ -1,9 +1,9 @@
 
 ### Review questions: Insertion sort
 
-:::::::::: quiz ::::::::::
+:::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 
-::::: question
+:::::::::: question ::::::::::
 Answer TRUE or FALSE.
 
 Insertion Sort (as the code is written in this
@@ -16,9 +16,11 @@ algorithm maintains the relative order of records with equal keys.
 ::: hints
 - Think of the behavior of every pass through the inner for loop of the insertion sort if keys are equal.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 When implementing Insertion Sort, a binary search could be used to locate the position within
 the first $i-1$ records of the array into which record $i$ should be inserted. Using binary search will:
 
@@ -30,9 +32,11 @@ the first $i-1$ records of the array into which record $i$ should be inserted. U
 ::: hints
 - The position at which to insert could be found in $\Theta(\log(i))$ steps, but shifting the records to make room for the this record will require $\Theta(i)$ time.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 When implementing Insertion Sort, a binary
 search could be used to locate the position within the first $i-1$
 records of the array into which record $i$ should be
@@ -47,9 +51,11 @@ inserted. In this implementation, the worst case time will be:
 - The position to insert could be found in $\Theta (\log i)$, 
 but shifting the records to makeroom for the insert will still require $\Theta(i)$ time
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 We know that the worst case for Insertion Sort is about $n^2/2$, while the average case is
 about $n^2/4$. This means that:
 
@@ -61,9 +67,11 @@ about $n^2/4$. This means that:
 ::: hints
 - Growth rates ignore constants.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 In which cases are the growth rates the same for Insertion Sort?
 
 - [x] Worst and Average only
@@ -75,9 +83,11 @@ In which cases are the growth rates the same for Insertion Sort?
 - Insertion Sort is really cheap in the best case.
 - Its average and worst case times differ by a constant factor.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 The order of the input records has what impact on the number of comparisons 
 required by Insertion Sort (as presented in this module)?
 
@@ -89,9 +99,11 @@ required by Insertion Sort (as presented in this module)?
 - Does Insertion Sort change when it make a comparison according to the order of the array input values?
 - Yes, Insertion Sort might stop early or might look at many records.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 What is the {average|worst}-case time for Insertion Sort to sort an array of n records?
 
 - [x] $\Theta(n^2)$
@@ -108,9 +120,11 @@ of sorted order.
 first time through the for loop, two the second time, and
 so on.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 What is the best-case time for Insertionsort to sort an array of n records?
 
 - [x] $\Theta(n)$
@@ -122,9 +136,11 @@ What is the best-case time for Insertionsort to sort an array of n records?
 - The best-case cost occurs when the records are already in sorted order from lowest to highest.
 - In this case, every test on the inner for loop will fail immediately, and no records will be moved.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 What is the running time of Insertion Sort when the input is an array where all record values are equal?
 
 - [x] $\Theta(n)$
@@ -138,9 +154,11 @@ What is the running time of Insertion Sort when the input is an array where all 
 value at position $i$ is never less than the
 value at position $i-1$.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 If $I$ is the number of
 inversions in an input array of $n$ records,
 then Insertion Sort will run in what time?
@@ -157,9 +175,11 @@ then Insertion Sort will run in what time?
 - If the record for this pass has no remaining inversions, then it requires no work.
 - But if it does have inversions, it will need a swap for each such inversion.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 What is the running time for Insertion Sort when the input array has values that are in reverse sort order?
 
 - [x] $\Theta(n^2)$
@@ -171,9 +191,11 @@ What is the running time for Insertion Sort when the input array has values that
 - On each iteration, the $i$th record will have to move to the start of the array.
 - This is the worst case.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 What is the running time of Insertion Sort when the input is an array that has already been sorted?
 
 - [x] $\Theta(n)$
@@ -186,9 +208,11 @@ What is the running time of Insertion Sort when the input is an array that has a
 value at position $i$ is never less than the
 value at position $i-1$.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 When is Insertion Sort a good choice for sorting an array?
 
 - [x] The array has only a few records out of sorted order
@@ -207,9 +231,11 @@ While the number of times the inner for loop executes depends
 on how many keys in positions 0 to $i-1$ have a
 value less than that of the key in position i.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 When is Insertion Sort a good choice for sorting an array?
 
 - [x] The array contains only a few records
@@ -225,9 +251,11 @@ When is Insertion Sort a good choice for sorting an array?
 little bit per comparison when compared to more complicated
 sorting algorithms.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 In the worst case, the total number of comparisons for Insertion Sort is closest to:
 
 - [x] $n^2/2$
@@ -241,7 +269,7 @@ In the worst case, the total number of comparisons for Insertion Sort is closest
 - The inner for loop is executed $i$ times.
 - The total cost is the sum of $i$'s for $i$ goes from 1 to $n$.
 :::
-:::::
-
 ::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 

@@ -1,9 +1,9 @@
 
 ### Review questions: Comparison
 
-:::::::::: quiz ::::::::::
+:::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 
-::::: question
+:::::::::: question ::::::::::
 Answer TRUE or FALSE.
 
 One good general-purpose solution to the problem of getting a key from a record 
@@ -16,9 +16,11 @@ is to define a special method such as `.key()`.
 - If we use a `.key()` function, then there is only one way to compute the key for a record.
 - That means the records cannot be sorted on differing fields.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 Answer TRUE or FALSE.
 
 One good general-purpose solution to the problem of getting a key from a record 
@@ -31,9 +33,11 @@ is to store Key/Value pairs in the search structure.
 - When we store key/value pairs, we are explicitly storing the key used by that search structure.
 - This permits a collection of records to be sorted or searched in many different ways.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 Answer TRUE or FALSE.
 
 In order to be able to sort, the key values must define a total order.
@@ -46,9 +50,11 @@ In order to be able to sort, the key values must define a total order.
 - We need to be able to compare any two records and tell which one is less than the other.
 - This is the essence of a total order.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 Answer TRUE or FALSE.
 
 In order to do an exact-match search, the key values must define a total order.
@@ -61,9 +67,11 @@ In order to do an exact-match search, the key values must define a total order.
 - We do not need to decide which one is greater than the other.
 - So, we do not need a total order.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 Answer TRUE or FALSE.
 
 The problem with using a `.key()` method to get the key from a record 
@@ -76,9 +84,11 @@ is that we can't use this same method to get different fields for different sear
 - If we use a `.key()` function, then there is only one way to compute the key for a record.
 - That means the records cannot be sorted on differing fields.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 Defining a record's key field is a property of:
 
 - [ ] The record
@@ -91,7 +101,7 @@ Defining a record's key field is a property of:
 - If the key were a property of the record, then we could only search on a single value.
 - But we really want to be able to sort or search on different fields.
 :::
-:::::
-
 ::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 

@@ -3,9 +3,9 @@
 
 ![A concept map for the term "data type"](images/DatatypeCM.png)
 
-:::::::::: quiz ::::::::::
+:::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 
-::::: question
+:::::::::: question ::::::::::
 "Data type" and "data structure" are synonyms.
 
 - [x] False
@@ -14,9 +14,11 @@
 ::: hints
 - Look at these terms on the concept map.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 It is correct to say that interfaces are abstract data types.
 
 - [ ] True
@@ -25,9 +27,11 @@ It is correct to say that interfaces are abstract data types.
 ::: hints
 - Look at these terms on the concept map.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 The term "composite type" is a synonym of...
 
 - [x] Aggregate type
@@ -38,9 +42,11 @@ The term "composite type" is a synonym of...
 ::: hints
 - Look at these terms on the concept map.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 Which of the following is NOT an example of a data type?
 
 - [ ] Array
@@ -52,9 +58,11 @@ Which of the following is NOT an example of a data type?
 ::: hints
 - Look at these terms on the concept map.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 An abstract data type implements a(n)...
 
 - [x] Data structure
@@ -65,9 +73,11 @@ An abstract data type implements a(n)...
 ::: hints
 - Look at these terms on the concept map.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 An integer variable is an example of a(n) ________
 
 - [x] Simple data type
@@ -78,9 +88,11 @@ An integer variable is an example of a(n) ________
 ::: hints
 - Look at these terms on the concept map.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 An array-based list is an implementation of a(n)...
 
 - [x] List
@@ -91,9 +103,11 @@ An array-based list is an implementation of a(n)...
 ::: hints
 - Look at these terms on the concept map.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 An abstract data type logically defines a(n)...
 
 - [x] Interface
@@ -104,16 +118,18 @@ An abstract data type logically defines a(n)...
 ::: hints
 - Look at these terms on the concept map.
 :::
-:::::
-
 ::::::::::::::::::::::::::::::
+
+
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 ### ADTs: Summary Questions
 
-:::::::::: quiz ::::::::::
+:::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 
-::::: question
+:::::::::: question ::::::::::
 An *ADT* is: 
 
 - [x] The specification of a data type within some language, independent of an implementation
@@ -127,9 +143,11 @@ An *ADT* is:
 - It can't be a data structure, since an ADT is more like the interface for a data structure.
 - An implementation for a data structure in a program is close, but not really it. An ADT is more abstract than an actual program.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 An ADT is a form of:
 
 - [x] Abstraction
@@ -141,9 +159,11 @@ An ADT is a form of:
 ::: hints
 - What does the "A" stand for in ADT?
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 Which is an example of a composite type?
 
 - [x] A bank account record
@@ -155,9 +175,11 @@ Which is an example of a composite type?
 - A composite type is made up of two or more simple types.
 - Character, Integer, and floating point numbers are all simple types.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 A *composite type* is:
 
 - [x] A type comprised of other types
@@ -171,9 +193,11 @@ A *composite type* is:
 - An ADT is the realization of a data type, including the type and the operations allowed on the type.
 - An object is an instance of a class.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 A *data item* is:
 
 - [x] A member of a type
@@ -188,9 +212,11 @@ A *data item* is:
 An object is an instance of a class. A data item is a member of the class.
 - A data item is a piece of information whose value is drawn from a type.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 A *data structure* is:
 
 - [x] The implementation for an ADT
@@ -203,9 +229,11 @@ A *data structure* is:
 - A data structure is not an ADT.
 - A data structure is not a type (which is also a collection of values).
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 An ADT is most like which of the following?
 
 - [x] An interface
@@ -219,9 +247,11 @@ An ADT is most like which of the following?
 - A data structure, program, class, or method are all concrete implementation.
 - An object is something created at runtime.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 In computer science a *metaphor* is:
 
 - [x] A label applied to a group of concepts
@@ -234,9 +264,11 @@ In computer science a *metaphor* is:
 - The model of a type is another term for an ADT.
 - In computer science a metaphor is more than a comparison.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 A *simple type* is:
 
 - [x] A type that cannot be broken down into smaller types
@@ -249,9 +281,11 @@ A *simple type* is:
 - The model of a type is another way to define an ADT.
 - Any type is a collection of values and therefore, a subset of another type.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 A *type* is:
 
 - [x] A collection of values
@@ -264,6 +298,6 @@ A *type* is:
 - A type is a general concept, so it is not an integer, or an implementation, or a variable.
 - A type has values. An ADT is a collection of actions on an object (a type).
 :::
-:::::
-
 ::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

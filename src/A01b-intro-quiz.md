@@ -1,9 +1,9 @@
 
 ### Introduction Summary Questions
 
-:::::::::: quiz ::::::::::
+:::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 
-::::: question
+:::::::::: question ::::::::::
 A tool for measuring the efficiency of an algorithm or problem is:
 
 - [x] Algorithm analysis
@@ -17,9 +17,11 @@ A tool for measuring the efficiency of an algorithm or problem is:
 - Empirical analysis works on a program, not an algorithm.
 - Algorithm analysis estimates the cost of an algorithm or problem.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 Which of these is NOT a definition for efficiency in a computer program?
 
 - [x] It runs in linear time
@@ -31,9 +33,11 @@ Which of these is NOT a definition for efficiency in a computer program?
 - One definition for an efficient program is that it requires fewer resources than known alternatives.
 - Many efficient programs require more than linear time. Sometimes linear time is not efficient for a given problem.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 An exact-match query is:
 
 - [x] A query where a record is returned if its unique identifier matches the search value.
@@ -47,9 +51,11 @@ An exact-match query is:
 - Whether a search is efficient or not has nothing to do with whether it is an exact-match query or not.
 - A query to find the record that matches a unique identifier is called an exact-match query.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 Which is NOT a topic that a this course book focuses on?
 
 - [x] How to design and maintain large programs.
@@ -63,9 +69,11 @@ Which is NOT a topic that a this course book focuses on?
 - A key skill for any DSA course is ability to measure the effectiveness of a data structure or algorithm.
 - Designing and maintaining large programs is a focus for Software Engineering.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 As computers have become more powerful:
 
 - [x] We have used that additional computing power to tackle more complex problems.
@@ -79,9 +87,11 @@ As computers have become more powerful:
 - Processor speed cannot grow as fast as the cost of a slower algorithm applied to a bigger problem.
 - As our computers have become more powerful, our history has been to apply them to more complex problems.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 A range query is:
 
 - [x] A query where a record is returned if its relevant key value falls between a pair of values.
@@ -95,9 +105,11 @@ A range query is:
 -  Whether a search is efficient or not has nothing to do with whether it is a range query or not.
 - Returning a record that falls within a range is called a range query.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 Which of these is more a concern for Software Engineering than for a data structures course?
 
 - [x] To design an algorithm that is easy to understand, code, and debug.
@@ -107,9 +119,11 @@ Which of these is more a concern for Software Engineering than for a data struct
 - Designing efficient programs is a focus for data structures and algorithms courses.
 - Designing and maintaining large programs is a focus for Software Engineering.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 Which of these is NOT one of the three standard steps to follow when selecting a data structure to solve a problem?
 
 - [x] Run simulations to quantify the expected running time of the program.
@@ -123,7 +137,7 @@ Which of these is NOT one of the three standard steps to follow when selecting a
 - Once you know the basic operations and their resource constraints, then you can select a data structure that matches.
 - Many problems do not require that you run simulations to determine the expected times for alternative solutions.
 :::
-:::::
-
 ::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 

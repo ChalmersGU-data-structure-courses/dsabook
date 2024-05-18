@@ -1,9 +1,9 @@
 
 ### Review questions: Exchange sort
 
-:::::::::: quiz ::::::::::
+:::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 
-::::: question
+:::::::::: question ::::::::::
 Answer TRUE or FALSE.
 
 Consider an array $A$ of $n$ records each with a unique key value,
@@ -19,9 +19,11 @@ in exactly one of $A$ or $A_R$.
 - Being out of order is called an inversion.
 - If your pair is in order in some array, then it must be out of order in the reverse.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 Answer TRUE or FALSE.
 
 Consider an array $A$ of $n$ records each with a unique key value,
@@ -40,9 +42,11 @@ inverted.
 - Any given pair must be inverted in exactly one of these arrays.
 - So every pair must be inverted in either $A$ or $A_R$.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 The average number of inversions in an array
 of $n$ records is $n(n-1)/4$. This is:
 
@@ -54,9 +58,11 @@ of $n$ records is $n(n-1)/4$. This is:
 - $n(n-1)/4 = n^2/4 - n/4$.
 - From the rules on asymptotic analysis, $\Theta(n^2/4 - n/4)$ is $\Theta(n^2)$
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 An exchange sort is:
 
 - [x] Any sort where only adjacent records are swapped
@@ -70,9 +76,11 @@ An exchange sort is:
 - Insertion Sort is not the only exchange sort.
 - An "exchange" means a swap of adjacent records.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 An inversion is:
 
 - [x] When a record with key value greater than
@@ -86,9 +94,11 @@ the current record's key appears before it in the array
 a swap is needed to undo an inversion), it is not a swap.
 - Inversion refers to an instance of a record being out of order.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 How many ways can $n$ distinct values be arranged?
 
 - [x] $n!$
@@ -103,9 +113,11 @@ How many ways can $n$ distinct values be arranged?
 - This means that there are $n * (n-1)$ ways to pick the first two records.
 - And so on.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 If I is the number of inversions in an input array of n records,
 then Insertion Sort will require how many swaps?
 
@@ -122,9 +134,11 @@ then Insertion Sort will require how many swaps?
 - An inversion requires a swap to undo it.
 - The number of comparisons done by an algorithm is generally different from the number of swaps.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 The total number of pairs of records among $n$ records is:
 
 - [x] $n(n-1)/2$
@@ -142,7 +156,7 @@ The total number of pairs of records among $n$ records is:
 - This leaves $n-1$ ways to pick the second record.
 - We consider pair (A, B) to be the same as pair (B, A).
 :::
-:::::
-
 ::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 

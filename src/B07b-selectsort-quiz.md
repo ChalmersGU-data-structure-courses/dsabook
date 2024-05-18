@@ -5,9 +5,9 @@ Here are some review questions to check how well you understand
 Selection Sort.
 
 
-:::::::::: quiz ::::::::::
+:::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 
-::::: question
+:::::::::: question ::::::::::
 Answer TRUE or FALSE.
 
 Selection sort is simple, but less efficient than the best sorting algorithms.
@@ -20,9 +20,11 @@ Selection sort is simple, but less efficient than the best sorting algorithms.
 - It is $\Theta(n^2)$.
 - Are there any better sorting algorithms?
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 Answer TRUE or FALSE.
 
 Selection Sort (as the code is written in this module) 
@@ -41,9 +43,11 @@ the greatest value in the array.
 - Where will it be moved to?
 - The last position in the array.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 Suppose that Selection Sort is given an input of 100 records, 
 and it has completed 37 iterations of the main loop.
 
@@ -56,9 +60,11 @@ position (never to be moved again by the sort)?
 - On each pass, Selection Sort puts a record into its final position.
 - So, if Selection Sort has done 37 passes, then at least 37 records are in their final positions.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 How many times does Selection Sort call the swap function on an array of $n$ records?
 
 - [x] $n-1$
@@ -80,9 +86,11 @@ required to put the record in place.
 since at that point the first record
 must already be in place.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 In which cases are the time complexities the same for Selection Sort?
 
 - [x] Worst, Average and Best
@@ -94,9 +102,11 @@ In which cases are the time complexities the same for Selection Sort?
 - Does Selection Sort's cost vary according to the order of the array input values?
 - No, it does not matter what order the input values have.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 The order of the input records has what
 impact on the number of comparisons required by Selection Sort
 (as presented in this module)?
@@ -109,9 +119,11 @@ impact on the number of comparisons required by Selection Sort
 - Does Selection Sort change when it make a comparison according to the order of the array input values?
 - No, it does not matter what order the input values have.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 What is the worst-case time for Selection Sort to sort an array of n records?
 
 - [x] $\Theta(n^2)$
@@ -125,9 +137,11 @@ What is the worst-case time for Selection Sort to sort an array of n records?
 - Recall that our implementation for Selection Sort will
 try to swap even if the current record is in its correct location.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 What is the running time of Selection Sort
 when the input is an array that has already been sorted?
 
@@ -140,9 +154,11 @@ when the input is an array that has already been sorted?
 - Each test in the inner for loop will be the same no
 matter what the order of the input array.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 What is the running time of Selection Sort
 when the input is an array that has all equal values?
 
@@ -155,9 +171,11 @@ when the input is an array that has all equal values?
 - Each test in the inner for loop will be the same no
 matter what the order of the input array.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 Which statement best characterizes
 Selection Sort (as the code is written in this module)?
 Recall that a stable sorting algorithm maintains the relative
@@ -179,9 +197,11 @@ it out of order with other equal-valued records.
 - But we could easily change the maximum-finding part of the
 loop to take the last of these equal-valued records.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 In the worst case, the total number of swaps done by Selection Sort is closest to:
 
 - [x] $n$
@@ -195,9 +215,11 @@ In the worst case, the total number of swaps done by Selection Sort is closest t
 - Recall that our implementation for Selection Sort will
 try to swap even if the current record is in its correct location.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 When is Selection Sort a good choice to use for sorting an array?
 
 - [x] When the cost of a swap is large, such as when the records are large
@@ -209,9 +231,11 @@ When is Selection Sort a good choice to use for sorting an array?
 - The big advantage of Selection Sort is that it keeps the number of swaps small.
 - So it will make best use of this advantage when the cost to swap is large.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 In the worst case, the total number of comparisons for Selection Sort is closest to:
 
 - [x] $n^2/2$
@@ -226,7 +250,7 @@ In the worst case, the total number of comparisons for Selection Sort is closest
 - The inner for loop is executed $n-i$ times.
 - The total cost is the sum of $i$'s for $i$ goes from 1 to $n$.
 :::
-:::::
-
 ::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 

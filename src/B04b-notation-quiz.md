@@ -1,9 +1,9 @@
 
 ### Review questions: Sorting Introduction
 
-:::::::::: quiz ::::::::::
+:::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 
-::::: question
+:::::::::: question ::::::::::
 Which of these is the best definition for a stable sorting algorithm?</p>
 
 - [x] An algorithm that does not change the relative ordering of records with identical keys
@@ -16,9 +16,11 @@ Which of these is the best definition for a stable sorting algorithm?</p>
 - It refers to maintaining the relative order of records with equal key values.
 - In some applications, we require that records with equal key value preserve the relative order of those records.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 Which of these will NOT affect the RELATIVE running times for two sorting algorithms?
 
 - [x] The CPU speed
@@ -29,9 +31,11 @@ Which of these will NOT affect the RELATIVE running times for two sorting algori
 ::: hints
 - If we speed up the CPU by a factor of two, both sorts will go twice as fast.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 Which of these is a traditional measure for the cost of a sorting algorithm?
 
 *Note*: Multiple answers are possible!
@@ -48,9 +52,11 @@ Which of these is a traditional measure for the cost of a sorting algorithm?
 - The memory size affects the cost, but it does not measure the cost.
 - Records being out of order can increase the cost, but not measure it.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 In which case might the number of comparisons *not* be 
 a good representation of the cost for a sorting algorithm?
 
@@ -64,9 +70,11 @@ a good representation of the cost for a sorting algorithm?
 - Number of records or amount of space won't affect the value of counting comparisons.
 - The longer the string, the longer it takes to compare.
 :::
-:::::
+::::::::::::::::::::::::::::::
 
-::::: question
+
+
+:::::::::: question ::::::::::
 Sometimes, the constant factors in an algorithm's runtime equation are more important
 thant its growth rate. When the problem is sorting, this can happen in which situation?
 
@@ -83,7 +91,7 @@ thant its growth rate. When the problem is sorting, this can happen in which sit
 But not relevant to this question.
 - When we sort only a few records, constants matter a lot.
 :::
-:::::
-
 ::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
