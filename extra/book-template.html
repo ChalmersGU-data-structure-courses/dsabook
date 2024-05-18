@@ -36,19 +36,19 @@ $endfor$
 <header>
 $if(top)$
 <nav class="sitenav">
-<div class="navlink"></div>
-<h1 class="navlink navbutton"><a href="$top.url$" accesskey="t" rel="top">$top.title$</a></h1>
-<div class="navlink"></div>
+<div></div>
+<h1><a href="$top.url$" class="navbutton" accesskey="t" rel="top">$top.title$</a></h1>
+<div></div>
 </nav>
 $endif$
 <nav class="sitenav">
-<div class="navlink">
+<div>
 $if(previous.url)$
 <a href="$previous.url$" class="navbutton">&lt;&lt;</a>
 <a href="$previous.url$" accesskey="p" rel="previous">$previous.title$</a>
 $endif$
 </div>
-<div class="navlink">
+<div>
 $if(next.url)$
 <a href="$next.url$" accesskey="n" rel="next">$next.title$</a>
 <a href="$next.url$" class="navbutton">&gt;&gt;</a>

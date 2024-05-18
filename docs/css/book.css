@@ -40,6 +40,7 @@ nav.sitenav {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+    text-wrap: nowrap;
 }
 
 nav.sitenav a {
@@ -52,6 +53,18 @@ nav.sitenav .navbutton {
     background-color: var(--body-bgcolor);
     border: 1px solid var(--border-color);
     border-radius: calc(var(--border-radius)/2);
+}
+
+nav.sitenav > * {
+    text-align: center;
+}
+
+nav.sitenav > *:first-child {
+    margin-right: auto;
+}
+
+nav.sitenav > *:last-child {
+    margin-left: auto;
 }
 
 /* Front page */

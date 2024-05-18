@@ -1,8 +1,23 @@
 
 @media (max-width: 600px) {
-    header, footer, main {
+
+    main {
         padding: 1rem;
         border-left: none;
         border-right: none;
     }
+    
+    header nav, footer nav, main {
+        padding: 0 1rem;
+        margin: 1rem 0;
+    }
+
+    header h1 {
+        margin: 0;
+    }
+
+    nav.sitenav a:not(.navbutton) {
+        display: none;
+    }
+    
 }
