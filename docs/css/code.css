@@ -6,10 +6,8 @@ which doesn't support light/dark mode
 
 code {
     font-family: var(--code-font);
-    /* font-size: 90%; */
     margin: 0;
     hyphens: manual;
-    white-space: pre-wrap;
 }
 
 div.sourceCode {
@@ -21,21 +19,15 @@ div.sourceCode {
 
 pre.sourceCode {
     margin: 0;
-}
-
-.sourceCode {
-    overflow: visible;
+    overflow: auto;
 }
 
 pre {
     padding: var(--block-margin);
-    overflow: auto;
 }
 
 pre code {
     padding: 0;
-    overflow: visible;
-    overflow-wrap: normal;
 }
 
 code.sourceCode > span {
@@ -48,34 +40,16 @@ pre > code.sourceCode > span {
 }
 
 pre > code.sourceCode > span:empty {
-    height: 1.2em;
+    height: 1rem;
 }
 
-
-@media screen {
-    div.sourceCode {
-        overflow: auto;
-    }
-}
-
-@media print {
-    pre > code.sourceCode {
-        white-space: pre-wrap;
-    }
-
-    pre > code.sourceCode > span {
-        display: inline-block;
-        text-indent: -5em;
-        padding-left: 5em;
-    }
-}
 
 pre.numberSource code {
     counter-reset: source-line 0;
 }
 pre.numberSource code > span {
     position: relative;
-    left: -4em;
+    left: -4rem;
     counter-increment: source-line;
 }
 pre.numberSource code > span > a:first-child::before {
@@ -92,7 +66,7 @@ pre.numberSource code > span > a:first-child::before {
     color: var(--linenumber-color);
 }
 pre.numberSource {
-    margin-left: 3em;
+    margin-left: 3rem;
     border-left: 1px solid var(--linenumber-color);
     padding-left: 4px;
 }
