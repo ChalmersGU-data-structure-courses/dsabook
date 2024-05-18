@@ -36,4 +36,3 @@ current record's key value appears before it.
 
 <inlineav id="ExchangeSortCON" src="Sorting/ExchangeSortCON.js" name="Exchange Sort Analysis Slideshow" links="Sorting/ExchangeSortCON.css"/>
 
-<avembed id="ExchangeSumm" src="Sorting/ExchangeSumm.html" type="ka" name="Exchange Sorting Summary Exercise"/>
