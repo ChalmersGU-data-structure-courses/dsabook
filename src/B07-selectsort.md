@@ -82,7 +82,3 @@ return is a faster swap operation.
 <inlineav id="ptrSwapCON" src="Sorting/ptrSwapCON.js" name="Selection Sort Pointer Swap" links="Sorting/ptrSwapCON.css"/>
 ::::
 
-Here are some review questions to check how well you understand
-Selection Sort.
-
-<avembed id="SelsortSumm" src="Sorting/SelsortSumm.html" type="ka" name="Selection Sort Summary Exercise"/>
