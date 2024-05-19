@@ -90,7 +90,3 @@ conclude that the problem of sorting requires $\Theta(n \log n)$ time.
 As a corollary, we know that no comparison-based sorting algorithm can
 improve on existing $\Theta(n \log n)$ time sorting algorithms by more
 than a constant factor.
-
-Here are some review questions to check that you understand this proof.
-
-<avembed id="SortBoundSumm" src="Sorting/SortBoundSumm.html" type="ka" name="Lower Bounds Summary Exercise"/>
