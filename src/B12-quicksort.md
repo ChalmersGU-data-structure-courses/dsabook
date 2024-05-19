@@ -314,4 +314,3 @@ suggested above, most of the function calls will already have been
 eliminated. Thus, eliminating the remaining function calls will yield
 only a modest speedup.
 
-<avembed id="QuicksortSumm" src="Sorting/QuicksortSumm.html" type="ka" name="Quicksort Summary Exercise"/>
