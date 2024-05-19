@@ -58,8 +58,3 @@ algorithm for all but lists of 10 records. Even for small arrays,
 optimized Quicksort performs well because it does one partition step
 before calling Insertion Sort. In general, optimizing the various
 algorithms makes a noticeable improvement for larger array sizes.
-
-Here are a few multiple choice questions that ask you to compare the
-sorting algorithms that we learned about in this chapter.
-
-<avembed id="SortAlgCompSumm" src="Sorting/SortAlgCompSumm.html" type="ka" name="Sort Comparison Summary Exercise"/>
