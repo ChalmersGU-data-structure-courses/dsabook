@@ -197,6 +197,3 @@ $\Omega(2n\log n)$.
 
 <inlineav id="LowerBoundCON" src="AlgAnal/LowerBoundCON.js" name="Lower Bounds visualization" links="AlgAnal/LowerBoundCON.css"/>
 
-### Summary Exercise
-
-<avembed id="LowerThetaSumm" src="AlgAnal/LowerThetaSumm.html" type="ka" name="Lower Bounds and Theta Notation Exercise"/>
