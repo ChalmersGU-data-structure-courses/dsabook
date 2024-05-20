@@ -143,7 +143,3 @@ an instantiation of an algorithm in a programming language. The
 following slideshow should help you to visualize the differences.
 
 <inlineav id="ProblemAlgorithmCON" src="AlgAnal/ProblemAlgorithmCON.js" name="Problem, Algorithm, and Program definitions Slideshow" links="AlgAnal/ProblemAlgorithmCON.css"/>
-
-### Summary Questions
-
-<avembed id="AnalPrelimSumm" src="AlgAnal/AnalPrelimSumm.html" type="ka" name="Problems, Algorithms, Programs Exercise"/>
