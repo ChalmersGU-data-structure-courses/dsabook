@@ -24,56 +24,8 @@ $\Omega$ is symmetric with the definition of big-Oh.
 
 > For $\mathbf{T}(n)$ a non-negatively valued function, $\mathbf{T}(n)$
 > is in set $\Omega(g(n))$ if there exist two positive constants $c$ and
-> $n_0$ such that $\mathbf{T}(n) \geq c g(n)$ for all $n > n_0$.[^C07a]
+> $n_0$ such that $\mathbf{T}(n) \geq c g(n)$ for all $n > n_0$.
 
-
-[^C07a]: An alternate (non-equivalent) definition for $\Omega$ is
-
-    $\mathbf{T}(n)$ is in the set $\Omega(g(n))$ if there exists a
-    positive constant $c$ such that $\mathbf{T}(n) \geq c g(n)$ for an
-    infinite number of values for $n$.
-
-    This definition says that for an "interesting" number of cases,
-    the algorithm takes at least $c g(n)$ time. Note that this
-    definition is *not* symmetric with the definition of big-Oh. For
-    $g(n)$ to be a lower bound, this definition *does not* require that
-    $\mathbf{T}(n) \geq c g(n)$ for all values of $n$ greater than some
-    constant. It only requires that this happen often enough, in
-    particular that it happen for an infinite number of values for $n$.
-    Motivation for this alternate definition can be found in the
-    following example.
-
-    Assume a particular algorithm has the following behavior:
-
-    $$
-    \mathbf{T}(n) = \left\{ \begin{array}{ll}
-    n  & \mbox{for all odd}\ n \geq 1\\
-    n^2/100 & \mbox{for all even}\ n \geq 0
-    \end{array}
-    \right.
-    $$
-
-    From this definition, $n^2/100 \geq \frac{1}{100} n^2$ for all even
-    $n \geq 0$. So, $\mathbf{T}(n) \geq c n^2$ for an infinite number of
-    values of $n$ (i.e., for all even $n$) for $c = 1/100$. Therefore,
-    $\mathbf{T}(n)$ is in $\Omega(n^2)$ by the definition.
-
-    For this equation for $\mathbf{T}(n)$, it is true that all inputs of
-    size $n$ take at least $cn$ time. But an infinite number of inputs
-    of size $n$ take $cn^2$ time, so we would like to say that the
-    algorithm is in $\Omega(n^2)$. Unfortunately, using our first
-    definition will yield a lower bound of $\Omega(n)$ because it is not
-    possible to pick constants $c$ and $n_0$ such that
-    $\mathbf{T}(n) \geq c n^2$ for all $n>n_0$. The alternative
-    definition does result in a lower bound of $\Omega(n^2)$ for this
-    algorithm, which seems to fit common sense more closely.
-    Fortunately, few real algorithms or computer programs display the
-    pathological behavior of this example. Our first definition for
-    $\Omega$ generally yields the expected result.
-
-    As you can see from this discussion, asymptotic bounds notation is
-    not a law of nature. It is merely a powerful modeling tool used to
-    describe the behavior of algorithms.
 
 :::: {#AAnalEx}
 ::: topic
@@ -103,6 +55,56 @@ array of integers. In the average and worst cases this algorithm is in
 $\Omega(n)$, because in both the average and worst cases we must examine
 *at least* $cn$ values (where $c$ is 1/2 in the average case and 1 in
 the worst case).
+
+#### Alternative definition for $\Omega$
+
+An alternate (non-equivalent) definition for $\Omega$ is
+
+> $\mathbf{T}(n)$ is in the set $\Omega(g(n))$ if there exists a
+> positive constant $c$ such that $\mathbf{T}(n) \geq c g(n)$ for an
+> infinite number of values for $n$.
+
+This definition says that for an "interesting" number of cases,
+the algorithm takes at least $c g(n)$ time. Note that this
+definition is *not* symmetric with the definition of big-Oh. For
+$g(n)$ to be a lower bound, this definition *does not* require that
+$\mathbf{T}(n) \geq c g(n)$ for all values of $n$ greater than some
+constant. It only requires that this happen often enough, in
+particular that it happen for an infinite number of values for $n$.
+Motivation for this alternate definition can be found in the
+following example.
+
+Assume a particular algorithm has the following behavior:
+
+$$
+\mathbf{T}(n) = \left\{ \begin{array}{ll}
+n  & \mbox{for all odd}\ n \geq 1\\
+n^2/100 & \mbox{for all even}\ n \geq 0
+\end{array}
+\right.
+$$
+
+From this definition, $n^2/100 \geq \frac{1}{100} n^2$ for all even
+$n \geq 0$. So, $\mathbf{T}(n) \geq c n^2$ for an infinite number of
+values of $n$ (i.e., for all even $n$) for $c = 1/100$. Therefore,
+$\mathbf{T}(n)$ is in $\Omega(n^2)$ by the definition.
+
+For this equation for $\mathbf{T}(n)$, it is true that all inputs of
+size $n$ take at least $cn$ time. But an infinite number of inputs
+of size $n$ take $cn^2$ time, so we would like to say that the
+algorithm is in $\Omega(n^2)$. Unfortunately, using our first
+definition will yield a lower bound of $\Omega(n)$ because it is not
+possible to pick constants $c$ and $n_0$ such that
+$\mathbf{T}(n) \geq c n^2$ for all $n>n_0$. The alternative
+definition does result in a lower bound of $\Omega(n^2)$ for this
+algorithm, which seems to fit common sense more closely.
+Fortunately, few real algorithms or computer programs display the
+pathological behavior of this example. Our first definition for
+$\Omega$ generally yields the expected result.
+
+As you can see from this discussion, asymptotic bounds notation is
+not a law of nature. It is merely a powerful modeling tool used to
+describe the behavior of algorithms.
 
 ### Theta Notation
 
