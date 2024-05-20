@@ -168,13 +168,133 @@ algorithms end up sorting lots of small lists as well.</p>
 <p>Finally, some situations require that a sorting algorithm use as
 little memory as possible. We will call attention to sorting algorithms
 that require significant extra memory beyond the input array.</p>
-<p>
-<div id="SortIntroSumm" class="embedContainer">
-<iframe id="SortIntroSumm_iframe" aria-label="SortIntroSumm" src="../interactive/Sorting/SortIntroSumm.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
-</div>
+<section id="review-questions-sorting-introduction" class="level3"
+data-number="2.3.1">
+<h3 data-number="2.3.1"><span class="header-section-number">2.3.1</span>
+Review questions: Sorting Introduction</h3>
+<div class="quiz">
+<div class="question">
+Which of these is the best definition for a stable sorting algorithm?
 </p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />An algorithm that does
+not change the relative ordering of records with identical
+keys</label></li>
+<li><label><input type="checkbox" />An algorithm that is as fast as the
+best one known</label></li>
+<li><label><input type="checkbox" />An algorithm that always gives the
+right answer</label></li>
+<li><label><input type="checkbox" />An algorithm that always gives the
+same order for duplicate keys from run to run</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>“Stable” has nothing to do with how fast an algorithm is.</li>
+<li>It refers to maintaining the relative order of records with equal
+key values.</li>
+<li>In some applications, we require that records with equal key value
+preserve the relative order of those records.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which of these will NOT affect the RELATIVE running times for two
+sorting algorithms?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />The CPU
+speed</label></li>
+<li><label><input type="checkbox" />The number of records</label></li>
+<li><label><input type="checkbox" />The allowable range for the record
+values</label></li>
+<li><label><input type="checkbox" />The amount by which the values are
+out of order</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>If we speed up the CPU by a factor of two, both sorts will go twice
+as fast.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which of these is a traditional measure for the cost of a sorting
+algorithm?</p>
+<p><em>Note</em>: Multiple answers are possible!</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />The number of
+comparisons</label></li>
+<li><label><input type="checkbox" checked="" />The number of
+swaps</label></li>
+<li><label><input type="checkbox" />The number of records</label></li>
+<li><label><input type="checkbox" />The memory size</label></li>
+<li><label><input type="checkbox" />The amount by which the values are
+out of order</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>This question does not ask what <em>affects</em> the cost. It asks
+what is a <em>measure</em> of the cost.</li>
+<li>The number of records affects the cost, but it does not measure the
+cost.</li>
+<li>The memory size affects the cost, but it does not measure the
+cost.</li>
+<li>Records being out of order can increase the cost, but not measure
+it.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In which case might the number of comparisons <em>not</em> be a good
+representation of the cost for a sorting algorithm?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />When we are comparing
+strings of widely varying length</label></li>
+<li><label><input type="checkbox" />When there are lots of
+records</label></li>
+<li><label><input type="checkbox" />When the CPU is really
+fast</label></li>
+<li><label><input type="checkbox" />When the amount of available space
+is small</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>CPU speed would affect all comparisons in the same way.</li>
+<li>Number of records or amount of space won’t affect the value of
+counting comparisons.</li>
+<li>The longer the string, the longer it takes to compare.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Sometimes, the constant factors in an algorithm’s runtime equation
+are more important thant its growth rate. When the problem is sorting,
+this can happen in which situation?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />When we are sorting lots
+of small groups of records.</label></li>
+<li><label><input type="checkbox" />When there are lots of
+records.</label></li>
+<li><label><input type="checkbox" />When the CPU is really
+fast.</label></li>
+<li><label><input type="checkbox" />When the amount of available space
+is small.</label></li>
+<li><label><input type="checkbox" />When the records are nearly
+sorted.</label></li>
+<li><label><input type="checkbox" />When the records are nearly reverse
+sorted.</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>CPU speed would affect all comparisons in the same way.</li>
+<li>Records being sorted or reverse sorted affects the growth rate of
+different algorithms differently. But not relevant to this
+question.</li>
+<li>When we sort only a few records, constants matter a lot.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
 </section>
 </main>
 

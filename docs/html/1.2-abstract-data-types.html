@@ -381,20 +381,337 @@ that you know about the list class implementation, and this should be
 all you need to know. Within the class, a variety of physical
 implementations for lists is possible.</p>
 </section>
-<p>
-<div id="CMdatatypeSumm" class="embedContainer">
-<iframe id="CMdatatypeSumm_iframe" aria-label="CMdatatypeSumm" src="../interactive/CMP/CMdatatypeSumm.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
+<section id="quiz-data-types-concept-map" class="level3"
+data-number="1.2.1">
+<h3 data-number="1.2.1"><span class="header-section-number">1.2.1</span>
+Quiz: Data Types Concept Map</h3>
+<figure>
+<img src="images/DatatypeCM.png"
+alt="A concept map for the term “data type”" />
+<figcaption aria-hidden="true">A concept map for the term “data
+type”</figcaption>
+</figure>
+<div class="quiz">
+<div class="question">
+<p>“Data type” and “data structure” are synonyms.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />False</label></li>
+<li><label><input type="checkbox" />True</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Look at these terms on the concept map.</li>
+</ul>
 </div>
-</p>
-<p>
-<div id="IntroADTSumm" class="embedContainer">
-<iframe id="IntroADTSumm_iframe" aria-label="IntroADTSumm" src="../interactive/Design/IntroADTSumm.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
 </div>
-</p>
+<div class="question">
+<p>It is correct to say that interfaces are abstract data types.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Look at these terms on the concept map.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The term “composite type” is a synonym of…</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Aggregate
+type</label></li>
+<li><label><input type="checkbox" />Data type</label></li>
+<li><label><input type="checkbox" />Abstract data type</label></li>
+<li><label><input type="checkbox" />Interface</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Look at these terms on the concept map.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which of the following is NOT an example of a data type?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Array</label></li>
+<li><label><input type="checkbox" />List</label></li>
+<li><label><input type="checkbox" />Integer</label></li>
+<li><label><input type="checkbox" />Boolean</label></li>
+<li><label><input type="checkbox" checked="" />None of the
+above</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Look at these terms on the concept map.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>An abstract data type implements a(n)…</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Data
+structure</label></li>
+<li><label><input type="checkbox" />ADT</label></li>
+<li><label><input type="checkbox" />Data type</label></li>
+<li><label><input type="checkbox" />Data item</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Look at these terms on the concept map.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>An integer variable is an example of a(n) ________</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Simple data
+type</label></li>
+<li><label><input type="checkbox" />Array</label></li>
+<li><label><input type="checkbox" />Composite type</label></li>
+<li><label><input type="checkbox" />List</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Look at these terms on the concept map.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>An array-based list is an implementation of a(n)…</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />List</label></li>
+<li><label><input type="checkbox" />Array</label></li>
+<li><label><input type="checkbox" />Linked list</label></li>
+<li><label><input type="checkbox" />Graph</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Look at these terms on the concept map.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>An abstract data type logically defines a(n)…</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Interface</label></li>
+<li><label><input type="checkbox" />Class</label></li>
+<li><label><input type="checkbox" />Data structure</label></li>
+<li><label><input type="checkbox" />Method</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Look at these terms on the concept map.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="adts-summary-questions" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2"><span class="header-section-number">1.2.2</span>
+ADTs: Summary Questions</h3>
+<div class="quiz">
+<div class="question">
+<p>An <em>ADT</em> is:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />The specification of a
+data type within some language, independent of an
+implementation</label></li>
+<li><label><input type="checkbox" />A concrete implementation of a
+class</label></li>
+<li><label><input type="checkbox" />An implementation for a data
+structure in a program</label></li>
+<li><label><input type="checkbox" />A collection of values</label></li>
+<li><label><input type="checkbox" />Another name for a data
+structure</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A collection of values is a data type, not an ADT.</li>
+<li>It can’t be a data structure, since an ADT is more like the
+interface for a data structure.</li>
+<li>An implementation for a data structure in a program is close, but
+not really it. An ADT is more abstract than an actual program.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>An ADT is a form of:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Abstraction</label></li>
+<li><label><input type="checkbox" />Metaphor</label></li>
+<li><label><input type="checkbox" />Simile</label></li>
+<li><label><input type="checkbox" />Programming</label></li>
+<li><label><input type="checkbox" />Design</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>What does the “A” stand for in ADT?</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which is an example of a composite type?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />A bank account
+record</label></li>
+<li><label><input type="checkbox" />An integer</label></li>
+<li><label><input type="checkbox" />A floating point number</label></li>
+<li><label><input type="checkbox" />A character</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A composite type is made up of two or more simple types.</li>
+<li>Character, Integer, and floating point numbers are all simple
+types.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A <em>composite type</em> is:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />A type comprised of other
+types</label></li>
+<li><label><input type="checkbox" />A type composed from at least one
+simple type</label></li>
+<li><label><input type="checkbox" />Another term for an Abstract Data
+Type</label></li>
+<li><label><input type="checkbox" />An instance of a class</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A type with only 1 simple type is just a simple type. There is a
+better answer to this question.</li>
+<li>An ADT is the realization of a data type, including the type and the
+operations allowed on the type.</li>
+<li>An object is an instance of a class.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A <em>data item</em> is:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />A member of a
+type</label></li>
+<li><label><input type="checkbox" />A specification of a type within
+some language</label></li>
+<li><label><input type="checkbox" />An implementation of an
+ADT</label></li>
+<li><label><input type="checkbox" />An object instantiated from a
+class</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>An ADT is the specification of a data type within some language,
+independent of an implementation.</li>
+<li>A data structure is the implementation of an ADT.</li>
+<li>In OO programming, an ADT and its implementation together form a
+class. An object is an instance of a class. A data item is a member of
+the class.</li>
+<li>A data item is a piece of information whose value is drawn from a
+type.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A <em>data structure</em> is:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />The implementation for an
+ADT</label></li>
+<li><label><input type="checkbox" />A specification for an
+implementation</label></li>
+<li><label><input type="checkbox" />A collection of values</label></li>
+<li><label><input type="checkbox" />A type</label></li>
+<li><label><input type="checkbox" />Another name for an ADT</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A data structure is not an ADT.</li>
+<li>A data structure is not a type (which is also a collection of
+values).</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>An ADT is most like which of the following?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />An interface</label></li>
+<li><label><input type="checkbox" />A data structure</label></li>
+<li><label><input type="checkbox" />A class</label></li>
+<li><label><input type="checkbox" />An object</label></li>
+<li><label><input type="checkbox" />A method</label></li>
+<li><label><input type="checkbox" />A program</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A data structure, program, class, or method are all concrete
+implementation.</li>
+<li>An object is something created at runtime.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In computer science a <em>metaphor</em> is:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />A label applied to a
+group of concepts</label></li>
+<li><label><input type="checkbox" />A figure of speech in which a phrase
+is applied to an object to which it is not literally
+applicable</label></li>
+<li><label><input type="checkbox" />The model of a type</label></li>
+<li><label><input type="checkbox" />A comparison that does not use the
+word ‘like’</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>In English a metaphor may refer to a word or a phrase, but this is
+not how the word is used in computer science.</li>
+<li>The model of a type is another term for an ADT.</li>
+<li>In computer science a metaphor is more than a comparison.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A <em>simple type</em> is:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />A type that cannot be
+broken down into smaller types</label></li>
+<li><label><input type="checkbox" />The simplest type in a
+class</label></li>
+<li><label><input type="checkbox" />The model of a type</label></li>
+<li><label><input type="checkbox" />A subset of a type</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A class may have more than one, or only simple types as
+members.</li>
+<li>The model of a type is another way to define an ADT.</li>
+<li>Any type is a collection of values and therefore, a subset of
+another type.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A <em>type</em> is:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />A collection of
+values</label></li>
+<li><label><input type="checkbox" />A variable</label></li>
+<li><label><input type="checkbox" />An integer</label></li>
+<li><label><input type="checkbox" />An implementation</label></li>
+<li><label><input type="checkbox" />Another name for an ADT</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A type is a general concept, so it is not an integer, or an
+implementation, or a variable.</li>
+<li>A type has values. An ADT is a collection of actions on an object (a
+type).</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
 </section>
 </main>
 

@@ -238,16 +238,117 @@ comparison problem. But as long as the elements of the array supports
 the <strong>Comparable</strong> interface, we can still use the standard
 comparison operators when sorting.</p>
 </section>
-<section id="review-questions" class="level3" data-number="1.5.5">
+<section id="review-questions-comparison" class="level3"
+data-number="1.5.5">
 <h3 data-number="1.5.5"><span class="header-section-number">1.5.5</span>
-Review questions</h3>
-<p>
-<div id="CompareSumm" class="embedContainer">
-<iframe id="CompareSumm_iframe" aria-label="CompareSumm" src="../interactive/Design/CompareSumm.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
+Review questions: Comparison</h3>
+<div class="quiz">
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>One good general-purpose solution to the problem of getting a key
+from a record is to define a special method such as
+<code>.key()</code>.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />False</label></li>
+<li><label><input type="checkbox" />True</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>If we use a <code>.key()</code> function, then there is only one way
+to compute the key for a record.</li>
+<li>That means the records cannot be sorted on differing fields.</li>
+</ul>
 </div>
-</p>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>One good general-purpose solution to the problem of getting a key
+from a record is to store Key/Value pairs in the search structure.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />False</label></li>
+<li><label><input type="checkbox" checked="" />True</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>When we store key/value pairs, we are explicitly storing the key
+used by that search structure.</li>
+<li>This permits a collection of records to be sorted or searched in
+many different ways.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>In order to be able to sort, the key values must define a total
+order.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />False</label></li>
+<li><label><input type="checkbox" checked="" />True</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Sorting relies on comparisons.</li>
+<li>We need to be able to compare any two records and tell which one is
+less than the other.</li>
+<li>This is the essence of a total order.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>In order to do an exact-match search, the key values must define a
+total order.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />False</label></li>
+<li><label><input type="checkbox" />True</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Exact match requires only that we can tell if two keys are
+equal.</li>
+<li>We do not need to decide which one is greater than the other.</li>
+<li>So, we do not need a total order.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>The problem with using a <code>.key()</code> method to get the key
+from a record is that we can’t use this same method to get different
+fields for different searches.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />False</label></li>
+<li><label><input type="checkbox" checked="" />True</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>If we use a <code>.key()</code> function, then there is only one way
+to compute the key for a record.</li>
+<li>That means the records cannot be sorted on differing fields.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Defining a record’s key field is a property of:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />The record</label></li>
+<li><label><input type="checkbox" checked="" />The context of the
+search</label></li>
+<li><label><input type="checkbox" />Both</label></li>
+<li><label><input type="checkbox" />Neither</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>If the key were a property of the record, then records could only be
+sorted in one order.</li>
+<li>If the key were a property of the record, then we could only search
+on a single value.</li>
+<li>But we really want to be able to sort or search on different
+fields.</li>
+</ul>
+</div>
+</div>
+</div>
 <!-- TODO: make a similar Python example -->
 </section>
 </section>

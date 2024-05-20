@@ -226,15 +226,304 @@ return is a faster swap operation.</p>
 </div>
 </p>
 </div>
+</section>
+<section id="review-questions-selection-sort" class="level3"
+data-number="2.6.2">
+<h3 data-number="2.6.2"><span class="header-section-number">2.6.2</span>
+Review questions: Selection sort</h3>
 <p>Here are some review questions to check how well you understand
 Selection Sort.</p>
-<p>
-<div id="SelsortSumm" class="embedContainer">
-<iframe id="SelsortSumm_iframe" aria-label="SelsortSumm" src="../interactive/Sorting/SelsortSumm.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
+<div class="quiz">
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>Selection sort is simple, but less efficient than the best sorting
+algorithms.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>What is Selection Sort’s average case complexity?</li>
+<li>It is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^2)</annotation></semantics></math>.</li>
+<li>Are there any better sorting algorithms?</li>
+</ul>
 </div>
-</p>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>Selection Sort (as the code is written in this module) is a stable
+sorting algorithm. Recall that a stable sorting algorithm maintains the
+relative order of records with equal keys.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Think of the behaviour of every pass through the inner for loop of
+Selection Sort if two records are equal, with the greatest value in the
+array.</li>
+<li>Which record will be selected?</li>
+<li>The first such record.</li>
+<li>Where will it be moved to?</li>
+<li>The last position in the array.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Suppose that Selection Sort is given an input of 100 records, and it
+has completed 37 iterations of the main loop.</p>
+<p>How many records are now guaranteed to be in their final position
+(never to be moved again by the sort)?</p>
+<p><input type="text" value="37"/></p>
+<div class="hints">
+<ul>
+<li>On each pass, Selection Sort puts a record into its final
+position.</li>
+<li>So, if Selection Sort has done 37 passes, then at least 37 records
+are in their final positions.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>How many times does Selection Sort call the swap function on an array
+of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+records?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>log</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">n \log n</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>n</mi><mn>2</mn></msup><annotation encoding="application/x-tex">n^2</annotation></semantics></math></label></li>
+<li><label><input type="checkbox" />It depends on the order of the
+records</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Selection Sort first finds the largest key in an unsorted list, then
+the second largest, and so on.</li>
+<li>To find the next largest key value requires searching through the
+entire unsorted portion of the array, but the search itself needs no
+swaps.</li>
+<li>Once the next largest key is found, one swap is required to put the
+record in place.</li>
+<li>We don’t need to check anything on the very last pass, since at that
+point the first record must already be in place.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In which cases are the time complexities the same for Selection
+Sort?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Worst, Average and
+Best</label></li>
+<li><label><input type="checkbox" />Worst and Best</label></li>
+<li><label><input type="checkbox" />Best and Average</label></li>
+<li><label><input type="checkbox" />Worst and Average</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Selection Sort’s cost vary according to the order of the array
+input values?</li>
+<li>No, it does not matter what order the input values have.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The order of the input records has what impact on the number of
+comparisons required by Selection Sort (as presented in this
+module)?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />None</label></li>
+<li><label><input type="checkbox" />There is a constant factor
+difference</label></li>
+<li><label><input type="checkbox" />There is a big difference, the
+asymptotic running time can change</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Selection Sort change when it make a comparison according to
+the order of the array input values?</li>
+<li>No, it does not matter what order the input values have.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the worst-case time for Selection Sort to sort an array of n
+records?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^2)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log n)</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Selection Sort’s order and number of comparisons depend on the
+particular order of the input array?</li>
+<li>No, it does not.</li>
+<li>Recall that our implementation for Selection Sort will try to swap
+even if the current record is in its correct location.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the running time of Selection Sort when the input is an array
+that has already been sorted?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^2)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log n)</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Each test in the inner for loop will be the same no matter what the
+order of the input array.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the running time of Selection Sort when the input is an array
+that has all equal values?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^2)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log n)</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Each test in the inner for loop will be the same no matter what the
+order of the input array.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which statement best characterizes Selection Sort (as the code is
+written in this module)? Recall that a stable sorting algorithm
+maintains the relative order of records with equal keys.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Selection Sort is not
+stable, but with minor modifications it could be made so</label></li>
+<li><label><input type="checkbox" />Selection Sort is
+stable</label></li>
+<li><label><input type="checkbox" />Selection Sort is not
+stable</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Think of the behaviour of every pass through the inner for loop of
+Selection Sort if two records are equal, with the greatest value in the
+array.</li>
+<li>Which record will be selected?</li>
+<li>The first such record.</li>
+<li>It will be moved to the last position in the array, putting it out
+of order with other equal-valued records.</li>
+<li>But we could easily change the maximum-finding part of the loop to
+take the last of these equal-valued records.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In the worst case, the total number of swaps done by Selection Sort
+is closest to:</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>n</mi><mn>2</mn></msup><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n^2/2</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>n</mi><mn>2</mn></msup><annotation encoding="application/x-tex">n^2</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>log</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">n \log n</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Selection Sort’s number of swaps depend on the particular order
+of the input array?</li>
+<li>No, it does not.</li>
+<li>Recall that our implementation for Selection Sort will try to swap
+even if the current record is in its correct location.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>When is Selection Sort a good choice to use for sorting an array?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />When the cost of a swap
+is large, such as when the records are large</label></li>
+<li><label><input type="checkbox" />When each component of the array
+requires a small amount of memory</label></li>
+<li><label><input type="checkbox" />When the array has only a few
+elements out of place</label></li>
+<li><label><input type="checkbox" />None of these answers</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>The big advantage of Selection Sort is that it keeps the number of
+swaps small.</li>
+<li>So it will make best use of this advantage when the cost to swap is
+large.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In the worst case, the total number of comparisons for Selection Sort
+is closest to:</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>n</mi><mn>2</mn></msup><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n^2/2</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>n</mi><mn>2</mn></msup><annotation encoding="application/x-tex">n^2</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>n</mi><mn>2</mn></msup><mi>/</mi><mn>4</mn></mrow><annotation encoding="application/x-tex">n^2/4</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Selection Sort’s implementation is made up of two nested for
+loops.</li>
+<li>The outer for loop is executed
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>
+times.</li>
+<li>The inner for loop is executed
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mi>i</mi></mrow><annotation encoding="application/x-tex">n-i</annotation></semantics></math>
+times.</li>
+<li>The total cost is the sum of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>’s
+for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+goes from 1 to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
 </section>
 </main>

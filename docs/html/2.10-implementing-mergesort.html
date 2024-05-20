@@ -187,13 +187,259 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a hr
 <div class="jsavcanvas"></div>
 </div>
 </p>
-<p>
-<div id="MergesortSumm" class="embedContainer">
-<iframe id="MergesortSumm_iframe" aria-label="MergesortSumm" src="../interactive/Sorting/MergesortSumm.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
+<section id="review-questions-mergesort" class="level3"
+data-number="2.10.1">
+<h3 data-number="2.10.1"><span
+class="header-section-number">2.10.1</span> Review questions:
+Mergesort</h3>
+<div class="quiz">
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>Mergesort (as the code is written in this module) is a stable sorting
+algorithm. Recall that a stable sorting algorithm maintains the relative
+order of records with equal keys.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>What happens when two equal values are compared during merge?</li>
+</ul>
 </div>
-</p>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>Mergesort is easier to implement when operating on a linked list than
+on an array.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Look at the length of the code given in the modules.</li>
+<li>There are a lot of details to deal with when implementing Mergesort
+on an array.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>You must merge 2 sorted lists of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
+respectively. The number of comparisons needed in the worst case by the
+merge algorithm will be:</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>+</mo><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">m+n-1</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">mn</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>max</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>m</mi><mo>,</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\max(m,n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>min</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>m</mi><mo>,</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\min(m,n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>+</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">m+n</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Each comparison puts one record in the final sorted array.</li>
+<li>You don’t compare when there is only one record.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the most complicated part of the Mergesort algorithm?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Merging the sorted halves
+back together</label></li>
+<li><label><input type="checkbox" />Finding the midpoint</label></li>
+<li><label><input type="checkbox" />Partitioning the array</label></li>
+<li><label><input type="checkbox" />Achieving the base case</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>There is no partition in Mergesort.</li>
+<li>The two main parts of Mergesort are splitting and merging.</li>
+<li>Splitting is easy – just cut the list into two halves.</li>
+<li>Merging is not hard, but it is more complicated than splitting.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Mergesort works by splitting a list of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+numbers in half, then sorting each half recursively, and finally merging
+the two halves. Which of the following list implementations would allow
+Mergesort to work in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log n)</annotation></semantics></math>
+time?</p>
+<p><em>Multiple choices are possible!</em></p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />A singly linked
+list</label></li>
+<li><label><input type="checkbox" checked="" />A doubly linked
+list</label></li>
+<li><label><input type="checkbox" checked="" />An array</label></li>
+<li><label><input type="checkbox" />None of them</label></li>
+</ul>
+<div class="hints">
+<p>We have an implementation that works on arrays. It is also easy to do
+this on linked lists. It works fine on both singly and doubly lined
+lists.</p>
+</div>
+</div>
+<div class="question">
+<p>In which cases are the time complexities the same for Mergesort?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Worst, Average and
+Best</label></li>
+<li><label><input type="checkbox" />Worst and Best</label></li>
+<li><label><input type="checkbox" />Best and Average</label></li>
+<li><label><input type="checkbox" />Worst and Average</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Mergesort’s cost vary according to the order of the array input
+values?</li>
+<li>No, it does not matter what order the input values have.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The order of the input records has what impact on the number of
+comparisons required by Mergesort (as presented in this module)?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />None</label></li>
+<li><label><input type="checkbox" />There is a constant factor
+difference</label></li>
+<li><label><input type="checkbox" />There is a big difference, the
+asymptotic running time can change</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Mergesort change when it make a comparison according to the
+order of the array input values?</li>
+<li>No, it does not matter what order the input values have.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the worst-case time for Mergesort to sort an array of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+records?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^2)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mi>n</mi></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^n)</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Mergesort’s number of comparisons depend on the particular
+order of the input array?</li>
+<li>No, it does not.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the running time of Mergesort when the input is an array
+where all record values are equal?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^2)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mi>n</mi></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n ^ n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Mergesort’s number of comparisons depend on the particular
+order of the input array?</li>
+<li>No, it does not.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>When is Mergesort a good choice for sorting an array?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />We need a reasonably fast
+algorithm with a good worst case cost</label></li>
+<li><label><input type="checkbox" />Each record requires a large amount
+of memory</label></li>
+<li><label><input type="checkbox" />Each record requires a small amount
+of memory</label></li>
+<li><label><input type="checkbox" />The processor speed is
+fast</label></li>
+<li><label><input type="checkbox" />The array contains many
+records</label></li>
+<li><label><input type="checkbox" />We need good best-case running
+time</label></li>
+<li><label><input type="checkbox" />None of these
+situations</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Mergesort’s number of comparisons depend on the particular
+order of the input array?</li>
+<li>No, it does not.</li>
+<li>This makes it reliable in the worst case.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In the worst case, the total number of comparisons for Mergesort is
+closest to: - [x]
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>log</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">n \log n</annotation></semantics></math>
+- [ ]
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+- [ ]
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>n</mi><mn>2</mn></msup><annotation encoding="application/x-tex">n^2</annotation></semantics></math>
+- [ ]
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>n</mi><mn>2</mn></msup><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n^2/2</annotation></semantics></math></p>
+<div class="hints">
+<ul>
+<li>What is the asymptotic cost of Mergesort?</li>
+<li>Only one of these answers looks like the asymptotic cost.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The array-based implementation for Mergesort uses how many
+arrays?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>2</mn><annotation encoding="application/x-tex">2</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>log</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<p>There are
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>log</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n</annotation></semantics></math>
+passes. But the implementation is careful to reuse the auxilliary array
+rather than make a new one on each pass. So Mergesort requires the
+original array and an auxilliary array.</p>
+</div>
+</div>
+</div>
+</section>
 </section>
 </main>
 

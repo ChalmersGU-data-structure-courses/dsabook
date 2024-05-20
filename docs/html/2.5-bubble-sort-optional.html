@@ -206,15 +206,229 @@ case, leading to
 for the expected number of swaps. The actual number of swaps performed
 by Bubble Sort will be identical to that performed by Insertion
 Sort.</p>
+</section>
+<section id="review-questions-bubble-sort" class="level3"
+data-number="2.5.2">
+<h3 data-number="2.5.2"><span class="header-section-number">2.5.2</span>
+Review questions: Bubble sort</h3>
 <p>Here are some review questions to check your understanding of Bubble
 Sort.</p>
-<p>
-<div id="BubsortSumm" class="embedContainer">
-<iframe id="BubsortSumm_iframe" aria-label="BubsortSumm" src="../interactive/Sorting/BubsortSumm.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
+<div class="quiz">
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>Bubble Sort (as the code is written in this module) is a stable
+sorting algorithm. Recall that a stable sorting algorithm maintains the
+relative order of records with equal keys.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Remember that: Bubble Sort consists of a simple double for
+loop.</li>
+<li>The first iteration of the inner for loop moves through the record
+array from bottom to top, comparing adjacent keys.</li>
+<li>If the lower-indexed keys value is greater than its higher-indexed
+neighbor, then the two values are swapped.</li>
+</ul>
 </div>
-</p>
+</div>
+<div class="question">
+<p>In which cases are the time complexities the same for Bubble Sort (as
+the algorithm is presented in this module)?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Worst, Average and
+Best</label></li>
+<li><label><input type="checkbox" />Worst and Best</label></li>
+<li><label><input type="checkbox" />Best and Average</label></li>
+<li><label><input type="checkbox" />Worst and Average</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Bubble Sort’s cost vary according to the order of the array
+input values?</li>
+<li>No, it does not matter what order the input values have.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The order of the input records has what impact on the number of
+comparisons required by Bubble Sort (as presented in this module)?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />None.</label></li>
+<li><label><input type="checkbox" />There is a constant factor
+difference.</label></li>
+<li><label><input type="checkbox" />There is a big difference, the
+asymptotic running time can change.</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Bubble Sort change when it make a comparison according to the
+order of the array input values?</li>
+<li>No, it does not matter what order the input values have.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the worst-case time for Bubble Sort (as the algorithm is
+presented in this module) to sort an array of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+records?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^2)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mi>n</mi></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^n)</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Bubble Sort’s number of comparisons depend on the particular
+order of the input array?</li>
+<li>No, it does not.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the running time of Bubble Sort when the input is an array
+where all record values are equal?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^2)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log n)</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Each comparison test in the inner for loop will fail because the
+value at position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+is never less than the value at position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i-1</annotation></semantics></math>.</li>
+<li>However, this observation does not affect the number of comparisons
+to be made, it only affects the number of swaps.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the running time for Bubble Sort when the input array has
+values that are in reverse sort order?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^2)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log n)</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>On each iteration, the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>th
+record will have to move to the start of the array.</li>
+<li>This is the worst case.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the running time of Bubble Sort (as the algorithm is
+presented in this module) when the input is an array that has already
+been sorted?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^2)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log n)</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Each test in the inner for loop will fail because the value at
+position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+is never less than the value at position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i-1</annotation></semantics></math>.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>When is Bubble Sort a good choice for sorting an array?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />There is no situation
+where Bubble Sort is the best choice over all of the others in this
+chapter.</label></li>
+<li><label><input type="checkbox" />Each component of the array requires
+a large amount of memory.</label></li>
+<li><label><input type="checkbox" />Each component of the array requires
+a small amount of memory.</label></li>
+<li><label><input type="checkbox" />The array has only a few items out
+of place.</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Bubble Sort’s cost vary with how much the input is out of
+order?</li>
+<li>Bubble Sort always does a lot of work, as compared to other sorting
+algorithms.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In the worst case, the total number of comparisons for Bubble Sort is
+closest to:</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>n</mi><mn>2</mn></msup><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n^2/2</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>n</mi><mn>2</mn></msup><annotation encoding="application/x-tex">n^2</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n/2</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mn>4</mn></mrow><annotation encoding="application/x-tex">n/4</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">2n^2</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>n</mi></mrow><annotation encoding="application/x-tex">2n</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>n</mi><mn>2</mn></msup><mi>/</mi><mn>4</mn></mrow><annotation encoding="application/x-tex">n^2/4</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Bubble Sort’s implementation is made up of two nested for
+loops.</li>
+<li>The outer for loop is executed
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>
+times.</li>
+<li>The inner for loop is executed
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+times.</li>
+<li>The total cost is the sum of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>’s
+for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+goes from 1 to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
 </section>
 </main>

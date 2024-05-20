@@ -251,15 +251,221 @@ lists of 10 records. Even for small arrays, optimized Quicksort performs
 well because it does one partition step before calling Insertion Sort.
 In general, optimizing the various algorithms makes a noticeable
 improvement for larger array sizes.</p>
+<section id="review-questions-comparison-of-sorting-algorithms"
+class="level3" data-number="2.12.1">
+<h3 data-number="2.12.1"><span
+class="header-section-number">2.12.1</span> Review questions: Comparison
+of sorting algorithms</h3>
 <p>Here are a few multiple choice questions that ask you to compare the
 sorting algorithms that we learned about in this chapter.</p>
-<p>
-<div id="SortAlgCompSumm" class="embedContainer">
-<iframe id="SortAlgCompSumm_iframe" aria-label="SortAlgCompSumm" src="../interactive/Sorting/SortAlgCompSumm.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
+<div class="quiz">
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>Selection Sort is generally faster than the Bubble Sort on the same
+input.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Selection Sort can be viewed as an optimization of Bubble Sort.</li>
+<li>On each pass, Selection Sort just picks out the next record, while
+Bubble Sort has to do a lot of swapping.</li>
+</ul>
 </div>
-</p>
+</div>
+<div class="question">
+<p>How are Selection Sort and Quicksort similar?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />They can both swap
+non-adjacent records</label></li>
+<li><label><input type="checkbox" />They are both
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>
+sorts</label></li>
+<li><label><input type="checkbox" />They both use
+divide-and-conquer</label></li>
+<li><label><input type="checkbox" />Both have quadratic average case
+time</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Selection Sort use divide-and-conquer? No.</li>
+<li>Can Selection Sort run in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>
+time? No.</li>
+<li>How long does Quicksort need in the average case?</li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math></li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>(For the implementations as presented in this chapter:) Which of the
+following sorts is not stable?</p>
+<ul>
+<li><label><input type="checkbox" checked="" />Quicksort</label></li>
+<li>[ ] Insertion Sort</li>
+<li>[ ] Mergesort</li>
+</ul>
+<div class="hints">
+<ul>
+<li>Which of the mentioned algorithms will not maintain the relative
+order of records with equal keys?</li>
+</ul>
+</div>
+</div>
+<!-- 
+:::::::::: question ::::::::::
+Which sorting algorithm makes use of Insertion Sort's best case behavior?
+
+- [x] Shellsort
+- [ ] Heapsort
+- [ ] Radix Sort
+- [ ] Mergesort
+
+::: hints
+- Which algorithm works by performing a series of Insertion Sorts on carefully selected sublists?
+:::
+::::::::::::::::::::::::::::::
+-->
+<div class="question">
+<p>What do we call the property of a sorting algorithm that gaurantees
+that records with the same key value occur in the same order in the
+sorted list as in the original, unsorted list?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Stable</label></li>
+<li><label><input type="checkbox" />Consistent</label></li>
+<li><label><input type="checkbox" />External</label></li>
+<li><label><input type="checkbox" />Linear</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>“Linear” refers to an algorithm cost.</li>
+<li>“External” refers to an algorithm to sort records on disk.</li>
+<li>“Consistent” is not standard terminology related to sorting.</li>
+<li>“Stable” sorting algorithms preserve the relative order of
+equal-valued keys.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A person sorting a hand of cards might reasonably use which sorting
+algorithm?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Insertion
+Sort</label></li>
+<li><label><input type="checkbox" />Bubble Sort</label></li>
+<li><label><input type="checkbox" />Quicksort</label></li>
+<li><label><input type="checkbox" />Mergesort</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Think about each algorithm in turn, and imagine yourself trying to
+use it for sorting a hand of cards.</li>
+<li>If you pick up the first two cards you might put them in order, then
+pick up the next card, and so on.</li>
+<li>Or you might pick up all the cards to start, but then still sort
+them from left to right.</li>
+<li>What sorting algorithm resembles this procedure?</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Consider what happens if someone accidently calls sort on a file that
+is already sorted. Which of the following sorting methods will be the
+most efficient if the input is already in sorted order?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Insertion
+Sort</label></li>
+<li><label><input type="checkbox" />Bubble Sort</label></li>
+<li><label><input type="checkbox" />Selection Sort</label></li>
+<li><label><input type="checkbox" />Mergesort</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Which algorithm will make an iteration “quit early” depending on the
+values seen during comparisons?</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which of the following sorting methods will be best if the number of
+swaps done is the only measure of efficiency?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Selection
+Sort</label></li>
+<li><label><input type="checkbox" />Bubble Sort</label></li>
+<li><label><input type="checkbox" />Insertion Sort</label></li>
+<li><label><input type="checkbox" />Mergesort</label></li>
+<li><label><input type="checkbox" />Quicksort</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>This sorting algorithms finds the minimum value, swaps it with the
+value in the first position, and repeats these steps for the remainder
+of the list.</li>
+<li>It does no more than
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+swaps.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which of the following sorting algorithms has a worst case complexity
+of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log n)</annotation></semantics></math>?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Merge Sort</label></li>
+<li><label><input type="checkbox" />Bubble Sort</label></li>
+<li><label><input type="checkbox" />Selection Sort</label></li>
+<li><label><input type="checkbox" />Insertion Sort</label></li>
+<li><label><input type="checkbox" />Quicksort</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Bubble Sort, Insertion Sort, and Selection Sort are referred to as
+“quadratic sorts” because of their worst-case time cost.</li>
+<li>Quicksort’s worst-case behaviour comes when the pivot is chosen
+badly.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>When Mergssort merges two sorted lists of sizes
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+into a sorted list of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>+</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">m+n</annotation></semantics></math>,
+it requires how many comparisons in the worst case?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>+</mo><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">m+n-1</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>+</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">m+n</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n+1</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>m</mi><mo>+</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(\log m + \log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>m</mi><mo>+</mo><mo>log</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(\log m + \log n + 1)</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Merging compares two records, and selects the smaller.</li>
+<li>Each record gets selected once, and each selection requires a
+comparison.</li>
+<li>However, the last record does not need a comparison to be selected
+because there is no longer anything to compare it to.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
 </section>
 </main>
 
