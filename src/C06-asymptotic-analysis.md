@@ -225,7 +225,3 @@ that possible.
 <inlineav id="UpperBoundCON" src="AlgAnal/UpperBoundCON.js" name="Upper Bounds visualization" links="AlgAnal/UpperBoundCON.css" height="500px"/>
 
 <inlineav id="SimpleCostsCON" src="AlgAnal/SimpleCostsCON.js" name="AlgAnal/SimpleCostsCON" links="AlgAnal/SimpleCostsCON.css" height="900px" static/>
-
-### Practice Questions
-
-<avembed id="UpperBoundsSumm" src="AlgAnal/UpperBoundsSumm.html" type="ka" name="Asymptotic Analysis and Upper Bounds Exercise"/>
