@@ -124,4 +124,3 @@ computer, an algorithm with a slower growth rate provides a greater
 benefit in terms of larger problem size that can run in a certain time
 on the new computer.
 
-<avembed id="FasterCorASumm" src="AlgAnal/FasterCorASumm.html" type="ka" name="Faster Computer or Faster Algorithm Exercise"/>
