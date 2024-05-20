@@ -5,7 +5,7 @@ OUT=docs/html
 
 rm -rf $OUT
 echo "Running pandoc"
-time pandoc --defaults=pandoc-defaults.yaml --output=$OUT "${SOURCES[@]}"
+time pandoc -t chunkedhtml --defaults=pandoc-defaults.yaml --output=$OUT "${SOURCES[@]}"
 echo
 
 echo "Postprocessing output"

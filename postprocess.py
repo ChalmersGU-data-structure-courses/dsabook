@@ -93,7 +93,15 @@ def convert_interactive(s: str) -> str:
     tmpl = templates[tag]
     return tmpl.format(**attrs)
 
+import xml.dom.minidom as dom
 
+# Apperently the getElementById method doesn't work...
+def find_element(document, id):
+    for e in document.getElementsByTagName("*"):
+        if e.getAttribute("id") == id:
+            return e
+    return None
+    
 for f in HTML.glob("*.html"):
     scripts.clear()
     links.clear()
@@ -105,4 +113,57 @@ for f in HTML.glob("*.html"):
     for ln in links:
         tag = f'<link href="../interactive/{ln}" rel="stylesheet" type="text/css"/>'
         s = re.sub(r"</head>", f'{tag}\n</head>', s)
+    
+    document = dom.parseString(s)
+    
+    # Find the 'TOC' id
+    toc = find_element(document, 'TOC')
+    
+    # Find the body
+    body = document.getElementsByTagName("body")[0]
+    
+    if toc is not None and body is not None:
+        # Find the section element
+        section = document.getElementsByTagName("section")
+        
+        if not section:
+            continue
+        
+        section = section[0]
+        
+        # Encapsulate the TOC in a div
+        div = document.createElement("div")
+        
+        # Append the TOC to the div
+        div.appendChild(toc)
+        
+        # Insert the div in the parent
+        body.insertBefore(div, section)
+        
+        # Add a button to toggle the TOC
+        button = document.createElement("button")
+        
+        button.setAttribute("id", "toggle-toc")
+        button.setAttribute("style", "padding: 0.5em; margin: 0.5em; width: 100%; background-color: #f0f0f0; border: 1px solid #ccc;")
+        button.setAttribute("onclick", 
+            """
+            var toc = document.getElementById("TOC");
+            toc.style.display = toc.style.display == "none" ? "block" : "none";
+            
+            // Change the button text
+            var text = this.firstChild;
+            text.nodeValue = text.nodeValue == "Show Table of Contents" ? "Hide Table of Contents" : "Show Table of Contents";
+            """
+        )
+        
+        # Make the TOC hidden by default
+        toc.setAttribute("style", "display: none;")
+        
+        button.appendChild(document.createTextNode("Show Table of Contents"))
+        
+        body.insertBefore(button, div)
+    
+    s = document.toxml()
+    
     open(f, "w").write(s)
+
