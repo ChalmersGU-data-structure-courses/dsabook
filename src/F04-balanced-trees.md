@@ -50,5 +50,5 @@ This is a little like the idea of path compression used by the
 One example of such a compromise is called the
 [splay tree](#the-splay-tree-optional).
 
-The [Red-Black Tree] is also a binary tree, but it uses a different balancing
+The [red-black tree](#the-red-black-tree-optional) is also a binary tree, but it uses a different balancing
 mechanism.
