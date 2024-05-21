@@ -108,7 +108,3 @@ order in which the node and its children are visited, as appropriate.
 ### Inorder Traversal Practice
 
 <avembed id="btTravInorderPRO" src="Binary/btTravInorderPRO.html" type="pe" name="Binary Tree Inorder Traversal Exercise"/>
-
-### Summary Questions
-
-<avembed id="TravSumm" src="Binary/TravSumm.html" type="ka" name="Tree Traversal Summary Questions"/>

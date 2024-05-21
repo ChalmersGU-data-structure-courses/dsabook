@@ -275,16 +275,170 @@ Your browser does not support iframes.
 </div>
 </p>
 </section>
-<section id="summary-questions-1" class="level3" data-number="5.5.8">
+<section id="practice-questions-binary-tree-traversals" class="level3"
+data-number="5.5.8">
 <h3 data-number="5.5.8"><span class="header-section-number">5.5.8</span>
-Summary Questions</h3>
-<p>
-<div id="TravSumm" class="embedContainer">
-<iframe id="TravSumm_iframe" aria-label="TravSumm" src="../interactive/Binary/TravSumm.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
+Practice questions: Binary tree traversals</h3>
+<div class="quiz">
+<div class="question">
+<p>Visiting each element in a tree is known as:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />“Traversing”</label></li>
+<li><label><input type="checkbox" />“Sorting”</label></li>
+<li><label><input type="checkbox" />“Merging”</label></li>
+<li><label><input type="checkbox" />“Inserting”</label></li>
+<li><label><input type="checkbox" />“Enumerating”</label></li>
+</ul>
+<div class="hints">
+
 </div>
-</p>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>If you are given the order of the nodes as visited by a
+<em>postorder</em> traversal and the order of the nodes as visited by an
+<em>inorder</em> traversal, do you have enough information to
+reconstruct the original tree? Assume that the nodes all have unique
+values.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Build yourself a small example tree of about 6 or 7 nodes and see
+what happens.</li>
+<li>Consider the example where the root has value A. In the postorder
+traversal, the left subtree is printed, then the right subtree, then A.
+In the inorder traversal, the left subtree comes first, then the A, then
+the right subtree.</li>
+<li>From this information, we always know the root, the contents of its
+left subtree, and the contents of its right subtree.</li>
+<li>We can apply this concept recursively to reconstruct the left
+subtree and the right subtree.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>If you are given the order of the nodes as visited by a
+<em>preorder</em> traversal and the order of the nodes as visited by an
+<em>inorder</em> traversal, do you have enough information to
+reconstruct the original tree? Assume that the nodes all have unique
+values.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Build yourself a small example tree of about 6 or 7 nodes and see
+what happens.</li>
+<li>Consider the example where the root has value A. In the preorder
+traversal, that A is printed first. In the inorder traversal, the left
+subtree comes first, then the A, then the right subtree.</li>
+<li>From this information, we always know the root, the contents of its
+left subtree, and the contents of its right subtree.</li>
+<li>We can apply this concept recursively to reconstruct the left
+subtree and the right subtree.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>If you are given the order of the nodes as visited by a
+<em>preorder</em> traversal and the order of the nodes as visited by a
+<em>postorder</em> traversal, do you have enough information to
+reconstruct the original tree? Assume that the nodes all have unique
+values.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Consider this example: The preorder traversal prints ABC, and the
+postorder traversal prints CBA. Can you determine the original tree from
+this information?</li>
+<li>In general, if a node has only one subtree, then the preorder and
+postorder traversals do not give you enough information to determine
+which side the subtree goes on.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>When you print out the nodes of binary tree, the <em>leaf nodes</em>
+appear in the same relative order for the preorder, inorder, and
+postorder traversals.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Take a small binary tree with three or four leaf nodes and see what
+happens with the traversals.</li>
+<li>Since all 3 traversals print the left subtree before the right
+subtree, the leaves have to get printed in the same order.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+nodes in a binary tree can be visited in:</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math>
+time</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(1)</annotation></semantics></math>
+time</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math>
+time</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log n)</annotation></semantics></math>
+time</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^2)</annotation></semantics></math>
+time</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>This would be done by a traversal. How much work does a traversal do
+at each node?</li>
+<li>Each node is visted once, with constant time spent at each.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Why does function <code>preorder2()</code> presented in the Traversal
+module make only half as many recursive calls as function
+<code>preorder()</code>?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Because half of the
+pointers are null</label></li>
+<li><label><input type="checkbox" />Because there are half as many
+nodes</label></li>
+<li><label><input type="checkbox" />Because there are half as many leaf
+nodes</label></li>
+<li><label><input type="checkbox" />Because only internal nodes get
+called</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>All nodes will eventually get called</li>
+<li>The number of nodes in the tree does not change based on the
+algorithm used to traverse it.</li>
+<li>The Full Binary Tree Theorem tells us that roughly half of all
+pointers in a binary tree are null. No recursive call is made for these
+pointers by <code>preorder2</code>.</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
 </section>
 </main>
