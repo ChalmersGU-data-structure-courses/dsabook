@@ -123,10 +123,12 @@ href="10-glossary.html#collision-resolution-policy" class="term"
 title="In hashing, the process of resolving a collision. Specifically in a closed hash system, this is the process of finding the proper position in a hash table that contains the desired record if the hash function did not return the correct position for that record due to a collision with another record.">collision
 resolution policy</a> that can potentially use any slot in the hash
 table.</p>
-<p>Compared to [separate chaining], we will now have room for exactly
-one entry in each table cell. If we want to implement a
-<strong>HashMap</strong> (not a HashSet), we then need to be able to put
-both a key and a value in the same table cell.</p>
+<p>Compared to <a
+href="8.3-separate-chaining.html#separate-chaining">separate
+chaining</a>, we will now have room for exactly one entry in each table
+cell. If we want to implement a <strong>HashMap</strong> (not a
+HashSet), we then need to be able to put both a key and a value in the
+same table cell.</p>
 <p>This can be done in two ways: either one array of key-value paris, or
 two arrays of the same length – one for the keys and another for the
 values. Here we will use the second approach.</p>

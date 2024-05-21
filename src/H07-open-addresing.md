@@ -7,7 +7,7 @@ We now turn to the most commonly used form of hashing:
 [open addressing]{.term} (also called [closed hashing](#closed-hash-system){.term})
 with no bucketing, and a [collision resolution policy]{.term} that can potentially use any slot in the hash table.
 
-Compared to [separate chaining], 
+Compared to [separate chaining](#separate-chaining), 
 we will now have room for exactly one entry in each table 
 cell. If we want to implement a **HashMap** (not a HashSet), we then
 need to be able to put both a key and a value in the same table cell.
