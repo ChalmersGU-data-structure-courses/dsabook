@@ -68,5 +68,3 @@ $n=1$.
 :::
 
 <inlineav id="MisunderstandingsGraphCON" src="AlgAnal/MisunderstandingsGraphCON.js" name="Example's graph Visualization" links="AlgAnal/MisunderstandingsGraphCON.css"/>
-
-<avembed id="MisSumm" src="AlgAnal/MisSumm.html" type="ka" name="Common Misconceptions Exercise"/>
