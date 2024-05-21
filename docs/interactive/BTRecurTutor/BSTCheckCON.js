@@ -18,8 +18,8 @@ $(document).ready(function() {
   rt.right().left().left(""); // the covered leaf node
 
   //adding the leaf node "20 to 40"
-  av.label("20 to 40", {visible: true, left: 325, top: 147});
-  av.g.ellipse(350, 173, 35, 16, cirOpt);
+  av.label("20 to 40", {visible: true, left: 315, top: 140});
+  av.g.ellipse(340, 166, 35, 16, cirOpt);
 
   bt.layout();
   av.displayInit();
