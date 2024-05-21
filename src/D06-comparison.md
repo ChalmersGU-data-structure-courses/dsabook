@@ -93,10 +93,6 @@ But these advanced list iterators are not part of this course, and in
 fact there are not many algorithms where list iterators are particularly
 useful.
 
-### Practice Questions
-
-<avembed id="LinkedList-Summary-QUIZ" src="ChalmersGU/LinkedList-Summary-QUIZ.html" type="ka" name="Linked List Summary Exercise"/>
-
 ### How are lists implemented in the standard libraries?
 
 All serious languages have dynamic list implementations. Here are how

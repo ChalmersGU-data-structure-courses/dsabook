@@ -319,6 +319,178 @@ href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Lis
 which is part of Java’s standard <a
 href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/LinkedList.html">LinkedList</a>.</p>
 </section>
+<section id="practice-questions-linked-lists" class="level3"
+data-number="4.4.6">
+<h3 data-number="4.4.6"><span class="header-section-number">4.4.6</span>
+Practice questions: Linked lists</h3>
+<div class="quiz">
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>The physical order in memory for the nodes of a linked list is the
+same as the order in which the nodes appear in the list.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>When you create a new object, you have no control over where it is
+in memory.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>In a singly linked list implementation, to access the predecessor of
+the current node we must start at the first node in the list.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>In a singly linked list we are unable to move directly backwards in
+the list.</li>
+<li>So, the only alternative is to start at the front and move down to
+the previous node.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In a linked list, the successive elements in the list:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Need not occupy
+contiguous space in memory</label></li>
+<li><label><input type="checkbox" />Must occupy contiguous space in
+memory</label></li>
+<li><label><input type="checkbox" />Must not occupy contiguous space in
+memory</label></li>
+<li><label><input type="checkbox" />None of these</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Unlike an array-based list, the linked list is created by linking
+together separate objects.</li>
+<li>Those objects can be created at any time, and you don’t control
+where they are in memory when they are made.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>To find an element with value
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
+in a linked list with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+nodes requires how many nodes to be visited in the worst case?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+nodes</label></li>
+<li><label><input type="checkbox" />Two nodes</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>log</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n</annotation></semantics></math>
+nodes</label></li>
+<li><label><input type="checkbox" />One node</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>n</mi><mn>2</mn></msup><annotation encoding="application/x-tex">n^2</annotation></semantics></math>
+nodes</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>How many nodes might we have to visit to find the one that we are
+looking for?</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Given a linked list implementation, inserting a new element to
+arbitrary position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+takes how long in the average case?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(i)</annotation></semantics></math>
+time</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math>
+time</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(1)</annotation></semantics></math>
+time</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math>
+time</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log n)</annotation></semantics></math>
+time</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>We can’t insert until we reach the proper position.</li>
+<li>How long does it take to reach position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+in a linked list?</li>
+<li>Once we get there, it takes only a couple of assignments to put the
+new node in place.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Given a linked list implementation, deleting the element at arbitrary
+position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+takes how long in the average case?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(i)</annotation></semantics></math>
+time</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(1)</annotation></semantics></math>
+time</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math>
+time</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math>
+time</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log n)</annotation></semantics></math>
+time</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>You cannot delete a node until you get to it.</li>
+<li>Starting from the front, how long does it take to get to the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>th
+node?</li>
+<li>Once you do reach the node, then you can remove it in constant
+time.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>To access the node at position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+in a singly-linked list</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />requires that all its
+predecessors be visited</label></li>
+<li><label><input type="checkbox" />takes one step</label></li>
+<li><label><input type="checkbox" />takes two steps</label></li>
+<li><label><input type="checkbox" />requires that all its successors be
+visited</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>How can we reach the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>th
+position?</li>
+<li>We have to work from the front.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
 </section>
 </main>
 
