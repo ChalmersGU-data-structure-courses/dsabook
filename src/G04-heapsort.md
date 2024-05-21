@@ -125,4 +125,3 @@ the same key value. This represents the best case for Heapsort. This is
 because removing the smallest value requires only constant time, since
 the value swapped to the top is never pushed down the heap.
 
-<avembed id="HeapsortSumm" src="Sorting/HeapsortSumm.html" type="ka" name="Heapsort Summary Exercise"/>
