@@ -207,7 +207,7 @@ figure {
 
 /* Highlighted blocks */
 
-.topic, .figure, div.embedContainer, div.jsavcontainer {
+.topic, .figure, .alert, div.embedContainer, div.jsavcontainer {
     border-radius: var(--border-radius);
     border: 1px solid var(--border-color);
     margin: var(--block-margin) 0;
@@ -216,6 +216,10 @@ figure {
 
 .figure, .topic, div.embedContainer, div.jsavcontainer {
     background-color: var(--box-bgcolor);
+}
+
+.alert {
+    background-color: var(--alert-bgcolor);
 }
 
 .topic .jsavcontainer {

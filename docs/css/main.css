@@ -7,6 +7,7 @@
     --border-radius: 1rem;
     --block-margin: 1rem;
 
+    --alert-bgcolor: Yellow;
     --body-bgcolor: #FFFEFA;
     --border-color: Sienna;
     --box-bgcolor: FloralWhite;
@@ -20,6 +21,7 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
+        --alert-bgcolor: FireBrick;
         --body-bgcolor: Black;
         --border-color: SandyBrown;
         --box-bgcolor: #201810;
