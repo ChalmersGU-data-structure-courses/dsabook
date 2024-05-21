@@ -307,28 +307,8 @@ href="7.2-heaps-and-priority-queues.html#heaps-and-priority-queues">heap</a>
 data structure is an example of a complete binary tree. The <a
 href="7.4-huffman-coding-trees-optional.html#huffman-coding-trees-optional">Huffman
 coding tree</a> is an example of a full binary tree.</p>
-<p>
-<div id="DefSumm" class="embedContainer">
-<iframe id="DefSumm_iframe" aria-label="DefSumm" src="../interactive/Binary/DefSumm.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
-</div>
-</p>
-<section id="practice-questions" class="level3" data-number="5.1.1">
-<h3 data-number="5.1.1"><span class="header-section-number">5.1.1</span>
-Practice Questions</h3>
-<p>
-<div id="Treeprobs" class="embedContainer">
-<iframe id="Treeprobs_iframe" aria-label="Treeprobs" src="../interactive/Binary/Treeprobs.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
-</div>
-</p>
-</section>
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document"
-role="doc-endnotes">
-<hr />
+<aside id="footnotes" class="footnotes footnotes-end-of-block"
+role="doc-footnote">
 <ol>
 <li id="fn1"><p>While these definitions for full and complete binary
 tree are the ones most commonly used, they are not universal. Because
@@ -340,6 +320,217 @@ trees tend to be wider than full binary trees because each level of a
 complete binary tree is as wide as possible.<a href="#fnref1"
 class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
+</aside>
+<section id="practice-questions-binary-tree-definition" class="level3"
+data-number="5.1.1">
+<h3 data-number="5.1.1"><span class="header-section-number">5.1.1</span>
+Practice questions: Binary tree definition</h3>
+<div class="quiz">
+<div class="question">
+<p>Which statement is false?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Every binary tree has at
+least one node</label></li>
+<li><label><input type="checkbox" />Every non-empty binary tree has
+exactly one root node</label></li>
+<li><label><input type="checkbox" />Every node in a binary tree has
+exactly two children</label></li>
+<li><label><input type="checkbox" />Every non-root node in a binary tree
+has exactly one parent</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Look carefully at the definition for a binary tree.</li>
+<li>It states that every binary tree is either empty, or it has a root
+node and two binary trees as children.</li>
+<li>So, every binary tree node has two children, but not every binary
+tree has a node.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the minimum number of nodes in a complete binary tree with
+height 3?</p>
+<p><input type="text" value="8"/></p>
+<div class="hints">
+<ul>
+<li>Start filling in the tree level by level.</li>
+<li>Stop when you draw the first node at level 3.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Select the one true statement.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />None of the
+alternatives</label></li>
+<li><label><input type="checkbox" />Every binary tree is either complete
+or full</label></li>
+<li><label><input type="checkbox" />Every complete binary tree is also a
+full binary tree</label></li>
+<li><label><input type="checkbox" />Every full binary tree is also a
+complete binary tree</label></li>
+<li><label><input type="checkbox" />No binary tree is both complete and
+full</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Not every binary tree is either complete or full.</li>
+<li>Not every complete binary tree is full.</li>
+<li>Not every full binary tree is complete.</li>
+<li>Some complete trees are full.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the minimum number of nodes in a full binary tree with height
+3?</p>
+<p><input type="text" value="7"/></p>
+<div class="hints">
+<ul>
+<li>First, draw a vertical chain of 4 nodes. This is a tree with height
+3.</li>
+<li>Next, add nodes to make the tree be full.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Suppose T is a binary tree with 14 nodes. What is the minimum
+possible height of T?</p>
+<p><input type="text" value="3"/></p>
+<div class="hints">
+<ul>
+<li>Try drawing this as a complete treee.</li>
+<li>That is, build a tree of 14 nodes by filling it in level by
+level.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the minimum number of internal nodes in a binary tree with 8
+nodes?</p>
+<p><input type="text" value="4"/></p>
+<div class="hints">
+<ul>
+<li>Try drawing some trees. Your best bet is to try and make it
+full.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="binary-tree-exercises" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2"><span class="header-section-number">5.1.2</span>
+Binary tree exercises</h3>
+<div class="quiz">
+<figure>
+<img src="images/BintreeExercise.png"
+alt="Here’s an example binary tree" />
+<figcaption aria-hidden="true">Here’s an example binary
+tree</figcaption>
+</figure>
+<div class="question">
+<p>How many internal nodes does this tree have?</p>
+<p><input type="text" value="5"/></p>
+<div class="hints">
+<ul>
+<li>Anything that is <em>not</em> a leaf node is an internal node.
+Internal nodes might have 1 or 2 children.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the height of this tree?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />0</label></li>
+<li><label><input type="checkbox" />1</label></li>
+<li><label><input type="checkbox" />2</label></li>
+<li><label><input type="checkbox" checked="" />3</label></li>
+<li><label><input type="checkbox" />4</label></li>
+<li><label><input type="checkbox" />5</label></li>
+<li><label><input type="checkbox" />9</label></li>
+<li><label><input type="checkbox" />Trees have depth – they do not have
+height</label></li>
+<li><label><input type="checkbox" />None of the above</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Count the number of steps to the deepest node.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>How many leaf nodes does this tree have?</p>
+<p><input type="text" value="4"/></p>
+<div class="hints">
+<ul>
+<li>Anything that has <em>no</em> children is a leaf node.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>How many nodes in the tree have at least one sibling?</p>
+<p><input type="text" value="6"/></p>
+<div class="hints">
+<ul>
+<li>Siblings must have the same parent. If a node has two children, then
+each such child has a sibling.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>How many descendents does the root of this tree have?</p>
+<p><input type="text" value="8"/></p>
+<div class="hints">
+<ul>
+<li>Every node <em>except</em> the root is a descendent.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the depth of this tree?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />0</label></li>
+<li><label><input type="checkbox" />1</label></li>
+<li><label><input type="checkbox" />2</label></li>
+<li><label><input type="checkbox" />3</label></li>
+<li><label><input type="checkbox" />4</label></li>
+<li><label><input type="checkbox" />5</label></li>
+<li><label><input type="checkbox" />9</label></li>
+<li><label><input type="checkbox" checked="" />Trees have height – they
+do not have depth</label></li>
+<li><label><input type="checkbox" />None of the above</label>
+</ul></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Nodes have depth.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which statement is correct?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />The tree is neither full
+nor complete</label></li>
+<li><label><input type="checkbox" />The tree is complete but not
+full</label></li>
+<li><label><input type="checkbox" />The tree is full but not
+complete</label></li>
+<li><label><input type="checkbox" />The tree is full and
+complete</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Do any internal nodes have only one child? If so, the tree is
+<em>not</em> full.</li>
+<li>A complete tree fills in nodes level by level, with the bottom level
+filled in from left to right.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
 </section>
 </main>
 

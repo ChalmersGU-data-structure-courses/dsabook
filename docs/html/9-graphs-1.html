@@ -160,6 +160,17 @@ and the number of edges is written
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">|</mo><mi>𝐄</mi><mo stretchy="true" form="postfix">|</mo></mrow><annotation encoding="application/x-tex">|\mathbf{E}|</annotation></semantics></math>
 can range from zero to a maximum of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow><mo stretchy="true" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="true" form="postfix">|</mo></mrow><mn>2</mn></msup><mo>−</mo><mrow><mo stretchy="true" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="true" form="postfix">|</mo></mrow></mrow><annotation encoding="application/x-tex">|\mathbf{V}|^2 - |\mathbf{V}|</annotation></semantics></math>.</p>
+<aside id="footnotes" class="footnotes footnotes-end-of-block"
+role="doc-footnote">
+<ol>
+<li id="fn1"><p>Some graph applications require that a given pair of
+vertices can have multiple or parallel edges connecting them, or that a
+vertex can have an edge to itself. However, the applications discussed
+here do not require either of these special cases. To simplify our graph
+API, we will assume that there are no duplicate edges.<a href="#fnref1"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</aside>
 <p>A graph whose edges are not directed is called an <a
 href="10-glossary.html#undirected-graph" class="term"
 title="A graph whose edges do not have a direction.">undirected
@@ -341,18 +352,6 @@ tree</a> is a connected, undirected graph with no simple cycles. An
 equivalent definition is that a free tree is connected and has
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="true" form="postfix">|</mo></mrow><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">|\mathbf{V}| - 1</annotation></semantics></math>
 edges.</p>
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document"
-role="doc-endnotes">
-<hr />
-<ol>
-<li id="fn1"><p>Some graph applications require that a given pair of
-vertices can have multiple or parallel edges connecting them, or that a
-vertex can have an edge to itself. However, the applications discussed
-here do not require either of these special cases. To simplify our graph
-API, we will assume that there are no duplicate edges.<a href="#fnref1"
-class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
 </section>
 </main>
 

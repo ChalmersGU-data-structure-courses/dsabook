@@ -352,6 +352,15 @@ tree with equal values to the right of the node now containing
 Selecting the greatest value from the left subtree does not have a
 similar problem, because it does not violate the Binary Search Tree
 Property if equal values appear in the left subtree.</p>
+<aside id="footnotes" class="footnotes footnotes-end-of-block"
+role="doc-footnote">
+<ol>
+<li id="fn1"><p>Alternatively, if we prefer to store duplicate values in
+the right subtree, then we must replace a deleted node with the least
+value from its right subtree.<a href="#fnref1" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+</ol>
+</aside>
 <p>The code for removal is shown here.</p>
 <div class="sourceCode" id="cb5"><pre
 class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BSTMap:</span>
@@ -463,16 +472,6 @@ Your browser does not support iframes.
 </div>
 </p>
 </section>
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document"
-role="doc-endnotes">
-<hr />
-<ol>
-<li id="fn1"><p>Alternatively, if we prefer to store duplicate values in
-the right subtree, then we must replace a deleted node with the least
-value from its right subtree.<a href="#fnref1" class="footnote-back"
-role="doc-backlink">↩︎</a></p></li>
-</ol>
 </section>
 </main>
 
