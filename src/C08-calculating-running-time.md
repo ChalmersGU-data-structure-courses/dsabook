@@ -255,7 +255,3 @@ between the advantage of binary search during search and the
 disadvantage related to maintaining a sorted array. Only in the context
 of the complete problem to be solved can we know whether the advantage
 outweighs the disadvantage.
-
-### Summary Exercise
-
-<avembed id="AnalProgramSumm" src="AlgAnal/AnalProgramSumm.html" type="ka" name="Program Code Analysis Exercise"/>
