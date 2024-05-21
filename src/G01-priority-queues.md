@@ -45,7 +45,8 @@ turn it into a maximum priority queue.
 
 Now let's look at a couple of applications of priority queues.
 
-### Sorting
+::: topic
+#### Example: Sorting {-}
 
 We can use a priority queue to make an efficient sorting algorithm. To
 sort a list of items:
@@ -68,8 +69,11 @@ of size $n$, the algorithm calls `add` $n$ times and `removeMin` $n$
 times. In a binary heap, `add` and `removeMin` both take $O(\log n)$
 time. Therefore, the total runtime is $O(n \log n)$ -- as efficient as
 any of the sorting algorithms we have seen so far!
+:::
 
-### Finding the top 100 items
+
+::: topic
+#### Example: Finding the top 100 items {-}
 
 Suppose that we are running a bank. Every day, every transaction that
 occurs at the bank is recorded in a list. When the bank closes at the
@@ -141,3 +145,4 @@ What is the complexity of `add`? Well, in fact it takes constant time,
 because the priority queue has a constant maximum size of 100 elements.
 If we generalize this problem to keeping track of the top $k$
 transactions, then the complexity of `add` is $O(\log k)$.
+:::
