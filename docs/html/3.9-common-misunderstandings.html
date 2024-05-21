@@ -207,13 +207,125 @@ best case occurs when
 <div class="jsavcanvas"></div>
 </div>
 </p>
-<p>
-<div id="MisSumm" class="embedContainer">
-<iframe id="MisSumm_iframe" aria-label="MisSumm" src="../interactive/AlgAnal/MisSumm.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
+<section id="practice-questions-common-misunderstandings" class="level3"
+data-number="3.9.1">
+<h3 data-number="3.9.1"><span class="header-section-number">3.9.1</span>
+Practice questions: Common misunderstandings</h3>
+<div class="quiz">
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>For all algorithms, if we completely understand the running time
+analysis, then the upper bound and lower bound will be the same.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Upper and lower bounds are only different when we do not completely
+understand the cost for the algorithm.</li>
+</ul>
 </div>
-</p>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>The upper bound and lower bounds of the sequential search algorithm
+is in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Omega(n)</annotation></semantics></math>
+respectively.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Is this statement complete?</li>
+<li>To make this statement correct, you need to add in which case you
+are measuring the lower and upper bounds.</li>
+<li>This would be true for the worst case, but not the best case.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>The worst case for sequential search occurs when the last element of
+the array is the value being searched for.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Worst case cost refers to the most expensive problem instance AS THE
+INPUT GETS BIG.</li>
+<li>Since, for any given array (regardless of size), the most expensive
+problem instance occurs when the search value is in the last position of
+the array, this is indeed the worst case.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>The lower bound for the cost of sequential search is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Omega(1)</annotation></semantics></math>
+since this is the running time of the algorithm in the best case.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Upper/lower bounds define the growth rate in a particular situation
+(such as worst or best case).</li>
+<li>So the statement is badly worded.</li>
+<li>Proper wording: The lower bound for the cost of sequential search in
+the best case is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Omega(1)</annotation></semantics></math>.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>The best case for the sequential search algorithm occurs when the
+array has only a single element.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Best case cost refers to a best problem instance AS THE INPUT GETS
+BIG.</li>
+<li>So it makes no sense to talk about a growth rate or a best case of a
+fixed input size.</li>
+<li>The best case for sequential search occurs when the first element of
+the array (for whatever size) is the value being searched for.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>The worst case for the sequencial search algorithm occurs when the
+array size tends to infinity.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Worst case cost refers to the most expensive problem instance AS THE
+INPUT GETS BIG.</li>
+<li>That is, worst case does not refer to what the input size it.</li>
+<li>It refers to which input of a particular size is the worst one.</li>
+<li>The worst case for sequential search occurs when the last element of
+the array (for whatever size) is the value being searched for.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
 </section>
 </main>
 

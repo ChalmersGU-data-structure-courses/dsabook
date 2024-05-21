@@ -228,13 +228,175 @@ that is better only by a constant factor.</p>
 CAN do, while the lower bound for a problem is the least work that you
 MUST do. If those two are the same, then we say that we really
 understand our problem.</p>
-<p>
-<div id="AnalProblemSumm" class="embedContainer">
-<iframe id="AnalProblemSumm_iframe" aria-label="AnalProblemSumm" src="../interactive/AlgAnal/AnalProblemSumm.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
+<section id="practice-questions-analyzing-problems" class="level3"
+data-number="3.8.1">
+<h3 data-number="3.8.1"><span class="header-section-number">3.8.1</span>
+Practice questions: Analyzing problems</h3>
+<div class="quiz">
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>No algorithm for searching in an unsorted array can be worse than
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>
+since any algorithm must look at every value in the array in the worst
+case.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Do you think that sequential search is the only algorithm to search
+an unsorted array?</li>
+<li>Can’t someone write a worse algorithm, perhaps by adding unnecessary
+work?</li>
+</ul>
 </div>
-</p>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>The lower bound in the worst case for the problem of searching an
+unsorted array is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Omega(n)</annotation></semantics></math>
+because this is the worst case cost of the sequential search
+algorithm.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>While it is true that sequential search is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Omega(n)</annotation></semantics></math>
+in the worst case, this is not the whole story.</li>
+<li>Just because the best algorithm that we happen to know has a certain
+cost, that does not mean that there is no better algorithm.</li>
+<li>The reason that search in an unsorted array has a lower bound of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Omega(n)</annotation></semantics></math>
+is because we can prove that any algorithm MUST look at every element
+(in some order) in the worst case.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>The upper bound for a problem is defined as the upper bound cost for
+the worst algorithm that we know.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>There is no limit to how bad someone might make an algorithm. So
+this can’t make sense as a definition.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>The upper bound for a problem is defined as the upper bound cost for
+the best algorithm that we know.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>This comes straight from the definition for the upper bound of a
+problem.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>The lower bound for a problem is defined as the cost of the best
+algorithm that we know.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Just because we know some algorithm does not mean that there does
+not exist some better algorithm.</li>
+<li>The lower bound for a problem is the best that an algorithm COULD
+be, not just what we happen to know.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>The lower bound for a problem is defined as the least cost that any
+algorithm could reach.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>This comes straight from the definition for the lower bound of a
+problem.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>The worst case upper bound for sorting an array is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>
+since this is the cost of the best algorithm (in the worst case) that we
+know about.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>This comes straight from the definition for problem upper
+bound.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>The lower bound of the sorting problem is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>
+because we can prove that this is the best cost that any sorting
+algorithm could reach.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>This comes straight from the definition of a problem lower
+bound.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>The worst case lower bound for sorting an array is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>
+since this is the cost of the best algorithm (in the worst case) that we
+know about.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Just because we don’t know of a better algorithm does not mean that
+there is no better algorithm.</li>
+<li>While it is true that the lower bound for sorting is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>,
+this is not the right reason.</li>
+<li>The right reason is because we can prove that no algorithm can do
+better.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document"
 role="doc-endnotes">

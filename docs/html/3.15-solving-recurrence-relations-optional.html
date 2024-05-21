@@ -7,8 +7,7 @@
   <meta name="author" content="Cliff Shaffer" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
-  <title>DSABook – Solving Recurrence Relations (optional) (WORK IN
-PROGRESS)</title>
+  <title>DSABook – Solving Recurrence Relations (optional)</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -96,21 +95,25 @@ PROGRESS)</title>
 </nav>
 <nav class="sitenav">
 <div>
-<a href="3.16-summation-techniques-optional-work-in-progress.html" class="navbutton">&lt;&lt;</a>
-<a href="3.16-summation-techniques-optional-work-in-progress.html" accesskey="p" rel="previous">Summation Techniques (optional) (WORK IN PROGRESS)</a>
+<a href="3.14-summation-techniques-optional.html" class="navbutton">&lt;&lt;</a>
+<a href="3.14-summation-techniques-optional.html" accesskey="p" rel="previous">Summation Techniques (optional)</a>
 </div>
 <div>
-<a href="3.18-amortized-analysis-optional-work-in-progress.html" accesskey="n" rel="next">Amortized Analysis (optional) (WORK IN PROGRESS)</a>
-<a href="3.18-amortized-analysis-optional-work-in-progress.html" class="navbutton">&gt;&gt;</a>
+<a href="3.16-amortized-analysis-optional.html" accesskey="n" rel="next">Amortized Analysis (optional)</a>
+<a href="3.16-amortized-analysis-optional.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="solving-recurrence-relations-optional-work-in-progress"
-class="level2" data-number="3.17">
-<h2 data-number="3.17"><span class="header-section-number">3.17</span>
-Solving Recurrence Relations (optional) (WORK IN PROGRESS)</h2>
+<section id="solving-recurrence-relations-optional" class="level2"
+data-number="3.15">
+<h2 data-number="3.15"><span class="header-section-number">3.15</span>
+Solving Recurrence Relations (optional)</h2>
+<div class="alert">
+<p><strong><em>Note</em></strong>: This section is <em>work in
+progress</em></p>
+</div>
 <!-- TODO
 Throughout this module, there are references to equations, both on this
 page and in the Summations module. These should be made into proper
@@ -147,9 +150,9 @@ typical divide-and-conquer algorithms such as Mergesort yield
 recurrences of a form that fits a pattern for which we have a ready
 solution.</p>
 <section id="estimating-upper-and-lower-bounds" class="level3"
-data-number="3.17.1">
-<h3 data-number="3.17.1"><span
-class="header-section-number">3.17.1</span> Estimating Upper and Lower
+data-number="3.15.1">
+<h3 data-number="3.15.1"><span
+class="header-section-number">3.15.1</span> Estimating Upper and Lower
 Bounds</h3>
 <p>The first approach to solving recurrences is to guess the answer and
 then attempt to prove it correct. If a correct upper or lower bound
@@ -526,9 +529,9 @@ converges to</p>
 </annotation></semantics></math></p>
 </section>
 </section>
-<section id="expanding-recurrences" class="level3" data-number="3.17.2">
-<h3 data-number="3.17.2"><span
-class="header-section-number">3.17.2</span> Expanding Recurrences</h3>
+<section id="expanding-recurrences" class="level3" data-number="3.15.2">
+<h3 data-number="3.15.2"><span
+class="header-section-number">3.15.2</span> Expanding Recurrences</h3>
 <p>Estimating bounds is effective if you only need an approximation to
 the answer. More precise techniques are required to find an exact
 solution. One approach is called <a
@@ -582,15 +585,15 @@ f(n)  &amp; \leq &amp;  \sum_{i=0}^{\log n -1} 2^{i+1} \log(n/2^i) \\
 </section>
 </section>
 <section id="divide-and-conquer-recurrences" class="level3"
-data-number="3.17.3">
-<h3 data-number="3.17.3"><span
-class="header-section-number">3.17.3</span> Divide-and-Conquer
+data-number="3.15.3">
+<h3 data-number="3.15.3"><span
+class="header-section-number">3.15.3</span> Divide-and-Conquer
 Recurrences</h3>
 <p>The third approach to solving recurrences is to take advantage of
 known theorems that provide the solution for classes of recurrences. Of
 particular practical use is a theorem that gives the answer for a class
 known as <a
-href="3.17-solving-recurrence-relations-optional-work-in-progress.html#divide-and-conquer-recurrences"
+href="3.15-solving-recurrence-relations-optional.html#divide-and-conquer-recurrences"
 class="term"
 title="A common form of recurrence relation that have the form $$\mathbf{T}(n) = a\mathbf{T}(n/b) + cn^k;\quad \mathbf{T}(1) = c$$ where $a$, $b$, $c$, and $k$ are constants. In general, this recurrence describes a problem of size $n$ divided into $a$ subproblems of size $n/b$, while $cn^k$ is the amount of work necessary to combine the partial solutions.">divide-and-conquer
 recurrences</a>. These have the form</p>
@@ -769,9 +772,9 @@ Applying case (2) of the theorem,
 </section>
 </section>
 <section id="average-case-analysis-of-quicksort" class="level3"
-data-number="3.17.4">
-<h3 data-number="3.17.4"><span
-class="header-section-number">3.17.4</span> Average-Case Analysis of
+data-number="3.15.4">
+<h3 data-number="3.15.4"><span
+class="header-section-number">3.15.4</span> Average-Case Analysis of
 Quicksort</h3>
 <p>In Module <a href="2.11-quicksort.html#quicksort">Quicksort</a>, we
 determined that the average-case analysis of Quicksort had the following
@@ -869,12 +872,12 @@ so the final solution is
 <footer>
 <nav class="sitenav">
 <div class="navlink">
-<a href="3.16-summation-techniques-optional-work-in-progress.html" class="navbutton">&lt;&lt;</a>
-<a href="3.16-summation-techniques-optional-work-in-progress.html" accesskey="p" rel="previous">Summation Techniques (optional) (WORK IN PROGRESS)</a>
+<a href="3.14-summation-techniques-optional.html" class="navbutton">&lt;&lt;</a>
+<a href="3.14-summation-techniques-optional.html" accesskey="p" rel="previous">Summation Techniques (optional)</a>
 </div>
 <div class="navlink">
-<a href="3.18-amortized-analysis-optional-work-in-progress.html" accesskey="n" rel="next">Amortized Analysis (optional) (WORK IN PROGRESS)</a>
-<a href="3.18-amortized-analysis-optional-work-in-progress.html" class="navbutton">&gt;&gt;</a>
+<a href="3.16-amortized-analysis-optional.html" accesskey="n" rel="next">Amortized Analysis (optional)</a>
+<a href="3.16-amortized-analysis-optional.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </footer>
