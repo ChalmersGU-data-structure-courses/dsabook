@@ -59,7 +59,3 @@ the same as for the equivalent stack implementations.
 Unlike the array-based stack implementation, there is no convenient way
 to store two queues in the same array, unless items are always
 transferred directly from one queue to the other.
-
-### Stack and Queue Summary Questions
-
-<avembed id="StackQueue-Summary-QUIZ" src="ChalmersGU/StackQueue-Summary-QUIZ.html" type="ka" name="Stack/Queue Summary Exercise"/>

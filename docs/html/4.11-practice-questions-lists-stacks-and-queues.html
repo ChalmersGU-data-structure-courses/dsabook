@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Cliff Shaffer" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Nick Smallbone" />
+  <title>DSABook – Practice questions: lists, stacks and queues</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+      },
+      "HTML-CSS": {
+        scale: "80",
+      }
+    });
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="4.10-queues.html" class="navbutton">&lt;&lt;</a>
+<a href="4.10-queues.html" accesskey="p" rel="previous">Queues</a>
+</div>
+<div>
+<a href="5-binary-trees.html" accesskey="n" rel="next">Binary Trees</a>
+<a href="5-binary-trees.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="practice-questions-lists-stacks-and-queues" class="level2"
+data-number="4.11">
+<h2 data-number="4.11"><span class="header-section-number">4.11</span>
+Practice questions: lists, stacks and queues</h2>
+<section id="stack-and-queue-summary-questions" class="level3"
+data-number="4.11.1">
+<h3 data-number="4.11.1"><span
+class="header-section-number">4.11.1</span> Stack and Queue summary
+questions</h3>
+<p>Here are some general practice questions about stacks and queues.</p>
+<div class="quiz">
+<div class="question">
+<p>Which value of a stack is accessible?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />The top item</label></li>
+<li><label><input type="checkbox" />The front item</label></li>
+<li><label><input type="checkbox" />The root</label></li>
+<li><label><input type="checkbox" />The bottom item</label></li>
+<li><label><input type="checkbox" />The rear item</label></li>
+<li><label><input type="checkbox" />The highest-valued item</label></li>
+<li><label><input type="checkbox" />The lowest-valued item</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Stacks do not care about the relative order of the values for the
+items it stores.</li>
+<li>A stack gives access only to the last item that was inserted.</li>
+<li>This is called the “top” item.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>It is an error to pop data from a(n) _______ stack.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Empty</label></li>
+<li><label><input type="checkbox" />Full</label></li>
+<li><label><input type="checkbox" />Initialized</label></li>
+<li><label><input type="checkbox" />Array-based</label></li>
+<li><label><input type="checkbox" />Linked</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>“Pop” means to remove.</li>
+<li>When can we not remove anything?</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In the linked implementation of a queue, a new item would be
+added:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />At the rear</label></li>
+<li><label><input type="checkbox" />At the head</label></li>
+<li><label><input type="checkbox" />At the current position</label></li>
+<li><label><input type="checkbox" />After all other entries that are
+greater than the new entry</label></li>
+<li><label><input type="checkbox" />After all other entries that are
+smaller than the new entry</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>We don’t care about value order in a queue.</li>
+<li>In a queue, we always add at the rear.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The following sequence of operations is performed on a queue:</p>
+<blockquote>
+<p>enqueue(1), enqueue(2), dequeue, enqueue(1), enqueue(2), dequeue,
+dequeue, dequeue, enqueue(2), dequeue</p>
+</blockquote>
+<p>The values will be output in this order:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />1,2,1,2,2</label></li>
+<li><label><input type="checkbox" />1,2,1,1,2</label></li>
+<li><label><input type="checkbox" />2,2,1,1,2</label></li>
+<li><label><input type="checkbox" />2,2,1,2,2</label></li>
+<li><label><input type="checkbox" />2,1,2,2,1</label></li>
+<li><label><input type="checkbox" />2,1,2,2,2</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Trace the operations, one by one.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>One difference between a queue and a stack is:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Queues use two ends of
+the structure; stacks use only one</label></li>
+<li><label><input type="checkbox" />Queues require linked lists, but
+stacks do not</label></li>
+<li><label><input type="checkbox" />Stacks require linked lists, but
+queues do not</label></li>
+<li><label><input type="checkbox" />Stacks use two ends of the
+structure, queues use only one</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Stacks and queues can both be implemented using a linked
+structure.</li>
+<li>The key difference is which end(s) the two stuctures access for
+insert and remove operations.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>If the characters ‘D’, ‘C’, ‘B’, ‘A’ are placed in a stack (in that
+order), and then removed one at a time, in what order will they be
+removed?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />ABCD</label></li>
+<li><label><input type="checkbox" />ABDC</label></li>
+<li><label><input type="checkbox" />DCAB</label></li>
+<li><label><input type="checkbox" />DCBA</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Items come off of a stack in the opposite order from how they went
+in.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Queue behavior is typically referred to as:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />First-In,
+First-Out</label></li>
+<li><label><input type="checkbox" />Last-In, First-Out</label></li>
+<li><label><input type="checkbox" />First Come, First
+Served</label></li>
+<li><label><input type="checkbox" />Just-in-Time</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>In a queue, we remove the one that came in first.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>It is an error to dequeue data from a(n) _______ queue.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Empty</label></li>
+<li><label><input type="checkbox" />Full</label></li>
+<li><label><input type="checkbox" />Array-based</label></li>
+<li><label><input type="checkbox" />Linked</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>“Dequeue” means to remove. When can we not remove from a
+queue?-</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which value of a queue is accessible?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />The front
+item</label></li>
+<li><label><input type="checkbox" />The top item</label></li>
+<li><label><input type="checkbox" />The root</label></li>
+<li><label><input type="checkbox" />The bottom item</label></li>
+<li><label><input type="checkbox" />The rear item</label></li>
+<li><label><input type="checkbox" />The highest-valued item</label></li>
+<li><label><input type="checkbox" />The lowest-valued item</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>In a queue, we remove from (access) the front (and insert at the
+rear).</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The Stack is best characterized as:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Last-In,
+First-Out</label></li>
+<li><label><input type="checkbox" />First-In, First-Out</label></li>
+<li><label><input type="checkbox" />First come, First
+Served</label></li>
+<li><label><input type="checkbox" />Just-in-Time</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>The queue is called “First-in, First-out”</li>
+<li>The stack is called “Last-in, First-out”</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In the linked implementation of a queue, a new item would be added to
+the:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Rear</label></li>
+<li><label><input type="checkbox" />Front</label></li>
+<li><label><input type="checkbox" />Current position</label></li>
+<li><label><input type="checkbox" />None of these</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>In any queue implementation, we always add to the rear.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>If the characters ‘D’, ‘C’, ‘B’, ‘A’ are placed in a queue (in that
+order), and then removed one at a time, in what order will they be
+removed?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />DCBA</label></li>
+<li><label><input type="checkbox" />ABCD</label></li>
+<li><label><input type="checkbox" />ABDC</label></li>
+<li><label><input type="checkbox" />DCAB</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Items are removed from a queue in the same order as they
+arrived.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Stack A has entries a, b, c (in that order with a on top), while
+Stack B is initially empty. When an entry is popped out of stack A, it
+can be printed immediately or pushed to stack B. When an entry is popped
+out of stack B, it can only be printed. Which of the following
+permutations of a, b, c is not possible to print?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />c a b</label></li>
+<li><label><input type="checkbox" />b a c</label></li>
+<li><label><input type="checkbox" />b c a</label></li>
+<li><label><input type="checkbox" />a b c</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>We can manage to get “c” to print first.</li>
+<li>But to do so requires putting “a” and then “b” into stack B.-</li>
+<li>Which then means that they must come out of B and be printed in
+reverse order.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The following sequence of operations is performed on a stack:</p>
+<blockquote>
+<p>push(1), push(2), pop, push(1), push(2), pop, pop, pop, push(2),
+pop</p>
+</blockquote>
+<p>The values will be output in this order:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />2,2,1,1,2</label></li>
+<li><label><input type="checkbox" />1,2,1,2,2</label></li>
+<li><label><input type="checkbox" />1,2,2,1,2</label></li>
+<li><label><input type="checkbox" />2,2,1,2,2</label></li>
+<li><label><input type="checkbox" />2,1,2,2,1</label></li>
+<li><label><input type="checkbox" />2,1,2,2,2</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Trace the series of operations onto a stack.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="list-summary-questions" class="level3"
+data-number="4.11.2">
+<h3 data-number="4.11.2"><span
+class="header-section-number">4.11.2</span> List summary questions</h3>
+<p>Here are some general practice questions about various data
+structures in this chapter.</p>
+<div class="quiz">
+<div class="question">
+<p>The term “LIFO” is associated with which data structure?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Stack</label></li>
+<li><label><input type="checkbox" />List</label></li>
+<li><label><input type="checkbox" />Queue</label></li>
+<li><label><input type="checkbox" />All of these</label></li>
+<li><label><input type="checkbox" />None of these</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>LIFO means “Last-in, First-out”.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which of the following is not a linear data structure?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />These are all linear data
+structures</label></li>
+<li><label><input type="checkbox" />Queue</label></li>
+<li><label><input type="checkbox" />Array-based list</label></li>
+<li><label><input type="checkbox" />Linked list</label></li>
+<li><label><input type="checkbox" />Stack</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>We studied all of these data structures in this chapter.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which data structure would be used to implement recursion?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Stack</label></li>
+<li><label><input type="checkbox" />Queue</label></li>
+<li><label><input type="checkbox" />Array-based list</label></li>
+<li><label><input type="checkbox" />Linked list</label></li>
+<li><label><input type="checkbox" />Tree</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>When unwinding from recursion, we say that you “pop” the recursive
+“stack”.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which data structure allows insertion only at the top, and deletion
+only at the top?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Stack</label></li>
+<li><label><input type="checkbox" />Queue</label></li>
+<li><label><input type="checkbox" />Array-based list</label></li>
+<li><label><input type="checkbox" />Linked list</label></li>
+<li><label><input type="checkbox" />Tree</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>We use the term “top” with only one of these data structures.</li>
+<li>We add and remove at the “top” with the stack.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which data structure allows insertion only at the back, and removing
+only from the front?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Queue</label></li>
+<li><label><input type="checkbox" />Stack</label></li>
+<li><label><input type="checkbox" />Array-based list</label></li>
+<li><label><input type="checkbox" />Linked list</label></li>
+<li><label><input type="checkbox" />Tree</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>We did not cover trees in this chapter.</li>
+<li>Lists do not restrict where inserts and removes take place.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The terms “enqueue” and “dequeue” are associated with which data
+structure?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Queue</label></li>
+<li><label><input type="checkbox" />Stack</label></li>
+<li><label><input type="checkbox" />Array</label></li>
+<li><label><input type="checkbox" />List</label></li>
+<li><label><input type="checkbox" />All of these</label></li>
+<li><label><input type="checkbox" />None of these</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>What does “enqueue” and “dequeue” mean?</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The terms “add/insert” and “delete” are traditionally associated with
+which data structure(s)?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />List</label></li>
+<li><label><input type="checkbox" />Stack</label></li>
+<li><label><input type="checkbox" />Queue</label></li>
+<li><label><input type="checkbox" />All of these</label></li>
+<li><label><input type="checkbox" />None of these</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Stacks and Queues have special terminology that is used instead of
+the more general “insert” and “delete”.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The term “FIFO” is associated with which data structure?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Queue</label></li>
+<li><label><input type="checkbox" />List</label></li>
+<li><label><input type="checkbox" />Stack</label></li>
+<li><label><input type="checkbox" />Freelist</label></li>
+<li><label><input type="checkbox" />All of these</label></li>
+<li><label><input type="checkbox" />None of these</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>FIFO means “first-in, first-out”</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which of the following is not a linear data structure?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Tree</label></li>
+<li><label><input type="checkbox" />Queue</label></li>
+<li><label><input type="checkbox" />Array-based list</label></li>
+<li><label><input type="checkbox" />Linked list</label></li>
+<li><label><input type="checkbox" />Stack</label></li>
+<li><label><input type="checkbox" />These are all linear data
+structures</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Which is the one data structure not covered in this chapter?</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The terms “push” and “pop” are associated with which data
+structure?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Stack</label></li>
+<li><label><input type="checkbox" />Queue</label></li>
+<li><label><input type="checkbox" />Array</label></li>
+<li><label><input type="checkbox" />List</label></li>
+<li><label><input type="checkbox" />All of these</label></li>
+<li><label><input type="checkbox" />None of these</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>“Push” and “pop” are special terminology associated with one of
+these data structures.</li>
+<li>You push items onto a stack, and pull them off.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="4.10-queues.html" class="navbutton">&lt;&lt;</a>
+<a href="4.10-queues.html" accesskey="p" rel="previous">Queues</a>
+</div>
+<div class="navlink">
+<a href="5-binary-trees.html" accesskey="n" rel="next">Binary Trees</a>
+<a href="5-binary-trees.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+
