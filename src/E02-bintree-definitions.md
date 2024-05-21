@@ -92,9 +92,3 @@ structure is an example of a complete binary tree. The
     might find useful: "Complete" is a wider word than "full", and
     complete binary trees tend to be wider than full binary trees
     because each level of a complete binary tree is as wide as possible.
-
-<avembed id="DefSumm" src="Binary/DefSumm.html" type="ka" name="Tree Definition Summary Exercises"/>
-
-### Practice Questions
-
-<avembed id="Treeprobs" src="Binary/Treeprobs.html" type="ka" name="Tree/Node Exercises"/>
