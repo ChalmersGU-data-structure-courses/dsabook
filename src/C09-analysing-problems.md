@@ -95,4 +95,3 @@ do, while the lower bound for a problem is the least work that you MUST
 do. If those two are the same, then we say that we really understand our
 problem.
 
-<avembed id="AnalProblemSumm" src="AlgAnal/AnalProblemSumm.html" type="ka" name="Problem Analysis Exercise"/>
