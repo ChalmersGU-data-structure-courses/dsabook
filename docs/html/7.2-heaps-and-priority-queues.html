@@ -586,17 +586,263 @@ efficient search for objects (such as a BST). Records in the auxiliary
 data structure will store the object’s heap index, so that the object’s
 priority can be updated.</p>
 </section>
-<section id="practice-questions" class="level4" data-number="7.2.3.2">
-<h4 data-number="7.2.3.2"><span
-class="header-section-number">7.2.3.2</span> Practice Questions</h4>
-<p>
-<div id="HeapSumm" class="embedContainer">
-<iframe id="HeapSumm_iframe" aria-label="HeapSumm" src="../interactive/Binary/HeapSumm.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
-</div>
-</p>
 </section>
+<section id="practice-questions-binary-heaps" class="level3"
+data-number="7.2.4">
+<h3 data-number="7.2.4"><span class="header-section-number">7.2.4</span>
+Practice questions: Binary heaps</h3>
+<div class="quiz">
+<div class="question">
+<p>Which feature of heaps allows them to be efficienty implemented using
+an array?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Heaps are complete binary
+trees</label></li>
+<li><label><input type="checkbox" />Heaps are binary trees</label></li>
+<li><label><input type="checkbox" />Heaps are binary search
+trees</label></li>
+<li><label><input type="checkbox" />Heaps are full binary
+trees</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A heap is not a BST.</li>
+<li>In general, just being a binary tree (or even a full binary tree) is
+not enough to let something be implemented using an array.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In a max-heap containing
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+elements, what is the position of the element with the greatest
+value?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0</mn><annotation encoding="application/x-tex">0</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n+1</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>*</mo><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2*n+1</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>*</mo><mi>n</mi><mo>+</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2*n+2</annotation></semantics></math></label></li>
+<li><label><input type="checkbox" />Possibly in any leaf
+node</label></li>
+<li><label><input type="checkbox" />The leftmost leaf node</label></li>
+<li><label><input type="checkbox" />The rightmost leaf node</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Remember this is a max-heap. So where is the biggest element?</li>
+<li>It is at the root. So, what position holds the root?</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In a max-heap containing
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+elements, what is the position of the element with the least value?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Possibly in any leaf
+node</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n+1</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>*</mo><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2*n+1</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>*</mo><mi>n</mi><mo>+</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2*n+2</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0</mn><annotation encoding="application/x-tex">0</annotation></semantics></math></label></li>
+<li><label><input type="checkbox" />The leftmost leaf node</label></li>
+<li><label><input type="checkbox" />The rightmost leaf node</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Remember this is a max-heap. So where is the smallest element?</li>
+<li>It has to be at the bottom.</li>
+<li>But, it could be anywhere at the bottom.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Consider a node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+of a complete binary tree whose value is stored in position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+of an array representation for the tree. If
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+has a left child, where will the left child’s position be in the
+array?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>*</mo><mi>i</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2*i+1</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i+1</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>+</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">i+2</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>*</mo><mi>i</mi><mo>+</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2*i+2</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⌊</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mn>2</mn><mo stretchy="false" form="postfix">⌋</mo></mrow><annotation encoding="application/x-tex">\lfloor (i-1)/2 \rfloor</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>If you have a right sibling, it is at
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i+1</annotation></semantics></math>.</li>
+<li>If you have a left sibling, it is at
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i-1</annotation></semantics></math>.</li>
+<li>If you have a parent, it is at
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⌊</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mn>2</mn><mo stretchy="false" form="postfix">⌋</mo></mrow><annotation encoding="application/x-tex">\lfloor (i-1)/2 \rfloor</annotation></semantics></math>.</li>
+<li>If you have a right child, it is at
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>*</mo><mi>i</mi><mo>+</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2*i+2</annotation></semantics></math>.</li>
+<li>If you have a left child, it is at
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>*</mo><mi>i</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2*i+1</annotation></semantics></math>.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Consider a node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+of a complete binary tree whose value is stored in position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+of an array representation for the tree. If
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+has a left sibling, where will the left sibling’s position be in the
+array?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i-1</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i+1</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>+</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">i+2</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>*</mo><mi>i</mi><mo>+</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2*i+2</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⌊</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mn>2</mn><mo stretchy="false" form="postfix">⌋</mo></mrow><annotation encoding="application/x-tex">\lfloor (i-1)/2 \rfloor</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>If you have a parent, it is at
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⌊</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mn>2</mn><mo stretchy="false" form="postfix">⌋</mo></mrow><annotation encoding="application/x-tex">\lfloor (i-1)/2 \rfloor</annotation></semantics></math>.</li>
+<li>If you have a right child, it is at
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>*</mo><mi>i</mi><mo>+</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2*i+2</annotation></semantics></math>.</li>
+<li>If you have a left child, it is at
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>*</mo><mi>i</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2*i+1</annotation></semantics></math>.</li>
+<li>If you have a right sibling, it is at
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i+1</annotation></semantics></math>.</li>
+<li>If you have a left sibling, it is at
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i-1</annotation></semantics></math>.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Consider a node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+of a complete binary tree whose value is stored in position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+of an array representation for the tree. If
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+has a parent, where will the parent’s position be in the array?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⌊</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mn>2</mn><mo stretchy="false" form="postfix">⌋</mo></mrow><annotation encoding="application/x-tex">\lfloor (i-1)/2 \rfloor</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i+1</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>+</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">i+2</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>*</mo><mi>i</mi><mo>+</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2*i+2</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>*</mo><mi>i</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2*i+1</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>If you have a right sibling, it is at
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i+1</annotation></semantics></math>.</li>
+<li>If you have a left sibling, it is at
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i-1</annotation></semantics></math>.</li>
+<li>If you have a right child, it is at
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>*</mo><mi>i</mi><mo>+</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2*i+2</annotation></semantics></math>.</li>
+<li>If you have a left child, it is at
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>*</mo><mi>i</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2*i+1</annotation></semantics></math>.</li>
+<li>If you have a parent, it is at
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⌊</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mn>2</mn><mo stretchy="false" form="postfix">⌋</mo></mrow><annotation encoding="application/x-tex">\lfloor (i-1)/2 \rfloor</annotation></semantics></math>.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Consider a node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+of a complete binary tree whose value is stored in position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+of an array representation for the tree. If
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+has a right child, where will the right child’s position be in the
+array?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>*</mo><mi>i</mi><mo>+</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2*i+2</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i+1</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>+</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">i+2</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>*</mo><mi>i</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2*i+1</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⌊</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mn>2</mn><mo stretchy="false" form="postfix">⌋</mo></mrow><annotation encoding="application/x-tex">\lfloor (i-1)/2 \rfloor</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>If you have a right sibling, it is at
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i+1</annotation></semantics></math>.</li>
+<li>If you have a left sibling, it is at
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i-1</annotation></semantics></math>.</li>
+<li>If you have a parent, it is at
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⌊</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mn>2</mn><mo stretchy="false" form="postfix">⌋</mo></mrow><annotation encoding="application/x-tex">\lfloor (i-1)/2 \rfloor</annotation></semantics></math>.</li>
+<li>If you have a left child, it is at
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>*</mo><mi>i</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2*i+1</annotation></semantics></math>.</li>
+<li>If you have a right child, it is at
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>*</mo><mi>i</mi><mo>+</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2*i+2</annotation></semantics></math>.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which of these is a true statement about the worst-case time for
+operations on heaps?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Both insertion and
+removal are better than linear</label></li>
+<li><label><input type="checkbox" />Insertion is better than linear, but
+removal is not</label></li>
+<li><label><input type="checkbox" />Removal is better than linear, but
+insertion is not</label></li>
+<li><label><input type="checkbox" />Neither insertion nor removal are
+better than linear</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Insert works by putting the new element at the end of the array, and
+moving it up the tree as appropriate.</li>
+<li>So its worst-case cost is proportional to the depth of the
+tree.</li>
+<li>Remove works swapping the element to remove with the one at the end
+of the array. Then move that moved item up or down the tree, as
+appropriate.</li>
+<li>So its worst-case cost is proportional to the depth of the
+tree.</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
 </section>
 </main>

@@ -353,6 +353,3 @@ efficient search for objects (such as a BST). Records in the auxiliary
 data structure will store the object's heap index, so that the
 object's priority can be updated.
 
-#### Practice Questions
-
-<avembed id="HeapSumm" src="Binary/HeapSumm.html" type="ka" name="Heap Question Summary"/>
