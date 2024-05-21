@@ -260,4 +260,3 @@ also exist other types of search trees that are guaranteed to remain
 balanced, such as the
 [2-3 Tree]{.term}.
 
-<avembed id="BSTSumm" src="Binary/BSTSumm.html" type="ka" name="BST Question Summary"/>
