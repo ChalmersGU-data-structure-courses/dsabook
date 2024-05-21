@@ -8,26 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Improved Collision Resolution</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -93,27 +79,32 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 <link href="../interactive/Hashing/collisionCON.css" rel="stylesheet" type="text/css"/>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="8-hashing.html" accesskey="u" rel="up">Hashing</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="8.6-open-addressing.html" class="navbutton">&lt;&lt;</a>
+<a href="8.6-open-addressing.html" accesskey="p" rel="previous">Open Addressing</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="8.8-analysis-of-open-addressing.html" accesskey="n" rel="next">Analysis of Open Addressing</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="8.6-open-addressing.html" accesskey="p" rel="previous">Open Addressing</a>
-</span>
+<div>
+<a href="8.8-analysis-of-open-addressing.html" accesskey="n" rel="next">Analysis of Open Addressing</a>
+<a href="8.8-analysis-of-open-addressing.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="improved-collision-resolution" class="level2"
 data-number="8.7">
 <h2 data-number="8.7"><span class="header-section-number">8.7</span>
@@ -234,8 +225,11 @@ sequence should be a random permutation of the hash table positions.
 Unfortunately, we cannot actually select the next position in the probe
 sequence at random, because we would not be able to duplicate this same
 probe sequence when searching for the key. However, we can do something
-similar called <a href="10-glossary.html#pseudo-random-probing" class="term">pseudo-random probing</a>. In
-pseudo-random probing, the
+similar called <a
+href="8.7-improved-collision-resolution.html#pseudo-random-probing"
+class="term"
+title="In hashing, this is a collision resolution method that stores a random permutation of the values 1 through the size of the hash table. Term $i$ of the probe sequence is simply the value of position $i$ in the permuation.">pseudo-random
+probing</a>. In pseudo-random probing, the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
 th slot in the probe sequence is
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mtext mathvariant="bold">𝐡</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>K</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><msub><mi>r</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mspace width="0.444em"></mspace><mo>mod</mo><mspace width="0.222em"></mspace><mi>M</mi></mrow></mrow><annotation encoding="application/x-tex">(\textbf{h}(K) + r_i) \mod M</annotation></semantics></math>
@@ -286,8 +280,10 @@ function.</p>
 <h3 data-number="8.7.3"><span class="header-section-number">8.7.3</span>
 Quadratic Probing</h3>
 <p>Another probe function that eliminates primary clustering is called
-<a href="10-glossary.html#quadratic-probing" class="term">quadratic probing</a>. Here the probe function is
-some quadratic function
+<a href="8.7-improved-collision-resolution.html#quadratic-probing"
+class="term"
+title="In hashing, this is a collision resolution method that computes term $i$ of the probe sequence using some quadratic equation $ai^2 _ bi + c$ for suitable constants $a, b, c$. The simplest form is simply to use $i^2$ as term $i$ of the probe sequence.">quadratic
+probing</a>. Here the probe function is some quadratic function
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="bold">𝐩</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>K</mi><mo>,</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msub><mi>c</mi><mn>1</mn></msub><msup><mi>i</mi><mn>2</mn></msup><mo>+</mo><msub><mi>c</mi><mn>2</mn></msub><mi>i</mi><mo>+</mo><msub><mi>c</mi><mn>3</mn></msub></mrow><annotation encoding="application/x-tex">\textbf{p}(K, i) = c_1 i^2 + c_{2}i + c_3</annotation></semantics></math>
 for some choice of constants
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>c</mi><mn>1</mn></msub><annotation encoding="application/x-tex">c_1</annotation></semantics></math>,
@@ -366,7 +362,10 @@ its input parameter
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>K</mi><annotation encoding="application/x-tex">K</annotation></semantics></math>
 for these collision resolution methods. If the hash function generates a
 cluster at a particular home position, then the cluster remains under
-pseudo-random and quadratic probing. This problem is called <a href="10-glossary.html#secondary-clustering" class="term">secondary clustering</a>.</p>
+pseudo-random and quadratic probing. This problem is called <a
+href="10-glossary.html#secondary-clustering" class="term"
+title="In hashing, the tendency in certain collision resolution methods to create clustering in sections of the hash table. In primary clustering, this is caused by a cluster of keys that don&#39;t necessarily hash to the same slot but which following significant portions of the same probe sequence during collision resolution. Secondary clustering results from the keys hashing to the same slot of the table (and so a collision resolution method that is not affected by the key value must use the same probe sequence for all such keys). This problem can be resolved by double hashing since its probe sequence is determined in part by a second hash function.">secondary
+clustering</a>.</p>
 <p>To avoid secondary clustering, we need to have the probe sequence
 make use of the original key value in its decision-making process. A
 simple technique for doing this is to return to linear probing by a
@@ -375,7 +374,11 @@ determined by a second hash function,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mtext mathvariant="bold">𝐡</mtext><mn>2</mn></msub><annotation encoding="application/x-tex">\textbf{h}_2</annotation></semantics></math>.
 Thus, the probe sequence would be of the form
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="bold">𝐩</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>K</mi><mo>,</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>i</mi><mo>*</mo><msub><mtext mathvariant="bold">𝐡</mtext><mn>2</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>K</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\textbf{p}(K, i) = i * \textbf{h}_2(K)</annotation></semantics></math>.
-This method is called <a href="10-glossary.html#double-hashing" class="term">double hashing</a>.</p>
+This method is called <a
+href="8.7-improved-collision-resolution.html#double-hashing"
+class="term"
+title="A collision resolution method. A second hash function is used to generate a value $c$ on the key. That value is then used by this key as the step size in linear probing by steps. Since different keys use different step sizes (as generated by the second hash function), this process avoids the clustering caused by standard linear probing by steps.">double
+hashing</a>.</p>
 <p>There are important restrictions on
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>h</mi><mn>2</mn></msub><annotation encoding="application/x-tex">h_2</annotation></semantics></math>.
 Most importantly, the value returned by
@@ -413,36 +416,8 @@ We can get that result with this secondary hash function:
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mtext mathvariant="bold">𝐡</mtext><mn>2</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>k</mi><mi>/</mi><mi>M</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mspace width="0.444em"></mspace><mo>mod</mo><mspace width="0.222em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mi>M</mi><mi>/</mi><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mo stretchy="true" form="postfix">)</mo></mrow><mo>*</mo><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\textbf{h}_2(k) = (((k/M) \mod (M/2)) * 2) + 1</annotation></semantics></math>.<a
 href="#fn1" class="footnote-ref" id="fnref1"
 role="doc-noteref"><sup>1</sup></a></p>
-<p>
-<div id="collisionCON7" class="ssAV" data-short-name="collisionCON7" data-long-name="Double Hashing Slideshow 2" alt="Double Hashing Slideshow 2" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-</p>
-<div class="line-block"></div>
-<p>
-<div id="collisionCON8" class="ssAV" data-short-name="collisionCON8" data-long-name="Double Hashing Slideshow 3" alt="Double Hashing Slideshow 3" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-</p>
-<p>Now you can try it.</p>
-<p>
-<div id="HashDoublePPRO" class="embedContainer">
-<iframe id="HashDoublePPRO_iframe" aria-label="HashDoublePPRO" src="../interactive/Hashing/HashDoublePPRO.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
-</div>
-</p>
-</section>
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document"
-role="doc-endnotes">
-<hr />
+<aside id="footnotes" class="footnotes footnotes-end-of-block"
+role="doc-footnote">
 <ol>
 <li id="fn1"><p>The secondary hash function
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mtext mathvariant="bold">𝐡</mtext><mn>2</mn></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>k</mi><mi>/</mi><mi>M</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mspace width="0.444em"></mspace><mo>mod</mo><mspace width="0.222em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mi>M</mi><mi>/</mi><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mo stretchy="true" form="postfix">)</mo></mrow><mo>*</mo><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\textbf{h}_2(k) = (((k/M) \mod (M/2)) * 2) + 1</annotation></semantics></math>
@@ -494,7 +469,49 @@ the hash table size. This is not a problem for typical hashing
 applications.<a href="#fnref1" class="footnote-back"
 role="doc-backlink">↩︎</a></p></li>
 </ol>
+</aside>
+<p>
+<div id="collisionCON7" class="ssAV" data-short-name="collisionCON7" data-long-name="Double Hashing Slideshow 2" alt="Double Hashing Slideshow 2" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<div class="line-block"></div>
+<p>
+<div id="collisionCON8" class="ssAV" data-short-name="collisionCON8" data-long-name="Double Hashing Slideshow 3" alt="Double Hashing Slideshow 3" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>Now you can try it.</p>
+<p>
+<div id="HashDoublePPRO" class="embedContainer">
+<iframe id="HashDoublePPRO_iframe" aria-label="HashDoublePPRO" src="../interactive/Hashing/HashDoublePPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
 </section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="8.6-open-addressing.html" class="navbutton">&lt;&lt;</a>
+<a href="8.6-open-addressing.html" accesskey="p" rel="previous">Open Addressing</a>
+</div>
+<div class="navlink">
+<a href="8.8-analysis-of-open-addressing.html" accesskey="n" rel="next">Analysis of Open Addressing</a>
+<a href="8.8-analysis-of-open-addressing.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 <script type="text/javascript" src="../interactive/Hashing/collisionCON1.js"></script>
 <script type="text/javascript" src="../interactive/Hashing/collisionCON2.js"></script>
 <script type="text/javascript" src="../interactive/Hashing/collisionCON3.js"></script>
@@ -505,3 +522,4 @@ role="doc-backlink">↩︎</a></p></li>
 <script type="text/javascript" src="../interactive/Hashing/collisionCON8.js"></script>
 </body>
 </html>
+

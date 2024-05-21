@@ -8,93 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Mergesort</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        background-color: #ffffff;
-        color: #a0a0a0;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
-    div.sourceCode
-      { color: #1f1c1b; background-color: #ffffff; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #1f1c1b; } /* Normal */
-    code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
-    code span.an { color: #ca60ca; } /* Annotation */
-    code span.at { color: #0057ae; } /* Attribute */
-    code span.bn { color: #b08000; } /* BaseN */
-    code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
-    code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #924c9d; } /* Char */
-    code span.cn { color: #aa5500; } /* Constant */
-    code span.co { color: #898887; } /* Comment */
-    code span.cv { color: #0095ff; } /* CommentVar */
-    code span.do { color: #607880; } /* Documentation */
-    code span.dt { color: #0057ae; } /* DataType */
-    code span.dv { color: #b08000; } /* DecVal */
-    code span.er { color: #bf0303; text-decoration: underline; } /* Error */
-    code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
-    code span.fl { color: #b08000; } /* Float */
-    code span.fu { color: #644a9b; } /* Function */
-    code span.im { color: #ff5500; } /* Import */
-    code span.in { color: #b08000; } /* Information */
-    code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
-    code span.op { color: #1f1c1b; } /* Operator */
-    code span.ot { color: #006e28; } /* Other */
-    code span.pp { color: #006e28; } /* Preprocessor */
-    code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
-    code span.sc { color: #3daee9; } /* SpecialChar */
-    code span.ss { color: #ff5500; } /* SpecialString */
-    code span.st { color: #bf0303; } /* String */
-    code span.va { color: #0057ae; } /* Variable */
-    code span.vs { color: #bf0303; } /* VerbatimString */
-    code span.wa { color: #bf0303; } /* Warning */
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -160,27 +79,32 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 <link href="../interactive/Sorting/MergeSortAnalysisCON.css" rel="stylesheet" type="text/css"/>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="2-arrays-searching-and-sorting.html" accesskey="u" rel="up">Arrays: searching and sorting</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="2.8-optimizing-sort-algorithms-with-code-tuning-optional.html" class="navbutton">&lt;&lt;</a>
+<a href="2.8-optimizing-sort-algorithms-with-code-tuning-optional.html" accesskey="p" rel="previous">Optimizing Sort Algorithms with Code Tuning (optional)</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="2.10-implementing-mergesort.html" accesskey="n" rel="next">Implementing Mergesort</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="2.8-optimizing-sort-algorithms-with-code-tuning-optional.html" accesskey="p" rel="previous">Optimizing Sort Algorithms with Code Tuning (optional)</a>
-</span>
+<div>
+<a href="2.10-implementing-mergesort.html" accesskey="n" rel="next">Implementing Mergesort</a>
+<a href="2.10-implementing-mergesort.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="mergesort" class="level2" data-number="2.9">
 <h2 data-number="2.9"><span class="header-section-number">2.9</span>
 Mergesort</h2>
@@ -189,18 +113,19 @@ divide and conquer when sorting, we might consider breaking the list to
 be sorted into pieces, process the pieces, and then put them back
 together somehow. A simple way to do this would be to split the list in
 half, sort the halves, and then merge the sorted halves together. This
-is the idea behind <a href="10-glossary.html#mergesort" class="term">Mergesort</a>.</p>
+is the idea behind <a href="2.9-mergesort.html#mergesort" class="term"
+title="A sorting algorithm that requires $\Theta(n \log n)$ in the best, average, and worst cases. Conceptually it is simple: Split the list in half, sort the halves, then merge them together. It is a bit complicated to implement efficiently on an array.">Mergesort</a>.</p>
 <p>Mergesort is one of the simplest sorting algorithms conceptually, and
 has good performance both in the asymptotic sense and in empirical
 running time. Unfortunately, even though it is based on a simple
 concept, it is relatively difficult to implement in practice. Here is a
 pseudocode sketch of Mergesort:</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mergeSort(inlist)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> length of inlist <span class="op">&lt;=</span> <span class="dv">1</span>:</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> inlist</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    L1 <span class="op">=</span> half of the items <span class="im">from</span> inlist</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    L2 <span class="op">=</span> other half of the items <span class="im">from</span> inlist</span>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> mergeSort(A):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> A.<span class="bu">size</span>() <span class="op">&lt;=</span> <span class="dv">1</span>:</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> A</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    L1 <span class="op">=</span> half <span class="kw">of</span> A</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    L2 <span class="op">=</span> other half <span class="kw">of</span> A</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> merge(mergeSort(L1), mergeSort(L2))</span></code></pre></div>
 <p>Here is a visualization that illustrates how Mergesort works.</p>
 <p>
@@ -219,20 +144,20 @@ sublists and continually appending the smaller to the output list until
 no more input records remain.</p>
 <p>Here is pseudocode for merge on lists:</p>
 <div class="sourceCode" id="cb2"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>merge(L1, L2)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    answer <span class="op">=</span> new empty <span class="bu">list</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> L1 <span class="kw">is</span> <span class="kw">not</span> empty <span class="kw">and</span> L2 <span class="kw">is</span> <span class="kw">not</span> empty</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> first element of L1</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> first element of L2</span>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> merge(L1, L2):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    answer <span class="op">=</span> <span class="kw">new</span> empty list</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> L1 <span class="kw">is</span> <span class="kw">not</span> empty <span class="kw">and</span> L2 <span class="kw">is</span> <span class="kw">not</span> empty:</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> first element <span class="kw">of</span> L1</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> first element <span class="kw">of</span> L2</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> x <span class="op">&lt;=</span> y</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>            append x to answer</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>            remove first element <span class="im">from</span> L1</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>            append y to answer</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            remove first element <span class="im">from</span> L2</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">//</span> Now one of L1 <span class="kw">and</span> L2 <span class="kw">is</span> empty, so append <span class="bu">all</span> remaining elements</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    append <span class="bu">all</span> elements of L1 to answer</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    append <span class="bu">all</span> elements of L2 to answer</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>            <span class="bu">append</span> x <span class="kw">to</span> answer</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>            <span class="bu">remove</span> L1<span class="st">&#39;s first element</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="er">        else</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>            <span class="bu">append</span> y <span class="kw">to</span> answer</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            <span class="bu">remove</span> L2<span class="st">&#39;s first element</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="er">    // Now one of L1 and L2 is empty, so append all remaining elements</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">append</span> <span class="kw">all</span> elements <span class="kw">of</span> L1 <span class="kw">to</span> answer</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">append</span> <span class="kw">all</span> elements <span class="kw">of</span> L2 <span class="kw">to</span> answer</span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> answer</span></code></pre></div>
 <p>Here is a visualization for the merge operation.</p>
 <p>
@@ -275,7 +200,23 @@ Sort.</p>
 </p>
 </section>
 </section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="2.8-optimizing-sort-algorithms-with-code-tuning-optional.html" class="navbutton">&lt;&lt;</a>
+<a href="2.8-optimizing-sort-algorithms-with-code-tuning-optional.html" accesskey="p" rel="previous">Optimizing Sort Algorithms with Code Tuning (optional)</a>
+</div>
+<div class="navlink">
+<a href="2.10-implementing-mergesort.html" accesskey="n" rel="next">Implementing Mergesort</a>
+<a href="2.10-implementing-mergesort.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 <script type="text/javascript" src="../interactive/Sorting/mergesortCON.js"></script>
 <script type="text/javascript" src="../interactive/Sorting/MergeSortAnalysisCON.js"></script>
 </body>
 </html>
+

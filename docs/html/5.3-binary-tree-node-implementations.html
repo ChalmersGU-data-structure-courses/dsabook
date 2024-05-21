@@ -8,93 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Binary Tree Node Implementations</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        background-color: #ffffff;
-        color: #a0a0a0;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
-    div.sourceCode
-      { color: #1f1c1b; background-color: #ffffff; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #1f1c1b; } /* Normal */
-    code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
-    code span.an { color: #ca60ca; } /* Annotation */
-    code span.at { color: #0057ae; } /* Attribute */
-    code span.bn { color: #b08000; } /* BaseN */
-    code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
-    code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #924c9d; } /* Char */
-    code span.cn { color: #aa5500; } /* Constant */
-    code span.co { color: #898887; } /* Comment */
-    code span.cv { color: #0095ff; } /* CommentVar */
-    code span.do { color: #607880; } /* Documentation */
-    code span.dt { color: #0057ae; } /* DataType */
-    code span.dv { color: #b08000; } /* DecVal */
-    code span.er { color: #bf0303; text-decoration: underline; } /* Error */
-    code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
-    code span.fl { color: #b08000; } /* Float */
-    code span.fu { color: #644a9b; } /* Function */
-    code span.im { color: #ff5500; } /* Import */
-    code span.in { color: #b08000; } /* Information */
-    code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
-    code span.op { color: #1f1c1b; } /* Operator */
-    code span.ot { color: #006e28; } /* Other */
-    code span.pp { color: #006e28; } /* Preprocessor */
-    code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
-    code span.sc { color: #3daee9; } /* SpecialChar */
-    code span.ss { color: #ff5500; } /* SpecialString */
-    code span.st { color: #bf0303; } /* String */
-    code span.va { color: #0057ae; } /* Variable */
-    code span.vs { color: #bf0303; } /* VerbatimString */
-    code span.wa { color: #bf0303; } /* Warning */
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -160,29 +79,34 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 <link href="../interactive/Binary/BTCON.css" rel="stylesheet" type="text/css"/>
 <link href="../interactive/Binary/BTnullpointerCON.css" rel="stylesheet" type="text/css"/>
 <link href="../interactive/Binary/expressionTreeCON.css" rel="stylesheet" type="text/css"/>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="5-binary-trees.html" accesskey="u" rel="up">Binary Trees</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="5.2-binary-tree-as-a-recursive-data-structure.html" class="navbutton">&lt;&lt;</a>
+<a href="5.2-binary-tree-as-a-recursive-data-structure.html" accesskey="p" rel="previous">Binary Tree as a Recursive Data Structure</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="5.4-the-full-binary-tree-theorem-optional.html" accesskey="n" rel="next">The Full Binary Tree Theorem (optional)</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="5.2-binary-tree-as-a-recursive-data-structure.html" accesskey="p" rel="previous">Binary Tree as a Recursive Data Structure</a>
-</span>
+<div>
+<a href="5.4-the-full-binary-tree-theorem-optional.html" accesskey="n" rel="next">The Full Binary Tree Theorem (optional)</a>
+<a href="5.4-the-full-binary-tree-theorem-optional.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="binary-tree-node-implementations" class="level2"
 data-number="5.3">
 <h2 data-number="5.3"><span class="header-section-number">5.3</span>
@@ -194,86 +118,26 @@ field, with the type of the field depending on the application. The most
 common node implementation includes a value field and pointers to the
 two children.</p>
 <p>Here is a simple implementation for binary tree nodes. When we need
-to support search structures such as the <a href="10-glossary.html#binary-search-tree" class="term">Binary
-Search Tree</a>, the node will typically store a <a href="10-glossary.html#key-value-pair" class="term">key-value pair</a>. Every <code>BinaryTreeNode</code>
-object also has two pointers, one to its left child and another to its
-right child.</p>
+to support search structures such as the <a
+href="10-glossary.html#binary-search-tree" class="term"
+title="A binary tree that imposes the following constraint on its node values: The search key value for any node $A$ must be greater than the (key) values for all nodes in the left subtree of $A$, and less than the key values for all nodes in the right subtree of $A$. Some convention must be adopted if multiple nodes with the same key value are permitted, typically these are required to be in the right subtree.">Binary
+Search Tree</a>, the node will typically store a <a
+href="10-glossary.html#key-value-pair" class="term"
+title="A standard solution for solving the problem of how to relate a key value to a record (or how to find the key for a given record) within the context of a particular index. The idea is to simply store as records in the index pairs of keys and records. Specifically, the index will typically store a copy of the key along with a reference to the record. The other standard solution to this problem is to pass a comparator function to the index.">key-value
+pair</a>. Every <code>BinaryNode</code> object also has two pointers,
+one to its left child and another to its right child.</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Binary tree node implementation</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BinaryTreeNode:</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, element<span class="op">=</span><span class="va">None</span>, left<span class="op">=</span><span class="va">None</span>, right<span class="op">=</span><span class="va">None</span>):</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.element <span class="op">=</span> element   <span class="co"># Element for this node.</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.left <span class="op">=</span> left         <span class="co"># Pointer to left child.</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.right <span class="op">=</span> right       <span class="co"># Pointer to right child.</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> isLeaf(<span class="va">self</span>):</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="co">&quot;&quot;&quot;Return True if a leaf node, False otherwise.&quot;&quot;&quot;</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.left <span class="kw">is</span> <span class="va">None</span> <span class="kw">and</span> <span class="va">self</span>.right <span class="kw">is</span> <span class="va">None</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Binary tree node implementation</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BinaryTreeNode<span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> E element<span class="op">;</span>               <span class="co">// Element for this node.</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> BinaryTreeNode<span class="op">&lt;</span>E<span class="op">&gt;</span> left<span class="op">;</span>  <span class="co">// Pointer to left child.</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> BinaryTreeNode<span class="op">&lt;</span>E<span class="op">&gt;</span> right<span class="op">;</span> <span class="co">// Pointer to right child.</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Constructors</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">BinaryTreeNode</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        left <span class="op">=</span> right <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">BinaryTreeNode</span><span class="op">(</span>E val<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        left <span class="op">=</span> right <span class="op">=</span> <span class="kw">null</span><span class="op">;</span> element <span class="op">=</span> val<span class="op">;</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">BinaryTreeNode</span><span class="op">(</span>E val<span class="op">,</span> BinaryTreeNode<span class="op">&lt;</span>E<span class="op">&gt;</span> l<span class="op">,</span> BinaryTreeNode<span class="op">&lt;</span>E<span class="op">&gt;</span> r<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        left <span class="op">=</span> l<span class="op">;</span> right <span class="op">=</span> r<span class="op">;</span> element <span class="op">=</span> val<span class="op">;</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Return TRUE if a leaf node, FALSE otherwise.</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">isLeaf</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> left <span class="op">==</span> <span class="kw">null</span> <span class="op">&amp;&amp;</span> right <span class="op">==</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>Sometimes, we will treat binary tree nodes as an <em>abstract data
-type</em>. In those cases, instead of using the class above, we will use
-the following <code>BinNode</code> ADT. It provides operations that set
-and return the element value, return a pointer to the left or right
-child, and indicate whether a node is a leaf.</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BinNode:</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Binary tree node ADT.&quot;&quot;&quot;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> value(<span class="va">self</span>):           <span class="st">&quot;&quot;&quot;Get the element value.&quot;&quot;&quot;</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> setValue(<span class="va">self</span>, value): <span class="st">&quot;&quot;&quot;Set the element value.&quot;&quot;&quot;</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> left(<span class="va">self</span>):   <span class="st">&quot;&quot;&quot;Return the left child.&quot;&quot;&quot;</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> right(<span class="va">self</span>):  <span class="st">&quot;&quot;&quot;Return the right child.&quot;&quot;&quot;</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> isLeaf(<span class="va">self</span>): <span class="st">&quot;&quot;&quot;return True if a leaf node, False otherwise.&quot;&quot;&quot;</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> BinNode <span class="op">{</span> <span class="co">// Binary tree node ADT</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Get and set the element value</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="bu">Object</span> <span class="fu">value</span><span class="op">();</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setValue</span><span class="op">(</span><span class="bu">Object</span> v<span class="op">);</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">// return the children</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> BinNode <span class="fu">left</span><span class="op">();</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> BinNode <span class="fu">right</span><span class="op">();</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">// return TRUE if a leaf node, FALSE otherwise</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">isLeaf</span><span class="op">();</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> BinNode<span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Binary tree node ADT</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> E <span class="fu">value</span><span class="op">();</span>           <span class="co">// Get and set the element value.</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">setValue</span><span class="op">(</span>E v<span class="op">);</span>  <span class="co">// Set the element value.</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> BinNode<span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="fu">left</span><span class="op">();</span>   <span class="co">// Return the left child.</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> BinNode<span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="fu">right</span><span class="op">();</span>  <span class="co">// Return the right child.</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">isLeaf</span><span class="op">();</span>    <span class="co">// return TRUE if a leaf node, FALSE otherwise.</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<div class="line-block"></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BinaryNode:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    BinaryNode(elem, left, right):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.elem <span class="op">=</span> elem    <span class="co">// Element for this node.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.left <span class="op">=</span> left    <span class="co">// Pointer to left child.</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.right <span class="op">=</span> right  <span class="co">// Pointer to right child.</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    isLeaf():</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Return true if a leaf node, false otherwise.</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">this</span>.left <span class="kw">is</span> <span class="va">null</span> <span class="kw">and</span> <span class="va">this</span>.right <span class="kw">is</span> <span class="va">null</span></span></code></pre></div>
+<p>We also define a <em>leaf</em> to be a node with no children – i.e.,
+where both childen pointers point to nothing.</p>
 <div id="BinLink">
 <p>
 <div id="BTnullpointerCON" class="ssAV" data-short-name="BTnullpointerCON" data-long-name="Binary/BTnullpointerCON" alt="Binary/BTnullpointerCON" tabIndex="-1">
@@ -293,13 +157,32 @@ importantly, many uses of the parent pointer are driven by improper
 understanding of recursion and so indicate poor programming. If you are
 inclined toward using a parent pointer, consider if there is a more
 efficient implementation possible.</p>
+<section id="differentiating-between-internal-nodes-and-leaves"
+class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1"><span class="header-section-number">5.3.1</span>
+Differentiating between internal nodes and leaves</h3>
 <p>An important decision in the design of a pointer-based node
-implementation is whether the same class definition will be used for <a href="10-glossary.html#leaf-node" class="term">leaves</a> and <a href="10-glossary.html#internal-node" class="term">internal nodes</a>. Using the same class for both will
-simplify the implementation, but might be an inefficient use of space.
-Some applications require data values only for the leaves. Other
-applications require one type of value for the leaves and another for
-the internal nodes. Examples include the <a href="10-glossary.html#binary-trie" class="term">binary
-trie</a>, the <a href="10-glossary.html#pr-quadtree" class="term">PR Quadtree</a>, the <a href="10-glossary.html#huffman-coding-tree" class="term">Huffman coding tree</a>, and the <a href="10-glossary.html#expression-tree" class="term">expression tree</a> illustrated by <a
+implementation is whether the same class definition will be used for <a
+href="10-glossary.html#leaf-node" class="term"
+title="In a binary tree, leaf node is any node that has two empty children. (Note that a binary tree is defined so that every node has two children, and that is why the leaf node has to have two empty children, rather than no children.) In a general tree, any node is a leaf node if it has no children.">leaves</a>
+and <a href="10-glossary.html#internal-node" class="term"
+title="In a tree, any node that has at least one non-empty child is an internal node.">internal
+nodes</a>. Using the same class for both will simplify the
+implementation, but might be an inefficient use of space. Some
+applications require data values only for the leaves. Other applications
+require one type of value for the leaves and another for the internal
+nodes. Examples include the <a href="10-glossary.html#binary-trie"
+class="term"
+title="A binary tree whose structure is that of a trie. Generally this is an implementation for a search tree. This means that the search key values are thought of a binary digits, with the digit in the position corresponding to this a node&#39;s level in the tree indicating a left branch if it is &#39;0&#39;, or a right branch if it is &#39;1&#39;. Examples include the Huffman coding tree and the Bintree.">binary
+trie</a>, the <a href="10-glossary.html#pr-quadtree" class="term"
+title="A type of quadtree that stores point data in two dimensions. The root of the PR quadtree represents some square region of 2d space. If that space stores more than one data point, then the region is decomposed into four equal subquadrants, each represented recursively by a subtree of the PR quadtree. Since many leaf nodes of the PR quadtree will contain no data points, implementation often makes use of the Flyweight design pattern. Related to the bintree.">PR
+Quadtree</a>, the <a href="10-glossary.html#huffman-coding-tree"
+class="term"
+title="A Huffman coding tree is a full binary tree that is used to represent letters (or other symbols) efficiently. Each letter is associated with a node in the tree, and is then given a Huffman code based on the position of the associated node. A Huffman coding tree is an example of a binary trie.">Huffman
+coding tree</a>, and the <a href="10-glossary.html#expression-tree"
+class="term"
+title="A tree structure meant to represent a mathematical expression. Internal nodes of the expression tree are operators in the expression, with the subtrees being the sub-expressions that are its operand. All leaf nodes are operands.">expression
+tree</a> illustrated by <a
 href="5.3-binary-tree-node-implementations.html#DiffNodes">Figure
 #DiffNodes</a>. By definition, only internal nodes have non-empty
 children. If we use the same node implementation for both internal and
@@ -334,181 +217,42 @@ character symbol. In contrast, leaves store variable names or numbers,
 which is considerably larger in order to handle the wider range of
 possible values. At the same time, leaf nodes need not store child
 pointers.</p>
-<p><a href="10-glossary.html#object-oriented-programming-paradigm" class="term">Object-oriented languages</a> allow us to differentiate
-leaf from internal nodes through the use of a <a href="10-glossary.html#class-hierarchy" class="term">class
-hierarchy</a>. A <a href="10-glossary.html#base-class" class="term">base class</a> provides a
-general definition for an object, and a <a href="10-glossary.html#subclass" class="term">subclass</a> modifies a base class to add more detail. A
-base class can be declared for binary tree nodes in general, with
-subclasses defined for the internal and leaf nodes. The base class in
-the following code is named <code>VarBinNode</code>. It includes a
-virtual member function named <code>isLeaf</code>, which indicates the
-node type. Subclasses for the internal and leaf node types each
-implement <code>isLeaf</code>. Internal nodes store child pointers of
-the base class type; they do not distinguish their children’s actual
-subclass. Whenever a node is examined, its version of
-<code>isLeaf</code> indicates the node’s subclass.</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Base class for expression tree nodes</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> VarBinNode:</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> isLeaf(<span class="va">self</span>):  <span class="co"># All subclasses must implement</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">NotImplementedError</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Leaf node</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> VarLeafNode(VarBinNode):</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, val):</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.operand <span class="op">=</span> val</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> isLeaf(<span class="va">self</span>):</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">True</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> value(<span class="va">self</span>):</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.operand</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Internal node</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> VarIntlNode(VarBinNode):</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, op, l, r):</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.operator <span class="op">=</span> op</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.left <span class="op">=</span> l</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.right <span class="op">=</span> r</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> isLeaf(<span class="va">self</span>):</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">False</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> leftchild(<span class="va">self</span>):</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.left</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> rightchild(<span class="va">self</span>):</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.right</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> value(<span class="va">self</span>):</span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.operator</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Preorder traversal</span></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> traverse(node):</span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> node <span class="kw">is</span> <span class="va">None</span>: <span class="cf">return</span>  <span class="co"># Nothing to visit</span></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> node.isLeaf():        <span class="co"># Process leaf node</span></span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>        VisitLeafNode(node.value())</span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:                    <span class="co"># Process internal node</span></span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>        VisitInternalNode(node.value())</span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>        traverse(node.leftchild())</span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>        traverse(node.rightchild())</span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: ExpressionTree1 *** */</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Base class for expression tree nodes</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">interface</span> VarBinNode <span class="op">{</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">isLeaf</span><span class="op">();</span> <span class="co">// All subclasses must implement</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span> Leaf node <span class="co">*/</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> VarLeafNode <span class="kw">implements</span> VarBinNode <span class="op">{</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="bu">String</span> operand<span class="op">;</span>                 <span class="co">// Operand value</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">VarLeafNode</span><span class="op">(</span><span class="bu">String</span> val<span class="op">)</span> <span class="op">{</span> operand <span class="op">=</span> val<span class="op">;</span> <span class="op">}</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">isLeaf</span><span class="op">()</span> <span class="op">{</span> <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span> <span class="op">}</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="bu">String</span> <span class="fu">value</span><span class="op">()</span> <span class="op">{</span> <span class="cf">return</span> operand<span class="op">;</span> <span class="op">}</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: ExpressionTree1 *** */</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: ExpressionTree2 *** */</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co">// Internal node</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> VarIntlNode <span class="kw">implements</span> VarBinNode <span class="op">{</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> VarBinNode left<span class="op">;</span>                <span class="co">// Left child</span></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> VarBinNode right<span class="op">;</span>               <span class="co">// Right child</span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="kw">private</span> <span class="bu">Character</span> operator<span class="op">;</span>             <span class="co">// Operator value</span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">VarIntlNode</span><span class="op">(</span><span class="bu">Character</span> op<span class="op">,</span> VarBinNode l<span class="op">,</span> VarBinNode r<span class="op">)</span></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> operator <span class="op">=</span> op<span class="op">;</span> left <span class="op">=</span> l<span class="op">;</span> right <span class="op">=</span> r<span class="op">;</span> <span class="op">}</span></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">isLeaf</span><span class="op">()</span> <span class="op">{</span> <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span> <span class="op">}</span></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> VarBinNode <span class="fu">leftchild</span><span class="op">()</span> <span class="op">{</span> <span class="cf">return</span> left<span class="op">;</span> <span class="op">}</span></span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> VarBinNode <span class="fu">rightchild</span><span class="op">()</span> <span class="op">{</span> <span class="cf">return</span> right<span class="op">;</span> <span class="op">}</span></span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>  <span class="kw">public</span> <span class="bu">Character</span> <span class="fu">value</span><span class="op">()</span> <span class="op">{</span> <span class="cf">return</span> operator<span class="op">;</span> <span class="op">}</span></span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: ExpressionTree2 *** */</span></span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a><span class="co">// Preorder traversal</span></span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: pointer based preorder *** */</span></span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">traverse</span><span class="op">(</span>VarBinNode rt<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>rt <span class="op">==</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span> <span class="cf">return</span><span class="op">;</span> <span class="op">}</span>         <span class="co">// Nothing to visit</span></span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>rt<span class="op">.</span><span class="fu">isLeaf</span><span class="op">())</span> <span class="op">{</span>                 <span class="co">// Process leaf node</span></span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>    Visit<span class="op">.</span><span class="fu">VisitLeafNode</span><span class="op">(((</span>VarLeafNode<span class="op">)</span>rt<span class="op">).</span><span class="fu">value</span><span class="op">());</span></span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="op">{</span>                           <span class="co">// Process internal node</span></span>
-<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>    Visit<span class="op">.</span><span class="fu">VisitInternalNode</span><span class="op">(((</span>VarIntlNode<span class="op">)</span>rt<span class="op">).</span><span class="fu">value</span><span class="op">());</span></span>
-<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">traverse</span><span class="op">(((</span>VarIntlNode<span class="op">)</span>rt<span class="op">).</span><span class="fu">leftchild</span><span class="op">());</span></span>
-<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">traverse</span><span class="op">(((</span>VarIntlNode<span class="op">)</span>rt<span class="op">).</span><span class="fu">rightchild</span><span class="op">());</span></span>
-<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: pointer based preorder *** */</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: ExpressionTree1 *** */</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Base class for expression tree nodes</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">interface</span> VarBinNode <span class="op">{</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">isLeaf</span><span class="op">();</span> <span class="co">// All subclasses must implement</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">/**</span> Leaf node <span class="co">*/</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> VarLeafNode <span class="kw">implements</span> VarBinNode <span class="op">{</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="bu">String</span> operand<span class="op">;</span>        <span class="co">// Operand value</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">VarLeafNode</span><span class="op">(</span><span class="bu">String</span> val<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>        operand <span class="op">=</span> val<span class="op">;</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">isLeaf</span><span class="op">()</span> <span class="op">{</span> <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span> <span class="op">}</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">String</span>  <span class="fu">value</span><span class="op">()</span>  <span class="op">{</span> <span class="cf">return</span> operand<span class="op">;</span> <span class="op">}</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: ExpressionTree1 *** */</span></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: ExpressionTree2 *** */</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="co">// Internal node</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> VarIntlNode <span class="kw">implements</span> VarBinNode <span class="op">{</span></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> VarBinNode left<span class="op">;</span>       <span class="co">// Left child</span></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> VarBinNode right<span class="op">;</span>      <span class="co">// Right child</span></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="bu">Character</span>  operator<span class="op">;</span>   <span class="co">// Operator value</span></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">VarIntlNode</span><span class="op">(</span><span class="bu">Character</span> op<span class="op">,</span> VarBinNode l<span class="op">,</span> VarBinNode r<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>        operator <span class="op">=</span> op<span class="op">;</span> left <span class="op">=</span> l<span class="op">;</span> right <span class="op">=</span> r<span class="op">;</span></span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">boolean</span>    <span class="fu">isLeaf</span><span class="op">()</span>     <span class="op">{</span> <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span> <span class="op">}</span></span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> VarBinNode <span class="fu">leftchild</span><span class="op">()</span>  <span class="op">{</span> <span class="cf">return</span> left<span class="op">;</span> <span class="op">}</span></span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> VarBinNode <span class="fu">rightchild</span><span class="op">()</span> <span class="op">{</span> <span class="cf">return</span> right<span class="op">;</span> <span class="op">}</span></span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">Character</span>  <span class="fu">value</span><span class="op">()</span>      <span class="op">{</span> <span class="cf">return</span> operator<span class="op">;</span> <span class="op">}</span></span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: ExpressionTree2 *** */</span></span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="co">// Preorder traversal</span></span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: pointer based preorder *** */</span></span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">traverse</span><span class="op">(</span>VarBinNode node<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>node <span class="op">==</span> <span class="kw">null</span><span class="op">)</span> <span class="cf">return</span><span class="op">;</span>  <span class="co">// Nothing to visit</span></span>
-<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>node<span class="op">.</span><span class="fu">isLeaf</span><span class="op">())</span> <span class="op">{</span></span>
-<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Process leaf node</span></span>
-<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>        Visit<span class="op">.</span><span class="fu">VisitLeafNode</span><span class="op">(((</span>VarLeafNode<span class="op">)</span>node<span class="op">).</span><span class="fu">value</span><span class="op">());</span></span>
-<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Process internal node</span></span>
-<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>        Visit<span class="op">.</span><span class="fu">VisitInternalNode</span><span class="op">(((</span>VarIntlNode<span class="op">)</span>node<span class="op">).</span><span class="fu">value</span><span class="op">());</span></span>
-<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>        <span class="fu">traverse</span><span class="op">(((</span>VarIntlNode<span class="op">)</span>node<span class="op">).</span><span class="fu">leftchild</span><span class="op">());</span></span>
-<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>        <span class="fu">traverse</span><span class="op">(((</span>VarIntlNode<span class="op">)</span>node<span class="op">).</span><span class="fu">rightchild</span><span class="op">());</span></span>
-<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: pointer based preorder *** */</span></span></code></pre></div>
-<p>
-<div id="expressionTraversalCON" class="ssAV" data-short-name="expressionTraversalCON" data-long-name="Expression Tree Traversal Slideshow" alt="Expression Tree Traversal Slideshow" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-</p>
-<p>The Expression Tree implementation includes two subclasses derived
-from class <code>VarBinNode</code>, named <code>LeafNode</code> and
-<code>IntlNode</code>. Class <code>IntlNode</code> can access its
-children through pointers of type <code>VarBinNode</code>. Function
-<code>traverse</code> illustrates the use of these classes. When
-<code>traverse</code> calls method <code>isLeaf</code>, the language’s
-runtime environment determines which subclass this particular instance
-of <code>node</code> happens to be and calls that subclass’s version of
-<code>isLeaf</code>. Method <code>isLeaf</code> then provides the actual
-node type to its caller. The other member functions for the derived
-subclasses are accessed by type-casting the base class pointer as
-appropriate, as shown in function <code>traverse</code>.</p>
+<p><a href="10-glossary.html#object-oriented-programming-paradigm"
+class="term"
+title="An approach to problem-solving where all computations are carried out using objects.">Object-oriented
+languages</a> allow us to differentiate leaf from internal nodes through
+the use of a <a href="10-glossary.html#class-hierarchy" class="term"
+title="In object-oriented programming, a set of classes and their interrelationships. One of the classes is the base class, and the others are subclasses that inherit either directly or indirectly from the base class.">class
+hierarchy</a>. A <a href="10-glossary.html#base-class" class="term"
+title="In object-oriented programming, a class from which another class inherits. The class that inherits is called a subclass.">base
+class</a> provides a general definition for an object, and a <a
+href="10-glossary.html#subclass" class="term"
+title="In object-oriented programming, any class within a class hierarchy that inherits from some other class.">subclass</a>
+modifies the base class to add more detail. We will not discuss further
+how to implement different kind of tree nodes more in this book, but
+will just assume that all nodes are of the same class.</p>
+<!-- TODO:
+Add information about data types and functional languages
+-->
 </section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="5.2-binary-tree-as-a-recursive-data-structure.html" class="navbutton">&lt;&lt;</a>
+<a href="5.2-binary-tree-as-a-recursive-data-structure.html" accesskey="p" rel="previous">Binary Tree as a Recursive Data Structure</a>
+</div>
+<div class="navlink">
+<a href="5.4-the-full-binary-tree-theorem-optional.html" accesskey="n" rel="next">The Full Binary Tree Theorem (optional)</a>
+<a href="5.4-the-full-binary-tree-theorem-optional.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 <script type="text/javascript" src="../interactive/Binary/BTnullpointerCON.js"></script>
 <script type="text/javascript" src="../interactive/Binary/expressionTreeCON.js"></script>
-<script type="text/javascript" src="../interactive/Binary/expressionTraversalCON.js"></script>
 </body>
 </html>
+

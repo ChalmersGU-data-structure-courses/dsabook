@@ -12,14 +12,14 @@ $(document).ready(function() {
   var av_name = "StaticArrayList-Add-CON";
   var av = new JSAV(av_name);
   var pseudo = av.code([
-    "add(i:int, x:E)",
+    "add(i, x):",
     "    // Precondition: listSize < size of internalArray",
     "    // Precondition: 0 <= i <= listSize",
-    "    listSize += 1",
-    "    for k in listSize-1, listSize-2, ..., i+1",
+    "    listSize = listSize + 1",
+    "    for k = listSize-1 downto i+1:",
     "        internalArray[k] = internalArray[k-1]",
     "    internalArray[i] = x",
-  ], {lineNumbers: false});
+], {lineNumbers: false});
 
   var leftMargin = 10;
   var arr = av.ds.array(arrValues, {indexed: true, left: leftMargin, top: 20}).hide();

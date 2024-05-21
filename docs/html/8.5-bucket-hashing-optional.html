@@ -8,26 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Bucket Hashing (optional)</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -93,27 +79,32 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 <link href="../interactive/Hashing/buckethashCON.css" rel="stylesheet" type="text/css"/>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="8-hashing.html" accesskey="u" rel="up">Hashing</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="8.4-converting-objects-to-table-indices.html" class="navbutton">&lt;&lt;</a>
+<a href="8.4-converting-objects-to-table-indices.html" accesskey="p" rel="previous">Converting Objects to Table Indices</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="8.6-open-addressing.html" accesskey="n" rel="next">Open Addressing</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="8.4-converting-objects-to-table-indices.html" accesskey="p" rel="previous">Converting Objects to Table Indices</a>
-</span>
+<div>
+<a href="8.6-open-addressing.html" accesskey="n" rel="next">Open Addressing</a>
+<a href="8.6-open-addressing.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="bucket-hashing-optional" class="level2" data-number="8.5">
 <h2 data-number="8.5"><span class="header-section-number">8.5</span>
 Bucket Hashing (optional)</h2>
@@ -122,7 +113,8 @@ record
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
 with key value
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mi>R</mi></msub><annotation encoding="application/x-tex">k_R</annotation></semantics></math>
-has a <a href="10-glossary.html#home-position" class="term">home position</a> that is
+has a <a href="10-glossary.html#home-position" class="term"
+title="In hashing, a synonym for home slot.">home position</a> that is
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="bold">𝐡</mtext><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>k</mi><mi>R</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\textbf{h}(k_R)</annotation></semantics></math>,
 the slot computed by the hash function. If
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
@@ -135,7 +127,10 @@ the collision resolution policy to determine which slot that will be.
 Naturally, the same policy must be followed during search as during
 insertion, so that any record not found in its home position can be
 recovered by repeating the collision resolution process.</p>
-<p>One implementation for closed hashing groups hash table slots into <a href="10-glossary.html#bucket" class="term">buckets</a>. The
+<p>One implementation for closed hashing groups hash table slots into <a
+href="10-glossary.html#bucket" class="term"
+title="In bucket hashing, a bucket is a sequence of slots in the hash table that are grouped together.">buckets</a>.
+The
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>
 slots of the hash table are divided into
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
@@ -144,11 +139,13 @@ buckets, with each bucket consisting of
 slots. The hash function assigns each record to the first slot within
 one of the buckets. If this slot is already occupied, then the bucket
 slots are searched sequentially until an open slot is found. If a bucket
-is entirely full, then the record is stored in an <a href="10-glossary.html#overflow-bucket" class="term">overflow bucket</a> of infinite capacity at the end of
-the table. All buckets share the same overflow bucket. A good
-implementation will use a hash function that distributes the records
-evenly among the buckets so that as few records as possible go into the
-overflow bucket.</p>
+is entirely full, then the record is stored in an <a
+href="10-glossary.html#overflow-bucket" class="term"
+title="In bucket hashing, this is the bucket into which a record is placed if the bucket containing the record&#39;s home slot is full. The overflow bucket is logically considered to have infinite capacity, though in practice search and insert will become relatively expensive if many records are stored in the overflow bucket.">overflow
+bucket</a> of infinite capacity at the end of the table. All buckets
+share the same overflow bucket. A good implementation will use a hash
+function that distributes the records evenly among the buckets so that
+as few records as possible go into the overflow bucket.</p>
 <p>When searching for a record, the first step is to hash the key to
 determine which bucket should contain the record. The records in this
 bucket are then searched. If the desired key value is not found and the
@@ -209,7 +206,23 @@ Your browser does not support iframes.
 </p>
 </section>
 </section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="8.4-converting-objects-to-table-indices.html" class="navbutton">&lt;&lt;</a>
+<a href="8.4-converting-objects-to-table-indices.html" accesskey="p" rel="previous">Converting Objects to Table Indices</a>
+</div>
+<div class="navlink">
+<a href="8.6-open-addressing.html" accesskey="n" rel="next">Open Addressing</a>
+<a href="8.6-open-addressing.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 <script type="text/javascript" src="../interactive/Hashing/buckethashCON1.js"></script>
 <script type="text/javascript" src="../interactive/Hashing/buckethashCON2.js"></script>
 </body>
 </html>
+

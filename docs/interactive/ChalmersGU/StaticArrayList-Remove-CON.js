@@ -15,12 +15,12 @@ $(document).ready(function() {
       arrow1_x = 22 + nodeWidth;
 
   var pseudo = av.code([
-      "remove(i:int) : E",
+      "remove(i):",
       "    // Precondition: 0 <= i < listSize",
-      "    x : E = internalArray[i]",
-      "    for k in i+1, i+2, ..., listSize-1",
-      "        internalArray[k] = internalArray[k+1]",
-      "    listSize -= 1",
+      "    x = internalArray[i]",
+      "    for k = i+1 to listSize-1:",
+      "        internalArray[k-1] = internalArray[k]",
+      "    listSize = listSize - 1",
       "    internalArray[listSize] = null   // For garbage collection",
       "    return x",
     ], {"lineNumbers": false}

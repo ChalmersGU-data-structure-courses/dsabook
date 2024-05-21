@@ -1,15 +1,28 @@
 #!/bin/bash
 
-SOURCES=(src/*.md)
-OUT=docs/html
+# exit on error:
+set -e
 
-rm -rf $OUT
-echo "Running pandoc"
-time pandoc -t chunkedhtml --defaults=pandoc-defaults.yaml --output=$OUT "${SOURCES[@]}"
+temp=_temp
+
+rm -rf $temp
+mkdir -p $temp/src
+
+echo "Preprocessing: src/* -> $temp/src/*"
+time python3 extra/preprocess.py $temp/src src/X01-glossary.md src/*.md
+# Copy non-markdown files and folders:
+cp -Rn src/ $temp/src/ || true
 echo
 
-echo "Postprocessing output"
-time python postprocess.py
+echo "Running pandoc: $temp/src/* -> $temp/html/*"
+time pandoc -t chunkedhtml --defaults=pandoc-defaults.yaml --output=$temp/html $temp/src/*.md
+echo
+
+rm -rf docs/html/*
+echo "Postprocessing: $temp/html/* -> docs/html/*"
+time python3 extra/postprocess.py docs/html $temp/html/*.html
+# Copy non-html files and folders:
+cp -Rn $temp/html/ docs/html || true
 echo
 
 # Checking links using library: https://github.com/untitaker/hyperlink

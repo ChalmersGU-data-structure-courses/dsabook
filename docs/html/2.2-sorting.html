@@ -8,26 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Sorting</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -93,26 +79,31 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="2-arrays-searching-and-sorting.html" accesskey="u" rel="up">Arrays: searching and sorting</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="2.1-searching-in-an-array.html" class="navbutton">&lt;&lt;</a>
+<a href="2.1-searching-in-an-array.html" accesskey="p" rel="previous">Searching in an Array</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="2.3-sorting-terminology-and-notation.html" accesskey="n" rel="next">Sorting Terminology and Notation</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="2.1-searching-in-an-array.html" accesskey="p" rel="previous">Searching in an Array</a>
-</span>
+<div>
+<a href="2.3-sorting-terminology-and-notation.html" accesskey="n" rel="next">Sorting Terminology and Notation</a>
+<a href="2.3-sorting-terminology-and-notation.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="sorting" class="level2" data-number="2.2">
 <h2 data-number="2.2"><span class="header-section-number">2.2</span>
 Sorting</h2>
@@ -132,7 +123,7 @@ search the collection efficiently. We might sort customer records by zip
 code so that when we print an advertisement we can then mail them more
 cheaply. We might use sorting to help an algorithm to solve some other
 problem. For example, <a
-href="9.5-minimal-cost-spanning-trees.html#kruskals-algorithm">Kruskal’s
+href="9.6-minimal-cost-spanning-trees.html#kruskals-algorithm">Kruskal’s
 algorithm</a> to find [minimal-cost spanning trees] must sort the edges
 of a graph by their lengths before it can process them.</p>
 <p>Because sorting is so important, naturally it has been studied
@@ -154,24 +145,39 @@ being developed and refined for special-purpose applications.</p>
 <p>Along with introducing this central problem in computer science,
 studying sorting algorithms helps us to understand issues in algorithm
 design and analysis. For example, the sorting algorithms in this chapter
-show multiple approaches to using <a href="10-glossary.html#divide-and-conquer" class="term">divide and
-conquer</a>. In particular, there are multiple ways to do the
+show multiple approaches to using <a
+href="10-glossary.html#divide-and-conquer" class="term"
+title="A technique for designing algorithms where a solution is found by breaking the problem into smaller (similar) subproblems, solving the subproblems, then combining the subproblem solutions to form the solution to the original problem. This process is often implemented using recursion.">divide
+and conquer</a>. In particular, there are multiple ways to do the
 dividing. <a href="2.9-mergesort.html#mergesort">Mergesort</a> divides a
 list in half. <a href="2.11-quicksort.html#quicksort">Quicksort</a>
-divides a list into big values and small values. <a href="10-glossary.html#radix-sort" class="term">Radix Sort</a> divides the problem by working on one
-digit of the key at a time. Sorting algorithms can also illustrate a
-wide variety of algorithm analysis techniques. Quicksort illustrates
-that it is possible for an algorithm to have an <a href="10-glossary.html#average-case" class="term">average case</a> whose growth rate is significantly
-smaller than its <a href="10-glossary.html#worst-case" class="term">worst case</a>. It is possible to
-speed up one sorting algorithm (such as <a href="10-glossary.html#shellsort" class="term">Shellsort</a> or <a
-href="2.11-quicksort.html#quicksort">Quicksort</a>) by taking advantage
-of the <a href="10-glossary.html#best-case" class="term">best case</a> behavior of another algorithm
-(Insertion Sort). Special case behavior by some sorting algorithms makes
-them a good solution for special niche applications (<a
+divides a list into big values and small values. <a
+href="10-glossary.html#radix-sort" class="term"
+title="A sorting algorithm that works by processing records with $k$ digit keys in $k$ passes, where each pass sorts the records according to the current digit. At the end of the process, the records will be sorted. This can be efficient if the number of digits is small compared to the number of records. However, if the $n$ records all have unique key values, than at least $\Omega(\log n)$ digits are required, leading to an $\Omega(n \log n)$ sorting algorithm that tends to be much slower than other sorting algorithms like Quicksort or mergesort.">Radix
+Sort</a> divides the problem by working on one digit of the key at a
+time. Sorting algorithms can also illustrate a wide variety of algorithm
+analysis techniques. Quicksort illustrates that it is possible for an
+algorithm to have an <a href="10-glossary.html#average-case"
+class="term"
+title="In algorithm analysis, specifically complexity of an algorithm, the average of the costs for all problem instances of a given input size $n$. If not all problem instances have equal probability of occurring, then the average case must be calculated using a weighted average that is specified with the problem (for example, every input may be equally likely). Every input size $n$ has its own average case. We **never** consider the average case as removed from input size.">average
+case</a> whose growth rate is significantly smaller than its <a
+href="10-glossary.html#worst-case" class="term"
+title="In algorithm analysis, specifically complexity of an algorithm, the problem instance from among all problem instances for a given input size $n$ that has the greatest cost. Every input size $n$ has its own worst case. We **never** consider the worst case as removed from input size.">worst
+case</a>. It is possible to speed up one sorting algorithm (such as <a
+href="10-glossary.html#shellsort" class="term"
+title="A sort that relies on the best-case cost of insertion sort to improve over $\Theta(n^2)$ worst case cost.">Shellsort</a>
+or <a href="2.11-quicksort.html#quicksort">Quicksort</a>) by taking
+advantage of the <a href="10-glossary.html#best-case" class="term"
+title="In algorithm analysis, specifically complexity of an algorithm, the problem instance from among all problem instances for a given input size $n$ that has least cost. Every input size $n$ has its own best case. We **never** consider the best case as removed from input size.">best
+case</a> behavior of another algorithm (Insertion Sort). Special case
+behavior by some sorting algorithms makes them a good solution for
+special niche applications (<a
 href="7.3-heapsort.html#heapsort">Heapsort</a>). Sorting provides an
 example of an important technique for analyzing the lower bound for a
-problem. <a href="10-glossary.html#external-sort" class="term">External Sorting</a>
-refers to the process of sorting large files stored on disk.</p>
+problem. <a href="10-glossary.html#external-sort" class="term"
+title="A sorting algorithm that is applied to data stored in peripheral storage such as on a disk drive. This is in contrast to an internal sort that works on data stored in main memory.">External
+Sorting</a> refers to the process of sorting large files stored on
+disk.</p>
 <p>This chapter covers several standard algorithms appropriate for
 sorting a collection of records that fit into the computer’s main
 memory. It begins with a discussion of three simple, but relatively
@@ -191,5 +197,21 @@ general requires
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Omega(n \log n)</annotation></semantics></math>
 time in the worst case.</p>
 </section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="2.1-searching-in-an-array.html" class="navbutton">&lt;&lt;</a>
+<a href="2.1-searching-in-an-array.html" accesskey="p" rel="previous">Searching in an Array</a>
+</div>
+<div class="navlink">
+<a href="2.3-sorting-terminology-and-notation.html" accesskey="n" rel="next">Sorting Terminology and Notation</a>
+<a href="2.3-sorting-terminology-and-notation.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 </body>
 </html>
+

@@ -8,26 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Comparison of List Implementations</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -93,26 +79,31 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="4-lists-1.html" accesskey="u" rel="up">Lists</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="4.4-linked-lists.html" class="navbutton">&lt;&lt;</a>
+<a href="4.4-linked-lists.html" accesskey="p" rel="previous">Linked Lists</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="4.6-implementing-maps-using-lists.html" accesskey="n" rel="next">Implementing Maps using Lists</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="4.4-linked-lists.html" accesskey="p" rel="previous">Linked Lists</a>
-</span>
+<div>
+<a href="4.6-implementing-maps-using-lists.html" accesskey="n" rel="next">Implementing Maps using Lists</a>
+<a href="4.6-implementing-maps-using-lists.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="comparison-of-list-implementations" class="level2"
 data-number="4.5">
 <h2 data-number="4.5"><span class="header-section-number">4.5</span>
@@ -128,17 +119,23 @@ choose?</p>
 space whether they are simple integers or large objects with many
 fields. Any container data structure like a list then requires some
 additional space to organize the elements being stored. This additional
-space is called <a href="10-glossary.html#overhead" class="term">overhead</a>.</p>
-<p><a href="10-glossary.html#array-based-list" class="term">Array-based lists</a> have
-the disadvantage that their size must be predetermined before the array
-can be allocated. Static array-based lists cannot grow beyond their
-predetermined size, but dynamic lists will automatically reallocate the
-array when needed. However, when the list has recently been reallocated,
-a substantial amount of space might be tied up in a largely empty array.
-This empty space is the overhead required by the array-based list. <a href="10-glossary.html#linked-list" class="term">Linked lists</a> have the advantage
-that they only need space for the objects actually on the list. There is
-no limit to the number of elements in either a linked list or a dynamic
-array-based list, as long as there is <a href="10-glossary.html#free-store" class="term">free
+space is called <a href="10-glossary.html#overhead" class="term"
+title="All information stored by a data structure aside from the actual data. For example, the pointer fields in a linked list or BST, or the unused positions in an array-based list.">overhead</a>.</p>
+<p><a href="10-glossary.html#array-based-list" class="term"
+title="An implementation for the list ADT that uses an array to store the list elements. Typical implementations fix the array size at creation of the list, and the overhead is the number of array positions that are presently unused.">Array-based
+lists</a> have the disadvantage that their size must be predetermined
+before the array can be allocated. Static array-based lists cannot grow
+beyond their predetermined size, but dynamic lists will automatically
+reallocate the array when needed. However, when the list has recently
+been reallocated, a substantial amount of space might be tied up in a
+largely empty array. This empty space is the overhead required by the
+array-based list. <a href="10-glossary.html#linked-list" class="term"
+title="An implementation for the list ADT that uses dynamic allocation of link nodes to store the list elements. Common variants are the singly linked list, doubly linked list and circular list. The overhead required is the pointers in each link node.">Linked
+lists</a> have the advantage that they only need space for the objects
+actually on the list. There is no limit to the number of elements in
+either a linked list or a dynamic array-based list, as long as there is
+<a href="10-glossary.html#free-store" class="term"
+title="Space available to a program during runtime to be used for dynamic allocation of objects. The free store is distinct from the runtime stack. The free store is sometimes referred to as the heap, which can be confusing because heap more often refers to a specific data structure. Most programming languages provide functions to allocate (and maybe to deallocate) objects from the free store, such as `new` in C++ and Java.">free
 store</a> memory available.</p>
 <p>The amount of space required by a linked list is directly
 proportional to the number of elements
@@ -222,33 +219,22 @@ href="4.10-queues.html#queues">queues</a> later.</p>
 could have a pointer to the “current” list node, and have methods for
 moving forward and backward in the list, several of the operations can
 be constant time. In the Java standard API this is called a <a
-href="https://docs.oracle.com/javase/8/docs/api/java/util/ListIterator.html">ListIterator</a>,
+href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/ListIterator.html">ListIterator</a>,
 which is part of Java’s standard <a
-href="https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html">LinkedList</a>.</p>
+href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/LinkedList.html">LinkedList</a>.</p>
 <p>But these advanced list iterators are not part of this course, and in
 fact there are not many algorithms where list iterators are particularly
 useful.</p>
 </section>
-<section id="practice-questions-1" class="level3" data-number="4.5.4">
-<h3 data-number="4.5.4"><span class="header-section-number">4.5.4</span>
-Practice Questions</h3>
-<p>
-<div id="LinkedList-Summary-QUIZ" class="embedContainer">
-<iframe id="LinkedList-Summary-QUIZ_iframe" aria-label="LinkedList-Summary-QUIZ" src="../interactive/ChalmersGU/LinkedList-Summary-QUIZ.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
-</div>
-</p>
-</section>
 <section id="how-are-lists-implemented-in-the-standard-libraries"
-class="level3" data-number="4.5.5">
-<h3 data-number="4.5.5"><span class="header-section-number">4.5.5</span>
+class="level3" data-number="4.5.4">
+<h3 data-number="4.5.4"><span class="header-section-number">4.5.4</span>
 How are lists implemented in the standard libraries?</h3>
 <p>All serious languages have dynamic list implementations. Here are how
 they are implemented in Java and Python:</p>
 <ul>
 <li>In Java, <a
-href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">java.util.ArrayList</a>
+href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/ArrayList.html">java.util.ArrayList</a>
 implements dynamic arrays, meaning that the internal array grows
 automatically when necessary. The growth factor is 50%, so that if the
 array has size 1024, it will grow with another 512 elements. [<a
@@ -257,7 +243,7 @@ ArrayList.java</a>] However, the ArrayList will never shrink
 automatically, but instead it’s up to the programmer to decide when to
 shrink it.</li>
 <li>Java’s <a
-href="https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html">java.util.LinkedList</a>
+href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/LinkedList.html">java.util.LinkedList</a>
 implements <a
 href="4.7-doubly-linked-lists-optional.html#doubly-linked-lists-optional">doubly-linked
 lists</a>, so that the iterator can move forward and backward through
@@ -275,5 +261,21 @@ listobject.c</a>]</li>
 </ul>
 </section>
 </section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="4.4-linked-lists.html" class="navbutton">&lt;&lt;</a>
+<a href="4.4-linked-lists.html" accesskey="p" rel="previous">Linked Lists</a>
+</div>
+<div class="navlink">
+<a href="4.6-implementing-maps-using-lists.html" accesskey="n" rel="next">Implementing Maps using Lists</a>
+<a href="4.6-implementing-maps-using-lists.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 </body>
 </html>
+

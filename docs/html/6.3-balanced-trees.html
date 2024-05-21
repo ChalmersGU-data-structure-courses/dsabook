@@ -8,26 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Balanced Trees</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -93,33 +79,40 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="6-binary-search-trees.html" accesskey="u" rel="up">Binary Search Trees</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="6.2-binary-tree-guided-information-flow.html" class="navbutton">&lt;&lt;</a>
+<a href="6.2-binary-tree-guided-information-flow.html" accesskey="p" rel="previous">Binary Tree Guided Information Flow</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="6.4-the-avl-tree.html" accesskey="n" rel="next">The AVL Tree</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="6.2-binary-tree-guided-information-flow.html" accesskey="p" rel="previous">Binary Tree Guided Information Flow</a>
-</span>
+<div>
+<a href="6.4-the-avl-tree.html" accesskey="n" rel="next">The AVL Tree</a>
+<a href="6.4-the-avl-tree.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="balanced-trees" class="level2" data-number="6.3">
 <h2 data-number="6.3"><span class="header-section-number">6.3</span>
 Balanced Trees</h2>
-<p>The <a href="10-glossary.html#binary-search-tree" class="term">Binary Search Tree</a> has a serious
-deficiency for practical use as a search structure. That is the fact
-that it can easily become unbalanced, so that some nodes are deep in the
-tree. In fact, it is possible for a BST with
+<p>The <a href="10-glossary.html#binary-search-tree" class="term"
+title="A binary tree that imposes the following constraint on its node values: The search key value for any node $A$ must be greater than the (key) values for all nodes in the left subtree of $A$, and less than the key values for all nodes in the right subtree of $A$. Some convention must be adopted if multiple nodes with the same key value are permitted, typically these are required to be in the right subtree.">Binary
+Search Tree</a> has a serious deficiency for practical use as a search
+structure. That is the fact that it can easily become unbalanced, so
+that some nodes are deep in the tree. In fact, it is possible for a BST
+with
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
 nodes to have a depth of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
@@ -130,21 +123,28 @@ be
 a huge improvement.</p>
 <p>One solution to this problem is to adopt another search tree
 structure instead of using a BST at all. An example of such an
-alternative tree structure is the <a href="10-glossary.html#2-3-tree" class="term">2-3 Tree</a> or
-the <a href="10-glossary.html#b-tree" class="term">B-Tree</a>. But another alternative would be
-to modify the BST access functions in some way to guarantee that the
-tree performs well. This is an appealing concept, and the concept works
-well for heaps, whose access functions maintain the heap in the shape of
-a complete binary tree. Unfortunately, the heap keeps its balanced shape
-at the cost of weaker restrictions on the relative values of a node and
-its children, making it a bad search structure. And requiring that the
-BST always be in the shape of a complete binary tree requires excessive
-modification to the tree during update, as we see in this example.</p>
+alternative tree structure is the <a href="10-glossary.html#2-3-tree"
+class="term"
+title="A specialized form of the B-tree where each internal node has either 2 children or 3 children. Key values are ordered to maintain the binary search tree property. The 2-3 tree is always height balanced, and its insert, search, and remove operations all have $\Theta(\log n)$ cost.">2-3
+Tree</a> or the <a href="10-glossary.html#b-tree" class="term"
+title="A method for indexing a large collection of records. A B-tree is a balanced tree that typically has high branching factor (commonly as much as 100 children per internal node), causing the tree to be very shallow. When stored on disk, the node size is selected to be same as the desired unit of I/O (hence some multiple of the disk sector size). This makes it easy to gain access to the record associated with a given search key stored in the tree with few disk accesses. The most commonly implemented variant of the B-tree is the B+ tree.">B-Tree</a>.
+But another alternative would be to modify the BST access functions in
+some way to guarantee that the tree performs well. This is an appealing
+concept, and the concept works well for heaps, whose access functions
+maintain the heap in the shape of a complete binary tree. Unfortunately,
+the heap keeps its balanced shape at the cost of weaker restrictions on
+the relative values of a node and its children, making it a bad search
+structure. And requiring that the BST always be in the shape of a
+complete binary tree requires excessive modification to the tree during
+update, as we see in this example.</p>
 <div id="balanceBST">
-<div class="odsafig" width="500" data-align="center"
-data-capalign="justify" data-figwidth="90%"
-alt="An attempt to re-balance a BST after insertion can be expensive">
-<p>Images/BSTBal.png</p>
+<div class="figure">
+<figure>
+<img src="images/BSTBal.png" width="500"
+alt="An attempt to re-balance a BST after insertion can be expensive" />
+<figcaption aria-hidden="true">An attempt to re-balance a BST after
+insertion can be expensive</figcaption>
+</figure>
 <p>An attempt to re-balance a BST after insertion can be expensive. (a)
 A BST with six nodes in the shape of a complete binary tree. (b) A node
 with value 1 is inserted into the BST of (a). To maintain both the
@@ -162,12 +162,30 @@ subtrees differ by at most one.</p>
 <p>A different approach to improving the performance of the BST is to
 not require that the tree always be balanced, but rather to expend some
 effort toward making the BST more balanced every time it is accessed.
-This is a little like the idea of path compression used by the <a href="10-glossary.html#union-find" class="term">UNION/FIND</a> algorithm. One example of such a
-compromise is called the <a
+This is a little like the idea of path compression used by the <a
+href="10-glossary.html#union-find" class="term"
+title="A process for mainining a collection of disjoint sets. The FIND operation determines which disjoint set a given object resides in, and the UNION operation combines two disjoint sets when it is determined that they are members of the same equivalence class under some equivalence relation.">UNION/FIND</a>
+algorithm. One example of such a compromise is called the <a
 href="6.6-the-splay-tree-optional.html#the-splay-tree-optional">splay
 tree</a>.</p>
 <p>The [Red-Black Tree] is also a binary tree, but it uses a different
 balancing mechanism.</p>
 </section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="6.2-binary-tree-guided-information-flow.html" class="navbutton">&lt;&lt;</a>
+<a href="6.2-binary-tree-guided-information-flow.html" accesskey="p" rel="previous">Binary Tree Guided Information Flow</a>
+</div>
+<div class="navlink">
+<a href="6.4-the-avl-tree.html" accesskey="n" rel="next">The AVL Tree</a>
+<a href="6.4-the-avl-tree.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 </body>
 </html>
+

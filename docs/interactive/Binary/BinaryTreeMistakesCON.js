@@ -13,11 +13,10 @@ $(document).ready(function() {
   };
 
   var pseudo = av.code([
-    "static int bad_count(BinNode root) {",
-    "    if (root == null) return 0;  // Nothing to count",
-    "    bad_count(root.left());",
-    "    1 + bad_count(root.left()) + bad_count(root.right());",
-    "}",
+    "function bad_count(node):",
+    "    if node is null: return 0",
+    "    bad_count(root.left)",
+    "    1 + bad_count(root.left) + bad_count(root.right)",
   ], {lineNumbers: false,
       tags: {
         "treenull": 2,

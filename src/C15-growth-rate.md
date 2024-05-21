@@ -1,13 +1,17 @@
 
-## Growth Rates Review (optional) (WORK IN PROGRESS)
+## Growth Rates Review (optional) 
+
+::: alert
+***Note***: This section is *work in progress*
+:::
 
 Two functions of $n$ have different
 [growth rates](#growth-rate){.term} if as $n$
 goes to infinity their ratio either goes to infinity or goes to zero.
 
 :::: {#RunTimeGraph}
-::: {.odsafig width="500" align="center" capalign="justify" figwidth="90%" alt="The growth rates for five equations"}
-Images/plot.png
+::: figure
+![The growth rates for five equations](images/plot.png){width=500}
 
 Two views of a graph illustrating the growth rates for six equations.
 The bottom view shows in detail the lower-left portion of the top view.

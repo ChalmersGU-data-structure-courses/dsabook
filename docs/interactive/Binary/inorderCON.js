@@ -9,10 +9,10 @@ $(document).ready(function() {
   var interpret = {
     "av_beginning": "Inorder traversal begins.",
     "av_nullcheck": "Check to see if node is null.",
-    "av_isnotnull": "Not null.",
+    "av_isnotnull": "Node is not null, continue traversing.",
     "av_leftchild": "Make a recursive call on left child.",
     "av_inorder": "Inorder traversal begins.",
-    "av_isnull": "Null.",
+    "av_isnull": "Node is null, do nothing.",
     "av_visit": "Visit ",
     "av_rightchild": "Make a recursive call on right child.",
     "av_finish": "Finished the inorder traversal on ",
@@ -20,12 +20,11 @@ $(document).ready(function() {
   };
 
   var pseudo = av.code([
-    "static <E> void inorder(BinNode<E> node) {",
-    "    if (node == null) return;  // Empty subtree - do nothing",
-    "    preorder(node.left());     // Process all nodes in left",
-    "    visit(node);               // Visit root node",
-    "    preorder(node.right());    // Process all nodes in right",
-    "}",
+    "function inorder(node):",
+    "    if node is not null:     // Only continue if this is a tree",
+    "        inorder(node.left)   // Process all nodes in left subtree",
+    "        visit(node)          // Visit root node",
+    "        inorder(node.right)  // Process all nodes in right subtree",
     ], {lineNumbers: false,
       tags: {
         "sig": 1,

@@ -23,21 +23,28 @@ reader: markdown
 writer: chunkedhtml
 # pandoc --to=chunkedhtml --list-extensions
 
-# template: pandoc-template.html
+template: extra/book-template.html
 # Use the specified file as a custom template for the generated document. 
 # Implies --standalone. See Templates, below, for a description of template syntax. 
 # If no extension is specified, an extension corresponding to the writer will be added, 
 # so that --template=special looks for special.html for HTML output.
 
 css: 
-  - ../bookstyle.css
+  - ../css/main.css
+  - ../css/book.css
+  - ../css/code.css
+  - ../css/quiz.css
+  - ../css/mobile.css
+  - ../css/print.css
 # Link to a CSS style sheet. This option can be used repeatedly to include multiple files.
 
 table-of-contents: true
 toc-depth: 2
 
-highlight-style: kate
+# highlight-style: tango
 # pandoc --list-highlight-styles
+# pygments, tango, espresso, zenburn, kate, monochrome, breezedark, haddock
+
 
 html-math-method:
   method: mathml
@@ -68,17 +75,19 @@ syntax-definitions: [extra/pseudo.xml]
 # of appropriately marked code blocks. This can be used to add support for new languages or to use altered
 # syntax definitions for existing languages. This option may be repeated to add multiple syntax definitions.
 
-indented-code-classes: [python]
+indented-code-classes: [pseudo]
 # Specify classes to use for indented code blocks–for example, perl,numberLines or haskell. 
 # Multiple classes may be separated by spaces or commas.
 
-reference-location: document
+reference-location: block
 # reference-location: block|section|document
 # Specify whether footnotes (and references, if reference-links is set) are placed at 
 # the end of the current (top-level) block, the current section, or the document. The default is document.
 
 
-include-in-header: [extra/opendsa-header.html]
+include-in-header: 
+  - extra/opendsa-header.html
+  - extra/quiz-header.html
 # Include contents of FILE, verbatim, at the end of the header.
 # This can be used, for example, to include special CSS or JavaScript in HTML documents.
 

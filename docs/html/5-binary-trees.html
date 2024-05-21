@@ -8,26 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Binary Trees</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -93,35 +79,44 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="index.html" accesskey="u" rel="up">Data Structures and Algorithms</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="4.11-practice-questions-lists-stacks-and-queues.html" class="navbutton">&lt;&lt;</a>
+<a href="4.11-practice-questions-lists-stacks-and-queues.html" accesskey="p" rel="previous">Practice questions: lists, stacks and queues</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="5.1-definitions-and-properties.html" accesskey="n" rel="next">Definitions and Properties</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="4.11-linear-structure-summary-exercises.html" accesskey="p" rel="previous">Linear Structure Summary Exercises</a>
-</span>
+<div>
+<a href="5.1-definitions-and-properties.html" accesskey="n" rel="next">Definitions and Properties</a>
+<a href="5.1-definitions-and-properties.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="binary-trees" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Binary
 Trees</h1>
-<p><a href="10-glossary.html#tree" class="term">Tree</a> structures enable efficient access and
-efficient update to large collections of data. <a href="10-glossary.html#binary-tree" class="term">Binary trees</a> in particular are widely used and
-relatively easy to implement. But binary trees are useful for many
-things besides searching. Just a few examples of applications that trees
-can speed up include <a
-href="7-priority-queues.html#priority-queues">prioritizing jobs</a>, <a
+<p><a href="10-glossary.html#tree" class="term"
+title="A tree $\mathbf{T}$ is a finite set of one or more nodes such that there is one designated node $R$, called the root of $\mathbf{T}$. If the set $(\mathbf{T} -{R})$ is not empty, these nodes are partitioned into $n &gt; 0$ disjoint sets $\mathbf{T}_0$, $\mathbf{T}_1$, ..., $\mathbf{T}_{n-1}$, each of which is a tree, and whose roots $R_1, R_2, ..., R_n$, respectively, are children of $R$.">Tree</a>
+structures enable efficient access and efficient update to large
+collections of data. <a href="10-glossary.html#binary-tree" class="term"
+title="A finite set of nodes which is either empty, or else has a root node together two binary trees, called the left and right subtrees, which are disjoint from each other and from the root.">Binary
+trees</a> in particular are widely used and relatively easy to
+implement. But binary trees are useful for many things besides
+searching. Just a few examples of applications that trees can speed up
+include <a href="7-priority-queues.html#priority-queues">prioritizing
+jobs</a>, <a
 href="5.3-binary-tree-node-implementations.html#binary-tree-node-implementations">describing
 mathematical expressions</a> and the syntactic elements of computer
 programs, or organizing the information needed to drive <a
@@ -133,5 +128,21 @@ traversals</a>, approaches to implementing tree <a
 href="5.3-binary-tree-node-implementations.html#binary-tree-node-implementations">nodes</a>,
 and various examples of binary trees.</p>
 </section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="4.11-practice-questions-lists-stacks-and-queues.html" class="navbutton">&lt;&lt;</a>
+<a href="4.11-practice-questions-lists-stacks-and-queues.html" accesskey="p" rel="previous">Practice questions: lists, stacks and queues</a>
+</div>
+<div class="navlink">
+<a href="5.1-definitions-and-properties.html" accesskey="n" rel="next">Definitions and Properties</a>
+<a href="5.1-definitions-and-properties.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 </body>
 </html>
+

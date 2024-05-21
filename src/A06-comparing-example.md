@@ -1,9 +1,10 @@
 
+<!-- TODO: make a similar Python example -->
+
 ## Comparables and Comparators: An Example
 
-*Note*: This example treats comparables and comparators, as they work in
-Java. Python code is also included, but since Python thinks of
-comparisons in a different way, the code is not always transferrable.
+*Note*: This example treats comparables and comparators, as they work in Java.
+(A similar example for Python is on the TODO list.)
 
 ### Comparables and comparators in Java
 
@@ -57,8 +58,8 @@ Which results in:
 ### Comparables
 
 With the **Comparable** interface we can define the "natural ordering"
-for a class ([Java 8
-Comparable](https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html)).
+for a class ([Java 11
+Comparable](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Comparable.html)).
 Recall the interface for comparables from
 [the course API](#all-adts-used-in-this-book):
 ```java
@@ -112,8 +113,8 @@ Two things to note, which we address later:
 
 What if we sometimes want to sort the list according to some other
 ordering, e.g., birth year or given name? Enter *comparators*, and here
-is the interface ([Java 8
-Comparator](https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html)):
+is the interface ([Java 11
+Comparator](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Comparator.html)):
 ```java
 // Note: This is a subset of the java.util.Comparator interface
 interface Comparator<E> {
@@ -192,7 +193,7 @@ Result:
 > | Nadia Boulanger (1887)
 > | Unsuk Chin (1961)
 
-### Comparators, the new functional interface in Java 8
+### Comparators, the functional interface in Java 
 
 Since Java 8, there's a functional interface which can be used to build
 comparators (and many other things). So we don't have to write the class

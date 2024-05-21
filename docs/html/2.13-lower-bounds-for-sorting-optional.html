@@ -8,26 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Lower Bounds for Sorting (optional)</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -93,27 +79,32 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 <link href="../interactive/Sorting/SortingLowerBoundCON.css" rel="stylesheet" type="text/css"/>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="2-arrays-searching-and-sorting.html" accesskey="u" rel="up">Arrays: searching and sorting</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="2.12-an-empirical-comparison-of-sorting-algorithms.html" class="navbutton">&lt;&lt;</a>
+<a href="2.12-an-empirical-comparison-of-sorting-algorithms.html" accesskey="p" rel="previous">An Empirical Comparison of Sorting Algorithms</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="2.14-arrays-as-sets-or-maps.html" accesskey="n" rel="next">Arrays as Sets or Maps</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="2.12-an-empirical-comparison-of-sorting-algorithms.html" accesskey="p" rel="previous">An Empirical Comparison of Sorting Algorithms</a>
-</span>
+<div>
+<a href="2.14-arrays-as-sets-or-maps.html" accesskey="n" rel="next">Arrays as Sets or Maps</a>
+<a href="2.14-arrays-as-sets-or-maps.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="lower-bounds-for-sorting-optional" class="level2"
 data-number="2.13">
 <h2 data-number="2.13"><span class="header-section-number">2.13</span>
@@ -173,7 +164,9 @@ it provides a useful model for proving lower bounds on other problems.
 Finally, knowing a lower bound for sorting gives us a lower bound in
 turn for other problems whose solution could be made to work as the
 basis for a sorting algorithm. The process of deriving asymptotic bounds
-for one problem from the asymptotic bounds of another is called a <a href="10-glossary.html#reduction" class="term">reduction</a>.</p>
+for one problem from the asymptotic bounds of another is called a <a
+href="10-glossary.html#reduction" class="term"
+title="In algorithm analysis, the process of deriving asymptotic bounds for one problem from the asymptotic bounds of another. In particular, if problem A can be used to solve problem B, and problem A is proved to be in $O(f(n))$, then problem B must also be in $O(f(n))$. Reductions are often used to show that certain problems are at least as expensive as sorting, or that certain problems are NP-Complete.">reduction</a>.</p>
 <p>All of the sorting algorithms we have studied make decisions based on
 the direct comparison of two key values. For example, Insertion Sort
 sequentially compares the value to be inserted into the sorted list
@@ -194,14 +187,17 @@ leaves is shown to be in
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Omega(n \log n)</annotation></semantics></math>.</p>
 <p>Before presenting the proof of an
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Omega(n \log n)</annotation></semantics></math>
-lower bound for sorting, we first must define the concept of a <a href="10-glossary.html#decision-tree" class="term">decision tree</a>. A decision tree is a binary tree that
-can model the processing for any algorithm that makes binary decisions.
-Each (binary) decision is represented by a branch in the tree. For the
-purpose of modeling sorting algorithms, we count all comparisons of key
-values as decisions. If two keys are compared and the first is less than
-the second, then this is modeled as a left branch in the decision tree.
-In the case where the first value is greater than the second, the
-algorithm takes the right branch.</p>
+lower bound for sorting, we first must define the concept of a <a
+href="10-glossary.html#decision-tree" class="term"
+title="A theoretical construct for modeling the behavior of algorithms. Each point at which the algorithm makes a decision (such as an if statement) is modeled by a branch in the tree that represents the algorithms behavior. Decision trees can be used in lower bounds proofs, such as the proof that sorting requires $\Omega(n \log n)$ comparisons in the worst case.">decision
+tree</a>. A decision tree is a binary tree that can model the processing
+for any algorithm that makes binary decisions. Each (binary) decision is
+represented by a branch in the tree. For the purpose of modeling sorting
+algorithms, we count all comparisons of key values as decisions. If two
+keys are compared and the first is less than the second, then this is
+modeled as a left branch in the decision tree. In the case where the
+first value is greater than the second, the algorithm takes the right
+branch.</p>
 <p>Here is a Visualization that illustrates decision trees and the
 sorting lower bound proof.</p>
 <p>
@@ -228,16 +224,214 @@ time. As a corollary, we know that no comparison-based sorting algorithm
 can improve on existing
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log n)</annotation></semantics></math>
 time sorting algorithms by more than a constant factor.</p>
+<section id="review-questions-lower-bounds-for-sorting" class="level3"
+data-number="2.13.1">
+<h3 data-number="2.13.1"><span
+class="header-section-number">2.13.1</span> Review questions: Lower
+bounds for sorting</h3>
 <p>Here are some review questions to check that you understand this
 proof.</p>
-<p>
-<div id="SortBoundSumm" class="embedContainer">
-<iframe id="SortBoundSumm_iframe" aria-label="SortBoundSumm" src="../interactive/Sorting/SortBoundSumm.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
+<div class="quiz">
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>The proof that the lower bound for the sorting problem is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Omega(n \log n)</annotation></semantics></math>
+technically only applies to comparison-based sorting. This means that we
+can find other approaches (such as radix sort) to solve the problem
+faster.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Radix Sort compare?</li>
+<li>While Radix Sort does not directly compare the keys of two records
+against each other, it does do a comparison for each digit of each
+key.</li>
+</ul>
 </div>
-</p>
+</div>
+<div class="question">
+<p>The upper bound for a problem is defined to be:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />The cost of the best
+algorithm that we know for the problem</label></li>
+<li><label><input type="checkbox" />The cost of the worst algorithm that
+we know for the problem</label></li>
+<li><label><input type="checkbox" />The same as the lower bound for the
+problem</label></li>
+<li><label><input type="checkbox" />The cost of the worst case input for
+the problem</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>For a given problem, it is possible to write an algorithm that is as
+bad as we want. So defining a bound in terms of bad algorithms is not
+useful.</li>
+<li>We look at the worst-case input to determine the worst-case upper
+bound for an algorithm, not a problem.</li>
+<li>To get the upper bound for a problems, we compare the cost for each
+algorithm that we know.</li>
+<li>The upper bound of the problem is the upper bound of the best known
+algorithm.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The lower bound for a problem is defined to be:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />The best possible cost
+for any algorithm that solves the problem</label></li>
+<li><label><input type="checkbox" />The cost of the best algorithm that
+we know for the problem</label></li>
+<li><label><input type="checkbox" />The same as the upper bound for the
+problem</label></li>
+<li><label><input type="checkbox" />The cost of the best case input for
+the problem</label></li>
+<li><label><input type="checkbox" />The maximum cost that any algorithm
+to solve the problem could have</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Upper and lower bounds are used to describe to what we know, and we
+do not always know that these are the same for a given algorithm.</li>
+<li>Lower bound refers to the class of inputs that we are considering
+(best, average, or worst-case). So it does NOT necessarily have anything
+to do with the best-case input.</li>
+<li>The cost of the best algorithm that we know sets a limit on the
+upper bound of the problem, not the lower bound.</li>
+<li>The lower bound refers to the best possible cost (for the class of
+inputs, such as worst-case) for ANY algorithm that solves the
+problem.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>If the upper and lower bounds for a problem meet then:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />We can say that we
+understand the runtime cost of the problem</label></li>
+<li><label><input type="checkbox" />We are ready to implement the
+solution to the problem</label></li>
+<li><label><input type="checkbox" />The universe explodes</label></li>
+<li><label><input type="checkbox" />The problem is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>The universe hasn’t exploded yet.</li>
+<li>Just because the bounds meet, it does not mean that the cost is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math>.</li>
+<li>We might need to implement an algorithm even if we are not certain
+that it is the best.</li>
+<li>When the bounds meet, then we know for certain if an algorithm to
+solve that problem is best (within a constant factor).</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which of the following is NOT relevant to the sorting problem lower
+bounds proof?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />The worst-case cost for
+Bubble Sort is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^2)</annotation></semantics></math></label></li>
+<li><label><input type="checkbox" />The number of permutations for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+records is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>!</mi></mrow><annotation encoding="application/x-tex">n!</annotation></semantics></math></label></li>
+<li><label><input type="checkbox" />A tree with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+nodes has a depth of at least
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>log</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n</annotation></semantics></math></label></li>
+<li><label><input type="checkbox" />Any sorting algorithm can be modeled
+using a decision tree</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>The proof uses decision trees to model sorting algorithms.</li>
+<li>The number of permutations affects the size of the decision
+tree.</li>
+<li>Given a tree of a certain size, we can compute its minimum
+depth.</li>
+<li>The cost of Bubble Sort does not affect the cost of other
+sorts.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>log</mo><mi>n</mi><mi>!</mi></mrow><annotation encoding="application/x-tex">\log n!</annotation></semantics></math>
+is:</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Omega(n \log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Omega(n^2)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Omega(n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Omega(\log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mi>n</mi></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Omega(n^n)</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Since
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>!</mi><mo>≤</mo><msup><mi>n</mi><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">n! \leq n^n</annotation></semantics></math>,
+it follows that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>log</mo><mi>n</mi><mi>!</mi><mo>≤</mo><mo>log</mo><msup><mi>n</mi><mi>n</mi></msup><mo>=</mo><mi>n</mi><mo>log</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n! \leq \log n^n = n \log n</annotation></semantics></math>.
+So that eliminates anything bigger than
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>log</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">n \log n</annotation></semantics></math>.</li>
+<li>There are
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+terms in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>!</mi></mrow><annotation encoding="application/x-tex">n!</annotation></semantics></math>,
+and you need to take the log of each of them. Since they have some size,
+it has to be much more than
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>log</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n</annotation></semantics></math>.</li>
+<li>It turns out to be worse than just
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A decision tree is:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />A model for the behavior
+of an algorithm based on the decisions that it makes</label></li>
+<li><label><input type="checkbox" />A tree that helps you to decide
+which permutation sorts the input</label></li>
+<li><label><input type="checkbox" />A tree that searches for the lower
+bound for sorting</label></li>
+<li><label><input type="checkbox" />A search tree</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A decision tree is not a search tree.</li>
+<li>A decision tree is a model for behavior, not an algorithm.</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="2.12-an-empirical-comparison-of-sorting-algorithms.html" class="navbutton">&lt;&lt;</a>
+<a href="2.12-an-empirical-comparison-of-sorting-algorithms.html" accesskey="p" rel="previous">An Empirical Comparison of Sorting Algorithms</a>
+</div>
+<div class="navlink">
+<a href="2.14-arrays-as-sets-or-maps.html" accesskey="n" rel="next">Arrays as Sets or Maps</a>
+<a href="2.14-arrays-as-sets-or-maps.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 <script type="text/javascript" src="../interactive/Sorting/SortingLowerBoundCON.js"></script>
 </body>
 </html>
+

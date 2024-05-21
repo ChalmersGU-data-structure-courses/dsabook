@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Cliff Shaffer" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Nick Smallbone" />
+  <title>DSABook – Minimal Cost Spanning Trees</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+      },
+      "HTML-CSS": {
+        scale: "80",
+      }
+    });
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+<link href="../interactive/Graph/primCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Graph/kruskalCON.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="9.5-shortest-paths-problems.html" class="navbutton">&lt;&lt;</a>
+<a href="9.5-shortest-paths-problems.html" accesskey="p" rel="previous">Shortest-Paths Problems</a>
+</div>
+<div>
+<a href="9.7-all-pairs-shortest-paths-optional.html" accesskey="n" rel="next">All-Pairs Shortest Paths (optional)</a>
+<a href="9.7-all-pairs-shortest-paths-optional.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="minimal-cost-spanning-trees" class="level2"
+data-number="9.6">
+<h2 data-number="9.6"><span class="header-section-number">9.6</span>
+Minimal Cost Spanning Trees</h2>
+<p>The <a href="10-glossary.html#minimal-cost-spanning-tree"
+class="term"
+title="Abbreviated as MCST, or sometimes as MST. Derived from a weighted graph, the MCST is the subset of the graph&#39;s edges that maintains the connectivitiy of the graph while having lowest total cost (as defined by the sum of the weights of the edges in the MCST). The result is referred to as a tree because it would never have a cycle (since an edge could be removed from the cycle and still preserve connectivity). Two algorithms to solve this problem are Prim&#39;s algorithm and Kruskal&#39;s algorithm.">minimal-cost
+spanning tree</a> (MCST) problem takes as input a connected, undirected
+graph
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐆</mi><annotation encoding="application/x-tex">\mathbf{G}</annotation></semantics></math>,
+where each edge has a distance or weight measure attached. The MCST is
+also called <em>minimum spanning tree</em> (MST).</p>
+<p>The MCST is the graph containing the vertices of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐆</mi><annotation encoding="application/x-tex">\mathbf{G}</annotation></semantics></math>
+along with the subset of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐆</mi><annotation encoding="application/x-tex">\mathbf{G}</annotation></semantics></math>
+’s edges that (1) has minimum total cost as measured by summing the
+values for all of the edges in the subset, and (2) keeps the vertices
+connected. Applications where a solution to this problem is useful
+include soldering the shortest set of wires needed to connect a set of
+terminals on a circuit board, and connecting a set of cities by
+telephone lines in such a way as to require the least amount of
+cable.</p>
+<p>The MCST contains no cycles. If a proposed MCST did have a cycle, a
+cheaper MCST could be had by removing any one of the edges in the cycle.
+Thus, the MCST is a free tree with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="true" form="postfix">|</mo></mrow><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">|\mathbf{V}| - 1</annotation></semantics></math>
+edges. The name “minimum-cost spanning tree” comes from the fact that
+the required set of edges forms a tree, it spans the vertices (i.e., it
+connects them together), and it has minimum cost. <a
+href="9.6-minimal-cost-spanning-trees.html#MCSTdgm">Figure #MCSTdgm</a>
+shows the MCST for an example graph.</p>
+<div id="MCSTdgm">
+<p>
+<div id="MCSTCON" class="ssAV" data-short-name="MCSTCON" data-long-name="Graph/MCSTCON" alt="Graph/MCSTCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>A graph and its MCST. All edges appear in the original graph. Those
+edges drawn with heavy lines indicate the subset making up the MCST.
+Note that edge
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>C</mi><mo>,</mo><mi>F</mi><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(C, F)</annotation></semantics></math>
+could be replaced with edge
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>D</mi><mo>,</mo><mi>F</mi><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(D, F)</annotation></semantics></math>
+to form a different MCST with equal cost.</p>
+</div>
+<section id="prims-algorithm" class="level3" data-number="9.6.1">
+<h3 data-number="9.6.1"><span class="header-section-number">9.6.1</span>
+Prim’s Algorithm</h3>
+<p>The first of our two algorithms for finding MCSTs is commonly
+referred to as <a
+href="9.6-minimal-cost-spanning-trees.html#prims-algorithm" class="term"
+title="A greedy algorithm for computing the MCST of a graph. It is nearly identical to Dijkstra&#39;s algorithm for solving the single-source shortest paths problem, with the only difference being the calculation done to update the best-known distance.">Prim’s
+algorithm</a>. Prim’s algorithm is very simple. Start with any Vertex
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>
+in the graph, setting the MCST to be
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>
+initially. Pick the least-cost edge connected to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>.
+This edge connects
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>
+to another vertex; call this
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>.
+Add Vertex
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>
+and Edge
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>N</mi><mo>,</mo><mi>M</mi><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(N, M)</annotation></semantics></math>
+to the MCST. Next, pick the least-cost edge coming from either
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>
+or
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>
+to any other vertex in the graph. Add this edge and the new vertex it
+reaches to the MCST. This process continues, at each step expanding the
+MCST by selecting the least-cost edge from a vertex currently in the
+MCST to a vertex not currently in the MCST.</p>
+<p>Prim’s algorithm is quite similar to Dijkstra’s algorithm for finding
+the single-source shortest paths. The primary difference is that we are
+seeking not the next closest vertex to the start vertex, but rather the
+next closest vertex to any vertex currently in the MCST. Thus the
+following lines in Djikstra’s algorithm:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dist <span class="op">=</span> D.<span class="bu">get</span>(v) <span class="op">+</span> e.weight</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> dist <span class="op">&lt;</span> D.<span class="bu">get</span>(w):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    D.<span class="bu">put</span>(w, dist)</span></code></pre></div>
+<p>are replaced with the following lines in Prim’s algorithm:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> e.weight <span class="op">&lt;</span> D.<span class="bu">get</span>(w):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    D.<span class="bu">put</span>(w, e.weight)</span></code></pre></div>
+<p>The following code shows an implementation for Prim’s algorithm that
+searches the distance matrix for the next closest vertex.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Compute shortest distances to the MCST, store them in D.</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">// parent.get(v) will hold the index for the vertex that is v&#39;s parent in the MCST</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> Prim(G, s):</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    visited <span class="op">=</span> <span class="kw">new</span> <span class="bu">Set</span>()</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    parent <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>()</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    D <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>()</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> v <span class="kw">in</span> G.vertices():</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        D.<span class="bu">put</span>(v, ∞)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    D.<span class="bu">put</span>(s, <span class="dv">0</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">repeat</span> G.vertxCount() <span class="kw">times</span>:  <span class="co">// Process the vertices</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        v <span class="op">=</span> minVertex(G, D, visited)  <span class="co">// Find next-closest vertex</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        visited.<span class="bu">add</span>(v)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> D.<span class="bu">get</span>(v) <span class="op">==</span> ∞:</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> parent</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="kw">each</span> e <span class="kw">in</span> G.outgoingEdges(v):</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>            w <span class="op">=</span> e.end</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> e.weight <span class="op">&lt;</span> D.<span class="bu">get</span>(w):</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>                D.<span class="bu">put</span>(w, e.weight)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>                parent.<span class="bu">put</span>(w, v)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> parent</span></code></pre></div>
+<p>For each vertex <em>e</em>, when <em>e</em> is processed by Prim’s
+algorithm, an edge going to <em>e</em> is added to the MCST that we are
+building. Array <code>V[e]</code> stores the previously visited vertex
+that is closest to Vertex <em>e</em>. This information lets us know
+which edge goes into the MCST when Vertex <em>e</em> is processed.</p>
+<p>
+<div id="primCON" class="ssAV" data-short-name="primCON" data-long-name="Prim's Minimum Cost Spanning Tree Algorithm Slideshow" alt="Prim's Minimum Cost Spanning Tree Algorithm Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</section>
+<section id="prims-algorithm-priority-queue-implementation"
+class="level3" data-number="9.6.2">
+<h3 data-number="9.6.2"><span class="header-section-number">9.6.2</span>
+Prim’s Algorithm, Priority Queue Implementation</h3>
+<p>Alternatively, we can implement Prim’s algorithm using a <a
+href="10-glossary.html#priority-queue" class="term"
+title="An ADT whose primary operations of insert of records, and deletion of the greatest (or, in an alternative implementation, the least) valued record. Most often implemented using the heap data structure. The name comes from a common application where the records being stored represent tasks, with the ordering values based on the priorities of the tasks.">priority
+queue</a> to find the next closest vertex, as shown next. As with the
+priority queue version of Dijkstra’s algorithm, the <a
+href="10-glossary.html#heap" class="term"
+title="The head data structure is a complete binary tree with the requirement that every node has a value greater than its children (called a max heap), or else the requirement that every node has a value less than its children (called a min heap). Since it is a complete binary tree, a heap is nearly always implemented using an array rather than an explicit tree structure. To add a new value to a heap, or to remove the extreme value (the max value in a max-heap or min value in a min-heap) and update the heap, takes $\Theta(\log n)$ time in the worst case. However, if given all of the values in an unordered array, the values can be re-arranged to form a heap in only $\Theta(n)$ time. Due to its space and time efficiency, the heap is a popular choice for implementing a priority queue. Uncommonly, *heap* is a synonym for free store.">heap</a>
+stores <code>DijkElem</code> objects.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Prim&#39;s MCST algorithm: priority queue version</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> PrimPQ(G, s):</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    visited <span class="op">=</span> <span class="kw">new</span> <span class="bu">Set</span>()</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    parent <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>()</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    D <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>()</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (v : G.vertices())</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        D.<span class="bu">put</span>(v, ∞)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    D.<span class="bu">put</span>(s, <span class="dv">0</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    agenda <span class="op">=</span> <span class="kw">new</span> <span class="bu">PriorityQueue</span>()</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    agenda.<span class="bu">add</span>(<span class="kw">new</span> <span class="bu">KVPair</span>(<span class="dv">0</span>, s))</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="kw">not</span> agenda.<span class="bu">isEmpty</span>():</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        v <span class="op">=</span> agenda.<span class="bu">removeMin</span>().value</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> v <span class="kw">not</span> <span class="kw">in</span> visited:</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>            visited.<span class="bu">add</span>(v)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> D.<span class="bu">get</span>(v) <span class="op">==</span> ∞:</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> parent</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> <span class="kw">each</span> e <span class="kw">in</span> G.outgoingEdges():</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>                w <span class="op">=</span> e.end</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> e.weight <span class="op">&lt;</span> D.<span class="bu">get</span>(w):</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>                    D.<span class="bu">put</span>(w, e.weight)</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>                    parent.<span class="bu">put</span>(w, v)</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>                    agenda.<span class="bu">add</span>(<span class="kw">new</span> <span class="bu">KVPair</span>(e.weight, w))</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> parent</span></code></pre></div>
+<p>Prim’s algorithm is an example of a greedy algorithm. At each step in
+the <code>for</code> loop, we select the least-cost edge that connects
+some marked vertex to some unmarked vertex. The algorithm does not
+otherwise check that the MCST really should include this least-cost
+edge. This leads to an important question: Does Prim’s algorithm work
+correctly? Clearly it generates a spanning tree (because each pass
+through the <code>for</code> loop adds one edge and one unmarked vertex
+to the spanning tree until all vertices have been added), but does this
+tree have minimum cost?</p>
+<blockquote>
+<p><strong>Theorem:</strong> Prim’s algorithm produces a minimum-cost
+spanning tree.</p>
+<p><strong>Proof:</strong> We will use a proof by contradiction. Let
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐆</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐕</mi><mo>,</mo><mi>𝐄</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathbf{G} = (\mathbf{V}, \mathbf{E})</annotation></semantics></math>
+be a graph for which Prim’s algorithm does <em>not</em> generate an
+MCST. Define an ordering on the vertices according to the order in which
+they were added by Prim’s algorithm to the MCST:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mn>0</mn></msub><mo>,</mo><msub><mi>v</mi><mn>1</mn></msub><mo>,</mo><mi>.</mi><mi>.</mi><mi>.</mi><mo>,</mo><msub><mi>v</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">v_0, v_1, ..., v_{n-1}</annotation></semantics></math>.
+Let edge
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mi>i</mi></msub><annotation encoding="application/x-tex">e_i</annotation></semantics></math>
+connect
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>v</mi><mi>x</mi></msub><mo>,</mo><msub><mi>v</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(v_x, v_i)</annotation></semantics></math>
+for some
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>&lt;</mo><mi>i</mi></mrow><annotation encoding="application/x-tex">x &lt; i</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>≤</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i \leq 1</annotation></semantics></math>.
+Let
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mi>j</mi></msub><annotation encoding="application/x-tex">e_j</annotation></semantics></math>
+be the lowest numbered (first) edge added by Prim’s algorithm such that
+the set of edges selected so far <em>cannot</em> be extended to form an
+MCST for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐆</mi><annotation encoding="application/x-tex">\mathbf{G}</annotation></semantics></math>.
+In other words,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mi>j</mi></msub><annotation encoding="application/x-tex">e_j</annotation></semantics></math>
+is the first edge where Prim’s algorithm “went wrong.” Let
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐓</mi><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>
+be the “true” MCST. Call
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mi>p</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mo>&lt;</mo><mi>j</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">v_p (p&lt;j)</annotation></semantics></math>
+the vertex connected by edge
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mi>j</mi></msub><annotation encoding="application/x-tex">e_j</annotation></semantics></math>,
+that is,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>e</mi><mi>j</mi></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>v</mi><mi>p</mi></msub><mo>,</mo><msub><mi>v</mi><mi>j</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">e_j = (v_p, v_j)</annotation></semantics></math>.</p>
+<p>Because
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐓</mi><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>
+is a tree, there exists some path in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐓</mi><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>
+connecting
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>p</mi></msub><annotation encoding="application/x-tex">v_p</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>j</mi></msub><annotation encoding="application/x-tex">v_j</annotation></semantics></math>.
+There must be some edge
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>e</mi><mi>′</mi></mrow><annotation encoding="application/x-tex">e&#39;</annotation></semantics></math>
+in this path connecting vertices
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>u</mi></msub><annotation encoding="application/x-tex">v_u</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>w</mi></msub><annotation encoding="application/x-tex">v_w</annotation></semantics></math>,
+with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi><mo>&lt;</mo><mi>j</mi></mrow><annotation encoding="application/x-tex">u &lt; j</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mo>≥</mo><mi>j</mi></mrow><annotation encoding="application/x-tex">w \geq j</annotation></semantics></math>.
+Because
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mi>j</mi></msub><annotation encoding="application/x-tex">e_j</annotation></semantics></math>
+is not part of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐓</mi><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>,
+adding edge
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mi>j</mi></msub><annotation encoding="application/x-tex">e_j</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐓</mi><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>
+forms a cycle. Edge
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>e</mi><mi>′</mi></mrow><annotation encoding="application/x-tex">e&#39;</annotation></semantics></math>
+must be of lower cost than edge
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mi>j</mi></msub><annotation encoding="application/x-tex">e_j</annotation></semantics></math>,
+because Prim’s algorithm did not generate an MCST. This situation is
+illustrated in <a
+href="9.6-minimal-cost-spanning-trees.html#PrimProof">Figure
+#PrimProof</a>. However, Prim’s algorithm would have selected the
+least-cost edge available. It would have selected
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>e</mi><mi>′</mi></mrow><annotation encoding="application/x-tex">e&#39;</annotation></semantics></math>,
+not
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mi>j</mi></msub><annotation encoding="application/x-tex">e_j</annotation></semantics></math>.
+Thus, it is a contradiction that Prim’s algorithm would have selected
+the wrong edge, and thus, Prim’s algorithm must be correct.</p>
+</blockquote>
+<div id="PrimProof">
+<div class="figure">
+<figure>
+<img src="images/PrimMST.png" width="400"
+alt="Prim’s MCST algorithm proof" />
+<figcaption aria-hidden="true">Prim’s MCST algorithm proof</figcaption>
+</figure>
+<p>Prim’s MCST algorithm proof. The left oval contains that portion of
+the graph where Prim’s MCST and the “true” MCST
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐓</mi><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>
+agree. The right oval contains the rest of the graph. The two portions
+of the graph are connected by (at least) edges
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>e</mi><mi>j</mi></msub><annotation encoding="application/x-tex">e_j</annotation></semantics></math>
+(selected by Prim’s algorithm to be in the MCST) and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>e</mi><mi>′</mi></mrow><annotation encoding="application/x-tex">e&#39;</annotation></semantics></math>
+(the “correct” edge to be placed in the MCST). Note that the path from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>w</mi></msub><annotation encoding="application/x-tex">v_w</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>j</mi></msub><annotation encoding="application/x-tex">v_j</annotation></semantics></math>
+cannot include any marked vertex
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mi>i</mi></msub><mo>,</mo><mi>i</mi><mo>≤</mo><mi>j</mi></mrow><annotation encoding="application/x-tex">v_i, i \leq j</annotation></semantics></math>,
+because to do so would form a cycle.</p>
+</div>
+</div>
+<p>
+<div id="PrimPE" class="embedContainer">
+<iframe id="PrimPE_iframe" aria-label="PrimPE" src="../interactive/Graph/PrimPE.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</section>
+<section id="kruskals-algorithm" class="level3" data-number="9.6.3">
+<h3 data-number="9.6.3"><span class="header-section-number">9.6.3</span>
+Kruskal’s Algorithm</h3>
+<p>Our next MCST algorithm is commonly referred to as <a
+href="9.6-minimal-cost-spanning-trees.html#kruskals-algorithm"
+class="term"
+title="An algorithm for computing the MCST of a graph. During processing, it makes use of the UNION/FIND process to efficiently determine of two vertices are within the same subgraph.">Kruskal’s
+algorithm</a>. Kruskal’s algorithm is also a simple, greedy algorithm.
+First partition the set of vertices into
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="true" form="postfix">|</mo></mrow><annotation encoding="application/x-tex">|\mathbf{V}|</annotation></semantics></math>
+<a href="10-glossary.html#union-find" class="term"
+title="A process for mainining a collection of disjoint sets. The FIND operation determines which disjoint set a given object resides in, and the UNION operation combines two disjoint sets when it is determined that they are members of the same equivalence class under some equivalence relation.">disjoint
+sets</a>, each consisting of one vertex. Then process the edges in order
+of weight. An edge is added to the MCST, and two disjoint sets combined,
+if the edge connects two vertices in different disjoint sets. This
+process is repeated until only one disjoint set remains.</p>
+<p>
+<div id="kruskalCON" class="ssAV" data-short-name="kruskalCON" data-long-name="Kruskal Slideshow" alt="Kruskal Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>The edges can be processed in order of weight by putting them in an
+array and then sorting the array. Another possibility is to use a
+<em>minimum</em> <a href="10-glossary.html#priority-queue" class="term"
+title="An ADT whose primary operations of insert of records, and deletion of the greatest (or, in an alternative implementation, the least) valued record. Most often implemented using the heap data structure. The name comes from a common application where the records being stored represent tasks, with the ordering values based on the priorities of the tasks.">priority
+queue</a>, similar to what we did in <a
+href="9.6-minimal-cost-spanning-trees.html#prims-algorithm">Prim’s
+algorithm</a>.</p>
+<p>The only tricky part to this algorithm is determining if two vertices
+belong to the same equivalence class. Fortunately, the ideal algorithm
+is available for the purpose – the <a href="10-glossary.html#union-find"
+class="term"
+title="A process for mainining a collection of disjoint sets. The FIND operation determines which disjoint set a given object resides in, and the UNION operation combines two disjoint sets when it is determined that they are members of the same equivalence class under some equivalence relation.">UNION/FIND</a>
+algorithm. Here is an implementation for Kruskal’s algorithm. Note that
+since the MCST will never have more than
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="true" form="postfix">|</mo></mrow><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">|\mathbf{V}|-1</annotation></semantics></math>
+edges, we can return as soon as the MCST contains enough edges.</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Kruskal&#39;s MCST algorithm</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> Kruskal(G):</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    A <span class="op">=</span> <span class="kw">new</span> ParentPointerTree()</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> v <span class="kw">in</span> G.vertices():</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        A.MAKE_SET(v)  <span class="co">// Create one singleton set for each vertex</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    edges <span class="op">=</span> <span class="kw">new</span> <span class="bu">PriorityQueue</span>()</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> v <span class="kw">in</span> G.vertices():</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="kw">each</span> e <span class="kw">in</span> G.outgoingEdges(v):</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>            edges.<span class="bu">add</span>(<span class="kw">new</span> <span class="bu">KVPair</span>(e.weight, e))</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    numEdgesInMCST <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="kw">not</span> edges.<span class="bu">isEmpty</span>():</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        e <span class="op">=</span> edges.<span class="bu">removeMin</span>()</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> A.FIND(e.start) <span class="op">!=</span> A.FIND(e.end):  <span class="co">// If the vertices are not connected...</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>            AddEdgetoMCST(edge)               <span class="co">// ...add this edge to the MCST</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>            numEdgesInMCST <span class="op">=</span> numEdgesInMCST <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> numEdgesInMCST <span class="op">&gt;=</span> G.vertexCount()<span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> A                      <span class="co">// Stop when the MCST has |V|-1 edges</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>            A.UNION(e.start, e.end)           <span class="co">// Connect the two vertices</span></span></code></pre></div>
+<p>Kruskal’s algorithm is dominated by the time required to process the
+edges. The <code>FIND</code> and <code>UNION</code> functions are nearly
+constant in time if path compression and weighted union is used. Thus,
+the total cost of the algorithm is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">|</mo><mi>𝐄</mi><mo stretchy="true" form="postfix">|</mo></mrow><mo>log</mo><mrow><mo stretchy="true" form="prefix">|</mo><mi>𝐄</mi><mo stretchy="true" form="postfix">|</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(|\mathbf{E}| \log |\mathbf{E}|)</annotation></semantics></math>
+in the worst case, when nearly all edges must be processed before all
+the edges of the spanning tree are found and the algorithm can stop.
+More often the edges of the spanning tree are the shorter ones, and only
+about
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="true" form="postfix">|</mo></mrow><annotation encoding="application/x-tex">|\mathbf{V}|</annotation></semantics></math>
+edges must be processed. If so, the cost is often close to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="true" form="postfix">|</mo></mrow><mo>log</mo><mrow><mo stretchy="true" form="prefix">|</mo><mi>𝐄</mi><mo stretchy="true" form="postfix">|</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(|\mathbf{V}| \log |\mathbf{E}|)</annotation></semantics></math>
+in the average case (provided we use a priority queue instead of sorting
+all edges in advance).</p>
+<p>
+<div id="KruskalPE" class="embedContainer">
+<iframe id="KruskalPE_iframe" aria-label="KruskalPE" src="../interactive/Graph/KruskalPE.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="9.5-shortest-paths-problems.html" class="navbutton">&lt;&lt;</a>
+<a href="9.5-shortest-paths-problems.html" accesskey="p" rel="previous">Shortest-Paths Problems</a>
+</div>
+<div class="navlink">
+<a href="9.7-all-pairs-shortest-paths-optional.html" accesskey="n" rel="next">All-Pairs Shortest Paths (optional)</a>
+<a href="9.7-all-pairs-shortest-paths-optional.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+<script type="text/javascript" src="../interactive/Graph/MCSTCON.js"></script>
+<script type="text/javascript" src="../interactive/Graph/primCON.js"></script>
+<script type="text/javascript" src="../interactive/Graph/kruskalCON.js"></script>
+</body>
+</html>
+

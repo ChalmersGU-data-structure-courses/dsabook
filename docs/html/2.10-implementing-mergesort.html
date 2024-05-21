@@ -8,93 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Implementing Mergesort</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        background-color: #ffffff;
-        color: #a0a0a0;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
-    div.sourceCode
-      { color: #1f1c1b; background-color: #ffffff; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #1f1c1b; } /* Normal */
-    code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
-    code span.an { color: #ca60ca; } /* Annotation */
-    code span.at { color: #0057ae; } /* Attribute */
-    code span.bn { color: #b08000; } /* BaseN */
-    code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
-    code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #924c9d; } /* Char */
-    code span.cn { color: #aa5500; } /* Constant */
-    code span.co { color: #898887; } /* Comment */
-    code span.cv { color: #0095ff; } /* CommentVar */
-    code span.do { color: #607880; } /* Documentation */
-    code span.dt { color: #0057ae; } /* DataType */
-    code span.dv { color: #b08000; } /* DecVal */
-    code span.er { color: #bf0303; text-decoration: underline; } /* Error */
-    code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
-    code span.fl { color: #b08000; } /* Float */
-    code span.fu { color: #644a9b; } /* Function */
-    code span.im { color: #ff5500; } /* Import */
-    code span.in { color: #b08000; } /* Information */
-    code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
-    code span.op { color: #1f1c1b; } /* Operator */
-    code span.ot { color: #006e28; } /* Other */
-    code span.pp { color: #006e28; } /* Preprocessor */
-    code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
-    code span.sc { color: #3daee9; } /* SpecialChar */
-    code span.ss { color: #ff5500; } /* SpecialString */
-    code span.st { color: #bf0303; } /* String */
-    code span.va { color: #0057ae; } /* Variable */
-    code span.vs { color: #bf0303; } /* VerbatimString */
-    code span.wa { color: #bf0303; } /* Warning */
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -160,26 +79,31 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="2-arrays-searching-and-sorting.html" accesskey="u" rel="up">Arrays: searching and sorting</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="2.9-mergesort.html" class="navbutton">&lt;&lt;</a>
+<a href="2.9-mergesort.html" accesskey="p" rel="previous">Mergesort</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="2.11-quicksort.html" accesskey="n" rel="next">Quicksort</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="2.9-mergesort.html" accesskey="p" rel="previous">Mergesort</a>
-</span>
+<div>
+<a href="2.11-quicksort.html" accesskey="n" rel="next">Quicksort</a>
+<a href="2.11-quicksort.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="implementing-mergesort" class="level2" data-number="2.10">
 <h2 data-number="2.10"><span class="header-section-number">2.10</span>
 Implementing Mergesort</h2>
@@ -230,58 +154,30 @@ define the left and right indices, respectively, for the subarray being
 sorted. The initial call to <code>mergeSort</code> would be
 <code>mergeSort(array, temparray, 0, n-1)</code>.</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mergeSort(A, temp, left, right):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> left <span class="op">==</span> right:                 <span class="co"># List has one record</span></span>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> mergeSort(A, temp, left, right):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> left <span class="op">==</span> right:                 <span class="co">// List has one record</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    mid <span class="op">=</span> (left <span class="op">+</span> right) <span class="op">//</span> <span class="dv">2</span>         <span class="co"># Select midpoint</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    mergeSort(A, temp, left, mid)     <span class="co"># Mergesort first half</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    mergeSort(A, temp, mid<span class="op">+</span><span class="dv">1</span>, right)  <span class="co"># Mergesort second half</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(left, right<span class="op">+</span><span class="dv">1</span>):    <span class="co"># Copy subarray to temp</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    mid <span class="op">=</span> <span class="bu">int</span>((left <span class="op">+</span> right) <span class="op">/</span> <span class="dv">2</span>)     <span class="co">// Select midpoint</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    mergeSort(A, temp, left, mid)     <span class="co">// Mergesort first half</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    mergeSort(A, temp, mid<span class="op">+</span><span class="dv">1</span>, right)  <span class="co">// Mergesort second half</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="op">=</span> left <span class="kw">to</span> right:            <span class="co">// Copy subarray to temp</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        temp[i] <span class="op">=</span> A[i]</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Do the merge operation back to A</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Do the merge operation back to A</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    i1 <span class="op">=</span> left</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    i2 <span class="op">=</span> mid <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> curr <span class="kw">in</span> <span class="bu">range</span>(left, right<span class="op">+</span><span class="dv">1</span>):</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i1 <span class="op">==</span> mid<span class="op">+</span><span class="dv">1</span>:               <span class="co"># Left sublist exhausted</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> curr <span class="op">=</span> left <span class="kw">to</span> right:</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i1 <span class="op">==</span> mid<span class="op">+</span><span class="dv">1</span>:               <span class="co">// Left sublist exhausted</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>            A[curr] <span class="op">=</span> temp[i2]</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>            i2 <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> i2 <span class="op">&gt;</span> right:              <span class="co"># Right sublist exhausted</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>            i2 <span class="op">=</span> i2<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> i2 <span class="op">&gt;</span> right:           <span class="co">// Right sublist exhausted</span></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>            A[curr] <span class="op">=</span> temp[i1]</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>            i1 <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> temp[i1] <span class="op">&lt;=</span> temp[i2]:    <span class="co"># Get smaller value</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>            i1 <span class="op">=</span> i1<span class="op">+</span><span class="dv">1</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> temp[i1] <span class="op">&lt;=</span> temp[i2]: <span class="co">// Get smaller value</span></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>            A[curr] <span class="op">=</span> temp[i1]</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>            i1 <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>            i1 <span class="op">=</span> i1<span class="op">+</span><span class="dv">1</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>            A[curr] <span class="op">=</span> temp[i2]</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>            i2 <span class="op">+=</span> <span class="dv">1</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="dt">static</span> <span class="op">&lt;</span>T <span class="kw">extends</span> <span class="bu">Comparable</span><span class="op">&lt;</span>T<span class="op">&gt;&gt;</span> <span class="dt">void</span> <span class="fu">mergeSort</span><span class="op">(</span>T<span class="op">[]</span> A<span class="op">,</span> T<span class="op">[]</span> temp<span class="op">,</span> <span class="dt">int</span> left<span class="op">,</span> <span class="dt">int</span> right<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>left <span class="op">==</span> right<span class="op">)</span>                   <span class="co">// List has one record</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> mid <span class="op">=</span> <span class="op">(</span>left <span class="op">+</span> right<span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span>        <span class="co">// Select midpoint</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mergeSort</span><span class="op">(</span>A<span class="op">,</span> temp<span class="op">,</span> left<span class="op">,</span> mid<span class="op">);</span>       <span class="co">// Mergesort first half</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mergeSort</span><span class="op">(</span>A<span class="op">,</span> temp<span class="op">,</span> mid<span class="op">+</span><span class="dv">1</span><span class="op">,</span> right<span class="op">);</span>    <span class="co">// Mergesort second half</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> left<span class="op">;</span> i <span class="op">&lt;=</span> right<span class="op">;</span> i<span class="op">++)</span>  <span class="co">// Copy subarray to temp</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        temp<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> A<span class="op">[</span>i<span class="op">];</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Do the merge operation back to A</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> i1 <span class="op">=</span> left<span class="op">;</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> i2 <span class="op">=</span> mid <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> curr <span class="op">=</span> left<span class="op">;</span> curr <span class="op">&lt;=</span> right<span class="op">;</span> curr<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>i1 <span class="op">==</span> mid<span class="op">+</span><span class="dv">1</span><span class="op">)</span> <span class="op">{</span>               <span class="co">// Left sublist exhausted</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>            A<span class="op">[</span>curr<span class="op">]</span> <span class="op">=</span> temp<span class="op">[</span>i2<span class="op">];</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>            i2<span class="op">++;</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>i2 <span class="op">&gt;</span> right<span class="op">)</span> <span class="op">{</span>         <span class="co">// Right sublist exhausted</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>            A<span class="op">[</span>curr<span class="op">]</span> <span class="op">=</span> temp<span class="op">[</span>i1<span class="op">];</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>            i1<span class="op">++;</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>temp<span class="op">[</span>i1<span class="op">].</span><span class="fu">compareTo</span><span class="op">(</span>temp<span class="op">[</span>i2<span class="op">])</span> <span class="op">&lt;=</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span>  <span class="co">// Get smaller value</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>            A<span class="op">[</span>curr<span class="op">]</span> <span class="op">=</span> temp<span class="op">[</span>i1<span class="op">];</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>            i1<span class="op">++;</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>            A<span class="op">[</span>curr<span class="op">]</span> <span class="op">=</span> temp<span class="op">[</span>i2<span class="op">];</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>            i2<span class="op">++;</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>            i2 <span class="op">=</span> i2<span class="op">+</span><span class="dv">1</span></span></code></pre></div>
 <p>Here is a visualization for the merge step.</p>
 <p>
 <div id="mergeImplS1CON" class="ssAV" data-short-name="mergeImplS1CON" data-long-name="Mergesort Implementation Slideshow 1" alt="Mergesort Implementation Slideshow 1" tabIndex="-1">
@@ -291,14 +187,276 @@ class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="
 <div class="jsavcanvas"></div>
 </div>
 </p>
-<p>
-<div id="MergesortSumm" class="embedContainer">
-<iframe id="MergesortSumm_iframe" aria-label="MergesortSumm" src="../interactive/Sorting/MergesortSumm.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
+<section id="review-questions-mergesort" class="level3"
+data-number="2.10.1">
+<h3 data-number="2.10.1"><span
+class="header-section-number">2.10.1</span> Review questions:
+Mergesort</h3>
+<div class="quiz">
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>Mergesort (as the code is written in this module) is a stable sorting
+algorithm. Recall that a stable sorting algorithm maintains the relative
+order of records with equal keys.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>What happens when two equal values are compared during merge?</li>
+</ul>
 </div>
-</p>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>Mergesort is easier to implement when operating on a linked list than
+on an array.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Look at the length of the code given in the modules.</li>
+<li>There are a lot of details to deal with when implementing Mergesort
+on an array.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>You must merge 2 sorted lists of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
+respectively. The number of comparisons needed in the worst case by the
+merge algorithm will be:</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>+</mo><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">m+n-1</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">mn</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>max</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>m</mi><mo>,</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\max(m,n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>min</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>m</mi><mo>,</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\min(m,n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>+</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">m+n</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Each comparison puts one record in the final sorted array.</li>
+<li>You don’t compare when there is only one record.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the most complicated part of the Mergesort algorithm?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Merging the sorted halves
+back together</label></li>
+<li><label><input type="checkbox" />Finding the midpoint</label></li>
+<li><label><input type="checkbox" />Partitioning the array</label></li>
+<li><label><input type="checkbox" />Achieving the base case</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>There is no partition in Mergesort.</li>
+<li>The two main parts of Mergesort are splitting and merging.</li>
+<li>Splitting is easy – just cut the list into two halves.</li>
+<li>Merging is not hard, but it is more complicated than splitting.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Mergesort works by splitting a list of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+numbers in half, then sorting each half recursively, and finally merging
+the two halves. Which of the following list implementations would allow
+Mergesort to work in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log n)</annotation></semantics></math>
+time?</p>
+<p><em>Multiple choices are possible!</em></p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />A singly linked
+list</label></li>
+<li><label><input type="checkbox" checked="" />A doubly linked
+list</label></li>
+<li><label><input type="checkbox" checked="" />An array</label></li>
+<li><label><input type="checkbox" />None of them</label></li>
+</ul>
+<div class="hints">
+<p>We have an implementation that works on arrays. It is also easy to do
+this on linked lists. It works fine on both singly and doubly lined
+lists.</p>
+</div>
+</div>
+<div class="question">
+<p>In which cases are the time complexities the same for Mergesort?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Worst, Average and
+Best</label></li>
+<li><label><input type="checkbox" />Worst and Best</label></li>
+<li><label><input type="checkbox" />Best and Average</label></li>
+<li><label><input type="checkbox" />Worst and Average</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Mergesort’s cost vary according to the order of the array input
+values?</li>
+<li>No, it does not matter what order the input values have.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The order of the input records has what impact on the number of
+comparisons required by Mergesort (as presented in this module)?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />None</label></li>
+<li><label><input type="checkbox" />There is a constant factor
+difference</label></li>
+<li><label><input type="checkbox" />There is a big difference, the
+asymptotic running time can change</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Mergesort change when it make a comparison according to the
+order of the array input values?</li>
+<li>No, it does not matter what order the input values have.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the worst-case time for Mergesort to sort an array of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+records?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^2)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mi>n</mi></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^n)</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Mergesort’s number of comparisons depend on the particular
+order of the input array?</li>
+<li>No, it does not.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the running time of Mergesort when the input is an array
+where all record values are equal?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^2)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mi>n</mi></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n ^ n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Mergesort’s number of comparisons depend on the particular
+order of the input array?</li>
+<li>No, it does not.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>When is Mergesort a good choice for sorting an array?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />We need a reasonably fast
+algorithm with a good worst case cost</label></li>
+<li><label><input type="checkbox" />Each record requires a large amount
+of memory</label></li>
+<li><label><input type="checkbox" />Each record requires a small amount
+of memory</label></li>
+<li><label><input type="checkbox" />The processor speed is
+fast</label></li>
+<li><label><input type="checkbox" />The array contains many
+records</label></li>
+<li><label><input type="checkbox" />We need good best-case running
+time</label></li>
+<li><label><input type="checkbox" />None of these
+situations</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Mergesort’s number of comparisons depend on the particular
+order of the input array?</li>
+<li>No, it does not.</li>
+<li>This makes it reliable in the worst case.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In the worst case, the total number of comparisons for Mergesort is
+closest to: - [x]
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>log</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">n \log n</annotation></semantics></math>
+- [ ]
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+- [ ]
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>n</mi><mn>2</mn></msup><annotation encoding="application/x-tex">n^2</annotation></semantics></math>
+- [ ]
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>n</mi><mn>2</mn></msup><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n^2/2</annotation></semantics></math></p>
+<div class="hints">
+<ul>
+<li>What is the asymptotic cost of Mergesort?</li>
+<li>Only one of these answers looks like the asymptotic cost.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The array-based implementation for Mergesort uses how many
+arrays?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>2</mn><annotation encoding="application/x-tex">2</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>log</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<p>There are
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>log</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n</annotation></semantics></math>
+passes. But the implementation is careful to reuse the auxilliary array
+rather than make a new one on each pass. So Mergesort requires the
+original array and an auxilliary array.</p>
+</div>
+</div>
+</div>
 </section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="2.9-mergesort.html" class="navbutton">&lt;&lt;</a>
+<a href="2.9-mergesort.html" accesskey="p" rel="previous">Mergesort</a>
+</div>
+<div class="navlink">
+<a href="2.11-quicksort.html" accesskey="n" rel="next">Quicksort</a>
+<a href="2.11-quicksort.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 <script type="text/javascript" src="../interactive/Sorting/mergeImplS1CON.js"></script>
 </body>
 </html>
+

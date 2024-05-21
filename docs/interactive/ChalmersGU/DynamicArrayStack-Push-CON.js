@@ -10,11 +10,11 @@ $(document).ready(function() {
   var av_name = "DynamicArrayStack-Push-CON";
   var av = new JSAV(av_name);
   var pseudo = av.code([
-    "push(x:E)",
-    "    if stackSize >= size of internalArray",
-    "        resizeArray(size of internalArray * CapacityMultiplier)",
+    "push(x):",
+    "    if stackSize >= size of internalArray:",
+    "        resizeArray(size of internalArray * 2)",
     "    internalArray[stackSize] = x",
-    "    stackSize += 1",
+    "    stackSize = stackSize + 1",
   ], {lineNumbers: false});
 
   var arr = av.ds.array([12, 45, 5, 81, "", "", "", ""],

@@ -8,93 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Priority queues</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        background-color: #ffffff;
-        color: #a0a0a0;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
-    div.sourceCode
-      { color: #1f1c1b; background-color: #ffffff; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #1f1c1b; } /* Normal */
-    code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
-    code span.an { color: #ca60ca; } /* Annotation */
-    code span.at { color: #0057ae; } /* Attribute */
-    code span.bn { color: #b08000; } /* BaseN */
-    code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
-    code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #924c9d; } /* Char */
-    code span.cn { color: #aa5500; } /* Constant */
-    code span.co { color: #898887; } /* Comment */
-    code span.cv { color: #0095ff; } /* CommentVar */
-    code span.do { color: #607880; } /* Documentation */
-    code span.dt { color: #0057ae; } /* DataType */
-    code span.dv { color: #b08000; } /* DecVal */
-    code span.er { color: #bf0303; text-decoration: underline; } /* Error */
-    code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
-    code span.fl { color: #b08000; } /* Float */
-    code span.fu { color: #644a9b; } /* Function */
-    code span.im { color: #ff5500; } /* Import */
-    code span.in { color: #b08000; } /* Information */
-    code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
-    code span.op { color: #1f1c1b; } /* Operator */
-    code span.ot { color: #006e28; } /* Other */
-    code span.pp { color: #006e28; } /* Preprocessor */
-    code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
-    code span.sc { color: #3daee9; } /* SpecialChar */
-    code span.ss { color: #ff5500; } /* SpecialString */
-    code span.st { color: #bf0303; } /* String */
-    code span.va { color: #0057ae; } /* Variable */
-    code span.vs { color: #bf0303; } /* VerbatimString */
-    code span.wa { color: #bf0303; } /* Warning */
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -160,37 +79,49 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="index.html" accesskey="u" rel="up">Data Structures and Algorithms</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="6.8-binary-search-tree-chapter-summary.html" class="navbutton">&lt;&lt;</a>
+<a href="6.8-binary-search-tree-chapter-summary.html" accesskey="p" rel="previous">Binary Search Tree Chapter Summary</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="7.1-array-implementation-for-complete-binary-trees.html" accesskey="n" rel="next">Array Implementation for Complete Binary Trees</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="6.8-binary-search-tree-chapter-summary.html" accesskey="p" rel="previous">Binary Search Tree Chapter Summary</a>
-</span>
+<div>
+<a href="7.1-array-representation-for-complete-binary-trees.html" accesskey="n" rel="next">Array Representation for Complete Binary Trees</a>
+<a href="7.1-array-representation-for-complete-binary-trees.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="priority-queues" class="level1" data-number="7">
 <h1 data-number="7"><span class="header-section-number">7</span>
 Priority queues</h1>
-<p>So far we have seen two <a href="10-glossary.html#adt" class="term">ADTs</a> that
-represent a collection of objects, and support adding and removing
+<p>So far we have seen two <a href="10-glossary.html#adt" class="term"
+title="Abbreviated ADT. The specification of a data type within some language, independent of an implementation. The interface for the ADT is defined in terms of a type and a set of operations on that type. The behavior of each operation is determined by its inputs and outputs. An ADT does not specify *how* the data type is implemented. These implementation details are hidden from the user of the ADT and protected from outside access, a concept referred to as encapsulation.">ADTs</a>
+that represent a collection of objects, and support adding and removing
 objects:</p>
 <ul>
-<li><a href="10-glossary.html#stack" class="term">Stacks</a>, where the object removed
-is always the one <em>most recently</em> inserted (<a href="10-glossary.html#lifo" class="term">LIFO</a>).</li>
-<li><a href="10-glossary.html#queue" class="term">Queues</a>, where the object removed
-is always the one <em>first</em> inserted (<a href="10-glossary.html#fifo" class="term">FIFO</a>).</li>
+<li><a href="10-glossary.html#stack" class="term"
+title="A list-like structure in which elements may be inserted or removed from only one end.">Stacks</a>,
+where the object removed is always the one <em>most recently</em>
+inserted (<a href="10-glossary.html#lifo" class="term"
+title="Abbreviation for &#39;last-in, first-out&#39;. This is the access paradigm for a stack, and an old terminolgy for the stack is &#39;LIFO list&#39;.">LIFO</a>).</li>
+<li><a href="10-glossary.html#queue" class="term"
+title="A list-like structure in which elements are inserted only at one end, and removed only from the other one end.">Queues</a>,
+where the object removed is always the one <em>first</em> inserted (<a
+href="10-glossary.html#fifo" class="term"
+title="Abbreviation for &#39;first-in, first-out&#39;. This is the access paradigm for a queue, and an old terminology for the queue is &#39;FIFO list&#39;.">FIFO</a>).</li>
 </ul>
 <p>There are many situations, both in real life and in computing
 applications, where we wish to choose the next “most important” from a
@@ -198,13 +129,18 @@ collection of people, tasks, or objects. For example, doctors in a
 hospital emergency room often choose to see next the “most critical”
 patient rather than the one who arrived first. When scheduling programs
 for execution in a multitasking operating system, at any given moment
-there might be several programs (usually called <a href="10-glossary.html#job" class="term">jobs</a>) ready to run. The next job selected is the one
-with the highest <a href="10-glossary.html#priority" class="term">priority</a>. Priority is
-indicated by a particular value associated with the job (and might
-change while the job remains in the wait list).</p>
+there might be several programs (usually called <a
+href="10-glossary.html#job" class="term"
+title="Common name for processes or tasks to be run by an operating system. They typically need to be processed in order of importance, and so are kept organized by a priority queue. Another common use for this term is for a collection of tasks to be ordered by a topological sort.">jobs</a>)
+ready to run. The next job selected is the one with the highest <a
+href="10-glossary.html#priority" class="term"
+title="A quantity assigned to each of a collection of jobs or tasks that indicate importance for order of processing. For example, in an operating system, there could be a collection of processes (jobs) ready to run. The operating system must select the next task to execute, based on their priorities.">priority</a>.
+Priority is indicated by a particular value associated with the job (and
+might change while the job remains in the wait list).</p>
 <p>When a collection of objects is organized by importance or priority,
-we call this a <a href="10-glossary.html#priority-queue" class="term">priority queue</a>. A priority
-queue supports the following operations:</p>
+we call this a <a href="10-glossary.html#priority-queue" class="term"
+title="An ADT whose primary operations of insert of records, and deletion of the greatest (or, in an alternative implementation, the least) valued record. Most often implemented using the heap data structure. The name comes from a common application where the records being stored represent tasks, with the ordering values based on the priorities of the tasks.">priority
+queue</a>. A priority queue supports the following operations:</p>
 <ul>
 <li>adding a new object to the priority queue</li>
 <li>removing the <em>smallest</em> object from the priority queue.</li>
@@ -214,20 +150,10 @@ that both adding and removing the minimum take
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>
 time.</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> PriorityQueue(Collection):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> add(<span class="va">self</span>, x):    <span class="st">&quot;&quot;&quot;Adds x to the priority queue.&quot;&quot;&quot;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> removeMin(<span class="va">self</span>): <span class="st">&quot;&quot;&quot;Removes and returns the minimum element. Raises an exception if the priority queue is empty.&quot;&quot;&quot;</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> getMin(<span class="va">self</span>):    <span class="st">&quot;&quot;&quot;Returns the minimum element, without removing it. Raises an exception if the priority queue is empty.&quot;&quot;&quot;</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Note: __iter__() can yield the elements in any order, but the minimum element should come first.</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Note: This is an interface, while java.util.PriorityQueue is a class</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">// implementing the Queue interface (so different method names)!</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">PriorityQueue</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="kw">extends</span> <span class="bu">Collection</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> <span class="fu">add</span><span class="op">(</span>E x<span class="op">);</span>  <span class="co">// Adds x to the priority queue.</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    E <span class="fu">removeMin</span><span class="op">();</span>  <span class="co">// Removes and returns the minimum element. Raises an exception if the priority queue is empty.</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    E <span class="fu">getMin</span><span class="op">();</span>     <span class="co">// Returns the minimum element, without removing it. Raises an exception if the priority queue is empty.</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Note: iterator() can yield the elements in any order, but the minimum element should come first.</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">PriorityQueue</span> <span class="kw">extends</span> <span class="bu">Collection</span>:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">add</span>(x)       <span class="co">// Adds x to the priority queue.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">removeMin</span>()  <span class="co">// Removes and returns the minimum element.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">getMin</span>()     <span class="co">// Returns the minimum element, without removing it.</span></span></code></pre></div>
 <p>Note that this API assumes that the priority queue orders the
 elements in <em>ascending</em> order. There is also the possibility of
 ordering in descending order –that kind of queue is called a <em>maximum
@@ -246,25 +172,13 @@ it.</li>
 come out in ascending order.</li>
 </ul>
 <p>Here is an implementation of this algorithm in code:</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pqSort(array):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    pq <span class="op">=</span> MinHeap()</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># MinHeap is a class that implements the priority queue ADT;</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># we will see how it works in the next section.</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> item <span class="kw">in</span> array:</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        pq.add(item)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(array)):</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        array[i] <span class="op">=</span> pq.removeMin()</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="dt">static</span> <span class="op">&lt;</span>E <span class="kw">extends</span> <span class="bu">Comparable</span><span class="op">&lt;</span>E<span class="op">&gt;&gt;</span> <span class="dt">void</span> <span class="fu">pqSort</span><span class="op">(</span>E<span class="op">[]</span> array<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// MinHeap is a class that implements the priority queue ADT;</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// we will see how it works in the next section.</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">PriorityQueue</span><span class="op">&lt;</span>E<span class="op">&gt;</span> pq <span class="op">=</span> <span class="kw">new</span> MinHeap<span class="op">&lt;</span>E<span class="op">&gt;();</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span>E item <span class="op">:</span> array<span class="op">)</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        pq<span class="op">.</span><span class="fu">add</span><span class="op">(</span>item<span class="op">);</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> array<span class="op">.</span><span class="fu">length</span><span class="op">;</span> i<span class="op">++)</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        array<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> pq<span class="op">.</span><span class="fu">removeMin</span><span class="op">();</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> pqSort(array):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    pq <span class="op">=</span> <span class="kw">new</span> <span class="bu">PriorityQueue</span>()</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> item <span class="kw">in</span> array:</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        pq.<span class="bu">add</span>(item)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="op">=</span> <span class="dv">0</span> <span class="kw">to</span> array.<span class="bu">size</span>()<span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        array[i] <span class="op">=</span> pq.<span class="bu">removeMin</span>()</span></code></pre></div>
 <p>What is the time complexity of this algorithm? Well, for an input
 list of size
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
@@ -336,61 +250,24 @@ algorithm can be implemented efficiently using a priority queue.</p>
 add the new transaction to the priority queue. This might make the
 priority queue grow to 101 transactions. If so, we remove the
 lowest-valued transaction. Here it is in code:</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Top100Transactions:</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Assume that the Transaction class implements comparisons</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># by comparing the value of the transaction.</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.pq <span class="op">=</span> MinHeap()</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add a new transaction to the priority queue.</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> add(transaction):</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        pq.add(transaction)</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        <span class="co"># If the priority queue grows to 101 transactions,</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        <span class="co"># cut it down to 100 by removing the smallest-valued one.</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> pq.size() <span class="op">&gt;</span> <span class="dv">100</span>:</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>            pq.removeMin()</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Return the top 100 transactions.</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> top100():</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pq.iterator()</span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode pseudocode"><code class="sourceCode pseudo"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Top100Transactions</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Assume that the Transaction class implements comparisons</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// by comparing the value of the transaction.</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    pq : PriorityQueue(Transaction) <span class="op">=</span> <span class="kw">new</span> MinHeap()</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Add a new transaction to the priority queue.</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    add(transaction:Transaction)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        pq.add(transaction)</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="co">// If the priority queue grows to 101 transactions,</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        <span class="co">// cut it down to 100 by removing the smallest-valued one.</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> pq.size() <span class="op">&gt;</span> <span class="dv">100</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>            pq.removeMin()</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Return the top 100 transactions.</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    top100() : Iterator(Transaction)</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pq.<span class="bu">iterator</span>()</span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Top100Transactions <span class="op">{</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Assume that the Transaction class implements Comparable</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// by comparing the value of the transaction.</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="bu">PriorityQueue</span><span class="op">&lt;</span>Transaction<span class="op">&gt;</span> pq <span class="op">=</span> <span class="kw">new</span> MinHeap<span class="op">&lt;&gt;();</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Add a new transaction to the priority queue.</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">add</span><span class="op">(</span>Transaction transaction<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        pq<span class="op">.</span><span class="fu">add</span><span class="op">(</span>transaction<span class="op">);</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>        <span class="co">// If the priority queue grows to 101 transactions,</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>        <span class="co">// cut it down to 100 by removing the smallest-valued one.</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>pq<span class="op">.</span><span class="fu">size</span><span class="op">()</span> <span class="op">&gt;</span> <span class="dv">100</span><span class="op">)</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>            pq<span class="op">.</span><span class="fu">removeMin</span><span class="op">();</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Return the top 100 transactions.</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">Iterator</span><span class="op">&lt;</span>Transaction<span class="op">&gt;</span> <span class="fu">top100</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pq<span class="op">.</span><span class="fu">iterator</span><span class="op">();</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Top100Transactions:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Assume that the Transaction class implements comparisons</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// by comparing the value of the transaction.</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    Top100Transactions():</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.pq <span class="op">=</span> <span class="kw">new</span> <span class="bu">PriorityQueue</span>()</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Add a new transaction to the priority queue.</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">add</span>(transaction):</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        pq.<span class="bu">add</span>(transaction)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        <span class="co">// If the priority queue grows to 101 transactions,</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">// cut it down to 100 by removing the smallest-valued one.</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> pq.<span class="bu">size</span>() <span class="op">&gt;</span> <span class="dv">100</span>:</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>            pq.<span class="bu">removeMin</span>()</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Return the top 100 transactions.</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    top100():</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pq.<span class="bu">iterator</span>()</span></code></pre></div>
 <p>What is the complexity of <code>add</code>? Well, in fact it takes
 constant time, because the priority queue has a constant maximum size of
 100 elements. If we generalize this problem to keeping track of the top
@@ -399,5 +276,21 @@ transactions, then the complexity of <code>add</code> is
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(\log k)</annotation></semantics></math>.</p>
 </section>
 </section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="6.8-binary-search-tree-chapter-summary.html" class="navbutton">&lt;&lt;</a>
+<a href="6.8-binary-search-tree-chapter-summary.html" accesskey="p" rel="previous">Binary Search Tree Chapter Summary</a>
+</div>
+<div class="navlink">
+<a href="7.1-array-representation-for-complete-binary-trees.html" accesskey="n" rel="next">Array Representation for Complete Binary Trees</a>
+<a href="7.1-array-representation-for-complete-binary-trees.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 </body>
 </html>
+

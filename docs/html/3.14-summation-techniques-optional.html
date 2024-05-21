@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Cliff Shaffer" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Nick Smallbone" />
+  <title>DSABook – Summation Techniques (optional)</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+      },
+      "HTML-CSS": {
+        scale: "80",
+      }
+    });
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+<link href="../interactive/Background/SummationOneToNCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/AlgAnal/GeometricSumProofCON.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="3.13-growth-rates-review-optional.html" class="navbutton">&lt;&lt;</a>
+<a href="3.13-growth-rates-review-optional.html" accesskey="p" rel="previous">Growth Rates Review (optional)</a>
+</div>
+<div>
+<a href="3.15-solving-recurrence-relations-optional.html" accesskey="n" rel="next">Solving Recurrence Relations (optional)</a>
+<a href="3.15-solving-recurrence-relations-optional.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="summation-techniques-optional" class="level2"
+data-number="3.14">
+<h2 data-number="3.14"><span class="header-section-number">3.14</span>
+Summation Techniques (optional)</h2>
+<div class="alert">
+<p><strong><em>Note</em></strong>: This section is <em>work in
+progress</em></p>
+</div>
+<p>Consider the following simple summation.</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>i</mi></mrow><annotation encoding="application/x-tex">
+\sum_{i=1}^n i
+</annotation></semantics></math></p>
+<p>An easy <a href="10-glossary.html#proof-by-induction" class="term"
+title="A mathematical proof technique similar to recursion. It is used to prove a parameterized theorem $S(n)$, that is, a theorem where there is a induction variable involved (such as the sum of the numbers from 1 to $n$). One first proves that the theorem holds true for a base case, then one proves the implication that whenever $S(n)$ is true then $S(n+1)$ is also true. Another variation is strong induction.">proof
+by induction</a> shows that this summation has the well-known closed
+form
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n(n+1)/2</annotation></semantics></math>.
+But while induction is a good technique for proving that a proposed
+closed-form expression is correct, how do we find a candidate
+closed-form expression to test in the first place? Let us try to think
+through this problem from first principles, as though we had never seen
+it before.</p>
+<p>A good place to begin analyzing a summation it is to give an estimate
+of its value for a given
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.
+Observe that the biggest term for this summation is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
+and there are
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+terms being summed up. So the total must be less than
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>n</mi><mn>2</mn></msup><annotation encoding="application/x-tex">n^2</annotation></semantics></math>.
+Actually, most terms are much less than
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
+and the sizes of the terms grow linearly. If we were to draw a picture
+with bars for the size of the terms, their heights would form a line,
+and we could enclose them in a box
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+units wide and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+units high. It is easy to see from this that a closer estimate for the
+summation is about
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">(n^2)/2</annotation></semantics></math>.
+Having this estimate in hand helps us when trying to determine an exact
+closed-form solution, because we will hopefully recognize if our
+proposed solution is badly wrong.</p>
+<p>
+<div id="SummationOneToNCON" class="ssAV" data-short-name="SummationOneToNCON" data-long-name="Background/SummationOneToNCON" alt="Background/SummationOneToNCON" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>Let us now consider some ways that we might hit upon an exact
+equation for the closed form solution to this summation. One
+particularly clever approach that we can take is to observe that we can
+“pair up” the first and last terms, the second and
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>)th
+terms, and so on. Each pair sums to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n+1</annotation></semantics></math>.
+The number of pairs is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n/2</annotation></semantics></math>.
+Thus, the solution is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n(n+1)/2</annotation></semantics></math>.
+This is pretty, and there is no doubt about it being correct. The
+problem is that it is not a useful technique for solving many other
+summations.</p>
+<p>Now let us try to come up with something a bit more general. We
+already recognized that, because the largest term is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+and there are
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+terms, the summation is less than
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>n</mi><mn>2</mn></msup><annotation encoding="application/x-tex">n^2</annotation></semantics></math>.
+If we are lucky, the closed form solution is a polynomial. Using that as
+a working assumption, we can invoke a technique called <a
+href="10-glossary.html#guess-and-test" class="term"
+title="A technique used when trying to determine the closed-form solution for a summation or recurrence relation. Given a hypothesis for the closed-form solution, if it is correct, then it is often relatively easy to prove that using induction.">guess-and-test</a>.
+We will guess that the closed-form solution for this summation is a
+polynomial. That means that we are guessing that it is of the form
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>c</mi><mn>1</mn></msub><msup><mi>n</mi><mn>2</mn></msup><mo>+</mo><msub><mi>c</mi><mn>2</mn></msub><mi>n</mi><mo>+</mo><msub><mi>c</mi><mn>3</mn></msub></mrow><annotation encoding="application/x-tex">c_1 n^2 + c_2 n + c_3</annotation></semantics></math>
+for some constants
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>c</mi><mn>1</mn></msub><annotation encoding="application/x-tex">c_1</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>c</mi><mn>2</mn></msub><annotation encoding="application/x-tex">c_2</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>c</mi><mn>3</mn></msub><annotation encoding="application/x-tex">c_3</annotation></semantics></math>.
+If this is true, then we can plug in the answers to small cases of the
+summation to solve for the coefficients. For this example, substituting
+0, 1, and 2 for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+leads to three simultaneous equations. Because the summation when
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">n=0</annotation></semantics></math>
+is just 0,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>c</mi><mn>3</mn></msub><annotation encoding="application/x-tex">c_3</annotation></semantics></math>
+must be 0. For
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n=1</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">n=2</annotation></semantics></math>
+we get the two equations</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>c</mi><mn>1</mn></msub><mo>+</mo><msub><mi>c</mi><mn>2</mn></msub></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mn>1</mn></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><mn>4</mn><msub><mi>c</mi><mn>1</mn></msub><mo>+</mo><mn>2</mn><msub><mi>c</mi><mn>2</mn></msub></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mn>3</mn></mtd></mtr></mtable><annotation encoding="application/x-tex">
+\begin{eqnarray*}
+c_1 + c_2     &amp; = &amp;  1 \\
+4 c_1 + 2 c_2 &amp; = &amp;  3 
+\end{eqnarray*}
+</annotation></semantics></math></p>
+<p>which in turn yield
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>c</mi><mn>1</mn></msub><mo>=</mo><mn>1</mn><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">c_1 = 1/2</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>c</mi><mn>2</mn></msub><mo>=</mo><mn>1</mn><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">c_2 = 1/2</annotation></semantics></math>.
+Thus, if the closed-form solution for the summation <strong>is</strong>
+a polynomial, then it can only be</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mn>2</mn><msup><mi>n</mi><mn>2</mn></msup><mo>+</mo><mn>1</mn><mi>/</mi><mn>2</mn><mi>n</mi><mo>+</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">
+1/2 n^2 + 1/2 n + 0
+</annotation></semantics></math></p>
+<p>which is more commonly written</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac><mrow><mi>n</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mn>2</mn></mfrac><annotation encoding="application/x-tex">
+\frac{n(n+1)}{2}
+</annotation></semantics></math></p>
+<p>At this point, we still must do the “test” part of the guess-and-test
+approach. We can use an induction proof to verify whether our candidate
+closed-form solution is correct. In this case it is indeed correct, as
+shown by <a
+href="3.14-summation-techniques-optional.html#SumIEx">Example
+#SumIEx</a>. The induction proof is necessary because our initial
+assumption that the solution is a simple polynomial could be wrong. For
+example, it might have been that the true solution includes a
+logarithmic term, such as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>c</mi><mn>1</mn></msub><msup><mi>n</mi><mn>2</mn></msup><mo>+</mo><msub><mi>c</mi><mn>2</mn></msub><mi>n</mi><mo>log</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">c_1n^2 + c_2 n \log n</annotation></semantics></math>.
+The process shown here is essentially fitting a curve to a fixed number
+of points. Because there is always an
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>-degree
+polynomial that fits
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n+1</annotation></semantics></math>
+points, we have not done enough work to be sure that we to know the true
+equation without the induction proof.</p>
+<p>Guess-and-test is useful whenever the solution is a polynomial
+expression. In particular, similar reasoning can be used to solve for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup><msup><mi>i</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\sum_{i=1}^n i^2</annotation></semantics></math>,
+or more generally
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup><msup><mi>i</mi><mi>c</mi></msup></mrow><annotation encoding="application/x-tex">\sum_{i=1}^n i^c</annotation></semantics></math>
+for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>
+any positive integer. Why is this not a universal approach to solving
+summations? Because many summations do not have a polynomial as their
+closed form solution.</p>
+<p>A more general approach is based on the <a
+href="10-glossary.html#subtract-and-guess" class="term"
+title="A technique for finding a closed-form solution to a summation or recurrence relation.">subtract-and-guess</a>
+or <a href="10-glossary.html#divide-and-guess" class="term"
+title="A technique for finding a closed-form solution to a summation or recurrence relation.">divide-and-guess</a>
+strategies. One form of subtract-and-guess is known as the <a
+href="10-glossary.html#shifting-method" class="term"
+title="A technique for finding a closed-form solution to a summation or recurrence relation.">shifting
+method</a>. The shifting method subtracts the summation from a variation
+on the summation. The variation selected for the subtraction should be
+one that makes most of the terms cancel out. To solve sum
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>f</mi><annotation encoding="application/x-tex">f</annotation></semantics></math>,
+we pick a known function
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>g</mi><annotation encoding="application/x-tex">g</annotation></semantics></math>
+and find a pattern in terms of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(n) - g(n)</annotation></semantics></math>
+or
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(n)/g(n)</annotation></semantics></math>.</p>
+<section id="SumIEx" class="level4 topic" data-number="3.14.0.1">
+<h4 data-number="3.14.0.1"><span
+class="header-section-number">3.14.0.1</span> Example</h4>
+<p>Find the closed form solution for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup><mi>i</mi></mrow><annotation encoding="application/x-tex">\sum_{i=1}^n i</annotation></semantics></math>
+using the divide-and-guess approach. We will try two example functions
+to illustrate the divide-and-guess method: dividing by
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+and dividing by
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(n-1)</annotation></semantics></math>.
+Our goal is to find patterns that we can use to guess a closed-form
+expression as our candidate for testing with an induction proof. To aid
+us in finding such patterns, we can construct a table showing the first
+few numbers of each function, and the result of dividing one by the
+other, as follows.</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th
+style="text-align: right;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math></th>
+<th style="text-align: right;">1</th>
+<th style="text-align: right;">2</th>
+<th style="text-align: right;">3</th>
+<th style="text-align: right;">4</th>
+<th style="text-align: right;">5</th>
+<th style="text-align: right;">6</th>
+<th style="text-align: right;">7</th>
+<th style="text-align: right;">8</th>
+<th style="text-align: right;">9</th>
+<th style="text-align: right;">10</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td
+style="text-align: right;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(n)</annotation></semantics></math></td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">46</td>
+<td style="text-align: right;">57</td>
+</tr>
+<tr class="even">
+<td
+style="text-align: right;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math></td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="odd">
+<td
+style="text-align: right;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">f(n)/n</annotation></semantics></math></td>
+<td style="text-align: right;">2/2</td>
+<td style="text-align: right;">3/2</td>
+<td style="text-align: right;">4/2</td>
+<td style="text-align: right;">5/2</td>
+<td style="text-align: right;">6/2</td>
+<td style="text-align: right;">7/2</td>
+<td style="text-align: right;">8/2</td>
+<td style="text-align: right;">9/2</td>
+<td style="text-align: right;">10/2</td>
+<td style="text-align: right;">11/2</td>
+</tr>
+<tr class="even">
+<td
+style="text-align: right;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mspace width="-0.167em"></mspace><mo>−</mo><mspace width="-0.167em"></mspace><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(n\!-\!1)</annotation></semantics></math></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">46</td>
+</tr>
+<tr class="odd">
+<td
+style="text-align: right;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mspace width="-0.167em"></mspace><mo>−</mo><mspace width="-0.167em"></mspace><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(n)/f(n\!-\!1)</annotation></semantics></math></td>
+<td style="text-align: right;">–</td>
+<td style="text-align: right;">3/1</td>
+<td style="text-align: right;">4/2</td>
+<td style="text-align: right;">5/3</td>
+<td style="text-align: right;">6/4</td>
+<td style="text-align: right;">7/5</td>
+<td style="text-align: right;">8/6</td>
+<td style="text-align: right;">9/7</td>
+<td style="text-align: right;">10/8</td>
+<td style="text-align: right;">11/9</td>
+</tr>
+</tbody>
+</table>
+<p>Dividing by both
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(n-1)</annotation></semantics></math>
+happen to give us useful patterns to work with.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mi>n</mi></mfrac><mo>=</mo><mfrac><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{f(n)}{n} = \frac{n+1}{2}</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{f(n)}{f(n-1)} = \frac{n+1}{n-1}</annotation></semantics></math>.
+Of course, lots of other guesses for function
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>g</mi><annotation encoding="application/x-tex">g</annotation></semantics></math>
+do not work. For example,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>n</mi><mo>=</mo><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(n) - n = f(n-1)</annotation></semantics></math>.
+Knowing that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">f(n) = f(n-1) + n</annotation></semantics></math>
+is not useful for determining the closed form solution to this
+summation. Or consider
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">f(n) - f(n-1) = n</annotation></semantics></math>.
+Again, knowing that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">f(n) = f(n-1) + n</annotation></semantics></math>
+is not useful. Finding the right combination of equations can be like
+finding a needle in a haystack.</p>
+<p>In our first example, we can see directly what the closed-form
+solution should be. Since
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mi>n</mi></mfrac><mo>=</mo><mfrac><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{f(n)}{n} = \frac{n+1}{2}</annotation></semantics></math>,
+obviously
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>n</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">f(n) = n(n+1)/2</annotation></semantics></math>.</p>
+<p>Dividing
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(n)</annotation></semantics></math>
+by
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(n-1)</annotation></semantics></math>
+does not give so obvious a result, but it provides another useful
+illustration.</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mfrac><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mfrac><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></mfrac></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><mi>n</mi><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mi>n</mi><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><msup><mi>n</mi><mn>2</mn></msup><mo>−</mo><mi>n</mi></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><mn>2</mn><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><msup><mi>n</mi><mn>2</mn></msup><mo>+</mo><mi>n</mi><mo>=</mo><mi>n</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mfrac><mrow><mi>n</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mn>2</mn></mfrac></mtd></mtr></mtable><annotation encoding="application/x-tex">
+\begin{eqnarray}
+\frac{f(n)}{f(n-1)} &amp; = &amp;  \frac{n+1}{n-1} \\
+f(n) (n-1)          &amp; = &amp;  (n+1) f(n-1)  \\
+f(n) (n-1)          &amp; = &amp;  (n+1) (f(n) - n) \\
+n f(n) - f(n)       &amp; = &amp;  n f(n) + f(n) - n^2 - n \\
+2 f(n)              &amp; = &amp;  n^2 + n = n (n+1) \\
+f(n)                &amp; = &amp;  \frac{n (n + 1)}{2}
+\end{eqnarray}
+</annotation></semantics></math></p>
+<p>Once again, we still do not have a proof that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>n</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">f(n) = n(n+1)/2</annotation></semantics></math>.
+Why? Because we did not prove that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mi>n</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">f(n)/n = (n+1)/2</annotation></semantics></math>
+nor that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(n)/f(n-1) = (n+1)(n-1)</annotation></semantics></math>.
+We merely hypothesized patterns from looking at a few terms.
+Fortunately, it is easy to check our hypothesis with induction.</p>
+</section>
+<section id="example-17" class="level4 unnumbered topic">
+<h4 class="unnumbered">Example</h4>
+<p>Solve the summation</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mn>1</mn><mi>/</mi><msup><mn>2</mn><mi>i</mi></msup></mrow><annotation encoding="application/x-tex">
+\sum_{i=1}^n 1/2^i
+</annotation></semantics></math></p>
+<p>We will begin by writing out a table listing the first few values of
+the summation, to see if we can detect a pattern.</p>
+<table>
+<thead>
+<tr class="header">
+<th
+style="text-align: left;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math></th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">5</th>
+<th style="text-align: center;">6</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td
+style="text-align: left;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(n)</annotation></semantics></math></td>
+<td style="text-align: center;">1/2</td>
+<td style="text-align: center;">3/4</td>
+<td style="text-align: center;">7/8</td>
+<td style="text-align: center;">15/16</td>
+<td style="text-align: center;">31/32</td>
+<td style="text-align: center;">63/64</td>
+</tr>
+<tr class="even">
+<td
+style="text-align: left;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>−</mo><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">1-f(n)</annotation></semantics></math></td>
+<td style="text-align: center;">1/2</td>
+<td style="text-align: center;">1/4</td>
+<td style="text-align: center;">1/8</td>
+<td style="text-align: center;">1/16</td>
+<td style="text-align: center;">1/32</td>
+<td style="text-align: center;">1/64</td>
+</tr>
+</tbody>
+</table>
+<p>By direct inspection of the second line of the table, we might
+recognize the pattern
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mrow><msup><mn>2</mn><mi>n</mi></msup><mo>−</mo><mn>1</mn></mrow><msup><mn>2</mn><mi>n</mi></msup></mfrac></mrow><annotation encoding="application/x-tex">f(n) = \frac{2^n-1}{2^n}</annotation></semantics></math>.
+A simple induction proof can then prove that this always holds true.
+Alternatively, consider if we hadn’t noticed the pattern for the form of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(n)</annotation></semantics></math>.
+We might observe that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(n)</annotation></semantics></math>
+appears to be reaching an asymptote at 1. In which case, we might
+consider looking at the difference between
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(n)</annotation></semantics></math>
+and the expected asymptote. This result is shown in the last line of the
+table, which has a clear pattern since the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+th entry is of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><msup><mn>2</mn><mi>i</mi></msup></mrow><annotation encoding="application/x-tex">1/2^i</annotation></semantics></math>.
+From this we can easily deduce a guess that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>1</mn><mo>−</mo><mfrac><mn>1</mn><msup><mn>2</mn><mi>n</mi></msup></mfrac></mrow><annotation encoding="application/x-tex">f(n) = 1 - \frac{1}{2^n}</annotation></semantics></math>.
+Again, a simple induction proof will verify the guess.</p>
+</section>
+<section id="example-18" class="level4 unnumbered topic">
+<h4 class="unnumbered">Example</h4>
+<p>Solve the summation</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></munderover><mi>a</mi><msup><mi>r</mi><mi>i</mi></msup><mo>=</mo><mi>a</mi><mo>+</mo><mi>a</mi><mi>r</mi><mo>+</mo><mi>a</mi><msup><mi>r</mi><mn>2</mn></msup><mo>+</mo><mi>⋯</mi><mo>+</mo><mi>a</mi><msup><mi>r</mi><mi>n</mi></msup></mtd></mtr></mtable><annotation encoding="application/x-tex">
+\begin{eqnarray}
+f(n) &amp; = &amp; \sum_{i=0}^{n} ar^i = a + ar + ar^2 + \cdots + ar^n
+\end{eqnarray}
+</annotation></semantics></math></p>
+<p>This is called a geometric series. Our goal is to find some function
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">g(n)</annotation></semantics></math>
+such that the difference between
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(n)</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">g(n)</annotation></semantics></math>
+one from the other leaves us with an easily manipulated equation.
+Because the difference between consecutive terms of the summation is a
+factor of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>,
+we can shift terms if we multiply the entire expression by
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>r</mi><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></munderover><mi>a</mi><msup><mi>r</mi><mi>i</mi></msup><mo>=</mo><mi>a</mi><mi>r</mi><mo>+</mo><mi>a</mi><msup><mi>r</mi><mn>2</mn></msup><mo>+</mo><mi>a</mi><msup><mi>r</mi><mn>3</mn></msup><mo>+</mo><mi>⋯</mi><mo>+</mo><mi>a</mi><msup><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">
+rf(n) = r\sum_{i=0}^{n} ar^i = ar + ar^2 + ar^3 + \cdots + ar^{n+1}
+</annotation></semantics></math></p>
+<p>We can now subtract the one equation from the other, as follows:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>r</mi><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mi>a</mi><mo>+</mo><mi>a</mi><mi>r</mi><mo>+</mo><mi>a</mi><msup><mi>r</mi><mn>2</mn></msup><mo>+</mo><mi>a</mi><msup><mi>r</mi><mn>3</mn></msup><mo>+</mo><mi>⋯</mi><mo>+</mo><mi>a</mi><msup><mi>r</mi><mi>n</mi></msup></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="center" style="text-align: center"></mtd><mtd columnalign="left" style="text-align: left"><mspace width="0.278em"></mspace><mo>−</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mi>r</mi><mo>+</mo><mi>a</mi><msup><mi>r</mi><mn>2</mn></msup><mo>+</mo><mi>a</mi><msup><mi>r</mi><mn>3</mn></msup><mo>+</mo><mi>⋯</mi><mo>+</mo><mi>a</mi><msup><mi>r</mi><mi>n</mi></msup><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>a</mi><msup><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mtd></mtr></mtable><annotation encoding="application/x-tex">
+\begin{eqnarray}
+f(n) - rf(n) &amp; = &amp; a + ar + ar^2 + ar^3 + \cdots + ar^{n} \\
+             &amp;   &amp; \; - (ar + ar^2 + ar^3 + \cdots + ar^n) - ar^{n+1}
+\end{eqnarray}
+</annotation></semantics></math></p>
+<p>The result leaves only the end terms:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>r</mi><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></munderover><mi>a</mi><msup><mi>r</mi><mi>i</mi></msup><mo>−</mo><mi>r</mi><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></munderover><mi>a</mi><msup><mi>r</mi><mi>i</mi></msup></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>r</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mi>a</mi><mo>−</mo><mi>a</mi><msup><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mtd></mtr></mtable><annotation encoding="application/x-tex">
+\begin{eqnarray}
+f(n) - rf(n)  &amp; = &amp;  \sum_{i=0}^{n} ar^i - r\sum_{i=0}^{n} ar^i \\
+(1-r)f(n)     &amp; = &amp;  a - ar^{n+1}
+\end{eqnarray}
+</annotation></semantics></math></p>
+<p>Thus, we get the result</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mfrac><mrow><mi>a</mi><mo>−</mo><mi>a</mi><msup><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow><mrow><mn>1</mn><mo>−</mo><mi>r</mi></mrow></mfrac></mtd></mtr></mtable><annotation encoding="application/x-tex">
+\begin{eqnarray}
+f(n) &amp;=&amp; \frac{a - ar^{n+1}}{1 - r}
+\end{eqnarray}
+</annotation></semantics></math></p>
+<p>where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>≠</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">r \neq 1</annotation></semantics></math>.</p>
+</section>
+<section id="example-19" class="level4 unnumbered topic">
+<h4 class="unnumbered">Example</h4>
+<p>For our second example of the shifting method, we solve</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>i</mi><msup><mn>2</mn><mi>i</mi></msup><mo>=</mo><mn>1</mn><mo>⋅</mo><msup><mn>2</mn><mn>1</mn></msup><mo>+</mo><mn>2</mn><mo>⋅</mo><msup><mn>2</mn><mn>2</mn></msup><mo>+</mo><mn>3</mn><mo>⋅</mo><msup><mn>2</mn><mn>3</mn></msup><mo>+</mo><mi>⋯</mi><mo>+</mo><mi>n</mi><mo>⋅</mo><msup><mn>2</mn><mi>n</mi></msup></mtd></mtr></mtable><annotation encoding="application/x-tex">
+\begin{eqnarray}
+f(n) &amp;=&amp; \sum_{i=1}^{n} i2^i = 1 \cdot 2^1 + 2 \cdot 2^2 + 3 \cdot 2^3 + \cdots + n \cdot 2^n
+\end{eqnarray}
+</annotation></semantics></math></p>
+<p>We can achieve our goal if we multiply by two:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mn>2</mn><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mn>2</mn><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>i</mi><msup><mn>2</mn><mi>i</mi></msup><mo>=</mo><mn>1</mn><mo>⋅</mo><msup><mn>2</mn><mn>2</mn></msup><mo>+</mo><mn>2</mn><mo>⋅</mo><msup><mn>2</mn><mn>3</mn></msup><mo>+</mo><mn>3</mn><mo>⋅</mo><msup><mn>2</mn><mn>4</mn></msup><mo>+</mo><mi>⋯</mi><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>⋅</mo><msup><mn>2</mn><mi>n</mi></msup><mo>+</mo><mi>n</mi><mo>⋅</mo><msup><mn>2</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mtd></mtr></mtable><annotation encoding="application/x-tex">
+\begin{eqnarray}
+2f(n) &amp;=&amp; 2\sum_{i=1}^{n} i2^i = 1 \cdot 2^2 + 2 \cdot 2^3 + 3 \cdot 2^4 + \cdots + (n-1) \cdot 2^n + n \cdot 2^{n+1}
+\end{eqnarray}
+</annotation></semantics></math></p>
+<p>The
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+th term of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">2f(n)</annotation></semantics></math>
+is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>⋅</mo><msup><mn>2</mn><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">i \cdot 2^{i+1}</annotation></semantics></math>,
+while the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(i+1)</annotation></semantics></math>
+th term of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(n)</annotation></semantics></math>
+is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>⋅</mo><msup><mn>2</mn><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">(i+1) \cdot 2^{i+1}</annotation></semantics></math>.
+Subtracting one expression from the other yields the summation of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mi>i</mi></msup><annotation encoding="application/x-tex">2^i</annotation></semantics></math>
+and a few non-canceled terms:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mn>2</mn><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mn>2</mn><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>i</mi><msup><mn>2</mn><mi>i</mi></msup><mo>−</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>i</mi><msup><mn>2</mn><mi>i</mi></msup></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>i</mi><msup><mn>2</mn><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>−</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>i</mi><msup><mn>2</mn><mi>i</mi></msup></mtd></mtr></mtable><annotation encoding="application/x-tex">
+\begin{eqnarray}
+2f(n) - f(n) &amp; = &amp; 2\sum_{i=1}^n i 2^i - \sum_{i=1}^n i 2^i  \\
+             &amp; = &amp; \sum_{i=1}^n i 2^{i+1} - \sum_{i=1}^n i 2^i
+\end{eqnarray}
+</annotation></semantics></math></p>
+<p>Shift
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+’s value in the second summation, substituting
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(i+1)</annotation></semantics></math>
+for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mi>n</mi><msup><mn>2</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>+</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></munderover><mi>i</mi><msup><mn>2</mn><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>−</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></munderover><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><msup><mn>2</mn><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msup></mtd></mtr></mtable><annotation encoding="application/x-tex">
+\begin{eqnarray}
+&amp;=&amp; n2^{n+1} + \sum_{i=0}^{n-1}i2^{i+1} - \sum_{i=0}^{n-1}(i+1)2^{i+1}
+\end{eqnarray}
+</annotation></semantics></math></p>
+<p>Break the second summation into two parts:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mi>n</mi><msup><mn>2</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>+</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></munderover><mi>i</mi><msup><mn>2</mn><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>−</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></munderover><mi>i</mi><msup><mn>2</mn><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>−</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></munderover><msup><mn>2</mn><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msup></mtd></mtr></mtable><annotation encoding="application/x-tex">
+\begin{eqnarray}
+&amp;=&amp;  n2^{n+1} + \sum_{i=0}^{n-1}i2^{i+1} -
+              \sum_{i=0}^{n-1}i2^{i+1} -
+              \sum_{i=0}^{n-1}2^{i+1}
+\end{eqnarray}
+</annotation></semantics></math></p>
+<p>Cancel like terms:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mi>n</mi><msup><mn>2</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>−</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></munderover><msup><mn>2</mn><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msup></mtd></mtr></mtable><annotation encoding="application/x-tex">
+\begin{eqnarray}
+&amp;=&amp; n2^{n+1} - \sum_{i=0}^{n-1} 2^{i+1}
+\end{eqnarray}
+</annotation></semantics></math></p>
+<p>Again shift
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+’s value in the summation, substituting
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(i+1)</annotation></semantics></math>:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mi>n</mi><msup><mn>2</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>−</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msup><mn>2</mn><mi>i</mi></msup></mtd></mtr></mtable><annotation encoding="application/x-tex">
+\begin{eqnarray}
+&amp;=&amp; n2^{n+1} - \sum_{i=1}^{n} 2^i
+\end{eqnarray}
+</annotation></semantics></math></p>
+<p>Replace the new summation with a solution that we already know:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mi>n</mi><msup><mn>2</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>−</mo><mrow><mo stretchy="true" form="prefix">(</mo><msup><mn>2</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>−</mo><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr></mtable><annotation encoding="application/x-tex">
+\begin{eqnarray}
+&amp;=&amp; n2^{n+1} - \left ( 2^{n+1} - 2 \right )
+\end{eqnarray}
+</annotation></semantics></math></p>
+<p>Finally, reorganize the equation:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><msup><mn>2</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>+</mo><mn>2</mn></mtd></mtr></mtable><annotation encoding="application/x-tex">
+\begin{eqnarray}
+&amp;=&amp; (n-1)2^{n+1} + 2
+\end{eqnarray}
+</annotation></semantics></math></p>
+</section>
+<p>Here is another example.</p>
+<p>
+<div id="GeometricSumProofCON" class="ssAV" data-short-name="GeometricSumProofCON" data-long-name="AlgAnal/GeometricSumProofCON" alt="AlgAnal/GeometricSumProofCON" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="3.13-growth-rates-review-optional.html" class="navbutton">&lt;&lt;</a>
+<a href="3.13-growth-rates-review-optional.html" accesskey="p" rel="previous">Growth Rates Review (optional)</a>
+</div>
+<div class="navlink">
+<a href="3.15-solving-recurrence-relations-optional.html" accesskey="n" rel="next">Solving Recurrence Relations (optional)</a>
+<a href="3.15-solving-recurrence-relations-optional.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+<script type="text/javascript" src="../interactive/Background/SummationOneToNCON.js"></script>
+<script type="text/javascript" src="../interactive/AlgAnal/GeometricSumProofCON.js"></script>
+</body>
+</html>
+

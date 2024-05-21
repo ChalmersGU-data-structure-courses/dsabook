@@ -8,93 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Heaps and Priority Queues</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        background-color: #ffffff;
-        color: #a0a0a0;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
-    div.sourceCode
-      { color: #1f1c1b; background-color: #ffffff; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #1f1c1b; } /* Normal */
-    code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
-    code span.an { color: #ca60ca; } /* Annotation */
-    code span.at { color: #0057ae; } /* Attribute */
-    code span.bn { color: #b08000; } /* BaseN */
-    code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
-    code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #924c9d; } /* Char */
-    code span.cn { color: #aa5500; } /* Constant */
-    code span.co { color: #898887; } /* Comment */
-    code span.cv { color: #0095ff; } /* CommentVar */
-    code span.do { color: #607880; } /* Documentation */
-    code span.dt { color: #0057ae; } /* DataType */
-    code span.dv { color: #b08000; } /* DecVal */
-    code span.er { color: #bf0303; text-decoration: underline; } /* Error */
-    code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
-    code span.fl { color: #b08000; } /* Float */
-    code span.fu { color: #644a9b; } /* Function */
-    code span.im { color: #ff5500; } /* Import */
-    code span.in { color: #b08000; } /* Information */
-    code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
-    code span.op { color: #1f1c1b; } /* Operator */
-    code span.ot { color: #006e28; } /* Other */
-    code span.pp { color: #006e28; } /* Preprocessor */
-    code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
-    code span.sc { color: #3daee9; } /* SpecialChar */
-    code span.ss { color: #ff5500; } /* SpecialString */
-    code span.st { color: #bf0303; } /* String */
-    code span.va { color: #0057ae; } /* Variable */
-    code span.vs { color: #bf0303; } /* VerbatimString */
-    code span.wa { color: #bf0303; } /* Warning */
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -160,29 +79,34 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 <link href="../interactive/Binary/HeapBldChoiceCON.css" rel="stylesheet" type="text/css"/>
 <link href="../interactive/Binary/HeapsIndCON.css" rel="stylesheet" type="text/css"/>
 <link href="../interactive/Binary/heapbuildProofCON.css" rel="stylesheet" type="text/css"/>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="7-priority-queues.html" accesskey="u" rel="up">Priority queues</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="7.1-array-representation-for-complete-binary-trees.html" class="navbutton">&lt;&lt;</a>
+<a href="7.1-array-representation-for-complete-binary-trees.html" accesskey="p" rel="previous">Array Representation for Complete Binary Trees</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="7.3-heapsort.html" accesskey="n" rel="next">Heapsort</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="7.1-array-implementation-for-complete-binary-trees.html" accesskey="p" rel="previous">Array Implementation for Complete Binary Trees</a>
-</span>
+<div>
+<a href="7.3-heapsort.html" accesskey="n" rel="next">Heapsort</a>
+<a href="7.3-heapsort.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="heaps-and-priority-queues" class="level2"
 data-number="7.2">
 <h2 data-number="7.2"><span class="header-section-number">7.2</span>
@@ -193,14 +117,20 @@ collection of people, tasks, or objects. For example, doctors in a
 hospital emergency room often choose to see next the “most critical”
 patient rather than the one who arrived first. When scheduling programs
 for execution in a multitasking operating system, at any given moment
-there might be several programs (usually called <a href="10-glossary.html#job" class="term">jobs</a>) ready to run. The next job selected is the one
-with the highest <a href="10-glossary.html#priority" class="term">priority</a>. Priority is
-indicated by a particular value associated with the job (and might
-change while the job remains in the wait list).</p>
+there might be several programs (usually called <a
+href="10-glossary.html#job" class="term"
+title="Common name for processes or tasks to be run by an operating system. They typically need to be processed in order of importance, and so are kept organized by a priority queue. Another common use for this term is for a collection of tasks to be ordered by a topological sort.">jobs</a>)
+ready to run. The next job selected is the one with the highest <a
+href="10-glossary.html#priority" class="term"
+title="A quantity assigned to each of a collection of jobs or tasks that indicate importance for order of processing. For example, in an operating system, there could be a collection of processes (jobs) ready to run. The operating system must select the next task to execute, based on their priorities.">priority</a>.
+Priority is indicated by a particular value associated with the job (and
+might change while the job remains in the wait list).</p>
 <p>When a collection of objects is organized by importance or priority,
-we call this a <a href="10-glossary.html#priority-queue" class="term">priority queue</a>. A normal queue
-data structure will not implement a priority queue efficiently because
-search for the element with highest priority will take
+we call this a <a href="10-glossary.html#priority-queue" class="term"
+title="An ADT whose primary operations of insert of records, and deletion of the greatest (or, in an alternative implementation, the least) valued record. Most often implemented using the heap data structure. The name comes from a common application where the records being stored represent tasks, with the ordering values based on the priorities of the tasks.">priority
+queue</a>. A normal queue data structure will not implement a priority
+queue efficiently because search for the element with highest priority
+will take
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math>
 time. A list, whether sorted or not, will also require
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math>
@@ -215,340 +145,136 @@ time in the average case. However, there is always the possibility that
 the BST will become unbalanced, leading to bad performance. Instead, we
 would like to find a data structure that is guaranteed to have good
 performance for this special application.</p>
-<p>This section presents the <a href="10-glossary.html#heap" class="term">heap</a><a
-href="#fn1" class="footnote-ref" id="fnref1"
-role="doc-noteref"><sup>1</sup></a> data structure. A heap is defined by
-two properties. First, it is a complete binary tree, so heaps are nearly
-always implemented using the <a
-href="7.1-array-implementation-for-complete-binary-trees.html#array-implementation-for-complete-binary-trees">array
+<p>This section presents the <a href="10-glossary.html#binary-heap"
+class="term"
+title="The head data structure is a complete binary tree with the requirement that every node has a value greater than its children (called a max heap), or else the requirement that every node has a value less than its children (called a min heap). Since it is a complete binary tree, a heap is nearly always implemented using an array rather than an explicit tree structure. To add a new value to a heap, or to remove the extreme value (the max value in a max-heap or min value in a min-heap) and update the heap, takes $\Theta(\log n)$ time in the worst case. However, if given all of the values in an unordered array, the values can be re-arranged to form a heap in only $\Theta(n)$ time. Due to its space and time efficiency, the heap is a popular choice for implementing a priority queue. Uncommonly, *heap* is a synonym for free store.">binary
+heap</a> data structure. A heap is defined by two properties. First, it
+is a complete binary tree, so heaps are nearly always implemented using
+the <a
+href="7.1-array-representation-for-complete-binary-trees.html#array-representation-for-complete-binary-trees">array
 representation for complete binary trees</a>. Second, the values stored
-in a heap are <a href="10-glossary.html#partial-order" class="term">partially
+in a heap are <a href="10-glossary.html#partial-order" class="term"
+title="In set notation, a binary relation is called a partial order if it is antisymmetric and transitive. If the relation is also reflexive, then it is a non-strict partial order. Alternatively, if the relation is also irreflexive, then it is a strict partial order.">partially
 ordered</a>. This means that there is a relationship between the value
 stored at any node and the values of its children. There are two
 variants of the heap, depending on the definition of this
 relationship.</p>
-<p>A <a href="10-glossary.html#max-heap" class="term">max heap</a> has the property that every node
-stores a value that is <em>greater</em> than or equal to the value of
-either of its children. Because the root has a value greater than or
-equal to its children, which in turn have values greater than or equal
-to their children, the root stores the maximum of all values in the
-tree.</p>
-<p>A <a href="10-glossary.html#min-heap" class="term">min heap</a> has the property that every node
-stores a value that is <em>less</em> than or equal to that of its
-children. Because the root has a value less than or equal to its
-children, which in turn have values less than or equal to their
-children, the root stores the minimum of all values in the tree.</p>
+<p>A <a href="10-glossary.html#max-heap" class="term"
+title="A heap where every node has a key value greater than its children. As a consequence, the node with maximum key value is at the root.">max
+heap</a> has the property that every node stores a value that is
+<em>greater</em> than or equal to the value of either of its children.
+Because the root has a value greater than or equal to its children,
+which in turn have values greater than or equal to their children, the
+root stores the maximum of all values in the tree.</p>
+<p>A <a href="10-glossary.html#min-heap" class="term"
+title="A heap where every node has a key value less than its children. As a consequence, the node with minimum key value is at the root.">min
+heap</a> has the property that every node stores a value that is
+<em>less</em> than or equal to that of its children. Because the root
+has a value less than or equal to its children, which in turn have
+values less than or equal to their children, the root stores the minimum
+of all values in the tree.</p>
 <p>Note that there is no necessary relationship between the value of a
 node and that of its sibling in either the min heap or the max heap. For
 example, it is possible that the values for all nodes in the left
 subtree of the root are greater than the values for every node of the
 right subtree. We can contrast BSTs and heaps by the strength of their
-ordering relationships. A BST defines a <a href="10-glossary.html#total-order" class="term">total
-order</a> on its nodes in that, given the positions for any two nodes
-in the tree, the one to the “left” (equivalently, the one appearing
-earlier in an inorder traversal) has a smaller key value than the one to
-the “right”. In contrast, a heap implements a partial order. Given their
+ordering relationships. A BST defines a <a
+href="10-glossary.html#total-order" class="term"
+title="A binary relation on a set where every pair of distinct elements in the set are comparable (that is, one can determine which of the two is greater than the other).">total
+order</a> on its nodes in that, given the positions for any two nodes in
+the tree, the one to the “left” (equivalently, the one appearing earlier
+in an inorder traversal) has a smaller key value than the one to the
+“right”. In contrast, a heap implements a partial order. Given their
 positions, we can determine the relative order for the key values of two
 nodes in the heap <em>only</em> if one is a descendant of the other.</p>
-<p>Min heaps and max heaps both have their uses. For example, the
-Heapsort uses the max heap, while the Replacement Selection algorithm
-used for external sorting uses a min heap. The examples in the rest of
-this section will sometimes use a min and sometimes a max heap.</p>
+<p>Min heaps and max heaps both have their uses. For example, the <a
+href="7.3-heapsort.html#heapsort" class="term"
+title="A sorting algorithm that costs $\Theta(n \log n)$ time in the best, average, and worst cases. It tends to be slower than Mergesort and Quicksort. It works by building a max heap, and then repeatedly removing the item with maximum key value (moving it to the end of the heap) until all elements have been removed (and replaced at their proper location in the array).">Heapsort</a>
+algorithm uses the max heap, while the <a
+href="10-glossary.html#replacement-selection" class="term"
+title="A variant of heapsort most often used as one phase of an external sort. Given a collection of records stored in an array, and a stream of additional records too large to fit into working memory, replacement selection will unload the heap by sending records to an output stream, and seek to bring new records into the heap from the input stream in preference to shrinking the heap size whenever possible.">Replacement
+Selection</a> algorithm used for external sorting uses a min heap. The
+examples in the rest of this section will sometimes use a min and
+sometimes a max heap.</p>
 <p>Be sure not to confuse the logical representation of a heap with its
 physical implementation by means of the array-based complete binary
 tree. The two are not synonymous because the logical view of the heap is
 actually a tree structure, while the typical physical implementation
 uses an array.</p>
-<p>Here is an implementation for min heaps. The class uses records that
-support the Comparable interface to provide flexibility.</p>
+<p>Here is an implementation for min heaps. It uses a <a
+href="4.3-dynamic-array-based-lists.html#dynamic-array-based-lists">dynamic
+array list</a> that will resize automatically when the number of
+elements change.</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MinHeap(PriorityQueue):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>     <span class="co"># The heap array.</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Note that we use Python&#39;s internal lists, which are dynamic,</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>     <span class="co"># so we don&#39;t have to implement resizing.</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    _heap : <span class="bu">list</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Constructor supporting preloading of heap contents</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, h <span class="op">=</span> <span class="va">None</span>):</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> h <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._heap <span class="op">=</span> []</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._heap <span class="op">=</span> <span class="bu">list</span>(h) <span class="co"># Make a copy of h</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._buildHeap()</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> isEmpty(<span class="va">self</span>):</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        <span class="co">&quot;&quot;&quot;Return true if there are no elements.&quot;&quot;&quot;</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.size() <span class="op">==</span> <span class="dv">0</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> size(<span class="va">self</span>):</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        <span class="co">&quot;&quot;&quot;Return current size of the heap.&quot;&quot;&quot;</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">len</span>(<span class="va">self</span>._heap)</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> getMin(<span class="va">self</span>):</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        <span class="co">&quot;&quot;&quot;Return smallest item into heap.&quot;&quot;&quot;</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>.size() <span class="op">==</span> <span class="dv">0</span>: <span class="cf">raise</span> <span class="pp">IndexError</span>(<span class="st">&quot;getMin from empty heap&quot;</span>)</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._heap[<span class="dv">0</span>]</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> add(<span class="va">self</span>, elem):</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        <span class="co">&quot;&quot;&quot;Insert elem into heap.&quot;&quot;&quot;</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._heap.append(elem)            <span class="co"># New item starts at end of heap.</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._siftUp(<span class="bu">len</span>(<span class="va">self</span>._heap) <span class="op">-</span> <span class="dv">1</span>)  <span class="co"># Put the new value in its correct place.</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> removeMin(<span class="va">self</span>):</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>        <span class="co">&quot;&quot;&quot;Remove and return minimum value.&quot;&quot;&quot;</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(<span class="va">self</span>._heap) <span class="op">==</span> <span class="dv">0</span>: <span class="cf">raise</span> <span class="pp">IndexError</span>(<span class="st">&quot;removeMin from empty heap&quot;</span>)</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>        removed <span class="op">=</span> <span class="va">self</span>._heap[<span class="dv">0</span>]</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>        last <span class="op">=</span> <span class="va">self</span>._heap.pop()     <span class="co"># Find and remove last element</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(<span class="va">self</span>._heap) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._heap[<span class="dv">0</span>] <span class="op">=</span> last    <span class="co"># Replace root with last element</span></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._siftDown(<span class="dv">0</span>)       <span class="co"># Put the new root in its correct place.</span></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> removed</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">str</span>(<span class="va">self</span>._heap)</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__repr__</span>(<span class="va">self</span>):</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">repr</span>(<span class="va">self</span>._heap)</span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__iter__</span>(<span class="va">self</span>):</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">iter</span>(<span class="va">self</span>._heap)</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Private helper methods</span></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="co"># /* *** ODSATag: invariant *** */</span></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _checkInvariant(<span class="va">self</span>):</span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>        <span class="co">&quot;&quot;&quot;Check that the invariant holds.&quot;&quot;&quot;</span></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>        heapSize <span class="op">=</span> <span class="bu">len</span>(<span class="va">self</span>._heap)</span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(heapSize):</span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>            left <span class="op">=</span> <span class="va">self</span>._getLeftChild(i)</span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>            right <span class="op">=</span> <span class="va">self</span>._getRightChild(i)</span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> left <span class="op">&lt;</span> heapSize <span class="kw">and</span> <span class="va">self</span>._lessThan(left, i):</span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>                <span class="cf">raise</span> <span class="pp">AssertionError</span>(<span class="st">&quot;Parent (&quot;</span> <span class="op">+</span> i <span class="op">+</span> <span class="st">&quot;) is smaller than its left child: &quot;</span> <span class="op">+</span> <span class="va">self</span>._heap[i] <span class="op">+</span> <span class="st">&quot; &lt; &quot;</span> <span class="op">+</span> <span class="va">self</span>._heap[left])<span class="op">;</span></span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> right <span class="op">&lt;</span> heapSize <span class="kw">and</span> <span class="va">self</span>._lessThan(right, i):</span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>                <span class="cf">raise</span> <span class="pp">AssertionError</span>(<span class="st">&quot;Parent (&quot;</span> <span class="op">+</span> i <span class="op">+</span> <span class="st">&quot;) is smaller than its right child: &quot;</span> <span class="op">+</span> <span class="va">self</span>._heap[i] <span class="op">+</span> <span class="st">&quot; &lt; &quot;</span> <span class="op">+</span> <span class="va">self</span>._heap[right])<span class="op">;</span></span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="co"># /* *** ODSAendTag: invariant *** */</span></span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _isLeaf(<span class="va">self</span>, pos):</span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>        <span class="co">&quot;&quot;&quot;Return true if pos is a leaf position, false otherwise.&quot;&quot;&quot;</span></span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pos <span class="op">&gt;=</span> <span class="bu">len</span>(<span class="va">self</span>._heap) <span class="op">//</span> <span class="dv">2</span></span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _getLeftChild(<span class="va">self</span>, pos):</span>
-<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>        <span class="co">&quot;&quot;&quot;Return the position for the left child of the given node.&quot;&quot;&quot;</span></span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">2</span><span class="op">*</span>pos<span class="op">+</span><span class="dv">1</span></span>
-<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _getRightChild(<span class="va">self</span>, pos):</span>
-<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>        <span class="co">&quot;&quot;&quot;Return the position for the right child of the given node.&quot;&quot;&quot;</span></span>
-<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">2</span><span class="op">*</span>pos<span class="op">+</span><span class="dv">2</span></span>
-<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _getParent(<span class="va">self</span>, pos):</span>
-<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>        <span class="co">&quot;&quot;&quot;Return the position for the parent. Returns 0 if we&#39;re already at the root.&quot;&quot;&quot;</span></span>
-<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (pos<span class="op">-</span><span class="dv">1</span>) <span class="op">//</span> <span class="dv">2</span></span>
-<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _swap(<span class="va">self</span>, pos1, pos2):</span>
-<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>        <span class="co">&quot;&quot;&quot;Swap the values in two positions.&quot;&quot;&quot;</span></span>
-<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._heap[pos1], <span class="va">self</span>._heap[pos2] <span class="op">=</span> <span class="va">self</span>._heap[pos2], <span class="va">self</span>._heap[pos1]</span>
-<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _buildHeap(<span class="va">self</span>):</span>
-<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>        <span class="co">&quot;&quot;&quot;Heapify the contents of an array.&quot;&quot;&quot;</span></span>
-<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>        heapSize <span class="op">=</span> <span class="bu">len</span>(<span class="va">self</span>._heap)</span>
-<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Loop from heapSize/2-1 down to 0</span></span>
-<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> pos <span class="kw">in</span> <span class="bu">reversed</span>(<span class="bu">range</span>(heapSize<span class="op">//</span><span class="dv">2</span>)):</span>
-<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._siftDown(pos)</span>
-<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _siftDown(<span class="va">self</span>, pos):</span>
-<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>        <span class="co">&quot;&quot;&quot;Sift a value down the tree, return its new position.&quot;&quot;&quot;</span></span>
-<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>        heapSize <span class="op">=</span> <span class="bu">len</span>(<span class="va">self</span>._heap)</span>
-<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="kw">not</span> <span class="va">self</span>._isLeaf(pos):</span>
-<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>            child <span class="op">=</span> <span class="va">self</span>._getLeftChild(pos)</span>
-<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>            right <span class="op">=</span> child <span class="op">+</span> <span class="dv">1</span>   <span class="co"># or: self._getRightChild(pos)</span></span>
-<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> right <span class="op">&lt;</span> heapSize <span class="kw">and</span> <span class="va">self</span>._lessThan(right, child):</span>
-<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>                child <span class="op">=</span> right   <span class="co"># &#39;child&#39; is now the index of the child with smaller value</span></span>
-<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="kw">not</span> <span class="va">self</span>._lessThan(child, pos):</span>
-<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> pos</span>
-<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._swap(pos, child)</span>
-<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>            pos <span class="op">=</span> child   <span class="co"># Move down one level in the tree.</span></span>
-<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pos</span>
-<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _siftUp(<span class="va">self</span>, pos):</span>
-<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>        <span class="co">&quot;&quot;&quot;Sift a value up the tree, return its new position.&quot;&quot;&quot;</span></span>
-<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> pos <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>            parent <span class="op">=</span> <span class="va">self</span>._getParent(pos)</span>
-<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="kw">not</span> <span class="va">self</span>._lessThan(pos, parent):</span>
-<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> pos</span>
-<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._swap(pos, parent)</span>
-<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a>            pos <span class="op">=</span> parent   <span class="co"># Move up one level in the tree.</span></span>
-<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pos</span>
-<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _lessThan(<span class="va">self</span>, i, j):</span>
-<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Compare the values in the given positions.</span></span>
-<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._heap[i] <span class="op">&lt;</span> <span class="va">self</span>._heap[j]</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Min-heap implementation</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MinHeap<span class="op">&lt;</span>E <span class="kw">extends</span> <span class="bu">Comparable</span><span class="op">&lt;</span>E<span class="op">&gt;&gt;</span> <span class="kw">implements</span> <span class="bu">PriorityQueue</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> E<span class="op">[]</span> heap<span class="op">;</span>       <span class="co">// The heap array</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> heapSize<span class="op">;</span>   <span class="co">// Size of heap, and index of the next free slot</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">static</span> <span class="dt">int</span> MinCapacity <span class="op">=</span> <span class="dv">8</span><span class="op">;</span>               <span class="co">// Minimum capacity of heap</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">static</span> <span class="dt">double</span> MinLoadFactor <span class="op">=</span> <span class="fl">0.5</span><span class="op">;</span>        <span class="co">// Must be smaller than 1/CapacityMultiplier</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">static</span> <span class="dt">double</span> CapacityMultiplier <span class="op">=</span> <span class="fl">1.5</span><span class="op">;</span>   <span class="co">// Factor to grow/shrink the capacity</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Constructor supporting preloading of heap contents</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">@SuppressWarnings</span><span class="op">(</span><span class="st">&quot;unchecked&quot;</span><span class="op">)</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">MinHeap</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        heap <span class="op">=</span> <span class="op">(</span>E<span class="op">[])</span> <span class="kw">new</span> <span class="bu">Comparable</span><span class="op">[</span>MinCapacity<span class="op">];</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        heapSize <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">MinHeap</span><span class="op">(</span>E<span class="op">[]</span> h<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        heap <span class="op">=</span> <span class="bu">Arrays</span><span class="op">.</span><span class="fu">copyOf</span><span class="op">(</span>h<span class="op">,</span> h<span class="op">.</span><span class="fu">length</span><span class="op">);</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        heapSize <span class="op">=</span> heap<span class="op">.</span><span class="fu">length</span><span class="op">;</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        <span class="fu">buildHeap</span><span class="op">();</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>heapSize <span class="op">&lt;</span> MinCapacity<span class="op">)</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>            <span class="fu">resizeHeap</span><span class="op">(</span>MinCapacity<span class="op">);</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Return true if there are no elements.</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">isEmpty</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> heapSize <span class="op">==</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Return current size of the heap</span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">size</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> heapSize<span class="op">;</span></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> E <span class="fu">getMin</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!(</span>heapSize <span class="op">&gt;</span> <span class="dv">0</span><span class="op">))</span> <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">NoSuchElementException</span><span class="op">(</span><span class="st">&quot;getMin from empty heap&quot;</span><span class="op">);</span></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> heap<span class="op">[</span><span class="dv">0</span><span class="op">];</span></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Insert val into heap</span></span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">add</span><span class="op">(</span>E elem<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>heapSize <span class="op">&gt;=</span> heap<span class="op">.</span><span class="fu">length</span><span class="op">)</span></span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>            <span class="fu">resizeHeap</span><span class="op">((</span><span class="dt">int</span><span class="op">)</span> <span class="op">(</span>heap<span class="op">.</span><span class="fu">length</span> <span class="op">*</span> CapacityMultiplier<span class="op">));</span></span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>        heap<span class="op">[</span>heapSize<span class="op">]</span> <span class="op">=</span> elem<span class="op">;</span>  <span class="co">// Start at end of heap.</span></span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>        <span class="fu">siftUp</span><span class="op">(</span>heapSize<span class="op">);</span>       <span class="co">// Put the new value in its correct place.</span></span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>        heapSize<span class="op">++;</span></span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Remove and return minimum value</span></span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> E <span class="fu">removeMin</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!(</span>heapSize <span class="op">&gt;</span> <span class="dv">0</span><span class="op">))</span> <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">NoSuchElementException</span><span class="op">(</span><span class="st">&quot;removeMin from empty heap&quot;</span><span class="op">);</span></span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>        E removed <span class="op">=</span> heap<span class="op">[</span><span class="dv">0</span><span class="op">];</span></span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>        heapSize<span class="op">--;</span></span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>        <span class="fu">swap</span><span class="op">(</span><span class="dv">0</span><span class="op">,</span> heapSize<span class="op">);</span>  <span class="co">// Swap the root with the current last value.</span></span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>heapSize <span class="op">&gt;</span> <span class="dv">0</span><span class="op">)</span> </span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>            <span class="fu">siftDown</span><span class="op">(</span><span class="dv">0</span><span class="op">);</span>    <span class="co">// Put the new heap root val in its correct place.</span></span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>heapSize <span class="op">&lt;=</span> heap<span class="op">.</span><span class="fu">length</span> <span class="op">*</span> MinLoadFactor<span class="op">)</span></span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>            <span class="fu">resizeHeap</span><span class="op">((</span><span class="dt">int</span><span class="op">)</span> <span class="op">(</span>heap<span class="op">.</span><span class="fu">length</span> <span class="op">/</span> CapacityMultiplier<span class="op">));</span></span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>        heap<span class="op">[</span>heapSize<span class="op">]</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span>   <span class="co">// Remove the old root value, for garbage collection.</span></span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> removed<span class="op">;</span></span>
-<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">String</span> <span class="fu">toString</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">Arrays</span><span class="op">.</span><span class="fu">toString</span><span class="op">(</span>heap<span class="op">).</span><span class="fu">replace</span><span class="op">(</span><span class="st">&quot;null&quot;</span><span class="op">,</span> <span class="st">&quot;-&quot;</span><span class="op">)</span> <span class="op">+</span> heapSize<span class="op">;</span></span>
-<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">Iterator</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="fu">iterator</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>    <span class="co">////////////////////////////////////////////////////////////////////////////////</span></span>
-<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Private helper methods</span></span>
-<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: invariant *** */</span></span>
-<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Check that the invariant holds.</span></span>
-<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> <span class="fu">checkInvariant</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> heapSize<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> left <span class="op">=</span> <span class="fu">getLeftChild</span><span class="op">(</span>i<span class="op">);</span></span>
-<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> right <span class="op">=</span> <span class="fu">getRightChild</span><span class="op">(</span>i<span class="op">);</span></span>
-<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>left <span class="op">&lt;</span> heapSize <span class="op">&amp;&amp;</span> <span class="fu">lessThan</span><span class="op">(</span>left<span class="op">,</span> i<span class="op">))</span></span>
-<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>                <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">AssertionError</span><span class="op">(</span><span class="st">&quot;Parent (&quot;</span> <span class="op">+</span> i <span class="op">+</span> <span class="st">&quot;) is smaller than its left child: &quot;</span> <span class="op">+</span> heap<span class="op">[</span>i<span class="op">]</span> <span class="op">+</span> <span class="st">&quot; &lt; &quot;</span> <span class="op">+</span> heap<span class="op">[</span>left<span class="op">]);</span></span>
-<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>right <span class="op">&lt;</span> heapSize <span class="op">&amp;&amp;</span> <span class="fu">lessThan</span><span class="op">(</span>right<span class="op">,</span> i<span class="op">))</span></span>
-<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>                <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">AssertionError</span><span class="op">(</span><span class="st">&quot;Parent (&quot;</span> <span class="op">+</span> i <span class="op">+</span> <span class="st">&quot;) is smaller than its right child: &quot;</span> <span class="op">+</span> heap<span class="op">[</span>i<span class="op">]</span> <span class="op">+</span> <span class="st">&quot; &lt; &quot;</span> <span class="op">+</span> heap<span class="op">[</span>right<span class="op">]);</span></span>
-<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: invariant *** */</span></span>
-<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: resize *** */</span></span>
-<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">resizeHeap</span><span class="op">(</span><span class="dt">int</span> newCapacity<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>newCapacity <span class="op">&lt;</span> MinCapacity<span class="op">)</span> <span class="cf">return</span><span class="op">;</span></span>
-<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>        <span class="at">@SuppressWarnings</span><span class="op">(</span><span class="st">&quot;unchecked&quot;</span><span class="op">)</span></span>
-<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>        E<span class="op">[]</span> newHeap <span class="op">=</span> <span class="op">(</span>E<span class="op">[])</span> <span class="kw">new</span> <span class="bu">Comparable</span><span class="op">[</span>newCapacity<span class="op">];</span></span>
-<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> heapSize<span class="op">;</span> i<span class="op">++)</span></span>
-<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>            newHeap<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> heap<span class="op">[</span>i<span class="op">];</span></span>
-<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>        heap <span class="op">=</span> newHeap<span class="op">;</span></span>
-<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: resize *** */</span></span>
-<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Return true if pos is a leaf position, false otherwise.</span></span>
-<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">boolean</span> <span class="fu">isLeaf</span><span class="op">(</span><span class="dt">int</span> pos<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pos <span class="op">&gt;=</span> heapSize <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span>
-<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Return the position for the left child of the given node</span></span>
-<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> <span class="fu">getLeftChild</span><span class="op">(</span><span class="dt">int</span> pos<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">2</span> <span class="op">*</span> pos <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Return the position for the right child of the given node</span></span>
-<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> <span class="fu">getRightChild</span><span class="op">(</span><span class="dt">int</span> pos<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">2</span> <span class="op">*</span> pos <span class="op">+</span> <span class="dv">2</span><span class="op">;</span></span>
-<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Return the position for the parent. Returns 0 if we&#39;re already at the root.</span></span>
-<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> <span class="fu">getParent</span><span class="op">(</span><span class="dt">int</span> pos<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="op">(</span>pos <span class="op">-</span> <span class="dv">1</span><span class="op">)</span> <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span>
-<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Swap the values in two positions</span></span>
-<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">swap</span><span class="op">(</span><span class="dt">int</span> pos1<span class="op">,</span> <span class="dt">int</span> pos2<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>        E tmp <span class="op">=</span> heap<span class="op">[</span>pos1<span class="op">];</span></span>
-<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a>        heap<span class="op">[</span>pos1<span class="op">]</span> <span class="op">=</span> heap<span class="op">[</span>pos2<span class="op">];</span></span>
-<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a>        heap<span class="op">[</span>pos2<span class="op">]</span> <span class="op">=</span> tmp<span class="op">;</span></span>
-<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Heapify the contents of an array</span></span>
-<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">buildHeap</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> pos <span class="op">=</span> heapSize<span class="op">/</span><span class="dv">2</span><span class="op">-</span><span class="dv">1</span><span class="op">;</span> pos <span class="op">&gt;=</span> <span class="dv">0</span><span class="op">;</span> pos<span class="op">--)</span></span>
-<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a>            <span class="fu">siftDown</span><span class="op">(</span>pos<span class="op">);</span></span>
-<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Sift a value down the tree, return its new position.</span></span>
-<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> <span class="fu">siftDown</span><span class="op">(</span><span class="dt">int</span> pos<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="op">(!</span><span class="fu">isLeaf</span><span class="op">(</span>pos<span class="op">))</span> <span class="op">{</span></span>
-<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> child <span class="op">=</span> <span class="fu">getLeftChild</span><span class="op">(</span>pos<span class="op">);</span></span>
-<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> right <span class="op">=</span> child <span class="op">+</span> <span class="dv">1</span><span class="op">;</span>   <span class="co">// or: getRightChild(pos)</span></span>
-<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>right <span class="op">&lt;</span> heapSize <span class="op">&amp;&amp;</span> <span class="fu">lessThan</span><span class="op">(</span>right<span class="op">,</span> child<span class="op">))</span></span>
-<span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a>                child <span class="op">=</span> right<span class="op">;</span>   <span class="co">// &#39;child&#39; is now the index of the child with smaller value</span></span>
-<span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(!</span><span class="fu">lessThan</span><span class="op">(</span>child<span class="op">,</span> pos<span class="op">))</span></span>
-<span id="cb2-140"><a href="#cb2-140" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> pos<span class="op">;</span></span>
-<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a>            <span class="fu">swap</span><span class="op">(</span>pos<span class="op">,</span> child<span class="op">);</span></span>
-<span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a>            pos <span class="op">=</span> child<span class="op">;</span>   <span class="co">// Move down one level in the tree.</span></span>
-<span id="cb2-143"><a href="#cb2-143" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb2-144"><a href="#cb2-144" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pos<span class="op">;</span></span>
-<span id="cb2-145"><a href="#cb2-145" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-146"><a href="#cb2-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-147"><a href="#cb2-147" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Sift a value up the tree, return its new position.</span></span>
-<span id="cb2-148"><a href="#cb2-148" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> <span class="fu">siftUp</span><span class="op">(</span><span class="dt">int</span> pos<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-149"><a href="#cb2-149" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="op">(</span>pos <span class="op">&gt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-150"><a href="#cb2-150" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> parent <span class="op">=</span> <span class="fu">getParent</span><span class="op">(</span>pos<span class="op">);</span></span>
-<span id="cb2-151"><a href="#cb2-151" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(!</span><span class="fu">lessThan</span><span class="op">(</span>pos<span class="op">,</span> parent<span class="op">))</span></span>
-<span id="cb2-152"><a href="#cb2-152" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> pos<span class="op">;</span></span>
-<span id="cb2-153"><a href="#cb2-153" aria-hidden="true" tabindex="-1"></a>            <span class="fu">swap</span><span class="op">(</span>pos<span class="op">,</span> parent<span class="op">);</span></span>
-<span id="cb2-154"><a href="#cb2-154" aria-hidden="true" tabindex="-1"></a>            pos <span class="op">=</span> parent<span class="op">;</span>   <span class="co">// Move up one level in the tree.</span></span>
-<span id="cb2-155"><a href="#cb2-155" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb2-156"><a href="#cb2-156" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pos<span class="op">;</span></span>
-<span id="cb2-157"><a href="#cb2-157" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-158"><a href="#cb2-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-159"><a href="#cb2-159" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Compare the values in the given positions.</span></span>
-<span id="cb2-160"><a href="#cb2-160" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">boolean</span> <span class="fu">lessThan</span><span class="op">(</span><span class="dt">int</span> i<span class="op">,</span> <span class="dt">int</span> j<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-161"><a href="#cb2-161" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> heap<span class="op">[</span>i<span class="op">].</span><span class="fu">compareTo</span><span class="op">(</span>heap<span class="op">[</span>j<span class="op">])</span> <span class="op">&lt;</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb2-162"><a href="#cb2-162" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-163"><a href="#cb2-163" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<blockquote>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MinHeap <span class="kw">implements</span> <span class="bu">PriorityQueue</span>:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    MinHeap():</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.heap <span class="op">=</span> <span class="kw">new</span> DynamicArrayList()</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">getMin</span>():</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Returns the minimum element, without removing it.</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">precondition</span>: <span class="va">this</span>.heap.<span class="bu">size</span>() <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">this</span>.heap[<span class="dv">0</span>]</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">add</span>(elem):</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Adds an element to the priority queue.</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> <span class="va">this</span>.heap.<span class="bu">size</span>()</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.heap.<span class="bu">add</span>(i, elem)  <span class="co">// Add the element at end of the heap.</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.siftUp(i)          <span class="co">// Put it in its correct place.</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">removeMin</span>():</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Removes and returns the minimum element.</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">precondition</span>: <span class="va">this</span>.heap.<span class="bu">size</span>() <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        removed <span class="op">=</span> <span class="va">this</span>.heap[<span class="dv">0</span>]</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> <span class="va">this</span>.heap.<span class="bu">size</span>() <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        last <span class="op">=</span> <span class="va">this</span>.heap.<span class="bu">remove</span>(i)  <span class="co">// Find and remove the last element.</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">this</span>.heap.<span class="bu">size</span>() <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>            <span class="va">this</span>.heap[<span class="dv">0</span>] <span class="op">=</span> last     <span class="co">// Replace the root with the last element.</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>            <span class="va">this</span>.siftDown(<span class="dv">0</span>)        <span class="co">// Put the new root in its correct place.</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> removed</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    siftDown(pos):</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Sift a value down the tree, return its new position.</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        heapSize <span class="op">=</span> <span class="va">this</span>.heap.<span class="bu">size</span>()</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="kw">not</span> <span class="va">this</span>.isLeaf(pos):</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>            child <span class="op">=</span> <span class="va">this</span>.getLeftChild(pos)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>            right <span class="op">=</span> child <span class="op">+</span> <span class="dv">1</span>   <span class="co">// or: this.getRightChild(pos)</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> right <span class="op">&lt;</span> heapSize <span class="kw">and</span> <span class="va">this</span>.heap[right] <span class="op">&lt;</span> <span class="va">this</span>.heap[child]:</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>                child <span class="op">=</span> right   <span class="co">// &#39;child&#39; is now the index of the child with smaller value</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">this</span>.heap[child] <span class="op">&gt;=</span> <span class="va">this</span>.heap[pos]:</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> pos</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>            <span class="va">this</span>.swap(pos, child)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>            pos <span class="op">=</span> child   <span class="co">// Move down one level in the tree.</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pos</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    siftUp(pos):</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Sift a value up the tree, return its new position.</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> pos <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>            parent <span class="op">=</span> <span class="va">this</span>.getParent(pos)</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">this</span>.heap[pos] <span class="op">&gt;=</span> <span class="va">this</span>.heap[parent]:</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> pos</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>            <span class="va">this</span>.swap(pos, parent)</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>            pos <span class="op">=</span> parent   <span class="co">// Move up one level in the tree.</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pos</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>    isLeaf(pos):</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Return true if pos is a leaf position.</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pos <span class="op">&gt;=</span> <span class="va">this</span>.heap.<span class="bu">size</span>() <span class="op">/</span> <span class="dv">2</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>    getLeftChild(pos):</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Return the position for the left child of the given node.</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">2</span> <span class="op">*</span> pos <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>    getRightChild(pos):</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Return the position for the right child of the given node.</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">2</span> <span class="op">*</span> pos <span class="op">+</span> <span class="dv">2</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>    getParent(pos):</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Return the position for the parent. Returns 0 if we&#39;re already at the root.</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">int</span>((pos <span class="op">-</span> <span class="dv">1</span>) <span class="op">/</span> <span class="dv">2</span>)</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>    swap(pos1, pos2):</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Swap the values in two positions.</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.heap[pos1], <span class="va">this</span>.heap[pos2] <span class="op">=</span> <span class="va">this</span>.heap[pos2], <span class="va">this</span>.heap[pos1]</span></code></pre></div>
 <p>This class definition makes two concessions to the fact that an
 array-based implementation is used. First, heap nodes are indicated by
 their logical position within the heap rather than by a pointer to the
@@ -562,11 +288,10 @@ below. The constructor also takes an integer parameter indicating the
 initial size of the heap (based on the number of elements initially
 loaded into the array) and a second integer parameter indicating the
 maximum size allowed for the heap (the size of the array).</p>
-</blockquote>
 <p>The class contains some private auxiliary methods that are use when
 adding and removing elements from the heap: <code>isLeaf(pos)</code>
 returns <code>true</code> if position <code>pos</code> is a leaf in the
-tree, and <code>false</code> otherwise. Members
+tree, and <code>false</code> otherwise. Methods
 <code>getLeftChild</code>, <code>getRightChild</code>, and
 <code>getParent</code> return the position (actually, the array index)
 for the left child, right child, and parent of the position passed,
@@ -686,9 +411,6 @@ this figure:</p>
 <div id="HeapInduct">
 <p>
 <div id="HeapsIndCON" class="ssAV" data-short-name="HeapsIndCON" data-long-name="Binary/HeapsIndCON" alt="Binary/HeapsIndCON" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
 </p>
@@ -719,7 +441,7 @@ leaf node. This process is implemented by the private method
 <p>This approach assumes that the subtrees are already heaps, suggesting
 that a complete algorithm can be obtained by visiting the nodes in some
 order such that the children of a node are visited <em>before</em> the
-node itself. One simple way to do this is simply to work from the high
+node itthis. One simple way to do this is simply to work from the high
 index of the array to the low index. Actually, the build process need
 not visit the leaf nodes (they can never move down because they are
 already at the bottom), so the building algorithm can start in the
@@ -757,7 +479,9 @@ total distances that elements can go is therefore</p>
 &amp;=&amp; \frac{n}{2}\sum_{i=1}^{\log n} \frac{i-1}{2^{i-1}}
 \end{eqnarray}
 </annotation></semantics></math></p>
-<p>The summation on the right <a href="10-glossary.html#summation" class="term">is
+<p>The summation on the right <a href="10-glossary.html#summation"
+class="term"
+title="The sum of costs for some function applied to a range of parameter values. Often written using Sigma notation. For example, the sum of the integers from 1 to $n$ can be written as $\sum_{i=1}^{n} i$.">is
 known</a> to have a closed-form solution of approximately 2, so this
 algorithm takes
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math>
@@ -811,7 +535,6 @@ Your browser does not support iframes.
 <div class="jsavcanvas"></div>
 </div>
 </p>
-<blockquote>
 <p>For some applications, objects might get their priority modified. One
 solution in this case is to remove the object and reinsert it. To do
 this, the application needs to know the position of the object in the
@@ -822,7 +545,6 @@ heap is swapped with the one being removed, that value might be either
 too small or too big for its new position. So we use a utility method
 called <code>update</code> in both the <code>remove</code> and
 <code>modify</code> methods to handle this process.</p>
-</blockquote>
 </section>
 <section id="binary-heaps-as-priority-queues" class="level3"
 data-number="7.2.3">
@@ -834,8 +556,13 @@ their priority value as the ordering key) when needed. Method
 <code>removeMin</code> can be called whenever a new job is to be
 executed.</p>
 <p>Priority queues can be helpful for solving graph problems such as the
-<a href="10-glossary.html#single-source-shortest-paths-problem" class="term">single-source shortest paths problem</a> and
-finding the <a href="10-glossary.html#minimal-cost-spanning-tree" class="term">minimal-cost spanning tree</a>.</p>
+<a href="10-glossary.html#single-source-shortest-paths-problem"
+class="term"
+title="Given a graph with weights or distances on the edges, and a designated start vertex $s$, find the shortest path from $s$ to every other vertex in the graph. One algorithm to solve this problem is Dijkstra&#39;s algorithm.">single-source
+shortest paths problem</a> and finding the <a
+href="10-glossary.html#minimal-cost-spanning-tree" class="term"
+title="Abbreviated as MCST, or sometimes as MST. Derived from a weighted graph, the MCST is the subset of the graph&#39;s edges that maintains the connectivitiy of the graph while having lowest total cost (as defined by the sum of the weights of the edges in the MCST). The result is referred to as a tree because it would never have a cycle (since an edge could be removed from the cycle and still preserve connectivity). Two algorithms to solve this problem are Prim&#39;s algorithm and Kruskal&#39;s algorithm.">minimal-cost
+spanning tree</a>.</p>
 <p>For a story about Priority Queues and dragons, see <a
 href="http://computationaltales.blogspot.com/2011/04/stacks-queues-priority-queues-and.html">Computational
 Fairy Tales: Stacks, Queues, Priority Queues, and the Prince’s Complaint
@@ -859,7 +586,7 @@ efficient search for objects (such as a BST). Records in the auxiliary
 data structure will store the object’s heap index, so that the object’s
 priority can be updated.</p>
 </section>
-<section id="practice-questions-4" class="level4" data-number="7.2.3.2">
+<section id="practice-questions" class="level4" data-number="7.2.3.2">
 <h4 data-number="7.2.3.2"><span
 class="header-section-number">7.2.3.2</span> Practice Questions</h4>
 <p>
@@ -872,15 +599,21 @@ Your browser does not support iframes.
 </section>
 </section>
 </section>
-<section id="footnotes" class="footnotes footnotes-end-of-document"
-role="doc-endnotes">
-<hr />
-<ol>
-<li id="fn1"><p>Note that the term “heap” is also sometimes used to
-refer to <a href="10-glossary.html#free-store" class="term">free store</a>.<a href="#fnref1"
-class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="7.1-array-representation-for-complete-binary-trees.html" class="navbutton">&lt;&lt;</a>
+<a href="7.1-array-representation-for-complete-binary-trees.html" accesskey="p" rel="previous">Array Representation for Complete Binary Trees</a>
+</div>
+<div class="navlink">
+<a href="7.3-heapsort.html" accesskey="n" rel="next">Heapsort</a>
+<a href="7.3-heapsort.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 <script type="text/javascript" src="../interactive/DataStructures/binaryheap.js"></script>
 <script type="text/javascript" src="../interactive/Binary/heapinsertCON.js"></script>
 <script type="text/javascript" src="../interactive/Binary/HeapBldChoiceCON.js"></script>
@@ -891,3 +624,4 @@ class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <script type="text/javascript" src="../interactive/Binary/heapremoveCON.js"></script>
 </body>
 </html>
+

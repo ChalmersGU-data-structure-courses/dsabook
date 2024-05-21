@@ -18,12 +18,12 @@ $(document).ready(function() {
   };
 
   var pseudo = av.code([
-    "def insertionsort(A):",
-    "    for i in range(len(A)):  # Insert i'th record",
+    "function insertionSort(A):",
+    "    for i in 1 ... length(A)-1:",
     "        j = i",
     "        while j > 0 and A[j] < A[j-1]:",
     "            swap(A, j, j-1)",
-    "            j -= 1",
+    "            j = j-1",
   ], {lineNumbers: false,
       tags: {
         "sig": 1,
@@ -36,7 +36,7 @@ $(document).ready(function() {
 
   var arr;
   var leftAlign = 300;
-  var topAlign = 0;
+  var topAlign =150;
   var labelGap = 5;
 
   // Slide 1
@@ -47,7 +47,7 @@ $(document).ready(function() {
   pseudo.show();
   av.umsg(interpret["sc2"]);
   arr = av.ds.array(["0", "1", "...", "i-1", "i", "...", "n-1"], {left: leftAlign, top: topAlign, indexed: false});
-  pseudo.highlight("loop2");
+  pseudo.highlight("inloop");
   arr.highlight(4);
   av.step();
 
@@ -58,7 +58,7 @@ $(document).ready(function() {
 
   //Slide 4
   av.umsg(interpret["sc4"]);
-  pseudo.unhighlight("loop2");
+  pseudo.unhighlight("inloop");
   av.step();
 
   //Slide 5
@@ -84,7 +84,7 @@ $(document).ready(function() {
            {top: topAlign + 40,
              left: leftAlign + 80 + labelGap});
 
-  pseudo.highlight("loop1");
+  pseudo.highlight("outloop");
   arr.unhighlight(4);
   arr.removeClass([0, 1, 2, 3], "greenbg");
   av.step();
@@ -97,6 +97,6 @@ $(document).ready(function() {
 
   //Slide 8
   av.umsg(interpret["sc8"]);
-  pseudo.unhighlight("loop2");
+  pseudo.unhighlight("outloop");
   av.recorded();
 });

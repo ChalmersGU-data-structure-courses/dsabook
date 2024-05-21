@@ -6,14 +6,14 @@ $(document).ready(function() {
   var av_name = "LinkedQueue-Enqueue-CON";
   var av = new JSAV(av_name);
   var pseudo = av.code([
-    "enqueue(x:E)",
-    "    newRear : E = new Node(x, null)",
-    "    if queueSize == 0",
+    "enqueue(x):",
+    "    newRear = new Node(x, null)",
+    "    if queueSize == 0:",
     "        front = newRear",
-    "    else",
+    "    else:",
     "        rear.next = newRear",
     "    rear = newRear",
-    "    queueSize += 1",
+    "    queueSize = queueSize + 1",
   ], {lineNumbers: false});
 
   var leftMargin = 10;

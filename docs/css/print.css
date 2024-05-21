@@ -1,0 +1,71 @@
+
+@media print {
+    :root {
+        --font-size: 10pt;
+
+        --body-bgcolor: Transparent;
+        --border-color: Silver;
+        --box-bgcolor: Transparent;
+        --code-bgcolor: Transparent;
+        --html-bgcolor: White;
+        --link-color: Black;
+        --quote-color: DimGrey;
+        --term-color: Black;
+        --text-color: Black;
+
+        --code-alert-color: Black;
+        --code-builtin-color: Black;
+        --code-comment-color: Grey;
+        --code-number-color: Black;
+        --code-oper-color: Black;
+        --code-string-color: Black;
+        --code-variable-color: Black;
+        --linenumber-color: Grey;
+        }
+
+    @page { 
+        size: auto;
+        margin: 25mm 25mm 25mm 25mm;  
+    }
+
+    body { 
+        margin: 0;
+        padding: 0;
+    } 
+
+    main {
+        max-width: none;
+        border: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    header, footer, iframe, script {
+        display: none;
+    }
+
+    p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h1, h2, h3, h4 {
+        page-break-after: avoid;
+    }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    pre > code.sourceCode {
+        white-space: break-spaces;
+    }
+
+    pre > code.sourceCode > span {
+        display: inline-block;
+        text-indent: -3rem;
+        padding-left: 3rem;
+    }
+
+}

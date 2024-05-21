@@ -25,7 +25,7 @@ div.exercises-card {
 
 body {
   min-width: 0;
-  background-color: #ffe;  /* same color as in bookstyle.css */
+  background-color: floralWhite;  /* same color as in DSABook: extra/main.css */
 }
 
 #page-container {

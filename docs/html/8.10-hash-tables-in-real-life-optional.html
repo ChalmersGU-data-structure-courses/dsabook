@@ -8,93 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Hash Tables in Real Life (optional)</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        background-color: #ffffff;
-        color: #a0a0a0;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
-    div.sourceCode
-      { color: #1f1c1b; background-color: #ffffff; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #1f1c1b; } /* Normal */
-    code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
-    code span.an { color: #ca60ca; } /* Annotation */
-    code span.at { color: #0057ae; } /* Attribute */
-    code span.bn { color: #b08000; } /* BaseN */
-    code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
-    code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #924c9d; } /* Char */
-    code span.cn { color: #aa5500; } /* Constant */
-    code span.co { color: #898887; } /* Comment */
-    code span.cv { color: #0095ff; } /* CommentVar */
-    code span.do { color: #607880; } /* Documentation */
-    code span.dt { color: #0057ae; } /* DataType */
-    code span.dv { color: #b08000; } /* DecVal */
-    code span.er { color: #bf0303; text-decoration: underline; } /* Error */
-    code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
-    code span.fl { color: #b08000; } /* Float */
-    code span.fu { color: #644a9b; } /* Function */
-    code span.im { color: #ff5500; } /* Import */
-    code span.in { color: #b08000; } /* Information */
-    code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
-    code span.op { color: #1f1c1b; } /* Operator */
-    code span.ot { color: #006e28; } /* Other */
-    code span.pp { color: #006e28; } /* Preprocessor */
-    code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
-    code span.sc { color: #3daee9; } /* SpecialChar */
-    code span.ss { color: #ff5500; } /* SpecialString */
-    code span.st { color: #bf0303; } /* String */
-    code span.va { color: #0057ae; } /* Variable */
-    code span.vs { color: #bf0303; } /* VerbatimString */
-    code span.wa { color: #bf0303; } /* Warning */
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -160,26 +79,31 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="8-hashing.html" accesskey="u" rel="up">Hashing</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="8.9-open-addressing-deletion.html" class="navbutton">&lt;&lt;</a>
+<a href="8.9-open-addressing-deletion.html" accesskey="p" rel="previous">Open Addressing, Deletion</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="8.11-hashing-chapter-summary-exercises.html" accesskey="n" rel="next">Hashing Chapter Summary Exercises</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="8.9-open-addressing-deletion.html" accesskey="p" rel="previous">Open Addressing, Deletion</a>
-</span>
+<div>
+<a href="8.11-hashing-chapter-summary-exercises.html" accesskey="n" rel="next">Hashing Chapter Summary Exercises</a>
+<a href="8.11-hashing-chapter-summary-exercises.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="hash-tables-in-real-life-optional" class="level2"
 data-number="8.10">
 <h2 data-number="8.10"><span class="header-section-number">8.10</span>
@@ -192,18 +116,22 @@ data-number="8.10.1">
 class="header-section-number">8.10.1</span> Algorithmic complexity
 attacks</h3>
 <p>As we wrote in the chapter introduction:</p>
+<blockquote>
 <p>“When properly implemented, these operations can be performed in
 constant time. (...) However, even though hashing is based on a very
 simple idea, it is surprisingly difficult to implement properly.”</p>
+</blockquote>
 <p>This difficulty can be (and has been) exploited for malicious attacks
 on systems, so called algorithmic complexity attacks. We’ll leave the
 word to Adam Jacobson and David Renardy to give an introduction to the
 problems (please read the whole text, it’s an easy read):</p>
+<blockquote>
 <p>“An Algorithmic Complexity (AC) attack is a resource exhaustion
 attack that takes advantage of worst-case performance in server-side
 algorithms.” (<a
 href="https://twosixtech.com/algorithmic-complexity-vulnerabilities-an-introduction"
 class="uri">https://twosixtech.com/algorithmic-complexity-vulnerabilities-an-introduction</a>)</p>
+</blockquote>
 <p>As you can see, hash tables even have a category of itself
 (“Hashtable DoS Attacks”). They only mention separate chaining (“These
 hash tables utilized a linked list”), but the same problem arises for
@@ -218,11 +146,10 @@ data-number="8.10.2">
 class="header-section-number">8.10.2</span> Breaking hash functions</h3>
 <p>Java’s default algorithm for calculating a hash code from a string
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>s</mi><annotation encoding="application/x-tex">s</annotation></semantics></math>
-looks like this:
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>s</mi><mn>0</mn></msub><mo>⋅</mo><msup><mn>31</mn><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>+</mo><msub><mi>s</mi><mn>1</mn></msub><mo>⋅</mo><msup><mn>31</mn><mrow><mi>n</mi><mo>−</mo><mn>2</mn></mrow></msup><mo>+</mo><mi>.</mi><mi>.</mi><mi>.</mi><mo>+</mo><msub><mi>s</mi><mrow><mi>n</mi><mo>−</mo><mn>2</mn></mrow></msub><mo>⋅</mo><msup><mn>31</mn><mn>1</mn></msup><mo>+</mo><msub><mi>s</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>⋅</mo><msup><mn>31</mn><mn>0</mn></msup></mrow><annotation encoding="application/x-tex">s_0\cdot 31^{n-1} + s_1\cdot 31^{n-2} + ... + s_{n-2}\cdot 31^1 + s_{n-1}\cdot 31^0</annotation></semantics></math>.
-(Source: <a
+looks like this (see the code for <a
 href="https://github.com/openjdk/jdk/blob/9f75d5ce500886b32175cc541939b7f0eee190ca/src/java.base/share/classes/java/lang/StringUTF16.java#L414-L420">hashCode()
-in StringUTF16.java</a>).</p>
+in StringUTF16.java</a>):</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>s</mi><mn>0</mn></msub><mo>⋅</mo><msup><mn>31</mn><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>+</mo><msub><mi>s</mi><mn>1</mn></msub><mo>⋅</mo><msup><mn>31</mn><mrow><mi>n</mi><mo>−</mo><mn>2</mn></mrow></msup><mo>+</mo><mi>.</mi><mi>.</mi><mi>.</mi><mo>+</mo><msub><mi>s</mi><mrow><mi>n</mi><mo>−</mo><mn>2</mn></mrow></msub><mo>⋅</mo><msup><mn>31</mn><mn>1</mn></msup><mo>+</mo><msub><mi>s</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>⋅</mo><msup><mn>31</mn><mn>0</mn></msup></mrow><annotation encoding="application/x-tex"> s_0\cdot 31^{n-1} + s_1\cdot 31^{n-2} + ... + s_{n-2}\cdot 31^1 + s_{n-1}\cdot 31^0 </annotation></semantics></math></p>
 <p>This works well in practice, <em>if you assume that your data is
 normal</em>! But an attacker does not use normal data – instead they
 deliberately create data that will break the system. For example,
@@ -234,12 +161,12 @@ That’s a hashtable DoS attack!</p>
 It relies on the fact that the following two strings have the same
 hashcode:</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;Aa&quot;</span>.hashCode() <span class="op">==</span> <span class="st">&quot;BB&quot;</span>.hashCode() <span class="op">==</span> <span class="dv">2112</span></span></code></pre></div>
+class="sourceCode java"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Aa&quot;</span><span class="op">.</span><span class="fu">hashCode</span><span class="op">()</span> <span class="op">==</span> <span class="st">&quot;BB&quot;</span><span class="op">.</span><span class="fu">hashCode</span><span class="op">()</span> <span class="op">==</span> <span class="dv">2112</span></span></code></pre></div>
 <p>Therefore, all same-length repetitions of “Aa” and “BB” have the same
 hash code:</p>
 <div class="sourceCode" id="cb2"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;AaAaAaAaAa&quot;</span>, <span class="st">&quot;AaAaAaAaBB&quot;</span>, <span class="st">&quot;AaAaAaBBAa&quot;</span>, <span class="st">&quot;AaAaAaBBBB&quot;</span>, ...,</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;BBBBBBAaAa&quot;</span>, <span class="st">&quot;BBBBBBAaBB&quot;</span>, <span class="st">&quot;BBBBBBBBAa&quot;</span>, <span class="st">&quot;BBBBBBBBBB&quot;</span></span></code></pre></div>
+class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;AaAaAaAaAa&quot;</span><span class="op">,</span> <span class="st">&quot;AaAaAaAaBB&quot;</span><span class="op">,</span> <span class="st">&quot;AaAaAaBBAa&quot;</span><span class="op">,</span> <span class="st">&quot;AaAaAaBBBB&quot;</span><span class="op">,</span> <span class="kw">...</span><span class="op">,</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;BBBBBBAaAa&quot;</span><span class="op">,</span> <span class="st">&quot;BBBBBBAaBB&quot;</span><span class="op">,</span> <span class="st">&quot;BBBBBBBBAa&quot;</span><span class="op">,</span> <span class="st">&quot;BBBBBBBBBB&quot;</span></span></code></pre></div>
 <p>There are
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mi>k</mi></msup><annotation encoding="application/x-tex">2^k</annotation></semantics></math>
 possible strings with
@@ -352,5 +279,21 @@ class="uri">https://github.com/python/cpython/blob/main/Objects/dictobject.c</a>
 </ul>
 </section>
 </section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="8.9-open-addressing-deletion.html" class="navbutton">&lt;&lt;</a>
+<a href="8.9-open-addressing-deletion.html" accesskey="p" rel="previous">Open Addressing, Deletion</a>
+</div>
+<div class="navlink">
+<a href="8.11-hashing-chapter-summary-exercises.html" accesskey="n" rel="next">Hashing Chapter Summary Exercises</a>
+<a href="8.11-hashing-chapter-summary-exercises.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 </body>
 </html>
+

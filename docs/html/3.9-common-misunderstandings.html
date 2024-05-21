@@ -8,26 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Common Misunderstandings</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -93,43 +79,57 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 <link href="../interactive/AlgAnal/MisunderstandingsGraphCON.css" rel="stylesheet" type="text/css"/>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="3-algorithm-analysis.html" accesskey="u" rel="up">Algorithm Analysis</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="3.8-analyzing-problems.html" class="navbutton">&lt;&lt;</a>
+<a href="3.8-analyzing-problems.html" accesskey="p" rel="previous">Analyzing Problems</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="3.10-multiple-parameters.html" accesskey="n" rel="next">Multiple Parameters</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="3.8-analyzing-problems.html" accesskey="p" rel="previous">Analyzing Problems</a>
-</span>
+<div>
+<a href="3.10-multiple-parameters.html" accesskey="n" rel="next">Multiple Parameters</a>
+<a href="3.10-multiple-parameters.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="common-misunderstandings" class="level2" data-number="3.9">
 <h2 data-number="3.9"><span class="header-section-number">3.9</span>
 Common Misunderstandings</h2>
-<p><a href="10-glossary.html#asymptotic-analysis" class="term">Asymptotic analysis</a> is one of the most
-intellectually difficult topics that undergraduate computer science
-majors are confronted with. Most people find <a href="10-glossary.html#growth-rate" class="term">growth rates</a> and asymptotic analysis confusing and so
-develop misconceptions about either the concepts or the terminology. It
-helps to know what the standard points of confusion are, in hopes of
-avoiding them.</p>
-<p>One problem with differentiating the concepts of <a href="10-glossary.html#upper-bound" class="term">upper</a> and <a href="10-glossary.html#lower-bound" class="term">lower bounds</a> is that, for most algorithms that you will
-encounter, it is easy to recognize the true growth rate for that
-algorithm. Given complete knowledge about a cost function, the upper and
-lower bound for that cost function are always the same. Thus, the
-distinction between an upper and a lower bound is only worthwhile when
-you have incomplete knowledge about the thing being measured. If this
-distinction is still not clear, then you should <a
+<p><a href="10-glossary.html#asymptotic-analysis" class="term"
+title="A method for estimating the efficiency of an algorithm or computer program by identifying its asymptotic complexity, the growth rate of its complexity function. Asymptotic analysis also gives a way to define the inherent difficulty of a problem. We frequently use the term algorithm analysis to mean the same thing.">Asymptotic
+analysis</a> is one of the most intellectually difficult topics that
+undergraduate computer science majors are confronted with. Most people
+find <a href="10-glossary.html#growth-rate" class="term"
+title="The rate at which a function grows. How quickly the function grows when its input grows. Also called its *order of growth*. A function $f$ has growth rate bounded by a function $g$ if the values of $f$ are eventually bounded by those of $g$ up to some constant factor. We often shorten this (somewhat confusingly) by saying that $f$ has growth rate $g$ or that $f$ has order of growth $g$. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \leq c g(n)$ for all $n \geq n_0$. We then say that $f$ has growth rate less or equal that of $g$ and write $f \in O(g)$ (big-Oh notation). This defines the preorder of growth rates. In algorithm analysis, we sometimes speak of the growth rate of an algorithm. By that, we mean the growth rate of the complexity of the algorithm, the rate at which the cost of the algorithm grows as the size of its input grows. This is also called the asymptotic complexity of that algorithm.">growth
+rates</a> and asymptotic analysis confusing and so develop
+misconceptions about either the concepts or the terminology. It helps to
+know what the standard points of confusion are, in hopes of avoiding
+them.</p>
+<p>One problem with differentiating the concepts of <a
+href="10-glossary.html#upper-bound" class="term"
+title="An upper bound for a growth rate $f$ is any growth rate $g$ that is greater than or equal to it. Formally, there are constants $n_0 \geq 0$ and $C &gt; 0$ such that $f(n) \leq C g(n)$ for all $n \geq n_0$. We also write $f \in O(g)$ or slightly imprecisely $f(n) \in O(g(n))$ (this is big-Oh notation). Usually, we are interested in finding an upper bound $g$ that has a simple expression compared to $f$, but is still sharp (there is not much room for improvement). In algorithm analysis, an upper bound for an algorithm is an upper bound for the asymptotic complexity of the algorithm, the growth rate of its complexity. In practice, we are looking for the best possible upper bound that has a simple mathematical expression. For example, we may write $T(n) \in O(n^2)$ if $T$ is the (time) complexity of the algorithm to say that the complexity is quadratic, i.e. the asymptoptic complexity of the algorithm has as upper bound the growth rate given by squaring.">upper</a>
+and <a href="10-glossary.html#lower-bound" class="term"
+title="An lower bound for a growth rate $f$ is any growth rate $g$ that is less than or equal to it. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \geq c g(n)$ for all $n \geq n_0$. We also write $f \in \Omega(g)$ or slightly imprecisely $f(n) \in \Omega(g(n))$ (this is Omega notation). Usually, we are interested in finding a lower bound $g$ that has a simple expression compared to $f$, but is still sharp (there is not much room for improvement). In algorithm analysis, a lower bound for an algorithm is a lower bound for the asymptotic complexity of the algorithm, the growth rate of its complexity.">lower
+bounds</a> is that, for most algorithms that you will encounter, it is
+easy to recognize the true growth rate for that algorithm. Given
+complete knowledge about a cost function, the upper and lower bound for
+that cost function are always the same. Thus, the distinction between an
+upper and a lower bound is only worthwhile when you have incomplete
+knowledge about the thing being measured. If this distinction is still
+not clear, then you should <a
 href="3.8-analyzing-problems.html#analyzing-problems">read about
 analyzing problems</a>. We use
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Θ</mi><annotation encoding="application/x-tex">\Theta</annotation></semantics></math>-notation
@@ -137,15 +137,22 @@ to indicate that there is no meaningful difference between what we know
 about the growth rates of the upper and lower bound (which is usually
 the case for simple algorithms).</p>
 <p>It is a common mistake to confuse the concepts of upper bound or
-lower bound on the one hand, and <a href="10-glossary.html#worst-case" class="term">worst case</a> or
-<a href="10-glossary.html#best-case" class="term">best case</a> on the other. The best, worst, or <a href="10-glossary.html#average-case" class="term">average cases</a> each <strong>define
-a cost</strong> for a specific input instance (or specific set of
-instances for the average case). In contrast, upper and lower bounds
-describe our understanding of the <strong>growth rate</strong> for that
-cost measure. So to define the growth rate for an algorithm or problem,
-we need to determine what we are measuring (the best, worst, or average
-case) and also our description for what we know about the growth rate of
-that cost measure (big-Oh,
+lower bound on the one hand, and <a href="10-glossary.html#worst-case"
+class="term"
+title="In algorithm analysis, specifically complexity of an algorithm, the problem instance from among all problem instances for a given input size $n$ that has the greatest cost. Every input size $n$ has its own worst case. We **never** consider the worst case as removed from input size.">worst
+case</a> or <a href="10-glossary.html#best-case" class="term"
+title="In algorithm analysis, specifically complexity of an algorithm, the problem instance from among all problem instances for a given input size $n$ that has least cost. Every input size $n$ has its own best case. We **never** consider the best case as removed from input size.">best
+case</a> on the other. The best, worst, or <a
+href="10-glossary.html#average-case" class="term"
+title="In algorithm analysis, specifically complexity of an algorithm, the average of the costs for all problem instances of a given input size $n$. If not all problem instances have equal probability of occurring, then the average case must be calculated using a weighted average that is specified with the problem (for example, every input may be equally likely). Every input size $n$ has its own average case. We **never** consider the average case as removed from input size.">average
+cases</a> each <strong>define a cost</strong> for a specific input
+instance (or specific set of instances for the average case). In
+contrast, upper and lower bounds describe our understanding of the
+<strong>growth rate</strong> for that cost measure. So to define the
+growth rate for an algorithm or problem, we need to determine what we
+are measuring (the best, worst, or average case) and also our
+description for what we know about the growth rate of that cost measure
+(big-Oh,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Ω</mi><annotation encoding="application/x-tex">\Omega</annotation></semantics></math>,
 or
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Θ</mi><annotation encoding="application/x-tex">\Theta</annotation></semantics></math>).</p>
@@ -200,14 +207,142 @@ best case occurs when
 <div class="jsavcanvas"></div>
 </div>
 </p>
-<p>
-<div id="MisSumm" class="embedContainer">
-<iframe id="MisSumm_iframe" aria-label="MisSumm" src="../interactive/AlgAnal/MisSumm.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
+<section id="practice-questions-common-misunderstandings" class="level3"
+data-number="3.9.1">
+<h3 data-number="3.9.1"><span class="header-section-number">3.9.1</span>
+Practice questions: Common misunderstandings</h3>
+<div class="quiz">
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>For all algorithms, if we completely understand the running time
+analysis, then the upper bound and lower bound will be the same.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Upper and lower bounds are only different when we do not completely
+understand the cost for the algorithm.</li>
+</ul>
 </div>
-</p>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>The upper bound and lower bounds of the sequential search algorithm
+is in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Omega(n)</annotation></semantics></math>
+respectively.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Is this statement complete?</li>
+<li>To make this statement correct, you need to add in which case you
+are measuring the lower and upper bounds.</li>
+<li>This would be true for the worst case, but not the best case.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>The worst case for sequential search occurs when the last element of
+the array is the value being searched for.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Worst case cost refers to the most expensive problem instance AS THE
+INPUT GETS BIG.</li>
+<li>Since, for any given array (regardless of size), the most expensive
+problem instance occurs when the search value is in the last position of
+the array, this is indeed the worst case.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>The lower bound for the cost of sequential search is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Omega(1)</annotation></semantics></math>
+since this is the running time of the algorithm in the best case.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Upper/lower bounds define the growth rate in a particular situation
+(such as worst or best case).</li>
+<li>So the statement is badly worded.</li>
+<li>Proper wording: The lower bound for the cost of sequential search in
+the best case is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Omega(1)</annotation></semantics></math>.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>The best case for the sequential search algorithm occurs when the
+array has only a single element.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Best case cost refers to a best problem instance AS THE INPUT GETS
+BIG.</li>
+<li>So it makes no sense to talk about a growth rate or a best case of a
+fixed input size.</li>
+<li>The best case for sequential search occurs when the first element of
+the array (for whatever size) is the value being searched for.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>The worst case for the sequencial search algorithm occurs when the
+array size tends to infinity.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Worst case cost refers to the most expensive problem instance AS THE
+INPUT GETS BIG.</li>
+<li>That is, worst case does not refer to what the input size it.</li>
+<li>It refers to which input of a particular size is the worst one.</li>
+<li>The worst case for sequential search occurs when the last element of
+the array (for whatever size) is the value being searched for.</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="3.8-analyzing-problems.html" class="navbutton">&lt;&lt;</a>
+<a href="3.8-analyzing-problems.html" accesskey="p" rel="previous">Analyzing Problems</a>
+</div>
+<div class="navlink">
+<a href="3.10-multiple-parameters.html" accesskey="n" rel="next">Multiple Parameters</a>
+<a href="3.10-multiple-parameters.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 <script type="text/javascript" src="../interactive/AlgAnal/MisunderstandingsGraphCON.js"></script>
 </body>
 </html>
+

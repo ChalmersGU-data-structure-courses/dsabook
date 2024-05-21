@@ -10,8 +10,8 @@
 }
 
 #ListADT-Positions-CON .jsavarray .jsavnode {
-  border-color: #eed;
-  background-color: #eed;
+  border-color: transparent;
+  background-color: transparent;
   line-height: 60px;
   min-height: 60px;
   max-height: 60px;

@@ -6,12 +6,12 @@ $(document).ready(function() {
   var av_name = "LinkedQueue-Intro-CON";
   var av = new JSAV(av_name);
   var pseudo = av.code([
-    "class LinkedQueue(E) implements Queue(E)",
-    "    private front      : Node   // Pointer to front queue node",
-    "    private rear       : Node   // Pointer to rear queue node",
-    "    private queueSize  : int    // Size of queue",
+    "class LinkedQueue: implements Queue:",
+    "    front      // Pointer to front queue node",
+    "    rear       // Pointer to rear queue node",
+    "    queueSize  // Size of queue",
     "",
-    "    LinkedQueue()",
+    "    LinkedQueue():",
     "        front = null",
     "        rear = null",
     "        queueSize = 0",

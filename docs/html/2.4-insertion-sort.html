@@ -8,93 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Insertion Sort</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        background-color: #ffffff;
-        color: #a0a0a0;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
-    div.sourceCode
-      { color: #1f1c1b; background-color: #ffffff; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #1f1c1b; } /* Normal */
-    code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
-    code span.an { color: #ca60ca; } /* Annotation */
-    code span.at { color: #0057ae; } /* Attribute */
-    code span.bn { color: #b08000; } /* BaseN */
-    code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
-    code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #924c9d; } /* Char */
-    code span.cn { color: #aa5500; } /* Constant */
-    code span.co { color: #898887; } /* Comment */
-    code span.cv { color: #0095ff; } /* CommentVar */
-    code span.do { color: #607880; } /* Documentation */
-    code span.dt { color: #0057ae; } /* DataType */
-    code span.dv { color: #b08000; } /* DecVal */
-    code span.er { color: #bf0303; text-decoration: underline; } /* Error */
-    code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
-    code span.fl { color: #b08000; } /* Float */
-    code span.fu { color: #644a9b; } /* Function */
-    code span.im { color: #ff5500; } /* Import */
-    code span.in { color: #b08000; } /* Information */
-    code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
-    code span.op { color: #1f1c1b; } /* Operator */
-    code span.ot { color: #006e28; } /* Other */
-    code span.pp { color: #006e28; } /* Preprocessor */
-    code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
-    code span.sc { color: #3daee9; } /* SpecialChar */
-    code span.ss { color: #ff5500; } /* SpecialString */
-    code span.st { color: #bf0303; } /* String */
-    code span.va { color: #0057ae; } /* Variable */
-    code span.vs { color: #bf0303; } /* VerbatimString */
-    code span.wa { color: #bf0303; } /* Warning */
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -160,29 +79,34 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 <link href="../interactive/Sorting/InsertionSortWorstCaseCON.css" rel="stylesheet" type="text/css"/>
 <link href="../interactive/Sorting/InsertionSortBestCaseCON.css" rel="stylesheet" type="text/css"/>
 <link href="../interactive/Sorting/InsertionSortAverageCaseCON.css" rel="stylesheet" type="text/css"/>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="2-arrays-searching-and-sorting.html" accesskey="u" rel="up">Arrays: searching and sorting</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="2.3-sorting-terminology-and-notation.html" class="navbutton">&lt;&lt;</a>
+<a href="2.3-sorting-terminology-and-notation.html" accesskey="p" rel="previous">Sorting Terminology and Notation</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="2.5-bubble-sort-optional.html" accesskey="n" rel="next">Bubble Sort (optional)</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="2.3-sorting-terminology-and-notation.html" accesskey="p" rel="previous">Sorting Terminology and Notation</a>
-</span>
+<div>
+<a href="2.5-bubble-sort-optional.html" accesskey="n" rel="next">Bubble Sort (optional)</a>
+<a href="2.5-bubble-sort-optional.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="insertion-sort" class="level2" data-number="2.4">
 <h2 data-number="2.4"><span class="header-section-number">2.4</span>
 Insertion Sort</h2>
@@ -192,7 +116,10 @@ this is to look at the first two bills and put them in order. Then take
 the third bill and put it into the right position with respect to the
 first two, and so on. As you take each bill, you would add it to the
 sorted pile that you have already made. This simple approach is the
-inspiration for our first sorting algorithm, called <a href="10-glossary.html#insertion-sort" class="term">Insertion Sort</a>.</p>
+inspiration for our first sorting algorithm, called <a
+href="2.4-insertion-sort.html#insertion-sort" class="term"
+title="A sorting algorithm with $\Theta(n^2)$ average and worst case cost, and $Theta(n)$ best case cost. This best case cost makes it useful when we have reason to expect the input to be nearly sorted.">Insertion
+Sort</a>.</p>
 <p>Insertion Sort iterates through a list of records. For each
 iteration, the current record is inserted in turn at the correct
 position within a sorted list composed of those records already
@@ -202,23 +129,13 @@ processed. Here is an implementation. The input is an array named
 records.</p>
 <div id="introduction">
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> insertionSort(A):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(A)):  <span class="co"># Insert i&#39;th record</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        j <span class="op">=</span> i</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> j <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> A[j] <span class="op">&lt;</span> A[j<span class="op">-</span><span class="dv">1</span>]:</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>            swap(A, j, j<span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            j <span class="op">-=</span> <span class="dv">1</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="dt">static</span> <span class="op">&lt;</span>T <span class="kw">extends</span> <span class="bu">Comparable</span><span class="op">&lt;</span>T<span class="op">&gt;&gt;</span> <span class="dt">void</span> <span class="fu">insertionSort</span><span class="op">(</span>T<span class="op">[]</span> A<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;</span> A<span class="op">.</span><span class="fu">length</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Insert i&#39;th record.</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> j <span class="op">=</span> i<span class="op">;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="op">(</span>j <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> A<span class="op">[</span>j<span class="op">].</span><span class="fu">compareTo</span><span class="op">(</span>A<span class="op">[</span>j<span class="op">-</span><span class="dv">1</span><span class="op">])</span> <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>            <span class="bu">Util</span><span class="op">.</span><span class="fu">swap</span><span class="op">(</span>A<span class="op">,</span> j<span class="op">,</span> j<span class="op">-</span><span class="dv">1</span><span class="op">);</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>            j<span class="op">--;</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> insertionSort(A):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="op">=</span> <span class="dv">1</span> <span class="kw">to</span> A.<span class="bu">size</span>()<span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Move the i&#39;th element to its correct position.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        j <span class="op">=</span> i</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> j <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> A[j] <span class="op">&lt;</span> A[j<span class="op">-</span><span class="dv">1</span>]:</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            swap(A, j, j<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>            j <span class="op">=</span> j<span class="op">-</span><span class="dv">1</span></span></code></pre></div>
 </div>
 <div id="practice">
 <p>(Note that to make the explanation for these sorting algorithms as
@@ -226,9 +143,12 @@ simple as possible, our visualizations will show the array as though it
 stored simple integers rather than more complex records. But you should
 realize that in practice, there is rarely any point to sorting an array
 of simple integers. Nearly always we want to sort more complex records
-that each have a <a href="10-glossary.html#key" class="term">key</a> value. In such cases we
-must have a way to associate a key value with a record. The sorting
-algorithms will simply assume that the records are <a href="10-glossary.html#comparable" class="term">comparable</a>.)</p>
+that each have a <a href="10-glossary.html#key" class="term"
+title="A field or part of a larger record used to represent that record for the purpose of searching or comparing. Another term for search key.">key</a>
+value. In such cases we must have a way to associate a key value with a
+record. The sorting algorithms will simply assume that the records are
+<a href="10-glossary.html#comparable" class="term"
+title="The concept that two objects can be compared to determine if they are equal or not, or to determine which one is greater than the other. In set notation, elements $x$ and $y$ of a set are comparable under a given relation $R$ if either $xRy$ or $yRx$. To be reliably compared for a greater/lesser relationship, the values being compared must belong to a total order. In programming, the property of a data type such that two elements of the type can be compared to determine if they are the same (a weaker version), or which of the two is larger (a stronger version). `Comparable` is also the name of an interface in Java that asserts a comparable relationship between objects within a class, and `.compareTo()` is the `Comparable` interface method that implements the actual comparison between two objects of the class.">comparable</a>.)</p>
 </div>
 <p>Here we see the first few iterations of Insertion Sort.</p>
 <p>
@@ -265,6 +185,7 @@ Your browser does not support iframes.
 data-number="2.4.1">
 <h3 data-number="2.4.1"><span class="header-section-number">2.4.1</span>
 Insertion Sort Analysis</h3>
+<p>Here is an explanation of the worst case cost of insertion sort:</p>
 <p>
 <div id="InsertionSortWorstCaseCON" class="ssAV" data-short-name="InsertionSortWorstCaseCON" data-long-name="Insertion Sort Worst Case Slideshow" alt="Insertion Sort Worst Case Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
@@ -273,7 +194,7 @@ Insertion Sort Analysis</h3>
 <div class="jsavcanvas"></div>
 </div>
 </p>
-<div class="line-block"></div>
+<p>And here is an explanation of the cost of the best case:</p>
 <p>
 <div id="InsertionSortBestCaseCON" class="ssAV" data-short-name="InsertionSortBestCaseCON" data-long-name="Insertion Sort Best Case Slideshow" alt="Insertion Sort Best Case Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
@@ -282,7 +203,7 @@ Insertion Sort Analysis</h3>
 <div class="jsavcanvas"></div>
 </div>
 </p>
-<div class="line-block"></div>
+<p>And here is the average case cost:</p>
 <p>
 <div id="InsertionSortAverageCaseCON" class="ssAV" data-short-name="InsertionSortAverageCaseCON" data-long-name="Insertion Sort Average Case Slideshow" alt="Insertion Sort Average Case Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
@@ -302,8 +223,10 @@ slight. And even when the input is not perfectly sorted, Insertion
 Sort’s cost goes up in proportion to the number of inversions. So a
 “nearly sorted” list will always be cheap to sort with Insertion Sort.
 Examples of algorithms that take advantage of Insertion Sort’s
-near-best-case running time are <a href="10-glossary.html#shellsort" class="term">Shellsort</a> and
-<a href="2.11-quicksort.html#quicksort">Quicksort</a>.</p>
+near-best-case running time are <a href="10-glossary.html#shellsort"
+class="term"
+title="A sort that relies on the best-case cost of insertion sort to improve over $\Theta(n^2)$ worst case cost.">Shellsort</a>
+and <a href="2.11-quicksort.html#quicksort">Quicksort</a>.</p>
 <p>Counting comparisons or swaps yields similar results. Each time
 through the inner <code>for</code> loop yields both a comparison and a
 swap, except the last (i.e., the comparison that fails the inner
@@ -330,25 +253,409 @@ input sizes. But there are times when we might need to do many, many
 sorts on very small arrays. You should spend some time right now trying
 to think of a situation where you will need to sort many small arrays.
 Actually, it happens a lot.</p>
-<p>
-<div id="InssortSumm" class="embedContainer">
-<iframe id="InssortSumm_iframe" aria-label="InssortSumm" src="../interactive/Sorting/InssortSumm.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
-</div>
-</p>
-<p>See for a discussion on how the relative costs of search and insert
-can affect what is the best sort algorithm to use.</p>
 <p>See <a
 href="http://computationaltales.blogspot.com/2011/04/why-tailors-use-insertion-sort.html">Computational
 Fairy Tales: Why Tailors Use Insertion Sort</a> for a discussion on how
 the relative costs of search and insert can affect what is the best sort
 algorithm to use.</p>
 </section>
+<section id="review-questions-insertion-sort" class="level3"
+data-number="2.4.2">
+<h3 data-number="2.4.2"><span class="header-section-number">2.4.2</span>
+Review questions: Insertion sort</h3>
+<div class="quiz">
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>Insertion Sort (as the code is written in this module) is a stable
+sorting algorithm. Recall that a stable sorting algorithm maintains the
+relative order of records with equal keys.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Think of the behavior of every pass through the inner for loop of
+the insertion sort if keys are equal.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>When implementing Insertion Sort, a binary search could be used to
+locate the position within the first
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i-1</annotation></semantics></math>
+records of the array into which record
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+should be inserted. Using binary search will:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Not speed up the
+asymptotic running time because shifting the records to make room for
+the insert will require
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(i)</annotation></semantics></math>
+time.</label></li>
+<li><label><input type="checkbox" />Speed up the asymptotic running time
+because the position to insert will be found in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log i)</annotation></semantics></math>
+time.</label></li>
+<li><label><input type="checkbox" />Speed up the asymptotic running time
+because shifting the records to make room for the insert will require
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(i)</annotation></semantics></math>
+time.</label></li>
+<li><label><input type="checkbox" />None of these answers is
+correct.</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>The position at which to insert could be found in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log(i))</annotation></semantics></math>
+steps, but shifting the records to make room for the this record will
+require
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(i)</annotation></semantics></math>
+time.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>When implementing Insertion Sort, a binary search could be used to
+locate the position within the first
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i-1</annotation></semantics></math>
+records of the array into which record
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+should be inserted. In this implementation, the worst case time will
+be:</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^2)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>The position to insert could be found in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta (\log i)</annotation></semantics></math>,
+but shifting the records to makeroom for the insert will still require
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(i)</annotation></semantics></math>
+time</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>We know that the worst case for Insertion Sort is about
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>n</mi><mn>2</mn></msup><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n^2/2</annotation></semantics></math>,
+while the average case is about
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>n</mi><mn>2</mn></msup><mi>/</mi><mn>4</mn></mrow><annotation encoding="application/x-tex">n^2/4</annotation></semantics></math>.
+This means that:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />The growth rates are the
+same</label></li>
+<li><label><input type="checkbox" />The runtime in the average case is
+about half that of the worst case – [x] Both of the above</label></li>
+<li><label><input type="checkbox" />None of the above</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Growth rates ignore constants.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In which cases are the growth rates the same for Insertion Sort?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Worst and Average
+only</label></li>
+<li><label><input type="checkbox" />Worst and Best only</label></li>
+<li><label><input type="checkbox" />Best and Average only</label></li>
+<li><label><input type="checkbox" />Worst, Average, and
+Best</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Insertion Sort is really cheap in the best case.</li>
+<li>Its average and worst case times differ by a constant factor.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The order of the input records has what impact on the number of
+comparisons required by Insertion Sort (as presented in this
+module)?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />There is a big
+difference, the asymptotic running time can change</label></li>
+<li><label><input type="checkbox" />None</label></li>
+<li><label><input type="checkbox" />There is a constant factor
+difference</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Insertion Sort change when it make a comparison according to
+the order of the array input values?</li>
+<li>Yes, Insertion Sort might stop early or might look at many
+records.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the {average|worst}-case time for Insertion Sort to sort an
+array of n records?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^2)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log n)</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>In the worst case, each record must make its way to the start of the
+array. This would occur if the record values are initially arranged from
+highest to lowest, in the reverse of sorted order.</li>
+<li>In this case, the number of comparisons will be one the first time
+through the for loop, two the second time, and so on.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the best-case time for Insertionsort to sort an array of n
+records?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^2)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log n)</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>The best-case cost occurs when the records are already in sorted
+order from lowest to highest.</li>
+<li>In this case, every test on the inner for loop will fail
+immediately, and no records will be moved.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the running time of Insertion Sort when the input is an array
+where all record values are equal?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^2)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mi>n</mi></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n ^ n)</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Each test in the inner for loop will fail because the value at
+position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+is never less than the value at position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i-1</annotation></semantics></math>.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>If
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>I</mi><annotation encoding="application/x-tex">I</annotation></semantics></math>
+is the number of inversions in an input array of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+records, then Insertion Sort will run in what time?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>+</mo><mi>I</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n+I)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>−</mo><mi>I</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n - I)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>I</mi><mo>−</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(I - n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^2)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>I</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(I)</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Insertion sort has to do
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+passes where it compares at least once.</li>
+<li>If the record for this pass has no remaining inversions, then it
+requires no work.</li>
+<li>But if it does have inversions, it will need a swap for each such
+inversion.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the running time for Insertion Sort when the input array has
+values that are in reverse sort order?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^2)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log n)</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>On each iteration, the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>th
+record will have to move to the start of the array.</li>
+<li>This is the worst case.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the running time of Insertion Sort when the input is an array
+that has already been sorted?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^2)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log n)</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Each test in the inner for loop will fail because the value at
+position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+is never less than the value at position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i-1</annotation></semantics></math>.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>When is Insertion Sort a good choice for sorting an array?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />The array has only a few
+records out of sorted order</label></li>
+<li><label><input type="checkbox" />Each record requires a large amount
+of memory</label></li>
+<li><label><input type="checkbox" />Each record requires a small amount
+of memory</label></li>
+<li><label><input type="checkbox" />The processor speed is
+fast</label></li>
+<li><label><input type="checkbox" />The array contains many
+records</label></li>
+<li><label><input type="checkbox" />None of these
+situations</label></li>
+<li><label><input type="checkbox" />We need a reasonably fast algorithm
+with a good worst case</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Remember that insertion sort implementation is made up of two nested
+for loops.</li>
+<li>The outer for loop is executed
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>
+times. While the number of times the inner for loop executes depends on
+how many keys in positions 0 to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i-1</annotation></semantics></math>
+have a value less than that of the key in position i.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>When is Insertion Sort a good choice for sorting an array?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />The array contains only a
+few records</label></li>
+<li><label><input type="checkbox" />Each record requires a large amount
+of memory</label></li>
+<li><label><input type="checkbox" />Each record requires a small amount
+of memory</label></li>
+<li><label><input type="checkbox" />The processor speed is
+fast</label></li>
+<li><label><input type="checkbox" />The array contains many
+records</label></li>
+<li><label><input type="checkbox" />None of these
+situations</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Insertion Sort if fairly simple.</li>
+<li>Because Insertion Sort is simple, it tends to cost only a little bit
+per comparison when compared to more complicated sorting
+algorithms.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In the worst case, the total number of comparisons for Insertion Sort
+is closest to:</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>n</mi><mn>2</mn></msup><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n^2/2</annotation></semantics></math></label></li>
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math></label></li>
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>n</mi><mn>2</mn></msup><annotation encoding="application/x-tex">n^2</annotation></semantics></math></label></li>
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>log</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">n \log n</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Insertion Sort’s implementation is made up of two nested for
+loops.</li>
+<li>The outer for loop is executed
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>
+times.</li>
+<li>The inner for loop is executed
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+times.</li>
+<li>The total cost is the sum of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>’s
+for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+goes from 1 to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="2.3-sorting-terminology-and-notation.html" class="navbutton">&lt;&lt;</a>
+<a href="2.3-sorting-terminology-and-notation.html" accesskey="p" rel="previous">Sorting Terminology and Notation</a>
+</div>
+<div class="navlink">
+<a href="2.5-bubble-sort-optional.html" accesskey="n" rel="next">Bubble Sort (optional)</a>
+<a href="2.5-bubble-sort-optional.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 <script type="text/javascript" src="../interactive/Sorting/insertionsortCON.js"></script>
 <script type="text/javascript" src="../interactive/Sorting/InsertionSortWorstCaseCON.js"></script>
 <script type="text/javascript" src="../interactive/Sorting/InsertionSortBestCaseCON.js"></script>
 <script type="text/javascript" src="../interactive/Sorting/InsertionSortAverageCaseCON.js"></script>
 </body>
 </html>
+

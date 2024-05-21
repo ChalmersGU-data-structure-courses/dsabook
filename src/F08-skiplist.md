@@ -37,64 +37,13 @@ accesses is $\Theta(\log n)$.
 
 We will store with each skip list node an array named `forward` that
 stores the pointers. Position `forward[0]` stores a level 0 pointer,
-`forward[1]` stores a level 1 pointer, and so on. It also uses a KVPair
-to store the key and record for the node. The SkipNode class follows:
+`forward[1]` stores a level 1 pointer, and so on:
 
-```java
- class SkipNode {
-    private KVPair rec;
-    private SkipNode[] forward;
-
-    public Object element() {
-      return rec.value();
-    }
-
-    public Comparable key() {
-      return rec.key();
-    }
-
-    public SkipNode(Comparable key, Object elem, int level) {
-      rec = new KVPair(key, elem);
-      forward = new SkipNode[level + 1];
-      for (int i = 0; i < level; i++) {
-        forward[i] = null;
-      }
-    }
-
-    public String toString() {
-      return rec.toString();
-    }
-  }
-```
-
-```java
-    class SkipNode<K extends Comparable<K>, E> {
-        private KVPair<K, E> rec;
-        private SkipNode<K, E>[] forward;
-
-        public E element() {
-            return rec.value();
-        }
-
-        public K key() {
-            return rec.key();
-        }
-
-        @SuppressWarnings("unchecked")
-        public SkipNode(K key, E elem, int level) {
-            rec = new KVPair<K, E>(key, elem);
-            forward = new SkipNode[level + 1];
-            for (int i = 0; i < level; i++)
-                forward[i] = null;
-        }
-
-        public String toString() {
-            return rec.toString();
-        }
-    }
-```
-
-
+    class SkipNode:
+        SkipNode(key, value, level):
+            this.key = key
+            this.value = value
+            this.forward = new Array(level + 1)
 
 The skip list object includes data member `level` that stores the
 highest level for any node currently in the skip list. The skip list
@@ -102,67 +51,27 @@ stores a header node named `head` with `level+1` pointers where the head
 level is initially 0 and the level is set to -1 for the empty list. The
 start of the SkipList class follows:
 
-```java
-class SkipList implements Dictionary {
-  private SkipNode head;
-  private int level;
-  private int size;
-  static private Random ran = new Random(); // Hold the Random class object
+    class SkipList implements Map:
+        SkipList():
+            this.head = new SkipNode(null, null, 0)
+            this.level = -1
+            this.listSize = 0
 
-  public SkipList() {
-    head = new SkipNode(null, null, 0);
-    level = -1;
-    size = 0;
-  }
-```
+The `get` method works as follows.
 
-```java
-class SkipList<K extends Comparable<K>, E> implements Dictionary<K, E> {
-    private SkipNode<K, E> head;
-    private int level;
-    private int size;
-    static private Random ran = new Random(); // Hold the Random class object
-
-    public SkipList() {
-        head = new SkipNode<K, E>(null, null, 0);
-        level = -1;
-        size = 0;
-    }
-```
-
-
-
-The `find` function works as follows.
-
-```java
-  // Return the (first) matching matching element if one exists, null otherwise
-  public Object find(Comparable key) {
-    SkipNode x = head; // Dummy header node
-    for (int i = level; i >= 0; i--) { // For each level...
-      while ((x.forward[i] != null) && (x.forward[i].key().compareTo(key) < 0)) { // go forward
-        x = x.forward[i]; // Go one last step
-      }
-    }
-    x = x.forward[0]; // Move to actual record, if it exists
-    if ((x != null) && (x.key().compareTo(key) == 0)) { return x.element(); } // Got it
-    else { return null; } // Its not there
-  }
-```
-
-```java
-    // Return the (first) matching matching element if one exists, null otherwise
-    public E find(K key) {
-        SkipNode<K, E> x = head; // Dummy header node
-        for (int i = level; i >= 0; i--) // For each level...
-            while ((x.forward[i] != null) && (x.forward[i].key().compareTo(key) < 0)) // go forward
-                x = x.forward[i]; // Go one last step
-        x = x.forward[0]; // Move to actual record, if it exists
-        if ((x != null) && (x.key().compareTo(key) == 0)) return x.element(); // Got it
-        else return null; // Its not there
-    }
-```
-
-
+    class SkipList implements Map:
+        ...
+        // Look up the value associated with a key.
+        get(key):
+            x = this.head  // Dummy header node
+            for i = this.level downto 0:  // For each level...
+                while x.forward[i] is not null and key > x.forward[i].key:  // ...go forward
+                    x = x.forward[i]  // Go one last step
+            x = x.forward[0]  // Move to actual record, if it exists
+            if x is not null and key == x.key:
+                return x.value  // Got it
+            else:
+                return null  // It's not there
 
 The ideal skip list is organized so that (if the head node is not
 counted) half of the nodes have only one pointer, one quarter have two,
@@ -177,28 +86,13 @@ have one pointer, a 25% probability that it will have two, and so on.
 The following function determines the level based on such a
 distribution.
 
-```java
-  // Pick a level using a geometric distribution
-  int randomLevel() {
-    int lev;
-    for (lev = 0; Math.abs(ran.nextInt()) % 2 == 0; lev++) { // ran is random generator
-      ; // Do nothing
-    }
-    return lev;
-  }
-```
-
-```java
-    // Pick a level using a geometric distribution
-    int randomLevel() {
-        int lev;
-        for (lev = 0; Math.abs(ran.nextInt()) % 2 == 0; lev++) // ran is random generator
-            ; // Do nothing
-        return lev;
-    }
-```
-
-
+    class SkipList implements Map:
+        ...
+        randomLevel():
+            level = 0
+            while random() < 0.5:
+                level = level + 1
+            return lev
 
 Once the proper level for the node has been determined, the next step is
 to find where the node should be inserted and link it in as appropriate
@@ -208,71 +102,37 @@ Note that we build an `update` array as we progress through the skip
 list, so that we can update the pointers for the nodes that will precede
 the one being inserted.
 
-```java
-  /** Insert a key, element pair into the skip list */
-  public void insert(Comparable key, Object elem) {
-    int newLevel = randomLevel(); // New node's level
-    if (newLevel > level) { // If new node is deeper
-      adjustHead(newLevel); // adjust the header
-    }
-    // Track end of level
-    SkipNode[] update = new SkipNode[level + 1];
-    SkipNode x = head; // Start at header node
-    for (int i = level; i >= 0; i--) { // Find insert position
-      while ((x.forward[i] != null) && (x.forward[i].key().compareTo(key) < 0)) {
-        x = x.forward[i];
-      }
-      update[i] = x; // Track end at level i
-    }
-    x = new SkipNode(key, elem, newLevel);
-    for (int i = 0; i <= newLevel; i++) { // Splice into list
-      x.forward[i] = update[i].forward[i]; // Who x points to
-      update[i].forward[i] = x; // Who points to x
-    }
-    size++; // Increment dictionary size
-  }
+    class SkipList implements Map:
+        ...
+        // Add a key-value pair, or update the value associated with an existing key. 
+        put(key, value):
+            newLevel = this.randomLevel()  // New node's level
+            if newLevel > this.level:  // If new node is deeper...
+                this.adjustHead(newLevel)  // ...adjust the header
+            // Track end of level:
+            update = new Array(this.level + 1)
+            x = this.head  // Start at header node
+            for i = level downto 0:  // Find insert position
+                while x.forward[i] is not null and key > x.forward[i].key:
+                    x = x.forward[i]
+                update[i] = x  // Track end at level i
+            x = x.forward[0]  // Move to actual record, if it exists
+            if x is not null and key == x.key:
+                x.value = value  // The key exists: update the value
+            else:
+                // Otherwise, create a new node and insert it into place:
+                y = new SkipNode(key, value, newLevel)
+                for i = 0 to newLevel:  // Splice into list
+                    y.forward[i] = update[i].forward[i]  // Who y points to
+                    update[i].forward[i] = y  // Who points to y
+                this.listSize = this.listSize + 1
 
-  private void adjustHead(int newLevel) {
-    SkipNode temp = head;
-    head = new SkipNode(null, null, newLevel);
-    for (int i = 0; i <= level; i++) {
-      head.forward[i] = temp.forward[i];
-    }
-    level = newLevel;
-  }
-```
-
-```java
-    /** Insert a key, element pair into the skip list */
-    public void insert(K key, E elem) {
-        int newLevel = randomLevel(); // New node's level
-        if (newLevel > level) // If new node is deeper
-            adjustHead(newLevel); // adjust the header
-        // Track end of level
-        SkipNode<K, E>[] update = new SkipNode[level + 1];
-        SkipNode<K, E> x = head; // Start at header node
-        for (int i = level; i >= 0; i--) { // Find insert position
-            while ((x.forward[i] != null) && (x.forward[i].key().compareTo(key) < 0))
-                x = x.forward[i];
-            update[i] = x; // Track end at level i
-        }
-        x = new SkipNode<K, E>(key, elem, newLevel);
-        for (int i = 0; i <= newLevel; i++) { // Splice into list
-            x.forward[i] = update[i].forward[i]; // Who x points to
-            update[i].forward[i] = x; // Who points to x
-        }
-        size++; // Increment dictionary size
-    }
-
-    private void adjustHead(int newLevel) {
-        SkipNode<K, E> temp = head;
-        head = new SkipNode<K, E>(null, null, newLevel);
-        for (int i = 0; i <= level; i++)
-            head.forward[i] = temp.forward[i];
-        level = newLevel;
-    }
-```
-
+        adjustHead(newLevel):
+            temp = this.head
+            this.head = new SkipNode(null, null, newLevel)
+            for i in 0 to this.level:
+                this.head.forward[i] = temp.forward[i]
+            this.level = newLevel
 
 
 <inlineav id="SkipListInsertCON" src="SearchStruct/SkipListInsertCON.js" script="DataStructures/SkipList.js" name="SearchStruct/SkipListInsertCON" links="DataStructures/SkipList.css SearchStruct/SkipListInsertCON.css"/>

@@ -8,26 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Analysis of Open Addressing</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -93,26 +79,31 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="8-hashing.html" accesskey="u" rel="up">Hashing</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="8.7-improved-collision-resolution.html" class="navbutton">&lt;&lt;</a>
+<a href="8.7-improved-collision-resolution.html" accesskey="p" rel="previous">Improved Collision Resolution</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="8.9-open-addressing-deletion.html" accesskey="n" rel="next">Open Addressing, Deletion</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="8.7-improved-collision-resolution.html" accesskey="p" rel="previous">Improved Collision Resolution</a>
-</span>
+<div>
+<a href="8.9-open-addressing-deletion.html" accesskey="n" rel="next">Open Addressing, Deletion</a>
+<a href="8.9-open-addressing-deletion.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="analysis-of-open-addressing" class="level2"
 data-number="8.8">
 <h2 data-number="8.8"><span class="header-section-number">8.8</span>
@@ -142,7 +133,9 @@ searched for along its probe sequence. As the table fills up, more and
 more records are likely to be located ever further from their home
 positions.</p>
 <p>From this discussion, we see that the expected cost of hashing is a
-function of how full the table is. Define the <a href="10-glossary.html#load-factor" class="term">load
+function of how full the table is. Define the <a
+href="10-glossary.html#load-factor" class="term"
+title="In hashing this is the fraction of the hash table slots that contain a record. Hash systems usually try to keep the load factor below 50%.">load
 factor</a> for the table as
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>=</mo><mi>N</mi><mi>/</mi><mi>M</mi></mrow><annotation encoding="application/x-tex">\alpha = N/M</annotation></semantics></math>,
 where
@@ -202,9 +195,12 @@ for insertions or unsuccessful searches and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>+</mo><mn>1</mn><mi>/</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>α</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\frac{1}{2}(1 + 1/(1-\alpha))</annotation></semantics></math>
 for deletions or successful searches.</p>
 <div id="HashPlot">
-<div class="odsafig" width="400" data-align="center"
-data-capalign="justify" data-figwidth="90%" alt="Hashing analysis plot">
-<p>Images/hashplot.png</p>
+<div class="figure">
+<figure>
+<img src="images/hashplot.png" width="400"
+alt="Hashing analysis plot" />
+<figcaption aria-hidden="true">Hashing analysis plot</figcaption>
+</figure>
 <p>A plot showing the growth rate of the cost for insertion and deletion
 into a hash table as the load factor increases.</p>
 </div>
@@ -250,5 +246,21 @@ Your browser does not support iframes.
 </div>
 </p>
 </section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="8.7-improved-collision-resolution.html" class="navbutton">&lt;&lt;</a>
+<a href="8.7-improved-collision-resolution.html" accesskey="p" rel="previous">Improved Collision Resolution</a>
+</div>
+<div class="navlink">
+<a href="8.9-open-addressing-deletion.html" accesskey="n" rel="next">Open Addressing, Deletion</a>
+<a href="8.9-open-addressing-deletion.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 </body>
 </html>
+

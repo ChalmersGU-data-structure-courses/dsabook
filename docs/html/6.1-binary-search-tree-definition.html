@@ -8,93 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Binary Search Tree Definition</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        background-color: #ffffff;
-        color: #a0a0a0;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
-    div.sourceCode
-      { color: #1f1c1b; background-color: #ffffff; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #1f1c1b; } /* Normal */
-    code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
-    code span.an { color: #ca60ca; } /* Annotation */
-    code span.at { color: #0057ae; } /* Attribute */
-    code span.bn { color: #b08000; } /* BaseN */
-    code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
-    code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #924c9d; } /* Char */
-    code span.cn { color: #aa5500; } /* Constant */
-    code span.co { color: #898887; } /* Comment */
-    code span.cv { color: #0095ff; } /* CommentVar */
-    code span.do { color: #607880; } /* Documentation */
-    code span.dt { color: #0057ae; } /* DataType */
-    code span.dv { color: #b08000; } /* DecVal */
-    code span.er { color: #bf0303; text-decoration: underline; } /* Error */
-    code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
-    code span.fl { color: #b08000; } /* Float */
-    code span.fu { color: #644a9b; } /* Function */
-    code span.im { color: #ff5500; } /* Import */
-    code span.in { color: #b08000; } /* Information */
-    code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
-    code span.op { color: #1f1c1b; } /* Operator */
-    code span.ot { color: #006e28; } /* Other */
-    code span.pp { color: #006e28; } /* Preprocessor */
-    code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
-    code span.sc { color: #3daee9; } /* SpecialChar */
-    code span.ss { color: #ff5500; } /* SpecialString */
-    code span.st { color: #bf0303; } /* String */
-    code span.va { color: #0057ae; } /* Variable */
-    code span.vs { color: #bf0303; } /* VerbatimString */
-    code span.wa { color: #bf0303; } /* Warning */
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -160,34 +79,53 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 <link href="../interactive/Binary/BSTShapeCON.css" rel="stylesheet" type="text/css"/>
 <link href="../interactive/Binary/BSTCON.css" rel="stylesheet" type="text/css"/>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="6-binary-search-trees.html" accesskey="u" rel="up">Binary Search Trees</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="6-binary-search-trees.html" class="navbutton">&lt;&lt;</a>
+<a href="6-binary-search-trees.html" accesskey="p" rel="previous">Binary Search Trees</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="6.2-binary-tree-guided-information-flow.html" accesskey="n" rel="next">Binary Tree Guided Information Flow</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="6-binary-search-trees.html" accesskey="p" rel="previous">Binary Search Trees</a>
-</span>
+<div>
+<a href="6.2-binary-tree-guided-information-flow.html" accesskey="n" rel="next">Binary Tree Guided Information Flow</a>
+<a href="6.2-binary-tree-guided-information-flow.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="binary-search-tree-definition" class="level2"
 data-number="6.1">
 <h2 data-number="6.1"><span class="header-section-number">6.1</span>
 Binary Search Tree Definition</h2>
-<p>A <a href="10-glossary.html#binary-search-tree" class="term">binary search tree</a> (<a href="10-glossary.html#bst" class="term">BST</a>) is a <a href="10-glossary.html#binary-tree" class="term">binary tree</a> that
-conforms to the following condition, known as the <a href="10-glossary.html#binary-search-tree-property" class="term">binary search tree property</a>. All <a href="10-glossary.html#node" class="term">nodes</a> stored in the left subtree of a node whose <a href="10-glossary.html#key" class="term">key</a> value is
+<p>A <a href="10-glossary.html#binary-search-tree" class="term"
+title="A binary tree that imposes the following constraint on its node values: The search key value for any node $A$ must be greater than the (key) values for all nodes in the left subtree of $A$, and less than the key values for all nodes in the right subtree of $A$. Some convention must be adopted if multiple nodes with the same key value are permitted, typically these are required to be in the right subtree.">binary
+search tree</a> (<a href="10-glossary.html#bst" class="term"
+title="A binary tree that imposes the following constraint on its node values: The search key value for any node $A$ must be greater than the (key) values for all nodes in the left subtree of $A$, and less than the key values for all nodes in the right subtree of $A$. Some convention must be adopted if multiple nodes with the same key value are permitted, typically these are required to be in the right subtree.">BST</a>)
+is a <a href="10-glossary.html#binary-tree" class="term"
+title="A finite set of nodes which is either empty, or else has a root node together two binary trees, called the left and right subtrees, which are disjoint from each other and from the root.">binary
+tree</a> that conforms to the following condition, known as the <a
+href="10-glossary.html#binary-search-tree-property" class="term"
+title="The defining relationship between the key values for nodes in a BST. All nodes stored in the left subtree of a node whose key value is $K$ have key values less than or equal to $K$. All nodes stored in the right subtree of a node whose key value is $K$ have key values greater than $K$.">binary
+search tree property</a>. All <a href="10-glossary.html#node"
+class="term"
+title="The objects that make up a linked structure such as a linked list or binary tree. Typically, nodes are allocated using dynamic memory allocation. In graph terminology, the nodes are more commonly called vertices.">nodes</a>
+stored in the left subtree of a node whose <a
+href="10-glossary.html#key" class="term"
+title="A field or part of a larger record used to represent that record for the purpose of searching or comparing. Another term for search key.">key</a>
+value is
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>K</mi><annotation encoding="application/x-tex">K</annotation></semantics></math>
 have key values less than or equal to
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>K</mi><annotation encoding="application/x-tex">K</annotation></semantics></math>.
@@ -198,8 +136,11 @@ have key values greater than
 <a href="6.1-binary-search-tree-definition.html#BSTShape">Figure
 #BSTShape</a> shows two BSTs for a collection of values. One consequence
 of the binary search tree property is that if the BST nodes are printed
-using an <a href="10-glossary.html#inorder-traversal" class="term">inorder traversal</a>, then the resulting
-enumeration will be in sorted order from lowest to highest.</p>
+using an <a href="5.5-binary-tree-traversals.html#inorder-traversal"
+class="term"
+title="In a binary tree, a traversal that first recursively visits the left child, then visits the root, and then recursively visits the right child. In a binary search tree, this traversal will enumerate the nodes in sorted order.">inorder
+traversal</a>, then the resulting enumeration will be in sorted order
+from lowest to highest.</p>
 <div id="BSTShape">
 <p>
 <div id="BSTShapeCON" class="ssAV" data-short-name="BSTShapeCON" data-long-name="Binary/BSTShapeCON" alt="Binary/BSTShapeCON" tabIndex="-1">
@@ -211,17 +152,19 @@ if values are inserted in the order 37, 24, 42, 7, 2, 40, 42, 32, 120.
 Tree (b) results if the same values are inserted in the order 120, 42,
 42, 7, 2, 32, 37, 24, 40.</p>
 </div>
-<p>Here is a class declaration for the BST:</p>
+<p>Here is a class declaration for the BST Map:</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BSTMap:</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    root : Node <span class="op">=</span> <span class="va">None</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    treeSize : <span class="bu">int</span> <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Node:</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    key   : Key</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    value : Value</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    left  : Node</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    right : Node</span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BSTMap <span class="kw">implements</span> <span class="bu">Map</span>:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    BSTMap():</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.root <span class="op">=</span> <span class="va">null</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.treeSize <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BSTNode:</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    BSTNode(key, value):</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.key <span class="op">=</span> key      <span class="co">// the key that are used for looking up values</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.value <span class="op">=</span> value  <span class="co">// the value associated with the key</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.left <span class="op">=</span> <span class="va">null</span>    <span class="co">// the left subtree, initially null</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.right <span class="op">=</span> <span class="va">null</span>   <span class="co">// the right subtree, initially null</span></span></code></pre></div>
 <section id="bst-search" class="level3" data-number="6.1.1">
 <h3 data-number="6.1.1"><span class="header-section-number">6.1.1</span>
 BST Search</h3>
@@ -236,19 +179,19 @@ of a subtree and the search key. Member <code>getHelper</code> has the
 desired form for this recursive subroutine and is implemented as
 follows.</p>
 <div class="sourceCode" id="cb2"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BSTMap:</span>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BSTMap <span class="kw">implements</span> <span class="bu">Map</span>:</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get(key):</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> getHelper(this.root, key)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">get</span>(key):</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> getHelper(<span class="va">this</span>.root, key)</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> getHelper(node, key):</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> node <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">None</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> node.key <span class="op">&gt;</span> key:</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    getHelper(node, key):</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> node <span class="kw">is</span> <span class="va">null</span>:</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">null</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> key <span class="op">&lt;</span> node.key:</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> getHelper(node.left, key)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> node.key <span class="op">&lt;</span> key:</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> key <span class="op">&gt;</span> node.key:</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> getHelper(node.right, key)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>: <span class="co"># node.key == key</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>: <span class="co">// key == node.key</span></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> node.value</span></code></pre></div>
 <p>
 <div id="BSTsearchCON" class="ssAV" data-short-name="BSTsearchCON" data-long-name="BST Search Slideshow" alt="BST Search Slideshow" tabIndex="-1">
@@ -271,26 +214,23 @@ Your browser does not support iframes.
 BST Insert</h3>
 <p>Now we look at how to insert a new node into the BST.</p>
 <div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BSTMap:</span>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BSTMap <span class="kw">implements</span> <span class="bu">Map</span>:</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> put(key, value):</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        [newRoot, oldValue] <span class="op">=</span> putHelper(this.root, key, value)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> oldValue <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            this.treeSize <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        this.root <span class="op">=</span> newRoot</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> oldValue</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> putHelper(node, key, value):</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> node <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> [Node(key, value, <span class="va">None</span>, <span class="va">None</span>), <span class="va">None</span>]</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> node.key <span class="op">&gt;</span> key:</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>            [node.left, oldValue] <span class="op">=</span> putHelper(node.left, key, value)</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> node.key <span class="op">&lt;</span> key:</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>            [node.right, oldValue] <span class="op">=</span> putHelper(node.right, key, value)</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>: <span class="co"># node.key == key</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>            oldValue <span class="op">=</span> node.value</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>            node.value <span class="op">=</span> value</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [node, oldValue]</span></code></pre></div>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">put</span>(key, value):</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.root <span class="op">=</span> <span class="va">this</span>.putHelper(<span class="va">this</span>.root, key, value)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    putHelper(node, key, value):</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Helper method for &#39;put&#39;, returns the updated node.</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> node <span class="kw">is</span> <span class="va">null</span>:</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>            <span class="va">this</span>.treeSize <span class="op">=</span> <span class="va">this</span>.treeSize <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="kw">new</span> BSTNode(key, value)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> key <span class="op">&lt;</span> node.key:</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>            node.left <span class="op">=</span> <span class="va">this</span>.putHelper(node.left, key, value)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> key <span class="op">&gt;</span> node.key:</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>            node.right <span class="op">=</span> <span class="va">this</span>.putHelper(node.right, key, value)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>: <span class="co">// key == node.key</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>            node.value <span class="op">=</span> value</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> node</span></code></pre></div>
 <p>
 <div id="BSTinsertCON" class="ssAV" data-short-name="BSTinsertCON" data-long-name="BST Insert Slideshow" alt="BST Insert Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
@@ -342,10 +282,12 @@ individually. Before tackling the general node removal process, we need
 a useful companion method, <code>largestNode</code>, which returns a
 pointer to the node containing the maximum value in the subtree.</p>
 <div class="sourceCode" id="cb4"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> largestNode(node):</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> node.right <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>            node <span class="op">=</span> node.right</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> node</span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BSTMap <span class="kw">implements</span> <span class="bu">Map</span>:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    largestNode(node):</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> node.right <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span>:</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>            node <span class="op">=</span> node.right</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> node</span></code></pre></div>
 <p>Now we are ready for the <code>removeHelper</code> method. Removing a
 node with given key value
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
@@ -410,39 +352,45 @@ tree with equal values to the right of the node now containing
 Selecting the greatest value from the left subtree does not have a
 similar problem, because it does not violate the Binary Search Tree
 Property if equal values appear in the left subtree.</p>
+<aside id="footnotes" class="footnotes footnotes-end-of-block"
+role="doc-footnote">
+<ol>
+<li id="fn1"><p>Alternatively, if we prefer to store duplicate values in
+the right subtree, then we must replace a deleted node with the least
+value from its right subtree.<a href="#fnref1" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+</ol>
+</aside>
 <p>The code for removal is shown here.</p>
 <div class="sourceCode" id="cb5"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BSTMap:</span>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BSTMap:</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> remove(key):</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        this.root, oldValue <span class="op">=</span> removeHelper(this.root, key)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> oldValue <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>            this.treeSize <span class="op">-=</span> <span class="dv">1</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> oldValue</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> removeHelper(node, key):</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        <span class="co">&quot;&quot;&quot;Helper method for &#39;remove&#39;.</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">        Returns the updated node, and the value previously associated with the key.&quot;&quot;&quot;</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> node <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> [<span class="va">None</span>, <span class="va">None</span>]</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> node.key <span class="op">&gt;</span> key:</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>            [node.left, oldValue] <span class="op">=</span> BSTMap.removeHelper(node.left, key)</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> [node, oldValue]</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> node.key <span class="op">&lt;</span> key:</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>            [node.right, oldValue] <span class="op">=</span> BSTMap.removeHelper(node.right, key)</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> [node, oldValue]</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>: <span class="co"># node.key == key</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> node.left <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> [node.right, node.value]</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span> <span class="cf">if</span> node.right <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> [node.left, node.value]</span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>                predecessor <span class="op">=</span> largestNode(node.left)</span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>                oldValue <span class="op">=</span> node.value</span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>                node.key <span class="op">=</span> predecessor.key</span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>                node.value <span class="op">=</span> predecessor.value</span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>                [node.left, _] <span class="op">=</span> removeHelper(node.left, predecessor.key)</span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> [node, oldValue]</span></code></pre></div>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">remove</span>(key):</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.root <span class="op">=</span> removeHelper(<span class="va">this</span>.root, key)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    removeHelper(node, key):</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Helper method for &#39;remove&#39;, returns the updated node.</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> node <span class="kw">is</span> <span class="va">null</span>:</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">null</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> key <span class="op">&lt;</span> node.key:</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>            node.left <span class="op">=</span> <span class="va">this</span>.removeHelper(node.left, key)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> node</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> key <span class="op">&gt;</span> node.key:</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>            node.right <span class="op">=</span> <span class="va">this</span>.removeHelper(node.right, key)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> node</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>: <span class="co">// key == node.key</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> node.left <span class="kw">is</span> <span class="va">null</span>:</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>                <span class="va">this</span>.treeSize <span class="op">=</span> <span class="va">this</span>.treeSize <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> node.right</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span> <span class="cf">if</span> node.right <span class="kw">is</span> <span class="va">null</span>:</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>                <span class="va">this</span>.treeSize <span class="op">=</span> <span class="va">this</span>.treeSize <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> node.left</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>                predecessor <span class="op">=</span> <span class="va">this</span>.largestNode(node.left)</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>                node.key <span class="op">=</span> predecessor.key</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>                node.value <span class="op">=</span> predecessor.value</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>                node.left <span class="op">=</span> <span class="va">this</span>.removeHelper(node.left, predecessor.key)</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> node</span></code></pre></div>
 <p>
 <div id="BSTremovePRO" class="embedContainer">
 <iframe id="BSTremovePRO_iframe" aria-label="BSTremovePRO" src="../interactive/Binary/BSTremovePRO.html" width="100%" height="600" scrolling="no">
@@ -460,8 +408,11 @@ depth of the node found or inserted. The cost for
 the case when this node has two children, the depth of the node with
 smallest value in its right subtree. Thus, in the worst case, the cost
 for any one of these operations is the depth of the deepest node in the
-tree. This is why it is desirable to keep BSTs <a href="10-glossary.html#balanced-tree" class="term">balanced</a>, that is, with least possible height. If a
-binary tree is balanced, then the height for a tree of
+tree. This is why it is desirable to keep BSTs <a
+href="10-glossary.html#balanced-tree" class="term"
+title="A tree where the subtrees meet some criteria for being balanced. Two possibilities are that the tree is height balanced, or that the tree has a roughly equal number of nodes in each subtree.">balanced</a>,
+that is, with least possible height. If a binary tree is balanced, then
+the height for a tree of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
 nodes is approximately
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>log</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n</annotation></semantics></math>.
@@ -497,11 +448,11 @@ and each child pointer is followed exactly once.</p>
 performs an inorder traversal on the BST to print the node keys, in
 sorted order.</p>
 <div class="sourceCode" id="cb6"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> printHelper(node):</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> node <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>: </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>            print_helper(node.left)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(node.key)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>            printHelper(node.right)</span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> printHelper(node):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> node <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span>: </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        printHelper(node.left)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(node.key)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        printHelper(node.right)</span></code></pre></div>
 <p>While the BST is simple to implement and efficient when the tree is
 balanced, the possibility of its being unbalanced is a serious
 liability. There are techniques for organizing a BST to guarantee good
@@ -509,7 +460,9 @@ performance. Two examples are the <a
 href="6.4-the-avl-tree.html#the-avl-tree">AVL tree</a> and the <a
 href="6.6-the-splay-tree-optional.html#the-splay-tree-optional">splay
 tree</a>. There also exist other types of search trees that are
-guaranteed to remain balanced, such as the <a href="10-glossary.html#2-3-tree" class="term">2-3
+guaranteed to remain balanced, such as the <a
+href="10-glossary.html#2-3-tree" class="term"
+title="A specialized form of the B-tree where each internal node has either 2 children or 3 children. Key values are ordered to maintain the binary search tree property. The 2-3 tree is always height balanced, and its insert, search, and remove operations all have $\Theta(\log n)$ cost.">2-3
 Tree</a>.</p>
 <p>
 <div id="BSTSumm" class="embedContainer">
@@ -520,19 +473,25 @@ Your browser does not support iframes.
 </p>
 </section>
 </section>
-<section id="footnotes" class="footnotes footnotes-end-of-document"
-role="doc-endnotes">
-<hr />
-<ol>
-<li id="fn1"><p>Alternatively, if we prefer to store duplicate values in
-the right subtree, then we must replace a deleted node with the least
-value from its right subtree.<a href="#fnref1" class="footnote-back"
-role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="6-binary-search-trees.html" class="navbutton">&lt;&lt;</a>
+<a href="6-binary-search-trees.html" accesskey="p" rel="previous">Binary Search Trees</a>
+</div>
+<div class="navlink">
+<a href="6.2-binary-tree-guided-information-flow.html" accesskey="n" rel="next">Binary Tree Guided Information Flow</a>
+<a href="6.2-binary-tree-guided-information-flow.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 <script type="text/javascript" src="../interactive/Binary/BSTShapeCON.js"></script>
 <script type="text/javascript" src="../interactive/Binary/BSTsearchCON.js"></script>
 <script type="text/javascript" src="../interactive/Binary/BSTinsertCON.js"></script>
 <script type="text/javascript" src="../interactive/Binary/BSTremoveCON.js"></script>
 </body>
 </html>
+

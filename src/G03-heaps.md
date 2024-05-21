@@ -25,18 +25,15 @@ unbalanced, leading to bad performance. Instead, we would like to find a
 data structure that is guaranteed to have good performance for this
 special application.
 
-This section presents the [heap]{.term}[^G03a] data
-structure. A heap is defined by two properties. First, it is a complete
+This section presents the [binary heap]{.term} data structure. 
+A heap is defined by two properties. First, it is a complete
 binary tree, so heaps are nearly always implemented using the
-[array representation for complete binary trees](#array-implementation-for-complete-binary-trees).
+[array representation for complete binary trees].
 Second, the values stored in a heap are
 [partially ordered](#partial-order){.term}. This
 means that there is a relationship between the value stored at any node
 and the values of its children. There are two variants of the heap,
 depending on the definition of this relationship.
-
-[^G03a]: Note that the term "heap" is also sometimes used to refer to
-    [free store]{.term}.
 
 A [max heap]{.term} has the property that every
 node stores a value that is *greater* than or equal to the value of
@@ -63,8 +60,8 @@ the "right". In contrast, a heap implements a partial order. Given
 their positions, we can determine the relative order for the key values
 of two nodes in the heap *only* if one is a descendant of the other.
 
-Min heaps and max heaps both have their uses. For example, the Heapsort
-uses the max heap, while the Replacement Selection algorithm used for
+Min heaps and max heaps both have their uses. For example, the [Heapsort]{.term} algorithm
+uses the max heap, while the [Replacement Selection]{.term} algorithm used for
 external sorting uses a min heap. The examples in the rest of this
 section will sometimes use a min and sometimes a max heap.
 
@@ -74,326 +71,105 @@ tree. The two are not synonymous because the logical view of the heap is
 actually a tree structure, while the typical physical implementation
 uses an array.
 
-Here is an implementation for min heaps. The class uses records that
-support the Comparable interface to provide flexibility.
+Here is an implementation for min heaps. It uses a 
+[dynamic array list](#dynamic-array-based-lists)
+that will resize automatically when the number of elements change.
 
-```python
-class MinHeap(PriorityQueue):
-     # The heap array.
-     # Note that we use Python's internal lists, which are dynamic,
-     # so we don't have to implement resizing.
-    _heap : list
+    class MinHeap implements PriorityQueue:
+        MinHeap():
+            this.heap = new DynamicArrayList()
 
-    # Constructor supporting preloading of heap contents
-    def __init__(self, h = None):
-        if h is None:
-            self._heap = []
-        else:
-            self._heap = list(h) # Make a copy of h
-        self._buildHeap()
+        getMin():
+            // Returns the minimum element, without removing it.
+            precondition: this.heap.size() > 0
+            return this.heap[0]
 
-    def isEmpty(self):
-        """Return true if there are no elements."""
-        return self.size() == 0
+        add(elem):
+            // Adds an element to the priority queue.
+            i = this.heap.size()
+            this.heap.add(i, elem)  // Add the element at end of the heap.
+            this.siftUp(i)          // Put it in its correct place.
 
-    def size(self):
-        """Return current size of the heap."""
-        return len(self._heap)
+        removeMin():
+            // Removes and returns the minimum element.
+            precondition: this.heap.size() > 0
+            removed = this.heap[0]
+            i = this.heap.size() - 1
+            last = this.heap.remove(i)  // Find and remove the last element.
+            if this.heap.size() > 0:
+                this.heap[0] = last     // Replace the root with the last element.
+                this.siftDown(0)        // Put the new root in its correct place.
+            return removed
 
-    def getMin(self):
-        """Return smallest item into heap."""
-        if self.size() == 0: raise IndexError("getMin from empty heap")
-        return self._heap[0]
+        siftDown(pos):
+            // Sift a value down the tree, return its new position.
+            heapSize = this.heap.size()
+            while not this.isLeaf(pos):
+                child = this.getLeftChild(pos)
+                right = child + 1   // or: this.getRightChild(pos)
+                if right < heapSize and this.heap[right] < this.heap[child]:
+                    child = right   // 'child' is now the index of the child with smaller value
+                if this.heap[child] >= this.heap[pos]:
+                    return pos
+                this.swap(pos, child)
+                pos = child   // Move down one level in the tree.
+            return pos
 
-    def add(self, elem):
-        """Insert elem into heap."""
-        self._heap.append(elem)            # New item starts at end of heap.
-        self._siftUp(len(self._heap) - 1)  # Put the new value in its correct place.
+        siftUp(pos):
+            // Sift a value up the tree, return its new position.
+            while pos > 0:
+                parent = this.getParent(pos)
+                if this.heap[pos] >= this.heap[parent]:
+                    return pos
+                this.swap(pos, parent)
+                pos = parent   // Move up one level in the tree.
+            return pos
 
-    def removeMin(self):
-        """Remove and return minimum value."""
-        if len(self._heap) == 0: raise IndexError("removeMin from empty heap")
-        removed = self._heap[0]
-        last = self._heap.pop()     # Find and remove last element
-        if len(self._heap) > 0:
-            self._heap[0] = last    # Replace root with last element
-            self._siftDown(0)       # Put the new root in its correct place.
-        return removed
+        isLeaf(pos):
+            // Return true if pos is a leaf position.
+            return pos >= this.heap.size() / 2
 
-    def __str__(self):
-        return str(self._heap)
+        getLeftChild(pos):
+            // Return the position for the left child of the given node.
+            return 2 * pos + 1
 
-    def __repr__(self):
-        return repr(self._heap)
+        getRightChild(pos):
+            // Return the position for the right child of the given node.
+            return 2 * pos + 2
 
-    def __iter__(self):
-        return iter(self._heap)
+        getParent(pos):
+            // Return the position for the parent. Returns 0 if we're already at the root.
+            return int((pos - 1) / 2)
 
-    # Private helper methods
-
-# /* *** ODSATag: invariant *** */
-    def _checkInvariant(self):
-        """Check that the invariant holds."""
-
-        heapSize = len(self._heap)
-        for i in range(heapSize):
-            left = self._getLeftChild(i)
-            right = self._getRightChild(i)
-            if left < heapSize and self._lessThan(left, i):
-                raise AssertionError("Parent (" + i + ") is smaller than its left child: " + self._heap[i] + " < " + self._heap[left]);
-            if right < heapSize and self._lessThan(right, i):
-                raise AssertionError("Parent (" + i + ") is smaller than its right child: " + self._heap[i] + " < " + self._heap[right]);
-# /* *** ODSAendTag: invariant *** */
-
-    def _isLeaf(self, pos):
-        """Return true if pos is a leaf position, false otherwise."""
-        return pos >= len(self._heap) // 2
-
-    def _getLeftChild(self, pos):
-        """Return the position for the left child of the given node."""
-        return 2*pos+1
-
-    def _getRightChild(self, pos):
-        """Return the position for the right child of the given node."""
-        return 2*pos+2
-
-    def _getParent(self, pos):
-        """Return the position for the parent. Returns 0 if we're already at the root."""
-        return (pos-1) // 2
-
-    def _swap(self, pos1, pos2):
-        """Swap the values in two positions."""
-        self._heap[pos1], self._heap[pos2] = self._heap[pos2], self._heap[pos1]
-
-    def _buildHeap(self):
-        """Heapify the contents of an array."""
-        heapSize = len(self._heap)
-        # Loop from heapSize/2-1 down to 0
-        for pos in reversed(range(heapSize//2)):
-            self._siftDown(pos)
-
-    def _siftDown(self, pos):
-        """Sift a value down the tree, return its new position."""
-        heapSize = len(self._heap)
-        while not self._isLeaf(pos):
-            child = self._getLeftChild(pos)
-            right = child + 1   # or: self._getRightChild(pos)
-            if right < heapSize and self._lessThan(right, child):
-                child = right   # 'child' is now the index of the child with smaller value
-            if not self._lessThan(child, pos):
-                return pos
-            self._swap(pos, child)
-            pos = child   # Move down one level in the tree.
-
-        return pos
-
-    def _siftUp(self, pos):
-        """Sift a value up the tree, return its new position."""
-        while pos > 0:
-            parent = self._getParent(pos)
-            if not self._lessThan(pos, parent):
-                return pos
-            self._swap(pos, parent)
-            pos = parent   # Move up one level in the tree.
-        return pos
-
-    def _lessThan(self, i, j):
-        # Compare the values in the given positions.
-        return self._heap[i] < self._heap[j]
-```
-
-```java
-// Min-heap implementation
-class MinHeap<E extends Comparable<E>> implements PriorityQueue<E> {
-    private E[] heap;       // The heap array
-    private int heapSize;   // Size of heap, and index of the next free slot
-
-    static int MinCapacity = 8;               // Minimum capacity of heap
-    static double MinLoadFactor = 0.5;        // Must be smaller than 1/CapacityMultiplier
-    static double CapacityMultiplier = 1.5;   // Factor to grow/shrink the capacity
-
-    // Constructor supporting preloading of heap contents
-    @SuppressWarnings("unchecked")
-    MinHeap() {
-        heap = (E[]) new Comparable[MinCapacity];
-        heapSize = 0;
-    }
-
-    MinHeap(E[] h) {
-        heap = Arrays.copyOf(h, h.length);
-        heapSize = heap.length;
-        buildHeap();
-        if (heapSize < MinCapacity)
-            resizeHeap(MinCapacity);
-    }
-
-    // Return true if there are no elements.
-    public boolean isEmpty() {
-        return heapSize == 0;
-    }
-
-    // Return current size of the heap
-    public int size() {
-        return heapSize;
-    }
-
-    public E getMin() {
-        if (!(heapSize > 0)) throw new NoSuchElementException("getMin from empty heap");
-        return heap[0];
-    }
-
-    // Insert val into heap
-    public void add(E elem) {
-        if (heapSize >= heap.length)
-            resizeHeap((int) (heap.length * CapacityMultiplier));
-        heap[heapSize] = elem;  // Start at end of heap.
-        siftUp(heapSize);       // Put the new value in its correct place.
-        heapSize++;
-    }
-
-    // Remove and return minimum value
-    public E removeMin() {
-        if (!(heapSize > 0)) throw new NoSuchElementException("removeMin from empty heap");
-        E removed = heap[0];
-        heapSize--;
-        swap(0, heapSize);  // Swap the root with the current last value.
-        if (heapSize > 0) 
-            siftDown(0);    // Put the new heap root val in its correct place.
-        if (heapSize <= heap.length * MinLoadFactor)
-            resizeHeap((int) (heap.length / CapacityMultiplier));
-        heap[heapSize] = null;   // Remove the old root value, for garbage collection.
-        return removed;
-    }
-
-    public String toString() {
-        return Arrays.toString(heap).replace("null", "-") + heapSize;
-    }
-
-    public Iterator<E> iterator() {
-        return null;
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////
-    // Private helper methods
-
-/* *** ODSATag: invariant *** */
-    // Check that the invariant holds.
-    void checkInvariant() {
-        for (int i = 0; i < heapSize; i++) {
-            int left = getLeftChild(i);
-            int right = getRightChild(i);
-            if (left < heapSize && lessThan(left, i))
-                throw new AssertionError("Parent (" + i + ") is smaller than its left child: " + heap[i] + " < " + heap[left]);
-            if (right < heapSize && lessThan(right, i))
-                throw new AssertionError("Parent (" + i + ") is smaller than its right child: " + heap[i] + " < " + heap[right]);
-        }
-    }
-/* *** ODSAendTag: invariant *** */
-
-/* *** ODSATag: resize *** */
-    private void resizeHeap(int newCapacity) {
-        if (newCapacity < MinCapacity) return;
-        @SuppressWarnings("unchecked")
-        E[] newHeap = (E[]) new Comparable[newCapacity];
-        for (int i = 0; i < heapSize; i++)
-            newHeap[i] = heap[i];
-        heap = newHeap;
-    }
-/* *** ODSAendTag: resize *** */
-
-    // Return true if pos is a leaf position, false otherwise.
-    private boolean isLeaf(int pos) {
-        return pos >= heapSize / 2;
-    }
-
-    // Return the position for the left child of the given node
-    private int getLeftChild(int pos) {
-        return 2 * pos + 1;
-    }
-
-    // Return the position for the right child of the given node
-    private int getRightChild(int pos) {
-        return 2 * pos + 2;
-    }
-
-    // Return the position for the parent. Returns 0 if we're already at the root.
-    private int getParent(int pos) {
-        return (pos - 1) / 2;
-    }
-
-    // Swap the values in two positions
-    private void swap(int pos1, int pos2) {
-        E tmp = heap[pos1];
-        heap[pos1] = heap[pos2];
-        heap[pos2] = tmp;
-    }
-
-    // Heapify the contents of an array
-    private void buildHeap() {
-        for (int pos = heapSize/2-1; pos >= 0; pos--)
-            siftDown(pos);
-    }
-
-    // Sift a value down the tree, return its new position.
-    private int siftDown(int pos) {
-        while (!isLeaf(pos)) {
-            int child = getLeftChild(pos);
-            int right = child + 1;   // or: getRightChild(pos)
-            if (right < heapSize && lessThan(right, child))
-                child = right;   // 'child' is now the index of the child with smaller value
-            if (!lessThan(child, pos))
-                return pos;
-            swap(pos, child);
-            pos = child;   // Move down one level in the tree.
-        }
-        return pos;
-    }
-
-    // Sift a value up the tree, return its new position.
-    private int siftUp(int pos) {
-        while (pos > 0) {
-            int parent = getParent(pos);
-            if (!lessThan(pos, parent))
-                return pos;
-            swap(pos, parent);
-            pos = parent;   // Move up one level in the tree.
-        }
-        return pos;
-    }
-
-    // Compare the values in the given positions.
-    private boolean lessThan(int i, int j) {
-        return heap[i].compareTo(heap[j]) < 0;
-    }
-}
-```
+        swap(pos1, pos2):
+            // Swap the values in two positions.
+            this.heap[pos1], this.heap[pos2] = this.heap[pos2], this.heap[pos1]
 
 
-
-> This class definition makes two concessions to the fact that an
-> array-based implementation is used. First, heap nodes are indicated by
-> their logical position within the heap rather than by a pointer to the
-> node. In practice, the logical heap position corresponds to the
-> identically numbered physical position in the array. Second, the
-> constructor takes as input a pointer to the array to be used. This
-> approach provides the greatest flexibility for using the heap because
-> all data values can be loaded into the array directly by the client.
-> The advantage of this comes during the heap construction phase, as
-> explained below. The constructor also takes an integer parameter
-> indicating the initial size of the heap (based on the number of
-> elements initially loaded into the array) and a second integer
-> parameter indicating the maximum size allowed for the heap (the size
-> of the array).
+This class definition makes two concessions to the fact that an
+array-based implementation is used. First, heap nodes are indicated by
+their logical position within the heap rather than by a pointer to the
+node. In practice, the logical heap position corresponds to the
+identically numbered physical position in the array. Second, the
+constructor takes as input a pointer to the array to be used. This
+approach provides the greatest flexibility for using the heap because
+all data values can be loaded into the array directly by the client.
+The advantage of this comes during the heap construction phase, as
+explained below. The constructor also takes an integer parameter
+indicating the initial size of the heap (based on the number of
+elements initially loaded into the array) and a second integer
+parameter indicating the maximum size allowed for the heap (the size
+of the array).
 
 The class contains some private auxiliary methods that are use when
 adding and removing elements from the heap: `isLeaf(pos)` returns `true`
-if position `pos` is a leaf in the tree, and `false` otherwise. Members
+if position `pos` is a leaf in the tree, and `false` otherwise. Methods
 `getLeftChild`, `getRightChild`, and `getParent` return the position
 (actually, the array index) for the left child, right child, and parent
 of the position passed, respectively.
 
-One way to build a heap is to insert the elements one at a time. Method
-`add` will insert a new element $V$ into the heap.
+One way to build a heap is to insert the elements one at a time. 
+Method `add` will insert a new element $V$ into the heap.
 
 <inlineav id="heapinsertCON" src="Binary/heapinsertCON.js" script="DataStructures/binaryheap.js" name="Heap insert Slideshow"/>
 
@@ -456,7 +232,7 @@ subtrees of the root are already heaps, and $R$ is the name of the
 element at the root. This situation is illustrated by this figure:
 
 :::: {#HeapInduct}
-<inlineav id="HeapsIndCON" src="Binary/HeapsIndCON.js" name="Binary/HeapsIndCON" links="Binary/HeapsIndCON.css"/>
+<inlineav id="HeapsIndCON" src="Binary/HeapsIndCON.js" name="Binary/HeapsIndCON" links="Binary/HeapsIndCON.css" static/>
 
 Final stage in the heap-building algorithm. Both subtrees of node $R$
 are heaps. All that remains is to push $R$ down to its proper level in
@@ -479,7 +255,7 @@ private method `siftDown`.
 This approach assumes that the subtrees are already heaps, suggesting
 that a complete algorithm can be obtained by visiting the nodes in some
 order such that the children of a node are visited *before* the node
-itself. One simple way to do this is simply to work from the high index
+itthis. One simple way to do this is simply to work from the high index
 of the array to the low index. Actually, the build process need not
 visit the leaf nodes (they can never move down because they are already
 at the bottom), so the building algorithm can start in the middle of the
@@ -533,16 +309,16 @@ maximum element is $\Theta(\log n)$ in the average and worst cases.
 
 <inlineav id="heapremoveCON" src="Binary/heapremoveCON.js" script="DataStructures/binaryheap.js" name="Remove Any Slideshow"/>
 
-> For some applications, objects might get their priority modified. One
-> solution in this case is to remove the object and reinsert it. To do
-> this, the application needs to know the position of the object in the
-> heap. Another option is to change the priority value of the object,
-> and then update its position in the heap. Note that a remove operation
-> implicitly has to do this anyway, since when the last element in the
-> heap is swapped with the one being removed, that value might be either
-> too small or too big for its new position. So we use a utility method
-> called `update` in both the `remove` and `modify` methods to handle
-> this process.
+For some applications, objects might get their priority modified. One
+solution in this case is to remove the object and reinsert it. To do
+this, the application needs to know the position of the object in the
+heap. Another option is to change the priority value of the object,
+and then update its position in the heap. Note that a remove operation
+implicitly has to do this anyway, since when the last element in the
+heap is swapped with the one being removed, that value might be either
+too small or too big for its new position. So we use a utility method
+called `update` in both the `remove` and `modify` methods to handle
+this process.
 
 ### Binary Heaps as Priority Queues
 

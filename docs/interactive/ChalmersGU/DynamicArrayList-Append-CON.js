@@ -12,12 +12,12 @@ $(document).ready(function() {
   var av_name = "DynamicArrayList-Append-CON";
   var av = new JSAV(av_name);
   var pseudo = av.code([
-    "add(i:int, x:E)",
+    "add(i, x):",
     "    // Precondition: 0 <= i <= listSize",
     "    if listSize >= size of internalArray",
-    "        resizeArray(size of internalArray * CapacityMultiplier)",
-    "    listSize += 1",
-    "    for k in listSize-1, listSize-2, ..., i+1",
+    "        resizeArray(size of internalArray * 2)",
+    "    listSize = listSize + 1",
+    "    for k in listSize-1 downto i+1",
     "        internalArray[k] = internalArray[k-1]",
     "    internalArray[i] = x",
   ], {lineNumbers: false});

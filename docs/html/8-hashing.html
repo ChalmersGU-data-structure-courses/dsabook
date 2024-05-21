@@ -8,26 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Hashing</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -93,27 +79,32 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 <link href="../interactive/Hashing/hashIntroCON.css" rel="stylesheet" type="text/css"/>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="index.html" accesskey="u" rel="up">Data Structures and Algorithms</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="7.5-priority-queues-chapter-summary.html" class="navbutton">&lt;&lt;</a>
+<a href="7.5-priority-queues-chapter-summary.html" accesskey="p" rel="previous">Priority Queues Chapter Summary</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="8.1-hash-function-principles.html" accesskey="n" rel="next">Hash Function Principles</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="7.5-priority-queues-chapter-summary.html" accesskey="p" rel="previous">Priority Queues Chapter Summary</a>
-</span>
+<div>
+<a href="8.1-hash-function-principles.html" accesskey="n" rel="next">Hash Function Principles</a>
+<a href="8.1-hash-function-principles.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="hashing" class="level1" data-number="8">
 <h1 data-number="8"><span class="header-section-number">8</span>
 Hashing</h1>
@@ -132,17 +123,22 @@ cost required to do an operation on a binary search tree. However, even
 though hashing is based on a very simple idea, it is surprisingly
 difficult to implement properly. Designers need to pay careful attention
 to all of the details involved with implementing a hash system.</p>
-<p>A hash system stores records in an array called a <a href="10-glossary.html#hash-table" class="term">hash table</a>, which we will call <code>HT</code>.
-Hashing works by performing a computation on a search key <code>K</code>
-in a way that is intended to identify the position in <code>HT</code>
-that contains the record with key <code>K</code>. The function that does
-this calculation is called the <a href="10-glossary.html#hash-function" class="term">hash function</a>,
-and will be denoted by the letter <strong>h</strong>. Since hashing
-schemes place records in the table in whatever order satisfies the needs
-of the address calculation, records are not ordered by value. A position
-in the hash table is also known as a <a href="10-glossary.html#slot" class="term">slot</a>. The
-number of slots in hash table <code>HT</code> will be denoted by the
-variable
+<p>A hash system stores records in an array called a <a
+href="10-glossary.html#hash-table" class="term"
+title="The data structure (usually an array) that stores data records for lookup using hashing.">hash
+table</a>, which we will call <code>HT</code>. Hashing works by
+performing a computation on a search key <code>K</code> in a way that is
+intended to identify the position in <code>HT</code> that contains the
+record with key <code>K</code>. The function that does this calculation
+is called the <a href="10-glossary.html#hash-function" class="term"
+title="In a hash system, the function that converts a key value to a position in the hash table. The hope is that this position in the hash table contains the record that matches the key value.">hash
+function</a>, and will be denoted by the letter <strong>h</strong>.
+Since hashing schemes place records in the table in whatever order
+satisfies the needs of the address calculation, records are not ordered
+by value. A position in the hash table is also known as a <a
+href="10-glossary.html#slot" class="term"
+title="In hashing, a position in a hash table.">slot</a>. The number of
+slots in hash table <code>HT</code> will be denoted by the variable
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>
 with slots numbered from 0 to
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">M-1</annotation></semantics></math>.</p>
@@ -208,7 +204,9 @@ is a slot in the table, then we say that
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>1</mn></msub><annotation encoding="application/x-tex">k_1</annotation></semantics></math>
 and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>2</mn></msub><annotation encoding="application/x-tex">k_2</annotation></semantics></math>
-have a <a href="10-glossary.html#collision" class="term">collision</a> at slot
+have a <a href="10-glossary.html#collision" class="term"
+title="In a hash system, this refers to the case where two search keys are mapped by the hash function to the same slot in the hash table. This can happen on insertion or search when another record has already been hashed to that slot. In this case, a closed hash system will require a process known as collision resolution to find the location of the desired record.">collision</a>
+at slot
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>
 under hash function <strong>h</strong>.</p>
 <p>Finding a record with key value <code>K</code> in a database
@@ -219,9 +217,27 @@ organized by hashing follows a two-step procedure:</p>
 <li>Starting with slot
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐡</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>K</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathbf{h}(K)</annotation></semantics></math>,
 locate the record containing key <code>K</code> using (if necessary) a
-<a href="10-glossary.html#collision-resolution" class="term">collision resolution</a> policy.</li>
+<a href="8.6-open-addressing.html#collision-resolution" class="term"
+title="The outcome of a collision resolution policy.">collision
+resolution</a> policy.</li>
 </ol>
 </section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="7.5-priority-queues-chapter-summary.html" class="navbutton">&lt;&lt;</a>
+<a href="7.5-priority-queues-chapter-summary.html" accesskey="p" rel="previous">Priority Queues Chapter Summary</a>
+</div>
+<div class="navlink">
+<a href="8.1-hash-function-principles.html" accesskey="n" rel="next">Hash Function Principles</a>
+<a href="8.1-hash-function-principles.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 <script type="text/javascript" src="../interactive/Hashing/hashIntroCON.js"></script>
 </body>
 </html>
+

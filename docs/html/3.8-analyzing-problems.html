@@ -8,26 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Analyzing Problems</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -93,41 +79,55 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="3-algorithm-analysis.html" accesskey="u" rel="up">Algorithm Analysis</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="3.7-calculating-program-running-time.html" class="navbutton">&lt;&lt;</a>
+<a href="3.7-calculating-program-running-time.html" accesskey="p" rel="previous">Calculating Program Running Time</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="3.9-common-misunderstandings.html" accesskey="n" rel="next">Common Misunderstandings</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="3.7-calculating-program-running-time.html" accesskey="p" rel="previous">Calculating Program Running Time</a>
-</span>
+<div>
+<a href="3.9-common-misunderstandings.html" accesskey="n" rel="next">Common Misunderstandings</a>
+<a href="3.9-common-misunderstandings.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="analyzing-problems" class="level2" data-number="3.8">
 <h2 data-number="3.8"><span class="header-section-number">3.8</span>
 Analyzing Problems</h2>
 <p>You most often use the techniques of “algorithm” analysis to analyze
-an <a href="10-glossary.html#algorithm" class="term">algorithm</a>, or the instantiation of an
-algorithm as a <a href="10-glossary.html#program" class="term">program</a>. You can also use these
-same techniques to analyze the cost of a <a href="10-glossary.html#problem" class="term">problem</a>. The key question that we want to ask is:
-How hard is a problem? Certainly we should expect that in some sense,
-the problem of sorting a list of records is harder than the problem of
-searching a list of records for a given key value. Certainly the
-algorithms that we know for sorting some records seem to be more
-expensive than the algorithms that we know for searching those same
-records.</p>
-<p>What we need are useful definitions for the <a href="10-glossary.html#upper-bound" class="term">upper
-bound</a> and <a href="10-glossary.html#lower-bound" class="term">lower bound</a> of a problem.</p>
+an <a href="10-glossary.html#algorithm" class="term"
+title="A method or a process followed to solve a problem.">algorithm</a>,
+or the instantiation of an algorithm as a <a
+href="10-glossary.html#program" class="term"
+title="An instance, or concrete representation, of an algorithm in some programming language.">program</a>.
+You can also use these same techniques to analyze the cost of a <a
+href="10-glossary.html#problem" class="term"
+title="A task to be performed. It is best thought of as a function or a mapping of inputs to outputs.">problem</a>.
+The key question that we want to ask is: How hard is a problem?
+Certainly we should expect that in some sense, the problem of sorting a
+list of records is harder than the problem of searching a list of
+records for a given key value. Certainly the algorithms that we know for
+sorting some records seem to be more expensive than the algorithms that
+we know for searching those same records.</p>
+<p>What we need are useful definitions for the <a
+href="10-glossary.html#upper-bound" class="term"
+title="An upper bound for a growth rate $f$ is any growth rate $g$ that is greater than or equal to it. Formally, there are constants $n_0 \geq 0$ and $C &gt; 0$ such that $f(n) \leq C g(n)$ for all $n \geq n_0$. We also write $f \in O(g)$ or slightly imprecisely $f(n) \in O(g(n))$ (this is big-Oh notation). Usually, we are interested in finding an upper bound $g$ that has a simple expression compared to $f$, but is still sharp (there is not much room for improvement). In algorithm analysis, an upper bound for an algorithm is an upper bound for the asymptotic complexity of the algorithm, the growth rate of its complexity. In practice, we are looking for the best possible upper bound that has a simple mathematical expression. For example, we may write $T(n) \in O(n^2)$ if $T$ is the (time) complexity of the algorithm to say that the complexity is quadratic, i.e. the asymptoptic complexity of the algorithm has as upper bound the growth rate given by squaring.">upper
+bound</a> and <a href="10-glossary.html#lower-bound" class="term"
+title="An lower bound for a growth rate $f$ is any growth rate $g$ that is less than or equal to it. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \geq c g(n)$ for all $n \geq n_0$. We also write $f \in \Omega(g)$ or slightly imprecisely $f(n) \in \Omega(g(n))$ (this is Omega notation). Usually, we are interested in finding a lower bound $g$ that has a simple expression compared to $f$, but is still sharp (there is not much room for improvement). In algorithm analysis, a lower bound for an algorithm is a lower bound for the asymptotic complexity of the algorithm, the growth rate of its complexity.">lower
+bound</a> of a problem.</p>
 <p>One might start by thinking that the upper bound for a problem is how
 hard any algorithm can be for the problem. But we can make algorithms as
 bad as we want, so that is not useful. Instead, what is useful is to say
@@ -204,8 +204,10 @@ knowledge, we now have a lower bound in
 and an upper bound in
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>.
 Should we search for a faster algorithm? Many have tried, without
-success. Fortunately (or perhaps unfortunately?), <a href="10-glossary.html#sorting-lower-bound" class="term">we can prove that</a> any
-sorting algorithm must have running time in
+success. Fortunately (or perhaps unfortunately?), <a
+href="10-glossary.html#sorting-lower-bound" class="term"
+title="The lower bound for the problem of sorting is $\Omega(n \log n)$. This is traditionally proved using a decision tree model for sorting algorithms, and recognizing that the minimum depth of the decision tree for any sorting algorithm is $\Omega(n \log n)$ since there are $n!$ permutations of the $n$ input records to distinguish between during the sorting process.">we
+can prove that</a> any sorting algorithm must have running time in
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Omega(n \log n)</annotation></semantics></math>
 in the worst case.<a href="#fn1" class="footnote-ref" id="fnref1"
 role="doc-noteref"><sup>1</sup></a> This proof is one of the most
@@ -217,6 +219,17 @@ for the worst-case input of size
 Thus, we can conclude that the problem of sorting is
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log n)</annotation></semantics></math>
 in the worst case, because the upper and lower bounds have met.</p>
+<aside id="footnotes" class="footnotes footnotes-end-of-block"
+role="doc-footnote">
+<ol>
+<li id="fn1"><p>While it is fortunate to know the truth, it is
+unfortunate that sorting is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log n)</annotation></semantics></math>
+rather than
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math>.<a
+href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</aside>
 <p>Knowing the lower bound for a problem does not give you a good
 algorithm. But it does help you to know when to stop looking. If the
 lower bound for the problem matches the upper bound for the algorithm
@@ -226,25 +239,191 @@ that is better only by a constant factor.</p>
 CAN do, while the lower bound for a problem is the least work that you
 MUST do. If those two are the same, then we say that we really
 understand our problem.</p>
-<p>
-<div id="AnalProblemSumm" class="embedContainer">
-<iframe id="AnalProblemSumm_iframe" aria-label="AnalProblemSumm" src="../interactive/AlgAnal/AnalProblemSumm.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
+<section id="practice-questions-analyzing-problems" class="level3"
+data-number="3.8.1">
+<h3 data-number="3.8.1"><span class="header-section-number">3.8.1</span>
+Practice questions: Analyzing problems</h3>
+<div class="quiz">
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>No algorithm for searching in an unsorted array can be worse than
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>
+since any algorithm must look at every value in the array in the worst
+case.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Do you think that sequential search is the only algorithm to search
+an unsorted array?</li>
+<li>Can’t someone write a worse algorithm, perhaps by adding unnecessary
+work?</li>
+</ul>
 </div>
-</p>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>The lower bound in the worst case for the problem of searching an
+unsorted array is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Omega(n)</annotation></semantics></math>
+because this is the worst case cost of the sequential search
+algorithm.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>While it is true that sequential search is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Omega(n)</annotation></semantics></math>
+in the worst case, this is not the whole story.</li>
+<li>Just because the best algorithm that we happen to know has a certain
+cost, that does not mean that there is no better algorithm.</li>
+<li>The reason that search in an unsorted array has a lower bound of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Omega(n)</annotation></semantics></math>
+is because we can prove that any algorithm MUST look at every element
+(in some order) in the worst case.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>The upper bound for a problem is defined as the upper bound cost for
+the worst algorithm that we know.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>There is no limit to how bad someone might make an algorithm. So
+this can’t make sense as a definition.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>The upper bound for a problem is defined as the upper bound cost for
+the best algorithm that we know.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>This comes straight from the definition for the upper bound of a
+problem.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>The lower bound for a problem is defined as the cost of the best
+algorithm that we know.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Just because we know some algorithm does not mean that there does
+not exist some better algorithm.</li>
+<li>The lower bound for a problem is the best that an algorithm COULD
+be, not just what we happen to know.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>The lower bound for a problem is defined as the least cost that any
+algorithm could reach.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>This comes straight from the definition for the lower bound of a
+problem.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>The worst case upper bound for sorting an array is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>
+since this is the cost of the best algorithm (in the worst case) that we
+know about.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>This comes straight from the definition for problem upper
+bound.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>The lower bound of the sorting problem is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>
+because we can prove that this is the best cost that any sorting
+algorithm could reach.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>This comes straight from the definition of a problem lower
+bound.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>The worst case lower bound for sorting an array is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>
+since this is the cost of the best algorithm (in the worst case) that we
+know about.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Just because we don’t know of a better algorithm does not mean that
+there is no better algorithm.</li>
+<li>While it is true that the lower bound for sorting is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>,
+this is not the right reason.</li>
+<li>The right reason is because we can prove that no algorithm can do
+better.</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
-<section id="footnotes" class="footnotes footnotes-end-of-document"
-role="doc-endnotes">
-<hr />
-<ol>
-<li id="fn1"><p>While it is fortunate to know the truth, it is
-unfortunate that sorting is
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log n)</annotation></semantics></math>
-rather than
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math>.<a
-href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
 </section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="3.7-calculating-program-running-time.html" class="navbutton">&lt;&lt;</a>
+<a href="3.7-calculating-program-running-time.html" accesskey="p" rel="previous">Calculating Program Running Time</a>
+</div>
+<div class="navlink">
+<a href="3.9-common-misunderstandings.html" accesskey="n" rel="next">Common Misunderstandings</a>
+<a href="3.9-common-misunderstandings.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 </body>
 </html>
+

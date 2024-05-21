@@ -34,11 +34,7 @@ its depth. In this case, the depth is passed as a parameter to the
 function, and each recursive call must adjust that value (by adding
 one).
 
-### Binary Tree Set Depth Exercise
-
-::: {.extrtoolembed workout_id="66"}
-'Binary Tree Set Depth Exercise'
-:::
+<!-- ### Binary Tree Set Depth Exercise -->
 
 ### Collect-and-return
 
@@ -56,75 +52,26 @@ right subtrees. Where do left and right subtree counts come from? Calls
 to function `count` on the subtrees will compute this for us. Thus, we
 can implement `count` as follows.
 
-```python
-def count(root):
-    if node is None: return 0  # No nodes to count
-    return 1 + count(node.left()) + count(node.right())
-```
-
-```java
-static int count(BinNode root) {
-  if (root == null) { return 0; }  // Nothing to count
-  return 1 + count(root.left()) + count(root.right());
-}
-```
-
-```java
-static <E> int count(BinNode<E> root) {
-    if (root == null) return 0;  // Nothing to count
-    return 1 + count(root.left()) + count(root.right());
-}
-```
-
-
+    function count(node):
+        if node is null: 
+            return 0
+        return 1 + count(node.left) + count(node.right)
 
 The following solution is correct but inefficient as it does redundant
 checks on the left and the right child of each visited node.
 
-```python
-def ineff_count(root):
-    if root is None: return 0   # Nothing to count
-    count = 0
-    if root.left() is not None:
-        count += ineff_count(root.left())
-    if root.right() is not None:
-        count += ineff_count(root.right())
-    if root.left() is None and root.right() is None:
-        return 1
-    return 1 + count
-```
-
-```java
-static int ineff_count(BinNode root) {
-  if (root == null) { return 0; }  // Nothing to count
-  int count = 0;
-  if (root.left() != null) {
-    count = 1 + ineff_count(root.left());
-  }
-  if (root.right() != null) {
-    count = 1 + ineff_count(root.right());
-  }  
-  if (root.left() == null && root.right() == null) {
-    return 1;
-  }
-  return 1 + count;
-}
-```
-
-```java
-static <E> int ineff_count(BinNode<E> root) {
-    if (root == null) return 0;  // Nothing to count
-    int count = 0;
-    if (root.left() != null)
-        count += ineff_count(root.left());
-    if (root.right() != null)
-        count += ineff_count(root.right());
-    if (root.left() == null && root.right() == null)
-        return 1;
-    return 1 + count;
-}
-```
-
+    function inefficient_count(node):
+        if node is null: 
+            return 0
+        count = 0
+        if node.left is not null:
+            count = count + inefficient_count(node.left)
+        if node.right is not null:
+            count = count + inefficient_count(node.right)
+        if node.left is null and node.right is null:
+            return 1
+        else:
+            return 1 + count
 
 :::::
 
@@ -136,23 +83,12 @@ mistake is to not return a value.
 
 <inlineav id="BinaryTreeMistakesCON" src="Binary/BinaryTreeMistakesCON.js" name="Binary Tree Common Mistakes Slideshow" links="Binary/WriteTrav.css"/>
 
-### Binary Tree Check Sum Exercise
+<!-- ### Binary Tree Check Sum Exercise -->
 
-::: {.extrtoolembed workout_id="71"}
-'Binary Tree Check Sum Exercise'
-:::
+<!-- ### Binary Tree Leaf Nodes Count Exercise -->
 
-### Binary Tree Leaf Nodes Count Exercise
+<!-- ### Binary Tree Sum Nodes Exercise -->
 
-::: {.extrtoolembed workout_id="72"}
-'Binary Tree Leaf Nodes Count Exercise'
-:::
-
-### Binary Tree Sum Nodes Exercise
-
-::: {.extrtoolembed workout_id="68"}
-'Binary Tree Sum Nodes Exercise'
-:::
 
 ### Combining Information Flows
 
@@ -164,11 +100,7 @@ up. The downward flow is simple, as the value being checked for never
 changes. The information passed up has the simple collect-and-return
 style: Return True if and only if one of the children returns True.
 
-### Binary Tree Check Value Exercise
-
-::: {.extrtoolembed workout_id="65"}
-'Binary Tree Check Value Exercise'
-:::
+<!-- ### Binary Tree Check Value Exercise -->
 
 ### Combination Problems
 
@@ -176,20 +108,8 @@ Slightly more complicated problems combine what we have seen so far.
 Information passing down the tree changes from node to node. Data passed
 back up the tree uses the collect-and-return paradigm.
 
-### Binary Tree Height Exercise
+<!-- ### Binary Tree Height Exercise -->
 
-::: {.extrtoolembed workout_id="70"}
-'Binary Tree Height Exercise'
-:::
+<!-- ### Binary Tree Get Difference Exercise -->
 
-### Binary Tree Get Difference Exercise
-
-::: {.extrtoolembed workout_id="73"}
-'Binary Tree Get Difference Exercise'
-:::
-
-### Binary Tree Has Path Sum Exercise
-
-::: {.extrtoolembed workout_id="67"}
-'Binary Tree Has Path Sum Exercise'
-:::
+<!-- ### Binary Tree Has Path Sum Exercise -->

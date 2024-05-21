@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Cliff Shaffer" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Nick Smallbone" />
+  <title>DSABook – General Trees (optional)</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+      },
+      "HTML-CSS": {
+        scale: "80",
+      }
+    });
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+<link href="../interactive/General/GenTreeCON.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="5.10-binary-tree-chapter-summary.html" class="navbutton">&lt;&lt;</a>
+<a href="5.10-binary-tree-chapter-summary.html" accesskey="p" rel="previous">Binary Tree Chapter Summary</a>
+</div>
+<div>
+<a href="5.12-the-unionfind-algorithm-optional.html" accesskey="n" rel="next">The Union/Find Algorithm (optional)</a>
+<a href="5.12-the-unionfind-algorithm-optional.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="general-trees-optional" class="level2" data-number="5.11">
+<h2 data-number="5.11"><span class="header-section-number">5.11</span>
+General Trees (optional)</h2>
+<p>Many organizations are hierarchical in nature, such as the military
+and most businesses. Consider a company with a president and some number
+of vice presidents who report to the president. Each vice president has
+some number of direct subordinates, and so on. If we wanted to model
+this company with a data structure, it would be natural to think of the
+president in the root node of a tree, the vice presidents at level 1,
+and their subordinates at lower levels in the tree as we go down the
+organizational hierarchy.</p>
+<p>Because the number of vice presidents is likely to be more than two,
+this company’s organization cannot easily be represented by a binary
+tree. We need instead to use a tree whose nodes have an arbitrary number
+of children. Unfortunately, when we permit trees to have nodes with an
+arbitrary number of children, they become much harder to implement than
+binary trees. We consider such trees in this chapter. To distinguish
+them from binary trees, we use the term <a
+href="10-glossary.html#general-tree" class="term"
+title="A tree in which any given node can have any number of children. This is in contrast to, for example, a binary tree where each node has a fixed number of children (some of which might be `null`). General tree nodes tend to be harder to implement for this reason.">general
+tree</a>.</p>
+<p>In this module we will examine general tree terminology and define a
+basic class for general trees.</p>
+<section id="general-tree-definitions-and-terminology" class="level3"
+data-number="5.11.1">
+<h3 data-number="5.11.1"><span
+class="header-section-number">5.11.1</span> General Tree Definitions and
+Terminology</h3>
+<p>A <a href="10-glossary.html#tree" class="term"
+title="A tree $\mathbf{T}$ is a finite set of one or more nodes such that there is one designated node $R$, called the root of $\mathbf{T}$. If the set $(\mathbf{T} -{R})$ is not empty, these nodes are partitioned into $n &gt; 0$ disjoint sets $\mathbf{T}_0$, $\mathbf{T}_1$, ..., $\mathbf{T}_{n-1}$, each of which is a tree, and whose roots $R_1, R_2, ..., R_n$, respectively, are children of $R$.">tree</a>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐓</mi><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>
+is a finite set of one or more nodes such that there is one designated
+node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>,
+called the root of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐓</mi><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>.
+If the set
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐓</mi><mo>−</mo><mo stretchy="false" form="prefix">{</mo><mi>R</mi><mo stretchy="false" form="postfix">}</mo><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(\mathbf{T} -\{R\})</annotation></semantics></math>
+is not empty, these nodes are partitioned into
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">n &gt; 0</annotation></semantics></math>
+disjoint sets
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝐓</mi><mn>0</mn></msub><annotation encoding="application/x-tex">\mathbf{T}_0</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝐓</mi><mn>1</mn></msub><annotation encoding="application/x-tex">\mathbf{T}_1</annotation></semantics></math>,
+...,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝐓</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><annotation encoding="application/x-tex">\mathbf{T}_{n-1}</annotation></semantics></math>,
+each of which is a tree, and whose roots
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mn>1</mn></msub><mo>,</mo><msub><mi>R</mi><mn>2</mn></msub><mo>,</mo><mi>.</mi><mi>.</mi><mi>.</mi><mo>,</mo><msub><mi>R</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">R_1, R_2, ..., R_n</annotation></semantics></math>,
+respectively, are children of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>.
+The subsets
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝐓</mi><mi>i</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>≤</mo><mi>i</mi><mo>&lt;</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathbf{T}_i (0 \leq i &lt; n)</annotation></semantics></math>
+are said to be <a href="10-glossary.html#subtree" class="term"
+title="A subtree is a subset of the nodes of a binary tree that includes some node $R$ of the tree as the subtree root along with all the descendants of $R$.">subtrees</a>
+of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐓</mi><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>.
+These subtrees are ordered in that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝐓</mi><mi>i</mi></msub><annotation encoding="application/x-tex">\mathbf{T}_i</annotation></semantics></math>
+is said to come before
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝐓</mi><mi>j</mi></msub><annotation encoding="application/x-tex">\mathbf{T}_j</annotation></semantics></math>
+if
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>&lt;</mo><mi>j</mi></mrow><annotation encoding="application/x-tex">i &lt; j</annotation></semantics></math>.
+By convention, the subtrees are arranged from left to right with subtree
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝐓</mi><mn>0</mn></msub><annotation encoding="application/x-tex">\mathbf{T}_0</annotation></semantics></math>
+called the leftmost child of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>.
+A node’s <a href="10-glossary.html#out-degree" class="term"
+title="In graph terminology, the out degree for a vertex is the number of edges directed out of the vertex.">out
+degree</a> is the number of children for that node. A <a
+href="10-glossary.html#forest" class="term"
+title="A collection of one or more trees.">forest</a> is a collection of
+one or more trees. <a
+href="5.11-general-trees-optional.html#GenTreeFig">Figure
+#GenTreeFig</a> presents further tree notation generalized from the
+notation for binary trees.</p>
+<div id="GenTreeFig">
+<p>
+<div id="GenTreeCON" class="ssAV" data-short-name="GenTreeCON" data-long-name="General/GenTreeCON" alt="General/GenTreeCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>Notation for general trees. Node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>
+is the parent of nodes
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">S1</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">S2</annotation></semantics></math>.
+Thus,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">S1</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">S2</annotation></semantics></math>
+are children of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>.
+Nodes
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>
+are ancestors of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>.
+Nodes
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">S1</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">S2</annotation></semantics></math>
+are called <a href="10-glossary.html#sibling" class="term"
+title="In a tree, a sibling of node $A$ is any other node with the same parent as $A$.">siblings</a>.
+The oval surrounds the subtree having
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>
+as its root.</p>
+</div>
+<p>Each node in a tree has precisely one parent, except for the root,
+which has no parent. From this observation, it immediately follows that
+a tree with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+nodes must have
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>
+edges because each node, aside from the root, has one edge connecting
+that node to its parent.</p>
+</section>
+<section id="an-adt-for-general-tree-nodes" class="level3"
+data-number="5.11.2">
+<h3 data-number="5.11.2"><span
+class="header-section-number">5.11.2</span> An ADT for General Tree
+Nodes</h3>
+<p>Before discussing general tree implementations, we should first make
+precise what operations such implementations must support. Any
+implementation must be able to initialize a tree. Given a tree, we need
+access to the root of that tree. There must be some way to access the
+children of a node. In the case of binary tree nodes, this was done by
+providing instance variables for the left and right child pointers.
+Unfortunately, because we do not know in advance how many children a
+given node will have in the general tree, we cannot give explicit
+functions to access each child. An alternative must be found that works
+for an unknown number of children.</p>
+<p>One choice would be to provide a function that takes as its parameter
+the index for the desired child. That combined with a function that
+returns the number of children for a given node would support the
+ability to access any node or process all children of a node.
+Unfortunately, this view of access tends to bias the choice for node
+implementations in favor of an array-based approach, because these
+functions favor random access to a list of children.</p>
+<p>An alternative is to provide access to a <strong>List</strong> of the
+children pointers. This list can be an array-based list or a linked list
+or even a dynamic function generating the children on demand. The only
+thing we will assume is that it follows the <strong>List</strong> ADT,
+as described in the section about <a
+href="4.1-the-list-adt.html#the-list-adt">the List ADT</a>.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// General tree nodes</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> GTNode:</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    GTNode(elem, children):</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.elem <span class="op">=</span> elem          <span class="co">// This is the value, just as for binary nodes</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.children <span class="op">=</span> children  <span class="co">// This is a List of GTNodes</span></span></code></pre></div>
+</section>
+<section id="general-tree-traversals" class="level3"
+data-number="5.11.3">
+<h3 data-number="5.11.3"><span
+class="header-section-number">5.11.3</span> General Tree Traversals</h3>
+<p>There are three traditional <a
+href="5.5-binary-tree-traversals.html#binary-tree-traversals">tree
+traversals</a> for <a href="10-glossary.html#binary-tree" class="term"
+title="A finite set of nodes which is either empty, or else has a root node together two binary trees, called the left and right subtrees, which are disjoint from each other and from the root.">binary
+trees</a>: <a href="5.5-binary-tree-traversals.html#preorder-traversal"
+class="term"
+title="In a binary tree, a traversal that first visits the root, then recursively visits the left child, then recursively visits the right child.">preorder</a>,
+<a href="5.5-binary-tree-traversals.html#postorder-traversal"
+class="term"
+title="In a binary tree, a traversal that first recursively visits the left child, then recursively visits the right child, and then visits the root.">postorder</a>,
+and <a href="5.5-binary-tree-traversals.html#inorder-traversal"
+class="term"
+title="In a binary tree, a traversal that first recursively visits the left child, then visits the root, and then recursively visits the right child. In a binary search tree, this traversal will enumerate the nodes in sorted order.">inorder</a>.
+For general trees, preorder and postorder traversals are defined with
+meanings similar to their binary tree counterparts. Preorder traversal
+of a general tree first visits the root of the tree, then performs a
+preorder traversal of each subtree from left to right. A postorder
+traversal of a general tree performs a postorder traversal of the root’s
+subtrees from left to right, then visits the root. Inorder traversal
+does not have a natural definition for the general tree, because there
+is no particular number of children for an internal node. An arbitrary
+definition – such as visit the leftmost subtree in inorder, then the
+root, then visit the remaining subtrees in inorder – can be invented.
+However, inorder traversals are generally not useful with general
+trees.</p>
+<p>
+<div id="GenTreePreTravCON" class="ssAV" data-short-name="GenTreePreTravCON" data-long-name="General Tree Preorder Traversal Slideshow" alt="General Tree Preorder Traversal Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>To perform a preorder traversal, it is necessary to visit each of the
+children for a given node (say
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>)
+from left to right. This is accomplished by starting at R’s leftmost
+child (call it
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>T</mi><annotation encoding="application/x-tex">T</annotation></semantics></math>).
+From
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>T</mi><annotation encoding="application/x-tex">T</annotation></semantics></math>,
+we can move to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>T</mi><annotation encoding="application/x-tex">T</annotation></semantics></math>’s
+right sibling, and then to that node’s right sibling, and so on.</p>
+<p>
+<div id="GenTreePostTravCON" class="ssAV" data-short-name="GenTreePostTravCON" data-long-name="General Tree Postorder Traversal Slideshow" alt="General Tree Postorder Traversal Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>Using the General Tree class shown above, here are implementations to
+process the nodes of a general tree in preorder and in postorder. The
+code is very simple, but this is because we defer all the complexity to
+the underlying <strong>List</strong> implementation of the children.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> preorder(node):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    process(node)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> child <span class="kw">in</span> node.children:</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        preorder(child)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> postorder(node):</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> child <span class="kw">in</span> node.children:</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        postorder(child)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    process(node)</span></code></pre></div>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="5.10-binary-tree-chapter-summary.html" class="navbutton">&lt;&lt;</a>
+<a href="5.10-binary-tree-chapter-summary.html" accesskey="p" rel="previous">Binary Tree Chapter Summary</a>
+</div>
+<div class="navlink">
+<a href="5.12-the-unionfind-algorithm-optional.html" accesskey="n" rel="next">The Union/Find Algorithm (optional)</a>
+<a href="5.12-the-unionfind-algorithm-optional.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+<script type="text/javascript" src="../interactive/General/GenTreeCON.js"></script>
+<script type="text/javascript" src="../interactive/General/GenTreePreTravCON.js"></script>
+<script type="text/javascript" src="../interactive/General/GenTreePostTravCON.js"></script>
+</body>
+</html>
+

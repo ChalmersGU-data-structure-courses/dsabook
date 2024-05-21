@@ -8,93 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Comparables, Comparators and Key-Value Pairs</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        background-color: #ffffff;
-        color: #a0a0a0;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
-    div.sourceCode
-      { color: #1f1c1b; background-color: #ffffff; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #1f1c1b; } /* Normal */
-    code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
-    code span.an { color: #ca60ca; } /* Annotation */
-    code span.at { color: #0057ae; } /* Attribute */
-    code span.bn { color: #b08000; } /* BaseN */
-    code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
-    code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #924c9d; } /* Char */
-    code span.cn { color: #aa5500; } /* Constant */
-    code span.co { color: #898887; } /* Comment */
-    code span.cv { color: #0095ff; } /* CommentVar */
-    code span.do { color: #607880; } /* Documentation */
-    code span.dt { color: #0057ae; } /* DataType */
-    code span.dv { color: #b08000; } /* DecVal */
-    code span.er { color: #bf0303; text-decoration: underline; } /* Error */
-    code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
-    code span.fl { color: #b08000; } /* Float */
-    code span.fu { color: #644a9b; } /* Function */
-    code span.im { color: #ff5500; } /* Import */
-    code span.in { color: #b08000; } /* Information */
-    code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
-    code span.op { color: #1f1c1b; } /* Operator */
-    code span.ot { color: #006e28; } /* Other */
-    code span.pp { color: #006e28; } /* Preprocessor */
-    code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
-    code span.sc { color: #3daee9; } /* SpecialChar */
-    code span.ss { color: #ff5500; } /* SpecialString */
-    code span.st { color: #bf0303; } /* String */
-    code span.va { color: #0057ae; } /* Variable */
-    code span.vs { color: #bf0303; } /* VerbatimString */
-    code span.wa { color: #bf0303; } /* Warning */
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -160,26 +79,31 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="1-introduction.html" accesskey="u" rel="up">Introduction</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="1.4-information-retrieval-sets-and-maps.html" class="navbutton">&lt;&lt;</a>
+<a href="1.4-information-retrieval-sets-and-maps.html" accesskey="p" rel="previous">Information retrieval: Sets and Maps</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="1.6-comparables-and-comparators-an-example.html" accesskey="n" rel="next">Comparables and Comparators: An Example</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="1.4-information-retrieval-sets-and-maps.html" accesskey="p" rel="previous">Information retrieval: Sets and Maps</a>
-</span>
+<div>
+<a href="1.6-comparables-and-comparators-an-example.html" accesskey="n" rel="next">Comparables and Comparators: An Example</a>
+<a href="1.6-comparables-and-comparators-an-example.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="comparables-comparators-and-key-value-pairs" class="level2"
 data-number="1.5">
 <h2 data-number="1.5"><span class="header-section-number">1.5</span>
@@ -198,7 +122,10 @@ records to decide which one is “smaller”? We cannot just use “&lt;” to
 compare the records! Nearly always in this situation, we are actually
 interested in sorting the records based on the values of one particular
 field used to represent the record, which itself is something simple
-like an integer. This field is referred to as the <a href="10-glossary.html#key" class="term">key</a> for the record.</p>
+like an integer. This field is referred to as the <a
+href="10-glossary.html#key" class="term"
+title="A field or part of a larger record used to represent that record for the purpose of searching or comparing. Another term for search key.">key</a>
+for the record.</p>
 <p>Likewise, if we want to search for a given record in a database, how
 should we describe what we are looking for? A database record could
 simply be a number, or it could be quite complicated, such as a payroll
@@ -208,23 +135,30 @@ the record. If we knew everything about the record already, we probably
 would not need to look for it. Instead, we typically define what record
 we want in terms of a key value. For example, if searching for payroll
 records, we might wish to search for the record that matches a
-particular ID number. In this example the ID number is the <a href="10-glossary.html#search-key" class="term">search key</a>.</p>
+particular ID number. In this example the ID number is the <a
+href="10-glossary.html#search-key" class="term"
+title="A field or part of a record that is used to represent the record when searching. For example, in a database of customer records, we might want to search by name. In this case the name field is used as the search key.">search
+key</a>.</p>
 <section id="comparables" class="level3" data-number="1.5.1">
 <h3 data-number="1.5.1"><span class="header-section-number">1.5.1</span>
 Comparables</h3>
-<p>To implement sorting or searching, we require that keys be <a href="10-glossary.html#comparable" class="term">comparable</a>. At a minimum, we must be able to take
-two keys and reliably determine whether they are equal or not. That is
-enough to enable a sequential search through a database of records and
-find one that matches a given key. However, we typically would like for
-the keys to define a <a href="10-glossary.html#total-order" class="term">total order</a>, which means
-that we can always tell which of two keys is greater than the other.
-Using key types with total orderings gives the database implementor the
-opportunity to organize a collection of records in a way that makes
-searching more efficient. An example is storing the records in sorted
-order in an array, which permits a binary search. Fortunately, in
-practice most fields of most records consist of simple data types with
-natural total orders. For example, integers, floats, doubles, and
-character strings all are totally ordered.</p>
+<p>To implement sorting or searching, we require that keys be <a
+href="10-glossary.html#comparable" class="term"
+title="The concept that two objects can be compared to determine if they are equal or not, or to determine which one is greater than the other. In set notation, elements $x$ and $y$ of a set are comparable under a given relation $R$ if either $xRy$ or $yRx$. To be reliably compared for a greater/lesser relationship, the values being compared must belong to a total order. In programming, the property of a data type such that two elements of the type can be compared to determine if they are the same (a weaker version), or which of the two is larger (a stronger version). `Comparable` is also the name of an interface in Java that asserts a comparable relationship between objects within a class, and `.compareTo()` is the `Comparable` interface method that implements the actual comparison between two objects of the class.">comparable</a>.
+At a minimum, we must be able to take two keys and reliably determine
+whether they are equal or not. That is enough to enable a sequential
+search through a database of records and find one that matches a given
+key. However, we typically would like for the keys to define a <a
+href="10-glossary.html#total-order" class="term"
+title="A binary relation on a set where every pair of distinct elements in the set are comparable (that is, one can determine which of the two is greater than the other).">total
+order</a>, which means that we can always tell which of two keys is
+greater than the other. Using key types with total orderings gives the
+database implementor the opportunity to organize a collection of records
+in a way that makes searching more efficient. An example is storing the
+records in sorted order in an array, which permits a binary search.
+Fortunately, in practice most fields of most records consist of simple
+data types with natural total orders. For example, integers, floats,
+doubles, and character strings all are totally ordered.</p>
 <p>But if we want to write a general purpose sorting or searching
 function, we need a general way to get the key for the record. We could
 insist that every record have a particular method called
@@ -248,34 +182,41 @@ value.</p>
 <h3 data-number="1.5.2"><span class="header-section-number">1.5.2</span>
 Comparators</h3>
 <p>Another, more general approach is to supply a function or class –
-called a <a href="10-glossary.html#comparator" class="term">comparator</a> –whose job is to extract
-the key from the record. A comparator function can be passed in as a
-parameter, such as in a call to a sorting function. In this case, the
-comparator function would be invoked on two records whenever they need
-to be compared. In this way, different comparator functions can be
-passed in to handle different record types or different fields within a
-record. In Java (with generics) or C++ (with templates), a comparator
-class can be a parameter for another class definition. For example, a
-BST could take a comparator class as a generics parameter in Java. This
-comparator class would be responsible for dealing with the comparison of
-two records.</p>
+called a <a href="10-glossary.html#comparator" class="term"
+title="A function given as a parameter to a method of a library (or alternatively, a parameter for a C++ template or a Java generic). The comparator function concept provides a generic way to encapulate the process of performing a comparison between two objects of a specific type. For example, if we want to write a generic sorting routine, that can handle any record type, we can require that the user of the sorting routine passes in a comparator function to define how records in the collection are to be compared.">comparator</a>
+–whose job is to extract the key from the record. A comparator function
+can be passed in as a parameter, such as in a call to a sorting
+function. In this case, the comparator function would be invoked on two
+records whenever they need to be compared. In this way, different
+comparator functions can be passed in to handle different record types
+or different fields within a record. In Java (with generics) or C++
+(with templates), a comparator class can be a parameter for another
+class definition. For example, a BST could take a comparator class as a
+generics parameter in Java. This comparator class would be responsible
+for dealing with the comparison of two records.</p>
 </section>
 <section id="key-value-pairs" class="level3" data-number="1.5.3">
 <h3 data-number="1.5.3"><span class="header-section-number">1.5.3</span>
 Key-Value Pairs</h3>
-<p>One good general-purpose solution is to explicitly store <a href="10-glossary.html#key-value-pair" class="term">key-value pairs</a> in the data
-structure. For example, if we want to sort a bunch of records, we can
-store them in an array where every array entry contains both a key value
-for the record and a pointer to the record itself.</p>
+<p>One good general-purpose solution is to explicitly store <a
+href="10-glossary.html#key-value-pair" class="term"
+title="A standard solution for solving the problem of how to relate a key value to a record (or how to find the key for a given record) within the context of a particular index. The idea is to simply store as records in the index pairs of keys and records. Specifically, the index will typically store a copy of the key along with a reference to the record. The other standard solution to this problem is to pass a comparator function to the index.">key-value
+pairs</a> in the data structure. For example, if we want to sort a bunch
+of records, we can store them in an array where every array entry
+contains both a key value for the record and a pointer to the record
+itself.</p>
 <p>The main places where we will need to be concerned with comparing
 records and extracting keys is for various map implementations and
 sorting algorithms. Here is a simple class for representing key-value
 pairs:</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> KVPair:</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, key, value):</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.key <span class="op">=</span> key</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.value <span class="op">=</span> value</span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> <span class="bu">KVPair</span>:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    key    <span class="co">// the search key</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    value  <span class="co">// the value associated with the key</span></span></code></pre></div>
+<p>Note that in Python it’s probably easier to just use a pair
+<code>(key,value)</code>, but not all languages (read: Java) have that
+possibility. So we declare a class <strong>KVPair</strong> thart we will
+use in our example code.</p>
 <p>Using this we can easily implement a <strong>Map</strong> from an
 underlying <strong>List</strong>, which we will discuss further in the
 <a
@@ -293,29 +234,139 @@ integers. But to be useful, a real sorting algorithm typically has to
 deal with the fact that it is sorting a collection of records. A
 general-purpose sorting routine meant to operate on multiple record
 types would have to be written in a way to deal with the generic
-comparison problem. To illustrate, here is an example of <a
-href="2.4-insertion-sort.html#insertion-sort">Insertion Sort</a>
-implemented to work on an array that stores records that support the
-<code>Comparable</code> interface:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> insertionSort(A):</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(A)):  <span class="co"># Insert i&#39;th record</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        j <span class="op">=</span> i</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> j <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> A[j] <span class="op">&lt;</span> A[j<span class="op">-</span><span class="dv">1</span>]:</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>            swap(A, j, j<span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>            j <span class="op">-=</span> <span class="dv">1</span></span></code></pre></div>
+comparison problem. But as long as the elements of the array supports
+the <strong>Comparable</strong> interface, we can still use the standard
+comparison operators when sorting.</p>
 </section>
-<section id="review-questions" class="level3" data-number="1.5.5">
+<section id="review-questions-comparison" class="level3"
+data-number="1.5.5">
 <h3 data-number="1.5.5"><span class="header-section-number">1.5.5</span>
-Review questions</h3>
-<p>
-<div id="CompareSumm" class="embedContainer">
-<iframe id="CompareSumm_iframe" aria-label="CompareSumm" src="../interactive/Design/CompareSumm.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
+Review questions: Comparison</h3>
+<div class="quiz">
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>One good general-purpose solution to the problem of getting a key
+from a record is to define a special method such as
+<code>.key()</code>.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />False</label></li>
+<li><label><input type="checkbox" />True</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>If we use a <code>.key()</code> function, then there is only one way
+to compute the key for a record.</li>
+<li>That means the records cannot be sorted on differing fields.</li>
+</ul>
 </div>
-</p>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>One good general-purpose solution to the problem of getting a key
+from a record is to store Key/Value pairs in the search structure.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />False</label></li>
+<li><label><input type="checkbox" checked="" />True</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>When we store key/value pairs, we are explicitly storing the key
+used by that search structure.</li>
+<li>This permits a collection of records to be sorted or searched in
+many different ways.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>In order to be able to sort, the key values must define a total
+order.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />False</label></li>
+<li><label><input type="checkbox" checked="" />True</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Sorting relies on comparisons.</li>
+<li>We need to be able to compare any two records and tell which one is
+less than the other.</li>
+<li>This is the essence of a total order.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>In order to do an exact-match search, the key values must define a
+total order.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />False</label></li>
+<li><label><input type="checkbox" />True</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Exact match requires only that we can tell if two keys are
+equal.</li>
+<li>We do not need to decide which one is greater than the other.</li>
+<li>So, we do not need a total order.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>The problem with using a <code>.key()</code> method to get the key
+from a record is that we can’t use this same method to get different
+fields for different searches.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />False</label></li>
+<li><label><input type="checkbox" checked="" />True</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>If we use a <code>.key()</code> function, then there is only one way
+to compute the key for a record.</li>
+<li>That means the records cannot be sorted on differing fields.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Defining a record’s key field is a property of:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />The record</label></li>
+<li><label><input type="checkbox" checked="" />The context of the
+search</label></li>
+<li><label><input type="checkbox" />Both</label></li>
+<li><label><input type="checkbox" />Neither</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>If the key were a property of the record, then records could only be
+sorted in one order.</li>
+<li>If the key were a property of the record, then we could only search
+on a single value.</li>
+<li>But we really want to be able to sort or search on different
+fields.</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- TODO: make a similar Python example -->
 </section>
 </section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="1.4-information-retrieval-sets-and-maps.html" class="navbutton">&lt;&lt;</a>
+<a href="1.4-information-retrieval-sets-and-maps.html" accesskey="p" rel="previous">Information retrieval: Sets and Maps</a>
+</div>
+<div class="navlink">
+<a href="1.6-comparables-and-comparators-an-example.html" accesskey="n" rel="next">Comparables and Comparators: An Example</a>
+<a href="1.6-comparables-and-comparators-an-example.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 </body>
 </html>
+

@@ -8,93 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Comparing Algorithms</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        background-color: #ffffff;
-        color: #a0a0a0;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
-    div.sourceCode
-      { color: #1f1c1b; background-color: #ffffff; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #1f1c1b; } /* Normal */
-    code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
-    code span.an { color: #ca60ca; } /* Annotation */
-    code span.at { color: #0057ae; } /* Attribute */
-    code span.bn { color: #b08000; } /* BaseN */
-    code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
-    code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #924c9d; } /* Char */
-    code span.cn { color: #aa5500; } /* Constant */
-    code span.co { color: #898887; } /* Comment */
-    code span.cv { color: #0095ff; } /* CommentVar */
-    code span.do { color: #607880; } /* Documentation */
-    code span.dt { color: #0057ae; } /* DataType */
-    code span.dv { color: #b08000; } /* DecVal */
-    code span.er { color: #bf0303; text-decoration: underline; } /* Error */
-    code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
-    code span.fl { color: #b08000; } /* Float */
-    code span.fu { color: #644a9b; } /* Function */
-    code span.im { color: #ff5500; } /* Import */
-    code span.in { color: #b08000; } /* Information */
-    code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
-    code span.op { color: #1f1c1b; } /* Operator */
-    code span.ot { color: #006e28; } /* Other */
-    code span.pp { color: #006e28; } /* Preprocessor */
-    code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
-    code span.sc { color: #3daee9; } /* SpecialChar */
-    code span.ss { color: #ff5500; } /* SpecialString */
-    code span.st { color: #bf0303; } /* String */
-    code span.va { color: #0057ae; } /* Variable */
-    code span.vs { color: #bf0303; } /* VerbatimString */
-    code span.wa { color: #bf0303; } /* Warning */
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -160,28 +79,33 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 <link href="../interactive/AlgAnal/GrowthRatesCON.css" rel="stylesheet" type="text/css"/>
 <link href="../interactive/AlgAnal/GrowthRatesZoomCON.css" rel="stylesheet" type="text/css"/>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="3-algorithm-analysis.html" accesskey="u" rel="up">Algorithm Analysis</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="3.1-problems-algorithms-and-programs.html" class="navbutton">&lt;&lt;</a>
+<a href="3.1-problems-algorithms-and-programs.html" accesskey="p" rel="previous">Problems, Algorithms, and Programs</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="3.3-best-worst-and-average-cases.html" accesskey="n" rel="next">Best, Worst, and Average Cases</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="3.1-problems-algorithms-and-programs.html" accesskey="p" rel="previous">Problems, Algorithms, and Programs</a>
-</span>
+<div>
+<a href="3.3-best-worst-and-average-cases.html" accesskey="n" rel="next">Best, Worst, and Average Cases</a>
+<a href="3.3-best-worst-and-average-cases.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="comparing-algorithms" class="level2" data-number="3.2">
 <h2 data-number="3.2"><span class="header-section-number">3.2</span>
 Comparing Algorithms</h2>
@@ -255,7 +179,8 @@ data-number="3.2.2">
 <h3 data-number="3.2.2"><span class="header-section-number">3.2.2</span>
 Basic Operations and Input Size</h3>
 <p>Of primary consideration when estimating an algorithm’s performance
-is the number of <a href="10-glossary.html#basic-operation" class="term">basic
+is the number of <a href="10-glossary.html#basic-operation" class="term"
+title="Examples of basic operations include inserting a data item into the data structure, deleting a data item from the data structure, and finding a specified data item.">basic
 operations</a> required by the algorithm to process an input of a
 certain size. The terms “basic operations” and “size” are both rather
 vague and depend on the algorithm being analyzed. Size is often the
@@ -281,35 +206,14 @@ position of the largest value seen so far. This algorithm is called the
 <em>largest-value sequential search</em> and is illustrated by the
 following function:</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Return position of largest value in integer array A</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> largest(A):</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    currlarge <span class="op">=</span> <span class="dv">0</span>                 <span class="co"># Position of largest element seen</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, A.length):  <span class="co"># For each element</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> A[currlarge] <span class="op">&lt;</span> A[i]:   <span class="co"># if A[i] is larger</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>             currlarge <span class="op">=</span> i        <span class="co"># remember its position</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> currlarge              <span class="co"># Return largest position</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Return position of largest value in integer array A</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">int</span> <span class="fu">largest</span><span class="op">(</span><span class="dt">int</span><span class="op">[]</span> A<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> currlarge <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>             <span class="co">// Position of largest element seen</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i<span class="op">=</span><span class="dv">1</span><span class="op">;</span> i<span class="op">&lt;</span>A<span class="op">.</span><span class="fu">length</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span> <span class="co">// For each element</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>A<span class="op">[</span>currlarge<span class="op">]</span> <span class="op">&lt;</span> A<span class="op">[</span>i<span class="op">])</span> <span class="op">{</span>    <span class="co">//   if A[i] is larger</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>       currlarge <span class="op">=</span> i<span class="op">;</span>            <span class="co">//     remember its position</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> currlarge<span class="op">;</span>              <span class="co">// Return largest position</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Return position of largest value in integer array A</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="dt">int</span> <span class="fu">largest</span><span class="op">(</span><span class="dt">int</span><span class="op">[]</span> A<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> currlarge <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>               <span class="co">// Position of largest element seen</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i<span class="op">=</span><span class="dv">1</span><span class="op">;</span> i<span class="op">&lt;</span>A<span class="op">.</span><span class="fu">length</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span> <span class="co">// For each element</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>A<span class="op">[</span>currlarge<span class="op">]</span> <span class="op">&lt;</span> A<span class="op">[</span>i<span class="op">])</span>     <span class="co">// if A[i] is larger</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            currlarge <span class="op">=</span> i<span class="op">;</span>           <span class="co">// remember its position</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> currlarge<span class="op">;</span>                <span class="co">// Return largest position</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>Here, the size of the problem is <code>A.length</code>, the number of
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Return position of largest value in integer array A</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> largest(A):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    currlarge <span class="op">=</span> <span class="dv">0</span>                 <span class="co">// Position of largest element seen.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="op">=</span> <span class="dv">1</span> <span class="kw">to</span> A.<span class="bu">size</span>():     <span class="co">// For each element,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> A[currlarge] <span class="op">&lt;</span> A[i]:   <span class="co">// if A[i] is larger,</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            currlarge <span class="op">=</span> i         <span class="co">// remember its position.</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> currlarge              <span class="co">// Return largest position</span></span></code></pre></div>
+<p>Here, the size of the problem is <code>A.size()</code>, the number of
 integers stored in array <code>A</code>. The basic operation is to
 compare an integer’s value to that of the largest value seen so far. It
 is reasonable to assume that it takes a fixed amount of time to do one
@@ -377,30 +281,19 @@ Thus, the equation for this algorithm is simply</p>
 </annotation></semantics></math></p>
 <p>indicating that the size of the input
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-has no effect on the running time. This is called a <a href="10-glossary.html#constant-running-time" class="term">constant running time</a>.</p>
+has no effect on the running time. This is called a <a
+href="10-glossary.html#constant-running-time" class="term"
+title="The cost of a function whose running time is not related to its input size. In Theta notation, this is traditionally written as $\Theta(1)$.">constant
+running time</a>.</p>
 </section>
 <section id="example-2" class="level4 unnumbered topic">
 <h4 class="unnumbered">Example</h4>
 <p>Consider the following code:</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sum</span> <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(n):</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span> <span class="op">+=</span> <span class="dv">1</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sum <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span>i<span class="op">=</span><span class="dv">1</span><span class="op">;</span> i<span class="op">&lt;=</span>n<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="op">(</span>j<span class="op">=</span><span class="dv">1</span><span class="op">;</span> j<span class="op">&lt;=</span>n<span class="op">;</span> j<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    sum<span class="op">++;</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sum <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span>i<span class="op">=</span><span class="dv">1</span><span class="op">;</span> i<span class="op">&lt;=</span>n<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span>j<span class="op">=</span><span class="dv">1</span><span class="op">;</span> j<span class="op">&lt;=</span>n<span class="op">;</span> j<span class="op">++)</span> <span class="op">{</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        sum<span class="op">++;</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sum</span> <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="op">=</span> <span class="dv">0</span> <span class="kw">to</span> n<span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="op">=</span> <span class="dv">0</span> <span class="kw">to</span> n<span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span> <span class="op">=</span> <span class="bu">sum</span><span class="op">+</span><span class="dv">1</span></span></code></pre></div>
 <p>What is the running time for this code fragment? Clearly it takes
 longer to run when
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
@@ -421,12 +314,13 @@ Thus, we say that the running time is
 <section id="growth-rates" class="level3" data-number="3.2.3">
 <h3 data-number="3.2.3"><span class="header-section-number">3.2.3</span>
 Growth Rates</h3>
-<p>The <a href="10-glossary.html#growth-rate" class="term">growth rate</a> for an algorithm is the
-rate at which the cost of the algorithm grows as the size of its input
-grows. The following figure shows a graph for six equations, each meant
-to describe the running time for a particular program or algorithm. A
-variety of growth rates that are representative of typical algorithms
-are shown.</p>
+<p>The <a href="10-glossary.html#growth-rate" class="term"
+title="The rate at which a function grows. How quickly the function grows when its input grows. Also called its *order of growth*. A function $f$ has growth rate bounded by a function $g$ if the values of $f$ are eventually bounded by those of $g$ up to some constant factor. We often shorten this (somewhat confusingly) by saying that $f$ has growth rate $g$ or that $f$ has order of growth $g$. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \leq c g(n)$ for all $n \geq n_0$. We then say that $f$ has growth rate less or equal that of $g$ and write $f \in O(g)$ (big-Oh notation). This defines the preorder of growth rates. In algorithm analysis, we sometimes speak of the growth rate of an algorithm. By that, we mean the growth rate of the complexity of the algorithm, the rate at which the cost of the algorithm grows as the size of its input grows. This is also called the asymptotic complexity of that algorithm.">growth
+rate</a> for an algorithm is the rate at which the cost of the algorithm
+grows as the size of its input grows. The following figure shows a graph
+for six equations, each meant to describe the running time for a
+particular program or algorithm. A variety of growth rates that are
+representative of typical algorithms are shown.</p>
 <div id="RunTimeGraph">
 <p>
 <div id="GrowthRatesCON" class="ssAV" data-short-name="GrowthRatesCON" data-long-name="DataStructures/Plot.js AlgAnal/GrowthRatesCON" alt="DataStructures/Plot.js AlgAnal/GrowthRatesCON" tabIndex="-1">
@@ -451,8 +345,10 @@ are graphed by straight lines. A growth rate of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">cn</annotation></semantics></math>
 (for
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>
-any positive constant) is often referred to as a <a href="10-glossary.html#linear-growth-rate" class="term">linear growth rate</a> or running time. This means that
-as the value of
+any positive constant) is often referred to as a <a
+href="10-glossary.html#linear-growth-rate" class="term"
+title="For input size $n$, a growth rate of $cn$ (for $c$ any positive constant). In other words, the cost of the associated function is linear on the input size.">linear
+growth rate</a> or running time. This means that as the value of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
 grows, the running time of the algorithm grows in the same proportion.
 Doubling the value of
@@ -460,13 +356,17 @@ Doubling the value of
 roughly doubles the running time. An algorithm whose running-time
 equation has a highest-order term containing a factor of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>n</mi><mn>2</mn></msup><annotation encoding="application/x-tex">n^2</annotation></semantics></math>
-is said to have a <a href="10-glossary.html#quadratic-growth-rate" class="term">quadratic growth rate</a>. In
-the figure, the line labeled
+is said to have a <a href="10-glossary.html#quadratic-growth-rate"
+class="term"
+title="A growth rate function of the form $cn^2$ where $n$ is the input size and $c$ is a constant.">quadratic
+growth rate</a>. In the figure, the line labeled
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">2n^2</annotation></semantics></math>
 represents a quadratic growth rate. The line labeled
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mi>n</mi></msup><annotation encoding="application/x-tex">2^n</annotation></semantics></math>
-represents an <a href="10-glossary.html#exponential-growth-rate" class="term">exponential growth rate</a>. This
-name comes from the fact that
+represents an <a href="10-glossary.html#exponential-growth-rate"
+class="term"
+title="A growth rate function where $n$ (the input size) appears in the exponent. For example, $2^n$.">exponential
+growth rate</a>. This name comes from the fact that
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
 appears in the exponent. The line labeled
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>!</mi></mrow><annotation encoding="application/x-tex">n!</annotation></semantics></math>
@@ -692,19 +592,34 @@ Your browser does not support iframes.
 </iframe>
 </div>
 </p>
-<div class="todo" type="AV">
-<p>To make students more engaged in the GrowthRates exercise, we may
-need a tool that allows students to input two growth rate functions.
-Then the tool should plot the graph of both functions and mark their
-crossing point. The student also should be allowed to play with the
-constant values for both functions and see that this only changes the
-crossing point but doesn’t change which function grows faster than the
-other.</p>
+<!-- TODO
+To make students more engaged in the GrowthRates exercise, we may need a
+tool that allows students to input two growth rate functions. Then the
+tool should plot the graph of both functions and mark their crossing
+point. The student also should be allowed to play with the constant
+values for both functions and see that this only changes the crossing
+point but doesn't change which function grows faster than the other. 
+-->
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="3.1-problems-algorithms-and-programs.html" class="navbutton">&lt;&lt;</a>
+<a href="3.1-problems-algorithms-and-programs.html" accesskey="p" rel="previous">Problems, Algorithms, and Programs</a>
 </div>
-</section>
-</section>
+<div class="navlink">
+<a href="3.3-best-worst-and-average-cases.html" accesskey="n" rel="next">Best, Worst, and Average Cases</a>
+<a href="3.3-best-worst-and-average-cases.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 <script type="text/javascript" src="../interactive/DataStructures/Plot.js"></script>
 <script type="text/javascript" src="../interactive/AlgAnal/GrowthRatesCON.js"></script>
 <script type="text/javascript" src="../interactive/AlgAnal/GrowthRatesZoomCON.js"></script>
 </body>
 </html>
+

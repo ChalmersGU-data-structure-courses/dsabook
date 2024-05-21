@@ -8,26 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Definitions and Properties</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -93,40 +79,59 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 <link href="../interactive/Binary/BinExampCON.css" rel="stylesheet" type="text/css"/>
 <link href="../interactive/Binary/BinDiffCON.css" rel="stylesheet" type="text/css"/>
 <link href="../interactive/Binary/FullCompCON.css" rel="stylesheet" type="text/css"/>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="5-binary-trees.html" accesskey="u" rel="up">Binary Trees</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="5-binary-trees.html" class="navbutton">&lt;&lt;</a>
+<a href="5-binary-trees.html" accesskey="p" rel="previous">Binary Trees</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="5.2-binary-tree-as-a-recursive-data-structure.html" accesskey="n" rel="next">Binary Tree as a Recursive Data Structure</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="5-binary-trees.html" accesskey="p" rel="previous">Binary Trees</a>
-</span>
+<div>
+<a href="5.2-binary-tree-as-a-recursive-data-structure.html" accesskey="n" rel="next">Binary Tree as a Recursive Data Structure</a>
+<a href="5.2-binary-tree-as-a-recursive-data-structure.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="definitions-and-properties" class="level2"
 data-number="5.1">
 <h2 data-number="5.1"><span class="header-section-number">5.1</span>
 Definitions and Properties</h2>
-<p>A <a href="10-glossary.html#binary-tree" class="term">binary tree</a> is made up of a finite set of
-elements called <a href="10-glossary.html#node" class="term">nodes</a>. This set either
-is empty or consists of a node called the <a href="10-glossary.html#root" class="term">root</a>
-together with two binary trees, called the left and right <a href="10-glossary.html#subtree" class="term">subtrees</a>, which are disjoint from each
-other and from the root. (Disjoint means that they have no nodes in
-common.) The roots of these subtrees are <a href="10-glossary.html#child" class="term">children</a> of the root. There is an <a href="10-glossary.html#edge" class="term">edge</a> from a node to each of its children, and a node
-is said to be the <a href="10-glossary.html#parent" class="term">parent</a> of its children.</p>
+<p>A <a href="10-glossary.html#binary-tree" class="term"
+title="A finite set of nodes which is either empty, or else has a root node together two binary trees, called the left and right subtrees, which are disjoint from each other and from the root.">binary
+tree</a> is made up of a finite set of elements called <a
+href="10-glossary.html#node" class="term"
+title="The objects that make up a linked structure such as a linked list or binary tree. Typically, nodes are allocated using dynamic memory allocation. In graph terminology, the nodes are more commonly called vertices.">nodes</a>.
+This set either is empty or consists of a node called the <a
+href="10-glossary.html#root" class="term"
+title="In a tree, the topmost node of the tree. All other nodes in the tree are descendants of the root.">root</a>
+together with two binary trees, called the left and right <a
+href="10-glossary.html#subtree" class="term"
+title="A subtree is a subset of the nodes of a binary tree that includes some node $R$ of the tree as the subtree root along with all the descendants of $R$.">subtrees</a>,
+which are disjoint from each other and from the root. (Disjoint means
+that they have no nodes in common.) The roots of these subtrees are <a
+href="10-glossary.html#child" class="term"
+title="In a tree, the set of nodes directly pointed to by a node $R$ are the children of $R$.">children</a>
+of the root. There is an <a href="10-glossary.html#edge" class="term"
+title="The connection that links two nodes in a tree, linked list, or graph.">edge</a>
+from a node to each of its children, and a node is said to be the <a
+href="10-glossary.html#parent" class="term"
+title="In a tree, the node $P$ that directly links to a node $A$ is the parent of $A$. $A$ is the child of $P$.">parent</a>
+of its children.</p>
 <p>If
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>n</mi><mn>1</mn></msub><mo>,</mo><msub><mi>n</mi><mn>2</mn></msub><mo>,</mo><mi>.</mi><mi>.</mi><mi>.</mi><mo>,</mo><msub><mi>n</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">n_1, n_2, ..., n_k</annotation></semantics></math>
 is a sequence of nodes in the tree such that
@@ -135,11 +140,16 @@ is the parent of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>n</mi><mi>i</mi></msub><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n_i+1</annotation></semantics></math>
 for
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>≤</mo><mi>i</mi><mo>&lt;</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">1 \leq i &lt; k</annotation></semantics></math>,
-then this sequence is called a <a href="10-glossary.html#path" class="term">path</a> from
+then this sequence is called a <a href="10-glossary.html#path"
+class="term"
+title="In tree or graph terminology, a sequence of vertices $v_1, v_2, ..., v_n$ forms a path of length $n-1$ if there exist edges from $v_i$ to $v_{i+1}$ for $1 \leq i &lt; n$.">path</a>
+from
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>n</mi><mn>1</mn></msub><annotation encoding="application/x-tex">n_1</annotation></semantics></math>
 to
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>n</mi><mi>k</mi></msub><annotation encoding="application/x-tex">n_k</annotation></semantics></math>.
-The <a href="10-glossary.html#length" class="term">length</a> of the path is
+The <a href="10-glossary.html#length" class="term"
+title="In a list, the number of elements. In a string, the number of characters.">length</a>
+of the path is
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">k-1</annotation></semantics></math>.
 If there is a path from node
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
@@ -147,26 +157,39 @@ to node
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>,
 then
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
-is an <a href="10-glossary.html#ancestor" class="term">ancestor</a> of
+is an <a href="10-glossary.html#ancestor" class="term"
+title="In a tree, for a given node $A$, any node on a path from $A$ up to the root is an ancestor of $A$.">ancestor</a>
+of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>,
 and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>
-is a <a href="10-glossary.html#descendant" class="term">descendant</a> of
+is a <a href="10-glossary.html#descendant" class="term"
+title="In a tree, the set of all nodes that have a node $A$ as an ancestor are the descendants of $A$. In other words, all of the nodes that can be reached from $A$ by progressing downwards in tree. Another way to say it is: The children of $A$, their children, and so on.">descendant</a>
+of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>.
 Thus, all nodes in the tree are descendants of the root of the tree,
-while the root is the ancestor of all nodes. The <a href="10-glossary.html#depth" class="term">depth</a> of a node
+while the root is the ancestor of all nodes. The <a
+href="10-glossary.html#depth" class="term"
+title="The depth of a node $M$ in a tree is the length of the path from the root of the tree to $M$.">depth</a>
+of a node
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>
 in the tree is the length of the path from the root of the tree to
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>.
-The <a href="10-glossary.html#height" class="term">height</a> of a tree is the depth of the
-deepest node in the tree. All nodes of depth
+The <a href="10-glossary.html#height" class="term"
+title="The height of a tree is one more than the depth of the deepest node in the tree.">height</a>
+of a tree is the depth of the deepest node in the tree. All nodes of
+depth
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>
-are at <a href="10-glossary.html#level" class="term">level</a>
+are at <a href="10-glossary.html#level" class="term"
+title="In a tree, all nodes of depth $d$ are at level $d$ in the tree. The root is the only node at level 0, and its depth is 0.">level</a>
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>
 in the tree. The root is the only node at level 0, and its depth is 0. A
-<a href="10-glossary.html#leaf-node" class="term">leaf node</a> is any node that has two empty
-children. An <a href="10-glossary.html#internal-node" class="term">internal node</a> is any node that
-has at least one non-empty child.</p>
+<a href="10-glossary.html#leaf-node" class="term"
+title="In a binary tree, leaf node is any node that has two empty children. (Note that a binary tree is defined so that every node has two children, and that is why the leaf node has to have two empty children, rather than no children.) In a general tree, any node is a leaf node if it has no children.">leaf
+node</a> is any node that has two empty children. An <a
+href="10-glossary.html#internal-node" class="term"
+title="In a tree, any node that has at least one non-empty child is an internal node.">internal
+node</a> is any node that has at least one non-empty child.</p>
 <div id="BinExample">
 <p>
 <div id="BinExampCON" class="ssAV" data-short-name="BinExampCON" data-long-name="Binary/BinExampCON" alt="Binary/BinExampCON" tabIndex="-1">
@@ -251,10 +274,16 @@ which might be empty), the two binary trees of <a
 href="5.1-definitions-and-properties.html#BinDiff">Figure #BinDiff</a>
 are <em>not</em> the same.</p>
 <p>Two restricted forms of binary tree are sufficiently important to
-warrant special names. Each node in a <a href="10-glossary.html#full-tree" class="term">full binary tree</a> is either (1) an internal node with
-exactly two non-empty children or (2) a leaf. A <a href="10-glossary.html#complete-binary-tree" class="term">complete binary tree</a> has a restricted shape obtained
-by starting at the root and filling the tree by levels from left to
-right. In the complete binary tree of height
+warrant special names. Each node in a <a
+href="10-glossary.html#full-tree" class="term"
+title="A binary tree is full if every node is either a leaf node or else it is an internal node with two non-empty children.">full
+binary tree</a> is either (1) an internal node with exactly two
+non-empty children or (2) a leaf. A <a
+href="10-glossary.html#complete-binary-tree" class="term"
+title="A binary tree where the nodes are filled in row by row, with the bottom row filled in left to right. Due to this requirement, there is only one tree of $n$ nodes for any value of $n$. Since storing the records in an array in row order leads to a simple mapping from a node&#39;s position in the array to its parent, siblings, and children, the array representation is most commonly used to implement the complete binary tree. The heap data structure is a complete binary tree with partial ordering constraints on the node values.">complete
+binary tree</a> has a restricted shape obtained by starting at the root
+and filling the tree by levels from left to right. In the complete
+binary tree of height
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>,
 all levels except possibly level
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>
@@ -278,28 +307,8 @@ href="7.2-heaps-and-priority-queues.html#heaps-and-priority-queues">heap</a>
 data structure is an example of a complete binary tree. The <a
 href="7.4-huffman-coding-trees-optional.html#huffman-coding-trees-optional">Huffman
 coding tree</a> is an example of a full binary tree.</p>
-<p>
-<div id="DefSumm" class="embedContainer">
-<iframe id="DefSumm_iframe" aria-label="DefSumm" src="../interactive/Binary/DefSumm.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
-</div>
-</p>
-<section id="practice-questions-3" class="level3" data-number="5.1.1">
-<h3 data-number="5.1.1"><span class="header-section-number">5.1.1</span>
-Practice Questions</h3>
-<p>
-<div id="Treeprobs" class="embedContainer">
-<iframe id="Treeprobs_iframe" aria-label="Treeprobs" src="../interactive/Binary/Treeprobs.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
-</div>
-</p>
-</section>
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document"
-role="doc-endnotes">
-<hr />
+<aside id="footnotes" class="footnotes footnotes-end-of-block"
+role="doc-footnote">
 <ol>
 <li id="fn1"><p>While these definitions for full and complete binary
 tree are the ones most commonly used, they are not universal. Because
@@ -311,9 +320,236 @@ trees tend to be wider than full binary trees because each level of a
 complete binary tree is as wide as possible.<a href="#fnref1"
 class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
+</aside>
+<section id="practice-questions-binary-tree-definition" class="level3"
+data-number="5.1.1">
+<h3 data-number="5.1.1"><span class="header-section-number">5.1.1</span>
+Practice questions: Binary tree definition</h3>
+<div class="quiz">
+<div class="question">
+<p>Which statement is false?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Every binary tree has at
+least one node</label></li>
+<li><label><input type="checkbox" />Every non-empty binary tree has
+exactly one root node</label></li>
+<li><label><input type="checkbox" />Every node in a binary tree has
+exactly two children</label></li>
+<li><label><input type="checkbox" />Every non-root node in a binary tree
+has exactly one parent</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Look carefully at the definition for a binary tree.</li>
+<li>It states that every binary tree is either empty, or it has a root
+node and two binary trees as children.</li>
+<li>So, every binary tree node has two children, but not every binary
+tree has a node.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the minimum number of nodes in a complete binary tree with
+height 3?</p>
+<p><input type="text" value="8"/></p>
+<div class="hints">
+<ul>
+<li>Start filling in the tree level by level.</li>
+<li>Stop when you draw the first node at level 3.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Select the one true statement.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />None of the
+alternatives</label></li>
+<li><label><input type="checkbox" />Every binary tree is either complete
+or full</label></li>
+<li><label><input type="checkbox" />Every complete binary tree is also a
+full binary tree</label></li>
+<li><label><input type="checkbox" />Every full binary tree is also a
+complete binary tree</label></li>
+<li><label><input type="checkbox" />No binary tree is both complete and
+full</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Not every binary tree is either complete or full.</li>
+<li>Not every complete binary tree is full.</li>
+<li>Not every full binary tree is complete.</li>
+<li>Some complete trees are full.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the minimum number of nodes in a full binary tree with height
+3?</p>
+<p><input type="text" value="7"/></p>
+<div class="hints">
+<ul>
+<li>First, draw a vertical chain of 4 nodes. This is a tree with height
+3.</li>
+<li>Next, add nodes to make the tree be full.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Suppose T is a binary tree with 14 nodes. What is the minimum
+possible height of T?</p>
+<p><input type="text" value="3"/></p>
+<div class="hints">
+<ul>
+<li>Try drawing this as a complete treee.</li>
+<li>That is, build a tree of 14 nodes by filling it in level by
+level.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the minimum number of internal nodes in a binary tree with 8
+nodes?</p>
+<p><input type="text" value="4"/></p>
+<div class="hints">
+<ul>
+<li>Try drawing some trees. Your best bet is to try and make it
+full.</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
+<section id="binary-tree-exercises" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2"><span class="header-section-number">5.1.2</span>
+Binary tree exercises</h3>
+<div class="quiz">
+<figure>
+<img src="images/BintreeExercise.png"
+alt="Here’s an example binary tree" />
+<figcaption aria-hidden="true">Here’s an example binary
+tree</figcaption>
+</figure>
+<div class="question">
+<p>How many internal nodes does this tree have?</p>
+<p><input type="text" value="5"/></p>
+<div class="hints">
+<ul>
+<li>Anything that is <em>not</em> a leaf node is an internal node.
+Internal nodes might have 1 or 2 children.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the height of this tree?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />0</label></li>
+<li><label><input type="checkbox" />1</label></li>
+<li><label><input type="checkbox" />2</label></li>
+<li><label><input type="checkbox" checked="" />3</label></li>
+<li><label><input type="checkbox" />4</label></li>
+<li><label><input type="checkbox" />5</label></li>
+<li><label><input type="checkbox" />9</label></li>
+<li><label><input type="checkbox" />Trees have depth – they do not have
+height</label></li>
+<li><label><input type="checkbox" />None of the above</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Count the number of steps to the deepest node.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>How many leaf nodes does this tree have?</p>
+<p><input type="text" value="4"/></p>
+<div class="hints">
+<ul>
+<li>Anything that has <em>no</em> children is a leaf node.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>How many nodes in the tree have at least one sibling?</p>
+<p><input type="text" value="6"/></p>
+<div class="hints">
+<ul>
+<li>Siblings must have the same parent. If a node has two children, then
+each such child has a sibling.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>How many descendents does the root of this tree have?</p>
+<p><input type="text" value="8"/></p>
+<div class="hints">
+<ul>
+<li>Every node <em>except</em> the root is a descendent.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the depth of this tree?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />0</label></li>
+<li><label><input type="checkbox" />1</label></li>
+<li><label><input type="checkbox" />2</label></li>
+<li><label><input type="checkbox" />3</label></li>
+<li><label><input type="checkbox" />4</label></li>
+<li><label><input type="checkbox" />5</label></li>
+<li><label><input type="checkbox" />9</label></li>
+<li><label><input type="checkbox" checked="" />Trees have height – they
+do not have depth</label></li>
+<li><label><input type="checkbox" />None of the above</label>
+</ul></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Nodes have depth.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which statement is correct?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />The tree is neither full
+nor complete</label></li>
+<li><label><input type="checkbox" />The tree is complete but not
+full</label></li>
+<li><label><input type="checkbox" />The tree is full but not
+complete</label></li>
+<li><label><input type="checkbox" />The tree is full and
+complete</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Do any internal nodes have only one child? If so, the tree is
+<em>not</em> full.</li>
+<li>A complete tree fills in nodes level by level, with the bottom level
+filled in from left to right.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="5-binary-trees.html" class="navbutton">&lt;&lt;</a>
+<a href="5-binary-trees.html" accesskey="p" rel="previous">Binary Trees</a>
+</div>
+<div class="navlink">
+<a href="5.2-binary-tree-as-a-recursive-data-structure.html" accesskey="n" rel="next">Binary Tree as a Recursive Data Structure</a>
+<a href="5.2-binary-tree-as-a-recursive-data-structure.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 <script type="text/javascript" src="../interactive/Binary/BinExampCON.js"></script>
 <script type="text/javascript" src="../interactive/Binary/BinDiffCON.js"></script>
 <script type="text/javascript" src="../interactive/Binary/FullCompCON.js"></script>
 </body>
 </html>
+

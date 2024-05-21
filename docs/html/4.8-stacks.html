@@ -8,93 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Stacks</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        background-color: #ffffff;
-        color: #a0a0a0;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
-    div.sourceCode
-      { color: #1f1c1b; background-color: #ffffff; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #1f1c1b; } /* Normal */
-    code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
-    code span.an { color: #ca60ca; } /* Annotation */
-    code span.at { color: #0057ae; } /* Attribute */
-    code span.bn { color: #b08000; } /* BaseN */
-    code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
-    code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #924c9d; } /* Char */
-    code span.cn { color: #aa5500; } /* Constant */
-    code span.co { color: #898887; } /* Comment */
-    code span.cv { color: #0095ff; } /* CommentVar */
-    code span.do { color: #607880; } /* Documentation */
-    code span.dt { color: #0057ae; } /* DataType */
-    code span.dv { color: #b08000; } /* DecVal */
-    code span.er { color: #bf0303; text-decoration: underline; } /* Error */
-    code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
-    code span.fl { color: #b08000; } /* Float */
-    code span.fu { color: #644a9b; } /* Function */
-    code span.im { color: #ff5500; } /* Import */
-    code span.in { color: #b08000; } /* Information */
-    code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
-    code span.op { color: #1f1c1b; } /* Operator */
-    code span.ot { color: #006e28; } /* Other */
-    code span.pp { color: #006e28; } /* Preprocessor */
-    code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
-    code span.sc { color: #3daee9; } /* SpecialChar */
-    code span.ss { color: #ff5500; } /* SpecialString */
-    code span.st { color: #bf0303; } /* String */
-    code span.va { color: #0057ae; } /* Variable */
-    code span.vs { color: #bf0303; } /* VerbatimString */
-    code span.wa { color: #bf0303; } /* Warning */
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -160,64 +79,74 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 <link href="../interactive/ChalmersGU/CGU-Styles.css" rel="stylesheet" type="text/css"/>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="4-lists-1.html" accesskey="u" rel="up">Lists</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="4.7-doubly-linked-lists-optional.html" class="navbutton">&lt;&lt;</a>
+<a href="4.7-doubly-linked-lists-optional.html" accesskey="p" rel="previous">Doubly Linked Lists (optional)</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="4.9-implementing-recursion.html" accesskey="n" rel="next">Implementing Recursion</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="4.7-doubly-linked-lists-optional.html" accesskey="p" rel="previous">Doubly Linked Lists (optional)</a>
-</span>
+<div>
+<a href="4.9-implementing-recursion.html" accesskey="n" rel="next">Implementing Recursion</a>
+<a href="4.9-implementing-recursion.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="stacks" class="level2" data-number="4.8">
 <h2 data-number="4.8"><span class="header-section-number">4.8</span>
 Stacks</h2>
-<p>The <a href="10-glossary.html#stack" class="term">stack</a> is a list-like structure in which
-elements may be inserted or removed from only one end. While this
-restriction makes stacks less flexible than lists, it also makes stacks
-both efficient (for those operations they can do) and easy to implement.
-Many applications require only the limited form of insert and remove
-operations that stacks provide. In such cases, it is more efficient to
-use the simpler stack data structure rather than the generic list.</p>
+<p>The <a href="10-glossary.html#stack" class="term"
+title="A list-like structure in which elements may be inserted or removed from only one end.">stack</a>
+is a list-like structure in which elements may be inserted or removed
+from only one end. While this restriction makes stacks less flexible
+than lists, it also makes stacks both efficient (for those operations
+they can do) and easy to implement. Many applications require only the
+limited form of insert and remove operations that stacks provide. In
+such cases, it is more efficient to use the simpler stack data structure
+rather than the generic list.</p>
 <p>Despite their restrictions, stacks have many uses. Thus, a special
 vocabulary for stacks has developed. Accountants used stacks long before
-the invention of the computer. They called the stack a “<a href="10-glossary.html#lifo" class="term">LIFO</a>” list, which stands for “Last-In, First-Out.”
-Note that one implication of the LIFO policy is that stacks remove
-elements in reverse order of their arrival.</p>
+the invention of the computer. They called the stack a “<a
+href="10-glossary.html#lifo" class="term"
+title="Abbreviation for &#39;last-in, first-out&#39;. This is the access paradigm for a stack, and an old terminolgy for the stack is &#39;LIFO list&#39;.">LIFO</a>”
+list, which stands for “Last-In, First-Out.” Note that one implication
+of the LIFO policy is that stacks remove elements in reverse order of
+their arrival.</p>
 <p>The accessible element of the stack is called the <code>top</code>
-element. Elements are not said to be inserted, they are <a href="10-glossary.html#push" class="term">pushed</a> onto the stack. When removed, an element is said
-to be <a href="10-glossary.html#pop" class="term">popped</a> from the stack. Here is our
-<a href="10-glossary.html#adt" class="term">ADT</a> for stacks:</p>
+element. Elements are not said to be inserted, they are <a
+href="10-glossary.html#push" class="term"
+title="A specialized term used to indicate inserting an element onto a stack.">pushed</a>
+onto the stack. When removed, an element is said to be <a
+href="10-glossary.html#pop" class="term"
+title="A specialized term used to indicate removing an element from a stack.">popped</a>
+from the stack. Here is our <a href="10-glossary.html#adt" class="term"
+title="Abbreviated ADT. The specification of a data type within some language, independent of an implementation. The interface for the ADT is defined in terms of a type and a set of operations on that type. The behavior of each operation is determined by its inputs and outputs. An ADT does not specify *how* the data type is implemented. These implementation details are hidden from the user of the ADT and protected from outside access, a concept referred to as encapsulation.">ADT</a>
+for stacks:</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Stack(Collection):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> push(<span class="va">self</span>, x): <span class="st">&quot;&quot;&quot;Pushes x on top of the stack.&quot;&quot;&quot;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> pop(<span class="va">self</span>):     <span class="st">&quot;&quot;&quot;Pops the top of the stack and returns it. Raises an exception if the stack is empty.&quot;&quot;&quot;</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> peek(<span class="va">self</span>):    <span class="st">&quot;&quot;&quot;Returns the top element, without removing it. Raises an exception if the stack is empty.&quot;&quot;&quot;</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Note: __iter__() should yield the elements starting from the top of the stack.</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Note: This is an interface, while java.util.Stack is a class!</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Stack</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="kw">extends</span> <span class="bu">Collection</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> <span class="fu">push</span><span class="op">(</span>E x<span class="op">);</span>  <span class="co">// Pushes x on top of the stack.</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    E <span class="fu">pop</span><span class="op">();</span>         <span class="co">// Pops the top of the stack and returns it. Raises an exception if the stack is empty.</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    E <span class="fu">peek</span><span class="op">();</span>        <span class="co">// Returns the top element, without removing it. Raises an exception if the stack is empty.</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Note: iterator() should yield the elements starting from the top of the stack.</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Stack</span> <span class="kw">extends</span> <span class="bu">Collection</span>:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">push</span>(x)    <span class="co">// Pushes x on top of the stack.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">pop</span>()      <span class="co">// Pops the top of the stack and returns it.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">peek</span>()     <span class="co">// Returns the top element, without removing it.</span></span></code></pre></div>
 <p>As with lists, there are many variations on stack implementation. The
-two main approaches are the <a href="10-glossary.html#array-based-stack" class="term">array-based stack</a>
-and the <a href="4.8-stacks.html#linked-list-stacks">linked stack</a>,
-which are analogous to array-based and linked lists, respectively.</p>
+two main approaches are the <a href="10-glossary.html#array-based-stack"
+class="term"
+title="Analogous to an array-based list, this uses an array to store the elements when implementing the stack ADT.">array-based
+stack</a> and the <a href="4.8-stacks.html#linked-list-stacks">linked
+stack</a>, which are analogous to array-based and linked lists,
+respectively.</p>
 <section id="dynamic-array-based-stacks" class="level3"
 data-number="4.8.1">
 <h3 data-number="4.8.1"><span class="header-section-number">4.8.1</span>
@@ -226,29 +155,14 @@ Dynamic Array-Based Stacks</h3>
 grow and shrink dynamically), and the index of the <strong>top</strong>
 of the stack. Or actually, the index is for the next free slot in the
 array, which at the same time is the size of the stack.</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> DynamicArrayStack(Stack):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    _minCapacity <span class="op">=</span> <span class="dv">8</span>            <span class="co"># Minimum capacity of internalArray</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    _minLoadFactor <span class="op">=</span> <span class="fl">0.5</span>        <span class="co"># Must be smaller than 1/CapacityMultiplier</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    _capacityMultiplier <span class="op">=</span> <span class="fl">1.5</span>   <span class="co"># Factor to grow/shrink the capacity</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._internalArray <span class="op">=</span> [<span class="va">None</span>] <span class="op">*</span> <span class="va">self</span>._minCapacity   <span class="co"># Internal array containing the stack elements</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._stackSize <span class="op">=</span> <span class="dv">0</span>                                <span class="co"># Size of stack, and index of the next free slot</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> DynamicArrayStack<span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="kw">implements</span> <span class="bu">Stack</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> E<span class="op">[]</span> internalArray<span class="op">;</span>   <span class="co">// Internal array containing the stack elements</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> stackSize<span class="op">;</span>       <span class="co">// Size of stack, and index of the next free slot</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">static</span> <span class="dt">int</span> MinCapacity <span class="op">=</span> <span class="dv">8</span><span class="op">;</span>               <span class="co">// Minimum capacity of internalArray</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">static</span> <span class="dt">double</span> MinLoadFactor <span class="op">=</span> <span class="fl">0.5</span><span class="op">;</span>        <span class="co">// Must be smaller than 1/CapacityMultiplier</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">static</span> <span class="dt">double</span> CapacityMultiplier <span class="op">=</span> <span class="fl">1.5</span><span class="op">;</span>   <span class="co">// Factor to grow/shrink the capacity</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">@SuppressWarnings</span><span class="op">(</span><span class="st">&quot;unchecked&quot;</span><span class="op">)</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">DynamicArrayStack</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        internalArray <span class="op">=</span> <span class="op">(</span>E<span class="op">[])</span> <span class="kw">new</span> <span class="bu">Object</span><span class="op">[</span>MinCapacity<span class="op">];</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        stackSize <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> DynamicArrayStack <span class="kw">implements</span> <span class="bu">Stack</span>:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    DynamicArrayStack():</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.internalArray <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(<span class="dv">8</span>)  <span class="co">// Internal array containing the stack elements</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.stackSize <span class="op">=</span> <span class="dv">0</span>                 <span class="co">// Size of stack, and index of the next free slot</span></span></code></pre></div>
+<p>Note that here we use an initial array size of 8, but we could use
+any positive value. (It doesn’t work with an initial empty array, can
+you figure out why?)</p>
 <p>The array-based stack implementation is essentially a simplified
 version of the array-based list. The only important design decision to
 be made is which end of the array should represent the top of the
@@ -273,19 +187,17 @@ Pushing to the Stack</h3>
 <div class="jsavcanvas"></div>
 </div>
 </p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> push(<span class="va">self</span>, x):</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>._stackSize <span class="op">&gt;=</span> <span class="bu">len</span>(<span class="va">self</span>._internalArray):</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._resizeArray(<span class="bu">len</span>(<span class="va">self</span>._internalArray) <span class="op">*</span> <span class="va">self</span>._capacityMultiplier)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._internalArray[<span class="va">self</span>._stackSize] <span class="op">=</span> x</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._stackSize <span class="op">+=</span> <span class="dv">1</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">push</span><span class="op">(</span>E x<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>stackSize <span class="op">&gt;=</span> internalArray<span class="op">.</span><span class="fu">length</span><span class="op">)</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">resizeArray</span><span class="op">((</span><span class="dt">int</span><span class="op">)</span> <span class="op">(</span>internalArray<span class="op">.</span><span class="fu">length</span> <span class="op">*</span> CapacityMultiplier<span class="op">));</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        internalArray<span class="op">[</span>stackSize<span class="op">]</span> <span class="op">=</span> x<span class="op">;</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        stackSize<span class="op">++;</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> DynamicArrayStack <span class="kw">implements</span> <span class="bu">Stack</span>:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">push</span>(x):</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">this</span>.stackSize <span class="op">&gt;=</span> <span class="va">this</span>.internalArray.<span class="bu">size</span>():</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>            <span class="va">this</span>.resizeArray(<span class="va">this</span>.internalArray.<span class="bu">size</span>() <span class="op">*</span> <span class="dv">2</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.internalArray[<span class="va">this</span>.stackSize] <span class="op">=</span> x</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.stackSize <span class="op">=</span> <span class="va">this</span>.stackSize <span class="op">+</span> <span class="dv">1</span></span></code></pre></div>
+<p>Note that any resizing factor &gt;1 works, and in fact it is probably
+better to use something like 1.5 or even 1.1 (because this will save
+memory without losing too much efficiency).</p>
 <p>
 <div id="DynamicArrayStack-Push-PRO" class="embedContainer">
 <iframe id="DynamicArrayStack-Push-PRO_iframe" aria-label="DynamicArrayStack-Push-PRO" src="../interactive/ChalmersGU/DynamicArrayStack-Push-PRO.html" width="100%" height="600" scrolling="no">
@@ -305,25 +217,20 @@ Popping from the Stack</h3>
 <div class="jsavcanvas"></div>
 </div>
 </p>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> pop(<span class="va">self</span>):</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> (<span class="va">self</span>._stackSize <span class="op">&gt;</span> <span class="dv">0</span>): <span class="cf">raise</span> <span class="pp">IndexError</span>(<span class="st">&quot;pop from empty stack&quot;</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._stackSize <span class="op">-=</span> <span class="dv">1</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> <span class="va">self</span>._internalArray[<span class="va">self</span>._stackSize]</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._internalArray[<span class="va">self</span>._stackSize] <span class="op">=</span> <span class="va">None</span>   <span class="co"># For garbage collection</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>._stackSize <span class="op">&lt;=</span> <span class="bu">len</span>(<span class="va">self</span>._internalArray) <span class="op">*</span> <span class="va">self</span>._minLoadFactor:</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._resizeArray(<span class="bu">len</span>(<span class="va">self</span>._internalArray) <span class="op">/</span> <span class="va">self</span>._capacityMultiplier)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x</span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> E <span class="fu">pop</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!(</span>stackSize <span class="op">&gt;</span> <span class="dv">0</span><span class="op">))</span> <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">NoSuchElementException</span><span class="op">(</span><span class="st">&quot;pop from empty stack&quot;</span><span class="op">);</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        stackSize<span class="op">--;</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        E x <span class="op">=</span> internalArray<span class="op">[</span>stackSize<span class="op">];</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        internalArray<span class="op">[</span>stackSize<span class="op">]</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span>   <span class="co">// For garbage collection</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>stackSize <span class="op">&lt;=</span> internalArray<span class="op">.</span><span class="fu">length</span> <span class="op">*</span> MinLoadFactor<span class="op">)</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>            <span class="fu">resizeArray</span><span class="op">((</span><span class="dt">int</span><span class="op">)</span> <span class="op">(</span>internalArray<span class="op">.</span><span class="fu">length</span> <span class="op">/</span> CapacityMultiplier<span class="op">));</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x<span class="op">;</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> DynamicArrayStack <span class="kw">implements</span> <span class="bu">Stack</span>:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">pop</span>():</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">precondition</span>: <span class="va">this</span>.stackSize <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.stackSize <span class="op">=</span> <span class="va">this</span>.stackSize <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> <span class="va">this</span>.internalArray[<span class="va">this</span>.stackSize]</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.internalArray[<span class="va">this</span>.stackSize] <span class="op">=</span> <span class="va">null</span>  <span class="co">// For garbage collection</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">this</span>.stackSize <span class="op">&lt;=</span> <span class="va">this</span>.internalArray.<span class="bu">size</span>() <span class="op">*</span> <span class="dv">1</span><span class="op">/</span><span class="dv">3</span>:</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>            <span class="va">this</span>.resizeArray(<span class="va">this</span>.internalArray.<span class="bu">size</span>() <span class="op">*</span> <span class="dv">1</span><span class="op">/</span><span class="dv">2</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x</span></code></pre></div>
+<p>Note that the factors 1/3 and 1/2 are not set in stone. The only
+requirement is that the minimum load factor 1/3 must be smaller than the
+shrinking factor 1/2, which in turn must be &lt;1.</p>
 <p>
 <div id="DynamicArrayStack-Pop-PRO" class="embedContainer">
 <iframe id="DynamicArrayStack-Pop-PRO_iframe" aria-label="DynamicArrayStack-Pop-PRO" src="../interactive/ChalmersGU/DynamicArrayStack-Pop-PRO.html" width="100%" height="600" scrolling="no">
@@ -331,148 +238,14 @@ Your browser does not support iframes.
 </iframe>
 </div>
 </p>
-</section>
-<section id="array-based-stacks-full-implementation" class="level3"
-data-number="4.8.4">
-<h3 data-number="4.8.4"><span class="header-section-number">4.8.4</span>
-Array-based stacks: Full implementation</h3>
 <p>As you hopefully have noticed, the code for stacks is very similar to
 the code for lists. E.g., the internal variables are exactly the same,
 and the resizing method doesn’t change at all. The main difference is
 that stacks are even simpler to implement than their list
 counterparts.</p>
-<p>Here is a complete implementation for the (dynamic) array-based stack
-class.</p>
-<div class="sourceCode" id="cb9"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: DynamicArrayStackInit *** */</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> DynamicArrayStack(Stack):</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    _minCapacity <span class="op">=</span> <span class="dv">8</span>            <span class="co"># Minimum capacity of internalArray</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    _minLoadFactor <span class="op">=</span> <span class="fl">0.5</span>        <span class="co"># Must be smaller than 1/CapacityMultiplier</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    _capacityMultiplier <span class="op">=</span> <span class="fl">1.5</span>   <span class="co"># Factor to grow/shrink the capacity</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._internalArray <span class="op">=</span> [<span class="va">None</span>] <span class="op">*</span> <span class="va">self</span>._minCapacity   <span class="co"># Internal array containing the stack elements</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._stackSize <span class="op">=</span> <span class="dv">0</span>                                <span class="co"># Size of stack, and index of the next free slot</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: DynamicArrayStackInit *** */</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: DynamicArrayStackPush *** */</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> push(<span class="va">self</span>, x):</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>._stackSize <span class="op">&gt;=</span> <span class="bu">len</span>(<span class="va">self</span>._internalArray):</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._resizeArray(<span class="bu">len</span>(<span class="va">self</span>._internalArray) <span class="op">*</span> <span class="va">self</span>._capacityMultiplier)</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._internalArray[<span class="va">self</span>._stackSize] <span class="op">=</span> x</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._stackSize <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: DynamicArrayStackPush *** */</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: DynamicArrayStackPeek *** */</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> peek(<span class="va">self</span>):</span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> (<span class="va">self</span>._stackSize <span class="op">&gt;</span> <span class="dv">0</span>): <span class="cf">raise</span> <span class="pp">IndexError</span>(<span class="st">&quot;peek from empty stack&quot;</span>)</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._internalArray[<span class="va">self</span>._stackSize<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: DynamicArrayStackPeek *** */</span></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: DynamicArrayStackPop *** */</span></span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> pop(<span class="va">self</span>):</span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> (<span class="va">self</span>._stackSize <span class="op">&gt;</span> <span class="dv">0</span>): <span class="cf">raise</span> <span class="pp">IndexError</span>(<span class="st">&quot;pop from empty stack&quot;</span>)</span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._stackSize <span class="op">-=</span> <span class="dv">1</span></span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> <span class="va">self</span>._internalArray[<span class="va">self</span>._stackSize]</span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._internalArray[<span class="va">self</span>._stackSize] <span class="op">=</span> <span class="va">None</span>   <span class="co"># For garbage collection</span></span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>._stackSize <span class="op">&lt;=</span> <span class="bu">len</span>(<span class="va">self</span>._internalArray) <span class="op">*</span> <span class="va">self</span>._minLoadFactor:</span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._resizeArray(<span class="bu">len</span>(<span class="va">self</span>._internalArray) <span class="op">/</span> <span class="va">self</span>._capacityMultiplier)</span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x</span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: DynamicArrayStackPop *** */</span></span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: DynamicArrayStackResize *** */</span></span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _resizeArray(<span class="va">self</span>, newCapacity):</span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> newCapacity <span class="op">&lt;</span> <span class="va">self</span>._minCapacity: <span class="cf">return</span></span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>        newArray <span class="op">=</span> [<span class="va">None</span>] <span class="op">*</span> <span class="bu">int</span>(newCapacity)</span>
-<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="va">self</span>._stackSize):</span>
-<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>            newArray[i] <span class="op">=</span> <span class="va">self</span>._internalArray[i]</span>
-<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._internalArray <span class="op">=</span> newArray</span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: DynamicArrayStackResize *** */</span></span>
-<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> isEmpty(<span class="va">self</span>):</span>
-<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._stackSize <span class="op">==</span> <span class="dv">0</span></span>
-<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> size(<span class="va">self</span>):</span>
-<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._stackSize</span>
-<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: DynamicArrayStackIterator *** */</span></span>
-<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__iter__</span>(<span class="va">self</span>):</span>
-<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">reversed</span>(<span class="bu">range</span>(<span class="va">self</span>._stackSize)):</span>
-<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>            <span class="cf">yield</span> <span class="va">self</span>._internalArray[i]</span>
-<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: DynamicArrayStackIterator *** */</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: DynamicArrayStackInit *** */</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> DynamicArrayStack<span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="kw">implements</span> <span class="bu">Stack</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> E<span class="op">[]</span> internalArray<span class="op">;</span>   <span class="co">// Internal array containing the stack elements</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> stackSize<span class="op">;</span>       <span class="co">// Size of stack, and index of the next free slot</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">static</span> <span class="dt">int</span> MinCapacity <span class="op">=</span> <span class="dv">8</span><span class="op">;</span>               <span class="co">// Minimum capacity of internalArray</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">static</span> <span class="dt">double</span> MinLoadFactor <span class="op">=</span> <span class="fl">0.5</span><span class="op">;</span>        <span class="co">// Must be smaller than 1/CapacityMultiplier</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">static</span> <span class="dt">double</span> CapacityMultiplier <span class="op">=</span> <span class="fl">1.5</span><span class="op">;</span>   <span class="co">// Factor to grow/shrink the capacity</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">@SuppressWarnings</span><span class="op">(</span><span class="st">&quot;unchecked&quot;</span><span class="op">)</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">DynamicArrayStack</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>        internalArray <span class="op">=</span> <span class="op">(</span>E<span class="op">[])</span> <span class="kw">new</span> <span class="bu">Object</span><span class="op">[</span>MinCapacity<span class="op">];</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>        stackSize <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: DynamicArrayStackInit *** */</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: DynamicArrayStackPush *** */</span></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">push</span><span class="op">(</span>E x<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>stackSize <span class="op">&gt;=</span> internalArray<span class="op">.</span><span class="fu">length</span><span class="op">)</span></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>            <span class="fu">resizeArray</span><span class="op">((</span><span class="dt">int</span><span class="op">)</span> <span class="op">(</span>internalArray<span class="op">.</span><span class="fu">length</span> <span class="op">*</span> CapacityMultiplier<span class="op">));</span></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>        internalArray<span class="op">[</span>stackSize<span class="op">]</span> <span class="op">=</span> x<span class="op">;</span></span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>        stackSize<span class="op">++;</span></span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: DynamicArrayStackPush *** */</span></span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: DynamicArrayStackPeek *** */</span></span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> E <span class="fu">peek</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!(</span>stackSize <span class="op">&gt;</span> <span class="dv">0</span><span class="op">))</span> <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">NoSuchElementException</span><span class="op">(</span><span class="st">&quot;peek from empty stack&quot;</span><span class="op">);</span></span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> internalArray<span class="op">[</span>stackSize<span class="op">-</span><span class="dv">1</span><span class="op">];</span></span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: DynamicArrayStackPeek *** */</span></span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: DynamicArrayStackPop *** */</span></span>
-<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> E <span class="fu">pop</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!(</span>stackSize <span class="op">&gt;</span> <span class="dv">0</span><span class="op">))</span> <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">NoSuchElementException</span><span class="op">(</span><span class="st">&quot;pop from empty stack&quot;</span><span class="op">);</span></span>
-<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>        stackSize<span class="op">--;</span></span>
-<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>        E x <span class="op">=</span> internalArray<span class="op">[</span>stackSize<span class="op">];</span></span>
-<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>        internalArray<span class="op">[</span>stackSize<span class="op">]</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span>   <span class="co">// For garbage collection</span></span>
-<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>stackSize <span class="op">&lt;=</span> internalArray<span class="op">.</span><span class="fu">length</span> <span class="op">*</span> MinLoadFactor<span class="op">)</span></span>
-<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>            <span class="fu">resizeArray</span><span class="op">((</span><span class="dt">int</span><span class="op">)</span> <span class="op">(</span>internalArray<span class="op">.</span><span class="fu">length</span> <span class="op">/</span> CapacityMultiplier<span class="op">));</span></span>
-<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x<span class="op">;</span></span>
-<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: DynamicArrayStackPop *** */</span></span>
-<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: DynamicArrayStackResize *** */</span></span>
-<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">resizeArray</span><span class="op">(</span><span class="dt">int</span> newCapacity<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>newCapacity <span class="op">&lt;</span> MinCapacity<span class="op">)</span> <span class="cf">return</span><span class="op">;</span></span>
-<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>        <span class="at">@SuppressWarnings</span><span class="op">(</span><span class="st">&quot;unchecked&quot;</span><span class="op">)</span></span>
-<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>        E<span class="op">[]</span> newArray <span class="op">=</span> <span class="op">(</span>E<span class="op">[])</span> <span class="kw">new</span> <span class="bu">Object</span><span class="op">[</span>newCapacity<span class="op">];</span></span>
-<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> stackSize<span class="op">;</span> i<span class="op">++)</span></span>
-<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>            newArray<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> internalArray<span class="op">[</span>i<span class="op">];</span></span>
-<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a>        internalArray <span class="op">=</span> newArray<span class="op">;</span></span>
-<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: DynamicArrayStackResize *** */</span></span>
-<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">isEmpty</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> stackSize <span class="op">==</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">size</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> stackSize<span class="op">;</span></span>
-<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: DynamicArrayStackIterator *** */</span></span>
-<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">Iterator</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="fu">iterator</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">Arrays</span><span class="op">.</span><span class="fu">stream</span><span class="op">(</span>internalArray<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> stackSize<span class="op">).</span><span class="fu">iterator</span><span class="op">();</span></span>
-<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: DynamicArrayStackIterator *** */</span></span>
-<span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
-<section id="linked-list-stacks" class="level3" data-number="4.8.5">
-<h3 data-number="4.8.5"><span class="header-section-number">4.8.5</span>
+<section id="linked-list-stacks" class="level3" data-number="4.8.4">
+<h3 data-number="4.8.4"><span class="header-section-number">4.8.4</span>
 Linked List Stacks</h3>
 <p>The linked stack implementation is quite simple. Elements are
 inserted and removed only from the head of the list. Here is a visual
@@ -482,43 +255,22 @@ representation for the linked stack.</p>
 <div class="jsavcanvas"></div>
 </div>
 </p>
-<div class="line-block"></div>
-<div class="sourceCode" id="cb11"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LinkedStack(Stack):</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._top <span class="op">=</span> <span class="va">None</span>      <span class="co"># Pointer to top of stack</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._stackSize <span class="op">=</span> <span class="dv">0</span>   <span class="co"># Size of stack</span></span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LinkedStack<span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="kw">implements</span> <span class="bu">Stack</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="bu">Node</span> top<span class="op">;</span>        <span class="co">// Pointer to top of stack</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> stackSize<span class="op">;</span>   <span class="co">// Size of stack</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">LinkedStack</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>        top <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        stackSize <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LinkedStack <span class="kw">implements</span> <span class="bu">Stack</span>:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    LinkedStack():</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.top <span class="op">=</span> <span class="va">null</span>     <span class="co">// Pointer to top of stack</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.stackSize <span class="op">=</span> <span class="dv">0</span>  <span class="co">// Size of stack</span></span></code></pre></div>
 <p>Stack nodes are exactly the same as the <a
 href="4.4-linked-lists.html#linked-lists">linked list nodes</a> we saw
 earlier.</p>
-<div class="sourceCode" id="cb13"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Python does not have internal classes, so we have to make the stack node standalone.</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LinkedStackNode:</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, elem, <span class="bu">next</span>):</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.elem <span class="op">=</span> elem   <span class="co"># Value for this node</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.<span class="bu">next</span> <span class="op">=</span> <span class="bu">next</span>   <span class="co"># Pointer to next node in stack</span></span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="kw">class</span> <span class="bu">Node</span> <span class="op">{</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>        E elem<span class="op">;</span>       <span class="co">// Value for this node</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Node</span> next<span class="op">;</span>    <span class="co">// Pointer to next node in stack</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Node</span><span class="op">(</span>E elem<span class="op">,</span> <span class="bu">Node</span> next<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>            <span class="kw">this</span><span class="op">.</span><span class="fu">elem</span> <span class="op">=</span> elem<span class="op">;</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>            <span class="kw">this</span><span class="op">.</span><span class="fu">next</span> <span class="op">=</span> next<span class="op">;</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
-<section id="linked-stack-push" class="level4" data-number="4.8.5.1">
-<h4 data-number="4.8.5.1"><span
-class="header-section-number">4.8.5.1</span> Linked Stack Push</h4>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Node:</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    Node(elem, <span class="bu">next</span>):</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.elem <span class="op">=</span> elem   <span class="co">// Value for this node</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.<span class="bu">next</span> <span class="op">=</span> <span class="bu">next</span>   <span class="co">// Pointer to next node in stack</span></span></code></pre></div>
+<section id="linked-stack-push" class="level4" data-number="4.8.4.1">
+<h4 data-number="4.8.4.1"><span
+class="header-section-number">4.8.4.1</span> Linked Stack Push</h4>
 <p>
 <div id="LinkedStack-Push-CON" class="ssAV" data-short-name="LinkedStack-Push-CON" data-long-name="Linked Stack Push" alt="Linked Stack Push" tabIndex="-1">
 <span class="jsavcounter"></span>
@@ -527,17 +279,12 @@ class="header-section-number">4.8.5.1</span> Linked Stack Push</h4>
 <div class="jsavcanvas"></div>
 </div>
 </p>
-<div class="line-block"></div>
-<div class="sourceCode" id="cb15"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> push(<span class="va">self</span>, x):</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._top <span class="op">=</span> LinkedStackNode(x, <span class="va">self</span>._top)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._stackSize <span class="op">+=</span> <span class="dv">1</span></span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">push</span><span class="op">(</span>E x<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>        top <span class="op">=</span> <span class="kw">new</span> <span class="bu">Node</span><span class="op">(</span>x<span class="op">,</span> top<span class="op">);</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>        stackSize<span class="op">++;</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
-<div class="line-block"></div>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LinkedStack <span class="kw">implements</span> <span class="bu">Stack</span>:</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">push</span>(x):</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.top <span class="op">=</span> <span class="kw">new</span> Node(x, <span class="va">this</span>.top)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.stackSize <span class="op">=</span> <span class="va">this</span>.stackSize <span class="op">+</span> <span class="dv">1</span></span></code></pre></div>
 <p>
 <div id="LstackPushPRO" class="embedContainer">
 <iframe id="LstackPushPRO_iframe" aria-label="LstackPushPRO" src="../interactive/ChalmersGU/LstackPushPRO.html" width="100%" height="600" scrolling="no">
@@ -546,9 +293,9 @@ Your browser does not support iframes.
 </div>
 </p>
 </section>
-<section id="linked-stack-pop" class="level4" data-number="4.8.5.2">
-<h4 data-number="4.8.5.2"><span
-class="header-section-number">4.8.5.2</span> Linked Stack Pop</h4>
+<section id="linked-stack-pop" class="level4" data-number="4.8.4.2">
+<h4 data-number="4.8.4.2"><span
+class="header-section-number">4.8.4.2</span> Linked Stack Pop</h4>
 <p>
 <div id="LinkedStack-Pop-CON" class="ssAV" data-short-name="LinkedStack-Pop-CON" data-long-name="Linked Stack Pop" alt="Linked Stack Pop" tabIndex="-1">
 <span class="jsavcounter"></span>
@@ -557,25 +304,16 @@ class="header-section-number">4.8.5.2</span> Linked Stack Pop</h4>
 <div class="jsavcanvas"></div>
 </div>
 </p>
-<div class="line-block"></div>
-<div class="sourceCode" id="cb17"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> pop(<span class="va">self</span>):</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> (<span class="va">self</span>._stackSize <span class="op">&gt;</span> <span class="dv">0</span>): <span class="cf">raise</span> <span class="pp">IndexError</span>(<span class="st">&quot;pop from empty stack&quot;</span>)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>        removed <span class="op">=</span> <span class="va">self</span>._top</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._top <span class="op">=</span> removed.<span class="bu">next</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>        removed.<span class="bu">next</span> <span class="op">=</span> <span class="va">None</span>   <span class="co"># For garbage collection</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._stackSize <span class="op">-=</span> <span class="dv">1</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> removed.elem</span></code></pre></div>
-<div class="sourceCode" id="cb18"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> E <span class="fu">pop</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!(</span>stackSize <span class="op">&gt;</span> <span class="dv">0</span><span class="op">))</span> <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">NoSuchElementException</span><span class="op">(</span><span class="st">&quot;pop from empty stack&quot;</span><span class="op">);</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Node</span> removed <span class="op">=</span> top<span class="op">;</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>        top <span class="op">=</span> removed<span class="op">.</span><span class="fu">next</span><span class="op">;</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>        removed<span class="op">.</span><span class="fu">next</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span>   <span class="co">// For garbage collection</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>        stackSize<span class="op">--;</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> removed<span class="op">.</span><span class="fu">elem</span><span class="op">;</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
-<div class="line-block"></div>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LinkedStack <span class="kw">implements</span> <span class="bu">Stack</span>:</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">pop</span>():</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">precondition</span>: <span class="va">this</span>.stackSize <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        removed <span class="op">=</span> <span class="va">this</span>.top</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.top <span class="op">=</span> removed.<span class="bu">next</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        removed.<span class="bu">next</span> <span class="op">=</span> <span class="va">null</span>  <span class="co">// For garbage collection</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.stackSize <span class="op">=</span> <span class="va">this</span>.stackSize <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> removed.elem</span></code></pre></div>
 <p>
 <div id="LstackPopPRO" class="embedContainer">
 <iframe id="LstackPopPRO_iframe" aria-label="LstackPopPRO" src="../interactive/ChalmersGU/LstackPopPRO.html" width="100%" height="600" scrolling="no">
@@ -584,147 +322,10 @@ Your browser does not support iframes.
 </div>
 </p>
 </section>
-<section id="linked-stacks-full-implementation" class="level4"
-data-number="4.8.5.3">
-<h4 data-number="4.8.5.3"><span
-class="header-section-number">4.8.5.3</span> Linked stacks: Full
-implementation</h4>
-<p>Here is the complete linked stack implementation.</p>
-<div class="sourceCode" id="cb19"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: LinkedStackInit *** */</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LinkedStack(Stack):</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._top <span class="op">=</span> <span class="va">None</span>      <span class="co"># Pointer to top of stack</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._stackSize <span class="op">=</span> <span class="dv">0</span>   <span class="co"># Size of stack</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: LinkedStackInit *** */</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: LinkedStackPush *** */</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> push(<span class="va">self</span>, x):</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._top <span class="op">=</span> LinkedStackNode(x, <span class="va">self</span>._top)</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._stackSize <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: LinkedStackPush *** */</span></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: LinkedStackPeek *** */</span></span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> peek(<span class="va">self</span>):</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> (<span class="va">self</span>._stackSize <span class="op">&gt;</span> <span class="dv">0</span>): <span class="cf">raise</span> <span class="pp">IndexError</span>(<span class="st">&quot;peek from empty stack&quot;</span>)</span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._top.elem</span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: LinkedStackPeek *** */</span></span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: LinkedStackPop *** */</span></span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> pop(<span class="va">self</span>):</span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> (<span class="va">self</span>._stackSize <span class="op">&gt;</span> <span class="dv">0</span>): <span class="cf">raise</span> <span class="pp">IndexError</span>(<span class="st">&quot;pop from empty stack&quot;</span>)</span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>        removed <span class="op">=</span> <span class="va">self</span>._top</span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._top <span class="op">=</span> removed.<span class="bu">next</span></span>
-<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>        removed.<span class="bu">next</span> <span class="op">=</span> <span class="va">None</span>   <span class="co"># For garbage collection</span></span>
-<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._stackSize <span class="op">-=</span> <span class="dv">1</span></span>
-<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> removed.elem</span>
-<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: LinkedStackPop *** */</span></span>
-<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> isEmpty(<span class="va">self</span>):</span>
-<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._stackSize <span class="op">==</span> <span class="dv">0</span></span>
-<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> size(<span class="va">self</span>):</span>
-<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._stackSize</span>
-<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: LinkedStackIterator *** */</span></span>
-<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__iter__</span>(<span class="va">self</span>):</span>
-<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>        current <span class="op">=</span> <span class="va">self</span>._top</span>
-<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> current <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
-<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>            <span class="cf">yield</span> current.elem</span>
-<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>            current <span class="op">=</span> current.<span class="bu">next</span></span>
-<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: LinkedStackIterator *** */</span></span>
-<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: LinkedStackNode *** */</span></span>
-<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Python does not have internal classes, so we have to make the stack node standalone.</span></span>
-<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LinkedStackNode:</span>
-<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, elem, <span class="bu">next</span>):</span>
-<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.elem <span class="op">=</span> elem   <span class="co"># Value for this node</span></span>
-<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.<span class="bu">next</span> <span class="op">=</span> <span class="bu">next</span>   <span class="co"># Pointer to next node in stack</span></span>
-<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: LinkedStackNode *** */</span></span></code></pre></div>
-<div class="sourceCode" id="cb20"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: LinkedStackInit *** */</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LinkedStack<span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="kw">implements</span> <span class="bu">Stack</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="bu">Node</span> top<span class="op">;</span>        <span class="co">// Pointer to top of stack</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> stackSize<span class="op">;</span>   <span class="co">// Size of stack</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">LinkedStack</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>        top <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>        stackSize <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: LinkedStackInit *** */</span></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: LinkedStackNode *** */</span></span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="kw">class</span> <span class="bu">Node</span> <span class="op">{</span></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>        E elem<span class="op">;</span>       <span class="co">// Value for this node</span></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Node</span> next<span class="op">;</span>    <span class="co">// Pointer to next node in stack</span></span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Node</span><span class="op">(</span>E elem<span class="op">,</span> <span class="bu">Node</span> next<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>            <span class="kw">this</span><span class="op">.</span><span class="fu">elem</span> <span class="op">=</span> elem<span class="op">;</span></span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>            <span class="kw">this</span><span class="op">.</span><span class="fu">next</span> <span class="op">=</span> next<span class="op">;</span></span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: LinkedStackNode *** */</span></span>
-<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: LinkedStackPush *** */</span></span>
-<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">push</span><span class="op">(</span>E x<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>        top <span class="op">=</span> <span class="kw">new</span> <span class="bu">Node</span><span class="op">(</span>x<span class="op">,</span> top<span class="op">);</span></span>
-<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>        stackSize<span class="op">++;</span></span>
-<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: LinkedStackPush *** */</span></span>
-<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: LinkedStackPeek *** */</span></span>
-<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> E <span class="fu">peek</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!(</span>stackSize <span class="op">&gt;</span> <span class="dv">0</span><span class="op">))</span> <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">NoSuchElementException</span><span class="op">(</span><span class="st">&quot;peek from empty stack&quot;</span><span class="op">);</span></span>
-<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> top<span class="op">.</span><span class="fu">elem</span><span class="op">;</span></span>
-<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: LinkedStackPeek *** */</span></span>
-<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: LinkedStackPop *** */</span></span>
-<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> E <span class="fu">pop</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(!(</span>stackSize <span class="op">&gt;</span> <span class="dv">0</span><span class="op">))</span> <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">NoSuchElementException</span><span class="op">(</span><span class="st">&quot;pop from empty stack&quot;</span><span class="op">);</span></span>
-<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Node</span> removed <span class="op">=</span> top<span class="op">;</span></span>
-<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a>        top <span class="op">=</span> removed<span class="op">.</span><span class="fu">next</span><span class="op">;</span></span>
-<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>        removed<span class="op">.</span><span class="fu">next</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span>   <span class="co">// For garbage collection</span></span>
-<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>        stackSize<span class="op">--;</span></span>
-<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> removed<span class="op">.</span><span class="fu">elem</span><span class="op">;</span></span>
-<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: LinkedStackPop *** */</span></span>
-<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">isEmpty</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> stackSize <span class="op">==</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-53"><a href="#cb20-53" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">size</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> stackSize<span class="op">;</span></span>
-<span id="cb20-55"><a href="#cb20-55" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb20-56"><a href="#cb20-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-57"><a href="#cb20-57" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: LinkedStackIterator *** */</span></span>
-<span id="cb20-58"><a href="#cb20-58" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">Iterator</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="fu">iterator</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb20-59"><a href="#cb20-59" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="kw">new</span> <span class="fu">LinkedStackIterator</span><span class="op">();</span></span>
-<span id="cb20-60"><a href="#cb20-60" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb20-61"><a href="#cb20-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-62"><a href="#cb20-62" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="kw">class</span> LinkedStackIterator <span class="kw">implements</span> <span class="bu">Iterator</span><span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb20-63"><a href="#cb20-63" aria-hidden="true" tabindex="-1"></a>        <span class="kw">private</span> <span class="bu">Node</span> current<span class="op">;</span></span>
-<span id="cb20-64"><a href="#cb20-64" aria-hidden="true" tabindex="-1"></a>        <span class="fu">LinkedStackIterator</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb20-65"><a href="#cb20-65" aria-hidden="true" tabindex="-1"></a>            current <span class="op">=</span> top<span class="op">;</span></span>
-<span id="cb20-66"><a href="#cb20-66" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb20-67"><a href="#cb20-67" aria-hidden="true" tabindex="-1"></a>        <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">hasNext</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb20-68"><a href="#cb20-68" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> current <span class="op">!=</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb20-69"><a href="#cb20-69" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb20-70"><a href="#cb20-70" aria-hidden="true" tabindex="-1"></a>        <span class="kw">public</span> E <span class="fu">next</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb20-71"><a href="#cb20-71" aria-hidden="true" tabindex="-1"></a>            E x <span class="op">=</span> current<span class="op">.</span><span class="fu">elem</span><span class="op">;</span></span>
-<span id="cb20-72"><a href="#cb20-72" aria-hidden="true" tabindex="-1"></a>            current <span class="op">=</span> current<span class="op">.</span><span class="fu">next</span><span class="op">;</span></span>
-<span id="cb20-73"><a href="#cb20-73" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> x<span class="op">;</span></span>
-<span id="cb20-74"><a href="#cb20-74" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb20-75"><a href="#cb20-75" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb20-76"><a href="#cb20-76" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: LinkedStackIterator *** */</span></span>
-<span id="cb20-77"><a href="#cb20-77" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-</section>
 </section>
 <section id="comparison-of-array-based-and-linked-stacks" class="level3"
-data-number="4.8.6">
-<h3 data-number="4.8.6"><span class="header-section-number">4.8.6</span>
+data-number="4.8.5">
+<h3 data-number="4.8.5"><span class="header-section-number">4.8.5</span>
 Comparison of Array-Based and Linked Stacks</h3>
 <p>All operations for the array-based and linked stack implementations
 take constant time, so from a time efficiency perspective, neither has a
@@ -735,9 +336,9 @@ actually needed, and some of that space is wasted whenever the stack is
 not full. The linked stack can shrink and grow but requires the overhead
 of a <code>next</code> field for every element.</p>
 <section id="implementing-two-stacks-using-one-array" class="level4"
-data-number="4.8.6.1">
-<h4 data-number="4.8.6.1"><span
-class="header-section-number">4.8.6.1</span> Implementing two stacks
+data-number="4.8.5.1">
+<h4 data-number="4.8.5.1"><span
+class="header-section-number">4.8.5.1</span> Implementing two stacks
 using one array</h4>
 <p>If you need to use two stacks at the same time, you can take
 advantage of the one-way growth of the array-based stack by using a
@@ -760,6 +361,21 @@ resized.</p>
 </section>
 </section>
 </section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="4.7-doubly-linked-lists-optional.html" class="navbutton">&lt;&lt;</a>
+<a href="4.7-doubly-linked-lists-optional.html" accesskey="p" rel="previous">Doubly Linked Lists (optional)</a>
+</div>
+<div class="navlink">
+<a href="4.9-implementing-recursion.html" accesskey="n" rel="next">Implementing Recursion</a>
+<a href="4.9-implementing-recursion.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 <script type="text/javascript" src="../interactive/ChalmersGU/DynamicArrayStack-Top-CON.js"></script>
 <script type="text/javascript" src="../interactive/ChalmersGU/DynamicArrayStack-Push-CON.js"></script>
 <script type="text/javascript" src="../interactive/ChalmersGU/DynamicArrayStack-Pop-CON.js"></script>
@@ -769,3 +385,4 @@ resized.</p>
 <script type="text/javascript" src="../interactive/ChalmersGU/LinkedStack-Twostack-CON.js"></script>
 </body>
 </html>
+

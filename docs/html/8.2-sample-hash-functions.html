@@ -8,93 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Sample Hash Functions</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        background-color: #ffffff;
-        color: #a0a0a0;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
-    div.sourceCode
-      { color: #1f1c1b; background-color: #ffffff; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #1f1c1b; } /* Normal */
-    code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
-    code span.an { color: #ca60ca; } /* Annotation */
-    code span.at { color: #0057ae; } /* Attribute */
-    code span.bn { color: #b08000; } /* BaseN */
-    code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
-    code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #924c9d; } /* Char */
-    code span.cn { color: #aa5500; } /* Constant */
-    code span.co { color: #898887; } /* Comment */
-    code span.cv { color: #0095ff; } /* CommentVar */
-    code span.do { color: #607880; } /* Documentation */
-    code span.dt { color: #0057ae; } /* DataType */
-    code span.dv { color: #b08000; } /* DecVal */
-    code span.er { color: #bf0303; text-decoration: underline; } /* Error */
-    code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
-    code span.fl { color: #b08000; } /* Float */
-    code span.fu { color: #644a9b; } /* Function */
-    code span.im { color: #ff5500; } /* Import */
-    code span.in { color: #b08000; } /* Information */
-    code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
-    code span.op { color: #1f1c1b; } /* Operator */
-    code span.ot { color: #006e28; } /* Other */
-    code span.pp { color: #006e28; } /* Preprocessor */
-    code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
-    code span.sc { color: #3daee9; } /* SpecialChar */
-    code span.ss { color: #ff5500; } /* SpecialString */
-    code span.st { color: #bf0303; } /* String */
-    code span.va { color: #0057ae; } /* Variable */
-    code span.vs { color: #bf0303; } /* VerbatimString */
-    code span.wa { color: #bf0303; } /* Warning */
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -160,26 +79,31 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="8-hashing.html" accesskey="u" rel="up">Hashing</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="8.1-hash-function-principles.html" class="navbutton">&lt;&lt;</a>
+<a href="8.1-hash-function-principles.html" accesskey="p" rel="previous">Hash Function Principles</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="8.3-separate-chaining.html" accesskey="n" rel="next">Separate Chaining, or Open Hashing</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="8.1-hash-function-principles.html" accesskey="p" rel="previous">Hash Function Principles</a>
-</span>
+<div>
+<a href="8.3-separate-chaining.html" accesskey="n" rel="next">Separate Chaining, or Open Hashing</a>
+<a href="8.3-separate-chaining.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="sample-hash-functions" class="level2" data-number="8.2">
 <h2 data-number="8.2"><span class="header-section-number">8.2</span>
 Sample Hash Functions</h2>
@@ -190,13 +114,9 @@ Simple Mod Function</h3>
 <p>Consider the following hash function used to hash integers to a table
 of sixteen slots.</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> hashInt(x):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x <span class="op">%</span> <span class="dv">16</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="fu">hashInt</span><span class="op">(</span><span class="dt">int</span> x<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x <span class="op">%</span> <span class="dv">16</span><span class="op">;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
-<p>Here “%” is the symbol for the mod function.</p>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> hashInt(x):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x <span class="op">%</span> <span class="dv">16</span></span></code></pre></div>
+<p>Here “%” is the symbol for the [mod] function.</p>
 <p>
 <div id="hashFuncExCON1" class="ssAV" data-short-name="hashFuncExCON1" data-long-name="Hash Function Slideshow 1" alt="Hash Function Slideshow 1" tabIndex="-1">
 <span class="jsavcounter"></span>
@@ -227,15 +147,17 @@ key value by 100. Thus, all keys in the range 0 to 99 would hash to slot
 0, keys 100 to 199 would hash to slot 1, and so on. In other words, this
 hash function “bins” the first 100 keys to the first slot, the next 100
 keys to the second slot, and so on.</p>
-<p><a href="10-glossary.html#binning" class="term">Binning</a> in this way has the problem that it
-will cluster together keys if the distribution does not divide evenly on
-the high-order bits. In the above example, if more records have keys in
-the range 900-999 (first digit 9) than have keys in the range 100-199
-(first digit 1), more records will hash to slot 9 than to slot 1.
-Likewise, if we pick too big a value for the key range and the actual
-key values are all relatively small, then most records will hash to slot
-0. A similar, analogous problem arises if we were instead hashing
-strings based on the first letter in the string.</p>
+<p><a href="8.2-sample-hash-functions.html#binning" class="term"
+title="In hashing, binning is a type of hash function. Say we are given keys in the range 0 to 999, and have a hash table of size 10. In this case, a possible hash function might simply divide the key value by 100. Thus, all keys in the range 0 to 99 would hash to slot 0, keys 100 to 199 would hash to slot 1, and so on. In other words, this hash function &#39;bins&#39; the first 100 keys to the first slot, the next 100 keys to the second slot, and so on. This approach tends to make the hash function dependent on the distribution of the high-order bits of the keys.">Binning</a>
+in this way has the problem that it will cluster together keys if the
+distribution does not divide evenly on the high-order bits. In the above
+example, if more records have keys in the range 900-999 (first digit 9)
+than have keys in the range 100-199 (first digit 1), more records will
+hash to slot 9 than to slot 1. Likewise, if we pick too big a value for
+the key range and the actual key values are all relatively small, then
+most records will hash to slot 0. A similar, analogous problem arises if
+we were instead hashing strings based on the first letter in the
+string.</p>
 <p>
 <div id="hashFuncExCON2" class="ssAV" data-short-name="hashFuncExCON2" data-long-name="Hash Function Slideshow 2" alt="Hash Function Slideshow 2" tabIndex="-1">
 <span class="jsavcounter"></span>
@@ -286,10 +208,12 @@ with any given slot are near the tails, and some are near the center.
 Thus, each table slot is equally likely (roughly) to get a key
 value.</p>
 <div id="HashNormal">
-<div class="odsafig" width="800" data-align="center"
-data-capalign="center" data-figwidth="90%"
-alt="Binning vs. Mod Function">
-<p>Images/HashNormal.png</p>
+<div class="figure">
+<figure>
+<img src="images/HashNormal.png" width="800"
+alt="Binning vs. Mod Function" />
+<figcaption aria-hidden="true">Binning vs. Mod Function</figcaption>
+</figure>
 <p>A comparison of binning vs. modulus as a hash function.</p>
 </div>
 </div>
@@ -297,8 +221,11 @@ alt="Binning vs. Mod Function">
 <section id="the-mid-square-method" class="level3" data-number="8.2.3">
 <h3 data-number="8.2.3"><span class="header-section-number">8.2.3</span>
 The Mid-Square Method</h3>
-<p>A good hash function to use with integer key values is the <a href="10-glossary.html#mid-square-method" class="term">mid-square method</a>. The mid-square method squares the
-key value, and then takes out the middle
+<p>A good hash function to use with integer key values is the <a
+href="10-glossary.html#mid-square-method" class="term"
+title="In hashing, an approach to implementing a hash function. The key value is squared, and some number of bits from the middle of the resulting value are extracted as the hash code. Some care must be taken to extract bits that tend to actually be in the middle of the resulting value, which requires some understanding of the typical key values. When done correctly, this has the advantage of having the hash code be affected by all bits of the key">mid-square
+method</a>. The mid-square method squares the key value, and then takes
+out the middle
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>
 bits of the result, giving a value in the range 0 to
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mi>r</mi></msup><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2^{r}-1</annotation></semantics></math>.
@@ -319,10 +246,12 @@ the top digit of the original key value. Of course, if the key values
 all tend to be small numbers, then their squares will only affect the
 low-order digits of the hash value.</p>
 <div id="MidSquareFig">
-<div class="odsafig" width="70" data-align="center"
-data-capalign="justify" data-figwidth="90%"
-alt="Mid-square method example">
-<p>Images/MidSquare.png</p>
+<div class="figure">
+<figure>
+<img src="images/MidSquare.png" width="70"
+alt="Mid-square method example" />
+<figcaption aria-hidden="true">Mid-square method example</figcaption>
+</figure>
 <p>An example of the mid-square method. This image shows the traditional
 gradeschool long multiplication process. The value being squared is
 4567. The result of squaring is 20857489. At the bottom, of the image,
@@ -350,27 +279,22 @@ data-number="8.2.4">
 A Simple Hash Function for Strings</h3>
 <p>Now we will examine some hash functions suitable for storing strings
 of characters. We start with a simple summation function.</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> hashString(s, M):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span> <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> c <span class="kw">in</span> s:</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>            <span class="bu">sum</span> <span class="op">+=</span> <span class="bu">ord</span>(c)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">sum</span> <span class="op">%</span> M</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="fu">hashString</span><span class="op">(</span><span class="bu">String</span> s<span class="op">,</span> <span class="dt">int</span> M<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> sum <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">char</span> c <span class="op">:</span> s<span class="op">.</span><span class="fu">toCharArray</span><span class="op">())</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>            sum <span class="op">+=</span> c<span class="op">;</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> sum <span class="op">%</span> M<span class="op">;</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> hashString(<span class="bu">string</span>, M):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">sum</span> <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> <span class="bu">char</span> <span class="kw">in</span> <span class="bu">string</span>:</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span> <span class="op">=</span> <span class="bu">sum</span> <span class="op">+</span> <span class="bu">ord</span>(<span class="bu">char</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sum</span> <span class="op">%</span> M</span></code></pre></div>
 <p>This function sums the ASCII values of the letters in a string. If
 the hash table size
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>
 is small compared to the resulting summations, then this hash function
 should do a good job of distributing strings evenly among the hash table
 slots, because it gives equal weight to all characters in the string.
-This is an example of the <a href="10-glossary.html#folding-method" class="term">folding method</a> to
-designing a hash function.</p>
+This is an example of the <a href="10-glossary.html#folding-method"
+class="term"
+title="In hashing, an approach to implementing a hash function. Most typically used when the key is a string, the folding method breaks the string into pieces (perhaps each letter is a piece, or a small series of letters is a piece), converts the letter(s) to an integer value (typically by using its underlying encoding value), and summing up the pieces.">folding
+method</a> to designing a hash function.</p>
 <p>As with many other hash functions, the final step is to apply the
 modulus operator to the result, using table size
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>
@@ -403,19 +327,12 @@ Improved String Folding</h3>
 the next character, we get a much better distribution of the hash codes.
 This is Java’s default hash code for strings, where the prime number is
 31.</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> hashStringImproved(s, M):</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span> <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> c <span class="kw">in</span> s:</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>            <span class="bu">sum</span> <span class="op">=</span> <span class="dv">31</span> <span class="op">*</span> <span class="bu">sum</span> <span class="op">+</span> <span class="bu">ord</span>(c)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">sum</span> <span class="op">%</span> M</span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="fu">hashStringImproved</span><span class="op">(</span><span class="bu">String</span> s<span class="op">,</span> <span class="dt">int</span> M<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> sum <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">char</span> c <span class="op">:</span> s<span class="op">.</span><span class="fu">toCharArray</span><span class="op">())</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>            sum <span class="op">=</span> <span class="dv">31</span> <span class="op">*</span> sum <span class="op">+</span> c<span class="op">;</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> sum <span class="op">%</span> M<span class="op">;</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> hashStringImproved(<span class="bu">string</span>, M):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">sum</span> <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="bu">char</span> <span class="kw">in</span> <span class="bu">string</span>:</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span> <span class="op">=</span> <span class="dv">31</span> <span class="op">*</span> <span class="bu">sum</span> <span class="op">+</span> <span class="bu">ord</span>(<span class="bu">char</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sum</span> <span class="op">%</span> M</span></code></pre></div>
 <p>Mathematically, the hash function is
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>s</mi><mn>0</mn></msub><mo>⋅</mo><msup><mn>31</mn><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>+</mo><msub><mi>s</mi><mn>1</mn></msub><mo>⋅</mo><msup><mn>31</mn><mrow><mi>n</mi><mo>−</mo><mn>2</mn></mrow></msup><mo>+</mo><mi>.</mi><mi>.</mi><mi>.</mi><mo>+</mo><msub><mi>s</mi><mrow><mi>n</mi><mo>−</mo><mn>2</mn></mrow></msub><mo>⋅</mo><msup><mn>31</mn><mn>1</mn></msup><mo>+</mo><msub><mi>s</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>⋅</mo><msup><mn>31</mn><mn>0</mn></msup></mrow><annotation encoding="application/x-tex">s_0\cdot 31^{n-1} + s_1\cdot 31^{n-2} + ... + s_{n-2}\cdot 31^1 + s_{n-1}\cdot 31^0</annotation></semantics></math>.
 This number grows quite fast when the string gets longer, but that’s not
@@ -468,7 +385,23 @@ Your browser does not support iframes.
 </p>
 </section>
 </section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="8.1-hash-function-principles.html" class="navbutton">&lt;&lt;</a>
+<a href="8.1-hash-function-principles.html" accesskey="p" rel="previous">Hash Function Principles</a>
+</div>
+<div class="navlink">
+<a href="8.3-separate-chaining.html" accesskey="n" rel="next">Separate Chaining, or Open Hashing</a>
+<a href="8.3-separate-chaining.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 <script type="text/javascript" src="../interactive/Hashing/hashFuncExCON1.js"></script>
 <script type="text/javascript" src="../interactive/Hashing/hashFuncExCON2.js"></script>
 </body>
 </html>
+

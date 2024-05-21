@@ -25,12 +25,12 @@ $(document).ready(function() {
 };
 
   var pseudo = av.code([
-    "def insertionsort(A):",
-    "    for i in range(len(A)):  # Insert i'th record",
+    "function insertionSort(A):",
+    "    for i in 1 ... length(A)-1:",
     "        j = i",
     "        while j > 0 and A[j] < A[j-1]:",
     "            swap(A, j, j-1)",
-    "            j -= 1",
+    "            j = j-1",
   ], {lineNumbers: false,
       tags: {
         "sig": 1,
@@ -55,24 +55,24 @@ $(document).ready(function() {
   // Slide 2
   av.umsg(interpret["sc2"]);
   pseudo.show();
-  //  pseudo.css("loops", {"background-color":"#99FF00"});
-  pseudo.highlight("loops");
+  pseudo.highlight("outloop");
+  pseudo.highlight("inloop");
   av.step();
 
   // Slide 3
   av.umsg(interpret["sc3"]);
-  pseudo.unhighlight("loop2");
+  pseudo.unhighlight("inloop");
   av.step();
 
   // Slide 4
   av.umsg(interpret["sc4"]);
-  pseudo.unhighlight("loop1");
-  pseudo.highlight("loop2");
+  pseudo.unhighlight("outloop");
+  pseudo.highlight("inloop");
   av.step();
 
   // Slide 5
   av.umsg(interpret["sc5"]);
-  pseudo.unhighlight("loop2");
+  pseudo.unhighlight("inloop");
   arr = av.ds.array([6, 5, 4, 3, 2, 1], {
     left: 10,
     top: 150,

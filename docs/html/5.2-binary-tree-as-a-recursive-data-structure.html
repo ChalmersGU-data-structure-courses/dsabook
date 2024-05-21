@@ -8,26 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Binary Tree as a Recursive Data Structure</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -93,39 +79,49 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 <link href="../interactive/Binary/RecursiveDSCON.css" rel="stylesheet" type="text/css"/>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="5-binary-trees.html" accesskey="u" rel="up">Binary Trees</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="5.1-definitions-and-properties.html" class="navbutton">&lt;&lt;</a>
+<a href="5.1-definitions-and-properties.html" accesskey="p" rel="previous">Definitions and Properties</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="5.3-binary-tree-node-implementations.html" accesskey="n" rel="next">Binary Tree Node Implementations</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="5.1-definitions-and-properties.html" accesskey="p" rel="previous">Definitions and Properties</a>
-</span>
+<div>
+<a href="5.3-binary-tree-node-implementations.html" accesskey="n" rel="next">Binary Tree Node Implementations</a>
+<a href="5.3-binary-tree-node-implementations.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="binary-tree-as-a-recursive-data-structure" class="level2"
 data-number="5.2">
 <h2 data-number="5.2"><span class="header-section-number">5.2</span>
 Binary Tree as a Recursive Data Structure</h2>
-<p>A <a href="10-glossary.html#recursive-data-structure" class="term">recursive data structure</a> is a data
-structure that is partially composed of smaller or simpler instances of
-the same data structure. For example, <a href="10-glossary.html#linked-list" class="term">linked lists</a> and <a href="10-glossary.html#binary-tree" class="term">binary trees</a> can be viewed as recursive data
-structures. A list is a recursive data structure because a list can be
-defined as either (1) an empty list or (2) a node followed by a list. A
-binary tree is typically defined as (1) an empty tree or (2) a node
-pointing to two binary trees, one its left child and the other one its
-right child.</p>
+<p>A <a href="10-glossary.html#recursive-data-structure" class="term"
+title="A data structure that is partially composed of smaller or simpler instances of the same data structure. For example, linked lists and binary trees can be viewed as recursive data structures.">recursive
+data structure</a> is a data structure that is partially composed of
+smaller or simpler instances of the same data structure. For example, <a
+href="10-glossary.html#linked-list" class="term"
+title="An implementation for the list ADT that uses dynamic allocation of link nodes to store the list elements. Common variants are the singly linked list, doubly linked list and circular list. The overhead required is the pointers in each link node.">linked
+lists</a> and <a href="10-glossary.html#binary-tree" class="term"
+title="A finite set of nodes which is either empty, or else has a root node together two binary trees, called the left and right subtrees, which are disjoint from each other and from the root.">binary
+trees</a> can be viewed as recursive data structures. A list is a
+recursive data structure because a list can be defined as either (1) an
+empty list or (2) a node followed by a list. A binary tree is typically
+defined as (1) an empty tree or (2) a node pointing to two binary trees,
+one its left child and the other one its right child.</p>
 <div id="ListRecDS">
 <p>
 <div id="ListRecDSCON" class="ssAV" data-short-name="ListRecDSCON" data-long-name="Binary/ListRecDSCON" alt="Binary/ListRecDSCON" tabIndex="-1">
@@ -151,8 +147,24 @@ natural model for any recursive algorithm on the structure.</p>
 </div>
 </p>
 </section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="5.1-definitions-and-properties.html" class="navbutton">&lt;&lt;</a>
+<a href="5.1-definitions-and-properties.html" accesskey="p" rel="previous">Definitions and Properties</a>
+</div>
+<div class="navlink">
+<a href="5.3-binary-tree-node-implementations.html" accesskey="n" rel="next">Binary Tree Node Implementations</a>
+<a href="5.3-binary-tree-node-implementations.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 <script type="text/javascript" src="../interactive/Binary/ListRecDSCON.js"></script>
 <script type="text/javascript" src="../interactive/Binary/BinRecDSCON.js"></script>
 <script type="text/javascript" src="../interactive/Binary/SumBinaryTreeCON.js"></script>
 </body>
 </html>
+

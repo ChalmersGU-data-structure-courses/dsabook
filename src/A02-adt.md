@@ -252,6 +252,3 @@ Within the class, a variety of physical implementations for lists is
 possible.
 :::
 
-<avembed id="CMdatatypeSumm" src="CMP/CMdatatypeSumm.html" type="ka" name="Concept map data types exercises"/>
-
-<avembed id="IntroADTSumm" src="Design/IntroADTSumm.html" type="ka" name="ADT Summary Questions"/>

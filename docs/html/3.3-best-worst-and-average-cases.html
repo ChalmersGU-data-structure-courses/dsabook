@@ -8,26 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Best, Worst, and Average Cases</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -93,27 +79,32 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 <link href="../interactive/AlgAnal/AnalCasesCON.css" rel="stylesheet" type="text/css"/>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="3-algorithm-analysis.html" accesskey="u" rel="up">Algorithm Analysis</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="3.2-comparing-algorithms.html" class="navbutton">&lt;&lt;</a>
+<a href="3.2-comparing-algorithms.html" accesskey="p" rel="previous">Comparing Algorithms</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="3.4-faster-computer-or-faster-algorithm.html" accesskey="n" rel="next">Faster Computer, or Faster Algorithm?</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="3.2-comparing-algorithms.html" accesskey="p" rel="previous">Comparing Algorithms</a>
-</span>
+<div>
+<a href="3.4-faster-computer-or-faster-algorithm.html" accesskey="n" rel="next">Faster Computer, or Faster Algorithm?</a>
+<a href="3.4-faster-computer-or-faster-algorithm.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="best-worst-and-average-cases" class="level2"
 data-number="3.3">
 <h2 data-number="3.3"><span class="header-section-number">3.3</span>
@@ -141,7 +132,9 @@ characterization of the algorithm’s running time. In other words,
 analysis based on the best case is not likely to be representative of
 the behavior of the algorithm. However, there are rare instances where a
 best-case analysis is useful – in particular, when the best case has
-high probability of occurring. The <a href="10-glossary.html#shellsort" class="term">Shellsort</a>
+high probability of occurring. The <a href="10-glossary.html#shellsort"
+class="term"
+title="A sort that relies on the best-case cost of insertion sort to improve over $\Theta(n^2)$ worst case cost.">Shellsort</a>
 and <a href="2.11-quicksort.html#quicksort">Quicksort</a> algorithms
 both can take advantage of the best-case running time of <a
 href="2.4-insertion-sort.html#insertion-sort">Insertion Sort</a> to
@@ -180,14 +173,33 @@ href="8-hashing.html#hashing">hashing</a> and search trees such as the
 <a href="6-binary-search-trees.html#binary-search-trees">BST</a>.
 Incorrect assumptions about data distribution can have disastrous
 consequences on a program’s space or time performance. Unusual data
-distributions can also be used to advantage, such as is done by <a href="10-glossary.html#self-organizing-list" class="term">self-organizing lists</a>.</p>
+distributions can also be used to advantage, such as is done by <a
+href="10-glossary.html#self-organizing-list" class="term"
+title="A list that, over a series of search operations, will make use of some heuristic to re-order its elements in an effort to improve search times. Generally speaking, search is done sequentially from the beginning, but the self-organizing heuristic will attempt to put the records that are most likely to be searched for at or near the front of the list. While typically not as efficient as binary search on a sorted list, self-organizing lists do not require that the list be sorted (and so do not pay the cost of doing the sorting operation).">self-organizing
+lists</a>.</p>
 <p>In summary, for real-time applications we are likely to prefer a
 worst-case analysis of an algorithm. Otherwise, we often desire an
 average-case analysis if we know enough about the distribution of our
 input to compute the average case. If not, then we must resort to
 worst-case analysis.</p>
 </section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="3.2-comparing-algorithms.html" class="navbutton">&lt;&lt;</a>
+<a href="3.2-comparing-algorithms.html" accesskey="p" rel="previous">Comparing Algorithms</a>
+</div>
+<div class="navlink">
+<a href="3.4-faster-computer-or-faster-algorithm.html" accesskey="n" rel="next">Faster Computer, or Faster Algorithm?</a>
+<a href="3.4-faster-computer-or-faster-algorithm.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 <script type="text/javascript" src="../interactive/AlgAnal/AnalCasesSameCON.js"></script>
 <script type="text/javascript" src="../interactive/AlgAnal/AnalCasesDiffCON.js"></script>
 </body>
 </html>
+

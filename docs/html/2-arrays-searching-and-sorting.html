@@ -8,26 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Arrays: searching and sorting</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -93,26 +79,31 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="index.html" accesskey="u" rel="up">Data Structures and Algorithms</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="1.6-comparables-and-comparators-an-example.html" class="navbutton">&lt;&lt;</a>
+<a href="1.6-comparables-and-comparators-an-example.html" accesskey="p" rel="previous">Comparables and Comparators: An Example</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="2.1-searching-in-an-array.html" accesskey="n" rel="next">Searching in an Array</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="1.6-comparables-and-comparators-an-example.html" accesskey="p" rel="previous">Comparables and Comparators: An Example</a>
-</span>
+<div>
+<a href="2.1-searching-in-an-array.html" accesskey="n" rel="next">Searching in an Array</a>
+<a href="2.1-searching-in-an-array.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="arrays-searching-and-sorting" class="level1"
 data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Arrays:
@@ -123,6 +114,21 @@ role="doc-noteref"><sup>1</sup></a>. This is because they are natively
 supported by the computer, and have good performance: reading or writing
 an element of the array takes very little time. Many important
 algorithms use arrays.</p>
+<aside id="footnotes" class="footnotes footnotes-end-of-block"
+role="doc-footnote">
+<ol>
+<li id="fn1"><p>Note to Python programmers: in Python, arrays are called
+<em>lists</em>, and are written like this: <code>[1,2,3]</code>. There
+is one difference between arrays and Python lists: in most programming
+languages, any given array has a fixed size. However, Python lists can
+change in size – for example, the <code>append</code> method adds a new
+element to the list, increasing its size. In this chapter, we will work
+with arrays that have a fixed size. Python lists are so-called <a
+href="4.3-dynamic-array-based-lists.html#dynamic-array-based-lists">dynamic
+arrays</a>.<a href="#fnref1" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+</ol>
+</aside>
 <p>In this chapter we will study two algorithmic problems and how to
 solve them efficiently using arrays:</p>
 <ul>
@@ -155,7 +161,10 @@ example, sorting a list of towns by population.</li>
 doesn’t have to be explicitly stored in the object, but can instead be
 calculated on demand. E.g., if we want to sort a list of words
 case-insensitively, we can use a lower-case transformation when doing
-the comparisons. This is usually done by a <a href="10-glossary.html#comparator" class="term">comparator</a> (in Java), or by a <a
+the comparisons. This is usually done by a <a
+href="10-glossary.html#comparator" class="term"
+title="A function given as a parameter to a method of a library (or alternatively, a parameter for a C++ template or a Java generic). The comparator function concept provides a generic way to encapulate the process of performing a comparison between two objects of a specific type. For example, if we want to write a generic sorting routine, that can handle any record type, we can require that the user of the sorting routine passes in a comparator function to define how records in the collection are to be compared.">comparator</a>
+(in Java), or by a <a
 href="https://docs.python.org/3/howto/sorting.html#key-functions">key
 function</a> (in Python).</p>
 <p>This chapter concentrates on <em>membership testing</em> and
@@ -163,21 +172,21 @@ function</a> (in Python).</p>
 just as well for <em>lookup</em> and <em>key-based sorting</em>.</p>
 <p><strong>Footnotes</strong></p>
 </section>
-<section id="footnotes" class="footnotes footnotes-end-of-document"
-role="doc-endnotes">
-<hr />
-<ol>
-<li id="fn1"><p>Note to Python programmers: in Python, arrays are called
-<em>lists</em>, and are written like this: <code>[1,2,3]</code>. There
-is one difference between arrays and Python lists: in most programming
-languages, any given array has a fixed size. However, Python lists can
-change in size – for example, the <code>append</code> method adds a new
-element to the list, increasing its size. In this chapter, we will work
-with arrays that have a fixed size. Python lists are so-called <a
-href="4.3-dynamic-array-based-lists.html#dynamic-array-based-lists">dynamic
-arrays</a>.<a href="#fnref1" class="footnote-back"
-role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="1.6-comparables-and-comparators-an-example.html" class="navbutton">&lt;&lt;</a>
+<a href="1.6-comparables-and-comparators-an-example.html" accesskey="p" rel="previous">Comparables and Comparators: An Example</a>
+</div>
+<div class="navlink">
+<a href="2.1-searching-in-an-array.html" accesskey="n" rel="next">Searching in an Array</a>
+<a href="2.1-searching-in-an-array.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 </body>
 </html>
+

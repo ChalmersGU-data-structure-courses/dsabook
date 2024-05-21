@@ -9,21 +9,20 @@ $(document).ready(function() {
   var interpret = {
     "av_postorder": "Postorder traversal begins.",
     "av_nullcheck": "Check to see if node is null.",
-    "av_isnotnull": "Not null.",
+    "av_isnotnull": "Node is not null, continue traversing.",
     "av_leftchild": "Make recursive call on left child.",
     "av_rightchild": "Make recursive call on right child.",
-    "av_isnull": "Null.",
+    "av_isnull": "Node is null, do nothing.",
     "av_visit": "Visit ",
     "av_done": "Finished the postorder traversal on "
   };
 
   var pseudo = av.code([
-    "static <E> void postorder(BinNode<E> node) {",
-    "    if (node == null) return;  // Empty subtree - do nothing",
-    "    preorder(node.left());     // Process all nodes in left",
-    "    preorder(node.right());    // Process all nodes in right",
-    "    visit(node);               // Visit root node",
-    "}",
+    "function postorder(node):",
+    "    if node is not null:      // Only continue if this is a tree",
+    "        postorder(node.left)  // Process all nodes in left subtree",
+    "        postorder(node.right) // Process all nodes in right subtree",
+    "        visit(node)           // Visit root node",
   ], {lineNumbers: false,
       tags: {
         "sig": 1,

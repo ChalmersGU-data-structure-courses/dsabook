@@ -8,93 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Space Bounds</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        background-color: #ffffff;
-        color: #a0a0a0;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
-    div.sourceCode
-      { color: #1f1c1b; background-color: #ffffff; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #1f1c1b; } /* Normal */
-    code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
-    code span.an { color: #ca60ca; } /* Annotation */
-    code span.at { color: #0057ae; } /* Attribute */
-    code span.bn { color: #b08000; } /* BaseN */
-    code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
-    code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #924c9d; } /* Char */
-    code span.cn { color: #aa5500; } /* Constant */
-    code span.co { color: #898887; } /* Comment */
-    code span.cv { color: #0095ff; } /* CommentVar */
-    code span.do { color: #607880; } /* Documentation */
-    code span.dt { color: #0057ae; } /* DataType */
-    code span.dv { color: #b08000; } /* DecVal */
-    code span.er { color: #bf0303; text-decoration: underline; } /* Error */
-    code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
-    code span.fl { color: #b08000; } /* Float */
-    code span.fu { color: #644a9b; } /* Function */
-    code span.im { color: #ff5500; } /* Import */
-    code span.in { color: #b08000; } /* Information */
-    code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
-    code span.op { color: #1f1c1b; } /* Operator */
-    code span.ot { color: #006e28; } /* Other */
-    code span.pp { color: #006e28; } /* Preprocessor */
-    code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
-    code span.sc { color: #3daee9; } /* SpecialChar */
-    code span.ss { color: #ff5500; } /* SpecialString */
-    code span.st { color: #bf0303; } /* String */
-    code span.va { color: #0057ae; } /* Variable */
-    code span.vs { color: #bf0303; } /* VerbatimString */
-    code span.wa { color: #bf0303; } /* Warning */
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -160,26 +79,31 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="3-algorithm-analysis.html" accesskey="u" rel="up">Algorithm Analysis</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="3.10-multiple-parameters.html" class="navbutton">&lt;&lt;</a>
+<a href="3.10-multiple-parameters.html" accesskey="p" rel="previous">Multiple Parameters</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="3.12-code-tuning-and-empirical-analysis.html" accesskey="n" rel="next">Code Tuning and Empirical Analysis</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="3.10-multiple-parameters.html" accesskey="p" rel="previous">Multiple Parameters</a>
-</span>
+<div>
+<a href="3.12-code-tuning-and-empirical-analysis.html" accesskey="n" rel="next">Code Tuning and Empirical Analysis</a>
+<a href="3.12-code-tuning-and-empirical-analysis.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="space-bounds" class="level2" data-number="3.11">
 <h2 data-number="3.11"><span class="header-section-number">3.11</span>
 Space Bounds</h2>
@@ -236,27 +160,35 @@ allows efficient access to those data. To provide efficient access, it
 may be necessary to store additional information about where the data
 are within the data structure. For example, each node of a linked list
 must store a pointer to the next value on the list. All such information
-stored in addition to the actual data values is referred to as <a href="10-glossary.html#overhead" class="term">overhead</a>. Ideally, overhead should be kept to a
-minimum while allowing maximum access. The need to maintain a balance
-between these opposing goals is what makes the study of data structures
-so interesting.</p>
-<p>One important aspect of algorithm design is referred to as the <a href="10-glossary.html#space-time-tradeoff" class="term">space/time tradeoff</a> principle. The space/time
-tradeoff principle says that one can often achieve a reduction in time
-if one is willing to sacrifice space or vice versa. Many programs can be
-modified to reduce storage requirements by “packing” or encoding
-information. “Unpacking” or decoding the information requires additional
-time. Thus, the resulting program uses less space but runs slower.
-Conversely, many programs can be modified to pre-store results or
-reorganize information to allow faster running time at the expense of
-greater storage requirements. Typically, such changes in time and space
-are both by a constant factor.</p>
-<p>A classic example of a space/time tradeoff is the <a href="10-glossary.html#lookup-table" class="term">lookup table</a>. A lookup table pre-stores the value of
-a function that would otherwise be computed each time it is needed. For
-example, 12! is the greatest value for the factorial function that can
-be stored in a 32-bit <code>int</code> variable. If you are writing a
-program that often computes factorials, it is likely to be much more
-time efficient to simply pre-compute and store the 12 values in a table.
-Whenever the program needs the value of
+stored in addition to the actual data values is referred to as <a
+href="10-glossary.html#overhead" class="term"
+title="All information stored by a data structure aside from the actual data. For example, the pointer fields in a linked list or BST, or the unused positions in an array-based list.">overhead</a>.
+Ideally, overhead should be kept to a minimum while allowing maximum
+access. The need to maintain a balance between these opposing goals is
+what makes the study of data structures so interesting.</p>
+<p>One important aspect of algorithm design is referred to as the <a
+href="10-glossary.html#space-time-tradeoff" class="term"
+title="Many programs can be designed to either speed processing at the cost of additional storage, or reduce storage at the cost of additional processing time.">space/time
+tradeoff</a> principle. The space/time tradeoff principle says that one
+can often achieve a reduction in time if one is willing to sacrifice
+space or vice versa. Many programs can be modified to reduce storage
+requirements by “packing” or encoding information. “Unpacking” or
+decoding the information requires additional time. Thus, the resulting
+program uses less space but runs slower. Conversely, many programs can
+be modified to pre-store results or reorganize information to allow
+faster running time at the expense of greater storage requirements.
+Typically, such changes in time and space are both by a constant
+factor.</p>
+<p>A classic example of a space/time tradeoff is the <a
+href="10-glossary.html#lookup-table" class="term"
+title="A table of pre-calculated values, used to speed up processing time when the values are going to be viewed many times. The costs to this approach are the space required for the table and the time required to compute the table. This is an example of a space/time tradeoff.">lookup
+table</a>. A lookup table pre-stores the value of a function that would
+otherwise be computed each time it is needed. For example, 12! is the
+greatest value for the factorial function that can be stored in a 32-bit
+<code>int</code> variable. If you are writing a program that often
+computes factorials, it is likely to be much more time efficient to
+simply pre-compute and store the 12 values in a table. Whenever the
+program needs the value of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>!</mi></mrow><annotation encoding="application/x-tex">n!</annotation></semantics></math>
 it can simply check the lookup table. (If
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>&gt;</mo><mn>12</mn></mrow><annotation encoding="application/x-tex">n &gt; 12</annotation></semantics></math>,
@@ -279,10 +211,12 @@ this is a special case where there are
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
 integers whose values are a permutation of the integers from 0 to
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>.
-This is an example of a <a href="10-glossary.html#binsort" class="term">binsort</a>. Binsort
-assigns each value to an array position corresponding to its value.</p>
+This is an example of a <a href="10-glossary.html#binsort" class="term"
+title="A sort that works by taking each record and placing it into a bin based on its value. The bins are then gathered up in order to sort the list. It is generally not practical in this form, but it is the conceptual underpinning of the radix sort.">binsort</a>.
+Binsort assigns each value to an array position corresponding to its
+value.</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="op">=</span> <span class="dv">0</span> ... <span class="bu">len</span>(A)<span class="op">-</span><span class="dv">1</span>:</span>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="op">=</span> <span class="dv">0</span> <span class="kw">to</span> A.<span class="bu">size</span>()<span class="op">-</span><span class="dv">1</span>:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    B[A[i]] <span class="op">=</span> A[i]</span></code></pre></div>
 <p>This is efficient and requires
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math>
@@ -291,9 +225,10 @@ time. However, it also requires two arrays of size
 Next is a code fragment that places the permutation in order but does so
 within the same array (thus it is an example of an “in place” sort).</p>
 <div class="sourceCode" id="cb2"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="op">=</span> <span class="dv">0</span> ... <span class="bu">len</span>(A)<span class="op">-</span><span class="dv">1</span>:</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> A[i] <span class="op">!=</span> i:    <span class="co"># Swap element A[i] with A[A[i]]</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        swap(A, i, A[i])</span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="op">=</span> <span class="dv">0</span> <span class="kw">to</span> A.<span class="bu">size</span>()<span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> A[i] <span class="op">!=</span> i:</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Swap element A[i] with A[A[i]]:</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        swap(A, i, A[i])</span></code></pre></div>
 <p>Function <code>swap(A, i, j)</code> exchanges elements <code>i</code>
 and <code>j</code> in array <code>A</code>. It may not be obvious that
 the second code fragment actually sorts the array. To see that this does
@@ -314,19 +249,39 @@ However, it requires more time to run than the first code fragment. On
 my computer the second version takes nearly twice as long to run as the
 first, but it only requires half the space.</p>
 <p>A second principle for the relationship between a program’s space and
-time requirements applies to programs that process information <a href="10-glossary.html#file-processing" class="term">stored on disk</a>. Strangely
-enough, the disk-based space/time tradeoff principle is almost the
-reverse of the space/time tradeoff principle for programs using main
-memory.</p>
-<p>The <a href="10-glossary.html#disk-based-space-time-tradeoff" class="term">disk-based space/time tradeoff</a>
-principle states that the smaller you can make your disk storage
-requirements, the faster your program will run. This is because the time
-to read information from disk is enormous compared to computation time,
-so almost any amount of additional computation needed to unpack the data
-is going to be less than the disk-reading time saved by reducing the
-storage requirements. Naturally this principle does not hold true in all
-cases, but it is good to keep in mind when designing programs that
-process information stored on disk.</p>
+time requirements applies to programs that process information <a
+href="10-glossary.html#file-processing" class="term"
+title="The domain with computer science that deals with processing data stored on a disk drive (in a file), or more broadly, dealing with data stored on any peripheral storage device. Two fundamental properties make dealing with data on a peripheral device different from dealing with data in main memory: (1) Reading/writing data on a peripheral storage device is far slower than reading/writing data to main memory (for example, a typical disk drive is about a million times slower than RAM). (2) All I/O to a peripheral device is typically in terms of a block of data (for example, nearly all disk drives do all I/O in terms of blocks of 512 bytes).">stored
+on disk</a>. Strangely enough, the disk-based space/time tradeoff
+principle is almost the reverse of the space/time tradeoff principle for
+programs using main memory.</p>
+<p>The <a href="10-glossary.html#disk-based-space-time-tradeoff"
+class="term"
+title="In contrast to the standard space/time tradeoff, this principle states that the smaller you can make your disk storage requirements, the faster your program will run. This is because the time to read information from disk is enormous compared to computation time, so almost any amount of additional computation needed to unpack the data is going to be less than the disk-reading time saved by reducing the storage requirements.">disk-based
+space/time tradeoff</a> principle states that the smaller you can make
+your disk storage requirements, the faster your program will run. This
+is because the time to read information from disk is enormous compared
+to computation time, so almost any amount of additional computation
+needed to unpack the data is going to be less than the disk-reading time
+saved by reducing the storage requirements. Naturally this principle
+does not hold true in all cases, but it is good to keep in mind when
+designing programs that process information stored on disk.</p>
 </section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="3.10-multiple-parameters.html" class="navbutton">&lt;&lt;</a>
+<a href="3.10-multiple-parameters.html" accesskey="p" rel="previous">Multiple Parameters</a>
+</div>
+<div class="navlink">
+<a href="3.12-code-tuning-and-empirical-analysis.html" accesskey="n" rel="next">Code Tuning and Empirical Analysis</a>
+<a href="3.12-code-tuning-and-empirical-analysis.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 </body>
 </html>
+

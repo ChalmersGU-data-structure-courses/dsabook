@@ -5,12 +5,12 @@ $(document).ready(function() {
   var av_name = "StaticArrayList-Vars-CON";
   var av = new JSAV(av_name);
   var pseudo = av.code([
-      "class StaticArrayList(E) implements List(E)",
-      "    private internalArray : E[]   // Internal array containing the list elements",
-      "    private listSize      : int   // Size of list",
+      "class StaticArrayList implements List:",
+      "    internalArray   // Internal array containing the list elements",
+      "    listSize        // Size of list",
       "",
-      "    StaticArrayList(capacity:int)",
-      "        internalArray = new array of size capacity",
+      "    StaticArrayList(capacity):",
+      "        internalArray = new Array(capacity)",
       "        listSize = 0",
     ], {lineNumbers: false}
   );

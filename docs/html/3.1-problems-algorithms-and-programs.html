@@ -8,26 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Problems, Algorithms, and Programs</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -93,27 +79,32 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 <link href="../interactive/AlgAnal/ProblemAlgorithmCON.css" rel="stylesheet" type="text/css"/>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="3-algorithm-analysis.html" accesskey="u" rel="up">Algorithm Analysis</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="3-algorithm-analysis.html" class="navbutton">&lt;&lt;</a>
+<a href="3-algorithm-analysis.html" accesskey="p" rel="previous">Algorithm Analysis</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="3.2-comparing-algorithms.html" accesskey="n" rel="next">Comparing Algorithms</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="3-algorithm-analysis.html" accesskey="p" rel="previous">Algorithm Analysis</a>
-</span>
+<div>
+<a href="3.2-comparing-algorithms.html" accesskey="n" rel="next">Comparing Algorithms</a>
+<a href="3.2-comparing-algorithms.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="problems-algorithms-and-programs" class="level2"
 data-number="3.1">
 <h2 data-number="3.1"><span class="header-section-number">3.1</span>
@@ -123,7 +114,9 @@ Problems, Algorithms, and Programs</h2>
 Problems</h3>
 <p>Programmers commonly deal with problems, algorithms, and computer
 programs. These are three distinct concepts.</p>
-<p>As your intuition would suggest, a <a href="10-glossary.html#problem" class="term">problem</a>
+<p>As your intuition would suggest, a <a href="10-glossary.html#problem"
+class="term"
+title="A task to be performed. It is best thought of as a function or a mapping of inputs to outputs.">problem</a>
 is a task to be performed. It is best thought of in terms of inputs and
 matching outputs. A problem definition should not include any
 constraints on <em>how</em> the problem is to be solved. The solution
@@ -134,19 +127,28 @@ solution. For any problem to be solved by a computer, there are always
 such constraints, whether stated or implied. For example, any computer
 program may use only the main memory and disk space available, and it
 must run in a “reasonable” amount of time.</p>
-<p>Problems can be viewed as functions in the mathematical sense. A
-<a href="10-glossary.html#function" class="term">function</a> is a matching between inputs (the
-<a href="10-glossary.html#domain" class="term">domain</a>) and outputs (the <a href="10-glossary.html#range" class="term">range</a>). An input to a function might be a single
-value or a collection of information. The values making up an input are
-called the <a href="10-glossary.html#parameter" class="term">parameters</a> of the
-function. A specific selection of values for the parameters is called an
-<a href="10-glossary.html#problem-instance" class="term">instance</a> of the problem.
-For example, the input parameter to a sorting function might be an array
-of integers. A particular array of integers, with a given size and
-specific values for each position in the array, would be an instance of
-the sorting problem. Different instances might generate the same output.
-However, any problem instance must always result in the same output
-every time the function is computed using that particular input.</p>
+<p>Problems can be viewed as functions in the mathematical sense. A <a
+href="10-glossary.html#function" class="term"
+title="In mathematics, a matching between inputs (the domain) and outputs (the range). In programming, a subroutine that takes input parameters and uses them to compute and return a value. In this case, it is usually considered bad practice for a function to change any global variables (doing so is called a side effect).">function</a>
+is a matching between inputs (the <a href="10-glossary.html#domain"
+class="term"
+title="The set of possible inputs to a function.">domain</a>) and
+outputs (the <a href="10-glossary.html#range" class="term"
+title="The set of possible outputs for a function.">range</a>). An input
+to a function might be a single value or a collection of information.
+The values making up an input are called the <a
+href="10-glossary.html#parameter" class="term"
+title="The values making up an input to a function.">parameters</a> of
+the function. A specific selection of values for the parameters is
+called an <a href="10-glossary.html#problem-instance" class="term"
+title="A specific selection of values for the parameters to a problem. In other words, a specific set of inputs to a problem. A given problem instance has a size under some cost model.">instance</a>
+of the problem. For example, the input parameter to a sorting function
+might be an array of integers. A particular array of integers, with a
+given size and specific values for each position in the array, would be
+an instance of the sorting problem. Different instances might generate
+the same output. However, any problem instance must always result in the
+same output every time the function is computed using that particular
+input.</p>
 <p>This concept of all problems behaving like mathematical functions
 might not match your intuition for the behavior of computer programs.
 You might know of programs to which you can give the same input value on
@@ -164,20 +166,23 @@ completely determined by the program’s full set of inputs. Even a
 (although some random number generating systems appear to get around
 this by accepting a random input from a physical process beyond the
 user’s control). The limits to what functions can be implemented by
-programs is part of the domain of <a href="10-glossary.html#computability" class="term">Computability</a>.</p>
+programs is part of the domain of <a
+href="10-glossary.html#computability" class="term"
+title="A branch of computer science that deals with the theory of solving problems through computation. More specificially, it deals with the limits to what problems (functions) are computable. An example of a famous problem that cannot in principle be solved by a computer is the halting problem.">Computability</a>.</p>
 </section>
 <section id="algorithms" class="level3" data-number="3.1.2">
 <h3 data-number="3.1.2"><span class="header-section-number">3.1.2</span>
 Algorithms</h3>
-<p>An <a href="10-glossary.html#algorithm" class="term">algorithm</a> is a method or a process
-followed to solve a problem. If the problem is viewed as a function,
-then an algorithm is an implementation for the function that transforms
-an input to the corresponding output. A problem can be solved by many
-different algorithms. A given algorithm solves only one problem (i.e.,
-computes a particular function). OpenDSA modules cover many problems,
-and for several of these problems we will see more than one algorithm.
-For the important problem of sorting there are over a dozen commonly
-known algorithms!</p>
+<p>An <a href="10-glossary.html#algorithm" class="term"
+title="A method or a process followed to solve a problem.">algorithm</a>
+is a method or a process followed to solve a problem. If the problem is
+viewed as a function, then an algorithm is an implementation for the
+function that transforms an input to the corresponding output. A problem
+can be solved by many different algorithms. A given algorithm solves
+only one problem (i.e., computes a particular function). OpenDSA modules
+cover many problems, and for several of these problems we will see more
+than one algorithm. For the important problem of sorting there are over
+a dozen commonly known algorithms!</p>
 <p>The advantage of knowing several solutions to a problem is that
 solution
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐀</mi><annotation encoding="application/x-tex">\mathbf{A}</annotation></semantics></math>
@@ -235,8 +240,10 @@ infinite loop.</li>
 <section id="programs" class="level3" data-number="3.1.3">
 <h3 data-number="3.1.3"><span class="header-section-number">3.1.3</span>
 Programs</h3>
-<p>We often think of a computer <a href="10-glossary.html#program" class="term">program</a> as an
-instance, or concrete representation, of an algorithm in some
+<p>We often think of a computer <a href="10-glossary.html#program"
+class="term"
+title="An instance, or concrete representation, of an algorithm in some programming language.">program</a>
+as an instance, or concrete representation, of an algorithm in some
 programming language. Algorithms are usually presented in terms of
 programs, or parts of programs. Naturally, there are many programs that
 are instances of the same algorithm, because any modern computer
@@ -258,13 +265,18 @@ which terminates once its output is produced.</p>
 <section id="summary" class="level3" data-number="3.1.4">
 <h3 data-number="3.1.4"><span class="header-section-number">3.1.4</span>
 Summary</h3>
-<p>To summarize: A <a href="10-glossary.html#problem" class="term">problem</a> is a function or a
-mapping of inputs to outputs. An <a href="10-glossary.html#algorithm" class="term">algorithm</a> is
-a recipe for solving a problem whose steps are concrete and unambiguous.
-Algorithms must be correct, of finite length, and must terminate for all
-inputs. A <a href="10-glossary.html#program" class="term">program</a> is an instantiation of an
-algorithm in a programming language. The following slideshow should help
-you to visualize the differences.</p>
+<p>To summarize: A <a href="10-glossary.html#problem" class="term"
+title="A task to be performed. It is best thought of as a function or a mapping of inputs to outputs.">problem</a>
+is a function or a mapping of inputs to outputs. An <a
+href="10-glossary.html#algorithm" class="term"
+title="A method or a process followed to solve a problem.">algorithm</a>
+is a recipe for solving a problem whose steps are concrete and
+unambiguous. Algorithms must be correct, of finite length, and must
+terminate for all inputs. A <a href="10-glossary.html#program"
+class="term"
+title="An instance, or concrete representation, of an algorithm in some programming language.">program</a>
+is an instantiation of an algorithm in a programming language. The
+following slideshow should help you to visualize the differences.</p>
 <p>
 <div id="ProblemAlgorithmCON" class="ssAV" data-short-name="ProblemAlgorithmCON" data-long-name="Problem, Algorithm, and Program definitions Slideshow" alt="Problem, Algorithm, and Program definitions Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
@@ -277,15 +289,228 @@ you to visualize the differences.</p>
 <section id="summary-questions" class="level3" data-number="3.1.5">
 <h3 data-number="3.1.5"><span class="header-section-number">3.1.5</span>
 Summary Questions</h3>
-<p>
-<div id="AnalPrelimSumm" class="embedContainer">
-<iframe id="AnalPrelimSumm_iframe" aria-label="AnalPrelimSumm" src="../interactive/AlgAnal/AnalPrelimSumm.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
+<div class="quiz">
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>There is only one way that a given problem can be solved.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>There are always an infinite number of ways to solve a problem
+(though there might be only one “reasonable” approach).</li>
+</ul>
 </div>
-</p>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>There are some algorithms that do not terminate for certain
+inputs.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>By the technical definition of “algorithm”, all algorithms
+terminate.</li>
+<li>Of course, that means that some programs are not technically
+algorithms.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>An algorithm is a series of steps that act as a recipe to solve a
+particular problem.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>This is as good a descriptive definition for “algorithm” as
+any.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>A problem instance is a series of steps that act as a recipe to solve
+a particular problem.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A problem instance is a particular input for a problem.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>A problem is an instantiation of an algorithm implemented in a
+specific programming language.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A PROGRAM is an instantiation of an algorithm implemented in a
+specific programming language.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>A program is an instantiation of an algorithm implemented in a
+specific programming language.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>This statement captures the relationship between a program and an
+algorithm.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>An algorithm can only work if it is written in the right type of
+programming language.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>All programming languages implement the same set of algorithms.
+Though, some languages make certain algorithms easier to implement than
+do other languages.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>A problem maps inputs to outputs.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>This is the standard technical definition for a problem.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>An algorithm maps inputs to outputs.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>No. A PROBLEM maps inputs to outputs.</li>
+<li>An algorithm implements the mapping.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>A program maps inputs to outputs.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>No. A PROBLEM maps inputs to outputs.</li>
+<li>A program implements an algorithm.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>A problem instance is a specific selection of values for the problem
+input.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>This is correct.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which is the best definition for algorithm?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />A recipe</label></li>
+<li><label><input type="checkbox" />A program</label></li>
+<li><label><input type="checkbox" />A mapping from input to
+output</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>An algorithm is implemented using a program, but it is not a
+program.</li>
+<li>A problem is a mapping from input to output.</li>
+<li>While informal, the term “recipe” captures the essence of what an
+algorithm is.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which is true about the relationship between algorithms and
+problems?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />A problem is a mapping
+from inputs to outputs, and there might be many algorithms that can
+accomplish this mapping.</label></li>
+<li><label><input type="checkbox" />A problem is a mapping from inputs
+to outputs. Since this mapping is fixed, there is only one right way to
+compute the mapping.</label></li>
+<li><label><input type="checkbox" />An algorithm is another term for a
+problem.</label></li>
+<li><label><input type="checkbox" />A problem is a recipe, and an
+algorithm is a solution to a problem.</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A problem is a mapping from inputs to outputs.</li>
+<li>An algorithm is a recipe.</li>
+<li>There are many algorithms that can solve a given problem.</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
 </section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="3-algorithm-analysis.html" class="navbutton">&lt;&lt;</a>
+<a href="3-algorithm-analysis.html" accesskey="p" rel="previous">Algorithm Analysis</a>
+</div>
+<div class="navlink">
+<a href="3.2-comparing-algorithms.html" accesskey="n" rel="next">Comparing Algorithms</a>
+<a href="3.2-comparing-algorithms.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 <script type="text/javascript" src="../interactive/AlgAnal/ProblemAlgorithmCON.js"></script>
 </body>
 </html>
+

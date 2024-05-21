@@ -5,12 +5,12 @@ $(document).ready(function() {
   var av_name = "LinkedStack-Pop-CON";
   var av = new JSAV(av_name);
   var pseudo = av.code([
-    "pop() : E",
+    "pop():",
     "    // Precondition: stackSize > 0",
-    "    removed : Node = top",
+    "    removed = top",
     "    top = removed.next",
-    "    removed.next = null   // For garbage collection",
-    "    stackSize -= 1",
+    "    removed.next = null",
+    "    stackSize = stackSize - 1",
     "    return removed.elem",
   ], {lineNumbers: false});
 

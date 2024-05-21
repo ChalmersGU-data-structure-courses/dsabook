@@ -8,93 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Separate Chaining, or Open Hashing</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        background-color: #ffffff;
-        color: #a0a0a0;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
-    div.sourceCode
-      { color: #1f1c1b; background-color: #ffffff; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #1f1c1b; } /* Normal */
-    code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
-    code span.an { color: #ca60ca; } /* Annotation */
-    code span.at { color: #0057ae; } /* Attribute */
-    code span.bn { color: #b08000; } /* BaseN */
-    code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
-    code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #924c9d; } /* Char */
-    code span.cn { color: #aa5500; } /* Constant */
-    code span.co { color: #898887; } /* Comment */
-    code span.cv { color: #0095ff; } /* CommentVar */
-    code span.do { color: #607880; } /* Documentation */
-    code span.dt { color: #0057ae; } /* DataType */
-    code span.dv { color: #b08000; } /* DecVal */
-    code span.er { color: #bf0303; text-decoration: underline; } /* Error */
-    code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
-    code span.fl { color: #b08000; } /* Float */
-    code span.fu { color: #644a9b; } /* Function */
-    code span.im { color: #ff5500; } /* Import */
-    code span.in { color: #b08000; } /* Information */
-    code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
-    code span.op { color: #1f1c1b; } /* Operator */
-    code span.ot { color: #006e28; } /* Other */
-    code span.pp { color: #006e28; } /* Preprocessor */
-    code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
-    code span.sc { color: #3daee9; } /* SpecialChar */
-    code span.ss { color: #ff5500; } /* SpecialString */
-    code span.st { color: #bf0303; } /* String */
-    code span.va { color: #0057ae; } /* Variable */
-    code span.vs { color: #bf0303; } /* VerbatimString */
-    code span.wa { color: #bf0303; } /* Warning */
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -160,41 +79,51 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 <link href="../interactive/Hashing/openhashCON.css" rel="stylesheet" type="text/css"/>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="8-hashing.html" accesskey="u" rel="up">Hashing</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="8.2-sample-hash-functions.html" class="navbutton">&lt;&lt;</a>
+<a href="8.2-sample-hash-functions.html" accesskey="p" rel="previous">Sample Hash Functions</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="8.4-converting-objects-to-table-indices.html" accesskey="n" rel="next">Converting Objects to Table Indices</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="8.2-sample-hash-functions.html" accesskey="p" rel="previous">Sample Hash Functions</a>
-</span>
+<div>
+<a href="8.4-converting-objects-to-table-indices.html" accesskey="n" rel="next">Converting Objects to Table Indices</a>
+<a href="8.4-converting-objects-to-table-indices.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="separate-chaining" class="level2" data-number="8.3">
 <h2 data-number="8.3"><span class="header-section-number">8.3</span>
 Separate Chaining, or Open Hashing</h2>
 <p>While the goal of a hash function is to minimize collisions, some
 collisions are unavoidable in practice. Thus, hashing implementations
 must include some form of collision resolution policy. Collision
-resolution techniques can be broken into two classes: <a href="10-glossary.html#separate-chaining" class="term">separate chaining</a> (also called open hashing) and
-<a href="10-glossary.html#open-addressing" class="term">open addressing</a> (also called closed hashing).
-(Yes, it is confusing when “open hashing” means the opposite of “open
-addressing”, but unfortunately, that is the way it is.) The difference
-between the two has to do with whether collisions are stored outside the
-table (separate chaining/open hashing), or whether collisions result in
-storing one of the records at another slot in the table (open
-addressing/closed hashing).</p>
+resolution techniques can be broken into two classes: <a
+href="8.3-separate-chaining.html#separate-chaining" class="term"
+title="In hashing, a synonym for open hashing">separate chaining</a>
+(also called open hashing) and <a
+href="8.6-open-addressing.html#open-addressing" class="term"
+title="A hash system where all records are stored in slots of the hash table. This is in contrast to an open hash system.">open
+addressing</a> (also called closed hashing). (Yes, it is confusing when
+“open hashing” means the opposite of “open addressing”, but
+unfortunately, that is the way it is.) The difference between the two
+has to do with whether collisions are stored outside the table (separate
+chaining/open hashing), or whether collisions result in storing one of
+the records at another slot in the table (open addressing/closed
+hashing).</p>
 <p>The simplest form of separate chaining defines each slot in the hash
 table to be the head of a linked list. All records that hash to a
 particular slot are placed on that slot’s linked list. The following
@@ -224,7 +153,10 @@ positions in the table, yielding on average
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mi>/</mi><mi>M</mi></mrow><annotation encoding="application/x-tex">N/M</annotation></semantics></math>
 records for each list. This value,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mi>/</mi><mi>M</mi></mrow><annotation encoding="application/x-tex">N/M</annotation></semantics></math>,
-is commonly called the <a href="10-glossary.html#load-factor" class="term">load factor</a>.</p>
+is commonly called the <a href="10-glossary.html#load-factor"
+class="term"
+title="In hashing this is the fraction of the hash table slots that contain a record. Hash systems usually try to keep the load factor below 50%.">load
+factor</a>.</p>
 <p>Assuming that the table has more slots than there are records to be
 stored, we can hope that few slots will contain more than one record. In
 the case where a list is empty or has only one record, a search requires
@@ -241,19 +173,22 @@ way is difficult, because members of a given linked list might be stored
 on different disk blocks. This would result in multiple disk accesses
 when searching for a particular key value, which defeats the purpose of
 using hashing.</p>
-<p>There are similarities between separate chaining and <a href="10-glossary.html#binsort" class="term">Binsort</a>. One way to view separate chaining is that
-each record is simply placed in a bin. While multiple records may hash
-to the same bin, this initial binning should still greatly reduce the
-number of records accessed by a search operation. In a similar fashion,
-a simple Binsort reduces the number of records in each bin to a small
-number that can be sorted in some other way.</p>
+<p>There are similarities between separate chaining and <a
+href="10-glossary.html#binsort" class="term"
+title="A sort that works by taking each record and placing it into a bin based on its value. The bins are then gathered up in order to sort the list. It is generally not practical in this form, but it is the conceptual underpinning of the radix sort.">Binsort</a>.
+One way to view separate chaining is that each record is simply placed
+in a bin. While multiple records may hash to the same bin, this initial
+binning should still greatly reduce the number of records accessed by a
+search operation. In a similar fashion, a simple Binsort reduces the
+number of records in each bin to a small number that can be sorted in
+some other way.</p>
 <section id="alternatives-to-a-linked-list" class="level3"
 data-number="8.3.1">
 <h3 data-number="8.3.1"><span class="header-section-number">8.3.1</span>
 Alternatives to a linked list</h3>
 <p>There is nothing that requires us to use a linked list as the
 underlying data structure, it could be a dynamic array or a balanced
-search tree too. (In fact, Java 8’s hash tables use a combination of
+search tree too. (In fact, Java’s hash tables use a combination of
 linked lists and balanced trees).</p>
 <p>Conceptually, a hash table can use any kind of collection data
 structure –the only thing that the actual array does is to partition the
@@ -287,9 +222,9 @@ data-number="8.3.3">
 Implementing Separate Chaining</h3>
 <p>Here we will show the implementation of a <strong>hash map</strong>.
 Implementing a hash set is very similar, and even simpler.</p>
-<p>A separate chaining hash map consists of an internal array of
-key-value maps. We don’t have to specify what kind of maps just yet, but
-we will use a simple <a
+<p>A separate chaining hash map consists of an internal array
+<code>bins</code> of key-value maps. We don’t have to specify what kind
+of maps just yet, but we will use a simple <a
 href="4.6-implementing-maps-using-lists.html#implementing-maps-using-lists">linked
 list map</a> because the idea is that each bin will only contain a
 couple of entries. We also have to remember the collected size of the
@@ -300,90 +235,61 @@ initial minimum capacity, and then let every array cell be a new empty
 linked list map. Note that we put the initialisation in a private method
 of its own, so that we can reuse it when resizing the table.</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SeparateChainingHashMap(Map):</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SeparateChainingHashMap<span class="op">&lt;</span>K<span class="op">,</span> V<span class="op">&gt;</span> <span class="kw">implements</span> <span class="bu">Map</span><span class="op">&lt;</span>K<span class="op">,</span> V<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Map</span><span class="op">&lt;</span>K<span class="op">,</span> V<span class="op">&gt;[]</span> internalTable<span class="op">;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> mapSize<span class="op">;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">SeparateChainingHashMap</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">initialiseTable</span><span class="op">(</span>MinCapacity<span class="op">);</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">@SuppressWarnings</span><span class="op">(</span><span class="st">&quot;unchecked&quot;</span><span class="op">)</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">initialiseTable</span><span class="op">(</span><span class="dt">int</span> capacity<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        internalTable <span class="op">=</span> <span class="op">(</span><span class="bu">Map</span><span class="op">&lt;</span>K<span class="op">,</span> V<span class="op">&gt;[])</span> <span class="kw">new</span> LinkedMap<span class="op">[</span>capacity<span class="op">];</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        mapSize <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="bu">Map</span><span class="op">&lt;</span>K<span class="op">,</span> V<span class="op">&gt;</span> <span class="fu">lookupBin</span><span class="op">(</span><span class="dt">int</span> i<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Map</span><span class="op">&lt;</span>K<span class="op">,</span> V<span class="op">&gt;</span> bin <span class="op">=</span> internalTable<span class="op">[</span>i<span class="op">];</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>bin <span class="op">==</span> <span class="kw">null</span><span class="op">)</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>            bin <span class="op">=</span> internalTable<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="kw">new</span> LinkedMap<span class="op">&lt;&gt;();</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> bin<span class="op">;</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SeparateChainingHashMap <span class="kw">implements</span> <span class="bu">Map</span>:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    SeparateChainingHashMap():</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.initialise(minCapacity)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    initialise(capacity):</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.bins <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(capacity)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.mapSize <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    lookupBin(i):</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        bin <span class="op">=</span> <span class="va">this</span>.bins[i]</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> bin <span class="op">==</span> <span class="va">null</span>:</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>            bin <span class="op">=</span> <span class="kw">new</span> LinkedListMap()</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            <span class="va">this</span>.bins[i] <span class="op">=</span> bin</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> bin</span></code></pre></div>
 <p>To get the value for a key, we called the table index for the key,
 and then look up the key in the underlying map at that position.</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get(<span class="va">self</span>, key):</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> <span class="va">self</span>._hash(key)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._internalTable[i].get(key)</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> V <span class="fu">get</span><span class="op">(</span>K key<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> i <span class="op">=</span> <span class="fu">hash</span><span class="op">(</span>key<span class="op">);</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="fu">lookupBin</span><span class="op">(</span>i<span class="op">).</span><span class="fu">get</span><span class="op">(</span>key<span class="op">);</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span>        </span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SeparateChainingHashMap <span class="kw">implements</span> <span class="bu">Map</span>:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">get</span>(key):</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> <span class="va">this</span>.<span class="bu">hash</span>(key)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">this</span>.bins[i].<span class="bu">get</span>(key)</span></code></pre></div>
 <p>To set a value for a key, we calculate the table index for the key,
 and then we set the value for the key in the underlying map. If if the
 old value for the key is null, the key wasn’t in the hash table
 previously, and then we know that the number of key/value pairs have
 been increased. We also have to check if the load factor becomes too
 large, and then we make the internal table larger by a factor.</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> put(<span class="va">self</span>, key, value):</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> <span class="va">self</span>._hash(key)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        old <span class="op">=</span> <span class="va">self</span>._internalTable[i].put(key, value)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> old <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._mapSize <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">self</span>.loadFactor() <span class="op">&gt;</span> <span class="va">self</span>._maxLoadFactor:</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>._resizeTable(<span class="bu">len</span>(<span class="va">self</span>._internalTable) <span class="op">*</span> <span class="va">self</span>._capacityMultiplier)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> old</span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> V <span class="fu">put</span><span class="op">(</span>K key<span class="op">,</span> V value<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> i <span class="op">=</span> <span class="fu">hash</span><span class="op">(</span>key<span class="op">);</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        V old <span class="op">=</span> <span class="fu">lookupBin</span><span class="op">(</span>i<span class="op">).</span><span class="fu">put</span><span class="op">(</span>key<span class="op">,</span> value<span class="op">);</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>old <span class="op">==</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>            mapSize<span class="op">++;</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span><span class="fu">loadFactor</span><span class="op">()</span> <span class="op">&gt;</span> MaxLoadFactor<span class="op">)</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                <span class="fu">resizeTable</span><span class="op">((</span><span class="dt">int</span><span class="op">)</span> <span class="op">(</span>internalTable<span class="op">.</span><span class="fu">length</span> <span class="op">*</span> CapacityMultiplier<span class="op">));</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> old<span class="op">;</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SeparateChainingHashMap <span class="kw">implements</span> <span class="bu">Map</span>:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    def <span class="bu">put</span>(key, value):</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> <span class="va">this</span>.<span class="bu">hash</span>(key)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        old <span class="op">=</span> <span class="va">this</span>.bins[i].<span class="bu">put</span>(key, value)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> old <span class="kw">is</span> <span class="va">null</span>:</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            <span class="va">this</span>.mapSize <span class="op">=</span> <span class="va">this</span>.mapSize <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">this</span>.loadFactor() <span class="op">&gt;</span> maxLoadFactor:</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                <span class="va">this</span>.resizeTable(<span class="va">this</span>.bins.<span class="bu">size</span>() <span class="op">*</span> capacityMultiplier)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> old</span></code></pre></div>
 <p>To remove a value, we do the same: find the underlying map for the
 key, and remove the key/value pair. If we actually removed the key
 (i.e., if it existed in the map), then we decrease the map size. We also
 check if the table becomes too sparse, and then decrease the internal
 table by a factor.</p>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> remove(<span class="va">self</span>, key):</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> <span class="va">self</span>._hash(key)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        removed <span class="op">=</span> <span class="va">self</span>._internalTable[i].remove(key)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> removed <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._mapSize <span class="op">-=</span> <span class="dv">1</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">self</span>.loadFactor() <span class="op">&lt;</span> <span class="va">self</span>._minLoadFactor:</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>._resizeTable(<span class="bu">len</span>(<span class="va">self</span>._internalTable) <span class="op">/</span> <span class="va">self</span>._capacityMultiplier)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> removed</span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> V <span class="fu">remove</span><span class="op">(</span>K key<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> i <span class="op">=</span> <span class="fu">hash</span><span class="op">(</span>key<span class="op">);</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        V removed <span class="op">=</span> <span class="fu">lookupBin</span><span class="op">(</span>i<span class="op">).</span><span class="fu">remove</span><span class="op">(</span>key<span class="op">);</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>removed <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>            mapSize<span class="op">--;</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span><span class="fu">loadFactor</span><span class="op">()</span> <span class="op">&lt;</span> MinLoadFactor<span class="op">)</span> </span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>                <span class="fu">resizeTable</span><span class="op">((</span><span class="dt">int</span><span class="op">)</span> <span class="op">(</span>internalTable<span class="op">.</span><span class="fu">length</span> <span class="op">/</span> CapacityMultiplier<span class="op">));</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> removed<span class="op">;</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span>            </span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SeparateChainingHashMap <span class="kw">implements</span> <span class="bu">Map</span>:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    def <span class="bu">remove</span>(key):</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> <span class="va">this</span>.<span class="bu">hash</span>(key)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        removed <span class="op">=</span> <span class="va">this</span>.bins[i].<span class="bu">remove</span>(key)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> removed <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span>:</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>            <span class="va">this</span>.mapSize <span class="op">=</span> <span class="va">this</span>.mapSize <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">this</span>.loadFactor() <span class="op">&lt;</span> minLoadFactor:</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                <span class="va">this</span>.resizeTable(<span class="va">this</span>.bins.<span class="bu">size</span>() <span class="op">/</span> capacityMultiplier)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> removed</span></code></pre></div>
 <p>The constants for min and max load factors, and the resizing factor,
 are a bit arbitrary. With the following values, we ensure that the table
 on average contains between 0.5 and 2 entries per table index.
@@ -392,26 +298,21 @@ conflicts (i.e., longer search times). Also, we enlarge by 50%, or
 reduce by 33%, each time we resize the table. Increasing this value
 means that resizing will happen less often, but instead the memory usage
 will increase.</p>
-<div class="sourceCode" id="cb9"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>    _minCapacity <span class="op">=</span> <span class="dv">8</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    _minLoadFactor <span class="op">=</span> <span class="fl">0.5</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    _maxLoadFactor <span class="op">=</span> <span class="fl">2.0</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    _capacityMultiplier <span class="op">=</span> <span class="fl">1.5</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>    <span class="dt">static</span> <span class="dt">int</span> MinCapacity <span class="op">=</span> <span class="dv">8</span><span class="op">;</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">static</span> <span class="dt">double</span> MinLoadFactor <span class="op">=</span> <span class="fl">0.5</span><span class="op">;</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">static</span> <span class="dt">double</span> MaxLoadFactor <span class="op">=</span> <span class="fl">2.0</span><span class="op">;</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">static</span> <span class="dt">double</span> CapacityMultiplier <span class="op">=</span> <span class="fl">1.5</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SeparateChainingHashMap <span class="kw">implements</span> <span class="bu">Map</span>:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    minCapacity <span class="op">=</span> <span class="dv">8</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    minLoadFactor <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    maxLoadFactor <span class="op">=</span> <span class="fl">2.0</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    capacityMultiplier <span class="op">=</span> <span class="fl">1.5</span></span></code></pre></div>
 <p>The load factor
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mi>/</mi><mi>M</mi></mrow><annotation encoding="application/x-tex">N/M</annotation></semantics></math>
 is easy to calculate.</p>
-<div class="sourceCode" id="cb11"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> loadFactor(<span class="va">self</span>):</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._mapSize <span class="op">/</span> <span class="bu">len</span>(<span class="va">self</span>._internalTable)</span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">double</span> <span class="fu">loadFactor</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="op">(</span><span class="dt">double</span><span class="op">)</span> mapSize <span class="op">/</span> internalTable<span class="op">.</span><span class="fu">length</span><span class="op">;</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SeparateChainingHashMap <span class="kw">implements</span> <span class="bu">Map</span>:</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    loadFactor():</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">this</span>.mapSize <span class="op">/</span> <span class="va">this</span>.bins.<span class="bu">size</span>()</span></code></pre></div>
 </section>
 <section id="resizing-the-internal-table" class="level3"
 data-number="8.3.4">
@@ -423,24 +324,16 @@ will not be the same after resizing. Instead we save the current
 internal table to a temporary variable, and reinitialise the table to
 the new capacity. Then we iterate through all bins and entries in the
 old table, and simply insert them again into the new resized table.</p>
-<div class="sourceCode" id="cb13"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _resizeTable(<span class="va">self</span>, newCapacity):</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> newCapacity <span class="op">&lt;</span> <span class="va">self</span>._minCapacity: <span class="cf">return</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>        oldTable <span class="op">=</span> <span class="va">self</span>._internalTable</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._initialiseTable(<span class="bu">int</span>(newCapacity))</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="bu">bin</span> <span class="kw">in</span> oldTable:</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">bin</span>:</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.put(k, <span class="bu">bin</span>.get(k))</span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">resizeTable</span><span class="op">(</span><span class="dt">int</span> newCapacity<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>newCapacity <span class="op">&lt;</span> MinCapacity<span class="op">)</span> <span class="cf">return</span><span class="op">;</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Map</span><span class="op">&lt;</span>K<span class="op">,</span> V<span class="op">&gt;[]</span> oldTable <span class="op">=</span> internalTable<span class="op">;</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">initialiseTable</span><span class="op">(</span>newCapacity<span class="op">);</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="bu">Map</span><span class="op">&lt;</span>K<span class="op">,</span> V<span class="op">&gt;</span> bin <span class="op">:</span> oldTable<span class="op">)</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>bin <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> <span class="op">(</span>K k <span class="op">:</span> bin<span class="op">)</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">put</span><span class="op">(</span>k<span class="op">,</span> bin<span class="op">.</span><span class="fu">get</span><span class="op">(</span>k<span class="op">));</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SeparateChainingHashMap <span class="kw">implements</span> <span class="bu">Map</span>:</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    def resizeTable(newCapacity):</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> newCapacity <span class="op">&gt;=</span> <span class="va">this</span>.minCapacity: </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>            oldBins <span class="op">=</span> <span class="va">this</span>.bins</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>            <span class="va">this</span>.initialiseTable(newCapacity)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> <span class="kw">each</span> bin <span class="kw">in</span> oldBins:</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> <span class="kw">each</span> k <span class="kw">in</span> bin:</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>                    <span class="va">this</span>.<span class="bu">put</span>(k, bin.<span class="bu">get</span>(k))</span></code></pre></div>
 </section>
 <section id="exercise" class="level3" data-number="8.3.5">
 <h3 data-number="8.3.5"><span class="header-section-number">8.3.5</span>
@@ -453,224 +346,23 @@ Your browser does not support iframes.
 </div>
 </p>
 </section>
-<section id="full-implementation-1" class="level3" data-number="8.3.6">
-<h3 data-number="8.3.6"><span class="header-section-number">8.3.6</span>
-Full implementation</h3>
-<p>Here is the full implementation for separate chaining hash
-tables.</p>
-<div class="sourceCode" id="cb15"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: Header *** */</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SeparateChainingHashMap(Map):</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: Header *** */</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: Constants *** */</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    _minCapacity <span class="op">=</span> <span class="dv">8</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    _minLoadFactor <span class="op">=</span> <span class="fl">0.5</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    _maxLoadFactor <span class="op">=</span> <span class="fl">2.0</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    _capacityMultiplier <span class="op">=</span> <span class="fl">1.5</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: Constants *** */</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: Constructor *** */</span></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._initialiseTable(<span class="va">self</span>._minCapacity)</span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _initialiseTable(<span class="va">self</span>, capacity):</span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>        capacity <span class="op">=</span> <span class="bu">int</span>(capacity)</span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._internalTable <span class="op">=</span> [<span class="va">None</span>] <span class="op">*</span> capacity</span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(capacity):</span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._internalTable[i] <span class="op">=</span> LinkedMap()</span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._mapSize <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: Constructor *** */</span></span>
-<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: HashIndex *** */</span></span>
-<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _hash(<span class="va">self</span>, key):</span>
-<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> (<span class="bu">hash</span>(key) <span class="op">&amp;</span> <span class="bn">0x7fffffff</span>) <span class="op">%</span> <span class="bu">len</span>(<span class="va">self</span>._internalTable)</span>
-<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: HashIndex *** */</span></span>
-<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: Put *** */</span></span>
-<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> put(<span class="va">self</span>, key, value):</span>
-<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> <span class="va">self</span>._hash(key)</span>
-<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>        old <span class="op">=</span> <span class="va">self</span>._internalTable[i].put(key, value)</span>
-<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> old <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._mapSize <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">self</span>.loadFactor() <span class="op">&gt;</span> <span class="va">self</span>._maxLoadFactor:</span>
-<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>._resizeTable(<span class="bu">len</span>(<span class="va">self</span>._internalTable) <span class="op">*</span> <span class="va">self</span>._capacityMultiplier)</span>
-<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> old</span>
-<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: Put *** */</span></span>
-<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: Get *** */</span></span>
-<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get(<span class="va">self</span>, key):</span>
-<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> <span class="va">self</span>._hash(key)</span>
-<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._internalTable[i].get(key)</span>
-<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: Get *** */</span></span>
-<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: Remove *** */</span></span>
-<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> remove(<span class="va">self</span>, key):</span>
-<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> <span class="va">self</span>._hash(key)</span>
-<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a>        removed <span class="op">=</span> <span class="va">self</span>._internalTable[i].remove(key)</span>
-<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> removed <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
-<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>._mapSize <span class="op">-=</span> <span class="dv">1</span></span>
-<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="va">self</span>.loadFactor() <span class="op">&lt;</span> <span class="va">self</span>._minLoadFactor:</span>
-<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>._resizeTable(<span class="bu">len</span>(<span class="va">self</span>._internalTable) <span class="op">/</span> <span class="va">self</span>._capacityMultiplier)</span>
-<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> removed</span>
-<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: Remove *** */</span></span>
-<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> containsKey(<span class="va">self</span>, key):</span>
-<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> <span class="va">self</span>._hash(key)</span>
-<span id="cb15-58"><a href="#cb15-58" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._internalTable[i].containsKey(key)</span>
-<span id="cb15-59"><a href="#cb15-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-60"><a href="#cb15-60" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: Resize *** */</span></span>
-<span id="cb15-61"><a href="#cb15-61" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _resizeTable(<span class="va">self</span>, newCapacity):</span>
-<span id="cb15-62"><a href="#cb15-62" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> newCapacity <span class="op">&lt;</span> <span class="va">self</span>._minCapacity: <span class="cf">return</span></span>
-<span id="cb15-63"><a href="#cb15-63" aria-hidden="true" tabindex="-1"></a>        oldTable <span class="op">=</span> <span class="va">self</span>._internalTable</span>
-<span id="cb15-64"><a href="#cb15-64" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>._initialiseTable(<span class="bu">int</span>(newCapacity))</span>
-<span id="cb15-65"><a href="#cb15-65" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="bu">bin</span> <span class="kw">in</span> oldTable:</span>
-<span id="cb15-66"><a href="#cb15-66" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">bin</span>:</span>
-<span id="cb15-67"><a href="#cb15-67" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.put(k, <span class="bu">bin</span>.get(k))</span>
-<span id="cb15-68"><a href="#cb15-68" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: Resize *** */</span></span>
-<span id="cb15-69"><a href="#cb15-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-70"><a href="#cb15-70" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> isEmpty(<span class="va">self</span>):</span>
-<span id="cb15-71"><a href="#cb15-71" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._mapSize <span class="op">==</span> <span class="dv">0</span></span>
-<span id="cb15-72"><a href="#cb15-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-73"><a href="#cb15-73" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> size(<span class="va">self</span>):</span>
-<span id="cb15-74"><a href="#cb15-74" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._mapSize</span>
-<span id="cb15-75"><a href="#cb15-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-76"><a href="#cb15-76" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSATag: LoadFactor *** */</span></span>
-<span id="cb15-77"><a href="#cb15-77" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> loadFactor(<span class="va">self</span>):</span>
-<span id="cb15-78"><a href="#cb15-78" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._mapSize <span class="op">/</span> <span class="bu">len</span>(<span class="va">self</span>._internalTable)</span>
-<span id="cb15-79"><a href="#cb15-79" aria-hidden="true" tabindex="-1"></a><span class="co">#/* *** ODSAendTag: LoadFactor *** */</span></span>
-<span id="cb15-80"><a href="#cb15-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-81"><a href="#cb15-81" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__iter__</span>(<span class="va">self</span>):</span>
-<span id="cb15-82"><a href="#cb15-82" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="bu">bin</span> <span class="kw">in</span> <span class="va">self</span>._internalTable:</span>
-<span id="cb15-83"><a href="#cb15-83" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> key <span class="kw">in</span> <span class="bu">bin</span>:</span>
-<span id="cb15-84"><a href="#cb15-84" aria-hidden="true" tabindex="-1"></a>                <span class="cf">yield</span> key</span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: Header *** */</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SeparateChainingHashMap<span class="op">&lt;</span>K<span class="op">,</span> V<span class="op">&gt;</span> <span class="kw">implements</span> <span class="bu">Map</span><span class="op">&lt;</span>K<span class="op">,</span> V<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Map</span><span class="op">&lt;</span>K<span class="op">,</span> V<span class="op">&gt;[]</span> internalTable<span class="op">;</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> mapSize<span class="op">;</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">SeparateChainingHashMap</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">initialiseTable</span><span class="op">(</span>MinCapacity<span class="op">);</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">@SuppressWarnings</span><span class="op">(</span><span class="st">&quot;unchecked&quot;</span><span class="op">)</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">initialiseTable</span><span class="op">(</span><span class="dt">int</span> capacity<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>        internalTable <span class="op">=</span> <span class="op">(</span><span class="bu">Map</span><span class="op">&lt;</span>K<span class="op">,</span> V<span class="op">&gt;[])</span> <span class="kw">new</span> LinkedMap<span class="op">[</span>capacity<span class="op">];</span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>        mapSize <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="bu">Map</span><span class="op">&lt;</span>K<span class="op">,</span> V<span class="op">&gt;</span> <span class="fu">lookupBin</span><span class="op">(</span><span class="dt">int</span> i<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Map</span><span class="op">&lt;</span>K<span class="op">,</span> V<span class="op">&gt;</span> bin <span class="op">=</span> internalTable<span class="op">[</span>i<span class="op">];</span></span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>bin <span class="op">==</span> <span class="kw">null</span><span class="op">)</span></span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>            bin <span class="op">=</span> internalTable<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="kw">new</span> LinkedMap<span class="op">&lt;&gt;();</span></span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> bin<span class="op">;</span></span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: Header *** */</span></span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: Constants *** */</span></span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>    <span class="dt">static</span> <span class="dt">int</span> MinCapacity <span class="op">=</span> <span class="dv">8</span><span class="op">;</span></span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>    <span class="dt">static</span> <span class="dt">double</span> MinLoadFactor <span class="op">=</span> <span class="fl">0.5</span><span class="op">;</span></span>
-<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>    <span class="dt">static</span> <span class="dt">double</span> MaxLoadFactor <span class="op">=</span> <span class="fl">2.0</span><span class="op">;</span></span>
-<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>    <span class="dt">static</span> <span class="dt">double</span> CapacityMultiplier <span class="op">=</span> <span class="fl">1.5</span><span class="op">;</span></span>
-<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: Constants *** */</span></span>
-<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: HashIndex *** */</span></span>
-<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">int</span> <span class="fu">hash</span><span class="op">(</span>K key<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="op">(</span>key<span class="op">.</span><span class="fu">hashCode</span><span class="op">()</span> <span class="op">&amp;</span> <span class="bn">0x7fffffff</span><span class="op">)</span> <span class="op">%</span> internalTable<span class="op">.</span><span class="fu">length</span><span class="op">;</span></span>
-<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: HashIndex *** */</span></span>
-<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: Put *** */</span></span>
-<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> V <span class="fu">put</span><span class="op">(</span>K key<span class="op">,</span> V value<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> i <span class="op">=</span> <span class="fu">hash</span><span class="op">(</span>key<span class="op">);</span></span>
-<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>        V old <span class="op">=</span> <span class="fu">lookupBin</span><span class="op">(</span>i<span class="op">).</span><span class="fu">put</span><span class="op">(</span>key<span class="op">,</span> value<span class="op">);</span></span>
-<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>old <span class="op">==</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>            mapSize<span class="op">++;</span></span>
-<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span><span class="fu">loadFactor</span><span class="op">()</span> <span class="op">&gt;</span> MaxLoadFactor<span class="op">)</span></span>
-<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>                <span class="fu">resizeTable</span><span class="op">((</span><span class="dt">int</span><span class="op">)</span> <span class="op">(</span>internalTable<span class="op">.</span><span class="fu">length</span> <span class="op">*</span> CapacityMultiplier<span class="op">));</span></span>
-<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> old<span class="op">;</span></span>
-<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: Put *** */</span></span>
-<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: Get *** */</span></span>
-<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> V <span class="fu">get</span><span class="op">(</span>K key<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> i <span class="op">=</span> <span class="fu">hash</span><span class="op">(</span>key<span class="op">);</span></span>
-<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="fu">lookupBin</span><span class="op">(</span>i<span class="op">).</span><span class="fu">get</span><span class="op">(</span>key<span class="op">);</span></span>
-<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span>        </span>
-<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: Get *** */</span></span>
-<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: Remove *** */</span></span>
-<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> V <span class="fu">remove</span><span class="op">(</span>K key<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> i <span class="op">=</span> <span class="fu">hash</span><span class="op">(</span>key<span class="op">);</span></span>
-<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a>        V removed <span class="op">=</span> <span class="fu">lookupBin</span><span class="op">(</span>i<span class="op">).</span><span class="fu">remove</span><span class="op">(</span>key<span class="op">);</span></span>
-<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>removed <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a>            mapSize<span class="op">--;</span></span>
-<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span><span class="fu">loadFactor</span><span class="op">()</span> <span class="op">&lt;</span> MinLoadFactor<span class="op">)</span> </span>
-<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a>                <span class="fu">resizeTable</span><span class="op">((</span><span class="dt">int</span><span class="op">)</span> <span class="op">(</span>internalTable<span class="op">.</span><span class="fu">length</span> <span class="op">/</span> CapacityMultiplier<span class="op">));</span></span>
-<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> removed<span class="op">;</span></span>
-<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span>            </span>
-<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: Remove *** */</span></span>
-<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">containsKey</span><span class="op">(</span>K key<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> i <span class="op">=</span> <span class="fu">hash</span><span class="op">(</span>key<span class="op">);</span></span>
-<span id="cb16-72"><a href="#cb16-72" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="fu">lookupBin</span><span class="op">(</span>i<span class="op">).</span><span class="fu">containsKey</span><span class="op">(</span>key<span class="op">);</span></span>
-<span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-75"><a href="#cb16-75" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: Resize *** */</span></span>
-<span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="dt">void</span> <span class="fu">resizeTable</span><span class="op">(</span><span class="dt">int</span> newCapacity<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb16-77"><a href="#cb16-77" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>newCapacity <span class="op">&lt;</span> MinCapacity<span class="op">)</span> <span class="cf">return</span><span class="op">;</span></span>
-<span id="cb16-78"><a href="#cb16-78" aria-hidden="true" tabindex="-1"></a>        <span class="bu">Map</span><span class="op">&lt;</span>K<span class="op">,</span> V<span class="op">&gt;[]</span> oldTable <span class="op">=</span> internalTable<span class="op">;</span></span>
-<span id="cb16-79"><a href="#cb16-79" aria-hidden="true" tabindex="-1"></a>        <span class="fu">initialiseTable</span><span class="op">(</span>newCapacity<span class="op">);</span></span>
-<span id="cb16-80"><a href="#cb16-80" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="bu">Map</span><span class="op">&lt;</span>K<span class="op">,</span> V<span class="op">&gt;</span> bin <span class="op">:</span> oldTable<span class="op">)</span></span>
-<span id="cb16-81"><a href="#cb16-81" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>bin <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span></span>
-<span id="cb16-82"><a href="#cb16-82" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> <span class="op">(</span>K k <span class="op">:</span> bin<span class="op">)</span></span>
-<span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">put</span><span class="op">(</span>k<span class="op">,</span> bin<span class="op">.</span><span class="fu">get</span><span class="op">(</span>k<span class="op">));</span></span>
-<span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb16-85"><a href="#cb16-85" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: Resize *** */</span></span>
-<span id="cb16-86"><a href="#cb16-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-87"><a href="#cb16-87" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">isEmpty</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb16-88"><a href="#cb16-88" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> mapSize <span class="op">==</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb16-89"><a href="#cb16-89" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb16-90"><a href="#cb16-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-91"><a href="#cb16-91" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">size</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb16-92"><a href="#cb16-92" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> mapSize<span class="op">;</span></span>
-<span id="cb16-93"><a href="#cb16-93" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb16-94"><a href="#cb16-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-95"><a href="#cb16-95" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSATag: LoadFactor *** */</span></span>
-<span id="cb16-96"><a href="#cb16-96" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">double</span> <span class="fu">loadFactor</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb16-97"><a href="#cb16-97" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="op">(</span><span class="dt">double</span><span class="op">)</span> mapSize <span class="op">/</span> internalTable<span class="op">.</span><span class="fu">length</span><span class="op">;</span></span>
-<span id="cb16-98"><a href="#cb16-98" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb16-99"><a href="#cb16-99" aria-hidden="true" tabindex="-1"></a><span class="co">/* *** ODSAendTag: LoadFactor *** */</span></span>
-<span id="cb16-100"><a href="#cb16-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-101"><a href="#cb16-101" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="bu">Iterator</span><span class="op">&lt;</span>K<span class="op">&gt;</span> <span class="fu">iterator</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb16-102"><a href="#cb16-102" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="kw">new</span> <span class="fu">HashMapIterator</span><span class="op">();</span></span>
-<span id="cb16-103"><a href="#cb16-103" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb16-104"><a href="#cb16-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-105"><a href="#cb16-105" aria-hidden="true" tabindex="-1"></a>    <span class="kw">private</span> <span class="kw">class</span> HashMapIterator <span class="kw">implements</span> <span class="bu">Iterator</span><span class="op">&lt;</span>K<span class="op">&gt;</span> <span class="op">{</span></span>
-<span id="cb16-106"><a href="#cb16-106" aria-hidden="true" tabindex="-1"></a>        <span class="kw">private</span> <span class="dt">int</span> bucketIndex<span class="op">;</span></span>
-<span id="cb16-107"><a href="#cb16-107" aria-hidden="true" tabindex="-1"></a>        <span class="kw">private</span> <span class="bu">Iterator</span><span class="op">&lt;</span>K<span class="op">&gt;</span> bucketIterator<span class="op">;</span></span>
-<span id="cb16-108"><a href="#cb16-108" aria-hidden="true" tabindex="-1"></a>        <span class="fu">HashMapIterator</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb16-109"><a href="#cb16-109" aria-hidden="true" tabindex="-1"></a>            bucketIndex <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb16-110"><a href="#cb16-110" aria-hidden="true" tabindex="-1"></a>            bucketIterator <span class="op">=</span> <span class="fu">lookupBin</span><span class="op">(</span>bucketIndex<span class="op">).</span><span class="fu">iterator</span><span class="op">();</span></span>
-<span id="cb16-111"><a href="#cb16-111" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb16-112"><a href="#cb16-112" aria-hidden="true" tabindex="-1"></a>        <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">hasNext</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb16-113"><a href="#cb16-113" aria-hidden="true" tabindex="-1"></a>            <span class="cf">while</span> <span class="op">(!</span>bucketIterator<span class="op">.</span><span class="fu">hasNext</span><span class="op">())</span> <span class="op">{</span></span>
-<span id="cb16-114"><a href="#cb16-114" aria-hidden="true" tabindex="-1"></a>                bucketIndex<span class="op">++;</span></span>
-<span id="cb16-115"><a href="#cb16-115" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="op">(</span>bucketIndex <span class="op">&gt;=</span> internalTable<span class="op">.</span><span class="fu">length</span><span class="op">)</span> <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></span>
-<span id="cb16-116"><a href="#cb16-116" aria-hidden="true" tabindex="-1"></a>                bucketIterator <span class="op">=</span> <span class="fu">lookupBin</span><span class="op">(</span>bucketIndex<span class="op">).</span><span class="fu">iterator</span><span class="op">();</span></span>
-<span id="cb16-117"><a href="#cb16-117" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
-<span id="cb16-118"><a href="#cb16-118" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
-<span id="cb16-119"><a href="#cb16-119" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb16-120"><a href="#cb16-120" aria-hidden="true" tabindex="-1"></a>        <span class="kw">public</span> K <span class="fu">next</span><span class="op">()</span> <span class="op">{</span></span>
-<span id="cb16-121"><a href="#cb16-121" aria-hidden="true" tabindex="-1"></a>            <span class="fu">hasNext</span><span class="op">();</span></span>
-<span id="cb16-122"><a href="#cb16-122" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> bucketIterator<span class="op">.</span><span class="fu">next</span><span class="op">();</span></span>
-<span id="cb16-123"><a href="#cb16-123" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb16-124"><a href="#cb16-124" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb16-125"><a href="#cb16-125" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
-</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="8.2-sample-hash-functions.html" class="navbutton">&lt;&lt;</a>
+<a href="8.2-sample-hash-functions.html" accesskey="p" rel="previous">Sample Hash Functions</a>
+</div>
+<div class="navlink">
+<a href="8.4-converting-objects-to-table-indices.html" accesskey="n" rel="next">Converting Objects to Table Indices</a>
+<a href="8.4-converting-objects-to-table-indices.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 <script type="text/javascript" src="../interactive/Hashing/openhashCON.js"></script>
 </body>
 </html>
+

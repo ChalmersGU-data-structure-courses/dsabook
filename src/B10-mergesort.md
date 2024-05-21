@@ -14,11 +14,11 @@ running time. Unfortunately, even though it is based on a simple
 concept, it is relatively difficult to implement in practice. Here is a
 pseudocode sketch of Mergesort:
 
-    mergeSort(inlist)
-        if length of inlist <= 1:
-            return inlist
-        L1 = half of the items from inlist
-        L2 = other half of the items from inlist
+    function mergeSort(A):
+        if A.size() <= 1:
+            return A
+        L1 = half of A
+        L2 = other half of A
         return merge(mergeSort(L1), mergeSort(L2))
 
 Here is a visualization that illustrates how Mergesort works.
@@ -35,17 +35,17 @@ no more input records remain.
 
 Here is pseudocode for merge on lists:
 
-    merge(L1, L2)
+    function merge(L1, L2):
         answer = new empty list
-        while L1 is not empty and L2 is not empty
+        while L1 is not empty and L2 is not empty:
             x = first element of L1
             y = first element of L2
             if x <= y
                 append x to answer
-                remove first element from L1
+                remove L1's first element
             else
                 append y to answer
-                remove first element from L2
+                remove L2's first element
         // Now one of L1 and L2 is empty, so append all remaining elements
         append all elements of L1 to answer
         append all elements of L2 to answer

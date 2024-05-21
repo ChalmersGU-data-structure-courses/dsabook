@@ -8,26 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Hash Function Principles</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -93,26 +79,31 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="8-hashing.html" accesskey="u" rel="up">Hashing</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="8-hashing.html" class="navbutton">&lt;&lt;</a>
+<a href="8-hashing.html" accesskey="p" rel="previous">Hashing</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="8.2-sample-hash-functions.html" accesskey="n" rel="next">Sample Hash Functions</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="8-hashing.html" accesskey="p" rel="previous">Hashing</a>
-</span>
+<div>
+<a href="8.2-sample-hash-functions.html" accesskey="n" rel="next">Sample Hash Functions</a>
+<a href="8.2-sample-hash-functions.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="hash-function-principles" class="level2" data-number="8.1">
 <h2 data-number="8.1"><span class="header-section-number">8.1</span>
 Hash Function Principles</h2>
@@ -147,11 +138,6 @@ Your browser does not support iframes.
 </iframe>
 </div>
 </p>
-<!-- <div id="Birthday" class="embedContainer">
-<iframe aria-label="Birthday" src="../../exercises/Hashing/Birthday.html" scrolling="no" width="100%" height="177">
-Your browser does not support iframes.
-</iframe>
-</div> -->
 <p>Use the calculator to answer the following questions.</p>
 <p>
 <div id="BirthdayFIB" class="embedContainer">
@@ -160,11 +146,6 @@ Your browser does not support iframes.
 </iframe>
 </div>
 </p>
-<!-- <div id="BirthdayFIB" class="embedContainer">
-<iframe id="BirthdayFIB_iframe" aria-label="BirthdayFIB" src="../../exercises/Hashing/BirthdayFIB.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
-</div> -->
 <p>To be practical, a database organized by hashing must store records
 in a hash table that is not so large that it wastes space. To balance
 time and space efficiency, this means that the hash table should be <a
@@ -236,5 +217,21 @@ unevenly distributed.</li>
 <p>In the next module, you will see several examples of hash functions
 that illustrate these points.</p>
 </section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="8-hashing.html" class="navbutton">&lt;&lt;</a>
+<a href="8-hashing.html" accesskey="p" rel="previous">Hashing</a>
+</div>
+<div class="navlink">
+<a href="8.2-sample-hash-functions.html" accesskey="n" rel="next">Sample Hash Functions</a>
+<a href="8.2-sample-hash-functions.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 </body>
 </html>
+

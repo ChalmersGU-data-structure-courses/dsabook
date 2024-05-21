@@ -8,26 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Sorting Terminology and Notation</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -93,27 +79,32 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 <link href="../interactive/Sorting/SortNotationS1CON.css" rel="stylesheet" type="text/css"/>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="2-arrays-searching-and-sorting.html" accesskey="u" rel="up">Arrays: searching and sorting</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="2.2-sorting.html" class="navbutton">&lt;&lt;</a>
+<a href="2.2-sorting.html" accesskey="p" rel="previous">Sorting</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="2.4-insertion-sort.html" accesskey="n" rel="next">Insertion Sort</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="2.2-sorting.html" accesskey="p" rel="previous">Sorting</a>
-</span>
+<div>
+<a href="2.4-insertion-sort.html" accesskey="n" rel="next">Insertion Sort</a>
+<a href="2.4-insertion-sort.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="sorting-terminology-and-notation" class="level2"
 data-number="2.3">
 <h2 data-number="2.3"><span class="header-section-number">2.3</span>
@@ -126,18 +117,21 @@ Sorting Terminology and Notation</h2>
 <div class="jsavcanvas"></div>
 </div>
 </p>
-<p>As defined, the <a href="10-glossary.html#sorting-problem" class="term">Sorting Problem</a> allows
-input with two or more records that have the same key value. Certain
-applications require that input not contain duplicate key values.
-Typically, sorting algorithms can handle duplicate key values unless
-noted otherwise. When duplicate key values are allowed, there might be
-an implicit ordering to the duplicates, typically based on their order
-of occurrence within the input. It might be desirable to maintain this
-initial ordering among duplicates. A sorting algorithm is said to be
-<a href="10-glossary.html#stable" class="term">stable</a> if it does not change the relative
-ordering of records with identical key values. Many, but not all, of the
-sorting algorithms presented in this chapter are stable, or can be made
-stable with minor changes.</p>
+<p>As defined, the <a href="10-glossary.html#sorting-problem"
+class="term"
+title="Given a set of records $r_1$, $r_2$, ..., $r_n$ with key values $k_1$, $k_2$, ..., $k_n$, the sorting problem is to arrange the records into any order $s$ such that records $r_{s_1}$, $r_{s_2}$, ..., $r_{s_n}$ have keys obeying the property $k_{s_1} \leq k_{s_2} \leq ... \leq k_{s_n}$. In other words, the sorting problem is to arrange a set of records so that the values of their key fields are in non-decreasing order.">Sorting
+Problem</a> allows input with two or more records that have the same key
+value. Certain applications require that input not contain duplicate key
+values. Typically, sorting algorithms can handle duplicate key values
+unless noted otherwise. When duplicate key values are allowed, there
+might be an implicit ordering to the duplicates, typically based on
+their order of occurrence within the input. It might be desirable to
+maintain this initial ordering among duplicates. A sorting algorithm is
+said to be <a href="10-glossary.html#stable" class="term"
+title="A sorting algorithm is said to be stable if it does not change the relative ordering of records with identical key values.">stable</a>
+if it does not change the relative ordering of records with identical
+key values. Many, but not all, of the sorting algorithms presented in
+this chapter are stable, or can be made stable with minor changes.</p>
 <p>When comparing two sorting algorithms, the simplest approach would be
 to program both and measure their running times. This is an example of
 <a
@@ -174,14 +168,150 @@ algorithms end up sorting lots of small lists as well.</p>
 <p>Finally, some situations require that a sorting algorithm use as
 little memory as possible. We will call attention to sorting algorithms
 that require significant extra memory beyond the input array.</p>
-<p>
-<div id="SortIntroSumm" class="embedContainer">
-<iframe id="SortIntroSumm_iframe" aria-label="SortIntroSumm" src="../interactive/Sorting/SortIntroSumm.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
-</div>
+<section id="review-questions-sorting-introduction" class="level3"
+data-number="2.3.1">
+<h3 data-number="2.3.1"><span class="header-section-number">2.3.1</span>
+Review questions: Sorting Introduction</h3>
+<div class="quiz">
+<div class="question">
+Which of these is the best definition for a stable sorting algorithm?
 </p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />An algorithm that does
+not change the relative ordering of records with identical
+keys</label></li>
+<li><label><input type="checkbox" />An algorithm that is as fast as the
+best one known</label></li>
+<li><label><input type="checkbox" />An algorithm that always gives the
+right answer</label></li>
+<li><label><input type="checkbox" />An algorithm that always gives the
+same order for duplicate keys from run to run</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>“Stable” has nothing to do with how fast an algorithm is.</li>
+<li>It refers to maintaining the relative order of records with equal
+key values.</li>
+<li>In some applications, we require that records with equal key value
+preserve the relative order of those records.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which of these will NOT affect the RELATIVE running times for two
+sorting algorithms?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />The CPU
+speed</label></li>
+<li><label><input type="checkbox" />The number of records</label></li>
+<li><label><input type="checkbox" />The allowable range for the record
+values</label></li>
+<li><label><input type="checkbox" />The amount by which the values are
+out of order</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>If we speed up the CPU by a factor of two, both sorts will go twice
+as fast.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which of these is a traditional measure for the cost of a sorting
+algorithm?</p>
+<p><em>Note</em>: Multiple answers are possible!</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />The number of
+comparisons</label></li>
+<li><label><input type="checkbox" checked="" />The number of
+swaps</label></li>
+<li><label><input type="checkbox" />The number of records</label></li>
+<li><label><input type="checkbox" />The memory size</label></li>
+<li><label><input type="checkbox" />The amount by which the values are
+out of order</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>This question does not ask what <em>affects</em> the cost. It asks
+what is a <em>measure</em> of the cost.</li>
+<li>The number of records affects the cost, but it does not measure the
+cost.</li>
+<li>The memory size affects the cost, but it does not measure the
+cost.</li>
+<li>Records being out of order can increase the cost, but not measure
+it.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In which case might the number of comparisons <em>not</em> be a good
+representation of the cost for a sorting algorithm?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />When we are comparing
+strings of widely varying length</label></li>
+<li><label><input type="checkbox" />When there are lots of
+records</label></li>
+<li><label><input type="checkbox" />When the CPU is really
+fast</label></li>
+<li><label><input type="checkbox" />When the amount of available space
+is small</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>CPU speed would affect all comparisons in the same way.</li>
+<li>Number of records or amount of space won’t affect the value of
+counting comparisons.</li>
+<li>The longer the string, the longer it takes to compare.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Sometimes, the constant factors in an algorithm’s runtime equation
+are more important thant its growth rate. When the problem is sorting,
+this can happen in which situation?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />When we are sorting lots
+of small groups of records.</label></li>
+<li><label><input type="checkbox" />When there are lots of
+records.</label></li>
+<li><label><input type="checkbox" />When the CPU is really
+fast.</label></li>
+<li><label><input type="checkbox" />When the amount of available space
+is small.</label></li>
+<li><label><input type="checkbox" />When the records are nearly
+sorted.</label></li>
+<li><label><input type="checkbox" />When the records are nearly reverse
+sorted.</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>CPU speed would affect all comparisons in the same way.</li>
+<li>Records being sorted or reverse sorted affects the growth rate of
+different algorithms differently. But not relevant to this
+question.</li>
+<li>When we sort only a few records, constants matter a lot.</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="2.2-sorting.html" class="navbutton">&lt;&lt;</a>
+<a href="2.2-sorting.html" accesskey="p" rel="previous">Sorting</a>
+</div>
+<div class="navlink">
+<a href="2.4-insertion-sort.html" accesskey="n" rel="next">Insertion Sort</a>
+<a href="2.4-insertion-sort.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 <script type="text/javascript" src="../interactive/Sorting/SortNotationS1CON.js"></script>
 </body>
 </html>
+

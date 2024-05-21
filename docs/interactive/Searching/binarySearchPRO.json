@@ -1,0 +1,25 @@
+{
+    "translations" :{
+      "en": {
+        ".exerciseTitle": "Binary Search",
+        ".instructLabel": "Instructions:",
+        ".instructions": "The blue box contains a search key. The array stores values in ascending order, but these are intially hidden from your view. Find the key in the array by clicking on the midpoint positions as they would be calculated by the binary search algorithm. Whenever you click in the array, the value stored there will be displayed. Remember that midpoint calculation uses interger arithmetic, so the position calculation rounds down.",
+        "#about": "About",
+        ".avTitle": "Binary Search Proficiency Exercise",
+        "av_Authors": "Kasper Hellström",
+        "av_find_label": "Find",
+        "av_ms_comment1": "Low = {low} and high = {high}, so mid = ( {low} + {high} ) / 2 = <strong>{mid}</strong> (division truncates!)",
+        "av_ms_comment2": "<br/>Because {arr_at_mid} is less than {key}, the new low will be <strong>{mid_plus_1}</strong>.",
+        "av_ms_comment3": "<br/>Because {arr_at_mid} is greater than {key}, the new high will be <strong>{mid_minus_1}</strong>.",
+        "av_ms_comment4": "<br/>The key was found at index {mid}!",
+        "av_ms_comment5": "<br/>The key was not found in the table.",
+        "av_line": "(line {first})",
+        "av_lines": "(lines {first} and {second})"
+      }
+    },
+    "params": {
+      "JXOP-feedback": "continuous",
+      "JXOP-fixmode": "undo"
+    }
+  }
+  

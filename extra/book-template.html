@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="$lang$" xml:lang="$lang$"$if(dir)$ dir="$dir$"$endif$>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+$for(author-meta)$
+  <meta name="author" content="$author-meta$" />
+$endfor$
+$if(date-meta)$
+  <meta name="dcterms.date" content="$date-meta$" />
+$endif$
+$if(keywords)$
+  <meta name="keywords" content="$for(keywords)$$keywords$$sep$, $endfor$" />
+$endif$
+$if(description-meta)$
+  <meta name="description" content="$description-meta$" />
+$endif$
+  <title>$if(title-prefix)$$title-prefix$ – $endif$$pagetitle$</title>
+$for(css)$
+  <link rel="stylesheet" href="$css$" />
+$endfor$
+$for(header-includes)$
+  $header-includes$
+$endfor$
+$if(math)$
+  $math$
+$endif$
+</head>
+
+<body>
+$for(include-before)$
+$include-before$
+$endfor$
+
+<header>
+$if(top)$
+<nav class="sitenav">
+<div></div>
+<h1><a href="$top.url$" class="navbutton" accesskey="t" rel="top">$top.title$</a></h1>
+<div></div>
+</nav>
+$endif$
+<nav class="sitenav">
+<div>
+$if(previous.url)$
+<a href="$previous.url$" class="navbutton">&lt;&lt;</a>
+<a href="$previous.url$" accesskey="p" rel="previous">$previous.title$</a>
+$endif$
+</div>
+<div>
+$if(next.url)$
+<a href="$next.url$" accesskey="n" rel="next">$next.title$</a>
+<a href="$next.url$" class="navbutton">&gt;&gt;</a>
+$endif$
+</div>
+</nav>
+</header>
+
+<main>
+$if(top)$
+$-- only print title block if this is NOT the top page
+$else$
+$if(title)$
+<header id="title-block-header">
+<h1 class="title">$title$</h1>
+$if(subtitle)$
+<p class="subtitle">$subtitle$</p>
+$endif$
+$for(author)$
+<p class="author">$author$</p>
+$endfor$
+$if(date)$
+<p class="date">$date$</p>
+$endif$
+$if(abstract)$
+<div class="abstract">
+<div class="abstract-title">$abstract-title$</div>
+$abstract$
+</div>
+$endif$
+$endif$
+</header>
+$endif$
+$if(toc)$
+<nav id="$idprefix$TOC" role="doc-toc">
+$if(toc-title)$
+<h2 id="$idprefix$toc-title">$toc-title$</h2>
+$endif$
+$table-of-contents$
+</nav>
+$endif$
+$body$
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+$if(previous.url)$
+<a href="$previous.url$" class="navbutton">&lt;&lt;</a>
+<a href="$previous.url$" accesskey="p" rel="previous">$previous.title$</a>
+$endif$
+</div>
+<div class="navlink">
+$if(next.url)$
+<a href="$next.url$" accesskey="n" rel="next">$next.title$</a>
+<a href="$next.url$" class="navbutton">&gt;&gt;</a>
+$endif$
+</div>
+</nav>
+</footer>
+
+$for(include-after)$
+$include-after$
+$endfor$
+</body>
+</html>

@@ -103,33 +103,30 @@ where $U$ is some vertex in $\mathbf{S}$.
 This solution is usually referred to as Dijkstra's algorithm. It works
 by maintaining a distance estimate $\mathbf{D}(X)$ for all vertices $X$
 in $\mathbf{V}$. The elements of $\mathbf{D}$ are initialized to the
-value `INFINITE`. Vertices are processed in order of distance from $S$.
+value $\infty$ (positive infinity). Vertices are processed in order of distance from $S$.
 Whenever a vertex $v$ is processed, $\mathbf{D}(X)$ is updated for every
 neighbor $X$ of $V$. Here is an implementation for Dijkstra's
-algorithm. At the end, array `D` will contain the shortest distance
-values.
+algorithm. At the end, array `D` will contain the shortest distance values.
 
-```java
-// Compute shortest path distances from s, store them in D
-static void <V> Dijkstra(Graph<V> G, V s, Map<V,Double> D) {
-    Set<V> visited = new Set<>();
-    for (V v : G.vertices())
-        D.put(v, Double.POSITIVE_INFINITY);
-    D.put(s, 0);
-    for (int i=0; i < G.vertexCount(); i++) {   // Process the vertices
-        V v = minVertex(G, D);   // Find next-closest vertex
-        visited.add(v);
-        if (D.get(v) == Double.POSITIVE_INFINITY)
-            return;              // Unreachable
-        for (Edge<V> e : G.outgoingEdges(v)) {
-            V w = e.end;
-            if (D.get(w) > D.get(v) + e.weight)
-                D.put(w, D.get(v) + e.weight);
-        }
-    }
-}
-```
+    // Compute shortest path distances from s
+    function Dijkstra(G, s):
+        visited = new Set()
+        D = new Map()
+        for each v in G.vertices():
+            D.put(v, ∞)  // Initialise distances
+        D.put(s, 0)  // The distance from s to s is 0
 
+        repeat G.vertxCount() times:  // Process the vertices
+            v = minVertex(G, D, visited)  // Find next-closest vertex
+            visited.add(v)
+            if D.get(v) == ∞:
+                return D  // Vertex v is unreachable
+            for each e in G.outgoingEdges(v):
+                w = e.end
+                dist = D.get(v) + e.weight
+                if dist < D.get(w): // If the new distance is shorter...
+                    D.put(w, dist)  // ...update w with the new distance
+        return D
 
 
 <inlineav id="DijkstraCON" src="Graph/DijkstraCON.js" name="Dijkstra Slideshow" links="Graph/DijkstraCON.css"/>
@@ -139,22 +136,14 @@ unvisited vertex with minimum distance value during each pass through
 the main `for` loop. The first method is simply to scan through the list
 of $|\mathbf{V}|$ vertices searching for the minimum value, as follows:
 
-```java
-// Find the unvisited vertex with the smalled distance
-static V minVertex(Graph G<V>, Map<V,Double> D, Set<V> visited) {
-    V minV = null;
-    for (v : G.vertices()) {
-        if (!visited.contains(v)) {
-            if (minV == null)
-                minV = v;
-            else if (D.get(v) < D.get(minV))
-                minV = v;
-        }
-    }
-    return minV;
-}
-```
-
+    // Find the unvisited vertex with the smalled distance
+    function minVertex(G, D, visited):
+        minV = null
+        for each v in G.vertices():
+            if v not in visited:
+                if minV is null or D.get(v) < D.get(minV):
+                    minV = v
+        return minV
 
 
 Because this scan is done $|\mathbf{V}|$ times, and because each edge
@@ -187,39 +176,32 @@ class to store key-value pairs in the heap, with the edge weight as the
 key and the target vertex as the value. here is the implementation for
 Dijkstra's algorithm using a heap.
 
-```java
-// Dijkstra's shortest-paths: priority queue version
-static void <V> DijkstraPQ(Graph G, V s, Map<V,Double> D) {
-    MinHeap H = new MinHeap();
-    H.add(new KVPair(0, s));   // Initial vertex
+    // Dijkstra's shortest-paths: priority queue version
+    function DijkstraPQ(G, s):
+        visited = new Set()
+        D = new Map()
+        for (V v : G.vertices())
+            D.put(v, ∞)  // Initialize distance
+        D.put(s, 0)  // The distance from s to s is 0
 
-    Set<V> visited = new Set<>();
+        agenda = new PriorityQueue()
+        agenda.add(new KVPair(0, s))  // Initial vertex
 
-    for (V v : G.vertices())  // Initialize distance
-        D.put(v, Double.POSITIVE_INFINITY);
-    D.put(s, 0);
-
-    while (!H.isEmpty()) {
-        V v = H.removeMin().value();
-        if (!visited.contains(v)) {
-            visited.add(v);
-            if (D.get(v) == Double.POSITIVE_INFINITY)
-                return;     // Unreachable
-            for (Edge<V> e : G.outgoingEdges) {
-                V w = e.end;
-                if (D.get(w) > D.get(v) + e.weight) { // Update D
-                    D.put(w, D.get(v) + e.weight);
-                    H.add(new KVPair(D.get(W), w));
-                }
-            }
-        }
-    }
-}
-```
+        while not agenda.isEmpty():
+            v = agenda.removeMin().value
+            if v not in visited:
+                visited.add(v)
+                if D.get(v) == ∞:
+                    return D  // Vertex v is unreachable
+                for each e in G.outgoingEdges():
+                    w = e.end
+                    dist = D.get(v) + e.weight
+                    if dist < D.get(w): // If the new distance is shorter...
+                        D.put(w, dist)  // ...update w with the new distance...
+                        agenda.add(new KVPair(dist, w))  // ...and add it to the agenda
 
 
-
-Using `MinVertex` to scan the vertex list for the minimum value is more
+Using `minVertex` to scan the vertex list for the minimum value is more
 efficient when the graph is dense, that is, when $|\mathbf{E}|$
 approaches $|\mathbf{V}|^2$. Using a heap is more efficient when the
 graph is sparse because its cost is

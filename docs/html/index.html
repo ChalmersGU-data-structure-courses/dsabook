@@ -8,26 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Data Structures and Algorithms</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -93,23 +79,24 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-</span>
-<span class="navlink">
-</span>
+
+<header>
+<nav class="sitenav">
+<div>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="1-introduction.html" accesskey="n" rel="next">Introduction</a>
-</span>
-<span class="navlink">
-</span>
+<div>
+<a href="1-introduction.html" accesskey="n" rel="next">Introduction</a>
+<a href="1-introduction.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <header id="title-block-header">
 <h1 class="title">Data Structures and Algorithms</h1>
 <p class="author">Cliff Shaffer</p>
@@ -206,11 +193,6 @@ class="toc-section-number">2.13</span> Lower Bounds for Sorting
 <li><a href="2.14-arrays-as-sets-or-maps.html#arrays-as-sets-or-maps"
 id="toc-arrays-as-sets-or-maps"><span
 class="toc-section-number">2.14</span> Arrays as Sets or Maps</a></li>
-<li><a
-href="2.15-sorting-summary-exercises.html#sorting-summary-exercises"
-id="toc-sorting-summary-exercises"><span
-class="toc-section-number">2.15</span> Sorting: Summary
-Exercises</a></li>
 </ul></li>
 <li><a href="3-algorithm-analysis.html#algorithm-analysis"
 id="toc-algorithm-analysis"><span class="toc-section-number">3</span>
@@ -268,33 +250,25 @@ id="toc-code-tuning-and-empirical-analysis"><span
 class="toc-section-number">3.12</span> Code Tuning and Empirical
 Analysis</a></li>
 <li><a
-href="3.13-algorithm-analysis-summary-exercises.html#algorithm-analysis-summary-exercises"
-id="toc-algorithm-analysis-summary-exercises"><span
-class="toc-section-number">3.13</span> Algorithm Analysis: Summary
-Exercises</a></li>
-<li><a href="3.14-summary-exercise-cs3.html#summary-exercise-cs3"
-id="toc-summary-exercise-cs3"><span
-class="toc-section-number">3.14</span> Summary Exercise: CS3</a></li>
+href="3.13-growth-rates-review-optional.html#growth-rates-review-optional"
+id="toc-growth-rates-review-optional"><span
+class="toc-section-number">3.13</span> Growth Rates Review
+(optional)</a></li>
 <li><a
-href="3.15-growth-rates-review-optional-work-in-progress.html#growth-rates-review-optional-work-in-progress"
-id="toc-growth-rates-review-optional-work-in-progress"><span
-class="toc-section-number">3.15</span> Growth Rates Review (optional)
-(WORK IN PROGRESS)</a></li>
+href="3.14-summation-techniques-optional.html#summation-techniques-optional"
+id="toc-summation-techniques-optional"><span
+class="toc-section-number">3.14</span> Summation Techniques
+(optional)</a></li>
 <li><a
-href="3.16-summation-techniques-optional-work-in-progress.html#summation-techniques-optional-work-in-progress"
-id="toc-summation-techniques-optional-work-in-progress"><span
-class="toc-section-number">3.16</span> Summation Techniques (optional)
-(WORK IN PROGRESS)</a></li>
+href="3.15-solving-recurrence-relations-optional.html#solving-recurrence-relations-optional"
+id="toc-solving-recurrence-relations-optional"><span
+class="toc-section-number">3.15</span> Solving Recurrence Relations
+(optional)</a></li>
 <li><a
-href="3.17-solving-recurrence-relations-optional-work-in-progress.html#solving-recurrence-relations-optional-work-in-progress"
-id="toc-solving-recurrence-relations-optional-work-in-progress"><span
-class="toc-section-number">3.17</span> Solving Recurrence Relations
-(optional) (WORK IN PROGRESS)</a></li>
-<li><a
-href="3.18-amortized-analysis-optional-work-in-progress.html#amortized-analysis-optional-work-in-progress"
-id="toc-amortized-analysis-optional-work-in-progress"><span
-class="toc-section-number">3.18</span> Amortized Analysis (optional)
-(WORK IN PROGRESS)</a></li>
+href="3.16-amortized-analysis-optional.html#amortized-analysis-optional"
+id="toc-amortized-analysis-optional"><span
+class="toc-section-number">3.16</span> Amortized Analysis
+(optional)</a></li>
 </ul></li>
 <li><a href="4-lists-1.html#lists-1" id="toc-lists-1"><span
 class="toc-section-number">4</span> Lists</a>
@@ -335,10 +309,10 @@ class="toc-section-number">4.9</span> Implementing Recursion</a></li>
 <li><a href="4.10-queues.html#queues" id="toc-queues"><span
 class="toc-section-number">4.10</span> Queues</a></li>
 <li><a
-href="4.11-linear-structure-summary-exercises.html#linear-structure-summary-exercises"
-id="toc-linear-structure-summary-exercises"><span
-class="toc-section-number">4.11</span> Linear Structure Summary
-Exercises</a></li>
+href="4.11-practice-questions-lists-stacks-and-queues.html#practice-questions-lists-stacks-and-queues"
+id="toc-practice-questions-lists-stacks-and-queues"><span
+class="toc-section-number">4.11</span> Practice questions: lists, stacks
+and queues</a></li>
 </ul></li>
 <li><a href="5-binary-trees.html#binary-trees"
 id="toc-binary-trees"><span class="toc-section-number">5</span> Binary
@@ -383,32 +357,27 @@ id="toc-binary-tree-space-requirements-optional"><span
 class="toc-section-number">5.8</span> Binary Tree Space Requirements
 (optional)</a></li>
 <li><a
-href="5.9-multiple-binary-trees-optional.html#multiple-binary-trees-optional"
-id="toc-multiple-binary-trees-optional"><span
-class="toc-section-number">5.9</span> Multiple Binary Trees
-(optional)</a></li>
-<li><a
-href="5.10-a-hard-information-flow-problem-optional.html#a-hard-information-flow-problem-optional"
+href="5.9-a-hard-information-flow-problem-optional.html#a-hard-information-flow-problem-optional"
 id="toc-a-hard-information-flow-problem-optional"><span
-class="toc-section-number">5.10</span> A Hard Information Flow Problem
+class="toc-section-number">5.9</span> A Hard Information Flow Problem
 (optional)</a></li>
 <li><a
-href="5.11-binary-tree-chapter-summary.html#binary-tree-chapter-summary"
+href="5.10-binary-tree-chapter-summary.html#binary-tree-chapter-summary"
 id="toc-binary-tree-chapter-summary"><span
-class="toc-section-number">5.11</span> Binary Tree Chapter
+class="toc-section-number">5.10</span> Binary Tree Chapter
 Summary</a></li>
-<li><a href="5.12-general-trees-optional.html#general-trees-optional"
+<li><a href="5.11-general-trees-optional.html#general-trees-optional"
 id="toc-general-trees-optional"><span
-class="toc-section-number">5.12</span> General Trees (optional)</a></li>
+class="toc-section-number">5.11</span> General Trees (optional)</a></li>
 <li><a
-href="5.13-the-unionfind-algorithm-optional.html#the-unionfind-algorithm-optional"
+href="5.12-the-unionfind-algorithm-optional.html#the-unionfind-algorithm-optional"
 id="toc-the-unionfind-algorithm-optional"><span
-class="toc-section-number">5.13</span> The Union/Find Algorithm
+class="toc-section-number">5.12</span> The Union/Find Algorithm
 (optional)</a></li>
 <li><a
-href="5.14-sequential-tree-representations-optional.html#sequential-tree-representations-optional"
+href="5.13-sequential-tree-representations-optional.html#sequential-tree-representations-optional"
 id="toc-sequential-tree-representations-optional"><span
-class="toc-section-number">5.14</span> Sequential Tree Representations
+class="toc-section-number">5.13</span> Sequential Tree Representations
 (optional)</a></li>
 </ul></li>
 <li><a href="6-binary-search-trees.html#binary-search-trees"
@@ -431,9 +400,11 @@ Balanced Trees</a></li>
 <li><a href="6.4-the-avl-tree.html#the-avl-tree"
 id="toc-the-avl-tree"><span class="toc-section-number">6.4</span> The
 AVL Tree</a></li>
-<li><a href="6.5-red-black-tree.html#red-black-tree"
-id="toc-red-black-tree"><span class="toc-section-number">6.5</span> The
-Red-Black Tree (WORK IN PROGRESS)</a></li>
+<li><a
+href="6.5-the-red-black-tree-optional.html#the-red-black-tree-optional"
+id="toc-the-red-black-tree-optional"><span
+class="toc-section-number">6.5</span> The Red-Black Tree
+(optional)</a></li>
 <li><a href="6.6-the-splay-tree-optional.html#the-splay-tree-optional"
 id="toc-the-splay-tree-optional"><span
 class="toc-section-number">6.6</span> The Splay Tree (optional)</a></li>
@@ -451,9 +422,9 @@ id="toc-priority-queues"><span class="toc-section-number">7</span>
 Priority queues</a>
 <ul>
 <li><a
-href="7.1-array-implementation-for-complete-binary-trees.html#array-implementation-for-complete-binary-trees"
-id="toc-array-implementation-for-complete-binary-trees"><span
-class="toc-section-number">7.1</span> Array Implementation for Complete
+href="7.1-array-representation-for-complete-binary-trees.html#array-representation-for-complete-binary-trees"
+id="toc-array-representation-for-complete-binary-trees"><span
+class="toc-section-number">7.1</span> Array Representation for Complete
 Binary Trees</a></li>
 <li><a
 href="7.2-heaps-and-priority-queues.html#heaps-and-priority-queues"
@@ -522,31 +493,34 @@ Exercises</a></li>
 <li><a href="9-graphs-1.html#graphs-1" id="toc-graphs-1"><span
 class="toc-section-number">9</span> Graphs</a>
 <ul>
-<li><a href="9.1-graph-implementations.html#graph-implementations"
+<li><a href="9.1-graph-representations.html#graph-representations"
+id="toc-graph-representations"><span
+class="toc-section-number">9.1</span> Graph Representations</a></li>
+<li><a href="9.2-graph-implementations.html#graph-implementations"
 id="toc-graph-implementations"><span
-class="toc-section-number">9.1</span> Graph Implementations</a></li>
-<li><a href="9.2-graph-traversals.html#graph-traversals"
-id="toc-graph-traversals"><span class="toc-section-number">9.2</span>
+class="toc-section-number">9.2</span> Graph Implementations</a></li>
+<li><a href="9.3-graph-traversals.html#graph-traversals"
+id="toc-graph-traversals"><span class="toc-section-number">9.3</span>
 Graph Traversals</a></li>
-<li><a href="9.3-topological-sort.html#topological-sort"
-id="toc-topological-sort"><span class="toc-section-number">9.3</span>
+<li><a href="9.4-topological-sort.html#topological-sort"
+id="toc-topological-sort"><span class="toc-section-number">9.4</span>
 Topological Sort</a></li>
-<li><a href="9.4-shortest-paths-problems.html#shortest-paths-problems"
+<li><a href="9.5-shortest-paths-problems.html#shortest-paths-problems"
 id="toc-shortest-paths-problems"><span
-class="toc-section-number">9.4</span> Shortest-Paths Problems</a></li>
+class="toc-section-number">9.5</span> Shortest-Paths Problems</a></li>
 <li><a
-href="9.5-minimal-cost-spanning-trees.html#minimal-cost-spanning-trees"
+href="9.6-minimal-cost-spanning-trees.html#minimal-cost-spanning-trees"
 id="toc-minimal-cost-spanning-trees"><span
-class="toc-section-number">9.5</span> Minimal Cost Spanning
+class="toc-section-number">9.6</span> Minimal Cost Spanning
 Trees</a></li>
 <li><a
-href="9.6-all-pairs-shortest-paths-optional.html#all-pairs-shortest-paths-optional"
+href="9.7-all-pairs-shortest-paths-optional.html#all-pairs-shortest-paths-optional"
 id="toc-all-pairs-shortest-paths-optional"><span
-class="toc-section-number">9.6</span> All-Pairs Shortest Paths
+class="toc-section-number">9.7</span> All-Pairs Shortest Paths
 (optional)</a></li>
-<li><a href="9.7-graph-concepts-summary.html#graph-concepts-summary"
+<li><a href="9.8-graph-concepts-summary.html#graph-concepts-summary"
 id="toc-graph-concepts-summary"><span
-class="toc-section-number">9.7</span> Graph Concepts Summary</a></li>
+class="toc-section-number">9.8</span> Graph Concepts Summary</a></li>
 </ul></li>
 <li><a href="10-glossary.html#glossary" id="toc-glossary"><span
 class="toc-section-number">10</span> Glossary</a></li>
@@ -556,5 +530,19 @@ Bibliography</a></li>
 </ul>
 </nav>
 
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+</div>
+<div class="navlink">
+<a href="1-introduction.html" accesskey="n" rel="next">Introduction</a>
+<a href="1-introduction.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 </body>
 </html>
+

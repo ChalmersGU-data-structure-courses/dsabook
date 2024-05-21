@@ -8,26 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Lists</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -93,26 +79,31 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="index.html" accesskey="u" rel="up">Data Structures and Algorithms</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="3.16-amortized-analysis-optional.html" class="navbutton">&lt;&lt;</a>
+<a href="3.16-amortized-analysis-optional.html" accesskey="p" rel="previous">Amortized Analysis (optional)</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="4.1-the-list-adt.html" accesskey="n" rel="next">The List ADT</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="3.18-amortized-analysis-optional-work-in-progress.html" accesskey="p" rel="previous">Amortized Analysis (optional) (WORK IN PROGRESS)</a>
-</span>
+<div>
+<a href="4.1-the-list-adt.html" accesskey="n" rel="next">The List ADT</a>
+<a href="4.1-the-list-adt.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="lists-1" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span>
 Lists</h1>
@@ -120,17 +111,24 @@ Lists</h1>
 records, or job descriptions for example – the simplest and most
 effective approach might be to put them in a list. Only when you have to
 organize and search through a large number of things do more
-sophisticated data structures like <a href="10-glossary.html#search-tree" class="term">search trees</a> become necessary. Many applications don’t
-require any form of search, and they do not require that an ordering be
-placed on the objects being stored. Some applications require that
-actions be performed in a strict chronological order, processing objects
-in the order that they arrived, or perhaps processing objects in the
-reverse of the order that they arrived. For all these situations, a
-simple list structure is appropriate.</p>
+sophisticated data structures like <a
+href="10-glossary.html#search-tree" class="term"
+title="A tree data structure that makes search by key value more efficient. A type of container, it is common to implement an index using a search tree. A good search tree implementation will guarentee that insertion, deletion, and search operations are all $\Theta(\log n)$.">search
+trees</a> become necessary. Many applications don’t require any form of
+search, and they do not require that an ordering be placed on the
+objects being stored. Some applications require that actions be
+performed in a strict chronological order, processing objects in the
+order that they arrived, or perhaps processing objects in the reverse of
+the order that they arrived. For all these situations, a simple list
+structure is appropriate.</p>
 <p>This chapter describes representations both for lists and for two
-important list-like structures called the <a href="10-glossary.html#stack" class="term">stack</a> and the <a href="10-glossary.html#queue" class="term">queue</a>. Along
-with presenting these fundamental data structures, the other goals of
-the chapter are to:</p>
+important list-like structures called the <a
+href="10-glossary.html#stack" class="term"
+title="A list-like structure in which elements may be inserted or removed from only one end.">stack</a>
+and the <a href="10-glossary.html#queue" class="term"
+title="A list-like structure in which elements are inserted only at one end, and removed only from the other one end.">queue</a>.
+Along with presenting these fundamental data structures, the other goals
+of the chapter are to:</p>
 <ol type="1">
 <li>Give examples that show the separation of a logical representation
 in the form of an ADT from a physical implementation as a data
@@ -151,5 +149,21 @@ The chapter finishes with implementations for <a
 href="4.8-stacks.html#stacks">stacks</a> and <a
 href="4.10-queues.html#queues">queues</a>.</p>
 </section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="3.16-amortized-analysis-optional.html" class="navbutton">&lt;&lt;</a>
+<a href="3.16-amortized-analysis-optional.html" accesskey="p" rel="previous">Amortized Analysis (optional)</a>
+</div>
+<div class="navlink">
+<a href="4.1-the-list-adt.html" accesskey="n" rel="next">The List ADT</a>
+<a href="4.1-the-list-adt.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 </body>
 </html>
+

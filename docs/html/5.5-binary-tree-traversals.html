@@ -8,93 +8,12 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
   <title>DSABook – Binary Tree Traversals</title>
-  <style>
-    div.sitenav { display: flex; flex-direction: row; flex-wrap: wrap; }
-    span.navlink { flex: 1; }
-    span.navlink-label { display: inline-block; min-width: 4em; }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        background-color: #ffffff;
-        color: #a0a0a0;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
-    div.sourceCode
-      { color: #1f1c1b; background-color: #ffffff; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #1f1c1b; } /* Normal */
-    code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
-    code span.an { color: #ca60ca; } /* Annotation */
-    code span.at { color: #0057ae; } /* Attribute */
-    code span.bn { color: #b08000; } /* BaseN */
-    code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
-    code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #924c9d; } /* Char */
-    code span.cn { color: #aa5500; } /* Constant */
-    code span.co { color: #898887; } /* Comment */
-    code span.cv { color: #0095ff; } /* CommentVar */
-    code span.do { color: #607880; } /* Documentation */
-    code span.dt { color: #0057ae; } /* DataType */
-    code span.dv { color: #b08000; } /* DecVal */
-    code span.er { color: #bf0303; text-decoration: underline; } /* Error */
-    code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
-    code span.fl { color: #b08000; } /* Float */
-    code span.fu { color: #644a9b; } /* Function */
-    code span.im { color: #ff5500; } /* Import */
-    code span.in { color: #b08000; } /* Information */
-    code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
-    code span.op { color: #1f1c1b; } /* Operator */
-    code span.ot { color: #006e28; } /* Other */
-    code span.pp { color: #006e28; } /* Preprocessor */
-    code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
-    code span.sc { color: #3daee9; } /* SpecialChar */
-    code span.ss { color: #ff5500; } /* SpecialString */
-    code span.st { color: #bf0303; } /* String */
-    code span.va { color: #0057ae; } /* Variable */
-    code span.vs { color: #bf0303; } /* VerbatimString */
-    code span.wa { color: #bf0303; } /* Warning */
-  </style>
-  <link rel="stylesheet" href="../bookstyle.css" />
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -160,44 +79,48 @@
     JSAV_EXERCISE_OPTIONS['code']='pseudo';
   </script>
 
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 <link href="../interactive/Binary/BinExampCON.css" rel="stylesheet" type="text/css"/>
 <link href="../interactive/Binary/BTCON.css" rel="stylesheet" type="text/css"/>
 </head>
+
 <body>
-<nav id="sitenav">
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Up:</span> <a href="5-binary-trees.html" accesskey="u" rel="up">Binary Trees</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Top:</span> <a href="index.html" accesskey="t" rel="top">Data Structures and Algorithms</a>
-</span>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="5.4-the-full-binary-tree-theorem-optional.html" class="navbutton">&lt;&lt;</a>
+<a href="5.4-the-full-binary-tree-theorem-optional.html" accesskey="p" rel="previous">The Full Binary Tree Theorem (optional)</a>
 </div>
-<div class="sitenav">
-<span class="navlink">
-<span class="navlink-label">Next:</span> <a href="5.6-implementing-tree-traversals.html" accesskey="n" rel="next">Implementing Tree Traversals</a>
-</span>
-<span class="navlink">
-<span class="navlink-label">Previous:</span> <a href="5.4-the-full-binary-tree-theorem-optional.html" accesskey="p" rel="previous">The Full Binary Tree Theorem (optional)</a>
-</span>
+<div>
+<a href="5.6-implementing-tree-traversals.html" accesskey="n" rel="next">Implementing Tree Traversals</a>
+<a href="5.6-implementing-tree-traversals.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
+</header>
+
+<main>
 <section id="binary-tree-traversals" class="level2" data-number="5.5">
 <h2 data-number="5.5"><span class="header-section-number">5.5</span>
 Binary Tree Traversals</h2>
 <p>Often we wish to process a binary tree by “visiting” each of its
 nodes, each time performing a specific action such as printing the
 contents of the node. Any process for visiting all of the nodes in some
-order is called a <a href="10-glossary.html#traversal" class="term">traversal</a>. Any traversal
-that lists every node in the tree exactly once is called an <a href="10-glossary.html#enumeration" class="term">enumeration</a> of the tree’s nodes. Some applications
-do not require that the nodes be visited in any particular order as long
-as each node is visited precisely once. For other applications, nodes
-must be visited in an order that preserves some relationship.</p>
-<section id="preorder-traversal" class="level3" data-number="5.5.1">
-<h3 data-number="5.5.1"><span class="header-section-number">5.5.1</span>
-Preorder Traversal</h3>
-<p>For example, we might wish to make sure that we visit any given node
-<em>before</em> we visit its children. This is called a <a href="10-glossary.html#preorder-traversal" class="term">preorder traversal</a>.</p>
+order is called a <a href="10-glossary.html#traversal" class="term"
+title="Any process for visiting all of the objects in a collection (such as a tree or graph) in some order.">traversal</a>.
+Any traversal that lists every node in the tree exactly once is called
+an <a href="10-glossary.html#enumeration" class="term"
+title="The process by which a traversal lists every object in the container exactly once. Thus, a traversal that prints the nodes is said to enumerate the nodes. An enumeration can also refer to the actual listing that is produced by the traversal (as well as the process that created that listing).">enumeration</a>
+of the tree’s nodes. Some applications do not require that the nodes be
+visited in any particular order as long as each node is visited
+precisely once. For other applications, nodes must be visited in an
+order that preserves some relationship.</p>
 <div id="BinTravExample">
 <p>
 <div id="BinExampCON" class="ssAV" data-short-name="BinExampCON" data-long-name="Binary/BinExampCON" alt="Binary/BinExampCON" tabIndex="-1">
@@ -206,6 +129,14 @@ Preorder Traversal</h3>
 </p>
 <p>A binary tree for traversal examples.</p>
 </div>
+<section id="preorder-traversal" class="level3" data-number="5.5.1">
+<h3 data-number="5.5.1"><span class="header-section-number">5.5.1</span>
+Preorder Traversal</h3>
+<p>For example, we might wish to make sure that we visit any given node
+<em>before</em> we visit its children. This is called a <a
+href="5.5-binary-tree-traversals.html#preorder-traversal" class="term"
+title="In a binary tree, a traversal that first visits the root, then recursively visits the left child, then recursively visits the right child.">preorder
+traversal</a>.</p>
 <section id="example-27" class="level4 unnumbered topic">
 <h4 class="unnumbered">Example</h4>
 <p>The preorder enumeration for the tree of <a
@@ -232,7 +163,9 @@ we visit its children (and their subtrees). For example, this would be
 necessary if we wish to return all nodes in the tree to free store. We
 would like to delete the children of a node before deleting the node
 itself. But to do that requires that the children’s children be deleted
-first, and so on. This is called a <a href="10-glossary.html#postorder-traversal" class="term">postorder
+first, and so on. This is called a <a
+href="5.5-binary-tree-traversals.html#postorder-traversal" class="term"
+title="In a binary tree, a traversal that first recursively visits the left child, then recursively visits the right child, and then visits the root.">postorder
 traversal</a>.</p>
 <section id="example-28" class="level4 unnumbered topic">
 <h4 class="unnumbered">Example</h4>
@@ -252,10 +185,16 @@ href="5.5-binary-tree-traversals.html#BinTravExample">Figure
 <section id="inorder-traversal" class="level3" data-number="5.5.3">
 <h3 data-number="5.5.3"><span class="header-section-number">5.5.3</span>
 Inorder Traversal</h3>
-<p>An <a href="10-glossary.html#inorder-traversal" class="term">inorder traversal</a> first visits the left
-child (including its entire subtree), then visits the node, and finally
-visits the right child (including its entire subtree). The <a href="10-glossary.html#binary-search-tree" class="term">binary search tree</a> makes use of this traversal to
-print all nodes in ascending order of value.</p>
+<p>An <a href="5.5-binary-tree-traversals.html#inorder-traversal"
+class="term"
+title="In a binary tree, a traversal that first recursively visits the left child, then visits the root, and then recursively visits the right child. In a binary search tree, this traversal will enumerate the nodes in sorted order.">inorder
+traversal</a> first visits the left child (including its entire
+subtree), then visits the node, and finally visits the right child
+(including its entire subtree). The <a
+href="10-glossary.html#binary-search-tree" class="term"
+title="A binary tree that imposes the following constraint on its node values: The search key value for any node $A$ must be greater than the (key) values for all nodes in the left subtree of $A$, and less than the key values for all nodes in the right subtree of $A$. Some convention must be adopted if multiple nodes with the same key value are permitted, typically these are required to be in the right subtree.">binary
+search tree</a> makes use of this traversal to print all nodes in
+ascending order of value.</p>
 <section id="example-29" class="level4 unnumbered topic">
 <h4 class="unnumbered">Example</h4>
 <p>The inorder enumeration for the tree of <a
@@ -283,18 +222,11 @@ example, a preorder traversal specifies that <code>node</code> be
 visited before its children. This can easily be implemented as
 follows.</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> preorder(node):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> node <span class="kw">is</span> <span class="va">None</span>: <span class="cf">return</span>  <span class="co"># Empty subtree - do nothing</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    visit(node)                <span class="co"># Visit root node</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    preorder(node.left())    <span class="co"># Process all nodes in left</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    preorder(node.right())   <span class="co"># Process all nodes in right</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">static</span> <span class="op">&lt;</span>E<span class="op">&gt;</span> <span class="dt">void</span> <span class="fu">preorder</span><span class="op">(</span>BinNode<span class="op">&lt;</span>E<span class="op">&gt;</span> node<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>node <span class="op">==</span> <span class="kw">null</span><span class="op">)</span> <span class="cf">return</span><span class="op">;</span>  <span class="co">// Empty subtree - do nothing</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">visit</span><span class="op">(</span>node<span class="op">);</span>               <span class="co">// Visit root node</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">preorder</span><span class="op">(</span>node<span class="op">.</span><span class="fu">left</span><span class="op">());</span>     <span class="co">// Process all nodes in left</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">preorder</span><span class="op">(</span>node<span class="op">.</span><span class="fu">right</span><span class="op">());</span>    <span class="co">// Process all nodes in right</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> preorder(node):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> node <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span>:      <span class="co">// Only continue if this is a tree</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        visit(node)           <span class="co">// Visit root node</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        preorder(node.left)   <span class="co">// Process all nodes in left subtree</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        preorder(node.right)  <span class="co">// Process all nodes in right subtree</span></span></code></pre></div>
 <p>Function <code>preorder</code> first checks that the tree is not
 empty (if it is, then the traversal is done and <code>preorder</code>
 simply returns). Otherwise, <code>preorder</code> makes a call to
@@ -306,6 +238,11 @@ subtree, which will visit all nodes in that subtree. Finally,
 in the right subtree. Postorder and inorder traversals are similar. They
 simply change the order in which the node and its children are visited,
 as appropriate.</p>
+</section>
+<section id="preorder-traversal-practice" class="level3"
+data-number="5.5.5">
+<h3 data-number="5.5.5"><span class="header-section-number">5.5.5</span>
+Preorder Traversal Practice</h3>
 <p>
 <div id="btTravPreorderPRO" class="embedContainer">
 <iframe id="btTravPreorderPRO_iframe" aria-label="btTravPreorderPRO" src="../interactive/Binary/btTravPreorderPRO.html" width="100%" height="600" scrolling="no">
@@ -315,8 +252,8 @@ Your browser does not support iframes.
 </p>
 </section>
 <section id="postorder-traversal-practice" class="level3"
-data-number="5.5.5">
-<h3 data-number="5.5.5"><span class="header-section-number">5.5.5</span>
+data-number="5.5.6">
+<h3 data-number="5.5.6"><span class="header-section-number">5.5.6</span>
 Postorder Traversal Practice</h3>
 <p>
 <div id="btTravPostorderPRO" class="embedContainer">
@@ -327,8 +264,8 @@ Your browser does not support iframes.
 </p>
 </section>
 <section id="inorder-traversal-practice" class="level3"
-data-number="5.5.6">
-<h3 data-number="5.5.6"><span class="header-section-number">5.5.6</span>
+data-number="5.5.7">
+<h3 data-number="5.5.7"><span class="header-section-number">5.5.7</span>
 Inorder Traversal Practice</h3>
 <p>
 <div id="btTravInorderPRO" class="embedContainer">
@@ -338,8 +275,8 @@ Your browser does not support iframes.
 </div>
 </p>
 </section>
-<section id="summary-questions-1" class="level3" data-number="5.5.7">
-<h3 data-number="5.5.7"><span class="header-section-number">5.5.7</span>
+<section id="summary-questions-1" class="level3" data-number="5.5.8">
+<h3 data-number="5.5.8"><span class="header-section-number">5.5.8</span>
 Summary Questions</h3>
 <p>
 <div id="TravSumm" class="embedContainer">
@@ -350,9 +287,25 @@ Your browser does not support iframes.
 </p>
 </section>
 </section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="5.4-the-full-binary-tree-theorem-optional.html" class="navbutton">&lt;&lt;</a>
+<a href="5.4-the-full-binary-tree-theorem-optional.html" accesskey="p" rel="previous">The Full Binary Tree Theorem (optional)</a>
+</div>
+<div class="navlink">
+<a href="5.6-implementing-tree-traversals.html" accesskey="n" rel="next">Implementing Tree Traversals</a>
+<a href="5.6-implementing-tree-traversals.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
 <script type="text/javascript" src="../interactive/Binary/BinExampCON.js"></script>
 <script type="text/javascript" src="../interactive/Binary/preorderCON.js"></script>
 <script type="text/javascript" src="../interactive/Binary/postorderCON.js"></script>
 <script type="text/javascript" src="../interactive/Binary/inorderCON.js"></script>
 </body>
 </html>
+

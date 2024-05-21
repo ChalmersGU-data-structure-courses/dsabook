@@ -44,27 +44,13 @@ define the left and right indices, respectively, for the subarray being
 sorted. The initial call to `quickSort` would be
 `quickSort(array, 0, n-1)`.
 
-```python
-def quickSort(A, left, right):
-    if left >= right:                          # Base case: Subarray length is <= 1
-        return
-    pivot = findPivot(A, left, right)          # Pick a pivot index
-    pivot = partition(A, left, right, pivot)   # Partition the subarray; update pivot with its new position
-    quickSort(A, left, pivot-1)                # Sort left partition
-    quickSort(A, pivot+1, right)               # Sort right partition
-```
-
-```java
-public static <E extends Comparable<E>> void quickSort(E[] A, int left, int right) {
-    if (left >= right)                          // Base case: Subarray length is <= 1
-        return;
-    int pivot = findPivot(A, left, right);      // Pick a pivot index
-    pivot = partition(A, left, right, pivot);   // Partition the subarray; update pivot with its new position
-    quickSort(A, left, pivot-1);                // Sort left partition
-    quickSort(A, pivot+1, right);               // Sort right partition
-}
-```
-
+    function quickSort(A, left, right):
+        if left >= right:                          # Base case: Subarray length is <= 1
+            return
+        pivot = findPivot(A, left, right)          # Pick a pivot index
+        pivot = partition(A, left, right, pivot)   # Partition the subarray; update pivot with its new position
+        quickSort(A, left, pivot-1)                # Sort left partition
+        quickSort(A, pivot+1, right)               # Sort right partition
 
 
 Function `partition` will move records to the appropriate partition and
@@ -83,19 +69,9 @@ the array. Here is a simple `findPivot` function implementing this idea.
 Note that later in the chapter we will switch to a better pivot
 selection strategy.
 
-```python
-def findPivot(A, i, j):
-    """Not-so-good pivot selection: always choose the middle element."""
-    return (i + j) // 2
-```
-
-```java
-static <E extends Comparable<E>> int findPivot(E[] A, int i, int j) {
-    // Not-so-good pivot selection: always choose the middle element.
-    return (i + j) / 2;
-}
-```
-
+    function findPivot(A, i, j):
+        // Not-so-good pivot selection: always choose the middle element.
+        return int((i + j) / 2)
 
 
 <avembed id="QuicksortPivotPRO" src="Sorting/QuicksortPivotPRO.html" type="ka" name="Quicksort Pivot Proficiency Exercise"/>
@@ -115,72 +91,36 @@ whole array, but also part of the array. Therefore `partition` needs the
 positions of the leftmost and rightmost elements in the subarray that we
 will partition.
 
-```python
-def partition(A, left, right, pivot):
-    swap(A, left, pivot)   # Put pivot at the leftmost index
-    pivot = left
-    left += 1              # Start partitioning from the element after the pivot
+    function partition(A, left, right, pivot):
+        swap(A, left, pivot)   // Put pivot at the leftmost index
+        pivot = left
+        left = left+1          // Start partitioning from the element after the pivot
 
-    pivotValue = A[pivot]
-    while True:
-        # Move `left` right as far as possible. Stop if equal to pivot!
-        # Also stop if `left` moves past `right` – this is important, 
-        # so that `left` stops if it moves past the end of the array.
-        while left <= right and A[left] < pivotValue:
-            left += 1
+        pivotValue = A[pivot]
+        while True:
+            // Move `left` right as far as possible. Stop if equal to pivot!
+            // Also stop if `left` moves past `right`: this is important, 
+            // so that `left` stops if it moves past the end of the array.
+            while left <= right and A[left] < pivotValue:
+                left = left+1
 
-        # Move `right` left as far as possible. Stop if equal to pivot!
-        # Also stop if `right` moves all the way left to `left`,
-        # see above for why.
-        while left <= right and A[right] > pivotValue:
-            right -= 1
+            // Move `right` left as far as possible. Stop if equal to pivot!
+            // Also stop if `right` moves all the way left to `left`,
+            // see above for why.
+            while left <= right and A[right] > pivotValue:
+                right = right-1
 
-        # Stop here if `left` and `right` passed each other.
-        if left > right:
-            break
+            // Stop here if `left` and `right` passed each other.
+            if left > right:
+                break
 
-        # Otherwise, swap the elements and move `left` and `right` on by 1.
-        swap(A, left, right)
-        left += 1; right -= 1
+            // Otherwise, swap the elements and move `left` and `right` on by 1.
+            swap(A, left, right)
+            left = left+1
+            right = right-1
 
-    swap(A, pivot, right)   # Finally, move the pivot into place
-    return right            # Return the position of the pivot
-```
-
-```java
-static <E extends Comparable<E>> int partition(E[] A, int left, int right, int pivot) {
-    Util.swap(A, left, pivot);   // Put pivot at the leftmost index
-    pivot = left;
-    left++;                 // Start partitioning from the element after the pivot
-
-    E pivotValue = A[pivot];
-    while (true) {
-        // Move `left` right as far as possible. Stop if equal to pivot!
-        // Also stop if `left` moves past `right` – this is important,
-        // so that `left` stops if it moves past the end of the array.
-        while (left <= right && A[left].compareTo(pivotValue) < 0) 
-            left++;
-
-        // Move `right` left as far as possible. Stop if equal to pivot!
-        // Also stop if `right` moves all the way left to `left`,
-        // see above for why.
-        while (left <= right && A[right].compareTo(pivotValue) > 0) 
-            right--;
-
-        // Stop here if `left` and `right` passed each other.
-        if (left > right)
-            break;
-
-        // Otherwise, swap the elements and move `left` and `right` on by 1.
-        Util.swap(A, left, right);
-        left++; right--;
-    }
-
-    Util.swap(A, pivot, right);   // Finally, move the pivot into place
-    return right;            // Return the position of the pivot
-}
-```
-
+        swap(A, pivot, right)   // Finally, move the pivot into place
+        return right            // Return the position of the pivot
 
 
 The function `partition` first puts the pivot at the leftmost position
@@ -374,4 +314,3 @@ suggested above, most of the function calls will already have been
 eliminated. Thus, eliminating the remaining function calls will yield
 only a modest speedup.
 
-<avembed id="QuicksortSumm" src="Sorting/QuicksortSumm.html" type="ka" name="Quicksort Summary Exercise"/>

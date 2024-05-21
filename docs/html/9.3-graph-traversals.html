@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Cliff Shaffer" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Nick Smallbone" />
+  <title>DSABook – Graph Traversals</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+      },
+      "HTML-CSS": {
+        scale: "80",
+      }
+    });
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+<link href="../interactive/Graph/DFSCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Graph/BFSCON.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="9.2-graph-implementations.html" class="navbutton">&lt;&lt;</a>
+<a href="9.2-graph-implementations.html" accesskey="p" rel="previous">Graph Implementations</a>
+</div>
+<div>
+<a href="9.4-topological-sort.html" accesskey="n" rel="next">Topological Sort</a>
+<a href="9.4-topological-sort.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="graph-traversals" class="level2" data-number="9.3">
+<h2 data-number="9.3"><span class="header-section-number">9.3</span>
+Graph Traversals</h2>
+<p>Many graph applications need to visit the vertices of a graph in some
+specific order based on the graph’s topology. This is known as a graph
+<a href="10-glossary.html#traversal" class="term"
+title="Any process for visiting all of the objects in a collection (such as a tree or graph) in some order.">traversal</a>
+and is similar in concept to a <a href="10-glossary.html#tree-traversal"
+class="term"
+title="A traversal performed on a tree. Traditional tree traversals include preorder and postorder traversals for both binary and general trees, and inorder traversal that is most appropriate for a BST.">tree
+traversal</a>. Recall that tree traversals visit every node exactly
+once, in some specified order such as preorder, inorder, or postorder.
+Multiple tree traversals exist because various applications require the
+nodes to be visited in a particular order. For example, to print a BST’s
+nodes in ascending order requires an inorder traversal as opposed to
+some other traversal. Standard graph traversal orders also exist. Each
+is appropriate for solving certain problems. For example, many problems
+in artificial intelligence programming are modeled using graphs. The
+problem domain might consist of a large collection of states, with
+connections between various pairs of states. Solving this sort of
+problem requires getting from a specified start state to a specified
+goal state by moving between states only through the connections.
+Typically, the start and goal states are not directly connected. To
+solve this problem, the vertices of the graph must be searched in some
+organized manner.</p>
+<p>Graph traversal algorithms typically begin with a start vertex and
+attempt to visit the remaining vertices from there. Graph traversals
+must deal with a number of troublesome cases. First, it might not be
+possible to reach all vertices from the start vertex. This occurs when
+the graph is not connected. Second, the graph might contain cycles, and
+we must make sure that cycles do not cause the algorithm to go into an
+infinite loop.</p>
+<p>Graph traversal algorithms can solve both of these problems by
+keeping track of the vertices that have been visited, in a set
+<code>visited</code>. At the beginning of the algorithm, this set is
+empty. When a vertex is first visited during the traversal, we add it to
+<code>visited</code>. If a vertex is encountered during traversal that
+already is in the set, we will not visit it a second time. This keeps
+the program from going into an infinite loop when it encounters a
+cycle.</p>
+<p>Once the traversal algorithm completes, we can check to see if all
+vertices have been processed by checking whether they are in the set
+<code>Visited</code>. If not all vertices are in this set, we can
+continue the traversal from another unvisited vertex. Note that this
+process works regardless of whether the graph is directed or undirected.
+To ensure visiting all vertices, <code>graphTraverse</code> could be
+called as follows on a graph
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐆</mi><annotation encoding="application/x-tex">\mathbf{G}</annotation></semantics></math>:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> graphTraverse(G):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    visited <span class="op">=</span> <span class="bu">Set</span>()</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> Vertex v <span class="kw">in</span> G.vertices():</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> v <span class="kw">not</span> <span class="kw">in</span> visited:</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>            doTraversal(G, v, visited)</span></code></pre></div>
+<p>The function <code>doTraversal</code> might be implemented by using
+one of the graph traversals described next.</p>
+<section id="depth-first-search" class="level3" data-number="9.3.1">
+<h3 data-number="9.3.1"><span class="header-section-number">9.3.1</span>
+Depth-First Search</h3>
+<p>Our first method for organized graph traversal is called <a
+href="9.3-graph-traversals.html#depth-first-search" class="term"
+title="A graph traversal algorithm. Whenever a $v$ is visited during the traversal, DFS will recursively visit all of $v$ &#39;s unvisited neighbors.">depth-first
+search</a> (DFS). Whenever a vertex
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>
+is visited during the search, DFS will recursively visit all of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>
+’s unvisited neighbors. Equivalently, DFS will add all edges leading out
+of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>
+to a stack. The next vertex to be visited is determined by popping the
+stack and following that edge. The effect is to follow one branch
+through the graph to its conclusion, then it will back up and follow
+another branch, and so on. The DFS process can be used to define a <a
+href="10-glossary.html#depth-first-search-tree" class="term"
+title="A tree that can be defined by the operation of a depth-first search (DFS) on a graph. This tree would consist of the nodes of the graph and a subset of the edges of the graph that was followed during the DFS.">depth-first
+search tree</a>. This tree is composed of the edges that were followed
+to any new (unvisited) vertex during the traversal, and leaves out the
+edges that lead to already visited vertices. DFS can be applied to
+directed or undirected graphs.</p>
+<p>The recursive DFS algorithm can be described as simply as this:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>visit(v):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> v <span class="kw">is</span> unvisited:</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        mark v as visited</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        recursively visit <span class="kw">all</span> adjacent vertices</span></code></pre></div>
+<p>This visualization shows a graph and the result of performing a DFS
+on it, resulting in a depth-first search tree.</p>
+<p>
+<div id="DFSCON" class="ssAV" data-short-name="DFSCON" data-long-name="Depth-First Search Slideshow" alt="Depth-First Search Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>Here is an implementation for the DFS algorithm.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> traverseDFS(G, v, visited):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> v <span class="kw">not</span> <span class="kw">in</span> visited:</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        visited.<span class="bu">add</span>(v)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        preVisit(G, v)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="kw">each</span> edge <span class="kw">in</span> G.outgoingEdges(v):</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            traverseDFS(G, edge.end, visited)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        postVisit(G, v)</span></code></pre></div>
+<p>This implementation contains calls to functions <code>preVisit</code>
+and <code>postVisit</code>. These functions specify what activity should
+take place during the search. Just as a preorder tree traversal requires
+action before the subtrees are visited, some graph traversals require
+that a vertex be processed before ones further along in the DFS.
+Alternatively, some applications require activity <em>after</em> the
+remaining vertices are processed; hence the call to function
+<code>postVisit</code>. This would be a natural opportunity to make use
+of the <a href="10-glossary.html#visitor" class="term"
+title="A design pattern where a traversal process is given a function (known as the visitor) that is applied to every object in the collection being traversed. For example, a generic tree or graph traversal might be designed such that it takes a function parameter, where that function is applied to each node.">visitor</a>
+design pattern.</p>
+<p>The following visualization shows a random graph each time that you
+start it, so that you can see the behavior on different examples. It can
+show you DFS run on a directed graph or an undirected graph. Be sure to
+look at an example for each type of graph.</p>
+<p>
+<div id="DFSAV" class="embedContainer">
+<iframe id="DFSAV_iframe" aria-label="DFSAV" src="../interactive/Graph/DFSAV.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+<p>DFS processes each edge once in a directed graph. In an undirected
+graph, DFS processes each edge from both directions. Each vertex must be
+visited, but only once, so the total cost is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="true" form="postfix">|</mo></mrow><mo>+</mo><mrow><mo stretchy="true" form="prefix">|</mo><mi>𝐄</mi><mo stretchy="true" form="postfix">|</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(|\mathbf{V}| + |\mathbf{E}|)</annotation></semantics></math>.</p>
+<p>Here is an exercise for you to practice DFS.</p>
+<p>
+<div id="DFSPE" class="embedContainer">
+<iframe id="DFSPE_iframe" aria-label="DFSPE" src="../interactive/Graph/DFSPE.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</section>
+<section id="breadth-first-search" class="level3" data-number="9.3.2">
+<h3 data-number="9.3.2"><span class="header-section-number">9.3.2</span>
+Breadth-First Search</h3>
+<p>Our second graph traversal algorithm is known as a <a
+href="9.3-graph-traversals.html#breadth-first-search" class="term"
+title="A graph traversal algorithm. As the name implies, all immediate neighbors for a node are visited before any more-distant nodes are visited. BFS is driven by a queue. A start vertex is placed on the queue. Then, until the queue is empty, a node is taken off the queue, visited, and and then any unvisited neighbors are placed onto the queue.">breadth-first
+search</a> (BFS). BFS examines all vertices connected to the start
+vertex before visiting vertices further away. BFS is implemented
+similarly to DFS, except that a queue replaces the recursion stack. Note
+that if the graph is a tree and the start vertex is at the root, BFS is
+equivalent to visiting vertices level by level from top to bottom.</p>
+<p>This visualization shows a graph and the result of performing a BFS
+on it, resulting in a breadth-first search tree.</p>
+<p>
+<div id="BFSCON" class="ssAV" data-short-name="BFSCON" data-long-name="Breadth-First Search Slideshow" alt="Breadth-First Search Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>Here is an implementation for BFS. Note that it’s not possible to
+call <code>postVisit</code> in BFS traversal, because you cannot know
+when the adjacent edges (the “children”) have been traversed.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> traverseBFS(G, v, visited):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    agenda <span class="op">=</span> <span class="bu">Queue</span>()</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    agenda.<span class="bu">enqueue</span>(v)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="kw">not</span> agenda.<span class="bu">isEmpty</span>()</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        v <span class="op">=</span> agenda.<span class="bu">dequeue</span>()</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> v <span class="kw">not</span> <span class="kw">in</span> visited:</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>            visited.<span class="bu">add</span>(v)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>            preVisit(G, v)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> <span class="kw">each</span> edge <span class="kw">in</span> G.outgoingEdges(v):</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                agenda.<span class="bu">enqueue</span>(edge.end)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>            <span class="co">// postVisit is not possible in a stack or queue based version!</span></span></code></pre></div>
+<p><em>Fun fact</em>: If you replace the queue with a stack (and the
+enqueing/dequeueing operations with push/pop), you will get depth-first
+search! This is because the recursive version of DFS implicitly uses the
+call stack to remember which vertices to visit.</p>
+<p>The following visualization shows a random graph each time that you
+start it, so that you can see the behavior on different examples. It can
+show you BFS run on a directed graph or an undirected graph. Be sure to
+look at an example for each type of graph.</p>
+<p>
+<div id="BFSAV" class="embedContainer">
+<iframe id="BFSAV_iframe" aria-label="BFSAV" src="../interactive/Graph/BFSAV.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+<p>Here is an exercise for you to practice BFS.</p>
+<p>
+<div id="BFSPE" class="embedContainer">
+<iframe id="BFSPE_iframe" aria-label="BFSPE" src="../interactive/Graph/BFSPE.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="9.2-graph-implementations.html" class="navbutton">&lt;&lt;</a>
+<a href="9.2-graph-implementations.html" accesskey="p" rel="previous">Graph Implementations</a>
+</div>
+<div class="navlink">
+<a href="9.4-topological-sort.html" accesskey="n" rel="next">Topological Sort</a>
+<a href="9.4-topological-sort.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+<script type="text/javascript" src="../interactive/Graph/DFSCON.js"></script>
+<script type="text/javascript" src="../interactive/Graph/BFSCON.js"></script>
+</body>
+</html>
+

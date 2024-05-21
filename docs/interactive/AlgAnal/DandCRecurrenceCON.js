@@ -8,9 +8,9 @@ $(document).ready(function() {
   var xoffset = 50;
   var yoffset = 80;
   av = new JSAV(av_name);
-  MathJax.Hub.Config({tex2jax: {inlineMath: [["$", "$"], ["\\(", "\\)"]]}});
+  typeof MathJax !== 'undefined' && MathJax.Hub.Config({tex2jax: {inlineMath: [["$", "$"], ["\\(", "\\)"]]}});
   $(".avcontainer").on("jsav-message", function() {
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    typeof MathJax !== 'undefined' && MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
   });
 
   // Slide 1
