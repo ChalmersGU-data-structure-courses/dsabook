@@ -125,7 +125,3 @@ elements, which is $\Theta(n)$.
 
 <avembed id="StaticArrayList-Remove-PRO" src="ChalmersGU/StaticArrayList-Remove-PRO.html" type="ka" name="Array-based List Remove Exercise"/>
 
-### Static Array-based List Summary Questions
-
-<avembed id="StaticArrayList-Summary-QUIZ" src="ChalmersGU/StaticArrayList-Summary-QUIZ.html" type="ka" name="Static Array-based List Summary"/>
-
