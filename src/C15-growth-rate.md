@@ -1,5 +1,9 @@
 
-## Growth Rates Review (optional) (WORK IN PROGRESS)
+## Growth Rates Review (optional) 
+
+::: alert
+***Note***: This section is *work in progress*
+:::
 
 Two functions of $n$ have different
 [growth rates](#growth-rate){.term} if as $n$

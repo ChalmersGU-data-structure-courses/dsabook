@@ -1,5 +1,9 @@
 
-## Summation Techniques (optional) (WORK IN PROGRESS)
+## Summation Techniques (optional)
+
+::: alert
+***Note***: This section is *work in progress*
+:::
 
 Consider the following simple summation.
 

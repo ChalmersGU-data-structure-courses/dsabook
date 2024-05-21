@@ -1,5 +1,9 @@
 
-## Solving Recurrence Relations (optional) (WORK IN PROGRESS)
+## Solving Recurrence Relations (optional)
+
+::: alert
+***Note***: This section is *work in progress*
+:::
 
 <!-- TODO
 Throughout this module, there are references to equations, both on this

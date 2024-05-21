@@ -1,5 +1,9 @@
 
-## Amortized Analysis (optional) (WORK IN PROGRESS)
+## Amortized Analysis (optional)
+
+::: alert
+***Note***: This section is *work in progress*
+:::
 
 This module presents the concept of
 [amortized analysis]{.term}, which is the
