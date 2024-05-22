@@ -238,13 +238,209 @@ table at maximum loading, and select the table size accordingly. The
 goal should be to make the table small enough so that it does not waste
 a lot of space on the one hand, while making it big enough to keep
 performance good on the other.</p>
-<p>
-<div id="HashAnalSumm" class="embedContainer">
-<iframe id="HashAnalSumm_iframe" aria-label="HashAnalSumm" src="../interactive/Hashing/HashAnalSumm.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
+<section id="practice-questions-open-addressing" class="level3"
+data-number="8.8.1">
+<h3 data-number="8.8.1"><span class="header-section-number">8.8.1</span>
+Practice questions: Open addressing</h3>
+<div class="quiz">
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>Hashing has the advantage that it can answer range queries or
+questions like what is the largest key in the database.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Hashing is good only for exact match queries.</li>
+</ul>
 </div>
-</p>
+</div>
+<div class="question">
+<p>Which of the following is true of open addressing?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />All records are stored
+directly within the hash table</label></li>
+<li><label><input type="checkbox" />Records are stored on a list
+associated with a slot in the hash table</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>In open addressing, the records are in the table.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>Separate chaining works well for disk-based hash systems.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Managing a bunch of linked lists is not so good on disk.</li>
+<li>Otherwise, hashing works fine on disk.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>Open addressing works well for disk-based hash systems.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Managing a bunch of linked lists is not so good on disk.</li>
+<li>Otherwise, hashing works fine on disk.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the expected worst-case cost for a search on a properly tuned
+hash system that stores
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+records?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(1)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^2)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(\log n)</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>If the system is working right, you should only need to look at one
+slot most of the time, or occasionally a couple of slots.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is a disadvantage of linear probing?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />It can lead to allocating a lot of
+extra memory</label></li>
+<li><label><input type="checkbox" checked="" />You tend to get primary
+clustering</label></li>
+<li><label><input type="checkbox" />You tend to get secondary
+clustering</label></li>
+<li><label><input type="checkbox" />The algorithm is difficult to
+program</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Clusters pile up into bigger clusters.</li>
+<li>This is called primary clustering.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which of the following is true of separate chaining?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Records are stored on a
+list associated with a slot in the hash table</label></li>
+<li><label><input type="checkbox" />All records are stored directly
+within the hash table</label></li>
+<li><label><input type="checkbox" />The algorithm running time is
+determined by probes of different table cells until an empty one is
+found</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>In separate chaining, where are the records stored?</li>
+<li>They are stored in linked lists outside the table.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A separate chaining table has an array size of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>.
+What is the maximum number of records that can be stored in the
+table?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />There is no
+maximum</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">N/2</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">N-1</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mo>−</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">N-2</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>In separate chaining, where are the records stored?</li>
+<li>They are stored in linked lists outside the table.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which is the best definition for a probe sequence?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />The order in which
+collision resolution will visit the slots of the hash table</label></li>
+<li><label><input type="checkbox" />It is another name for a hash
+function</label></li>
+<li><label><input type="checkbox" />The order in which the hash function
+will visit the slots of the hash table</label></li>
+<li><label><input type="checkbox" />It is another name for collision
+resolution</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Probing is part of collision resolution.</li>
+<li>The probe sequence tells you where to look next.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is one disadvantage of quadratic probing as a collision
+resolution method?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Insertions can fail even
+if there are empty slots in the hash table</label></li>
+<li><label><input type="checkbox" />You have to check whether or not a
+node needs to be split</label></li>
+<li><label><input type="checkbox" />Memory usage increases with each
+insertion</label></li>
+<li><label><input type="checkbox" />Primary clustering can degrade
+performance</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Usually, the probe sequence for quadratic probing does not visit all
+slots of the table.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Hashing is good for which queries?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Exact match
+queries</label></li>
+<li><label><input type="checkbox" />Range queries</label></li>
+<li><label><input type="checkbox" />Finding the maximum key
+value</label></li>
+<li><label><input type="checkbox" />All of these</label></li>
+<li><label><input type="checkbox" />None of these</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Hashing takes a key value and then looks at a particular slot in the
+table.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
 </section>
 </main>
 

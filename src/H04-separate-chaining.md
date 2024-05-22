@@ -40,7 +40,7 @@ Assuming that the table has more slots than there are records to be
 stored, we can hope that few slots will contain more than one record. In
 the case where a list is empty or has only one record, a search requires
 only one access to the list. Thus, the average cost for hashing should
-be $\Theta(1$). However, if clustering causes many records to hash to
+be $\Theta(1)$. However, if clustering causes many records to hash to
 only a few of the slots, then the cost to access a record will be much
 higher because many elements on the linked list must be searched.
 

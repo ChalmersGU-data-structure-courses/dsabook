@@ -108,4 +108,3 @@ size accordingly. The goal should be to make the table small enough so
 that it does not waste a lot of space on the one hand, while making it
 big enough to keep performance good on the other.
 
-<avembed id="HashAnalSumm" src="Hashing/HashAnalSumm.html" type="ka" name="Analysis of Open Addressing Summary Exercise"/>

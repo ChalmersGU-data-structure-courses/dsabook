@@ -162,7 +162,7 @@ stored, we can hope that few slots will contain more than one record. In
 the case where a list is empty or has only one record, a search requires
 only one access to the list. Thus, the average cost for hashing should
 be
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\Theta(1</annotation></semantics></math>).
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(1)</annotation></semantics></math>.
 However, if clustering causes many records to hash to only a few of the
 slots, then the cost to access a record will be much higher because many
 elements on the linked list must be searched.</p>
