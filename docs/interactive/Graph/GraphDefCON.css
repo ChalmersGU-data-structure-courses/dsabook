@@ -34,11 +34,17 @@
     height: 230px;
 }
 
-.jsavautoresize .jsavnode {
+.jsavautoresize .jsavnode, .jsavautoresize .jsavnode .jsavvalue {
   min-width: 25px;
   min-height: 25px;
   max-width: 25px;
   max-height: 25px;
+}
+
+.jsavautoresize .jsavnode .jsavvalue {
+  position: relative;
+  left: -1px;
+  top: -1px;
 }
 
 .borderEdge{ /* Used to separate parts of a figure */
