@@ -240,7 +240,3 @@ total cost of $\Theta(|\mathbf{V}^2|)$ time when the algorithm might
 otherwise require only $\Theta(|\mathbf{V}| + |\mathbf{E}|)$ time. This
 is a considerable disadvantage when the graph is sparse, but not when
 the graph is closer to full.
-
-### Graph Terminology Questions
-
-<avembed id="GraphIntroSumm" src="Graph/GraphIntroSumm.html" type="ka" name="Graph Terminology Summary Exercise"/>
