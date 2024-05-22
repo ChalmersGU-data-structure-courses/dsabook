@@ -228,8 +228,6 @@ requires $4 |\mathbf{V}| + 8 |\mathbf{E}| = 116$ bytes (because there
 are now 12 edges represented instead of 6).
 :::
 
-<avembed id="GspaceCalcSumm" src="Graph/GspaceCalcSumm.html" type="ka" name="Graph Space Requirements Exercise"/>
-
 The adjacency matrix often requires a higher asymptotic cost for an
 algorithm than would result if the adjacency list were used. The reason
 is that it is common for a graph algorithm to visit each neighbor of
