@@ -1,7 +1,15 @@
 
 ## Hash Tables in Real Life (optional)
 
-Here we will give some examples of problems with hashing, and how Java
+Congratulations! You have reached the end of the hashing tutorial. In
+summary, a properly tuned hashing system will return records with an
+average cost of less than two record accesses. This makes it the most
+effective way known to store a database of records to support
+exact-match queries. Unfortunately, hashing is not effective when
+implementing range queries, or answering questions like "Which record
+in the collection has the smallest key value?"
+
+In this section we will give some examples of problems with hashing, and how Java
 and Python implement hashing and hash tables internally.
 
 ### Algorithmic complexity attacks

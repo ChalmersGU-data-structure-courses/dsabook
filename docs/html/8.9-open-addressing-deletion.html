@@ -250,25 +250,99 @@ occupied slots, giving the load factor
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi><mi>/</mi><mi>M</mi></mrow><annotation encoding="application/x-tex">N / M</annotation></semantics></math>.</li>
 </ul>
 </section>
-<section id="hashing-deletion-summary-questions" class="level3"
+<section id="practice-questions-open-addressing-deletion" class="level3"
 data-number="8.9.4">
 <h3 data-number="8.9.4"><span class="header-section-number">8.9.4</span>
-Hashing Deletion Summary Questions</h3>
+Practice questions: Open addressing deletion</h3>
 <p>Now here are some practice questions.</p>
-<p>
-<div id="HashDelSumm" class="embedContainer">
-<iframe id="HashDelSumm_iframe" aria-label="HashDelSumm" src="../interactive/Hashing/HashDelSumm.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
+<div class="quiz">
+<div class="question">
+<p>The special value used to signal a position in a hash table from
+which a record has been deleted is called a:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Tombstone</label></li>
+<li><label><input type="checkbox" />Flag</label></li>
+<li><label><input type="checkbox" />Sentinal</label></li>
+<li><label><input type="checkbox" />Gravestone</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Starts with a T.</li>
+</ul>
 </div>
-</p>
-<p>Congratulations! You have reached the end of the hashing tutorial. In
-summary, a properly tuned hashing system will return records with an
-average cost of less than two record accesses. This makes it the most
-effective way known to store a database of records to support
-exact-match queries. Unfortunately, hashing is not effective when
-implementing range queries, or answering questions like “Which record in
-the collection has the smallest key value?”</p>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>When deleting a record from a hash table, we can just do a normal
+search and then remove the record from the slot where we find it.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>If there is an empty slot along a probe path, records further down
+the path won’t be found on a search.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>A problem with using tombstones is that they take up slots in the
+table that cannot be reused, so that over time the effective table size
+shrinks.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Tombstone slots can be resued.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>A problem with using tombstones is that they take up slots in the
+table, so they slightly increase the search and insert time.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>They do take up slots in the table.</li>
+<li>So they do need to be searched over.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which is true about deletion from a hash table using tombstones?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />It causes a slight
+increase in the average time to insert and search</label></li>
+<li><label><input type="checkbox" />It causes a large decrease in the
+average time to insert and search</label></li>
+<li><label><input type="checkbox" />It causes a slight decrease in the
+average time to insert and search</label></li>
+<li><label><input type="checkbox" />It has no effect on the average time
+to insert and search</label></li>
+<li><label><input type="checkbox" />It causes a slight increase in the
+average time to insert and search</label></li>
+<li><label><input type="checkbox" />It causes a large increase in the
+average time to insert and search</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>The tombstones fill some slots of the table.</li>
+<li>While tombstone slots can be reused, they do have to be searched
+through.</li>
+<li>The fraction of hash table slots taken up by tombstones is normally
+not large, so while there is an increased cost, is is not large.</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
 </section>
 </main>
