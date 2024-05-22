@@ -371,18 +371,216 @@ Your browser does not support iframes.
 </div>
 </p>
 </section>
-<section id="hash-function-review-questions" class="level3"
+<section id="practice-questions-hash-functions" class="level3"
 data-number="8.2.7">
 <h3 data-number="8.2.7"><span class="header-section-number">8.2.7</span>
-Hash Function Review Questions</h3>
+Practice questions: Hash functions</h3>
 <p>Here are some review questions.</p>
-<p>
-<div id="HashFuncSumm" class="embedContainer">
-<iframe id="HashFuncSumm_iframe" aria-label="HashFuncSumm" src="../interactive/Hashing/HashFuncSumm.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
+<div class="quiz">
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>For the string hash functions, the size of the hash table limits the
+length of the string that can be hashed.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>All hash functions should return a legal index in the hash
+table.</li>
+<li>The length of the string does not change this.</li>
+</ul>
 </div>
-</p>
+</div>
+<div class="question">
+<p>The simple mod hash function makes use of:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />The low order digits or
+bits in the key</label></li>
+<li><label><input type="checkbox" />The high order digits or bits in the
+key</label></li>
+<li><label><input type="checkbox" />The middle digits or bits of the
+key</label></li>
+<li><label><input type="checkbox" />All of the digits or bits in the
+key</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Think of taking a three-digit number mod 10. What digit is
+used?</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The binning hash function makes use of:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />The high order digits or
+bits in the key</label></li>
+<li><label><input type="checkbox" />The low order digits or bits in the
+key</label></li>
+<li><label><input type="checkbox" />The middle digits or bits of the
+key</label></li>
+<li><label><input type="checkbox" />All of the digits or bits in the
+key</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Consider what happens with 10 bins and 3-digit numbers in the range
+0 to 999.</li>
+<li>0 to 99 goes to the first bin, 100 to 199 to the second, and so
+on.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The mid-squares method hash function makes use of:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />All of the digits or bits
+of the key</label></li>
+<li><label><input type="checkbox" />The high order digits or bits of the
+key</label></li>
+<li><label><input type="checkbox" />The middle digits or bits of the
+key</label></li>
+<li><label><input type="checkbox" />The low order digits or bits of the
+key</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Mid-squares method will square the key value before pulling out the
+middle bits.</li>
+<li>While it uses only the middle bits of the squared value, all of the
+bits in the original key will influence the result.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>For the simple string hash function that sums the ASCII values for
+the letters, does the order of the letters in the string affect the
+result?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Yes</label></li>
+<li><label><input type="checkbox" checked="" />No</label></li>
+<li><label><input type="checkbox" />Usually</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Addition is commutative.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which is the best definition for collision in a hash table?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Two records with
+different keys have the same hash value</label></li>
+<li><label><input type="checkbox" />Two records are identical except for
+their keys</label></li>
+<li><label><input type="checkbox" />Two records have the same
+key</label></li>
+<li><label><input type="checkbox" />Two records have the same key and
+the same hash value</label></li>
+<li><label><input type="checkbox" />Two records with the same key have
+different hash values</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Collision occurs when two keys try to go to the same slot.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>(Recall that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>
+refers to the size of a hash table.) A hash function must:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Return a value between 0
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">M-1</annotation></semantics></math></label></li>
+<li><label><input type="checkbox" />Return a value between 1 and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math></label></li>
+<li><label><input type="checkbox" />Return the position of a free slot
+in the table</label></li>
+<li><label><input type="checkbox" />Return the hash value for the
+key</label></li>
+<li><label><input type="checkbox" />Return values in equal distribution
+throughout the table</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A hash function should always give you a legal index into the hash
+table array.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>If you double the size of a hash table, can you keep using the same
+hash function?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Yes, but you will not
+hash to the new slots</label></li>
+<li><label><input type="checkbox" />Yes, it works fine since the table
+size does not matter to the hash function</label></li>
+<li><label><input type="checkbox" />No, the hash function would now
+generate illegal values</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Will the old hash function go to an illegal index in the new
+table?</li>
+<li>Will the old hash function go to all slots of the new table?</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>A company wants to use a system where they randomly assign each
+customer a 9-digit ID (so there are 1 billion possible ID numbers). Of
+course, there is a chance that two customers will be assigned the same
+ID. But the company figures that risk is OK if the odds are small
+enough. They expect to assign IDs to 1000 customers. The chance of a
+collision is therefore one in a million.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>While it is true that the last customer given an ID has about one
+chance in a million of sharing it with another customer (actually, the
+chance is 999/1,000,000,000 if 999 IDs are already assigned)…</li>
+<li>… this logic does not account for the fact that any of the previous
+998 assignments might also have caused a collision.</li>
+<li>So the chance for a collision is rather higher than one in a
+million.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>A company wants to use a system where they randomly assign each
+customer a 9-digit ID (so there are 1 billion possible ID numbers). Of
+course, there is a chance that two customers will be assigned the same
+ID. But the company figures that risk is OK if the odds are only one in
+a million. They expect to assign IDs to 1000 customers. But the chance
+of collision is much higher than one in a million.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>While it is true that the last customer given an ID has about one
+chance in a million of sharing it with another customer (actually, the
+chance is 999/1,000,000,000 if 999 IDs are already assigned)…</li>
+<li>… this logic does not account for the fact that any of the previous
+998 assignments might also have caused a collision.</li>
+<li>So the chance for a collision is rather higher than one in a
+million.</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
 </section>
 </main>

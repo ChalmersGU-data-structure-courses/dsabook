@@ -215,8 +215,3 @@ hash functions.
 
 <avembed id="HashFuncFIBSumm" src="Hashing/HashFuncFIBSumm.html" type="ka" name="Hash Function Pick Slot Summary"/>
 
-### Hash Function Review Questions
-
-Here are some review questions.
-
-<avembed id="HashFuncSumm" src="Hashing/HashFuncSumm.html" type="ka" name="Hash Function Summary Exercise"/>
