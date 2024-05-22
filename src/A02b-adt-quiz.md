@@ -1,9 +1,9 @@
 
 ### Quiz: Data Types Concept Map
 
-![A concept map for the term "data type"](images/DatatypeCM.png)
-
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
+
+![A concept map for the term "data type"](images/DatatypeCM.png)
 
 :::::::::: question ::::::::::
 "Data type" and "data structure" are synonyms.
