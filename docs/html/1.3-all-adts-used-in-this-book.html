@@ -153,9 +153,9 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a hr
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">isEmpty</span>()  <span class="co">// Returns true if the collection is empty.</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span>()     <span class="co">// Returns the number of elements in this collection.</span></span></code></pre></div>
 </section>
-<section id="lists" class="level3" data-number="1.3.2">
+<section id="adts-for-lists" class="level3" data-number="1.3.2">
 <h3 data-number="1.3.2"><span class="header-section-number">1.3.2</span>
-Lists</h3>
+ADTs for Lists</h3>
 <p>General lists:</p>
 <div class="sourceCode" id="cb4"><pre
 class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">List</span> <span class="kw">extends</span> <span class="bu">Collection</span>:</span>
@@ -182,9 +182,9 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb7-1"><a hr
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">removeMin</span>()  <span class="co">// Removes and returns the minimum element.</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">getMin</span>()     <span class="co">// Returns the minimum element, without removing it.</span></span></code></pre></div>
 </section>
-<section id="sets" class="level3" data-number="1.3.3">
+<section id="adts-for-sets" class="level3" data-number="1.3.3">
 <h3 data-number="1.3.3"><span class="header-section-number">1.3.3</span>
-Sets</h3>
+ADTs for Sets</h3>
 <p>Sets with no internal order:</p>
 <div class="sourceCode" id="cb8"><pre
 class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Set</span> <span class="kw">extends</span> <span class="bu">Collection</span>:</span>
@@ -202,9 +202,10 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb9-1"><a hr
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    higher(x)        <span class="co">// Returns the closest element &gt; x, or nothing if there is no such element.</span></span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    between(x1, x2)  <span class="co">// Returns all elements x such that x1 &lt;= x &lt;= x2.</span></span></code></pre></div>
 </section>
-<section id="maps-or-dictionaries" class="level3" data-number="1.3.4">
+<section id="adts-for-maps-or-dictionaries" class="level3"
+data-number="1.3.4">
 <h3 data-number="1.3.4"><span class="header-section-number">1.3.4</span>
-Maps or Dictionaries</h3>
+ADTs for Maps or Dictionaries</h3>
 <p>Maps are also called dictionaries or associative arrays.</p>
 <p>Maps with no internal order:</p>
 <div class="sourceCode" id="cb10"><pre
@@ -226,9 +227,9 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb11-1"><a h
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    higherKey(key)           <span class="co">// Returns the closest key &gt; k, or nothing if there is no such element.</span></span>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    keysBetween(key1, key2)  <span class="co">// Returns all keys k such that k1 &lt;= k &lt;= k2.</span></span></code></pre></div>
 </section>
-<section id="graphs" class="level3" data-number="1.3.5">
+<section id="adts-for-graphs" class="level3" data-number="1.3.5">
 <h3 data-number="1.3.5"><span class="header-section-number">1.3.5</span>
-Graphs</h3>
+ADTs for Graphs</h3>
 <p>Finally, graphs:</p>
 <div class="sourceCode" id="cb12"><pre
 class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Graph</span>:</span>

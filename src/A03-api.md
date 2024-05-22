@@ -49,7 +49,7 @@ As well as collections:
         isEmpty()  // Returns true if the collection is empty.
         size()     // Returns the number of elements in this collection.
 
-### Lists
+### ADTs for Lists
 
 General lists:
 
@@ -81,7 +81,7 @@ Priority queues:
         getMin()     // Returns the minimum element, without removing it.
 
 
-### Sets
+### ADTs for Sets
 
 Sets with no internal order:
 
@@ -102,7 +102,7 @@ Sets where the elements are sorted:
         between(x1, x2)  // Returns all elements x such that x1 <= x <= x2.
 
 
-### Maps or Dictionaries
+### ADTs for Maps or Dictionaries
 
 Maps are also called dictionaries or associative arrays.
 
@@ -128,7 +128,7 @@ Maps where the keys are sorted:
         keysBetween(key1, key2)  // Returns all keys k such that k1 <= k <= k2.
 
 
-### Graphs
+### ADTs for Graphs
 
 Finally, graphs:
 
