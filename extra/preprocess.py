@@ -2,18 +2,34 @@
 import re
 import sys
 from pathlib import Path
+from collections import defaultdict
 
 
 def main(outdir: str, glossfile: str, *infiles: str):
     """Preprocess each of the infiles and write their result in the outdir folder"""
     load_global_glossary(glossfile)
+    term_usage = defaultdict(list)
+    
     for inf in infiles:
+        # Handled later
+        if inf == glossfile:
+            continue
+        
         with open(inf) as f:
             contents = f.read()
+        
+        # Track terms used in this file
+        track_terms(contents, term_usage, inf)
+        
         contents = preprocess(contents)
         outf = Path(outdir) / Path(inf).name
         with open(outf, "w") as f:
             print(contents, file=f)
+    
+    outf = Path(outdir) / Path(glossfile).name
+    
+    # Update the glossary file with reverse links
+    update_glossary_with_reverse_links(outf, glossfile, term_usage)
 
 
 def preprocess(contents: str) -> str:
@@ -145,6 +161,56 @@ def strip_markdown(text: str) -> str:
     text = re.sub(r"\s+", " ", text)
     text = re.sub(r'["]', "'", text)
     return text
+
+
+def track_terms(contents: str, term_usage: dict, filename: str):
+    """Track the terms used in a file under subheadings."""
+    headings = re.split(r"^(#+)\s*(.*)", contents, flags=re.MULTILINE)
+    
+    for i in range(1, len(headings), 3):
+        heading_text = headings[i + 1].strip()
+        heading_content = headings[i + 2]
+        
+        current_heading = heading_text
+        
+        terms = re.findall(r"\[([^][]+)\]\(#([^()]+)\)", heading_content)
+        for term in terms:
+            _, term = term
+            term_usage[mkid(term)].append(f"{current_heading}")
+        
+        terms = re.findall(r"\[([^][]+)\]{\.term}", heading_content)
+        for term in terms:
+            term_usage[mkid(term)].append(f"{current_heading}")
+        
+
+def update_glossary_with_reverse_links(output: str, glossfile: str, term_usage: dict):
+    """Update the glossary file with reverse links to files using the terms."""
+    with open(glossfile) as f:
+        contents = f.read()
+        
+    pretext, glossary, posttext = read_glossary(contents)
+    
+    def convert_file_name(ref: str) -> str:
+        link = mkid(ref)
+        return f"[{ref}](#{link})"
+    
+    for gloss in glossary:
+        term_id = mkid(gloss[0])
+        if term_id in term_usage:
+            reverse_links = "\n\nRead more: " + ", ".join(map(convert_file_name, term_usage[term_id]))
+            if len(reverse_links) > 1:
+                reverse_links = reverse_links.rsplit(", ", 1)
+                reverse_links = " and ".join(reverse_links)
+            gloss[-1] += reverse_links
+    
+    updated_glossary = pretext + print_glossary(glossary) + posttext
+    
+    # Do the other processing
+    updated_glossary = convert_terms(updated_glossary)
+    updated_glossary = add_tooltips(updated_glossary)
+    
+    with open(output, "w") as f:
+        f.write(updated_glossary)
 
 
 ###############################################################################
