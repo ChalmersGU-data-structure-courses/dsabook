@@ -301,6 +301,4 @@ will not be as expected either.
 You can use the following visualization to create a huffman tree for
 your own set of letters and frequencies.
 
-<!-- TODO: this doesn't work
 <avembed id="huffmanCustomBuildAV" src="Binary/huffmanCustomBuildAV.html" type="ss" name="Huffman Custom Build"/>
--->
