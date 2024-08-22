@@ -104,6 +104,4 @@ $\log_2 n$ times before we reach 1.[^B02b]
     even more difficult than proving that sequential search is the most
     efficient algorithm possible on an unsorted array.
 
-<!-- TODO: this currently doesn't work
 <avembed id="binarySearchPRO" src="Searching/binarySearchPRO.html" type="pe" name="Binary Search Proficiency Exercise"/> 
--->
