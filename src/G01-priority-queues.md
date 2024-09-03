@@ -39,7 +39,7 @@ both adding and removing the minimum take $O(\log n)$ time.
 
 Note that this API assumes that the priority queue orders the elements
 in *ascending* order. There is also the possibility of ordering in
-descending order --that kind of queue is called a *maximum priority
+descending order -- that kind of queue is called a *maximum priority
 queue*. If you have a minimum priority queue, it's straightforward to
 turn it into a maximum priority queue.
 

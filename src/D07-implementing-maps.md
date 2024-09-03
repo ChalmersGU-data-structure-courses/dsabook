@@ -3,7 +3,7 @@
 
 It is not difficult to implement a **Map** using a list. The problem is
 that all the operations -- searching for a key, updating the value for
-a key, and removing a key --will be linear in the number of entries,
+a key, and removing a key -- will be linear in the number of entries,
 $O(n)$.
 
 In later chapters we will see how to improve the efficiency, by using

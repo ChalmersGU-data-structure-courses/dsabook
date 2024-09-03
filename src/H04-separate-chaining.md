@@ -68,7 +68,7 @@ too. (In fact, Java's hash tables use a combination of linked lists
 and balanced trees).
 
 Conceptually, a hash table can use any kind of collection data structure
---the only thing that the actual array does is to partition the large
+-- the only thing that the actual array does is to partition the large
 collection into $M$ disjoint collections. If the hash function is good
 and distributes the objects evenly among the bins, all operations will
 become $M$ times faster (because the bins are $M$ times smaller than the

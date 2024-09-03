@@ -284,7 +284,7 @@ by-product of the divide and conquer approach.
 
 A simple improvement might then be to replace Quicksort with a faster
 sort for small subarrays, say Insertion Sort or Selection Sort. However,
-there is an even better\---and still simpler\---optimization. When
+there is an even better -- and still simpler -- optimization. When
 Quicksort partitions are below a certain size, do nothing! The values
 within that partition will be out of order. However, we do know that all
 values in the array to the left of the partition are smaller than all

@@ -26,7 +26,7 @@ compromise between difficulty of implementation and performance.
 
 <inlineav id="SkipListIntroCON" src="SearchStruct/SkipListIntroCON.js" script="DataStructures/SkipList.js" name="SearchStruct/SkipListIntroCON" links="DataStructures/SkipList.css SearchStruct/SkipListIntroCON.css"/>
 
-We can continue adding pointers to selected nodes in this way \--- give
+We can continue adding pointers to selected nodes in this way -- give
 a third pointer to every fourth node, give a fourth pointer to every
 eighth node, and so on -- until we reach the ultimate of $\log n$
 pointers in the first and middle nodes for a list of $n$ nodes. To

@@ -82,8 +82,8 @@ of the following properties.
     crash). At issue here is whether a given algorithm implements the
     *intended* function.
 2.  It is composed of a series of *concrete steps*. Concrete means that
-    the action described by that step is completely understood \--- and
-    doable \--- by the person or machine that must perform the
+    the action described by that step is completely understood -- and
+    doable -- by the person or machine that must perform the
     algorithm. Each step must also be doable in a finite amount of time.
     Thus, the algorithm gives us a "recipe" for solving the problem by
     performing a series of steps, where each such step is within our
