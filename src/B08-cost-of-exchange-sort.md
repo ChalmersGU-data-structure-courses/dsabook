@@ -1,5 +1,5 @@
 
-## The Cost of Exchange Sorting (optional)
+## The Cost of Exchange Sorting
 
 Here is a summary for the cost of Insertion Sort, Bubble Sort, and
 Selection Sort in terms of their required number of comparisons and

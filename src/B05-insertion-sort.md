@@ -15,17 +15,14 @@ the current record is inserted in turn at the correct position within a
 sorted list composed of those records already processed. Here is an
 implementation. The input is an array named `A` that stores $n$ records.
 
-:::: {#introduction}
-
     function insertionSort(A):
-        for i = 1 to A.size()-1:
+        N = A.size()
+        for i = 1 to N-1:
             // Move the i'th element to its correct position.
             j = i
             while j > 0 and A[j] < A[j-1]:
                 swap(A, j, j-1)
                 j = j-1
-
-::::
 
 ::: {#practice}
 (Note that to make the explanation for these sorting algorithms as

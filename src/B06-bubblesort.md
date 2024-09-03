@@ -1,7 +1,8 @@
 
-## Bubble Sort (optional)
+## Bubble Sort
 
-Our next sorting algorithm is called [Bubble Sort]{.term}. Bubble Sort is often taught to novice programmers in
+Our next sorting algorithm is called [Bubble Sort]{.term}. 
+Bubble Sort is often taught to novice programmers in
 introductory computer science courses. This is unfortunate, because
 Bubble Sort has no redeeming features whatsoever. It is rather slow,
 even compared to the other $\Theta(n^2)$ sorts that are commonly known.
@@ -26,9 +27,10 @@ records, looking at one less record toward the end than did the
 preceding pass. Here is an implementation.
 
     function bubbleSort(A):
-        for i = 0 to A.size()-2:
+        N = A.size()
+        for i = 0 to N-2:
             // Bubble up the i'th element
-            for j = 1 to A.size()-i:
+            for j = 1 to N-i-1:
                 if A[j-1] > A[j]:
                     swap(A, j-1, j)
 

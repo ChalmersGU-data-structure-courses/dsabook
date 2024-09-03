@@ -13,7 +13,9 @@ you find the bill for January, and pull that out. Then look through the
 remaining pile until you find the bill for February, and add that behind
 January. Proceed through the ever-shrinking pile of bills to select the
 next one in order until you are done. This is the inspiration for our
-last $\Theta(n^2)$ sort, called [Selection Sort]{.term}. The $i$'th pass of Selection Sort "selects" the $i$'th
+last $\Theta(n^2)$ sort, called [Selection Sort]{.term}. 
+
+The $i$'th pass of Selection Sort "selects" the $i$'th
 largest key in the array, placing that record at the end of the array.
 In other words, Selection Sort first finds the largest key in an
 unsorted list, then the next largest, and so on. Its unique feature is
@@ -26,12 +28,13 @@ number of swaps required will be $n-1$ (we get the last record in place
 Here is an implementation for Selection Sort.
 
     function selectionSort(A):
-        for i = 0 to A.size()-1:             // Select i'th biggest element
-            bigindex = i                     // Current biggest index
-            for j = 0 to A.size()-i:         // Find the max value
-                if A[j] > A[bigindex]:       // Found something bigger  
-                    bigindex = j             // Remember bigger index
-            swap(A, bigindex, A.size()-i-1)  // Put it into place
+        N = A.size()
+        for i = 0 to N-1:               // Select i'th biggest element
+            bigindex = N - i            // Current biggest index
+            for j in 0 to N-i-1:        // Find the max value
+                if A[j] > A[bigindex]:  // Found something bigger  
+                    bigindex = j        // Remember bigger index
+            swap(A, bigindex, N-i)      // Put it into place
 
 
 Consider the example of the following array.

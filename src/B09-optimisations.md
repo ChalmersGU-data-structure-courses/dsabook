@@ -1,10 +1,10 @@
 
-## Optimizing Sort Algorithms with Code Tuning (optional)
+## Optimizing Sort Algorithms with Code Tuning
 
 Since sorting is such an important application, it is natural for
 programmers to want to optimize their sorting code to run faster. Of
 course all quadratic sorts (Insertion Sort, Bubble Sort and Selection
-Sort) are relatively slow. Each has (as the name "quadratic suggests)
+Sort) are relatively slow. Each has (as the name "quadratic" suggests)
 $\Theta(n^2)$ worst case running time. The best way to speed them up is
 to find a better sorting algorithm. Nonetheless, there have been many
 suggestions given over the years about how to speed up one or another of
@@ -32,7 +32,8 @@ swaps anyway. Here is an implementation for Insertion Sort using this
 optimization.
 
     function insertionSortShift(A):
-        for i = 1 to A.size()-1:
+        N = A.size()
+        for i = 1 to N-1:
             temp = A[i]
             j = i
             while j > 0 and temp < A[j-1]:
@@ -53,39 +54,44 @@ implementations. Each sorting algorithm is run on a random integer array
 with 10,000 items. Times are in milliseconds. The arrays being sorted
 use the Comparable interface in languages that support this.
 
-| Sort               |  Java | Processing | Javascript | Python  |
-|:-------------------|:-----:|:----------:|:----------:|:-------:|
-| **Insertion sort** |       |            |            |         |
-| Standard           |  60   |    26      |    118     | 11,220  |
-| Shifting           |  41   |    18      |     77     |  5,100  |
-| **Bubble sort**    |       |            |            |         |
-| Standard           |  202  |    149     |    303     | 12,700  |
-| Check swaps        |  230  |    152     |    327     | 13,275  |
-| **Selection sort** |       |            |            |         |
-| Standard           |  104  |    65      |    158     |  4,000  |
-| Check swaps        |  104  |    65      |    155     |  4,050  |
+| Sort               |  Java  | Javascript |  Python  |
+|:-------------------|:------:|:----------:|:--------:|
+| **Insertion sort** |        |            |          |
+| Standard           |   60   |    118     |  11,220  |
+| Shifting           |   41   |     77     |   5,100  |
+| **Bubble sort**    |        |            |          |
+| Standard           |   202  |    303     |  12,700  |
+| Check swaps        |   230  |    327     |  13,275  |
+| **Selection sort** |        |            |          |
+| Standard           |   104  |    158     |   4,000  |
+| Check swaps        |   104  |    155     |   4,050  |
 
 :::
 
 [The table above](#OptimizeTable) shows the relative
-costs for a number of optimizations in four programming languages: Java,
-JavaScipt, Processing, and Python.
+costs for a number of optimizations in three programming languages: 
+Java, JavaScipt, and Python.
 
 The programming language that you use can have a big influence on the
 runtime for a program. Perhaps the greatest distinction is whether your
-language is compiled or not. Java, C++, and Processing are normally
-compiled, while JavaScript and Python are normally interpreted. This can
-make a huge difference in whether a given code change will actually
+language is compiled or not. Java and C++ are normally
+compiled, while Python is normally interpreted. 
+To further complicate things, current Javascript engines are
+just-in-time compiled, and there is a version of Python
+that is just-in-time compiled.
+This can make a huge difference in whether a given code change will actually
 speed the program up or not. In the case of the "shift" vs "swap"
-choice, shifting always turns out to be a big improvement. This is more
-true for the interpreted languages JavaScript and Python than for Java
-and Processing, but still an improvement either way. But the biggest
+choice, shifting always turns out to be a big improvement. 
+This is more
+true for the interpreted languages Javascript and Python than for Java
+and C++, but still an improvement either way. But the biggest
 effect that we see is that Python takes over 100 times as long to
 execute the same program as Java.
 
-Some languages have peculiarities that it pays to be aware of. It turns
-out that there is a big difference in JavaScript between using `i < n`
-or `i != n` to test termination of a loop.
+Some languages have peculiarities that it pays to be aware of. 
+For example, it turns out that there is a big difference in Javascript between using 
+$i<n$ or $i\neq n$ to test termination of a loop.
+
 
 ### Bubble Sort
 
@@ -96,22 +102,22 @@ Sort. That is to check during each iteration of the outer loop to see if
 any swaps took place during that iteration, and quit if not (since we
 know the list is ordered at this point). We can improve on this idea
 even more by recognizing that if the last swap done affects the values
-at positions $i$ and $i+1$, no swaps could happen to values at positions
-greater than $i$. Thus, we never need to check higher-positioned values
+at positions $j-1$ and $j$, no swaps could happen to values at positions
+greater than $j$. Thus, we never need to check higher-positioned values
 again, which could save many iterations even if there are a few swaps
 lower down. Here is code to implement this approach.
 
 
     function bubbleCheckSwap(A):
-        n = A.size() - 1
-        while n > 0:
-            newn = 0
-            for i = 0 to n-1:
+        N = A.size()
+        while N > 1:
+            newN = 0
+            for j = 1 to N-1:
                 // Check if this pair is out of order:
-                if A[i] > A[i+1]:
-                    swap(A, i, i+1)
-                    newn = i
-            n = newn
+                if A[j-1] > A[j]:
+                    swap(A, j-1, j)
+                    newN = j
+            N = newN
 
 
 The problem with this idea is that a considerable amount of effort
@@ -190,7 +196,7 @@ operating system, one might expect to save between 5 and 10 percent of
 the total time by doing so.
 
 Another important consideration is the type of data object being used.
-For Processing and Java, we use a simple Integer wrapper object that
+For Java, we use a simple Integer wrapper object that
 supports the Comparable interface. This means that some dereferencing of
 the key value from an object is required, which is a typical expectation
 in a realistic application of a sorting function. However, if we were to
