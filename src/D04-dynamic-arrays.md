@@ -124,8 +124,13 @@ What happens if we instead grow the array by 100 elements every time?
 You can try the calculation yourself, for say $n = 1,000,000$. What
 happens is that `resizeArray` gets called 100 times less often -- so
 there 100 times fewer elements copied. But the runtime is still
-quadratic[^D04a]. When $n = 1,000,000$, the total number of elements copied
+quadratic. When $n = 1,000,000$, the total number of elements copied
 is about $5,000,000,000$, still far too many.
+
+::: note
+*Note*: You can get a precise number of elements copied by using the formula for an
+[arithmetic progression](https://en.wikipedia.org/wiki/Arithmetic_progression).
+:::
 
 In short, **growing the array size by a constant amount is bad**,
 because a loop that repeatedly adds to the array will take quadratic
@@ -308,6 +313,3 @@ before. The only thing that matters is that the minimum load factor
 <inlineav id="DynamicArrayList-Remove-CON" src="ChalmersGU/DynamicArrayList-Remove-CON.js" name="Dynamic Array-based List Deletion Slideshow" links="ChalmersGU/CGU-Styles.css"/>
 
 
-[^D04a]: You can get a precise number by using the formula for an
-    [arithmetic
-    progression](https://en.wikipedia.org/wiki/Arithmetic_progression).

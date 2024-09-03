@@ -39,16 +39,18 @@ $\mathbf{G} = (\mathbf{V}, \mathbf{E})$ consists of a set of
 [vertices](#vertex){.term} $\mathbf{V}$ and a
 set of [edges](#edge){.term} $\mathbf{E}$, such
 that each edge in $\mathbf{E}$ is a connection between a pair of
-vertices in $\mathbf{V}$.[^J01a] The number of vertices is written
+vertices in $\mathbf{V}$. The number of vertices is written
 $|\mathbf{V}|$, and the number of edges is written $|\mathbf{E}|$.
 $|\mathbf{E}|$ can range from zero to a maximum of
 $|\mathbf{V}|^2 - |\mathbf{V}|$.
 
-[^J01a]: Some graph applications require that a given pair of vertices can
-    have multiple or parallel edges connecting them, or that a vertex
-    can have an edge to itself. However, the applications discussed here
-    do not require either of these special cases. To simplify our graph
-    API, we will assume that there are no duplicate edges.
+::: note
+*Note*: Some graph applications require that a given pair of vertices can
+have multiple or parallel edges connecting them, or that a vertex
+can have an edge to itself. However, the applications discussed here
+do not require either of these special cases. To simplify our graph
+API, we will assume that there are no duplicate edges.
+:::
 
 A graph whose edges are not directed is called an
 [undirected graph]{.term}, as shown in part (a)

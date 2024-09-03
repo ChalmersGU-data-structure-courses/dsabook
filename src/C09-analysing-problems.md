@@ -74,15 +74,12 @@ in $O(n \log n)$. Should we search for a faster algorithm? Many have
 tried, without success. Fortunately (or perhaps unfortunately?),
 [we can prove that](#sorting-lower-bound){.term} 
 any sorting algorithm must have running time in
-$\Omega(n \log n)$ in the worst case.[^C09a] This proof is one of the most
+$\Omega(n \log n)$ in the worst case. This proof is one of the most
 important results in the field of algorithm analysis, and it means that
 no sorting algorithm can possibly run faster than $c n \log n$ for the
 worst-case input of size $n$. Thus, we can conclude that the problem of
 sorting is $\Theta(n \log n)$ in the worst case, because the upper and
 lower bounds have met.
-
-[^C09a]: While it is fortunate to know the truth, it is unfortunate that
-    sorting is $\Theta(n \log n)$ rather than $\Theta(n)$.
 
 Knowing the lower bound for a problem does not give you a good
 algorithm. But it does help you to know when to stop looking. If the

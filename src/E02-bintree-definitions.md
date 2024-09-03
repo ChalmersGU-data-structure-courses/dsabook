@@ -77,18 +77,20 @@ Examples of full and complete binary trees.
 ::::
 
 [Figure #FullComplete](#FullComplete) illustrates
-the differences between full and complete binary trees.[^E02a] There is no
+the differences between full and complete binary trees. There is no
 particular relationship between these two tree shapes; that is, the tree (a) is
 full but not complete while the tree (b) is complete but
 not full. The [heap](#heaps-and-priority-queues) data
 structure is an example of a complete binary tree. The
 [Huffman coding tree](#huffman-coding-trees-optional) is an example of a full binary tree.
 
-[^E02a]: While these definitions for full and complete binary tree are the
-    ones most commonly used, they are not universal. Because the common
-    meaning of the words "full" and "complete" are quite similar,
-    there is little that you can do to distinguish between them other
-    than to memorize the definitions. Here is a memory aid that you
-    might find useful: "Complete" is a wider word than "full", and
-    complete binary trees tend to be wider than full binary trees
-    because each level of a complete binary tree is as wide as possible.
+::: note
+*Note*: While these definitions for full and complete binary tree are the
+ones most commonly used, they are not universal. Because the common
+meaning of the words "full" and "complete" are quite similar,
+there is little that you can do to distinguish between them other
+than to memorize the definitions. Here is a memory aid that you
+might find useful: "Complete" is a wider word than "full", and
+complete binary trees tend to be wider than full binary trees
+because each level of a complete binary tree is as wide as possible.
+:::

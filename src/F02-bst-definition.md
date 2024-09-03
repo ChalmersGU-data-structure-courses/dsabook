@@ -166,7 +166,7 @@ When duplicate node values do not appear in the tree, it makes no
 difference whether the replacement is the greatest value from the left
 subtree or the least value from the right subtree. If duplicates are
 stored in the left subtree, then we must select the replacement from the
-*left* subtree.[^F02a] To see why, call the least value in the right
+*left* subtree. To see why, call the least value in the right
 subtree $L$. If multiple nodes in the right subtree have value $L$,
 selecting $L$ as the replacement value for the root of the subtree will
 result in a tree with equal values to the right of the node now
@@ -174,9 +174,11 @@ containing $L$. Selecting the greatest value from the left subtree does
 not have a similar problem, because it does not violate the Binary
 Search Tree Property if equal values appear in the left subtree.
 
-[^F02a]: Alternatively, if we prefer to store duplicate values in the right
-    subtree, then we must replace a deleted node with the least value
-    from its right subtree.
+::: note
+*Note*: Alternatively, we can decide to store duplicate values in the 
+right subtree instead of the left. Then we must replace a deleted node 
+with the least value from its right subtree.
+:::
 
 The code for removal is shown here.
 
