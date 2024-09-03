@@ -40,18 +40,20 @@ this reason, the sequential search algorithm is sometimes called
 ### Binary Search
 
 Sequential search is the best that we can do when trying to find a value
-in an unsorted array.[^B02a] But if the array is sorted in increasing order
+in an unsorted array. But if the array is sorted in increasing order
 by value, then we can do much better. We use a process called
 [binary search]{.term}.
 
-[^B02a]: It seems to be really "obvious" that sequential search is the
-    best that you can do on an unsorted array. But writing a convincing
-    proof that no algorithm could ever be discovered that is better is
-    surprisingly difficult. This is an example of a
-    [lower bounds proof]{.term} to find the cost
-    for the best possible [algorithm]{.term} to
-    solve the [problem]{.term} of search in an
-    unsorted array.
+::: note
+*Note*: It seems to be really "obvious" that sequential search is the
+best that you can do on an unsorted array. But writing a convincing
+proof that no algorithm could ever be discovered that is better is
+surprisingly difficult. This is an example of a
+[lower bounds proof]{.term} to find the cost
+for the best possible [algorithm]{.term} to
+solve the [problem]{.term} of search in an
+unsorted array.
+:::
 
 Binary search begins by examining the value in the middle position of
 the array; call this position $mid$ and the corresponding value
@@ -96,12 +98,14 @@ of binary search on an array of $n$ values is at most $\log_2 n$. This
 is because we are repeatedly splitting the size of the subarray that we
 must look at in half. We stop (in the worst case) when we reach a
 subarray of size 1. And we can only cut the value of $n$ in half
-$\log_2 n$ times before we reach 1.[^B02b]
+$\log_2 n$ times before we reach 1.
 
-[^B02b]: It is possible to
-    [prove](#search-lower-bound){.term} that binary search is the most efficient algorithm
-    possible in the worst case when searching in a sorted array. This is
-    even more difficult than proving that sequential search is the most
-    efficient algorithm possible on an unsorted array.
+::: note
+*Note*: It is possible to [prove](#search-lower-bound){.term} 
+that binary search is the most efficient algorithm
+possible in the worst case when searching in a sorted array. This is
+even more difficult than proving that sequential search is the most
+efficient algorithm possible on an unsorted array.
+:::
 
 <avembed id="binarySearchPRO" src="Searching/binarySearchPRO.html" type="pe" name="Binary Search Proficiency Exercise"/> 

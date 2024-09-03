@@ -2958,6 +2958,12 @@ For input size $n$, a growth rate of $cn$ (for $c$ any positive
 constant). In other words, the cost of the associated function is
 linear on the input size.
 
+### linearithmic growth rate
+
+For input size $n$, a growth rate of $cn \log n$ (for $c$ any positive
+constant). In other words, the cost of the associated function is
+slightly larger than linear on the input size.
+
 ### linear index
 
 A form of [indexing]{.term} that stores
@@ -3089,6 +3095,12 @@ local storage.
 
 The *logarithm* of base $b$ for value $y$ is the power
 to which $b$ is raised to get $y$.
+
+### logarithmic growth rate
+
+For input size $n$, a growth rate of $c \log n$ (for $c$ any positive
+constant). In other words, the cost of the associated function is
+logarithmic on the input size.
 
 ### logical file
 
