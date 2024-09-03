@@ -57,7 +57,7 @@ supporting this (such as the `Comparable` interface in Java, which has
 the `.compareTo()` method for defining the exact process by which two
 objects are compared; 
 or the overloaded methods `__eq__`, `__lt__`, etc, used by Python). 
-But many languages like Processing and JavaScript do not.
+But many languages do not, such as C and Javascript.
 
 But what if the programmer wants to sort
 the record now using one field as the key, and later using another

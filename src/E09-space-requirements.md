@@ -26,7 +26,7 @@ overhead. Worse yet, the Full Binary Tree Theorem tells us that about
 half of the pointers are "wasted" NULL values that serve only to
 indicate tree structure, but which do not provide access to new data.
 
-In many languages (such as Java or JavaScript), the most typical
+In many languages (such as Java or Javascript), the most typical
 implementation is not to store any actual data in a node, but rather a
 pointer to the data record. In this case, each node will typically store
 three pointers, all of which are overhead, resulting in an overhead

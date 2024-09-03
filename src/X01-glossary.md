@@ -1674,7 +1674,7 @@ occurs at run time.
 ### dynamic allocation
 
 The act of creating an object from [free store]{.term}.
-In C++, Java, and JavaScript, this is done using the
+In C++, Java, and Javascript, this is done using the
 `new` operator.
 
 ### dynamic array
@@ -2176,7 +2176,7 @@ creating garbage is considered a [memory leak]{.term}.
 
 ### garbage collection
 
-Languages with garbage collection such Java, JavaScript, Lisp, and
+Languages with garbage collection such Java, Javascript, Lisp, and
 Scheme will periodically reclaim [garbage]{.term}
 and return it to [free store]{.term}.
 
