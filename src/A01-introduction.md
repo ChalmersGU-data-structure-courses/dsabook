@@ -1,10 +1,14 @@
 
 # Introduction
 
-How many cities with more than 250,000 people lie within 500 miles of
-Dallas, Texas? How many people in my company make over \$100,000 per
-year? Can we connect all of our telephone customers with less than 1,000
-miles of cable? To answer questions like these, it is not enough to have
+How many cities with more than 100,000 people lie within 200 kilometers of Paris, France? 
+How many people in Swedish towns with less than 50,000 people earn less than 50% 
+of the average income of people in Sweden? 
+How much more CO__2__ will be emitted if I travel by plane from Gothenburg, Sweden, 
+to Düsseldorf, Germany, compared to if I take the train?
+How can I see if a text contains plagiarism, i.e., 
+if it copied some parts from another existing text?
+To answer questions like these, it is not enough to have
 the necessary information. We must organize that information in a way
 that allows us to find the answers in time to satisfy our needs.
 
@@ -67,6 +71,13 @@ efficiency is becoming less important. After all, processor speed and
 memory size still continue to improve. Won't today's efficiency
 problem be solved by tomorrow's hardware?
 
+> The short answer to this question is ***no***!
+
+It is not at all certain that a twice as fast computer can solve 
+twice as large problems. On the contrary -- most interesting problems
+are very difficult, in the sense that if we increase the computing power 
+we can still only solve a very small increase in the size of the problem.
+
 As we develop more powerful computers, our history so far has always
 been to use that additional computing power to tackle more complex
 problems, be it in the form of more sophisticated user interfaces,
@@ -78,7 +89,8 @@ computer scientists must be trained to have a thorough understanding of
 the principles behind efficient program design, because their ordinary
 life experiences often do not apply when designing computer programs.
 
-In the most general sense, a [data structure]{.term} is any data representation and its associated operations.
+In the most general sense, a [data structure]{.term} is any 
+data representation and its associated operations.
 Even an integer or floating point number stored on the computer can be
 viewed as a simple data structure. More commonly, people use the term
 "data structure" to mean an organization or structuring for a
@@ -95,7 +107,8 @@ unsorted array containing all of the data items. It is possible to
 perform all necessary operations on an unsorted array. However, using
 the proper data structure can make the difference between a program
 running in a few seconds and one requiring many days. For example,
-searching for a given record in a [hash table]{.term} is much faster than searching for it in an unsorted array.
+searching for a given record in a [hash table]{.term} 
+is much faster than searching for it in an unsorted array.
 
 A solution is said to be [efficient]{.term} if
 it solves the problem within the required
@@ -128,8 +141,7 @@ can meet its performance goals when implemented using a simpler design.
 When selecting a data structure to solve a problem, you should follow
 these steps.
 
-1.  Analyze your problem to determine the
-    [basic operations](#basic-operation){.term}
+1.  Analyze your problem to determine the [basic operation]{.term}s
     that must be supported. Examples of basic operations include
     inserting a data item into the data structure, deleting a data item
     from the data structure, and finding a specified data item.
@@ -220,9 +232,8 @@ system that manages customer accounts, we see that a data structure that
 has little concern for the cost of deletion, but is highly efficient for
 search and moderately efficient for insertion, should meet the resource
 constraints imposed by this problem. Records are accessible by unique
-account number (sometimes called an
-[exact-match query]{.term}). One data structure
-that meets these requirements is the
+account number (sometimes called an [exact-match query]{.term}). 
+One data structure that meets these requirements is the
 [hash table](#hashing){.term}.
 Hash tables allow for extremely fast exact-match search. A record can be
 modified quickly when the modification does not affect its space
@@ -238,7 +249,7 @@ offline so as not to affect ATM transactions.
 #### Example: Databases {-}
 
 A company is developing a database system containing information about
-cities and towns in the United States. There are many thousands of
+cities and towns in Europe. There are many thousands of
 cities and towns, and the database program should allow users to find
 information about a particular place by name (another example of an
 exact-match query). Users should also be able to find all places that
@@ -247,21 +258,20 @@ location or population size. This is known as a
 [range query]{.term}.
 
 A reasonable database system must answer queries quickly enough to
-satisfy the patience of a typical user. For an exact-match query, a few
-seconds is satisfactory. If the database is meant to support range
+satisfy the patience of a typical user. For an exact-match query, 
+a fraction of a second is satisfactory. If the database is meant to support range
 queries that can return many cities that match the query specification,
-the user might tolerate the entire operation to take longer, perhaps on
-the order of a minute. To meet this requirement, it will be necessary to
+the user might tolerate the entire operation to take a little longer, perhaps 
+a couple of seconds. To meet this requirement, it will be necessary to
 support operations that process range queries efficiently by processing
 all cities in the range as a batch, rather than as a series of
 operations on individual cities.
 
 The hash table suggested in the previous example is inappropriate for
 implementing our city database, because it cannot perform efficient
-range queries. The [B-tree]{.term} supports large databases, insertion and deletion of data
-records, and range queries. However, a simple
+range queries. The [B-tree]{.term} supports large databases, insertion 
+and deletion of data records, and range queries. However, a simple
 [linear index]{.term} would be more appropriate if the database is created once,
-and then never changed, such as an atlas distributed on a CD or accessed
-from a website.
+and then never changed, such as an atlas accessed from a website.
 :::
 

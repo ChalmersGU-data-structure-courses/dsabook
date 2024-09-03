@@ -35,14 +35,14 @@ particular ID number. In this example the ID number is the
 To implement sorting or searching, we require that keys be
 [comparable]{.term}. At a minimum, we must be
 able to take two keys and reliably determine whether they are equal or
-not. That is enough to enable a sequential search through a database of
+not. That is enough to enable a [sequential search]{.term} through a database of
 records and find one that matches a given key. However, we typically
 would like for the keys to define a [total order]{.term},
 which means that we can always tell which of two keys is greater than
 the other. Using key types with total orderings gives the database
 implementor the opportunity to organize a collection of records in a way
 that makes searching more efficient. An example is storing the records
-in sorted order in an array, which permits a binary search. Fortunately,
+in sorted order in an array, which permits a [binary search]{.term}. Fortunately,
 in practice most fields of most records consist of simple data types
 with natural total orders. For example, integers, floats, doubles, and
 character strings all are totally ordered.
@@ -52,14 +52,14 @@ we need a general way to get the key for the record. We could insist
 that every record have a particular method called `.key()`. That seems
 like a good name for it!
 
-Some languages like Java and C++ have special infrastructure for
+Some languages like Java, Python and C++ have special infrastructure for
 supporting this (such as the `Comparable` interface in Java, which has
 the `.compareTo()` method for defining the exact process by which two
-objects are compared). But many languages like Processing and JavaScript
-do not.
+objects are compared; 
+or the overloaded methods `__eq__`, `__lt__`, etc, used by Python). 
+But many languages like Processing and JavaScript do not.
 
-But what if the programmer had already used that method name for another
-purpose? An even bigger problem is, what if the programmer wants to sort
+But what if the programmer wants to sort
 the record now using one field as the key, and later using another
 field? Or search sometimes on one key, and at other times on another?
 The problem is that the "keyness" of a given field is not an inherent
@@ -70,7 +70,7 @@ even the comparable interface) to extract the desired key value.
 ### Comparators
 
 Another, more general approach is to supply a function or class --
-called a [comparator]{.term} --whose job is to
+called a [comparator]{.term} -- whose job is to
 extract the key from the record. A comparator function can be passed in
 as a parameter, such as in a call to a sorting function. In this case,
 the comparator function would be invoked on two records whenever they

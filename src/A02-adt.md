@@ -8,6 +8,8 @@ terms "[data item]{.term}" and
 "[data structure]{.term}". We begin with the
 basic elements on which data structures are built.
 
+#### Type {-}
+
 A [type]{.term} is a collection of values. For
 example, the Boolean type consists of the values `true` and `false`. The
 integers also form a type. An integer is a
@@ -15,11 +17,12 @@ integers also form a type. An integer is a
 no subparts. A bank account record will typically contain several pieces
 of information such as name, address, account number, and account
 balance. Such a record is an example of an
-[aggregate type]{.term} or
-[composite type]{.term}. A
-[data item]{.term} is a piece of information or
+[aggregate type]{.term} or [composite type]{.term}. 
+A [data item]{.term} is a piece of information or
 a record whose value is drawn from a type. A data item is said to be a
 [member]{.term} of a type.
+
+#### Data type {-}
 
 A [data type]{.term} is a type together with a
 collection of operations to manipulate the type. For example, an integer
@@ -28,8 +31,9 @@ an operation on the integer data type.
 
 A distinction should be made between the logical concept of a data type
 and its physical implementation in a computer program. For example,
-there are two traditional implementations for the list data type: the
-linked list and the array-based list. The list data type can therefore
+there are two traditional implementations for the [list]{.term} data type: 
+the [linked list]{.term} and the [array-based list]{.term}. 
+The list data type can therefore
 be implemented using a linked list or an array. But we don't need to
 know how the list is implemented when we wish to use a list to help in a
 more complex design. For example, a list might be used to help implement
@@ -51,6 +55,8 @@ it could be implemented with an interface that uses traditional row and
 column indices, thus appearing to the user in the same way that it would
 if it had been implemented as a block of contiguous memory locations.
 
+#### Abstract data type {-}
+
 An [abstract data type]{.term} (ADT) is the
 specification of a data type within some language, independent of an
 implementation. The interface for the ADT is defined in terms of a type
@@ -59,6 +65,8 @@ determined by its inputs and outputs. An ADT does not specify *how* the
 data type is implemented. These implementation details are hidden from
 the user of the ADT and protected from outside access, a concept
 referred to as [encapsulation]{.term}.
+
+#### Data structure {-}
 
 A [data structure]{.term} is the implementation
 for an ADT. In an object-oriented language, an ADT and its
@@ -77,7 +85,7 @@ data stored in a computer's main memory. The related term
 organization of data on peripheral storage, such as a disk drive or CD.
 
 ::: topic
-#### Example A {-}
+#### Example: Integers {-}
 
 The mathematical concept of an integer, along with operations that
 manipulate integers, form a data type. The `int` variable type is a
@@ -91,7 +99,7 @@ new implementation must be used for the associated operations.
 :::
 
 ::: topic
-#### Example B {-}
+#### Example: Lists of integers {-}
 
 An ADT for a list of integers might specify the following operations:
 
@@ -118,7 +126,7 @@ datasets (millions of elements). Therefore there is usually a need for
 several different implementations of the same ADT.
 
 ::: topic
-#### Example C {-}
+#### Example: Collections or records {-}
 
 Two popular implementations for large disk-based database applications
 are [hashing] and
@@ -138,7 +146,7 @@ The concept of an ADT can help us to focus on key issues even in
 non-computing applications.
 
 ::: topic
-#### Example D {-}
+#### Example: Cars {-}
 
 When operating a car, the primary activities are steering, accelerating,
 and braking. On nearly all passenger cars, you steer by turning the
@@ -166,7 +174,7 @@ hierarchy of labels allows us to focus on important issues while
 ignoring unnecessary details.
 
 ::: topic
-#### Example E {-}
+#### Example: Computers, hard drives, and CPUs {-}
 
 We apply the label "hard drive" to a collection of hardware that
 manipulates data on a particular type of storage device, and we apply
@@ -187,7 +195,7 @@ thinking about a complex program, you would have no hope of
 understanding or implementing it.
 
 ::: topic
-#### Example F {-}
+#### Example: Disk-based databases {-}
 
 Consider the design for a relatively simple database system stored on
 disk. Typically, records on disk in such a program are accessed through
@@ -223,7 +231,7 @@ use the logical ADT for the data structure in the context of a
 higher-level task.
 
 :::: topic
-#### Figure G {-}
+#### Figure: ADTs, data structures, and data items {-}
 
 <inlineav id="ADTCON" src="Design/ADTCON.js" name="Design/ADTCON" links="Design/ADTCON.css" static/>
 
@@ -241,7 +249,7 @@ for the ADT. The interface becomes a form of communication between two
 programmers.
 
 ::: topic
-#### Example H {-}
+#### Example: API for a list class {-}
 
 A particular programming environment might provide a library that
 includes a [list]{.term} class. The logical form

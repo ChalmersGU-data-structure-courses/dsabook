@@ -11,7 +11,7 @@ be explained in detail later on.
 **Important Java note**: There are many similarities, but also some
 differences, between the API below and the interfaces and classes in the
 "standard" Java API. For more details about the differences, please
-see the end of this module.
+see the end of this section.
 
 **Important Python note**: Python doesn't make use of abstract classes
 (interfaces) in the same way as Java does. Instead they use a concept
@@ -25,8 +25,11 @@ pretend that there are interfaces, even in Python.
 These include comparables:
 
     interface Comparable:
-        // Returns an integer: negative (smaller), 0 (equal), positive (larger)
+        // This is Java's default way of comparing elements,
+        // returning an integer: negative (smaller), 0 (equal), positive (larger)
         this.compareTo(other)
+
+        // This is Python's default way of comparing elements.
         // All of these operators return a boolean:
         this == other  
         this != other  
@@ -54,10 +57,10 @@ As well as collections:
 General lists:
 
     interface List extends Collection:
-        add(i, x)  // Adds x at position i; where 0 <= i <= size.
-        get(i)     // Returns the element at position i; where 0 <= i < size.
-        set(i, x)  // Replaces the value at position i with x; where 0 <= i < size.
-        remove(i)  // Removes the element at position i; where 0 <= i < size.
+        add(i, x)  // Adds x at position i; where 0 ≤ i ≤ size.
+        get(i)     // Returns the element at position i; where 0 ≤ i < size.
+        set(i, x)  // Replaces the value at position i with x; where 0 ≤ i < size.
+        remove(i)  // Removes the element at position i; where 0 ≤ i < size.
 
 Stacks:
 
@@ -95,11 +98,11 @@ Sets where the elements are sorted:
     interface SortedSet extends Set:
         first()          // Returns the first (smallest) element.
         last()           // Returns the last (largest) element.
-        floor(x)         // Returns the closest element <= x, or nothing if there is no such element.
-        ceiling(x)       // Returns the closest element >= x, or nothing if there is no such element.
+        floor(x)         // Returns the closest element ≤ x, or nothing if there is no such element.
+        ceiling(x)       // Returns the closest element ≥ x, or nothing if there is no such element.
         lower(x)         // Returns the closest element < x, or nothing if there is no such element.
         higher(x)        // Returns the closest element > x, or nothing if there is no such element.
-        between(x1, x2)  // Returns all elements x such that x1 <= x <= x2.
+        between(x1, x2)  // Returns all elements x such that x1 ≤ x ≤ x2.
 
 
 ### ADTs for Maps or Dictionaries
@@ -121,11 +124,11 @@ Maps where the keys are sorted:
     interface SortedMap extends Map:
         firstKey()               // Returns the first (smallest) key.
         lastKey()                // Returns the last (largest) key.
-        floorKey(key)            // Returns the closest key <= k, or nothing if there is no key.
-        ceilingKey(key)          // Returns the closest key >= k, or nothing if there is no key.
+        floorKey(key)            // Returns the closest key ≤ k, or nothing if there is no key.
+        ceilingKey(key)          // Returns the closest key ≥ k, or nothing if there is no key.
         lowerKey(key)            // Returns the closest key < k, or nothing if there is no such element.
         higherKey(key)           // Returns the closest key > k, or nothing if there is no such element.
-        keysBetween(key1, key2)  // Returns all keys k such that k1 <= k <= k2.
+        keysBetween(key1, key2)  // Returns all keys k such that k1 ≤ k ≤ k2.
 
 
 ### ADTs for Graphs

@@ -1,12 +1,10 @@
 
 <!-- TODO: make a similar Python example -->
 
-## Comparables and Comparators: An Example
+## Example: Comparables and Comparators in Java
 
 *Note*: This example treats comparables and comparators, as they work in Java.
 (A similar example for Python is on the TODO list.)
-
-### Comparables and comparators in Java
 
 In Java there are two main ways of comparing objects. The one that most
 people find easier to understand is *comparable*. But there is an

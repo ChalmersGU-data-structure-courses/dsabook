@@ -12,10 +12,10 @@ examples of information retrieval problems:
 -   *Database lookup:* Given a list of people, find the person with a
     given *personnummer*.
 -   *Search engine:* Given a collection of documents (e.g. web pages),
-    find all web pages containing a given word.
+    find all documents containing a given word.
 -   *Between X and Y:* Given a list of all Swedish towns and their
-    populations, find the towns whose population is between 1,000 and
-    2,000.
+    populations, find the towns whose population is between 5,000 and
+    10,000.
 
 All of these problems can be solved using two ADTs, the *set* and the
 *map*. Both ADTs can be used to maintain a collection of *records*. They
@@ -34,7 +34,7 @@ classes, and Python provides
 [dictionaries](https://docs.python.org/3/tutorial/datastructures.html#dictionaries)
 (another word for maps) as part of its standard library.
 
-### Spell-checking: Sets
+### Sets
 
 A *set* represents a collection of items, where we can *add* and
 *remove* items, and *check* if a given item is present in the set. A set
@@ -46,6 +46,9 @@ interface for sets from [the course API](#all-adts-used-in-this-book):
         add(x)       // Adds x to the set. Returns true if the element wasn't already in the set.
         remove(x)    // Removes x from the set. Returns true if the element was in the set.
         contains(x)  // Returns true if x is in the set.
+
+::: topic
+#### Example: Spell-checking {-}
 
 We can use a set for the spell-checking example:
 
@@ -77,9 +80,11 @@ set. Then to spell-check a given word, we just call `contains`.
             else:
                 print(word, "is INVALID")
 
-### Database lookup: Maps
+:::
 
-A *map* represents a set of *keys*, where each key has an associated
+### Maps or dictionaries
+
+A *map* (or dictionary) represents a set of *keys*, where each key has an associated
 *value*. We can *add* and *remove* keys, but when we add a key we must
 specify what *value* we want to associated with it. We can *check* if a
 given key is present in the map. We can also *look up* a key to find the
@@ -99,6 +104,9 @@ the same value. Recall the interface for maps from
         containsKey(key)  // Returns true if the key has an associated value.
         isEmpty()         // Returns true if there are no keys.
         size()            // Returns the number of keys (i.e., the number of key/value pairs).
+
+::: topic 
+#### Example: Database lookup {-}
 
 The map is a perfect match for our database example:
 
@@ -131,8 +139,9 @@ call `database.get(pnr)`.
             // Find the person who has a given personnummer.
             return this.database.get(pnr)
 
+:::
 
-### Search engine: Multimaps
+### Multimaps
 
 Maps have the restriction that each key has only one value. However,
 sometimes we want to store a list of records, where some records might
@@ -144,6 +153,9 @@ Unfortunately, most programming languages do not provide a multimap data
 structure. Instead, we can implement it ourselves. The idea is to use a
 map, where the key is a word, and the value is not a document but a
 *set* of documents.
+
+::: topic 
+#### Example: Search engine {-}
 
 A multimap is the perfect data structure for our search engine example:
 
@@ -185,26 +197,27 @@ the multimap.
                 // If the word is not found, return an empty set.
                 return new Set()
 
+:::
 
 ### Between X and Y: Sorted Sets and Maps
 
 Consider the final example problem:
 
 -   Given a list of all Swedish towns and their populations, find the
-    towns whose population is between 1,000 and 2,000.
+    towns whose population is between 5,000 and 10,000.
 
 One way to solve this problem would be to use a multimap. The key would
 be a population number, and the values would be all towns having that
 population. Then we could find the required towns by making a sequence
 of calls to `contains`:
 
--   `contains(1000)` - find all towns with 1,000 population
--   `contains(1001)` - find all towns with 1,001 population
--   `contains(1002)` - find all towns with 1,002 population
+-   `contains(5000)` - find all towns with 5,000 population
+-   `contains(5001)` - find all towns with 5,001 population
+-   `contains(5002)` - find all towns with 5,002 population
 -   etc.
 
-But this is not a sensible approach. We would need to make \~1,000 calls
-to `contains`, and if we wanted to instead find all cities in the USA
+But this is not a sensible approach. We would need to make \~5,000 calls
+to `contains`, and if we wanted to instead find all cities in Europe
 having a population of between 1 and 2 million, we would need to make
 \~1,000,000 calls.
 
@@ -212,11 +225,11 @@ There is a better way. If the towns are stored in an array, and sorted
 by population, we can use the following algorithm:
 
 -   Find the position in the array of the *first* town that has a
-    population of *at least* 1,000. (We will see in the section about
+    population of *at least* 5,000. (We will see in the section about
     [binary search] that it
     is possible to find this position efficiently.)
 -   Find the position in the array of the *last* town that has a
-    population of *at most* 2,000.
+    population of *at most* 10,000.
 -   Now return all towns between those two positions in the array.
 
 This is an example of a *range query*: given a map, finding all items
@@ -271,8 +284,12 @@ Recall the interface for sorted sets from
         higher(x)        // Returns the closest element > x, or nothing if there is no such element.
         between(x1, x2)  // Returns all elements x such that x1 <= x <= x2.
 
+
+::: topic 
+#### Example: Small Swedish towns {-}
+
 Here is how to use a sorted map ADT to find all Swedish towns having
-between 1,000 and 2,000 population. As there may be towns that have the
+between 5,000 and 10,000 population. As there may be towns that have the
 same population, we need a *multimap*. As before, we solve this by
 having the key be a population number and the value be a set of towns.
 
@@ -307,6 +324,8 @@ having the key be a population number and the value be a set of towns.
                 for each city in this.cities.get(population):
                     result.add(city)
             return result
+
+:::
 
 ### How to implement sets and maps
 
