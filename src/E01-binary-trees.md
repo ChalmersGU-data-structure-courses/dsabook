@@ -11,7 +11,7 @@ of applications that trees can speed up include
 [describing mathematical expressions](#binary-tree-node-implementations)
 and the syntactic elements of computer programs, or
 organizing the information needed to drive
-[data compression algorithms](#huffman-coding-trees-optional).
+[data compression algorithms](#huffman-coding-trees).
 
 This chapter covers terminology used for discussing binary trees,
 [tree traversals](#binary-tree-traversals),

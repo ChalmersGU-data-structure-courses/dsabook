@@ -109,7 +109,7 @@ they are implemented in Java and Python:
     it's up to the programmer to decide when to shrink it.
 -   Java's
     [java.util.LinkedList](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/LinkedList.html)
-    implements [doubly-linked lists](#doubly-linked-lists-optional), so that the iterator can move forward and backward
+    implements [doubly-linked lists](#doubly-linked-lists), so that the iterator can move forward and backward
     through the list. \[[Source:
     LinkedList.java](https://github.com/openjdk/jdk/blob/961dcffc862a4830fbf26791835a98c12d4b513e/src/java.base/share/classes/java/util/LinkedList.java#L974-L984)\]
 -   Python's standard lists are dynamic. In fact, Python doesn't even

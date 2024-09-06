@@ -82,7 +82,7 @@ particular relationship between these two tree shapes; that is, the tree (a) is
 full but not complete while the tree (b) is complete but
 not full. The [heap](#heaps-and-priority-queues) data
 structure is an example of a complete binary tree. The
-[Huffman coding tree](#huffman-coding-trees-optional) is an example of a full binary tree.
+[Huffman coding tree](#huffman-coding-trees) is an example of a full binary tree.
 
 ::: note
 *Note*: While these definitions for full and complete binary tree are the

@@ -257,7 +257,7 @@ balanced, the possibility of its being unbalanced is a serious
 liability. There are techniques for organizing a BST to guarantee good
 performance. Two examples are the
 [AVL tree](#the-avl-tree) and the
-[splay tree](#the-splay-tree-optional). There
+[splay tree](#the-splay-tree). There
 also exist other types of search trees that are guaranteed to remain
 balanced, such as the
 [2-3 Tree]{.term}.

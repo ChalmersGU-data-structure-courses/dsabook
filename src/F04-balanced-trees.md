@@ -48,7 +48,7 @@ effort toward making the BST more balanced every time it is accessed.
 This is a little like the idea of path compression used by the
 [UNION/FIND]{.term} algorithm. 
 One example of such a compromise is called the
-[splay tree](#the-splay-tree-optional).
+[splay tree](#the-splay-tree).
 
-The [red-black tree](#the-red-black-tree-optional) is also a binary tree, but it uses a different balancing
+The [red-black tree](#the-red-black-tree) is also a binary tree, but it uses a different balancing
 mechanism.
