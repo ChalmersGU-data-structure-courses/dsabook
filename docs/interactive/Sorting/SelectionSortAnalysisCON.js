@@ -10,12 +10,12 @@ $(document).ready(function() {
 	  "sc1": "What is the cost for Selection Sort?",
 	  "sc2": "Selection Sort is essentially a bubble sort, except that the next largest value is remembered so that we can delay the swap to the end of each pass.",
 	  "sc3": "Consider the following example of an array with 6 elements.",
-	  "sc4": "At $i=0$",
-	  "sc11": "At $i=1$",
-	  "sc16": "At $i=2$",
-	  "sc20": "At $i=3$",
-	  "sc23": "At $i=4$",
-	  "sc24": "Thus, the number of comparisons is defined by the equation $\\displaystyle\\sum_{i=0}^{n-1}i = \\frac{n(n-1)}{2}$, or $\\theta(n^2)$, while the number of swaps is $\\theta(n)$.",
+	  "sc4": "At <em>i=0</em>",
+	  "sc11": "At <em>i=1</em>",
+	  "sc16": "At <em>i=2</em>",
+	  "sc20": "At <em>i=3</em>",
+	  "sc23": "At <em>i=4</em>",
+	  "sc24": "Thus, the number of comparisons is defined by the equation &Sigma;<em><sub>i&lt;n</sub> i</em> &nbsp;=&nbsp; <em>n(n-1)/2</em>, or <em>O(n<sup>2</sup>)</em>, while the number of swaps is <em>O(n)</em>.",
     "lab1": "<b><u>Number of Comparisons</u></b>",
     "lab2": "<b><u>Number of Swaps</u></b>"
   };
@@ -57,7 +57,7 @@ $(document).ready(function() {
 
   // Slide 5
   arr.highlight(1);
-  av.label("$i=0$",  {top: topAlign + topGap, left: leftAlign + 7});
+  av.label("<em>i=0</em>",  {top: topAlign + topGap, left: leftAlign + 7});
   av.g.rect(leftAlign, topAlign, rectWidth, rectHeight);
   av.step();
 
@@ -132,7 +132,7 @@ $(document).ready(function() {
   arr.removeClass(bigIndex, "greenbg");
   arr.addClass(5, "deemph");
   av.g.rect(leftAlign + gap, topAlign, rectWidth, rectHeight);
-  av.label("$i=0$",  {top: topAlign + topGap, left: leftAlign + gap + 7});
+  av.label("<em>i=0</em>",  {top: topAlign + topGap, left: leftAlign + gap + 7});
   bigIndex = 0;
   pointer.target(arr.index(bigIndex));
   arr.addClass(bigIndex, "greenbg");
@@ -141,7 +141,7 @@ $(document).ready(function() {
   // Slide 11
   av.umsg(interpret["sc11"]);
   arr.highlight(1);
-  av.label("$i=1$",  {top: topAlign + topGap, left: leftAlign + rectWidth + 7});
+  av.label("<em>i=1</em>",  {top: topAlign + topGap, left: leftAlign + rectWidth + 7});
   av.g.rect(leftAlign + rectWidth, topAlign, rectWidth, rectHeight);
   av.step();
 
@@ -202,7 +202,7 @@ $(document).ready(function() {
   arr.removeClass(bigIndex, "greenbg");
   arr.addClass(4, "deemph");
   av.g.rect(leftAlign + gap + rectWidth, topAlign, rectWidth, rectHeight);
-  av.label("$i=1$",  {top: topAlign + topGap, left: leftAlign + gap + rectWidth + 7});
+  av.label("<em>i=1</em>",  {top: topAlign + topGap, left: leftAlign + gap + rectWidth + 7});
   bigIndex = 0;
   pointer.target(arr.index(bigIndex));
   arr.addClass(bigIndex, "greenbg");
@@ -211,7 +211,7 @@ $(document).ready(function() {
   // Slide 16
   av.umsg(interpret["sc16"]);
   arr.highlight(1);
-  av.label("$i=2$",  {top: topAlign + topGap, left: leftAlign + 2 * rectWidth + 7});
+  av.label("<em>i=2</em>",  {top: topAlign + topGap, left: leftAlign + 2 * rectWidth + 7});
   av.g.rect(leftAlign + 2 * rectWidth, topAlign, rectWidth, rectHeight);
   av.step();
 
@@ -258,7 +258,7 @@ $(document).ready(function() {
   arr.removeClass(bigIndex, "greenbg");
   arr.addClass(3, "deemph");
   av.g.rect(leftAlign + gap + 2 * rectWidth, topAlign, rectWidth, rectHeight);
-  av.label("$i=2$", {top: topAlign + topGap, left: leftAlign + gap + 2 * rectWidth + 7});
+  av.label("<em>i=2</em>", {top: topAlign + topGap, left: leftAlign + gap + 2 * rectWidth + 7});
   bigIndex = 0;
   pointer.target(arr.index(bigIndex));
   arr.addClass(bigIndex, "greenbg");
@@ -267,7 +267,7 @@ $(document).ready(function() {
   // Slide 20
   av.umsg(interpret["sc20"]);
   arr.highlight(1);
-  av.label("$i=3$",  {top: topAlign + topGap, left: leftAlign + 3 * rectWidth + 7});
+  av.label("<em>i=3</em>",  {top: topAlign + topGap, left: leftAlign + 3 * rectWidth + 7});
   av.g.rect(leftAlign + 3 * rectWidth, topAlign, rectWidth, rectHeight);
   av.step();
 
@@ -300,7 +300,7 @@ $(document).ready(function() {
   arr.removeClass(bigIndex, "greenbg");
   arr.addClass(2, "deemph");
   av.g.rect(leftAlign + gap + 3 * rectWidth, topAlign, rectWidth, rectHeight);
-  av.label("$i=3$",  {top: topAlign + topGap, left: leftAlign + gap + 3 * rectWidth + 7});
+  av.label("<em>i=3</em>",  {top: topAlign + topGap, left: leftAlign + gap + 3 * rectWidth + 7});
   bigIndex = 0;
   pointer.target(arr.index(bigIndex));
   arr.addClass(bigIndex, "greenbg");
@@ -309,7 +309,7 @@ $(document).ready(function() {
   // Slide 23
   av.umsg(interpret["sc23"]);
   arr.highlight(1);
-  av.label("$i=4$",  {top: topAlign + topGap, left: leftAlign + 4 * rectWidth + 7});
+  av.label("<em>i=4</em>",  {top: topAlign + topGap, left: leftAlign + 4 * rectWidth + 7});
   av.g.rect(leftAlign + 4 * rectWidth, topAlign, rectWidth, rectHeight);
   av.step();
   av.clearumsg();
@@ -326,7 +326,7 @@ $(document).ready(function() {
   arr.removeClass(bigIndex, "greenbg");
   arr.addClass(1, "deemph");
   av.g.rect(leftAlign + gap + 4 * rectWidth, topAlign, rectWidth, rectHeight);
-  av.label("$i=4$",  {top: topAlign + topGap, left: leftAlign + gap + 4 * rectWidth + 7});
+  av.label("<em>i=4</em>",  {top: topAlign + topGap, left: leftAlign + gap + 4 * rectWidth + 7});
   pointer.hide();
   arr.addClass(0, "deemph");
   av.step();
@@ -346,7 +346,7 @@ $(document).ready(function() {
             leftAlign, 3.5 * rectHeight + topAlign);
   av.g.line(leftAlign + 5 * rectWidth, 2.5 * rectHeight + topAlign,
             leftAlign + 5 * rectWidth, 3.5 * rectHeight + topAlign);
-  av.label("$n - 1$",
+  av.label("<em>n–1</em>",
            {top: topAlign + 1.5 * rectHeight,
              left: leftAlign + 2 * rectWidth + labelGap});
 
@@ -361,7 +361,7 @@ $(document).ready(function() {
             leftAlign - 0.25 * rectWidth, topAlign + rectHeight);
   av.g.line(leftAlign - 0.75 * rectWidth, topAlign - 4 * rectHeight,
             leftAlign - 0.25 * rectWidth, topAlign - 4 * rectHeight);
-  av.label("$n - 1$",
+  av.label("<em>n–1</em>",
            {top: topAlign - 3 * rectHeight,
              left: leftAlign - rectWidth + labelGap});
 
@@ -378,7 +378,7 @@ $(document).ready(function() {
             leftAlign, 3.5 * rectHeight + topAlign);
   av.g.line(leftAlign + 5 * rectWidth, 2.5 * rectHeight + topAlign,
             leftAlign + 5 * rectWidth, 3.5 * rectHeight + topAlign);
-  av.label("$n - 1$",
+  av.label("<em>n–1</em>",
            {top: topAlign + 1.5 * rectHeight,
              left: leftAlign + 2 * rectWidth + labelGap});
   av.step();

@@ -7,15 +7,15 @@ $(document).ready(function() {
   var av = new JSAV(av_name);
 
   var interpret = {
-    "Slide 1": "To analyze Quicksort, we first analyze the findpivot and partition functions when operating on a subarray of length $k$",
-    "Slide 2": "Clearly, findpivot takes constant time for any $k$. Here we have $k = 9$",
-    "Slide 4": "The total cost of the partition operation is constrained by how far left and right can move inwards",
-    "Slide 5": "The swap operation in the body of the outer while loop guarantees the movement of left and right at least one step each",
-    "Slide 6": "Thus, the maximum number of times swap can be executed is $\\frac{s-1}{2}$. In this case, left and right will move at most $\\frac{s-1}{2}$ steps each for a total of $s-1$ steps",
-    "Slide 7": "The first inner while loop can be executed at most $s-1$ times in which case left will end up at the end of the array and the outer while loop will end",
-    "Slide 8": "The second inner while loop can be executed at most $s-1$ times in which case right will end up at the pivot and the outer while loop will end",
-    "Slide 9": "Accordingly, the outer while loop along with its two inner loops will move left and right a total of $s-1$ steps",
-    "Slide 10": "Thus, the running time of the partition function is $\\theta(s)$, where $s$ is the size of the subarray",
+    "Slide 1": "To analyze Quicksort, we first analyze the findpivot and partition functions when operating on a subarray of length <em>k</em>.",
+    "Slide 2": "Clearly, findpivot takes constant time for any <em>k</em>. Here we have <em>k = 9</em>.",
+    "Slide 4": "The total cost of the partition operation is constrained by how far left and right can move inwards.",
+    "Slide 5": "The swap operation in the body of the outer while loop guarantees the movement of left and right at least one step each.",
+    "Slide 6": "Thus, the maximum number of times swap can be executed is <em>(s–1)/2</em>. <br/> In this case, left and right will move at most <em>(s–1)/2</em> steps each for a total of <em>s–1</em> steps.",
+    "Slide 7": "The first inner while loop can be executed at most <em>s–1</em> times in which case left will end up at the end of the array and the outer while loop will end.",
+    "Slide 8": "The second inner while loop can be executed at most <em>s–1</em> times in which case right will end up at the pivot and the outer while loop will end.",
+    "Slide 9": "Accordingly, the outer while loop along with its two inner loops will move left and right a total of <em>s–1</em> steps.",
+    "Slide 10": "Thus, the running time of the partition function is <em>O(s)</em>, where <em>s</em> is the size of the subarray.",
     "lab1": "Pivot",
     "lab2": "Left",
     "lab3": "Right"

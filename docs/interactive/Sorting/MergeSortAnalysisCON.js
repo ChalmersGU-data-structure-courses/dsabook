@@ -51,8 +51,8 @@ $(document).ready(function() {
 	  "Slide 25": "Merging the green highlighted arrays requires 2 units of work.",
 	  "Slide 27": "Merging the green highlighted arrays requires 4 units of work.",
 	  "Slide 29": "Merging the green highlighted arrays requires 8 units of work.",
-	  "Slide 31": "Thus, we have $\\log{n+1}$ levels each of which requires $\\theta(n)$ work.",
-	  "Slide 32": "Therefore, the total running time of merge sort is $\\theta(n\\log{n})$.",
+	  "Slide 31": "Thus, we have <em>log(n+1)</em> levels each of which requires <em>O(n)</em> work.",
+	  "Slide 32": "Therefore, the total running time of merge sort is <em>O(n log(n))</em>.",
 	  "Slide 33": "This cost is unaffected by the relative order of the values being sorted, thus this analysis holds for the best, average, and worst cases.",
 	  "lab1": "<b><u>Splitting Work</u></b>",
 	  "lab2": "<b><u>Merging Work</u></b>"
@@ -84,7 +84,7 @@ $(document).ready(function() {
   arr11 = av.ds.array([arr_values[0], arr_values[1], arr_values[2], arr_values[3]], {left: 40, top: 75, indexed: false});
   arr12 = av.ds.array([arr_values[4], arr_values[5], arr_values[6], arr_values[7]], {left: 200, top: 75, indexed: false});
   av.label(interpret["lab1"],  {top: "-22px", left: "370px"}).addClass("largeLabel");
-  av.label("|----------- $n$ -----------|",  {top: "-3px", left: "355px"});
+  av.label("|------------- <em>n</em> -------------|",  {top: "-3px", left: "352px"});
   for (i = 0; i < 8; i++) {
     av.g.rect(rectLeftAlign + (i * 20), rectTopAlign, 20, 20);
   }
@@ -99,7 +99,7 @@ $(document).ready(function() {
   // Slide 6
   arr21 = av.ds.array([arr_values[0], arr_values[1]], {left: 20, top: 150, indexed: false});
   arr22 = av.ds.array([arr_values[2], arr_values[3]], {left: 120, top: 150, indexed: false});
-  av.label("|--- $\\frac{n}{2}$ ---|", {top: "65px", left: rectLeftAlign + 8});
+  av.label("|---- <em>n/2</em> ----|", {top: "65px", left: rectLeftAlign+1});
   for (i = 0; i < 4; i++) {
     av.g.rect(rectLeftAlign + (i * 20), 105, 20, 20);
   }
@@ -114,7 +114,7 @@ $(document).ready(function() {
   // Slide 8
   arr31 = av.ds.array([arr_values[0]], {left: 0, top: 225, indexed: false});
   arr32 = av.ds.array([arr_values[1]], {left: 70, top: 225, indexed: false});
-  av.label("|- $\\frac{n}{4}$ -|", {top: "140px", left: rectLeftAlign});
+  av.label("<em>n/4</em>", {top: "140px", left: rectLeftAlign+10});
   for (i = 0; i < 2; i++) {
     av.g.rect(rectLeftAlign + (i * 20), 180, 20, 20);
   }
@@ -131,10 +131,9 @@ $(document).ready(function() {
   arr31.hide();
   arr32.hide();
   av.label(interpret["lab2"],  {top: "-22px", left: "620px"}).addClass("largeLabel");
-  av.label("$\\frac{n}{8}$ ",  {top: "215px", left: rectLeftAlign + 252});
-  av.label("$\\frac{n}{8}$ ",  {top: "215px", left: rectLeftAlign + 282});
+  av.label("<em>n/4</em>",  {top: "215px", left: rectLeftAlign + 260});
   for (i = 0; i < 2; i++) {
-    av.g.rect(rectLeftAlign + 250 + (i * 20 + i * 10), 255, 20, 20);
+    av.g.rect(rectLeftAlign + 250 + (i * 20), 255, 20, 20);
   }
   arr21.unhighlight();
   av.clearumsg();
@@ -148,7 +147,7 @@ $(document).ready(function() {
   // Slide 12
   arr33 = av.ds.array([arr_values[2]], {left: 100, top: 225, indexed: false});
   arr34 = av.ds.array([arr_values[3]], {left: 170, top: 225, indexed: false});
-  av.label("|- $\\frac{n}{4}$ -|",  {top: "140px", left: rectLeftAlign + 50});
+  av.label("<em>n/4</em>",  {top: "140px", left: rectLeftAlign + 60});
   for (i = 0; i < 2; i++) {
     av.g.rect(rectLeftAlign + 50 + (i * 20), 180, 20, 20);
   }
@@ -164,10 +163,9 @@ $(document).ready(function() {
   merge(av, arr33, arr34, arr22);
   arr33.hide();
   arr34.hide();
-  av.label("$\\frac{n}{8}$ ",  {top: "215px", left: rectLeftAlign + 252 + 60});
-  av.label("$\\frac{n}{8}$ ",  {top: "215px", left: rectLeftAlign + 282 + 60});
+  av.label("<em>n/4</em>",  {top: "215px", left: rectLeftAlign + 260 + 50});
   for (i = 0; i < 2; i++) {
-    av.g.rect(rectLeftAlign + 250 + 60 + (i * 20 + i * 10), 255, 20, 20);
+    av.g.rect(rectLeftAlign + 250 + 50 + (i * 20), 255, 20, 20);
   }
   arr22.unhighlight();
   av.clearumsg();
@@ -183,7 +181,7 @@ $(document).ready(function() {
   merge(av, arr21, arr22, arr11);
   arr21.hide();
   arr22.hide();
-  av.label("|--- $\\frac{n}{2}$ ---|",  {top: "140px", left: rectLeftAlign + 250 + 8});
+  av.label("|---- <em>n/2</em> ----|", {top: "140px", left: rectLeftAlign + 251});
   for (i = 0; i < 4; i++) {
     av.g.rect(rectLeftAlign + 250 + (i * 20), 180, 20, 20);
   }
@@ -197,7 +195,7 @@ $(document).ready(function() {
   // Slide 18
   arr23 = av.ds.array([arr_values[4], arr_values[5]], {left: 180, top: 150, indexed: false});
   arr24 = av.ds.array([arr_values[6], arr_values[7]], {left: 280, top: 150, indexed: false});
-  av.label("|--- $\\frac{n}{2}$ ---|",  {top: "65px", left: rectLeftAlign + 108});
+  av.label("|---- <em>n/2</em> ----|", {top: "65px", left: rectLeftAlign + 100});
   for (i = 0; i < 4; i++) {
     av.g.rect(rectLeftAlign + 100 + (i * 20), 105, 20, 20);
   }
@@ -212,7 +210,7 @@ $(document).ready(function() {
   // Slide 20
   arr35 = av.ds.array([arr_values[4]], {left: 160, top: 225, indexed: false});
   arr36 = av.ds.array([arr_values[5]], {left: 230, top: 225, indexed: false});
-  av.label("|- $\\frac{n}{4}$ -|",  {top: "140px", left: rectLeftAlign + 100});
+  av.label("<em>n/4</em>",  {top: "140px", left: rectLeftAlign + 110});
   for (i = 0; i < 2; i++) {
     av.g.rect(rectLeftAlign + 100 + (i * 20), 180, 20, 20);
   }
@@ -228,10 +226,9 @@ $(document).ready(function() {
   merge(av, arr35, arr36, arr23);
   arr35.hide();
   arr36.hide();
-  av.label("$\\frac{n}{8}$ ",  {top: "215px", left: rectLeftAlign + 252 + 120});
-  av.label("$\\frac{n}{8}$ ",  {top: "215px", left: rectLeftAlign + 282 + 120});
+  av.label("<em>n/4</em> ",  {top: "215px", left: rectLeftAlign + 260 + 100});
   for (i = 0; i < 2; i++) {
-    av.g.rect(rectLeftAlign + 250 + 120 + (i * 20 + i * 10), 255, 20, 20);
+    av.g.rect(rectLeftAlign + 250 + 100 + (i * 20), 255, 20, 20);
   }
   arr23.unhighlight();
   av.clearumsg();
@@ -245,7 +242,7 @@ $(document).ready(function() {
   // Slide 24
   arr37 = av.ds.array([arr_values[6]], {left: 260, top: 225, indexed: false});
   arr38 = av.ds.array([arr_values[7]], {left: 330, top: 225, indexed: false});
-  av.label("|- $\\frac{n}{4}$ -|",  {top: "140px", left: rectLeftAlign + 150});
+  av.label("<em>n/4</em>",  {top: "140px", left: rectLeftAlign + 160});
   for (i = 0; i < 2; i++) {
     av.g.rect(rectLeftAlign + 150 + (i * 20), 180, 20, 20);
   }
@@ -261,10 +258,9 @@ $(document).ready(function() {
   merge(av, arr37, arr38, arr24);
   arr37.hide();
   arr38.hide();
-  av.label("$\\frac{n}{8}$ ",  {top: "215px", left: rectLeftAlign + 252 + 180});
-  av.label("$\\frac{n}{8}$ ",  {top: "215px", left: rectLeftAlign + 282 + 180});
+  av.label("<em>n/4</em> ",  {top: "215px", left: rectLeftAlign + 260 + 150});
   for (i = 0; i < 2; i++) {
-    av.g.rect(rectLeftAlign + 250 + 180 + (i * 20 + i * 10), 255, 20, 20);
+    av.g.rect(rectLeftAlign + 250 + 150 + (i * 20), 255, 20, 20);
   }
   arr24.unhighlight();
   av.clearumsg();
@@ -280,7 +276,7 @@ $(document).ready(function() {
   merge(av, arr23, arr24, arr12);
   arr23.hide();
   arr24.hide();
-  av.label("|--- $\\frac{n}{2}$ ---|",  {top: "140px", left: "708px"});
+  av.label("|---- <em>n/2</em> ----|", {top: "140px", left: "701px"});
   for (i = 0; i < 4; i++) {
     av.g.rect(700 + (i * 20), 180, 20, 20);
   }
@@ -296,7 +292,7 @@ $(document).ready(function() {
   merge(av, arr11, arr12, arr);
   arr11.hide();
   arr12.hide();
-  av.label("|----------- $n$ -----------|",  {top: "65px", left: rectLeftAlign + 250 + 5});
+  av.label("|------------- <em>n</em> -------------|",  {top: "65px", left: rectLeftAlign + 250 + 2});
   for (i = 0; i < 8; i++) {
     av.g.rect(rectLeftAlign + 250 + (i * 20), 105, 20, 20);
   }
@@ -305,7 +301,7 @@ $(document).ready(function() {
 
   // Slide 31
   av.umsg(interpret["Slide 31"]);
-  av.label("|--------------- $\\log{n+1}$---------------|", {top: "125px", left: "200px"}).addClass("largeLabel rotated");
+  av.label("|----------------- <em>log(n)</em> -----------------|", {top: "125px", left: "205px"}).addClass("largeLabel rotated");
   av.step();
 
   // Slide 32

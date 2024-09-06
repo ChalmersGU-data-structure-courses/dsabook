@@ -8,16 +8,16 @@ $(document).ready(function() {
 
   var interpret = {
     "Slide 1": "What is the average number of inversions?",
-    "Slide 2": "Consider a list $L$ containing $n$ values.",
-    "Slide 3": "Define $L_R$ to be $L$ in reverse.",
+    "Slide 2": "Consider a list <em>L</em> containing <em>n</em> values.",
+    "Slide 3": "Define <em>L<sub>R</sub></em> to be <em>L</em> in reverse.",
     "Slide 4": "For example, if we have input list 3 4 1 2, the reverse list is 2 1 4 3",
-    "Slide 5": "$L$ has ${n\\choose 2} = \\frac{n(n-1)}{2}$ distinct pairs of values, each of which could potentially be an inversion.",
+    "Slide 5": "<em>L</em> has <em>n(n-1)/2</em> distinct pairs of values, each of which could potentially be an inversion.",
     "Slide 6": "<br>In our example, we have 6 distinct pairs",
-    "Slide 12": "Each such pair must either be an inversion in $L$ or in $L_R$.",
+    "Slide 12": "Each such pair must either be an inversion in <em>L</em> or in <em>L<sub>R</sub></em>.",
     "Slide 13": "<br>Here in the example, 3 comes before 4 in the original list, and 4 comes before 3 in the reverse list.",
-    "Slide 14": "Thus, the total number of inversions in $L$ and $L_R$ together is exactly $\\frac{n(n-1)}{2}$",
-    "Slide 15": "This means that the average number of inversions must be half of that, or $\\frac{n(n-1)}{4}$ per list.",
-    "Slide 16": "We therefore know with certainty that any sorting algorithm which limits comparisons to adjacent items will cost at least $\\frac{n(n-1)}{4}=\\Omega(n^2)$ in the average case."
+    "Slide 14": "Thus, the total number of inversions in <em>L</em> and <em>L<sub>R</sub></em> together is exactly <em>n(n-1)/2</em>",
+    "Slide 15": "This means that the average number of inversions must be half of that, or <em>n(n-1)/4</em> per list.",
+    "Slide 16": "We therefore know with certainty that any sorting algorithm which limits comparisons to adjacent items will cost at least <em>n(n-1)/4 = &Omega;(n<sup>2</sup>)</em> in the average case."
   };
 
   var arr1, arr3, arr4;
@@ -31,16 +31,16 @@ $(document).ready(function() {
 
   //Slide 2
   av.umsg(interpret["Slide 2"]);
-  arr1 = av.ds.array(["$x_1$", "$x_2$", "$x_3$", "...", "$x_{n-1}$", "$x_n$"],
+  arr1 = av.ds.array(["<em>x<sub>1</sub></em>", "<em>x<sub>2</sub></em>", "<em>x<sub>3</sub></em>", "...", "<em>x<sub>n-1</sub></em>", "<em>x<sub>n</sub></em>"],
                      {left: leftAlign, top: topAlign, indexed: false});
-  labelSet.push(av.label("$L$", {left: leftAlign + 75, top: topAlign + 40}).css({"font-size": "22px", "text-align": "center", "font-style": "bold"}));
+  labelSet.push(av.label("<em>L</em>", {left: leftAlign + 75, top: topAlign + 40}).css({"font-size": "22px", "text-align": "center", "font-style": "bold"}));
   av.step();
 
   //Slide 3
   av.umsg(interpret["Slide 3"]);
-  av.ds.array(["$x_n$", "$x_{n-1}$", "...", "$x_3$", "$x_2$", "$x_1$"],
+  av.ds.array(["<em>x<sub>n</sub></em>", "<em>x<sub>n-1</sub></em>", "...", "<em>x<sub>3</sub></em>", "<em>x<sub>2</sub></em>", "<em>x<sub>1</sub></em>"],
               {left: leftAlign + 250, top: topAlign, indexed: false});
-  labelSet.push(av.label("$L_R$", {left: leftAlign + 325, top: topAlign + 40}).css({"font-size": "22px", "text-align": "center", "font-style": "bold"}));
+  labelSet.push(av.label("<em>L<sub>R</sub></em>", {left: leftAlign + 325, top: topAlign + 40}).css({"font-size": "22px", "text-align": "center", "font-style": "bold"}));
   av.step();
 
   //Slide 4

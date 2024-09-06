@@ -8,29 +8,29 @@ $(document).ready(function() {
 
   var interpret = {
 	  "Slide 1": "We will illustrate the Sorting Lower bound proof by showing the decision tree that models the processing of InsertionSort on an array of 3 elements XYZ",
-	  "Slide 2": "There are $6$ possible permutations of the array values XYZ, only one of them represents the sorted array",
+	  "Slide 2": "There are <em>6</em> possible permutations of the array values XYZ, only one of them represents the sorted array",
 	  "Slide 3": "The first step in insertion sort is to compare the second element Y with the first element X",
-	  "Slide 4": "If Y is less than X, the two values are swapped, and then we will end up having only $3$ permutations",
-	  "Slide 5": "If Y is not less than X, no swap will occur and we will end up having only $3$ permutations",
+	  "Slide 4": "If Y is less than X, the two values are swapped, and then we will end up having only <em>3</em> permutations",
+	  "Slide 5": "If Y is not less than X, no swap will occur and we will end up having only <em>3</em> permutations",
 	  "Slide 6": "Let us assume for the moment that Y is less than X and so the left branch is taken",
 	  "Slide 7": "The third element Z is compared to the second element X",
-	  "Slide 8": "Again, there are two possibilities. If Z is less than X, then these items should be swapped and we will end up having $2$ permutations",
-	  "Slide 9": "If Z is not less than X, no swap will occur and we will end up having only $1$ permutation and InsertionSort is complete",
+	  "Slide 8": "Again, there are two possibilities. If Z is less than X, then these items should be swapped and we will end up having <em>2</em> permutations",
+	  "Slide 9": "If Z is not less than X, no swap will occur and we will end up having only <em>1</em> permutation and InsertionSort is complete",
 	  "Slide 10": "If the left branch was taken, Z is then compared to Y and InsertionSort will be completed regardless of the comparision result",
 	  "Slide 11": "In the first comparison, if the right branch was taken, the third element Z is then compared to the second element Y",
-	  "Slide 12": "If Z is less than Y, the two values are swapped, and then we will end up having only $2$ permutations",
-	  "Slide 13": "If Z is not less than Y, no swap will occur and we will end up having only $1$ permutation and InsertionSort is complete",
+	  "Slide 12": "If Z is less than Y, the two values are swapped, and then we will end up having only <em>2</em> permutations",
+	  "Slide 13": "If Z is not less than Y, no swap will occur and we will end up having only <em>1</em> permutation and InsertionSort is complete",
 	  "Slide 14": "If the left branch was taken, Z is then compared to X and InsertionSort will be completed regardless of the comparision result",
 	  "Slide 15": "The cost of the algorithm (In worst, best, and average cases) is determined by the depth of the nodes indicating the number of comparasions required to reach that node",
 	  "Slide 16": "The worst case of the algorithm is determined by the depth of the deepest node(s)",
 	  "Slide 17": "Each Sorting algorithm has its own decision tree with different maximum depths",
 	  "Slide 18": "The best algorithm (in the worst case) will be the one with the shallowest deepest node",
 	  "Slide 19": "The depth of the shallowest deepest node depends in part on the number of nodes in the decision tree",
-	  "Slide 20": "The minimum number of nodes that must be in the decision tree for any comparison-based sorting algorithm for $n$ values should be $n!$ since the decision tree must have at least $n!$ leaf nodes, since at least one leaf node will correspond to each input permutation",
-	  "Slide 21": "A tree with $n$ nodes requires a minimum of $\\log n$ levels.",
-	  "Slide 22": "Because there are at least $n!$ nodes in the tree, we know that the tree must have $\\Omega(\\log{n!})$ levels",
-	  "Slide 23": "Accordingly, the decision tree for any comparison-based sorting algorithm must have at least one node that is $\\Omega(n\\log{n})$ levels deep. This deepest node represents the algorithm's worst case.",
-	  "Slide 24": "So in the worst case, any such sorting algorithm must require $\\Omega(n\\log{n})$ comparisons"
+	  "Slide 20": "The minimum number of nodes that must be in the decision tree for any comparison-based sorting algorithm for <em>n</em> values should be <em>n!</em> since the decision tree must have at least <em>n!</em> leaf nodes, since at least one leaf node will correspond to each input permutation",
+	  "Slide 21": "A tree with <em>n</em> nodes requires a minimum of <em>log(n)</em> levels.",
+	  "Slide 22": "Because there are at least <em>n!</em> nodes in the tree, we know that the tree must have &Omega;<em>(log(n!))</em> levels",
+	  "Slide 23": "Accordingly, the decision tree for any comparison-based sorting algorithm must have at least one node that is &Omega;<em>(n log(n))</em> levels deep. This deepest node represents the algorithm's worst case.",
+	  "Slide 24": "So in the worst case, any such sorting algorithm must require &Omega;<em>(n log(n))</em> comparisons"
   };
 
   var set = av.g.set(); //Graphical primitive set to hold the entire tree in a single JSAV object;
@@ -57,7 +57,7 @@ $(document).ready(function() {
 
   // Slide 3
   av.umsg(interpret["Slide 3"]);
-  label_set.push(av.label("$Y < X?$", {top: "95px", left: "392px"}).addClass("smallLabel"));
+  label_set.push(av.label("Y < X ?", {top: "95px", left: "392px"}).addClass("smallLabel"));
   av.step();
 
   // Slide 4
@@ -89,7 +89,7 @@ $(document).ready(function() {
 
   // Slide 7
   av.umsg(interpret["Slide 7"]);
-  label_set.push(av.label("$Z < X?$", {top: "230px", left: "277px"}).addClass("smallLabel"));
+  label_set.push(av.label("Z < X ?", {top: "230px", left: "277px"}).addClass("smallLabel"));
   av.step();
 
   // Slide 8
@@ -115,7 +115,7 @@ $(document).ready(function() {
   // Slide 10
   av.umsg(interpret["Slide 10"]);
   left_branch_2.css({"stroke-width": 3, stroke: "red"});
-  label_set.push(av.label("$Z < Y?$", {top: "335px", left: "192px"}).addClass("smallLabel"));
+  label_set.push(av.label("Z < Y ?", {top: "335px", left: "192px"}).addClass("smallLabel"));
   set.push(av.g.line(190, 340, 130, 380));
   set.push(av.g.line(240, 340, 300, 380));
   label_set.push(av.label("Yes", {top: "330px", left: "140px"}).addClass("smallLabel"));
@@ -133,7 +133,7 @@ $(document).ready(function() {
   left_branch_1.css({"stroke-width": 1, stroke: "black"});
   left_branch_2.css({"stroke-width": 1, stroke: "black"});
   right_branch_1.css({"stroke-width": 3, stroke: "red"});
-  label_set.push(av.label("$Z < Y?$", {top: "230px", left: "497px"}).addClass("smallLabel"));
+  label_set.push(av.label("Z < Y ?", {top: "230px", left: "497px"}).addClass("smallLabel"));
   av.step();
 
   // Slide 12
@@ -159,7 +159,7 @@ $(document).ready(function() {
   // Slide 14
   av.umsg(interpret["Slide 14"]);
   left_branch_3.css({"stroke-width": 3, stroke: "red"});
-  label_set.push(av.label("$Z < X?$", {top: "335px", left: "420px"}).addClass("smallLabel"));
+  label_set.push(av.label("Z < X ?", {top: "335px", left: "420px"}).addClass("smallLabel"));
   set.push(av.g.line(420, 340, 360, 380));
   set.push(av.g.line(470, 340, 530, 380));
   label_set.push(av.label("Yes", {top: "330px", left: "370px"}).addClass("smallLabel"));

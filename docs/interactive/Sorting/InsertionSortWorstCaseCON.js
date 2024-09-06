@@ -8,20 +8,20 @@ $(document).ready(function() {
 
   var interpret = {
     "sc1": "We first examine the worst case cost.",
-    "sc2": "The body of insertionsort contains two nested for loops.",
-    "sc3": "The outer for loop is executed $n-1$ times.",
-    "sc4": "The inner loop is harder to analyze since it depends on how many records in positions $0$ to $i-1$ have a value less than that of the record in position $i$.",
+    "sc2": "The body of insertion sort contains two nested for loops.",
+    "sc3": "The outer for loop is executed <em>n–1</em> times.",
+    "sc4": "The inner loop is harder to analyze since it depends on how many records in positions <em>0</em> to <em>i–1</em> have a value less than that of the record in position <em>i</em>.",
     "sc5": "Let's consider now a worst case example of an array with 6 elements. Since it is the worst case, each iteration of the outer loop does the greatest possible number of comparisons.",
-    "sc6": "At $i=1$ a single comparison is required. We draw one box.",
-    "sc7": "At $i=2$ two comparisons are required. We draw two boxes.",
-    "sc9": "At $i=3$ three comparisons are required, so three boxes.",
-    "sc12": "At $i=4$ four comparisons are required, so four boxes.",
-    "sc16": "At $i=5$ five comparisons are required, so five boxes.",
+    "sc6": "At <em>i=1</em> a single comparison is required. We draw one box.",
+    "sc7": "At <em>i=2</em> two comparisons are required. We draw two boxes.",
+    "sc9": "At <em>i=3</em> three comparisons are required, so three boxes.",
+    "sc12": "At <em>i=4</em> four comparisons are required, so four boxes.",
+    "sc16": "At <em>i=5</em> five comparisons are required, so five boxes.",
     "sc21": "The total running time now will be the total surface area of this shape.",
     "sc22_1": "The total area will be the sum of the areas of the big triangle <br>",
-    "sc22_2": "+ <br> the series of $(n-1)$ small triangles.",
-    "sc23": "<br>So, the total area is $\\frac{(n-1)(n-1)}{2} + \\frac{(n-1)}{2}$ which gives $\\frac{n(n-1)}{2}$.",
-    "sc24": "Therefore, the worst case running time of insertion sort is $\\theta(n^2)$."
+    "sc22_2": "+ <br> the series of <em>(n–1)</em> small triangles.",
+    "sc23": "<br>So, the total area is <em>(n–1)(n–1)/2 + (n–1)/2</em> which gives <em>n(n–1)/2</em>.",
+    "sc24": "Therefore, the worst case running time of insertion sort is <em>O(n<sup>2</sup>)</em>."
 };
 
   var pseudo = av.code([
@@ -84,7 +84,7 @@ $(document).ready(function() {
   av.umsg(interpret["sc6"]);
   arr.swap(0, 1);
   av.g.rect(leftAlign, topAlign, 50, 20);
-  av.label("$i=1$", {
+  av.label("<em>i=1</em>", {
     top: "300px",
     left: "330px"
   });
@@ -94,7 +94,7 @@ $(document).ready(function() {
   av.umsg(interpret["sc7"]);
   arr.swap(1, 2);
   av.g.rect(leftAlign + rectWidth, topAlign, 50, 20);
-  av.label("$i=2$", {
+  av.label("<em>i=2</em>", {
     top: "300px",
     left: "380px"
   });
@@ -109,7 +109,7 @@ $(document).ready(function() {
   av.umsg(interpret["sc9"]);
   arr.swap(2, 3);
   av.g.rect(leftAlign + 2 * rectWidth, topAlign, 50, 20);
-  av.label("$i=3$", {
+  av.label("<em>i=3</em>", {
     top: "300px",
     left: "430px"
   });
@@ -129,7 +129,7 @@ $(document).ready(function() {
   av.umsg(interpret["sc12"]);
   arr.swap(3, 4);
   av.g.rect(leftAlign + 3 * rectWidth, topAlign, 50, 20);
-  av.label("$i=4$", {
+  av.label("<em>i=4</em>", {
     top: "300px",
     left: "480px"
   });
@@ -154,7 +154,7 @@ $(document).ready(function() {
   av.umsg(interpret["sc16"]);
   arr.swap(4, 5);
   av.g.rect(leftAlign + 4 * rectWidth, topAlign, 50, 20);
-  av.label("$i=5$", {
+  av.label("<em>i=5</em>", {
     top: "300px",
     left: "530px"
   });
@@ -198,7 +198,7 @@ $(document).ready(function() {
             leftAlign, 3.5 * rectHeight + topAlign);
   av.g.line(leftAlign + 5 * rectWidth, 2.5 * rectHeight + topAlign,
             leftAlign + 5 * rectWidth, 3.5 * rectHeight + topAlign);
-  av.label("$n - 1$",
+  av.label("<em>n–1</em>",
            {top: topAlign + 1.5 * rectHeight,
              left: leftAlign + 2 * rectWidth + labelGap});
 
@@ -216,7 +216,7 @@ $(document).ready(function() {
             leftAlign + 5.25 * rectWidth, topAlign + rectHeight);
   av.g.line(leftAlign + 5.75 * rectWidth, topAlign - 4 * rectHeight,
             leftAlign + 5.25 * rectWidth, topAlign - 4 * rectHeight);
-  av.label("$n - 1$",
+  av.label("<em>n–1</em>",
            {top: topAlign - 3 * rectHeight,
              left: leftAlign + 5 * rectWidth + labelGap});
 

@@ -8,17 +8,17 @@ $(document).ready(function() {
 
   var interpret = {
     "sc1": "What is the cost of Bubblesort?",
-    "sc2": "The number of comparisons made by the inner for loop on the $i^{th}$ iteration is always $n-i$.",
+    "sc2": "The number of comparisons made by the inner for loop on iteration <em>i</em> is always <em>n–i</em>.",
     "sc3": "Consider the following example of an array with 6 elements:",
-    "sc4": "At $i=0$ we have 5 comparisons. Let's mark this with 5 boxes.",
-    "sc9": "At $i=1$ we have 4 comparisons, so 4 boxes.",
-    "sc13": "At $i=2$ we have 3 comparisons, so 3 boxes.",
-    "sc17": "At $i=3$ we have 2 comparisons, so 2 boxes.",
-    "sc20": "At $i=4$ we have only 1 comparison, so 1 box.",
+    "sc4": "At <em>i=0</em> we have 5 comparisons. Let's mark this with 5 boxes.",
+    "sc9": "At <em>i=1</em> we have 4 comparisons, so 4 boxes.",
+    "sc13": "At <em>i=2</em> we have 3 comparisons, so 3 boxes.",
+    "sc17": "At <em>i=3</em> we have 2 comparisons, so 2 boxes.",
+    "sc20": "At <em>i=4</em> we have only 1 comparison, so 1 box.",
     "sc21": "The total amount of comparisons will be the surface area of this shape.",
-    "sc22": "The total area will be the sum of the areas of the big triangle $+$ the series of ($n-1$) small traingles.",
-    "sc23": "So, the total area is $\\frac{(n-1)(n-1)}{2} + \\frac{(n-1)}{2} = \\frac{n(n-1)}{2}$.",
-    "sc24": "Therefore, the worst case running time of Bubble sort is $\\theta(n^2).$"
+    "sc22": "The total area will be the sum of the areas of the big triangle + the series of (<em>n–1</em>) small traingles.",
+    "sc23": "So, the total area is <em>(n-1)(n-1)/2 + (n-1)/2 = n(n-1)/2</em>.",
+    "sc24": "Therefore, the worst case running time of Bubble sort is <em>O(n<sup>2</sup>).</em>"
   };
 
   var pseudo = av.code([
@@ -69,7 +69,7 @@ $(document).ready(function() {
     arr.swap(0, 1);
   }
   av.g.rect(leftAlign, topAlign, rectWidth, rectHeight);
-  av.label("$i = 0$",  {top: topAlign + 12, left: leftAlign + 10});
+  av.label("<em>i=0</em>",  {top: topAlign + 12, left: leftAlign + 10});
   av.step();
 
   // Slide 5
@@ -118,7 +118,7 @@ $(document).ready(function() {
     arr.swap(0, 1);
   }
   av.g.rect(leftAlign + rectWidth, topAlign, rectWidth, rectHeight);
-  av.label("$i = 1$",  {top: topAlign + 12, left: leftAlign + rectWidth + 10});
+  av.label("<em>i=1</em>",  {top: topAlign + 12, left: leftAlign + rectWidth + 10});
   av.step();
 
   // Slide 10
@@ -158,7 +158,7 @@ $(document).ready(function() {
     arr.swap(0, 1);
   }
   av.g.rect(leftAlign + 2 * rectWidth, topAlign, rectWidth, rectHeight);
-  av.label("$i = 2$",  {top: topAlign + 12, left: leftAlign + 2 * rectWidth + 10});
+  av.label("<em>i=2</em>",  {top: topAlign + 12, left: leftAlign + 2 * rectWidth + 10});
   av.step();
 
   // Slide 14
@@ -192,7 +192,7 @@ $(document).ready(function() {
     arr.swap(0, 1);
   }
   av.g.rect(leftAlign + 3 * rectWidth, topAlign, rectWidth, rectHeight);
-  av.label("$i = 3$",  {top: topAlign + 12, left: leftAlign + 3 * rectWidth + 10});
+  av.label("<em>i=3</em>",  {top: topAlign + 12, left: leftAlign + 3 * rectWidth + 10});
   av.step();
 
   // Slide 18
@@ -217,7 +217,7 @@ $(document).ready(function() {
     arr.swap(0, 1);
   }
   av.g.rect(leftAlign + 4 * rectWidth, topAlign, rectWidth, rectHeight);
-  av.label("$i = 4$", {top: topAlign + 12, left: leftAlign + 4 * rectWidth + 10});
+  av.label("<em>i=4</em>", {top: topAlign + 12, left: leftAlign + 4 * rectWidth + 10});
   arr.addClass(1, "deemph");
   arr.addClass(0, "deemph");
   arr.removeClass(0, "greenbg");
@@ -238,7 +238,7 @@ $(document).ready(function() {
             leftAlign, 3.5 * rectHeight + topAlign);
   av.g.line(leftAlign + 5 * rectWidth, 2.5 * rectHeight + topAlign,
             leftAlign + 5 * rectWidth, 3.5 * rectHeight + topAlign);
-  av.label("$n - 1$",
+  av.label("<em>n–1</em>",
            {top: topAlign + 1.5 * rectHeight,
              left: leftAlign + 2 * rectWidth + labelGap});
   //Vertical Line
@@ -252,7 +252,7 @@ $(document).ready(function() {
             leftAlign - 0.25 * rectWidth, topAlign + rectHeight);
   av.g.line(leftAlign - 0.75 * rectWidth, topAlign - 4 * rectHeight,
             leftAlign - 0.25 * rectWidth, topAlign - 4 * rectHeight);
-  av.label("$n - 1$",
+  av.label("<em>n–1</em>",
            {top: topAlign - 3 * rectHeight,
              left: leftAlign - rectWidth + labelGap});
   av.step();
