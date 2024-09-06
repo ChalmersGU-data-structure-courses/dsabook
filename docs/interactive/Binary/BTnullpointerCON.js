@@ -30,28 +30,28 @@ $(document).ready(function() {
   arrI.css(2, {"background-color": "LightPink"});
 
   //line for A - B
-  av.g.line(200, 30, 90, 60, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+  av.g.line(200, 40, 90, 70, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
 
   //line for A - C
-  av.g.line(250, 30, 370, 60, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+  av.g.line(250, 40, 370, 70, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
 
   //line for B - D
-  av.g.line(115, 80, 120, 110, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+  av.g.line(115, 90, 120, 120, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
 
   //line for C - E
-  av.g.line(340, 80, 280, 110, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+  av.g.line(340, 90, 280, 120, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
 
   //line for C - F
-  av.g.line(395, 80, 450, 110, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+  av.g.line(395, 90, 450, 120, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
 
   //line for E - G
-  av.g.line(250, 130, 200, 160, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+  av.g.line(250, 140, 200, 170, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
 
   //line for F - H
-  av.g.line(430, 130, 395, 160, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+  av.g.line(430, 140, 395, 170, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
 
   //line for F - I
-  av.g.line(485, 130, 515, 160, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+  av.g.line(485, 140, 515, 170, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
 
   av.displayInit();
   av.recorded();

@@ -31,34 +31,34 @@ $(document).ready(function() {
   arr11.addClass([0], "internalnode");
 
   //line for [-] - [*]
-  av.g.line(440, 30, 400, 70, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+  av.g.line(440, 40, 400, 80, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
 
   //line for [-] - c
-  av.g.line(495, 30, 535, 70, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+  av.g.line(495, 40, 535, 80, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
 
   //line for [*] - [*]
-  av.g.line(370, 90, 290, 130, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+  av.g.line(370, 100, 290, 140, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
 
   //line for [*] - [+]
-  av.g.line(425, 90, 505, 130, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+  av.g.line(425, 100, 505, 140, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
 
   //line for [*] - 4
-  av.g.line(255, 150, 255, 190, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+  av.g.line(255, 160, 255, 200, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
 
   //line for [*] - x
-  av.g.line(315, 150, 315, 190, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+  av.g.line(315, 160, 315, 200, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
 
   //line for [+] - [*]
-  av.g.line(475, 150, 450, 190, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+  av.g.line(475, 160, 450, 200, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
 
   //line for [+] - a
-  av.g.line(535, 150, 565, 190, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+  av.g.line(535, 160, 565, 200, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
 
   //line for [*] - 2
-  av.g.line(420, 210, 420, 250, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+  av.g.line(420, 220, 420, 260, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
 
   //line for [*] - x
-  av.g.line(475, 210, 475, 250, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+  av.g.line(475, 220, 475, 260, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
 
   av.displayInit();
   av.recorded();

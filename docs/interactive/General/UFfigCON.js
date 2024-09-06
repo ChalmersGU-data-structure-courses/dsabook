@@ -13,7 +13,7 @@ $(document).ready(function () {
 
   //Displaying Tree Nodes
   var newNode;
-  var tree = av.ds.tree({top: 85, left: leftoffset + 30, center: true, nodegap: 20});
+  var tree = av.ds.tree({top: 90, left: leftoffset + 30, center: true, nodegap: 20});
   var root = tree.newNode("X");
   tree.root(root); // This "root" node will be hidden
 

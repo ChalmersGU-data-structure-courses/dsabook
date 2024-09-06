@@ -47,7 +47,7 @@ $(document).ready(function () {
 
   //Displaying Tree Nodes
   var newNode;
-  var tree = av.ds.tree({left: 50, top: 260, nodegap: 20});
+  var tree = av.ds.tree({left: 50, top: 200, nodegap: 20});
   var root = tree.newNode("X");
   tree.root(root);
   for (ind = 0; ind < arr.length; ind++) {

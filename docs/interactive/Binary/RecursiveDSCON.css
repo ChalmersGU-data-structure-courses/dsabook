@@ -16,14 +16,17 @@
 
 
 #SumBinaryTreeCON {
-  height: 400px;
+  height: 450px;
 }
 
 
 #SumBinaryTreeCON .jsavlabel { 
-  width: 100px;
+  width: 200px;
   height: 100px;
   color: blue;
   background-image: url(../Icons/person.png);
-  background-size: cover;
+  background-size: auto 70%;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  text-align: center;
 }
