@@ -6,23 +6,23 @@ $(document).ready(function() {
   var av_name = "SummationOneToNCON";
 
   var interpret = {
-    "sc1": "Let's see how to find the closed form solution for $\\displaystyle\\sum_{i=1}^{n}i$.",
-    "sc2": "As an example, suppose that $n = 5$.",
-    "sc3.1": "When $i=1$, this adds $1$ to the summation. Represent this by a single rectangle.",
-    "sc3.2": "<br> $\\displaystyle\\sum_{i=1}^{n=5}i =$ <span style='color:red;'>1</span> $+ \\displaystyle\\sum_{i=2}^{n=5}i.$",
-    "sc4.1": "When $i = 2$, this adds $2$ to the overall summation. Represent this by two rectangles.",
-    "sc4.2": "<br> $\\displaystyle\\sum_{i=1}^{n=5}i = 1 +$ <span style='color:red;'>2</span> $+ \\displaystyle\\sum_{i=3}^{n=5}i$",
-    "sc5.1": "When $i = 3$, this adds $3$ to the summation. Represent this by three rectangles.",
-    "sc5.2": "<br> $\\displaystyle\\sum_{i=1}^{n=5}i = 1 + 2 +$ <span style='color:red;'>3</span> $+ \\displaystyle\\sum_{i=4}^{n=5}i$",
-    "sc6.1": "When $i = 4$, this adds $4$ to the summation. Represent this by four rectangles.",
-    "sc6.2": "<br> $\\displaystyle\\sum_{i=1}^{n=5}i = 1 + 2 + 3 +$ <span style='color:red;'>4</span> $+ \\displaystyle\\sum_{i=5}^{n=5}i$",
-    "sc7.1": "When $i = 5$, this adds $5$ to the summation. Represent this by five rectangles.",
-    "sc7.2": "<br> $\\displaystyle\\sum_{i=1}^{n=5}i = 1 + 2 + 3 + 4 +$ <span style='color:red;'>5</span>",
+    "sc1": "Let's see how to find the closed form solution for <em>&Sigma;<sub>1&le;i&le;n</sub> i</em>.",
+    "sc2": "As an example, suppose that <em>n = 5</em>.",
+    "sc3.1": "When <em>i=1</em>, this adds <em>1</em> to the summation. Represent this by a single rectangle.",
+    "sc3.2": "<br> <em>&Sigma;<sub>1&le;i&le;5</sub> i = <span style='color:red;'>1</span> + &Sigma;<sub>2&le;i&le;5 i.</em>",
+    "sc4.1": "When <em>i = 2</em>, this adds <em>2</em> to the overall summation. Represent this by two rectangles.",
+    "sc4.2": "<br> <em>&Sigma;<sub>1&le;i&le;5</sub> i = 1 + <span style='color:red;'>2</span> + &Sigma;<sub>3&le;i&le;5</sub> i</em>",
+    "sc5.1": "When <em>i = 3</em>, this adds <em>3</em> to the summation. Represent this by three rectangles.",
+    "sc5.2": "<br> <em>&Sigma;<sub>1&le;i&le;5</sub> i = 1 + 2 + <span style='color:red;'>3</span> + &Sigma;<sub>4&le;i&le;5</sub> i</em>",
+    "sc6.1": "When <em>i = 4</em>, this adds <em>4</em> to the summation. Represent this by four rectangles.",
+    "sc6.2": "<br> <em>&Sigma;<sub>1&le;i&le;5</sub> i = 1 + 2 + 3 + <span style='color:red;'>4</span> + &Sigma;<sub>5&le;i&le;5</sub> i</em>",
+    "sc7.1": "When <em>i = 5</em>, this adds <em>5</em> to the summation. Represent this by five rectangles.",
+    "sc7.2": "<br> <em>&Sigma;<sub>1&le;i&le;5</sub> i = 1 + 2 + 3 + 4 + <span style='color:red;'>5</span></em>",
     "sc8": "The closed form solution for this summation can be found by calculating the area of the resulting shape.",
     "sc9": "The area will be the area of the big triangle",
-    "sc10" : "$\\ +$ the sum of the areas of the $n$ small rectangles.",
-    "sc11": "So, the area is $\\displaystyle\\frac{n^2}{2} + \\frac{n}{2} = \\frac{n(n + 1)}{2}$.",
-    "sc12": "Finally, we have $\\displaystyle\\sum_{i=1}^{n} i = \\frac{n(n + 1)}{2}$."
+    "sc10" : "<br/><em>+</em> the sum of the areas of the <em>n</em> small rectangles.",
+    "sc11": "So, the area is <em>n<sup>2</sup>/2 + n/2 = n(n+1)/2</em>.",
+    "sc12": "Finally, we have <em>&Sigma;<sub>1&le;i&le;n</sub> i = n(n+1)/2</em>."
   };
 
   var av;
@@ -45,7 +45,7 @@ $(document).ready(function() {
   av.umsg(interpret["sc3.1"]);
   av.umsg(interpret["sc3.2"], {preserve: true});
   var rect1 = av.g.rect(leftAlign, topAlign, rectWidth, rectHeight).addClass("highlight");
-  av.label("$i = 1$",  {top: topAlign + 12, left: leftAlign + 10});
+  av.label("<em>i = 1</em>",  {top: topAlign + 12, left: leftAlign + 10});
   av.step();
 
   //Slide 4
@@ -54,7 +54,7 @@ $(document).ready(function() {
   rect1.removeClass("highlight");
   var rect21 = av.g.rect(leftAlign + rectWidth, topAlign, rectWidth, rectHeight).addClass("highlight");
   var rect22 = av.g.rect(leftAlign + rectWidth, topAlign - rectHeight, rectWidth, rectHeight).addClass("highlight");
-  av.label("$i = 2$",  {top: topAlign + 12, left: leftAlign + rectWidth + 10});
+  av.label("<em>i = 2</em>",  {top: topAlign + 12, left: leftAlign + rectWidth + 10});
   av.step();
 
   //Slide 5
@@ -65,7 +65,7 @@ $(document).ready(function() {
   var rect31 = av.g.rect(leftAlign + 2 * rectWidth, topAlign, rectWidth, rectHeight).addClass("highlight");
   var rect32 = av.g.rect(leftAlign + 2 * rectWidth, topAlign - rectHeight, rectWidth, rectHeight).addClass("highlight");
   var rect33 = av.g.rect(leftAlign + 2 * rectWidth, topAlign - 2 * rectHeight, rectWidth, rectHeight).addClass("highlight");
-  av.label("$i = 3$",  {top: topAlign + 12, left: leftAlign + 2 * rectWidth + 10});
+  av.label("<em>i = 3</em>",  {top: topAlign + 12, left: leftAlign + 2 * rectWidth + 10});
   av.step();
 
   //Slide 6
@@ -78,7 +78,7 @@ $(document).ready(function() {
   var rect42 = av.g.rect(leftAlign + 3 * rectWidth, topAlign - rectHeight, rectWidth, rectHeight).addClass("highlight");
   var rect43 = av.g.rect(leftAlign + 3 * rectWidth, topAlign - 2 * rectHeight, rectWidth, rectHeight).addClass("highlight");
   var rect44 = av.g.rect(leftAlign + 3 * rectWidth, topAlign - 3 * rectHeight, rectWidth, rectHeight).addClass("highlight");
-  av.label("$i = 4$",  {top: topAlign + 12, left: leftAlign + 3 * rectWidth + 10});
+  av.label("<em>i = 4</em>",  {top: topAlign + 12, left: leftAlign + 3 * rectWidth + 10});
   av.step();
 
   //Slide 7
@@ -93,7 +93,7 @@ $(document).ready(function() {
   var rect53 = av.g.rect(leftAlign + 4 * rectWidth, topAlign - 2 * rectHeight, rectWidth, rectHeight).addClass("highlight");
   var rect54 = av.g.rect(leftAlign + 4 * rectWidth, topAlign - 3 * rectHeight, rectWidth, rectHeight).addClass("highlight");
   var rect55 = av.g.rect(leftAlign + 4 * rectWidth, topAlign - 4 * rectHeight, rectWidth, rectHeight).addClass("highlight");
-  av.label("$i = 5$",  {top: topAlign + 12, left: leftAlign + 4 * rectWidth + 10});
+  av.label("<em>i = 5</em>",  {top: topAlign + 12, left: leftAlign + 4 * rectWidth + 10});
   av.step();
 
   //Slide 8
@@ -106,7 +106,7 @@ $(document).ready(function() {
   av.g.line(leftAlign + 0.25 * rectWidth, topAlign + 2.25 * rectHeight,
             leftAlign + 2.25 * rectWidth, topAlign + 2.25 * rectHeight,
             {"stroke-width": 2, "arrow-start": "classic-wide-long"});
-  av.label("$n$",
+  av.label("<em>n</em>",
            {top: topAlign + rectHeight,
              left: leftAlign + 2.35 * rectWidth});
   av.g.line(leftAlign + 2.75 * rectWidth, topAlign + 2.25 * rectHeight,
@@ -115,7 +115,7 @@ $(document).ready(function() {
   av.g.line(leftAlign + 5.25 * rectWidth, topAlign - 3.75 * rectHeight,
             leftAlign + 5.25 * rectWidth, topAlign - 1.75 * rectHeight,
             {"stroke-width": 2, "arrow-start": "classic-wide-long"});
-  av.label("$n$",
+  av.label("<em>n</em>",
            {top: topAlign - 2.35 * rectHeight,
              left: leftAlign + 5.15 * rectWidth});
   av.g.line(leftAlign + 5.25 * rectWidth, topAlign - 0.75 * rectHeight,

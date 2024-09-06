@@ -11,27 +11,27 @@ $(document).ready(function() {
   var xLength = 150; // Graph x axis size
 
   // First, draw the top row of graphs: for an arbitrary (but specific) value of n
-  av.label("Costs for all inputs of an arbitrary (but fixed) size $n$ for three representative algorithms", {top: topAlign - 50, left: 130}).addClass("largeLabel");
+  av.label("Costs for all inputs of an arbitrary (but fixed) size <em>n</em> for three representative algorithms", {top: topAlign - 50, left: 130}).addClass("largeLabel");
 
   var axis = av.g.polyline([[left, topAlign], [left, topAlign + yLength],
                             [left + xLength, topAlign + yLength]]);
-  var xLabel = av.label("$I_n$", {top: topAlign + yLength - 5,
+  var xLabel = av.label("<em>I<sub>n</sub></em>", {top: topAlign + yLength - 5,
                                  left: left + xLength - 75}).addClass("smallLabel");
   av.label("cheap", {top: topAlign + yLength - 5, left: left}).addClass("smallLabel");
   av.label("expensive", {top: topAlign + yLength - 5, left: left + 120}).addClass("smallLabel");
-  av.label("$2^n-1$", {top: topAlign + 3, left: left - 30}).addClass("smallLabel");
+  av.label("<em>2<sup>n</sup>-1</em>", {top: topAlign + 3, left: left - 30}).addClass("smallLabel");
   av.label("_", {top: topAlign - 20, left: left - 4}).addClass("largeLabel");
-  av.label("$*$", {top: topAlign - 10, left: left + 70});
+  av.label("<em>*</em>", {top: topAlign - 10, left: left + 70});
   av.label("Towers of Hanoi", {top: topAlign + 150, left: left + 20});
 
   left += 250;
   var axis = av.g.polyline([[left, topAlign], [left, topAlign + yLength],
                             [left + xLength, topAlign + yLength]]);
-  xLabel = av.label("$I_n$", {top: topAlign + yLength - 5,
+  xLabel = av.label("<em>I<sub>n</sub></em>", {top: topAlign + yLength - 5,
                                  left: left + xLength - 75}).addClass("smallLabel");
   av.label("cheap", {top: topAlign + yLength - 5, left: left}).addClass("smallLabel");
   av.label("expensive", {top: topAlign + yLength - 5, left: left + 120}).addClass("smallLabel");
-  av.label("$n$", {top: topAlign - 10, left: left - 20});
+  av.label("<em>n</em>", {top: topAlign - 10, left: left - 20});
   av.label("_", {top: topAlign - 20, left: left - 4}).addClass("largeLabel");
   av.g.line(left, topAlign + 16, left + xLength, topAlign + 16);
   av.label("FindMax", {top: topAlign + 150, left: left + 50});
@@ -39,13 +39,13 @@ $(document).ready(function() {
   left += 250;
   var axis = av.g.polyline([[left, topAlign], [left, topAlign + yLength],
                             [left + xLength, topAlign + yLength]]);
-  xLabel = av.label("$I_n$", {top: topAlign + yLength - 5,
+  xLabel = av.label("<em>I<sub>n</sub></em>", {top: topAlign + yLength - 5,
                                  left: left + xLength - 75}).addClass("smallLabel");
   av.label("cheap", {top: topAlign + yLength - 5, left: left}).addClass("smallLabel");
   av.label("expensive", {top: topAlign + yLength - 5, left: left + 120}).addClass("smallLabel");
-  av.label("$n$", {top: topAlign - 10, left: left - 20});
+  av.label("<em>n</em>", {top: topAlign - 10, left: left - 20});
   av.label("_", {top: topAlign - 20, left: left - 4}).addClass("largeLabel");
-  av.label("$1$", {top: topAlign + xLength - 40, left: left - 20});
+  av.label("<em>1</em>", {top: topAlign + xLength - 40, left: left - 20});
   av.label("_", {top: topAlign + xLength - 50, left: left - 4}).addClass("largeLabel");
   av.g.line(left, topAlign + xLength - 14, left + xLength, topAlign + 16);
   av.label("Find", {top: topAlign + 150, left: left + 70});
@@ -54,16 +54,16 @@ $(document).ready(function() {
   // Now, draw the second row of graphs: Behavior as n grows toward infinity
   topAlign += 260;
   left = 100;
-  av.label("Costs, as $n$ grows, for some representative algorithms", {top: topAlign - 50, left: 200}).addClass("largeLabel");
+  av.label("Costs, as <em>n</em> grows, for some representative algorithms", {top: topAlign - 50, left: 200}).addClass("largeLabel");
   av.g.polyline([[left, topAlign], [left, topAlign + yLength],
                  [left + xLength, topAlign + yLength]]);
-  av.label("$n$", {top: topAlign + yLength - 5,
+  av.label("<em>n</em>", {top: topAlign + yLength - 5,
                    left: left + xLength - 75}).addClass("smallLabel");
   av.label("cheap", {top: topAlign + yLength - 5, left: left}).addClass("smallLabel");
   av.label("expensive", {top: topAlign + yLength - 5, left: left + 120}).addClass("smallLabel");
-  av.label("$2^n-1$", {top: topAlign + 3, left: left - 30}).addClass("smallLabel");
+  av.label("<em>2<sup>n</sup>-1</em>", {top: topAlign + 3, left: left - 30}).addClass("smallLabel");
   av.label("_", {top: topAlign - 20, left: left - 4}).addClass("largeLabel");
-  av.label("$T(n) = 2^n-1$", {top: topAlign + 50, left: left + 30});
+  av.label("<em>T(n) = 2<sup>n</sup>-1</em>", {top: topAlign + 50, left: left + 30});
   av.label("Towers of Hanoi", {top: topAlign + 150, left: left + 20});
 
   var xGraph = left;
@@ -80,13 +80,13 @@ $(document).ready(function() {
   left += 250;
   av.g.polyline([[left, topAlign], [left, topAlign + yLength],
                  [left + xLength, topAlign + yLength]]);
-  av.label("$n$", {top: topAlign + yLength - 5,
+  av.label("<em>n</em>", {top: topAlign + yLength - 5,
                    left: left + xLength - 75}).addClass("smallLabel");
   av.label("cheap", {top: topAlign + yLength - 5, left: left}).addClass("smallLabel");
   av.label("expensive", {top: topAlign + yLength - 5, left: left + 120}).addClass("smallLabel");
-  av.label("$n$", {top: topAlign - 10, left: left - 20});
+  av.label("<em>n</em>", {top: topAlign - 10, left: left - 20});
   av.label("_", {top: topAlign - 20, left: left - 4}).addClass("largeLabel");
-  av.label("$1$", {top: topAlign + xLength - 40, left: left - 20});
+  av.label("<em>1</em>", {top: topAlign + xLength - 40, left: left - 20});
   av.label("_", {top: topAlign + xLength - 50, left: left - 4}).addClass("largeLabel");
   av.g.line(left, topAlign + xLength - 14, left + xLength, topAlign + 16);
   av.label("FindMax", {top: topAlign + 150, left: left + 50});
@@ -94,11 +94,11 @@ $(document).ready(function() {
   left += 250;
   av.g.polyline([[left, topAlign], [left, topAlign + yLength],
                  [left + xLength, topAlign + yLength]]);
-  av.label("$n$", {top: topAlign + yLength - 5,
+  av.label("<em>n</em>", {top: topAlign + yLength - 5,
                    left: left + xLength - 75}).addClass("smallLabel");
   av.label("cheap", {top: topAlign + yLength - 5, left: left}).addClass("smallLabel");
   av.label("expensive", {top: topAlign + yLength - 5, left: left + 120}).addClass("smallLabel");
-  av.label("$1$", {top: topAlign + xLength - 40, left: left - 20});
+  av.label("<em>1</em>", {top: topAlign + xLength - 40, left: left - 20});
   av.label("_", {top: topAlign + xLength - 50, left: left - 4}).addClass("largeLabel");
   av.g.line(left, topAlign + xLength - 14, left + xLength, topAlign + xLength - 14);
   av.label("Find (Best)", {top: topAlign + 150, left: left + 40});
@@ -106,13 +106,13 @@ $(document).ready(function() {
   topAlign += 190;
   av.g.polyline([[left, topAlign], [left, topAlign + yLength],
                  [left + xLength, topAlign + yLength]]);
-  av.label("$n$", {top: topAlign + yLength - 5,
+  av.label("<em>n</em>", {top: topAlign + yLength - 5,
                    left: left + xLength - 75}).addClass("smallLabel");
   av.label("cheap", {top: topAlign + yLength - 5, left: left}).addClass("smallLabel");
   av.label("expensive", {top: topAlign + yLength - 5, left: left + 120}).addClass("smallLabel");
-  av.label("$n$", {top: topAlign - 10, left: left - 20});
+  av.label("<em>n</em>", {top: topAlign - 10, left: left - 20});
   av.label("_", {top: topAlign - 20, left: left - 4}).addClass("largeLabel");
-  av.label("$1$", {top: topAlign + xLength - 40, left: left - 20});
+  av.label("<em>1</em>", {top: topAlign + xLength - 40, left: left - 20});
   av.label("_", {top: topAlign + xLength - 50, left: left - 4}).addClass("largeLabel");
   av.g.line(left, topAlign + xLength - 14, left + xLength, topAlign + xLength/2);
   av.label("Find (Average)", {top: topAlign + 150, left: left + 40});
@@ -120,13 +120,13 @@ $(document).ready(function() {
   topAlign += 190;
   av.g.polyline([[left, topAlign], [left, topAlign + yLength],
                  [left + xLength, topAlign + yLength]]);
-  av.label("$n$", {top: topAlign + yLength - 5,
+  av.label("<em>n</em>", {top: topAlign + yLength - 5,
                    left: left + xLength - 75}).addClass("smallLabel");
   av.label("cheap", {top: topAlign + yLength - 5, left: left}).addClass("smallLabel");
   av.label("expensive", {top: topAlign + yLength - 5, left: left + 120}).addClass("smallLabel");
-  av.label("$n$", {top: topAlign - 10, left: left - 20});
+  av.label("<em>n</em>", {top: topAlign - 10, left: left - 20});
   av.label("_", {top: topAlign - 20, left: left - 4}).addClass("largeLabel");
-  av.label("$1$", {top: topAlign + xLength - 40, left: left - 20});
+  av.label("<em>1</em>", {top: topAlign + xLength - 40, left: left - 20});
   av.label("_", {top: topAlign + xLength - 50, left: left - 4}).addClass("largeLabel");
   av.g.line(left, topAlign + xLength - 14, left + xLength, topAlign + 16);
   av.label("Find (Worst)", {top: topAlign + 150, left: left + 40});

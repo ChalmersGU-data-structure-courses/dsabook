@@ -64,12 +64,12 @@ $(document).ready(function() {
   // draw dashline and label for 10n
   var dash1 = Plot.drawDash(_10n, xStart, yStart, xEnd, xMax, yMax, height);
   av.g.line(dash1).addClass("dashLine");
-  av.label("$10n$",  {left: dash1[2] - 30, top: dash1[3] - 35});
+  av.label("<em>10n</em>",  {left: dash1[2] - 50, top: dash1[3] - 35});
 
   // draw dashline and label for 10n
   var dash2 = Plot.drawDash(_20n, xStart, yStart, xEnd, xMax, yMax, height);
   av.g.line(dash2).addClass("dashLine");
-  av.label("$20n$",  {left: dash2[2] - 30, top: dash2[3] - 35});
+  av.label("<em>20n</em>",  {left: dash2[2] - 50, top: dash2[3] - 30});
 
   function _10n(n) {
     return 10 * n;
@@ -81,19 +81,19 @@ $(document).ready(function() {
 
   var curve1 = Plot.drawCurve(_5nlog2n, xStart, yStart, yEnd, xMax, yMax, width, height, 1, true);
   av.g.polyline(curve1, {"stroke-width": 3});
-  av.label("$5n\\log_2{n}$", {left: 635, top: 35});
+  av.label("<em>5n log<sub>2</sub>(n)</em>", {left: 600, top: 50});
 
   var curve2 = Plot.drawCurve(_2npow2, xStart, yStart, yEnd, xMax, yMax, width, height, 0.1, false);
   av.g.polyline(curve2, {"stroke-width": 3});
-  av.label("$2n^2$", {left: 395, top: 35});
+  av.label("<em>2n<sup>2</sup></em>", {left: 390, top: 35});
 
   var curve3 = Plot.drawCurve(_2pown, xStart, yStart, yEnd, xMax, yMax, width, height, 0.01, false);
   av.g.polyline(curve3, {"stroke-width": 3});
-  av.label("$2^n$", {left: 205, top: 35});
+  av.label("<em>2<sup>n</<sup></em>", {left: 205, top: 35});
 
   var curve4 = Plot.drawCurve(_factorial, xStart, yStart, yEnd, xMax, yMax, width, height, 0.25, false);
   av.g.polyline(curve4, {"stroke-width": 3});
-  av.label("$n!$", {left: 155, top: 35});
+  av.label("<em>n!</em>", {left: 155, top: 35});
   av.displayInit();
   av.recorded();
 

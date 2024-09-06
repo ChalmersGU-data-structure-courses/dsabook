@@ -7,21 +7,21 @@ $(document).ready(function() {
   var av = new JSAV(av_name);
 
   var interpret = {
-    "sc1": "For some algorithms, different inputs of a given size require different amounts of time. For example, consider the problem of searching an array containing $n$ integers to find the one with a particular value $K$ (assume that $K$ appears exactly once in the array).",
-    "sc2": "The algorithm accepts as its input an array of $n$ keys and the target key $K$ to search for.",
-    "sc3": "The sequential search algorithm begins at the first position in the array and looks at each value in turn until $K$ is found. Once $K$ is found, the algorithm stops. This is different from the largest-value sequential search algorithm, which always examines every array value.",
-    "sc4": "There is a wide range of possible running times for the sequential search algorithm. The first integer in the array could have value $K$, and so only one integer is examined.",
-    "sc5": "In this case the running time is short. This is the <b>best case</b> for this algorithm, because it is not possible for sequential search to look at less than one value. In this case the sequencial search algorithm will find $K$ at the first comparison.",
+    "sc1": "For some algorithms, different inputs of a given size require different amounts of time. For example, consider the problem of searching an array containing <em>n</em> integers to find the one with a particular value <em>K</em> (assume that <em>K</em> appears exactly once in the array).",
+    "sc2": "The algorithm accepts as its input an array of <em>n</em> keys and the target key <em>K</em> to search for.",
+    "sc3": "The sequential search algorithm begins at the first position in the array and looks at each value in turn until <em>K</em> is found. Once <em>K</em> is found, the algorithm stops. This is different from the largest-value sequential search algorithm, which always examines every array value.",
+    "sc4": "There is a wide range of possible running times for the sequential search algorithm. The first integer in the array could have value <em>K</em>, and so only one integer is examined.",
+    "sc5": "In this case the running time is short. This is the <b>best case</b> for this algorithm, because it is not possible for sequential search to look at less than one value. In this case the sequencial search algorithm will find <em>K</em> at the first comparison.",
     "sc6": "<br>After that the algorithm will terminate, returning 0 as the target's index.",
-    "sc7": "Alternatively, if the last position in the array contains $K$, then the running time is relatively long, because the algorithm must examine $n$ values.",
-    "sc8": "<br>This is the <b>worst case</b> for this algorithm, because sequential search never looks at more than each of the $n$ values in the array.",
-    "sc9": "If we implement sequential search as a program and run it many times on many different arrays of size $n$, or search for many different values of $K$ within the same array, we expect the algorithm on average to go halfway through the array before finding the value we seek.",
-    "sc10": "<br>On average, the algorithm examines $\\frac{n+1}{2}$ values. We call this the <b>average case</b> for this algorithm.",
+    "sc7": "Alternatively, if the last position in the array contains <em>K</em>, then the running time is relatively long, because the algorithm must examine <em>n</em> values.",
+    "sc8": "<br>This is the <b>worst case</b> for this algorithm, because sequential search never looks at more than each of the <em>n</em> values in the array.",
+    "sc9": "If we implement sequential search as a program and run it many times on many different arrays of size <em>n</em>, or search for many different values of <em>K</em> within the same array, we expect the algorithm on average to go halfway through the array before finding the value we seek.",
+    "sc10": "<br>On average, the algorithm examines <em>(n+1)/2</em> values. We call this the <b>average case</b> for this algorithm.",
     "sc11": "Putting things all together...",
     "lab1": "Sequential Search",
     "lab2": "<b><u>Best Case.</u></b> A single comparison is performed.",
-    "lab3": "<b><u>Worst Case</u></b>. $n$ comparisons are performed.",
-    "lab4": "<b><u>Average Case</u></b>. $\\frac{n+1}{2}$ comparisons are performed."
+    "lab3": "<b><u>Worst Case</u></b>. <em>n</em> comparisons are performed.",
+    "lab4": "<b><u>Average Case</u></b>. <em>(n+1)/2</em> comparisons are performed."
   };
 
   var pseudo = av.code([
@@ -54,7 +54,7 @@ $(document).ready(function() {
 
   // Slide 2
   av.umsg(interpret["sc2"]);
-  var nlabel = av.label("|---------------------------- $n$ ----------------------------|", {left: leftAlign + 25, top: topAlign + 60});
+  var nlabel = av.label("|---------------------------- <em>n</em> ----------------------------|", {left: leftAlign + 25, top: topAlign + 60});
   var count = 0;
   while (count < arraySize) {
     var value = Math.round(Math.random() * 10) + 1;
@@ -73,7 +73,7 @@ $(document).ready(function() {
 
   // Slide 4
   av.umsg(interpret["sc4"]);
-  var pointer = av.pointer("$k$", arr.index(0));
+  var pointer = av.pointer("<em>k</em>", arr.index(0));
   pseudo.highlight("comparison");
   av.step();
 
@@ -85,7 +85,7 @@ $(document).ready(function() {
 
   // Slide 6
   av.umsg(interpret["sc6"], {preserve: true});
-  var labelOutput = av.label("index = $0$",
+  var labelOutput = av.label("index = <em>0</em>",
                              {top: topAlign + 15, left: leftAlign + 395 + rectWidth});
   arr.addClass([0], "greenbg");
   pseudo.unhighlight("return");
@@ -141,11 +141,11 @@ $(document).ready(function() {
   labelOutput.hide();
   topAlign = 15;
   var arr1 = av.ds.array(arr_values, {left: leftAlign, top: topAlign + 20, indexed: true});
-  av.pointer("$k$", arr1.index(0));
+  av.pointer("<em>k</em>", arr1.index(0));
   arr1.addClass([0], "greenbg");
   av.label(interpret["lab2"],  {top: topAlign + 25, left: leftAlign + 395});
   var arr2 = av.ds.array(arr_values, {left: leftAlign, top: topAlign + 120, indexed: true});
-  av.pointer("$k$", arr2.index(arraySize - 1));
+  av.pointer("<em>k</em>", arr2.index(arraySize - 1));
   arr2.addClass(indices, "redbg");
   av.label(interpret["lab3"],  {top: topAlign + 125, left: leftAlign + 395});
 

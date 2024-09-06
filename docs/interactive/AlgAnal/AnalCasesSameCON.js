@@ -7,17 +7,17 @@ $(document).ready(function() {
   var av = new JSAV(av_name);
 
   var interpret = {
-    "sc1": "Consider the problem of finding the factorial of $n$.",
-    "sc2": "For this problem, there is only one input of a given 'size'. That is, there is only a single instance for each size of $n$.",
-    "sc3": "For example, $n$ can take the value of 2",
+    "sc1": "Consider the problem of finding the factorial of <em>n</em>.",
+    "sc2": "For this problem, there is only one input of a given 'size'. That is, there is only a single instance for each size of <em>n</em>.",
+    "sc3": "For example, <em>n</em> can take the value of 2",
     "sc4": " or 3",
     "sc5": " or 4.",
     "sc6": "Now consider the largest-value sequential search algorithm, which always examines every array value.",
-    "sc7": "This algorithm works on many inputs of a given size $n$. That is, there are many possible arrays of any given size.",
-    "sc8": "<br>For example, we can have an input array of size $n = 3$",
+    "sc7": "This algorithm works on many inputs of a given size <em>n</em>. That is, there are many possible arrays of any given size.",
+    "sc8": "<br>For example, we can have an input array of size <em>n = 3</em>",
     "sc9": " or 4",
     "sc10": " or 5. For any given size array, there are many possible values in the array cells.",
-    "sc11": "However, no matter what array of size $n$ that the algorithm looks at, its cost will always be the same in that it always looks at every element in the array exactly one time.",
+    "sc11": "However, no matter what array of size <em>n</em> that the algorithm looks at, its cost will always be the same in that it always looks at every element in the array exactly one time.",
     "lab1": "Factorial Problem",
     "lab2": "Sequential Search"
 };
@@ -47,9 +47,9 @@ $(document).ready(function() {
   // Slide 2
   av.umsg(interpret["sc2"]);
   var lineInput = av.g.line(leftAlign + 320, topAlign + 95, leftAlign + 380, topAlign + 95);
-  var labelInput = av.label("$n$", {top: topAlign + 62, left: leftAlign + 285}).addClass("largeLabel");
+  var labelInput = av.label("<em>n</em>", {top: topAlign + 62, left: leftAlign + 285}).addClass("largeLabel");
   var lineOutput = av.g.line(leftAlign + rectWidth + 380, topAlign + 95, leftAlign + rectWidth + 440, topAlign + 95);
-  var labelOutput = av.label("$n!$", {top: topAlign + 62, left: leftAlign + rectWidth + 460}).addClass("largeLabel");
+  var labelOutput = av.label("<em>n!</em>", {top: topAlign + 62, left: leftAlign + rectWidth + 460}).addClass("largeLabel");
   av.step();
 
   // Slide 3
@@ -60,25 +60,25 @@ $(document).ready(function() {
   labelOutput.hide();
 
   var lineInput1 = av.g.line(leftAlign + 320, topAlign + 30, leftAlign + 380, topAlign + 30);
-  var labelInput1 = av.label("$n = 2$", {top: topAlign + 0, left: leftAlign + 250}).addClass("largeLabel");
+  var labelInput1 = av.label("<em>n = 2</em>", {top: topAlign + 0, left: leftAlign + 250}).addClass("largeLabel");
   var lineOutput1 = av.g.line(leftAlign + rectWidth + 380, topAlign + 30, leftAlign + rectWidth + 440, topAlign + 30);
-  var labelOutput1 = av.label("$n! = 2$", {top: topAlign + 0, left: leftAlign + rectWidth + 460}).addClass("largeLabel");
+  var labelOutput1 = av.label("<em>n! = 2</em>", {top: topAlign + 0, left: leftAlign + rectWidth + 460}).addClass("largeLabel");
   av.step();
 
   // Slide 4
   av.umsg(interpret["sc4"], {preserve: true});
   var lineInput2 = av.g.line(leftAlign + 320, topAlign + 95, leftAlign + 380, topAlign + 95);
-  var labelInput2 = av.label("$n = 3$", {top: topAlign + 62, left: leftAlign + 250}).addClass("largeLabel");
+  var labelInput2 = av.label("<em>n = 3</em>", {top: topAlign + 62, left: leftAlign + 250}).addClass("largeLabel");
   var lineOutput2 = av.g.line(leftAlign + rectWidth + 380, topAlign + 95, leftAlign + rectWidth + 440, topAlign + 95);
-  var labelOutput2 = av.label("$n! = 6$", {top: topAlign + 62, left: leftAlign + rectWidth + 460}).addClass("largeLabel");
+  var labelOutput2 = av.label("<em>n! = 6</em>", {top: topAlign + 62, left: leftAlign + rectWidth + 460}).addClass("largeLabel");
   av.step();
 
   // Slide 5
   av.umsg(interpret["sc5"], {preserve: true});
   var lineInput3 = av.g.line(leftAlign + 320, topAlign + 155, leftAlign + 380, topAlign + 155);
-  var labelInput3 = av.label("$n = 4$", {top: topAlign + 124, left: leftAlign + 250}).addClass("largeLabel");
+  var labelInput3 = av.label("<em>n = 4</em>", {top: topAlign + 124, left: leftAlign + 250}).addClass("largeLabel");
   var lineOutput3 = av.g.line(leftAlign + rectWidth + 380, topAlign + 155, leftAlign + rectWidth + 440, topAlign + 155);
-  var labelOutput3 = av.label("$n! = 24$", {top: topAlign + 124, left: leftAlign + rectWidth + 460}).addClass("largeLabel");
+  var labelOutput3 = av.label("<em>n! = 24</em>", {top: topAlign + 124, left: leftAlign + rectWidth + 460}).addClass("largeLabel");
   av.step();
 
   // Slide 6

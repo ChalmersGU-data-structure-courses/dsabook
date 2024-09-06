@@ -7,19 +7,19 @@ $(document).ready(function() {
   var av;
 
   var interpret = {
-    "sc1": "Let's see how we can determine the closed form solution of $T(n) = 2T(n/2) + 5n^2, T(1) = 7$ by expanding the recurrence. We simplify the process by assuming that $n$ is a power of 2.",
-    "sc2.1": "For a problem of size $n$, we have $5n^2$ units of work plus the work required for two subproblems of size $n/2$ each.",
-    "sc2.2": "<br> $T(n) = 5n^2 + 2T(n/2)$",
-    "sc3.1": "For each problem of size $n/2$, we have $5(\\frac{n}{2})^2$ units of work. Since there are two of them this is a total of $\\frac{5n^2}{2}$ units. Each problem generates two subproblems, for a total of four subproblems of size $n/4$.",
-    "sc3.2": "<br> $T(n) = 5n^2 + 2(5(\\frac{n}{2})^2 + 2T(n/4))$",
-    "sc4.1": "For each problem of size $n/4$, we have $5(\\frac{n}{4})^2$ units of work. These total to $\\frac{5n^2}{4}$ units. Each problem of size $n/4$ also now generates two problems of size $n/8$, for a total of eight of these.",
-    "sc4.2": "<br> $T(n) = 5n^2 + 2(5(\\frac{n}{2})^2 + 2(5(\\frac{n}{4})^2 + 2T(n/8)))$",
-    "sc5.1": "This pattern will continue till we reach a total of $n$ problems of size $1$, each of which requires $7$ units of work for a total of $7n$ units.",
-    "sc5.2": "<br> $T(n) = 5n^2 + 2(5(\\frac{n}{2})^2 + 2(5(\\frac{n}{4})^2 + 2(5(\\frac{n}{8})^2 + 2((...))))$",
-    "sc6": "We end up having $\\log{n} + 1$ levels. The amount of work at the last level is  $7n$. The amount of work at the rest of the levels is modelled by the summation $\\displaystyle\\sum_{i=0}^{\\log{n}-1}\\frac{5n^2}{2^i}$",
-    "sc7": "Accordingly, the total amount of work is $5n^2\\displaystyle\\sum_{i=0}^{\\log{n}-1}\\frac{1}{2^i} + 7n$",  
-    "sc8": "By substituting the summation $\\displaystyle\\sum_{i=0}^{\\log{n}-1}\\frac{1}{2^i}$ with its closed form $2-\\frac{2}{n}$, we will end up having a final closed form of $T(n) = 2T(n/2) + 5n^2, T(1) = 7$ as $10n^2 - 3n$",
-    "sc9": "This is the <b>exact</b> solution to the recurrence when $n$ is a power of two. At this point, we should use a simple induction proof to verify that our solution was indeed calculated correctly."
+    "sc1": "Let's see how we can determine the closed form solution of <em>T(n) = 2 T(n/2) + 5 n<sup>2</sup>; T(1) = 7</em> by expanding the recurrence. We simplify the process by assuming that <em>n</em> is a power of 2.",
+    "sc2.1": "For a problem of size <em>n</em>, we have <em>5 n<sup>2</sup></em> units of work plus the work required for two subproblems of size <em>n/2</em> each.",
+    "sc2.2": "<br> <em>T(n) = 5n<sup>2</sup> + 2 T(n/2)</em>",
+    "sc3.1": "For each problem of size <em>n/2</em>, we have <em>5 (n/2)<sup>2</sup></em> units of work. Since there are two of them this is a total of <em>5 n<sup>2</sup>/2</em> units. Each problem generates two subproblems, for a total of four subproblems of size <em>n/4</em>.",
+    "sc3.2": "<br> <em>T(n) = 5 n<sup>2</sup> + 2 (5 (n/2)<sup>2</sup> + 2 T(n/4))</em>",
+    "sc4.1": "For each problem of size <em>n/4</em>, we have <em>5 (n/4)<sup>2</sup></em> units of work. These total to <em>5 n<sup>2</sup>/4</em> units. Each problem of size <em>n/4</em> also now generates two problems of size <em>n/8</em>, for a total of eight of these.",
+    "sc4.2": "<br> <em>T(n) = 5 n<sup>2</sup> + 2 (5(n/2)<sup>2</sup> + 2 (5(n/4)<sup>2</sup> + 2 T(n/8)))</em>",
+    "sc5.1": "This pattern will continue till we reach a total of <em>n</em> problems of size <em>1</em>, each of which requires <em>7</em> units of work for a total of <em>7n</em> units.",
+    "sc5.2": "<br> <em>T(n) = 5 n<sup>2</sup> + 2 (5(n/2)<sup>2</sup> + 2 (5(n/4)<sup>2</sup> + 2 (5(n/8)<sup>2</sup> + 2((...))))</em>",
+    "sc6": "We end up having <em>log(n) + 1</em> levels. The amount of work at the last level is  <em>7n</em>. The amount of work at the rest of the levels is modelled by the summation <em>&Sigma;<sub>i&lt;log(n)</sub> 5 n<sup>2</sup> / 2<sup>i</sup></em>",
+    "sc7": "Accordingly, the total amount of work is <em>5 n<sup>2</sup> &Sigma;<sub>i&lt;log(n)</sub> 1 / 2<sup>i</sup> + 7n</em>",  
+    "sc8": "By substituting the summation <em>&Sigma;<sup>i&lt;log(n)</sup> 1 / 2<sup>i</sup></em> with its closed form <em>2 – 2/n</em>, we will end up having a final closed form of <em>T(n) = 2 T(n/2) + 5 n<sup>2</sup>; T(1) = 7</em> as <em>10n<sup>2</sup> – 3n</em>",
+    "sc9": "This is the <b>exact</b> solution to the recurrence when <em>n</em> is a power of two. At this point, we should use a simple induction proof to verify that our solution was indeed calculated correctly."
 };
 
   var tree;
@@ -47,10 +47,10 @@ $(document).ready(function() {
   av.umsg(interpret["sc2.1"]);
   av.umsg(interpret["sc2.2"], {preserve: true});
   tree = av.ds.binarytree({left: leftAlign, top: topAlign, nodegap: nodeGap});
-  var root = tree.newNode("$n$");
+  var root = tree.newNode("<em>n</em>");
   tree.root(root);
-  var nOverTwo1 = tree.newNode("$n/2$");
-  var nOverTwo2 = tree.newNode("$n/2$");
+  var nOverTwo1 = tree.newNode("<em>n/2</em>");
+  var nOverTwo2 = tree.newNode("<em>n/2</em>");
   root.addChild(nOverTwo1);
   root.addChild(nOverTwo2);
   tree.layout();
@@ -61,7 +61,7 @@ $(document).ready(function() {
                              {top: topAlign + 0.25 * nodeHeight,
                                left: leftAlign + nodeWidth + labelShift});
   labelSet.push(dashLabel_n);
-  var valueLabel_1 = av.label("$5n^2$",
+  var valueLabel_1 = av.label("<em>5n<sup>2</sup></em>",
                               {top: topAlign + 0.25 * nodeHeight,
                                 left: leftAlign + nodeWidth + labelShift * 5});
   labelSet.push(valueLabel_1);
@@ -75,12 +75,12 @@ $(document).ready(function() {
                               {top: topAlign + 1.25 * nodeHeight + nodeGap,
                                 left: leftAlign + nodeWidth + labelShift * 4});
   labelSet.push(dashLabel_n2);
-  var valueLabel_2 = av.label("$\\frac{5n^2}{2}$", {top: topAlign + 1.25 * nodeHeight + nodeGap, left: leftAlign + 3 * nodeWidth + labelShift * 5});
+  var valueLabel_2 = av.label("<em>5 n<sup>2</sup>/2</em>", {top: topAlign + 1.25 * nodeHeight + nodeGap, left: leftAlign + 3 * nodeWidth + labelShift * 5});
   labelSet.push(valueLabel_2);
-  var nOverFour1 = tree.newNode("$n/4$");
-  var nOverFour2 = tree.newNode("$n/4$");
-  var nOverFour3 = tree.newNode("$n/4$");
-  var nOverFour4 = tree.newNode("$n/4$");
+  var nOverFour1 = tree.newNode("<em>n/4</em>");
+  var nOverFour2 = tree.newNode("<em>n/4</em>");
+  var nOverFour3 = tree.newNode("<em>n/4</em>");
+  var nOverFour4 = tree.newNode("<em>n/4</em>");
   nOverTwo1.addChild(nOverFour1);
   nOverTwo1.addChild(nOverFour2);
   nOverTwo2.addChild(nOverFour3);
@@ -93,15 +93,15 @@ $(document).ready(function() {
   av.umsg(interpret["sc4.2"], {preserve: true});
   displaceLabels(5 * nodeWidth);
   labelSet.push(av.label("----------", {top: topAlign + 2.25 * nodeHeight + 2 * nodeGap, left: leftAlign + 7.5 * nodeWidth + labelShift * 4}));
-  labelSet.push(av.label("$\\frac{5n^2}{4}$", {top: topAlign + 2.25 * nodeHeight + 2 * nodeGap, left: leftAlign + 8 * nodeWidth + labelShift * 5}));
-  var nOverEight1 = tree.newNode("$n/8$");
-  var nOverEight2 = tree.newNode("$n/8$");
-  var nOverEight3 = tree.newNode("$n/8$");
-  var nOverEight4 = tree.newNode("$n/8$");
-  var nOverEight5 = tree.newNode("$n/8$");
-  var nOverEight6 = tree.newNode("$n/8$");
-  var nOverEight7 = tree.newNode("$n/8$");
-  var nOverEight8 = tree.newNode("$n/8$");
+  labelSet.push(av.label("<em>5 n<sup>2</sup>/4</em>", {top: topAlign + 2.25 * nodeHeight + 2 * nodeGap, left: leftAlign + 8 * nodeWidth + labelShift * 5}));
+  var nOverEight1 = tree.newNode("<em>n/8</em>");
+  var nOverEight2 = tree.newNode("<em>n/8</em>");
+  var nOverEight3 = tree.newNode("<em>n/8</em>");
+  var nOverEight4 = tree.newNode("<em>n/8</em>");
+  var nOverEight5 = tree.newNode("<em>n/8</em>");
+  var nOverEight6 = tree.newNode("<em>n/8</em>");
+  var nOverEight7 = tree.newNode("<em>n/8</em>");
+  var nOverEight8 = tree.newNode("<em>n/8</em>");
   nOverFour1.addChild(nOverEight1);
   nOverFour1.addChild(nOverEight2);
   nOverFour2.addChild(nOverEight3);
@@ -119,12 +119,12 @@ $(document).ready(function() {
   //displaceLabels(2 * nodeWidth);
 
   labelSet.push(av.label("------", {top: topAlign + 4.25 * nodeHeight + 4 * nodeGap, left: leftAlign + 8 * nodeWidth + labelShift * 4}));
-  labelSet.push(av.label("$7n$", {top: topAlign + 4.25 * nodeHeight + 4 * nodeGap, left: leftAlign + 8 * nodeWidth + labelShift * 5}));
+  labelSet.push(av.label("<em>7n</em>", {top: topAlign + 4.25 * nodeHeight + 4 * nodeGap, left: leftAlign + 8 * nodeWidth + labelShift * 5}));
   labelSet.push(av.label("---------------------------------------------------------------------------",
                          {top: topAlign + 4.25 * nodeHeight + 4 * nodeGap,
                            left: leftAlign + nodeWidth}));
-  var one1 = tree.newNode("$1$");
-  var one2 = tree.newNode("$1$");
+  var one1 = tree.newNode("<em>1</em>");
+  var one2 = tree.newNode("<em>1</em>");
   nOverEight1.left(one1);
   nOverEight8.right(one2);
   var edge1 = one1.edgeToParent();
@@ -136,7 +136,7 @@ $(document).ready(function() {
 
   // Slide 6
   av.umsg(interpret["sc6"]);
-  labelSet.push(av.label("|------------ $\\log{n + 1}$ ------------|", {top: topAlign + 3 * nodeHeight + nodeGap, left: leftAlign + 8.5 * nodeWidth + labelShift * 4 - 20}).addClass("rotated"));
+  labelSet.push(av.label("|------------ <em>log(n+1)</em> ------------|", {top: topAlign + 3 * nodeHeight + nodeGap, left: leftAlign + 8.5 * nodeWidth + labelShift * 4}).addClass("rotated"));
   av.step();
 
   // Slide 7

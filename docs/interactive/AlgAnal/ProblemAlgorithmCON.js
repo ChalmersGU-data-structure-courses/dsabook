@@ -93,7 +93,7 @@ $(document).ready(function() {
   var labelOutput3 = av.label(interpret["lab7"],
                               {top: topAlign + 22,
                                 left: leftAlign + 490 + rectWidth});
-  var labelOutput4 = av.label("$n$", {top: topAlign + 95, left: leftAlign + 490 + rectWidth});
+  var labelOutput4 = av.label("<em>n</em>", {top: topAlign + 95, left: leftAlign + 490 + rectWidth});
   av.step();
 
   // Slide 5

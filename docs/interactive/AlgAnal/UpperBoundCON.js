@@ -7,25 +7,25 @@ $(document).ready(function() {
 
   var interpret = {
     "sc1": "A mistake that people often make is to confuse the upper bound and the worst case.",
-    "sc2": "<br>The upper bound of an algorithm indicates the upper or highest growth rate that the algorithm can have for a problem of size $n$.",
-    "sc3": "The sequential search algorithm accepts as its input an array of $n$ keys and the target key $K$ to search for.",
+    "sc2": "<br>The upper bound of an algorithm indicates the upper or highest growth rate that the algorithm can have for a problem of size <em>n</em>.",
+    "sc3": "The sequential search algorithm accepts as its input an array of <em>n</em> keys and the target key <em>K</em> to search for.",
     "sc4": "<br> So what is the upper bound of the sequential search algorithm?",
     "sc5": "<br>Do you think this is the correct way to ask this question?",
     "sc6": "Remember that there are three input cases that affect the running time of sequential search.",
-    "sc7": "<br>1- When the target key $K$ is located at the first position in the input array.",
-    "sc8": "<br>2- When the target key $K$ is located at the last position in the input array.",
-    "sc9": "<br>3- The average cost over all possible positions for $K$, which comes out to about $n/2$.",
-    "sc10": "In the best case for the algorithm, only a single element is visited. $\\mathbf{T}(n) = 1$",
-    "sc11": "<br>Accordingly, an upper bound for the algorithm in the best case is $O(1)$. Even when $n$ increases, the cost for the best case does not <b>grow</b>.",
-    "sc12": "In the worst case for the algorithm, $n$ elements must be visited. $\\mathbf{T}(n) = n$",
-    "sc13": "<br>So an upper bound for the algorithm in the worst case is $O(n)$. No matter the value of $n$, for some constant $c$, $cn$ is bigger than $n$.",
-    "sc14": "In the average case for the algorithm, about $n/2$ elements are visited. $T(n) = \\frac{n}{2}$",
-    "sc15": "<br><br>So an upper bound for the algorithm in the average case is also $O(n)$. No matter the value of $n$, for some constant $c$, $cn$ is bigger than $n/2$.",
+    "sc7": "<br>1- When the target key <em>K</em> is located at the first position in the input array.",
+    "sc8": "<br>2- When the target key <em>K</em> is located at the last position in the input array.",
+    "sc9": "<br>3- The average cost over all possible positions for <em>K</em>, which comes out to about <em>n/2</em>.",
+    "sc10": "In the best case for the algorithm, only a single element is visited. <em><b>T</b> = 1</em>",
+    "sc11": "<br>Accordingly, an upper bound for the algorithm in the best case is <em>O(1)</em>. Even when <em>n</em> increases, the cost for the best case does not <b>grow</b>.",
+    "sc12": "In the worst case for the algorithm, <em>n</em> elements must be visited. <em><b>T</b>(n) = n</em>",
+    "sc13": "<br>So an upper bound for the algorithm in the worst case is <em>O(n)</em>. No matter the value of <em>n</em>, for some constant <em>c</em>, <em>cn</em> is bigger than <em>n</em>.",
+    "sc14": "In the average case for the algorithm, about <em>n/2</em> elements are visited. <em>T(n) = n/2</em>",
+    "sc15": "<br><br>So an upper bound for the algorithm in the average case is also <em>O(n)</em>. No matter the value of <em>n</em>, for some constant <em>c</em>, <em>cn</em> is bigger than <em>n/2</em>.",
     "sc16": "Accordingly, the correct way to ask the question is: <br>What is the upper bound of sequential search in the best/average/worst case?",
     "sc17": "<br><br>And the answer should be...",
-    "lab1": "$O(1)$ in the <b><u>Best Case.</u></b>",
-    "lab2": "$O(n)$ in the <b><u>Worst Case</u></b>.",
-    "lab3": "$O(n)$ in the <b><u>Average Case</u></b>."
+    "lab1": "<em>O(1)</em> in the <b><u>Best Case.</u></b>",
+    "lab2": "<em>O(n)</em> in the <b><u>Worst Case</u></b>.",
+    "lab3": "<em>O(n)</em> in the <b><u>Average Case</u></b>."
   };
 
   var av = new JSAV(av_name);
@@ -49,7 +49,7 @@ $(document).ready(function() {
   var nLine1 = av.g.line(leftAlign + 10, topAlign,
                          leftAlign + 155, topAlign,
                          {"stroke-width": 2, "arrow-start": "classic-wide-long"});
-  var nLabel = av.label("$n$",
+  var nLabel = av.label("<em>n</em>",
                         {top: topAlign - 30, left: leftAlign + 165});
   var nLine2 = av.g.line(leftAlign + 195, topAlign,
                          leftAlign + 340, topAlign,
@@ -79,7 +79,7 @@ $(document).ready(function() {
 
   // Slide 7
   av.umsg(interpret["sc7"], {preserve: true});
-  var pointer = av.pointer("$K$", arr.index(0));
+  var pointer = av.pointer("<em>K</em>", arr.index(0));
   av.step();
 
   // Slide 8
@@ -146,11 +146,11 @@ $(document).ready(function() {
   av.umsg(interpret["sc17"], {preserve: true});
   topAlign = 15;
   var arr1 = av.ds.array(arr_values, {left: leftAlign, top: topAlign + 30, indexed: true});
-  av.pointer("$K$", arr1.index(0));
+  av.pointer("<em>K</em>", arr1.index(0));
   arr1.addClass([0], "greenbg");
   av.label(interpret["lab1"], {left: leftAlign + 395, top: topAlign + 35});
   var arr2 = av.ds.array(arr_values, {left: leftAlign, top: topAlign + 140, indexed: true});
-  av.pointer("$K$", arr2.index(arraySize - 1));
+  av.pointer("<em>K</em>", arr2.index(arraySize - 1));
   arr2.addClass(indices, "redbg");
   av.label(interpret["lab2"], {left: leftAlign + 395, top: topAlign + 145});
   var arr3 = av.ds.array(arr_values, {left: leftAlign, top: topAlign + 250, indexed: true});
