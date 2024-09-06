@@ -77,7 +77,7 @@ Assume a particular algorithm has the following behavior:
 $$
 \mathbf{T}(n) = \left\{ \begin{array}{ll}
 n  & \mbox{for all odd}\ n \geq 1\\
-n^2/100 & \mbox{for all even}\ n \geq 0
+n^2/100 \;& \mbox{for all even}\ n \geq 0
 \end{array}
 \right.
 $$
