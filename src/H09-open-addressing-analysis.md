@@ -48,9 +48,7 @@ one plus the sum over $i >= 1$ of the probability of $i$ collisions,
 which is approximately
 
 $$
-\begin{eqnarray}
-1 + \sum_{i=1}^\infty (N/M)^i &=& 1/(1-\alpha)
-\end{eqnarray}
+1 + \sum_{i=1}^\infty (N/M)^i = 1/(1-\alpha)
 $$
 
 The cost for a successful search (or a deletion) has the same cost as

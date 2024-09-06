@@ -77,9 +77,7 @@ through the loop when $j = n$. Thus, the total cost of the loop is $c_3$
 times the sum of the integers 1 through $n$. We know that
 
 $$
-\begin{eqnarray}
-\sum_{i = 1}^{n} i &=& \frac{n (n+1)}{2}
-\end{eqnarray}
+\sum_{i = 1}^{n} i = \frac{n (n+1)}{2}
 $$
 
 which is $\Theta(n^2)$. By simplifying rule (3),
@@ -137,9 +135,7 @@ until it reaches $n$. Because the inner loop always executes $n$ times,
 the total cost for the first code fragment can be expressed as
 
 $$
-\begin{eqnarray}
-\sum_{i=0}^{\log n} n &=& n \log n
-\end{eqnarray}
+\sum_{i=0}^{\log n} n = n \log n
 $$
 
 So the cost of this first double loop is $\Theta(n \log n)$. Note that a
@@ -151,9 +147,7 @@ times. The inner loop has cost $k$, which doubles each time. The
 summation can be expressed as
 
 $$
-\begin{eqnarray}
-\sum_{i=0}^{\log n} 2^i &=& \Theta(n)
-\end{eqnarray}
+\sum_{i=0}^{\log n} 2^i = \Theta(n)
 $$
 
 where $n$ is assumed to be a power of two and again $k = 2^i$.

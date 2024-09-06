@@ -19,9 +19,7 @@ and finally merges the two sublists in $n$ steps. The cost for this can
 be modeled as
 
 $$
-\begin{eqnarray}
-\mathbf{T}(n) &=& 2\mathbf{T}(n/2) + n
-\end{eqnarray}
+\mathbf{T}(n) = 2\mathbf{T}(n/2) + n
 $$
 
 In other words, the cost of the algorithm on input of size $n$ is two
@@ -59,7 +57,8 @@ whose running time is described by the equation
 
 $$
 \begin{eqnarray}
-\mathbf{T}(n) = 2\mathbf{T}(n/2) + n &;& \mathbf{T}(2) = 1
+\mathbf{T}(n) &=& 2\mathbf{T}(n/2) + n \\
+\mathbf{T}(2) &=& 1
 \end{eqnarray}
 $$
 
@@ -67,9 +66,7 @@ We begin by guessing that this recurrence has an upper bound in
 $O(n^2)$. To be more precise, assume that
 
 $$
-\begin{eqnarray}
-\mathbf{T}(n) &\leq& n^2
-\end{eqnarray}
+\mathbf{T}(n) \leq n^2
 $$
 
 We prove this guess is correct by induction. In this proof, we assume
@@ -79,9 +76,7 @@ that $\mathbf{T}(n) \leq n^2$ implies that $\mathbf{T}(2n) \leq (2n)^2$ for
 $n = 2^N, N \geq 1$. The induction hypothesis is
 
 $$
-\begin{eqnarray}
-\mathbf{T}(i) &\leq& i^2,\ \textrm{for all}\ i \leq n
-\end{eqnarray}
+\mathbf{T}(i) \leq i^2,\ \textrm{for all}\ i \leq n
 $$
 
 It follows that
@@ -318,7 +313,8 @@ known as [divide-and-conquer recurrences]{.term}. These have the form
 
 $$
 \begin{eqnarray}
-\mathbf{T}(n) = a\mathbf{T}(n/b) + cn^k &;& \mathbf{T}(1) = c
+\mathbf{T}(n) &=& a\mathbf{T}(n/b) + cn^k \\
+\mathbf{T}(1) &=& c
 \end{eqnarray}
 $$
 
@@ -460,7 +456,8 @@ Use the Master Theorem to solve the recurrence relation for Mergesort:
 
 $$
 \begin{eqnarray}
-\mathbf{T}(n) = 2\mathbf{T}(n/2) + n &;& \mathbf{T}(1) = 1
+\mathbf{T}(n) &=& 2\mathbf{T}(n/2) + n \\
+\mathbf{T}(1) &=& 1
 \end{eqnarray}
 $$
 
@@ -475,8 +472,8 @@ had the following recurrence:
 
 $$
 \begin{eqnarray}
-\mathbf{T}(n) = cn + \frac{1}{n}\sum_{k=0}^{n-1} [\mathbf{T}(k) + \mathbf{T}(n -1 - k)]
-&;& \mathbf{T}(0) = \mathbf{T}(1) = c
+\mathbf{T}(n) &=& cn + \frac{1}{n}\sum_{k=0}^{n-1} [\mathbf{T}(k) + \mathbf{T}(n -1 - k)] \\
+\mathbf{T}(0) &=& \mathbf{T}(1) = c
 \end{eqnarray}
 $$
 
@@ -489,9 +486,7 @@ counts up from $T(0)$ to $T(n-1)$ while the other counts down from
 $T(n-1)$ to $T(0)$. This yields
 
 $$
-\begin{eqnarray}
-\mathbf{T}(n) &=& cn + \frac{2}{n}\sum_{k=0}^{n-1} \mathbf{T}(k)
-\end{eqnarray}
+\mathbf{T}(n) = cn + \frac{2}{n}\sum_{k=0}^{n-1} \mathbf{T}(k)
 $$
 
 This form is known as a [recurrence with full history]{.term}. The key to solving such a recurrence is to cancel out the

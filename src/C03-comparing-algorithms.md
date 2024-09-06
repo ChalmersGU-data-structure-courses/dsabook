@@ -130,9 +130,7 @@ sequential search algorithm for any typical implementation) has a
 running time expressed by the equation
 
 $$
-\begin{eqnarray}
-\mathbf{T}(n) &=& cn
-\end{eqnarray}
+\mathbf{T}(n) = cn
 $$
 
 This equation describes the growth rate for the running time of the
@@ -153,9 +151,7 @@ array size), the time to copy the value from the first position of the
 array is always $c_1$. Thus, the equation for this algorithm is simply
 
 $$
-\begin{eqnarray}
-\mathbf{T}(n) &=& c_1
-\end{eqnarray}
+\mathbf{T}(n) = c_1
 $$
 
 indicating that the size of the input $n$ has no effect on the running

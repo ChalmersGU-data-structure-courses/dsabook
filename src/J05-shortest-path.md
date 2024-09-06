@@ -91,9 +91,7 @@ A shortest path from $S$ to $X$ must have its next-to-last vertex in
 $S$. Thus,
 
 $$
-\begin{eqnarray}
-\mathbf{d}(S, X) &=& \min_{U \in \mathbf{S}}(\mathbf{d}(S, U) + \mathbf{w}(U, X))
-\end{eqnarray}
+\mathbf{d}(S, X) = \min_{U \in \mathbf{S}}(\mathbf{d}(S, U) + \mathbf{w}(U, X))
 $$
 
 In other words, the shortest path from $S$ to $X$ is the minimum over

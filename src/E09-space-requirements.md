@@ -47,9 +47,7 @@ nodes, and because only internal nodes now have child pointers, the
 overhead fraction in this case will be approximately
 
 $$
-\begin{eqnarray}
-\frac{\frac{n}{2} (2P)}{\frac{n}{2} (2P) + Dn} &=& \frac{P}{P + D}
-\end{eqnarray}
+\frac{\frac{n}{2} (2P)}{\frac{n}{2} (2P) + Dn} = \frac{P}{P + D}
 $$
 
 If $P = D$, the overhead drops to about one half of the total space.

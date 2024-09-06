@@ -193,9 +193,7 @@ induction proof will verify the guess.
 Solve the summation
 
 $$
-\begin{eqnarray}
-f(n) & = & \sum_{i=0}^{n} ar^i = a + ar + ar^2 + \cdots + ar^n
-\end{eqnarray}
+f(n) = \sum_{i=0}^{n} ar^i = a + ar + ar^2 + \cdots + ar^n
 $$
 
 This is called a geometric series. Our goal is to find some function
@@ -229,9 +227,7 @@ $$
 Thus, we get the result
 
 $$
-\begin{eqnarray}
-f(n) &=& \frac{a - ar^{n+1}}{1 - r}
-\end{eqnarray}
+f(n) = \frac{a - ar^{n+1}}{1 - r}
 $$
 
 where $r \neq 1$.
@@ -243,17 +239,13 @@ where $r \neq 1$.
 For our second example of the shifting method, we solve
 
 $$
-\begin{eqnarray}
-f(n) &=& \sum_{i=1}^{n} i2^i = 1 \cdot 2^1 + 2 \cdot 2^2 + 3 \cdot 2^3 + \cdots + n \cdot 2^n
-\end{eqnarray}
+f(n) = \sum_{i=1}^{n} i2^i = 1 \cdot 2^1 + 2 \cdot 2^2 + 3 \cdot 2^3 + \cdots + n \cdot 2^n
 $$
 
 We can achieve our goal if we multiply by two:
 
 $$
-\begin{eqnarray}
-2f(n) &=& 2\sum_{i=1}^{n} i2^i = 1 \cdot 2^2 + 2 \cdot 2^3 + 3 \cdot 2^4 + \cdots + (n-1) \cdot 2^n + n \cdot 2^{n+1}
-\end{eqnarray}
+2f(n) = 2\sum_{i=1}^{n} i2^i = 1 \cdot 2^2 + 2 \cdot 2^3 + 3 \cdot 2^4 + \cdots + (n-1) \cdot 2^n + n \cdot 2^{n+1}
 $$
 
 The $i$ th term of $2f(n)$ is $i \cdot 2^{i+1}$, while the $(i+1)$ th
@@ -271,52 +263,40 @@ Shift $i$ 's value in the second summation, substituting $(i+1)$ for
 $i$:
 
 $$
-\begin{eqnarray}
-&=& n2^{n+1} + \sum_{i=0}^{n-1}i2^{i+1} - \sum_{i=0}^{n-1}(i+1)2^{i+1}
-\end{eqnarray}
+= n2^{n+1} + \sum_{i=0}^{n-1}i2^{i+1} - \sum_{i=0}^{n-1}(i+1)2^{i+1}
 $$
 
 Break the second summation into two parts:
 
 $$
-\begin{eqnarray}
-&=&  n2^{n+1} + \sum_{i=0}^{n-1}i2^{i+1} -
+=  n2^{n+1} + \sum_{i=0}^{n-1}i2^{i+1} -
               \sum_{i=0}^{n-1}i2^{i+1} -
               \sum_{i=0}^{n-1}2^{i+1}
-\end{eqnarray}
 $$
 
 Cancel like terms:
 
 $$
-\begin{eqnarray}
-&=& n2^{n+1} - \sum_{i=0}^{n-1} 2^{i+1}
-\end{eqnarray}
+= n2^{n+1} - \sum_{i=0}^{n-1} 2^{i+1}
 $$
 
 Again shift $i$ 's value in the summation, substituting $i$ for
 $(i+1)$:
 
 $$
-\begin{eqnarray}
-&=& n2^{n+1} - \sum_{i=1}^{n} 2^i
-\end{eqnarray}
+= n2^{n+1} - \sum_{i=1}^{n} 2^i
 $$
 
 Replace the new summation with a solution that we already know:
 
 $$
-\begin{eqnarray}
-&=& n2^{n+1} - \left ( 2^{n+1} - 2 \right )
-\end{eqnarray}
+= n2^{n+1} - \left ( 2^{n+1} - 2 \right )
 $$
 
 Finally, reorganize the equation:
 
 $$
-\begin{eqnarray}
-&=& (n-1)2^{n+1} + 2
-\end{eqnarray}
+= (n-1)2^{n+1} + 2
 $$
 
 :::

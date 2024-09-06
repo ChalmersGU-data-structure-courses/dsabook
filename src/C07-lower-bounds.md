@@ -34,9 +34,7 @@ $\Omega$ is symmetric with the definition of big-Oh.
 Assume $\mathbf{T}(n) = c_1 n^2 + c_2 n$ for $c_1$ and $c_2 > 0$. Then,
 
 $$
-\begin{eqnarray}
-c_1 n^2 + c_2 n &\geq& c_1 n^2
-\end{eqnarray}
+c_1 n^2 + c_2 n \geq c_1 n^2
 $$
 
 for all $n > 1$. So, $\mathbf{T}(n) \geq c n^2$ for $c = c_1$ and
@@ -180,17 +178,13 @@ If $f(n) = n^2$ and $g(n) = 2n\log n$, is $f(n)$ in $O(g(n))$,
 $\Omega(g(n))$, or $\Theta(g(n))$? Since
 
 $$
-\begin{eqnarray}
-\frac{n^2}{2n\log n} &=& \frac{n}{2\log n}
-\end{eqnarray}
+\frac{n^2}{2n\log n} = \frac{n}{2\log n}
 $$
 
 we easily see that
 
 $$
-\begin{eqnarray}
-\lim_{n \rightarrow \infty} \frac{n^2}{2n\log n} &=& \infty
-\end{eqnarray}
+\lim_{n \rightarrow \infty} \frac{n^2}{2n\log n} = \infty
 $$
 
 because $n$ grows faster than $2\log n$. Thus, $n^2$ is in

@@ -59,9 +59,7 @@ quarter of the time, and so on. We can capture this with the summation
 (charging costs to bits going from right to left)
 
 $$
-\begin{eqnarray}
-\sum_{i=0}^{n-1} \frac{1}{2^i} &<& 2
-\end{eqnarray}
+\sum_{i=0}^{n-1} \frac{1}{2^i} < 2
 $$
 
 In other words, the average number of bits flipped on each increment is
@@ -104,9 +102,7 @@ operations, which is at most $m_1$, the number of *push*
 operations. This total cost can therefore be expressed as
 
 $$
-\begin{eqnarray}
-m_1 + (m_2 + m_1) &=& \Theta(m_1 + m_2)
-\end{eqnarray}
+m_1 + (m_2 + m_1) = \Theta(m_1 + m_2)
 $$
 
 A similar argument was used in our analysis for the partition function
