@@ -29,7 +29,7 @@ $\Omega$ is symmetric with the definition of big-Oh.
 
 :::: {#AAnalEx}
 ::: topic
-#### Example {-}
+#### Example: Quadratic algorithm {-}
 
 Assume $\mathbf{T}(n) = c_1 n^2 + c_2 n$ for $c_1$ and $c_2 > 0$. Then,
 
@@ -172,7 +172,7 @@ constant other than zero, then $f(n) = \Theta(g(n))$ because both grow
 at the same rate.
 
 ::: topic
-#### Example {-}
+#### Example: Comparing two functions {-}
 
 If $f(n) = n^2$ and $g(n) = 2n\log n$, is $f(n)$ in $O(g(n))$,
 $\Omega(g(n))$, or $\Theta(g(n))$? Since

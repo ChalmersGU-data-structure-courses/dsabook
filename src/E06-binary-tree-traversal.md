@@ -25,7 +25,7 @@ For example, we might wish to make sure that we visit any given node
 [preorder traversal]{.term}.
 
 ::: topic
-#### Example {-}
+#### Example: Preorder enumeration {-}
 
 The preorder enumeration for the tree of 
 [Figure #BinTravExample](#BinTravExample) is **A B D C E G F H I**.
@@ -46,7 +46,7 @@ do that requires that the children's children be deleted first, and so
 on. This is called a [postorder traversal]{.term}.
 
 ::: topic
-#### Example {-}
+#### Example: Postorder enumeration {-}
 
 The postorder enumeration for the tree of 
 [Figure #BinTravExample](#BinTravExample) is **D B G E H I F C A**.
@@ -63,7 +63,7 @@ finally visits the right child (including its entire subtree). The
 order of value.
 
 ::: topic
-#### Example {-}
+#### Example: Inorder enumeration {-}
 
 The inorder enumeration for the tree of 
 [Figure #BinTravExample](#BinTravExample) is **B D A G E C H F I**.

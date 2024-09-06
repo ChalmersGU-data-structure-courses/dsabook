@@ -16,7 +16,7 @@ growth rates on input size apply completely to measuring space
 requirements.
 
 ::: topic
-#### Example {-}
+#### Example: Arrays {-}
 
 What are the space requirements for an array of $n$ integers? If each
 integer requires $c$ bytes, then the array requires $cn$ bytes, which is
@@ -24,7 +24,7 @@ $\Theta(n)$.
 :::
 
 ::: topic
-#### Example {-}
+#### Example: Friendship links {-}
 
 Imagine that we want to keep track of friendships between $n$ people. We
 can do this with an array of size $n \times n$. Each row of the array

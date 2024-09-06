@@ -124,7 +124,7 @@ however, consideration for unbalanced nodes must begin at the level of
 the *deleteMin* operation.
 
 ::: topic
-#### Example {-}
+#### Example: AVL insertion {-}
 
 In [Figure #AVLinsert](#AVLinsert) (b), the
 bottom-most unbalanced node has value 7. The excess node (with value 5)

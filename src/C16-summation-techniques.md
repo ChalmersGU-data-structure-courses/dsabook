@@ -105,7 +105,7 @@ cancel out. To solve sum $f$, we pick a known function $g$ and find a
 pattern in terms of $f(n) - g(n)$ or $f(n)/g(n)$.
 
 ::: topic
-#### Example {#SumIEx}
+#### Example: Divide-and-guess {#SumIEx}
 
 Find the closed form solution for $\sum_{i=1}^n i$ using the
 divide-and-guess approach. We will try two example functions to
@@ -159,7 +159,7 @@ induction.
 :::
 
 ::: topic
-#### Example {-}
+#### Example: Exponentially decreasing numbers {-}
 
 Solve the summation
 
@@ -188,7 +188,7 @@ induction proof will verify the guess.
 :::
 
 ::: topic
-#### Example {-}
+#### Example: Geometric series {-}
 
 Solve the summation
 
@@ -234,7 +234,7 @@ where $r \neq 1$.
 :::
 
 ::: topic
-#### Example {-}
+#### Example: Shifting method {-}
 
 For our second example of the shifting method, we solve
 

@@ -90,7 +90,7 @@ $n > n_0$), the algorithm *always* executes in less than or equal to
 $cf(n)$ steps for some constant $c$.
 
 ::: topic
-#### Example {-}
+#### Example: Sequential search {-}
 
 Consider the sequential search algorithm for finding a specified value
 in an array of integers. If visiting and examining one value in the
@@ -102,7 +102,7 @@ definition, $\mathbf{T}(n)$ is in $O(n)$ for $n_0 = 1$ and $c = c_s$.
 :::
 
 ::: topic
-#### Example {-}
+#### Example: Quadratic algorithm {-}
 
 For a particular algorithm, $\mathbf{T}(n) = c_1 n^2 + c_2 n$ in the
 average case where $c_1$ and $c_2$ are positive numbers. Then,
@@ -117,9 +117,9 @@ definition.
 :::
 
 ::: topic
-#### Example {-}
+#### Example: Accessing an array cell {-}
 
-Assigning the value from the first position of an array to a variable
+Assigning the value from a given position of an array to a variable
 takes constant time regardless of the size of the array. Thus,
 $\mathbf{T}(n) = c$ (for the best, worst, and average cases). We could
 say in this case that $\mathbf{T}(n)$ is in $O(c)$. However, it is

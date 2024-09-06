@@ -50,7 +50,7 @@ closed-form solution (i.e., you seek the constants for the expression),
 this method will probably be too much work.
 
 ::: topic
-#### Example {-}
+#### Example: Mergesort {-}
 
 Use the guessing technique to find the asymptotic bounds for Mergesort,
 whose running time is described by the equation
@@ -111,7 +111,7 @@ $\Theta(n \log n)$.
 :::
 
 ::: topic
-#### Example {-}
+#### Example: Factorial function {-}
 
 We know that the factorial function grows exponentially. How does it
 compare to $2^n$? To $n^n$? Do they all grow "equally fast" (in an
@@ -198,7 +198,7 @@ $f(n) = \Theta(g(n))$.
 :::
 
 ::: topic
-#### Example {-}
+#### Example: Fibonacci sequence {-}
 
 What is the growth rate of the Fibonacci sequence? We define the
 Fibonacci sequence as $f(n) = f(n-1) + f(n-2)$ for $n \geq 2$;
@@ -267,7 +267,7 @@ techniques for solving summations can then be used.
 <inlineav id="ExpandRecurrenceCON" src="AlgAnal/ExpandRecurrenceCON.js" name="Divide-and-Conquer Expansion Slideshow" links="AlgAnal/ExpandRecurrenceCON.css"/>
 
 ::: topic
-#### Example {-}
+#### Example: Building a heap {-}
 
 Our next example models the cost of the algorithm to build a heap. You
 should recall that to build a [heap](#heaps-and-priority-queues), 
@@ -415,7 +415,7 @@ sometimes referred to as the [Master Theorem]{.term}.
 
 :::: {#RecurThm}
 ::: topic
-#### Theorem {-}
+#### Theorem: The Master Theorem {-}
 
 **The Master Theorem:** For any recurrence relation of the form
 $\mathbf{T}(n) = a\mathbf{T}(n/b) + cn^k, \mathbf{T}(1) = c$, the following
@@ -437,7 +437,7 @@ This theorem may be applied whenever appropriate, rather than
 re-deriving the solution for the recurrence.
 
 ::: topic
-#### Example {-}
+#### Example: Using the Master Theorem {-}
 
 Apply the Master Theorem to solve
 
@@ -450,7 +450,7 @@ case (3) of the theorem, $\mathbf{T}(n) = \Theta(n^2)$.
 :::
 
 ::: topic
-#### Example {-}
+#### Example: Master Theorem for Mergesort {-}
 
 Use the Master Theorem to solve the recurrence relation for Mergesort:
 

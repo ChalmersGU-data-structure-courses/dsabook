@@ -34,7 +34,7 @@ the two machines for five running-time functions.
 
 :::: {#Speedups}
 ::: topic
-#### Table {-}
+#### Table: Getting a faster computer {-}
 
 The increase in problem size that can be run in a fixed period of time
 on a computer that is ten times faster. The first column lists the

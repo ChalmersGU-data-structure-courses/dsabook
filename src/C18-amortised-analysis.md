@@ -114,7 +114,7 @@ can be further executed.
 
 Our final example uses amortized analysis to prove a relationship
 between the cost of the [move-to-front]{.term}
-self-organizing list heuristic and the cost for the optimal static
+[self-organizing list]{.term} heuristic and the cost for the optimal static
 ordering of the list.
 
 Recall that, for a series of search operations, the minimum cost for a
@@ -126,10 +126,10 @@ most frequently accessed record, and so on.
 
 :::: {#MTFThm}
 ::: topic
-#### Theorem {-}
+#### Theorem: Self-organizing lists {-}
 
 **Theorem:** The total number of comparisons required by any series $S$
-of $n$ or more searches on a self-organizing list of length $n$ using
+of $n$ or more searches on a [self-organizing list]{.term} of length $n$ using
 the move-to-front heuristic is never more than twice the total number of
 comparisons required when series $S$ is applied to the list stored in
 its optimal static order.

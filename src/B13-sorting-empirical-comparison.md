@@ -9,7 +9,7 @@ which algorithm is best for sorting small lists. For answers to these
 questions, we can turn to empirical testing.
 
 ::: topic
-#### Table {- #SortCompTable}
+#### Table: Empirical comparison {- #SortCompTable}
 
 Empirical comparison of sorting algorithms run on a 3.4 GHz Intel
 Pentium 4 CPU running Linux. All times shown are milliseconds.

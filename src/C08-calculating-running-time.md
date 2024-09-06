@@ -15,7 +15,7 @@ We will make use of the algorithm analysis simplifying rules:
 
 ::::: {#AssignAnal}
 :::: topic
-#### Example {-}
+#### Example: Simple assignment {-}
 
 We begin with an analysis of a simple assignment to an integer variable.
 
@@ -27,7 +27,7 @@ Because the assignment statement takes constant time, it is $\Theta(1)$.
 
 ::::: {#FLAnal}
 :::: topic
-#### Example {-}
+#### Example: Simple for-loop {-}
 
 Consider a simple `for` loop.
 
@@ -44,7 +44,7 @@ $\Theta(n)$.
 :::::
 
 :::: topic
-#### Example {-}
+#### Example: Many for-loops {-}
 
 We now analyze a code fragment with several `for` loops, some of which
 are nested.
@@ -85,7 +85,7 @@ $\Theta(c_1 + c_2 n + c_3 n^2)$ is simply $\Theta(n^2)$.
 ::::
 
 :::: topic
-#### Example {-}
+#### Example: Comparing nested loops {-}
 
 Compare the asymptotic analysis for the following two code fragments.
 
@@ -109,22 +109,22 @@ about half the time of the first.
 ::::
 
 :::: topic
-#### Example {-}
+#### Example: Non-quadratic nested loops {-}
 
 Not all doubly nested `for` loops are $\Theta(n^2)$. The following pair
 of nested loops illustrates this fact.
 
     sum1 = 0
     k = 1
-    while k <= n:            // Do log n times.
-        for j = 0 to n-1:  // Do n times.
+    while k <= n:           // Do log n times.
+        for j = 0 to n-1:   // Do n times.
             sum1 = sum1 + 1
         k = k * 2
 
     sum2 = 0
     k = 1
-    while k <= n:            // Do log n times.
-        for j = 0 to k-1:  // Do k times.
+    while k <= n:           // Do log n times.
+        for j = 0 to k-1:   // Do k times.
             sum2 = sum2 + 1
         k = k * 2
 

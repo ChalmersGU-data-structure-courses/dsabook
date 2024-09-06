@@ -137,7 +137,7 @@ Proof that the splay tree meets the guarantee of $O(m \log n)$ is beyond
 the scope of our study.
 
 ::: topic
-#### Example {-}
+#### Example: Searching in a splay tree {-}
 
 Consider a search for value 89 in the splay tree of 
 [Figure #SplayEx](#SplayEx) (a). The splay tree's

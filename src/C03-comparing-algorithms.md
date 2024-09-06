@@ -87,7 +87,7 @@ value of $n$ (i.e., the size of the input).
 
 ::::: {#SeqMax}
 :::: topic
-#### Example {-}
+#### Example: Largest value in an array {-}
 
 Consider a simple algorithm to solve the problem of finding the largest
 value in an array of $n$ integers. The algorithm looks at each integer
@@ -139,7 +139,7 @@ largest-value sequential search algorithm.
 :::::
 
 ::: topic
-#### Example {-}
+#### Example: Accessing the first array value {-}
 
 The running time of a statement that assigns the first value of an
 integer array to a variable is simply the time required to copy the
@@ -159,7 +159,7 @@ time. This is called a [constant running time]{.term}.
 :::
 
 :::: topic
-#### Example {-}
+#### Example: Nested for-loop {-}
 
 Consider the following code:
 
@@ -239,9 +239,9 @@ effect on the resources consumed by an algorithm.
 
 :::: {#GrowthTable}
 ::: topic
-#### Table {-}
+#### Table: Growth rates {-}
 
-Costs for representative growth rates.
+This table shows costs for representative growth rates.
 
 | n | $\log\log n$ | $\log n$ | $n$ | $n \log n$ | $n^2$ | $n^3$ | $2^n$ |
 |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|

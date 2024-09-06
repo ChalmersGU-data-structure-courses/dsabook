@@ -49,7 +49,7 @@ the work potentially saved, the test must always be made and the work
 can be avoided only some fraction of the time.
 
 ::: topic
-#### Example {-}
+#### Example: Computer graphics {-}
 
 A common operation in computer graphics applications is to find which
 among a set of complex objects contains a given point in space. Many

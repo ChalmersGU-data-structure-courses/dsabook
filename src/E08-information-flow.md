@@ -43,7 +43,7 @@ tree to the caller. Simple examples are to count the number of nodes in
 a tree, or to sum the values of all the nodes.
 
 ::::: topic
-#### Example {-}
+#### Example: Number of nodes in a tree {-}
 
 Consider the problem of counting (and returning) the number of nodes in
 a binary tree. The key insight is that the total count for any

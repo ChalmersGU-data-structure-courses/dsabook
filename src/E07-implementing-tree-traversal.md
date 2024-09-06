@@ -79,7 +79,7 @@ used to decide whether to call them recursively. Make the call, and let
 their own base case handle it.
 
 :::: topic
-#### Example {-}
+#### Example: Changing the node values in a tree {-}
 
 Consider the problem of incrementing the value for each node in a binary
 tree. The following solution has an error, since it does redundant
