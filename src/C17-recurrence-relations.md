@@ -119,26 +119,26 @@ asymptotic sense)? We can begin by looking at a few initial terms.
 
 | $n$   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
 |------:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| $n!$  | 1 | 2 | 6 | 24 | 120 | 720 | 5040 | 40320 | 362880 |
 | $2^n$ | 2 | 4 | 8 | 16 | 32 | 64 | 128 | 256 | 512 |
+| $n!$  | 1 | 2 | 6 | 24 | 120 | 720 | 5040 | 40320 | 362880 |
 | $n^n$ | 1 | 4 | 9 | 256 | 3125 | 46656 | 823543 | 16777216 | 387420489 |
 
 We can also look at these functions in terms of their recurrences.
-
-$$
-n! = \left\{
-\begin{array}{ll}
-1 & n=1\\
-n(n-1)! & n>1\\
-\end{array}
-\right.
-$$
 
 $$
 2^n = \left\{
 \begin{array}{ll}
 2 & n=1\\
 2(2^{n-1}) & n>1\\
+\end{array}
+\right.
+$$
+
+$$
+n! = \left\{
+\begin{array}{ll}
+1 & n=1\\
+n(n-1)! & n>1\\
 \end{array}
 \right.
 $$

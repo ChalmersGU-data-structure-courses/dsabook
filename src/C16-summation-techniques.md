@@ -105,7 +105,7 @@ cancel out. To solve sum $f$, we pick a known function $g$ and find a
 pattern in terms of $f(n) - g(n)$ or $f(n)/g(n)$.
 
 ::: topic
-#### Example: Divide-and-guess {#SumIEx}
+#### Example: Divide-and-guess {- #SumIEx}
 
 Find the closed form solution for $\sum_{i=1}^n i$ using the
 divide-and-guess approach. We will try two example functions to
@@ -164,7 +164,7 @@ induction.
 Solve the summation
 
 $$
-\sum_{i=1}^n 1/2^i
+\sum_{i=1}^n \frac{1}{2^i}
 $$
 
 We will begin by writing out a table listing the first few values of the
@@ -182,7 +182,7 @@ hadn't noticed the pattern for the form of $f(n)$. We might observe
 that $f(n)$ appears to be reaching an asymptote at 1. In which case, we
 might consider looking at the difference between $f(n)$ and the expected
 asymptote. This result is shown in the last line of the table, which has
-a clear pattern since the $i$ th entry is of $1/2^i$. From this we can
+a clear pattern since the $i$ th entry is of $\frac{1}{2^i}$. From this we can
 easily deduce a guess that $f(n) = 1 - \frac{1}{2^n}$. Again, a simple
 induction proof will verify the guess.
 :::
@@ -239,23 +239,23 @@ where $r \neq 1$.
 For our second example of the shifting method, we solve
 
 $$
-f(n) = \sum_{i=1}^{n} i2^i = 1 \cdot 2^1 + 2 \cdot 2^2 + 3 \cdot 2^3 + \cdots + n \cdot 2^n
+f(n) = \sum_{i=1}^{n} i\,2^i = 1 \cdot 2^1 + 2 \cdot 2^2 + 3 \cdot 2^3 + \cdots + n \cdot 2^n
 $$
 
 We can achieve our goal if we multiply by two:
 
 $$
-2f(n) = 2\sum_{i=1}^{n} i2^i = 1 \cdot 2^2 + 2 \cdot 2^3 + 3 \cdot 2^4 + \cdots + (n-1) \cdot 2^n + n \cdot 2^{n+1}
+2\,f(n) = 2\sum_{i=1}^{n} i\,2^i = 1 \cdot 2^2 + 2 \cdot 2^3 + 3 \cdot 2^4 + \cdots + (n-1) \cdot 2^n + n \cdot 2^{n+1}
 $$
 
-The $i$ th term of $2f(n)$ is $i \cdot 2^{i+1}$, while the $(i+1)$ th
+The $i$ th term of $2\,f(n)$ is $i \cdot 2^{i+1}$, while the $(i+1)$ th
 term of $f(n)$ is $(i+1) \cdot 2^{i+1}$. Subtracting one expression from
 the other yields the summation of $2^i$ and a few non-canceled terms:
 
 $$
 \begin{eqnarray}
-2f(n) - f(n) & = & 2\sum_{i=1}^n i 2^i - \sum_{i=1}^n i 2^i  \\
-             & = & \sum_{i=1}^n i 2^{i+1} - \sum_{i=1}^n i 2^i
+2f(n) - f(n) & = & 2\sum_{i=1}^n i\,2^i - \sum_{i=1}^n i\,2^i  \\
+             & = & \sum_{i=1}^n i\,2^{i+1} - \sum_{i=1}^n i\,2^i
 \end{eqnarray}
 $$
 
@@ -263,34 +263,34 @@ Shift $i$ 's value in the second summation, substituting $(i+1)$ for
 $i$:
 
 $$
-= n2^{n+1} + \sum_{i=0}^{n-1}i2^{i+1} - \sum_{i=0}^{n-1}(i+1)2^{i+1}
+= n\,2^{n+1} + \sum_{i=0}^{n-1}i\,2^{i+1} - \sum_{i=0}^{n-1}(i+1)2^{i+1}
 $$
 
 Break the second summation into two parts:
 
 $$
-=  n2^{n+1} + \sum_{i=0}^{n-1}i2^{i+1} -
-              \sum_{i=0}^{n-1}i2^{i+1} -
+=  n\,2^{n+1} + \sum_{i=0}^{n-1}i\,2^{i+1} -
+              \sum_{i=0}^{n-1}i\,2^{i+1} -
               \sum_{i=0}^{n-1}2^{i+1}
 $$
 
 Cancel like terms:
 
 $$
-= n2^{n+1} - \sum_{i=0}^{n-1} 2^{i+1}
+= n\,2^{n+1} - \sum_{i=0}^{n-1} 2^{i+1}
 $$
 
 Again shift $i$ 's value in the summation, substituting $i$ for
 $(i+1)$:
 
 $$
-= n2^{n+1} - \sum_{i=1}^{n} 2^i
+= n\,2^{n+1} - \sum_{i=1}^{n} 2^i
 $$
 
 Replace the new summation with a solution that we already know:
 
 $$
-= n2^{n+1} - \left ( 2^{n+1} - 2 \right )
+= n\,2^{n+1} - \left ( 2^{n+1} - 2 \right )
 $$
 
 Finally, reorganize the equation:
