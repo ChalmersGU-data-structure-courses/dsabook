@@ -32,7 +32,7 @@ leaf node.
 Here is a problem that typically needs to visit more than just a single
 path, but not all of the nodes.
 
-<inlineav id="IneffBinaryTreeRangeCON" src="BTRecurTutor/IneffBinaryTreeRangeCON.js" name="Inefficient Binary Tree Traversal on Range Slide Show"/>
+<inlineav id="IneffBinaryTreeRangeCON" src="Binary/IneffBinaryTreeRangeCON.js" name="Inefficient Binary Tree Traversal on Range Slide Show"/>
 
 <!-- ### Binary Search Tree Small Count Exercise -->
 

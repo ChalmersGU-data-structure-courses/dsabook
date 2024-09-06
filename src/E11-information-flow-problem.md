@@ -14,7 +14,7 @@ to make this decision we need to know some context that is not available
 just by looking at the node's parent or children.
 
 :::: {#BSTCheckFig}
-<inlineav id="BSTCheckCON" src="BTRecurTutor/BSTCheckCON.js" name="BTRecurTutor/BSTCheckCON" links="BTRecurTutor/BSTCheckCON.css" static/>
+<inlineav id="BSTCheckCON" src="Binary/BSTCheckCON.js" name="Binary/BSTCheckCON" links="Binary/BSTCheckCON.css" static/>
 
 To be a binary search tree, the left child of the node with value 40
 must have a value between 20 and 40.
