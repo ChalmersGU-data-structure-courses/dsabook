@@ -30,7 +30,7 @@ about $(n^2)/2$. Having this estimate in hand helps us when trying to
 determine an exact closed-form solution, because we will hopefully
 recognize if our proposed solution is badly wrong.
 
-<inlineav id="SummationOneToNCON" src="Background/SummationOneToNCON.js" name="Background/SummationOneToNCON" links="Background/SummationOneToNCON.css"/>
+<inlineav id="SummationOneToNCON" src="AlgAnal/SummationOneToNCON.js" name="AlgAnal/SummationOneToNCON" links="AlgAnal/SummationOneToNCON.css"/>
 
 Let us now consider some ways that we might hit upon an exact equation
 for the closed form solution to this summation. One particularly clever
