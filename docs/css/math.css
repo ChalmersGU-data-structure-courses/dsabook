@@ -1,0 +1,15 @@
+
+/* MathML settings */
+
+/* Math tables */
+
+/* Padding between table rows */
+mtr:not(:first-child) mtd { 
+    padding-top: 1ex;
+}
+
+/* Padding between table cells */
+mtd:not(:first-child) {
+    padding-left: 1ex;
+}
+
