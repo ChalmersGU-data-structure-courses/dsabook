@@ -86,6 +86,11 @@ keys are less than the pivot, we use a clever algorithm that moves
 indices inwards from the ends of the subarray, swapping values as
 necessary until the two indices meet.
 
+(If you read Wikipedia's article about quicksort, you will notice that there
+are two main partition algorithms. 
+The algorithm we describe here is called the *Hoare partition scheme* on Wikipedia,
+the other variant being the *Lomuto partition scheme*.)
+
 Since Quicksort is a recursive algorithm, we will not only partition the
 whole array, but also part of the array. Therefore `partition` needs the
 positions of the leftmost and rightmost elements in the subarray that we
@@ -251,8 +256,8 @@ first!) Instead, many Quicksort implementations use a strategy called
 *median-of-three*. In median-of-three, we pick elements from three
 positions in the array: the *first* position, the *middle* position and
 the *last* position. Then we take the median of these three elements.
-For example, given the array `3, 1, 4, 1, 5, 9, 2`, we pick out the
-elements `3` (first position), `1` (middle position) and `2` (last
+For example, given the array [3, 1, 4, 1, 5, 9, 2], we pick out the
+elements 3 (first position), 1 (middle position) and 2 (last
 position). The median of 3, 1 and 2 is 2, so we pick 2 as the pivot.
 
 Median-of-three is not guaranteed to pick a good pivot: there are cases
@@ -309,7 +314,7 @@ subarray, only the subarray bounds. Furthermore, the stack depth can be
 kept small if care is taken on the order in which Quicksort's recursive
 calls are executed. We can also place the code for `findPivot` and
 `partition` inline to eliminate the remaining function calls. Note
-however that by not processing smal sublists of size nine or less as
+however that by not processing small sublists of size nine or less as
 suggested above, most of the function calls will already have been
 eliminated. Thus, eliminating the remaining function calls will yield
 only a modest speedup.
