@@ -1,5 +1,5 @@
 
-## Lower Bounds for Sorting (optional)
+## Lower Bounds for Sorting
 
 By now you have seen many analyses for algorithms. These analyses
 generally define the upper and lower bounds for algorithms in their

@@ -67,7 +67,7 @@ Here is another example.
 
 <inlineav id="topSortDFSCON" src="Graph/topSortDFSCON.js" name="TopSort Slideshow" links="Graph/topSortDFSCON.css"/>
 
-### Queue-based Solution (optional)
+### Queue-based Solution
 
 We can implement topological sort using a queue instead of recursion, as follows.
 

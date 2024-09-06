@@ -1,5 +1,5 @@
 
-## Binary Tree Space Requirements (optional)
+## Binary Tree Space Requirements
 
 This module presents techniques for calculating the amount of
 [overhead]{.term} required by a

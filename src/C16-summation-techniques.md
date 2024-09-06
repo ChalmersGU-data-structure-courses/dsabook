@@ -1,5 +1,5 @@
 
-## Summation Techniques (optional)
+## Summation Techniques
 
 ::: alert
 ***Note***: This section is *work in progress*

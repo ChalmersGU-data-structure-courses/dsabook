@@ -1,5 +1,5 @@
 
-## The Red-Black Tree (optional)
+## The Red-Black Tree
 
 ::: alert
 ***Note***: This section is *work in progress*

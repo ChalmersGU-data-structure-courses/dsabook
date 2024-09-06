@@ -1,5 +1,5 @@
 
-## Growth Rates Review (optional) 
+## Growth Rates Review 
 
 ::: alert
 ***Note***: This section is *work in progress*

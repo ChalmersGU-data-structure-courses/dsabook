@@ -1,5 +1,5 @@
 
-## All-Pairs Shortest Paths (optional)
+## All-Pairs Shortest Paths
 
 We next consider the problem of finding the shortest distance between
 all pairs of vertices in the graph, called the

@@ -1,5 +1,5 @@
 
-## The Splay Tree (optional)
+## The Splay Tree
 
 Like the AVL tree, the splay tree is not actually a distinct data
 structure, but rather reimplements the BST insert, delete, and search

@@ -1,5 +1,5 @@
 
-## A Hard Information Flow Problem (optional)
+## A Hard Information Flow Problem
 
 Sometimes, passing the right information up and down the tree to control
 a recursive function gets complicated. The information flow itself is

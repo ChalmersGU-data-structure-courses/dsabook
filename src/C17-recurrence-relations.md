@@ -1,5 +1,5 @@
 
-## Solving Recurrence Relations (optional)
+## Solving Recurrence Relations
 
 ::: alert
 ***Note***: This section is *work in progress*

@@ -1,5 +1,5 @@
 
-## Bucket Hashing (optional)
+## Bucket Hashing
 
 Closed hashing stores all records directly in the hash table. Each
 record $R$ with key value $k_R$ has a [home position]{.term} that is $\textbf{h}(k_R)$, the slot computed by the hash

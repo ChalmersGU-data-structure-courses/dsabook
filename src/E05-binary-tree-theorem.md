@@ -1,5 +1,5 @@
 
-## The Full Binary Tree Theorem (optional)
+## The Full Binary Tree Theorem
 
 Some binary tree implementations store data only at the
 [leaf nodes](#leaf-node){.term}, using the

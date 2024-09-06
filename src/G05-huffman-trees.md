@@ -1,5 +1,5 @@
 
-## Huffman Coding Trees (optional)
+## Huffman Coding Trees
 
 One can often gain an improvement in space requirements in exchange for
 a penalty in running time. There are many situations where this is a

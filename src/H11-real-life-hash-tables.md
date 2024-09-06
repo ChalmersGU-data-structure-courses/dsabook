@@ -1,5 +1,5 @@
 
-## Hash Tables in Real Life (optional)
+## Hash Tables in Real Life
 
 Congratulations! You have reached the end of the hashing tutorial. In
 summary, a properly tuned hashing system will return records with an

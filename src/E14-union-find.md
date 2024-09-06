@@ -1,5 +1,5 @@
 
-## The Union/Find Algorithm (optional)
+## The Union/Find Algorithm
 
 [General trees](#general-tree){.term} are trees
 whose [internal nodes](#internal-node){.term}

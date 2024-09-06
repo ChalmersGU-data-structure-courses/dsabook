@@ -1,5 +1,5 @@
 
-## Doubly Linked Lists (optional)
+## Doubly Linked Lists
 
 The [singly linked list](#linked-lists) allows for direct access from a list node only to the next
 node in the list. A [doubly linked list]{.term}

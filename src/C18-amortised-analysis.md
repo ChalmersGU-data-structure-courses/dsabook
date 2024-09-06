@@ -1,5 +1,5 @@
 
-## Amortized Analysis (optional)
+## Amortized Analysis
 
 ::: alert
 ***Note***: This section is *work in progress*
@@ -40,7 +40,7 @@ stored in array **A** of length $n$.
     i = 0
     while i < A.size() and A[i] == 1:
         A[i] = 0
-        i += 1
+        i = i + 1
     if i < A.size():
         A[i] = 1
 

@@ -1,5 +1,5 @@
 
-### Trees versus Tries (optional)
+### Trees versus Tries
 
 We see that all letters with codes beginning with '0' are stored in
 the left branch, while all letters with codes beginning with '1' are

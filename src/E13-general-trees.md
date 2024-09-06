@@ -1,5 +1,5 @@
 
-## General Trees (optional)
+## General Trees
 
 Many organizations are hierarchical in nature, such as the military and
 most businesses. Consider a company with a president and some number of

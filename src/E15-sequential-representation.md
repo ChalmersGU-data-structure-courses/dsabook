@@ -1,5 +1,5 @@
 
-## Sequential Tree Representations (optional)
+## Sequential Tree Representations
 
 Next we consider a fundamentally different approach to implementing
 trees. The goal is to store a series of node values with the minimum
