@@ -17,7 +17,7 @@ $(document).ready(function() {
   var arr = av.ds.array(arrPositions, {indexed: false}).hide();
 
   // Slide 1
-  av.umsg("Since we want to be able to insert to the front or the back of the list as well as anywhere in between, there are actually $n+1$ possible insertion positions when there are $n$ elements in the list.");
+  av.umsg("Since we want to be able to insert to the front or the back of the list as well as anywhere in between, there are actually <em>n+1</em> possible insertion positions when there are <em>n</em> elements in the list.");
   av.displayInit();
 
   // Slide 2

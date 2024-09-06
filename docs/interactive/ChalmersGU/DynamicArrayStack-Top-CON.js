@@ -45,12 +45,12 @@ $(document).ready(function() {
   av.displayInit();
 
   // Slide 2
-  av.umsg("This implementation is inefficient, because now every push or pop operation will require that all elements currently in the stack be shifted one position in the array, for a cost of $\\theta(n)$ if there are $n$ elements.");
+  av.umsg("This implementation is inefficient, because now every push or pop operation will require that all elements currently in the stack be shifted one position in the array, for a cost of <em>&theta;(n)</em> if there are <em>n</em> elements.");
   arr.highlight([1, 2, 3]);
   av.step();
 
   // Slide 3
-  av.umsg("The other choice is have the top element be at position $n-1$ when there are $n$ elements in the stack. In other words, as elements are pushed onto the stack, they are appended to the end of the list.");
+  av.umsg("The other choice is have the top element be at position <em>n–1</em> when there are <em>n</em> elements in the stack. In other words, as elements are pushed onto the stack, they are appended to the end of the list.");
   arr.unhighlight([0, 1, 2]);
   arr.swap(0, 3); arr.swap(1, 2);
   arrow1.hide();
@@ -59,7 +59,7 @@ $(document).ready(function() {
   av.step();
 
   // Slide 4
-  av.umsg("Method <code>pop</code> removes the last element. In this case, the cost for each push or pop operation is only $\\theta(1)$.");
+  av.umsg("Method <code>pop</code> removes the last element. In this case, the cost for each push or pop operation is only <em>&theta;(1)</em>.");
   arr.value(3, "");
   arr.addClass(3, "unused");
   arr.unhighlight(3);

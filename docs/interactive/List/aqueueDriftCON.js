@@ -7,7 +7,7 @@ $(document).ready(function() {
   var av = new JSAV(av_name);
 
   var interpret = {
-    "sc1": "A more efficient implementation can be obtained by relaxing the requirement that all elements of the queue must be in the first $n$ positions of the array. We still require that the queue be stored be in contiguous array positions, but the contents of the queue will be permitted to drift within the array.",
+    "sc1": "A more efficient implementation can be obtained by relaxing the requirement that all elements of the queue must be in the first <em>n</em> positions of the array. We still require that the queue be stored be in contiguous array positions, but the contents of the queue will be permitted to drift within the array.",
     "sc2": " The queue after the initial four numbers 20, 5, 12, and 17 have been inserted",
     "sc3": "<code>dequeue</code> the value 20.",
     "sc4": "<code>dequeue</code> the value 5.",
@@ -15,7 +15,7 @@ $(document).ready(function() {
     "sc6": "<code>enqueue</code> the value 3.",
     "sc7": "<code>enqueue</code> the value 30.",
     "sc8": "<code>enqueue</code> the value 4.",
-    "sc9": "Now, both the enqueue and the dequeue operations can be performed in $\\theta(1)$ time because no other elements in the queue need be moved."
+    "sc9": "Now, both the enqueue and the dequeue operations can be performed in <em>&theta;(1)</em> time because no other elements in the queue need be moved."
   };
 
   // Relative offsets
