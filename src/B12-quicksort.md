@@ -45,12 +45,12 @@ sorted. The initial call to `quickSort` would be
 `quickSort(array, 0, n-1)`.
 
     function quickSort(A, left, right):
-        if left >= right:                          # Base case: Subarray length is <= 1
+        if left >= right:                         // Base case: Subarray length is ≤ 1
             return
-        pivot = findPivot(A, left, right)          # Pick a pivot index
-        pivot = partition(A, left, right, pivot)   # Partition the subarray; update pivot with its new position
-        quickSort(A, left, pivot-1)                # Sort left partition
-        quickSort(A, pivot+1, right)               # Sort right partition
+        pivot = findPivot(A, left, right)         // Pick a pivot index
+        pivot = partition(A, left, right, pivot)  // Partition the subarray; update pivot with its new position
+        quickSort(A, left, pivot-1)               // Sort left partition
+        quickSort(A, pivot+1, right)              // Sort right partition
 
 
 Function `partition` will move records to the appropriate partition and
@@ -94,7 +94,7 @@ will partition.
     function partition(A, left, right, pivot):
         swap(A, left, pivot)   // Put pivot at the leftmost index
         pivot = left
-        left = left+1          // Start partitioning from the element after the pivot
+        left = left + 1        // Start partitioning from the element after the pivot
 
         pivotValue = A[pivot]
         while True:
@@ -102,13 +102,13 @@ will partition.
             // Also stop if `left` moves past `right`: this is important, 
             // so that `left` stops if it moves past the end of the array.
             while left <= right and A[left] < pivotValue:
-                left = left+1
+                left = left + 1
 
             // Move `right` left as far as possible. Stop if equal to pivot!
             // Also stop if `right` moves all the way left to `left`,
             // see above for why.
             while left <= right and A[right] > pivotValue:
-                right = right-1
+                right = right - 1
 
             // Stop here if `left` and `right` passed each other.
             if left > right:
@@ -116,8 +116,8 @@ will partition.
 
             // Otherwise, swap the elements and move `left` and `right` on by 1.
             swap(A, left, right)
-            left = left+1
-            right = right-1
+            left = left + 1
+            right = right - 1
 
         swap(A, pivot, right)   // Finally, move the pivot into place
         return right            // Return the position of the pivot

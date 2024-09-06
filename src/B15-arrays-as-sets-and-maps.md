@@ -55,20 +55,20 @@ search. As a reminder, here are the relevant operations:
     interface SortedSet extends Set:
         first()          // Returns the first (smallest) element.
         last()           // Returns the last (largest) element.
-        floor(x)         // Returns the closest element <= x, or nothing if there is no such element.
-        ceiling(x)       // Returns the closest element >= x, or nothing if there is no such element.
+        floor(x)         // Returns the closest element ≤ x, or nothing if there is no such element.
+        ceiling(x)       // Returns the closest element ≤ x, or nothing if there is no such element.
         lower(x)         // Returns the closest element < x, or nothing if there is no such element.
         higher(x)        // Returns the closest element > x, or nothing if there is no such element.
-        between(x1, x2)  // Returns all elements x such that x1 <= x <= x2.
+        between(x1, x2)  // Returns all elements x such that x1 ≤ x ≤ x2.
 
     interface SortedMap extends Map:
         firstKey()               // Returns the first (smallest) key.
         lastKey()                // Returns the last (largest) key.
-        floorKey(key)            // Returns the closest key <= k, or nothing if there is no key.
-        ceilingKey(key)          // Returns the closest key >= k, or nothing if there is no key.
+        floorKey(key)            // Returns the closest key ≤ k, or nothing if there is no key.
+        ceilingKey(key)          // Returns the closest key ≤ k, or nothing if there is no key.
         lowerKey(key)            // Returns the closest key < k, or nothing if there is no such element.
         higherKey(key)           // Returns the closest key > k, or nothing if there is no such element.
-        keysBetween(key1, key2)  // Returns all keys k such that k1 <= k <= k2.
+        keysBetween(key1, key2)  // Returns all keys k such that k1 ≤ k ≤ k2.
 
 
 Sorted arrays can also be useful in cases where we always add *many*

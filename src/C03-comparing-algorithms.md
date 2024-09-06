@@ -170,7 +170,7 @@ Consider the following code:
     sum = 0
     for i = 0 to n-1:
         for j = 0 to n-1:
-            sum = sum+1
+            sum = sum + 1
 
 What is the running time for this code fragment? Clearly it takes longer
 to run when $n$ is larger. The basic operation in this example is the

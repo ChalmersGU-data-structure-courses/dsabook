@@ -59,7 +59,7 @@ Assume that all variables are integers.
 
     sum = 0
     for i = 0 to n*n-1:
-        sum = sum+1
+        sum = sum + 1
 
 - [x] $\Theta(n^2)$
 - [ ] $\Theta(\log n)$

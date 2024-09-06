@@ -59,18 +59,18 @@ subarray being sorted. The initial call to `mergeSort` would be
         i1 = left
         i2 = mid + 1
         for curr = left to right:
-            if i1 == mid+1:               // Left sublist exhausted
+            if i1 > mid:                  // Left sublist exhausted
                 A[curr] = temp[i2]
-                i2 = i2+1
+                i2 = i2 + 1
             else if i2 > right:           // Right sublist exhausted
                 A[curr] = temp[i1]
-                i1 = i1+1
+                i1 = i1 + 1
             else if temp[i1] <= temp[i2]: // Get smaller value
                 A[curr] = temp[i1]
-                i1 = i1+1
+                i1 = i1 + 1
             else:
                 A[curr] = temp[i2]
-                i2 = i2+1
+                i2 = i2 + 1
 
 
 
