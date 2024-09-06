@@ -40,7 +40,8 @@
 */
 
 *, *::before, *::after {
-	box-sizing: border-box;
+    /* This setting made SVG boxes look terrible: */
+	/* box-sizing: border-box; */
 }
 * {
 	margin: 0;
