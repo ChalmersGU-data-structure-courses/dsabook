@@ -140,7 +140,7 @@ Here's the code for deletion:
 
 And here's an exercise.
 
-<avembed id="LinkedList-Remove-PRO" src="ChalmersGU/LinkedList-Remove-PRO.html" type="ka" name="Linked List Remove Exercise"/>
+<avembed id="LinkedList-Remove-PRO" src="ChalmersGU/LinkedList-Remove-PRO.html" type="ka" name="Linked List Remove Exercise" height="700"/>
 
 ### Complexity analysis
 

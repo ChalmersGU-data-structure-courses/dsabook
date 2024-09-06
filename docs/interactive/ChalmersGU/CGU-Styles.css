@@ -2,7 +2,7 @@
 /*********************************************************/
 
 #ListADT-Positions-CON { 
-  height: 175px;
+  height: 190px;
 }
 
 #ListADT-Positions-CON .jsavoutput.jsavline{
@@ -10,8 +10,6 @@
 }
 
 #ListADT-Positions-CON .jsavarray .jsavnode {
-  border-color: #eed;
-  background-color: #eed;
   line-height: 60px;
   min-height: 60px;
   max-height: 60px;
@@ -83,7 +81,7 @@
 
 #StaticArrayList-Remove-CON .jsavcode {
   margin-left: 280px;
-  width: 560px;
+  width: 520px;
 }
 
 #StaticArrayList-Remove-CON .jsavoutput.jsavline {
@@ -93,13 +91,13 @@
 /*********************************************************/
 
 #DynamicArrayList-Append-CON {
-    height: 320px;
+    height: 350px;
     width: 900px;
 }
 
 #DynamicArrayList-Append-CON .jsavcode {
   margin-left: 300px;
-  width: 580px;
+  width: 520px;
 }
 
 #DynamicArrayList-Append-CON .jsavoutput.jsavline {
@@ -115,7 +113,7 @@
 
 #DynamicArrayList-Remove-CON .jsavcode {
   margin-left: 280px;
-  width: 580px;
+  width: 520px;
 }
 
 #DynamicArrayList-Remove-CON .jsavoutput.jsavline {
@@ -131,13 +129,13 @@
 /*********************************************************/
 
 #LinkedList-Iteration-CON {
-  height: 240px;
+  height: 260px;
 }
 
 /*********************************************************/
 
 #LinkedList-Problems-CON {
-  height: 240px;
+  height: 250px;
 }
 
 #LinkedList-Problems-CON .jsavoutput.jsavline {
@@ -201,7 +199,7 @@
 /*********************************************************/
 
 #DynamicArrayStack-Top-CON {
-  height: 200px;
+  height: 220px;
 }
 
 #DynamicArrayStack-Top-CON .jsavoutput.jsavline {
@@ -211,8 +209,7 @@
 /*********************************************************/
 
 #DynamicArrayStack-Push-CON {
-    height: 225px;
-    width: 900px;
+    height: 230px;
 }
 
 #DynamicArrayStack-Push-CON .jsavoutput.jsavline {
@@ -223,14 +220,13 @@
   position: relative;
   top: -5px;
   left: 135px;
-  width: 580px;
+  width: 450px;
 }
 
 /*********************************************************/
 
 #DynamicArrayStack-Pop-CON {
   height: 280px;
-  width: 900px;
 }
 
 #DynamicArrayStack-Pop-CON .jsavoutput.jsavline {
@@ -241,7 +237,7 @@
   position: relative;
   top: 5px;
   left: 135px;
-  width: 580px;
+  width: 450px;
 }
 
 /*********************************************************/
@@ -264,7 +260,7 @@
   position: relative;
   top: 0;
   left: 196px;
-  width: 450px;
+  width: 350px;
 }
 
 /*********************************************************/
@@ -281,7 +277,7 @@
   position: relative;
   top: -20px;
   left: 195px;
-  width: 500px;
+  width: 400px;
 }
 
 /*********************************************************/

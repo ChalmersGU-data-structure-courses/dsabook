@@ -16,13 +16,13 @@ $(document).ready(function() {
 
   var pseudo = av.code([
       "remove(i):",
-      "    // Precondition: 0 <= i < listSize",
-      "    x = internalArray[i]",
-      "    for k = i+1 to listSize-1:",
-      "        internalArray[k-1] = internalArray[k]",
-      "    listSize = listSize - 1",
-      "    internalArray[listSize] = null   // For garbage collection",
-      "    return x",
+      "  // Precondition: 0 <= i < listSize",
+      "  x = internalArray[i]",
+      "  for k = i+1 to listSize-1:",
+      "    internalArray[k-1] = internalArray[k]",
+      "  listSize = listSize - 1",
+      "  internalArray[listSize] = null  // For garbage collection",
+      "  return x",
     ], {"lineNumbers": false}
   );
 
