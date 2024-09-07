@@ -9,8 +9,9 @@ Two functions of $n$ have different
 [growth rates](#growth-rate){.term} if as $n$
 goes to infinity their ratio either goes to infinity or goes to zero.
 
-:::: {#RunTimeGraph}
 ::: figure
+#### Figure: Growth rates {-}
+
 ![The growth rates for five equations](images/plot.png){width=500}
 
 Two views of a graph illustrating the growth rates for six equations.
@@ -18,7 +19,6 @@ The bottom view shows in detail the lower-left portion of the top view.
 The horizontal axis represents input size. The vertical axis can
 represent time, space, or any other measure of cost.
 :::
-::::
 
 Where does $(1.618)^n$ go on here?
 

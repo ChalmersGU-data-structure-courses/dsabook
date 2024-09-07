@@ -22,8 +22,9 @@ it a bad search structure. And requiring that the BST always be in the
 shape of a complete binary tree requires excessive modification to the
 tree during update, as we see in this example.
 
-:::: {#balanceBST}
-::: figure
+::: topic
+#### Example: Rebalancing a BST {-}
+
 ![An attempt to re-balance a BST after insertion can be expensive](images/BSTBal.png){width=500}
 
 An attempt to re-balance a BST after insertion can be expensive. (a) A
@@ -32,7 +33,7 @@ with value 1 is inserted into the BST of (a). To maintain both the
 complete binary tree shape and the BST property, a major reorganization
 of the tree is required.
 :::
-::::
+
 
 If we are willing to weaken the balance requirements, we can come up
 with alternative update routines that perform well both in terms of cost

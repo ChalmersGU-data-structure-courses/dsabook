@@ -34,8 +34,9 @@ A *left rotation* is the opposite process: starting from the tree in
 that a right rotation tends to make the tree more right-leaning, while a
 left rotation tends to make it more left-leaning.
 
-:::: {#SingleRotation}
 ::: figure
+#### Figure: Tree rotation {- #SingleRotation}
+
 ![Rotation](images/SingRot.png){width=500}
 
 In a rotation, node $S$ is promoted to the root, rotating with
@@ -50,12 +51,12 @@ Going from (a) to (b) is called a *right rotation*. We can also go from
 rotation*. In general, a right rotation makes the tree more
 right-leaning, and a left rotation makes it more left-leaning.
 :::
-::::
 
 ### AVL tree insertion
 
-:::: {#AVLinsert}
 ::: figure
+#### Figure: AVL insertion {- #AVLinsert}
+
 ![An insertion that violates the AVL tree balance property](images/AVLins.png){width=500}
 
 Example of an insert operation that violates the AVL tree balance
@@ -64,7 +65,6 @@ balanced (i.e., the depths of the left and right subtrees for every node
 differ by at most one). After inserting the node with value 5, the nodes
 with values 7 and 24 are no longer balanced.
 :::
-::::
 
 Consider what happens when we insert a node with key value 5, as shown
 in [Figure #AVLinsert](#AVLinsert). The tree on
@@ -90,8 +90,9 @@ shown in [Figure #AVLsingle](#AVLsingle).
 Cases 2 and 3 can be fixed using a [double rotation]{.term}, 
 as shown in [Figure #AVLdouble](#AVLdouble).
 
-:::: {#AVLsingle}
 ::: figure
+#### Figure: Single rotation {- #AVLsingle}
+
 ![AVL tree single rotation](images/AVLSingRot.png){width=500}
 
 A single rotation in an AVL tree. This operation occurs when the excess
@@ -102,10 +103,10 @@ the AVL tree balance property. The case where the excess node is in the
 right child of the right child of the unbalanced node is handled in the
 same way.
 :::
-::::
 
-:::: {#AVLdouble}
 ::: figure
+#### Figure: Double rotation {- #AVLdouble}
+
 ![AVL tree double rotation](images/AVLDblRot.png){width=500}
 
 A double rotation in an AVL tree. This operation occurs when the excess
@@ -115,7 +116,6 @@ preserve the BST property, as well as re-balance the tree to preserve
 the AVL tree balance property. The case where the excess node is in the
 left child of the right child of $S$ is handled in the same way.
 :::
-::::
 
 The AVL tree insert algorithm begins with a normal BST insert. Then as
 the recursion unwinds up the tree, we perform the appropriate rotation

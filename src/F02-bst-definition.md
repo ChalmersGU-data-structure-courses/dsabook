@@ -10,13 +10,15 @@ following condition, known as the
 of a node whose [key]{.term} value is $K$ have
 key values less than or equal to $K$. All nodes stored in the right
 subtree of a node whose key value is $K$ have key values greater than $K$. 
-[Figure #BSTShape](#BSTShape) shows two
+[The figure below](#BSTShape) shows two
 BSTs for a collection of values. One consequence of the binary search
 tree property is that if the BST nodes are printed using an
 [inorder traversal]{.term}, then the resulting enumeration will be in sorted order from
 lowest to highest.
 
-:::: {#BSTShape}
+:::: figure
+#### Figure: Example BSTs {- #BSTShape}
+
 <inlineav id="BSTShapeCON" src="Binary/BSTShapeCON.js" name="Binary/BSTShapeCON" links="Binary/BSTShapeCON.css" static/>
 
 Two Binary Search Trees for a collection of values. Tree (a) results if

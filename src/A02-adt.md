@@ -230,7 +230,7 @@ on physical implementations for a given data structure. Other sections
 use the logical ADT for the data structure in the context of a
 higher-level task.
 
-:::: topic
+:::: figure
 #### Figure: ADTs, data structures, and data items {-}
 
 <inlineav id="ADTCON" src="Design/ADTCON.js" name="Design/ADTCON" links="Design/ADTCON.css" static/>

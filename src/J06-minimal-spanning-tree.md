@@ -166,8 +166,9 @@ have been added), but does this tree have minimum cost?
 > Prim's algorithm would have selected the wrong edge, and thus,
 > Prim's algorithm must be correct. 
 
-:::: {#PrimProof}
 ::: figure
+#### Figure: Proof of Prim's algorithm {- #PrimProof}
+
 ![Prim's MCST algorithm proof](images/PrimMST.png){width=400}
 
 Prim's MCST algorithm proof. The left oval contains that portion of the
@@ -178,6 +179,6 @@ to be in the MCST) and $e'$ (the "correct" edge to be placed in the
 MCST). Note that the path from $v_w$ to $v_j$ cannot include any marked
 vertex $v_i, i \leq j$, because to do so would form a cycle.
 :::
-::::
+
 
 <avembed id="PrimPE" src="Graph/PrimPE.html" type="pe" name="Prim's Algorithm Proficiency Exercise"/>

@@ -85,13 +85,13 @@ distribution, some of these slices associated with any given slot are
 near the tails, and some are near the center. Thus, each table slot is
 equally likely (roughly) to get a key value.
 
-:::: {#HashNormal}
 ::: figure
+#### Figure: Binning vs. modulus {- #HashNormal}
+
 ![Binning vs. Mod Function](images/HashNormal.png){width=800}
 
 A comparison of binning vs. modulus as a hash function.
 :::
-::::
 
 ### The Mid-Square Method
 
@@ -113,8 +113,9 @@ the bottom digit or the top digit of the original key value. Of course,
 if the key values all tend to be small numbers, then their squares will
 only affect the low-order digits of the hash value.
 
-:::: {#MidSquareFig}
 ::: figure
+#### Figure: Mid-square method {- #MidSquareFig}
+
 ![Mid-square method example](images/MidSquare.png){width=70}
 
 An example of the mid-square method. This image shows the traditional
@@ -127,7 +128,6 @@ output digits 2, 0, 8, 5, an 7. But it has no affect on the last 3
 digits. The key point is that the middle two digits of the result (5 and
 7) are affected by every digit of the input.
 :::
-::::
 
 Here is a little calculator for you to see how this works. Start with
 '4567' as an example.

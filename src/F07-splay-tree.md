@@ -50,8 +50,9 @@ slightly different from [Figure #AVLsingle](#AVLsingle),
 in fact the splay tree single rotation is identical to the
 AVL tree single rotation.
 
-:::: {#SingProm}
 ::: figure
+#### Figure: Single rotation {- #SingProm}
+
 ![Splay tree single rotation](images/SingRot.png){width=500}
 
 Splay tree single rotation. This rotation takes place only when the node
@@ -67,7 +68,6 @@ initial configuration of the tree (i.e., $S$ is at the root and $P$ is
 its right child), then (a) shows the result of a single rotation to
 splay $P$ to the root.
 :::
-::::
 
 Unlike the AVL tree, the splay tree requires two types of double
 rotation. Double rotations involve $S$, its parent (call it $P$), and
@@ -84,8 +84,9 @@ In other words, a zigzag rotation is used when $G$, $P$, and $S$ form a
 zigzag. The zigzag rotation is illustrated by 
 [Figure #ZigZag](#ZigZag).
 
-:::: {#ZigZag}
 ::: figure
+#### Figure: ZigZag rotation {- #ZigZag}
+
 ![Splay tree zigzag rotation](images/ZigZag.png){width=500}
 
 Splay tree zigzag rotation. (a) The original tree with $S$, $P$, and $G$
@@ -93,7 +94,6 @@ in zigzag formation. (b) The tree after the rotation takes place. The
 positions of subtrees $A$, $B$, $C$, and $D$ are altered as appropriate
 to maintain the BST property.
 :::
-::::
 
 The other double rotation is known as a [zigzig]{.term} rotation. A zigzig rotation takes place when either of the
 following two conditions are met:
@@ -110,8 +110,9 @@ different from [Figure #AVLdouble](#AVLdouble),
 in fact the zigzig rotation is identical to the AVL tree double
 rotation.
 
-:::: {#ZigZig}
 ::: figure
+#### Figure: ZigZig rotation {#ZigZig}
+
 ![Splay tree zigzig rotation](images/ZigZig.png){width=500}
 
 Splay tree zigzig rotation. (a) The original tree with $S$, $P$, and $G$
@@ -119,7 +120,6 @@ in zigzig formation. (b) The tree after the rotation takes place. The
 positions of subtrees $A$, $B$, $C$, and $D$ are altered as appropriate
 to maintain the BST property.
 :::
-::::
 
 Note that zigzag rotations tend to make the tree more balanced, because
 they bring subtrees $B$ and $C$ up one level while moving subtree $D$
@@ -150,8 +150,9 @@ The final step is a single rotation resulting in the tree of Figure (d).
 Notice that the splaying process has made the tree shallower.
 :::
 
-:::: {#SplayEx}
 ::: figure
+#### Figure: Splay tree search {- #SplayEx}
+
 ![Example of search in a splay tree](images/SplayEx.png){width=500}
 
 Example of splaying after performing a search in a splay tree. After
@@ -165,4 +166,4 @@ search had been for 91, the search would have been unsuccessful with the
 node storing key value 89 being that last one visited. In that case, the
 same splay operations would take place.
 :::
-::::
+

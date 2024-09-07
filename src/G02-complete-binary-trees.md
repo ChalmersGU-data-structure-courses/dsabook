@@ -26,13 +26,13 @@ position corresponding to that node's position within the tree. The
 table lists the array indices for the children, parent, and siblings of
 each node in the figure.
 
-:::: {#BinArray}
 ::: figure
+#### Figure: Complete binary tree {- #BinArray}
+
 ![Complete binary tree node numbering](images/BinArray.png){width=400}
 
 A complete binary tree of 12 nodes, numbered starting from 0.
 :::
-::::
 
 Here is a table that lists, for each node position, the positions of the
 parent, sibling, and children of the node.
