@@ -23,10 +23,10 @@ $(document).ready(function () {
     "            this.treeSize = this.treeSize - 1",
     "            return node.left",
     "        else:",
-    "            predecessor = largestNode(node.left)",
-    "            node.key = predecessor.key",
-    "            node.value = predecessor.value",
-    "            node.left = removeHelper(node.left, predecessor.key)",
+    "            pred = largestNode(node.left)",
+    "            node.key = pred.key",
+    "            node.value = pred.value",
+    "            node.left = removeHelper(node.left, pred.key)",
     "            return node",
     "",
   ], {lineNumbers: false,
@@ -67,7 +67,7 @@ $(document).ready(function () {
 
   bt.layout();
 
-  var rt1 = av.pointer("rt", bt.root(), {anchor: "left top"});
+  var rt1 = av.pointer("node", bt.root(), {anchor: "left top"});
 
   // Slide 1
   av.umsg("Let's look a few examples for removeHelper. We will start with an easy case. Let's see what happens when we delete 30 from this tree.");
@@ -97,7 +97,7 @@ $(document).ready(function () {
   av.step();
 
   // Slide 6
-  av.umsg("Compare rt's value of 24 against the search key value of 32. 24 is not greater than 32.");
+  av.umsg("Compare the node's value of 24 against the search key value of 32. 24 is not greater than 32.");
   pseudo.setCurrentLine("checkless");
   av.step();
 
@@ -308,7 +308,7 @@ $(document).ready(function () {
   pseudo.setCurrentLine("getmax");
   var tnode = rt.left().right();
   tnode.addClass("processing");
-  var rt2 = av.pointer("predecessor", tnode, {anchor: "right top", top: -10});
+  var rt2 = av.pointer("pred", tnode, {anchor: "right top", top: -10});
   av.step();
 
   // Slide 29

@@ -34,7 +34,6 @@ $(document).ready(function() {
     "    else:  // key == node.key",
     "        node.value = value",
     "    return node",
-    "}",
   ], {lineNumbers: false,
       tags: {
         "sig": 1,

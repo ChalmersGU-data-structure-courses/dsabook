@@ -28,7 +28,7 @@ $(document).ready(function () {
 
   // Slide 3
   // Set up the tree
-  var btTop = 320;
+  var btTop = 250;
   var btLeft = 305;
   var bt = av.ds.binarytree({nodegap: 15, top: btTop, left: btLeft});
   bt.root('20');
@@ -101,7 +101,7 @@ $(document).ready(function () {
   av.umsg("We now proceed to the recursive calls. The first recursive call counts nodes in range in the left sub-tree, and the second recursive call counts nodes in range in the right subtree.");
   pseudo.unhighlight(5);
   pseudo.highlight([7, 8]);
-  var el2= av.g.ellipse(342, btTop + 108, 50 , 50).css({fill: "red", opacity: 0.4});
+  var el2 = av.g.ellipse(342, btTop + 108, 50 , 50).css({fill: "red", opacity: 0.4});
   av.step();
 
   // Slide 12
