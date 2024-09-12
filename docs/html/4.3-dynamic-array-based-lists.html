@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -255,22 +241,17 @@ You can try the calculation yourself, for say
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>000</mn><mo>,</mo><mn>000</mn></mrow><annotation encoding="application/x-tex">n = 1,000,000</annotation></semantics></math>.
 What happens is that <code>resizeArray</code> gets called 100 times less
 often – so there 100 times fewer elements copied. But the runtime is
-still quadratic<a href="#fn1" class="footnote-ref" id="fnref1"
-role="doc-noteref"><sup>1</sup></a>. When
+still quadratic. When
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>000</mn><mo>,</mo><mn>000</mn></mrow><annotation encoding="application/x-tex">n = 1,000,000</annotation></semantics></math>,
 the total number of elements copied is about
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn><mo>,</mo><mn>000</mn><mo>,</mo><mn>000</mn><mo>,</mo><mn>000</mn></mrow><annotation encoding="application/x-tex">5,000,000,000</annotation></semantics></math>,
 still far too many.</p>
-<aside id="footnotes" class="footnotes footnotes-end-of-block"
-role="doc-footnote">
-<ol>
-<li id="fn1"><p>You can get a precise number by using the formula for an
-<a
+<div class="note">
+<p><em>Note</em>: You can get a precise number of elements copied by
+using the formula for an <a
 href="https://en.wikipedia.org/wiki/Arithmetic_progression">arithmetic
-progression</a>.<a href="#fnref1" class="footnote-back"
-role="doc-backlink">↩︎</a></p></li>
-</ol>
-</aside>
+progression</a>.</p>
+</div>
 <p>In short, <strong>growing the array size by a constant amount is
 bad</strong>, because a loop that repeatedly adds to the array will take
 quadratic time.</p>

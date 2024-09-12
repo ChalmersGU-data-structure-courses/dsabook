@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -95,12 +81,12 @@
 </nav>
 <nav class="sitenav">
 <div>
-<a href="2.5-bubble-sort-optional.html" class="navbutton">&lt;&lt;</a>
-<a href="2.5-bubble-sort-optional.html" accesskey="p" rel="previous">Bubble Sort (optional)</a>
+<a href="2.5-bubble-sort.html" class="navbutton">&lt;&lt;</a>
+<a href="2.5-bubble-sort.html" accesskey="p" rel="previous">Bubble Sort</a>
 </div>
 <div>
-<a href="2.7-the-cost-of-exchange-sorting-optional.html" accesskey="n" rel="next">The Cost of Exchange Sorting (optional)</a>
-<a href="2.7-the-cost-of-exchange-sorting-optional.html" class="navbutton">&gt;&gt;</a>
+<a href="2.7-the-cost-of-exchange-sorting.html" accesskey="n" rel="next">The Cost of Exchange Sorting</a>
+<a href="2.7-the-cost-of-exchange-sorting.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
@@ -125,7 +111,8 @@ for our last
 sort, called <a href="2.6-selection-sort.html#selection-sort"
 class="term"
 title="While this sort requires $\Theta(n^2)$ time in the best, average, and worst cases, it requires only $\Theta(n)$ swap operations. Thus, it does relatively well in applications where swaps are expensive. It can be viewed as an optimization on bubble sort, where a swap is deferred until the end of each iteration.">Selection
-Sort</a>. The
+Sort</a>.</p>
+<p>The
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>’th
 pass of Selection Sort “selects” the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>’th
@@ -141,12 +128,13 @@ number of swaps required will be
 <p>Here is an implementation for Selection Sort.</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> selectionSort(A):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="op">=</span> <span class="dv">0</span> <span class="kw">to</span> A.<span class="bu">size</span>()<span class="op">-</span><span class="dv">1</span>:             <span class="co">// Select i&#39;th biggest element</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        bigindex <span class="op">=</span> i                     <span class="co">// Current biggest index</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="op">=</span> <span class="dv">0</span> <span class="kw">to</span> A.<span class="bu">size</span>()<span class="op">-</span>i:         <span class="co">// Find the max value</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> A[j] <span class="op">&gt;</span> A[bigindex]:       <span class="co">// Found something bigger  </span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                bigindex <span class="op">=</span> j             <span class="co">// Remember bigger index</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        swap(A, bigindex, A.<span class="bu">size</span>()<span class="op">-</span>i<span class="op">-</span><span class="dv">1</span>)  <span class="co">// Put it into place</span></span></code></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    N <span class="op">=</span> A.<span class="bu">size</span>()</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="op">=</span> <span class="dv">0</span> <span class="kw">to</span> N<span class="op">-</span><span class="dv">1</span>:               <span class="co">// Select i&#39;th biggest element</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        bigindex <span class="op">=</span> N <span class="op">-</span> i            <span class="co">// Current biggest index</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="dv">0</span> <span class="kw">to</span> N<span class="op">-</span>i<span class="op">-</span><span class="dv">1</span>:        <span class="co">// Find the max value</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> A[j] <span class="op">&gt;</span> A[bigindex]:  <span class="co">// Found something bigger  </span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                bigindex <span class="op">=</span> j        <span class="co">// Remember bigger index</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        swap(A, bigindex, N<span class="op">-</span>i)      <span class="co">// Put it into place</span></span></code></pre></div>
 <p>Consider the example of the following array.</p>
 <p>
 <div id="selectionsortS1CON" class="ssAV" data-short-name="selectionsortS1CON" data-long-name="Selection Sort Slideshow 1" alt="Selection Sort Slideshow 1" tabIndex="-1">
@@ -531,12 +519,12 @@ goes from 1 to
 <footer>
 <nav class="sitenav">
 <div class="navlink">
-<a href="2.5-bubble-sort-optional.html" class="navbutton">&lt;&lt;</a>
-<a href="2.5-bubble-sort-optional.html" accesskey="p" rel="previous">Bubble Sort (optional)</a>
+<a href="2.5-bubble-sort.html" class="navbutton">&lt;&lt;</a>
+<a href="2.5-bubble-sort.html" accesskey="p" rel="previous">Bubble Sort</a>
 </div>
 <div class="navlink">
-<a href="2.7-the-cost-of-exchange-sorting-optional.html" accesskey="n" rel="next">The Cost of Exchange Sorting (optional)</a>
-<a href="2.7-the-cost-of-exchange-sorting-optional.html" class="navbutton">&gt;&gt;</a>
+<a href="2.7-the-cost-of-exchange-sorting.html" accesskey="n" rel="next">The Cost of Exchange Sorting</a>
+<a href="2.7-the-cost-of-exchange-sorting.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </footer>

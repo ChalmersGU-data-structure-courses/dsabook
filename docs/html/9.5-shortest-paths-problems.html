@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -313,10 +299,8 @@ to
 must have its next-to-last vertex in
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>.
 Thus,</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mi>𝐝</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>S</mi><mo>,</mo><mi>X</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><munder><mo>min</mo><mrow><mi>U</mi><mo>∈</mo><mi>𝐒</mi></mrow></munder><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐝</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>S</mi><mo>,</mo><mi>U</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>𝐰</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>U</mi><mo>,</mo><mi>X</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr></mtable><annotation encoding="application/x-tex">
-\begin{eqnarray}
-\mathbf{d}(S, X) &amp;=&amp; \min_{U \in \mathbf{S}}(\mathbf{d}(S, U) + \mathbf{w}(U, X))
-\end{eqnarray}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐝</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>S</mi><mo>,</mo><mi>X</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><munder><mo>min</mo><mrow><mi>U</mi><mo>∈</mo><mi>𝐒</mi></mrow></munder><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐝</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>S</mi><mo>,</mo><mi>U</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>𝐰</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>U</mi><mo>,</mo><mi>X</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+\mathbf{d}(S, X) = \min_{U \in \mathbf{S}}(\mathbf{d}(S, U) + \mathbf{w}(U, X))
 </annotation></semantics></math></p>
 <p>In other words, the shortest path from
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>

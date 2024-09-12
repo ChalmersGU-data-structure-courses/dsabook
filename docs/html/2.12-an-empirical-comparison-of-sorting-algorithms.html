@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -97,8 +83,8 @@
 <a href="2.11-quicksort.html" accesskey="p" rel="previous">Quicksort</a>
 </div>
 <div>
-<a href="2.13-lower-bounds-for-sorting-optional.html" accesskey="n" rel="next">Lower Bounds for Sorting (optional)</a>
-<a href="2.13-lower-bounds-for-sorting-optional.html" class="navbutton">&gt;&gt;</a>
+<a href="2.13-lower-bounds-for-sorting.html" accesskey="n" rel="next">Lower Bounds for Sorting</a>
+<a href="2.13-lower-bounds-for-sorting.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
@@ -118,7 +104,7 @@ same asymptotic complexity. Nor does asymptotic analysis say anything
 about which algorithm is best for sorting small lists. For answers to
 these questions, we can turn to empirical testing.</p>
 <section id="SortCompTable" class="level4 unnumbered topic">
-<h4 class="unnumbered">Table</h4>
+<h4 class="unnumbered">Table: Empirical comparison</h4>
 <p>Empirical comparison of sorting algorithms run on a 3.4 GHz Intel
 Pentium 4 CPU running Linux. All times shown are milliseconds.</p>
 <table>
@@ -221,10 +207,9 @@ href="2.12-an-empirical-comparison-of-sorting-algorithms.html#SortCompTable">The
 table above</a> shows timing results for actual implementations of the
 sorting algorithms presented in this chapter. The algorithms compared
 include <a href="2.4-insertion-sort.html#insertion-sort">Insertion
-Sort</a>, <a
-href="2.8-optimizing-sort-algorithms-with-code-tuning-optional.html#bubble-sort">Bubble
-Sort</a>, <a href="2.6-selection-sort.html#selection-sort">Selection
-Sort</a>, <a href="2.11-quicksort.html#quicksort">Quicksort</a>, and <a
+Sort</a>, <a href="2.5-bubble-sort.html#bubble-sort">Bubble Sort</a>, <a
+href="2.6-selection-sort.html#selection-sort">Selection Sort</a>, <a
+href="2.11-quicksort.html#quicksort">Quicksort</a>, and <a
 href="2.9-mergesort.html#mergesort">Mergesort</a>.</p>
 <p>For Quicksort, two versions are compared: the basic implementation
 and an optimized version that does not partition sublists below length
@@ -476,8 +461,8 @@ because there is no longer anything to compare it to.</li>
 <a href="2.11-quicksort.html" accesskey="p" rel="previous">Quicksort</a>
 </div>
 <div class="navlink">
-<a href="2.13-lower-bounds-for-sorting-optional.html" accesskey="n" rel="next">Lower Bounds for Sorting (optional)</a>
-<a href="2.13-lower-bounds-for-sorting-optional.html" class="navbutton">&gt;&gt;</a>
+<a href="2.13-lower-bounds-for-sorting.html" accesskey="n" rel="next">Lower Bounds for Sorting</a>
+<a href="2.13-lower-bounds-for-sorting.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </footer>

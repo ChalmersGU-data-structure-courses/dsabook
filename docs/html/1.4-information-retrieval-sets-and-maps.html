@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -119,10 +105,10 @@ word).</li>
 <li><em>Database lookup:</em> Given a list of people, find the person
 with a given <em>personnummer</em>.</li>
 <li><em>Search engine:</em> Given a collection of documents (e.g. web
-pages), find all web pages containing a given word.</li>
+pages), find all documents containing a given word.</li>
 <li><em>Between X and Y:</em> Given a list of all Swedish towns and
-their populations, find the towns whose population is between 1,000 and
-2,000.</li>
+their populations, find the towns whose population is between 5,000 and
+10,000.</li>
 </ul>
 <p>All of these problems can be solved using two ADTs, the <em>set</em>
 and the <em>map</em>. Both ADTs can be used to maintain a collection of
@@ -141,9 +127,9 @@ href="https://docs.python.org/3/tutorial/datastructures.html#sets">sets</a>
 and <a
 href="https://docs.python.org/3/tutorial/datastructures.html#dictionaries">dictionaries</a>
 (another word for maps) as part of its standard library.</p>
-<section id="spell-checking-sets" class="level3" data-number="1.4.1">
+<section id="sets" class="level3" data-number="1.4.1">
 <h3 data-number="1.4.1"><span class="header-section-number">1.4.1</span>
-Spell-checking: Sets</h3>
+Sets</h3>
 <p>A <em>set</em> represents a collection of items, where we can
 <em>add</em> and <em>remove</em> items, and <em>check</em> if a given
 item is present in the set. A set cannot contain duplicate items: if we
@@ -156,6 +142,8 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a hr
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">add</span>(x)       <span class="co">// Adds x to the set. Returns true if the element wasn&#39;t already in the set.</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">remove</span>(x)    <span class="co">// Removes x from the set. Returns true if the element was in the set.</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">contains</span>(x)  <span class="co">// Returns true if x is in the set.</span></span></code></pre></div>
+<section id="example-spell-checking" class="level4 unnumbered topic">
+<h4 class="unnumbered">Example: Spell-checking</h4>
 <p>We can use a set for the spell-checking example:</p>
 <ul>
 <li>Given a set containing all valid English words, check if a given
@@ -187,15 +175,16 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a hr
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
 <span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(word, <span class="st">&quot;is INVALID&quot;</span>)</span></code></pre></div>
 </section>
-<section id="database-lookup-maps" class="level3" data-number="1.4.2">
+</section>
+<section id="maps-or-dictionaries" class="level3" data-number="1.4.2">
 <h3 data-number="1.4.2"><span class="header-section-number">1.4.2</span>
-Database lookup: Maps</h3>
-<p>A <em>map</em> represents a set of <em>keys</em>, where each key has
-an associated <em>value</em>. We can <em>add</em> and <em>remove</em>
-keys, but when we add a key we must specify what <em>value</em> we want
-to associated with it. We can <em>check</em> if a given key is present
-in the map. We can also <em>look up</em> a key to find the associated
-value.</p>
+Maps or dictionaries</h3>
+<p>A <em>map</em> (or dictionary) represents a set of <em>keys</em>,
+where each key has an associated <em>value</em>. We can <em>add</em> and
+<em>remove</em> keys, but when we add a key we must specify what
+<em>value</em> we want to associated with it. We can <em>check</em> if a
+given key is present in the map. We can also <em>look up</em> a key to
+find the associated value.</p>
 <p>A map cannot contain duplicate <em>keys</em>, so each key is
 associated with exactly one value. If we call <code>put(k,v)</code>, but
 the key <code>k</code> is already present, then the value associated
@@ -212,6 +201,8 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a hr
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">containsKey</span>(key)  <span class="co">// Returns true if the key has an associated value.</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">isEmpty</span>()         <span class="co">// Returns true if there are no keys.</span></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span>()            <span class="co">// Returns the number of keys (i.e., the number of key/value pairs).</span></span></code></pre></div>
+<section id="example-database-lookup" class="level4 unnumbered topic">
+<h4 class="unnumbered">Example: Database lookup</h4>
 <p>The map is a perfect match for our database example:</p>
 <ul>
 <li>Given a list of people, find the person with a given
@@ -245,10 +236,10 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a hr
 <span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Find the person who has a given personnummer.</span></span>
 <span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">this</span>.database.<span class="bu">get</span>(pnr)</span></code></pre></div>
 </section>
-<section id="search-engine-multimaps" class="level3"
-data-number="1.4.3">
+</section>
+<section id="multimaps" class="level3" data-number="1.4.3">
 <h3 data-number="1.4.3"><span class="header-section-number">1.4.3</span>
-Search engine: Multimaps</h3>
+Multimaps</h3>
 <p>Maps have the restriction that each key has only one value. However,
 sometimes we want to store a list of records, where some records might
 have the same key. Then we want something like a map, but where a key
@@ -258,6 +249,8 @@ can have multiple values associated with it. This structure is called a
 data structure. Instead, we can implement it ourselves. The idea is to
 use a map, where the key is a word, and the value is not a document but
 a <em>set</em> of documents.</p>
+<section id="example-search-engine" class="level4 unnumbered topic">
+<h4 class="unnumbered">Example: Search engine</h4>
 <p>A multimap is the perfect data structure for our search engine
 example:</p>
 <ul>
@@ -299,6 +292,7 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a hr
 <span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>            <span class="co">// If the word is not found, return an empty set.</span></span>
 <span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="kw">new</span> <span class="bu">Set</span>()</span></code></pre></div>
 </section>
+</section>
 <section id="between-x-and-y-sorted-sets-and-maps" class="level3"
 data-number="1.4.4">
 <h3 data-number="1.4.4"><span class="header-section-number">1.4.4</span>
@@ -306,34 +300,34 @@ Between X and Y: Sorted Sets and Maps</h3>
 <p>Consider the final example problem:</p>
 <ul>
 <li>Given a list of all Swedish towns and their populations, find the
-towns whose population is between 1,000 and 2,000.</li>
+towns whose population is between 5,000 and 10,000.</li>
 </ul>
 <p>One way to solve this problem would be to use a multimap. The key
 would be a population number, and the values would be all towns having
 that population. Then we could find the required towns by making a
 sequence of calls to <code>contains</code>:</p>
 <ul>
-<li><code>contains(1000)</code> - find all towns with 1,000
+<li><code>contains(5000)</code> - find all towns with 5,000
 population</li>
-<li><code>contains(1001)</code> - find all towns with 1,001
+<li><code>contains(5001)</code> - find all towns with 5,001
 population</li>
-<li><code>contains(1002)</code> - find all towns with 1,002
+<li><code>contains(5002)</code> - find all towns with 5,002
 population</li>
 <li>etc.</li>
 </ul>
-<p>But this is not a sensible approach. We would need to make ~1,000
+<p>But this is not a sensible approach. We would need to make ~5,000
 calls to <code>contains</code>, and if we wanted to instead find all
-cities in the USA having a population of between 1 and 2 million, we
+cities in Europe having a population of between 1 and 2 million, we
 would need to make ~1,000,000 calls.</p>
 <p>There is a better way. If the towns are stored in an array, and
 sorted by population, we can use the following algorithm:</p>
 <ul>
 <li>Find the position in the array of the <em>first</em> town that has a
-population of <em>at least</em> 1,000. (We will see in the section about
+population of <em>at least</em> 5,000. (We will see in the section about
 <a href="2.1-searching-in-an-array.html#binary-search">binary search</a>
 that it is possible to find this position efficiently.)</li>
 <li>Find the position in the array of the <em>last</em> town that has a
-population of <em>at most</em> 2,000.</li>
+population of <em>at most</em> 10,000.</li>
 <li>Now return all towns between those two positions in the array.</li>
 </ul>
 <p>This is an example of a <em>range query</em>: given a map, finding
@@ -424,8 +418,11 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb7-1"><a hr
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    lower(x)         <span class="co">// Returns the closest element &lt; x, or nothing if there is no such element.</span></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    higher(x)        <span class="co">// Returns the closest element &gt; x, or nothing if there is no such element.</span></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    between(x1, x2)  <span class="co">// Returns all elements x such that x1 &lt;= x &lt;= x2.</span></span></code></pre></div>
+<section id="example-small-swedish-towns"
+class="level4 unnumbered topic">
+<h4 class="unnumbered">Example: Small Swedish towns</h4>
 <p>Here is how to use a sorted map ADT to find all Swedish towns having
-between 1,000 and 2,000 population. As there may be towns that have the
+between 5,000 and 10,000 population. As there may be towns that have the
 same population, we need a <em>multimap</em>. As before, we solve this
 by having the key be a population number and the value be a set of
 towns.</p>
@@ -461,6 +458,7 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb8-1"><a hr
 <span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> <span class="kw">each</span> city <span class="kw">in</span> <span class="va">this</span>.cities.<span class="bu">get</span>(population):</span>
 <span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>                result.<span class="bu">add</span>(city)</span>
 <span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> result</span></code></pre></div>
+</section>
 </section>
 <section id="how-to-implement-sets-and-maps" class="level3"
 data-number="1.4.5">

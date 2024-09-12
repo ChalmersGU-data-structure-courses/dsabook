@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -93,8 +79,8 @@
 </nav>
 <nav class="sitenav">
 <div>
-<a href="6.7-skip-lists-optional.html" class="navbutton">&lt;&lt;</a>
-<a href="6.7-skip-lists-optional.html" accesskey="p" rel="previous">Skip Lists (optional)</a>
+<a href="6.7-skip-lists.html" class="navbutton">&lt;&lt;</a>
+<a href="6.7-skip-lists.html" accesskey="p" rel="previous">Skip Lists</a>
 </div>
 <div>
 <a href="7.1-array-representation-for-complete-binary-trees.html" accesskey="n" rel="next">Array Representation for Complete Binary Trees</a>
@@ -156,9 +142,9 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a hr
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">getMin</span>()     <span class="co">// Returns the minimum element, without removing it.</span></span></code></pre></div>
 <p>Note that this API assumes that the priority queue orders the
 elements in <em>ascending</em> order. There is also the possibility of
-ordering in descending order –that kind of queue is called a <em>maximum
-priority queue</em>. If you have a minimum priority queue, it’s
-straightforward to turn it into a maximum priority queue.</p>
+ordering in descending order – that kind of queue is called a
+<em>maximum priority queue</em>. If you have a minimum priority queue,
+it’s straightforward to turn it into a maximum priority queue.</p>
 <p>Now let’s look at a couple of applications of priority queues.</p>
 <section id="example-sorting" class="level4 unnumbered topic">
 <h4 class="unnumbered">Example: Sorting</h4>
@@ -279,8 +265,8 @@ transactions, then the complexity of <code>add</code> is
 <footer>
 <nav class="sitenav">
 <div class="navlink">
-<a href="6.7-skip-lists-optional.html" class="navbutton">&lt;&lt;</a>
-<a href="6.7-skip-lists-optional.html" accesskey="p" rel="previous">Skip Lists (optional)</a>
+<a href="6.7-skip-lists.html" class="navbutton">&lt;&lt;</a>
+<a href="6.7-skip-lists.html" accesskey="p" rel="previous">Skip Lists</a>
 </div>
 <div class="navlink">
 <a href="7.1-array-representation-for-complete-binary-trees.html" accesskey="n" rel="next">Array Representation for Complete Binary Trees</a>

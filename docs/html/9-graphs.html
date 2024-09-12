@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -94,8 +80,8 @@
 </nav>
 <nav class="sitenav">
 <div>
-<a href="8.10-hash-tables-in-real-life-optional.html" class="navbutton">&lt;&lt;</a>
-<a href="8.10-hash-tables-in-real-life-optional.html" accesskey="p" rel="previous">Hash Tables in Real Life (optional)</a>
+<a href="8.10-hash-tables-in-real-life.html" class="navbutton">&lt;&lt;</a>
+<a href="8.10-hash-tables-in-real-life.html" accesskey="p" rel="previous">Hash Tables in Real Life</a>
 </div>
 <div>
 <a href="9.1-graph-representations.html" accesskey="n" rel="next">Graph Representations</a>
@@ -151,26 +137,21 @@ title="The connection that links two nodes in a tree, linked list, or graph.">ed
 such that each edge in
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐄</mi><annotation encoding="application/x-tex">\mathbf{E}</annotation></semantics></math>
 is a connection between a pair of vertices in
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐕</mi><annotation encoding="application/x-tex">\mathbf{V}</annotation></semantics></math>.<a
-href="#fn1" class="footnote-ref" id="fnref1"
-role="doc-noteref"><sup>1</sup></a> The number of vertices is written
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐕</mi><annotation encoding="application/x-tex">\mathbf{V}</annotation></semantics></math>.
+The number of vertices is written
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="true" form="postfix">|</mo></mrow><annotation encoding="application/x-tex">|\mathbf{V}|</annotation></semantics></math>,
 and the number of edges is written
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">|</mo><mi>𝐄</mi><mo stretchy="true" form="postfix">|</mo></mrow><annotation encoding="application/x-tex">|\mathbf{E}|</annotation></semantics></math>.
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">|</mo><mi>𝐄</mi><mo stretchy="true" form="postfix">|</mo></mrow><annotation encoding="application/x-tex">|\mathbf{E}|</annotation></semantics></math>
 can range from zero to a maximum of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow><mo stretchy="true" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="true" form="postfix">|</mo></mrow><mn>2</mn></msup><mo>−</mo><mrow><mo stretchy="true" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="true" form="postfix">|</mo></mrow></mrow><annotation encoding="application/x-tex">|\mathbf{V}|^2 - |\mathbf{V}|</annotation></semantics></math>.</p>
-<aside id="footnotes" class="footnotes footnotes-end-of-block"
-role="doc-footnote">
-<ol>
-<li id="fn1"><p>Some graph applications require that a given pair of
+<div class="note">
+<p><em>Note</em>: Some graph applications require that a given pair of
 vertices can have multiple or parallel edges connecting them, or that a
 vertex can have an edge to itself. However, the applications discussed
 here do not require either of these special cases. To simplify our graph
-API, we will assume that there are no duplicate edges.<a href="#fnref1"
-class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</aside>
+API, we will assume that there are no duplicate edges.</p>
+</div>
 <p>A graph whose edges are not directed is called an <a
 href="10-glossary.html#undirected-graph" class="term"
 title="A graph whose edges do not have a direction.">undirected
@@ -358,8 +339,8 @@ edges.</p>
 <footer>
 <nav class="sitenav">
 <div class="navlink">
-<a href="8.10-hash-tables-in-real-life-optional.html" class="navbutton">&lt;&lt;</a>
-<a href="8.10-hash-tables-in-real-life-optional.html" accesskey="p" rel="previous">Hash Tables in Real Life (optional)</a>
+<a href="8.10-hash-tables-in-real-life.html" class="navbutton">&lt;&lt;</a>
+<a href="8.10-hash-tables-in-real-life.html" accesskey="p" rel="previous">Hash Tables in Real Life</a>
 </div>
 <div class="navlink">
 <a href="9.1-graph-representations.html" accesskey="n" rel="next">Graph Representations</a>

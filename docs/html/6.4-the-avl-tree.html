@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -97,8 +83,8 @@
 <a href="6.3-balanced-trees.html" accesskey="p" rel="previous">Balanced Trees</a>
 </div>
 <div>
-<a href="6.5-the-red-black-tree-optional.html" accesskey="n" rel="next">The Red-Black Tree (optional)</a>
-<a href="6.5-the-red-black-tree-optional.html" class="navbutton">&gt;&gt;</a>
+<a href="6.5-the-red-black-tree.html" accesskey="n" rel="next">The Red-Black Tree</a>
+<a href="6.5-the-red-black-tree.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
@@ -161,8 +147,8 @@ tree in (b), transforming it to the tree in (a), by lifting node
 up. Notice that a right rotation tends to make the tree more
 right-leaning, while a left rotation tends to make it more
 left-leaning.</p>
-<div id="SingleRotation">
-<div class="figure">
+<section id="SingleRotation" class="level4 unnumbered figure">
+<h4 class="unnumbered">Figure: Tree rotation</h4>
 <figure>
 <img src="images/SingRot.png" width="500" alt="Rotation" />
 <figcaption aria-hidden="true">Rotation</figcaption>
@@ -193,14 +179,13 @@ also go from (b) to (a) promoting node
 to the root – this is called a <em>left rotation</em>. In general, a
 right rotation makes the tree more right-leaning, and a left rotation
 makes it more left-leaning.</p>
-</div>
-</div>
+</section>
 </section>
 <section id="avl-tree-insertion" class="level3" data-number="6.4.2">
 <h3 data-number="6.4.2"><span class="header-section-number">6.4.2</span>
 AVL tree insertion</h3>
-<div id="AVLinsert">
-<div class="figure">
+<section id="AVLinsert" class="level4 unnumbered figure">
+<h4 class="unnumbered">Figure: AVL insertion</h4>
 <figure>
 <img src="images/AVLins.png" width="500"
 alt="An insertion that violates the AVL tree balance property" />
@@ -212,8 +197,7 @@ property. Prior to the insert operation, all nodes of the tree are
 balanced (i.e., the depths of the left and right subtrees for every node
 differ by at most one). After inserting the node with value 5, the nodes
 with values 7 and 24 are no longer balanced.</p>
-</div>
-</div>
+</section>
 <p>Consider what happens when we insert a node with key value 5, as
 shown in <a href="6.4-the-avl-tree.html#AVLinsert">Figure
 #AVLinsert</a>. The tree on the left meets the AVL tree balance
@@ -249,8 +233,8 @@ class="term"
 title="A type of rebalancing operation used by the splay tree and AVL tree.">double
 rotation</a>, as shown in <a
 href="6.4-the-avl-tree.html#AVLdouble">Figure #AVLdouble</a>.</p>
-<div id="AVLsingle">
-<div class="figure">
+<section id="AVLsingle" class="level4 unnumbered figure">
+<h4 class="unnumbered">Figure: Single rotation</h4>
 <figure>
 <img src="images/AVLSingRot.png" width="500"
 alt="AVL tree single rotation" />
@@ -265,10 +249,9 @@ By rearranging the nodes as shown, we preserve the BST property, as well
 as re-balance the tree to preserve the AVL tree balance property. The
 case where the excess node is in the right child of the right child of
 the unbalanced node is handled in the same way.</p>
-</div>
-</div>
-<div id="AVLdouble">
-<div class="figure">
+</section>
+<section id="AVLdouble" class="level4 unnumbered figure">
+<h4 class="unnumbered">Figure: Double rotation</h4>
 <figure>
 <img src="images/AVLDblRot.png" width="500"
 alt="AVL tree double rotation" />
@@ -284,15 +267,14 @@ as re-balance the tree to preserve the AVL tree balance property. The
 case where the excess node is in the left child of the right child of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
 is handled in the same way.</p>
-</div>
-</div>
+</section>
 <p>The AVL tree insert algorithm begins with a normal BST insert. Then
 as the recursion unwinds up the tree, we perform the appropriate
 rotation on any node that is found to be unbalanced. Deletion is
 similar; however, consideration for unbalanced nodes must begin at the
 level of the <em>deleteMin</em> operation.</p>
-<section id="example-33" class="level4 unnumbered topic">
-<h4 class="unnumbered">Example</h4>
+<section id="example-avl-insertion" class="level4 unnumbered topic">
+<h4 class="unnumbered">Example: AVL insertion</h4>
 <p>In <a href="6.4-the-avl-tree.html#AVLinsert">Figure #AVLinsert</a>
 (b), the bottom-most unbalanced node has value 7. The excess node (with
 value 5) is in the right subtree of the left child of 7, so we have an
@@ -466,8 +448,8 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a hr
 <a href="6.3-balanced-trees.html" accesskey="p" rel="previous">Balanced Trees</a>
 </div>
 <div class="navlink">
-<a href="6.5-the-red-black-tree-optional.html" accesskey="n" rel="next">The Red-Black Tree (optional)</a>
-<a href="6.5-the-red-black-tree-optional.html" class="navbutton">&gt;&gt;</a>
+<a href="6.5-the-red-black-tree.html" accesskey="n" rel="next">The Red-Black Tree</a>
+<a href="6.5-the-red-black-tree.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </footer>

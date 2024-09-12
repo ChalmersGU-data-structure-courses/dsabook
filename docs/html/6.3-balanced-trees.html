@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -137,8 +123,8 @@ the relative values of a node and its children, making it a bad search
 structure. And requiring that the BST always be in the shape of a
 complete binary tree requires excessive modification to the tree during
 update, as we see in this example.</p>
-<div id="balanceBST">
-<div class="figure">
+<section id="example-rebalancing-a-bst" class="level4 unnumbered topic">
+<h4 class="unnumbered">Example: Rebalancing a BST</h4>
 <figure>
 <img src="images/BSTBal.png" width="500"
 alt="An attempt to re-balance a BST after insertion can be expensive" />
@@ -150,8 +136,7 @@ A BST with six nodes in the shape of a complete binary tree. (b) A node
 with value 1 is inserted into the BST of (a). To maintain both the
 complete binary tree shape and the BST property, a major reorganization
 of the tree is required.</p>
-</div>
-</div>
+</section>
 <p>If we are willing to weaken the balance requirements, we can come up
 with alternative update routines that perform well both in terms of cost
 for the update and in balance for the resulting tree structure. <a
@@ -166,12 +151,10 @@ This is a little like the idea of path compression used by the <a
 href="10-glossary.html#union-find" class="term"
 title="A process for mainining a collection of disjoint sets. The FIND operation determines which disjoint set a given object resides in, and the UNION operation combines two disjoint sets when it is determined that they are members of the same equivalence class under some equivalence relation.">UNION/FIND</a>
 algorithm. One example of such a compromise is called the <a
-href="6.6-the-splay-tree-optional.html#the-splay-tree-optional">splay
-tree</a>.</p>
+href="6.6-the-splay-tree.html#the-splay-tree">splay tree</a>.</p>
 <p>The <a
-href="6.5-the-red-black-tree-optional.html#the-red-black-tree-optional">red-black
-tree</a> is also a binary tree, but it uses a different balancing
-mechanism.</p>
+href="6.5-the-red-black-tree.html#the-red-black-tree">red-black tree</a>
+is also a binary tree, but it uses a different balancing mechanism.</p>
 </section>
 </main>
 

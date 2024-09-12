@@ -7,10 +7,11 @@
   <meta name="author" content="Cliff Shaffer" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
-  <title>DSABook – The Union/Find Algorithm (optional)</title>
+  <title>DSABook – The Union/Find Algorithm</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -94,21 +80,20 @@
 </nav>
 <nav class="sitenav">
 <div>
-<a href="5.10-general-trees-optional.html" class="navbutton">&lt;&lt;</a>
-<a href="5.10-general-trees-optional.html" accesskey="p" rel="previous">General Trees (optional)</a>
+<a href="5.10-general-trees.html" class="navbutton">&lt;&lt;</a>
+<a href="5.10-general-trees.html" accesskey="p" rel="previous">General Trees</a>
 </div>
 <div>
-<a href="5.12-sequential-tree-representations-optional.html" accesskey="n" rel="next">Sequential Tree Representations (optional)</a>
-<a href="5.12-sequential-tree-representations-optional.html" class="navbutton">&gt;&gt;</a>
+<a href="5.12-sequential-tree-representations.html" accesskey="n" rel="next">Sequential Tree Representations</a>
+<a href="5.12-sequential-tree-representations.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="the-unionfind-algorithm-optional" class="level2"
-data-number="5.11">
+<section id="the-unionfind-algorithm" class="level2" data-number="5.11">
 <h2 data-number="5.11"><span class="header-section-number">5.11</span>
-The Union/Find Algorithm (optional)</h2>
+The Union/Find Algorithm</h2>
 <p><a href="10-glossary.html#general-tree" class="term"
 title="A tree in which any given node can have any number of children. This is in contrast to, for example, a binary tree where each node has a fixed number of children (some of which might be `null`). General tree nodes tend to be harder to implement for this reason.">General
 trees</a> are trees whose <a href="10-glossary.html#internal-node"
@@ -292,9 +277,9 @@ through
 </div>
 </p>
 <p>A graph with two connected components. The tree of <a
-href="5.11-the-unionfind-algorithm-optional.html#UFfig">Figure
-#UFfig</a> shows the corresponding tree structure resulting form
-processing the edges to determine the connected components.</p>
+href="5.11-the-unionfind-algorithm.html#UFfig">Figure #UFfig</a> shows
+the corresponding tree structure resulting form processing the edges to
+determine the connected components.</p>
 </div>
 <p>Notice that for nodes
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
@@ -425,8 +410,7 @@ weighted union.</p>
 class="header-section-number">5.11.4</span> Path Compression</h3>
 <p>The weighted union rule helps to minimize the depth of the tree, but
 we can do better than this. <a
-href="5.11-the-unionfind-algorithm-optional.html#path-compression"
-class="term"
+href="5.11-the-unionfind-algorithm.html#path-compression" class="term"
 title="When implementing the UNION/FIND algorithm, path compression is a local optimization step that can be performed during the FIND step. Once the root of the tree for the current object has been found, the path to the root can be traced a second time, with all objects in the tree made to point directly to the root. This reduces the depth of the tree from typically $\Theta(\log n)$ to nearly constant.">Path
 compression</a> is a method that tends to create extremely shallow
 trees. Path compression takes place while finding the root for a given
@@ -514,7 +498,8 @@ processing time required for
 operations will be
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><msup><mo>log</mo><mo>*</mo></msup><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log^* n)</annotation></semantics></math>,
 yielding nearly constant time for each equivalence operation. This is an
-example of <a href="10-glossary.html#amortized-analysis" class="term"
+example of <a href="3.16-amortized-analysis.html#amortized-analysis"
+class="term"
 title="Analysing the amortized complexity of an algorithm or problem.">amortized
 analysis</a>.</p>
 <p>The expression
@@ -540,12 +525,12 @@ Your browser does not support iframes.
 <footer>
 <nav class="sitenav">
 <div class="navlink">
-<a href="5.10-general-trees-optional.html" class="navbutton">&lt;&lt;</a>
-<a href="5.10-general-trees-optional.html" accesskey="p" rel="previous">General Trees (optional)</a>
+<a href="5.10-general-trees.html" class="navbutton">&lt;&lt;</a>
+<a href="5.10-general-trees.html" accesskey="p" rel="previous">General Trees</a>
 </div>
 <div class="navlink">
-<a href="5.12-sequential-tree-representations-optional.html" accesskey="n" rel="next">Sequential Tree Representations (optional)</a>
-<a href="5.12-sequential-tree-representations-optional.html" class="navbutton">&gt;&gt;</a>
+<a href="5.12-sequential-tree-representations.html" accesskey="n" rel="next">Sequential Tree Representations</a>
+<a href="5.12-sequential-tree-representations.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </footer>

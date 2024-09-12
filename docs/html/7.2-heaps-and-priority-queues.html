@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -473,11 +459,9 @@ the leaves, and so their elements can move down at most one level. At
 each step up the tree we get half the number of nodes as were at the
 previous level, and an additional height of one. The maximum sum of
 total distances that elements can go is therefore</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mo>log</mo><mi>n</mi></mrow></munderover><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mfrac><mi>n</mi><msup><mn>2</mn><mi>i</mi></msup></mfrac></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mfrac><mi>n</mi><mn>2</mn></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mo>log</mo><mi>n</mi></mrow></munderover><mfrac><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow><msup><mn>2</mn><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup></mfrac></mtd></mtr></mtable><annotation encoding="application/x-tex">
-\begin{eqnarray}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mo>log</mo><mi>n</mi></mrow></munderover><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mfrac><mi>n</mi><msup><mn>2</mn><mi>i</mi></msup></mfrac><mo>=</mo><mfrac><mi>n</mi><mn>2</mn></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mo>log</mo><mi>n</mi></mrow></munderover><mfrac><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow><msup><mn>2</mn><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup></mfrac></mrow><annotation encoding="application/x-tex">
 \sum_{i=1}^{\log n} (i-1)\frac{n}{2^i}
-&amp;=&amp; \frac{n}{2}\sum_{i=1}^{\log n} \frac{i-1}{2^{i-1}}
-\end{eqnarray}
+= \frac{n}{2}\sum_{i=1}^{\log n} \frac{i-1}{2^{i-1}}
 </annotation></semantics></math></p>
 <p>The summation on the right <a href="10-glossary.html#summation"
 class="term"

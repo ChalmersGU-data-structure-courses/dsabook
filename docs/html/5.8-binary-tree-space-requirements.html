@@ -7,10 +7,11 @@
   <meta name="author" content="Cliff Shaffer" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
-  <title>DSABook – Binary Tree Space Requirements (optional)</title>
+  <title>DSABook – Binary Tree Space Requirements</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -97,17 +83,17 @@
 <a href="5.7-information-flow-in-recursive-functions.html" accesskey="p" rel="previous">Information Flow in Recursive Functions</a>
 </div>
 <div>
-<a href="5.9-a-hard-information-flow-problem-optional.html" accesskey="n" rel="next">A Hard Information Flow Problem (optional)</a>
-<a href="5.9-a-hard-information-flow-problem-optional.html" class="navbutton">&gt;&gt;</a>
+<a href="5.9-a-hard-information-flow-problem.html" accesskey="n" rel="next">A Hard Information Flow Problem</a>
+<a href="5.9-a-hard-information-flow-problem.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="binary-tree-space-requirements-optional" class="level2"
+<section id="binary-tree-space-requirements" class="level2"
 data-number="5.8">
 <h2 data-number="5.8"><span class="header-section-number">5.8</span>
-Binary Tree Space Requirements (optional)</h2>
+Binary Tree Space Requirements</h2>
 <p>This module presents techniques for calculating the amount of <a
 href="10-glossary.html#overhead" class="term"
 title="All information stored by a data structure aside from the actual data. For example, the pointer fields in a linked list or BST, or the unused positions in an array-based list.">overhead</a>
@@ -147,7 +133,7 @@ overhead. Worse yet, the Full Binary Tree Theorem tells us that about
 half of the pointers are “wasted” NULL values that serve only to
 indicate tree structure, but which do not provide access to new
 data.</p>
-<p>In many languages (such as Java or JavaScript), the most typical
+<p>In many languages (such as Java or Javascript), the most typical
 implementation is not to store any actual data in a node, but rather a
 pointer to the data record. In this case, each node will typically store
 three pointers, all of which are overhead, resulting in an overhead
@@ -165,10 +151,8 @@ in full binary trees. Again assume the tree stores a pointer to the data
 field. Because about half of the nodes are leaves and half internal
 nodes, and because only internal nodes now have child pointers, the
 overhead fraction in this case will be approximately</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mfrac><mrow><mfrac><mi>n</mi><mn>2</mn></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mi>P</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mrow><mfrac><mi>n</mi><mn>2</mn></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mi>P</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>D</mi><mi>n</mi></mrow></mfrac></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mfrac><mi>P</mi><mrow><mi>P</mi><mo>+</mo><mi>D</mi></mrow></mfrac></mtd></mtr></mtable><annotation encoding="application/x-tex">
-\begin{eqnarray}
-\frac{\frac{n}{2} (2P)}{\frac{n}{2} (2P) + Dn} &amp;=&amp; \frac{P}{P + D}
-\end{eqnarray}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mfrac><mi>n</mi><mn>2</mn></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mi>P</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mrow><mfrac><mi>n</mi><mn>2</mn></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mi>P</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>D</mi><mi>n</mi></mrow></mfrac><mo>=</mo><mfrac><mi>P</mi><mrow><mi>P</mi><mo>+</mo><mi>D</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+\frac{\frac{n}{2} (2P)}{\frac{n}{2} (2P) + Dn} = \frac{P}{P + D}
 </annotation></semantics></math></p>
 <p>If
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>=</mo><mi>D</mi></mrow><annotation encoding="application/x-tex">P = D</annotation></semantics></math>,
@@ -231,8 +215,8 @@ Your browser does not support iframes.
 <a href="5.7-information-flow-in-recursive-functions.html" accesskey="p" rel="previous">Information Flow in Recursive Functions</a>
 </div>
 <div class="navlink">
-<a href="5.9-a-hard-information-flow-problem-optional.html" accesskey="n" rel="next">A Hard Information Flow Problem (optional)</a>
-<a href="5.9-a-hard-information-flow-problem-optional.html" class="navbutton">&gt;&gt;</a>
+<a href="5.9-a-hard-information-flow-problem.html" accesskey="n" rel="next">A Hard Information Flow Problem</a>
+<a href="5.9-a-hard-information-flow-problem.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </footer>

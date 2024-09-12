@@ -7,10 +7,11 @@
   <meta name="author" content="Cliff Shaffer" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
-  <title>DSABook – The Splay Tree (optional)</title>
+  <title>DSABook – The Splay Tree</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -93,20 +79,20 @@
 </nav>
 <nav class="sitenav">
 <div>
-<a href="6.5-the-red-black-tree-optional.html" class="navbutton">&lt;&lt;</a>
-<a href="6.5-the-red-black-tree-optional.html" accesskey="p" rel="previous">The Red-Black Tree (optional)</a>
+<a href="6.5-the-red-black-tree.html" class="navbutton">&lt;&lt;</a>
+<a href="6.5-the-red-black-tree.html" accesskey="p" rel="previous">The Red-Black Tree</a>
 </div>
 <div>
-<a href="6.7-skip-lists-optional.html" accesskey="n" rel="next">Skip Lists (optional)</a>
-<a href="6.7-skip-lists-optional.html" class="navbutton">&gt;&gt;</a>
+<a href="6.7-skip-lists.html" accesskey="n" rel="next">Skip Lists</a>
+<a href="6.7-skip-lists.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="the-splay-tree-optional" class="level2" data-number="6.6">
+<section id="the-splay-tree" class="level2" data-number="6.6">
 <h2 data-number="6.6"><span class="header-section-number">6.6</span> The
-Splay Tree (optional)</h2>
+Splay Tree</h2>
 <p>Like the AVL tree, the splay tree is not actually a distinct data
 structure, but rather reimplements the BST insert, delete, and search
 methods to improve the performance of a BST. The goal of these revised
@@ -177,16 +163,16 @@ title="A type of rebalancing operation used by the splay tree and AVL tree.">sin
 rotation</a> is performed only if
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
 is a child of the root node. The single rotation is illustrated by <a
-href="6.6-the-splay-tree-optional.html#SingProm">Figure #SingProm</a>.
-It basically switches
+href="6.6-the-splay-tree.html#SingProm">Figure #SingProm</a>. It
+basically switches
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
 with its parent in a way that retains the BST property. While this
 figure is slightly different from <a
 href="6.4-the-avl-tree.html#AVLsingle">Figure #AVLsingle</a>, in fact
 the splay tree single rotation is identical to the AVL tree single
 rotation.</p>
-<div id="SingProm">
-<div class="figure">
+<section id="SingProm" class="level4 unnumbered figure">
+<h4 class="unnumbered">Figure: Single rotation</h4>
 <figure>
 <img src="images/SingRot.png" width="500"
 alt="Splay tree single rotation" />
@@ -223,8 +209,7 @@ is its right child), then (a) shows the result of a single rotation to
 splay
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>
 to the root.</p>
-</div>
-</div>
+</section>
 <p>Unlike the AVL tree, the splay tree requires two types of double
 rotation. Double rotations involve
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>,
@@ -262,9 +247,9 @@ is the left child of
 and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
 form a zigzag. The zigzag rotation is illustrated by <a
-href="6.6-the-splay-tree-optional.html#ZigZag">Figure #ZigZag</a>.</p>
-<div id="ZigZag">
-<div class="figure">
+href="6.6-the-splay-tree.html#ZigZag">Figure #ZigZag</a>.</p>
+<section id="ZigZag" class="level4 unnumbered figure">
+<h4 class="unnumbered">Figure: ZigZag rotation</h4>
 <figure>
 <img src="images/ZigZag.png" width="500"
 alt="Splay tree zigzag rotation" />
@@ -283,8 +268,7 @@ positions of subtrees
 and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>
 are altered as appropriate to maintain the BST property.</p>
-</div>
-</div>
+</section>
 <p>The other double rotation is known as a <a
 href="10-glossary.html#zigzig" class="term"
 title="A type of rebalancing operation used by splay trees.">zigzig</a>
@@ -304,12 +288,14 @@ which is in turn the right child of
 </ol>
 <p>Thus, a zigzig rotation takes place in those situations where a
 zigzag rotation is not appropriate. The zigzig rotation is illustrated
-by <a href="6.6-the-splay-tree-optional.html#ZigZig">Figure #ZigZig</a>.
-While the figure appears somewhat different from <a
+by <a href="6.6-the-splay-tree.html#ZigZig">Figure #ZigZig</a>. While
+the figure appears somewhat different from <a
 href="6.4-the-avl-tree.html#AVLdouble">Figure #AVLdouble</a>, in fact
 the zigzig rotation is identical to the AVL tree double rotation.</p>
-<div id="ZigZig">
-<div class="figure">
+<section id="ZigZig" class="level4 figure" data-number="6.6.0.1">
+<h4 data-number="6.6.0.1"><span
+class="header-section-number">6.6.0.1</span> Figure: ZigZig
+rotation</h4>
 <figure>
 <img src="images/ZigZig.png" width="500"
 alt="Splay tree zigzig rotation" />
@@ -328,8 +314,7 @@ positions of subtrees
 and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>
 are altered as appropriate to maintain the BST property.</p>
-</div>
-</div>
+</section>
 <p>Note that zigzag rotations tend to make the tree more balanced,
 because they bring subtrees
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
@@ -354,11 +339,12 @@ of the tree, resulting in reduced access cost. Proof that the splay tree
 meets the guarantee of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>m</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(m \log n)</annotation></semantics></math>
 is beyond the scope of our study.</p>
-<section id="example-34" class="level4 unnumbered topic">
-<h4 class="unnumbered">Example</h4>
+<section id="example-searching-in-a-splay-tree"
+class="level4 unnumbered topic">
+<h4 class="unnumbered">Example: Searching in a splay tree</h4>
 <p>Consider a search for value 89 in the splay tree of <a
-href="6.6-the-splay-tree-optional.html#SplayEx">Figure #SplayEx</a> (a).
-The splay tree’s search operation is identical to searching in a BST.
+href="6.6-the-splay-tree.html#SplayEx">Figure #SplayEx</a> (a). The
+splay tree’s search operation is identical to searching in a BST.
 However, once the value has been found, it is splayed to the root. Three
 rotations are required in this example. The first is a zigzig rotation,
 whose result is shown in figure (b). The second is a zigzag rotation,
@@ -366,8 +352,8 @@ whose result is shown in figure (c). The final step is a single rotation
 resulting in the tree of Figure (d). Notice that the splaying process
 has made the tree shallower.</p>
 </section>
-<div id="SplayEx">
-<div class="figure">
+<section id="SplayEx" class="level4 unnumbered figure">
+<h4 class="unnumbered">Figure: Splay tree search</h4>
 <figure>
 <img src="images/SplayEx.png" width="500"
 alt="Example of search in a splay tree" />
@@ -384,20 +370,19 @@ single rotation on the node with key value 89 in the tree of (c). If the
 search had been for 91, the search would have been unsuccessful with the
 node storing key value 89 being that last one visited. In that case, the
 same splay operations would take place.</p>
-</div>
-</div>
+</section>
 </section>
 </main>
 
 <footer>
 <nav class="sitenav">
 <div class="navlink">
-<a href="6.5-the-red-black-tree-optional.html" class="navbutton">&lt;&lt;</a>
-<a href="6.5-the-red-black-tree-optional.html" accesskey="p" rel="previous">The Red-Black Tree (optional)</a>
+<a href="6.5-the-red-black-tree.html" class="navbutton">&lt;&lt;</a>
+<a href="6.5-the-red-black-tree.html" accesskey="p" rel="previous">The Red-Black Tree</a>
 </div>
 <div class="navlink">
-<a href="6.7-skip-lists-optional.html" accesskey="n" rel="next">Skip Lists (optional)</a>
-<a href="6.7-skip-lists-optional.html" class="navbutton">&gt;&gt;</a>
+<a href="6.7-skip-lists.html" accesskey="n" rel="next">Skip Lists</a>
+<a href="6.7-skip-lists.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </footer>

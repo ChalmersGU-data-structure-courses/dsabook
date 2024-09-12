@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -134,10 +120,10 @@ id="toc-comparables-comparators-and-key-value-pairs"><span
 class="toc-section-number">1.5</span> Comparables, Comparators and
 Key-Value Pairs</a></li>
 <li><a
-href="1.6-comparables-and-comparators-an-example.html#comparables-and-comparators-an-example"
-id="toc-comparables-and-comparators-an-example"><span
-class="toc-section-number">1.6</span> Comparables and Comparators: An
-Example</a></li>
+href="1.6-example-comparables-and-comparators-in-java.html#example-comparables-and-comparators-in-java"
+id="toc-example-comparables-and-comparators-in-java"><span
+class="toc-section-number">1.6</span> Example: Comparables and
+Comparators in Java</a></li>
 </ul></li>
 <li><a
 href="2-arrays-searching-and-sorting.html#arrays-searching-and-sorting"
@@ -157,22 +143,22 @@ Notation</a></li>
 <li><a href="2.4-insertion-sort.html#insertion-sort"
 id="toc-insertion-sort"><span class="toc-section-number">2.4</span>
 Insertion Sort</a></li>
-<li><a href="2.5-bubble-sort-optional.html#bubble-sort-optional"
-id="toc-bubble-sort-optional"><span
-class="toc-section-number">2.5</span> Bubble Sort (optional)</a></li>
+<li><a href="2.5-bubble-sort.html#bubble-sort"
+id="toc-bubble-sort"><span class="toc-section-number">2.5</span> Bubble
+Sort</a></li>
 <li><a href="2.6-selection-sort.html#selection-sort"
 id="toc-selection-sort"><span class="toc-section-number">2.6</span>
 Selection Sort</a></li>
 <li><a
-href="2.7-the-cost-of-exchange-sorting-optional.html#the-cost-of-exchange-sorting-optional"
-id="toc-the-cost-of-exchange-sorting-optional"><span
-class="toc-section-number">2.7</span> The Cost of Exchange Sorting
-(optional)</a></li>
+href="2.7-the-cost-of-exchange-sorting.html#the-cost-of-exchange-sorting"
+id="toc-the-cost-of-exchange-sorting"><span
+class="toc-section-number">2.7</span> The Cost of Exchange
+Sorting</a></li>
 <li><a
-href="2.8-optimizing-sort-algorithms-with-code-tuning-optional.html#optimizing-sort-algorithms-with-code-tuning-optional"
-id="toc-optimizing-sort-algorithms-with-code-tuning-optional"><span
+href="2.8-optimizing-sort-algorithms-with-code-tuning.html#optimizing-sort-algorithms-with-code-tuning"
+id="toc-optimizing-sort-algorithms-with-code-tuning"><span
 class="toc-section-number">2.8</span> Optimizing Sort Algorithms with
-Code Tuning (optional)</a></li>
+Code Tuning</a></li>
 <li><a href="2.9-mergesort.html#mergesort" id="toc-mergesort"><span
 class="toc-section-number">2.9</span> Mergesort</a></li>
 <li><a href="2.10-implementing-mergesort.html#implementing-mergesort"
@@ -186,10 +172,9 @@ id="toc-an-empirical-comparison-of-sorting-algorithms"><span
 class="toc-section-number">2.12</span> An Empirical Comparison of
 Sorting Algorithms</a></li>
 <li><a
-href="2.13-lower-bounds-for-sorting-optional.html#lower-bounds-for-sorting-optional"
-id="toc-lower-bounds-for-sorting-optional"><span
-class="toc-section-number">2.13</span> Lower Bounds for Sorting
-(optional)</a></li>
+href="2.13-lower-bounds-for-sorting.html#lower-bounds-for-sorting"
+id="toc-lower-bounds-for-sorting"><span
+class="toc-section-number">2.13</span> Lower Bounds for Sorting</a></li>
 <li><a href="2.14-arrays-as-sets-or-maps.html#arrays-as-sets-or-maps"
 id="toc-arrays-as-sets-or-maps"><span
 class="toc-section-number">2.14</span> Arrays as Sets or Maps</a></li>
@@ -249,26 +234,20 @@ href="3.12-code-tuning-and-empirical-analysis.html#code-tuning-and-empirical-ana
 id="toc-code-tuning-and-empirical-analysis"><span
 class="toc-section-number">3.12</span> Code Tuning and Empirical
 Analysis</a></li>
+<li><a href="3.13-growth-rates-review.html#growth-rates-review"
+id="toc-growth-rates-review"><span
+class="toc-section-number">3.13</span> Growth Rates Review</a></li>
+<li><a href="3.14-summation-techniques.html#summation-techniques"
+id="toc-summation-techniques"><span
+class="toc-section-number">3.14</span> Summation Techniques</a></li>
 <li><a
-href="3.13-growth-rates-review-optional.html#growth-rates-review-optional"
-id="toc-growth-rates-review-optional"><span
-class="toc-section-number">3.13</span> Growth Rates Review
-(optional)</a></li>
-<li><a
-href="3.14-summation-techniques-optional.html#summation-techniques-optional"
-id="toc-summation-techniques-optional"><span
-class="toc-section-number">3.14</span> Summation Techniques
-(optional)</a></li>
-<li><a
-href="3.15-solving-recurrence-relations-optional.html#solving-recurrence-relations-optional"
-id="toc-solving-recurrence-relations-optional"><span
-class="toc-section-number">3.15</span> Solving Recurrence Relations
-(optional)</a></li>
-<li><a
-href="3.16-amortized-analysis-optional.html#amortized-analysis-optional"
-id="toc-amortized-analysis-optional"><span
-class="toc-section-number">3.16</span> Amortized Analysis
-(optional)</a></li>
+href="3.15-solving-recurrence-relations.html#solving-recurrence-relations"
+id="toc-solving-recurrence-relations"><span
+class="toc-section-number">3.15</span> Solving Recurrence
+Relations</a></li>
+<li><a href="3.16-amortized-analysis.html#amortized-analysis"
+id="toc-amortized-analysis"><span class="toc-section-number">3.16</span>
+Amortized Analysis</a></li>
 </ul></li>
 <li><a href="4-lists.html#lists" id="toc-lists"><span
 class="toc-section-number">4</span> Lists</a>
@@ -296,11 +275,9 @@ href="4.6-implementing-maps-using-lists.html#implementing-maps-using-lists"
 id="toc-implementing-maps-using-lists"><span
 class="toc-section-number">4.6</span> Implementing Maps using
 Lists</a></li>
-<li><a
-href="4.7-doubly-linked-lists-optional.html#doubly-linked-lists-optional"
-id="toc-doubly-linked-lists-optional"><span
-class="toc-section-number">4.7</span> Doubly Linked Lists
-(optional)</a></li>
+<li><a href="4.7-doubly-linked-lists.html#doubly-linked-lists"
+id="toc-doubly-linked-lists"><span class="toc-section-number">4.7</span>
+Doubly Linked Lists</a></li>
 <li><a href="4.8-stacks.html#stacks" id="toc-stacks"><span
 class="toc-section-number">4.8</span> Stacks</a></li>
 <li><a href="4.9-implementing-recursion.html#implementing-recursion"
@@ -334,10 +311,10 @@ id="toc-binary-tree-node-implementations"><span
 class="toc-section-number">5.3</span> Binary Tree Node
 Implementations</a></li>
 <li><a
-href="5.4-the-full-binary-tree-theorem-optional.html#the-full-binary-tree-theorem-optional"
-id="toc-the-full-binary-tree-theorem-optional"><span
-class="toc-section-number">5.4</span> The Full Binary Tree Theorem
-(optional)</a></li>
+href="5.4-the-full-binary-tree-theorem.html#the-full-binary-tree-theorem"
+id="toc-the-full-binary-tree-theorem"><span
+class="toc-section-number">5.4</span> The Full Binary Tree
+Theorem</a></li>
 <li><a href="5.5-binary-tree-traversals.html#binary-tree-traversals"
 id="toc-binary-tree-traversals"><span
 class="toc-section-number">5.5</span> Binary Tree Traversals</a></li>
@@ -352,28 +329,26 @@ id="toc-information-flow-in-recursive-functions"><span
 class="toc-section-number">5.7</span> Information Flow in Recursive
 Functions</a></li>
 <li><a
-href="5.8-binary-tree-space-requirements-optional.html#binary-tree-space-requirements-optional"
-id="toc-binary-tree-space-requirements-optional"><span
-class="toc-section-number">5.8</span> Binary Tree Space Requirements
-(optional)</a></li>
+href="5.8-binary-tree-space-requirements.html#binary-tree-space-requirements"
+id="toc-binary-tree-space-requirements"><span
+class="toc-section-number">5.8</span> Binary Tree Space
+Requirements</a></li>
 <li><a
-href="5.9-a-hard-information-flow-problem-optional.html#a-hard-information-flow-problem-optional"
-id="toc-a-hard-information-flow-problem-optional"><span
-class="toc-section-number">5.9</span> A Hard Information Flow Problem
-(optional)</a></li>
-<li><a href="5.10-general-trees-optional.html#general-trees-optional"
-id="toc-general-trees-optional"><span
-class="toc-section-number">5.10</span> General Trees (optional)</a></li>
+href="5.9-a-hard-information-flow-problem.html#a-hard-information-flow-problem"
+id="toc-a-hard-information-flow-problem"><span
+class="toc-section-number">5.9</span> A Hard Information Flow
+Problem</a></li>
+<li><a href="5.10-general-trees.html#general-trees"
+id="toc-general-trees"><span class="toc-section-number">5.10</span>
+General Trees</a></li>
+<li><a href="5.11-the-unionfind-algorithm.html#the-unionfind-algorithm"
+id="toc-the-unionfind-algorithm"><span
+class="toc-section-number">5.11</span> The Union/Find Algorithm</a></li>
 <li><a
-href="5.11-the-unionfind-algorithm-optional.html#the-unionfind-algorithm-optional"
-id="toc-the-unionfind-algorithm-optional"><span
-class="toc-section-number">5.11</span> The Union/Find Algorithm
-(optional)</a></li>
-<li><a
-href="5.12-sequential-tree-representations-optional.html#sequential-tree-representations-optional"
-id="toc-sequential-tree-representations-optional"><span
-class="toc-section-number">5.12</span> Sequential Tree Representations
-(optional)</a></li>
+href="5.12-sequential-tree-representations.html#sequential-tree-representations"
+id="toc-sequential-tree-representations"><span
+class="toc-section-number">5.12</span> Sequential Tree
+Representations</a></li>
 </ul></li>
 <li><a href="6-binary-search-trees.html#binary-search-trees"
 id="toc-binary-search-trees"><span class="toc-section-number">6</span>
@@ -395,17 +370,14 @@ Balanced Trees</a></li>
 <li><a href="6.4-the-avl-tree.html#the-avl-tree"
 id="toc-the-avl-tree"><span class="toc-section-number">6.4</span> The
 AVL Tree</a></li>
-<li><a
-href="6.5-the-red-black-tree-optional.html#the-red-black-tree-optional"
-id="toc-the-red-black-tree-optional"><span
-class="toc-section-number">6.5</span> The Red-Black Tree
-(optional)</a></li>
-<li><a href="6.6-the-splay-tree-optional.html#the-splay-tree-optional"
-id="toc-the-splay-tree-optional"><span
-class="toc-section-number">6.6</span> The Splay Tree (optional)</a></li>
-<li><a href="6.7-skip-lists-optional.html#skip-lists-optional"
-id="toc-skip-lists-optional"><span class="toc-section-number">6.7</span>
-Skip Lists (optional)</a></li>
+<li><a href="6.5-the-red-black-tree.html#the-red-black-tree"
+id="toc-the-red-black-tree"><span class="toc-section-number">6.5</span>
+The Red-Black Tree</a></li>
+<li><a href="6.6-the-splay-tree.html#the-splay-tree"
+id="toc-the-splay-tree"><span class="toc-section-number">6.6</span> The
+Splay Tree</a></li>
+<li><a href="6.7-skip-lists.html#skip-lists" id="toc-skip-lists"><span
+class="toc-section-number">6.7</span> Skip Lists</a></li>
 </ul></li>
 <li><a href="7-priority-queues.html#priority-queues"
 id="toc-priority-queues"><span class="toc-section-number">7</span>
@@ -422,11 +394,9 @@ id="toc-heaps-and-priority-queues"><span
 class="toc-section-number">7.2</span> Heaps and Priority Queues</a></li>
 <li><a href="7.3-heapsort.html#heapsort" id="toc-heapsort"><span
 class="toc-section-number">7.3</span> Heapsort</a></li>
-<li><a
-href="7.4-huffman-coding-trees-optional.html#huffman-coding-trees-optional"
-id="toc-huffman-coding-trees-optional"><span
-class="toc-section-number">7.4</span> Huffman Coding Trees
-(optional)</a></li>
+<li><a href="7.4-huffman-coding-trees.html#huffman-coding-trees"
+id="toc-huffman-coding-trees"><span
+class="toc-section-number">7.4</span> Huffman Coding Trees</a></li>
 </ul></li>
 <li><a href="8-hashing.html#hashing" id="toc-hashing"><span
 class="toc-section-number">8</span> Hashing</a>
@@ -445,9 +415,9 @@ href="8.4-converting-objects-to-table-indices.html#converting-objects-to-table-i
 id="toc-converting-objects-to-table-indices"><span
 class="toc-section-number">8.4</span> Converting Objects to Table
 Indices</a></li>
-<li><a href="8.5-bucket-hashing-optional.html#bucket-hashing-optional"
-id="toc-bucket-hashing-optional"><span
-class="toc-section-number">8.5</span> Bucket Hashing (optional)</a></li>
+<li><a href="8.5-bucket-hashing.html#bucket-hashing"
+id="toc-bucket-hashing"><span class="toc-section-number">8.5</span>
+Bucket Hashing</a></li>
 <li><a href="8.6-open-addressing.html#open-addressing"
 id="toc-open-addressing"><span class="toc-section-number">8.6</span>
 Open Addressing</a></li>
@@ -465,10 +435,9 @@ Addressing</a></li>
 id="toc-open-addressing-deletion"><span
 class="toc-section-number">8.9</span> Open Addressing, Deletion</a></li>
 <li><a
-href="8.10-hash-tables-in-real-life-optional.html#hash-tables-in-real-life-optional"
-id="toc-hash-tables-in-real-life-optional"><span
-class="toc-section-number">8.10</span> Hash Tables in Real Life
-(optional)</a></li>
+href="8.10-hash-tables-in-real-life.html#hash-tables-in-real-life"
+id="toc-hash-tables-in-real-life"><span
+class="toc-section-number">8.10</span> Hash Tables in Real Life</a></li>
 </ul></li>
 <li><a href="9-graphs.html#graphs" id="toc-graphs"><span
 class="toc-section-number">9</span> Graphs</a>
@@ -493,11 +462,9 @@ href="9.6-minimal-cost-spanning-trees.html#minimal-cost-spanning-trees"
 id="toc-minimal-cost-spanning-trees"><span
 class="toc-section-number">9.6</span> Minimal Cost Spanning
 Trees</a></li>
-<li><a
-href="9.7-all-pairs-shortest-paths-optional.html#all-pairs-shortest-paths-optional"
-id="toc-all-pairs-shortest-paths-optional"><span
-class="toc-section-number">9.7</span> All-Pairs Shortest Paths
-(optional)</a></li>
+<li><a href="9.7-all-pairs-shortest-paths.html#all-pairs-shortest-paths"
+id="toc-all-pairs-shortest-paths"><span
+class="toc-section-number">9.7</span> All-Pairs Shortest Paths</a></li>
 <li><a href="9.8-graph-concepts-summary.html#graph-concepts-summary"
 id="toc-graph-concepts-summary"><span
 class="toc-section-number">9.8</span> Graph Concepts Summary</a></li>

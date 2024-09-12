@@ -7,10 +7,11 @@
   <meta name="author" content="Cliff Shaffer" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
-  <title>DSABook – Lower Bounds for Sorting (optional)</title>
+  <title>DSABook – Lower Bounds for Sorting</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -105,10 +91,10 @@
 </header>
 
 <main>
-<section id="lower-bounds-for-sorting-optional" class="level2"
+<section id="lower-bounds-for-sorting" class="level2"
 data-number="2.13">
 <h2 data-number="2.13"><span class="header-section-number">2.13</span>
-Lower Bounds for Sorting (optional)</h2>
+Lower Bounds for Sorting</h2>
 <p>By now you have seen many analyses for algorithms. These analyses
 generally define the upper and lower bounds for algorithms in their
 worst and average cases. For many of the algorithms presented so far,

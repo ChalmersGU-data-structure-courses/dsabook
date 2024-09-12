@@ -7,11 +7,11 @@
   <meta name="author" content="Cliff Shaffer" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
-  <title>DSABook – Optimizing Sort Algorithms with Code Tuning
-(optional)</title>
+  <title>DSABook – Optimizing Sort Algorithms with Code Tuning</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -20,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -32,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -94,8 +79,8 @@
 </nav>
 <nav class="sitenav">
 <div>
-<a href="2.7-the-cost-of-exchange-sorting-optional.html" class="navbutton">&lt;&lt;</a>
-<a href="2.7-the-cost-of-exchange-sorting-optional.html" accesskey="p" rel="previous">The Cost of Exchange Sorting (optional)</a>
+<a href="2.7-the-cost-of-exchange-sorting.html" class="navbutton">&lt;&lt;</a>
+<a href="2.7-the-cost-of-exchange-sorting.html" accesskey="p" rel="previous">The Cost of Exchange Sorting</a>
 </div>
 <div>
 <a href="2.9-mergesort.html" accesskey="n" rel="next">Mergesort</a>
@@ -105,14 +90,14 @@
 </header>
 
 <main>
-<section id="optimizing-sort-algorithms-with-code-tuning-optional"
-class="level2" data-number="2.8">
+<section id="optimizing-sort-algorithms-with-code-tuning" class="level2"
+data-number="2.8">
 <h2 data-number="2.8"><span class="header-section-number">2.8</span>
-Optimizing Sort Algorithms with Code Tuning (optional)</h2>
+Optimizing Sort Algorithms with Code Tuning</h2>
 <p>Since sorting is such an important application, it is natural for
 programmers to want to optimize their sorting code to run faster. Of
 course all quadratic sorts (Insertion Sort, Bubble Sort and Selection
-Sort) are relatively slow. Each has (as the name “quadratic suggests)
+Sort) are relatively slow. Each has (as the name “quadratic” suggests)
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^2)</annotation></semantics></math>
 worst case running time. The best way to speed them up is to find a
 better sorting algorithm. Nonetheless, there have been many suggestions
@@ -141,13 +126,14 @@ swaps anyway. Here is an implementation for Insertion Sort using this
 optimization.</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> insertionSortShift(A):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="op">=</span> <span class="dv">1</span> <span class="kw">to</span> A.<span class="bu">size</span>()<span class="op">-</span><span class="dv">1</span>:</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        temp <span class="op">=</span> A[i]</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        j <span class="op">=</span> i</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> j <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> temp <span class="op">&lt;</span> A[j<span class="op">-</span><span class="dv">1</span>]:</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            A[j] <span class="op">=</span> A[j<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>            j <span class="op">=</span> j<span class="op">-</span><span class="dv">1</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        A[j] <span class="op">=</span> temp</span></code></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    N <span class="op">=</span> A.<span class="bu">size</span>()</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="op">=</span> <span class="dv">1</span> <span class="kw">to</span> N<span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        temp <span class="op">=</span> A[i]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        j <span class="op">=</span> i</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> j <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> temp <span class="op">&lt;</span> A[j<span class="op">-</span><span class="dv">1</span>]:</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>            A[j] <span class="op">=</span> A[j<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            j <span class="op">=</span> j<span class="op">-</span><span class="dv">1</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        A[j] <span class="op">=</span> temp</span></code></pre></div>
 <p>Now, you can test whether you understand how this works.</p>
 <p>
 <div id="insertionSortWithoutSwapPRO" class="embedContainer">
@@ -166,8 +152,7 @@ use the Comparable interface in languages that support this.</p>
 <thead>
 <tr>
 <th style="text-align: left;">Sort</th>
-<th style="text-align: center;">Java </th>
-<th style="text-align: center;">Processing</th>
+<th style="text-align: center;">Java  </th>
 <th style="text-align: center;">Javascript</th>
 <th style="text-align: center;">Python</th>
 </tr>
@@ -178,19 +163,16 @@ use the Comparable interface in languages that support this.</p>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td style="text-align: left;">Standard</td>
 <td style="text-align: center;">60</td>
-<td style="text-align: center;">26</td>
 <td style="text-align: center;">118</td>
 <td style="text-align: center;">11,220</td>
 </tr>
 <tr>
 <td style="text-align: left;">Shifting</td>
 <td style="text-align: center;">41</td>
-<td style="text-align: center;">18</td>
 <td style="text-align: center;">77</td>
 <td style="text-align: center;">5,100</td>
 </tr>
@@ -199,19 +181,16 @@ use the Comparable interface in languages that support this.</p>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td style="text-align: left;">Standard</td>
 <td style="text-align: center;">202</td>
-<td style="text-align: center;">149</td>
 <td style="text-align: center;">303</td>
 <td style="text-align: center;">12,700 </td>
 </tr>
 <tr>
 <td style="text-align: left;">Check swaps</td>
 <td style="text-align: center;">230</td>
-<td style="text-align: center;">152</td>
 <td style="text-align: center;">327</td>
 <td style="text-align: center;">13,275</td>
 </tr>
@@ -220,19 +199,16 @@ use the Comparable interface in languages that support this.</p>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td style="text-align: left;">Standard</td>
 <td style="text-align: center;">104</td>
-<td style="text-align: center;">65</td>
 <td style="text-align: center;">158</td>
 <td style="text-align: center;">4,000</td>
 </tr>
 <tr>
 <td style="text-align: left;">Check swaps</td>
 <td style="text-align: center;">104</td>
-<td style="text-align: center;">65</td>
 <td style="text-align: center;">155</td>
 <td style="text-align: center;">4,050</td>
 </tr>
@@ -240,27 +216,30 @@ use the Comparable interface in languages that support this.</p>
 </table>
 </section>
 <p><a
-href="2.8-optimizing-sort-algorithms-with-code-tuning-optional.html#OptimizeTable">The
+href="2.8-optimizing-sort-algorithms-with-code-tuning.html#OptimizeTable">The
 table above</a> shows the relative costs for a number of optimizations
-in four programming languages: Java, JavaScipt, Processing, and
-Python.</p>
+in three programming languages: Java, JavaScipt, and Python.</p>
 <p>The programming language that you use can have a big influence on the
 runtime for a program. Perhaps the greatest distinction is whether your
-language is compiled or not. Java, C++, and Processing are normally
-compiled, while JavaScript and Python are normally interpreted. This can
-make a huge difference in whether a given code change will actually
-speed the program up or not. In the case of the “shift” vs “swap”
-choice, shifting always turns out to be a big improvement. This is more
-true for the interpreted languages JavaScript and Python than for Java
-and Processing, but still an improvement either way. But the biggest
-effect that we see is that Python takes over 100 times as long to
-execute the same program as Java.</p>
-<p>Some languages have peculiarities that it pays to be aware of. It
-turns out that there is a big difference in JavaScript between using
-<code>i &lt; n</code> or <code>i != n</code> to test termination of a
-loop.</p>
+language is compiled or not. Java and C++ are normally compiled, while
+Python is normally interpreted. To further complicate things, current
+Javascript engines are just-in-time compiled, and there is a version of
+Python that is just-in-time compiled. This can make a huge difference in
+whether a given code change will actually speed the program up or not.
+In the case of the “shift” vs “swap” choice, shifting always turns out
+to be a big improvement. This is more true for the interpreted languages
+Javascript and Python than for Java and C++, but still an improvement
+either way. But the biggest effect that we see is that Python takes over
+100 times as long to execute the same program as Java.</p>
+<p>Some languages have peculiarities that it pays to be aware of. For
+example, it turns out that there is a big difference in Javascript
+between using
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>&lt;</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">i&lt;n</annotation></semantics></math>
+or
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>≠</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">i\neq n</annotation></semantics></math>
+to test termination of a loop.</p>
 </section>
-<section id="bubble-sort" class="level3" data-number="2.8.2">
+<section id="bubble-sort-1" class="level3" data-number="2.8.2">
 <h3 data-number="2.8.2"><span class="header-section-number">2.8.2</span>
 Bubble Sort</h3>
 <p>Turning to Bubble Sort, the first thing we should notice from this
@@ -271,25 +250,25 @@ see if any swaps took place during that iteration, and quit if not
 (since we know the list is ordered at this point). We can improve on
 this idea even more by recognizing that if the last swap done affects
 the values at positions
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>j</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">j-1</annotation></semantics></math>
 and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i+1</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>,
 no swaps could happen to values at positions greater than
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>.
 Thus, we never need to check higher-positioned values again, which could
 save many iterations even if there are a few swaps lower down. Here is
 code to implement this approach.</p>
 <div class="sourceCode" id="cb2"><pre
 class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> bubbleCheckSwap(A):</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> A.<span class="bu">size</span>() <span class="op">-</span> <span class="dv">1</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> n <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        newn <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="op">=</span> <span class="dv">0</span> <span class="kw">to</span> n<span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    N <span class="op">=</span> A.<span class="bu">size</span>()</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> N <span class="op">&gt;</span> <span class="dv">1</span>:</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        newN <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="op">=</span> <span class="dv">1</span> <span class="kw">to</span> N<span class="op">-</span><span class="dv">1</span>:</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>            <span class="co">// Check if this pair is out of order:</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> A[i] <span class="op">&gt;</span> A[i<span class="op">+</span><span class="dv">1</span>]:</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                swap(A, i, i<span class="op">+</span><span class="dv">1</span>)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                newn <span class="op">=</span> i</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        n <span class="op">=</span> newn</span></code></pre></div>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> A[j<span class="op">-</span><span class="dv">1</span>] <span class="op">&gt;</span> A[j]:</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                swap(A, j<span class="op">-</span><span class="dv">1</span>, j)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                newN <span class="op">=</span> j</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        N <span class="op">=</span> newN</span></code></pre></div>
 <p>The problem with this idea is that a considerable amount of effort
 (relatively speaking) is required to track the position for the last
 swap within the inner loop. This tracking process has a cost, and that
@@ -371,14 +350,14 @@ code that the function would perform. Depending on the language,
 compiler, and operating system, one might expect to save between 5 and
 10 percent of the total time by doing so.</p>
 <p>Another important consideration is the type of data object being
-used. For Processing and Java, we use a simple Integer wrapper object
-that supports the Comparable interface. This means that some
-dereferencing of the key value from an object is required, which is a
-typical expectation in a realistic application of a sorting function.
-However, if we were to sort a simple array of <code>int</code> values,
-the cost for all sorting algorithms will be less than half that shown.
-If we use a the more complicated <code>KVPair</code> objects, the costs
-will more than double over those shown in the table.</p>
+used. For Java, we use a simple Integer wrapper object that supports the
+Comparable interface. This means that some dereferencing of the key
+value from an object is required, which is a typical expectation in a
+realistic application of a sorting function. However, if we were to sort
+a simple array of <code>int</code> values, the cost for all sorting
+algorithms will be less than half that shown. If we use a the more
+complicated <code>KVPair</code> objects, the costs will more than double
+over those shown in the table.</p>
 </section>
 </section>
 </main>
@@ -386,8 +365,8 @@ will more than double over those shown in the table.</p>
 <footer>
 <nav class="sitenav">
 <div class="navlink">
-<a href="2.7-the-cost-of-exchange-sorting-optional.html" class="navbutton">&lt;&lt;</a>
-<a href="2.7-the-cost-of-exchange-sorting-optional.html" accesskey="p" rel="previous">The Cost of Exchange Sorting (optional)</a>
+<a href="2.7-the-cost-of-exchange-sorting.html" class="navbutton">&lt;&lt;</a>
+<a href="2.7-the-cost-of-exchange-sorting.html" accesskey="p" rel="previous">The Cost of Exchange Sorting</a>
 </div>
 <div class="navlink">
 <a href="2.9-mergesort.html" accesskey="n" rel="next">Mergesort</a>

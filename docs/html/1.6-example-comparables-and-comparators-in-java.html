@@ -7,10 +7,11 @@
   <meta name="author" content="Cliff Shaffer" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
-  <title>DSABook – Comparables and Comparators: An Example</title>
+  <title>DSABook – Example: Comparables and Comparators in Java</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -104,17 +90,13 @@
 </header>
 
 <main>
-<section id="comparables-and-comparators-an-example" class="level2"
+<section id="example-comparables-and-comparators-in-java" class="level2"
 data-number="1.6">
 <h2 data-number="1.6"><span class="header-section-number">1.6</span>
-Comparables and Comparators: An Example</h2>
+Example: Comparables and Comparators in Java</h2>
 <p><em>Note</em>: This example treats comparables and comparators, as
 they work in Java. (A similar example for Python is on the TODO
 list.)</p>
-<section id="comparables-and-comparators-in-java" class="level3"
-data-number="1.6.1">
-<h3 data-number="1.6.1"><span class="header-section-number">1.6.1</span>
-Comparables and comparators in Java</h3>
 <p>In Java there are two main ways of comparing objects. The one that
 most people find easier to understand is <em>comparable</em>. But there
 is an alternative, <em>comparator</em>, which is very useful.</p>
@@ -155,9 +137,8 @@ Guy d’Hardelot (1857)<br />
 Nadia Boulanger (1887)<br />
 Lili Boulanger (1893)</div>
 </blockquote>
-</section>
-<section id="comparables-1" class="level3" data-number="1.6.2">
-<h3 data-number="1.6.2"><span class="header-section-number">1.6.2</span>
+<section id="comparables-1" class="level3" data-number="1.6.1">
+<h3 data-number="1.6.1"><span class="header-section-number">1.6.1</span>
 Comparables</h3>
 <p>With the <strong>Comparable</strong> interface we can define the
 “natural ordering” for a class (<a
@@ -209,8 +190,8 @@ the alphabet.</li>
 </ol>
 </section>
 <section id="comparators-the-old-way" class="level3"
-data-number="1.6.3">
-<h3 data-number="1.6.3"><span class="header-section-number">1.6.3</span>
+data-number="1.6.2">
+<h3 data-number="1.6.2"><span class="header-section-number">1.6.2</span>
 Comparators, the old way</h3>
 <p>What if we sometimes want to sort the list according to some other
 ordering, e.g., birth year or given name? Enter <em>comparators</em>,
@@ -287,8 +268,8 @@ Unsuk Chin (1961)</div>
 </blockquote>
 </section>
 <section id="comparators-the-functional-interface-in-java"
-class="level3" data-number="1.6.4">
-<h3 data-number="1.6.4"><span class="header-section-number">1.6.4</span>
+class="level3" data-number="1.6.3">
+<h3 data-number="1.6.3"><span class="header-section-number">1.6.3</span>
 Comparators, the functional interface in Java</h3>
 <p>Since Java 8, there’s a functional interface which can be used to
 build comparators (and many other things). So we don’t have to write the
@@ -301,8 +282,8 @@ class="sourceCode java"><code class="sourceCode java"><span id="cb12-1"><a href=
 etc).</p>
 </section>
 <section id="comparing-fields-using-key-extractors" class="level3"
-data-number="1.6.5">
-<h3 data-number="1.6.5"><span class="header-section-number">1.6.5</span>
+data-number="1.6.4">
+<h3 data-number="1.6.4"><span class="header-section-number">1.6.4</span>
 Comparing fields using key extractors</h3>
 <p>In many cases (including our example case), we only want to compare
 some fields in a class. Then we can use <em>key extractors</em> to
@@ -317,8 +298,8 @@ efficient.</li>
 </ul>
 </section>
 <section id="comparing-several-fields" class="level3"
-data-number="1.6.6">
-<h3 data-number="1.6.6"><span class="header-section-number">1.6.6</span>
+data-number="1.6.5">
+<h3 data-number="1.6.5"><span class="header-section-number">1.6.5</span>
 Comparing several fields</h3>
 <p>Remember the natural ordering? The problem with only comparing the
 family name is that if two persons have the same name they keep their
@@ -365,8 +346,8 @@ Diana Čemerytė (1974)</div>
 problem with Guy and Diana coming last in the list.</p>
 </section>
 <section id="case-insensitive-and-language-specific-comparisons"
-class="level3" data-number="1.6.7">
-<h3 data-number="1.6.7"><span class="header-section-number">1.6.7</span>
+class="level3" data-number="1.6.6">
+<h3 data-number="1.6.6"><span class="header-section-number">1.6.6</span>
 Case-insensitive and language-specific comparisons</h3>
 <p>The Java <strong>String</strong> class has a method
 <code>.compareToIgnoringCase(…)</code> which is what it sounds like.</p>
@@ -409,15 +390,15 @@ Anna Thorvaldsdóttir (1977)</div>
 the list!</p>
 </section>
 <section id="and-what-about-the-names" class="level3"
-data-number="1.6.8">
-<h3 data-number="1.6.8"><span class="header-section-number">1.6.8</span>
+data-number="1.6.7">
+<h3 data-number="1.6.7"><span class="header-section-number">1.6.7</span>
 …and what about the names?</h3>
 <p>The names are taken from here: <a
 href="https://female-composers.forts.se/"
 class="uri">https://female-composers.forts.se/</a></p>
 </section>
-<section id="running-the-program" class="level3" data-number="1.6.9">
-<h3 data-number="1.6.9"><span class="header-section-number">1.6.9</span>
+<section id="running-the-program" class="level3" data-number="1.6.8">
+<h3 data-number="1.6.8"><span class="header-section-number">1.6.8</span>
 Running the program</h3>
 <p>Here is the full source code. Just compile and run it without any
 arguments:</p>

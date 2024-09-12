@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -116,7 +102,7 @@ will be explained in detail later on.</p>
 <p><strong>Important Java note</strong>: There are many similarities,
 but also some differences, between the API below and the interfaces and
 classes in the “standard” Java API. For more details about the
-differences, please see the end of this module.</p>
+differences, please see the end of this section.</p>
 <p><strong>Important Python note</strong>: Python doesn’t make use of
 abstract classes (interfaces) in the same way as Java does. Instead they
 use a concept called <a
@@ -131,15 +117,18 @@ Basic Abstract Data Types</h3>
 <p>These include comparables:</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Comparable</span>:</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Returns an integer: negative (smaller), 0 (equal), positive (larger)</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">this</span>.<span class="bu">compareTo</span>(other)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// All of these operators return a boolean:</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">this</span> <span class="op">==</span> other  </span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="va">this</span> <span class="op">!=</span> other  </span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="va">this</span> <span class="op">&lt;</span> other   </span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">this</span> <span class="op">&lt;=</span> other  </span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="va">this</span> <span class="op">&gt;</span> other   </span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="va">this</span> <span class="op">&gt;=</span> other  </span></code></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// This is Java&#39;s default way of comparing elements,</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// returning an integer: negative (smaller), 0 (equal), positive (larger)</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">this</span>.<span class="bu">compareTo</span>(other)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// This is Python&#39;s default way of comparing elements.</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// All of these operators return a boolean:</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">this</span> <span class="op">==</span> other  </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="va">this</span> <span class="op">!=</span> other  </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="va">this</span> <span class="op">&lt;</span> other   </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="va">this</span> <span class="op">&lt;=</span> other  </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="va">this</span> <span class="op">&gt;</span> other   </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="va">this</span> <span class="op">&gt;=</span> other  </span></code></pre></div>
 <p>And iterators and iterables:</p>
 <div class="sourceCode" id="cb2"><pre
 class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Iterator</span>:</span>
@@ -159,10 +148,10 @@ ADTs for Lists</h3>
 <p>General lists:</p>
 <div class="sourceCode" id="cb4"><pre
 class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">List</span> <span class="kw">extends</span> <span class="bu">Collection</span>:</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">add</span>(i, x)  <span class="co">// Adds x at position i; where 0 &lt;= i &lt;= size.</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">get</span>(i)     <span class="co">// Returns the element at position i; where 0 &lt;= i &lt; size.</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">set</span>(i, x)  <span class="co">// Replaces the value at position i with x; where 0 &lt;= i &lt; size.</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">remove</span>(i)  <span class="co">// Removes the element at position i; where 0 &lt;= i &lt; size.</span></span></code></pre></div>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">add</span>(i, x)  <span class="co">// Adds x at position i; where 0 ≤ i ≤ size.</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">get</span>(i)     <span class="co">// Returns the element at position i; where 0 ≤ i &lt; size.</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">set</span>(i, x)  <span class="co">// Replaces the value at position i with x; where 0 ≤ i &lt; size.</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">remove</span>(i)  <span class="co">// Removes the element at position i; where 0 ≤ i &lt; size.</span></span></code></pre></div>
 <p>Stacks:</p>
 <div class="sourceCode" id="cb5"><pre
 class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Stack</span> <span class="kw">extends</span> <span class="bu">Collection</span>:</span>
@@ -196,11 +185,11 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb8-1"><a hr
 class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">SortedSet</span> <span class="kw">extends</span> <span class="bu">Set</span>:</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    first()          <span class="co">// Returns the first (smallest) element.</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    last()           <span class="co">// Returns the last (largest) element.</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    floor(x)         <span class="co">// Returns the closest element &lt;= x, or nothing if there is no such element.</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    ceiling(x)       <span class="co">// Returns the closest element &gt;= x, or nothing if there is no such element.</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    floor(x)         <span class="co">// Returns the closest element ≤ x, or nothing if there is no such element.</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    ceiling(x)       <span class="co">// Returns the closest element ≥ x, or nothing if there is no such element.</span></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    lower(x)         <span class="co">// Returns the closest element &lt; x, or nothing if there is no such element.</span></span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    higher(x)        <span class="co">// Returns the closest element &gt; x, or nothing if there is no such element.</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    between(x1, x2)  <span class="co">// Returns all elements x such that x1 &lt;= x &lt;= x2.</span></span></code></pre></div>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    between(x1, x2)  <span class="co">// Returns all elements x such that x1 ≤ x ≤ x2.</span></span></code></pre></div>
 </section>
 <section id="adts-for-maps-or-dictionaries" class="level3"
 data-number="1.3.4">
@@ -221,11 +210,11 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb10-1"><a h
 class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">SortedMap</span> <span class="kw">extends</span> <span class="bu">Map</span>:</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    firstKey()               <span class="co">// Returns the first (smallest) key.</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    lastKey()                <span class="co">// Returns the last (largest) key.</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    floorKey(key)            <span class="co">// Returns the closest key &lt;= k, or nothing if there is no key.</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    ceilingKey(key)          <span class="co">// Returns the closest key &gt;= k, or nothing if there is no key.</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    floorKey(key)            <span class="co">// Returns the closest key ≤ k, or nothing if there is no key.</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    ceilingKey(key)          <span class="co">// Returns the closest key ≥ k, or nothing if there is no key.</span></span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    lowerKey(key)            <span class="co">// Returns the closest key &lt; k, or nothing if there is no such element.</span></span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    higherKey(key)           <span class="co">// Returns the closest key &gt; k, or nothing if there is no such element.</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    keysBetween(key1, key2)  <span class="co">// Returns all keys k such that k1 &lt;= k &lt;= k2.</span></span></code></pre></div>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    keysBetween(key1, key2)  <span class="co">// Returns all keys k such that k1 ≤ k ≤ k2.</span></span></code></pre></div>
 </section>
 <section id="adts-for-graphs" class="level3" data-number="1.3.5">
 <h3 data-number="1.3.5"><span class="header-section-number">1.3.5</span>

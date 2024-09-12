@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -100,8 +86,8 @@
 <a href="2.3-sorting-terminology-and-notation.html" accesskey="p" rel="previous">Sorting Terminology and Notation</a>
 </div>
 <div>
-<a href="2.5-bubble-sort-optional.html" accesskey="n" rel="next">Bubble Sort (optional)</a>
-<a href="2.5-bubble-sort-optional.html" class="navbutton">&gt;&gt;</a>
+<a href="2.5-bubble-sort.html" accesskey="n" rel="next">Bubble Sort</a>
+<a href="2.5-bubble-sort.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
@@ -127,16 +113,15 @@ processed. Here is an implementation. The input is an array named
 <code>A</code> that stores
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
 records.</p>
-<div id="introduction">
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> insertionSort(A):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="op">=</span> <span class="dv">1</span> <span class="kw">to</span> A.<span class="bu">size</span>()<span class="op">-</span><span class="dv">1</span>:</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Move the i&#39;th element to its correct position.</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        j <span class="op">=</span> i</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> j <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> A[j] <span class="op">&lt;</span> A[j<span class="op">-</span><span class="dv">1</span>]:</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            swap(A, j, j<span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>            j <span class="op">=</span> j<span class="op">-</span><span class="dv">1</span></span></code></pre></div>
-</div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    N <span class="op">=</span> A.<span class="bu">size</span>()</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="op">=</span> <span class="dv">1</span> <span class="kw">to</span> N<span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Move the i&#39;th element to its correct position.</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        j <span class="op">=</span> i</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> j <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> A[j] <span class="op">&lt;</span> A[j<span class="op">-</span><span class="dv">1</span>]:</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>            swap(A, j, j<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            j <span class="op">=</span> j<span class="op">-</span><span class="dv">1</span></span></code></pre></div>
 <div id="practice">
 <p>(Note that to make the explanation for these sorting algorithms as
 simple as possible, our visualizations will show the array as though it
@@ -646,8 +631,8 @@ goes from 1 to
 <a href="2.3-sorting-terminology-and-notation.html" accesskey="p" rel="previous">Sorting Terminology and Notation</a>
 </div>
 <div class="navlink">
-<a href="2.5-bubble-sort-optional.html" accesskey="n" rel="next">Bubble Sort (optional)</a>
-<a href="2.5-bubble-sort-optional.html" class="navbutton">&gt;&gt;</a>
+<a href="2.5-bubble-sort.html" accesskey="n" rel="next">Bubble Sort</a>
+<a href="2.5-bubble-sort.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </footer>

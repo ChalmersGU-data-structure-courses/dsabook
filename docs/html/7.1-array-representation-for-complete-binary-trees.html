@@ -12,6 +12,7 @@ Trees</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -20,7 +21,6 @@ Trees</title>
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -32,22 +32,8 @@ Trees</title>
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -142,8 +128,8 @@ href="7.1-array-representation-for-complete-binary-trees.html#BinArray">Figure
 placing each data value in the array position corresponding to that
 node’s position within the tree. The table lists the array indices for
 the children, parent, and siblings of each node in the figure.</p>
-<div id="BinArray">
-<div class="figure">
+<section id="BinArray" class="level4 unnumbered figure">
+<h4 class="unnumbered">Figure: Complete binary tree</h4>
 <figure>
 <img src="images/BinArray.png" width="400"
 alt="Complete binary tree node numbering" />
@@ -151,8 +137,7 @@ alt="Complete binary tree node numbering" />
 numbering</figcaption>
 </figure>
 <p>A complete binary tree of 12 nodes, numbered starting from 0.</p>
-</div>
-</div>
+</section>
 <p>Here is a table that lists, for each node position, the positions of
 the parent, sibling, and children of the node.</p>
 <table>

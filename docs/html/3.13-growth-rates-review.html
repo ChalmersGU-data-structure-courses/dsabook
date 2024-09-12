@@ -7,10 +7,11 @@
   <meta name="author" content="Cliff Shaffer" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
-  <title>DSABook – Growth Rates Review (optional)</title>
+  <title>DSABook – Growth Rates Review</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -97,17 +83,16 @@
 <a href="3.12-code-tuning-and-empirical-analysis.html" accesskey="p" rel="previous">Code Tuning and Empirical Analysis</a>
 </div>
 <div>
-<a href="3.14-summation-techniques-optional.html" accesskey="n" rel="next">Summation Techniques (optional)</a>
-<a href="3.14-summation-techniques-optional.html" class="navbutton">&gt;&gt;</a>
+<a href="3.14-summation-techniques.html" accesskey="n" rel="next">Summation Techniques</a>
+<a href="3.14-summation-techniques.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="growth-rates-review-optional" class="level2"
-data-number="3.13">
+<section id="growth-rates-review" class="level2" data-number="3.13">
 <h2 data-number="3.13"><span class="header-section-number">3.13</span>
-Growth Rates Review (optional)</h2>
+Growth Rates Review</h2>
 <div class="alert">
 <p><strong><em>Note</em></strong>: This section is <em>work in
 progress</em></p>
@@ -120,8 +105,8 @@ rates</a> if as
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
 goes to infinity their ratio either goes to infinity or goes to
 zero.</p>
-<div id="RunTimeGraph">
-<div class="figure">
+<section id="figure-growth-rates" class="level4 unnumbered figure">
+<h4 class="unnumbered">Figure: Growth rates</h4>
 <figure>
 <img src="images/plot.png" width="500"
 alt="The growth rates for five equations" />
@@ -132,8 +117,7 @@ equations</figcaption>
 The bottom view shows in detail the lower-left portion of the top view.
 The horizontal axis represents input size. The vertical axis can
 represent time, space, or any other measure of cost.</p>
-</div>
-</div>
+</section>
 <p>Where does
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>1.618</mn><mo stretchy="true" form="postfix">)</mo></mrow><mi>n</mi></msup><annotation encoding="application/x-tex">(1.618)^n</annotation></semantics></math>
 go on here?</p>
@@ -402,8 +386,8 @@ thinking.</p>
 <a href="3.12-code-tuning-and-empirical-analysis.html" accesskey="p" rel="previous">Code Tuning and Empirical Analysis</a>
 </div>
 <div class="navlink">
-<a href="3.14-summation-techniques-optional.html" accesskey="n" rel="next">Summation Techniques (optional)</a>
-<a href="3.14-summation-techniques-optional.html" class="navbutton">&gt;&gt;</a>
+<a href="3.14-summation-techniques.html" accesskey="n" rel="next">Summation Techniques</a>
+<a href="3.14-summation-techniques.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </footer>

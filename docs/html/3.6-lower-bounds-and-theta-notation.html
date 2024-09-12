@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -155,8 +141,9 @@ for all
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>&gt;</mo><msub><mi>n</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">n &gt; n_0</annotation></semantics></math>.</p>
 </blockquote>
 <div id="AAnalEx">
-<section id="example-6" class="level4 unnumbered topic">
-<h4 class="unnumbered">Example</h4>
+<section id="example-quadratic-algorithm-1"
+class="level4 unnumbered topic">
+<h4 class="unnumbered">Example: Quadratic algorithm</h4>
 <p>Assume
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐓</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msub><mi>c</mi><mn>1</mn></msub><msup><mi>n</mi><mn>2</mn></msup><mo>+</mo><msub><mi>c</mi><mn>2</mn></msub><mi>n</mi></mrow><annotation encoding="application/x-tex">\mathbf{T}(n) = c_1 n^2 + c_2 n</annotation></semantics></math>
 for
@@ -164,10 +151,8 @@ for
 and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>c</mi><mn>2</mn></msub><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">c_2 &gt; 0</annotation></semantics></math>.
 Then,</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>c</mi><mn>1</mn></msub><msup><mi>n</mi><mn>2</mn></msup><mo>+</mo><msub><mi>c</mi><mn>2</mn></msub><mi>n</mi></mtd><mtd columnalign="center" style="text-align: center"><mo>≥</mo></mtd><mtd columnalign="left" style="text-align: left"><msub><mi>c</mi><mn>1</mn></msub><msup><mi>n</mi><mn>2</mn></msup></mtd></mtr></mtable><annotation encoding="application/x-tex">
-\begin{eqnarray}
-c_1 n^2 + c_2 n &amp;\geq&amp; c_1 n^2
-\end{eqnarray}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>c</mi><mn>1</mn></msub><msup><mi>n</mi><mn>2</mn></msup><mo>+</mo><msub><mi>c</mi><mn>2</mn></msub><mi>n</mi><mo>≥</mo><msub><mi>c</mi><mn>1</mn></msub><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">
+c_1 n^2 + c_2 n \geq c_1 n^2
 </annotation></semantics></math></p>
 <p>for all
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>&gt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n &gt; 1</annotation></semantics></math>.
@@ -238,10 +223,10 @@ for
 Motivation for this alternate definition can be found in the following
 example.</p>
 <p>Assume a particular algorithm has the following behavior:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐓</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mrow><mo stretchy="true" form="prefix">{</mo><mtable><mtr><mtd columnalign="left" style="text-align: left"><mi>n</mi></mtd><mtd columnalign="left" style="text-align: left"><mtext mathvariant="normal">for all odd</mtext><mspace width="0.222em"></mspace><mi>n</mi><mo>≥</mo><mn>1</mn></mtd></mtr><mtr><mtd columnalign="left" style="text-align: left"><msup><mi>n</mi><mn>2</mn></msup><mi>/</mi><mn>100</mn></mtd><mtd columnalign="left" style="text-align: left"><mtext mathvariant="normal">for all even</mtext><mspace width="0.222em"></mspace><mi>n</mi><mo>≥</mo><mn>0</mn></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐓</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mrow><mo stretchy="true" form="prefix">{</mo><mtable><mtr><mtd columnalign="left" style="text-align: left"><mi>n</mi></mtd><mtd columnalign="left" style="text-align: left"><mtext mathvariant="normal">for all odd</mtext><mspace width="0.222em"></mspace><mi>n</mi><mo>≥</mo><mn>1</mn></mtd></mtr><mtr><mtd columnalign="left" style="text-align: left"><msup><mi>n</mi><mn>2</mn></msup><mi>/</mi><mn>100</mn><mspace width="0.278em"></mspace></mtd><mtd columnalign="left" style="text-align: left"><mtext mathvariant="normal">for all even</mtext><mspace width="0.222em"></mspace><mi>n</mi><mo>≥</mo><mn>0</mn></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
 \mathbf{T}(n) = \left\{ \begin{array}{ll}
 n  &amp; \mbox{for all odd}\ n \geq 1\\
-n^2/100 &amp; \mbox{for all even}\ n \geq 0
+n^2/100 \;&amp; \mbox{for all even}\ n \geq 0
 \end{array}
 \right.
 </annotation></semantics></math></p>
@@ -411,8 +396,9 @@ because
 grows faster. If the limit goes to some constant other than zero, then
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(n) = \Theta(g(n))</annotation></semantics></math>
 because both grow at the same rate.</p>
-<section id="example-7" class="level4 unnumbered topic">
-<h4 class="unnumbered">Example</h4>
+<section id="example-comparing-two-functions"
+class="level4 unnumbered topic">
+<h4 class="unnumbered">Example: Comparing two functions</h4>
 <p>If
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">f(n) = n^2</annotation></semantics></math>
 and
@@ -425,16 +411,12 @@ in
 or
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(g(n))</annotation></semantics></math>?
 Since</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mfrac><msup><mi>n</mi><mn>2</mn></msup><mrow><mn>2</mn><mi>n</mi><mo>log</mo><mi>n</mi></mrow></mfrac></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mfrac><mi>n</mi><mrow><mn>2</mn><mo>log</mo><mi>n</mi></mrow></mfrac></mtd></mtr></mtable><annotation encoding="application/x-tex">
-\begin{eqnarray}
-\frac{n^2}{2n\log n} &amp;=&amp; \frac{n}{2\log n}
-\end{eqnarray}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><msup><mi>n</mi><mn>2</mn></msup><mrow><mn>2</mn><mi>n</mi><mo>log</mo><mi>n</mi></mrow></mfrac><mo>=</mo><mfrac><mi>n</mi><mrow><mn>2</mn><mo>log</mo><mi>n</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+\frac{n^2}{2n\log n} = \frac{n}{2\log n}
 </annotation></semantics></math></p>
 <p>we easily see that</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><munder><mo>lim</mo><mrow><mi>n</mi><mo>→</mo><mi>∞</mi></mrow></munder><mfrac><msup><mi>n</mi><mn>2</mn></msup><mrow><mn>2</mn><mi>n</mi><mo>log</mo><mi>n</mi></mrow></mfrac></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mi>∞</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">
-\begin{eqnarray}
-\lim_{n \rightarrow \infty} \frac{n^2}{2n\log n} &amp;=&amp; \infty
-\end{eqnarray}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munder><mo>lim</mo><mrow><mi>n</mi><mo>→</mo><mi>∞</mi></mrow></munder><mfrac><msup><mi>n</mi><mn>2</mn></msup><mrow><mn>2</mn><mi>n</mi><mo>log</mo><mi>n</mi></mrow></mfrac><mo>=</mo><mi>∞</mi></mrow><annotation encoding="application/x-tex">
+\lim_{n \rightarrow \infty} \frac{n^2}{2n\log n} = \infty
 </annotation></semantics></math></p>
 <p>because
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>

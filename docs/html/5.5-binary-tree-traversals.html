@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -95,8 +81,8 @@
 </nav>
 <nav class="sitenav">
 <div>
-<a href="5.4-the-full-binary-tree-theorem-optional.html" class="navbutton">&lt;&lt;</a>
-<a href="5.4-the-full-binary-tree-theorem-optional.html" accesskey="p" rel="previous">The Full Binary Tree Theorem (optional)</a>
+<a href="5.4-the-full-binary-tree-theorem.html" class="navbutton">&lt;&lt;</a>
+<a href="5.4-the-full-binary-tree-theorem.html" accesskey="p" rel="previous">The Full Binary Tree Theorem</a>
 </div>
 <div>
 <a href="5.6-implementing-tree-traversals.html" accesskey="n" rel="next">Implementing Tree Traversals</a>
@@ -137,8 +123,9 @@ Preorder Traversal</h3>
 href="5.5-binary-tree-traversals.html#preorder-traversal" class="term"
 title="In a binary tree, a traversal that first visits the root, then recursively visits the left child, then recursively visits the right child.">preorder
 traversal</a>.</p>
-<section id="example-27" class="level4 unnumbered topic">
-<h4 class="unnumbered">Example</h4>
+<section id="example-preorder-enumeration"
+class="level4 unnumbered topic">
+<h4 class="unnumbered">Example: Preorder enumeration</h4>
 <p>The preorder enumeration for the tree of <a
 href="5.5-binary-tree-traversals.html#BinTravExample">Figure
 #BinTravExample</a> is <strong>A B D C E G F H I</strong>.</p>
@@ -167,8 +154,9 @@ first, and so on. This is called a <a
 href="5.5-binary-tree-traversals.html#postorder-traversal" class="term"
 title="In a binary tree, a traversal that first recursively visits the left child, then recursively visits the right child, and then visits the root.">postorder
 traversal</a>.</p>
-<section id="example-28" class="level4 unnumbered topic">
-<h4 class="unnumbered">Example</h4>
+<section id="example-postorder-enumeration"
+class="level4 unnumbered topic">
+<h4 class="unnumbered">Example: Postorder enumeration</h4>
 <p>The postorder enumeration for the tree of <a
 href="5.5-binary-tree-traversals.html#BinTravExample">Figure
 #BinTravExample</a> is <strong>D B G E H I F C A</strong>.</p>
@@ -195,8 +183,9 @@ href="10-glossary.html#binary-search-tree" class="term"
 title="A binary tree that imposes the following constraint on its node values: The search key value for any node $A$ must be greater than the (key) values for all nodes in the left subtree of $A$, and less than the key values for all nodes in the right subtree of $A$. Some convention must be adopted if multiple nodes with the same key value are permitted, typically these are required to be in the right subtree.">binary
 search tree</a> makes use of this traversal to print all nodes in
 ascending order of value.</p>
-<section id="example-29" class="level4 unnumbered topic">
-<h4 class="unnumbered">Example</h4>
+<section id="example-inorder-enumeration"
+class="level4 unnumbered topic">
+<h4 class="unnumbered">Example: Inorder enumeration</h4>
 <p>The inorder enumeration for the tree of <a
 href="5.5-binary-tree-traversals.html#BinTravExample">Figure
 #BinTravExample</a> is <strong>B D A G E C H F I</strong>.</p>
@@ -446,8 +435,8 @@ pointers by <code>preorder2</code>.</li>
 <footer>
 <nav class="sitenav">
 <div class="navlink">
-<a href="5.4-the-full-binary-tree-theorem-optional.html" class="navbutton">&lt;&lt;</a>
-<a href="5.4-the-full-binary-tree-theorem-optional.html" accesskey="p" rel="previous">The Full Binary Tree Theorem (optional)</a>
+<a href="5.4-the-full-binary-tree-theorem.html" class="navbutton">&lt;&lt;</a>
+<a href="5.4-the-full-binary-tree-theorem.html" accesskey="p" rel="previous">The Full Binary Tree Theorem</a>
 </div>
 <div class="navlink">
 <a href="5.6-implementing-tree-traversals.html" accesskey="n" rel="next">Implementing Tree Traversals</a>

@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -168,17 +154,13 @@ title="Another name for sequential search.">linear search</a>.</p>
 <h3 data-number="2.1.2"><span class="header-section-number">2.1.2</span>
 Binary Search</h3>
 <p>Sequential search is the best that we can do when trying to find a
-value in an unsorted array.<a href="#fn1" class="footnote-ref"
-id="fnref1" role="doc-noteref"><sup>1</sup></a> But if the array is
-sorted in increasing order by value, then we can do much better. We use
-a process called <a href="2.1-searching-in-an-array.html#binary-search"
-class="term"
+value in an unsorted array. But if the array is sorted in increasing
+order by value, then we can do much better. We use a process called <a
+href="2.1-searching-in-an-array.html#binary-search" class="term"
 title="A standard recursive algorithm for finding the record with a given search key value within a sorted list. It runs in $O(\log n)$ time. At each step, look at the middle of the current sublist, and throw away the half of the records whose keys are either too small or too large.">binary
 search</a>.</p>
-<aside id="footnotes" class="footnotes footnotes-end-of-block"
-role="doc-footnote">
-<ol>
-<li id="fn1"><p>It seems to be really “obvious” that sequential search
+<div class="note">
+<p><em>Note</em>: It seems to be really “obvious” that sequential search
 is the best that you can do on an unsorted array. But writing a
 convincing proof that no algorithm could ever be discovered that is
 better is surprisingly difficult. This is an example of a <a
@@ -189,10 +171,8 @@ href="10-glossary.html#algorithm" class="term"
 title="A method or a process followed to solve a problem.">algorithm</a>
 to solve the <a href="10-glossary.html#problem" class="term"
 title="A task to be performed. It is best thought of as a function or a mapping of inputs to outputs.">problem</a>
-of search in an unsorted array.<a href="#fnref1" class="footnote-back"
-role="doc-backlink">↩︎</a></p></li>
-</ol>
-</aside>
+of search in an unsorted array.</p>
+</div>
 <p>Binary search begins by examining the value in the middle position of
 the array; call this position
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>i</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">mid</annotation></semantics></math>
@@ -258,21 +238,16 @@ a subarray of size 1. And we can only cut the value of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
 in half
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mo>log</mo><mn>2</mn></msub><mi>n</mi></mrow><annotation encoding="application/x-tex">\log_2 n</annotation></semantics></math>
-times before we reach 1.<a href="#fn2" class="footnote-ref" id="fnref2"
-role="doc-noteref"><sup>2</sup></a></p>
-<aside id="footnotes-2" class="footnotes footnotes-end-of-block"
-role="doc-footnote">
-<ol start="2">
-<li id="fn2"><p>It is possible to <a
+times before we reach 1.</p>
+<div class="note">
+<p><em>Note</em>: It is possible to <a
 href="10-glossary.html#search-lower-bound" class="term"
 title="The problem of searching in an array has provable lower bounds for specific variations of the problem. For an unsorted array, it is $\Omega(n)$ comparisons in the worst case, typically proved using an adversary argument. For a sorted array, it is $\Omega(\log n)$ in the worst case, typically proved using an argument similar to the sorting lower bound proof. Indeed, it is possible to search a sorted array in the average case in $O(\log n)$ time.">prove</a>
 that binary search is the most efficient algorithm possible in the worst
 case when searching in a sorted array. This is even more difficult than
 proving that sequential search is the most efficient algorithm possible
-on an unsorted array.<a href="#fnref2" class="footnote-back"
-role="doc-backlink">↩︎</a></p></li>
-</ol>
-</aside>
+on an unsorted array.</p>
+</div>
 <p>
 <div id="binarySearchPRO" class="embedContainer">
 <iframe id="binarySearchPRO_iframe" aria-label="binarySearchPRO" src="../interactive/Searching/binarySearchPRO.html" width="100%" height="600" scrolling="no">

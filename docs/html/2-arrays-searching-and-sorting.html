@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -93,8 +79,8 @@
 </nav>
 <nav class="sitenav">
 <div>
-<a href="1.6-comparables-and-comparators-an-example.html" class="navbutton">&lt;&lt;</a>
-<a href="1.6-comparables-and-comparators-an-example.html" accesskey="p" rel="previous">Comparables and Comparators: An Example</a>
+<a href="1.6-example-comparables-and-comparators-in-java.html" class="navbutton">&lt;&lt;</a>
+<a href="1.6-example-comparables-and-comparators-in-java.html" accesskey="p" rel="previous">Example: Comparables and Comparators in Java</a>
 </div>
 <div>
 <a href="2.1-searching-in-an-array.html" accesskey="n" rel="next">Searching in an Array</a>
@@ -109,15 +95,12 @@ data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Arrays:
 searching and sorting</h1>
 <p><em>Arrays</em> are one of the fundamental data structures in
-programming <a href="#fn1" class="footnote-ref" id="fnref1"
-role="doc-noteref"><sup>1</sup></a>. This is because they are natively
-supported by the computer, and have good performance: reading or writing
-an element of the array takes very little time. Many important
-algorithms use arrays.</p>
-<aside id="footnotes" class="footnotes footnotes-end-of-block"
-role="doc-footnote">
-<ol>
-<li id="fn1"><p>Note to Python programmers: in Python, arrays are called
+programming. This is because they are natively supported by the
+computer, and have good performance: reading or writing an element of
+the array takes very little time. Many important algorithms use
+arrays.</p>
+<div class="note">
+<p><em>Note to Python programmers</em>: in Python, arrays are called
 <em>lists</em>, and are written like this: <code>[1,2,3]</code>. There
 is one difference between arrays and Python lists: in most programming
 languages, any given array has a fixed size. However, Python lists can
@@ -125,38 +108,36 @@ change in size – for example, the <code>append</code> method adds a new
 element to the list, increasing its size. In this chapter, we will work
 with arrays that have a fixed size. Python lists are so-called <a
 href="4.3-dynamic-array-based-lists.html#dynamic-array-based-lists">dynamic
-arrays</a>.<a href="#fnref1" class="footnote-back"
-role="doc-backlink">↩︎</a></p></li>
-</ol>
-</aside>
+arrays</a>.</p>
+</div>
 <p>In this chapter we will study two algorithmic problems and how to
 solve them efficiently using arrays:</p>
-<ul>
-<li><em>Searching</em>: Given a list of items, check if a given item is
-present in the list. There are two kinds of search problems:
-<ul>
-<li><em>Membership testing:</em> The search algorithm is given an item
-to search for, and should return <em>true</em> or <em>false</em>
-depending on whether the item is found. For example, a spellchecker:
-given a list of all valid English words, search the list for a given
-string.</li>
-<li><em>Lookup:</em> The items are typically objects, and each object
-has a field called the <em>key</em>. The search algorithm is given a
-key, and should return the item having that key (or a reference to the
-item, such as the position in the list). For example, a database: given
-a list of people, find the person having a given personal identity
-number.</li>
-</ul></li>
-<li><em>Sorting</em>: Given a list of items, put them in ascending
-order. Again, there are two kinds of sorting problems:
-<ul>
-<li><em>Natural sorting:</em> Here, the items have some kind of natural
-order. For example, sorting a list of words in alphabetical order.</li>
-<li><em>Key-based sorting:</em> Here, each item has a <em>key</em>, and
+<dl>
+<dt>Searching</dt>
+<dd>
+<p>Given a list of items, check if a given item is present in the list.
+There are two kinds of search problems:</p>
+<p><em>Membership testing</em>: The search algorithm is given an item to
+search for, and should return <em>true</em> or <em>false</em> depending
+on whether the item is found. For example, a spellchecker: given a list
+of all valid English words, search the list for a given string.</p>
+<p><em>Lookup</em>: The items are typically objects, and each object has
+a field called the <em>key</em>. The search algorithm is given a key,
+and should return the item having that key (or a reference to the item,
+such as the position in the list). For example, a database: given a list
+of people, find the person having a given personal identity number.</p>
+</dd>
+<dt>Sorting</dt>
+<dd>
+<p>Given a list of items, put them in ascending order. Again, there are
+two kinds of sorting problems:</p>
+<p><em>Natural sorting</em>: Here, the items have some kind of natural
+order. For example, sorting a list of words in alphabetical order.</p>
+<p><em>Key-based sorting</em>: Here, each item has a <em>key</em>, and
 we want to sort the items so that the keys come in ascending order. For
-example, sorting a list of towns by population.</li>
-</ul></li>
-</ul>
+example, sorting a list of towns by population.</p>
+</dd>
+</dl>
 <p>Note that if we search or sort according to a <em>key</em>, it
 doesn’t have to be explicitly stored in the object, but can instead be
 calculated on demand. E.g., if we want to sort a list of words
@@ -170,15 +151,14 @@ function</a> (in Python).</p>
 <p>This chapter concentrates on <em>membership testing</em> and
 <em>natural sorting</em>, but all the algorithms in this chapter work
 just as well for <em>lookup</em> and <em>key-based sorting</em>.</p>
-<p><strong>Footnotes</strong></p>
 </section>
 </main>
 
 <footer>
 <nav class="sitenav">
 <div class="navlink">
-<a href="1.6-comparables-and-comparators-an-example.html" class="navbutton">&lt;&lt;</a>
-<a href="1.6-comparables-and-comparators-an-example.html" accesskey="p" rel="previous">Comparables and Comparators: An Example</a>
+<a href="1.6-example-comparables-and-comparators-in-java.html" class="navbutton">&lt;&lt;</a>
+<a href="1.6-example-comparables-and-comparators-in-java.html" accesskey="p" rel="previous">Example: Comparables and Comparators in Java</a>
 </div>
 <div class="navlink">
 <a href="2.1-searching-in-an-array.html" accesskey="n" rel="next">Searching in an Array</a>

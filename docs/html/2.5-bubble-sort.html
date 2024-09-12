@@ -7,10 +7,11 @@
   <meta name="author" content="Cliff Shaffer" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
-  <title>DSABook – Bubble Sort (optional)</title>
+  <title>DSABook – Bubble Sort</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -105,21 +91,20 @@
 </header>
 
 <main>
-<section id="bubble-sort-optional" class="level2" data-number="2.5">
+<section id="bubble-sort" class="level2" data-number="2.5">
 <h2 data-number="2.5"><span class="header-section-number">2.5</span>
-Bubble Sort (optional)</h2>
+Bubble Sort</h2>
 <p>Our next sorting algorithm is called <a
-href="2.8-optimizing-sort-algorithms-with-code-tuning-optional.html#bubble-sort"
-class="term"
+href="2.5-bubble-sort.html#bubble-sort" class="term"
 title="A simple sort that requires $Theta(n^2)$ time in best, average, and worst cases. Even an optimized version will normally run slower than insertion sort, so it has little to recommend it.">Bubble
 Sort</a>. Bubble Sort is often taught to novice programmers in
 introductory computer science courses. This is unfortunate, because
 Bubble Sort has no redeeming features whatsoever. It is rather slow,
 even compared to the other
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^2)</annotation></semantics></math>
-sorts that are commonly known. It is not particularly intutitive –nobody
-is going to come naturally to Bubble Sort as a way to sort their Bridge
-hand or their pile of bills like they might with <a
+sorts that are commonly known. It is not particularly intutitive –
+nobody is going to come naturally to Bubble Sort as a way to sort their
+Bridge hand or their pile of bills like they might with <a
 href="2.4-insertion-sort.html#insertion-sort">Insertion Sort</a> or <a
 href="2.6-selection-sort.html#selection-sort">Selection Sort</a>.
 However, Bubble Sort can viewed as a close relative of Selection
@@ -139,11 +124,12 @@ compares adjacent records, looking at one less record toward the end
 than did the preceding pass. Here is an implementation.</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> bubbleSort(A):</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="op">=</span> <span class="dv">0</span> <span class="kw">to</span> A.<span class="bu">size</span>()<span class="op">-</span><span class="dv">2</span>:</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Bubble up the i&#39;th element</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="op">=</span> <span class="dv">1</span> <span class="kw">to</span> A.<span class="bu">size</span>()<span class="op">-</span>i:</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> A[j<span class="op">-</span><span class="dv">1</span>] <span class="op">&gt;</span> A[j]:</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                swap(A, j<span class="op">-</span><span class="dv">1</span>, j)</span></code></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    N <span class="op">=</span> A.<span class="bu">size</span>()</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="op">=</span> <span class="dv">0</span> <span class="kw">to</span> N<span class="op">-</span><span class="dv">2</span>:</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Bubble up the i&#39;th element</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="op">=</span> <span class="dv">1</span> <span class="kw">to</span> N<span class="op">-</span>i<span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> A[j<span class="op">-</span><span class="dv">1</span>] <span class="op">&gt;</span> A[j]:</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                swap(A, j<span class="op">-</span><span class="dv">1</span>, j)</span></code></pre></div>
 <p>
 <div id="bubblesortS1CON" class="ssAV" data-short-name="bubblesortS1CON" data-long-name="Bubble Sort Slideshow 1" alt="Bubble Sort Slideshow 1" tabIndex="-1">
 <span class="jsavcounter"></span>

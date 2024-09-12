@@ -7,10 +7,11 @@
   <meta name="author" content="Cliff Shaffer" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
-  <title>DSABook – Sequential Tree Representations (optional)</title>
+  <title>DSABook – Sequential Tree Representations</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -95,8 +81,8 @@
 </nav>
 <nav class="sitenav">
 <div>
-<a href="5.11-the-unionfind-algorithm-optional.html" class="navbutton">&lt;&lt;</a>
-<a href="5.11-the-unionfind-algorithm-optional.html" accesskey="p" rel="previous">The Union/Find Algorithm (optional)</a>
+<a href="5.11-the-unionfind-algorithm.html" class="navbutton">&lt;&lt;</a>
+<a href="5.11-the-unionfind-algorithm.html" accesskey="p" rel="previous">The Union/Find Algorithm</a>
 </div>
 <div>
 <a href="6-binary-search-trees.html" accesskey="n" rel="next">Binary Search Trees</a>
@@ -106,10 +92,10 @@
 </header>
 
 <main>
-<section id="sequential-tree-representations-optional" class="level2"
+<section id="sequential-tree-representations" class="level2"
 data-number="5.12">
 <h2 data-number="5.12"><span class="header-section-number">5.12</span>
-Sequential Tree Representations (optional)</h2>
+Sequential Tree Representations</h2>
 <p>Next we consider a fundamentally different approach to implementing
 trees. The goal is to store a series of node values with the minimum
 information needed to reconstruct the tree structure. This approach,
@@ -311,8 +297,7 @@ restricted form of general tree with at most two children. Every binary
 tree node has a left and a right child, though either or both might be
 empty. So this representation cannot let us distinguish whether node
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>
-in <a
-href="5.12-sequential-tree-representations-optional.html#BinExampb">Figure
+in <a href="5.12-sequential-tree-representations.html#BinExampb">Figure
 #BinExampb</a> is the left or right child of node
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>.</p>
 <p>
@@ -329,8 +314,8 @@ Your browser does not support iframes.
 <footer>
 <nav class="sitenav">
 <div class="navlink">
-<a href="5.11-the-unionfind-algorithm-optional.html" class="navbutton">&lt;&lt;</a>
-<a href="5.11-the-unionfind-algorithm-optional.html" accesskey="p" rel="previous">The Union/Find Algorithm (optional)</a>
+<a href="5.11-the-unionfind-algorithm.html" class="navbutton">&lt;&lt;</a>
+<a href="5.11-the-unionfind-algorithm.html" accesskey="p" rel="previous">The Union/Find Algorithm</a>
 </div>
 <div class="navlink">
 <a href="6-binary-search-trees.html" accesskey="n" rel="next">Binary Search Trees</a>

@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -138,18 +124,19 @@ of reference</a>.</p>
 id="adt">ADT</dfn>)</dt>
 <dd>
 <p>Abbreviated ADT. The specification of a <a
-href="10-glossary.html#data-type" class="term"
+href="1.2-abstract-data-types.html#data-type" class="term"
 title="A type together with a collection of operations to manipulate the type.">data
 type</a> within some language, independent of an implementation. The <a
 href="10-glossary.html#interface" class="term"
 title="An interface is a class-like structure that only contains method signatures and fields. An interface does not contain an implementation of the methods or any data members.">interface</a>
-for the ADT is defined in terms of a <a href="10-glossary.html#type"
-class="term" title="A collection of values.">type</a> and a set of
-operations on that type. The behavior of each operation is determined by
-its inputs and outputs. An ADT does not specify <em>how</em> the data
-type is implemented. These implementation details are hidden from the
-user of the ADT and protected from outside access, a concept referred to
-as <a href="10-glossary.html#encapsulation" class="term"
+for the ADT is defined in terms of a <a
+href="1.2-abstract-data-types.html#type" class="term"
+title="A collection of values.">type</a> and a set of operations on that
+type. The behavior of each operation is determined by its inputs and
+outputs. An ADT does not specify <em>how</em> the data type is
+implemented. These implementation details are hidden from the user of
+the ADT and protected from outside access, a concept referred to as <a
+href="10-glossary.html#encapsulation" class="term"
 title="In programming, the concept of hiding implementation details from the user of an ADT, and protecting data members of an object from outside access.">encapsulation</a>.</p>
 </dd>
 <dt><dfn id="accept">accept</dfn></dt>
@@ -257,7 +244,8 @@ is adjacent from
 </dd>
 <dt><dfn>ADT</dfn></dt>
 <dd>
-<p>See <a href="10-glossary.html#abstract-data-type" class="term"
+<p>See <a href="1.2-abstract-data-types.html#abstract-data-type"
+class="term"
 title="Abbreviated ADT. The specification of a data type within some language, independent of an implementation. The interface for the ADT is defined in terms of a type and a set of operations on that type. The behavior of each operation is determined by its inputs and outputs. An ADT does not specify *how* the data type is implemented. These implementation details are hidden from the user of the ADT and protected from outside access, a concept referred to as encapsulation.">abstract
 data type</a></p>
 </dd>
@@ -378,7 +366,8 @@ lead to an overestimate for the total cost of the series. This can be
 made precise without considering averages by introducing <a
 href="10-glossary.html#potential" class="term"
 title="A concept in amortized complexity for operations on a data structure. We choose a *potential function* that associates an arbitrary non-negative value of *stored cost* (stored energy) with each state of the data structure. We then define the amortized cost of a run of the operation to be its cost as given by the the cost model plus the change in potential. The complexity modified this way is called amortized complexity. An example is adding an element to a dynamic array. When the dynamic array is not full, adding an element is quick and we store some of that saved cost by increasing the potential. When the dynamic array is full capacity, we perform an expensive reallocation, but compensate that cost by resetting the potential from a high value to zero. Let us define the potential of a dynamic array with capacity $c$ and size $n$ to be $max(2n-c,0)$. Assuming we double the capacity on reallocation, the operation of adding an element then has constant amortized complexity. The concept comes from potential energy in physics. For example, in the graviational field of the earth, kinetic energy may be stored as potential energy.">potentials</a>.</p>
-<p>In <a href="10-glossary.html#amortized-analysis" class="term"
+<p>In <a href="3.16-amortized-analysis.html#amortized-analysis"
+class="term"
 title="Analysing the amortized complexity of an algorithm or problem.">amortized
 analysis</a>, gives rise to the notion of <a
 href="10-glossary.html#amortized-complexity" class="term"
@@ -464,7 +453,7 @@ ADT.</p>
 </dd>
 <dt><dfn id="array">array</dfn></dt>
 <dd>
-<p>A <a href="10-glossary.html#data-type" class="term"
+<p>A <a href="1.2-abstract-data-types.html#data-type" class="term"
 title="A type together with a collection of operations to manipulate the type.">data
 type</a> that is used to store elements in consecutive memory locations
 and refers to them by an index.</p>
@@ -536,8 +525,8 @@ title="In algorithm analysis, specifically complexity of an algorithm, the avera
 case</a>, <a href="10-glossary.html#best-case" class="term"
 title="In algorithm analysis, specifically complexity of an algorithm, the problem instance from among all problem instances for a given input size $n$ that has least cost. Every input size $n$ has its own best case. We **never** consider the best case as removed from input size.">best
 case</a>,</li>
-<li>whether to use <a href="10-glossary.html#amortized-analysis"
-class="term"
+<li>whether to use <a
+href="3.16-amortized-analysis.html#amortized-analysis" class="term"
 title="Analysing the amortized complexity of an algorithm or problem.">amortized
 complexity</a>.</li>
 </ul>
@@ -746,7 +735,7 @@ title="In object-oriented programming, any class within a class hierarchy that i
 </dd>
 <dt><dfn id="base-type">base type</dfn></dt>
 <dd>
-<p>The <a href="10-glossary.html#data-type" class="term"
+<p>The <a href="1.2-abstract-data-types.html#data-type" class="term"
 title="A type together with a collection of operations to manipulate the type.">data
 type</a> for the elements in a set. For example, the set might consist
 of the integer values 3, 5, and 7. In this example, the base type is
@@ -1218,7 +1207,7 @@ each bin.</p>
 </dd>
 <dt><dfn id="bucket">bucket</dfn></dt>
 <dd>
-<p>In <a href="10-glossary.html#bucket-hashing" class="term"
+<p>In <a href="8.5-bucket-hashing.html#bucket-hashing" class="term"
 title="A method of hashing where multiple slots of the hash table are grouped together to form a bucket. The hash function then either hashes to some bucket, or else it hashes to a home slot in the normal way, but this home slot is part of some bucket. Collision resolution is handled first by attempting to find a free position within the same bucket as the home slot. If the bucket if full, then the record is placed in an overflow bucket.">bucket
 hashing</a>, a bucket is a sequence of <a href="10-glossary.html#slot"
 class="term" title="In hashing, a position in a hash table.">slots</a>
@@ -1666,7 +1655,7 @@ collection are to be compared.</p>
 title="A field or part of a larger record used to represent that record for the purpose of searching or comparing. Another term for search key.">keys</a>
 or <a href="10-glossary.html#record" class="term"
 title="A collection of information, typically implemented as an object in an object-oriented programming language. Many data structures are organized containers for a collection of records.">records</a>.
-For many <a href="10-glossary.html#data-type" class="term"
+For many <a href="1.2-abstract-data-types.html#data-type" class="term"
 title="A type together with a collection of operations to manipulate the type.">data
 types</a>, a comparison has constant time cost. The number of
 comparisons required is often used as a <a
@@ -1805,7 +1794,7 @@ the children of the root).</p>
 <dt><dfn id="composite-type">composite type</dfn> (<dfn
 id="aggregate-type">aggregate type</dfn>)</dt>
 <dd>
-<p>A <a href="10-glossary.html#data-type" class="term"
+<p>A <a href="1.2-abstract-data-types.html#data-type" class="term"
 title="A type together with a collection of operations to manipulate the type.">data
 type</a> whose <a href="10-glossary.html#member" class="term"
 title="In set notation, this is a synonym for element. In abstract design, a data item is a member of a type. In an object-oriented language, data members are data fields in an object.">members</a>
@@ -1921,7 +1910,7 @@ title="A data structure that stores a collection of records. Typical examples ar
 <dt><dfn id="container">container</dfn> (<dfn
 id="container-class">container class</dfn>)</dt>
 <dd>
-<p>A <a href="10-glossary.html#data-structure" class="term"
+<p>A <a href="1.2-abstract-data-types.html#data-structure" class="term"
 title="The implementation for an ADT.">data structure</a> that stores a
 collection of <a href="10-glossary.html#record" class="term"
 title="A collection of information, typically implemented as an object in an object-oriented programming language. Many data structures are organized containers for a collection of records.">records</a>.
@@ -2579,10 +2568,10 @@ the disjoint sets.</p>
 </dd>
 <dt><dfn id="disjoint">disjoint</dfn></dt>
 <dd>
-<p>Two parts of a <a href="10-glossary.html#data-structure" class="term"
-title="The implementation for an ADT.">data structure</a> or two
-collections with no objects in common are disjoint. This term is often
-used in conjunction with a data structure that has <a
+<p>Two parts of a <a href="1.2-abstract-data-types.html#data-structure"
+class="term" title="The implementation for an ADT.">data structure</a>
+or two collections with no objects in common are disjoint. This term is
+often used in conjunction with a data structure that has <a
 href="10-glossary.html#node" class="term"
 title="The objects that make up a linked structure such as a linked list or binary tree. Typically, nodes are allocated using dynamic memory allocation. In graph terminology, the nodes are more commonly called vertices.">nodes</a>
 (such as a <a href="10-glossary.html#tree" class="term"
@@ -2777,7 +2766,7 @@ list.</p>
 <p>The act of creating an object from <a
 href="10-glossary.html#free-store" class="term"
 title="Space available to a program during runtime to be used for dynamic allocation of objects. The free store is distinct from the runtime stack. The free store is sometimes referred to as the heap, which can be confusing because heap more often refers to a specific data structure. Most programming languages provide functions to allocate (and maybe to deallocate) objects from the free store, such as `new` in C++ and Java.">free
-store</a>. In C++, Java, and JavaScript, this is done using the
+store</a>. In C++, Java, and Javascript, this is done using the
 <code>new</code> operator.</p>
 </dd>
 <dt><dfn id="dynamic-array">dynamic array</dfn></dt>
@@ -2980,9 +2969,7 @@ handle them properly.</p>
 reorder the list. <a href="2.4-insertion-sort.html#insertion-sort"
 class="term"
 title="A sorting algorithm with $\Theta(n^2)$ average and worst case cost, and $Theta(n)$ best case cost. This best case cost makes it useful when we have reason to expect the input to be nearly sorted.">insertion
-sort</a> and <a
-href="2.8-optimizing-sort-algorithms-with-code-tuning-optional.html#bubble-sort"
-class="term"
+sort</a> and <a href="2.5-bubble-sort.html#bubble-sort" class="term"
 title="A simple sort that requires $Theta(n^2)$ time in best, average, and worst cases. Even an optimized version will normally run slower than insertion sort, so it has little to recommend it.">bubble
 sort</a> are examples of exchange sorts. All exchange sorts require
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^2)</annotation></semantics></math>
@@ -3383,7 +3370,7 @@ pool</a>.</p>
 <dd>
 <p>Space available to a program during runtime to be used for <a
 href="10-glossary.html#dynamic-allocation" class="term"
-title="The act of creating an object from free store. In C++, Java, and JavaScript, this is done using the `new` operator.">dynamic
+title="The act of creating an object from free store. In C++, Java, and Javascript, this is done using the `new` operator.">dynamic
 allocation</a> of objects. The free store is distinct from the <a
 href="10-glossary.html#runtime-stack" class="term"
 title="The place where an activation record is stored when a subroutine is called during a program&#39;s runtime.">runtime
@@ -3496,7 +3483,7 @@ called a side effect).</p>
 </dd>
 <dt><dfn id="garbage-collection">garbage collection</dfn></dt>
 <dd>
-<p>Languages with garbage collection such Java, JavaScript, Lisp, and
+<p>Languages with garbage collection such Java, Javascript, Lisp, and
 Scheme will periodically reclaim <a href="10-glossary.html#garbage"
 class="term"
 title="In memory management, any memory that was previously (dynamically) allocated by the program during runtime, but which is no longer accessible since all pointers to the memory have been deleted or overwritten. In some languages, garbage can be recovered by garbage collection. In languages such as C and C++ that do not support garbage collection, so creating garbage is considered a memory leak.">garbage</a>
@@ -3513,7 +3500,7 @@ by the program during runtime, but which is no longer accessible since
 all pointers to the memory have been deleted or overwritten. In some
 languages, garbage can be recovered by <a
 href="10-glossary.html#garbage-collection" class="term"
-title="Languages with garbage collection such Java, JavaScript, Lisp, and Scheme will periodically reclaim garbage and return it to free store.">garbage
+title="Languages with garbage collection such Java, Javascript, Lisp, and Scheme will periodically reclaim garbage and return it to free store.">garbage
 collection</a>. In languages such as C and C++ that do not support
 garbage collection, so creating garbage is considered a <a
 href="10-glossary.html#memory-leak" class="term"
@@ -4794,14 +4781,27 @@ href="2.1-searching-in-an-array.html#sequential-search" class="term"
 title="The simplest search algorithm: In an array, simply look at the array elements in the order that they appear.">sequential
 search</a>.</p>
 </dd>
+<dt><dfn id="linearithmic-growth-rate">linearithmic growth
+rate</dfn></dt>
+<dd>
+<p>For input size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
+a growth rate of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mi>n</mi><mo>log</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">cn \log n</annotation></semantics></math>
+(for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>
+any positive constant). In other words, the cost of the associated
+function is slightly larger than linear on the input size.</p>
+</dd>
 <dt><dfn id="link-node">link node</dfn></dt>
 <dd>
 <p>A widely used supporting object that forms the basic building block
 for a <a href="10-glossary.html#linked-list" class="term"
 title="An implementation for the list ADT that uses dynamic allocation of link nodes to store the list elements. Common variants are the singly linked list, doubly linked list and circular list. The overhead required is the pointers in each link node.">linked
-list</a> and similar <a href="10-glossary.html#data-structure"
-class="term" title="The implementation for an ADT.">data structures</a>.
-A link node contains one or more fields that store data, and a <a
+list</a> and similar <a
+href="1.2-abstract-data-types.html#data-structure" class="term"
+title="The implementation for an ADT.">data structures</a>. A link node
+contains one or more fields that store data, and a <a
 href="10-glossary.html#pointer" class="term"
 title="A variable whose value is the address of another variable; a link.">pointer</a>
 or <a href="10-glossary.html#reference" class="term"
@@ -4812,7 +4812,7 @@ to another link node.</p>
 <dd>
 <p>An implementation for the list ADT that uses <a
 href="10-glossary.html#dynamic-allocation" class="term"
-title="The act of creating an object from free store. In C++, Java, and JavaScript, this is done using the `new` operator.">dynamic
+title="The act of creating an object from free store. In C++, Java, and Javascript, this is done using the `new` operator.">dynamic
 allocation</a> of <a href="10-glossary.html#link-node" class="term"
 title="A widely used supporting object that forms the basic building block for a linked list and similar data structures. A link node contains one or more fields that store data, and a pointer or reference to another link node.">link
 nodes</a> to store the list elements. Common variants are the <a
@@ -4834,7 +4834,7 @@ required is the pointers in each link node.</p>
 title="An implementation for the list ADT that uses dynamic allocation of link nodes to store the list elements. Common variants are the singly linked list, doubly linked list and circular list. The overhead required is the pointers in each link node.">linked
 list</a>, this uses <a href="10-glossary.html#dynamic-allocation"
 class="term"
-title="The act of creating an object from free store. In C++, Java, and JavaScript, this is done using the `new` operator.">dynamic
+title="The act of creating an object from free store. In C++, Java, and Javascript, this is done using the `new` operator.">dynamic
 allocation</a> of nodes to store the elements when implementing the
 stack ADT.</p>
 </dd>
@@ -4920,6 +4920,17 @@ is the power to which
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>
 is raised to get
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math>.</p>
+</dd>
+<dt><dfn id="logarithmic-growth-rate">logarithmic growth rate</dfn></dt>
+<dd>
+<p>For input size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
+a growth rate of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mo>log</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">c \log n</annotation></semantics></math>
+(for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>
+any positive constant). In other words, the cost of the associated
+function is logarithmic on the input size.</p>
 </dd>
 <dt><dfn id="logical-file">logical file</dfn></dt>
 <dd>
@@ -5023,7 +5034,7 @@ storage</a></p>
 </dd>
 <dt><dfn id="map">map</dfn></dt>
 <dd>
-<p>A <a href="10-glossary.html#data-structure" class="term"
+<p>A <a href="1.2-abstract-data-types.html#data-structure" class="term"
 title="The implementation for an ADT.">data structure</a> that relates a
 <a href="10-glossary.html#key" class="term"
 title="A field or part of a larger record used to represent that record for the purpose of searching or comparing. Another term for search key.">key</a>
@@ -5056,7 +5067,7 @@ array</a> is often maintained for this purpose.</p>
 <dd>
 <p>An algorithm for <a href="10-glossary.html#garbage-collection"
 class="term"
-title="Languages with garbage collection such Java, JavaScript, Lisp, and Scheme will periodically reclaim garbage and return it to free store.">garbage
+title="Languages with garbage collection such Java, Javascript, Lisp, and Scheme will periodically reclaim garbage and return it to free store.">garbage
 collection</a>. All accessible variables, and any space that is
 reachable by a chain of pointers from any accessible variable, is
 “marked”. Then a sequential sweep of all memory in the pool is made. Any
@@ -5066,7 +5077,7 @@ and can be considered as free to be reused.</p>
 <dt><dfn id="master-theorem">master theorem</dfn></dt>
 <dd>
 <p>A theorem that makes it easy to solve <a
-href="3.15-solving-recurrence-relations-optional.html#divide-and-conquer-recurrences"
+href="3.15-solving-recurrence-relations.html#divide-and-conquer-recurrences"
 class="term"
 title="A common form of recurrence relation that have the form $$\mathbf{T}(n) = a\mathbf{T}(n/b) + cn^k;\quad \mathbf{T}(1) = c$$ where $a$, $b$, $c$, and $k$ are constants. In general, this recurrence describes a problem of size $n$ divided into $a$ subproblems of size $n/b$, while $cn^k$ is the amount of work necessary to combine the partial solutions.">divide-and-conquer
 recurrences</a>.</p>
@@ -5161,9 +5172,10 @@ href="10-glossary.html#element" class="term"
 title="One value or member in a set.">element</a>. In abstract design, a
 <a href="10-glossary.html#data-item" class="term"
 title="A piece of information or a record whose value is drawn from a type.">data
-item</a> is a member of a <a href="10-glossary.html#type" class="term"
-title="A collection of values.">type</a>. In an object-oriented
-language, <a href="10-glossary.html#data-member" class="term"
+item</a> is a member of a <a href="1.2-abstract-data-types.html#type"
+class="term" title="A collection of values.">type</a>. In an
+object-oriented language, <a href="10-glossary.html#data-member"
+class="term"
 title="In object-oriented programming, the variables that together define the space required by a data item are referred to as data members. Some of the commonly used synonyms include *data field*, *attribute*, and *instance variable*.">data
 members</a> are data fields in an object.</p>
 </dd>
@@ -5206,7 +5218,7 @@ href="10-glossary.html#garbage" class="term"
 title="In memory management, any memory that was previously (dynamically) allocated by the program during runtime, but which is no longer accessible since all pointers to the memory have been deleted or overwritten. In some languages, garbage can be recovered by garbage collection. In languages such as C and C++ that do not support garbage collection, so creating garbage is considered a memory leak.">garbage</a>.
 In languages such as C and C++ that do not support <a
 href="10-glossary.html#garbage-collection" class="term"
-title="Languages with garbage collection such Java, JavaScript, Lisp, and Scheme will periodically reclaim garbage and return it to free store.">garbage
+title="Languages with garbage collection such Java, Javascript, Lisp, and Scheme will periodically reclaim garbage and return it to free store.">garbage
 collection</a>, repeated memory leaks will evenually cause the program
 to terminate.</p>
 </dd>
@@ -5839,7 +5851,7 @@ the number of edges directed out of the vertex.</p>
 </dd>
 <dt><dfn id="overflow-bucket">overflow bucket</dfn></dt>
 <dd>
-<p>In <a href="10-glossary.html#bucket-hashing" class="term"
+<p>In <a href="8.5-bucket-hashing.html#bucket-hashing" class="term"
 title="A method of hashing where multiple slots of the hash table are grouped together to form a bucket. The hash function then either hashes to some bucket, or else it hashes to a home slot in the normal way, but this home slot is part of some bucket. Collision resolution is handled first by attempting to find a free position within the same bucket as the home slot. If the bucket if full, then the record is placed in an overflow bucket.">bucket
 hashing</a>, this is the <a href="10-glossary.html#bucket" class="term"
 title="In bucket hashing, a bucket is a sequence of slots in the hash table that are grouped together.">bucket</a>
@@ -7029,7 +7041,7 @@ algorithm</dfn></dt>
 <dd>
 <p>An algorithm for <a href="10-glossary.html#garbage-collection"
 class="term"
-title="Languages with garbage collection such Java, JavaScript, Lisp, and Scheme will periodically reclaim garbage and return it to free store.">garbage
+title="Languages with garbage collection such Java, Javascript, Lisp, and Scheme will periodically reclaim garbage and return it to free store.">garbage
 collection</a>. Whenever a reference is made from a variable to some
 memory location, a counter associated with that memory location is
 incremented. Whenever the reference is changed or deleted, the reference
@@ -7240,7 +7252,7 @@ stack</a>, the <a href="10-glossary.html#free-store" class="term"
 title="Space available to a program during runtime to be used for dynamic allocation of objects. The free store is distinct from the runtime stack. The free store is sometimes referred to as the heap, which can be confusing because heap more often refers to a specific data structure. Most programming languages provide functions to allocate (and maybe to deallocate) objects from the free store, such as `new` in C++ and Java.">free
 store</a>, and the <a href="10-glossary.html#garbage-collection"
 class="term"
-title="Languages with garbage collection such Java, JavaScript, Lisp, and Scheme will periodically reclaim garbage and return it to free store.">garbage
+title="Languages with garbage collection such Java, Javascript, Lisp, and Scheme will periodically reclaim garbage and return it to free store.">garbage
 collector</a>, and it conducts the execution of the program.</p>
 </dd>
 <dt><dfn id="runtime-stack">runtime stack</dfn></dt>
@@ -7456,8 +7468,7 @@ cases, it requires only
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math>
 swap operations. Thus, it does relatively well in applications where
 swaps are expensive. It can be viewed as an optimization on <a
-href="2.8-optimizing-sort-algorithms-with-code-tuning-optional.html#bubble-sort"
-class="term"
+href="2.5-bubble-sort.html#bubble-sort" class="term"
 title="A simple sort that requires $Theta(n^2)$ time in best, average, and worst cases. Even an optimized version will normally run slower than insertion sort, so it has little to recommend it.">bubble
 sort</a>, where a swap is deferred until the end of each iteration.</p>
 </dd>
@@ -7699,7 +7710,7 @@ is simple if all vertices on the path are distinct.</p>
 </dd>
 <dt><dfn id="simple-type">simple type</dfn></dt>
 <dd>
-<p>A <a href="10-glossary.html#data-type" class="term"
+<p>A <a href="1.2-abstract-data-types.html#data-type" class="term"
 title="A type together with a collection of operations to manipulate the type.">data
 type</a> whose values contain no subparts. An example is the
 integers.</p>
@@ -7955,7 +7966,7 @@ coordinate. This is typically in two or more dimensions.</p>
 </dd>
 <dt><dfn id="spatial-data-structure">spatial data structure</dfn></dt>
 <dd>
-<p>A <a href="10-glossary.html#data-structure" class="term"
+<p>A <a href="1.2-abstract-data-types.html#data-structure" class="term"
 title="The implementation for an ADT.">data structure</a> designed to
 support efficient processing when a <a
 href="10-glossary.html#spatial-attribute" class="term"

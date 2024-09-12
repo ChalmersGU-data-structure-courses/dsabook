@@ -7,10 +7,11 @@
   <meta name="author" content="Cliff Shaffer" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
-  <title>DSABook – Skip Lists (optional)</title>
+  <title>DSABook – Skip Lists</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -97,8 +83,8 @@
 </nav>
 <nav class="sitenav">
 <div>
-<a href="6.6-the-splay-tree-optional.html" class="navbutton">&lt;&lt;</a>
-<a href="6.6-the-splay-tree-optional.html" accesskey="p" rel="previous">The Splay Tree (optional)</a>
+<a href="6.6-the-splay-tree.html" class="navbutton">&lt;&lt;</a>
+<a href="6.6-the-splay-tree.html" accesskey="p" rel="previous">The Splay Tree</a>
 </div>
 <div>
 <a href="7-priority-queues.html" accesskey="n" rel="next">Priority queues</a>
@@ -108,9 +94,9 @@
 </header>
 
 <main>
-<section id="skip-lists-optional" class="level2" data-number="6.7">
+<section id="skip-lists" class="level2" data-number="6.7">
 <h2 data-number="6.7"><span class="header-section-number">6.7</span>
-Skip Lists (optional)</h2>
+Skip Lists</h2>
 <p>This module presents a probabilistic search structure called the <a
 href="10-glossary.html#skip-list" class="term"
 title="A form of linked list that adds additional links to improve the cost of fundamental operations like insert, delete, and search. It is a probabilistic data structure since it adds the additional links using a probabilistic algorithm. It can implement a dictionary more efficiently than a BST, and is roughly as difficult to implement.">skip
@@ -151,7 +137,7 @@ compromise between difficulty of implementation and performance.</p>
 <div class="jsavcanvas"></div>
 </div>
 </p>
-<p>We can continue adding pointers to selected nodes in this way -– give
+<p>We can continue adding pointers to selected nodes in this way – give
 a third pointer to every fourth node, give a fourth pointer to every
 eighth node, and so on – until we reach the ultimate of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>log</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n</annotation></semantics></math>
@@ -340,8 +326,8 @@ that characterizes probabilistic data structures.</p>
 <footer>
 <nav class="sitenav">
 <div class="navlink">
-<a href="6.6-the-splay-tree-optional.html" class="navbutton">&lt;&lt;</a>
-<a href="6.6-the-splay-tree-optional.html" accesskey="p" rel="previous">The Splay Tree (optional)</a>
+<a href="6.6-the-splay-tree.html" class="navbutton">&lt;&lt;</a>
+<a href="6.6-the-splay-tree.html" accesskey="p" rel="previous">The Splay Tree</a>
 </div>
 <div class="navlink">
 <a href="7-priority-queues.html" accesskey="n" rel="next">Priority queues</a>

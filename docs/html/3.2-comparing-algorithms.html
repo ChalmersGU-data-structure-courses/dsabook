@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -196,8 +182,9 @@ integers is not, because the cost depends on the value of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
 (i.e., the size of the input).</p>
 <div id="SeqMax">
-<section id="example" class="level4 unnumbered topic">
-<h4 class="unnumbered">Example</h4>
+<section id="example-largest-value-in-an-array"
+class="level4 unnumbered topic">
+<h4 class="unnumbered">Example: Largest value in an array</h4>
 <p>Consider a simple algorithm to solve the problem of finding the
 largest value in an array of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
@@ -252,17 +239,16 @@ comparisons, with each comparison costing
 time. We say that function <code>largest</code> (and by extension, the
 largest-value sequential search algorithm for any typical
 implementation) has a running time expressed by the equation</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mi>𝐓</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mi>c</mi><mi>n</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">
-\begin{eqnarray}
-\mathbf{T}(n) &amp;=&amp; cn
-\end{eqnarray}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐓</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>c</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">
+\mathbf{T}(n) = cn
 </annotation></semantics></math></p>
 <p>This equation describes the growth rate for the running time of the
 largest-value sequential search algorithm.</p>
 </section>
 </div>
-<section id="example-1" class="level4 unnumbered topic">
-<h4 class="unnumbered">Example</h4>
+<section id="example-accessing-the-first-array-value"
+class="level4 unnumbered topic">
+<h4 class="unnumbered">Example: Accessing the first array value</h4>
 <p>The running time of a statement that assigns the first value of an
 integer array to a variable is simply the time required to copy the
 value of the first array value. We can assume this assignment takes a
@@ -274,10 +260,8 @@ array size), the time to copy the value from the first position of the
 array is always
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>c</mi><mn>1</mn></msub><annotation encoding="application/x-tex">c_1</annotation></semantics></math>.
 Thus, the equation for this algorithm is simply</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mi>𝐓</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><msub><mi>c</mi><mn>1</mn></msub></mtd></mtr></mtable><annotation encoding="application/x-tex">
-\begin{eqnarray}
-\mathbf{T}(n) &amp;=&amp; c_1
-\end{eqnarray}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐓</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msub><mi>c</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">
+\mathbf{T}(n) = c_1
 </annotation></semantics></math></p>
 <p>indicating that the size of the input
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
@@ -286,14 +270,14 @@ href="10-glossary.html#constant-running-time" class="term"
 title="The cost of a function whose running time is not related to its input size. In Theta notation, this is traditionally written as $\Theta(1)$.">constant
 running time</a>.</p>
 </section>
-<section id="example-2" class="level4 unnumbered topic">
-<h4 class="unnumbered">Example</h4>
+<section id="example-nested-for-loop" class="level4 unnumbered topic">
+<h4 class="unnumbered">Example: Nested for-loop</h4>
 <p>Consider the following code:</p>
 <div class="sourceCode" id="cb2"><pre
 class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sum</span> <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="op">=</span> <span class="dv">0</span> <span class="kw">to</span> n<span class="op">-</span><span class="dv">1</span>:</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="op">=</span> <span class="dv">0</span> <span class="kw">to</span> n<span class="op">-</span><span class="dv">1</span>:</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span> <span class="op">=</span> <span class="bu">sum</span><span class="op">+</span><span class="dv">1</span></span></code></pre></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span> <span class="op">=</span> <span class="bu">sum</span> <span class="op">+</span> <span class="dv">1</span></span></code></pre></div>
 <p>What is the running time for this code fragment? Clearly it takes
 longer to run when
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
@@ -427,9 +411,9 @@ that appear in typical algorithms are shown, along with some
 representative input sizes. Once again, we see that the growth rate has
 a tremendous effect on the resources consumed by an algorithm.</p>
 <div id="GrowthTable">
-<section id="table" class="level4 unnumbered topic">
-<h4 class="unnumbered">Table</h4>
-<p>Costs for representative growth rates.</p>
+<section id="table-growth-rates" class="level4 unnumbered topic">
+<h4 class="unnumbered">Table: Growth rates</h4>
+<p>This table shows costs for representative growth rates.</p>
 <table>
 <colgroup>
 <col style="width: 12%" />

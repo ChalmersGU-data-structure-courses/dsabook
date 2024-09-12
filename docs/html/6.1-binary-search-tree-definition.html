@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -133,15 +119,16 @@ All nodes stored in the right subtree of a node whose key value is
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>K</mi><annotation encoding="application/x-tex">K</annotation></semantics></math>
 have key values greater than
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>K</mi><annotation encoding="application/x-tex">K</annotation></semantics></math>.
-<a href="6.1-binary-search-tree-definition.html#BSTShape">Figure
-#BSTShape</a> shows two BSTs for a collection of values. One consequence
-of the binary search tree property is that if the BST nodes are printed
+<a href="6.1-binary-search-tree-definition.html#BSTShape">The figure
+below</a> shows two BSTs for a collection of values. One consequence of
+the binary search tree property is that if the BST nodes are printed
 using an <a href="5.5-binary-tree-traversals.html#inorder-traversal"
 class="term"
 title="In a binary tree, a traversal that first recursively visits the left child, then visits the root, and then recursively visits the right child. In a binary search tree, this traversal will enumerate the nodes in sorted order.">inorder
 traversal</a>, then the resulting enumeration will be in sorted order
 from lowest to highest.</p>
-<div id="BSTShape">
+<section id="BSTShape" class="level4 unnumbered figure">
+<h4 class="unnumbered">Figure: Example BSTs</h4>
 <p>
 <div id="BSTShapeCON" class="ssAV" data-short-name="BSTShapeCON" data-long-name="Binary/BSTShapeCON" alt="Binary/BSTShapeCON" tabIndex="-1">
 <div class="jsavcanvas"></div>
@@ -151,7 +138,7 @@ from lowest to highest.</p>
 if values are inserted in the order 37, 24, 42, 7, 2, 40, 42, 32, 120.
 Tree (b) results if the same values are inserted in the order 120, 42,
 42, 7, 2, 32, 37, 24, 40.</p>
-</div>
+</section>
 <p>Here is a class declaration for the BST Map:</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BSTMap <span class="kw">implements</span> <span class="bu">Map</span>:</span>
@@ -338,9 +325,8 @@ property is maintained.</p>
 difference whether the replacement is the greatest value from the left
 subtree or the least value from the right subtree. If duplicates are
 stored in the left subtree, then we must select the replacement from the
-<em>left</em> subtree.<a href="#fn1" class="footnote-ref" id="fnref1"
-role="doc-noteref"><sup>1</sup></a> To see why, call the least value in
-the right subtree
+<em>left</em> subtree. To see why, call the least value in the right
+subtree
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math>.
 If multiple nodes in the right subtree have value
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math>,
@@ -352,15 +338,11 @@ tree with equal values to the right of the node now containing
 Selecting the greatest value from the left subtree does not have a
 similar problem, because it does not violate the Binary Search Tree
 Property if equal values appear in the left subtree.</p>
-<aside id="footnotes" class="footnotes footnotes-end-of-block"
-role="doc-footnote">
-<ol>
-<li id="fn1"><p>Alternatively, if we prefer to store duplicate values in
-the right subtree, then we must replace a deleted node with the least
-value from its right subtree.<a href="#fnref1" class="footnote-back"
-role="doc-backlink">↩︎</a></p></li>
-</ol>
-</aside>
+<div class="note">
+<p><em>Note</em>: Alternatively, we can decide to store duplicate values
+in the right subtree instead of the left. Then we must replace a deleted
+node with the least value from its right subtree.</p>
+</div>
 <p>The code for removal is shown here.</p>
 <div class="sourceCode" id="cb5"><pre
 class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> BSTMap:</span>
@@ -458,10 +440,9 @@ balanced, the possibility of its being unbalanced is a serious
 liability. There are techniques for organizing a BST to guarantee good
 performance. Two examples are the <a
 href="6.4-the-avl-tree.html#the-avl-tree">AVL tree</a> and the <a
-href="6.6-the-splay-tree-optional.html#the-splay-tree-optional">splay
-tree</a>. There also exist other types of search trees that are
-guaranteed to remain balanced, such as the <a
-href="10-glossary.html#2-3-tree" class="term"
+href="6.6-the-splay-tree.html#the-splay-tree">splay tree</a>. There also
+exist other types of search trees that are guaranteed to remain
+balanced, such as the <a href="10-glossary.html#2-3-tree" class="term"
 title="A specialized form of the B-tree where each internal node has either 2 children or 3 children. Key values are ordered to maintain the binary search tree property. The 2-3 tree is always height balanced, and its insert, search, and remove operations all have $\Theta(\log n)$ cost.">2-3
 Tree</a>.</p>
 </section>

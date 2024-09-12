@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -111,7 +97,7 @@ Selecting a Data Structure</h2>
 <p>It should go without saying that people write programs to solve
 problems. However, sometimes programmers forget this. So it is crucial
 to keep this truism in mind when selecting a <a
-href="10-glossary.html#data-structure" class="term"
+href="1.2-abstract-data-types.html#data-structure" class="term"
 title="The implementation for an ADT.">data structure</a> to solve a
 particular <a href="10-glossary.html#problem" class="term"
 title="A task to be performed. It is best thought of as a function or a mapping of inputs to outputs.">problem</a>.
@@ -129,7 +115,7 @@ these steps.</p>
 <li>Analyze your problem to determine the <a
 href="10-glossary.html#basic-operation" class="term"
 title="Examples of basic operations include inserting a data item into the data structure, deleting a data item from the data structure, and finding a specified data item.">basic
-operations</a> that must be supported. Examples of basic operations
+operation</a>s that must be supported. Examples of basic operations
 include inserting a data item into the data structure, deleting a data
 item from the data structure, and finding a specified data item.</li>
 <li>Quantify the resource constraints for each operation.</li>
@@ -231,24 +217,24 @@ offline so as not to affect ATM transactions.</p>
 <section id="example-databases" class="level4 unnumbered topic">
 <h4 class="unnumbered">Example: Databases</h4>
 <p>A company is developing a database system containing information
-about cities and towns in the United States. There are many thousands of
-cities and towns, and the database program should allow users to find
-information about a particular place by name (another example of an
-exact-match query). Users should also be able to find all places that
-match a particular value or range of values for attributes such as
-location or population size. This is known as a <a
+about cities and towns in Europe. There are many thousands of cities and
+towns, and the database program should allow users to find information
+about a particular place by name (another example of an exact-match
+query). Users should also be able to find all places that match a
+particular value or range of values for attributes such as location or
+population size. This is known as a <a
 href="10-glossary.html#range-query" class="term"
 title="Records are returned if their relevant key value falls within a specified range.">range
 query</a>.</p>
 <p>A reasonable database system must answer queries quickly enough to
-satisfy the patience of a typical user. For an exact-match query, a few
-seconds is satisfactory. If the database is meant to support range
-queries that can return many cities that match the query specification,
-the user might tolerate the entire operation to take longer, perhaps on
-the order of a minute. To meet this requirement, it will be necessary to
-support operations that process range queries efficiently by processing
-all cities in the range as a batch, rather than as a series of
-operations on individual cities.</p>
+satisfy the patience of a typical user. For an exact-match query, a
+fraction of a second is satisfactory. If the database is meant to
+support range queries that can return many cities that match the query
+specification, the user might tolerate the entire operation to take a
+little longer, perhaps a couple of seconds. To meet this requirement, it
+will be necessary to support operations that process range queries
+efficiently by processing all cities in the range as a batch, rather
+than as a series of operations on individual cities.</p>
 <p>The hash table suggested in the previous example is inappropriate for
 implementing our city database, because it cannot perform efficient
 range queries. The <a href="10-glossary.html#b-tree" class="term"
@@ -258,8 +244,7 @@ range queries. However, a simple <a href="10-glossary.html#linear-index"
 class="term"
 title="A form of indexing that stores key-value pairs in a sorted array. Typically this is used for an index to a large collection of records stored on disk, where the linear index itself might be on disk or in main memory. It allows for efficient search (including for range queries), but it is not good for inserting and deleting entries in the array. Therefore, it is an ideal indexing structure for when the system needs to do range queries but the collection of records never changes once the linear index has been created.">linear
 index</a> would be more appropriate if the database is created once, and
-then never changed, such as an atlas distributed on a CD or accessed
-from a website.</p>
+then never changed, such as an atlas accessed from a website.</p>
 </section>
 <section id="introduction-summary-questions" class="level3"
 data-number="1.1.1">

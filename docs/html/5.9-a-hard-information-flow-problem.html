@@ -7,10 +7,11 @@
   <meta name="author" content="Cliff Shaffer" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
-  <title>DSABook – A Hard Information Flow Problem (optional)</title>
+  <title>DSABook – A Hard Information Flow Problem</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -81,7 +67,7 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/BTRecurTutor/BSTCheckCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Binary/BSTCheckCON.css" rel="stylesheet" type="text/css"/>
 </head>
 
 <body>
@@ -94,21 +80,21 @@
 </nav>
 <nav class="sitenav">
 <div>
-<a href="5.8-binary-tree-space-requirements-optional.html" class="navbutton">&lt;&lt;</a>
-<a href="5.8-binary-tree-space-requirements-optional.html" accesskey="p" rel="previous">Binary Tree Space Requirements (optional)</a>
+<a href="5.8-binary-tree-space-requirements.html" class="navbutton">&lt;&lt;</a>
+<a href="5.8-binary-tree-space-requirements.html" accesskey="p" rel="previous">Binary Tree Space Requirements</a>
 </div>
 <div>
-<a href="5.10-general-trees-optional.html" accesskey="n" rel="next">General Trees (optional)</a>
-<a href="5.10-general-trees-optional.html" class="navbutton">&gt;&gt;</a>
+<a href="5.10-general-trees.html" accesskey="n" rel="next">General Trees</a>
+<a href="5.10-general-trees.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="a-hard-information-flow-problem-optional" class="level2"
+<section id="a-hard-information-flow-problem" class="level2"
 data-number="5.9">
 <h2 data-number="5.9"><span class="header-section-number">5.9</span> A
-Hard Information Flow Problem (optional)</h2>
+Hard Information Flow Problem</h2>
 <p>Sometimes, passing the right information up and down the tree to
 control a recursive function gets complicated. The information flow
 itself is simple enough, but deciding what to pass might be tricky.</p>
@@ -128,7 +114,7 @@ Unfortunately, to make this decision we need to know some context that
 is not available just by looking at the node’s parent or children.</p>
 <div id="BSTCheckFig">
 <p>
-<div id="BSTCheckCON" class="ssAV" data-short-name="BSTCheckCON" data-long-name="BTRecurTutor/BSTCheckCON" alt="BTRecurTutor/BSTCheckCON" tabIndex="-1">
+<div id="BSTCheckCON" class="ssAV" data-short-name="BSTCheckCON" data-long-name="Binary/BSTCheckCON" alt="Binary/BSTCheckCON" tabIndex="-1">
 <div class="jsavcanvas"></div>
 </div>
 </p>
@@ -136,7 +122,7 @@ is not available just by looking at the node’s parent or children.</p>
 must have a value between 20 and 40.</p>
 </div>
 <p>As shown by <a
-href="5.9-a-hard-information-flow-problem-optional.html#BSTCheckFig">Figure
+href="5.9-a-hard-information-flow-problem.html#BSTCheckFig">Figure
 #BSTCheckFig</a>, it is not enough to verify that
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>’s
 left child has a value less than that of
@@ -173,17 +159,17 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a hr
 <footer>
 <nav class="sitenav">
 <div class="navlink">
-<a href="5.8-binary-tree-space-requirements-optional.html" class="navbutton">&lt;&lt;</a>
-<a href="5.8-binary-tree-space-requirements-optional.html" accesskey="p" rel="previous">Binary Tree Space Requirements (optional)</a>
+<a href="5.8-binary-tree-space-requirements.html" class="navbutton">&lt;&lt;</a>
+<a href="5.8-binary-tree-space-requirements.html" accesskey="p" rel="previous">Binary Tree Space Requirements</a>
 </div>
 <div class="navlink">
-<a href="5.10-general-trees-optional.html" accesskey="n" rel="next">General Trees (optional)</a>
-<a href="5.10-general-trees-optional.html" class="navbutton">&gt;&gt;</a>
+<a href="5.10-general-trees.html" accesskey="n" rel="next">General Trees</a>
+<a href="5.10-general-trees.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/BTRecurTutor/BSTCheckCON.js"></script>
+<script type="text/javascript" src="../interactive/Binary/BSTCheckCON.js"></script>
 </body>
 </html>
 

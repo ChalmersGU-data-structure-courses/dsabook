@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -207,16 +193,15 @@ steps of 8. In the normal distribution, some of these slices associated
 with any given slot are near the tails, and some are near the center.
 Thus, each table slot is equally likely (roughly) to get a key
 value.</p>
-<div id="HashNormal">
-<div class="figure">
+<section id="HashNormal" class="level4 unnumbered figure">
+<h4 class="unnumbered">Figure: Binning vs. modulus</h4>
 <figure>
 <img src="images/HashNormal.png" width="800"
 alt="Binning vs. Mod Function" />
 <figcaption aria-hidden="true">Binning vs. Mod Function</figcaption>
 </figure>
 <p>A comparison of binning vs. modulus as a hash function.</p>
-</div>
-</div>
+</section>
 </section>
 <section id="the-mid-square-method" class="level3" data-number="8.2.3">
 <h3 data-number="8.2.3"><span class="header-section-number">8.2.3</span>
@@ -245,8 +230,8 @@ the result is not dominated by the distribution of the bottom digit or
 the top digit of the original key value. Of course, if the key values
 all tend to be small numbers, then their squares will only affect the
 low-order digits of the hash value.</p>
-<div id="MidSquareFig">
-<div class="figure">
+<section id="MidSquareFig" class="level4 unnumbered figure">
+<h4 class="unnumbered">Figure: Mid-square method</h4>
 <figure>
 <img src="images/MidSquare.png" width="70"
 alt="Mid-square method example" />
@@ -261,8 +246,7 @@ affected by each digit of the input. That is, “4” affects the output
 digits 2, 0, 8, 5, an 7. But it has no affect on the last 3 digits. The
 key point is that the middle two digits of the result (5 and 7) are
 affected by every digit of the input.</p>
-</div>
-</div>
+</section>
 <p>Here is a little calculator for you to see how this works. Start with
 ‘4567’ as an example.</p>
 <p>

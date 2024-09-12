@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -99,8 +85,8 @@
 <a href="9.5-shortest-paths-problems.html" accesskey="p" rel="previous">Shortest-Paths Problems</a>
 </div>
 <div>
-<a href="9.7-all-pairs-shortest-paths-optional.html" accesskey="n" rel="next">All-Pairs Shortest Paths (optional)</a>
-<a href="9.7-all-pairs-shortest-paths-optional.html" class="navbutton">&gt;&gt;</a>
+<a href="9.7-all-pairs-shortest-paths.html" accesskey="n" rel="next">All-Pairs Shortest Paths</a>
+<a href="9.7-all-pairs-shortest-paths.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
@@ -353,8 +339,8 @@ not
 Thus, it is a contradiction that Prim’s algorithm would have selected
 the wrong edge, and thus, Prim’s algorithm must be correct.</p>
 </blockquote>
-<div id="PrimProof">
-<div class="figure">
+<section id="PrimProof" class="level4 unnumbered figure">
+<h4 class="unnumbered">Figure: Proof of Prim’s algorithm</h4>
 <figure>
 <img src="images/PrimMST.png" width="400"
 alt="Prim’s MCST algorithm proof" />
@@ -375,8 +361,7 @@ to
 cannot include any marked vertex
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mi>i</mi></msub><mo>,</mo><mi>i</mi><mo>≤</mo><mi>j</mi></mrow><annotation encoding="application/x-tex">v_i, i \leq j</annotation></semantics></math>,
 because to do so would form a cycle.</p>
-</div>
-</div>
+</section>
 <p>
 <div id="PrimPE" class="embedContainer">
 <iframe id="PrimPE_iframe" aria-label="PrimPE" src="../interactive/Graph/PrimPE.html" width="100%" height="600" scrolling="no">
@@ -478,8 +463,8 @@ Your browser does not support iframes.
 <a href="9.5-shortest-paths-problems.html" accesskey="p" rel="previous">Shortest-Paths Problems</a>
 </div>
 <div class="navlink">
-<a href="9.7-all-pairs-shortest-paths-optional.html" accesskey="n" rel="next">All-Pairs Shortest Paths (optional)</a>
-<a href="9.7-all-pairs-shortest-paths-optional.html" class="navbutton">&gt;&gt;</a>
+<a href="9.7-all-pairs-shortest-paths.html" accesskey="n" rel="next">All-Pairs Shortest Paths</a>
+<a href="9.7-all-pairs-shortest-paths.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </footer>

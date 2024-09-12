@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -123,7 +109,9 @@ search the collection efficiently. We might sort customer records by zip
 code so that when we print an advertisement we can then mail them more
 cheaply. We might use sorting to help an algorithm to solve some other
 problem. For example, <a
-href="9.6-minimal-cost-spanning-trees.html#kruskals-algorithm">Kruskal’s
+href="9.6-minimal-cost-spanning-trees.html#kruskals-algorithm"
+class="term"
+title="An algorithm for computing the MCST of a graph. During processing, it makes use of the UNION/FIND process to efficiently determine of two vertices are within the same subgraph.">Kruskal’s
 algorithm</a> to find <a
 href="9.6-minimal-cost-spanning-trees.html#minimal-cost-spanning-trees"
 class="term" title="">minimal-cost spanning trees</a> must sort the
@@ -134,16 +122,19 @@ algorithms are straightforward adaptations of schemes we use in everyday
 life. For example, a natural way to sort your cards in a bridge hand is
 to go from left to right, and place each card in turn in its correct
 position relative to the other cards that you have already sorted. This
-is the idea behind <a
-href="2.4-insertion-sort.html#insertion-sort">Insertion Sort</a>. Other
-sorting algorithms are totally alien to how humans do things, having
-been invented to sort thousands or even millions of records stored on
-the computer. For example, no normal person would use <a
-href="2.11-quicksort.html#quicksort">Quicksort</a> to order a pile of
-bills by date, even though Quicksort is the standard sorting algorithm
-of choice for most software libraries. After years of study, there are
-still unsolved problems related to sorting. New algorithms are still
-being developed and refined for special-purpose applications.</p>
+is the idea behind <a href="2.4-insertion-sort.html#insertion-sort"
+class="term"
+title="A sorting algorithm with $\Theta(n^2)$ average and worst case cost, and $Theta(n)$ best case cost. This best case cost makes it useful when we have reason to expect the input to be nearly sorted.">Insertion
+Sort</a>. Other sorting algorithms are totally alien to how humans do
+things, having been invented to sort thousands or even millions of
+records stored on the computer. For example, no normal person would use
+<a href="2.11-quicksort.html#quicksort" class="term"
+title="A sort that is $\Theta(n \log n)$ in the best and average cases, though $\Theta(n^2)$ in the worst case. However, a reasonable implmentation will make the worst case occur under exceedingly rare circumstances. Due to its tight inner loop, it tends to run better than any other known sort in general cases. Thus, it is a popular sort to use in code libraries. It works by divide and conquer, by selecting a pivot value, splitting the list into parts that are either less than or greater than the pivot, and then sorting the two parts.">Quicksort</a>
+to order a pile of bills by date, even though Quicksort is one of the
+standard sorting algorithms of choice for most software libraries. After
+years of study, there are still unsolved problems related to sorting.
+New algorithms are still being developed and refined for special-purpose
+applications.</p>
 <p>Along with introducing this central problem in computer science,
 studying sorting algorithms helps us to understand issues in algorithm
 design and analysis. For example, the sorting algorithms in this chapter
@@ -151,13 +142,17 @@ show multiple approaches to using <a
 href="10-glossary.html#divide-and-conquer" class="term"
 title="A technique for designing algorithms where a solution is found by breaking the problem into smaller (similar) subproblems, solving the subproblems, then combining the subproblem solutions to form the solution to the original problem. This process is often implemented using recursion.">divide
 and conquer</a>. In particular, there are multiple ways to do the
-dividing. <a href="2.9-mergesort.html#mergesort">Mergesort</a> divides a
-list in half. <a href="2.11-quicksort.html#quicksort">Quicksort</a>
+dividing. <a href="2.9-mergesort.html#mergesort" class="term"
+title="A sorting algorithm that requires $\Theta(n \log n)$ in the best, average, and worst cases. Conceptually it is simple: Split the list in half, sort the halves, then merge them together. It is a bit complicated to implement efficiently on an array.">Mergesort</a>
+divides a list in half. <a href="2.11-quicksort.html#quicksort"
+class="term"
+title="A sort that is $\Theta(n \log n)$ in the best and average cases, though $\Theta(n^2)$ in the worst case. However, a reasonable implmentation will make the worst case occur under exceedingly rare circumstances. Due to its tight inner loop, it tends to run better than any other known sort in general cases. Thus, it is a popular sort to use in code libraries. It works by divide and conquer, by selecting a pivot value, splitting the list into parts that are either less than or greater than the pivot, and then sorting the two parts.">Quicksort</a>
 divides a list into big values and small values. <a
 href="10-glossary.html#radix-sort" class="term"
 title="A sorting algorithm that works by processing records with $k$ digit keys in $k$ passes, where each pass sorts the records according to the current digit. At the end of the process, the records will be sorted. This can be efficient if the number of digits is small compared to the number of records. However, if the $n$ records all have unique key values, than at least $\Omega(\log n)$ digits are required, leading to an $\Omega(n \log n)$ sorting algorithm that tends to be much slower than other sorting algorithms like Quicksort or mergesort.">Radix
 Sort</a> divides the problem by working on one digit of the key at a
-time. Sorting algorithms can also illustrate a wide variety of algorithm
+time.</p>
+<p>Sorting algorithms can also illustrate a wide variety of algorithm
 analysis techniques. Quicksort illustrates that it is possible for an
 algorithm to have an <a href="10-glossary.html#average-case"
 class="term"
@@ -168,36 +163,34 @@ title="In algorithm analysis, specifically complexity of an algorithm, the probl
 case</a>. It is possible to speed up one sorting algorithm (such as <a
 href="10-glossary.html#shellsort" class="term"
 title="A sort that relies on the best-case cost of insertion sort to improve over $\Theta(n^2)$ worst case cost.">Shellsort</a>
-or <a href="2.11-quicksort.html#quicksort">Quicksort</a>) by taking
-advantage of the <a href="10-glossary.html#best-case" class="term"
+or <a href="2.11-quicksort.html#quicksort" class="term"
+title="A sort that is $\Theta(n \log n)$ in the best and average cases, though $\Theta(n^2)$ in the worst case. However, a reasonable implmentation will make the worst case occur under exceedingly rare circumstances. Due to its tight inner loop, it tends to run better than any other known sort in general cases. Thus, it is a popular sort to use in code libraries. It works by divide and conquer, by selecting a pivot value, splitting the list into parts that are either less than or greater than the pivot, and then sorting the two parts.">Quicksort</a>)
+by taking advantage of the <a href="10-glossary.html#best-case"
+class="term"
 title="In algorithm analysis, specifically complexity of an algorithm, the problem instance from among all problem instances for a given input size $n$ that has least cost. Every input size $n$ has its own best case. We **never** consider the best case as removed from input size.">best
 case</a> behavior of another algorithm (Insertion Sort). Special case
 behavior by some sorting algorithms makes them a good solution for
-special niche applications (<a
-href="7.3-heapsort.html#heapsort">Heapsort</a>). Sorting provides an
-example of an important technique for analyzing the lower bound for a
-problem. <a href="10-glossary.html#external-sort" class="term"
-title="A sorting algorithm that is applied to data stored in peripheral storage such as on a disk drive. This is in contrast to an internal sort that works on data stored in main memory.">External
-Sorting</a> refers to the process of sorting large files stored on
-disk.</p>
+special niche applications (<a href="7.3-heapsort.html#heapsort"
+class="term"
+title="A sorting algorithm that costs $\Theta(n \log n)$ time in the best, average, and worst cases. It tends to be slower than Mergesort and Quicksort. It works by building a max heap, and then repeatedly removing the item with maximum key value (moving it to the end of the heap) until all elements have been removed (and replaced at their proper location in the array).">Heapsort</a>).
+Sorting provides an example of an important technique for analyzing the
+lower bound for a problem.</p>
 <p>This chapter covers several standard algorithms appropriate for
 sorting a collection of records that fit into the computer’s main
 memory. It begins with a discussion of three simple, but relatively
-slow, algorithms that require
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n^2)</annotation></semantics></math>
-time in the average and worst cases to sort
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-records. Several algorithms with considerably better performance are
-then presented, some with
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n \log n)</annotation></semantics></math>
-worst-case running time. The final sorting method presented requires
-only
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Θ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Theta(n)</annotation></semantics></math>
-worst-case time under special conditions (but it cannot run that fast in
-the general case). The chapter concludes with a proof that sorting in
-general requires
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Ω</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>log</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Omega(n \log n)</annotation></semantics></math>
-time in the worst case.</p>
+slow, algorithms that require <a
+href="10-glossary.html#quadratic-growth-rate" class="term"
+title="A growth rate function of the form $cn^2$ where $n$ is the input size and $c$ is a constant.">quadratic</a>
+time in the size of the array. Three algorithms with considerably better
+performance are then presented, some with <a
+href="10-glossary.html#linearithmic-growth-rate" class="term"
+title="For input size $n$, a growth rate of $cn \log n$ (for $c$ any positive constant). In other words, the cost of the associated function is slightly larger than linear on the input size.">linearithmic</a>
+worst-case running time. The chapter concludes with a proof that you
+cannot implement a generic sorting algorithm with better worst-case
+behaviour than <a href="10-glossary.html#linearithmic-growth-rate"
+class="term"
+title="For input size $n$, a growth rate of $cn \log n$ (for $c$ any positive constant). In other words, the cost of the associated function is slightly larger than linear on the input size.">linearithmic</a>
+time.</p>
 </section>
 </main>
 

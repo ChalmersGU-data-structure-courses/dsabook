@@ -7,10 +7,11 @@
   <meta name="author" content="Cliff Shaffer" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
-  <title>DSABook – Huffman Coding Trees (optional)</title>
+  <title>DSABook – Huffman Coding Trees</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -108,10 +94,9 @@
 </header>
 
 <main>
-<section id="huffman-coding-trees-optional" class="level2"
-data-number="7.4">
+<section id="huffman-coding-trees" class="level2" data-number="7.4">
 <h2 data-number="7.4"><span class="header-section-number">7.4</span>
-Huffman Coding Trees (optional)</h2>
+Huffman Coding Trees</h2>
 <p>One can often gain an improvement in space requirements in exchange
 for a penalty in running time. There are many situations where this is a
 desirable tradeoff. A typical example is storing files on disk. If the
@@ -141,17 +126,18 @@ fixed-length coding scheme is the most space efficient method. However,
 you are probably aware that not all characters are used equally often in
 many applications. For example, the various letters in an English
 language document have greatly different frequencies of use.</p>
-<p><a href="7.4-huffman-coding-trees-optional.html#Freq">Table #Freq</a>
-shows the relative frequencies of the letters of the alphabet. From this
-table we can see that the letter ‘E’ appears about 60 times more often
-than the letter ‘Z’. In normal ASCII, the words “DEED” and “MUCK”
-require the same amount of space (four bytes). It would seem that words
-such as “DEED”, which are composed of relatively common letters, should
-be storable in less space than words such as “MUCK”, which are composed
-of relatively uncommon letters.</p>
+<p><a href="7.4-huffman-coding-trees.html#Freq">Table #Freq</a> shows
+the relative frequencies of the letters of the alphabet. From this table
+we can see that the letter ‘E’ appears about 60 times more often than
+the letter ‘Z’. In normal ASCII, the words “DEED” and “MUCK” require the
+same amount of space (four bytes). It would seem that words such as
+“DEED”, which are composed of relatively common letters, should be
+storable in less space than words such as “MUCK”, which are composed of
+relatively uncommon letters.</p>
 <div id="Freq">
-<section id="table-2" class="level4 unnumbered topic">
-<h4 class="unnumbered">Table</h4>
+<section id="table-relative-frequencies-of-the-alphabet"
+class="level4 unnumbered topic">
+<h4 class="unnumbered">Table: Relative frequencies of the alphabet</h4>
 <p>Relative frequencies for the 26 letters of the alphabet as they
 appear in a selected set of English documents. “Frequency” represents
 the expected frequency of occurrence per 1000 letters, ignoring
@@ -320,8 +306,9 @@ weights of the two trees. Put this new tree back into the priority
 queue. This process is repeated until all of the partial Huffman trees
 have been combined into one.</p>
 <div id="FreqExamp">
-<section id="table-3" class="level4 unnumbered topic">
-<h4 class="unnumbered">Table</h4>
+<section id="table-relative-frequencies"
+class="level4 unnumbered topic">
+<h4 class="unnumbered">Table: Relative frequencies</h4>
 <p>The relative frequencies for eight selected letters.</p>
 <table>
 <tbody>
@@ -353,8 +340,7 @@ have been combined into one.</p>
 </div>
 <p>The following slideshow illustrates the Huffman tree construction
 process for the eight letters of <a
-href="7.4-huffman-coding-trees-optional.html#FreqExamp">Table
-#FreqExamp</a>.</p>
+href="7.4-huffman-coding-trees.html#FreqExamp">Table #FreqExamp</a>.</p>
 <p>
 <div id="huffmanBuildCON" class="ssAV" data-short-name="huffmanBuildCON" data-long-name="Huffman Coding Tree Slideshow: Build" alt="Huffman Coding Tree Slideshow: Build" tabIndex="-1">
 <span class="jsavcounter"></span>
@@ -496,11 +482,11 @@ coding is the relative frequencies of the letters. Some frequency
 patterns will save no space as compared to fixed-length codes; others
 can result in great compression. In general, Huffman coding does better
 when there is large variation in the frequencies of letters.</p>
-<section id="example-35" class="level4 unnumbered topic">
-<h4 class="unnumbered">Example</h4>
+<section id="example-expected-savings" class="level4 unnumbered topic">
+<h4 class="unnumbered">Example: Expected savings</h4>
 <p>In the particular case of the frequencies shown in <a
-href="7.4-huffman-coding-trees-optional.html#Freq">Table #Freq</a>, we
-can determine the expected savings from Huffman coding if the actual
+href="7.4-huffman-coding-trees.html#Freq">Table #Freq</a>, we can
+determine the expected savings from Huffman coding if the actual
 frequencies of a coded message match the expected frequencies. Because
 the sum of the frequencies is 306 and E has frequency 120, we expect it
 to appear 120 times in a message containing 306 letters. An actual
@@ -536,19 +522,19 @@ of letters.</p>
 </section>
 <p>Huffman coding for all ASCII symbols should do better than this
 example. The letters of <a
-href="7.4-huffman-coding-trees-optional.html#Freq">Table #Freq</a> are
-atypical in that there are too many common letters compared to the
-number of rare letters. Huffman coding for all 26 letters would yield an
-expected cost of 4.29 bits per letter. The equivalent fixed-length code
-would require about five bits. This is somewhat unfair to fixed-length
-coding because there is actually room for 32 codes in five bits, but
-only 26 letters. More generally, Huffman coding of a typical text file
-will save around 40% over ASCII coding if we charge ASCII coding at
-eight bits per character. Huffman coding for a binary file (such as a
-compiled executable) would have a very different set of distribution
-frequencies and so would have a different space savings. Most commercial
-compression programs use two or three coding schemes to adjust to
-different types of files.</p>
+href="7.4-huffman-coding-trees.html#Freq">Table #Freq</a> are atypical
+in that there are too many common letters compared to the number of rare
+letters. Huffman coding for all 26 letters would yield an expected cost
+of 4.29 bits per letter. The equivalent fixed-length code would require
+about five bits. This is somewhat unfair to fixed-length coding because
+there is actually room for 32 codes in five bits, but only 26 letters.
+More generally, Huffman coding of a typical text file will save around
+40% over ASCII coding if we charge ASCII coding at eight bits per
+character. Huffman coding for a binary file (such as a compiled
+executable) would have a very different set of distribution frequencies
+and so would have a different space savings. Most commercial compression
+programs use two or three coding schemes to adjust to different types of
+files.</p>
 <p>In decoding example, “DEED” was coded in 8 bits, a saving of 33% over
 the twelve bits required from a fixed-length coding. However, “MUCK”
 would require 18 bits, more space than required by the corresponding
@@ -566,10 +552,9 @@ Your browser does not support iframes.
 </div>
 </p>
 </section>
-<section id="trees-versus-tries-optional" class="level3"
-data-number="7.4.5">
+<section id="trees-versus-tries" class="level3" data-number="7.4.5">
 <h3 data-number="7.4.5"><span class="header-section-number">7.4.5</span>
-Trees versus Tries (optional)</h3>
+Trees versus Tries</h3>
 <p>We see that all letters with codes beginning with ‘0’ are stored in
 the left branch, while all letters with codes beginning with ‘1’ are
 stored in the right branch. Contrast this with storing records in a BST.
@@ -631,9 +616,9 @@ and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>l</mi><mn>2</mn></msub><annotation encoding="application/x-tex">l_2</annotation></semantics></math>
 are not the deepest nodes in the tree. In this case, the Huffman tree
 must either look as shown in <a
-href="7.4-huffman-coding-trees-optional.html#HProof">Figure #HProof</a>,
-or effectively symmetrical to this. For this situation to occur, the
-parent of
+href="7.4-huffman-coding-trees.html#HProof">Figure #HProof</a>, or
+effectively symmetrical to this. For this situation to occur, the parent
+of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>l</mi><mn>1</mn></msub><annotation encoding="application/x-tex">l_1</annotation></semantics></math>
 and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>l</mi><mn>2</mn></msub><annotation encoding="application/x-tex">l_2</annotation></semantics></math>,

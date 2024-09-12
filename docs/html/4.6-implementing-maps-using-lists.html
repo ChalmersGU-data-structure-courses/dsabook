@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -97,8 +83,8 @@
 <a href="4.5-comparison-of-list-implementations.html" accesskey="p" rel="previous">Comparison of List Implementations</a>
 </div>
 <div>
-<a href="4.7-doubly-linked-lists-optional.html" accesskey="n" rel="next">Doubly Linked Lists (optional)</a>
-<a href="4.7-doubly-linked-lists-optional.html" class="navbutton">&gt;&gt;</a>
+<a href="4.7-doubly-linked-lists.html" accesskey="n" rel="next">Doubly Linked Lists</a>
+<a href="4.7-doubly-linked-lists.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
@@ -110,8 +96,8 @@ data-number="4.6">
 Implementing Maps using Lists</h2>
 <p>It is not difficult to implement a <strong>Map</strong> using a list.
 The problem is that all the operations – searching for a key, updating
-the value for a key, and removing a key –will be linear in the number of
-entries,
+the value for a key, and removing a key – will be linear in the number
+of entries,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>.</p>
 <p>In later chapters we will see how to improve the efficiency, by
 using</p>
@@ -305,8 +291,8 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb10-1"><a h
 <a href="4.5-comparison-of-list-implementations.html" accesskey="p" rel="previous">Comparison of List Implementations</a>
 </div>
 <div class="navlink">
-<a href="4.7-doubly-linked-lists-optional.html" accesskey="n" rel="next">Doubly Linked Lists (optional)</a>
-<a href="4.7-doubly-linked-lists-optional.html" class="navbutton">&gt;&gt;</a>
+<a href="4.7-doubly-linked-lists.html" accesskey="n" rel="next">Doubly Linked Lists</a>
+<a href="4.7-doubly-linked-lists.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </footer>

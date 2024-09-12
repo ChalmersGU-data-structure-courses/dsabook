@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -257,8 +243,8 @@ the algorithm <em>always</em> executes in less than or equal to
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">cf(n)</annotation></semantics></math>
 steps for some constant
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>.</p>
-<section id="example-3" class="level4 unnumbered topic">
-<h4 class="unnumbered">Example</h4>
+<section id="example-sequential-search" class="level4 unnumbered topic">
+<h4 class="unnumbered">Example: Sequential search</h4>
 <p>Consider the sequential search algorithm for finding a specified
 value in an array of integers. If visiting and examining one value in
 the array requires
@@ -281,8 +267,9 @@ for
 and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mo>=</mo><msub><mi>c</mi><mi>s</mi></msub></mrow><annotation encoding="application/x-tex">c = c_s</annotation></semantics></math>.</p>
 </section>
-<section id="example-4" class="level4 unnumbered topic">
-<h4 class="unnumbered">Example</h4>
+<section id="example-quadratic-algorithm"
+class="level4 unnumbered topic">
+<h4 class="unnumbered">Example: Quadratic algorithm</h4>
 <p>For a particular algorithm,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐓</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msub><mi>c</mi><mn>1</mn></msub><msup><mi>n</mi><mn>2</mn></msup><mo>+</mo><msub><mi>c</mi><mn>2</mn></msub><mi>n</mi></mrow><annotation encoding="application/x-tex">\mathbf{T}(n) = c_1 n^2 + c_2 n</annotation></semantics></math>
 in the average case where
@@ -307,9 +294,10 @@ is in
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>
 by the second definition.</p>
 </section>
-<section id="example-5" class="level4 unnumbered topic">
-<h4 class="unnumbered">Example</h4>
-<p>Assigning the value from the first position of an array to a variable
+<section id="example-accessing-an-array-cell"
+class="level4 unnumbered topic">
+<h4 class="unnumbered">Example: Accessing an array cell</h4>
+<p>Assigning the value from a given position of an array to a variable
 takes constant time regardless of the size of the array. Thus,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐓</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">\mathbf{T}(n) = c</annotation></semantics></math>
 (for the best, worst, and average cases). We could say in this case that

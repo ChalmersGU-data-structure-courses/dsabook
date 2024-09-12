@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -98,8 +84,8 @@
 <a href="5.6-implementing-tree-traversals.html" accesskey="p" rel="previous">Implementing Tree Traversals</a>
 </div>
 <div>
-<a href="5.8-binary-tree-space-requirements-optional.html" accesskey="n" rel="next">Binary Tree Space Requirements (optional)</a>
-<a href="5.8-binary-tree-space-requirements-optional.html" class="navbutton">&gt;&gt;</a>
+<a href="5.8-binary-tree-space-requirements.html" accesskey="n" rel="next">Binary Tree Space Requirements</a>
+<a href="5.8-binary-tree-space-requirements.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
@@ -153,8 +139,9 @@ Collect-and-return</h3>
 <p>Collect-and-return requires that we communicate information back up
 the tree to the caller. Simple examples are to count the number of nodes
 in a tree, or to sum the values of all the nodes.</p>
-<section id="example-31" class="level4 unnumbered topic">
-<h4 class="unnumbered">Example</h4>
+<section id="example-number-of-nodes-in-a-tree"
+class="level4 unnumbered topic">
+<h4 class="unnumbered">Example: Number of nodes in a tree</h4>
 <p>Consider the problem of counting (and returning) the number of nodes
 in a binary tree. The key insight is that the total count for any
 (non-empty) subtree is one for the root plus the counts for the left and
@@ -233,8 +220,8 @@ back up the tree uses the collect-and-return paradigm.</p>
 <a href="5.6-implementing-tree-traversals.html" accesskey="p" rel="previous">Implementing Tree Traversals</a>
 </div>
 <div class="navlink">
-<a href="5.8-binary-tree-space-requirements-optional.html" accesskey="n" rel="next">Binary Tree Space Requirements (optional)</a>
-<a href="5.8-binary-tree-space-requirements-optional.html" class="navbutton">&gt;&gt;</a>
+<a href="5.8-binary-tree-space-requirements.html" accesskey="n" rel="next">Binary Tree Space Requirements</a>
+<a href="5.8-binary-tree-space-requirements.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </footer>

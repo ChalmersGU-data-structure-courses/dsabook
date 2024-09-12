@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -93,8 +79,8 @@
 </nav>
 <nav class="sitenav">
 <div>
-<a href="2.13-lower-bounds-for-sorting-optional.html" class="navbutton">&lt;&lt;</a>
-<a href="2.13-lower-bounds-for-sorting-optional.html" accesskey="p" rel="previous">Lower Bounds for Sorting (optional)</a>
+<a href="2.13-lower-bounds-for-sorting.html" class="navbutton">&lt;&lt;</a>
+<a href="2.13-lower-bounds-for-sorting.html" accesskey="p" rel="previous">Lower Bounds for Sorting</a>
 </div>
 <div>
 <a href="3-algorithm-analysis.html" accesskey="n" rel="next">Algorithm Analysis</a>
@@ -163,20 +149,20 @@ relevant operations:</p>
 class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">SortedSet</span> <span class="kw">extends</span> <span class="bu">Set</span>:</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    first()          <span class="co">// Returns the first (smallest) element.</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    last()           <span class="co">// Returns the last (largest) element.</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    floor(x)         <span class="co">// Returns the closest element &lt;= x, or nothing if there is no such element.</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    ceiling(x)       <span class="co">// Returns the closest element &gt;= x, or nothing if there is no such element.</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    floor(x)         <span class="co">// Returns the closest element ≤ x, or nothing if there is no such element.</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    ceiling(x)       <span class="co">// Returns the closest element ≤ x, or nothing if there is no such element.</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    lower(x)         <span class="co">// Returns the closest element &lt; x, or nothing if there is no such element.</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    higher(x)        <span class="co">// Returns the closest element &gt; x, or nothing if there is no such element.</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    between(x1, x2)  <span class="co">// Returns all elements x such that x1 &lt;= x &lt;= x2.</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    between(x1, x2)  <span class="co">// Returns all elements x such that x1 ≤ x ≤ x2.</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">SortedMap</span> <span class="kw">extends</span> <span class="bu">Map</span>:</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    firstKey()               <span class="co">// Returns the first (smallest) key.</span></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    lastKey()                <span class="co">// Returns the last (largest) key.</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    floorKey(key)            <span class="co">// Returns the closest key &lt;= k, or nothing if there is no key.</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    ceilingKey(key)          <span class="co">// Returns the closest key &gt;= k, or nothing if there is no key.</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    floorKey(key)            <span class="co">// Returns the closest key ≤ k, or nothing if there is no key.</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    ceilingKey(key)          <span class="co">// Returns the closest key ≤ k, or nothing if there is no key.</span></span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    lowerKey(key)            <span class="co">// Returns the closest key &lt; k, or nothing if there is no such element.</span></span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    higherKey(key)           <span class="co">// Returns the closest key &gt; k, or nothing if there is no such element.</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    keysBetween(key1, key2)  <span class="co">// Returns all keys k such that k1 &lt;= k &lt;= k2.</span></span></code></pre></div>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    keysBetween(key1, key2)  <span class="co">// Returns all keys k such that k1 ≤ k ≤ k2.</span></span></code></pre></div>
 <p>Sorted arrays can also be useful in cases where we always add
 <em>many</em> items in one go. Given a sorted array
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>,
@@ -210,8 +196,8 @@ hash tables.</p>
 <footer>
 <nav class="sitenav">
 <div class="navlink">
-<a href="2.13-lower-bounds-for-sorting-optional.html" class="navbutton">&lt;&lt;</a>
-<a href="2.13-lower-bounds-for-sorting-optional.html" accesskey="p" rel="previous">Lower Bounds for Sorting (optional)</a>
+<a href="2.13-lower-bounds-for-sorting.html" class="navbutton">&lt;&lt;</a>
+<a href="2.13-lower-bounds-for-sorting.html" accesskey="p" rel="previous">Lower Bounds for Sorting</a>
 </div>
 <div class="navlink">
 <a href="3-algorithm-analysis.html" accesskey="n" rel="next">Algorithm Analysis</a>

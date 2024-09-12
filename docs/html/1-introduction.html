@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -107,12 +93,16 @@
 <section id="introduction" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span>
 Introduction</h1>
-<p>How many cities with more than 250,000 people lie within 500 miles of
-Dallas, Texas? How many people in my company make over $100,000 per
-year? Can we connect all of our telephone customers with less than 1,000
-miles of cable? To answer questions like these, it is not enough to have
-the necessary information. We must organize that information in a way
-that allows us to find the answers in time to satisfy our needs.</p>
+<p>How many cities with more than 100,000 people lie within 200
+kilometers of Paris, France? How many people in Swedish towns with less
+than 50,000 people earn less than 50% of the average income of people in
+Sweden? How much more CO__2__ will be emitted if I travel by plane from
+Gothenburg, Sweden, to Düsseldorf, Germany, compared to if I take the
+train? How can I see if a text contains plagiarism, i.e., if it copied
+some parts from another existing text? To answer questions like these,
+it is not enough to have the necessary information. We must organize
+that information in a way that allows us to find the answers in time to
+satisfy our needs.</p>
 <p>Representing information is fundamental to computer science. The
 primary purpose of most computer programs is not to perform
 calculations, but to store and retrieve information – usually as fast as
@@ -170,6 +160,15 @@ algorithms for solving the same problem in terms of its efficiency.</p>
 efficiency is becoming less important. After all, processor speed and
 memory size still continue to improve. Won’t today’s efficiency problem
 be solved by tomorrow’s hardware?</p>
+<blockquote>
+<p>The short answer to this question is
+<strong><em>no</em></strong>!</p>
+</blockquote>
+<p>It is not at all certain that a twice as fast computer can solve
+twice as large problems. On the contrary – most interesting problems are
+very difficult, in the sense that if we increase the computing power we
+can still only solve a very small increase in the size of the
+problem.</p>
 <p>As we develop more powerful computers, our history so far has always
 been to use that additional computing power to tackle more complex
 problems, be it in the form of more sophisticated user interfaces,
@@ -182,7 +181,7 @@ the principles behind efficient program design, because their ordinary
 life experiences often do not apply when designing computer
 programs.</p>
 <p>In the most general sense, a <a
-href="10-glossary.html#data-structure" class="term"
+href="1.2-abstract-data-types.html#data-structure" class="term"
 title="The implementation for an ADT.">data structure</a> is any data
 representation and its associated operations. Even an integer or
 floating point number stored on the computer can be viewed as a simple

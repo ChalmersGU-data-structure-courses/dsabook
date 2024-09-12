@@ -7,10 +7,11 @@
   <meta name="author" content="Cliff Shaffer" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
-  <title>DSABook – The Full Binary Tree Theorem (optional)</title>
+  <title>DSABook – The Full Binary Tree Theorem</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -105,10 +91,10 @@
 </header>
 
 <main>
-<section id="the-full-binary-tree-theorem-optional" class="level2"
+<section id="the-full-binary-tree-theorem" class="level2"
 data-number="5.4">
 <h2 data-number="5.4"><span class="header-section-number">5.4</span> The
-Full Binary Tree Theorem (optional)</h2>
+Full Binary Tree Theorem</h2>
 <p>Some binary tree implementations store data only at the <a
 href="10-glossary.html#leaf-node" class="term"
 title="In a binary tree, leaf node is any node that has two empty children. (Note that a binary tree is defined so that every node has two children, and that is why the leaf node has to have two empty children, rather than no children.) In a general tree, any node is a leaf node if it has no children.">leaf
@@ -130,7 +116,7 @@ internal nodes.</p>
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
 internal nodes might have only one leaf. This occurs when the internal
 nodes are arranged in a chain ending in a single leaf as shown in <a
-href="5.4-the-full-binary-tree-theorem-optional.html#OneLeaf">Figure
+href="5.4-the-full-binary-tree-theorem.html#OneLeaf">Figure
 #OneLeaf</a>. In this example, the number of leaves is low because each
 internal node has only one non-empty child. To find an upper bound on
 the number of leaves for a tree of
@@ -154,8 +140,9 @@ nodes.</p>
 <p>A tree containing many internal nodes and a single leaf.</p>
 </div>
 <div id="FullTree">
-<section id="theorem-2" class="level4 unnumbered topic">
-<h4 class="unnumbered">Theorem</h4>
+<section id="theorem-full-binary-tree-theorem"
+class="level4 unnumbered topic">
+<h4 class="unnumbered">Theorem: Full Binary Tree Theorem</h4>
 <p><strong>Full Binary Tree Theorem:</strong> The number of leaves in a
 non-empty full binary tree is one more than the number of internal
 nodes.</p>
@@ -248,8 +235,9 @@ whether full or not. Here are two approaches to proving the following
 theorem, and each suggests a useful way of thinking about binary
 trees.</p>
 <div id="SubTreeThrm">
-<section id="theorem-3" class="level4 unnumbered topic">
-<h4 class="unnumbered">Theorem</h4>
+<section id="theorem-number-of-subtrees"
+class="level4 unnumbered topic">
+<h4 class="unnumbered">Theorem: Number of subtrees</h4>
 <p>The number of empty subtrees in a non-empty binary tree is one more
 than the number of nodes in the tree.</p>
 <p><strong>Proof 1:</strong> Take an arbitrary binary tree

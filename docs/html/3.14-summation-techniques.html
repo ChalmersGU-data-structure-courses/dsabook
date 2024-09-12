@@ -7,10 +7,11 @@
   <meta name="author" content="Cliff Shaffer" />
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Nick Smallbone" />
-  <title>DSABook – Summation Techniques (optional)</title>
+  <title>DSABook – Summation Techniques</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
@@ -19,7 +20,6 @@
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
   <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
-  <link rel="stylesheet" href="../lib/ChalmersGU-interactive.css" type="text/css" />
 
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
@@ -31,22 +31,8 @@
     };
   </script>
 
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-        processEscapes: true,
-      },
-      "HTML-CSS": {
-        scale: "80",
-      }
-    });
-  </script>
-
   <script type="text/javascript" src="../lib/jquery.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../lib/localforage.min.js"></script>
   <script type="text/javascript" src="../lib/accessibility.js"></script>
   <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
@@ -81,7 +67,7 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Background/SummationOneToNCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/AlgAnal/SummationOneToNCON.css" rel="stylesheet" type="text/css"/>
 <link href="../interactive/AlgAnal/GeometricSumProofCON.css" rel="stylesheet" type="text/css"/>
 </head>
 
@@ -95,21 +81,20 @@
 </nav>
 <nav class="sitenav">
 <div>
-<a href="3.13-growth-rates-review-optional.html" class="navbutton">&lt;&lt;</a>
-<a href="3.13-growth-rates-review-optional.html" accesskey="p" rel="previous">Growth Rates Review (optional)</a>
+<a href="3.13-growth-rates-review.html" class="navbutton">&lt;&lt;</a>
+<a href="3.13-growth-rates-review.html" accesskey="p" rel="previous">Growth Rates Review</a>
 </div>
 <div>
-<a href="3.15-solving-recurrence-relations-optional.html" accesskey="n" rel="next">Solving Recurrence Relations (optional)</a>
-<a href="3.15-solving-recurrence-relations-optional.html" class="navbutton">&gt;&gt;</a>
+<a href="3.15-solving-recurrence-relations.html" accesskey="n" rel="next">Solving Recurrence Relations</a>
+<a href="3.15-solving-recurrence-relations.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="summation-techniques-optional" class="level2"
-data-number="3.14">
+<section id="summation-techniques" class="level2" data-number="3.14">
 <h2 data-number="3.14"><span class="header-section-number">3.14</span>
-Summation Techniques (optional)</h2>
+Summation Techniques</h2>
 <div class="alert">
 <p><strong><em>Note</em></strong>: This section is <em>work in
 progress</em></p>
@@ -152,7 +137,7 @@ Having this estimate in hand helps us when trying to determine an exact
 closed-form solution, because we will hopefully recognize if our
 proposed solution is badly wrong.</p>
 <p>
-<div id="SummationOneToNCON" class="ssAV" data-short-name="SummationOneToNCON" data-long-name="Background/SummationOneToNCON" alt="Background/SummationOneToNCON" tabIndex="-1">
+<div id="SummationOneToNCON" class="ssAV" data-short-name="SummationOneToNCON" data-long-name="AlgAnal/SummationOneToNCON" alt="AlgAnal/SummationOneToNCON" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
@@ -227,8 +212,7 @@ a polynomial, then it can only be</p>
 <p>At this point, we still must do the “test” part of the guess-and-test
 approach. We can use an induction proof to verify whether our candidate
 closed-form solution is correct. In this case it is indeed correct, as
-shown by <a
-href="3.14-summation-techniques-optional.html#SumIEx">Example
+shown by <a href="3.14-summation-techniques.html#SumIEx">Example
 #SumIEx</a>. The induction proof is necessary because our initial
 assumption that the solution is a simple polynomial could be wrong. For
 example, it might have been that the true solution includes a
@@ -269,9 +253,8 @@ and find a pattern in terms of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(n) - g(n)</annotation></semantics></math>
 or
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(n)/g(n)</annotation></semantics></math>.</p>
-<section id="SumIEx" class="level4 topic" data-number="3.14.0.1">
-<h4 data-number="3.14.0.1"><span
-class="header-section-number">3.14.0.1</span> Example</h4>
+<section id="SumIEx" class="level4 unnumbered topic">
+<h4 class="unnumbered">Example: Divide-and-guess</h4>
 <p>Find the closed form solution for
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup><mi>i</mi></mrow><annotation encoding="application/x-tex">\sum_{i=1}^n i</annotation></semantics></math>
 using the divide-and-guess approach. We will try two example functions
@@ -438,11 +421,12 @@ nor that
 We merely hypothesized patterns from looking at a few terms.
 Fortunately, it is easy to check our hypothesis with induction.</p>
 </section>
-<section id="example-17" class="level4 unnumbered topic">
-<h4 class="unnumbered">Example</h4>
+<section id="example-exponentially-decreasing-numbers"
+class="level4 unnumbered topic">
+<h4 class="unnumbered">Example: Exponentially decreasing numbers</h4>
 <p>Solve the summation</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mn>1</mn><mi>/</mi><msup><mn>2</mn><mi>i</mi></msup></mrow><annotation encoding="application/x-tex">
-\sum_{i=1}^n 1/2^i
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mfrac><mn>1</mn><msup><mn>2</mn><mi>i</mi></msup></mfrac></mrow><annotation encoding="application/x-tex">
+\sum_{i=1}^n \frac{1}{2^i}
 </annotation></semantics></math></p>
 <p>We will begin by writing out a table listing the first few values of
 the summation, to see if we can detect a pattern.</p>
@@ -497,18 +481,16 @@ and the expected asymptote. This result is shown in the last line of the
 table, which has a clear pattern since the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
 th entry is of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><msup><mn>2</mn><mi>i</mi></msup></mrow><annotation encoding="application/x-tex">1/2^i</annotation></semantics></math>.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac><mn>1</mn><msup><mn>2</mn><mi>i</mi></msup></mfrac><annotation encoding="application/x-tex">\frac{1}{2^i}</annotation></semantics></math>.
 From this we can easily deduce a guess that
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>1</mn><mo>−</mo><mfrac><mn>1</mn><msup><mn>2</mn><mi>n</mi></msup></mfrac></mrow><annotation encoding="application/x-tex">f(n) = 1 - \frac{1}{2^n}</annotation></semantics></math>.
 Again, a simple induction proof will verify the guess.</p>
 </section>
-<section id="example-18" class="level4 unnumbered topic">
-<h4 class="unnumbered">Example</h4>
+<section id="example-geometric-series" class="level4 unnumbered topic">
+<h4 class="unnumbered">Example: Geometric series</h4>
 <p>Solve the summation</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></munderover><mi>a</mi><msup><mi>r</mi><mi>i</mi></msup><mo>=</mo><mi>a</mi><mo>+</mo><mi>a</mi><mi>r</mi><mo>+</mo><mi>a</mi><msup><mi>r</mi><mn>2</mn></msup><mo>+</mo><mi>⋯</mi><mo>+</mo><mi>a</mi><msup><mi>r</mi><mi>n</mi></msup></mtd></mtr></mtable><annotation encoding="application/x-tex">
-\begin{eqnarray}
-f(n) &amp; = &amp; \sum_{i=0}^{n} ar^i = a + ar + ar^2 + \cdots + ar^n
-\end{eqnarray}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></munderover><mi>a</mi><msup><mi>r</mi><mi>i</mi></msup><mo>=</mo><mi>a</mi><mo>+</mo><mi>a</mi><mi>r</mi><mo>+</mo><mi>a</mi><msup><mi>r</mi><mn>2</mn></msup><mo>+</mo><mi>⋯</mi><mo>+</mo><mi>a</mi><msup><mi>r</mi><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">
+f(n) = \sum_{i=0}^{n} ar^i = a + ar + ar^2 + \cdots + ar^n
 </annotation></semantics></math></p>
 <p>This is called a geometric series. Our goal is to find some function
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">g(n)</annotation></semantics></math>
@@ -540,32 +522,26 @@ f(n) - rf(n)  &amp; = &amp;  \sum_{i=0}^{n} ar^i - r\sum_{i=0}^{n} ar^i \\
 \end{eqnarray}
 </annotation></semantics></math></p>
 <p>Thus, we get the result</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mfrac><mrow><mi>a</mi><mo>−</mo><mi>a</mi><msup><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow><mrow><mn>1</mn><mo>−</mo><mi>r</mi></mrow></mfrac></mtd></mtr></mtable><annotation encoding="application/x-tex">
-\begin{eqnarray}
-f(n) &amp;=&amp; \frac{a - ar^{n+1}}{1 - r}
-\end{eqnarray}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mrow><mi>a</mi><mo>−</mo><mi>a</mi><msup><mi>r</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow><mrow><mn>1</mn><mo>−</mo><mi>r</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+f(n) = \frac{a - ar^{n+1}}{1 - r}
 </annotation></semantics></math></p>
 <p>where
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>≠</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">r \neq 1</annotation></semantics></math>.</p>
 </section>
-<section id="example-19" class="level4 unnumbered topic">
-<h4 class="unnumbered">Example</h4>
+<section id="example-shifting-method" class="level4 unnumbered topic">
+<h4 class="unnumbered">Example: Shifting method</h4>
 <p>For our second example of the shifting method, we solve</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>i</mi><msup><mn>2</mn><mi>i</mi></msup><mo>=</mo><mn>1</mn><mo>⋅</mo><msup><mn>2</mn><mn>1</mn></msup><mo>+</mo><mn>2</mn><mo>⋅</mo><msup><mn>2</mn><mn>2</mn></msup><mo>+</mo><mn>3</mn><mo>⋅</mo><msup><mn>2</mn><mn>3</mn></msup><mo>+</mo><mi>⋯</mi><mo>+</mo><mi>n</mi><mo>⋅</mo><msup><mn>2</mn><mi>n</mi></msup></mtd></mtr></mtable><annotation encoding="application/x-tex">
-\begin{eqnarray}
-f(n) &amp;=&amp; \sum_{i=1}^{n} i2^i = 1 \cdot 2^1 + 2 \cdot 2^2 + 3 \cdot 2^3 + \cdots + n \cdot 2^n
-\end{eqnarray}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>i</mi><mspace width="0.167em"></mspace><msup><mn>2</mn><mi>i</mi></msup><mo>=</mo><mn>1</mn><mo>⋅</mo><msup><mn>2</mn><mn>1</mn></msup><mo>+</mo><mn>2</mn><mo>⋅</mo><msup><mn>2</mn><mn>2</mn></msup><mo>+</mo><mn>3</mn><mo>⋅</mo><msup><mn>2</mn><mn>3</mn></msup><mo>+</mo><mi>⋯</mi><mo>+</mo><mi>n</mi><mo>⋅</mo><msup><mn>2</mn><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">
+f(n) = \sum_{i=1}^{n} i\,2^i = 1 \cdot 2^1 + 2 \cdot 2^2 + 3 \cdot 2^3 + \cdots + n \cdot 2^n
 </annotation></semantics></math></p>
 <p>We can achieve our goal if we multiply by two:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mn>2</mn><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mn>2</mn><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>i</mi><msup><mn>2</mn><mi>i</mi></msup><mo>=</mo><mn>1</mn><mo>⋅</mo><msup><mn>2</mn><mn>2</mn></msup><mo>+</mo><mn>2</mn><mo>⋅</mo><msup><mn>2</mn><mn>3</mn></msup><mo>+</mo><mn>3</mn><mo>⋅</mo><msup><mn>2</mn><mn>4</mn></msup><mo>+</mo><mi>⋯</mi><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>⋅</mo><msup><mn>2</mn><mi>n</mi></msup><mo>+</mo><mi>n</mi><mo>⋅</mo><msup><mn>2</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mtd></mtr></mtable><annotation encoding="application/x-tex">
-\begin{eqnarray}
-2f(n) &amp;=&amp; 2\sum_{i=1}^{n} i2^i = 1 \cdot 2^2 + 2 \cdot 2^3 + 3 \cdot 2^4 + \cdots + (n-1) \cdot 2^n + n \cdot 2^{n+1}
-\end{eqnarray}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mspace width="0.167em"></mspace><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>2</mn><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>i</mi><mspace width="0.167em"></mspace><msup><mn>2</mn><mi>i</mi></msup><mo>=</mo><mn>1</mn><mo>⋅</mo><msup><mn>2</mn><mn>2</mn></msup><mo>+</mo><mn>2</mn><mo>⋅</mo><msup><mn>2</mn><mn>3</mn></msup><mo>+</mo><mn>3</mn><mo>⋅</mo><msup><mn>2</mn><mn>4</mn></msup><mo>+</mo><mi>⋯</mi><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>⋅</mo><msup><mn>2</mn><mi>n</mi></msup><mo>+</mo><mi>n</mi><mo>⋅</mo><msup><mn>2</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">
+2\,f(n) = 2\sum_{i=1}^{n} i\,2^i = 1 \cdot 2^2 + 2 \cdot 2^3 + 3 \cdot 2^4 + \cdots + (n-1) \cdot 2^n + n \cdot 2^{n+1}
 </annotation></semantics></math></p>
 <p>The
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
 th term of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">2f(n)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mspace width="0.167em"></mspace><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">2\,f(n)</annotation></semantics></math>
 is
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>⋅</mo><msup><mn>2</mn><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">i \cdot 2^{i+1}</annotation></semantics></math>,
 while the
@@ -577,10 +553,10 @@ is
 Subtracting one expression from the other yields the summation of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mi>i</mi></msup><annotation encoding="application/x-tex">2^i</annotation></semantics></math>
 and a few non-canceled terms:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mn>2</mn><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mn>2</mn><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>i</mi><msup><mn>2</mn><mi>i</mi></msup><mo>−</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>i</mi><msup><mn>2</mn><mi>i</mi></msup></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>i</mi><msup><mn>2</mn><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>−</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>i</mi><msup><mn>2</mn><mi>i</mi></msup></mtd></mtr></mtable><annotation encoding="application/x-tex">
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mn>2</mn><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mn>2</mn><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>i</mi><mspace width="0.167em"></mspace><msup><mn>2</mn><mi>i</mi></msup><mo>−</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>i</mi><mspace width="0.167em"></mspace><msup><mn>2</mn><mi>i</mi></msup></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>i</mi><mspace width="0.167em"></mspace><msup><mn>2</mn><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>−</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>i</mi><mspace width="0.167em"></mspace><msup><mn>2</mn><mi>i</mi></msup></mtd></mtr></mtable><annotation encoding="application/x-tex">
 \begin{eqnarray}
-2f(n) - f(n) &amp; = &amp; 2\sum_{i=1}^n i 2^i - \sum_{i=1}^n i 2^i  \\
-             &amp; = &amp; \sum_{i=1}^n i 2^{i+1} - \sum_{i=1}^n i 2^i
+2f(n) - f(n) &amp; = &amp; 2\sum_{i=1}^n i\,2^i - \sum_{i=1}^n i\,2^i  \\
+             &amp; = &amp; \sum_{i=1}^n i\,2^{i+1} - \sum_{i=1}^n i\,2^i
 \end{eqnarray}
 </annotation></semantics></math></p>
 <p>Shift
@@ -589,24 +565,18 @@ and a few non-canceled terms:</p>
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(i+1)</annotation></semantics></math>
 for
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mi>n</mi><msup><mn>2</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>+</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></munderover><mi>i</mi><msup><mn>2</mn><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>−</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></munderover><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><msup><mn>2</mn><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msup></mtd></mtr></mtable><annotation encoding="application/x-tex">
-\begin{eqnarray}
-&amp;=&amp; n2^{n+1} + \sum_{i=0}^{n-1}i2^{i+1} - \sum_{i=0}^{n-1}(i+1)2^{i+1}
-\end{eqnarray}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo><mi>n</mi><mspace width="0.167em"></mspace><msup><mn>2</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>+</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></munderover><mi>i</mi><mspace width="0.167em"></mspace><msup><mn>2</mn><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>−</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></munderover><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><msup><mn>2</mn><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">
+= n\,2^{n+1} + \sum_{i=0}^{n-1}i\,2^{i+1} - \sum_{i=0}^{n-1}(i+1)2^{i+1}
 </annotation></semantics></math></p>
 <p>Break the second summation into two parts:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mi>n</mi><msup><mn>2</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>+</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></munderover><mi>i</mi><msup><mn>2</mn><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>−</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></munderover><mi>i</mi><msup><mn>2</mn><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>−</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></munderover><msup><mn>2</mn><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msup></mtd></mtr></mtable><annotation encoding="application/x-tex">
-\begin{eqnarray}
-&amp;=&amp;  n2^{n+1} + \sum_{i=0}^{n-1}i2^{i+1} -
-              \sum_{i=0}^{n-1}i2^{i+1} -
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo><mi>n</mi><mspace width="0.167em"></mspace><msup><mn>2</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>+</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></munderover><mi>i</mi><mspace width="0.167em"></mspace><msup><mn>2</mn><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>−</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></munderover><mi>i</mi><mspace width="0.167em"></mspace><msup><mn>2</mn><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>−</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></munderover><msup><mn>2</mn><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">
+=  n\,2^{n+1} + \sum_{i=0}^{n-1}i\,2^{i+1} -
+              \sum_{i=0}^{n-1}i\,2^{i+1} -
               \sum_{i=0}^{n-1}2^{i+1}
-\end{eqnarray}
 </annotation></semantics></math></p>
 <p>Cancel like terms:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mi>n</mi><msup><mn>2</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>−</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></munderover><msup><mn>2</mn><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msup></mtd></mtr></mtable><annotation encoding="application/x-tex">
-\begin{eqnarray}
-&amp;=&amp; n2^{n+1} - \sum_{i=0}^{n-1} 2^{i+1}
-\end{eqnarray}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo><mi>n</mi><mspace width="0.167em"></mspace><msup><mn>2</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>−</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></munderover><msup><mn>2</mn><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">
+= n\,2^{n+1} - \sum_{i=0}^{n-1} 2^{i+1}
 </annotation></semantics></math></p>
 <p>Again shift
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
@@ -614,22 +584,16 @@ for
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
 for
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(i+1)</annotation></semantics></math>:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mi>n</mi><msup><mn>2</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>−</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msup><mn>2</mn><mi>i</mi></msup></mtd></mtr></mtable><annotation encoding="application/x-tex">
-\begin{eqnarray}
-&amp;=&amp; n2^{n+1} - \sum_{i=1}^{n} 2^i
-\end{eqnarray}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo><mi>n</mi><mspace width="0.167em"></mspace><msup><mn>2</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>−</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msup><mn>2</mn><mi>i</mi></msup></mrow><annotation encoding="application/x-tex">
+= n\,2^{n+1} - \sum_{i=1}^{n} 2^i
 </annotation></semantics></math></p>
 <p>Replace the new summation with a solution that we already know:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mi>n</mi><msup><mn>2</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>−</mo><mrow><mo stretchy="true" form="prefix">(</mo><msup><mn>2</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>−</mo><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr></mtable><annotation encoding="application/x-tex">
-\begin{eqnarray}
-&amp;=&amp; n2^{n+1} - \left ( 2^{n+1} - 2 \right )
-\end{eqnarray}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo><mi>n</mi><mspace width="0.167em"></mspace><msup><mn>2</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>−</mo><mrow><mo stretchy="true" form="prefix">(</mo><msup><mn>2</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>−</mo><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+= n\,2^{n+1} - \left ( 2^{n+1} - 2 \right )
 </annotation></semantics></math></p>
 <p>Finally, reorganize the equation:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="center" style="text-align: center"><mo>=</mo></mtd><mtd columnalign="left" style="text-align: left"><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><msup><mn>2</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>+</mo><mn>2</mn></mtd></mtr></mtable><annotation encoding="application/x-tex">
-\begin{eqnarray}
-&amp;=&amp; (n-1)2^{n+1} + 2
-\end{eqnarray}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><msup><mn>2</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>+</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">
+= (n-1)2^{n+1} + 2
 </annotation></semantics></math></p>
 </section>
 <p>Here is another example.</p>
@@ -647,17 +611,17 @@ for
 <footer>
 <nav class="sitenav">
 <div class="navlink">
-<a href="3.13-growth-rates-review-optional.html" class="navbutton">&lt;&lt;</a>
-<a href="3.13-growth-rates-review-optional.html" accesskey="p" rel="previous">Growth Rates Review (optional)</a>
+<a href="3.13-growth-rates-review.html" class="navbutton">&lt;&lt;</a>
+<a href="3.13-growth-rates-review.html" accesskey="p" rel="previous">Growth Rates Review</a>
 </div>
 <div class="navlink">
-<a href="3.15-solving-recurrence-relations-optional.html" accesskey="n" rel="next">Solving Recurrence Relations (optional)</a>
-<a href="3.15-solving-recurrence-relations-optional.html" class="navbutton">&gt;&gt;</a>
+<a href="3.15-solving-recurrence-relations.html" accesskey="n" rel="next">Solving Recurrence Relations</a>
+<a href="3.15-solving-recurrence-relations.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/Background/SummationOneToNCON.js"></script>
+<script type="text/javascript" src="../interactive/AlgAnal/SummationOneToNCON.js"></script>
 <script type="text/javascript" src="../interactive/AlgAnal/GeometricSumProofCON.js"></script>
 </body>
 </html>
