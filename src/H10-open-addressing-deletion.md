@@ -26,7 +26,7 @@ sequence until a truly empty position has been found, simply to verify
 that a duplicate is not in the table. However, the new record would
 actually be inserted into the slot of the first tombstone encountered.
 
-<inlineav id="hashdelCON" src="Hashing/hashdelCON.js" name="Hash Deletion Slideshow"/>
+<inlineav id="hashdelCON" src="Hashing/hashdelCON.js" name="Hash Deletion Slideshow" links="Hashing/collisionCON.css"/>
 
 Here is a practice exercise.
 

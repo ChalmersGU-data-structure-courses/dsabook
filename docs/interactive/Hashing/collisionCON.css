@@ -1,16 +1,13 @@
-#collisionCON3 {
-  height: 280px;
-}
 
-#collisionCON4 {
-  height: 280px;
-}
-
-#collisionCON7 {
-  height: 250px;
-}
-
-#collisionCON8 {
-  margin-top: 25px;
-  height: 250px;
+#collisionCON1 .jsavoutput.jsavline,
+#collisionCON2 .jsavoutput.jsavline,
+#collisionCON3 .jsavoutput.jsavline,
+#collisionCON4 .jsavoutput.jsavline,
+#collisionCON5 .jsavoutput.jsavline,
+#collisionCON6 .jsavoutput.jsavline,
+#collisionCON7 .jsavoutput.jsavline,
+#collisionCON8 .jsavoutput.jsavline,
+#hashdelCON .jsavoutput.jsavline
+{
+  height: 5ex;
 }
