@@ -22,16 +22,16 @@
     height: 420px;
 }
 
-#GdirRepCON .jsavcanvas {
-    height: 240px;
-}
-
-#GundirRepCON .jsavcanvas {
-    height: 240px;
-}
-
+#GdirRepCON .jsavcanvas,
+#GundirRepCON .jsavcanvas,
 #GweightedCON .jsavcanvas {
-    height: 230px;
+    height: 240px;
+}
+
+#GdirRepCON .jsavverticalarray .jsavnode.jsavindex,
+#GundirRepCON .jsavverticalarray .jsavnode.jsavindex,
+#GweightedCON .jsavverticalarray .jsavnode.jsavindex {
+  margin-top: 0;
 }
 
 .jsavautoresize .jsavnode, .jsavautoresize .jsavnode .jsavvalue {

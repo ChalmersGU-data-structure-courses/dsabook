@@ -1,9 +1,13 @@
 #kruskalCON {
-  height: 550px;
+  height: 560px;
 }
 
 #kruskalCON .jsavline {
       height: 110px;
+}
+
+#kruskalCON .jsavverticalarray .jsavnode.jsavindex {
+  margin-top: 0;
 }
 
 #kruskalCON .jsavverticalarray .jsavindex:first-of-type, .jsavverticalarray .jsavindex:first-of-type .jsavvalue {
@@ -77,5 +81,5 @@
 
 #kruskalCON .jsavedge.markpath {
   stroke-width: 4;
-  stroke: #f61010; //red
+  stroke: #f61010;  /* red */
 }

@@ -5,15 +5,15 @@ $(document).ready(function () {
   var av = new JSAV(av_name, {"animationMode" : "none"});
 
   var interpret = {
-    "av_l1": "(a) Vertices $a$ and $b$ are <i>neighbors</i>",
-    "av_l2": "(b) The red edge is <i>incident</i> with vertices $a$ and $b$",
+    "av_l1": "(a) Vertices <em>a</em> and <em>b</em> are <i>neighbors</i>",
+    "av_l2": "(b) The red edge is <i>incident</i> with vertices <em>a</em> and <em>b</em>",
     "av_l3": "(a) A <i>simple</i> path from 0 to 3.",
     "av_l4": "(b) Path 0, 1, 3, 2, 4, 1 is not simple",
     "av_l5": "(c) <i>Simple cycle</i> 1, 3, 2, 4, 1",
     "av_l6": "(a) A graph with relatively few edges is called a <i>sparse graph</i>.",
     "av_l7": "(b) A graph with many edges is called a <i>dense graph</i>.",
     "av_l8": "(c) A <i>complete graph</i> has edges connecting every pair of nodes.",
-    "av_l9": "(d) A <i>clique</i> is a subset of $V$ where all vertices in the subset have edges to all other vertices in the subset."
+    "av_l9": "(d) A <i>clique</i> is a subset of <em>V</em> where all vertices in the subset have edges to all other vertices in the subset."
   };
 
   var gTop = -5;
