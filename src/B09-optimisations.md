@@ -51,46 +51,37 @@ Now, you can test whether you understand how this works.
 
 Empirical comparison of proposed optimizations to quadratic sort
 implementations. Each sorting algorithm is run on a random integer array
-with 10,000 items. Times are in milliseconds. The arrays being sorted
-use the Comparable interface in languages that support this.
+with 20,000 items. Times are in seconds. 
 
-| Sort               |  Java  | Javascript |  Python  |
-|:-------------------|:------:|:----------:|:--------:|
-| **Insertion sort** |        |            |          |
-| Standard           |   60   |    118     |  11,220  |
-| Shifting           |   41   |     77     |   5,100  |
-| **Bubble sort**    |        |            |          |
-| Standard           |   202  |    303     |  12,700  |
-| Check swaps        |   230  |    327     |  13,275  |
-| **Selection sort** |        |            |          |
-| Standard           |   104  |    158     |   4,000  |
-| Check swaps        |   104  |    155     |   4,050  |
+| Sort               |  Java  | Python |
+|:-------------------|:------:|:------:|
+| **Insertion sort** |        |        |
+| Standard           |  0.20  |   6.4  |
+| Shifting           |  0.16  |   3.5  |
+| **Bubble sort**    |        |        |
+| Standard           |  0.33  |   8.5  |
+| Check swaps        |  0.32  |   8.9  |
+| **Selection sort** |        |        |
+| Standard           |  0.23  |   2.8  |
+| Check swaps        |  0.22  |   2.7  |
 
 :::
 
 [The table above](#OptimizeTable) shows the relative
-costs for a number of optimizations in three programming languages: 
-Java, JavaScipt, and Python.
+costs for a number of optimizations in two programming languages: 
+Java (version 22.0), Python (version 3.11).
 
 The programming language that you use can have a big influence on the
 runtime for a program. Perhaps the greatest distinction is whether your
-language is compiled or not. Java and C++ are normally
-compiled, while Python is normally interpreted. 
-To further complicate things, current Javascript engines are
-just-in-time compiled, and there is a version of Python
-that is just-in-time compiled.
+language is compiled or not. 
+Java is normally compiled, while Python is normally interpreted. 
 This can make a huge difference in whether a given code change will actually
 speed the program up or not. In the case of the "shift" vs "swap"
 choice, shifting always turns out to be a big improvement. 
-This is more
-true for the interpreted languages Javascript and Python than for Java
-and C++, but still an improvement either way. But the biggest
-effect that we see is that Python takes over 100 times as long to
-execute the same program as Java.
-
-Some languages have peculiarities that it pays to be aware of. 
-For example, it turns out that there is a big difference in Javascript between using 
-$i<n$ or $i\neq n$ to test termination of a loop.
+This is more true for the interpreted language Python than for Java, 
+but still an improvement either way. 
+But the biggest effect that we see is that Java is around
+around 20--30 times faster than Python.
 
 
 ### Bubble Sort

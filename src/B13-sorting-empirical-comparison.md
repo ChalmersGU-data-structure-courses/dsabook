@@ -11,17 +11,34 @@ questions, we can turn to empirical testing.
 ::: topic
 #### Table: Empirical comparison {- #SortCompTable}
 
-Empirical comparison of sorting algorithms run on a 3.4 GHz Intel
-Pentium 4 CPU running Linux. All times shown are milliseconds.
+Empirical comparison of sorting algorithms run on an 
+Apple MacBook M3 Pro (2023 model). 
+All times shown are seconds.
 
-| Sort | 10 | 100 | 1K | 10K | 100K | 1M | Up | Down |
-|:--------------|--------:|-------:|-------:|-------:|-------:|--------:|-------:|-------:|
-| Insertion     | 0.00023 |  0.007 |   0.66 |  64.98 |   7381 |  674420 |    0.1 | 129.1 |
-| Bubble        | 0.00035 |  0.020 |   2.25 | 277.94 |  27691 | 2820680 |   70.6 | 108.7 |
-| Selection     | 0.00039 |  0.012 |   0.69 |  72.47 |   7356 |  780000 |   69.8 |  69.6 |
-| Merge         | 0.00050 |  0.010 |   0.12 |   1.61 |     19 |     219 |    0.8 |   0.8 |
-| Quick         | 0.00048 |  0.008 |   0.11 |   1.37 |     16 |     162 |    0.4 |   0.4 |
-| Quick (opt)   | 0.00031 |  0.006 |   0.09 |   1.14 |     14 |     143 |    0.3 |   0.4 |
+The first table shows Python implementations, using CPython version 3.11:
+
+| Sort              |     1K |    10K |   100K |     1M |    10M | 100K sorted | 100K reversed |
+|:------------------|:------:|:------:|:------:|:------:|:------:|:-----------:|:-------------:|
+| Insertion sort    |  0.009 |   0.88 |     82 |    --- |    --- |       0.003 |           175 |
+| Bubble sort       |  0.020 |   2.08 |    211 |    --- |    --- |          97 |           280 |
+| Selection sort    |  0.006 |   0.68 |     68 |    --- |    --- |          66 |            66 |
+| Merge sort        |  0.001 |  0.009 |  0.105 |   1.26 |   17.4 |       0.084 |         0.087 |
+| Merge (cutoff 20) |  0.000 |  0.006 |  0.077 |   1.00 |   15.1 |       0.048 |         0.071 |
+| Quicksort         |  0.000 |  0.006 |  0.074 |   0.95 |   12.6 |       0.045 |         0.047 |
+| Quick (cutoff 20) |  0.000 |  0.005 |  0.066 |   0.87 |   11.8 |       0.030 |         0.032 |
+
+The second table shows Java implementations, using OpenJDK version 22.0 
+(note that the arrays are 4 times larger than for the Python tests):
+
+| Sort              |     4K |    40K |   400K |     4M |    40M | 400K sorted | 400K reversed |
+|:------------------|:------:|:------:|:------:|:------:|:------:|:-----------:|:-------------:|
+| Insertion sort    |  0.015 |   0.62 |     69 |    --- |    --- |        0.01 |           126 |
+| Bubble sort       |  0.018 |   1.46 |    312 |    --- |    --- |          35 |           175 |
+| Selection sort    |  0.023 |   0.96 |    112 |    --- |    --- |          41 |            79 |
+| Merge sort        |  0.001 |  0.010 |   0.14 |   1.06 |   13.2 |        0.11 |          0.12 |
+| Merge (cutoff 20) |  0.001 |  0.009 |   0.12 |   1.03 |   12.3 |        0.10 |          0.10 |
+| Quicksort         |  0.001 |  0.008 |   0.06 |   0.66 |    8.2 |        0.04 |          0.03 |
+| Quick (cutoff 20) |  0.001 |  0.007 |   0.06 |   0.57 |    8.0 |        0.04 |          0.04 |
 
 :::
 
@@ -31,9 +48,9 @@ in this chapter. The algorithms compared include
 [Insertion Sort], [Bubble Sort],
 [Selection Sort], [Quicksort], and [Mergesort].
 
-For Quicksort, two versions are compared: the basic implementation and
-an optimized version that does not partition sublists below length nine
-(with Insertion Sort performed at the end).
+For Quicksort and Mergesort, two versions are compared: the basic implementation, 
+and an optimized version that falls back to insertion sort for sublists of
+length below 20.
 
 Except for the rightmost columns, the input to each algorithm is a
 random array of integers. This affects the timing for some of the
@@ -41,9 +58,10 @@ sorting algorithms. For example, Selection Sort is not being used to
 best advantage because the record size is small, so it does not get the
 best possible showing.
 
-The various sorting algorithms are shown for lists of sizes 10, 100,
-1000, 10,000, 100,000, and 1,000,000. The final two columns of each
-table show the performance for the algorithms on inputs of size 10,000
+The various sorting algorithms are shown for arrays of sizes being multiples of 10.
+The final two columns of each
+table show the performance for the algorithms on inputs of size 100,000
+(400,000 for the Java tests)
 where the numbers are in ascending (sorted) and descending (reverse
 sorted) order, respectively. These columns demonstrate best-case
 performance for some algorithms and worst-case performance for others.
