@@ -83,12 +83,39 @@ $endif$
 </header>
 $endif$
 $if(toc)$
-<nav id="$idprefix$TOC" role="doc-toc">
-$if(toc-title)$
-<h2 id="$idprefix$toc-title">$toc-title$</h2>
-$endif$
-$table-of-contents$
-</nav>
+<div>
+  <button id="main-toc-button" class="toc-button" onclick="toggleTOC()">Table of Contents</button>
+  <nav style="display: none;" id="$idprefix$TOC" role="doc-toc">
+  $if(toc-title)$
+  <h2 id="$idprefix$toc-title">$toc-title$</h2>
+  $endif$
+  $table-of-contents$
+  </nav>
+  <script>
+    function toggleTOC() {
+      var toc = document.getElementById('$idprefix$TOC');
+      if (toc.style.display == 'none') {
+        toc.style.display = 'block';
+      } else {
+        toc.style.display = 'none';
+      }
+      var button = document.getElementById('main-toc-button');
+      if (button.innerHTML == 'Table of Contents') {
+        button.innerHTML = 'Hide Table of Contents';
+      } else {
+        button.innerHTML = 'Table of Contents';
+      }
+    }
+    // If the page is 'index.html', show the TOC by default
+    if (window.location.pathname.endsWith('index.html')) {
+      var toc = document.getElementById('$idprefix$TOC');
+      toc.style.display = 'block';
+      // Remove the button
+      var button = document.getElementById('main-toc-button');
+      button.style.display = 'none';
+    }
+  </script>
+</div>
 $endif$
 $body$
 </main>
