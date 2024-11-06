@@ -282,7 +282,7 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a hr
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    resizeArray(newCapacity):</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        newArray <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(newCapacity)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="dv">0</span> <span class="kw">to</span> <span class="va">this</span>.queueSize<span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="op">=</span> <span class="dv">0</span> <span class="kw">to</span> <span class="va">this</span>.queueSize<span class="op">-</span><span class="dv">1</span>:</span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>            j <span class="op">=</span> (i <span class="op">+</span> <span class="va">this</span>.front) <span class="op">%</span> <span class="va">this</span>.internalArray.<span class="bu">size</span>()</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>            newArray[i] <span class="op">=</span> <span class="va">this</span>.internalArray[j]</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.internalArray <span class="op">=</span> newArray</span>

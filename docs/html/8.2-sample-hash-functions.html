@@ -314,7 +314,7 @@ This is Java’s default hash code for strings, where the prime number is
 <div class="sourceCode" id="cb3"><pre
 class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> hashStringImproved(<span class="bu">string</span>, M):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">sum</span> <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="bu">char</span> <span class="kw">in</span> <span class="bu">string</span>:</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> <span class="bu">char</span> <span class="kw">in</span> <span class="bu">string</span>:</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span> <span class="op">=</span> <span class="dv">31</span> <span class="op">*</span> <span class="bu">sum</span> <span class="op">+</span> <span class="bu">ord</span>(<span class="bu">char</span>)</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sum</span> <span class="op">%</span> M</span></code></pre></div>
 <p>Mathematically, the hash function is

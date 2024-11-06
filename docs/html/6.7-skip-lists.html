@@ -215,7 +215,7 @@ the nodes that will precede the one being inserted.</p>
 <div class="sourceCode" id="cb5"><pre
 class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SkipList <span class="kw">implements</span> <span class="bu">Map</span>:</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Add a key-value pair, or update the value associated with an existing key. </span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Add a key-value pair, or update the value associated with an existing key.</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">put</span>(key, value):</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        newLevel <span class="op">=</span> <span class="va">this</span>.randomLevel()  <span class="co">// New node&#39;s level</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> newLevel <span class="op">&gt;</span> <span class="va">this</span>.level:  <span class="co">// If new node is deeper...</span></span>
@@ -241,7 +241,7 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a hr
 <span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    adjustHead(newLevel):</span>
 <span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>        temp <span class="op">=</span> <span class="va">this</span>.head</span>
 <span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.head <span class="op">=</span> <span class="kw">new</span> SkipNode(<span class="va">null</span>, <span class="va">null</span>, newLevel)</span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="dv">0</span> <span class="kw">to</span> <span class="va">this</span>.level:</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="op">=</span> <span class="dv">0</span> <span class="kw">to</span> <span class="va">this</span>.level:</span>
 <span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>            <span class="va">this</span>.head.forward[i] <span class="op">=</span> temp.forward[i]</span>
 <span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>        <span class="va">this</span>.level <span class="op">=</span> newLevel</span></code></pre></div>
 <p>
