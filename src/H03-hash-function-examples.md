@@ -69,7 +69,7 @@ low-order digits, while binning into an array of size 10 or 100 looks at
 the high-order digits.
 
 As another example, consider hashing a collection of keys whose values
-follow a normal distribution, as illustrated by 
+follow a normal distribution, as illustrated by
 [Figure #HashNormal](#HashNormal). Keys near the mean
 of the normal distribution are far more likely to occur than keys near
 the tails of the distribution. For a given slot, think of where the keys
@@ -181,7 +181,7 @@ This is Java's default hash code for strings, where the prime number is 31.
 
     function hashStringImproved(string, M):
         sum = 0
-        for char in string:
+        for each char in string:
             sum = 31 * sum + ord(char)
         return sum % M
 

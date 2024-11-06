@@ -104,7 +104,7 @@ the one being inserted.
 
     class SkipList implements Map:
         ...
-        // Add a key-value pair, or update the value associated with an existing key. 
+        // Add a key-value pair, or update the value associated with an existing key.
         put(key, value):
             newLevel = this.randomLevel()  // New node's level
             if newLevel > this.level:  // If new node is deeper...
@@ -130,7 +130,7 @@ the one being inserted.
         adjustHead(newLevel):
             temp = this.head
             this.head = new SkipNode(null, null, newLevel)
-            for i in 0 to this.level:
+            for i = 0 to this.level:
                 this.head.forward[i] = temp.forward[i]
             this.level = newLevel
 

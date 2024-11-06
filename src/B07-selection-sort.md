@@ -13,7 +13,7 @@ you find the bill for January, and pull that out. Then look through the
 remaining pile until you find the bill for February, and add that behind
 January. Proceed through the ever-shrinking pile of bills to select the
 next one in order until you are done. This is the inspiration for our
-last $\Theta(n^2)$ sort, called [Selection Sort]{.term}. 
+last $\Theta(n^2)$ sort, called [Selection Sort]{.term}.
 
 The $i$'th pass of Selection Sort "selects" the $i$'th
 largest key in the array, placing that record at the end of the array.
@@ -31,8 +31,8 @@ Here is an implementation for Selection Sort.
         N = A.size()
         for i = 0 to N-1:               // Select i'th biggest element
             bigindex = N - i            // Current biggest index
-            for j in 0 to N-i-1:        // Find the max value
-                if A[j] > A[bigindex]:  // Found something bigger  
+            for j = 0 to N-i-1:        // Find the max value
+                if A[j] > A[bigindex]:  // Found something bigger
                     bigindex = j        // Remember bigger index
             swap(A, bigindex, N-i)      // Put it into place
 

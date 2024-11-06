@@ -31,11 +31,11 @@ efficient.
 
 <inlineav id="aqueueFirstCON" src="List/aqueueFirstCON.js" name="Array-based Queue Positions Slideshow" links="List/aqueueCON.css"/>
 
-| 
+|
 
 <inlineav id="aqueueDriftCON" src="List/aqueueDriftCON.js" name="Array-based Queue Drift Slideshow" links="List/aqueueCON.css"/>
 
-| 
+|
 
 <inlineav id="aqueueBadCON" src="List/aqueueBadCON.js" name="Array-based Queue Bad Representation Slideshow" links="List/aqueueCON.css"/>
 
@@ -43,7 +43,7 @@ efficient.
 
 <inlineav id="aqueueCircularCON" src="List/aqueueCircularCON.js" script="DataStructures/CircularQueue.js" name="Circular Array-based Queue Slideshow" links="List/aqueueCON.css"/>
 
-| 
+|
 
 <inlineav id="aqueueEmptyCON" src="List/aqueueEmptyCON.js" script="DataStructures/CircularQueue.js" name="Empty Circular Array-based Queue Slideshow" links="List/aqueueCON.css"/>
 
@@ -137,7 +137,7 @@ one for lists and queues.
         ...
         resizeArray(newCapacity):
             newArray = new Array(newCapacity)
-            for i in 0 to this.queueSize-1:
+            for i = 0 to this.queueSize-1:
                 j = (i + this.front) % this.internalArray.size()
                 newArray[i] = this.internalArray[j]
             this.internalArray = newArray
