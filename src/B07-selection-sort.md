@@ -29,9 +29,9 @@ Here is an implementation for Selection Sort.
 
     function selectionSort(A):
         N = A.size()
-        for i = 0 to N-1:               // Select i'th biggest element
-            bigindex = N - i            // Current biggest index
-            for j = 0 to N-i-1:        // Find the max value
+        for i = 1 to N-1:               // Select i'th biggest element
+            bigindex = 0                // Current biggest index
+            for j = 1 to N-i+1:         // Find the max value
                 if A[j] > A[bigindex]:  // Found something bigger
                     bigindex = j        // Remember bigger index
             swap(A, bigindex, N-i)      // Put it into place

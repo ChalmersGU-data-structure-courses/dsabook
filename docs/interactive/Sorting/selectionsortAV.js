@@ -12,22 +12,23 @@ $(document).ready(function() {
 
   var code = [
     "function selectionSort(A):",
-    "    for i in 0 ... length(A)-1:        // Select i'th biggest element",
-    "        bigindex = i                   // Current biggest index",
-    "        for j in 0 ... len(A)-i:       // Find the max value",
-    "            if A[j] > A[bigindex]:     // Found something bigger  ",
-    "                bigindex = j           // Remember bigger index",
-    "        swap(A, bigindex, len(A)-i-1)  // Put it into place",
+    "    N = A.size()",
+    "    for i = 1 to N-1:               // Select i'th biggest element",
+    "        bigindex = 0                // Current biggest index",
+    "        for j = 1 to N-i+1:         // Find the max value",
+    "            if A[j] > A[bigindex]:  // Found something bigger",
+    "                bigindex = j        // Remember bigger index",
+    "        swap(A, bigindex, N-i)      // Put it into place",
   ];
   var tags = {
     "sig": 1,
-    "outloop": 2,
-    "initbig": 3,
-    "inloop": 4,
-    "compare": 5,
-    "setbig": 6,
-    "swap": 7,
-    "end": 9
+    "outloop": 3,
+    "initbig": 4,
+    "inloop": 5,
+    "compare": 6,
+    "setbig": 7,
+    "swap": 8,
+    "end": 10
   };
 
   // Placeholder text translation needs to be set explicitly
@@ -50,7 +51,7 @@ $(document).ready(function() {
     av.umsg(interpret("av_c3"));
     pseudo.setCurrentLine("sig");
     av.step();
-    for (i = 0; i < arr.size() - 1; i++) {
+    for (i = 1; i < arr.size(); i++) {
       av.umsg(interpret("av_c4") + i);
       pseudo.setCurrentLine("outloop");
       av.step();
@@ -62,7 +63,7 @@ $(document).ready(function() {
       av.umsg(interpret("av_c6"));
       pseudo.setCurrentLine("inloop");
       av.step();
-      for (j = 1; j < arr.size() - i; j++) {
+      for (j = 1; j < arr.size() - i + 1; j++) {
         arr.addClass(j, "processing");
         av.umsg(interpret("av_c7"));
         pseudo.setCurrentLine("compare");
@@ -80,15 +81,15 @@ $(document).ready(function() {
       av.umsg(interpret("av_c9"));
       pseudo.setCurrentLine("swap");
       av.step();
-      if (bigindex !== (arr.size() - i - 1)) {
-        arr.swap(bigindex, arr.size() - i - 1); // swap the two indices
+      if (bigindex !== (arr.size() - i)) {
+        arr.swap(bigindex, arr.size() - i); // swap the two indices
         arr.removeClass(bigindex, "special");
-        arr.addClass(arr.size() - i - 1, "special");
+        arr.addClass(arr.size() - i, "special");
       }
       av.step();
       av.umsg(interpret("av_c10"));
-      arr.removeClass(arr.size() - i - 1, "special");
-      arr.addClass(arr.size() - i - 1, "deemph");
+      arr.removeClass(arr.size() - i, "special");
+      arr.addClass(arr.size() - i, "deemph");
       av.step();
     }
     av.umsg(interpret("av_c2"));
