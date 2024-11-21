@@ -15,7 +15,7 @@ cp -Rn src/ $temp/src/ || true
 echo
 
 echo "Running pandoc: $temp/src/* -> $temp/html/*"
-time pandoc --defaults=pandoc-defaults.yaml --output=$temp/html $temp/src/*.md
+time pandoc -t chunkedhtml --defaults=pandoc-defaults.yaml --output=$temp/html $temp/src/*.md
 echo
 
 rm -rf docs/html/*
