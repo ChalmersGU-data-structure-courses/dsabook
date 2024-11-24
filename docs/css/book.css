@@ -121,8 +121,8 @@ h1 { font-size: 1.6rem; }
 h2 { font-size: 1.2rem; }
 h3 { font-size: 1.1rem; }
 
-h4, h5, h6 { 
-    font-size: 1rem; 
+h4, h5, h6 {
+    font-size: 1rem;
     font-style: italic;
 }
 
@@ -226,9 +226,13 @@ figure {
     background-color: transparent;
     border: none;
 }
+
+/* Make JSAV containers *not* use the dark color scheme */
+
 @media (prefers-color-scheme: dark) {
-    div.jsavcontainer {
-        background-color: antiqueWhite;
+    div.jsavcontainer, div.embedContainer {
+        background-color: floralWhite;
+        color: black;
     }
 }
 
