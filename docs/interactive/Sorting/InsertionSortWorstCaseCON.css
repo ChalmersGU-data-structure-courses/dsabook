@@ -1,5 +1,5 @@
 #InsertionSortWorstCaseCON {
-  height: 500px;
+  height: 530px;
 }
 
 .rotated {
@@ -15,7 +15,7 @@
   text-align: center;
 }
 .bigTriangle{
-  fill: blue; 
+  fill: blue;
   opacity: 0.2 !important;
 }
 .smallTriangle{
