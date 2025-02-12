@@ -3,6 +3,7 @@
 :root {
     --font-size: 12pt;
     --text-font: Georgia, serif;
+    --animation-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
     --code-font: Courier, "Courier New", monospace;
     --border-radius: 1rem;
     --block-margin: 1rem;
@@ -31,7 +32,7 @@
         --quote-color: AntiqueWhite;
         --term-color: PaleGreen;
         --text-color: White;
-    }    
+    }
 }
 
 /* A mixture of the following two CSS resets:

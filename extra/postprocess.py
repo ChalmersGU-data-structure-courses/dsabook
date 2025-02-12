@@ -27,7 +27,7 @@ def postprocess(contents: str) -> str:
 
 # Matching pseudo-HTML tags for animations and exercises
 
-match_tag = re.compile(r"<(inlineav|avembed) [^<>]*/>")
+match_tag = re.compile(r"<(inlineav|avembed|dsvis) [^<>]*/>")
 
 class MyTagParser(HTMLParser):
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str|None]]):
@@ -67,6 +67,11 @@ templates["inlineav-static"] = """
 </div>
 """
 
+templates["dsvis"] = """
+<div id="{id}" class="dsvis"></div>
+<script>DSVis.initialiseAnimation("#{id}", "{ds}", "{init}", "{actions}")</script>
+"""
+
 
 def convert_animations(contents: str) -> str:
     """Convert each animation using its template, and include necessary scripts and stylesheets"""
@@ -100,7 +105,7 @@ def convert_animations(contents: str) -> str:
         contents = re.sub(r"</head>", f'{tag}\n</head>', contents)
     return contents
 
-        
+
 ###############################################################################
 ## Calling from the command-line
 

@@ -36,6 +36,7 @@ css:
   - ../css/quiz.css
   - ../css/mobile.css
   - ../css/print.css
+  - ../css/dsvis.css
 # Link to a CSS style sheet. This option can be used repeatedly to include multiple files.
 
 table-of-contents: true
@@ -87,6 +88,7 @@ reference-location: block
 
 include-in-header:
   - extra/opendsa-header.html
+  - extra/dsvis-header.html
   - extra/quiz-header.html
 # Include contents of FILE, verbatim, at the end of the header.
 # This can be used, for example, to include special CSS or JavaScript in HTML documents.

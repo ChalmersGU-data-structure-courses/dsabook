@@ -1,0 +1,182 @@
+@charset "utf-8";
+
+.dsvis {
+    background-color: var(--box-bgcolor);
+    border: 1px solid var(--border-color);
+	border-radius: 16px;
+    width: 100%;
+	max-width: 1000px;
+    text-align: initial;
+}
+
+.dsvis fieldset, .dsvis form {
+    border: none;
+	display: inline-block;
+	padding: 10px 20px 0 20px;
+}
+
+.dsvis .formgroup {
+	white-space: nowrap;
+	margin-right: 12px;
+}
+
+.dsvis select, .dsvis input, .dsvis button {
+	margin: 3px 0;
+	padding: 3px 6px;
+	background-color: white;
+	border: solid 1px maroon;
+	border-radius: 5px;
+}
+
+.dsvis input[type="checkbox"], .dsvis input[type="radio"] {
+	width: 18px;
+	height: 18px;
+	margin-right: 0;
+	vertical-align: middle;
+}
+
+.dsvis select:hover:not(:disabled), .dsvis input:hover:not(:disabled), .dsvis button:hover:not(:disabled) {
+	cursor: pointer;
+}
+
+.dsvis input:active:not(:disabled), .dsvis button:active:not(:disabled), .dsvis button.selected:not(:disabled) {
+	background-color: maroon;
+	color: white;
+}
+
+.dsvis *:disabled, .dsvis *:disabled * {
+	background: transparent;
+	color: maroon;
+}
+
+
+/*-----------------------------------------------------------------*/
+
+:root {
+	--node-font-size: 100%;
+}
+
+.dsvis svg {
+	font-size: 20px;
+}
+
+.dsvis svg g {
+	font-size: var(--node-font-size);
+}
+
+.dsvis, .dsvis text {
+	font-family: var(--animation-font);
+}
+
+.dsvis text.status-report {
+	fill: grey;
+	font-size: 80%;
+}
+.dsvis text.status-report.paused {
+	fill: brown;
+}
+.dsvis text.status-report.running {
+	fill: green;
+}
+
+.dsvis text.title, .dsvis text.message {
+	fill: brown;
+}
+.dsvis text.title {
+	font-weight: bold;
+}
+
+.dsvis text.printer {
+	fill: blue;
+}
+
+.dsvis circle, .dsvis rect, .dsvis polygon {
+    stroke: black;
+    fill: lemonchiffon;
+}
+
+.dsvis path, .dsvis line, .dsvis polyline {
+    stroke: black;
+    fill: none;
+}
+
+.dsvis svg .filled {
+	stroke: none;
+	fill: black;
+}
+
+.dsvis svg .marked, .dsvis svg .marked > * {
+    stroke: green;
+}
+
+.dsvis svg .marked.filled, .dsvis svg text.marked, .dsvis svg .marked > .filled, .dsvis svg .marked > text {
+	stroke: none;
+	fill: green;
+}
+
+.dsvis svg .highlight, .dsvis svg .highlight > * {
+    stroke: #C00;
+}
+
+.dsvis svg .highlight.filled, .dsvis svg text.highlight, .dsvis svg .highlight > .filled, .dsvis svg .highlight > text {
+	stroke: none;
+	fill: #C00;
+}
+
+.dsvis svg .nofill {
+	fill: none;
+}
+
+.dsvis svg .highlight-circle {
+	stroke: #C00;
+	fill: none;
+}
+
+.dsvis g text {
+	stroke: none;
+    fill: black;
+    text-anchor: middle;
+}
+
+.dsvis g text.avlheight {
+	font-size: 70%;
+}
+
+.dsvis g.unfilled circle {
+	fill: none;
+}
+
+.dsvis g.red circle {
+	fill: pink;
+}
+
+.dsvis g.red.black circle {
+	fill: lightgrey;
+}
+
+.dsvis text.arrayindex > tspan {
+	font-size: 70%;
+}
+
+.dsvis rect.background.disabled {
+	fill: lightgray;
+}
+
+.dsvis svg.shownullnodes .nullnode:not(.invisible) {
+	fill: black;
+	stroke: black;
+}
+
+.dsvis line.gridline, .dsvis svg .invisible, .dsvis svg .nullnode {
+	fill: none;
+	stroke: none;
+}
+
+.dsvis line.gridline {
+	stroke-width: 1;
+}
+
+.dsvis svg.debug line.gridline, .dsvis svg.debug .invisible, .dsvis svg.debug .nullnode {
+    stroke: lightgray;
+}
+
