@@ -9,7 +9,7 @@ following condition, known as the
 [nodes](#node){.term} stored in the left subtree
 of a node whose [key]{.term} value is $K$ have
 key values less than or equal to $K$. All nodes stored in the right
-subtree of a node whose key value is $K$ have key values greater than $K$. 
+subtree of a node whose key value is $K$ have key values greater than $K$.
 [The figure below](#BSTShape) shows two
 BSTs for a collection of values. One consequence of the binary search
 tree property is that if the BST nodes are printed using an
@@ -72,6 +72,8 @@ implemented as follows.
 
 <inlineav id="BSTsearchCON" src="Binary/BSTsearchCON.js" name="BST Search Slideshow" links="Binary/BSTCON.css"/>
 
+<dsvis id="dsvisBSTSearch" ds="BST" init="37 24 42 7 32 42 120 2 40" actions="Find:32"/>
+
 <avembed id="BSTsearchPRO" src="Binary/BSTsearchPRO.html" type="pe" name="BST Search Proficiency Exercise"/>
 
 ### BST Insert
@@ -99,6 +101,8 @@ Now we look at how to insert a new node into the BST.
 
 <inlineav id="BSTinsertCON" src="Binary/BSTinsertCON.js" name="BST Insert Slideshow" links="Binary/BSTCON.css"/>
 
+<dsvis id="dsvisBSTInsert" ds="BST" init="37 24 42 7 32 42 120 2 40" actions="Insert:30"/>
+
 Note that, except for the last node in the path, `putHelp` will not
 actually change the child pointer for any of the nodes that are visited.
 In that sense, many of the assignments seem redundant. However, the cost
@@ -116,7 +120,7 @@ duplicate in the left subtree.
 
 The shape of a BST depends on the order in which elements are inserted.
 A new element is added to the BST as a new leaf node, potentially
-increasing the depth of the tree. 
+increasing the depth of the tree.
 [Figure #BSTShape](#BSTShape) illustrates two BSTs
 for a collection of values. It is possible for the BST containing $n$
 nodes to be a chain of nodes with height $n$. This would happen if, for
@@ -164,6 +168,8 @@ maintained.
 
 <inlineav id="BSTremoveCON" src="Binary/BSTremoveCON.js" name="BST remove Slideshow" links="Binary/BSTCON.css"/>
 
+<dsvis id="dsvisBSTDelete30" ds="BST" init="37 24 42 7 32 42 120 2 30 40" actions="Delete:30 Delete:32 Delete:37"/>
+
 When duplicate node values do not appear in the tree, it makes no
 difference whether the replacement is the greatest value from the left
 subtree or the least value from the right subtree. If duplicates are
@@ -177,8 +183,8 @@ not have a similar problem, because it does not violate the Binary
 Search Tree Property if equal values appear in the left subtree.
 
 ::: note
-*Note*: Alternatively, we can decide to store duplicate values in the 
-right subtree instead of the left. Then we must replace a deleted node 
+*Note*: Alternatively, we can decide to store duplicate values in the
+right subtree instead of the left. Then we must replace a deleted node
 with the least value from its right subtree.
 :::
 
@@ -249,7 +255,7 @@ Below is an example traversal, named `printHelper`. It performs an
 inorder traversal on the BST to print the node keys, in sorted order.
 
     function printHelper(node):
-        if node is not null: 
+        if node is not null:
             printHelper(node.left)
             print(node.key)
             printHelper(node.right)
