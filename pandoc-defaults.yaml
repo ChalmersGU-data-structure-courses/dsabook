@@ -9,7 +9,7 @@ metadata:
 
   date: 2016–2024
 
-variables: 
+variables:
   lang: en-GB
 
 
@@ -23,12 +23,12 @@ writer: chunkedhtml
 # pandoc --to=chunkedhtml --list-extensions
 
 template: extra/book-template.html
-# Use the specified file as a custom template for the generated document. 
-# Implies --standalone. See Templates, below, for a description of template syntax. 
-# If no extension is specified, an extension corresponding to the writer will be added, 
+# Use the specified file as a custom template for the generated document.
+# Implies --standalone. See Templates, below, for a description of template syntax.
+# If no extension is specified, an extension corresponding to the writer will be added,
 # so that --template=special looks for special.html for HTML output.
 
-css: 
+css:
   - ../css/main.css
   - ../css/book.css
   - ../css/code.css
@@ -48,12 +48,12 @@ toc-depth: 2
 
 html-math-method:
   method: mathml
-# Convert TeX math to MathML (in epub3, docbook4, docbook5, jats, html4 and html5). 
+# Convert TeX math to MathML (in epub3, docbook4, docbook5, jats, html4 and html5).
 # MathML is supported natively by the main web browsers and select e-book readers.
 
 number-sections: true
-# Number section headings in LaTeX, ConTeXt, HTML, Docx, ms, or EPUB output. 
-# By default, sections are not numbered. Sections with class unnumbered will never be numbered, 
+# Number section headings in LaTeX, ConTeXt, HTML, Docx, ms, or EPUB output.
+# By default, sections are not numbered. Sections with class unnumbered will never be numbered,
 # even if --number-sections is specified.
 
 section-divs: true
@@ -63,29 +63,29 @@ split-level: 2
 # Specify the heading level at which to split an EPUB or chunked HTML document into separate files.
 
 chunk-template: "%s-%i.html"
-# Specify a template for the filenames in a chunkedhtml document. 
-# In the template, %n will be replaced by the chunk number (padded with leading 0s to 3 digits), 
-# %s with the section number of the chunk, %h with the heading text (with formatting removed), 
-# %i with the section identifier. For example, %section-%s-%i.html might be resolved to 
-# section-1.1-introduction.html. The characters / and \ are not allowed in chunk templates and will be ignored. 
+# Specify a template for the filenames in a chunkedhtml document.
+# In the template, %n will be replaced by the chunk number (padded with leading 0s to 3 digits),
+# %s with the section number of the chunk, %h with the heading text (with formatting removed),
+# %i with the section identifier. For example, %section-%s-%i.html might be resolved to
+# section-1.1-introduction.html. The characters / and \ are not allowed in chunk templates and will be ignored.
 # The default is %s-%i.html.
 
 syntax-definitions: [extra/pseudo.xml]
-# Instructs pandoc to load a KDE XML syntax definition file, which will be used for syntax highlighting 
+# Instructs pandoc to load a KDE XML syntax definition file, which will be used for syntax highlighting
 # of appropriately marked code blocks. This can be used to add support for new languages or to use altered
 # syntax definitions for existing languages. This option may be repeated to add multiple syntax definitions.
 
 indented-code-classes: [pseudo]
-# Specify classes to use for indented code blocks–for example, perl,numberLines or haskell. 
+# Specify classes to use for indented code blocks–for example, perl,numberLines or haskell.
 # Multiple classes may be separated by spaces or commas.
 
 reference-location: block
 # reference-location: block|section|document
-# Specify whether footnotes (and references, if reference-links is set) are placed at 
+# Specify whether footnotes (and references, if reference-links is set) are placed at
 # the end of the current (top-level) block, the current section, or the document. The default is document.
 
 
-include-in-header: 
+include-in-header:
   - extra/opendsa-header.html
   - extra/quiz-header.html
 # Include contents of FILE, verbatim, at the end of the header.
@@ -93,29 +93,29 @@ include-in-header:
 
 # include-before-body:
 #   - inc.tex
-# Include contents of FILE, verbatim, at the beginning of the document body 
-# (e.g. after the <body> tag in HTML, or the \begin{document} command in LaTeX). 
+# Include contents of FILE, verbatim, at the beginning of the document body
+# (e.g. after the <body> tag in HTML, or the \begin{document} command in LaTeX).
 # This can be used to include navigation bars or banners in HTML documents.
 
 # include-after-body:
 #   - inc.tex
-# Include contents of FILE, verbatim, at the end of the document body 
-# (before the </body> tag in HTML, or the \end{document} command in LaTeX). 
+# Include contents of FILE, verbatim, at the end of the document body
+# (before the </body> tag in HTML, or the \end{document} command in LaTeX).
 
 # html-q-tags: true
-# Use <q> tags for quotes in HTML. 
+# Use <q> tags for quotes in HTML.
 
 # wrap: auto|none|preserve
-# Determine how text is wrapped in the output (the source code, not the rendered version). 
-# With auto (the default), pandoc will attempt to wrap lines to the column width specified 
-# by --columns (default 72). With none, pandoc will not wrap lines at all. With preserve, 
-# pandoc will attempt to preserve the wrapping from the source document (that is, where there 
-# are nonsemantic newlines in the source, there will be nonsemantic newlines in the output as well). 
+# Determine how text is wrapped in the output (the source code, not the rendered version).
+# With auto (the default), pandoc will attempt to wrap lines to the column width specified
+# by --columns (default 72). With none, pandoc will not wrap lines at all. With preserve,
+# pandoc will attempt to preserve the wrapping from the source document (that is, where there
+# are nonsemantic newlines in the source, there will be nonsemantic newlines in the output as well).
 # In ipynb output, this option affects wrapping of the contents of Markdown cells.
 
 # columns: NUMBER
-# Specify length of lines in characters. This affects text wrapping in the generated source code 
+# Specify length of lines in characters. This affects text wrapping in the generated source code
 
 # strip-comments: true
-# Strip out HTML comments in the Markdown or Textile source, rather than passing them on 
+# Strip out HTML comments in the Markdown or Textile source, rather than passing them on
 

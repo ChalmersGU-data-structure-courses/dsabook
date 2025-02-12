@@ -28,7 +28,7 @@ echo
 # Checking links using library: https://github.com/untitaker/hyperlink
 
 echo "==============================================================================="
-hyperlink dump-external-links docs | sort | uniq 
+hyperlink dump-external-links docs | sort | uniq
 echo
 
 echo "==============================================================================="
