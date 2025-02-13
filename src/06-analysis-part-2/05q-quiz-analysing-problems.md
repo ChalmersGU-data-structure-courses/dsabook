@@ -1,5 +1,5 @@
 
-### Review questions: Lower bounds for sorting
+### Review questions: Analysing problems
 
 Here are some review questions to check that you understand this proof.
 

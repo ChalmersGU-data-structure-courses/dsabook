@@ -1,5 +1,5 @@
 
-### Practice questions: Asymptotic analysis
+### Practice questions: Upper bounds
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 

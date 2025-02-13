@@ -1,5 +1,5 @@
 
-## Upper Bounds, or the big-O notation
+## Upper Bounds: the big-O notation
 
 ::: TODO
 - definition
@@ -155,22 +155,6 @@ $n$.
 
 From now on, we will use these simplifying rules when discussing the
 cost for a program or algorithm.
-
-### Tight Bounds
-
-The definition for big-Oh allows us to greatly overestimate the cost for
-an algorithm. But sometimes we know a tight bound -- that is, a bound
-that truly reflects the cost of the algorithm or program with a constant
-factor. In that case, we can express this more accurate state of our
-knowledge using the $\Theta$ symbol instead of using big-Oh.
-
-While some textbooks and programmers will casually say that an algorithm
-is "order of" or "big-Oh" of some cost function, it is generally
-better to use $\Theta$ notation rather than big-Oh notation whenever we
-have sufficient knowledge about an algorithm to be sure that we know the
-cost to within a constant factor. OpenDSA modules use $\Theta$ notation
-in preference to big-Oh notation whenever our state of knowledge makes
-that possible.
 
 ### Summary
 

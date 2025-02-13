@@ -1,5 +1,5 @@
 
-## Growth Rates Review 
+## Growth Rates (part 2)
 
 ::: alert
 ***Note***: This section is *work in progress*
@@ -75,62 +75,3 @@ to $2^n$.
 
 $2^{\log n} = n$.
 
-### Asymptotic Notation
-
-| Name         | Notation                | Definition                  |
-|:-------------|:----------------------- |:----------------------------|
-| Little-O     | $f(n) \in o(g(n))$      | $|f(n)| < k\cdot g(n)$      |
-| Big-O        | $f(n) \in O(g(n))$      | $|f(n)| \leq k\cdot g(n)$   |
-| Theta        | $f(n) \in \Theta(g(n))$ | $k_1\cdot g(n) \leq |f(n)| \leq k_2\cdot g(n)$ |
-| Big-Omega    | $f(n) \in \Omega(g(n))$ | $f(n) \geq k\cdot g(n)$     |
-| Little-Omega | $f(n) \in \omega(g(n))$ | $f(n) > k\cdot g(n)$        |
-
-I prefer "$f \in O(n^2)$" to "$f = O(n^2)$" While $n \in O(n^2)$ and
-$n^2 \in O(n^2)$, $O(n) \neq O(n^2)$.
-
-Note: Big oh does not say how good an algorithm is -- only how bad it
-**can** be.
-
-If $\mathcal{A}\in O(n)$ and $\mathcal{B} \in O(n^2)$, is $\mathcal{A}$
-better than $\mathcal{B}$? Perhaps\... but perhaps better analysis will
-show that $\mathcal{A} = \Theta(n)$ while
-$\mathcal{B} = \Theta(\log n)$.
-
-Order Notation has practical limits. Notation: $\log n^2 (= 2 \log n)$
-vs. $\log^2 n (= (\log n)^2)$ vs. $\log \log n$.
-
-$\log 16^2 = 2 \log 16 = 8$.
-
-$\log^2 16 = 4^2 = 16$.
-
-$\log \log 16 = \log 4 = 2$.
-
-Statement: Resource requirements for Algorithm $\mathcal{A}$ grow slower
-than resource requirements for Algorithm $\mathcal{B}$.
-
-Is $\mathcal{A}$ better than $\mathcal{B}$?
-
-Potential problems:
-
--   How big must the input be?
--   Some growth rate differences are trivial Example: $\Theta(\log^2 n)$
-    vs. $\Theta(n^{1/10})$. If $n$ is $10^{12} (\approx 2^{40})$ then
-    $\log^2 n \approx 1600$, $n^{1/10} = 16$ even though $n^{1/10}$
-    grows faster than $\log^2 n$. $n$ must be enormous (like $2^{150}$)
-    for $n^{1/10}$ to be bigger than $\log^2 n$.
-
-It is not always practical to reduce an algorithm's growth rate
-"Practical" here means that the constants might become too much higher
-when we shave off the minor asymptotic growth.
-
-Shaving a factor of $n$ reduces cost by a factor of a million for input
-size of a million. Shaving a factor of $\log \log n$ saves only a factor
-of 4-5.
-
-There is the concept of a "Practicality Window". In general, (1) we
-have limited time to solve a problem, and (2) input can only get so big
-before the computer chokes. Fortunately, algorithm growth rates are
-USUALLY well behaved, so that Order Notation gives practical
-indications. "Practical" is the keyword. We use asymptotics because
-they provide a simple **model** that **usually** mirrors reality. This
-is **useful** to simplify our thinking.

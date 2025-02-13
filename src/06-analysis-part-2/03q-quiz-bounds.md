@@ -1,5 +1,5 @@
 
-### Practice questions: Lower bounds
+### Practice questions: Asymptotic notations
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 
@@ -324,7 +324,7 @@ For what value of $k$ is $\sqrt n = \Theta(n^k)$?
 
 
 :::::::::: question ::::::::::
-If we know that algorithm X is $\Theta(n)$ in the average case, 
+If we know that algorithm X is $\Theta(n)$ in the average case,
 then what can we say about its TIGHTEST upper bound?
 
 - [x] It is $O(n)$ in the average case.
