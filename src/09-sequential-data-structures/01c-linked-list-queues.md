@@ -48,14 +48,3 @@ queue, to be able to add new elements efficiently.
             return removed.elem
 
 <avembed id="LinkedQueue-Dequeue-PRO" src="ChalmersGU/LinkedQueue-Dequeue-PRO.html" type="ka" name="Linked Queue Dequeue Exercise"/>
-
-
-### Comparison of Array-Based and Linked Queues
-
-All member functions for both the array-based and linked queue
-implementations require constant time. The space comparison issues are
-the same as for the equivalent stack implementations.
-
-Unlike the array-based stack implementation, there is no convenient way
-to store two queues in the same array, unless items are always
-transferred directly from one queue to the other.

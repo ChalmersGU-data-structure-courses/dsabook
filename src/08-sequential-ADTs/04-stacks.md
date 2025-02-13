@@ -31,8 +31,9 @@ two main approaches are the [array-based stack]{.term} and the
 [linked stack](#linked-list-stacks), which are analogous to array-based and linked lists,
 respectively.
 
-### Implementing Recursion
+### Use case: Implementing recursion
 
+::: alert
 WARNING! You should not read this section unless you are already
 comfortable with implementing
 [recursive functions](#recursion){.term}.
@@ -43,8 +44,7 @@ recursive call gives back. Thinking about *how* that answer is computed
 just gets in the way of understanding. There are good reasons to
 understand how recursion is implemented, but helping you to write
 recursive functions is not one of them.
-
-### Call stacks for implementing recursion
+:::
 
 Perhaps the most common computer application that uses
 [stacks] is not even
@@ -149,7 +149,7 @@ information for the subarray to be processed needs to be saved.
 Let us now turn to a non-recursive version of the Towers of Hanoi
 function, which cannot be done iteratively.
 
-### Towers of Hanoi
+### Example: Towers of Hanoi
 
 Here is a recursive implementation for Towers of Hanoi.
 

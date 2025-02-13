@@ -1,6 +1,27 @@
 
 ## Comparison of List Implementations
 
+### Stacks
+
+All operations for the array-based and linked stack implementations take
+constant time, so from a time efficiency perspective, neither has a
+significant advantage. Another basis for comparison is the total space
+required. The analysis is similar to that done for list implementations.
+The array-based stack must allocate an array with more elements than
+actually needed, and some of that space is wasted whenever the stack is
+not full. The linked stack can shrink and grow but requires the overhead
+of a `next` field for every element.
+
+### Queues
+
+All member functions for both the array-based and linked queue
+implementations require constant time. The space comparison issues are
+the same as for the equivalent stack implementations.
+
+Unlike the array-based stack implementation, there is no convenient way
+to store two queues in the same array, unless items are always
+transferred directly from one queue to the other.
+
 ### Space Comparison
 
 Now that you have seen two substantially different implementations for

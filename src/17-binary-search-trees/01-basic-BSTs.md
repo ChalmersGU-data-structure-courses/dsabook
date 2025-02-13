@@ -1,5 +1,5 @@
 
-## Binary Search Tree Definition
+## Basic Binary Search Trees
 
 A [binary search tree]{.term}
 ([BST]{.term}) is a
@@ -9,7 +9,7 @@ following condition, known as the
 [nodes](#node){.term} stored in the left subtree
 of a node whose [key]{.term} value is $K$ have
 key values less than or equal to $K$. All nodes stored in the right
-subtree of a node whose key value is $K$ have key values greater than $K$. 
+subtree of a node whose key value is $K$ have key values greater than $K$.
 [The figure below](#BSTShape) shows two
 BSTs for a collection of values. One consequence of the binary search
 tree property is that if the BST nodes are printed using an
@@ -42,7 +42,7 @@ Here is a class declaration for the BST Map:
             this.right = null   // the right subtree, initially null
 
 
-### BST Search
+### Searching
 
 The first operation that we will look at in detail will find the record
 that matches a given key. Notice that in the BST class, public member
@@ -74,7 +74,7 @@ implemented as follows.
 
 <avembed id="BSTsearchPRO" src="Binary/BSTsearchPRO.html" type="pe" name="BST Search Proficiency Exercise"/>
 
-### BST Insert
+### Inserting
 
 Now we look at how to insert a new node into the BST.
 
@@ -116,7 +116,7 @@ duplicate in the left subtree.
 
 The shape of a BST depends on the order in which elements are inserted.
 A new element is added to the BST as a new leaf node, potentially
-increasing the depth of the tree. 
+increasing the depth of the tree.
 [Figure #BSTShape](#BSTShape) illustrates two BSTs
 for a collection of values. It is possible for the BST containing $n$
 nodes to be a chain of nodes with height $n$. This would happen if, for
@@ -126,7 +126,7 @@ average cost of a BST operation low.
 
 <avembed id="BSTinsertPRO" src="Binary/BSTinsertPRO.html" type="pe" name="BST Insert Proficiency Exercise"/>
 
-### BST Remove
+### Removing
 
 Removing a node from a BST is a bit trickier than inserting a node, but
 it is not complicated if all of the possible cases are considered
@@ -177,8 +177,8 @@ not have a similar problem, because it does not violate the Binary
 Search Tree Property if equal values appear in the left subtree.
 
 ::: note
-*Note*: Alternatively, we can decide to store duplicate values in the 
-right subtree instead of the left. Then we must replace a deleted node 
+*Note*: Alternatively, we can decide to store duplicate values in the
+right subtree instead of the left. Then we must replace a deleted node
 with the least value from its right subtree.
 :::
 
@@ -216,7 +216,7 @@ The code for removal is shown here.
 
 <avembed id="BSTremovePRO" src="Binary/BSTremovePRO.html" type="pe" name="BST Remove Proficiency Exercise"/>
 
-### BST Analysis
+### Analysis
 
 The cost for `getHelper` and `putHelper` is the depth of the node found
 or inserted. The cost for `removeHelper` is the depth of the node being
@@ -249,7 +249,7 @@ Below is an example traversal, named `printHelper`. It performs an
 inorder traversal on the BST to print the node keys, in sorted order.
 
     function printHelper(node):
-        if node is not null: 
+        if node is not null:
             printHelper(node.left)
             print(node.key)
             printHelper(node.right)

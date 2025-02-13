@@ -1,5 +1,7 @@
 
-## Information retrieval: Sets and Maps
+## ADTs for Sets and Maps
+
+### Use case: Information retrieval
 
 Many programming tasks involve *finding the right piece of information*
 in a large dataset. That is, we have a collection of items, and we want

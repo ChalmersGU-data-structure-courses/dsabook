@@ -63,3 +63,19 @@ the code for lists. E.g., the internal variables are exactly the same,
 and the resizing method doesn't change at all. The main difference is
 that stacks are even simpler to implement than their list counterparts.
 
+### Implementing two stacks using one array
+
+If you need to use two stacks at the same time, you can take advantage
+of the one-way growth of the array-based stack by using a single array
+to store two stacks. One stack grows inward from each end as illustrated
+by the figure below, hopefully leading to less wasted space. However,
+this only works well when the space requirements of the two stacks are
+inversely correlated. In other words, ideally when one stack grows, the
+other will shrink. This is particularly effective when elements are
+taken from one stack and given to the other. If instead both stacks grow
+at the same time, then the free space in the middle of the array will be
+exhausted quickly, and the array has to be resized.
+
+:::: {#TwoArrayStacks}
+<inlineav id="LinkedStack-Twostack-CON" src="ChalmersGU/LinkedStack-Twostack-CON.js" name="Two Stacks in the same Array" links="ChalmersGU/CGU-Styles.css" static/>
+::::

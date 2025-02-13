@@ -1,6 +1,12 @@
 
 ## Chapter Summary
 
+::: TODO
+- nice image showing all ADTs (and DSs)
+- see the slides
+:::
+
+
 ### Quiz: Data Types Concept Map
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::

@@ -1,5 +1,5 @@
 
-## Heapsort
+## Use case: Heapsort
 
 Before we get to Heapsort, consider for a moment the practicality of
 using a Binary Search Tree for sorting. You could insert all of the

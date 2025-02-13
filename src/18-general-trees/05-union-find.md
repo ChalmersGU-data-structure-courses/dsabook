@@ -1,5 +1,5 @@
 
-## The Union/Find Algorithm
+## Use case: The Union/Find Algorithm
 
 [General trees](#general-tree){.term} are trees
 whose [internal nodes](#internal-node){.term}
@@ -130,7 +130,7 @@ through $J$.
 :::: {#UFconcom}
 <inlineav id="UFconcomCON" src="General/UFconcomCON.js" name="General/UFconcomCON" links="General/UFCON.css" static/>
 
-A graph with two connected components. The tree of 
+A graph with two connected components. The tree of
 [Figure #UFfig](#UFfig) shows the corresponding
 tree structure resulting form processing the edges to determine the
 connected components.
@@ -278,8 +278,8 @@ of [amortized analysis]{.term}.
 The expression $\log^* n$ is closely related to the inverse of
 Ackermann's function. For more information about Ackermann's function
 and the cost of path compression for UNION/FIND, see
-\[[Tarjan, 1975](#tarjan75){.citation}\]. 
-The survey article by \[[Galil & Italiano, 1991](#galilitaliano91){.citation}\] 
+\[[Tarjan, 1975](#tarjan75){.citation}\].
+The survey article by \[[Galil & Italiano, 1991](#galilitaliano91){.citation}\]
 covers many aspects of the equivalence class problem.
 
 <avembed id="UnionFindPRO" src="General/UnionFindPRO.html" type="pe" name="Union/Find Proficiency Exercise"/>

@@ -164,3 +164,10 @@ look at an example for each type of graph.
 Here is an exercise for you to practice BFS.
 
 <avembed id="BFSPE" src="Graph/BFSPE.html" type="pe" name="BFS Proficiency Exercise"/>
+
+### Generic graph search
+
+::: TODO
+- generic graph search algorithm from the slides
+- this includes DFS, BFS, UCS, A*
+:::

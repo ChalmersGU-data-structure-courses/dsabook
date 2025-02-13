@@ -1,5 +1,5 @@
 
-## Comparison with the standard Java API
+### The standard Java API
 
 The standard Java API can be found here (this is Java SE 11):
 <https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/package-summary.html>. Here is a quick comparison

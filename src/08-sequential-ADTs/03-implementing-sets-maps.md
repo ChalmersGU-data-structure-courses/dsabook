@@ -1,5 +1,10 @@
 
-## Example: Implementing Maps using Lists
+## Example: Implementing Sets and Maps using Lists
+
+::: TODO
+- first show how to implement a set
+:::
+
 
 It is not difficult to implement a **Map** using a list. The problem is
 that all the operations -- searching for a key, updating the value for

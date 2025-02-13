@@ -18,7 +18,18 @@ relationship.
 A binary tree for traversal examples.
 ::::
 
-### Preorder Traversal
+### Depth-first and breadth-first
+
+::: TODO
+- BFS: use a queue
+- DFS: use a stack, or be recursive
+- for recursive DFS you can do preorder, postorder or inorder
+:::
+
+
+### Preorder, postorder and inorder
+
+#### Preorder Traversal
 
 For example, we might wish to make sure that we visit any given node
 *before* we visit its children. This is called a
@@ -27,7 +38,7 @@ For example, we might wish to make sure that we visit any given node
 ::: topic
 #### Example: Preorder enumeration {-}
 
-The preorder enumeration for the tree of 
+The preorder enumeration for the tree of
 [Figure #BinTravExample](#BinTravExample) is **A B D C E G F H I**.
 
 The first node printed is the root. Then all nodes of the left subtree
@@ -36,7 +47,7 @@ are printed (in preorder) before any node of the right subtree.
 
 <inlineav id="preorderCON" src="Binary/preorderCON.js" name="Preorder Traversal Slideshow" links="Binary/BTCON.css"/>
 
-### Postorder Traversal
+#### Postorder Traversal
 
 Alternatively, we might wish to visit each node only *after* we visit
 its children (and their subtrees). For example, this would be necessary
@@ -48,13 +59,13 @@ on. This is called a [postorder traversal]{.term}.
 ::: topic
 #### Example: Postorder enumeration {-}
 
-The postorder enumeration for the tree of 
+The postorder enumeration for the tree of
 [Figure #BinTravExample](#BinTravExample) is **D B G E H I F C A**.
 :::
 
 <inlineav id="postorderCON" src="Binary/postorderCON.js" name="Postorder Traversal Slideshow" links="Binary/BTCON.css"/>
 
-### Inorder Traversal
+#### Inorder Traversal
 
 An [inorder traversal]{.term} first visits the
 left child (including its entire subtree), then visits the node, and
@@ -65,7 +76,7 @@ order of value.
 ::: topic
 #### Example: Inorder enumeration {-}
 
-The inorder enumeration for the tree of 
+The inorder enumeration for the tree of
 [Figure #BinTravExample](#BinTravExample) is **B D A G E C H F I**.
 :::
 
@@ -97,14 +108,14 @@ is called on the right subtree, visiting all nodes in the right subtree.
 Postorder and inorder traversals are similar. They simply change the
 order in which the node and its children are visited, as appropriate.
 
-### Preorder Traversal Practice
+#### Preorder Traversal Practice
 
 <avembed id="btTravPreorderPRO" src="Binary/btTravPreorderPRO.html" type="pe" name="Binary Tree Preorder Traversal Exercise"/>
 
-### Postorder Traversal Practice
+#### Postorder Traversal Practice
 
 <avembed id="btTravPostorderPRO" src="Binary/btTravPostorderPRO.html" type="pe" name="Binary Tree Postorder Traversal Exercise"/>
 
-### Inorder Traversal Practice
+#### Inorder Traversal Practice
 
 <avembed id="btTravInorderPRO" src="Binary/btTravInorderPRO.html" type="pe" name="Binary Tree Inorder Traversal Exercise"/>

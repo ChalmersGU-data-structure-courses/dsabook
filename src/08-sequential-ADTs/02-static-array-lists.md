@@ -12,7 +12,9 @@ and remove from them. How can this be implemented? Well, what we
 elements are added or removed. So instead we will use an underlying
 array which is larger than we need.
 
-### Important note about Python lists {-}
+::: alert
+#### Important note about Python lists {-}
+- **refer to the chapter on prerequisites**
 
 Python doesn't have arrays -- i.e., fixed size constant-time access arrays
 like C, Java and most other languages have.
@@ -22,6 +24,7 @@ dynamic array-based lists that we are describe in this section and the next.
 So a Python `list` is implemented using fixed-size arrays, but when you program
 in Python you cannot access these arrays because they are hidden from
 the programmer.
+:::
 
 ### Internal variables
 

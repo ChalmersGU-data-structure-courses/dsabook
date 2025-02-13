@@ -270,7 +270,7 @@ techniques for solving summations can then be used.
 #### Example: Building a heap {-}
 
 Our next example models the cost of the algorithm to build a heap. You
-should recall that to build a [heap](#heaps-and-priority-queues), 
+should recall that to build a [heap](#heaps-and-priority-queues),
 we first heapify the two subheaps, then push down the root
 to its proper position. The cost is:
 
@@ -466,6 +466,10 @@ case (2) of the theorem, $\mathbf{T}(n) = \Theta(n \log n)$.
 :::
 
 ### Average-Case Analysis of Quicksort
+
+::: TODO
+- Average-case is **not** a good thing - what are we averaging on?
+:::
 
 In Module [Quicksort], we determined that the average-case analysis of Quicksort
 had the following recurrence:

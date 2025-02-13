@@ -83,7 +83,9 @@ Here's a short article explaining this:
 Note that this would not be improved by using an open addressing hash
 table, because then we would get a primary cluster with $2^k$ strings.
 
-### How Java's hash tables are implemented
+### How are hash tables implemented in standard libraries?
+
+#### Java API
 
 Before version 1.2, Java had exactly the problem above, but in version
 1.2 they changed the implementation. The current version of Java HashMap
@@ -102,7 +104,7 @@ If you're interested you can read the comment on [lines 125--232 in
 HashMap.java](https://github.com/openjdk/jdk/blob/9e831bccd2fc90681b32d1504eca753462afc6f6/src/java.base/share/classes/java/util/HashMap.java#L145-L233),
 where some implementation details are explained.
 
-### Hash functions and hash tables in Python
+#### Python
 
 Python uses much more modern implementations than Java, of both hash
 functions and hash tables. Python hash functions uses a combination of

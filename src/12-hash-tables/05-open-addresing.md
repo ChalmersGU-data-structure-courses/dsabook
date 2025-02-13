@@ -7,12 +7,12 @@ We now turn to the most commonly used form of hashing:
 [open addressing]{.term} (also called [closed hashing](#closed-hash-system){.term})
 with no bucketing, and a [collision resolution policy]{.term} that can potentially use any slot in the hash table.
 
-Compared to [separate chaining](#separate-chaining), 
-we will now have room for exactly one entry in each table 
+Compared to [separate chaining](#separate-chaining),
+we will now have room for exactly one entry in each table
 cell. If we want to implement a **HashMap** (not a HashSet), we then
 need to be able to put both a key and a value in the same table cell.
 
-This can be done in two ways: either one array of key-value paris, 
+This can be done in two ways: either one array of key-value paris,
 or two arrays of the same length -- one for the keys and another for the values.
 Here we will use the second approach.
 
@@ -42,7 +42,7 @@ smaller than 1, since there can only be one value per array slot.
         maxLoadFactor = 0.7
         capacityMultiplier = 1.5
 
-Finding a good table index for a key is done in the same way as for 
+Finding a good table index for a key is done in the same way as for
 [separate chaining hash tables](#converting-objects-to-table-indices):
 
     class OpenAddressingHashMap implements Map:
@@ -140,11 +140,11 @@ Setting a value for a key into the hash map works like this.
 
 
 First we the next available slot for the given key. If the slot is empty
-(`null`), we insert the key into the keys table, and increase the map size. 
+(`null`), we insert the key into the keys table, and increase the map size.
 Then we update the values table with the new value.
 Finally, we resize the table if the load factor becomes too large.
 
-Deleting from an open addressing hash table is explained 
+Deleting from an open addressing hash table is explained
 [later in this chapter](#open-addressing-deletion).
 
 ### Linear probing
@@ -165,29 +165,3 @@ to the home position.
 
 Can you see any reason why this might not be the best approach to
 collision resolution?
-
-### The Problem with Linear Probing
-
-While linear probing is probably the first idea that comes to mind when
-considering collision resolution policies, it is not the only one
-possible. Probe function **p** allows us many options for how to do
-collision resolution. In fact, linear probing is one of the worst
-collision resolution methods. The main problem is illustrated by the
-next slideshow.
-
-<inlineav id="linProbeCON2" src="Hashing/linProbeCON2.js" name="Linear Probing Slideshow 2" links="Hashing/linProbeCON.css"/>
-
-Again, the ideal behavior for a collision resolution mechanism is that
-each empty slot in the table will have equal probability of receiving
-the next record inserted (assuming that every slot in the table has
-equal probability of being hashed to initially). This tendency of linear
-probing to cluster items together is known as
-[primary clustering]{.term}. Small clusters tend
-to merge into big clusters, making the problem worse.
-
-The problem with primary clustering is that it leads to long probe
-sequences, which increases execution time. However, linear probing is
-still a very common probing method, because it is so simple and can be
-implemented efficiently.
-
-<avembed id="HashLinearPPRO" src="Hashing/HashLinearPPRO.html" type="ka" name="Linear Probing Proficiency Exercise"/>

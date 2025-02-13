@@ -1,6 +1,10 @@
 
 ### Kruskal's Algorithm
 
+::: TODO
+- first show more abstract pseudocode, not using union/find
+:::
+
 Our next MCST algorithm is commonly referred to as
 [Kruskal's algorithm]{.term}. Kruskal's
 algorithm is also a simple, greedy algorithm. First partition the set of

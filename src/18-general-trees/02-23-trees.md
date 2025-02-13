@@ -5,7 +5,9 @@
 - always completely balanced
 :::
 
-### 2-3-4 trees and red-black trees
+### 2-3-4 trees
+
+### Red-black trees and 2-3 / 2-3-4 trees
 
 ::: TODO
 - show the analogy between 2-3-4 trees and RB trees

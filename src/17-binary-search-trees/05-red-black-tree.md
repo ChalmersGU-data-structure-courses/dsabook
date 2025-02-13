@@ -1,9 +1,6 @@
 
-### The Red-Black Tree
+## The Red-Black Tree
 
-::: TODO
-- A section of its own?
-:::
 
 <!--
 ### Exercise 1
@@ -115,8 +112,7 @@ We consider null to be black. XXX it correponds to a whole node in the
 2-3 tree
 
 
-
-### Red-Black Trees Code
+### Implementation
 
 For information about red-black trees, see the lecture handout "2-3
 trees and red-black trees" under Theme 4 (Search trees).

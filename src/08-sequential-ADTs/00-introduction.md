@@ -1,5 +1,5 @@
 
-# Sequential ADTs
+# ADTs: Ordered sequences
 
 ::: TODO
 - API and use cases for stacks, queues

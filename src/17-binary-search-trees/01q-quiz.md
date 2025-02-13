@@ -1,5 +1,5 @@
 
-### Practice questions: BST definition
+### Practice questions
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 

@@ -1,5 +1,5 @@
 
-### Implementing Tree Traversals
+## Implementing Tree Traversals
 
 Recall that any recursive function requires the following:
 

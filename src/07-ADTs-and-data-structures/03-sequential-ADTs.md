@@ -1,5 +1,5 @@
 
-## ADTs for Sequences
+## ADTs for Ordered Sequences
 
 General lists:
 

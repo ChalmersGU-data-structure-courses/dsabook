@@ -1,4 +1,32 @@
 
+## Different probing strategies
+
+### The Problem with Linear Probing
+
+While linear probing is probably the first idea that comes to mind when
+considering collision resolution policies, it is not the only one
+possible. Probe function **p** allows us many options for how to do
+collision resolution. In fact, linear probing is one of the worst
+collision resolution methods. The main problem is illustrated by the
+next slideshow.
+
+<inlineav id="linProbeCON2" src="Hashing/linProbeCON2.js" name="Linear Probing Slideshow 2" links="Hashing/linProbeCON.css"/>
+
+Again, the ideal behavior for a collision resolution mechanism is that
+each empty slot in the table will have equal probability of receiving
+the next record inserted (assuming that every slot in the table has
+equal probability of being hashed to initially). This tendency of linear
+probing to cluster items together is known as
+[primary clustering]{.term}. Small clusters tend
+to merge into big clusters, making the problem worse.
+
+The problem with primary clustering is that it leads to long probe
+sequences, which increases execution time. However, linear probing is
+still a very common probing method, because it is so simple and can be
+implemented efficiently.
+
+<avembed id="HashLinearPPRO" src="Hashing/HashLinearPPRO.html" type="ka" name="Linear Probing Proficiency Exercise"/>
+
 
 ### Linear Probing by Steps
 
