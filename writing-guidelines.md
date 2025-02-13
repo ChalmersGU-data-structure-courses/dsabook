@@ -9,3 +9,12 @@
 
 - Style: Prefer "we/us" form (instead of impersonal "one")
 
+- Try to write one sentence per line (use soft wrap in you editor)
+    - then git diffs become easier to read
+
+## VSCode settings
+
+Check the following settings in VSCode
+- Insert final newline
+- Trim trailing whitespace
+
