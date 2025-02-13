@@ -3,11 +3,13 @@ metadata:
   title: Data Structures and Algorithms
 
   author:
-    - Cliff Shaffer
+    - Alex Gerdes
     - Peter Ljunglöf
+    - Hazem Torfah
     - Nick Smallbone
+    - Cliff Shaffer
 
-  date: 2016–2024
+  date: 2016–2025
 
 variables:
   lang: en-GB
@@ -39,7 +41,7 @@ css:
 # Link to a CSS style sheet. This option can be used repeatedly to include multiple files.
 
 table-of-contents: true
-toc-depth: 2
+toc-depth: 3
 
 # highlight-style: tango
 # pandoc --list-highlight-styles

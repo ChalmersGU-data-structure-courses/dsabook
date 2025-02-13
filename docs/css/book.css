@@ -87,6 +87,10 @@ nav.sitenav > *:last-child {
     padding-left: calc(1.5 * var(--block-margin));
 }
 
+#TOC ul ul ul {
+    margin-bottom: 0;
+}
+
 #TOC > ul {
     padding-left: 0;
 }
@@ -226,6 +230,23 @@ figure {
     background-color: transparent;
     border: none;
 }
+
+.TODO::before {
+    content: "TODO";
+    font-weight: bold;
+    display: block;
+}
+.TODO {
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    margin: var(--block-margin) 0;
+    padding: 0 var(--block-margin);
+    background-color: var(--alert-bgcolor);
+}
+.TODO ul, .TODO li {
+    margin: 0;
+}
+
 
 /* Make JSAV containers *not* use the dark color scheme */
 
