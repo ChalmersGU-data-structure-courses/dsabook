@@ -30,7 +30,7 @@ echo
 if [ "$(which hyperlink)" != "" ];
 then
   echo "==============================================================================="
-  hyperlink dump-external-links docs | sort | uniq
+  hyperlink dump-external-links --base-path=docs | sort | uniq
   echo
 
   echo "==============================================================================="
