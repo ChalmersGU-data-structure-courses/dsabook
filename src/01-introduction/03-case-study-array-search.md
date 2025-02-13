@@ -1,5 +1,5 @@
 
-## Example: Searching in an Array
+## Case study: Searching in a list
 
 ::: TODO
 - Use cases for searching: dictionaries, sets, ...
