@@ -27,11 +27,13 @@ echo
 
 # Checking links using library: https://github.com/untitaker/hyperlink
 
-echo "==============================================================================="
-hyperlink dump-external-links docs | sort | uniq
-echo
+if [ "$(which hyperlink)" != "" ];
+then
+  echo "==============================================================================="
+  hyperlink dump-external-links docs | sort | uniq
+  echo
 
-echo "==============================================================================="
-hyperlink --check-anchors docs
-echo
-
+  echo "==============================================================================="
+  hyperlink --check-anchors docs
+  echo
+fi
