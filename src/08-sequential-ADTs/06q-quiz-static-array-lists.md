@@ -1,5 +1,5 @@
 
-### Review questions: Static array-based lists
+### Quiz: Static array-based lists
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 

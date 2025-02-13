@@ -1,5 +1,5 @@
 
-## Example: Static Array-Based Lists
+## Case study: Static array-based lists
 
 First we give a static implementation for array-based lists, named
 **StaticArrayList**. This inherits from the
@@ -95,7 +95,7 @@ elements, which is $\Theta(n)$.
             this.internalArray[i] = x
 
 
-#### Add Practice Exericse
+#### Practice exercise
 
 <avembed id="StaticArrayList-Add-PRO" src="ChalmersGU/StaticArrayList-Add-PRO.html" type="ka" name="Array-based List Add Exercise"/>
 
@@ -124,7 +124,13 @@ elements, which is $\Theta(n)$.
             return x
 
 
-#### Remove Practice Exericise
+#### Practice exercise
 
 <avembed id="StaticArrayList-Remove-PRO" src="ChalmersGU/StaticArrayList-Remove-PRO.html" type="ka" name="Array-based List Remove Exercise"/>
 
+
+### Limitations
+
+::: TODO
+- What happens when the capacity is exceeded? See chapter X about dynamic arrays
+:::

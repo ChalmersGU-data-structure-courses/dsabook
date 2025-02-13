@@ -29,6 +29,8 @@ queue supports the following operations:
 -   adding a new object to the priority queue
 -   removing the *smallest* object from the priority queue.
 
+### ADT for priority queues
+
 In this chapter, we will see how to implement a priority queue so that
 both adding and removing the minimum take $O(\log n)$ time.
 
@@ -42,6 +44,8 @@ in *ascending* order. There is also the possibility of ordering in
 descending order -- that kind of queue is called a *maximum priority
 queue*. If you have a minimum priority queue, it's straightforward to
 turn it into a maximum priority queue.
+
+### Use cases
 
 Now let's look at a couple of applications of priority queues.
 

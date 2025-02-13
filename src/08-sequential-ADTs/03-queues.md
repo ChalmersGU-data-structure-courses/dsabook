@@ -13,7 +13,11 @@ their elements in order of arrival. In Britain, a line of people is
 called a "queue", and getting into line to wait for service is called
 "queuing up". Accountants have used queues since long before the
 existence of computers. They call a queue a "FIFO" list, which stands
-for "First-In, First-Out". Here is a sample queue ADT. This section
+for "First-In, First-Out".
+
+### ADT for queues
+
+Here is a sample queue ADT. This section
 presents two implementations for queues: the array-based queue and the
 linked queue.
 
@@ -21,3 +25,6 @@ linked queue.
         enqueue(x)  // Enqueues x at the end of the queue.
         dequeue()   // Dequeues the frontmost element.
         peek()      // Returns the frontmost element, without removing it.
+
+### Use case(s)
+

@@ -1,38 +1,5 @@
 
-## The List ADT
-
-### What is a List?
-
-We all have an intuitive understanding of what we mean by a "list". We
-want to turn this intuitive understanding into a concrete data structure
-with implementations for its operations. The most important concept
-related to lists is that of [position]{.term}.
-In other words, we perceive that there is a first element in the list, a
-second element, and so on. So, define a [list]{.term} to be a finite, ordered sequence of data items known as
-[elements](#element){.term}. This is close to
-the mathematical concept of a [sequence]{.term}.
-
-"Ordered" in this definition means that each element has a position in
-the list. So the term "ordered" in this context does **not** mean that
-the list elements are sorted by value. (Of course, we can always choose
-to sort the elements on the list if we want; it's just that keeping the
-elements sorted is not an inherent property of being a list.)
-
-Each list element must have some data type. In the simple list
-implementations discussed in this chapter, all elements of the list are
-usually assumed to have the same data type, although there is no
-conceptual objection to lists whose elements have differing data types
-if the application requires it. The operations defined as part of the
-list [ADT]{.term} depend on the elemental
-[data type]{.term}. For example, the list ADT
-can be used for lists of integers, lists of characters, lists of payroll
-records, even lists of lists.
-
-A list is said to be [empty]{.term} when it
-contains no elements. The number of elements currently stored is called
-the [length]{.term} of the list. The beginning
-of the list is called the [head]{.term}, the end
-of the list is called the [tail]{.term}.
+## Lists
 
 We need some notation to show the contents of a list, so we will use the
 same angle bracket notation that is normally used to represent
@@ -44,29 +11,7 @@ $\langle\ a_0,\ a_1,\ ...,\ a_{n-1}\ \rangle$. The subscript indicates
 an element's position within the list. Using this notation, the empty
 list would appear as $\langle\ \rangle$.
 
-### Collections
-
-There are some properties that lists share with many other data
-structures (some of them will be introduced later in this course). Then
-it's good habit to extract the most important common properties into a
-more general kind of ADT, which we will call collections.
-
-A collection contains a number of elements, and it supports only two
-things: we can inquire how many elements it contains, and we can iterate
-through all elements, one at the time (i.e., it is Iterable).
-
-    interface Collection extends Iterable:
-        isEmpty()   // Returns true if the collection is empty.
-        size()      // Returns the number of elements in this collection.
-
-
-Note that this very interface will not be implemented as it is, but
-instead we will use this as a base interface that we extend in different
-ways, e.g., for lists or sets or priority queues.
-
-### Defining the List ADT
-
-Now, back to the lists that we started talking about.
+### ADT for lists
 
 What basic operations do we want our lists to support? Our common
 intuition about lists tells us that a list should be able to grow and
@@ -123,14 +68,14 @@ A list `L` can be iterated through as follows:
         doSomething(elem)
         elem = iter.next()
 
-In this example, each element of the list in turn is stored in `iter`, 
+In this example, each element of the list in turn is stored in `iter`,
 and passed to the `doSomething` function. The loop terminates when the
 current position reaches the end of the list.
 
-(Note that the loop looks slightly different in Java and Python, 
+(Note that the loop looks slightly different in Java and Python,
 because of how they implement iterators.)
 
-Many languages, including Java and Python, has syntactic sugar for iterators, 
+Many languages, including Java and Python, has syntactic sugar for iterators,
 so the same iteration can be written something like this:
 
     for each elem in L:
@@ -155,3 +100,9 @@ implementation, just the list ADT.
 There are two standard approaches to implementing lists, the
 [array-based list](#static-array-based-lists), and the
 [linked list](#linked-lists).
+
+### Alternative approaches
+
+::: TODO
+- alternative interface
+:::

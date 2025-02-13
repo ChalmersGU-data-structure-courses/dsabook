@@ -1,5 +1,5 @@
 
-## Example: Implementing Sets and Maps using Lists
+### Use case: Implementing sets and maps
 
 ::: TODO
 - first show how to implement a set
@@ -24,7 +24,7 @@ And in fact, the
 requires an underlying simpler map implementation -- and there a linked
 list works very fine!
 
-### Using a list of key-value pairs
+#### Using a list of key-value pairs
 
 A very simple way of implementing a **Map** using a list, is to use
 [key-value pairs](#key-value-pair){.term}.
@@ -122,7 +122,7 @@ iterators have a "remove-the-current" method, so it is possible
 to optimise removal a little bit. Implementing the `remove` method using
 the `delete` method of Java Iterators is left as an exercise to the reader.
 
-### Using linked key-value nodes
+#### Using linked key-value nodes
 
 An alternative to using an underlying list of key-value pairs, which is
 also very easy to implement, is to modify the implementation of linked

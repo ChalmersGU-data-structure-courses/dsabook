@@ -16,6 +16,8 @@ the invention of the computer. They called the stack a
 "Last-In, First-Out." Note that one implication of the LIFO policy is
 that stacks remove elements in reverse order of their arrival.
 
+### ADT for stacks
+
 The accessible element of the stack is called the `top` element.
 Elements are not said to be inserted, they are
 [pushed](#push){.term} onto the stack. When
@@ -31,7 +33,7 @@ two main approaches are the [array-based stack]{.term} and the
 [linked stack](#linked-list-stacks), which are analogous to array-based and linked lists,
 respectively.
 
-### Use case: Implementing recursion
+### Case study: Implementing recursion
 
 ::: alert
 WARNING! You should not read this section unless you are already
@@ -149,7 +151,7 @@ information for the subarray to be processed needs to be saved.
 Let us now turn to a non-recursive version of the Towers of Hanoi
 function, which cannot be done iteratively.
 
-### Example: Towers of Hanoi
+### Use case: Towers of Hanoi
 
 Here is a recursive implementation for Towers of Hanoi.
 
