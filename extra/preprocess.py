@@ -4,14 +4,14 @@ import sys
 from pathlib import Path
 
 
-def main(outdir: str, glossfile: str, *infiles: str):
+def main(outdir: Path, glossfile: Path, *infiles: Path):
     """Preprocess each of the infiles and write their result in the outdir folder"""
     load_global_glossary(glossfile)
     for inf in infiles:
         with open(inf) as f:
             contents = f.read()
         contents = preprocess(contents)
-        outf = Path(outdir) / Path(inf).name
+        outf = Path(outdir) / '--'.join(Path(inf).parts)
         with open(outf, "w") as f:
             print(contents, file=f)
 
@@ -29,7 +29,7 @@ def preprocess(contents: str) -> str:
 
 TheGlossary: list[list[str]]
 
-def load_global_glossary(glossfile: str):
+def load_global_glossary(glossfile: Path):
     global TheGlossary
     with open(glossfile) as f:
         contents = f.read()
@@ -48,12 +48,12 @@ def find_glossary_definition(term: str) -> str:
 
 
 ###############################################################################
-## Convert glossary references 
+## Convert glossary references
 
 def convert_terms(contents: str) -> str:
     """Convert glossary references: [xyz]{.term} --> [xyz](#xyz){.term}"""
     return re.sub(
-        r"\[([^][]+?)\]{\.term}", 
+        r"\[([^][]+?)\]{\.term}",
         lambda m: f"[{m[1]}](#{mkid(m[1])}){{.term}}",
         contents,
     )
@@ -68,12 +68,12 @@ def add_tooltips(contents: str) -> str:
 
 
 ###############################################################################
-## Convert glossary definitions 
+## Convert glossary definitions
 
 def convert_glossary(contents: str) -> str:
     """Convert a glossary: add <dfn id="xyz"> tags, sort the terms, etc."""
     pretext, glossary, posttext = read_glossary(contents)
-    if not glossary: 
+    if not glossary:
         return contents
     else:
         return pretext + print_glossary(glossary) + posttext
@@ -82,7 +82,7 @@ def convert_glossary(contents: str) -> str:
 def read_glossary(contents: str) -> tuple[str, list[list[str]], str]:
     """Read a glossary, return: ("text-before", [["term", "alias", "alias", ..., "body"], ...], "text-after")"""
     m = re.match(
-        r"\A(.*^::: *glossary *)$(.+?)^(::: *$.*)\Z", 
+        r"\A(.*^::: *glossary *)$(.+?)^(::: *$.*)\Z",
         contents,
         flags = re.DOTALL|re.MULTILINE,
     )
@@ -107,7 +107,7 @@ def read_glossary(contents: str) -> tuple[str, list[list[str]], str]:
 
 def print_glossary(glossary: list[list[str]]) -> str:
     """Print the glossary into a Markdown string: sorted and with #identifiers"""
-    def dfn(term: str) -> str: 
+    def dfn(term: str) -> str:
         return f"[{term}]{{.dfn #{mkid(term)}}}"
 
     glosslist: list[str] = []
@@ -151,5 +151,6 @@ def strip_markdown(text: str) -> str:
 ## Calling from the command-line
 
 if __name__ == '__main__':
-    main(*sys.argv[1:])
+    args = map(Path, sys.argv[1:])
+    main(*args)
 
