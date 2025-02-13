@@ -1,5 +1,5 @@
 
-## All ADTs Used in This Book
+## ADTs used in this book
 
 Here we list all abstract data types that we will introduce in this
 course book. Together they form an API (application programming
@@ -11,7 +11,7 @@ be explained in detail later on.
 **Important Java note**: There are many similarities, but also some
 differences, between the API below and the interfaces and classes in the
 "standard" Java API. For more details about the differences, please
-see the end of this section.
+see the end of this chapter.
 
 **Important Python note**: Python doesn't make use of abstract classes
 (interfaces) in the same way as Java does. Instead they use a concept
@@ -21,7 +21,7 @@ don't need a formal interface. However, in this course book we will still
 pretend that there are interfaces, even in Python.
 
 
-### Basic ADTs: Comparables and iterators
+### Comparables and iterators
 
 These include comparables:
 

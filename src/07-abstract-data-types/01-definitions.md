@@ -1,5 +1,5 @@
 
-## Terminlogiy and definitions
+## Terminology and definitions
 
 This section presents terminology and definitions related to techniques
 for managing the tremendous complexity of computer programs. It also

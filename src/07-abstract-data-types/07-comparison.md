@@ -1,4 +1,6 @@
 
+## Comparison with standard libraries
+
 ### The standard Java API
 
 The standard Java API can be found here (this is Java SE 11):
@@ -55,9 +57,5 @@ Graph:
 :   There is no interface (or class) for graphs in the standard Java API.
 
 
-<!-- TODO
-### Comparison with the Python standard library
--->
-
-
+### The Python standard library
 

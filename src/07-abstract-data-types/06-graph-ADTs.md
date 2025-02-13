@@ -1,5 +1,9 @@
 
-## ADTs for Graphs
+## ADTs for graphs
+
+### Use case(s)
+
+### Graphs, edges and vertices
 
 Finally, graphs:
 
@@ -16,3 +20,11 @@ Finally, graphs:
         end      // end vertex
         weight   // weight, defaults to 1.0
 
+### Alternative approaches
+
+::: TODO
+- e.g., vertices are integers starting from 0?
+- not allowing the graph to change?
+- making it possible to delete vertices/edges?
+- undirected graphs
+:::

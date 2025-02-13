@@ -1,7 +1,9 @@
 
-## ADTs for Ordered Sequences
+## ADTs for ordered sequences
 
-General lists:
+### Use case(s)
+
+### General lists
 
     interface List extends Collection:
         add(i, x)  // Adds x at position i; where 0 ≤ i ≤ size.
@@ -9,21 +11,21 @@ General lists:
         set(i, x)  // Replaces the value at position i with x; where 0 ≤ i < size.
         remove(i)  // Removes the element at position i; where 0 ≤ i < size.
 
-Stacks:
+### Stacks
 
     interface Stack extends Collection:
         push(x)    // Pushes x on top of the stack.
         pop()      // Pops the top of the stack and returns it.
         peek()     // Returns the top element, without removing it.
 
-Queues:
+### Queues
 
     interface Queue extends Collection:
         enqueue(x)  // Enqueues x at the end of the queue.
         dequeue()   // Dequeues the frontmost element.
         peek()      // Returns the frontmost element, without removing it.
 
-Priority queues:
+### Priority queues
 
     interface PriorityQueue extends Collection:
         add(x)       // Adds x to the priority queue.

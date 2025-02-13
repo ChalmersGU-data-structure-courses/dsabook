@@ -1,5 +1,5 @@
 
-## Chapter Summary
+## Chapter summary
 
 ::: TODO
 - nice image showing all ADTs (and DSs)
@@ -7,7 +7,7 @@
 :::
 
 
-### Quiz: Data Types Concept Map
+### Quiz: Data types concept map
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 
@@ -133,7 +133,7 @@ An abstract data type logically defines a(n)...
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-### ADTs: Summary Questions
+### Quiz: Summary questions
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 
