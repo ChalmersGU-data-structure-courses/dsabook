@@ -135,3 +135,7 @@ efficient algorithm possible on an unsorted array.
 - use a hash function -> see the hashing chapter
 :::
 
+
+### Binary Search Practice Exercise
+
+<avembed id="binarySearchPRO" src="Searching/binarySearchPRO.html" type="pe" name="Binary Search Proficiency Exercise"/>
