@@ -1,5 +1,5 @@
 
-### Binary Tree Guided Information Flow
+### Guided information flow
 
 When writing a recursive method to solve a problem that requires
 traversing a binary tree, we want to make sure that we are visiting the

@@ -1,5 +1,5 @@
 
-## The AVL Tree
+## AVL trees
 
 The AVL tree is a BST with the following additional property: For every
 node, the heights of its left and right subtrees differ by at most 1. As
@@ -22,8 +22,8 @@ level higher. [Figure #SingleRotation](#SingleRotation)
 illustrates rotation. Here, $P$ and $S$ are nodes, while $A$, $B$ and
 $C$ represent subtrees.
 
-In Figure (a), node $S$ is the left child of the root. A *right rotation* 
-transforms it into the tree shown in Figure (b), 
+In Figure (a), node $S$ is the left child of the root. A *right rotation*
+transforms it into the tree shown in Figure (b),
 where node $S$ has become the root. Note that, because the value of
 $S$ is less than the value of $P$, $P$ must become $S$'s right child.
 Right rotation means transforming a tree from having the shape in (a) to
@@ -86,8 +86,8 @@ node.
 Our problem now is how to balance the tree in $O(\log n)$ time. It turns
 out that we can do this using a series of rotations. Cases 1 and 4 can
 be fixed using a [single rotation]{.term}, as
-shown in [Figure #AVLsingle](#AVLsingle). 
-Cases 2 and 3 can be fixed using a [double rotation]{.term}, 
+shown in [Figure #AVLsingle](#AVLsingle).
+Cases 2 and 3 can be fixed using a [double rotation]{.term},
 as shown in [Figure #AVLdouble](#AVLdouble).
 
 ::: figure
@@ -170,7 +170,7 @@ Here is an implementation of AVL trees:
                 return node.value
 
         put(key, value):
-            // Add a key-value pair, or update the value associated with an existing key. 
+            // Add a key-value pair, or update the value associated with an existing key.
             // This is the same as BSTMap.put, except that it rebalances the node afterwards.
             this.root = this.putHelper(this.root, key, value)
 
@@ -245,7 +245,7 @@ Here is an implementation of AVL trees:
             return node
 
         rebalance(node):
-            if node is null: 
+            if node is null:
                 return null
             diff = this.heightDiff(node)
             if diff > 1:  // Left-leaning
@@ -265,10 +265,10 @@ Here is an implementation of AVL trees:
 
         rotateLeft(x):
             // Left rotation.
-            ("""      x                 y    
-                     / \               / \   
-                    A   y     ===>    x   C  
-                       / \           / \     
+            ("""      x                 y
+                     / \               / \
+                    A   y     ===>    x   C
+                       / \           / \
                       B   C         A   B         """)
             // Variables are named according to the picture above.
             y = x.right

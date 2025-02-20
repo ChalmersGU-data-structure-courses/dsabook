@@ -9,7 +9,7 @@
 
 ### TST (Ternary search trees)
 
-### Trees versus Tries
+### Trees versus tries
 
 ::: TODO
 - This should be some place else?

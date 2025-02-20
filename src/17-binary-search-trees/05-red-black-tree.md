@@ -1,5 +1,5 @@
 
-## The Red-Black Tree
+## Red-black trees
 
 
 <!--

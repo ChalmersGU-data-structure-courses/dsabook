@@ -1,5 +1,5 @@
 
-## The Splay Tree
+## Splay trees
 
 Like the AVL tree, the splay tree is not actually a distinct data
 structure, but rather reimplements the BST insert, delete, and search
@@ -24,7 +24,7 @@ efficiency goal.
 
 The splay tree access functions operate in a manner reminiscent of the
 [move-to-front]{.term} rule for
-[self-organizing lists](#self-organizing-list){.term}, 
+[self-organizing lists](#self-organizing-list){.term},
 and of the path compression technique for managing a series
 of [Union/Find]{.term}
 operations. These access functions tend to make the tree more balanced,
@@ -46,7 +46,7 @@ $S$ is a child of the root node. The single rotation is illustrated by
 [Figure #SingProm](#SingProm). It basically
 switches $S$ with its parent in a way that retains the BST property.
 While this figure is
-slightly different from [Figure #AVLsingle](#AVLsingle), 
+slightly different from [Figure #AVLsingle](#AVLsingle),
 in fact the splay tree single rotation is identical to the
 AVL tree single rotation.
 
@@ -81,7 +81,7 @@ when either of the following two conditions are met:
 (2) $S$ is the right child of $P$, and $P$ is the left child of $G$.
 
 In other words, a zigzag rotation is used when $G$, $P$, and $S$ form a
-zigzag. The zigzag rotation is illustrated by 
+zigzag. The zigzag rotation is illustrated by
 [Figure #ZigZag](#ZigZag).
 
 ::: figure
@@ -139,14 +139,14 @@ the scope of our study.
 ::: topic
 #### Example: Searching in a splay tree {-}
 
-Consider a search for value 89 in the splay tree of 
+Consider a search for value 89 in the splay tree of
 [Figure #SplayEx](#SplayEx) (a). The splay tree's
 search operation is identical to searching in a BST. However, once the
 value has been found, it is splayed to the root. Three rotations are
 required in this example. The first is a zigzig rotation, whose result
 is shown in figure (b).
-The second is a zigzag rotation, whose result is shown in figure (c). 
-The final step is a single rotation resulting in the tree of Figure (d). 
+The second is a zigzag rotation, whose result is shown in figure (c).
+The final step is a single rotation resulting in the tree of Figure (d).
 Notice that the splaying process has made the tree shallower.
 :::
 

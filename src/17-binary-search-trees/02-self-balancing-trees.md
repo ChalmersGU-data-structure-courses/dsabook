@@ -58,4 +58,6 @@ mechanism.
 
 ::: TODO
 - overall idea of rotating in a tree
+- left, right, left-left, left-right, etc
+- steal from the AVL section
 :::

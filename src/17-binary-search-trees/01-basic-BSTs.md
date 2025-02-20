@@ -1,5 +1,5 @@
 
-## Basic Binary Search Trees
+## Basic BSTs
 
 A [binary search tree]{.term}
 ([BST]{.term}) is a
@@ -42,7 +42,11 @@ Here is a class declaration for the BST Map:
             this.right = null   // the right subtree, initially null
 
 
-### Searching
+### Searching in a BST
+
+::: TODO
+- both iterative and recursive versions
+:::
 
 The first operation that we will look at in detail will find the record
 that matches a given key. Notice that in the BST class, public member
@@ -74,7 +78,11 @@ implemented as follows.
 
 <avembed id="BSTsearchPRO" src="Binary/BSTsearchPRO.html" type="pe" name="BST Search Proficiency Exercise"/>
 
-### Inserting
+### Inserting into a BST
+
+::: TODO
+- both iterative and recursive versions
+:::
 
 Now we look at how to insert a new node into the BST.
 
@@ -126,7 +134,11 @@ average cost of a BST operation low.
 
 <avembed id="BSTinsertPRO" src="Binary/BSTinsertPRO.html" type="pe" name="BST Insert Proficiency Exercise"/>
 
-### Removing
+### Removing from a BST
+
+::: TODO
+- both iterative and recursive versions
+:::
 
 Removing a node from a BST is a bit trickier than inserting a node, but
 it is not complicated if all of the possible cases are considered

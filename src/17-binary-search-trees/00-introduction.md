@@ -1,5 +1,5 @@
 
-# Binary Search Trees
+# Binary search trees
 
 <!-- TODO
 * Update text and code for AVL, red-black, splay and skiplist
