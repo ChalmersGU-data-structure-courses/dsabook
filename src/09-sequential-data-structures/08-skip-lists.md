@@ -186,3 +186,7 @@ tension between the theoretical worst case (in this case, $\Theta(n)$
 for a skip list operation), and a rapidly increasing probability of
 average-case performance of $\Theta(\log n)$, that characterizes
 probabilistic data structures.
+
+### Invariants
+
+

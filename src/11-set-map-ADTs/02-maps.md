@@ -3,3 +3,7 @@
 
 ### ADT for maps
 
+
+### Invariants
+
+

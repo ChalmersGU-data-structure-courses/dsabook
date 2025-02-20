@@ -33,6 +33,10 @@ two main approaches are the [array-based stack]{.term} and the
 [linked stack](#linked-list-stacks), which are analogous to array-based and linked lists,
 respectively.
 
+
+### Invariants
+
+
 ### Case study: Implementing recursion
 
 ::: alert

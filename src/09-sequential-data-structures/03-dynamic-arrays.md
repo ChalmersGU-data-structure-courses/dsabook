@@ -9,6 +9,10 @@ The problem with a static array-based list is that it has a limited
 capacity. If we try to add new elements when the internal array is full,
 the method will throw an exception.
 
+
+### Invariants
+
+
 ### Resizing the internal array
 
 How can we modify our class to allow for any number of elements? One

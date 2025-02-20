@@ -13,5 +13,9 @@
         peekLast()
 
 
+
+### Invariants
+
+
 ### Use case(s)
 

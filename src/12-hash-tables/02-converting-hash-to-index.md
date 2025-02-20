@@ -75,3 +75,7 @@ codes are not calculated more than once.
 In Java, the optimisation is delegated to the object classes themselves.
 E.g., a Java string only calculates its hash code once and then stores
 it in an instance variable for immediate lookup.
+
+### Invariants
+
+

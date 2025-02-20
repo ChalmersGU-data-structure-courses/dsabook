@@ -18,6 +18,10 @@ queue, to be able to add new elements efficiently.
             this.queueSize = 0  // Size of queue
 
 
+
+#### Invariants
+
+
 #### Enqueueing elements
 
 <inlineav id="LinkedQueue-Enqueue-CON" src="ChalmersGU/LinkedQueue-Enqueue-CON.js" name="Linked Queue Enqueue" links="ChalmersGU/CGU-Styles.css"/>

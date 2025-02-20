@@ -47,6 +47,10 @@ the list.
             this.next = next   // Pointer to next node in list
 
 
+
+### Invariants
+
+
 ### Getting and setting values
 
 If we want to get or set the value at a certain index, we simply iterate

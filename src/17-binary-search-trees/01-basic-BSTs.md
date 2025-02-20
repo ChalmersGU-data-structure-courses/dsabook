@@ -42,6 +42,10 @@ Here is a class declaration for the BST Map:
             this.right = null   // the right subtree, initially null
 
 
+### Invariants
+
+
+
 ### Searching in a BST
 
 ::: TODO

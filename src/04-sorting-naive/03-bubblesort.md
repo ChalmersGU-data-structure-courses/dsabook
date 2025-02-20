@@ -53,7 +53,11 @@ Now try for yourself to see if you understand how Bubble Sort works.
 
 <avembed id="BubsortPRO" src="Sorting/BubsortPRO.html" type="ka" name="Bubble Sort Proficiency Exercise"/>
 
-### Bubble Sort Analysis
+
+### Invariants
+
+
+### Bubble sort analysis
 
 The following visualization illustrates the running time analysis of
 Bubble Sort.

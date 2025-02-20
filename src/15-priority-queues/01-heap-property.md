@@ -7,7 +7,7 @@
 - show insert, removeMin
 :::
 
-### The heap property
+### Invariants: The heap property
 
 ### Inserting elements
 

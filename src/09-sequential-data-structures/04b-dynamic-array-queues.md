@@ -67,6 +67,10 @@ increments the front pointer.
 
 Implemening the member functions is mostly straightforward.
 
+
+#### Invariants
+
+
 #### Enqueueing an element
 
 When enqueueing, we increase the `rear` pointer (modulo the size of the

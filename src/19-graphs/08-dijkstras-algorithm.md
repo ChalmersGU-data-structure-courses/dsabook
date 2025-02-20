@@ -168,3 +168,7 @@ $\Theta(|\mathbf{V}|^2 \log |\mathbf{E}|) = \Theta(|\mathbf{V}|^2 \log |\mathbf{
 Now you can practice using Dijkstra's algorithm.
 
 <avembed id="DijkstraPE" src="Graph/DijkstraPE.html" type="pe" name="Dijkstra's Algorithm Proficiency Exercise"/>
+
+### Invariants
+
+

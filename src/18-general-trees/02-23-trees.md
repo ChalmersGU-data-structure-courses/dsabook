@@ -5,6 +5,10 @@
 - always completely balanced
 :::
 
+
+### Invariants
+
+
 ### Searching
 
 ### Inserting

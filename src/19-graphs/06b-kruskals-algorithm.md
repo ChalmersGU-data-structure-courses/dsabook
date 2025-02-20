@@ -63,3 +63,7 @@ $\Theta(|\mathbf{V}| \log |\mathbf{E}|)$ in the average case (provided
 we use a priority queue instead of sorting all edges in advance).
 
 <avembed id="KruskalPE" src="Graph/KruskalPE.html" type="pe" name="Kruskal's Algorithm Proficiency Exercise"/>
+
+### Invariants
+
+

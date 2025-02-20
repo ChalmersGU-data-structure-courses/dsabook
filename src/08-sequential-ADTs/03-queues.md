@@ -26,5 +26,9 @@ linked queue.
         dequeue()   // Dequeues the frontmost element.
         peek()      // Returns the frontmost element, without removing it.
 
+
+### Invariants
+
+
 ### Use case(s)
 

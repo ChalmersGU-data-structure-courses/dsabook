@@ -64,6 +64,10 @@ MCST when Vertex *e* is processed.
 
 <inlineav id="primCON" src="Graph/primCON.js" name="Prim's Minimum Cost Spanning Tree Algorithm Slideshow" links="Graph/primCON.css"/>
 
+
+### Invariants
+
+
 #### Prim's algorithm – priority queue implementation
 
 ::: TODO

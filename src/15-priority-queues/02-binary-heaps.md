@@ -186,6 +186,11 @@ $\Theta(n \log n)$ time in the worst case.
 
 <avembed id="heapinsertPRO" src="Binary/heapinsertPRO.html" type="pe" name="Heap Insert Proficiency Exercise"/>
 
+
+### Invariants
+
+
+
 ### Building a heap
 
 If all $n$ values are available at the beginning of the building

@@ -59,6 +59,10 @@ list. In fact, Java's standard
 [LinkedList](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/LinkedList.html)
 is implemented as a doubly linked list.
 
+
+#### Invariants
+
+
 #### Implementation of the list methods
 
 Getting and setting are exactly the same as for normal linked lists, so

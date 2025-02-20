@@ -25,6 +25,10 @@ Stack nodes are exactly the same as the
             this.next = next   // Pointer to next node in stack
 
 
+
+#### Invariants
+
+
 #### Push to a linked stack
 
 <inlineav id="LinkedStack-Push-CON" src="ChalmersGU/LinkedStack-Push-CON.js" name="Linked Stack Push" links="ChalmersGU/CGU-Styles.css"/>

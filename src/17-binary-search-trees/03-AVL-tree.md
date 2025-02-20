@@ -15,6 +15,10 @@ practical, we must be able to implement the revised update routines in
 $\Theta(\log n)$ time. To maintain the balance property, we are going to
 use what are called [rotations](#rotation){.term}.
 
+
+### Invariants
+
+
 ### Rotations
 
 Rotation is an operation that takes a node in the tree and moves it one

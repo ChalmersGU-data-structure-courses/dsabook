@@ -104,6 +104,10 @@ position, rather than a slot in the hash table. Thus, the `for` loop in
 adding the value returned from the probe function to the home position.
 The $i$ th call to **p** returns the $i$ th offset to be used.
 
+### Invariants
+
+
+
 ### Implementing methods of the hash map
 
 All main methods in the Map interface (`put`, `get` and `remove`) use

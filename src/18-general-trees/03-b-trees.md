@@ -5,6 +5,10 @@
 - use cases
 :::
 
+
+### Invariants
+
+
 ### Searching
 
 ### Inserting

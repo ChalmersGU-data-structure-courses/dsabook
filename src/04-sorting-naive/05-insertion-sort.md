@@ -51,7 +51,11 @@ smaller keys.
 
 <avembed id="InssortPRO" src="Sorting/InssortPRO.html" type="ka" name="Insertion Sort Proficiency Exercise"/>
 
-### Insertion Sort Analysis
+
+### Invariants
+
+
+### Insertion sort analysis
 
 Here is an explanation of the worst case cost of insertion sort:
 

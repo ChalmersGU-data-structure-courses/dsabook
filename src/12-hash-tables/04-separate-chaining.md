@@ -65,6 +65,10 @@ greatly reduce the number of records accessed by a search operation. In
 a similar fashion, a simple Binsort reduces the number of records in
 each bin to a small number that can be sorted in some other way.
 
+### Invariants
+
+
+
 ### Alternatives to a linked list
 
 There is nothing that requires us to use a linked list as the underlying

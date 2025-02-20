@@ -76,6 +76,10 @@ selection strategy.
 
 <avembed id="QuicksortPivotPRO" src="Sorting/QuicksortPivotPRO.html" type="ka" name="Quicksort Pivot Proficiency Exercise"/>
 
+
+### Invariants
+
+
 ### Partition
 
 We now turn to function `partition`. If we knew in advance how many keys

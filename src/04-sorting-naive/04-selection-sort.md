@@ -56,7 +56,11 @@ Now try for yourself to see if you understand how Selection Sort works.
 
 <avembed id="SelsortPRO" src="Sorting/SelsortPRO.html" type="ka" name="Selection Sort Proficiency Exercise"/>
 
-### Selection Sort Analysis
+
+### Invariants
+
+
+### Selection sort analysis
 
 Any algorithm can be written in slightly different ways. For example, we
 could have written Selection Sort to find the smallest record, the next

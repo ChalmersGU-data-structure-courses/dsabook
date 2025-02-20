@@ -61,3 +61,7 @@
         removeMin()  // Removes and returns the minimum element.
         getMin()     // Returns the minimum element, without removing it.
 
+
+### Invariants
+
+
