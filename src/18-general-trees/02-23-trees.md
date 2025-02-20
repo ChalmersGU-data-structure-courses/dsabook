@@ -5,6 +5,12 @@
 - always completely balanced
 :::
 
+### Searching
+
+### Inserting
+
+### Deleting
+
 ### 2-3-4 trees
 
 ### Red-black trees and 2-3 / 2-3-4 trees

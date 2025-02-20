@@ -1,5 +1,5 @@
 
-## Rose trees (general trees)
+## General trees, or rose trees
 
 ::: TODO
 - how to implement
@@ -7,7 +7,7 @@
 - [5.12 Sequential Tree Representations]
 :::
 
-### Sequential Tree Representations
+### Sequential tree representations
 
 ::: TODO
 - move first part to chapter intro?
@@ -69,7 +69,7 @@ Sample binary tree for sequential tree implementation examples.
 
 <avembed id="SequentialTreePRO" src="General/SequentialTreePRO.html" type="ka" name="First Sequential Representation Exercise"/>
 
-### Alternative Sequential Representation
+### Alternative sequential representation
 
 To illustrate the difficulty involved in using the sequential tree
 representation for processing, consider searching for the right child of
@@ -117,7 +117,7 @@ bit.
 
 <avembed id="SequentialTreeAltPRO" src="General/SequentialTreeAltPRO.html" type="ka" name="Alternate Sequential Representation Exercise"/>
 
-### Bit Vector Representation
+### Bit vector representation
 
 Another approach is to store a separate bit vector to represent the
 status of each node. In this case, each node of the tree corresponds to
@@ -128,7 +128,7 @@ node, and "0" could indicate a leaf node.
 
 <avembed id="SequentialTreeBitVectorPRO" src="General/SequentialTreeBitVectorPRO.html" type="ka" name="Bit Vector Sequential Representation Exercise"/>
 
-### General Tree Sequential Representation
+### Serialising general trees
 
 Storing general trees by means of a sequential implementation requires
 that more explicit structural information be included with the node

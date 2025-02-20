@@ -1,5 +1,5 @@
 
-## General Tree Definitions and Terminology
+## Definitions and terminology
 
 A [tree]{.term} $\mathbf{T}$ is a finite set of
 one or more nodes such that there is one designated node $R$, called the
@@ -33,7 +33,7 @@ has no parent. From this observation, it immediately follows that a tree
 with $n$ nodes must have $n-1$ edges because each node, aside from the
 root, has one edge connecting that node to its parent.
 
-### An ADT for General Tree Nodes
+### ADT for General trees
 
 Before discussing general tree implementations, we should first make
 precise what operations such implementations must support. Any
@@ -67,7 +67,7 @@ that it follows the **List** ADT, as described in the section about
             this.children = children  // This is a List of GTNodes
 
 
-### General Tree Traversals
+### Traversing a general tree
 
 There are three traditional
 [tree traversals](#binary-tree-traversals) for [binary trees](#binary-tree){.term}:

@@ -5,4 +5,10 @@
 - use cases
 :::
 
+### Searching
+
+### Inserting
+
+### Deleting
+
 ### B+ trees

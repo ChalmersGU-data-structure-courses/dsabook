@@ -1,5 +1,5 @@
 
-## Use case: The Union/Find Algorithm
+## Use case: The union/find algorithm
 
 [General trees](#general-tree){.term} are trees
 whose [internal nodes](#internal-node){.term}
@@ -30,7 +30,7 @@ are different, then the two nodes are not in the same tree. The process
 of finding the ultimate root for a given node we will call
 [FIND]{.term}.
 
-### Parent Pointer Trees
+### Parent pointer trees
 
 The parent pointer representation is most often used to maintain a
 collection of [disjoint sets]{.term}. Two
@@ -109,7 +109,7 @@ trees stored in the same parent pointer array, one rooted at $F$ (with a
 total of 9 nodes), and the other rooted at $J$ (with a total of 1 node).
 ::::
 
-### Equivalence Classes
+### Equivalence classes
 
 Consider the problem of assigning the members of a set to disjoint
 subsets called
@@ -184,7 +184,7 @@ Achieving this goal all the time would require too much additional
 processing to be worth the effort, so we must settle for getting as
 close as possible.
 
-### Weighted Union
+### Weighted union
 
 A low-cost approach to reducing the height is to be smart about how two
 trees are joined together. One simple technique, called the
@@ -222,7 +222,7 @@ weighted union.
 
 <inlineav id="UFCON" src="General/UFCON.js" name="Union/Find Example" links="General/UFCON.css"/>
 
-### Path Compression
+### Path compression
 
 The weighted union rule helps to minimize the depth of the tree, but we
 can do better than this.

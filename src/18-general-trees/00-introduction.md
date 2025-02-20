@@ -1,5 +1,5 @@
 
-# General Trees
+# General trees
 
 ::: TODO
 - [5.10 General Trees]
