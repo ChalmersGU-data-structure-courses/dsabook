@@ -1,5 +1,5 @@
 
-### Implementing Mergesort
+### Implementing mergesort
 
 Implementing Mergesort presents a number of technical difficulties. The
 first decision is how to represent the lists. Mergesort lends itself

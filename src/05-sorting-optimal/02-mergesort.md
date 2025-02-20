@@ -59,7 +59,7 @@ Here is a Mergesort warmup exercise to practice merging.
 
 <avembed id="MergesortMergePRO" src="Sorting/MergesortMergePRO.html" type="ka" name="Mergesort Merging Proficiency Exercise"/>
 
-### Mergesort Practice Exercise
+### Mergesort practice exercise
 
 Now here is a full proficiency exercise to put it all together.
 

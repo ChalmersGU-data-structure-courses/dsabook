@@ -1,5 +1,5 @@
 
-## Divide and Conquer
+## Divide and conquer
 
 ::: TODO
 - Mergesort and quicksort

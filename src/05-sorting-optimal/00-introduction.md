@@ -1,3 +1,3 @@
 
-# Sorting, part 2: Optimal Algorithms
+# Sorting, part 2: Optimal algorithms
 

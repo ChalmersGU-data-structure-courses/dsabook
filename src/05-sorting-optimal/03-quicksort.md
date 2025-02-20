@@ -87,7 +87,7 @@ indices inwards from the ends of the subarray, swapping values as
 necessary until the two indices meet.
 
 (If you read Wikipedia's article about quicksort, you will notice that there
-are two main partition algorithms. 
+are two main partition algorithms.
 The algorithm we describe here is called the *Hoare partition scheme* on Wikipedia,
 the other variant being the *Lomuto partition scheme*.)
 
@@ -104,7 +104,7 @@ will partition.
         pivotValue = A[pivot]
         while True:
             // Move `left` right as far as possible. Stop if equal to pivot!
-            // Also stop if `left` moves past `right`: this is important, 
+            // Also stop if `left` moves past `right`: this is important,
             // so that `left` stops if it moves past the end of the array.
             while left <= right and A[left] < pivotValue:
                 left = left + 1
@@ -152,7 +152,7 @@ the partition function
 
 <inlineav id="QuickSortPartitionAnalysisCON" src="Sorting/QuickSortPartitionAnalysisCON.js" name="Quicksort Partition Analysis Slideshow" links="Sorting/QuickSortPartitionAnalysisCON.css"/>
 
-### Putting It Together
+### Putting it together
 
 Here is a visualization for the entire Quicksort algorithm. This
 visualization shows you how the logical decomposition caused by the
@@ -168,7 +168,7 @@ Quicksort.
 
 <avembed id="quicksortPRO" src="Sorting/quicksortPRO.html" type="pe" name="Quicksort Proficiency Exercise"/>
 
-### Quicksort Analysis
+### Quicksort analysis
 
 This visualization explains the worst-case running time of Quicksort
 

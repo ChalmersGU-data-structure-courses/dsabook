@@ -1,5 +1,5 @@
 
-## An Empirical Comparison of Sorting Algorithms
+## Empirical comparison of sorting algorithms
 
 Which sorting algorithm is fastest? Asymptotic complexity analysis lets
 us distinguish between $\Theta(n^2)$ and $\Theta(n \log n)$ algorithms,
@@ -11,8 +11,8 @@ questions, we can turn to empirical testing.
 ::: topic
 #### Table: Empirical comparison {- #SortCompTable}
 
-Empirical comparison of sorting algorithms run on an 
-Apple MacBook M3 Pro (2023 model). 
+Empirical comparison of sorting algorithms run on an
+Apple MacBook M3 Pro (2023 model).
 All times shown are seconds.
 
 The first table shows Python implementations, using CPython version 3.11:
@@ -27,7 +27,7 @@ The first table shows Python implementations, using CPython version 3.11:
 | Quicksort         |  0.000 |  0.006 |  0.074 |   0.95 |   12.6 |       0.045 |         0.047 |
 | Quick (cutoff 20) |  0.000 |  0.005 |  0.066 |   0.87 |   11.8 |       0.030 |         0.032 |
 
-The second table shows Java implementations, using OpenJDK version 22.0 
+The second table shows Java implementations, using OpenJDK version 22.0
 (note that the arrays are 4 times larger than for the Python tests):
 
 | Sort              |     4K |    40K |   400K |     4M |    40M | 400K sorted | 400K reversed |
@@ -48,7 +48,7 @@ in this chapter. The algorithms compared include
 [Insertion Sort], [Bubble Sort],
 [Selection Sort], [Quicksort], and [Mergesort].
 
-For Quicksort and Mergesort, two versions are compared: the basic implementation, 
+For Quicksort and Mergesort, two versions are compared: the basic implementation,
 and an optimized version that falls back to insertion sort for sublists of
 length below 20.
 
