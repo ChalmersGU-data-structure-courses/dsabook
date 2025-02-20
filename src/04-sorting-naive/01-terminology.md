@@ -1,5 +1,5 @@
 
-## Terminology and Notation
+## Terminology and notation
 
 ::: TODO
 - In-place

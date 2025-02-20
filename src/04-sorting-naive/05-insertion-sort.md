@@ -1,5 +1,5 @@
 
-## Insertion Sort
+## Insertion sort
 
 What would you do if you have a stack of phone bills from the past two
 years and you want to order by date? A fairly natural way to handle this

@@ -1,5 +1,5 @@
 
-## Optimizing Sort Algorithms with Code Tuning
+## Optimizing sort algorithms with code tuning
 
 Since sorting is such an important application, it is natural for
 programmers to want to optimize their sorting code to run faster. Of
@@ -14,7 +14,7 @@ give better performance. It is also interesting to see the relative
 performance of the three algorithms, as well as how various programming
 languages compare.
 
-### Insertion Sort
+### Insertion sort
 
 We start by trying to speed up Insertion Sort. Recall that Insertion
 Sort repeatedly moves an element toward the beginning of the sorted part
@@ -51,7 +51,7 @@ Now, you can test whether you understand how this works.
 
 Empirical comparison of proposed optimizations to quadratic sort
 implementations. Each sorting algorithm is run on a random integer array
-with 20,000 items. Times are in seconds. 
+with 20,000 items. Times are in seconds.
 
 | Sort               |  Java  | Python |
 |:-------------------|:------:|:------:|
@@ -68,23 +68,23 @@ with 20,000 items. Times are in seconds.
 :::
 
 [The table above](#OptimizeTable) shows the relative
-costs for a number of optimizations in two programming languages: 
+costs for a number of optimizations in two programming languages:
 Java (version 22.0), Python (version 3.11).
 
 The programming language that you use can have a big influence on the
 runtime for a program. Perhaps the greatest distinction is whether your
-language is compiled or not. 
-Java is normally compiled, while Python is normally interpreted. 
+language is compiled or not.
+Java is normally compiled, while Python is normally interpreted.
 This can make a huge difference in whether a given code change will actually
 speed the program up or not. In the case of the "shift" vs "swap"
-choice, shifting always turns out to be a big improvement. 
-This is more true for the interpreted language Python than for Java, 
-but still an improvement either way. 
+choice, shifting always turns out to be a big improvement.
+This is more true for the interpreted language Python than for Java,
+but still an improvement either way.
 But the biggest effect that we see is that Java is around
 around 20--30 times faster than Python.
 
 
-### Bubble Sort
+### Bubble sort
 
 Turning to Bubble Sort, the first thing we should notice from this table
 is that it is far slower on random input than Insertion Sort. Let's
@@ -143,7 +143,7 @@ out-of-order records. In fact, if we took a sorted list and moved the
 smallest value to the end, then there would be no benefit from swap
 checking whatsoever.
 
-### Selection Sort
+### Selection sort
 
 Finally, let's consider Selection Sort. The table shows foremost that
 Selection Sort can be viewed as a far better optimization to Bubble Sort

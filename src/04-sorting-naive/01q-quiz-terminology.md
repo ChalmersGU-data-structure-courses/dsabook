@@ -1,5 +1,5 @@
 
-### Review questions: Sorting Introduction
+### Review questions: Terminology
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 
@@ -57,7 +57,7 @@ Which of these is a traditional measure for the cost of a sorting algorithm?
 
 
 :::::::::: question ::::::::::
-In which case might the number of comparisons *not* be 
+In which case might the number of comparisons *not* be
 a good representation of the cost for a sorting algorithm?
 
 - [x] When we are comparing strings of widely varying length
@@ -87,7 +87,7 @@ thant its growth rate. When the problem is sorting, this can happen in which sit
 
 ::: hints
 - CPU speed would affect all comparisons in the same way.
-- Records being sorted or reverse sorted affects the growth rate of different algorithms differently. 
+- Records being sorted or reverse sorted affects the growth rate of different algorithms differently.
 But not relevant to this question.
 - When we sort only a few records, constants matter a lot.
 :::

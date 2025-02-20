@@ -1,5 +1,5 @@
 
-## Selection Sort
+## Selection sort
 
 ::: TODO
 This version selects the largest element and puts it in the end,

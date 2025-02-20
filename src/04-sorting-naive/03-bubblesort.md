@@ -1,7 +1,7 @@
 
-## Bubble Sort
+## Bubble sort
 
-Our next sorting algorithm is called [Bubble Sort]{.term}. 
+Our next sorting algorithm is called [Bubble Sort]{.term}.
 Bubble Sort is often taught to novice programmers in
 introductory computer science courses. This is unfortunate, because
 Bubble Sort has no redeeming features whatsoever. It is rather slow,
@@ -9,7 +9,7 @@ even compared to the other $\Theta(n^2)$ sorts that are commonly known.
 It is not particularly intutitive -- nobody is going to come naturally
 to Bubble Sort as a way to sort their Bridge hand or their pile of bills
 like they might with
-[Insertion Sort] or [Selection Sort]. 
+[Insertion Sort] or [Selection Sort].
 However, Bubble Sort can viewed as a close relative of Selection Sort.
 
 Like Insertion Sort, Bubble Sort consists of a simple double `for` loop.
