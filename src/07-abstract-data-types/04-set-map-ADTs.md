@@ -1,6 +1,10 @@
 
 ## ADTs for sets and maps
 
+::: TODO
+- Implementations: arrays, hash tables
+:::
+
 ### Use case: Information retrieval
 
 Many programming tasks involve *finding the right piece of information*

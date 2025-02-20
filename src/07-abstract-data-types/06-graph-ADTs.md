@@ -1,6 +1,13 @@
 
 ## ADTs for graphs
 
+::: TODO
+- examples, use cases
+- Terminology: vertices/nodes, edges, directed/undirected, weighted/unweighted (negative weights)
+- quickly: MST, shortest path, topological order
+- Implementations: adjacency list, adjacency matrix
+:::
+
 ### Use case(s)
 
 ### Graphs, edges and vertices
