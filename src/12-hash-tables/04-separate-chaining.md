@@ -1,14 +1,19 @@
 
-## Separate Chaining, or Open Hashing {#separate-chaining}
+## Separate chaining
+
+::: TODO
+- Discuss: Load factor, what is a good LF?
+- Discuss: When to resize
+:::
 
 While the goal of a hash function is to minimize collisions, some
 collisions are unavoidable in practice. Thus, hashing implementations
 must include some form of collision resolution policy. Collision
 resolution techniques can be broken into two classes:
 [separate chaining]{.term} (also called open hashing) and
-[open addressing]{.term} (also called closed hashing). 
-(Yes, it is confusing when "open hashing" means the opposite 
-of "open addressing", but unfortunately, that is the way it is.) 
+[open addressing]{.term} (also called closed hashing).
+(Yes, it is confusing when "open hashing" means the opposite
+of "open addressing", but unfortunately, that is the way it is.)
 The difference between the two has to do with whether collisions
 are stored outside the table (separate chaining/open hashing), or
 whether collisions result in storing one of the records at another slot
@@ -85,14 +90,14 @@ a good hash function, the number of elements in a bin will remain
 approximately constant. And then all operations will be expected
 constant time.
 
-### Implementing Separate Chaining
+### Implementing separate chaining
 
 Here we will show the implementation of a **hash map**. Implementing a
 hash set is very similar, and even simpler.
 
 A separate chaining hash map consists of an internal array `bins` of key-value
 maps. We don't have to specify what kind of maps just yet, but we will
-use a simple [linked list map](#implementing-maps-using-lists) 
+use a simple [linked list map](#implementing-maps-using-lists)
 because the idea is that each bin will only contain a couple
 of entries. We also have to remember the collected size of the map,
 otherwise we would have to calculate a sum every time `size()` or
@@ -198,7 +203,7 @@ insert them again into the new resized table.
     class SeparateChainingHashMap implements Map:
         ...
         def resizeTable(newCapacity):
-            if newCapacity >= this.minCapacity: 
+            if newCapacity >= this.minCapacity:
                 oldBins = this.bins
                 this.initialiseTable(newCapacity)
                 for each bin in oldBins:

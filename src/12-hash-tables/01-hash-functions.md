@@ -1,5 +1,12 @@
 
-## Hash Function Principles
+## Hash functions
+
+::: TODO
+- definitions, requirements
+- distribution of values, independence of values
+- good vs perfect hash function
+- include all object parts in hash code (but not calculated)
+:::
 
 Hashing generally takes records whose key values come from a large range
 and stores those records in a table with a relatively small number of

@@ -1,5 +1,10 @@
 
-## Open Addressing
+## Open addressing
+
+::: TODO
+- Discuss: Load factor, what is a good LF?
+- Discuss: When to resize
+:::
 
 ### Hash tables without bins
 
@@ -51,7 +56,7 @@ Finding a good table index for a key is done in the same way as for
             h = key.hashCode() & 0x7fffffff
             return h % this.keys.size()
 
-### Collision Resolution
+### Collision resolution
 
 The goal of [collision resolution]{.term} is to
 find a free slot in the hash table when the "home position" for the

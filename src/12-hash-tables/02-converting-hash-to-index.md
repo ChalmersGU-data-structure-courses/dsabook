@@ -1,5 +1,5 @@
 
-## Converting Objects to Table Indices
+## Converting objects to table indices
 
 ### Hash codes are not table indices
 
@@ -43,10 +43,10 @@ However, in Java and Python, integers are signed, so the method
 $M$, we might get a negative result. A negative index is not suitable as
 a table index, so first we have to make the hash code positive.
 
-One way to do this is to mask off the sign bit. 
+One way to do this is to mask off the sign bit.
 Most programming languages use integers in the range $-2^{31}\ldots h<2^{31}$.
-In these cases we can e.g. use `hashCode & 0x7fffffff` to make the hash code positive. 
-(Python and some other languages use arbitrary size integers, but it works fine to 
+In these cases we can e.g. use `hashCode & 0x7fffffff` to make the hash code positive.
+(Python and some other languages use arbitrary size integers, but it works fine to
 truncate them to 31 bits as we do here).
 
     class SeparateChainingHashMap implements Map:

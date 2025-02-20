@@ -1,5 +1,5 @@
 
-## Bucket Hashing
+## Bucket hashing
 
 Closed hashing stores all records directly in the hash table. Each
 record $R$ with key value $k_R$ has a [home position]{.term} that is $\textbf{h}(k_R)$, the slot computed by the hash
@@ -40,7 +40,7 @@ Now you can try it yourself.
 
 <avembed id="HashBucketPRO" src="Hashing/HashBucketPRO.html" type="ka" name="Bucket Hashing Proficiency Exercise"/>
 
-### An Alternate Approach
+### An alternative approach
 
 A simple variation on bucket hashing is to hash a key value to some slot
 in the hash table as though bucketing were not being used. If the home

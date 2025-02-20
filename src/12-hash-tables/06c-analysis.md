@@ -1,5 +1,5 @@
 
-### Analysis of Open Addressing
+### Analysis of open addressing
 
 How efficient is hashing? We can measure hashing performance in terms of
 the number of record accesses required when performing an operation. The

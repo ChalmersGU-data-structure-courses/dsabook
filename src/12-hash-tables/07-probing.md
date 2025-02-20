@@ -1,7 +1,7 @@
 
 ## Different probing strategies
 
-### The Problem with Linear Probing
+### The problem with linear probing
 
 While linear probing is probably the first idea that comes to mind when
 considering collision resolution policies, it is not the only one
@@ -28,7 +28,7 @@ implemented efficiently.
 <avembed id="HashLinearPPRO" src="Hashing/HashLinearPPRO.html" type="ka" name="Linear Probing Proficiency Exercise"/>
 
 
-### Linear Probing by Steps
+### Linear probing by steps
 
 How can we avoid primary clustering? One possible improvement might be
 to use linear probing, but to skip slots by some constant $c$ other
@@ -71,7 +71,7 @@ Now you can practice linear probing by different step sizes.
 
 <avembed id="HashLinearStepPPRO" src="Hashing/HashLinearStepPPRO.html" type="ka" name="Linear Probing By Steps Proficiency Exercise"/>
 
-### Pseudo-Random Probing
+### Pseudo-random probing
 
 Consider the situation where $c = 2$ and we wish to insert a record with
 key $k_1$ such that $\textbf{h}(k_1) = 3$. The probe sequence for $k_1$
@@ -112,7 +112,7 @@ function.
 
 <inlineav id="collisionCON4" src="Hashing/collisionCON4.js" name="Avoiding the Train" links="Hashing/collisionCON.css"/>
 
-### Quadratic Probing
+### Quadratic probing
 
 Another probe function that eliminates primary clustering is called
 [quadratic probing]{.term}. Here the probe
@@ -154,7 +154,7 @@ found. Alternatively, if the hash table size is a power of two and the
 probe function is $\textbf{p}(K, i) = (i^2 + i)/2$, then every slot in
 the table will be visited by the probe function.
 
-### Double Hashing
+### Double hashing
 
 Both pseudo-random probing and quadratic probing eliminate primary
 clustering, which is the name given to the the situation when keys share

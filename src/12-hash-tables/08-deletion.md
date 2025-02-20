@@ -1,7 +1,5 @@
 
-## Open Addressing, Deletion
-
-### Deletion in an open addressing hash table
+## Deletion in an open addressing hash table
 
 When deleting records from a hash table, there are two important
 considerations.

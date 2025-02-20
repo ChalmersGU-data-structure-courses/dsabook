@@ -1,9 +1,13 @@
 
-### Sample Hash Functions
+### Sample hash functions
+
+::: TODO
+- the worst hash function (constant)
+:::
 
 In this module we give some examples of simple hash functions.
 
-### Simple Mod Function
+### Modulo
 
 Consider the following hash function used to hash integers to a table of
 sixteen slots.
@@ -93,7 +97,7 @@ equally likely (roughly) to get a key value.
 A comparison of binning vs. modulus as a hash function.
 :::
 
-### The Mid-Square Method
+### The mid-square method
 
 A good hash function to use with integer key values is the
 [mid-square method]{.term}. The mid-square
@@ -134,7 +138,7 @@ Here is a little calculator for you to see how this works. Start with
 
 <avembed id="MidSquare" src="Hashing/MidSquare.html" type="pe" name="Mid-Square Calculator"/>
 
-### A Simple Hash Function for Strings
+### A simple hash function for strings
 
 Now we will examine some hash functions suitable for storing strings of
 characters. We start with a simple summation function.
@@ -173,7 +177,7 @@ Now you can try it out with this calculator.
 
 <avembed id="StringSimple" src="Hashing/StringSimple.html" type="pe" name="Simple String Folding Calculator"/>
 
-### Improved String Folding
+### Improved string folding
 
 If we instead multiply the hash with a prime number, before adding the
 next character, we get a much better distribution of the hash codes.
@@ -207,7 +211,7 @@ integer to overflow (thus losing some of the high-order bits) because
 the resulting values are so large. But this causes no problems when the
 goal is to compute a hash function.
 
-### Hash Function Practice
+### Hash function exercise
 
 Now here is an exercise to let you practice these various hash
 functions. You should use the calculators above for the more complicated

@@ -1,6 +1,15 @@
 
 # Hash tables
 
+::: TODO
+- hash tables are quite similar to arrays, so they fit better to introduce before trees
+- introduction: to index general objects (e.g. strings), we can use a hash function to calculate an array index
+- problem: how do we handle conflicts?
+- we need dynamic arrays!
+- see hash table slides
+- load factor
+:::
+
 Hashing is a method for storing and retrieving records from a database.
 It lets you insert, delete, and search for records based on a search key
 value. When properly implemented, these operations can be performed in
