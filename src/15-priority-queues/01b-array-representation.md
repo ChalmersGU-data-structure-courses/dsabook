@@ -1,5 +1,5 @@
 
-### Array Representation for Complete Binary Trees
+### Representing complete binary trees as arrays
 
 From the [full binary tree theorem]{.term},
 we know that a large fraction of the space in a typical

@@ -1,5 +1,5 @@
 
-### Proof of Optimality for Huffman Coding
+### Proof of optimality for Huffman coding
 
 Huffman tree building is an example of a
 [greedy algorithm]{.term}. At each step, the

@@ -1,5 +1,5 @@
 
-## Use case: Huffman Coding
+## Use case: Huffman coding
 
 One can often gain an improvement in space requirements in exchange for
 a penalty in running time. There are many situations where this is a
@@ -83,7 +83,7 @@ Huffman trees ordered by frequency. But a real implementation would use
 a [priority queue]{.term} keyed by the
 frequencies.
 
-### Building Huffman Coding Trees
+### Building Huffman coding trees
 
 Huffman coding assigns codes to characters such that the length of the
 code depends on the relative frequency or [weight]{.term} of the corresponding character. Thus, it is a
@@ -186,7 +186,7 @@ following: It takes the first two trees off the heap, and creates a new
 tree by making them subtrees. The weight of the new tree is the sum of
 the two children trees. Finally, it adds the new tree to the min-heap.
 
-### Assigning and Using Huffman Codes
+### Assigning and using Huffman codes
 
 Once the Huffman tree has been constructed, it is an easy matter to
 assign codes to individual letters. Beginning at the root, we assign

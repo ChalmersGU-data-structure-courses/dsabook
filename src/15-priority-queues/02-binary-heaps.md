@@ -1,6 +1,10 @@
 
 ## Binary heaps
 
+::: TODO
+- if the tree from prev. section is also complete, we can use an array
+:::
+
 This section presents the [binary heap]{.term} data structure.
 A heap is defined by two properties. First, it is a complete
 binary tree, so heaps are nearly always implemented using the
@@ -182,7 +186,7 @@ $\Theta(n \log n)$ time in the worst case.
 
 <avembed id="heapinsertPRO" src="Binary/heapinsertPRO.html" type="pe" name="Heap Insert Proficiency Exercise"/>
 
-### Building a Heap
+### Building a heap
 
 If all $n$ values are available at the beginning of the building
 process, we can build the heap faster than just inserting the values
@@ -294,7 +298,7 @@ too small or too big for its new position. So we use a utility method
 called `update` in both the `remove` and `modify` methods to handle
 this process.
 
-### Binary Heaps as Priority Queues
+### Binary heaps as priority queues
 
 The heap is a natural implementation for the priority queue discussed at
 the beginning of this section. Jobs can be added to the heap (using
@@ -310,7 +314,7 @@ For a story about Priority Queues and dragons, see
 
 [EXT]: http://computationaltales.blogspot.com/2011/04/stacks-queues-priority-queues-and.html
 
-#### Changing the priority of elements
+### Changing the priority of elements
 
 Some applications of priority queues require the ability to change the
 priority of an object already stored in the queue. This might require

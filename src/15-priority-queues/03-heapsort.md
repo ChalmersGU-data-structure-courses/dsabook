@@ -1,5 +1,5 @@
 
-## Use case: Heapsort
+## Case study: Heapsort
 
 Before we get to Heapsort, consider for a moment the practicality of
 using a Binary Search Tree for sorting. You could insert all of the
@@ -87,14 +87,14 @@ Here is a warmup practice exercise for Heapsort.
 
 <avembed id="HeapsortStepPRO" src="Sorting/HeapsortStepPRO.html" type="ka" name="Heapsort RemoveMax Proficiency Exercise"/>
 
-### Heapsort Proficiency Practice
+### Heapsort proficiency practice
 
 Now test yourself to see how well you understand Heapsort. Can you
 reproduce its behavior?
 
 <avembed id="heapsortPRO" src="Sorting/heapsortPRO.html" type="pe" name="Heapsort Proficiency Exercise"/>
 
-### Heapsort Analysis
+### Heapsort analysis
 
 This visualization presents the running time analysis of Heap Sort
 
