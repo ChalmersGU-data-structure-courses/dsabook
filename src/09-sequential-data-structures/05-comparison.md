@@ -1,5 +1,9 @@
 
-## Comparison of List Implementations
+## Comparison of linked lists vs dynamic arrays
+
+::: TODO
+- compare linked lists with arrays: no random access, but easy to insert (if we have a pointer)
+:::
 
 ### Stacks
 
@@ -22,7 +26,7 @@ Unlike the array-based stack implementation, there is no convenient way
 to store two queues in the same array, unless items are always
 transferred directly from one queue to the other.
 
-### Space Comparison
+### Memory usage
 
 Now that you have seen two substantially different implementations for
 lists, it is natural to ask which is better. In particular, if you must
@@ -71,7 +75,7 @@ elements, since the lists themselves only contain pointers to the
 elements! And in many cases, the objects themselves are much larger than
 the list nodes (or array cells).
 
-### Time Comparison
+### Time complexity
 
 Array-based lists are faster for access by position. To locate an
 element anywhere in the list is constant time, i.e., they take

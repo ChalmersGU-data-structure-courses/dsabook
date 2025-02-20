@@ -1,5 +1,8 @@
 
-### Linked List Stacks
+## Implementing stacks and queues using linked lists
+
+
+### Linked stacks
 
 The linked stack implementation is quite simple. Elements are inserted
 and removed only from the head of the list. Here is a visual
@@ -22,7 +25,7 @@ Stack nodes are exactly the same as the
             this.next = next   // Pointer to next node in stack
 
 
-#### Linked Stack Push
+#### Push to a linked stack
 
 <inlineav id="LinkedStack-Push-CON" src="ChalmersGU/LinkedStack-Push-CON.js" name="Linked Stack Push" links="ChalmersGU/CGU-Styles.css"/>
 
@@ -34,7 +37,7 @@ Stack nodes are exactly the same as the
 
 <avembed id="LstackPushPRO" src="ChalmersGU/LstackPushPRO.html" type="ka" name="Linked Stack Push Exercise"/>
 
-#### Linked Stack Pop
+#### Pop from a linked stack
 
 <inlineav id="LinkedStack-Pop-CON" src="ChalmersGU/LinkedStack-Pop-CON.js" name="Linked Stack Pop" links="ChalmersGU/CGU-Styles.css"/>
 

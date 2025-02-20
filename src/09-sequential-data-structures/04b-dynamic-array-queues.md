@@ -1,5 +1,10 @@
 
-### Array-Based Queues
+### Array-based queues
+
+::: TODO
+- implementing dequeus, circular queues
+:::
+
 
 The array-based queue is somewhat tricky to implement effectively. A
 simple conversion of the array-based list implementation is not
@@ -15,7 +20,7 @@ efficient.
 
 <inlineav id="aqueueBadCON" src="List/aqueueBadCON.js" name="Array-based Queue Bad Representation Slideshow" links="List/aqueueCON.css"/>
 
-#### The Circular Queue
+#### Circular queues
 
 <inlineav id="aqueueCircularCON" src="List/aqueueCircularCON.js" script="DataStructures/CircularQueue.js" name="Circular Array-based Queue Slideshow" links="List/aqueueCON.css"/>
 
@@ -45,8 +50,6 @@ implementor's taste in such affairs. Our choice here is to keep an
 explicit count of the number of elements, in the variable `queueSize`,
 because this will make the code more similar to our list and stack
 implementations.
-
-#### Array-based Queue Implementation
 
 In this implementation, the front of the queue is defined to be toward
 the lower numbered positions in the array (in the counter-clockwise
@@ -121,7 +124,7 @@ one for lists and queues.
             this.rear = this.queueSize-1
 
 
-#### Array-based Queue Practice Exercises
+#### Array-based queue practice exercises
 
 <avembed id="AqueueEnqueuePRO" src="ChalmersGU/AqueueEnqueuePRO.html" type="ka" name="Array-based Queue Enqueue Exercise"/>
 

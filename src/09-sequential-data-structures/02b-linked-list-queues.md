@@ -1,5 +1,9 @@
 
-### Linked Queues
+### Linked queues
+
+::: TODO
+- implementing dequeus, circular queues
+:::
 
 The linked queue implementation is an adaptation of the linked list. The
 only thing is that we have to add a pointer to the rear node in the
@@ -14,7 +18,7 @@ queue, to be able to add new elements efficiently.
             this.queueSize = 0  // Size of queue
 
 
-#### Enqueueing Elements
+#### Enqueueing elements
 
 <inlineav id="LinkedQueue-Enqueue-CON" src="ChalmersGU/LinkedQueue-Enqueue-CON.js" name="Linked Queue Enqueue" links="ChalmersGU/CGU-Styles.css"/>
 
@@ -31,7 +35,7 @@ queue, to be able to add new elements efficiently.
 
 <avembed id="LinkedQueue-Enqueue-PRO" src="ChalmersGU/LinkedQueue-Enqueue-PRO.html" type="ka" name="Linked Queue Enqueue Exercise"/>
 
-#### Dequeueing Elements
+#### Dequeueing elements
 
 <inlineav id="LinkedQueue-Dequeue-CON" src="ChalmersGU/LinkedQueue-Dequeue-CON.js" name="Linked Queue Dequeue" links="ChalmersGU/CGU-Styles.css"/>
 

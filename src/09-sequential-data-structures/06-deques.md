@@ -1,5 +1,17 @@
 
-### Doubly Linked Lists
+## Implementing deques using dynamic arrays or linked lists
+
+### Circular dynamic arrays
+
+::: TODO
+- This is the same as the queue implementation, we just need some more methods
+:::
+
+### Doubly linked lists
+
+::: TODO
+- With normal linked lists we cannot pop from the back
+:::
 
 The [singly linked list](#linked-lists) allows for direct access from a list node only to the next
 node in the list. A [doubly linked list]{.term}
@@ -51,6 +63,7 @@ is implemented as a doubly linked list.
 
 Getting and setting are exactly the same as for normal linked lists, so
 we don't show them here.
+
 
 #### Adding/inserting elements
 

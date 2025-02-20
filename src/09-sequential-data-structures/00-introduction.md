@@ -1,5 +1,5 @@
 
-# Sequential Data Structures
+# Sequential data structures
 
 ::: TODO
 - [4 Lists]

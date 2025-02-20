@@ -1,5 +1,5 @@
 
-## Skip Lists
+## Skip lists
 
 This module presents a probabilistic search structure called the
 [skip list]{.term}. Like the

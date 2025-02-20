@@ -1,5 +1,8 @@
 
-### Dynamic Array-Based Stacks
+## Implementing stacks and queues using dynamic arrays
+
+
+### Array-based stacks
 
 The dynamic array-based stack contains an internal array (which will
 grow and shrink dynamically), and the index of the **top** of the stack.
@@ -20,7 +23,7 @@ is which end of the array should represent the top of the stack.
 
 <inlineav id="DynamicArrayStack-Top-CON" src="ChalmersGU/DynamicArrayStack-Top-CON.js" name="Array stack top position slideshow" links="ChalmersGU/CGU-Styles.css"/>
 
-#### Pushing to the Stack
+#### Pushing to the stack
 
 <inlineav id="DynamicArrayStack-Push-CON" src="ChalmersGU/DynamicArrayStack-Push-CON.js" name="Array stack push slideshow" links="ChalmersGU/CGU-Styles.css"/>
 
@@ -37,7 +40,7 @@ Note that any resizing factor >1 works, and in fact it is probably better to use
 
 <avembed id="DynamicArrayStack-Push-PRO" src="ChalmersGU/DynamicArrayStack-Push-PRO.html" type="ka" name="Array-based Stack Push Exercise"/>
 
-#### Popping from the Stack
+#### Popping from the stack
 
 <inlineav id="DynamicArrayStack-Pop-CON" src="ChalmersGU/DynamicArrayStack-Pop-CON.js" name="Array stack pop slideshow" links="ChalmersGU/CGU-Styles.css"/>
 
@@ -63,7 +66,7 @@ the code for lists. E.g., the internal variables are exactly the same,
 and the resizing method doesn't change at all. The main difference is
 that stacks are even simpler to implement than their list counterparts.
 
-### Implementing two stacks using one array
+#### Implementing two stacks using one array
 
 If you need to use two stacks at the same time, you can take advantage
 of the one-way growth of the array-based stack by using a single array

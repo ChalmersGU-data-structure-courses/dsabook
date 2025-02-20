@@ -1,5 +1,5 @@
 
-## Linked Lists
+## Linked lists
 
 In this module we present one of the two traditional implementations for
 lists, usually called a [linked list]{.term}.
@@ -36,7 +36,7 @@ efficiency of getting the list size).
             this.listSize = 0   // Size of list
 
 
-Here is our implementation for list nodes, the class `Node`. 
+Here is our implementation for list nodes, the class `Node`.
 Objects in the `Node` class contain a field `elem` to store the
 element value, and a field `next` to store a pointer to the next node on
 the list.
@@ -85,7 +85,7 @@ list, but this will increase memory usage.
 Another simple solution is to have a pointer to the node *before* the
 current node. This is the solution we will adopt.
 
-### Adding a Node
+### Adding a node
 
 <inlineav id="LinkedList-Add-CON" src="ChalmersGU/LinkedList-Add-CON.js" name="Linked List Add Slideshow" links="ChalmersGU/CGU-Styles.css"/>
 
@@ -114,7 +114,7 @@ Here's an exercise for adding a value to a linked list.
 
 <avembed id="LinkedList-Add-PRO" src="ChalmersGU/LinkedList-Add-PRO.html" type="ka" name="Linked List Add Exercise"/>
 
-### Removing a Node
+### Removing a node
 
 <inlineav id="LinkedList-Remove-CON" src="ChalmersGU/LinkedList-Remove-CON.js" name="Linked List Remove Slideshow" links="ChalmersGU/CGU-Styles.css"/>
 

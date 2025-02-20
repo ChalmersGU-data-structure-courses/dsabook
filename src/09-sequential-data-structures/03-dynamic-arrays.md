@@ -1,5 +1,9 @@
 
-## Dynamic Array-Based Lists
+## Dynamic arrays
+
+::: TODO
+- Recap static arrays from last chapter
+:::
 
 The problem with a static array-based list is that it has a limited
 capacity. If we try to add new elements when the internal array is full,
@@ -20,8 +24,8 @@ exceeded, and copy over all elements to the new one.
             this.internalArray = newArray
 
 
-So, how large should the new internal array be? For now, let's 
-**double the size of the internal array** when we need to resize, 
+So, how large should the new internal array be? For now, let's
+**double the size of the internal array** when we need to resize,
 which means that we add the following if-clause to the `add` method:
 
         if listSize >= internalArray.size()
@@ -44,7 +48,7 @@ That's the only difference from the `add` method from
 
 As explained below, we don't have to double the size, but we can
 multiply by 3 or 1.5 or 1.1. The important point is that we don't add a
-constant number, but increase the size by a factor. 
+constant number, but increase the size by a factor.
 
 <inlineav id="DynamicArrayList-Append-CON" src="ChalmersGU/DynamicArrayList-Append-CON.js" name="Dynamic Array-based List Addition Slideshow" links="ChalmersGU/CGU-Styles.css"/>
 
@@ -191,7 +195,7 @@ just proved the following result.
 times starting from an empty dynamic array list causes fewer than $2n$
 elements to be copied.
 
-In short, the overhead of using a dynamic array list is at most 
+In short, the overhead of using a dynamic array list is at most
 *two array elements copied per element that we add*. But copying
 an array element is an extremely cheap operation, so dynamic array lists
 implemented using array doubling have almost no overhead, compared to
@@ -204,7 +208,7 @@ can use the same argument as above, but instead of using the formula
 $2^0+2^1+...+2^k = 2^{k+1}$, you have to use the formula for a general
 [geometric
 progression](https://en.wikipedia.org/wiki/Geometric_progression). What
-you get is an overhead of *three elements copied per element added*. 
+you get is an overhead of *three elements copied per element added*.
 In fact, Java `ArrayLists` grow the array by 50% on resizing.
 
 In fact, **growing the array by any constant factor** works, because the
@@ -308,7 +312,7 @@ before. The only thing that matters is that the minimum load factor
                 this.resizeArray(this.internalArray.size() * 1/2)
             return x
 
-| 
+|
 
 <inlineav id="DynamicArrayList-Remove-CON" src="ChalmersGU/DynamicArrayList-Remove-CON.js" name="Dynamic Array-based List Deletion Slideshow" links="ChalmersGU/CGU-Styles.css"/>
 
