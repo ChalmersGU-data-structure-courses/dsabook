@@ -11,7 +11,7 @@ highest. Here is a visualization of the binary search method.
 
 <inlineav id="binarySearchCON" src="Searching/binarySearchCON.js" name="Binary Search Algorithm Slideshow" links="Searching/binarySearchCON.css"/>
 
-### Analyzing Binary Search
+### Analyzing binary search
 
 <inlineav id="BsearchDandCRecurCON" src="AlgAnal/BsearchDandCRecurCON.js" name="Binary Search recurrence slideshow" links="AlgAnal/BsearchDandCRecurCON.css"/>
 

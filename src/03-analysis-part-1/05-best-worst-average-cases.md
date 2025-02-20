@@ -1,9 +1,10 @@
 
-## Best, Worst, and Average Cases
+## Best, worst, and average cases
 
 ::: TODO
 - more needs to be added
 - examples (e.g., quicksort, insertion sort)
+- discuss problems with "average case" - how do we know what is the average?
 :::
 
 <inlineav id="AnalCasesSameCON" src="AlgAnal/AnalCasesSameCON.js" name="Simple analysis cases slideshow" links="AlgAnal/AnalCasesCON.css"/>

@@ -1,5 +1,5 @@
 
-## Comparing Algorithms
+## Comparing algorithms
 
 ::: TODO
 - input size
@@ -77,7 +77,7 @@ reliably other than to run an implementation of the algorithm on some
 computer. The only alternative is to use some other measure as a
 surrogate for running time.
 
-### Basic Operations and Input Size
+### Basic operations and input size
 
 Of primary consideration when estimating an algorithm's performance is
 the number of [basic operations](#basic-operation){.term} required by the algorithm to process an input of a certain

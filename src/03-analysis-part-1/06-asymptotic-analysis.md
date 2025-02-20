@@ -60,7 +60,7 @@ algorithms. Just be aware of the limitations to asymptotic analysis in
 the rare situation where the constant is important.
 
 
-### Classifying Functions
+### Classifying functions
 
 Given functions $f(n)$ and $g(n)$ whose growth rates are expressed as
 algebraic equations, we might like to determine if one grows faster than

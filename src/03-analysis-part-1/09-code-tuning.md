@@ -1,5 +1,5 @@
 
-## Code Tuning
+## Code tuning
 
 In practice, there is not such a big difference in running time between
 an algorithm with growth rate $\Theta(n)$ and another with growth rate

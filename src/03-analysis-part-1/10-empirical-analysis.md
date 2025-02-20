@@ -1,5 +1,5 @@
 
-## Empirical Analysis
+## Empirical analysis
 
 [Asymptotic algorithm analysis](#algorithm-analysis){.term} is an analytic tool, whereby we model the key aspects of an
 algorithm to determine the growth rate of the algorithm as the input

@@ -1,5 +1,5 @@
 
-## Invariants, preconditions, postconditions
+## Invariants, preconditions, and postconditions
 
 ::: TODO
 - What is an invariant? Why is it important?

@@ -1,5 +1,5 @@
 
-### Summary Questions
+### Preliminaries: Summary questions
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 
@@ -198,7 +198,7 @@ Which is true about the relationship between algorithms and problems?
 
 - [x] A problem is a mapping from inputs to
 outputs, and there might be many algorithms that can accomplish this mapping.
-- [ ] A problem is a mapping from inputs to outputs. 
+- [ ] A problem is a mapping from inputs to outputs.
 Since this mapping is fixed, there is only one right way to compute the mapping.
 - [ ] An algorithm is another term for a problem.
 - [ ] A problem is a recipe, and an algorithm is a solution to a problem.

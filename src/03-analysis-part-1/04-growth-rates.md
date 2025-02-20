@@ -1,7 +1,7 @@
 
 ## Growth rates
 
-### Faster Computer, or Faster Algorithm?
+### Faster computer, or faster algorithm?
 
 Imagine that you have a problem to solve, and you know of an algorithm
 whose running time is proportional to $n^2$ where $n$ is a measure of
@@ -127,7 +127,7 @@ benefit in terms of larger problem size that can run in a certain time
 on the new computer.
 
 
-### Growth Rates
+### Growth rates
 
 The [growth rate]{.term} for an algorithm is the
 rate at which the cost of the algorithm grows as the size of its input
@@ -206,7 +206,7 @@ This table shows costs for representative growth rates.
 
 <avembed id="CompareGrowth" src="AlgAnal/CompareGrowth.html" type="ka" name="Comparing Growth Rates Exercise"/>
 
-### Growth Rates Ordering Exercise
+### Growth rates ordering exercise
 
 <avembed id="GrowthRatesPRO" src="AlgAnal/GrowthRatesPRO.html" type="ka" name="Growth Rates Ordering Exercise"/>
 
