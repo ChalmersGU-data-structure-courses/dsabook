@@ -1,5 +1,5 @@
 
-### Acyclic Graphs: Topological Sort
+### Acyclic graphs: Topological sort
 
 Assume that we need to schedule a series of tasks, such as classes or
 construction jobs, where we cannot start one task until after its
@@ -25,7 +25,7 @@ An example graph for topological sort. Seven tasks have dependencies as
 shown by the directed graph.
 ::::
 
-#### Depth-first solution
+#### Depth-first algorithm
 
 A topological sort may be found by performing a DFS on the graph. When a
 vertex is visited, no action is taken (i.e., function `preVisit` does
@@ -67,7 +67,7 @@ Here is another example.
 
 <inlineav id="topSortDFSCON" src="Graph/topSortDFSCON.js" name="TopSort Slideshow" links="Graph/topSortDFSCON.css"/>
 
-#### Queue-based Solution
+#### Queue-based algorithm
 
 We can implement topological sort using a queue instead of recursion, as follows.
 

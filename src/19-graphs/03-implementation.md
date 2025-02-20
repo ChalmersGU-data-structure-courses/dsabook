@@ -65,7 +65,7 @@ this purpose, perhaps reading the graph description from a file. The
 graph can be built up by using the `addEdge` function provided by the
 ADT.
 
-### Adjacency Matrix
+### Adjacency matrix
 
 Here is an implementation for the adjacency matrix.
 To simplify the implementation we assume that the vertices are integers
@@ -133,7 +133,7 @@ the matix to locate the positions of the various neighbors. It creates
 an edge for each neighbour and adds it to a queue. (There is no special
 reason why we use a queue, we could use a stack or a list too).
 
-### Adjacency List
+### Adjacency list
 
 Here is an implementation of the adjacency list representation for
 graphs. This implementation uses a generic type for vertices, so that

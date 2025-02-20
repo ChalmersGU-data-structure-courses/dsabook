@@ -1,5 +1,10 @@
 
-## Graph Traversals
+## Traversing graphs
+
+::: TODO
+- handling cycles
+- remembering visited nodes
+:::
 
 Many graph applications need to visit the vertices of a graph in some
 specific order based on the graph's topology. This is known as a graph
@@ -54,7 +59,7 @@ graph $\mathbf{G}$:
 The function `doTraversal` might be implemented by using one of the
 graph traversals described next.
 
-### Depth-First Search
+### Depth-first search
 
 Our first method for organized graph traversal is called
 [depth-first search]{.term} (DFS). Whenever a
@@ -117,7 +122,7 @@ Here is an exercise for you to practice DFS.
 
 <avembed id="DFSPE" src="Graph/DFSPE.html" type="pe" name="DFS Proficiency Exercise"/>
 
-### Breadth-First Search
+### Breadth-first search
 
 Our second graph traversal algorithm is known as a
 [breadth-first search]{.term} (BFS). BFS

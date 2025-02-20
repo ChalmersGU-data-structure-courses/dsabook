@@ -1,5 +1,5 @@
 
-### Prim's Algorithm
+### Prim's algorithm
 
 ::: TODO
 - reformulate as a generic graph search algorithm
@@ -64,7 +64,7 @@ MCST when Vertex *e* is processed.
 
 <inlineav id="primCON" src="Graph/primCON.js" name="Prim's Minimum Cost Spanning Tree Algorithm Slideshow" links="Graph/primCON.css"/>
 
-#### Prim's Algorithm, Priority Queue Implementation
+#### Prim's algorithm – priority queue implementation
 
 ::: TODO
 - can be removed if we use the generic algorithm?

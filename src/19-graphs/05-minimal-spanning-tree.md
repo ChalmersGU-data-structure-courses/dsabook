@@ -1,5 +1,5 @@
 
-## Minimal Cost Spanning Trees
+## Minimum spanning trees
 
 The [minimal-cost spanning tree]{.term} (MCST)
 problem takes as input a connected, undirected graph $\mathbf{G}$, where

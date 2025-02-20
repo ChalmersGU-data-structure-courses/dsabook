@@ -1,5 +1,5 @@
 
-### Kruskal's Algorithm
+### Kruskal's algorithm
 
 ::: TODO
 - first show more abstract pseudocode, not using union/find

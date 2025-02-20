@@ -1,7 +1,13 @@
 
-## Shortest-Paths Problems
+## Shortest-paths problems
 
-### Shortest-Paths on Unweighted Graphs
+::: TODO
+- directed/undirected graphs
+- remembering visited nodes
+:::
+
+
+### Shortest-paths on unweighted graphs
 
 If you have an unweighted graph, the [shortest path]{.term} between two vertices is the smallest number of edges you
 have to pass to get from one of the vertices to the other.
@@ -12,7 +18,7 @@ from, if will give you the shortest path between the start vertex and
 any other vertex. However, things become sligthly more complicated if
 the graph is weighted.
 
-### Shortest-Paths on Weighted Graphs
+### Shortest-paths on weighted graphs
 
 On a road map, a road connecting two towns is typically labeled with its
 distance. We can model a road network as a directed graph whose edges

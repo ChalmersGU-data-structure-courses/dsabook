@@ -1,8 +1,9 @@
 
-## Dijkstra's Shortest Path Algorithm
+## Dijkstra's shortest-path algorithm
 
 ::: TODO
 - use the generic graph search algorithm
+- aka uniform-cost search
 :::
 
 We will now present an algorithm to solve the
