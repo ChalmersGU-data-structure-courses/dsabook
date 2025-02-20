@@ -1,5 +1,9 @@
 
-## Arrays as Sets or Maps
+## Implementing sets and maps using sorted lists
+
+::: TODO
+- some of this should go to 11-set-map-ADTS/03-list-implementation.md
+:::
 
 In the [introduction](#information-retrieval-sets-and-maps) chapter we learnt about
 *sets* and *maps*, two of the most important ADTs.
@@ -83,3 +87,10 @@ An array is not a good way to implement a set or a map, if we need both
 `add`, `remove` and `contains` to be efficient. Later we will learn
 about two data structures that are more suitable for implementing sets
 and maps: binary search trees and hash tables.
+
+
+### Complexity analysis
+
+
+### Why can't we use hash tables?
+
