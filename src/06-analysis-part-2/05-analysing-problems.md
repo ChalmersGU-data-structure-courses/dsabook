@@ -1,5 +1,5 @@
 
-## Analyzing Problems
+## Analyzing problems
 
 You most often use the techniques of "algorithm" analysis to analyze
 an [algorithm]{.term}, or the instantiation of
@@ -93,7 +93,7 @@ do. If those two are the same, then we say that we really understand our
 problem.
 
 
-### Case study: Lower Bounds for Sorting
+### Case study: Lower bounds for sorting
 
 By now you have seen many analyses for algorithms. These analyses
 generally define the upper and lower bounds for algorithms in their

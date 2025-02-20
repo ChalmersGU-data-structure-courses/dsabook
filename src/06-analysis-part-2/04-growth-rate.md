@@ -1,5 +1,5 @@
 
-## Growth Rates (part 2)
+## Growth rates (part 2)
 
 ::: alert
 ***Note***: This section is *work in progress*

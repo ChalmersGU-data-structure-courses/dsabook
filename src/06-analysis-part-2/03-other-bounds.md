@@ -1,5 +1,5 @@
 
-## Lower Bounds and Tight Bounds
+## Lower bounds and tight bounds
 
 The definition for big-Oh allows us to greatly overestimate the cost for
 an algorithm. But sometimes we know a tight bound -- that is, a bound
@@ -15,7 +15,7 @@ cost to within a constant factor. OpenDSA modules use $\Theta$ notation
 in preference to big-Oh notation whenever our state of knowledge makes
 that possible.
 
-### Lower Bounds: the $\Omega$ notation
+### Lower bounds: the $\Omega$ notation
 
 [Big-Oh notation]{.term} describes an upper
 bound. In other words, big-Oh notation states a claim about the greatest
@@ -118,7 +118,7 @@ As you can see from this discussion, asymptotic bounds notation is
 not a law of nature. It is merely a powerful modeling tool used to
 describe the behavior of algorithms.
 
-### Tight Bounds: the $\Theta$ notation
+### Tight bounds: the $\Theta$ notation
 
 The definitions for big-Oh and $\Omega$ give us ways to describe the
 upper bound for an algorithm (if we can find an equation for the maximum

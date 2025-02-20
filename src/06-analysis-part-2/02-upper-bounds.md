@@ -109,7 +109,7 @@ $O(f(n))$" or "$= O(f(n))$". There is no strict equality to the use
 of big-Oh notation. $O(n)$ is in $O(n^2)$, but $O(n^2)$ is not in
 $O(n)$.
 
-### Simplifying Rules
+### Simplifying rules
 
 Once you determine the running-time equation for an algorithm, it really
 is a simple matter to derive the big-Oh expressions from the equation.
