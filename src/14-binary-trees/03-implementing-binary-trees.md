@@ -1,5 +1,5 @@
 
-## Binary Tree Node Implementations
+## Implementing binary trees
 
 In this module we examine one way to implement binary tree nodes. By
 definition, all binary tree nodes have two children, though one or both
@@ -59,7 +59,7 @@ leaves and another for the internal nodes. Examples include the
 [binary trie]{.term}, the
 [PR Quadtree]{.term}, the
 [Huffman coding tree]{.term}, and the
-[expression tree]{.term} illustrated by 
+[expression tree]{.term} illustrated by
 [Figure #DiffNodes](#DiffNodes). By definition, only
 internal nodes have non-empty children. If we use the same node
 implementation for both internal and leaf nodes, then both must store
@@ -74,11 +74,11 @@ An expression tree for $4x(2x + a) - c$.
 ::::
 
 As an example of a tree that stores different information at the leaf
-and internal nodes, consider the expression tree illustrated by 
+and internal nodes, consider the expression tree illustrated by
 [Figure #DiffNodes](#DiffNodes). The expression tree
 represents an algebraic expression composed of binary operators such as
 addition, subtraction, multiplication, and division. Internal nodes
-store operators, while the leaves store operands. The tree of 
+store operators, while the leaves store operands. The tree of
 [Figure #DiffNodes](#DiffNodes) represents the
 expression $4x(2x + a) - c$. The storage requirements for a leaf in an
 expression tree are quite different from those of an internal node.
@@ -89,11 +89,11 @@ names or numbers, which is considerably larger in order to handle the
 wider range of possible values. At the same time, leaf nodes need not
 store child pointers.
 
-[Object-oriented languages](#object-oriented-programming-paradigm){.term} 
+[Object-oriented languages](#object-oriented-programming-paradigm){.term}
 allow us to differentiate leaf from internal nodes through
 the use of a [class hierarchy]{.term}. A [base class]{.term} provides a general
-definition for an object, and a [subclass]{.term} modifies the base class to add more detail. 
-We will not discuss further how to implement different kind of tree nodes 
+definition for an object, and a [subclass]{.term} modifies the base class to add more detail.
+We will not discuss further how to implement different kind of tree nodes
 more in this book, but will just assume that all nodes are of the same class.
 
 <!-- TODO:

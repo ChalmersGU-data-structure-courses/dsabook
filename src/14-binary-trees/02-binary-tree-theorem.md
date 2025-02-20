@@ -1,5 +1,5 @@
 
-### The Full Binary Tree Theorem
+## Case study: Full binary trees
 
 Some binary tree implementations store data only at the
 [leaf nodes](#leaf-node){.term}, using the
@@ -34,7 +34,7 @@ A tree containing many internal nodes and a single leaf.
 
 :::: {#FullTree}
 ::: topic
-#### Theorem: Full Binary Tree Theorem {-}
+#### Theorem: Full binary tree theorem {-}
 
 **Full Binary Tree Theorem:** The number of leaves in a non-empty full
 binary tree is one more than the number of internal nodes.

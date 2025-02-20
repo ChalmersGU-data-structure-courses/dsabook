@@ -1,5 +1,9 @@
 
-## Information Flow in Recursive Functions
+## Iteration, recursion, and information flow
+
+::: TODO
+- when to use iteration, recursion, BFS, DFS, etc, etc
+:::
 
 Handling information flow in a recursive function can be a challenge. In
 any given function, we might need to be concerned with either or both
@@ -13,7 +17,7 @@ of:
 Any given problems might need to do either or both. Here are some
 examples and exercises.
 
-### Local
+### Local traversal
 
 Local traversal involves going to each node in the tree to do some
 operation. Such functions need no information from the parent (other
@@ -21,7 +25,7 @@ than a pointer to the current node), and pass no information back.
 Examples include preorder traversal and incrementing the value of every
 node by one.
 
-### Passing Down Information
+### Passing down information
 
 Slightly more complicated is the situation where every node needs the
 same piece of information to be passed to it. An example would be
@@ -90,7 +94,7 @@ mistake is to not return a value.
 <!-- ### Binary Tree Sum Nodes Exercise -->
 
 
-### Combining Information Flows
+### Combining information flows
 
 Many functions require both that information be passed in, and that
 information be passed back. Let's start with a relatively simple case.
@@ -102,7 +106,7 @@ style: Return True if and only if one of the children returns True.
 
 <!-- ### Binary Tree Check Value Exercise -->
 
-### Combination Problems
+### Combination problems
 
 Slightly more complicated problems combine what we have seen so far.
 Information passing down the tree changes from node to node. Data passed
@@ -115,7 +119,7 @@ back up the tree uses the collect-and-return paradigm.
 <!-- ### Binary Tree Has Path Sum Exercise -->
 
 
-### A Hard Information Flow Problem
+### A hard information flow problem
 
 Sometimes, passing the right information up and down the tree to control
 a recursive function gets complicated. The information flow itself is
