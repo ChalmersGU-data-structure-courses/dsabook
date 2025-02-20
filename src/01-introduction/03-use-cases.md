@@ -1,8 +1,7 @@
 
 ## Use cases
 
-::: topic
-### Example: Bank {-}
+### Example: Bank
 
 A bank must support many types of transactions with its customers, but
 we will examine a simple model where customers wish to open accounts,
@@ -54,10 +53,9 @@ deletions lead to some degradation in performance for the remaining
 operations. However, the hash table can be reorganized periodically to
 restore the system to peak efficiency. Such reorganization can occur
 offline so as not to affect ATM transactions.
-:::
 
-::: topic
-### Example: Databases {-}
+
+### Example: Databases
 
 A company is developing a database system containing information about
 cities and towns in Europe. There are many thousands of
@@ -84,5 +82,7 @@ range queries. The [B-tree]{.term} supports large databases, insertion
 and deletion of data records, and range queries. However, a simple
 [linear index]{.term} would be more appropriate if the database is created once,
 and then never changed, such as an atlas accessed from a website.
-:::
+
+
+### Example: [Something something]
 

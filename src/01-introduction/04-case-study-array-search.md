@@ -6,7 +6,7 @@
 :::
 
 
-### Linear Search
+### Linear search
 
 ::: TODO
 - Analysis: linear time
@@ -46,7 +46,7 @@ case for sequential search has
 this reason, the sequential search algorithm is sometimes called
 [linear search]{.term}.
 
-### Binary Search
+### Binary search
 
 ::: TODO
 - Use a range, not a slice
@@ -126,9 +126,11 @@ even more difficult than proving that sequential search is the most
 efficient algorithm possible on an unsorted array.
 :::
 
+#### Binary search exercise
+
 <avembed id="binarySearchPRO" src="Searching/binarySearchPRO.html" type="pe" name="Binary Search Proficiency Exercise"/>
 
-### Constant-time search
+### Even faster searching
 
 ::: TODO
 - e.g. searching for numbers: use an array
@@ -136,6 +138,3 @@ efficient algorithm possible on an unsorted array.
 :::
 
 
-### Binary Search Practice Exercise
-
-<avembed id="binarySearchPRO" src="Searching/binarySearchPRO.html" type="pe" name="Binary Search Proficiency Exercise"/>
