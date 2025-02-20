@@ -1,15 +1,14 @@
 
-## Solving Recurrence Relations
+## Recurrence relations
 
 ::: alert
 ***Note***: This section is *work in progress*
 :::
 
-<!-- TODO
-Throughout this module, there are references to equations, both on this
-page and in the Summations module. These should be made into proper
-cross-references rather than hard-coded equation numbers.
--->
+::: TODO
+- recurrences are a way to model recursive functions
+- Throughout this module, there are references to equations, both on this page and in the Summations module. These should be made into proper cross-references rather than hard-coded equation numbers.
+:::
 
 Recurrence relations are often used to model the cost of recursive
 functions. For example, the standard
@@ -37,7 +36,7 @@ typical divide-and-conquer algorithms such as Mergesort yield
 recurrences of a form that fits a pattern for which we have a ready
 solution.
 
-### Estimating Upper and Lower Bounds
+### Estimating upper and lower bounds
 
 The first approach to solving recurrences is to guess the answer and
 then attempt to prove it correct. If a correct upper or lower bound
@@ -253,7 +252,7 @@ $$
 $$
 :::
 
-### Expanding Recurrences
+### Expanding recurrences
 
 Estimating bounds is effective if you only need an approximation to the
 answer. More precise techniques are required to find an exact solution.
@@ -304,7 +303,7 @@ $$
 
 :::
 
-### Divide-and-Conquer Recurrences
+### Divide-and-conquer recurrences
 
 The third approach to solving recurrences is to take advantage of known
 theorems that provide the solution for classes of recurrences. Of
@@ -465,7 +464,7 @@ Because $a=2$, $b=2$, $c=1$, and $k=1$, we find that $2 = 2^1$. Applying
 case (2) of the theorem, $\mathbf{T}(n) = \Theta(n \log n)$.
 :::
 
-### Average-Case Analysis of Quicksort
+### Case study: Average-case analysis of Quicksort
 
 ::: TODO
 - Average-case is **not** a good thing - what are we averaging on?

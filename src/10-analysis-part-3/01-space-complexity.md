@@ -1,5 +1,5 @@
 
-## Space Bounds
+## Space bounds
 
 Besides time, space is the other computing resource that is commonly of
 concern to programmers. Just as computers have become much faster over
@@ -118,7 +118,7 @@ half the space.
 
 A second principle for the relationship between a program's space and
 time requirements applies to programs that process information
-[stored on disk](#file-processing){.term}. 
+[stored on disk](#file-processing){.term}.
 Strangely enough, the disk-based space/time tradeoff
 principle is almost the reverse of the space/time tradeoff principle for
 programs using main memory.

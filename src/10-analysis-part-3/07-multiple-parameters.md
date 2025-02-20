@@ -1,5 +1,5 @@
 
-## Multiple Parameters
+## Multiple parameters
 
 Sometimes the proper analysis for an algorithm requires multiple
 parameters to describe the cost. To illustrate the concept, consider an
@@ -19,7 +19,7 @@ follows.
         count[i] = 0
     // Increment the pixel value count for each of the pixels:
     for i = 0 to P-1:
-        count[value(i)] = count[value(i)]+1  
+        count[value(i)] = count[value(i)]+1
     // Sort the pixel value counts:
     sort(count)
 

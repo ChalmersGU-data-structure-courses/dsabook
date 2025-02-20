@@ -1,3 +1,3 @@
 
-# Algorithm Analysis, part 3: Advanced Theory
+# Algorithm analysis, part 3: Advanced theory
 

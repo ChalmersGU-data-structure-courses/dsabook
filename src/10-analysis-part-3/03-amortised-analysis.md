@@ -1,5 +1,5 @@
 
-## Amortized Analysis
+## Amortised analysis
 
 ::: alert
 ***Note***: This section is *work in progress*

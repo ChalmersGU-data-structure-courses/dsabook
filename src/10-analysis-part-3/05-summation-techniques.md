@@ -1,5 +1,5 @@
 
-## Summation Techniques
+## Summation techniques
 
 ::: alert
 ***Note***: This section is *work in progress*
@@ -57,7 +57,7 @@ and $n=2$ we get the two equations
 $$
 \begin{eqnarray*}
 c_1 + c_2     & = &  1 \\
-4 c_1 + 2 c_2 & = &  3 
+4 c_1 + 2 c_2 & = &  3
 \end{eqnarray*}
 $$
 
