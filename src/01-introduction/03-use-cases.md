@@ -1,6 +1,11 @@
 
 ## Use cases
 
+::: TODO
+- Replace Bank with e.g. Social media
+:::
+
+
 ### Example: Bank
 
 A bank must support many types of transactions with its customers, but
