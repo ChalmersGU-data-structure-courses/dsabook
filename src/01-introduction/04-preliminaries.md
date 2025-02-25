@@ -1589,13 +1589,23 @@ regardless of the specific programming language.
 #### Primitive data types
 
 ::: TODO
-- We will only use these: boolean, integer, float, character
+- We will only use these: boolean, integer, float, character, **null**
 - We assume characters are fixed-size unicode - but sometimes 8-bit ascii
 - Sometimes we might talk about fixed-size integers (32-bit, 64-bit)
 - Python-specific details: no fixed-size ints, chars == strings
 :::
 
-#### Arrays and strings
+#### Strings
+
+::: TODO
+- Constants
+- Cannot resize, cannot change individual chars
+- Looking up a specific character is instant
+- Concatenation takes time, because of being constant
+- Comparing strings takes time
+:::
+
+#### Arrays
 
 ::: TODO
 - shorten this section (perhaps move some to the sorting intro)
@@ -1665,7 +1675,7 @@ This chapter concentrates on *membership testing* and *natural sorting*,
 but all the algorithms in this chapter work just as well for *lookup*
 and *key-based sorting*.
 
-#### Referring to array slices (sub-arrays)
+#### Array slices
 
 ::: TODO
 - don't use slicing = copying
@@ -1674,15 +1684,7 @@ and *key-based sorting*.
     - (how do we do in this book?)
 :::
 
-#### Strings
-
-::: TODO
-- Constants, think of them as arrays of characters
-- Concatenation takes time
-- Cannot resize
-:::
-
-### Tuples and records
+#### Tuples and records
 
 ::: TODO
 - what do we assume about tuples / records?
@@ -1690,6 +1692,7 @@ and *key-based sorting*.
 - java doesn't have either
 - how about key/value-pairs?
 :::
+
 
 ### Classes and objects
 
@@ -1708,12 +1711,21 @@ What you don't need to know:
 - referring to the superclass, calling the super instance
 :::
 
+### Mutable and immutable objects
+
+::: TODO
+- immutable: primitives, strings, tuples
+- mutable: arrays, objects
+    - all data structures!
+:::
+
 ### Functions
 
 ::: TODO
 - what we assume they know about functions
 - recursion, mutual recursion
 - no named arguments, or default arguments?
+- call-by-value, call-by-name: mutable/immutable arguments
 :::
 
 
