@@ -8,7 +8,6 @@
         contains(x)  // Returns true if x is in the set.
 
 
-### Invariants
 
 
 ### Use cases

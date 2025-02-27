@@ -21,6 +21,10 @@ This takes linear time in the worst case. Similarly, to `remove` an item
 without creating a hole in the array, we need to move all the items that
 come after one space backwards. This also takes linear time.
 
+:::TODO
+Tie this to invariants.
+:::
+
 A sorted array is a suitable way to implement a set or a map that *never
 changes*, that is where we never need to add or remove items after the
 array is created. We start by sorting the array, using either quicksort

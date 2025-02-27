@@ -27,7 +27,6 @@
         keysBetween(key1, key2)  // Returns all keys k such that k1 ≤ k ≤ k2.
 
 
-### Invariants
 
 
 ### Use cases

@@ -10,7 +10,6 @@
         size()            // Returns the number of keys (i.e., the number of key/value pairs).
 
 
-### Invariants
 
 
 ### Use cases
