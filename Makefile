@@ -15,27 +15,27 @@ PYTHON     := python3
 PANDOC     := pandoc
 HYPERLINK  := hyperlink
 
-default: clean preprocess pandoc postprocess deploy
+default: deploy
 
-all: clean preprocess pandoc postprocess deploy check-links
+all: deploy check-links
 
 clean:
 	@rm -rf $(TEMP) $(DOCS_HTML)/*
 
-preprocess:
+preprocess: clean
 	@mkdir -p $(TEMP_SRC)
 	@echo "Preprocessing: src/*/* -> $(TEMP_SRC)"
 	@time $(PYTHON) extra/preprocess.py $(TEMP_SRC) $(GLOSSARY) $(SRC_FILES)
 
-pandoc:
+pandoc: preprocess
 	@echo "Running pandoc: $(TEMP_SRC)/* -> $(TEMP_HTML)/*"
 	@time $(PANDOC) --defaults=pandoc-defaults.yaml --output=$(TEMP_HTML) $(TEMP_SRC)/*.md
 
-postprocess:
+postprocess: pandoc
 	@echo "Postprocessing: $(TEMP_HTML)/* -> $(DOCS_HTML)/*"
 	@time $(PYTHON) extra/postprocess.py $(DOCS_HTML) $(TEMP_HTML)/*.html
 
-deploy:
+deploy: postprocess
 	@cp -Rn $(TEMP_HTML)/ $(DOCS_HTML) || true
 
 check-links:
