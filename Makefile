@@ -1,44 +1,60 @@
-.PHONY: all default clean preprocess pandoc postprocess deploy check-links
+.PHONY: all default clean preprocess pandoc postprocess install deploy check-links
 
 # Directories
-TEMP       := _temp
-TEMP_SRC   := $(TEMP)/src
-TEMP_HTML  := $(TEMP)/html
-DOCS_HTML  := docs/html
+SRC       := src
+LIB       := lib
+RSC       := resources
+MARKOWN   := $(SRC)/markdown
+TEMP      := _temp
+BUILD     := build
+HTML      := $(BUILD)/html
+DOCS      := docs
 
 # Source Files
-GLOSSARY   := src/X-appendix/01-glossary.md
-SRC_FILES  := $(wildcard src/*/*.md)
+GLOSSARY  := $(MARKOWN)/X-appendix/01-glossary.md
+MD_FILES  := $(wildcard $(MARKOWN)/*/*.md)
 
 # Tools
-PYTHON     := python3
-PANDOC     := pandoc
-HYPERLINK  := hyperlink
+PYTHON    := python3
+PANDOC    := pandoc
+HYPERLINK := hyperlink
 
-default: deploy
+default: install
 
-all: deploy check-links
+all: install check-links
 
 clean:
-	@rm -rf $(TEMP) $(DOCS_HTML)/*
+	@echo "Cleaning..."
+	@rm -rf $(TEMP) $(BUILD)
 
 preprocess: clean
-	@mkdir -p $(TEMP_SRC)
-	@echo "Preprocessing: src/*/* -> $(TEMP_SRC)"
-	@time $(PYTHON) extra/preprocess.py $(TEMP_SRC) $(GLOSSARY) $(SRC_FILES)
+	@mkdir -p $(TEMP)
+	@echo "Preprocessing..."
+	@time $(PYTHON) extra/preprocess.py $(TEMP) $(GLOSSARY) $(MD_FILES)
 
 pandoc: preprocess
-	@echo "Running pandoc: $(TEMP_SRC)/* -> $(TEMP_HTML)/*"
-	@time $(PANDOC) --defaults=pandoc-defaults.yaml --output=$(TEMP_HTML) $(TEMP_SRC)/*.md
+	@mkdir -p $(BUILD)
+	@echo "Running pandoc..."
+	@time $(PANDOC) --defaults=pandoc-defaults.yaml --resource-path=resources --output=$(HTML) $(TEMP)/*.md
 
 postprocess: pandoc
-	@echo "Postprocessing: $(TEMP_HTML)/* -> $(DOCS_HTML)/*"
-	@time $(PYTHON) extra/postprocess.py $(DOCS_HTML) $(TEMP_HTML)/*.html
+	@echo "Postprocessing..."
+	@time $(PYTHON) extra/postprocess.py $(HTML)/*.html
 
-deploy: postprocess
-	@cp -Rn $(TEMP_HTML)/ $(DOCS_HTML) || true
+install: postprocess
+	@echo "Installing..."
+	@cp    $(SRC)/index.html     $(BUILD)/ || true
+	@cp -r $(SRC)/interactive    $(BUILD)/ || true
+	@cp -r $(SRC)/khan-exercises $(BUILD)/ || true
+	@cp -r $(RSC)/*              $(BUILD)/ || true
+	@cp -r $(LIB)                $(BUILD)/ || true
+
+deploy: install
+	@echo "Deploying..."
+	@rm -fr $(DOCS)
+	@cp -r $(BUILD) $(DOCS) || true
 
 check-links:
-	$(HYPERLINK) dump-external-links --base-path $(DOCS_HTML) | sort | uniq
+	$(HYPERLINK) dump-external-links --base-path $(HTML) | sort | uniq
 	@echo "--------------"
-	$(HYPERLINK) --check-anchors $(DOCS_HTML)
+	$(HYPERLINK) --check-anchors $(HTML)

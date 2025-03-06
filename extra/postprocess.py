@@ -5,14 +5,14 @@ from pathlib import Path
 from html.parser import HTMLParser
 
 
-def main(outdir: str, *infiles: str):
-    """Postprocess each of the infiles and write their result in the outdir folder"""
+def main(*infiles: str):
+    """Postprocess each of the infiles"""
     for inf in infiles:
         with open(inf) as IN:
             contents = IN.read()
+            IN.close
         contents = postprocess(contents)
-        outf = Path(outdir) / Path(inf).name
-        with open(outf, "w") as OUT:
+        with open(inf, "w") as OUT:
             print(contents, file=OUT)
 
 
@@ -100,7 +100,7 @@ def convert_animations(contents: str) -> str:
         contents = re.sub(r"</head>", f'{tag}\n</head>', contents)
     return contents
 
-        
+
 ###############################################################################
 ## Calling from the command-line
 
