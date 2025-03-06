@@ -1,0 +1,67 @@
+<!--
+List-based dequeue mini-proficiency exercise.
+Written by Junyang Chen and Cliff Shaffer
+-->
+
+<!DOCTYPE html>
+<html data-require="jsav math LinkedQueue-Dequeue-PRO LinkList">
+  <head>
+    <title>List-based dequeue Proficiency Exercise</title>
+    <script src="../../lib/require-2.1.14.min.js"></script>
+    <script src="../../khan-exercises/local-only/main.js" ></script>
+    <style>
+      #LinkedQueue-Dequeue-PRO .jsavcanvas{
+        height: 200px;
+      }
+      #LinkedQueue-Dequeue-PRO .bgColor{
+        font-size: 130%;
+        background-color: yellow;
+      }
+      #LinkedQueue-Dequeue-PRO .highlight{
+        background-color: yellow;
+      }
+    </style>
+  </head>
+
+  <body data-height="550" data-width="950">
+    <div class="exercise">
+      <div class="vars">
+        <var id="arr_size">Khan.randRange(2, 6)</var>
+        <var id="JSAV">LinkedQueueDequeuePRO.initJSAV(arr_size)</var>
+      </div>
+
+      <div class="problems">
+        <div id="LinkedQueue-Dequeue-PROp"> <!-- Supresses answer box -->
+          <p class="problem">Dequeue a value from the linked queue.</p>
+          <div class="question">
+            <p>First move the correct value to the box shown below the
+              list. Then update any
+              necessary pointers. If a pointer variable needs to be set to
+              null, then click the pointer and then click on the "Make Null" button.</p>
+            <input id="reset" type="button" value="Reset" />
+            <input id="makenull" type="button" value="Make Null" />
+            <div id="LinkedQueue-Dequeue-PRO" class="jsavcanvas"></div>
+          </div>
+          <div class="solution" data-type="custom">
+            <div class="guess"> [LinkedQueueDequeuePRO.userInput] </div>
+            <div class="validator-function">
+              if (!LinkedQueueDequeuePRO.checkAnswer(arr_size) && !guess[0]) {
+                return ""; // User did not click, and correct answer is not
+                           // initial array state
+              } else { return LinkedQueueDequeuePRO.checkAnswer(arr_size); }
+            </div>
+          </div>
+          <div class="hints">
+            <p>The value to be removed must be in the node that "front" is
+              pointing to. So click that value, then click the
+              "return" box below the list.</p>
+            <p>The pointer field of the removed node must be changed
+              to null with the "Make Null" button.
+            <p>Finally the "front" pointer should be moved to the next node
+              in the list.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

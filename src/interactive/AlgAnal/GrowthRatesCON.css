@@ -1,0 +1,17 @@
+#GrowthRatesCON {
+  height: 430px;
+}
+
+.dashBoxLine{
+  stroke-width: 1.5;
+  stroke-dasharray: 7,7;
+}
+
+.dashLine{
+  stroke-width: 1;
+  stroke-dasharray: 10,10;
+}
+
+.yLabel{
+  text-align: right;
+}

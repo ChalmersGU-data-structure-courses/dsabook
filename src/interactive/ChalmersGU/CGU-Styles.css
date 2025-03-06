@@ -1,0 +1,340 @@
+
+/*********************************************************/
+
+#ListADT-Positions-CON { 
+  height: 190px;
+}
+
+#ListADT-Positions-CON .jsavoutput.jsavline{
+  height: 45px;
+}
+
+#ListADT-Positions-CON .jsavarray .jsavnode {
+  line-height: 60px;
+  min-height: 60px;
+  max-height: 60px;
+  font-size: 20px;
+  box-shadow: 0 0 0;
+  min-width: 40px !important;
+  max-width: 40px !important;
+}
+
+/*********************************************************/
+
+#StaticArrayList-Vars-CON {
+  height: 280px;
+}
+
+#StaticArrayList-Vars-CON .jsavoutput.jsavline {
+  height: 50px;
+}
+
+/*********************************************************/
+
+#StaticArrayList-Intro-CON {
+  height: 190px;
+}
+
+#StaticArrayList-Intro-CON .jsavoutput.jsavline {
+  height: 40px;
+}
+
+/*********************************************************/
+
+#StaticArrayList-Add-CON {
+  height: 310px;
+}
+
+#StaticArrayList-Add-CON .jsavcode {
+  margin-left: 300px;
+  width: 500px;
+}
+
+#StaticArrayList-Add-CON .jsavlabel {
+  margin-bottom: 0;
+}
+
+#StaticArrayList-Add-CON .jsavoutput.jsavline {
+  height: 30px;
+}
+
+/*********************************************************/
+
+#StaticArrayList-Append-CON {
+  height: 270px;
+}
+
+#StaticArrayList-Append-CON .jsavcode {
+  margin-left: 300px;
+  width: 500px;
+}
+
+#StaticArrayList-Append-CON .jsavoutput.jsavline {
+  height: 20px;
+}
+
+/*********************************************************/
+
+#StaticArrayList-Remove-CON {
+  height: 340px;
+}
+
+#StaticArrayList-Remove-CON .jsavcode {
+  margin-left: 280px;
+  width: 520px;
+}
+
+#StaticArrayList-Remove-CON .jsavoutput.jsavline {
+  height: 30px;
+}
+
+/*********************************************************/
+
+#DynamicArrayList-Append-CON {
+    height: 350px;
+    width: 900px;
+}
+
+#DynamicArrayList-Append-CON .jsavcode {
+  margin-left: 300px;
+  width: 520px;
+}
+
+#DynamicArrayList-Append-CON .jsavoutput.jsavline {
+  height: 30px;
+}
+
+/*********************************************************/
+
+#DynamicArrayList-Remove-CON {
+    height: 360px;
+    width: 870px;
+}
+
+#DynamicArrayList-Remove-CON .jsavcode {
+  margin-left: 280px;
+  width: 520px;
+}
+
+#DynamicArrayList-Remove-CON .jsavoutput.jsavline {
+  height: 30px;
+}
+
+/*********************************************************/
+
+#LinkedList-Overview-CON {
+  height: 60px;
+}
+
+/*********************************************************/
+
+#LinkedList-Iteration-CON {
+  height: 260px;
+}
+
+/*********************************************************/
+
+#LinkedList-Problems-CON {
+  height: 250px;
+}
+
+#LinkedList-Problems-CON .jsavoutput.jsavline {
+  height: 70px;
+}
+
+/*********************************************************/
+
+#LinkedList-Add-CON .jsavcanvas {
+  height: 340px;
+}
+
+#LinkedList-Add-CON .jsavoutput.jsavline {
+  height: 30px;
+}
+
+#LinkedList-Add-CON .jsavcode {
+  top: 145px;
+  width: 600px;
+  position: relative;
+}
+
+/*********************************************************/
+
+#LinkedList-AddSpecial-CON .jsavcanvas {
+  height: 340px;
+}
+
+#LinkedList-AddSpecial-CON .jsavoutput.jsavline {
+  height: 30px;
+}
+
+#LinkedList-AddSpecial-CON .jsavcode {
+  top: 145px;
+  width: 600px;
+  position: relative;
+}
+
+/*********************************************************/
+
+#LinkedList-Remove-CON {
+  height: 580px;
+}
+
+#LinkedList-Remove-CON .jsavoutput.jsavline {
+  height: 30px;
+}
+
+#LinkedList-Remove-CON .jsavcode {
+  position: relative;
+  top: 150px;
+  width: 540px;
+}
+
+/*********************************************************/
+
+#DoublyLinkedList-CON .jsavcanvas {
+  height: 95px;
+}
+
+/*********************************************************/
+
+#DynamicArrayStack-Top-CON {
+  height: 220px;
+}
+
+#DynamicArrayStack-Top-CON .jsavoutput.jsavline {
+  height: 30px;
+}
+
+/*********************************************************/
+
+#DynamicArrayStack-Push-CON {
+    height: 230px;
+}
+
+#DynamicArrayStack-Push-CON .jsavoutput.jsavline {
+  height: 30px;
+}
+
+#DynamicArrayStack-Push-CON .jsavcode{
+  position: relative;
+  top: -5px;
+  left: 135px;
+  width: 450px;
+}
+
+/*********************************************************/
+
+#DynamicArrayStack-Pop-CON {
+  height: 280px;
+}
+
+#DynamicArrayStack-Pop-CON .jsavoutput.jsavline {
+  height: 15px;
+}
+
+#DynamicArrayStack-Pop-CON .jsavcode{
+  position: relative;
+  top: 5px;
+  left: 135px;
+  width: 450px;
+}
+
+/*********************************************************/
+
+#LinkedStack-Overview-CON {
+  height: 95px;
+}
+
+/*********************************************************/
+
+#LinkedStack-Push-CON {
+  height: 210px;
+}
+
+#LinkedStack-Push-CON .jsavoutput.jsavline {
+  height: 15px;
+}
+
+#LinkedStack-Push-CON .jsavcode {
+  position: relative;
+  top: 0;
+  left: 196px;
+  width: 350px;
+}
+
+/*********************************************************/
+
+#LinkedStack-Pop-CON {
+  height: 250px;
+}
+
+#LinkedStack-Pop-CON .jsavoutput.jsavline {
+  height: 20px;
+}
+
+#LinkedStack-Pop-CON .jsavcode {
+  position: relative;
+  top: -20px;
+  left: 195px;
+  width: 400px;
+}
+
+/*********************************************************/
+
+#LinkedStack-Twostack-CON {
+  height: 90px;
+}
+
+/*********************************************************/
+
+#LinkedQueue-Intro-CON {
+  height: 300px;
+}
+
+#LinkedQueue-Intro-CON .jsavoutput.jsavline {
+  height: 40px;
+}
+
+#LinkedQueue-Intro-CON .jsavcode {
+  position: relative;
+  left: 150px;
+  top: -10px;
+  width:535px;
+}
+
+/*********************************************************/
+
+#LinkedQueue-Enqueue-CON {
+  height: 280px;
+}
+
+#LinkedQueue-Enqueue-CON .jsavoutput.jsavline {
+  height: 20px;
+}
+
+#LinkedQueue-Enqueue-CON .jsavcode {
+  position: relative;
+  left: 195px;
+  top: -10px;
+  width:450px;
+}
+
+/*********************************************************/
+
+#LinkedQueue-Dequeue-CON {
+  height: 300px;
+}
+
+#LinkedQueue-Dequeue-CON .jsavoutput.jsavline {
+  height: 20px;
+}
+
+#LinkedQueue-Dequeue-CON .jsavcode {
+  position: relative;
+  left: 150px;
+  top: -10px;
+  width:550px;
+}
+
+/*********************************************************/

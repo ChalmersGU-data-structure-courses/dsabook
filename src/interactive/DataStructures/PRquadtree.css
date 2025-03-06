@@ -1,0 +1,22 @@
+.PrQuadFullleaf {
+  border-radius: 1px;
+  background-color: DarkOrange;
+  line-height: 20px; /*22px*/
+  z-index: 100; /* Prevents the tails of the edges from showing up in the background of the node */
+}
+
+.PrQuadEmptyleaf {
+  border-radius: 1px;
+  background-color: BurlyWood;
+  line-height: 20px; /*22px*/
+  z-index: 100; /* Prevents the tails of the edges from showing up in the background of the node */
+}
+
+/* Change the size of the tree nodes */
+.jsavtree .jsavnode, .jsavtree .jsavvalue {
+  line-height: 15px;
+  min-width: 15px;
+  max-width: 15px;
+  min-height: 15px;
+  max-height: 15px;
+}

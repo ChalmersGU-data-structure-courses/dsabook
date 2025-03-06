@@ -1,0 +1,24 @@
+{
+  "translations" : {
+    "en": {
+      ".avTitle": "Selection Sort Visualization",
+      "av_Authors": "Cliff Shaffer and Mauricio De La Barra",
+      "#about": "About",
+      "#run": "Run",
+      "#reset": "Reset",
+      "#arraysizeLabel": " List size: ",
+      "#arrayValuesLabel": " Your values: ",
+      "av_arrValsPlaceholder": "Type some array values, or click 'run' to use random values",
+      "av_c1": "Starting Selection Sort.",
+      "av_c2": "Done sorting!",
+      "av_c3": "For each pass, we will move left to right looking for the next largest value. Once that is found, it will be swapped into its final position (these will be shown in lighter color).",
+      "av_c4": "Starting pass ",
+      "av_c5": "Initialize bigindex.",
+      "av_c6": "For each element moving through the list: the biggest seen so far is always red.",
+      "av_c7": "Compare to biggest seen so far.",
+      "av_c8": "Found something bigger, so switch value of bigindex.",
+      "av_c9": "Now swap the next biggest element into place.",
+      "av_c10": "Done this pass."
+    }
+  }
+}
