@@ -2,11 +2,11 @@
 # Temporary files/directories
 _local*
 _private*
-_temp*
 *~
 *.bak
 \#*#
 .#*
+build
 
 # MacOS-specific files
 .DS_Store
@@ -15,4 +15,3 @@ _temp*
 __pycache__/
 *.py[cod]
 
-build
