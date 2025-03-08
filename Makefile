@@ -1,4 +1,4 @@
-.PHONY: all default clean preprocess pandoc postprocess install deploy check-links
+.PHONY: all default clean preprocess pandoc postprocess install deploy check-links server
 
 # Directories
 SRC       := src
@@ -36,6 +36,7 @@ pandoc: preprocess
 	@mkdir -p $(BUILD)
 	@echo "Running pandoc..."
 	@time $(PANDOC) --defaults=pandoc-defaults.yaml --resource-path=resources --output=$(HTML) $(TEMP)/*.md
+	@rm -fr $(TEMP)
 
 postprocess: pandoc
 	@echo "Postprocessing..."
@@ -58,3 +59,6 @@ check-links:
 	$(HYPERLINK) dump-external-links --base-path $(HTML) | sort | uniq
 	@echo "--------------"
 	$(HYPERLINK) --check-anchors $(HTML)
+
+server:
+	$(PYTHON) -m http.server -d $(BUILD) 8000
