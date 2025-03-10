@@ -2,10 +2,7 @@
 ## Comparing algorithms
 
 ::: TODO
-- input size
-- basic operations
-- [3.2 Comparing Algorithms]
-- abstracting away things,
+- Prio 2: discuss how to abstract away things
 :::
 
 ### Introduction

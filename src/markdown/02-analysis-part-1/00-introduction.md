@@ -2,7 +2,8 @@
 # Algorithm analysis, part 1: Introduction
 
 ::: TODO
-- correctness and complexity
+- Prio 2: also write about correctness, e.g. invariants
+- Prio 3: is the bullet list fine?
 :::
 
 How long will a program take when I run it on a dataset ten times as

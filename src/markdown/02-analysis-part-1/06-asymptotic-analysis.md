@@ -2,8 +2,12 @@
 ## Asymptotic analysis
 
 ::: TODO
-- growth rate when the input gets large
-- T(n) - the number of basic operations
+- Prio 1: should we use O() or Omega or Theta when describing functions/algorithms?
+    - perhaps O() and "as tight as possible"?
+    - this influences all subsequence sections/chapters too
+- Prio 1: give informal definition of O(), (and/or Omega and Theta?)
+- Prio 2: extend the subsection Classifying functions
+- Prio 2: add another example
 :::
 
 

@@ -1,10 +1,15 @@
 
 ### Practice questions: Running time
 
+::: TODO
+- Prio 1: should we use Theta or O()?
+    - perhaps just say "complexity" in the question, and O() in the answer?
+:::
+
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 
 :::::::::: question ::::::::::
-Determine $\Theta$ for the following code fragment in the average case. 
+Determine $\Theta$ for the following code fragment in the average case.
 Assume that all variables are integers.
 
     a = b + c
@@ -27,7 +32,7 @@ Assume that all variables are integers.
 
 
 :::::::::: question ::::::::::
-Determine $\Theta$ for the following code fragment in the average case. 
+Determine $\Theta$ for the following code fragment in the average case.
 Assume that all variables are integers.
 
     sum = 0
@@ -54,7 +59,7 @@ Assume that all variables are integers.
 
 
 :::::::::: question ::::::::::
-Determine $\Theta$ for the following code fragment in the average case. 
+Determine $\Theta$ for the following code fragment in the average case.
 Assume that all variables are integers.
 
     sum = 0
@@ -79,7 +84,7 @@ Assume that all variables are integers.
 
 
 :::::::::: question ::::::::::
-Determine $\Theta$ for the following code fragment in the average case. 
+Determine $\Theta$ for the following code fragment in the average case.
 Assume that all variables are integers.
 
     for i = 0 to n-2:
@@ -107,7 +112,7 @@ Assume that all variables are integers.
 
 
 :::::::::: question ::::::::::
-Determine $\Theta$ for the following code fragment in the average case. 
+Determine $\Theta$ for the following code fragment in the average case.
 Assume that all variables are integers.
 
     sum = 0
@@ -137,7 +142,7 @@ Assume that all variables are integers.
 
 
 :::::::::: question ::::::::::
-Determine $\Theta$ for the following code fragment in the average case. 
+Determine $\Theta$ for the following code fragment in the average case.
 Assume that all variables are integers.
 
     sum = 0
@@ -166,7 +171,7 @@ Assume that all variables are integers.
 
 
 :::::::::: question ::::::::::
-Determine $\Theta$ for the following code fragment in the average case. 
+Determine $\Theta$ for the following code fragment in the average case.
 Assume that all variables are integers.
 
 Assume that array A contains $n$ values, "random" takes constant time,
@@ -197,7 +202,7 @@ and "sort" takes $n \log n$ time.
 
 
 :::::::::: question ::::::::::
-Determine $\Theta$ for the following code fragment in the average case. 
+Determine $\Theta$ for the following code fragment in the average case.
 Assume that all variables are integers.
 
 Assume array A contains a random permutation of the values from 0 to $n-1$.
@@ -228,7 +233,7 @@ Assume array A contains a random permutation of the values from 0 to $n-1$.
 
 
 :::::::::: question ::::::::::
-Determine $\Theta$ for the following code fragment in the average case. 
+Determine $\Theta$ for the following code fragment in the average case.
 Assume that all variables are integers.
 
     sum = 0

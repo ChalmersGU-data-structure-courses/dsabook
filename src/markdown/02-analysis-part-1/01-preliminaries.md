@@ -1,6 +1,10 @@
 
 ## Problems, algorithms, and programs
 
+::: TODO
+- Prio 3: is this a good section? a good division of concepts?
+:::
+
 ### Problems
 
 Programmers commonly deal with problems, algorithms, and computer

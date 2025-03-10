@@ -1,6 +1,11 @@
 
 ## Empirical analysis
 
+::: TODO
+- Prio 2: make the text more coherent, more formal
+- Prio 3: add another example
+:::
+
 [Asymptotic algorithm analysis](#algorithm-analysis){.term} is an analytic tool, whereby we model the key aspects of an
 algorithm to determine the growth rate of the algorithm as the input
 size grows. It has proved hugely practical, guiding developers to use

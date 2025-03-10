@@ -1,6 +1,11 @@
 
 ### Preliminaries: Summary questions
 
+::: TODO
+- Prio 3: update questions
+- Prio 3: do we want this quiz here or in another place?
+:::
+
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 
 :::::::::: question ::::::::::

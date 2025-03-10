@@ -1,6 +1,11 @@
 
 ## Growth rates
 
+::: TODO
+- Prio 2: is this a good way of introducing the concept of growth rates?
+    - does this section match well with the previous and the next?
+:::
+
 ### Faster computer, or faster algorithm?
 
 Imagine that you have a problem to solve, and you know of an algorithm

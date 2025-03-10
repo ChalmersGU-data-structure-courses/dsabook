@@ -2,8 +2,8 @@
 ## Invariants, preconditions, and postconditions
 
 ::: TODO
-- What is an invariant? Why is it important?
-- Example: binary search
+- Prio 1: what is an invariant? why is it important?
+- Prio 1: Example: binary search
     - precondition: sorted array
     - invariant: the searched value is between a[lo] and a[hi]
 :::

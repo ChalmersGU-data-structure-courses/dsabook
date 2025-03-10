@@ -1,6 +1,10 @@
 
 ## Case study: Analysing linear and binary search
 
+::: TODO
+- Prio 2: update text so that it fits in this position in the structure
+:::
+
 ### Linear search
 
 The final example of algorithm analysis for this section will compare

@@ -2,8 +2,13 @@
 ## Algorithm analysis in practice
 
 ::: TODO
-- simple statements, loops, nested loops, sequence, if-then-else
-- examples
+- Prio 1: should the simplifying rules be here or in the previous section?
+- Prio 1: divide into subsections, should the examples be examples?
+- Prio 1: how to combine statements (sequencing)
+    - sequence = add, looping = multiply
+- Prio 2: add some "real" examples, i.e., more complex ones
+    - exception: nested linear + binary loop == linear
+- Prio 2: briefly discuss functions and non-atomic statements
 :::
 
 This modules discusses the analysis for several simple code fragments.

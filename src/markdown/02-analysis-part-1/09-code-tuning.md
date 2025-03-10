@@ -1,6 +1,11 @@
 
 ## Code tuning
 
+::: TODO
+- Prio 2: discuss constant factors (not covered by asymptotic complexity/analysis)
+- Prio 2: update this text, to make it fit in the structure
+:::
+
 In practice, there is not such a big difference in running time between
 an algorithm with growth rate $\Theta(n)$ and another with growth rate
 $\Theta(n \log n)$. There is, however, an enormous difference in running
