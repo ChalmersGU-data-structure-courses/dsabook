@@ -1,6 +1,10 @@
 
 ## Implementing mergesort
 
+::: TODO
+- Prio 1: short introduction
+- Prio 3: bottomup, runbased mergesort, powersort
+:::
 
 ### Mergesort using linked lists
 

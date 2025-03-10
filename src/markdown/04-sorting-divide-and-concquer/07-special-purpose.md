@@ -2,8 +2,9 @@
 ## Special-purpose sorting algorithms
 
 ::: TODO
-- It's not possible to make a generic sorting algorithm better than n log n, but if the data is restricted we can
-- non-comparative sorting
+- Prio 3: write this section
+    - It's not possible to make a generic sorting algorithm better than n log n, but if the data is restricted we can
+    - non-comparative sorting
 :::
 
 ### Distribution sorting

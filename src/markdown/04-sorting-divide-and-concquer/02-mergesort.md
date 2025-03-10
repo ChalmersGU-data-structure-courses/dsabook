@@ -1,6 +1,12 @@
 
 ## Mergesort
 
+::: TODO
+- Prio 1: invariants
+- Prio 1: complexity analysis
+- Prio 2: general rewrite of the text
+:::
+
 A natural approach to problem solving is divide and conquer. To use
 divide and conquer when sorting, we might consider breaking the list to
 be sorted into pieces, process the pieces, and then put them back

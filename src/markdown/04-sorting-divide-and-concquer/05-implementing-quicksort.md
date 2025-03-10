@@ -1,7 +1,9 @@
 ## Implementing quicksort
 
 ::: TODO
-- pseudocode
+- Prio 1: short intro to section
+- Prio 1: text for partition
+- Prio 1: pseudocode
 :::
 
 ### Partition

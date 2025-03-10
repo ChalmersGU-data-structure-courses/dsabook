@@ -1,6 +1,11 @@
 
 ## Quicksort
 
+::: TODO
+- Prio 1: invariants
+- Prio 2: make the text more coherent
+:::
+
 While Mergesort uses the most obvious form of divide and conquer (split
 the list in half then sort the halves), this is not the only way that we
 can break down the sorting problem. We saw that doing the merge step for

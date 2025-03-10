@@ -1,6 +1,10 @@
 
 ## Empirical comparison of sorting algorithms
 
+::: TODO
+- Prio 3: redo the tests, better
+:::
+
 Which sorting algorithm is fastest? Asymptotic complexity analysis lets
 us distinguish between $\Theta(n^2)$ and $\Theta(n \log n)$ algorithms,
 but it does not help distinguish between algorithms with the same

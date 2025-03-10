@@ -1,6 +1,10 @@
 
 ### Review questions: Comparison of sorting algorithms
 
+::: TODO
+- Prio 2: perhaps this quiz is better somewhere else?
+:::
+
 Here are a few multiple choice questions that ask you to compare the
 sorting algorithms that we learned about in this chapter.
 
@@ -16,7 +20,7 @@ Selection Sort is generally faster than the Bubble Sort on the same input.
 
 ::: hints
 - Selection Sort can be viewed as an optimization of Bubble Sort.
-- On each pass, Selection Sort just picks out the next record, 
+- On each pass, Selection Sort just picks out the next record,
 while Bubble Sort has to do a lot of swapping.
 :::
 ::::::::::::::::::::::::::::::
@@ -35,14 +39,14 @@ How are Selection Sort and Quicksort similar?
 - Does Selection Sort use divide-and-conquer? No.
 - Can Selection Sort run in $O(n \log n)$ time? No.
 - How long does Quicksort need in the average case?
-- $O(n \log n)$ 
+- $O(n \log n)$
 :::
 ::::::::::::::::::::::::::::::
 
 
 
 :::::::::: question ::::::::::
-(For the implementations as presented in this chapter:) 
+(For the implementations as presented in this chapter:)
 Which of the following sorts is not stable?
 
 - [x] Quicksort
@@ -56,7 +60,7 @@ relative order of records with equal keys?
 ::::::::::::::::::::::::::::::
 
 
-<!-- 
+<!--
 :::::::::: question ::::::::::
 Which sorting algorithm makes use of Insertion Sort's best case behavior?
 
@@ -131,7 +135,7 @@ depending on the values seen during comparisons?
 
 
 :::::::::: question ::::::::::
-Which of the following sorting methods will be best 
+Which of the following sorting methods will be best
 if the number of swaps done is the only measure of efficiency?
 
 - [x] Selection Sort
@@ -170,7 +174,7 @@ referred to as "quadratic sorts" because of their worst-case time cost.
 
 
 :::::::::: question ::::::::::
-When Mergssort merges two sorted lists of sizes $m$ and $n$ 
+When Mergssort merges two sorted lists of sizes $m$ and $n$
 into a sorted list of size $m+n$, it requires how many comparisons in the worst case?
 
 - [x] $m+n-1$
