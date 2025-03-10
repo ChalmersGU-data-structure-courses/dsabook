@@ -1,7 +1,9 @@
 
 ## Motivation
 
-[Short explanation of the why and what]
+::: TODO
+- Prio 3: is this a good motivation section?
+:::
 
 You might think that with ever more powerful computers, program
 efficiency is becoming less important. After all, processor speed and

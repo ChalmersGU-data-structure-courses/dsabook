@@ -1,11 +1,14 @@
 
 ## Preliminaries
 
+::: note
+The section is intended to be a very quick run-down of what programming and math concepts we we use in the book.
+We don't need lots of explanations - we can refer to other places instead.
+:::
+
 ::: TODO
-- Very quick run-down of what programming and math concepts we we use in the book
-- Note that we use pseudocode in this book
-- Note that Python doesn't use many of the basic types we need
-- Don't need lots of explanations - we can refer to other places instead
+- Prio 1: all sections need major rewrites/updates, almost everything is missing
+- Prio 2: introduce and describe the pseudocode we use in this book
 :::
 
 ### Mathematics
@@ -1592,7 +1595,7 @@ regardless of the specific programming language.
 - We will only use these: boolean, integer, float, character, **null**
 - We assume characters are fixed-size unicode - but sometimes 8-bit ascii
 - Sometimes we might talk about fixed-size integers (32-bit, 64-bit)
-- Python-specific details: no fixed-size ints, chars == strings
+- Python-specific details: no fixed-size ints, chars == strings, doesn't distinguish between int and float
 :::
 
 #### Strings

@@ -2,7 +2,7 @@
 ### Quiz: Data types concept map
 
 ::: TODO
-- Remove this "concept map" quiz completely??
+- Prio 1: do we need this quiz "concept map" at all?
 :::
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::

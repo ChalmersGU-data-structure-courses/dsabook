@@ -2,7 +2,9 @@
 ## Case study: Searching in a list
 
 ::: TODO
-- Use cases for searching: dictionaries, sets, ...
+- Prio 1: update the sections on linear and binary search
+- Prio 2: use cases for searching: dictionaries, sets, ...
+- Prio 3: write the text on Even faster searching
 :::
 
 

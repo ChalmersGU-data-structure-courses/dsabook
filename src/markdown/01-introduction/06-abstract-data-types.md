@@ -2,9 +2,11 @@
 ## Abstract data types, ADT
 
 ::: TODO
-- overview and motivation
-- analogy with Java interfaces (see preliminaries)
-- nice image showing all ADTs (and DSs) - see the slides
+- Prio 1: write sections Ordered seqs, Sets&maps, Graphs
+- Prio 1: nice image showing all ADTs (and DSs) - see the slides
+- Prio 2: overview and motivation
+- Prio 2: analogy with Java interfaces (see preliminaries)
+- Prio 3: update the text and examples in section Terminology
 :::
 
 

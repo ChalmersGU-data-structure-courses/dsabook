@@ -1,6 +1,11 @@
 
 ## Selecting a data structure
 
+::: TODO
+- Prio 3: are the priority lists as we want them?
+- Prio 3: should this section be already this early?
+:::
+
 It should go without saying that people write programs to solve
 problems. However, sometimes programmers forget this. So it is crucial
 to keep this truism in mind when selecting a
