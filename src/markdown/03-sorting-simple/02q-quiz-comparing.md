@@ -1,12 +1,16 @@
 
 ### Review questions: Comparison
 
+::: TODO
+- Prio 3: is this quiz necessary? and is this a good place for it?
+:::
+
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.
 
-One good general-purpose solution to the problem of getting a key from a record 
+One good general-purpose solution to the problem of getting a key from a record
 is to define a special method such as `.key()`.
 
 - [x] False
@@ -23,7 +27,7 @@ is to define a special method such as `.key()`.
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.
 
-One good general-purpose solution to the problem of getting a key from a record 
+One good general-purpose solution to the problem of getting a key from a record
 is to store Key/Value pairs in the search structure.
 
 - [ ] False
@@ -74,7 +78,7 @@ In order to do an exact-match search, the key values must define a total order.
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.
 
-The problem with using a `.key()` method to get the key from a record 
+The problem with using a `.key()` method to get the key from a record
 is that we can't use this same method to get different fields for different searches.
 
 - [ ] False

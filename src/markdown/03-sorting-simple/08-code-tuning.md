@@ -1,6 +1,11 @@
 
 ## Optimizing sort algorithms with code tuning
 
+::: TODO
+- Prio 2: reduce the text about Selection sort a little
+- Prio 3: are the other simple optimisations?
+:::
+
 Since sorting is such an important application, it is natural for
 programmers to want to optimize their sorting code to run faster. Of
 course all quadratic sorts (Insertion Sort, Bubble Sort and Selection

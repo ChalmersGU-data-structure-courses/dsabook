@@ -1,6 +1,10 @@
 
 ## Insertion sort
 
+- Prio 1: write about invariants
+- Prio 2: rewrite a little, because now it looks like insertion sort is the first to be introduced
+- Prio 2: improve the analysis (not just a visualisation)
+
 What would you do if you have a stack of phone bills from the past two
 years and you want to order by date? A fairly natural way to handle this
 is to look at the first two bills and put them in order. Then take the

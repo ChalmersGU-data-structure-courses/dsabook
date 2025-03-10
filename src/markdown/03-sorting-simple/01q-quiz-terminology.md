@@ -1,6 +1,10 @@
 
 ### Review questions: Terminology
 
+::: TODO
+- Prio 3: review the questions, is this a good place for a quiz?
+:::
+
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 
 :::::::::: question ::::::::::

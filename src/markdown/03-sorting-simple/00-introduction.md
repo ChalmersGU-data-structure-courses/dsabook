@@ -1,6 +1,11 @@
 
 # Sorting, part 1: Simple algorithms
 
+::: TODO
+- Prio 1: rewrite the last paragraph to reflect that it's not 2 chapters
+- Prio 3: update text in general
+:::
+
 We have seen that, when an array is sorted in ascending order, *binary
 search* can be used to find items in it efficiently. But what about when
 we have a collection of data that is not in any order? If we will often

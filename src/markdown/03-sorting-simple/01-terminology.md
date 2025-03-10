@@ -2,13 +2,14 @@
 ## Terminology and notation
 
 ::: TODO
-- In-place: only requires a constant amount O(1) of additional memory
-- Stability: does not change the relative order of elements with equal keys
-- Adaptive: if it takes advantage of existing order in its input
-- Online: can sort a list as it receives it
-- Efficicency: n:o comparisons / swaps / array accesses
-    - Note: multiplicative/additive constants do not matter (refer forward to complexity chapter)
-- Postcondition: the array is sorted!
+- Prio 2: introduce all these terms, more formally:
+    - In-place: only requires a constant amount O(1) of additional memory
+    - Stability: does not change the relative order of elements with equal keys
+    - Adaptive: if it takes advantage of existing order in its input
+    - Online: can sort a list as it receives it
+    - Efficicency: n:o comparisons / swaps / array accesses
+        - Note: multiplicative/additive constants do not matter (refer forward to complexity chapter)
+    - Postcondition: the array is sorted!
 :::
 
 

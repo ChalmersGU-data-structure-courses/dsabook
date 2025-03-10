@@ -1,6 +1,12 @@
 
 ## Bubble sort
 
+::: TODO
+- Prio 1: write about invariants
+- Prio 2: rewrite a little, because now it looks like insertion sort has already been introduced
+- Prio 2: improve the analysis (not just a visualisation)
+:::
+
 Our next sorting algorithm is called [Bubble Sort]{.term}.
 Bubble Sort is often taught to novice programmers in
 introductory computer science courses. This is unfortunate, because

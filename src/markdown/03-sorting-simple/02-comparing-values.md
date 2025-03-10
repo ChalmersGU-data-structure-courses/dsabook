@@ -2,10 +2,11 @@
 ## Comparing values
 
 ::: TODO
-- unnecessary long - remove things!
-- Two main approaches (cmp -> -1/0/1, or declare each operator)
-- "Natural" ordering, and different orderings
-- key-based sorting, comparable-based
+- Prio 1: unnecessary long - remove things!
+- overview:
+    - Two main approaches (cmp -> -1/0/1, or declare each operator)
+    - "Natural" ordering, and different orderings
+    - key-based sorting, comparable-based
 :::
 
 If we want to sort some things, we have to be able to compare them, to

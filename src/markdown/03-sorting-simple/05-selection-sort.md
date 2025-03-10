@@ -2,9 +2,14 @@
 ## Selection sort
 
 ::: TODO
-This version selects the largest element and puts it in the end,
-which is different from Wikipedia, Programiz, etc.
-They selects the smallest element and puts it at the front.
+- Prio 1: write about invariants
+- Prio 1: change the pseudocode
+    - The current version selects the largest element and puts it in the end,
+      which is different from Wikipedia, Programiz, etc.
+      They select the smallest element and puts it at the front.
+    - We have to change the animations too!
+- Prio 2: rewrite a little, because now it looks like insertion sort has already been introduced
+- Prio 2: improve the analysis (not just a visualisation)
 :::
 
 Consider again the problem of sorting a pile of phone bills for the past

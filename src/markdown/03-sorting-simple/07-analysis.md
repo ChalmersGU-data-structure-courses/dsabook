@@ -1,6 +1,12 @@
 
 ## Computational analysis
 
+::: TODO
+- Prio 1: write about stability, etc
+- Prio 2: introduction before the Stability section
+- Prio 2: improve the other sections
+:::
+
 ### Stability, in-place, adaptive, online
 
 ### The cost of exchange sorting
