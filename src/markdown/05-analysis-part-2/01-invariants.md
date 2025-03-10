@@ -2,5 +2,5 @@
 ## Invariants, part 2
 
 ::: TODO
-- something something
+- Prio 1: write this
 :::

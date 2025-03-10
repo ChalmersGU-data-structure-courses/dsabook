@@ -1,8 +1,8 @@
 
 ## Growth rates, part 2
 
-::: alert
-***Note***: This section is *work in progress*
+::: TODO
+- Prio 1: finish the section
 :::
 
 Two functions of $n$ have different

@@ -1,6 +1,12 @@
 
 ## Lower bounds and tight bounds
 
+::: TODO
+- Prio 1: this section says that Theta is the best to use, is that what we want?
+- Prio 1: update the text in Summary of asymptotic notations
+- Prio 3: do we really need the alternative definition of Omega?
+:::
+
 The definition for big-Oh allows us to greatly overestimate the cost for
 an algorithm. But sometimes we know a tight bound -- that is, a bound
 that truly reflects the cost of the algorithm or program with a constant

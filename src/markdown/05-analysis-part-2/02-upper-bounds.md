@@ -2,9 +2,7 @@
 ## Upper bounds: the big-O notation
 
 ::: TODO
-- definition
-- [3.5.1 Upper Bounds]
-- [3.5.2 Simplifying Rules]
+- Prio 1: formal definition
 :::
 
 Several terms are used to describe the running-time equation for an

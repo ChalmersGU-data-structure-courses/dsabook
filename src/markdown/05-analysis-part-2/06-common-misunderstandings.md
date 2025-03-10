@@ -1,6 +1,10 @@
 
 ## Common misunderstandings
 
+::: TODO
+- Prio 2: update text, perhaps merge with another section?
+:::
+
 [Asymptotic analysis]{.term} is one of the most intellectually difficult topics that
 undergraduate computer science majors are confronted with. Most people
 find [growth rates](#growth-rate){.term} and

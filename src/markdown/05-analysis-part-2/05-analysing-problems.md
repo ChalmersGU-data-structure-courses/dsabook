@@ -1,6 +1,10 @@
 
 ## Analyzing problems
 
+::: TODO
+- Prio 2: rewrite this text, more examples and help in how to analyse problems
+:::
+
 You most often use the techniques of "algorithm" analysis to analyze
 an [algorithm]{.term}, or the instantiation of
 an algorithm as a [program]{.term}. You can also
