@@ -2,9 +2,11 @@
 # Ordered sequences
 
 ::: TODO
-- API and use cases for stacks, queues
-- Briefly introduce deques
-- Mention prio.queues as extension of queues – point forward to the prio.queue chapter
+- Prio 2: update the text, include all ADTs (e.g. prio. queues too)
+- general chapter todos:
+    - API and use cases for stacks, queues
+    - Briefly introduce deques
+    - Mention prio.queues as extension of queues – point forward to the prio.queue chapter
 :::
 
 If your program needs to store a few things -- numbers, payroll

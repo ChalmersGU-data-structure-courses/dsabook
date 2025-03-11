@@ -1,6 +1,12 @@
 
 ## Implementing stacks and queues using arrays
 
+::: TODO
+- Prio 1: invariants
+- Prio 1: explanations of the pseudocode, not just the code (also file 05b)
+:::
+
+
 ### Array-based stacks
 
 The dynamic array-based stack contains an internal array (which will

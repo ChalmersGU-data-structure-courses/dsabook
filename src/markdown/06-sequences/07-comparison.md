@@ -2,9 +2,10 @@
 ## Comparison of linked lists vs dynamic arrays
 
 ::: TODO
-- should this be here or after the general lists section?
-   - if here, we must change the discussion about lists to stacks/queues
-- compare linked lists with arrays: no random access, but easy to insert (if we have a pointer)
+- Prio 1: rewrite
+    - now this is written as if general lists have been introduced, but not stacks/queues
+    - "we will look at stacks and queues later"
+- Prio 1: move some parts to the section about general lists
 :::
 
 ### Stacks

@@ -1,6 +1,13 @@
 
 ## ADT: General lists
 
+::: TODO
+- Prio 2: invariants
+- Prio 2: refactor: much of the text is supposed to be the first in the chapter (see file 09b)
+- Prio 3: alternative APIs
+:::
+
+
 We need some notation to show the contents of a list, so we will use the
 same angle bracket notation that is normally used to represent
 [sequences](#sequence){.term}. To be consistent

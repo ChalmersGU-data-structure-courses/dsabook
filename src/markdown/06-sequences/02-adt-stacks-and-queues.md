@@ -1,6 +1,12 @@
 
 ## ADT: Stacks and queues
 
+::: TODO
+- Prio 1: invariants
+- Prio 1: use cases for queues
+- Prio 2: make the case study more compact
+:::
+
 The [stack]{.term} is a list-like structure in
 which elements may be inserted or removed from only one end. While this
 restriction makes stacks less flexible than lists, it also makes stacks

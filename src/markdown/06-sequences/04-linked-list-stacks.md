@@ -1,6 +1,10 @@
 
 ## Implementing stacks and queues using linked lists
 
+::: TODO
+- Prio 1: invariants
+- Prio 1: explanations of the pseudocode, not just the code (also file 04b)
+:::
 
 ### Linked stacks
 

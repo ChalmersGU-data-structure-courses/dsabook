@@ -1,6 +1,10 @@
 
 ## Dynamic arrays
 
+::: TODO
+- Prio 1: invariants
+:::
+
 The problem with a static array-based list is that it has a limited
 capacity. If we try to add new elements when the internal array is full,
 the method will throw an exception.

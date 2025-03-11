@@ -1,6 +1,10 @@
 
 ## ADT: Collections and sequences
 
+::: TODO
+- Prio 2: introduction here
+:::
+
 ### Collections
 
 There are some properties that lists share with many other data

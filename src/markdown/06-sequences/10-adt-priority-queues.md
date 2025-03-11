@@ -1,6 +1,10 @@
 
 ## ADT: Priority queues
 
+::: TODO
+- Prio 1: invariants
+:::
+
 So far we have seen two [ADTs](#adt){.term} that
 represent a collection of objects, and support adding and removing
 objects:

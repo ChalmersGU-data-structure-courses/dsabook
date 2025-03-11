@@ -1,6 +1,11 @@
 
 ## ADT: Double-ended queues
 
+::: TODO
+- Prio 1: hide this section until written
+- Prio 2: invariants, use cases, explaining text
+:::
+
 ### Double-ended queues, or deques
 
     interface Deque extends Collection:

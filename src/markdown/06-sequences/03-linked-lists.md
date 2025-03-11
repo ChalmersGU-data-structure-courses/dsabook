@@ -1,6 +1,11 @@
 
 ## Linked lists
 
+::: TODO
+- Prio 1: invariants
+- Prio 1: explanation and pseudocode for deletion
+:::
+
 In this module we present one of the two traditional implementations for
 lists, usually called a [linked list]{.term}.
 The linked list uses [dynamic memory allocation]{.term}, that is, it allocates memory for new list elements as
