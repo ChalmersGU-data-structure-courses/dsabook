@@ -1,14 +1,9 @@
 
 ## Amortised analysis
 
-::: alert
-***Note***: This section is *work in progress*
-:::
-
 ::: TODO
-- amortised constant time
-- inserting at the beginning is slow
-- appending is fast
+- Prio 2: merge (or relate) with previous section
+- Prio 2: make self-organising lists a "case study"
 :::
 
 This module presents the concept of

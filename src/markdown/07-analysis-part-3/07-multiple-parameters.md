@@ -1,6 +1,12 @@
 
 ## Multiple parameters
 
+::: TODO
+- Prio 2: add definitions
+- Prio 2: more examples
+- Prio 3: discuss different definitions and how they differ
+:::
+
 Sometimes the proper analysis for an algorithm requires multiple
 parameters to describe the cost. To illustrate the concept, consider an
 algorithm to compute the rank ordering for counts of all pixel values in

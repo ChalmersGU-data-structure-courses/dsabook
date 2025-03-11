@@ -1,6 +1,13 @@
 
 ## Space bounds
 
+::: TODO
+- Prio 2: add an example where two different solutions have different space complexities
+- Prio 2: Binsort example:
+    - make an Example just as Arrays and Friendship links?
+    - don't talk about Theta because the improvements here are about the constant factors
+:::
+
 Besides time, space is the other computing resource that is commonly of
 concern to programmers. Just as computers have become much faster over
 the years, they have also received greater allotments of memory. Even

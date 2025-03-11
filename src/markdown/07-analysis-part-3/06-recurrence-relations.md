@@ -1,13 +1,9 @@
 
 ## Recurrence relations
 
-::: alert
-***Note***: This section is *work in progress*
-:::
-
 ::: TODO
-- recurrences are a way to model recursive functions
-- Throughout this module, there are references to equations, both on this page and in the Summations module. These should be made into proper cross-references rather than hard-coded equation numbers.
+- Prio 2: emphasize the main takeaway: recurrences are a way to model recursive functions
+- Prio 3: throughout this module, there are references to equations, both on this page and in the Summations module - these should be made into proper cross-references rather than hard-coded equation numbers
 :::
 
 Recurrence relations are often used to model the cost of recursive

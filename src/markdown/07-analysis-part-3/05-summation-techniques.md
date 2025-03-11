@@ -1,8 +1,9 @@
 
 ## Summation techniques
 
-::: alert
-***Note***: This section is *work in progress*
+::: TODO
+- Prio 2: update this text
+- Prio 3: relate to the rest of the chapter
 :::
 
 Consider the following simple summation.
