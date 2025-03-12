@@ -1,14 +1,10 @@
 
 ## Problems, algorithms, and programs
 
-::: TODO
-- Prio 3: is this a good section? a good division of concepts?
-:::
+Programmers commonly deal with *problems*, *algorithms*, and computer *programs*.
+These are three distinct concepts.
 
 ### Problems
-
-Programmers commonly deal with problems, algorithms, and computer
-programs. These are three distinct concepts.
 
 As your intuition would suggest, a [problem]{.term} is a task to be performed. It is best thought of in terms
 of inputs and matching outputs. A problem definition should not include
@@ -61,10 +57,9 @@ followed to solve a problem. If the problem is viewed as a function,
 then an algorithm is an implementation for the function that transforms
 an input to the corresponding output. A problem can be solved by many
 different algorithms. A given algorithm solves only one problem (i.e.,
-computes a particular function). OpenDSA modules cover many problems,
-and for several of these problems we will see more than one algorithm.
-For the important problem of sorting there are over a dozen commonly
-known algorithms!
+computes a particular function).
+This book covers many problems, and for several of these problems we will see more than one algorithm.
+For the important problem of sorting there are over a dozen commonly used algorithms!
 
 The advantage of knowing several solutions to a problem is that solution
 $\mathbf{A}$ might be more efficient than solution $\mathbf{B}$ for a
@@ -77,7 +72,7 @@ might be the best for sorting a large collection of integers. A third
 might be the best for sorting a collection of variable-length strings.
 
 By definition, something can only be called an algorithm if it has all
-of the following properties.
+of the following properties:
 
 1.  It must be *correct*. In other words, it must compute the desired
     function, converting each input to the correct output. Note that
@@ -137,6 +132,9 @@ outputs) as individual problems, each solved by specific algorithms
 implemented by a part of the operating system program, and each one of
 which terminates once its output is produced.
 
+In this book we will usually present algorithms and not programs.
+We assume that you as the reader is competent enough to be able to translate our descriptions and pseudocode into working programs in your favourite language.
+
 ### Summary
 
 To summarize: A [problem]{.term} is a function
@@ -145,5 +143,9 @@ and unambiguous. Algorithms must be correct, of finite length, and must
 terminate for all inputs. A [program]{.term} is
 an instantiation of an algorithm in a programming language. The
 following slideshow should help you to visualize the differences.
+
+::: TODO
+- Prio 3: this visualization is really ugly
+:::
 
 <inlineav id="ProblemAlgorithmCON" src="AlgAnal/ProblemAlgorithmCON.js" name="Problem, Algorithm, and Program definitions Slideshow" links="AlgAnal/ProblemAlgorithmCON.css"/>

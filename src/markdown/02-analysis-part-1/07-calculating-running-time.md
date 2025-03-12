@@ -2,26 +2,112 @@
 ## Algorithm analysis in practice
 
 ::: TODO
-- Prio 1: should the simplifying rules be here or in the previous section?
-- Prio 1: divide into subsections, should the examples be examples?
-- Prio 1: how to combine statements (sequencing)
-    - sequence = add, looping = multiply
 - Prio 2: add some "real" examples, i.e., more complex ones
     - exception: nested linear + binary loop == linear
 - Prio 2: briefly discuss functions and non-atomic statements
 :::
 
-This modules discusses the analysis for several simple code fragments.
-We will make use of the algorithm analysis simplifying rules:
+In this section we show how to analyse complexity in practice, by analysing several simple code fragments.
+As mentioned in the last section, we will only give the upper bound using the big-O notation $O$.
 
-1.  If $f(n)$ is in $O(g(n))$ and $g(n)$ is in $O(h(n))$, then $f(n)$ is
-    in $O(h(n))$.
-2.  If $f(n)$ is in $O(k g(n))$ for any constant $k > 0$, then $f(n)$ is
-    in $O(g(n))$.
-3.  If $f_1(n)$ is in $O(g_1(n))$ and $f_2(n)$ is in $O(g_2(n))$, then
-    $f_1(n) + f_2(n)$ is in $O(\max(g_1(n), g_2(n)))$.
-4.  If $f_1(n)$ is in $O(g_1(n))$ and $f_2(n)$ is in $O(g_2(n))$, then
-    $f_1(n) f_2(n)$ is in $O(g_1(n) g_2(n))$.
+### Simplification rules
+
+To make algorithm analysis easier there are some simplifying rules that are very useful:
+
+
+Addition
+
+: If $f\in O(g)$ and $f'\in O(g')$, then $f+f' \in O(g+g') = O(\max(g,g'))$
+
+: Special case: if $f,f'\in O(g)$, then $f+f' \in O(g)$
+
+Multiplication
+
+: If $f\in O(g)$ and $f'\in O(g')$, then $f\cdot f' \in O(g\cdot g')$
+
+: Special case when $k>0$ is a constant: if $f\in O(g)$, then $k\cdot f\in O(k\cdot g) = O(g)$
+
+: Even more special case: $O(k) = O(1)$ for all constants $k>0$
+
+Transitivity
+
+: If $f\in O(g)$ and $g\in O(h)$, then $f\in O(h)$
+
+
+Here's a table with the same information, even more simplified:
+
+| Addition         | $O(f) + O(g) = O(f+g) = O(\max(f,g))$      |
+| Multiplication   | $O(f) \cdot O(g) = O(f\cdot g)             |
+| ...by a constant | $k \cdot O(f) = O(k\cdot f) = O(f)$        |
+| Constant factor  | $O(k) = O(1)$                              |
+| Transitivity     | if $f\in O(g)$ and $g\in O(h)$, then $f\in O(h)$ |
+| Comparison       |
+
+### The complexity hierarchy
+
+We can also compare complexities, where $O(f) < O(g)$ means that $g$ grows faster than $f$.
+
+From the rules above, we can infer the following hierarchy of complexity classes:
+
+$$
+O(1) < O(\log n) < O(\sqrt{n}) < O(n) < O(n\log n) < O(n^2) < O(n^2\log n) < O(n^3) < \cdots < O(n^k) < O(2^n) < O(10^n) < O(n!) < \cdots
+$$
+
+(Actually the meaning of $O(f)\leq O(g)$ is just that $f\in O(g)$, but more about that in section XX (analysis part 2 chapter).)
+
+
+### Analysing code fragments
+
+#### Atomic operations
+
+Atomic operations are things like assigning a variable, looking up the value of an array index, or printing something.
+Not all atomic operations take the same time to execute, but we can assume that they are always constant.
+
+If an operation takes constant time, $f(n) = k$, then $f\in O(1)$, so we can assume that all atomic operations are $O(1)$.
+
+#### Sequence of operations
+
+A sequence of atomic operations, such as performing 10 assignments, is still constant (multiplying a constant with 10 is still constant).
+But what if we have a sequence of non-atomic operations?
+
+E.g., suppose that we have the three operations $p_1\in O(f_1)$, $p_2\in O(f_2)$, and $p_3\in O(f_3)$.
+The complexity of the sequence $p_1; p_2; p_3$ will then be sum of the parts, i.e.:
+
+$$
+p_1; p_2; p_3 \in O(f_1) + O(f_2) + O(f_3) = O(f_1+f_2+f_3) = O(\max(f_1, f_2, f_3))
+$$
+
+#### Loops and iterations
+
+What if we perform some operation $p\in O(f)$ for each element in an array $A$, what is the complexity?
+It depends on the size of the array: if we assume that the array has $n$ elements, what is the complexity of the following loop?
+
+$$
+\mathbf{for} x \in A: p
+$$
+
+The loop performs $p$ once for every element in $A$, meaning that $p$ will be executed $n$ times.
+Therefore the complexity of a loop is:
+
+$$
+\mathbf{for} x \mathbf{in} A: p \in |A|\cdot O(f) = n\cdot O(f) = O(n\cdot f)
+$$
+
+Note that $p$ can be a complex operation, for example a loop itself.
+If $p$ is a simple loop over A, with a constant-time operation in its body, then $p\in O(n)$.
+And then the outer loop $\mathbf{for} x \in A: p$ will be in $n\cdot O(n) = O(n^2)$.
+
+#### Summary
+
+When we want to analyse the complexity of code fragments, the following three rules of thumb one will get us very far:
+
+- Atomic operations are always $O(1)$
+- Sequences $p;p'$ are translated to addition, $O(f+f') = O(\max(f,f'))$
+- Iterations $\mathbf{for} x \in A: p$, are translated to multiplication, $n\cdot O(f) = O(n\cdot f)$
+  (assuming that $n=|A|$)
+
+
+### Examples
 
 ::::: {#AssignAnal}
 :::: topic
@@ -31,7 +117,7 @@ We begin with an analysis of a simple assignment to an integer variable.
 
     a = b
 
-Because the assignment statement takes constant time, it is $\Theta(1)$.
+Because the assignment statement takes constant time, it is $O(1)$.
 ::::
 :::::
 
@@ -45,11 +131,11 @@ Consider a simple `for` loop.
     for i = 0 to n-1:
         sum = sum + n
 
-The first line is $\Theta(1)$. The `for` loop is repeated $n$ times. The
+The first line is $O(1)$. The `for` loop is repeated $n$ times. The
 third line takes constant time so, by simplifying rule (4), the total
 cost for executing the two lines making up the `for` loop is
-$\Theta(n)$. By rule (3), the cost of the entire code fragment is also
-$\Theta(n)$.
+$O(n)$. By rule (3), the cost of the entire code fragment is also
+$O(n)$.
 ::::
 :::::
 
@@ -72,7 +158,7 @@ This code fragment has three separate statements: the first assignment
 statement and the two `for` loops. Again the assignment statement takes
 constant time; call it $c_1$. The second `for` loop is just like the one
 in Example [#FLAnal](#FLAnal) and takes
-$c_2 n = \Theta(n)$ time.
+$c_2 n \in O(n)$ time.
 
 The first `for` loop is a double loop and requires a special technique.
 We work from the inside of the loop outward. The expression `sum++`
@@ -90,8 +176,8 @@ $$
 \sum_{i = 1}^{n} i = \frac{n (n+1)}{2}
 $$
 
-which is $\Theta(n^2)$. By simplifying rule (3),
-$\Theta(c_1 + c_2 n + c_3 n^2)$ is simply $\Theta(n^2)$.
+which is $O(n^2)$. By simplifying rule (3),
+$O(c_1 + c_2 n + c_3 n^2)$ is simply $O(n^2)$.
 ::::
 
 :::: topic
@@ -114,14 +200,25 @@ times. Because the outer loop executes $n$ times, it should be obvious
 that the statement `sum1=sum1+1` is executed precisely $n^2$ times. The
 second loop is similar to the one analyzed in the previous example, with
 cost $\sum_{j = 1}^{n} j$. This is approximately $\frac{1}{2} n^2$.
-Thus, both double loops cost $\Theta(n^2)$, though the second requires
+Thus, both double loops cost $O(n^2)$, though the second requires
 about half the time of the first.
 ::::
+
+
+### Advanced algorithm analyses
+
+The rules of thumb above do not always give the tightest possible complexity.
+In some (rare) cases the simple analysis might give a complexity of say $O(n \log n)$,
+but a more detailed analysis will give a tighter bound, such as $O(n)$.
+So, is there something wrong with the rules?
+
+No, the rules are correct, and this is because the $O$ notation gives an *upper bound*.
+Recall that every function $f\in O(n)$ is also in $O(n\log n)$, since $O(n) < O(n\log n)$.
 
 :::: topic
 #### Example: Non-quadratic nested loops {-}
 
-Not all doubly nested `for` loops are $\Theta(n^2)$. The following pair
+Not all doubly nested `for` loops are $O(n^2)$. The following pair
 of nested loops illustrates this fact.
 
     sum1 = 0
@@ -148,7 +245,7 @@ $$
 \sum_{i=0}^{\log n} n = n \log n
 $$
 
-So the cost of this first double loop is $\Theta(n \log n)$. Note that a
+So the cost of this first double loop is $O(n \log n)$. Note that a
 variable substitution takes place here to create the summation, with
 $k = 2^i$.
 
@@ -157,7 +254,7 @@ times. The inner loop has cost $k$, which doubles each time. The
 summation can be expressed as
 
 $$
-\sum_{i=0}^{\log n} 2^i = \Theta(n)
+\sum_{i=0}^{\log n} 2^i \in O(n)
 $$
 
 where $n$ is assumed to be a power of two and again $k = 2^i$.
@@ -168,6 +265,8 @@ We need to think about a technique for visualizing the running time of
 some loop constructs. This can be very similar to how we visualize
 reaching the closed form solution of summations.
 -->
+
+#### Other control statements
 
 What about other control statements? `While` loops are analyzed in a
 manner similar to `for` loops. The cost of an `if` statement in the
@@ -188,6 +287,8 @@ programs, we cannot simply count the cost of the `if` statement as being
 the cost of the more expensive branch. In such situations, the technique
 of [amortized analysis]{.term} can come to the rescue.
 
+#### Recursive functions
+
 Determining the execution time of a recursive subroutine can be
 difficult. The running time for a recursive subroutine is typically best
 expressed by a recurrence relation. For example, the recursive factorial
@@ -207,4 +308,6 @@ T(1) &=& 0
 \end{eqnarray}
 $$
 
-The closed-form solution for this recurrence relation is $\Theta(n)$.
+The closed-form solution for this recurrence relation is $O(n)$.
+
+Recurrence relations are discussed further in section XX (chapter: analysis part 2).

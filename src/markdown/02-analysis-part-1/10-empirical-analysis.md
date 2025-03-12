@@ -2,7 +2,6 @@
 ## Empirical analysis
 
 ::: TODO
-- Prio 2: make the text more coherent, more formal
 - Prio 3: add another example
 :::
 
@@ -36,12 +35,36 @@ are the same), then differences in code tuning might account for any
 difference in running time. Be suspicious of empirical comparisons in
 this situation.
 
-Another approach to analytical analysis is simulation. The idea of
-simulation is to model the problem with a computer program and then run
-it to get a result. In the context of algorithm analysis, simulation is
-distinct from empirical comparison of two competitors because the
-purpose of the simulation is to perform analysis that might otherwise be
-too difficult. A good example of this appears in the following figure.
+### Simulation
+
+Another approach to analytical analysis is simulation.
+The idea of simulation is to model the problem with a computer program.
+This is different from empirical analysis where you evaluate a solution,
+but a simulation is used for learning more about the problem.
+The main purpose of a simulation is to perform analysis that might be too difficult to do mathematically.
+
+Often simulation and empirical analysis go hand-in-hand:
+we can use simulation to generate a large number of inputs so that we can study an algorithm empirically instead of analytically.
+It is often extremely difficult to do a credible average-case analysis analytically,
+because it is uncommon that the input to a problem is randomly distributed.
+Assuming a uniform distribution will often lead to wrong conclusion about the average running time of an algorithm.
+For example, which sorting algorithm is the best to use depends a lot on how the data is distributed.
+
+::: topic
+#### Example: sorting English words {-}
+
+Assume that we want to create an alphabetically sorted list of words from a collection of English texts.
+There are an infinite number of possible strings that can occur, but some strings are much more common than others.
+How can we know how the data is distributed, on average?
+
+George Zipf observed already in 1932 that the relative frequency of the $n$-th most common word in a language is approximately inversely proportional to $n$. [refer to Wikipedia Zipf's law]
+We can use this observation to simulate a number of large texts, which we then can use for making an empirical comparison between different sorting algorithms.
+:::
+
+
+<!-- Perhaps move the example to the Hashing chapter?
+
+A good example of this appears in the following figure.
 
 ![Hashing analysis plot](images/hashplot.png){width=400}
 
@@ -59,3 +82,4 @@ approach to hashing is most efficient, so we are not doing empirical
 comparison of hashing alternatives. Instead, the purpose was to analyze
 the proper loading factor that would be used in an efficient hashing
 system to balance time cost versus hash table size (space cost).
+-->

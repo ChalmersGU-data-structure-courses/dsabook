@@ -2,11 +2,6 @@
 ## Asymptotic analysis
 
 ::: TODO
-- Prio 1: should we use O() or Omega or Theta when describing functions/algorithms?
-    - perhaps O() and "as tight as possible"?
-    - this influences all subsequence sections/chapters too
-- Prio 1: give informal definition of O(), (and/or Omega and Theta?)
-- Prio 2: extend the subsection Classifying functions
 - Prio 2: add another example
 :::
 
@@ -66,39 +61,99 @@ the rare situation where the constant is important.
 
 ### Classifying functions
 
-Given functions $f(n)$ and $g(n)$ whose growth rates are expressed as
+Given functions $f$ and $g$ whose growth rates are expressed as
 algebraic equations, we might like to determine if one grows faster than
-the other. The best way to do this is to take the limit of the two
-functions as $n$ grows towards infinity,
+the other.
+One way to do this is to take the limit of the quotient of the two functions as $n$ grows towards infinity:
 
 $$
 \lim_{n \rightarrow \infty} \frac{f(n)}{g(n)}
 $$
 
-If the limit goes to $\infty$, then $f(n)$ is in $\Omega(g(n))$ because
-$f(n)$ grows faster. If the limit goes to zero, then $f(n)$ is in
-$O(g(n))$ because $g(n)$ grows faster. If the limit goes to some
-constant other than zero, then $f(n) = \Theta(g(n))$ because both grow
-at the same rate.
+There are three possibilities:
+
+- If the quotient goes to $\infty$, then $f$ grows faster than $g$.
+  We say that $g$ is a *lower bound* of $f$, or that $f\in\Omega(g)$.
+- If the quotient goes to zero, then $g$ grows faster than $g$.
+  We say that $g$ is an *upper bound* of $f$, or that $f\in O(g)$.
+- If the quotient goes to some constant other than zero, then both functions grow at the same rate,
+  and we say that $f\in\Theta(g)$.
 
 ::: topic
 #### Example: Comparing two functions {-}
 
-If $f(n) = n^2$ and $g(n) = 2n\log n$, is $f(n)$ in $O(g(n))$,
-$\Omega(g(n))$, or $\Theta(g(n))$? Since
+Assume $f(n) = n^2$ and $g(n) = 1000n\log n$.
+Is $f$ in $O(g)$, $\Omega(g)$, or $\Theta(g)$?
+
+To answer this we can calculate the limit of the quotient $f(n)/g(n)$ when $n$ grows:
 
 $$
-\frac{n^2}{2n\log n} = \frac{n}{2\log n}
+\lim_{n \rightarrow \infty} \frac{f(n)}{g(n)} =
+\lim_{n \rightarrow \infty} \frac{n^2}{1000n\log n} =
+\frac{1}{1000}\cdot\lim_{n \rightarrow \infty} \frac{n}{\log n} = \infty
 $$
 
-we easily see that
+because $n$ grows faster than $\log n$.
+
+Thus, $f\in\Omega(g)$ (or equivalently, $g\in O(f)$).
+
+This also shows that the constant factor $1000$ doesn't have any effect on the growth factor,
+because $\infty/1000$ is still $\infty$.
+:::
+
+### Definitions of orders of growth
+
+Using limits like above is one way of defining orders of growth, but in the context of algorithmic complexity it is more common with the following definitions:
+
+- $f\in O(g)$ iff there exists positive numbers $k$ and $n_0$ such that $f(n) \leq k\cdot g(n)$ for all $n>n_0$.
+- $f\in\Omega(g)$ iff there exists positive numbers $k$ and $n_0$ such that $f(n)\geq k\cdot g(n)$ for all $n>n_0$.
+    - or equivalently: $f\in\Omega(g)$ iff $g\in O(f)$
+- $f\in\Theta(g)$ iff there exists positive numbers $k_1$, $k_2$ and $n_0$ such that $k_1\cdot g(n) \leq f(n) \leq k_2\cdot g(n)$ for all $n>n_0$.
+    - or equivalently: $f\in\Theta(g)$ iff $f\in O(g)$ and $f\in\Omega(g)$
+
+(Note that these definitions assume that $f$ and $g$ are *positive* functions -- otherwise we have to take the absolute value too -- but since we will only be using them for comparing computational resources, they will always be positive.)
+
+::: topic
+#### Example: Comparing two functions (again) {-}
+
+Assume the same functions as before, $f(n) = n^2$ and $g(n) = 1000n\log n$.
+How can we use the definitions above to prove that $f\in\Omega(g)$?
+
+We have to find positive numbers $k$ and $n_0$ so that $f(n)\geq k\cdot g(n)$.
+Since $g$ has a constant factor of 1000, we can try with $k=0.001$:
 
 $$
-\lim_{n \rightarrow \infty} \frac{n^2}{2n\log n} = \infty
+k\cdot g(n) = 0.001 \cdot 1000n\log n = n\log n
 $$
 
-because $n$ grows faster than $2\log n$. Thus, $n^2$ is in
-$\Omega(2n\log n)$.
+Now we readily see that $f(n) = n^2$ is larger than $k\cdot g(n) = n\log n$ for all $n\geq 1$, so we can set $n_0 = 1$.
+
+Note that there are plenty of possible values to choose from, such as $k=1$ and $n_0=13,789$.
+We can even use very large values such as $k=n_0=10^99$, what we are interested in is after all what happens when $n$ grows infinitly large.
+:::
+
+### Should we use $O$, $\Omega$ or $\Theta$?
+
+If an algorithm has a lower bound of $\Omega(f)$, we know that it will never run asymptotically faster than $f$.
+But this is usually not very useful knowledge, because we are more interested in knowing how the algorithm works on on bad inputs.
+Therefore the upper bound $O(f)$ is by far the most common complexity measure that people use, and this is what we will be using in this book.
+
+One could argue that $\Theta(f)$ would be an even better measure, because it gives more information about an algorithm.
+But it is much more difficult to reason about $\Theta(f)$, and therefore we (and almost all other algorithm books) use the upper bound notation $O(f)$.
+
+#### Is the lower bound useless?
+
+The lower bound is not useless, definitely not.
+The main use case for $\Omega$ is when we want to classify *problems*, not algorithms.
+One example is when proving that the lower bound for sorting is $\Omega(n\log n)$ (see section XX).
+But classifying problems is out of scope for this book, so we will not use $\Omega$ much.
+
+### Confusing the lower bound $\Omega$ with the best case
+
+::: TODO
+- (Peter) for me this is just confusing
+    - is it even possible to talk about best and worst case $\Omega$?
+    - would we lose something if we removed it?
 :::
 
 <inlineav id="LowerBoundCON" src="AlgAnal/LowerBoundCON.js" name="Lower Bounds visualization" links="AlgAnal/LowerBoundCON.css"/>

@@ -1,29 +1,24 @@
 
-## Case study: Analysing linear and binary search
+## Case study: Analysing binary search
 
 ::: TODO
 - Prio 2: update text so that it fits in this position in the structure
 :::
 
-### Linear search
+Now we will discuss the algorithmic complexity of the two search algorithms that we introduced in section XX (chapter: introduction).
 
-The final example of algorithm analysis for this section will compare
-two algorithms for performing search in an array. Earlier, we determined
-that the running time for sequential search on an array where the search
-value $K$ is equally likely to appear in any location is $\Theta(n)$ in
-both the average and worst cases. We would like to compare this running
-time to that required to perform a [binary search]{.term} on an array whose values are stored in order from lowest to
-highest. Here is a visualization of the binary search method.
+In section XX (this chapter), we deduced that the running time for linear search on an array if size $n$ is $O(n)$.
+If we assume that the value is equally likely to appear in any location, this complexity is both the average case and the worst case.
+(The best case is constant, $O(1)$, and occurs when the searched value occurs first in the array.
+But as we already discussed we are rarely interested in the best case.)
 
-<inlineav id="binarySearchCON" src="Searching/binarySearchCON.js" name="Binary Search Algorithm Slideshow" links="Searching/binarySearchCON.css"/>
-
-### Binary search
+But what is the complexity of the binary search algorithm?
 
 <inlineav id="BsearchDandCRecurCON" src="AlgAnal/BsearchDandCRecurCON.js" name="Binary Search recurrence slideshow" links="AlgAnal/BsearchDandCRecurCON.css"/>
 
 Comparing sequential search to binary search, we see that as $n$ grows,
-the $\Theta(n)$ running time for sequential search in the average and
-worst cases quickly becomes much greater than the $\Theta(\log n)$
+the $O(n)$ running time for sequential search in the average and
+worst cases quickly becomes much greater than the $O(\log n)$
 running time for binary search. Taken in isolation, binary search
 appears to be much more efficient than sequential search. This is
 despite the fact that the constant factor for binary search is greater

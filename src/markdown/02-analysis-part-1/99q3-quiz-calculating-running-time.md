@@ -1,28 +1,27 @@
 
-### Practice questions: Running time
-
-::: TODO
-- Prio 1: should we use Theta or O()?
-    - perhaps just say "complexity" in the question, and O() in the answer?
-:::
+### Review questions: Running time
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 
+In this quiz you will give the complexity of some code fragments.
+Note that you should answer with the tightest possible growth factor,
+so it's not correct if you answer $O(n^2)$ when the fragment is $O(n)$.
+
 :::::::::: question ::::::::::
-Determine $\Theta$ for the following code fragment in the average case.
+Determine $O$ for the following code fragment.
 Assume that all variables are integers.
 
     a = b + c
     d = a + e
 
-- [x] $\Theta(1)$
-- [ ] $\Theta(\log n)$
-- [ ] $\Theta(n \log n)$
-- [ ] $\Theta(n)$
-- [ ] $\Theta(n^2)$
-- [ ] $\Theta(n^2 \log n)$
-- [ ] $\Theta(n^3)$
-- [ ] $\Theta(2^n)$
+- [x] $O(1)$
+- [ ] $O(\log n)$
+- [ ] $O(n \log n)$
+- [ ] $O(n)$
+- [ ] $O(n^2)$
+- [ ] $O(n^2 \log n)$
+- [ ] $O(n^3)$
+- [ ] $O(2^n)$
 
 ::: hints
 - Does any line of code get executed more than once?
@@ -32,7 +31,7 @@ Assume that all variables are integers.
 
 
 :::::::::: question ::::::::::
-Determine $\Theta$ for the following code fragment in the average case.
+Determine $O$ for the following code fragment.
 Assume that all variables are integers.
 
     sum = 0
@@ -40,14 +39,14 @@ Assume that all variables are integers.
         for j = 0 to n-1:
             sum = sum + 1
 
-- [x] $\Theta(n)$
-- [ ] $\Theta(\log n)$
-- [ ] $\Theta(n \log n)$
-- [ ] $\Theta(1)$
-- [ ] $\Theta(n^2)$
-- [ ] $\Theta(n^2 \log n)$
-- [ ] $\Theta(n^3)$
-- [ ] $\Theta(2^n)$
+- [x] $O(n)$
+- [ ] $O(\log n)$
+- [ ] $O(n \log n)$
+- [ ] $O(1)$
+- [ ] $O(n^2)$
+- [ ] $O(n^2 \log n)$
+- [ ] $O(n^3)$
+- [ ] $O(2^n)$
 
 ::: hints
 - How much work is done by the body of the inner for loop?
@@ -59,21 +58,21 @@ Assume that all variables are integers.
 
 
 :::::::::: question ::::::::::
-Determine $\Theta$ for the following code fragment in the average case.
+Determine $O$ for the following code fragment.
 Assume that all variables are integers.
 
     sum = 0
     for i = 0 to n*n-1:
         sum = sum + 1
 
-- [x] $\Theta(n^2)$
-- [ ] $\Theta(\log n)$
-- [ ] $\Theta(n \log n)$
-- [ ] $\Theta(1)$
-- [ ] $\Theta(n)$
-- [ ] $\Theta(n^2 \log n)$
-- [ ] $\Theta(n^3)$
-- [ ] $\Theta(2^n)$
+- [x] $O(n^2)$
+- [ ] $O(\log n)$
+- [ ] $O(n \log n)$
+- [ ] $O(1)$
+- [ ] $O(n)$
+- [ ] $O(n^2 \log n)$
+- [ ] $O(n^3)$
+- [ ] $O(2^n)$
 
 ::: hints
 - How much work is done by the body of the inner for loop?
@@ -84,7 +83,7 @@ Assume that all variables are integers.
 
 
 :::::::::: question ::::::::::
-Determine $\Theta$ for the following code fragment in the average case.
+Determine $O$ for the following code fragment.
 Assume that all variables are integers.
 
     for i = 0 to n-2:
@@ -93,14 +92,14 @@ Assume that all variables are integers.
             AA[i][j] = AA[j][i]
             AA[j][i] = tmp
 
-- [x] $\Theta(n^2)$
-- [ ] $\Theta(\log n)$
-- [ ] $\Theta(n \log n)$
-- [ ] $\Theta(1)$
-- [ ] $\Theta(n)$
-- [ ] $\Theta(n^2 \log n)$
-- [ ] $\Theta(n^3)$
-- [ ] $\Theta(2^n)$
+- [x] $O(n^2)$
+- [ ] $O(\log n)$
+- [ ] $O(n \log n)$
+- [ ] $O(1)$
+- [ ] $O(n)$
+- [ ] $O(n^2 \log n)$
+- [ ] $O(n^3)$
+- [ ] $O(2^n)$
 
 ::: hints
 - How much work is done by the body of the inner for loop?
@@ -112,7 +111,7 @@ Assume that all variables are integers.
 
 
 :::::::::: question ::::::::::
-Determine $\Theta$ for the following code fragment in the average case.
+Determine $O$ for the following code fragment.
 Assume that all variables are integers.
 
     sum = 0
@@ -123,14 +122,14 @@ Assume that all variables are integers.
             j = j * 2
 
 
-- [x] $\Theta(n \log n)$
-- [ ] $\Theta(\log n)$
-- [ ] $\Theta(n^2)$
-- [ ] $\Theta(1)$
-- [ ] $\Theta(n)$
-- [ ] $\Theta(n^2 \log n)$
-- [ ] $\Theta(n^3)$
-- [ ] $\Theta(2^n)$
+- [x] $O(n \log n)$
+- [ ] $O(\log n)$
+- [ ] $O(n^2)$
+- [ ] $O(1)$
+- [ ] $O(n)$
+- [ ] $O(n^2 \log n)$
+- [ ] $O(n^3)$
+- [ ] $O(2^n)$
 
 ::: hints
 - How much work is done by the body of the inner for loop?
@@ -142,7 +141,7 @@ Assume that all variables are integers.
 
 
 :::::::::: question ::::::::::
-Determine $\Theta$ for the following code fragment in the average case.
+Determine $O$ for the following code fragment.
 Assume that all variables are integers.
 
     sum = 0
@@ -152,14 +151,14 @@ Assume that all variables are integers.
             sum = sum + 1
         i = i * 2
 
-- [x] $\Theta(n \log n)$
-- [ ] $\Theta(\log n)$
-- [ ] $\Theta(n^2)$
-- [ ] $\Theta(1)$
-- [ ] $\Theta(n)$
-- [ ] $\Theta(n^2 \log n)$
-- [ ] $\Theta(n^3)$
-- [ ] $\Theta(2^n)$
+- [x] $O(n \log n)$
+- [ ] $O(\log n)$
+- [ ] $O(n^2)$
+- [ ] $O(1)$
+- [ ] $O(n)$
+- [ ] $O(n^2 \log n)$
+- [ ] $O(n^3)$
+- [ ] $O(2^n)$
 
 ::: hints
 - How much work is done by the body of the inner for loop?
@@ -171,7 +170,7 @@ Assume that all variables are integers.
 
 
 :::::::::: question ::::::::::
-Determine $\Theta$ for the following code fragment in the average case.
+Determine $O$ for the following code fragment.
 Assume that all variables are integers.
 
 Assume that array A contains $n$ values, "random" takes constant time,
@@ -183,14 +182,14 @@ and "sort" takes $n \log n$ time.
             A[j] = random(n)
         sort(A)
 
-- [x] $\Theta(n^2 \log n)$
-- [ ] $\Theta(\log n)$
-- [ ] $\Theta(n^2)$
-- [ ] $\Theta(1)$
-- [ ] $\Theta(n)$
-- [ ] $\Theta(n \log n)$
-- [ ] $\Theta(n^3)$
-- [ ] $\Theta(2^n)$
+- [x] $O(n^2 \log n)$
+- [ ] $O(\log n)$
+- [ ] $O(n^2)$
+- [ ] $O(1)$
+- [ ] $O(n)$
+- [ ] $O(n \log n)$
+- [ ] $O(n^3)$
+- [ ] $O(2^n)$
 
 ::: hints
 - How much work is done by the body of the inner for loop?
@@ -202,7 +201,7 @@ and "sort" takes $n \log n$ time.
 
 
 :::::::::: question ::::::::::
-Determine $\Theta$ for the following code fragment in the average case.
+Determine $O$ for the following code fragment.
 Assume that all variables are integers.
 
 Assume array A contains a random permutation of the values from 0 to $n-1$.
@@ -214,14 +213,14 @@ Assume array A contains a random permutation of the values from 0 to $n-1$.
             sum = sum + 1
             j = j + 1
 
-- [x] $\Theta(n^2)$
-- [ ] $\Theta(\log n)$
-- [ ] $\Theta(n^2 \log n)$
-- [ ] $\Theta(1)$
-- [ ] $\Theta(n)$
-- [ ] $\Theta(n \log n)$
-- [ ] $\Theta(n^3)$
-- [ ] $\Theta(2^n)$
+- [x] $O(n^2)$
+- [ ] $O(\log n)$
+- [ ] $O(n^2 \log n)$
+- [ ] $O(1)$
+- [ ] $O(n)$
+- [ ] $O(n \log n)$
+- [ ] $O(n^3)$
+- [ ] $O(2^n)$
 
 ::: hints
 - How much work is done by the body of the inner for loop?
@@ -233,7 +232,7 @@ Assume array A contains a random permutation of the values from 0 to $n-1$.
 
 
 :::::::::: question ::::::::::
-Determine $\Theta$ for the following code fragment in the average case.
+Determine $O$ for the following code fragment.
 Assume that all variables are integers.
 
     sum = 0
@@ -243,14 +242,14 @@ Assume that all variables are integers.
     else:
         sum = sum + n
 
-- [x] $\Theta(n)$
-- [ ] $\Theta(\log n)$
-- [ ] $\Theta(n^2 \log n)$
-- [ ] $\Theta(1)$
-- [ ] $\Theta(n^2)$
-- [ ] $\Theta(n \log n)$
-- [ ] $\Theta(n^3)$
-- [ ] $\Theta(2^n)$
+- [x] $O(n)$
+- [ ] $O(\log n)$
+- [ ] $O(n^2 \log n)$
+- [ ] $O(1)$
+- [ ] $O(n^2)$
+- [ ] $O(n \log n)$
+- [ ] $O(n^3)$
+- [ ] $O(2^n)$
 
 ::: hints
 - How much work is done by each branch of the if-then-else statement? Use the more expensive one.

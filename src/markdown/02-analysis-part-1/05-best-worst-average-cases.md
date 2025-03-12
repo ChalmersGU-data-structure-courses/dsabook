@@ -2,8 +2,7 @@
 ## Best, worst, and average cases
 
 ::: TODO
-- Prio 2: more needs to be added
-    - examples (e.g., quicksort, insertion sort)
+- Prio 2: examples (e.g., quicksort, insertion sort)
 - Prio 2: discuss problems with "average case" - how do we know what is the average?
 :::
 
@@ -52,12 +51,11 @@ array values in the average case.
 
 The characteristics of a data distribution have a significant effect on
 many search algorithms, such as those based on
-[hashing] and search
-trees such as the [BST](#binary-search-trees). Incorrect assumptions about data distribution can have
+[hashing]{.term} and [binary search tree]{.term}s.
+Incorrect assumptions about data distribution can have
 disastrous consequences on a program's space or time performance.
 Unusual data distributions can also be used to advantage, such as is
-done by
-[self-organizing lists](#self-organizing-list){.term}.
+done by [self-organizing list]{.term}s.
 
 In summary, for real-time applications we are likely to prefer a
 worst-case analysis of an algorithm. Otherwise, we often desire an

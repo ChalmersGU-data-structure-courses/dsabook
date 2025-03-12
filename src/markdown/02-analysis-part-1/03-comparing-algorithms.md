@@ -102,7 +102,7 @@ illustrated by the following function:
     // Return position of largest value in integer array A
     function largest(A):
         currlarge = 0                 // Position of largest element seen.
-        for i = 1 to A.size():     // For each element,
+        for i = 1 to A.size():        // For each element,
             if A[currlarge] < A[i]:   // if A[i] is larger,
                 currlarge = i         // remember its position.
         return currlarge              // Return largest position

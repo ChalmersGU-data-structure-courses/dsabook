@@ -32,37 +32,34 @@ algorithm's growth rate is greater than $cn$, such as $c_1n^2$, then
 you will *not* be able to do a problem ten times the size in the same
 amount of time on a machine that is ten times faster.
 
-How much larger a problem can be solved in a given amount of time by a
-faster computer? Assume that the new machine is ten times faster than
-the old. Say that the old machine could solve a problem of size $n$ in
-an hour. What is the largest problem that the new machine can solve in
-one hour? The following table shows how large a problem can be solved on
-the two machines for five running-time functions.
+How much larger problems a faster computer solve in the same amount of time?
+Say that the old machine could solve a problem of size $n$ in an hour,
+and that the new machine is ten times faster than the old.
+What is the largest problem that the new machine can solve in one hour?
+The following table shows just that for five running-time functions.
 
 :::: {#Speedups}
 ::: topic
-#### Table: Getting a faster computer {-}
+#### Table: Getting a 10 times faster computer {-}
 
-The increase in problem size that can be run in a fixed period of time
-on a computer that is ten times faster. The first column lists the
-right-hand sides for five growth rate equations. For the purpose of this
-example, arbitrarily assume that the old machine can run 10,000 basic
-operations in one hour. The second column shows the maximum value for
-$n$ that can be run in 10,000 basic operations on the old machine. The
-third column shows the value for $n'$, the new maximum size for the
-problem that can be run in the same time on the new machine that is ten
-times faster. Variable $n'$ is the greatest size for the problem that
-can run in 100,000 basic operations. The fourth column shows how the
-size of $n$ changed to become $n'$ on the new machine. The fifth column
-shows the increase in the problem size as the ratio of $n'$ to $n$.
+This table shows the increase in problem size that can be run in the same time on a computer that is ten times faster.
 
-| f(n)     | n  | n'   | Change | n'/n |
+| Growth rate | Max $n$ (old machine) | Max $n'$ (new machine) | Relation $n$ and $n'$ | $n'/n$ |
 |:------------:|:------:|:--------:|:------------------------:|:-----:|
-| $10 n$       | $1000$ | $10,000$ | $n' = 10n$               | $10$  |
-| $20 n$       | $500$  | $5000$   | $n' = 10n$               | $10$  |
-| $5 n \log n$ | $250$  | $1842$   | $\sqrt{10} n < n' < 10n$ | $7.4$ |
-| $2 n^2$      | $70$   | $223$    | $n' = \sqrt{10} n$       | $3.2$ |
-| $2^n$        | $13$   | $16$     | $n' = n + 3$             |  --   |
+| $10 n$       | $1,000$ | $10,000$ | $n' = n\cdot 10$               | $10$  |
+| $20 n$       | $500$  | $5,000$   | $n' = n\cdot 10$               | $10$  |
+| $5 n \log n$ | $250$  | $1842$   | $n' \approx \frac{0.1386n}{W(0.1386n)}$ | $7.4$ |
+| $2 n^2$      | $70$   | $223$    | $n' = n\cdot\sqrt{10}$       | $3.2$ |
+| $2^n$        | $13$   | $16$     | $n' = n + 3$             |  $\approx 1$   |
+
+Explanations:
+
+- The first column lists the right-hand sides for five growth rate equations.
+- The second column shows the maximum value for $n$ that can be run in 10,000 basic operations on the old machine.
+- The third column shows the value for $n'$, the new maximum size for the problem that can be run in the same time on the new machine that is ten times faster.
+  Variable $n'$ is the greatest size for the problem that can run in 100,000 basic operations.
+- The fourth column shows how the size of $n$ changed to become $n'$ on the new machine.
+- The fifth column shows the increase in the problem size as the ratio of $n'$ to $n$.
 
 :::
 ::::
@@ -118,10 +115,10 @@ time would appear as a horizontal line. If the line for the amount of
 time available to solve your problem is above the point at which the
 curves for the two growth rates in question meet, then the algorithm
 whose running time grows less quickly is faster. An algorithm with
-running time $\mathbf{T}n=n^2$ requires $1024 \times 1024 = 1,048,576$
-time steps for an input of size $n=1024$. An algorithm with running time
-$\mathbf{T}(n) = n \log n$ requires $1024 \times 10 = 10,240$ time steps
-for an input of size $n = 1024$, which is an improvement of much more
+running time $\mathbf{T}(n)=n^2$ requires $1000 \times 1000 = 1,000,000$
+time steps for an input of size $n=1000$. An algorithm with running time
+$\mathbf{T}(n) = n \log n$ requires $1000 \times 10 = 10,000$ time steps
+for an input of size $n = 1000$, which is an improvement of much more
 than a factor of ten when compared to the algorithm with running time
 $\mathbf{T}(n) = n^2$. Because $n^2 > 10 n \log n$ whenever $n > 58$, if
 the typical problem size is larger than 58 for this example, then you
@@ -199,19 +196,22 @@ This table shows costs for representative growth rates.
 
 | n | $\log\log n$ | $\log n$ | $n$ | $n \log n$ | $n^2$ | $n^3$ | $2^n$ |
 |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
-| $16$ | $2$ | $4$ | $2^{4}$ | $4 \cdot 2^{4 = 2^{6}}$ | $2^{8}$ | $2^{12}$ | $2^{16}$ |
-| $256$ | $3$ | $8$ | $2^{8}$ | $8 \cdot 2^{8 = 2^{11}}$ | $2^{16}$ | $2^{24}$ | $2^{256}$ |
-| $1024$ | $\approx 3.3$ | $10$ | $2^{10}$ | $10 \cdot 2^{10 \approx 2^{13}}$ | $2^{20}$ | $2^{30}$ | $2^{1024}$ |
-| $64K$ | $4$ | $16$ | $2^{16}$ | $16 \cdot 2^{16 = 2^{20}}$ | $2^{32}$ | $2^{48}$ | $2^{64K}$ |
-| $1M$ | $\approx 4.3$ | $20$ | $2^{20}$ | $20 \cdot 2^{20 \approx 2^{24}}$ | $2^{40}$ | $2^{60}$ | $2^{1M}$ |
-| $1G$ | $\approx 4.9$ | $30$ | $2^{30}$ | $30 \cdot 2^{30 \approx 2^{35}}$ | $2^{60}$ | $2^{90}$ | $2^{1G}$ |
+| $10$          | $1.7$ | $3.3$  |   $10$ | $33$            | $100$   | $10^3$  | $10^3$ |
+| $100$         | $2.7$ | $6.6$  |  $100$ | $664$           | $10^4$  | $10^6$  | $10^30$ |
+| $1K = 1000$   | $3.3$ | $10$   | $1000$ | $10^4$          | $10^6$  | $10^9$  | $10^300$ |
+| $10K = 10^4$  | $3.7$ | $13.3$ | $10^4$ | $1.3\cdot 10^5$ | $10^8$  | $10^12$ | $10^3000$ |
+| $100K = 10^5$ | $4.1$ | $16.6$ | $10^5$ | $1.6\cdot 10^6$ | $10^10$ | $10^15$ | $10^{30,000}$ |
+| $1M = 10^6$   | $4.3$ | $20$   | $10^6$ | $2\cdot 10^7$   | $10^12$ | $10^18$ | $10^{300,000}$ |
+| $1G = 10^9$   | $4.9$ | $30$   | $10^9$ | $3\cdot 10^10$  | $10^18$ | $10^27$ | $10^{300,000,000}$ |
 
 :::
 ::::
 
+### Growth rates exercises
+
+
 <avembed id="CompareGrowth" src="AlgAnal/CompareGrowth.html" type="ka" name="Comparing Growth Rates Exercise"/>
 
-### Growth rates ordering exercise
 
 <avembed id="GrowthRatesPRO" src="AlgAnal/GrowthRatesPRO.html" type="ka" name="Growth Rates Ordering Exercise"/>
 

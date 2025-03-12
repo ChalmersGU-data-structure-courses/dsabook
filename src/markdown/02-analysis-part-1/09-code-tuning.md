@@ -3,17 +3,17 @@
 
 ::: TODO
 - Prio 2: discuss constant factors (not covered by asymptotic complexity/analysis)
-- Prio 2: update this text, to make it fit in the structure
+- Prio 3: add an image explaining the graphics example
 :::
 
 In practice, there is not such a big difference in running time between
-an algorithm with growth rate $\Theta(n)$ and another with growth rate
-$\Theta(n \log n)$. There is, however, an enormous difference in running
-time between algorithms with growth rates of $\Theta(n \log n)$ and
-$\Theta(n^2)$. As you shall see during the course of your study of
+an algorithm with growth rate $O(n)$ and another with growth rate
+$O(n \log n)$. There is, however, an enormous difference in running
+time between algorithms with growth rates of $O(n \log n)$ and
+$O(n^2)$. As you shall see during the course of your study of
 common data structures and algorithms, there are many problems whose
-obvious solution requires $\Theta(n^2)$ time, but that also have a
-solution requiring $\Theta(n \log n)$ time. Examples include sorting and
+obvious solution requires $O(n^2)$ time, but that also have a
+solution requiring $O(n \log n)$ time. Examples include sorting and
 searching, two of the most important computer problems.
 
 While not nearly so important as changing an algorithm to reduce its
@@ -87,10 +87,7 @@ efficiently. Be careful not to damage the compiler's ability to do such
 optimizations for you in an effort to optimize the expression yourself.
 Always check that your "optimizations" really do improve the program
 by running the program before and after the change on a suitable
-benchmark set of input. Many times I have been wrong about the positive
-effects of code tuning in my own programs. Most often I am wrong when I
-try to optimize an expression. It is hard to do better than the
-compiler.
+benchmark set of input. It is very hard to do better than a good compiler.
 
 The greatest time and space improvements come from a better data
 structure or algorithm. The most important rule of code tuning is:
