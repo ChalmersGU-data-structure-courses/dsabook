@@ -1,6 +1,12 @@
 
 ## AVL trees
 
+::: TODO
+- Prio 1: invariants
+- Prio 2: don't write the full source code
+- Prio 2: move some things about rotations to previous overview section
+:::
+
 The AVL tree is a BST with the following additional property: For every
 node, the heights of its left and right subtrees differ by at most 1. As
 long as the tree maintains this property, if the tree contains $n$

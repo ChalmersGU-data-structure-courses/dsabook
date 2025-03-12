@@ -1,6 +1,11 @@
 
 ## Case study: The union/find algorithm
 
+::: TODO
+- Prio 2: add use case = Kruskal's algorithm
+- Prio 3: update text and code
+:::
+
 [General trees](#general-tree){.term} are trees
 whose [internal nodes](#internal-node){.term}
 have no fixed number of [children](#child){.term}. Compared to general trees,

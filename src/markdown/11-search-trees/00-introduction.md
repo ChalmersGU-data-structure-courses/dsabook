@@ -2,7 +2,7 @@
 # Search trees
 
 ::: TODO
-- Change introduction
+- Prio 1: change introduction
 :::
 
 This chapter covers *balanced binary search trees (BSTs)*, a data

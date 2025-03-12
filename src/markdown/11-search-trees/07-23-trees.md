@@ -2,11 +2,13 @@
 ## 2-3 trees
 
 ::: TODO
-- always completely balanced
+- Prio 2: write the section
 :::
 
 
 ### Invariants
+
+- always completely balanced
 
 
 ### Searching

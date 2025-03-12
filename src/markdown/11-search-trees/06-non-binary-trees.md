@@ -2,9 +2,8 @@
 ## Non-binary trees
 
 ::: TODO
-- [5.10 General Trees]
-- traversal: preorder, postorder (no inorder)
-- use cases
+- Prio 3: update text
+- Prio 3: add use cases
 :::
 
 Many organizations are hierarchical in nature, such as the military and

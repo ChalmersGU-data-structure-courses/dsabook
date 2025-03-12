@@ -1,6 +1,10 @@
 
 ## Self-balancing trees
 
+::: TODO
+- Prio 2: write an overview of rotations
+:::
+
 The [Binary Search Tree]{.term} has a
 serious deficiency for practical use as a search structure. That is the
 fact that it can easily become unbalanced, so that some nodes are deep

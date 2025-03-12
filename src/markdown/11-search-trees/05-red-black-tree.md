@@ -1,6 +1,10 @@
 
 ## Red-black trees
 
+::: TODO
+- Prio 1: make text coherent
+- Prio 2: don't write the full source code
+:::
 
 <!--
 ### Exercise 1

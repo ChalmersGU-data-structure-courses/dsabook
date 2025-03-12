@@ -1,6 +1,14 @@
 
 ## Binary search trees, BST
 
+::: TODO
+- Prio 1: invariants
+- Prio 2: update pseudocode
+- Prio 2: explanations
+- Prio 3: update the section on guided information flow (file 01b)
+- Prio 3: both recursive and iterative versions
+:::
+
 A [binary search tree]{.term}
 ([BST]{.term}) is a
 [binary tree]{.term} that conforms to the

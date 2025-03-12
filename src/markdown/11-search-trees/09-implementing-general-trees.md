@@ -2,9 +2,9 @@
 ## Implementing general trees
 
 ::: TODO
-- how to implement
-- similarity with graphs
-- [5.12 Sequential Tree Representations]
+- Prio 2: rewrite text, include:
+    - how to implement
+    - similarity with graphs
 :::
 
 ### Sequential tree representations

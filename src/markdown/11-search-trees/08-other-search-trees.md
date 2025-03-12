@@ -2,7 +2,8 @@
 ## Other kinds of search trees
 
 ::: TODO
-- list some examples
+- Prio 3: write this section
+- Prio 3: use cases, examples
 :::
 
 ### Tries, or prefix trees

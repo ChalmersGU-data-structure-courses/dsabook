@@ -2,8 +2,9 @@
 ## Skip lists
 
 ::: TODO
-- discuss the relation with a tree
-- (i.e., why is this section in this chapter?)
+- Prio 3: discuss the relation with a tree
+    - (i.e., why is this section in this chapter?)
+- Prio 3: less code, more explanations
 :::
 
 This module presents a probabilistic search structure called the

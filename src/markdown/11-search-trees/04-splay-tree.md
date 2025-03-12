@@ -1,6 +1,12 @@
 
 ## Splay trees
 
+::: TODO
+- Prio 1: invariants
+- Prio 2: move some things about rotations to previous overview
+- Prio 3: analysis (is it too hard?)
+:::
+
 Like the AVL tree, the splay tree is not actually a distinct data
 structure, but rather reimplements the BST insert, delete, and search
 methods to improve the performance of a BST. The goal of these revised
