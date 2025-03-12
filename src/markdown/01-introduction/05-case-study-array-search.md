@@ -128,6 +128,16 @@ even more difficult than proving that sequential search is the most
 efficient algorithm possible on an unsorted array.
 :::
 
+#### Variations
+
+Binary search is designed to find the (single) occurrence of a value
+$K$ and return its position. A special value is returned if $K$ does not
+appear in the array. This algorithm can be modified to implement
+variations such as returning the position of the first occurrence of $K$
+in the array if multiple occurrences are allowed, and returning the
+position of the greatest value less than $K$ when $K$ is not in the
+array.
+
 #### Binary search exercise
 
 <avembed id="binarySearchPRO" src="Searching/binarySearchPRO.html" type="pe" name="Binary Search Proficiency Exercise"/>
