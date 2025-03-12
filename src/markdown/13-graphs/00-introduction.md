@@ -1,6 +1,10 @@
 
 # Graphs
 
+::: TODO
+- Prio 2: move parts of this text to the 1st section
+:::
+
 Graphs provide the ultimate in data structure flexibility. A graph
 consists of a set of nodes, and a set of edges where an edge connects
 two nodes. Trees and lists can be viewed as special cases of graphs.

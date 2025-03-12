@@ -1,6 +1,12 @@
 
 ## Implementing graphs
 
+::: TODO
+- Prio 2: simplify code
+- Prio 2: discuss implementation vs sparse/dense
+- Prio 3: write about alternative approaches, infinite graphs
+:::
+
 ### ADT: Graphs
 
 We next turn to the problem of implementing a general-purpose

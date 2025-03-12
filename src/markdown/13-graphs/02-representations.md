@@ -1,6 +1,10 @@
 
 ## Graph representations
 
+::: TODO
+- Prio 2: update text, (semi)formal definitions
+:::
+
 There are two commonly used methods for representing graphs. The
 [adjacency matrix]{.term} for a graph is a
 $|\mathbf{V}| \times |\mathbf{V}|$ array. We typically label the

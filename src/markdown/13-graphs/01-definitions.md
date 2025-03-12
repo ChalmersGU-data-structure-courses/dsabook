@@ -2,7 +2,8 @@
 ## Definitions and properties
 
 ::: TODO
-- Directed / undirected
-- Weighted / unweighted
-- [9.1 Graph Representations]
+- Prio 1: write this
+    - directed / undirected
+    - weighted / unweighted
+    - sparse / dense
 :::

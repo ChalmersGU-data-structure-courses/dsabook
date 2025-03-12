@@ -2,7 +2,7 @@
 ### Prim's algorithm
 
 ::: TODO
-- reformulate as a generic graph search algorithm
+- Prio 2: reformulate as a generic graph search algorithm
 :::
 
 The first of our two algorithms for finding MCSTs is commonly referred

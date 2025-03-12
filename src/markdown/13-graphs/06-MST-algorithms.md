@@ -2,6 +2,6 @@
 ## Algorithms for finding the MST
 
 ::: TODO
-- Overview description of Kruskal, Prim and Boruvka
+- Prio 2: overview description of Kruskal, Prim and Boruvka
 :::
 

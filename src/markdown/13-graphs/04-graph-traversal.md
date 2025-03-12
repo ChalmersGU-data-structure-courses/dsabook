@@ -2,8 +2,10 @@
 ## Traversing graphs
 
 ::: TODO
-- handling cycles
-- remembering visited nodes
+- Prio 2: update pseudocode
+- Prio 2: discuss, compare with tree traversal
+    - handling cycles
+    - remembering visited nodes
 :::
 
 Many graph applications need to visit the vertices of a graph in some

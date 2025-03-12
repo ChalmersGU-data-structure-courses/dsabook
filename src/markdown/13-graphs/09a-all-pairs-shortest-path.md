@@ -1,6 +1,10 @@
 
 ### All-pairs shortest paths: Floyd's algorithm
 
+::: TODO
+- Prio 3: use cases
+:::
+
 We next consider the problem of finding the shortest distance between
 all pairs of vertices in the graph, called the
 [all-pairs shortest paths problem]{.term}. To be

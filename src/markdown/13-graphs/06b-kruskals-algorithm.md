@@ -2,7 +2,7 @@
 ### Kruskal's algorithm
 
 ::: TODO
-- first show more abstract pseudocode, not using union/find
+- Prio 2: first show more abstract pseudocode, not using union/find
 :::
 
 Our next MCST algorithm is commonly referred to as

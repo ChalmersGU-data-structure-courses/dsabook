@@ -1,6 +1,11 @@
 
 ### Acyclic graphs: Topological sort
 
+::: TODO
+- Prio 3: simplify code
+- Prio 3: use cases
+:::
+
 Assume that we need to schedule a series of tasks, such as classes or
 construction jobs, where we cannot start one task until after its
 prerequisites are completed. We wish to organize the tasks into a linear

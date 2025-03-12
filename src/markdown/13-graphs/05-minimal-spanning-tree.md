@@ -1,6 +1,11 @@
 
 ## Minimum spanning trees, MST
 
+::: TODO
+- Prio 1: minimal-cost spanning tree --> minimum spanning tree
+- Prio 2: add use cases
+:::
+
 The [minimal-cost spanning tree]{.term} (MCST)
 problem takes as input a connected, undirected graph $\mathbf{G}$, where
 each edge has a distance or weight measure attached. The MCST is also

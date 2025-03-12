@@ -2,9 +2,11 @@
 ## Shortest-paths problems
 
 ::: TODO
-- directed/undirected graphs
-- remembering visited nodes
-- shortest-path tree vs MST
+- Prio 2: introduction, discussing
+    - directed/undirected graphs
+    - remembering visited nodes
+    - shortest-path tree vs MST
+- Prio 2: use cases
 :::
 
 

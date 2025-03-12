@@ -2,8 +2,10 @@
 ## Dijkstra's shortest-path algorithm
 
 ::: TODO
-- use the generic graph search algorithm
-- aka uniform-cost search
+- Prio 2:
+    - use the generic graph search algorithm
+    - aka uniform-cost search
+- Prio 2: simplify code
 :::
 
 We will now present an algorithm to solve the
