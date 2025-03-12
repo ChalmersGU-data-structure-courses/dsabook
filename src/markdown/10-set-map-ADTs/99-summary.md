@@ -2,5 +2,6 @@
 ## Chapter summary
 
 ::: TODO
-- practice questions
+- Prio 2: add summary text
+- Prio 2: practice questions
 :::
