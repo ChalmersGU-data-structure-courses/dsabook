@@ -1,6 +1,11 @@
 
 ## Case study: Huffman coding
 
+::: TODO
+- Prio 2: make the text shorter (this is just an example anyway)
+    - including the file 04b
+:::
+
 One can often gain an improvement in space requirements in exchange for
 a penalty in running time. There are many situations where this is a
 desirable tradeoff. A typical example is storing files on disk. If the

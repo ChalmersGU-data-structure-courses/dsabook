@@ -1,15 +1,16 @@
 # Heaps
 
-## Implementing priority queues using binary trees
-
 ::: TODO
-- Recap of the ADT for prio queues
-- what is the heap property?
-- a binary tree that respects the heap property can be used as a prio. queue
-- show insert, removeMin
-- this is meant to be an introduction to heaps
+- Prio 1: short introduction - perhaps move some text from the first section?
+- Prio 1: rewrite the first section (move out binary heaps)
+    - Recap of the ADT for prio queues
+    - what is the heap property?
+    - a binary tree that respects the heap property can be used as a prio. queue
+    - show insert, removeMin
+    - this is meant to be an introduction to heaps
 :::
 
+## Implementing priority queues using binary trees
 
 A normal queue data structure will not implement a priority queue efficiently
 because search for the element with highest priority will take

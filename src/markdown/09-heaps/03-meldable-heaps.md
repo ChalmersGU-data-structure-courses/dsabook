@@ -2,7 +2,8 @@
 ## Meldable heaps
 
 ::: TODO
-- if we don't use complete trees there are several other possibilities
+- Prio 3: write this section:
+    - gist: "if we don't use complete trees there are several other possibilities"
 :::
 
 ### Meld: merging heaps

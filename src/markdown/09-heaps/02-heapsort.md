@@ -1,6 +1,14 @@
 
 ## Case study: Heapsort
 
+::: TODO
+- Prio 1: don't talk about BSTs here - they are not introduced yet
+- Prio 2: two stages:
+    1. not in-place heapsort (using a general prio.queue)
+    2. in-place heapsort (using a heap)
+- Prio 2: properties (stability, in-place)
+:::
+
 Before we get to Heapsort, consider for a moment the practicality of
 using a Binary Search Tree for sorting. You could insert all of the
 values to be sorted into the BST one by one, then traverse the completed

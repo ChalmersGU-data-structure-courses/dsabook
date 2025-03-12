@@ -1,6 +1,12 @@
 
 ## Binary heaps
 
+::: TODO
+- Prio 1: move some things from previous section here
+- Prio 1: we don't want the full source code, but only the main parts
+- Prio 1: invariants
+- Prio 2: change the order (building a heap shouldnät come first)
+:::
 
 ### Representing complete binary trees as arrays
 
