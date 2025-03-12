@@ -2,7 +2,8 @@
 ## Traversing a binary tree
 
 ::: TODO
-- Refer to previous chapter
+- Prio 1: add more text
+- Prio 2: refer to previous chapter
 :::
 
 Often we wish to process a binary tree by "visiting" each of its

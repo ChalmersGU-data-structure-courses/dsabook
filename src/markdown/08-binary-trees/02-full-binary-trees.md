@@ -1,6 +1,12 @@
 
 ## Case study: Full binary trees
 
+::: TODO
+- Prio 2: discuss how this is useful, why do we care about full bintrees?
+- Prio 2: maybe add more examples of theorems for bintrees?
+    - e.g. that the height of a complete tree is log of the size?
+:::
+
 Some binary tree implementations store data only at the
 [leaf nodes](#leaf-node){.term}, using the
 [internal nodes](#internal-node){.term} to

@@ -1,6 +1,10 @@
 
 # Binary Trees
 
+::: TODO
+- Prio 2: update introduction
+:::
+
 [Tree]{.term} structures enable efficient
 access and efficient update to large collections of data.
 [Binary trees](#binary-tree){.term} in
@@ -15,5 +19,5 @@ organizing the information needed to drive
 
 This chapter covers terminology used for discussing binary trees,
 [tree traversals](#binary-tree-traversals),
-approaches to implementing tree [nodes](#binary-tree-node-implementations), 
+approaches to implementing tree [nodes](#binary-tree-node-implementations),
 and various examples of binary trees.

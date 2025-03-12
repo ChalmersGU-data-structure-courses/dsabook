@@ -2,14 +2,16 @@
 ## Definitions and properties
 
 ::: TODO
-- General trees
-- Binary trees
-- Binary search trees
-- Properties
-    - depth, size, branching factor
-    - Perfect trees
-    - Complete trees
-    - Balanced trees
+- Prio 2: update section, here's what should be included:
+    - General trees
+    - Binary trees
+    - Binary search trees
+    - Properties
+        - depth, size, branching factor
+        - Perfect trees
+        - Complete trees
+        - Balanced trees
+- Prio 2: merge quizzes (files 01q, 01q2), perhaps move to another section?
 :::
 
 A [binary tree]{.term} is made up of a finite

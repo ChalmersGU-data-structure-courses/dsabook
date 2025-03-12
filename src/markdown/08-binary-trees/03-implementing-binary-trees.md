@@ -1,6 +1,12 @@
 
 ## Implementing binary trees
 
+::: TODO
+- Prio 1: update pseudocode
+- Prio 3: extend text
+- Prio 3: look over the text for space requirements (file 03b)
+:::
+
 In this module we examine one way to implement binary tree nodes. By
 definition, all binary tree nodes have two children, though one or both
 children can be empty. Binary tree nodes typically contain a value

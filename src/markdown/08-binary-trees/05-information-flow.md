@@ -2,7 +2,8 @@
 ## Iteration, recursion, and information flow
 
 ::: TODO
-- when to use iteration, recursion, BFS, DFS, etc, etc
+- Prio 1: remove short subsections? or extend them
+- Prio 2: discuss when to use iteration, recursion, BFS, DFS, etc, etc
 :::
 
 Handling information flow in a recursive function can be a challenge. In
