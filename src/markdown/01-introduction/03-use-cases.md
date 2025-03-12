@@ -2,7 +2,7 @@
 ## Use cases
 
 ::: TODO
-- Prio 1: add a 3rd example
+- Prio 2: add a 3rd example
 - Prio 2: reorganise the examples
 - Prio 2: replace Bank with e.g. Social media
 - Prio 3: add a 4th example
