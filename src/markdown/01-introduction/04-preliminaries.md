@@ -1707,6 +1707,22 @@ What we assume you know:
 - instance variable and method
 - this/self
 
+Should we treat "dataclasses" special? I.e., can we have a Python-inspired simple format:
+```
+class Node<Value>
+    value: Value
+    left: Node
+    right: Node
+```
+instead of using a constructor:
+```
+class Node<Value>
+    constructor(value, left, right):
+        this.value = value
+        this.left = left
+        this.right = right
+```
+
 What you don't need to know:
 - multiple inheritance
 - class variables, class methods, static methods
