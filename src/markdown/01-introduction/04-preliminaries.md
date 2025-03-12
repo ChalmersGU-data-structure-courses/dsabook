@@ -118,65 +118,42 @@ Note that sequence $\lbrack3, 5, 4, 4\rbrack$ is distinct from sequence $\lbrack
 
 #### Relations {-}
 
-A [relation]{.term} $R$ over set $\mathbf{S}$ is a set of
-ordered pairs from $\mathbf{S}$.
-As an example of a relation, if $\mathbf{S}$ is
-$\{a, b, c\}$, then
+A [relation]{.term} $R$ over set $\mathbf{S}$ is a set of ordered pairs from $\mathbf{S}$.
+As an example of a relation, if $\mathbf{S}$ is $\{a, b, c\}$, then
 
 $$
-\{ \langle a, c\rangle, \langle b, c\rangle, \langle c, b\rangle \}
+\{ (a, c), (b, c), (c, b) \}
 $$
 
 is a relation, and
 
 $$
-\{ \langle a, a\rangle, \langle a, c\rangle, \langle b, b\rangle,
-\langle b, c\rangle, \langle c, c\rangle \}
+\{ (a, a), (a, c), (b, b), (b, c), (c, c) \}
 $$
 
 is a different relation.
-If tuple $\langle x, y\rangle$ is in relation $R$, we may
-use the infix notation $xRy$.
-We often use relations such as the less than operator ($<$) on
-the natural numbers, which includes ordered pairs such as
-$\langle1, 3\rangle$ and
-$\langle2, 23\rangle$, but not $\langle3, 2\rangle$ or
-$\langle2, 2\rangle$.
-Rather than writing the relationship in terms of ordered pairs, we
-typically use an infix notation for such relations, writing $1<3$.
+If tuple $(x, y)$ is in relation $R$, we may use the infix notation $xRy$.
+We often use relations, such as the less than operator ($<$), on the natural numbers, which includes ordered pairs such as $(1, 3)$ and $(2, 23)$, but not $(3, 2)$ or $(2, 2)$.
+Rather than writing the relationship in terms of ordered pairs, we typically use an infix notation for such relations, writing $1<3$.
 
-Define the properties of relations as follows, with $R$ a
-binary relation over set $\mathbf{S}$.
+Define the properties of relations as follows, with $R$ a binary relation over set $\mathbf{S}$.
 
-* $R$ is [reflexive]{.term} if $aRa$
-  for all $a \in \mathbf{S}$.
+* $R$ is [reflexive]{.term} if $aRa$ for all $a \in \mathbf{S}$.
 
-* $R$ is [irreflexive]{.term} if $aRa$ is not true
-  for all $a \in \mathbf{S}$.
+* $R$ is [irreflexive]{.term} if $aRa$ is not true for all $a \in \mathbf{S}$.
 
-* $R$ is [symmetric]{.term} if whenever $aRb$,
-  then $bRa$, for all $a, b \in \mathbf{S}$.
+* $R$ is [symmetric]{.term} if whenever $aRb$, then $bRa$, for all $a, b \in \mathbf{S}$.
 
-* $R$ is [antisymmetric]{.term} if whenever $aRb$
-  and $bRa$, then $a = b$, for all
-  $a, b \in \mathbf{S}$.
+* $R$ is [antisymmetric]{.term} if whenever $aRb$ and $bRa$, then $a = b$, for all $a, b \in \mathbf{S}$.
 
-* $R$ is [transitive]{.term} if whenever $aRb$ and
-  $bRc$, then $aRc$, for all
-  $a, b, c \in \mathbf{S}$.
+* $R$ is [transitive]{.term} if whenever $aRb$ and $bRc$, then $aRc$, for all $a, b, c \in \mathbf{S}$.
 
-As examples, for the natural numbers, $<$ is
-irreflexive (because $aRa$ is never true),
-antisymmetric (because there is no case where $aRb$ and
+As examples, for the natural numbers, $<$ is irreflexive (because $aRa$ is never true), antisymmetric (because there is no case where $aRb$ and
 $bRa$), and transitive.
 Relation $\leq$ is reflexive, antisymmetric, and transitive.
-Relation $=$ is reflexive, symmetric (and antisymmetric!),
-and transitive.
-For people, the relation "is a sibling of" is symmetric and
-transitive.
-If we define a person to be a sibling of themself, then it is
-reflexive; if we define a person not to be a sibling of themself, then
-it is not reflexive.
+Relation $=$ is reflexive, symmetric (and antisymmetric!), and transitive.
+For people, the relation "is a sibling of" is symmetric and transitive.
+If we define a person to be a sibling of themself, then it is reflexive; if we define a person not to be a sibling of themself, then it is not reflexive.
 
 <!--
 .. avembed:: Exercises/Background/SetTFrelation.html ka
@@ -185,26 +162,16 @@ it is not reflexive.
 
 #### Equivalence Relations
 
-$R$ is an [equivalence relation]{.term} on set $\mathbf{S}$
-if it is reflexive, symmetric, and transitive.
-An equivalence relation can be used to partition a set into
-[equivalence classes <equivalence class>]{.term}.
-If two elements $a$ and $b$ are equivalent to each other,
-we write $a \equiv b$.
-A [partition]{.term} of a set $\mathbf{S}$ is a collection of
-subsets that are [disjoint]{.term} from each other and whose union is
-$\mathbf{S}$.
-An [equivalence relation]{.term} on set $\mathbf{S}$ partitions
-the set into disjoint subsets whose elements are equivalent.
-The [UNION/FIND <UNION/FIND> <UnionFind>]{.term} algorithm efficiently
-maintains equivalence classes on a set.
-One application for such [disjoint sets]{.term}
-computing a [minimal cost spanning tree <MCST> <MCST>]{.term}.
+$R$ is an [equivalence relation]{.term} on set $\mathbf{S}$ if it is reflexive, symmetric, and transitive.
+An equivalence relation can be used to partition a set into [equivalence classes <equivalence class>]{.term}.
+If two elements $a$ and $b$ are equivalent to each other, we write $a \equiv b$.
+A [partition]{.term} of a set $\mathbf{S}$ is a collection of subsets that are [disjoint]{.term} from each other and whose union is $\mathbf{S}$.
+An [equivalence relation]{.term} on set $\mathbf{S}$ partitions the set into disjoint subsets whose elements are equivalent.
+The [Union-Find <Union-find> <UnionFind>]{.term} algorithm efficiently maintains equivalence classes on a set.
 
 ::: topic
 #### Example {-}
-For the integers, $=$ is an equivalence relation that
-partitions each element into a distinct subset.
+For the integers, $=$ is an equivalence relation that partitions each element into a distinct subset.
 In other words, for any integer $a$, three things are true.
 
 1. $a = a$,
@@ -213,13 +180,11 @@ In other words, for any integer $a$, three things are true.
 
 3. if $a = b$ and $b = c$, then $a = c$.
 
-Of course, for distinct integers $a$, $b$, and $c$
-there are never cases where $a = b$, $b = a$, or
-$b = c$.
-So the requirements for symmetry and transitivity are never
-violated, and therefore the relation is symmetric and transitive.
+Of course, for distinct integers $a$, $b$, and $c$ there are never cases where $a = b$, $b = a$, or $b = c$.
+So the requirements for symmetry and transitivity are never violated, and therefore the relation is symmetric and transitive.
 :::
 
+<!--
 ::: topic
 #### Example {-}
 If we clarify the definition of sibling to mean that a person is
@@ -251,6 +216,8 @@ This relation is an equivalence relation because
     $y \;\mathrm{mod}\; m = z \;\mathrm{mod}\; m$, then
     $x \;\mathrm{mod}\; m = z \;\mathrm{mod}\; m$.
 :::
+
+-->
 
 <!--
 .. avembed:: Exercises/Background/SetTFequivrel.html ka
