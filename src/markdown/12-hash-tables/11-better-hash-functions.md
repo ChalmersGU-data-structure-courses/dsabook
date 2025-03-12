@@ -2,14 +2,16 @@
 ## Better hash functions
 
 ::: TODO
-- more advanced hash functions
+- Prio 1: introduction
+- Prio 2: more advanced hash functions
 :::
 
 ### What is a good hash function?
 
 ::: TODO
-- uniform distribution
-- independence
+- Prio 2:
+    - uniform distribution
+    - independence
 :::
 
 ### Binning

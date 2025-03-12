@@ -1,6 +1,10 @@
 
 ## Converting objects to table indices
 
+::: TODO
+- Prio 2: write missing parts: other strategies, invariants, conflicts
+:::
+
 ### Hash codes are not table indices
 
 Now, we want to be able to calculate a table index for any kind of

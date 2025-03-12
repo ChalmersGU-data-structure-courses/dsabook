@@ -2,11 +2,14 @@
 ## Hash functions
 
 ::: TODO
-- definitions, requirements
-- distribution of values, independence of values
-- good vs perfect hash function
-- include all object parts in hash code (but not calculated)
-- not random, but random-like
+- Prio 1: invariants
+- Prio 1: basic hash functions
+- Prio 2:
+    - definitions, requirements
+    - distribution of values, independence of values
+    - good vs perfect hash function
+    - include all object parts in hash code (but not calculated)
+    - not random, but random-like
 :::
 
 Hashing generally takes records whose key values come from a large range

@@ -2,8 +2,10 @@
 ## Separate chaining
 
 ::: TODO
-- Discuss: Load factor, what is a good LF?
-- Discuss: When to resize
+- Prio 2: implementation
+- Prio 2:
+    - Discuss: Load factor, what is a good LF?
+    - Discuss: When to resize
 :::
 
 While the goal of a hash function is to minimize collisions, some

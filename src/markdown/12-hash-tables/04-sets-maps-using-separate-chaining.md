@@ -1,6 +1,11 @@
 
 ## Implementing sets and maps using separate chaining
 
+::: TODO
+- Prio 2: write "implementing sets"
+- Prio 2: simplify code
+:::
+
 ### Implementing sets
 
 ### Implementing maps

@@ -1,6 +1,10 @@
 
 ## Deletion in open addressing
 
+::: TODO
+- Prio 2: update text
+:::
+
 When deleting records from a hash table, there are two important
 considerations.
 

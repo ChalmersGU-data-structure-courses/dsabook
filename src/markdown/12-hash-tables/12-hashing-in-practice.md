@@ -1,6 +1,10 @@
 
 ## Hash tables in practice
 
+::: TODO
+- Prio 2: update text
+:::
+
 Congratulations! You have reached the end of the hashing tutorial. In
 summary, a properly tuned hashing system will return records with an
 average cost of less than two record accesses. This makes it the most

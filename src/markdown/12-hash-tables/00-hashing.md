@@ -2,13 +2,15 @@
 # Hash tables
 
 ::: TODO
-- hash tables are quite similar to arrays, so they fit better to introduce before trees
-- introduction: to index general objects (e.g. strings), we can use a hash function to calculate an array index
-- problem: how do we handle conflicts?
-- we need dynamic arrays!
-- see hash table slides
-- load factor
-- terminology: load factor, hash conflict
+- Prio 2: terminology: load factor, hash conflict
+- Prio 2: update what terms we use (open addressing, closed hashing, etc etc)
+- Prio 2: be consistent with pseudocode - key/value, and simplify code!
+- Prio 2: update examples - they are not the best
+- Overview idea:
+    - introduction: to index general objects (e.g. strings), we can use a hash function to calculate an array index
+    - problem: how do we handle conflicts?
+    - we need dynamic arrays!
+    - see hash table slides
 :::
 
 Hashing is a method for storing and retrieving records from a database.

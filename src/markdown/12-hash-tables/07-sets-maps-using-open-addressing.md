@@ -1,6 +1,12 @@
 
 ## Implementing sets and maps using open addressing
 
+::: TODO
+- Prio 1: resizing
+- Prio 2: write "implementing sets"
+- Prio 2: simplify code
+:::
+
 ### Implementing sets
 
 ### Implementing maps

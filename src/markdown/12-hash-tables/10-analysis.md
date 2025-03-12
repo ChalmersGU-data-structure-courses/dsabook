@@ -2,8 +2,9 @@
 ## Analysis of hash tables
 
 ::: TODO
-- load factor
-- (for open addressing: clustering)
+- Prio 1: write about separate chaining
+- Prio 2: discuss load factor
+- Prio 3: for open addressing: discuss clustering
 :::
 
 How efficient is hashing? We can measure hashing performance in terms of

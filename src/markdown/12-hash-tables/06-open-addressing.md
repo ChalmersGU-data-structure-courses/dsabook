@@ -2,9 +2,11 @@
 ## Open addressing
 
 ::: TODO
-- Discuss: Load factor, what is a good LF?
-- Discuss: When to resize
-- give overview implementation, not for a specific ADT (set/map)
+- Prio 2: invariants
+- Prio 2:
+    - Discuss: Load factor, what is a good LF?
+    - Discuss: When to resize
+- Prio 2: give overview implementation, not for a specific ADT (set/map)
 :::
 
 

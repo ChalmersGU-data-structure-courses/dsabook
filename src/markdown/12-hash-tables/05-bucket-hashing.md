@@ -2,8 +2,8 @@
 ## Bucket hashing
 
 ::: TODO
-- do we want to keep this section?
-- Wikipedia doesn't even mention bucket hashing, so probably noone uses it
+- Prio 2: - do we want to keep this section?
+    - Wikipedia doesn't even mention bucket hashing, so probably noone uses it
 :::
 
 Closed hashing stores all records directly in the hash table. Each

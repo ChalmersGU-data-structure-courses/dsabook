@@ -1,6 +1,10 @@
 
 ## Different probing strategies
 
+::: TODO
+- Prio 3: examples, tests
+:::
+
 ### The problem with linear probing
 
 While linear probing is probably the first idea that comes to mind when
