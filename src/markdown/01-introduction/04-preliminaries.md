@@ -160,7 +160,7 @@ If we define a person to be a sibling of themself, then it is reflexive; if we d
    :long_name: Relations Exercise
 -->
 
-#### Equivalence Relations
+#### Equivalence Relations {-}
 
 $R$ is an [equivalence relation]{.term} on set $\mathbf{S}$ if it is reflexive, symmetric, and transitive.
 An equivalence relation can be used to partition a set into [equivalence classes <equivalence class>]{.term}.
@@ -224,43 +224,28 @@ This relation is an equivalence relation because
    :long_name: Equivalence Exercise
 -->
 
-#### Partial Orders
+#### Partial Orders {-}
 
-A binary relation is called a
-[partial order]{.term} if it is antisymmetric and transitive.
-If the relation is reflexive, it is called a
-[non-strict partial order]{.term}.
-If the relation is [irreflexive]{.term}, it is called a
-[strict partial order]{.term}.
-The set on which the partial order is defined is called a
-[partially ordered set]{.term} or a [poset]{.term}.
-Elements $x$ and $y$ of a set are [comparable]{.term} under
-a given relation $R$ if either $xRy$ or $yRx$.
-If every pair of distinct elements in a partial order are comparable,
-then the order is called a [total order]{.term} or [linear order]{.term}.
+A binary relation is called a [partial order]{.term} if it is antisymmetric and transitive.
+If the relation is reflexive, it is called a [non-strict partial order]{.term}.
+If the relation is [irreflexive]{.term}, it is called a [strict partial order]{.term}.
+The set on which the partial order is defined is called a [partially ordered set]{.term} or a [poset]{.term}.
+Elements $x$ and $y$ of a set are [comparable]{.term} under a given relation $R$ if either $xRy$ or $yRx$.
+If every pair of distinct elements in a partial order are comparable, then the order is called a [total order]{.term} or [linear order]{.term}.
 
 ::: topic
 #### Example {-}
-For the integers, relations $<$ and $\leq$ define
-partial orders.
-Operation $<$ is a total order because, for every pair of
-integers $x$ and $y$ such that $x \neq y$,
-either $x < y$ or $y < x$.
-Likewise, $\leq$ is a total order because,
-for every pair of integers $x$ and $y$ such that
-$x \neq y$, either $x \leq y$ or $y \leq x$.
+For the integers, relations $<$ and $\leq$ define partial orders.
+Operation $<$ is a total order because, for every pair of integers $x$ and $y$ such that $x \neq y$, either $x < y$ or $y < x$.
+Likewise, $\leq$ is a total order because, for every pair of integers $x$ and $y$ such that $x \neq y$, either $x \leq y$ or $y \leq x$.
 :::
 
 ::: topic
 #### Example {-}
-For the powerset of the integers, the subset
-operator defines a partial order (because it is antisymmetric and
-transitive).
+For the powerset of the integers, the subset operator defines a partial order (because it is antisymmetric and transitive).
 For example, $\{1, 2\}\subseteq\{1, 2, 3\}$.
-However, sets {1, 2} and {1, 3} are not comparable by the
-subset operator, because neither is a subset of the other.
-Therefore, the subset operator does not define a total order on the
-powerset of the integers.
+However, sets {1, 2} and {1, 3} are not comparable by the subset operator, because neither is a subset of the other.
+Therefore, the subset operator does not define a total order on the powerset of the integers.
 :::
 
 <!--
@@ -268,31 +253,21 @@ powerset of the integers.
    :long_name: PartialOrder Exercise
 -->
 
-#### Miscellaneous Notation
+#### Miscellaneous Notation {-}
 
-This module collects together definitions for a number of mathematical
-terms and concepts, as a place for reference when needed.
+We now define several mathematical terms and concepts, providing a reference for future use.
 
 **Units of measure:**
-OpenDSA modules use the following notation for units of measure.
-"B" will be used as an abbreviation for bytes, "b" for bits,
-"KB" for kilobytes $(2^{10} = 1024$ bytes),
-"MB" for megabytes $(2^{20}$ bytes)
-"GB" for gigabytes $(2^{30}$ bytes)
-and "ms" for milliseconds
-(a millisecond is 1/1000 of a second).
-Spaces are not placed between the number and the unit abbreviation
-when a power of two is intended.
-Thus a disk drive of size 25 gigabytes (where a gigabyte is intended
-as $2^{30}$ bytes) will be written as "25GB".
+SA modules use the following notation for units of measure.
+"B" will be used as an abbreviation for bytes, "b" for bits, "KB" for kilobytes $(2^{10} = 1024$ bytes), "MB" for megabytes $(2^{20}$ bytes) "GB" for gigabytes $(2^{30}$ bytes) and "ms" for milliseconds (a millisecond is 1/1000 of a second).
+Spaces are not placed between the number and the unit abbreviation when a power of two is intended.
+Thus a disk drive of size 25 gigabytes (where a gigabyte is intended as $2^{30}$ bytes) will be written as "25GB".
 Spaces are used when a decimal value is intended.
-An amount of 2000 bits would therefore be written "2 Kb" while
-"2Kb" represents 2048 bits.
+An amount of 2000 bits would therefore be written "2 Kb" while "2KB" represents 2048 bits.
 2000 milliseconds is written as 2000 ms.
-Note that in this book large amounts of storage are nearly always
-measured in powers of two and times in powers of
-ten.
+Note that in this book large amounts of storage are nearly always measured in powers of two and times in powers of ten.
 
+<!--
 **Factorial function:**
 The [factorial]{.term} function, written $n!$ for $n$ an
 integer greater than 0, is the product of
@@ -315,21 +290,16 @@ $c$.
 ::: note
 The symbol "$\approx$" means "approximately equal."
 :::
+-->
 
 **Permutations:**
-A [permutation]{.term} of a sequence $\mathbf{S}$
-is simply the members of $\mathbf{S}$ arranged in some order.
-For example, a permutation of the integers 1 through $n$ would
-be those values arranged in some order.
-If the sequence contains $n$ distinct members, then there are
-$n!$ different permutations for the sequence.
-This is because there are $n$ choices for the first member in
-the permutation; for each choice of first member there are $n-1$
-choices for the second member, and so on.
-Sometimes one would like to obtain a [random permutation]{.term} for a
-sequence, that is, one of the $n!$ possible permutations is
-selected in such a way that each permutation has equal probability of
-being selected.
+A [permutation]{.term} of a sequence $\mathbf{S}$ is simply the members of $\mathbf{S}$ arranged in some order.
+For example, a permutation of the integers 1 through $n$ would be those values arranged in some order.
+If the sequence contains $n$ distinct members, then there are $n!$ different permutations for the sequence.
+This is because there are $n$ choices for the first member in the permutation; for each choice of first member there are $n-1$ choices for the second member, and so on.
+Sometimes one would like to obtain a [random permutation]{.term} for a sequence, that is, one of the $n!$ possible permutations is selected in such a way that each permutation has equal probability of being selected.
+
+<!--
 A simple function for generating a random permutation is as
 follows.
 Here, the $n$ values of the sequence are stored in
@@ -346,93 +316,46 @@ public static void permute(Object[] A) {
     Swap.swap(A, i-1, random(i));      //   swap A[i-1] with a random
 }                                      //   position in the range 0 to i-1.
 ```
-
-
-**Boolean variables:**
-A [Boolean variable]{.term}
-is a variable that takes on one of the two values $True$ and
-$False$.
-These two values are often associated with the values 1 and 0,
-respectively, although there is no reason why this needs to be the
-case.
-It is poor programming practice to rely on the
-correspondence between 0 and False, because these are logically
-distinct objects of different types.
+-->
 
 **Logic Notation:**
-We will occasionally make use of the notation of symbolic or Boolean
-logic.
-$A \Rightarrow B$ means "$A$ implies $B$" or
-"If $A$ then $B$".
-$A \Leftrightarrow B$ means "$A$ if and only if $B$"
-or "$A$ is equivalent to $B$".
-$A \vee B$ means "$A$ or $B$"
-(useful both in the context of symbolic
-logic or when performing a Boolean operation).
+We will occasionally make use of the notation of symbolic or Boolean logic.
+$A \Rightarrow B$ means "$A$ implies $B$" or "If $A$ then $B$".
+$A \Leftrightarrow B$ means "$A$ if and only if $B$" or "$A$ is equivalent to $B$".
+$A \vee B$ means "$A$ or $B$" (useful both in the context of symbolic logic or when performing a Boolean operation).
 $A \wedge B$ means "$A$ and $B$".
-$\sim\!A$ and $\overline{A}$ both mean "not $A$" or
-the negation of $A$ where $A$ is a Boolean variable.
+$\sim\!A$ and $\overline{A}$ both mean "not $A$" or the negation of $A$ where $A$ is a Boolean variable.
 
 **Floor and ceiling:**
-The [floor]{.term} of $x$ (written $\lfloor x \rfloor$)
-takes real value $x$ and returns the greatest
-integer $\leq x$.
-For example, $\lfloor 3.4 \rfloor = 3$,
-as does $\lfloor 3.0 \rfloor$,
-while $\lfloor -3.4 \rfloor = -4$ and
-$\lfloor -3.0 \rfloor = -3$.
-The [ceiling]{.term} of $x$ (written
-$\lceil x \rceil$) takes real value $x$ and returns the
-least integer $\geq x$.
-For example, $\lceil 3.4 \rceil = 4$, as does
-$\lceil 4.0 \rceil$,
-while $\lceil -3.4 \rceil = \lceil -3.0 \rceil = -3$.
+The [floor]{.term} of $x$ (written $\lfloor x \rfloor$) takes real value $x$ and returns the greatest integer $\leq x$.
+For example, $\lfloor 3.4 \rfloor = 3$, as does $\lfloor 3.0 \rfloor$, while $\lfloor -3.4 \rfloor = -4$ and $\lfloor -3.0 \rfloor = -3$.
+The [ceiling]{.term} of $x$ (written $\lceil x \rceil$) takes real value $x$ and returns the least integer $\geq x$.
+For example, $\lceil 3.4 \rceil = 4$, as does $\lceil 4.0 \rceil$, while $\lceil -3.4 \rceil = \lceil -3.0 \rceil = -3$.
 
 **Modulus function:**
-The [modulus]{.term} (or [mod]{.term}) function returns the remainder of
-an integer division.
-Sometimes written $n \;\mathrm{mod}\; m$ in mathematical expressions,
-the syntax in many programming languages is $n % m$.
-From the definition of remainder, $n \;\mathrm{mod}\; m$ is the integer
-$r$ such that $n = qm + r$ for $q$ an integer,
-and $|r| < |m|$.
-Therefore, the result of $n \;\mathrm{mod}\; m$ must be between 0 and
-$m-1$ when $n$ and $m$ are positive integers.
-For example, $5 \;\mathrm{mod}\; 3 = 2$; $25 \;\mathrm{mod}\; 3 = 1$,
-$5 \;\mathrm{mod}\; 7 = 5$, and $5 \;\mathrm{mod}\; 5 = 0$.
+The [modulus]{.term} (or [mod]{.term}) function returns the remainder of an integer division.
+Sometimes written $n \;\mathrm{mod}\; m$ in mathematical expressions, the syntax in many programming languages is $n % m$.
+From the definition of remainder, $n \;\mathrm{mod}\; m$ is the integer $r$ such that $n = qm + r$ for $q$ an integer, and $|r| < |m|$.
+Therefore, the result of $n \;\mathrm{mod}\; m$ must be between 0 and $m-1$ when $n$ and $m$ are positive integers.
+For example, $5 \;\mathrm{mod}\; 3 = 2$; $25 \;\mathrm{mod}\; 3 = 1$, $5 \;\mathrm{mod}\; 7 = 5$, and $5 \;\mathrm{mod}\; 5 = 0$.
 
-There is more than one way to assign values to $q$
-and $r$, depending on how integer division is interpreted.
-The most common mathematical definition computes the mod function as
-$n \;\mathrm{mod}\; m = n - m\lfloor n/m\rfloor$.
+There is more than one way to assign values to $q$ and $r$, depending on how integer division is interpreted.
+The most common mathematical definition computes the mod function as $n \;\mathrm{mod}\; m = n - m\lfloor n/m\rfloor$.
 In this case, $-3 \;\mathrm{mod}\; 5 = 2$.
-However, Java and C++ compilers typically use the underlying
-processor's machine instruction for computing integer arithmetic.
-On many computers this is done by truncating the resulting fraction,
-meaning $n \;\mathrm{mod}\; m = n - m (\mathrm{trunc}(n/m))$.
+However, Java and C++ compilers typically use the underlying processor's machine instruction for computing integer arithmetic.
+On many computers this is done by truncating the resulting fraction, meaning $n \;\mathrm{mod}\; m = n - m (\mathrm{trunc}(n/m))$.
 Under this definition, $-3 \;\mathrm{mod}\; 5 = -3$.
 Another language might do something different.
 
-Unfortunately, for many applications this is not what the user wants
-or expects.
-For example, many [hash systems <hash system> <HashFunc>]{.term}
-will perform some computation on a record's [key]{.term} value and then
-take the result modulo the hash table size.
-The expectation here would be that the result is a legal index into
-the hash table, not a negative number.
-Implementers of hash functions must either insure that the
-result of the computation is always positive, or else add the hash
-table size to the result of the modulo function when that result is
-negative.
+Unfortunately, for many applications this is not what the user wants or expects.
+For example, many [hash systems <hash system> <HashFunc>]{.term} will perform some computation on a record's [key]{.term} value and then take the result modulo the hash table size.
+The expectation here would be that the result is a legal index into the hash table, not a negative number.
+Implementers of hash functions must either insure that the result of the computation is always positive, or else add the hash table size to the result of the modulo function when that result is negative.
 
+#### Logarithms {-}
 
-#### Logarithms
-
-The [logarithm]{.term} of base $b$ for value $y$ is the
-power to which $b$ is raised to get $y$.
-Normally, this is written as $\log_b y = x$.
-Thus, if $\log_b y = x$ then $b^x = y$,
-and $b^{log_b y} = y$.
+The [logarithm]{.term} of base $b$ for value $y$ is the power to which $b$ is raised to get $y$.
+Normally, this is written as $\log_b y = x$.  Thus, if $\log_b y = x$ then $b^x = y$, and $b^{log_b y} = y$.
 
 Logarithms are used frequently by programmers.
 Here are two typical uses.
@@ -440,41 +363,26 @@ Here are two typical uses.
 ::: topic
 ##### Example {-}
 Many programs require an encoding for a collection of objects.
-What is the minimum number of bits needed to represent $n$
-distinct code values?
+What is the minimum number of bits needed to represent $n$ distinct code values?
 The answer is $\lceil \log_2 n \rceil$ bits.
-For example, if you have 1000 codes to store, you will require at
-least $\lceil \log_2 1000 \rceil = 10$ bits to have 1000
-different codes (10 bits provide 1024 distinct code values).
+For example, if you have 1000 codes to store, you will require at least $\lceil \log_2 1000 \rceil = 10$ bits to have 1000 different codes (10 bits provide 1024 distinct code values).
 :::
 
 ::: topic
 ##### Example {-}
-Consider the [binary search <binary search> <AnalProgram>]{.term}
-algorithm for finding a given value within an array sorted by value
-from lowest to highest.
-Binary search first looks at the middle element
-and determines if the value being searched for is in the upper half
-or the lower half of the array.
-The algorithm then continues splitting the appropriate
-subarray in half until the desired value is found.
-How many times can an array of size \(n\) be split in half until
-only one element remains in the final subarray?
+Consider the [binary search <binary search> <AnalProgram>]{.term} algorithm for finding a given value within an array sorted by value from lowest to highest.
+Binary search first looks at the middle element and determines if the value being searched for is in the upper half or the lower half of the array.
+The algorithm then continues splitting the appropriate subarray in half until the desired value is found.
+How many times can an array of size \(n\) be split in half until only one element remains in the final subarray?
 The answer is $\lceil \log_2 n \rceil$ times.
 :::
 
-In OpenDSA, nearly all logarithms used have a base of two.
-This is because data structures and algorithms most often divide
-things in half, or store codes with binary bits.
-Whenever you see the notation $\log n$ in OpenDSA,
-either $\log_2 n$ is meant or else the term is being used
-asymptotically and so the actual base does not matter.
-For logarithms using any base other than two, we will show the base
-explicitly.
+Nearly all logarithms we use have a base of two.
+This is because data structures and algorithms most often divide things in half, or store codes with binary bits.
+Whenever you see the notation $\log n$, either $\log_2 n$ is meant or else the term is being used asymptotically and so the actual base does not matter.
+For logarithms using any base other than two, we will show the base explicitly.
 
-Logarithms have the following properties, for any positive values of
-$m$, $n$, and $r$, and any positive integers
-$a$ and $b$.
+Logarithms have the following properties, for any positive values of $m$, $n$, and $r$, and any positive integers $a$ and $b$.
 
 1) $\log (nm) = \log n + \log m$.
 
@@ -484,19 +392,11 @@ $a$ and $b$.
 
 4) $\log_a n = \log_b n / \log_b a$.
 
-The first two properties state that the logarithm
-of two numbers multiplied (or divided) can be found by adding
-(or subtracting) the logarithms of the two numbers. [#]_
+The first two properties state that the logarithm of two numbers multiplied (or divided) can be found by adding (or subtracting) the logarithms of the two numbers.
 Property (3) is simply an extension of property (1).
-Property (4) tells us that, for variable $n$ and any two integer
-constants $a$ and $b$, $\log_a n$ and
-$\log_b n$ differ by the constant factor $\log_b a$,
-regardless of the value of $n$.
-Most runtime analyses we use are of a type that ignores
-constant factors in costs.
-Property (4) says that such analyses need not be concerned with the
-base of the logarithm, because this can change the total cost only by
-a constant factor.
+Property (4) tells us that, for variable $n$ and any two integer constants $a$ and $b$, $\log_a n$ and $\log_b n$ differ by the constant factor $\log_b a$, regardless of the value of $n$.
+Most runtime analyses we use are of a type that ignores constant factors in costs.
+Property (4) says that such analyses need not be concerned with the base of the logarithm, because this can change the total cost only by a constant factor.
 
 A useful identity to know is:
 
@@ -504,31 +404,22 @@ $$
 2^{\log n} = n
 $$
 
-To give some intuition for why this is true:
-What does it mean to take the log (base 2) of $n$?
-If $\log_2 n = x$, then $x$ is the power to which you need
-to raise 2 to get back to $n$.
+To give some intuition for why this is true: What does it mean to take the log (base 2) of $n$?
+If $\log_2 n = x$, then $x$ is the power to which you need to raise 2 to get back to $n$.
 So of course, $2^{\log n} = n$ when the base of the log is 2.
 
 When discussing logarithms, exponents often lead to confusion.
 Property (3) tells us that $\log n^2 = 2 \log n$.
-How do we indicate the square of the logarithm (as opposed to the
-logarithm of $n^2$)?
-This could be written as $(\log n)^2$, but it is traditional to
-use $\log^2 n$.
-On the other hand, we might want to take the logarithm of the
-logarithm of $n$.
+How do we indicate the square of the logarithm (as opposed to the logarithm of $n^2$)?
+This could be written as $(\log n)^2$, but it is traditional to use $\log^2 n$.
+On the other hand, we might want to take the logarithm of the logarithm of $n$.
 This is written $\log \log n$.
 
-A special notation is used in the rare case when we need to know how
-many times we must take the log of a number before we reach a
-value $\leq 1$.
+A special notation is used in the rare case when we need to know how many times we must take the log of a number before we reach a value $\leq 1$.
 This quantity is written $\log^* n$.
-For example, $\log^* 1024 = 4$ because
-$\log 1024 = 10$, $\log 10 \approx 3.33$,
-$\log 3.33 \approx 1.74$,
-and $\log 1.74 < 1$, which is a total of 4 log operations.
+For example, $\log^* 1024 = 4$ because $\log 1024 = 10$, $\log 10 \approx 3.33$, $\log 3.33 \approx 1.74$, and $\log 1.74 < 1$, which is a total of 4 log operations.
 
+<!--
 ::: note
 These properties are the idea behind the slide rule.
 Adding two numbers can be viewed as joining two lengths
@@ -545,59 +436,40 @@ the correct numeric answer by taking the inverse of the
 logarithm for the result.
 :::
 
-<!--
 Here is some practice with manipulating logarithms.
 
 .. avembed:: Exercises/Background/MathLogSumm.html ka
    :long_name: Logarithms Practice Questions
  -->
 
-#### Summations
+#### Summations {-}
 
 Most programs contain loop constructs.
-When analyzing running time costs for programs with loops, we
-need to add up the costs for each time the loop is executed.
+When analyzing running time costs for programs with loops, we need to add up the costs for each time the loop is executed.
 This is an example of a [summation]{.term}.
-Summations are simply the sum of costs for some function applied to a
-range of parameter values.
-Summations are typically written with the following "Sigma"
-notation:
+Summations are simply the sum of costs for some function applied to a range of parameter values.
+Summations are typically written with the following "Sigma" notation:
 
 $$
 \sum_{i=1}^{n} f(i).
 $$
 
-This notation indicates that we are summing the value of
-$f(i)$ over some range of (integer) values.
-The parameter to the expression and its initial value are indicated
-below the $\sum$ symbol.
-Here, the notation $i=1$ indicates that the parameter is
-$i$ and that it begins with the value 1.
+This notation indicates that we are summing the value of $f(i)$ over some range of (integer) values.
+The parameter to the expression and its initial value are indicated below the $\sum$ symbol.
+Here, the notation $i=1$ indicates that the parameter is $i$ and that it begins with the value 1.
 At the top of the $\sum$ symbol is the expression $n$.
 This indicates the maximum value for the parameter $i$.
-Thus, this notation means to sum the values of $f(i)$ as
-$i$ ranges across the integers from 1 through $n$.
-This can also be written
-$f(1) + f(2) + \cdots + f(n-1) + f(n)$.
-Within a sentence, Sigma notation is typeset as
-$\sum_{i=1}^{n} f(i)$.
+Thus, this notation means to sum the values of $f(i)$ as $i$ ranges across the integers from 1 through $n$.
+This can also be written $f(1) + f(2) + \cdots + f(n-1) + f(n)$.
+Within a sentence, Sigma notation is typeset as $\sum_{i=1}^{n} f(i)$.
 
-Given a summation, you often wish to replace it with an algebraic
-equation with the same value as the summation.
-This is known as a [closed-form solution]{.term},
-and the process of replacing the summation with its closed-form
-solution is known as solving the summation.
-For example, the summation
-$\sum_{i=1}^{n} 1$
-is simply the expression "1" summed $n$ times
-(remember that $i$ ranges from 1 to $n$).
-Because the sum of $n$ 1s is $n$,
-the closed-form solution is $n$.
+Given a summation, you often wish to replace it with an algebraic equation with the same value as the summation.
+This is known as a [closed-form solution]{.term}, and the process of replacing the summation with its closed-form solution is known as solving the summation.
+For example, the summation $\sum_{i=1}^{n} 1$ is simply the expression "1" summed $n$ times (remember that $i$ ranges from 1 to $n$).
+Because the sum of $n$ ones is $n$, the closed-form solution is $n$.
 
-Here is an explanation about the closed form solution of one summation
-that you will see many times in this book.
-Since this appears so often, it will help you later if you can get
-comfortable with it.
+Here is an explanation about the closed form solution of one summation that you will see many times in this book.
+Since this appears so often, it will help you later if you can get comfortable with it.
 
 <!--
 .. inlineav:: SummationOneToNCON ss
@@ -632,11 +504,9 @@ $$
 \end{eqnarray}
 $$
 
-The sum of reciprocals from 1 to $n$, called the
-[Harmonic Series]{.term} and written $\mathcal{H}_n$, has a value
-between $\log_e n$ and $\log_e n + 1$.
-To be more precise, as $n$ grows,
-the summation grows closer to
+<!--
+The sum of reciprocals from 1 to $n$, called the [Harmonic Series]{.term} and written $\mathcal{H}_n$, has a value between $\log_e n$ and $\log_e n + 1$.
+To be more precise, as $n$ grows, the summation grows closer to
 
 $$
 \mathcal{H}_n \approx \log_e n + \gamma + \frac{1}{2n},
@@ -650,51 +520,36 @@ Unfortunately, induction does not help us derive a closed-form
 solution.
 Induction only confirms when a proposed closed-form solution is
 correct.
+-->
 
+#### Recurrence Relations {-}
 
-#### Recurrence Relations
-
-The running time for a recursive algorithm is most easily expressed by
-a recursive expression because the total time for the recursive
-algorithm includes the time to run the recursive
-call(s).
-A [recurrence relation]{.term} defines a function by means of an
-expression that includes one or more (smaller) instances of itself.
-A classic example is the recursive definition for the
-factorial function:
+The running time for a recursive algorithm is most easily expressed by a recursive expression because the total time for the recursive algorithm includes the time to run the recursive call(s).
+A [recurrence relation]{.term} defines a function by means of an expression that includes one or more (smaller) instances of itself.
+A classic example is the recursive definition for the factorial function:
 
 $$
 n! = (n-1)! \cdot n\ \mbox{for}\ n>1; \quad 1! = 0! = 1.
 $$
 
-Another standard example of a recurrence is the Fibonacci
-sequence:
+Another standard example of a recurrence is the Fibonacci sequence:
 
 $$
 \mbox{Fib}(n) = \mbox{Fib}(n-1) + \mbox{Fib}(n-2)\ \mbox{for}\ n>2;
 \quad\mbox{Fib}(1) = \mbox{Fib}(2) = 1.
 $$
 
-From this definition, the first seven numbers of the
-Fibonacci sequence are
+From this definition, the first seven numbers of the Fibonacci sequence are
 
 $$
 1, 1, 2, 3, 5, 8,\ \mbox{and}\ 13.
 $$
 
-Notice that this definition contains two parts: the general
-definition for $\mbox{Fib}(n)$ and the base cases for
-$\mbox{Fib}(1)$ and $\mbox{Fib}(2)$.
-Likewise, the definition for factorial contains a recursive part and
-base cases.
+Notice that this definition contains two parts: the general definition for $\mbox{Fib}(n)$ and the base cases for $\mbox{Fib}(1)$ and $\mbox{Fib}(2)$.
+Likewise, the definition for factorial contains a recursive part and base cases.
 
-Recurrence relations are often used to model the cost of recursive
-functions.
-For example, the number of multiplications required by a recursive
-version of the factorial function for an input of size
-$n$ will be zero when $n = 0$ or $n = 1$ (the base
-cases), and it will be one plus the cost of calling $fact$ on a
-value of $n-1$.
+Recurrence relations are often used to model the cost of recursive functions.
+For example, the number of multiplications required by a recursive version of the factorial function for an input of size $n$ will be zero when $n = 0$ or $n = 1$ (the base cases), and it will be one plus the cost of calling $fact$ on a value of $n-1$.
 This can be defined using the following recurrence:
 
 $$
@@ -702,11 +557,10 @@ $$
 \quad \mathbf{T}(0) = \mathbf{T}(1) = 0.
 $$
 
-As with summations, we typically wish to replace the recurrence
-relation with a closed-form solution.
-One approach is to expand the recurrence by replacing any
-occurrences of $\mathbf{T}$ on the right-hand side with its
-definition.
+As with summations, we typically wish to replace the recurrence relation with a closed-form solution.
+One approach is to expand the recurrence by replacing any occurrences of $\mathbf{T}$ on the right-hand side with its definition.
+
+We will go deeper into recurrence relations when we analyse the complexity of divide-and-conquer algorithms.
 
 <!--
 .. inlineav:: LinearRecurrencesCON ss
@@ -716,11 +570,13 @@ definition.
    :output: show
 -->
 
+<!--
 A slightly more complicated recurrence is
 
 $$
 \mathbf{T}(n) = \mathbf{T}(n-1) + n; \quad \mathbf{T}(1) = 1.
 $$
+-->
 
 <!--
 Again, we will use expansion to help us find a closed form solution.
@@ -1511,6 +1367,17 @@ regardless of the specific programming language.
 ### Data types
 
 #### Primitive data types
+
+**Boolean variables:**
+A [Boolean variable]{.term}
+is a variable that takes on one of the two values $True$ and
+$False$.
+These two values are often associated with the values 1 and 0,
+respectively, although there is no reason why this needs to be the
+case.
+It is poor programming practice to rely on the
+correspondence between 0 and False, because these are logically
+distinct objects of different types.
 
 ::: TODO
 - We will only use these: boolean, integer, float, character, **null**
