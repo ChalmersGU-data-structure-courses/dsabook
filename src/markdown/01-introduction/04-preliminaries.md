@@ -1,15 +1,16 @@
 
 ## Preliminaries
 
-::: note
-The section is intended to be a very quick run-down of what programming and math concepts we we use in the book.
-We don't need lots of explanations - we can refer to other places instead.
-:::
-
 ::: TODO
+The section is intended to be a quick run-down of what programming and math concepts we we use in the book.
+We don't need lots of explanations - we can refer to other places instead.
+
 - Prio 1: all sections need major rewrites/updates, almost everything is missing
 - Prio 2: introduce and describe the pseudocode we use in this book
 :::
+
+This chapter presents the mathematical and programming preliminaries assumed to be familiar to the reader.
+It serves as a review and reference, allowing you to revisit relevant sections when encountering unfamiliar notation or mathematical techniques in later chapters.
 
 ### Mathematics
 
@@ -19,44 +20,26 @@ We don't need lots of explanations - we can refer to other places instead.
 - It's a lot more than we want, and probably about the wrong things - so we should remove most of it
 :::
 
+#### Sets {-}
 
-This chapter presents mathematical notation, background, and techniques used throughout the modules. This material is provided primarily for review and reference. You might wish to return to the relevant sections when you encounter unfamiliar notation or mathematical techniques in later chapters.
+The concept of a set in the mathematical sense has wide application in computer science.
+The notations and techniques of set theory are commonly used when describing and implementing algorithms because the abstractions associated with sets often help to clarify and simplify algorithm design.
 
-The concept of [estimation]{.term} might be unfamiliar to many readers. Estimation is not a mathematical technique, but rather a general engineering skill. It is enormously useful to computer scientists doing design work, because any proposed solution whose estimated resource requirements fall well outside the problem’s resource constraints can be discarded immediately, allowing time for greater analysis of more promising solutions.
-
-#### Sets and relations
-
-#### Set Notation
-
-The concept of a set in the mathematical sense has wide
-application in computer science.
-The notations and techniques of set theory are commonly used
-when describing and implementing algorithms because the abstractions
-associated with sets often help to clarify and simplify algorithm
-design.
-
-A [set]{.term} is a collection of distinguishable
-[members <member>]{.term} or [elements <element>]{.term}.
-The members are typically drawn from some larger population known as
-the [base type]{.term}.
-Each member of a set is either a [primitive element]{.term} of the
-base type or is a set itself.
+A [set]{.term} is a collection of distinguishable [members <member>]{.term} or [elements <element>]{.term}.
+The members are typically drawn from some larger population known as the [base type]{.term}.
+Each member of a set is either a [primitive element]{.term} of the base type or is a set itself.
 There is no concept of duplication in a set.
 Each value from the base type is either in the set or not in the set.
-For example, a set named $\mathbf{P}$ might consist of the three
-integers 7, 11, and 42.
-In this case, $\mathbf{P}$'s members are 7, 11, and 42, and the
-base type is integer.
+For example, a set named $\mathbf{P}$ might consist of the three integers 7, 11, and 42.
+In this case, $\mathbf{P}$'s members are 7, 11, and 42, and the base type is integer.
 
-The following table shows the symbols commonly used to express sets
-and their relationships.
+The following table shows the symbols commonly used to express sets and their relationships.
 
 $$
 \begin{array}{l|l}
 \{1, 4\}& \mbox{A set composed of the members 1 and 4}\\
 \{\mathsf{x}\, |\, \mathsf{x}\ \mbox{is a positive integer}\}&
-    \mbox{A set definition using a set former}\\
-&\qquad \mbox{Example: the set of all positive integers}\\
+    \mbox{A set definition using a set comprehension (e.g., the set of all positive integers)}\\
 \mathsf{x} \in \mathbf{P}&\mathsf{x}\ \mbox{is a member of set}\ \mathbf{P}\\
 \mathsf{x} \notin \mathbf{P}&\mathsf{x}\ \mbox{is not a member of set}\ \mathbf{P}\\
 \emptyset&\mbox{The null or empty set}\\
@@ -88,85 +71,52 @@ $$
 \mathbf{P} = \{2, 3, 5\}, \qquad \mathbf{Q} = \{5, 10\}.
 $$
 
-$|\mathbf{P}| = 3$  (because $\mathbf{P}$ has three
-members) and $|\mathbf{Q}| = 2$
+$|\mathbf{P}| = 3$ (because $\mathbf{P}$ has three members) and $|\mathbf{Q}| = 2$
 (because $\mathbf{Q}$ has two members).
 Both of these sets are finite in length.
 Other sets can be infinite, for example, the set of integers.
 
-The union of $\mathbf{P}$ and $\mathbf{Q}$, written
-$\mathbf{P} \cup \mathbf{Q}$, is the set of elements in either
-$\mathbf{P}$ or $\mathbf{Q}$, which is {2, 3, 5, 10}.
-The intersection of $\mathbf{P}$ and $\mathbf{Q}$,
-written $\mathbf{P} \cap \mathbf{Q}$, is the set of elements that
-appear in both $\mathbf{P}$ and $\mathbf{Q}$, which is {5}.
-The set difference of $\mathbf{P}$ and $\mathbf{Q}$,
-written $\mathbf{P} - \mathbf{Q}$,
-is the set of elements that occur in $\mathbf{P}$ but not in
+The union of $\mathbf{P}$ and $\mathbf{Q}$, written $\mathbf{P} \cup \mathbf{Q}$, is the set of elements in either $\mathbf{P}$ or $\mathbf{Q}$, which is {2, 3, 5, 10}.
+The intersection of $\mathbf{P}$ and $\mathbf{Q}$, written $\mathbf{P} \cap \mathbf{Q}$, is the set of elements that appear in both $\mathbf{P}$ and $\mathbf{Q}$, which is {5}.
+The set difference of $\mathbf{P}$ and $\mathbf{Q}$, written $\mathbf{P} - \mathbf{Q}$, is the set of elements that occur in $\mathbf{P}$ but not in
 $\mathbf{Q}$, which is {2, 3}.
-Note that
-$\mathbf{P} \cup \mathbf{Q} = \mathbf{Q} \cup \mathbf{P}$
-and that
-$\mathbf{P} \cap \mathbf{Q} = \mathbf{Q} \cap \mathbf{P}$,
-but in general
-$\mathbf{P} - \mathbf{Q} \neq \mathbf{Q} - \mathbf{P}$.
-In this example,
-$\mathbf{Q} - \mathbf{P}  = \{10\}$.
-Finally, the set {5, 3, 2} is indistinguishable from set
-$\mathbf{P}$, because sets have no concept of order.
-Likewise, set {2, 3, 2, 5} is also indistinguishable from
-$\mathbf{P}$, because sets have no concept of duplicate elements.
+Note that $\mathbf{P} \cup \mathbf{Q} = \mathbf{Q} \cup \mathbf{P}$ and that $\mathbf{P} \cap \mathbf{Q} = \mathbf{Q} \cap \mathbf{P}$, but in general $\mathbf{P} - \mathbf{Q} \neq \mathbf{Q} - \mathbf{P}$.
+In this example, $\mathbf{Q} - \mathbf{P}  = \{10\}$.
+Finally, the set {5, 3, 2} is indistinguishable from set $\mathbf{P}$, because sets have no concept of order.
+Likewise, set {2, 3, 2, 5} is also indistinguishable from $\mathbf{P}$, because sets have no concept of duplicate elements.
 
-The [set product]{.term} or [Cartesian product]{.term} of two sets
-$\mathbf{Q} \times \mathbf{P}$ is a set of ordered pairs.
-For our example sets, the set product would be
+The [set product]{.term} or [Cartesian product]{.term} of two sets $\mathbf{Q} \times \mathbf{P}$ is a set of ordered pairs.
+For our example sets, the set product would be:
 
 $$
 \{(2, 5),\ (2, 10),\ (3, 5),\ (3, 10),\ (5, 5),\ (5, 10)\}.
 $$
 
-The [powerset]{.term} of a set $\mathbf{S}$ (denoted $2^S$)
-is the set of all possible subsets for $\mathbf{S}$.
-Consider the set $\mathbf{S} = \{ a, b, c \}$.
-The powerset of $\mathbf{S}$ is
+The [powerset]{.term} of a set $\mathbf{S}$ (denoted $2^S$) is the set of all possible subsets for $\mathbf{S}$.
+Consider the set $\mathbf{S} = \{ a, b, c \}$. The powerset of $\mathbf{S}$ is
 
 $$
 \{ \emptyset,\ \{a\},\ \{b\},\ \{c\},\ \{a, b\},
 \ \{a, c\},\ \{b, c\},\ \{a, b, c\}\}.
 $$
 
-A collection of elements with no order (like a set), but with
-duplicate-valued elements is called a
-[bag]{.term} [#]_.
-To distinguish bags from sets, we will use square brackets [] around
-a bag's elements.
-For example, bag [3, 4, 5, 4] is distinct from bag [3, 4, 5],
-while set {3, 4, 5, 4} is indistinguishable from set
-{3, 4, 5}.
-However, bag [3, 4, 5, 4] is indistinguishable from bag
-[3, 4, 4, 5].
+A collection of elements without a specific order, similar to a set, but allowing multiple occurrences of each element, is called a [bag]{.term}.
+A bag is also called a multiset and an element that occurs multipel times is called a duplicate.
+A bag is also known as a multiset and an element that appears more than once is called a duplicate.
+<!--
+To distinguish bags from sets, we will use square brackets [] around a bag's elements.
+For example, bag [3, 4, 5, 4] is distinct from bag [3, 4, 5], while set {3, 4, 5, 4} is indistinguishable from set {3, 4, 5}.
+However, bag [3, 4, 5, 4] is indistinguishable from bag [3, 4, 4, 5].
+-->
 
-A [sequence]{.term} is a collection of elements with an order, and
-which may contain duplicate-valued elements.
-A sequence is also sometimes called a [tuple]{.term} or a
-[vector]{.term}.
-In a sequence, there is a 0th element, a 1st element, 2nd element, and
-so on.
-We will use angle brackets $\langle\rangle$ to enclose the
-elements of a sequence.
-For example, $\langle3, 4, 5, 4\rangle$ is a sequence.
-Note that sequence $\langle3, 5, 4, 4\rangle$ is distinct from
-sequence $\langle3, 4, 5, 4\rangle$, and both are distinct from
-sequence $\langle3, 4, 5\rangle$.
+A [sequence]{.term} is an ordered collection of elements of the same type that may include duplicates.
+A sequence can for example be implemented as a list, an array, or a vector.
+We can access elements in a sequence using zero-based indexing, where the index 0 refers to the first element, 1 to the second, and so on.
+We will use square brackets $\lbrack\rbrack$ to enclose the elements of a sequence.
+For example, $\lbrack3, 4, 5, 4\rbrack$ is a sequence.
+Note that sequence $\lbrack3, 5, 4, 4\rbrack$ is distinct from sequence $\lbrack3, 4, 5, 4\rbrack$, and both are distinct from sequence $\lbrack3, 4, 5\rbrack$.
 
-The object referred to here as a
-bag is sometimes called a
-[multilist <multilist> <Multilists>]{.term}.
-But, the term multilist also refers to a list that may contain
-sublists.
-
-
-#### Relations
+#### Relations {-}
 
 A [relation]{.term} $R$ over set $\mathbf{S}$ is a set of
 ordered pairs from $\mathbf{S}$.
@@ -1362,6 +1312,10 @@ which might also be done using an induction proof.
 
 
 #### Estimation
+
+The concept of [estimation]{.term} might be unfamiliar to many readers.
+Estimation is not a mathematical technique, but rather a general engineering skill.
+It is very useful to computer scientists doing design work, because any proposed solution whose estimated resource requirements fall well outside the problem’s resource constraints can be discarded immediately, allowing time for greater analysis of more promising solutions.
 
 One of the most useful life skills that you can gain from your
 computer science training is the ability to perform quick estimates.
