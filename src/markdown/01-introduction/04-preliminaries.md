@@ -1303,44 +1303,47 @@ Statements
     - Return: a `return` halts the execution of a function and outputs a value
       to the caller of the function.
 
-
-The above example show how we use
-
-
-
 ### Data types
 
-A data type consists of a collection of values and the operations that can be performed on them.
+As mentioned earlier, a data type consists of a set of values and the operations that can be performed on them.
+Primitive data types are basic types provided by a programming language (including our pseudocode) and cannot be user-defined.
+Compound data types, however, are created by combining primitive types.
+Many programming languages provide built-in compound types, such as arrays and tuples, while also allowing users to define their own, using constructs like classes or algebraic data types.
+The next sections introduce the data types that we use in this book.
 
-#### Primitive data types
+#### Primitive data types {-}
 
-**Boolean variables:**
-A [Boolean variable]{.term}
-is a variable that takes on one of the two values $True$ and
-$False$.
-These two values are often associated with the values 1 and 0,
-respectively, although there is no reason why this needs to be the
-case.
-It is poor programming practice to rely on the
-correspondence between 0 and False, because these are logically
-distinct objects of different types.
+We use the following primitive data types:
 
+- **boolean**: This data type has only two possible values: `true` and `false`.
+  It supports logical operations such as conjunction (AND), disjunction (OR),
+  exclusive OR (XOR), and negation.
+- **int**: Represents whole numbers. Unless specified otherwise, we assume
+  integers of arbitrary size, though in some cases, we may use fixed-size
+  integers (32-bit or 64-bit), which will be explicitly stated. Standard
+  arithmetic operations, such as addition, multiplication, and integer division,
+  are supported.
+- **float**: Represents floating-point numbers with limited precision, which
+  depends on the programming language and, in some cases, the underlying
+  computer architecture. It supports common operations like addition,
+  subtraction, multiplication, and division.
+- **char**: Represents individual characters. Unless otherwise specified, we
+  assume fixed-size Unicode encoding, though in some cases, 8-bit ASCII may be
+  used.
+
+<!--
 ::: TODO
-- We will only use these: boolean, integer, float, character, **null**
-- We assume characters are fixed-size unicode - but sometimes 8-bit ascii
-- Sometimes we might talk about fixed-size integers (32-bit, 64-bit)
 - Python-specific details: no fixed-size ints, chars == strings, doesn't distinguish between int and float
 :::
+-->
 
-#### Strings
+#### Strings {-}
 
-::: TODO
-- Constants
-- Cannot resize, cannot change individual chars
-- Looking up a specific character is instant
-- Concatenation takes time, because of being constant
-- Comparing strings takes time
-:::
+A string is an immutable sequence of characters, meaning that once defined (e.g., `str = "data"`), it cannot be modified.
+In this sense, strings behave like values, similar to integers or booleans.
+While you can access individual characters using indexing, you cannot change them.
+Any modification, such as concatenation or replacement, results in the creation of a new string rather than altering the original one.
+Because strings are internally represented as arrays, operations like concatenation and comparison are not constant-time and may involve overhead depending on the string length.
 
 #### Arrays
 
