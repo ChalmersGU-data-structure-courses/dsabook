@@ -1217,17 +1217,100 @@ Time will tell if this approach replaces deterministic approaches.
 ### Pseudocode
 
 ::: TODO
-- why pseudocode and not a specific language?
-   - inspiration from here: https://en.wikipedia.org/wiki/Pseudocode
 - show pseudocode for each introduced term below
 :::
 
-There's a difference between knowing a programming language and knowing programming --
-the ultimate goal of studying data structures and algorithms is to learn *programming*,
-regardless of the specific programming language.
+There is a difference between knowing a programming language and understanding programming itself. The ultimate goal of studying data structures and algorithms is to develop programming skills, regardless of the language used.
+
+To keep our examples accessible, this book uses pseudocode rather than a specific programming language like Python or Java.
+Pseudocode provides a structured yet informal way to describe algorithms, focusing on logic and flow without strict syntax rules.
+Its simplicity and use of common programming constructs, such as loops and conditionals, make it easy to understand and translate into actual code.
+The pseudocode in this book is designed to be straightforward to convert into real programming languages.
+We will demonstrate this translation for Python, Java, and Haskell.
+
+In the following sections, we will introduce fundamental programming concepts and, where applicable, specify the pseudocode conventions we use.
+For example, the following function written in pseudocode calculates the factorial of $n$:
+
+    function fact(n: int) -> int:
+        res = 1
+        for i = 2 to n:
+            res = res * i
+        return res
+
+Our pseudocode includes the fundamental components of a programming language.
+
+Variables
+
+:   A name for a value, we use lower case alphabetic characters and allow
+    underscore and numbers. A variable can have a type, but we don't specify it
+    when it does not matter or is evident from the context. We use the following
+    notation: `var: <type>`.
+
+    Examples: `res`, `n: int`, `i`, `b0: boolean`, `res_n`
+
+Types
+
+:   A type defines a set of values along with the operations (or functions) that
+    can be performed on them. Data types can be categorized as primitive or
+    compound. Primitive types represent basic values, while compound types,
+    such as arrays, tuples, and lists, are constructed using other types. For
+    instance, an array is always an array of a specific type.
+
+    In our pseudocode, we sometimes use type variables to indicate that a
+    compound data type is parameterized by another type. For example, `list<A>`
+    represents a list containing elements of some type A. To distinguish type
+    variables, we use capital letters.
+
+    Examples: the primitive type `int` or `bool`, or the compound type `array<bool>`
+
+Literals
+
+:   A literal is the representation of a value in concrete syntax (that is, in
+    the source code). The value that a literal represents has a specific type.
+
+    Examples: the integer `1`, the character `'1'`, the floating point number `1.0`
+
+Operators
+
+:   An operator is a name for an operation belonging to a specific data type.
+    The application of an operator is usually written infix, that is, the name
+    of the operation is written _between_ its operands. The mathematical operators
+    have the usual precedence and in case of equal precedence we treat the
+    as left associative.
+
+    Examples: `+`, `*`, `%`, `<`
+
+Expressions
+
+:   An expression can be a variable, a literal, or an operation (or function)
+    applied to one or more expressions, ultimately producing a value.
+
+    Examples: `1 + 2`, `true && false`, `(1 + 2) * n`
+
+Statements
+
+:   We have the following kind of statements:
+
+    - Declaration: to declare a variable with a given name and value, and an
+      optional type.
+    - Assignment: to assign a value to a variable.
+    - Conditional: execute a block of statements depending on a boolean expression,
+      we use the common `if-then` or `if-then-else` statements.
+    - Loop: iteratively execute a block of statements, a loop can either be:
+        * a `while`-loop, which executes a block of statements until a boolean
+          expression is `false`, or
+        * a `for-each`-loop, which traverses over a collection of elements.
+    - Return: a `return` halts the execution of a function and outputs a value
+      to the caller of the function.
+
+
+The above example show how we use
+
 
 
 ### Data types
+
+A data type consists of a collection of values and the operations that can be performed on them.
 
 #### Primitive data types
 
