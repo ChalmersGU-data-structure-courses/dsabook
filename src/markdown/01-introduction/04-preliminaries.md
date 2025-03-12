@@ -14,12 +14,6 @@ It serves as a review and reference, allowing you to revisit relevant sections w
 
 ### Mathematics
 
-::: TODO
-- The text below is copy-pasted from
-<https://chalmersgu-data-structure-courses.github.io/OpenDSA/Published/ChalmersGU-Repetition/html/index.html>
-- It's a lot more than we want, and probably about the wrong things - so we should remove most of it
-:::
-
 #### Sets {-}
 
 The concept of a set in the mathematical sense has wide application in computer science.
@@ -588,46 +582,29 @@ Again, we will use expansion to help us find a closed form solution.
    :output: show
 -->
 
-#### Mathematical Proof Techniques
+#### Mathematical Proof Techniques {-}
 
-Solving any problem has two distinct parts:
-the investigation and the argument.
-Students are too used to seeing only the argument in their textbooks
-and lectures.
-But to be successful in school (and in life after school),
-one needs to be good at both, and to understand the differences
-between these two phases of the process.
+Solving any problem has two distinct parts: the investigation and the argument.
+Students are too used to seeing only the argument in their textbooks and lectures.
+But to be successful in school (and in life after school), one needs to be good at both, and to understand the differences between these two phases of the process.
 To solve the problem, you must investigate successfully.
-That means engaging the problem, and working through until you find a
-solution.
-Then, to give the answer to your client (whether that "client" be
-your instructor when writing answers on a homework assignment or exam,
-or a written report to your boss),
-you need to be able to make the argument in a way
-that gets the solution across clearly and succinctly.
-The argument phase involves good technical writing skills |---|
-the ability to make a clear, logical argument.
+That means engaging the problem, and working through until you find a solution.
+Then, to give the answer to your client (whether that "client" be your instructor when writing answers on a homework assignment or exam, or a written report to your boss), you need to be able to make the argument in a way that gets the solution across clearly and succinctly.
+The argument phase involves good technical writing skills and the ability to make a clear, logical argument.
 
-Being conversant with standard proof techniques can help you in this
-process.
+Being conversant with standard proof techniques can help you in this process.
 Knowing how to write a good proof helps in many ways.
-First, it clarifies your thought process, which in turn clarifies your
-explanations.
-Second, if you use one of the standard proof structures such as proof
-by contradiction or an induction proof, then both you and your reader
-are working from a shared understanding of that structure.
-That makes for less complexity to your reader to understand your
-proof, because the reader need not decode the structure of your
-argument from scratch.
+First, it clarifies your thought process, which in turn clarifies your explanations.
+Second, if you use one of the standard proof structures such as proof by contradiction or an induction proof, then both you and your reader are working from a shared understanding of that structure.
+That makes for less complexity to your reader to understand your proof, because the reader need not decode the structure of your argument from scratch.
 
 This section briefly introduces three commonly used proof techniques:
 
-1) deduction, or direct proof;
+1) deduction, or direct proof,
 
-2) proof by contradiction and
+2) proof by contradiction, and
 
 3) proof by mathematical induction.
-
 
 <!-- .. index:: ! proof; direct -->
 
@@ -635,64 +612,38 @@ In general, a [direct proof]{.term} is just a "logical explanation".
 A direct proof is sometimes referred to as an argument by deduction.
 This is simply an argument in terms of logic.
 
+ **Direct Proof**
 
-##### Direct Proof
+Many direct proofs are written in English with words such as "if ... then".
+In this case logic notation such as $P \Rightarrow Q$ can often help express the proof.
+Even if we don't wish to use symbolic logic notation, we can still take advantage of fundamental theorems of logic to structure our arguments.
+For example, if we want to prove that $P$ and $Q$ are equivalent, we can first prove $P \Rightarrow Q$ and then prove $Q \Rightarrow P$.
+
+In some domains, proofs are essentially a series of state changes from a start state to an end state.
+Formal predicate logic can be viewed in this way, with the various "rules of logic" being used to make the changes from one formula or combining a couple of formulas to make a new formula on the route to the destination.
+Symbolic manipulations to solve integration problems in introductory calculus classes are similar in spirit, as are high school geometry proofs.
 
 :::: {#SumDirect}
 ::: topic
 ##### Example {-}
 Here is a direct proof that $\sum_{i=1}^n i = (n+1)n/2$.
-If we take the first and last terms of the series, since they are 1
-and $n$, of course they sum to $n+1$.
-If we take the second term and next-to-last term, since they are 2
-and $n-1$, they also sum to $n+1$.
+If we take the first and last terms of the series, since they are 1 and $n$, of course they sum to $n+1$.
+If we take the second term and next-to-last term, since they are 2 and $n-1$, they also sum to $n+1$.
 Likewise for the third term and third-from-the-end term.
-We can go on and pair up terms like this, such that there are
-$n/2$ pairs that each sum to $n+1$, for a total sum of
-$(n+1)n/2$.
-You can check for yourself that this is true even if $n$ is
-odd (and so the middle value of the series has no partner).
+We can go on and pair up terms like this, such that there are $n/2$ pairs that each sum to $n+1$, for a total sum of $(n+1)n/2$.
+You can check for yourself that this is true even if $n$ is odd (and so the middle value of the series has no partner).
 :::
 ::::
-
-Many direct proofs are written in English with words such as
-"if ... then".
-In this case logic notation such as $P \Rightarrow Q$ can often
-help express the proof.
-Even if we don't wish to use symbolic logic notation, we can still
-take advantage of fundamental theorems of logic to structure our
-arguments.
-For example, if we want to prove that $P$ and $Q$ are
-equivalent, we can first prove $P \Rightarrow Q$ and then prove
-$Q \Rightarrow P$.
-
-In some domains, proofs are essentially a series of state changes from
-a start state to an end state.
-Formal predicate logic can be viewed in this way, with the various
-"rules of logic" being used to make the changes from one formula or
-combining a couple of formulas to make a new formula
-on the route to the destination.
-Symbolic manipulations to solve integration problems in introductory
-calculus classes are similar in spirit, as are high school geometry
-proofs.
-
 <!-- .. index:: ! proof; by contradiction -->
 
+**Proof by Contradiction**
 
-##### Proof by Contradiction
-
-The simplest way to *disprove* a theorem or statement is to find
-a counter-example to the theorem.
-Unfortunately, no number of examples supporting a theorem is
-sufficient to prove that the theorem is correct.
-However, there is an approach that is vaguely similar to disproving by
-counter-example, called [proof by contradiction]{.term}.
-To prove a theorem by contradiction, we first *assume* that the
-theorem is *false*.
+The simplest way to *disprove* a theorem or statement is to find a counter-example to the theorem.
+Unfortunately, no number of examples supporting a theorem is sufficient to prove that the theorem is correct.
+However, there is an approach that is vaguely similar to disproving by counter-example, called [proof by contradiction]{.term}.
+To prove a theorem by contradiction, we first *assume* that the theorem is *false*.
 We then find a logical contradiction stemming from this assumption.
-If the logic used to find the contradiction is correct, then the only
-way to resolve the contradiction is to recognize that the assumption
-that the theorem is false must be incorrect.
+If the logic used to find the contradiction is correct, then the only way to resolve the contradiction is to recognize that the assumption that the theorem is false must be incorrect.
 That is, we conclude that the theorem must be true.
 
 ::: topic
@@ -703,107 +654,75 @@ Here is a simple proof by contradiction.
 
 **Proof by contradiction:**
 
-**Step 1. Contrary assumption:** Assume that there *is* a
-largest integer.
+**Step 1. Contrary assumption:**
+Assume that there *is* a largest integer.
 Call it $B$ (for "biggest").
 
 **Step 2. Show this assumption leads to a contradiction:**
 Consider $C = B + 1$.
 $C$ is an integer because it is the sum of two integers.
-Also, $C > B$, which means that $B$ is not the
-largest integer after all.
+Also, $C > B$, which means that $B$ is not the largest integer after all.
 Thus, we have reached a contradiction.
-The only flaw in our reasoning is the initial assumption that
-the theorem is false.
+The only flaw in our reasoning is the initial assumption that the theorem is false.
 Thus, we conclude that the theorem is correct.
 :::
 
 A related proof technique is [proving the contrapositive]{.term}.
-We can prove that $P \Rightarrow Q$ by proving
-$(\mathrm{not}\ Q) \Rightarrow (\mathrm{not}\ P)$.
-This technique works because the [truth table]{.term} for the two
-logical statements are the same.
+We can prove that $P \Rightarrow Q$ by proving $(\mathrm{not}\ Q) \Rightarrow (\mathrm{not}\ P)$.
+This technique works because the [truth table]{.term} for the two logical statements are the same.
 
 <!-- .. index:: ! proof; by induction -->
 
-##### Proof by Mathematical Induction
+**Proof by Mathematical Induction**
 
-Mathematical induction can be used to prove a wide variety of
-theorems.
-Induction also provides a useful way to think about algorithm design,
-because it encourages you to think about solving a problem by building
-up from simple subproblems.
-Induction can help to prove that a recursive function produces the
-correct result.
-Understanding recursion is a big step toward understanding induction,
-and vice versa, since they work by essentially the same process.
+Mathematical induction can be used to prove a wide variety of theorems.
+Induction also provides a useful way to think about algorithm design, because it encourages you to think about solving a problem by building up from simple subproblems.
+Induction can help to prove that a recursive function produces the correct result.
+Understanding recursion is a big step toward understanding induction, and vice versa, since they work by essentially the same process.
 
-Within the context of algorithm analysis, one of the most important
-uses for mathematical induction is as a method to test a hypothesis.
-When [seeking a closed-form solution <closed-form solution> <Summation>]{.term}
-for a [summation]{.term} or [recurrence <recurrence relation>]{.term},
-we might first guess or otherwise acquire evidence that a particular
-formula is the correct solution.
-If the formula is indeed correct, it is often an easy matter to prove
-that fact with an induction proof.
+Within the context of algorithm analysis, one of the most important uses for mathematical induction is as a method to test a hypothesis.
+When [seeking a closed-form solution <closed-form solution> <Summation>]{.term} for a [summation]{.term} or [recurrence <recurrence relation>]{.term}, we might first guess or otherwise acquire evidence that a particular formula is the correct solution.
+If the formula is indeed correct, it is often an easy matter to prove that fact with an induction proof.
 
-Let **Thrm** be a theorem to prove, and express **Thrm** in
-terms of a positive integer parameter $n$.
-Mathematical induction states that **Thrm** is true for any value
-of parameter $n$ (for $n \geq c$, where $c$ is some
-constant) if the following two conditions are true:
+Let **Thrm** be a theorem to prove, and express **Thrm** in terms of a positive integer parameter $n$.
+Mathematical induction states that **Thrm** is true for any value of parameter $n$ (for $n \geq c$, where $c$ is some constant) if the following two conditions are true:
 
 1. [Base Case]{.term}: **Thrm** holds for $n = c$, and
 
 2. [Induction Step]{.term}:
    If **Thrm** holds for $n - 1$, then **Thrm** holds for $n$.
 
-Proving the base case is usually easy, typically requiring that some
-small value such as 1 be substituted for $n$ in the theorem and
-applying simple algebra or logic as necessary to verify the theorem.
+Proving the base case is usually easy, typically requiring that some small value such as 1 be substituted for $n$ in the theorem and applying simple algebra or logic as necessary to verify the theorem.
 Proving the induction step is sometimes easy, and sometimes difficult.
-An alternative formulation of the induction step is known as
-[strong induction]{.term}.
+Proving induction step (in conjunction with verifying the base case) yields a satisfactory proof by mathematical induction.
+
+<!--
+An alternative formulation of the induction step is known as [strong induction]{.term}.
 The induction step for strong induction is:
 
 2a. **Induction Step:**
     If **Thrm** holds for all $k, c \leq k < n$, then
     **Thrm** holds for $n$.
 
-Proving either variant of the induction step (in
-conjunction with verifying the base case) yields a satisfactory proof
-by mathematical induction.
+Proving either variant of the induction step (in conjunction with verifying the base case) yields a satisfactory proof by mathematical induction.
+-->
 
-The two conditions that make up the induction proof combine to
-demonstrate that **Thrm** holds for $n=2$ as an extension of the
-fact that **Thrm** holds for $n=1$.
-This fact, combined again with condition (2) or (2a), indicates
-that **Thrm** also holds for $n=3$, and so on.
-Thus, **Thrm** holds for all values of $n$ (larger than the
-base cases) once the two conditions have been proved.
+The two conditions that make up the induction proof combine to demonstrate that **Thrm** holds for $n=2$ as an extension of the fact that **Thrm** holds for $n=1$.
+This fact, combined again with condition (2), indicates that **Thrm** also holds for $n=3$, and so on.
+Thus, **Thrm** holds for all values of $n$ (larger than the base cases) once the two conditions have been proved.
 
-What makes mathematical induction so powerful (and so mystifying to
-most people at first) is that we can take advantage of the
-*assumption* that **Thrm** holds for all values less
-than $n$ as a tool to help us prove that **Thrm** holds
-for $n$.
+What makes mathematical induction so powerful (and so mystifying to most people at first) is that we can take advantage of the *assumption* that **Thrm** holds for all values less than $n$ as a tool to help us prove that **Thrm** holds for $n$.
 This is known as the [induction hypothesis]{.term}.
-Having this assumption to work with makes the induction step
-easier to prove than tackling the original theorem itself.
-Being able to rely on the induction hypothesis provides extra
-information that we can bring to bear on the problem.
+Having this assumption to work with makes the induction step easier to prove than tackling the original theorem itself.
+Being able to rely on the induction hypothesis provides extra information that we can bring to bear on the problem.
 
 Recursion and induction have many similarities.
 Both are anchored on one or more base cases.
-A recursive function relies on the ability to call itself to get the
-answer for smaller instances of the problem.
-Likewise, induction proofs rely on the truth of the induction
-hypothesis to prove the theorem.
+A recursive function relies on the ability to call itself to get the answer for smaller instances of the problem.
+Likewise, induction proofs rely on the truth of the induction hypothesis to prove the theorem.
 The induction hypothesis does not come out of thin air.
-It is true if and only if the theorem itself is true, and
-therefore is reliable within the proof context.
-Using the induction hypothesis to do work is exactly the same as using
-a recursive call to do work.
+It is true if and only if the theorem itself is true, and therefore is reliable within the proof context.
+Using the induction hypothesis to do work is exactly the same as using a recursive call to do work.
 
 :::: {#SumIEx}
 ::: topic
@@ -855,15 +774,11 @@ The proof is by mathematical induction.
 ::::
 
 Note carefully what took place in this example.
-First we cast $\mathbf{S}(n)$ in terms of a smaller occurrence
-of the problem: $\mathbf{S}(n) = \mathbf{S}(n-1) + n$.
-This is important because once $\mathbf{S}(n-1)$ comes into the
-picture, we can  use the induction hypothesis to replace
-$\mathbf{S}(n-1)$ with $(n-1)(n)/2$.
-From here, it is simple algebra to prove that
-$\mathbf{S}(n-1) + n$ equals the
-right-hand side of the original theorem.
+First we cast $\mathbf{S}(n)$ in terms of a smaller occurrence of the problem: $\mathbf{S}(n) = \mathbf{S}(n-1) + n$.
+This is important because once $\mathbf{S}(n-1)$ comes into the picture, we can  use the induction hypothesis to replace $\mathbf{S}(n-1)$ with $(n-1)(n)/2$.
+From here, it is simple algebra to prove that $\mathbf{S}(n-1) + n$ equals the right-hand side of the original theorem.
 
+<!--
 We can compare the induction proof of Example [Example](#SumIEx)
 with the direct proof in Example [Example](#SumDirect).
 Different people might think one is easier to understand than the
@@ -919,6 +834,7 @@ $$
 $$
 :::
 ::::
+-->
 
 :::: {#FactRecurProof}
 ::: topic
@@ -950,6 +866,7 @@ Thus, we have proved the theorem correct by mathematical induction.
 :::
 ::::
 
+<!--
 :::: {#ThmStamps}
 ::: topic
 ##### Example {-}
@@ -1013,6 +930,7 @@ geometry.
 It also illustrates a standard technique of induction proof where we
 take $n$ objects and remove some object to use the
 induction hypothesis.
+-->
 
 <!--
 .. _TwoColor:
@@ -1022,8 +940,9 @@ induction hypothesis.
    :align: center
 
    A two-coloring for the regions formed by three lines in the plane.
- -->
+-->
 
+<!--
 :::: {#ThmRegion}
 ::: topic
 ##### Example {-}
@@ -1040,13 +959,13 @@ The set of regions formed by $n$ infinite lines in the plane
 can be two-colored.
 
 **Proof:**
-<!--
+
 .. inlineav:: TwoColoringProofCON ss
     :long_name: Two Coloring Proof Slideshow
     :links: AV/Background/TwoColoringProofCON.css
     :scripts: AV/Background/TwoColoringProofCON.js
     :output: show
--->
+
 :::
 ::::
 
@@ -1083,14 +1002,14 @@ In recursion, we would naturally compute some
 function of $n$ by calling the function (recursively) on
 $n-1$ and then using the result to compute the value for
 $n$.
+-->
 
-This section's final example shows how induction can be used to
-prove that a recursive function produces the correct result.
+<!--
+This section's final example shows how induction can be used to prove that a recursive function produces the correct result.
 
 ::: topic
 ##### Example {-}
-We would like to prove that function $fact$ does indeed compute
-the factorial function.
+We would like to prove that function $fact$ does indeed compute the factorial function.
 There are two distinct steps to such a proof.
 The first is to prove that the function always terminates.
 The second is to prove that the function returns the correct value.
@@ -1099,14 +1018,11 @@ The second is to prove that the function returns the correct value.
 Function $fact$ will terminate for any value of $n$.
 
 **Proof:**
-For the base case, we observe that $fact$ will terminate directly
-whenever $n \leq 0$.
-The induction hypothesis is that $fact$ will terminate for
-$n-1$.
+For the base case, we observe that $fact$ will terminate directly whenever $n \leq 0$.
+The induction hypothesis is that $fact$ will terminate for $n-1$.
 For $n$, we have two possibilities.
 One possibility is that $n \geq 12$.
-In that case, $fact$ will terminate directly because it will
-fail its assertion test.
+In that case, $fact$ will terminate directly because it will fail its assertion test.
 Otherwise, $fact$ will make a recursive call to $fact(n-1)$.
 By the induction hypothesis, $fact(n-1)$ must terminate.
 
@@ -1132,26 +1048,18 @@ then to use the induction hypothesis to show that the recursive step
 also produces the correct result.
 Prior to this, we must prove that the function always terminates,
 which might also be done using an induction proof.
+-->
 
-
-#### Estimation
+#### Estimation {-}
 
 The concept of [estimation]{.term} might be unfamiliar to many readers.
 Estimation is not a mathematical technique, but rather a general engineering skill.
+This is sometimes known as "back of the napkin" or "back of the envelope" calculation.
+Both nicknames suggest that only a rough estimate is produced.
 It is very useful to computer scientists doing design work, because any proposed solution whose estimated resource requirements fall well outside the problem’s resource constraints can be discarded immediately, allowing time for greater analysis of more promising solutions.
 
-One of the most useful life skills that you can gain from your
-computer science training is the ability to perform quick estimates.
-This is sometimes known as "back of the napkin" or
-"back of the envelope" calculation.
-Both nicknames suggest that only a rough estimate is produced.
-[Estimation]{.term} techniques are a standard part of engineering
-curricula but are often neglected in computer science.
-Estimation is no substitute for rigorous, detailed analysis
-of a problem, but it can help to decide when a rigorous
-analysis is warranted:
-If the initial estimate indicates that the solution
-is unworkable, then further analysis is probably unnecessary.
+[Estimation]{.term} techniques are a standard part of engineering curricula but are often neglected in computer science.
+Estimation is no substitute for rigorous, detailed analysis of a problem, but it can help to decide when a rigorous analysis is warranted: If the initial estimate indicates that the solution is unworkable, then further analysis is probably unnecessary.
 
 Estimation can be formalized by the following three-step process:
 
@@ -1162,56 +1070,39 @@ Estimation can be formalized by the following three-step process:
 3. Select values for the parameters, and apply the equation to yield an
    estimated solution.
 
-When doing estimations, a good way to reassure yourself that the
-estimate is reasonable is to do it in two different ways.
-In general, if you want to know what comes out of a system, you can
-either try to estimate that directly, or you can estimate what goes
-into the system (assuming that what goes in must later come out).
-If both approaches (independently) give similar answers, then this
-should build confidence in the estimate.
+When doing estimations, a good way to reassure yourself that the estimate is reasonable is to do it in two different ways.
+In general, if you want to know what comes out of a system, you can either try to estimate that directly, or you can estimate what goes into the system (assuming that what goes in must later come out).
+If both approaches (independently) give similar answers, then this should build confidence in the estimate.
 
 When calculating, be sure that your units match.
 For example, do not add feet and pounds.
 Verify that the result is in the correct units.
-Always keep in mind that the output of a calculation is only
-as good as its input.
-The more uncertain your valuation for the input parameters in Step 3,
-the more uncertain the output value.
-However, back of the envelope calculations are often meant only to get
-an answer within an order of magnitude, or perhaps within a factor of
-two.
-Before doing an estimate, you should decide on acceptable error
-bounds, such as within 25\%, within a factor of two, and so forth.
-Once you are confident that an estimate falls within your error
-bounds, leave it alone!
-Do not try to get a more precise estimate than necessary for your
-purpose.
+Always keep in mind that the output of a calculation is only as good as its input.
+The more uncertain your valuation for the input parameters in Step 3, the more uncertain the output value.
+However, back of the envelope calculations are often meant only to get an answer within an order of magnitude, or perhaps within a factor of two.
+Before doing an estimate, you should decide on acceptable error bounds, such as within 25\%, within a factor of two, and so forth.
+Once you are confident that an estimate falls within your error bounds, leave it alone!
+Do not try to get a more precise estimate than necessary for your purpose.
 
 ::: topic
 ##### Example {-}
-How many library bookcases does it take to store books containing one
-million pages?
-I estimate that a 500-page book requires one inch on the
-library shelf (it will help to look at the size of any handy book),
-yielding about 200 feet of shelf space for one million pages.
+How many library bookcases does it take to store books containing one million pages?
+I estimate that a 500-page book requires one inch on the library shelf (it will help to look at the size of any handy book), yielding about 200 feet of shelf space for one million pages.
 If a shelf is 4 feet wide, then 50 shelves are required.
-If a bookcase contains 5 shelves, this yields about 10 library
-bookcases.
-To reach this conclusion, I estimated the number of pages per
-inch, the width of a shelf, and the number of shelves in a
-bookcase.
-None of my estimates are likely to be precise, but I feel confident
-that my answer is correct to within a factor of two.
-(After writing this, I went to Virginia Tech's library and looked at
-some real bookcases.
-They were only about 3 feet wide, but typically had 7 shelves for a
-total of 21 shelf-feet.
-So I was correct to within 10% on bookcase capacity, far better than
-I expected or needed.
-One of my selected values was too high, and the other too low, which
-canceled out the errors.)
+If a bookcase contains 5 shelves, this yields about 10 library bookcases.
+To reach this conclusion, I estimated the number of pages per inch, the width of a shelf, and the number of shelves in a bookcase.
+None of my estimates are likely to be precise, but I feel confident that my answer is correct to within a factor of two.
+(After writing this, I went to Virginia Tech's library and looked at some real bookcases.
+They were only about 3 feet wide, but typically had 7 shelves for a total of 21 shelf-feet.
+So I was correct to within 10% on bookcase capacity, far better than I expected or needed.
+One of my selected values was too high, and the other too low, which canceled out the errors.)
 :::
 
+::: TODO
+Maybe have the the doubling technique here?
+:::
+
+<!--
 ::: topic
 ##### Example {-}
 Is it more economical
@@ -1241,6 +1132,7 @@ item in your shopping cart.
 This will likely give an answer within a couple of dollars of the true
 total.
 :::
+-->
 
 <!--
 ### Chapter Summary Questions
@@ -1251,47 +1143,32 @@ Here are some practice questions for the modules in this chapter.
    :long_name: Math Background Summary Questions
  -->
 
-#### Random Numbers
+#### Random Numbers {-}
 
-The success of randomized algorithms depends on having access to a
-good random number generator.
-While modern compilers are likely to include a random number generator
-that is good enough for most purposes, it is helpful to understand how
-they work, and to even be able to construct your own in case you don't
-trust the one provided.
+The success of randomized algorithms depends on having access to a good random number generator.
+While modern compilers are likely to include a random number generator that is good enough for most purposes, it is helpful to understand how they work, and to even be able to construct your own in case you don't trust the one provided.
 This is easy to do.
 
-First, let us consider what a random sequence.
-From the following list, which appears to be a sequence of "random"
-numbers?
+First, let us consider what a random sequence is.
+From the following list, which appears to be a sequence of "random" numbers?
 
 * 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
 * 1, 2, 3, 4, 5, 6, 7, 8, 9, ...
 * 2, 7, 1, 8, 2, 8, 1, 8, 2, ...
 
-In fact, all three happen to be the beginning of a some sequence in
-which one could continue the pattern to generate more values (in case
-you do not recognize it, the third one is the initial digits of the
-irrational constant $e$).
-Viewed as a series of digits, ideally every possible sequence has
-equal probability of being generated (even the three sequences
-above).
+In fact, all three happen to be the beginning of a some sequence in which one could continue the pattern to generate more values (in case you do not recognize it, the third one is the initial digits of the irrational constant $e$).
+Viewed as a series of digits, ideally every possible sequence has equal probability of being generated (even the three sequences above).
 In fact, definitions of randomness generally have features such as:
 
 * One cannot predict the next item better than by guessing.
-* The series cannot be described more briefly than simply listing
-  it out.
+* The series cannot be described more briefly than simply listing it out.
   This is the [equidistribution property]{.term}.
 
-There is no such thing as a random number sequence, only
-"random enough" sequences.
-A sequence is [pseudo random]{.term} if no future term can be predicted
-in polynomial time, given all past terms.
+There is no such thing as a random number sequence, only "random enough" sequences.
+A sequence is [pseudo random]{.term} if no future term can be predicted in polynomial time, given all past terms.
 
-Most computer systems use a deterministic algorithm to select
-pseudorandom numbers.  [#]_
-The most commonly used approach historically is known as the
-[Linear Congruential Method]{.term} (LCM).
+Most computer systems use a deterministic algorithm to select pseudorandom numbers.
+The most commonly used approach historically is known as the [Linear Congruential Method]{.term} (LCM).
 The LCM method is quite simple.
 We begin by picking a [seed]{.term} that we will call $r(1)$.
 Then, we can compute successive terms as follows.
@@ -1302,26 +1179,18 @@ $$
 
 where $b$ and $t$ are constants.
 
-By definition of the $\;\mathrm{mod}\;$ function, all generated numbers
-must be in the range 0 to $t-1$.
-Now, consider what happens when $r(i) = r(j)$ for values
-$i$ and $j$.
-Of course then $r(i+1) = r(j+1)$ which means that we have a
-repeating cycle.
+By definition of the $\;\mathrm{mod}\;$ function, all generated numbers must be in the range 0 to $t-1$.
+Now, consider what happens when $r(i) = r(j)$ for values $i$ and $j$.
+Of course then $r(i+1) = r(j+1)$ which means that we have a repeating cycle.
 
-Since the values coming out of the random number generator are between
-0 and $t-1$, the longest cycle that we can hope for has length
-$t$.
+Since the values coming out of the random number generator are between 0 and $t-1$, the longest cycle that we can hope for has length $t$.
 In fact, since $r(0) = 0$, it cannot even be quite this long.
-It turns out that to get a good result, it is crucial to pick good
-values for both $b$ and $t$.
+It turns out that to get a good result, it is crucial to pick good values for both $b$ and $t$.
 To see why, consider the following example.
 
 ::: topic
 ##### Example {-}
-Given a $t$ value of 13, we can get very different results
-depending on the $b$ value that we pick, in ways that are
-hard to predict.
+Given a $t$ value of 13, we can get very different results depending on the $b$ value that we pick, in ways that are hard to predict.
 
 $r(i) = 6r(i-1) \;\mathrm{mod}\; 13 \quad = \quad ..., 1, 6, 10, 8, 9, 2, 12, 7, 3, 5, 4, 11, 1, ...$
 
@@ -1329,24 +1198,18 @@ $r(i) = 7r(i-1) \;\mathrm{mod}\; 13 \quad = \quad ..., 1, 7, 10, 5, 9, 11, 12, 6
 
 $r(i) = 5r(i-1) \;\mathrm{mod}\; 13 \quad = \quad ..., 1, 5, 12, 8, 1, ...$
 
-In the case of $b=5$, the generator goes through only a short
-sequence before repeating, with the series depending on the seed value
-chosen.
-Clearly, a $b$ value of 5 is far inferior to $b$ values
-of 6 or 7 in this example.
+In the case of $b=5$, the generator goes through only a short sequence before repeating, with the series depending on the seed value chosen.
+Clearly, a $b$ value of 5 is far inferior to $b$ values of 6 or 7 in this example.
 :::
 
-If you would like to write a simple LCM random number generator of
-your own, an effective one can be made with the following formula.
+If you would like to write a simple LCM random number generator of your own, an effective one can be made with the following formula:
 
 $$
 r(i) = 16807 r(i-1) \;\mathrm{mod}\; 2^{31} - 1.
 $$
 
 ::: note
-Another approach is based on
-using a computer chip that generates random numbers resulting
-from "thermal noise" in the system.
+Another approach is based on using a computer chip that generates random numbers resulting from "thermal noise" in the system.
 Time will tell if this approach replaces deterministic approaches.
 :::
 
