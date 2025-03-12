@@ -1,5 +1,5 @@
 
-### Practice questions: Binary heaps
+### Review questions: Binary heaps
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 

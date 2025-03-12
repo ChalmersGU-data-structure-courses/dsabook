@@ -1,5 +1,5 @@
 
-### Practice questions: Binary tree definition
+### Review questions: Binary tree definition
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 
@@ -70,7 +70,7 @@ full binary tree with height 3?
 
 
 :::::::::: question ::::::::::
-Suppose T is a binary tree with 14 nodes. 
+Suppose T is a binary tree with 14 nodes.
 What is the minimum possible height of T?
 
 <input type="text" value="3"/>

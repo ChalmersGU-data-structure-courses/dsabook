@@ -1,5 +1,5 @@
 
-### Summary questions for stacks and queues
+### Review questions: Stacks and queues
 
 Here are some general practice questions about stacks and queues.
 

@@ -24,13 +24,13 @@ algorithm maintains the relative order of records with equal keys.
 When implementing Insertion Sort, a binary search could be used to locate the position within
 the first $i-1$ records of the array into which record $i$ should be inserted. Using binary search will:
 
-- [x] Not speed up the asymptotic running time because shifting the records to make room for the insert will require $\Theta(i)$ time.
-- [ ] Speed up the asymptotic running time because the position to insert will be found in $\Theta(\log i)$ time.
-- [ ] Speed up the asymptotic running time because shifting the records to make room for the insert will require $\Theta(i)$ time.
+- [x] Not speed up the asymptotic running time because shifting the records to make room for the insert will require $O(i)$ time.
+- [ ] Speed up the asymptotic running time because the position to insert will be found in $O(\log i)$ time.
+- [ ] Speed up the asymptotic running time because shifting the records to make room for the insert will require $O(i)$ time.
 - [ ] None of these answers is correct.
 
 ::: hints
-- The position at which to insert could be found in $\Theta(\log(i))$ steps, but shifting the records to make room for the this record will require $\Theta(i)$ time.
+- The position at which to insert could be found in $O(\log(i))$ steps, but shifting the records to make room for the this record will require $O(i)$ time.
 :::
 ::::::::::::::::::::::::::::::
 
@@ -42,14 +42,14 @@ search could be used to locate the position within the first $i-1$
 records of the array into which record $i$ should be
 inserted. In this implementation, the worst case time will be:
 
-- [x] $\Theta(n^2)$
-- [ ] $\Theta(n \log n)$
-- [ ] $\Theta(n)$
-- [ ] $\Theta(\log n)$
+- [x] $O(n^2)$
+- [ ] $O(n \log n)$
+- [ ] $O(n)$
+- [ ] $O(\log n)$
 
 ::: hints
-- The position to insert could be found in $\Theta (\log i)$, 
-but shifting the records to makeroom for the insert will still require $\Theta(i)$ time
+- The position to insert could be found in $O (\log i)$,
+but shifting the records to makeroom for the insert will still require $O(i)$ time
 :::
 ::::::::::::::::::::::::::::::
 
@@ -88,7 +88,7 @@ In which cases are the growth rates the same for Insertion Sort?
 
 
 :::::::::: question ::::::::::
-The order of the input records has what impact on the number of comparisons 
+The order of the input records has what impact on the number of comparisons
 required by Insertion Sort (as presented in this module)?
 
 - [x] There is a big difference, the asymptotic running time can change
@@ -106,10 +106,10 @@ required by Insertion Sort (as presented in this module)?
 :::::::::: question ::::::::::
 What is the {average|worst}-case time for Insertion Sort to sort an array of n records?
 
-- [x] $\Theta(n^2)$
-- [ ] $\Theta(n)$
-- [ ] $\Theta(\log n)$
-- [ ] $\Theta(n \log n)$
+- [x] $O(n^2)$
+- [ ] $O(n)$
+- [ ] $O(\log n)$
+- [ ] $O(n \log n)$
 
 ::: hints
 - In the worst case, each record must make its way to the
@@ -127,10 +127,10 @@ so on.
 :::::::::: question ::::::::::
 What is the best-case time for Insertionsort to sort an array of n records?
 
-- [x] $\Theta(n)$
-- [ ] $\Theta(n^2)$
-- [ ] $\Theta(\log n)$
-- [ ] $\Theta(n \log n)$
+- [x] $O(n)$
+- [ ] $O(n^2)$
+- [ ] $O(\log n)$
+- [ ] $O(n \log n)$
 
 ::: hints
 - The best-case cost occurs when the records are already in sorted order from lowest to highest.
@@ -143,11 +143,11 @@ What is the best-case time for Insertionsort to sort an array of n records?
 :::::::::: question ::::::::::
 What is the running time of Insertion Sort when the input is an array where all record values are equal?
 
-- [x] $\Theta(n)$
-- [ ] $\Theta(n^2)$
-- [ ] $\Theta(\log n)$
-- [ ] $\Theta(n \log n)$
-- [ ] $\Theta(n ^ n)$
+- [x] $O(n)$
+- [ ] $O(n^2)$
+- [ ] $O(\log n)$
+- [ ] $O(n \log n)$
+- [ ] $O(n ^ n)$
 
 ::: hints
 - Each test in the inner for loop will fail because the
@@ -163,12 +163,12 @@ If $I$ is the number of
 inversions in an input array of $n$ records,
 then Insertion Sort will run in what time?
 
-- [x] $\Theta(n+I)$
-- [ ] $\Theta(n - I)$
-- [ ] $\Theta(I - n)$
-- [ ] $\Theta(n)$
-- [ ] $\Theta(n^2)$
-- [ ] $\Theta(I)$
+- [x] $O(n+I)$
+- [ ] $O(n - I)$
+- [ ] $O(I - n)$
+- [ ] $O(n)$
+- [ ] $O(n^2)$
+- [ ] $O(I)$
 
 ::: hints
 - Insertion sort has to do $n$ passes where it compares at least once.
@@ -182,10 +182,10 @@ then Insertion Sort will run in what time?
 :::::::::: question ::::::::::
 What is the running time for Insertion Sort when the input array has values that are in reverse sort order?
 
-- [x] $\Theta(n^2)$
-- [ ] $\Theta(n)$
-- [ ] $\Theta(\log n)$
-- [ ] $\Theta(n \log n)$
+- [x] $O(n^2)$
+- [ ] $O(n)$
+- [ ] $O(\log n)$
+- [ ] $O(n \log n)$
 
 ::: hints
 - On each iteration, the $i$th record will have to move to the start of the array.
@@ -198,10 +198,10 @@ What is the running time for Insertion Sort when the input array has values that
 :::::::::: question ::::::::::
 What is the running time of Insertion Sort when the input is an array that has already been sorted?
 
-- [x] $\Theta(n)$
-- [ ] $\Theta(n^2)$
-- [ ] $\Theta(\log n)$
-- [ ] $\Theta(n \log n)$
+- [x] $O(n)$
+- [ ] $O(n^2)$
+- [ ] $O(\log n)$
+- [ ] $O(n \log n)$
 
 ::: hints
 - Each test in the inner for loop will fail because the

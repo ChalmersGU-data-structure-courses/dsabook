@@ -1,5 +1,5 @@
 
-### Practice questions: Binary tree traversals
+### Review questions: Binary tree traversals
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 

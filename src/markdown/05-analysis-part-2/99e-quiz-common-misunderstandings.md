@@ -1,5 +1,5 @@
 
-### Practice questions: Common misunderstandings
+### Review questions: Common misunderstandings
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 
@@ -53,7 +53,7 @@ searched for.
 - [ ] False
 
 ::: hints
-- Worst case cost refers to the most expensive problem instance 
+- Worst case cost refers to the most expensive problem instance
 AS THE INPUT GETS BIG.
 - Since, for any given array (regardless of size), the most
 expensive problem instance occurs when the search value is in
@@ -95,7 +95,7 @@ algorithm occurs when the array has only a single element.
 - [x] False
 
 ::: hints
-- Best case cost refers to a best problem instance 
+- Best case cost refers to a best problem instance
 AS THE INPUT GETS BIG.
 - So it makes no sense to talk about a growth rate or a best
 case of a fixed input size.

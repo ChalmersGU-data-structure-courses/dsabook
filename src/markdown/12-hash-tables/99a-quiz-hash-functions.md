@@ -1,7 +1,5 @@
 
-### Practice questions: Hash functions 
-
-Here are some review questions.
+### Review questions: Hash functions
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 

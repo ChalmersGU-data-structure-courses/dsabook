@@ -1,12 +1,8 @@
 
 ### Review questions: Comparison of sorting algorithms
 
-::: TODO
-- Prio 2: perhaps this quiz is better somewhere else?
-:::
-
 Here are a few multiple choice questions that ask you to compare the
-sorting algorithms that we learned about in this chapter.
+sorting algorithms that we learned about in the last two chapters.
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 
@@ -156,7 +152,7 @@ for the remainder of the list.
 
 :::::::::: question ::::::::::
 Which of the following sorting algorithms has a worst case complexity of
-$\Theta(n \log n)$?
+$O(n \log n)$?
 
 - [x] Merge Sort
 - [ ] Bubble Sort

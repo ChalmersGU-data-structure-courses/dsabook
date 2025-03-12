@@ -50,13 +50,13 @@ inverted.
 The average number of inversions in an array
 of $n$ records is $n(n-1)/4$. This is:
 
-- [x] $\Theta(n^2)$
-- [ ] Better than $\Theta(n^2)$
-- [ ] Worse than $\Theta(n^2)$
+- [x] $O(n^2)$
+- [ ] Better than $O(n^2)$
+- [ ] Worse than $O(n^2)$
 
 ::: hints
 - $n(n-1)/4 = n^2/4 - n/4$.
-- From the rules on asymptotic analysis, $\Theta(n^2/4 - n/4)$ is $\Theta(n^2)$
+- From the rules on asymptotic analysis, $O(n^2/4 - n/4)$ is $O(n^2)$
 :::
 ::::::::::::::::::::::::::::::
 
@@ -68,8 +68,8 @@ An exchange sort is:
 - [x] Any sort where only adjacent records are swapped
 - [ ] Any sort where records are swapped rather than using another mechanism for rearranging the array
 - [ ] Another name for Insertion Sort
-- [ ] Any $\Theta(n^2)$ sort
-- [ ] Any $\Theta(n)$ sort
+- [ ] Any $O(n^2)$ sort
+- [ ] Any $O(n)$ sort
 
 ::: hints
 - Most of the sorts that we study swap records.
@@ -90,7 +90,7 @@ the current record's key appears before it in the array
 
 ::: hints
 - We have not used "inversion" to refer to a type of sort.
-- While "inversions" are related to swaps (since ultimately 
+- While "inversions" are related to swaps (since ultimately
 a swap is needed to undo an inversion), it is not a swap.
 - Inversion refers to an instance of a record being out of order.
 :::

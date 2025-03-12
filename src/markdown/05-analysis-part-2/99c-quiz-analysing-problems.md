@@ -1,5 +1,5 @@
 
-### Practice questions: Analyzing problems
+### Review questions: Analyzing problems
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 
@@ -41,7 +41,7 @@ is $\Omega(n)$ in the worst case, this is not the whole story.
 a certain cost, that does not mean that there is no better algorithm.
 - The reason that search in an unsorted array has a lower
 bound of $\Omega(n)$ is because we can prove that
-any algorithm MUST look at every element (in some order) 
+any algorithm MUST look at every element (in some order)
 in the worst case.
 :::
 ::::::::::::::::::::::::::::::

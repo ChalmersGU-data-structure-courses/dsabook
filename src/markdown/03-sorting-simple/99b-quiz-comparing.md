@@ -2,7 +2,7 @@
 ### Review questions: Comparison
 
 ::: TODO
-- Prio 3: is this quiz necessary? and is this a good place for it?
+- Prio 3: is this quiz necessary?
 :::
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::

@@ -1,5 +1,5 @@
 
-### Practice questions: Hash tables
+### Review questions: Hash tables
 
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::

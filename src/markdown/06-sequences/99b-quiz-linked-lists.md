@@ -1,5 +1,5 @@
 
-### Practice questions: Linked lists
+### Review questions: Linked lists
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 
@@ -43,7 +43,7 @@ move down to the previous node.
 
 :::::::::: question ::::::::::
 In a linked list, the successive elements in
-the list: 
+the list:
 
 - [x] Need not occupy contiguous space in memory
 - [ ] Must occupy contiguous space in memory
@@ -82,7 +82,7 @@ that we are looking for?
 :::::::::: question ::::::::::
 Given a linked list implementation,
 inserting a new element to arbitrary position $i$
-takes how long in the average case? 
+takes how long in the average case?
 
 - [x] $\Theta(i)$ time
 - [ ] $\Theta(n)$ time

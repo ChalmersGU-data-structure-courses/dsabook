@@ -1,5 +1,5 @@
 
-### Practice questions: Upper bounds
+### Review questions: Upper bounds
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 

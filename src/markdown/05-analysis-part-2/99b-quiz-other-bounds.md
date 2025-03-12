@@ -1,5 +1,5 @@
 
-### Practice questions: Asymptotic notations
+### Review questions: Asymptotic notations
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 

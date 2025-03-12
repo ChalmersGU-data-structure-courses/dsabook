@@ -1,7 +1,7 @@
 
-### Review questions: Analysing problems
+### Review questions: Lower bounds for sortings
 
-Here are some review questions to check that you understand this proof.
+Here are some review questions to check that you understand lower bounds.
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 

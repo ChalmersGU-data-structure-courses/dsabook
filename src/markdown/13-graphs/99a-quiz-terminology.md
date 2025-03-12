@@ -1,5 +1,5 @@
 
-### Practice questions: Graph terminology
+### Review questions: Graph terminology
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 

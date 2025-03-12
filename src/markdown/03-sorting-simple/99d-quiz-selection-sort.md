@@ -1,8 +1,7 @@
 
 ### Review questions: Selection sort
 
-Here are some review questions to check how well you understand
-Selection Sort.
+Here are some review questions to check how well you understand Selection Sort.
 
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
@@ -17,7 +16,7 @@ Selection sort is simple, but less efficient than the best sorting algorithms.
 
 ::: hints
 - What is Selection Sort's average case complexity?
-- It is $\Theta(n^2)$.
+- It is $O(n^2)$.
 - Are there any better sorting algorithms?
 :::
 ::::::::::::::::::::::::::::::
@@ -27,7 +26,7 @@ Selection sort is simple, but less efficient than the best sorting algorithms.
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.
 
-Selection Sort (as the code is written in this module) 
+Selection Sort (as the code is written in this module)
 is a stable sorting algorithm. Recall that a stable sorting
 algorithm maintains the relative order of records with equal keys.
 
@@ -48,7 +47,7 @@ the greatest value in the array.
 
 
 :::::::::: question ::::::::::
-Suppose that Selection Sort is given an input of 100 records, 
+Suppose that Selection Sort is given an input of 100 records,
 and it has completed 37 iterations of the main loop.
 
 How many records are now guaranteed to be in their final
@@ -126,10 +125,10 @@ impact on the number of comparisons required by Selection Sort
 :::::::::: question ::::::::::
 What is the worst-case time for Selection Sort to sort an array of n records?
 
-- [x] $\Theta(n^2)$
-- [ ] $\Theta(n)$
-- [ ] $\Theta(\log n)$
-- [ ] $\Theta(n \log n)$
+- [x] $O(n^2)$
+- [ ] $O(n)$
+- [ ] $O(\log n)$
+- [ ] $O(n \log n)$
 
 ::: hints
 - Does Selection Sort's order and number of comparisons depend on the particular order of the input array?
@@ -145,10 +144,10 @@ try to swap even if the current record is in its correct location.
 What is the running time of Selection Sort
 when the input is an array that has already been sorted?
 
-- [x] $\Theta(n^2)$
-- [ ] $\Theta(n)$
-- [ ] $\Theta(\log n)$
-- [ ] $\Theta(n \log n)$
+- [x] $O(n^2)$
+- [ ] $O(n)$
+- [ ] $O(\log n)$
+- [ ] $O(n \log n)$
 
 ::: hints
 - Each test in the inner for loop will be the same no
@@ -162,10 +161,10 @@ matter what the order of the input array.
 What is the running time of Selection Sort
 when the input is an array that has all equal values?
 
-- [x] $\Theta(n^2)$
-- [ ] $\Theta(n)$
-- [ ] $\Theta(\log n)$
-- [ ] $\Theta(n \log n)$
+- [x] $O(n^2)$
+- [ ] $O(n)$
+- [ ] $O(\log n)$
+- [ ] $O(n \log n)$
 
 ::: hints
 - Each test in the inner for loop will be the same no

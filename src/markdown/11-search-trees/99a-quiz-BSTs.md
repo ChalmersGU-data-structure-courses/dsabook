@@ -1,5 +1,5 @@
 
-### Practice questions
+### Review questions: Binary search trees
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 

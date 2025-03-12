@@ -7,7 +7,7 @@
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.
 
-Mergesort (as the code is written in this module) 
+Mergesort (as the code is written in this module)
 is a stable sorting algorithm. Recall that a stable sorting
 algorithm maintains the relative order of records with equal keys.
 
@@ -80,7 +80,7 @@ Mergesort works by splitting a list of $n$
 numbers in half, then sorting each half recursively, and
 finally merging the two halves.
 Which of the following list implementations would allow
-Mergesort to work in $\Theta(n \log n)$ time?
+Mergesort to work in $O(n \log n)$ time?
 
 *Multiple choices are possible!*
 
@@ -138,11 +138,11 @@ to the order of the array input values?
 :::::::::: question ::::::::::
 What is the worst-case time for Mergesort to sort an array of $n$ records?
 
-- [x] $\Theta(n \log n)$
-- [ ] $\Theta(n)$
-- [ ] $\Theta(\log n)$
-- [ ] $\Theta(n^2)$
-- [ ] $\Theta(n^n)$
+- [x] $O(n \log n)$
+- [ ] $O(n)$
+- [ ] $O(\log n)$
+- [ ] $O(n^2)$
+- [ ] $O(n^n)$
 
 
 ::: hints
@@ -157,11 +157,11 @@ What is the worst-case time for Mergesort to sort an array of $n$ records?
 What is the running time of Mergesort
 when the input is an array where all record values are equal?
 
-- [x] $\Theta(n \log n)$
-- [ ] $\Theta(n^2)$
-- [ ] $\Theta(\log n)$
-- [ ] $\Theta(n ^ n)$
-- [ ] $\Theta(n)$
+- [x] $O(n \log n)$
+- [ ] $O(n^2)$
+- [ ] $O(\log n)$
+- [ ] $O(n ^ n)$
+- [ ] $O(n)$
 
 ::: hints
 - Does Mergesort's number of comparisons depend on the particular order of the input array?

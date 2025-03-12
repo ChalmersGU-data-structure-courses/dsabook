@@ -1,5 +1,5 @@
 
-### Practice questions: Graph space requirements
+### Review questions: Graph space requirements
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 
@@ -14,8 +14,8 @@ edgeB = §randRange(2,4)
 -->
 
 :::::::::: question ::::::::::
-Assume for an *directed unweighted* graph with <!--NumV--> 6 vertices and <!--numE--> 14 edges, 
-that a vertex index requires <!--vertB--> 2 bytes, 
+Assume for an *directed unweighted* graph with <!--NumV--> 6 vertices and <!--numE--> 14 edges,
+that a vertex index requires <!--vertB--> 2 bytes,
 and a pointer requires <!--pointerB--> 4 bytes.
 
 Calculate the byte requirements for an *adjacency list*.
@@ -34,8 +34,8 @@ Calculate the byte requirements for an *adjacency list*.
 
 
 :::::::::: question ::::::::::
-Assume for an *directed unweighted* graph with <!--NumV--> 6 vertices and <!--numE--> 14 edges, 
-that a vertex index requires <!--vertB--> 2 bytes, 
+Assume for an *directed unweighted* graph with <!--NumV--> 6 vertices and <!--numE--> 14 edges,
+that a vertex index requires <!--vertB--> 2 bytes,
 and a pointer requires <!--pointerB--> 4 bytes.
 
 Calculate the byte requirements for an *adjacency matrix*.
@@ -54,8 +54,8 @@ Calculate the byte requirements for an *adjacency matrix*.
 
 
 :::::::::: question ::::::::::
-Assume for an *directed weighted* graph with <!--NumV--> 9 vertices and <!--numE--> 11 edges, 
-that a vertex index requires <!--vertB--> 5 bytes, 
+Assume for an *directed weighted* graph with <!--NumV--> 9 vertices and <!--numE--> 11 edges,
+that a vertex index requires <!--vertB--> 5 bytes,
 a pointer requires <!--pointerB--> 4 bytes.
 and that edge weights require <!--edgeB--> 8 bytes.
 
@@ -74,8 +74,8 @@ Calculate the byte requirements for an *adjacency list*.
 
 
 :::::::::: question ::::::::::
-Assume for an *directed weighted* graph with <!--NumV--> 9 vertices and <!--numE--> 11 edges, 
-that a vertex index requires <!--vertB--> 5 bytes, 
+Assume for an *directed weighted* graph with <!--NumV--> 9 vertices and <!--numE--> 11 edges,
+that a vertex index requires <!--vertB--> 5 bytes,
 a pointer requires <!--pointerB--> 4 bytes.
 and that edge weights require <!--edgeB--> 8 bytes.
 
@@ -94,8 +94,8 @@ Calculate the byte requirements for an *adjacency matrix*.
 
 
 :::::::::: question ::::::::::
-Assume for an *undirected unweighted* graph with <!--NumV--> 7 vertices and <!--numE--> 17 edges, 
-that a vertex index requires <!--vertB--> 6 bytes, 
+Assume for an *undirected unweighted* graph with <!--NumV--> 7 vertices and <!--numE--> 17 edges,
+that a vertex index requires <!--vertB--> 6 bytes,
 and a pointer requires <!--pointerB--> 2 bytes.
 
 Calculate the byte requirements for an *adjacency list*.
@@ -108,7 +108,7 @@ Calculate the byte requirements for an *adjacency list*.
 - Since the graph is unweighted, the adjacency list does not store any weight information.
 - Since the graph is undirected, each undirected edge is represented by two directed edges.
 - The adjacency list has an array (of size $|V|$) which points to a list of edges.
-- Every edge appears twice on the list (the graph is undirected, so we need the directed edge in each direction). 
+- Every edge appears twice on the list (the graph is undirected, so we need the directed edge in each direction).
 And for each edge there  has to be a vertex ID and a pointer to the next edge.
 - It uses $(|V| \cdot \textrm{pointer}) + (2 \cdots |E| \cdot (\textrm{vertex-index} + \textrm{pointer}))$ bytes.
 :::
@@ -117,8 +117,8 @@ And for each edge there  has to be a vertex ID and a pointer to the next edge.
 
 
 :::::::::: question ::::::::::
-Assume for an *undirected unweighted* graph with <!--NumV--> 7 vertices and <!--numE--> 17 edges, 
-that a vertex index requires <!--vertB--> 6 bytes, 
+Assume for an *undirected unweighted* graph with <!--NumV--> 7 vertices and <!--numE--> 17 edges,
+that a vertex index requires <!--vertB--> 6 bytes,
 and a pointer requires <!--pointerB--> 2 bytes.
 
 Calculate the byte requirements for an *adjacency matrix*.
@@ -139,8 +139,8 @@ Calculate the byte requirements for an *adjacency matrix*.
 
 
 :::::::::: question ::::::::::
-Assume for an *undirected weighted* graph with <!--NumV--> 10 vertices and <!--numE--> 15 edges, 
-that a vertex index requires <!--vertB--> 1 byte, 
+Assume for an *undirected weighted* graph with <!--NumV--> 10 vertices and <!--numE--> 15 edges,
+that a vertex index requires <!--vertB--> 1 byte,
 a pointer requires <!--pointerB--> 2 bytes.
 and that edge weights require <!--edgeB--> 4 bytes.
 
@@ -152,7 +152,7 @@ Calculate the byte requirements for an *adjacency list*.
 ::: hints
 - Since the graph is undirected, each undirected edge is represented by two directed edges.
 - The adjacency list has an array (of size $|V|$) which points to a list of edges.
-- Every edge appears twice on the list (the graph is undirected, so we need the directed edge in each direction). 
+- Every edge appears twice on the list (the graph is undirected, so we need the directed edge in each direction).
 And for each edge there  has to be a vertex ID, a weight and a pointer to the next edge.
 - It uses $(|V| \cdot \textrm{pointer}) + (2 \cdots |E| \cdot (\textrm{vertex-index} + \textrm{edge-weight} + \textrm{pointer}))$ bytes.
 :::
@@ -161,8 +161,8 @@ And for each edge there  has to be a vertex ID, a weight and a pointer to the ne
 
 
 :::::::::: question ::::::::::
-Assume for an *undirected weighted* graph with <!--NumV--> 10 vertices and <!--numE--> 15 edges, 
-that a vertex index requires <!--vertB--> 1 byte, 
+Assume for an *undirected weighted* graph with <!--NumV--> 10 vertices and <!--numE--> 15 edges,
+that a vertex index requires <!--vertB--> 1 byte,
 a pointer requires <!--pointerB--> 2 bytes,
 and that edge weights require <!--edgeB--> 4 bytes.
 

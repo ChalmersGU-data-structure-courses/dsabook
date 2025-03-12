@@ -2,8 +2,10 @@
 ## Lower bounds and tight bounds
 
 ::: TODO
-- Prio 1: this section says that Theta is the best to use, is that what we want?
+- Prio 1: this section says that Theta is the best to use
+    - we want to discuss that we use O "as tight as possible", and not Theta
 - Prio 1: update the text in Summary of asymptotic notations
+- Prio 1: add (part of) this table as a summary: https://en.wikipedia.org/wiki/Big_O_notation#Family_of_Bachmann%E2%80%93Landau_notations
 - Prio 3: do we really need the alternative definition of Omega?
 :::
 

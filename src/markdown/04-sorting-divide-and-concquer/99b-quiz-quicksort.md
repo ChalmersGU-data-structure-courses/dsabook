@@ -6,7 +6,7 @@
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.
 
-Quicksort (as the code is written in this module) 
+Quicksort (as the code is written in this module)
 is a stable sorting algorithm. Recall that a stable sorting
 algorithm maintains the relative order of records with equal keys.
 
@@ -22,14 +22,14 @@ algorithm maintains the relative order of records with equal keys.
 
 
 :::::::::: question ::::::::::
-On average, how many comparisons does Quicksort require to sort 1000 records 
+On average, how many comparisons does Quicksort require to sort 1000 records
 (to the nearest 1000 comparisons)?
 
 <input type="text" value="10000" placeholder="Round to nearest 1000"/>
 
 ::: hints
 - What is Quicksort's average case running time?
-- It is $\Theta(n \log_2 n)$
+- It is $O(n \log_2 n)$
 - This means about $10 \cdot 1000$ comparisons are required
 :::
 ::::::::::::::::::::::::::::::
@@ -37,12 +37,12 @@ On average, how many comparisons does Quicksort require to sort 1000 records
 
 
 :::::::::: question ::::::::::
-If it takes a given computer one second on average to run Quicksort 
-on an array of 1000 records, how long (to the nearest thousand seconds) 
-will it take to run Quicksort on 1,000,000 records? 
+If it takes a given computer one second on average to run Quicksort
+on an array of 1000 records, how long (to the nearest thousand seconds)
+will it take to run Quicksort on 1,000,000 records?
 
 (Hint: You know from this statement that
-the machine can do about 10,000 comparisons per second. 
+the machine can do about 10,000 comparisons per second.
 To get the answer, you first need to compute about how many
 total comparisons 1,000,000 records will require.)
 
@@ -50,7 +50,7 @@ total comparisons 1,000,000 records will require.)
 
 ::: hints
 - What is Quicksort's average case running time?
-- It is $\Theta(n \log_2 n)$
+- It is $O(n \log_2 n)$
 - This means $10 \cdot 1000$ instructions ran in one second for an input of 1000 records
 - What is $n \log_2 n$ when $n = 1,000,000$?
 - It is about $20 \cdot 1,000,000$
@@ -96,10 +96,10 @@ impact on the number of comparisons required by Quicksort
 :::::::::: question ::::::::::
 What is the worst-case cost for Quicksort to sort an array of n elements?
 
-- [x] $\Theta(n^2)$
-- [ ] $\Theta(n)$
-- [ ] $\Theta(\log n)$
-- [ ] $\Theta(n \log n)$
+- [x] $O(n^2)$
+- [ ] $O(n)$
+- [ ] $O(\log n)$
+- [ ] $O(n \log n)$
 
 ::: hints
 - There are a few really bad inputs.
@@ -115,14 +115,14 @@ that is the sum of $i$ from 2 to $n-1$, that you should be very familiar with.
 :::::::::: question ::::::::::
 What is the best-case cost for Quicksort to sort an array of n elements?
 
-- [x] $\Theta(n \log n)$
-- [ ] $\Theta(n)$
-- [ ] $\Theta(\log n)$
-- [ ] $\Theta(n^2)$
+- [x] $O(n \log n)$
+- [ ] $O(n)$
+- [ ] $O(\log n)$
+- [ ] $O(n^2)$
 
 ::: hints
 - While there are a few bad inputs, they are so few as to not affect the best case.
-- The best thing that can happen is that every pivot split its partition in half. 
+- The best thing that can happen is that every pivot split its partition in half.
 :::
 ::::::::::::::::::::::::::::::
 
@@ -131,28 +131,28 @@ What is the best-case cost for Quicksort to sort an array of n elements?
 :::::::::: question ::::::::::
 A disadvantage of Quicksort is:
 
-- [x] Its worst-case running time is $\Theta(n^2)$
+- [x] Its worst-case running time is $O(n^2)$
 - [ ] It needs an extra array for auxilliary storage
 - [ ] It is stable
-- [ ] Its average-case running time is $\Theta(n^2)$
+- [ ] Its average-case running time is $O(n^2)$
 
 ::: hints
 - How does Quicksort do in the worst case?
-- It requires $\Theta(n^2)$, which is pretty bad.
+- It requires $O(n^2)$, which is pretty bad.
 :::
 ::::::::::::::::::::::::::::::
 
 
 
 :::::::::: question ::::::::::
-(For the version of the algorithm as presented in this module) 
+(For the version of the algorithm as presented in this module)
 What is the running time of Quicksort when the input is an array where all record values are equal?
 
-- [x] $\Theta(n^2)$
-- [ ] $\Theta(n)$
-- [ ] $\Theta(\log n)$
-- [ ] $\Theta(n \log n)$
-- [ ] $\Theta(n ^ n)$
+- [x] $O(n^2)$
+- [ ] $O(n)$
+- [ ] $O(\log n)$
+- [ ] $O(n \log n)$
+- [ ] $O(n ^ n)$
 
 ::: hints
 - What does the partition step do?
@@ -164,8 +164,8 @@ What is the running time of Quicksort when the input is an array where all recor
 
 
 :::::::::: question ::::::::::
-Quicksort's worst-case case cost is $O(n^2)$ and its 
-average-case cost is $O(n \log n)$. This means that 
+Quicksort's worst-case case cost is $O(n^2)$ and its
+average-case cost is $O(n \log n)$. This means that
 the fraction of input cases with cost $O(n^2)$ must:</p>
 
 - [x] Drop as $n$ grows
@@ -196,7 +196,7 @@ After Quicksort completes the partition function, where is the pivot?
 
 ::: hints
 - When partition is called, the pivot is at the end of the partition.
-- The partition operation itself does not move the pivot. 
+- The partition operation itself does not move the pivot.
 That is done afterwards by the Quicksort function itself.
 :::
 ::::::::::::::::::::::::::::::
@@ -206,10 +206,10 @@ That is done afterwards by the Quicksort function itself.
 :::::::::: question ::::::::::
 What is the worst-case cost for Quicksort's partition step?
 
-- [x] $\Theta(n)$
-- [ ] $\Theta(n^2)$
-- [ ] $\Theta(\log n)$
-- [ ] $\Theta(n \log n)$
+- [x] $O(n)$
+- [ ] $O(n^2)$
+- [ ] $O(\log n)$
+- [ ] $O(n \log n)$
 
 ::: hints
 - Partition moves indices inwards until the meet.
@@ -237,7 +237,7 @@ position in the partition, or the middle position in the partition?
 - If you pick the first or last one, then sorted input will give the worst case performance.
 - If you pick the middle value, then it is still possible to get worst-case performance.
 - But to do so requires a very specific and unusual permuation that will normally occur very rarely.
-- If all permuations were equally likely, then it wouldn't matter. 
+- If all permuations were equally likely, then it wouldn't matter.
 But in practice, the sorted input is much more likely to occur.
 :::
 ::::::::::::::::::::::::::::::

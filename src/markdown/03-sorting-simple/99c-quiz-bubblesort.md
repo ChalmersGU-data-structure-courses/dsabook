@@ -8,7 +8,7 @@ Here are some review questions to check your understanding of Bubble Sort.
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.
 
-Bubble Sort (as the code is written in this module) is a stable sorting algorithm. 
+Bubble Sort (as the code is written in this module) is a stable sorting algorithm.
 Recall that a stable sorting algorithm maintains the relative order of records with equal keys.
 
 - [x] True
@@ -65,11 +65,11 @@ What is the worst-case time for
 Bubble Sort (as the algorithm is presented in this module)
 to sort an array of $n$ records?
 
-- [x] $\Theta(n^2)$
-- [ ] $\Theta(n)$
-- [ ] $\Theta(\log n)$
-- [ ] $\Theta(n \log n)$
-- [ ] $\Theta(n^n)$
+- [x] $O(n^2)$
+- [ ] $O(n)$
+- [ ] $O(\log n)$
+- [ ] $O(n \log n)$
+- [ ] $O(n^n)$
 
 ::: hints
 - Does Bubble Sort's number of comparisons depend on the particular order of the input array?
@@ -83,10 +83,10 @@ to sort an array of $n$ records?
 What is the running time of Bubble Sort
 when the input is an array where all record values are equal?
 
-- [x] $\Theta(n^2)$
-- [ ] $\Theta(n)$
-- [ ] $\Theta(\log n)$
-- [ ] $\Theta(n \log n)$
+- [x] $O(n^2)$
+- [ ] $O(n)$
+- [ ] $O(\log n)$
+- [ ] $O(n \log n)$
 
 ::: hints
 - Each comparison test in the inner for loop will fail
@@ -103,10 +103,10 @@ comparisons to be made, it only affects the number of swaps.
 What is the running time for Bubble Sort
 when the input array has values that are in reverse sort order?
 
-- [x] $\Theta(n^2)$
-- [ ] $\Theta(n)$
-- [ ] $\Theta(\log n)$
-- [ ] $\Theta(n \log n)$
+- [x] $O(n^2)$
+- [ ] $O(n)$
+- [ ] $O(\log n)$
+- [ ] $O(n \log n)$
 
 ::: hints
 - On each iteration, the $i$th record will have to move to the start of the array.
@@ -121,10 +121,10 @@ What is the running time of Bubble Sort
 (as the algorithm is presented in this module)
 when the input is an array that has already been sorted?
 
-- [x] $\Theta(n^2)$
-- [ ] $\Theta(n)$
-- [ ] $\Theta(\log n)$
-- [ ] $\Theta(n \log n)$
+- [x] $O(n^2)$
+- [ ] $O(n)$
+- [ ] $O(\log n)$
+- [ ] $O(n \log n)$
 
 ::: hints
 - Each test in the inner for loop will fail because the

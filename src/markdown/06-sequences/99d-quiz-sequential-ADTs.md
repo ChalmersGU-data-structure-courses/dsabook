@@ -1,5 +1,5 @@
 
-### List summary questions
+### Summary questions
 
 Here are some general practice questions about various data structures in this chapter.
 

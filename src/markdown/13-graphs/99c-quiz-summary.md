@@ -1,5 +1,5 @@
 
-### Graph Concepts Summary Questions
+### Summary questions
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 

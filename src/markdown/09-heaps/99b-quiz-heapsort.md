@@ -1,5 +1,5 @@
 
-### Practice questions: Heapsort
+### Review questions: Heapsort
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 
@@ -46,7 +46,7 @@ In which cases are the time complexities the same for Heapsort?
 - [x] Worst and Average
 - [ ] Worst and Best
 - [ ] Best and Average
-- [ ] Worst, Average and Best	  	 
+- [ ] Worst, Average and Best
 
 ::: hints
 - Does Heapsort's cost vary according to the order of the array input values?

@@ -3,5 +3,5 @@
 
 ::: TODO
 - Prio 2: add summary text
-- Prio 2: practice questions
+- Prio 3: update quizzes
 :::

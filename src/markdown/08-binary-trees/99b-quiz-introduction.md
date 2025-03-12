@@ -1,5 +1,5 @@
 
-### Binary tree exercises
+### Review questions: Example binary tree
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 
