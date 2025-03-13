@@ -14,30 +14,38 @@ growth rate that the algorithm can have.
 
 Because the phrase "has an upper bound to its growth rate of $f(n)$"
 is long and often used when discussing algorithms, we adopt a special
-notation, called [big-Oh notation]{.term}. If
+notation, called [big-$O$ notation]{.term}. If
 the upper bound for an algorithm's growth rate (for, say, the worst
-case) is (f(n)), then we would write that this algorithm is "in the set
+case) is $f(n)$, then we would write that this algorithm is "in the set
 $O(f(n))$ in the worst case" (or just "in $O(f(n))$ in the worst
 case"). For example, if $n^2$ grows as fast as $\mathbf{T}(n)$ (the
 running time of our algorithm) for the worst-case input, we would say
 the algorithm is "in $O(n^2)$ in the worst case".
 
-The following is a precise definition for an upper bound.
-$\mathbf{T}(n)$ represents the true running time of the algorithm.
-$f(n)$ is some expression for the upper bound.
+We already defined the upper bound in section XX, like this:
 
-> For $\mathbf{T}(n)$ a non-negatively valued function, $\mathbf{T}(n)$
-> is in set $O(f(n))$ if there exist two positive constants $c$ and
-> $n_0$ such that $\mathbf{T}(n) \leq cf(n)$ for all $n > n_0$.
+Upper bound
 
-Constant $n_0$ is the smallest value of $n$ for which the claim of an
-upper bound holds true. Usually $n_0$ is small, such as 1, but does not
-need to be. You must also be able to pick some constant $c$, but it is
-irrelevant what the value for $c$ actually is. In other words, the
-definition says that for *all* inputs of the type in question (such as
-the worst case for all inputs of size $n$) that are large enough (i.e.,
-$n > n_0$), the algorithm *always* executes in less than or equal to
-$cf(n)$ steps for some constant $c$.
+: $f\in O(g)$ **iff** there exist positive numbers $k$ and $n_0$ such that $f(n) \leq k\cdot g(n)$ for all $n>n_0$
+
+The constant $n_0$ is the smallest value of $n$ for which the claim of an upper bound holds true.
+Usually $n_0$ is small, such as 1, but does not need to be.
+You must also be able to pick some constant $k$, but it is irrelevant what the value for $k$ actually is.
+In other words, the definition says that for *all* inputs of the type in question
+(such as the worst case for all inputs of size $n$)
+that are large enough (i.e., $n > n_0$),
+the algorithm *always* executes in less than or equal to $k\cdot g(n)$ steps for some constant $k$.
+
+::: note
+Note that the definition is somewhat simplified, it only works if $f$ and $g$ are *monotonically increasing*.
+This means that if $x\leq y$ then $f(x)\leq f(y)$, so the value can never decrease whenever $x$ increases.
+
+But this is not a real restriction for our purposes, because there are no algorithms that becomes faster when the input size grows.
+In the very best case, the runtime of an algorithm can be independent of the input size, but this is also monotonically increasing.
+
+If we were to allow any non-monotonic functions, then the definition of upper bound would become slightly more complicated.
+You can look up the formal definition in mathematical textbooks, or in Wikipedia.
+:::
 
 ::: topic
 #### Example: Sequential search {-}
@@ -62,8 +70,7 @@ c_1 n^2 + c_2 n \leq c_1 n^2 + c_2 n^2 \leq (c_1 + c_2)n^2
 $$
 
 for all $n > 1$. So, $\mathbf{T}(n) \leq c n^2$ for $c = c_1 + c_2$, and
-$n_0 = 1$. Therefore, $\mathbf{T}(n)$ is in $O(n^2)$ by the second
-definition.
+$n_0 = 1$. Therefore, $\mathbf{T}(n)$ is in $O(n^2)$ by the definition.
 :::
 
 ::: topic
@@ -104,58 +111,45 @@ seek to define the running time of an algorithm with the tightest
 search is in $O(n)$. This also explains why the phrase "is in
 $O(f(n))$" or the notation "$\in O(f(n))$" is used instead of "is
 $O(f(n))$" or "$= O(f(n))$". There is no strict equality to the use
-of big-Oh notation. $O(n)$ is in $O(n^2)$, but $O(n^2)$ is not in
+of big-$O$ notation. $O(n)$ is in $O(n^2)$, but $O(n^2)$ is not in
 $O(n)$.
 
 ### Simplifying rules
 
-Once you determine the running-time equation for an algorithm, it really
-is a simple matter to derive the big-Oh expressions from the equation.
-You do not need to resort to the formal definitions of asymptotic
-analysis. Instead, you can use the following rules to determine the
-simplest form.
+We introduced simplifying rules in section XX, but repeat them here in compact form:
 
-1.  If $f(n)$ is in $O(g(n))$ and $g(n)$ is in $O(h(n))$, then $f(n)$ is
-    in $O(h(n))$.
-2.  If $f(n)$ is in $O(k g(n))$ for any constant $k > 0$, then $f(n)$ is
-    in $O(g(n))$.
-3.  If $f_1(n)$ is in $O(g_1(n))$ and $f_2(n)$ is in $O(g_2(n))$, then
-    $f_1(n) + f_2(n)$ is in $O(\max(g_1(n), g_2(n)))$.
-4.  If $f_1(n)$ is in $O(g_1(n))$ and $f_2(n)$ is in $O(g_2(n))$, then
-    $f_1(n) f_2(n)$ is in $O(g_1(n) g_2(n))$.
+     Rule              Simplification                                                       Alternatively
+---  ----------------  -------------------------------------------------------------------  -------------------------------
+(1)  Transitivity      if $f\in O(g)$ and $g\in O(h)$, then $f\in O(h)$
+(2)  Constant $k>0$    if $f\in O(g)$, then $k\cdot f\in O(g)$                              $k \cdot O(g) = O(g)$
+(3)  Addition          if $f\in O(g)$ and $f'\in O(g')$, then $f+f'\in O(\max(g,g'))$       $O(g) + O(g') = O(\max(g,g'))$
+(4)  Multiplication    if $f\in O(g)$ and $f'\in O(g')$, then $f\cdot f'\in O(g\cdot g')$   $O(g) \cdot O(g') = O(g\cdot g')$
 
-The first rule says that if some function $g(n)$ is an upper bound for
-your cost function, then any upper bound for $g(n)$ is also an upper
-bound for your cost function.
+Using these rules we can easily determine the asymptotic growth rate for many algorithms.
 
-The significance of rule (2) is that you can ignore any multiplicative
-constants in your equations when using big-Oh notation.
+- Rule (2) says that any constant-time operation is $O(1)$.
+- Rule (3) says that if you have a sequence of statements, you only need to consider the most expensive statement: $O(\max(f_1,\ldots,f_k))$.
+- Rule (4) says that if you have a loop that repeats a statement $p$ a number of times, the total cost is the cost of $p$ times the number of iterations: $O(n\cdot f)$.
+- Rule (2) also says that if you repeat a statement $p$ a *constant* number of times, you can treat it as you only execute $p$ once.
 
-Rule (3) says that given two parts of a program run in sequence (whether
-two statements or two sections of code), you need consider only the more
-expensive part.
+### big-$O$ and logarithms
 
-Rule (4) is used to analyze simple loops in programs. If some action is
-repeated some number of times, and each repetition has the same cost,
-then the total cost is the cost of the action multiplied by the number
-of times that the action takes place.
+One interesting consequence of asymptotic complexity is that the base of a logarithm becomes irrelevant:
 
-Taking the first three rules collectively, you can ignore all constants
-and all lower-order terms to determine the asymptotic growth rate for
-any cost function. The advantages and dangers of ignoring constants were
-discussed near the beginning of this section. Ignoring lower-order terms
-is reasonable when performing an asymptotic analysis. The higher-order
-terms soon swamp the lower-order terms in their contribution to the
-total cost as (n) becomes larger. Thus, if
-$\mathbf{T}(n) = 3 n^4 + 5 n^2$, then $\mathbf{T}(n)$ is in $O(n^4)$.
-The $n^2$ term contributes relatively little to the total cost for large
-$n$.
+$$ O(\log_2(n)) = O(\ln(n)) = O(\log_10(n)) $$
 
-From now on, we will use these simplifying rules when discussing the
-cost for a program or algorithm.
+The reason for this is that according to the logarithm laws, $\log_b(n) = \log_a(n) \cdot \frac{1}{\log_a(b)}$.
+But $\frac{1}{\log_a(b)}$ is a constant which we can ignore, so $O(\log_b(n)) = O(\log_a(n))$.
+Therefore we can just ignore the base and write $O(\log n)$.
 
-### Summary
+(Note that this *does not* hold for exponential growth -- e.g., $2^n\in O(10^n)$, but $10^n\not\in O(2^n)$.)
 
-<inlineav id="UpperBoundCON" src="AlgAnal/UpperBoundCON.js" name="Upper Bounds visualization" links="AlgAnal/UpperBoundCON.css" height="500px"/>
+Another consequence of the logarithm laws is that it doesn't really matter if you take the logarithm from a linear, quadratic, cubic, or any power function:
 
-<inlineav id="SimpleCostsCON" src="AlgAnal/SimpleCostsCON.js" name="AlgAnal/SimpleCostsCON" links="AlgAnal/SimpleCostsCON.css" height="900px" static/>
+$$ O(\log n) = O(\log n^2) = O(\log n^3) = O(\log n^k) $$
+
+The reason for this is that $\log n^k = k\cdot\log n$ according to the logarithm laws, so the exponent $k$ becomes a multiplicative constant and can be ignored.
+
+However, taking the power of a logarithm cannot be ignored, so $O(\log n)$ and $O(\log^2 n)$ are different complexity classes.
+
+

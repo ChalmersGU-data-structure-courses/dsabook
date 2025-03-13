@@ -281,7 +281,7 @@ We frequently use the term algorithm analysis to mean the same thing.
 
 In [algorithm analysis]{.term}, specifically
 [complexity]{.term} of an algorithm, the
-average of the costs for all 
+average of the costs for all
 [problem instances](#problem-instance){.term} of a given input
 size $n$. If not all problem instances have equal probability of
 occurring, then the average case must be calculated using a weighted
@@ -322,7 +322,7 @@ the actual data records.
 
 ### B* tree
 
-A variant on the [B+ tree]{.term}. The B* tree is identical to the B+ tree, 
+A variant on the [B+ tree]{.term}. The B* tree is identical to the B+ tree,
 except for the rules used to split and merge nodes. Instead of splitting a
 node in half when it overflows, the B* tree gives some
 records to its neighboring sibling, if possible. If the sibling is
@@ -437,7 +437,7 @@ requests. The disadvantage is that it tends to cause
 [external fragmentation]{.term} in the form
 of small, unuseable memory blocks.
 
-### big-Oh notation
+### big-$O$ notation
 
 For [growth rates](#growth-rate){.term} $f$
 and $g$, we write $f \in O(g)$ to say that $g$ is an
@@ -1046,7 +1046,7 @@ might in turn require invoking the traversal method of other objects
 ### composite type
 ### aggregate type
 
-A [data type]{.term} whose [members](#member){.term} have subparts. 
+A [data type]{.term} whose [members](#member){.term} have subparts.
 For example, a typical database record.
 
 ### composition
@@ -2222,7 +2222,7 @@ $g$.
 
 Formally, there are constants $n_0 \geq 0$ and $c > 0$ such that
 $f(n) \leq c g(n)$ for all $n \geq n_0$. We then say that $f$ has
-growth rate less or equal that of $g$ and write $f \in O(g)$ (big-Oh
+growth rate less or equal that of $g$ and write $f \in O(g)$ (big-$O$
 notation). This defines the preorder of growth rates.
 
 In [algorithm analysis]{.term}, we sometimes
@@ -2696,7 +2696,7 @@ inverted list is stored in a disk file.
 ### I/O head
 ### read/write head
 
-On a [disk drive]{.term} (or similar device), 
+On a [disk drive]{.term} (or similar device),
 the part of the machinery that actually reads data from the disk.
 
 ### irreflexive
@@ -2789,7 +2789,7 @@ to a sorting operation that works directly on a collection of
 records. The intention is that the collection of key-value pairs is
 far smaller than the collection of records themselves. As such, this
 might allow for an [internal sort]{.term}
-when sorting the records directly would require an 
+when sorting the records directly would require an
 [external sort]{.term}. The collection of key-value
 pairs can also act as an [index](#indexing){.term}.
 
@@ -2895,7 +2895,7 @@ Abbreviated LRU, it is a popular
 [buffer]{.term} in a
 [buffer pool]{.term} to
 [flush]{.term} when data in the buffer pool
-must be replaced by new data being read into a 
+must be replaced by new data being read into a
 [cache](#caching){.term}. Analogous to the
 [move-to-front]{.term} heuristic for
 maintaining a [self-organizing list]{.term}.
@@ -3531,7 +3531,7 @@ In set notation, a relation that is [reflexive]{.term},
 
 ### NP-Complete
 
-A class of problems that are related to each other in this way: 
+A class of problems that are related to each other in this way:
 If ever one such problem is proved to be solvable in polynomial time,
 or proved to require exponential time, then all other NP-Complete
 problems will cost likewise. Since so many real-world problems have
@@ -4945,7 +4945,7 @@ In [hashing]{.term}, a position in a
 
 ### snowplow argument
 
-An analogy used to give intuition for why 
+An analogy used to give intuition for why
 [replacement selection]{.term} will generate
 [runs](#run){.term} that are on average
 twice the size of working memory. Records coming from the input
@@ -5241,7 +5241,7 @@ from some other class.
 
 A subgraph $\mathbf{S}$ is formed from [graph]{.term}
 $\mathbf{G}$ by selecting a [subset]{.term}
-$\mathbf{V}_s$ of $\mathbf{G}$'s 
+$\mathbf{V}_s$ of $\mathbf{G}$'s
 [vertices](#vertex){.term} and a subset $\mathbf{E}_s$
 of $\mathbf{G}$'s [edges](#edge){.term}
 such that for every edge $e \in \mathbf{E}_s$, both vertices of $e$
@@ -5659,7 +5659,7 @@ $f$ is any growth rate $g$ that is greater than or equal to it.
 Formally, there are constants $n_0 \geq 0$ and $C > 0$ such that
 $f(n) \leq C g(n)$ for all $n \geq n_0$. We also write $f \in O(g)$
 or slightly imprecisely $f(n) \in O(g(n))$ (this is
-[big-Oh notation]{.term}).
+[big-$O$ notation]{.term}).
 
 Usually, we are interested in finding an upper bound $g$ that has a
 simple expression compared to $f$, but is still sharp (there is not

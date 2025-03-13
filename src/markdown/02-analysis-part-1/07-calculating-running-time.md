@@ -8,52 +8,81 @@
 :::
 
 In this section we show how to analyse complexity in practice, by analysing several simple code fragments.
-As mentioned in the last section, we will only give the upper bound using the big-O notation $O$.
+As mentioned in the last section, we will only give the upper bound using the big-$O$ notation.
 
 ### Simplification rules
 
-To make algorithm analysis easier there are some simplifying rules that are very useful:
+Once you determine the running-time equation for an algorithm, it really
+is a simple matter to derive the big-$O$ expressions from the equation.
+You do not need to resort to the formal definitions of asymptotic
+analysis. Instead, you can use the following rules to determine the
+simplest form.
+
+(1) **Transitivity**:
+    If $f\in O(g)$ and $g\in O(h)$, then $f\in O(h)$
+
+(2) **Constant factor**:
+    If $f\in O(g)$, then $k\cdot f\in O(g)$, for any constant $k>0$
+
+      - Special case: $O(k) = O(1)$ for all constants $k>0$
+
+(3) **Addition**:
+    If $f\in O(g)$ and $f'\in O(g')$, then $f+f' \in O(\max(g,g'))$
+
+      - Special case: if $f,f'\in O(g)$, then $f+f' \in O(g)$
+
+(4) **Multiplication**:
+    If $f\in O(g)$ and $f'\in O(g')$, then $f\cdot f' \in O(g\cdot g')$
 
 
-Addition
+The first rule says that if some function $g(n)$ is an upper bound for
+your cost function, then any upper bound for $g(n)$ is also an upper
+bound for your cost function.
 
-: If $f\in O(g)$ and $f'\in O(g')$, then $f+f' \in O(g+g') = O(\max(g,g'))$
+The significance of rule (2) is that you can ignore any multiplicative
+constants in your equations when using big-$O$ notation.
 
-: Special case: if $f,f'\in O(g)$, then $f+f' \in O(g)$
+Rule (3) says that given two parts of a program run in sequence (whether
+two statements or two sections of code), you need consider only the more
+expensive part.
 
-Multiplication
+Rule (4) is used to analyze simple loops in programs. If some action is
+repeated some number of times, and each repetition has the same cost,
+then the total cost is the cost of the action multiplied by the number
+of times that the action takes place.
 
-: If $f\in O(g)$ and $f'\in O(g')$, then $f\cdot f' \in O(g\cdot g')$
+Taking the first three rules collectively, you can ignore all constants and all lower-order terms to determine the asymptotic growth rate for any cost function.
+The advantages and dangers of ignoring constants were discussed in the beginning of the previous section.
+Ignoring lower-order terms is reasonable when performing an asymptotic analysis.
+The higher-order terms soon swamp the lower-order terms in their contribution to the total cost as $n$ becomes larger.
+Thus, if $f(n) = 3 n^4 + 5 n^2$, then $f(n)$ is in $O(n^4)$.
+The $n^2$ term contributes relatively little to the total cost for large $n$.
 
-: Special case when $k>0$ is a constant: if $f\in O(g)$, then $k\cdot f\in O(k\cdot g) = O(g)$
+From now on, we will use these simplifying rules when discussing the
+cost for a program or algorithm.
 
-: Even more special case: $O(k) = O(1)$ for all constants $k>0$
-
-Transitivity
-
-: If $f\in O(g)$ and $g\in O(h)$, then $f\in O(h)$
-
-
-Here's a table with the same information, even more simplified:
-
-| Addition         | $O(f) + O(g) = O(f+g) = O(\max(f,g))$      |
-| Multiplication   | $O(f) \cdot O(g) = O(f\cdot g)             |
-| ...by a constant | $k \cdot O(f) = O(k\cdot f) = O(f)$        |
-| Constant factor  | $O(k) = O(1)$                              |
-| Transitivity     | if $f\in O(g)$ and $g\in O(h)$, then $f\in O(h)$ |
-| Comparison       |
 
 ### The complexity hierarchy
 
-We can also compare complexities, where $O(f) < O(g)$ means that $g$ grows faster than $f$.
-
-From the rules above, we can infer the following hierarchy of complexity classes:
+We can use the upper bound to define an ordering between complexity classes,
+where we write $O(f)\leq O(g)$ for $f\in O(g)$.
+Using this we can infer the following hierarchy of complexity classes:
 
 $$
 O(1) < O(\log n) < O(\sqrt{n}) < O(n) < O(n\log n) < O(n^2) < O(n^2\log n) < O(n^3) < \cdots < O(n^k) < O(2^n) < O(10^n) < O(n!) < \cdots
 $$
 
-(Actually the meaning of $O(f)\leq O(g)$ is just that $f\in O(g)$, but more about that in section XX (analysis part 2 chapter).)
+(Note that we use strict equality here, and trust that you intuitively understand the difference between $\leq$ and $<$.)
+
+One interesting consequence of asymptotic complexity is that the base of a logarithm becomes irrelevant, i.e.:
+
+$$ O(\log_2(n)) = O(\ln(n)) = O(\log_10(n)) $$
+
+So we usually just write $O(\log n)$.
+The reason why the base is irrelevant is a direct consequence of the logarithm laws.
+
+We leave as an exercise to the reader to figure out both the definition of $<$ and why the logarithm base is irrelevant.
+But we will come back to this issue in chapter XX.
 
 
 ### Analysing code fragments
@@ -74,7 +103,7 @@ E.g., suppose that we have the three operations $p_1\in O(f_1)$, $p_2\in O(f_2)$
 The complexity of the sequence $p_1; p_2; p_3$ will then be sum of the parts, i.e.:
 
 $$
-p_1; p_2; p_3 \in O(f_1) + O(f_2) + O(f_3) = O(f_1+f_2+f_3) = O(\max(f_1, f_2, f_3))
+p_1; p_2; p_3 \in O(f_1) + O(f_2) + O(f_3) = O(\max(f_1, f_2, f_3))
 $$
 
 #### Loops and iterations
@@ -83,27 +112,27 @@ What if we perform some operation $p\in O(f)$ for each element in an array $A$, 
 It depends on the size of the array: if we assume that the array has $n$ elements, what is the complexity of the following loop?
 
 $$
-\mathbf{for} x \in A: p
+\mathbf{for}\ x \in A: p
 $$
 
 The loop performs $p$ once for every element in $A$, meaning that $p$ will be executed $n$ times.
 Therefore the complexity of a loop is:
 
 $$
-\mathbf{for} x \mathbf{in} A: p \in |A|\cdot O(f) = n\cdot O(f) = O(n\cdot f)
+(\mathbf{for}\ x \in A: p) \in |A|\cdot O(f) = n\cdot O(f) = O(n\cdot f)
 $$
 
 Note that $p$ can be a complex operation, for example a loop itself.
 If $p$ is a simple loop over A, with a constant-time operation in its body, then $p\in O(n)$.
-And then the outer loop $\mathbf{for} x \in A: p$ will be in $n\cdot O(n) = O(n^2)$.
+And then the outer loop ($\mathbf{for}\ x \in A: p$) will be in $n\cdot O(n) = O(n^2)$.
 
 #### Summary
 
 When we want to analyse the complexity of code fragments, the following three rules of thumb one will get us very far:
 
 - Atomic operations are always $O(1)$
-- Sequences $p;p'$ are translated to addition, $O(f+f') = O(\max(f,f'))$
-- Iterations $\mathbf{for} x \in A: p$, are translated to multiplication, $n\cdot O(f) = O(n\cdot f)$
+- Sequences $p;p'$ are translated to addition, O(\max(f,f'))$
+- Iterations, $\mathbf{for}\ x \in A: p$, are translated to multiplication, $n\cdot O(f) = O(n\cdot f)$
   (assuming that $n=|A|$)
 
 
@@ -310,4 +339,4 @@ $$
 
 The closed-form solution for this recurrence relation is $O(n)$.
 
-Recurrence relations are discussed further in section XX (chapter: analysis part 2).
+Recurrence relations are discussed further in section XX (chapter: analysis part 3).

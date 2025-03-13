@@ -42,7 +42,7 @@ After reading this chapter, you should understand:
 -   The concept of [growth rate]{.term} or
     [order of growth]{.term} of a (mathematical)
     function. How to compute and compare growth rates of functions.
-    Notations such as [big-Oh](#big-oh-notation){.term} to describe upper and lower bounds of growth rates.
+    Notations such as [big-$O$](#big-o-notation){.term} to describe upper and lower bounds of growth rates.
 -   The [asymptotic complexity]{.term} of an
     algorithm, which is the growth rate of its complexity. Sometimes,
     this is just called the growth rate of the algorithm.

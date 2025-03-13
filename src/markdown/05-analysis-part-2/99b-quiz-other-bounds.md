@@ -74,8 +74,8 @@ g(n) &=& \log n^2
 $$
 
 - [x] $f(n)$ is $\Omega(g(n))$
-- $f(n)$ is $\Theta(g(n))$
-- $f(n)$ is in $O(g(n))$
+- [ ] $f(n)$ is $\Theta(g(n))$
+- [ ] $f(n)$ is in $O(g(n))$
 
 ::: hints
 - if $\lim \frac{f(n)}{g(n)} \rightarrow 0$, then $f(n)$ is in $O(g(n))$.

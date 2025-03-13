@@ -1,4 +1,6 @@
 
+<!--
+
 ## Growth rates, part 2
 
 ::: TODO
@@ -75,3 +77,4 @@ to $2^n$.
 
 $2^{\log n} = n$.
 
+-->

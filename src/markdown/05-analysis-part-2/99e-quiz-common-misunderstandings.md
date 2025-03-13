@@ -20,7 +20,7 @@ completely understand the cost for the algorithm.
 ::::::::::::::::::::::::::::::
 
 
-
+<!--
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.
 
@@ -39,7 +39,7 @@ case you are measuring the lower and upper bounds.
 - This would be true for the worst case, but not the best case.
 :::
 ::::::::::::::::::::::::::::::
-
+-->
 
 
 :::::::::: question ::::::::::
@@ -62,7 +62,7 @@ the last position of the array, this is indeed the worst case.
 ::::::::::::::::::::::::::::::
 
 
-
+<!--
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.
 
@@ -81,7 +81,7 @@ situation (such as worst or best case).
 the best case is $\Omega(1)$.
 :::
 ::::::::::::::::::::::::::::::
-
+-->
 
 
 :::::::::: question ::::::::::
@@ -110,7 +110,7 @@ searched for.
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.
 
-The worst case for the sequencial search
+The worst case for the sequential search
 algorithm occurs when the array size tends to infinity.
 
 - [ ] True

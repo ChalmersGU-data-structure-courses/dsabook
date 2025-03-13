@@ -5,17 +5,14 @@
 - Prio 2: add another example
 :::
 
-
-:::: {#RunTimeGraph2}
-<inlineav id="GrowthRatesCON" src="AlgAnal/GrowthRatesCON.js" script="DataStructures/Plot.js" name="DataStructures/Plot.js AlgAnal/GrowthRatesCON" links="AlgAnal/GrowthRatesCON.css" height="450px" static/>
-
-<inlineav id="GrowthRatesZoomCON" src="AlgAnal/GrowthRatesZoomCON.js" script="DataStructures/Plot.js" name="DataStructures/Plot.js AlgAnal/GrowthRatesZoomCON" links="AlgAnal/GrowthRatesZoomCON.css" height="420px" static/>
-
-Two views of a graph illustrating the growth rates for six equations.
+Here are two views of a graph illustrating the growth rates for six equations.
 The bottom view shows in detail the lower-left portion of the top view.
 The horizontal axis represents input size. The vertical axis can
 represent time, space, or any other measure of cost.
-::::
+
+<inlineav id="GrowthRatesCON" src="AlgAnal/GrowthRatesCON.js" script="DataStructures/Plot.js" name="DataStructures/Plot.js AlgAnal/GrowthRatesCON" links="AlgAnal/GrowthRatesCON.css" height="450px" static/>
+
+<inlineav id="GrowthRatesZoomCON" src="AlgAnal/GrowthRatesZoomCON.js" script="DataStructures/Plot.js" name="DataStructures/Plot.js AlgAnal/GrowthRatesZoomCON" links="AlgAnal/GrowthRatesZoomCON.css" height="420px" static/>
 
 Despite the larger constant for the curve labeled $10 n$ in the figure
 above, $2 n^2$ crosses it at the relatively small value of $n = 5$. What
@@ -59,64 +56,73 @@ algorithms. Just be aware of the limitations to asymptotic analysis in
 the rare situation where the constant is important.
 
 
-### Classifying functions
+### Orders of growth
 
-Given functions $f$ and $g$ whose growth rates are expressed as
-algebraic equations, we might like to determine if one grows faster than
-the other.
-One way to do this is to take the limit of the quotient of the two functions as $n$ grows towards infinity:
+To be able to discuss orders of growth for algorithms we need to do some abstractions.
+The most important abstraction is to describe the runtime of an algorithm as a mathematical function from the input size to a number.
+We actually don't care how we encode the input size, as long as it is proportional to the actual size of the input.
+So we can, e.g., use the number of cells in an array as input, instead of trying to figure out the exact memory usage of the array.
+And in the same way, we don't care about the unit of measure for the result -- it can be actual runtime, in seconds, minutes or hours, but it's more common to think about the number of "basic operations".
+Already here we have abstracted away lots of things that relate to hardware, which is vital because we want to analyse algorithms, not implementations.
+So we will say things like "the runtime of algorithm $\mathbf{A}$ is $f(n)$".
 
-$$
-\lim_{n \rightarrow \infty} \frac{f(n)}{g(n)}
-$$
+Now, the easiest way to view order of growth is not as an absolute propery of an algorithm, but instead as a relation between functions.
+When we say that an algorithm is quadratic, we actually mean that the mathematical function $f(n)$ that describes the abstract runtime of the algorithm, is related to the quadratic function $g(n) = n^2$ in some way.
 
-There are three possibilities:
+So, how can we relate functions using orders of growth?
+We do this by saying that one function is a *bound* of another function.
+E.g., when we say that an algorithm $\mathbf{A}$ is quadratic, we actually mean that the function $n^2$ is an upper bound of $\mathbf{A}$.
+The following are the most common definitions of *upper*, *lower* and *tight* bounds:
 
-- If the quotient goes to $\infty$, then $f$ grows faster than $g$.
-  We say that $g$ is a *lower bound* of $f$, or that $f\in\Omega(g)$.
-- If the quotient goes to zero, then $g$ grows faster than $g$.
-  We say that $g$ is an *upper bound* of $f$, or that $f\in O(g)$.
-- If the quotient goes to some constant other than zero, then both functions grow at the same rate,
-  and we say that $f\in\Theta(g)$.
+Upper bound
+
+: $f$ is an upper bound of $g$ **iff** $f$ grows *at least as fast* as $g$, and we write this $f\in O(g)$
+
+Lower bound
+
+: $f$ is a lower bound of $g$ **iff** $f$ grows *at most as fast* as $g$, and we write this $f\in\Omega(g)$
+
+Tight bound
+
+: $f$ is a lower bound of $g$ **iff** both functions grow *at the same rate*, and we write this $f\in\Theta(g)$
+
+
+### Defining orders of growth
+
+But how do we define upper and lower bounds?
+First, if $g$ is an upper bound of $f$, then this should mean something like $f(n)\leq g(n)$ *in the long run*.
+What we mean by this is that whenever $n$ becomes sufficiently large, then $f(n)$ should not outgrow $g(n)$.
+
+But this is not all there is to it.
+We have already mentioned that we want to abstract away from constant factors --
+if algorithm $\mathbf{A}$ is twice as fast as algorithm $\mathbf{B}$, then they grow at the same rate, and we want our notation to capture that.
+So what we want to say is that $f(n)\leq k\cdot g(n)$, for some arbitrary constant $k$.
+
+Now we can give formal definitions of upper, lower and tight bounds:
+
+Upper bound
+
+: $f\in O(g)$ **iff** there exist positive numbers $k$ and $n_0$ such that $f(n) \leq k\cdot g(n)$ for all $n>n_0$
+
+Lower bound
+
+: $f\in\Omega(g)$ **iff** there exist positive numbers $k$ and $n_0$ such that $f(n)\geq k\cdot g(n)$ for all $n>n_0$
+
+: or equivalently: $f\in\Omega(g)$ **iff** $g\in O(f)$
+
+Tight bound
+
+: $f\in\Theta(g)$ **iff** there exist positive numbers $k_1$, $k_2$ and $n_0$ such that $k_1\cdot g(n) \leq f(n) \leq k_2\cdot g(n)$ for all $n>n_0$
+
+: or equivalently: $f\in\Theta(g)$ **iff** $f\in O(g) \wedge f\in\Omega(g)$
+
+(These definitions assume that $f$ and $g$ are *monotonically increasing*, i.e., that they never decrease when the input increases.
+But since we will only be using them for comparing computational resources, they will always be monotonically increasing.)
 
 ::: topic
 #### Example: Comparing two functions {-}
 
 Assume $f(n) = n^2$ and $g(n) = 1000n\log n$.
-Is $f$ in $O(g)$, $\Omega(g)$, or $\Theta(g)$?
-
-To answer this we can calculate the limit of the quotient $f(n)/g(n)$ when $n$ grows:
-
-$$
-\lim_{n \rightarrow \infty} \frac{f(n)}{g(n)} =
-\lim_{n \rightarrow \infty} \frac{n^2}{1000n\log n} =
-\frac{1}{1000}\cdot\lim_{n \rightarrow \infty} \frac{n}{\log n} = \infty
-$$
-
-because $n$ grows faster than $\log n$.
-
-Thus, $f\in\Omega(g)$ (or equivalently, $g\in O(f)$).
-
-This also shows that the constant factor $1000$ doesn't have any effect on the growth factor,
-because $\infty/1000$ is still $\infty$.
-:::
-
-### Definitions of orders of growth
-
-Using limits like above is one way of defining orders of growth, but in the context of algorithmic complexity it is more common with the following definitions:
-
-- $f\in O(g)$ iff there exists positive numbers $k$ and $n_0$ such that $f(n) \leq k\cdot g(n)$ for all $n>n_0$.
-- $f\in\Omega(g)$ iff there exists positive numbers $k$ and $n_0$ such that $f(n)\geq k\cdot g(n)$ for all $n>n_0$.
-    - or equivalently: $f\in\Omega(g)$ iff $g\in O(f)$
-- $f\in\Theta(g)$ iff there exists positive numbers $k_1$, $k_2$ and $n_0$ such that $k_1\cdot g(n) \leq f(n) \leq k_2\cdot g(n)$ for all $n>n_0$.
-    - or equivalently: $f\in\Theta(g)$ iff $f\in O(g)$ and $f\in\Omega(g)$
-
-(Note that these definitions assume that $f$ and $g$ are *positive* functions -- otherwise we have to take the absolute value too -- but since we will only be using them for comparing computational resources, they will always be positive.)
-
-::: topic
-#### Example: Comparing two functions (again) {-}
-
-Assume the same functions as before, $f(n) = n^2$ and $g(n) = 1000n\log n$.
 How can we use the definitions above to prove that $f\in\Omega(g)$?
 
 We have to find positive numbers $k$ and $n_0$ so that $f(n)\geq k\cdot g(n)$.
@@ -139,7 +145,7 @@ But this is usually not very useful knowledge, because we are more interested in
 Therefore the upper bound $O(f)$ is by far the most common complexity measure that people use, and this is what we will be using in this book.
 
 One could argue that $\Theta(f)$ would be an even better measure, because it gives more information about an algorithm.
-But it is much more difficult to reason about $\Theta(f)$, and therefore we (and almost all other algorithm books) use the upper bound notation $O(f)$.
+But it is much more difficult to reason about $\Theta(f)$, and therefore we will almost exclusively use the upper bound notation $O(f)$.
 
 #### Is the lower bound useless?
 
@@ -148,13 +154,4 @@ The main use case for $\Omega$ is when we want to classify *problems*, not algor
 One example is when proving that the lower bound for sorting is $\Omega(n\log n)$ (see section XX).
 But classifying problems is out of scope for this book, so we will not use $\Omega$ much.
 
-### Confusing the lower bound $\Omega$ with the best case
-
-::: TODO
-- (Peter) for me this is just confusing
-    - is it even possible to talk about best and worst case $\Omega$?
-    - would we lose something if we removed it?
-:::
-
-<inlineav id="LowerBoundCON" src="AlgAnal/LowerBoundCON.js" name="Lower Bounds visualization" links="AlgAnal/LowerBoundCON.css"/>
 

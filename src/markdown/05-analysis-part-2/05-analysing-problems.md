@@ -5,111 +5,81 @@
 - Prio 2: rewrite this text, more examples and help in how to analyse problems
 :::
 
-You most often use the techniques of "algorithm" analysis to analyze
-an [algorithm]{.term}, or the instantiation of
-an algorithm as a [program]{.term}. You can also
-use these same techniques to analyze the cost of a
-[problem]{.term}. The key question that we want
-to ask is: How hard is a problem? Certainly we should expect that in
-some sense, the problem of sorting a list of records is harder than the
-problem of searching a list of records for a given key value. Certainly
-the algorithms that we know for sorting some records seem to be more
-expensive than the algorithms that we know for searching those same
-records.
+You most often use the techniques of algorithm analysis to analyze an [algorithm]{.term}
+(or the instantiation of an algorithm as a [program]{.term}).
+But you can also use these same techniques to analyze the cost of a [problem]{.term}.
+The key question that we want to ask is: How hard is a problem?
 
-What we need are useful definitions for the
-[upper bound]{.term} and
-[lower bound]{.term} of a problem.
+Certainly we should expect that in some sense, the problem of sorting a list of records is harder than the problem of searching a list of records for a given key value.
+Certainly the algorithms that we know for sorting some records seem to be more expensive than the algorithms that we know for searching those same records.
 
-One might start by thinking that the upper bound for a problem is how
-hard any algorithm can be for the problem. But we can make algorithms as
-bad as we want, so that is not useful. Instead, what is useful is to say
-that a problem is only as hard as what we CAN do. In other words, we
-should define the upper bound for a problem to be the **best** algorithm
-that we know for the problem. Of course, whenever we talk about bounds,
-we have to say when they apply. We we really should say something like
-the best algorithm that we know in the worst case, or the best algorithm
-that we know in the average case.
+What we need are useful definitions for the upper bound and lower bound of a *problem*, instead of an algorithm.
 
-But what does it mean to give a lower bound for a problem? Lower bound
-refers to the minimum that any algorithm MUST cost. For example, when
-searching an unsorted list, we MUST look at every record. When sorting a
-list, we MUST look at every record (to even know if it is sorted).
+One might start by thinking that the upper bound for a problem is how hard any algorithm can be for the problem.
+But we can make algorithms as bad as we want, so that is not useful.
+Instead, what is useful is to say that a problem is only as hard as what we *can* do.
+In other words, we should define the upper bound for a problem to be the *best* algorithm that we know for the problem.
 
-It is much easier to show that an algorithm (or program) is in
-$\Omega(f(n))$ than it is to show that a problem is in $\Omega(f(n))$.
-For a problem to be in $\Omega(f(n))$ means that *every* algorithm that
-solves the problem is in $\Omega(f(n))$, even algorithms that we have
-not thought of! In other words, EVERY algorithm MUST have at least this
-cost. So, to prove a lower bound, we need an argument that is true, even
-for algorithms that we don't know.
+But what does it then mean to give a lower bound for a problem?
+Lower bound refers to the minimum that any algorithm *must* cost.
+For example, when searching an unsorted list, we *must* look at every record.
+When sorting a list, we *must* look at every record (to even know if it is sorted).
 
-So far all of our examples of algorithm analysis give "obvious"
-results, with big-Oh always matching $\Omega$. To understand how big-Oh,
-$\Omega$, and $\Theta$ notations are properly used to describe our
-understanding of a problem or an algorithm, it is best to consider an
-example where you do not already know a lot about the problem.
+So, how do upper and lower bounds relate to the key question -- how hard is a problem?
+As we have argued, the upper bound relies on our knowledge of the currently best algorithm.
+But how can we be certain that this algorithm is as good as it can be?
+To know this we have to know about the lower bound of the problem,
+i.e., the lower bound tells us how hard a problem is.
 
-Let us look ahead to analyzing the problem of sorting to see how this
-process works. What is the least possible cost for any sorting algorithm
-in the worst case? The algorithm must at least look at every element in
-the input, just to determine that the input is truly sorted. Thus, any
-sorting algorithm must take at least $cn$ time. For many problems, this
-observation that each of the $n$ inputs must be looked at leads to an
-easy $\Omega(n)$ lower bound.
+As a rule of thumb we can say:
 
-In your previous study of computer science, you have probably seen an
-example of a sorting algorithm whose running time is in $O(n^2)$ in the
-worst case. The simple Bubble Sort and Insertion Sort algorithms
-typically given as examples in a first year programming course have
-worst case running times in $O(n^2)$. Thus, the problem of sorting can
-be said to have an upper bound in $O(n^2)$. How do we close the gap
-between $\Omega(n)$ and $O(n^2)$? Can there be a better sorting
-algorithm? If you can think of no algorithm whose worst-case growth rate
-is better than $O(n^2)$, and if you have discovered no analysis
-technique to show that the least cost for the problem of sorting in the
-worst case is greater than $\Omega(n)$, then you cannot know for sure
-whether or not there is a better algorithm.
+- when we analyse an algorithm, we are interested in the *upper bound*, big-$O$
+- when we analyse a problem, we are instead interested in the *lower bound*, $\Omega$
 
-Many good sorting algorithms have running time that is in $O(n \log n)$
-in the worst case. This greatly narrows the gap. With this new
-knowledge, we now have a lower bound in $\Omega(n)$ and an upper bound
-in $O(n \log n)$. Should we search for a faster algorithm? Many have
-tried, without success. Fortunately (or perhaps unfortunately?),
-[we can prove that](#sorting-lower-bound){.term}
-any sorting algorithm must have running time in
-$\Omega(n \log n)$ in the worst case. This proof is one of the most
-important results in the field of algorithm analysis, and it means that
-no sorting algorithm can possibly run faster than $c n \log n$ for the
-worst-case input of size $n$. Thus, we can conclude that the problem of
-sorting is $\Theta(n \log n)$ in the worst case, because the upper and
-lower bounds have met.
+It is much easier to show that an algorithm (or program) is in $\Omega(f)$ than it is to show that a problem is in $\Omega(f)$.
+For a problem to be in $\Omega(f)$ means that *every* algorithm that solves the problem is in $\Omega(f)$, even algorithms that we have not thought of!
+In other words, *every* algorithm *must* have at least this cost.
+So, to prove a lower bound, we need an argument that is true, even for algorithms that we don't know.
 
-Knowing the lower bound for a problem does not give you a good
-algorithm. But it does help you to know when to stop looking. If the
-lower bound for the problem matches the upper bound for the algorithm
-(within a constant factor), then we know that we can find an algorithm
-that is better only by a constant factor.
+So far all of our examples of algorithm analysis give "obvious" results, with big-$O$ always matching $\Omega$.
+To understand how big-$O$, $\Omega$, and $\Theta$ notations are properly used to describe our understanding of a problem or an algorithm, it is best to consider an example where you do not already know a lot about the problem.
 
-So, to summarize: The upper bound for a problem is the best that you CAN
-do, while the lower bound for a problem is the least work that you MUST
-do. If those two are the same, then we say that we really understand our
-problem.
+Let us look ahead to analyzing the problem of sorting to see how this process works.
+What is the least possible cost for any sorting algorithm in the worst case?
+The algorithm must at least look at every element in the input, just to determine that the input is truly sorted.
+Thus, any sorting algorithm must take at least $\Omega(n)$ time.
+For many problems, this observation that each of the $n$ inputs must be looked at leads to an easy $\Omega(n)$ lower bound.
+
+In the previous chapter about sorting, you learned about some sorting algorithms whose running time is in $O(n^2)$ -- bubble sort, selection sort and insertion sort.
+But you also learned about the linearithmic sorting algorithms quicksort and mergesort with a running time in $O(n\log n)$.
+Thus, the problem of sorting can be said to have an upper bound in $O(n\log n)$.
+How do we close the gap between $\Omega(n)$ and $O(n\log n)$?
+Can there be even better sorting algorithms than mergesort and quicksort?
+If you can think of no algorithm whose worst-case growth rate is better than $O(n\log n)$, and if you have discovered no analysis technique to show that the least cost for the problem of sorting in the worst case is greater than $\Omega(n)$, then you cannot know for sure whether or not there is a better algorithm.
+
+Should we search for a faster algorithm?
+Many have tried, without success.
+Fortunately (or perhaps unfortunately?), we can prove that *any* sorting algorithm must have running time in $\Omega(n \log n)$ in the worst case.
+So, the problem of sorting has a linearithmic lower bound, which is the same as the upper bounds for the best sorting algorithms.
+Thus, we can conclude that the problem of sorting is $\Theta(n \log n)$ in the worst case, because the upper and lower bounds have met.
+
+Knowing the lower bound for a problem does not give you a good algorithm.
+But it does help you to know when to stop looking.
+If the lower bound for the problem matches the upper bound for the algorithm (within a constant factor), then we know that we can find an algorithm that is better only by a constant factor.
+
+So, to summarize: The upper bound for a problem is the best that you *can* do, while the lower bound for a problem is the least work that you *must* do.
+If those two are the same, then we can say that we really understand our problem.
 
 
 ### Case study: Lower bounds for sorting
 
-By now you have seen many analyses for algorithms. These analyses
-generally define the upper and lower bounds for algorithms in their
-worst and average cases. For many of the algorithms presented so far,
-analysis has been easy. This module considers a more difficult task: An
-analysis for the cost of a *problem* as opposed to an *algorithm*. The
-upper bound for a problem can be defined as the asymptotic cost of the
-fastest known algorithm. The lower bound defines the best possible cost
-for *any* algorithm that solves the problem, including algorithms not
-yet invented. Once the upper and lower bounds for the problem meet, we
-know that no future algorithm can possibly be (asymptotically) more
-efficient.
+By now you have seen many analyses for algorithms.
+These analyses generally define the worst-case upper bounds.
+For many of the algorithms presented so far, analysis has been quite easy.
+This section considers a more difficult task: An analysis for the cost of a *problem* as opposed to an *algorithm*.
+
+As we explained earlier, the lower bound defines the best possible cost for *any* algorithm that solves the problem, including algorithms not yet invented.
+Once we know the lower bound for the problem, we know that no future algorithm can possibly be (asymptotically) more efficient.
 
 A simple estimate for a problem's lower bound can be obtained by
 measuring the size of the input that must be read and the output that
@@ -122,12 +92,6 @@ value to recognize whether the input values are in sorted order. So,
 based on our current knowledge of sorting algorithms and the size of the
 input, we know that the *problem* of sorting is bounded by $\Omega(n)$
 and $O(n \log n)$.
-
-Computer scientists have spent much time devising efficient
-general-purpose sorting algorithms, but no one has ever found one that
-is faster than $O(n \log n)$ in the worst or average cases. Should we
-keep searching for a faster sorting algorithm? Or can we prove that
-there is no faster sorting algorithm by finding a tighter lower bound?
 
 This section presents one of the most important and most useful proofs
 in computer science: No sorting algorithm based on key comparisons can
@@ -149,19 +113,16 @@ for one problem from the asymptotic bounds of another is called a
 [reduction]{.term}.
 
 All of the sorting algorithms we have studied make decisions based on
-the direct comparison of two key values. For example, Insertion Sort
+the direct comparison of two key values. For example, [Insertion sort]{.term}
 sequentially compares the value to be inserted into the sorted list
 until a comparison against the next value in the list fails.
 
-The proof that any comparison sort requires $\Omega(n \log n)$
-comparisons in the worst case is structured as follows. First,
-comparison-based decisions can be modeled as the branches in a tree.
-This means that any sorting algorithm based on comparisons between
-records can be viewed as a binary tree whose nodes correspond to the
-comparisons, and whose branches correspond to the possible outcomes.
-Next, the minimum number of leaves in the resulting tree is shown to be
-the factorial of $n$. Finally, the minimum depth of a tree with $n!$
-leaves is shown to be in $\Omega(n \log n)$.
+The proof that any comparison sort requires $\Omega(n \log n)$ comparisons in the worst case is structured as follows:
+
+1. First, comparison-based decisions can be modeled as the branches in a tree.
+   This means that any sorting algorithm based on comparisons between records can be viewed as a binary tree whose nodes correspond to the comparisons, and whose branches correspond to the possible outcomes.
+2. Next, the minimum number of leaves in the resulting tree is shown to be the factorial of $n$.
+3. Finally, the minimum depth of a tree with $n!$ leaves is shown to be in $\Omega(n \log n)$.
 
 Before presenting the proof of an $\Omega(n \log n)$ lower bound for
 sorting, we first must define the concept of a
@@ -174,7 +135,7 @@ first is less than the second, then this is modeled as a left branch in
 the decision tree. In the case where the first value is greater than the
 second, the algorithm takes the right branch.
 
-Here is a Visualization that illustrates decision trees and the sorting
+Here is a visualization that illustrates decision trees and the sorting
 lower bound proof.
 
 <inlineav id="SortingLowerBoundCON" src="Sorting/SortingLowerBoundCON.js" name="Sorting Lower Bound Slideshow" links="Sorting/SortingLowerBoundCON.css"/>
