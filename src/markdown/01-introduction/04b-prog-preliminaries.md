@@ -26,7 +26,7 @@ We will demonstrate this translation for Python, Java, and Haskell.
 In the following sections, we will introduce fundamental programming concepts and, where applicable, specify the pseudocode conventions we use.
 For example, the following function is written in our pseudocode calculates the factorial of $n$:
 
-    function fact(n: int) -> int:
+    function fact(n: Int) -> Int:
         res = 1
         for i = 2 to n:
             res = res * i
@@ -39,9 +39,9 @@ Variables
 :   A name for a value, we use lower case alphabetic characters and allow
     underscore and numbers. A variable can have a type, but we don't specify it
     when it does not matter or is evident from the context. We use the following
-    notation: `var: <type>`.
+    notation: `var: <type>`. Note that type names begin with a capital letter.
 
-    Examples: `res`, `n: int`, `i`, `b0: boolean`, `res_n`
+    Examples: `res`, `n: Int`, `i`, `b0: Boolean`, `res_n`
 
 Types
 
@@ -52,11 +52,11 @@ Types
     instance, an array is always an array of a specific type.
 
     In our pseudocode, we sometimes use type variables to indicate that a
-    compound data type is parameterized by another type. For example, `list<A>`
+    compound data type is parameterized by another type. For example, `List<A>`
     represents a list containing elements of some type A. To distinguish type
     variables, we use capital letters.
 
-    Examples: the primitive type `int` or `bool`, or the compound type `array<bool>`
+    Examples: the primitive type `Int` or `Bool`, or the compound type `Array<Bool>`
 
 Literals
 
@@ -100,29 +100,28 @@ Statements
 
 ### Data types
 
-As mentioned earlier, a data type consists of a set of values and the operations that can be performed on them.
-Primitive data types are basic types provided by a programming language (including our pseudocode) and cannot be user-defined.
-Compound data types, however, are created by combining primitive types.
-Many programming languages provide built-in compound types, such as arrays and tuples, while also allowing users to define their own, using constructs like classes or algebraic data types.
-The next sections introduce the data types that we use in this book.
+As mentioned earlier, a data type consists of a set of values and the operations that can be performed on them. 
+Primitive data types are basic types provided by a programming language (including our pseudocode) and cannot be user-defined. 
+Some (aggregate) data structures, such as arrays and lists, are built into many languages and organize collections of values, while compound data types, such as classes or algebraic data types, allow users to define their own structures.
+The next sections introduce the data types used in this book.
 
 #### Primitive data types {-}
 
 We use the following primitive data types:
 
-- **boolean**: This data type has only two possible values: `true` and `false`.
+- **Boolean**: This data type has only two possible values: `true` and `false`.
   It supports logical operations such as conjunction (AND), disjunction (OR),
   exclusive OR (XOR), and negation.
-- **int**: Represents whole numbers. Unless specified otherwise, we assume
+- **Int**: Represents whole numbers. Unless specified otherwise, we assume
   integers of arbitrary size, though in some cases, we may use fixed-size
   integers (32-bit or 64-bit), which will be explicitly stated. Standard
   arithmetic operations, such as addition, multiplication, and integer division,
   are supported.
-- **float**: Represents floating-point numbers with limited precision, which
+- **Float**: Represents floating-point numbers with limited precision, which
   depends on the programming language and, in some cases, the underlying
   computer architecture. It supports common operations like addition,
   subtraction, multiplication, and division.
-- **char**: Represents individual characters. Unless otherwise specified, we
+- **Char**: Represents individual characters. Unless otherwise specified, we
   assume fixed-size Unicode encoding, though in some cases, 8-bit ASCII may be
   used.
 
@@ -157,8 +156,8 @@ This structure allows quick access to any element using its index by directly ca
 
 In our pseudocode, we use the following syntax to declare an array, retrieve an element, and update an element:
 
-    function addOne(input: array<int>) -> array<int>:
-        output = new array<int>[input.length]
+    function addOne(input: Array<Int>) -> Array<Int>:
+        output = Array<Int>[input.length]
         i = 0
         while i < input.length:
             output[i] = input[i] + 1
@@ -181,7 +180,7 @@ This means that when you assign one array variable to another, you are copying t
 
 For example:
 
-    a = new array<int>[3]
+    a = Array<Int>[3]
     a[0] = 10
 
     b = a        // 'b' now refers to the same array as 'a'
@@ -207,53 +206,101 @@ In Python we can use the `range(start, end)` function for this functionality.
 #### Strings {-}
 
 A string is an immutable sequence of characters, meaning that once defined (e.g., `str = "data"`), it cannot be modified.
-In this sense, strings behave like values, similar to integers or booleans.
+In this sense, strings behave like values, similar to integers or boolean values.
 While you can access individual characters using indexing, you cannot change them.
 Any modification, such as concatenation or replacement, results in the creation of a new string rather than altering the original one.
 Because strings are internally represented as arrays, operations like concatenation and comparison are not constant-time and may involve overhead depending on the string length.
 
-#### Tuples and records
+#### Tuples {-}
+
+A tuple is an _ordered_, _immutable_ collection of elements. 
+Unlike arrays, which allow modification of its elements, tuples cannot be changed after they are created. 
+They can store multiple values of different types and are often used when a fixed grouping of related data is needed.
+
+We use the following notation in our pseudocode:
+
+    point = (3, 4)                // A tuple with two elements
+    person = ("Geert", 30, True)  // A tuple with different data types  
+    print(point[0])               // Accessing first element  
+    point[0] = 5                  // This is not allowed, tuples are immutable  
+
+Tuples are useful for returning multiple values from a function, grouping related data, and working with fixed collections that should not be modified.
+
+#### Interfaces {-}
+
+In our pseudocode, we introduce the concept of an _interface_ to distinguish between an abstract data type (ADT) and its concrete implementation. 
+An interface defines a set of operations that a data type must support, without specifying how those operations are implemented. 
+This allows us to describe the behaviour of a data type separately from its internal representation.
+
+An abstract data type (ADT) is a high-level description of a data structure that focuses on what operations are available rather than how they are executed. 
+For example, an ADT for a stack may define operations such as `push` and `pop`,but it does not specify whether the stack is implemented using an array or a linked list.
+A concrete implementation provides the actual data structure and the logic for performing the operations defined in the interface. 
+Different implementations of the same interface can exist, each with different performance characteristics.
 
 ::: TODO
-- what do we assume about tuples / records?
-- python has tuples, records are dicts (or dataclasses)
-- java doesn't have either
-- how about key/value-pairs?
+Maybe add a forward reference to stacks?
 :::
 
+We use the following notation for interfaces in our pseudocode:
 
-### Classes and objects
+    interface Stack<T>:
+        push(value: T)
+        pop() -> T
 
-::: TODO
-What we assume you know:
-- class and instance
-- interface == abstract class
-- constructor
-- instance variable and method
-- this/self
+Using an interface, we can define a data type's expected behaviour and provide multiple implementations in our pseudocode. 
+By using interfaces, we clarify the conceptual structure of a data type, making it easier to explain, compare, and analyse different implementations.
 
-Should we treat "dataclasses" special? I.e., can we have a Python-inspired simple format:
-```
-class Node<Value>
-    value: Value
-    left: Node
-    right: Node
-```
-instead of using a constructor:
-```
-class Node<Value>
-    constructor(value, left, right):
-        this.value = value
-        this.left = left
-        this.right = right
-```
+#### Compound data types {-}
 
-What you don't need to know:
-- multiple inheritance
-- class variables, class methods, static methods
-- difference between interface and abstract class
-- referring to the superclass, calling the super instance
-:::
+We often need to combine different data types to store complex information.
+These are known as _compound data types_. 
+Nearly every programming language supports compound data types, although the specific implementation can vary between languages. 
+For example, in Java, compound data types are typically created using classes, which allow you to combine instance variables of potentially different types.
+In Python, you can achieve this using classes, dataclasses, or dictionaries.
+In functional programming languages, such as Haskell, you can define algebraic data types to combine values in various ways.
+
+Our goal is to keep things simple and explain the concept in a way that can be easily translated into the syntax of any programming language you prefer. 
+For this reason, we have adopted a straightforward notation for compound data types in our pseudocode:
+
+    datatype ArrayStack<T>(capacity) implements Stack<T>:
+        data = Array<T>[capacity]
+        size = 0
+
+        function push(value: T):  // no safety checks
+            data[size] = value
+            size = size + 1
+
+        function pop() -> T:
+            size = size - 1
+            return data[size]
+
+This example uses an array to store the stack elements and demonstrates how to define a compound data type. 
+We define a new compound data type using the keyword `datatype`.
+A `datatype` can implement an `interface`, making it a subtype of the interface.
+
+To create a concrete instance of a `datatype`, we use the following notation:
+
+    Stack<Int> stack = ArrayStack<Int>(100)
+
+We can then call member functions like this:
+
+    next = stack.pop()
+
+Note that, in our pseudocode, we simplify by omitting details we consider irrelevant, such as constructor handling, default values, and other specifics.
+We intentionally avoid complex features like multiple inheritance or static methods, focusing instead on clarity and easy translation to your preferred programming language.
+
+We assume familiarity with the following concepts:
+
+- Classes and instances
+- Constructors
+- Members (instance variables) and member functions (methods)
+- The self reference
+
+There is no need to know the following for our purposes:
+
+- Multiple inheritance
+- Class variables, class methods, static methods
+- Referencing a superclass or using the super keyword
 
 ### Mutable and immutable objects
 

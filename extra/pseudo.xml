@@ -62,6 +62,7 @@
 			<item>method</item>
 			<item>global</item>
 			<item>lambda</item>
+			<item>datatype</item>
 		</list>
 		<list name="operators">
 			<item>and</item>
