@@ -4,6 +4,8 @@
 ::: TODO
 - Prio 1: all sections need major rewrites/updates, almost everything is missing
 - Prio 2: introduce and describe the pseudocode we use in this book
+
+we use indent based blocks, and don't use curly braces to denote blocks
 :::
 
 This section explains the pseudocode that we will use throughout the book.
@@ -134,12 +136,6 @@ In addition to the primitive data types mentioned earlier, there is also `null` 
 
 #### Arrays {-}
 
-::: TODO
-- 0-based indexing
-- Pseudocode for creating, looking up, setting, etc
-- Slicing is not a primitive - we will not use it
-:::
-
 Arrays are one of the fundamental data structures in programming because they are directly supported by the computer’s memory system and offer excellent performance. 
 Accessing or modifying an element in an array is extremely fast, making arrays important for many algorithms.
 
@@ -159,24 +155,44 @@ One key advantage of arrays is their efficient retrieval of elements.
 When an array is allocated, memory is reserved in a contiguous block, ensuring that all elements are stored next to each other. 
 This structure allows quick access to any element using its index by directly calculating its memory location.
 
-We use the following syntax in our pseudocode to declare an array, and to retrieve and update an element in an array:
+In our pseudocode, we use the following syntax to declare an array, retrieve an element, and update an element:
 
     function addOne(input: array<int>) -> array<int>:
         output = new array<int>[input.length]
-        i = 
+        i = 0
         while i < input.length:
             output[i] = input[i] + 1
+            i = i + 1
         return output
-        
-As the above example 
-We use zero-based indexing in this book. 
 
-reference, assignment will make a copy of the reference, not the array, aliasing
+This example highlights several key features of arrays. 
+First, our pseudocode follows zero-based indexing, meaning the first element is at index 0, the second at index 1, and so on. 
+The last element is located at an index equal to the array’s length minus one.
+The length of an array can be accessed using the length attribute. 
+This value is stored alongside the array and does not need to be computed manually.
 
+To retrieve an element from an array, we use square bracket notation. For instance, `input[2]` retrieves the third element of the input array.
+Similarly, updating an element follows the same notation: `input[2] = 10` assigns a new value to the third element.
 
-**Array slices**
+In the example above, we explicitly declare the types of array variables to illustrate our pseudocode conventions. However, in some cases, we may omit type annotations for simplicity.
 
-A prominent feature in the popular programming language Python are _array slices_.
+**References** In most programming languages, including our pseudocode, arrays are stored as references rather than direct values. 
+This means that when you assign one array variable to another, you are copying the reference (or pointer) to the original array, not the array itself.
+
+For example:
+
+    a = new array<int>[3]
+    a[0] = 10
+
+    b = a        // 'b' now refers to the same array as 'a'
+    b[0] = 20
+
+    print(a[0])  // Outputs 20, because 'a' and 'b' point to the same array  
+
+Since `b` holds a reference to the same array as `a`, any modifications made through `b` will also affect `a`. 
+If you want to create a separate copy, you need to explicitly copy the array element by element.
+
+**Array slices** A prominent feature in the popular programming language Python are _array slices_.
 You can use a slice to select a part of an array, for example, the first ten elements.
 However, such a slice creates a new array and copies the selected elements from the original array.
 This means that using slices is quite slow.
