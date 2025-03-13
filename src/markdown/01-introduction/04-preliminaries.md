@@ -257,7 +257,7 @@ SA modules use the following notation for units of measure.
 Spaces are not placed between the number and the unit abbreviation when a power of two is intended.
 Thus a disk drive of size 25 gigabytes (where a gigabyte is intended as $2^{30}$ bytes) will be written as "25GB".
 Spaces are used when a decimal value is intended.
-An amount of 2000 bits would therefore be written "2 Kb" while "2KB" represents 2048 bits.
+An amount of 2000 bits would therefore be written "2 Kb" while "2Kb" represents 2048 bits.
 2000 milliseconds is written as 2000 ms.
 Note that in this book large amounts of storage are nearly always measured in powers of two and times in powers of ten.
 
