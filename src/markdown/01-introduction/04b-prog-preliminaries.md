@@ -2,9 +2,6 @@
 ## Programming preliminaries
 
 ::: TODO
-- Prio 1: all sections need major rewrites/updates, almost everything is missing
-- Prio 2: introduce and describe the pseudocode we use in this book
-
 we use indent based blocks, and don't use curly braces to denote blocks
 :::
 
@@ -52,11 +49,11 @@ Types
     instance, an array is always an array of a specific type.
 
     In our pseudocode, we sometimes use type variables to indicate that a
-    compound data type is parameterized by another type. For example, `List<A>`
+    compound data type is parameterized by another type. For example, `List of A`
     represents a list containing elements of some type A. To distinguish type
     variables, we use capital letters.
 
-    Examples: the primitive type `Int` or `Bool`, or the compound type `Array<Bool>`
+    Examples: the primitive type `Int` or `Bool`, or the collection type `Array of Bool`
 
 Literals
 
@@ -156,8 +153,8 @@ This structure allows quick access to any element using its index by directly ca
 
 In our pseudocode, we use the following syntax to declare an array, retrieve an element, and update an element:
 
-    function addOne(input: Array<Int>) -> Array<Int>:
-        output = Array<Int>[input.length]
+    function addOne(input: Array of Int) -> Array of Int:
+        output = Array[input.length] of Int
         i = 0
         while i < input.length:
             output[i] = input[i] + 1
@@ -180,7 +177,7 @@ This means that when you assign one array variable to another, you are copying t
 
 For example:
 
-    a = Array<Int>[3]
+    a = Array[3] of Int
     a[0] = 10
 
     b = a        // 'b' now refers to the same array as 'a'
@@ -243,7 +240,7 @@ Maybe add a forward reference to stacks?
 
 We use the following notation for interfaces in our pseudocode:
 
-    interface Stack<T>:
+    interface Stack of T:
         push(value: T)
         pop() -> T
 
@@ -262,8 +259,8 @@ In functional programming languages, such as Haskell, you can define algebraic d
 Our goal is to keep things simple and explain the concept in a way that can be easily translated into the syntax of any programming language you prefer. 
 For this reason, we have adopted a straightforward notation for compound data types in our pseudocode:
 
-    datatype ArrayStack<T>(capacity) implements Stack<T>:
-        data = Array<T>[capacity]
+    datatype ArrayStack(capacity) of T implements Stack of T:
+        data = Array[capacity] of T
         size = 0
 
         function push(value: T):  // no safety checks
@@ -280,7 +277,7 @@ A `datatype` can implement an `interface`, making it a subtype of the interface.
 
 To create a concrete instance of a `datatype`, we use the following notation:
 
-    Stack<Int> stack = ArrayStack<Int>(100)
+    Stack of Int stack = ArrayStack(100) of Int
 
 We can then call member functions like this:
 
@@ -291,7 +288,7 @@ We intentionally avoid complex features like multiple inheritance or static meth
 
 We assume familiarity with the following concepts:
 
-- Classes and instances
+- Classes and instances (objects)
 - Constructors
 - Members (instance variables) and member functions (methods)
 - The self reference
@@ -302,15 +299,25 @@ There is no need to know the following for our purposes:
 - Class variables, class methods, static methods
 - Referencing a superclass or using the super keyword
 
-### Mutable and immutable objects
+### Mutable and immutable data {-}
 
-::: TODO
-- immutable: primitives, strings, tuples
-- mutable: arrays, objects
-    - all data structures!
-:::
+For many algorithms, the ability to use mutable data can lead to more efficient solutions. 
+However, mutability comes with its drawbacks: it increases the risk of making mistakes, and immutable data is often easier to reason about and debug.
+
+In our pseudocode, we assume the following data types are immutable:
+
+- Primitive data types (such as integers and characters), 
+- Strings
+- Tuples
+
+On the other hand, the following data types are mutable:
+
+- Arrays
+- Compound data types
 
 ### Functions
+
+
 
 ::: TODO
 - what we assume they know about functions
