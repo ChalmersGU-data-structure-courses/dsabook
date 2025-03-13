@@ -1,13 +1,19 @@
 
 ## Programming preliminaries
 
-### Pseudocode
-
 ::: TODO
-- show pseudocode for each introduced term below
+- Prio 1: all sections need major rewrites/updates, almost everything is missing
+- Prio 2: introduce and describe the pseudocode we use in this book
 :::
 
-There is a difference between knowing a programming language and understanding programming itself. The ultimate goal of studying data structures and algorithms is to develop programming skills, regardless of the language used.
+This section explains the pseudocode that we will use throughout the book.
+In addition, we introduce the programming preliminaries that we assume you are familiar with.
+If you're comfortable with these preliminaries, you can safely skip ahead to the next section.
+
+### Pseudocode
+
+There is a difference between knowing a programming language and understanding programming itself.
+The ultimate goal of studying data structures and algorithms is to develop programming skills, regardless of the language used.
 
 To keep our examples accessible, this book uses pseudocode rather than a specific programming language like Python or Java.
 Pseudocode provides a structured yet informal way to describe algorithms, focusing on logic and flow without strict syntax rules.
@@ -16,7 +22,7 @@ The pseudocode in this book is designed to be straightforward to convert into re
 We will demonstrate this translation for Python, Java, and Haskell.
 
 In the following sections, we will introduce fundamental programming concepts and, where applicable, specify the pseudocode conventions we use.
-For example, the following function written in pseudocode calculates the factorial of $n$:
+For example, the following function is written in our pseudocode calculates the factorial of $n$:
 
     function fact(n: int) -> int:
         res = 1
@@ -118,11 +124,69 @@ We use the following primitive data types:
   assume fixed-size Unicode encoding, though in some cases, 8-bit ASCII may be
   used.
 
+In addition to the primitive data types mentioned earlier, there is also `null` (referred to as `None` in some languages), a special value that represents the absence of a value or an unknown state.
+
 <!--
 ::: TODO
 - Python-specific details: no fixed-size ints, chars == strings, doesn't distinguish between int and float
 :::
 -->
+
+#### Arrays {-}
+
+::: TODO
+- 0-based indexing
+- Pseudocode for creating, looking up, setting, etc
+- Slicing is not a primitive - we will not use it
+:::
+
+Arrays are one of the fundamental data structures in programming because they are directly supported by the computer’s memory system and offer excellent performance. 
+Accessing or modifying an element in an array is extremely fast, making arrays important for many algorithms.
+
+::: note
+*Note to Python programmers*: in Python, arrays are called *lists*, and are written like this: `[1,2,3]`. 
+There is one difference between arrays and Python lists: in most programming languages, any given array has a fixed size. 
+However, Python lists can change in size -- for example, the `append` method adds a new element to the list, increasing its size.
+In this book, we will work with arrays that have a _fixed_ size.
+Python lists are so-called [dynamic arrays](#dynamic-array-based-lists).
+:::
+
+Before using an array, you must declare it and specify its size.
+Once created, an array has a fixed size and cannot be resized.
+This limitation means that operations like concatenating two arrays require creating a new array large enough to hold all elements.
+
+One key advantage of arrays is their efficient retrieval of elements. 
+When an array is allocated, memory is reserved in a contiguous block, ensuring that all elements are stored next to each other. 
+This structure allows quick access to any element using its index by directly calculating its memory location.
+
+We use the following syntax in our pseudocode to declare an array, and to retrieve and update an element in an array:
+
+    function addOne(input: array<int>) -> array<int>:
+        output = new array<int>[input.length]
+        i = 
+        while i < input.length:
+            output[i] = input[i] + 1
+        return output
+        
+As the above example 
+We use zero-based indexing in this book. 
+
+reference, assignment will make a copy of the reference, not the array, aliasing
+
+
+**Array slices**
+
+A prominent feature in the popular programming language Python are _array slices_.
+You can use a slice to select a part of an array, for example, the first ten elements.
+However, such a slice creates a new array and copies the selected elements from the original array.
+This means that using slices is quite slow.
+Instead, we create a sequence of indexes and use these to index into an array and retrieve the elements we want.
+In Python we can use the `range(start, end)` function for this functionality.
+
+::: TODO
+- discussion: should 'end' point to the last element or the one after
+    - (how do we do in this book?)
+:::
 
 #### Strings {-}
 
@@ -131,85 +195,6 @@ In this sense, strings behave like values, similar to integers or booleans.
 While you can access individual characters using indexing, you cannot change them.
 Any modification, such as concatenation or replacement, results in the creation of a new string rather than altering the original one.
 Because strings are internally represented as arrays, operations like concatenation and comparison are not constant-time and may involve overhead depending on the string length.
-
-#### Arrays
-
-::: TODO
-- shorten this section (perhaps move some to the sorting intro)
-- Have to know the size and type in advance
-- 0-based indexing
-- Cannot resize
-- Pseudocode for creating, looking up, setting, etc
-- Python-specific detail: no real arrays
-- Slicing is not a primitive - we will not use it
-:::
-
-*Arrays* are one of the fundamental data structures in programming.
-This is because they are natively supported by the computer,
-and have good performance: reading or writing an element of the array
-takes very little time. Many important algorithms use arrays.
-
-::: note
-*Note to Python programmers*: in Python, arrays are called *lists*,
-and are written like this: `[1,2,3]`. There is one difference
-between arrays and Python lists: in most programming languages, any
-given array has a fixed size. However, Python lists can change in
-size -- for example, the `append` method adds a new element to the
-list, increasing its size. In this chapter, we will work with arrays
-that have a fixed size. Python lists are so-called
-[dynamic arrays](#dynamic-array-based-lists).
-:::
-
-In this chapter we will study two algorithmic problems and how to solve
-them efficiently using arrays:
-
-Searching
-:   Given a list of items, check if a given item is present
-    in the list. There are two kinds of search problems:
-
-    *Membership testing*: The search algorithm is given an item to search for,
-    and should return *true* or *false* depending on whether the item
-    is found. For example, a spellchecker: given a list of all
-    valid English words, search the list for a given string.
-
-    *Lookup*: The items are typically objects, and each object has a field
-    called the *key*. The search algorithm is given a key, and
-    should return the item having that key (or a reference to
-    the item, such as the position in the list). For example,
-    a database: given a list of people, find the person having
-    a given personal identity number.
-
-Sorting
-:   Given a list of items, put them in ascending order.
-    Again, there are two kinds of sorting problems:
-
-    *Natural sorting*: Here, the items have some kind of natural order.
-    For example, sorting a list of words in alphabetical order.
-
-    *Key-based sorting*: Here, each item has a *key*, and we want to
-    sort the items so that the keys come in ascending order.
-    For example, sorting a list of towns by population.
-
-Note that if we search or sort according to a *key*, it doesn't have to
-be explicitly stored in the object, but can instead be calculated on
-demand. E.g., if we want to sort a list of words case-insensitively, we
-can use a lower-case transformation when doing the comparisons. This is
-usually done by a [comparator]{.term} (in Java), or by a
-[key function](https://docs.python.org/3/howto/sorting.html#key-functions)
-(in Python).
-
-This chapter concentrates on *membership testing* and *natural sorting*,
-but all the algorithms in this chapter work just as well for *lookup*
-and *key-based sorting*.
-
-#### Array slices
-
-::: TODO
-- don't use slicing = copying
-- instead: use a range (start, end)
-- discussion: should 'end' point to the last element or the one after
-    - (how do we do in this book?)
-:::
 
 #### Tuples and records
 
