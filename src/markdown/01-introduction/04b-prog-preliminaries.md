@@ -299,7 +299,7 @@ There is no need to know the following for our purposes:
 - Class variables, class methods, static methods
 - Referencing a superclass or using the super keyword
 
-### Mutable and immutable data {-}
+#### Mutable and immutable data {-}
 
 For many algorithms, the ability to use mutable data can lead to more efficient solutions. 
 However, mutability comes with its drawbacks: it increases the risk of making mistakes, and immutable data is often easier to reason about and debug.
@@ -315,7 +315,7 @@ On the other hand, the following data types are mutable:
 - Arrays
 - Compound data types
 
-### Functions {-}
+### Functions
 
 We have already seen several examples of functions. 
 A function starts with the keyword function, followed by its name.
@@ -330,7 +330,11 @@ Functions can also be recursive, meaning they call themselves within their own b
 Recursion is often used in divide-and-conquer algorithms, though it is not limited to them. 
 When analysing recursive functions, it is important to remember that function calls are not free—they consume memory on the stack, which can become a limiting factor if recursion depth is too large.
 
-### Computer memory {-}
+### TODO
+describe return type
+###
+
+### Computer memory
 
 To run a program we need to first load the program in memory before we can start executing.
 A program uses memory as well to store information that it needs for calculations.
