@@ -315,22 +315,46 @@ On the other hand, the following data types are mutable:
 - Arrays
 - Compound data types
 
-### Functions
+### Functions {-}
 
+We have already seen several examples of functions. 
+A function starts with the keyword function, followed by its name.
+Functions can have zero or more parameters, and we assume a call-by-value evaluation strategy.
 
+It is important to note that aggregate types (such as arrays) and compound data types are reference types. 
+When assigning an array or a compound data type to a variable, what gets stored is a reference to the actual data, not a copy of the data itself. 
+This means that if you pass an array as an argument to a function, the reference is copied, not the entire array. 
+As a result, any modifications made to the array inside the function will persist when the function returns.
 
-::: TODO
-- what we assume they know about functions
-- recursion, mutual recursion
-- no named arguments, or default arguments?
-- call-by-value, call-by-name: mutable/immutable arguments
-:::
+Functions can also be recursive, meaning they call themselves within their own body. 
+Recursion is often used in divide-and-conquer algorithms, though it is not limited to them. 
+When analysing recursive functions, it is important to remember that function calls are not free—they consume memory on the stack, which can become a limiting factor if recursion depth is too large.
 
+### Computer memory {-}
 
-### Computer memory
+To run a program we need to first load the program in memory before we can start executing.
+A program uses memory as well to store information that it needs for calculations.
+A program has access to two different memory regions: the stack and the heap. 
+The stack is a memory region that stores local variables, function call information, and return values.
+When a function is called, its local variables and return address are pushed onto the stack, and when the function exits, they are removed. 
+Since the stack follows a last-in, first-out (LIFO) order, memory allocation and deallocation happen in a predictable way, making it efficient.
 
-::: TODO
-- Stack vs heap
-- Internal memory vs external memory
-- Caching and locality (memory/data locality)
-:::
+The heap, on the other hand, is a more flexible memory area used for _dynamic_ allocation. 
+Memory allocated on the heap persists until explicitly freed or garbage-collected, making it useful for objects with longer lifetimes. 
+Unlike the stack, the heap does not follow a strict order for allocation and deallocation, which can lead to fragmentation and slower access times.
+While stack allocation is fast and automatic, heap allocation requires more overhead and manual memory management.
+
+The stack and heap are part of the so called _internal memory_ and consists of high-speed storage components like Random Access Memory (RAM) and cache that are directly accessible by the CPU. 
+This memory is volatile, meaning data is lost when power is turned off, and is used to store actively running programs and data. 
+Because of its speed, internal memory is important for efficient program execution.
+
+External memory, or secondary storage, includes non-volatile devices such as hard drives, solid-state drives, and USB storage. 
+Unlike internal memory, it persists data even when the system is powered off and is used for long-term storage.
+External memory usually has a much larger capacity than internal memory, but it is significantly slower because data must be fetched and loaded into RAM before it can be processed.
+
+**Caching**
+
+Caching is a technique used to accelerate data access by temporarily storing frequently used information in a smaller, high-speed memory area called a cache. 
+When a program requests data, the processor first checks whether it is available in the cache. 
+If the data is found, it can be retrieved almost instantly, avoiding the need to access slower main memory. 
+Cache memory is located very close to the processor, often integrated directly into the CPU, allowing it to fetch values in just a few clock cycles, significantly improving performance.
