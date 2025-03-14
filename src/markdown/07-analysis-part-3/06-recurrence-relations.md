@@ -3,7 +3,7 @@
 
 ::: TODO
 - Prio 2: emphasize the main takeaway: recurrences are a way to model recursive functions
-- Prio 3: throughout this module, there are references to equations, both on this page and in the Summations module - these should be made into proper cross-references rather than hard-coded equation numbers
+- Prio 3: throughout this section, there are references to equations, both on this page and in the Summations section - these should be made into proper cross-references rather than hard-coded equation numbers
 - Prio 3: example: matrix multiplication, Strassen's algorithm
 :::
 

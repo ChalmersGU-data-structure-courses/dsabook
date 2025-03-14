@@ -112,8 +112,7 @@ situations:
     hash on the value of the first character because this is likely to
     be unevenly distributed.
 
-In the next module, you will see several examples of hash functions that
-illustrate these points.
+In the rest of this section, and in section XX, you will see several examples of hash functions that illustrate these points.
 
 ### Invariants
 

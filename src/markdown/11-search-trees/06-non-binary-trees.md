@@ -23,7 +23,7 @@ arbitrary number of children, they become much harder to implement than
 binary trees. We consider such trees in this chapter. To distinguish
 them from binary trees, we use the term [general tree]{.term}.
 
-In this module we will examine general tree terminology and define
+In this section we will examine general tree terminology and define
 a basic class for general trees.
 
 

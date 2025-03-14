@@ -7,7 +7,7 @@
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.
 
-Mergesort (as the code is written in this module)
+Mergesort (as the code is written in this chapter)
 is a stable sorting algorithm. Recall that a stable sorting
 algorithm maintains the relative order of records with equal keys.
 
@@ -30,7 +30,7 @@ Mergesort is easier to implement when operating on a linked list than on an arra
 - [ ] False
 
 ::: hints
-- Look at the length of the code given in the modules.
+- Look at the length of the code given in the chapter.
 - There are a lot of details to deal with when implementing Mergesort on an array.
 :::
 ::::::::::::::::::::::::::::::
@@ -119,7 +119,7 @@ In which cases are the time complexities the same for Mergesort?
 :::::::::: question ::::::::::
 The order of the input records has what
 impact on the number of comparisons required by Mergesort
-(as presented in this module)?
+(as presented in this chapter)?
 
 - [x] None
 - [ ] There is a constant factor difference

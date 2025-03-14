@@ -143,7 +143,7 @@ each.
 
 :::::::::: question ::::::::::
 Why does function `preorder2()` presented in
-the Traversal module make only half as many recursive calls
+the Traversal section make only half as many recursive calls
 as function `preorder()`?
 
 - [x] Because half of the pointers are null

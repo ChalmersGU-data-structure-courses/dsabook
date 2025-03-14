@@ -7,7 +7,7 @@
 - Prio 3: less code, more explanations
 :::
 
-This module presents a probabilistic search structure called the
+This section presents a probabilistic search structure called the
 [skip list]{.term}. Like the
 [BST]{.term}, skip lists are designed to
 overcome a basic limitation of array-based and linked lists: Either

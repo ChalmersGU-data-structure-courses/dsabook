@@ -7,7 +7,7 @@
 - Prio 3: look over the text for space requirements (file 03b)
 :::
 
-In this module we examine one way to implement binary tree nodes. By
+In this section we examine one way to implement binary tree nodes. By
 definition, all binary tree nodes have two children, though one or both
 children can be empty. Binary tree nodes typically contain a value
 field, with the type of the field depending on the application. The most

@@ -243,7 +243,7 @@ Therefore, the subset operator does not define a total order on the powerset of 
 We now define several mathematical terms and concepts, providing a reference for future use.
 
 **Units of measure:**
-SA modules use the following notation for units of measure.
+We will use the following notation for units of measure.
 "B" will be used as an abbreviation for bytes, "b" for bits, "KB" for kilobytes $(2^{10} = 1024$ bytes), "MB" for megabytes $(2^{20}$ bytes) "GB" for gigabytes $(2^{30}$ bytes) and "ms" for milliseconds (a millisecond is 1/1000 of a second).
 Spaces are not placed between the number and the unit abbreviation when a power of two is intended.
 Thus a disk drive of size 25 gigabytes (where a gigabyte is intended as $2^{30}$ bytes) will be written as "25GB".
@@ -1128,7 +1128,7 @@ total.
 <!--
 ### Chapter Summary Questions
 
-Here are some practice questions for the modules in this chapter.
+Here are some practice questions for the sections in this chapter.
 
 .. avembed:: Exercises/Background/MathBgSumm.html ka
    :long_name: Math Background Summary Questions

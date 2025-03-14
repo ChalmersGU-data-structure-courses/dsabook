@@ -1,7 +1,7 @@
 
 ### Space requirements
 
-This module presents techniques for calculating the amount of
+This section presents techniques for calculating the amount of
 [overhead]{.term} required by a
 [binary tree]{.term}, based on its node
 implementation. Recall that overhead is the amount of space necessary to

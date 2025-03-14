@@ -30,8 +30,8 @@ for.
 7.  Modeling relationships such as family trees, business or military
     organizations, and scientific taxonomies.
 
-The rest of this module covers some basic graph terminology. The
-following modules will describe fundamental representations for graphs,
+The next section covers some basic graph terminology. The
+rest of the chapter will describe fundamental representations for graphs,
 provide a reference implementation, and cover core graph algorithms
 including traversal, topological sort, shortest paths algorithms, and
 algorithms to find the minimal-cost spanning tree. Besides being useful

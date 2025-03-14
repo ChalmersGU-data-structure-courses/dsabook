@@ -6,7 +6,7 @@
 - Prio 1: explanation and pseudocode for deletion
 :::
 
-In this module we present one of the two traditional implementations for
+In this section we present one of the two traditional implementations for
 lists, usually called a [linked list]{.term}.
 The linked list uses [dynamic memory allocation]{.term}, that is, it allocates memory for new list elements as
 needed. The following diagram illustrates the linked list concept. There

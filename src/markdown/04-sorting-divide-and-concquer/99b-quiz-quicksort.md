@@ -6,7 +6,7 @@
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.
 
-Quicksort (as the code is written in this module)
+Quicksort (as the code is written in this chapter)
 is a stable sorting algorithm. Recall that a stable sorting
 algorithm maintains the relative order of records with equal keys.
 
@@ -79,7 +79,7 @@ In which cases are the time complexities the same for Quicksort?
 :::::::::: question ::::::::::
 The order of the input records has what
 impact on the number of comparisons required by Quicksort
-(as presented in this module)?
+(as presented in this chapter)?
 
 - [x] There is a big difference, the asymptotic running time can change
 - [ ] None
@@ -145,7 +145,7 @@ A disadvantage of Quicksort is:
 
 
 :::::::::: question ::::::::::
-(For the version of the algorithm as presented in this module)
+(For the version of the algorithm as presented in this chapter)
 What is the running time of Quicksort when the input is an array where all record values are equal?
 
 - [x] $O(n^2)$

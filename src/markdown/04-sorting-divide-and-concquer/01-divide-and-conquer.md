@@ -51,7 +51,7 @@ The concept can be difficult to grasp because it requires you to think
 about problems in a new way.
 When first learning recursion, it is common for people to think a lot
 about the recursive process.
-We will spend some time in these modules going over the details for
+We will spend some time in this section going over the details for
 how recursion works.
 But when writing recursive functions, it is best to
 stop thinking about how the recursion works beyond the recursive

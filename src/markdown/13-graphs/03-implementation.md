@@ -13,7 +13,7 @@ We next turn to the problem of implementing a general-purpose
 [graph]{.term} class. There are two traditional
 approaches to representing graphs: The
 [adjacency matrix]{.term} and the
-[adjacency list]{.term}. In this module we will
+[adjacency list]{.term}. In this section we will
 show actual implementations for each approach. We will begin with an
 interface defining an ADT for graphs that a given implementation must
 meet.

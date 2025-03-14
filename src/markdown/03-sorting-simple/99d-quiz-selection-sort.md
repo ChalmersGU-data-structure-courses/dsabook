@@ -26,7 +26,7 @@ Selection sort is simple, but less efficient than the best sorting algorithms.
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.
 
-Selection Sort (as the code is written in this module)
+Selection Sort (as the code is written in this chapter)
 is a stable sorting algorithm. Recall that a stable sorting
 algorithm maintains the relative order of records with equal keys.
 
@@ -108,7 +108,7 @@ In which cases are the time complexities the same for Selection Sort?
 :::::::::: question ::::::::::
 The order of the input records has what
 impact on the number of comparisons required by Selection Sort
-(as presented in this module)?
+(as presented in this chapter)?
 
 - [x] None
 - [ ] There is a constant factor difference
@@ -176,7 +176,7 @@ matter what the order of the input array.
 
 :::::::::: question ::::::::::
 Which statement best characterizes
-Selection Sort (as the code is written in this module)?
+Selection Sort (as the code is written in this chapter)?
 Recall that a stable sorting algorithm maintains the relative
 order of records with equal keys.
 

@@ -14,7 +14,7 @@ From the [full binary tree theorem]{.term},
 we know that a large fraction of the space in a typical
 binary tree node implementation is devoted to structural
 [overhead]{.term}, not to storing data. This
-module presents a simple, compact implementation for
+section presents a simple, compact implementation for
 [complete binary trees](#complete-binary-tree){.term}. Recall that complete binary trees have all levels except
 the bottom filled out completely, and the bottom level has all of its
 nodes filled in from left to right. Thus, a complete binary tree of $n$

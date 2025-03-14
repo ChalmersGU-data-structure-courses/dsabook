@@ -133,7 +133,7 @@ Recall that any recursive function requires the following:
 > 1.  The base case and its action.
 > 2.  The recursive case and its action.
 
-In this module, we will talk about some details related to correctly and
+In this section, we will talk about some details related to correctly and
 clearly implementing recursive tree traversals.
 
 #### Base case

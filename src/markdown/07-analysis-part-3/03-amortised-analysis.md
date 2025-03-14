@@ -8,7 +8,7 @@
 - Prio 3: make self-organising lists a "case study"
 :::
 
-This module presents the concept of
+This section presents the concept of
 [amortized analysis]{.term}, which is the
 analysis for a series of operations taken as a whole. In particular,
 amortized analysis allows us to deal with the situation where the

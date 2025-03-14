@@ -8,7 +8,7 @@ Here are some review questions to check your understanding of Bubble Sort.
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.
 
-Bubble Sort (as the code is written in this module) is a stable sorting algorithm.
+Bubble Sort (as the code is written in this chapter) is a stable sorting algorithm.
 Recall that a stable sorting algorithm maintains the relative order of records with equal keys.
 
 - [x] True
@@ -27,7 +27,7 @@ higher-indexed neighbor, then the two values are swapped.
 
 :::::::::: question ::::::::::
 In which cases are the time complexities the
-same for Bubble Sort (as the algorithm is presented in this module)?
+same for Bubble Sort (as the algorithm is presented in this chapter)?
 
 - [x] Worst, Average and Best
 - [ ] Worst and Best
@@ -45,7 +45,7 @@ same for Bubble Sort (as the algorithm is presented in this module)?
 :::::::::: question ::::::::::
 The order of the input records has what
 impact on the number of comparisons required by Bubble Sort
-(as presented in this module)?
+(as presented in this chapter)?
 
 - [x] None.
 - [ ] There is a constant factor difference.
@@ -62,7 +62,7 @@ according to the order of the array input values?
 
 :::::::::: question ::::::::::
 What is the worst-case time for
-Bubble Sort (as the algorithm is presented in this module)
+Bubble Sort (as the algorithm is presented in this chapter)
 to sort an array of $n$ records?
 
 - [x] $O(n^2)$
@@ -118,7 +118,7 @@ when the input array has values that are in reverse sort order?
 
 :::::::::: question ::::::::::
 What is the running time of Bubble Sort
-(as the algorithm is presented in this module)
+(as the algorithm is presented in this chapter)
 when the input is an array that has already been sorted?
 
 - [x] $O(n^2)$

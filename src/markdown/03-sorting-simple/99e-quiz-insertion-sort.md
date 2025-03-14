@@ -7,7 +7,7 @@
 Answer TRUE or FALSE.
 
 Insertion Sort (as the code is written in this
-module) is a stable sorting algorithm. Recall that a stable sorting
+chapter) is a stable sorting algorithm. Recall that a stable sorting
 algorithm maintains the relative order of records with equal keys.
 
 - [x] True
@@ -89,7 +89,7 @@ In which cases are the growth rates the same for Insertion Sort?
 
 :::::::::: question ::::::::::
 The order of the input records has what impact on the number of comparisons
-required by Insertion Sort (as presented in this module)?
+required by Insertion Sort (as presented in this chapter)?
 
 - [x] There is a big difference, the asymptotic running time can change
 - [ ] None

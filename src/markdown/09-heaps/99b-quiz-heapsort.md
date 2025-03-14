@@ -7,7 +7,7 @@
 Answer TRUE or FALSE.
 
 Heapsort (as the code is written in this
-module) is a stable sorting algorithm. Recall that a stable sorting
+chapter) is a stable sorting algorithm. Recall that a stable sorting
 algorithm maintains the relative order of records with equal keys.
 
 - [ ] True
@@ -61,7 +61,7 @@ In which cases are the time complexities the same for Heapsort?
 (Assuming no duplicate key values)
 The order of the input records has what
 impact on the number of comparisons required by Heapsort
-(as presented in this module)?
+(as presented in this chapter)?
 
 - [x] There is a constant factor difference
 - [ ] None

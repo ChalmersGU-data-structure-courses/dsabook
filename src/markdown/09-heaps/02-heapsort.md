@@ -24,8 +24,7 @@ nodes into the tree. Quicksort implements this same concept in a much
 more efficient way. But there is also the possibility that the BST might
 be unbalanced, leading to a $O(n^2)$ worst-case running time. And
 this is the same problem as Quicksort has with chosing a good pivot (see
-the section "Quicksort Analysis" in the
-[Quicksort] module).
+the section "Quicksort Analysis" in chapter XX).
 
 Instead, a good sorting algorithm can be devised based on a tree
 structure more suited to the purpose. In particular, we would like the
