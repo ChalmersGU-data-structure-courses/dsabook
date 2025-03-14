@@ -12,6 +12,7 @@
 ::: TODO
 - counting sort: keys are finite range of integers
 - bucket sort: hashable keys (refer to hashing chapter)
+- binsort (referred in chapter 7)
 :::
 
 ### Sorting strings (or other kinds of sequences)
