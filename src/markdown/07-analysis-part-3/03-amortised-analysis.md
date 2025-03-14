@@ -105,7 +105,7 @@ operations, which is at most $m_1$, the number of *push*
 operations. This total cost can therefore be expressed as
 
 $$
-m_1 + (m_2 + m_1) = O(m_1 + m_2)
+m_1 + (m_2 + m_1) \in O(m_1 + m_2)
 $$
 
 A similar argument was used in our analysis for the partition function

@@ -240,7 +240,7 @@ $$
 
 This expression also has the name $\phi$. What does this say about the
 growth rate of the Fibonacci sequence? It is exponential, with
-$f(n) = O(\phi^n)$. More precisely, $f(n)$ converges to
+$f(n) \in O(\phi^n)$. More precisely, $f(n)$ converges to
 
 $$
 \frac{\phi^n - (1 - \phi)^n}{\sqrt{5}}
@@ -363,10 +363,10 @@ depends on the ratio $r = b^k/a$. There are three cases.
 Case (1)
 
 :   $r<1$. From Equation (4) of section XX,
-    $ \sum_{i=0}^{m} r^i < 1/(1-r) $, which is a constant.
+    $\sum_{i=0}^{m} r^i < 1/(1-r)$, which is a constant.
 
     Thus,
-    $ \mathbf{T}(n) = O(a^m) = O(n^{log_b a}) $.
+    $\mathbf{T}(n) \in O(a^m) = O(n^{log_b a})$.
 
 Case (2)
 
@@ -375,18 +375,18 @@ Case (2)
     Also note that since we defined $n = b^m$, then $m = \log_b n$.
 
     Thus,
-    $ \sum_{i=0}^{m} r^i = m + 1 = \log_bn + 1 $.
+    $\sum_{i=0}^{m} r^i = m + 1 = \log_bn + 1$.
 
     Because $a^m = n^{\log_b a} = n^k$, we have
-    $ \mathbf{T}(n) = O(n^{\log_ba}\log_b n) = O(n^k\log_b n) $.
+    $\mathbf{T}(n) \in O(n^{\log_ba}\log_b n) = O(n^k\log_b n)$.
 
 Case (3)
 
 :   $r>1$. From Equation (5) of section XX,
-    $ \sum_{i=0}^{m} r^i = \frac{r^{m+1} - 1}{r - 1} = O(r^m) $.
+    $\sum_{i=0}^{m} r^i = \frac{r^{m+1} - 1}{r - 1} \in O(r^m)$.
 
     Thus,
-    $ \mathbf{T}(n) = O(a^m r^m) = O(a^m (b^k/a)^m) = O(b^{km}) = O(n^k) $.
+    $\mathbf{T}(n) \in O(a^m r^m) = O(a^m (b^k/a)^m) = O(b^{km}) = O(n^k)$.
 
 
 We can summarize the above derivation as the following theorem,
@@ -401,7 +401,7 @@ $\mathbf{T}(n) = a\mathbf{T}(n/b) + cn^k, \mathbf{T}(1) = c$, the following
 relationships hold.
 
 $$
-\mathbf{T}(n) =
+\mathbf{T}(n) \in
 \left\{ \begin{array}{ll}
     O(n^{\log_ba})  &  \textrm{if}\ a > b^k \\
     O(n^k\log_b n)  &  \textrm{if}\ a = b^k \\
@@ -419,10 +419,10 @@ re-deriving the solution for the recurrence.
 #### Example: Using the Master Theorem {-}
 
 Apply the Master Theorem to solve
-$ \mathbf{T}(n) = 3\mathbf{T}(n/5) + 8n^2 $.
+$\mathbf{T}(n) = 3\mathbf{T}(n/5) + 8n^2$.
 
 Because $a=3$, $b=5$, $c=8$, and $k=2$, we find that $3<5^2$. Applying
-case (3) of the theorem, $\mathbf{T}(n) = O(n^2)$.
+case (3) of the theorem, $\mathbf{T}(n) \in O(n^2)$.
 :::
 
 ::: topic
@@ -438,7 +438,7 @@ $$
 $$
 
 Because $a=2$, $b=2$, $c=1$, and $k=1$, we find that $2 = 2^1$. Applying
-case (2) of the theorem, $\mathbf{T}(n) = O(n \log n)$.
+case (2) of the theorem, $\mathbf{T}(n) \in O(n \log n)$.
 :::
 
 ### Case study: Average-case analysis of Quicksort
@@ -516,5 +516,5 @@ $$
 $$
 
 for $\mathcal{H}_{n+1}$, the Harmonic Series. From Equation (10) of section XX,
-$\mathcal{H}_{n+1} = O(\log n)$, so the final solution is
+$\mathcal{H}_{n+1} \in O(\log n)$, so the final solution is
 $O(n \log n)$.

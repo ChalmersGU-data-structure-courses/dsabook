@@ -13,7 +13,7 @@ precise, for every $u, v \in \mathbf{V}$, calculate $d(u, v)$.
 One solution is to run [Dijkstra's algorithm]{.term} for finding the
 [shortest path](#single-source-shortest-paths-problem){.term} $|\mathbf{V}|$ times, each time computing the shortest path
 from a different start vertex. If $\mathbf{G}$ is sparse (that is,
-$|\mathbf{E}| = O(|\mathbf{V}|)$) then this is a good solution,
+$|\mathbf{E}| \in O(|\mathbf{V}|)$) then this is a good solution,
 because the total cost will be
 $O(|\mathbf{V}|^2 + |\mathbf{V}||\mathbf{E}| \log
 |\mathbf{V}|) = O(|\mathbf{V}|^2 \log |\mathbf{V}|)$ for the

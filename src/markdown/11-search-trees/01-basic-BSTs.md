@@ -263,7 +263,7 @@ then each insertion will cost on average $O(\log n)$, for a total
 cost of $O(n \log n)$. However, if the records are inserted in
 order of increasing value, then the resulting tree will be a chain of
 height $n$. The cost of insertion in this case will be
-$\sum_{i=1}^{n} i = O(n^2)$.
+$\sum_{i=1}^{n} i \in O(n^2)$.
 
 Traversing a BST costs $O(n)$ regardless of the shape of the tree.
 Each node is visited exactly once, and each child pointer is followed
