@@ -117,13 +117,13 @@ proof. To aid us in finding such patterns, we can construct a table
 showing the first few numbers of each function, and the result of
 dividing one by the other, as follows.
 
-| $n$      |  1 |  2 |  3 |  4 |  5 |  6 |  7 |  8 |  9 | 10 |
-|---------:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| $f(n)$   |  1 |  3 |  6 | 10 | 15 | 21 | 28 | 36 | 46 | 57 |
-| $n$      |  1 |  2 |  3 |  4 |  5 |  6 |  7 |  8 |  9 | 10 |
-| $f(n)/n$          | 2/2 | 3/2 | 4/2 | 5/2 | 6/2 | 7/2 | 8/2 | 9/2 | 10/2 | 11/2 |
-| $f(n\!-\!1)$      |   0 |   1 |   3 |   6 |  10 |  15 |  21 |  28 |  36  |  46  |
-| $f(n)/f(n\!-\!1)$ |  -- | 3/1 | 4/2 | 5/3 | 6/4 | 7/5 | 8/6 | 9/7 | 10/8 | 11/9 |
+              $n$    1     2     3     4     5     6     7     8      9     10
+-----------------  ----- ----- ----- ----- ----- ----- ----- ----- ------ ------
+           $f(n)$    1     3     6    10    15    21    28    36     46     57
+              $n$    1     2     3     4     5     6     7     8      9     10
+         $f(n)/n$   2/2   3/2   4/2   5/2   6/2   7/2   8/2   9/2   10/2   11/2
+     $f(n\!-\!1)$    0     1     3     6    10    15    21    28     36     46
+$f(n)/f(n\!-\!1)$   --    3/1   4/2   5/3   6/4   7/5   8/6   9/7   10/8   11/9
 
 Dividing by both $n$ and $f(n-1)$ happen to give us useful patterns to
 work with. $\frac{f(n)}{n} = \frac{n+1}{2}$, and
@@ -171,10 +171,10 @@ $$
 We will begin by writing out a table listing the first few values of the
 summation, to see if we can detect a pattern.
 
-| $n$ |  1  |  2  |  3  |  4  |  5  |  6  |
-|:----|:---:|:---:|:---:|:---:|:---:|:---:|
-| $f(n)$   | 1/2 | 3/4 | 7/8 | 15/16 | 31/32 | 63/64 |
-| $1-f(n)$ | 1/2 | 1/4 | 1/8 | 1/16  | 1/32  | 1/64  |
+     $n$    1     2     3      4       5       6
+--------  ----- ----- ----- ------- ------- -------
+  $f(n)$   1/2   3/4   7/8   15/16   31/32   63/64
+$1-f(n)$   1/2   1/4   1/8    1/16    1/32    1/64
 
 By direct inspection of the second line of the table, we might recognize
 the pattern $f(n) = \frac{2^n-1}{2^n}$. A simple induction proof can

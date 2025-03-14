@@ -16,16 +16,16 @@ Selection Sort in terms of their required number of comparisons and
 swaps in the best, average, and worst cases. The running time for each
 of these sorts is $\Theta(n^2)$ in the average and worst cases.
 
-|                   |     Insertion     |      Bubble       |     Selection     |
-|------------------:|:-----------------:|:-----------------:|:-----------------:|
-|  **Comparisons:** |                   |                   |                   |
-|         Best case |   $\Theta(n^2)$   |   $\Theta(n^2)$   |   $\Theta(n^2)$   |
-|      Average case |   $\Theta(n^2)$   |   $\Theta(n^2)$   |   $\Theta(n^2)$   |
-|        Worst case |   $\Theta(n^2)$   |   $\Theta(n^2)$   |   $\Theta(n^2)$   |
-|        **Swaps:** |                   |                   |                   |
-|         Best case |        $0$        |       $0$         |    $\Theta(n)$    |
-|      Average case |   $\Theta(n^2)$   |   $\Theta(n^2)$   |    $\Theta(n)$    |
-|        Worst case |   $\Theta(n^2)$   |   $\Theta(n^2)$   |    $\Theta(n)$    |
+            &nbsp;    Insertion     Bubble      Selection
+------------------  ------------- ----------- -------------
+  **Comparisons:**
+         Best case    $O(n^2)$     $O(n^2)$     $O(n^2)$
+      Average case    $O(n^2)$     $O(n^2)$     $O(n^2)$
+        Worst case    $O(n^2)$     $O(n^2)$     $O(n^2)$
+        **Swaps:**
+         Best case         $0$          $0$      $O(n)$
+      Average case    $O(n^2)$     $O(n^2)$      $O(n)$
+        Worst case    $O(n^2)$     $O(n^2)$      $O(n)$
 
 The remaining sorting algorithms presented in this tutorial are
 significantly better than these three under typical conditions. But

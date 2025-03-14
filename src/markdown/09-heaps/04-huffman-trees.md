@@ -49,21 +49,21 @@ Relative frequencies for the 26 letters of the alphabet as they appear
 in a selected set of English documents. "Frequency" represents the
 expected frequency of occurrence per 1000 letters, ignoring case.
 
-| Letter | Frequency | Letter | Frequency |
-|:------:|:---------:|:------:|:---------:|
-|    A   |    77     |    N   |      67   |
-|    B   |    17     |    O   |      67   |
-|    C   |    32     |    P   |      20   |
-|    D   |    42     |    Q   |       5   |
-|    E   |   120     |    R   |      59   |
-|    F   |    24     |    S   |      67   |
-|    G   |    17     |    T   |      85   |
-|    H   |    50     |    U   |      37   |
-|    I   |    76     |    V   |      12   |
-|    J   |     4     |    W   |      22   |
-|    K   |     7     |    X   |       4   |
-|    L   |    42     |    Y   |      22   |
-|    M   |    24     |    Z   |       2   |
+ Letter    Frequency    Letter    Frequency
+--------  -----------  --------  -----------
+    A         77           N           67
+    B         17           O           67
+    C         32           P           20
+    D         42           Q            5
+    E        120           R           59
+    F         24           S           67
+    G         17           T           85
+    H         50           U           37
+    I         76           V           12
+    J          4           W           22
+    K          7           X            4
+    L         42           Y           22
+    M         24           Z            2
 
 :::
 ::::
@@ -127,10 +127,10 @@ have been combined into one.
 
 The relative frequencies for eight selected letters.
 
-||
-|:--------------|:--:|:--:|:---:|:--:|:--:|:--:|:--:|:--:|
-| **Letter**    |  C |  D |  E  |  K |  L |  M |  U |  Z |
-| **Frequency** | 32 | 42 | 120 |  7 | 42 | 24 | 37 |  2 |
+--------------- -------- -------- -------- -------- -------- -------- -------- --------
+**Letter**          C        D       E        K         L        M        U       Z
+**Frequency**      32       42      120       7        42       24       37       2
+--------------- -------- -------- -------- -------- -------- -------- -------- --------
 
 :::
 ::::

@@ -112,11 +112,11 @@ We know that the factorial function grows exponentially. How does it
 compare to $2^n$? To $n^n$? Do they all grow "equally fast" (in an
 asymptotic sense)? We can begin by looking at a few initial terms.
 
-| $n$   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
-|------:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| $2^n$ | 2 | 4 | 8 | 16 | 32 | 64 | 128 | 256 | 512 |
-| $n!$  | 1 | 2 | 6 | 24 | 120 | 720 | 5040 | 40320 | 362880 |
-| $n^n$ | 1 | 4 | 9 | 256 | 3125 | 46656 | 823543 | 16777216 | 387420489 |
+   $n$   1   2   3     4       5        6         7            8             9
+------ --- --- --- ----- ------- -------- --------- ------------ -------------
+ $2^n$   2   4   8    16      32       64       128          256           512
+  $n!$   1   2   6    24     120      720     5,040       40,320       362,880
+ $n^n$   1   4   9   256   3,125   46,656   823,543   16,777,216   387,420,489
 
 We can also look at these functions in terms of their recurrences.
 
@@ -202,10 +202,10 @@ $f(0) = f(1) = 1$.
 In this case it is useful to compare the ratio of $f(n)$ to $f(n-1)$.
 The following table shows the first few values.
 
-| $n$    |  1 |  2 |  3 |  4 |  5 |  6 |  7 |
-|-------:|---:|---:|---:|---:|---:|---:|---:|
-| $f(n)$ |  1 |  2 |  3 |  5 |  8 | 13 | 21 |
-| $f(n)/f(n-1)$ | 1 | 2 | 1.5 | 1.666 | 1.625 | 1.615 | 1.619 |
+          $n$    1    2     3       4      5      6      7
+------------- ---- ---- ----- ------- ------ ------ ------
+       $f(n)$    1    2     3       5      8     13     21
+$f(n)/f(n-1)$    1    2   1.5   1.666  1.625  1.615  1.619
 
 If we continue for more terms, the ratio appears to converge on a value
 slightly greater then 1.618. Assuming $f(n)/f(n-1)$ really does converge

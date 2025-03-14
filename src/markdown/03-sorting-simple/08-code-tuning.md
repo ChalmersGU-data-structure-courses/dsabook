@@ -174,17 +174,17 @@ Empirical comparison of proposed optimizations to quadratic sort
 implementations. Each sorting algorithm is run on a random integer array
 with 20,000 items. Times are in seconds.
 
-| Sort               |  Java  | Python |
-|:-------------------|:------:|:------:|
-| **Insertion sort** |        |        |
-| Standard           |  0.20  |   6.4  |
-| Shifting           |  0.16  |   3.5  |
-| **Bubble sort**    |        |        |
-| Standard           |  0.33  |   8.5  |
-| Check swaps        |  0.32  |   8.9  |
-| **Selection sort** |        |        |
-| Standard           |  0.23  |   2.8  |
-| Check swaps        |  0.22  |   2.7  |
+Sort                  Java    Python
+-------------------- ------- --------
+**Insertion sort**
+Standard              0.20      6.4
+Shifting              0.16      3.5
+**Bubble sort**
+Standard              0.33      8.5 
+Check swaps           0.32      8.9
+**Selection sort**
+Standard              0.23      2.8
+Check swaps           0.22      2.7
 
 :::
 
