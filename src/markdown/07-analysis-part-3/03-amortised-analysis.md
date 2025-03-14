@@ -2,8 +2,10 @@
 ## Amortised analysis
 
 ::: TODO
-- Prio 2: merge (or relate) with previous section
-- Prio 2: make self-organising lists a "case study"
+- Prio 1: replace the examples with: a queue as a pair of stacks
+- Prio 1: describe the potential method better
+- Prio 3: merge (or relate) with previous section
+- Prio 3: make self-organising lists a "case study"
 :::
 
 This module presents the concept of
