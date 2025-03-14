@@ -11,7 +11,7 @@ fact that it can easily become unbalanced, so that some nodes are deep
 in the tree. In fact, it is possible for a BST with $n$ nodes to have a
 depth of $n$, making it no faster to search in the worst case than a
 linked list. If we could keep the tree balanced in some way, then search
-cost would only be $\Theta(\log n)$, a huge improvement.
+cost would only be $O(\log n)$, a huge improvement.
 
 One solution to this problem is to adopt another search tree structure
 instead of using a BST at all. An example of such an alternative tree

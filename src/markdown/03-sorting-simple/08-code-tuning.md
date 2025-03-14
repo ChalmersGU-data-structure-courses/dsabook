@@ -10,7 +10,7 @@ Since sorting is such an important application, it is natural for
 programmers to want to optimize their sorting code to run faster. Of
 course all quadratic sorts (Insertion Sort, Bubble Sort and Selection
 Sort) are relatively slow. Each has (as the name "quadratic" suggests)
-$\Theta(n^2)$ worst case running time. The best way to speed them up is
+$O(n^2)$ worst case running time. The best way to speed them up is
 to find a better sorting algorithm. Nonetheless, there have been many
 suggestions given over the years about how to speed up one or another of
 these particular algorithms. There are useful lessons to be learned
@@ -96,15 +96,15 @@ to get a field out of a more complex object.
 
 It is also true that tracking the last swap position can substantially
 improve the best case cost. In fact, tracking the last swap position
-makes the best case cost of Bubble Sort to be only $\Theta(n)$. But
+makes the best case cost of Bubble Sort to be only $O(n)$. But
 going out of one's way to artificially improve the best case has
 dubious value if doing so imposes additional cost on nearly all other
 inputs. Note that we could nominally convert *any* sorting algorithm to
-have a best-case cost of $\Theta(n)$ by simply adding code at the
+have a best-case cost of $O(n)$ by simply adding code at the
 beginning that checks if the list is already sorted. It should be
 obvious that this is a waste of time, even though it has the (small)
 possibility of winning big. Unlike Insertion Sort whose best case cost
-is naturally $\Theta(n)$ and whose time increases in proportion to how
+is naturally $O(n)$ and whose time increases in proportion to how
 "out of order" the list is, the number of iterations avoided by swap
 checking in Bubble Sort is sensitive to the detailed placements of the
 out-of-order records. In fact, if we took a sorted list and moved the
@@ -133,8 +133,8 @@ Sort is always $n-1$ in the best, average and worst cases. It might seem
 like a good idea to test if the positions are the same before calling
 `swap`, especially since Selection Sort's claim to fame is its low
 number of swaps. Actually, we can't expect this to ever make much
-difference since we are talking about $\Theta(n)$ actions within
-$\Theta(n^2)$ total steps, an inconsequential fraction. The other
+difference since we are talking about $O(n)$ actions within
+$O(n^2)$ total steps, an inconsequential fraction. The other
 consideration is whether this is could typically be expected to save
 time even when just considering the time needed to do the swaps. Doing
 the check to see if a swap is necessary also takes some time. It is only

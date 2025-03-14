@@ -10,7 +10,7 @@ where each internal node has either 2 children or 3 children. Key
 values are ordered to maintain the
 [binary search tree property]{.term}. The
 2-3 tree is always height balanced, and its insert, search, and
-remove operations all have $\Theta(\log n)$ cost.
+remove operations all have $O(\log n)$ cost.
 
 ### 80/20 rule
 
@@ -633,7 +633,7 @@ neighbors are placed onto the queue.
 
 ### bubble sort
 
-A simple sort that requires $Theta(n^2)$ time in
+A simple sort that requires $O(n^2)$ time in
 [best](#best-case){.term},
 [average](#average-case){.term}, and
 [worst](#worst-case){.term} cases. Even an
@@ -1111,8 +1111,8 @@ graph if there is at least one path from any
 ### constant running time
 
 The cost of a function whose running time is not related to its
-input size. In Theta notation, this is traditionally written as
-$\Theta(1)$.
+input size. In big-$O$ notation, this is traditionally written as
+$O(1)$.
 
 ### constructive induction
 
@@ -1827,7 +1827,7 @@ A sort that relies solely on exchanges (swaps of adjacent records)
 to reorder the list.
 [insertion sort]{.term} and
 [bubble sort]{.term} are examples of
-exchange sorts. All exchange sorts require $\Theta(n^2)$ time in the
+exchange sorts. All exchange sorts require $O(n^2)$ time in the
 [worst case]{.term}.
 
 ### expanding the recurrence
@@ -2024,7 +2024,7 @@ secondary storage.
 An algorithm to solve the
 [all-pairs shortest paths problem]{.term}.
 It uses the [dynamic programming]{.term}
-algorithmic technique, and runs in $\Theta(n^3)$ time. As with any
+algorithmic technique, and runs in $O(n^3)$ time. As with any
 [dynamic programming]{.term} algorithm, the
 key issue is to avoid duplicating work by using proper bookkeeping
 on the algorithm's progress through the solution space. The basic
@@ -2372,10 +2372,10 @@ it is a complete binary tree, a heap is nearly always implemented
 using an [array]{.term} rather than an
 explicit tree structure. To add a new value to a heap, or to remove
 the extreme value (the max value in a max-heap or min value in a
-min-heap) and update the heap, takes $\Theta(\log n)$ time in the
+min-heap) and update the heap, takes $O(\log n)$ time in the
 [worst case]{.term}. However, if given all
 of the values in an unordered array, the values can be re-arranged
-to form a heap in only $\Theta(n)$ time. Due to its space and time
+to form a heap in only $O(n)$ time. Due to its space and time
 efficiency, the heap is a popular choice for implementing a
 [priority queue]{.term}.
 
@@ -2383,7 +2383,7 @@ Uncommonly, *heap* is a synonym for [free store]{.term}.
 
 ### heapsort
 
-A sorting algorithm that costs $\Theta(n \log n)$ time in the
+A sorting algorithm that costs $O(n \log n)$ time in the
 [best](#best-case){.term},
 [average](#average-case){.term}, and
 [worst](#worst-case){.term} cases. It tends
@@ -2577,9 +2577,9 @@ in sorted order.
 
 ### insertion sort
 
-A sorting algorithm with $\Theta(n^2)$
+A sorting algorithm with $O(n^2)$
 [average](#average-case){.term} and
-[worst case]{.term} cost, and $Theta(n)$
+[worst case]{.term} cost, and $O(n)$
 [best case]{.term} cost. This best case cost
 makes it useful when we have reason to expect the input to be nearly
 sorted.
@@ -2658,7 +2658,7 @@ the subarray as a fraction of the distance between the known key
 values. So it will next check that computed location, thus narrowing
 the search for the next iteration. Given reasonable key value
 distribution, the [average case]{.term} for interpolation search will
-be $\Theta(\log \log n)$, or better than the expected cost of
+be $O(\log \log n)$, or better than the expected cost of
 [binary search]{.term}. Nonetheless, binary
 search is expected to be faster in nearly all practical situations
 due to the small difference between the two costs, combined with the
@@ -2742,7 +2742,7 @@ fixed number of positions until a value is found that is bigger than
 sequential search over the subarray that is now known to contain the
 search key. The optimal number of steps to jump will be $\sqrt{n}$
 for an array of size $n$, and the [worst case]{.term}
-cost will be $\Theta(\sqrt{n})$.
+cost will be $O(\sqrt{n})$.
 
 ### K-ary tree
 
@@ -3241,7 +3241,7 @@ between the key values of record pairs.
 
 ### mergesort
 
-A sorting algorithm that requires $\Theta(n \log n)$ in the
+A sorting algorithm that requires $O(n \log n)$ in the
 [best](#best-case){.term},
 [average](#average-case){.term}, and
 [worst](#worst-case){.term} cases.
@@ -3785,7 +3785,7 @@ In [Quicksort]{.term}, the process of
 splitting a list into two sublists, such that one sublist has values
 less than the [pivot]{.term} value, and the
 other with values greater than the pivot. This process takes
-$\Theta(i)$ time on a sublist of length $i$.
+$O(i)$ time on a sublist of length $i$.
 
 ### pass by value
 
@@ -3814,7 +3814,7 @@ performed during the FIND step. Once the root of the tree for the
 current object has been found, the path to the root can be traced a
 second time, with all objects in the tree made to point directly to
 the root. This reduces the depth of the tree from typically
-$\Theta(\log n)$ to nearly constant.
+$O(\log n)$ to nearly constant.
 
 ### peripheral storage
 
@@ -4282,10 +4282,10 @@ end, and removed only from the other one end.
 
 ### quicksort
 
-A sort that is $\Theta(n \log n)$ in the
+A sort that is $O(n \log n)$ in the
 [best](#best-case){.term} and
 [average](#average-case){.term} cases,
-though $\Theta(n^2)$ in the [worst case]{.term}.
+though $O(n^2)$ in the [worst case]{.term}.
 However, a reasonable implmentation will make the
 worst case occur under exceedingly rare circumstances. Due to its
 tight inner loop, it tends to run better than any other known sort
@@ -4646,7 +4646,7 @@ A type of [container]{.term}, it is common
 to implement an [index](#indexing){.term}
 using a search tree. A good search tree implementation will
 guarentee that insertion, deletion, and search operations are all
-$\Theta(\log n)$.
+$O(\log n)$.
 
 ### search trie
 
@@ -4724,11 +4724,11 @@ considered the most expensive step during a
 
 ### selection sort
 
-While this sort requires $\Theta(n^2)$ time in the
+While this sort requires $O(n^2)$ time in the
 [best](#best-case){.term},
 [average](#average-case){.term}, and
 [worst](#worst-case){.term} cases, it
-requires only $\Theta(n)$ swap operations. Thus, it does relatively
+requires only $O(n)$ swap operations. Thus, it does relatively
 well in applications where swaps are expensive. It can be viewed as
 an optimization on [bubble sort]{.term},
 where a swap is deferred until the end of each iteration.
@@ -4836,7 +4836,7 @@ actual content.
 
 A sort that relies on the best-case cost of
 [insertion sort]{.term} to improve over
-$\Theta(n^2)$ [worst case]{.term} cost.
+$O(n^2)$ [worst case]{.term} cost.
 
 ### shifting method
 
@@ -4993,8 +4993,8 @@ the list are arranged so that their [key]{.term}
 values are in ascending order. If the list uses an
 [array-based list]{.term} implementation,
 then it can use [binary search]{.term} for a
-cost of $\Theta(\log n)$. But both insertion and deletion will be
-require $\Theta(n)$ time.
+cost of $O(\log n)$. But both insertion and deletion will be
+require $O(n)$ time.
 
 ### sorting lower bound
 
@@ -5097,9 +5097,9 @@ concept of [rotations](#rotation){.term} in
 the insert and remove operations. While a splay tree does not
 guarentee that the tree is balanced, it does guarentee that a series
 of $n$ operations on the tree will have a total cost of
-$\Theta(n \log n)$ cost, meaning that any given operation can be
+$O(n \log n)$ cost, meaning that any given operation can be
 viewed as having [amortized cost]{.term} of
-$\Theta(\log n)$.
+$O(\log n)$.
 
 ### splaying
 
@@ -5177,10 +5177,10 @@ A synonym for [lexical scoping]{.term}.
 
 A [recursive](#recursion){.term} algorithm
 for matrix multiplication. When multiplying two $n \times n$
-matrices, this algorithm runs faster than the $\Theta(n^3)$ time
+matrices, this algorithm runs faster than the $O(n^3)$ time
 required by the standard matrix multiplication algorithm.
 Specifically, Strassen's algorithm requires time
-$Theta(n^{\log_2 7})$ time. This is achieved by refactoring the
+$O(n^{\log_2 7})$ time. This is achieved by refactoring the
 sub-matrix multiplication and addition operations so as to need only
 7 sub-matrix multiplications instead of 8, at a cost of additional
 sub-matrix addition operations. Thus, while the asymptotic cost is
@@ -5392,7 +5392,7 @@ a stack of disks (each with unique size) stacked decreasing order on
 the left pole, and two additional poles. The problem is to move the
 disks to the right pole, with the constraints that only one disk can
 be moved at a time and a disk may never be on top of a smaller disk.
-For $n$ disks, this problem requires $\Theta(2^n)$ moves. The
+For $n$ disks, this problem requires $O(2^n)$ moves. The
 standard solution is to move $n-1$ disks to the middle pole, move
 the bottom disk to the right pole, and then move the $n-1$ disks on
 the middle pole to the right pole.
@@ -5631,8 +5631,8 @@ classic example is the [halting problem]{.term}.
 A [list]{.term} where the records stored in
 the list can appear in any order (as opposed to a
 [sorted list]{.term}). An unsorted list can
-support efficient ($\Theta(1)$) insertion time (since you can put
-the record anywhere convenient), but requires $\Theta(n)$ time for
+support efficient ($O(1)$) insertion time (since you can put
+the record anywhere convenient), but requires $O(n)$ time for
 both search and and deletion.
 
 ### unsuccessful search

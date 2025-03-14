@@ -155,11 +155,11 @@ And here's an exercise.
 
 Locating a certain position $i$ in the list requires $i$ steps. The
 worst case is if we want to go to the last node, so the time complexity
-for above all operations is $\Theta(n)$.
+for above all operations is $O(n)$.
 
 This is much worse than the
 [array-based list](#static-array-based-lists), where
-these operations are $\Theta(1)$. So are linked lists totally useless?
+these operations are $O(1)$. So are linked lists totally useless?
 No! But they don't work well with our current List interface.
 
 To make linked lists useful, we need an enhanced iterator interface,

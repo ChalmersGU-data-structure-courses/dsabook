@@ -1,5 +1,5 @@
 
-## Upper bounds: the big-O notation
+## Upper bounds: the big-$O$ notation
 
 ::: TODO
 - Prio 1: formal definition

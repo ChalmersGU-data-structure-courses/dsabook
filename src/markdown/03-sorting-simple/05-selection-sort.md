@@ -18,7 +18,7 @@ you find the bill for January, and pull that out. Then look through the
 remaining pile until you find the bill for February, and add that behind
 January. Proceed through the ever-shrinking pile of bills to select the
 next one in order until you are done. This is the inspiration for our
-last $\Theta(n^2)$ sort, called [Selection Sort]{.term}.
+last $O(n^2)$ sort, called [Selection Sort]{.term}.
 
 The $i$'th pass of Selection Sort "selects" the $i$'th
 largest key in the array, placing that record at the end of the array.

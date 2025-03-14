@@ -12,7 +12,7 @@ vertices from $v_0$ through $v_{|\mathbf{V}|-1}$. Row $i$ of the
 adjacency matrix contains entries for Vertex $v_i$. Column $j$ in row
 $i$ is marked if there is an edge from $v_i$ to $v_j$ and is not marked
 otherwise. The space requirements for the adjacency matrix are
-$\Theta(|\mathbf{V}|^2)$.
+$O(|\mathbf{V}|^2)$.
 
 The second common representation for graphs is the
 [adjacency list]{.term}. The adjacency list is
@@ -54,7 +54,7 @@ number of edges and the number of vertices in the graph. There must be
 an array entry for each vertex (even if the vertex is not adjacent to
 any other vertex and thus has no elements on its linked list), and each
 edge must appear on one of the lists. Thus, the cost is
-$\Theta(|\mathbf{V}| + |\mathbf{E}|)$.
+$O(|\mathbf{V}| + |\mathbf{E}|)$.
 
 Sometimes we want to store weights or distances with each each edge,
 such as in [Figure #GraphTerms](#GraphTerms)
@@ -109,7 +109,7 @@ is that it is common for a graph algorithm to visit each neighbor of
 each vertex. Using the adjacency list, only the actual edges connecting
 a vertex to its neighbors are examined. However, the adjacency matrix
 must look at each of its $|\mathbf{V}|$ potential edges, yielding a
-total cost of $\Theta(|\mathbf{V}^2|)$ time when the algorithm might
-otherwise require only $\Theta(|\mathbf{V}| + |\mathbf{E}|)$ time. This
+total cost of $O(|\mathbf{V}^2|)$ time when the algorithm might
+otherwise require only $O(|\mathbf{V}| + |\mathbf{E}|)$ time. This
 is a considerable disadvantage when the graph is sparse, but not when
 the graph is closer to full.

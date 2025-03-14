@@ -125,11 +125,11 @@ same order.
 :::::::::: question ::::::::::
 The $n$ nodes in a binary tree can be visited in:
 
-- [x] $\Theta(n)$ time
-- [ ] $\Theta(1)$ time
-- [ ] $\Theta(\log n)$ time
-- [ ] $\Theta(n \log n)$ time
-- [ ] $\Theta(n^2)$ time
+- [x] $O(n)$ time
+- [ ] $O(1)$ time
+- [ ] $O(\log n)$ time
+- [ ] $O(n \log n)$ time
+- [ ] $O(n^2)$ time
 
 ::: hints
 - This would be done by a traversal. How much work does a

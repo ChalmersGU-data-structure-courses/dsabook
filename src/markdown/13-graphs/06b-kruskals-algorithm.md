@@ -54,12 +54,12 @@ soon as the MCST contains enough edges.
 Kruskal's algorithm is dominated by the time required to process the
 edges. The `FIND` and `UNION` functions are nearly constant in time if
 path compression and weighted union is used. Thus, the total cost of the
-algorithm is $\Theta(|\mathbf{E}| \log |\mathbf{E}|)$ in the worst case,
+algorithm is $O(|\mathbf{E}| \log |\mathbf{E}|)$ in the worst case,
 when nearly all edges must be processed before all the edges of the
 spanning tree are found and the algorithm can stop. More often the edges
 of the spanning tree are the shorter ones, and only about $|\mathbf{V}|$
 edges must be processed. If so, the cost is often close to
-$\Theta(|\mathbf{V}| \log |\mathbf{E}|)$ in the average case (provided
+$O(|\mathbf{V}| \log |\mathbf{E}|)$ in the average case (provided
 we use a priority queue instead of sorting all edges in advance).
 
 <avembed id="KruskalPE" src="Graph/KruskalPE.html" type="pe" name="Kruskal's Algorithm Proficiency Exercise"/>

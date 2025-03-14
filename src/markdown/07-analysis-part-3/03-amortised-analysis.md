@@ -73,7 +73,7 @@ function is slightly modified to take a second parameter $k$ indicating
 that $k$ pop operations are to be performed.
 
 The "local" worst-case analysis for *multipop* is
-$\Theta(n)$ for $n$ elements in the stack. Thus, if there are $m_1$
+$O(n)$ for $n$ elements in the stack. Thus, if there are $m_1$
 calls to *push* and $m_2$ calls to *multipop*,
 then the naive worst-case cost for the series of operation is
 $m_1 + m_2\cdot n = m_1 + m_2 \cdot m_1$. This analysis is unreasonably
@@ -103,7 +103,7 @@ operations, which is at most $m_1$, the number of *push*
 operations. This total cost can therefore be expressed as
 
 $$
-m_1 + (m_2 + m_1) = \Theta(m_1 + m_2)
+m_1 + (m_2 + m_1) = O(m_1 + m_2)
 $$
 
 A similar argument was used in our analysis for the partition function

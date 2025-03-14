@@ -254,18 +254,18 @@ a tree of $n$ nodes is approximately $\log n$. However, if the tree is
 completely unbalanced, for example in the shape of a linked list, then
 the height for a tree with $n$ nodes can be as great as $n$. Thus, a
 balanced BST will in the average case have operations costing
-$\Theta(\log n)$, while a badly unbalanced BST can have operations in
-the worst case costing $\Theta(n)$. Consider the situation where we
+$O(\log n)$, while a badly unbalanced BST can have operations in
+the worst case costing $O(n)$. Consider the situation where we
 construct a BST of $n$ nodes by inserting records one at a time. If we
 are fortunate to have them arrive in an order that results in a balanced
 tree (a "random" order is likely to be good enough for this purpose),
-then each insertion will cost on average $\Theta(\log n)$, for a total
-cost of $\Theta(n \log n)$. However, if the records are inserted in
+then each insertion will cost on average $O(\log n)$, for a total
+cost of $O(n \log n)$. However, if the records are inserted in
 order of increasing value, then the resulting tree will be a chain of
 height $n$. The cost of insertion in this case will be
-$\sum_{i=1}^{n} i = \Theta(n^2)$.
+$\sum_{i=1}^{n} i = O(n^2)$.
 
-Traversing a BST costs $\Theta(n)$ regardless of the shape of the tree.
+Traversing a BST costs $O(n)$ regardless of the shape of the tree.
 Each node is visited exactly once, and each child pointer is followed
 exactly once.
 

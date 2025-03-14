@@ -52,7 +52,7 @@ Random access to any element in the list is quick and easy.
 <inlineav id="StaticArrayList-Intro-CON" src="ChalmersGU/StaticArrayList-Intro-CON.js" name="Static Array-based List Intro Slideshow" links="ChalmersGU/CGU-Styles.css"/>
 
 As you can see below, there are no loops in the methods `get` and `set`,
-which means that both require $\Theta(1)$ time.
+which means that both require $O(1)$ time.
 
     class StaticArrayList implements List:
         ...
@@ -83,7 +83,7 @@ existing elements in the array by one position toward the tail.
 Therefore, if we want to add an element at position $i$, then
 $n - i - 1$ elements must shift toward the tail to leave room for the
 new element. In the worst case, adding elements requires moving all $n$
-elements, which is $\Theta(n)$.
+elements, which is $O(n)$.
 
     class StaticArrayList implements List:
         ...
@@ -110,7 +110,7 @@ must shift toward the head, as shown in the following slideshow.
 <inlineav id="StaticArrayList-Remove-CON" src="ChalmersGU/StaticArrayList-Remove-CON.js" name="Static Array-based List Remove" links="ChalmersGU/CGU-Styles.css"/>
 
 In the worst case, insertion or removal each requires moving all $n$
-elements, which is $\Theta(n)$.
+elements, which is $O(n)$.
 
     class StaticArrayList implements List:
         ...

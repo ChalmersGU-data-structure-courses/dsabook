@@ -23,7 +23,7 @@ node list. In other words, node access must start at the beginning of
 the node list, processing nodes sequentially in whatever order they are
 stored until the desired node is reached. Thus, one primary virtue of
 the other implementations discussed in this section is lost: efficient
-access (typically $\Theta(\log n)$ time) to arbitrary nodes in the tree.
+access (typically $O(\log n)$ time) to arbitrary nodes in the tree.
 Sequential tree implementations are ideal for archiving trees on disk
 for later use because they save space, and the tree structure can be
 reconstructed as needed for later processing.

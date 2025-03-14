@@ -25,10 +25,10 @@ Given an array-based list implementation,
 inserting a new element just before the last value
 takes how long in the worst case?
 
-- [x] $\Theta(1)$ time
-- [ ] $\Theta(n)$ time
-- [ ] $\Theta(\log n)$ time
-- [ ] $\Theta(n \log n)$ time
+- [x] $O(1)$ time
+- [ ] $O(n)$ time
+- [ ] $O(\log n)$ time
+- [ ] $O(n \log n)$ time
 
 ::: hints
 - We only need to shift one single value: the last element.
@@ -42,10 +42,10 @@ Given an array-based list implementation,
 inserting a new element to arbitrary position $i$
 takes how long in the worst case?
 
-- [x] $\Theta(n)$ time
-- [ ] $\Theta(1)$ time
-- [ ] $\Theta(\log n)$ time
-- [ ] $\Theta(n \log n)$ time
+- [x] $O(n)$ time
+- [ ] $O(1)$ time
+- [ ] $O(\log n)$ time
+- [ ] $O(n \log n)$ time
 
 ::: hints
 - Position $i$ could be anywhere in the list.
@@ -61,10 +61,10 @@ takes how long in the worst case?
 Given an array-based list implementation,
 deleting the second-to-last element takes how long in the worst case?
 
-- [x] $\Theta(1)$ time
-- [ ] $\Theta(n)$ time
-- [ ] $\Theta(\log n)$ time
-- [ ] $\Theta(n \log n)$ time
+- [x] $O(1)$ time
+- [ ] $O(n)$ time
+- [ ] $O(\log n)$ time
+- [ ] $O(n \log n)$ time
 
 ::: hints
 - We only need to shift one single value: the last element.
@@ -78,10 +78,10 @@ Given an array-based list implementation,
 deleting the element at an arbitrary position $i$ takes
 how long in the worst case?
 
-- [x] $\Theta(n)$ time
-- [ ] $\Theta(1)$ time
-- [ ] $\Theta(\log n)$ time
-- [ ] $\Theta(n \log n)$ time
+- [x] $O(n)$ time
+- [ ] $O(1)$ time
+- [ ] $O(\log n)$ time
+- [ ] $O(n \log n)$ time
 
 ::: hints
 - Position $i$ could be anywhere in the list (of $n$ values).

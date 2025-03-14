@@ -64,7 +64,7 @@ Since $n!$ grows faster than $2^n$,
 -   $\sqrt{n!}$ grows faster than $\sqrt{2^n}$. (Take square root of
     both sides.)
 -   $\log n!$ grows *no slower* than $n$. (Take log of both sides.
-    Actually, it grows faster since $\log n! = \Theta(n \log n)$.)
+    Actually, it grows faster since $\log n! = O(n \log n)$.)
 
 If $f$ grows faster than $g$, then must $\sqrt{f}$ grow faster than
 $\sqrt{g}$? Yes.

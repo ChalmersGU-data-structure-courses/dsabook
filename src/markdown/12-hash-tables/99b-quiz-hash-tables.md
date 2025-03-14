@@ -70,10 +70,10 @@ Open addressing works well for disk-based hash systems.
 What is the expected worst-case cost for a search
 on a properly tuned hash system that stores $n$ records?
 
-- [x] $\Theta(1)$
-- [ ] $\Theta(n^2)$
-- [ ] $\Theta(n)$
-- [ ] $\Theta(\log n)$
+- [x] $O(1)$
+- [ ] $O(n^2)$
+- [ ] $O(n)$
+- [ ] $O(\log n)$
 
 ::: hints
 - If the system is working right, you should only need to

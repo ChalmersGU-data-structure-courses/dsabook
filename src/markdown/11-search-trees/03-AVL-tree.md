@@ -18,7 +18,7 @@ updates will also cost $O(\log n)$, even in the worst case.
 The key to making the AVL tree work is to alter the insert and delete
 routines so as to maintain the balance property. Of course, to be
 practical, we must be able to implement the revised update routines in
-$\Theta(\log n)$ time. To maintain the balance property, we are going to
+$O(\log n)$ time. To maintain the balance property, we are going to
 use what are called [rotations](#rotation){.term}.
 
 

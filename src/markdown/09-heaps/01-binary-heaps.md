@@ -203,7 +203,7 @@ until $V$ reaches its correct position.
 
 Since the heap is a complete binary tree, its height is guaranteed to be
 the minimum possible. In particular, a heap containing $n$ nodes will
-have a height of $\Theta(\log n)$. Intuitively, we can see that this
+have a height of $O(\log n)$. Intuitively, we can see that this
 must be true because each level that we add will slightly more than
 double the number of nodes in the tree (the $i$ th level has $2^i$
 nodes, and the sum of the first $i$ levels is $2^{i+1}-1$). Starting at
@@ -211,11 +211,11 @@ nodes, and the sum of the first $i$ levels is $2^{i+1}-1$). Starting at
 precise, the height of a heap with $n$ nodes is
 $\lceil \log n + 1 \rceil$.
 
-Each call to `add` takes $\Theta(\log n)$ time in the worst case,
+Each call to `add` takes $O(\log n)$ time in the worst case,
 because the value being inserted can move at most the distance from the
 bottom of the tree to the top of the tree. Thus, to insert $n$ values
 into the heap, if we insert them one at a time, will take
-$\Theta(n \log n)$ time in the worst case.
+$O(n \log n)$ time in the worst case.
 
 <avembed id="heapinsertPRO" src="Binary/heapinsertPRO.html" type="pe" name="Heap Insert Proficiency Exercise"/>
 
@@ -305,10 +305,10 @@ $$
 The summation on the right
 [is known](#summation){.term} to
 have a closed-form solution of approximately 2, so this algorithm takes
-$\Theta(n)$ time in the worst case. This is far better than building the
-heap one element at a time, which would cost $\Theta(n \log n)$ in the
-worst case. It is also faster than the $\Theta(n \log n)$ average-case
-time and $\Theta(n^2)$ worst-case time required to build the BST.
+$O(n)$ time in the worst case. This is far better than building the
+heap one element at a time, which would cost $O(n \log n)$ in the
+worst case. It is also faster than the $O(n \log n)$ average-case
+time and $O(n^2)$ worst-case time required to build the BST.
 
 <inlineav id="heapbuildProofCON" src="Binary/heapbuildProofCON.js" script="DataStructures/binaryheap.js" name="Heap build analysis proof Slideshow" links="Binary/heapbuildProofCON.css"/>
 
@@ -317,7 +317,7 @@ time and $\Theta(n^2)$ worst-case time required to build the BST.
 <inlineav id="heapmaxCON" src="Binary/heapmaxCON.js" script="DataStructures/binaryheap.js" name="Remove Max Slideshow"/>
 
 Because the heap is $\log n$ levels deep, the cost of deleting the
-maximum element is $\Theta(\log n)$ in the average and worst cases.
+maximum element is $O(\log n)$ in the average and worst cases.
 
 <avembed id="heapremovePRO" src="Binary/heapremovePRO.html" type="pe" name="Heap Remove Exercise"/>
 

@@ -13,16 +13,16 @@ precise, for every $u, v \in \mathbf{V}$, calculate $d(u, v)$.
 One solution is to run [Dijkstra's algorithm]{.term} for finding the
 [shortest path](#single-source-shortest-paths-problem){.term} $|\mathbf{V}|$ times, each time computing the shortest path
 from a different start vertex. If $\mathbf{G}$ is sparse (that is,
-$|\mathbf{E}| = \Theta(|\mathbf{V}|)$) then this is a good solution,
+$|\mathbf{E}| = O(|\mathbf{V}|)$) then this is a good solution,
 because the total cost will be
-$\Theta(|\mathbf{V}|^2 + |\mathbf{V}||\mathbf{E}| \log
-|\mathbf{V}|) = \Theta(|\mathbf{V}|^2 \log |\mathbf{V}|)$ for the
+$O(|\mathbf{V}|^2 + |\mathbf{V}||\mathbf{E}| \log
+|\mathbf{V}|) = O(|\mathbf{V}|^2 \log |\mathbf{V}|)$ for the
 version of Dijkstra's algorithm based on priority queues. For a dense
 graph, the priority queue version of Dijkstra's algorithm yields a cost
-of $\Theta(|\mathbf{V}|^3 \log |\mathbf{V}|)$, but the version using
-`MinVertex` yields a cost of $\Theta(|\mathbf{V}|^3)$.
+of $O(|\mathbf{V}|^3 \log |\mathbf{V}|)$, but the version using
+`MinVertex` yields a cost of $O(|\mathbf{V}|^3)$.
 
-Another solution that limits processing time to $\Theta(|\mathbf{V}|^3)$
+Another solution that limits processing time to $O(|\mathbf{V}|^3)$
 regardless of the number of edges is known as Floyd's algorithm. It is
 an example of dynamic programming. The chief problem with solving this
 problem is organizing the search process so that we do not repeatedly
@@ -81,6 +81,6 @@ the algorithm, array `D` stores the all-pairs shortest distances.
         return D
 
 
-Clearly this algorithm requires $\Theta(|\mathbf{V}|^3)$ running time,
+Clearly this algorithm requires $O(|\mathbf{V}|^3)$ running time,
 and it is the best choice for dense graphs because it is (relatively)
 fast and easy to implement.

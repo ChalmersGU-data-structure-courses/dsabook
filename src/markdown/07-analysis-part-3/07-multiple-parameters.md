@@ -35,24 +35,24 @@ value for pixel $i$.
 
 The time for the first `for` loop (which initializes `count`) is based
 on the number of colors, $C$. The time for the second loop (which
-determines the number of pixels with each color) is $\Theta(P)$. The
+determines the number of pixels with each color) is $O(P)$. The
 time for the final line, the call to `sort`, depends on the cost of the
 sorting algorithm used. We will assume that the sorting algorithm has
-cost $\Theta(P \log P)$ if $P$ items are sorted, thus yielding
-$\Theta(P \log P)$ as the total algorithm cost.
+cost $O(P \log P)$ if $P$ items are sorted, thus yielding
+$O(P \log P)$ as the total algorithm cost.
 
 Is this a good representation for the cost of this algorithm? What is
 actually being sorted? It is not the pixels, but rather the colors. What
-if $C$ is much smaller than $P$? Then the estimate of $\Theta(P \log P)$
+if $C$ is much smaller than $P$? Then the estimate of $O(P \log P)$
 is pessimistic, because much fewer than $P$ items are being sorted.
 Instead, we should use $P$ as our analysis variable for steps that look
 at each pixel, and $C$ as our analysis variable for steps that look at
-colors. Then we get $\Theta(C)$ for the initialization loop, $\Theta(P)$
-for the pixel count loop, and $\Theta(C \log C)$ for the sorting
-operation. This yields a total cost of $\Theta(P + C \log C)$.
+colors. Then we get $O(C)$ for the initialization loop, $O(P)$
+for the pixel count loop, and $O(C \log C)$ for the sorting
+operation. This yields a total cost of $O(P + C \log C)$.
 
 Why can we not simply use the value of $C$ for input size and say that
-the cost of the algorithm is $\Theta(C \log C)$? Because, $C$ is
+the cost of the algorithm is $O(C \log C)$? Because, $C$ is
 typically much less than $P$. For example, a picture might have 1000
 $\times$ 1000 pixels and a range of 256 possible colors. So, $P$ is one
 million, which is much larger than $C \log C$. But, if $P$ is smaller,

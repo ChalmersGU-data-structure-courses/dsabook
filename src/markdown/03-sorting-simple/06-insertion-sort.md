@@ -91,10 +91,10 @@ the inner `for` loop yields both a comparison and a swap, except the
 last (i.e., the comparison that fails the inner `for` loop's test),
 which has no swap. Thus, the number of swaps for the entire sort
 operation is $n-1$ less than the number of comparisons. This is 0 in the
-best case, and $\Theta(n^2)$ in the average and worst cases.
+best case, and $O(n^2)$ in the average and worst cases.
 
 Later we will see algorithms whose growth rate is much better than
-$\Theta(n^2)$. Thus for larger arrays, Insertion Sort will not be so
+$O(n^2)$. Thus for larger arrays, Insertion Sort will not be so
 good a performer as other algorithms. So Insertion Sort is not the best
 sorting algorithm to use in most situations. But there are special
 situations where it is ideal. We already know that Insertion Sort works

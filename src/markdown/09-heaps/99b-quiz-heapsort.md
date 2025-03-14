@@ -32,7 +32,7 @@ equal keys might not remain in the same order after sorting)
 
 ::: hints
 - Heapsort does not need auxilliary storage.
-- Heapsort runs in $\Theta(n \log n)$ time.
+- Heapsort runs in $O(n \log n)$ time.
 - Equal-valued records might be in different sides of the
 heap, and can get out of relative order.
 :::
@@ -84,11 +84,11 @@ What is the worst-case time for
 Heapsort to sort an array of n records that each have unique
 key values?
 
-- [x] $\Theta(n \log n)$
-- [ ] $\Theta(n)$
-- [ ] $\Theta(\log n)$
-- [ ] $\Theta(n^2)$
-- [ ] $\Theta(n^n)$
+- [x] $O(n \log n)$
+- [ ] $O(n)$
+- [ ] $O(\log n)$
+- [ ] $O(n^2)$
+- [ ] $O(n^n)$
 
 ::: hints
 - Does Heapsort's number of comparisons depend on the
@@ -104,11 +104,11 @@ same work regardless of input data order.
  What is the running time of Heapsort
 when the input is an array where all key values are equal?
 
-- [x] $\Theta(n)$
-- [ ] $\Theta(n^2)$
-- [ ] $\Theta(\log n)$
-- [ ] $\Theta(n ^ n)$
-- [ ] $\Theta(n \log n)$
+- [x] $O(n)$
+- [ ] $O(n^2)$
+- [ ] $O(\log n)$
+- [ ] $O(n ^ n)$
+- [ ] $O(n \log n)$
 
 ::: hints
 - Heapsort has the same asymptotic cost in the best, average,
@@ -117,7 +117,7 @@ and worst cases, but only if the key values are all unique.
 siftdown operation do?
 - In that case, siftdown will always return immediately,
 resulting in a constant time operation. Since Heapsort calls
-siftdown $n$ times, the total cost is $\Theta(n)$.
+siftdown $n$ times, the total cost is $O(n)$.
 :::
 ::::::::::::::::::::::::::::::
 
@@ -127,10 +127,10 @@ siftdown $n$ times, the total cost is $\Theta(n)$.
 How much auxilliary space or overhead
 (beyond the array holding the records) is needed by Heapsort?
 
-- [x] $\Theta(1)$
-- [ ] $\Theta(\log n)$
-- [ ] $\Theta(n)$
-- [ ] $\Theta(n^2)$
+- [x] $O(1)$
+- [ ] $O(\log n)$
+- [ ] $O(n)$
+- [ ] $O(n^2)$
 
 ::: hints
 - Heapsort does not require any auxilliary arrays.

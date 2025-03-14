@@ -22,7 +22,7 @@ However, the approach has a number of drawbacks, including the extra
 space required by BST pointers and the amount of time required to insert
 nodes into the tree. Quicksort implements this same concept in a much
 more efficient way. But there is also the possibility that the BST might
-be unbalanced, leading to a $\Theta(n^2)$ worst-case running time. And
+be unbalanced, leading to a $O(n^2)$ worst-case running time. And
 this is the same problem as Quicksort has with chosing a good pivot (see
 the section "Quicksort Analysis" in the
 [Quicksort] module).
@@ -41,7 +41,7 @@ Heapsort has all of the advantages just listed. The complete binary tree
 is balanced, its array representation is space efficient, and we can
 load all values into the tree at once, taking advantage of the efficient
 `buildHeap` function. The asymptotic performance of Heapsort when all of
-the records have unique key values is $\Theta(n \log n)$ in the best,
+the records have unique key values is $O(n \log n)$ in the best,
 average, and worst cases. It is not as fast as Quicksort in the average
 case (by a constant factor), but Heapsort has special properties that
 will make it particularly useful for
@@ -112,10 +112,10 @@ While typically slower than Quicksort by a constant factor (because
 unloading the heap using `removemax` is somewhat slower than
 Quicksort's series of partitions), Heapsort has one special advantage
 over the other sorts studied so far. Building the heap is relatively
-cheap, requiring $\Theta(n)$ time. Removing the maximum-valued record
-from the heap requires $\Theta(\log n)$ time in the worst case. Thus, if
+cheap, requiring $O(n)$ time. Removing the maximum-valued record
+from the heap requires $O(\log n)$ time in the worst case. Thus, if
 we wish to find the $k$ records with the largest key values in an array,
-we can do so in time $\Theta(n + k \log n)$. If $k$ is small, this is a
+we can do so in time $O(n + k \log n)$. If $k$ is small, this is a
 substantial improvement over the time required to find the $k$
 largest-valued records using one of the other sorting methods described
 earlier (many of which would require sorting all of the array first).

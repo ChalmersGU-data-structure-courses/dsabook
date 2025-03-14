@@ -6,7 +6,7 @@
 :::
 
 Which sorting algorithm is fastest? Asymptotic complexity analysis lets
-us distinguish between $\Theta(n^2)$ and $\Theta(n \log n)$ algorithms,
+us distinguish between $O(n^2)$ and $O(n \log n)$ algorithms,
 but it does not help distinguish between algorithms with the same
 asymptotic complexity. Nor does asymptotic analysis say anything about
 which algorithm is best for sorting small lists. For answers to these

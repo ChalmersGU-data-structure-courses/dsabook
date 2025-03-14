@@ -14,8 +14,8 @@
 
 A normal queue data structure will not implement a priority queue efficiently
 because search for the element with highest priority will take
-$\Theta(n)$ time. A list, whether sorted or not, will also require
-$\Theta(n)$ time for either insertion or removal.
+$O(n)$ time. A list, whether sorted or not, will also require
+$O(n)$ time for either insertion or removal.
 
 
 This section presents the [binary heap]{.term} data structure.

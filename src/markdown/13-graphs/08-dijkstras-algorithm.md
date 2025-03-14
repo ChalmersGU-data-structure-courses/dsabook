@@ -106,13 +106,13 @@ of $|\mathbf{V}|$ vertices searching for the minimum value, as follows:
 
 Because this scan is done $|\mathbf{V}|$ times, and because each edge
 requires a constant-time update to `D`, the total cost for this approach
-is $\Theta(|\mathbf{V}|^2 + |\mathbf{E}|) =
-\Theta(|\mathbf{V}|^2)$, because $|\mathbf{E}|$ is in
+is $O(|\mathbf{V}|^2 + |\mathbf{E}|) =
+O(|\mathbf{V}|^2)$, because $|\mathbf{E}|$ is in
 $O(|\mathbf{V}|^2)$.
 
 An alternative approach is to store unprocessed vertices in a min-heap
 ordered by their distance from the processed vertices. The next-closest
-vertex can be found in the heap in $\Theta(\log |\mathbf{V}|)$ time.
+vertex can be found in the heap in $O(\log |\mathbf{V}|)$ time.
 Every time we modify $\mathbf{D}(X)$, we could reorder $X$ in the heap
 by deleting and reinserting it. This is an example of a
 [priority queue]{.term}
@@ -125,10 +125,10 @@ given vertex currently in the heap will be found first, and greater
 distance values found later will be ignored because the vertex will
 already be marked as **visited**. The only disadvantage to repeatedly
 inserting distance values in this way is that it will raise the number
-of elements in the heap from $\Theta(|\mathbf{V}|)$ to
-$\Theta(|\mathbf{E}|)$ in the worst case. But in practice this only adds
+of elements in the heap from $O(|\mathbf{V}|)$ to
+$O(|\mathbf{E}|)$ in the worst case. But in practice this only adds
 a slight increase to the depth of the heap. The time complexity is
-$\Theta((|\mathbf{V}| + |\mathbf{E}|) \log |\mathbf{E}|)$, because for
+$O((|\mathbf{V}| + |\mathbf{E}|) \log |\mathbf{E}|)$, because for
 each edge that we process we must reorder the heap. We use the `KVPair`
 class to store key-value pairs in the heap, with the edge weight as the
 key and the target vertex as the value. here is the implementation for
@@ -163,9 +163,9 @@ Using `minVertex` to scan the vertex list for the minimum value is more
 efficient when the graph is dense, that is, when $|\mathbf{E}|$
 approaches $|\mathbf{V}|^2$. Using a heap is more efficient when the
 graph is sparse because its cost is
-$\Theta((|\mathbf{V}| + |\mathbf{E}|) \log |\mathbf{E}|)$. However, when
+$O((|\mathbf{V}| + |\mathbf{E}|) \log |\mathbf{E}|)$. However, when
 the graph is dense, this cost can become as great as
-$\Theta(|\mathbf{V}|^2 \log |\mathbf{E}|) = \Theta(|\mathbf{V}|^2 \log |\mathbf{V}|)$.
+$O(|\mathbf{V}|^2 \log |\mathbf{E}|) = O(|\mathbf{V}|^2 \log |\mathbf{V}|)$.
 
 Now you can practice using Dijkstra's algorithm.
 

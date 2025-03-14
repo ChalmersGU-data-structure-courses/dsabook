@@ -118,7 +118,7 @@ look at an example for each type of graph.
 DFS processes each edge once in a directed graph. In an undirected
 graph, DFS processes each edge from both directions. Each vertex must be
 visited, but only once, so the total cost is
-$\Theta(|\mathbf{V}| + |\mathbf{E}|)$.
+$O(|\mathbf{V}| + |\mathbf{E}|)$.
 
 Here is an exercise for you to practice DFS.
 

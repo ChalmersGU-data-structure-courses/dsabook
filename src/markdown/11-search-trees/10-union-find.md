@@ -264,19 +264,19 @@ constant.
 To be more precise about what is meant by "very close to constant",
 the cost of path compression for $n$ FIND operations on $n$ nodes (when
 combined with the weighted union rule for joining sets) is approximately
-$\Theta(n \log^* n)$. The notation $\log^* n$ means the number of times
+$O(n \log^* n)$. The notation $\log^* n$ means the number of times
 that the log of $n$ must be taken before $n \leq 1$. For example,
 $\log^* 65536$ is 4 because $\log 65536 = 16, \log 16 = 4, \log 4 = 2$,
 and finally $\log 2 = 1$. Thus, $\log^* n$ grows *very* slowly, so the
 cost for a series of $n$ FIND operations is very close to $n$.
 
 Note that this does not mean that the tree resulting from processing $n$
-equivalence pairs necessarily has depth $\Theta(\log^* n)$. One can
-devise a series of equivalence operations that yields $\Theta(\log n)$
+equivalence pairs necessarily has depth $O(\log^* n)$. One can
+devise a series of equivalence operations that yields $O(\log n)$
 depth for the resulting tree. However, many of the equivalences in such
 a series will look only at the roots of the trees being merged,
 requiring little processing time. The *total* amount of processing time
-required for $n$ operations will be $\Theta(n \log^* n)$, yielding
+required for $n$ operations will be $O(n \log^* n)$, yielding
 nearly constant time for each equivalence operation. This is an example
 of [amortized analysis]{.term}.
 

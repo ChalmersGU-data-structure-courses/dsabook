@@ -84,11 +84,11 @@ Given a linked list implementation,
 inserting a new element to arbitrary position $i$
 takes how long in the average case?
 
-- [x] $\Theta(i)$ time
-- [ ] $\Theta(n)$ time
-- [ ] $\Theta(1)$ time
-- [ ] $\Theta(\log n)$ time
-- [ ] $\Theta(n \log n)$ time
+- [x] $O(i)$ time
+- [ ] $O(n)$ time
+- [ ] $O(1)$ time
+- [ ] $O(\log n)$ time
+- [ ] $O(n \log n)$ time
 
 ::: hints
 - We can't insert until we reach the proper position.
@@ -106,11 +106,11 @@ Given a linked list implementation, deleting
 the element at arbitrary position $i$ takes how long in the
 average case?
 
-- [x] $\Theta(i)$ time
-- [ ] $\Theta(1)$ time
-- [ ] $\Theta(n)$ time
-- [ ] $\Theta(\log n)$ time
-- [ ] $\Theta(n \log n)$ time
+- [x] $O(i)$ time
+- [ ] $O(1)$ time
+- [ ] $O(n)$ time
+- [ ] $O(\log n)$ time
+- [ ] $O(n \log n)$ time
 
 ::: hints
 - You cannot delete a node until you get to it.

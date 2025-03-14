@@ -100,9 +100,7 @@ $$
 \leq 2n(\log n + 1) \leq 2 n \log 2n
 $$
 
-which is what we seek to prove. In similar fashion, we can prove that
-$\mathbf{T}(n)$ is in $\Omega(n \log n)$. Thus, $\mathbf{T}(n)$ is also
-$\Theta(n \log n)$.
+Therefore we have proved that $\mathbf{T}(n)$ is in $O(n\log n)$.
 :::
 
 ::: topic
@@ -241,7 +239,7 @@ $$
 
 This expression also has the name $\phi$. What does this say about the
 growth rate of the Fibonacci sequence? It is exponential, with
-$f(n) = \Theta(\phi^n)$. More precisely, $f(n)$ converges to
+$f(n) = O(\phi^n)$. More precisely, $f(n)$ converges to
 
 $$
 \frac{\phi^n - (1 - \phi)^n}{\sqrt{5}}
@@ -371,7 +369,7 @@ depends on the ratio $r = b^k/a$. There are three cases.
     Thus,
 
     $$
-    \mathbf{T}(n) = \Theta(a^m) = \Theta(n^{log_ba})
+    \mathbf{T}(n) = O(a^m) = O(n^{log_ba})
     $$
 
 (2) $r=1$. Because $r = b^k/a$, we know that $a = b^k$. From the
@@ -386,23 +384,23 @@ depends on the ratio $r = b^k/a$. There are three cases.
     Because $a^m = n^{\log_b a} = n^k$, we have
 
     $$
-    \mathbf{T}(n) = \Theta(n^{\log_ba}\log_b n) = \Theta(n^k\log_b n)
+    \mathbf{T}(n) = O(n^{\log_ba}\log_b n) = O(n^k\log_b n)
     $$
 
 (3) $r>1$. From Equation (5) of Module
     [summation]{.term},
 
     $$
-    \sum_{i=0}^{m} r^i = \frac{r^{m+1} - 1}{r - 1} = \Theta(r^m)
+    \sum_{i=0}^{m} r^i = \frac{r^{m+1} - 1}{r - 1} = O(r^m)
     $$
 
     Thus,
 
     $$
-    \mathbf{T}(n) = \Theta(a^mr^m)
-               = \Theta(a^m(b^k/a)^m)
-               = \Theta(b^{km})
-               = \Theta(n^k)
+    \mathbf{T}(n) = O(a^mr^m)
+               = O(a^m(b^k/a)^m)
+               = O(b^{km})
+               = O(n^k)
     $$
 
 We can summarize the above derivation as the following theorem,
@@ -441,7 +439,7 @@ $$
 $$
 
 Because $a=3$, $b=5$, $c=8$, and $k=2$, we find that $3<5^2$. Applying
-case (3) of the theorem, $\mathbf{T}(n) = \Theta(n^2)$.
+case (3) of the theorem, $\mathbf{T}(n) = O(n^2)$.
 :::
 
 ::: topic
@@ -457,7 +455,7 @@ $$
 $$
 
 Because $a=2$, $b=2$, $c=1$, and $k=1$, we find that $2 = 2^1$. Applying
-case (2) of the theorem, $\mathbf{T}(n) = \Theta(n \log n)$.
+case (2) of the theorem, $\mathbf{T}(n) = O(n \log n)$.
 :::
 
 ### Case study: Average-case analysis of Quicksort
@@ -536,5 +534,5 @@ $$
 
 for $\mathcal{H}_{n+1}$, the Harmonic Series. From Equation (10) of Module
 [summation]{.term},
-$\mathcal{H}_{n+1} = \Theta(\log n)$, so the final solution is
-$\Theta(n \log n)$.
+$\mathcal{H}_{n+1} = O(\log n)$, so the final solution is
+$O(n \log n)$.

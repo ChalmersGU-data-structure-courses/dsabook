@@ -11,7 +11,7 @@ Our next sorting algorithm is called [Bubble Sort]{.term}.
 Bubble Sort is often taught to novice programmers in
 introductory computer science courses. This is unfortunate, because
 Bubble Sort has no redeeming features whatsoever. It is rather slow,
-even compared to the other $\Theta(n^2)$ sorts that are commonly known.
+even compared to the other $O(n^2)$ sorts that are commonly known.
 It is not particularly intutitive -- nobody is going to come naturally
 to Bubble Sort as a way to sort their Bridge hand or their pile of bills
 like they might with
@@ -76,6 +76,6 @@ average, and worst cases.
 The number of swaps required depends on how often a record's value is
 less than that of the record immediately preceding it in the array. We
 can expect this to occur for about half the comparisons in the average
-case, leading to $\Theta(n^2)$ for the expected number of swaps. The
+case, leading to $O(n^2)$ for the expected number of swaps. The
 actual number of swaps performed by Bubble Sort will be identical to
 that performed by Insertion Sort.

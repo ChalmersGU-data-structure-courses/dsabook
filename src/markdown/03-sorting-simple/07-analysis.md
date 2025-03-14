@@ -14,7 +14,7 @@
 Here is a summary for the cost of Insertion Sort, Bubble Sort, and
 Selection Sort in terms of their required number of comparisons and
 swaps in the best, average, and worst cases. The running time for each
-of these sorts is $\Theta(n^2)$ in the average and worst cases.
+of these sorts is $O(n^2)$ in the average and worst cases.
 
             &nbsp;    Insertion     Bubble      Selection
 ------------------  ------------- ----------- -------------

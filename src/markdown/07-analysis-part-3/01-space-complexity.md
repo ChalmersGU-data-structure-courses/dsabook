@@ -99,7 +99,7 @@ assigns each value to an array position corresponding to its value.
     for i = 0 to A.size()-1:
         B[A[i]] = A[i]
 
-This is efficient and requires $\Theta(n)$ time. However, it also
+This is efficient and requires $O(n)$ time. However, it also
 requires two arrays of size $n$. Next is a code fragment that places the
 permutation in order but does so within the same array (thus it is an
 example of an "in place" sort).
@@ -118,7 +118,7 @@ position in the array, and that during this iteration, the value of
 `swap` operations take place, because an integer cannot be moved out of
 its correct position once it has been placed there, and each swap
 operation places at least one integer in its correct position. Thus,
-this code fragment has cost $\Theta(n)$. However, it requires more time
+this code fragment has cost $O(n)$. However, it requires more time
 to run than the first code fragment. On my computer the second version
 takes nearly twice as long to run as the first, but it only requires
 half the space.

@@ -82,17 +82,17 @@ the list nodes (or array cells).
 
 Array-based lists are faster for access by position. To locate an
 element anywhere in the list is constant time, i.e., they take
-$\Theta(1)$ time. In contrast, for singly linked lists, access by
+$O(1)$ time. In contrast, for singly linked lists, access by
 position requires that we march down the list from the front to the
-specified position. This requires $\Theta(n)$ time in the worst case,
+specified position. This requires $O(n)$ time in the worst case,
 which is when if we want to locate the very last element.
 
 Assuming that we already have located a suitable location in the list,
-insertion and removal are constant time, $\Theta(1)$. However, as
-already mentioned, finding that location takes $\Theta(n)$, so the `add`
-and `remove` methods are linear time, $\Theta(n)$. Array-based lists
+insertion and removal are constant time, $O(1)$. However, as
+already mentioned, finding that location takes $O(n)$, so the `add`
+and `remove` methods are linear time, $O(n)$. Array-based lists
 must shift the remainder of the list up or down within the array. This
-requires $\Theta(n)$ time in the worst case.
+requires $O(n)$ time in the worst case.
 
 Note that linked lists and array-based lists have different worst-case
 isntances! For a linked list, inserting/removing at the end takes the
