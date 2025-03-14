@@ -18,6 +18,15 @@ of each operation independently and summing them, amortized analysis
 looks at the cost of the entire series and "charges" each individual
 operation with a share of the total cost.
 
+The standard example for amortised analysis is dynamic arrays which were introduced in section XX.
+In that section we gave an informal argument why it is important to grow the array in the right way.
+If we do it by doubling the array size, we get *amortised* constant time for all basic operatinos,
+but if we do it in the wrong way we get linear time operations in the worst case.
+
+Dynamic arrays are such an important example for amortised analysis that we will devote the whole of next section to them.
+But before that we will explain the concepts and give some other examples.
+
+<!--
 We can apply the technique of amortized analysis in the case of a series
 of sequential searches in an unsorted array. For $n$ random searches,
 the average-case cost for each search is $n/2$, and so the *expected*
@@ -31,89 +40,96 @@ be cheap. The total number of searches, in the best, average, and worst
 case, for this problem must be $\sum_{i=i}^n i \approx n^2/2$. This is a
 factor of two better than the more pessimistic analysis that charges
 each operation in the series with its worst-case cost.
+-->
 
-As another example of amortized analysis, consider the process of
-incrementing a binary counter. The algorithm is to move from the
-lower-order (rightmost) bit toward the high-order (leftmost) bit,
-changing 1s to 0s until the first 0 is encountered. This 0 is changed to
-a 1, and the increment operation is done. Below is an implementation for
-the increment operation, assuming that a binary number of length $n$ is
-stored in array **A** of length $n$.
+::: topic
+#### Example: Multipop on stacks {-}
 
-    i = 0
-    while i < A.size() and A[i] == 1:
-        A[i] = 0
-        i = i + 1
-    if i < A.size():
-        A[i] = 1
+Assume that we want to add a new operation *multipop* on stacks,
+where *multipop*($k$) will pop the $k$ topmost elements off the stack.
+The operation is implemented in the straightforward by simply repeating a single *pop* operation *k* times.
 
-If we count from 0 through $2^n - 1$, (requiring a counter with at least
-$n$ bits), what is the average cost for an increment operation in terms
-of the number of bits processed? Naive worst-case analysis says that if
-all $n$ bits are 1 (except for the high-order bit), then $n$ bits need
-to be processed. Thus, if there are $2^n$ increments, then the cost is
-$n 2^n$. However, this is much too high, because it is rare for so many
-bits to be processed. In fact, half of the time the low-order bit is 0,
-and so only that bit is processed. One quarter of the time, the
-low-order two bits are 01, and so only the low-order two bits are
-processed. Another way to view this is that the low-order bit is always
-flipped, the bit to its left is flipped half the time, the next bit one
-quarter of the time, and so on. We can capture this with the summation
-(charging costs to bits going from right to left)
+What is the time complexity of this new operation?
+Since we're repeating the constant-time *pop* operation $k$ times, we get a time complexity of $O(k)$.
+And the worst case of this is when $k$ is as large as possible, i.e., the stack size $n$.
+So the worst-case complexity for *multipop* is linear in the stack size $O(n)$.
+
+This is quite correct, the worst-case complexity of a single call to *multipop* is linear in $n$.
+But what is the complexity of executing a large number of stack operations in sequence?
+
+Let's say that we start from an empty stack and execute a sequence of $n$ *push* operations and $n$ *multipop* operations.
+Using our analysis above, the whole sequence of $2n$ operations will have worst-case complexity
+$n\cdot O(1) + n\cdot O(n) = O(n+n^2) = O(n^2)$.
+Since we performed $2n$ operations, we get an average complexity per operation of $O(n^2)/2n = O(n)$.
+This analysis is unreasonably pessimistic.
+Clearly it is not really possible to pop $n$ elements each time *multipop* is called.
+Analysis that focuses on single operations cannot deal with this global limit, and so we turn to amortized analysis to model the entire series of operations.
+
+We can reason like this instead:
+$n$ elements are pushed to the stack, and each of these elements can only be popped once.
+The sum of costs for all calls to *multipop* can never be more than the total number of elements that has been pushed on the stack, which is $n$.
+This means that the total complexity of our $n$ calls to *multipop* must be in $O(n)$.
+This is the same complexity as the $n$ calls to *pop*, so our total complexity cannot be worse than $O(n) + O(n) = O(n)$.
+
+Therefore the average worst-case complexity per operation must be $O(n)/n = O(1)$, i.e., constant.
+:::
+
+In the *multipop* example we got two different complexities for the *multipop* operation:
+first we found that it is linear in the stack size, $O(n)$,
+but when averaging over a sequence of operations we found that it is constant, $O(1)$.
+So, which complexity is the right one?
+
+Actually, both are correct.
+The worst-case complexity for a single call to *multipop* is linear in the worst case,
+but the *amortised* complexity is constant.
+This means that when executing *multipop* many many times, it will behave as it is constant time:
+some individual calls might take longer time, but this is balanced out by other calls that are fast.
+
+In the example we used a very hand-waving, informal argument, but the underlying idea is the concept of a [potential]{.term}.
+In the potential method we let cheap operations "save up" some additional work that can be used by more expensive operations later.
+In the example, we let each *push* save an extra operation "for later", which is then used by *multipop*.
+In a way we can say that each *push* takes 2 time units instead of one, and this extra time unit is saved so that *multipop* can make use of it.
+These storage of "for later" operations is called the *potential*.
+
+::: topic
+#### Example: Incrementing a binary counter {-}
+
+As another example of amortised analysis, consider the process of incrementing a binary counter.
+We want to show that this operation (*increment*) takes amortised constant time in the size of the counter.
+Since the counter is stored as a binary number, we say that the size of the counter is the number of bits it uses.
+
+The *increment* operation can be implemented like this.
+
+- Iterate over the bits in the counter, starting from the lowest-order bit (the rightmost bit).
+    - Change each 1-bit to a 0, until the first 0-bit is encountered.
+    - Then change this 0-bit to 1 and return.
+
+For example, to increment the number 175 (bitstring `10101111`), we flip the four rightmost 1's to 0, and then the next 0-bit to 1.
+This results in the bitstring `10110000`, which is the number 176.
+
+The worst case example is when the counter consists of only 1's, such as the number 255 (bitstring `11111111`).
+In this case the complexity of *increment* is linear, $O(n)$, in the number of bits $n$.
+So what is the amortised complexity of *increment*?
+
+If we count from 0 through $M = 2^n-1$, what is the average cost for *increment*?
+Naive worst-case analysis says that each increment costs $O(n)$.
+But it is rare to have so many bits processed in one single increment.
+In fact, half of the time the low-order bit is `0`, and so only that bit is processed.
+One quarter of the time, the low-order two bits are `01`, and so only the low-order two bits are processed.
+Another way to view this is that the low-order bit is always flipped,
+the bit to its left is flipped half the time,
+the next bit one quarter of the time, and so on.
+We can capture this with the following summation (charging costs to bits going from right to left):
 
 $$
-\sum_{i=0}^{n-1} \frac{1}{2^i} < 2
+1 + \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \cdots
+= \sum_{i=0}^{n-1} \frac{1}{2^i}
+< 2
 $$
 
-In other words, the average number of bits flipped on each increment is
-2, leading to a total cost of only $2 \cdot 2^n$ for a series of $2^n$
-increments.
-
-A useful concept for amortized analysis is illustrated by a simple
-variation on the stack data structure, where the *pop*
-function is slightly modified to take a second parameter $k$ indicating
-that $k$ pop operations are to be performed.
-
-The "local" worst-case analysis for *multipop* is
-$O(n)$ for $n$ elements in the stack. Thus, if there are $m_1$
-calls to *push* and $m_2$ calls to *multipop*,
-then the naive worst-case cost for the series of operation is
-$m_1 + m_2\cdot n = m_1 + m_2 \cdot m_1$. This analysis is unreasonably
-pessimistic. Clearly it is not really possible to pop $m_1$ elements
-each time *multipop* is called. Analysis that focuses on
-single operations cannot deal with this global limit, and so we turn to
-amortized analysis to model the entire series of operations.
-
-The key to an amortized analysis of this problem lies in the concept of
-[potential]{.term}. At any given time, a certain
-number of items may be on the stack. The cost for *multipop*
-can be no more than this number of items. Each call to
-*push* places another item on the stack, which can be
-removed by only a single *multipop* operation. Thus, each
-call to *push* raises the potential of the stack by one
-item. The sum of costs for all calls to *multipop* can never
-be more than the total potential of the stack (aside from a constant
-time cost associated with each call to *multipop* itself).
-
-The amortized cost for any series of *push* and
-*multipop* operations is the sum of three costs. First, each
-of the *push* operations takes constant time. Second, each
-*multipop* operation takes a constant time in overhead,
-regardless of the number of items popped on that call. Finally, we count
-the sum of the potentials expended by all *multipop*
-operations, which is at most $m_1$, the number of *push*
-operations. This total cost can therefore be expressed as
-
-$$
-m_1 + (m_2 + m_1) \in O(m_1 + m_2)
-$$
-
-A similar argument was used in our analysis for the partition function
-in the [Quicksort]
-algorithm. While on any given pass through the while loop the left or
-right pointers might move all the way through the remainder of the
-partition, doing so would reduce the number of times that the while loop
-can be further executed.
+In other words, the average number of bits flipped on each increment is 2, leading to a total cost of only $2 \cdot M\in O(M)$ for a series of $M$ increments.
+Therefore, the amortised cost for *increment* is $O(M)/M = O(1)$.
+:::
 
 Our final example uses amortized analysis to prove a relationship
 between the cost of the [move-to-front]{.term}
@@ -127,7 +143,6 @@ allow the positions of records to change, because the most-frequently
 accessed record is first (and thus has least cost), followed by the next
 most frequently accessed record, and so on.
 
-:::: {#MTFThm}
 ::: topic
 #### Theorem: Self-organizing lists {-}
 
@@ -175,4 +190,3 @@ same for both methods, the total number of comparisons required by
 move-to-front is less than twice the number of comparisons required by
 the optimal static ordering.
 :::
-::::
