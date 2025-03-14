@@ -453,8 +453,13 @@ This is known as a [closed-form solution]{.term}, and the process of replacing t
 For example, the summation $\sum_{i=1}^{n} 1$ is simply the expression "1" summed $n$ times (remember that $i$ ranges from 1 to $n$).
 Because the sum of $n$ ones is $n$, the closed-form solution is $n$.
 
-Here is an explanation about the closed form solution of one summation that you will see many times in this book.
+Here are explanations about the closed form solutions of two summations that you will see many times in this book.
 Since this appears so often, it will help you later if you can get comfortable with it.
+
+
+<inlineav id="SummationOneToNCON" src="AlgAnal/SummationOneToNCON.js" name="AlgAnal/SummationOneToNCON" links="AlgAnal/SummationOneToNCON.css"/>
+
+<inlineav id="SummationTwoPowerICON" src="AlgAnal/SummationTwoPowerICON.js" name="AlgAnal/SummationTwoPowerICON" links="AlgAnal/SummationTwoPowerICON.css"/>
 
 <!--
 .. inlineav:: SummationOneToNCON ss
@@ -478,13 +483,31 @@ $$
 \sum_{i = 1}^{n} i^2 &=& \frac{2 n^3 + 3 n^2 + n}{6} = \frac{n(2n + 1)(n + 1)}{6} \\
 \sum_{i = 1}^{\log n} n &=& n \log n \\
 \sum_{i = 0}^\infty a^i &=& \frac{1}{1-a}\ \text{for} \ 0 < a < 1 \\
-\sum_{i = 0}^{n} a^i &=& \frac{a^{n+1} - 1}{a - 1}\ \text{for} \ a \neq 1 \\
-\text{As special cases to the last summation, we have the following two:} \
+\sum_{i = 0}^{n} a^i &=& \frac{a^{n+1} - 1}{a - 1}\ \text{for} \ a \neq 1
+\end{eqnarray}
+$$
+
+As special cases to the last summation, we have the following two:
+
+$$
+\begin{eqnarray}
 \sum_{i = 1}^{n} \frac{1}{2^i} &=& 1 - \frac{1}{2^n} \\
 \sum_{i = 0}^{n} 2^i &=& 2^{n+1} - 1 \\
-\text{As a corollary to the previous summation: } \
-\sum_{i = 0}^{\log n} 2^i &=& 2^{\log n + 1} - 1 = 2n - 1 \\
-\text{Finally: } \
+\end{eqnarray}
+$$
+
+As a corollary to the previous summation:
+
+$$
+\begin{eqnarray}
+\sum_{i = 0}^{\log n} 2^i &=& 2^{\log n + 1} - 1 = 2n - 1
+\end{eqnarray}
+$$
+
+Finally:
+
+$$
+\begin{eqnarray}
 \sum_{i = 1}^{n} \frac{i}{2^i} &=& 2 - \frac{n+2}{2^n}
 \end{eqnarray}
 $$

@@ -6,23 +6,23 @@ $(document).ready(function() {
   var av_name = "SummationOneToNCON";
 
   var interpret = {
-    "sc1": "Let's see how to find the closed form solution for <em>&Sigma;<sub>1&le;i&le;n</sub> i</em>.",
+    "sc1": "Let's see how to find the closed form solution for <em>&Sigma;<sub>i=1...n</sub> i</em>.",
     "sc2": "As an example, suppose that <em>n = 5</em>.",
     "sc3.1": "When <em>i=1</em>, this adds <em>1</em> to the summation. Represent this by a single rectangle.",
-    "sc3.2": "<br> <em>&Sigma;<sub>1&le;i&le;5</sub> i = <span style='color:red;'>1</span> + &Sigma;<sub>2&le;i&le;5 i.</em>",
+    "sc3.2": "<br> <em>&Sigma;<sub>i=1...5</sub> i = <span style='color:red;'>1</span> + &Sigma;<sub>i=2...5</sub> i</em>",
     "sc4.1": "When <em>i = 2</em>, this adds <em>2</em> to the overall summation. Represent this by two rectangles.",
-    "sc4.2": "<br> <em>&Sigma;<sub>1&le;i&le;5</sub> i = 1 + <span style='color:red;'>2</span> + &Sigma;<sub>3&le;i&le;5</sub> i</em>",
+    "sc4.2": "<br> <em>&Sigma;<sub>i=1...5</sub> i = 1 + <span style='color:red;'>2</span> + &Sigma;<sub>i=3...5</sub> i</em>",
     "sc5.1": "When <em>i = 3</em>, this adds <em>3</em> to the summation. Represent this by three rectangles.",
-    "sc5.2": "<br> <em>&Sigma;<sub>1&le;i&le;5</sub> i = 1 + 2 + <span style='color:red;'>3</span> + &Sigma;<sub>4&le;i&le;5</sub> i</em>",
+    "sc5.2": "<br> <em>&Sigma;<sub>i=1...5</sub> i = 1 + 2 + <span style='color:red;'>3</span> + &Sigma;<sub>i=4...5</sub> i</em>",
     "sc6.1": "When <em>i = 4</em>, this adds <em>4</em> to the summation. Represent this by four rectangles.",
-    "sc6.2": "<br> <em>&Sigma;<sub>1&le;i&le;5</sub> i = 1 + 2 + 3 + <span style='color:red;'>4</span> + &Sigma;<sub>5&le;i&le;5</sub> i</em>",
+    "sc6.2": "<br> <em>&Sigma;<sub>i=1...5</sub> i = 1 + 2 + 3 + <span style='color:red;'>4</span> + &Sigma;&Sigma;<sub>i=5...5</sub> i</em>",
     "sc7.1": "When <em>i = 5</em>, this adds <em>5</em> to the summation. Represent this by five rectangles.",
-    "sc7.2": "<br> <em>&Sigma;<sub>1&le;i&le;5</sub> i = 1 + 2 + 3 + 4 + <span style='color:red;'>5</span></em>",
+    "sc7.2": "<br> <em>&Sigma;<sub>i=1...5</sub> i = 1 + 2 + 3 + 4 + <span style='color:red;'>5</span></em>",
     "sc8": "The closed form solution for this summation can be found by calculating the area of the resulting shape.",
     "sc9": "The area will be the area of the big triangle",
     "sc10" : "<br/><em>+</em> the sum of the areas of the <em>n</em> small rectangles.",
     "sc11": "So, the area is <em>n<sup>2</sup>/2 + n/2 = n(n+1)/2</em>.",
-    "sc12": "Finally, we have <em>&Sigma;<sub>1&le;i&le;n</sub> i = n(n+1)/2</em>."
+    "sc12": "Finally, we have <em>&Sigma;<sub>i=1...n</sub> i = n(n+1)/2</em>."
   };
 
   var av;

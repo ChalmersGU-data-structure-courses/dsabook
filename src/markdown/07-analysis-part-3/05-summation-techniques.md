@@ -1,4 +1,5 @@
 
+<!--
 ## Summation techniques
 
 ::: TODO
@@ -305,3 +306,4 @@ $$
 Here is another example.
 
 <inlineav id="GeometricSumProofCON" src="AlgAnal/GeometricSumProofCON.js" name="AlgAnal/GeometricSumProofCON" links="AlgAnal/GeometricSumProofCON.css"/>
+-->
