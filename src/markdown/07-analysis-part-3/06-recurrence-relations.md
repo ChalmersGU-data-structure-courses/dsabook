@@ -360,49 +360,34 @@ $$
 The summation part of this equation is a geometric series whose sum
 depends on the ratio $r = b^k/a$. There are three cases.
 
-(1) $r<1$. From Equation (4) of Module
-    [summation]{.term},
+Case (1)
 
-    $$
-    \sum_{i=0}^{m} r^i < 1/(1-r),\ \textrm{a constant}
-    $$
+:   $r<1$. From Equation (4) of section XX,
+    $ \sum_{i=0}^{m} r^i < 1/(1-r) $, which is a constant.
 
     Thus,
+    $ \mathbf{T}(n) = O(a^m) = O(n^{log_b a}) $.
 
-    $$
-    \mathbf{T}(n) = O(a^m) = O(n^{log_ba})
-    $$
+Case (2)
 
-(2) $r=1$. Because $r = b^k/a$, we know that $a = b^k$. From the
+:   $r=1$. Because $r = b^k/a$, we know that $a = b^k$. From the
     definition of logarithms it follows immediately that $k = \log_b a$.
     Also note that since we defined $n = b^m$, then $m = \log_b n$.
-    Thus,
 
-    $$
-    \sum_{i=0}^{m} r^i = m + 1 = \log_bn + 1
-    $$
+    Thus,
+    $ \sum_{i=0}^{m} r^i = m + 1 = \log_bn + 1 $.
 
     Because $a^m = n^{\log_b a} = n^k$, we have
+    $ \mathbf{T}(n) = O(n^{\log_ba}\log_b n) = O(n^k\log_b n) $.
 
-    $$
-    \mathbf{T}(n) = O(n^{\log_ba}\log_b n) = O(n^k\log_b n)
-    $$
+Case (3)
 
-(3) $r>1$. From Equation (5) of Module
-    [summation]{.term},
-
-    $$
-    \sum_{i=0}^{m} r^i = \frac{r^{m+1} - 1}{r - 1} = O(r^m)
-    $$
+:   $r>1$. From Equation (5) of section XX,
+    $ \sum_{i=0}^{m} r^i = \frac{r^{m+1} - 1}{r - 1} = O(r^m) $.
 
     Thus,
+    $ \mathbf{T}(n) = O(a^m r^m) = O(a^m (b^k/a)^m) = O(b^{km}) = O(n^k) $.
 
-    $$
-    \mathbf{T}(n) = O(a^mr^m)
-               = O(a^m(b^k/a)^m)
-               = O(b^{km})
-               = O(n^k)
-    $$
 
 We can summarize the above derivation as the following theorem,
 sometimes referred to as the [Master Theorem]{.term}.
@@ -411,17 +396,17 @@ sometimes referred to as the [Master Theorem]{.term}.
 ::: topic
 #### Theorem: The Master Theorem {-}
 
-**The Master Theorem:** For any recurrence relation of the form
+For any recurrence relation of the form
 $\mathbf{T}(n) = a\mathbf{T}(n/b) + cn^k, \mathbf{T}(1) = c$, the following
 relationships hold.
 
 $$
-\mathbf{T}(n) = \left\{ \begin{array}{ll}
-             \Theta(n^{\log_ba})  &  \mbox{if \(a > b^k\)} \\
-             \Theta(n^k\log_b n)    &  \mbox{if \(a = b^k\)} \\
-             \Theta(n^k)          &  \mbox{if \(a < b^k\).}
-            \end{array}
-   \right.
+\mathbf{T}(n) =
+\left\{ \begin{array}{ll}
+    O(n^{\log_ba})  &  \textrm{if}\ a > b^k \\
+    O(n^k\log_b n)  &  \textrm{if}\ a = b^k \\
+    O(n^k)          &  \textrm{if}\ a < b^k
+\end{array} \right.
 $$
 
 :::
@@ -434,10 +419,7 @@ re-deriving the solution for the recurrence.
 #### Example: Using the Master Theorem {-}
 
 Apply the Master Theorem to solve
-
-$$
-\mathbf{T}(n) = 3\mathbf{T}(n/5) + 8n^2
-$$
+$ \mathbf{T}(n) = 3\mathbf{T}(n/5) + 8n^2 $.
 
 Because $a=3$, $b=5$, $c=8$, and $k=2$, we find that $3<5^2$. Applying
 case (3) of the theorem, $\mathbf{T}(n) = O(n^2)$.
@@ -465,7 +447,7 @@ case (2) of the theorem, $\mathbf{T}(n) = O(n \log n)$.
 - Average-case is **not** a good thing - what are we averaging on?
 :::
 
-In Module [Quicksort], we determined that the average-case analysis of Quicksort
+In section XX, we determined that the average-case analysis of quicksort
 had the following recurrence:
 
 $$
@@ -533,7 +515,6 @@ $$
 \end{eqnarray*}
 $$
 
-for $\mathcal{H}_{n+1}$, the Harmonic Series. From Equation (10) of Module
-[summation]{.term},
+for $\mathcal{H}_{n+1}$, the Harmonic Series. From Equation (10) of section XX,
 $\mathcal{H}_{n+1} = O(\log n)$, so the final solution is
 $O(n \log n)$.
