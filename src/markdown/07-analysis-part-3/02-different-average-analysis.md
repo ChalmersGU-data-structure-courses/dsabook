@@ -1,4 +1,5 @@
 
+<!--
 ## Three different types of average analysis
 
 ::: TODO
@@ -14,3 +15,4 @@
 ### Amortised analysis
 
 ### Randomised analysis
+-->
