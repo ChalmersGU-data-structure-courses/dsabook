@@ -224,6 +224,10 @@ We use the following notation in our pseudocode:
 
 Tuples are useful for returning multiple values from a function, grouping related data, and working with fixed collections that should not be modified.
 
+::: TODO
+- Note that Java doesn't have tuples, and how to fix that (same for C?)
+:::
+
 #### Interfaces {-}
 
 In our pseudocode, we introduce the concept of an _interface_ to distinguish between an abstract data type (ADT) and its concrete implementation. 
