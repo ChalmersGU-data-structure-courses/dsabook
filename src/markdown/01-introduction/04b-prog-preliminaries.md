@@ -136,8 +136,9 @@ Arrays are one of the fundamental data structures in programming because they ar
 Accessing or modifying an element in an array is extremely fast, making arrays important for many algorithms.
 
 ::: note
-*Note to Python programmers*: in Python, arrays are called *lists*, and are written like this: `[1,2,3]`. 
-There is one difference between arrays and Python lists: in most programming languages, any given array has a fixed size. 
+*Note to Python programmers*:
+Python doesn't have arrays, instead they have *lists* which are written like this: `[1,2,3]`.
+There is one important difference between arrays and Python lists: any given array has a fixed size.
 However, Python lists can change in size -- for example, the `append` method adds a new element to the list, increasing its size.
 In this book, we will work with arrays that have a _fixed_ size.
 Python lists are so-called [dynamic arrays](#dynamic-array-based-lists).
