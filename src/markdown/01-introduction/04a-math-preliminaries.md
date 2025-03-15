@@ -241,6 +241,10 @@ Therefore, the subset operator does not define a total order on the powerset of 
 
 We now define several mathematical terms and concepts, providing a reference for future use.
 
+::: TODO
+- (Peter) I don't like that whitespace changes the meaning: "2Kb" is different from "2 Kb"
+:::
+
 Units of measure:
 
 :   We will use the following notation for units of measure.
