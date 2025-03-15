@@ -571,12 +571,12 @@ For example, the number of multiplications required by a recursive version of th
 This can be defined using the following recurrence:
 
 $$
-\mathbf{T}(n) = \mathbf{T}(n-1) + 1\ \mbox{for}\ n>1;
-\quad \mathbf{T}(0) = \mathbf{T}(1) = 0.
+T(n) = T(n-1) + 1\ \mbox{for}\ n>1;
+\quad T(0) = T(1) = 0.
 $$
 
 As with summations, we typically wish to replace the recurrence relation with a closed-form solution.
-One approach is to expand the recurrence by replacing any occurrences of $\mathbf{T}$ on the right-hand side with its definition.
+One approach is to expand the recurrence by replacing any occurrences of $T$ on the right-hand side with its definition.
 
 We will go deeper into recurrence relations when we analyse the complexity of divide-and-conquer algorithms.
 -->
@@ -593,7 +593,7 @@ We will go deeper into recurrence relations when we analyse the complexity of di
 A slightly more complicated recurrence is
 
 $$
-\mathbf{T}(n) = \mathbf{T}(n-1) + n; \quad \mathbf{T}(1) = 1.
+T(n) = T(n-1) + n; \quad T(1) = 1.
 $$
 -->
 
@@ -868,22 +868,28 @@ This example shows how we can use induction to prove that a proposed
 closed-form solution for a [recurrence relation]{.term} is correct.
 
 **Theorem:**
-The recurrence relation
-$\mathbf{T}(n) = \mathbf{T}(n-1) + 1; \quad \mathbf{T}(1) = 0$
-has closed-form solution $\mathbf{T}(n) = n - 1$.
+The following recurrence relation has closed-form solution $T(n) = n - 1$:
+
+$$
+\begin{eqnarray}
+T(n) &=& T(n-1) + 1 \\
+T(1) &=& 0
+\end{eqnarray}
+$$
+
 
 **Proof:**
 To prove the base case, we observe from the definition that
-$\mathbf{T}(2) = \mathbf{T}(1) + 1 = 0 + 1 = 1$.
+$T(2) = T(1) + 1 = 0 + 1 = 1$.
 From the proposed closed-form solution we get
-$\mathbf{T}(2) = 2 - 1 = 1$, which matches the definition.
+$T(2) = 2 - 1 = 1$, which matches the definition.
 
-The induction hypothesis is that $\mathbf{T}(n-1) = n-2$.
+The induction hypothesis is that $T(n-1) = n-2$.
 Combining the definition of the recurrence with the induction
 hypothesis, we see immediately that
 
 $$
-\mathbf{T}(n) = \mathbf{T}(n-1) + 1 = n-2 + 1 = n-1
+T(n) = T(n-1) + 1 = n-2 + 1 = n-1
 $$
 
 for $n > 1$.

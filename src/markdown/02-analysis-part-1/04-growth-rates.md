@@ -25,7 +25,7 @@ better off solving a larger problem. And because the new machine is ten
 times faster, you would like to sort ten times as many records.
 
 If your algorithm's growth rate is linear (i.e., if the equation that
-describes the running time on input size $n$ is $\mathbf{T}(n) = cn$ for
+describes the running time on input size $n$ is $T(n) = cn$ for
 some constant $c$), then 100,000 records on the new machine will be
 sorted in the same time as 10,000 records on the old machine. If the
 algorithm's growth rate is greater than $cn$, such as $c_1n^2$, then
@@ -75,7 +75,7 @@ computer. This relationship holds true regardless of the algorithm's
 growth rate: Constant factors never affect the relative improvement
 gained by a faster computer.
 
-An algorithm with time equation $\mathbf{T}(n) = 2n^2$ does not receive
+An algorithm with time equation $T(n) = 2n^2$ does not receive
 nearly as great an improvement from the faster machine as an algorithm
 with linear growth rate. Instead of an improvement by a factor of ten,
 the improvement is only the square root of that:
@@ -84,7 +84,7 @@ not only solves a smaller problem in a given time in the first place, it
 *also* receives less of a speedup from a faster computer. As computers
 get ever faster, the disparity in problem sizes becomes ever greater.
 
-The algorithm with growth rate $\mathbf{T}(n) = 5 n \log n$ improves by
+The algorithm with growth rate $T(n) = 5 n \log n$ improves by
 a greater amount than the one with quadratic growth rate, but not by as
 great an amount as the algorithms with linear growth rates.
 
@@ -115,12 +115,12 @@ time would appear as a horizontal line. If the line for the amount of
 time available to solve your problem is above the point at which the
 curves for the two growth rates in question meet, then the algorithm
 whose running time grows less quickly is faster. An algorithm with
-running time $\mathbf{T}(n)=n^2$ requires $1000 \times 1000 = 1,000,000$
+running time $T(n)=n^2$ requires $1000 \times 1000 = 1,000,000$
 time steps for an input of size $n=1000$. An algorithm with running time
-$\mathbf{T}(n) = n \log n$ requires $1000 \times 10 = 10,000$ time steps
+$T(n) = n \log n$ requires $1000 \times 10 = 10,000$ time steps
 for an input of size $n = 1000$, which is an improvement of much more
 than a factor of ten when compared to the algorithm with running time
-$\mathbf{T}(n) = n^2$. Because $n^2 > 10 n \log n$ whenever $n > 58$, if
+$T(n) = n^2$. Because $n^2 > 10 n \log n$ whenever $n > 58$, if
 the typical problem size is larger than 58 for this example, then you
 would be much better off changing algorithms instead of buying a
 computer ten times faster. Furthermore, when you do buy a faster
@@ -164,21 +164,21 @@ comes from the fact that $n$ appears in the exponent. The line labeled
 $n!$ also grows exponentially.
 
 As you can see from the figure, the difference between an algorithm
-whose running time has cost $\mathbf{T}(n) = 10n$ and another with cost
-$\mathbf{T}(n) = 2n^2$ becomes tremendous as $n$ grows. For $n > 5$, the
-algorithm with running time $\mathbf{T}(n) = 2n^2$ is already much
+whose running time has cost $T(n) = 10n$ and another with cost
+$T(n) = 2n^2$ becomes tremendous as $n$ grows. For $n > 5$, the
+algorithm with running time $T(n) = 2n^2$ is already much
 slower. This is despite the fact that $10n$ has a greater constant
 factor than $2n^2$. Comparing the two curves marked $20n$ and $2n^2$
 shows that changing the constant factor for one of the equations only
 shifts the point at which the two curves cross. For $n>10$, the
-algorithm with cost $\mathbf{T}(n) = 2n^2$ is slower than the algorithm
-with cost $\mathbf{T}(n) = 20n$. This graph also shows that the equation
-$\mathbf{T}(n) = 5 n \log n$ grows somewhat more quickly than both
-$\mathbf{T}(n) = 10 n$ and $\mathbf{T}(n) = 20 n$, but not nearly so
-quickly as the equation $\mathbf{T}(n) = 2n^2$. For constants
+algorithm with cost $T(n) = 2n^2$ is slower than the algorithm
+with cost $T(n) = 20n$. This graph also shows that the equation
+$T(n) = 5 n \log n$ grows somewhat more quickly than both
+$T(n) = 10 n$ and $T(n) = 20 n$, but not nearly so
+quickly as the equation $T(n) = 2n^2$. For constants
 $a, b > 1, n^a$ grows faster than either $\log^b n$ or $\log n^b$.
-Finally, algorithms with cost $\mathbf{T}(n) = 2^n$ or
-$\mathbf{T}(n) = n!$ are prohibitively expensive for even modest values
+Finally, algorithms with cost $T(n) = 2^n$ or
+$T(n) = n!$ are prohibitively expensive for even modest values
 of $n$. Note that for constants $a, b \geq 1, a^n$ grows faster than
 $n^b$.
 

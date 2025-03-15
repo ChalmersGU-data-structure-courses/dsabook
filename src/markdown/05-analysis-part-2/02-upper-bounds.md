@@ -18,7 +18,7 @@ notation, called [big-$O$ notation]{.term}. If
 the upper bound for an algorithm's growth rate (for, say, the worst
 case) is $f(n)$, then we would write that this algorithm is "in the set
 $O(f(n))$ in the worst case" (or just "in $O(f(n))$ in the worst
-case"). For example, if $n^2$ grows as fast as $\mathbf{T}(n)$ (the
+case"). For example, if $n^2$ grows as fast as $T(n)$ (the
 running time of our algorithm) for the worst-case input, we would say
 the algorithm is "in $O(n^2)$ in the worst case".
 
@@ -54,23 +54,23 @@ Consider the sequential search algorithm for finding a specified value
 in an array of integers. If visiting and examining one value in the
 array requires $c_s$ steps where $c_s$ is a positive number, and if the
 value we search for has equal probability of appearing in any position
-in the array, then in the average case $\mathbf{T}(n) = c_s n/2$. For
+in the array, then in the average case $T(n) = c_s n/2$. For
 all values of $n > 1$, $c_s n/2 \leq c_s n$. Therefore, by the
-definition, $\mathbf{T}(n)$ is in $O(n)$ for $n_0 = 1$ and $c = c_s$.
+definition, $T(n)$ is in $O(n)$ for $n_0 = 1$ and $c = c_s$.
 :::
 
 ::: topic
 #### Example: Quadratic algorithm {-}
 
-For a particular algorithm, $\mathbf{T}(n) = c_1 n^2 + c_2 n$ in the
+For a particular algorithm, $T(n) = c_1 n^2 + c_2 n$ in the
 average case where $c_1$ and $c_2$ are positive numbers. Then,
 
 $$
 c_1 n^2 + c_2 n \leq c_1 n^2 + c_2 n^2 \leq (c_1 + c_2)n^2
 $$
 
-for all $n > 1$. So, $\mathbf{T}(n) \leq c n^2$ for $c = c_1 + c_2$, and
-$n_0 = 1$. Therefore, $\mathbf{T}(n)$ is in $O(n^2)$ by the definition.
+for all $n > 1$. So, $T(n) \leq c n^2$ for $c = c_1 + c_2$, and
+$n_0 = 1$. Therefore, $T(n)$ is in $O(n^2)$ by the definition.
 :::
 
 ::: topic
@@ -78,8 +78,8 @@ $n_0 = 1$. Therefore, $\mathbf{T}(n)$ is in $O(n^2)$ by the definition.
 
 Assigning the value from a given position of an array to a variable
 takes constant time regardless of the size of the array. Thus,
-$\mathbf{T}(n) = c$ (for the best, worst, and average cases). We could
-say in this case that $\mathbf{T}(n)$ is in $O(c)$. However, it is
+$T(n) = c$ (for the best, worst, and average cases). We could
+say in this case that $T(n)$ is in $O(c)$. However, it is
 traditional to say that an algorithm whose running time has a constant
 upper bound is in $O(1)$.
 :::

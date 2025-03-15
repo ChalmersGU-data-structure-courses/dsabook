@@ -1608,7 +1608,12 @@ using [recursion]{.term}.
 A common form of [recurrence relation]{.term}
 that have the form
 
-$$\mathbf{T}(n) = a\mathbf{T}(n/b) + cn^k;\quad \mathbf{T}(1) = c$$
+$$
+\begin{eqnarray}
+T(n) &=& a T(n/b) + cn^k \\
+T(1) &=& c
+\end{eqnarray}
+$$
 
 where $a$, $b$, $c$, and $k$ are constants. In general, this
 recurrence describes a problem of size $n$ divided into $a$

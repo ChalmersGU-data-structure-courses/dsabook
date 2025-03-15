@@ -116,9 +116,8 @@ array.
 
 Because the most important factor affecting running time is normally
 size of the input, for a given input size $n$ we often express the time
-$\mathbf{T}$ to run the algorithm as a function of $n$, written as
-$\mathbf{T}(n)$. We will always assume $\mathbf{T}(n)$ is a non-negative
-value.
+$T$ to run the algorithm as a function of $n$, written as $T(n)$.
+We will always assume $T(n)$ is a non-negative value.
 
 Let us call $c$ the amount of time required to compare two integers in
 function `largest`. We do not care right now what the precise value of
@@ -134,7 +133,7 @@ sequential search algorithm for any typical implementation) has a
 running time expressed by the equation
 
 $$
-\mathbf{T}(n) = cn
+T(n) = cn
 $$
 
 This equation describes the growth rate for the running time of the
@@ -155,7 +154,7 @@ array size), the time to copy the value from the first position of the
 array is always $c_1$. Thus, the equation for this algorithm is simply
 
 $$
-\mathbf{T}(n) = c_1
+T(n) = c_1
 $$
 
 indicating that the size of the input $n$ has no effect on the running
@@ -179,5 +178,5 @@ takes constant time; call this time $c_2$. (We can ignore the time
 required to initialize `sum`, and to increment the loop counters `i` and
 `j`. In practice, these costs can safely be bundled into time $c_2$.)
 The total number of increment operations is $n^2$. Thus, we say that the
-running time is $\mathbf{T}(n) = c_2 n^2$.
+running time is $T(n) = c_2 n^2$.
 ::::

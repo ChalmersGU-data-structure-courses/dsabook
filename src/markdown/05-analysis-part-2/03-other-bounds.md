@@ -40,14 +40,14 @@ Lower bound
 ::: topic
 #### Example: Quadratic algorithm {-}
 
-Assume $\mathbf{T}(n) = c_1 n^2 + c_2 n$ for $c_1$ and $c_2 > 0$. Then,
+Assume $T(n) = c_1 n^2 + c_2 n$ for $c_1$ and $c_2 > 0$. Then,
 
 $$
 c_1 n^2 + c_2 n \geq c_1 n^2
 $$
 
-for all $n > 1$. So, $\mathbf{T}(n) \geq c n^2$ for $c = c_1$ and
-$n_0 = 1$. Therefore, $\mathbf{T}(n)$ is in $\Omega(n^2)$ by the
+for all $n > 1$. So, $T(n) \geq c n^2$ for $c = c_1$ and
+$n_0 = 1$. Therefore, $T(n)$ is in $\Omega(n^2)$ by the
 definition.
 :::
 ::::
@@ -77,7 +77,7 @@ Assume a particular algorithm has the following behavior:
 
 $$
 \begin{eqnarray}
-\mathbf{T}(n)
+T(n)
 &=&
 \left\{ \begin{array}{ll}
     n  & \mbox{for all odd}\ n \\
@@ -87,16 +87,16 @@ $$
 $$
 
 From this definition, $n^2/100 \geq k\cdot n^2$ for all even $n$, for any $k<0.01$.
-So, $\mathbf{T}(n) \geq k\cdot n^2$ for an infinite number of values of $n$.
-Therefore, $\mathbf{T}(n)$ is in $\Omega(n^2)$ by the definition.
+So, $T(n) \geq k\cdot n^2$ for an infinite number of values of $n$.
+Therefore, $T(n)$ is in $\Omega(n^2)$ by the definition.
 
-For this equation for $\mathbf{T}(n)$, it is true that all inputs of
+For this equation for $T(n)$, it is true that all inputs of
 size $n$ take at least $cn$ time. But an infinite number of inputs
 of size $n$ take $cn^2$ time, so we would like to say that the
 algorithm is in $\Omega(n^2)$. Unfortunately, using our first
 definition will yield a lower bound of $\Omega(n)$ because it is not
 possible to pick constants $k$ and $n_0$ such that
-$\mathbf{T}(n) \geq k\cdot n^2$ for all $n>n_0$. The alternative
+$T(n) \geq k\cdot n^2$ for all $n>n_0$. The alternative
 definition does result in a lower bound of $\Omega(n^2)$ for this
 algorithm, which seems to fit common sense more closely.
 Fortunately, few real algorithms or computer programs display the

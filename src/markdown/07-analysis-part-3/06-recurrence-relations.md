@@ -41,13 +41,13 @@ This can be defined using the following recurrence:
 
 $$
 \begin{eqnarray}
-\mathbf{T}(n) &=& \mathbf{T}(n-1) + 1 \mbox{~~for~} n>1 \\
-\mathbf{T}(0) = \mathbf{T}(1) &=& 0
+T(n) &=& T(n-1) + 1 \mbox{~~for~} n>1 \\
+T(0) = T(1) &=& 0
 \end{eqnarray}
 $$
 
 As with summations, we typically wish to replace the recurrence relation with a closed-form solution.
-One approach is to expand the recurrence by replacing any occurrences of $\mathbf{T}$ on the right-hand side with its definition.
+One approach is to expand the recurrence by replacing any occurrences of $T$ on the right-hand side with its definition.
 
 <inlineav id="LinearRecurrencesCON" src="AlgAnal/LinearRecurrencesCON.js" name="AlgAnal/LinearRecurrencesCON" links="AlgAnal/LinearRecurrencesCON.css"/>
 
@@ -55,8 +55,8 @@ A slightly more complicated recurrence is
 
 $$
 \begin{eqnarray}
-\mathbf{T}(n) &=& \mathbf{T}(n-1) + n \\
-\mathbf{T}(1) &=& 1
+T(n) &=& T(n-1) + n \\
+T(1) &=& 1
 \end{eqnarray}
 $$
 
@@ -71,8 +71,8 @@ The cost for this can be modeled as
 
 $$
 \begin{eqnarray}
-\mathbf{T}(n) &=& 2\mathbf{T}(n/2) + n \\
-\mathbf{T}(1) &=& 1
+T(n) &=& 2T(n/2) + n \\
+T(1) &=& 1
 \end{eqnarray}
 $$
 
@@ -111,8 +111,8 @@ whose running time is described by the equation
 
 $$
 \begin{eqnarray}
-\mathbf{T}(n) &=& 2\mathbf{T}(n/2) + n \\
-\mathbf{T}(1) &=& 1
+T(n) &=& 2T(n/2) + n \\
+T(1) &=& 1
 \end{eqnarray}
 $$
 
@@ -120,46 +120,46 @@ We begin by guessing that this recurrence has an upper bound in
 $O(n^2)$. To be more precise, assume that
 
 $$
-\mathbf{T}(n) \leq n^2
+T(n) \leq n^2
 $$
 
 We prove this guess is correct by induction. In this proof, we assume
 that $n$ is a power of two, to make the calculations easy. For the base
-case, $\mathbf{T}(1) = 1 \leq 2^2$. For the induction step, we need to show
-that $\mathbf{T}(n) \leq n^2$ implies that $\mathbf{T}(2n) \leq (2n)^2$ for
+case, $T(1) = 1 \leq 2^2$. For the induction step, we need to show
+that $T(n) \leq n^2$ implies that $T(2n) \leq (2n)^2$ for
 $n = 2^N, N \geq 1$. The induction hypothesis is
 
 $$
-\mathbf{T}(i) \leq i^2,\ \textrm{for all}\ i \leq n
+T(i) \leq i^2,\ \textrm{for all}\ i \leq n
 $$
 
 It follows that
 
 $$
-\mathbf{T}(2n) = 2\mathbf{T}(n) + 2n \leq 2n^2 + 2n \leq 4n^2 \leq (2n)^2
+T(2n) = 2T(n) + 2n \leq 2n^2 + 2n \leq 4n^2 \leq (2n)^2
 $$
 
-which is what we wanted to prove. Thus, $\mathbf{T}(n)$ is in $O(n^2)$.
+which is what we wanted to prove. Thus, $T(n)$ is in $O(n^2)$.
 
 Is $O(n^2)$ a good estimate? In the next-to-last step we went from
 $n^2 + 2n$ to the much larger $4n^2$. This suggests that $O(n^2)$ is a
 high estimate. If we guess something smaller, such as
-$\mathbf{T}(n) \leq cn$ for some constant $c$, it should be clear that this
+$T(n) \leq cn$ for some constant $c$, it should be clear that this
 cannot work because $c 2 n = 2 c n$ and there is no room for the extra
 $n$ cost to join the two pieces together. Thus, the true cost must be
 somewhere between $cn$ and $n^2$.
 
-Let us now try $\mathbf{T}(n) \leq n \log n$. For the base case, the
+Let us now try $T(n) \leq n \log n$. For the base case, the
 definition of the recurrence sets
-$\mathbf{T}(1) = 1 \leq (2 \cdot \log 2) = 2$. Assume (induction
-hypothesis) that $\mathbf{T}(n) \leq n \log n$. Then,
+$T(1) = 1 \leq (2 \cdot \log 2) = 2$. Assume (induction
+hypothesis) that $T(n) \leq n \log n$. Then,
 
 $$
-\mathbf{T}(2n) = 2\mathbf{T}(n) + 2n \leq 2n \log n + 2n
+T(2n) = 2T(n) + 2n \leq 2n \log n + 2n
 \leq 2n(\log n + 1) \leq 2 n \log 2n
 $$
 
-Therefore we have proved that $\mathbf{T}(n)$ is in $O(n\log n)$.
+Therefore we have proved that $T(n)$ is in $O(n\log n)$.
 :::
 
 The following two examples are about the growth rates of a function (the factorial and the Fibonacci sequence),
@@ -373,8 +373,8 @@ known as [divide-and-conquer recurrences]{.term}. These have the form
 
 $$
 \begin{eqnarray}
-\mathbf{T}(n) &=& a\mathbf{T}(n/b) + cn^k \\
-\mathbf{T}(1) &=& c
+T(n) &=& aT(n/b) + cn^k \\
+T(1) &=& c
 \end{eqnarray}
 $$
 
@@ -388,10 +388,10 @@ for any divide and conquer recurrence, assuming that $n = b^m$.
 
 $$
 \begin{eqnarray*}
-\mathbf{T}(n)  &  =  &  a\mathbf{T}(n/b) + cn^k \\
-            &  =  &  a(a\mathbf{T}(n/b^2) + c(n/b)^k) + cn^k \\
-            &  =  &  a(a[a\mathbf{T}(n/b^3) + c(n/b^2)^k] + c(n/b)^k) + cn^k \\
-            &  =  &  a^m\mathbf{T}(1) + a^{m-1}c(n/b^{m-1})^k + \cdots + ac(n/b)^k + cn^k \\
+T(n)  &  =  &  aT(n/b) + cn^k \\
+            &  =  &  a(aT(n/b^2) + c(n/b)^k) + cn^k \\
+            &  =  &  a(a[aT(n/b^3) + c(n/b^2)^k] + c(n/b)^k) + cn^k \\
+            &  =  &  a^mT(1) + a^{m-1}c(n/b^{m-1})^k + \cdots + ac(n/b)^k + cn^k \\
             &  =  &  a^mc + a^{m-1}c(n/b^{m-1})^k + \cdots + ac(n/b)^k + cn^k \\
             &  =  &  c\sum_{i=0}^{m} a^{m-i} b^{ik} \\
             &  =  & ca^m\sum_{i=0}^{m} (b^k/a)^i
@@ -405,7 +405,7 @@ Here is a more visual presentation of this same derivation.
 So, we are left with this result:
 
 $$
-\mathbf{T}(n) = ca^m\sum_{i=0}^{m} (b^k/a)^i
+T(n) = ca^m\sum_{i=0}^{m} (b^k/a)^i
 $$
 
 At this point, it is useful to note that
@@ -420,7 +420,7 @@ $$
 This gives us
 
 $$
-\mathbf{T}(n) = c n^{\log_ba} \sum_{i=0}^{m} (b^k/a)^i
+T(n) = c n^{\log_ba} \sum_{i=0}^{m} (b^k/a)^i
 $$
 
 The summation part of this equation is a geometric series whose sum
@@ -432,7 +432,7 @@ Case (1)
     $\sum_{i=0}^{m} r^i < 1/(1-r)$, which is a constant.
 
     Thus,
-    $\mathbf{T}(n) \in O(a^m) = O(n^{log_b a})$.
+    $T(n) \in O(a^m) = O(n^{log_b a})$.
 
 Case (2)
 
@@ -444,7 +444,7 @@ Case (2)
     $\sum_{i=0}^{m} r^i = m + 1 = \log_bn + 1$.
 
     Because $a^m = n^{\log_b a} = n^k$, we have
-    $\mathbf{T}(n) \in O(n^{\log_ba}\log_b n) = O(n^k\log_b n)$.
+    $T(n) \in O(n^{\log_ba}\log_b n) = O(n^k\log_b n)$.
 
 Case (3)
 
@@ -452,7 +452,7 @@ Case (3)
     $\sum_{i=0}^{m} r^i = \frac{r^{m+1} - 1}{r - 1} \in O(r^m)$.
 
     Thus,
-    $\mathbf{T}(n) \in O(a^m r^m) = O(a^m (b^k/a)^m) = O(b^{km}) = O(n^k)$.
+    $T(n) \in O(a^m r^m) = O(a^m (b^k/a)^m) = O(b^{km}) = O(n^k)$.
 
 
 We can summarize the above derivation as the following theorem,
@@ -463,11 +463,11 @@ sometimes referred to as the [Master Theorem]{.term}.
 #### Theorem: The Master Theorem {-}
 
 For any recurrence relation of the form
-$\mathbf{T}(n) = a\mathbf{T}(n/b) + cn^k$; $\mathbf{T}(1) = c$, the following
+$T(n) = aT(n/b) + cn^k$; $T(1) = c$, the following
 relationships hold.
 
 $$
-\mathbf{T}(n) \in
+T(n) \in
 \left\{ \begin{array}{ll}
     O(n^{\log_ba})  &  \textrm{if}\ a > b^k \\
     O(n^k\log_b n)  &  \textrm{if}\ a = b^k \\
@@ -485,10 +485,10 @@ re-deriving the solution for the recurrence.
 #### Example: Using the Master Theorem {-}
 
 Apply the Master Theorem to solve
-$\mathbf{T}(n) = 3\mathbf{T}(n/5) + 8n^2$.
+$T(n) = 3T(n/5) + 8n^2$.
 
 Because $a=3$, $b=5$, $c=8$, and $k=2$, we find that $3<5^2$. Applying
-case (3) of the theorem, $\mathbf{T}(n) \in O(n^2)$.
+case (3) of the theorem, $T(n) \in O(n^2)$.
 :::
 
 ::: topic
@@ -498,13 +498,13 @@ Use the Master Theorem to solve the recurrence relation for Mergesort:
 
 $$
 \begin{eqnarray}
-\mathbf{T}(n) &=& 2\mathbf{T}(n/2) + n \\
-\mathbf{T}(1) &=& 1
+T(n) &=& 2T(n/2) + n \\
+T(1) &=& 1
 \end{eqnarray}
 $$
 
 Because $a=2$, $b=2$, $c=1$, and $k=1$, we find that $2 = 2^1$. Applying
-case (2) of the theorem, $\mathbf{T}(n) \in O(n \log n)$.
+case (2) of the theorem, $T(n) \in O(n \log n)$.
 :::
 
 ### Case study: Average-case analysis of Quicksort
@@ -518,8 +518,8 @@ had the following recurrence:
 
 $$
 \begin{eqnarray}
-\mathbf{T}(n) &=& cn + \frac{1}{n}\sum_{k=0}^{n-1} [\mathbf{T}(k) + \mathbf{T}(n -1 - k)] \\
-\mathbf{T}(0) = \mathbf{T}(1) &=& c
+T(n) &=& cn + \frac{1}{n}\sum_{k=0}^{n-1} [T(k) + T(n -1 - k)] \\
+T(0) = T(1) &=& c
 \end{eqnarray}
 $$
 
@@ -527,36 +527,36 @@ The $cn$ term is an upper bound on the *findpivot* and
 *partition* steps. This equation comes from assuming that
 the partitioning element is equally likely to occur in any position $k$.
 It can be simplified by observing that the two recurrence terms
-$\mathbf{T}(k)$ and $\mathbf{T}(n - 1 - k)$ are equivalent, because one simply
+$T(k)$ and $T(n - 1 - k)$ are equivalent, because one simply
 counts up from $T(0)$ to $T(n-1)$ while the other counts down from
 $T(n-1)$ to $T(0)$. This yields
 
 $$
 \begin{eqnarray}
-\mathbf{T}(n) &=& cn + \frac{2}{n}\sum_{k=0}^{n-1} \mathbf{T}(k)
+T(n) &=& cn + \frac{2}{n}\sum_{k=0}^{n-1} T(k)
 \end{eqnarray}
 $$
 
 This form is known as a [recurrence with full history]{.term}. The key to solving such a recurrence is to cancel out the
 summation terms. The shifting method for summations provides a way to do
 this. Multiply both sides by $n$ and subtract the result from the
-formula for $n\mathbf{T}(n+1)$:
+formula for $nT(n+1)$:
 
 $$
 \begin{eqnarray*}
-n\mathbf{T}(n)  &  =  &  cn^2 + 2 \sum_{k=1}^{n-1} \mathbf{T}(k)\\
-(n+1)\mathbf{T}(n+1)  &  =  &  c(n+1)^2 + 2 \sum_{k=1}^{n} \mathbf{T}(k)
+nT(n)  &  =  &  cn^2 + 2 \sum_{k=1}^{n-1} T(k)\\
+(n+1)T(n+1)  &  =  &  c(n+1)^2 + 2 \sum_{k=1}^{n} T(k)
 \end{eqnarray*}
 $$
 
-Subtracting $n\mathbf{T}(n)$ from both sides yields:
+Subtracting $nT(n)$ from both sides yields:
 
 $$
 \begin{eqnarray*}
-(n+1)\mathbf{T}(n+1) - n\mathbf{T}(n)  &  =  &  c(n+1)^2 - cn^2 + 2\mathbf{T}(n)\\
-(n+1)\mathbf{T}(n+1) - n\mathbf{T}(n)  &  =  &  c(2n+1) + 2\mathbf{T}(n)\\
-(n+1)\mathbf{T}(n+1)  &  =  &  c(2n+1) + (n+2)\mathbf{T}(n)\\
-\mathbf{T}(n+1)  &  =  &  \frac{c(2n+1)}{n+1} + \frac{n+2}{n+1}\mathbf{T}(n)
+(n+1)T(n+1) - nT(n)  &  =  &  c(n+1)^2 - cn^2 + 2T(n)\\
+(n+1)T(n+1) - nT(n)  &  =  &  c(2n+1) + 2T(n)\\
+(n+1)T(n+1)  &  =  &  c(2n+1) + (n+2)T(n)\\
+T(n+1)  &  =  &  \frac{c(2n+1)}{n+1} + \frac{n+2}{n+1}T(n)
 \end{eqnarray*}
 $$
 
@@ -567,13 +567,13 @@ Expanding the recurrence, we get
 
 $$
 \begin{eqnarray*}
-\mathbf{T}(n+1)  &  \leq  &  2c + \frac{n+2}{n+1} \mathbf{T}(n)\\
+T(n+1)  &  \leq  &  2c + \frac{n+2}{n+1} T(n)\\
            &  =  &  2c + \frac{n+2}{n+1}\left (2c +
-                     \frac{n+1}{n}\mathbf{T}(n-1)\right )\\
+                     \frac{n+1}{n}T(n-1)\right )\\
            &  =  &  2c + \frac{n+2}{n+1}\left (2c + \frac{n+1}{n}\left
-                    (2c + \frac{n}{n-1}\mathbf{T}(n-2)\right )\right )\\
+                    (2c + \frac{n}{n-1}T(n-2)\right )\right )\\
            &  =  &  2c + \frac{n+2}{n+1}\left (2c + \cdots +
-                         \frac{4}{3}(2c + \frac{3}{2}\mathbf{T}(1))\right )\\
+                         \frac{4}{3}(2c + \frac{3}{2}T(1))\right )\\
            &  =  &  2c\left (1 + \frac{n+2}{n+1}
                   + \frac{n+2}{n+1}\frac{n+1}{n} + \cdots
                   + \frac{n+2}{n+1}\frac{n+1}{n}\cdots\frac{3}{2}\right )\\

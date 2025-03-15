@@ -209,9 +209,9 @@ following equation:
 
 $$
 \begin{eqnarray}
-\mathbf{T}(n) &=& cn + \frac{1}{n}\sum_{k=0}^{n-1}[\mathbf{T}(k) + \mathbf{T}(n - 1 - k)]
+T(n) &=& cn + \frac{1}{n}\sum_{k=0}^{n-1}[T(k) + T(n - 1 - k)]
 \\
-\mathbf{T}(0) = \mathbf{T}(1) &=& c
+T(0) = T(1) &=& c
 \end{eqnarray}
 $$
 
