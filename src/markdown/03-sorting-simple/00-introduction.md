@@ -79,7 +79,7 @@ algorithms are straightforward adaptations of schemes we use in everyday
 life. For example, a natural way to sort your cards in a bridge hand is
 to go from left to right, and place each card in turn in its correct
 position relative to the other cards that you have already sorted. This
-is the idea behind [Insertion Sort]{.term}.
+is the idea behind [Insertion sort]{.term}.
 Other sorting algorithms are totally alien to how humans do
 things, having been invented to sort thousands or even millions of
 records stored on the computer. For example, no normal person would use
@@ -97,7 +97,7 @@ show multiple approaches to using [divide and conquer]{.term}.
 In particular, there are multiple ways to do the dividing.
 [Mergesort]{.term} divides a list in half.
 [Quicksort]{.term} divides a list into big values and small values.
-[Radix Sort]{.term} divides the problem by working on one digit of the key at a time.
+[Radix sort]{.term} divides the problem by working on one digit of the key at a time.
 
 Sorting algorithms can also illustrate a wide variety of algorithm
 analysis techniques. Quicksort illustrates that it is possible for an
@@ -105,7 +105,7 @@ algorithm to have an [average case]{.term} whose
 growth rate is significantly smaller than its
 [worst case]{.term}. It is possible to speed up
 one sorting algorithm (such as [Shellsort]{.term} or [Quicksort]{.term})
-by taking advantage of the [best case]{.term} behavior of another algorithm (Insertion Sort).
+by taking advantage of the [best case]{.term} behavior of another algorithm (Insertion sort).
 Special case behavior by some sorting algorithms makes them a good solution for
 special niche applications ([Heapsort]{.term}).
 Sorting provides an example of an important technique for analyzing the

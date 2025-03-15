@@ -67,13 +67,13 @@ An exchange sort is:
 
 - [x] Any sort where only adjacent records are swapped
 - [ ] Any sort where records are swapped rather than using another mechanism for rearranging the array
-- [ ] Another name for Insertion Sort
+- [ ] Another name for Insertion sort
 - [ ] Any $O(n^2)$ sort
 - [ ] Any $O(n)$ sort
 
 ::: hints
 - Most of the sorts that we study swap records.
-- Insertion Sort is not the only exchange sort.
+- Insertion sort is not the only exchange sort.
 - An "exchange" means a swap of adjacent records.
 :::
 ::::::::::::::::::::::::::::::
@@ -119,7 +119,7 @@ How many ways can $n$ distinct values be arranged?
 
 :::::::::: question ::::::::::
 If I is the number of inversions in an input array of n records,
-then Insertion Sort will require how many swaps?
+then Insertion sort will require how many swaps?
 
 - [x] $I$
 - [ ] $n - I$

@@ -18,11 +18,11 @@ you find the bill for January, and pull that out. Then look through the
 remaining pile until you find the bill for February, and add that behind
 January. Proceed through the ever-shrinking pile of bills to select the
 next one in order until you are done. This is the inspiration for our
-last $O(n^2)$ sort, called [Selection Sort]{.term}.
+last $O(n^2)$ sort, called [Selection sort]{.term}.
 
-The $i$'th pass of Selection Sort "selects" the $i$'th
+The $i$'th pass of Selection sort "selects" the $i$'th
 largest key in the array, placing that record at the end of the array.
-In other words, Selection Sort first finds the largest key in an
+In other words, Selection sort first finds the largest key in an
 unsorted list, then the next largest, and so on. Its unique feature is
 that there are few record swaps. To find the next-largest key value
 requires searching through the entire unsorted portion of the array, but
@@ -30,7 +30,7 @@ only one swap is required to put the record into place. Thus, the total
 number of swaps required will be $n-1$ (we get the last record in place
 "for free").
 
-Here is an implementation for Selection Sort.
+Here is an implementation for Selection sort.
 
     function selectionSort(A):
         N = A.size()
@@ -51,13 +51,13 @@ is already at the right end, we will not need to look at it again.
 
 <inlineav id="selectionsortS2CON" src="Sorting/selectionsortS2CON.js" name="Selection Sort Slideshow 2"/>
 
-Selection Sort continues in this way until the entire array is sorted.
+Selection sort continues in this way until the entire array is sorted.
 
 The following visualization puts it all together.
 
 <avembed id="selectionsortAV" src="Sorting/selectionsortAV.html" type="ss" name="Selection Sort Visualization"/>
 
-Now try for yourself to see if you understand how Selection Sort works.
+Now try for yourself to see if you understand how Selection sort works.
 
 <avembed id="SelsortPRO" src="Sorting/SelsortPRO.html" type="ka" name="Selection Sort Proficiency Exercise"/>
 
@@ -68,16 +68,16 @@ Now try for yourself to see if you understand how Selection Sort works.
 ### Selection sort analysis
 
 Any algorithm can be written in slightly different ways. For example, we
-could have written Selection Sort to find the smallest record, the next
-smallest, and so on. We wrote this version of Selection Sort to mimic
-the behavior of our Bubble Sort implementation as closely as possible.
-This shows that Selection Sort is essentially a Bubble Sort except that
+could have written Selection sort to find the smallest record, the next
+smallest, and so on. We wrote this version of Selection sort to mimic
+the behavior of our Bubble sort implementation as closely as possible.
+This shows that Selection sort is essentially a Bubble sort except that
 rather than repeatedly swapping adjacent values to get the next-largest
 record into place, we instead remember the position of the record to be
 selected and do one swap at the end.
 
 This visualization analyzes the number of comparisons and swaps required
-by Selection Sort.
+by Selection sort.
 
 <inlineav id="SelectionSortAnalysisCON" src="Sorting/SelectionSortAnalysisCON.js" name="Selection Sort Analysis Slideshow" links="Sorting/SelectionSortAnalysisCON.css"/>
 

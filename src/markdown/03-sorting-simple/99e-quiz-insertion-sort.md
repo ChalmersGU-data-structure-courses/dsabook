@@ -6,7 +6,7 @@
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.
 
-Insertion Sort (as the code is written in this
+Insertion sort (as the code is written in this
 chapter) is a stable sorting algorithm. Recall that a stable sorting
 algorithm maintains the relative order of records with equal keys.
 
@@ -21,7 +21,7 @@ algorithm maintains the relative order of records with equal keys.
 
 
 :::::::::: question ::::::::::
-When implementing Insertion Sort, a binary search could be used to locate the position within
+When implementing Insertion sort, a binary search could be used to locate the position within
 the first $i-1$ records of the array into which record $i$ should be inserted. Using binary search will:
 
 - [x] Not speed up the asymptotic running time because shifting the records to make room for the insert will require $O(i)$ time.
@@ -37,7 +37,7 @@ the first $i-1$ records of the array into which record $i$ should be inserted. U
 
 
 :::::::::: question ::::::::::
-When implementing Insertion Sort, a binary
+When implementing Insertion sort, a binary
 search could be used to locate the position within the first $i-1$
 records of the array into which record $i$ should be
 inserted. In this implementation, the worst case time will be:
@@ -56,7 +56,7 @@ but shifting the records to makeroom for the insert will still require $O(i)$ ti
 
 
 :::::::::: question ::::::::::
-We know that the worst case for Insertion Sort is about $n^2/2$, while the average case is
+We know that the worst case for Insertion sort is about $n^2/2$, while the average case is
 about $n^2/4$. This means that:
 
 - [ ] The growth rates are the same
@@ -72,7 +72,7 @@ about $n^2/4$. This means that:
 
 
 :::::::::: question ::::::::::
-In which cases are the growth rates the same for Insertion Sort?
+In which cases are the growth rates the same for Insertion sort?
 
 - [x] Worst and Average only
 - [ ] Worst and Best only
@@ -80,7 +80,7 @@ In which cases are the growth rates the same for Insertion Sort?
 - [ ] Worst, Average, and Best
 
 ::: hints
-- Insertion Sort is really cheap in the best case.
+- Insertion sort is really cheap in the best case.
 - Its average and worst case times differ by a constant factor.
 :::
 ::::::::::::::::::::::::::::::
@@ -89,22 +89,22 @@ In which cases are the growth rates the same for Insertion Sort?
 
 :::::::::: question ::::::::::
 The order of the input records has what impact on the number of comparisons
-required by Insertion Sort (as presented in this chapter)?
+required by Insertion sort (as presented in this chapter)?
 
 - [x] There is a big difference, the asymptotic running time can change
 - [ ] None
 - [ ] There is a constant factor difference
 
 ::: hints
-- Does Insertion Sort change when it make a comparison according to the order of the array input values?
-- Yes, Insertion Sort might stop early or might look at many records.
+- Does Insertion sort change when it make a comparison according to the order of the array input values?
+- Yes, Insertion sort might stop early or might look at many records.
 :::
 ::::::::::::::::::::::::::::::
 
 
 
 :::::::::: question ::::::::::
-What is the {average|worst}-case time for Insertion Sort to sort an array of n records?
+What is the {average|worst}-case time for Insertion sort to sort an array of n records?
 
 - [x] $O(n^2)$
 - [ ] $O(n)$
@@ -141,7 +141,7 @@ What is the best-case time for Insertionsort to sort an array of n records?
 
 
 :::::::::: question ::::::::::
-What is the running time of Insertion Sort when the input is an array where all record values are equal?
+What is the running time of Insertion sort when the input is an array where all record values are equal?
 
 - [x] $O(n)$
 - [ ] $O(n^2)$
@@ -161,7 +161,7 @@ value at position $i-1$.
 :::::::::: question ::::::::::
 If $I$ is the number of
 inversions in an input array of $n$ records,
-then Insertion Sort will run in what time?
+then Insertion sort will run in what time?
 
 - [x] $O(n+I)$
 - [ ] $O(n - I)$
@@ -180,7 +180,7 @@ then Insertion Sort will run in what time?
 
 
 :::::::::: question ::::::::::
-What is the running time for Insertion Sort when the input array has values that are in reverse sort order?
+What is the running time for Insertion sort when the input array has values that are in reverse sort order?
 
 - [x] $O(n^2)$
 - [ ] $O(n)$
@@ -196,7 +196,7 @@ What is the running time for Insertion Sort when the input array has values that
 
 
 :::::::::: question ::::::::::
-What is the running time of Insertion Sort when the input is an array that has already been sorted?
+What is the running time of Insertion sort when the input is an array that has already been sorted?
 
 - [x] $O(n)$
 - [ ] $O(n^2)$
@@ -213,7 +213,7 @@ value at position $i-1$.
 
 
 :::::::::: question ::::::::::
-When is Insertion Sort a good choice for sorting an array?
+When is Insertion sort a good choice for sorting an array?
 
 - [x] The array has only a few records out of sorted order
 - [ ] Each record requires a large amount of memory
@@ -236,7 +236,7 @@ value less than that of the key in position i.
 
 
 :::::::::: question ::::::::::
-When is Insertion Sort a good choice for sorting an array?
+When is Insertion sort a good choice for sorting an array?
 
 - [x] The array contains only a few records
 - [ ] Each record requires a large amount of memory
@@ -246,8 +246,8 @@ When is Insertion Sort a good choice for sorting an array?
 - [ ] None of these situations
 
 ::: hints
-- Insertion Sort if fairly simple.
-- Because Insertion Sort is simple, it tends to cost only a
+- Insertion sort if fairly simple.
+- Because Insertion sort is simple, it tends to cost only a
 little bit per comparison when compared to more complicated
 sorting algorithms.
 :::
@@ -256,7 +256,7 @@ sorting algorithms.
 
 
 :::::::::: question ::::::::::
-In the worst case, the total number of comparisons for Insertion Sort is closest to:
+In the worst case, the total number of comparisons for Insertion sort is closest to:
 
 - [x] $n^2/2$
 - [x] $n$
@@ -264,7 +264,7 @@ In the worst case, the total number of comparisons for Insertion Sort is closest
 - [x] $n \log n$
 
 ::: hints
-- Insertion Sort's implementation is made up of two nested for loops.
+- Insertion sort's implementation is made up of two nested for loops.
 - The outer for loop is executed $n-1$ times.
 - The inner for loop is executed $i$ times.
 - The total cost is the sum of $i$'s for $i$ goes from 1 to $n$.

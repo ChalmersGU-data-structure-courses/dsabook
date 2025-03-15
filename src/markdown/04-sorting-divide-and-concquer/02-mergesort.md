@@ -75,7 +75,7 @@ Now here is a full proficiency exercise to put it all together.
 
 <avembed id="mergesortPRO" src="Sorting/mergesortPRO.html" type="pe" name="Mergesort Proficiency Exercise"/>
 
-This visualization provides a running time analysis for Merge Sort.
+This visualization provides a running time analysis for Mergesort.
 
 <inlineav id="MergeSortAnalysisCON" src="Sorting/MergeSortAnalysisCON.js" name="Mergesort Analysis Slideshow" links="Sorting/MergeSortAnalysisCON.css"/>
 

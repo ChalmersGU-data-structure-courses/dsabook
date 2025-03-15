@@ -9,22 +9,22 @@ sorting algorithms that we learned about in the last two chapters.
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.
 
-Selection Sort is generally faster than the Bubble Sort on the same input.
+Selection sort is generally faster than the Bubble sort on the same input.
 
 - [x] True
 - [ ] False
 
 ::: hints
-- Selection Sort can be viewed as an optimization of Bubble Sort.
-- On each pass, Selection Sort just picks out the next record,
-while Bubble Sort has to do a lot of swapping.
+- Selection sort can be viewed as an optimization of Bubble sort.
+- On each pass, Selection sort just picks out the next record,
+while Bubble sort has to do a lot of swapping.
 :::
 ::::::::::::::::::::::::::::::
 
 
 
 :::::::::: question ::::::::::
-How are Selection Sort and Quicksort similar?
+How are Selection sort and Quicksort similar?
 
 - [x] They can both swap non-adjacent records
 - [ ] They are both $O(n \log n)$ sorts
@@ -32,8 +32,8 @@ How are Selection Sort and Quicksort similar?
 - [ ] Both have quadratic average case time
 
 ::: hints
-- Does Selection Sort use divide-and-conquer? No.
-- Can Selection Sort run in $O(n \log n)$ time? No.
+- Does Selection sort use divide-and-conquer? No.
+- Can Selection sort run in $O(n \log n)$ time? No.
 - How long does Quicksort need in the average case?
 - $O(n \log n)$
 :::
@@ -46,7 +46,7 @@ How are Selection Sort and Quicksort similar?
 Which of the following sorts is not stable?
 
 - [x] Quicksort
-- [ ] Insertion Sort
+- [ ] Insertion sort
 - [ ] Mergesort
 
 ::: hints
@@ -58,15 +58,15 @@ relative order of records with equal keys?
 
 <!--
 :::::::::: question ::::::::::
-Which sorting algorithm makes use of Insertion Sort's best case behavior?
+Which sorting algorithm makes use of Insertion sort's best case behavior?
 
 - [x] Shellsort
 - [ ] Heapsort
-- [ ] Radix Sort
+- [ ] Radix sort
 - [ ] Mergesort
 
 ::: hints
-- Which algorithm works by performing a series of Insertion Sorts on carefully selected sublists?
+- Which algorithm works by performing a series of Insertion sorts on carefully selected sublists?
 :::
 ::::::::::::::::::::::::::::::
 -->
@@ -96,8 +96,8 @@ unsorted list?
 :::::::::: question ::::::::::
 A person sorting a hand of cards might reasonably use which sorting algorithm?
 
-- [x] Insertion Sort
-- [ ] Bubble Sort
+- [x] Insertion sort
+- [ ] Bubble sort
 - [ ] Quicksort
 - [ ] Mergesort
 
@@ -117,9 +117,9 @@ accidently calls sort on a file that is already sorted.
 Which of the following sorting methods will be the most
 efficient if the input is already in sorted order?
 
-- [x] Insertion Sort
-- [ ] Bubble Sort
-- [ ] Selection Sort
+- [x] Insertion sort
+- [ ] Bubble sort
+- [ ] Selection sort
 - [ ] Mergesort
 
 ::: hints
@@ -134,9 +134,9 @@ depending on the values seen during comparisons?
 Which of the following sorting methods will be best
 if the number of swaps done is the only measure of efficiency?
 
-- [x] Selection Sort
-- [ ] Bubble Sort
-- [ ] Insertion Sort
+- [x] Selection sort
+- [ ] Bubble sort
+- [ ] Insertion sort
 - [ ] Mergesort
 - [ ] Quicksort
 
@@ -154,14 +154,14 @@ for the remainder of the list.
 Which of the following sorting algorithms has a worst case complexity of
 $O(n \log n)$?
 
-- [x] Merge Sort
-- [ ] Bubble Sort
-- [ ] Selection Sort
-- [ ] Insertion Sort
+- [x] Mergesort
+- [ ] Bubble sort
+- [ ] Selection sort
+- [ ] Insertion sort
 - [ ] Quicksort
 
 ::: hints
-- Bubble Sort, Insertion Sort, and Selection Sort are
+- Bubble sort, Insertion sort, and Selection sort are
 referred to as "quadratic sorts" because of their worst-case time cost.
 - Quicksort's worst-case behaviour comes when the pivot is chosen badly.
 :::
@@ -170,7 +170,7 @@ referred to as "quadratic sorts" because of their worst-case time cost.
 
 
 :::::::::: question ::::::::::
-When Mergssort merges two sorted lists of sizes $m$ and $n$
+When Mergesort merges two sorted lists of sizes $m$ and $n$
 into a sorted list of size $m+n$, it requires how many comparisons in the worst case?
 
 - [x] $m+n-1$

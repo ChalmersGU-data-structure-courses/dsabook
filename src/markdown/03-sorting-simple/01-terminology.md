@@ -15,7 +15,7 @@
 
 <inlineav id="SortNotationS1CON" src="Sorting/SortNotationS1CON.js" name="Sorting Terminology and Notation Slideshow 1" links="Sorting/SortNotationS1CON.css"/>
 
-As defined, the [Sorting Problem]{.term} allows
+As defined, the [sorting problem]{.term} allows
 input with two or more records that have the same key value. Certain
 applications require that input not contain duplicate key values.
 Typically, sorting algorithms can handle duplicate key values unless

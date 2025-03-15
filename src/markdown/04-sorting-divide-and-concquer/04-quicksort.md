@@ -184,14 +184,14 @@ This visualization explains the worst-case running time of Quicksort
 
 <inlineav id="QuickSortWorstCaseCON" src="Sorting/QuickSortWorstCaseCON.js" name="Quicksort Worst Case Analysis Slideshow" links="Sorting/QuickSortWorstCaseCON.css"/>
 
-This is terrible, no better than Insertion or Selection Sort. When will
+This is terrible, no better than Insertion or Selection sort. When will
 this worst case occur? Only when each pivot yields a bad partitioning of
 the array. If the pivot values are selected at random, then this is
 extremely unlikely to happen. When selecting the middle position of the
 current subarray, it is still unlikely to happen. It does not take many
 good partitionings for Quicksort to work fairly well.
 
-This visualization explains the best-case running time of Quick Sort
+This visualization explains the best-case running time of Quicksort
 
 <inlineav id="QuickSortBestCaseCON" src="Sorting/QuickSortBestCaseCON.js" name="Quicksort Best Case Analysis Slideshow" links="Sorting/QuickSortBestCaseCON.css"/>
 

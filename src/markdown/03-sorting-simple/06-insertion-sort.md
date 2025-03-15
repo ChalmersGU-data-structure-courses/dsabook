@@ -12,9 +12,9 @@ third bill and put it into the right position with respect to the first
 two, and so on. As you take each bill, you would add it to the sorted
 pile that you have already made. This simple approach is the inspiration
 for our first sorting algorithm, called
-[Insertion Sort]{.term}.
+[Insertion sort]{.term}.
 
-Insertion Sort iterates through a list of records. For each iteration,
+Insertion sort iterates through a list of records. For each iteration,
 the current record is inserted in turn at the correct position within a
 sorted list composed of those records already processed. Here is an
 implementation. The input is an array named `A` that stores $n$ records.
@@ -40,12 +40,12 @@ algorithms will simply assume that the records are
 [comparable]{.term}.)
 :::
 
-Here we see the first few iterations of Insertion Sort.
+Here we see the first few iterations of Insertion sort.
 
 <inlineav id="insertionsortCON" src="Sorting/insertionsortCON.js" name="Insertion Sort Slideshow"/>
 
 This continues on with each record in turn. Call the current record $x$.
-Insertion Sort will move it to the left so long as its value is less
+Insertion sort will move it to the left so long as its value is less
 than that of the record immediately preceding it. As soon as a key value
 less than or equal to $x$ is encountered, `insertionSort` is done with
 that record because all records to its left in the array must have
@@ -78,12 +78,12 @@ cases, the average and worst cases are usually more reliable indicators
 of the "typical" running time. However, there are situations where we
 can expect the input to be in sorted or nearly sorted order. One example
 is when an already sorted list is slightly disordered by a small number
-of additions to the list; restoring sorted order using Insertion Sort
+of additions to the list; restoring sorted order using Insertion sort
 might be a good idea if we know that the disordering is slight. And even
-when the input is not perfectly sorted, Insertion Sort's cost goes up
+when the input is not perfectly sorted, Insertion sort's cost goes up
 in proportion to the number of inversions. So a "nearly sorted" list
-will always be cheap to sort with Insertion Sort. Examples of algorithms
-that take advantage of Insertion Sort's near-best-case running time are
+will always be cheap to sort with Insertion sort. Examples of algorithms
+that take advantage of Insertion sort's near-best-case running time are
 [Shellsort]{.term} and [Quicksort](#quicksort).
 
 Counting comparisons or swaps yields similar results. Each time through
@@ -94,12 +94,12 @@ operation is $n-1$ less than the number of comparisons. This is 0 in the
 best case, and $O(n^2)$ in the average and worst cases.
 
 Later we will see algorithms whose growth rate is much better than
-$O(n^2)$. Thus for larger arrays, Insertion Sort will not be so
-good a performer as other algorithms. So Insertion Sort is not the best
+$O(n^2)$. Thus for larger arrays, Insertion sort will not be so
+good a performer as other algorithms. So Insertion sort is not the best
 sorting algorithm to use in most situations. But there are special
-situations where it is ideal. We already know that Insertion Sort works
+situations where it is ideal. We already know that Insertion sort works
 great when the input is sorted or nearly so. Another good time to use
-Insertion Sort is when the array is very small, since Insertion Sort is
+Insertion sort is when the array is very small, since Insertion sort is
 so simple. The algorithms that have better asymptotic growth rates tend
 to be more complicated, which leads to larger constant factors in their
 running time. That means they typically need fewer comparisons for
@@ -110,8 +110,10 @@ we might need to do many, many sorts on very small arrays. You should
 spend some time right now trying to think of a situation where you will
 need to sort many small arrays. Actually, it happens a lot.
 
+<!--
 See [Computational Fairy Tales: Why Tailors Use Insertion Sort][FAIRYTALES] for a discussion on how the relative costs of
 search and insert can affect what is the best sort algorithm to use.
 
 [FAIRYTALES]: http://computationaltales.blogspot.com/2011/04/why-tailors-use-insertion-sort.html
+-->
 

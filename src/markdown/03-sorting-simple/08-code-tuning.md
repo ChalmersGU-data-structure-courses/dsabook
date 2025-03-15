@@ -8,8 +8,8 @@
 
 Since sorting is such an important application, it is natural for
 programmers to want to optimize their sorting code to run faster. Of
-course all quadratic sorts (Insertion Sort, Bubble Sort and Selection
-Sort) are relatively slow. Each has (as the name "quadratic" suggests)
+course all quadratic sorts (Insertion sort, Bubble sort and Selection
+sort) are relatively slow. Each has (as the name "quadratic" suggests)
 $O(n^2)$ worst case running time. The best way to speed them up is
 to find a better sorting algorithm. Nonetheless, there have been many
 suggestions given over the years about how to speed up one or another of
@@ -21,8 +21,8 @@ languages compare.
 
 ### Insertion sort
 
-We start by trying to speed up Insertion Sort. Recall that Insertion
-Sort repeatedly moves an element toward the beginning of the sorted part
+We start by trying to speed up Insertion sort. Recall that Insertion
+sort repeatedly moves an element toward the beginning of the sorted part
 of the list until it encounters a key with lesser value. In the original
 code, this is done with a series of swap operations. There is a better
 alternative than continuously swapping the record to the left until a
@@ -33,7 +33,7 @@ and shifting requires only one assignment per element, we can hope that
 this will yield a big improvement. Of course, the amount of improvement
 that we actually get will depend on how much movement there is among the
 records. If the list is already nearly sorted, then there will be few
-swaps anyway. Here is an implementation for Insertion Sort using this
+swaps anyway. Here is an implementation for Insertion sort using this
 optimization.
 
     function insertionSortShift(A):
@@ -54,10 +54,10 @@ Now, you can test whether you understand how this works.
 
 ### Bubble sort
 
-Turning to Bubble Sort, the first thing we should notice from this table
-is that it is far slower on random input than Insertion Sort. Let's
+Turning to Bubble sort, the first thing we should notice from this table
+is that it is far slower on random input than Insertion sort. Let's
 consider a possible improvement that is sometimes suggested for Bubble
-Sort. That is to check during each iteration of the outer loop to see if
+sort. That is to check during each iteration of the outer loop to see if
 any swaps took place during that iteration, and quit if not (since we
 know the list is ordered at this point). We can improve on this idea
 even more by recognizing that if the last swap done affects the values
@@ -96,42 +96,42 @@ to get a field out of a more complex object.
 
 It is also true that tracking the last swap position can substantially
 improve the best case cost. In fact, tracking the last swap position
-makes the best case cost of Bubble Sort to be only $O(n)$. But
+makes the best case cost of Bubble sort to be only $O(n)$. But
 going out of one's way to artificially improve the best case has
 dubious value if doing so imposes additional cost on nearly all other
 inputs. Note that we could nominally convert *any* sorting algorithm to
 have a best-case cost of $O(n)$ by simply adding code at the
 beginning that checks if the list is already sorted. It should be
 obvious that this is a waste of time, even though it has the (small)
-possibility of winning big. Unlike Insertion Sort whose best case cost
+possibility of winning big. Unlike Insertion sort whose best case cost
 is naturally $O(n)$ and whose time increases in proportion to how
 "out of order" the list is, the number of iterations avoided by swap
-checking in Bubble Sort is sensitive to the detailed placements of the
+checking in Bubble sort is sensitive to the detailed placements of the
 out-of-order records. In fact, if we took a sorted list and moved the
 smallest value to the end, then there would be no benefit from swap
 checking whatsoever.
 
 ### Selection sort
 
-Finally, let's consider Selection Sort. The table shows foremost that
-Selection Sort can be viewed as a far better optimization to Bubble Sort
+Finally, let's consider Selection sort. The table shows foremost that
+Selection sort can be viewed as a far better optimization to Bubble sort
 than tracking the last swap position. That is, tracking the position of
 the largest element and performing one swap to put it into place is a
-far better optimization to Bubble Sort than tracking the position of the
-last swap seen. The table also shows that Selection Sort is faster in
-the average case than Insertion Sort when implemented in Python.
+far better optimization to Bubble sort than tracking the position of the
+last swap seen. The table also shows that Selection sort is faster in
+the average case than Insertion sort when implemented in Python.
 Evidently, the cost to swap is high for Python.
 
-Our original Selection Sort implementation is written to make a call to
+Our original Selection sort implementation is written to make a call to
 `swap` even if the current record is already in its correct location.
 For example, if the record with the largest value is already in the
 rightmost array position, then `selectionSort` will still call `swap`
 with the two position parameters being the same. The net effect is that
 the work done by `swap` will not change anything in the array, and this
 is a waste of time. Thus, the total number of swaps done by Selection
-Sort is always $n-1$ in the best, average and worst cases. It might seem
+sort is always $n-1$ in the best, average and worst cases. It might seem
 like a good idea to test if the positions are the same before calling
-`swap`, especially since Selection Sort's claim to fame is its low
+`swap`, especially since Selection sort's claim to fame is its low
 number of swaps. Actually, we can't expect this to ever make much
 difference since we are talking about $O(n)$ actions within
 $O(n^2)$ total steps, an inconsequential fraction. The other

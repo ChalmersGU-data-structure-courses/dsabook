@@ -67,7 +67,7 @@ itself sorts many, many small arrays! This happens as a natural
 by-product of the divide and conquer approach.
 
 A simple improvement might then be to replace Quicksort with a faster
-sort for small subarrays, say Insertion Sort or Selection Sort. However,
+sort for small subarrays, say Insertion sort or Selection sort. However,
 there is an even better -- and still simpler -- optimization. When
 Quicksort partitions are below a certain size, do nothing! The values
 within that partition will be out of order. However, we do know that all
@@ -76,10 +76,10 @@ values in the partition. All values in the array to the right of the
 partition are greater than all values in the partition. Thus, even if
 Quicksort only gets the values to "nearly" the right locations, the
 array will be close to sorted. This is an ideal situation in which to
-take advantage of the best-case performance of Insertion Sort. The final
-step is a single call to Insertion Sort to process the entire array,
+take advantage of the best-case performance of Insertion sort. The final
+step is a single call to Insertion sort to process the entire array,
 putting the records into final sorted order. At what size should we
-switch to Insertion Sort? The answer can only be determined by empirical
+switch to Insertion sort? The answer can only be determined by empirical
 testing, but on modern machines the answer is probably somewhere between
 10 and 100.
 
