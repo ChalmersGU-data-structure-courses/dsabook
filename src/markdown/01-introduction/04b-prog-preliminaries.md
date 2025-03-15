@@ -97,8 +97,8 @@ Statements
 
 ### Data types
 
-As mentioned earlier, a data type consists of a set of values and the operations that can be performed on them. 
-Primitive data types are basic types provided by a programming language (including our pseudocode) and cannot be user-defined. 
+As mentioned earlier, a data type consists of a set of values and the operations that can be performed on them.
+Primitive data types are basic types provided by a programming language (including our pseudocode) and cannot be user-defined.
 Some (aggregate) data structures, such as arrays and lists, are built into many languages and organize collections of values, while compound data types, such as classes or algebraic data types, allow users to define their own structures.
 The next sections introduce the data types used in this book.
 
@@ -132,7 +132,7 @@ In addition to the primitive data types mentioned earlier, there is also `null` 
 
 #### Arrays {-}
 
-Arrays are one of the fundamental data structures in programming because they are directly supported by the computer’s memory system and offer excellent performance. 
+Arrays are one of the fundamental data structures in programming because they are directly supported by the computer’s memory system and offer excellent performance.
 Accessing or modifying an element in an array is extremely fast, making arrays important for many algorithms.
 
 ::: note
@@ -148,8 +148,8 @@ Before using an array, you must declare it and specify its size.
 Once created, an array has a fixed size and cannot be resized.
 This limitation means that operations like concatenating two arrays require creating a new array large enough to hold all elements.
 
-One key advantage of arrays is their efficient retrieval of elements. 
-When an array is allocated, memory is reserved in a contiguous block, ensuring that all elements are stored next to each other. 
+One key advantage of arrays is their efficient retrieval of elements.
+When an array is allocated, memory is reserved in a contiguous block, ensuring that all elements are stored next to each other.
 This structure allows quick access to any element using its index by directly calculating its memory location.
 
 In our pseudocode, we use the following syntax to declare an array, retrieve an element, and update an element:
@@ -162,10 +162,10 @@ In our pseudocode, we use the following syntax to declare an array, retrieve an 
             i = i + 1
         return output
 
-This example highlights several key features of arrays. 
-First, our pseudocode follows zero-based indexing, meaning the first element is at index 0, the second at index 1, and so on. 
+This example highlights several key features of arrays.
+First, our pseudocode follows zero-based indexing, meaning the first element is at index 0, the second at index 1, and so on.
 The last element is located at an index equal to the array’s length minus one.
-The length of an array can be accessed using the length attribute. 
+The length of an array can be accessed using the length attribute.
 This value is stored alongside the array and does not need to be computed manually.
 
 To retrieve an element from an array, we use square bracket notation. For instance, `input[2]` retrieves the third element of the input array.
@@ -184,9 +184,9 @@ For example:
     b = a        // 'b' now refers to the same array as 'a'
     b[0] = 20
 
-    print(a[0])  // Outputs 20, because 'a' and 'b' point to the same array  
+    print(a[0])  // Outputs 20, because 'a' and 'b' point to the same array
 
-Since `b` holds a reference to the same array as `a`, any modifications made through `b` will also affect `a`. 
+Since `b` holds a reference to the same array as `a`, any modifications made through `b` will also affect `a`.
 If you want to create a separate copy, you need to explicitly copy the array element by element.
 
 **Array slices**: A prominent feature in the popular programming language Python are _array slices_.
@@ -211,16 +211,16 @@ Because strings are internally represented as arrays, operations like concatenat
 
 #### Tuples {-}
 
-A tuple is an _ordered_, _immutable_ collection of elements. 
-Unlike arrays, which allow modification of its elements, tuples cannot be changed after they are created. 
+A tuple is an _ordered_, _immutable_ collection of elements.
+Unlike arrays, which allow modification of its elements, tuples cannot be changed after they are created.
 They can store multiple values of different types and are often used when a fixed grouping of related data is needed.
 
 We use the following notation in our pseudocode:
 
     point = (3, 4)                // A tuple with two elements
-    person = ("Geert", 30, True)  // A tuple with different data types  
-    print(point[0])               // Accessing first element  
-    point[0] = 5                  // This is not allowed, tuples are immutable  
+    person = ("Geert", 30, True)  // A tuple with different data types
+    print(point[0])               // Accessing first element
+    point[0] = 5                  // This is not allowed, tuples are immutable
 
 Tuples are useful for returning multiple values from a function, grouping related data, and working with fixed collections that should not be modified.
 
@@ -230,13 +230,13 @@ Tuples are useful for returning multiple values from a function, grouping relate
 
 #### Interfaces {-}
 
-In our pseudocode, we introduce the concept of an _interface_ to distinguish between an abstract data type (ADT) and its concrete implementation. 
-An interface defines a set of operations that a data type must support, without specifying how those operations are implemented. 
+In our pseudocode, we introduce the concept of an _interface_ to distinguish between an abstract data type (ADT) and its concrete implementation.
+An interface defines a set of operations that a data type must support, without specifying how those operations are implemented.
 This allows us to describe the behaviour of a data type separately from its internal representation.
 
-An abstract data type (ADT) is a high-level description of a data structure that focuses on what operations are available rather than how they are executed. 
+An abstract data type (ADT) is a high-level description of a data structure that focuses on what operations are available rather than how they are executed.
 For example, an ADT for a stack may define operations such as `push` and `pop`,but it does not specify whether the stack is implemented using an array or a linked list.
-A concrete implementation provides the actual data structure and the logic for performing the operations defined in the interface. 
+A concrete implementation provides the actual data structure and the logic for performing the operations defined in the interface.
 Different implementations of the same interface can exist, each with different performance characteristics.
 
 ::: TODO
@@ -249,19 +249,19 @@ We use the following notation for interfaces in our pseudocode:
         push(value: T)
         pop() -> T
 
-Using an interface, we can define a data type's expected behaviour and provide multiple implementations in our pseudocode. 
+Using an interface, we can define a data type's expected behaviour and provide multiple implementations in our pseudocode.
 By using interfaces, we clarify the conceptual structure of a data type, making it easier to explain, compare, and analyse different implementations.
 
 #### Compound data types {-}
 
 We often need to combine different data types to store complex information.
-These are known as _compound data types_. 
-Nearly every programming language supports compound data types, although the specific implementation can vary between languages. 
+These are known as _compound data types_.
+Nearly every programming language supports compound data types, although the specific implementation can vary between languages.
 For example, in Java, compound data types are typically created using classes, which allow you to combine instance variables of potentially different types.
 In Python, you can achieve this using classes, dataclasses, or dictionaries.
 In functional programming languages, such as Haskell, you can define algebraic data types to combine values in various ways.
 
-Our goal is to keep things simple and explain the concept in a way that can be easily translated into the syntax of any programming language you prefer. 
+Our goal is to keep things simple and explain the concept in a way that can be easily translated into the syntax of any programming language you prefer.
 For this reason, we have adopted a straightforward notation for compound data types in our pseudocode:
 
     datatype ArrayStack(capacity) of T implements Stack of T:
@@ -276,7 +276,7 @@ For this reason, we have adopted a straightforward notation for compound data ty
             size = size - 1
             return data[size]
 
-This example uses an array to store the stack elements and demonstrates how to define a compound data type. 
+This example uses an array to store the stack elements and demonstrates how to define a compound data type.
 We define a new compound data type using the keyword `datatype`.
 A `datatype` can implement an `interface`, making it a subtype of the interface.
 
@@ -308,12 +308,12 @@ There is no need to know the following for our purposes:
 
 #### Mutable and immutable data {-}
 
-For many algorithms, the ability to use mutable data can lead to more efficient solutions. 
+For many algorithms, the ability to use mutable data can lead to more efficient solutions.
 However, mutability comes with its drawbacks: it increases the risk of making mistakes, and immutable data is often easier to reason about and debug.
 
 In our pseudocode, we assume the following data types are immutable:
 
-- Primitive data types (such as integers and characters), 
+- Primitive data types (such as integers and characters),
 - Strings
 - Tuples
 
@@ -324,17 +324,17 @@ On the other hand, the following data types are mutable:
 
 ### Functions
 
-We have already seen several examples of functions. 
+We have already seen several examples of functions.
 A function starts with the keyword function, followed by its name.
 Functions can have zero or more parameters, and we assume a call-by-value evaluation strategy.
 
-It is important to note that aggregate types (such as arrays) and compound data types are reference types. 
-When assigning an array or a compound data type to a variable, what gets stored is a reference to the actual data, not a copy of the data itself. 
-This means that if you pass an array as an argument to a function, the reference is copied, not the entire array. 
+It is important to note that aggregate types (such as arrays) and compound data types are reference types.
+When assigning an array or a compound data type to a variable, what gets stored is a reference to the actual data, not a copy of the data itself.
+This means that if you pass an array as an argument to a function, the reference is copied, not the entire array.
 As a result, any modifications made to the array inside the function will persist when the function returns.
 
-Functions can also be recursive, meaning they call themselves within their own body. 
-Recursion is often used in divide-and-conquer algorithms, though it is not limited to them. 
+Functions can also be recursive, meaning they call themselves within their own body.
+Recursion is often used in divide-and-conquer algorithms, though it is not limited to them.
 When analysing recursive functions, it is important to remember that function calls are not free—they consume memory on the stack, which can become a limiting factor if recursion depth is too large.
 
 ### TODO
@@ -345,27 +345,27 @@ describe return type
 
 To run a program we need to first load the program in memory before we can start executing.
 A program uses memory as well to store information that it needs for calculations.
-A program has access to two different memory regions: the stack and the heap. 
+A program has access to two different memory regions: the stack and the heap.
 The stack is a memory region that stores local variables, function call information, and return values.
-When a function is called, its local variables and return address are pushed onto the stack, and when the function exits, they are removed. 
+When a function is called, its local variables and return address are pushed onto the stack, and when the function exits, they are removed.
 Since the stack follows a last-in, first-out (LIFO) order, memory allocation and deallocation happen in a predictable way, making it efficient.
 
-The heap, on the other hand, is a more flexible memory area used for _dynamic_ allocation. 
-Memory allocated on the heap persists until explicitly freed or garbage-collected, making it useful for objects with longer lifetimes. 
+The heap, on the other hand, is a more flexible memory area used for _dynamic_ allocation.
+Memory allocated on the heap persists until explicitly freed or garbage-collected, making it useful for objects with longer lifetimes.
 Unlike the stack, the heap does not follow a strict order for allocation and deallocation, which can lead to fragmentation and slower access times.
 While stack allocation is fast and automatic, heap allocation requires more overhead and manual memory management.
 
-The stack and heap are part of the so called _internal memory_ and consists of high-speed storage components like Random Access Memory (RAM) and cache that are directly accessible by the CPU. 
-This memory is volatile, meaning data is lost when power is turned off, and is used to store actively running programs and data. 
+The stack and heap are part of the so called _internal memory_ and consists of high-speed storage components like Random Access Memory (RAM) and cache that are directly accessible by the CPU.
+This memory is volatile, meaning data is lost when power is turned off, and is used to store actively running programs and data.
 Because of its speed, internal memory is important for efficient program execution.
 
-External memory, or secondary storage, includes non-volatile devices such as hard drives, solid-state drives, and USB storage. 
+External memory, or secondary storage, includes non-volatile devices such as hard drives, solid-state drives, and USB storage.
 Unlike internal memory, it persists data even when the system is powered off and is used for long-term storage.
 External memory usually has a much larger capacity than internal memory, but it is significantly slower because data must be fetched and loaded into RAM before it can be processed.
 
 #### Caching {-}
 
-Caching is a technique used to accelerate data access by temporarily storing frequently used information in a smaller, high-speed memory area called a cache. 
-When a program requests data, the processor first checks whether it is available in the cache. 
-If the data is found, it can be retrieved almost instantly, avoiding the need to access slower main memory. 
+Caching is a technique used to accelerate data access by temporarily storing frequently used information in a smaller, high-speed memory area called a cache.
+When a program requests data, the processor first checks whether it is available in the cache.
+If the data is found, it can be retrieved almost instantly, avoiding the need to access slower main memory.
 Cache memory is located very close to the processor, often integrated directly into the CPU, allowing it to fetch values in just a few clock cycles, significantly improving performance.
