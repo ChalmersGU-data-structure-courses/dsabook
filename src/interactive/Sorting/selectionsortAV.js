@@ -13,20 +13,20 @@ $(document).ready(function() {
   var code = [
     "function selectionSort(A):",
     "    N = A.size()",
-    "    for i = 1 to N-1:               // Select i'th biggest element",
-    "        bigindex = 0                // Current biggest index",
-    "        for j = 1 to N-i+1:         // Find the max value",
-    "            if A[j] > A[bigindex]:  // Found something bigger",
-    "                bigindex = j        // Remember bigger index",
-    "        swap(A, bigindex, N-i)      // Put it into place",
+    "    for i = 0 to N-1:                // Select i'th smallest element",
+    "        minIndex = i                 // Current smallest index",
+    "        for j = i+1 to N-1:          // Find the smallest value",
+    "            if A[j] > A[minIndex]:   // Found something smaller",
+    "                minIndex = j         // Remember smaller index",
+    "        swap(A, i, minIndex)         // Put it into place",
   ];
   var tags = {
     "sig": 1,
     "outloop": 3,
-    "initbig": 4,
+    "initsmall": 4,
     "inloop": 5,
     "compare": 6,
-    "setbig": 7,
+    "setsmall": 7,
     "swap": 8,
     "end": 10
   };
@@ -47,33 +47,34 @@ $(document).ready(function() {
 
   // Selection sort
   function selectionsort() {
-    var i, j, bigindex;
+    var i, j, minIndex;
     av.umsg(interpret("av_c3"));
     pseudo.setCurrentLine("sig");
     av.step();
-    for (i = 1; i < arr.size(); i++) {
+    for (i = 0; i < arr.size(); i++) {
       av.umsg(interpret("av_c4") + i);
       pseudo.setCurrentLine("outloop");
       av.step();
       av.umsg(interpret("av_c5"));
-      pseudo.setCurrentLine("initbig");
-      bigindex = 0;
-      arr.addClass(0, "special");
+      pseudo.setCurrentLine("initsmall");
+      minIndex = i;
+      arr.addClass(minIndex, "special");
       av.step();
       av.umsg(interpret("av_c6"));
       pseudo.setCurrentLine("inloop");
       av.step();
-      for (j = 1; j < arr.size() - i + 1; j++) {
+      for (j = i + 1; j < arr.size(); j++) {
+        console.log("P", minIndex, i, j)
         arr.addClass(j, "processing");
         av.umsg(interpret("av_c7"));
         pseudo.setCurrentLine("compare");
         av.step();
-        if (arr.value(j) > arr.value(bigindex)) {
+        if (arr.value(j) < arr.value(minIndex)) {
           av.umsg(interpret("av_c8"));
-          arr.removeClass(bigindex, "special");
-          pseudo.setCurrentLine("setbig");
-          bigindex = j;
-          arr.addClass(bigindex, "special");
+          arr.removeClass(minIndex, "special");
+          pseudo.setCurrentLine("setsmall");
+          minIndex = j;
+          arr.addClass(minIndex, "special");
           av.step();
         }
         arr.removeClass(j, "processing");
@@ -81,15 +82,15 @@ $(document).ready(function() {
       av.umsg(interpret("av_c9"));
       pseudo.setCurrentLine("swap");
       av.step();
-      if (bigindex !== (arr.size() - i)) {
-        arr.swap(bigindex, arr.size() - i); // swap the two indices
-        arr.removeClass(bigindex, "special");
-        arr.addClass(arr.size() - i, "special");
+      if (minIndex !== i) {
+        arr.swap(minIndex, i); // swap the two indices
+        arr.removeClass(minIndex, "special");
+        arr.addClass(i, "special");
       }
       av.step();
       av.umsg(interpret("av_c10"));
-      arr.removeClass(arr.size() - i, "special");
-      arr.addClass(arr.size() - i, "deemph");
+      arr.removeClass(i, "special");
+      arr.addClass(i, "deemph");
       av.step();
     }
     av.umsg(interpret("av_c2"));

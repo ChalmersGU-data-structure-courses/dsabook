@@ -4,38 +4,38 @@ $(document).ready(function() {
   var av_name = "selectionsortS2CON";
 
   var interpret = {
-    "av_c1": "Second pass: moving from left to right, find the element with the second greatest value.",
-    "av_c2": "For each element moving through the list: the biggest seen so far is shown in red.",
-    "av_c3": "Compare to biggest seen so far.",
-    "av_c4": "Found something bigger, so switch value of bigindex.",
-    "av_c5": "Now swap the next biggest element into place.",
+    "av_c1": "Second pass: moving from left to right, find the element with the second smallest value.",
+    "av_c2": "For each element moving through the list: the smallest seen so far is shown in red.",
+    "av_c3": "Compare to smallest seen so far.",
+    "av_c4": "Found something smaller, so switch value of <em>minIndex</em>.",
+    "av_c5": "Now swap the next smallest element into place.",
     "av_c6": "Done this pass."
   };
 
-  var theArray2 = [20, 10, 15, 54, 55, 11, 14, 78];
+  // var theArray = [66, 78, 22, 54, 20, 10, 55, 14];
+  var theArray2 = [10, 78, 22, 54, 20, 66, 55, 14];
   var av = new JSAV(av_name);
   var arr = av.ds.array(theArray2, {indexed: true});
   var j;
-  var bigindex = 0;
+  var minIndex = 1;
 
-  arr.addClass(arr.size() - 1, "deemph");
+  arr.addClass(0, "deemph");
   av.umsg(interpret["av_c1"]);
   av.displayInit();
 
   av.umsg(interpret["av_c2"]);
-  arr.addClass(0, "special");
+  arr.addClass(minIndex, "special");
   av.step();
 
-  for (j = 1; j < arr.size() - 1; j++) {
+  for (j = minIndex+1; j < arr.size(); j++) {
     arr.addClass(j, "processing");
     av.umsg(interpret["av_c3"]);
     av.step();
-
-    if (arr.value(j) > arr.value(bigindex)) {
+    if (arr.value(j) < arr.value(minIndex)) {
       av.umsg(interpret["av_c4"]);
-      arr.removeClass(bigindex, "special");
-      bigindex = j;
-      arr.addClass(bigindex, "special");
+      arr.removeClass(minIndex, "special");
+      minIndex = j;
+      arr.addClass(minIndex, "special");
       av.step();
     }
     arr.removeClass(j, "processing");
@@ -43,13 +43,13 @@ $(document).ready(function() {
   av.umsg(interpret["av_c5"]);
   av.step();
 
-  arr.removeClass(bigindex, "special");
-  arr.addClass(arr.size() - 2, "special");
-  arr.swap(bigindex, arr.size() - 2); // swap the two indices
+  arr.removeClass(minIndex, "special");
+  arr.addClass(1, "special");
+  arr.swap(minIndex, 1); // swap the two indices
   av.step();
 
   av.umsg(interpret["av_c6"]);
-  arr.removeClass(arr.size() - 2, "special");
-  arr.addClass(arr.size() - 2, "deemph");
+  arr.removeClass(1, "special");
+  arr.addClass(1, "deemph");
   av.recorded();
 });

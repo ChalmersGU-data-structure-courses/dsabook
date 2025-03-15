@@ -12,44 +12,38 @@
 - Prio 2: improve the analysis (not just a visualisation)
 :::
 
-Consider again the problem of sorting a pile of phone bills for the past
-year. Another intuitive approach might be to look through the pile until
-you find the bill for January, and pull that out. Then look through the
-remaining pile until you find the bill for February, and add that behind
-January. Proceed through the ever-shrinking pile of bills to select the
-next one in order until you are done. This is the inspiration for our
-last $O(n^2)$ sort, called [Selection sort]{.term}.
+Let's say you have a large pile of books that you want to put in your bookshelf, in alphabetical order by author's surname.
+How would you go about?
+One natural way to do handle this is to look through the pile until you find the first book (by an author named Ajvide), and put that first in the bookshelf.
+Then you look through the remaining pile until you find the second book (written by Bengtsdotter), and add that behind Ajvide.
+Then find the third book (by Cassler), and add behind Bengtsdotter.
+Proceed through the shrinking pile of books to select the next one in order until you are done.
+This is the inspiration for our next sorting algorithm, called [Selection sort]{.term}.
 
-The $i$'th pass of Selection sort "selects" the $i$'th
-largest key in the array, placing that record at the end of the array.
-In other words, Selection sort first finds the largest key in an
-unsorted list, then the next largest, and so on. Its unique feature is
-that there are few record swaps. To find the next-largest key value
-requires searching through the entire unsorted portion of the array, but
-only one swap is required to put the record into place. Thus, the total
-number of swaps required will be $n-1$ (we get the last record in place
-"for free").
+The $i$'th pass of Selection sort "selects" the $i$'th smallest key in the array, placing that record at position $i$ in the array.
+In other words, Selection sort first finds the smallest key in an unsorted list, then the next smallest, and so on.
+Its unique feature is that there are few record swaps, much fewer than Bubble sort.
+To find the next-smallest key value requires searching through the entire unsorted portion of the array, but only one swap is required to put the record into place.
+Thus, the total number of swaps required will be $n-1$ (we get the last record in place "for free").
 
 Here is an implementation for Selection sort.
 
     function selectionSort(A):
         N = A.size()
-        for i = 1 to N-1:               // Select i'th biggest element
-            bigindex = 0                // Current biggest index
-            for j = 1 to N-i+1:         // Find the max value
-                if A[j] > A[bigindex]:  // Found something bigger
-                    bigindex = j        // Remember bigger index
-            swap(A, bigindex, N-i)      // Put it into place
-
+        for i = 0 to N-1:                // Select i'th smallest element
+            minIndex = i                 // Current smallest index
+            for j = i+1 to N-1:          // Find the smallest value
+                if A[j] > A[minIndex]:   // Found something smaller
+                    minIndex = j         // Remember smaller index
+            swap(A, i, minIndex)         // Put it into place
 
 Consider the example of the following array.
 
-<inlineav id="selectionsortS1CON" src="Sorting/selectionsortS1CON.js" name="Selection Sort Slideshow 1"/>
+<inlineav id="selectionsortS1CON" src="Sorting/selectionsortS1CON.js" name="Selection Sort Slideshow 1" links="Sorting/selectionsortSCON.css"/>
 
-Now we continue with the second pass. However, since the largest record
-is already at the right end, we will not need to look at it again.
+Now we continue with the second pass. However, since the smallest record is already at the beginning, we will not need to look at it again.
 
-<inlineav id="selectionsortS2CON" src="Sorting/selectionsortS2CON.js" name="Selection Sort Slideshow 2"/>
+<inlineav id="selectionsortS2CON" src="Sorting/selectionsortS2CON.js" name="Selection Sort Slideshow 2" links="Sorting/selectionsortSCON.css"/>
 
 Selection sort continues in this way until the entire array is sorted.
 
@@ -67,17 +61,12 @@ Now try for yourself to see if you understand how Selection sort works.
 
 ### Selection sort analysis
 
-Any algorithm can be written in slightly different ways. For example, we
-could have written Selection sort to find the smallest record, the next
-smallest, and so on. We wrote this version of Selection sort to mimic
-the behavior of our Bubble sort implementation as closely as possible.
-This shows that Selection sort is essentially a Bubble sort except that
-rather than repeatedly swapping adjacent values to get the next-largest
-record into place, we instead remember the position of the record to be
-selected and do one swap at the end.
+Any algorithm can be written in slightly different ways.
+For example, we could have written Selection sort to find the largest record and put it at the end of the array, then the next
+smallest, and so on.
+That version of Selection sort would behave very similar to our Bubble sort implementation, except that rather than repeatedly swapping adjacent values to get the next-largest record into place, it instead remembers the position of the record to be selected and does one swap at the end.
 
-This visualization analyzes the number of comparisons and swaps required
-by Selection sort.
+This visualization analyzes the number of comparisons and swaps required by Selection sort.
 
 <inlineav id="SelectionSortAnalysisCON" src="Sorting/SelectionSortAnalysisCON.js" name="Selection Sort Analysis Slideshow" links="Sorting/SelectionSortAnalysisCON.css"/>
 

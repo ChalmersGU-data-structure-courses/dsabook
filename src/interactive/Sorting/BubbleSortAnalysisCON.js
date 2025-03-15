@@ -56,9 +56,8 @@ $(document).ready(function() {
   // Slide 3
   pseudo.unhighlight("loop");
   av.umsg(interpret["sc3"]);
-  for (var i = 0; i < 6; i++) {
-    arr_values[i] = parseInt(Math.random() * 20, 10);
-  }
+  arr_values = [42, 56, 23, 87, 12, 66];
+  // for (var i = 0; i < 6; i++) arr_values[i] = parseInt(Math.random() * 20, 10);
   arr = av.ds.array(arr_values, {left: 50, top: 0, indexed: true});
   av.step();
 
