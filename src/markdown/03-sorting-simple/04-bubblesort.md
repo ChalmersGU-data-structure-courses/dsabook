@@ -7,18 +7,12 @@
 - Prio 2: improve the analysis (not just a visualisation)
 :::
 
-Our next sorting algorithm is called [Bubble sort]{.term}.
-Bubble sort is often taught to novice programmers in
-introductory computer science courses. This is unfortunate, because
-Bubble sort has no redeeming features whatsoever. It is rather slow,
-even compared to the other $O(n^2)$ sorts that are commonly known.
-It is not particularly intutitive -- nobody is going to come naturally
-to Bubble sort as a way to sort their Bridge hand or their pile of bills
-like they might with
-[Insertion sort] or [Selection sort].
-However, Bubble sort can viewed as a close relative of Selection sort.
+Our first sorting algorithm is called [Bubble sort]{.term}.
+Bubble sort is often the first sorting algorithm that you learn, because it is relatively easy to understand and implement.
+However, it is rather slow, even compared to the other quadratic sorting algorithms that we will introduce in the next sections -- [Selection sort] and [Insertion sort].
+It's not even particularly intutitive -- nobody is going to come naturally to bubble sort as a way to sort their Bridge hand or their pile of bills, like they might with Insertion sort or Selection sort.
 
-Like Insertion sort, Bubble sort consists of a simple double `for` loop.
+Bubble sort consists of a simple double `for` loop.
 The inner `for` loop moves through the record array from left to right,
 comparing adjacent keys. If a record's key value is greater than the
 key of its right neighbor, then the two records are swapped. Once the
