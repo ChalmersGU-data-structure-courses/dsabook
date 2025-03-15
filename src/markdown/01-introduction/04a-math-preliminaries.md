@@ -531,6 +531,7 @@ Induction only confirms when a proposed closed-form solution is
 correct.
 -->
 
+<!-- Moved to chapter 7, section about Recurrence relations
 ### Recurrence Relations
 
 The running time for a recursive algorithm is most easily expressed by a recursive expression because the total time for the recursive algorithm includes the time to run the recursive call(s).
@@ -570,6 +571,7 @@ As with summations, we typically wish to replace the recurrence relation with a 
 One approach is to expand the recurrence by replacing any occurrences of $\mathbf{T}$ on the right-hand side with its definition.
 
 We will go deeper into recurrence relations when we analyse the complexity of divide-and-conquer algorithms.
+-->
 
 <!--
 .. inlineav:: LinearRecurrencesCON ss

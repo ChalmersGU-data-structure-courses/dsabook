@@ -2,20 +2,78 @@
 ## Recurrence relations
 
 ::: TODO
-- Prio 2: emphasize the main takeaway: recurrences are a way to model recursive functions
 - Prio 3: throughout this section, there are references to equations, both on this page and in the Summations section - these should be made into proper cross-references rather than hard-coded equation numbers
 - Prio 3: example: matrix multiplication, Strassen's algorithm
 :::
 
-Recurrence relations are often used to model the cost of recursive
-functions. For example, the standard
-[Mergesort] takes
-a list of size $n$, splits it in half, performs Mergesort on each half,
-and finally merges the two sublists in $n$ steps. The cost for this can
-be modeled as
+The running time for a recursive algorithm is most easily expressed by a recursive expression because the total time for the recursive algorithm includes the time to run the recursive call(s).
+A [recurrence relation]{.term} defines a function by means of an expression that includes one or more (smaller) instances of itself.
+A classic example is the recursive definition for the factorial function:
 
 $$
-\mathbf{T}(n) = 2\mathbf{T}(n/2) + n
+\begin{eqnarray}
+n! &=& n\cdot(n-1)! \mbox{~~for~} n>1 \\
+1! = 0! &=& 1
+\end{eqnarray}
+$$
+
+Another standard example of a recurrence is the Fibonacci sequence:
+
+$$
+\begin{eqnarray}
+\mbox{Fib}(n) &=& \mbox{Fib}(n-1) + \mbox{Fib}(n-2) \mbox{~~for~} n>2 \\
+\quad\mbox{Fib}(1) = \mbox{Fib}(2) &=& 1
+\end{eqnarray}
+$$
+
+From this definition, the first seven numbers of the Fibonacci sequence are
+
+$$
+1, 1, 2, 3, 5, 8,\ \mbox{and}\ 13.
+$$
+
+Notice that this definition contains two parts: the general definition for $\mbox{Fib}(n)$ and the base cases for $\mbox{Fib}(1)$ and $\mbox{Fib}(2)$.
+Likewise, the definition for factorial contains a recursive part and base cases.
+
+Recurrence relations are often used to model the cost of recursive functions.
+For example, the number of multiplications required by a recursive version of the factorial function for an input of size $n$ will be zero when $n = 0$ or $n = 1$ (the base cases), and it will be one plus the cost of calling itself on a value of $n-1$.
+This can be defined using the following recurrence:
+
+$$
+\begin{eqnarray}
+\mathbf{T}(n) &=& \mathbf{T}(n-1) + 1 \mbox{~~for~} n>1 \\
+\mathbf{T}(0) = \mathbf{T}(1) &=& 0
+\end{eqnarray}
+$$
+
+As with summations, we typically wish to replace the recurrence relation with a closed-form solution.
+One approach is to expand the recurrence by replacing any occurrences of $\mathbf{T}$ on the right-hand side with its definition.
+
+<inlineav id="LinearRecurrencesCON" src="AlgAnal/LinearRecurrencesCON.js" name="AlgAnal/LinearRecurrencesCON" links="AlgAnal/LinearRecurrencesCON.css"/>
+
+A slightly more complicated recurrence is
+
+$$
+\begin{eqnarray}
+\mathbf{T}(n) &=& \mathbf{T}(n-1) + n \\
+\mathbf{T}(1) &=& 1
+\end{eqnarray}
+$$
+
+Again, we will use expansion to help us find a closed form solution.
+
+<inlineav id="LinearRecurrencesNCON" src="AlgAnal/LinearRecurrencesNCON.js" name="AlgAnal/LinearRecurrencesNCON" links="AlgAnal/LinearRecurrencesNCON.css"/>
+
+
+A more complicated example is the standard [Mergesort].
+This takes a list of size $n$, splits it in half, performs Mergesort on each half, and finally merges the two sublists in $n$ steps.
+The cost for this can be modeled as
+
+$$
+\begin{eqnarray}
+\mathbf{T}(n) &=& 2\mathbf{T}(n/2) + n \\
+\mathbf{T}(1) &=& 1
+\end{eqnarray}
 $$
 
 In other words, the cost of the algorithm on input of size $n$ is two
@@ -54,7 +112,7 @@ whose running time is described by the equation
 $$
 \begin{eqnarray}
 \mathbf{T}(n) &=& 2\mathbf{T}(n/2) + n \\
-\mathbf{T}(2) &=& 1
+\mathbf{T}(1) &=& 1
 \end{eqnarray}
 $$
 
@@ -67,7 +125,7 @@ $$
 
 We prove this guess is correct by induction. In this proof, we assume
 that $n$ is a power of two, to make the calculations easy. For the base
-case, $\mathbf{T}(2) = 1 \leq 2^2$. For the induction step, we need to show
+case, $\mathbf{T}(1) = 1 \leq 2^2$. For the induction step, we need to show
 that $\mathbf{T}(n) \leq n^2$ implies that $\mathbf{T}(2n) \leq (2n)^2$ for
 $n = 2^N, N \geq 1$. The induction hypothesis is
 
@@ -93,7 +151,7 @@ somewhere between $cn$ and $n^2$.
 
 Let us now try $\mathbf{T}(n) \leq n \log n$. For the base case, the
 definition of the recurrence sets
-$\mathbf{T}(2) = 1 \leq (2 \cdot \log 2) = 2$. Assume (induction
+$\mathbf{T}(1) = 1 \leq (2 \cdot \log 2) = 2$. Assume (induction
 hypothesis) that $\mathbf{T}(n) \leq n \log n$. Then,
 
 $$
@@ -104,8 +162,12 @@ $$
 Therefore we have proved that $\mathbf{T}(n)$ is in $O(n\log n)$.
 :::
 
+The following two examples are about the growth rates of a function (the factorial and the Fibonacci sequence),
+*not* about the time it takes to compute the function.
+
 ::: topic
 #### Example: Factorial function {-}
+
 
 We know that the factorial function grows exponentially. How does it
 compare to $2^n$? To $n^n$? Do they all grow "equally fast" (in an
@@ -260,6 +322,10 @@ techniques for solving summations can then be used.
 
 <inlineav id="ExpandRecurrenceCON" src="AlgAnal/ExpandRecurrenceCON.js" name="Divide-and-Conquer Expansion Slideshow" links="AlgAnal/ExpandRecurrenceCON.css"/>
 
+::: TODO
+- We haven't introduced heaps yet - so this should move to later
+:::
+
 ::: topic
 #### Example: Building a heap {-}
 
@@ -397,7 +463,7 @@ sometimes referred to as the [Master Theorem]{.term}.
 #### Theorem: The Master Theorem {-}
 
 For any recurrence relation of the form
-$\mathbf{T}(n) = a\mathbf{T}(n/b) + cn^k, \mathbf{T}(1) = c$, the following
+$\mathbf{T}(n) = a\mathbf{T}(n/b) + cn^k$; $\mathbf{T}(1) = c$, the following
 relationships hold.
 
 $$
@@ -453,7 +519,7 @@ had the following recurrence:
 $$
 \begin{eqnarray}
 \mathbf{T}(n) &=& cn + \frac{1}{n}\sum_{k=0}^{n-1} [\mathbf{T}(k) + \mathbf{T}(n -1 - k)] \\
-\mathbf{T}(0) &=& \mathbf{T}(1) = c
+\mathbf{T}(0) = \mathbf{T}(1) &=& c
 \end{eqnarray}
 $$
 
@@ -466,7 +532,9 @@ counts up from $T(0)$ to $T(n-1)$ while the other counts down from
 $T(n-1)$ to $T(0)$. This yields
 
 $$
-\mathbf{T}(n) = cn + \frac{2}{n}\sum_{k=0}^{n-1} \mathbf{T}(k)
+\begin{eqnarray}
+\mathbf{T}(n) &=& cn + \frac{2}{n}\sum_{k=0}^{n-1} \mathbf{T}(k)
+\end{eqnarray}
 $$
 
 This form is known as a [recurrence with full history]{.term}. The key to solving such a recurrence is to cancel out the
