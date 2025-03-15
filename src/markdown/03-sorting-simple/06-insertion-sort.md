@@ -5,14 +5,11 @@
 - Prio 2: rewrite a little, because now it looks like insertion sort is the first to be introduced
 - Prio 2: improve the analysis (not just a visualisation)
 
-What would you do if you have a stack of phone bills from the past two
-years and you want to order by date? A fairly natural way to handle this
-is to look at the first two bills and put them in order. Then take the
-third bill and put it into the right position with respect to the first
-two, and so on. As you take each bill, you would add it to the sorted
-pile that you have already made. This simple approach is the inspiration
-for our first sorting algorithm, called
-[Insertion sort]{.term}.
+Consider again the problem of sorting a pile of books.
+Another intuitive approach might be to pick up the two topmost books in the pile and put them in order in the bookshelf.
+Then you take another book from the pile and put it in the bookshelf, in the right position with respect to the first two, and so on.
+As you take each book, you would add it in the bookshelf in the right position.
+This simple approach is the inspiration for our third sorting algorithm, called [Insertion sort]{.term}.
 
 Insertion sort iterates through a list of records. For each iteration,
 the current record is inserted in turn at the correct position within a
