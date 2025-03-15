@@ -304,12 +304,13 @@ public static void permute(Object[] A) {
 -->
 
 **Logic Notation:**
-We will occasionally make use of the notation of symbolic or Boolean logic.
-$A \Rightarrow B$ means "$A$ implies $B$" or "If $A$ then $B$".
-$A \Leftrightarrow B$ means "$A$ if and only if $B$" or "$A$ is equivalent to $B$".
-$A \vee B$ means "$A$ or $B$" (useful both in the context of symbolic logic or when performing a Boolean operation).
-$A \wedge B$ means "$A$ and $B$".
-$\neg\!A$ and $\overline{A}$ both mean "not $A$" or the negation of $A$ where $A$ is a Boolean variable.
+We will occasionally make use of the notation of symbolic logic.
+
+- $A \Rightarrow B$ means "if $A$ then $B$" -- i.e., that $A$ implies $B$.
+- $A \Leftrightarrow B$ means "$A$ if and only if $B$" -- i.e., that $A$ and $B$ are equivalent.
+- $A \vee B$ means "$A$ or $B$" -- the disjunction of $A$ and $B$.
+- $A \wedge B$ means "$A$ and $B$" -- the conjunction of $A$ and $B$.
+- $\neg A$ means "not $A$" -- the negation of $A$.
 
 **Floor and ceiling:**
 The [floor]{.term} of $x$ (written $\lfloor x \rfloor$) takes real value $x$ and returns the greatest integer $\leq x$.
