@@ -112,19 +112,19 @@ What if we perform some operation $p\in O(f)$ for each element in an array $A$, 
 It depends on the size of the array: if we assume that the array has $n$ elements, what is the complexity of the following loop?
 
 $$
-\mathbf{for}\ x \in A: p
+\mbox{for}\ x \in A: p
 $$
 
 The loop performs $p$ once for every element in $A$, meaning that $p$ will be executed $n$ times.
 Therefore the complexity of a loop is:
 
 $$
-(\mathbf{for}\ x \in A: p) \in |A|\cdot O(f) = n\cdot O(f) = O(n\cdot f)
+(\mbox{for}\ x \in A: p) \in |A|\cdot O(f) = n\cdot O(f) = O(n\cdot f)
 $$
 
 Note that $p$ can be a complex operation, for example a loop itself.
 If $p$ is a simple loop over A, with a constant-time operation in its body, then $p\in O(n)$.
-And then the outer loop ($\mathbf{for}\ x \in A: p$) will be in $n\cdot O(n) = O(n^2)$.
+And then the outer loop ($\mbox{for}\ x \in A: p$) will be in $n\cdot O(n) = O(n^2)$.
 
 #### Summary
 
@@ -132,7 +132,7 @@ When we want to analyse the complexity of code fragments, the following three ru
 
 - Atomic operations are always $O(1)$
 - Sequences $p;p'$ are translated to addition, O(\max(f,f'))$
-- Iterations, $\mathbf{for}\ x \in A: p$, are translated to multiplication, $n\cdot O(f) = O(n\cdot f)$
+- Iterations, $\mbox{for}\ x \in A: p$, are translated to multiplication, $n\cdot O(f) = O(n\cdot f)$
   (assuming that $n=|A|$)
 
 

@@ -491,8 +491,8 @@ $$
 \sum_{i = 1}^{n} i &=& \frac{n (n+1)}{2} \\
 \sum_{i = 1}^{n} i^2 &=& \frac{2 n^3 + 3 n^2 + n}{6} = \frac{n(2n + 1)(n + 1)}{6} \\
 \sum_{i = 1}^{\log n} n &=& n \log n \\
-\sum_{i = 0}^\infty a^i &=& \frac{1}{1-a}\ \text{for} \ 0 < a < 1 \\
-\sum_{i = 0}^{n} a^i &=& \frac{a^{n+1} - 1}{a - 1}\ \text{for} \ a \neq 1
+\sum_{i = 0}^\infty a^i &=& \frac{1}{1-a}  ~~~ \mbox{if} \ 0 < a < 1 \\
+\sum_{i = 0}^{n} a^i &=& \frac{a^{n+1} - 1}{a - 1}  ~~~ \mbox{if} \ a \neq 1
 \end{eqnarray}
 $$
 
@@ -547,13 +547,13 @@ A [recurrence relation]{.term} defines a function by means of an expression that
 A classic example is the recursive definition for the factorial function:
 
 $$
-n! = (n-1)! \cdot n\ \mbox{for}\ n>1; \quad 1! = 0! = 1.
+n! = (n-1)! \cdot n ~~~ \mbox{for}\ n>1; \quad 1! = 0! = 1.
 $$
 
 Another standard example of a recurrence is the Fibonacci sequence:
 
 $$
-\mbox{Fib}(n) = \mbox{Fib}(n-1) + \mbox{Fib}(n-2)\ \mbox{for}\ n>2;
+\mbox{Fib}(n) = \mbox{Fib}(n-1) + \mbox{Fib}(n-2) ~~~ \mbox{for}\ n>2;
 \quad\mbox{Fib}(1) = \mbox{Fib}(2) = 1.
 $$
 
@@ -571,7 +571,7 @@ For example, the number of multiplications required by a recursive version of th
 This can be defined using the following recurrence:
 
 $$
-T(n) = T(n-1) + 1\ \mbox{for}\ n>1;
+T(n) = T(n-1) + 1 ~~~ \mbox{for}\ n>1;
 \quad T(0) = T(1) = 0.
 $$
 

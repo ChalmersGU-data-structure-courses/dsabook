@@ -469,9 +469,9 @@ relationships hold.
 $$
 T(n) \in
 \left\{ \begin{array}{ll}
-    O(n^{\log_ba})  &  \textrm{if}\ a > b^k \\
-    O(n^k\log_b n)  &  \textrm{if}\ a = b^k \\
-    O(n^k)          &  \textrm{if}\ a < b^k
+    O(n^{\log_ba})  &  \mbox{if}\ a > b^k \\
+    O(n^k\log_b n)  &  \mbox{if}\ a = b^k \\
+    O(n^k)          &  \mbox{if}\ a < b^k
 \end{array} \right.
 $$
 
