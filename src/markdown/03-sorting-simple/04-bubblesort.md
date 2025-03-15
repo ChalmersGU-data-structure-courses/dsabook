@@ -35,6 +35,20 @@ preceding pass. Here is an implementation.
                     swap(A, j-1, j)
 
 
+
+::: {#practice}
+(Note that to make the explanation for these sorting algorithms as
+simple as possible, our visualizations will show the array as though it
+stored simple integers rather than more complex records. But you should
+realize that in practice, there is rarely any point to sorting an array
+of simple integers. Nearly always we want to sort more complex records
+that each have a [key]{.term} value. In such cases we must have a way
+to associate a key value with a record. The sorting
+algorithms will simply assume that the records are
+[comparable]{.term}.)
+:::
+
+
 <inlineav id="bubblesortS1CON" src="Sorting/bubblesortS1CON.js" name="Bubble Sort Slideshow 1"/>
 
 Now we continue with the second pass. However, since the largest record
