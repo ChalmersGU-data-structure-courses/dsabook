@@ -135,7 +135,7 @@ So, mergesort is not an in-place algorithm because it uses at least linear addit
 But what about quicksort, didn't we say that it is in-place?
 
 ::: topic
-#### Example Quicksort {-}
+#### Example: Quicksort {-}
 
 How much additional space does quicksort use?
 Just as mergesort, quicksort is also a divide-and-conquer algorithm, but in this case we cannot be certain that it halves the problem size in each call.

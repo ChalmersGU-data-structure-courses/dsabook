@@ -172,7 +172,7 @@ Similarly, updating an element follows the same notation: `input[2] = 10` assign
 
 In the example above, we explicitly declare the types of array variables to illustrate our pseudocode conventions. However, in some cases, we may omit type annotations for simplicity.
 
-**References** In most programming languages, including our pseudocode, arrays are stored as references rather than direct values. 
+**References**: In most programming languages, including our pseudocode, arrays are stored as references rather than direct values.
 This means that when you assign one array variable to another, you are copying the reference (or pointer) to the original array, not the array itself.
 
 For example:
@@ -188,7 +188,7 @@ For example:
 Since `b` holds a reference to the same array as `a`, any modifications made through `b` will also affect `a`. 
 If you want to create a separate copy, you need to explicitly copy the array element by element.
 
-**Array slices** A prominent feature in the popular programming language Python are _array slices_.
+**Array slices**: A prominent feature in the popular programming language Python are _array slices_.
 You can use a slice to select a part of an array, for example, the first ten elements.
 However, such a slice creates a new array and copies the selected elements from the original array.
 This means that using slices is quite slow.
@@ -277,7 +277,7 @@ A `datatype` can implement an `interface`, making it a subtype of the interface.
 
 To create a concrete instance of a `datatype`, we use the following notation:
 
-    Stack of Int stack = ArrayStack(100) of Int
+    stack: Stack of Int = ArrayStack(100) of Int
 
 We can then call member functions like this:
 
@@ -286,6 +286,7 @@ We can then call member functions like this:
 Note that, in our pseudocode, we simplify by omitting details we consider irrelevant, such as constructor handling, default values, and other specifics.
 We intentionally avoid complex features like multiple inheritance or static methods, focusing instead on clarity and easy translation to your preferred programming language.
 
+::: TODO
 We assume familiarity with the following concepts:
 
 - Classes and instances (objects)
@@ -298,6 +299,7 @@ There is no need to know the following for our purposes:
 - Multiple inheritance
 - Class variables, class methods, static methods
 - Referencing a superclass or using the super keyword
+:::
 
 #### Mutable and immutable data {-}
 
@@ -356,7 +358,7 @@ External memory, or secondary storage, includes non-volatile devices such as har
 Unlike internal memory, it persists data even when the system is powered off and is used for long-term storage.
 External memory usually has a much larger capacity than internal memory, but it is significantly slower because data must be fetched and loaded into RAM before it can be processed.
 
-**Caching**
+#### Caching {-}
 
 Caching is a technique used to accelerate data access by temporarily storing frequently used information in a smaller, high-speed memory area called a cache. 
 When a program requests data, the processor first checks whether it is available in the cache. 

@@ -10,7 +10,7 @@ If you're comfortable with these preliminaries, you can safely skip ahead to the
 The concept of a set in the mathematical sense has wide application in computer science.
 The notations and techniques of set theory are commonly used when describing and implementing algorithms because the abstractions associated with sets often help to clarify and simplify algorithm design.
 
-A [set]{.term} is a collection of distinguishable [members <member>]{.term} or [elements <element>]{.term}.
+A [set]{.term} is a collection of distinguishable [members]{.term} or [elements]{.term}.
 The members are typically drawn from some larger population known as the [base type]{.term}.
 Each member of a set is either a [primitive element]{.term} of the base type or is a set itself.
 There is no concept of duplication in a set.
@@ -86,7 +86,6 @@ $$
 $$
 
 A collection of elements without a specific order, similar to a set, but allowing multiple occurrences of each element, is called a [bag]{.term}.
-A bag is also called a multiset and an element that occurs multipel times is called a duplicate.
 A bag is also known as a multiset and an element that appears more than once is called a duplicate.
 <!--
 To distinguish bags from sets, we will use square brackets [] around a bag's elements.
@@ -97,9 +96,9 @@ However, bag [3, 4, 5, 4] is indistinguishable from bag [3, 4, 4, 5].
 A [sequence]{.term} is an ordered collection of elements of the same type that may include duplicates.
 A sequence can for example be implemented as a list, an array, or a vector.
 We can access elements in a sequence using zero-based indexing, where the index 0 refers to the first element, 1 to the second, and so on.
-We will use square brackets $\lbrack\rbrack$ to enclose the elements of a sequence.
-For example, $\lbrack3, 4, 5, 4\rbrack$ is a sequence.
-Note that sequence $\lbrack3, 5, 4, 4\rbrack$ is distinct from sequence $\lbrack3, 4, 5, 4\rbrack$, and both are distinct from sequence $\lbrack3, 4, 5\rbrack$.
+We will use square brackets $[]$ to enclose the elements of a sequence.
+For example, $[3, 4, 5, 4]$ is a sequence.
+Note that sequence $[3, 5, 4, 4]$ is distinct from sequence $[3, 4, 5, 4]$, and both are distinct from sequence $[3, 4, 5]$.
 
 ### Relations
 
@@ -148,11 +147,11 @@ If we define a person to be a sibling of themself, then it is reflexive; if we d
 #### Equivalence Relations {-}
 
 $R$ is an [equivalence relation]{.term} on set $\mathbf{S}$ if it is reflexive, symmetric, and transitive.
-An equivalence relation can be used to partition a set into [equivalence classes <equivalence class>]{.term}.
+An equivalence relation can be used to partition a set into [equivalence classes]{.term}.
 If two elements $a$ and $b$ are equivalent to each other, we write $a \equiv b$.
 A [partition]{.term} of a set $\mathbf{S}$ is a collection of subsets that are [disjoint]{.term} from each other and whose union is $\mathbf{S}$.
 An [equivalence relation]{.term} on set $\mathbf{S}$ partitions the set into disjoint subsets whose elements are equivalent.
-The [Union-Find <Union-find> <UnionFind>]{.term} algorithm efficiently maintains equivalence classes on a set.
+The [Union-Find]{.term} algorithm efficiently maintains equivalence classes on a set.
 
 ::: topic
 #### Example {-}
@@ -334,7 +333,7 @@ Under this definition, $-3 \;\mathrm{mod}\; 5 = -3$.
 Another language might do something different.
 
 Unfortunately, for many applications this is not what the user wants or expects.
-For example, many [hash systems <hash system> <HashFunc>]{.term} will perform some computation on a record's [key]{.term} value and then take the result modulo the hash table size.
+For example, many [hash systems]{.term} will perform some computation on a record's [key]{.term} value and then take the result modulo the hash table size.
 The expectation here would be that the result is a legal index into the hash table, not a negative number.
 Implementers of hash functions must either ensure that the result of the computation is always positive, or else add the hash table size to the result of the modulo function when that result is negative.
 
@@ -356,10 +355,10 @@ For example, if you have 1000 codes to store, you will require at least $\lceil 
 
 ::: topic
 ##### Example {-}
-Consider the [binary search <binary search> <AnalProgram>]{.term} algorithm for finding a given value within an array sorted by value from lowest to highest.
+Consider the [binary search]{.term} algorithm for finding a given value within an array sorted by value from lowest to highest.
 Binary search first looks at the middle element and determines if the value being searched for is in the upper half or the lower half of the array.
 The algorithm then continues splitting the appropriate subarray in half until the desired value is found.
-How many times can an array of size \(n\) be split in half until only one element remains in the final subarray?
+How many times can an array of size $n$ be split in half until only one element remains in the final subarray?
 The answer is $\lceil \log_2 n \rceil$ times.
 :::
 
@@ -437,7 +436,7 @@ Summations are simply the sum of costs for some function applied to a range of p
 Summations are typically written with the following "Sigma" notation:
 
 $$
-\sum_{i=1}^{n} f(i).
+\sum_{i=1}^{n} f(i)
 $$
 
 This notation indicates that we are summing the value of $f(i)$ over some range of (integer) values.
@@ -524,7 +523,7 @@ $$
 where $\gamma$ is Euler's constant and has the value 0.5772...
 
 Most of these equalities can be proved easily by a
-[proof by induction <Proofs>]{.term}.
+[proof by induction]{.term}.
 Unfortunately, induction does not help us derive a closed-form
 solution.
 Induction only confirms when a proposed closed-form solution is
@@ -698,7 +697,7 @@ Induction can help to prove that a recursive function produces the correct resul
 Understanding recursion is a big step toward understanding induction, and vice versa, since they work by essentially the same process.
 
 Within the context of algorithm analysis, one of the most important uses for mathematical induction is as a method to test a hypothesis.
-When [seeking a closed-form solution <closed-form solution> <Summation>]{.term} for a [summation]{.term} or [recurrence <recurrence relation>]{.term}, we might first guess or otherwise acquire evidence that a particular formula is the correct solution.
+When seeking a [closed-form solution]{.term} for a [summation]{.term} or [recurrence]{.term}, we might first guess or otherwise acquire evidence that a particular formula is the correct solution.
 If the formula is indeed correct, it is often an easy matter to prove that fact with an induction proof.
 
 Let **Thrm** be a theorem to prove, and express **Thrm** in terms of a positive integer parameter $n$.
@@ -857,7 +856,7 @@ $$
 ::: topic
 ##### Example {-}
 This example shows how we can use induction to prove that a proposed
-closed-form solution for a recurrence relation is correct.
+closed-form solution for a [recurrence relation]{.term} is correct.
 
 **Theorem:**
 The recurrence relation

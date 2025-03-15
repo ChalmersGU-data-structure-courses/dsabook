@@ -104,7 +104,7 @@ BST could take a comparator class as a generics parameter in Java. This
 comparator class would be responsible for dealing with the comparison of
 two records.
 
-### Key-Value Pairs
+### Key-value Pairs
 
 One good general-purpose solution is to explicitly store
 [key-value pairs](#key-value-pair){.term} in the
@@ -123,7 +123,7 @@ pairs:
 
 Note that in Python it's probably easier to just use a pair `(key,value)`,
 but not all languages (read: Java) have that possibility.
-So we declare a class **KVPair** thart we will use in our example code.
+So we declare a class **KVPair** that we will use in our example code.
 
 Using this we can easily implement a **Map** from an underlying
 **List**, which we will discuss further in the

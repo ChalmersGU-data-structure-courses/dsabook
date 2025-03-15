@@ -19,7 +19,7 @@
 :::
 
 An [algorithm]{.term} (or a function in a computer program) is
-[recursive <recursion>]{.term} if it invokes itself to do part of its
+[recursive]{.term} if it invokes itself to do part of its
 work.
 Recursion makes it possible to solve complex problems using programs
 that are concise, easily understood, and algorithmically efficient.
@@ -87,7 +87,7 @@ will eventually make it's way back to the person who asked.
 
 Imagine that you have a big task.
 You could just do a small piece of it,
-and then [delegate <delegation mental model for recursion>]{.term}
+and then delegate
 the rest to some helper, as in this example.
 
 <!--
