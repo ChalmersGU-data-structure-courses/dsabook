@@ -335,7 +335,7 @@ Another language might do something different.
 Unfortunately, for many applications this is not what the user wants or expects.
 For example, many [hash systems <hash system> <HashFunc>]{.term} will perform some computation on a record's [key]{.term} value and then take the result modulo the hash table size.
 The expectation here would be that the result is a legal index into the hash table, not a negative number.
-Implementers of hash functions must either insure that the result of the computation is always positive, or else add the hash table size to the result of the modulo function when that result is negative.
+Implementers of hash functions must either ensure that the result of the computation is always positive, or else add the hash table size to the result of the modulo function when that result is negative.
 
 ### Logarithms
 
