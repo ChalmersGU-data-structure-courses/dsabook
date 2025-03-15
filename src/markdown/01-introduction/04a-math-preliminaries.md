@@ -241,8 +241,9 @@ Therefore, the subset operator does not define a total order on the powerset of 
 
 We now define several mathematical terms and concepts, providing a reference for future use.
 
-**Units of measure:**
-We will use the following notation for units of measure.
+Units of measure:
+
+:   We will use the following notation for units of measure.
 "B" will be used as an abbreviation for bytes, "b" for bits, "KB" for kilobytes $(2^{10} = 1024$ bytes), "MB" for megabytes $(2^{20}$ bytes) "GB" for gigabytes $(2^{30}$ bytes) and "ms" for milliseconds (a millisecond is 1/1000 of a second).
 Spaces are not placed between the number and the unit abbreviation when a power of two is intended.
 Thus a disk drive of size 25 gigabytes (where a gigabyte is intended as $2^{30}$ bytes) will be written as "25GB".
@@ -276,8 +277,9 @@ The symbol "$\approx$" means "approximately equal."
 :::
 -->
 
-**Permutations:**
-A [permutation]{.term} of a sequence $\mathbf{S}$ is simply the members of $\mathbf{S}$ arranged in some order.
+Permutations:
+
+:   A [permutation]{.term} of a sequence $\mathbf{S}$ is simply the members of $\mathbf{S}$ arranged in some order.
 For example, a permutation of the integers 1 through $n$ would be those values arranged in some order.
 If the sequence contains $n$ distinct members, then there are $n!$ different permutations for the sequence.
 This is because there are $n$ choices for the first member in the permutation; for each choice of first member there are $n-1$ choices for the second member, and so on.
@@ -302,29 +304,32 @@ public static void permute(Object[] A) {
 ```
 -->
 
-**Logic Notation:**
-We will occasionally make use of the notation of symbolic logic.
+Logic Notation:
 
-- $A \Rightarrow B$ means "if $A$ then $B$" -- i.e., that $A$ implies $B$.
-- $A \Leftrightarrow B$ means "$A$ if and only if $B$" -- i.e., that $A$ and $B$ are equivalent.
-- $A \vee B$ means "$A$ or $B$" -- the disjunction of $A$ and $B$.
-- $A \wedge B$ means "$A$ and $B$" -- the conjunction of $A$ and $B$.
-- $\neg A$ means "not $A$" -- the negation of $A$.
+:  We will occasionally make use of the notation of symbolic logic.
 
-**Floor and ceiling:**
-The [floor]{.term} of $x$ (written $\lfloor x \rfloor$) takes real value $x$ and returns the greatest integer $\leq x$.
+     - $A \Rightarrow B$ means "if $A$ then $B$" -- i.e., that $A$ implies $B$.
+     - $A \Leftrightarrow B$ means "$A$ if and only if $B$" -- i.e., that $A$ and $B$ are equivalent.
+     - $A \vee B$ means "$A$ or $B$" -- the disjunction of $A$ and $B$.
+     - $A \wedge B$ means "$A$ and $B$" -- the conjunction of $A$ and $B$.
+     - $\neg A$ means "not $A$" -- the negation of $A$.
+
+Floor and ceiling:
+
+:   The [floor]{.term} of $x$ (written $\lfloor x \rfloor$) takes real value $x$ and returns the greatest integer $\leq x$.
 For example, $\lfloor 3.4 \rfloor = 3$, as does $\lfloor 3.0 \rfloor$, while $\lfloor -3.4 \rfloor = -4$ and $\lfloor -3.0 \rfloor = -3$.
 The [ceiling]{.term} of $x$ (written $\lceil x \rceil$) takes real value $x$ and returns the least integer $\geq x$.
 For example, $\lceil 3.4 \rceil = 4$, as does $\lceil 4.0 \rceil$, while $\lceil -3.4 \rceil = \lceil -3.0 \rceil = -3$.
 
-**Modulus function:**
-The [modulus]{.term} (or [mod]{.term}) function returns the remainder of an integer division.
+Modulus function:
+
+:   The [modulus]{.term} (or [mod]{.term}) function returns the remainder of an integer division.
 Sometimes written $n \;\mathrm{mod}\; m$ in mathematical expressions, the syntax in many programming languages is $n % m$.
 From the definition of remainder, $n \;\mathrm{mod}\; m$ is the integer $r$ such that $n = qm + r$ for $q$ an integer, and $|r| < |m|$.
 Therefore, the result of $n \;\mathrm{mod}\; m$ must be between 0 and $m-1$ when $n$ and $m$ are positive integers.
 For example, $5 \;\mathrm{mod}\; 3 = 2$; $25 \;\mathrm{mod}\; 3 = 1$, $5 \;\mathrm{mod}\; 7 = 5$, and $5 \;\mathrm{mod}\; 5 = 0$.
 
-There is more than one way to assign values to $q$ and $r$, depending on how integer division is interpreted.
+    There is more than one way to assign values to $q$ and $r$, depending on how integer division is interpreted.
 The most common mathematical definition computes the mod function as $n \;\mathrm{mod}\; m = n - m\lfloor n/m\rfloor$.
 In this case, $-3 \;\mathrm{mod}\; 5 = 2$.
 However, Java and C++ compilers typically use the underlying processor's machine instruction for computing integer arithmetic.
@@ -332,7 +337,7 @@ On many computers this is done by truncating the resulting fraction, meaning $n 
 Under this definition, $-3 \;\mathrm{mod}\; 5 = -3$.
 Another language might do something different.
 
-Unfortunately, for many applications this is not what the user wants or expects.
+    Unfortunately, for many applications this is not what the user wants or expects.
 For example, many [hash systems]{.term} will perform some computation on a record's [key]{.term} value and then take the result modulo the hash table size.
 The expectation here would be that the result is a legal index into the hash table, not a negative number.
 Implementers of hash functions must either ensure that the result of the computation is always positive, or else add the hash table size to the result of the modulo function when that result is negative.
