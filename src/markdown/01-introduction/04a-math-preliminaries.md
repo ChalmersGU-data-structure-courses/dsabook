@@ -35,6 +35,10 @@ $\mathbf{P}-\mathbf{Q}$            Difference all elements of $\mathbf{P}$ *not*
 $\mathbf{P}\times\mathbf{Q}$       (Cartesian) product: all possible pairs $(x,y)$ with $x\in\mathbf{P}$ and $y\in\mathbf{Q}$
 ---------------------------------- ---------------------------------------------------------------------------------------------
 
+::: TODO
+- (Peter) I think the examples below are unnecessary: the students should know all this.
+  But we can keep the text on product, powerset, multiset, and sequence.
+:::
 
 Here are some examples of this notation in use.
 First define two sets, $\mathbf{P}$ and $\mathbf{Q}$.
@@ -64,7 +68,7 @@ $$
 \{(2, 5),\ (2, 10),\ (3, 5),\ (3, 10),\ (5, 5),\ (5, 10)\}.
 $$
 
-The [powerset]{.term} of a set $\mathbf{S}$ (denoted $2^S$) is the set of all possible subsets for $\mathbf{S}$.
+The [powerset]{.term} of a set $\mathbf{S}$ (denoted $2^\mathbf{S}$ or $\mathcal{P}(\mathbf{S})$) is the set of all possible subsets for $\mathbf{S}$.
 Consider the set $\mathbf{S} = \{ a, b, c \}$. The powerset of $\mathbf{S}$ is
 
 $$
@@ -89,7 +93,7 @@ Note that sequence $[3, 5, 4, 4]$ is distinct from sequence $[3, 4, 5, 4]$, and 
 
 ### Relations
 
-A [relation]{.term} $R$ over set $\mathbf{S}$ is a set of ordered pairs from $\mathbf{S}$.
+A binary [relation]{.term} $R$ over set $\mathbf{S}$ is a set of ordered pairs from $\mathbf{S}$, i.e., $R\subseteq\mathbf{S}\times\mathbf{S}$.
 As an example of a relation, if $\mathbf{S}$ is $\{a, b, c\}$, then
 
 $$
@@ -107,53 +111,58 @@ If tuple $(x, y)$ is in relation $R$, we may use the infix notation $xRy$.
 We often use relations, such as the less than operator ($<$), on the natural numbers, which includes ordered pairs such as $(1, 3)$ and $(2, 23)$, but not $(3, 2)$ or $(2, 2)$.
 Rather than writing the relationship in terms of ordered pairs, we typically use an infix notation for such relations, writing $1<3$.
 
-Define the properties of relations as follows, with $R$ a binary relation over set $\mathbf{S}$.
+The most important properties of relations are as follows, where $R$ is a binary relation over set $\mathbf{S}$, and the condition holds for all $a, b, c \in \mathbf{S}$.
 
-* $R$ is [reflexive]{.term} if $aRa$ for all $a \in \mathbf{S}$.
-
-* $R$ is [irreflexive]{.term} if $aRa$ is not true for all $a \in \mathbf{S}$.
-
-* $R$ is [symmetric]{.term} if whenever $aRb$, then $bRa$, for all $a, b \in \mathbf{S}$.
-
-* $R$ is [antisymmetric]{.term} if whenever $aRb$ and $bRa$, then $a = b$, for all $a, b \in \mathbf{S}$.
-
-* $R$ is [transitive]{.term} if whenever $aRb$ and $bRc$, then $aRc$, for all $a, b, c \in \mathbf{S}$.
+* $R$ is [reflexive]{.term} if $aRa$.
+* $R$ is [irreflexive]{.term} if $aRa$ is never true.
+* $R$ is [symmetric]{.term} if whenever $aRb$, then $bRa$.
+* $R$ is [antisymmetric]{.term} if whenever $aRb$ and $bRa$, then $a = b$.
+* $R$ is [transitive]{.term} if whenever $aRb$ and $bRc$, then $aRc$.
 
 As examples, for the natural numbers, $<$ is irreflexive (because $aRa$ is never true), antisymmetric (because there is no case where $aRb$ and
 $bRa$), and transitive.
 Relation $\leq$ is reflexive, antisymmetric, and transitive.
 Relation $=$ is reflexive, symmetric (and antisymmetric!), and transitive.
 For people, the relation "is a sibling of" is symmetric and transitive.
-If we define a person to be a sibling of themself, then it is reflexive; if we define a person not to be a sibling of themself, then it is not reflexive.
+If we define a person to be a sibling of themself, then it is reflexive; if we define a person not to be a sibling of themself, then it is irreflexive.
 
 <!--
 .. avembed:: Exercises/Background/SetTFrelation.html ka
    :long_name: Relations Exercise
 -->
 
-#### Equivalence Relations
+#### Equivalence relations
 
-$R$ is an [equivalence relation]{.term} on set $\mathbf{S}$ if it is reflexive, symmetric, and transitive.
+$R$ is an [equivalence relation]{.term} on set $\mathbf{S}$ if it is *reflexive*, *symmetric*, and *transitive*.
 An equivalence relation can be used to partition a set into [equivalence classes]{.term}.
 If two elements $a$ and $b$ are equivalent to each other, we write $a \equiv b$.
-A [partition]{.term} of a set $\mathbf{S}$ is a collection of subsets that are [disjoint]{.term} from each other and whose union is $\mathbf{S}$.
-An [equivalence relation]{.term} on set $\mathbf{S}$ partitions the set into disjoint subsets whose elements are equivalent.
-The [Union-Find]{.term} algorithm efficiently maintains equivalence classes on a set.
 
+A [partition]{.term} of a set $\mathbf{S}$ is a collection of subsets that are [disjoint]{.term} from each other and whose union is $\mathbf{S}$.
+There's a close correspondence between equivalence relations and partitions:
+an equivalence relation on a set $\mathbf{S}$ partitions the set into disjoint subsets (the subsest of equivalent elements).
+But the opposite is also true:
+if you have a partition of a set $\mathbf{S}$ you can easily define a corresponding equivalence relation (elements are equivalent if they belong to the same partition).
+
+<!-- The [Union-Find]{.term} algorithm efficiently maintains equivalence classes on a set. -->
+
+An obvious example of an equivalence relation is the relation $=$ on natural numbers.
+Examples on real-life objects are "have the same colour", or "as heavy as".
+And if we look at strings, "have the same length" is an equivalence relation too.
+
+<!--
 ::: topic
 #### Example: Integers {-}
 For the integers, $=$ is an equivalence relation that partitions each element into a distinct subset.
 In other words, for any integer $a$, three things are true.
 
-1. $a = a$,
-
-2. if $a = b$ then $b = a$, and
-
-3. if $a = b$ and $b = c$, then $a = c$.
+- (reflexive) $a = a$,
+- (symmetric) if $a = b$ then $b = a$, and
+- (transitive) if $a = b$ and $b = c$, then $a = c$.
 
 Of course, for distinct integers $a$, $b$, and $c$ there are never cases where $a = b$, $b = a$, or $b = c$.
 So the requirements for symmetry and transitivity are never violated, and therefore the relation is symmetric and transitive.
 :::
+-->
 
 <!--
 ::: topic
@@ -197,7 +206,7 @@ This relation is an equivalence relation because
 
 #### Partial Orders
 
-A binary relation is called a [partial order]{.term} if it is antisymmetric and transitive.
+A binary relation is called a [partial order]{.term} if it is *antisymmetric* and *transitive*.
 If the relation is reflexive, it is called a [non-strict partial order]{.term}.
 If the relation is [irreflexive]{.term}, it is called a [strict partial order]{.term}.
 The set on which the partial order is defined is called a [partially ordered set]{.term} or a [poset]{.term}.
