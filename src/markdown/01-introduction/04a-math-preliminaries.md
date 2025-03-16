@@ -239,12 +239,16 @@ We now define several mathematical terms and concepts, providing a reference for
 
 ::: TODO
 - (Peter) I don't like that whitespace changes the meaning: "2Kb" is different from "2 Kb"
+    - We don't use `[KMG][Bb]` anywhere in the book, so we don't have to do this distinction
+    - Suggestion:
+        - don't talk about "B" or "b" here (instead write out "bytes", "bits" when needed)
+        - discuss here that "K" (and M, G) can sometimes mean $2^10$ and sometimes $10^3$, and whenever the distinction is important we clearly say so
 :::
 
 Units of measure:
 
 :   We will use the following notation for units of measure.
-"B" will be used as an abbreviation for bytes, "b" for bits, "KB" for kilobytes $(2^{10} = 1024$ bytes), "MB" for megabytes $(2^{20}$ bytes) "GB" for gigabytes $(2^{30}$ bytes) and "ms" for milliseconds (a millisecond is 1/1000 of a second).
+"B" will be used as an abbreviation for bytes, "b" for bits, "KB" for kilobytes ($2^{10} = 1024$ bytes), "MB" for megabytes ($2^{20}$ bytes) "GB" for gigabytes ($2^{30}$ bytes) and "ms" for milliseconds (a millisecond is 1/1000 of a second).
 Spaces are not placed between the number and the unit abbreviation when a power of two is intended.
 Thus a disk drive of size 25 gigabytes (where a gigabyte is intended as $2^{30}$ bytes) will be written as "25GB".
 Spaces are used when a decimal value is intended.
