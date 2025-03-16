@@ -1199,21 +1199,21 @@ A sequence is [pseudo random]{.term} if no future term can be predicted in polyn
 Most computer systems use a deterministic algorithm to select pseudorandom numbers.
 The most commonly used approach historically is known as the [Linear Congruential Method]{.term} (LCM).
 The LCM method is quite simple.
-We begin by picking a [seed]{.term} that we will call $r(1)$.
-Then, we can compute successive terms as follows.
+We begin by picking a [seed]{.term} that we will call $r_1$.
+Then, we can compute successive terms as follows, where $b$ and $t$ are some constant positive integers.
 
 $$
-r(i) = (r(i-1)\times b) \;\mathrm{mod}\; t
+\begin{eqnarray}
+r_i &=& (b\cdot r_{i-1}) \;\mathrm{mod}\; t
+\end{eqnarray}
 $$
 
-where $b$ and $t$ are constants.
-
-By definition of the $\;\mathrm{mod}\;$ function, all generated numbers must be in the range 0 to $t-1$.
-Now, consider what happens when $r(i) = r(j)$ for values $i$ and $j$.
-Of course then $r(i+1) = r(j+1)$ which means that we have a repeating cycle.
+By definition of the $\mathrm{mod}$ function, all generated numbers must be in the range 0 to $t-1$.
+Now, consider what happens when $r_i = r_j$ for values $i$ and $j$.
+Of course then $r_{i+1} = r_{j+1}$ which means that we have a repeating cycle.
 
 Since the values coming out of the random number generator are between 0 and $t-1$, the longest cycle that we can hope for has length $t$.
-In fact, since $r(0) = 0$, it cannot even be quite this long.
+In fact, since $r_0 = 0$, it cannot even be quite this long.
 It turns out that to get a good result, it is crucial to pick good values for both $b$ and $t$.
 To see why, consider the following example.
 
@@ -1221,11 +1221,13 @@ To see why, consider the following example.
 ##### Example: Varying the $t$ value {-}
 Given a $t$ value of 13, we can get very different results depending on the $b$ value that we pick, in ways that are hard to predict.
 
-$r(i) = 6r(i-1) \;\mathrm{mod}\; 13 \quad = \quad ..., 1, 6, 10, 8, 9, 2, 12, 7, 3, 5, 4, 11, 1, ...$
-
-$r(i) = 7r(i-1) \;\mathrm{mod}\; 13 \quad = \quad ..., 1, 7, 10, 5, 9, 11, 12, 6, 3, 8, 4, 2, 1, ...$
-
-$r(i) = 5r(i-1) \;\mathrm{mod}\; 13 \quad = \quad ..., 1, 5, 12, 8, 1, ...$
+$$
+\begin{eqnarray}
+r_i \;=\; (6\cdot r_{i-1}) \;\mathrm{mod}\; 13  &=&  \ldots, 1, 6, 10, 8, 9, 2, 12, 7, 3, 5, 4, 11, 1, \ldots  \\
+r_i \;=\; (7\cdot r_{i-1}) \;\mathrm{mod}\; 13  &=&  \ldots, 1, 7, 10, 5, 9, 11, 12, 6, 3, 8, 4, 2, 1, \ldots \\
+r_i \;=\; (5\cdot r_{i-1}) \;\mathrm{mod}\; 13  &=&  \ldots, 1, 5, 12, 8, 1, \ldots
+\end{eqnarray}
+$$
 
 In the case of $b=5$, the generator goes through only a short sequence before repeating, with the series depending on the seed value chosen.
 Clearly, a $b$ value of 5 is far inferior to $b$ values of 6 or 7 in this example.
@@ -1234,7 +1236,9 @@ Clearly, a $b$ value of 5 is far inferior to $b$ values of 6 or 7 in this exampl
 If you would like to write a simple LCM random number generator of your own, an effective one can be made with the following formula:
 
 $$
-r(i) = 16807 r(i-1) \;\mathrm{mod}\; 2^{31} - 1.
+\begin{eqnarray}
+r_i &=& (16807 \cdot r_{i-1}) \;\mathrm{mod}\; 2^{31} - 1
+\end{eqnarray}
 $$
 
 ::: note
