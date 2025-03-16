@@ -379,12 +379,10 @@ For logarithms using any base other than two, we will show the base explicitly.
 Logarithms have the following properties, for any positive values of $m$, $n$, and $r$, and any positive integers $a$ and $b$.
 
 1) $\log (nm) = \log n + \log m$.
-
 2) $\log (n/m) = \log n - \log m$.
-
 3) $\log (n^r) = r \log n$.
-
 4) $\log_a n = \log_b n / \log_b a$.
+5) $b^{\log_b n} = n$.
 
 The first two properties state that the logarithm of two numbers multiplied (or divided) can be found by adding (or subtracting) the logarithms of the two numbers.
 Property (3) is simply an extension of property (1).
@@ -392,6 +390,7 @@ Property (4) tells us that, for variable $n$ and any two integer constants $a$ a
 Most runtime analyses we use are of a type that ignores constant factors in costs.
 Property (4) says that such analyses need not be concerned with the base of the logarithm, because this can change the total cost only by a constant factor.
 
+<!-- (Replacing this with property (5) above)
 A useful identity to know is:
 
 $$
@@ -401,6 +400,7 @@ $$
 To give some intuition for why this is true: What does it mean to take the log (base 2) of $n$?
 If $\log_2 n = x$, then $x$ is the power to which you need to raise 2 to get back to $n$.
 So of course, $2^{\log n} = n$ when the base of the log is 2.
+-->
 
 When discussing logarithms, exponents often lead to confusion.
 Property (3) tells us that $\log n^2 = 2 \log n$.
@@ -409,9 +409,11 @@ This could be written as $(\log n)^2$, but it is traditional to use $\log^2 n$.
 On the other hand, we might want to take the logarithm of the logarithm of $n$.
 This is written $\log \log n$.
 
+<!-- (Removing this, it's only used in UNION-FIND, and already explained there)
 A special notation is used in the rare case when we need to know how many times we must take the log of a number before we reach a value $\leq 1$.
 This quantity is written $\log^* n$.
 For example, $\log^* 1024 = 4$ because $\log 1024 = 10$, $\log 10 \approx 3.33$, $\log 3.33 \approx 1.74$, and $\log 1.74 < 1$, which is a total of 4 log operations.
+-->
 
 <!--
 ::: note
