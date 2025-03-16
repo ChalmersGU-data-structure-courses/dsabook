@@ -1097,11 +1097,8 @@ Estimation is no substitute for rigorous, detailed analysis of a problem, but it
 Estimation can be formalized by the following three-step process:
 
 1. Determine the major parameters that affect the problem.
-
 2. Derive an equation that relates the parameters to the problem.
-
-3. Select values for the parameters, and apply the equation to yield an
-   estimated solution.
+3. Select values for the parameters, and apply the equation to yield an estimated solution.
 
 When doing estimations, a good way to reassure yourself that the estimate is reasonable is to do it in two different ways.
 In general, if you want to know what comes out of a system, you can either try to estimate that directly, or you can estimate what goes into the system (assuming that what goes in must later come out).
@@ -1118,17 +1115,16 @@ Once you are confident that an estimate falls within your error bounds, leave it
 Do not try to get a more precise estimate than necessary for your purpose.
 
 ::: topic
-##### Example: Library bookcases {-}
-How many library bookcases does it take to store books containing one million pages?
-I estimate that a 500-page book requires one inch on the library shelf (it will help to look at the size of any handy book), yielding about 200 feet of shelf space for one million pages.
-If a shelf is 4 feet wide, then 50 shelves are required.
-If a bookcase contains 5 shelves, this yields about 10 library bookcases.
-To reach this conclusion, I estimated the number of pages per inch, the width of a shelf, and the number of shelves in a bookcase.
-None of my estimates are likely to be precise, but I feel confident that my answer is correct to within a factor of two.
-(After writing this, I went to Virginia Tech's library and looked at some real bookcases.
-They were only about 3 feet wide, but typically had 7 shelves for a total of 21 shelf-feet.
-So I was correct to within 10% on bookcase capacity, far better than I expected or needed.
-One of my selected values was too high, and the other too low, which canceled out the errors.)
+##### Example: Bookcases for a million pages {-}
+How many bookcases does it take to store books containing one million pages?
+Let's estimate that a book of 200 pages requires one cm on the library shelf (it will help to look at the size of any handy book), yielding about 50 metres of shelf space for one million pages.
+If a shelf is 80 cm wide, then around 60-65 shelves are required.
+If a bookcase contains 6 shelves, this yields about 10 bookcases.
+
+To reach this conclusion, we estimated the number of pages per cm, the width of a shelf, and the number of shelves in a bookcase.
+Any of these estimates can be wrong: books have thinner or thicker paper, shelves can be narrower or wider, and bookcases can have more or less shelves.
+Let's say that the paper thickness can vary ±50%, that shelves can be 60--100 cm wide, and that there can be 5--8 shelves in a bookcase.
+This suggests that in the extreme case we might be wrong by a factor 2--3, but it's much more likely that some of the errors even out so that our estimate is much more accurate.
 :::
 
 ::: TODO
