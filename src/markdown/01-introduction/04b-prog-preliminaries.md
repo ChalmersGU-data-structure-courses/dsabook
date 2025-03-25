@@ -39,7 +39,7 @@ Variables
     when it does not matter or is evident from the context. We use the following
     notation: `var: <type>`. Note that type names begin with a capital letter.
 
-    Examples: `res`, `n: Int`, `i`, `b0: Boolean`, `res_n`
+    Examples: `res`, `n: Int`, `i`, `b0: Bool`, `res_n`
 
 Types
 
@@ -107,7 +107,7 @@ The next sections introduce the data types used in this book.
 
 We use the following primitive data types:
 
-- **Boolean**: This data type has only two possible values: `true` and `false`.
+- **Bool**: This data type has only two possible values: `true` and `false`.
   It supports logical operations such as conjunction (AND), disjunction (OR),
   exclusive OR (XOR), and negation.
 - **Int**: Represents whole numbers. Unless specified otherwise, we assume
@@ -265,9 +265,12 @@ In functional programming languages, such as Haskell, you can define algebraic d
 Our goal is to keep things simple and explain the concept in a way that can be easily translated into the syntax of any programming language you prefer.
 For this reason, we have adopted a straightforward notation for compound data types in our pseudocode:
 
-    datatype ArrayStack(capacity) of T implements Stack of T:
-        data = Array[capacity] of T
+    datatype ArrayStack of T implements Stack of T:
+        data = Array of T
         size = 0
+    
+        constructor ArrayStack(capacity):
+            data = Array(capacity) of T
 
         function push(value: T):  // no safety checks
             data[size] = value
@@ -291,6 +294,21 @@ We can then call member functions like this:
 
 Note that, in our pseudocode, we simplify by omitting details we consider irrelevant, such as constructor handling, default values, and other specifics.
 We intentionally avoid complex features like multiple inheritance or static methods, focusing instead on clarity and easy translation to your preferred programming language.
+
+    datatype Node of T: 
+        elem:  T
+        left:  Node of T = null
+        right: Node of T = null
+
+        constructor Empty():
+            elem = null
+
+        constructor Node(elem)
+        constructor Node(elem, left, right)
+            
+        function isLeaf() -> Bool:
+            return left is null and right is null
+        
 
 ::: TODO
 We assume familiarity with the following concepts:
