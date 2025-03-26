@@ -103,7 +103,7 @@ Primitive data types are basic types provided by a programming language (includi
 Some (aggregate) data structures, such as arrays and lists, are built into many languages and organize collections of values, while compound data types, such as classes or algebraic data types, allow users to define their own structures.
 The next sections introduce the data types used in this book.
 
-#### Primitive data types {-}
+#### Primitive data types
 
 We use the following primitive data types:
 
@@ -131,7 +131,7 @@ In addition to the primitive data types mentioned earlier, there is also `null` 
 :::
 -->
 
-#### Arrays {-}
+#### Arrays
 
 Arrays are one of the fundamental data structures in programming because they are directly supported by the computer’s memory system and offer excellent performance.
 Accessing or modifying an element in an array is extremely fast, making arrays important for many algorithms.
@@ -202,7 +202,7 @@ In Python we can use the `range(start, end)` function for this functionality.
     - (how do we do in this book?)
 :::
 
-#### Strings {-}
+#### Strings
 
 A string is an immutable sequence of characters, meaning that once defined (e.g., `str = "data"`), it cannot be modified.
 In this sense, strings behave like values, similar to integers or boolean values.
@@ -210,7 +210,7 @@ While you can access individual characters using indexing, you cannot change the
 Any modification, such as concatenation or replacement, results in the creation of a new string rather than altering the original one.
 Because strings are internally represented as arrays, operations like concatenation and comparison are not constant-time and may involve overhead depending on the string length.
 
-#### Tuples {-}
+#### Tuples
 
 A tuple is an _ordered_, _immutable_ collection of elements.
 Unlike arrays, which allow modification of its elements, tuples cannot be changed after they are created.
@@ -227,9 +227,49 @@ Tuples are useful for returning multiple values from a function, grouping relate
 
 ::: TODO
 - Note that Java doesn't have tuples, and how to fix that (same for C?)
+- show some simple *destructuring* assignments `(x, y) = point`
 :::
 
-#### Interfaces {-}
+### Mutable and immutable data
+
+For many algorithms, the ability to use mutable data can lead to more efficient solutions.
+However, mutability comes with its drawbacks: it increases the risk of making mistakes, and immutable data is often easier to reason about and debug.
+
+In our pseudocode, we assume the following data types are immutable:
+
+- Primitive data types (such as integers and characters),
+- Strings
+- Tuples
+
+On the other hand, the following data types are mutable:
+
+- Arrays
+- Compound data types (see below)
+
+::: TODO
+add some examples of mutable/immutable (e.g., arrays vs strings)
+:::
+
+### Functions
+
+We have already seen several examples of functions.
+A function starts with the keyword function, followed by its name.
+Functions can have zero or more parameters, and we assume a call-by-value evaluation strategy.
+
+It is important to note that aggregate types (such as arrays) and compound data types are reference types.
+When assigning an array or a compound data type to a variable, what gets stored is a reference to the actual data, not a copy of the data itself.
+This means that if you pass an array as an argument to a function, the reference is copied, not the entire array.
+As a result, any modifications made to the array inside the function will persist when the function returns.
+
+Functions can also be recursive, meaning they call themselves within their own body.
+Recursion is often used in divide-and-conquer algorithms, though it is not limited to them.
+When analysing recursive functions, it is important to remember that function calls are not free—they consume memory on the stack, which can become a limiting factor if recursion depth is too large.
+
+::: TODO
+describe return type
+:::
+
+### Interfaces
 
 In our pseudocode, we introduce the concept of an _interface_ to distinguish between an abstract data type (ADT) and its concrete implementation.
 An interface defines a set of operations that a data type must support, without specifying how those operations are implemented.
@@ -253,11 +293,7 @@ We use the following notation for interfaces in our pseudocode:
 Using an interface, we can define a data type's expected behaviour and provide multiple implementations in our pseudocode.
 By using interfaces, we clarify the conceptual structure of a data type, making it easier to explain, compare, and analyse different implementations.
 
-#### Compound data types {-}
-
-::: TODO
-- Move this after mutable/immutable, and up one level
-:::
+### Compound data types
 
 We often need to combine different data types to store complex information.
 These are known as _compound data types_.
@@ -302,6 +338,8 @@ We can then call member functions like this:
 
     next = stack.pop()
 
+#### Simplified definitions
+
 Note that, in our pseudocode, we simplify by omitting details we consider irrelevant, such as constructor handling, default values, and other specifics.
 This means that our ArrayStack can also be defined without an explicit constructor:
 
@@ -328,7 +366,10 @@ This definition is an abbreviation of the following:
             value = value
             next = next
 
-But as you can see, the constructor is straghtforward so we won't write it down.
+But as you can see, the constructor is straightforward so we won't write it down.
+We trust that you are competent programmers and can deduce yourself how to implement these simplified definitions in your favourite programming language.
+
+#### Extending datatypes
 
 We can *extend* a datatype by adding more variables, e.g., here a definition of *doubly-linked list nodes* (see section XX):
 
@@ -344,18 +385,14 @@ This example uses an array to store the stack elements and demonstrates how to d
 We define a new compound data type using the keyword `datatype`.
 A `datatype` can implement an `interface`, making it a subtype of the interface.
 
+#### Examples: binary tree nodes
 
-We intentionally avoid complex features like multiple inheritance or static methods, focusing instead on clarity and easy translation to your preferred programming language.
-
-Here's a final example of *binary tree nodes* (see section XX), together with a method telling if a node is a leaf:
+Here's a final example of *binary tree nodes* (see section XX):
 
     datatype TreeNode:
         value
         left:  TreeNode = null
         right: TreeNode = null
-
-        function isLeaf() -> Bool:
-            return left is null and right is null
 
 
 The definition leaves out the following details:
@@ -376,58 +413,51 @@ So a more explicit definition would be like this:
             left  = left
             right = right
 
-But we trust that you are competent programmers and can deduce yourself how to implement this in your favourite programming language.
+We can of course also define some methods, or internal functions, that operate on the internal variables:
+
+    datatype TreeNode:
+        (...)
+
+        function isLeaf() -> Bool:
+            // Return true if a node doesn't have any children
+            return left is null and right is null
+
+        function size() -> Int:
+            // Return the number of nodes, including myself
+            n = 1
+            if left is not null:
+                n = n + left.size()
+            if right is not null:
+                n = n + right.size()
+            return n
+
+Note that in the last function we have to check that the children actually are tree nodes before calculating their size.
+Another possibility is to have a global function that takes the tree node as an argument:
+
+    function treeSize(node: TreeNode) -> Int:
+        if node is null:
+            return 0
+        else:
+            return 1 + treeSize(node.left) + treeSize(node.right)
 
 
-::: TODO
-We assume familiarity with the following concepts:
+#### Complex features that are not used
 
-- Classes and instances (objects)
-- Constructors
-- Members (instance variables) and member functions (methods)
-- The self reference
+We intentionally avoid complex features from object-oriented languages, focusing instead on clarity and easy translation to your preferred programming language.
+So you do *not* have to know about these things to follow the algorithms in this book:
 
-There is no need to know the following for our purposes:
+Multiple inheritance
 
-- Multiple inheritance
-- Class variables, class methods, static methods
-- Referencing a superclass or using the super keyword
-:::
+: Being able to extend multiple classes or interfaces is useful for defining e.g. user interfaces, but it is not something we will use in this book.
 
-#### Mutable and immutable data {-}
+Static methods, class variables, etc.
 
-For many algorithms, the ability to use mutable data can lead to more efficient solutions.
-However, mutability comes with its drawbacks: it increases the risk of making mistakes, and immutable data is often easier to reason about and debug.
+: This is useful for not cluttering up the global namespace, so very useful when you write larger programs. But it is not needed for describing algorithms and data structures.
 
-In our pseudocode, we assume the following data types are immutable:
+Referencing super classes
 
-- Primitive data types (such as integers and characters),
-- Strings
-- Tuples
+: Being able to refer to methods of a super-class can also be useful in some contexts, but again, not something we need here.
 
-On the other hand, the following data types are mutable:
-
-- Arrays
-- Compound data types
-
-### Functions
-
-We have already seen several examples of functions.
-A function starts with the keyword function, followed by its name.
-Functions can have zero or more parameters, and we assume a call-by-value evaluation strategy.
-
-It is important to note that aggregate types (such as arrays) and compound data types are reference types.
-When assigning an array or a compound data type to a variable, what gets stored is a reference to the actual data, not a copy of the data itself.
-This means that if you pass an array as an argument to a function, the reference is copied, not the entire array.
-As a result, any modifications made to the array inside the function will persist when the function returns.
-
-Functions can also be recursive, meaning they call themselves within their own body.
-Recursion is often used in divide-and-conquer algorithms, though it is not limited to them.
-When analysing recursive functions, it is important to remember that function calls are not free—they consume memory on the stack, which can become a limiting factor if recursion depth is too large.
-
-::: TODO
-describe return type
-:::
 
 ### Computer memory
 
@@ -451,7 +481,7 @@ External memory, or secondary storage, includes non-volatile devices such as har
 Unlike internal memory, it persists data even when the system is powered off and is used for long-term storage.
 External memory usually has a much larger capacity than internal memory, but it is significantly slower because data must be fetched and loaded into RAM before it can be processed.
 
-#### Caching {-}
+#### Caching
 
 Caching is a technique used to accelerate data access by temporarily storing frequently used information in a smaller, high-speed memory area called a cache.
 When a program requests data, the processor first checks whether it is available in the cache.
