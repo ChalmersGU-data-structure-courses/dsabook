@@ -156,7 +156,7 @@ This structure allows quick access to any element using its index by directly ca
 In our pseudocode, we use the following syntax to declare an array, retrieve an element, and update an element:
 
     function addOne(input: Array of Int) -> Array of Int:
-        output = Array[input.length] of Int
+        output = new Array(input.length) of Int
         i = 0
         while i < input.length:
             output[i] = input[i] + 1
@@ -179,7 +179,7 @@ This means that when you assign one array variable to another, you are copying t
 
 For example:
 
-    a = Array[3] of Int
+    a = new Array(3) of Int
     a[0] = 10
 
     b = a        // 'b' now refers to the same array as 'a'
@@ -255,6 +255,10 @@ By using interfaces, we clarify the conceptual structure of a data type, making 
 
 #### Compound data types {-}
 
+::: TODO
+- Move this after mutable/immutable, and up one level
+:::
+
 We often need to combine different data types to store complex information.
 These are known as _compound data types_.
 Nearly every programming language supports compound data types, although the specific implementation can vary between languages.
@@ -263,16 +267,22 @@ In Python, you can achieve this using classes, dataclasses, or dictionaries.
 In functional programming languages, such as Haskell, you can define algebraic data types to combine values in various ways.
 
 Our goal is to keep things simple and explain the concept in a way that can be easily translated into the syntax of any programming language you prefer.
-For this reason, we have adopted a straightforward notation for compound data types in our pseudocode:
+For this reason, we have adopted a straightforward notation for compound data types in our pseudocode.
+Here is an example of how to define a dynamic array (see section XX):
 
     datatype ArrayStack of T implements Stack of T:
-        data = Array of T
-        size = 0
-    
+        data: Array of T
+        size: int = 0
+
         constructor ArrayStack(capacity):
             data = Array(capacity) of T
 
-        function push(value: T):  // no safety checks
+A datatype can also have "internal functions" (called *methods* in object-oriented languages), and they will have access to the internal variables:
+
+    datatype ArrayStack ...:
+        (...)
+
+        function push(value: T):
             data[size] = value
             size = size + 1
 
@@ -286,29 +296,88 @@ A `datatype` can implement an `interface`, making it a subtype of the interface.
 
 To create a concrete instance of a `datatype`, we use the following notation:
 
-    stack: Stack of Int = ArrayStack(100) of Int
+    stack: Stack of Int = new ArrayStack(100) of Int
 
 We can then call member functions like this:
 
     next = stack.pop()
 
 Note that, in our pseudocode, we simplify by omitting details we consider irrelevant, such as constructor handling, default values, and other specifics.
+This means that our ArrayStack can also be defined without an explicit constructor:
+
+    datatype ArrayStack(capacity) implements Stack:
+        data: Array = new Array(capacity)
+        size: int = 0
+
+The above definition is the same as the first one -- we can deduce how the constructor must look like from the datatype declaration.
+Note that we also removed the type variable `T` because it can be deduced from the context.
+
+Another example datatype are *linked list nodes* (see section XX):
+
+    datatype ListNode of T:
+        value: T
+        next:  ListNode of T
+
+This definition is an abbreviation of the following:
+
+    datatype ListNode of T:
+        value: T
+        next:  ListNode of T
+
+        constructor(value, next):
+            value = value
+            next = next
+
+But as you can see, the constructor is straghtforward so we won't write it down.
+
+We can *extend* a datatype by adding more variables, e.g., here a definition of *doubly-linked list nodes* (see section XX):
+
+    datatype DoubleNode extends ListNode:
+        ...
+        prev: ListNode
+
+The ellipsis (...) is to remind you that there are already variables that are taken from the `ListNode` datatype.
+
+Sometimes the argument to the constructor isn't an internal variable, and then we have to be more explicit about the internal variables:
+
+This example uses an array to store the stack elements and demonstrates how to define a compound data type.
+We define a new compound data type using the keyword `datatype`.
+A `datatype` can implement an `interface`, making it a subtype of the interface.
+
+
 We intentionally avoid complex features like multiple inheritance or static methods, focusing instead on clarity and easy translation to your preferred programming language.
 
-    datatype Node of T: 
-        elem:  T
-        left:  Node of T = null
-        right: Node of T = null
+Here's a final example of *binary tree nodes* (see section XX), together with a method telling if a node is a leaf:
 
-        constructor Empty():
-            elem = null
+    datatype TreeNode:
+        value
+        left:  TreeNode = null
+        right: TreeNode = null
 
-        constructor Node(elem)
-        constructor Node(elem, left, right)
-            
         function isLeaf() -> Bool:
             return left is null and right is null
-        
+
+
+The definition leaves out the following details:
+
+- the value type `T`
+- the constructor
+- that `left` and `right` have default values (`null`) if they are not given to the constructor
+
+So a more explicit definition would be like this:
+
+    datatype TreeNode of T:
+        value: T
+        left:  TreeNode of T
+        right: TreeNode of T
+
+        constructor TreeNode(value, left=null, right=null):
+            value = value
+            left  = left
+            right = right
+
+But we trust that you are competent programmers and can deduce yourself how to implement this in your favourite programming language.
+
 
 ::: TODO
 We assume familiarity with the following concepts:
@@ -356,9 +425,9 @@ Functions can also be recursive, meaning they call themselves within their own b
 Recursion is often used in divide-and-conquer algorithms, though it is not limited to them.
 When analysing recursive functions, it is important to remember that function calls are not free—they consume memory on the stack, which can become a limiting factor if recursion depth is too large.
 
-### TODO
+::: TODO
 describe return type
-###
+:::
 
 ### Computer memory
 
