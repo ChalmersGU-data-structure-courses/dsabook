@@ -11,6 +11,7 @@ metadata:
 
 variables:
   lang: en-GB
+  toc: true
 
 
 title-prefix: DSABook
