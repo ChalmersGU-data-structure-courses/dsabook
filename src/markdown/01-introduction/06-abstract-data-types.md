@@ -294,9 +294,10 @@ possible.
 
 ### Ordered sequences
 
-    interface Collection extends Iterable:
-        isEmpty()  // Returns true if the collection is empty.
-        size()     // Returns the number of elements in this collection.
+    interface Collection of T:
+        // We assume that we can iterate over the elements in the collection, using a for loop.
+        isEmpty() -> Bool  // Returns true if the collection is empty.
+        size() -> Int      // Returns the number of elements in this collection.
 
 #### Use case(s)
 
@@ -313,17 +314,17 @@ possible.
 - Implementations: linked lists, dynamic arrays
 :::
 
-    interface Stack extends Collection:
-        push(x)    // Pushes x on top of the stack.
-        pop()      // Pops the top of the stack and returns it.
-        peek()     // Returns the top element, without removing it.
+    interface Stack of T extends Collection of T:
+        push(x: T)     // Pushes x on top of the stack.
+        pop() -> T     // Pops the top of the stack and returns it.
+        peek()  -> T   // Returns the top element, without removing it.
 
 #### Queues
 
-    interface Queue extends Collection:
-        enqueue(x)  // Enqueues x at the end of the queue.
-        dequeue()   // Dequeues the frontmost element.
-        peek()      // Returns the frontmost element, without removing it.
+    interface Queue of T extends Collection of T:
+        enqueue(x: T)    // Enqueues x at the end of the queue.
+        dequeue() -> T   // Dequeues the frontmost element.
+        peek() -> T      // Returns the frontmost element, without removing it.
 
 #### Double-ended queues
 
@@ -336,10 +337,10 @@ possible.
 - Implementations: heaps, etc.
 :::
 
-    interface PriorityQueue extends Collection:
-        add(x)       // Adds x to the priority queue.
-        removeMin()  // Removes and returns the minimum element.
-        getMin()     // Returns the minimum element, without removing it.
+    interface PriorityQueue of T extends Collection of T:
+        add(x: t)          // Adds x to the priority queue.
+        removeMin() -> T   // Removes and returns the minimum element.
+        getMin() -> T      // Returns the minimum element, without removing it.
 
 
 #### General lists
@@ -351,11 +352,11 @@ possible.
 - several possible interfaces
 :::
 
-    interface List extends Collection:
-        add(i, x)  // Adds x at position i; where 0 ≤ i ≤ size.
-        get(i)     // Returns the element at position i; where 0 ≤ i < size.
-        set(i, x)  // Replaces the value at position i with x; where 0 ≤ i < size.
-        remove(i)  // Removes the element at position i; where 0 ≤ i < size.
+    interface List of T extends Collection of T:
+        add(i: Int, x: T)   // Adds x at position i; where 0 ≤ i ≤ size.
+        get(i: Int) -> T    // Returns the element at position i; where 0 ≤ i < size.
+        set(i: Int, x: T)   // Replaces the value at position i with x; where 0 ≤ i < size.
+        remove(i: Int)      // Removes the element at position i; where 0 ≤ i < size.
 
 
 
@@ -408,10 +409,10 @@ cannot contain duplicate items: if we try to add an item that is already
 present, nothing happens, and the set is left unchanged. Recall the
 interface for sets from [the course API](#all-adts-used-in-this-book):
 
-    interface Set extends Collection:
-        add(x)       // Adds x to the set. Returns true if the element wasn't already in the set.
-        remove(x)    // Removes x from the set. Returns true if the element was in the set.
-        contains(x)  // Returns true if x is in the set.
+    interface Set of T extends Collection of T:
+        add(x: T)               // Adds x to the set.
+        remove(x: T)            // Removes x from the set.
+        contains(x: T) -> Bool  // Returns true if x is in the set.
 
 ::: topic
 ##### Example: Spell-checking {-}
@@ -425,28 +426,33 @@ To create the spell-checking dictionary, we start with an initially
 empty set, and then call `add` repeatedly to add each valid word to the
 set. Then to spell-check a given word, we just call `contains`.
 
-    class SpellChecker:
-        SpellChecker(listOfValidWords):
+    datatype SpellChecker:
+        validWords: Set of String
+
+        constructor(listOfValidWords: Collection of String):
             // Convert the list of words into a set.
-            this.setOfValidWords = new Set()
+            validWords = new Set()
             for each word in listOfValidWords:
-                this.setOfValidWords.add(word)
+                validWords.add(word)
 
-        isValidWord(word):
-            return this.setOfValidWords.contains(word)
+        isValidWord(word) -> Bool:
+            return validWords.contains(word)
 
-    function main(listOfWordsToCheck):
+Here's how the `SpellChecker` can be used:
+
+    function main(wordsToCheck: Collection of String):
         // Create a new spell checker.
         checker = new SpellChecker(["cat", "dog"])
 
         // Now we can spell-check a word easily.
-        for each word in listOfWordsToCheck:
+        for each word in wordsToCheck:
             if checker.isValidWord(word):
-                print(word, "is valid")
+                print word "is valid"
             else:
-                print(word, "is INVALID")
+                print word "is INVALID"
 
 :::
+
 
 #### Maps, or dictionaries
 
@@ -463,13 +469,14 @@ other hand, a map *can* contain duplicate *values*: two keys can have
 the same value. Recall the interface for maps from
 [the course API](#all-adts-used-in-this-book):
 
-    interface Map extends Iterable:
-        put(key, value)   // Sets the value of the given key. Returns the previous value, or nothing.
-        get(key)          // Returns the value associated with the given key, or nothing if the key is not there.
-        remove(key)       // Removes and returns the value associated with the given key, or nothing if there is no key.
-        containsKey(key)  // Returns true if the key has an associated value.
-        isEmpty()         // Returns true if there are no keys.
-        size()            // Returns the number of keys (i.e., the number of key/value pairs).
+    interface Map of K to V extends Collection of K:
+        put(key: K, value: V)        // Sets the value of the given key.
+        get(key: K) -> V             // Returns the value associated with the given key, or `null` if the key is not there.
+        remove(key: K)               // Removes the value associated with the given key.
+        containsKey(key: K) -> Bool  // Returns true if the key has an associated value.
+
+Note that maps depend on two different types, the keys `K` and the values `V`.
+These types can be the same or different, depending on the needs of your application.
 
 ::: topic
 ##### Example: Database lookup {-}
@@ -484,26 +491,24 @@ in a field `pnr`, then to put a person `p` in the database we call
 `database.put(p.pnr, p)`. To find the person with personnummer `pnr` we
 call `database.get(pnr)`.
 
-    class Person:
-        Person(pnr, name):
-            this.pnr  = pnr    // personnummer
-            this.name = name   // person's name
+    datatype Person
+        pnr: String
+        name: String
 
-    class PersonDatabase:
-        PersonDatabase():
-            this.database = new Map()
+    datatype PersonDatabase:
+        database: Map of String to Person = new Map()
 
-        put(p):
-            // Put the person in the database.
-            this.database.put(p.pnr, p)
+        // Put the person in the database.
+        put(p: Person):
+            database.put(p.pnr, p)
 
-        remove(p):
-            // Remove a person from the database.
-            this.database.remove(p.pnr)
+        // Remove a person from the database.
+        remove(p: Person):
+            database.remove(p.pnr)
 
-        find(pnr):
-            // Find the person who has a given personnummer.
-            return this.database.get(pnr)
+        // Find the person who has a given personnummer.
+        find(pnr: String) -> Person:
+            return database.get(pnr)
 
 :::
 
@@ -525,43 +530,41 @@ map, where the key is a word, and the value is not a document but a
 
 A multimap is the perfect data structure for our search engine example:
 
--   Given a collection of documents (e.g. web pages), find all web pages
-    containing a given word.
+- Given a collection of documents (e.g. web pages), find all web pages containing a given word.
 
 To find all documents containing a given word, we will build a multimap,
 where the key is a word, and the values are all documents containing
 that word. Then, searching for a word will just mean looking it up in
 the multimap.
 
-    class Document:
-        // We model a document as a list of words.
-        Document(contents):
-            this.contents = contents
+    // We model a document as a list of words.
+    datatype Document:
+        contents: Collection of String
 
-    class SearchEngine:
-        SearchEngine():
-            this.database = new Map()
+    datatype SearchEngine:
+        database: Map of String to Set of Document = new Map()
 
-        add(doc):
-            // Add a new document to the database.
+        // Add a new document to the database.
+        add(doc: Document):
             for each word in doc.contents:
-                // Get the set of documents containing this word.
-                set = this.database.get(word)
-                if set is null:
+                if not database.containsKey(word):
                     // This is the first document containing this word.
-                    set = new Set()
+                    database.put(word, new Set())
 
-                // Add the document to the set.
+                // Get the set of documents containing this word, and add the document.
+                set = database.get(word)
                 set.add(doc)
-                this.database.put(word, set)
 
-        find(word):
-            // Find all documents containing a given word.
-            if this.database.containsKey(word):
-                return this.database.get(word)
+        // Find all documents containing a given word.
+        find(word: String) -> Set of Document:
+            if database.containsKey(word):
+                return database.get(word)
             else:
                 // If the word is not found, return an empty set.
                 return new Set()
+
+Note that we don't have to `put` the updated set back into the database (in the `add` method).
+This is because complex data structures are *mutable*, as explained in section XX.
 
 :::
 
@@ -673,6 +676,18 @@ that take advantage of the natural order of the keys:
         $k \leq k\prime$. If $k$ is in the map, then the ceiling of $k$
         is just $k$; otherwise it is the successor of $k$.
 
+Here is a possible interface for sorted maps:
+
+    interface SortedMap of K to V extends Map of K to V:
+        firstKey() -> K              // Returns the first (smallest) key.
+        lastKey() -> K               // Returns the last (largest) key.
+        floorKey(key: K) -> K        // Returns the closest key ≤ k, or nothing if there is no key.
+        ceilingKey(key: K) -> K      // Returns the closest key ≤ k, or nothing if there is no key.
+        lowerKey(key: K) -> K        // Returns the closest key < k, or nothing if there is no such element.
+        higherKey(key: K) -> K       // Returns the closest key > k, or nothing if there is no such element.
+        keysBetween(key1: K, key2: K) -> Collection of K
+                                     // Returns all keys k such that k1 ≤ k ≤ k2.
+
 ::: topic
 ##### Example: Small Swedish towns {-}
 
@@ -681,41 +696,38 @@ between 5,000 and 10,000 population. As there may be towns that have the
 same population, we need a *multimap*. As before, we solve this by
 having the key be a population number and the value be a set of towns.
 
-    class City:
-        City(name, population):
-            this.name = name
-            this.population = population
+    datatype City:
+        name: String
+        population: Int
 
-    class CityPopulations:
-        // Similar to the search engine, use a map where the value is a list of cities.
-        CityPopulations():
-            this.cities = new SortedMap()
+    // Similar to the search engine, use a map where the value is a list of cities.
+    datatype CityPopulations:
+        cities: SortedMap of Int to Set of City = new SortedMap()
 
-        add(city):
-            // Add a new city to the database.
-            // Get the set of documents containing this city
-            set = this.cities.get(city.population)
-            if set is null:
-                // This is the first city with this population
-                set = new Set()
+        // Add a new city to the database.
+        add(city: City):
+            if not cities.containsKey(city.population):
+                // This is the first city with this population.
+                    cities.put(city.population, new Set())
 
-            // Add the city to the set
-            set.add(city)
-            this.cities.put(city.population, set)
+            // Get the set of documents containing this city.
+            set = cities.get(city.population)
+            set.add(doc)
 
-        findBetween(lower, upper):
-            // Find all cities with a population between lower and upper
+        // Find all cities with a population between lower and upper
+        findBetween(lower: Int, upper: Int) -> Set of City:
             result = new Set()
-            // The range query returns a set of keys, i.e. populations.
-            for each population in this.cities.keysBetween(lower, upper):
+            // The range query returns a collection of keys, i.e. populations.
+            for each population in cities.keysBetween(lower, upper):
                 // cities.get(population) returns the list of cities with that population.
-                for each city in this.cities.get(population):
+                for each city in cities.get(population):
                     result.add(city)
             return result
 
 :::
 
-#### ADTs for graphs
+
+### Graphs
 
 ::: TODO
 - examples, use cases
@@ -724,12 +736,27 @@ having the key be a population number and the value be a set of towns.
 - Implementations: adjacency list, adjacency matrix
 :::
 
-##### Use case(s)
-
-### Graphs
-
 #### Edges, vertices
 
+    datatype Edge of V:
+        start: V              // start vertex
+        end: V                // end vertex
+        weight: Float = 1.0   // weight, defaults to 1.0
+
+
+#### ADTs for graphs
+
+    interface Graph of V:
+        addVertex(v: V)                 // Adds the vertex v to the graph.
+        addEdge(e: Edge of V)           // Adds the edge e to the graph.
+        vertices() -> Collection of V   // Returns a Collection of all vertices in the graph.
+        outgoingEdges(v: V) -> Collection of Edge of V
+                                        // Returns a Collection of the edges that originates in vertex v.
+        vertexCount() -> Int            // Returns the number of vertices in the graph.
+        edgeCount() -> Int              // Returns the number of edges in the graph.
+
+
+##### Use case(s) / examples
 
 
 ### Comparison with standard libraries

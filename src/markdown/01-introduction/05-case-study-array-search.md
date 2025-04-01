@@ -25,12 +25,12 @@ will call this an [unsuccessful search]{.term}.
 Here is a simple implementation for sequential search.
 
     // Return the position of an element in an array A.
-    // If the element is not found, return -1.
+    // If the element is not found, return `null`.
     function sequentialSearch(A, e):
-        for i = 0 to A.size()-1:   // For each element in A,
-            if A[i] == e:          // if we found it
-                return i           // return this position.
-        return -1                  // Otherwise, return -1.
+        for i in 0 .. A.size()-1:   // For each element in A,
+            if A[i] == e:           // if we found it
+                return i            // return this position.
+        return null                 // Otherwise, return null
 
 It is natural to ask how long a program or algorithm will take to run.
 But we do not really care exactly how long a particular program will run
@@ -95,7 +95,7 @@ remaining in the array that might contain the value $K$.
 Here is the method in pseudocode:
 
     // Return the position of an element in an array A.
-    // If the element is not found, return -1.
+    // If the element is not found, return `null`.
     function binarySearch(A, e):
         low = 0
         high = A.size() - 1
@@ -107,7 +107,7 @@ Here is the method in pseudocode:
                 high = mid - 1           // In left half.
             else:
                 return mid               // Found it.
-        return -1                        // Search value not in array.
+        return null                      // Search value not in array.
 
 And here is an illustration of the binary search method.
 
