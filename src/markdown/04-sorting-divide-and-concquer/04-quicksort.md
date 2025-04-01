@@ -49,7 +49,7 @@ define the left and right indices, respectively, for the subarray being
 sorted. The initial call to `quickSort` would be
 `quickSort(array, 0, n-1)`.
 
-    function quickSort(A, left, right):
+    function quickSort(A: Array, left: Int, right: Int):
         if left >= right:                         // Base case: Subarray length is ≤ 1
             return
         pivot = findPivot(A, left, right)         // Pick a pivot index
@@ -74,7 +74,7 @@ the array. Here is a simple `findPivot` function implementing this idea.
 Note that later in the chapter we will switch to a better pivot
 selection strategy.
 
-    function findPivot(A, i, j):
+    function findPivot(A, i, j) -> Int:
         // Not-so-good pivot selection: always choose the middle element.
         return int((i + j) / 2)
 
@@ -105,13 +105,13 @@ whole array, but also part of the array. Therefore `partition` needs the
 positions of the leftmost and rightmost elements in the subarray that we
 will partition.
 
-    function partition(A, left, right, pivot):
+    function partition(A, left, right, pivot) -> Int:
         swap(A, left, pivot)   // Put pivot at the leftmost index
         pivot = left
         left = left + 1        // Start partitioning from the element after the pivot
 
         pivotValue = A[pivot]
-        while True:
+        while true:
             // Move `left` right as far as possible. Stop if equal to pivot!
             // Also stop if `left` moves past `right`: this is important,
             // so that `left` stops if it moves past the end of the array.

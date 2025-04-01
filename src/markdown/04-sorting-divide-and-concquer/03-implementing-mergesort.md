@@ -56,25 +56,25 @@ temporarily copy records during the merge process. Parameters `left` and
 subarray being sorted. The initial call to `mergeSort` would be
 `mergeSort(array, temparray, 0, n-1)`.
 
-    function mergeSort(A, temp, left, right):
-        if left == right:                 // List has one record
+    function mergeSort(A: Array, temp: Array, left: Int, right: Int):
+        if left >= right:                  // Base case: Subarray length is ≤ 1
             return
-        mid = int((left + right) / 2)     // Select midpoint
-        mergeSort(A, temp, left, mid)     // Mergesort first half
-        mergeSort(A, temp, mid+1, right)  // Mergesort second half
-        for i = left to right:            // Copy subarray to temp
+        mid = int((left + right) / 2)      // Select midpoint
+        mergeSort(A, temp, left, mid)      // Mergesort first half
+        mergeSort(A, temp, mid+1, right)   // Mergesort second half
+        for i in left .. right:            // Copy subarray to temp
             temp[i] = A[i]
         // Do the merge operation back to A
         i1 = left
         i2 = mid + 1
-        for curr = left to right:
-            if i1 > mid:                  // Left sublist exhausted
+        for curr in left .. right:
+            if i1 > mid:                   // Left sublist exhausted
                 A[curr] = temp[i2]
                 i2 = i2 + 1
-            else if i2 > right:           // Right sublist exhausted
+            else if i2 > right:            // Right sublist exhausted
                 A[curr] = temp[i1]
                 i1 = i1 + 1
-            else if temp[i1] <= temp[i2]: // Get smaller value
+            else if temp[i1] <= temp[i2]:  // Get smaller value
                 A[curr] = temp[i1]
                 i1 = i1 + 1
             else:

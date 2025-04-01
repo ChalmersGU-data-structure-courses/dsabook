@@ -166,15 +166,14 @@ The Fibonacci Sequence is the series of numbers: 1, 1, 2, 3, 5, 8,
 13, 21, 34, ...
 Any number in the sequence is found by adding up the two numbers
 before it.
-The base cases are that `Fibonacci(0) = 1` and
-`Fibonacci(1) = 1`.
+The base cases are that `fibonacci(0) == fibonacci(1) == 1`.
 
-```java
-long Fibonacci(int n) {
-  if (n < 2) {
-    return 1;
-  }
-  return Fibonacci(n - 1) + Fibonacci(n - 2);
-}
 ```
+function fibonacci(n: Int) -> Int:
+    if n < 2:
+        return 1
+    else:
+        return fibonacci(n - 1) + fibonacci(n - 2)
+```
+
 :::
