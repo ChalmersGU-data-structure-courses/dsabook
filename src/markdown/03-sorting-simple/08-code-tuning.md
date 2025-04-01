@@ -38,7 +38,7 @@ optimization.
 
     function insertionSortShift(A):
         N = A.size()
-        for i = 1 to N-1:
+        for i in 1 .. N-1:
             temp = A[i]
             j = i
             while j > 0 and temp < A[j-1]:
@@ -71,7 +71,7 @@ lower down. Here is code to implement this approach.
         N = A.size()
         while N > 1:
             newN = 0
-            for j = 1 to N-1:
+            for j in 1 .. N-1:
                 // Check if this pair is out of order:
                 if A[j-1] > A[j]:
                     swap(A, j-1, j)

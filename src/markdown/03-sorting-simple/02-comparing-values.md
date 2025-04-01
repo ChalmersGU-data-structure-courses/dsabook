@@ -78,16 +78,16 @@ even the comparable interface) to extract the desired key value.
     interface Comparable:
         // This is Java's default way of comparing elements,
         // returning an integer: negative (smaller), 0 (equal), positive (larger)
-        this.compareTo(other)
+        compareTo(other: Comparable) -> Int
 
         // This is Python's default way of comparing elements.
         // All of these operators return a boolean:
-        this == other
-        this != other
-        this < other
-        this <= other
-        this > other
-        this >= other
+        (this == other) -> Bool
+        (this != other) -> Bool
+        (this < other)  -> Bool
+        (this <= other) -> Bool
+        (this > other)  -> Bool
+        (this >= other) -> Bool
 
 ### Comparators
 
@@ -117,9 +117,9 @@ records and extracting keys is for various map implementations and
 sorting algorithms. Here is a simple class for representing key-value
 pairs:
 
-    class KVPair:
-        key    // the search key
-        value  // the value associated with the key
+    datatype KVPair of K and V:
+        key: K    // the search key
+        value: V  // the value associated with the key
 
 Note that in Python it's probably easier to just use a pair `(key,value)`,
 but not all languages (read: Java) have that possibility.

@@ -28,9 +28,9 @@ preceding pass. Here is an implementation.
 
     function bubbleSort(A):
         N = A.size()
-        for i = 0 to N-2:
+        for i in 0 .. N-2:
             // Bubble up the i'th element
-            for j = 1 to N-i-1:
+            for j in 1 .. N-i-1:
                 if A[j-1] > A[j]:
                     swap(A, j-1, j)
 

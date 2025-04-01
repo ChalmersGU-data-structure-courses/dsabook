@@ -30,9 +30,9 @@ Here is an implementation for Selection sort.
 
     function selectionSort(A):
         N = A.size()
-        for i = 0 to N-1:                // Select i'th smallest element
+        for i in 0 .. N-1:               // Select i'th smallest element
             minIndex = i                 // Current smallest index
-            for j = i+1 to N-1:          // Find the smallest value
+            for j in i+1 .. N-1:         // Find the smallest value
                 if A[j] > A[minIndex]:   // Found something smaller
                     minIndex = j         // Remember smaller index
             swap(A, i, minIndex)         // Put it into place

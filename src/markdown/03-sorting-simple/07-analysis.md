@@ -27,7 +27,7 @@ of these sorts is $O(n^2)$ in the average and worst cases.
       Average case    $O(n^2)$     $O(n^2)$      $O(n)$
         Worst case    $O(n^2)$     $O(n^2)$      $O(n)$
 
-The remaining sorting algorithms presented in this tutorial are
+The remaining sorting algorithms presented in the next chapter are
 significantly better than these three under typical conditions. But
 before continuing on, it is instructive to investigate what makes these
 three sorts so slow. The crucial bottleneck is that only *adjacent*
