@@ -179,24 +179,25 @@ This structure allows quick access to any element using its index by directly ca
 
 In our pseudocode, we use the following syntax to declare an array, retrieve an element, and update an element:
 
+    // Make a copy of the input array, and increment every value in the copied array.
+    // Return the copied array.
     function addOne(input: Array of Int) -> Array of Int:
-        output = new Array(input.length) of Int
-        i = 0
-        while i < input.length:
+        output = new Array(input.size()) of Int
+        for i in 0 .. input.size()-1:
             output[i] = input[i] + 1
-            i = i + 1
         return output
 
 This example highlights several key features of arrays.
-First, our pseudocode follows zero-based indexing, meaning the first element is at index 0, the second at index 1, and so on.
-The last element is located at an index equal to the array’s length minus one.
-The length of an array can be accessed using the length attribute.
-This value is stored alongside the array and does not need to be computed manually.
 
-To retrieve an element from an array, we use square bracket notation. For instance, `input[2]` retrieves the third element of the input array.
-Similarly, updating an element follows the same notation: `input[2] = 10` assigns a new value to the third element.
+- First, our pseudocode follows zero-based indexing, meaning the first element is at index 0, the second at index 1, and so on.
+  The last element is located at an index equal to the array’s size minus one.
+- The size of an array can be accessed using the `size()` method.
+  Note that although this is done by a function call, the actual size is stored alongside the array and does not need to be computed manually.
+- To retrieve an element from an array, we use square bracket notation. For instance, `input[2]` retrieves the third element of the input array.
+- Similarly, updating an element follows the same notation: `input[2] = 10` assigns a new value to the third element.
 
-In the example above, we explicitly declare the types of array variables to illustrate our pseudocode conventions. However, in some cases, we may omit type annotations for simplicity.
+In the example above, we explicitly declare the types of array variables to illustrate our pseudocode conventions.
+However, in many cases, we may omit type annotations for simplicity.
 
 **References**: In most programming languages, including our pseudocode, arrays are stored as references rather than direct values.
 This means that when you assign one array variable to another, you are copying the reference (or pointer) to the original array, not the array itself.
@@ -218,13 +219,10 @@ If you want to create a separate copy, you need to explicitly copy the array ele
 You can use a slice to select a part of an array, for example, the first ten elements.
 However, such a slice creates a new array and copies the selected elements from the original array.
 This means that using slices is quite slow.
-Instead, we create a sequence of indexes and use these to index into an array and retrieve the elements we want.
-In Python we can use the `range(start, end)` function for this functionality.
 
-::: TODO
-- discussion: should 'end' point to the last element or the one after
-    - (how do we do in this book?)
-:::
+Therefore we will not use array slices in this book.
+Instead we can use a pair of array indices `i`, `j` to refer to a specific slice of the array.
+This is, e.g., done already in section XX where we introduce the *binary search* algorithm.
 
 #### Strings
 
