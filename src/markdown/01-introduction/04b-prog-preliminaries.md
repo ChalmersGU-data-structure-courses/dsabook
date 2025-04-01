@@ -340,17 +340,19 @@ A datatype can also have "internal functions" (called *methods* in object-orient
     datatype ArrayStack ...:
         (...)
 
-        function push(value: T):
+        push(value: T):
             data[size] = value
             size = size + 1
 
-        function pop() -> T:
+        pop() -> T:
             size = size - 1
             return data[size]
 
 This example uses an array to store the stack elements and demonstrates how to define a compound data type.
 We define a new compound data type using the keyword `datatype`.
 A `datatype` can implement an `interface`, making it a subtype of the interface.
+
+Note that we usually don't write the keyword `function` when it appears within a datatype definition.
 
 To create a concrete instance of a `datatype`, we use the following notation:
 
@@ -440,12 +442,12 @@ We can of course also define some methods, or internal functions, that operate o
     datatype TreeNode:
         (...)
 
-        function isLeaf() -> Bool:
-            // Return true if a node doesn't have any children
+        // Return true if a node doesn't have any children.
+        isLeaf() -> Bool:
             return left is null and right is null
 
-        function size() -> Int:
-            // Return the number of nodes, including myself
+        // Return the number of nodes, including myself.
+        size() -> Int:
             n = 1
             if left is not null:
                 n = n + left.size()
