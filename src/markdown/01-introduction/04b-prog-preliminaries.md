@@ -19,7 +19,12 @@ To keep our examples accessible, this book uses pseudocode rather than a specifi
 Pseudocode provides a structured yet informal way to describe algorithms, focusing on logic and flow without strict syntax rules.
 Its simplicity and use of common programming constructs, such as loops and conditionals, make it easy to understand and translate into actual code.
 The pseudocode in this book is designed to be straightforward to convert into real programming languages.
+
+<!--
+::: TODO
 We will demonstrate this translation for Python, Java, and Haskell.
+:::
+-->
 
 In the following sections, we will introduce fundamental programming concepts and, where applicable, specify the pseudocode conventions we use.
 For example, the following function is written in our pseudocode calculates the factorial of $n$:
@@ -61,7 +66,7 @@ Literals
 :   A literal is the representation of a value in concrete syntax (that is, in
     the source code). The value that a literal represents has a specific type.
 
-    Examples: the integer `1`, the character `'1'`, the floating point number `1.0`
+    Examples: the integer `1`, the character `'1'`, the floating point number `1.0`, the boolean `false`
 
 Operators
 
@@ -72,6 +77,8 @@ Operators
     as left associative.
 
     Examples: `+`, `*`, `%`, `<`
+
+    Note that we use `==` for the equallity operator, and `=` for assignment.
 
 Expressions
 
@@ -84,17 +91,35 @@ Statements
 
 :   We have the following kind of statements:
 
-    - Declaration: to declare a variable with a given name and value, and an
-      optional type.
+    - Declaration: to declare a variable with a given name and value, and an optional type.
     - Assignment: to assign a value to a variable.
-    - Conditional: execute a block of statements depending on a boolean expression,
-      we use the common `if-then` or `if-then-else` statements.
-    - Loop: iteratively execute a block of statements, a loop can either be:
-        * a `while`-loop, which executes a block of statements until a boolean
-          expression is `false`, or
-        * a `for-each`-loop, which traverses over a collection of elements.
-    - Return: a `return` halts the execution of a function and outputs a value
-      to the caller of the function.
+    - Conditional: execute a block of statements depending on a boolean expression, we use the common `if-then` or `if-then-else` statements.
+    - Loop: iteratively execute a block of statements, see below.
+    - Return: a `return` halts the execution of a function and returns a value to the caller of the function.
+
+#### Loops, iteration
+
+We use two kind of loops, `while` and `for`:
+
+- a `while`-loop executes a block of statements until a boolean expression is `false`
+- a `for`-loop traverses over a collection of elements
+- in some cases we can `break` out of a loop inside its body
+
+Often we want to iterate over integers, and then it's important to know if the end point is included or not.
+We will use `i..j` to describe the increasing seqeunce from `i` to `j` (i.e., `0..10` is the sequence $0, 1, \ldots, 9, 10$).
+Here is an example of a nested `for` loop:
+
+    for i in 0 .. N-1:
+        for j in i+1 .. N:
+            do something with i and j
+
+*Important note*: the range `i..j` is *inclusive*, meaning that the endpoint `j` is *included* in the sequence.
+This is different to how a language such as Python does it, where `range(i,j)` does not include `j`.
+Sometimes this can be a matter of life and death (of your program), so be sure to translate the algorithms in a correct way to your favourite programming language!
+
+Some modern programming languages (such as Python and Java) have syntactic sugar for *iterators*.
+Although this is very convenient in many cases, we will not make use of iterators in this book, just to keep things as simple as possible.
+
 
 ### Data types
 
@@ -108,8 +133,7 @@ The next sections introduce the data types used in this book.
 We use the following primitive data types:
 
 - **Bool**: This data type has only two possible values: `true` and `false`.
-  It supports logical operations such as conjunction (AND), disjunction (OR),
-  exclusive OR (XOR), and negation.
+  It supports logical operations such as conjunction (`and`), disjunction (`or`), and negation.
 - **Int**: Represents whole numbers. Unless specified otherwise, we assume
   integers of arbitrary size, though in some cases, we may use fixed-size
   integers (32-bit or 64-bit), which will be explicitly stated. Standard
@@ -263,7 +287,7 @@ As a result, any modifications made to the array inside the function will persis
 
 Functions can also be recursive, meaning they call themselves within their own body.
 Recursion is often used in divide-and-conquer algorithms, though it is not limited to them.
-When analysing recursive functions, it is important to remember that function calls are not free—they consume memory on the stack, which can become a limiting factor if recursion depth is too large.
+When analysing recursive functions, it is important to remember that function calls are not free -- they consume memory on the stack, which can become a limiting factor if recursion depth is too large.
 
 ::: TODO
 describe return type
