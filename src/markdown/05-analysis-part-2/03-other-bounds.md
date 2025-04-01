@@ -138,7 +138,7 @@ are hard to analyze. Nobody currently knows the true upper or lower
 bounds for the following code fragment.
 
     while n > 1:
-        if ODD(n):
+        if n is odd:
             n = 3 * n + 1
         else:
             n = n / 2
