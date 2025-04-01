@@ -102,7 +102,7 @@ illustrated by the following function:
     // Return position of largest value in integer array A
     function largest(A):
         currlarge = 0                 // Position of largest element seen.
-        for i = 1 to A.size():        // For each element,
+        for i in 1 .. A.size()-1:     // For each element,
             if A[currlarge] < A[i]:   // if A[i] is larger,
                 currlarge = i         // remember its position.
         return currlarge              // Return largest position
@@ -167,8 +167,8 @@ time. This is called a [constant running time]{.term}.
 Consider the following code:
 
     sum = 0
-    for i = 0 to n-1:
-        for j = 0 to n-1:
+    for i in 0 .. n-1:
+        for j in 0 .. n-1:
             sum = sum + 1
 
 What is the running time for this code fragment? Clearly it takes longer
