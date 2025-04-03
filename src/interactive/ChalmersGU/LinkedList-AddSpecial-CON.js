@@ -6,7 +6,6 @@ $(document).ready(function() {
   var av = new JSAV(av_name);
   var pseudo = av.code([
     "add(i, x):",
-    "    // Precondition: 0 <= i <= listSize",
     "    if i == 0:",
     "        head = new Node(x, head)",
     "    else:",
@@ -14,7 +13,7 @@ $(document).ready(function() {
     "        repeat i-1 times:",
     "            prev = prev.next",
     "        prev.next = new Node(x, prev.next)",
-    "    listSize = listSize + 1",
+    "    size = size + 1",
   ], {lineNumbers: false});
 
   // Offsets
@@ -30,12 +29,12 @@ $(document).ready(function() {
   var addValueLast = 42;
   var addValueFirst = 34;
   var listSize = 5;
-  av.label("listSize", {left: 20, top: 10});
+  av.label("size", {left: 45, top: 15});
   var listSizeArr = av.ds.array([5], {indexed: false, top: 5, left: 80});
 
   // Slide
   av.umsg(`
-Inserting at the beginning of the list works a bit differently. 
+Inserting at the beginning of the list works a bit differently.
 In this example we want to insert the value ${addValueFirst}.
 `);
   pseudo.highlight(1);
@@ -50,13 +49,13 @@ In this example we want to insert the value ${addValueFirst}.
   // Slide
   av.umsg(`The beginning of the list is position 0, so this is a special case.`);
   pseudo.unhighlight(1);
-  pseudo.highlight(3);
+  pseudo.highlight(2);
   av.step();
 
   // Slide
   av.umsg(`Create a new list node and set its value to ${addValueFirst}.`);
-  pseudo.unhighlight(3);
-  pseudo.highlight(4);
+  pseudo.unhighlight(2);
+  pseudo.highlight(3);
   l.get(0).show();
   l.get(0).highlight();
   av.step();
@@ -76,8 +75,8 @@ In this example we want to insert the value ${addValueFirst}.
 
   // Slide
   av.umsg("Increase the list size by 1.");
-  pseudo.unhighlight(4);
-  pseudo.highlight(10);
+  pseudo.unhighlight(3);
+  pseudo.highlight(9);
   l.get(0).unhighlight();
   listSizeArr.value(0, listSize+1);
   listSizeArr.highlight(0);
@@ -90,7 +89,7 @@ Here is an example showing appending at the end of the list, i.e. at position ${
 We want to append the value ${addValueLast}.
 `);
   listSizeArr.unhighlight(0);
-  pseudo.unhighlight(10);
+  pseudo.unhighlight(9);
   pseudo.highlight(1);
   av.step();
 
@@ -98,14 +97,14 @@ We want to append the value ${addValueLast}.
   av.umsg(`First we move the <code>prev</code> pointer to the final node.`);
   var prevP = av.pointer("prev", l.get(0));
   pseudo.unhighlight(1);
-  pseudo.highlight([6,7,8]);
+  pseudo.highlight([5,6,7]);
   prevP.target(l.get(listSize));
   av.step();
 
   // Slide
   av.umsg(`Create a new list node and set its value to ${addValueLast}.`);
-  pseudo.unhighlight([6,7,8]);
-  pseudo.highlight(9);
+  pseudo.unhighlight([5,6,7]);
+  pseudo.highlight(8);
   newNode = l.newNode(addValueLast);
   newNode.css({top: 50, left: 440});  // Set the position for the new node
   newNode.highlight();
@@ -125,8 +124,8 @@ We want to append the value ${addValueLast}.
 
   // Slide
   av.umsg("Increase the list size by 1.");
-  pseudo.unhighlight(9);
-  pseudo.highlight(10);
+  pseudo.unhighlight(8);
+  pseudo.highlight(9);
   l.get(listSize).unhighlight();
   l.get(listSize+1).unhighlight();
   listSizeArr.value(0, listSize+2);
@@ -137,7 +136,7 @@ We want to append the value ${addValueLast}.
   av.umsg("Finished!");
   prevP.hide();
   listSizeArr.unhighlight(0);
-  pseudo.unhighlight(10);
+  pseudo.unhighlight(9);
   av.recorded();
 });
 

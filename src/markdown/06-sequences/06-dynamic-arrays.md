@@ -9,45 +9,48 @@ The problem with a static array-based list is that it has a limited
 capacity. If we try to add new elements when the internal array is full,
 the method will throw an exception.
 
+The dynamic array-based stack contains an internal array (which will
+grow and shrink dynamically), and the index of the **top** of the stack.
+Or actually, the index is for the next free slot in the array, which at
+the same time is the size of the stack.
+
 
 ### Invariants
 
 
 ### Resizing the internal array
 
-How can we modify our class to allow for any number of elements? One
+How can we modify our data type to allow for any number of elements? One
 solution is to create a larger internal array whenever the capacity is
 exceeded, and copy over all elements to the new one.
 
-    class DynamicArrayList implements List:
+    datatype ArrayStack:
         ...
         resizeArray(newCapacity):
             newArray = new Array(newCapacity)
-            for i = 0 to this.listSize-1:
-                newArray[i] = this.internalArray[i]
-            this.internalArray = newArray
+            for i in 0 .. size-1:
+                newArray[i] = internalArray[i]
+            internalArray = newArray
 
 
 So, how large should the new internal array be? For now, let's
 **double the size of the internal array** when we need to resize,
-which means that we add the following if-clause to the `add` method:
+which means that we add the following if-clause to the `push` method:
 
-        if listSize >= internalArray.size()
+        if size >= internalArray.size()
             resizeArray(internalArray.size() * 2)
 
-That's the only difference from the `add` method from
-**StaticArrayList**. So the dynamic `add` method will look like this.
+That's the only difference from the `push` method from **ArrayStack** from earlier.
+So the dynamic `push` method will look like
 
-    class DynamicArrayList implements List:
+    datatype ArrayStack:
         ...
-        add(i, x):
-            precondition: 0 <= i <= this.listSize
-            if this.listSize >= this.internalArray.size()
-                this.resizeArray(this.internalArray.size() * 2)
-            this.listSize = this.listSize + 1
-            for k = this.listSize-1 downto i+1:
-                this.internalArray[k] = this.internalArray[k-1]
-            this.internalArray[i] = x
+        push(x):
+            // precondition: 0 <= i <= size
+            if size >= internalArray.size()
+                resizeArray(internalArray.size() * 2)
+            internalArray[size] = x
+            size = size + 1
 
 
 As explained below, we don't have to double the size, but we can
@@ -77,25 +80,24 @@ resize it more often.
 We will explore these tradeoffs by looking at the performance of the
 following small program under different resizing strategies:
 
-    list = new DynamicArrayList
-    for i = 1 to n:
-        list.add(i)
+    stack = new ArrayStack()
+    for i in 1 .. n:
+        stack.push(i)
 
-The program builds a list of length *n* by repeatedly
-calling $add$. In this case, we could have used a static array-based
-list of capacity $n$. So we would like the dynamic array-based list to
-have comparable performance to the static array-based list. This means
-that the program ought to take *linear time*.
+The program builds a list of length *n* by repeatedly calling `push`.
+In this case, we could have used a static array-based stack of capacity $n$.
+So we would like the dynamic array-based stack to have comparable performance to the static array-based stack.
+This means that the program ought to take *linear time*.
 
 #### Growing by a constant amount
 
 What happens if we only grow the internal array by 1 element when we
 resize it?
 
-    if listSize >= internalArray.size()
+    if size >= internalArray.size()
         resizeArray(internalArray.size() + 1)
 
-Every time we call `add`, the internal array will be resized. Resizing
+Every time we call `push`, the internal array will be resized. Resizing
 the array takes linear time, because if the internal array has size $n$,
 it has to copy $n$ elements from the internal array to the new array. To
 put it another way, the loop body `newArray[i] = internalArray[i]` will
@@ -257,7 +259,7 @@ many calls to `add`, it takes 100 times as long. Quadratic algorithms
 always lose to linear algorithms eventually!
 
 
-#### Resizing an array-based queue
+### Resizing an array-based queue
 
 When we resize the internal array, we cannot keep the positions of the
 elements. If the queue is wrapped around (i.e., if `rear < front`) then
@@ -269,16 +271,16 @@ position 1, etc. Apart from that, the implementation is similar to the
 one for lists and queues.
 
 
-    class DynamicArrayQueue implements Queue:
+    datatype ArrayQueue:
         ...
         resizeArray(newCapacity):
             newArray = new Array(newCapacity)
-            for i = 0 to this.queueSize-1:
-                j = (i + this.front) % this.internalArray.size()
-                newArray[i] = this.internalArray[j]
-            this.internalArray = newArray
-            this.front = 0
-            this.rear = this.queueSize-1
+            for i in 0 .. size-1:
+                j = (i + front) % internalArray.size()
+                newArray[i] = internalArray[j]
+            internalArray = newArray
+            front = 0
+            rear = size - 1
 
 
 ### Shrinking the internal array
@@ -318,27 +320,25 @@ shrink the internal array! E.g., we can shrink the array (i.e., halve
 it), when it is only 1/3 full. So we can add the following lines to the
 end of the `remove` method:
 
-    if listSize <= internalArray.size() * 1/3:
+    if size <= internalArray.size() * 1/3:
         resizeArray(internalArray.size * 1/2)
 
-That's the only difference from the `StaticArrayList.remove` method.
+That's the only difference from the `ArrayStack.remove` method.
 
 Note that the factors 1/3 and 1/2 are not important, as explained
 before. The only thing that matters is that the minimum load factor
 (1/3) is smaller than the shrinking factor (1/2). So the dynamic
-`remove` method will look like this.
+`remove` method will look like this:
 
-    class DynamicArrayList implements List:
+    datatype ArrayStack:
         ...
-        remove(i):
-            precondition: 0 <= i < this.listSize
-            x = this.internalArray[i]
-            for k = i+1 to this.listSize-1:
-                this.internalArray[k-1] = this.internalArray[k]
-            this.listSize = this.listSize - 1
-            this.internalArray[this.listSize] = null   // For garbage collection
-            if this.listSize <= size of this.internalArray * 1/3:
-                this.resizeArray(this.internalArray.size() * 1/2)
+        pop():
+            // precondition: size > 0
+            size = size - 1
+            x = internalArray[size]
+            internalArray[size] = null  // For garbage collection
+            if size <= internalArray.size() * 1/3:
+                resizeArray(internalArray.size() * 1/2)
             return x
 
 |

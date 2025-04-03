@@ -8,13 +8,13 @@
 
 ### Double-ended queues, or deques
 
-    interface Deque extends Collection:
-        insertFirst(x)
-        insertLast(x)
-        removeFirst()
-        removeLast()
-        peekFirst()
-        peekLast()
+    interface Deque of T extends Collection:
+        insertFirst(x: T)
+        insertLast(x: T)
+        removeFirst() -> T
+        removeLast() -> T
+        peekFirst() -> T
+        peekLast() -> T
 
 
 
@@ -61,17 +61,15 @@ node class. The only real difference between single linked lists is that
 we have pointers to the previous node, and a pointer to the tail of the
 list.
 
-    class DoubleNode:
-        DoubleNode(elem, prev, next):
-            this.elem = elem  // Value for this node
-            this.prev = prev  // Pointer to previous node in list
-            this.next = next  // Pointer to next node in list
+    datatype DoubleNode of T:
+        elem: T                 // Value for this node
+        prev: DoubleNode of T   // Pointer to previous node in list
+        next: DoubleNode of T   // Pointer to next node in list
 
-    class DoubleLinkedList implements List:
-        DoubleLinkedList():
-            this.head = null   // Pointer to list header
-            this.tail = null   // Pointer to list tail
-            this.listSize = 0  // Size of list
+    datatype DoubleDeque implements Deque:
+        head: DoubleNode = null   // Pointer to front of deque
+        tail: DoubleNode = null   // Pointer to tail of deque
+        dequeSize: Int = 0        // Size of deque
 
 
 The main advantage with doubly linked lists are that we can implement
@@ -90,63 +88,53 @@ Getting and setting are exactly the same as for normal linked lists, so
 we don't show them here.
 
 
-#### Adding/inserting elements
+#### Inserting elements
 
-Adding elements becomes a bit trickier, because we have to make sure
-that all pointers are updated correctly. We get some special cases --
-when the list is empty, or when we add before the head or after the
-tail.
+Adding elements becomes a bit trickier, because we have to make sure that all pointers are updated correctly.
+We have to handle inserting into an empty list specially, because then both head and tail will point to the same cell.
 
-    class DoubleLinkedList implements List:
+    datatype DoubleDeque implements Deque:
         ...
-        add(i, x):
-            precondition: 0 <= i <= this.listSize
-            if this.listSize == 0:
-                this.head = this.tail = new DoubleNode(x, null, null)
-            else if i == 0:
-                newhead = new DoubleNode(x, null, this.head)
-                this.head.prev = newhead
-                this.head = newhead
-            else if i == this.listSize:
-                newtail = new DoubleNode(x, this.tail, null)
-                this.tail.next = newtail
-                this.tail = newtail
+        insertFirst(x):
+            if dequeSize == 0:
+                head = tail = new DoubleNode(x, null, null)
             else:
-                prev = this.head
-                repeat i-1 times:
-                    prev = prev.next
-                next = prev.next
-                newnode = new DoubleNode(x, prev, next)
-                prev.next = newnode
-                next.prev = newnode
-            this.listSize = this.listSize + 1
+                newhead = new DoubleNode(x, null, head)
+                head.prev = newhead
+                head = newhead
+            dequeSize = dequeSize + 1
+
+        insertLast(x):
+            if dequeSize == 0:
+                head = tail = new DoubleNode(x, null, null)
+            else:
+                newtail = new DoubleNode(x, tail, null)
+                tail.next = newtail
+                tail = newtail
+            dequeSize = dequeSize + 1
 
 
 #### Removing elements
 
-The same goes for removing elements -- we get special cases when we
-remove the head or the tail.
+The same goes for removing elements -- the one-element list is a special case.
 
-    class DoubleLinkedList implements List:
+    datatype DoubleDeque implements Deque:
         ...
-        remove(i):
-            precondition: 0 <= i < this.listSize
-            if i == 0:
-                removed = this.head
-                this.head = removed.next
-                this.head.prev = null
-            else if i == this.listSize-1:
-                removed = this.tail
-                this.tail = removed.prev
-                this.tail.next = null
-            else:
-                prev = this.head
-                repeat i-1 times:
-                    prev = prev.next
-                removed = prev.next
-                prev.next = removed.next
-                prev.next.prev = prev
+        removeFirst():
+            // precondition: dequeSize > 0
+            removed = head                      // Remember the current head
+            head = removed.next                 // Re-point the head to the second node
+            head.prev = null                    // Make sure the new head doesn't have any predecessor
             removed.prev = removed.next = null  // For garbage collection
-            this.listSize = this.listSize - 1
+            dequeSize = dequeSize - 1
+            return removed.elem
+
+        removeLast():
+            // precondition: dequeSize > 0
+            removed = tail                      // Remember the current tail
+            tail = removed.prev                 // Re-point the tail to the predecessor node
+            tail.next = null                    // Make sure the new tail doesn't have any successor
+            removed.prev = removed.next = null  // For garbage collection
+            dequeSize = dequeSize - 1
             return removed.elem
 

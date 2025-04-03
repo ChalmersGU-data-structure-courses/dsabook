@@ -1,9 +1,8 @@
 
-### Array-based queues
+## Queues implemented using arrays
 
-The array-based queue is somewhat tricky to implement effectively. A
-simple conversion of the array-based list implementation is not
-efficient.
+The array-based queue is somewhat tricky to implement effectively.
+A simple conversion of the array-based stack implementation is not efficient.
 
 <inlineav id="aqueueFirstCON" src="List/aqueueFirstCON.js" name="Array-based Queue Positions Slideshow" links="List/aqueueCON.css"/>
 
@@ -15,7 +14,7 @@ efficient.
 
 <inlineav id="aqueueBadCON" src="List/aqueueBadCON.js" name="Array-based Queue Bad Representation Slideshow" links="List/aqueueCON.css"/>
 
-#### Circular queues
+### Circular queues
 
 <inlineav id="aqueueCircularCON" src="List/aqueueCircularCON.js" script="DataStructures/CircularQueue.js" name="Circular Array-based Queue Slideshow" links="List/aqueueCON.css"/>
 
@@ -39,10 +38,10 @@ One obvious solution is to keep an explicit count of the number of
 elements in the queue, or at least a Boolean variable that indicates
 whether the queue is empty or not. Another solution is to make the array
 be of size $n+1$, and only allow $n$ elements to be stored. A third
-solution is to set `front` and `rear` to --1 when the queue becomes
+solution is to set `front` and `rear` to $-1$ when the queue becomes
 empty. Which of these solutions to adopt is purely a matter of the
 implementor's taste in such affairs. Our choice here is to keep an
-explicit count of the number of elements, in the variable `queueSize`,
+explicit count of the number of elements, in the variable `size`,
 because this will make the code more similar to our list and stack
 implementations.
 
@@ -50,56 +49,47 @@ In this implementation, the front of the queue is defined to be toward
 the lower numbered positions in the array (in the counter-clockwise
 direction in the circular array), and the rear is defined to be toward
 the higher-numbered positions. Thus, `enqueue` increments the rear
-pointer (modulus the size of the internal array), and `dequeue`
+pointer (modulus the capacity of the internal array), and `dequeue`
 increments the front pointer.
 
-    class DynamicArrayQueue implements Queue:
-        DynamicArrayQueue():
-            this.internalArray = new Array(8)  // Internal array containing the queue elements
-            this.queueSize = 0                 // Size of queue, and index of the next free slot
-            this.front = 0                     // Index of front element
-            this.rear = -1                     // Index of rear element
-
-Implemening the member functions is mostly straightforward.
+    datatype ArrayQueue implements Queue:
+        internalArray = new Array(1000)  // Internal array containing the queue elements
+        size = 0                         // Size of queue
+        front = 0                        // Index of front element
+        rear = -1                        // Index of rear element
 
 
-#### Invariants
+### Invariants
 
 
-#### Enqueueing an element
+### Enqueueing an element
 
-When enqueueing, we increase the `rear` pointer (modulo the size of the
-internal array to make it circular).
+When enqueueing, we increase the `rear` pointer (modulo the size of the internal array to make it circular).
 
-    class DynamicArrayQueue implements Queue:
+    datatype ArrayQueue implements Queue:
         ...
         enqueue(x):
-            if this.queueSize >= this.internalArray.size():
-                this.resizeArray(this.internalArray.size() * 2)
-            this.rear = (this.rear + 1) % this.internalArray.size()  // Circular increment
-            this.internalArray[this.rear] = x
-            this.queueSize = this.queueSize + 1
+            rear = (rear + 1) % internalArray.size()  // Circular increment
+            internalArray[rear] = x
+            size = size + 1
 
 
-#### Dequeueing an element
+### Dequeueing an element
 
-When dequeueing, we increase the `front` pointer (modulo the size of the
-internal array).
+When dequeueing, we increase the `front` pointer (modulo the size of the internal array).
 
-    class DynamicArrayQueue implements Queue:
+    class ArrayQueue implements Queue:
         ...
         dequeue():
-            precondition: this.queueSize > 0
-            this.queueSize = this.queueSize - 1
-            x = this.internalArray[this.front]
-            this.internalArray[this.front] = null  // For garbage collection
-            this.front = (this.front + 1) % this.internalArray.size()  // Circular increment
-            if this.queueSize <= this.internalArray.size() * 1/3:
-                this.resizeArray(this.internalArray.size()) * 1/2
+            // precondition: size > 0
+            x = internalArray[front]
+            internalArray[front] = null  // For garbage collection
+            front = (front + 1) % internalArray.size()  // Circular increment
+            size = size - 1
             return x
 
 
-#### Array-based queue practice exercises
+### Array-based queue practice exercises
 
 <avembed id="AqueueEnqueuePRO" src="ChalmersGU/AqueueEnqueuePRO.html" type="ka" name="Array-based Queue Enqueue Exercise"/>
 

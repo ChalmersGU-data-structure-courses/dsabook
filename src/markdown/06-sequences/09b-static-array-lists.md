@@ -2,7 +2,7 @@
 ### Implementing lists using arrays
 
 First we give a static implementation for array-based lists, named
-**StaticArrayList**. This inherits from the
+**ArrayList**. This inherits from the
 [List ADT](#all-adts-used-in-this-book), and must therefore
 implement all of the member functions of `List`.
 
@@ -36,10 +36,9 @@ size counter is set to 0 because there are no elements yet.
 
 <inlineav id="StaticArrayList-Vars-CON" src="ChalmersGU/StaticArrayList-Vars-CON.js" name="Static Array-based List Variables Slideshow"/>
 
-    class StaticArrayList implements List:
-        StaticArrayList(capacity):
-            this.internalArray = new Array(capacity)  // Internal array containing the list elements
-            this.listSize = 0                         // Size of list
+    datatype ArrayList implements List:
+        internalArray = new Array(capacity)  // Internal array containing the list elements
+        size = 0                             // Size of list
 
 *Note*: in Python you cannot create an array with a certain capacity.
 You can simulate it by creating a list with a number of empty elements:
@@ -54,15 +53,15 @@ Random access to any element in the list is quick and easy.
 As you can see below, there are no loops in the methods `get` and `set`,
 which means that both require $O(1)$ time.
 
-    class StaticArrayList implements List:
+    datatype ArrayList implements List:
         ...
         get(i):
-            precondition: 0 <= i < this.listSize
-            return this.internalArray[i]
+            // precondition: 0 <= i < size
+            return internalArray[i]
 
         set(i, x):
-            precondition: 0 <= i < this.listSize
-            this.internalArray[i] = x
+            // precondition: 0 <= i < size
+            internalArray[i] = x
 
 
 ### Adding elements
@@ -85,14 +84,14 @@ $n - i - 1$ elements must shift toward the tail to leave room for the
 new element. In the worst case, adding elements requires moving all $n$
 elements, which is $O(n)$.
 
-    class StaticArrayList implements List:
+    datatype ArrayList implements List:
         ...
         add(i, x):
-            precondition: 0 <= i <= this.listSize < this.internalArray.size()
-            this.listSize = this.listSize + 1
-            for k = this.listSize-1 downto i+1:
-                this.internalArray[k] = this.internalArray[k-1]
-            this.internalArray[i] = x
+            // precondition: 0 <= i <= size < internalArray.size()
+            size = size + 1
+            for k in size-1 .. i+1 (downwards):
+                internalArray[k] = internalArray[k-1]
+            internalArray[i] = x
 
 
 #### Practice exercise
@@ -112,15 +111,15 @@ must shift toward the head, as shown in the following slideshow.
 In the worst case, insertion or removal each requires moving all $n$
 elements, which is $O(n)$.
 
-    class StaticArrayList implements List:
+    datatype ArrayList implements List:
         ...
         remove(i):
-            precondition: 0 <= i < this.listSize
-            x = this.internalArray[i]
-            for k = i+1 to this.listSize-1:
-                this.internalArray[k-1] = this.internalArray[k]
-            this.listSize = this.listSize - 1
-            this.internalArray[this.listSize] = null  // For garbage collection
+            // precondition: 0 <= i < size
+            x = internalArray[i]
+            for k in i+1 .. size-1:
+                internalArray[k-1] = internalArray[k]
+            size = size - 1
+            internalArray[size] = null  // For garbage collection
             return x
 
 
@@ -132,5 +131,13 @@ elements, which is $O(n)$.
 ### Limitations
 
 ::: TODO
-- What happens when the capacity is exceeded? See chapter X about dynamic arrays
+- What happens when the capacity is exceeded? See section X about dynamic arrays
+:::
+
+
+
+### Alternative approaches
+
+::: TODO
+- alternative interface
 :::

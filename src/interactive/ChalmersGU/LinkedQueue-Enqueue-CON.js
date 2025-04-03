@@ -8,12 +8,12 @@ $(document).ready(function() {
   var pseudo = av.code([
     "enqueue(x):",
     "    newRear = new Node(x, null)",
-    "    if queueSize == 0:",
+    "    if size == 0:",
     "        front = newRear",
     "    else:",
     "        rear.next = newRear",
     "    rear = newRear",
-    "    queueSize = queueSize + 1",
+    "    size = size + 1",
   ], {lineNumbers: false});
 
   var leftMargin = 10;
@@ -61,7 +61,7 @@ $(document).ready(function() {
   av.step();
 
   // Slide 5
-  av.umsg("Increase <code>queueSize</code> by 1.");
+  av.umsg("Increase <code>size</code> by 1.");
   pseudo.setCurrentLine(8);
   av.recorded();
 });

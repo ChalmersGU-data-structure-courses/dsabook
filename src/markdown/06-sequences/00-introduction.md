@@ -23,10 +23,9 @@ or perhaps processing objects in the reverse of the order that they
 arrived. For all these situations, a simple list structure is
 appropriate.
 
-This chapter describes representations both for lists and for two
-important list-like structures called the [stack]{.term} and the [queue]{.term}. Along with
-presenting these fundamental data structures, the other goals of the
-chapter are to:
+This chapter describes two different representations lists-like structures, the [linked list]{.term} and the [array-based list]{.term}.
+We also show how these representations can be used to implement important list-like structures such as the [stack]{.term} and the [queue]{.term}.
+Along with presenting these fundamental data structures, the other goals of the chapter are to:
 
 1.  Give examples that show the separation of a logical representation
     in the form of an ADT from a physical implementation as a data
@@ -37,9 +36,3 @@ chapter are to:
     complications that arise when analyzing more sophisticated
     algorithms and data structures.
 
-We begin by defining an [ADT for lists](#the-list-adt). Two implementations for the list ADT -- the
-[array-based list](#static-array-based-lists) and the
-[linked list](#linked-lists)
--- are covered in detail and their relative merits discussed. The
-chapter finishes with implementations for
-[stacks] and [queues].

@@ -11,8 +11,8 @@ $(document).ready(function() {
 
   // Slide 1
   av.umsg(`
-Class <code>StaticArrayList</code> stores the list elements in the first <code>listSize</code> contiguous array positions. 
-In this example, <code>listSize</code> is 5.
+Class <code>ArrayList</code> stores the list elements in the first <code>size</code> contiguous array positions.
+In this example, <code>size</code> is 5.
 `);
   arr.addClass([5, 6, 7], "unused");
   arr.highlight([0, 1, 2, 3, 4]);
@@ -20,7 +20,7 @@ In this example, <code>listSize</code> is 5.
 
   // Slide 2
   av.umsg(`
-Array positions correspond to list positions. In other words, the element at position $i$ in the list is stored at array cell $i$. 
+Array positions correspond to list positions. In other words, the element at position <em>i</em> in the list is stored at array cell <em>i</em>.
 Here, the element at position 3 in the list (and index 3 in the array) is highlighted.
 `);
   arr.unhighlight([0, 1, 2, 4]);

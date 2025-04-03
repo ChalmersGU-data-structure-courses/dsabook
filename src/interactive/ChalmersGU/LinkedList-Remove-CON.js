@@ -6,7 +6,6 @@ $(document).ready(function() {
   var av = new JSAV(av_name);
   var pseudo = av.code([
     "remove(i):",
-    "    // Precondition: 0 <= i < listSize",
     "    if i == 0:",
     "        removed = head",
     "        head = removed.next",
@@ -17,7 +16,7 @@ $(document).ready(function() {
     "        removed = prev.next",
     "        prev.next = removed.next",
     "    removed.next = null",
-    "    listSize = listSize - 1",
+    "    size = size - 1",
     "    return removed.elem",
   ], {lineNumbers: false});
 
@@ -32,7 +31,7 @@ $(document).ready(function() {
 
   var delPos = 3;
   var listSize = 5;
-  av.label("listSize", {left: 20, top: topMargin-50});
+  av.label("size", {left: 45, top: topMargin-45});
   var listSizeArr = av.ds.array([listSize], {indexed: false, top: topMargin-55, left: 80});
 
   // Slide
@@ -52,7 +51,7 @@ $(document).ready(function() {
   av.umsg(`First we move the <code>prev</code> pointer to the node before.`);
   var prevP = av.pointer("prev", l.get(0));
   pseudo.unhighlight(1);
-  pseudo.highlight([7,8,9]);
+  pseudo.highlight([6,7,8]);
   prevP.target(prevNode);
   av.step();
 
@@ -60,8 +59,8 @@ $(document).ready(function() {
   av.umsg("Remember the node to remove, which is <code>prev.next</code>.");
   delNode.unhighlight();
   var delPtr = av.pointer("removed", delNode);
-  pseudo.unhighlight([7,8,9]);
-  pseudo.highlight(10);
+  pseudo.unhighlight([6,7,8]);
+  pseudo.highlight(9);
   av.step();
 
   // Slide
@@ -76,8 +75,8 @@ $(document).ready(function() {
   prevNode.next(delNode.next());
   prevNode.highlight();
   prevNode.next().highlight();
-  pseudo.unhighlight(10);
-  pseudo.highlight(11);
+  pseudo.unhighlight(9);
+  pseudo.highlight(10);
   l.layout({updateLeft: false});
   av.step();
 
@@ -85,16 +84,16 @@ $(document).ready(function() {
   av.umsg("Set the <code>next</code> field node to be deleted to <code>null</code>. This removes the node from the linked list, and makes it possible to garbage delete it.");
   delArrow.hide();
   delNode.next("");
-  pseudo.unhighlight(11);
-  pseudo.highlight(12);
+  pseudo.unhighlight(10);
+  pseudo.highlight(11);
   av.step();
 
   // Slide
   av.umsg("Decrease the list size by 1.");
   prevNode.unhighlight();
   prevNode.next().unhighlight();
-  pseudo.unhighlight(12);
-  pseudo.highlight(13);
+  pseudo.unhighlight(11);
+  pseudo.highlight(12);
   listSizeArr.value(0, listSize-1);
   listSizeArr.highlight(0);
   av.step();
@@ -103,8 +102,8 @@ $(document).ready(function() {
   av.umsg("Return the value of the node that was deleted.");
   listSizeArr.unhighlight(0);
   delNode.highlight();
-  pseudo.unhighlight(13);
-  pseudo.highlight(14);
+  pseudo.unhighlight(12);
+  pseudo.highlight(13);
   av.step();
 
   // Slide
@@ -114,6 +113,6 @@ $(document).ready(function() {
   delNode.hide();
   l.layout();
   listSizeArr.unhighlight(0);
-  pseudo.unhighlight(14);
+  pseudo.unhighlight(13);
   av.recorded();
 });

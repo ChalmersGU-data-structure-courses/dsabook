@@ -12,13 +12,11 @@ $(document).ready(function() {
   var av_name = "StaticArrayList-Add-CON";
   var av = new JSAV(av_name);
   var pseudo = av.code([
-    "add(i, x):",
-    "    // Precondition: listSize < size of internalArray",
-    "    // Precondition: 0 <= i <= listSize",
-    "    listSize = listSize + 1",
-    "    for k = listSize-1 downto i+1:",
-    "        internalArray[k] = internalArray[k-1]",
-    "    internalArray[i] = x",
+      "add(i, x):",
+      "    size = size + 1",
+      "    for k in size-1 .. i+1 (downwards):",
+      "        internalArray[k] = internalArray[k-1]",
+      "    internalArray[i] = x",
 ], {lineNumbers: false});
 
   var leftMargin = 10;
@@ -44,11 +42,11 @@ $(document).ready(function() {
   // Create the graphics for maxSize and listSize variables
   var arrMS = av.ds.array([maxSize], {indexed: false, left: 150, top: 90});
   arrMS.hide();
-  var labelMaxSize = av.label("size of internalArray", {left: 10, top: 94});
+  var labelMaxSize = av.label("capacity", {before: arrMS, left: 90, top: 89});
   labelMaxSize.hide();
   var arrLS = av.ds.array([listSize], {indexed: false, left: 150, top: 125});
   arrLS.hide();
-  var labelListSize = av.label("listSize", {left: 95, top: 129});
+  var labelListSize = av.label("size", {left: 120, top: 129});
   labelListSize.hide();
 
   // Slide
@@ -77,7 +75,7 @@ Here is an array-based list with ${listSize} elements. We will add an element wi
 Increase the list size by 1.
 `);
   pseudo.unhighlight(1);
-  pseudo.highlight(4);
+  pseudo.highlight(2);
   arr.removeClass([listSize], "unused");
   arrLS.highlight(0);
   arrLS.value(0, listSize+1);
@@ -90,8 +88,8 @@ Shift the later elements elements one position to the right to make room.
 `);
   // shift all existing elements one position to the right
   arrow2.show();
-  pseudo.unhighlight(4);
-  pseudo.highlight([5,6]);
+  pseudo.unhighlight(2);
+  pseudo.highlight([3,4]);
   av.step();
 
   for (let i = listSize; i > addIndex; i--) {
@@ -106,15 +104,15 @@ Insert ${addValue} into array position ${addIndex}.
   arr.value(addIndex, addValue);
   arr.highlight([addIndex]);
   arrow2.hide();
-  pseudo.unhighlight([5,6]);
-  pseudo.highlight(7);
+  pseudo.unhighlight([3,4]);
+  pseudo.highlight(5);
   av.step();
 
   // Slide
   arr.unhighlight([addIndex]);
   av.umsg(`
-Thus, the cost to insert into an array-based list in the worst case is $\\Theta(n)$ when there are $n$ items in the list.
+Thus, the cost to insert into an array-based list in the worst case is <em>O(n)</em> when there are <em>n</em> items in the list.
 `);
-  pseudo.unhighlight(7);
+  pseudo.unhighlight(5);
   av.recorded();
 });

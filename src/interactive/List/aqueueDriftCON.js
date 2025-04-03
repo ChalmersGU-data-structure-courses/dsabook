@@ -41,7 +41,7 @@ $(document).ready(function() {
   arrRear.addClass([0], "processing");
   arr.addClass([3], "processing");
   var arrSize = av.ds.array([4], {indexed: false, left: 200, top: topMargin + 70});
-  av.label("listSize", {left: 145, top: topMargin + 74});
+  av.label("size", {left: 166, top: topMargin + 74});
   av.step();
 
   // Slide 3

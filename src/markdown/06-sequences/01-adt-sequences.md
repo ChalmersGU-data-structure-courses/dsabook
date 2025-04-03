@@ -16,9 +16,10 @@ A collection contains a number of elements, and it supports only two
 things: we can inquire how many elements it contains, and we can iterate
 through all elements, one at the time (i.e., it is Iterable).
 
-    interface Collection extends Iterable:
-        isEmpty()   // Returns true if the collection is empty.
-        size()      // Returns the number of elements in this collection.
+    interface Collection of T:
+        // We assume that we can iterate over the elements in the collection, using a for loop.
+        isEmpty() -> Bool  // Returns true if the collection is empty.
+        size() -> Int      // Returns the number of elements in this collection.
 
 Note that this very interface will not be implemented as it is, but
 instead we will use this as a base interface that we extend in different
@@ -47,23 +48,12 @@ implementations discussed in this chapter, all elements of the list are
 usually assumed to have the same data type, although there is no
 conceptual objection to lists whose elements have differing data types
 if the application requires it. The operations defined as part of the
-list [ADT]{.term} depend on the elemental
-[data type]{.term}. For example, the list ADT
-can be used for lists of integers, lists of characters, lists of payroll
-records, even lists of lists.
+list [ADT]{.term}s depend on the elemental [data type]{.term}.
+For example, the queue ADT can be used for queues of integers, queues of characters, queues of payroll records, even queues of queues.
 
 A list is said to be [empty]{.term} when it
 contains no elements. The number of elements currently stored is called
-the [length]{.term} of the list. The beginning
+the [length]{.term} (or size) of the list. The beginning
 of the list is called the [head]{.term}, the end
 of the list is called the [tail]{.term}.
 
-We need some notation to show the contents of a list, so we will use the
-same angle bracket notation that is normally used to represent
-[sequences](#sequence){.term}. To be consistent
-with standard array indexing, the first position on the list is denoted
-as 0. Thus, if there are $n$ elements in the list, they are given
-positions 0 through $n-1$ as
-$\langle\ a_0,\ a_1,\ ...,\ a_{n-1}\ \rangle$. The subscript indicates
-an element's position within the list. Using this notation, the empty
-list would appear as $\langle\ \rangle$.

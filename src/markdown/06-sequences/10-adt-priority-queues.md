@@ -39,10 +39,10 @@ queue supports the following operations:
 In this chapter, we will see how to implement a priority queue so that
 both adding and removing the minimum take $O(\log n)$ time.
 
-    interface PriorityQueue extends Collection:
-        add(x)       // Adds x to the priority queue.
-        removeMin()  // Removes and returns the minimum element.
-        getMin()     // Returns the minimum element, without removing it.
+    interface PriorityQueue of T extends Collection:
+        add(x: T)         // Adds x to the priority queue.
+        removeMin() -> T  // Removes and returns the minimum element.
+        getMin() -> T     // Returns the minimum element, without removing it.
 
 Note that this API assumes that the priority queue orders the elements
 in *ascending* order. There is also the possibility of ordering in
@@ -75,7 +75,7 @@ Here is an implementation of this algorithm in code:
         pq = new PriorityQueue()
         for each item in array:
             pq.add(item)
-        for i = 0 to array.size()-1:
+        for i in 0 .. array.size()-1:
             array[i] = pq.removeMin()
 
 What is the time complexity of this algorithm? Well, for an input list
@@ -136,11 +136,10 @@ the new transaction to the priority queue. This might make the priority
 queue grow to 101 transactions. If so, we remove the lowest-valued
 transaction. Here it is in code:
 
-    class Top100Transactions:
-        // Assume that the Transaction class implements comparisons
+    datatype Top100Transactions:
+        pq = new PriorityQueue()
+        // Assume that the Transaction type implements comparisons
         // by comparing the value of the transaction.
-        Top100Transactions():
-            this.pq = new PriorityQueue()
 
         // Add a new transaction to the priority queue.
         add(transaction):
@@ -152,7 +151,7 @@ transaction. Here it is in code:
 
         // Return the top 100 transactions.
         top100():
-            return pq.iterator()
+            return everything in pq
 
 
 What is the complexity of `add`? Well, in fact it takes constant time,

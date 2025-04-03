@@ -21,7 +21,6 @@ list would appear as $\langle\ \rangle$.
 ### General lists
 
 ::: TODO
-- Recall list API
 - Dyn arrays can do most things efficient (except insert/remove from the middle)
 - (Doubly) linked lists can only modify from front/rear
 - But with a pointer it's efficient to modify in the mdidle (see Java Spliterator)
@@ -53,47 +52,19 @@ member function describe what it is intended to do. However, an
 explanation of the basic design should help make this clearer. There are
 four main operations we want to support:
 
--   `get(i)` to read the value of an element at the given position `i`
--   `set(i,x)` to set the value at position `i` to value `x`
--   `add(i,x)` to add (insert) an element `x`, at position `i`, thus
-    increasing the size of the list
--   `remove(i)` to remove the element at position `i`, thus decreasing
-    the size of the list
-
-Apart from these four, we also want to be able to loop through the list
-elements in order (i.e., an `iterator` over the elements).
-
     interface List extends Collection:
-        add(i, x)  // Adds x at position i; where 0 <= i <= size.
+        add(i, x)  // Adds (inserts) x at position i; where 0 <= i <= size, increasing the size.
         get(i)     // Returns the element at position i; where 0 <= i < size.
-        set(i, x)  // Replaces the value at position i with x; where 0 <= i < size.
-        remove(i)  // Removes the element at position i; where 0 <= i < size.
+        set(i, x)  // Sets the value at position i to x; where 0 <= i < size.
+        remove(i)  // Removes the element at position i; where 0 <= i < size, decreasing the size.
+
+Apart from these four, we also want to know the number of elements, to be able to loop through the list elements in order.
+So we make the List interface be a Collection too.
 
 <inlineav id="ListADT-Positions-CON" src="ChalmersGU/ListADT-Positions-CON.js" name="List ADT Positions Slideshow" links="ChalmersGU/CGU-Styles.css"/>
 
 The `List` member functions allow you to build a list with elements in
 any desired order, and to access any desired position in the list.
-
-A list `L` can be iterated through as follows:
-
-    iter = L.iterator()
-    elem = iter.next()
-    while elem:
-        doSomething(elem)
-        elem = iter.next()
-
-In this example, each element of the list in turn is stored in `iter`,
-and passed to the `doSomething` function. The loop terminates when the
-current position reaches the end of the list.
-
-(Note that the loop looks slightly different in Java and Python,
-because of how they implement iterators.)
-
-Many languages, including Java and Python, has syntactic sugar for iterators,
-so the same iteration can be written something like this:
-
-    for each elem in L:
-        doSomething(elem)
 
 The list class declaration presented here is just one of many possible
 interpretations for lists. Our list interface provides most of the
@@ -119,8 +90,104 @@ There are two standard approaches to implementing lists, the
 ### Invariants
 
 
-### Alternative approaches
+### Linked lists
 
-::: TODO
-- alternative interface
-:::
+We can use the same structure as for stacks when implementing general linked lists:
+
+    datatype LinkedList implements List:
+        head: Node = null   // Pointer to list header
+        size: Int = 0       // Size of list
+
+<inlineav id="LinkedList-Iteration-CON" src="ChalmersGU/LinkedList-Iteration-CON.js" name="Linked List Slideshow 1" links="ChalmersGU/CGU-Styles.css"/>
+
+#### Adding and removing nodes
+
+However, if we want to add or remove nodes, there is a problem with
+using a pointer to the `current` node.
+
+<inlineav id="LinkedList-Problems-CON" src="ChalmersGU/LinkedList-Problems-CON.js" name="Linked List Add/Remove Problems" links="ChalmersGU/CGU-Styles.css"/>
+
+So, using a `current` pointer, it is possible to add and remove nodes,
+using some complicated coding. But this does not work for the very last
+node! There are several possible ways to deal with this problem. One is
+to always have an empty node (a "dummy node") at the very end of the
+list, but this will increase memory usage.
+
+Another simple solution is to have a pointer to the node *before* the
+current node. This is the solution we will adopt.
+
+#### Adding a node
+
+<inlineav id="LinkedList-Add-CON" src="ChalmersGU/LinkedList-Add-CON.js" name="Linked List Add Slideshow" links="ChalmersGU/CGU-Styles.css"/>
+
+Here are some special cases for linked list insertion: Inserting at the
+beginning of a list, and appending at the end.
+
+<inlineav id="LinkedList-AddSpecial-CON" src="ChalmersGU/LinkedList-AddSpecial-CON.js" name="Linked List Add Special Cases Slideshow" links="ChalmersGU/CGU-Styles.css"/>
+
+Here's the code for addition.
+
+    datatype LinkedList implements List:
+        ...
+        add(i, x):
+            // precondition: 0 <= i <= size
+            if i == 0:
+                head = new Node(x, head)
+            else:
+                prev = head
+                repeat i-1 times:
+                    prev = prev.next
+                prev.next = new Node(x, prev.next)
+            size = size + 1
+
+
+Here's an exercise for adding a value to a linked list.
+
+<avembed id="LinkedList-Add-PRO" src="ChalmersGU/LinkedList-Add-PRO.html" type="ka" name="Linked List Add Exercise"/>
+
+#### Removing a node
+
+<inlineav id="LinkedList-Remove-CON" src="ChalmersGU/LinkedList-Remove-CON.js" name="Linked List Remove Slideshow" links="ChalmersGU/CGU-Styles.css"/>
+
+Here's the code for deletion:
+
+    datatype LinkedList implements List:
+        ...
+        remove(self, i):
+            // precondition: 0 <= i < size
+            if i == 0:
+                removed = head
+                head = removed.next
+            else:
+                prev = head
+                repeat i-1 times:
+                    prev = prev.next
+                removed = prev.next
+                prev.next = removed.next
+            removed.next = null   // For garbage collection
+            size = size - 1
+            return removed.elem
+
+
+And here's an exercise.
+
+<avembed id="LinkedList-Remove-PRO" src="ChalmersGU/LinkedList-Remove-PRO.html" type="ka" name="Linked List Remove Exercise" height="700"/>
+
+#### Complexity analysis
+
+Locating a certain position $i$ in the list requires $i$ steps. The
+worst case is if we want to go to the last node, so the time complexity
+for above all operations is $O(n)$.
+
+This is much worse than the
+[array-based list](#static-array-based-lists), where
+these operations are $O(1)$. So are linked lists totally useless?
+No! But they don't work well with our current List interface.
+
+To make linked lists useful, we need an enhanced iterator interface,
+where we can move forwards and backwards in the list, and add/remove
+nodes through this enhanced iterator. In the standard Java API, this
+kind of iterator is called a
+[ListIterator](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/ListIterator.html),
+which is part of Java's standard
+[LinkedList](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/LinkedList.html).
