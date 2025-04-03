@@ -20,13 +20,12 @@ support search structures such as the
 [key-value pair]{.term}. Every `BinaryNode` object also has two pointers, one to
 its left child and another to its right child.
 
-    class BinaryNode:
-        BinaryNode(elem, left, right):
-            this.elem = elem    // Element for this node.
-            this.left = left    // Pointer to left child.
-            this.right = right  // Pointer to right child.
+    datatype BinaryNode of T:
+        elem: T            // Element for this node.
+        left: BinaryNode   // Pointer to left child.
+        right: BinaryNode  // Pointer to right child.
 
-        isLeaf():
+        isLeaf() -> bool:
             // Return true if a leaf node, false otherwise.
             return this.left is null and this.right is null
 

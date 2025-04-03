@@ -155,7 +155,7 @@ the tree. We can implement this function as follows.
             return true  // Base case: empty subtree
 
         rootval = node.elem
-        if rootval <= low or rootval >= high:
+        if not (low <= rootval <= high):
             return false  // Value out of range
 
         return (checkBST(node.left, low, rootval) and  // Check left subtree
