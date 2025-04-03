@@ -201,7 +201,7 @@ this is a special case where there are $n$ integers whose values are a
 permutation of the integers from 0 to $n-1$. This is an example of a [binsort]{.term}.
 Binsort assigns each value to an array position corresponding to its value.
 
-    for i = 0 to A.size()-1:
+    for i in 0 .. A.size()-1:
         B[A[i]] = A[i]
 
 This is efficient and requires $O(n)$ time.
@@ -210,7 +210,7 @@ However, it also requires two arrays of size $n$, so the additional space usage 
 Next is a code fragment that places the permutation in order but does so within the same array
 (thus it is an example of an *in-place* sort).
 
-    for i = 0 to A.size()-1:
+    for i in 0 .. A.size()-1:
         while A[i] != i:
             swap(A, i, A[i])  // Swap element A[i] with A[A[i]]
 
