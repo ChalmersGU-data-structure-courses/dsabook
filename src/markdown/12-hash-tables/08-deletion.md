@@ -77,20 +77,20 @@ Here is a simple implementation of deletion in a HashMap using
 tombstones.
 
 
-    class OpenAddressingHashMap implements Map:
+    datatype OpenAddressingHashMap implements Map:
         ...
         remove(key):
-            i = this.hashAndProbe(key)
-            if this.keys[i] is null:  // The key isn't there
+            i = hashAndProbe(key)
+            if keys[i] is null:  // The key isn't there
                 return null
-            removed = this.values[i].value
+            removed = values[i].value
             if removed is null:  // The key is already removed
                 return null
-            this.values[i] = null
-            this.mapSize = this.mapSize - 1
-            this.numDeleted = this.numDeleted + 1
-            if this.mapSize < minLoadFactor * this.keys.size():
-                this.resizeTable(this.keys.size() / capacityMultiplier)
+            values[i] = null
+            size = size - 1
+            deleted = deleted + 1
+            if size < MIN_LOAD_FACTOR * keys.size():
+                resizeTable(keys.size() / MULTIPLIER)
             return removed
 
 

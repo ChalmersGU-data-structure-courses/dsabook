@@ -17,14 +17,14 @@ way, a record not in its home position can be recovered.
 
 An implementation for the `get` method is as follows.
 
-    class OpenAddressingHashMap implements Map:
+    datatype OpenAddressingHashMap implements Map:
         ...
         get(key):
-            i = this.hashAndProbe(key)
-            if this.keys[i] is null:
+            i = hashAndProbe(key)
+            if keys[i] is null:
                 return null
             else:
-                return this.values[i]
+                return values[i]
 
 
 Searching and inserting both assume that at least one slot on the probe
@@ -33,19 +33,19 @@ infinite loop on unsuccessful searches. Thus, the hash system should
 keep a count of the number of records stored, and make sure to resize
 the array when it becomes too full.
 
-Setting a value for a key into the hash map works like this.
+Setting a value for a key into the hash map works like
 
-    class OpenAddressingHashMap implements Map:
+    datatype OpenAddressingHashMap implements Map:
         ...
         put(key, value):
-            i = this.hashAndProbe(key)
-            if this.keys[i] is null:
-                this.keys[i] = key
-                this.mapSize = this.mapSize + 1
-            old = this.values[i]
-            this.values[i] = value
-            if this.loadFactor() > maxLoadFactor:
-                this.resizeTable(this.keys.size() * capacityMultiplier)
+            i = hashAndProbe(key)
+            if keys[i] is null:
+                keys[i] = key
+                size = size + 1
+            old = values[i]
+            values[i] = value
+            if loadFactor() > MAX_LOAD_FACTOR:
+                resizeTable(keys.size() * MULTIPLIER)
             return old
 
 

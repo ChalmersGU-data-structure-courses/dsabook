@@ -14,13 +14,12 @@ decide how to hash strings, and x-ray images can decide how to hash
 x-ray images. This is done by requiring a class to implement a hash
 method (called `hashCode()` in Java, and `__hash__()` in Python).
 
-    class Person:
-        Person(first, last):
-            this.firstName = first
-            this.lastName = last
+    datatype Person:
+        firstName: String
+        lastName: String
 
-        hashCode():
-            return this.firstName.hashCode() + this.lastName.hashCode()
+        hashCode() -> Int:
+            return firstName.hashCode() + lastName.hashCode()
 
 
 Now, the problem is that these classes have no idea how large the
@@ -79,11 +78,11 @@ In these cases we can e.g. use `hashCode & 0x7fffffff` to make the hash code pos
 (Python and some other languages use arbitrary size integers, but it works fine to
 truncate them to 31 bits as we do here).
 
-    class SeparateChainingHashMap implements Map:
+    datatype SeparateChainingHashMap implements Map:
         ...
         hash(key):
             h = key.hashCode() & 0x7fffffff
-            return h % this.bins.size()
+            return h % bins.size()
 
 ### The hash code never changes
 
