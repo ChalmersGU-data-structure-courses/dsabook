@@ -18,18 +18,19 @@ show actual implementations for each approach. We will begin with an
 interface defining an ADT for graphs that a given implementation must
 meet.
 
-    interface Graph:
-        addVertex(v)      // Adds the vertex v to the graph. Returns true if it wasn't already in the graph.
-        addEdge(e)        // Adds the edge e to the graph. Returns true if it wasn't already in the graph.
-        vertices()        // Returns a Collection of all vertices in the graph.
-        outgoingEdges(v)  // Returns a Collection of the edges that originates in vertex v.
-        vertexCount()     // Returns the number of vertices in the graph.
-        edgeCount()       // Returns the number of edges in the graph.
+    interface Graph of V:
+        addVertex(v: V)                 // Adds the vertex v to the graph.
+        addEdge(e: Edge of V)           // Adds the edge e to the graph.
+        vertices() -> Collection of V   // Returns a Collection of all vertices in the graph.
+        outgoingEdges(v: V) -> Collection of Edge of V
+                                        // Returns a Collection of the edges that originates in vertex v.
+        vertexCount() -> Int            // Returns the number of vertices in the graph.
+        edgeCount() -> Int              // Returns the number of edges in the graph.
 
-    interface Edge:
-        start    // start vertex
-        end      // end vertex
-        weight   // weight, defaults to 1.0
+    datatype Edge of V:
+        start: V              // start vertex
+        end: V                // end vertex
+        weight: Float = 1.0   // weight, defaults to 1.0
 
 
 Note that this API is quite generic, and perhaps not suited for all
@@ -77,48 +78,35 @@ Here is an implementation for the adjacency matrix.
 To simplify the implementation we assume that the vertices are integers
 $0\ldots N-1$: then we can use the vertices as indices in the adjacency matrix.
 
-    class MatrixGraph implements Graph:
-        MatrixGraph(numVertices):
+    datatype MatrixGraph implements Graph:
+        edgeMatrix: Array of Arrays of Edges
+        vertexCount: Int
+        edgeCount: Int = 0
+
+        constructor(vertexCount):
             // The edge matrix is an N x N matrix of weights.
             // We use the special weight 0 to indicate that there is no edge.
-            this.edgeMatrix = new Array(numVertices)
-            for i = 0 to numVertices-1:
-                this.edgeMatrix[i] = new Array(numVertices)
-            this.totalEdges = 0
-
-        vertexCount():
-            return this.edgeMatrix.size()
-
-        edgeCount():
-            return this.totalEdges
+            edgeMatrix = new Array(vertexCount)
+            for i = 0 .. vertexCount-1:
+                edgeMatrix[i] = new Array(vertexCount)
 
         addEdge(e):
-            precondition: e.weight != 0
-            isNew = this.edgeMatrix[e.start][e.end]
-            this.edgeMatrix[e.start][e.end] = e.weight
+            // precondition: e.weight != 0
+            isNew = edgeMatrix[e.start][e.end]
+            edgeMatrix[e.start][e.end] = e.weight
             if isNew:
-                this.totalEdges = this.totalEdges + 1
-            return isNew
+                edgeCount = edgeCount + 1
 
         vertices():
-            return the collection [0, 1, ..., this.vertexCount()-1]
+            return the collection [0, 1, ..., vertexCount()-1]
 
         outgoingEdges(v):
-            return the collection [
-                new Edge(v, w, this.edgeWeight(v, w))
-                for each w in this.vertices()
-                if this.isEdge(v, w)
-            ]
-
-        // For an adjacency matrix, it's much more efficient to get information
-        // about known edges, than to search through outgoingEdges,
-        // so we add the following two as convenience methods.
-
-        isEdge(v, w):
-            return this.edgeMatrix[v][w] != 0
-
-        edgeWeight(v, w):
-            return this.edgeMatrix[v][w]
+            outgoing = new List()
+            for w in 0 .. vertexCount-1:
+                weight = edgeMatrix[v][w]
+                if weight != 0:
+                    outgoing.append(new Edge(v, w, weight))
+            return outgoing
 
 
 The edge matrix is implemented as an integer array of size $n \times n$
@@ -163,37 +151,33 @@ The implementations of the API methods are quite straightforward, as can
 be seen here:
 
     class AdjacencyGraph implements Graph:
-        AdjacencyGraph():
-            this.edgesMap = new Map()
-            this.verticesSet = new Set()
-            this.totalEdges = 0
+        edgesMap: Map from V to Edge = new Map()
+        vertices: Set of V = new Set()
+        edgeCount: Int = 0
 
         vertexCount():
-            return this.verticesSet.size()
+            return vertices.size()
 
-        edgeCount():
-            return this.totalEdges
-
-        addVertex(v) -> bool:
-            return this.verticesSet.add(v)
+        addVertex(v):
+            vertices.add(v)
 
         addEdge(e):
-            this.addVertex(e.start)
-            this.addVertex(e.end)
-            outgoingEdges = this.edgesMap.get(e.start)
-            if outgoingEdges is null:
-                outgoingEdges = new Set()
-                this.edgesMap.put(e.start, outgoingEdges)
-            isNew = outgoingEdges.add(e)
-            if isNew:
-                this.totalEdges = this.totalEdges + 1
-            return isNew
+            addVertex(e.start)
+            addVertex(e.end)
+            outgoing = edgesMap.get(e.start)
+            if outgoing is null:
+                outgoing = new Set()
+                edgesMap.put(e.start, outgoing)
+            oldSize = outgoing.size()
+            outgoing.add(e)
+            if outgoing.size() > oldSize:
+                edgeCount = edgeCount + 1
 
         vertices():
-            return this.verticesSet
+            return verticesSet
 
         outgoingEdges(v):
-            return this.edgesMap.get(v)
+            return edgesMap.get(v)
 
 
 

@@ -30,7 +30,7 @@ MCST will never have more than $|\mathbf{V}|-1$ edges, we can return as
 soon as the MCST contains enough edges.
 
     // Kruskal's MCST algorithm
-    function Kruskal(G):
+    function kruskal(G):
         A = new ParentPointerTree()
         for each v in G.vertices():
             A.MAKE_SET(v)  // Create one singleton set for each vertex

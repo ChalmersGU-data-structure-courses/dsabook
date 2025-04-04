@@ -53,8 +53,8 @@ visiting all vertices, `graphTraverse` could be called as follows on a
 graph $\mathbf{G}$:
 
     function graphTraverse(G):
-        visited = Set()
-        for each Vertex v in G.vertices():
+        visited = new Set()
+        for each v in G.vertices():
             if v not in visited:
                 doTraversal(G, v, visited)
 
@@ -144,7 +144,7 @@ Here is an implementation for BFS. Note that it's not possible to call
 edges (the "children") have been traversed.
 
     function traverseBFS(G, v, visited):
-        agenda = Queue()
+        agenda = new Queue()
         agenda.enqueue(v)
         while not agenda.isEmpty()
             v = agenda.dequeue()

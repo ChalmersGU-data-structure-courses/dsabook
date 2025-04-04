@@ -36,7 +36,7 @@ searches the distance matrix for the next closest vertex.
 
     // Compute shortest distances to the MCST, store them in D.
     // parent.get(v) will hold the index for the vertex that is v's parent in the MCST
-    function Prim(G, s):
+    function prim(G, s):
         visited = new Set()
         parent = new Map()
         D = new Map()
@@ -44,7 +44,7 @@ searches the distance matrix for the next closest vertex.
             D.put(v, ∞)
         D.put(s, 0)
 
-        repeat G.vertxCount() times:  // Process the vertices
+        repeat G.vertexCount() times:  // Process the vertices
             v = minVertex(G, D, visited)  // Find next-closest vertex
             visited.add(v)
             if D.get(v) == ∞:
@@ -81,11 +81,11 @@ algorithm, the [heap]{.term} stores `DijkElem`
 objects.
 
     // Prim's MCST algorithm: priority queue version
-    function PrimPQ(G, s):
+    function primPQ(G, s):
         visited = new Set()
         parent = new Map()
         D = new Map()
-        for (v : G.vertices())
+        for each v in G.vertices():
             D.put(v, ∞)
         D.put(s, 0)
 

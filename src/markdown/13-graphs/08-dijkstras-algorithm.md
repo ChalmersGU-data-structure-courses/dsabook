@@ -67,7 +67,7 @@ neighbor $X$ of $V$. Here is an implementation for Dijkstra's
 algorithm. At the end, array `D` will contain the shortest distance values.
 
     // Compute shortest path distances from s
-    function Dijkstra(G, s):
+    function dijkstra(G, s):
         visited = new Set()
         D = new Map()
         for each v in G.vertices():
@@ -135,7 +135,7 @@ key and the target vertex as the value. here is the implementation for
 Dijkstra's algorithm using a heap.
 
     // Dijkstra's shortest-paths: priority queue version
-    function DijkstraPQ(G, s):
+    function dijkstraPQ(G, s):
         visited = new Set()
         D = new Map()
         for (V v : G.vertices())
