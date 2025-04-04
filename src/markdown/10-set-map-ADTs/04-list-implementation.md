@@ -85,28 +85,25 @@ list works very fine!
 A very simple way of implementing a **Map** using a list, is to use
 [key-value pairs](#key-value-pair){.term}.
 
-    class KVPair:
-        KVPair(key, value):
-            this.key = key
-            this.value = value
+    datatype KVPair of K and V:
+        key: K
+        value: V
 
 
 Now we can create a **Map** class that uses an underlying **List** of
 **KVPair**. So the only thing we need is really an internal variable
 referring to the underlying list.
 
-    class LinkedMap implements Map:
-        LinkedMap():
-            // This could also be a DynamicArrayList:
-            this.internalList = new LinkedList()
+    datatype LinkedMap implements Map:
+        internalList: LinkedList of KVPair = new LinkedList()
 
 Finding the value for a certain key is easy. We just iterate through all
 entries and stop whenever we find a matching key.
 
-    class LinkedMap implements Map:
+    datatype LinkedMap implements Map:
         ...
         get(key):
-            for each entry in this.internalList:
+            for each entry in internalList:
                 if key == entry.key:
                     return entry.value
             return null
@@ -115,16 +112,16 @@ Setting a value for a given key means to search the list for a matching
 key, and then updating the value. If we cannot find the key, we add a
 new **KVPair** to the list.
 
-    class LinkedMap implements Map:
+    datatype LinkedMap implements Map:
         ...
         put(key, value):
-            for each entry in this.internalList:
+            for each entry in internalList:
                 if key == entry.key:
                     entry.value = value
                     return
-            // If we're using a DynamicArrayList we should add at the end of the list instead:
-            this.internalList.add(0, new KVPair(key, value))
-
+            // The key isn't present, so we add a new key-value pair to the list.
+            // Because it's a linked list we add the pair to the front of the list.
+            internalList.add(0, new KVPair(key, value))
 
 In this example we're using a linked list, but we could equally well
 have used a dynamic array list. The only thing we have to think about is
@@ -137,10 +134,10 @@ Other methods can be deferred to the underlying list.
     class LinkedMap implements Map:
         ...
         isEmpty():
-            return this.internalList.isEmpty()
+            return internalList.isEmpty()
 
         size():
-            return this.internalList.size()
+            return internalList.size()
 
 
 #### How to remove keys from the map
@@ -162,89 +159,54 @@ should be, which is unnecessary.
         // First a search to find the index, and then a loop delete that index.
         remove(key):
             i = 0
-            for each entry in this.internalList:
+            for each entry in internalList:
                 if key == entry.key:
-                    this.internalList.remove(i)
+                    internalList.remove(i)
                     return entry.value
                 i = i + 1
             return null
 
+If we allow ourselves to peek into the inner workings of the linked list, we can make a more efficient version.
+Note that to be able to remove a list node, we need a pointer to the *previous* node.
+This makes it possible for us to repoint the `next` pointer from the previous node to its new next node.
+Therefore we keep two variables, `prev` that points to the previous node, and `current` that points to the current.
 
-If the **Iterator** interface would include a method for removing the
-"current" element from a list, it would be possible to improve the
-method. Our simple API doesn't have that possibility, so we have to
-stick with the slightly slower version. However, in the Java API,
-iterators have a "remove-the-current" method, so it is possible
-to optimise removal a little bit. Implementing the `remove` method using
-the `delete` method of Java Iterators is left as an exercise to the reader.
-
-#### Using linked key-value nodes
-
-An alternative to using an underlying list of key-value pairs, which is
-also very easy to implement, is to modify the implementation of linked
-lists just slightly. The advantage of this solution is that deletion
-becomes more efficient.
-
-Instead of using nodes with just one value, we used key-value nodes.
-
-    class KVNode:
-        KVNode(key, value, next):
-            this.key = key       // Key for this node
-            this.value = value   // Value for this node
-            this.next = next     // Pointer to next node in list
-
-Then the internal structure is very much like our previous
-[linked lists implementation](#linked-lists).
-The private variables are the same (except we use a
-**KVNode** instead of a **Node**).
-
-    class LinkedMap(Map):
-        LinkedMap():
-            this.head = null    // Pointer to list header
-            this.listSize = 0   // Size of list
-
-Searching for a key simply means to iterating through the key-value node
-until we find a matching key.
-
-    class LinkedMap(Map):
-        ...
-        get(key):
-            current = this.head
-            while current is not null:
-                if key == current.key:
-                    return current.value
-                current = current.next
-            return null
-
-Setting a value for a key is similar: If the key is in the list, we
-upate the associated value. If the key is not in the list, we add a new
-**KVNode** and increase the list size.
-
-Finally, to remove a key-value node, we use the same trick as we did for
-linked lists: We iterate through the *previous* node instead of the current
-one. This is to be able to reassign the pointers from the previous node
-to the following node.
-
-So, we use two nodes -- the one to be removed, and the previous one.
-The loop searches through the nodes until the one to be removed is
-found, and then reassigns the pointer for the previous node to the
-following one.
-
-    class LinkedMap(Map):
+    class LinkedMap implements Map:
         ...
         remove(key):
             prev = null
-            current = this.head
+            current = internalList.head
             while current is not null:
                 if key == current.key:
                     if prev is null:
-                        this.head = current.next
+                        // Special case: if prev is null,
+                        // it's the list head that needs to be repointed.
+                        internalList.head = current.next
                     else:
                         prev.next = current.next
                     current.next = null  // For garbage collection
-                    this.listSize = this.listSize - 1
+                    internalList.size = internalList.size - 1
                     return current.value
                 prev = current
                 current = current.next
             return null
+
+It is not good programming practice that one datatype (or class, or module) looks into the implementation details of another one.
+Therefore, a real library for linked lists should have more public methods to be able to implement an efficient version without having to look into its implementation.
+
+For example, the **Iterator** interface in Java provides a "remove-the-current-node" method, so it is possible to implement optimise map removal just like above.
+
+#### Using linked key-value nodes
+
+An alternative to using an underlying list of key-value pairs is to modify the implementation of linked lists just slightly.
+This gives us more control of the implementation, with the tradeoff that we have to reimplement some things.
+
+Instead of using linked list nodes with just one value, we used key-value nodes.
+
+    datatype KVNode of K and V:
+        key: K        // Key for this node
+        value: V      // Value for this node
+        next: KVNode  // Pointer to next node in list
+
+The actual implementation of the datatype LinkedMap now becomes an exercise for the reader.
 

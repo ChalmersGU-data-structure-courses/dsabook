@@ -5,26 +5,28 @@
 ### Sorted sets
 
 
-    interface SortedSet extends Set:
-        first()          // Returns the first (smallest) element.
-        last()           // Returns the last (largest) element.
-        floor(x)         // Returns the closest element ≤ x, or nothing if there is no such element.
-        ceiling(x)       // Returns the closest element ≤ x, or nothing if there is no such element.
-        lower(x)         // Returns the closest element < x, or nothing if there is no such element.
-        higher(x)        // Returns the closest element > x, or nothing if there is no such element.
-        between(x1, x2)  // Returns all elements x such that x1 ≤ x ≤ x2.
+    interface SortedSet of T extends Set:
+        first() -> T          // Returns the first (smallest) element.
+        last() -> T           // Returns the last (largest) element.
+        floor(x: T) -> T      // Returns the closest element ≤ x, or nothing if there is no such element.
+        ceiling(x: T) -> T    // Returns the closest element ≤ x, or nothing if there is no such element.
+        lower(x: T) -> T      // Returns the closest element < x, or nothing if there is no such element.
+        higher(x: T) -> T     // Returns the closest element > x, or nothing if there is no such element.
+        between(x1: T, x2: T) -> Collection of T
+                              // Returns all elements x such that x1 ≤ x ≤ x2.
 
 
 ### Sorted maps
 
-    interface SortedMap extends Map:
-        firstKey()               // Returns the first (smallest) key.
-        lastKey()                // Returns the last (largest) key.
-        floorKey(key)            // Returns the closest key ≤ k, or nothing if there is no key.
-        ceilingKey(key)          // Returns the closest key ≤ k, or nothing if there is no key.
-        lowerKey(key)            // Returns the closest key < k, or nothing if there is no such element.
-        higherKey(key)           // Returns the closest key > k, or nothing if there is no such element.
-        keysBetween(key1, key2)  // Returns all keys k such that k1 ≤ k ≤ k2.
+    interface SortedMap of K to V extends Map:
+        firstKey() -> K               // Returns the first (smallest) key.
+        lastKey() -> K                // Returns the last (largest) key.
+        floorKey(key: K) -> K         // Returns the closest key ≤ k, or nothing if there is no key.
+        ceilingKey(key: K) -> K       // Returns the closest key ≤ k, or nothing if there is no key.
+        lowerKey(key: K) -> K         // Returns the closest key < k, or nothing if there is no such element.
+        higherKey(key: K) -> K        // Returns the closest key > k, or nothing if there is no such element.
+        keysBetween(key1: K, key2: K) -> Collection of K
+                                      // Returns all keys k such that k1 ≤ k ≤ k2.
 
 
 
