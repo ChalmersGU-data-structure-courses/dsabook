@@ -52,39 +52,39 @@ used when sorting data sets too large to fit in main memory.
 A complete implementation is as follows.
 
 
-    function heapsort(a):
+    function heapsort(A):
         // Convert the array to a heap:
-        buildHeap(a)
+        buildHeap(A)
 
         // Repeatedly find and remove the minimum element
-        for heapsize = a.size()-1 downto 0:
-            a[0], a[heapsize] = a[heapsize], a[0]
-            siftDown(a, heapsize, 0)
+        for heapsize in A.size()-1 .. 0 (downwards):
+            A[0], A[heapsize] = A[heapsize], A[0]
+            siftDown(A, heapsize, 0)
 
+    // Go backwards from the first non-leaf, sifting down each one
     function buildHeap(a):
-        // Go backwards from the first non-leaf, sifting down each one
-        heapsize = a.size()
-        for i = heapsize/2-1 downto 0:
-            siftDown(a, heapsize, i)
+        heapsize = A.size()
+        for i in heapsize/2-1 .. 0 (downwards):
+            siftDown(A, heapsize, i)
 
-    function siftDown(a, heapsize, i):
-        // Standard sift-down method for max heaps
+    // Standard sift-down method for max heaps
+    function siftDown(A, heapsize, i):
         left = 2*i + 1
         while left < heapsize:
             right = left + 1
 
-            if a[left] > a[i]:
+            if A[left] > A[i]:
                 largest = left
             else:
                 largest = i
 
-            if right < heapsize and a[right] > a[largest]:
+            if right < heapsize and A[right] > A[largest]:
                 largest = right
 
             if largest == i:
                 return
             else:
-                a[i], a[largest] = a[largest], a[i]
+                A[i], A[largest] = A[largest], A[i]
                 i = largest
 
             left = 2*i + 1

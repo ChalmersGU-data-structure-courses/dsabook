@@ -88,78 +88,76 @@ Here is an implementation for min heaps. It uses a
 [dynamic array list](#dynamic-array-based-lists)
 that will resize automatically when the number of elements change.
 
-    class MinHeap implements PriorityQueue:
-        MinHeap():
-            this.heap = new DynamicArrayList()
+    datatype MinHeap implements PriorityQueue:
+        heap = new ArrayList()
 
+        // Return the minimum element, without removing it.
         getMin():
-            // Returns the minimum element, without removing it.
-            precondition: this.heap.size() > 0
-            return this.heap[0]
+            // precondition: heap.size() > 0
+            return heap[0]
 
+        // Add an element to the priority queue.
         add(elem):
-            // Adds an element to the priority queue.
-            i = this.heap.size()
-            this.heap.add(i, elem)  // Add the element at end of the heap.
-            this.siftUp(i)          // Put it in its correct place.
+            i = heap.size()
+            heap.add(i, elem)  // Add the element at end of the heap.
+            siftUp(i)          // Put it in its correct place.
 
+        // Remove and return the minimum element.
         removeMin():
-            // Removes and returns the minimum element.
-            precondition: this.heap.size() > 0
-            removed = this.heap[0]
-            i = this.heap.size() - 1
-            last = this.heap.remove(i)  // Find and remove the last element.
-            if this.heap.size() > 0:
-                this.heap[0] = last     // Replace the root with the last element.
-                this.siftDown(0)        // Put the new root in its correct place.
+            // precondition: heap.size() > 0
+            removed = heap[0]
+            i = heap.size() - 1
+            last = heap.remove(i)  // Find and remove the last element.
+            if heap.size() > 0:
+                heap[0] = last     // Replace the root with the last element.
+                siftDown(0)        // Put the new root in its correct place.
             return removed
 
+        // Sift a value down the tree, return its new position.
         siftDown(pos):
-            // Sift a value down the tree, return its new position.
-            heapSize = this.heap.size()
-            while not this.isLeaf(pos):
-                child = this.getLeftChild(pos)
-                right = child + 1   // or: this.getRightChild(pos)
-                if right < heapSize and this.heap[right] < this.heap[child]:
+            while not isLeaf(pos):
+                child = getLeftChild(pos)
+                right = getRightChild(pos)  // or: right = child + 1
+                if right < heap.size() and heap[right] < heap[child]:
                     child = right   // 'child' is now the index of the child with smaller value
-                if this.heap[child] >= this.heap[pos]:
+                if heap[child] >= heap[pos]:
                     return pos
-                this.swap(pos, child)
+                swap(pos, child)
                 pos = child   // Move down one level in the tree.
             return pos
 
+        // Sift a value up the tree, return its new position.
         siftUp(pos):
-            // Sift a value up the tree, return its new position.
             while pos > 0:
-                parent = this.getParent(pos)
-                if this.heap[pos] >= this.heap[parent]:
+                parent = getParent(pos)
+                if heap[pos] >= heap[parent]:
                     return pos
-                this.swap(pos, parent)
+                swap(pos, parent)
                 pos = parent   // Move up one level in the tree.
             return pos
 
+        // Return true if pos is a leaf position.
         isLeaf(pos):
-            // Return true if pos is a leaf position.
-            return pos >= this.heap.size() / 2
+            return pos >= heap.size() / 2
 
+        // Return the position for the left child of the given node.
         getLeftChild(pos):
-            // Return the position for the left child of the given node.
             return 2 * pos + 1
 
+        // Return the position for the right child of the given node.
         getRightChild(pos):
-            // Return the position for the right child of the given node.
             return 2 * pos + 2
 
+        // Return the position for the parent. Returns 0 if we're already at the root.
         getParent(pos):
-            // Return the position for the parent. Returns 0 if we're already at the root.
             return int((pos - 1) / 2)
 
+        // Swap the values in two positions.
         swap(pos1, pos2):
-            // Swap the values in two positions.
-            this.heap[pos1], this.heap[pos2] = this.heap[pos2], this.heap[pos1]
+            heap[pos1], heap[pos2] = heap[pos2], heap[pos1]
 
 
-This class definition makes two concessions to the fact that an
+This datatype makes two concessions to the fact that an
 array-based implementation is used. First, heap nodes are indicated by
 their logical position within the heap rather than by a pointer to the
 node. In practice, the logical heap position corresponds to the
@@ -174,7 +172,7 @@ elements initially loaded into the array) and a second integer
 parameter indicating the maximum size allowed for the heap (the size
 of the array).
 
-The class contains some private auxiliary methods that are use when
+The datatype contains some private auxiliary methods that are use when
 adding and removing elements from the heap: `isLeaf(pos)` returns `true`
 if position `pos` is a leaf in the tree, and `false` otherwise. Methods
 `getLeftChild`, `getRightChild`, and `getParent` return the position
@@ -273,7 +271,7 @@ private method `siftDown`.
 This approach assumes that the subtrees are already heaps, suggesting
 that a complete algorithm can be obtained by visiting the nodes in some
 order such that the children of a node are visited *before* the node
-itthis. One simple way to do this is simply to work from the high index
+itself. One simple way to do this is simply to work from the high index
 of the array to the low index. Actually, the build process need not
 visit the leaf nodes (they can never move down because they are already
 at the bottom), so the building algorithm can start in the middle of the

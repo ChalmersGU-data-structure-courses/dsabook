@@ -142,21 +142,15 @@ process for the eight letters of [Table #FreqExamp](#FreqExamp).
 
 Here is the implementation for the Huffman Tree class.
 
-    class HuffTree implements Comparable:
-        HuffTree(elem, left, right, weight):
-            this.elem = elem
-            this.left = left
-            this.right = right
-            this.weight = weight
+    datatype HuffTree of T implements Comparable:
+        elem: T
+        left: HuffTree
+        right: HuffTree
+        weight: Int
 
         // Huffman trees are compared using their 'weight':
         compareTo(other):
-            return this.weight.compareTo(other.weight)
-
-        // ...or for all comparison operators:
-        (this < other) = (this.weight < other.weight)
-        (this == other) = (this.weight == other.weight)
-        (...etc...)
+            return weight.compareTo(other.weight)
 
 Here is the implementation for the tree-building process.
 
@@ -165,7 +159,7 @@ Here is the implementation for the tree-building process.
         huffHeap = new MinHeap()
         for each char in frequencies:
             freq = frequencies.get(char)
-            huffHeap.add(new HuffTree(elem=char, weight=freq))
+            huffHeap.add(new HuffTree(char, null, null, freq))
 
         // While there are at least two trees left on heap
         while huffHeap.size() > 1:
@@ -174,7 +168,7 @@ Here is the implementation for the tree-building process.
             t2 = huffHeap.removeMin()
             weight = t1.weight + t2.weight
             // Combine the trees and add the new tree to the heap
-            t3 = new HuffTree(left=t1, right=t2, weight=weight)
+            t3 = new HuffTree(null, t1, t2, weight)
             huffHeap.add(t3)
 
         // Return the final Huffman tree
