@@ -35,19 +35,20 @@ values are inserted in the order 37, 24, 42, 7, 2, 40, 42, 32, 120. Tree
 2, 32, 37, 24, 40.
 ::::
 
-Here is a class declaration for the BST Map:
+BST nodes are very similar to linked list nodes, but instead of just one child they have up to two children.
 
-    class BSTMap implements Map:
-        BSTMap():
-            this.root = null
-            this.treeSize = 0
+    class BSTNode of K and V:
+        key: K           // the key that are used for looking up values
+        value: V         // the value associated with the key
+        left: BSTNode    // the left subtree, initially null
+        right: BSTNode   // the right subtree, initially null
 
-    class BSTNode:
-        BSTNode(key, value):
-            this.key = key      // the key that are used for looking up values
-            this.value = value  // the value associated with the key
-            this.left = null    // the left subtree, initially null
-            this.right = null   // the right subtree, initially null
+
+Here is a datatype declaration for the BST Map:
+
+    datatype BSTMap of K to V implements Map:
+        root: BSTNode = null
+        size: Int = 0
 
 
 ### Invariants
@@ -60,6 +61,23 @@ Here is a class declaration for the BST Map:
 - both iterative and recursive versions
 :::
 
+Iterative version:
+
+    datatype BSTMap implements Map:
+        ...
+        get(key):
+            node = root
+            while node is not null:
+                if key < node.key:
+                    node = node.left
+                else if key > node.key:
+                    node = node.right
+                else: // now key == node.key
+                    return node.value
+            return null
+
+Recursive version:
+
 The first operation that we will look at in detail will find the record
 that matches a given key. Notice that in the BST class, public member
 function `get` calls private member function `getHelper`. Method `get`
@@ -70,10 +88,10 @@ parameters are the root of a subtree and the search key. Member
 `getHelper` has the desired form for this recursive subroutine and is
 implemented as follows.
 
-    class BSTMap implements Map:
+    datatype BSTMap implements Map:
         ...
         get(key):
-            return getHelper(this.root, key)
+            return getHelper(root, key)
 
         getHelper(node, key):
             if node is null:
@@ -96,22 +114,50 @@ implemented as follows.
 - both iterative and recursive versions
 :::
 
-Now we look at how to insert a new node into the BST.
+Iterative version:
 
-    class BSTMap implements Map:
+    datatype BSTMap implements Map:
         ...
         put(key, value):
-            this.root = this.putHelper(this.root, key, value)
+            parent = null
+            node = root
+            while node is not null:
+                if key < node.key:
+                    parent = node
+                    node = node.left
+                else if key > node.key:
+                    parent = node
+                    node = node.right
+                else: // now key == node.key
+                    node.value = value
+                    return
+            // The key doesn't exist so we create a new node and attach it to the parent:
+            node = new BSTNode(key, value)
+            if key < parent.key:
+                parent.left = node
+            else: // key > parent.key
+                parent.right = node
+            size = size + 1
+
+
+Recursive version:
+
+Now we look at how to insert a new node into the BST.
+
+    datatype BSTMap implements Map:
+        ...
+        put(key, value):
+            root = putHelper(root, key, value)
 
         putHelper(node, key, value):
             // Helper method for 'put', returns the updated node.
             if node is null:
-                this.treeSize = this.treeSize + 1
+                size = size + 1
                 return new BSTNode(key, value)
             else if key < node.key:
-                node.left = this.putHelper(node.left, key, value)
+                node.left = putHelper(node.left, key, value)
             else if key > node.key:
-                node.right = this.putHelper(node.right, key, value)
+                node.right = putHelper(node.right, key, value)
             else: // key == node.key
                 node.value = value
             return node
@@ -158,7 +204,7 @@ individually. Before tackling the general node removal process, we need
 a useful companion method, `largestNode`, which returns a pointer to the
 node containing the maximum value in the subtree.
 
-    class BSTMap implements Map:
+    datatype BSTMap implements Map:
         ...
         largestNode(node):
             while node.right is not null:
@@ -208,33 +254,33 @@ with the least value from its right subtree.
 
 The code for removal is shown here.
 
-    class BSTMap:
+    datatype BSTMap:
         ...
         remove(key):
-            this.root = removeHelper(this.root, key)
+            root = removeHelper(root, key)
 
         removeHelper(node, key):
             // Helper method for 'remove', returns the updated node.
             if node is null:
                 return null
             else if key < node.key:
-                node.left = this.removeHelper(node.left, key)
+                node.left = removeHelper(node.left, key)
                 return node
             else if key > node.key:
-                node.right = this.removeHelper(node.right, key)
+                node.right = removeHelper(node.right, key)
                 return node
             else: // key == node.key
                 if node.left is null:
-                    this.treeSize = this.treeSize - 1
+                    size = size - 1
                     return node.right
                 else if node.right is null:
-                    this.treeSize = this.treeSize - 1
+                    size = size - 1
                     return node.left
                 else:
-                    predecessor = this.largestNode(node.left)
+                    predecessor = largestNode(node.left)
                     node.key = predecessor.key
                     node.value = predecessor.value
-                    node.left = this.removeHelper(node.left, predecessor.key)
+                    node.left = removeHelper(node.left, predecessor.key)
                     return node
 
 

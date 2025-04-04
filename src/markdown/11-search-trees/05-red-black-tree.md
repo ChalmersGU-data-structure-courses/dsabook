@@ -124,57 +124,37 @@ trees and red-black trees" under Theme 4 (Search trees).
 Here is an implementation of red-black trees:
 
     // A node in a red-black tree.
-    class RedBlackNode:
-        RedBlackNode(key, value, isRed):
-            this.key = key
-            this.value = value
-            this.isRed = isRed
-            this.left = left
-            this.right = right
+    datatype RedBlackNode extends BSTNode:
+        ...key, value, left, right  // All properties of the BSTNode
+        isRed: Bool                 // The colour of the node
 
 
     // A map implemented using a binary search tree.
-    class RedBlackMap implements Map:
-        RedBlackMap():
-            this.root = null
-            this.treeSize = 0
-
-        get(key):
-            // Look up the value associated with a key.
-            return this.getHelper(this.root, key)
-
-        getHelper(node, key):
-            // This is exactly the same as getHelper for BSTMap.
-            if node is null:
-                return null
-            else if key < node.key:
-                return this.getHelper(node.left, key)
-            else if key > node.key:
-                return this.getHelper(node.right, key)
-            else:
-                return node.value
+    datatype RedBlackMap extends BSTMap:
+        ...root, size   // All properties of the BSTMap
+        ...get(key)     // Inherited from BSTMap
 
         def put(key, value):
             // Add a key-value pair, or update the value associated with an existing key.
             // This is the same as BSTMap.put, except that it rebalances the node afterwards,
             // and colors the root node black.
-            this.root = this.putHelper(this.root, key, value)
-            this.root.isRed = false
+            root = putHelper(root, key, value)
+            root.isRed = false
 
         putHelper(node, key, value):
             // Recursive helper method for 'put', returns the updated node.
             if node is null:
-                this.treeSize = this.treeSize + 1
-                return new AVLNode(key, value)
+                size = size + 1
+                return new RedBlackNode(key, value)
             else if key < node.key:
-                node.left = this.putHelper(node.left, key, value)
-                this.updateHeight(node)
+                node.left = putHelper(node.left, key, value)
+                updateHeight(node)
             else if key > node.key:
-                node.right = this.putHelper(node.right, key, value)
-                this.updateHeight(node)
+                node.right = putHelper(node.right, key, value)
+                updateHeight(node)
             else: // key == node.key
                 node.value = value
-            return this.rebalance(node)
+            return rebalance(node)
 
         def remove(key):
             // Delete a key: not implemented yet!
@@ -187,13 +167,13 @@ Here is an implementation of red-black trees:
             if node is null:
                 return null
             // Skew:
-            if this.isRed(node.right):
-                node = this.rotateLeft(node)
+            if isRed(node.right):
+                node = rotateLeft(node)
             // Split part 1:
-            if this.isRed(node.left) and this.isRed(node.left.left):
-                node = this.rotateRight(node)
+            if isRed(node.left) and isRed(node.left.left):
+                node = rotateRight(node)
             // Split part 2:
-            if this.isRed(node.left) and this.isRed(node.right):
+            if isRed(node.left) and isRed(node.right):
                 node.left.isRed = false
                 node.right.isRed = false
                 node.isRed = true
@@ -211,7 +191,7 @@ Here is an implementation of red-black trees:
             x.right = B; y.left = x
             // We also swap x's and y's colours
             // (e.g. if x was red before, then y will be red afterwards).
-            y.isRed, x.isRed = this.isRed(x), this.isRed(y)
+            y.isRed, x.isRed = isRed(x), isRed(y)
             return y
 
         rotateRight(x):
@@ -227,5 +207,5 @@ Here is an implementation of red-black trees:
             x.left = B
             y.right = x
             // We also swap x's and y's colours
-            y.isRed, x.isRed = this.isRed(x), this.isRed(y)
+            y.isRed, x.isRed = isRed(x), isRed(y)
             return y

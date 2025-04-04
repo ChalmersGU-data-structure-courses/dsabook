@@ -45,11 +45,15 @@ We will store with each skip list node an array named `forward` that
 stores the pointers. Position `forward[0]` stores a level 0 pointer,
 `forward[1]` stores a level 1 pointer, and so on:
 
-    class SkipNode:
-        SkipNode(key, value, level):
-            this.key = key
-            this.value = value
-            this.forward = new Array(level + 1)
+    datatype SkipNode of K, V:
+        key: K
+        value: V
+        forward: Array of SkipNode
+
+        constructor(key, value, level):
+            key = key
+            value = value
+            forward = new Array(level + 1)
 
 The skip list object includes data member `level` that stores the
 highest level for any node currently in the skip list. The skip list
@@ -57,20 +61,19 @@ stores a header node named `head` with `level+1` pointers where the head
 level is initially 0 and the level is set to -1 for the empty list. The
 start of the SkipList class follows:
 
-    class SkipList implements Map:
-        SkipList():
-            this.head = new SkipNode(null, null, 0)
-            this.level = -1
-            this.listSize = 0
+    datatype SkipList K to V implements Map:
+        head  = new SkipNode(null, null, 0)
+        level = -1
+        size  = 0
 
 The `get` method works as follows.
 
-    class SkipList implements Map:
+    datatype SkipList implements Map:
         ...
         // Look up the value associated with a key.
         get(key):
-            x = this.head  // Dummy header node
-            for i = this.level downto 0:  // For each level...
+            x = head  // Dummy header node
+            for i in level .. 0 (downwards):  // For each level...
                 while x.forward[i] is not null and key > x.forward[i].key:  // ...go forward
                     x = x.forward[i]  // Go one last step
             x = x.forward[0]  // Move to actual record, if it exists
@@ -92,13 +95,11 @@ have one pointer, a 25% probability that it will have two, and so on.
 The following function determines the level based on such a
 distribution.
 
-    class SkipList implements Map:
-        ...
-        randomLevel():
-            level = 0
-            while random() < 0.5:
-                level = level + 1
-            return lev
+    function randomLevel():
+        level = 0
+        while random() < 0.5:
+            level = level + 1
+        return lev
 
 Once the proper level for the node has been determined, the next step is
 to find where the node should be inserted and link it in as appropriate
@@ -108,16 +109,16 @@ Note that we build an `update` array as we progress through the skip
 list, so that we can update the pointers for the nodes that will precede
 the one being inserted.
 
-    class SkipList implements Map:
+    datatype SkipList implements Map:
         ...
         // Add a key-value pair, or update the value associated with an existing key.
         put(key, value):
-            newLevel = this.randomLevel()  // New node's level
-            if newLevel > this.level:  // If new node is deeper...
-                this.adjustHead(newLevel)  // ...adjust the header
+            newLevel = randomLevel()  // New node's level
+            if newLevel > level:  // If new node is deeper...
+                adjustHead(newLevel)  // ...adjust the header
             // Track end of level:
-            update = new Array(this.level + 1)
-            x = this.head  // Start at header node
+            update = new Array(level + 1)
+            x = head  // Start at header node
             for i = level downto 0:  // Find insert position
                 while x.forward[i] is not null and key > x.forward[i].key:
                     x = x.forward[i]
@@ -131,14 +132,14 @@ the one being inserted.
                 for i = 0 to newLevel:  // Splice into list
                     y.forward[i] = update[i].forward[i]  // Who y points to
                     update[i].forward[i] = y  // Who points to y
-                this.listSize = this.listSize + 1
+                size = size + 1
 
         adjustHead(newLevel):
-            temp = this.head
-            this.head = new SkipNode(null, null, newLevel)
-            for i = 0 to this.level:
-                this.head.forward[i] = temp.forward[i]
-            this.level = newLevel
+            temp = head
+            head = new SkipNode(null, null, newLevel)
+            for i = 0 to level:
+                head.forward[i] = temp.forward[i]
+            level = newLevel
 
 
 <inlineav id="SkipListInsertCON" src="SearchStruct/SkipListInsertCON.js" script="DataStructures/SkipList.js" name="SearchStruct/SkipListInsertCON" links="DataStructures/SkipList.css SearchStruct/SkipListInsertCON.css"/>

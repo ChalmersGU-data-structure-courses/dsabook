@@ -151,152 +151,135 @@ Trees](https://bradfieldcs.com/algos/trees/avl-trees/).
 
 Here is an implementation of AVL trees:
 
-    class AVLNode:
-        AVLNode(key, value):
-            this.key = key      // the key that are used for looking up values
-            this.value = value  // the value associated with the key
-            this.left = null    // the left subtree, initially null
-            this.right = null   // the right subtree, initially null
-            this.height = 1     // the height of this subtree
+    datatype AVLNode of K, V extends BSTNode:
+        ...key, value, left, right  // All properties of the BSTNode
+        height: Int = 1             // The height of this subtree.
 
-    class AVLMap implements Map:
-        AVLMap():
-            this.root = null
-            this.treeSize = 0
 
-        get(key):
-            // Look up the value associated with a key.
-            return this.getHelper(this.root, key)
-
-        getHelper(node, key):
-            // This is exactly the same as getHelper for BSTMap.
-            if node is null:
-                return null
-            else if key < node.key:
-                return this.getHelper(node.left, key)
-            else if key > node.key:
-                return this.getHelper(node.right, key)
-            else:
-                return node.value
+    datatype AVLMap extends BSTMap:
+        ...root, size   // All properties of the BSTMap
+        ...get(key)     // Inherited from BSTMap
 
         put(key, value):
             // Add a key-value pair, or update the value associated with an existing key.
             // This is the same as BSTMap.put, except that it rebalances the node afterwards.
-            this.root = this.putHelper(this.root, key, value)
+            root = putHelper(root, key, value)
 
         putHelper(node, key, value):
             // Recursive helper method for 'put', returns the updated node.
             if node is null:
-                this.treeSize = this.treeSize + 1
+                size = size + 1
                 return new AVLNode(key, value)
             else if key < node.key:
-                node.left = this.putHelper(node.left, key, value)
-                this.updateHeight(node)
+                node.left = putHelper(node.left, key, value)
+                updateHeight(node)
             else if key > node.key:
-                node.right = this.putHelper(node.right, key, value)
-                this.updateHeight(node)
+                node.right = putHelper(node.right, key, value)
+                updateHeight(node)
             else: // key == node.key
                 node.value = value
-            return this.rebalance(node)
+            return rebalance(node)
 
         remove(key):
             // Delete a key and its associated value.
             // This is the same as BSTMap.remove, except that it rebalances the node afterwards.
-            this.root = this.removeHelper(this.root, key)
+            root = removeHelper(root, key)
 
         removeHelper(node, key):
             // Helper method for 'remove', returns the updated node.
             if node is null:
                 return null
             else if key < node.key:
-                node.left = this.removeHelper(node.left, key)
-                this.updateHeight(node)
-                return this.rebalance(node)
+                node.left = removeHelper(node.left, key)
+                updateHeight(node)
+                return rebalance(node)
             else if key > node.key:
-                node.right = this.removeHelper(node.right, key)
-                this.updateHeight(node)
-                return this.rebalance(node)
+                node.right = removeHelper(node.right, key)
+                updateHeight(node)
+                return rebalance(node)
             else: // key == node.key
                 if node.left is null:
-                    this.treeSize = this.treeSize - 1
+                    size = size - 1
                     return node.right
                 else if node.right is null:
-                    this.treeSize = this.treeSize - 1
+                    size = size - 1
                     return node.left
                 else:
-                    predecessor = this.largestNode(node.left)
+                    predecessor = largestNode(node.left)
                     old_value = node.value
                     node.key = predecessor.key
                     node.value = predecessor.value
-                    node.left = this.removeHelper(node.left, predecessor.key)
-                    this.updateHeight(node)
-                    return this.rebalance(node)
+                    node.left = removeHelper(node.left, predecessor.key)
+                    updateHeight(node)
+                    return rebalance(node)
 
-        getHeight(node):
-            // Return the height of a tree node, also works if the node is null.
-            if node is null:
-                return 0
-            else:
-                return node.height
+Here are some helper functions:
 
-        updateHeight(node):
-            // Recompute the value of the height of a tree node.
-            // Must be called every time the height could change.
-            node.height = 1 + max(this.getHeight(node.left), this.getHeight(node.right))
+    getHeight(node):
+        // Return the height of a tree node, also works if the node is null.
+        if node is null:
+            return 0
+        else:
+            return node.height
 
-        heightDiff(node):
-            // Return the height difference of a node: left height - right height.
-            return this.getHeight(node.left) - this.getHeight(node.right)
+    updateHeight(node):
+        // Recompute the value of the height of a tree node.
+        // Must be called every time the height could change.
+        node.height = 1 + max(getHeight(node.left), getHeight(node.right))
 
-        largestNode(node):
-            // Find the descendant node having the largest key.
-            while node.right is not null:
-                node = node.right
+    heightDiff(node):
+        // Return the height difference of a node: left height - right height.
+        return getHeight(node.left) - getHeight(node.right)
+
+    largestNode(node):
+        // Find the descendant node having the largest key.
+        while node.right is not null:
+            node = node.right
+        return node
+
+    rebalance(node):
+        if node is null:
+            return null
+        diff = heightDiff(node)
+        if diff > 1:  // Left-leaning
+            leftDiff = heightDiff(node.left)
+            if leftDiff == -1:  // Left-right: convert to left-left
+                node.left = rotateLeft(node.left)
+                updateHeight(node)
+            return rotateRight(node)
+        else if diff < -1:  // Right-leaning
+            rightDiff = heightDiff(node.right)
+            if rightDiff == 1:  // Right-left: convert to right-right
+                node.right = rotateRight(node.right)
+                updateHeight(node)
+            return rotateLeft(node)
+        else:
             return node
 
-        rebalance(node):
-            if node is null:
-                return null
-            diff = this.heightDiff(node)
-            if diff > 1:  // Left-leaning
-                leftDiff = this.heightDiff(node.left)
-                if leftDiff == -1:  // Left-right: convert to left-left
-                    node.left = this.rotateLeft(node.left)
-                    this.updateHeight(node)
-                return this.rotateRight(node)
-            else if diff < -1:  // Right-leaning
-                rightDiff = this.heightDiff(node.right)
-                if rightDiff == 1:  // Right-left: convert to right-right
-                    node.right = this.rotateRight(node.right)
-                    this.updateHeight(node)
-                return this.rotateLeft(node)
-            else:
-                return node
+    rotateLeft(x):
+        // Left rotation.
+        ("""      x                 y
+                    / \               / \
+                A   y     ===>    x   C
+                    / \           / \
+                    B   C         A   B         """)
+        // Variables are named according to the picture above.
+        y = x.right
+        B = y.left
+        x.right = B
+        y.left = x
+        return y
 
-        rotateLeft(x):
-            // Left rotation.
-            ("""      x                 y
-                     / \               / \
-                    A   y     ===>    x   C
-                       / \           / \
-                      B   C         A   B         """)
-            // Variables are named according to the picture above.
-            y = x.right
-            B = y.left
-            x.right = B
-            y.left = x
-            return y
-
-        rotateRight(x):
-            // Right rotation.
-            ("""       x              y
-                      / \            / \
-                     y   C   ===>   A   x
-                    / \                / \
-                   A   B              B   C       """)
-            // Variables are named according to the picture above.
-            y = x.left
-            B = y.right
-            x.left = B
-            y.right = x
-            return y
+    rotateRight(x):
+        // Right rotation.
+        ("""       x              y
+                    / \            / \
+                    y   C   ===>   A   x
+                / \                / \
+                A   B              B   C       """)
+        // Variables are named according to the picture above.
+        y = x.left
+        B = y.right
+        x.left = B
+        y.right = x
+        return y

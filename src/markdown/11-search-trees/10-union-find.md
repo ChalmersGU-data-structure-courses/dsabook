@@ -69,23 +69,25 @@ trees. This makes it easy to merge trees together with UNION operations.
 Here is an implementation for parent pointer trees and the UNION/FIND process.
 
     // General Tree implementation for UNION/FIND
-    class ParentPointerTree:
-        ParentPointerTree(size):
+    datatype ParentPointerTree:
+        array: Array of Int
+
+        constructor(size):
             // Each node is its own root to start
-            this.array = new Array(size)
-            for i = 0 to size-1:
-                this.array[i] = -1  // We use -1 to say that this is a root
+            array = new Array(size)
+            for i in 0 .. size-1:
+                array[i] = -1  // We use -1 to say that this is a root
 
         // Merge two subtrees if they are different:
-        UNION(a, b):
-            root1 = this.FIND(a)  // Find root of node a
-            root2 = this.FIND(b)  // Find root of node b
-            if root1 != root2:    // Merge two trees
-                this.array[root1] = root2
+        UNION(a: Int, b: Int):
+            root1 = FIND(a)    // Find root of node a
+            root2 = FIND(b)    // Find root of node b
+            if root1 != root2: // Merge two trees
+                array[root1] = root2
 
         // Return the root of current's tree
-        FIND(current):
-            while this.array[current] != -1:
+        FIND(current: Int) -> Int:
+            while array[current] != -1:
                 current = self.array[current]
             return current  // Now we are at the root
 
@@ -208,18 +210,18 @@ tree).
 
 Here is an implementation for the UNION method when using weighted union.
 
-    class ParentPointerTree:
+    datatype ParentPointerTree:
         ...
         UNION(a, b):
-            root1 = this.FIND(a)   // Find root of node a
-            root2 = this.FIND(b)   // Find root of node b
-            if root1 != root2:     // Merge with weighted union
-                if this.weights[root2] > this.weights[root1]:
-                    this.array[root1] = root2
-                    this.weights[root2] = this.weights[root2] + this.weights[root1]
+            root1 = FIND(a)     // Find root of node a
+            root2 = FIND(b)     // Find root of node b
+            if root1 != root2:  // Merge with weighted union
+                if weights[root2] > weights[root1]:
+                    array[root1] = root2
+                    weights[root2] = weights[root2] + weights[root1]
                 else:
-                    this.array[root2] = root1
-                    this.weights[root1] = this.weights[root1] + this.weights[root2]
+                    array[root2] = root1
+                    weights[root1] = weights[root1] + weights[root2]
 
 
 The following slideshow illustrates a series of UNION operations with
@@ -242,15 +244,15 @@ Alternatively, a recursive algorithm can be implemented as follows. This
 version of `FIND` not only returns the root of the current node, but
 also makes all ancestors of the current node point to the root.
 
-    class ParentPointerTree:
+    datatype ParentPointerTree:
         ...
         // Return the root of current's tree with path compression
         FIND(current):
-            if this.array[current] == -1:
+            if array[current] == -1:
                 return current  // Base case: we are at the root
             else:
-                this.array[current] = this.FIND(this.array[current])
-                return this.array[current]
+                array[current] = FIND(array[current])
+                return array[current]
 
 
 The following slide show illustrates path compression using the last

@@ -89,10 +89,9 @@ that it follows the **List** ADT, as described in the section about
 [the List ADT].
 
     // General tree nodes
-    class GTNode:
-        GTNode(elem, children):
-            this.elem = elem          // This is the value, just as for binary nodes
-            this.children = children  // This is a List of GTNodes
+    datatype GTNode of T:
+        elem: T                   // This is the value, just as for binary nodes
+        children: List of GTNode  // All children of the node
 
 
 ### Traversing a general tree
