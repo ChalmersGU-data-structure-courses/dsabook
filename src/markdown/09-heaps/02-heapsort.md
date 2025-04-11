@@ -53,19 +53,19 @@ A complete implementation is as follows.
 
 
     function heapsort(A):
-        // Convert the array to a heap:
-        buildHeap(A)
+        N = A.size
 
-        // Repeatedly find and remove the minimum element
-        for heapsize in A.size-1, A.size-2 .. 0:
+        // First, convert the array to a max heap.
+        // Go backwards from the first non-leaf, sifting down each one.
+        for i in N/2-1, N/2-2 .. 0:
+            siftDown(A, N, i)
+
+        // Then, repeatedly remove each maximum element from the heap,
+        // and put it just after the heap.
+        for heapsize in N-1, N-2 .. 0:
             A[0], A[heapsize] = A[heapsize], A[0]
             siftDown(A, heapsize, 0)
 
-    // Go backwards from the first non-leaf, sifting down each one
-    function buildHeap(a):
-        heapsize = A.size
-        for i in heapsize/2-1, heapsize/2-2 .. 0:
-            siftDown(A, heapsize, i)
 
     // Standard sift-down method for max heaps
     function siftDown(A, heapsize, i):
