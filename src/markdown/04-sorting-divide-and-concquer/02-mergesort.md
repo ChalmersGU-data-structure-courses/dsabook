@@ -21,7 +21,7 @@ concept, it is relatively difficult to implement in practice. Here is a
 pseudocode sketch of Mergesort:
 
     function mergeSort(A):
-        if A.size() <= 1:
+        if A.size <= 1:
             return A
         L1 = half of A
         L2 = other half of A

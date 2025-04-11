@@ -182,8 +182,8 @@ In our pseudocode, we use the following syntax to declare an array, retrieve an 
     // Make a copy of the input array, and increment every value in the copied array.
     // Return the copied array.
     function addOne(input: Array of Int) -> Array of Int:
-        output = new Array(input.size()) of Int
-        for i in 0 .. input.size()-1:
+        output = new Array(input.size) of Int
+        for i in 0 .. input.size-1:
             output[i] = input[i] + 1
         return output
 
@@ -191,8 +191,7 @@ This example highlights several key features of arrays.
 
 - First, our pseudocode follows zero-based indexing, meaning the first element is at index 0, the second at index 1, and so on.
   The last element is located at an index equal to the array’s size minus one.
-- The size of an array can be accessed using the `size()` method.
-  Note that although this is done by a function call, the actual size is stored alongside the array and does not need to be computed manually.
+- The size of an array can be accessed using the `size` property.
 - To retrieve an element from an array, we use square bracket notation. For instance, `input[2]` retrieves the third element of the input array.
 - Similarly, updating an element follows the same notation: `input[2] = 10` assigns a new value to the third element.
 
@@ -447,12 +446,12 @@ We can of course also define some methods, or internal functions, that operate o
             return left is null and right is null
 
         // Return the number of nodes, including myself.
-        size() -> Int:
+        treeSize() -> Int:
             n = 1
             if left is not null:
-                n = n + left.size()
+                n = n + left.treeSize()
             if right is not null:
-                n = n + right.size()
+                n = n + right.treeSize()
             return n
 
 Note that in the last function we have to check that the children actually are tree nodes before calculating their size.

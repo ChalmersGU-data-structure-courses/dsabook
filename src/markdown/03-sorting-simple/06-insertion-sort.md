@@ -14,10 +14,10 @@ This simple approach is the inspiration for our third sorting algorithm, called 
 Insertion sort iterates through a list of records. For each iteration,
 the current record is inserted in turn at the correct position within a
 sorted list composed of those records already processed. Here is an
-implementation. The input is an array named `A` that stores $n$ records.
+implementation. The input is an array named `A` that stores $N$ records.
 
     function insertionSort(A):
-        N = A.size()
+        N = A.size
         for i in 1 .. N-1:
             // Move the i'th element to its correct position.
             j = i

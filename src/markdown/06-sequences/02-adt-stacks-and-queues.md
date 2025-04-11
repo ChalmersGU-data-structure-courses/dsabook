@@ -158,7 +158,7 @@ following non-recursive version of the factorial function.
             S.push(n)
             n = n - 1
         result = 1
-        while S.size() > 0:
+        while S.size > 0:
             result = result * S.pop()
         return result
 
@@ -216,7 +216,7 @@ stored on the stack.
     function towersStack(n, start, goal, temp):
         S = new LinkedStack()
         S.push(new Task(TOH, n, start, goal, temp))
-        while S.size() > 0:
+        while S.size > 0:
             it = S.pop()          // Get next task
             if it.oper == MOVE:   // Do a move
                 move(it.start, it.goal)

@@ -156,7 +156,7 @@ be seen here:
         edgeCount: Int = 0
 
         vertexCount():
-            return vertices.size()
+            return vertices.size
 
         addVertex(v):
             vertices.add(v)
@@ -168,9 +168,9 @@ be seen here:
             if outgoing is null:
                 outgoing = new Set()
                 edgesMap.put(e.start, outgoing)
-            oldSize = outgoing.size()
+            oldSize = outgoing.size
             outgoing.add(e)
-            if outgoing.size() > oldSize:
+            if outgoing.size > oldSize:
                 edgeCount = edgeCount + 1
 
         vertices():

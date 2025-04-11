@@ -18,8 +18,13 @@ through all elements, one at the time (i.e., it is Iterable).
 
     interface Collection of T:
         // We assume that we can iterate over the elements in the collection, using a for loop.
-        isEmpty() -> Bool  // Returns true if the collection is empty.
-        size() -> Int      // Returns the number of elements in this collection.
+
+        // The number of elements in this collection.
+        size: Int
+
+        // Returns true if the collection is empty.
+        isEmpty() -> Bool:
+            return size == 0
 
 Note that this very interface will not be implemented as it is, but
 instead we will use this as a base interface that we extend in different

@@ -71,12 +71,12 @@ sort a list of items:
 
 Here is an implementation of this algorithm in code:
 
-    function pqSort(array):
+    function pqSort(A):
         pq = new PriorityQueue()
-        for each item in array:
+        for each item in A:
             pq.add(item)
-        for i in 0 .. array.size()-1:
-            array[i] = pq.removeMin()
+        for i in 0 .. A.size-1:
+            A[i] = pq.removeMin()
 
 What is the time complexity of this algorithm? Well, for an input list
 of size $n$, the algorithm calls `add` $n$ times and `removeMin` $n$
@@ -146,7 +146,7 @@ transaction. Here it is in code:
             pq.add(transaction)
             // If the priority queue grows to 101 transactions,
             // cut it down to 100 by removing the smallest-valued one.
-            if pq.size() > 100:
+            if pq.size > 100:
                 pq.removeMin()
 
         // Return the top 100 transactions.

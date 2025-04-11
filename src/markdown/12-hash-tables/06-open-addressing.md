@@ -54,7 +54,7 @@ Finding a good table index for a key is done in the same way as for
         ...
         hash(key):
             h = key.hashCode() & 0x7fffffff
-            return h % keys.size()
+            return h % keys.size
 
 ### Collision resolution
 
@@ -75,8 +75,8 @@ as follows.
         ...
         hashAndProbe(key):
             home = hash(key)
-            for i in 0 .. keys.size()-1:
-                pos = (home + probe(key, i)) % keys.size()
+            for i in 0 .. keys.size-1:
+                pos = (home + probe(key, i)) % keys.size
                 k = keys[pos]
                 if k is null or k == key:
                     return pos

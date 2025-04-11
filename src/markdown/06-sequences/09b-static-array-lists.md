@@ -87,7 +87,7 @@ elements, which is $O(n)$.
     datatype ArrayList implements List:
         ...
         add(i, x):
-            // precondition: 0 <= i <= size < internalArray.size()
+            // precondition: 0 <= i <= size < internalArray.size
             size = size + 1
             for k in size-1, size-2 .. i+1:
                 internalArray[k] = internalArray[k-1]

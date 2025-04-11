@@ -82,7 +82,7 @@ truncate them to 31 bits as we do here).
         ...
         hash(key):
             h = key.hashCode() & 0x7fffffff
-            return h % bins.size()
+            return h % bins.size
 
 ### The hash code never changes
 

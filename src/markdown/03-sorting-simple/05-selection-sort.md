@@ -24,12 +24,12 @@ The $i$'th pass of Selection sort "selects" the $i$'th smallest key in the array
 In other words, Selection sort first finds the smallest key in an unsorted list, then the next smallest, and so on.
 Its unique feature is that there are few record swaps, much fewer than Bubble sort.
 To find the next-smallest key value requires searching through the entire unsorted portion of the array, but only one swap is required to put the record into place.
-Thus, the total number of swaps required will be $n-1$ (we get the last record in place "for free").
+Thus, the total number of swaps required will be $N-1$ (we get the last record in place "for free").
 
 Here is an implementation for Selection sort.
 
     function selectionSort(A):
-        N = A.size()
+        N = A.size
         for i in 0 .. N-1:               // Select i'th smallest element
             minIndex = i                 // Current smallest index
             for j in i+1 .. N-1:         // Find the smallest value

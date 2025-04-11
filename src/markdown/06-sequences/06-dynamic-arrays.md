@@ -37,8 +37,8 @@ So, how large should the new internal array be? For now, let's
 **double the size of the internal array** when we need to resize,
 which means that we add the following if-clause to the `push` method:
 
-        if size >= internalArray.size()
-            resizeArray(internalArray.size() * 2)
+        if size >= internalArray.size
+            resizeArray(internalArray.size * 2)
 
 That's the only difference from the `push` method from **ArrayStack** from earlier.
 So the dynamic `push` method will look like
@@ -47,8 +47,8 @@ So the dynamic `push` method will look like
         ...
         push(x):
             // precondition: 0 <= i <= size
-            if size >= internalArray.size()
-                resizeArray(internalArray.size() * 2)
+            if size >= internalArray.size
+                resizeArray(internalArray.size * 2)
             internalArray[size] = x
             size = size + 1
 
@@ -94,8 +94,8 @@ This means that the program ought to take *linear time*.
 What happens if we only grow the internal array by 1 element when we
 resize it?
 
-    if size >= internalArray.size()
-        resizeArray(internalArray.size() + 1)
+    if size >= internalArray.size
+        resizeArray(internalArray.size + 1)
 
 Every time we call `push`, the internal array will be resized. Resizing
 the array takes linear time, because if the internal array has size $n$,
@@ -276,7 +276,7 @@ one for lists and queues.
         resizeArray(newCapacity):
             newArray = new Array(newCapacity)
             for i in 0 .. size-1:
-                j = (i + front) % internalArray.size()
+                j = (i + front) % internalArray.size
                 newArray[i] = internalArray[j]
             internalArray = newArray
             front = 0
@@ -320,7 +320,7 @@ shrink the internal array! E.g., we can shrink the array (i.e., halve
 it), when it is only 1/3 full. So we can add the following lines to the
 end of the `remove` method:
 
-    if size <= internalArray.size() * 1/3:
+    if size <= internalArray.size * 1/3:
         resizeArray(internalArray.size * 1/2)
 
 That's the only difference from the `ArrayStack.remove` method.
@@ -337,8 +337,8 @@ before. The only thing that matters is that the minimum load factor
             size = size - 1
             x = internalArray[size]
             internalArray[size] = null  // For garbage collection
-            if size <= internalArray.size() * 1/3:
-                resizeArray(internalArray.size() * 1/2)
+            if size <= internalArray.size * 1/3:
+                resizeArray(internalArray.size * 1/2)
             return x
 
 |

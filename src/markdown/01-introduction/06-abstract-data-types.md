@@ -296,8 +296,13 @@ possible.
 
     interface Collection of T:
         // We assume that we can iterate over the elements in the collection, using a for loop.
-        isEmpty() -> Bool  // Returns true if the collection is empty.
-        size() -> Int      // Returns the number of elements in this collection.
+
+        // The number of elements in this collection.
+        size: Int
+
+        // Returns true if the collection is empty.
+        isEmpty() -> Bool:
+            return size == 0
 
 #### Use case(s)
 

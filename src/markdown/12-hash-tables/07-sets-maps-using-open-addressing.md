@@ -45,7 +45,7 @@ Setting a value for a key into the hash map works like
             old = values[i]
             values[i] = value
             if loadFactor() > MAX_LOAD_FACTOR:
-                resizeTable(keys.size() * MULTIPLIER)
+                resizeTable(keys.size * MULTIPLIER)
             return old
 
 

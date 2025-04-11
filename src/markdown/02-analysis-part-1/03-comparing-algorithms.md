@@ -102,12 +102,12 @@ illustrated by the following function:
     // Return position of largest value in integer array A
     function largest(A):
         currlarge = 0                 // Position of largest element seen.
-        for i in 1 .. A.size()-1:     // For each element,
+        for i in 1 .. A.size-1:     // For each element,
             if A[currlarge] < A[i]:   // if A[i] is larger,
                 currlarge = i         // remember its position.
         return currlarge              // Return largest position
 
-Here, the size of the problem is `A.size()`, the number of integers
+Here, the size of the problem is `A.size`, the number of integers
 stored in array `A`. The basic operation is to compare an integer's
 value to that of the largest value seen so far. It is reasonable to
 assume that it takes a fixed amount of time to do one such comparison,

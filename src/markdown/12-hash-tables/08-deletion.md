@@ -89,8 +89,8 @@ tombstones.
             values[i] = null
             size = size - 1
             deleted = deleted + 1
-            if size < MIN_LOAD_FACTOR * keys.size():
-                resizeTable(keys.size() / MULTIPLIER)
+            if size < MIN_LOAD_FACTOR * keys.size:
+                resizeTable(keys.size / MULTIPLIER)
             return removed
 
 

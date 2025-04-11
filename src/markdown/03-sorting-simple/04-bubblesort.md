@@ -27,7 +27,7 @@ records, looking at one less record toward the end than did the
 preceding pass. Here is an implementation.
 
     function bubbleSort(A):
-        N = A.size()
+        N = A.size
         for i in 0 .. N-2:
             // Bubble up the i'th element
             for j in 1 .. N-i-1:

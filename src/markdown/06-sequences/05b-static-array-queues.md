@@ -69,7 +69,7 @@ When enqueueing, we increase the `rear` pointer (modulo the size of the internal
     datatype ArrayQueue implements Queue:
         ...
         enqueue(x):
-            rear = (rear + 1) % internalArray.size()  // Circular increment
+            rear = (rear + 1) % internalArray.size  // Circular increment
             internalArray[rear] = x
             size = size + 1
 
@@ -84,7 +84,7 @@ When dequeueing, we increase the `front` pointer (modulo the size of the interna
             // precondition: size > 0
             x = internalArray[front]
             internalArray[front] = null  // For garbage collection
-            front = (front + 1) % internalArray.size()  // Circular increment
+            front = (front + 1) % internalArray.size  // Circular increment
             size = size - 1
             return x
 

@@ -133,11 +133,10 @@ Other methods can be deferred to the underlying list.
 
     class LinkedMap implements Map:
         ...
-        isEmpty():
-            return internalList.isEmpty()
-
         size():
-            return internalList.size()
+            return internalList.size
+
+(Note that since the number of entries can vary, we need `size` to be a method and not a property.)
 
 
 #### How to remove keys from the map

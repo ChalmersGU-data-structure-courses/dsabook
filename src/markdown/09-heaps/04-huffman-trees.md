@@ -162,7 +162,7 @@ Here is the implementation for the tree-building process.
             huffHeap.add(new HuffTree(char, null, null, freq))
 
         // While there are at least two trees left on heap
-        while huffHeap.size() > 1:
+        while huffHeap.size > 1:
             // Remove the two minimum ones
             t1 = huffHeap.removeMin()
             t2 = huffHeap.removeMin()

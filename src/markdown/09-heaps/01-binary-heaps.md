@@ -93,22 +93,22 @@ that will resize automatically when the number of elements change.
 
         // Return the minimum element, without removing it.
         getMin():
-            // precondition: heap.size() > 0
+            // precondition: heap.size > 0
             return heap[0]
 
         // Add an element to the priority queue.
         add(elem):
-            i = heap.size()
+            i = heap.size
             heap.add(i, elem)  // Add the element at end of the heap.
             siftUp(i)          // Put it in its correct place.
 
         // Remove and return the minimum element.
         removeMin():
-            // precondition: heap.size() > 0
+            // precondition: heap.size > 0
             removed = heap[0]
-            i = heap.size() - 1
+            i = heap.size - 1
             last = heap.remove(i)  // Find and remove the last element.
-            if heap.size() > 0:
+            if heap.size > 0:
                 heap[0] = last     // Replace the root with the last element.
                 siftDown(0)        // Put the new root in its correct place.
             return removed
@@ -118,7 +118,7 @@ that will resize automatically when the number of elements change.
             while not isLeaf(pos):
                 child = getLeftChild(pos)
                 right = getRightChild(pos)  // or: right = child + 1
-                if right < heap.size() and heap[right] < heap[child]:
+                if right < heap.size and heap[right] < heap[child]:
                     child = right   // 'child' is now the index of the child with smaller value
                 if heap[child] >= heap[pos]:
                     return pos
@@ -138,7 +138,7 @@ that will resize automatically when the number of elements change.
 
         // Return true if pos is a leaf position.
         isLeaf(pos):
-            return pos >= heap.size() / 2
+            return pos >= heap.size / 2
 
         // Return the position for the left child of the given node.
         getLeftChild(pos):

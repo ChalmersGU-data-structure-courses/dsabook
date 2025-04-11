@@ -18,8 +18,7 @@ maps. We don't have to specify what kind of maps just yet, but we will
 use a simple [linked list map](#implementing-maps-using-lists)
 because the idea is that each bin will only contain a couple
 of entries. We also have to remember the collected size of the map,
-otherwise we would have to calculate a sum every time `size()` or
-`isEmpty()` would be called.
+otherwise we would have to calculate a sum every time we want to know the size.
 
 To initialise the table, we first create the internal array of the
 initial minimum capacity, and then let every array cell be a new empty
@@ -50,12 +49,12 @@ make the internal table larger by a factor.
         ...
         put(key, value):
             i = hash(key)
-            oldSize = bins[i].size()
+            oldSize = bins[i].size
             bins[i].put(key, value)
-            if bins[i].size() > oldSize:
+            if bins[i].size > oldSize:
                 size = size + 1
                 if loadFactor() > MAX_LOAD_FACTOR:
-                    resizeTable(bins.size() * MULTIPLIER)
+                    resizeTable(bins.size * MULTIPLIER)
             return old
 
 To remove a value, we do the same: find the underlying map for the key,
@@ -68,12 +67,12 @@ factor.
         ...
         remove(key):
             i = hash(key)
-            oldSize = bins[i].size()
+            oldSize = bins[i].size
             bins[i].remove(key)
-            if bins[i].size() < oldSize:
+            if bins[i].size < oldSize:
                 size = size - 1
                 if loadFactor() < MIN_LOAD_FACTOR:
-                    resizeTable(bins.size() / MULTIPLIER)
+                    resizeTable(bins.size / MULTIPLIER)
             return removed
 
 The constants for min and max load factors, and the resizing factor, are
@@ -96,7 +95,7 @@ The load factor $N/M$ is easy to calculate.
     datatype SeparateChainingHashMap implements Map:
         ...
         loadFactor():
-            return size / bins.size()
+            return size / bins.size
 
 
 ### Resizing the internal table
