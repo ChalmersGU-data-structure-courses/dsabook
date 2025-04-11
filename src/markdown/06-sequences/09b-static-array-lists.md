@@ -89,7 +89,7 @@ elements, which is $O(n)$.
         add(i, x):
             // precondition: 0 <= i <= size < internalArray.size()
             size = size + 1
-            for k in size-1 .. i+1 (downwards):
+            for k in size-1, size-2 .. i+1:
                 internalArray[k] = internalArray[k-1]
             internalArray[i] = x
 

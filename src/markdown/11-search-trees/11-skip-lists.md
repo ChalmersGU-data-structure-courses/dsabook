@@ -73,7 +73,7 @@ The `get` method works as follows.
         // Look up the value associated with a key.
         get(key):
             x = head  // Dummy header node
-            for i in level .. 0 (downwards):  // For each level...
+            for i in level, level-1 .. 0:  // For each level...
                 while x.forward[i] is not null and key > x.forward[i].key:  // ...go forward
                     x = x.forward[i]  // Go one last step
             x = x.forward[0]  // Move to actual record, if it exists

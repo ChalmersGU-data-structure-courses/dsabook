@@ -57,14 +57,14 @@ A complete implementation is as follows.
         buildHeap(A)
 
         // Repeatedly find and remove the minimum element
-        for heapsize in A.size()-1 .. 0 (downwards):
+        for heapsize in A.size()-1, A.size()-2 .. 0:
             A[0], A[heapsize] = A[heapsize], A[0]
             siftDown(A, heapsize, 0)
 
     // Go backwards from the first non-leaf, sifting down each one
     function buildHeap(a):
         heapsize = A.size()
-        for i in heapsize/2-1 .. 0 (downwards):
+        for i in heapsize/2-1, heapsize/2-2 .. 0:
             siftDown(A, heapsize, i)
 
     // Standard sift-down method for max heaps
