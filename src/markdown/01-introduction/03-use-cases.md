@@ -92,5 +92,30 @@ and deletion of data records, and range queries. However, a simple
 and then never changed, such as an atlas accessed from a website.
 
 
-### Example: [Something something]
+### Example: Search engines
+
+The World Wide Web (WWW), also called the Internet, has revolutionized the way we access and utilize information. 
+With just a few clicks, you can browse through an enormous amount of websites containing texts, videos, and images about many different topics.
+The sheer scale of the Internet's content is astounding, with millions of pages and countless pieces of data at our fingertips.
+However, this vast collection of information also presents many challenges, since it can be overwhelming to sift through the numerous sources available online.
+It is nearly impossible to find the address of a website on your own.
+To find a website with relevant information, we can use a so called _search engine_. 
+Search engines, like Google, Bing, or DuckDuckGo, categorise the internet and make it possible to search for relevant web-pages.
+This categorisation is called _indexing_.
+
+Now imagine you are building a search engine that indexes billions of web pages.
+Each page is represented by a particular address (its URL) and contains a list of relevant keywords. 
+When a user submits a query, containing a number terms, your search engine must quickly find all the matching web pages to return in the results.
+In this scenario, a simple list would not suffice as an efficient way to store and retrieve data.
+The sheer volume of web pages (billions!) makes it impractical to sequentially scan through each page for every search query. 
+Even if inspecting a single page only cost a millisecond, going through all web pages will take years.
+We need clever data structures and algorithms to handle such a large volume of web pages.
+
+simplication: search through a list
+
+sort the list, binary search
+
+down to just a few comparison
+
+In real life, much more complex: case sensitive, relevance, conjunctions, etc.
 
