@@ -6,19 +6,19 @@ $(document).ready(function() {
   var av_name = "BsearchDandCRecurCON";
 
   var interpret = {
-    "sc1": "To find the cost of binary search in the worst case, we can model the running time as a recurrence and then find the closed-form solution. Each recursive call to <tt>binarySearch</tt> cuts the size of the array approximately in half, so we can model the worst-case cost as follows, assuming for simplicity that <em>n</em> is a power of two.<br><em>&Theta;(n) = &Theta;(n/2) + 1, &Theta;(1) = 1</em>",
+    "sc1": "To find the cost of binary search in the worst case, we can model the running time as a recurrence and then find the closed-form solution. Each recursive call to <tt>binarySearch</tt> cuts the size of the array approximately in half, so we can model the worst-case cost as follows, assuming for simplicity that <em>n</em> is a power of two.<br><em>O(n) = O(n/2) + 1, O(1) = 1</em>",
     "sc2.1": "If we expand the recurrence, we will find that we can do so only <em>log(n)</em> times before we reach the base case, and each expansion adds one to the cost. For a problem of size <em>n</em>, we have <em>1</em> unit of work plus the amount of work required for one subproblem of size <em>n/2</em>",
-    "sc2.2": "<br> <em>&Theta;(n) = 1 + &Theta;(n/2)</em>",
+    "sc2.2": "<br> <em>O(n) = 1 + O(n/2)</em>",
     "sc3.1": "For a problem of size <em>n/2</em>, we have <em>1</em> unit of work plus the amount of work required for one subproblem of size <em>n/4</em>",
-    "sc3.2": "<br> <em>&Theta;(n) = 1 + (1 + &Theta;(n/4))</em>",
+    "sc3.2": "<br> <em>O(n) = 1 + (1 + O(n/4))</em>",
     "sc4.1": "For a problem of size <em>n/4</em>, we have <em>1</em> unit of work plus the amount of work required for one subproblem of size <em>n/8</em>",
-    "sc4.2": "<br> <em>&Theta;(n) = 1 + (1 + (1 + &Theta;(n/8)))</em>",
+    "sc4.2": "<br> <em>O(n) = 1 + (1 + (1 + O(n/8)))</em>",
     "sc5.1": "For a problem of size <em>n/8</em>, we have <em>1</em> unit of work plus the amount of work required for one subproblem of size <em>n/16</em>",
-    "sc5.2": "<br> <em>&Theta;(n) = 1 + (1 + (1 + (1 + &Theta;(n/16)))</em>",
+    "sc5.2": "<br> <em>O(n) = 1 + (1 + (1 + (1 + O(n/16)))</em>",
     "sc6.1": "This pattern will continue till we reach a subproblem of size <em>1</em>",
-    "sc6.2": "<br> <em>&Theta;(n) = 1 + (1 + (1 + (1 + (1 + (...))))</em>",
-    "sc7": "Thus, the closed form solution of <em>&Theta;(n) = &Theta;(n/2) + 1</em> can be modeled by the summation <em>&Sigma;<sub>i&lt;log(n)</sub> 1</em>",
-    "sc8": "Finally, we have the closed form solution of <em>&Theta;(n) = &Theta;(n/2) + 1; &Theta;(1) = 1</em> evaluates to <em>log(n) + 1</em> or <em>&Theta;(log(n))</em>"
+    "sc6.2": "<br> <em>O(n) = 1 + (1 + (1 + (1 + (1 + (...))))</em>",
+    "sc7": "Thus, the closed form solution of <em>O(n) = O(n/2) + 1</em> can be modeled by the summation <em>&Sigma;<sub>i&lt;log(n)</sub> 1</em>",
+    "sc8": "Finally, we have the closed form solution of <em>O(n) = O(n/2) + 1; O(1) = 1</em> evaluates to <em>log(n) + 1</em> or <em>O(log(n))</em>"
   };
 
   var av;
