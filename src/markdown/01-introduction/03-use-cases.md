@@ -94,28 +94,48 @@ and then never changed, such as an atlas accessed from a website.
 
 ### Example: Search engines
 
-The World Wide Web (WWW), also called the Internet, has revolutionized the way we access and utilize information. 
-With just a few clicks, you can browse through an enormous amount of websites containing texts, videos, and images about many different topics.
-The sheer scale of the Internet's content is astounding, with millions of pages and countless pieces of data at our fingertips.
-However, this vast collection of information also presents many challenges, since it can be overwhelming to sift through the numerous sources available online.
-It is nearly impossible to find the address of a website on your own.
-To find a website with relevant information, we can use a so called _search engine_. 
-Search engines, like Google, Bing, or DuckDuckGo, categorise the internet and make it possible to search for relevant web-pages.
-This categorisation is called _indexing_.
+The World Wide Web (WWW), often referred to as the Internet, has completely changed how we access and use information.
+With just a few clicks, we can explore an enormous number of websites filled with text, videos, and images on a wide variety of topics.
+The amount of content available is staggering, with millions of pages and an endless stream of data at our fingertips.
+But this vast amount of information also presents challenges.
+It can be overwhelming to sort through all the sources available online.
+Finding the exact address of a website on your own is nearly impossible.
 
-Now imagine you are building a search engine that indexes billions of web pages.
-Each page is represented by a particular address (its URL) and contains a list of relevant keywords. 
-When a user submits a query, containing a number terms, your search engine must quickly find all the matching web pages to return in the results.
-In this scenario, a simple list would not suffice as an efficient way to store and retrieve data.
-The sheer volume of web pages (billions!) makes it impractical to sequentially scan through each page for every search query. 
-Even if inspecting a single page only cost a millisecond, going through all web pages will take years.
-We need clever data structures and algorithms to handle such a large volume of web pages.
+This is where search engines come in.
+Search engines like Google, Bing, and DuckDuckGo help us find the information we need by organizing the Internet and making it searchable.
+This process of organizing information is called indexing.
 
-simplication: search through a list
+Most of us use search engines every day without thinking about the incredible job they do.
+The image below shows the results of a search for “binary search”:
 
-sort the list, binary search
+![Google blabla](resources/images/Google.png){ width=50% }
 
-down to just a few comparison
+It is already impressive to be shown a list of relevant web pages, but it is even more astonishing that, in this case, Google found 331 million results in just _0.23 seconds_.
 
-In real life, much more complex: case sensitive, relevance, conjunctions, etc.
+Now imagine you are designing a search engine that must index billions of web pages.
+Each page has a unique address, called a Uniform Resource Locator (URL), and is associated with a set of keywords.
+When a user submits a search query, the engine must quickly find all the relevant pages.
+A simple list is not an efficient way to store and retrieve this information.
+With billions of pages, it is not practical to check each one in order.
+Even if looking at a single page takes only a millisecond, going through them all would take years.
+To handle this challenge, we need smart ways to store and search through the data.
 
+Let’s consider a simpler version of this problem.
+Suppose we use an array that connects keywords to lists of related web pages.
+A basic approach would be to go through the array one element at a time until we find the keyword.
+This works, but it becomes very slow as the array grows larger.
+To improve efficiency, we can _sort_ the array of keywords alphabetically.
+Then, instead of scanning from the beginning, we start in the middle of the array and compare the search word with the keyword at that position:
+
+- If they match, we return the corresponding list of web pages.
+- If the search word is smaller, we continue the search in the lower half of the array.
+- If it’s larger, we search in the upper half.
+
+Each step cuts the number of possibilities in half.
+So, how many times can we divide the array in half before we narrow it down to one element? 
+This is a logarithmic process, meaning we divide the search space in half again and again.
+With an array of one billion keywords, we would need only about 39 steps to find the right one.
+
+This model is simplified.
+In reality, search engines do much more than just match keywords.
+They also rank pages by relevance and take many details into account, such as whether letters are uppercase or lowercase, and whether the user is combining terms with “and” or “or”.
