@@ -1,181 +1,54 @@
 
-## Abstract data types, ADT
+## Abstract data types
 
 ::: TODO
-- Prio 1: write sections Ordered seqs, Sets&maps, Graphs
-- Prio 1: nice image showing all ADTs (and DSs) - see the slides
-- Prio 2: overview and motivation
 - Prio 2: analogy with Java interfaces (see preliminaries)
 - Prio 3: update the text and examples in section Terminology
 :::
 
+Earlier, we introduced the term [data type]{.term}, which refers to a type along with a collection of operations for manipulating values of that type.
+For instance, integers form a data type, and addition is an operation that can be performed on them.
+These are known as _concrete_ data types, meaning they consist of actual values and a specific implementation.
+In contrast, an [abstract data type]{.term} (ADT) does not specify concrete values or implementations.
+Instead, it defines a data type purely in terms of a set of operations and the expected behavior of those operations, as determined by their inputs and outputs.
+An ADT does not dictate _how_ the operations should be implemented, and multiple implementations are often possible.
+These implementation details are hidden from the user—a concept known as [encapsulation]{.term}.
+The set of operations offered by an abstract data type is known as its [application programming interface]{.term} (API).
 
-Here we list all abstract data types that we will introduce in this
-course book. Together they form an API (application programming
-interface) for this book.
+Using an ADT, we can distinguish between the logical behavior of a data type and its actual implementation in a concrete program.
+A classic example is the [list]{.term} abstract data type, which can be implemented using either an array or a linked list.
+Users of a list do not need to know which implementation is used in order to make use of its functionality.
+The actual implementations of an ADT rely on specific _data structures_ to realize the desired behavior of the operations -- for example, calculating the size of a list.
 
-Don't worry about understanding the different interfaces now, they will
-be explained in detail later on.
-
-**Important Java note**: There are many similarities, but also some
-differences, between the API below and the interfaces and classes in the
-"standard" Java API. For more details about the differences, please
-see the end of this chapter.
-
-**Important Python note**: Python doesn't make use of abstract classes
-(interfaces) in the same way as Java does. Instead they use a concept
-called [Duck Typing](https://en.wikipedia.org/wiki/Duck_typing), which
-means that it's enough to just implement the required methods -- you
-don't need a formal interface. However, in this course book we will still
-pretend that there are interfaces, even in Python.
-
-
-
-### Terminology and definitions
-
-This section presents terminology and definitions related to techniques
-for managing the tremendous complexity of computer programs. It also
-presents working definitions for the fundamental but somewhat slippery
-terms "[data item]{.term}" and
-"[data structure]{.term}". We begin with the
-basic elements on which data structures are built.
-
-#### Type {-}
-
-A [type]{.term} is a collection of values. For
-example, the Boolean type consists of the values `true` and `false`. The
-integers also form a type. An integer is a
-[simple type]{.term} because its values contain
-no subparts. A bank account record will typically contain several pieces
-of information such as name, address, account number, and account
-balance. Such a record is an example of an
-[aggregate type]{.term} or [composite type]{.term}.
-A [data item]{.term} is a piece of information or
-a record whose value is drawn from a type. A data item is said to be a
-[member]{.term} of a type.
-
-#### Data type {-}
-
-A [data type]{.term} is a type together with a
-collection of operations to manipulate the type. For example, an integer
-variable is a member of the integer data type. Addition is an example of
-an operation on the integer data type.
-
-A distinction should be made between the logical concept of a data type
-and its physical implementation in a computer program. For example,
-there are two traditional implementations for the [list]{.term} data type:
-the [linked list]{.term} and the [array-based list]{.term}.
-The list data type can therefore
-be implemented using a linked list or an array. But we don't need to
-know how the list is implemented when we wish to use a list to help in a
-more complex design. For example, a list might be used to help implement
-a [graph data structure](#graph-implementations).
-
-As another example, the term "array" could refer either to a data type
-or an implementation. "Array" is commonly used in computer programming
-to mean a contiguous block of memory locations, where each memory
-location stores one fixed-length data item. By this meaning, an array is
-a physical data structure. However, array can also mean a logical data
-type composed of a (typically homogeneous) collection of data items,
-with each data item identified by an index number. It is possible to
-implement arrays in many different ways besides as a block of contiguous
-memory locations. The
-[sparse matrix]{.term} refers to a large, two-dimensional array that stores only a
-relatively few non-zero values. This is often implemented with a linked
-structure, or possibly using a [hash table](#hashing). But
-it could be implemented with an interface that uses traditional row and
-column indices, thus appearing to the user in the same way that it would
-if it had been implemented as a block of contiguous memory locations.
-
-#### Abstract data type {-}
-
-An [abstract data type]{.term} (ADT) is the
-specification of a data type within some language, independent of an
-implementation. The interface for the ADT is defined in terms of a type
-and a set of operations on that type. The behavior of each operation is
-determined by its inputs and outputs. An ADT does not specify *how* the
-data type is implemented. These implementation details are hidden from
-the user of the ADT and protected from outside access, a concept
-referred to as [encapsulation]{.term}.
-
-#### Data structure {-}
-
-A [data structure]{.term} is the implementation
-for an ADT. In an object-oriented language, an ADT and its
-implementation together make up a [class]{.term}. Each operation associated with the ADT is implemented by a
-[member function]{.term} or
-[method]{.term}. The variables that define the
-space required by a data item are referred to as
-[data members](#data-member){.term}. An
-[object]{.term} is an instance of a class, that
-is, something that is created and takes up storage during the execution
-of a computer program.
-
-The term [data structure]{.term} often refers to
-data stored in a computer's main memory. The related term
-[file structure]{.term} often refers to the
-organization of data on peripheral storage, such as a disk drive or CD.
+Although different implementations of an abstract data type (ADT) offer the same set of operations, the choice of [data structure]{.term} can significantly impact the _efficiency_ of those operations.
+Often, there are trade-offs involved: optimizing one operation may come at the cost of another.
+For example, an array-based list allows fast access to elements at specific indices, while a linked-list implementation excels at inserting elements at the front.
+Furthermore, different applications may prioritize different operations.
+One program might frequently perform operation A, while another relies more heavily on operation B.
+In such cases, it is often not possible to implement all operations efficiently, so multiple implementations of the same ADT are needed.
+Additionally, one implementation may be more efficient for small datasets (thousands of elements), whereas another may scale better for large datasets (millions of elements).
+The most suitable data structure depends on the specific use case, and making informed and well-reasoned choices is one of the central goals of this book.
 
 ::: topic
-#### Example: Integers {-}
+#### Example: Collection of records {-}
 
-The mathematical concept of an integer, along with operations that
-manipulate integers, form a data type. The `int` variable type is a
-physical representation of the abstract integer. The `int` variable
-type, along with the operations that act on an `int` variable, form an
-ADT. Unfortunately, the `int` implementation is not completely true to
-the abstract integer, as there are limitations on the range of values an
-`int` variable can store. If these limitations prove unacceptable, then
-some other representation for the ADT "integer" must be devised, and a
-new implementation must be used for the associated operations.
+A _database_ is a structured collection of data that can be easily accessed, managed, and updated.
+Each item in a database is typically called a _record_, which consists of multiple fields containing information—such as a name, an ID number, or an address.
+Efficiently organizing, storing, and searching these records is a key challenge in database design.
+
+Two popular implementations for managing large disk-based database applications are [hashing]i{.term} and the [B-tree]{.term}.
+Both support efficient insertion and deletion of records, as well as exact-match queries.
+However, they differ in the types of queries they handle best.
+Hashing is particularly efficient for exact-match queries, where you are looking for a record with a specific key.
+On the other hand, B-trees are better suited for _range queries_, where you want to retrieve all records with keys within a certain interval.
+In such cases, hashing becomes inefficient.
+
+Therefore, if a database application only requires exact-match queries, hashing is typically the better choice.
+But if the application needs to support range queries—such as finding all records with values between X and Y—the B-tree is preferred.
+Despite their performance differences, both data structures address the same core problem: how to efficiently update and search a large collection of records.
 :::
 
-::: topic
-#### Example: Lists of integers {-}
-
-An ADT for a list of integers might specify the following operations:
-
-1.  Insert a new integer at a particular position in the list.
-2.  Return `true` if the list is empty.
-3.  Reinitialize the list.
-4.  Return the number of integers currently in the list.
-5.  Retrieve the integer at a particular position in the list.
-6.  Delete the integer at a particular position in the list.
-
-From this description, the input and output of each operation should be
-clear, but the implementation for lists has not been specified.
-:::
-
-There are often several possible implementations of the same ADT. The
-reason for this is that it is usually not possible to implement all
-operations efficiently, and often there is a trade off: As an example,
-it could be the case that you can make operation A or B efficient, but
-not both. And some applications might use A more often than B, while
-other applications use B more often. Another example is that one
-implementation could be efficient for small datasets (thousands of
-elements), while another implementation is more efficient for large
-datasets (millions of elements). Therefore there is usually a need for
-several different implementations of the same ADT.
-
-::: topic
-#### Example: Collections or records {-}
-
-Two popular implementations for large disk-based database applications
-are [hashing] and
-the [B-tree]{.term}. Both
-support efficient insertion and deletion of records, and both support
-exact-match queries. However, hashing is more efficient than the B-tree
-for exact-match queries. On the other hand, the B-tree can perform range
-queries efficiently, while hashing is hopelessly inefficient for range
-queries. Thus, if the database application limits searches to
-exact-match queries, hashing is preferred. On the other hand, if the
-application requires support for range queries, the B-tree is preferred.
-Despite these performance issues, both implementations solve versions of
-the same problem: updating and searching a large collection of records.
-:::
-
-The concept of an ADT can help us to focus on key issues even in
-non-computing applications.
+The concept of an ADT can help us to focus on key issues even in non-computing applications.
 
 ::: topic
 #### Example: Cars {-}
@@ -193,17 +66,13 @@ understand the specifics of any particular engine or drive design. These
 differences are deliberately hidden.
 :::
 
-The concept of an ADT is one instance of an important principle that
-must be understood by any successful computer scientist: managing
-complexity through abstraction. A central theme of computer science is
-complexity and techniques for handling it. Humans deal with complexity
-by assigning a label to an assembly of objects or concepts and then
-manipulating the label in place of the assembly. Cognitive psychologists
-call such a label a *metaphor*. A particular label might be related to
-other pieces of information or other labels. This collection can in turn
-be given a label, forming a hierarchy of concepts and labels. This
-hierarchy of labels allows us to focus on important issues while
-ignoring unnecessary details.
+The concept of an ADT is one instance of an important principle that must be understood by any successful computer scientist: managing complexity through abstraction.
+A central theme of computer science is complexity and techniques for handling it.
+Humans deal with complexity by assigning a label to an assembly of objects or concepts and then manipulating the label in place of the assembly.
+Cognitive psychologists call such a label a *metaphor*.
+A particular label might be related to other pieces of information or other labels.
+This collection can in turn be given a label, forming a hierarchy of concepts and labels.
+This hierarchy of labels allows us to focus on important issues while ignoring unnecessary details.
 
 ::: topic
 #### Example: Computers, hard drives, and CPUs {-}
@@ -226,29 +95,7 @@ data structure's implementation. Without this ability to simplify your
 thinking about a complex program, you would have no hope of
 understanding or implementing it.
 
-::: topic
-#### Example: Disk-based databases {-}
-
-Consider the design for a relatively simple database system stored on
-disk. Typically, records on disk in such a program are accessed through
-a [buffer pool]{.term} rather than directly. Variable length records might use a
-[memory manager]{.term} to find an appropriate location within the disk file to
-place the record. Multiple [index structures](#indexing){.term}
-will typically be used to support access to a collection of records
-using multiple [search keys](#search-key){.term}. Thus, we have a chain of classes, each with its own
-responsibilities and access privileges. A database query from a user is
-implemented by searching an index structure. This index requests access
-to the record by means of a request to the buffer pool. If a record is
-being inserted or deleted, such a request goes through the memory
-manager, which in turn interacts with the buffer pool to gain access to
-the disk file. A program such as this is far too complex for nearly any
-human programmer to keep all of the details in their head at once. The
-only way to design and implement such a program is through proper use of
-abstraction and metaphors. In object-oriented programming, such
-abstraction is handled using classes.
-:::
-
-Data types have both a [logical form]{.term} and
+<!-- Data types have both a [logical form]{.term} and
 a [physical form]{.term}. The definition of the
 data type in terms of an ADT is its logical form. The implementation of
 the data type as a data structure is its physical form. Sometimes you
@@ -269,18 +116,18 @@ higher-level task.
 
 The relationship between data items, abstract data types, and data
 structures.
-::::
+:::: -->
 
-As we saw, the ADT defines the logical form of the data type, while the
+<!-- As we saw, the ADT defines the logical form of the data type, while the
 data structure implements the physical form of the data type. Users of
 an ADT are typically programmers working in the same language as the
 implementer of the ADT. Typically, these programmers want to use the ADT
 as a component in another application. The interface to an ADT is also
 commonly referred to as the Application Programmer Interface, or API,
 for the ADT. The interface becomes a form of communication between two
-programmers.
+programmers. -->
 
-::: topic
+<!-- ::: topic
 #### Example: API for a list class {-}
 
 A particular programming environment might provide a library that
@@ -290,7 +137,9 @@ outputs that define the class. This might be all that you know about the
 list class implementation, and this should be all you need to know.
 Within the class, a variety of physical implementations for lists is
 possible.
-:::
+::: -->
+
+The remainder of this section provides an overview of the abstract data types (ADTs) introduced throughout this course book.
 
 ![Overview of common Abstract Data Types (ADTs)](resources/images/ADT_overview.png)
 

@@ -48,11 +48,7 @@ Variables
 
 Types
 
-:   A type defines a set of values along with the operations (or functions) that
-    can be performed on them. Data types can be categorized as primitive or
-    compound. Primitive types represent basic values, while compound types,
-    such as arrays, tuples, and lists, are constructed using other types. For
-    instance, an array is always an array of a specific type.
+:   A [type]{.term} defines a set of values along with the operations (or functions) that can be performed on them. For example, the Boolean type consists of the values `true` and `false`. Data types can be categorized as primitive or compound. Primitive types represent basic values, while compound types, such as arrays, tuples, and lists, are constructed using other types. For instance, an array is always an array of a specific type.
 
     In our pseudocode, we sometimes use type variables to indicate that a
     compound data type is parameterized by another type. For example, `List of A`
