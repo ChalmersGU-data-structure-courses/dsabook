@@ -292,6 +292,8 @@ Within the class, a variety of physical implementations for lists is
 possible.
 :::
 
+![Overview of common Abstract Data Types (ADTs)](resources/images/ADT_overview.png)
+
 ### Ordered sequences
 
     interface Collection of T:
