@@ -16,7 +16,15 @@ These implementation details are hidden from the user—a concept known as [enca
 The set of operations offered by an abstract data type is known as its [application programming interface]{.term} (API).
 
 Using an ADT, we can distinguish between the logical behavior of a data type and its actual implementation in a concrete program.
-A classic example is the [list]{.term} abstract data type, which can be implemented using either an array or a linked list.
+A classic example is the [list]{.term} abstract data type, which support the following set of operations:
+
+    interface List of T:
+        add(i: Int, x: T)   // Adds x at position i; where 0 ≤ i ≤ size.
+        get(i: Int) -> T    // Returns the element at position i; where 0 ≤ i < size.
+        set(i: Int, x: T)   // Replaces the value at position i with x; where 0 ≤ i < size.
+        remove(i: Int)      // Removes the element at position i; where 0 ≤ i < size.
+
+A list can be implemented using either an array or a linked list.
 Users of a list do not need to know which implementation is used in order to make use of its functionality.
 The actual implementations of an ADT rely on specific _data structures_ to realize the desired behavior of the operations -- for example, calculating the size of a list.
 
@@ -174,10 +182,6 @@ Ordered sequences are used in many applications and algorithms where the order o
 For example, maintaining a task list, simulating a line of customers, or a editor’s undo/redo history.
 
 ### Sets and maps
-
-::: TODO
-- Implementations: arrays, hash tables
-:::
 
 #### Use case: Information retrieval
 
