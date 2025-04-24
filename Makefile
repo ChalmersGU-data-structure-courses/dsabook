@@ -1,18 +1,19 @@
-.PHONY: all default clean preprocess pandoc postprocess install deploy check-links server
+.PHONY: all default clean preprocess pandoc postprocess install deploy check-links server pdf
 
 # Directories
 SRC       := src
 LIB       := lib
 RSC       := resources
-MARKOWN   := $(SRC)/markdown
+MARKDOWN  := $(SRC)/markdown
 TEMP      := _temp
 BUILD     := build
 HTML      := $(BUILD)/html
+PDF       := book.pdf
 DOCS      := docs
 
 # Source Files
-GLOSSARY  := $(MARKOWN)/X-appendix/01-glossary.md
-MD_FILES  := $(wildcard $(MARKOWN)/*/*.md)
+GLOSSARY  := $(MARKDOWN)/X-appendix/01-glossary.md
+MD_FILES  := $(wildcard $(MARKDOWN)/*/*.md)
 
 # Tools
 PYTHON    := python3
@@ -62,3 +63,7 @@ check-links:
 
 server:
 	$(PYTHON) -m http.server -d $(BUILD) 8000
+
+pdf:
+	@echo "Running pandoc + XeTeX --> $(PDF)..."
+	@time $(PANDOC) --defaults=pandoc-tex.yaml --template=extra/eisvogel.latex --resource-path=$(RSC) --output=$(PDF) $(MD_FILES)
