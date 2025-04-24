@@ -3,7 +3,6 @@
 
 ::: TODO
 - Prio 2: add some "real" examples, i.e., more complex ones
-    - exception: nested linear + binary loop == linear
 - Prio 2: briefly discuss functions and non-atomic statements
 :::
 
@@ -12,8 +11,8 @@ As mentioned in the last section, we will only give the upper bound using the bi
 
 ### Simplification rules
 
-Once you determine the running-time equation for an algorithm, it really
-is a simple matter to derive the big-$O$ expressions from the equation.
+Once you determine the running-time equation for an algorithm, it is
+often a simple matter to derive the big-$O$ expressions from the equation.
 You do not need to resort to the formal definitions of asymptotic
 analysis. Instead, you can use the following rules to determine the
 simplest form.
@@ -21,35 +20,27 @@ simplest form.
 (1) **Transitivity**:
     If $f\in O(g)$ and $g\in O(h)$, then $f\in O(h)$
 
+    This first rule says that if some function $g(n)$ is an upper bound for your cost function, then any upper bound for $g(n)$ is also an upper bound for your cost function.
+
 (2) **Constant factor**:
     If $f\in O(g)$, then $k\cdot f\in O(g)$, for any constant $k>0$
 
       - Special case: $O(k) = O(1)$ for all constants $k>0$
+
+    The significance of this rule is that you can ignore any multiplicative constants in your equations when using big-$O$ notation.
 
 (3) **Addition**:
     If $f\in O(g)$ and $f'\in O(g')$, then $f+f' \in O(\max(g,g'))$
 
       - Special case: if $f,f'\in O(g)$, then $f+f' \in O(g)$
 
+    This rule says that given two parts of a program run in sequence (whether two statements or two sections of code), you need consider only the more expensive part.
+
 (4) **Multiplication**:
     If $f\in O(g)$ and $f'\in O(g')$, then $f\cdot f' \in O(g\cdot g')$
 
-
-The first rule says that if some function $g(n)$ is an upper bound for
-your cost function, then any upper bound for $g(n)$ is also an upper
-bound for your cost function.
-
-The significance of rule (2) is that you can ignore any multiplicative
-constants in your equations when using big-$O$ notation.
-
-Rule (3) says that given two parts of a program run in sequence (whether
-two statements or two sections of code), you need consider only the more
-expensive part.
-
-Rule (4) is used to analyze simple loops in programs. If some action is
-repeated some number of times, and each repetition has the same cost,
-then the total cost is the cost of the action multiplied by the number
-of times that the action takes place.
+    The final rule is used to analyze simple loops in programs.
+    If some action is repeated some number of times, and each repetition has the same cost, then the total cost is the cost of the action multiplied by the number of times that the action takes place.
 
 Taking the first three rules collectively, you can ignore all constants and all lower-order terms to determine the asymptotic growth rate for any cost function.
 The advantages and dangers of ignoring constants were discussed in the beginning of the previous section.
@@ -87,6 +78,18 @@ But we will come back to this issue in chapter XX.
 
 ### Analysing code fragments
 
+When we want to analyse the complexity of code fragments, the following three rules of thumb one will get us very far:
+
+- An **atomic operation** is always $O(1)$
+
+- A **sequence**, $\langle p_1;p_2\rangle$,
+  has the complexity $O(\max(f_1,f_2))$,
+  where $p_i\in O(f_i)$
+
+- An **iteration**, $\langle\mbox{for}\ x \in A: p\rangle$,
+  has the complexity $n\cdot O(f) = O(n\cdot f)$,
+  where $n=|A|$ and $p\in O(f)$
+
 #### Atomic operations
 
 Atomic operations are things like assigning a variable, looking up the value of an array index, or printing something.
@@ -100,7 +103,7 @@ A sequence of atomic operations, such as performing 10 assignments, is still con
 But what if we have a sequence of non-atomic operations?
 
 E.g., suppose that we have the three operations $p_1\in O(f_1)$, $p_2\in O(f_2)$, and $p_3\in O(f_3)$.
-The complexity of the sequence $p_1; p_2; p_3$ will then be sum of the parts, i.e.:
+The complexity of the sequence $\langle p_1; p_2; p_3\rangle$ will then be sum of the parts, i.e.:
 
 $$
 p_1; p_2; p_3 \in O(f_1) + O(f_2) + O(f_3) = O(\max(f_1, f_2, f_3))
@@ -124,16 +127,7 @@ $$
 
 Note that $p$ can be a complex operation, for example a loop itself.
 If $p$ is a simple loop over A, with a constant-time operation in its body, then $p\in O(n)$.
-And then the outer loop ($\mbox{for}\ x \in A: p$) will be in $n\cdot O(n) = O(n^2)$.
-
-#### Summary
-
-When we want to analyse the complexity of code fragments, the following three rules of thumb one will get us very far:
-
-- Atomic operations are always $O(1)$
-- Sequences $p;p'$ are translated to addition, $O(\max(f,f'))$
-- Iterations, $\mbox{for}\ x \in A: p$, are translated to multiplication, $n\cdot O(f) = O(n\cdot f)$
-  (assuming that $n=|A|$)
+And then the outer loop $\langle \mbox{for}\ x \in A: p\rangle$ will be in $n\cdot O(n) = O(n^2)$.
 
 
 ### Examples
@@ -201,9 +195,9 @@ through the outer loop, $j$ becomes one greater, until the last time
 through the loop when $j = n$. Thus, the total cost of the loop is $c_3$
 times the sum of the integers 1 through $n$. We know that
 
-$$
-\sum_{i = 1}^{n} i = \frac{n (n+1)}{2}
-$$
+\begin{eqnarray}
+\sum_{i = 1}^{n} i &=& \frac{n (n+1)}{2}
+\end{eqnarray}
 
 which is $O(n^2)$. By simplifying rule (3),
 $O(c_1 + c_2 n + c_3 n^2)$ is simply $O(n^2)$.
@@ -234,7 +228,34 @@ about half the time of the first.
 ::::
 
 
-### Advanced algorithm analyses
+:::: topic
+#### Example: Non-quadratic nested loops {-}
+
+Not all doubly nested `for` loops are strictly $O(n^2)$, the following is an example.
+
+    sum1 = 0
+    k = 1
+    while k <= n:            // Do log n times.
+        for j in 0 .. n-1:   // Do n times.
+            sum1 = sum1 + 1
+        k = k * 2
+
+To make our analysis easier, we will assume that $n$ is a power of two.
+The code fragment has its outer `for` loop executed $\log n+1$ times because on each iteration $k$ is multiplied by two until it reaches $n$.
+Now, because the inner loop always executes $n$ times, the total cost for can be expressed as
+
+\begin{eqnarray}
+\sum_{i=0}^{\log n} n &=& n \log n
+\end{eqnarray}
+
+So the cost of this double loop is $O(n \log n)$.
+Note that the summation variable $i$ is the logarithm of the loop variable $k$, i.e. $k = 2^i$.
+
+Our analysis rules give the same result: the outer loop is logarithmic and the inner loop is linear, so we multiply them to $O(n \log n)$.
+::::
+
+
+### Advanced algorithm analysis
 
 The rules of thumb above do not always give the tightest possible complexity.
 In some (rare) cases the simple analysis might give a complexity of say $O(n \log n)$,
@@ -245,17 +266,9 @@ No, the rules are correct, and this is because the $O$ notation gives an *upper 
 Recall that every function $f\in O(n)$ is also in $O(n\log n)$, since $O(n) < O(n\log n)$.
 
 :::: topic
-#### Example: Non-quadratic nested loops {-}
+#### Example: A nested loop with linear complexity {-}
 
-Not all doubly nested `for` loops are $O(n^2)$. The following pair
-of nested loops illustrates this fact.
-
-    sum1 = 0
-    k = 1
-    while k <= n:            // Do log n times.
-        for j in 0 .. n-1:   // Do n times.
-            sum1 = sum1 + 1
-        k = k * 2
+If we take the non-quadratic example above and just do a very small change, we get a completely different complexity.
 
     sum2 = 0
     k = 1
@@ -264,29 +277,23 @@ of nested loops illustrates this fact.
             sum2 = sum2 + 1
         k = k * 2
 
-When analyzing these two code fragments, we will assume that $n$ is a
-power of two. The first code fragment has its outer `for` loop executed
-$\log n+1$ times because on each iteration $k$ is multiplied by two
-until it reaches $n$. Because the inner loop always executes $n$ times,
-the total cost for the first code fragment can be expressed as
+The only difference is that the inner loop runs $k$ times, instead of $n$ times.
+The rules of thumb gives us the same complexity as before, $O(n \log n)$, but a more careful analysis reveals a tighter bound.
 
-$$
-\sum_{i=0}^{\log n} n = n \log n
-$$
+The outer loop is executed $\log n+1$ times, and the inner loop has cost $k$, which doubles each time.
+This can be expressed as the following summation, where $n$ is assumed to be a power of two and again $k = 2^i$.
 
-So the cost of this first double loop is $O(n \log n)$. Note that a
-variable substitution takes place here to create the summation, with
-$k = 2^i$.
+\begin{eqnarray}
+1 + 2 + 4 + \cdots + \log n &=& \sum_{i=0}^{\log n} 2^i
+\end{eqnarray}
 
-In the second code fragment, the outer loop is also executed $\log n+1$
-times. The inner loop has cost $k$, which doubles each time. The
-summation can be expressed as
+Now, as mentioned in section XX (*math prelim. summation*), this summation has a closed form solution
+$2^{\log n + 1} - 1 = 2n - 1$.
+So, the complexity of the code fragment above is actually linear, $O(n)$, and not linearithmic.
 
-$$
-\sum_{i=0}^{\log n} 2^i \in O(n)
-$$
-
-where $n$ is assumed to be a power of two and again $k = 2^i$.
+Note that this is an exception where the simple analysis rules do not give a tight enough bound.
+But in almost all cases the rules work fine, and when they don't it's usually only by a logarithmic factor.
+(And as we all know, logarithmic factors are not that big a deal when it comes to computational copmlexity.)
 ::::
 
 <!-- TODO
@@ -295,7 +302,7 @@ some loop constructs. This can be very similar to how we visualize
 reaching the closed form solution of summations.
 -->
 
-#### Other control statements
+### Other control statements
 
 What about other control statements? `While` loops are analyzed in a
 manner similar to `for` loops. The cost of an `if` statement in the
@@ -316,11 +323,11 @@ programs, we cannot simply count the cost of the `if` statement as being
 the cost of the more expensive branch. In such situations, the technique
 of [amortized analysis]{.term} can come to the rescue.
 
-#### Recursive functions
+### Recursive functions
 
 Determining the execution time of a recursive subroutine can be
 difficult. The running time for a recursive subroutine is typically best
-expressed by a recurrence relation. For example, the recursive factorial
+expressed by a [recurrence relation]{.term}. For example, the recursive factorial
 function calls itself with a value one less than its input value. The
 result of this recursive call is then multiplied by the input value,
 which takes constant time. Thus, the cost of the factorial function, if
@@ -336,5 +343,4 @@ T(1) &=& 0
 \end{eqnarray}
 
 The closed-form solution for this recurrence relation is $O(n)$.
-
 Recurrence relations are discussed further in section XX (chapter: analysis part 3).
