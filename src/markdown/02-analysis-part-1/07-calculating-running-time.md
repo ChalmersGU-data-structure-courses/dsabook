@@ -131,7 +131,7 @@ And then the outer loop ($\mbox{for}\ x \in A: p$) will be in $n\cdot O(n) = O(n
 When we want to analyse the complexity of code fragments, the following three rules of thumb one will get us very far:
 
 - Atomic operations are always $O(1)$
-- Sequences $p;p'$ are translated to addition, O(\max(f,f'))$
+- Sequences $p;p'$ are translated to addition, $O(\max(f,f'))$
 - Iterations, $\mbox{for}\ x \in A: p$, are translated to multiplication, $n\cdot O(f) = O(n\cdot f)$
   (assuming that $n=|A|$)
 
