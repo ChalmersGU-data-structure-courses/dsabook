@@ -139,82 +139,39 @@ Within the class, a variety of physical implementations for lists is
 possible.
 ::: -->
 
-The remainder of this section provides an overview of the abstract data types (ADTs) introduced throughout this course book.
+Most of the abstract data types (ADTs) we introduce in this book are collections, that is, structures that store elements of an arbitrary type.
+The earlier example of a list illustrates this: a list is a collection that holds elements, which can be of any type.
 
-![Overview of common Abstract Data Types (ADTs)](resources/images/ADT_overview.png)
+We group these collection-based ADTs into two main categories:
+
+- Ordered sequences
+- Sets and maps
+
+In addition to these, we also introduce graphs, along with their commonly used implementations.
+
+The rest of this section gives a high-level overview of the ADTs covered throughout the course.
+The figure below summarizes these ADTs and highlights how they relate to one another.
+Each ADT will be discussed in more detail later in the book, including their operations and the data structures used to implement them.
+
+![An overview of ADTS with their common implementations](resources/images/ADT_overview.png)
+
 
 ### Ordered sequences
 
-    interface Collection of T:
-        // We assume that we can iterate over the elements in the collection, using a for loop.
+Ordered sequences are a category of abstract data types in which the order of the elements matters.
+This means that each element has a specific position in the sequence, and operations on the ADT are sensitive to this order.
+Insertion, removal, and retrieval operations often depend on the position within the sequence.
 
-        // The number of elements in this collection.
-        size: Int
+The ordered sequence ADTs found in this book are:
 
-        // Returns true if the collection is empty.
-        isEmpty() -> Bool:
-            return size == 0
+- Stacks, a sequence with a Last-In-First-Out (LIFO) ordering
+- Queues, a sequence with a First-In-First-Out (FIFO) ordering
+- Double-ended queues (deques), which allow insertion and removal at both ends
+- Priority queues, return elements based on priority rather than insertion order, but are conceptually related
+- General lists, support adding, removing, and accessing elements
 
-#### Use case(s)
-
-
-#### Stacks
-
-::: TODO
-- Special cases of lists
-- examples, use cases
-- Restricted list ADTs
-- makes it possible to use optimised implementations
-- e.g., circular queues
-- deque = double-ended queue = stack + queue
-- Implementations: linked lists, dynamic arrays
-:::
-
-    interface Stack of T extends Collection of T:
-        push(x: T)     // Pushes x on top of the stack.
-        pop() -> T     // Pops the top of the stack and returns it.
-        peek()  -> T   // Returns the top element, without removing it.
-
-#### Queues
-
-    interface Queue of T extends Collection of T:
-        enqueue(x: T)    // Enqueues x at the end of the queue.
-        dequeue() -> T   // Dequeues the frontmost element.
-        peek() -> T      // Returns the frontmost element, without removing it.
-
-#### Double-ended queues
-
-#### Priority queues
-
-::: TODO
-- Similar API as stacks/queues, but returning different element
-- sorted arrays - makes insertion expensive
-- unsorted arrays - makes removal expensive
-- Implementations: heaps, etc.
-:::
-
-    interface PriorityQueue of T extends Collection of T:
-        add(x: t)          // Adds x to the priority queue.
-        removeMin() -> T   // Removes and returns the minimum element.
-        getMin() -> T      // Returns the minimum element, without removing it.
-
-
-#### General lists
-
-::: TODO
-- examples, use cases
-- Implementations: dynamic arrays, linked lists
-- refer forward
-- several possible interfaces
-:::
-
-    interface List of T extends Collection of T:
-        add(i: Int, x: T)   // Adds x at position i; where 0 ≤ i ≤ size.
-        get(i: Int) -> T    // Returns the element at position i; where 0 ≤ i < size.
-        set(i: Int, x: T)   // Replaces the value at position i with x; where 0 ≤ i < size.
-        remove(i: Int)      // Removes the element at position i; where 0 ≤ i < size.
-
-
+Ordered sequences are used in many applications and algorithms where the order of operations or items is important.
+For example, maintaining a task list, simulating a line of customers, or a editor’s undo/redo history.
 
 ### Sets and maps
 
