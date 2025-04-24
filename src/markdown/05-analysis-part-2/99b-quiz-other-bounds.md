@@ -43,12 +43,10 @@ slower, nor too much faster, than the claimed growth rate.
 :::::::::: question ::::::::::
 Determine the proper relationship between the following pair of functions.
 
-$$
 \begin{eqnarray}
 f(n) &=& \log n^2 \\
 g(n) &=& \log n + 5
 \end{eqnarray}
-$$
 
 - [x] $f(n)$ is $\Theta(g(n))$
 - [ ] $f(n)$ is in $\Omega(g(n))$
@@ -66,12 +64,10 @@ $$
 :::::::::: question ::::::::::
 Determine the proper relationship between the following pair of functions.
 
-$$
 \begin{eqnarray}
 f(n) &=& \sqrt n \\
 g(n) &=& \log n^2
 \end{eqnarray}
-$$
 
 - [x] $f(n)$ is $\Omega(g(n))$
 - [ ] $f(n)$ is $\Theta(g(n))$
@@ -89,12 +85,10 @@ $$
 :::::::::: question ::::::::::
 Determine the proper relationship between the following pair of functions.
 
-$$
 \begin{eqnarray}
 f(n) &=& \log^2 n \\
 g(n) &=& \log n
 \end{eqnarray}
-$$
 
 - [x] $f(n)$ is $\Omega(g(n))$
 - [ ] $f(n)$ is $\Theta(g(n))$
@@ -112,12 +106,10 @@ $$
 :::::::::: question ::::::::::
 Determine the proper relationship between the following pair of functions.
 
-$$
 \begin{eqnarray}
 f(n) &=& n \\
 g(n) &=& \log^2 n
 \end{eqnarray}
-$$
 
 - [x] $f(n)$ is $\Omega(g(n))$
 - [ ] $f(n)$ is $\Theta(g(n))$
@@ -135,12 +127,10 @@ $$
 :::::::::: question ::::::::::
 Determine the proper relationship between the following pair of functions.
 
-$$
 \begin{eqnarray}
 f(n) &=& n \log n + n \\
 g(n) &=& \log n
 \end{eqnarray}
-$$
 
 - [x] $f(n)$ is $\Omega(g(n))$
 - [ ] $f(n)$ is $\Theta(g(n))$
@@ -158,12 +148,10 @@ $$
 :::::::::: question ::::::::::
 Determine the proper relationship between the following pair of functions.
 
-$$
 \begin{eqnarray}
 f(n) &=& \log n^2 \\
 g(n) &=& (\log n)^2
 \end{eqnarray}
-$$
 
 - [ ] $f(n)$ is $\Omega(g(n))$
 - [ ] $f(n)$ is $\Theta(g(n))$
@@ -181,12 +169,10 @@ $$
 :::::::::: question ::::::::::
 Determine the proper relationship between the following pair of functions.
 
-$$
 \begin{eqnarray}
 f(n) &=& 10 \\
 g(n) &=& \log 10
 \end{eqnarray}
-$$
 
 - [ ] $f(n)$ is $\Omega(g(n))$
 - [x] $f(n)$ is $\Theta(g(n))$
@@ -204,12 +190,10 @@ $$
 :::::::::: question ::::::::::
 Determine the proper relationship between the following pair of functions.
 
-$$
 \begin{eqnarray}
 f(n) &=& 2^n \\
 g(n) &=& 10 n^2
 \end{eqnarray}
-$$
 
 - [x] $f(n)$ is $\Omega(g(n))$
 - [ ] $f(n)$ is $\Theta(g(n))$
@@ -227,12 +211,10 @@ $$
 :::::::::: question ::::::::::
 Determine the proper relationship between the following pair of functions.
 
-$$
 \begin{eqnarray}
 f(n) &=& 2^n \\
 g(n) &=& n \log n
 \end{eqnarray}
-$$
 
 - [x] $f(n)$ is $\Omega(g(n))$
 - [ ] $f(n)$ is $\Theta(g(n))$
@@ -250,12 +232,10 @@ $$
 :::::::::: question ::::::::::
 Determine the proper relationship between the following pair of functions.
 
-$$
 \begin{eqnarray}
 f(n) &=& 2^n \\
 g(n) &=& 3^n
 \end{eqnarray}
-$$
 
 - [ ] $f(n)$ is $\Omega(g(n))$
 - [ ] $f(n)$ is $\Theta(g(n))$
@@ -273,12 +253,10 @@ $$
 :::::::::: question ::::::::::
 Determine the proper relationship between the following pair of functions.
 
-$$
 \begin{eqnarray}
 f(n) &=& 2^n \\
 g(n) &=& n^n
 \end{eqnarray}
-$$
 
 - [ ] $f(n)$ is $\Omega(g(n))$
 - [ ] $f(n)$ is $\Theta(g(n))$

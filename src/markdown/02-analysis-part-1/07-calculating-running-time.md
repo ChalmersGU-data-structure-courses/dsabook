@@ -330,12 +330,10 @@ recursive call on the smaller input. Because the base case does no
 multiplications, its cost is zero. Thus, the running time for this
 function can be expressed as
 
-$$
 \begin{eqnarray}
 T(n) &=& T(n-1) + 1, \textrm{ for } n>1 \\
 T(1) &=& 0
 \end{eqnarray}
-$$
 
 The closed-form solution for this recurrence relation is $O(n)$.
 

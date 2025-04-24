@@ -10,21 +10,17 @@ The running time for a recursive algorithm is most easily expressed by a recursi
 A [recurrence relation]{.term} defines a function by means of an expression that includes one or more (smaller) instances of itself.
 A classic example is the recursive definition for the factorial function:
 
-$$
 \begin{eqnarray}
 n! &=& n\cdot(n-1)! \mbox{~~for~} n>1 \\
 1! = 0! &=& 1
 \end{eqnarray}
-$$
 
 Another standard example of a recurrence is the Fibonacci sequence:
 
-$$
 \begin{eqnarray}
 \mbox{Fib}(n) &=& \mbox{Fib}(n-1) + \mbox{Fib}(n-2) \mbox{~~for~} n>2 \\
 \quad\mbox{Fib}(1) = \mbox{Fib}(2) &=& 1
 \end{eqnarray}
-$$
 
 From this definition, the first seven numbers of the Fibonacci sequence are
 
@@ -39,12 +35,10 @@ Recurrence relations are often used to model the cost of recursive functions.
 For example, the number of multiplications required by a recursive version of the factorial function for an input of size $n$ will be zero when $n = 0$ or $n = 1$ (the base cases), and it will be one plus the cost of calling itself on a value of $n-1$.
 This can be defined using the following recurrence:
 
-$$
 \begin{eqnarray}
 T(n) &=& T(n-1) + 1 \mbox{~~for~} n>1 \\
 T(0) = T(1) &=& 0
 \end{eqnarray}
-$$
 
 As with summations, we typically wish to replace the recurrence relation with a closed-form solution.
 One approach is to expand the recurrence by replacing any occurrences of $T$ on the right-hand side with its definition.
@@ -53,12 +47,10 @@ One approach is to expand the recurrence by replacing any occurrences of $T$ on 
 
 A slightly more complicated recurrence is
 
-$$
 \begin{eqnarray}
 T(n) &=& T(n-1) + n \\
 T(1) &=& 1
 \end{eqnarray}
-$$
 
 Again, we will use expansion to help us find a closed form solution.
 
@@ -69,12 +61,10 @@ A more complicated example is the standard [Mergesort].
 This takes a list of size $n$, splits it in half, performs Mergesort on each half, and finally merges the two sublists in $n$ steps.
 The cost for this can be modeled as
 
-$$
 \begin{eqnarray}
 T(n) &=& 2T(n/2) + n \\
 T(1) &=& 1
 \end{eqnarray}
-$$
 
 In other words, the cost of the algorithm on input of size $n$ is two
 times the cost for input of size $n/2$ (due to the two recursive calls
@@ -109,12 +99,10 @@ this method will probably be too much work.
 Use the guessing technique to find the asymptotic bounds for Mergesort,
 whose running time is described by the equation
 
-$$
 \begin{eqnarray}
 T(n) &=& 2T(n/2) + n \\
 T(1) &=& 1
 \end{eqnarray}
-$$
 
 We begin by guessing that this recurrence has an upper bound in
 $O(n^2)$. To be more precise, assume that
@@ -224,7 +212,6 @@ Obviously $n! \leq n^n$, so we know that $\log n!$ is $O(n \log n)$. But
 what about a lower bound for the factorial function? Consider the
 following.
 
-$$
 \begin{eqnarray*}
 n!  & = &  n \times (n - 1) \times \cdots \times \frac{n}{2} \times
 (\frac{n}{2} - 1) \times \cdots \times 2 \times 1\\
@@ -232,7 +219,6 @@ n!  & = &  n \times (n - 1) \times \cdots \times \frac{n}{2} \times
 \times 1 \times \cdots \times 1 \times 1\\
  & = &  (\frac{n}{2})^{n/2}
 \end{eqnarray*}
-$$
 
 Therefore
 
@@ -341,18 +327,15 @@ $$
 Let us find a closed form solution for this recurrence. We can expand
 the recurrence a few times to see that
 
-$$
 \begin{eqnarray*}
 f(n) & \leq &  2f(n/2) + 2 \log n \\
      & \leq &  2[2f(n/4) + 2 \log n/2] + 2 \log n \\
      & \leq &  2[2(2f(n/8) + 2 \log n/4) + 2 \log n/2] + 2 \log n
 \end{eqnarray*}
-$$
 
 We can deduce from this expansion that this recurrence is equivalent to
 following summation and its derivation:
 
-$$
 \begin{eqnarray*}
 f(n)  & \leq &  \sum_{i=0}^{\log n -1} 2^{i+1} \log(n/2^i) \\
       &  =   &  2 \sum_{i=0}^{\log n -1} 2^i (\log n - i) \\
@@ -360,7 +343,6 @@ f(n)  & \leq &  \sum_{i=0}^{\log n -1} 2^{i+1} \log(n/2^i) \\
       &  =   &  2 n \log n - 2 \log n - 2 n \log n + 4n -4 \\
       &  =   &  4n - 2 \log n - 4
 \end{eqnarray*}
-$$
 
 :::
 
@@ -371,12 +353,10 @@ theorems that provide the solution for classes of recurrences. Of
 particular practical use is a theorem that gives the answer for a class
 known as [divide-and-conquer recurrences]{.term}. These have the form
 
-$$
 \begin{eqnarray}
 T(n) &=& aT(n/b) + cn^k \\
 T(1) &=& c
 \end{eqnarray}
-$$
 
 where $a$, $b$, $c$, and $k$ are constants. In general, this recurrence
 describes a problem of size $n$ divided into $a$ subproblems of size
@@ -386,7 +366,6 @@ algorithm, and its recurrence fits this form. So does binary search. We
 use the method of expanding recurrences to derive the general solution
 for any divide and conquer recurrence, assuming that $n = b^m$.
 
-$$
 \begin{eqnarray*}
 T(n)  &  =  &  aT(n/b) + cn^k \\
             &  =  &  a(aT(n/b^2) + c(n/b)^k) + cn^k \\
@@ -396,7 +375,6 @@ T(n)  &  =  &  aT(n/b) + cn^k \\
             &  =  &  c\sum_{i=0}^{m} a^{m-i} b^{ik} \\
             &  =  & ca^m\sum_{i=0}^{m} (b^k/a)^i
 \end{eqnarray*}
-$$
 
 Here is a more visual presentation of this same derivation.
 
@@ -410,12 +388,10 @@ $$
 
 At this point, it is useful to note that
 
-$$
 \begin{eqnarray}
 \label{ThmEquiv}
 a^m = a^{\log_bn} = n^{\log_ba}.
 \end{eqnarray}
-$$
 
 This gives us
 
@@ -496,12 +472,10 @@ case (3) of the theorem, $T(n) \in O(n^2)$.
 
 Use the Master Theorem to solve the recurrence relation for Mergesort:
 
-$$
 \begin{eqnarray}
 T(n) &=& 2T(n/2) + n \\
 T(1) &=& 1
 \end{eqnarray}
-$$
 
 Because $a=2$, $b=2$, $c=1$, and $k=1$, we find that $2 = 2^1$. Applying
 case (2) of the theorem, $T(n) \in O(n \log n)$.
@@ -516,12 +490,10 @@ case (2) of the theorem, $T(n) \in O(n \log n)$.
 In section XX, we determined that the average-case analysis of quicksort
 had the following recurrence:
 
-$$
 \begin{eqnarray}
 T(n) &=& cn + \frac{1}{n}\sum_{k=0}^{n-1} [T(k) + T(n -1 - k)] \\
 T(0) = T(1) &=& c
 \end{eqnarray}
-$$
 
 The $cn$ term is an upper bound on the *findpivot* and
 *partition* steps. This equation comes from assuming that
@@ -531,41 +503,34 @@ $T(k)$ and $T(n - 1 - k)$ are equivalent, because one simply
 counts up from $T(0)$ to $T(n-1)$ while the other counts down from
 $T(n-1)$ to $T(0)$. This yields
 
-$$
 \begin{eqnarray}
 T(n) &=& cn + \frac{2}{n}\sum_{k=0}^{n-1} T(k)
 \end{eqnarray}
-$$
 
 This form is known as a [recurrence with full history]{.term}. The key to solving such a recurrence is to cancel out the
 summation terms. The shifting method for summations provides a way to do
 this. Multiply both sides by $n$ and subtract the result from the
 formula for $nT(n+1)$:
 
-$$
 \begin{eqnarray*}
 nT(n)  &  =  &  cn^2 + 2 \sum_{k=1}^{n-1} T(k)\\
 (n+1)T(n+1)  &  =  &  c(n+1)^2 + 2 \sum_{k=1}^{n} T(k)
 \end{eqnarray*}
-$$
 
 Subtracting $nT(n)$ from both sides yields:
 
-$$
 \begin{eqnarray*}
 (n+1)T(n+1) - nT(n)  &  =  &  c(n+1)^2 - cn^2 + 2T(n)\\
 (n+1)T(n+1) - nT(n)  &  =  &  c(2n+1) + 2T(n)\\
 (n+1)T(n+1)  &  =  &  c(2n+1) + (n+2)T(n)\\
 T(n+1)  &  =  &  \frac{c(2n+1)}{n+1} + \frac{n+2}{n+1}T(n)
 \end{eqnarray*}
-$$
 
 At this point, we have eliminated the summation and can now use our
 normal methods for solving recurrences to get a closed-form solution.
 Note that $\frac{c(2n+1)}{n+1} < 2c$, so we can simplify the result.
 Expanding the recurrence, we get
 
-$$
 \begin{eqnarray*}
 T(n+1)  &  \leq  &  2c + \frac{n+2}{n+1} T(n)\\
            &  =  &  2c + \frac{n+2}{n+1}\left (2c +
@@ -581,7 +546,6 @@ T(n+1)  &  \leq  &  2c + \frac{n+2}{n+1} T(n)\\
                   + \frac{1}{n} + \cdots + \frac{1}{2}\right )\right )\\
            &  =  &  2c + 2c(n+2)\left (\mathcal{H}_{n+1} - 1\right )
 \end{eqnarray*}
-$$
 
 for $\mathcal{H}_{n+1}$, the Harmonic Series. From Equation (10) of section XX,
 $\mathcal{H}_{n+1} \in O(\log n)$, so the final solution is

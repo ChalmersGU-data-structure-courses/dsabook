@@ -207,13 +207,11 @@ on.
 Given this assumption, the average-case cost is computed from the
 following equation:
 
-$$
 \begin{eqnarray}
 T(n) &=& cn + \frac{1}{n}\sum_{k=0}^{n-1}[T(k) + T(n - 1 - k)]
 \\
 T(0) = T(1) &=& c
 \end{eqnarray}
-$$
 
 This visualization will help you to understand how this recurrence
 relation was formed.
