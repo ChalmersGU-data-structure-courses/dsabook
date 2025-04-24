@@ -2,7 +2,6 @@
 ## Use cases
 
 ::: TODO
-- Prio 2: add a 3rd example
 - Prio 2: reorganise the examples
 - Prio 2: replace Bank with e.g. Social media
 - Prio 3: add a 4th example
@@ -108,7 +107,7 @@ This process of organizing information is called indexing.
 Most of us use search engines every day without thinking about the incredible job they do.
 The image below shows the results of a search for “binary search”:
 
-![Google blabla](resources/images/Google.png){ width=50% }
+![Searching the Internet with Google](resources/images/Google.png){ width=75% }
 
 It is already impressive to be shown a list of relevant web pages, but it is even more astonishing that, in this case, Google found 331 million results in just _0.23 seconds_.
 
