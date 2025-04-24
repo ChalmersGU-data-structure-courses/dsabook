@@ -1,10 +1,6 @@
 
 ## Case study: Analysing binary search
 
-::: TODO
-- Prio 2: update text so that it fits in this position in the structure
-:::
-
 Now we will discuss the algorithmic complexity of the two search algorithms that we introduced in section XX (chapter: introduction).
 
 In section XX (this chapter), we deduced that the running time for linear search on an array if size $n$ is $O(n)$.
@@ -16,6 +12,27 @@ But what is the complexity of the binary search algorithm?
 
 <inlineav id="BsearchDandCRecurCON" src="AlgAnal/BsearchDandCRecurCON.js" name="Binary Search recurrence slideshow" links="AlgAnal/BsearchDandCRecurCON.css"/>
 
+To find the worst-case cost of binary search, we can model the running time as a recurrence and then find the closed-form solution.
+Each recursive call to `binarySearch` cuts the size of the array approximately in half, so we can model the worst-case cost as follows, assuming for simplicity that $n$ is a power of two.
+
+\begin{eqnarray}
+O(n) &=& O(n/2) + 1 \\
+O(1) &=& 1
+\end{eqnarray}
+
+If we expand the recurrence, we will find that we can do so only $\log n$ times before we reach the base case, and each expansion adds one to the cost.
+
+- For a problem of size $n$, we have $1$ unit of work plus the amount of work required for one subproblem of size $n/2$: $O(n) = 1 + O(n/2)$
+- For a problem of size $n/2$, we have $1$ unit of work plus the amount of work required for one subproblem of size $n/4$: $O(n) = 1 + (1 + O(n/4))$
+- For a problem of size $n/4$, we have $1$ unit of work plus the amount of work required for one subproblem of size $n/8$: $O(n) = 1 + (1 + (1 + O(n/8)))$
+- ...etc, until we reach a subproblem of size $1$: $O(n) = 1 + (1 + (1 + (1 + (1 + (\ldots)))))$
+
+Thus, the closed form solution of $O(n) = O(n/2) + 1$ can be modeled by the summation
+
+\begin{eqnarray}
+\sum_{i=0}^{\log n} 1 &\in& O(\log n)
+\end{eqnarray}
+
 Comparing sequential search to binary search, we see that as $n$ grows,
 the $O(n)$ running time for sequential search in the average and
 worst cases quickly becomes much greater than the $O(\log n)$
@@ -26,15 +43,11 @@ than that for sequential search, because the calculation for the next
 search position in binary search is more expensive than just
 incrementing the current position, as sequential search does.
 
-Note however that the running time for sequential search will be roughly
-the same regardless of whether or not the array values are stored in
-order. In contrast, binary search requires that the array values be
-ordered from lowest to highest. Depending on the context in which binary
-search is to be used, this requirement for a sorted array could be
-detrimental to the running time of a complete program, because
-maintaining the values in sorted order requires a greater cost when
-inserting new elements into the array. This is an example of a tradeoff
-between the advantage of binary search during search and the
-disadvantage related to maintaining a sorted array. Only in the context
-of the complete problem to be solved can we know whether the advantage
-outweighs the disadvantage.
+However, binary search comes with a precondition: the array must be sorted.
+And sorting an array is a time-consuming operation -- in fact it is $O(n\log n)$ in the worst case, as we will see in chapter XX (chapter 4).
+So there's a tradeoff here -- to be able to search the array efficiently we need to keep it sorted.
+This is not much of a problem if this is something we only have to do once, but it can be very costly if the array changes because we insert and delete elements.
+Only in the context of the complete problem to be solved can we know whether the advantage outweighs the disadvantage.
+
+So, if we want to maintain a searchable collection which changes over time, a sorted array is not a good choice.
+But an unsorted array isn't either -- instead we should use smarter data structures such as [search trees]{.term} (chapter XX) or [hash tables]{.term} (chapter YY).
