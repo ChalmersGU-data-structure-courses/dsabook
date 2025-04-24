@@ -54,3 +54,7 @@ syntax-definitions: [extra/pseudo.xml]
 indented-code-classes: [pseudo]
 # Specify classes to use for indented code blocks–for example, perl,numberLines or haskell.
 # Multiple classes may be separated by spaces or commas.
+
+filters:
+  - pandoc-plot
+

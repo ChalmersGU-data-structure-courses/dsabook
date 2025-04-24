@@ -86,6 +86,8 @@ reference-location: block
 # Specify whether footnotes (and references, if reference-links is set) are placed at
 # the end of the current (top-level) block, the current section, or the document. The default is document.
 
+filters:
+  - pandoc-plot
 
 include-in-header:
   - extra/opendsa-header.html
