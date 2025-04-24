@@ -1,5 +1,9 @@
 .PHONY: all default clean preprocess pandoc postprocess install deploy check-links server pdf
 
+# Default is to build all chapters
+# Run `make CHAPTER=02` to only build chapter 2
+CHAPTER :=
+
 # Directories
 SRC       := src
 LIB       := lib
@@ -13,7 +17,7 @@ DOCS      := docs
 
 # Source Files
 GLOSSARY  := $(MARKDOWN)/X-appendix/01-glossary.md
-MD_FILES  := $(wildcard $(MARKDOWN)/*/*.md)
+MD_FILES  := $(sort $(wildcard $(MARKDOWN)/$(CHAPTER)*/*.md) $(wildcard $(MARKDOWN)/*/00-*.md))
 
 # Tools
 PYTHON    := python3
