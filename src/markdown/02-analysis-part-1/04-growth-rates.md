@@ -4,6 +4,8 @@
 ::: TODO
 - Prio 2: is this a good way of introducing the concept of growth rates?
     - does this section match well with the previous and the next?
+    - remove 1st subheading?
+    - rename 2nd subheading - ugly to have "growth rates" twice
 :::
 
 ### Faster computer, or faster algorithm?

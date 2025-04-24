@@ -2,10 +2,8 @@
 ## Comparing algorithms
 
 ::: TODO
-- Prio 2: discuss how to abstract away things
+- Prio 3: discuss how to abstract away things
 :::
-
-### Introduction
 
 How do you compare two algorithms for solving some problem in terms of
 efficiency? We could implement both algorithms as computer programs and
@@ -102,7 +100,7 @@ illustrated by the following function:
     // Return position of largest value in integer array A
     function largest(A):
         currlarge = 0                 // Position of largest element seen.
-        for i in 1 .. A.size-1:     // For each element,
+        for i in 1 .. A.size-1:       // For each element,
             if A[currlarge] < A[i]:   // if A[i] is larger,
                 currlarge = i         // remember its position.
         return currlarge              // Return largest position

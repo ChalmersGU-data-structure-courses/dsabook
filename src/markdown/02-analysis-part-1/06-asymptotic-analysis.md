@@ -89,7 +89,7 @@ Tight bound
 
 ### Defining orders of growth
 
-But how do we define upper and lower bounds?
+How do we define upper and lower bounds?
 First, if $g$ is an upper bound of $f$, then this should mean something like $f(n)\leq g(n)$ *in the long run*.
 What we mean by this is that whenever $n$ becomes sufficiently large, then $f(n)$ should not outgrow $g(n)$.
 
@@ -147,9 +147,8 @@ Therefore the upper bound $O(f)$ is by far the most common complexity measure th
 One could argue that $\Theta(f)$ would be an even better measure, because it gives more information about an algorithm.
 But it is much more difficult to reason about $\Theta(f)$, and therefore we will almost exclusively use the upper bound notation $O(f)$.
 
-#### Is the lower bound useless?
-
-The lower bound is not useless, definitely not.
+So, is the lower bound useless?
+-- No, definitely not.
 The main use case for $\Omega$ is when we want to classify *problems*, not algorithms.
 One example is when proving that the lower bound for sorting is $\Omega(n\log n)$ (see section XX).
 But classifying problems is out of scope for this book, so we will not use $\Omega$ much.

@@ -2,7 +2,7 @@
 # Algorithm analysis, part 1: Introduction
 
 ::: TODO
-- Prio 2: also write about correctness, e.g. invariants
+- Prio 3: also write about correctness, e.g. invariants
 - Prio 3: is the bullet list fine?
 :::
 
@@ -27,7 +27,7 @@ asymptotic analysis is only interested in its
 [order of growth]{.term}). The growth rate is
 what determines the resource consumption for large inputs. Thankfully,
 growth rate expressions are relatively easy to compare. This allows us
-decide which of two algorithms is better at solving the same problem.
+to decide which of two algorithms is better at solving the same problem.
 Asymptotic analysis also gives algorithm designers a tool for estimating
 whether a proposed solution is likely to meet the resource constraints
 for a problem before they implement an actual program.

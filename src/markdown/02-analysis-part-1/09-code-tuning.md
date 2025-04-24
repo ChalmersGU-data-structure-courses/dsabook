@@ -2,7 +2,7 @@
 ## Code tuning
 
 ::: TODO
-- Prio 2: discuss constant factors (not covered by asymptotic complexity/analysis)
+- Prio 3: discuss constant factors (not covered by asymptotic complexity/analysis)
 - Prio 3: add an image explaining the graphics example
 :::
 
@@ -25,6 +25,10 @@ or more. Even speedups by a factor of five to ten are not uncommon.
 Occasionally, you can get an even bigger speedup by converting from a
 symbolic representation of the data to a numeric coding scheme on which
 you can do direct computation.
+
+Note that code tuning does not change the complexity of an algorithm, because it only affects the multiplicative factor.
+So we cannot use complexity analysis to understand the improvements by code tuning.
+Instead, the most important tuning tool is [empirical analysis]{.term}.
 
 <!-- TODO
 Give an example of this type of representational change.
@@ -92,4 +96,6 @@ benchmark set of input. It is very hard to do better than a good compiler.
 The greatest time and space improvements come from a better data
 structure or algorithm. The most important rule of code tuning is:
 
-> **First tune the algorithm, then tune the code.**
+::: center
+***First tune the algorithm, then tune the code.***
+:::
