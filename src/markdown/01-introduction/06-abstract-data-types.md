@@ -195,34 +195,18 @@ Most implementations of both sets and maps are designed to support fast insertio
 
 ### Graphs
 
-::: TODO
-- examples, use cases
-- Terminology: vertices/nodes, edges, directed/undirected, weighted/unweighted (negative weights)
-- quickly: MST, shortest path, topological order
-- Implementations: adjacency list, adjacency matrix
-:::
+Another well-known abstract data type is the _graph_.
+Graphs are used to model relationships between elements, where each element is called a _node_ or _vertex_.
+A _relation_ between two nodes is represented by an _edge_, which may carry additional information to describe the nature or strength of the relationship—such as distance, cost, or capacity.
 
-#### Edges, vertices
+Graphs appear in many real-world scenarios, often in surprising ways.
+A classic example is a map, where cities are represented as nodes and roads (with distances) as edges.
+Graph algorithms can then be used to solve problems such as finding the shortest route between two cities.
+Another, less obvious example is the structure of Java programs: the dependencies between Java classes can be represented as a graph.
+This representation helps us determine the correct order to compile classes based on their dependencies.
 
-    datatype Edge of V:
-        start: V              // start vertex
-        end: V                // end vertex
-        weight: Float = 1.0   // weight, defaults to 1.0
-
-
-#### ADTs for graphs
-
-    interface Graph of V:
-        addVertex(v: V)                 // Adds the vertex v to the graph.
-        addEdge(e: Edge of V)           // Adds the edge e to the graph.
-        vertices() -> Collection of V   // Returns a Collection of all vertices in the graph.
-        outgoingEdges(v: V) -> Collection of Edge of V
-                                        // Returns a Collection of the edges that originates in vertex v.
-        vertexCount() -> Int            // Returns the number of vertices in the graph.
-        edgeCount() -> Int              // Returns the number of edges in the graph.
-
-
-##### Use case(s) / examples
+Graphs are a fundamental concept in computer science, and we dedicate an entire chapter to them in this book.
+Chapter [Graphs](#chap-graphs) explores how graphs can be represented and how we can traverse and manipulate them using various algorithms.
 
 
 <!--
