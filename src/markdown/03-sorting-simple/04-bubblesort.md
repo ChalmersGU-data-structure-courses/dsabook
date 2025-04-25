@@ -8,7 +8,7 @@
 Our first sorting algorithm is called [Bubble sort]{.term}.
 Bubble sort is often the first sorting algorithm that you learn, because it is relatively easy to understand and implement.
 However, it is rather slow, even compared to the other quadratic sorting algorithms that we will introduce in the next sections -- [Selection sort] and [Insertion sort].
-It's not even particularly intuitive -- nobody is going to come naturally to bubble sort as a way to sort their Bridge hand or their pile of bills, like they might with Insertion sort or Selection sort.
+It's not even particularly intuitive -- nobody is going to come naturally to bubble sort as a way to sort their bookshelf, their Bridge hand or their pile of bills, like they might with Insertion sort or Selection sort.
 
 Bubble sort consists of a simple double `for` loop.
 The inner `for` loop moves through the array from left to right, comparing adjacent elements.
@@ -23,13 +23,13 @@ Likewise, each succeeding pass through the array compares adjacent
 elements, looking at one less element toward the end than in the
 preceding pass. Here is an implementation:
 
-    function bubbleSort(arr):
-        n = arr.size
-        for i in 0 .. n-2:
+    function bubbleSort(A):
+        N = A.size
+        for i in 0 .. N-2:
             // Bubble up the i'th element
-            for j in 1 .. n-i-1:
-                if arr[j-1] > arr[j]:
-                    swap(arr, j-1, j)
+            for j in 1 .. N-i-1:
+                if A[j-1] > A[j]:
+                    swap(A, j-1, j)
 
 
 ### Bubble sort visualisation
@@ -50,15 +50,14 @@ Here is a visualisation of the first pass of bubble sorting an array of integers
 
 <inlineav id="bubblesortS1CON" src="Sorting/bubblesortS1CON.js" name="Bubble Sort Slideshow 1" links="Sorting/BubbleSortAnalysisCON.css"/>
 
-Now we continue with the second pass. However, since the largest record
+Now we continue with the second pass. However, since the largest element
 has "bubbled" to the very right, we will not need to look at it again.
 
 <inlineav id="bubblesortS2CON" src="Sorting/bubblesortS2CON.js" name="Bubble Sort Slideshow 2" links="Sorting/BubbleSortAnalysisCON.css"/>
 
 Bubble sort continues in this way until the entire array is sorted.
 
-The following visualization shows the complete Bubble sort. You can
-input your own data if you like.
+The following visualization shows the complete Bubble sort. You can input your own data if you like.
 
 <avembed id="bubblesortAV" src="Sorting/bubblesortAV.html" type="ss" name="Bubble Sort Visualization"/>
 
@@ -74,8 +73,8 @@ Now try for yourself to see if you understand how Bubble sort works.
 
 We have a nested for loop, where the inner loop depends on the loop variable of the outer loop.
 
-- The outer loop is iterated $n-1$ times in total.
-- In iteration $i$, the number of comparisons made by the inner loop is always $n-i-1$.
+- The outer loop is iterated $N-1$ times in total.
+- In iteration $i$, the number of comparisons made by the inner loop is always $N-i-1$.
 
 So the total number of iterations is
 
@@ -83,7 +82,7 @@ So the total number of iterations is
 (n-1) + (n-2) + \cdots + 1 &=& \sum_{i=1}^{n-1} i
 \end{eqnarray}
 
-And this sum has the value $n(n-1)/2$, which means the runtime complexity is *quadratic*, $O(n^2)$.
+And this sum has the value $N(N-1)/2$, which means the runtime complexity is *quadratic*, $O(N^2)$.
 Note that this is regardless of how the initial array looks like, so bubble sort has the same best- and worst-case complexity.
 
 The following visualisation illustrates the running time analysis of Bubble sort.
@@ -91,9 +90,9 @@ The following visualisation illustrates the running time analysis of Bubble sort
 <inlineav id="BubbleSortAnalysisCON" src="Sorting/BubbleSortAnalysisCON.js" name="Bubble Sort Analysis Slideshow" links="Sorting/BubbleSortAnalysisCON.css"/>
 
 The number of swaps required depends on how often an element is less than the one immediately preceding it in the array.
-In the worst case this will happen in every single comparison, leading to $O(n^2)$ number of swaps.
+In the worst case this will happen in every single comparison, leading to $O(N^2)$ number of swaps.
 If we assume that the initial array is random, we can expect that about half of the comparisons will lead to a swap.
-So the average case number of swaps is also quadratic, $O(n^2)$.
+So the average case number of swaps is also quadratic, $O(N^2)$.
 However, if the initial array is already sorted we don't have to perform any swaps at all, so in the best case the number of swaps is constant $O(1)$.
 (But recall that the best case is not something we should rely upon.)
 

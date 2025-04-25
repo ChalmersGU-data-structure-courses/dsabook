@@ -8,7 +8,11 @@
 #BubbleSortAnalysisCON .jsavline,
 #bubblesortS1CON .jsavline,
 #bubblesortS2CON .jsavline {
-  height: 40px;
+  height: auto;
+}
+
+#bubblesortS1CON .jsavline,
+#bubblesortS2CON .jsavline {
   margin-bottom: 0;
 }
 
