@@ -1,57 +1,6 @@
 
 # Sorting, part 1: Simple algorithms
 
-::: TODO
-- Prio 1: rewrite the last paragraph to reflect that it's not 2 chapters
-- Prio 3: update text in general
-:::
-
-::: TODO
-Perhaps integrate the following text:
-
-In this chapter we will study two algorithmic problems and how to solve
-them efficiently using arrays:
-
-Searching
-:   Given a list of items, check if a given item is present
-    in the list. There are two kinds of search problems:
-
-    *Membership testing*: The search algorithm is given an item to search for,
-    and should return *true* or *false* depending on whether the item
-    is found. For example, a spellchecker: given a list of all
-    valid English words, search the list for a given string.
-
-    *Lookup*: The items are typically objects, and each object has a field
-    called the *key*. The search algorithm is given a key, and
-    should return the item having that key (or a reference to
-    the item, such as the position in the list). For example,
-    a database: given a list of people, find the person having
-    a given personal identity number.
-
-Sorting
-:   Given a list of items, put them in ascending order.
-    Again, there are two kinds of sorting problems:
-
-    *Natural sorting*: Here, the items have some kind of natural order.
-    For example, sorting a list of words in alphabetical order.
-
-    *Key-based sorting*: Here, each item has a *key*, and we want to
-    sort the items so that the keys come in ascending order.
-    For example, sorting a list of towns by population.
-
-Note that if we search or sort according to a *key*, it doesn't have to
-be explicitly stored in the object, but can instead be calculated on
-demand. E.g., if we want to sort a list of words case-insensitively, we
-can use a lower-case transformation when doing the comparisons. This is
-usually done by a [comparator]{.term} (in Java), or by a
-[key function](https://docs.python.org/3/howto/sorting.html#key-functions)
-(in Python).
-
-This chapter concentrates on *membership testing* and *natural sorting*,
-but all the algorithms in this chapter work just as well for *lookup*
-and *key-based sorting*.
-:::
-
 We have seen that, when an array is sorted in ascending order, *binary
 search* can be used to find items in it efficiently. But what about when
 we have a collection of data that is not in any order? If we will often
@@ -90,36 +39,23 @@ study, there are still unsolved problems related to sorting. New
 algorithms are still being developed and refined for special-purpose
 applications.
 
-Along with introducing this central problem in computer science,
-studying sorting algorithms helps us to understand issues in algorithm
-design and analysis. For example, the sorting algorithms in this chapter
-show multiple approaches to using [divide and conquer]{.term}.
-In particular, there are multiple ways to do the dividing.
-[Mergesort]{.term} divides a list in half.
-[Quicksort]{.term} divides a list into big values and small values.
-[Radix sort]{.term} divides the problem by working on one digit of the key at a time.
+<inlineav id="SortNotationS1CON" src="Sorting/SortNotationS1CON.js" name="Sorting Terminology and Notation Slideshow 1" links="Sorting/SortNotationS1CON.css"/>
 
-Sorting algorithms can also illustrate a wide variety of algorithm
-analysis techniques. Quicksort illustrates that it is possible for an
-algorithm to have an [average case]{.term} whose
-growth rate is significantly smaller than its
-[worst case]{.term}. It is possible to speed up
-one sorting algorithm (such as [Shellsort]{.term} or [Quicksort]{.term})
-by taking advantage of the [best case]{.term} behavior of another algorithm (Insertion sort).
-Special case behavior by some sorting algorithms makes them a good solution for
-special niche applications ([Heapsort]{.term}).
-Sorting provides an example of an important technique for analyzing the
-lower bound for a problem.
+Sorting can be divided into two kinds depending on how we compare the items in the list:
 
-This chapter covers several standard algorithms appropriate for sorting
-a collection of records that fit into the computer's main memory. It
-begins with a discussion of three simple, but relatively slow,
-algorithms that require [quadratic](#quadratic-growth-rate){.term}
-time in the size of the array.
-Three algorithms with considerably better
-performance are then presented, some with
-[linearithmic](#linearithmic-growth-rate){.term} worst-case running time.
-The chapter concludes with a proof that you cannot implement a generic sorting
-algorithm with better worst-case behaviour than
-[linearithmic](#linearithmic-growth-rate){.term} time.
+Natural sorting
+:   The items have some kind of natural order.
+    For example, sorting a list of words in alphabetical order, or sorting a list of numbers.
 
+Key-based sorting
+:   Here, each item has a *key*, and we want to sort the items so that the keys come in order.
+    For example, sorting a list of towns by population, or sorting a list of persons by their age.
+
+Note that if we sort according to a *key*, it doesn't have to be explicitly stored in the object, but can instead be calculated on demand.
+E.g., if we want to sort a list of words case-insensitively, we can use a lower-case transformation when doing the comparisons.
+This is usually done by a [comparator]{.term} (in Java), or by a [key function](https://docs.python.org/3/howto/sorting.html#key-functions) (in Python).
+
+The following two chapters cover several standard algorithms appropriate for sorting a collection of records.
+In these chapters we concentrate on *natural sorting*, but all the algorithms work just as well for *key-based sorting* -- and we trust that you are a mature enough programmer to be able to infer how to do this.
+The first chapter discusses three simple, but relatively slow, algorithms that require [quadratic](#quadratic-growth-rate){.term} time in the size of the array.
+The following chapter then presents two algorithms with considerably better performance, with [linearithmic](#linearithmic-growth-rate){.term} worst-case or average-case running time.
