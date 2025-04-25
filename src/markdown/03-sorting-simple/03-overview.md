@@ -8,7 +8,7 @@ For these short descriptions, assume that we want to sort $n$ books in a bookshe
 It doesn't matter what we want to sort the books by -- it could be by author, or title, or perhaps height.
 We only need to know how to compare two books, where we say that the "smaller" book should come before the "larger" in the final ordered bookshelf.
 
-### Bubble sort
+### Bubble sort overview
 
 The first algorithm, *bubble sort*, is also the shortest to describe:
 
@@ -20,7 +20,7 @@ This can be done in many different ways, but the commonest implementation is to 
 Repeat this left-to-right pass until the list is sorted.
 It's perhaps not obvious, but in fact we only have to do this at most $n$ times.
 
-### Selection sort
+### Selection sort overview
 
 Now, assume that we instead empty the bookshelf and put all the books on the floor, so that we can have a good overview of them.
 This gives the idea for the *selection sort* algorithm:
@@ -31,7 +31,7 @@ This gives the idea for the *selection sort* algorithm:
 This description suggests that selection sort is not an in-place algorithm, because we first move all the books to a new place, meaning that we have to have enough extra floor space for all the books.
 But the algorithm can easily be made in-place, and we will describe that in a later section.
 
-### Insertion sort
+### Insertion sort overview
 
 Finally, assume that we don't spread out all books on the floor, but instead put them in a single pile.
 Now we can proceed like as *insertion sort*:

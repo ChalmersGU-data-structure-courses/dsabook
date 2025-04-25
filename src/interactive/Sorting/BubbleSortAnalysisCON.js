@@ -8,7 +8,7 @@ $(document).ready(function() {
 
   var interpret = {
     "sc1": "What is the cost of Bubblesort?",
-    "sc2": "The number of comparisons made by the inner for loop on iteration <em>i</em> is always <em>n–i</em>.",
+    "sc2": "The number of comparisons made by the inner for loop on iteration <em>i</em> is always <em>n–i–1</em>.",
     "sc3": "Consider the following example of an array with 6 elements:",
     "sc4": "At <em>i=0</em> we have 5 comparisons. Let's mark this with 5 boxes.",
     "sc9": "At <em>i=1</em> we have 4 comparisons, so 4 boxes.",
@@ -23,9 +23,9 @@ $(document).ready(function() {
 
   var pseudo = av.code([
     "function bubbleSort(A):",
-    "    for i in 0 ... length(A)-2:",
-    "        // Bubble up the i'th element",
-    "        for j in 1 ... length(A)-i:",
+    "    N = A.size",
+    "    for i in 0 .. N-2:",
+    "        for j in 1 .. N-i-1:",
     "            if A[j-1] > A[j]:",
     "                swap(A, j-1, j)",
   ], {lineNumbers: false,

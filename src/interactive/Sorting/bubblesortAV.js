@@ -12,17 +12,18 @@ $(document).ready(function() {
 
   var code = [
     "function bubbleSort(A):",
-    "    for i in 0 ... length(A)-2:",
-    "        for j in 1 ... length(A)-i:",
+    "    N = A.size",
+    "    for i in 0 .. N-2:",
+    "        for j in 1 .. N-i-1:",
     "            if A[j-1] > A[j]:",
     "                swap(A, j-1, j)",
   ];
   var tags = {
     "sig": 1,
-    "outloop": 2,
-    "inloop": 3,
-    "compare": 4,
-    "swap": 5,
+    "outloop": 3,
+    "inloop": 4,
+    "compare": 5,
+    "swap": 6,
     "end": 9
   };
 

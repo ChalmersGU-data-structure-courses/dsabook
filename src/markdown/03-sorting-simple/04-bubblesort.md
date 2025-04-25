@@ -2,29 +2,26 @@
 ## Bubble sort
 
 ::: TODO
-- Prio 1: write about invariants
-- Prio 2: rewrite a little, because now it looks like insertion sort has already been introduced
-- Prio 2: improve the analysis (not just a visualisation)
+- Prio 3: write about invariants
 :::
 
 Our first sorting algorithm is called [Bubble sort]{.term}.
 Bubble sort is often the first sorting algorithm that you learn, because it is relatively easy to understand and implement.
 However, it is rather slow, even compared to the other quadratic sorting algorithms that we will introduce in the next sections -- [Selection sort] and [Insertion sort].
-It's not even particularly intutitive -- nobody is going to come naturally to bubble sort as a way to sort their Bridge hand or their pile of bills, like they might with Insertion sort or Selection sort.
+It's not even particularly intutitive -- nobody is going to come naturally to bubble sort as a way to sort their bookshelf, their Bridge hand or their pile of bills, like they might with Insertion sort or Selection sort.
 
 Bubble sort consists of a simple double `for` loop.
-The inner `for` loop moves through the record array from left to right,
-comparing adjacent keys. If a record's key value is greater than the
-key of its right neighbor, then the two records are swapped. Once the
-record with the largest key value is encountered, this process will
+The inner `for` loop moves through the array from left to right, comparing adjacent elements.
+If an element is greater than its right neighbor, then the two are swapped.
+Once the largest element is encountered, this process will
 cause it to "bubble" up to the right of the array (which is where
 Bubble sort gets its name). The second pass through the array repeats
-this process. However, because we know that the record with the largest
-value already reached the right of the array on the first pass, there is
-no need to compare the rightmost two records on the second pass.
+this process. However, because we know that the largest
+element already reached the right of the array on the first pass, there is
+no need to compare the rightmost two elements on the second pass.
 Likewise, each succeeding pass through the array compares adjacent
-records, looking at one less record toward the end than did the
-preceding pass. Here is an implementation.
+elements, looking at one less element toward the end than in the
+preceding pass. Here is an implementation:
 
     function bubbleSort(A):
         N = A.size
@@ -35,9 +32,10 @@ preceding pass. Here is an implementation.
                     swap(A, j-1, j)
 
 
+### Bubble sort visualisation
 
-::: {#practice}
-(Note that to make the explanation for these sorting algorithms as
+::: note
+Note that to make the explanation for the sorting algorithms as
 simple as possible, our visualizations will show the array as though it
 stored simple integers rather than more complex records. But you should
 realize that in practice, there is rarely any point to sorting an array
@@ -45,16 +43,17 @@ of simple integers. Nearly always we want to sort more complex records
 that each have a [key]{.term} value. In such cases we must have a way
 to associate a key value with a record. The sorting
 algorithms will simply assume that the records are
-[comparable]{.term}.)
+[comparable]{.term}.
 :::
 
+Here is a visualisation of the first pass of bubble sorting an array of integers.
 
-<inlineav id="bubblesortS1CON" src="Sorting/bubblesortS1CON.js" name="Bubble Sort Slideshow 1"/>
+<inlineav id="bubblesortS1CON" src="Sorting/bubblesortS1CON.js" name="Bubble Sort Slideshow 1" links="Sorting/BubbleSortAnalysisCON.css"/>
 
 Now we continue with the second pass. However, since the largest record
 has "bubbled" to the very right, we will not need to look at it again.
 
-<inlineav id="bubblesortS2CON" src="Sorting/bubblesortS2CON.js" name="Bubble Sort Slideshow 2"/>
+<inlineav id="bubblesortS2CON" src="Sorting/bubblesortS2CON.js" name="Bubble Sort Slideshow 2" links="Sorting/BubbleSortAnalysisCON.css"/>
 
 Bubble sort continues in this way until the entire array is sorted.
 
@@ -67,23 +66,34 @@ Now try for yourself to see if you understand how Bubble sort works.
 
 <avembed id="BubsortPRO" src="Sorting/BubsortPRO.html" type="ka" name="Bubble Sort Proficiency Exercise"/>
 
-
+<!--
 ### Invariants
-
+-->
 
 ### Bubble sort analysis
 
-The following visualization illustrates the running time analysis of
-Bubble sort.
+We have a nested for loop, where the inner loop depends on the loop variable of the outer loop.
+
+- The outer loop is iterated $n-1$ times in total.
+- In iteration $i$, the number of comparisons made by the inner loop is always $n-i-1$.
+
+So the total number of iterations is
+
+\begin{eqnarray}
+(n-1) + (n-2) + \cdots + 1 &=& \sum_{i=1}^{n-1} i
+\end{eqnarray}
+
+And this sum has the value $n(n-1)/2$, which means the runtime complexity is *quadratic*, $O(n^2)$.
+Note that this is regardless of how the initial array looks like, so bubble sort has the same best- and worst-case complexity.
+
+The following visualisation illustrates the running time analysis of Bubble sort.
 
 <inlineav id="BubbleSortAnalysisCON" src="Sorting/BubbleSortAnalysisCON.js" name="Bubble Sort Analysis Slideshow" links="Sorting/BubbleSortAnalysisCON.css"/>
 
-Thus, Bubble sort's running time is roughly the same in the best,
-average, and worst cases.
+The number of swaps required depends on how often an element is less than the one immediately preceding it in the array.
+In the worst case this will happen in every single comparison, leading to $O(n^2)$ number of swaps.
+If we assume that the initial array is random, we can expect that about half of the comparisons will lead to a swap.
+So the average case number of swaps is also quadratic, $O(n^2)$.
+However, if the initial array is already sorted we don't have to perform any swaps at all, so in the best case the number of swaps is constant $O(1)$.
+(But recall that the best case is not something we should rely upon.)
 
-The number of swaps required depends on how often a record's value is
-less than that of the record immediately preceding it in the array. We
-can expect this to occur for about half the comparisons in the average
-case, leading to $O(n^2)$ for the expected number of swaps. The
-actual number of swaps performed by Bubble sort will be identical to
-that performed by Insertion sort.

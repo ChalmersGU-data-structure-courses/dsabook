@@ -1,10 +1,15 @@
-#BubbleSortAnalysisCON {
-  height: 450px;
-}
+
 #BubbleSortAnalysisCON .jsavcode {
   position: absolute;
   top: 150px;
   left: 250px;
+}
+
+#BubbleSortAnalysisCON .jsavline,
+#bubblesortS1CON .jsavline,
+#bubblesortS2CON .jsavline {
+  height: 40px;
+  margin-bottom: 0;
 }
 
 .rotated {
@@ -15,7 +20,7 @@
   transform: rotate(90deg);
 }
 .bigTriangle{
-  fill: blue; 
+  fill: blue;
   opacity: 0.2 !important;
 }
 .smallTriangle{
@@ -23,7 +28,7 @@
   opacity: 0.2 !important;
 }
 .largeLabel{
-	font-size: 16px; 
+	font-size: 16px;
 	text-align: center;
 }
 .arrayStyle{
