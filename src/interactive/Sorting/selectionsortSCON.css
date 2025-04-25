@@ -1,4 +1,5 @@
 
 #selectionsortS1CON .jsavline, #selectionsortS2CON .jsavline {
-  height: 40px;
+  height: auto;
+  margin-bottom: 0;
 }

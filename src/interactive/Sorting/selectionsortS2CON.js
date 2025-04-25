@@ -8,7 +8,7 @@ $(document).ready(function() {
     "av_c2": "For each element moving through the list: the smallest seen so far is shown in red.",
     "av_c3": "Compare to smallest seen so far.",
     "av_c4": "Found something smaller, so switch value of <em>minIndex</em>.",
-    "av_c5": "Now swap the next smallest element into place.",
+    "av_c5": "Now swap the second smallest element into place.",
     "av_c6": "Done this pass."
   };
 
