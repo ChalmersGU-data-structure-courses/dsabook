@@ -1,0 +1,37 @@
+#InsertionSortBestCaseCON,
+#InsertionSortAverageCaseCON,
+#InsertionSortWorstCaseCON {
+	height: auto;
+}
+
+#InsertionSortBestCaseCON .jsavline,
+#InsertionSortAverageCaseCON .jsavline,
+#InsertionSortWorstCaseCON .jsavline {
+	height: 3em;
+	margin-bottom: 0;
+}
+
+#insertionsortCON .jsavline {
+	height: auto;
+	margin-bottom: 0;
+}
+
+.largeLabel{
+	font-size: 20px;
+	text-align: center;
+}
+
+.mediumLabel{
+	font-size: 16px;
+	text-align: left;
+}
+
+.bigTriangle{
+	fill: blue;
+	opacity: 0.2 !important;
+}
+
+.smallTriangle{
+	fill: green;
+	opacity: 0.2 !important;
+}

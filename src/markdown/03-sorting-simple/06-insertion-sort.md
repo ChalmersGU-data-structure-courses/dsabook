@@ -1,20 +1,23 @@
 
 ## Insertion sort
 
-- Prio 1: write about invariants
-- Prio 2: rewrite a little, because now it looks like insertion sort is the first to be introduced
-- Prio 2: improve the analysis (not just a visualisation)
+::: TODO
+- Prio 3: write about invariants
+:::
 
 Consider again the problem of sorting a pile of books.
 Another intuitive approach might be to pick up the two topmost books in the pile and put them in order in the bookshelf.
-Then you take another book from the pile and put it in the bookshelf, in the right position with respect to the first two, and so on.
-As you take each book, you would add it in the bookshelf in the right position.
+Then you take another book from the pile and put it in the bookshelf, in the correct position with respect to the first two, and so on.
+As you take each book, you would add it in the bookshelf in the correct position to always keep the shelf sorted.
 This simple approach is the inspiration for our third sorting algorithm, called [Insertion sort]{.term}.
 
-Insertion sort iterates through a list of records. For each iteration,
-the current record is inserted in turn at the correct position within a
-sorted list composed of those records already processed. Here is an
-implementation. The input is an array named `A` that stores $N$ records.
+Just as for selection sort, the description above is not in-place.
+But just as for selection sort, it's relatively easy to turn it into an in-place algorithm, by remembering an invisible separator between the sorted books (on the left) and the still-unsorted books (on the right).
+
+Insertion sort iterates through a list of elements. For each iteration,
+the current element is inserted in turn at the correct position within a
+sorted list composed of those elements already processed. Here is an
+implementation. The input is an array named $A$ that stores $N$ elements.
 
     function insertionSort(A):
         N = A.size
@@ -25,38 +28,52 @@ implementation. The input is an array named `A` that stores $N$ records.
                 swap(A, j, j-1)
                 j = j-1
 
+### Selection sort visualisation
+
 Here we see the first few iterations of Insertion sort.
 
-<inlineav id="insertionsortCON" src="Sorting/insertionsortCON.js" name="Insertion Sort Slideshow"/>
+<inlineav id="insertionsortCON" src="Sorting/insertionsortCON.js" name="Insertion Sort Slideshow" links="Sorting/InsertionSort.css"/>
 
-This continues on with each record in turn. Call the current record $x$.
-Insertion sort will move it to the left so long as its value is less
-than that of the record immediately preceding it. As soon as a key value
-less than or equal to $x$ is encountered, `insertionSort` is done with
-that record because all records to its left in the array must have
-smaller keys.
+This continues on with each element in turn.
+Call the current element $x$.
+Insertion sort will move it to the left so long as it is smaller than element immediately preceding it.
+As an element is less than or equal to $x$ is encountered, `insertionSort` is done with that element because all elements to its left in the array must be smaller.
+
+The following visualization shows the complete Insertion sort. You can input your own data if you like.
 
 <avembed id="insertionsortAV" src="Sorting/insertionsortAV.html" type="ss" name="Insertion Sort Visualization"/>
 
+Now try for yourself to see if you understand how Insertion sort works.
+
 <avembed id="InssortPRO" src="Sorting/InssortPRO.html" type="ka" name="Insertion Sort Proficiency Exercise"/>
 
-
+<!--
 ### Invariants
-
+-->
 
 ### Insertion sort analysis
 
+Just as for the previous sorting algorithms, we have a nested for loop, where the inner loop depends on the loop variable of the outer loop.
+
+- The outer loop is iterated $N-1$ times in total.
+- The inner loop is harder to analyze since it depends on how many elements in positions $0,\ldots,i-1$ are smaller than the element in position $i$.
+    - in the absolute worst case, we always have to move the element to the front of the list, so the number of comparisons will be $i-1$
+    - in the best case, the element is already in place, and then we only need one comparison
+
+Therefore, the worst case complexity of insertion sort is $\sum_0^N i$, which is quadratic, $O(N^2)$.
+In the best case -- when the list is already sorted -- the complexity is instead linear, $O(N)$, because we only have to do one comparison per iteration.
+
 Here is an explanation of the worst case cost of insertion sort:
 
-<inlineav id="InsertionSortWorstCaseCON" src="Sorting/InsertionSortWorstCaseCON.js" name="Insertion Sort Worst Case Slideshow" links="Sorting/InsertionSortWorstCaseCON.css"/>
+<inlineav id="InsertionSortWorstCaseCON" src="Sorting/InsertionSortWorstCaseCON.js" name="Insertion Sort Worst Case Slideshow" links="Sorting/InsertionSort.css"/>
 
 And here is an explanation of the cost of the best case:
 
-<inlineav id="InsertionSortBestCaseCON" src="Sorting/InsertionSortBestCaseCON.js" name="Insertion Sort Best Case Slideshow" links="Sorting/InsertionSortBestCaseCON.css"/>
+<inlineav id="InsertionSortBestCaseCON" src="Sorting/InsertionSortBestCaseCON.js" name="Insertion Sort Best Case Slideshow" links="Sorting/InsertionSort.css"/>
 
 And here is the average case cost:
 
-<inlineav id="InsertionSortAverageCaseCON" src="Sorting/InsertionSortAverageCaseCON.js" name="Insertion Sort Average Case Slideshow" links="Sorting/InsertionSortAverageCaseCON.css"/>
+<inlineav id="InsertionSortAverageCaseCON" src="Sorting/InsertionSortAverageCaseCON.js" name="Insertion Sort Average Case Slideshow" links="Sorting/InsertionSort.css"/>
 
 While the best case is significantly faster than the average and worst
 cases, the average and worst cases are usually more reliable indicators
@@ -67,19 +84,18 @@ of additions to the list; restoring sorted order using Insertion sort
 might be a good idea if we know that the disordering is slight. And even
 when the input is not perfectly sorted, Insertion sort's cost goes up
 in proportion to the number of inversions. So a "nearly sorted" list
-will always be cheap to sort with Insertion sort. Examples of algorithms
-that take advantage of Insertion sort's near-best-case running time are
-[Shellsort]{.term} and [Quicksort](#quicksort).
+will always be cheap to sort with Insertion sort.
+An example of an algorithm that take advantage of Insertion sort's near-best-case running time is [Shellsort]{.term}.
 
 Counting comparisons or swaps yields similar results. Each time through
 the inner `for` loop yields both a comparison and a swap, except the
 last (i.e., the comparison that fails the inner `for` loop's test),
 which has no swap. Thus, the number of swaps for the entire sort
-operation is $n-1$ less than the number of comparisons. This is 0 in the
-best case, and $O(n^2)$ in the average and worst cases.
+operation is $N-1$ less than the number of comparisons. This is 0 in the
+best case, and $O(N^2)$ in the average and worst cases.
 
 Later we will see algorithms whose growth rate is much better than
-$O(n^2)$. Thus for larger arrays, Insertion sort will not be so
+$O(N^2)$. Thus for larger arrays, Insertion sort will not be so
 good a performer as other algorithms. So Insertion sort is not the best
 sorting algorithm to use in most situations. But there are special
 situations where it is ideal. We already know that Insertion sort works
