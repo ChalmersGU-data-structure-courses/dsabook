@@ -17,6 +17,8 @@ The first algorithm, *bubble sort*, is also the shortest to describe:
 Note that this description is too unspecified to be a real algorithm --
 in particular, we have to know in which order we should look at adjacent books.
 This can be done in many different ways, but the commonest implementation is to go from left to right and compare each pair of adjacent books.
+After the first iteration we have moved the largest book to the far end of the bookshelf.
+The next iteration will move the second largest book to its right location (next to the largest book), and so on.
 Repeat this left-to-right pass until the list is sorted.
 It's perhaps not obvious, but in fact we only have to do this at most $n$ times.
 
@@ -37,9 +39,9 @@ Finally, assume that we don't spread out all books on the floor, but instead put
 Now we can proceed like as *insertion sort*:
 
 - Repeat until there are no more books in the pile:
-    - Take the topmost book in the pile and insert it in the right position among the books that are in the shelf.
+    - Take the topmost book in the pile and insert it in the right position among the books that are on the bookshelf.
 
-Just as for selection sort, this description suggests that it is not in-place, but there is a simple in-place version which we will introduce later.
+Just as for selection sort, this description suggests that it is not in-place, but there is a simple in-place version, which we will introduce later.
 
 ### Summary
 

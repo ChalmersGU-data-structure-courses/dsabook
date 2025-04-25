@@ -8,7 +8,7 @@
 Our first sorting algorithm is called [Bubble sort]{.term}.
 Bubble sort is often the first sorting algorithm that you learn, because it is relatively easy to understand and implement.
 However, it is rather slow, even compared to the other quadratic sorting algorithms that we will introduce in the next sections -- [Selection sort] and [Insertion sort].
-It's not even particularly intutitive -- nobody is going to come naturally to bubble sort as a way to sort their bookshelf, their Bridge hand or their pile of bills, like they might with Insertion sort or Selection sort.
+It's not even particularly intuitive -- nobody is going to come naturally to bubble sort as a way to sort their Bridge hand or their pile of bills, like they might with Insertion sort or Selection sort.
 
 Bubble sort consists of a simple double `for` loop.
 The inner `for` loop moves through the array from left to right, comparing adjacent elements.
@@ -23,13 +23,13 @@ Likewise, each succeeding pass through the array compares adjacent
 elements, looking at one less element toward the end than in the
 preceding pass. Here is an implementation:
 
-    function bubbleSort(A):
-        N = A.size
-        for i in 0 .. N-2:
+    function bubbleSort(arr):
+        n = arr.size
+        for i in 0 .. n-2:
             // Bubble up the i'th element
-            for j in 1 .. N-i-1:
-                if A[j-1] > A[j]:
-                    swap(A, j-1, j)
+            for j in 1 .. n-i-1:
+                if arr[j-1] > arr[j]:
+                    swap(arr, j-1, j)
 
 
 ### Bubble sort visualisation
