@@ -111,7 +111,7 @@ Here is an example of a nested `for` loop:
 
 *Important note*: the range `i..j` is *inclusive*, meaning that the endpoint `j` is *included* in the sequence.
 This is different to how a language such as Python does it, where `range(i,j)` does not include `j`.
-Sometimes this can be a matter of life and death (of your program), so be sure to translate the algorithms in a correct way to your favourite programming language!
+Sometimes this can be a matter of life and death (of your program), so be sure to translate the algorithms in a correct way to your favorite programming language!
 
 Some modern programming languages (such as Python and Java) have syntactic sugar for *iterators*.
 Although this is very convenient in many cases, we will not make use of iterators in this book, just to keep things as simple as possible.
@@ -121,7 +121,7 @@ Although this is very convenient in many cases, we will not make use of iterator
 
 As mentioned earlier, a data type consists of a set of values and the operations that can be performed on them.
 Primitive data types are basic types provided by a programming language (including our pseudocode) and cannot be user-defined.
-Some (aggregate) data structures, such as arrays and lists, are built into many languages and organize collections of values, while compound data types, such as classes or algebraic data types, allow users to define their own structures.
+Some data structures, such as arrays and lists, are built into many languages and organize collections of values, while compound data types, such as classes or algebraic data types, allow users to define their own structures.
 The next sections introduce the data types used in this book.
 
 #### Primitive data types
@@ -273,7 +273,7 @@ We have already seen several examples of functions.
 A function starts with the keyword function, followed by its name.
 Functions can have zero or more parameters, and we assume a call-by-value evaluation strategy.
 
-It is important to note that aggregate types (such as arrays) and compound data types are reference types.
+It is important to note that collection types (such as arrays) and compound data types are reference types.
 When assigning an array or a compound data type to a variable, what gets stored is a reference to the actual data, not a copy of the data itself.
 This means that if you pass an array as an argument to a function, the reference is copied, not the entire array.
 As a result, any modifications made to the array inside the function will persist when the function returns.

@@ -1044,7 +1044,6 @@ might in turn require invoking the traversal method of other objects
 (in this case, the children of the root).
 
 ### composite type
-### aggregate type
 
 A [data type]{.term} whose [members](#member){.term} have subparts.
 For example, a typical database record.
