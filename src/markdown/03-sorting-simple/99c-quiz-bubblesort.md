@@ -9,7 +9,8 @@ Here are some review questions to check your understanding of Bubble sort.
 Answer TRUE or FALSE.
 
 Bubble sort (as the code is written in this chapter) is a stable sorting algorithm.
-Recall that a stable sorting algorithm maintains the relative order of records with equal keys.
+
+(Recall that a stable sorting algorithm maintains the relative order of equal elements.)
 
 - [x] True
 - [ ] False
@@ -17,9 +18,9 @@ Recall that a stable sorting algorithm maintains the relative order of records w
 ::: hints
 - Remember that: Bubble sort consists of a simple double for loop.
 - The first iteration of the inner for loop moves through
-the record array from bottom to top, comparing adjacent keys.
-- If the lower-indexed keys value is greater than its
-higher-indexed neighbor, then the two values are swapped.
+the array from bottom to top, comparing adjacent elements.
+- If the lower-indexed element is greater than its
+higher-indexed neighbor, then the two are swapped.
 :::
 ::::::::::::::::::::::::::::::
 
@@ -81,7 +82,7 @@ to sort an array of $n$ records?
 
 :::::::::: question ::::::::::
 What is the running time of Bubble sort
-when the input is an array where all record values are equal?
+when the input is an array where all elements are equal?
 
 - [x] $O(n^2)$
 - [ ] $O(n)$

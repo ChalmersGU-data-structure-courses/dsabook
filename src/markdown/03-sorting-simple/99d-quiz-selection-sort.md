@@ -15,7 +15,7 @@ Selection sort is simple, but less efficient than the best sorting algorithms.
 - [ ] False
 
 ::: hints
-- What is Selection sort's average case complexity?
+- What is Selection sort's worst case complexity?
 - It is $O(n^2)$.
 - Are there any better sorting algorithms?
 :::
@@ -26,38 +26,34 @@ Selection sort is simple, but less efficient than the best sorting algorithms.
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.
 
-Selection sort (as the code is written in this chapter)
-is a stable sorting algorithm. Recall that a stable sorting
-algorithm maintains the relative order of records with equal keys.
+Selection sort (as the code is written in this chapter) is a stable sorting algorithm.
+
+(Recall that a stable sorting algorithm maintains the relative order of equal elements.)
 
 - [ ] True
 - [x] False
 
 ::: hints
-- Think of the behaviour of every pass through the inner
-for loop of Selection sort if two records are equal, with
-the greatest value in the array.
-- Which record will be selected?
-- The first such record.
-- Where will it be moved to?
-- The last position in the array.
+- Can you find a counter-example to the proposition?
+- What about the array [2,2,1]?
+- Will the relative order between the two 2's change while sorting?
 :::
 ::::::::::::::::::::::::::::::
 
 
 
 :::::::::: question ::::::::::
-Suppose that Selection sort is given an input of 100 records,
+Suppose that Selection sort is given an input of 100 elements,
 and it has completed 37 iterations of the main loop.
 
-How many records are now guaranteed to be in their final
+How many elements are now guaranteed to be in their final
 position (never to be moved again by the sort)?
 
 <input type="text" value="37"/>
 
 ::: hints
-- On each pass, Selection sort puts a record into its final position.
-- So, if Selection sort has done 37 passes, then at least 37 records are in their final positions.
+- On each pass, Selection sort puts a element into its final position.
+- So, if Selection sort has done $k$ passes, then at least $k$ elements are in their final positions.
 :::
 ::::::::::::::::::::::::::::::
 
@@ -74,15 +70,15 @@ How many times does Selection sort call the swap function on an array of $n$ rec
 - [ ] It depends on the order of the records
 
 ::: hints
-- Selection sort first finds the largest key in an
-unsorted list, then the second largest, and so on.
-- To find the next largest key value requires searching
+- Selection sort first finds the smallest element in an
+unsorted list, then the second smallest, and so on.
+- To find the next smallest element requires searching
 through the entire unsorted portion of the array, but the
 search itself needs no swaps.
-- Once the next largest key is found, one swap is
-required to put the record in place.
+- Once the next smallest element is found, one swap is
+required to put the element in place.
 - We don't need to check anything on the very last pass,
-since at that point the first record
+since at that point the last element
 must already be in place.
 :::
 ::::::::::::::::::::::::::::::
@@ -177,8 +173,8 @@ matter what the order of the input array.
 :::::::::: question ::::::::::
 Which statement best characterizes
 Selection sort (as the code is written in this chapter)?
-Recall that a stable sorting algorithm maintains the relative
-order of records with equal keys.
+
+(Recall that a stable sorting algorithm maintains the relative order of equal elements.)
 
 - [x] Selection sort is not stable, but with
 minor modifications it could be made so
@@ -187,14 +183,14 @@ minor modifications it could be made so
 
 ::: hints
 - Think of the behaviour of every pass through the inner
-for loop of Selection sort if two records are equal, with
-the greatest value in the array.
-- Which record will be selected?
-- The first such record.
-- It will be moved to the last position in the array, putting
-it out of order with other equal-valued records.
-- But we could easily change the maximum-finding part of the
-loop to take the last of these equal-valued records.
+for loop of Selection sort if two elements are equal, with
+the smallest value in the array.
+- Which element will be selected?
+- The last such element.
+- It will be moved to the first position in the array, putting
+it out of order with other equal elements.
+- But we could easily change the minimum-finding part of the
+loop to take the last of these equal elements.
 :::
 ::::::::::::::::::::::::::::::
 
@@ -221,7 +217,7 @@ try to swap even if the current record is in its correct location.
 :::::::::: question ::::::::::
 When is Selection sort a good choice to use for sorting an array?
 
-- [x] When the cost of a swap is large, such as when the records are large
+- [x] When the cost of a swap is large
 - [ ] When each component of the array requires a small amount of memory
 - [ ] When the array has only a few elements out of place
 - [ ] None of these answers

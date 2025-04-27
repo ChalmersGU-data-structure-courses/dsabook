@@ -6,15 +6,15 @@
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.
 
-Insertion sort (as the code is written in this
-chapter) is a stable sorting algorithm. Recall that a stable sorting
-algorithm maintains the relative order of records with equal keys.
+Insertion sort (as the code is written in this chapter) is a stable sorting algorithm.
+
+(Recall that a stable sorting algorithm maintains the relative order of equal elements.)
 
 - [x] True
 - [ ] False
 
 ::: hints
-- Think of the behavior of every pass through the inner for loop of the insertion sort if keys are equal.
+- Think of the behavior of every pass through the inner for loop of the insertion sort if the elements are equal.
 :::
 ::::::::::::::::::::::::::::::
 
@@ -22,15 +22,15 @@ algorithm maintains the relative order of records with equal keys.
 
 :::::::::: question ::::::::::
 When implementing Insertion sort, a binary search could be used to locate the position within
-the first $i-1$ records of the array into which record $i$ should be inserted. Using binary search will:
+the first $i-1$ elements of the array into which element $i$ should be inserted. Using binary search will:
 
-- [x] Not speed up the asymptotic running time because shifting the records to make room for the insert will require $O(i)$ time.
+- [x] Not speed up the asymptotic running time because shifting the elements to make room for the insert will require $O(i)$ time.
 - [ ] Speed up the asymptotic running time because the position to insert will be found in $O(\log i)$ time.
-- [ ] Speed up the asymptotic running time because shifting the records to make room for the insert will require $O(i)$ time.
+- [ ] Speed up the asymptotic running time because shifting the elements to make room for the insert will require $O(i)$ time.
 - [ ] None of these answers is correct.
 
 ::: hints
-- The position at which to insert could be found in $O(\log(i))$ steps, but shifting the records to make room for the this record will require $O(i)$ time.
+- The position at which to insert could be found in $O(\log(i))$ steps, but shifting the elements to make room for the this element will require $O(i)$ time.
 :::
 ::::::::::::::::::::::::::::::
 
@@ -39,7 +39,7 @@ the first $i-1$ records of the array into which record $i$ should be inserted. U
 :::::::::: question ::::::::::
 When implementing Insertion sort, a binary
 search could be used to locate the position within the first $i-1$
-records of the array into which record $i$ should be
+elements of the array into which element $i$ should be
 inserted. In this implementation, the worst case time will be:
 
 - [x] $O(n^2)$
@@ -49,7 +49,7 @@ inserted. In this implementation, the worst case time will be:
 
 ::: hints
 - The position to insert could be found in $O (\log i)$,
-but shifting the records to makeroom for the insert will still require $O(i)$ time
+but shifting the elements to makeroom for the insert will still require $O(i)$ time
 :::
 ::::::::::::::::::::::::::::::
 
@@ -88,7 +88,7 @@ In which cases are the growth rates the same for Insertion sort?
 
 
 :::::::::: question ::::::::::
-The order of the input records has what impact on the number of comparisons
+The order of the input elements has what impact on the number of comparisons
 required by Insertion sort (as presented in this chapter)?
 
 - [x] There is a big difference, the asymptotic running time can change
@@ -97,14 +97,14 @@ required by Insertion sort (as presented in this chapter)?
 
 ::: hints
 - Does Insertion sort change when it make a comparison according to the order of the array input values?
-- Yes, Insertion sort might stop early or might look at many records.
+- Yes, Insertion sort might stop early or might look at many elements.
 :::
 ::::::::::::::::::::::::::::::
 
 
 
 :::::::::: question ::::::::::
-What is the {average|worst}-case time for Insertion sort to sort an array of n records?
+What is the worst-case time for Insertion sort to sort an array of n elements?
 
 - [x] $O(n^2)$
 - [ ] $O(n)$
@@ -112,8 +112,8 @@ What is the {average|worst}-case time for Insertion sort to sort an array of n r
 - [ ] $O(n \log n)$
 
 ::: hints
-- In the worst case, each record must make its way to the
-start of the array. This would occur if the record values are
+- In the worst case, each element must make its way to the
+start of the array. This would occur if the elements are
 initially arranged from highest to lowest, in the reverse
 of sorted order.
 - In this case, the number of comparisons will be one the
@@ -125,7 +125,7 @@ so on.
 
 
 :::::::::: question ::::::::::
-What is the best-case time for Insertionsort to sort an array of n records?
+What is the best-case time for Insertion sort to sort an array of n elements?
 
 - [x] $O(n)$
 - [ ] $O(n^2)$
@@ -133,15 +133,15 @@ What is the best-case time for Insertionsort to sort an array of n records?
 - [ ] $O(n \log n)$
 
 ::: hints
-- The best-case cost occurs when the records are already in sorted order from lowest to highest.
-- In this case, every test on the inner for loop will fail immediately, and no records will be moved.
+- The best-case cost occurs when the elements are already in sorted order from lowest to highest.
+- In this case, every test on the inner for loop will fail immediately, and no elements will be moved.
 :::
 ::::::::::::::::::::::::::::::
 
 
 
 :::::::::: question ::::::::::
-What is the running time of Insertion sort when the input is an array where all record values are equal?
+What is the running time of Insertion sort when the input is an array where all elements are equal?
 
 - [x] $O(n)$
 - [ ] $O(n^2)$
@@ -160,7 +160,7 @@ value at position $i-1$.
 
 :::::::::: question ::::::::::
 If $I$ is the number of
-inversions in an input array of $n$ records,
+inversions in an input array of $n$ elements,
 then Insertion sort will run in what time?
 
 - [x] $O(n+I)$
@@ -172,7 +172,7 @@ then Insertion sort will run in what time?
 
 ::: hints
 - Insertion sort has to do $n$ passes where it compares at least once.
-- If the record for this pass has no remaining inversions, then it requires no work.
+- If the element for this pass has no remaining inversions, then it requires no work.
 - But if it does have inversions, it will need a swap for each such inversion.
 :::
 ::::::::::::::::::::::::::::::
@@ -188,7 +188,7 @@ What is the running time for Insertion sort when the input array has values that
 - [ ] $O(n \log n)$
 
 ::: hints
-- On each iteration, the $i$th record will have to move to the start of the array.
+- On each iteration, the $i$th element will have to move to the start of the array.
 - This is the worst case.
 :::
 ::::::::::::::::::::::::::::::
@@ -215,15 +215,22 @@ value at position $i-1$.
 :::::::::: question ::::::::::
 When is Insertion sort a good choice for sorting an array?
 
-- [x] The array has only a few records out of sorted order
-- [ ] Each record requires a large amount of memory
-- [ ] Each record requires a small amount of memory
+*Note*: Multiple answers are possible!
+
+- [x] The array has only a few elements out of sorted order
+- [x] The array contains only a few elements
+- [ ] Each element requires a large amount of memory
+- [ ] Each element requires a small amount of memory
 - [ ] The processor speed is fast
-- [ ] The array contains many records
+- [ ] The array contains many elements
 - [ ] None of these situations
 - [ ] We need a reasonably fast algorithm with a good worst case
 
 ::: hints
+- Insertion sort if fairly simple.
+- Because Insertion sort is simple, it tends to cost only a
+little bit per comparison when compared to more complicated
+sorting algorithms.
 - Remember that insertion sort implementation is made up
 of two nested for loops.
 - The outer for loop is executed $n-1$ times.
@@ -236,32 +243,12 @@ value less than that of the key in position i.
 
 
 :::::::::: question ::::::::::
-When is Insertion sort a good choice for sorting an array?
-
-- [x] The array contains only a few records
-- [ ] Each record requires a large amount of memory
-- [ ] Each record requires a small amount of memory
-- [ ] The processor speed is fast
-- [ ] The array contains many records
-- [ ] None of these situations
-
-::: hints
-- Insertion sort if fairly simple.
-- Because Insertion sort is simple, it tends to cost only a
-little bit per comparison when compared to more complicated
-sorting algorithms.
-:::
-::::::::::::::::::::::::::::::
-
-
-
-:::::::::: question ::::::::::
 In the worst case, the total number of comparisons for Insertion sort is closest to:
 
 - [x] $n^2/2$
-- [x] $n$
-- [x] $n^2$
-- [x] $n \log n$
+- [ ] $n$
+- [ ] $n^2$
+- [ ] $n \log n$
 
 ::: hints
 - Insertion sort's implementation is made up of two nested for loops.
