@@ -1,4 +1,5 @@
 
+<!--
 ## More advanced optimisations / variants
 
 ::: TODO
@@ -25,4 +26,4 @@
 
 - Improvement of selection sort
 - See later chapter
-
+-->
