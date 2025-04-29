@@ -13,7 +13,9 @@ Conversion to HTML is done by the
 
 First you need to install the following dependencies:
 
-- To build the HTML files you need the [Pandoc library](https://pandoc.org/).
+- To build the HTML files you need the [Pandoc library](https://pandoc.org/),
+  [pandoc-plot](https://laurentrdc.github.io/pandoc-plot/), and
+  [panflute](https://scorreia.com/software/panflute/).
 
 - To check for broken links you need the [Hyperlink library](https://github.com/untitaker/hyperlink).
   (If you don't want to install this library, you can just comment out those calls in `make.sh`).
