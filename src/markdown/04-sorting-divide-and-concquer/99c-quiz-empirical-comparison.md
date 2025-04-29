@@ -1,10 +1,10 @@
 
-### Review questions: Comparison of sorting algorithms
+:::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
+### Review questions: Comparison of sorting algorithms {-}
 
 Here are a few multiple choice questions that ask you to compare the
 sorting algorithms that we learned about in the last two chapters.
 
-:::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.
@@ -46,8 +46,8 @@ How are Selection sort and Quicksort similar?
 Which of the following sorts is not stable?
 
 - [x] Quicksort
-- [ ] Insertion sort
-- [ ] Mergesort
+- [ ] Insertion sort
+- [ ] Mergesort
 
 ::: hints
 - Which of the mentioned algorithms will not maintain the

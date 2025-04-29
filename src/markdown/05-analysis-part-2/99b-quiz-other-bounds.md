@@ -1,7 +1,7 @@
 
-### Review questions: Asymptotic notations
-
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
+### Review questions: Asymptotic notations {-}
+
 
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.

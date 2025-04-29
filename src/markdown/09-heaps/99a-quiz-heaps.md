@@ -1,7 +1,7 @@
 
-### Review questions: Binary heaps
-
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
+### Review questions: Binary heaps {-}
+
 
 :::::::::: question ::::::::::
 Which feature of heaps allows them to be

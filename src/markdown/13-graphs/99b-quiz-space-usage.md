@@ -1,7 +1,7 @@
 
-### Review questions: Graph space requirements
-
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
+### Review questions: Graph space requirements {-}
+
 
 *Warning*! Read the conditions for the problems in this set very carefully!
 

@@ -1,7 +1,6 @@
 
-### Review questions: Growth rates
-
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
+### Review questions: Growth rates {-}
 
 :::::::::: question ::::::::::
 Hardware vendor XYZ Corp. claims that their

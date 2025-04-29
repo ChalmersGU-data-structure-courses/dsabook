@@ -1,9 +1,9 @@
 
-### Review questions: Bubble sort
+:::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
+### Review questions: Bubble sort {-}
 
 Here are some review questions to check your understanding of Bubble sort.
 
-:::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.

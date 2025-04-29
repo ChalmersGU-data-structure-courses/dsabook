@@ -1,2 +1,2 @@
 
-## Chapter exercises
+## Chapter summary

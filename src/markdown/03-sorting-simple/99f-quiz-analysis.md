@@ -1,7 +1,7 @@
 
-### Review questions: Exchange sort
-
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
+### Review questions: Exchange sort {-}
+
 
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.

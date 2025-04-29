@@ -1,7 +1,6 @@
 
-### Review questions: Terminology
-
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
+### Review questions: Terminology {-}
 
 :::::::::: question ::::::::::
 Which of these is the best definition for a stable sorting algorithm?</p>

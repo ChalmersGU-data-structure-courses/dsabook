@@ -1,7 +1,7 @@
 
-### Review questions: Binary tree traversals
-
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
+### Review questions: Binary tree traversals {-}
+
 
 :::::::::: question ::::::::::
 Visiting each element in a tree is known as:

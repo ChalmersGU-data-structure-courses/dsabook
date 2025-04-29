@@ -1,7 +1,6 @@
 
-### Review questions: Running time
-
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
+### Review questions: Running time {-}
 
 In this quiz you will give the complexity of some code fragments.
 Note that you should answer with the tightest possible growth factor,

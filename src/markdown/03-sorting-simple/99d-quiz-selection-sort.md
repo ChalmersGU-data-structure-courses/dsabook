@@ -1,10 +1,9 @@
 
-### Review questions: Selection sort
+:::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
+### Review questions: Selection sort {-}
 
 Here are some review questions to check how well you understand Selection sort.
 
-
-:::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.

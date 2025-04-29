@@ -1,7 +1,6 @@
 
-### Review questions: Upper bounds
-
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
+### Review questions: Upper bounds {-}
 
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.

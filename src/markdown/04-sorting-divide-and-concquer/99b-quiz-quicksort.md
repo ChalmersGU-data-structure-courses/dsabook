@@ -1,7 +1,7 @@
 
-### Review questions: Quicksort
-
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
+### Review questions: Quicksort {-}
+
 
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.

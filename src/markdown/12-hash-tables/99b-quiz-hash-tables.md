@@ -1,8 +1,7 @@
 
-### Review questions: Hash tables
-
-
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
+### Review questions: Hash tables {-}
+
 
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.

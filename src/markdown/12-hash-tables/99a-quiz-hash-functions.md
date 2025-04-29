@@ -1,7 +1,7 @@
 
-### Review questions: Hash functions
-
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
+### Review questions: Hash functions {-}
+
 
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.

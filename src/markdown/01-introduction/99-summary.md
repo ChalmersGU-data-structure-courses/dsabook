@@ -9,10 +9,9 @@ To support all readers, the chapter included a brief review of essential mathema
 
 In the following chapter, we delve deeper into the formal analysis of algorithms, focusing on systematic methods to compare time and space complexity across various solutions.
 
-
-### Questions {-}
-
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
+### Review questions {-}
+
 
 :::::::::: question ::::::::::
 An *ADT* is:

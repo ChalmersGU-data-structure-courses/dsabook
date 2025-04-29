@@ -1,7 +1,7 @@
 
-### Review questions: Graph terminology
-
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
+### Review questions: Graph terminology {-}
+
 
 :::::::::: question ::::::::::
 When a vertex  $Q$ is connected by an edge to

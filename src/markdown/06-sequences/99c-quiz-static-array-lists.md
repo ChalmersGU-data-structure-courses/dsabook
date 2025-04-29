@@ -1,7 +1,7 @@
 
-### Review questions: Static array-based lists
-
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
+### Review questions: Static array-based lists {-}
+
 
 :::::::::: question ::::::::::
 In an array-based list, the successive elements in the list:

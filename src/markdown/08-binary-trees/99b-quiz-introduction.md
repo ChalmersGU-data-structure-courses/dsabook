@@ -1,7 +1,7 @@
 
-### Review questions: Example binary tree
-
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
+### Review questions: Example binary tree {-}
+
 
 ![Here's an example binary tree](images/BintreeExercise.png)
 

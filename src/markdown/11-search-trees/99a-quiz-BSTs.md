@@ -1,7 +1,7 @@
 
-### Review questions: Binary search trees
-
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
+### Review questions: Binary search trees {-}
+
 
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.

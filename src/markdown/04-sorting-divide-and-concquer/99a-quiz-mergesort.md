@@ -1,8 +1,7 @@
 
-### Review questions: Mergesort
-
-
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
+### Review questions: Mergesort {-}
+
 
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.
