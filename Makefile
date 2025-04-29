@@ -21,7 +21,7 @@ MD_FILES  := $(sort $(wildcard $(MARKDOWN)/$(CHAPTER)*/*.md) $(wildcard $(MARKDO
 
 # Tools
 PYTHON    := python3
-PANDOC    := pandoc
+PANDOC    := pandoc --resource-path=$(RSC) --data-dir=pandoc --defaults=dsabook.yaml
 HYPERLINK := hyperlink
 
 default: install
@@ -35,17 +35,17 @@ clean:
 preprocess: clean
 	@mkdir -p $(TEMP)
 	@echo "Preprocessing..."
-	@time $(PYTHON) extra/preprocess.py $(TEMP) $(GLOSSARY) $(MD_FILES)
+	@time $(PYTHON) scripts/preprocess.py $(TEMP) $(GLOSSARY) $(MD_FILES)
 
 pandoc: preprocess
 	@mkdir -p $(BUILD)
 	@echo "Running pandoc..."
-	@time $(PANDOC) --defaults=pandoc-defaults.yaml --resource-path=resources --output=$(HTML) $(TEMP)/*.md
+	@time $(PANDOC) --defaults=dsabook-html.yaml --output=$(HTML) $(TEMP)/*.md
 	@rm -fr $(TEMP)
 
 postprocess: pandoc
 	@echo "Postprocessing..."
-	@time $(PYTHON) extra/postprocess.py $(HTML)/*.html
+	@time $(PYTHON) scripts/postprocess.py $(HTML)/*.html
 
 install: postprocess
 	@echo "Installing..."
@@ -70,4 +70,4 @@ server:
 
 pdf:
 	@echo "Running pandoc + XeTeX --> $(PDF)..."
-	@time $(PANDOC) --defaults=pandoc-tex.yaml --template=extra/eisvogel.latex --resource-path=$(RSC) --output=$(PDF) $(MD_FILES)
+	@time $(PANDOC) --defaults=dsabook-latex.yaml --output=$(PDF) $(MD_FILES)
