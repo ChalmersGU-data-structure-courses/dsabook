@@ -7,17 +7,23 @@ import panflute as pf
 
 
 remove_classes = set(
-    "TODO html online quiz".split()
+    "TODO html online quiz dsvis".split()
 )
+
+class_actions = {
+}
+
+
+def action(elem, doc):
+    for c in getattr(elem, "classes", ()):
+        if c in remove_classes:
+            return []
+        if c in class_actions:
+            return class_actions[c](elem)
 
 
 def prepare(doc):
     pass
-
-
-def action(elem, doc):
-    if any(c in remove_classes for c in getattr(elem, "classes", ())):
-        return []
 
 
 def finalize(doc):

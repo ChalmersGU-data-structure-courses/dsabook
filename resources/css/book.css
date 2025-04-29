@@ -211,7 +211,7 @@ figure {
 
 /* Highlighted blocks */
 
-.topic, .figure, .alert, .note, div.embedContainer, div.jsavcontainer {
+.topic, .figure, .alert, .note, div.embedContainer, div.jsavcontainer, details {
     border-radius: var(--border-radius);
     border: 1px solid var(--border-color);
     margin: var(--block-margin) 0;
@@ -245,6 +245,14 @@ figure {
 }
 .TODO ul, .TODO li {
     margin: 0;
+}
+
+
+/* Details, summary */
+
+summary * {
+    display: inline;
+    cursor: pointer;
 }
 
 
