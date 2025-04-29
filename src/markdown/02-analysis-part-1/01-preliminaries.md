@@ -106,8 +106,8 @@ of the following properties:
     programming languages include the `while` and `for` loop constructs.
     Iteration allows for short descriptions, with the number of steps
     actually performed controlled by the input.
-5.  It must *terminate*. In other words, it may not go into an infinite
-    loop.
+5.  It must *terminate* for the intended input.
+    In other words, it may not go into an infinite loop.
 
 ### Programs
 
