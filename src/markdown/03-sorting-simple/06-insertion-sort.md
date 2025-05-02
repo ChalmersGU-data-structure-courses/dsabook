@@ -29,7 +29,7 @@ implementation. The input is an array named $A$ that stores $N$ elements.
                 j = j-1
 
 :::::::: online
-### Selection sort visualisation
+### Insertion sort visualisation
 
 ::: dsvis
 Here we see the first few iterations of Insertion sort.
