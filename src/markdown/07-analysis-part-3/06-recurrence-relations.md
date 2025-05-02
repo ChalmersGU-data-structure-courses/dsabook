@@ -101,7 +101,7 @@ closed-form solution (i.e., you seek the constants for the expression),
 this method will probably be too much work.
 
 ::: topic
-#### Example: Mergesort {-}
+#### Example: Mergesort
 
 Use the guessing technique to find the asymptotic bounds for Mergesort,
 whose running time is described by the equation
@@ -161,7 +161,7 @@ The following two examples are about the growth rates of a function (the factori
 *not* about the time it takes to compute the function.
 
 ::: topic
-#### Example: Factorial function {-}
+#### Example: Factorial function
 
 
 We know that the factorial function grows exponentially. How does it
@@ -247,7 +247,7 @@ $f(n) = \Theta(g(n))$.
 :::
 
 ::: topic
-#### Example: Fibonacci sequence {-}
+#### Example: Fibonacci sequence
 
 What is the growth rate of the Fibonacci sequence? We define the
 Fibonacci sequence as $f(n) = f(n-1) + f(n-2)$ for $n \geq 2$;
@@ -324,7 +324,7 @@ TODO
 :::
 
 ::: topic
-#### Example: Building a heap {-}
+#### Example: Building a heap
 
 Our next example models the cost of the algorithm to build a heap. You
 should recall that to build a [heap](#heaps-and-priority-queues),
@@ -449,7 +449,7 @@ sometimes referred to as the [Master Theorem]{.term}.
 
 :::: {#RecurThm}
 ::: topic
-#### Theorem: The Master Theorem {-}
+#### Theorem: The Master Theorem
 
 For any recurrence relation of the form
 $T(n) = aT(n/b) + cn^k$; $T(1) = c$, the following
@@ -471,7 +471,7 @@ This theorem may be applied whenever appropriate, rather than
 re-deriving the solution for the recurrence.
 
 ::: topic
-#### Example: Using the Master Theorem {-}
+#### Example: Using the Master Theorem
 
 Apply the Master Theorem to solve
 $T(n) = 3T(n/5) + 8n^2$.
@@ -481,7 +481,7 @@ case (3) of the theorem, $T(n) \in O(n^2)$.
 :::
 
 ::: topic
-#### Example: Master Theorem for Mergesort {-}
+#### Example: Master Theorem for Mergesort
 
 Use the Master Theorem to solve the recurrence relation for Mergesort:
 

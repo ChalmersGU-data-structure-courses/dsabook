@@ -41,7 +41,7 @@ For example, we might wish to make sure that we visit any given node
 [preorder traversal]{.term}.
 
 ::: dsvis
-#### Example: Preorder enumeration {-}
+#### Example: Preorder enumeration
 
 The preorder enumeration for the tree of
 [Figure #BinTravExample](#BinTravExample) is **A B D C E G F H I**.
@@ -63,7 +63,7 @@ do that requires that the children's children be deleted first, and so
 on. This is called a [postorder traversal]{.term}.
 
 ::: dsvis
-#### Example: Postorder enumeration {-}
+#### Example: Postorder enumeration
 
 The postorder enumeration for the tree of
 [Figure #BinTravExample](#BinTravExample) is **D B G E H I F C A**.
@@ -80,7 +80,7 @@ finally visits the right child (including its entire subtree). The
 order of value.
 
 ::: dsvis
-#### Example: Inorder enumeration {-}
+#### Example: Inorder enumeration
 
 The inorder enumeration for the tree of
 [Figure #BinTravExample](#BinTravExample) is **B D A G E C H F I**.
@@ -115,19 +115,19 @@ Postorder and inorder traversals are similar. They simply change the
 order in which the node and its children are visited, as appropriate.
 
 ::: dsvis
-#### Preorder traversal practice {-}
+#### Preorder traversal practice
 
 <avembed id="btTravPreorderPRO" src="Binary/btTravPreorderPRO.html" type="pe" name="Binary Tree Preorder Traversal Exercise"/>
 :::
 
 ::: dsvis
-#### Postorder traversal practice {-}
+#### Postorder traversal practice
 
 <avembed id="btTravPostorderPRO" src="Binary/btTravPostorderPRO.html" type="pe" name="Binary Tree Postorder Traversal Exercise"/>
 :::
 
 ::: dsvis
-#### Inorder traversal practice {-}
+#### Inorder traversal practice
 
 <avembed id="btTravInorderPRO" src="Binary/btTravInorderPRO.html" type="pe" name="Binary Tree Inorder Traversal Exercise"/>
 :::
@@ -213,7 +213,7 @@ used to decide whether to call them recursively. Make the call, and let
 their own base case handle it.
 
 :::: topic
-#### Example: Changing the node values in a tree {-}
+#### Example: Changing the node values in a tree
 
 Consider the problem of incrementing the value for each node in a binary
 tree. The following solution has an error, since it does redundant

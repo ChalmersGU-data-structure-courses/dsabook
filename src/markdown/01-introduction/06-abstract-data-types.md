@@ -38,7 +38,7 @@ Additionally, one implementation may be more efficient for small datasets (thous
 The most suitable data structure depends on the specific use case, and making informed and well-reasoned choices is one of the central goals of this book.
 
 ::: topic
-#### Example: Collection of records {-}
+#### Example: Collection of records
 
 A _database_ is a structured collection of data that can be easily accessed, managed, and updated.
 Each item in a database is typically called a _record_, which consists of multiple fields containing information—such as a name, an ID number, or an address.
@@ -59,7 +59,7 @@ Despite their performance differences, both data structures address the same cor
 The concept of an ADT can help us to focus on key issues even in non-computing applications.
 
 ::: topic
-#### Example: Cars {-}
+#### Example: Cars
 
 When operating a car, the primary activities are steering, accelerating,
 and braking. On nearly all passenger cars, you steer by turning the
@@ -83,7 +83,7 @@ This collection can in turn be given a label, forming a hierarchy of concepts an
 This hierarchy of labels allows us to focus on important issues while ignoring unnecessary details.
 
 ::: topic
-#### Example: Computers, hard drives, and CPUs {-}
+#### Example: Computers, hard drives, and CPUs
 
 We apply the label "hard drive" to a collection of hardware that
 manipulates data on a particular type of storage device, and we apply
@@ -118,7 +118,7 @@ use the logical ADT for the data structure in the context of a
 higher-level task.
 
 :::: figure
-#### Figure: ADTs, data structures, and data items {-}
+#### Figure: ADTs, data structures, and data items
 
 <inlineav id="ADTCON" src="Design/ADTCON.js" name="Design/ADTCON" links="Design/ADTCON.css" static/>
 
@@ -136,7 +136,7 @@ for the ADT. The interface becomes a form of communication between two
 programmers. -->
 
 <!-- ::: topic
-#### Example: API for a list class {-}
+#### Example: API for a list class
 
 A particular programming environment might provide a library that
 includes a [list]{.term} class. The logical form

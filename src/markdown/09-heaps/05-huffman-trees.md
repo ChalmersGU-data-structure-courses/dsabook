@@ -43,7 +43,7 @@ uncommon letters.
 
 :::: {#Freq}
 ::: topic
-#### Table: Relative frequencies of the alphabet {-}
+#### Table: Relative frequencies of the alphabet
 
 Relative frequencies for the 26 letters of the alphabet as they appear
 in a selected set of English documents. "Frequency" represents the
@@ -123,7 +123,7 @@ have been combined into one.
 
 :::: {#FreqExamp}
 ::: topic
-#### Table: Relative frequencies {-}
+#### Table: Relative frequencies
 
 The relative frequencies for eight selected letters.
 
@@ -261,7 +261,7 @@ great compression. In general, Huffman coding does better when there is
 large variation in the frequencies of letters.
 
 ::: topic
-#### Example: Expected savings {-}
+#### Example: Expected savings
 
 In the particular case of the frequencies shown in
 [Table #Freq](#Freq), we can determine the

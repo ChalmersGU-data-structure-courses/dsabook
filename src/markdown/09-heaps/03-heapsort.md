@@ -101,7 +101,7 @@ Here is a warmup practice exercise for Heapsort.
 :::
 
 ::: dsvis
-#### Heapsort proficiency practice {-}
+#### Heapsort proficiency practice
 
 Now test yourself to see how well you understand Heapsort. Can you
 reproduce its behavior?

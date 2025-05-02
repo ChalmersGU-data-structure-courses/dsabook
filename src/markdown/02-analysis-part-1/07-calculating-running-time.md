@@ -134,7 +134,7 @@ And then the outer loop $\langle \mbox{for}\ x \in A: p\rangle$ will be in $n\cd
 
 ::::: {#AssignAnal}
 :::: topic
-#### Example: Simple assignment {-}
+#### Example: Simple assignment
 
 We begin with an analysis of a simple assignment to an integer variable.
 
@@ -146,7 +146,7 @@ Because the assignment statement takes constant time, it is $O(1)$.
 
 ::::: {#FLAnal}
 :::: topic
-#### Example: Simple for-loop {-}
+#### Example: Simple for-loop
 
 Consider a simple `for` loop.
 
@@ -163,7 +163,7 @@ $O(n)$.
 :::::
 
 :::: topic
-#### Example: Many for-loops {-}
+#### Example: Many for-loops
 
 We now analyze a code fragment with several `for` loops, some of which
 are nested.
@@ -204,7 +204,7 @@ $O(c_1 + c_2 n + c_3 n^2)$ is simply $O(n^2)$.
 ::::
 
 :::: topic
-#### Example: Comparing nested loops {-}
+#### Example: Comparing nested loops
 
 Compare the asymptotic analysis for the following two code fragments.
 
@@ -229,7 +229,7 @@ about half the time of the first.
 
 
 :::: topic
-#### Example: Non-quadratic nested loops {-}
+#### Example: Non-quadratic nested loops
 
 Not all doubly nested `for` loops are strictly $O(n^2)$, the following is an example.
 
@@ -266,7 +266,7 @@ No, the rules are correct, and this is because the $O$ notation gives an *upper 
 Recall that every function $f\in O(n)$ is also in $O(n\log n)$, since $O(n) < O(n\log n)$.
 
 :::: topic
-#### Example: A nested loop with linear complexity {-}
+#### Example: A nested loop with linear complexity
 
 If we take the non-quadratic example above and just do a very small change, we get a completely different complexity.
 

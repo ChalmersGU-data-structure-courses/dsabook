@@ -12,7 +12,7 @@ Two functions of $n$ have different
 goes to infinity their ratio either goes to infinity or goes to zero.
 
 ::: figure
-#### Figure: Growth rates {-}
+#### Figure: Growth rates
 
 ![The growth rates for five equations](images/plot.png){width=500}
 

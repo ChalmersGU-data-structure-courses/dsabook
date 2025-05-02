@@ -42,7 +42,7 @@ The following table shows just that for five running-time functions.
 
 :::: {#Speedups}
 ::: topic
-#### Table: Getting a 10 times faster computer {-}
+#### Table: Getting a 10 times faster computer
 
 This table shows the increase in problem size that can be run in the same time on a computer that is ten times faster.
 
@@ -224,7 +224,7 @@ effect on the resources consumed by an algorithm.
 
 :::: {#GrowthTable}
 ::: topic
-#### Table: Growth rates {-}
+#### Table: Growth rates
 
 This table shows costs for representative growth rates.
 

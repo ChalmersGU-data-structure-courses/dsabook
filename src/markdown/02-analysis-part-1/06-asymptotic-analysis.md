@@ -154,7 +154,7 @@ Tight bound
 But since we will only be using them for comparing computational resources, they will always be monotonically increasing.)
 
 ::: topic
-#### Example: Comparing two functions {-}
+#### Example: Comparing two functions
 
 Assume $f(n) = n^2$ and $g(n) = 1000n\log n$.
 How can we use the definitions above to prove that $f\in\Omega(g)$?

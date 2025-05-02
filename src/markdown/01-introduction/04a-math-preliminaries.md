@@ -151,7 +151,7 @@ And if we look at strings, "have the same length" is an equivalence relation too
 
 <!--
 ::: topic
-#### Example: Integers {-}
+#### Example: Integers
 For the integers, $=$ is an equivalence relation that partitions each element into a distinct subset.
 In other words, for any integer $a$, three things are true.
 
@@ -166,14 +166,14 @@ So the requirements for symmetry and transitivity are never violated, and theref
 
 <!--
 ::: topic
-#### Example: Siblings {-}
+#### Example: Siblings
 If we clarify the definition of sibling to mean that a person is
 a sibling of themself, then the sibling relation is an
 equivalence relation that partitions the set of people.
 :::
 
 ::: topic
-#### Example: Modulus {-}
+#### Example: Modulus
 We can use the [modulus]{.term} function
 to define an equivalence relation.
 For the set of integers, use the modulus function
@@ -214,14 +214,14 @@ Elements $x$ and $y$ of a set are [comparable]{.term} under a given relation $R$
 If every pair of distinct elements in a partial order are comparable, then the order is called a [total order]{.term} or [linear order]{.term}.
 
 ::: topic
-#### Example: Less-than {-}
+#### Example: Less-than
 For the integers, relations $<$ and $\leq$ define partial orders.
 Operation $<$ is a total order because, for every pair of integers $x$ and $y$ such that $x \neq y$, either $x < y$ or $y < x$.
 Likewise, $\leq$ is a total order because, for every pair of integers $x$ and $y$ such that $x \neq y$, either $x \leq y$ or $y \leq x$.
 :::
 
 ::: topic
-#### Example: Subsets {-}
+#### Example: Subsets
 For the powerset of the integers, the subset operator defines a partial order (because it is antisymmetric and transitive).
 For example, $\{1, 2\}\subseteq\{1, 2, 3\}$.
 However, sets {1, 2} and {1, 3} are not comparable by the subset operator, because neither is a subset of the other.
@@ -355,7 +355,7 @@ Logarithms are used frequently by programmers.
 Here are two typical uses.
 
 ::: topic
-##### Example: Minimum bits {-}
+##### Example: Minimum bits
 Many programs require an encoding for a collection of objects.
 What is the minimum number of bits needed to represent $n$ distinct code values?
 The answer is $\lceil \log_2 n \rceil$ bits.
@@ -363,7 +363,7 @@ For example, if you have 1000 codes to store, you will require at least $\lceil 
 :::
 
 ::: topic
-##### Example: Binary search {-}
+##### Example: Binary search
 Consider the [binary search]{.term} algorithm for finding a given value within an array sorted by value from lowest to highest.
 Binary search first looks at the middle element and determines if the value being searched for is in the upper half or the lower half of the array.
 The algorithm then continues splitting the appropriate subarray in half until the desired value is found.
@@ -645,7 +645,7 @@ Symbolic manipulations to solve integration problems in introductory calculus cl
 
 :::: {#SumDirect}
 ::: topic
-##### Example: Sum of first $n$ integers {-}
+##### Example: Sum of first $n$ integers
 Here is a direct proof that $\sum_{i=1}^n i = (n+1)n/2$.
 If we take the first and last terms of the series, since they are 1 and $n$, of course they sum to $n+1$.
 If we take the second term and next-to-last term, since they are 2 and $n-1$, they also sum to $n+1$.
@@ -667,7 +667,7 @@ If the logic used to find the contradiction is correct, then the only way to res
 That is, we conclude that the theorem must be true.
 
 ::: topic
-##### Example: No largest integer {-}
+##### Example: No largest integer
 Here is a simple proof by contradiction.
 
 **Theorem:** There is no largest integer.
@@ -746,7 +746,7 @@ Using the induction hypothesis to do work is exactly the same as using a recursi
 
 :::: {#SumIEx}
 ::: topic
-##### Example: Sum of first $n$ integers {-}
+##### Example: Sum of first $n$ integers
 Here is a sample proof by mathematical induction.
 Call the sum of the first $n$ positive integers $\mathbf{S}(n)$.
 
@@ -806,7 +806,7 @@ not be helpful or relevant when proving other summations.
 
 :::: {#nOdds}
 ::: topic
-##### Example: Sum of odd numbers {-}
+##### Example: Sum of odd numbers
 Here is another simple proof by induction that illustrates
 choosing the proper variable for induction.
 We wish to prove by induction that the sum of the first $n$
@@ -854,7 +854,7 @@ $$
 
 :::: {#FactRecurProof}
 ::: topic
-##### Example: Recurrence relation {-}
+##### Example: Recurrence relation
 This example shows how we can use induction to prove that a proposed
 closed-form solution for a [recurrence relation]{.term} is correct.
 
@@ -889,7 +889,7 @@ Thus, we have proved the theorem correct by mathematical induction.
 <!--
 :::: {#ThmStamps}
 ::: topic
-##### Example: Stamps {-}
+##### Example: Stamps
 This example uses induction without involving summations or other
 equations.
 It also illustrates a more flexible use of base cases.
@@ -922,7 +922,7 @@ Thus, by mathematical induction, the theorem is correct.
 ::::
 
 ::: topic
-##### Example: Divisible by prime {-}
+##### Example: Divisible by prime
 Here is an example using strong induction.
 
 **Theorem:**
@@ -965,7 +965,7 @@ induction hypothesis.
 <!--
 :::: {#ThmRegion}
 ::: topic
-##### Example: Two-coloring {-}
+##### Example: Two-coloring
 Define a [two-coloring]{.term} for a
 set of regions as a way of assigning one of two colors to each region
 such that no two regions sharing a side have the same color.
@@ -1028,7 +1028,7 @@ $n$.
 This section's final example shows how induction can be used to prove that a recursive function produces the correct result.
 
 ::: topic
-##### Example: Factorial {-}
+##### Example: Factorial
 We would like to prove that function $fact$ does indeed compute the factorial function.
 There are two distinct steps to such a proof.
 The first is to prove that the function always terminates.
@@ -1102,7 +1102,7 @@ Once you are confident that an estimate falls within your error bounds, leave it
 Do not try to get a more precise estimate than necessary for your purpose.
 
 ::: topic
-##### Example: Bookcases for a million pages {-}
+##### Example: Bookcases for a million pages
 How many bookcases does it take to store books containing one million pages?
 Let's estimate that a book of 200 pages requires one cm on the library shelf (it will help to look at the size of any handy book), yielding about 50 metres of shelf space for one million pages.
 If a shelf is 80 cm wide, then around 60-65 shelves are required.
@@ -1120,7 +1120,7 @@ Maybe have the the doubling technique here?
 
 <!--
 ::: topic
-##### Example: Buying a car {-}
+##### Example: Buying a car
 Is it more economical
 to buy a car that gets 20 miles per gallon, or one that gets 30 miles
 per gallon but costs \\$3000 more?
@@ -1139,7 +1139,7 @@ outcome.
 :::
 
 ::: topic
-##### Example: Supermarket shopping {-}
+##### Example: Supermarket shopping
 When at the supermarket doing the week's shopping, can you estimate
 about how much you will have to pay at the checkout?
 One simple way is to round the price of each item to the nearest
@@ -1203,7 +1203,7 @@ It turns out that to get a good result, it is crucial to pick good values for bo
 To see why, consider the following example.
 
 ::: topic
-##### Example: Varying the $t$ value {-}
+##### Example: Varying the $t$ value
 Given a $t$ value of 13, we can get very different results depending on the $b$ value that we pick, in ways that are hard to predict.
 
 \begin{eqnarray}

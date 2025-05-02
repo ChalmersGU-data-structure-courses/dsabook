@@ -206,7 +206,7 @@ the resulting values are so large. But this causes no problems when the
 goal is to compute a hash function.
 
 ::: dsvis
-#### Hash function exercise {-}
+#### Hash function exercise
 
 Now here is an exercise to let you practice these various hash
 functions. You should use the calculators above for the more complicated

@@ -27,7 +27,7 @@ shape of a complete binary tree requires excessive modification to the
 tree during update, as we see in this example.
 
 ::: topic
-#### Example: Rebalancing a BST {-}
+#### Example: Rebalancing a BST
 
 ![An attempt to re-balance a BST after insertion can be expensive](images/BSTBal.png){width=500}
 

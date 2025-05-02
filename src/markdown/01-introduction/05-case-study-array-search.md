@@ -119,7 +119,7 @@ efficient algorithm possible on an unsorted array.
 :::
 -->
 
-#### Variations {-}
+#### Variations
 
 Binary search is designed to find the (single) occurrence of a value and return its position.
 A special value is returned if the value does not appear in the array.
@@ -127,7 +127,7 @@ The algorithm can be modified to implement variations such as returning the posi
 Another variation is returning the position of the greatest value less than the value we are looking for when it is not in the array.
 
 :::: dsvis
-#### Binary search exercise {-}
+#### Binary search exercise
 
 <avembed id="binarySearchPRO" src="Searching/binarySearchPRO.html" type="pe" name="Binary Search Proficiency Exercise"/>
 :::

@@ -18,7 +18,7 @@ problems that require information flow on binary search trees are
 "guided" in this way.
 
 ::: topic
-#### Example: Minimum value in a tree {-}
+#### Example: Minimum value in a tree
 
 An extreme example is finding the minimum value in a BST. A bad solution
 to this problem would visit every node of the tree. However, we can take

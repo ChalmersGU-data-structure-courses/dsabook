@@ -40,7 +40,7 @@ A tree containing many internal nodes and a single leaf.
 
 :::: {#FullTree}
 ::: topic
-#### Theorem: Full binary tree theorem {-}
+#### Theorem: Full binary tree theorem
 
 **Full Binary Tree Theorem:** The number of leaves in a non-empty full
 binary tree is one more than the number of internal nodes.
@@ -85,7 +85,7 @@ useful way of thinking about binary trees.
 
 :::: {#SubTreeThrm}
 ::: topic
-#### Theorem: Number of subtrees {-}
+#### Theorem: Number of subtrees
 
 The number of empty subtrees in a non-empty binary tree is one more than
 the number of nodes in the tree.

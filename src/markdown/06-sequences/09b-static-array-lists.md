@@ -13,7 +13,7 @@ elements are added or removed. So instead we will use an underlying
 array which is larger than we need.
 
 ::: alert
-#### Important note about Python lists {-}
+#### Important note about Python lists
 - **refer to the chapter on prerequisites**
 
 Python doesn't have arrays -- i.e., fixed size constant-time access arrays

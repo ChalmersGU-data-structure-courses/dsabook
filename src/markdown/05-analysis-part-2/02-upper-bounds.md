@@ -48,7 +48,7 @@ You can look up the formal definition in mathematical textbooks, or in Wikipedia
 :::
 
 ::: topic
-#### Example: Sequential search {-}
+#### Example: Sequential search
 
 Consider the sequential search algorithm for finding a specified value
 in an array of integers. If visiting and examining one value in the
@@ -60,7 +60,7 @@ definition, $T(n)$ is in $O(n)$ for $n_0 = 1$ and $c = c_s$.
 :::
 
 ::: topic
-#### Example: Quadratic algorithm {-}
+#### Example: Quadratic algorithm
 
 For a particular algorithm, $T(n) = c_1 n^2 + c_2 n$ in the
 average case where $c_1$ and $c_2$ are positive numbers. Then,
@@ -74,7 +74,7 @@ $n_0 = 1$. Therefore, $T(n)$ is in $O(n^2)$ by the definition.
 :::
 
 ::: topic
-#### Example: Accessing an array cell {-}
+#### Example: Accessing an array cell
 
 Assigning the value from a given position of an array to a variable
 takes constant time regardless of the size of the array. Thus,

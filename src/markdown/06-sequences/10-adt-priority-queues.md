@@ -60,7 +60,7 @@ Now let's look at a couple of applications of priority queues.
 
 
 ::: topic
-#### Example: Sorting {-}
+#### Example: Sorting
 
 We can use a priority queue to make an efficient sorting algorithm. To
 sort a list of items:
@@ -87,7 +87,7 @@ any of the sorting algorithms we have seen so far!
 
 
 ::: topic
-#### Example: Finding the top 100 items {-}
+#### Example: Finding the top 100 items
 
 Suppose that we are running a bank. Every day, every transaction that
 occurs at the bank is recorded in a list. When the bank closes at the

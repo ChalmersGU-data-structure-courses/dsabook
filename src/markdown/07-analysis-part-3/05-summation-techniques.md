@@ -161,7 +161,7 @@ induction.
 :::
 
 ::: topic
-#### Example: Exponentially decreasing numbers {-}
+#### Example: Exponentially decreasing numbers
 
 Solve the summation
 
@@ -190,7 +190,7 @@ induction proof will verify the guess.
 :::
 
 ::: topic
-#### Example: Geometric series {-}
+#### Example: Geometric series
 
 Solve the summation
 
@@ -232,7 +232,7 @@ where $r \neq 1$.
 :::
 
 ::: topic
-#### Example: Shifting method {-}
+#### Example: Shifting method
 
 For our second example of the shifting method, we solve
 

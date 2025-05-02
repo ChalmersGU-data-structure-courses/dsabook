@@ -90,7 +90,7 @@ Sparse graphs are likely to have their adjacency list representation be
 more space efficient.
 
 ::: topic
-#### Example: Memory usage {-}
+#### Example: Memory usage
 
 Assume that a vertex index requires two bytes, a pointer requires four
 bytes, and an edge weight requires two bytes. Then, each link node in

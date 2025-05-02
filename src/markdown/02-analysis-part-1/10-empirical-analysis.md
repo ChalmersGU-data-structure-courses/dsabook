@@ -51,7 +51,7 @@ Assuming a uniform distribution will often lead to wrong conclusion about the av
 For example, which sorting algorithm is the best to use depends a lot on how the data is distributed.
 
 ::: topic
-#### Example: sorting English words {-}
+#### Example: sorting English words
 
 Assume that we want to create an alphabetically sorted list of words from a collection of English texts.
 There are an infinite number of possible strings that can occur, but some strings are much more common than others.

@@ -104,7 +104,7 @@ When dequeueing, we increase the `front` pointer (modulo the size of the interna
 
 
 ::: dsvis
-#### Array-based queue practice exercises {-}
+#### Array-based queue practice exercises
 
 <avembed id="AqueueEnqueuePRO" src="ChalmersGU/AqueueEnqueuePRO.html" type="ka" name="Array-based Queue Enqueue Exercise"/>
 

@@ -43,7 +43,7 @@ each operation in the series with its worst-case cost.
 -->
 
 ::: topic
-#### Example: Multipop on stacks {-}
+#### Example: Multipop on stacks
 
 Assume that we want to add a new operation *multipop* on stacks,
 where *multipop*($k$) will pop the $k$ topmost elements off the stack.
@@ -92,7 +92,7 @@ In a way we can say that each *push* takes 2 time units instead of one, and this
 These storage of "for later" operations is called the *potential*.
 
 ::: topic
-#### Example: Incrementing a binary counter {-}
+#### Example: Incrementing a binary counter
 
 As another example of amortised analysis, consider the process of incrementing a binary counter.
 We want to show that this operation (*increment*) takes amortised constant time in the size of the counter.
@@ -144,7 +144,7 @@ accessed record is first (and thus has least cost), followed by the next
 most frequently accessed record, and so on.
 
 ::: topic
-#### Theorem: Self-organizing lists {-}
+#### Theorem: Self-organizing lists
 
 **Theorem:** The total number of comparisons required by any series $S$
 of $n$ or more searches on a [self-organizing list]{.term} of length $n$ using

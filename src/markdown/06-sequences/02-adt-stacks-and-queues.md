@@ -147,7 +147,7 @@ iteration.
 
 ::::: {#StackFact}
 :::: topic
-#### Example: Factorial function {-}
+#### Example: Factorial function
 
 As a simple example of replacing recursion with a stack, consider the
 following non-recursive version of the factorial function.

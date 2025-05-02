@@ -35,7 +35,7 @@ Yes, we can say that after each iteration of the binary search loop, we know tha
 This means that we can formulate the following invariants:
 
 ::: topic
-#### Binary search invariants {-}
+#### Binary search invariants
 
 - When searching for $v$ in a sorted array $A$, then $A[\mathit{low}] \leq v \leq A[\mathit{high}]$ after each iteration of the main loop.
 - The interval $\mathit{high}-\mathit{low}$ strictly decreases in each iteration.

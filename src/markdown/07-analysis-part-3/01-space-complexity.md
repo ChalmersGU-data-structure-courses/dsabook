@@ -27,7 +27,7 @@ Time complexity helps us to abstract away from hardware-specific details, consta
 In the same way we want to abstract away from the actual memory usage in bytes, and instead focus on how the memory used by a data structure depends on the data size.
 
 ::: topic
-#### Example: Arrays and linked lists {-}
+#### Example: Arrays and linked lists
 
 What are the space requirements for an array of $n$ integers?
 If each integer requires $k$ bytes, then the array requires $kn$ bytes, which is in $O(n)$.
@@ -49,7 +49,7 @@ balance between these opposing goals is what makes the study of data
 structures so interesting.
 
 ::: topic
-#### Example: Integers {-}
+#### Example: Integers
 
 How much memory does an integer use?
 This might sound like a stupid question -- don't we usually just assume that integers use a fixed size, such as 32 bits or 64 bits?
@@ -72,7 +72,7 @@ Therefore the space usage of an integer is logarithmic, $O(\log N)$ to store an 
 And finally a more complex example, about friendship:
 
 ::: topic
-#### Example: Friendship links {-}
+#### Example: Friendship links
 
 Imagine that we want to keep track of friendships between $n$ people.
 We can do this with a 2-dimensional array of size $n \times n$ (a matrix).
@@ -111,7 +111,7 @@ Let's say that an algorithm is *in-place* if it only uses constant additional sp
 For example, insertion sort is in-place, because it only allocates a constant number of variables to complete.
 
 ::: topic
-#### Example: Mergesort {-}
+#### Example: Mergesort
 
 How much additional space does mergesort use?
 Mergesort is a divide-and-conquer algorithm that calls itself recursively, halving the size of the problem in each call.
@@ -135,7 +135,7 @@ So, mergesort is not an in-place algorithm because it uses at least linear addit
 But what about quicksort, didn't we say that it is in-place?
 
 ::: topic
-#### Example: Quicksort {-}
+#### Example: Quicksort
 
 How much additional space does quicksort use?
 Just as mergesort, quicksort is also a divide-and-conquer algorithm, but in this case we cannot be certain that it halves the problem size in each call.
@@ -192,7 +192,7 @@ of time. Your application must use the lookup table often enough to make
 this initialization worthwhile.
 
 ::: topic
-#### Example: Binsort {-}
+#### Example: Binsort
 
 Another example of the space/time tradeoff is typical of what a
 programmer might encounter when trying to optimize space. Here is a

@@ -59,7 +59,7 @@ can determine the growth rate for the characterized best, worst, and
 average cases as the input size grows.
 
 ::: topic
-#### Example: Best case for sequential search {-}
+#### Example: Best case for sequential search
 
 What is the growth rate of the best case for sequential search? For any
 array of size $n$, the best case occurs when the value we are looking

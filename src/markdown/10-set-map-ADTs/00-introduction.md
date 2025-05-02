@@ -68,7 +68,7 @@ interface for sets from [the course API](#all-adts-used-in-this-book):
         contains(x: T) -> Bool  // Returns true if x is in the set.
 
 ::: topic
-##### Example: Spell-checking {-}
+##### Example: Spell-checking
 
 We can use a set for the spell-checking example:
 
@@ -132,7 +132,7 @@ Note that maps depend on two different types, the keys `K` and the values `V`.
 These types can be the same or different, depending on the needs of your application.
 
 ::: topic
-##### Example: Database lookup {-}
+##### Example: Database lookup
 
 The map is a perfect match for our database example:
 
@@ -179,7 +179,7 @@ map, where the key is a word, and the value is not a document but a
 *set* of documents.
 
 ::: topic
-##### Example: Search engine {-}
+##### Example: Search engine
 
 A multimap is the perfect data structure for our search engine example:
 
@@ -267,7 +267,7 @@ By the end of this book you will understand how all of these work.
 
 
 ::: topic
-##### Use case: Between X and Y {-}
+##### Use case: Between X and Y
 
 Consider the final example problem:
 
@@ -342,7 +342,7 @@ Here is a possible interface for sorted maps:
                                      // Returns all keys k such that k1 ≤ k ≤ k2.
 
 ::: topic
-##### Example: Small Swedish towns {-}
+##### Example: Small Swedish towns
 
 Here is how to use a sorted map ADT to find all Swedish towns having
 between 5,000 and 10,000 population. As there may be towns that have the
