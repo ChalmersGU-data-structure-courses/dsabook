@@ -5,6 +5,14 @@ Generic filter
 
 import panflute as pf
 
+MAX_HEADER_NUMBERING_LEVEL = 3
+
+
+def max_numbering(hdr):
+    if hdr.level > MAX_HEADER_NUMBERING_LEVEL:
+        hdr.classes.append("unnumbered")
+    return hdr
+
 
 def make_details(elem):
     content = list(elem.content)
@@ -37,9 +45,20 @@ class_actions = {
     "latex": {},
 }
 
+tag_actions = {
+    "chunkedhtml": {
+        "Header": max_numbering,
+    },
+    "latex": {
+        "Header": max_numbering,
+    },
+}
+
 
 def action(elem, doc):
     fmt = doc.format
+    if elem.tag in tag_actions[fmt]:
+        elem = tag_actions[fmt][elem.tag](elem)
     for c in getattr(elem, "classes", ()):
         if c in remove_classes[fmt]:
             return []
