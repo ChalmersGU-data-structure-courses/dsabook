@@ -39,11 +39,17 @@ until the record is found or all records in the overflow bucket have
 been checked. If many records are in the overflow bucket, this will be
 an expensive process.
 
-<inlineav id="buckethashCON1" src="Hashing/buckethashCON1.js" name="Bucket Hashing Slideshow 1" links="Hashing/buckethashCON.css"/>
+::: dsvis
+TODO
 
+<inlineav id="buckethashCON1" src="Hashing/buckethashCON1.js" name="Bucket Hashing Slideshow 1" links="Hashing/buckethashCON.css"/>
+:::
+
+::: dsvis
 Now you can try it yourself.
 
 <avembed id="HashBucketPRO" src="Hashing/HashBucketPRO.html" type="ka" name="Bucket Hashing Proficiency Exercise"/>
+:::
 
 ### An alternative approach
 
@@ -55,7 +61,11 @@ assigned to the overflow bucket. The advantage of this approach is that
 initial collisions are reduced, because any slot can be a home position
 rather than just the first slot in the bucket.
 
+::: dsvis
+TODO
+
 <inlineav id="buckethashCON2" src="Hashing/buckethashCON2.js" name="Bucket Hashing Slideshow 2" links="Hashing/buckethashCON.css"/>
+:::
 
 Bucket methods are good for implementing hash tables stored on disk,
 because the bucket size can be set to the size of a disk block. Whenever
@@ -66,4 +76,8 @@ full. If the bucket is full, then the overflow bucket must be retrieved
 from disk as well. Naturally, overflow should be kept small to minimize
 unnecessary disk accesses.
 
+::: dsvis
+TODO
+
 <avembed id="HashBucket2PRO" src="Hashing/HashBucket2PRO.html" type="ka" name="Alternate Bucket Hashing Proficiency Exercise"/>
+:::

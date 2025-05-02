@@ -10,9 +10,11 @@ queue, to be able to add new elements efficiently.
         rear: Node = null    // Pointer to rear queue node
         size: Int = 0        // Size of queue
 
+::: dsvis
+Linked queue -- introduction.
 
 <inlineav id="LinkedQueue-Intro-CON" src="ChalmersGU/LinkedQueue-Intro-CON.js" name="Linked Queue Intro" links="ChalmersGU/CGU-Styles.css"/>
-
+:::
 
 ### Invariants
 
@@ -30,9 +32,17 @@ queue, to be able to add new elements efficiently.
             rear = newRear
             size = size + 1
 
+::: dsvis
+Linked queue -- enqueue.
+
 <inlineav id="LinkedQueue-Enqueue-CON" src="ChalmersGU/LinkedQueue-Enqueue-CON.js" name="Linked Queue Enqueue" links="ChalmersGU/CGU-Styles.css"/>
+:::
+
+::: dsvis
+Linked queue -- enqueue exercise.
 
 <avembed id="LinkedQueue-Enqueue-PRO" src="ChalmersGU/LinkedQueue-Enqueue-PRO.html" type="ka" name="Linked Queue Enqueue Exercise"/>
+:::
 
 ### Dequeueing elements
 
@@ -48,6 +58,14 @@ queue, to be able to add new elements efficiently.
                 rear = null
             return removed.elem
 
+::: dsvis
+Linked queue -- dequeue.
+
 <inlineav id="LinkedQueue-Dequeue-CON" src="ChalmersGU/LinkedQueue-Dequeue-CON.js" name="Linked Queue Dequeue" links="ChalmersGU/CGU-Styles.css"/>
+:::
+
+::: dsvis
+Linked queue -- dequeue exercise.
 
 <avembed id="LinkedQueue-Dequeue-PRO" src="ChalmersGU/LinkedQueue-Dequeue-PRO.html" type="ka" name="Linked Queue Dequeue Exercise"/>
+:::

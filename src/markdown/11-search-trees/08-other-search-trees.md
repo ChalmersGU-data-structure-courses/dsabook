@@ -33,11 +33,17 @@ In contrast, we could split key values based on their binary
 reprsentation similar to what the Huffman coding tree does. The
 following slideshows present this in more detail.
 
-<inlineav id="TreeTimelineCON" src="Development/TreeTimelineCON.js" name="Tree timeline Slideshow" links="Development/TreeTrieCON.css"/>
+::: dsvis
+TODO
 
-|
+<inlineav id="TreeTimelineCON" src="Development/TreeTimelineCON.js" name="Tree timeline Slideshow" links="Development/TreeTrieCON.css"/>
+:::
+
+::: dsvis
+TODO
 
 <inlineav id="TrieTimelineCON" src="Development/TrieTimelineCON.js" name="Trie timeline Slideshow" links="Development/TreeTrieCON.css"/>
+:::
 
 ### Analogy between search trees and quicksort
 

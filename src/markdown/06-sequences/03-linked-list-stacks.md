@@ -48,7 +48,12 @@ Our data type for linked stacks contains two instance variables, one pointer to 
 
 ### Push to a linked stack
 
+
+::: dsvis
+Linked stack -- push.
+
 <inlineav id="LinkedStack-Push-CON" src="ChalmersGU/LinkedStack-Push-CON.js" name="Linked Stack Push" links="ChalmersGU/CGU-Styles.css"/>
+:::
 
 The first three actions, to create the node, set the value and the next pointer, can be done in one single line, like this:
 
@@ -58,11 +63,20 @@ The first three actions, to create the node, set the value and the next pointer,
             top = new Node(x, top)
             size = size + 1
 
+::: dsvis
+Linked stack -- push exercise.
+
 <avembed id="LstackPushPRO" src="ChalmersGU/LstackPushPRO.html" type="ka" name="Linked Stack Push Exercise"/>
+:::
 
 ### Pop from a linked stack
 
+::: dsvis
+Linked stack -- pop.
+
 <inlineav id="LinkedStack-Pop-CON" src="ChalmersGU/LinkedStack-Pop-CON.js" name="Linked Stack Pop" links="ChalmersGU/CGU-Styles.css"/>
+:::
+
 
     datatype LinkedStack implements Stack:
         ...
@@ -74,5 +88,10 @@ The first three actions, to create the node, set the value and the next pointer,
             size = size - 1
             return removed.elem
 
+
+::: dsvis
+Linked stack -- pop exercise.
+
 <avembed id="LstackPopPRO" src="ChalmersGU/LstackPopPRO.html" type="ka" name="Linked Stack Pop Exercise"/>
+:::
 

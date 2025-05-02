@@ -83,10 +83,12 @@ The recursive DFS algorithm can be described as simply as this:
             mark v as visited
             recursively visit all adjacent vertices
 
+::: dsvis
 This visualization shows a graph and the result of performing a DFS on
 it, resulting in a depth-first search tree.
 
 <inlineav id="DFSCON" src="Graph/DFSCON.js" name="Depth-First Search Slideshow" links="Graph/DFSCON.css"/>
+:::
 
 Here is an implementation for the DFS algorithm.
 
@@ -108,21 +110,25 @@ processed; hence the call to function `postVisit`. This would be a
 natural opportunity to make use of the
 [visitor]{.term} design pattern.
 
+::: dsvis
 The following visualization shows a random graph each time that you
 start it, so that you can see the behavior on different examples. It can
 show you DFS run on a directed graph or an undirected graph. Be sure to
 look at an example for each type of graph.
 
 <avembed id="DFSAV" src="Graph/DFSAV.html" type="ss" name="DFS AV"/>
+:::
 
 DFS processes each edge once in a directed graph. In an undirected
 graph, DFS processes each edge from both directions. Each vertex must be
 visited, but only once, so the total cost is
 $O(|\mathbf{V}| + |\mathbf{E}|)$.
 
+::: dsvis
 Here is an exercise for you to practice DFS.
 
 <avembed id="DFSPE" src="Graph/DFSPE.html" type="pe" name="DFS Proficiency Exercise"/>
+:::
 
 ### Breadth-first search
 
@@ -134,10 +140,12 @@ a queue replaces the recursion stack. Note that if the graph is a tree
 and the start vertex is at the root, BFS is equivalent to visiting
 vertices level by level from top to bottom.
 
+::: dsvis
 This visualization shows a graph and the result of performing a BFS on
 it, resulting in a breadth-first search tree.
 
 <inlineav id="BFSCON" src="Graph/BFSCON.js" name="Breadth-First Search Slideshow" links="Graph/BFSCON.css"/>
+:::
 
 Here is an implementation for BFS. Note that it's not possible to call
 `postVisit` in BFS traversal, because you cannot know when the adjacent
@@ -161,16 +169,20 @@ enqueing/dequeueing operations with push/pop), you will get depth-first
 search! This is because the recursive version of DFS implicitly uses the
 call stack to remember which vertices to visit.
 
+::: dsvis
 The following visualization shows a random graph each time that you
 start it, so that you can see the behavior on different examples. It can
 show you BFS run on a directed graph or an undirected graph. Be sure to
 look at an example for each type of graph.
 
 <avembed id="BFSAV" src="Graph/BFSAV.html" type="ss" name="BFS AV"/>
+:::
 
+::: dsvis
 Here is an exercise for you to practice BFS.
 
 <avembed id="BFSPE" src="Graph/BFSPE.html" type="pe" name="BFS Proficiency Exercise"/>
+:::
 
 ### Generic graph search
 

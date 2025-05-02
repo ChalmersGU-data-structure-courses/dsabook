@@ -17,15 +17,22 @@ Note that here we use an internal *capacity* of 1000 for the internal array, but
 
 The only important design decision to be made is which end of the array should represent the top of the stack.
 
-<inlineav id="DynamicArrayStack-Top-CON" src="ChalmersGU/DynamicArrayStack-Top-CON.js" name="Array stack top position slideshow" links="ChalmersGU/CGU-Styles.css"/>
+::: dsvis
+Array stack -- top position.
 
+<inlineav id="DynamicArrayStack-Top-CON" src="ChalmersGU/DynamicArrayStack-Top-CON.js" name="Array stack top position slideshow" links="ChalmersGU/CGU-Styles.css"/>
+:::
 
 ### Invariants
 
 
 ### Pushing to the stack
 
+::: dsvis
+Array stack -- push.
+
 <inlineav id="DynamicArrayStack-Push-CON" src="ChalmersGU/DynamicArrayStack-Push-CON.js" name="Array stack push slideshow" links="ChalmersGU/CGU-Styles.css"/>
+:::
 
     datatype ArrayStack implements Stack:
         ...
@@ -33,9 +40,16 @@ The only important design decision to be made is which end of the array should r
             internalArray[size] = x
             size = size + 1
 
+::: dsvis
+Array stack -- push exercise.
+
 <avembed id="DynamicArrayStack-Push-PRO" src="ChalmersGU/DynamicArrayStack-Push-PRO.html" type="ka" name="Array-based Stack Push Exercise"/>
+:::
 
 ### Popping from the stack
+
+::: dsvis
+Array stack -- pop.
 
 <inlineav id="DynamicArrayStack-Pop-CON" src="ChalmersGU/DynamicArrayStack-Pop-CON.js" name="Array stack pop slideshow" links="ChalmersGU/CGU-Styles.css"/>
 
@@ -47,8 +61,14 @@ The only important design decision to be made is which end of the array should r
             x = internalArray[size]
             internalArray[size] = null  // For garbage collection
             return x
+:::
+
+
+::: dsvis
+Array stack -- pop exercise.
 
 <avembed id="DynamicArrayStack-Pop-PRO" src="ChalmersGU/DynamicArrayStack-Pop-PRO.html" type="ka" name="Array-based Stack Pop Exercise"/>
+:::
 
 As you hopefully have noticed, the code for stacks is very similar to
 the code for lists. E.g., the internal variables are exactly the same,

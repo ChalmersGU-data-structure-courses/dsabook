@@ -50,7 +50,11 @@ sixteen slots.
 
 Here "%" is the symbol for the [mod] function.
 
+::: dsvis
+TODO
+
 <inlineav id="hashFuncExCON1" src="Hashing/hashFuncExCON1.js" name="Hash Function Slideshow 1"/>
+:::
 
 Recall that the values 0 to 15 can be represented with four bits (i.e.,
 0000 to 1111). The value returned by this hash function depends solely

@@ -65,9 +65,17 @@ structure.
 Sample binary tree for sequential tree implementation examples.
 ::::
 
+::: dsvis
+TODO
+
 <inlineav id="SequentialTreeCON" src="General/SequentialTreeCON.js" name="First sequential representation Slideshow" links="General/SequentialTreeCON.css"/>
+:::
+
+::: dsvis
+TODO
 
 <avembed id="SequentialTreePRO" src="General/SequentialTreePRO.html" type="ka" name="First Sequential Representation Exercise"/>
+:::
 
 ### Alternative sequential representation
 
@@ -103,7 +111,11 @@ children of leaf nodes are not represented at all. Note that a full
 binary tree stores no `null` values with this implementation, and so
 requires less overhead.
 
+::: dsvis
+TODO
+
 <inlineav id="SequentialTreeAltCON" src="General/SequentialTreeAltCON.js" name="Second sequential representation Slideshow" links="General/SequentialTreeCON.css"/>
+:::
 
 Storing $n$ extra bits can be a considerable savings over storing $n$
 `null` values. In the example above, each node was shown with a mark if
@@ -115,7 +127,11 @@ example would be if all node values must be positive. Then the
 high-order (sign) bit of the integer value could be used as the mark
 bit.
 
+::: dsvis
+TODO
+
 <avembed id="SequentialTreeAltPRO" src="General/SequentialTreeAltPRO.html" type="ka" name="Alternate Sequential Representation Exercise"/>
+:::
 
 ### Bit vector representation
 
@@ -124,9 +140,17 @@ status of each node. In this case, each node of the tree corresponds to
 one bit in the bit vector. A value of "1" could indicate an internal
 node, and "0" could indicate a leaf node.
 
+::: dsvis
+TODO
+
 <inlineav id="SequentialTreeBitsCON" src="General/SequentialTreeBitsCON.js" name="Bit vector sequential representation Slideshow" links="General/SequentialTreeCON.css"/>
+:::
+
+::: dsvis
+TODO
 
 <avembed id="SequentialTreeBitVectorPRO" src="General/SequentialTreeBitVectorPRO.html" type="ka" name="Bit Vector Sequential Representation Exercise"/>
+:::
 
 ### Serialising general trees
 
@@ -142,7 +166,11 @@ are followed by a ")" symbol because they have no children. A leaf
 node that is also the last child for its parent would indicate this by
 two or more successive ")" symbols.
 
+::: dsvis
+TODO
+
 <inlineav id="SequentialGenTreeCON" src="General/SequentialGenTreeCON.js" name="General Tree sequential representation Slideshow" links="General/SequentialTreeCON.css"/>
+:::
 
 Note that this representation for serializing general trees cannot be
 used for binary trees. This is because a binary tree is not merely a
@@ -152,4 +180,8 @@ empty. So this representation cannot let us distinguish whether node $D$
 in [Figure #BinExampb](#BinExampb) is the left
 or right child of node $B$.
 
+::: dsvis
+TODO
+
 <avembed id="SequentialTreeGenTreePRO" src="General/SequentialTreeGenTreePRO.html" type="ka" name="General Tree Sequential Representation Exercise"/>
+:::

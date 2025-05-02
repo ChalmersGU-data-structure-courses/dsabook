@@ -152,7 +152,9 @@ If the list is already nearly sorted, then there will be few swaps anyway.
 The experiments show that the improvement is greater in Python (around twice as fast) than in Java (around 20% faster).
 This is consistent with the results for Selection sort, where we concluded that assignment is probably more expensive in Python than in Java.
 
+::: dsvis
 Now, you can test whether you understand how this optimisation works.
 
 <avembed id="insertionSortWithoutSwapPRO" src="Sorting/insertionSortWithoutSwapPRO.html" type="pe" name="Insertion Sort Without Swap Proficiency Exercise"/>
+:::
 

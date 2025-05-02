@@ -40,7 +40,7 @@ For example, we might wish to make sure that we visit any given node
 *before* we visit its children. This is called a
 [preorder traversal]{.term}.
 
-::: topic
+::: dsvis
 #### Example: Preorder enumeration {-}
 
 The preorder enumeration for the tree of
@@ -48,9 +48,10 @@ The preorder enumeration for the tree of
 
 The first node printed is the root. Then all nodes of the left subtree
 are printed (in preorder) before any node of the right subtree.
-:::
 
 <inlineav id="preorderCON" src="Binary/preorderCON.js" name="Preorder Traversal Slideshow" links="Binary/BTCON.css"/>
+:::
+
 
 #### Postorder traversal
 
@@ -61,14 +62,14 @@ to delete the children of a node before deleting the node itself. But to
 do that requires that the children's children be deleted first, and so
 on. This is called a [postorder traversal]{.term}.
 
-::: topic
+::: dsvis
 #### Example: Postorder enumeration {-}
 
 The postorder enumeration for the tree of
 [Figure #BinTravExample](#BinTravExample) is **D B G E H I F C A**.
-:::
 
 <inlineav id="postorderCON" src="Binary/postorderCON.js" name="Postorder Traversal Slideshow" links="Binary/BTCON.css"/>
+:::
 
 #### Inorder traversal
 
@@ -78,14 +79,14 @@ finally visits the right child (including its entire subtree). The
 [binary search tree]{.term} makes use of this traversal to print all nodes in ascending
 order of value.
 
-::: topic
+::: dsvis
 #### Example: Inorder enumeration {-}
 
 The inorder enumeration for the tree of
 [Figure #BinTravExample](#BinTravExample) is **B D A G E C H F I**.
-:::
 
 <inlineav id="inorderCON" src="Binary/inorderCON.js" name="Inorder Traversal Slideshow" links="Binary/BTCON.css"/>
+:::
 
 ### Implementation
 
@@ -113,17 +114,23 @@ is called on the right subtree, visiting all nodes in the right subtree.
 Postorder and inorder traversals are similar. They simply change the
 order in which the node and its children are visited, as appropriate.
 
-#### Preorder traversal practice
+::: dsvis
+#### Preorder traversal practice {-}
 
 <avembed id="btTravPreorderPRO" src="Binary/btTravPreorderPRO.html" type="pe" name="Binary Tree Preorder Traversal Exercise"/>
+:::
 
-#### Postorder traversal practice
+::: dsvis
+#### Postorder traversal practice {-}
 
 <avembed id="btTravPostorderPRO" src="Binary/btTravPostorderPRO.html" type="pe" name="Binary Tree Postorder Traversal Exercise"/>
+:::
 
-#### Inorder traversal practice
+::: dsvis
+#### Inorder traversal practice {-}
 
 <avembed id="btTravInorderPRO" src="Binary/btTravInorderPRO.html" type="pe" name="Binary Tree Inorder Traversal Exercise"/>
+:::
 
 
 ### More about implementing tree traversals

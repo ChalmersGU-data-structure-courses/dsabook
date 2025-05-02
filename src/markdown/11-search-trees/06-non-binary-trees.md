@@ -113,7 +113,11 @@ inorder, then the root, then visit the remaining subtrees in inorder --
 can be invented. However, inorder traversals are generally not useful
 with general trees.
 
+::: dsvis
+TODO
+
 <inlineav id="GenTreePreTravCON" src="General/GenTreePreTravCON.js" name="General Tree Preorder Traversal Slideshow" links="General/GenTreeCON.css"/>
+:::
 
 To perform a preorder traversal, it is necessary to visit each of the
 children for a given node (say $R$) from left to right. This is
@@ -121,7 +125,11 @@ accomplished by starting at R's leftmost child (call it $T$). From $T$,
 we can move to $T$'s right sibling, and then to that node's right
 sibling, and so on.
 
+::: dsvis
+TODO
+
 <inlineav id="GenTreePostTravCON" src="General/GenTreePostTravCON.js" name="General Tree Postorder Traversal Slideshow" links="General/GenTreeCON.css"/>
+:::
 
 Using the General Tree class shown above, here are implementations to
 process the nodes of a general tree in preorder and in postorder.

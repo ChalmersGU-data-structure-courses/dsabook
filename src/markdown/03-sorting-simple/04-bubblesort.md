@@ -32,6 +32,7 @@ preceding pass. Here is an implementation:
                     swap(A, j-1, j)
 
 
+::::: online :::::
 ### Bubble sort visualisation
 
 ::: note
@@ -46,24 +47,35 @@ algorithms will simply assume that the records are
 [comparable]{.term}.
 :::
 
+::: dsvis
 Here is a visualisation of the first pass of bubble sorting an array of integers.
 
 <inlineav id="bubblesortS1CON" src="Sorting/bubblesortS1CON.js" name="Bubble Sort Slideshow 1" links="Sorting/BubbleSortAnalysisCON.css"/>
+:::
 
-Now we continue with the second pass. However, since the largest element
-has "bubbled" to the very right, we will not need to look at it again.
+::: dsvis
+Now we continue with the second pass.
+
+However, since the largest element has "bubbled" to the very right, we will not need to look at it again.
 
 <inlineav id="bubblesortS2CON" src="Sorting/bubblesortS2CON.js" name="Bubble Sort Slideshow 2" links="Sorting/BubbleSortAnalysisCON.css"/>
 
 Bubble sort continues in this way until the entire array is sorted.
+:::
 
+::: dsvis
 The following visualization shows the complete Bubble sort. You can input your own data if you like.
 
 <avembed id="bubblesortAV" src="Sorting/bubblesortAV.html" type="ss" name="Bubble Sort Visualization"/>
+:::
 
+::: dsvis
 Now try for yourself to see if you understand how Bubble sort works.
 
 <avembed id="BubsortPRO" src="Sorting/BubsortPRO.html" type="ka" name="Bubble Sort Proficiency Exercise"/>
+:::
+
+::::::::::
 
 <!--
 ### Invariants
@@ -85,9 +97,11 @@ So the total number of iterations is
 And this sum has the value $N(N-1)/2$, which means the runtime complexity is *quadratic*, $O(N^2)$.
 Note that this is regardless of how the initial array looks like, so bubble sort has the same best- and worst-case complexity.
 
+::: dsvis
 The following visualisation illustrates the running time analysis of Bubble sort.
 
 <inlineav id="BubbleSortAnalysisCON" src="Sorting/BubbleSortAnalysisCON.js" name="Bubble Sort Analysis Slideshow" links="Sorting/BubbleSortAnalysisCON.css"/>
+:::
 
 The number of swaps required depends on how often an element is less than the one immediately preceding it in the array.
 In the worst case this will happen in every single comparison, leading to $O(N^2)$ number of swaps.

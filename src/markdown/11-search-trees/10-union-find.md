@@ -224,10 +224,12 @@ Here is an implementation for the UNION method when using weighted union.
                     weights[root1] = weights[root1] + weights[root2]
 
 
+::: dsvis
 The following slideshow illustrates a series of UNION operations with
 weighted union.
 
 <inlineav id="UFCON" src="General/UFCON.js" name="Union/Find Example" links="General/UFCON.css"/>
+:::
 
 ### Path compression
 
@@ -255,10 +257,12 @@ also makes all ancestors of the current node point to the root.
                 return array[current]
 
 
+::: dsvis
 The following slide show illustrates path compression using the last
 step in the previous example.
 
 <inlineav id="pathcompCON" src="General/pathcompCON.js" name="Union/Find Path Compression Example" links="General/UFCON.css"/>
+:::
 
 Path compression keeps the cost of each FIND operation very close to
 constant.
@@ -289,5 +293,8 @@ and the cost of path compression for UNION/FIND, see
 The survey article by \[[Galil & Italiano, 1991](#galilitaliano91){.citation}\]
 covers many aspects of the equivalence class problem.
 
-<avembed id="UnionFindPRO" src="General/UnionFindPRO.html" type="pe" name="Union/Find Proficiency Exercise"/>
+::: dsvis
+TODO
 
+<avembed id="UnionFindPRO" src="General/UnionFindPRO.html" type="pe" name="Union/Find Proficiency Exercise"/>
+:::

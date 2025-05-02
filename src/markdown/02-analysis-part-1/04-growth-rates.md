@@ -209,13 +209,13 @@ This table shows costs for representative growth rates.
 :::
 ::::
 
+::: dsvis
 ### Growth rates exercises
-
 
 <avembed id="CompareGrowth" src="AlgAnal/CompareGrowth.html" type="ka" name="Comparing Growth Rates Exercise"/>
 
-
 <avembed id="GrowthRatesPRO" src="AlgAnal/GrowthRatesPRO.html" type="ka" name="Growth Rates Ordering Exercise"/>
+:::
 
 <!-- TODO
 To make students more engaged in the GrowthRates exercise, we may need a

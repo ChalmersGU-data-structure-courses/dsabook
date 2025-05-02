@@ -74,7 +74,11 @@ to $n-1$.
 -   Left sibling($r$) $= r - 1$ if $r$ is even and $r \neq 0$.
 -   Right sibling($r$) $= r + 1$ if $r$ is odd and $r + 1 < n$.
 
+::: dsvis
+TODO
+
 <avembed id="CompleteFIB" src="Binary/CompleteFIB.html" type="ka" name="Complete Tree Exercise"/>
+:::
 
 ### Implementing binary heaps
 
@@ -182,7 +186,11 @@ of the position passed, respectively.
 One way to build a heap is to insert the elements one at a time.
 Method `add` will insert a new element $V$ into the heap.
 
+::: dsvis
+TODO
+
 <inlineav id="heapinsertCON" src="Binary/heapinsertCON.js" script="DataStructures/binaryheap.js" name="Heap insert Slideshow"/>
+:::
 
 You might expect the heap insertion process to be similar to the insert
 function for a BST, starting at the root and working down through the
@@ -215,7 +223,11 @@ bottom of the tree to the top of the tree. Thus, to insert $n$ values
 into the heap, if we insert them one at a time, will take
 $O(n \log n)$ time in the worst case.
 
+::: dsvis
+TODO
+
 <avembed id="heapinsertPRO" src="Binary/heapinsertPRO.html" type="pe" name="Heap Insert Proficiency Exercise"/>
+:::
 
 
 ### Invariants
@@ -229,14 +241,16 @@ process, we can build the heap faster than just inserting the values
 into the heap one by one. Consider this example, with two possible ways
 to heapify an initial set of values in an array.
 
-:::: {#HeapBuild}
-<inlineav id="HeapBldChoiceCON" src="Binary/HeapBldChoiceCON.js" script="DataStructures/binaryheap.js" name="Heap Build Choices" links="Binary/HeapBldChoiceCON.css"/>
+::: dsvis
+TODO
 
 Two series of exchanges to build a max heap. (a) This heap is built by a
 series of nine exchanges in the order (4-2), (4-1), (2-1), (5-2), (5-4),
 (6-3), (6-5), (7-5), (7-6). (b) This heap is built by a series of four
 exchanges in the order (5-2), (7-3), (7-1), (6-1).
-::::
+
+<inlineav id="HeapBldChoiceCON" src="Binary/HeapBldChoiceCON.js" script="DataStructures/binaryheap.js" name="Heap Build Choices" links="Binary/HeapBldChoiceCON.css"/>
+:::
 
 From this example, it is clear that the heap for any given set of
 numbers is not unique, and we see that some rearrangements of the input
@@ -277,13 +291,19 @@ visit the leaf nodes (they can never move down because they are already
 at the bottom), so the building algorithm can start in the middle of the
 array, with the first internal node.
 
+::: dsvis
 Here is a visualization of the heap build process.
 
 <inlineav id="heapbuildCON" src="Binary/heapbuildCON.js" script="DataStructures/binaryheap.js" name="Heapbuild Slideshow"/>
+:::
 
 Method `buildHeap` implements the building algorithm.
 
+::: dsvis
+TODO
+
 <avembed id="heapbuildPRO" src="Binary/heapbuildPRO.html" type="pe" name="Heap Build Proficiency Exercise"/>
+:::
 
 What is the cost of `buildHeap`? Clearly it is the sum of the costs for
 the calls to `siftDown`. Each `siftDown` operation can cost at most the
@@ -308,21 +328,34 @@ heap one element at a time, which would cost $O(n \log n)$ in the
 worst case. It is also faster than the $O(n \log n)$ average-case
 time and $O(n^2)$ worst-case time required to build the BST.
 
+::: dsvis
+TODO
+
 <inlineav id="heapbuildProofCON" src="Binary/heapbuildProofCON.js" script="DataStructures/binaryheap.js" name="Heap build analysis proof Slideshow" links="Binary/heapbuildProofCON.css"/>
+:::
 
 ### Removing from the heap
 
+::: dsvis
+TODO
+
 <inlineav id="heapmaxCON" src="Binary/heapmaxCON.js" script="DataStructures/binaryheap.js" name="Remove Max Slideshow"/>
+:::
 
 Because the heap is $\log n$ levels deep, the cost of deleting the
 maximum element is $O(\log n)$ in the average and worst cases.
 
-<avembed id="heapremovePRO" src="Binary/heapremovePRO.html" type="pe" name="Heap Remove Exercise"/>
+::: dsvis
+TODO
 
-|
+<avembed id="heapremovePRO" src="Binary/heapremovePRO.html" type="pe" name="Heap Remove Exercise"/>
+:::
+
+::: dsvis
+TODO
 
 <inlineav id="heapremoveCON" src="Binary/heapremoveCON.js" script="DataStructures/binaryheap.js" name="Remove Any Slideshow"/>
-
+:::
 
 ### Binary heaps as priority queues
 

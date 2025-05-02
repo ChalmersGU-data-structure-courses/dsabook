@@ -62,7 +62,11 @@ stores the previously visited vertex that is closest to Vertex *e*.
 This information lets us know which edge goes into the
 MCST when Vertex *e* is processed.
 
+::: dsvis
+TODO
+
 <inlineav id="primCON" src="Graph/primCON.js" name="Prim's Minimum Cost Spanning Tree Algorithm Slideshow" links="Graph/primCON.css"/>
+:::
 
 
 ### Invariants
@@ -159,4 +163,8 @@ vertex $v_i, i \leq j$, because to do so would form a cycle.
 :::
 
 
+::: dsvis
+TODO
+
 <avembed id="PrimPE" src="Graph/PrimPE.html" type="pe" name="Prim's Algorithm Proficiency Exercise"/>
+:::

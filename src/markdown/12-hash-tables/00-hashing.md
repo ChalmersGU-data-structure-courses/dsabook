@@ -62,7 +62,11 @@ record with key $k$ can be stored in `HT`[$k$], and so the hash function
 is $\mathbf{h}(k) = k$. To find the record with key value $k$, look in
 `HT`[$k$].
 
+::: dsvis
+TODO
+
 <inlineav id="hashIntroCON" src="Hashing/hashIntroCON.js" name="Hashing Intro Slideshow" links="Hashing/hashIntroCON.css"/>
+:::
 
 In most applications, there are many more values in the key range than
 there are slots in the hash table. For a more realistic example, suppose

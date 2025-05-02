@@ -34,7 +34,11 @@ When we create a new array-list we have to decide the *capacity*, the
 largest possible size. Then the underlying array is initialised, and the
 size counter is set to 0 because there are no elements yet.
 
+::: dsvis
+TODO
+
 <inlineav id="StaticArrayList-Vars-CON" src="ChalmersGU/StaticArrayList-Vars-CON.js" name="Static Array-based List Variables Slideshow"/>
+:::
 
     datatype ArrayList implements List:
         internalArray = new Array(capacity)  // Internal array containing the list elements
@@ -48,7 +52,11 @@ You can simulate it by creating a list with a number of empty elements:
 
 Random access to any element in the list is quick and easy.
 
+::: dsvis
+TODO
+
 <inlineav id="StaticArrayList-Intro-CON" src="ChalmersGU/StaticArrayList-Intro-CON.js" name="Static Array-based List Intro Slideshow" links="ChalmersGU/CGU-Styles.css"/>
+:::
 
 As you can see below, there are no loops in the methods `get` and `set`,
 which means that both require $O(1)$ time.
@@ -72,12 +80,20 @@ methods must maintain this property.
 
 Appending elements at the tail of an array-based list is super-fast.
 
+::: dsvis
+TODO
+
 <inlineav id="StaticArrayList-Append-CON" src="ChalmersGU/StaticArrayList-Append-CON.js" name="Static Array-based List Append Slideshow" links="ChalmersGU/CGU-Styles.css"/>
+:::
 
 However, adding an element at the head of the list requires shifting all
 existing elements in the array by one position toward the tail.
 
+::: dsvis
+TODO
+
 <inlineav id="StaticArrayList-Add-CON" src="ChalmersGU/StaticArrayList-Add-CON.js" name="Static Array-based List Insertion Slideshow" links="ChalmersGU/CGU-Styles.css"/>
+:::
 
 Therefore, if we want to add an element at position $i$, then
 $n - i - 1$ elements must shift toward the tail to leave room for the
@@ -96,7 +112,11 @@ elements, which is $O(n)$.
 
 #### Practice exercise
 
+::: dsvis
+TODO
+
 <avembed id="StaticArrayList-Add-PRO" src="ChalmersGU/StaticArrayList-Add-PRO.html" type="ka" name="Array-based List Add Exercise"/>
+:::
 
 ### Removing elements
 
@@ -106,7 +126,11 @@ shift toward the head to fill in the gap, instead of toward the tail. If
 we want to remove the element at position $i$, then $n - i - 1$ elements
 must shift toward the head, as shown in the following slideshow.
 
+::: dsvis
+TODO
+
 <inlineav id="StaticArrayList-Remove-CON" src="ChalmersGU/StaticArrayList-Remove-CON.js" name="Static Array-based List Remove" links="ChalmersGU/CGU-Styles.css"/>
+:::
 
 In the worst case, insertion or removal each requires moving all $n$
 elements, which is $O(n)$.
@@ -125,7 +149,11 @@ elements, which is $O(n)$.
 
 #### Practice exercise
 
+::: dsvis
+TODO
+
 <avembed id="StaticArrayList-Remove-PRO" src="ChalmersGU/StaticArrayList-Remove-PRO.html" type="ka" name="Array-based List Remove Exercise"/>
+:::
 
 
 ### Limitations

@@ -68,9 +68,11 @@ alphabetic order, vertices of the graph in
 in the order J7, J5, J4, J6, J2, J3, J1. Popping them one by one yields
 the topological sort J1, J3, J2, J6, J4, J5, J7.
 
+::: dsvis
 Here is another example.
 
 <inlineav id="topSortDFSCON" src="Graph/topSortDFSCON.js" name="TopSort Slideshow" links="Graph/topSortDFSCON.css"/>
+:::
 
 #### Queue-based algorithm
 
@@ -124,4 +126,8 @@ implementation for the algorithm.
 
         return sortedVertices
 
+::: dsvis
+TODO
+
 <inlineav id="topSortQCON" src="Graph/topSortQCON.js" name="topSortQCON Slideshow" links="Graph/topSortQCON.css"/>
+:::

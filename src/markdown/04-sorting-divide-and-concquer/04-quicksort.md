@@ -78,9 +78,11 @@ selection strategy.
         // Not-so-good pivot selection: always choose the middle element.
         return int((i + j) / 2)
 
+::: dsvis
+Quicksort pivot proficiency exercise
 
 <avembed id="QuicksortPivotPRO" src="Sorting/QuicksortPivotPRO.html" type="ka" name="Quicksort Pivot Proficiency Exercise"/>
-
+:::
 
 ### Invariants
 
@@ -149,40 +151,54 @@ It breaks out of the loop if `left` and `right` passed each other;
 otherwise it swaps the `left` and `right` elements, moves the indices
 one step and continues with the loop.
 
-Finally, it puts the pivot at its correct position, by swapping with
-`right`.
+::: dsvis
+Finally, it puts the pivot at its correct position, by swapping with `right`.
 
 <inlineav id="quicksortCON" src="Sorting/quicksortCON.js" script="Sorting/quicksortCODE.js" name="Quicksort Partition Slideshow" links="Sorting/quicksortCON.css"/>
+:::
+
+::: dsvis
+Quicksort partition proficiency exercise.
 
 <avembed id="QuicksortPartitPRO" src="Sorting/QuicksortPartitPRO.html" type="ka" name="Quicksort Partition Proficiency Exercise"/>
+:::
 
+::: dsvis
 And here is a visualization illustrating the running time analysis of
 the partition function
 
 <inlineav id="QuickSortPartitionAnalysisCON" src="Sorting/QuickSortPartitionAnalysisCON.js" name="Quicksort Partition Analysis Slideshow" links="Sorting/QuickSortPartitionAnalysisCON.css"/>
+:::
 
 ### Putting it together
 
-Here is a visualization for the entire Quicksort algorithm. This
-visualization shows you how the logical decomposition caused by the
+::: dsvis
+Here is a visualization for the entire Quicksort algorithm.
+
+This visualization shows you how the logical decomposition caused by the
 partitioning process works. In the visualization, the separate
 sub-partitions are separated out to match the recursion tree. In
 reality, there is only a single array involved (as you will see in the
 proficiency exercise that follows the visualization).
 
 <avembed id="quicksortAV" src="Sorting/quicksortAV.html" type="ss" name="Quicksort Visualization"/>
+:::
 
+::: dsvis
 Here is a complete proficiency exercise to see how well you understand
 Quicksort.
 
 <avembed id="quicksortPRO" src="Sorting/quicksortPRO.html" type="pe" name="Quicksort Proficiency Exercise"/>
+:::
 
 
 ### Complexity analysis
 
+::: dsvis
 This visualization explains the worst-case running time of Quicksort
 
 <inlineav id="QuickSortWorstCaseCON" src="Sorting/QuickSortWorstCaseCON.js" name="Quicksort Worst Case Analysis Slideshow" links="Sorting/QuickSortWorstCaseCON.css"/>
+:::
 
 This is terrible, no better than Insertion or Selection sort. When will
 this worst case occur? Only when each pivot yields a bad partitioning of
@@ -191,9 +207,11 @@ extremely unlikely to happen. When selecting the middle position of the
 current subarray, it is still unlikely to happen. It does not take many
 good partitionings for Quicksort to work fairly well.
 
+::: dsvis
 This visualization explains the best-case running time of Quicksort
 
 <inlineav id="QuickSortBestCaseCON" src="Sorting/QuickSortBestCaseCON.js" name="Quicksort Best Case Analysis Slideshow" links="Sorting/QuickSortBestCaseCON.css"/>
+:::
 
 Quicksort's average-case behavior falls somewhere between the extremes
 of worst and best case. Average-case analysis considers the cost for all
@@ -213,10 +231,12 @@ T(n) &=& cn + \frac{1}{n}\sum_{k=0}^{n-1}[T(k) + T(n - 1 - k)]
 T(0) = T(1) &=& c
 \end{eqnarray}
 
+::: dsvis
 This visualization will help you to understand how this recurrence
 relation was formed.
 
 <inlineav id="QuickSortAverageCaseCON" src="Sorting/QuickSortAverageCaseCON.js" name="Quicksort Average Case Analysis Slideshow" links="Sorting/QuickSortAverageCaseCON.css"/>
+:::
 
 This is an unusual situation that the average case cost and the worst
 case cost have asymptotically different growth rates. Consider what

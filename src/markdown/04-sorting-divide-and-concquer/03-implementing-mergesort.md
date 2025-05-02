@@ -82,10 +82,11 @@ subarray being sorted. The initial call to `mergeSort` would be
                 i2 = i2 + 1
 
 
-
+::: dsvis
 Here is a visualization for the merge step.
 
 <inlineav id="mergeImplS1CON" src="Sorting/mergeImplS1CON.js" name="Mergesort Implementation Slideshow 1"/>
+:::
 
 
 ### Bottom-up mergesort

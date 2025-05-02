@@ -109,7 +109,7 @@ The $i$ th call to **p** returns the $i$ th offset to be used.
 
 ### Linear probing
 
-The simplest approach to collsion resolution is simply to move down the
+The simplest approach to collision resolution is simply to move down the
 table from the home slot until a free slot is found. This is known as
 [linear probing]{.term}. The probe function for
 simple linear probing is $\textbf{p}(K, i) = i$. That is, the $i$ th
@@ -121,10 +121,12 @@ Linear probing has the virtue that all slots in the table will be
 candidates for inserting a new record before the probe sequence returns
 to the home position.
 
-<inlineav id="linProbeCON1" src="Hashing/linProbeCON1.js" name="Linear Probing Slideshow 1" links="Hashing/linProbeCON.css"/>
-
+::: dsvis
 Can you see any reason why this might not be the best approach to
 collision resolution?
+
+<inlineav id="linProbeCON1" src="Hashing/linProbeCON1.js" name="Linear Probing Slideshow 1" links="Hashing/linProbeCON.css"/>
+:::
 
 ### Implementation
 

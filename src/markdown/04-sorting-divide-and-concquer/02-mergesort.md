@@ -27,9 +27,11 @@ pseudocode sketch of Mergesort:
         L2 = other half of A
         return merge(mergeSort(L1), mergeSort(L2))
 
+::: dsvis
 Here is a visualization that illustrates how Mergesort works.
 
 <avembed id="mergesortAV" src="Sorting/mergesortAV.html" type="ss" name="Mergesort Visualization"/>
+:::
 
 The hardest step to understand about Mergesort is the merge function.
 The merge function starts by examining the first record of each sublist
@@ -57,28 +59,34 @@ Here is pseudocode for merge on lists:
         append all elements of L2 to answer
         return answer
 
+::: dsvis
 Here is a visualization for the merge operation.
 
 <inlineav id="mergesortCON" src="Sorting/mergesortCON.js" name="Merging Slideshow"/>
+:::
 
+::: dsvis
 Here is a Mergesort warmup exercise to practice merging.
 
 <avembed id="MergesortMergePRO" src="Sorting/MergesortMergePRO.html" type="ka" name="Mergesort Merging Proficiency Exercise"/>
-
+:::
 
 ### Invariants
 
 
 ### Mergesort practice exercise
 
+::: dsvis
 Now here is a full proficiency exercise to put it all together.
 
 <avembed id="mergesortPRO" src="Sorting/mergesortPRO.html" type="pe" name="Mergesort Proficiency Exercise"/>
+:::
 
+::: dsvis
 This visualization provides a running time analysis for Mergesort.
 
 <inlineav id="MergeSortAnalysisCON" src="Sorting/MergeSortAnalysisCON.js" name="Mergesort Analysis Slideshow" links="Sorting/MergeSortAnalysisCON.css"/>
-
+:::
 
 
 ### Complexity analysis

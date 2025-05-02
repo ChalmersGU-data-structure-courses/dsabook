@@ -57,7 +57,11 @@ As explained below, we don't have to double the size, but we can
 multiply by 3 or 1.5 or 1.1. The important point is that we don't add a
 constant number, but increase the size by a factor.
 
+::: dsvis
+Dynamic array list.
+
 <inlineav id="DynamicArrayList-Append-CON" src="ChalmersGU/DynamicArrayList-Append-CON.js" name="Dynamic Array-based List Addition Slideshow" links="ChalmersGU/CGU-Styles.css"/>
+:::
 
 ### How much to increase the array size
 
@@ -341,8 +345,9 @@ before. The only thing that matters is that the minimum load factor
                 resizeArray(internalArray.size * 1/2)
             return x
 
-|
+::: dsvis
+Dynamic array list -- deletion.
 
 <inlineav id="DynamicArrayList-Remove-CON" src="ChalmersGU/DynamicArrayList-Remove-CON.js" name="Dynamic Array-based List Deletion Slideshow" links="ChalmersGU/CGU-Styles.css"/>
-
+:::
 

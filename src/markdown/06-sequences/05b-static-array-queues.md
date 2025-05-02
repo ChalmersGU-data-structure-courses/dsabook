@@ -4,23 +4,37 @@
 The array-based queue is somewhat tricky to implement effectively.
 A simple conversion of the array-based stack implementation is not efficient.
 
-<inlineav id="aqueueFirstCON" src="List/aqueueFirstCON.js" name="Array-based Queue Positions Slideshow" links="List/aqueueCON.css"/>
+::: dsvis
+Array queue -- positions.
 
-|
+<inlineav id="aqueueFirstCON" src="List/aqueueFirstCON.js" name="Array-based Queue Positions Slideshow" links="List/aqueueCON.css"/>
+:::
+
+::: dsvis
+Array queue -- drifting.
 
 <inlineav id="aqueueDriftCON" src="List/aqueueDriftCON.js" name="Array-based Queue Drift Slideshow" links="List/aqueueCON.css"/>
+:::
 
-|
+::: dsvis
+Array queue -- bad representation.
 
 <inlineav id="aqueueBadCON" src="List/aqueueBadCON.js" name="Array-based Queue Bad Representation Slideshow" links="List/aqueueCON.css"/>
+:::
 
 ### Circular queues
 
-<inlineav id="aqueueCircularCON" src="List/aqueueCircularCON.js" script="DataStructures/CircularQueue.js" name="Circular Array-based Queue Slideshow" links="List/aqueueCON.css"/>
+::: dsvis
+Circular array queue.
 
-|
+<inlineav id="aqueueCircularCON" src="List/aqueueCircularCON.js" script="DataStructures/CircularQueue.js" name="Circular Array-based Queue Slideshow" links="List/aqueueCON.css"/>
+:::
+
+::: dsvis
+Circular array queue -- empty.
 
 <inlineav id="aqueueEmptyCON" src="List/aqueueEmptyCON.js" script="DataStructures/CircularQueue.js" name="Empty Circular Array-based Queue Slideshow" links="List/aqueueCON.css"/>
+:::
 
 If the value of `front` is fixed, then $n+1$ different values for `rear`
 are needed to distinguish among the $n+1$ states. However, there are
@@ -89,9 +103,11 @@ When dequeueing, we increase the `front` pointer (modulo the size of the interna
             return x
 
 
-### Array-based queue practice exercises
+::: dsvis
+#### Array-based queue practice exercises {-}
 
 <avembed id="AqueueEnqueuePRO" src="ChalmersGU/AqueueEnqueuePRO.html" type="ka" name="Array-based Queue Enqueue Exercise"/>
 
 <avembed id="AqueueDequeuePRO" src="ChalmersGU/AqueueDequeuePRO.html" type="ka" name="Array-based Queue Dequeue Exercise"/>
+:::
 

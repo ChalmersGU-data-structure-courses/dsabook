@@ -11,10 +11,13 @@ While linear probing is probably the first idea that comes to mind when
 considering collision resolution policies, it is not the only one
 possible. Probe function **p** allows us many options for how to do
 collision resolution. In fact, linear probing is one of the worst
-collision resolution methods. The main problem is illustrated by the
-next slideshow.
+collision resolution methods.
+
+::: dsvis
+The main problem is illustrated by the next slideshow.
 
 <inlineav id="linProbeCON2" src="Hashing/linProbeCON2.js" name="Linear Probing Slideshow 2" links="Hashing/linProbeCON.css"/>
+:::
 
 Again, the ideal behavior for a collision resolution mechanism is that
 each empty slot in the table will have equal probability of receiving
@@ -29,7 +32,11 @@ sequences, which increases execution time. However, linear probing is
 still a very common probing method, because it is so simple and can be
 implemented efficiently.
 
+::: dsvis
+TODO
+
 <avembed id="HashLinearPPRO" src="Hashing/HashLinearPPRO.html" type="ka" name="Linear Probing Proficiency Exercise"/>
+:::
 
 
 ### Linear probing by steps
@@ -41,7 +48,11 @@ so the $i$ th slot in the probe sequence will be
 $(\textbf{h}(K) + ic) \mod M$. In this way, records with adjacent home
 positions will not follow the same probe sequence.
 
+::: dsvis
+TODO
+
 <inlineav id="collisionCON1" src="Hashing/collisionCON1.js" name="Linear Probing By Steps Slideshow 1" links="Hashing/collisionCON.css"/>
+:::
 
 One quality of a good probe sequence is that it will cycle through all
 slots in the hash table before returning to the home position. Clearly
@@ -69,11 +80,17 @@ any one of 1, 3, 7, or 9, then the probe sequence will visit all slots
 for any key. When $M = 11$, any value for $c$ between 1 and 10 generates
 a probe sequence that visits all slots for every key.
 
-<inlineav id="collisionCON2" src="Hashing/collisionCON2.js" name="Linear Probing By Steps Slideshow 2" links="Hashing/collisionCON.css"/>
+::: dsvis
+TODO
 
+<inlineav id="collisionCON2" src="Hashing/collisionCON2.js" name="Linear Probing By Steps Slideshow 2" links="Hashing/collisionCON.css"/>
+:::
+
+::: dsvis
 Now you can practice linear probing by different step sizes.
 
 <avembed id="HashLinearStepPPRO" src="Hashing/HashLinearStepPPRO.html" type="ka" name="Linear Probing By Steps Proficiency Exercise"/>
+:::
 
 ### Pseudo-random probing
 
@@ -105,16 +122,24 @@ function would be $\textbf{p}(K, i) = \textbf{Permutation}[i]$ where
 position **Permutation\[0\]**, and stores a random permutation of the
 values from 1 to $M - 1$ in slots 1 to $M - 1$.
 
-<inlineav id="collisionCON3" src="Hashing/collisionCON3.js" name="Pseudo-Random Probing Slideshow" links="Hashing/collisionCON.css"/>
+::: dsvis
+TODO
 
+<inlineav id="collisionCON3" src="Hashing/collisionCON3.js" name="Pseudo-Random Probing Slideshow" links="Hashing/collisionCON.css"/>
+:::
+
+::: dsvis
 Here is a practice exercise for pseudo-random probing.
 
 <avembed id="HashPseudoRandomPPRO" src="Hashing/HashPseudoRandomPPRO.html" type="ka" name="Pseudo-Random Probing Proficiency Exercise"/>
+:::
 
+::: dsvis
 Pseudo-random probing exhibits another desirable feature in a hash
 function.
 
 <inlineav id="collisionCON4" src="Hashing/collisionCON4.js" name="Avoiding the Train" links="Hashing/collisionCON.css"/>
+:::
 
 ### Quadratic probing
 
@@ -128,16 +153,26 @@ The simplest variation is $\textbf{p}(K, i) = i^2$ (i.e., $c_1 = 1$,
 $c_2 = 0$, and $c_3 = 0$). Then the $i$ th value in the probe sequence
 would be $(\textbf{h}(K) + i^2) \mod M$.
 
-<inlineav id="collisionCON5" src="Hashing/collisionCON5.js" name="Quadratic Probing Slideshow" links="Hashing/collisionCON.css"/>
+::: dsvis
+TODO
 
+<inlineav id="collisionCON5" src="Hashing/collisionCON5.js" name="Quadratic Probing Slideshow" links="Hashing/collisionCON.css"/>
+:::
+
+::: dsvis
 Now you can practice quadratic probing.
 
 <avembed id="HashQuadraticPPRO" src="Hashing/HashQuadraticPPRO.html" type="ka" name="Quadratic Probing Proficiency Exercise"/>
+:::
 
 There is one problem with quadratic probing: Its probe sequence
 typically will not visit all slots in the hash table.
 
+::: dsvis
+TODO
+
 <inlineav id="collisionCON6" src="Hashing/collisionCON6.js" name="Quadratic Probing Problem" links="Hashing/collisionCON.css"/>
+:::
 
 For many hash table sizes, this probe function will cycle through a
 relatively small number of slots. If all slots on that cycle happen to
@@ -230,12 +265,20 @@ that the max key value should be at least the square of the hash
 table size. This is not a problem for typical hashing applications.
 :::
 
-<inlineav id="collisionCON7" src="Hashing/collisionCON7.js" name="Double Hashing Slideshow 2" links="Hashing/collisionCON.css"/>
+::: dsvis
+TODO
 
-|
+<inlineav id="collisionCON7" src="Hashing/collisionCON7.js" name="Double Hashing Slideshow 2" links="Hashing/collisionCON.css"/>
+:::
+
+::: dsvis
+TODO
 
 <inlineav id="collisionCON8" src="Hashing/collisionCON8.js" name="Double Hashing Slideshow 3" links="Hashing/collisionCON.css"/>
+:::
 
+::: dsvis
 Now you can try it.
 
 <avembed id="HashDoublePPRO" src="Hashing/HashDoublePPRO.html" type="ka" name="Double Hashing Proficiency Exercise"/>
+:::

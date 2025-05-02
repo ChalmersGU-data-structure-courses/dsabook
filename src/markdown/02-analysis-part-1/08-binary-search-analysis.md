@@ -8,9 +8,11 @@ If we assume that the value is equally likely to appear in any location, this co
 (The best case is constant, $O(1)$, and occurs when the searched value occurs first in the array.
 But as we already discussed we are rarely interested in the best case.)
 
+::: dsvis
 But what is the complexity of the binary search algorithm?
 
 <inlineav id="BsearchDandCRecurCON" src="AlgAnal/BsearchDandCRecurCON.js" name="Binary Search recurrence slideshow" links="AlgAnal/BsearchDandCRecurCON.css"/>
+:::
 
 To find the worst-case cost of binary search, we can model the running time as a recurrence and then find the closed-form solution.
 Each recursive call to `binarySearch` cuts the size of the array approximately in half, so we can model the worst-case cost as follows, assuming for simplicity that $n$ is a power of two.

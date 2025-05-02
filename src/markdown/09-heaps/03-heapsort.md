@@ -47,7 +47,11 @@ will make it particularly useful for
 [external sorting](#external-sort){.term} algorithms,
 used when sorting data sets too large to fit in main memory.
 
+::: dsvis
+TODO
+
 <inlineav id="heapsortCON" src="Sorting/heapsortCON.js" script="DataStructures/binaryheap.js" name="Heapsort Slideshow"/>
+:::
 
 A complete implementation is as follows.
 
@@ -90,22 +94,28 @@ A complete implementation is as follows.
             left = 2*i + 1
 
 
+::: dsvis
 Here is a warmup practice exercise for Heapsort.
 
 <avembed id="HeapsortStepPRO" src="Sorting/HeapsortStepPRO.html" type="ka" name="Heapsort RemoveMax Proficiency Exercise"/>
+:::
 
-### Heapsort proficiency practice
+::: dsvis
+#### Heapsort proficiency practice {-}
 
 Now test yourself to see how well you understand Heapsort. Can you
 reproduce its behavior?
 
 <avembed id="heapsortPRO" src="Sorting/heapsortPRO.html" type="pe" name="Heapsort Proficiency Exercise"/>
+:::
 
 ### Heapsort analysis
 
+::: dsvis
 This visualization presents the running time analysis of Heap Sort
 
 <inlineav id="HeapSortAnalysisCON" src="Sorting/HeapSortAnalysisCON.js" script="DataStructures/binaryheap.js" name="Heapsort Analysis Slideshow" links="Sorting/HeapSortAnalysisCON.css"/>
+:::
 
 While typically slower than Quicksort by a constant factor (because
 unloading the heap using `removemax` is somewhat slower than

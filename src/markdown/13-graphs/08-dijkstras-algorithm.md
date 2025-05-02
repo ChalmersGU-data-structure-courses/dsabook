@@ -87,7 +87,11 @@ algorithm. At the end, array `D` will contain the shortest distance values.
         return D
 
 
+::: dsvis
+TODO
+
 <inlineav id="DijkstraCON" src="Graph/DijkstraCON.js" name="Dijkstra Slideshow" links="Graph/DijkstraCON.css"/>
+:::
 
 There are two reasonable solutions to the key issue of finding the
 unvisited vertex with minimum distance value during each pass through
@@ -167,9 +171,11 @@ $O((|\mathbf{V}| + |\mathbf{E}|) \log |\mathbf{E}|)$. However, when
 the graph is dense, this cost can become as great as
 $O(|\mathbf{V}|^2 \log |\mathbf{E}|) = O(|\mathbf{V}|^2 \log |\mathbf{V}|)$.
 
+::: dsvis
 Now you can practice using Dijkstra's algorithm.
 
 <avembed id="DijkstraPE" src="Graph/DijkstraPE.html" type="pe" name="Dijkstra's Algorithm Proficiency Exercise"/>
+:::
 
 ### Invariants
 

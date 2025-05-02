@@ -15,7 +15,11 @@ weight. An edge is added to the MCST, and two disjoint sets combined, if
 the edge connects two vertices in different disjoint sets. This process
 is repeated until only one disjoint set remains.
 
+::: dsvis
+TODO
+
 <inlineav id="kruskalCON" src="Graph/kruskalCON.js" name="Kruskal Slideshow" links="Graph/kruskalCON.css"/>
+:::
 
 The edges can be processed in order of weight by putting them in an
 array and then sorting the array. Another possibility is to use a
@@ -62,7 +66,11 @@ edges must be processed. If so, the cost is often close to
 $O(|\mathbf{V}| \log |\mathbf{E}|)$ in the average case (provided
 we use a priority queue instead of sorting all edges in advance).
 
+::: dsvis
+TODO
+
 <avembed id="KruskalPE" src="Graph/KruskalPE.html" type="pe" name="Kruskal's Algorithm Proficiency Exercise"/>
+:::
 
 ### Invariants
 

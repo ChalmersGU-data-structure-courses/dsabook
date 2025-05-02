@@ -121,5 +121,9 @@ insert them again into the new resized table.
 
 ### Exercise
 
+::: dsvis
+TODO
+
 <avembed id="OpenHashPRO" src="Hashing/OpenHashPRO.html" type="ka" name="Separate Chaining Proficiency Exercise"/>
+:::
 

@@ -28,24 +28,33 @@ implementation. The input is an array named $A$ that stores $N$ elements.
                 swap(A, j, j-1)
                 j = j-1
 
+:::::::: online
 ### Selection sort visualisation
 
+::: dsvis
 Here we see the first few iterations of Insertion sort.
 
 <inlineav id="insertionsortCON" src="Sorting/insertionsortCON.js" name="Insertion Sort Slideshow" links="Sorting/InsertionSort.css"/>
+:::
 
 This continues on with each element in turn.
 Call the current element $x$.
 Insertion sort will move it to the left so long as it is smaller than element immediately preceding it.
 As an element is less than or equal to $x$ is encountered, `insertionSort` is done with that element because all elements to its left in the array must be smaller.
 
+::: dsvis
 The following visualization shows the complete Insertion sort. You can input your own data if you like.
 
 <avembed id="insertionsortAV" src="Sorting/insertionsortAV.html" type="ss" name="Insertion Sort Visualization"/>
+:::
 
+::: dsvis
 Now try for yourself to see if you understand how Insertion sort works.
 
 <avembed id="InssortPRO" src="Sorting/InssortPRO.html" type="ka" name="Insertion Sort Proficiency Exercise"/>
+:::
+
+::::::::
 
 <!--
 ### Invariants
@@ -63,17 +72,23 @@ Just as for the previous sorting algorithms, we have a nested for loop, where th
 Therefore, the worst case complexity of insertion sort is $\sum_0^N i$, which is quadratic, $O(N^2)$.
 In the best case -- when the list is already sorted -- the complexity is instead linear, $O(N)$, because we only have to do one comparison per iteration.
 
-Here is an explanation of the worst case cost of insertion sort:
+::: dsvis
+Here is an explanation of the worst case cost of insertion sort.
 
 <inlineav id="InsertionSortWorstCaseCON" src="Sorting/InsertionSortWorstCaseCON.js" name="Insertion Sort Worst Case Slideshow" links="Sorting/InsertionSort.css"/>
+:::
 
-And here is an explanation of the cost of the best case:
+::: dsvis
+And here is an explanation of the cost of the best case.
 
 <inlineav id="InsertionSortBestCaseCON" src="Sorting/InsertionSortBestCaseCON.js" name="Insertion Sort Best Case Slideshow" links="Sorting/InsertionSort.css"/>
+:::
 
-And here is the average case cost:
+::: dsvis
+And here is the average case cost.
 
 <inlineav id="InsertionSortAverageCaseCON" src="Sorting/InsertionSortAverageCaseCON.js" name="Insertion Sort Average Case Slideshow" links="Sorting/InsertionSort.css"/>
+:::
 
 While the best case is significantly faster than the average and worst
 cases, the average and worst cases are usually more reliable indicators

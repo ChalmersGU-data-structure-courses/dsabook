@@ -105,5 +105,9 @@ constant time.
 
 ### Exercise
 
+::: dsvis
+TODO
+
 <avembed id="OpenHashPRO" src="Hashing/OpenHashPRO.html" type="ka" name="Separate Chaining Proficiency Exercise"/>
+:::
 

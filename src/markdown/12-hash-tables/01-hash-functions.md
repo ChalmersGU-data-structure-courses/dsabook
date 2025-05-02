@@ -31,6 +31,9 @@ size 365) using the birthday as a hash function. Note that this
 observation tells us nothing about *which* students share a birthday, or
 on *which* days of the year shared birthdays fall.
 
+::: dsvis
+TODO
+
 Try it for yourself. You can use the calculator to see the probability
 of a collision. The default values are set to show the number of people
 in a room such that the chance of a duplicate is just over 50%. But you
@@ -38,10 +41,13 @@ can set any table size and any number of records to determine the
 probability of a collision under those conditions.
 
 <avembed id="Birthday" src="Hashing/Birthday.html" type="ss" name="Birthday Problem Calculator" height="177"/>
+:::
 
+::: dsvis
 Use the calculator to answer the following questions.
 
 <avembed id="BirthdayFIB" src="Hashing/BirthdayFIB.html" type="ka" name="Birthday Problem Exercise"/>
+:::
 
 To be practical, a database organized by hashing must store records in a
 hash table that is not so large that it wastes space. To balance time

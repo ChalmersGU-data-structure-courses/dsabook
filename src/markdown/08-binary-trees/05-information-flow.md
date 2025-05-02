@@ -86,7 +86,11 @@ your function actually returns a value. A common mistake is to make a
 recursive call and not capture the returned value. Another common
 mistake is to not return a value.
 
+::: dsvis
+TODO
+
 <inlineav id="BinaryTreeMistakesCON" src="Binary/BinaryTreeMistakesCON.js" name="Binary Tree Common Mistakes Slideshow" links="Binary/WriteTrav.css"/>
+:::
 
 <!-- ### Binary Tree Check Sum Exercise -->
 

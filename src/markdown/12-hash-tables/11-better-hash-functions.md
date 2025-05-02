@@ -33,7 +33,11 @@ actual key values are all relatively small, then most records will hash
 to slot 0. A similar, analogous problem arises if we were instead
 hashing strings based on the first letter in the string.
 
+::: dsvis
+TODO
+
 <inlineav id="hashFuncExCON2" src="Hashing/hashFuncExCON2.js" name="Hash Function Slideshow 2"/>
+:::
 
 In general with binning we store the record with key value $i$ at array
 position $i/X$ for some value $X$ (using integer division). A problem
@@ -117,10 +121,12 @@ digits. The key point is that the middle two digits of the result (5 and
 7) are affected by every digit of the input.
 :::
 
+::: dsvis
 Here is a little calculator for you to see how this works. Start with
 '4567' as an example.
 
 <avembed id="MidSquare" src="Hashing/MidSquare.html" type="pe" name="Mid-Square Calculator"/>
+:::
 
 ### A simple hash function for strings
 
@@ -157,9 +163,11 @@ Another problem is that the order of the characters in the string has no
 effect on the result. E.g., all permutations of the string "*ABCDEFG*"
 will result in the same hash value.
 
+::: dsvis
 Now you can try it out with this calculator.
 
 <avembed id="StringSimple" src="Hashing/StringSimple.html" type="pe" name="Simple String Folding Calculator"/>
+:::
 
 ### Improved string folding
 
@@ -186,20 +194,23 @@ $65\cdot 31^2 + 66\cdot 31 + 67 = 64,578$. If the table size is 101 then
 the modulus function will cause this key to hash to slot 39 in the
 table.
 
+::: dsvis
 Now you can try it out with this calculator.
 
 <avembed id="StringSfold" src="Hashing/StringSfold.html" type="pe" name="Improved String Folding Calculator"/>
+:::
 
 For any sufficiently long string, the sum will typically cause a 32-bit
 integer to overflow (thus losing some of the high-order bits) because
 the resulting values are so large. But this causes no problems when the
 goal is to compute a hash function.
 
-### Hash function exercise
+::: dsvis
+#### Hash function exercise {-}
 
 Now here is an exercise to let you practice these various hash
 functions. You should use the calculators above for the more complicated
 hash functions.
 
 <avembed id="HashFuncFIBSumm" src="Hashing/HashFuncFIBSumm.html" type="ka" name="Hash Function Pick Slot Summary"/>
-
+:::

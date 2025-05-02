@@ -98,9 +98,11 @@ Here is the method in pseudocode:
                 return mid               // Found it!
         return null                      // Search value not in array.
 
+::: dsvis
 And here is an illustration of the binary search algorithm.
 
 <inlineav id="binarySearchCON" src="Searching/binarySearchCON.js" name="Binary Search Algorithm Slideshow" links="Searching/binarySearchCON.css"/>
+:::
 
 With the right math techniques, it is not too hard to show that the cost of binary search on an array of $n$ values is at most $\log_2 n$.
 This is because we are repeatedly splitting the size of the subarray that we must look at in half.
@@ -124,9 +126,11 @@ A special value is returned if the value does not appear in the array.
 The algorithm can be modified to implement variations such as returning the position of the _first occurrence_ of the value in the array if multiple occurrences are allowed.
 Another variation is returning the position of the greatest value less than the value we are looking for when it is not in the array.
 
+:::: dsvis
 #### Binary search exercise {-}
 
 <avembed id="binarySearchPRO" src="Searching/binarySearchPRO.html" type="pe" name="Binary Search Proficiency Exercise"/>
+:::
 
 <!--
 ### Even faster searching

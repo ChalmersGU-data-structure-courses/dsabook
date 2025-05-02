@@ -141,11 +141,14 @@ To summarize: A [problem]{.term} is a function
 or a mapping of inputs to outputs. An [algorithm]{.term} is a recipe for solving a problem whose steps are concrete
 and unambiguous. Algorithms must be correct, of finite length, and must
 terminate for all inputs. A [program]{.term} is
-an instantiation of an algorithm in a programming language. The
-following slideshow should help you to visualize the differences.
+an instantiation of an algorithm in a programming language.
+
+::: dsvis
+The following slideshow should help you to visualize the differences.
 
 ::: TODO
 - Prio 3: this visualization is really ugly
 :::
 
 <inlineav id="ProblemAlgorithmCON" src="AlgAnal/ProblemAlgorithmCON.js" name="Problem, Algorithm, and Program definitions Slideshow" links="AlgAnal/ProblemAlgorithmCON.css"/>
+:::

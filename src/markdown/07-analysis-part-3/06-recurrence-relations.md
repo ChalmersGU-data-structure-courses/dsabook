@@ -43,7 +43,11 @@ T(0) = T(1) &=& 0
 As with summations, we typically wish to replace the recurrence relation with a closed-form solution.
 One approach is to expand the recurrence by replacing any occurrences of $T$ on the right-hand side with its definition.
 
+::: dsvis
+TODO
+
 <inlineav id="LinearRecurrencesCON" src="AlgAnal/LinearRecurrencesCON.js" name="AlgAnal/LinearRecurrencesCON" links="AlgAnal/LinearRecurrencesCON.css"/>
+:::
 
 A slightly more complicated recurrence is
 
@@ -54,8 +58,11 @@ T(1) &=& 1
 
 Again, we will use expansion to help us find a closed form solution.
 
-<inlineav id="LinearRecurrencesNCON" src="AlgAnal/LinearRecurrencesNCON.js" name="AlgAnal/LinearRecurrencesNCON" links="AlgAnal/LinearRecurrencesNCON.css"/>
+::: dsvis
+TODO
 
+<inlineav id="LinearRecurrencesNCON" src="AlgAnal/LinearRecurrencesNCON.js" name="AlgAnal/LinearRecurrencesNCON" links="AlgAnal/LinearRecurrencesNCON.css"/>
+:::
 
 A more complicated example is the standard [Mergesort].
 This takes a list of size $n$, splits it in half, performs Mergesort on each half, and finally merges the two sublists in $n$ steps.
@@ -306,7 +313,11 @@ with no recurrence results. This yields a
 [summation]{.term}, and
 techniques for solving summations can then be used.
 
+::: dsvis
+TODO
+
 <inlineav id="ExpandRecurrenceCON" src="AlgAnal/ExpandRecurrenceCON.js" name="Divide-and-Conquer Expansion Slideshow" links="AlgAnal/ExpandRecurrenceCON.css"/>
+:::
 
 ::: TODO
 - We haven't introduced heaps yet - so this should move to later
@@ -376,9 +387,11 @@ T(n)  &  =  &  aT(n/b) + cn^k \\
             &  =  & ca^m\sum_{i=0}^{m} (b^k/a)^i
 \end{eqnarray*}
 
+::: dsvis
 Here is a more visual presentation of this same derivation.
 
 <inlineav id="DandCRecurrenceCON" src="AlgAnal/DandCRecurrenceCON.js" name="Divide-and-Conquer Expansion Slideshow2" links="AlgAnal/DandCRecurrenceCON.css"/>
+:::
 
 So, we are left with this result:
 

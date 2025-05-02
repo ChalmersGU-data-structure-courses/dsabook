@@ -28,11 +28,17 @@ sequence until a truly empty position has been found, simply to verify
 that a duplicate is not in the table. However, the new record would
 actually be inserted into the slot of the first tombstone encountered.
 
-<inlineav id="hashdelCON" src="Hashing/hashdelCON.js" name="Hash Deletion Slideshow" links="Hashing/collisionCON.css"/>
+::: dsvis
+TODO
 
+<inlineav id="hashdelCON" src="Hashing/hashdelCON.js" name="Hash Deletion Slideshow" links="Hashing/collisionCON.css"/>
+:::
+
+::: dsvis
 Here is a practice exercise.
 
 <avembed id="HashingDelPRO" src="Hashing/HashingDelPRO.html" type="pe" name="Hash Deletion Proficiency Exercise"/>
+:::
 
 The use of tombstones allows searches to work correctly and allows reuse
 of deleted slots. However, after a series of intermixed insertion and

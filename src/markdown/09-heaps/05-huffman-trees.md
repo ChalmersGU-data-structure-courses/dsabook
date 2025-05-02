@@ -135,10 +135,12 @@ The relative frequencies for eight selected letters.
 :::
 ::::
 
+::: dsvis
 The following slideshow illustrates the Huffman tree construction
 process for the eight letters of [Table #FreqExamp](#FreqExamp).
 
 <inlineav id="huffmanBuildCON" src="Binary/huffmanBuildCON.js" script="DataStructures/huffman.js" name="Huffman Coding Tree Slideshow: Build" links="DataStructures/huffman.css Binary/huffmanCON.css"/>
+:::
 
 Here is the implementation for the Huffman Tree class.
 
@@ -191,16 +193,23 @@ Once the Huffman tree has been constructed, it is an easy matter to
 assign codes to individual letters. Beginning at the root, we assign
 either a '0' or a '1' to each edge in the tree. '0' is assigned to
 edges connecting a node with its left child, and '1' to edges
-connecting a node with its right child. This process is illustrated by
-the following slideshow.
+connecting a node with its right child.
+
+::: dsvis
+This process is illustrated by the following slideshow.
 
 <inlineav id="huffmanLabelCON" src="Binary/huffmanLabelCON.js" script="DataStructures/huffman.js" name="Huffman Coding Tree Slideshow: Label Edges" links="DataStructures/huffman.css Binary/huffmanCON.css"/>
+:::
 
 Now that we see how the edges associate with bits in the code, it is a
 simple matter to generate the codes for each letter (since each letter
 corresponds to a leaf node in the tree).
 
+::: dsvis
+TODO
+
 <inlineav id="huffmanCodesCON" src="Binary/huffmanCodesCON.js" script="DataStructures/huffman.js" name="Huffman Coding Tree Slideshow: Setting Codes" links="DataStructures/huffman.css Binary/huffmanCON.css"/>
+:::
 
 Now that we have a code for each letter, encoding a text message is done
 by replacing each letter of the message with its binary code. A lookup
@@ -219,12 +228,19 @@ nodes.
 When we decode a character using the Huffman coding tree, we follow a
 path through the tree dictated by the bits in the code string. Each
 '0' bit indicates a left branch while each '1' bit indicates a right
-branch. The following slideshow shows an example for how to decode a
-message by traversing the tree appropriately.
+branch.
+
+::: dsvis
+The following slideshow shows an example for how to decode a message by traversing the tree appropriately.
 
 <inlineav id="huffmanDecodeCON" src="Binary/huffmanDecodeCON.js" script="DataStructures/huffman.js" name="Huffman Coding Tree Slideshow: Decoding" links="DataStructures/huffman.css Binary/huffmanCON.css"/>
+:::
+
+::: dsvis
+TODO
 
 <avembed id="HuffmanDecodePRO" src="Binary/HuffmanDecodePRO.html" type="ka" name="Huffman Decoding Proficiency Exercise"/>
+:::
 
 ### How efficient is Huffman coding?
 
@@ -297,11 +313,12 @@ that are not expected to occur often. If the message does not match the
 expected frequencies of the letters, than the length of the encoding
 will not be as expected either.
 
+::: dsvis
 You can use the following visualization to create a huffman tree for
 your own set of letters and frequencies.
 
 <avembed id="huffmanCustomBuildAV" src="Binary/huffmanCustomBuildAV.html" type="ss" name="Huffman Custom Build"/>
-
+:::
 
 ### Proof of optimality for Huffman coding
 

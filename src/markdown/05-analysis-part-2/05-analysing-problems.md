@@ -135,10 +135,12 @@ first is less than the second, then this is modeled as a left branch in
 the decision tree. In the case where the first value is greater than the
 second, the algorithm takes the right branch.
 
+::: dsvis
 Here is a visualization that illustrates decision trees and the sorting
 lower bound proof.
 
 <inlineav id="SortingLowerBoundCON" src="Sorting/SortingLowerBoundCON.js" name="Sorting Lower Bound Slideshow" links="Sorting/SortingLowerBoundCON.css"/>
+:::
 
 Any sorting algorithm requiring $\Omega(n \log n)$ comparisons in the
 worst case requires $\Omega(n \log n)$ running time in the worst case.

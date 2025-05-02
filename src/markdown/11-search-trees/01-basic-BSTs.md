@@ -104,9 +104,17 @@ implemented as follows.
                 return node.value
 
 
+::: dsvis
+TODO
+
 <inlineav id="BSTsearchCON" src="Binary/BSTsearchCON.js" name="BST Search Slideshow" links="Binary/BSTCON.css"/>
+:::
+
+::: dsvis
+TODO
 
 <avembed id="BSTsearchPRO" src="Binary/BSTsearchPRO.html" type="pe" name="BST Search Proficiency Exercise"/>
+:::
 
 ### Inserting into a BST
 
@@ -163,7 +171,11 @@ Now we look at how to insert a new node into the BST.
             return node
 
 
+::: dsvis
+TODO
+
 <inlineav id="BSTinsertCON" src="Binary/BSTinsertCON.js" name="BST Insert Slideshow" links="Binary/BSTCON.css"/>
+:::
 
 Note that, except for the last node in the path, `putHelp` will not
 actually change the child pointer for any of the nodes that are visited.
@@ -190,7 +202,11 @@ example, all elements were inserted in sorted order. In general, it is
 preferable for a BST to be as shallow as possible. This keeps the
 average cost of a BST operation low.
 
+::: dsvis
+TODO
+
 <avembed id="BSTinsertPRO" src="Binary/BSTinsertPRO.html" type="pe" name="BST Insert Proficiency Exercise"/>
+:::
 
 ### Removing from a BST
 
@@ -232,7 +248,11 @@ value less than (or equal to) the one being removed. If either of these
 values replace the one being removed, then the BST property is
 maintained.
 
+::: dsvis
+TODO
+
 <inlineav id="BSTremoveCON" src="Binary/BSTremoveCON.js" name="BST remove Slideshow" links="Binary/BSTCON.css"/>
+:::
 
 When duplicate node values do not appear in the tree, it makes no
 difference whether the replacement is the greatest value from the left
@@ -284,7 +304,11 @@ The code for removal is shown here.
                     return node
 
 
+::: dsvis
+TODO
+
 <avembed id="BSTremovePRO" src="Binary/BSTremovePRO.html" type="pe" name="BST Remove Proficiency Exercise"/>
+:::
 
 ### Analysis
 

@@ -464,13 +464,14 @@ This is known as a [closed-form solution]{.term}, and the process of replacing t
 For example, the summation $\sum_{i=1}^{n} 1$ is simply the expression "1" summed $n$ times (remember that $i$ ranges from 1 to $n$).
 Because the sum of $n$ ones is $n$, the closed-form solution is $n$.
 
+::: dsvis
 Here are explanations about the closed form solutions of two summations that you will see many times in this book.
 Since this appears so often, it will help you later if you can get comfortable with it.
-
 
 <inlineav id="SummationOneToNCON" src="AlgAnal/SummationOneToNCON.js" name="AlgAnal/SummationOneToNCON" links="AlgAnal/SummationOneToNCON.css"/>
 
 <inlineav id="SummationTwoPowerICON" src="AlgAnal/SummationTwoPowerICON.js" name="AlgAnal/SummationTwoPowerICON" links="AlgAnal/SummationTwoPowerICON.css"/>
+:::
 
 <!--
 .. inlineav:: SummationOneToNCON ss

@@ -133,4 +133,8 @@ child and the other one its right child.
 The recursive relationships used to define a structure provide a natural
 model for any recursive algorithm on the structure.
 
+::: dsvis
+TODO
+
 <inlineav id="SumBinaryTreeCON" src="Binary/SumBinaryTreeCON.js" name="Sum values in a Binary Tree Slide Show" links="Binary/RecursiveDSCON.css"/>
+:::

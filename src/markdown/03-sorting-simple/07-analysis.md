@@ -93,5 +93,8 @@ In the next chapter we will present sorting algorithms that are significantly be
 How can they circumvent the quadratic behaviour?
 -- They compare and swap non-adjacent elements (and they do it in a smart way).
 
+::: dsvis
+Inversions proficiency exercise
 
 <avembed id="FindInversionsPRO" src="Sorting/FindInversionsPRO.html" type="ka" name="Inversions Proficiency Exercise"/>
+:::

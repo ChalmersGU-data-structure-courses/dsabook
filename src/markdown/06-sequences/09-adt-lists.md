@@ -61,7 +61,11 @@ four main operations we want to support:
 Apart from these four, we also want to know the number of elements, to be able to loop through the list elements in order.
 So we make the List interface be a Collection too.
 
+::: dsvis
+TODO
+
 <inlineav id="ListADT-Positions-CON" src="ChalmersGU/ListADT-Positions-CON.js" name="List ADT Positions Slideshow" links="ChalmersGU/CGU-Styles.css"/>
+:::
 
 The `List` member functions allow you to build a list with elements in
 any desired order, and to access any desired position in the list.
@@ -98,14 +102,22 @@ We can use the same structure as for stacks when implementing general linked lis
         head: Node = null   // Pointer to list header
         size: Int = 0       // Size of list
 
+::: dsvis
+TODO
+
 <inlineav id="LinkedList-Iteration-CON" src="ChalmersGU/LinkedList-Iteration-CON.js" name="Linked List Slideshow 1" links="ChalmersGU/CGU-Styles.css"/>
+:::
 
 #### Adding and removing nodes
 
 However, if we want to add or remove nodes, there is a problem with
 using a pointer to the `current` node.
 
+::: dsvis
+TODO
+
 <inlineav id="LinkedList-Problems-CON" src="ChalmersGU/LinkedList-Problems-CON.js" name="Linked List Add/Remove Problems" links="ChalmersGU/CGU-Styles.css"/>
+:::
 
 So, using a `current` pointer, it is possible to add and remove nodes,
 using some complicated coding. But this does not work for the very last
@@ -118,12 +130,19 @@ current node. This is the solution we will adopt.
 
 #### Adding a node
 
+::: dsvis
+TODO
+
 <inlineav id="LinkedList-Add-CON" src="ChalmersGU/LinkedList-Add-CON.js" name="Linked List Add Slideshow" links="ChalmersGU/CGU-Styles.css"/>
+:::
+
+::: dsvis
 
 Here are some special cases for linked list insertion: Inserting at the
 beginning of a list, and appending at the end.
 
 <inlineav id="LinkedList-AddSpecial-CON" src="ChalmersGU/LinkedList-AddSpecial-CON.js" name="Linked List Add Special Cases Slideshow" links="ChalmersGU/CGU-Styles.css"/>
+:::
 
 Here's the code for addition.
 
@@ -141,13 +160,19 @@ Here's the code for addition.
             size = size + 1
 
 
+::: dsvis
 Here's an exercise for adding a value to a linked list.
 
 <avembed id="LinkedList-Add-PRO" src="ChalmersGU/LinkedList-Add-PRO.html" type="ka" name="Linked List Add Exercise"/>
+:::
 
 #### Removing a node
 
+::: dsvis
+TODO
+
 <inlineav id="LinkedList-Remove-CON" src="ChalmersGU/LinkedList-Remove-CON.js" name="Linked List Remove Slideshow" links="ChalmersGU/CGU-Styles.css"/>
+:::
 
 Here's the code for deletion:
 
@@ -169,9 +194,11 @@ Here's the code for deletion:
             return removed.elem
 
 
+::: dsvis
 And here's an exercise.
 
 <avembed id="LinkedList-Remove-PRO" src="ChalmersGU/LinkedList-Remove-PRO.html" type="ka" name="Linked List Remove Exercise" height="700"/>
+:::
 
 #### Complexity analysis
 

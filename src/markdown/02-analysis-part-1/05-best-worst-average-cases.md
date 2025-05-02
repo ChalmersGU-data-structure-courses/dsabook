@@ -12,7 +12,11 @@ For any given size $n$ there are inifinitely many possible inputs -- all imagina
 However, no matter what array of size $n$ that the algorithm looks at, its running time will always be the same.
 This is because it always looks at every element in the array exactly once.
 
+::: dsvis
+Consider the problem of finding the factorial of $n$.
+
 <inlineav id="AnalCasesSameCON" src="AlgAnal/AnalCasesSameCON.js" name="Simple analysis cases slideshow" links="AlgAnal/AnalCasesCON.css"/>
+:::
 
 For most algorithms however, different inputs of a given size require different amounts of time.
 
@@ -28,7 +32,11 @@ So, on average, the algorithm examines $(n+1)/2$ values -- this is the *average 
 
 However, note that the average case depends on an important assumption: that the searched value $K$ is independent from how the values in the array is distributed! More about that below.
 
+::: dsvis
+Here is an example.
+
 <inlineav id="AnalCasesDiffCON" src="AlgAnal/AnalCasesDiffCON.js" name="Best, Worst, and Average cases slideshow" links="AlgAnal/AnalCasesCON.css"/>
+:::
 
 When analyzing an algorithm, should we study the best, worst, or average
 case? Normally we are not interested in the best case, because this

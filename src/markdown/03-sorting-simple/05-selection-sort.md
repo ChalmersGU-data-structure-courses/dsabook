@@ -39,25 +39,38 @@ For example, we could have written Selection sort to find the largest element an
 smallest, and so on.
 That version of Selection sort would behave very similar to our Bubble sort implementation, except that rather than repeatedly swapping adjacent values to get the next-largest element into place, it instead remembers the position of the element to be selected and does one swap at the end.
 
+:::::::: online
 ### Selection sort visualisation
 
+::: dsvis
 Consider the example of the following array.
 
 <inlineav id="selectionsortS1CON" src="Sorting/selectionsortS1CON.js" name="Selection Sort Slideshow 1" links="Sorting/selectionsortSCON.css"/>
+:::
 
-Now we continue with the second pass. However, since the smallest element is already at the beginning, we will not need to look at it again.
+::: dsvis
+Now we continue with the second pass.
+
+However, since the smallest element is already at the beginning, we will not need to look at it again.
 
 <inlineav id="selectionsortS2CON" src="Sorting/selectionsortS2CON.js" name="Selection Sort Slideshow 2" links="Sorting/selectionsortSCON.css"/>
+:::
 
 Selection sort continues in this way until the entire array is sorted.
 
+::: dsvis
 The following visualization puts it all together. You can input your own data if you like.
 
 <avembed id="selectionsortAV" src="Sorting/selectionsortAV.html" type="ss" name="Selection Sort Visualization"/>
+:::
 
+::: dsvis
 Now try for yourself to see if you understand how Selection sort works.
 
 <avembed id="SelsortPRO" src="Sorting/SelsortPRO.html" type="ka" name="Selection Sort Proficiency Exercise"/>
+:::
+
+::::::::
 
 <!--
 ### Invariants
@@ -77,10 +90,11 @@ The advantage compared to bubble sort is that selection sort makes a lot fewer s
 For each outer iteration it only makes one swap, so the total number of swaps will be $N-1$ (we get the last element in place "for free").
 So, selection sort makes a linear number of swaps, $O(N)$.
 
+::: dsvis
 This visualization analyzes the number of comparisons and swaps required by Selection sort.
 
 <inlineav id="SelectionSortAnalysisCON" src="Sorting/SelectionSortAnalysisCON.js" name="Selection Sort Analysis Slideshow" links="Sorting/SelectionSortAnalysisCON.css"/>
-
+:::
 
 <!-- The following is only interesting for low-level languages (e.g. C), other languages do this by default, so we skip it.
 
