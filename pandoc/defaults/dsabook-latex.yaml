@@ -3,7 +3,7 @@
 metadata:
   panflute-path: pandoc/filters
   panflute-filters:
-    - latex-filter
+    - generic-filter
 
 writer: pdf
 # pandoc --to=pdf --list-extensions

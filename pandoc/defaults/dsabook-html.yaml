@@ -3,7 +3,7 @@
 metadata:
   panflute-path: pandoc/filters
   panflute-filters:
-    - html-filter
+    - generic-filter
 
 writer: chunkedhtml
 # pandoc --to=chunkedhtml --list-extensions
