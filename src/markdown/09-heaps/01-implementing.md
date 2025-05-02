@@ -1,4 +1,3 @@
-# Heaps
 
 ::: TODO
 - Prio 1: rewrite (move out binary heaps)
