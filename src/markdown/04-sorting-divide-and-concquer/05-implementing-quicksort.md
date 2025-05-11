@@ -1,12 +1,83 @@
 ## Implementing quicksort
 
 ::: TODO
-- Prio 1: short intro to section
-- Prio 1: text for partition
-- Prio 1: pseudocode
+- Prio 2: dangers with quadratic behaviour: hackers
+- Prio 3: pseudocode for pivot picking
 :::
 
+In this section we go into more details in how to implement Quicksort.
+
 ### Partition
+
+There were some important details that we didn't mention in the pseudocode for partition in the previous section.
+
+- The pivot element should *not* be part of the actual partitioning, so after swapping the pivot into the leftmost position, we should move the left pointer one step.
+- We also have to add a check that the left pointer doesn't continue moving rightwards when it has met the right pointer.
+- And similarly for the right pointer.
+
+Here is more detailed pseudocode that takes the details into account:
+
+    function partition(A, left, right, pivot) -> Int:
+        swap(A, left, pivot)   // Put pivot at the leftmost index
+        pivot = left
+        left = left + 1        // Start partitioning from the element after the pivot
+
+        while true:
+            // Move the left pointer rightwards as far as possible,
+            // as long as it hasn't passed the right pointer, *and* the value is smaller than the pivot.
+            while left <= right and A[left] < A[pivot]:
+                left = left + 1
+
+            // Move the right pointer leftwards as far as possible,
+            // as long as it hasn't passed the left pointer, *and* the value is greater than the pivot.
+            while left <= right and A[right] > A[pivot]:
+                right = right - 1
+
+            // Break out of the loop if the pointers has passed each other.
+            if left > right:
+                break
+
+            // Otherwise, swap the elements and move both pointers one step towards each other.
+            swap(A, left, right)
+            left = left + 1
+            right = right - 1
+
+        swap(A, pivot, right)   // Finally, move the pivot into place
+        return right            // Return the position of the pivot
+
+
+As we mentioned in the previous section, we swap the pivot with the value at the *right* pointer.
+This is because we started by putting the pivot first in the subarray.
+
+It is also possible to start by putting the pivot at the end of the subarray.
+In that case we have to swap the pivot value with the *left* pointer in the end.
+This is an equally good alternative partitioning algorithm.
+
+::: topic
+#### An alternative partitioning algorithm
+
+The partitioning algorithm we just presented is called *Hoare's partitioning scheme*, but there is another common algorithm which is called *Lomuto's partitioning scheme*.
+
+In this algorithm we still have two pointers, but both start at the left and move rightwards.
+Below we call them $i$ and $j$, where $i\leq j$.
+The invariant is that the elements from *left* to $i-1$ are less than the pivot, and the elements from $i$ to $j$ are greater than or equal to the pivot.
+In this case we start by putting the pivot at the end of the subarray.
+
+    function partition(A, left, right, pivot) -> Int:
+        swap A[pivot] with A[right]
+        pivot = right
+        right = right - 1
+        i = left
+        for j in left .. right:
+            if A[j] <= A[pivot]:
+                swap(A, i, j)
+                i = i + 1
+        swap A[pivot] with A[i]
+        return i
+
+However, Lomuto's partitioning algorithm is somewhat less efficient than Hoare's algorithm, because it makes more swaps.
+:::
+
 
 ### Selecting the pivot
 
@@ -14,6 +85,8 @@ Perhaps the most important choice in implementing Quicksort is how to
 choose the pivot. Choosing a bad pivot can result in all elements of the
 array ending up in the same partition, in which case Quicksort ends up
 taking quadratic time.
+
+#### First or last element
 
 Choosing the *first* or the *last* element of the array is a bad
 strategy. If the input array is sorted, then the first element of the
@@ -24,9 +97,13 @@ the partitioning will be as bad as possible, and Quicksort will end up
 taking quadratic time. You sometimes see implementations of Quicksort
 that use the first element as the pivot, but this is a bad idea!
 
+#### Middle element
+
 Above, we picked the *middle* element of the array, to avoid this
 problem. This works well enough, but in practice, more sophisticated
 strategies are used.
+
+#### Median-of-three
 
 The theoretically best choice of pivot is one that divides the array
 equally in two, i.e. the median element of the array. However, the
@@ -45,12 +122,15 @@ not seem to occur in practice. In practice, median-of-three picks good
 pivots, and it is also cheap to implement. It is used by most real-world
 Quicksort implementations.
 
+#### Random pivot
+
 Another good approach is to pick a random element of the array as the
 pivot. This makes it somewhat unlikely to get a poor partitioning.
 What's more, if we do get a poor partitioning, it is likely that in the
 recursive call to `quickSort`, we will choose a different pivot and get
 a better partitioning. Unlike median-of-three, this approach is
 theoretically sound: there are no input arrays which make it work badly.
+
 Another way to get the same effect is to pick e.g. the first element as
 the pivot, but to *shuffle* the array before sorting, rearranging it
 into a random order. The array only needs to be shuffled once before
@@ -58,17 +138,28 @@ Quicksort begins, not in every recursive call.
 
 ### More practical improvements
 
+There are some things we can do to improve the efficiency of Quicksort.
+
+#### Backing off to Insertion sort
+
 A significant improvement can be gained by recognizing that Quicksort is
-relatively slow when $n$ is small. This might not seem to be relevant if
+relatively slow when the array is small. This might not seem to be relevant if
 most of the time we sort large arrays, nor should it matter how long
 Quicksort takes in the rare instance when a small array is sorted
 because it will be fast anyway. But you should notice that Quicksort
 itself sorts many, many small arrays! This happens as a natural
 by-product of the divide and conquer approach.
 
-A simple improvement might then be to replace Quicksort with a faster
-sort for small subarrays, say Insertion sort or Selection sort. However,
-there is an even better -- and still simpler -- optimization. When
+A simple improvement is to replace Quicksort with a faster sort for small subarrays.
+This is a very common improvement, and usually one uses Insertion sort as the backoff algorithm.
+Now, at what size should we switch to Insertion sort?
+The answer can only be determined by empirical testing, but on modern machines the answer is probably somewhere between 10 and 100.
+
+Note that this improvement can also be used for Mergesort!
+
+#### Running Insertion sort in a single final pass
+
+There is a variant of this optimization: When
 Quicksort partitions are below a certain size, do nothing! The values
 within that partition will be out of order. However, we do know that all
 values in the array to the left of the partition are smaller than all
@@ -78,10 +169,9 @@ Quicksort only gets the values to "nearly" the right locations, the
 array will be close to sorted. This is an ideal situation in which to
 take advantage of the best-case performance of Insertion sort. The final
 step is a single call to Insertion sort to process the entire array,
-putting the records into final sorted order. At what size should we
-switch to Insertion sort? The answer can only be determined by empirical
-testing, but on modern machines the answer is probably somewhere between
-10 and 100.
+putting the records into final sorted order.
+
+#### Reduce recursive calls
 
 The last speedup to be considered reduces the cost of making recursive
 calls. Quicksort is inherently recursive, because each Quicksort

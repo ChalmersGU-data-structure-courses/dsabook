@@ -7,15 +7,14 @@ $(document).ready(function() {
   var av = new JSAV(av_name);
 
   var interpret = {
-    "Slide 1": "To analyze Quicksort, we first analyze the findpivot and partition functions when operating on a subarray of length <em>k</em>.",
-    "Slide 2": "Clearly, findpivot takes constant time for any <em>k</em>. Here we have <em>k = 9</em>.",
+    "Slide 1": "We first analyze the partition function when operating on a subarray of length <em>k</em>. Here we have <em>k = 9</em>.",
     "Slide 4": "The total cost of the partition operation is constrained by how far left and right can move inwards.",
-    "Slide 5": "The swap operation in the body of the outer while loop guarantees the movement of left and right at least one step each.",
-    "Slide 6": "Thus, the maximum number of times swap can be executed is <em>(s–1)/2</em>. <br/> In this case, left and right will move at most <em>(s–1)/2</em> steps each for a total of <em>s–1</em> steps.",
-    "Slide 7": "The first inner while loop can be executed at most <em>s–1</em> times in which case left will end up at the end of the array and the outer while loop will end.",
-    "Slide 8": "The second inner while loop can be executed at most <em>s–1</em> times in which case right will end up at the pivot and the outer while loop will end.",
-    "Slide 9": "Accordingly, the outer while loop along with its two inner loops will move left and right a total of <em>s–1</em> steps.",
-    "Slide 10": "Thus, the running time of the partition function is <em>O(s)</em>, where <em>s</em> is the size of the subarray.",
+    "Slide 5": "The swap operation in the body of the main loop guarantees the movement of left and right at least one step each.",
+    "Slide 6": "Thus, the maximum number of times swap can be executed is <em>(k–1)/2</em>. <br/> In this case, left and right will move at most <em>(k–1)/2</em> steps each for a total of <em>k–1</em> steps.",
+    "Slide 7": "If the pivot is the largest element, left will move <em>k–1</em> steps to the end of the array and the main loop will end.",
+    "Slide 8": "If the pivot is the smallest element, right will move <em>k–1</em> steps to the beginning of the array and the main loop will end.",
+    "Slide 9": "In any case, since left and right always move towards each other, they will move a total of <em>k–1</em> steps until they meet.",
+    "Slide 10": "Thus, the running time of the partition function is <em>O(k)</em>, where <em>k</em> is the size of the subarray.",
     "lab1": "Pivot",
     "lab2": "Left",
     "lab3": "Right"
@@ -30,28 +29,28 @@ $(document).ready(function() {
 
   // Slide 1
   av.umsg(interpret["Slide 1"]);
-  av.displayInit();
-
-  // Slide 2
-  av.umsg(interpret["Slide 2"]);
   for (var i = 0; i < 9; i++) {
     arr_values[i] = " ";
   }
   arr = av.ds.array(arr_values, {left: 150, top: 20, indexed: true});
+  av.displayInit();
+
+  // // Slide 2
+  // av.umsg(interpret["Slide 2"]);
   pivot = av.ds.array([4], {left: 550, top: 30, indexed: false});
   pivotLabel = av.label(interpret["lab1"], {left: 590, top: 32, indexed: false});
-  arr.highlight(4);
+  // arr.highlight(4);
   pivot.highlight();
-  av.step();
+  // av.step();
 
   // Slide 3
   // pseudo.show();
-  av.umsg("Function partition contains an outer while loop with two nested while loops");
-  // pseudo.highlight("loops");
-  pivot.hide();
-  pivotLabel.hide();
-  arr.unhighlight(4);
-  av.step();
+  // av.umsg("Function partition contains an outer while loop with two nested while loops.");
+  // // pseudo.highlight("loops");
+  // pivot.hide();
+  // pivotLabel.hide();
+  // arr.unhighlight(4);
+  // av.step();
 
   // Slide 4
   av.umsg(interpret["Slide 4"]);
@@ -104,12 +103,16 @@ $(document).ready(function() {
   av.umsg(interpret["Slide 9"]);
   right.value(0, 8);
   arr.removeClass(1, "redbg");
-  arr.addClass(8, "redbg");
-  arr.addClass(1, "greenbg");
+  arr.addClass(6, "greenbg");
+  arr.addClass(5, "redbg");
   // pseudo.highlight("loop2");
   av.step();
 
   // Slide 10
   av.umsg(interpret["Slide 10"]);
+  arr.removeClass(6, "greenbg");
+  arr.removeClass(5, "redbg");
+  arr.addClass(1, "greenbg");
+  arr.addClass(8, "redbg");
   av.recorded();
 });
