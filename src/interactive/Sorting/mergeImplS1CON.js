@@ -4,66 +4,67 @@ $(document).ready(function() {
 
   var av_name = "mergeImplS1CON";
 
-  var interpret = {
-    "av_c1": "Move the smaller value.",
-    "av_c2": "Compare the smallest values in each list.",
-    "av_c3": "Initially, we have the two sorted sublists in array A, and an empty temp array.",
-    "av_c4": "Move everything from A to temp.",
-    "av_c5": "Now we are ready to do the merge. First compare the smallest values in each list.",
-    "av_c6": "The smaller value is 2 in the right list.",
-    "av_c7": "Move it to position 0 of the A array.",
-    "av_c8": "Continue in this way, at each step comparing the smallest values in each list."
-  };
-
-  var startArray = [4, 8, 11, 25, 30, 2, 3, 17, 20];
-  var i;
+  var array = [5, 8, 17, 25, 30, 2, 4, 11, 20, 23];
   var empty = [];
-  empty.length = 9;
+  empty.length = array.length;
   var av = new JSAV(av_name);
 
-  var arr = av.ds.array(startArray,
-                        {indexed: true, center: true, layout: "array"});
-  var arrtemp = av.ds.array(empty,
-                            {indexed: true, center: true, layout: "array"});
+  var arr = av.ds.array(array, {indexed: true, center: true, layout: "array"});
 
-  function move(o, ii) {
-    av.step();
-    av.umsg(interpret["av_c1"]);
-    av.effects.moveValue(arrtemp, ii, arr, o);
-    arrtemp.unhighlight(i);
-    av.step();
-    if (o !== 8) {
-      av.umsg(interpret["av_c2"]);
-      arrtemp.highlight(ii + 1);
-    }
-  }
 
-  av.umsg(interpret["av_c3"]);
+  av.umsg("Initially, we have the two sorted sublists in array A.");
   av.displayInit();
-  av.umsg(interpret["av_c4"]);
-  for (i = 0; i < empty.length; i++) {
-    av.effects.moveValue(arr, i, arrtemp, i);
+
+  av.umsg("Create an empty temporary array.");
+  var arrtemp = av.ds.array(empty, {indexed: true, center: true, layout: "array"});
+  av.step();
+
+  let tomove;
+  let i = 0, left = 0, mid = array.length >> 1;
+  av.umsg("First compare the smallest values in each sublist.");
+  arr.highlight(left);
+  arr.highlight(mid);
+  av.step();
+  if (array[left] <= array[mid]) {
+    av.umsg(`The smaller value is ${array[left]} in the left list.`);
+    tomove = left++;
+  } else {
+    av.umsg(`The smaller value is ${array[mid]} in the right list.`);
+    tomove = mid++;
   }
   av.step();
-  av.umsg(interpret["av_c5"]);
-  arrtemp.highlight(0);
-  arrtemp.highlight(5);
+  av.umsg(`Copy it to position ${i} of the temp array.`);
+  av.effects.copyValue(arr, tomove, arrtemp, i);
+  arr.unhighlight(tomove);
+  arr.addClass(tomove, "deemph");
   av.step();
-  av.umsg(interpret["av_c6"]);
-  av.step();
-  av.umsg(interpret["av_c7"]);
-  av.effects.moveValue(arrtemp, 5, arr, 0);
-  arrtemp.unhighlight(5);
-  av.step();
-  av.umsg(interpret["av_c8"]);
-  arrtemp.highlight(6);
-  move(1, 6);
-  move(2, 0);
-  move(3, 1);
-  move(4, 2);
-  move(5, 7);
-  move(6, 8);
-  move(7, 3);
-  move(8, 4);
+  while (++i < array.length) {
+    if (left >= array.length >> 1) {
+      av.umsg("The left list is exhausted, copy all remaining elements from the right list.");
+      tomove = mid++;
+    } else if (mid >= array.length) {
+      av.umsg("The right list is exhausted, copy all remaining elements from the left list.");
+      tomove = left++;
+    } else {
+      av.umsg(i > 1 ? "Compare the smallest values in each list." :
+              "Continue in this way, at each step comparing the smallest values in each list.");
+      arr.highlight(left);
+      arr.highlight(mid);
+      av.step();
+      tomove = array[left] <= array[mid] ? left++ : mid++;
+      av.umsg(`Copy the smaller value to position ${i}.`);
+    }
+    av.effects.copyValue(arr, tomove, arrtemp, i);
+    arr.unhighlight(tomove);
+    arr.addClass(tomove, "deemph");
+    av.step();
+  }
+
+  av.umsg("Finally, copy everything back from temp to A.");
+  for (i = 0; i < empty.length; i++) {
+    av.effects.copyValue(arrtemp, i, arr, i);
+    arr.removeClass(i, "deemph");
+    arrtemp.addClass(i, "deemph");
+  }
   av.recorded();
 });
