@@ -53,16 +53,10 @@ in this chapter. The algorithms compared include
 [Selection sort], [Quicksort], and [Mergesort].
 
 For Quicksort and Mergesort, two versions are compared: the basic implementation,
-and an optimized version that falls back to insertion sort for sublists of
+and an optimized version that falls back to Insertion sort for sublists of
 length below 20.
 
-Except for the rightmost columns, the input to each algorithm is a
-random array of integers. This affects the timing for some of the
-sorting algorithms. For example, Selection sort is not being used to
-best advantage because the record size is small, so it does not get the
-best possible showing.
-
-The various sorting algorithms are shown for arrays of sizes being multiples of 10.
+The various sorting algorithms are shown for random integer arrays of sizes being multiples of 10.
 The final two columns of each
 table show the performance for the algorithms on inputs of size 100,000
 (400,000 for the Java tests)
@@ -73,10 +67,9 @@ They also show that for some algorithms, the order of input has little
 effect.
 
 These figures show a number of interesting results. As expected, the
-$O(n^2)$ sorts are quite poor performers for large arrays. Insertion
-sort is by far the best of this group, unless the array is already
-reverse sorted. Optimized Quicksort is clearly the best overall
-algorithm for all but lists of 10 records. Even for small arrays,
-optimized Quicksort performs well because it does one partition step
-before calling Insertion sort. In general, optimizing the various
-algorithms makes a noticeable improvement for larger array sizes.
+$O(n^2)$ sorts are quite poor performers for large arrays.
+Insertion sort and Selection sort outperforms Bubble sort in all cases.
+We also see that Insertion sort is the fastest algorithm of all if the input is already sorted.
+Quicksort with a cutoff to Insertion sort is clearly the best overall algorithm,
+but recall that this experiment was only run on random integer arrays.
+In general, optimizing the various algorithms makes a noticeable improvement for larger array sizes.
