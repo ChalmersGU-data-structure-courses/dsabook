@@ -69,3 +69,44 @@ Linked queue -- dequeue exercise.
 
 <avembed id="LinkedQueue-Dequeue-PRO" src="ChalmersGU/LinkedQueue-Dequeue-PRO.html" type="ka" name="Linked Queue Dequeue Exercise"/>
 :::
+
+
+
+::: topic
+### Example: Sorting a linked list using Mergesort
+
+We introduced Mergesort in section XX, and then we showed how to sort an array.
+But Mergesort can also be used to sort linked lists, because it does not require random access to the list elements.
+Thus, Mergesort is the method of choice when the input is in the form of a linked list.
+
+In fact, the only thing we need is to access the front and back of the linked list, which means that we can use Mergesort on linked queues.
+So, how do we implement splitting and merging?
+
+Splitting the input list into two equal halves presents some difficulty.
+Since we're using a linked list we cannot find the middle easily.
+But we can use a little trick instead: assign elements of the input list alternating between the two sublists.
+The first element is assigned to the first sublist, the second element to the second sublist, the third to first sublist, the fourth to the second sublist, and so on.
+Or in pseudocode:
+
+    function split(L) -> pair of two lists:
+        L1, L2 = empty linked lists
+        for each x in L:
+            add x to L1 (even iterations) or L2 (odd iterations)
+        return L1, L2
+
+(Note that it doesn't matter if we add `x` to the front or back of `L1` and `L2`, because the lists will be sorted anyway.)
+
+Merging two sorted linked lists is straightforward, because we need only remove items from the front of the input lists and append them to the end of the output list.
+The pseudocode in section XX can be used with linked lists directly.
+
+    function merge(L1, L2):
+        answer = new empty linked list
+        while L1 and L2 are nonempty:
+            if L1.peek() <= L2.peek():
+                enqueue L1.dequeue() to answer
+            else:
+                enqueue L2.dequeue() to answer
+        enqueue all remaining elements of L1 and L2
+        return L
+
+:::
