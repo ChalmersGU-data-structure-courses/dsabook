@@ -19,7 +19,7 @@ algorithm maintains the relative order of records with equal keys.
 ::::::::::::::::::::::::::::::
 
 
-
+<!--
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.
 
@@ -33,7 +33,7 @@ Mergesort is easier to implement when operating on a linked list than on an arra
 - There are a lot of details to deal with when implementing Mergesort on an array.
 :::
 ::::::::::::::::::::::::::::::
-
+-->
 
 
 :::::::::: question ::::::::::
@@ -73,7 +73,7 @@ What is the most complicated part of the Mergesort algorithm?
 ::::::::::::::::::::::::::::::
 
 
-
+<!--
 :::::::::: question ::::::::::
 Mergesort works by splitting a list of $n$
 numbers in half, then sorting each half recursively, and
@@ -95,7 +95,7 @@ It is also easy to do this on linked lists.
 It works fine on both singly and doubly lined lists.
 :::
 ::::::::::::::::::::::::::::::
-
+-->
 
 
 :::::::::: question ::::::::::

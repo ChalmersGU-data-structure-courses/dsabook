@@ -41,7 +41,7 @@ If it takes a given computer one second on average to run Quicksort
 on an array of 1000 records, how long (to the nearest thousand seconds)
 will it take to run Quicksort on 1,000,000 records?
 
-(Hint: You know from this statement that
+(You know from this statement that
 the machine can do about 10,000 comparisons per second.
 To get the answer, you first need to compute about how many
 total comparisons 1,000,000 records will require.)
@@ -166,7 +166,7 @@ What is the running time of Quicksort when the input is an array where all recor
 :::::::::: question ::::::::::
 Quicksort's worst-case case cost is $O(n^2)$ and its
 average-case cost is $O(n \log n)$. This means that
-the fraction of input cases with cost $O(n^2)$ must:</p>
+the fraction of input cases with cost $O(n^2)$ must:
 
 - [x] Drop as $n$ grows
 - [ ] Never happen
@@ -185,7 +185,7 @@ regardless of $n$, then the average would also be $n^2$.
 ::::::::::::::::::::::::::::::
 
 
-
+<!--
 :::::::::: question ::::::::::
 After Quicksort completes the partition function, where is the pivot?
 
@@ -200,7 +200,7 @@ After Quicksort completes the partition function, where is the pivot?
 That is done afterwards by the Quicksort function itself.
 :::
 ::::::::::::::::::::::::::::::
-
+-->
 
 
 :::::::::: question ::::::::::
@@ -228,9 +228,9 @@ partition. If we use this approach, does it matter whether we
 always pick from the first position in the partition, the last
 position in the partition, or the middle position in the partition?
 
-- [x] It is much better to pick the middle value
-- [ ] It is much better to pick the first value
-- [ ] It is much better to pick the last value
+- [x] It is better to pick the middle value
+- [ ] It is better to pick the first value
+- [ ] It is better to pick the last value
 - [ ] It doesn't really matter, they are all equally good or bad
 
 ::: hints
