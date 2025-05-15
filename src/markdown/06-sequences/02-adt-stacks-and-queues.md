@@ -107,7 +107,7 @@ factorial function.
 
 Here is an illustration for how the internal processing works.
 
-![Implementing recursion with a stack](images/RecurSta.png){width=500}
+![Implementing recursion with a stack](images/RecurSta.png)
 
 $\beta$ values indicate the address of the program instruction to return
 to after completing the current function call. On each recursive
