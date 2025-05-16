@@ -17,7 +17,7 @@ $(document).ready(function() {
     "sc5.2": "<br> <em><b>T</b>(n) = 1 + (1 + (1 + (1 + <b>T</b>(n-4)))</em>",
     "sc6.1": "This pattern will continue till we reach a subproblem of size <em>1</em>",
     "sc6.2": "<br> <em><b>T</b>(n) = 1 + (1 + (1 + (1 + (1 + (...))))</em>",
-    "sc7": "Thus, the closed form solution of <em><b>T</b>(n) = <b>T</b>(n-1) + 1</em> can be modeled by the summation <em>&Sigma;<sub>i=1...n</sub> 11</em>",
+    "sc7": "Thus, the closed form solution of <em><b>T</b>(n) = <b>T</b>(n-1) + 1</em> can be modeled by the summation <em>&Sigma;<sub>i=1...n</sub> 1</em>",
     "sc8": "This gives us a closed form solution of <em><b>T</b>(n) = <b>T</b>(n-1) + 1 = n</em>"
   };
 

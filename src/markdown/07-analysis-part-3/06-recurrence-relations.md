@@ -41,10 +41,19 @@ T(0) = T(1) &=& 0
 \end{eqnarray}
 
 As with summations, we typically wish to replace the recurrence relation with a closed-form solution.
-One approach is to expand the recurrence by replacing any occurrences of $T$ on the right-hand side with its definition.
+One approach is to expand the recurrence by replacing any occurrences of $T$ on the right-hand side with its definition:
+
+\begin{eqnarray}
+T(n) &=& 1 + T(n-1) \\
+     &=& 1 + (1 + T(n-2)) \\
+     &=& 1 + (1 + (1 + T(n-3))) \\
+     &=& 1 + (1 + (1 + (1 + (\cdots + 0))))
+\end{eqnarray}
+
+So, the closed form solution of $T(n) = T(n-1)+1$ can be modeled by the summation $\sum_1^n 1 = n$.
 
 ::: dsvis
-TODO
+Here is an interactive explanation of the recurrence relation $T(n)=T(n-1)+1$.
 
 <inlineav id="LinearRecurrencesCON" src="AlgAnal/LinearRecurrencesCON.js" name="AlgAnal/LinearRecurrencesCON" links="AlgAnal/LinearRecurrencesCON.css"/>
 :::
@@ -56,10 +65,20 @@ T(n) &=& T(n-1) + n \\
 T(1) &=& 1
 \end{eqnarray}
 
-Again, we will use expansion to help us find a closed form solution.
+Again, we will use expansion to help us find a closed form solution:
+
+\begin{eqnarray}
+T(n) &=& n + T(n-1) \\
+     &=& n + (n-1 + T(n-2)) \\
+     &=& n + (n-1 + (n-2 + T(n-3))) \\
+     &=& n + (n-1 + (n-2 + (n-3 + (\cdots + 1))))
+\end{eqnarray}
+
+So, the closed form solution of $T(n) = T(n-1)+n$ can be modeled by the summation $\sum_1^n i$.
+This is also a standard summation that we know, with the solution $T(n) = n(n+1)/2$.
 
 ::: dsvis
-TODO
+Here is an interactive explanation of this recurrence relation.
 
 <inlineav id="LinearRecurrencesNCON" src="AlgAnal/LinearRecurrencesNCON.js" name="AlgAnal/LinearRecurrencesNCON" links="AlgAnal/LinearRecurrencesNCON.css"/>
 :::
@@ -69,7 +88,7 @@ This takes a list of size $n$, splits it in half, performs Mergesort on each hal
 The cost for this can be modeled as
 
 \begin{eqnarray}
-T(n) &=& 2T(n/2) + n \\
+T(n) &=& 2\,T(n/2) + n \\
 T(1) &=& 1
 \end{eqnarray}
 
@@ -313,12 +332,16 @@ with no recurrence results. This yields a
 [summation]{.term}, and
 techniques for solving summations can then be used.
 
+In the beginning of this section we showed how to expand some very simple recurrences.
+
 ::: dsvis
-TODO
+Here is a more complicated example, where we want to find the closed form solution of
+$T(n) = 2T(n/2) + 5n^2$; $T(1) = 7$.
 
 <inlineav id="ExpandRecurrenceCON" src="AlgAnal/ExpandRecurrenceCON.js" name="Divide-and-Conquer Expansion Slideshow" links="AlgAnal/ExpandRecurrenceCON.css"/>
 :::
 
+<!--
 ::: TODO
 - We haven't introduced heaps yet - so this should move to later
 :::
@@ -356,6 +379,7 @@ f(n)  & \leq &  \sum_{i=0}^{\log n -1} 2^{i+1} \log(n/2^i) \\
 \end{eqnarray*}
 
 :::
+-->
 
 ### Divide-and-conquer recurrences
 
