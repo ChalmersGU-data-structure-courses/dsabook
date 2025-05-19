@@ -50,8 +50,9 @@ descending order -- that kind of queue is called a *maximum priority
 queue*. If you have a minimum priority queue, it's straightforward to
 turn it into a maximum priority queue.
 
-
+<!--
 ### Invariants
+-->
 
 
 ### Use cases
@@ -163,9 +164,25 @@ transactions, then the complexity of `add` is $O(\log k)$.
 
 ### Implementing priority queues using sorted lists
 
-::: TODO
-- both linked lists and (dynamic) array
-- array implementation = insert from insertion sort
-- problems: O(n) insertion
-:::
+It is very easy to implement priority queues using sorted lists (either linked lists or dynamic arrays).
+
+    datatype PriorityQueue:
+        list = new empty list
+
+        add(x):
+            insert x into list, keeping it sorted
+
+        removeMin():
+            remove the smallest element of list
+
+If we decide to use a linked list, then we make sure it is always sorted with the smallest value first in the list.
+If we instead use a dynamic array, we have to keep it *reversely* sorted.
+The reason is the same as for stacks: it is efficient to remove elements from the *front* of a linked list, and from the *back* of a dynamic array.
+This means that `removeMin` will be a very efficient, constant time operation, just as `pop` for stacks.
+
+However, inserting an element into a sorted list, keeping it sorted, is in the worst case linear, $O(n)$.
+Therefore, our sorting example above becomes a quadratic implementation, $O(n^2)$.
+In fact, `pqSort` from above using sorted list priority queues becomes a non-inplace variant of Insertion sort.
+
+Later, in chapter XX, we will show a more efficient version of priority queues, based on *binary trees*.
 
