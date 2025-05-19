@@ -36,7 +36,7 @@ queue supports the following operations:
 
 ### ADT for priority queues
 
-In this chapter, we will see how to implement a priority queue so that
+In chapter XX, we will see how to implement a priority queue so that
 both adding and removing the minimum take $O(\log n)$ time.
 
     interface PriorityQueue of T extends Collection:
