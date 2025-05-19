@@ -1,5 +1,5 @@
 
-## ADT: Double-ended queues
+## Double-ended queues
 
 ::: TODO
 - Prio 1: hide this section until written

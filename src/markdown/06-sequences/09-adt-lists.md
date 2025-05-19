@@ -1,5 +1,5 @@
 
-## ADT: General lists
+## General linked lists
 
 ::: TODO
 - Prio 2: invariants

@@ -1,11 +1,10 @@
 
-## ADT: Collections and sequences
 
 ::: TODO
 - Prio 2: introduction here
 :::
 
-### Collections
+#### Collections
 
 There are some properties that lists share with many other data
 structures (some of them will be introduced later in this course). Then
@@ -31,7 +30,7 @@ instead we will use this as a base interface that we extend in different
 ways, e.g., for lists or sets or priority queues.
 
 
-### What is a sequence?
+#### What is a sequence?
 
 We all have an intuitive understanding of what we mean by a "list". We
 want to turn this intuitive understanding into a concrete data structure

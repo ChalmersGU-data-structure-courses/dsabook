@@ -152,7 +152,7 @@ The earlier example of a list illustrates this: a list is a collection that hold
 
 We group these collection-based ADTs into two main categories:
 
-- Ordered sequences
+- Linear collections
 - Sets and maps
 
 In addition to these, we also introduce graphs, along with their commonly used implementations.
@@ -164,9 +164,9 @@ Each ADT will be discussed in more detail later in the book, including their ope
 ![An overview of ADTS with their common implementations](resources/images/ADT_overview.png)
 
 
-### Ordered sequences
+### Linear collections
 
-Ordered sequences are a category of abstract data types in which the order of the elements matters.
+Linear collections are a category of abstract data types in which the order of the elements matters.
 This means that each element has a specific position in the sequence, and operations on the ADT are sensitive to this order.
 Insertion, removal, and retrieval operations often depend on the position within the sequence.
 

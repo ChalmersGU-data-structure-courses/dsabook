@@ -1,5 +1,5 @@
 
-## ADT: Priority queues
+## Priority queues
 
 ::: TODO
 - Prio 1: invariants

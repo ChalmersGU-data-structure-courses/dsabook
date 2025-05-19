@@ -1,5 +1,5 @@
 
-## ADT: Stacks and queues
+## Stacks and queues
 
 ::: TODO
 - Prio 1: invariants
