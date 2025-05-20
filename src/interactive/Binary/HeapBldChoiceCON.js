@@ -9,11 +9,10 @@ $(document).ready(function() {
   var bt3Top = 170;
 
   // Slide 1
-  av.umsg("Two series of exchanges to build a max heap:");
-  av.displayInit();
+  // av.umsg("Two series of exchanges to build a max heap:");
 
   // Slide 2
-  av.umsg("(a) This heap is built by a series of nine exchanges in the order (4-2), (4-1), (2-1), (5-2), (5-4), (6-3), (6-5), (7-5), (7-6). ");
+  // av.umsg("(a) This heap is built by a series of nine exchanges in the order (4-2), (4-1), (2-1), (5-2), (5-4), (6-3), (6-5), (7-5), (7-6). ");
   var bt1 = av.ds.binarytree({nodegap: 15, left: bt1Left, top: bt1Top});
   bt1.root("1");
   var rt1 = bt1.root();
@@ -36,10 +35,10 @@ $(document).ready(function() {
   rt2.right().left("3");
   rt2.right().right("5");
   bt2.layout();
-  av.step();
+  // av.step();
 
   // Slide 3
-  av.umsg("(b) This heap is built by a series of four exchanges in the order (5-2), (7-3), (7-1), (6-1).");
+  // av.umsg("(b) This heap is built by a series of four exchanges in the order (5-2), (7-3), (7-1), (6-1).");
   var bt3 = av.ds.binarytree({nodegap: 15, left: bt1Left, top: bt3Top});
   bt3.root("1");
   var rt3 = bt3.root();
@@ -62,5 +61,6 @@ $(document).ready(function() {
   rt4.right().left("1");
   rt4.right().right("3");
   bt4.layout();
+  av.displayInit();
   av.recorded();
 });
