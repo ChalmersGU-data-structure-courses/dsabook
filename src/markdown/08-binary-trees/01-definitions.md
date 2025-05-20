@@ -133,8 +133,16 @@ child and the other one its right child.
 The recursive relationships used to define a structure provide a natural
 model for any recursive algorithm on the structure.
 
+Suppose you want to compute the sum of the values stored in a binary tree.
+You can ask two friends to help you.
+
+- The first friend will take the left subtree to sum it.
+- The second friend will take the right subtree to sum it.
+- The only thing you have to do is to sum the values that got from your friends.
+- You don't need to think about how your friends (the recursive calls) calculated their sums, you just accept that they are correct.
+
 ::: dsvis
-TODO
+Here is a visual explanation of the same idea.
 
 <inlineav id="SumBinaryTreeCON" src="Binary/SumBinaryTreeCON.js" name="Sum values in a Binary Tree Slide Show" links="Binary/RecursiveDSCON.css"/>
 :::

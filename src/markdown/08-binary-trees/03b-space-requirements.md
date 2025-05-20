@@ -94,7 +94,7 @@ difference between success and failure. In any other situation, such
 debug and understand at best, and are often machine dependent at worst.
 
 ::: dsvis
-TODO
+Here is an exercise for the space requirements of binary trees.
 
 <avembed id="TreeOverheadFIB" src="Binary/TreeOverheadFIB.html" type="ka" name="Tree Overhead Exercise"/>
 :::
