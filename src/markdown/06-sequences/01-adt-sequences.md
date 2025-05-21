@@ -1,19 +1,8 @@
 
-
-::: TODO
-- Prio 2: introduction here
-:::
-
 #### Collections
 
-There are some properties that lists share with many other data
-structures (some of them will be introduced later in this course). Then
-it's good habit to extract the most important common properties into a
-more general kind of ADT, which we will call collections.
-
-A collection contains a number of elements, and it supports only two
-things: we can inquire how many elements it contains, and we can iterate
-through all elements, one at the time (i.e., it is Iterable).
+A _collection_ is a general term for structures like lists and queues.
+It holds multiple elements and supports two main operations: checking the number of elements and iterating through them one at a time.
 
     interface Collection of T:
         // We assume that we can iterate over the elements in the collection, using a for loop.
@@ -28,7 +17,6 @@ through all elements, one at the time (i.e., it is Iterable).
 Note that this very interface will not be implemented as it is, but
 instead we will use this as a base interface that we extend in different
 ways, e.g., for lists or sets or priority queues.
-
 
 #### What is a sequence?
 
