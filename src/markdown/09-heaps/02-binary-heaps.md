@@ -80,11 +80,12 @@ actually a tree structure, while the typical physical implementation
 uses an array.
 
 Here is an implementation for *min*-heaps. It uses a
-[dynamic array list](#dynamic-array-based-lists)
+[dynamic array](#dynamic-array-based-lists)
 that will resize automatically when the number of elements change.
 
     datatype MinHeap implements PriorityQueue:
-        heap = new ArrayList()
+        H = new Array(10)  // 10 is the initial capacity.
+        size = 0           // The initial heap contains 0 elements.
 
 Note that, because we use an array to store the heap, we indicate the nodes by their logical position within the heap rather than by a pointer to the node.
 In practice, the logical heap position corresponds to the identically numbered physical position in the array.
@@ -94,16 +95,18 @@ Since it is a heap, we know that the first element always contains the element w
     datatype MinHeap implements PriorityQueue:
         ...
         getMin():
-            return heap[0]
+            // Precondition: the heap must contain some elements.
+            if size > 0:
+                return H[0]
 
 The datatype contains some private auxiliary methods that are used when adding and removing elements from the heap:
 `isLeaf` tells if a position represents a leaf in the tree, while
 `getLeftChild`, `getRightChild` and `getParent` return the position for the left child, right child, and parent of the position passed, respectively.
 
-    datatype MinHeap implements PriorityQueue:
+    datatype MinHeap:
         ...
         isLeaf(pos):
-            return pos >= heap.size / 2
+            return pos >= size / 2
 
         getLeftChild(pos):
             return 2 * pos + 1
@@ -113,6 +116,24 @@ The datatype contains some private auxiliary methods that are used when adding a
 
         getParent(pos):
             return int((pos - 1) / 2)
+
+We also need an auxiliary method for swapping two elements in the heap.
+
+    datatype MinHeap:
+        ...
+        swap(i, j):
+            H[i], H[j] = H[j], H[i]
+
+Finally, since we use a dynamic array we have to be able to resize the internal array.
+This is explained in further detail in section X.
+
+    datatype MinHeap:
+        ...
+        resizeHeap(newCapacity):
+            oldH = H
+            H = new Array(newCapacity)
+            for i in 0 .. size-1:
+                H[i] = oldH[i]
 
 
 <!--
@@ -149,19 +170,22 @@ until $V$ reaches its correct position.
 Here is the pseudocode for insertion in our *min*-heap.
 Note that we use a helper method for "sifting" a value up the tree.
 
-    datatype MinHeap implements PriorityQueue:
+    datatype MinHeap:
         ...
         add(elem):
-            i = heap.size
-            heap.add(i, elem)    // Add the element at end of the heap.
-            siftUp(i)            // Put it in its correct place.
+            if size >= H.size:
+                // See section X for more information about resizing a dynamic array.
+                resizeHeap(H.size * 2)
+            H[size] = elem      // Add the element at end of the heap.
+            siftUp(size)        // Put it in its correct place.
+            size = size + 1     // Increase the size of the heap.
 
         siftUp(pos):
             while pos > 0:       // Stop when we reach the root (if not earlier).
                 parent = getParent(pos)
-                if heap[pos] >= heap[parent]:
+                if H[pos] >= H[parent]:
                     return pos   // Stop if the parent is smaller or equal.
-                swap(heap, pos, parent)
+                swap(pos, parent)
                 pos = parent     // Move up one level in the tree.
 
 *Important note*:
@@ -213,24 +237,23 @@ maximum element is $O(\log n)$ in the average and worst cases.
 Here is the pseudocode for removing the minimum value from our *min*-heap.
 Note that we use a helper method for "sifting" a value down the tree.
 
-    datatype MinHeap implements PriorityQueue:
+    datatype MinHeap:
         ...
         removeMin():
-            removed = heap[0]      // Remember the current minimum value, to return in the end.
-            i = heap.size - 1
-            swap(heap, 0, i)       // Swap the last array element into the first position...
-            heap.remove(i)         // ... and remove the last element.
-            if heap.size > 0:
-                siftDown(0)        // Put the new root in its correct place.
+            removed = H[0]      // Remember the current minimum value, to return in the end.
+            swap(0, size-1)  // Swap the last array element into the first position...
+            size = size - 1     // ...and remove the last element, by decreasing the size.
+            if size > 0:
+                siftDown(0)     // Put the new root in its correct place.
             return removed
 
         siftDown(pos):
             while not isLeaf(pos):          // Stop when we reach a leaf (if not earlier).
                 child = getLeftChild(pos)
-                right = getRightChild(pos)  // Alternatively: right = child + 1.
-                if right < heap.size and heap[right] < heap[child]:
+                right = getRightChild(pos)
+                if right < size and H[right] < H[child]:
                     child = right           // 'child' is now the index of the child with smaller value.
-                if heap[child] >= heap[pos]:
+                if H[child] >= H[pos]:
                     return pos              // Stop if the parent is smaller or equal.
                 swap(pos, child)
                 pos = child                 // Move down one level in the tree.
@@ -339,13 +362,18 @@ Here is a visualization of the build process for a *max*-heap.
 
 The method `buildHeap` implements the building algorithm:
 
-    datatype MinHeap implements PriorityQueue:
+    datatype MinHeap:
         ...
         buildHeap(array):
-            heap = array                // Initialise the heap to the given array.
-            mid = getParent(size - 1)   // Find the parent of the last leaf.
-            for i = mid, mid-1 .. 0:    // Iterate the internal nodes backwards.
+            H = array                   // Initialise the heap to the given array.
+            size = H.size               // The capacity of the heap is used in full.
+            mid = getParent(size-1)     // Find the parent of the last leaf.
+            for i in mid, mid-1 .. 0:   // Iterate the internal nodes backwards.
                 siftDown(i)             // Sift each internal node down.
+
+Note that this method overwrites the existing heap (if there is one).
+Also note that the original array will be modified, so the method is *destructive*!
+The advantage is that it doesn't allocate any new memory.
 
 ::: dsvis
 #### Exercise: Building a *min*-heap
