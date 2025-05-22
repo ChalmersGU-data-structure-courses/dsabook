@@ -17,11 +17,13 @@ order as long as each node is visited precisely once. For other
 applications, nodes must be visited in an order that preserves some
 relationship.
 
-:::: {#BinTravExample}
-<inlineav id="BinExampCON" src="Binary/BinExampCON.js" name="Binary/BinExampCON" links="Binary/BinExampCON.css" static/>
+::: topic
+#### Example: A binary tree for traversal examples
 
-A binary tree for traversal examples.
-::::
+Here is an example binary tree that will be used when explaining the traversals below.
+
+<inlineav id="BinExampCON" src="Binary/BinExampCON.js" name="Binary/BinExampCON" links="Binary/BinExampCON.css" static/>
+:::
 
 ### Depth-first and breadth-first
 
@@ -43,8 +45,7 @@ For example, we might wish to make sure that we visit any given node
 ::: dsvis
 #### Example: Preorder enumeration
 
-The preorder enumeration for the tree of
-[Figure #BinTravExample](#BinTravExample) is **A B D C E G F H I**.
+The preorder enumeration for the example tree above is **A B D C E G F H I**.
 
 The first node printed is the root. Then all nodes of the left subtree
 are printed (in preorder) before any node of the right subtree.
@@ -65,8 +66,7 @@ on. This is called a [postorder traversal]{.term}.
 ::: dsvis
 #### Example: Postorder enumeration
 
-The postorder enumeration for the tree of
-[Figure #BinTravExample](#BinTravExample) is **D B G E H I F C A**.
+The postorder enumeration for the example tree above is **D B G E H I F C A**.
 
 <inlineav id="postorderCON" src="Binary/postorderCON.js" name="Postorder Traversal Slideshow" links="Binary/BTCON.css"/>
 :::
@@ -82,8 +82,7 @@ order of value.
 ::: dsvis
 #### Example: Inorder enumeration
 
-The inorder enumeration for the tree of
-[Figure #BinTravExample](#BinTravExample) is **B D A G E C H F I**.
+The inorder enumeration for the example treeabove is **B D A G E C H F I**.
 
 <inlineav id="inorderCON" src="Binary/inorderCON.js" name="Inorder Traversal Slideshow" links="Binary/BTCON.css"/>
 :::
@@ -137,8 +136,8 @@ order in which the node and its children are visited, as appropriate.
 
 Recall that any recursive function requires the following:
 
-> 1.  The base case and its action.
-> 2.  The recursive case and its action.
+1.  The base case and its action.
+2.  The recursive case and its action.
 
 In this section, we will talk about some details related to correctly and
 clearly implementing recursive tree traversals.

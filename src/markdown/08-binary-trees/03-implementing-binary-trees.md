@@ -32,13 +32,11 @@ its left child and another to its right child.
 We also define a *leaf* to be a node with no children -- i.e., where
 both childen pointers point to nothing.
 
+::: topic
+Here is an illustration of a typical pointer-based binary tree implementation, where each node stores two child pointers and a value.
 
-:::: {#BinLink}
 <inlineav id="BTnullpointerCON" src="Binary/BTnullpointerCON.js" name="Binary/BTnullpointerCON" links="Binary/BTCON.css Binary/BTnullpointerCON.css" static/>
-
-Illustration of a typical pointer-based binary tree implementation,
-where each node stores two child pointers and a value.
-::::
+:::
 
 Some programmers find it convenient to add a pointer to the node's
 parent, allowing easy upward movement in the tree. Using a parent
@@ -64,27 +62,27 @@ leaves and another for the internal nodes. Examples include the
 [binary trie]{.term}, the
 [PR Quadtree]{.term}, the
 [Huffman coding tree]{.term}, and the
-[expression tree]{.term} illustrated by
-[Figure #DiffNodes](#DiffNodes). By definition, only
+[expression tree]{.term} illustrated by the following figure.
+By definition, only
 internal nodes have non-empty children. If we use the same node
 implementation for both internal and leaf nodes, then both must store
 the child pointers. But it seems wasteful to store child pointers in the
 leaf nodes. Thus, there are many reasons why it can save space to have
 separate implementations for internal and leaf nodes.
 
-:::: {#DiffNodes}
-<inlineav id="expressionTreeCON" src="Binary/expressionTreeCON.js" name="Binary/expressionTreeCON" links="Binary/BTCON.css Binary/expressionTreeCON.css" static/>
+::: topic
+Here is an example of an expression tree for $4x(2x + a) - c$.
 
-An expression tree for $4x(2x + a) - c$.
-::::
+<inlineav id="expressionTreeCON" src="Binary/expressionTreeCON.js" name="Binary/expressionTreeCON" links="Binary/BTCON.css Binary/expressionTreeCON.css" static/>
+:::
 
 As an example of a tree that stores different information at the leaf
-and internal nodes, consider the expression tree illustrated by
-[Figure #DiffNodes](#DiffNodes). The expression tree
+and internal nodes, consider the expression tree illustrated by the figure above.
+The expression tree
 represents an algebraic expression composed of binary operators such as
 addition, subtraction, multiplication, and division. Internal nodes
-store operators, while the leaves store operands. The tree of
-[Figure #DiffNodes](#DiffNodes) represents the
+store operators, while the leaves store operands.
+The tree of the figure represents the
 expression $4x(2x + a) - c$. The storage requirements for a leaf in an
 expression tree are quite different from those of an internal node.
 Internal nodes store one of a small set of operators, so internal nodes

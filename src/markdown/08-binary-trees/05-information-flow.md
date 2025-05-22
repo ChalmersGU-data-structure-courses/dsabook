@@ -10,10 +10,8 @@ Handling information flow in a recursive function can be a challenge. In
 any given function, we might need to be concerned with either or both
 of:
 
-> 1.  Passing down the correct information needed by the function to do
->     its work,
-> 2.  Returning (passing up) information to the recursive function's
->     caller.
+1.  Passing down the correct information needed by the function to do its work,
+2.  Returning (passing up) information to the recursive function's caller.
 
 Any given problems might need to do either or both. Here are some
 examples and exercises.
@@ -138,14 +136,16 @@ happens to be the definition for a binary search tree.) Unfortunately,
 to make this decision we need to know some context that is not available
 just by looking at the node's parent or children.
 
-:::: {#BSTCheckFig}
-<inlineav id="BSTCheckCON" src="Binary/BSTCheckCON.js" name="Binary/BSTCheckCON" links="Binary/BSTCheckCON.css" static/>
+::: topic
+#### Example: Binary search tree
 
 To be a binary search tree, the left child of the node with value 40
 must have a value between 20 and 40.
-::::
 
-As shown by [Figure #BSTCheckFig](#BSTCheckFig),
+<inlineav id="BSTCheckCON" src="Binary/BSTCheckCON.js" name="Binary/BSTCheckCON" links="Binary/BSTCheckCON.css" static/>
+:::
+
+As shown in the figure above
 it is not enough to verify that $A$'s left child has a value less than
 that of $A$, and that $A$'s right child has a greater value. Nor is it
 enough to verify that $A$ has a value consistent with that of its

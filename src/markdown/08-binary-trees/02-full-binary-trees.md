@@ -19,10 +19,12 @@ leaves in a tree containing $n$ internal nodes.
 
 Unfortunately, this fraction is not fixed. A binary tree of $n$ internal
 nodes might have only one leaf. This occurs when the internal nodes are
-arranged in a chain ending in a single leaf as shown in
-[Figure #OneLeaf](#OneLeaf). In this example, the
-number of leaves is low because each internal node has only one
-non-empty child. To find an upper bound on the number of leaves for a
+arranged in a chain ending in a single leaf as shown in the following figure.
+In this example, the number of leaves is low because each internal node has only one non-empty child.
+
+<inlineav id="UnaryTreeExampleCON" src="Binary/UnaryTreeExampleCON.js" name="Binary/UnaryTreeExampleCON" links="Binary/UnaryTreeExampleCON.css" static/>
+
+To find an upper bound on the number of leaves for a
 tree of $n$ internal nodes, first note that the upper bound will occur
 when each internal node has two non-empty children, that is, when the
 tree is full. However, this observation does not tell what shape of tree
@@ -31,12 +33,6 @@ to matter, because all full binary trees with $n$ internal nodes have
 the same number of leaves. This fact allows us to compute the space
 requirements for a full binary tree implementation whose leaves require
 a different amount of space from its internal nodes.
-
-:::: {#OneLeaf}
-<inlineav id="UnaryTreeExampleCON" src="Binary/UnaryTreeExampleCON.js" name="Binary/UnaryTreeExampleCON" links="Binary/UnaryTreeExampleCON.css" static/>
-
-A tree containing many internal nodes and a single leaf.
-::::
 
 :::: {#FullTree}
 ::: topic
