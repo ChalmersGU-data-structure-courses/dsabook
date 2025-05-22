@@ -8,11 +8,9 @@ If we assume that the value is equally likely to appear in any location, this co
 (The best case is constant, $O(1)$, and occurs when the searched value occurs first in the array.
 But as we already discussed we are rarely interested in the best case.)
 
-::: dsvis
 But what is the complexity of the binary search algorithm?
 
-<inlineav id="BsearchDandCRecurCON" src="AlgAnal/BsearchDandCRecurCON.js" name="Binary Search recurrence slideshow" links="AlgAnal/BsearchDandCRecurCON.css"/>
-:::
+### Complexity of binary search
 
 To find the worst-case cost of binary search, we can model the running time as a recurrence and then find the closed-form solution.
 Each recursive call to `binarySearch` cuts the size of the array approximately in half, so we can model the worst-case cost as follows, assuming for simplicity that $n$ is a power of two.
@@ -34,6 +32,12 @@ Thus, the closed form solution of $O(n) = O(n/2) + 1$ can be modeled by the summ
 \begin{eqnarray}
 \sum_{i=0}^{\log n} 1 &\in& O(\log n)
 \end{eqnarray}
+
+::: dsvis
+Here is a visual explanation of the complexity of binary search.
+
+<inlineav id="BsearchDandCRecurCON" src="AlgAnal/BsearchDandCRecurCON.js" name="Binary Search recurrence slideshow" links="AlgAnal/BsearchDandCRecurCON.css"/>
+:::
 
 Comparing sequential search to binary search, we see that as $n$ grows,
 the $O(n)$ running time for sequential search in the average and
