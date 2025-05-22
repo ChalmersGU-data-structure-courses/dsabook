@@ -46,8 +46,7 @@ So the dynamic `push` method will look like
     datatype ArrayStack:
         ...
         push(x):
-            // precondition: 0 <= i <= size
-            if size >= internalArray.size
+            if size >= internalArray.size:
                 resizeArray(internalArray.size * 2)
             internalArray[size] = x
             size = size + 1
