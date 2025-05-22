@@ -40,7 +40,7 @@ algorithms are still being developed and refined for special-purpose
 applications.
 
 ::: dsvis
-### The sorting problem {-}
+#### The sorting problem
 
 <inlineav id="SortNotationS1CON" src="Sorting/SortNotationS1CON.js" name="Sorting Terminology and Notation Slideshow 1" links="Sorting/SortNotationS1CON.css"/>
 :::
