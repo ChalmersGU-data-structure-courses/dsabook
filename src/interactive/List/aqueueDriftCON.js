@@ -15,7 +15,7 @@ $(document).ready(function() {
     "sc6": "<code>enqueue</code> the value 3.",
     "sc7": "<code>enqueue</code> the value 30.",
     "sc8": "<code>enqueue</code> the value 4.",
-    "sc9": "Now, both the enqueue and the dequeue operations can be performed in <em>&theta;(1)</em> time because no other elements in the queue need be moved."
+    "sc9": "Now, both the enqueue and the dequeue operations can be performed in <em>O(1)</em> time because no other elements in the queue need be moved."
   };
 
   // Relative offsets
