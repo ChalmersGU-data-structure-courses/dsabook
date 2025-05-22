@@ -43,7 +43,7 @@ Merging continues in this way, comparing the front records of the
 sublists and continually appending the smaller to the output list until
 no more input records remain.
 
-Here is pseudocode for merge on lists:
+Here is pseudocode for merging two lists:
 
     function merge(L1, L2):
         answer = new empty list
