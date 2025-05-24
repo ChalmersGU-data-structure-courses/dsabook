@@ -1,5 +1,5 @@
 
-# ADTs: Sets and Maps
+# Sets and Maps
 
 ::: TODO
 - Prio 1: write this chapter
@@ -30,15 +30,11 @@ Here are some examples of information retrieval problems:
 -   *Spell-checking:* Given a set containing all valid English words,
     check if a given string is present in the set (i.e. is a valid
     word).
--   *Database lookup:* Given a list of people, find the person with a
-    given *personnummer*.
--   *Search engine:* Given a collection of documents (e.g. web pages),
+-   *Cash register:* Given a database of all items for sale in a supermarket, find information about the item with a given *EAN code*.-   *Search engine:* Given a collection of documents (e.g. web pages),
     find all documents containing a given word.
--   *Between X and Y:* Given a list of all Swedish towns and their
-    populations, find the towns whose population is between 5,000 and
-    10,000.
+-   *Between X and Y:* Given a list of all Swedish towns and their populations, are there any towns whose population is between 5,000 and 10,000? And if so, which are these towns?
 
-These problems can all be addressed using two abstract data types (ADTs):  *set* and the *map*.
+These problems can all be addressed using two abstract data types (ADTs):  the *set* and the *map*.
 Both provide efficient ways to manage a collection of elements, supporting operations to find, add, and remove elements.
 
 In this section, we'll explore what sets and maps are, how they work, and how they can be applied to solve the four example problems introduced above.
@@ -52,174 +48,7 @@ and
 classes, and Python provides
 [sets](https://docs.python.org/3/tutorial/datastructures.html#sets) and
 [dictionaries](https://docs.python.org/3/tutorial/datastructures.html#dictionaries)
-(another word for maps) as part of its standard library.
-
-#### Sets
-
-A *set* represents a collection of items, where we can *add* and
-*remove* items, and *check* if a given item is present in the set. A set
-cannot contain duplicate items: if we try to add an item that is already
-present, nothing happens, and the set is left unchanged. Recall the
-interface for sets from [the course API](#all-adts-used-in-this-book):
-
-    interface Set of T extends Collection of T:
-        add(x: T)               // Adds x to the set.
-        remove(x: T)            // Removes x from the set.
-        contains(x: T) -> Bool  // Returns true if x is in the set.
-
-::: topic
-#### Example: Spell-checking
-
-We can use a set for the spell-checking example:
-
--   Given a set containing all valid English words, check if a given
-    string is present in the set (i.e. is a valid word).
-
-To create the spell-checking dictionary, we start with an initially
-empty set, and then call `add` repeatedly to add each valid word to the
-set. Then to spell-check a given word, we just call `contains`.
-
-    datatype SpellChecker:
-        validWords: Set of String
-
-        constructor(listOfValidWords: Collection of String):
-            // Convert the list of words into a set.
-            validWords = new Set()
-            for each word in listOfValidWords:
-                validWords.add(word)
-
-        isValidWord(word) -> Bool:
-            return validWords.contains(word)
-
-Here's how the `SpellChecker` can be used:
-
-    function main(wordsToCheck: Collection of String):
-        // Create a new spell checker.
-        checker = new SpellChecker(["cat", "dog"])
-
-        // Now we can spell-check a word easily.
-        for each word in wordsToCheck:
-            if checker.isValidWord(word):
-                print word "is valid"
-            else:
-                print word "is INVALID"
-
-:::
-
-
-#### Maps, or dictionaries
-
-A *map* (or dictionary) represents a set of *keys*, where each key has an associated
-*value*. We can *add* and *remove* keys, but when we add a key we must
-specify what *value* we want to associated with it. We can *check* if a
-given key is present in the map. We can also *look up* a key to find the
-associated value.
-
-A map cannot contain duplicate *keys*, so each key is associated with
-exactly one value. If we call `put(k,v)`, but the key `k` is already
-present, then the value associated with `k` gets changed to `v`. On the
-other hand, a map *can* contain duplicate *values*: two keys can have
-the same value. Recall the interface for maps from
-[the course API](#all-adts-used-in-this-book):
-
-    interface Map of K to V extends Collection of K:
-        put(key: K, value: V)        // Sets the value of the given key.
-        get(key: K) -> V             // Returns the value associated with the given key, or `null` if the key is not there.
-        remove(key: K)               // Removes the value associated with the given key.
-        containsKey(key: K) -> Bool  // Returns true if the key has an associated value.
-
-Note that maps depend on two different types, the keys `K` and the values `V`.
-These types can be the same or different, depending on the needs of your application.
-
-::: topic
-#### Example: Database lookup
-
-The map is a perfect match for our database example:
-
--   Given a list of people, find the person with a given *personnummer*.
-
-Here, the key should be a personnummer, and the value should be a record
-containing information about that person. If the personnummer is stored
-in a field `pnr`, then to put a person `p` in the database we call
-`database.put(p.pnr, p)`. To find the person with personnummer `pnr` we
-call `database.get(pnr)`.
-
-    datatype Person
-        pnr: String
-        name: String
-
-    datatype PersonDatabase:
-        database: Map of String to Person = new Map()
-
-        // Put the person in the database.
-        put(p: Person):
-            database.put(p.pnr, p)
-
-        // Remove a person from the database.
-        remove(p: Person):
-            database.remove(p.pnr)
-
-        // Find the person who has a given personnummer.
-        find(pnr: String) -> Person:
-            return database.get(pnr)
-
-:::
-
-#### Multimaps
-
-Maps have the restriction that each key has only one value. However,
-sometimes we want to store a list of records, where some records might
-have the same key. Then we want something like a map, but where a key
-can have multiple values associated with it. This structure is called a
-*multimap*.
-
-Unfortunately, most programming languages do not provide a multimap data
-structure. Instead, we can implement it ourselves. The idea is to use a
-map, where the key is a word, and the value is not a document but a
-*set* of documents.
-
-::: topic
-#### Example: Search engine
-
-A multimap is the perfect data structure for our search engine example:
-
-- Given a collection of documents (e.g. web pages), find all web pages containing a given word.
-
-To find all documents containing a given word, we will build a multimap,
-where the key is a word, and the values are all documents containing
-that word. Then, searching for a word will just mean looking it up in
-the multimap.
-
-    // We model a document as a list of words.
-    datatype Document:
-        contents: Collection of String
-
-    datatype SearchEngine:
-        database: Map of String to Set of Document = new Map()
-
-        // Add a new document to the database.
-        add(doc: Document):
-            for each word in doc.contents:
-                if not database.containsKey(word):
-                    // This is the first document containing this word.
-                    database.put(word, new Set())
-
-                // Get the set of documents containing this word, and add the document.
-                set = database.get(word)
-                set.add(doc)
-
-        // Find all documents containing a given word.
-        find(word: String) -> Set of Document:
-            if database.containsKey(word):
-                return database.get(word)
-            else:
-                // If the word is not found, return an empty set.
-                return new Set()
-
-Note that we don't have to `put` the updated set back into the database (in the `add` method).
-This is because complex data structures are *mutable*, as explained in section XX.
-
-:::
+(another word for maps) as part of their standard libraries.
 
 
 #### How to implement sets and maps
@@ -230,19 +59,19 @@ class that implements a set or a map, in such a way that adding,
 removing and searching can be done efficiently? In this book we will see
 several different ways of implementing sets and maps.
 
-In Chapter [Arrays: Searching and Sorting],
-we will see how to implement a set using an array. By
-sorting the items in the array, it is possible to look up information
+- In Section XX,
+we will see how to implement a set or a map using a list. By
+sorting the items in the list, it is possible to look up information
 efficiently. However, it turns out that adding and removing items is
-quite expensive. An array is a suitable way of storing a set or a map if
+quite expensive. A list is a suitable way of storing a set or a map if
 its contents never changes.
 
-In Chapter [Search Trees](#binary-search-trees), we learn about
+- In Chapter [Search Trees](#binary-search-trees), we learn about
 *balanced binary search trees (BSTs)*, a data structure for sets and
 maps where adding, removing and searching are all efficient. BSTs also
 support the *sorted map* operations that we used in our final example.
 
-In Chapter [Hash Tables](#hashing), we learn about
+- In Chapter [Hash Tables](#hashing), we learn about
 *hash tables*, another way to implement the set and map ADTs. In a hash
 table, `add`, `remove` and `contains` are even faster than in a BST, but
 hash tables are somewhat harder to use than BSTs, and do not support the
@@ -261,121 +90,3 @@ and Python's:
 [sets](https://docs.python.org/3/tutorial/datastructures.html#sets) and
 [dictionaries](https://docs.python.org/3/tutorial/datastructures.html#dictionaries).
 By the end of this book you will understand how all of these work.
-
-
-#### Sorted sets and maps
-
-
-::: topic
-#### Use case: Between X and Y
-
-Consider the final example problem:
-
--   Given a list of all Swedish towns and their populations, find the
-    towns whose population is between 5,000 and 10,000.
-
-One way to solve this problem would be to use a multimap. The key would
-be a population number, and the values would be all towns having that
-population. Then we could find the required towns by making a sequence
-of calls to `contains`:
-
--   `contains(5000)` - find all towns with 5,000 population
--   `contains(5001)` - find all towns with 5,001 population
--   `contains(5002)` - find all towns with 5,002 population
--   etc.
-
-But this is not a sensible approach. We would need to make \~5,000 calls
-to `contains`, and if we wanted to instead find all cities in Europe
-having a population of between 1 and 2 million, we would need to make
-\~1,000,000 calls.
-
-There is a better way. If the towns are stored in an array, and sorted
-by population, we can use the following algorithm:
-
--   Find the position in the array of the *first* town that has a
-    population of *at least* 5,000. (We will see in the section about
-    [binary search] that it
-    is possible to find this position efficiently.)
--   Find the position in the array of the *last* town that has a
-    population of *at most* 10,000.
--   Now return all towns between those two positions in the array.
-
-:::
-
-This is an example of a *range query*: given a map, finding all items
-whose key lies in a given range. Some map implementations support
-answering range queries efficiently; we say that these data structures
-implement *sorted maps*.
-
-Apart from range queries, sorted maps support several other operations
-that take advantage of the natural order of the keys:
-
--   Finding the *smallest* or *largest* key in the map.
-
--   Finding the *closest* key to a given one. Given a key $k$ (which may
-    or may not be in the map), then:
-
-    -   The *successor* of $k$ is the next key after $k$ in the map,
-        i.e. the smallest key $k\prime$ such that $k < k\prime$.
-    -   The *predecessor* of $k$ is the previous key before $k$ in the
-        map, i.e. the greatest key $k\prime$ such that $k\prime < k$.
-
-    A variant which is sometimes useful is *floor* and *ceiling*:
-
-    -   The *floor* of $k$ is the greatest key $k\prime$ such that
-        $k\prime \leq k$. If $k$ is in the map, then the floor of $k$ is
-        just $k$; otherwise it is the predecessor of $k$.
-    -   The *ceiling* of $k$ is the least key $k\prime$ such that
-        $k \leq k\prime$. If $k$ is in the map, then the ceiling of $k$
-        is just $k$; otherwise it is the successor of $k$.
-
-Here is a possible interface for sorted maps:
-
-    interface SortedMap of K to V extends Map of K to V:
-        firstKey() -> K              // Returns the first (smallest) key.
-        lastKey() -> K               // Returns the last (largest) key.
-        floorKey(key: K) -> K        // Returns the closest key ≤ k, or nothing if there is no key.
-        ceilingKey(key: K) -> K      // Returns the closest key ≤ k, or nothing if there is no key.
-        lowerKey(key: K) -> K        // Returns the closest key < k, or nothing if there is no such element.
-        higherKey(key: K) -> K       // Returns the closest key > k, or nothing if there is no such element.
-        keysBetween(key1: K, key2: K) -> Collection of K
-                                     // Returns all keys k such that k1 ≤ k ≤ k2.
-
-::: topic
-#### Example: Small Swedish towns
-
-Here is how to use a sorted map ADT to find all Swedish towns having
-between 5,000 and 10,000 population. As there may be towns that have the
-same population, we need a *multimap*. As before, we solve this by
-having the key be a population number and the value be a set of towns.
-
-    datatype City:
-        name: String
-        population: Int
-
-    // Similar to the search engine, use a map where the value is a list of cities.
-    datatype CityPopulations:
-        cities: SortedMap of Int to Set of City = new SortedMap()
-
-        // Add a new city to the database.
-        add(city: City):
-            if not cities.containsKey(city.population):
-                // This is the first city with this population.
-                    cities.put(city.population, new Set())
-
-            // Get the set of documents containing this city.
-            set = cities.get(city.population)
-            set.add(doc)
-
-        // Find all cities with a population between lower and upper
-        findBetween(lower: Int, upper: Int) -> Set of City:
-            result = new Set()
-            // The range query returns a collection of keys, i.e. populations.
-            for each population in cities.keysBetween(lower, upper):
-                // cities.get(population) returns the list of cities with that population.
-                for each city in cities.get(population):
-                    result.add(city)
-            return result
-
-:::
-
