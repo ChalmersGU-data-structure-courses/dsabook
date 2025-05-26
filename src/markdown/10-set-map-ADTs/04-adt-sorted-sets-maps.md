@@ -22,9 +22,9 @@ The first example range query is:
 One way to solve this problem would be to use a normal set of city populations.
 Then we could find the answer to our query by making a sequence of calls to `contains`:
 
-- `contains(5000)` - is there a town with population 5,000?
-- `contains(5001)` - is there a town with population 5,001?
-- `contains(5002)` - is there a town with population 5,002?
+- `contains(5000)` -- is there a town with population 5,000?
+- `contains(5001)` -- is there a town with population 5,001?
+- `contains(5002)` -- is there a town with population 5,002?
 - etc.
 
 But this is not a sensible approach.
@@ -37,12 +37,12 @@ If the populations are stored in a sorted array, we can use the following algori
   (This can be done efficiently using [binary search].)
 - Check if this population is at most 10,000.
 
-So, a sorted list can be used as an efficient implementation of a sorted set.
-However, as we will see in the next section, there are problems with using sorted lists.
+So, a sorted array can be used as an efficient implementation of a sorted set.
+However, as we saw in the previous section, sorted arrays are not the best choice if you want to add or remove elements.
 :::
 
-Some set implementations support answering range queries efficiently, such as sorted lists as we saw in the example.
-But there are other implementations too -- we say that these data structures implement *sorted maps*.
+Some set implementations support answering range queries efficiently, such as sorted lists as we saw in the example above.
+But there are other implementations too -- we say that these data structures implement *sorted sets*.
 
 Apart from range queries, sorted sets support several other operations that take advantage of the natural order of the elements:
 
@@ -85,7 +85,7 @@ Now consider the second range query in the example above:
 
 - Given a list of all Swedish towns and their populations, find the towns whose population is between 5,000 and 10,000.
 
-One way to solve this problem would be to use a *multimap* (see the last section).
+One way to solve this problem would be to use a *multimap* (see section 10.X).
 The key would be a population number, and the values would be all towns having that population.
 Then we could find the required towns by making a sequence of `get(5,000)`, `get(5,001)`, ...., until `get(10,000)`.
 
