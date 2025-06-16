@@ -39,12 +39,12 @@ Our pseudocode includes the fundamental components of a programming language.
 
 Variables
 
-:   A name for a value, we use lower case alphabetic characters and allow
+:   A variable is a name for a value, for which we use lower case alphabetic characters and allow
     underscore and numbers. A variable can have a type, but we don't specify it
     when it does not matter or is evident from the context. We use the following
     notation: `var: <type>`. Note that type names begin with a capital letter.
 
-    Examples: `res`, `n: Int`, `i`, `b0: Bool`, `res_n`
+    Examples: `res`, `n: Int`, `i`, `b0: Bool`, `intermediate_result`
 
 Types
 
@@ -66,7 +66,7 @@ Literals
 
 Operators
 
-:   An operator is a name for an operation belonging to a specific data type.
+:   An operator is a symbol or keyword that represents an action or computation to be performed on one or more *operands* (which can be values or variables).
     The application of an operator is usually written infix, that is, the name
     of the operation is written _between_ its operands. The mathematical operators
     have the usual precedence and in case of equal precedence we treat the
@@ -74,7 +74,7 @@ Operators
 
     Examples: `+`, `*`, `%`, `<`
 
-    Note that we use `==` for the equallity operator, and `=` for assignment.
+    Note that we use `==` for the equality operator, and `=` for assignment.
 
 Expressions
 
@@ -330,7 +330,7 @@ Here is an example of how to define a dynamic array (see section XX):
         constructor ArrayStack(capacity):
             data = Array(capacity) of T
 
-A datatype can also have "internal functions" (called *methods* in object-oriented languages), and they will have access to the internal variables:
+A datatype can also have "internal functions" (called *methods* in object-oriented languages), and they have access to the internal variables:
 
     datatype ArrayStack ...:
         (...)
@@ -450,7 +450,9 @@ We can of course also define some methods, or internal functions, that operate o
                 n = n + right.treeSize()
             return n
 
-Note that in the last function we have to check that the children actually are tree nodes before calculating their size.
+Note that the last definition, `treeSize`, is a *recursive* function.
+
+Also note that `treeSize` has to check that the children actually are tree nodes before calculating their size.
 Another possibility is to have a global function that takes the tree node as an argument:
 
     function treeSize(node: TreeNode) -> Int:

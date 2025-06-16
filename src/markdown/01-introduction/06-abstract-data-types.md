@@ -28,7 +28,7 @@ A list can be implemented using either an array or a linked list.
 Users of a list do not need to know which implementation is used in order to make use of its functionality.
 The actual implementations of an ADT rely on specific _data structures_ to realize the desired behavior of the operations -- for example, calculating the size of a list.
 
-Although different implementations of an abstract data type (ADT) offer the same set of operations, the choice of [data structure]{.term} can significantly impact the _efficiency_ of those operations.
+Although different implementations of an abstract data type offer the same set of operations, the choice of [data structure]{.term} can significantly impact the _efficiency_ of those operations.
 Often, there are trade-offs involved: optimizing one operation may come at the cost of another.
 For example, an array-based list allows fast access to elements at specific indices, while a linked-list implementation excels at inserting elements at the front.
 Furthermore, different applications may prioritize different operations.
@@ -44,7 +44,7 @@ A _database_ is a structured collection of data that can be easily accessed, man
 Each item in a database is typically called a _record_, which consists of multiple fields containing information—such as a name, an ID number, or an address.
 Efficiently organizing, storing, and searching these records is a key challenge in database design.
 
-Two popular implementations for managing large disk-based database applications are [hashing]i{.term} and the [B-tree]{.term}.
+Two popular implementations for managing large disk-based database applications are [hashing]{.term} and the [B-tree]{.term}.
 Both support efficient insertion and deletion of records, as well as exact-match queries.
 However, they differ in the types of queries they handle best.
 Hashing is particularly efficient for exact-match queries, where you are looking for a record with a specific key.
@@ -147,7 +147,7 @@ Within the class, a variety of physical implementations for lists is
 possible.
 ::: -->
 
-Most of the abstract data types (ADTs) we introduce in this book are collections, that is, structures that store elements of an arbitrary type.
+Most of the abstract data types we introduce in this book are collections, that is, structures that store elements of an arbitrary type.
 The earlier example of a list illustrates this: a list is a collection that holds elements, which can be of any type.
 
 We group these collection-based ADTs into two main categories:
@@ -175,7 +175,7 @@ The ordered sequence ADTs found in this book are:
 - Stacks, a sequence with a Last-In-First-Out (LIFO) ordering
 - Queues, a sequence with a First-In-First-Out (FIFO) ordering
 - Double-ended queues (deques), which allow insertion and removal at both ends
-- Priority queues, return elements based on priority rather than insertion order, but are conceptually related
+- Priority queues, return elements based on priority rather than insertion order
 - General lists, support adding, removing, and accessing elements
 
 Ordered sequences are used in many applications and algorithms where the order of operations or items is important.

@@ -11,7 +11,7 @@
 
 If you want to find the position in an unsorted array of $n$ objects
 that stores a particular value, you cannot really do better than simply
-looking through the array from the beginning and move toward the end
+looking through the array from the beginning and moving toward the end
 until you find what you are looking for. This algorithm is called
 [sequential search]{.term}. If you do find it,
 we call this a [successful search]{.term}. If
@@ -35,9 +35,9 @@ the basic idea of [algorithm analysis]{.term}.
 In the case of sequential search, it is easy to see that if the value is
 in position $i$ of the array, then sequential search will look at $i$
 values to find it. If the value is not in the array at all, then we must
-look at $n$ values if the array holds $n$ values. This would be called
+look at all array values. This would be called
 the [worst case]{.term} for sequential search.
-Since the amount of work is proportional to $n$, we say that the worst
+Since the amount of work is proportional to the size of the array, we say that the worst
 case for sequential search has
 [linear cost](#linear-growth-rate){.term}. For
 this reason, the sequential search algorithm is sometimes called
@@ -71,7 +71,7 @@ unsorted array.
 :::
 -->
 
-Let say we search for the value $val$ in an array.
+Let's say we search for the value $val$ in an array.
 Binary search begins by examining the value in the middle position of the array; call this position $mid$ and the corresponding value $val_{mid}$.
 If $val_{mid} = val$, then processing can stop immediately.
 In this case we are lucky, if not, knowing the middle value provides useful information that can help guide the search process.
