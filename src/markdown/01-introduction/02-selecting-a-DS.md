@@ -51,7 +51,8 @@ structure.
 2.  Can data items be deleted? If so, this will probably make the
     implementation more complicated.
 3.  Are all data items processed in some well-defined order, or is
-    searching for specific data items allowed? "Random access" search
+    searching for specific data items allowed?
+    Efficient search
     generally requires more complex data structures.
 
 Each data structure has associated costs and benefits. In practice, it

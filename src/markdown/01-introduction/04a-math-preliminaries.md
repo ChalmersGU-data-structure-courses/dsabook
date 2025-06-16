@@ -20,20 +20,21 @@ In this case, $\mathbf{P}$'s members are 7, 11, and 42, and the base type is int
 
 The following table shows the symbols commonly used to express sets and their relationships.
 
----------------------------------- ---------------------------------------------------------------------------------------------
-$\{1, 4\}$                         A set composed of the members 1 and 4
-$\{x ~|~ x\ \mbox{is prime}\}$     A set definition using a set comprehension (e.g., the set of all primes)
-$x\in\mathbf{P}$                   $x$ is a member of $\mathbf{P}$
-$x\notin\mathbf{P}$                $x$ is not a member of set $\mathbf{P}$
-$\emptyset$                        The null or empty set
-$|\mathbf{P}|$                     Cardinality: the size of $\mathbf{P}$, or its number of members
-$\mathbf{P}\subseteq\mathbf{Q}$    $\mathbf{P}$ is included in $\mathbf{Q}$, $\mathbf{P}$ is a subset of $\mathbf{Q}$
-$\mathbf{P}\supseteq\mathbf{Q}$    $\mathbf{Q}$ is included in $\mathbf{P}$, $\mathbf{P}$ is a superset of $\mathbf{Q}$
-$\mathbf{P}\cup\mathbf{Q}$         Union: all elements appearing in any of $\mathbf{P}$ *or* $\mathbf{Q}$
-$\mathbf{P}\cap\mathbf{Q}$         Intersection: all elements appearing in both $\mathbf{P}$ *and* $\mathbf{Q}$
-$\mathbf{P}-\mathbf{Q}$            Difference all elements of $\mathbf{P}$ *not* in $\mathbf{Q}$
-$\mathbf{P}\times\mathbf{Q}$       (Cartesian) product: all possible pairs $(x,y)$ with $x\in\mathbf{P}$ and $y\in\mathbf{Q}$
----------------------------------- ---------------------------------------------------------------------------------------------
+--------------------------------------------- ---------------------------------------------------------------------------------------------
+$\{1, 4\}$                                    A set composed of the members 1 and 4
+$\{x ~|~ x\ \mbox{is prime}\}$                A set definition using a set comprehension (e.g., the set of all primes)
+$x\in\mathbf{P}$                              $x$ is a member of $\mathbf{P}$
+$x\notin\mathbf{P}$                           $x$ is not a member of set $\mathbf{P}$
+$\emptyset$                                   The null or empty set
+$|\mathbf{P}|$                                Cardinality: the size of $\mathbf{P}$, or its number of members
+$\mathbf{P}\subseteq\mathbf{Q}$               $\mathbf{P}$ is included in $\mathbf{Q}$, $\mathbf{P}$ is a subset of $\mathbf{Q}$
+$\mathbf{P}\supseteq\mathbf{Q}$               $\mathbf{Q}$ is included in $\mathbf{P}$, $\mathbf{P}$ is a superset of $\mathbf{Q}$
+$\mathbf{P}\cup\mathbf{Q}$                    Union: all elements appearing in any of $\mathbf{P}$ *or* $\mathbf{Q}$
+$\mathbf{P}\cap\mathbf{Q}$                    Intersection: all elements appearing in both $\mathbf{P}$ *and* $\mathbf{Q}$
+$\mathbf{P}-\mathbf{Q}$                       Difference: all elements of $\mathbf{P}$ *not* in $\mathbf{Q}$
+$\mathbf{P}\times\mathbf{Q}$                  (Cartesian) product: all possible pairs $(x,y)$ with $x\in\mathbf{P}$ and $y\in\mathbf{Q}$
+$2^\mathbf{P}$ or $\mathcal{P}(\mathbf{P})$   Powerset: all possible subsets of $\mathbf{P}$
+--------------------------------------------- ---------------------------------------------------------------------------------------------
 
 ::: TODO
 - (Peter) I think the examples below are unnecessary: the students should know all this.
@@ -61,19 +62,18 @@ In this example, $\mathbf{Q} - \mathbf{P}  = \{10\}$.
 Finally, the set {5, 3, 2} is indistinguishable from set $\mathbf{P}$, because sets have no concept of order.
 Likewise, set {2, 3, 2, 5} is also indistinguishable from $\mathbf{P}$, because sets have no concept of duplicate elements.
 
-The [set product]{.term} or [Cartesian product]{.term} of two sets $\mathbf{Q} \times \mathbf{P}$ is a set of ordered pairs.
+The [set product]{.term} or [Cartesian product]{.term} of two sets $\mathbf{P} \times \mathbf{Q}$ is a set of ordered pairs.
 For our example sets, the set product would be:
 
 $$
 \{(2, 5),\ (2, 10),\ (3, 5),\ (3, 10),\ (5, 5),\ (5, 10)\}.
 $$
 
-The [powerset]{.term} of a set $\mathbf{S}$ (denoted $2^\mathbf{S}$ or $\mathcal{P}(\mathbf{S})$) is the set of all possible subsets for $\mathbf{S}$.
-Consider the set $\mathbf{S} = \{ a, b, c \}$. The powerset of $\mathbf{S}$ is
+The [powerset]{.term} of a set $\mathbf{P}$ (denoted $2^\mathbf{P}$ or $\mathcal{P}(\mathbf{P})$) is the set of all possible subsets of $\mathbf{P}$.
+For our example set $\mathbf{P}$, the powerset would be:
 
 $$
-\{ \emptyset,\ \{a\},\ \{b\},\ \{c\},\ \{a, b\},
-\ \{a, c\},\ \{b, c\},\ \{a, b, c\}\}.
+\{ \emptyset,\ \{2\},\ \{3\},\ \{5\},\ \{2, 3\},\ \{2, 5\},\ \{3, 5\},\ \{2, 3, 5\} \}.
 $$
 
 A collection of elements without a specific order, similar to a set, but allowing multiple occurrences of each element, is called a [bag]{.term}.
@@ -111,13 +111,15 @@ If tuple $(x, y)$ is in relation $R$, we may use the infix notation $xRy$.
 We often use relations, such as the less than operator ($<$), on the natural numbers, which includes ordered pairs such as $(1, 3)$ and $(2, 23)$, but not $(3, 2)$ or $(2, 2)$.
 Rather than writing the relationship in terms of ordered pairs, we typically use an infix notation for such relations, writing $1<3$.
 
-The most important properties of relations are as follows, where $R$ is a binary relation over set $\mathbf{S}$, and the condition holds for all $a, b, c \in \mathbf{S}$.
+The most important properties of relations are as follows:
 
 * $R$ is [reflexive]{.term} if $aRa$.
 * $R$ is [irreflexive]{.term} if $aRa$ is never true.
 * $R$ is [symmetric]{.term} if whenever $aRb$, then $bRa$.
 * $R$ is [antisymmetric]{.term} if whenever $aRb$ and $bRa$, then $a = b$.
 * $R$ is [transitive]{.term} if whenever $aRb$ and $bRc$, then $aRc$.
+
+(Here $R$ is a binary relation over a set $\mathbf{S}$, and the condition holds for all $a, b, c \in \mathbf{S}$.)
 
 As examples, for the natural numbers, $<$ is irreflexive (because $aRa$ is never true), antisymmetric (because there is no case where $aRb$ and
 $bRa$), and transitive.
@@ -139,7 +141,7 @@ If two elements $a$ and $b$ are equivalent to each other, we write $a \equiv b$.
 
 A [partition]{.term} of a set $\mathbf{S}$ is a collection of subsets that are [disjoint]{.term} from each other and whose union is $\mathbf{S}$.
 There's a close correspondence between equivalence relations and partitions:
-an equivalence relation on a set $\mathbf{S}$ partitions the set into disjoint subsets (the subsest of equivalent elements).
+an equivalence relation on a set $\mathbf{S}$ partitions the set into disjoint subsets (the subset of equivalent elements).
 But the opposite is also true:
 if you have a partition of a set $\mathbf{S}$ you can easily define a corresponding equivalence relation (elements are equivalent if they belong to the same partition).
 
@@ -331,7 +333,7 @@ Modulus function:
 Sometimes written $n \;\mathrm{mod}\; m$ in mathematical expressions, the syntax in many programming languages is $n % m$.
 From the definition of remainder, $n \;\mathrm{mod}\; m$ is the integer $r$ such that $n = qm + r$ for $q$ an integer, and $|r| < |m|$.
 Therefore, the result of $n \;\mathrm{mod}\; m$ must be between 0 and $m-1$ when $n$ and $m$ are positive integers.
-For example, $5 \;\mathrm{mod}\; 3 = 2$; $25 \;\mathrm{mod}\; 3 = 1$, $5 \;\mathrm{mod}\; 7 = 5$, and $5 \;\mathrm{mod}\; 5 = 0$.
+For example, $5\mathop{mod}3 = 2$, $25\mathop{mod}3 = 1$, $5\mathop{mod}7 = 5$, and $5\mathop{mod}5 = 0$.
 
     There is more than one way to assign values to $q$ and $r$, depending on how integer division is interpreted.
 The most common mathematical definition computes the mod function as $n \;\mathrm{mod}\; m = n - m\lfloor n/m\rfloor$.
@@ -459,7 +461,7 @@ Thus, this notation means to sum the values of $f(i)$ as $i$ ranges across the i
 This can also be written $f(1) + f(2) + \cdots + f(n-1) + f(n)$.
 Within a sentence, Sigma notation is typeset as $\sum_{i=1}^{n} f(i)$.
 
-Given a summation, you often wish to replace it with an algebraic equation with the same value as the summation.
+Given a summation, you often wish to replace it with an algebraic expression with the same value as the summation.
 This is known as a [closed-form solution]{.term}, and the process of replacing the summation with its closed-form solution is known as solving the summation.
 For example, the summation $\sum_{i=1}^{n} 1$ is simply the expression "1" summed $n$ times (remember that $i$ ranges from 1 to $n$).
 Because the sum of $n$ ones is $n$, the closed-form solution is $n$.
@@ -683,7 +685,7 @@ Consider $C = B + 1$.
 $C$ is an integer because it is the sum of two integers.
 Also, $C > B$, which means that $B$ is not the largest integer after all.
 Thus, we have reached a contradiction.
-The only flaw in our reasoning is the initial assumption that the theorem is false.
+The only possible flaw in our reasoning is the initial assumption that the theorem is false.
 Thus, we conclude that the theorem is correct.
 :::
 
@@ -1222,7 +1224,5 @@ If you would like to write a simple LCM random number generator of your own, an 
 r_i &=& (16807 \cdot r_{i-1}) \;\mathrm{mod}\; 2^{31} - 1
 \end{eqnarray}
 
-::: note
 Another approach is based on using a computer chip that generates random numbers resulting from "thermal noise" in the system.
 Time will tell if this approach replaces deterministic approaches.
-:::

@@ -8,7 +8,7 @@
 :::
 
 
-### Example: Bank
+### Example: Banks
 
 A bank must support many types of transactions with its customers, but
 we will examine a simple model where customers wish to open accounts,
@@ -131,7 +131,7 @@ Then, instead of scanning from the beginning, we start in the middle of the arra
 - If it’s larger, we search in the upper half.
 
 Each step cuts the number of possibilities in half.
-So, how many times can we divide the array in half before we narrow it down to one element? 
+So, how many times can we divide the array in half before we narrow it down to one element?
 This is a logarithmic process, meaning we divide the search space in half again and again.
 With an array of one billion keywords, we would need only about 39 steps to find the right one.
 
