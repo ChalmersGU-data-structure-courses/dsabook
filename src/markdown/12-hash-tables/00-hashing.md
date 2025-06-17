@@ -20,13 +20,13 @@ constant time. In fact, a properly tuned hash system typically looks at
 only one or two records for each search, insert, or delete operation.
 This is better than the $O(\log n)$ cost required to do a binary search
 on a sorted array of $n$ records, or the $O(\log n)$ cost required to do
-an operation on a binary search tree. However, even though hashing is
+an operation on a self-balancing binary search tree. However, even though hashing is
 based on a very simple idea, it is surprisingly difficult to implement
 properly. Designers need to pay careful attention to all of the details
 involved with implementing a hash system.
 
 A hash system stores records in an array called a
-[hash table]{.term}, which we will call `HT`.
+[hash table]{.term}, which we will call `HT` below.
 Hashing works by performing a computation on a search key $k$ in a way
 that is intended to identify the position in `HT` that contains the
 record with key $k$. The function that does this calculation is called
@@ -41,29 +41,29 @@ key value $k$ and some hash function $\mathbf{h}$, $i = \mathbf{h}(k)$ is a slot
 in the table such that $0 \leq i < M$, and we have the key of the record
 stored at `HT`[$i$] equal to $k$.
 
-Hashing is not good for applications where multiple records with the
-same key value are permitted. Hashing is not a good method for answering
+Since the records are not ordered by value, hashing is not a good method for answering
 range searches. In other words, we cannot easily find all records (if
 any) whose key values fall within a certain range. Nor can we easily
 find the record with the minimum or maximum key value, or visit the
 records in key order. Hashing is most appropriate for answering the
-question, 'What record, if any, has key value $k$?' **For applications
-where all search is done by exact-match queries, hashing is the search
-method of choice because it is extremely efficient when implemented
-correctly.** As this tutorial shows, however, there are many approaches
+question, "What record, if any, has key value $k$?"
+**For applications
+where all search is done by exact-match queries, hashing is a very good search
+method because it is extremely efficient when implemented correctly.**
+As we will see in this chapter, however, there are many approaches
 to hashing and it is easy to devise an inefficient implementation.
 Hashing is suitable for both in-memory and disk-based searching and is
 one of the two most widely used methods for organizing large databases
-stored on disk (the other is the B-tree).
+stored on disk (the other is the [B-tree]{.term}).
+
+::: dsvis
+#### Simple hashing example
 
 As a simple (though unrealistic) example of hashing, consider storing
 $n$ records, each with a unique key value in the range 0 to $n-1$. A
 record with key $k$ can be stored in `HT`[$k$], and so the hash function
 is $\mathbf{h}(k) = k$. To find the record with key value $k$, look in
 `HT`[$k$].
-
-::: dsvis
-TODO
 
 <inlineav id="hashIntroCON" src="Hashing/hashIntroCON.js" name="Hashing Intro Slideshow" links="Hashing/hashIntroCON.css"/>
 :::
