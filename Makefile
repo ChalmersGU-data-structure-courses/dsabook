@@ -70,4 +70,4 @@ server:
 
 pdf:
 	@echo "Running pandoc + XeTeX --> $(PDF)..."
-	@time $(PANDOC) --defaults=dsabook-latex.yaml --output=$(PDF) $(MD_FILES)
+	@time $(PANDOC) --defaults=dsabook-studentlitteratur.yaml --output=$(PDF) $(MD_FILES)
