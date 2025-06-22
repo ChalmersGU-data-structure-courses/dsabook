@@ -16,7 +16,7 @@ $(document).ready(function () {
     "sc8": "Since 51 is larger then 45, we will keep the current left bound and move the right bound to position 8.",
     "sc9": "Now we compute the middle position between the current bounds (which is now only position 8). Add the left bound value to the right bound value and divide the result by 2. This gives us index 8. Look at the value in position 8, which is 45.",
     "sc10": "We have now found value 45, which is what we are looking for.",
-    "sc11": "Note that if the value in position 8 had not been what we were looking for, we still would have stopped searching at this point because there is nowhere else to look. In that case, we would have returned -1 as a signal that the value is not there.",
+    "sc11": "Note that if the value in position 8 had not been what we were looking for, we still would have stopped searching at this point because there is nowhere else to look. In that case, we would have returned <code>null</code> to signal that the value is not there.",
     "sc12": "During the course of the binary search, we looked at the values in 4 array positions (shown in red)."
   };
 

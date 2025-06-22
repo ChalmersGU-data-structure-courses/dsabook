@@ -2,7 +2,7 @@
 ## Red-black trees
 
 ::: TODO
-- Prio 1: make text coherent
+- Prio 1: make text coherent: don't refer to 2-3 trees
 - Prio 2: don't write the full source code
 :::
 

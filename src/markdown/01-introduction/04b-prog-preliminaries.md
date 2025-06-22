@@ -328,7 +328,7 @@ Here is an example of how to define a dynamic array (see section XX):
         size: int = 0
 
         constructor ArrayStack(capacity):
-            data = Array(capacity) of T
+            data = new Array(capacity) of T
 
 A datatype can also have "internal functions" (called *methods* in object-oriented languages), and they have access to the internal variables:
 

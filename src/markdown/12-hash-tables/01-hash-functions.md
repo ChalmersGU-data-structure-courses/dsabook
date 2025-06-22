@@ -2,8 +2,6 @@
 ## Hash functions
 
 ::: TODO
-- Prio 1: invariants
-- Prio 1: basic hash functions
 - Prio 2:
     - definitions, requirements
     - distribution of values, independence of values

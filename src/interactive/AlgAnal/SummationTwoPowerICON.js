@@ -20,8 +20,8 @@ $(document).ready(function() {
     "sc7.2": "<br> <em>&Sigma;<sub>i=0...4</sub> 2<sup>i</sup> = 1 + 2 + 4 + 8 + <span style='color:red'>16</span></em>",
     "sc8.1": "The closed form solution for this summation can be found by calculating the area of the resulting shape.",
     "sc8.2": "<br> Let's first reorder...",
-    "sc12": "Now it is easy to see that the total area is <em>2<sup>4</sup> + 2<sup>4</sup> - 1 = 2<sup>4+1</sup> – 1 = 31</em>.",
-    "sc13": "In general, we have <em>&Sigma;<sub>i=0...4</sub> 2<sup>i</sup> = 2<sup>n+1</sup></em>."
+    "sc12": "Now it is easy to see that the total area is <em>2<sup>4</sup> + 2<sup>4</sup> – 1 = 2<sup>4+1</sup> – 1 = 31</em>.",
+    "sc13": "In general, we have <em>&Sigma;<sub>i=0...n</sub> 2<sup>i</sup> = 2<sup>n+1</sup> – 1</em>."
 };
 
   var av;
