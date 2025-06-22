@@ -1,79 +1,91 @@
 
 ## Implementing sets and maps using separate chaining
 
-::: TODO
-- Prio 2: write "implementing sets"
-- Prio 2: simplify code
-:::
+In this section we go into more details in how to get a working implementation.
+First we show how to implement a *hash set*, an then we discuss how to extend this into a *hash map*.
 
 ### Implementing sets
 
-### Implementing maps
+A separate chaining hash set consists of an internal array `bins` of sets.
+We don't have to specify what kind of sets, as long as it supports the basic set methods.
+Usually it's perfectly fine to use a very simple linked list and not something more fancy.
+To initialise the table, we first create the internal array of some initial minimum capacity:
 
-Here we will show the implementation of a **hash map**. Implementing a
-hash set is very similar, and even simpler.
+    datatype SeparateChainingHashSet implements Set:
+        bins: Array of Sets
+        size: Int
 
-A separate chaining hash map consists of an internal array `bins` of key-value
-maps. We don't have to specify what kind of maps just yet, but we will
-use a simple [linked list map](#implementing-maps-using-lists)
-because the idea is that each bin will only contain a couple
-of entries. We also have to remember the collected size of the map,
-otherwise we would have to calculate a sum every time we want to know the size.
+        constructor():
+            initialise(MIN_CAPACITY)
 
-To initialise the table, we first create the internal array of the
-initial minimum capacity, and then let every array cell be a new empty
-linked list map. Note that we put the initialisation in a private method
-of its own, so that we can reuse it when resizing the table.
+To simplify things we put the initialisation in a method of its own, because we will reuse it later when resizing the table.
+The initialisation not only creates the internal table, but also populates it with new empty sets.
 
-    datatype SeparateChainingHashMap implements Map:
-        bins: Array of Maps = new Array(MIN_CAPACITY)
-        size: Int = 0
-
-To get the value for a key, we called the table index for the key, and
-then look up the key in the underlying map at that position.
-
-    datatype SeparateChainingHashMap implements Map:
+    datatype SeparateChainingHashSet:
         ...
-        get(key):
-            i = hash(key)
-            return bins[i].get(key)
+        initialize(capacity):
+            size = 0
+            bins = new Array(capacity)
+            for i in 0 .. capacity-1:
+                bins[i] = new Set()
 
-To set a value for a key, we calculate the table index for the key, and
-then we set the value for the key in the underlying map.
-If the size of the underlying map changed, we know that the key wasn't in the hash table previously,
-and then we know that the number of key/value pairs have been increased.
-We also have to check if the load factor becomes too large, and then we
-make the internal table larger by a factor.
+Note that we keep the total number of elements in a variable `size`.
+It is possible to calculate this value by summing the sizes of all bins, but this takes time so we remember it in a variable instead.
+This also means that we have to update the variable whenever the size of a bin changes.
 
-    datatype SeparateChainingHashMap implements Map:
+
+#### Searching for an element
+
+To see if the set contains a given element, we look it up in the corresponding bin:
+
+    datatype SeparateChainingHashSet:
         ...
-        put(key, value):
-            i = hash(key)
-            oldSize = bins[i].size
-            bins[i].put(key, value)
-            if bins[i].size > oldSize:
+        contains(elem):
+            bin = bins[hashIndex(elem)]
+            return bin.contains(elem)
+
+#### Adding an element
+
+To add an element we add it to the bin where it should belong.
+If the size of the bin changed, we know that the key wasn't in the bin previously, and then we know that the number of elements have increased.
+We also have to check if the load factor becomes too large, and then we resize the internal table.
+
+    datatype SeparateChainingHashSet:
+        ...
+        add(elem):
+            bin = bins[hashIndex(elem)]
+            oldBinSize = bin.size
+            bin.add(elem)
+            if bin.size > oldBinSize:
                 size = size + 1
                 if loadFactor() > MAX_LOAD_FACTOR:
                     resizeTable(bins.size * MULTIPLIER)
-            return old
 
-To remove a value, we do the same: find the underlying map for the key,
-and remove the key/value pair. If we actually removed the key (i.e., if
-it existed in the map), then we decrease the map size. We also check if
-the table becomes too sparse, and then decrease the internal table by a
-factor.
+#### Removing an element
 
-    datatype SeparateChainingHashMap implements Map:
+To remove a value, we do the same: find the underlying bin and remove the value.
+If we actually removed the element (i.e., if it existed in the bin), then we decrease the total size.
+We also check if the table becomes too sparse, and then decrease the internal table by a factor.
+
+    datatype SeparateChainingHashSet:
         ...
-        remove(key):
-            i = hash(key)
-            oldSize = bins[i].size
-            bins[i].remove(key)
-            if bins[i].size < oldSize:
+        remove(elem):
+            bin = bins[hashIndex(elem)]
+            oldBinSize = bin.size
+            bin.remove(elem)
+            if bin.size < oldBinSize:
                 size = size - 1
                 if loadFactor() < MIN_LOAD_FACTOR:
                     resizeTable(bins.size / MULTIPLIER)
-            return removed
+
+#### Load factor and constants
+
+The load factor is simply the total number of elements divided by the number of bins, or $N/M$:
+
+    datatype SeparateChainingHashSet:
+        ...
+        loadFactor():
+            return size / bins.size
 
 The constants for min and max load factors, and the resizing factor, are
 a bit arbitrary. With the following values, we ensure that the table on
@@ -83,22 +95,15 @@ these values leads to more better memory usage, but also more conflicts
 each time we resize the table. Increasing this value means that resizing
 will happen less often, but instead the memory usage will increase.
 
-    datatype SeparateChainingHashMap implements Map:
+    datatype SeparateChainingHashSet:
         ...
         MIN_CAPACITY = 8
         MIN_LOAD_FACTOR = 0.5
         MAX_LOAD_FACTOR = 2.0
         MULTIPLIER = 1.5
 
-The load factor $N/M$ is easy to calculate.
 
-    datatype SeparateChainingHashMap implements Map:
-        ...
-        loadFactor():
-            return size / bins.size
-
-
-### Resizing the internal table
+#### Resizing the internal table
 
 When we resize the internal table, it is very important that we *do not
 keep* the old hash indices for the keys, because they will not be the
@@ -107,16 +112,46 @@ temporary variable, and reinitialise the table to the new capacity. Then
 we iterate through all bins and entries in the old table, and simply
 insert them again into the new resized table.
 
-    datatype SeparateChainingHashMap implements Map:
+    datatype SeparateChainingHashSet:
         ...
         resizeTable(newCapacity):
-            if newCapacity >= minCapacity:
+            if newCapacity >= MIN_CAPACITY:
                 oldBins = bins
-                bins = new Array(newCapacity)
-                size = 0
+                initialise(newCapacity)
                 for each bin in oldBins:
-                    for each key, value in bin:
-                        put(key, value)
+                    for each elem in bin:
+                        add(elem)
+
+### Implementing maps
+
+It is straightforward to modify the implementation above to become a key-value map instead of a set.
+
+    datatype SeparateChainingHashMap implements Map:
+        bins: Array of Maps
+        ...
+
+        get(key):
+            // Similar to contains for hash sets, but use Map.get instead:
+            ...
+            return bin.get(key)
+
+        put(key, value):
+            // Similar to add for hash sets, but use Map.put instead:
+            ...
+            bin.put(key, value)
+            ...
+
+        remove(key):
+            // Similar to remove for hash sets, but use Map.remove instead:
+            ...
+            bin.remove(key)
+            ...
+
+        resizeTable(newCapacity):
+            // Similar to resizeTable for hash sets, but use put instead:
+            ...
+                for each key, value in bin:
+                    put(key, value)
 
 
 ### Exercise

@@ -2,7 +2,6 @@
 ## Separate chaining
 
 ::: TODO
-- Prio 2: implementation
 - Prio 2:
     - Discuss: Load factor, what is a good LF?
     - Discuss: When to resize
@@ -17,9 +16,9 @@ resolution techniques can be broken into two classes:
 (Yes, it is confusing when "open hashing" means the opposite
 of "open addressing", but unfortunately, that is the way it is.)
 The difference between the two has to do with whether collisions
-are stored outside the table (separate chaining/open hashing), or
+are stored outside the table (separate chaining), or
 whether collisions result in storing one of the records at another slot
-in the table (open addressing/closed hashing).
+in the table (open addressing).
 
 The simplest form of separate chaining defines each slot in the hash
 table to be the head of a linked list. All records that hash to a
@@ -53,7 +52,7 @@ higher because many elements on the linked list must be searched.
 
 Separate chaining is most appropriate when the hash table is kept in
 main memory, with the lists implemented by a standard in-memory linked
-list. Storing an separate chaining hash table on disk in an efficient
+list. Storing a separate chaining hash table on disk in an efficient
 way is difficult, because members of a given linked list might be stored
 on different disk blocks. This would result in multiple disk accesses
 when searching for a particular key value, which defeats the purpose of
@@ -67,8 +66,15 @@ greatly reduce the number of records accessed by a search operation. In
 a similar fashion, a simple Binsort reduces the number of records in
 each bin to a small number that can be sorted in some other way.
 
-### Invariants
+::: dsvis
+#### Exercise: Practicing Separate Chaining
 
+<avembed id="OpenHashPRO" src="Hashing/OpenHashPRO.html" type="ka" name="Separate Chaining Proficiency Exercise" height="630"/>
+:::
+
+<!--
+### Invariants
+-->
 
 
 ### Alternatives to a linked list
@@ -76,7 +82,7 @@ each bin to a small number that can be sorted in some other way.
 There is nothing that requires us to use a linked list as the underlying
 data structure, it could be a dynamic array or a balanced search tree
 too. (In fact, Java's hash tables use a combination of linked lists
-and balanced trees).
+and balanced trees.)
 
 Conceptually, a hash table can use any kind of collection data structure
 -- the only thing that the actual array does is to partition the large
@@ -98,16 +104,77 @@ constant time.
 
 ### Implementation
 
-::: TODO
-- give overview implementation, not for a specific ADT (set/map)
-:::
 
+Now we will give a very generic overview how to implement a separate chaining hash table.
+In the next section we will discuss implementation in more detail.
 
-### Exercise
+As already mentioned, a separate chaining hash table *partitions* its elements into a number of smaller collections, or *bins*.
 
-::: dsvis
-TODO
+    datatype SeparateChainingHashTable:
+        bins: Array of Collections
 
-<avembed id="OpenHashPRO" src="Hashing/OpenHashPRO.html" type="ka" name="Separate Chaining Proficiency Exercise"/>
-:::
+Note that we don't have to know what type of collections the bins are, the only thing we have to know is that they support the same methods that we want the hash table to support.
+To implement any kind of method, we first have to to decide on a bin and then *delegate* the method to that bin.
+We use the hash function to decide which bin to delegate to, and then simply call the method of that bin, with the same arguments as we got in the first place:
+
+    datatype SeparateChainingHashTable:
+        ...
+        method(elem, ...extra arguments...):
+            bin = bins[hashIndex(elem)]
+            return bin.method(elem, ...extra arguments...)
+
+As explained in the previous chapter, the hash index for an element consists of first getting the hash code and then compressing it to an array index.
+
+    datatype SeparateChainingHashTable:
+        ...
+        hashIndex(elem):
+            hash = elem.hashCode()
+            hash = hash & 0x7fffffff  // make the hash code non-negative
+            return hash % bins.size
+
+There are of course some more details one has to take care of to get a working implementation.
+For example, we have not discussed how to calculate the size of the hash table, i.e., the total number of elements.
+We have also not discussed how to handle bins that are not initialised yet.
+
+#### Load factor and resizing
+
+The efficiency of a hash table depends on two factors:
+
+1. how well the elements are distributed between the bins
+2. the size of each bin
+
+The first factor depends on the hash function, and for now we simply assume that it is good -- meaning that it distributes the elements evenly among the bins.
+The second factor depends on the load factor -- if there are $N$ elements in total and we have $M$ bins, then there are $N/M$ elements per bin on average.
+Assuming that our underlying collections are simple linked lists, then all main operations (searching, adding, deleting) are linear in the load factor.
+
+The key point to making hash tables efficient is to make sure that the load factor never becomes larger than a constant -- the *maximum load factor*.
+If we have a constant load factor and a good hash function, then all operations on hash tables will be constant time, $O(1)$.
+
+To be able to do this we have to *resize* the internal table when the number of elements grow.
+But we already know how to do this -- use a dynamic array!
+So, whenever we implement a method that can change the number of elements, we have to check if we need to resize the table.
+Here is how we can do this:
+
+    datatype SeparateChainingHashTable:
+        ...
+        method(elem, ...extra arguments...):
+            bin = bins[hashIndex(elem)]
+            result = bin.method(elem, ...extra arguments...)
+            if load factor is too large:
+                resizeTable(bins.size * MULTIPLIER)
+
+Recall from the dynamic arrays that we have to *multiply* by a factor (the `MULTIPLIER`) when resizing the table, not adding a constant.
+
+When we resize the internal table, it is very important that we *do not keep* the old hash indices for the keys, because they will not be the same after resizing.
+Instead we save the current internal table to a temporary variable, and reinitialise the table to the new capacity.
+Then we iterate through all bins and entries in the old table, and simply insert them again into the new resized table.
+
+    datatype SeparateChainingHashTable:
+        ...
+        resizeTable(newCapacity):
+            oldBins = bins                 // Remember the old table.
+            bins = new Array(newCapacity)  // Reset the internal table.
+            size = 0                       // Reset the number of elements.
+            for each bin in oldBins:
+                add each elem in bin
 
