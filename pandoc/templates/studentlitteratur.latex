@@ -24,6 +24,10 @@ $if(geometry)$
 \usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
 $endif$
 \usepackage{amsmath,amssymb}
+\usepackage{newunicodechar}
+\newunicodechar{≤}{\ensuremath{\leq}}
+\newunicodechar{≥}{\ensuremath{\geq}}
+\newunicodechar{∞}{\ensuremath{\inf}}
 $--
 $-- section numbering
 $--
@@ -55,6 +59,16 @@ $if(subtitle)$
 $endif$
 \author{$for(author)$$author$$sep$ \and $endfor$}
 \date{$date$}
+
+\edition{1}
+\artnr{xxxxx}
+\isbn{xxx--xxx--xx-x}
+%\covertext{Omslaget visar ett prov på den vita blankhet som kan infinna sig under gynnsamma förutsättningar.}
+%\coverlayout{Moderna omslag}
+%\coverimage{Pelle Persson}
+\copyrightyear{2012}
+\printer{The Printer, City}
+\printyear{2012}
 
 \begin{document}
 $if(has-frontmatter)$

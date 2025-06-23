@@ -21,13 +21,3 @@ template: studentlitteratur.latex
 
 table-of-contents: true
 toc-depth: 2
-
-
-format: 
-  pdf:
-    documentclass: studentlitteratur
-
-# classoption:
-# - cmyk
-# - 170x245
-
