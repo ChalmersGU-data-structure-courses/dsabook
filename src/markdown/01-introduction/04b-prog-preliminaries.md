@@ -1,4 +1,6 @@
 
+:::::: html
+
 ## Programming preliminaries
 
 ::: TODO
@@ -508,3 +510,5 @@ Caching is a technique used to accelerate data access by temporarily storing fre
 When a program requests data, the processor first checks whether it is available in the cache.
 If the data is found, it can be retrieved almost instantly, avoiding the need to access slower main memory.
 Cache memory is located very close to the processor, often integrated directly into the CPU, allowing it to fetch values in just a few clock cycles, significantly improving performance.
+
+::::::

@@ -1,4 +1,6 @@
 
+:::::: html
+
 ## Mathematical preliminaries
 
 This chapter presents the mathematical preliminaries assumed to be familiar to the reader.
@@ -1226,3 +1228,5 @@ r_i &=& (16807 \cdot r_{i-1}) \;\mathrm{mod}\; 2^{31} - 1
 
 Another approach is based on using a computer chip that generates random numbers resulting from "thermal noise" in the system.
 Time will tell if this approach replaces deterministic approaches.
+
+::::::
