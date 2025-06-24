@@ -28,6 +28,7 @@ $endif$
 \newunicodechar{≤}{\ensuremath{\leq}}
 \newunicodechar{≥}{\ensuremath{\geq}}
 \newunicodechar{∞}{\ensuremath{\inf}}
+\expandafter\def\csname ver@subfig.sty\endcsname{}
 $--
 $-- section numbering
 $--

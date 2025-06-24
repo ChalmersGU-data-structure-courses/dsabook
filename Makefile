@@ -13,11 +13,12 @@ TEMP      := _temp
 BUILD     := build
 HTML      := $(BUILD)/html
 PDF       := book.pdf
+BOOK      := dsabook.pdf
 DOCS      := docs
 
 # Source Files
 GLOSSARY  := $(MARKDOWN)/X-appendix/01-glossary.md
-MD_FILES  := $(sort $(wildcard $(MARKDOWN)/$(CHAPTER)*/*.md) $(wildcard $(MARKDOWN)/*/00-*.md))
+MD_FILES  := $(sort $(wildcard $(MARKDOWN)/$(CHAPTER)*/*.md) $(wildcard $(MARKDOWN)/*/00-*.md) $(wildcard $(MARKDOWN)/*.md))
 
 # Tools
 PYTHON    := python3
@@ -70,4 +71,12 @@ server:
 
 pdf:
 	@echo "Running pandoc + XeTeX --> $(PDF)..."
-	@time $(PANDOC) --defaults=dsabook-studentlitteratur.yaml --output=$(PDF) $(MD_FILES)
+	@time $(PANDOC) --defaults=dsabook-latex.yaml --output=$(PDF) $(MD_FILES)
+
+latex:
+	@echo "Running pandoc + pdfLaTeX --> $(PDF)..."
+	@time $(PANDOC) --defaults=dsabook-studentlitteratur.yaml --to=latex --output=dsabook.tex $(MD_FILES)
+
+book:
+	@echo "Running pandoc + pdfLaTeX --> $(PDF)..."
+	@time $(PANDOC) --defaults=dsabook-studentlitteratur.yaml --output=$(BOOK) $(MD_FILES)
