@@ -139,7 +139,7 @@ Clearly, `findPivot` takes constant time for any $k$.
 The total cost of the partition operation is constrained by how far `left` and `right` can move inwards.
 
 - The swap operation in the body of the main loop guarantees that `left` and `right` move at least one step each.
-  Thus, the maximum number of times `swap` can be executed is $(k–1)/2$.
+  Thus, the maximum number of times `swap` can be executed is $(k-1)/2$.
 - In any case, since `left` and `right` always move towards each other, it will take a total of $k-1$ steps until they meet.
 - Thus, the running time of the partition function is $O(k)$.
 
