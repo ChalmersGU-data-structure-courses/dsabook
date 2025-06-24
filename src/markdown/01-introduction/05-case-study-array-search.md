@@ -6,9 +6,6 @@
 - Prio 3: write the text on Even faster searching
 :::
 
-
-### Linear search
-
 If you want to find the position in an unsorted array of $n$ objects
 that stores a particular value, you cannot really do better than simply
 looking through the array from the beginning and moving toward the end

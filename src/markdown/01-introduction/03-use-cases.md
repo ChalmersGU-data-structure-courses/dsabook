@@ -1,5 +1,5 @@
 
-## Use cases
+## Practical examples
 
 ::: TODO
 - Prio 2: reorganise the examples
@@ -8,7 +8,7 @@
 :::
 
 
-### Example: Banks
+#### Banks
 
 A bank must support many types of transactions with its customers, but
 we will examine a simple model where customers wish to open accounts,
@@ -62,7 +62,7 @@ restore the system to peak efficiency. Such reorganization can occur
 offline so as not to affect ATM transactions.
 
 
-### Example: Databases
+#### Databases
 
 A company is developing a database system containing information about
 cities and towns in Europe. There are many thousands of
@@ -91,7 +91,7 @@ and deletion of data records, and range queries. However, a simple
 and then never changed, such as an atlas accessed from a website.
 
 
-### Example: Search engines
+#### Search engines
 
 The World Wide Web (WWW), often referred to as the Internet, has completely changed how we access and use information.
 With just a few clicks, we can explore an enormous number of websites filled with text, videos, and images on a wide variety of topics.
