@@ -103,8 +103,7 @@ Which of the following is true of separate chaining?
 
 - [x] Records are stored on a list associated with a slot in the hash table
 - [ ] All records are stored directly within the hash table
-- [ ] The algorithm running time is determined by probes of
-different table cells until an empty one is found
+- [ ] The algorithm running time is determined by probes of different slots until an empty one is found
 
 ::: hints
 - In separate chaining, where are the records stored?

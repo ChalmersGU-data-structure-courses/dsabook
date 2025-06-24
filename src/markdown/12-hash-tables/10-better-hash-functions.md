@@ -6,6 +6,7 @@
 - Prio 2: more advanced hash functions
 :::
 
+<!--
 ### What is a good hash function?
 
 ::: TODO
@@ -13,6 +14,7 @@
     - uniform distribution
     - independence
 :::
+-->
 
 ### Binning
 
@@ -34,7 +36,7 @@ to slot 0. A similar, analogous problem arises if we were instead
 hashing strings based on the first letter in the string.
 
 ::: dsvis
-TODO
+Demonstration of the Binning hash function.
 
 <inlineav id="hashFuncExCON2" src="Hashing/hashFuncExCON2.js" name="Hash Function Slideshow 2"/>
 :::
@@ -133,11 +135,11 @@ Here is a little calculator for you to see how this works. Start with
 Now we will examine some hash functions suitable for storing strings of
 characters. We start with a simple summation function.
 
-    function hashString(string, M):
-        sum = 0
-        for each char in string:
-            sum = sum + ord(char)
-        return sum % M
+    function hashString(str):
+        h = 0
+        for each char in str:
+            h = h + ord(char)
+        return h
 
 
 This function sums the ASCII values of the letters in a string. If the
@@ -152,7 +154,7 @@ As with many other hash functions, the final step is to apply the
 modulus operator to the result, using table size $M$ to generate a value
 within the table range. If the sum is not sufficiently large, then the
 modulus operator will yield a poor distribution. For example, because
-the ASCII value for 'A' is 65 and 'Z' is 90, `sum` will always be in
+the ASCII value for 'A' is 65 and 'Z' is 90, the sum will always be in
 the range 650 to 900 for a string of ten upper case letters. For a hash
 table of size 100 or less, a reasonable distribution results. For a hash
 table of size 1000, the distribution is terrible because only slots 650
@@ -175,11 +177,11 @@ If we instead multiply the hash with a prime number, before adding the
 next character, we get a much better distribution of the hash codes.
 This is Java's default hash code for strings, where the prime number is 31.
 
-    function hashStringImproved(string, M):
-        sum = 0
-        for each char in string:
-            sum = 31 * sum + ord(char)
-        return sum % M
+    function hashStringImproved(str):
+        h = 0
+        for each char in str:
+            h = 31 * h + ord(char)
+        return h
 
 
 Mathematically, the hash function is
