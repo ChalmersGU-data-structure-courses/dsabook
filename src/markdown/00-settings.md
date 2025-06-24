@@ -5,7 +5,7 @@ documentclass: studentlitteratur
 
 classoption:
 - cmyk
-- 170x245
+# - 170x245
 - noparts
 
 header-includes:
