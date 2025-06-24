@@ -6,13 +6,13 @@ First we show how to implement a *hash set*, an then we discuss how to extend th
 
 ### Implementing sets
 
-A separate chaining hash set consists of an internal array `bins` of sets.
+A separate chaining hash set consists of an internal array `table` of sets.
 We don't have to specify what kind of sets, as long as it supports the basic set methods.
 Usually it's perfectly fine to use a very simple linked list and not something more fancy.
 To initialise the table, we first create the internal array of some initial minimum capacity:
 
     datatype SeparateChainingHashSet implements Set:
-        bins: Array of Sets
+        table: Array of Sets
         size: Int
 
         constructor():
@@ -25,9 +25,9 @@ The initialisation not only creates the internal table, but also populates it wi
         ...
         initialize(capacity):
             size = 0
-            bins = new Array(capacity)
+            table = new Array(capacity)
             for i in 0 .. capacity-1:
-                bins[i] = new Set()
+                table[i] = new Set()
 
 Note that we keep the total number of elements in a variable `size`.
 It is possible to calculate this value by summing the sizes of all bins, but this takes time so we remember it in a variable instead.
@@ -41,7 +41,7 @@ To see if the set contains a given element, we look it up in the corresponding b
     datatype SeparateChainingHashSet:
         ...
         contains(elem):
-            bin = bins[hashIndex(elem)]
+            bin = table[hashIndex(elem)]
             return bin.contains(elem)
 
 #### Adding an element
@@ -53,13 +53,13 @@ We also have to check if the load factor becomes too large, and then we resize t
     datatype SeparateChainingHashSet:
         ...
         add(elem):
-            bin = bins[hashIndex(elem)]
+            bin = table[hashIndex(elem)]
             oldBinSize = bin.size
             bin.add(elem)
             if bin.size > oldBinSize:
                 size = size + 1
                 if loadFactor() > MAX_LOAD_FACTOR:
-                    resizeTable(bins.size * MULTIPLIER)
+                    resizeTable(table.size * MULTIPLIER)
 
 #### Removing an element
 
@@ -70,13 +70,13 @@ We also check if the table becomes too sparse, and then decrease the internal ta
     datatype SeparateChainingHashSet:
         ...
         remove(elem):
-            bin = bins[hashIndex(elem)]
+            bin = table[hashIndex(elem)]
             oldBinSize = bin.size
             bin.remove(elem)
             if bin.size < oldBinSize:
                 size = size - 1
                 if loadFactor() < MIN_LOAD_FACTOR:
-                    resizeTable(bins.size / MULTIPLIER)
+                    resizeTable(table.size / MULTIPLIER)
 
 #### Load factor and constants
 
@@ -85,7 +85,7 @@ The load factor is simply the total number of elements divided by the number of 
     datatype SeparateChainingHashSet:
         ...
         loadFactor():
-            return size / bins.size
+            return size / table.size
 
 The constants for min and max load factors, and the resizing factor, are
 a bit arbitrary. With the following values, we ensure that the table on
@@ -116,9 +116,9 @@ insert them again into the new resized table.
         ...
         resizeTable(newCapacity):
             if newCapacity >= MIN_CAPACITY:
-                oldBins = bins
+                oldTable = table
                 initialise(newCapacity)
-                for each bin in oldBins:
+                for each bin in oldTable:
                     for each elem in bin:
                         add(elem)
 
@@ -127,7 +127,7 @@ insert them again into the new resized table.
 It is straightforward to modify the implementation above to become a key-value map instead of a set.
 
     datatype SeparateChainingHashMap implements Map:
-        bins: Array of Maps
+        table: Array of Maps
         ...
 
         get(key):

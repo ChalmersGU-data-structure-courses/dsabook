@@ -108,10 +108,10 @@ constant time.
 Now we will give a very generic overview how to implement a separate chaining hash table.
 In the next section we will discuss implementation in more detail.
 
-As already mentioned, a separate chaining hash table *partitions* its elements into a number of smaller collections, or *bins*.
+As already mentioned, a separate chaining hash table *partitions* its elements into an array of smaller collections, or *bins*.
 
     datatype SeparateChainingHashTable:
-        bins: Array of Collections
+        table: Array of Collections
 
 Note that we don't have to know what type of collections the bins are, the only thing we have to know is that they support the same methods that we want the hash table to support.
 To implement any kind of method, we first have to to decide on a bin and then *delegate* the method to that bin.
@@ -120,7 +120,7 @@ We use the hash function to decide which bin to delegate to, and then simply cal
     datatype SeparateChainingHashTable:
         ...
         method(elem, ...extra arguments...):
-            bin = bins[hashIndex(elem)]
+            bin = table[hashIndex(elem)]
             return bin.method(elem, ...extra arguments...)
 
 As explained in the previous chapter, the hash index for an element consists of first getting the hash code and then compressing it to an array index.
@@ -130,7 +130,7 @@ As explained in the previous chapter, the hash index for an element consists of 
         hashIndex(elem):
             hash = elem.hashCode()
             hash = hash & 0x7fffffff  // make the hash code non-negative
-            return hash % bins.size
+            return hash % table.size
 
 There are of course some more details one has to take care of to get a working implementation.
 For example, we have not discussed how to calculate the size of the hash table, i.e., the total number of elements.
@@ -158,10 +158,10 @@ Here is how we can do this:
     datatype SeparateChainingHashTable:
         ...
         method(elem, ...extra arguments...):
-            bin = bins[hashIndex(elem)]
+            bin = table[hashIndex(elem)]
             result = bin.method(elem, ...extra arguments...)
             if load factor is too large:
-                resizeTable(bins.size * MULTIPLIER)
+                resizeTable(table.size * MULTIPLIER)
 
 Recall from the dynamic arrays that we have to *multiply* by a factor (the `MULTIPLIER`) when resizing the table, not adding a constant.
 
@@ -172,9 +172,9 @@ Then we iterate through all bins and entries in the old table, and simply insert
     datatype SeparateChainingHashTable:
         ...
         resizeTable(newCapacity):
-            oldBins = bins                 // Remember the old table.
-            bins = new Array(newCapacity)  // Reset the internal table.
-            size = 0                       // Reset the number of elements.
-            for each bin in oldBins:
+            oldTable = table                // Remember the old table.
+            table = new Array(newCapacity)  // Reset the internal table.
+            size = 0                        // Reset the number of elements.
+            for each bin in oldTable:
                 add each elem in bin
 
