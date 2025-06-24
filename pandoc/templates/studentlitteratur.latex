@@ -39,6 +39,7 @@ $else$
 $endif$
 $font-settings.latex()$
 $common.latex()$
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},fontsize=\footnotesize}
 $for(header-includes)$
 $header-includes$
 $endfor$
