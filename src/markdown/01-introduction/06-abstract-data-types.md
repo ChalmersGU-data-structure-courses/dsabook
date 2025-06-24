@@ -158,10 +158,10 @@ We group these collection-based ADTs into two main categories:
 In addition to these, we also introduce graphs, along with their commonly used implementations.
 
 The rest of this section gives a high-level overview of the ADTs covered throughout the course.
-The figure below summarizes these ADTs and highlights how they relate to one another.
+[Figure @fig:adt-overview] summarizes these ADTs and highlights how they relate to one another.
 Each ADT will be discussed in more detail later in the book, including their operations and the data structures used to implement them.
 
-![An overview of ADTS with their common implementations](resources/images/ADT_overview.png)
+![An overview of ADTS with their common implementations](resources/images/ADT_overview.png){#fig:adt-overview}
 
 
 ### Linear collections
