@@ -1,22 +1,7 @@
 
 ## Bucket hashing
 
-::: TODO
-- Prio 2: - do we want to keep this section?
-    - Wikipedia doesn't even mention bucket hashing, so probably noone uses it
-:::
-
-Closed hashing stores all records directly in the hash table. Each
-record $R$ with key value $k_R$ has a [home position]{.term} that is $\textbf{h}(k_R)$, the slot computed by the hash
-function. If $R$ is to be inserted and another record already occupies
-$R$'s home position, then $R$ will be stored at some other slot in the
-table. It is the business of the collision resolution policy to
-determine which slot that will be. Naturally, the same policy must be
-followed during search as during insertion, so that any record not found
-in its home position can be recovered by repeating the collision
-resolution process.
-
-One implementation for closed hashing groups hash table slots into
+One implementation for open addressing groups hash table slots into
 [buckets](#bucket){.term}. The $M$ slots of the
 hash table are divided into $B$ buckets, with each bucket consisting of
 $M/B$ slots. The hash function assigns each record to the first slot
@@ -40,7 +25,7 @@ been checked. If many records are in the overflow bucket, this will be
 an expensive process.
 
 ::: dsvis
-TODO
+Demonstration of bucket hashing.
 
 <inlineav id="buckethashCON1" src="Hashing/buckethashCON1.js" name="Bucket Hashing Slideshow 1" links="Hashing/buckethashCON.css"/>
 :::
@@ -51,7 +36,7 @@ Now you can try it yourself.
 <avembed id="HashBucketPRO" src="Hashing/HashBucketPRO.html" type="ka" name="Bucket Hashing Proficiency Exercise"/>
 :::
 
-### An alternative approach
+### An alternative approach to bucket hashing
 
 A simple variation on bucket hashing is to hash a key value to some slot
 in the hash table as though bucketing were not being used. If the home
@@ -62,7 +47,7 @@ initial collisions are reduced, because any slot can be a home position
 rather than just the first slot in the bucket.
 
 ::: dsvis
-TODO
+Demonstration of alternative bucket hashing.
 
 <inlineav id="buckethashCON2" src="Hashing/buckethashCON2.js" name="Bucket Hashing Slideshow 2" links="Hashing/buckethashCON.css"/>
 :::
@@ -77,7 +62,7 @@ from disk as well. Naturally, overflow should be kept small to minimize
 unnecessary disk accesses.
 
 ::: dsvis
-TODO
+#### Exercise: Bucket hashing
 
 <avembed id="HashBucket2PRO" src="Hashing/HashBucket2PRO.html" type="ka" name="Alternate Bucket Hashing Proficiency Exercise"/>
 :::
