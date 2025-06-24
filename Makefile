@@ -74,9 +74,9 @@ pdf:
 	@time $(PANDOC) --defaults=dsabook-latex.yaml --output=$(PDF) $(MD_FILES)
 
 latex:
-	@echo "Running pandoc + pdfLaTeX --> $(PDF)..."
-	@time $(PANDOC) --defaults=dsabook-studentlitteratur.yaml --to=latex --output=dsabook.tex $(MD_FILES)
+	@echo "Running pandoc --> $(BOOK:.pdf=.tex)..."
+	@time $(PANDOC) --defaults=dsabook-studentlitteratur.yaml --to=latex --output=$(BOOK:.pdf=.tex) $(MD_FILES)
 
 book:
-	@echo "Running pandoc + pdfLaTeX --> $(PDF)..."
+	@echo "Running pandoc + pdfLaTeX --> $(BOOK)..."
 	@time $(PANDOC) --defaults=dsabook-studentlitteratur.yaml --output=$(BOOK) $(MD_FILES)
