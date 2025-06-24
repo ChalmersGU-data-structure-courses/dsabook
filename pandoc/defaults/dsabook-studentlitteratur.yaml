@@ -13,6 +13,9 @@ variables:
     - noparts
     # - 170x245
 
+include-before-body: 
+    - src/markdown/contributions.tex
+
 writer: pdf
 # pandoc --to=pdf --list-extensions
 
