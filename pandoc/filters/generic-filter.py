@@ -14,6 +14,12 @@ def max_numbering(hdr):
     return hdr
 
 
+def hide_term_links(link):
+    if "term" in link.classes:
+        return pf.Span(*link.content, identifier=link.identifier, classes=link.classes, attributes=link.attributes)
+    return link
+
+
 def make_details(elem):
     content = list(elem.content)
     assert len(content) >= 2
@@ -51,6 +57,7 @@ tag_actions = {
     },
     "latex": {
         "Header": max_numbering,
+        "Link": hide_term_links,
     },
 }
 
