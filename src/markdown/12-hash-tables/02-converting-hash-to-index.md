@@ -26,7 +26,7 @@ This is a very common strategy in many programming languages -- e.g., in Java th
 
 ### Compressing a hash code
 
-Internally, a hash table is an array of a fixed length, say $M$, and each of these $M$ array cells represent a bucket which contains some objects.
+Internally, a hash table is an array of a fixed length, say $M$, and each of these $M$ slots represent a bucket which contains some objects.
 The hash function should help us by telling in which bucket we should search for the given object.
 
 Now, the problem is that the datatypes and objects have no idea how large the internal array is, i.e., which array index they should return.
@@ -123,19 +123,19 @@ it in an instance variable for immediate lookup.
 ### Handling collisions
 
 So far we have talked about how to calculate an array index for an arbitrary object.
-One thing we haven't discussed yet is what we should do if two two different objects get assigned the same array cell.
+One thing we haven't discussed yet is what we should do if two two different objects get assigned the same slots in the table.
 
 Assume that we have an internal array of size $M=16$, and we use modular compression like above.
 Then every 16th integer will get the same array index, such as the integers 7, 23, 39, 55, etc.
 
-So, one very important question is how to handle *collision*, i.e., when two objects want to occupy the same array cell.
+So, one very important question is how to handle *collision*, i.e., when two objects want to occupy the same slot.
 There are two main approaches to this, two *collision resolution strategies*:
 
 Separate chaining
 : The internal array contains pointers to *collections* of objects -- it could be linked lists, self-balancing trees, or some other suitable data structure.
 
 Open addressing
-: The internal array contains the objects themselves. Collisions are handled by *probing* the array -- i.e., searching through the table to find an empty cell.
+: The internal array contains the objects themselves. Collisions are handled by *probing* the array -- i.e., searching through the table to find an empty slot.
 
 Both of these are common -- e.g., the Java standard library implements a separate chaining hash table, while the Python sets and dictionaries are implemented using open addressing hash tables.
 

@@ -2,9 +2,6 @@
 # Hash tables
 
 ::: TODO
-- Prio 2: terminology: load factor, hash conflict
-- Prio 2: update what terms we use (open addressing, closed hashing, etc etc)
-- Prio 2: be consistent with pseudocode - key/value, and simplify code!
 - Prio 2: update examples - they are not the best
 - Overview idea:
     - introduction: to index general objects (e.g. strings), we can use a hash function to calculate an array index

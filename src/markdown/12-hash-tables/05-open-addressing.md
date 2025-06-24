@@ -6,7 +6,6 @@
 - Prio 2:
     - Discuss: Load factor, what is a good LF?
     - Discuss: When to resize
-- Prio 2: give overview implementation, not for a specific ADT (set/map)
 :::
 
 We now turn to the other commonly used form of hashing: [open addressing]{.term} (also called [closed hashing](#closed-hash-system){.term}).
@@ -30,7 +29,7 @@ Open addressing, in contrast, stores the elements themselves directly in the tab
         table: Array of Elem
 
 To implement a method on an open addressing hash table we first have to find the correct table index for the element in question,
-and then we can apply the method on the table cell.
+and then we can apply the method on the slot.
 
     datatype OpenAddressingHashTable:
         ...
@@ -74,7 +73,7 @@ In the following code we iterate through all possible *offsets* 0, 1, 2, ..., et
             home = hashIndex(elem)
             for offset in 0 .. table.size-1:
                 i = (home + offset) % table.size
-                if table[i] == elem or table[i] is empty:
+                if table[i] == elem or table[i] is null:
                     return i
             throw error "Hash table full"
 
@@ -84,7 +83,7 @@ Linear probing has some drawbacks, and there are several alternative strategies 
 #### Finding and inserting
 
 Searching for an element in an open addressing hash table is straightforward:
-`hashAndProbe` returns a cell index, and all we have to do is to check that it points to the correct element.
+`hashAndProbe` returns a slot, and all we have to do is to check that it points to the correct element.
 
     datatype OpenAddressingHashTable:
         ...
@@ -92,7 +91,7 @@ Searching for an element in an open addressing hash table is straightforward:
             i = hashAndProbe(elem)
             return table[i] == elem
 
-To add an element we first find the correct cell, and then we set the value in that cell:
+To add an element we first find the correct slot, and then we set the value in that slot:
 
     datatype OpenAddressingHashTable:
         ...
@@ -103,12 +102,12 @@ To add an element we first find the correct cell, and then we set the value in t
 
 #### Collisions and clusters
 
-When the table gets more and more populated, it starts building *clusters* -- sequences of neighbouring non-empty cells in the table.
+When the table gets more and more populated, it starts building *clusters* -- sequences of neighbouring non-empty slots in the table.
 The efficiency of the basic operations depend crucially on the size of the largest cluster.
-Assume we want to search for an element that's not in the table, but happens to have its home position as the very first cell in a large cluster.
-Then we have to inspect every cell in the cluster before we can be certain that the element is not there.
+Assume we want to search for an element that's not in the table, but happens to have its home position as the very first slot in a large cluster.
+Then we have to inspect every slot in the cluster before we can be certain that the element is not there.
 
-Note that a cluster can consist of elements that all have different hash codes and different home positions -- as long as the neighbouring cells are occupied they all belong to the same cluster.
+Note that a cluster can consist of elements that all have different hash codes and different home positions -- as long as the neighbouring slots are occupied they all belong to the same cluster.
 Therefore it's not only important that the hash function gives different hash codes for different elements -- ideally the hash codes should be spread apart as much as possible, even if the elements themselves are very close to each other.
 
 It is possible to reduce some clustering by using different probing strategies than simple linear probing, see section 12.XX for more details.
@@ -119,16 +118,17 @@ It is possible to reduce some clustering by using different probing strategies t
 The difficult part when implementing deletion is how to handle clusters.
 
 Assume for example that we have a cluster of five elements [*A*, *B*, *C*, *D*, *E*], and we want to remove *C*.
-If we simply clear the cell we will get the two clusters [*A*, *B*] and [*D*, *E*].
+If we simply clear the slot we will get the two clusters [*A*, *B*] and [*D*, *E*].
 Let us also assume that the home positions of *D* is in the beginning of the original large cluster -- i.e., *A* and *D* have the same home positions.
 
 Now, what happens if we try to search for *D* in the table, after we have removed *C*?
-It will start searching in the first cluster and inspect cells *A* and *B*, but then it encounters an empty cell and stops.
+It will start searching in the first cluster and inspect slots *A* and *B*, but then it encounters an empty slot and stops.
 So it will report that *D* is not in the table, even though it hasn't been deleted.
 
-Therefore we cannot just clear cells that we want to delete.
-The simplest solution is then to *not* delete the cell, but instead *mark* it in some way.
-For simplicity we can assume that we have a special value `DELETED` which is not used anywhere else, which will be the new value of the cell:
+Therefore we cannot just clear slots that we want to delete.
+The simplest solution is instead to *mark* the slot in some way.
+The most common way is to use a special value which is not used anywhere else, which will be the new value of the slot.
+This special `DELETED` value is sometimes called a [tombstone]{.term}.
 
     datatype OpenAddressingHashTable:
         ...
