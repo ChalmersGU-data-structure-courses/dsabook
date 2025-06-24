@@ -14,7 +14,13 @@ collision resolution. In fact, linear probing is one of the worst
 collision resolution methods.
 
 ::: dsvis
-The main problem is illustrated by the next slideshow.
+#### Example: The problem with linear probing
+
+Recall how linear probing works:
+
+<inlineav id="linProbeCON1" src="Hashing/linProbeCON1.js" name="Linear Probing Slideshow 1" links="Hashing/linProbeCON.css"/>
+
+Now the problem is illustrated here:
 
 <inlineav id="linProbeCON2" src="Hashing/linProbeCON2.js" name="Linear Probing Slideshow 2" links="Hashing/linProbeCON.css"/>
 :::
