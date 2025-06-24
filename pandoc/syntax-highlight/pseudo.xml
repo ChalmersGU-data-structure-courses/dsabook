@@ -28,7 +28,7 @@
 	<!ENTITY formatString "(?:r?f|fr?)(?:'(?:[^'{]++|\\'|\{\{|\{[^}]++\})*+'|&quot;(?:[^&quot;]++|\\&quot;|\{\{|\{[^}]*+\})*+&quot;)">
 	<!ENTITY string "&rawString;|&formatString;">
 ]>
-<!-- Pseudocode syntax highlightning v0.01 by Peter Ljunglöf: 
+<!-- Pseudocode syntax highlightning v0.01 by Peter Ljunglöf:
 	* based on Python syntax but with some different keywords -->
 
 <!-- Python syntax highlightning v0.9 by Per Wigren -->
@@ -59,7 +59,6 @@
 			<item>define</item>
 			<item>function</item>
 			<item>constructor</item>
-			<item>method</item>
 			<item>global</item>
 			<item>lambda</item>
 			<item>datatype</item>
@@ -438,7 +437,7 @@
 			<!-- <context name="String Interpolation" attribute="String Substitution" lineEndContext="#stay">
 				<DetectChar attribute="Error" char="\" context="#pop"/>
 				<RegExpr attribute="String Substitution" String="&format_spec;\}" context="#pop"/>
-				<IncludeRules context="Normal"/> 
+				<IncludeRules context="Normal"/>
 			</context> -->
 
 
