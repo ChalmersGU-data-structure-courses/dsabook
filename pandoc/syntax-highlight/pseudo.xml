@@ -173,7 +173,6 @@
 
 			<!-- common functions -->
 			<item>abs</item>
-			<item>char</item>
 			<item>compare</item>
 			<item>enumerate</item>
 			<item>evaluate</item>
@@ -211,6 +210,7 @@
 			<item>false</item>
 			<item>super</item>
 			<item>this</item>
+			<item>DELETED</item>  <!-- this is used in hash tables -->
 		</list>
 		<!-- <list name="bindings"></list> -->
 		<!-- <list name="overloaders"></list> -->
