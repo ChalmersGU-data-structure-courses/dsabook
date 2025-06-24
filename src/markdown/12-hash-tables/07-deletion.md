@@ -11,7 +11,7 @@ considerations.
 1.  Deleting a record must not hinder later searches. In other words,
     the search process must still pass through the newly emptied slot to
     reach records whose probe sequence passed through this slot. Thus,
-    the delete process cannot simply mark the slot as empty, because
+    the delete process cannot simply clear the slot, because
     this will isolate records further down the probe sequence.
 2.  We do not want to make positions in the hash table unusable because
     of deletion. The freed slot should be available to a future
@@ -79,53 +79,63 @@ resized).
 
 ### Simple implementation of deletion
 
-Here is a simple implementation of deletion in a HashMap using
-tombstones.
+If we are implementing a map (and not a set), then we actually don't need to use a special value `DELETED` to represent the tombstone.
+Instead, since we are using two internal arrays (one for the keys and one for the values), there are actually two possible ways of storing empty entries.
+We use this to encode both empty slots and tombstones:
 
+-   If the *keys* cell is empty (`keys[i] is null`), then the slot is unoccupied.
+-   If the *values* cell is empy (`values[i] is null`), then the slot is a tombstone.
 
-    datatype OpenAddressingHashMap implements Map:
+So, when we remove an entry, we do not remove the key, but
+instead set the value to `null`. This will make the slot a tombstone.
+
+    datatype OpenAddressingHashMap:
         ...
         remove(key):
             i = hashAndProbe(key)
-            if keys[i] is null:  // The key isn't there
-                return null
-            removed = values[i].value
-            if removed is null:  // The key is already removed
-                return null
-            values[i] = null
-            size = size - 1
-            deleted = deleted + 1
-            if size < MIN_LOAD_FACTOR * keys.size:
-                resizeTable(keys.size / MULTIPLIER)
-            return removed
-
-
-Since we are using two internal arrays (one for the keys and one for the value),
-there are actually two possible ways of storing empty entries,
-and we use this to encode the tombstones:
-
--   If the keys cell is empty (`keys[i] is null`), then it is unoccupied.
--   If the values cell is empy (`values[i] is null`), then it is a tombstone.
-
-So, when we remove an entry, we do not remove the key, but
-instead set the value to `null`. This will make the cell a tombstone.
+            if keys[i] is not null and values[i] is not null:
+                // Make the slot a tombstone by setting the value to null.
+                values[i] = null
+                size = size - 1
+                if loadFactor() < MIN_LOAD_FACTOR:
+                    resizeTable(keys.size * MULTIPLIER)
 
 The current code has one problem: Adding new entries will never make use
-of the tombstones, but will only insert into completely empty cells. It
+of the tombstones, but will only insert into completely empty slots. It
 is possible to fix this by implementing a sligthly different version of
 `hashAndProbe`, which will only be used by the `put` method. This is
 left as an exercise to the reader.
 
 ### Two load factors
 
+There is however a bigger problem with our code above.
+When we remove keys we reduce the size of the hash table, but we haven't actually changed the number of occupied slot.
+Instead we turned a slot from having a value into a tombstone.
+So, the variable `size` -- which is the number $N$ of key/value pairs -- does not say how many slots are actually occupied.
+
+If we are very unlucky we might end up in a table that has a nice load factor, but where almost all slots are tombstones.
+But the table doesn't know this, so it will not try to resize and instead we will get a drop in performance.
+
+To make deletion work properly together with resizing, we have to keep track of *two* instance variables -- the number of occupied slots (`size`), and the number of tombstones:
+
+    datatype OpenAddressingHashMap implements Map:
+        keys = new Array(MIN_CAPACITY)
+        values = new Array(MIN_CAPACITY)
+        size = 0
+        tombstones = 0
+
+
 When we have tombstones in our table, there are two possible ways of
 thinking about the load factor -- depending on if we want to include
-the deleted cells or not. And both variants are useful!
+the tombstones or not. And both variants are useful!
 
 -   When adding elements, we need to know if there are too few
     completely empty slots left, giving the load factor $N + D / M$
-    (where $N$ is the number of occupied cells and $D$ the number of
-    tombstones).
+    (where $N$ is the number of occupied slots and $D$ the number of tombstones).
 -   When deleting elements, we need to know if there are too few
     occupied slots, giving the load factor $N / M$.
+
+All this combined result in slightly more complicated code for our methods.
+E.g., when deleting a key/value pair -- or rather, turning the slot into a tombstone -- we have to decrease the `size` variable, but we also have to increase the variable `tombstones`.
+
 
