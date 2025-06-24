@@ -20,9 +20,7 @@ successful search for the record during insertion should generate an
 error because two records with the same key are not allowed to be stored
 in the table).
 
-### Separate chaining
-
-### Open addressing
+### Analysis of open addressing
 
 When the hash table is empty, the first record inserted will always find
 its home position free. Thus, it will require only one record access to
@@ -54,12 +52,12 @@ the next slot on the probe sequence occupied is $(N(N-1))/(M(M-1))$. The
 probability of $i$ collisions is
 $(N(N-1) ... (N-i+1))/(M(M-1) ... (M-i+1))$. If $N$ and $M$ are large,
 then this is approximately $(N/M)^i$. The expected number of probes is
-one plus the sum over $i >= 1$ of the probability of $i$ collisions,
+one plus the sum over $i \geq 1$ of the probability of $i$ collisions,
 which is approximately
 
-$$
-1 + \sum_{i=1}^\infty (N/M)^i = 1/(1-\alpha)
-$$
+\begin{eqnarray}
+1 + \sum_{i=1}^\infty (N/M)^i &=& 1/(1-\alpha)
+\end{eqnarray}
 
 The cost for a successful search (or a deletion) has the same cost as
 originally inserting that record. However, the expected value for the
@@ -116,3 +114,18 @@ size accordingly. The goal should be to make the table small enough so
 that it does not waste a lot of space on the one hand, while making it
 big enough to keep performance good on the other.
 
+<!-- Alternative text, moved from analysis part 1
+This figure shows the cost for inserting or deleting a record from a hash table
+under two different assumptions for the policy used to find a free slot
+in the table. The $y$ axes is the cost in number of hash table slots
+evaluated, and the $x$ axes is the percentage of slots in the table that
+are full. The mathematical equations for these curves can be determined,
+but this is not so easy. A reasonable alternative is to write simple
+variations on hashing. By timing the cost of the program for various
+loading conditions, it is not difficult to construct a plot similar to
+this one. The purpose of this analysis was not to determine which
+approach to hashing is most efficient, so we are not doing empirical
+comparison of hashing alternatives. Instead, the purpose was to analyze
+the proper loading factor that would be used in an efficient hashing
+system to balance time cost versus hash table size (space cost).
+-->

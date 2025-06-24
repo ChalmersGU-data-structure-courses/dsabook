@@ -61,25 +61,3 @@ George Zipf observed already in 1932 that the relative frequency of the $n$-th m
 We can use this observation to simulate a number of large texts, which we then can use for making an empirical comparison between different sorting algorithms.
 :::
 
-
-<!-- Perhaps move the example to the Hashing chapter?
-
-A good example of this appears in the following figure.
-
-![Hashing analysis plot](images/hashplot.png){width=400}
-
-This figure shows the cost for inserting or deleting a record from a
-[hash table](#hashing)
-under two different assumptions for the policy used to find a free slot
-in the table. The $y$ axes is the cost in number of hash table slots
-evaluated, and the $x$ axes is the percentage of slots in the table that
-are full. The mathematical equations for these curves can be determined,
-but this is not so easy. A reasonable alternative is to write simple
-variations on hashing. By timing the cost of the program for various
-loading conditions, it is not difficult to construct a plot similar to
-this one. The purpose of this analysis was not to determine which
-approach to hashing is most efficient, so we are not doing empirical
-comparison of hashing alternatives. Instead, the purpose was to analyze
-the proper loading factor that would be used in an efficient hashing
-system to balance time cost versus hash table size (space cost).
--->
