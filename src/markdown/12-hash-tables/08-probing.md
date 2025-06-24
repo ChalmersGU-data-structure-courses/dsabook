@@ -39,7 +39,7 @@ still a very common probing method, because it is so simple and can be
 implemented efficiently.
 
 ::: dsvis
-TODO
+#### Exercise: Practice linear probing
 
 <avembed id="HashLinearPPRO" src="Hashing/HashLinearPPRO.html" type="ka" name="Linear Probing Proficiency Exercise"/>
 :::
@@ -55,7 +55,7 @@ $(\textbf{h}(K) + ic) \mod M$. In this way, records with adjacent home
 positions will not follow the same probe sequence.
 
 ::: dsvis
-TODO
+Example: linear probing by steps
 
 <inlineav id="collisionCON1" src="Hashing/collisionCON1.js" name="Linear Probing By Steps Slideshow 1" links="Hashing/collisionCON.css"/>
 :::
@@ -87,7 +87,7 @@ for any key. When $M = 11$, any value for $c$ between 1 and 10 generates
 a probe sequence that visits all slots for every key.
 
 ::: dsvis
-TODO
+Example: Using a relative prime step factor.
 
 <inlineav id="collisionCON2" src="Hashing/collisionCON2.js" name="Linear Probing By Steps Slideshow 2" links="Hashing/collisionCON.css"/>
 :::
@@ -129,7 +129,7 @@ position **Permutation\[0\]**, and stores a random permutation of the
 values from 1 to $M - 1$ in slots 1 to $M - 1$.
 
 ::: dsvis
-TODO
+Slideshow for pseudo-random probing
 
 <inlineav id="collisionCON3" src="Hashing/collisionCON3.js" name="Pseudo-Random Probing Slideshow" links="Hashing/collisionCON.css"/>
 :::
@@ -160,7 +160,7 @@ $c_2 = 0$, and $c_3 = 0$). Then the $i$ th value in the probe sequence
 would be $(\textbf{h}(K) + i^2) \mod M$.
 
 ::: dsvis
-TODO
+How quadratic probing works.
 
 <inlineav id="collisionCON5" src="Hashing/collisionCON5.js" name="Quadratic Probing Slideshow" links="Hashing/collisionCON.css"/>
 :::
@@ -175,7 +175,7 @@ There is one problem with quadratic probing: Its probe sequence
 typically will not visit all slots in the hash table.
 
 ::: dsvis
-TODO
+The problem with quadratic probing.
 
 <inlineav id="collisionCON6" src="Hashing/collisionCON6.js" name="Quadratic Probing Problem" links="Hashing/collisionCON.css"/>
 :::
@@ -235,7 +235,7 @@ hash table size is 101 (a prime number), than any step size less than
 
 This can be achieved easily. One way is to select $M$ to be a prime
 number, and have $\textbf{h}_2$ return a value in the range
-$1 <= \textbf{h}_2(k) <= M - 1$. We can do this by using this secondary
+$1 \leq \textbf{h}_2(k) \leq M - 1$. We can do this by using this secondary
 hash function: $\textbf{h}_2(k) = 1 + (k \mod (M-1))$. An alternative is
 to set $M = 2^m$ for some value $m$ and have $\textbf{h}_2$ return an
 odd value between 1 and $2^m$. We can get that result with this
@@ -272,19 +272,17 @@ table size. This is not a problem for typical hashing applications.
 :::
 
 ::: dsvis
-TODO
+Calculating the secondary hash when the table size ($M$) is prime.
 
 <inlineav id="collisionCON7" src="Hashing/collisionCON7.js" name="Double Hashing Slideshow 2" links="Hashing/collisionCON.css"/>
-:::
 
-::: dsvis
-TODO
+Secondary hash when the table size ($M$) is a power of 2.
 
 <inlineav id="collisionCON8" src="Hashing/collisionCON8.js" name="Double Hashing Slideshow 3" links="Hashing/collisionCON.css"/>
 :::
 
 ::: dsvis
-Now you can try it.
+Double hashing exercise.
 
 <avembed id="HashDoublePPRO" src="Hashing/HashDoublePPRO.html" type="ka" name="Double Hashing Proficiency Exercise"/>
 :::
