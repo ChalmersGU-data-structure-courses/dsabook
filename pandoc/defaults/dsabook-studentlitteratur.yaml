@@ -5,6 +5,14 @@ metadata:
   panflute-filters:
     - generic-filter
 
+variables:
+  babel-lang: english
+  documentclass: studentlitteratur
+  classoption:
+    - cmyk
+    - noparts
+    # - 170x245
+
 writer: pdf
 # pandoc --to=pdf --list-extensions
 
@@ -19,5 +27,9 @@ template: studentlitteratur.latex
 # If no extension is specified, an extension corresponding to the writer will be added,
 # so that --template=special looks for special.html for HTML output.
 
+top-level-division: chapter
+# Treat top-level headings as the given division type in LaTeX, ConTeXt, DocBook, and TEI output.
+# The hierarchy order is part, chapter, then section; all headings are shifted such that
+# the top-level heading becomes the specified type.
+
 table-of-contents: true
-toc-depth: 2

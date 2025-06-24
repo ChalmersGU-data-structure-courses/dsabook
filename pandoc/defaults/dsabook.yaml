@@ -44,5 +44,3 @@ filters:
   - pandoc-plot
   - panflute
   - pandoc-crossref
-
-top-level-division: chapter
