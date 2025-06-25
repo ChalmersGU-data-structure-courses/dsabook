@@ -211,14 +211,14 @@ figure {
 
 /* Highlighted blocks */
 
-.topic, .figure, .alert, .note, div.embedContainer, div.jsavcontainer {
+.topic, .example, .figure, .alert, .note, div.embedContainer, div.jsavcontainer {
     border-radius: var(--border-radius);
     border: 1px solid var(--border-color);
     margin: var(--block-margin) 0;
     padding: 0 var(--block-margin);
 }
 
-.figure, .topic, div.embedContainer, div.jsavcontainer {
+.figure, .topic, .example, div.embedContainer, div.jsavcontainer {
     background-color: var(--box-bgcolor);
 }
 
@@ -227,6 +227,11 @@ figure {
 }
 
 .topic .jsavcontainer {
+    background-color: transparent;
+    border: none;
+}
+
+.example .jsavcontainer {
     background-color: transparent;
     border: none;
 }

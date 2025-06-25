@@ -24,13 +24,24 @@ def make_details(elem):
     content = list(elem.content)
     assert len(content) >= 2
     elem.content = [
-        # Must be initially open, otherwise we get problems with the ODSA animations:
         pf.RawBlock('<details open="true">'),
         pf.RawBlock("<summary>"),
         content[0],
         pf.RawBlock("</summary>"),
     ] + content[1:] + [
         pf.RawBlock("</details>"),
+    ]
+    return elem
+
+
+def make_example(elem):
+    content = list(elem.content)
+    assert len(content) >= 2
+    title = pf.stringify(content[0]).strip()
+    elem.content = [
+        pf.RawBlock(f'\\begin{{fancybox}}[frametitle={title}]', format='latex'),
+    ] + content[1:] + [
+        pf.RawBlock('\\end{fancybox}', format='latex'),
     ]
     return elem
 
@@ -48,7 +59,9 @@ class_actions = {
     "chunkedhtml": {
         "dsvis": make_details,
     },
-    "latex": {},
+    "latex": {
+        "example": make_example,
+    },
 }
 
 tag_actions = {

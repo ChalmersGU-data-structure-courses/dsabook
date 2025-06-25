@@ -37,8 +37,8 @@ In such cases, it is often not possible to implement all operations efficiently,
 Additionally, one implementation may be more efficient for small datasets (thousands of elements), whereas another may scale better for large datasets (millions of elements).
 The most suitable data structure depends on the specific use case, and making informed and well-reasoned choices is one of the central goals of this book.
 
-::: topic
-#### Example: Collection of records
+::: example
+Collection of records
 
 A _database_ is a structured collection of data that can be easily accessed, managed, and updated.
 Each item in a database is typically called a _record_, which consists of multiple fields containing information—such as a name, an ID number, or an address.
