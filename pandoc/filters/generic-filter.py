@@ -39,7 +39,7 @@ def make_example(elem):
     assert len(content) >= 2
     title = pf.stringify(content[0]).strip()
     elem.content = [
-        pf.RawBlock(f'\\begin{{fancybox}}[frametitle={title}]', format='latex'),
+        pf.RawBlock(f'\\begin{{fancybox}}[frametitle={{{title}}}]', format='latex'),
     ] + content[1:] + [
         pf.RawBlock('\\end{fancybox}', format='latex'),
     ]
