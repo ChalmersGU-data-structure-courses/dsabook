@@ -90,9 +90,9 @@ We have a nested for loop, where the inner loop depends on the loop variable of 
 
 So the total number of iterations is
 
-\begin{eqnarray}
+\begin{eqnarray*}
 (n-1) + (n-2) + \cdots + 1 &=& \sum_{i=1}^{n-1} i
-\end{eqnarray}
+\end{eqnarray*}
 
 And this sum has the value $N(N-1)/2$, which means the runtime complexity is *quadratic*, $O(N^2)$.
 Note that this is regardless of how the initial array looks like, so bubble sort has the same best- and worst-case complexity.

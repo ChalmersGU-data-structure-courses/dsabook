@@ -15,10 +15,10 @@ But what is the complexity of the binary search algorithm?
 To find the worst-case cost of binary search, we can model the running time as a recurrence and then find the closed-form solution.
 Each recursive call to `binarySearch` cuts the size of the array approximately in half, so we can model the worst-case cost as follows, assuming for simplicity that $n$ is a power of two.
 
-\begin{eqnarray}
+\begin{eqnarray*}
 O(n) &=& O(n/2) + 1 \\
 O(1) &=& 1
-\end{eqnarray}
+\end{eqnarray*}
 
 If we expand the recurrence, we will find that we can do so only $\log n$ times before we reach the base case, and each expansion adds one to the cost.
 
@@ -29,9 +29,9 @@ If we expand the recurrence, we will find that we can do so only $\log n$ times 
 
 Thus, the closed form solution of $O(n) = O(n/2) + 1$ can be modeled by the summation
 
-\begin{eqnarray}
+\begin{eqnarray*}
 \sum_{i=0}^{\log n} 1 &\in& O(\log n)
-\end{eqnarray}
+\end{eqnarray*}
 
 ::: dsvis
 Here is a visual explanation of the complexity of binary search.

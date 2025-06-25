@@ -391,10 +391,10 @@ most one level. At each step up the tree we get half the number of nodes
 as were at the previous level, and an additional height of one. The
 maximum sum of total distances that elements can go is therefore
 
-\begin{eqnarray}
+\begin{eqnarray*}
 \sum_{i=1}^{\log n} (i-1)\frac{n}{2^i}
 &=& \frac{n}{2}\sum_{i=1}^{\log n} \frac{i-1}{2^{i-1}}
-\end{eqnarray}
+\end{eqnarray*}
 
 
 The summation on the right

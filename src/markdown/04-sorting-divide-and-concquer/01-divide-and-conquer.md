@@ -83,10 +83,10 @@ and the first two numbers in the sequence are both 1.
 
 Mathematically, the $n$th Fibonacci number is calculated recursively like this:
 
-\begin{eqnarray}
+\begin{eqnarray*}
 f(n) &=& f(n-1) + f(n-2) \\
 f(0) &=& f(1) \; = \; 1
-\end{eqnarray}
+\end{eqnarray*}
 
 The first row is the *recursive case*, and the second row defines the two *base cases*.
 This mathematical definition is easily translated into pseudocode:

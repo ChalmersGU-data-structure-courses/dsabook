@@ -184,9 +184,9 @@ Quicksort's worst case will occur when the pivot does a poor job of breaking the
 
 Thus, the total amount of work is determined by the summation:
 
-\begin{eqnarray}
+\begin{eqnarray*}
 \sum_{i=1}^{N} i &=& \frac{1}{2} N (N-1) \; \in \; O(N^2)
-\end{eqnarray}
+\end{eqnarray*}
 
 Therefore, the worst case running time of Quicksort is $O(N^2)$.
 
@@ -233,11 +233,11 @@ on.
 Given this assumption, the average-case cost is computed from the
 following equation:
 
-\begin{eqnarray}
+\begin{eqnarray*}
 T(n) &=& cn + \frac{1}{n}\sum_{k=0}^{n-1}[T(k) + T(n - 1 - k)]
 \\
 T(0) = T(1) &=& c
-\end{eqnarray}
+\end{eqnarray*}
 
 ::: dsvis
 This visualization will help you to understand how this recurrence

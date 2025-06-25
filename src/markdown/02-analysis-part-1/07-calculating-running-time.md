@@ -195,9 +195,9 @@ through the outer loop, $j$ becomes one greater, until the last time
 through the loop when $j = n$. Thus, the total cost of the loop is $c_3$
 times the sum of the integers 1 through $n$. We know that
 
-\begin{eqnarray}
+\begin{eqnarray*}
 \sum_{i = 1}^{n} i &=& \frac{n (n+1)}{2}
-\end{eqnarray}
+\end{eqnarray*}
 
 which is $O(n^2)$. By simplifying rule (3),
 $O(c_1 + c_2 n + c_3 n^2)$ is simply $O(n^2)$.
@@ -244,9 +244,9 @@ To make our analysis easier, we will assume that $n$ is a power of two.
 The code fragment has its outer `for` loop executed $\log n+1$ times because on each iteration $k$ is multiplied by two until it reaches $n$.
 Now, because the inner loop always executes $n$ times, the total cost for can be expressed as
 
-\begin{eqnarray}
+\begin{eqnarray*}
 \sum_{i=0}^{\log n} n &=& n \log n
-\end{eqnarray}
+\end{eqnarray*}
 
 So the cost of this double loop is $O(n \log n)$.
 Note that the summation variable $i$ is the logarithm of the loop variable $k$, i.e. $k = 2^i$.
@@ -283,9 +283,9 @@ The rules of thumb gives us the same complexity as before, $O(n \log n)$, but a 
 The outer loop is executed $\log n+1$ times, and the inner loop has cost $k$, which doubles each time.
 This can be expressed as the following summation, where $n$ is assumed to be a power of two and again $k = 2^i$.
 
-\begin{eqnarray}
+\begin{eqnarray*}
 1 + 2 + 4 + \cdots + \log n &=& \sum_{i=0}^{\log n} 2^i
-\end{eqnarray}
+\end{eqnarray*}
 
 Now, as mentioned in section XX (*math prelim. summation*), this summation has a closed form solution
 $2^{\log n + 1} - 1 = 2n - 1$.
@@ -337,10 +337,10 @@ recursive call on the smaller input. Because the base case does no
 multiplications, its cost is zero. Thus, the running time for this
 function can be expressed as
 
-\begin{eqnarray}
+\begin{eqnarray*}
 T(n) &=& T(n-1) + 1, \textrm{ for } n>1 \\
 T(1) &=& 0
-\end{eqnarray}
+\end{eqnarray*}
 
 The closed-form solution for this recurrence relation is $O(n)$.
 Recurrence relations are discussed further in section XX (chapter: analysis part 3).
