@@ -39,6 +39,19 @@ $endif$
 \setsecnumdepth{subsection}
 \settocdepth{section}
 
+%% No paragraph indentation after some environments
+\usepackage{noindentafter}
+\NoIndentAfterEnv{itemize}
+\NoIndentAfterEnv{enumerate}
+\NoIndentAfterEnv{description}
+\NoIndentAfterEnv{Shaded}
+\NoIndentAfterEnv{eqnarray}
+\NoIndentAfterEnv{eqnarray*}
+\NoIndentAfterEnv{equation}
+\NoIndentAfterEnv{equation*}
+\NoIndentAfterEnv{align}
+\NoIndentAfterEnv{align*}
+
 $font-settings.latex()$
 $common.latex()$
 
