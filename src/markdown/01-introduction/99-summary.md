@@ -1,3 +1,5 @@
+::: html
+
 ## Chapter summary
 
 This chapter introduced the role of data structures and algorithms in computer science and software development.
@@ -234,3 +236,5 @@ Which of these is NOT one of the three standard steps to follow when selecting a
 ::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::
