@@ -42,6 +42,9 @@ $endif$
 $font-settings.latex()$
 $common.latex()$
 
+%% Fonts and colors
+\renewcommand{\colsubsection}{black}  % we don't want the spot color in subsections
+
 %% Font settings for code blocks
 %% The commented ones are Pandoc's default settings
 \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},fontsize=\footnotesize}
