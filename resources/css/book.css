@@ -205,9 +205,11 @@ td {
 
 figure {
     text-align: center;
-    font-style: italic;
 }
 
+figcaption {
+    font-style: italic;
+}
 
 /* Highlighted blocks */
 
