@@ -4,10 +4,10 @@
 - Prio 3: update quizzes
 :::
 
-## Review questions
-
-:::::: latex
-\booklink{Answer quiz online}{8.6-review-questions.html}
-::::::
+## Review questions {#ch08-review}
 
 This final section contains some review questions about the contents of this chapter.
+
+:::::: latex
+\booklink{Answer quiz online}{section-8.6.html}
+::::::

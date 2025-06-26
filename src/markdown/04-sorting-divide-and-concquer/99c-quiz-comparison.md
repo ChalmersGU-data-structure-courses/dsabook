@@ -1,6 +1,6 @@
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
-### Review questions: Comparison of sorting algorithms {-}
+### Review questions: Comparison of sorting algorithms
 
 Here are a few multiple choice questions that ask you to compare the
 sorting algorithms that we learned about in the last two chapters.

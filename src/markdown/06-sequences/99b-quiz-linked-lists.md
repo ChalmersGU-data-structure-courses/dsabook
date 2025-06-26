@@ -1,6 +1,6 @@
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
-### Review questions: Linked lists {-}
+### Review questions: Linked lists
 
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.

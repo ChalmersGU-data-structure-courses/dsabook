@@ -1,6 +1,6 @@
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
-### Review questions: Binary search trees {-}
+### Review questions: Binary search trees
 
 
 :::::::::: question ::::::::::

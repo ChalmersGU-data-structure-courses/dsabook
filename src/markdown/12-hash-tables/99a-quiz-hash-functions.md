@@ -1,6 +1,6 @@
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
-### Review questions: Hash functions {-}
+### Review questions: Hash functions
 
 
 :::::::::: question ::::::::::

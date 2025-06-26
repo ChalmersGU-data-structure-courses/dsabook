@@ -1,6 +1,6 @@
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
-### Review questions: Mergesort {-}
+### Review questions: Mergesort
 
 
 :::::::::: question ::::::::::

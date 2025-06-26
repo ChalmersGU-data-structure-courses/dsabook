@@ -1,6 +1,6 @@
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
-### Review questions: Introduction {-}
+### Review questions: Introduction
 
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.

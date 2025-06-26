@@ -1,6 +1,6 @@
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
-### Review questions: Bubble sort {-}
+### Review questions: Bubble sort
 
 Here are some review questions to check your understanding of Bubble sort.
 

@@ -1,6 +1,8 @@
 
-## Chapter summary
+## Review questions {#ch13-review}
 
-::: TODO
-- Prio 2: add summary text
-:::
+This final section contains some review questions about the contents of this chapter.
+
+:::::: latex
+\booklink{Answer quiz online}{section-13.11.html}
+::::::

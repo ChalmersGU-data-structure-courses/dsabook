@@ -1,6 +1,6 @@
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
-### Review questions: Heapsort {-}
+### Review questions: Heapsort
 
 
 :::::::::: question ::::::::::

@@ -1,6 +1,6 @@
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
-### Review questions: Graph terminology {-}
+### Review questions: Graph terminology
 
 
 :::::::::: question ::::::::::

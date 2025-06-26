@@ -1,6 +1,6 @@
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
-### Review questions: Quicksort {-}
+### Review questions: Quicksort
 
 
 :::::::::: question ::::::::::

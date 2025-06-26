@@ -1,6 +1,6 @@
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
-### Review questions: Asymptotic notations {-}
+### Review questions: Asymptotic notations
 
 
 :::::::::: question ::::::::::

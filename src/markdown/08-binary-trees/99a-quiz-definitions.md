@@ -1,6 +1,6 @@
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
-### Review questions: Binary tree definition {-}
+### Review questions: Binary tree definition
 
 
 :::::::::: question ::::::::::

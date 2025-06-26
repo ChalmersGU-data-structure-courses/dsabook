@@ -1,6 +1,6 @@
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
-### Review questions: Binary heaps {-}
+### Review questions: Binary heaps
 
 
 :::::::::: question ::::::::::

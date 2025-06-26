@@ -1,6 +1,6 @@
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
-### Review questions: Hash tables {-}
+### Review questions: Hash tables
 
 
 :::::::::: question ::::::::::

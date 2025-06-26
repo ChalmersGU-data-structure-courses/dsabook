@@ -1,6 +1,6 @@
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
-### Review questions: Analyzing problems {-}
+### Review questions: Analyzing problems
 
 
 :::::::::: question ::::::::::
