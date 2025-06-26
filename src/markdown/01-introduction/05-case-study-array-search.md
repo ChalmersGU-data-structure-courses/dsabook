@@ -40,7 +40,7 @@ case for sequential search has
 this reason, the sequential search algorithm is sometimes called
 [linear search]{.term}.
 
-### Binary search
+### Binary search {#sec:binary-search}
 
 ::: TODO
 - Use a range, not a slice

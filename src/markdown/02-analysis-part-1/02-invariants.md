@@ -11,7 +11,7 @@ Invariants can be more or less detailed, but if we make them too detailed they m
 Therefore we will keep them on a quite high level, in line with our decision to present algorithms in high-level pseudocode.
 We trust that you, the reader, is experienced enough to translate both pseudocode and invariants into more detailed descriptions.
 
-### Preconditions and postconditions
+#### Preconditions and postconditions
 
 Invariants can often be formulated as preconditions and postconditions on an algorithm:
 what do we assume of the inputs to the algorithm, and what can we promise about the output if the input is well-formed?
@@ -22,24 +22,22 @@ These specific pre- and postconditions are perhaps too obvious, so we usually do
 
 Keeping in line with our high-level approach, we often don't formulate specific pre- and postconditions, but instead write more abstract invariants.
 
-### Example: Binary search
+::: example
+Example: Binary search
 
-In section XX we introduced binary search. What kind of invariants can be useful to understand the algorithm better?
+In [Section @sec:binary-search] we introduced binary search. What kind of invariants can be useful to understand the algorithm better?
 A precondition is of course that the array is sorted, but this is so obvious that we don't have to spell it out.
 
 More interesting is to look into the algorithm itself.
-Binary search consists of a loop which updates two variables, $\mathit{low}$ and $\mathit{high}$.
+Binary search consists of a loop which updates two variables, `low` and `high`.
 So, can we say something about these variables?
 
-Yes, we can say that after each iteration of the binary search loop, we know that the value we search for lies between the cells pointed to by $\mathit{low}$ and $\mathit{high}$ (if it's in the array at all).
+Yes, we can say that after each iteration of the binary search loop, we know that the value we search for lies between the cells pointed to by `low` and `high` (if it's in the array at all).
 This means that we can formulate the following invariants:
 
-::: topic
-#### Binary search invariants
-
-- When searching for $v$ in a sorted array $A$, then $A[\mathit{low}] \leq v \leq A[\mathit{high}]$ after each iteration of the main loop.
-- The interval $\mathit{high}-\mathit{low}$ strictly decreases in each iteration.
-
-:::
+- When searching for `v` in a sorted array `arr`, then `arr[low]` $\leq$ `v` $\leq$ `arr[high]` after each iteration of the main loop.
+- The interval `high` - `low` strictly decreases in each iteration.
 
 Knowing these invariants, it becomes much easier to convince ourselves that the algorithm is correct and always terminates.
+
+:::

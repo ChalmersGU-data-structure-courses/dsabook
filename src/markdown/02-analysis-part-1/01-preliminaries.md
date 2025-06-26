@@ -4,7 +4,7 @@
 Programmers commonly deal with *problems*, *algorithms*, and computer *programs*.
 These are three distinct concepts.
 
-### Problems
+#### Problems
 
 As your intuition would suggest, a [problem]{.term} is a task to be performed. It is best thought of in terms
 of inputs and matching outputs. A problem definition should not include
@@ -50,7 +50,7 @@ process beyond the user's control). The limits to what functions can be
 implemented by programs is part of the domain of
 [Computability]{.term}.
 
-### Algorithms
+#### Algorithms
 
 An [algorithm]{.term} is a method or a process
 followed to solve a problem. If the problem is viewed as a function,
@@ -62,19 +62,19 @@ This book covers many problems, and for several of these problems we will see mo
 For the important problem of sorting there are over a dozen commonly used algorithms!
 
 The advantage of knowing several solutions to a problem is that solution
-$\mathbf{A}$ might be more efficient than solution $\mathbf{B}$ for a
+$\mathbf{A}$ might be more efficient than solution $\mathbf{B}$ for 
 specific variation of the problem, or for a specific class of inputs to
 the problem, while solution $\mathbf{B}$ might be more efficient than
 $\mathbf{A}$ for another variation or class of inputs. For example, one
 sorting algorithm might be the best for sorting a small collection of
-integers (which is important if you need to do this many times). Another
+integers (which is important if you need to do this many times). ther
 might be the best for sorting a large collection of integers. A third
 might be the best for sorting a collection of variable-length strings.
 
 By definition, something can only be called an algorithm if it has all
 of the following properties:
 
-1.  It must be *correct*. In other words, it must compute the desired
+1.  It must be *correct*. In other words, it must implement the desired
     function, converting each input to the correct output. Note that
     every algorithm implements some function, because every algorithm
     maps every input to some output (even if that output is a program
@@ -91,12 +91,10 @@ of the following properties:
     a cookie recipe in a cookbook might be considered sufficiently
     concrete for instructing a human cook, but not for programming an
     automated cookie-making factory.
-3.  There can be *no ambiguity* as to which step will be performed next.
-    Often it is the next step of the algorithm description. Selection
-    (e.g., the `if` statement) is normally a part of any language for
-    describing algorithms. Selection allows a choice for which step will
-    be performed next, but the selection process is unambiguous at the
-    time when the choice is made.
+3.  There must be *no ambiguity* about which step is performed next.
+    Typically, the next step follows directly from the algorithm’s description.
+    When the algorithm includes selection mechanisms, such as `if`-statements, these allow for alternative execution paths. 
+    However, the choice of which path to follow must always be unambiguous at the moment the decision is made.
 4.  It must be composed of a *finite* number of steps. If the
     description for the algorithm were made up of an infinite number of
     steps, we could never hope to write it down, nor implement it as a
@@ -109,7 +107,7 @@ of the following properties:
 5.  It must *terminate* for the intended input.
     In other words, it may not go into an infinite loop.
 
-### Programs
+#### Programs
 
 We often think of a computer [program]{.term} as
 an instance, or concrete representation, of an algorithm in some
@@ -134,8 +132,6 @@ which terminates once its output is produced.
 
 In this book we will usually present algorithms and not programs.
 We assume that you as the reader is competent enough to be able to translate our descriptions and pseudocode into working programs in your favourite language.
-
-### Summary
 
 To summarize: A [problem]{.term} is a function
 or a mapping of inputs to outputs. An [algorithm]{.term} is a recipe for solving a problem whose steps are concrete
