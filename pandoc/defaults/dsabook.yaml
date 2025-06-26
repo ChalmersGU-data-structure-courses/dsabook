@@ -10,6 +10,22 @@ metadata:
 
   date: 2016–2025
 
+  # Settings for panflute:
+  panflute-path: pandoc/filters
+  panflute-filters:
+    - generic-filter
+
+  # Settings for pandoc-crossref:
+  chapters: true
+  linkReferences: true
+  autoSectionLabels: true
+  figPrefix: ""
+  eqnPrefix: ""
+  tblPrefix: ""
+  lstPrefix: ""
+  secPrefix: ""
+
+
 variables:
   lang: en-GB
 

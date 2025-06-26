@@ -1,13 +1,5 @@
 # yaml-language-server: $schema=https://json.schemastore.org/yamllint.json
 
-metadata:
-  # Settings for panflute:
-  panflute-path: pandoc/filters
-  panflute-filters:
-    - generic-filter
-  # Settings for pandoc-crossref:
-  chapters: true
-
 writer: chunkedhtml
 # pandoc --to=chunkedhtml --list-extensions
 
@@ -37,8 +29,9 @@ toc-depth: 3
 
 html-math-method:
   method: mathml
-# Convert TeX math to MathML (in epub3, docbook4, docbook5, jats, html4 and html5).
-# MathML is supported natively by the main web browsers and select e-book readers.
+  # method: MathJax
+  # method: katex
+# Convert TeX math to MathML, MathJax, or KaTeX.
 
 section-divs: true
 # Wrap sections in <section> tags, and attach identifiers to the enclosing <section> rather than the heading itself.
@@ -46,7 +39,7 @@ section-divs: true
 split-level: 2
 # Specify the heading level at which to split an EPUB or chunked HTML document into separate files.
 
-chunk-template: "%s-%i.html"
+chunk-template: "section-%s.html"
 # Specify a template for the filenames in a chunkedhtml document.
 # In the template, %n will be replaced by the chunk number (padded with leading 0s to 3 digits),
 # %s with the section number of the chunk, %h with the heading text (with formatting removed),
@@ -85,6 +78,6 @@ include-in-header:
 # columns: NUMBER
 # Specify length of lines in characters. This affects text wrapping in the generated source code
 
-# strip-comments: true
+strip-comments: true
 # Strip out HTML comments in the Markdown or Textile source, rather than passing them on
 
