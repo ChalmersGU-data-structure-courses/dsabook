@@ -16,8 +16,9 @@ Linked queue -- introduction.
 <inlineav id="LinkedQueue-Intro-CON" src="ChalmersGU/LinkedQueue-Intro-CON.js" name="Linked Queue Intro" links="ChalmersGU/CGU-Styles.css"/>
 :::
 
+<!--
 ### Invariants
-
+ -->
 
 ### Enqueueing elements
 

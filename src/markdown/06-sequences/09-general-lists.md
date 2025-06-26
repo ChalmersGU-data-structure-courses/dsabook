@@ -90,8 +90,9 @@ There are two standard approaches to implementing lists, the
 [array-based list](#static-array-based-lists), and the
 [linked list](#linked-lists).
 
-
+<!--
 ### Invariants
+ -->
 
 
 ### Linked lists

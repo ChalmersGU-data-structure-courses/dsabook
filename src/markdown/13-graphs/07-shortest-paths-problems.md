@@ -55,4 +55,7 @@ because the graph is directed. We assume that all weights are positive.
 Example graph for shortest-path definitions.
 ::::
 
+<!--
 ### Use cases
+ -->
+

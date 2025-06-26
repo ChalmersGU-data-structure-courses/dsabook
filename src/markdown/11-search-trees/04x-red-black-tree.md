@@ -1,4 +1,5 @@
 
+<!--
 ## Red-black trees
 
 ::: TODO
@@ -209,3 +210,5 @@ Here is an implementation of red-black trees:
             // We also swap x's and y's colours
             y.isRed, x.isRed = isRed(x), isRed(y)
             return y
+
+-->

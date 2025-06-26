@@ -121,7 +121,7 @@ Tight bound
 : $f$ is a lower bound of $g$ **iff** both functions grow *at the same rate*, and we write this $f\in\Theta(g)$
 
 
-#### Defining orders of growth
+### Defining orders of growth
 
 How do we define upper and lower bounds?
 First, if $g$ is an upper bound of $f$, then this should mean something like $f(n)\leq g(n)$ *in the long run*.
@@ -172,7 +172,7 @@ Note that there are plenty of possible values to choose from, such as $k=1$ and 
 We can even use very large values such as $k=n_0=10^{99}$, what we are interested in is after all what happens when $n$ grows infinitly large.
 :::
 
-#### Should we use $O$, $\Omega$ or $\Theta$?
+### Should we use $O$, $\Omega$ or $\Theta$?
 
 If an algorithm has a lower bound of $\Omega(f)$, we know that it will never run asymptotically faster than $f$.
 But this is usually not very useful knowledge, because we are more interested in knowing how the algorithm works on on bad inputs.

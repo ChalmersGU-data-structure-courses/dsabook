@@ -7,7 +7,7 @@
 - Prio 3: write about alternative approaches, infinite graphs
 :::
 
-### ADT: Graphs
+### ADT for graphs
 
 We next turn to the problem of implementing a general-purpose
 [graph]{.term} class. There are two traditional

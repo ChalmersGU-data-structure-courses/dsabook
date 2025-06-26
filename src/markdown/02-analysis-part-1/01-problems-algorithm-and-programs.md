@@ -4,7 +4,7 @@
 Programmers commonly deal with *problems*, *algorithms*, and computer *programs*.
 These are three distinct concepts.
 
-#### Problems
+### Problems
 
 As your intuition would suggest, a [problem]{.term} is a task to be performed. It is best thought of in terms
 of inputs and matching outputs. A problem definition should not include
@@ -50,7 +50,7 @@ process beyond the user's control). The limits to what functions can be
 implemented by programs is part of the domain of
 [Computability]{.term}.
 
-#### Algorithms
+### Algorithms
 
 An [algorithm]{.term} is a method or a process
 followed to solve a problem. If the problem is viewed as a function,
@@ -62,7 +62,7 @@ This book covers many problems, and for several of these problems we will see mo
 For the important problem of sorting there are over a dozen commonly used algorithms!
 
 The advantage of knowing several solutions to a problem is that solution
-$\mathbf{A}$ might be more efficient than solution $\mathbf{B}$ for 
+$\mathbf{A}$ might be more efficient than solution $\mathbf{B}$ for
 specific variation of the problem, or for a specific class of inputs to
 the problem, while solution $\mathbf{B}$ might be more efficient than
 $\mathbf{A}$ for another variation or class of inputs. For example, one
@@ -93,7 +93,7 @@ of the following properties:
     automated cookie-making factory.
 3.  There must be *no ambiguity* about which step is performed next.
     Typically, the next step follows directly from the algorithm’s description.
-    When the algorithm includes selection mechanisms, such as `if`-statements, these allow for alternative execution paths. 
+    When the algorithm includes selection mechanisms, such as `if`-statements, these allow for alternative execution paths.
     However, the choice of which path to follow must always be unambiguous at the moment the decision is made.
 4.  It must be composed of a *finite* number of steps. If the
     description for the algorithm were made up of an infinite number of
@@ -107,7 +107,7 @@ of the following properties:
 5.  It must *terminate* for the intended input.
     In other words, it may not go into an infinite loop.
 
-#### Programs
+### Programs
 
 We often think of a computer [program]{.term} as
 an instance, or concrete representation, of an algorithm in some

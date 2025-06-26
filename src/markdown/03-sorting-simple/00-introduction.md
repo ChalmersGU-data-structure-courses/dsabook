@@ -1,5 +1,5 @@
 
-# Sorting, part 1: Simple algorithms
+# Sorting, part 1: Simple algorithms {#sorting-simple}
 
 We have seen that, when an array is sorted in ascending order, *binary
 search* can be used to find items in it efficiently. But what about when

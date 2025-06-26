@@ -1,4 +1,5 @@
 
+<!--
 ## Best-first search: Using a heuristics to guide the way
 
 ::: TODO
@@ -11,4 +12,4 @@
 ### Greedy best-first
 
 ### A*
-
+ -->

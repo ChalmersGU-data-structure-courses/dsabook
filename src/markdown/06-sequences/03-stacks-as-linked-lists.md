@@ -42,9 +42,9 @@ Our data type for linked stacks contains two instance variables, one pointer to 
         top: Node = null   // Pointer to top of stack
         size: Int = 0      // Size of stack
 
-
+<!--
 ### Invariants
-
+ -->
 
 ### Push to a linked stack
 

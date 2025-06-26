@@ -72,6 +72,7 @@ TODO
 <avembed id="KruskalPE" src="Graph/KruskalPE.html" type="pe" name="Kruskal's Algorithm Proficiency Exercise"/>
 :::
 
+<!--
 ### Invariants
-
+ -->
 

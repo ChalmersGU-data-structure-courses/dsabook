@@ -33,7 +33,7 @@ preceding pass. Here is an implementation:
 
 
 ::::: online :::::
-### Bubble sort visualisation
+#### Bubble sort visualisation
 
 ::: note
 Note that to make the explanation for the sorting algorithms as

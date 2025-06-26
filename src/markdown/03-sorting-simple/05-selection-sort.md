@@ -40,7 +40,7 @@ smallest, and so on.
 That version of Selection sort would behave very similar to our Bubble sort implementation, except that rather than repeatedly swapping adjacent values to get the next-largest element into place, it instead remembers the position of the element to be selected and does one swap at the end.
 
 :::::::: online
-### Selection sort visualisation
+#### Selection sort visualisation
 
 ::: dsvis
 Consider the example of the following array.

@@ -1,17 +1,20 @@
 
 ## Invariants, preconditions, and postconditions
 
-When we formulate a problem, and describe a data structure or an algorithm, it is very useful to formulate *invariants*.
-Simply formulated, an invariant is a condition (or a set of conditions) that must always hold for your data structure, or algorithm.
+When we formulate a problem, and describe a data structure or an algorithm, it is useful to describe them in terms of invariants, or pre- and postconditions.
 
-Invariants are a very useful tool for analyzing the correctness of an algorithm.
-But they are also a pedagogical tool, they help our understanding how an data structure or algorithm works.
+These properties are very useful tools for analyzing the correctness of an algorithm.
+But they are also pedagogical tools, they help our understanding how an data structure or algorithm works.
+
+### Invariants
+
+Simply formulated, an invariant is a condition (or a set of conditions) that must always hold for your data structure, or algorithm.
 
 Invariants can be more or less detailed, but if we make them too detailed they might be a hinder for our understanding.
 Therefore we will keep them on a quite high level, in line with our decision to present algorithms in high-level pseudocode.
 We trust that you, the reader, is experienced enough to translate both pseudocode and invariants into more detailed descriptions.
 
-#### Preconditions and postconditions
+### Preconditions and postconditions
 
 Invariants can often be formulated as preconditions and postconditions on an algorithm:
 what do we assume of the inputs to the algorithm, and what can we promise about the output if the input is well-formed?
@@ -23,9 +26,9 @@ These specific pre- and postconditions are perhaps too obvious, so we usually do
 Keeping in line with our high-level approach, we often don't formulate specific pre- and postconditions, but instead write more abstract invariants.
 
 ::: example
-Example: Binary search
+#### Example: Binary search
 
-In [Section @sec:binary-search] we introduced binary search. What kind of invariants can be useful to understand the algorithm better?
+In section @sec:binary-search we introduced binary search. What kind of invariants can be useful to understand the algorithm better?
 A precondition is of course that the array is sorted, but this is so obvious that we don't have to spell it out.
 
 More interesting is to look into the algorithm itself.

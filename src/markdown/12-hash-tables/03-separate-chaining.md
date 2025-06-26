@@ -136,7 +136,7 @@ There are of course some more details one has to take care of to get a working i
 For example, we have not discussed how to calculate the size of the hash table, i.e., the total number of elements.
 We have also not discussed how to handle bins that are not initialised yet.
 
-#### Load factor and resizing
+### Load factor and resizing
 
 The efficiency of a hash table depends on two factors:
 

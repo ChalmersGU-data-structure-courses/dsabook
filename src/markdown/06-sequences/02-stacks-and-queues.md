@@ -50,7 +50,9 @@ removed, an element is said to be [popped](#pop){.term} from the stack. Here is 
 
 There are two main approaches to implementing stacks: the [array-based stack]{.term} and the [linked stack]{.term}.
 
+<!--
 #### Invariants
+ -->
 
 
 ### Queues
@@ -63,8 +65,9 @@ This section presents two implementations for queues: the [array-based queue]{.t
         dequeue() -> T   // Dequeues the frontmost element.
         peek() -> T      // Returns the frontmost element, without removing it.
 
-
+<!--
 #### Invariants
+ -->
 
 
 ### Case study: Implementing recursion
@@ -244,6 +247,6 @@ operations executed by the recursive version. However, these operations
 must be placed on the stack in reverse order, so that they will be
 popped off in the correct order.
 
-
+<!--
 ### Use cases for queues
-
+ -->

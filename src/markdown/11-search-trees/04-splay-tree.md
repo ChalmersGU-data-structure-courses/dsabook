@@ -47,9 +47,9 @@ rotation moves $S$ higher in the tree by adjusting its position with
 respect to its parent and grandparent. A side effect of the rotations is
 a tendency to balance the tree. There are three types of rotation.
 
-
+<!--
 ### Invariants
-
+ -->
 
 ### Splaying
 

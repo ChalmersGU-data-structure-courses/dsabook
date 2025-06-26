@@ -23,8 +23,9 @@ Array stack -- top position.
 <inlineav id="DynamicArrayStack-Top-CON" src="ChalmersGU/DynamicArrayStack-Top-CON.js" name="Array stack top position slideshow" links="ChalmersGU/CGU-Styles.css"/>
 :::
 
+<!--
 ### Invariants
-
+ -->
 
 ### Pushing to the stack
 

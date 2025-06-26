@@ -1,5 +1,5 @@
 
-#### Collections
+## Collections
 
 A _collection_ is a general term for structures like lists and queues.
 It holds multiple elements and supports two main operations: checking the number of elements and iterating through them one at a time.
@@ -18,7 +18,7 @@ Note that this very interface will not be implemented as it is, but
 instead we will use this as a base interface that we extend in different
 ways, e.g., for lists or sets or priority queues.
 
-#### What is a sequence?
+### What is a sequence?
 
 We all have an intuitive understanding of what we mean by a "list". We
 want to turn this intuitive understanding into a concrete data structure

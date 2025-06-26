@@ -21,9 +21,9 @@ practical, we must be able to implement the revised update routines in
 $O(\log n)$ time. To maintain the balance property, we are going to
 use what are called [rotations](#rotation){.term}.
 
-
+<!--
 ### Invariants
-
+ -->
 
 ### Rotations
 

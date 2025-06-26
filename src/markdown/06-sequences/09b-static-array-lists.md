@@ -72,7 +72,7 @@ which means that both require $O(1)$ time.
             internalArray[i] = x
 
 
-### Adding elements
+#### Adding elements
 
 Because the array-based list implementation is defined to store list
 elements in contiguous cells of the array, the `add` and `remove`
@@ -118,7 +118,7 @@ TODO
 <avembed id="StaticArrayList-Add-PRO" src="ChalmersGU/StaticArrayList-Add-PRO.html" type="ka" name="Array-based List Add Exercise"/>
 :::
 
-### Removing elements
+#### Removing elements
 
 Removing an element from the head of the list is similar to adding in
 the sense that all remaining elements must shift. But now we have to
@@ -155,17 +155,18 @@ TODO
 <avembed id="StaticArrayList-Remove-PRO" src="ChalmersGU/StaticArrayList-Remove-PRO.html" type="ka" name="Array-based List Remove Exercise"/>
 :::
 
-
+<!--
 ### Limitations
 
 ::: TODO
 - What happens when the capacity is exceeded? See section X about dynamic arrays
 :::
+ -->
 
-
-
+<!--
 ### Alternative approaches
 
 ::: TODO
 - alternative interface
 :::
+-->

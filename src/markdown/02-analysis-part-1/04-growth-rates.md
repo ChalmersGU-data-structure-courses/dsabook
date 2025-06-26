@@ -133,7 +133,7 @@ benefit in terms of larger problem size that can run in a certain time
 on the new computer.
 
 
-#### Growth rates
+### Growth rates
 
 The [growth rate]{.term} for an algorithm is the
 rate at which the cost of the algorithm grows as the size of its input

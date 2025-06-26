@@ -1,5 +1,5 @@
 
-# Graphs {#chap-graphs}
+# Graphs
 
 ::: TODO
 - Prio 2: move parts of this text to the 1st section
