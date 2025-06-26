@@ -13,12 +13,43 @@ children can be empty. Binary tree nodes typically contain a value
 field, with the type of the field depending on the application. The most
 common node implementation includes a value field and pointers to the
 two children.
+[Figure @fig:bintree_with_pointers] is an illustration of how the tree from [figure @fig:example_bintree] looks like, where the child pointers are shown explicitly.
 
-Here is a simple implementation for binary tree nodes. When we need to
-support search structures such as the
-[Binary Search Tree]{.term}, the node will typically store a
-[key-value pair]{.term}. Every `BinaryNode` object also has two pointers, one to
-its left child and another to its right child.
+<div id="fig:bintree_with_pointers">
+
+::: latex
+\begin{tikzpicture}
+\tikzstyle{every node}=[rectangle split, rectangle split horizontal, rectangle split parts=3, draw]
+\node (A) {\nodepart{second} A};
+\node (B) [below left  = 5mm and 15mm of A] {\nodepart{second} B};
+\node (C) [below right = 5mm and 15mm of A] {\nodepart{second} C};
+\node (D) [below right = 5mm and  0mm of B] {\nodepart{second} D};
+\node (E) [below left  = 5mm and  0mm of C] {\nodepart{second} E};
+\node (F) [below right = 5mm and  0mm of C] {\nodepart{second} F};
+\node (G) [below left  = 5mm and  0mm of E] {\nodepart{second} G};
+\node (H) [below left  = 5mm and  0mm of F] {\nodepart{second} H};
+\node (I) [below right = 5mm and  0mm of F] {\nodepart{second} I};
+
+\draw[*->] ($(A.one)   + (0.2,0.1)$) -- (B);
+\draw[*->] ($(A.three) + (0.0,0.1)$) -- (C);
+\draw[*->] ($(B.three) + (0.0,0.1)$) -- (D);
+\draw[*->] ($(C.one)   + (0.2,0.1)$) -- (E);
+\draw[*->] ($(C.three) + (0.0,0.1)$) -- (F);
+\draw[*->] ($(E.one)   + (0.2,0.1)$) -- (G);
+\draw[*->] ($(F.one)   + (0.2,0.1)$) -- (H);
+\draw[*->] ($(F.three) + (0.0,0.1)$) -- (I);
+\end{tikzpicture}
+:::
+
+::: online
+<inlineav id="BTnullpointerCON" src="Binary/BTnullpointerCON.js" name="Binary/BTnullpointerCON" links="Binary/BTCON.css Binary/BTnullpointerCON.css" static/>
+:::
+
+Illustration of a typical pointer-based binary tree implementation, where each node stores two child pointers and a value
+</div>
+
+Here is a simple implementation for binary tree nodes, which can store one single element in each node.
+Every `BinaryNode` object also has two pointers, one to its left child and another to its right child.
 
     datatype BinaryNode of T:
         elem: T            // Element for this node.
@@ -29,14 +60,7 @@ its left child and another to its right child.
             // Return true if a leaf node, false otherwise.
             return this.left is null and this.right is null
 
-We also define a *leaf* to be a node with no children -- i.e., where
-both childen pointers point to nothing.
-
-::: topic
-Here is an illustration of a typical pointer-based binary tree implementation, where each node stores two child pointers and a value.
-
-<inlineav id="BTnullpointerCON" src="Binary/BTnullpointerCON.js" name="Binary/BTnullpointerCON" links="Binary/BTCON.css Binary/BTnullpointerCON.css" static/>
-:::
+We define a *leaf* to be a node with no children -- i.e., where both childen pointers point to nothing.
 
 Some programmers find it convenient to add a pointer to the node's
 parent, allowing easy upward movement in the tree. Using a parent
@@ -70,14 +94,46 @@ the child pointers. But it seems wasteful to store child pointers in the
 leaf nodes. Thus, there are many reasons why it can save space to have
 separate implementations for internal and leaf nodes.
 
-::: topic
-Here is an example of an expression tree for $4x(2x + a) - c$.
+<div id="fig:expression_tree">
 
+::: latex
+\begin{tikzpicture}
+\tikzstyle{binnode}=[rectangle split, rectangle split horizontal, rectangle split parts=3, draw]
+\tikzstyle{leafnode}=[circle, draw]
+\node[binnode]  (A)                                   {\nodepart{second} $-$};
+\node[binnode]  (B) [below left  = 5mm and 10mm of A] {\nodepart{second} $\times$};
+\node[leafnode] (C) [below right = 5mm and 10mm of A] {$c$};
+\node[binnode]  (D) [below left  = 5mm and  5mm of B] {\nodepart{second} $\times$};
+\node[binnode]  (E) [below right = 5mm and  5mm of B] {\nodepart{second} $+$};
+\node[leafnode] (F) [below left  = 5mm and  0mm of D] {$4$};
+\node[leafnode] (G) [below right = 5mm and  0mm of D] {$x$};
+\node[binnode]  (H) [below left  = 5mm and -5mm of E] {\nodepart{second} $\times$};
+\node[leafnode] (I) [below right = 5mm and  0mm of E] {$a$};
+\node[leafnode] (J) [below left  = 5mm and  0mm of H] {$2$};
+\node[leafnode] (K) [below right = 5mm and  0mm of H] {$x$};
+
+\draw[*->] ($(A.one)   + (0.2,0.1)$) -- (B);
+\draw[*->] ($(A.three) + (0.0,0.1)$) -- (C);
+\draw[*->] ($(B.one)   + (0.2,0.1)$) -- (D);
+\draw[*->] ($(B.three) + (0.0,0.1)$) -- (E);
+\draw[*->] ($(D.one)   + (0.2,0.1)$) -- (F);
+\draw[*->] ($(D.three) + (0.0,0.1)$) -- (G);
+\draw[*->] ($(E.one)   + (0.2,0.1)$) -- (H);
+\draw[*->] ($(E.three) + (0.0,0.1)$) -- (I);
+\draw[*->] ($(H.one)   + (0.2,0.1)$) -- (J);
+\draw[*->] ($(H.three) + (0.0,0.1)$) -- (K);
+\end{tikzpicture}
+:::
+
+::: online
 <inlineav id="expressionTreeCON" src="Binary/expressionTreeCON.js" name="Binary/expressionTreeCON" links="Binary/BTCON.css Binary/expressionTreeCON.css" static/>
 :::
 
+An example of an expression tree for $4x(2x + a) - c$
+</div>
+
 As an example of a tree that stores different information at the leaf
-and internal nodes, consider the expression tree illustrated by the figure above.
+and internal nodes, consider the expression tree illustrated by [figure @fig:expression_tree].
 The expression tree
 represents an algebraic expression composed of binary operators such as
 addition, subtraction, multiplication, and division. Internal nodes

@@ -6,6 +6,10 @@
 - Prio 2: discuss when to use iteration, recursion, BFS, DFS, etc, etc
 :::
 
+:::::: latex
+\booklink{Read online}{8.5-iteration-recursion-and-information-flow.html}
+::::::
+
 Handling information flow in a recursive function can be a challenge. In
 any given function, we might need to be concerned with either or both
 of:
@@ -13,9 +17,10 @@ of:
 1.  Passing down the correct information needed by the function to do its work,
 2.  Returning (passing up) information to the recursive function's caller.
 
-Any given problems might need to do either or both. Here are some
-examples and exercises.
+Any given problems might need to do either or both.
+This section contains some examples and exercises.
 
+:::::: online
 ### Local traversal
 
 Local traversal involves going to each node in the tree to do some
@@ -172,3 +177,4 @@ as large as possible, so we call the function like this:
 
     checkBST(tree, -∞, ∞)
 
+::::::

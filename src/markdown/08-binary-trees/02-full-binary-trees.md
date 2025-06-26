@@ -1,6 +1,15 @@
 
 ## Case study: Full binary trees
 
+:::::: latex
+\booklink{Read online}{8.2-case-study-full-binary-trees.html}
+
+This section discusses one particular kind of binary trees, where all nodes have either two children or no children, and how you can reason about them.
+::::::
+
+
+:::::: html
+
 ::: TODO
 - Prio 2: discuss how this is useful, why do we care about full bintrees?
 - Prio 2: maybe add more examples of theorems for bintrees?
@@ -109,3 +118,5 @@ Because the total number of children is $2n$, the remaining $n+1$
 children must be empty.
 :::
 ::::
+
+::::::

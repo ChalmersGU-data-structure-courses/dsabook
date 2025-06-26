@@ -1,10 +1,14 @@
 
 ### Space requirements
 
-This section presents techniques for calculating the amount of
-[overhead]{.term} required by a
-[binary tree]{.term}, based on its node
-implementation. Recall that overhead is the amount of space necessary to
+:::::: latex
+\booklink{Read online}{8.3-implementing-binary-trees.html\#space-requirements}
+::::::
+
+In this subsection we present techniques for calculating the amount of [overhead]{.term} required by a [binary tree]{.term}, based on its node implementation.
+
+:::::: html
+Recall that overhead is the amount of space necessary to
 maintain the data structure. In other words, it is any space not used to
 store data records. The amount of overhead depends on several factors
 including which nodes store data values (all nodes, or just the leaves),
@@ -98,3 +102,5 @@ Here is an exercise for the space requirements of binary trees.
 
 <avembed id="TreeOverheadFIB" src="Binary/TreeOverheadFIB.html" type="ka" name="Tree Overhead Exercise"/>
 :::
+
+::::::

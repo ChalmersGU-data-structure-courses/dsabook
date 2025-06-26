@@ -17,14 +17,7 @@ order as long as each node is visited precisely once. For other
 applications, nodes must be visited in an order that preserves some
 relationship.
 
-::: topic
-#### Example: A binary tree for traversal examples
-
-Here is an example binary tree that will be used when explaining the traversals below.
-
-<inlineav id="BinExampCON" src="Binary/BinExampCON.js" name="Binary/BinExampCON" links="Binary/BinExampCON.css" static/>
-:::
-
+<!--
 ### Depth-first and breadth-first
 
 ::: TODO
@@ -32,70 +25,87 @@ Here is an example binary tree that will be used when explaining the traversals 
 - DFS: use a stack, or be recursive
 - for recursive DFS you can do preorder, postorder or inorder
 :::
-
+ -->
 
 ### Preorder, postorder and inorder
 
-#### Preorder traversal
+There are three main strategies for traversing a binary tree, depending on when we want to visit a node in relation to its children (and all their subtrees).
 
-For example, we might wish to make sure that we visit any given node
-*before* we visit its children. This is called a
-[preorder traversal]{.term}.
+Preorder traversal
+:   Visit each node only *before* we visit its children (and their subtrees).
+    For example, this is useful if we want to create a copy of a tree.
+    First we create a copy of the current node, and then we can directly copy its subtrees into the new node.
+
+Postorder traversal
+:   Visit each node only *after* we visit its children (and their subtrees).
+    This is useful when we want to delete a tree to free storage space.
+    Before we can delete the current node, we should delete all its children (and its children's children and so on).
+
+Inorder traversal
+:   First visit the left child (including its entire subtree), then visit the node, and finally visit the right child (including its entire subtree).
+    If the tree is a [binary search tree]{.term}, then we can use inorder traversal to list all values in increasing order.
+
+[Table @tbl:visiting-orders] shows in which order the nodes in the example tree from [figure @fig:example_bintree] are visited, depending on the traversal strategy.
+
+Traversal             Visiting order                    When is the root visited?
+--------------------  --------------------------------  ------------------------------------------------------------------------
+Preorder              **A, B, D, C, E, G, F, H, I**     A is the first visited node
+Postorder             **D, B, G, E, H, I, F, C, A**     A is the very last node to visit
+Inorder               **B, D, A, G, E, C, H, F, I**     after visiting the left subtree (B, D)
+
+: Visiting order for the example tree in [figure @fig:example_bintree] {#tbl:visiting-orders}
+
+
+::: online
+As a reminder, here is the example tree again:
+
+<inlineav id="BinExampCON" src="Binary/BinExampCON.js" name="Binary/BinExampCON" links="Binary/BinExampCON.css" static/>
+
+#### Interactive explanations
+:::
 
 ::: dsvis
-#### Example: Preorder enumeration
-
-The preorder enumeration for the example tree above is **A B D C E G F H I**.
-
-The first node printed is the root. Then all nodes of the left subtree
-are printed (in preorder) before any node of the right subtree.
+Here is a visualisation of preorder traversal.
 
 <inlineav id="preorderCON" src="Binary/preorderCON.js" name="Preorder Traversal Slideshow" links="Binary/BTCON.css"/>
 :::
 
-
-#### Postorder traversal
-
-Alternatively, we might wish to visit each node only *after* we visit
-its children (and their subtrees). For example, this would be necessary
-if we wish to return all nodes in the tree to free store. We would like
-to delete the children of a node before deleting the node itself. But to
-do that requires that the children's children be deleted first, and so
-on. This is called a [postorder traversal]{.term}.
-
 ::: dsvis
-#### Example: Postorder enumeration
-
-The postorder enumeration for the example tree above is **D B G E H I F C A**.
+And a visualisation of postorder traversal.
 
 <inlineav id="postorderCON" src="Binary/postorderCON.js" name="Postorder Traversal Slideshow" links="Binary/BTCON.css"/>
 :::
 
-#### Inorder traversal
-
-An [inorder traversal]{.term} first visits the
-left child (including its entire subtree), then visits the node, and
-finally visits the right child (including its entire subtree). The
-[binary search tree]{.term} makes use of this traversal to print all nodes in ascending
-order of value.
-
 ::: dsvis
-#### Example: Inorder enumeration
-
-The inorder enumeration for the example treeabove is **B D A G E C H F I**.
+And finally a visualisation of inorder traversal.
 
 <inlineav id="inorderCON" src="Binary/inorderCON.js" name="Inorder Traversal Slideshow" links="Binary/BTCON.css"/>
 :::
 
+
 ### Implementation
 
-A traversal routine is naturally written as a recursive function. Its
-input parameter is a pointer to a node which we will call `node`. The
-initial call to the traversal function passes in a pointer to the root
-node of the tree. The traversal function visits `node` and its children
-(if any) in the desired order. For example, a preorder traversal
-specifies that `node` be visited before its children. This can easily be
-implemented as follows.
+:::::: latex
+\booklink{Read online}{8.4-traversing-a-binary-tree.html\#implementation}
+::::::
+
+A traversal routine is naturally written as a recursive function.
+The initial call to the traversal function passes in a pointer to the root node of the tree.
+The traversal function visits the node and its children (if any) in the desired order.
+Here is a very generic pseudocode for all kinds of traversal:
+
+    function traverse(node):
+        if node is not null:      // Only continue if this is a tree
+            visitPreorder(node)   // Visit root node (PREORDER traversal)
+            traverse(node.left)   // Process all nodes in left subtree
+            visitInorder(node)    // Visit root node (INORDER traversal)
+            traverse(node.right)  // Process all nodes in right subtree
+            visitPostorder(node)  // Visit root node (POSTORDER traversal)
+
+
+:::::: online
+For example, preorder traversal specifies that a node should be visited before its children.
+Then we can remove the lines for inorder and postorder, and we get the following preorder traversal function:
 
     function preorder(node):
         if node is not null:      // Only continue if this is a tree
@@ -243,3 +253,5 @@ current node. You do **not** look at the children to decide whether to
 make a recursive call.
 
 <!-- ### Binary Tree Increment By One Exercise -->
+
+::::::
