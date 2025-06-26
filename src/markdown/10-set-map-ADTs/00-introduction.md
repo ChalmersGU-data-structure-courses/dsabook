@@ -1,5 +1,5 @@
 
-# Sets and Maps
+# Sets and maps
 
 ::: TODO
 - Prio 1: write this chapter

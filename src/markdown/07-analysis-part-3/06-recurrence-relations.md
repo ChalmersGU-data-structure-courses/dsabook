@@ -469,11 +469,11 @@ Case (3)
 
 
 We can summarize the above derivation as the following theorem,
-sometimes referred to as the [Master Theorem]{.term}.
+sometimes referred to as the [master theorem]{.term}.
 
 :::: {#RecurThm}
 ::: topic
-#### Theorem: The Master Theorem
+#### Theorem: The master theorem
 
 For any recurrence relation of the form
 $T(n) = aT(n/b) + cn^k$; $T(1) = c$, the following
@@ -495,9 +495,9 @@ This theorem may be applied whenever appropriate, rather than
 re-deriving the solution for the recurrence.
 
 ::: topic
-#### Example: Using the Master Theorem
+#### Example: Using the master theorem
 
-Apply the Master Theorem to solve
+Apply the master theorem to solve
 $T(n) = 3T(n/5) + 8n^2$.
 
 Because $a=3$, $b=5$, $c=8$, and $k=2$, we find that $3<5^2$. Applying
@@ -505,9 +505,9 @@ case (3) of the theorem, $T(n) \in O(n^2)$.
 :::
 
 ::: topic
-#### Example: Master Theorem for Mergesort
+#### Example: Master theorem for Mergesort
 
-Use the Master Theorem to solve the recurrence relation for Mergesort:
+Use the master theorem to solve the recurrence relation for Mergesort:
 
 \begin{eqnarray*}
 T(n) &=& 2T(n/2) + n \\

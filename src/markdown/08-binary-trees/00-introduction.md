@@ -1,5 +1,5 @@
 
-# Binary Trees
+# Binary trees
 
 ::: TODO
 - Prio 2: update introduction

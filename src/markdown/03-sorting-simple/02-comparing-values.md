@@ -134,7 +134,7 @@ BST could take a comparator class as a generics parameter in Java. This
 comparator class would be responsible for dealing with the comparison of
 two records.
 
-### Key-value Pairs
+### Key-value pairs
 
 One good general-purpose solution is to explicitly store
 [key-value pairs](#key-value-pair){.term} in the
@@ -159,7 +159,7 @@ Using this we can easily implement a **Map** from an underlying
 **List**, which we will discuss further in the
 [chapter about linear structures](#implementing-maps-using-lists).
 
-### Sorting using Comparables
+### Sorting using comparables
 
 To keep them clear and simple, visualizations for sorting algorithms
 will usually show them as operating on integer values stored in an

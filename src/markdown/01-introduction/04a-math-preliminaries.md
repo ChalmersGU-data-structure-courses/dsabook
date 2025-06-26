@@ -213,7 +213,7 @@ This relation is an equivalence relation because
    :long_name: Equivalence Exercise
 -->
 
-#### Partial Orders
+#### Partial orders
 
 A binary relation is called a [partial order]{.term} if it is *antisymmetric* and *transitive*.
 If the relation is reflexive, it is called a [non-strict partial order]{.term}.
@@ -544,7 +544,7 @@ correct.
 -->
 
 <!-- Moved to chapter 7, section about Recurrence relations
-### Recurrence Relations
+### Recurrence relations
 
 The running time for a recursive algorithm is most easily expressed by a recursive expression because the total time for the recursive algorithm includes the time to run the recursive call(s).
 A [recurrence relation]{.term} defines a function by means of an expression that includes one or more (smaller) instances of itself.
@@ -1160,7 +1160,7 @@ total.
 -->
 
 <!--
-### Chapter Summary Questions
+### Chapter summary questions
 
 Here are some practice questions for the sections in this chapter.
 
@@ -1168,7 +1168,7 @@ Here are some practice questions for the sections in this chapter.
    :long_name: Math Background Summary Questions
  -->
 
-### Random Numbers
+### Random numbers
 
 The success of randomized algorithms depends on having access to a good random number generator.
 While modern compilers are likely to include a random number generator that is good enough for most purposes, it is helpful to understand how they work, and to even be able to construct your own in case you don't trust the one provided.

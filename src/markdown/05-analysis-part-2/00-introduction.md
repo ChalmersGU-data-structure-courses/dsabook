@@ -1,5 +1,5 @@
 
-# Algorithm Analysis, part 2: Theory
+# Algorithm analysis, part 2: Theory
 
 In chapter XX we introduced the ideas behind algorithmic analysis, and explained the basics on an abstract level.
 Now that you understand everything about sorting algorithms, we can go into more depth with our analysis tools.

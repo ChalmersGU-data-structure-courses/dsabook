@@ -67,7 +67,7 @@ a similar fashion, a simple Binsort reduces the number of records in
 each bin to a small number that can be sorted in some other way.
 
 ::: dsvis
-#### Exercise: Practicing Separate Chaining
+#### Exercise: Practicing separate chaining
 
 <avembed id="OpenHashPRO" src="Hashing/OpenHashPRO.html" type="ka" name="Separate Chaining Proficiency Exercise" height="630"/>
 :::
