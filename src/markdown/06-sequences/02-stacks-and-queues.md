@@ -36,7 +36,7 @@ called a "queue", and getting into line to wait for service is called
 existence of computers. They call a queue a "[FIFO]{.term}" list, which stands
 for "First-In, First-Out".
 
-### Stacks
+### ADT for stacks
 
 The accessible element of the stack is called the `top` element.
 Elements are not said to be inserted, they are
@@ -54,8 +54,7 @@ There are two main approaches to implementing stacks: the [array-based stack]{.t
 #### Invariants
  -->
 
-
-### Queues
+### ADT for queues
 
 Here is a sample queue ADT.
 This section presents two implementations for queues: the [array-based queue]{.term} and the [linked queue]{.term}.

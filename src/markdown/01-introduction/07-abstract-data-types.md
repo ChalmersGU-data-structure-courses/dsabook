@@ -164,7 +164,7 @@ Each ADT will be discussed in more detail later in the book, including their ope
 ![An overview of ADTS with their common implementations](resources/images/ADT_overview.png){#fig:adt-overview}
 
 
-#### Linear collections
+### Linear collections {#adt-linear-collections}
 
 Linear collections are a category of abstract data types in which the order of the elements matters.
 This means that each element has a specific position in the sequence, and operations on the ADT are sensitive to this order.
@@ -181,7 +181,7 @@ The ordered sequence ADTs found in this book are:
 Ordered sequences are used in many applications and algorithms where the order of operations or items is important.
 For example, maintaining a task list, simulating a line of customers, or a editor’s undo/redo history.
 
-#### Sets and maps
+### Sets and maps {#adt-sets-and-maps}
 
 Many programming tasks involve *retrieving specific information* from a large dataset.
 For example, given a collection of people, how do we efficiently find the person with a specific personnummer?
@@ -193,7 +193,7 @@ Two key abstract data types are commonly used to solve such information retrieva
 
 Most implementations of both sets and maps are designed to support fast insertion, deletion, and lookup operations, making them ideal for managing collections where quick access to data is important.
 
-#### Graphs
+### Graphs {#adt-graphs}
 
 Another well-known abstract data type is the _graph_.
 Graphs are used to model relationships between elements, where each element is called a _node_ or _vertex_.
@@ -206,7 +206,7 @@ Another, less obvious example is the structure of Java programs: the dependencie
 This representation helps us determine the correct order to compile classes based on their dependencies.
 
 Graphs are a fundamental concept in computer science, and we dedicate an entire chapter to them in this book.
-Chapter [Graphs](#chap-graphs) explores how graphs can be represented and how we can traverse and manipulate them using various algorithms.
+Chapter @sec:graphs explores how graphs can be represented and how we can traverse and manipulate them using various algorithms.
 
 
 <!--

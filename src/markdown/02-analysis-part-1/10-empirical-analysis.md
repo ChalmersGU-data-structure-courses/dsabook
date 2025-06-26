@@ -15,6 +15,8 @@ determining the finer distinctions between algorithms with the same
 growth rate, and the inherent difficulty of doing mathematical modeling
 for more complex problems.
 
+### Comparative timing
+
 An alternative to analytical approaches are empirical ones. The most
 obvious empirical approach is simply to run two competitors and see
 which performs better. In this way we might overcome the deficiencies of

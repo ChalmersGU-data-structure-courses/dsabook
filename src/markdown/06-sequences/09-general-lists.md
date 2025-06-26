@@ -1,5 +1,5 @@
 
-## General linked lists
+## General lists
 
 ::: TODO
 - Prio 2: invariants
@@ -18,8 +18,6 @@ $\langle\ a_0,\ a_1,\ ...,\ a_{n-1}\ \rangle$. The subscript indicates
 an element's position within the list. Using this notation, the empty
 list would appear as $\langle\ \rangle$.
 
-### General lists
-
 ::: TODO
 - Dyn arrays can do most things efficient (except insert/remove from the middle)
 - (Doubly) linked lists can only modify from front/rear
@@ -34,6 +32,8 @@ to gain access to any element's value, either to read it or to change
 it. Finally, we should be able to know the size of the list, and to
 iterate through the elements in the list -- i.e., the list should be a
 Collection.
+
+### ADT for general lists
 
 Now we can define the ADT for a list object in terms of a set of
 operations on that object. We will use an interface to formally define
@@ -94,8 +94,7 @@ There are two standard approaches to implementing lists, the
 ### Invariants
  -->
 
-
-### Linked lists
+### Implementing using linked lists
 
 We can use the same structure as for stacks when implementing general linked lists:
 

@@ -51,8 +51,6 @@ classes, and Python provides
 (another word for maps) as part of their standard libraries.
 
 
-#### How to implement sets and maps
-
 Sets and maps are useful in a huge variety of computer programs, and are
 perhaps the most useful of all data structures. But how can we design a
 class that implements a set or a map, in such a way that adding,

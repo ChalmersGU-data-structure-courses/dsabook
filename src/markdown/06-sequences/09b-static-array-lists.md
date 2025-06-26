@@ -1,5 +1,5 @@
 
-### Implementing lists using arrays
+### Implementing general lists using arrays
 
 First we give a static implementation for array-based lists, named
 **ArrayList**. This inherits from the
@@ -26,8 +26,6 @@ in Python you cannot access these arrays because they are hidden from
 the programmer.
 :::
 
-### Internal variables
-
 Because of that will need two internal variables: the underlying array,
 and a *size* counter telling how much of the array is actually used.
 When we create a new array-list we have to decide the *capacity*, the
@@ -48,7 +46,7 @@ TODO
 You can simulate it by creating a list with a number of empty elements:
 `[None] * capacity`, but this is not a real fixed-size array as explained just above.
 
-### Getting and setting values
+#### Getting and setting values
 
 Random access to any element in the list is quick and easy.
 

@@ -62,7 +62,7 @@ Using this we can infer the following hierarchy of complexity classes:
 $$
 O(1) < O(\log n) < O(\sqrt{n}) < O(n) < O(n\log n) < O(n^2) < \cdots
 $$
-$$ 
+$$
 \cdots < O(n^2\log n) < O(n^3) < O(n^k) < O(2^n) < O(10^n) < O(n!) < \cdots
 $$
 
@@ -133,7 +133,7 @@ If $p$ is a simple loop over A, with a constant-time operation in its body, then
 And then the outer loop $\langle \mbox{for}\ x \in A: p\rangle$ will be in $n\cdot O(n) = O(n^2)$.
 
 
-### Examples
+### Examples of algorithm analysis
 
 ::::: {#AssignAnal}
 :::: example
@@ -182,7 +182,7 @@ are nested.
 
 This code fragment has three separate statements: the first assignment
 statement and the two `for` loops. Again the assignment statement takes
-constant time; call it $c_1$. 
+constant time; call it $c_1$.
 The second `for` loop is just like the one in example with one `for` loop and takes $c_2 n \in O(n)$ time.
 
 The first `for` loop is a double loop and requires a special technique.

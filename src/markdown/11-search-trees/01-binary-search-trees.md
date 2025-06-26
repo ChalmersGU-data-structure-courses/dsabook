@@ -1,5 +1,5 @@
 
-## Binary search trees, BST
+## Binary search trees
 
 ::: TODO
 - Prio 1: invariants

@@ -6,6 +6,7 @@
 - Prio 2: invariants, use cases, explaining text
 :::
 
+<!--
 ### Double-ended queues, or deques
 
     interface Deque of T extends Collection:
@@ -31,6 +32,7 @@
 :::
 
 ### Implementing deques using doubly linked lists
+-->
 
 ::: TODO
 - With normal linked lists we cannot pop from the back

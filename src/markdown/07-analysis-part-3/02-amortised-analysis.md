@@ -144,7 +144,7 @@ accessed record is first (and thus has least cost), followed by the next
 most frequently accessed record, and so on.
 
 ::: topic
-#### Theorem: Self-organizing lists
+#### Example: Self-organizing lists
 
 **Theorem:** The total number of comparisons required by any series $S$
 of $n$ or more searches on a [self-organizing list]{.term} of length $n$ using

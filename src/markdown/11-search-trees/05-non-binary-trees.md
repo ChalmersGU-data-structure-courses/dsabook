@@ -61,7 +61,7 @@ has no parent. From this observation, it immediately follows that a tree
 with $n$ nodes must have $n-1$ edges because each node, aside from the
 root, has one edge connecting that node to its parent.
 
-### ADT: General trees
+### ADT for general trees
 
 Before discussing general tree implementations, we should first make
 precise what operations such implementations must support. Any

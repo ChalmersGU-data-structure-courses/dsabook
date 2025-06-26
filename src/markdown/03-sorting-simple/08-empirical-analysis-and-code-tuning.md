@@ -1,5 +1,5 @@
 
-## Empirical analysis, and code tuning
+## Empirical analysis and code tuning
 
 ::: TODO
 - Prio 3: are the other simple optimisations?
