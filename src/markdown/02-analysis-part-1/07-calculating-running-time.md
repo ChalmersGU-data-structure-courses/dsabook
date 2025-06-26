@@ -60,10 +60,13 @@ where we write $O(f)\leq O(g)$ for $f\in O(g)$.
 Using this we can infer the following hierarchy of complexity classes:
 
 $$
-O(1) < O(\log n) < O(\sqrt{n}) < O(n) < O(n\log n) < O(n^2) < O(n^2\log n) < O(n^3) < \cdots < O(n^k) < O(2^n) < O(10^n) < O(n!) < \cdots
+O(1) < O(\log n) < O(\sqrt{n}) < O(n) < O(n\log n) < O(n^2) < \cdots
+$$
+$$ 
+\cdots < O(n^2\log n) < O(n^3) < O(n^k) < O(2^n) < O(10^n) < O(n!) < \cdots
 $$
 
-(Note that we use strict equality here, and trust that you intuitively understand the difference between $\leq$ and $<$.)
+Note that we use strict equality here, and trust that you intuitively understand the difference between $\leq$ and $<$.
 
 One interesting consequence of asymptotic complexity is that the base of a logarithm becomes irrelevant, i.e.:
 
@@ -133,7 +136,7 @@ And then the outer loop $\langle \mbox{for}\ x \in A: p\rangle$ will be in $n\cd
 ### Examples
 
 ::::: {#AssignAnal}
-:::: topic
+:::: example
 #### Example: Simple assignment
 
 We begin with an analysis of a simple assignment to an integer variable.
@@ -145,7 +148,7 @@ Because the assignment statement takes constant time, it is $O(1)$.
 :::::
 
 ::::: {#FLAnal}
-:::: topic
+:::: example
 #### Example: Simple for-loop
 
 Consider a simple `for` loop.
@@ -162,7 +165,7 @@ $O(n)$.
 ::::
 :::::
 
-:::: topic
+:::: example
 #### Example: Many for-loops
 
 We now analyze a code fragment with several `for` loops, some of which
@@ -174,14 +177,13 @@ are nested.
         for i in 0 .. j-1:  // is a double loop.
             sum = sum + 1
     for k in 0 .. n-1:      // Second for loop.
-        A[k] = k
+        arr[k] = k
 
 
 This code fragment has three separate statements: the first assignment
 statement and the two `for` loops. Again the assignment statement takes
-constant time; call it $c_1$. The second `for` loop is just like the one
-in Example [#FLAnal](#FLAnal) and takes
-$c_2 n \in O(n)$ time.
+constant time; call it $c_1$. 
+The second `for` loop is just like the one in example with one `for` loop and takes $c_2 n \in O(n)$ time.
 
 The first `for` loop is a double loop and requires a special technique.
 We work from the inside of the loop outward. The expression `sum++`
@@ -195,15 +197,15 @@ through the outer loop, $j$ becomes one greater, until the last time
 through the loop when $j = n$. Thus, the total cost of the loop is $c_3$
 times the sum of the integers 1 through $n$. We know that
 
-\begin{eqnarray*}
-\sum_{i = 1}^{n} i &=& \frac{n (n+1)}{2}
-\end{eqnarray*}
+$$
+\sum_{i = 1}^{n} i = \frac{n (n+1)}{2}
+$$
 
 which is $O(n^2)$. By simplifying rule (3),
 $O(c_1 + c_2 n + c_3 n^2)$ is simply $O(n^2)$.
 ::::
 
-:::: topic
+:::: example
 #### Example: Comparing nested loops
 
 Compare the asymptotic analysis for the following two code fragments.
@@ -228,7 +230,7 @@ about half the time of the first.
 ::::
 
 
-:::: topic
+:::: example
 #### Example: Non-quadratic nested loops
 
 Not all doubly nested `for` loops are strictly $O(n^2)$, the following is an example.
@@ -244,9 +246,9 @@ To make our analysis easier, we will assume that $n$ is a power of two.
 The code fragment has its outer `for` loop executed $\log n+1$ times because on each iteration $k$ is multiplied by two until it reaches $n$.
 Now, because the inner loop always executes $n$ times, the total cost for can be expressed as
 
-\begin{eqnarray*}
-\sum_{i=0}^{\log n} n &=& n \log n
-\end{eqnarray*}
+$$
+\sum_{i=0}^{\log n} n = n \log n
+$$
 
 So the cost of this double loop is $O(n \log n)$.
 Note that the summation variable $i$ is the logarithm of the loop variable $k$, i.e. $k = 2^i$.
@@ -265,7 +267,7 @@ So, is there something wrong with the rules?
 No, the rules are correct, and this is because the $O$ notation gives an *upper bound*.
 Recall that every function $f\in O(n)$ is also in $O(n\log n)$, since $O(n) < O(n\log n)$.
 
-:::: topic
+:::: example
 #### Example: A nested loop with linear complexity
 
 If we take the non-quadratic example above and just do a very small change, we get a completely different complexity.
@@ -283,9 +285,9 @@ The rules of thumb gives us the same complexity as before, $O(n \log n)$, but a 
 The outer loop is executed $\log n+1$ times, and the inner loop has cost $k$, which doubles each time.
 This can be expressed as the following summation, where $n$ is assumed to be a power of two and again $k = 2^i$.
 
-\begin{eqnarray*}
-1 + 2 + 4 + \cdots + \log n &=& \sum_{i=0}^{\log n} 2^i
-\end{eqnarray*}
+$$
+1 + 2 + 4 + \cdots + \log n = \sum_{i=0}^{\log n} 2^i
+$$
 
 Now, as mentioned in section XX (*math prelim. summation*), this summation has a closed form solution
 $2^{\log n + 1} - 1 = 2n - 1$.

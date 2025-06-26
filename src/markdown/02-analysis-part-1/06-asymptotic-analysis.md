@@ -161,9 +161,11 @@ How can we use the definitions above to prove that $f\in\Omega(g)$?
 
 We have to find positive numbers $k$ and $n_0$ so that $f(n)\geq k\cdot g(n)$.
 Since $g$ has a constant factor of 1000, we can try with $k=0.001$:
+
 $$
 k\cdot g(n) = 0.001 \cdot 1000n\log n = n\log n
 $$
+
 Now we readily see that $f(n) = n^2$ is larger than $k\cdot g(n) = n\log n$ for all $n\geq 1$, so we can set $n_0 = 1$.
 
 Note that there are plenty of possible values to choose from, such as $k=1$ and $n_0=13,789$.

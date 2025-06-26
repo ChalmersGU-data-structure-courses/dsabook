@@ -143,6 +143,14 @@ $endif$
 \printer{The Printer, City}
 \printyear{2012}
 
+\expandafter\def\expandafter\normalsize\expandafter{%
+    \normalsize%
+    \setlength\abovedisplayskip{-6pt}%
+    \setlength\belowdisplayskip{8pt}%
+    \setlength\abovedisplayshortskip{-8pt}%
+    \setlength\belowdisplayshortskip{2pt}%
+}
+
 \begin{document}
 $if(has-frontmatter)$
 \frontmatter
