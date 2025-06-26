@@ -1,13 +1,13 @@
 
 ## Mathematical preliminaries
 
-:::::: latex
-\booklink{Read online}{1.4-mathematical-preliminaries.html}
-::::::
-
 This section presents the mathematical preliminaries assumed to be familiar to the reader.
 It serves as a review and reference, allowing you to revisit relevant sections when encountering unfamiliar notation or mathematical techniques in later chapters.
 If you're comfortable with these preliminaries, you can safely skip ahead to the next section.
+
+:::::: latex
+\booklink{Read section \ref{mathematical-preliminaries} online}{1.4-mathematical-preliminaries.html}
+::::::
 
 
 :::::: html

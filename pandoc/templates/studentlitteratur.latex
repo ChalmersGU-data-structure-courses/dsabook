@@ -33,12 +33,15 @@ $endif$
 \usepackage{wrapfig}
 \usepackage{qrcode}
 
-\newcommand{\booklink}[2]{
-  \begin{wrapfigure}{r}[15mm]{25mm}\centering
-    \vspace{-10mm}
-    \qrcode[height=15mm]{https://chalmersgu-data-structure-courses.github.io/dsabook/html/#2}
-    \caption*{#1}
-  \end{wrapfigure}
+\newcommand{\booklink}[2]{%
+  \begin{marginfigure}%
+    \qrcode[height=12mm]{https://chalmersgu-data-structure-courses.github.io/dsabook/html/#2}%
+    \caption*{#1}%
+  \end{marginfigure}%
+  % \begin{wrapfigure}{r}[15mm]{25mm}\centering%
+  %   \qrcode[height=15mm]{https://chalmersgu-data-structure-courses.github.io/dsabook/html/#2}%
+  %   \caption*{#1}%
+  % \end{wrapfigure}%
 }
 
 \usepackage{newunicodechar}

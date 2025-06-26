@@ -83,16 +83,16 @@ And finally a visualisation of inorder traversal.
 :::
 
 
-### Implementation
-
-:::::: latex
-\booklink{Read online}{8.4-traversing-a-binary-tree.html\#implementation}
-::::::
+### Implementation {#traversing-implementation}
 
 A traversal routine is naturally written as a recursive function.
 The initial call to the traversal function passes in a pointer to the root node of the tree.
 The traversal function visits the node and its children (if any) in the desired order.
 Here is a very generic pseudocode for all kinds of traversal:
+
+:::::: latex
+\booklink{Read section \ref{traversing-implementation} online}{8.4-traversing-a-binary-tree.html\#traversing-implementation}
+::::::
 
     function traverse(node):
         if node is not null:      // Only continue if this is a tree

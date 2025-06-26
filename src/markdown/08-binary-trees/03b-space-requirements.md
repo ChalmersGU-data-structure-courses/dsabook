@@ -1,11 +1,11 @@
 
 ### Space requirements
 
-:::::: latex
-\booklink{Read online}{8.3-implementing-binary-trees.html\#space-requirements}
-::::::
-
 In this subsection we present techniques for calculating the amount of [overhead]{.term} required by a [binary tree]{.term}, based on its node implementation.
+
+:::::: latex
+\booklink{Read section \ref{space-requirements} online}{8.3-implementing-binary-trees.html\#space-requirements}
+::::::
 
 :::::: html
 Recall that overhead is the amount of space necessary to

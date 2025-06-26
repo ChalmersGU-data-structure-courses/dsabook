@@ -15,11 +15,11 @@ In the following chapter, we delve deeper into the formal analysis of algorithms
 
 ## Review questions
 
-:::::: latex
-\booklink{Answer online}{1.7-review-questions.html}
-::::::
-
 This final section contains some review questions about the contents of this chapter.
+
+:::::: latex
+\booklink{Answer quiz online}{1.7-review-questions.html}
+::::::
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 

@@ -7,7 +7,7 @@
 ## Review questions
 
 :::::: latex
-\booklink{Answer online}{8.6-chapter-summary.html}
+\booklink{Answer quiz online}{8.6-review-questions.html}
 ::::::
 
 This final section contains some review questions about the contents of this chapter.
