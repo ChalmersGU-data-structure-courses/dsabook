@@ -1,6 +1,4 @@
 
-:::::: html
-
 ## Programming preliminaries
 
 ::: TODO
@@ -8,9 +6,15 @@
 - for x = 1 to 10 -- is 10 included or not?
 :::
 
+:::::: latex
+\booklink{Read online}{1.5-programming-preliminaries.html}
+::::::
+
 This section explains the pseudocode that we will use throughout the book.
 In addition, we introduce the programming preliminaries that we assume you are familiar with.
 If you're comfortable with these preliminaries, you can safely skip ahead to the next section.
+
+:::::: html
 
 ### Pseudocode
 

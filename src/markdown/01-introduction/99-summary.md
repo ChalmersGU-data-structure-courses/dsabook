@@ -1,5 +1,5 @@
-::: html
 
+<!-- Commenting out this until we have summaries for all chapters!
 ## Chapter summary
 
 This chapter introduced the role of data structures and algorithms in computer science and software development.
@@ -10,10 +10,18 @@ We also introduced _algorithm analysis_ and explained how asymptotic notation he
 To support all readers, the chapter included a brief review of essential mathematical tools and basic programming concepts needed to understand and implement algorithms effectively.
 
 In the following chapter, we delve deeper into the formal analysis of algorithms, focusing on systematic methods to compare time and space complexity across various solutions.
+-->
+
+
+## Review questions
+
+:::::: latex
+\booklink{Answer online}{1.7-review-questions.html}
+::::::
+
+This final section contains some review questions about the contents of this chapter.
 
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
-### Review questions {-}
-
 
 :::::::::: question ::::::::::
 An *ADT* is:
@@ -237,4 +245,3 @@ Which of these is NOT one of the three standard steps to follow when selecting a
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:::

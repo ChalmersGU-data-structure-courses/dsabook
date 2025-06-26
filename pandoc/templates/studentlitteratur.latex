@@ -26,7 +26,19 @@ $endif$
 \usepackage{amsmath,amssymb}
 \usepackage[utf8]{inputenc}
 
+\usepackage{tikz}
 \usepackage{forest}
+
+\usepackage{wrapfig}
+\usepackage{qrcode}
+
+\newcommand{\booklink}[2]{
+  \begin{wrapfigure}{r}[15mm]{25mm}\centering
+    \vspace{-10mm}
+    \qrcode[height=15mm]{https://chalmersgu-data-structure-courses.github.io/dsabook/html/#2}
+    \caption*{#1}
+  \end{wrapfigure}
+}
 
 \usepackage{newunicodechar}
 \newunicodechar{≤}{\ensuremath{\leq}}
