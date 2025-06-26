@@ -4,8 +4,8 @@
 ::: TODO
 - Prio 1: don't talk about BSTs here - they are not introduced yet
 - Prio 2: two stages:
-    1. not in-place heapsort (using a general prio.queue)
-    2. in-place heapsort (using a heap)
+    1. not in-place Heapsort (using a general prio.queue)
+    2. in-place Heapsort (using a heap)
 - Prio 2: properties (stability, in-place)
 :::
 
@@ -33,30 +33,35 @@ We can use a heap to implement a very simple sorting algorithm:
 1. Insert all elements from the unsorted array into a *min*-heap.
 2. Remove each element in turn from the heap, putting it in its right place in the original array.
 
+:::::: latex
+\booklink{Read section \ref{case-study-heapsort} online}{9.3-heapsort.html\#in-place-heapsort}
+::::::
+
 Since the heap returns the smallest elements first, they will be inserted in sorted order into the new array.
 Here is pseudocode:
 
-    function badHeapSort(A):
+    function naiveHeapsort(A):
         heap = new MinHeap()
         for i in 0 .. A.size-1:
             heap.add(A[i])
         for i in 0 .. A.size-1:
             A[i] = heap.removeMin()
 
+:::::: online
 What is the time complexity of this algorithm?
 
 - We have two very similar for loops, iterating over the range of the array.
 - The body of each loop is logarithmic, so the total loop complexity is $O(n \log n)$.
 
 So, we have two loops with linearithmic complexity, and therefore the algorithm is linearithmic too, $O(n \log n)$.
-This means that `badHeapSort` is an efficient sorting algorithm.
+This means that `naiveHeapsort` is an efficient sorting algorithm.
 However, our algorithm has some disadvantages:
 
 - It is not in-place: we have to allocate $O(n)$ additional space for the heap.
 - Also, we saw in the previous section that we can build the heap both faster and in-place.
-- (That's why we call it `badHeapSort`, and now we will find out how to solve both of these problems.)
+- (That's why we call it `naiveHeapsort`, and now we will find out how to solve both of these problems.)
 
-### In-place heapsort
+### In-place Heapsort
 
 <!--
 Instead, a good sorting algorithm can be devised based on a tree
@@ -82,6 +87,8 @@ used when sorting data sets too large to fit in main memory.
 -->
 
 In section X we saw that there is a more efficient way of turning an array into a heap, by using the `buildHeap` method.
+We can use this to implement a faster and in-place version of Heapsort.
+
 The crucial step here is to use a *max*-heap, which might seem counter-intuitive.
 After building the heap we tweak the `removeMax` method a little, so that it *keeps* the removed element, but puts it at the *end* of the array.
 This is why we need a max-heap -- because the first element we remove will be put at the very end of the array.
@@ -96,7 +103,7 @@ Here is an overview of the idea:
 - Finally, when the heap is exhausted the internal array is sorted.
 
 ::: dsvis
-Here is a visualisation of the heapsort algorithm.
+Here is a visualisation of the Heapsort algorithm.
 
 <inlineav id="heapsortCON" src="Sorting/heapsortCON.js" script="DataStructures/binaryheap.js" name="Heapsort Slideshow"/>
 :::
@@ -132,11 +139,11 @@ reproduce its behavior?
 <avembed id="heapsortPRO" src="Sorting/heapsortPRO.html" type="pe" name="Heapsort Proficiency Exercise"/>
 :::
 
-### Heapsort analysis
+#### Analysis of in-place Heapsort
 
 Here is an analysis of the time complexity of Heapsort:
 
-- The first step in heapsort is to heapify the array.
+- The first step in Heapsort is to heapify the array.
   This will cost $O(n)$ running time for an array of size $n$.
 - Then it swaps each element with the root node and "sifts" it down the heap.
     - Sifting down is logarithmic, $O(\log n)$, in the worst case, since the height of the tree is logarithmic.
@@ -175,3 +182,4 @@ the same key value. This represents the best case for Heapsort. This is
 because removing the smallest value requires only constant time, since
 the value swapped to the top is never pushed down the heap.
 
+::::::

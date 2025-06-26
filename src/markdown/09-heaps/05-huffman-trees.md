@@ -1,10 +1,10 @@
 
-## Case study: Huffman coding
-
 ::: TODO
 - Prio 2: make the text shorter (this is just an example anyway)
     - including the file 04b
 :::
+
+## Case study: Huffman coding
 
 One can often gain an improvement in space requirements in exchange for
 a penalty in running time. There are many situations where this is a
@@ -13,19 +13,31 @@ files are not actively used, the owner might wish to compress them to
 save space. Later, they can be uncompressed for use, which costs some
 time, but only once.
 
+:::::: latex
+\booklink{Read section \ref{case-study-huffman-coding} online}{9.4-case-study-huffman-coding.html}
+::::::
+
 We often represent a set of items in a computer program by assigning a
 unique code to each item. For example, the standard
-[ASCII coding](#ascii-character-coding){.term}
-scheme assigns a unique eight-bit value to each character. It takes a
+Latin-1 scheme (the formal name is ISO 8859-1)
+assigns a unique eight-bit value to each character. It takes a
 certain minimum number of bits to provide enough unique codes so that we
 have a different one for each character. For example, it takes
-$\left\lceil log\ 128\right\rceil$ or seven bits to provide the 128
-unique codes needed to represent the 128 symbols of the ASCII character
+$\left\lceil \log\ 256\right\rceil$ or eight bits to provide the 256
+unique codes needed to represent the 256 symbols of the Latin-1 character
 set.
 
-The requirement for $\left \lceil log\ n \right\rceil$ bits to represent
+:::::: latex
+Latin-1 and most other encodings are *fixed-length* codes, where each value is stored in the same number of bits.
+If all characters were used equally often, then a fixed-length encoding is the most space efficient method.
+However, you are probably aware that not all characters are used equally often in many applications.
+For example, the various letters in an English language document have greatly different frequencies of use.
+::::::
+
+:::::: online
+The requirement for $\left \lceil \log\ n \right\rceil$ bits to represent
 $n$ unique code values assumes that all codes will be the same length,
-as are ASCII codes. These are called
+as are Latin-1 codes. These are called
 [fixed-length codes](#fixed-length-coding){.term}. If all characters were used equally often, then a
 fixed-length coding scheme is the most space efficient method. However,
 you are probably aware that not all characters are used equally often in
@@ -35,7 +47,7 @@ language document have greatly different frequencies of use.
 The following table shows the relative
 frequencies of the letters of the alphabet. From this table we can see
 that the letter 'E' appears about 60 times more often than the letter
-'Z'. In normal ASCII, the words "DEED" and "MUCK" require the same
+'Z'. In normal Latin-1, the words "DEED" and "MUCK" require the same
 amount of space (four bytes). It would seem that words such as "DEED",
 which are composed of relatively common letters, should be storable in
 less space than words such as "MUCK", which are composed of relatively
@@ -66,14 +78,18 @@ expected frequency of occurrence per 1000 letters, ignoring case.
 
 :::
 
+::::::
+
 If some letters are used more frequently than others, is it possible
 to take advantage of this fact and somehow assign them shorter codes?
 The price could be that other letters require longer codes, but this
 might be worthwhile if such letters appear rarely enough. This
 concept is at the heart of file compression techniques in common use
-today. The next section presents one such approach to assigning
+today. In this section we present one such approach to assigning
 [variable-length codes](#variable-length-coding){.term},
 called [Huffman coding](#huffman-codes){.term}.
+
+:::::: online
 While it is not commonly used in its simplest form for
 file compression (there are better methods), Huffman coding gives the
 flavor of such coding schemes. One motivation for studying Huffman
@@ -290,11 +306,11 @@ for Huffman coding. Thus, Huffman coding is expected to save about 14%
 for this set of letters.
 :::
 
-Huffman coding for all ASCII symbols should do better than the 8-letter example.
+Huffman coding for all Latin-1 symbols should do better than the 8-letter example.
 The letter frequencies are atypical in that there are too many common letters compared to the number of rare letters.
 
 Huffman coding of a normal English text usually yields an expected cost of around 4.5 bits per character, compared to the standard way of encoding each letter in 8 bits.
-So, Huffman coding of a typical English text file will save at least 40% over ASCII coding (if we charge ASCII coding at eight bits per letter).
+So, Huffman coding of a typical English text file will save at least 40% over Latin-1 coding.
 Huffman coding for a binary file (such as a compiled executable, an image or a video) would have a very different set of distribution frequencies and so would have a different space savings.
 Most state-of-the-art compression programs use two or three coding schemes to adjust to different types of files.
 
@@ -381,3 +397,6 @@ minimum external path weight for the given set of letters.
  Thus by mathematical induction, function `buildHuffmanTree` creates the
  Huffman tree with minimum external path length.
 :::
+
+::::::
+

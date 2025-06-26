@@ -25,14 +25,23 @@ This means that we can store the nodes directly in an array, without having to i
 Instead we can use simple calculations to find the array indices of the children or the parent of a given node.
 
 We begin by assigning numbers to the node positions in the complete
-binary tree, level by level, from left to right as shown in the figure below.
+binary tree, level by level, from left to right as shown in [figure @fig:example_complete_bintree].
 Note that we start by assigning the root the number 0.
 
-::: figure
-#### Figure: Complete binary tree of 12 nodes
+<div id="fig:example_complete_bintree">
 
-![Complete binary tree node numbering](images/BinArray.png){width=400}
+::: latex
+\begin{forest}
+for tree={circle,draw,l=0,s sep=5mm}, [0 [1 [3 [7] [8]] [4 [9] [10]]] [2 [5 [11] [,phantom]] [6]]]
+\end{forest}
 :::
+
+::: online
+<inlineav id="CompleteBinTree" src="Binary/CompleteBinTree.js" name="Binary/CompleteBinTree" static/>
+:::
+
+Complete binary tree node numbering
+</div>
 
 An array can store the data values of the tree efficiently, placing each value in the array position corresponding to that node's position within the tree.
 The following table lists the array indices for the children, parent, and siblings of each node in the figure.
@@ -310,6 +319,11 @@ If all $n$ values are available at the beginning of the building
 process, we can build the heap faster than just inserting the values
 into the heap one by one.
 
+:::::: latex
+\booklink{Read section \ref{building-a-heap} online}{9.2-binary-heaps.html\#building-a-heap}
+::::::
+
+:::::: online
 Consider this example, with two possible ways to heapify the array [1,2,3,4,5,6,7] into a *max*-heap:
 
 <inlineav id="HeapBldChoiceCON" src="Binary/HeapBldChoiceCON.js" script="DataStructures/binaryheap.js" name="Heap Build Choices" static/>
@@ -412,3 +426,4 @@ Here is a visual explanation of the cost of `buildHeap`.
 <inlineav id="heapbuildProofCON" src="Binary/heapbuildProofCON.js" script="DataStructures/binaryheap.js" name="Heap build analysis proof Slideshow" links="Binary/heapbuildProofCON.css"/>
 :::
 
+::::::
