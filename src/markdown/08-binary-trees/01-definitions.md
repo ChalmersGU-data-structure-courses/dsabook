@@ -43,9 +43,45 @@ only node at level 0, and its depth is 0. A
 empty children. An [internal node]{.term} is any
 node that has at least one non-empty child.
 
-::: topic
-#### Example binary tree
+<div id="fig:example_bintree">
 
+::: latex
+\begin{forest}
+for tree={circle,draw,fit=rectangle},
+[A [B [NULL,rectangle,phantom] [D]] [C [E [G] [NULL,rectangle,phantom]] [F [H] [I]]]]
+\end{forest}
+:::
+
+::: online
+<inlineav id="BinExampCON" src="Binary/BinExampCON.js" name="Binary/BinExampCON" links="Binary/BinExampCON.css" static/>
+:::
+
+An example binary tree
+</div>
+
+<!-- Alternative, use GraphViz:
+```{.graphviz dpi=200 width=50mm #fig:example_bintree caption="Example binary tree"}
+graph {
+ranksep=0.3;
+node [shape=circle];
+{ node [shape=point, style=invis]; A0 A1 B0 B1 C0 E0 }
+
+A -- B; A -- C;
+{ rank=same; B -- A0 -- A1 -- C [style=invis] }
+
+B -- D; C -- E; C -- F;
+{ edge [style=invis]; B -- B0; B -- B1; C -- C0 }
+{ rank=same; B0 -- B1 -- D -- E -- C0 -- F [style=invis] }
+
+E -- G; F -- H; F -- I;
+{ edge [style=invis]; E -- E0 }
+{ rank=same; G -- E0 -- H -- I [style=invis] }
+}
+```
+-->
+
+[Figure @fig:example_bintree] above illustrates
+the various terms used to identify parts of a binary tree.
 Node $A$ is the root, and nodes $B$ and $C$ are $A$'s children.
 Nodes $B$ and $D$ together form a subtree. Node $B$ has two
 children: Its left child is the empty tree and its right child is $D$.
@@ -55,26 +91,48 @@ to $C$ to $E$ to $G$ form a path of length 3. Nodes $D$, $G$, $H$, and
 $I$ are leaves. Nodes $A$, $B$, $C$, $E$, and $F$ are internal nodes.
 The depth of $I$ is 3. The height of this tree is 3.
 
-<inlineav id="BinExampCON" src="Binary/BinExampCON.js" name="Binary/BinExampCON" links="Binary/BinExampCON.css" static/>
-:::
 
-The figure above illustrates
-the various terms used to identify parts of a binary tree.
-The figure below illustrates an important
+[Figure @fig:two_bintrees] below illustrates an important
 point regarding the structure of binary trees. Because *all* binary tree
 nodes have two children (one or both of which might be empty), the two
-binary trees in the figure are *not* the same.
+binary trees (a) and (b) in the figure are *not* the same.
 
+<div id="fig:two_bintrees">
+
+::: latex
+\phantom{.}\hfill
+\subbottom[]{
+    \begin{forest}
+    for tree={circle,draw,fit=rectangle}, [A [B] [NULL,rectangle,phantom]]
+    \end{forest}
+}\hfill
+\subbottom[]{
+    \begin{forest}
+    for tree={circle,draw,fit=rectangle}, [A [NULL,rectangle,phantom] [B]]
+    \end{forest}
+}\hfill\hfill
+\subbottom[]{
+    \begin{forest}
+    for tree={circle,draw,fit=rectangle}, [A [B] [NULL,rectangle,draw=none]]
+    \end{forest}
+\hfill}
+\subbottom[]{
+    \begin{forest}
+    for tree={circle,draw,fit=rectangle}, [A [NULL,rectangle,draw=none] [B]]
+    \end{forest}
+}\hfill\phantom{.}
 :::
-#### Two different binary trees
 
-(a) is a binary tree whose root has a non-empty left child.
-(b) is a binary tree whose root has a non-empty right child.
-(c) is the binary tree of (a) with the missing right child made explicit.
-(d) is the binary tree of (b) with the missing left child made explicit.
+::: online
+<inlineav id="BinDiffCON" src="Binary/BinDiffCON.js" name="Binary/BinDiffCON" static/>
+:::
 
-<inlineav id="BinDiffCON" src="Binary/BinDiffCON.js" name="Binary/BinDiffCON" links="Binary/BinDiffCON.css" static/>
-::::
+Two different binary trees:
+(a) the root has a non-empty left child;
+(b) the root has a non-empty right child; and
+(c) the same tree as (a), with the missing right child made explicit;
+(d) the same tree as (b), with the missing left child made explicit
+</div>
 
 Two restricted forms of binary tree are sufficiently important to
 warrant special names. Each node in a
@@ -86,7 +144,7 @@ from left to right. In the complete binary tree of height $d$, all
 levels except possibly level $d$ are completely full. The bottom level
 has its nodes filled in from the left side.
 
-The figure below illustrates
+[Figure @fig:full_complete_bintrees] below illustrates
 the differences between full and complete binary trees. There is no
 particular relationship between these two tree shapes; that is, the tree (a) is
 full but not complete while the tree (b) is complete but
@@ -94,11 +152,29 @@ not full. The [heap](#heaps-and-priority-queues) data
 structure is an example of a complete binary tree. The
 [Huffman coding tree](#huffman-coding-trees) is an example of a full binary tree.
 
-::: topic
-#### Examples of full and complete binary trees
+<div id="fig:full_complete_bintrees">
 
+::: latex
+\phantom{.}\hfill
+\subbottom[]{
+    \begin{forest}
+    for tree={circle,draw,fill=black,l=0,s sep=10mm}, [{} [{} [{}] [{} [{}] [{}]]] [{}]]
+    \end{forest}
+}\hfill\hfill
+\subbottom[]{
+    \begin{forest}
+    for tree={circle,draw,fill=black,l=0,s sep=5mm}, [{} [{} [{} [{}] [{}]] [{} [{}] [{}]]] [{} [{} [{}] [,phantom]] [{}]]]
+    \end{forest}
+}\hfill\phantom{.}
+:::
+
+::: online
 <inlineav id="FullCompCON" src="Binary/FullCompCON.js" name="Binary/FullCompCON" links="Binary/FullCompCON.css" static/>
-::::
+:::
+
+Examples of full and complete binary trees:
+(a) is full but not complete; (b) is complete but not full
+</div>
 
 ::: note
 *Note*: While these definitions for full and complete binary tree are the
@@ -125,24 +201,24 @@ structure because a list can be defined as either (1) an empty list or
 an empty tree or (2) a node pointing to two binary trees, one its left
 child and the other one its right child.
 
-:::: {#ListRecDS}
-<inlineav id="ListRecDSCON" src="Binary/ListRecDSCON.js" name="Binary/ListRecDSCON" links="Binary/RecursiveDSCON.css" static/>
-::::
-
-:::: {#BinRecDS}
-<inlineav id="BinRecDSCON" src="Binary/BinRecDSCON.js" name="Binary/BinRecDSCON" links="Binary/RecursiveDSCON.css" static/>
-::::
-
+::: dsvis
 The recursive relationships used to define a structure provide a natural
 model for any recursive algorithm on the structure.
 
+<inlineav id="ListRecDSCON" src="Binary/ListRecDSCON.js" name="Binary/ListRecDSCON" links="Binary/RecursiveDSCON.css" static/>
+
+<inlineav id="BinRecDSCON" src="Binary/BinRecDSCON.js" name="Binary/BinRecDSCON" links="Binary/RecursiveDSCON.css" static/>
+::::
+
+One way to think about recursion is to see it as *delegation*:
 Suppose you want to compute the sum of the values stored in a binary tree.
-You can ask two friends to help you.
+And since you are a lazy person you don't want to do most of the work yourself, so you ask two friends to help you.
 
 - The first friend will take the left subtree to sum it.
 - The second friend will take the right subtree to sum it.
 - The only thing you have to do is to sum the values that got from your friends.
-- You don't need to think about how your friends (the recursive calls) calculated their sums, you just accept that they are correct.
+
+You don't need to think about how your friends (the recursive calls) calculated their sums, as long as you accept that they are correct.
 
 ::: dsvis
 Here is a visual explanation of the same idea.
