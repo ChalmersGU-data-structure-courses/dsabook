@@ -28,6 +28,7 @@ $endif$
 
 \usepackage{tikz}
 \usepackage{forest}
+\usetikzlibrary{arrows}
 
 \usepackage{wrapfig}
 \usepackage{qrcode}
@@ -55,6 +56,7 @@ $endif$
 
 %% No paragraph indentation after some environments
 \usepackage{noindentafter}
+\NoIndentAfterEnv{pandoccrossrefsubfigures}
 \NoIndentAfterEnv{itemize}
 \NoIndentAfterEnv{enumerate}
 \NoIndentAfterEnv{description}

@@ -1,9 +1,12 @@
 # yaml-language-server: $schema=https://json.schemastore.org/yamllint.json
 
 metadata:
+  # Settings for panflute:
   panflute-path: pandoc/filters
   panflute-filters:
     - generic-filter
+  # Settings for pandoc-crossref:
+  chapters: true
 
 writer: chunkedhtml
 # pandoc --to=chunkedhtml --list-extensions
