@@ -10,8 +10,7 @@ efficiency is becoming less important. After all, processor speed and
 memory size still continue to improve. Won't today's efficiency
 problem be solved by tomorrow's hardware?
 
-> The short answer to this question is ***no***!
-
+The short answer to this question is ***no***!
 It is not at all certain that a twice as fast computer can solve
 twice as large problems. On the contrary -- most interesting problems
 are very difficult, in the sense that if we increase the computing power

@@ -161,7 +161,7 @@ The rest of this section gives a high-level overview of the ADTs covered through
 [Figure @fig:adt-overview] summarizes these ADTs and highlights how they relate to one another.
 Each ADT will be discussed in more detail later in the book, including their operations and the data structures used to implement them.
 
-![An overview of ADTS with their common implementations](resources/images/ADT_overview.png){#fig:adt-overview}
+![An overview of ADTs with their common implementations](resources/images/ADT_overview.png){#fig:adt-overview}
 
 
 ### Linear collections {#adt-linear-collections}
@@ -172,11 +172,15 @@ Insertion, removal, and retrieval operations often depend on the position within
 
 The ordered sequence ADTs found in this book are:
 
-- Stacks, a sequence with a Last-In-First-Out (LIFO) ordering
-- Queues, a sequence with a First-In-First-Out (FIFO) ordering
-- Double-ended queues (deques), which allow insertion and removal at both ends
-- Priority queues, return elements based on priority rather than insertion order
-- General lists, support adding, removing, and accessing elements
+- **Stacks**: sequences with a Last-In-First-Out (LIFO) ordering
+
+- **Queues**: sequences with a First-In-First-Out (FIFO) ordering
+
+- **Double-ended queues** (deques): allow insertion and removal at both ends
+
+- **Priority queues**: return elements based on priority rather than insertion order
+
+- **General lists**: support adding, removing, and accessing elements
 
 Ordered sequences are used in many applications and algorithms where the order of operations or items is important.
 For example, maintaining a task list, simulating a line of customers, or a editor’s undo/redo history.
@@ -187,9 +191,15 @@ Many programming tasks involve *retrieving specific information* from a large da
 For example, given a collection of people, how do we efficiently find the person with a specific personnummer?
 Two key abstract data types are commonly used to solve such information retrieval problems:
 
-- **Set**: A set represents an unordered collection of distinct items. It supports operations to *add* and *remove* elements, and to *check* whether a particular element is present. Duplicate elements are not allowed.
+- **Sets**:
+  represent unordered collections of distinct items.
+  They support operations to *add* and *remove* elements, and to *check* whether a particular element is present.
+  Duplicate elements are not allowed.
 
-- **Map** (also called a dictionary): A map represents a collection of *key-value pairs*. Each *key* maps to a corresponding *value*. Operations include *adding* or *removing* key-value pairs, *checking* if a key is present, and *retrieving* the value associated with a given key. Like sets, maps do not allow duplicate keys.
+- **Maps** (also called dictionaries):
+  represent collections of *key-value pairs*, where each *key* maps to a corresponding *value*.
+  Operations include *adding* or *removing* key-value pairs, *checking* if a key is present, and *retrieving* the value associated with a given key.
+  Like sets, maps do not allow duplicate keys.
 
 Most implementations of both sets and maps are designed to support fast insertion, deletion, and lookup operations, making them ideal for managing collections where quick access to data is important.
 

@@ -12,14 +12,6 @@ asymptotic complexity. Nor does asymptotic analysis say anything about
 which algorithm is best for sorting small lists. For answers to these
 questions, we can turn to empirical testing.
 
-::: topic
-#### Table: Empirical comparison {- #SortCompTable}
-
-Empirical comparison of sorting algorithms run on an
-Apple MacBook M3 Pro (2023 model).
-All times shown are seconds.
-
-The first table shows Python implementations, using CPython version 3.11:
 
 Sort                    1K      10K     100K       1M      10M   100K sorted   100K reversed
 ------------------  -------  -------  -------   ------  ------- ------------- ---------------
@@ -31,8 +23,8 @@ Merge (cutoff 20)    0.000    0.006    0.077     1.00     15.1         0.048    
 Quicksort            0.000    0.006    0.074     0.95     12.6         0.045           0.047
 Quick (cutoff 20)    0.000    0.005    0.066     0.87     11.8         0.030           0.032
 
-The second table shows Java implementations, using OpenJDK version 22.0
-(note that the arrays are 4 times larger than for the Python tests):
+: Runtime in seconds for Python implementations, using CPython version 3.11 {#tbl:empirical-sorting-python}
+
 
 Sort                     4K       40K      400K        4M       40M    400K sorted    400K reversed
 -------------------  -------   -------   -------   -------   -------  -------------  ----------------
@@ -44,9 +36,11 @@ Merge (cutoff 20)     0.001     0.009      0.12      1.03      12.3           0.
 Quicksort             0.001     0.008      0.06      0.66       8.2           0.04             0.03
 Quick (cutoff 20)     0.001     0.007      0.06      0.57       8.0           0.04             0.04
 
-:::
+: Runtime in seconds for Java implementations, using OpenJDK version 22.0
+  (note that the arrays are 4 times larger than for the Python tests) {#tbl:empirical-sorting-java}
 
-[The table above](#SortCompTable) shows timing
+
+Tables @tbl:empirical-sorting-python and @tbl:empirical-sorting-java above show timing
 results for actual implementations of the sorting algorithms presented
 in this chapter. The algorithms compared include
 [Insertion sort], [Bubble sort],
