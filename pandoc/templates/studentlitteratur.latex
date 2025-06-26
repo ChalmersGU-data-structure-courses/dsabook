@@ -26,6 +26,8 @@ $endif$
 \usepackage{amsmath,amssymb}
 \usepackage[utf8]{inputenc}
 
+\usepackage{forest}
+
 \usepackage{newunicodechar}
 \newunicodechar{≤}{\ensuremath{\leq}}
 \newunicodechar{≥}{\ensuremath{\geq}}
