@@ -6,7 +6,6 @@
 :::
 
 For some algorithms, the running time is always determined by the input size $n$.
-
 Consider the algorithm that finds the largest value in an array using sequential search algorithm.
 For any given size $n$ there are inifinitely many possible inputs -- all imaginable arrays of size $n$.
 However, no matter what array of size $n$ that the algorithm looks at, its running time will always be the same.
@@ -19,7 +18,6 @@ Consider the problem of finding the factorial of $n$.
 :::
 
 For most algorithms however, different inputs of a given size require different amounts of time.
-
 For example, consider the problem of searching an array containing $n$ integers to find the one with a particular value $K$.
 The sequential search algorithm begins at the first position in the array and looks at each value in turn until $K$ is found, and then it stops.
 So there is a wide range of possible running times for the algorithm, which is different from the largest-value search algorithm above.
@@ -47,7 +45,7 @@ the behavior of the algorithm. However, there are rare instances where a
 best-case analysis is useful -- in particular, when the best case has
 high probability of occurring.
 For example, if we know that the array we want to sort is *almost sorted*,
-we can take advantage of the best-case running time of [Insertion Sort].
+we can take advantage of the best-case running time of insertion sort.
 
 How about the worst case? The advantage to analyzing the worst case is
 that you know for certain that the algorithm must perform at least that

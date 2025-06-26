@@ -121,7 +121,7 @@ Tight bound
 : $f$ is a lower bound of $g$ **iff** both functions grow *at the same rate*, and we write this $f\in\Theta(g)$
 
 
-### Defining orders of growth
+#### Defining orders of growth
 
 How do we define upper and lower bounds?
 First, if $g$ is an upper bound of $f$, then this should mean something like $f(n)\leq g(n)$ *in the long run*.
@@ -150,10 +150,10 @@ Tight bound
 
 : or equivalently: $f\in\Theta(g)$ **iff** $f\in O(g) \wedge f\in\Omega(g)$
 
-(These definitions assume that $f$ and $g$ are *monotonically increasing*, i.e., that they never decrease when the input increases.
-But since we will only be using them for comparing computational resources, they will always be monotonically increasing.)
+These definitions assume that $f$ and $g$ are *monotonically increasing*, i.e., that they never decrease when the input increases.
+But since we will only be using them for comparing computational resources, they will always be monotonically increasing.
 
-::: topic
+::: example
 #### Example: Comparing two functions
 
 Assume $f(n) = n^2$ and $g(n) = 1000n\log n$.
@@ -161,18 +161,16 @@ How can we use the definitions above to prove that $f\in\Omega(g)$?
 
 We have to find positive numbers $k$ and $n_0$ so that $f(n)\geq k\cdot g(n)$.
 Since $g$ has a constant factor of 1000, we can try with $k=0.001$:
-
 $$
 k\cdot g(n) = 0.001 \cdot 1000n\log n = n\log n
 $$
-
 Now we readily see that $f(n) = n^2$ is larger than $k\cdot g(n) = n\log n$ for all $n\geq 1$, so we can set $n_0 = 1$.
 
 Note that there are plenty of possible values to choose from, such as $k=1$ and $n_0=13,789$.
-We can even use very large values such as $k=n_0=10^99$, what we are interested in is after all what happens when $n$ grows infinitly large.
+We can even use very large values such as $k=n_0=10^{99}$, what we are interested in is after all what happens when $n$ grows infinitly large.
 :::
 
-### Should we use $O$, $\Omega$ or $\Theta$?
+#### Should we use $O$, $\Omega$ or $\Theta$?
 
 If an algorithm has a lower bound of $\Omega(f)$, we know that it will never run asymptotically faster than $f$.
 But this is usually not very useful knowledge, because we are more interested in knowing how the algorithm works on on bad inputs.
@@ -184,7 +182,7 @@ But it is much more difficult to reason about $\Theta(f)$, and therefore we will
 So, is the lower bound useless?
 -- No, definitely not.
 The main use case for $\Omega$ is when we want to classify *problems*, not algorithms.
-One example is when proving that the lower bound for sorting is $\Omega(n\log n)$ (see section XX).
+One example is when proving that the lower bound for sorting is $\Omega(n\log n)$.<!--- (see section XX) -->
 But classifying problems is out of scope for this book, so we will not use $\Omega$ much.
 
 

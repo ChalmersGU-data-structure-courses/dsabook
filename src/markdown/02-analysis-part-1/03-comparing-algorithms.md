@@ -88,7 +88,7 @@ array containing $n$ integers is not, because the cost depends on the
 value of $n$ (i.e., the size of the input).
 
 ::::: {#SeqMax}
-:::: topic
+:::: example
 #### Example: Largest value in an array
 
 Consider a simple algorithm to solve the problem of finding the largest
@@ -97,16 +97,16 @@ in turn, saving the position of the largest value seen so far. This
 algorithm is called the *largest-value sequential search* and is
 illustrated by the following function:
 
-    // Return position of largest value in integer array A
-    function largest(A):
-        currlarge = 0                 // Position of largest element seen.
-        for i in 1 .. A.size-1:       // For each element,
-            if A[currlarge] < A[i]:   // if A[i] is larger,
-                currlarge = i         // remember its position.
-        return currlarge              // Return largest position
+    // Return position of largest value in integer array arr
+    function largest(arr):
+        pos = 0                    // Position of pos element seen.
+        for i in 1 .. arr.size-1:  // For each element,
+            if arr[pos] < arr[i]:  // if A[i] is larger,
+                pos = i            // remember its position.
+        return pos                 // Return pos position
 
-Here, the size of the problem is `A.size`, the number of integers
-stored in array `A`. The basic operation is to compare an integer's
+Here, the size of the problem is `arr.size`, the number of integers
+stored in array `arr`. The basic operation is to compare an integer's
 value to that of the largest value seen so far. It is reasonable to
 assume that it takes a fixed amount of time to do one such comparison,
 regardless of the value of the two integers or their positions in the
@@ -122,7 +122,7 @@ function `largest`. We do not care right now what the precise value of
 $c$ might be. Nor are we concerned with the time required to increment
 variable $i$ because this must be done for each value in the array, or
 the time for the actual assignment when a larger value is found, or the
-little bit of extra time taken to initialize `currlarge`. We just want a
+little bit of extra time taken to initialize `pos`. We just want a
 reasonable approximation for the time taken to execute the algorithm.
 The total time to run `largest` is therefore approximately $cn$, because
 we must make $n$ comparisons, with each comparison costing $c$ time. We
@@ -139,7 +139,7 @@ largest-value sequential search algorithm.
 ::::
 :::::
 
-::: topic
+::: example
 #### Example: Accessing the first array value
 
 The running time of a statement that assigns the first value of an
@@ -159,7 +159,7 @@ indicating that the size of the input $n$ has no effect on the running
 time. This is called a [constant running time]{.term}.
 :::
 
-:::: topic
+:::: example
 #### Example: Nested for-loop
 
 Consider the following code:

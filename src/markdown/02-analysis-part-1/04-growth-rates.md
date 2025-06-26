@@ -8,7 +8,9 @@
     - rename 2nd subheading - ugly to have "growth rates" twice
 :::
 
+<!--
 ### Faster computer, or faster algorithm?
+-->
 
 Imagine that you have a problem to solve, and you know of an algorithm
 whose running time is proportional to $n^2$ where $n$ is a measure of
@@ -131,7 +133,7 @@ benefit in terms of larger problem size that can run in a certain time
 on the new computer.
 
 
-### Growth rates
+#### Growth rates
 
 The [growth rate]{.term} for an algorithm is the
 rate at which the cost of the algorithm grows as the size of its input
@@ -229,14 +231,14 @@ effect on the resources consumed by an algorithm.
 This table shows costs for representative growth rates.
 
         n         $\log\log n$   $\log n$     $n$         $n\log n$       $n^2$      $n^3$     $2^n$
----------------- -------------- ---------- ---------- -----------------   ---------  --------- --------------------
-      $10$            $1.7$        $3.3$       $10$            $33$       $100$      $10^3$    $10^3$
-     $100$            $2.7$        $6.6$      $100$           $664$       $10^4$     $10^6$    $10^30$
-   $1K = 1000$        $3.3$         $10$     $1000$          $10^4$       $10^6$     $10^9$    $10^300$
-  $10K = 10^4$        $3.7$       $13.3$     $10^4$    $1.3\cdot 10^5$    $10^8$     $10^12$   $10^3000$
- $100K = 10^5$        $4.1$       $16.6$     $10^5$    $1.6\cdot 10^6$    $10^10$    $10^15$   $10^{30,000}$
-   $1M = 10^6$        $4.3$         $20$     $10^6$      $2\cdot 10^7$    $10^12$    $10^18$   $10^{300,000}$
-   $1G = 10^9$        $4.9$         $30$     $10^9$     $3\cdot 10^10$    $10^18$    $10^27$   $10^{300,000,000}$
+---------------- -------------- ---------- ---------- -----------------  ---------  ---------- --------------------
+     $10$            $1.7$       $3.3$       $10$            $33$        $100$      $10^3$     $10^3$
+    $100$            $2.7$       $6.6$      $100$           $664$        $10^4$     $10^6$     $10^{30}$
+  $1K = 1000$        $3.3$        $10$     $1000$          $10^4$        $10^6$     $10^9$     $10^{300}$
+ $10K = 10^4$        $3.7$      $13.3$     $10^4$     $1.3\cdot 10^5$    $10^8$     $10^{12}$  $10^{3000}$
+$100K = 10^5$        $4.1$      $16.6$     $10^5$     $1.6\cdot 10^6$    $10^{10}$  $10^{15}$  $10^{30,000}$
+  $1M = 10^6$        $4.3$        $20$     $10^6$     $2\cdot 10^7$      $10^{12}$  $10^{18}$  $10^{300,000}$
+  $1G = 10^9$        $4.9$        $30$     $10^9$     $3\cdot 10^{10}$   $10^{18}$  $10^{27}$  $10^{300,000,000}$
 
 :::
 ::::
