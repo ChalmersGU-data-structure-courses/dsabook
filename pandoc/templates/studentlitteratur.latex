@@ -80,6 +80,8 @@ $endif$
 \NoIndentAfterEnv{align}
 \NoIndentAfterEnv{align*}
 \NoIndentAfterEnv{center}
+\NoIndentAfterEnv{longtable}
+\NoIndentAfterCmd{\]}
 
 $font-settings.latex()$
 $common.latex()$
