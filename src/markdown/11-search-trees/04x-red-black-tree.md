@@ -7,7 +7,6 @@
 - Prio 2: don't write the full source code
 :::
 
-<!--
 ### Exercise 1
 
 <avembed-todo id="redBlackTreeColoring" src="Development/redBlackTreeColoring.html" type="pe" name="Red-Black Tree Coloring Exercise"/>
@@ -15,7 +14,6 @@
 ### Exercise 2
 
 <avembed-todo id="redBlackTreePRO" src="Development/redBlackTreePRO.html" type="pe" name="Red-Black Tree Proficiency Exercise"/>
--->
 
 
 A 2-3 tree is a conceptually elegant way to maintain a balanced search
