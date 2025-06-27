@@ -1,9 +1,9 @@
 
 ## Case study: Analysing binary search
 
-Now we will discuss the algorithmic complexity of the two search algorithms that we introduced in section XX (chapter: introduction).
+Now we will discuss the algorithmic complexity of the two search algorithms that we introduced in [Section @{sec:case-study-searching-in-a-list}].
 
-In section XX (this chapter), we deduced that the running time for linear search on an array if size $n$ is $O(n)$.
+In [Section @{sec:input-size}], we deduced that the running time for linear search on an array if size $n$ is $O(n)$.
 If we assume that the value is equally likely to appear in any location, this complexity is both the average case and the worst case.
 (The best case is constant, $O(1)$, and occurs when the searched value occurs first in the array.
 But as we already discussed we are rarely interested in the best case.)
@@ -15,10 +15,12 @@ But what is the complexity of the binary search algorithm?
 To find the worst-case cost of binary search, we can model the running time as a recurrence and then find the closed-form solution.
 Each recursive call to `binarySearch` cuts the size of the array approximately in half, so we can model the worst-case cost as follows, assuming for simplicity that $n$ is a power of two.
 
-\begin{eqnarray*}
-O(n) &=& O(n/2) + 1 \\
-O(1) &=& 1
-\end{eqnarray*}
+\begin{equation*}
+\begin{split}
+O(n) &= O(n/2) + 1 \\
+O(1) &= 1
+\end{split}
+\end{equation*}
 
 If we expand the recurrence, we will find that we can do so only $\log n$ times before we reach the base case, and each expansion adds one to the cost.
 
@@ -29,9 +31,9 @@ If we expand the recurrence, we will find that we can do so only $\log n$ times 
 
 Thus, the closed form solution of $O(n) = O(n/2) + 1$ can be modeled by the summation
 
-\begin{eqnarray*}
-\sum_{i=0}^{\log n} 1 &\in& O(\log n)
-\end{eqnarray*}
+$$
+\sum_{i=0}^{\log n} 1 \in O(\log n)
+$$
 
 ::: dsvis
 Here is a visual explanation of the complexity of binary search.

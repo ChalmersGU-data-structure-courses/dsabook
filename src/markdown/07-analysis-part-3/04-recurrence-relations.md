@@ -1,5 +1,5 @@
 
-## Recurrence relations
+## Recurrence relations {#recur-relations}
 
 ::: TODO
 - Prio 3: throughout this section, there are references to equations, both on this page and in the Summations section - these should be made into proper cross-references rather than hard-coded equation numbers

@@ -6,7 +6,7 @@ When we formulate a problem, and describe a data structure or an algorithm, it i
 These properties are very useful tools for analyzing the correctness of an algorithm.
 But they are also pedagogical tools, they help our understanding how an data structure or algorithm works.
 
-### Invariants
+#### Invariants
 
 Simply formulated, an invariant is a condition (or a set of conditions) that must always hold for your data structure, or algorithm.
 
@@ -14,7 +14,7 @@ Invariants can be more or less detailed, but if we make them too detailed they m
 Therefore we will keep them on a quite high level, in line with our decision to present algorithms in high-level pseudocode.
 We trust that you, the reader, is experienced enough to translate both pseudocode and invariants into more detailed descriptions.
 
-### Preconditions and postconditions
+#### Preconditions and postconditions
 
 Invariants can often be formulated as preconditions and postconditions on an algorithm:
 what do we assume of the inputs to the algorithm, and what can we promise about the output if the input is well-formed?
@@ -42,5 +42,4 @@ This means that we can formulate the following invariants:
 - The interval `high` - `low` strictly decreases in each iteration.
 
 Knowing these invariants, it becomes much easier to convince ourselves that the algorithm is correct and always terminates.
-
 :::

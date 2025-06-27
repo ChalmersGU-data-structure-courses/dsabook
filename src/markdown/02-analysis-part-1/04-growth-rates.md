@@ -36,8 +36,7 @@ algorithm's growth rate is greater than $cn$, such as $c_1n^2$, then
 you will *not* be able to do a problem ten times the size in the same
 amount of time on a machine that is ten times faster.
 
-::: example
-#### Example: Getting a 10 times faster computer
+### Getting a faster computer
 
 How much larger problems a faster computer solve in the same amount of time?
 Say that the old machine could solve a problem of size $n$ in an hour,
@@ -75,7 +74,6 @@ problem size (as a proportion to the original size) gained by a faster
 computer. This relationship holds true regardless of the algorithm's
 growth rate: Constant factors never affect the relative improvement
 gained by a faster computer.
-:::
 
 An algorithm with time equation $T(n) = 2n^2$ does not receive
 nearly as great an improvement from the faster machine as an algorithm

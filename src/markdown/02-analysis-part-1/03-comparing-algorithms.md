@@ -72,7 +72,7 @@ reliably other than to run an implementation of the algorithm on some
 computer. The only alternative is to use some other measure as a
 surrogate for running time.
 
-### Basic operations and input size
+### Basic operations and input size {#input-size}
 
 Of primary consideration when estimating an algorithm's performance is
 the number of [basic operations](#basic-operation){.term} required by the algorithm to process an input of a certain
@@ -139,6 +139,14 @@ largest-value sequential search algorithm.
 ::::
 :::::
 
+:::: latex
+There are more examples online.
+
+\booklink{Examples}{section-2.3.html}
+::::
+
+:::: online
+
 ::: example
 #### Example: Accessing the first array value
 
@@ -177,4 +185,6 @@ required to initialize `sum`, and to increment the loop counters `i` and
 `j`. In practice, these costs can safely be bundled into time $c_2$.)
 The total number of increment operations is $n^2$. Thus, we say that the
 running time is $T(n) = c_2 n^2$.
+::::
+
 ::::

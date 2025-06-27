@@ -1,5 +1,5 @@
 
-## Case study: Searching in a list
+## Case study: Searching in a list {#case-study-searching-in-a-list}
 
 ::: TODO
 - Prio 2: use cases for searching: dictionaries, sets, ...

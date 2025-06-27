@@ -63,7 +63,7 @@ $$
 O(1) < O(\log n) < O(\sqrt{n}) < O(n) < O(n\log n) < O(n^2) < \cdots
 $$
 $$
-\cdots < O(n^2\log n) < O(n^3) < O(n^k) < O(2^n) < O(10^n) < O(n!) < \cdots
+\cdots < O(n^2\log n) < O(n^3) < O(n^k) < O(2^n) < O(10^n) < O(n!)
 $$
 
 Note that we use strict equality here, and trust that you intuitively understand the difference between $\leq$ and $<$.
@@ -75,9 +75,10 @@ $$ O(\log_2(n)) = O(\ln(n)) = O(\log_10(n)) $$
 So we usually just write $O(\log n)$.
 The reason why the base is irrelevant is a direct consequence of the logarithm laws.
 
+::: online
 We leave as an exercise to the reader to figure out both the definition of $<$ and why the logarithm base is irrelevant.
 But we will come back to this issue in chapter XX.
-
+:::
 
 ### Analysing code fragments
 
@@ -133,7 +134,7 @@ If $p$ is a simple loop over A, with a constant-time operation in its body, then
 And then the outer loop $\langle \mbox{for}\ x \in A: p\rangle$ will be in $n\cdot O(n) = O(n^2)$.
 
 
-### Examples of algorithm analysis
+### Examples of algorithm analysis {#alg-analysis-examples}
 
 ::::: {#AssignAnal}
 :::: example
@@ -164,6 +165,14 @@ $O(n)$. By rule (3), the cost of the entire code fragment is also
 $O(n)$.
 ::::
 :::::
+
+::: latex
+More examples can be found in the online version of the book.
+
+\booklink{Examples}{section-2.7.4.html}
+:::
+
+::: online
 
 :::: example
 #### Example: Many for-loops
@@ -255,7 +264,7 @@ Note that the summation variable $i$ is the logarithm of the loop variable $k$, 
 
 Our analysis rules give the same result: the outer loop is logarithmic and the inner loop is linear, so we multiply them to $O(n \log n)$.
 ::::
-
+:::
 
 ### Advanced algorithm analysis
 
@@ -339,10 +348,12 @@ recursive call on the smaller input. Because the base case does no
 multiplications, its cost is zero. Thus, the running time for this
 function can be expressed as
 
-\begin{eqnarray*}
-T(n) &=& T(n-1) + 1, \textrm{ for } n>1 \\
-T(1) &=& 0
-\end{eqnarray*}
+\begin{equation*}
+\begin{split}
+T(n) & = T(n-1) + 1, \textrm{ for } n>1 \\
+T(1) & = 0
+\end{split}
+\end{equation*}
 
 The closed-form solution for this recurrence relation is $O(n)$.
-Recurrence relations are discussed further in section XX (chapter: analysis part 3).
+Recurrence relations are discussed further in [Section @sec:recur-relations].
