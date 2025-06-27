@@ -119,7 +119,7 @@ you are only looking for asymptotic complexities. When seeking a precise
 closed-form solution (i.e., you seek the constants for the expression),
 this method will probably be too much work.
 
-::: topic
+::: example
 #### Example: Mergesort
 
 Use the guessing technique to find the asymptotic bounds for Mergesort,
@@ -179,7 +179,7 @@ Therefore we have proved that $T(n)$ is in $O(n\log n)$.
 The following two examples are about the growth rates of a function (the factorial and the Fibonacci sequence),
 *not* about the time it takes to compute the function.
 
-::: topic
+::: example
 #### Example: Factorial function
 
 
@@ -265,7 +265,7 @@ $\log f(n) = \Theta(\log g(n))$ does not necessarily mean that
 $f(n) = \Theta(g(n))$.
 :::
 
-::: topic
+::: example
 #### Example: Fibonacci sequence
 
 What is the growth rate of the Fibonacci sequence? We define the
@@ -346,7 +346,7 @@ $T(n) = 2T(n/2) + 5n^2$; $T(1) = 7$.
 - We haven't introduced heaps yet - so this should move to later
 :::
 
-::: topic
+::: example
 #### Example: Building a heap
 
 Our next example models the cost of the algorithm to build a heap. You
@@ -494,7 +494,7 @@ $$
 This theorem may be applied whenever appropriate, rather than
 re-deriving the solution for the recurrence.
 
-::: topic
+::: example
 #### Example: Using the master theorem
 
 Apply the master theorem to solve
@@ -504,7 +504,7 @@ Because $a=3$, $b=5$, $c=8$, and $k=2$, we find that $3<5^2$. Applying
 case (3) of the theorem, $T(n) \in O(n^2)$.
 :::
 
-::: topic
+::: example
 #### Example: Master theorem for Mergesort
 
 Use the master theorem to solve the recurrence relation for Mergesort:

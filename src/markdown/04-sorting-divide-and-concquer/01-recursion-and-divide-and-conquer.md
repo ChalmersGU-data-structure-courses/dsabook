@@ -72,7 +72,7 @@ From there, the correct message (incremented by one each row)
 will eventually make it's way back to the person who asked.
 
 
-::: topic
+::: example
 #### Example: The Fibonacci sequence
 
 Here is an example of a function that is naturally written using recursion.

@@ -148,7 +148,7 @@ nodes stay near the top of the tree, resulting in reduced access cost.
 Proof that the splay tree meets the guarantee of $O(m \log n)$ is beyond
 the scope of our study.
 
-::: topic
+::: example
 #### Example: Searching in a splay tree
 
 Consider a search for value 89 in the splay tree of

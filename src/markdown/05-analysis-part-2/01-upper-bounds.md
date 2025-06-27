@@ -47,7 +47,7 @@ If we were to allow any non-monotonic functions, then the definition of upper bo
 You can look up the formal definition in mathematical textbooks, or in Wikipedia.
 :::
 
-::: topic
+::: example
 #### Example: Sequential search
 
 Consider the sequential search algorithm for finding a specified value
@@ -59,7 +59,7 @@ all values of $n > 1$, $c_s n/2 \leq c_s n$. Therefore, by the
 definition, $T(n)$ is in $O(n)$ for $n_0 = 1$ and $c = c_s$.
 :::
 
-::: topic
+::: example
 #### Example: Quadratic algorithm
 
 For a particular algorithm, $T(n) = c_1 n^2 + c_2 n$ in the
@@ -73,7 +73,7 @@ for all $n > 1$. So, $T(n) \leq c n^2$ for $c = c_1 + c_2$, and
 $n_0 = 1$. Therefore, $T(n)$ is in $O(n^2)$ by the definition.
 :::
 
-::: topic
+::: example
 #### Example: Accessing an array cell
 
 Assigning the value from a given position of an array to a variable

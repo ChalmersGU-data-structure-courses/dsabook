@@ -23,7 +23,7 @@ Here is a possible minimal interface for maps:
 Note that maps depend on two different types, the keys `K` and the values `V`.
 These types can be the same or different, depending on the needs of your application.
 
-::: topic
+::: example
 #### Example: Cash register
 
 The map is a perfect match for our supermarket example:
@@ -69,7 +69,7 @@ Unfortunately, most programming languages do not provide a multimap data
 structure. Instead, we can implement it ourselves. The idea is to use a
 map, whose value type is a *set* of the actual values that we are interested in.
 
-::: topic
+::: example
 #### Example: Search engine
 
 A multimap is the perfect data structure for our search engine example:

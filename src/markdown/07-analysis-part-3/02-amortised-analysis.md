@@ -42,7 +42,7 @@ factor of two better than the more pessimistic analysis that charges
 each operation in the series with its worst-case cost.
 -->
 
-::: topic
+::: example
 #### Example: Multipop on stacks
 
 Assume that we want to add a new operation *multipop* on stacks,
@@ -91,7 +91,7 @@ In the example, we let each *push* save an extra operation "for later", which is
 In a way we can say that each *push* takes 2 time units instead of one, and this extra time unit is saved so that *multipop* can make use of it.
 These storage of "for later" operations is called the *potential*.
 
-::: topic
+::: example
 #### Example: Incrementing a binary counter
 
 As another example of amortised analysis, consider the process of incrementing a binary counter.
@@ -143,7 +143,7 @@ allow the positions of records to change, because the most-frequently
 accessed record is first (and thus has least cost), followed by the next
 most frequently accessed record, and so on.
 
-::: topic
+::: example
 #### Example: Self-organizing lists
 
 **Theorem:** The total number of comparisons required by any series $S$

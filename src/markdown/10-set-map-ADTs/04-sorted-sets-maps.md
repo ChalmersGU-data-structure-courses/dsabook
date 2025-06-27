@@ -12,7 +12,7 @@ Some set and map implementations support answering range queries efficiently; we
 
 ### Sorted sets
 
-::: topic
+::: example
 #### Example: Between X and Y
 
 The first example range query is:
@@ -78,7 +78,7 @@ Note that it *extends* the `Set` interface, it has all the methods that normal s
 
 ### Sorted maps
 
-::: topic
+::: example
 #### Example: Between X and Y (again)
 
 Now consider the second range query in the example above:
@@ -115,7 +115,7 @@ Note the similarity to the interface for sorted sets.
                                      // Returns all keys k such that k1 ≤ k ≤ k2.
 
 
-::: topic
+::: example
 #### Example: Small Swedish towns
 
 Here is how to use a sorted map ADT to find all Swedish towns having

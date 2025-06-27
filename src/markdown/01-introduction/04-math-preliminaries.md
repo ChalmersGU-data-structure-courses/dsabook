@@ -159,7 +159,7 @@ Examples on real-life objects are "have the same colour", or "as heavy as".
 And if we look at strings, "have the same length" is an equivalence relation too.
 
 <!--
-::: topic
+::: example
 #### Example: Integers
 For the integers, $=$ is an equivalence relation that partitions each element into a distinct subset.
 In other words, for any integer $a$, three things are true.
@@ -174,14 +174,14 @@ So the requirements for symmetry and transitivity are never violated, and theref
 -->
 
 <!--
-::: topic
+::: example
 #### Example: Siblings
 If we clarify the definition of sibling to mean that a person is
 a sibling of themself, then the sibling relation is an
 equivalence relation that partitions the set of people.
 :::
 
-::: topic
+::: example
 #### Example: Modulus
 We can use the [modulus]{.term} function
 to define an equivalence relation.
@@ -222,14 +222,14 @@ The set on which the partial order is defined is called a [partially ordered set
 Elements $x$ and $y$ of a set are [comparable]{.term} under a given relation $R$ if either $xRy$ or $yRx$.
 If every pair of distinct elements in a partial order are comparable, then the order is called a [total order]{.term} or [linear order]{.term}.
 
-::: topic
+::: example
 #### Example: Less-than
 For the integers, relations $<$ and $\leq$ define partial orders.
 Operation $<$ is a total order because, for every pair of integers $x$ and $y$ such that $x \neq y$, either $x < y$ or $y < x$.
 Likewise, $\leq$ is a total order because, for every pair of integers $x$ and $y$ such that $x \neq y$, either $x \leq y$ or $y \leq x$.
 :::
 
-::: topic
+::: example
 #### Example: Subsets
 For the powerset of the integers, the subset operator defines a partial order (because it is antisymmetric and transitive).
 For example, $\{1, 2\}\subseteq\{1, 2, 3\}$.
@@ -363,7 +363,7 @@ Normally, this is written as $\log_b y = x$.  Thus, if $\log_b y = x$ then $b^x 
 Logarithms are used frequently by programmers.
 Here are two typical uses.
 
-::: topic
+::: example
 #### Example: Minimum bits
 Many programs require an encoding for a collection of objects.
 What is the minimum number of bits needed to represent $n$ distinct code values?
@@ -371,7 +371,7 @@ The answer is $\lceil \log_2 n \rceil$ bits.
 For example, if you have 1000 codes to store, you will require at least $\lceil \log_2 1000 \rceil = 10$ bits to have 1000 different codes (10 bits provide 1024 distinct code values).
 :::
 
-::: topic
+::: example
 #### Example: Binary search
 Consider the [binary search]{.term} algorithm for finding a given value within an array sorted by value from lowest to highest.
 Binary search first looks at the middle element and determines if the value being searched for is in the upper half or the lower half of the array.
@@ -653,7 +653,7 @@ Formal predicate logic can be viewed in this way, with the various "rules of log
 Symbolic manipulations to solve integration problems in introductory calculus classes are similar in spirit, as are high school geometry proofs.
 
 :::: {#SumDirect}
-::: topic
+::: example
 #### Example: Sum of first $n$ integers
 Here is a direct proof that $\sum_{i=1}^n i = (n+1)n/2$.
 If we take the first and last terms of the series, since they are 1 and $n$, of course they sum to $n+1$.
@@ -675,7 +675,7 @@ We then find a logical contradiction stemming from this assumption.
 If the logic used to find the contradiction is correct, then the only way to resolve the contradiction is to recognize that the assumption that the theorem is false must be incorrect.
 That is, we conclude that the theorem must be true.
 
-::: topic
+::: example
 #### Example: No largest integer
 Here is a simple proof by contradiction.
 
@@ -754,7 +754,7 @@ It is true if and only if the theorem itself is true, and therefore is reliable 
 Using the induction hypothesis to do work is exactly the same as using a recursive call to do work.
 
 :::: {#SumIEx}
-::: topic
+::: example
 #### Example: Sum of first $n$ integers
 Here is a sample proof by mathematical induction.
 Call the sum of the first $n$ positive integers $\mathbf{S}(n)$.
@@ -814,7 +814,7 @@ to discover an insight unique to that problem that might
 not be helpful or relevant when proving other summations.
 
 :::: {#nOdds}
-::: topic
+::: example
 #### Example: Sum of odd numbers
 Here is another simple proof by induction that illustrates
 choosing the proper variable for induction.
@@ -862,7 +862,7 @@ $$
 -->
 
 :::: {#FactRecurProof}
-::: topic
+::: example
 #### Example: Recurrence relation
 This example shows how we can use induction to prove that a proposed
 closed-form solution for a [recurrence relation]{.term} is correct.
@@ -897,7 +897,7 @@ Thus, we have proved the theorem correct by mathematical induction.
 
 <!--
 :::: {#ThmStamps}
-::: topic
+::: example
 #### Example: Stamps
 This example uses induction without involving summations or other
 equations.
@@ -930,7 +930,7 @@ Thus, by mathematical induction, the theorem is correct.
 :::
 ::::
 
-::: topic
+::: example
 #### Example: Divisible by prime
 Here is an example using strong induction.
 
@@ -973,7 +973,7 @@ induction hypothesis.
 
 <!--
 :::: {#ThmRegion}
-::: topic
+::: example
 #### Example: Two-coloring
 Define a [two-coloring]{.term} for a
 set of regions as a way of assigning one of two colors to each region
@@ -1036,7 +1036,7 @@ $n$.
 <!--
 This section's final example shows how induction can be used to prove that a recursive function produces the correct result.
 
-::: topic
+::: example
 #### Example: Factorial
 We would like to prove that function $fact$ does indeed compute the factorial function.
 There are two distinct steps to such a proof.
@@ -1110,7 +1110,7 @@ Before doing an estimate, you should decide on acceptable error bounds, such as 
 Once you are confident that an estimate falls within your error bounds, leave it alone!
 Do not try to get a more precise estimate than necessary for your purpose.
 
-::: topic
+::: example
 #### Example: Bookcases for a million pages
 How many bookcases does it take to store books containing one million pages?
 Let's estimate that a book of 200 pages requires one cm on the library shelf (it will help to look at the size of any handy book), yielding about 50 metres of shelf space for one million pages.
@@ -1128,7 +1128,7 @@ Maybe have the the doubling technique here?
 :::
 
 <!--
-::: topic
+::: example
 #### Example: Buying a car
 Is it more economical
 to buy a car that gets 20 miles per gallon, or one that gets 30 miles
@@ -1147,7 +1147,7 @@ quickly, and changes in gasoline prices will also greatly affect the
 outcome.
 :::
 
-::: topic
+::: example
 #### Example: Supermarket shopping
 When at the supermarket doing the week's shopping, can you estimate
 about how much you will have to pay at the checkout?
@@ -1211,7 +1211,7 @@ In fact, since $r_0 = 0$, it cannot even be quite this long.
 It turns out that to get a good result, it is crucial to pick good values for both $b$ and $t$.
 To see why, consider the following example.
 
-::: topic
+::: example
 #### Example: Varying the $t$ value
 Given a $t$ value of 13, we can get very different results depending on the $b$ value that we pick, in ways that are hard to predict.
 

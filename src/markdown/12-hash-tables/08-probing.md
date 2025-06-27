@@ -13,7 +13,8 @@ possible. Probe function **p** allows us many options for how to do
 collision resolution. In fact, linear probing is one of the worst
 collision resolution methods.
 
-::: dsvis
+:::::: online
+::: example
 #### Example: The problem with linear probing
 
 Recall how linear probing works:
@@ -24,6 +25,7 @@ Now the problem is illustrated here:
 
 <inlineav id="linProbeCON2" src="Hashing/linProbeCON2.js" name="Linear Probing Slideshow 2" links="Hashing/linProbeCON.css"/>
 :::
+::::::
 
 Again, the ideal behavior for a collision resolution mechanism is that
 each empty slot in the table will have equal probability of receiving

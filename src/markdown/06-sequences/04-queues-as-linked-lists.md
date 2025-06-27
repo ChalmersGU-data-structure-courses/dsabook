@@ -73,8 +73,8 @@ Linked queue -- dequeue exercise.
 
 
 
-::: topic
-### Example: Sorting a linked list using Mergesort
+::: example
+#### Example: Sorting a linked list using Mergesort
 
 We introduced Mergesort in section XX, and then we showed how to sort an array.
 But Mergesort can also be used to sort linked lists, because it does not require random access to the list elements.

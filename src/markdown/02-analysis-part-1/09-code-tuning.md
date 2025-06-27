@@ -57,7 +57,7 @@ exceed the amount of work saved. While one test might be cheaper than
 the work potentially saved, the test must always be made and the work
 can be avoided only some fraction of the time.
 
-::: topic
+::: example
 #### Example: Computer graphics
 
 A common operation in computer graphics applications is to find which

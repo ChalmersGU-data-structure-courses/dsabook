@@ -82,7 +82,7 @@ A particular label might be related to other pieces of information or other labe
 This collection can in turn be given a label, forming a hierarchy of concepts and labels.
 This hierarchy of labels allows us to focus on important issues while ignoring unnecessary details.
 
-::: example 
+::: example
 #### Example: Computers, hard drives, and CPUs
 
 We apply the label "hard drive" to a collection of hardware that
@@ -135,7 +135,7 @@ commonly referred to as the Application Programmer Interface, or API,
 for the ADT. The interface becomes a form of communication between two
 programmers. -->
 
-<!-- ::: topic
+<!-- ::: example
 #### Example: API for a list class
 
 A particular programming environment might provide a library that

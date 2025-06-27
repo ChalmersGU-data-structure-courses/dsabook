@@ -108,7 +108,7 @@ selected for the subtraction should be one that makes most of the terms
 cancel out. To solve sum $f$, we pick a known function $g$ and find a
 pattern in terms of $f(n) - g(n)$ or $f(n)/g(n)$.
 
-::: topic
+::: example
 #### Example: Divide-and-guess {- #SumIEx}
 
 Find the closed form solution for $\sum_{i=1}^n i$ using the
@@ -160,7 +160,7 @@ at a few terms. Fortunately, it is easy to check our hypothesis with
 induction.
 :::
 
-::: topic
+::: example
 #### Example: Exponentially decreasing numbers
 
 Solve the summation
@@ -189,7 +189,7 @@ easily deduce a guess that $f(n) = 1 - \frac{1}{2^n}$. Again, a simple
 induction proof will verify the guess.
 :::
 
-::: topic
+::: example
 #### Example: Geometric series
 
 Solve the summation
@@ -231,7 +231,7 @@ $$
 where $r \neq 1$.
 :::
 
-::: topic
+::: example
 #### Example: Shifting method
 
 For our second example of the shifting method, we solve

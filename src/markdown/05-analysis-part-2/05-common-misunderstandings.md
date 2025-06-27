@@ -58,7 +58,7 @@ can characterize the worst input case for an arbitrary size. Ideally, we
 can determine the growth rate for the characterized best, worst, and
 average cases as the input size grows.
 
-::: topic
+::: example
 #### Example: Best case for sequential search
 
 What is the growth rate of the best case for sequential search? For any

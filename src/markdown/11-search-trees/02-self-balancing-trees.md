@@ -26,10 +26,16 @@ it a bad search structure. And requiring that the BST always be in the
 shape of a complete binary tree requires excessive modification to the
 tree during update, as we see in this example.
 
-::: topic
+::: example
 #### Example: Rebalancing a BST
 
-![An attempt to re-balance a BST after insertion can be expensive](images/BSTBal.png){width=500}
+::::: online
+![](images/BSTBal.png){width=500}
+:::::
+
+::::: latex
+![](images/BSTBal.png){width=\textwidth}
+:::::
 
 An attempt to re-balance a BST after insertion can be expensive. (a) A
 BST with six nodes in the shape of a complete binary tree. (b) A node

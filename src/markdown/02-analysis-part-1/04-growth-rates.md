@@ -36,17 +36,15 @@ algorithm's growth rate is greater than $cn$, such as $c_1n^2$, then
 you will *not* be able to do a problem ten times the size in the same
 amount of time on a machine that is ten times faster.
 
+::: example
+#### Example: Getting a 10 times faster computer
+
 How much larger problems a faster computer solve in the same amount of time?
 Say that the old machine could solve a problem of size $n$ in an hour,
 and that the new machine is ten times faster than the old.
 What is the largest problem that the new machine can solve in one hour?
-The following table shows just that for five running-time functions.
+Table @tbl:problem-size-speedup shows just that for five running-time functions.
 
-:::: {#Speedups}
-::: topic
-#### Table: Getting a 10 times faster computer
-
-This table shows the increase in problem size that can be run in the same time on a computer that is ten times faster.
 
   Growth rate    Max $n$ (old)   Max $n'$ (new)   Relation $n$ and $n'$                        $n'/n$
 --------------- --------------- ----------------  ---------------------------------------- ---------------
@@ -56,6 +54,8 @@ This table shows the increase in problem size that can be run in the same time o
     $2 n^2$           $70$            $223$       $n' = n\cdot\sqrt{10}$                        $3.2$
       $2^n$           $13$             $16$       $n' = n + 3$                               $\approx 1$
 
+: The increase in problem size that can be run in the same time on a computer that is ten times faster {#tbl:problem-size-speedup}
+
 Explanations:
 
 - The first column lists the right-hand sides for five growth rate equations.
@@ -64,9 +64,6 @@ Explanations:
   Variable $n'$ is the greatest size for the problem that can run in 100,000 basic operations.
 - The fourth column shows how the size of $n$ changed to become $n'$ on the new machine.
 - The fifth column shows the increase in the problem size as the ratio of $n'$ to $n$.
-
-:::
-::::
 
 This table illustrates many important points. The first two equations
 are both linear; only the value of the constant factor has changed. In
@@ -78,6 +75,7 @@ problem size (as a proportion to the original size) gained by a faster
 computer. This relationship holds true regardless of the algorithm's
 growth rate: Constant factors never affect the relative improvement
 gained by a faster computer.
+:::
 
 An algorithm with time equation $T(n) = 2n^2$ does not receive
 nearly as great an improvement from the faster machine as an algorithm
@@ -219,16 +217,11 @@ of $n$. Note that for constants $a, b \geq 1, a^n$ grows faster than
 $n^b$.
 
 We can get some further insight into relative growth rates for various
-algorithms from the following table. Most of the growth rates that
+algorithms from table @tbl:growth-rates below. Most of the growth rates that
 appear in typical algorithms are shown, along with some representative
 input sizes. Once again, we see that the growth rate has a tremendous
 effect on the resources consumed by an algorithm.
 
-:::: {#GrowthTable}
-::: topic
-#### Table: Growth rates
-
-This table shows costs for representative growth rates.
 
         n         $\log\log n$   $\log n$     $n$         $n\log n$       $n^2$      $n^3$     $2^n$
 ---------------- -------------- ---------- ---------- -----------------  ---------  ---------- --------------------
@@ -240,8 +233,8 @@ $100K = 10^5$        $4.1$      $16.6$     $10^5$     $1.6\cdot 10^6$    $10^{10
   $1M = 10^6$        $4.3$        $20$     $10^6$     $2\cdot 10^7$      $10^{12}$  $10^{18}$  $10^{300,000}$
   $1G = 10^9$        $4.9$        $30$     $10^9$     $3\cdot 10^{10}$   $10^{18}$  $10^{27}$  $10^{300,000,000}$
 
-:::
-::::
+: Costs for representative growth rates {#tbl:growth-rates}
+
 
 ::: dsvis
 ### Growth rates exercises

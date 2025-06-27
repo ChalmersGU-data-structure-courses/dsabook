@@ -52,7 +52,7 @@ because it is uncommon that the input to a problem is randomly distributed.
 Assuming a uniform distribution will often lead to wrong conclusion about the average running time of an algorithm.
 For example, which sorting algorithm is the best to use depends a lot on how the data is distributed.
 
-::: topic
+::: example
 #### Example: sorting English words
 
 Assume that we want to create an alphabetically sorted list of words from a collection of English texts.

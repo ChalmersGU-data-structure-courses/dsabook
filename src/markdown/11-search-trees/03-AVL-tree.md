@@ -133,7 +133,7 @@ on any node that is found to be unbalanced. Deletion is similar;
 however, consideration for unbalanced nodes must begin at the level of
 the *deleteMin* operation.
 
-::: topic
+::: example
 #### Example: AVL insertion
 
 In [Figure #AVLinsert](#AVLinsert) (b), the

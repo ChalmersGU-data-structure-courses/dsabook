@@ -129,8 +129,8 @@ Furthermore, a *good* hash function should also respect the following:
 - *uniform distribution*: $\mathbf{h}$ should map the expected inputs as evenly as possible over the possible output values
 - *efficiency*: the hash function should be fast to calculate
 
-
-#### The worst hash function
+::: example
+#### Example: The worst hash function
 
 The requirements above tells us that the following is a valid hash function, because is both deterministic and preserves equality:
 
@@ -139,6 +139,7 @@ The requirements above tells us that the following is a valid hash function, bec
 \end{eqnarray*}
 
 However, it's a really bad hash function, because it gives the worst possible distribution.
+:::
 
 This means that if you implement a hash table which uses this constant hash function, it will still work.
 It will answer all your questions correctly, and insertion and deletion will work just as expected.

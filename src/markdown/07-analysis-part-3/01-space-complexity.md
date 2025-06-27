@@ -26,7 +26,7 @@ requirements.
 Time complexity helps us to abstract away from hardware-specific details, constant factors and lower-order terms, so that we can focus on what has the most impact for large inputs.
 In the same way we want to abstract away from the actual memory usage in bytes, and instead focus on how the memory used by a data structure depends on the data size.
 
-::: topic
+::: example
 #### Example: Arrays and linked lists
 
 What are the space requirements for an array of $n$ integers?
@@ -48,7 +48,7 @@ kept to a minimum while allowing maximum access. The need to maintain a
 balance between these opposing goals is what makes the study of data
 structures so interesting.
 
-::: topic
+::: example
 #### Example: Integers
 
 How much memory does an integer use?
@@ -71,7 +71,7 @@ Therefore the space usage of an integer is logarithmic, $O(\log N)$ to store an 
 
 And finally a more complex example, about friendship:
 
-::: topic
+::: example
 #### Example: Friendship links
 
 Imagine that we want to keep track of friendships between $n$ people.
@@ -110,7 +110,7 @@ When we analyse space usage of algorithms, we are usually only interested in the
 Let's say that an algorithm is *in-place* if it only uses constant additional space, $O(1)$.
 For example, insertion sort is in-place, because it only allocates a constant number of variables to complete.
 
-::: topic
+::: example
 #### Example: Mergesort
 
 How much additional space does mergesort use?
@@ -134,7 +134,7 @@ The most common solution is called bottom-up mergesort, and it has an additional
 So, mergesort is not an in-place algorithm because it uses at least linear additional space.
 But what about quicksort, didn't we say that it is in-place?
 
-::: topic
+::: example
 #### Example: Quicksort
 
 How much additional space does quicksort use?
@@ -191,7 +191,7 @@ Note that initially building the lookup table requires a certain amount
 of time. Your application must use the lookup table often enough to make
 this initialization worthwhile.
 
-::: topic
+::: example
 #### Example: Binsort
 
 Another example of the space/time tradeoff is typical of what a

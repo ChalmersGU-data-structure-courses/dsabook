@@ -12,7 +12,7 @@ We can specify a minimal interface for sets like this:
         remove(x: T)            // Removes x from the set.
         contains(x: T) -> Bool  // Returns true if x is in the set.
 
-::: topic
+::: example
 #### Example: Spell-checking
 
 We can use a set for the spell-checking example:

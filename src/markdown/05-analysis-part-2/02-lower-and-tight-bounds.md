@@ -37,7 +37,7 @@ Lower bound
 
 
 :::: {#AAnalEx}
-::: topic
+::: example
 #### Example: Quadratic algorithm
 
 Assume $T(n) = c_1 n^2 + c_2 n$ for $c_1$ and $c_2 > 0$. Then,
@@ -226,7 +226,7 @@ Big-Omega      $f \in \Omega(g)$   $k > 0$
 Little-Omega   $f \in \omega(g)$   $k = \infty$
 
 
-::: topic
+::: example
 #### Example: Comparing two functions
 
 Assume $f(n) = n^2$ and $g(n) = 1000n\log n$.

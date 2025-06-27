@@ -148,7 +148,7 @@ the factorial function above, recursion can easily be replaced by
 iteration.
 
 ::::: {#StackFact}
-:::: topic
+:::: example
 #### Example: Factorial function
 
 As a simple example of replacing recursion with a stack, consider the

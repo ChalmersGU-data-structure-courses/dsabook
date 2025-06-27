@@ -377,7 +377,7 @@ decision is typically based on the value of the current node. Many
 problems that require information flow on binary search trees are
 "guided" in this way.
 
-::: topic
+::: example
 #### Example: Minimum value in a tree
 
 An extreme example is finding the minimum value in a BST. A bad solution
