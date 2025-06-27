@@ -87,7 +87,8 @@ any of the sorting algorithms we have seen so far!
 :::
 
 :::::: latex
-\booklink{Read rest of \ref{sec:use-cases-for-priority-queues} online}{section-6.11.html\#sec:use-cases-for-priority-queues}
+More examples can be found in the online version of the book.
+\booklink{More examples online}{6.11}{sec:use-cases-for-priority-queues}
 ::::::
 
 :::::: online

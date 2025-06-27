@@ -34,7 +34,7 @@ iterate through the elements in the list -- i.e., the list should be a
 Collection.
 
 :::::: latex
-\booklink{Read rest of \ref{sec:general-lists} online}{section-6.10.html\#sec:general-lists}
+\booklink{Read the rest online}{6.10}{sec:general-lists}
 ::::::
 
 :::::: online

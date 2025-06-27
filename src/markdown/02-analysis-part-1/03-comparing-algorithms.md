@@ -140,9 +140,9 @@ largest-value sequential search algorithm.
 :::::
 
 :::: latex
-There are more examples online.
+More examples can be found in the online version of the book.
 
-\booklink{Examples}{section-2.3.html}
+\booklink{More examples online}{2.3}{sec:input-size}
 ::::
 
 :::: online

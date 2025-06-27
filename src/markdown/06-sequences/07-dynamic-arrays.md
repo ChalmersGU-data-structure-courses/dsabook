@@ -214,7 +214,7 @@ elements to be copied.
 :::
 
 :::::: latex
-\booklink{Read rest of \ref{sec:how-much-to-increase-the-array-size} online}{section-6.7.html\#sec:how-much-to-increase-the-array-size}
+\booklink{Read the rest online}{6.7}{sec:how-much-to-increase-the-array-size}
 ::::::
 
 In short, the overhead of using a dynamic array list is at most

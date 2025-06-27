@@ -14,7 +14,7 @@ save space. Later, they can be uncompressed for use, which costs some
 time, but only once.
 
 :::::: latex
-\booklink{Read section \ref{case-study-huffman-coding} online}{9.4-case-study-huffman-coding.html}
+\booklink{Read the rest online}{9.4}{sec:case-study-huffman-coding}
 ::::::
 
 We often represent a set of items in a computer program by assigning a

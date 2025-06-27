@@ -4,7 +4,7 @@
 In this subsection we present techniques for calculating the amount of [overhead]{.term} required by a [binary tree]{.term}, based on its node implementation.
 
 :::::: latex
-\booklink{Read section \ref{space-requirements} online}{8.3-implementing-binary-trees.html\#space-requirements}
+\booklink{Read the rest online}{8.3}{sec:space-requirements}
 ::::::
 
 :::::: html

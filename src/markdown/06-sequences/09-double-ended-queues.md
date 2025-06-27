@@ -81,7 +81,7 @@ an additional possibility to move both forwards and backwards in the
 list, and to efficiently add and remove elements from both ends.
 
 :::::: latex
-\booklink{Read rest of \ref{sec:double-ended-queues} online}{section-6.9.html\#sec:double-ended-queues}
+\booklink{Read the rest online}{6.9}{sec:double-ended-queues}
 ::::::
 
 :::::: online

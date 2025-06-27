@@ -7,12 +7,12 @@
 :::
 
 ::: latex
-Code tuning involves optimizing specific parts of a program to improve performance, often by reducing runtime or memory usage. 
-While it doesn’t change the algorithm’s complexity, it can lead to significant speedups, sometimes by a factor of five to ten. 
+Code tuning involves optimizing specific parts of a program to improve performance, often by reducing runtime or memory usage.
+While it doesn’t change the algorithm’s complexity, it can lead to significant speedups, sometimes by a factor of five to ten.
 Effective tuning focuses on the most time-consuming parts of the code and is best guided by empirical analysis and profiling tools.
 The full text can be read online.
 
-\booklink{Read section online}{section-2.9.html}
+\booklink{Read section online}{2.9}{sec:code-tuning}
 :::
 
 :::: html

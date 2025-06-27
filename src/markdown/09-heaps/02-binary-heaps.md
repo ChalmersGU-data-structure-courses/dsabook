@@ -320,7 +320,7 @@ process, we can build the heap faster than just inserting the values
 into the heap one by one.
 
 :::::: latex
-\booklink{Read section \ref{building-a-heap} online}{9.2-binary-heaps.html\#building-a-heap}
+\booklink{Read the rest online}{9.2}{sec:building-a-heap}
 ::::::
 
 :::::: online

@@ -106,7 +106,7 @@ calls add to the stack. Each return from a subroutine
 off the stack.
 
 :::::: latex
-\booklink{Read section \ref{sec:case-study-implementing-recursion} online}{section-6.2.html\#sec:case-study-implementing-recursion}
+\booklink{Read the rest online}{6.2}{sec:case-study-implementing-recursion}
 ::::::
 
 

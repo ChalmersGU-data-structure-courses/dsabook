@@ -91,7 +91,7 @@ The traversal function visits the node and its children (if any) in the desired 
 Here is a very generic pseudocode for all kinds of traversal:
 
 :::::: latex
-\booklink{Read section \ref{traversing-implementation} online}{8.4-traversing-a-binary-tree.html\#traversing-implementation}
+\booklink{Read the rest online}{8.4}{sec:traversing-implementation}
 ::::::
 
     function traverse(node):

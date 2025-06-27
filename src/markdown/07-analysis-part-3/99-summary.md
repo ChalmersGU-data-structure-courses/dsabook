@@ -10,6 +10,6 @@
 This final section contains some review questions about the contents of this chapter.
 
 :::::: latex
-\booklink{Answer quiz online}{section-7.6.html}
+\booklink{Answer quiz online}{7.6}{sec:ch07-review}
 ::::::
  -->

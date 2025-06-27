@@ -108,7 +108,7 @@ But Mergesort can also be used to sort linked lists, because it does not require
 Thus, Mergesort is the method of choice when the input is in the form of a linked list.
 
 :::::: latex
-\booklink{Read section \ref{sec:case-study-sorting-a-linked-list-using-mergesort} online}{section-6.4.html\#sec:case-study-sorting-a-linked-list-using-mergesort}
+\booklink{Read the rest online}{6.4}{sec:case-study-sorting-a-linked-list-using-mergesort}
 ::::::
 
 :::::: online

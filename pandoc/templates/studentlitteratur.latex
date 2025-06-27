@@ -39,18 +39,15 @@ $endif$
 \usepackage{forest}
 \usetikzlibrary{calc,shapes.multipart,chains,arrows}
 
-\usepackage{wrapfig}
 \usepackage{qrcode}
 
-\newcommand{\booklink}[2]{%
+\newcommand{\booklink}[3]{%
   \begin{marginfigure}%
-    \qrcode[height=12mm]{https://chalmersgu-data-structure-courses.github.io/dsabook/html/#2}%
-    \caption*{#1}%
+    \tiny\sffamily%
+    \vspace{-1mm}\caption*{\centering Section \ref{#3}}%
+    \qrcode[height=12mm]{https://chalmersgu-data-structure-courses.github.io/dsabook/html/section-#2.html\##3}\\%
+    \vspace{-1mm}\caption*{\centering #1}%
   \end{marginfigure}%
-  % \begin{wrapfigure}{r}[15mm]{25mm}\centering%
-  %   \qrcode[height=15mm]{https://chalmersgu-data-structure-courses.github.io/dsabook/html/#2}%
-  %   \caption*{#1}%
-  % \end{wrapfigure}%
 }
 
 \usepackage{newunicodechar}

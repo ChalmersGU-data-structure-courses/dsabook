@@ -6,7 +6,7 @@ It serves as a review and reference, allowing you to revisit relevant sections w
 If you're comfortable with these preliminaries, you can safely skip ahead to the next section.
 
 :::::: latex
-\booklink{Read section \ref{mathematical-preliminaries} online}{1.4-mathematical-preliminaries.html}
+\booklink{Read the rest online}{1.4}{sec:mathematical-preliminaries}
 ::::::
 
 

@@ -4,7 +4,7 @@
 :::::: latex
 This section discusses one particular kind of binary trees, where all nodes have either two children or no children, and how you can reason about them.
 
-\booklink{Read section \ref{case-study-full-binary-trees} online}{8.2-case-study-full-binary-trees.html}
+\booklink{Read the rest online}{8.2}{sec:case-study-full-binary-trees}
 ::::::
 
 

@@ -14,7 +14,7 @@ of:
 2.  Returning (passing up) information to the recursive function's caller.
 
 :::::: latex
-\booklink{Read section \ref{iteration-recursion-and-information-flow} online}{8.5-iteration-recursion-and-information-flow.html}
+\booklink{Read the rest online}{8.5}{sec:iteration-recursion-and-information-flow}
 ::::::
 
 Any given problems might need to do either or both.

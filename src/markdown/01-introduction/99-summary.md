@@ -18,5 +18,5 @@ In the following chapter, we delve deeper into the formal analysis of algorithms
 This final section contains some review questions about the contents of this chapter.
 
 :::::: latex
-\booklink{Answer quiz online}{section-1.8.html}
+\booklink{Answer quiz online}{1.8}{sec:ch01-review}
 ::::::
