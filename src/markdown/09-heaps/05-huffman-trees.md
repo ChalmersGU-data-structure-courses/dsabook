@@ -44,7 +44,7 @@ you are probably aware that not all characters are used equally often in
 many applications. For example, the various letters in an English
 language document have greatly different frequencies of use.
 
-The following table shows the relative
+Table @tbl:relative-frequencies below shows the relative
 frequencies of the letters of the alphabet. From this table we can see
 that the letter 'E' appears about 60 times more often than the letter
 'Z'. In normal Latin-1, the words "DEED" and "MUCK" require the same
@@ -53,12 +53,6 @@ which are composed of relatively common letters, should be storable in
 less space than words such as "MUCK", which are composed of relatively
 uncommon letters.
 
-::: topic
-#### Table: Relative frequencies of the alphabet
-
-Relative frequencies for the 26 letters of the alphabet as they appear
-in a selected set of English documents. "Frequency" represents the
-expected frequency of occurrence per 1000 letters, ignoring case.
 
  Letter    Frequency    Letter    Frequency
 --------  -----------  --------  -----------
@@ -76,7 +70,8 @@ expected frequency of occurrence per 1000 letters, ignoring case.
     L         42           Y           22
     M         24           Z            2
 
-:::
+: Relative frequencies for the 26 letters of the alphabet as they appear in a selected set of English documents.
+  "Frequency" represents the expected frequency of occurrence per 1000 letters, ignoring case {#tbl:relative-frequencies}
 
 ::::::
 
@@ -151,7 +146,8 @@ simple.
 
 - Repeat this process until all of the partial Huffman trees have been combined into one.
 
-::: dsvis
+:::::: online
+::: example
 #### Example: Constructing a Huffman tree
 
 Assume the following relative frequencies for eight selected letters:
@@ -165,6 +161,7 @@ Here is a slideshow that illustrates the Huffman tree construction process for t
 
 <inlineav id="huffmanBuildCON" src="Binary/huffmanBuildCON.js" script="DataStructures/huffman.js" name="Huffman Coding Tree Slideshow: Build" links="DataStructures/huffman.css Binary/huffmanCON.css"/>
 :::
+::::::
 
 Here is pseudocode for the tree-building process.
 It takes a list of characters paired with their frequencies, and returns the final Huffman tree:
@@ -277,7 +274,7 @@ $$
 \frac{c_1 f_1 + c_2 f_2 + \cdots + c_n f_n}{f_T}
 $$
 
-::: topic
+::: example
 #### Example: Expected savings
 
 Let's repeat the frequencies and the Huffman codes for each of the letters in our running example:
