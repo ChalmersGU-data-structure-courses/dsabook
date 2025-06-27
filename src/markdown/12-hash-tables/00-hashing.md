@@ -1,5 +1,5 @@
 
-# Hash tables
+# Hash tables {#hash-tables}
 
 ::: TODO
 - Prio 2: update examples - they are not the best

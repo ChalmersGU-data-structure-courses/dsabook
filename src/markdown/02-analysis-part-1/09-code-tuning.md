@@ -6,6 +6,16 @@
 - Prio 3: add an image explaining the graphics example
 :::
 
+::: latex
+Code tuning involves optimizing specific parts of a program to improve performance, often by reducing runtime or memory usage. 
+While it doesn’t change the algorithm’s complexity, it can lead to significant speedups, sometimes by a factor of five to ten. 
+Effective tuning focuses on the most time-consuming parts of the code and is best guided by empirical analysis and profiling tools.
+The full text can be read online.
+
+\booklink{Read section online}{section-2.9.html}
+:::
+
+:::: html
 In practice, there is not such a big difference in running time between
 an algorithm with growth rate $O(n)$ and another with growth rate
 $O(n \log n)$. There is, however, an enormous difference in running
@@ -99,3 +109,5 @@ structure or algorithm. The most important rule of code tuning is:
 ::: center
 ***First tune the algorithm, then tune the code.***
 :::
+
+::::

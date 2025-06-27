@@ -5,6 +5,15 @@
 - Prio 3: add another example
 :::
 
+:::: latex
+Asymptotic algorithm analysis is a method for estimating how an algorithm’s performance scales with input size. 
+While it helps identify efficient algorithms, it has limitations such as inaccuracy for small inputs and difficulty modeling complex problems. 
+The full text can be read online.
+
+\booklink{Read section online}{section-2.10.html}
+::::
+
+::::html
 [Asymptotic algorithm analysis](#algorithm-analysis){.term} is an analytic tool, whereby we model the key aspects of an
 algorithm to determine the growth rate of the algorithm as the input
 size grows. It has proved hugely practical, guiding developers to use
@@ -62,4 +71,4 @@ How can we know how the data is distributed, on average?
 George Zipf observed already in 1932 that the relative frequency of the $n$-th most common word in a language is approximately inversely proportional to $n$. [refer to Wikipedia Zipf's law]
 We can use this observation to simulate a number of large texts, which we then can use for making an empirical comparison between different sorting algorithms.
 :::
-
+::::

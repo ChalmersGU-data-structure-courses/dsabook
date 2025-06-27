@@ -1,5 +1,5 @@
 
-# Search trees
+# Search trees {#search-trees}
 
 This chapter covers *binary search trees (BSTs)*, a data
 structure that uses a binary tree to implement a set or a map.
