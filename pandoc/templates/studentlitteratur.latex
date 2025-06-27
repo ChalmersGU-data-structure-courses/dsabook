@@ -98,7 +98,7 @@ $common.latex()$
 
 %% Font settings for code blocks
 %% The commented ones are Pandoc's default settings
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},fontsize=\footnotesize}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},fontsize=\footnotesize,xleftmargin=\parindent}
 \renewcommand{\AlertTok}         [1]{\textbf{#1}}
 \renewcommand{\AnnotationTok}    [1]{\textbf{\textit{#1}}}
 \renewcommand{\AttributeTok}     [1]{#1}
