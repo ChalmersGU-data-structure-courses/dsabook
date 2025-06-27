@@ -4,7 +4,7 @@ variables:
   babel-lang: english
   documentclass: studentlitteratur
   classoption:
-    - cmyk
+    # - cmyk
     - noparts
     # - 170x245
 

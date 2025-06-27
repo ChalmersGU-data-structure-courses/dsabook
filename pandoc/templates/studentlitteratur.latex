@@ -131,6 +131,39 @@ $common.latex()$
 \renewcommand{\VerbatimStringTok}[1]{\textit{#1}}
 \renewcommand{\WarningTok}       [1]{\textbf{\textit{#1}}}
 
+%% Uncomment these when we want to make a colour-pdf:
+% \renewcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+% \renewcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+% \renewcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+% \renewcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+% \renewcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{#1}}
+% \renewcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+% \renewcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\rmfamily\textit{#1}}}
+% \renewcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\rmfamily\textbf{\textit{#1}}}}
+% \renewcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+% \renewcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+% \renewcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+% \renewcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+% \renewcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+% \renewcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+% \renewcommand{\ExtensionTok}[1]{#1}
+% \renewcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+% \renewcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+% \renewcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{\textbf{#1}}}
+% \renewcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+% \renewcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+% \renewcommand{\NormalTok}[1]{#1}
+% \renewcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+% \renewcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+% \renewcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+% \renewcommand{\RegionMarkerTok}[1]{#1}
+% \renewcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+% \renewcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+% \renewcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+% \renewcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+% \renewcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+% \renewcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+
 $for(header-includes)$
 $header-includes$
 $endfor$
