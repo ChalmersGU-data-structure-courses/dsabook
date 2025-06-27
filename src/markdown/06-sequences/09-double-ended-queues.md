@@ -22,7 +22,7 @@
 ### Invariants
 
 
-### Use case(s)
+### Use case(s) for deques
 
 
 ### Implementing deques using circular dynamic arrays
@@ -46,17 +46,47 @@ this in the obvious way by storing two pointers: one to the node
 following it (as in the singly linked list), and a second pointer to the
 node preceding it.
 
+::: latex
+\begin{center}
+\begin{tikzpicture}[
+    double link/.style n args=1{
+        on chain,
+        rectangle split,
+        rectangle split horizontal,
+        rectangle split parts=3,
+        anchor=center,
+        draw,
+        node contents={\nodepart{two}#1\nodepart{three}},
+    },
+    start chain=going right,
+]
+    \node [on chain, double link={8}];
+    \node [join={by <->}, double link={20}];
+    \node [join={by <->}, double link={23}];
+    \node [join={by <->}, double link={12}];
+    \node [join={by <->}, double link={15}];
+    \node [join={by <->}, double link={42}];
+    \path [<-, draw, shorten >=10pt] (chain-1.two north) |- node [at end] {head} ++(-.8,.5);
+    \path [<-, draw, shorten >=10pt] (chain-6.two north) |- node [at end] {tail} ++(-.8,.5);
+\end{tikzpicture}
+\end{center}
+:::
+
+::: online
 <inlineav id="DoublyLinkedList-CON" src="ChalmersGU/DoublyLinkedList-CON.js" script="DataStructures/DoubleLinkList.js" name="ChalmersGU/DoublyLinkedList-CON" links="DataStructures/DoubleLinkList.css ChalmersGU/CGU-Styles.css" static/>
+:::
 
 The most common reason to use a doubly linked list is because it gives
 an additional possibility to move both forwards and backwards in the
-list, and to efficiently add and remove elements from both ends. Whether
-a list implementation is doubly or singly linked should be hidden from
-the `List` class user.
+list, and to efficiently add and remove elements from both ends.
 
-Like our singly linked list implementation, the doubly linked list
-implementation makes use of a **header pointer**, but we also add a
-**tail pointer** to the end of the list.
+:::::: latex
+\booklink{Read rest of \ref{sec:double-ended-queues} online}{section-6.9.html\#sec:double-ended-queues}
+::::::
+
+:::::: online
+
+Like our linked queue implementation, the doubly linked list makes use of two pointers -- one to the first element (the *head*), and one to the last element (the *tail*).
 
 Here is an implementation for the class variables and the internal list
 node class. The only real difference between single linked lists is that
@@ -95,7 +125,7 @@ we don't show them here.
 Adding elements becomes a bit trickier, because we have to make sure that all pointers are updated correctly.
 We have to handle inserting into an empty list specially, because then both head and tail will point to the same cell.
 
-    datatype DoubleDeque implements Deque:
+    datatype DoubleDeque:
         ...
         insertFirst(x):
             if dequeSize == 0:
@@ -120,7 +150,7 @@ We have to handle inserting into an empty list specially, because then both head
 
 The same goes for removing elements -- the one-element list is a special case.
 
-    datatype DoubleDeque implements Deque:
+    datatype DoubleDeque:
         ...
         removeFirst():
             // precondition: dequeSize > 0
@@ -140,3 +170,4 @@ The same goes for removing elements -- the one-element list is a special case.
             dequeSize = dequeSize - 1
             return removed.elem
 
+::::::

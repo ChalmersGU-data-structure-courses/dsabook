@@ -33,6 +33,12 @@ it. Finally, we should be able to know the size of the list, and to
 iterate through the elements in the list -- i.e., the list should be a
 Collection.
 
+:::::: latex
+\booklink{Read rest of \ref{sec:general-lists} online}{section-6.10.html\#sec:general-lists}
+::::::
+
+:::::: online
+
 ### ADT for general lists
 
 Now we can define the ADT for a list object in terms of a set of
@@ -146,7 +152,7 @@ beginning of a list, and appending at the end.
 
 Here's the code for addition.
 
-    datatype LinkedList implements List:
+    datatype LinkedList:
         ...
         add(i, x):
             // precondition: 0 <= i <= size
@@ -176,7 +182,7 @@ TODO
 
 Here's the code for deletion:
 
-    datatype LinkedList implements List:
+    datatype LinkedList:
         ...
         remove(self, i):
             // precondition: 0 <= i < size
@@ -218,3 +224,5 @@ kind of iterator is called a
 [ListIterator](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/ListIterator.html),
 which is part of Java's standard
 [LinkedList](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/LinkedList.html).
+
+::::::

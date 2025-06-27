@@ -36,33 +36,39 @@ called a "queue", and getting into line to wait for service is called
 existence of computers. They call a queue a "[FIFO]{.term}" list, which stands
 for "First-In, First-Out".
 
-### ADT for stacks
+#### ADT for stacks
 
-The accessible element of the stack is called the `top` element.
+The accessible element of the stack is called the *top* element.
 Elements are not said to be inserted, they are
 [pushed](#push){.term} onto the stack. When
-removed, an element is said to be [popped](#pop){.term} from the stack. Here is our [ADT]{.term} for stacks:
+removed, an element is said to be [popped](#pop){.term} from the stack.
+Here is our [ADT]{.term} for stacks:
 
     interface Stack of T extends Collection:
         push(x: T)     // Pushes x on top of the stack.
         pop() -> T     // Pops the top of the stack and returns it.
         peek() -> T    // Returns the top element, without removing it.
 
-There are two main approaches to implementing stacks: the [array-based stack]{.term} and the [linked stack]{.term}.
+There are two main approaches to implementing stacks: the [linked stack]{.term} and the [array-based stack]{.term}.
+They will be discussed in sections @sec:stacks-implemented-as-linked-lists, @sec:stacks-implemented-using-arrays and @sec:dynamic-arrays.
 
 <!--
 #### Invariants
  -->
 
-### ADT for queues
+#### ADT for queues
 
-Here is a sample queue ADT.
-This section presents two implementations for queues: the [array-based queue]{.term} and the [linked queue]{.term}.
+The accessible element of the queue is called the *front* element.
+Inserting is called [enqueue]{.term} and removing [dequeue]{.term}.
+Here is our [ADT]{.term} for queues:
 
     interface Queue of T extends Collection:
         enqueue(x: T)    // Enqueues x at the end of the queue.
         dequeue() -> T   // Dequeues the frontmost element.
         peek() -> T      // Returns the frontmost element, without removing it.
+
+There are two main queue implementations: the [linked queue]{.term} and the [array-based queue]{.term}.
+They are discussed in sections @sec:queues-implemented-as-linked-lists, @sec:queues-implemented-using-arrays and @sec:dynamic-arrays.
 
 <!--
 #### Invariants
@@ -71,6 +77,7 @@ This section presents two implementations for queues: the [array-based queue]{.t
 
 ### Case study: Implementing recursion
 
+:::::: online
 ::: alert
 WARNING! You should not read this section unless you are already
 comfortable with implementing
@@ -83,6 +90,7 @@ just gets in the way of understanding. There are good reasons to
 understand how recursion is implemented, but helping you to write
 recursive functions is not one of them.
 :::
+::::::
 
 Perhaps the most common computer application that uses
 [stacks] is not even
@@ -95,7 +103,15 @@ local variables) onto a stack. This information is called an
 [activation record]{.term}. Further subroutine
 calls add to the stack. Each return from a subroutine
 [pops](#pop){.term} the top activation record
-off the stack. As an example, here is a recursive implementation for the
+off the stack.
+
+:::::: latex
+\booklink{Read section \ref{sec:case-study-implementing-recursion} online}{section-6.2.html\#sec:case-study-implementing-recursion}
+::::::
+
+
+:::::: online
+As an example, here is a recursive implementation for the
 factorial function.
 
     // Recursively compute and return n-factoral (n!)
@@ -245,6 +261,8 @@ and executes the appropriate operation. In the case of a `TOH` operation
 operations executed by the recursive version. However, these operations
 must be placed on the stack in reverse order, so that they will be
 popped off in the correct order.
+
+::::::
 
 <!--
 ### Use cases for queues

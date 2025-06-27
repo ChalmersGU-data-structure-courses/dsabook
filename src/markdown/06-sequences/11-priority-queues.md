@@ -36,7 +36,7 @@ queue supports the following operations:
 
 ### ADT for priority queues
 
-In chapter XX, we will see how to implement a priority queue so that
+In chapter @sec:priority-queues-and-heaps, we will see how to implement a priority queue so that
 both adding and removing the minimum take $O(\log n)$ time.
 
     interface PriorityQueue of T extends Collection:
@@ -55,7 +55,7 @@ turn it into a maximum priority queue.
 -->
 
 
-### Use cases
+### Use cases for priority queues
 
 Now let's look at a couple of applications of priority queues.
 
@@ -86,6 +86,11 @@ time. Therefore, the total runtime is $O(n \log n)$ -- as efficient as
 any of the sorting algorithms we have seen so far!
 :::
 
+:::::: latex
+\booklink{Read rest of \ref{sec:use-cases-for-priority-queues} online}{section-6.11.html\#sec:use-cases-for-priority-queues}
+::::::
+
+:::::: online
 
 ::: example
 #### Example: Finding the top 100 items
@@ -161,19 +166,19 @@ If we generalize this problem to keeping track of the top $k$
 transactions, then the complexity of `add` is $O(\log k)$.
 :::
 
+::::::
 
 ### Implementing priority queues using sorted lists
 
 It is very easy to implement priority queues using sorted lists (either linked lists or dynamic arrays).
+Here are very basic ideas how to implement the operations:
 
-    datatype PriorityQueue:
+    datatype NaivePriorityQueue:
         list = new empty list
-
         add(x):
             insert x into list, keeping it sorted
-
         removeMin():
-            remove the smallest element of list
+            remove the smallest element in list
 
 If we decide to use a linked list, then we make sure it is always sorted with the smallest value first in the list.
 If we instead use a dynamic array, we have to keep it *reversely* sorted.
@@ -181,8 +186,6 @@ The reason is the same as for stacks: it is efficient to remove elements from th
 This means that `removeMin` will be a very efficient, constant time operation, just as `pop` for stacks.
 
 However, inserting an element into a sorted list, keeping it sorted, is in the worst case linear, $O(n)$.
-Therefore, our sorting example above becomes a quadratic implementation, $O(n^2)$.
-In fact, `pqSort` from above using sorted list priority queues becomes a non-inplace variant of Insertion sort.
+Therefore, our sorting example in section @sec:use-cases-for-priority-queues becomes a quadratic implementation, $O(n^2)$, if we use this naive implementation of priority queues.
 
-Later, in chapter XX, we will show a more efficient version of priority queues, based on *binary trees*.
-
+Later, in chapter @sec:priority-queues-and-heaps, we will show a more efficient version of priority queues, based on *binary trees*.

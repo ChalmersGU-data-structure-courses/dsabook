@@ -6,12 +6,8 @@ It holds multiple elements and supports two main operations: checking the number
 
     interface Collection of T:
         // We assume that we can iterate over the elements in the collection, using a for loop.
-
-        // The number of elements in this collection.
-        size: Int
-
-        // Returns true if the collection is empty.
-        isEmpty() -> Bool:
+        size: Int               // The number of elements in this collection.
+        isEmpty() -> Bool:      // Returns true if the collection is empty.
             return size == 0
 
 Note that this very interface will not be implemented as it is, but
@@ -30,7 +26,7 @@ second element, and so on. So, define a [list]{.term} to be a finite, ordered se
 the mathematical concept of a [sequence]{.term}.
 
 "Ordered" in this definition means that each element has a position in
-the list. So the term "ordered" in this context does **not** mean that
+the list. So the term "ordered" in this context does ***not*** mean that
 the list elements are sorted by value. (Of course, we can always choose
 to sort the elements on the list if we want; it's just that keeping the
 elements sorted is not an inherent property of being a list.)
