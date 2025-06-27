@@ -8,6 +8,12 @@ _private*
 .#*
 build
 plots
+temp
+
+# Generated files
+book.pdf
+dsabook.pdf
+dsabook.tex
 
 # MacOS-specific files
 .DS_Store
@@ -16,8 +22,20 @@ plots
 __pycache__/
 *.py[cod]
 
+# VS Code
 .vscode
-book.pdf
-temp
-dsabook.pdf
-dsabook.tex
+
+# Core latex/pdflatex auxiliary files:
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+.*.lb
+
