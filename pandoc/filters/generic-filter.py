@@ -22,7 +22,7 @@ def hide_term_links(link):
 
 def make_details(elem):
     content = list(elem.content)
-    assert len(content) >= 2
+    assert len(content) >= 2, f"Not enough children to make <details>, {elem}"
     elem.content = [
         pf.RawBlock('<details open="true">'),
         pf.RawBlock("<summary>"),
@@ -36,7 +36,7 @@ def make_details(elem):
 
 def make_example(elem):
     content = list(elem.content)
-    assert len(content) >= 2
+    assert len(content) >= 2, f"Not enough children to make example, {elem}"
     title = pf.stringify(content[0]).strip()
     elem.content = [
         pf.RawBlock(f'\\begin{{fancybox}}[frametitle={{{title}}}]', format='latex'),
