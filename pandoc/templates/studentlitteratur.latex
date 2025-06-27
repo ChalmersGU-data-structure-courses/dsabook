@@ -84,8 +84,8 @@ $endif$
 $font-settings.latex()$
 $common.latex()$
 
-\usepackage[zerostyle=c]{newtxtt} %% serif, ok bold, slanted italics, any kind of 0: c=Ø-like, d=dotted, a=O-like
-% \usepackage{inconsolata}  %% sans-serif, ok bold, no italics, Ø-like 0
+\usepackage{inconsolata}  %% sans-serif, ok bold, no italics, Ø-like 0
+% \usepackage[zerostyle=c]{newtxtt} %% serif, ok bold, slanted italics, any kind of 0: c=Ø-like, d=dotted, a=O-like
 % \usepackage[scaled]{GoMono}  %% serif, ok bold, slanted italics, Ø-like 0
 % \usepackage[scaled]{DejaVuSansMono}  %% sans-serif, ok bold, slanted italics, dotted 0
 % \usepackage[scaled]{beramono}  %% sans-serif, ok bold, slanted italics, dotted 0
