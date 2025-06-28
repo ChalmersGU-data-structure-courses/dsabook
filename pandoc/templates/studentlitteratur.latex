@@ -26,6 +26,115 @@ $endif$
 \usepackage{amsmath,amssymb}
 \usepackage[utf8]{inputenc}
 
+\usepackage{ccicons}
+
+\makeatletter
+
+\renewcommand{\stdl@copyrightmsg}{%
+  \textcopyright~%
+  THE AUTHORS%
+  % \MakeUppercase{$for(author)$$author$$sep$ $endfor$}%
+}
+
+\renewcommand{\maketitle}{%
+  %%%% Title page:
+  \thispagestyle{empty}
+  \noindent\hspace*{34.5mm}\begin{minipage}[t]{70mm}%
+    \vspace*{36pt}%
+    \begin{tikzpicture}[node distance=0mm,
+      tbox/.style={inner sep=0pt,align=left}]
+      \node[tbox,anchor=south west] (title) at (0,0) {%
+        \begin{varwidth}{70mm}
+          \raggedright\normalfont\fontsize{20}{24}\selectfont\thetitle
+        \end{varwidth}
+      };
+      \node[tbox,below=of title.south west,anchor=north west,minimum height=14pt] (subtitle) {%
+        \begin{varwidth}{70mm}
+          \raggedright\normalsize\itshape\thesubtitle
+        \end{varwidth}
+      };
+      \node[tbox, below=of subtitle.south west,anchor=north west, minimum height=4mm] (spacing) {};
+      \node[tbox,fit={(title) (subtitle) (spacing)}] (A) {};
+      \draw[line width=0.3pt,below=2mm] (A.south west) -- (A.south east);
+    \end{tikzpicture}
+    \par\vspace*{2mm}
+      \normalfont\fontsize{11}{15}\scshape\textls[100]{\MakeLowercase\theauthor}\par
+    \vspace*{7.5mm}
+    \normalfont\fontsize{10}{15}\thetranslator
+    \if\theedition1\relax\else
+    \vspace{7.5mm}
+    \stdl@Ordinal{\theedition}~\stdl@editionnamex\par\fi
+  \end{minipage}
+  % \vfill
+  % \noindent\hspace*{34.5mm}\begin{minipage}[t]{70mm}
+  %   \includegraphics{Studlit_inlaga_svart_08}
+  % \end{minipage}
+  \newpage
+  %%%% Copyright page:
+  \thispagestyle{empty}
+  \enlargethispage{10mm}
+  \noindent\begin{minipage}[t]{79.2mm}
+    \normalfont\fontsize{8.5}{13}\selectfont\RaggedRight%
+    \thecovertext
+  \end{minipage}
+  \vfill
+  \noindent\begin{minipage}[t]{82mm}%{79.2mm}
+    \setlength{\parindent}{0pt}\setlength{\parskip}{2.5mm}
+    \raggedright
+    \tikz[baseline] {%
+      \draw[thick,rounded corners=2pt] (0,0) -- (3ex,0) -- (60:3ex) -- cycle;
+      \draw[very thick,line cap=round] (1.5ex, 0.55ex) -- (1.5ex, 1.45ex);
+    }
+    \sffamily\fontsize{8.5}{13}\selectfont\textbf{Copying prohibited}\par
+    \normalfont\fontsize{8.5}{13}\selectfont
+
+    This book is protected by the Swedish Copyright Act. Apart from \\
+    the restricted rights for teachers and students to copy material \\
+    for educational purposes, as regulated by the Bonus Copyright \\
+    Access agreement, any copying is prohibited. For information \\
+    about this agreement, please contact your course coordinator \\
+    or Bonus Copyright Access.
+
+    Some parts of this book is licensed under MIT and some under \\
+    Creative Commons \ccbyncsaeu\ CC BY-NC-SA 4.0.
+
+    Material that was added prior to 2025-03-10 is licensed under \\
+    the MIT license. To view a copy of this license, visit \\
+    \url{https://opensource.org/license/mit/}
+
+    Material that was added after 2025-03-10 is licensed under \\
+    CC BY-NC-SA 4.0. To view a copy of this license, visit \\
+    \url{https://creativecommons.org/licenses/by-nc-sa/4.0/}
+
+
+    \ccAttribution~\textbf{BY}: Credit must be given to the authors. \\
+    \ccShareAlike~\textbf{SA}: Adaptations must be shared under the same terms. \\
+    \ccNonCommercialEU~\textbf{NC}: Only noncommercial use of your work is permitted.
+    \par
+    \vspace*{2.5mm}
+    \theartnr
+    \theisbn
+    \stdl@editionname~\theedition:1
+
+    \stdl@copyrightmsg
+
+    \stdl@thetranslator
+    \thetechnicalreview
+    \thecoverlayout
+    \thecoverimage
+    \vspace{2.5mm}\theprinter~\theprintyear
+  \end{minipage}
+  \newpage
+}
+
+\makeatother
+
+% Studentlitteratur default is \vspace*{86pt}
+\renewcommand{\aftertoctitle}{\pagestyle{frontheadings}\thispagestyle{frontchapter}\par\nobreak\vspace*{50pt}}
+
+% \usepackage{studentlitteratur-thm}
+
+
 \usepackage{titlesec}
 % Make \subsubsection behave like \paragraph:
 \titleformat{\subsubsection}[runin]{\sffamily\normalsize\bfseries}{\thesubsubsection}{1em}{}
