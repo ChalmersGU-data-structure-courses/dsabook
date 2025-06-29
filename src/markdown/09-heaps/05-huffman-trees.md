@@ -44,7 +44,7 @@ you are probably aware that not all characters are used equally often in
 many applications. For example, the various letters in an English
 language document have greatly different frequencies of use.
 
-Table @tbl:relative-frequencies below shows the relative
+@Tbl:relative-frequencies below shows the relative
 frequencies of the letters of the alphabet. From this table we can see
 that the letter 'E' appears about 60 times more often than the letter
 'Z'. In normal Latin-1, the words "DEED" and "MUCK" require the same
@@ -332,7 +332,7 @@ Huffman tree building is an example of a
 [greedy algorithm]{.term}. At each step, the
 algorithm makes a "greedy" decision to merge the two subtrees with
 least weight. This makes the algorithm simple, but does it give the
-desired result? This section concludes with a proof that the Huffman
+desired result? This concludes with a proof that the Huffman
 tree indeed gives the most efficient arrangement for the set of letters.
 The proof requires the following lemma.
 

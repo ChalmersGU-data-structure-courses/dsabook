@@ -27,13 +27,12 @@ use what are called [rotations](#rotation){.term}.
 
 ### Rotations
 
-Rotation is an operation that takes a node in the tree and moves it one
-level higher. Figure @fig:SingleRotation
-illustrates rotation. Here, $P$ and $S$ are nodes, while $A$, $B$ and
+Rotation is an operation that takes a node in the tree and moves it one level higher.
+@Fig:SingleRotation illustrates rotation. Here, $P$ and $S$ are nodes, while $A$, $B$ and
 $C$ represent subtrees.
 
-In Figure (a), node $S$ is the left child of the root. A *right rotation*
-transforms it into the tree shown in Figure (b),
+In figure (a), node $S$ is the left child of the root. A *right rotation*
+transforms it into the tree shown in figure (b),
 where node $S$ has become the root. Note that, because the value of
 $S$ is less than the value of $P$, $P$ must become $S$'s right child.
 Right rotation means transforming a tree from having the shape in (a) to
@@ -67,7 +66,7 @@ with values 7 and 24 are no longer balanced.
 ](images/AVLins.png){width=60% #fig:AVLinsert}
 
 Consider what happens when we insert a node with key value 5, as shown
-in figure @fig:AVLinsert. The tree on
+in @fig:AVLinsert. The tree on
 the left meets the AVL tree balance requirements. After the insertion,
 two nodes no longer meet the requirements. Because the original tree met
 the balance requirement, nodes in the new tree can only be unbalanced by
@@ -86,9 +85,9 @@ node.
 Our problem now is how to balance the tree in $O(\log n)$ time. It turns
 out that we can do this using a series of rotations. Cases 1 and 4 can
 be fixed using a [single rotation]{.term}, as
-shown in figure @fig:AVLsingle.
+shown in @fig:AVLsingle.
 Cases 2 and 3 can be fixed using a [double rotation]{.term},
-as shown in figure @fig:AVLdouble.
+as shown in @fig:AVLdouble.
 
 ![A single rotation in an AVL tree. This operation occurs when the excess
 node (in subtree $A$) is in the left child of the left child of the
@@ -116,7 +115,7 @@ the *deleteMin* operation.
 ::: example
 #### Example: AVL insertion
 
-In figure @fig:AVLinsert (b), the
+In @fig:AVLinsert (b), the
 bottom-most unbalanced node has value 7. The excess node (with value 5)
 is in the right subtree of the left child of 7, so we have an example of
 Case 2. This requires a double rotation to fix. After the rotation, 5

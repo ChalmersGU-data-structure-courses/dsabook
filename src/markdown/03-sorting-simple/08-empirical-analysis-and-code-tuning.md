@@ -25,7 +25,7 @@ In addition, we implemented one proposed optimisation for each of them.
 
 Each algorithm is run on random integer arrays of sizes 10,000 to 80,000, and the times reported are in seconds.
 This will give an indication of the *average* running time for the algorithms
-(provided that the elements are distributed uniformly -- recall the problems with average-case analysis, discussed in section @sec:the-problem-with-average-case).
+(provided that the elements are distributed uniformly -- recall the problems with average-case analysis, discussed in @sec:the-problem-with-average-case).
 
 Sort                   Python (10k)     Python (20k)     Java (20k)     Java (40k)     Java (80k)
 -------------------- ---------------- ---------------- -------------- -------------- ---------------

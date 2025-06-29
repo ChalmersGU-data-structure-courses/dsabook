@@ -48,7 +48,7 @@ Now you can use the calculator to answer the following questions.
 To be practical, a database organized by hashing must store records in a
 hash table that is not so large that it wastes space. To balance time
 and space efficiency, this means that the hash table should be
-around half full (see section @sec:analysis-of-hash-tables). Because
+around half full (see @sec:analysis-of-hash-tables). Because
 collisions are extremely likely to occur under these conditions (by
 chance, any record inserted into a table that is half full should have a
 collision half of the time), does this mean that we need not worry about
@@ -114,7 +114,7 @@ situations:
     hash on the value of the first character because this is likely to
     be unevenly distributed.
 
-In the rest of this section, and in section @sec:better-hash-functions, you will see several examples of hash functions that illustrate these points.
+In the rest of this section, and in @sec:better-hash-functions, you will see several examples of hash functions that illustrate these points.
 
 
 ### Properties of a hash function

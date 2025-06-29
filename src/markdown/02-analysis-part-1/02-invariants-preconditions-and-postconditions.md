@@ -28,7 +28,7 @@ Keeping in line with our high-level approach, we often don't formulate specific 
 ::: example
 #### Example: Binary search
 
-In section @sec:binary-search we introduced binary search. What kind of invariants can be useful to understand the algorithm better?
+In @sec:binary-search we introduced binary search. What kind of invariants can be useful to understand the algorithm better?
 A precondition is of course that the array is sorted, but this is so obvious that we don't have to spell it out.
 
 More interesting is to look into the algorithm itself.

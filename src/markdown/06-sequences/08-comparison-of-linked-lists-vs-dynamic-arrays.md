@@ -19,7 +19,7 @@ All the basic operations for the array-based and linked list implementations tak
 Array-based lists are usually slightly faster because they can make use of the internal memory cache that modern computers have, but it depends on many factors -- the programming language, the operating system, the processor, etc.
 
 One little disadvantage with array-based lists is that the operations are only *amortised* constant time.
-We will discuss amortised time more in section @sec:amortised-analysis later.
+We will discuss amortised time more in @sec:amortised-analysis later.
 But what it means in practice is that push, pos, enqueue and dequeue are only guaranteed to be constant time *on average* if we run many operations.
 Now and then (very rarely) the internal array will be resized, and then the operation might take longer time than usual.
 

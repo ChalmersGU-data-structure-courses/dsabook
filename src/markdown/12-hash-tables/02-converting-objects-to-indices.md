@@ -139,4 +139,4 @@ Open addressing
 
 Both of these are common -- e.g., the Java standard library implements a separate chaining hash table, while the Python sets and dictionaries are implemented using open addressing hash tables.
 
-We will start by describing separate chaining hash tables in section 12.X, and then continue with open addressing in sections 12.Y--Z.
+We will start by describing separate chaining hash tables in @sec:separate-chaining, and then continue with open addressing in @sec:open-addressing.

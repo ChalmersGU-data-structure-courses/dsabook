@@ -39,15 +39,14 @@ Quick (cutoff 20)     0.001     0.007      0.06      0.57       8.0           0.
 : Runtime in seconds for Java implementations, using OpenJDK version 22.0
   (note that the arrays are 4 times larger than for the Python tests) {#tbl:empirical-sorting-java}
 
-
-Tables @tbl:empirical-sorting-python and @tbl:empirical-sorting-java above show timing
+[@Tbl:empirical-sorting-python;@tbl:empirical-sorting-java] above show timing
 results for actual implementations of the sorting algorithms presented
 in this chapter. The algorithms compared include
-Insertion sort (section @sec:insertion-sort),
-Bubble sort (section @sec:bubble-sort),
-Selection sort (section @sec:selection-sort),
-Quicksort (section @sec:quicksort), and
-Mergesort (section @sec:mergesort).
+Insertion sort (@sec:insertion-sort),
+Bubble sort (@sec:bubble-sort),
+Selection sort (@sec:selection-sort),
+Quicksort (@sec:quicksort), and
+Mergesort (@sec:mergesort).
 
 For Quicksort and Mergesort, two versions are compared: the basic implementation,
 and an optimized version that falls back to Insertion sort for sublists of

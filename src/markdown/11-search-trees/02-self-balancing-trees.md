@@ -48,7 +48,7 @@ of the tree is required.
 If we are willing to weaken the balance requirements, we can come up
 with alternative update routines that perform well both in terms of cost
 for the update and in balance for the resulting tree structure.
-The AVL tree (see section @sec:avl-trees) works in this
+The AVL tree (see @sec:avl-trees) works in this
 way, using insertion and deletion routines altered from those of the BST
 to ensure that, for every node, the depths of the left and right
 subtrees differ by at most one.
@@ -59,7 +59,7 @@ effort toward making the BST more balanced every time it is accessed.
 This is a little like the idea of path compression used by the
 [UNION/FIND]{.term} algorithm.
 One example of such a compromise is called the
-splay tree (see section @sec:splay-trees).
+splay tree (see @sec:splay-trees).
 
 The [red-black tree]{.term} is also a binary tree, but it uses a different balancing
 mechanism.

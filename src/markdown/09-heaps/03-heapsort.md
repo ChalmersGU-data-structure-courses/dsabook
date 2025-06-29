@@ -86,7 +86,7 @@ will make it particularly useful for
 used when sorting data sets too large to fit in main memory.
 -->
 
-In section X we saw that there is a more efficient way of turning an array into a heap, by using the `buildHeap` method.
+In @sec:building-a-heap we saw that there is a more efficient way of turning an array into a heap, by using the `buildHeap` method.
 We can use this to implement a faster and in-place version of Heapsort.
 
 The crucial step here is to use a *max*-heap, which might seem counter-intuitive.

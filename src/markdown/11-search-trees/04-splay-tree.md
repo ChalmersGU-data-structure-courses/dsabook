@@ -55,10 +55,10 @@ a tendency to balance the tree. There are three types of rotation.
 
 A [single rotation]{.term} is performed only if
 $S$ is a child of the root node. The single rotation is illustrated by
-figure @fig:SingProm. It basically
+@fig:SingProm. It basically
 switches $S$ with its parent in a way that retains the BST property.
 While this figure is
-slightly different from figure @fig:AVLsingle,
+slightly different from @fig:AVLsingle,
 in fact the splay tree single rotation is identical to the
 AVL tree single rotation.
 
@@ -90,7 +90,7 @@ when either of the following two conditions are met:
 
 In other words, a zigzag rotation is used when $G$, $P$, and $S$ form a
 zigzag. The zigzag rotation is illustrated by
-figure @fig:ZigZag.
+@fig:ZigZag.
 
 ![Splay tree zigzag rotation. (a) The original tree with $S$, $P$, and $G$
 in zigzag formation. (b) The tree after the rotation takes place. The
@@ -108,8 +108,8 @@ following two conditions are met:
 
 Thus, a zigzig rotation takes place in those situations where a zigzag
 rotation is not appropriate. The zigzig rotation is illustrated by
-figure @fig:ZigZig. While the figure appears somewhat
-different from figure @fig:AVLdouble,
+@fig:ZigZig. While the figure appears somewhat
+different from @fig:AVLdouble,
 in fact the zigzig rotation is identical to the AVL tree double
 rotation.
 
@@ -138,13 +138,13 @@ the scope of our study.
 #### Example: Searching in a splay tree
 
 Consider a search for value 89 in the splay tree of
-figure @fig:SplayEx (a). The splay tree's
+@fig:SplayEx (a). The splay tree's
 search operation is identical to searching in a BST. However, once the
 value has been found, it is splayed to the root. Three rotations are
 required in this example. The first is a zigzig rotation, whose result
 is shown in figure (b).
 The second is a zigzag rotation, whose result is shown in figure (c).
-The final step is a single rotation resulting in the tree of Figure (d).
+The final step is a single rotation resulting in the tree of figure (d).
 Notice that the splaying process has made the tree shallower.
 :::
 

@@ -103,7 +103,7 @@ Linked queue -- dequeue exercise.
 
 ### Case study: Sorting a linked list using Mergesort
 
-We introduced Mergesort in section @sec:mergesort, and then we showed how to sort an array.
+We introduced Mergesort in @sec:mergesort, and then we showed how to sort an array.
 But Mergesort can also be used to sort linked lists, because it does not require random access to the list elements.
 Thus, Mergesort is the method of choice when the input is in the form of a linked list.
 
@@ -130,7 +130,7 @@ Or in pseudocode:
 (Note that it doesn't matter if we add `x` to the front or back of `L1` and `L2`, because the lists will be sorted anyway.)
 
 Merging two sorted linked lists is straightforward, because we need only remove items from the front of the input lists and append them to the end of the output list.
-The Mergesort pseudocode in section @sec:mergesort can be used with linked lists directly.
+The Mergesort pseudocode in @sec:mergesort can be used with linked lists directly.
 
     function merge(L1, L2):
         answer = new empty linked list

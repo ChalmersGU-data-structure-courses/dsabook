@@ -45,7 +45,7 @@ Inorder traversal
 :   First visit the left child (including its entire subtree), then visit the node, and finally visit the right child (including its entire subtree).
     If the tree is a [binary search tree]{.term}, then we can use inorder traversal to list all values in increasing order.
 
-[Table @tbl:visiting-orders] shows in which order the nodes in the example tree from [figure @fig:example_bintree] are visited, depending on the traversal strategy.
+@Tbl:visiting-orders shows in which order the nodes in the example tree from @fig:example_bintree are visited, depending on the traversal strategy.
 
 Traversal             Visiting order                    When is the root visited?
 --------------------  --------------------------------  ------------------------------------------------------------------------
@@ -53,7 +53,7 @@ Preorder              **A, B, D, C, E, G, F, H, I**     A is the first visited n
 Postorder             **D, B, G, E, H, I, F, C, A**     A is the very last node to visit
 Inorder               **B, D, A, G, E, C, H, F, I**     after visiting the left subtree (B, D)
 
-: Visiting order for the example tree in [figure @fig:example_bintree] {#tbl:visiting-orders}
+: Visiting order for the example tree in @fig:example_bintree {#tbl:visiting-orders}
 
 
 ::: online

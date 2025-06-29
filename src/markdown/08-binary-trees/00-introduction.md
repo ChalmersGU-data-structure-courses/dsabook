@@ -13,12 +13,12 @@ trees are useful for many things besides searching. Just a few examples
 of applications that trees can speed up include
 describing mathematical expressions
 and the syntactic elements of computer programs
-(using expression trees, see section @sec:differentiating-between-internal-nodes-and-leaves),
-prioritizing jobs (using binary heaps, see section @sec:binary-heaps), or
+(using expression trees, see @sec:differentiating-between-internal-nodes-and-leaves),
+prioritizing jobs (using binary heaps, see @sec:binary-heaps), or
 organizing the information needed to drive
-data compression algorithms (using Huffman coding, see section @sec:case-study-huffman-coding).
+data compression algorithms (using Huffman coding, see @sec:case-study-huffman-coding).
 
-This chapter covers terminology used for discussing binary trees (section @sec:definitions-and-properties),
-tree traversals (section @sec:traversing-a-binary-tree),
-approaches to implementing tree nodes (section @sec:implementing-binary-trees),
+This chapter covers terminology used for discussing binary trees (@sec:definitions-and-properties),
+tree traversals (@sec:traversing-a-binary-tree),
+approaches to implementing tree nodes (@sec:implementing-binary-trees),
 and various examples of binary trees.

@@ -13,7 +13,7 @@ children can be empty. Binary tree nodes typically contain a value
 field, with the type of the field depending on the application. The most
 common node implementation includes a value field and pointers to the
 two children.
-[Figure @fig:bintree_with_pointers] is an illustration of how the tree from [figure @fig:example_bintree] looks like, where the child pointers are shown explicitly.
+@Fig:bintree_with_pointers is an illustration of how the tree from @fig:example_bintree looks like, where the child pointers are shown explicitly.
 
 <div id="fig:bintree_with_pointers">
 
@@ -133,7 +133,7 @@ An example of an expression tree for $4x(2x + a) - c$
 </div>
 
 As an example of a tree that stores different information at the leaf
-and internal nodes, consider the expression tree illustrated by [figure @fig:expression_tree].
+and internal nodes, consider the expression tree illustrated by @fig:expression_tree.
 The expression tree
 represents an algebraic expression composed of binary operators such as
 addition, subtraction, multiplication, and division. Internal nodes

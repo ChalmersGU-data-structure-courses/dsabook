@@ -25,7 +25,7 @@ This means that we can store the nodes directly in an array, without having to i
 Instead we can use simple calculations to find the array indices of the children or the parent of a given node.
 
 We begin by assigning numbers to the node positions in the complete
-binary tree, level by level, from left to right as shown in [figure @fig:example_complete_bintree].
+binary tree, level by level, from left to right as shown in @fig:example_complete_bintree.
 Note that we start by assigning the root the number 0.
 
 <div id="fig:example_complete_bintree">
@@ -89,7 +89,7 @@ actually a tree structure, while the typical physical implementation
 uses an array.
 
 Here is an implementation for *min*-heaps. It uses a
-dynamic array (see section @sec:dynamic-arrays)
+dynamic array (see @sec:dynamic-arrays)
 that will resize automatically when the number of elements change.
 
     datatype MinHeap implements PriorityQueue:
@@ -134,7 +134,7 @@ We also need an auxiliary method for swapping two elements in the heap.
             H[i], H[j] = H[j], H[i]
 
 Finally, since we use a dynamic array we have to be able to resize the internal array.
-This is explained in further detail in section X.
+This is explained in further detail in @sec:dynamic-arrays.
 
     datatype MinHeap:
         ...
@@ -183,7 +183,6 @@ Note that we use a helper method for "sifting" a value up the tree.
         ...
         add(elem):
             if size >= H.size:
-                // See section X for more information about resizing a dynamic array.
                 resizeHeap(H.size * 2)
             H[size] = elem      // Add the element at end of the heap.
             siftUp(size)        // Put it in its correct place.

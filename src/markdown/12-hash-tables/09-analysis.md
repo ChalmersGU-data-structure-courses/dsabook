@@ -79,7 +79,7 @@ successful searches.
 
 ![A plot showing the growth rate of the cost for insertion and deletion into a hash table as the load factor increases](images/hashplot.png){width=60% #fig:HashPlot}
 
-Figure @fig:HashPlot shows how the
+@Fig:HashPlot shows how the
 expected number of record accesses grows as $\alpha$ grows. The
 horizontal axis is the value for $\alpha$ , the vertical axis is the
 expected number of accesses to the hash table. Solid lines show the cost

@@ -64,7 +64,7 @@ the high-order digits.
 
 As another example, consider hashing a collection of keys whose values
 follow a normal distribution, as illustrated by
-Figure @fig:HashNormal. Keys near the mean
+@fig:HashNormal. Keys near the mean
 of the normal distribution are far more likely to occur than keys near
 the tails of the distribution. For a given slot, think of where the keys
 come from within the distribution. Binning would be taking thick slices
@@ -89,7 +89,7 @@ method squares the key value, and then takes out the middle $r$ bits of
 the result, giving a value in the range 0 to $2^{r}-1$. This works well
 because most or all bits of the key value contribute to the result. For
 example, consider records whose keys are 4-digit numbers in base 10, as
-shown in figure @fig:MidSquare.
+shown in @fig:MidSquare.
 The goal is to hash these key values to a table of size 100 (i.e., a
 range of 0 to 99). This range is equivalent to two digits in base 10.
 That is, $r = 2$. If the input is the number 4567, squaring yields an

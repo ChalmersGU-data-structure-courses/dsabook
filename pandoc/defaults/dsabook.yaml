@@ -19,11 +19,13 @@ metadata:
   chapters: true
   linkReferences: true
   autoSectionLabels: true
-  figPrefix: ""
-  eqnPrefix: ""
-  tblPrefix: ""
-  lstPrefix: ""
-  secPrefix: ""
+  nameInLink: true
+  figPrefix: ["figure", "figures"]
+  eqnPrefix: ["equation", "equations"]
+  tblPrefix: ["table", "tables"]
+  lstPrefix: ["list", "lists"]
+  secPrefix: ["section", "sections"]
+
 
 
 variables:

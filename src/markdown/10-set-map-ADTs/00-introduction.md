@@ -57,19 +57,19 @@ class that implements a set or a map, in such a way that adding,
 removing and searching can be done efficiently? In this book we will see
 several different ways of implementing sets and maps.
 
-- In section @sec:case-study-implementing-sets-and-maps-using-sorted-lists,
+- In @sec:case-study-implementing-sets-and-maps-using-sorted-lists,
 we will see how to implement a set or a map using a list. By
 sorting the items in the list, it is possible to look up information
 efficiently. However, it turns out that adding and removing items is
 quite expensive. A list is a suitable way of storing a set or a map if
 its contents never changes.
 
-- In chapter @sec:search-trees, we learn about
+- In chapter [-@sec:search-trees], we learn about
 *balanced binary search trees (BSTs)*, a data structure for sets and
 maps where adding, removing and searching are all efficient. BSTs also
-support the *sorted map* operations that we used in our final example.
+support the *sorted map* operations that we used i n our final example.
 
-- In chapter @sec:hash-tables, we learn about
+- In chapter [-@sec:hash-tables], we learn about
 *hash tables*, another way to implement the set and map ADTs. In a hash
 table, `add`, `remove` and `contains` are even faster than in a BST, but
 hash tables are somewhat harder to use than BSTs, and do not support the

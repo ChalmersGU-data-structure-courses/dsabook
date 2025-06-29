@@ -168,7 +168,7 @@ Python doesn't have arrays, instead they have *lists* which are written like thi
 There is one important difference between arrays and Python lists: any given array has a fixed size.
 However, Python lists can change in size -- for example, the `append` method adds a new element to the list, increasing its size.
 In this book, we will work with arrays that have a _fixed_ size.
-Python lists are so-called [dynamic arrays]{.term} -- we will discuss how they work in section @sec:dynamic-arrays.
+Python lists are so-called [dynamic arrays]{.term} -- we will discuss how they work in @sec:dynamic-arrays.
 :::
 
 Before using an array, you must declare it and specify its size.
@@ -223,7 +223,7 @@ This means that using slices is quite slow.
 
 Therefore we will not use array slices in this book.
 Instead we can use a pair of array indices `i`, `j` to refer to a specific slice of the array.
-This is, e.g., done already in section @sec:binary-search where we introduce the *binary search* algorithm.
+This is, e.g., done already in @sec:binary-search where we introduce the *binary search* algorithm.
 
 #### Strings
 
@@ -327,7 +327,7 @@ In functional programming languages, such as Haskell, you can define algebraic d
 
 Our goal is to keep things simple and explain the concept in a way that can be easily translated into the syntax of any programming language you prefer.
 For this reason, we have adopted a straightforward notation for compound data types in our pseudocode.
-Here is an example of how to define a dynamic array (see section @sec:dynamic-arrays):
+Here is an example of how to define a dynamic array (see @sec:dynamic-arrays):
 
     datatype ArrayStack of T implements Stack of T:
         data: Array of T
@@ -375,7 +375,7 @@ This means that our ArrayStack can also be defined without an explicit construct
 The above definition is the same as the first one -- we can deduce how the constructor must look like from the datatype declaration.
 Note that we also removed the type variable `T` because it can be deduced from the context.
 
-Another example datatype are *linked list nodes* (see section @sec:stacks-implemented-as-linked-lists):
+Another example datatype are *linked list nodes* (see @sec:stacks-implemented-as-linked-lists):
 
     datatype ListNode of T:
         value: T
@@ -396,7 +396,7 @@ We trust that you are competent programmers and can deduce yourself how to imple
 
 #### Extending datatypes
 
-We can *extend* a datatype by adding more variables, e.g., here a definition of *doubly-linked list nodes* (see section @sec:double-ended-queues):
+We can *extend* a datatype by adding more variables, e.g., here a definition of *doubly-linked list nodes* (see @sec:double-ended-queues):
 
     datatype DoubleNode extends ListNode:
         ...
@@ -412,7 +412,7 @@ A `datatype` can implement an `interface`, making it a subtype of the interface.
 
 #### Examples: binary tree nodes
 
-Here's a final example of *binary tree nodes* (see section @sec:implementing-binary-trees):
+Here's a final example of *binary tree nodes* (see @sec:implementing-binary-trees):
 
     datatype TreeNode:
         value

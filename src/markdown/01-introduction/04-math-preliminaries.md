@@ -979,7 +979,7 @@ Define a [two-coloring]{.term} for a
 set of regions as a way of assigning one of two colors to each region
 such that no two regions sharing a side have the same color.
 For example, a chessboard is two-colored.
-Figure [Figure](#TwoColor) shows a two-coloring for the plane
+Figure #TwoColor shows a two-coloring for the plane
 with three lines.
 We will assume that the two colors to be used are black and white.
 

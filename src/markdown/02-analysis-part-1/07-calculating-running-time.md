@@ -77,7 +77,7 @@ The reason why the base is irrelevant is a direct consequence of the logarithm l
 
 ::: online
 We leave as an exercise to the reader to figure out both the definition of $<$ and why the logarithm base is irrelevant.
-But we will come back to this issue in chapter @sec:algorithm-analysis-theory.
+But we will come back to this issue in chapter [-@sec:algorithm-analysis-theory].
 :::
 
 ### Analysing code fragments
@@ -298,7 +298,7 @@ $$
 1 + 2 + 4 + \cdots + \log n = \sum_{i=0}^{\log n} 2^i
 $$
 
-Now, as mentioned in section @sec:summations, this summation has a closed form solution
+Now, as mentioned in @sec:summations, this summation has a closed form solution
 $2^{\log n + 1} - 1 = 2n - 1$.
 So, the complexity of the code fragment above is actually linear, $O(n)$, and not linearithmic.
 

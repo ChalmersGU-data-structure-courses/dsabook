@@ -1,7 +1,7 @@
 
 ## Summary analysis of basic sorting algorithms
 
-How can we categorise our three sorting algorithms according to the terminology that we introduced in section @sec:terminology-and-notation?
+How can we categorise our three sorting algorithms according to the terminology that we introduced in @sec:terminology-and-notation?
 
 In-place
 :   All three algorithms are *in-place*, because we modify the array and only make use of a constant number of additional variables.

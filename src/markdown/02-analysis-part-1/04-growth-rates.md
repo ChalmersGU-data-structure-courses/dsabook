@@ -42,7 +42,7 @@ How much larger problems a faster computer solve in the same amount of time?
 Say that the old machine could solve a problem of size $n$ in an hour,
 and that the new machine is ten times faster than the old.
 What is the largest problem that the new machine can solve in one hour?
-Table @tbl:problem-size-speedup shows just that for five running-time functions.
+@Tbl:problem-size-speedup shows just that for five running-time functions.
 
 
   Growth rate    Max $n$ (old)   Max $n'$ (new)   Relation $n$ and $n'$                        $n'/n$
@@ -215,7 +215,7 @@ of $n$. Note that for constants $a, b \geq 1, a^n$ grows faster than
 $n^b$.
 
 We can get some further insight into relative growth rates for various
-algorithms from table @tbl:growth-rates below. Most of the growth rates that
+algorithms from @tbl:growth-rates below. Most of the growth rates that
 appear in typical algorithms are shown, along with some representative
 input sizes. Once again, we see that the growth rate has a tremendous
 effect on the resources consumed by an algorithm.

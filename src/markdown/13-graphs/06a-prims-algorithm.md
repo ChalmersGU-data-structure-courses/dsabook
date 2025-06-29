@@ -142,7 +142,7 @@ have been added), but does this tree have minimum cost?
 > $\mathbf{T}$ forms a cycle. Edge $e'$ must be of lower cost than edge
 > $e_j$, because Prim's algorithm did not generate an MCST. This
 > situation is illustrated in
-> figure @fig:PrimProof. However, Prim's
+> @fig:PrimProof. However, Prim's
 > algorithm would have selected the least-cost edge available. It would
 > have selected $e'$, not $e_j$. Thus, it is a contradiction that
 > Prim's algorithm would have selected the wrong edge, and thus,

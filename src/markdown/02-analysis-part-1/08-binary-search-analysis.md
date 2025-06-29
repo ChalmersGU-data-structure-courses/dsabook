@@ -1,9 +1,9 @@
 
 ## Case study: Analysing binary search
 
-Now we will discuss the algorithmic complexity of the two search algorithms that we introduced in [Section @{sec:case-study-searching-in-a-list}].
+Now we will discuss the algorithmic complexity of the two search algorithms that we introduced in @sec:case-study-searching-in-a-list.
 
-In [Section @{sec:input-size}], we deduced that the running time for linear search on an array if size $n$ is $O(n)$.
+In @sec:input-size, we deduced that the running time for linear search on an array if size $n$ is $O(n)$.
 If we assume that the value is equally likely to appear in any location, this complexity is both the average case and the worst case.
 (The best case is constant, $O(1)$, and occurs when the searched value occurs first in the array.
 But as we already discussed we are rarely interested in the best case.)
@@ -52,10 +52,10 @@ search position in binary search is more expensive than just
 incrementing the current position, as sequential search does.
 
 However, binary search comes with a precondition: the array must be sorted.
-And sorting an array is a time-consuming operation -- in fact it is $O(n\log n)$ in the worst case, as we will see in [Chapter @{sec:sorting-divide-and-conquer}].
+And sorting an array is a time-consuming operation -- in fact it is $O(n\log n)$ in the worst case, as we will see in chapter [-@sec:sorting-divide-and-conquer].
 So there's a tradeoff here -- to be able to search the array efficiently we need to keep it sorted.
 This is not much of a problem if this is something we only have to do once, but it can be very costly if the array changes because we insert and delete elements.
 Only in the context of the complete problem to be solved can we know whether the advantage outweighs the disadvantage.
 
 So, if we want to maintain a searchable collection which changes over time, a sorted array is not a good choice.
-But an unsorted array isn't either -- instead we should use smarter data structures such as [search trees]{.term} ([Chapter @{sec:search-trees}]) or [hash tables]{.term} ([Chapter @{sec:hash-tables}].
+But an unsorted array isn't either -- instead we should use smarter data structures such as [search trees]{.term} (chapter [-@sec:search-trees]) or [hash tables]{.term} (chapter [-@sec:hash-tables]).

@@ -69,14 +69,14 @@ $O(n)$.
 
 In later chapters we will see how to improve the efficiency, by using
 
--   [Balanced search tree]{.term}s (section @sec:self-balancing-trees), which bring down
+-   [Balanced search tree]{.term}s (@sec:self-balancing-trees), which bring down
     the complexity of the operations to $O(\log n)$.
--   [Hash tables]{.term} (chapter @sec:hash-tables), which make
+-   [Hash tables]{.term} (chapter [-@sec:hash-tables]), which make
     the operations constant time, $O(1)$.
 
 But some times it is enough to use a simple list-based implementation.
 And in fact, the
-[separate chaining hash map]{.term} (section @sec:separate-chaining)
+[separate chaining hash map]{.term} (@sec:separate-chaining)
 requires an underlying simpler map implementation -- and there a linked
 list works very fine!
 

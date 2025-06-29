@@ -50,7 +50,8 @@ Here is our [ADT]{.term} for stacks:
         peek() -> T    // Returns the top element, without removing it.
 
 There are two main approaches to implementing stacks: the [linked stack]{.term} and the [array-based stack]{.term}.
-They will be discussed in sections @sec:stacks-implemented-as-linked-lists, @sec:stacks-implemented-using-arrays and @sec:dynamic-arrays.
+They will be discussed in
+[@sec:stacks-implemented-as-linked-lists;@sec:stacks-implemented-using-arrays] and [-@sec:dynamic-arrays].
 
 <!--
 #### Invariants
@@ -68,7 +69,7 @@ Here is our [ADT]{.term} for queues:
         peek() -> T      // Returns the frontmost element, without removing it.
 
 There are two main queue implementations: the [linked queue]{.term} and the [array-based queue]{.term}.
-They are discussed in sections @sec:queues-implemented-as-linked-lists, @sec:queues-implemented-using-arrays and @sec:dynamic-arrays.
+They are discussed in [@sec:queues-implemented-as-linked-lists;@sec:queues-implemented-using-arrays] and [-@sec:dynamic-arrays].
 
 <!--
 #### Invariants

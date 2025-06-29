@@ -80,7 +80,7 @@ E -- G; F -- H; F -- I;
 ```
 -->
 
-[Figure @fig:example_bintree] above illustrates
+@Fig:example_bintree above illustrates
 the various terms used to identify parts of a binary tree.
 Node $A$ is the root, and nodes $B$ and $C$ are $A$'s children.
 Nodes $B$ and $D$ together form a subtree. Node $B$ has two
@@ -92,7 +92,7 @@ $I$ are leaves. Nodes $A$, $B$, $C$, $E$, and $F$ are internal nodes.
 The depth of $I$ is 3. The height of this tree is 3.
 
 
-[Figure @fig:two_bintrees] below illustrates an important
+@Fig:two_bintrees below illustrates an important
 point regarding the structure of binary trees. Because *all* binary tree
 nodes have two children (one or both of which might be empty), the two
 binary trees (a) and (b) in the figure are *not* the same.
@@ -144,12 +144,12 @@ from left to right. In the complete binary tree of height $d$, all
 levels except possibly level $d$ are completely full. The bottom level
 has its nodes filled in from the left side.
 
-[Figure @fig:full_complete_bintrees] below illustrates
+@Fig:full_complete_bintrees below illustrates
 the differences between full and complete binary trees. There is no
 particular relationship between these two tree shapes; that is, the tree (a) is
 full but not complete while the tree (b) is complete but not full.
-The [binary heap]{.term} (section @sec:binary-heaps) is an example of a complete binary tree.
-The [Huffman coding tree]{.term} (section @sec:case-study-huffman-coding) is an example of a full binary tree.
+The [binary heap]{.term} (@sec:binary-heaps) is an example of a complete binary tree.
+The [Huffman coding tree]{.term} (@sec:case-study-huffman-coding) is an example of a full binary tree.
 
 <div id="fig:full_complete_bintrees">
 

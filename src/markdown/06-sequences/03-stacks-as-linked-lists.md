@@ -49,7 +49,7 @@ Objects of the data type `Node` contain a field `elem` to store the element valu
 
 The list built from such nodes is called a [singly linked list]{.term}, or a [one-way list]{.term}, because each list node has a single pointer to the next node on the list.
 
-In this section and the next we describe how to use linked lists to implement stacks and queues, and in sections @sec:double-ended-queues and @sec:general-lists we will discuss extensions such as double-ended queues and general lists.
+In this section and the next we describe how to use linked lists to implement stacks and queues, and in @sec:double-ended-queues and @sec:general-lists we will discuss extensions such as double-ended queues and general lists.
 
 #### Linked stacks
 

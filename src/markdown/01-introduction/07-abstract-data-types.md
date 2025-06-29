@@ -157,8 +157,8 @@ We group these collection-based ADTs into two main categories:
 
 In addition to these, we also introduce graphs, along with their commonly used implementations.
 
-The rest of this section gives a high-level overview of the ADTs covered throughout the course.
-[Figure @fig:adt-overview] summarizes these ADTs and highlights how they relate to one another.
+The rest of this gives a high-level overview of the ADTs covered throughout the course.
+@Fig:adt-overview summarizes these ADTs and highlights how they relate to one another.
 Each ADT will be discussed in more detail later in the book, including their operations and the data structures used to implement them.
 
 ![An overview of ADTs with their common implementations](resources/images/ADT_overview.png){#fig:adt-overview}
@@ -216,7 +216,7 @@ Another, less obvious example is the structure of Java programs: the dependencie
 This representation helps us determine the correct order to compile classes based on their dependencies.
 
 Graphs are a fundamental concept in computer science, and we dedicate an entire chapter to them in this book.
-Chapter @sec:graphs explores how graphs can be represented and how we can traverse and manipulate them using various algorithms.
+Chapter [-@sec:graphs] explores how graphs can be represented and how we can traverse and manipulate them using various algorithms.
 
 
 <!--

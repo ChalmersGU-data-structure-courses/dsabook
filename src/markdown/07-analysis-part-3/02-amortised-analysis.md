@@ -18,7 +18,7 @@ of each operation independently and summing them, amortized analysis
 looks at the cost of the entire series and "charges" each individual
 operation with a share of the total cost.
 
-The standard example for amortised analysis is dynamic arrays which were introduced in section @sec:dynamic-arrays.
+The standard example for amortised analysis is dynamic arrays which were introduced in @sec:dynamic-arrays.
 In that section we gave an informal argument why it is important to grow the array in the right way.
 If we do it by doubling the array size, we get *amortised* constant time for all basic operatinos,
 but if we do it in the wrong way we get linear time operations in the worst case.

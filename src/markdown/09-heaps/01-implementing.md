@@ -7,7 +7,7 @@ This is because either insertion or removal will take linear time, $O(n)$, in th
 - If we use unordered lists, then searching for the element with the highest priority will be linear.
 - If we instead use sorted lists, then inserting an element into that list will be linear.
 
-In this section we show how to use binary trees instead of lists, to implement priority queues.
+In this we show how to use binary trees instead of lists, to implement priority queues.
 
 ### The heap property
 

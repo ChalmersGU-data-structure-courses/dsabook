@@ -85,7 +85,7 @@ Now consider the second range query in the example above:
 
 - Given a list of all Swedish towns and their populations, find the towns whose population is between 5,000 and 10,000.
 
-One way to solve this problem would be to use a *multimap* (see section 10.X).
+One way to solve this problem would be to use a *multimap* (see @sec:multimaps).
 The key would be a population number, and the values would be all towns having that population.
 Then we could find the required towns by making a sequence of `get(5,000)`, `get(5,001)`, ...., until `get(10,000)`.
 

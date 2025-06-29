@@ -159,7 +159,7 @@ TODO
 ### Limitations
 
 ::: TODO
-- What happens when the capacity is exceeded? See section X about dynamic arrays
+- What happens when the capacity is exceeded? See section about dynamic arrays
 :::
  -->
 
