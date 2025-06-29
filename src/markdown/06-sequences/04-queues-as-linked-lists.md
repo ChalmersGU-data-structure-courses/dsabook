@@ -130,7 +130,7 @@ Or in pseudocode:
 (Note that it doesn't matter if we add `x` to the front or back of `L1` and `L2`, because the lists will be sorted anyway.)
 
 Merging two sorted linked lists is straightforward, because we need only remove items from the front of the input lists and append them to the end of the output list.
-The pseudocode in section XX can be used with linked lists directly.
+The Mergesort pseudocode in section @sec:mergesort can be used with linked lists directly.
 
     function merge(L1, L2):
         answer = new empty linked list

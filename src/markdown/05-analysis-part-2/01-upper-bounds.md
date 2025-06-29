@@ -22,7 +22,7 @@ case"). For example, if $n^2$ grows as fast as $T(n)$ (the
 running time of our algorithm) for the worst-case input, we would say
 the algorithm is "in $O(n^2)$ in the worst case".
 
-We already defined the upper bound in section XX, like this:
+We already defined the upper bound in section @sec:defining-orders-of-growth, like this:
 
 Upper bound
 
@@ -116,7 +116,7 @@ $O(n)$.
 
 ### Simplifying rules
 
-We introduced simplifying rules in section XX, but repeat them here in compact form:
+We introduced simplifying rules in section @sec:simplification-rules, but repeat them here in compact form:
 
      Rule              Simplification                                                       Alternatively
 ---  ----------------  -------------------------------------------------------------------  -------------------------------

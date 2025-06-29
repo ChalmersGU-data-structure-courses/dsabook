@@ -34,7 +34,7 @@ viewed as a simple data structure. More commonly, people use the term
 "data structure" to mean an organization or structuring for a
 collection of data items. A sorted list of integers stored in an array
 is an example of such a structuring. These ideas are explored further in
-a discussion of [Abstract Data Types].
+section @sec:abstract-data-types about [abstract data types]{.term}.
 
 Given sufficient space to store a collection of
 [data item]{.term}s, it is always

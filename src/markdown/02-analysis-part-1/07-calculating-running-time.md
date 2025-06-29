@@ -77,7 +77,7 @@ The reason why the base is irrelevant is a direct consequence of the logarithm l
 
 ::: online
 We leave as an exercise to the reader to figure out both the definition of $<$ and why the logarithm base is irrelevant.
-But we will come back to this issue in chapter XX.
+But we will come back to this issue in chapter @sec:algorithm-analysis-theory.
 :::
 
 ### Analysing code fragments
@@ -298,7 +298,7 @@ $$
 1 + 2 + 4 + \cdots + \log n = \sum_{i=0}^{\log n} 2^i
 $$
 
-Now, as mentioned in section XX (*math prelim. summation*), this summation has a closed form solution
+Now, as mentioned in section @sec:summations, this summation has a closed form solution
 $2^{\log n + 1} - 1 = 2n - 1$.
 So, the complexity of the code fragment above is actually linear, $O(n)$, and not linearithmic.
 
@@ -348,12 +348,10 @@ recursive call on the smaller input. Because the base case does no
 multiplications, its cost is zero. Thus, the running time for this
 function can be expressed as
 
-\begin{equation*}
-\begin{split}
-T(n) & = T(n-1) + 1, \textrm{ for } n>1 \\
-T(1) & = 0
-\end{split}
-\end{equation*}
+\begin{eqnarray*}
+T(n) &=& T(n-1) + 1, \textrm{ for } n>1 \\
+T(1) &=& 0
+\end{eqnarray*}
 
 The closed-form solution for this recurrence relation is $O(n)$.
-Recurrence relations are discussed further in [Section @sec:recur-relations].
+Recurrence relations are discussed further in @sec:recur-relations.

@@ -1,7 +1,7 @@
 
 ## Sorted sets and maps
 
-Consider the final example problem from the chapter introduction, section XX:
+Consider the final example problem from the introduction to this chapter:
 
 - *Between X and Y:* Given a list of all Swedish towns and their populations, are there any towns whose population is between 5,000 and 10,000? And if so, which are these towns?
 

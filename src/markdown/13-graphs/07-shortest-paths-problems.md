@@ -15,8 +15,8 @@
 If you have an unweighted graph, the [shortest path]{.term} between two vertices is the smallest number of edges you
 have to pass to get from one of the vertices to the other.
 
-If you agument the [breadth-first search]
-algorithm to remember which vertex a visited vertex came
+If you agument the [breadth-first search]{.term} algorithm from section @sec:breadth-first-search
+to remember which vertex a visited vertex came
 from, if will give you the shortest path between the start vertex and
 any other vertex. However, things become sligthly more complicated if
 the graph is weighted.

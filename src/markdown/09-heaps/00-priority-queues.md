@@ -1,6 +1,6 @@
 # Priority queues and heaps
 
-In section XX we introduced priority queues and showed how to implement them using sorted lists.
+In section @sec:priority-queues we introduced priority queues and showed how to implement them using sorted lists.
 However, this is not a very good implementation, because inserting elements into the sorted list is linear, $O(n)$, in the worst case.
 
 In this chapter we will see how to use binary trees to implement a much more efficient version of priority queues.

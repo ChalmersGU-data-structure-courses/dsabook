@@ -18,9 +18,9 @@ A [binary tree]{.term} is made up of a finite
 set of elements called [nodes](#node){.term}.
 This set either is empty or consists of a node called the
 [root]{.term} together with two binary trees,
-called the left and right [subtrees](#subtree){.term}, which are disjoint from each other and from the root.
+called the left and right [subtrees]{.term}, which are disjoint from each other and from the root.
 (Disjoint means that they have no nodes in common.) The roots of these
-subtrees are [children](#child){.term} of the
+subtrees are [children]{.term} of the
 root. There is an [edge]{.term} from a node to
 each of its children, and a node is said to be the
 [parent]{.term} of its children.
@@ -147,10 +147,9 @@ has its nodes filled in from the left side.
 [Figure @fig:full_complete_bintrees] below illustrates
 the differences between full and complete binary trees. There is no
 particular relationship between these two tree shapes; that is, the tree (a) is
-full but not complete while the tree (b) is complete but
-not full. The [heap](#heaps-and-priority-queues) data
-structure is an example of a complete binary tree. The
-[Huffman coding tree](#huffman-coding-trees) is an example of a full binary tree.
+full but not complete while the tree (b) is complete but not full.
+The [binary heap]{.term} (section @sec:binary-heaps) is an example of a complete binary tree.
+The [Huffman coding tree]{.term} (section @sec:case-study-huffman-coding) is an example of a full binary tree.
 
 <div id="fig:full_complete_bintrees">
 

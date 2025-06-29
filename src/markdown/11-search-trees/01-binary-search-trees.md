@@ -352,8 +352,8 @@ While the BST is simple to implement and efficient when the tree is
 balanced, the possibility of its being unbalanced is a serious
 liability. There are techniques for organizing a BST to guarantee good
 performance. Two examples are the
-[AVL tree](#the-avl-tree) and the
-[splay tree](#the-splay-tree). There
+[AVL tree]{.term} (see section @sec:avl-trees) and the
+[splay tree]{.term} (see section @sec:splay-trees). There
 also exist other types of search trees that are guaranteed to remain
 balanced, such as the
 [2-3 Tree]{.term}.

@@ -441,7 +441,7 @@ depends on the ratio $r = b^k/a$. There are three cases.
 
 Case (1)
 
-:   $r<1$. From Equation (4) of section XX,
+:   $r<1$. From the list of useful summations in section @sec:summations,
     $\sum_{i=0}^{m} r^i < 1/(1-r)$, which is a constant.
 
     Thus,
@@ -461,7 +461,7 @@ Case (2)
 
 Case (3)
 
-:   $r>1$. From Equation (5) of section XX,
+:   $r>1$. Another useful summation tells us that
     $\sum_{i=0}^{m} r^i = \frac{r^{m+1} - 1}{r - 1} \in O(r^m)$.
 
     Thus,
@@ -524,7 +524,7 @@ case (2) of the theorem, $T(n) \in O(n \log n)$.
 - Average-case is **not** a good thing - what are we averaging on?
 :::
 
-In section XX, we determined that the average-case analysis of quicksort
+In section @sec:complexity-analysis-1, we determined that the average-case analysis of quicksort
 had the following recurrence:
 
 \begin{eqnarray*}
@@ -584,6 +584,7 @@ T(n+1)  &  \leq  &  2c + \frac{n+2}{n+1} T(n)\\
            &  =  &  2c + 2c(n+2)\left (\mathcal{H}_{n+1} - 1\right )
 \end{eqnarray*}
 
-for $\mathcal{H}_{n+1}$, the Harmonic Series. From Equation (10) of section XX,
+for $\mathcal{H}_{n+1}$, the Harmonic Series.
+This is a standard summation,
 $\mathcal{H}_{n+1} \in O(\log n)$, so the final solution is
 $O(n \log n)$.

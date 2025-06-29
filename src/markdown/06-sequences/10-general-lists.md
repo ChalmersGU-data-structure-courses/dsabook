@@ -93,8 +93,7 @@ implementation, just the list ADT.
         return false         // k not found.
 
 There are two standard approaches to implementing lists, the
-[array-based list](#static-array-based-lists), and the
-[linked list](#linked-lists).
+[array-based list]{.term}, and the [linked list]{.term}.
 
 <!--
 ### Invariants

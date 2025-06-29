@@ -184,7 +184,7 @@ But it is much more difficult to reason about $\Theta(f)$, and therefore we will
 So, is the lower bound useless?
 -- No, definitely not.
 The main use case for $\Omega$ is when we want to classify *problems*, not algorithms.
-One example is when proving that the lower bound for sorting is $\Omega(n\log n)$.<!--- (see section XX) -->
+One example is when proving that the lower bound for sorting is $\Omega(n\log n)$, which we do in section @sec:case-study-lower-bounds-for-sorting.
 But classifying problems is out of scope for this book, so we will not use $\Omega$ much.
 
 

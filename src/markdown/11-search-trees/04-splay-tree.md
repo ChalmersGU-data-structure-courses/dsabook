@@ -55,19 +55,14 @@ a tendency to balance the tree. There are three types of rotation.
 
 A [single rotation]{.term} is performed only if
 $S$ is a child of the root node. The single rotation is illustrated by
-[Figure #SingProm](#SingProm). It basically
+figure @fig:SingProm. It basically
 switches $S$ with its parent in a way that retains the BST property.
 While this figure is
-slightly different from [Figure #AVLsingle](#AVLsingle),
+slightly different from figure @fig:AVLsingle,
 in fact the splay tree single rotation is identical to the
 AVL tree single rotation.
 
-::: figure
-#### Figure: Single rotation {- #SingProm}
-
-![Splay tree single rotation](images/SingRot.png){width=500}
-
-Splay tree single rotation. This rotation takes place only when the node
+![Splay tree single rotation. This rotation takes place only when the node
 being splayed is a child of the root. Here, node $S$ is promoted to the
 root, rotating with node $P$. Because the value of $S$ is less than the
 value of $P$, $P$ must become $S$ 's right child. The positions of
@@ -79,7 +74,8 @@ will return the tree to its original shape. Equivalently, if (b) is the
 initial configuration of the tree (i.e., $S$ is at the root and $P$ is
 its right child), then (a) shows the result of a single rotation to
 splay $P$ to the root.
-:::
+](images/SingRot.png){width=60% #fig:SingProm}
+
 
 Unlike the AVL tree, the splay tree requires two types of double
 rotation. Double rotations involve $S$, its parent (call it $P$), and
@@ -94,18 +90,13 @@ when either of the following two conditions are met:
 
 In other words, a zigzag rotation is used when $G$, $P$, and $S$ form a
 zigzag. The zigzag rotation is illustrated by
-[Figure #ZigZag](#ZigZag).
+figure @fig:ZigZag.
 
-::: figure
-#### Figure: ZigZag rotation {- #ZigZag}
-
-![Splay tree zigzag rotation](images/ZigZag.png){width=500}
-
-Splay tree zigzag rotation. (a) The original tree with $S$, $P$, and $G$
+![Splay tree zigzag rotation. (a) The original tree with $S$, $P$, and $G$
 in zigzag formation. (b) The tree after the rotation takes place. The
 positions of subtrees $A$, $B$, $C$, and $D$ are altered as appropriate
 to maintain the BST property.
-:::
+](images/ZigZag.png){width=60% #fig:ZigZag}
 
 The other double rotation is known as a [zigzig]{.term} rotation. A zigzig rotation takes place when either of the
 following two conditions are met:
@@ -117,21 +108,16 @@ following two conditions are met:
 
 Thus, a zigzig rotation takes place in those situations where a zigzag
 rotation is not appropriate. The zigzig rotation is illustrated by
-[Figure #ZigZig](#ZigZig). While the figure appears somewhat
-different from [Figure #AVLdouble](#AVLdouble),
+figure @fig:ZigZig. While the figure appears somewhat
+different from figure @fig:AVLdouble,
 in fact the zigzig rotation is identical to the AVL tree double
 rotation.
 
-::: figure
-#### Figure: ZigZig rotation {#ZigZig}
-
-![Splay tree zigzig rotation](images/ZigZig.png){width=500}
-
-Splay tree zigzig rotation. (a) The original tree with $S$, $P$, and $G$
+![Splay tree zigzig rotation. (a) The original tree with $S$, $P$, and $G$
 in zigzig formation. (b) The tree after the rotation takes place. The
 positions of subtrees $A$, $B$, $C$, and $D$ are altered as appropriate
 to maintain the BST property.
-:::
+](images/ZigZig.png){width=60% #fig:ZigZig}
 
 Note that zigzag rotations tend to make the tree more balanced, because
 they bring subtrees $B$ and $C$ up one level while moving subtree $D$
@@ -152,7 +138,7 @@ the scope of our study.
 #### Example: Searching in a splay tree
 
 Consider a search for value 89 in the splay tree of
-[Figure #SplayEx](#SplayEx) (a). The splay tree's
+figure @fig:SplayEx (a). The splay tree's
 search operation is identical to searching in a BST. However, once the
 value has been found, it is splayed to the root. Three rotations are
 required in this example. The first is a zigzig rotation, whose result
@@ -162,12 +148,7 @@ The final step is a single rotation resulting in the tree of Figure (d).
 Notice that the splaying process has made the tree shallower.
 :::
 
-::: figure
-#### Figure: Splay tree search {- #SplayEx}
-
-![Example of search in a splay tree](images/SplayEx.png){width=500}
-
-Example of splaying after performing a search in a splay tree. After
+![Example of splaying after performing a search in a splay tree. After
 finding the node with key value 89, that node is splayed to the root by
 performing three rotations. (a) The original splay tree. (b) The result
 of performing a zigzig rotation on the node with key value 89 in the
@@ -177,5 +158,5 @@ single rotation on the node with key value 89 in the tree of (c). If the
 search had been for 91, the search would have been unsuccessful with the
 node storing key value 89 being that last one visited. In that case, the
 same splay operations would take place.
-:::
+](images/SplayEx.png){width=60% #fig:SplayEx}
 

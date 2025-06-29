@@ -48,7 +48,7 @@ Now you can use the calculator to answer the following questions.
 To be practical, a database organized by hashing must store records in a
 hash table that is not so large that it wastes space. To balance time
 and space efficiency, this means that the hash table should be
-[around half full](#analysis-of-open-addressing). Because
+around half full (see section @sec:analysis-of-hash-tables). Because
 collisions are extremely likely to occur under these conditions (by
 chance, any record inserted into a table that is half full should have a
 collision half of the time), does this mean that we need not worry about
@@ -114,7 +114,7 @@ situations:
     hash on the value of the first character because this is likely to
     be unevenly distributed.
 
-In the rest of this section, and in section XX, you will see several examples of hash functions that illustrate these points.
+In the rest of this section, and in section @sec:better-hash-functions, you will see several examples of hash functions that illustrate these points.
 
 
 ### Properties of a hash function
@@ -143,7 +143,7 @@ However, it's a really bad hash function, because it gives the worst possible di
 
 This means that if you implement a hash table which uses this constant hash function, it will still work.
 It will answer all your questions correctly, and insertion and deletion will work just as expected.
-But it will be extremely slow -- as slow as if you had used a simple list, like described in section XX.
+But it will be extremely slow -- as slow as if you had used a simple list of values.
 
 
 ### Basic principles of hash functions

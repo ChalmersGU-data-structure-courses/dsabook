@@ -7,7 +7,7 @@
 
 Our first sorting algorithm is called [Bubble sort]{.term}.
 Bubble sort is often the first sorting algorithm that you learn, because it is relatively easy to understand and implement.
-However, it is rather slow, even compared to the other quadratic sorting algorithms that we will introduce in the next sections -- [Selection sort] and [Insertion sort].
+However, it is rather slow, even compared to the other quadratic sorting algorithms that we will introduce in the next sections -- [Selection sort]{.term} and [Insertion sort]{.term}.
 It's not even particularly intuitive -- nobody is going to come naturally to bubble sort as a way to sort their bookshelf, their Bridge hand or their pile of bills, like they might with Insertion sort or Selection sort.
 
 Bubble sort consists of a simple double `for` loop.

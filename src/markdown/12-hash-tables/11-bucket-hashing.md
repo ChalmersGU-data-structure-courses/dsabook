@@ -2,7 +2,7 @@
 ## Bucket hashing
 
 One implementation for open addressing groups hash table slots into
-[buckets](#bucket){.term}. The $M$ slots of the
+[buckets]{.term}. The $M$ slots of the
 hash table are divided into $B$ buckets, with each bucket consisting of
 $M/B$ slots. The hash function assigns each record to the first slot
 within one of the buckets. If this slot is already occupied, then the

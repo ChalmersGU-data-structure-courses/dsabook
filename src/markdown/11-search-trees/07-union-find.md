@@ -286,12 +286,14 @@ required for $n$ operations will be $O(n \log^* n)$, yielding
 nearly constant time for each equivalence operation. This is an example
 of [amortized analysis]{.term}.
 
+<!--
 The expression $\log^* n$ is closely related to the inverse of
 Ackermann's function. For more information about Ackermann's function
 and the cost of path compression for UNION/FIND, see
 \[[Tarjan, 1975](#tarjan75){.citation}\].
 The survey article by \[[Galil & Italiano, 1991](#galilitaliano91){.citation}\]
 covers many aspects of the equivalence class problem.
+-->
 
 ::: dsvis
 TODO

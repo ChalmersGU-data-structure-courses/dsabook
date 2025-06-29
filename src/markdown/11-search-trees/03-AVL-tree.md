@@ -28,7 +28,7 @@ use what are called [rotations](#rotation){.term}.
 ### Rotations
 
 Rotation is an operation that takes a node in the tree and moves it one
-level higher. [Figure #SingleRotation](#SingleRotation)
+level higher. Figure @fig:SingleRotation
 illustrates rotation. Here, $P$ and $S$ are nodes, while $A$, $B$ and
 $C$ represent subtrees.
 
@@ -44,40 +44,30 @@ A *left rotation* is the opposite process: starting from the tree in
 that a right rotation tends to make the tree more right-leaning, while a
 left rotation tends to make it more left-leaning.
 
-::: figure
-#### Figure: Tree rotation {- #SingleRotation}
-
-![Rotation](images/SingRot.png){width=500}
-
+![Rotation.
 In a rotation, node $S$ is promoted to the root, rotating with
 node $P$. Because the value of $S$ is less than the value of $P$, $P$
 must become $S$ 's right child. The positions of subtrees $A$, $B$, and
 $C$ are altered as appropriate to maintain the BST property, but the
 contents of these subtrees remains unchanged. (a) The original tree with
 $P$ as the parent. (b) The tree after a rotation takes place.
-
 Going from (a) to (b) is called a *right rotation*. We can also go from
 (b) to (a) promoting node $P$ to the root -- this is called a *left
 rotation*. In general, a right rotation makes the tree more
 right-leaning, and a left rotation makes it more left-leaning.
-:::
+](images/SingRot.png){width=60% #fig:SingleRotation}
 
 ### AVL tree insertion
 
-::: figure
-#### Figure: AVL insertion {- #AVLinsert}
-
-![An insertion that violates the AVL tree balance property](images/AVLins.png){width=500}
-
-Example of an insert operation that violates the AVL tree balance
-property. Prior to the insert operation, all nodes of the tree are
+![An insertion that violates the AVL tree balance property.
+Prior to the insert operation, all nodes of the tree are
 balanced (i.e., the depths of the left and right subtrees for every node
 differ by at most one). After inserting the node with value 5, the nodes
 with values 7 and 24 are no longer balanced.
-:::
+](images/AVLins.png){width=60% #fig:AVLinsert}
 
 Consider what happens when we insert a node with key value 5, as shown
-in [Figure #AVLinsert](#AVLinsert). The tree on
+in figure @fig:AVLinsert. The tree on
 the left meets the AVL tree balance requirements. After the insertion,
 two nodes no longer meet the requirements. Because the original tree met
 the balance requirement, nodes in the new tree can only be unbalanced by
@@ -96,36 +86,26 @@ node.
 Our problem now is how to balance the tree in $O(\log n)$ time. It turns
 out that we can do this using a series of rotations. Cases 1 and 4 can
 be fixed using a [single rotation]{.term}, as
-shown in [Figure #AVLsingle](#AVLsingle).
+shown in figure @fig:AVLsingle.
 Cases 2 and 3 can be fixed using a [double rotation]{.term},
-as shown in [Figure #AVLdouble](#AVLdouble).
+as shown in figure @fig:AVLdouble.
 
-::: figure
-#### Figure: Single rotation {- #AVLsingle}
-
-![AVL tree single rotation](images/AVLSingRot.png){width=500}
-
-A single rotation in an AVL tree. This operation occurs when the excess
+![A single rotation in an AVL tree. This operation occurs when the excess
 node (in subtree $A$) is in the left child of the left child of the
 unbalanced node labeled $S$. By rearranging the nodes as shown, we
 preserve the BST property, as well as re-balance the tree to preserve
 the AVL tree balance property. The case where the excess node is in the
 right child of the right child of the unbalanced node is handled in the
 same way.
-:::
+](images/AVLSingRot.png){width=60% #fig:AVLsingle}
 
-::: figure
-#### Figure: Double rotation {- #AVLdouble}
-
-![AVL tree double rotation](images/AVLDblRot.png){width=500}
-
-A double rotation in an AVL tree. This operation occurs when the excess
+![A double rotation in an AVL tree. This operation occurs when the excess
 node (in subtree $B$) is in the right child of the left child of the
 unbalanced node labeled $S$. By rearranging the nodes as shown, we
 preserve the BST property, as well as re-balance the tree to preserve
 the AVL tree balance property. The case where the excess node is in the
 left child of the right child of $S$ is handled in the same way.
-:::
+](images/AVLDblRot.png){width=60% #fig:AVLdouble}
 
 The AVL tree insert algorithm begins with a normal BST insert. Then as
 the recursion unwinds up the tree, we perform the appropriate rotation
@@ -136,7 +116,7 @@ the *deleteMin* operation.
 ::: example
 #### Example: AVL insertion
 
-In [Figure #AVLinsert](#AVLinsert) (b), the
+In figure @fig:AVLinsert (b), the
 bottom-most unbalanced node has value 7. The excess node (with value 5)
 is in the right subtree of the left child of 7, so we have an example of
 Case 2. This requires a double rotation to fix. After the rotation, 5

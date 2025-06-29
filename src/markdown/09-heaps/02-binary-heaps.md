@@ -89,7 +89,7 @@ actually a tree structure, while the typical physical implementation
 uses an array.
 
 Here is an implementation for *min*-heaps. It uses a
-[dynamic array](#dynamic-array-based-lists)
+dynamic array (see section @sec:dynamic-arrays)
 that will resize automatically when the number of elements change.
 
     datatype MinHeap implements PriorityQueue:

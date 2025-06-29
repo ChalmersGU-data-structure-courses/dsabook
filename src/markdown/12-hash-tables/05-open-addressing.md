@@ -8,9 +8,9 @@
     - Discuss: When to resize
 :::
 
-We now turn to the other commonly used form of hashing: [open addressing]{.term} (also called [closed hashing](#closed-hash-system){.term}).
+We now turn to the other commonly used form of hashing: [open addressing]{.term} (also called [closed hashing]{.term}).
 
-Compared to [separate chaining](#separate-chaining), we now store all elements directly in the hash table.
+Compared to [separate chaining]{.term} (section @sec:separate-chaining), we now store all elements directly in the hash table.
 Each element $E$ has a [home position]{.term} that is $\textbf{h}(E)$, the slot computed by the hash function.
 If $E$ is to be inserted and another record already occupies its home position, then $E$ will be stored at some other slot in the table.
 It is the business of the [collision resolution]{.term} policy to determine which slot that will be.
@@ -110,7 +110,7 @@ Then we have to inspect every slot in the cluster before we can be certain that 
 Note that a cluster can consist of elements that all have different hash codes and different home positions -- as long as the neighbouring slots are occupied they all belong to the same cluster.
 Therefore it's not only important that the hash function gives different hash codes for different elements -- ideally the hash codes should be spread apart as much as possible, even if the elements themselves are very close to each other.
 
-It is possible to reduce some clustering by using different probing strategies than simple linear probing, see section 12.XX for more details.
+It is possible to reduce some clustering by using different probing strategies than simple linear probing, see section @sec:different-probing-strategies for more details.
 
 
 #### Deleting
@@ -136,4 +136,4 @@ This special `DELETED` value is sometimes called a [tombstone]{.term}.
             i = hashAndProbe(elem)
             table[i] = DELETED
 
-Things are not exactly as simple as they look here, there are some details that are very important to get right, we will discuss these details later in section 12.XX.
+Things are not exactly as simple as they look here, there are some details that are very important to get right, we will discuss these details later in section @sec:deletion-in-open-addressing.

@@ -77,16 +77,9 @@ linear probing is $\frac{1}{2}(1 + 1/(1-\alpha)^2)$ for insertions or
 unsuccessful searches and $\frac{1}{2}(1 + 1/(1-\alpha))$ for deletions or
 successful searches.
 
-:::: {#HashPlot}
-::: figure
-![Hashing analysis plot](images/hashplot.png){width=400}
+![A plot showing the growth rate of the cost for insertion and deletion into a hash table as the load factor increases](images/hashplot.png){width=60% #fig:HashPlot}
 
-A plot showing the growth rate of the cost for insertion and deletion
-into a hash table as the load factor increases.
-:::
-::::
-
-[Figure #HashPlot](#HashPlot) shows how the
+Figure @fig:HashPlot shows how the
 expected number of record accesses grows as $\alpha$ grows. The
 horizontal axis is the value for $\alpha$ , the vertical axis is the
 expected number of accesses to the hash table. Solid lines show the cost

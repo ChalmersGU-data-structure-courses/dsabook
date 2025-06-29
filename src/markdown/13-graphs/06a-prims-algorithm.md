@@ -142,25 +142,21 @@ have been added), but does this tree have minimum cost?
 > $\mathbf{T}$ forms a cycle. Edge $e'$ must be of lower cost than edge
 > $e_j$, because Prim's algorithm did not generate an MCST. This
 > situation is illustrated in
-> [Figure #PrimProof](#PrimProof). However, Prim's
+> figure @fig:PrimProof. However, Prim's
 > algorithm would have selected the least-cost edge available. It would
 > have selected $e'$, not $e_j$. Thus, it is a contradiction that
 > Prim's algorithm would have selected the wrong edge, and thus,
 > Prim's algorithm must be correct.
 
-::: figure
-#### Figure: Proof of Prim's algorithm {- #PrimProof}
-
-![Prim's MCST algorithm proof](images/PrimMST.png){width=400}
-
-Prim's MCST algorithm proof. The left oval contains that portion of the
+![Proof of Prim's MCST algorithm.
+The left oval contains that portion of the
 graph where Prim's MCST and the "true" MCST $\mathbf{T}$ agree. The
 right oval contains the rest of the graph. The two portions of the graph
 are connected by (at least) edges $e_j$ (selected by Prim's algorithm
 to be in the MCST) and $e'$ (the "correct" edge to be placed in the
 MCST). Note that the path from $v_w$ to $v_j$ cannot include any marked
 vertex $v_i, i \leq j$, because to do so would form a cycle.
-:::
+](images/PrimMST.png){width=60% #fig:PrimProof}
 
 
 ::: dsvis

@@ -97,9 +97,9 @@ that it follows the **List** ADT, as described in the section about
 ### Traversing a general tree
 
 There are three traditional
-[tree traversals](#binary-tree-traversals) for [binary trees](#binary-tree){.term}:
+[tree traversals]{.tree} for [binary trees](#binary-tree){.term}:
 [preorder](#preorder-traversal){.term}, [postorder](#postorder-traversal){.term},
-and [inorder](#inorder-traversal){.term}.
+and [inorder](#inorder-traversal){.term} (see section @sec:traversing-a-binary-tree).
 For general trees, preorder and postorder traversals are
 defined with meanings similar to their binary tree counterparts.
 Preorder traversal of a general tree first visits the root of the tree,

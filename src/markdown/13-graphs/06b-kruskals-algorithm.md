@@ -24,7 +24,7 @@ TODO
 The edges can be processed in order of weight by putting them in an
 array and then sorting the array. Another possibility is to use a
 *minimum* [priority queue]{.term}, similar to what we did in
-[Prim's algorithm].
+[Prim's algorithm]{.term} before.
 
 The only tricky part to this algorithm is determining if two vertices
 belong to the same equivalence class. Fortunately, the ideal algorithm
