@@ -77,7 +77,7 @@ The reason why the base is irrelevant is a direct consequence of the logarithm l
 
 ::: online
 We leave as an exercise to the reader to figure out both the definition of $<$ and why the logarithm base is irrelevant.
-But we will come back to this issue in chapter [-@sec:algorithm-analysis-theory].
+But we will come back to this issue in [chapter @sec:algorithm-analysis-theory].
 :::
 
 ### Analysing code fragments

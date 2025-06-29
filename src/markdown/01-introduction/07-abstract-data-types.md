@@ -216,7 +216,7 @@ Another, less obvious example is the structure of Java programs: the dependencie
 This representation helps us determine the correct order to compile classes based on their dependencies.
 
 Graphs are a fundamental concept in computer science, and we dedicate an entire chapter to them in this book.
-Chapter [-@sec:graphs] explores how graphs can be represented and how we can traverse and manipulate them using various algorithms.
+[Chapter @sec:graphs] explores how graphs can be represented and how we can traverse and manipulate them using various algorithms.
 
 
 <!--

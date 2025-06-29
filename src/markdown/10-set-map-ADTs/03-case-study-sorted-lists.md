@@ -69,9 +69,9 @@ $O(n)$.
 
 In later chapters we will see how to improve the efficiency, by using
 
--   [Balanced search tree]{.term}s (@sec:self-balancing-trees), which bring down
+-   [Balanced search trees](#balanced-tree){.term} (@sec:self-balancing-trees), which bring down
     the complexity of the operations to $O(\log n)$.
--   [Hash tables]{.term} (chapter [-@sec:hash-tables]), which make
+-   [Hash tables]{.term} ([chapter @sec:hash-tables]), which make
     the operations constant time, $O(1)$.
 
 But some times it is enough to use a simple list-based implementation.
