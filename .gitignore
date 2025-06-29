@@ -9,6 +9,7 @@ _private*
 build
 plots
 temp
+tmp
 
 # Generated files
 book.pdf
