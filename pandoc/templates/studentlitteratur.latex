@@ -30,6 +30,56 @@ $endif$
 
 \makeatletter
 
+%% Make font and line spacing slighly smaller:
+
+\renewcommand{\normalsize}{%
+   \@setfontsize\normalsize{10}{13}%{10.4}{14}%
+   \abovedisplayskip 6.5\p@ \@plus2\p@ \@minus2\p@%
+  %  \abovedisplayskip 7\p@ \@plus2\p@ \@minus2\p@%
+   \belowdisplayskip \abovedisplayskip%
+   \abovedisplayshortskip \z@ \@plus2\p@%
+   \belowdisplayshortskip 6\p@ \@plus2\p@ \@minus2\p@%
+   \let\@listi\@listI}
+\normalsize
+\renewcommand{\small}{%
+   \@setfontsize\small{9}{12}%{9.5}{13}%
+   \abovedisplayskip 6\p@ \@plus2\p@ \@minus2\p@%
+  %  \abovedisplayskip 6.5\p@ \@plus2\p@ \@minus2\p@%
+   \belowdisplayskip \abovedisplayskip%
+   \abovedisplayshortskip \z@ \@plus2\p@%
+   \belowdisplayshortskip 5\p@ \@plus2\p@ \@minus2\p@%
+   \def\@listi{\leftmargin\leftmargini%
+               \topsep 12pt%13pt%
+               \parsep \z@%
+               \itemsep \parsep%
+               \itemindent \z@%
+               \setlength{\parfillskip}{0pt plus 1fill}%
+              }%
+}
+\renewcommand{\footnotesize}{%
+   \@setfontsize\footnotesize{8}{11}%{8.5}{12}%
+   \abovedisplayskip 6\p@ \@plus2\p@ \@minus2\p@%
+   \abovedisplayshortskip \z@ \@plus\p@%
+   \belowdisplayshortskip 4\p@ \@plus2\p@ \@minus2\p@%
+   \def\@listi{\leftmargin\leftmargini%
+               \topsep 11pt%12pt%
+               \parsep \z@%
+               \itemsep \parsep%
+               \itemindent \z@%
+               \setlength{\parfillskip}{0pt plus 1fill}%
+             }%
+   \belowdisplayskip \abovedisplayskip%
+}
+\renewcommand{\miniscule}{\@setfontsize\miniscule{7}{9}}%{7.5}{9}}
+\renewcommand{\tiny}{\@setfontsize\tiny{6.5}{8}}%{6.9}{8}}
+\renewcommand{\scriptsize}{\@setfontsize\scriptsize{7}{9}}%{7.5}{9}}
+\renewcommand{\large}{\@setfontsize\large{12}{16}}%{12}{16}}
+\renewcommand{\Large}{\@setfontsize\Large{14}{20}}%{14}{20}}
+\renewcommand{\LARGE}{\@setfontsize\LARGE{17}{23}}%{17}{23}}
+\renewcommand{\huge}{\@setfontsize\huge{20}{24}}%{20}{24}}
+\renewcommand{\Huge}{\@setfontsize\Huge{24}{30}}%{24}{30}}
+\renewcommand{\HUGE}{\@setfontsize\Huge{28}{33}}%{28}{33}}
+
 \renewcommand{\stdl@copyrightmsg}{%
   \textcopyright~%
   THE AUTHORS%
