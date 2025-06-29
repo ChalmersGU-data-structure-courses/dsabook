@@ -23,7 +23,7 @@ MD_FILES  := $(sort $(wildcard $(MARKDOWN)/$(CHAPTER)*/*.md) $(wildcard $(MARKDO
 # Tools
 PYTHON    := python3
 PANDOC    := pandoc --resource-path=$(RSC) --data-dir=pandoc --defaults=dsabook.yaml
-HYPERLINK := hyperlink
+HTMLTEST  := htmltest
 
 default: install
 
@@ -62,9 +62,7 @@ deploy: install
 	@cp -r $(BUILD) $(DOCS) || true
 
 check-links:
-	$(HYPERLINK) dump-external-links --base-path $(HTML) | sort | uniq
-	@echo "--------------"
-	$(HYPERLINK) --check-anchors $(HTML)
+	$(HTMLTEST) $(HTML)
 
 server:
 	$(PYTHON) -m http.server -d $(BUILD) 8000
