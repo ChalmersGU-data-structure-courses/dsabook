@@ -10,7 +10,7 @@ variables:
     # - 170x245
 
 include-before-body:
-  - src/markdown/contributions.tex
+  - pandoc/includes/foreword.tex
 
 writer: pdf
 # pandoc --to=pdf --list-extensions
