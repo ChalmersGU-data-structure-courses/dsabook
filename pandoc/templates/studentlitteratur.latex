@@ -200,13 +200,19 @@ $endif$
 
 \usepackage{qrcode}
 
-\newcommand{\booklink}[3]{%
+\newcommand{\marginQR}[3]{%
   \begin{marginfigure}%
     \tiny\sffamily%
-    \vspace{-1mm}\caption*{\centering Section \ref{#3}}%
-    \qrcode[height=12mm]{https://chalmersgu-data-structure-courses.github.io/dsabook/html/section-#2.html\##3}\\%
+    \vspace{-1mm}\caption*{\centering #2}%
+    \qrcode[height=12mm]{#3}\\%
     \vspace{-1mm}\caption*{\centering #1}%
   \end{marginfigure}%
+}
+
+\newcommand{\baseURL}{https://chalmersgu-data-structure-courses.github.io/dsabook}
+
+\newcommand{\booklink}[3]{%
+  \marginQR{#1}{Section \ref{#2}}{\baseURL/html/section-#2.html\##3}%
 }
 
 \usepackage{newunicodechar}
