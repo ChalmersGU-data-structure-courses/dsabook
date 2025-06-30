@@ -262,15 +262,15 @@ $common.latex()$
 
 %% Font settings for code blocks
 %% The commented ones are Pandoc's default settings
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},fontsize=\small,xleftmargin=\parindent}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},fontsize=\small,baselinestretch=0.9,xleftmargin=\parindent}
 \renewcommand{\AlertTok}         [1]{\textbf{#1}}
 \renewcommand{\AnnotationTok}    [1]{\textbf{\textit{#1}}}
 \renewcommand{\AttributeTok}     [1]{#1}
 \renewcommand{\BaseNTok}         [1]{#1}
 \renewcommand{\BuiltInTok}       [1]{#1}
 \renewcommand{\CharTok}          [1]{\textit{#1}}
-\renewcommand{\CommentTok}       [1]{\textcolor{darkgray}{\rmfamily\textit{#1}}}
-\renewcommand{\CommentVarTok}    [1]{\textcolor{darkgray}{\rmfamily\textbf{\textit{#1}}}}
+\renewcommand{\CommentTok}       [1]{\textcolor{darkgray}{\footnotesize\rmfamily\textit{#1}}}
+\renewcommand{\CommentVarTok}    [1]{\textcolor{darkgray}{\footnotesize\rmfamily\textbf{\textit{#1}}}}
 \renewcommand{\ConstantTok}      [1]{{#1}}
 \renewcommand{\ControlFlowTok}   [1]{\textbf{#1}}
 \renewcommand{\DataTypeTok}      [1]{#1}
