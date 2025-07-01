@@ -1,5 +1,5 @@
 
-# Binary trees
+# Trees
 
 ::: TODO
 - Prio 2: update introduction
@@ -18,7 +18,7 @@ prioritizing jobs (using binary heaps, see @sec:binary-heaps), or
 organizing the information needed to drive
 data compression algorithms (using Huffman coding, see @sec:case-study-huffman-coding).
 
-This chapter covers terminology used for discussing binary trees (@sec:definitions-and-properties),
+This chapter covers terminology used for discussing binary trees (@sec:binary-trees),
 tree traversals (@sec:traversing-a-binary-tree),
 approaches to implementing tree nodes (@sec:implementing-binary-trees),
 and various examples of binary trees.

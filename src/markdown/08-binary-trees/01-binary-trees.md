@@ -1,5 +1,5 @@
 
-## Definitions and properties
+## Binary trees
 
 ::: TODO
 - Prio 2: update section, here's what should be included:
@@ -15,7 +15,7 @@
 :::
 
 A [binary tree]{.term} is made up of a finite
-set of elements called [nodes](#node){.term}.
+set of elements called [nodes]{.term}.
 This set either is empty or consists of a node called the
 [root]{.term} together with two binary trees,
 called the left and right [subtrees]{.term}, which are disjoint from each other and from the root.
