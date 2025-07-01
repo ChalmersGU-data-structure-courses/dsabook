@@ -30,8 +30,15 @@ performance with extremely high probability (unlike the BST which has a
 good chance of performing poorly). As such it represents a good
 compromise between difficulty of implementation and performance.
 
+
+:::::: latex
+\booklink{Read the rest online}{11.7}{sec:skip-lists}
+::::::
+
+:::::: online
+
 ::: dsvis
-TODO
+Here is an illustration of the basic idea behind skip lists.
 
 <inlineav id="SkipListIntroCON" src="SearchStruct/SkipListIntroCON.js" script="DataStructures/SkipList.js" name="SearchStruct/SkipListIntroCON" links="DataStructures/SkipList.css SearchStruct/SkipListIntroCON.css"/>
 :::
@@ -147,7 +154,7 @@ the one being inserted.
 
 
 ::: dsvis
-TODO
+Interactive explanation of skip list insertion.
 
 <inlineav id="SkipListInsertCON" src="SearchStruct/SkipListInsertCON.js" script="DataStructures/SkipList.js" name="SearchStruct/SkipListInsertCON" links="DataStructures/SkipList.css SearchStruct/SkipListInsertCON.css"/>
 :::
@@ -158,7 +165,7 @@ nodes specified by the update array have their forward pointers adjusted
 to point around the node being deleted.
 
 ::: dsvis
-TODO
+Interactive explanation of skip list removal.
 
 <inlineav id="SkipListRmvCON" src="SearchStruct/SkipListRmvCON.js" script="DataStructures/SkipList.js" name="SearchStruct/SkipListRmvCON" links="DataStructures/SkipList.css SearchStruct/SkipListRmvCON.css"/>
 :::
@@ -206,6 +213,8 @@ for a skip list operation), and a rapidly increasing probability of
 average-case performance of $O(\log n)$, that characterizes
 probabilistic data structures.
 
+<!--
 ### Invariants
+ -->
 
-
+::::::
