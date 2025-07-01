@@ -27,24 +27,39 @@ def preprocess(contents: str) -> str:
 ###############################################################################
 ## The global glossary
 
-TheGlossary: list[list[str]]
+TheGlossary: dict[str, str]
 
 def load_global_glossary(glossfile: Path):
     global TheGlossary
+    TheGlossary = {}
     with open(glossfile) as f:
         contents = f.read()
-    _, TheGlossary, _ = read_glossary(contents)
-    assert TheGlossary, f"Couldn't find a glossary in file {glossfile}"
-    for gloss in TheGlossary:
-        gloss[:-1] = map(mkid, gloss[:-1])
-        gloss[-1] = strip_markdown(gloss[-1])
+    _, glossary, _ = read_glossary(contents)
+    assert glossary, f"Couldn't find a glossary in file {glossfile}"
+    for gloss in glossary:
+        definition = strip_markdown(gloss[-1])
+        for term in gloss[:-1]:
+            id = mkid(term)
+            assert id not in TheGlossary, f"Duplicate term: {term} ({id})"
+            TheGlossary[id] = definition
 
-def find_glossary_definition(term: str) -> str:
-    """Find the definition of the given glossary term"""
-    for gloss in TheGlossary:
-        if term in gloss[:-1]:
-            return gloss[-1]
-    return ""
+
+def get_glossid(term: str) -> str:
+    """Get the glossary id of the given glossary term"""
+    id = mkid(term)
+    while id not in TheGlossary:
+        id = id[:-1]
+        if not id:
+            return mkid(term)
+    return id
+
+
+def find_glossary_definition(id: str) -> str:
+    """Find the definition of the given glossary id"""
+    if id not in TheGlossary:
+        print(f"Glossary term not found: {id}", file=sys.stderr)
+        return ""
+    return TheGlossary[id]
 
 
 ###############################################################################
@@ -54,7 +69,7 @@ def convert_terms(contents: str) -> str:
     """Convert glossary references: [xyz]{.term} --> [xyz](#xyz){.term}"""
     return re.sub(
         r"\[([^][]+?)\]{\.term}",
-        lambda m: f"[{m[1]}](#{mkid(m[1])}){{.term}}",
+        lambda m: f"[{m[1]}](#{get_glossid(m[1])}){{.term}}",
         contents,
     )
 
