@@ -212,7 +212,7 @@ $endif$
 \newcommand{\baseURL}{https://chalmersgu-data-structure-courses.github.io/dsabook}
 
 \newcommand{\booklink}[3]{%
-  \marginQR{#1}{Section \ref{#2}}{\baseURL/html/section-#2.html\##3}%
+  \marginQR{#1}{Section \ref{#3}}{\baseURL/html/section-#2.html\##3}%
 }
 
 \usepackage{newunicodechar}
