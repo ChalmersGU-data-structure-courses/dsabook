@@ -255,22 +255,29 @@ fast performance, or a low factor (such as 1.2) if we want to save memory.
 
 #### Constant amount vs constant factor
 
-Here is a graph that shows just how big the performance difference is
+@Fig:ListGrowthGraph shows just how big the performance difference is
 between the two resizing strategies: growing the array by a constant
 amount, and scaling it by a constant factor. The graph plots how many
 elements need to be copied, as a function of how many elements we add to
 the list.
 
-:::: {#ListGrowthGraph}
+<div id="fig:ListGrowthGraph">
 <inlineav id="ListArrayDynamicZoomCON" src="List/ListArrayDynamicZoomCON.js" script="DataStructures/Plot.js" name="DataStructures/Plot.js List/ListArrayDynamicZoomCON" links="List/ListArrayDynamicZoomCON.css" static/>
-::::
+
+The performance difference between growing the array by a constant amount, and scaling it by a constant factor
+</div>
 
 Notice that although growing by 10000 seems pretty good at first, for
 largest lists it's worse than growing by 10% (a factor of 1.1). We can
 see this more clearly if we zoom out the graph, making the *x*-axis go
-up to $10,000,000$ instead of $1,000,000$:
+up to $10,000,000$ instead of $1,000,000$,
+as shown in @fig:ListGrowthGraphZoom.
 
+<div id="fig:ListGrowthGraphZoom">
 <inlineav id="ListArrayDynamicCON" src="List/ListArrayDynamicCON.js" script="DataStructures/Plot.js" name="DataStructures/Plot.js List/ListArrayDynamicCON" links="List/ListArrayDynamicCON.css" static/>
+
+@Fig:ListGrowthGraph zoomed out 10 times.
+</div>
 
 Though you can't see it in the graph, at $x=10,000,000$, growing by
 10,000 is **5,000 times** slower than growing by 10%! This is because the
