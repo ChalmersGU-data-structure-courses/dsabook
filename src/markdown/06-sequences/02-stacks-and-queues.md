@@ -103,7 +103,7 @@ about the subroutine (including the return address, parameters, and
 local variables) onto a stack. This information is called an
 [activation record]{.term}. Further subroutine
 calls add to the stack. Each return from a subroutine
-[pops](#pop){.term} the top activation record
+[pops]{.term} the top activation record
 off the stack.
 
 :::::: latex
@@ -192,7 +192,7 @@ than the version shown in the example. But it is not always possible to
 replace recursion with iteration. Recursion, or some imitation of it, is
 necessary when implementing algorithms that require multiple branching
 such as in the Towers of Hanoi algorithm, or when
-[traversing a binary tree](#binary-tree-traversals).
+traversing a binary tree (@sec:traversing-a-binary-tree).
 The [Mergesort] and [Quicksort]
 sorting algorithms also require recursion.
 

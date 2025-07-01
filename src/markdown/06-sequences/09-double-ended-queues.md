@@ -38,7 +38,7 @@
 - With normal linked lists we cannot pop from the back
 :::
 
-The [singly linked list](#linked-lists) allows for direct access from a list node only to the next
+The [singly linked list]{.term} (@sec:stacks-implemented-as-linked-lists) allows for direct access from a list node only to the next
 node in the list. A [doubly linked list]{.term}
 allows convenient access from a list node to the next node and also to
 the preceding node on the list. The doubly linked list node accomplishes

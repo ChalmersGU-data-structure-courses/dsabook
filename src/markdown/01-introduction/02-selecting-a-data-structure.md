@@ -22,7 +22,7 @@ can meet its performance goals when implemented using a simpler design.
 When selecting a data structure to solve a problem, you should follow
 these steps.
 
-1.  Analyze your problem to determine the [basic operation]{.term}s
+1.  Analyze your problem to determine the [basic operations]{.term}
     that must be supported. Examples of basic operations include
     inserting a data item into the data structure, deleting a data item
     from the data structure, and finding a specified data item.

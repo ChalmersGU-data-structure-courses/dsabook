@@ -16,7 +16,7 @@ whether the leaves store child pointers, and whether the tree is a
 [full binary tree](#full-tree){.term}.
 
 In a simple
-[pointer-based implementation for binary tree nodes](#binary-tree-node-implementations),
+pointer-based implementation for binary tree nodes,
 every node has two pointers to its children (even when the
 children are NULL). This implementation requires total space amounting
 to $n(2P + D)$ for a tree of $n$ nodes. Here, $P$ stands for the amount

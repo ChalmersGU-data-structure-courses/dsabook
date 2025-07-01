@@ -81,8 +81,9 @@ insert all these strings into a Java HashMap and then all of them would
 be in the same bucket and we would resort to linear search through a
 linked list of $2^k$ strings.
 
-Here's a short article explaining this:
+<!-- Here's a short article explaining this:
 <https://dzone.com/articles/what-is-wrong-with-hashcode-in-javalangstring>
+-->
 
 Note that this would not be improved by using an open addressing hash
 table, because then we would get a primary cluster with $2^k$ strings.

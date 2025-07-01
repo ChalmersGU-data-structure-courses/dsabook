@@ -710,7 +710,7 @@ Induction can help to prove that a recursive function produces the correct resul
 Understanding recursion is a big step toward understanding induction, and vice versa, since they work by essentially the same process.
 
 Within the context of algorithm analysis, one of the most important uses for mathematical induction is as a method to test a hypothesis.
-When seeking a [closed-form solution]{.term} for a [summation]{.term} or [recurrence]{.term}, we might first guess or otherwise acquire evidence that a particular formula is the correct solution.
+When seeking a [closed-form solution]{.term} for a [summation]{.term} or [recurrence](#recurrence-relation){.term}, we might first guess or otherwise acquire evidence that a particular formula is the correct solution.
 If the formula is indeed correct, it is often an easy matter to prove that fact with an induction proof.
 
 Let **Thrm** be a theorem to prove, and express **Thrm** in terms of a positive integer parameter $n$.

@@ -38,7 +38,7 @@ you can do direct computation.
 
 Note that code tuning does not change the complexity of an algorithm, because it only affects the multiplicative factor.
 So we cannot use complexity analysis to understand the improvements by code tuning.
-Instead, the most important tuning tool is [empirical analysis]{.term}.
+Instead, the most important tuning tool is *empirical analysis*.
 
 <!-- TODO
 Give an example of this type of representational change.

@@ -548,7 +548,7 @@ conceptual underpinning of the [radix sort]{.term}.
 
 An [array]{.term} that stores
 a single bit at each position. Typically these bits represent
-[Boolean variable]{.term}s
+[Boolean variables]{.term}
 associated with a collection of objects, such that the $i$ th bit is the
 Boolean value for the $i$ th object.
 
@@ -3038,11 +3038,17 @@ list elements. Common variants are the
 [overhead]{.term} required is the pointers
 in each link node.
 
+### linked queue
+
+Analogous to a [linked list]{.term}, this
+uses [dynamic allocation]{.term} of nodes to
+store the elements when implementing the [queue]{.term} ADT.
+
 ### linked stack
 
 Analogous to a [linked list]{.term}, this
 uses [dynamic allocation]{.term} of nodes to
-store the elements when implementing the stack ADT.
+store the elements when implementing the [stack]{.term} ADT.
 
 ### list
 

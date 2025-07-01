@@ -22,7 +22,7 @@ Problems can be viewed as functions in the mathematical sense. A
 (the [domain]{.term}) and outputs (the
 [range]{.term}). An input to a function might be
 a single value or a collection of information. The values making up an
-input are called the [parameters](#parameter){.term} of the function. A specific selection of values for the
+input are called the [parameters]{.term} of the function. A specific selection of values for the
 parameters is called an [instance](#problem-instance){.term} of the problem. For example, the input parameter to a
 sorting function might be an array of integers. A particular array of
 integers, with a given size and specific values for each position in the

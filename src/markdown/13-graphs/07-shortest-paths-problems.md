@@ -27,9 +27,9 @@ On a road map, a road connecting two towns is typically labeled with its
 distance. We can model a road network as a directed graph whose edges
 are labeled with real numbers. These numbers represent the distance (or
 other cost metric, such as travel time) between two vertices. These
-labels may be called [weights](#weight){.term},
-[costs](#cost){.term}, or
-[distances](#distance){.term}, depending on the
+labels may be called [weights]{.term},
+[costs]{.term}, or
+[distances]{.term}, depending on the
 application. Given such a graph, a typical problem is to find the total
 length of the shortest path between two specified vertices. This is not
 a trivial problem, because the shortest path may not be along the edge
@@ -56,6 +56,6 @@ Example graph for shortest-path definitions.
 ::::
 
 <!--
-### Use cases
+### Use cases for shortest paths
  -->
 

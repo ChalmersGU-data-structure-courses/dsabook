@@ -13,7 +13,7 @@ In contrast, an [abstract data type]{.term} (ADT) does not specify concrete valu
 Instead, it defines a data type purely in terms of a set of operations and the expected behavior of those operations, as determined by their inputs and outputs.
 An ADT does not dictate _how_ the operations should be implemented, and multiple implementations are often possible.
 These implementation details are hidden from the user—a concept known as [encapsulation]{.term}.
-The set of operations offered by an abstract data type is known as its [application programming interface]{.term} (API).
+The set of operations offered by an abstract data type is known as its [application programming interface](#interface){.term} (API).
 
 Using an ADT, we can distinguish between the logical behavior of a data type and its actual implementation in a concrete program.
 A classic example is the [list]{.term} abstract data type, which support the following set of operations:

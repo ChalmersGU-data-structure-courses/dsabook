@@ -2,7 +2,7 @@
 ## Recursion and divide-and-conquer
 
 An [algorithm]{.term} (or a function in a computer program) is
-[recursive]{.term} if it invokes itself to do part of its
+[recursive](#recursion){.term} if it invokes itself to do part of its
 work.
 
 ### Recursion

@@ -10,7 +10,7 @@
 
 We need some notation to show the contents of a list, so we will use the
 same angle bracket notation that is normally used to represent
-[sequences](#sequence){.term}. To be consistent
+[sequences]{.term}. To be consistent
 with standard array indexing, the first position on the list is denoted
 as 0. Thus, if there are $n$ elements in the list, they are given
 positions 0 through $n-1$ as
@@ -212,7 +212,7 @@ worst case is if we want to go to the last node, so the time complexity
 for above all operations is $O(n)$.
 
 This is much worse than the
-[array-based list](#static-array-based-lists), where
+array-based list (@sec:implementing-general-lists-using-arrays), where
 these operations are $O(1)$. So are linked lists totally useless?
 No! But they don't work well with our current List interface.
 

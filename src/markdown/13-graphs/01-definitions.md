@@ -9,7 +9,7 @@
 A [graph]{.term}
 $\mathbf{G} = (\mathbf{V}, \mathbf{E})$ consists of a set of
 [vertices](#vertex){.term} $\mathbf{V}$ and a
-set of [edges](#edge){.term} $\mathbf{E}$, such
+set of [edges]{.term} $\mathbf{E}$, such
 that each edge in $\mathbf{E}$ is a connection between a pair of
 vertices in $\mathbf{V}$. The number of vertices is written
 $|\mathbf{V}|$, and the number of edges is written $|\mathbf{E}|$.

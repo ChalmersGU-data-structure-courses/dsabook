@@ -9,7 +9,7 @@
 In this section we present one of the two traditional implementations for lists, usually called a [linked list]{.term}.
 The linked list uses [dynamic memory allocation]{.term}, that is, it allocates memory for new list elements as
 needed. The following diagram illustrates the linked list concept. There
-are three [nodes](#node){.term} that are
+are three [nodes]{.term} that are
 "linked" together. Each node has two boxes. The box on the right holds a link to the next node in the list.
 Notice that the rightmost node does not have any link coming out of this box.
 

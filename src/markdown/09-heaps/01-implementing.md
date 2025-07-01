@@ -1,7 +1,7 @@
 
 ## Implementing priority queues using binary trees
 
-A normal [linear data structure]{.term}, such as a [linked list]{.term} or [dynamic array]{.term}, cannot implement a priority queue efficiently.
+A normal linear data structure, such as a [linked list]{.term} or [dynamic array]{.term}, cannot implement a priority queue efficiently.
 This is because either insertion or removal will take linear time, $O(n)$, in the worst case.
 
 - If we use unordered lists, then searching for the element with the highest priority will be linear.
@@ -14,7 +14,7 @@ In this we show how to use binary trees instead of lists, to implement priority 
 The main idea is that we always keep the highest priority element as the root of the tree.
 This means that we have constant access to it, so the method `getMin` will always be constant time.
 
-In general, a [heap]{.term} is a tree which satisfies the [heap property]{.term}:
+In general, a [heap]{.term} is a tree which satisfies the *heap property*:
 
 - Every tree node has at least as high priority as all its children
 

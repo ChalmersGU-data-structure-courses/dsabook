@@ -22,7 +22,7 @@ hospital emergency room often choose to see next the "most critical"
 patient rather than the one who arrived first. When scheduling programs
 for execution in a multitasking operating system, at any given moment
 there might be several programs (usually called
-[jobs](#job){.term}) ready to run. The next job
+[jobs]{.term}) ready to run. The next job
 selected is the one with the highest [priority]{.term}. Priority is indicated by a particular value associated
 with the job (and might change while the job remains in the wait list).
 

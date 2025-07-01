@@ -37,7 +37,7 @@ is an example of such a structuring. These ideas are explored further in
 @sec:abstract-data-types about [abstract data types]{.term}.
 
 Given sufficient space to store a collection of
-[data item]{.term}s, it is always
+[data items]{.term}, it is always
 possible to search for specified items within the collection, print or
 otherwise process the data items in any desired order, or modify the
 value of any particular data item. The most obvious example is an

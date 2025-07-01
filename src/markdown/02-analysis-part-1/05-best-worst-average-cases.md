@@ -78,16 +78,16 @@ array values in the average case.
 
 How the data is distributed has a significant effect on
 almost all data structures and algorithms, such as those based on
-[hashing]{.term} and [binary search tree]{.term}s.
+[hashing]{.term} and [binary search trees]{.term}.
 Incorrect assumptions about data distribution can have
 disastrous consequences on a program's space or time performance.
 Unusual data distributions can also be used to advantage, such as is
-done by [self-organizing list]{.term}s and [splay tree]{.term}s.
+done by [self-organizing lists]{.term} and [splay trees]{.term}.
 
 Relying on average-case analysis can be very dangerous for all applications where you don't have full control over your data.
 For example, all kinds of databases that are publicly available are a risk.
 Even if "bad" data are extremely unlikely to occur in your use cases, you can be certain that there are people out there who gladly will try to exploit any kind of weakness in your system.
-If there is just a tiny risk of a worst-case scenario, this opens up for [denial-of-service]{.term} attacks on your system.
+If there is just a tiny risk of a worst-case scenario, this opens up for *denial-of-service attacks* on your system.
 
 In summary, for real-time applications and for applications that are openly available, we should always prefer a worst-case analysis of an algorithm.
 In other cases we usually desire an average-case analysis, but then we need to know enough about how the input is distributed.

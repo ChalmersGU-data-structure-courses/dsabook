@@ -22,7 +22,7 @@ with implementations for its operations. The most important concept
 related to lists is that of [position]{.term}.
 In other words, we perceive that there is a first element in the list, a
 second element, and so on. So, define a [list]{.term} to be a finite, ordered sequence of data items known as
-[elements](#element){.term}. This is close to
+[elements]{.term}. This is close to
 the mathematical concept of a [sequence]{.term}.
 
 "Ordered" in this definition means that each element has a position in
@@ -36,7 +36,7 @@ implementations discussed in this chapter, all elements of the list are
 usually assumed to have the same data type, although there is no
 conceptual objection to lists whose elements have differing data types
 if the application requires it. The operations defined as part of the
-list [ADT]{.term}s depend on the elemental [data type]{.term}.
+list [ADTs]{.term} depend on the elemental [data type]{.term}.
 For example, the queue ADT can be used for queues of integers, queues of characters, queues of payroll records, even queues of queues.
 
 A list is said to be [empty]{.term} when it
