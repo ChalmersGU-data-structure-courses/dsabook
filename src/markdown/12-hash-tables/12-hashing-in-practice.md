@@ -35,7 +35,7 @@ problems (please read the whole text, it's an easy read):
 
 As you can see, hash tables even have a category of itself ("Hashtable
 DoS Attacks"). They only mention separate chaining ("These hash tables
-utilized a linked list"), but the same problem arises for open
+utilised a linked list"), but the same problem arises for open
 addressing. (In fact, Python hash tables are open addressing -- see
 below).
 

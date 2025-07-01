@@ -26,7 +26,7 @@ there might be several programs (usually called
 selected is the one with the highest [priority]{.term}. Priority is indicated by a particular value associated
 with the job (and might change while the job remains in the wait list).
 
-When a collection of objects is organized by importance or priority, we
+When a collection of objects is organised by importance or priority, we
 call this a [priority queue]{.term}. A priority
 queue supports the following operations:
 
@@ -163,7 +163,7 @@ transaction. Here it is in code:
 
 What is the complexity of `add`? Well, in fact it takes constant time,
 because the priority queue has a constant maximum size of 100 elements.
-If we generalize this problem to keeping track of the top $k$
+If we generalise this problem to keeping track of the top $k$
 transactions, then the complexity of `add` is $O(\log k)$.
 :::
 

@@ -7,7 +7,7 @@
     - Discuss: When to resize
 :::
 
-While the goal of a hash function is to minimize collisions, some
+While the goal of a hash function is to minimise collisions, some
 collisions are unavoidable in practice. Thus, hashing implementations
 must include some form of collision resolution policy. Collision
 resolution techniques can be broken into two classes:

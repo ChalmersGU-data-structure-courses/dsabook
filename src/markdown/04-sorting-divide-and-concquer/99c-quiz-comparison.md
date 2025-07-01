@@ -15,7 +15,7 @@ Selection sort is generally faster than the Bubble sort on the same input.
 - [ ] False
 
 ::: hints
-- Selection sort can be viewed as an optimization of Bubble sort.
+- Selection sort can be viewed as an optimisation of Bubble sort.
 - On each pass, Selection sort just picks out the next record,
 while Bubble sort has to do a lot of swapping.
 :::

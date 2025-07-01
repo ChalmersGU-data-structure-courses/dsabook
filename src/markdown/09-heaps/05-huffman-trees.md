@@ -138,7 +138,7 @@ The process of building the Huffman tree for $n$ letters is quite
 simple.
 
 - First, create a collection of $n$ initial Huffman trees, each of which is a single leaf node containing one of the letters.
-  Put the $n$ partial trees onto a *minimum* priority queue organized by weight (frequency).
+  Put the $n$ partial trees onto a *minimum* priority queue organised by weight (frequency).
 
 - Next, remove the first two trees (the ones with lowest weight) from the priority queue.
     - Join these two trees together to create a new tree whose root has the two trees as children, and whose weight is the sum of the weights of the two trees.
@@ -268,7 +268,7 @@ large variation in the frequencies of letters.
 
 The average expected cost per letter, $c$, is the sum of the cost for each letter ($c_i$) times the probability of its occurring ($p_i$), or $c_1 p_1 + c_2 p_2 + \cdots + c_n p_n$.
 Usually we measure the cost as the number of *bits* that is needed to encode one letter.
-The formula can be reorganized as follows, where $f_i$ is the (relative) frequency of letter $i$ and $f_T$ is the total for all letter frequencies:
+The formula can be reorganised as follows, where $f_i$ is the (relative) frequency of letter $i$ and $f_T$ is the total for all letter frequencies:
 
 $$
 \frac{c_1 f_1 + c_2 f_2 + \cdots + c_n f_n}{f_T}

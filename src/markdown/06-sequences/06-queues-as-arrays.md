@@ -53,7 +53,7 @@ Circular array queue.
 :::
 
 There remains one more subtle problem to the array-based queue implementation.
-How can we recognize when the queue is empty or full?
+How can we recognise when the queue is empty or full?
 
 ::: dsvis
 Circular array queue -- empty.

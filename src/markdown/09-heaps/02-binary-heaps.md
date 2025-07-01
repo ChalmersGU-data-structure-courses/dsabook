@@ -368,7 +368,7 @@ array, with the first internal node.
 - For each index $i$, sift down its value.
 
 ::: dsvis
-Here is a visualization of the build process for a *max*-heap.
+Here is a visualisation of the build process for a *max*-heap.
 
 <inlineav id="heapbuildCON" src="Binary/heapbuildCON.js" script="DataStructures/binaryheap.js" name="Heapbuild Slideshow"/>
 :::

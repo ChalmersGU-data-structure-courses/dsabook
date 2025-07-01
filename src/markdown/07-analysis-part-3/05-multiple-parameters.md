@@ -20,7 +20,7 @@ times each value appears in the picture. Assume that the picture is a
 rectangle with $P$ pixels. A pseudocode algorithm to solve the problem
 follows.
 
-    // Initialize the counts:
+    // Initialise the counts:
     for i in 0 .. C-1:
         count[i] = 0
     // Increment the pixel value count for each of the pixels:
@@ -33,7 +33,7 @@ In this example, `count` is an array of size `C` that stores the number
 of pixels for each color value. Function `value(i)` returns the color
 value for pixel $i$.
 
-The time for the first `for` loop (which initializes `count`) is based
+The time for the first `for` loop (which initialises `count`) is based
 on the number of colors, $C$. The time for the second loop (which
 determines the number of pixels with each color) is $O(P)$. The
 time for the final line, the call to `sort`, depends on the cost of the
@@ -47,7 +47,7 @@ if $C$ is much smaller than $P$? Then the estimate of $O(P \log P)$
 is pessimistic, because much fewer than $P$ items are being sorted.
 Instead, we should use $P$ as our analysis variable for steps that look
 at each pixel, and $C$ as our analysis variable for steps that look at
-colors. Then we get $O(C)$ for the initialization loop, $O(P)$
+colors. Then we get $O(C)$ for the initialisation loop, $O(P)$
 for the pixel count loop, and $O(C \log C)$ for the sorting
 operation. This yields a total cost of $O(P + C \log C)$.
 

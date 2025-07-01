@@ -10,7 +10,7 @@
 
 Assume that we need to schedule a series of tasks, such as classes or
 construction jobs, where we cannot start one task until after its
-prerequisites are completed. We wish to organize the tasks into a linear
+prerequisites are completed. We wish to organise the tasks into a linear
 order that allows us to complete them one at a time without violating
 any prerequisites. We can model the problem using a DAG. The graph is
 directed because one task is a prerequisite of another -- the vertices
@@ -93,7 +93,7 @@ Applying the queue version of topological sort to the graph of @fig:GraphToposor
 Here is an implementation of the algorithm.
 
     function topsortBFS(graph):
-        // Initialize the prerequisite counts
+        // Initialise the prerequisite counts
         counts = new Map() of vertices to prerequisite count
         for each v in graph.vertices():
             counts.put(v, 0)
@@ -103,7 +103,7 @@ Here is an implementation of the algorithm.
                 newCount = counts.get(edge.end) + 1
                 counts.put(edge.end, newCount)
 
-        // Initialize the queue
+        // Initialise the queue
         queue = new Queue()
         for each v in graph.vertices():
             // Only add vertices that have no prerequisites

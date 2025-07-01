@@ -7,7 +7,7 @@
 
 ### 2-3 tree
 
-A specialized form of the [B-tree]{.term}
+A specialised form of the [B-tree]{.term}
 where each internal node has either 2 children or 3 children. Key
 values are ordered to maintain the
 [binary search tree property]{.term}. The
@@ -135,7 +135,7 @@ problem. There are several independent categories of qualifiers for
     [average case]{.term},
     [best case]{.term},
 -   whether to use
-    [amortized complexity](#amortized-analysis){.term}.
+    [amortised complexity](#amortised-analysis){.term}.
 
 ### alias
 
@@ -172,23 +172,23 @@ with "a" will be stored in the "a" branch of the tree. At the
 second level, such strings will be separated by branching on the
 second letter.
 
-### amortized analysis
+### amortised analysis
 
-Analysing the [amortized complexity]{.term}
+Analysing the [amortised complexity]{.term}
 of an [algorithm]{.term} or
 [problem]{.term}.
 
-### amortized complexity
+### amortised complexity
 
 A modification to the notion of [complexity]{.term}
 for operations on a data structure where, for each
 fixed input size, one does not just look at the cost of a single run
-of the operation, but its [amortized cost]{.term}
+of the operation, but its [amortised cost]{.term}
 over sufficiently long series of operations of the same
 kind. This can be made precise without considering averages by
 introducing [potentials](#potential){.term}.
 
-### amortized cost
+### amortised cost
 
 The average cost of an operation in a sufficiently long series of
 operations of the same kind. This is as opposed to considering every
@@ -197,8 +197,8 @@ lead to an overestimate for the total cost of the series. This can
 be made precise without considering averages by introducing
 [potentials](#potential){.term}.
 
-In [amortized analysis]{.term}, gives rise
-to the notion of [amortized complexity]{.term}.
+In [amortised analysis]{.term}, gives rise
+to the notion of [amortised complexity]{.term}.
 
 ### ancestor
 
@@ -213,7 +213,7 @@ $bRa$, then $a = b$, for all $a, b \in \mathbf{S}$.
 
 ### approximation algorithm
 
-An algorthm for an [optimization problem]{.term}
+An algorthm for an [optimisation problem]{.term}
 that finds a good, but not necessarily cheapest,
 solution.
 
@@ -371,7 +371,7 @@ space. This can be improved using a
 ### bad reference
 
 A reference is referred to as a bad reference if it is allocated but
-not initialized.
+not initialised.
 
 ### bag
 
@@ -595,7 +595,7 @@ can save a lot of time.
 
 A variation on [backtracking]{.term} that
 applies to
-[optimization problems](#optimization-problem){.term}.
+[optimisation problems](#optimisation-problem){.term}.
 We traverse the [solution tree]{.term}
 as with backtracking. Proceeding deeper in the solution
 tree generally requires additional cost. We remember the best-cost
@@ -639,7 +639,7 @@ A simple sort that requires $O(n^2)$ time in
 [best](#best-case){.term},
 [average](#average-case){.term}, and
 [worst](#worst-case){.term} cases. Even an
-optimized version will normally run slower than
+optimised version will normally run slower than
 [insertion sort]{.term}, so it has little to
 recommend it.
 
@@ -776,7 +776,7 @@ the advantage that it is typically not necessary to look at all free
 blocks on the free block list to find a suitable free block. And it
 has the advantage over first fit that it spreads out memory
 allocations evenly across the [free block list]{.term}.
-This might help to minimize
+This might help to minimise
 [external fragmentation]{.term}.
 
 ### circular list
@@ -864,7 +864,7 @@ refer to the process of turning a parse tree (that determines the
 correctness of the structure of the program) into actual
 instructions that the computer can execute.
 
-### code optimization
+### code optimisation
 
 A phase in a [compiler]{.term} that makes
 changes in the code (typically [assembly code]{.term})
@@ -967,7 +967,7 @@ The major phases in a compiler include
 [lexical analysis]{.term},
 [syntax analysis]{.term},
 [intermediate code generation]{.term},
-[code optimization]{.term}, and
+[code optimisation]{.term}, and
 [code generation]{.term}. More broadly, a
 compiler can be viewed as [parsing](#parser){.term} the program to verify that
 it is syntactically correct, and then doing
@@ -1122,7 +1122,7 @@ A process for finding the
 for a [recurrence relation]{.term}, that
 involves substituting in a guess for the closed form to replace the
 recursive part(s) of the recurrence. Depending on the goal
-(typically either to show that the hypothesized growth rate is
+(typically either to show that the hypothesised growth rate is
 right, or to find the precise constants), one then manipulates the
 resulting non-recursive equation.
 
@@ -1339,7 +1339,7 @@ of the graph that was followed during the DFS.
 
 ### dequeue
 
-A specialized term used to indicate removing an element from a
+A specialised term used to indicate removing an element from a
 queue.
 
 ### dereference
@@ -1367,10 +1367,10 @@ by progressing downwards in tree. Another way to say it is:   The
 [children](#child){.term} of $A$, their
 children, and so on.
 
-### deserialization
+### deserialisation
 
 The process of returning a
-[serialized](#serialization){.term}
+[serialised](#serialisation){.term}
 representation for a data structure back to its original in-memory
 form.
 
@@ -1397,7 +1397,7 @@ one symbol.
 
 An algorithm that does not involve any element of randomness, and so
 its behavior on a given input will always be the same. This is in
-contrast to a [randomized algorithm]{.term}.
+contrast to a [randomised algorithm]{.term}.
 
 ### deterministic finite automata
 ### deterministic finite acceptor
@@ -1410,7 +1410,7 @@ behavior defined for what to do when in a given state and with a given
 symbol on the current square of the tape. All that we can "do" is
 change state before going to the next letter to the right.
 
-### diagonalization argument
+### diagonalisation argument
 
 A proof technique for proving that a set is
 [uncountably infinite]{.term}. The approach
@@ -1689,7 +1689,7 @@ appear to allow the array to grow and shrink in size as necessary.
 Typically this is done by allocating a new copy, copying the
 contents of the old array, and then returning the old array to
 [free store]{.term}. If done correctly, the
-[amortized cost]{.term} for dynamically
+[amortised cost]{.term} for dynamically
 resizing the array can be made constant. In some programming
 languages such as Java, the term [vector]{.term}
 is used as a synonym for dynamic array.
@@ -1762,7 +1762,7 @@ object from outside access.
 
 ### enqueue
 
-A specialized term used to indicate inserting an element onto a
+A specialised term used to indicate inserting an element onto a
 queue.
 
 ### entry-sequenced file
@@ -1803,7 +1803,7 @@ As a technical skill, this is the process of generating a rough
 estimate in order to evaluate the feasibility of a proposed
 solution. This is sometimes known as "back of the napkin" or
 "back of the envelope" calculation. The estimation process can be
-formalized as (1) determine the major parameters that affect the
+formalised as (1) determine the major parameters that affect the
 problem, (2) derive an equation that relates the parameters to the
 problem, then (3) select values for the parameters and apply the
 equation to yield an estimated solution.
@@ -1894,7 +1894,7 @@ satisfy a [memory request]{.term} from the
 current [free blocks](#free-block){.term} in
 the [memory pool]{.term}. Possibilities
 include rejecting the request, expanding the memory pool, collecting
-[garbage]{.term}, and reorganizing the
+[garbage]{.term}, and reorganising the
 memory pool (to collect together free space).
 
 ### family of languages
@@ -1939,7 +1939,7 @@ bytes).
 
 ### file structure
 
-The organization of data on [peripheral storage]{.term},
+The organisation of data on [peripheral storage]{.term},
 such as a [disk drive]{.term}
 or DVD drive.
 
@@ -2131,7 +2131,7 @@ connected and has $|\mathbf{V}| - 1$ edges.
 ### frequency count
 
 A [heuristic]{.term} used to maintain a
-[self-organizing list]{.term}. Under this
+[self-organising list]{.term}. Under this
 heuristic, a count is maintained for every record. When a record
 access is made, its count is increased. If this makes its count
 greater than that of another record in the list, it moves up toward
@@ -2422,7 +2422,7 @@ efficient solution.
 A type of [approximation algorithm]{.term},
 that uses a [heuristic]{.term} to find a
 good, but not necessarily cheapest, solution to an
-[optimization problem]{.term}.
+[optimisation problem]{.term}.
 
 ### home position
 
@@ -2548,7 +2548,7 @@ alternative, see [strong induction]{.term}.
 
 ### induction variable
 
-The variable used to parameterize the theorem being proved by
+The variable used to parameterise the theorem being proved by
 induction. For example, if we seek to prove that the sum of the
 integers from 1 to \$n\$ is \$n(n+1)/2\$, then \$n\$ is the
 induction variable. An induction variable must be an integer.
@@ -2592,7 +2592,7 @@ sorted.
 
 Any function whose input is an integer and whose output is an
 integer. It can be proved by
-[diagonalization](#diagonalization-argument){.term}
+[diagonalisation](#diagonalisation-argument){.term}
 that the set of integer functions is
 [uncountably infinite]{.term}.
 
@@ -2617,7 +2617,7 @@ transform the original high-level language into a form on which it
 is easier to do other stages of the process. For example, some
 compilers will transform the original high-level source code into
 [assembly code]{.term} on which it can do
-[code optimization]{.term}, before
+[code optimisation]{.term}, before
 translating it into its final executable form.
 
 ### intermediate code generation
@@ -2731,7 +2731,7 @@ the container.
 
 Common name for processes or tasks to be run by an operating system.
 They typically need to be processed in order of importance, and so
-are kept organized by a [priority queue]{.term}.
+are kept organised by a [priority queue]{.term}.
 Another common use for this term is for a collection
 of tasks to be ordered by a [topological sort]{.term}.
 
@@ -2832,7 +2832,7 @@ problem instances in practical time relatively quickly using
 [dynamic programming]{.term}. Thus, it is
 considered to have
 [pseudo-polynomial]{.term}
-cost. An [optimization problem]{.term}
+cost. An [optimisation problem]{.term}
 version is to find the subset that can fit with the
 greatest amount of items, either in terms of their total size, or in
 terms of the sum of values associated with each item.
@@ -2862,7 +2862,7 @@ A set of strings.
 
 ### Las Vegas algorithms
 
-A form of [randomized algorithm]{.term}. We
+A form of [randomised algorithm]{.term}. We
 always find the maximum value, and "usually" we find it fast. Such
 algorithms have a guaranteed result, but do not guarantee fast
 running time.
@@ -2889,7 +2889,7 @@ must be replaced by new data being read into a
 [least recently used]{.term} is more popular
 than LFU. Analogous to the [frequency count]{.term}
 heuristic for maintaining a
-[self-organizing list]{.term}.
+[self-organising list]{.term}.
 
 ### least recently used
 ### LRU
@@ -2902,7 +2902,7 @@ Abbreviated LRU, it is a popular
 must be replaced by new data being read into a
 [cache](#caching){.term}. Analogous to the
 [move-to-front]{.term} heuristic for
-maintaining a [self-organizing list]{.term}.
+maintaining a [self-organising list]{.term}.
 
 ### left recursive
 
@@ -3443,7 +3443,7 @@ syntax in many programming languages is `n % m`.
 
 ### Monte Carlo algorithms
 
-A form of [randomized algorithm]{.term}. We
+A form of [randomised algorithm]{.term}. We
 find the maximum value fast, or we don't get an answer at all (but
 fast). While such algorithms have good running time, their result is
 not guaranteed.
@@ -3451,7 +3451,7 @@ not guaranteed.
 ### move-to-front
 
 A [heuristic]{.term} used to maintain a
-[self-organizing list]{.term}. Under this
+[self-organising list]{.term}. Under this
 heuristic, whenever a record is accessed it is moved to the front of
 the list. Analogous to the [least recently used]{.term}
 heuristic for maintaining a
@@ -3464,7 +3464,7 @@ with a [multi-dimensional search structure]{.term}.
 Most typically, a [spatial]{.term}
 search key representing a position in multi-dimensional
 (2 or 3 dimensions) space. But a multi-dimensional key could be used
-to organize data within non-spatial dimensions, such as temperature
+to organise data within non-spatial dimensions, such as temperature
 and time.
 
 ### multi-dimensional search structure
@@ -3661,14 +3661,14 @@ these to other software components.
 ### optimal static ordering
 
 A theoretical construct defining the best static (non-changing)
-order in which to place a collection of records so as to minimize
+order in which to place a collection of records so as to minimise
 the number of records [visited](#visit){.term}
 by a series of sequential searches. It is a useful
 concept for the purpose of defining a theoretical optimum against
 which to compare the performance for a
-[self-organizing list heuristic]{.term}.
+[self-organising list heuristic]{.term}.
 
-### optimization problem
+### optimisation problem
 
 Any problem where there are a (typically large) collection of
 potential solutions, and the goal is to find the best solution. An
@@ -3819,7 +3819,7 @@ edges from $v_i$ to $v_{i+1}$ for $1 \leq i < n$.
 ### path compression
 
 When implementing the [UNION/FIND]{.term}
-algorithm, path compression is a local optimization step that can be
+algorithm, path compression is a local optimisation step that can be
 performed during the FIND step. Once the root of the tree for the
 current object has been found, the path to the root can be traced a
 second time, with all objects in the tree made to point directly to
@@ -3914,7 +3914,7 @@ and [compile-time polymorphism]{.term}.
 
 ### pop
 
-A specialized term used to indicate removing an
+A specialised term used to indicate removing an
 [element]{.term} from a
 [stack]{.term}.
 
@@ -3945,15 +3945,15 @@ right child, and then visits the [root]{.term}.
 
 ### potential
 
-A concept in [amortized complexity]{.term}
+A concept in [amortised complexity]{.term}
 for operations on a data structure. We choose a *potential function*
 that associates an arbitrary non-negative value of *stored cost*
 (stored energy) with each state of the data structure. We then
-define the [amortized cost]{.term} of a run
+define the [amortised cost]{.term} of a run
 of the operation to be its cost as given by the the
 [cost model]{.term} plus the change in
 potential. The [complexity]{.term} modified
-this way is called [amortized complexity]{.term}.
+this way is called [amortised complexity]{.term}.
 
 An example is adding an element to a dynamic array. When the dynamic
 array is not full, adding an element is quick and we store some of
@@ -3963,7 +3963,7 @@ compensate that cost by resetting the potential from a high value to
 zero. Let us define the potential of a dynamic array with capacity
 $c$ and size $n$ to be $max(2n-c,0)$. Assuming we double the
 capacity on reallocation, the operation of adding an element then
-has constant amortized complexity.
+has constant amortised complexity.
 
 The concept comes from potential energy in physics. For example, in
 the graviational field of the earth, kinetic energy may be stored as
@@ -4088,7 +4088,7 @@ tasks, with the ordering values based on the
 
 ### probabilistic algorithm
 
-A form of [randomized algorithm]{.term} that
+A form of [randomised algorithm]{.term} that
 might yield an incorrect result, or that might fail to produce a
 result.
 
@@ -4195,7 +4195,7 @@ theorem must be true.
 
 A mathematical proof technique similar to
 [recursion]{.term}. It is used to prove a
-parameterized theorem \$S(n)\$, that is, a theorem where there is a
+parameterised theorem \$S(n)\$, that is, a theorem where there is a
 [induction variable]{.term} involved (such
 as the sum of the numbers from 1 to \$n\$). One first proves that
 the theorem holds true for a [base case]{.term},
@@ -4247,7 +4247,7 @@ of position $i$ in the permuation.
 
 ### push
 
-A specialized term used to indicate inserting an
+A specialised term used to indicate inserting an
 [element]{.term} onto a
 [stack]{.term}.
 
@@ -4257,7 +4257,7 @@ A specialized term used to indicate inserting an
 A type of [finite state automata]{.term} that adds a stack
 memory to the basic [deterministic finite automata]{.term}
 machine. This extends the set of languages that can be
-recognize to the
+recognise to the
 [context-free languages](#context-free-language){.term}.
 
 ### quadratic growth rate
@@ -4350,10 +4350,10 @@ One of the $n!$ possible permutations for a set of $n$ element is
 selected in such a way that each permutation has equal probability
 of being selected.
 
-### randomized algorithm
+### randomised algorithm
 
 An algorithm that involves some form of randomness to control its
-behavior. The ultimate goal of a randomized algorithm is to improve
+behavior. The ultimate goal of a randomised algorithm is to improve
 performance over a deterministic algorithm to solve the same
 problem. There are a number of variations on this theme. A "Las
 Vegas algorithm" returns a correct result, but the amount of time
@@ -4385,7 +4385,7 @@ keeping the tree [height balanced]{.term}.
 A collection of information, typically implemented as an
 [object]{.term} in an
 [object-oriented programming language](#object-oriented-programming-paradigm){.term}.
-Many data structures are organized containers for a
+Many data structures are organised containers for a
 collection of records.
 
 ### recurrence with full history
@@ -4715,7 +4715,7 @@ by the disk drive hardware. This is typically 512 bytes.
 
 On a disk drive, a piece of information at the start of a
 [sector]{.term} that allows the
-[I/O head]{.term} to recognize the identity
+[I/O head]{.term} to recognise the identity
 (or equivalently, the address) of the current sector.
 
 ### seed
@@ -4740,26 +4740,26 @@ While this sort requires $O(n^2)$ time in the
 [worst](#worst-case){.term} cases, it
 requires only $O(n)$ swap operations. Thus, it does relatively
 well in applications where swaps are expensive. It can be viewed as
-an optimization on [bubble sort]{.term},
+an optimisation on [bubble sort]{.term},
 where a swap is deferred until the end of each iteration.
 
-### self-organizing list
+### self-organising list
 
 A list that, over a series of search operations, will make use of
 some [heuristic]{.term} to re-order its
 elements in an effort to improve search times. Generally speaking,
 search is done sequentially from the beginning, but the
-self-organizing heuristic will attempt to put the records that are
+self-organising heuristic will attempt to put the records that are
 most likely to be searched for at or near the front of the list.
 While typically not as efficient as
 [binary search]{.term} on a sorted list,
-self-organizing lists do not require that the list be sorted (and so
+self-organising lists do not require that the list be sorted (and so
 do not pay the cost of doing the sorting operation).
 
-### self-organizing list heuristic
+### self-organising list heuristic
 
 A [heuristic]{.term} to use for the purpose
-of maintaining a [self-organizing list]{.term}.
+of maintaining a [self-organising list]{.term}.
 Commonly used heuristics include
 [move-to-front]{.term} and
 [transpose]{.term}.
@@ -4804,17 +4804,17 @@ they appear.
 
 A representation that stores a series of node values with the
 minimum information needed to reconstruct the tree structure. This
-is a technique for [serializing](#serialization){.term}
+is a technique for [serialising](#serialisation){.term}
 a tree.
 
-### serialization
+### serialisation
 
 The process of taking a data structure in memory and representing it
 as a sequence of bytes. This is sometimes done in order to transmit
 the data structure across a network or store the data structure in a
 [stream]{.term}, such as on disk.
-[Deserialization]{.term}
-reconstructs the original data structure from the serialized
+[Deserialisation]{.term}
+reconstructs the original data structure from the serialised
 representation.
 
 ### set
@@ -4986,7 +4986,7 @@ creating new software.
 ### solution space
 
 The possible solutions to a problem. This typically refers to an
-[optimization problem]{.term}, where some
+[optimisation problem]{.term}, where some
 solutions are more desireable than others.
 
 ### solution tree
@@ -5012,7 +5012,7 @@ The lower bound for the [problem]{.term} of
 [sorting](#sorting-problem){.term} is
 $\Omega(n \log n)$. This is traditionally proved using a
 [decision tree]{.term} model for sorting
-algorithms, and recognizing that the minimum depth of the decision
+algorithms, and recognising that the minimum depth of the decision
 tree for any sorting algorithm is $\Omega(n \log n)$ since there are
 $n!$ permutations of the $n$ input records to distinguish between
 during the sorting process.
@@ -5108,7 +5108,7 @@ the insert and remove operations. While a splay tree does not
 guarentee that the tree is balanced, it does guarentee that a series
 of $n$ operations on the tree will have a total cost of
 $O(n \log n)$ cost, meaning that any given operation can be
-viewed as having [amortized cost]{.term} of
+viewed as having [amortised cost]{.term} of
 $O(\log n)$.
 
 ### splaying
@@ -5223,7 +5223,7 @@ collection members.
 ### stream
 
 The process of delivering content in a
-[serialized](#serialization){.term} form.
+[serialised](#serialisation){.term} form.
 
 ### strict partial order
 
@@ -5451,7 +5451,7 @@ $bRc$, then $aRc$, for all $a, b, c \in \mathbf{S}$.
 In the context of linear algebra, the transpose of a matrix $A$ is
 another matrix $A^T$ created by writing the rows of $A$ as the
 columns of $A^T$. In the context of a
-[self-organizing list]{.term}, transpose is
+[self-organising list]{.term}, transpose is
 a [heuristic]{.term} used to maintain the
 list. Under this heuristic, whenever a record is accessed it is
 moved one position closer to the front of the list.
@@ -5572,7 +5572,7 @@ value $n$ is represented by a series of $n$ marks.
 
 An infinite set is uncountably infinite
 if there does not exist any mapping from it to the set of integers. This
-is often proved using a [diagonalization argument]{.term}.
+is often proved using a [diagonalisation argument]{.term}.
 The real numbers is an example of an uncountably infinite
 set.
 
@@ -5618,9 +5618,9 @@ disjoint sets when it is determined that they are members of the
 same [equivalence class]{.term} under some
 [equivalence relation]{.term}.
 
-### uninitialized
+### uninitialised
 
-Uninitialized variable means it has no initial value.
+Uninitialised variable means it has no initial value.
 
 ### unit production
 
@@ -5699,7 +5699,7 @@ Given a collection of objects, a variable-length coding scheme
 assigns a code to each object in the collection using codes that can
 be of different lengths. Typically this is done in a way such that
 the objects that are most likely to be used have the shortest codes,
-with the goal of minimizing the total space needed to represent a
+with the goal of minimising the total space needed to represent a
 sequence of objects, such as when representing the characters in a
 document. [Huffman coding](#huffman-codes){.term}
 is an example of a variable-length coding scheme. This
@@ -5835,10 +5835,10 @@ higher than the next most frequently appearing record, which in turn
 has a frequency much higher than the third (but with ratio slightly
 lower than that for the first two records) and so on. The
 [80/20 rule]{.term} is a casual
-characterization of a Zipf distribution. Adherence to a Zipf
+characterisation of a Zipf distribution. Adherence to a Zipf
 distribution is important to the successful operation of a
 [cache](#caching){.term} or
-[self-organizing list]{.term}.
+[self-organising list]{.term}.
 
 ### zone
 

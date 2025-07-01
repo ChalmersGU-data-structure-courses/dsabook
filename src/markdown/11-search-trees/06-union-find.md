@@ -106,7 +106,7 @@ tree. **Find** is used to find the ultimate root for a node.
 An application using the **Union/Find** operations should store a set of $n$
 objects, where each object is assigned a unique index in the range 0 to
 $n-1$. The indices refer to the corresponding parent pointers in the
-array. Class `ParentPointerTree` creates and initializes the **Union/Find** array,
+array. Class `ParentPointerTree` creates and initialises the **Union/Find** array,
 and methods **Union** and **Find** take array indices as inputs.
 @Fig:UFfig visualises the parent pointer array.
 
@@ -132,9 +132,9 @@ subsets called
 [symmetric]{.term}, and
 [transitive]{.term}. Thus, if objects $A$ and
 $B$ are equivalent, and objects $B$ and $C$ are equivalent, then we must
-be able to recognize that objects $A$ and $C$ are also equivalent. In
+be able to recognise that objects $A$ and $C$ are also equivalent. In
 this representation, since $A$ and $B$ are equivalent, they must be in
-the same tree. Likewise for $B$ and $C$. We can recognize that $A$ and
+the same tree. Likewise for $B$ and $C$. We can recognise that $A$ and
 $C$ are equivalent because they must also be in the same tree.
 
 There are many practical uses for disjoint sets and representing
@@ -240,7 +240,7 @@ weighted union.
 
 ### Path compression
 
-The weighted union rule helps to minimize the depth of the tree, but we
+The weighted union rule helps to minimise the depth of the tree, but we
 can do better than this.
 [Path compression]{.term} is
 a method that tends to create extremely shallow trees. Path compression
@@ -291,7 +291,7 @@ a series will look only at the roots of the trees being merged,
 requiring little processing time. The *total* amount of processing time
 required for $n$ operations will be $O(n \log^* n)$, yielding
 nearly constant time for each equivalence operation. This is an example
-of [amortized analysis]{.term}.
+of [amortised analysis]{.term}.
 
 <!--
 The expression $\log^* n$ is closely related to the inverse of

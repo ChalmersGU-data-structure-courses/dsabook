@@ -36,7 +36,7 @@ worth considering for implementation.
 The critical resource for a program is most often its running time.
 However, you cannot pay attention to running time alone. You must also
 be concerned with other factors such as the space required to run the
-program (both main memory and disk space). Typically you will analyze
+program (both main memory and disk space). Typically you will analyse
 the *time* required for an *algorithm* (or the instantiation of an
 algorithm in the form of a program), and the *space* required for a
 *data structure*.
@@ -77,7 +77,7 @@ surrogate for running time.
 Of primary consideration when estimating an algorithm's performance is
 the number of [basic operations](#basic-operation){.term} required by the algorithm to process an input of a certain
 size. The terms "basic operations" and "size" are both rather vague
-and depend on the algorithm being analyzed. Size is often the number of
+and depend on the algorithm being analysed. Size is often the number of
 inputs processed. For example, when comparing sorting algorithms the
 size of the problem is typically measured by the number of records to be
 sorted. A basic operation must have the property that its time to
@@ -121,7 +121,7 @@ function `largest`. We do not care right now what the precise value of
 $c$ might be. Nor are we concerned with the time required to increment
 variable $i$ because this must be done for each value in the array, or
 the time for the actual assignment when a larger value is found, or the
-little bit of extra time taken to initialize `pos`. We just want a
+little bit of extra time taken to initialise `pos`. We just want a
 reasonable approximation for the time taken to execute the algorithm.
 The total time to run `largest` is therefore approximately $cn$, because
 we must make $n$ comparisons, with each comparison costing $c$ time. We
@@ -179,7 +179,7 @@ What is the running time for this code fragment? Clearly it takes longer
 to run when $n$ is larger. The basic operation in this example is the
 increment operation for variable `sum`. We can assume that incrementing
 takes constant time; call this time $c_2$. (We can ignore the time
-required to initialize `sum`, and to increment the loop counters `i` and
+required to initialise `sum`, and to increment the loop counters `i` and
 `j`. In practice, these costs can safely be bundled into time $c_2$.)
 The total number of increment operations is $n^2$. Thus, we say that the
 running time is $T(n) = c_2 n^2$.

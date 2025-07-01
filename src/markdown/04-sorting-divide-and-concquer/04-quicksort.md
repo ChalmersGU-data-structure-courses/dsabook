@@ -133,7 +133,7 @@ Quicksort partition proficiency exercise.
 <avembed id="QuicksortPartitPRO" src="Sorting/QuicksortPartitPRO.html" type="ka" name="Quicksort Partition Proficiency Exercise"/>
 :::
 
-To analyze Quicksort, we first analyze the functions for finding the pivot and partitioning a subarray of length $k$.
+To analyse Quicksort, we first analyse the functions for finding the pivot and partitioning a subarray of length $k$.
 Clearly, `findPivot` takes constant time for any $k$.
 
 The total cost of the partition operation is constrained by how far `left` and `right` can move inwards.
@@ -145,7 +145,7 @@ The total cost of the partition operation is constrained by how far `left` and `
 
 
 ::: dsvis
-Here is a visualization illustrating the running time analysis of the partition function.
+Here is a visualisation illustrating the running time analysis of the partition function.
 
 <inlineav id="QuickSortPartitionAnalysisCON" src="Sorting/QuickSortPartitionAnalysisCON.js" name="Quicksort Partition Analysis Slideshow" links="Sorting/QuickSortPartitionAnalysisCON.css"/>
 :::
@@ -153,15 +153,15 @@ Here is a visualization illustrating the running time analysis of the partition 
 ### Putting it together
 
 ::: dsvis
-Here is a visualization for the entire Quicksort algorithm.
+Here is a visualisation for the entire Quicksort algorithm.
 
-This visualization shows you how the logical decomposition caused by the
-partitioning process works. In the visualization, the separate
+This visualisation shows you how the logical decomposition caused by the
+partitioning process works. In the visualisation, the separate
 sub-partitions are separated out to match the recursion tree. In
 reality, there is only a single array involved (as you will see in the
-proficiency exercise that follows the visualization).
+proficiency exercise that follows the visualisation).
 
-<avembed id="quicksortAV" src="Sorting/quicksortAV.html" type="ss" name="Quicksort Visualization"/>
+<avembed id="quicksortAV" src="Sorting/quicksortAV.html" type="ss" name="Quicksort Visualisation"/>
 :::
 
 ::: dsvis
@@ -191,7 +191,7 @@ Thus, the total amount of work is determined by the summation:
 Therefore, the worst case running time of Quicksort is $O(N^2)$.
 
 ::: dsvis
-This visualization explains the worst-case running time of Quicksort
+This visualisation explains the worst-case running time of Quicksort
 
 <inlineav id="QuickSortWorstCaseCON" src="Sorting/QuickSortWorstCaseCON.js" name="Quicksort Worst Case Analysis Slideshow" links="Sorting/QuickSortWorstCaseCON.css"/>
 :::
@@ -216,7 +216,7 @@ And if we always can find the perfect pivot, there will be only $\log N$ levels.
 So the best-case running time of Quicksort is $O(N \log N)$.
 
 ::: dsvis
-This visualization explains the best-case running time of Quicksort
+This visualisation explains the best-case running time of Quicksort
 
 <inlineav id="QuickSortBestCaseCON" src="Sorting/QuickSortBestCaseCON.js" name="Quicksort Best Case Analysis Slideshow" links="Sorting/QuickSortBestCaseCON.css"/>
 :::
@@ -240,7 +240,7 @@ T(0) = T(1) &=& c
 \end{eqnarray*}
 
 ::: dsvis
-This visualization will help you to understand how this recurrence
+This visualisation will help you to understand how this recurrence
 relation was formed.
 
 <inlineav id="QuickSortAverageCaseCON" src="Sorting/QuickSortAverageCaseCON.js" name="Quicksort Average Case Analysis Slideshow" links="Sorting/QuickSortAverageCaseCON.css"/>

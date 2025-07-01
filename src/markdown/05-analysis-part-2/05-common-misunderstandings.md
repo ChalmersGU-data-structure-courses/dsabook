@@ -15,7 +15,7 @@ points of confusion are, in hopes of avoiding them.
 One problem with differentiating the concepts of
 [upper](#upper-bound){.term} and
 [lower bounds](#lower-bound){.term} is that, for
-most algorithms that you will encounter, it is easy to recognize the
+most algorithms that you will encounter, it is easy to recognise the
 true growth rate for that algorithm. Given complete knowledge about a
 cost function, the upper and lower bound for that cost function are
 always the same. Thus, the distinction between an upper and a lower
@@ -53,9 +53,9 @@ is correct is that best- and worse-case instances exist for each
 possible size of input. That is, for all inputs of a given size, say
 $n$, one (or more) of the inputs of size $n$ is the best and one (or
 more) of the inputs of size $n$ is the worst. Often (but not always!),
-we can characterize the best input case for an arbitrary size, and we
-can characterize the worst input case for an arbitrary size. Ideally, we
-can determine the growth rate for the characterized best, worst, and
+we can characterise the best input case for an arbitrary size, and we
+can characterise the worst input case for an arbitrary size. Ideally, we
+can determine the growth rate for the characterised best, worst, and
 average cases as the input size grows.
 
 ::: example
@@ -84,5 +84,5 @@ That leaves us with analysing the worst-case upper bound, or sometimes the avera
 
 
 <!-- This explanation is not very pedagogical
-<inlineav id="MisunderstandingsGraphCON" src="AlgAnal/MisunderstandingsGraphCON.js" name="Example's graph Visualization" links="AlgAnal/MisunderstandingsGraphCON.css"/>
+<inlineav id="MisunderstandingsGraphCON" src="AlgAnal/MisunderstandingsGraphCON.js" name="Example's graph Visualisation" links="AlgAnal/MisunderstandingsGraphCON.css"/>
 -->

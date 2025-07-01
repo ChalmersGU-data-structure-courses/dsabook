@@ -475,7 +475,7 @@ Case (3)
     $T(n) \in O(a^m r^m) = O(a^m (b^k/a)^m) = O(b^{km}) = O(n^k)$.
 
 
-We can summarize the above derivation as the following theorem,
+We can summarise the above derivation as the following theorem,
 sometimes referred to as the [master theorem]{.term}.
 
 ::: topic

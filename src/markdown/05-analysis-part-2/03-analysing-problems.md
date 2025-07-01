@@ -1,13 +1,13 @@
 
-## Analyzing problems
+## Analysing problems
 
 ::: TODO
 - Prio 2: rewrite this text, more examples and help in how to analyse problems
 :::
 
-You most often use the techniques of algorithm analysis to analyze an [algorithm]{.term}
+You most often use the techniques of algorithm analysis to analyse an [algorithm]{.term}
 (or the instantiation of an algorithm as a [program]{.term}).
-But you can also use these same techniques to analyze the cost of a [problem]{.term}.
+But you can also use these same techniques to analyse the cost of a [problem]{.term}.
 The key question that we want to ask is: How hard is a problem?
 
 Certainly we should expect that in some sense, the problem of sorting a list of records is harder than the problem of searching a list of records for a given key value.
@@ -44,7 +44,7 @@ So, to prove a lower bound, we need an argument that is true, even for algorithm
 So far all of our examples of algorithm analysis give "obvious" results, with big-$O$ always matching $\Omega$.
 To understand how big-$O$, $\Omega$, and $\Theta$ notations are properly used to describe our understanding of a problem or an algorithm, it is best to consider an example where you do not already know a lot about the problem.
 
-Let us look ahead to analyzing the problem of sorting to see how this process works.
+Let us look ahead to analysing the problem of sorting to see how this process works.
 What is the least possible cost for any sorting algorithm in the worst case?
 The algorithm must at least look at every element in the input, just to determine that the input is truly sorted.
 Thus, any sorting algorithm must take at least $\Omega(n)$ time.
@@ -67,7 +67,7 @@ Knowing the lower bound for a problem does not give you a good algorithm.
 But it does help you to know when to stop looking.
 If the lower bound for the problem matches the upper bound for the algorithm (within a constant factor), then we know that we can find an algorithm that is better only by a constant factor.
 
-So, to summarize: The upper bound for a problem is the best that you *can* do, while the lower bound for a problem is the least work that you *must* do.
+So, to summarise: The upper bound for a problem is the best that you *can* do, while the lower bound for a problem is the least work that you *must* do.
 If those two are the same, then we can say that we really understand our problem.
 
 
@@ -88,7 +88,7 @@ problem's I/O time. From this we see that the sorting problem cannot be
 solved by *any* algorithm in less than $\Omega(n)$ time because it takes
 at least $n$ steps to read and write the $n$ values to be sorted.
 Alternatively, any sorting algorithm must at least look at every input
-value to recognize whether the input values are in sorted order. So,
+value to recognise whether the input values are in sorted order. So,
 based on our current knowledge of sorting algorithms and the size of the
 input, we know that the *problem* of sorting is bounded by $\Omega(n)$
 and $O(n \log n)$.
@@ -136,7 +136,7 @@ the decision tree. In the case where the first value is greater than the
 second, the algorithm takes the right branch.
 
 ::: dsvis
-Here is a visualization that illustrates decision trees and the sorting
+Here is a visualisation that illustrates decision trees and the sorting
 lower bound proof.
 
 <inlineav id="SortingLowerBoundCON" src="Sorting/SortingLowerBoundCON.js" name="Sorting Lower Bound Slideshow" links="Sorting/SortingLowerBoundCON.css"/>

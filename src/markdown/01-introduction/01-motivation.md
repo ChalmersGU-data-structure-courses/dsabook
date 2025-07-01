@@ -31,7 +31,7 @@ In the most general sense, a [data structure]{.term} is any
 data representation and its associated operations.
 Even an integer or floating point number stored on the computer can be
 viewed as a simple data structure. More commonly, people use the term
-"data structure" to mean an organization or structuring for a
+"data structure" to mean an organisation or structuring for a
 collection of data items. A sorted list of integers stored in an array
 is an example of such a structuring. These ideas are explored further in
 @sec:abstract-data-types about [abstract data types]{.term}.

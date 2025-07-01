@@ -142,7 +142,7 @@ There are some things we can do to improve the efficiency of Quicksort.
 
 #### Backing off to Insertion sort
 
-A significant improvement can be gained by recognizing that Quicksort is
+A significant improvement can be gained by recognising that Quicksort is
 relatively slow when the array is small. This might not seem to be relevant if
 most of the time we sort large arrays, nor should it matter how long
 Quicksort takes in the rare instance when a small array is sorted
@@ -159,7 +159,7 @@ Note that this improvement can also be used for Mergesort!
 
 #### Running Insertion sort in a single final pass
 
-There is a variant of this optimization: When
+There is a variant of this optimisation: When
 Quicksort partitions are below a certain size, do nothing! The values
 within that partition will be out of order. However, we do know that all
 values in the array to the left of the partition are smaller than all

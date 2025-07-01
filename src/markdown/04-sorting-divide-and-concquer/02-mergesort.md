@@ -30,9 +30,9 @@ pseudocode sketch of Mergesort:
         merge(L1, L2)
 
 ::: dsvis
-Here is a visualization that illustrates how Mergesort works.
+Here is a visualisation that illustrates how Mergesort works.
 
-<avembed id="mergesortAV" src="Sorting/mergesortAV.html" type="ss" name="Mergesort Visualization"/>
+<avembed id="mergesortAV" src="Sorting/mergesortAV.html" type="ss" name="Mergesort Visualisation"/>
 :::
 
 The hardest step to understand about Mergesort is the merge function.
@@ -61,7 +61,7 @@ Here is pseudocode for merging two lists:
         return answer
 
 ::: dsvis
-Here is a visualization for the merge operation.
+Here is a visualisation for the merge operation.
 
 <inlineav id="mergesortCON" src="Sorting/mergesortCON.js" name="Merging Slideshow"/>
 :::
@@ -132,7 +132,7 @@ Note that this cost is unaffected by the relative order of the values being sort
 
 
 ::: dsvis
-This visualization provides a running time analysis for Mergesort.
+This visualisation provides a running time analysis for Mergesort.
 
 <inlineav id="MergeSortAnalysisCON" src="Sorting/MergeSortAnalysisCON.js" name="Mergesort Analysis Slideshow" links="Sorting/MergeSortAnalysisCON.css"/>
 :::

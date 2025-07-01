@@ -3,7 +3,7 @@
 
 When we formulate a problem, and describe a data structure or an algorithm, it is useful to describe them in terms of invariants, or pre- and postconditions.
 
-These properties are very useful tools for analyzing the correctness of an algorithm.
+These properties are very useful tools for analysing the correctness of an algorithm.
 But they are also pedagogical tools, they help our understanding how an data structure or algorithm works.
 
 #### Invariants

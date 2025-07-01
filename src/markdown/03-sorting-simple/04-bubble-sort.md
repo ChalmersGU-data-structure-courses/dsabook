@@ -37,9 +37,9 @@ preceding pass. Here is an implementation:
 
 ::: note
 Note that to make the explanation for the sorting algorithms as
-simple as possible, our visualizations will show the array as though it
+simple as possible, our visualisations will show the array as though it
 stored simple integers rather than more complex records. But you should
-realize that in practice, there is rarely any point to sorting an array
+realise that in practice, there is rarely any point to sorting an array
 of simple integers. Nearly always we want to sort more complex records
 that each have a [key]{.term} value. In such cases we must have a way
 to associate a key value with a record. The sorting
@@ -64,9 +64,9 @@ Bubble sort continues in this way until the entire array is sorted.
 :::
 
 ::: dsvis
-The following visualization shows the complete Bubble sort. You can input your own data if you like.
+The following visualisation shows the complete Bubble sort. You can input your own data if you like.
 
-<avembed id="bubblesortAV" src="Sorting/bubblesortAV.html" type="ss" name="Bubble Sort Visualization"/>
+<avembed id="bubblesortAV" src="Sorting/bubblesortAV.html" type="ss" name="Bubble Sort Visualisation"/>
 :::
 
 ::: dsvis

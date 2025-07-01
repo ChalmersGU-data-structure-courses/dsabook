@@ -49,7 +49,7 @@ Quicksort (@sec:quicksort), and
 Mergesort (@sec:mergesort).
 
 For Quicksort and Mergesort, two versions are compared: the basic implementation,
-and an optimized version that falls back to Insertion sort for sublists of
+and an optimised version that falls back to Insertion sort for sublists of
 length below 20.
 
 The various sorting algorithms are shown for random integer arrays of sizes being multiples of 10.
@@ -68,4 +68,4 @@ Insertion sort and Selection sort outperforms Bubble sort in all cases.
 We also see that Insertion sort is the fastest algorithm of all if the input is already sorted.
 Quicksort with a cutoff to Insertion sort is clearly the best overall algorithm,
 but recall that this experiment was only run on random integer arrays.
-In general, optimizing the various algorithms makes a noticeable improvement for larger array sizes.
+In general, optimising the various algorithms makes a noticeable improvement for larger array sizes.

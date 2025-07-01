@@ -59,9 +59,9 @@ However, since the smallest element is already at the beginning, we will not nee
 Selection sort continues in this way until the entire array is sorted.
 
 ::: dsvis
-The following visualization puts it all together. You can input your own data if you like.
+The following visualisation puts it all together. You can input your own data if you like.
 
-<avembed id="selectionsortAV" src="Sorting/selectionsortAV.html" type="ss" name="Selection Sort Visualization"/>
+<avembed id="selectionsortAV" src="Sorting/selectionsortAV.html" type="ss" name="Selection Sort Visualisation"/>
 :::
 
 ::: dsvis
@@ -91,7 +91,7 @@ For each outer iteration it only makes one swap, so the total number of swaps wi
 So, selection sort makes a linear number of swaps, $O(N)$.
 
 ::: dsvis
-This visualization analyzes the number of comparisons and swaps required by Selection sort.
+This visualisation analyses the number of comparisons and swaps required by Selection sort.
 
 <inlineav id="SelectionSortAnalysisCON" src="Sorting/SelectionSortAnalysisCON.js" name="Selection Sort Analysis Slideshow" links="Sorting/SelectionSortAnalysisCON.css"/>
 :::
@@ -104,7 +104,7 @@ large. This is to have each element of the array store a pointer to a
 record rather than store the record itself. In this implementation, a
 swap operation need only exchange the pointer values. The large records
 do not need to move. This technique is illustrated by the following
-visualization. Additional space is needed to store the pointers, but the
+visualisation. Additional space is needed to store the pointers, but the
 return is a faster swap operation.
 
 :::: {#PointerSwap}

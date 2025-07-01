@@ -79,7 +79,7 @@ iii\) **Induction Step:**
 By mathematical induction the theorem holds for all values of $n > 0$.
 :::
 
-When analyzing the space requirements for a binary tree implementation,
+When analysing the space requirements for a binary tree implementation,
 it is useful to know how many empty subtrees a tree contains. A simple
 extension of the Full Binary Tree Theorem tells us exactly how many
 empty subtrees there are in *any* binary tree, whether full or not. Here

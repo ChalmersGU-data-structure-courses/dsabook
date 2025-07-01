@@ -27,8 +27,8 @@ of $O(|\mathbf{V}|^3 \log |\mathbf{V}|)$, but the version using
 Another solution that limits processing time to $O(|\mathbf{V}|^3)$
 regardless of the number of edges is known as Floyd's algorithm. It is
 an example of dynamic programming. The chief problem with solving this
-problem is organizing the search process so that we do not repeatedly
-solve the same subproblems. We will do this organization through the use
+problem is organising the search process so that we do not repeatedly
+solve the same subproblems. We will do this organisation through the use
 of the $k$-path. Define a [k-path]{.term} from
 vertex $v$ to vertex $w$ to be any path whose intermediate vertices
 (aside from $v$ and $w$) all have indices less than $k$. A 0-path is

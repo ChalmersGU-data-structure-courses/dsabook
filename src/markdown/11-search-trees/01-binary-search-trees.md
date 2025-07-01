@@ -451,7 +451,7 @@ For example, if we want to print the nodes in ascending order we can perform an 
 
 While the BST is simple to implement and efficient when the tree is
 balanced, the possibility of its being unbalanced is a serious
-liability. There are techniques for organizing a BST to guarantee good
+liability. There are techniques for organising a BST to guarantee good
 performance. Two examples are the
 [AVL tree]{.term} (see @sec:avl-trees) and the
 [splay tree]{.term} (see @sec:splay-trees). There

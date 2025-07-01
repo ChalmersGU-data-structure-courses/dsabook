@@ -28,7 +28,7 @@ A similar notation is used to describe the least amount of a resource that an al
 Like big-$O$, this is a measure of the algorithm's growth rate.
 And like big-$O$, it works for any resource (usually time), and for some particular class of inputs of size $n$.
 
-The [lower bound]{.term} for an algorithm (or a problem, as we will discuss in @sec:analyzing-problems) is denoted by the symbol $\Omega$, pronounced "big-Omega" or just "Omega".
+The [lower bound]{.term} for an algorithm (or a problem, as we will discuss in @sec:analysing-problems) is denoted by the symbol $\Omega$, pronounced "big-Omega" or just "Omega".
 The following definition for $\Omega$ is symmetric with the definition of big-$O$.
 
 Lower bound
@@ -130,7 +130,7 @@ understood and we can almost always give a $\Theta$ analysis for them.
 However, the class of [NP-Complete]{.term}
 problems all have no definitive $\Theta$ analysis, just some
 unsatisfying big-$O$ and $\Omega$ analyses. Even some "simple" programs
-are hard to analyze. Nobody currently knows the true upper or lower
+are hard to analyse. Nobody currently knows the true upper or lower
 bounds for the following code fragment.
 
     while n > 1:

@@ -62,7 +62,7 @@ A *composite type* is:
 
 ::: hints
 - A type with only 1 simple type is just a simple type. There is a better answer to this question.
-- An ADT is the realization of a data type, including the type and the operations allowed on the type.
+- An ADT is the realisation of a data type, including the type and the operations allowed on the type.
 - An object is an instance of a class.
 :::
 ::::::::::::::::::::::::::::::
@@ -209,7 +209,7 @@ Which of these is more a concern for Software Engineering than for a data struct
 Which of these is NOT one of the three standard steps to follow when selecting a data structure to solve a problem?
 
 - [x] Run simulations to quantify the expected running time of the program.
-- [ ] Analyze your problem to determine the basic operations that must be supported.
+- [ ] Analyse your problem to determine the basic operations that must be supported.
 - [ ] Quantify the resource constraints for each operation.
 - [ ] Select the data structure that best meets the requirements determined in the prior steps of the process.
 

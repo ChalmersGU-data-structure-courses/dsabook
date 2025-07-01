@@ -1,7 +1,7 @@
 # Introduction
 
 ::: TODO
-- Prio 2: are the lists actually the ones we want to emphasize?
+- Prio 2: are the lists actually the ones we want to emphasise?
 - Prio 3: update the 1st paragraph with more up-to-date examples
 :::
 
@@ -9,7 +9,7 @@ How many cities with more than 100,000 people lie within 200 kilometers of Paris
 How many people in Swedish towns with less than 50,000 people earn less than 50% of the average income of people in Sweden?
 How much more CO~2~ will be emitted if I travel by plane from Gothenburg, Sweden, to Düsseldorf, Germany, compared to if I take the train?
 How can I see if a text contains plagiarism, i.e., if it copied some parts from another existing text?
-To answer questions like these, it is not enough to have the necessary information. We must organize that information in a way that allows us to find the answers in time to satisfy our needs.
+To answer questions like these, it is not enough to have the necessary information. We must organise that information in a way that allows us to find the answers in time to satisfy our needs.
 
 Representing information is fundamental to computer science. The primary
 purpose of most computer programs is not to perform calculations, but to

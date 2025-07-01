@@ -50,7 +50,7 @@ method because it is extremely efficient when implemented correctly.**
 As we will see in this chapter, however, there are many approaches
 to hashing and it is easy to devise an inefficient implementation.
 Hashing is suitable for both in-memory and disk-based searching and is
-one of the two most widely used methods for organizing large databases
+one of the two most widely used methods for organising large databases
 stored on disk (the other is the [B-tree]{.term}).
 
 ::: dsvis
@@ -81,7 +81,7 @@ the table, then we say that $k_1$ and $k_2$ have a
 [collision]{.term} at slot $\beta$ under hash
 function **h**.
 
-Finding a record with key value $k$ in a database organized by hashing
+Finding a record with key value $k$ in a database organised by hashing
 follows a two-step procedure:
 
 1.  Compute the table location $\mathbf{h}(k)$.

@@ -180,7 +180,7 @@ Many programs can be modified to reduce storage requirements by
 "packing" or encoding information. "Unpacking" or decoding the
 information requires additional time. Thus, the resulting program uses
 less space but runs slower. Conversely, many programs can be modified to
-pre-store results or reorganize information to allow faster running time
+pre-store results or reorganise information to allow faster running time
 at the expense of greater storage requirements. Typically, such changes
 in time and space are both by a constant factor.
 
@@ -211,13 +211,13 @@ nearest degree, then a lookup table storing the computation for exact
 degrees can be used instead of repeatedly computing the sine function.
 Note that initially building the lookup table requires a certain amount
 of time. Your application must use the lookup table often enough to make
-this initialization worthwhile.
+this initialisation worthwhile.
 
 ::: example
 #### Example: Binsort
 
 Another example of the space/time tradeoff is typical of what a
-programmer might encounter when trying to optimize space. Here is a
+programmer might encounter when trying to optimise space. Here is a
 simple code fragment for sorting an array of integers. We assume that
 this is a special case where there are $n$ integers whose values are a
 permutation of the integers from 0 to $n-1$. This is an example of a [binsort]{.term}.

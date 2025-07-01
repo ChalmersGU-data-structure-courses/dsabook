@@ -6,7 +6,7 @@
 :::
 
 Since sorting is such an important application, it is natural for
-programmers to want to optimize their sorting code to run faster. Of
+programmers to want to optimise their sorting code to run faster. Of
 course all quadratic sorts (Insertion sort, Bubble sort and Selection
 sort) are relatively slow. Each has (as the name "quadratic" suggests)
 $O(n^2)$ worst case running time. The best way to speed them up is
@@ -63,7 +63,7 @@ One possible improvement that is sometimes suggested for Bubble sort,
 is to check during each iteration of the outer loop to see if
 any swaps took place during that iteration, and quit if not (since we
 know the list is ordered at this point). We can improve on this idea
-even more by recognizing that if the last swap done affects the values
+even more by recognising that if the last swap done affects the values
 at positions $j-1$ and $j$, no swaps could happen to values at positions
 greater than $j$. Thus, we never need to check higher-positioned values
 again, which could save many iterations even if there are a few swaps
@@ -132,7 +132,7 @@ alternative than continuously swapping the element to the left until a
 smaller value is found. This is to move the current element to a
 temporary variable, and then shift all of the elements with greater value
 one step to the right. Here is an implementation for Insertion sort using this
-optimization.
+optimisation.
 
     function insertionSortShift(A):
         N = A.size

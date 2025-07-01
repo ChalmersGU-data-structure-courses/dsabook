@@ -12,7 +12,7 @@
 If your program needs to store a few things -- numbers, payroll
 records, or job descriptions for example -- the simplest and most
 effective approach might be to put them in a list. Only when you have to
-organize and search through a large number of things do more
+organise and search through a large number of things do more
 sophisticated data structures like
 [search trees](#search-tree){.term} become
 necessary. Many applications don't require any form of search, and they
@@ -33,7 +33,7 @@ Along with presenting these fundamental data structures, the other goals of the 
 2.  Illustrate the use of asymptotic analysis in the context of simple
     operations that you might already be familiar with. In this way you
     can begin to see how asymptotic analysis works, without the
-    complications that arise when analyzing more sophisticated
+    complications that arise when analysing more sophisticated
     algorithms and data structures.
 
 

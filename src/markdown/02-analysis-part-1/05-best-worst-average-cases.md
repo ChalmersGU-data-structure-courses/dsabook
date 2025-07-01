@@ -36,10 +36,10 @@ Here is an example.
 <inlineav id="AnalCasesDiffCON" src="AlgAnal/AnalCasesDiffCON.js" name="Best, Worst, and Average cases slideshow" links="AlgAnal/AnalCasesCON.css"/>
 :::
 
-When analyzing an algorithm, should we study the best, worst, or average
+When analysing an algorithm, should we study the best, worst, or average
 case? Normally we are not interested in the best case, because this
 might happen only rarely and generally is too optimistic for a fair
-characterization of the algorithm's running time. In other words,
+characterisation of the algorithm's running time. In other words,
 analysis based on the best case is not likely to be representative of
 the behavior of the algorithm. However, there are rare instances where a
 best-case analysis is useful -- in particular, when the best case has
@@ -47,7 +47,7 @@ high probability of occurring.
 For example, if we know that the array we want to sort is *almost sorted*,
 we can take advantage of the best-case running time of insertion sort.
 
-How about the worst case? The advantage to analyzing the worst case is
+How about the worst case? The advantage to analysing the worst case is
 that you know for certain that the algorithm must perform at least that
 well. This is especially important for real-time applications, such as
 for the computers that monitor an air traffic control system. Here, it
@@ -82,7 +82,7 @@ almost all data structures and algorithms, such as those based on
 Incorrect assumptions about data distribution can have
 disastrous consequences on a program's space or time performance.
 Unusual data distributions can also be used to advantage, such as is
-done by [self-organizing lists]{.term} and [splay trees]{.term}.
+done by [self-organising lists]{.term} and [splay trees]{.term}.
 
 Relying on average-case analysis can be very dangerous for all applications where you don't have full control over your data.
 For example, all kinds of databases that are publicly available are a risk.

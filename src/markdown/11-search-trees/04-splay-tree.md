@@ -30,7 +30,7 @@ efficiency goal.
 
 The splay tree access functions operate in a manner reminiscent of the
 [move-to-front]{.term} rule for
-[self-organizing lists](#self-organizing-list){.term} (see @sec:amortised-analysis),
+[self-organising lists](#self-organising-list){.term} (see @sec:amortised-analysis),
 and of the path compression technique for managing a series
 of [Union/Find]{.term} operations (see @sec:disjoint-sets).
 These access functions tend to make the tree more balanced,

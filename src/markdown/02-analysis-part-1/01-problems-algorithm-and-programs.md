@@ -133,17 +133,17 @@ which terminates once its output is produced.
 In this book we will usually present algorithms and not programs.
 We assume that you as the reader is competent enough to be able to translate our descriptions and pseudocode into working programs in your favourite language.
 
-To summarize: A [problem]{.term} is a function
+To summarise: A [problem]{.term} is a function
 or a mapping of inputs to outputs. An [algorithm]{.term} is a recipe for solving a problem whose steps are concrete
 and unambiguous. Algorithms must be correct, of finite length, and must
 terminate for all inputs. A [program]{.term} is
 an instantiation of an algorithm in a programming language.
 
 ::: dsvis
-The following slideshow should help you to visualize the differences.
+The following slideshow should help you to visualise the differences.
 
 ::: TODO
-- Prio 3: this visualization is really ugly
+- Prio 3: this visualisation is really ugly
 :::
 
 <inlineav id="ProblemAlgorithmCON" src="AlgAnal/ProblemAlgorithmCON.js" name="Problem, Algorithm, and Program definitions Slideshow" links="AlgAnal/ProblemAlgorithmCON.css"/>

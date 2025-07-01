@@ -63,7 +63,7 @@ where $U$ is some vertex in $\mathbf{S}$.
 
 This solution is usually referred to as [Dijkstra's algorithm]{.term}. It works
 by maintaining a distance estimate $\mathbf{D}(X)$ for all vertices $X$
-in $\mathbf{V}$. The elements of $\mathbf{D}$ are initialized to the
+in $\mathbf{V}$. The elements of $\mathbf{D}$ are initialised to the
 value $\infty$ (positive infinity). Vertices are processed in order of distance from $S$.
 Whenever a vertex $v$ is processed, $\mathbf{D}(X)$ is updated for every
 neighbor $X$ of $V$.

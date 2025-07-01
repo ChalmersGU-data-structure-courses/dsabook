@@ -7,7 +7,7 @@
 :::
 
 ::: latex
-Code tuning involves optimizing specific parts of a program to improve performance, often by reducing runtime or memory usage.
+Code tuning involves optimising specific parts of a program to improve performance, often by reducing runtime or memory usage.
 While it doesn’t change the algorithm’s complexity, it can lead to significant speedups, sometimes by a factor of five to ten.
 Effective tuning focuses on the most time-consuming parts of the code and is best guided by empirical analysis and profiling tools.
 The full text can be read online.
@@ -28,7 +28,7 @@ searching, two of the most important computer problems.
 
 While not nearly so important as changing an algorithm to reduce its
 growth rate, "code tuning" can also lead to dramatic improvements in
-running time. Code tuning is the art of hand-optimizing a program to run
+running time. Code tuning is the art of hand-optimising a program to run
 faster or require less storage. For many programs, code tuning can
 reduce running time or cut the storage requirements by a factor of two
 or more. Even speedups by a factor of five to ten are not uncommon.
@@ -45,7 +45,7 @@ Give an example of this type of representational change.
 -->
 
 Here are some suggestions for ways to speed up your programs by code
-tuning. The most important thing to realize is that most statements in a
+tuning. The most important thing to realise is that most statements in a
 program do not have much effect on the running time of that program.
 There are normally just a few key subroutines, possibly even key lines
 of code within the key subroutines, that account for most of the running
@@ -95,11 +95,11 @@ Be careful not to use tricks that make the program unreadable. Most code
 tuning is simply cleaning up a carelessly written program, not taking a
 clear program and adding tricks. In particular, you should develop an
 appreciation for the capabilities of modern compilers to make extremely
-good optimizations of expressions. "Optimization of expressions" here
+good optimisations of expressions. "Optimisation of expressions" here
 means a rearrangement of arithmetic or logical expressions to run more
 efficiently. Be careful not to damage the compiler's ability to do such
-optimizations for you in an effort to optimize the expression yourself.
-Always check that your "optimizations" really do improve the program
+optimisations for you in an effort to optimise the expression yourself.
+Always check that your "optimisations" really do improve the program
 by running the program before and after the change on a suitable
 benchmark set of input. It is very hard to do better than a good compiler.
 

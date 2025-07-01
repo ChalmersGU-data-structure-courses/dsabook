@@ -57,8 +57,8 @@ modified quickly when the modification does not affect its space
 requirements. Hash tables also support efficient insertion of new
 records. While deletions can also be supported efficiently, too many
 deletions lead to some degradation in performance for the remaining
-operations. However, the hash table can be reorganized periodically to
-restore the system to peak efficiency. Such reorganization can occur
+operations. However, the hash table can be reorganised periodically to
+restore the system to peak efficiency. Such reorganisation can occur
 offline so as not to affect ATM transactions.
 
 
@@ -101,8 +101,8 @@ It can be overwhelming to sort through all the sources available online.
 Finding the exact address of a website on your own is nearly impossible.
 
 This is where search engines come in.
-Search engines like Google, Bing, and DuckDuckGo help us find the information we need by organizing the Internet and making it searchable.
-This process of organizing information is called indexing.
+Search engines like Google, Bing, and DuckDuckGo help us find the information we need by organising the Internet and making it searchable.
+This process of organising information is called indexing.
 
 Most of us use search engines every day without thinking about the incredible job they do.
 The image below shows the results of a search for “binary search”:

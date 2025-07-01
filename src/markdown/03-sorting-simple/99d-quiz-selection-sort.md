@@ -170,7 +170,7 @@ matter what the order of the input array.
 
 
 :::::::::: question ::::::::::
-Which statement best characterizes
+Which statement best characterises
 Selection sort (as the code is written in this chapter)?
 
 (Recall that a stable sorting algorithm maintains the relative order of equal elements.)

@@ -10,7 +10,7 @@ It should go without saying that people write programs to solve
 problems. However, sometimes programmers forget this. So it is crucial
 to keep this truism in mind when selecting a
 [data structure]{.term} to solve a particular
-[problem]{.term}. Only by first analyzing the
+[problem]{.term}. Only by first analysing the
 problem to determine the performance goals that must be achieved can
 there be any hope of selecting the right data structure for the job.
 Poor program designers ignore this analysis step and apply a data
@@ -22,14 +22,14 @@ can meet its performance goals when implemented using a simpler design.
 When selecting a data structure to solve a problem, you should follow
 these steps.
 
-1.  Analyze your problem to determine the [basic operations]{.term}
+1.  Analyse your problem to determine the [basic operations]{.term}
     that must be supported. Examples of basic operations include
     inserting a data item into the data structure, deleting a data item
     from the data structure, and finding a specified data item.
 2.  Quantify the resource constraints for each operation.
 3.  Select the data structure that best meets these requirements.
 
-This three-step approach to selecting a data structure operationalizes a
+This three-step approach to selecting a data structure operationalises a
 data-centered view of the design process. The first concern is for the
 data and the operations to be performed on them, the next concern is the
 representation of those data, and the final concern is the

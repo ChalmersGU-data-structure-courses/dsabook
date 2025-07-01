@@ -180,7 +180,7 @@ Examples of full and complete binary trees:
 ones most commonly used, they are not universal. Because the common
 meaning of the words "full" and "complete" are quite similar,
 there is little that you can do to distinguish between them other
-than to memorize the definitions. Here is a memory aid that you
+than to memorise the definitions. Here is a memory aid that you
 might find useful: "Complete" is a wider word than "full", and
 complete binary trees tend to be wider than full binary trees
 because each level of a complete binary tree is as wide as possible.

@@ -39,7 +39,7 @@ simplest form.
 (4) **Multiplication**:
     If $f\in O(g)$ and $f'\in O(g')$, then $f\cdot f' \in O(g\cdot g')$
 
-    The final rule is used to analyze simple loops in programs.
+    The final rule is used to analyse simple loops in programs.
     If some action is repeated some number of times, and each repetition has the same cost, then the total cost is the cost of the action multiplied by the number of times that the action takes place.
 
 Taking the first three rules collectively, you can ignore all constants and all lower-order terms to determine the asymptotic growth rate for any cost function.
@@ -177,7 +177,7 @@ More examples can be found in the online version of the book.
 :::: example
 #### Example: Many for-loops
 
-We now analyze a code fragment with several `for` loops, some of which
+We now analyse a code fragment with several `for` loops, some of which
 are nested.
 
 
@@ -232,7 +232,7 @@ Compare the asymptotic analysis for the following two code fragments.
 In the first double loop, the inner `for` loop always executes $n$
 times. Because the outer loop executes $n$ times, it should be obvious
 that the statement `sum1=sum1+1` is executed precisely $n^2$ times. The
-second loop is similar to the one analyzed in the previous example, with
+second loop is similar to the one analysed in the previous example, with
 cost $\sum_{j = 1}^{n} j$. This is approximately $\frac{1}{2} n^2$.
 Thus, both double loops cost $O(n^2)$, though the second requires
 about half the time of the first.
@@ -308,14 +308,14 @@ But in almost all cases the rules work fine, and when they don't it's usually on
 ::::
 
 <!-- TODO
-We need to think about a technique for visualizing the running time of
-some loop constructs. This can be very similar to how we visualize
+We need to think about a technique for visualising the running time of
+some loop constructs. This can be very similar to how we visualise
 reaching the closed form solution of summations.
 -->
 
 ### Other control statements
 
-What about other control statements? `While` loops are analyzed in a
+What about other control statements? `While` loops are analysed in a
 manner similar to `for` loops. The cost of an `if` statement in the
 worst case is the greater of the costs for the `then` and `else`
 clauses. This is also true for the average case, assuming that the size
@@ -332,7 +332,7 @@ would be an `if` statement that executes the `then` clause only for the
 smallest of $n$ values. To perform an average-case analysis for such
 programs, we cannot simply count the cost of the `if` statement as being
 the cost of the more expensive branch. In such situations, the technique
-of [amortized analysis]{.term} can come to the rescue.
+of [amortised analysis]{.term} can come to the rescue.
 
 ### Recursive functions
 

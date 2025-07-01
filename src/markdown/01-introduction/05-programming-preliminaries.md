@@ -54,10 +54,10 @@ Variables
 
 Types
 
-:   A [type]{.term} defines a set of values along with the operations (or functions) that can be performed on them. For example, the Boolean type consists of the values `true` and `false`. Data types can be categorized as primitive or compound. Primitive types represent basic values, while compound types, such as arrays, tuples, and lists, are constructed using other types. For instance, an array is always an array of a specific type.
+:   A [type]{.term} defines a set of values along with the operations (or functions) that can be performed on them. For example, the Boolean type consists of the values `true` and `false`. Data types can be categorised as primitive or compound. Primitive types represent basic values, while compound types, such as arrays, tuples, and lists, are constructed using other types. For instance, an array is always an array of a specific type.
 
     In our pseudocode, we sometimes use type variables to indicate that a
-    compound data type is parameterized by another type. For example, `List of A`
+    compound data type is parameterised by another type. For example, `List of A`
     represents a list containing elements of some type A. To distinguish type
     variables, we use capital letters.
 
@@ -127,7 +127,7 @@ Although this is very convenient in many cases, we will not make use of iterator
 
 As mentioned earlier, a data type consists of a set of values and the operations that can be performed on them.
 Primitive data types are basic types provided by a programming language (including our pseudocode) and cannot be user-defined.
-Some data structures, such as arrays and lists, are built into many languages and organize collections of values, while compound data types, such as classes or algebraic data types, allow users to define their own structures.
+Some data structures, such as arrays and lists, are built into many languages and organise collections of values, while compound data types, such as classes or algebraic data types, allow users to define their own structures.
 The next sections introduce the data types used in this book.
 
 #### Primitive data types

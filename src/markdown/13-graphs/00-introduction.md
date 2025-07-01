@@ -22,13 +22,13 @@ for.
     links create the bottlenecks.
 4.  Finding a path from a starting condition to a goal condition. This
     is a common way to model problems in artificial intelligence
-    applications and computerized game players.
+    applications and computerised game players.
 5.  Modeling computer algorithms, to show transitions from one program
     state to another.
 6.  Finding an acceptable order for finishing subtasks in a complex
     activity, such as constructing large buildings.
 7.  Modeling relationships such as family trees, business or military
-    organizations, and scientific taxonomies.
+    organisations, and scientific taxonomies.
 
 The next section covers some basic graph terminology. The
 rest of the chapter will describe fundamental representations for graphs,

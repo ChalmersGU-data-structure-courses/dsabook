@@ -6,17 +6,17 @@
 - Prio 3: add use cases
 :::
 
-Many organizations are hierarchical in nature, such as the military and
+Many organisations are hierarchical in nature, such as the military and
 most businesses. Consider a company with a president and some number of
 vice presidents who report to the president. Each vice president has
 some number of direct subordinates, and so on. If we wanted to model
 this company with a data structure, it would be natural to think of the
 president in the root node of a tree, the vice presidents at level 1,
 and their subordinates at lower levels in the tree as we go down the
-organizational hierarchy.
+organisational hierarchy.
 
 Because the number of vice presidents is likely to be more than two,
-this company's organization cannot easily be represented by a binary
+this company's organisation cannot easily be represented by a binary
 tree. We need instead to use a tree whose nodes have an arbitrary number
 of children. Unfortunately, when we permit trees to have nodes with an
 arbitrary number of children, they become much harder to implement than
@@ -44,7 +44,7 @@ $R$. A node's [out degree]{.term} is the number
 of children for that node. A [forest]{.term} is
 a collection of one or more trees.
 @Fig:GeneralTree presents further tree
-notation generalized from the notation for binary trees.
+notation generalised from the notation for binary trees.
 
 <!-- <inlineav id="GenTreeCON" src="General/GenTreeCON.js" name="General/GenTreeCON" links="General/GenTreeCON.css" static/> -->
 
@@ -64,7 +64,7 @@ root, has one edge connecting that node to its parent.
 
 Before discussing general tree implementations, we should first make
 precise what operations such implementations must support. Any
-implementation must be able to initialize a tree. Given a tree, we need
+implementation must be able to initialise a tree. Given a tree, we need
 access to the root of that tree. There must be some way to access the
 children of a node. In the case of binary tree nodes, this
 was done by providing instance variables for the

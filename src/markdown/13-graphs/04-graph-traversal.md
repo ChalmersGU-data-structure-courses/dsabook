@@ -26,7 +26,7 @@ problem requires getting from a specified start state to a specified
 goal state by moving between states only through the connections.
 Typically, the start and goal states are not directly connected. To
 solve this problem, the vertices of the graph must be searched in some
-organized manner.
+organised manner.
 
 Graph traversal algorithms typically begin with a start vertex and
 attempt to visit the remaining vertices from there. Graph traversals
@@ -63,7 +63,7 @@ graph traversals described next.
 
 ### Depth-first search
 
-Our first method for organized graph traversal is called
+Our first method for organised graph traversal is called
 [depth-first search]{.term} (DFS). Whenever a
 vertex $v$ is visited during the search, DFS will recursively visit all
 of $v$ 's unvisited neighbors. Equivalently, DFS will add all edges
@@ -84,7 +84,7 @@ The recursive DFS algorithm can be described as simply as this:
             recursively visit all adjacent vertices
 
 ::: dsvis
-This visualization shows a graph and the result of performing a DFS on
+This visualisation shows a graph and the result of performing a DFS on
 it, resulting in a depth-first search tree.
 
 <inlineav id="DFSCON" src="Graph/DFSCON.js" name="Depth-First Search Slideshow" links="Graph/DFSCON.css"/>
@@ -109,7 +109,7 @@ some applications require activity *after* the remaining vertices are
 processed; hence the call to function `postVisit`.
 
 ::: dsvis
-The following visualization shows a random graph each time that you
+The following visualisation shows a random graph each time that you
 start it, so that you can see the behavior on different examples. It can
 show you DFS run on a directed graph or an undirected graph. Be sure to
 look at an example for each type of graph.
@@ -139,7 +139,7 @@ and the start vertex is at the root, BFS is equivalent to visiting
 vertices level by level from top to bottom.
 
 ::: dsvis
-This visualization shows a graph and the result of performing a BFS on
+This visualisation shows a graph and the result of performing a BFS on
 it, resulting in a breadth-first search tree.
 
 <inlineav id="BFSCON" src="Graph/BFSCON.js" name="Breadth-First Search Slideshow" links="Graph/BFSCON.css"/>
@@ -168,7 +168,7 @@ search! This is because the recursive version of DFS implicitly uses the
 call stack to remember which vertices to visit.
 
 ::: dsvis
-The following visualization shows a random graph each time that you
+The following visualisation shows a random graph each time that you
 start it, so that you can see the behavior on different examples. It can
 show you BFS run on a directed graph or an undirected graph. Be sure to
 look at an example for each type of graph.

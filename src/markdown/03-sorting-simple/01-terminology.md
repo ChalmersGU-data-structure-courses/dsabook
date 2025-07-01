@@ -20,7 +20,7 @@ keys and the records, the allowable range of the key values, and the
 amount by which the input records are "out of order" can all greatly
 affect the relative running times for sorting algorithms.
 
-When analyzing sorting algorithms, it is traditional to measure the cost
+When analysing sorting algorithms, it is traditional to measure the cost
 by *counting the number of comparisons* made between keys. This measure is
 usually closely related to the actual running time for the algorithm and
 has the advantage of being machine and data-type independent. However,

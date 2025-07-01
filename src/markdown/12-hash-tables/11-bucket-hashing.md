@@ -58,7 +58,7 @@ search or insertion occurs, the entire bucket is read into memory.
 Because the entire bucket is then in memory, processing an insert or
 search operation requires only one disk access, unless the bucket is
 full. If the bucket is full, then the overflow bucket must be retrieved
-from disk as well. Naturally, overflow should be kept small to minimize
+from disk as well. Naturally, overflow should be kept small to minimise
 unnecessary disk accesses.
 
 ::: dsvis

@@ -14,8 +14,8 @@ of applications that trees can speed up include
 describing mathematical expressions
 and the syntactic elements of computer programs
 (using expression trees, see @sec:differentiating-between-internal-nodes-and-leaves),
-prioritizing jobs (using binary heaps, see @sec:binary-heaps), or
-organizing the information needed to drive
+prioritising jobs (using binary heaps, see @sec:binary-heaps), or
+organising the information needed to drive
 data compression algorithms (using Huffman coding, see @sec:case-study-huffman-coding).
 
 This chapter covers terminology used for discussing binary trees (@sec:binary-trees),

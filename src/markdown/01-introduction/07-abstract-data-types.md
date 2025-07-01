@@ -26,12 +26,12 @@ A classic example is the [list]{.term} abstract data type, which support the fol
 
 A list can be implemented using either an array or a linked list.
 Users of a list do not need to know which implementation is used in order to make use of its functionality.
-The actual implementations of an ADT rely on specific _data structures_ to realize the desired behavior of the operations -- for example, calculating the size of a list.
+The actual implementations of an ADT rely on specific _data structures_ to realise the desired behavior of the operations -- for example, calculating the size of a list.
 
 Although different implementations of an abstract data type offer the same set of operations, the choice of [data structure]{.term} can significantly impact the _efficiency_ of those operations.
-Often, there are trade-offs involved: optimizing one operation may come at the cost of another.
+Often, there are trade-offs involved: optimising one operation may come at the cost of another.
 For example, an array-based list allows fast access to elements at specific indices, while a linked-list implementation excels at inserting elements at the front.
-Furthermore, different applications may prioritize different operations.
+Furthermore, different applications may prioritise different operations.
 One program might frequently perform operation A, while another relies more heavily on operation B.
 In such cases, it is often not possible to implement all operations efficiently, so multiple implementations of the same ADT are needed.
 Additionally, one implementation may be more efficient for small datasets (thousands of elements), whereas another may scale better for large datasets (millions of elements).
@@ -42,7 +42,7 @@ The most suitable data structure depends on the specific use case, and making in
 
 A _database_ is a structured collection of data that can be easily accessed, managed, and updated.
 Each item in a database is typically called a _record_, which consists of multiple fields containing information—such as a name, an ID number, or an address.
-Efficiently organizing, storing, and searching these records is a key challenge in database design.
+Efficiently organising, storing, and searching these records is a key challenge in database design.
 
 Two popular implementations for managing large disk-based database applications are [hashing]{.term} and the [B-tree]{.term}.
 Both support efficient insertion and deletion of records, as well as exact-match queries.
@@ -158,7 +158,7 @@ We group these collection-based ADTs into two main categories:
 In addition to these, we also introduce graphs, along with their commonly used implementations.
 
 The rest of this gives a high-level overview of the ADTs covered throughout the course.
-@Fig:adt-overview summarizes these ADTs and highlights how they relate to one another.
+@Fig:adt-overview summarises these ADTs and highlights how they relate to one another.
 Each ADT will be discussed in more detail later in the book, including their operations and the data structures used to implement them.
 
 ![An overview of ADTs with their common implementations](resources/images/ADT_overview.png){#fig:adt-overview}

@@ -450,7 +450,7 @@ Here is some practice with manipulating logarithms.
 ### Summations
 
 Most programs contain loop constructs.
-When analyzing running time costs for programs with loops, we need to add up the costs for each time the loop is executed.
+When analysing running time costs for programs with loops, we need to add up the costs for each time the loop is executed.
 This is an example of a [summation]{.term}.
 Summations are simply the sum of costs for some function applied to a range of parameter values.
 Summations are typically written with the following "Sigma" notation:
@@ -484,13 +484,13 @@ Since this appears so often, it will help you later if you can get comfortable w
 
 <!--
 .. inlineav:: SummationOneToNCON ss
-   :long_name: Summation of the first N Integers visualization
+   :long_name: Summation of the first N Integers visualisation
    :links: AV/Background/SummationOneToNCON.css
    :scripts: AV/Background/SummationOneToNCON.js
    :output: show
 
 .. inlineav:: SummationTwoPowerICON ss
-   :long_name: Summation Two Power I visualization
+   :long_name: Summation Two Power I visualisation
    :links: AV/Background/SummationTwoPowerICON.css
    :scripts: AV/Background/SummationTwoPowerICON.js
    :output: show
@@ -668,7 +668,7 @@ Unfortunately, no number of examples supporting a theorem is sufficient to prove
 However, there is an approach that is vaguely similar to disproving by counter-example, called [proof by contradiction]{.term}.
 To prove a theorem by contradiction, we first *assume* that the theorem is *false*.
 We then find a logical contradiction stemming from this assumption.
-If the logic used to find the contradiction is correct, then the only way to resolve the contradiction is to recognize that the assumption that the theorem is false must be incorrect.
+If the logic used to find the contradiction is correct, then the only way to resolve the contradiction is to recognise that the assumption that the theorem is false must be incorrect.
 That is, we conclude that the theorem must be true.
 
 ::: example
@@ -1074,7 +1074,7 @@ It is very useful to computer scientists doing design work, because any proposed
 [Estimation]{.term} techniques are a standard part of engineering curricula but are often neglected in computer science.
 Estimation is no substitute for rigorous, detailed analysis of a problem, but it can help to decide when a rigorous analysis is warranted: If the initial estimate indicates that the solution is unworkable, then further analysis is probably unnecessary.
 
-Estimation can be formalized by the following three-step process:
+Estimation can be formalised by the following three-step process:
 
 1. Determine the major parameters that affect the problem.
 2. Derive an equation that relates the parameters to the problem.
@@ -1154,7 +1154,7 @@ Here are some practice questions for the sections in this chapter.
 
 ### Random numbers
 
-The success of randomized algorithms depends on having access to a good random number generator.
+The success of randomised algorithms depends on having access to a good random number generator.
 While modern compilers are likely to include a random number generator that is good enough for most purposes, it is helpful to understand how they work, and to even be able to construct your own in case you don't trust the one provided.
 This is easy to do.
 
@@ -1165,7 +1165,7 @@ From the following list, which appears to be a sequence of "random" numbers?
 * 1, 2, 3, 4, 5, 6, 7, 8, 9, ...
 * 2, 7, 1, 8, 2, 8, 1, 8, 2, ...
 
-In fact, all three happen to be the beginning of a some sequence in which one could continue the pattern to generate more values (in case you do not recognize it, the third one is the initial digits of the irrational constant $e$).
+In fact, all three happen to be the beginning of a some sequence in which one could continue the pattern to generate more values (in case you do not recognise it, the third one is the initial digits of the irrational constant $e$).
 Viewed as a series of digits, ideally every possible sequence has equal probability of being generated (even the three sequences above).
 In fact, definitions of randomness generally have features such as:
 

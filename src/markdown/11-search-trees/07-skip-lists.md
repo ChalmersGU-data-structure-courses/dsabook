@@ -93,7 +93,7 @@ The `get` method works as follows.
             else:
                 return null  // It's not there
 
-The ideal skip list is organized so that (if the head node is not
+The ideal skip list is organised so that (if the head node is not
 counted) half of the nodes have only one pointer, one quarter have two,
 one eighth have three, and so on. And ideally, the distances would be
 equally spaced; in effect this is a "perfectly balanced" skip list.
@@ -115,7 +115,7 @@ distribution.
 Once the proper level for the node has been determined, the next step is
 to find where the node should be inserted and link it in as appropriate
 at all of its levels. Here is an implementation for inserting a new
-value into the skip list followed by a visualization of the process.
+value into the skip list followed by a visualisation of the process.
 Note that we build an `update` array as we progress through the skip
 list, so that we can update the pointers for the nodes that will precede
 the one being inserted.
@@ -199,18 +199,18 @@ will look like a linked list with the deepest node at depth $n-1$. If
 the data inserted over the life of the BST could be randomly ordered,
 then the probability distribution for the cost of the insert and search
 operations would be similar to that of the skip list. The problem for
-the BST is that this randomization does not happen in fact, but rather
+the BST is that this randomisation does not happen in fact, but rather
 the BST is constrained by the actual order of inputs and searches.
 
 In contrast, the skip list's performance does not depend on the order
 in which values are inserted into the list. In a sense, the data are
-"randomized" automatically as part of the skip list's probabilistic
+"randomised" automatically as part of the skip list's probabilistic
 behavior when the depths of the nodes are selected. As the number of
 nodes in the skip list increases, the probability of encountering the
 worst case decreases geometrically. Thus, the skip list illustrates a
 tension between the theoretical worst case (in this case, $O(n)$
 for a skip list operation), and a rapidly increasing probability of
-average-case performance of $O(\log n)$, that characterizes
+average-case performance of $O(\log n)$, that characterises
 probabilistic data structures.
 
 <!--

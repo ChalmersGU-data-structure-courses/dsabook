@@ -67,7 +67,7 @@ derive an estimate of this cost (essentially an average over all the
 insertion costs) by integrating from 0 to the current value of $\alpha$,
 yielding a result of $(1/\alpha) \log_e 1/(1-\alpha).$
 
-It is important to realize that these equations represent the expected
+It is important to realise that these equations represent the expected
 cost for operations when using the unrealistic assumption that the probe
 sequence is based on a random permutation of the slots in the hash
 table. We thereby avoid all the expense that results from a
@@ -118,7 +118,7 @@ variations on hashing. By timing the cost of the program for various
 loading conditions, it is not difficult to construct a plot similar to
 this one. The purpose of this analysis was not to determine which
 approach to hashing is most efficient, so we are not doing empirical
-comparison of hashing alternatives. Instead, the purpose was to analyze
+comparison of hashing alternatives. Instead, the purpose was to analyse
 the proper loading factor that would be used in an efficient hashing
 system to balance time cost versus hash table size (space cost).
 -->

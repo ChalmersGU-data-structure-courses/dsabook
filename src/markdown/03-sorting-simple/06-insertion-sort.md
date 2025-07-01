@@ -43,9 +43,9 @@ Insertion sort will move it to the left so long as it is smaller than element im
 As an element is less than or equal to $x$ is encountered, `insertionSort` is done with that element because all elements to its left in the array must be smaller.
 
 ::: dsvis
-The following visualization shows the complete Insertion sort. You can input your own data if you like.
+The following visualisation shows the complete Insertion sort. You can input your own data if you like.
 
-<avembed id="insertionsortAV" src="Sorting/insertionsortAV.html" type="ss" name="Insertion Sort Visualization"/>
+<avembed id="insertionsortAV" src="Sorting/insertionsortAV.html" type="ss" name="Insertion Sort Visualisation"/>
 :::
 
 ::: dsvis
@@ -65,7 +65,7 @@ Now try for yourself to see if you understand how Insertion sort works.
 Just as for the previous sorting algorithms, we have a nested for loop, where the inner loop depends on the loop variable of the outer loop.
 
 - The outer loop is iterated $N-1$ times in total.
-- The inner loop is harder to analyze since it depends on how many elements in positions $0,\ldots,i-1$ are smaller than the element in position $i$.
+- The inner loop is harder to analyse since it depends on how many elements in positions $0,\ldots,i-1$ are smaller than the element in position $i$.
     - in the absolute worst case, we always have to move the element to the front of the list, so the number of comparisons will be $i-1$
     - in the best case, the element is already in place, and then we only need one comparison
 

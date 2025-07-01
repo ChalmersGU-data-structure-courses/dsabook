@@ -32,7 +32,7 @@ It is an error to pop data from a(n) _______ stack.
 
 - [x] Empty
 - [ ] Full
-- [ ] Initialized
+- [ ] Initialised
 - [ ] Array-based
 - [ ] Linked
 
@@ -171,7 +171,7 @@ insert at the rear).
 
 
 :::::::::: question ::::::::::
-The Stack is best characterized as:
+The Stack is best characterised as:
 
 - [x] Last-In, First-Out
 - [ ] First-In, First-Out

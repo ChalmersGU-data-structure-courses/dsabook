@@ -20,7 +20,7 @@ closed-form expression to test in the first place? Let us try to think
 through this problem from first principles, as though we had never seen
 it before.
 
-A good place to begin analyzing a summation it is to give an estimate of
+A good place to begin analysing a summation it is to give an estimate of
 its value for a given $n$. Observe that the biggest term for this
 summation is $n$, and there are $n$ terms being summed up. So the total
 must be less than $n^2$. Actually, most terms are much less than $n$,
@@ -30,7 +30,7 @@ and we could enclose them in a box $n$ units wide and $n$ units high. It
 is easy to see from this that a closer estimate for the summation is
 about $(n^2)/2$. Having this estimate in hand helps us when trying to
 determine an exact closed-form solution, because we will hopefully
-recognize if our proposed solution is badly wrong.
+recognise if our proposed solution is badly wrong.
 
 ::: dsvis
 TODO
@@ -48,7 +48,7 @@ correct. The problem is that it is not a useful technique for solving
 many other summations.
 
 Now let us try to come up with something a bit more general. We already
-recognized that, because the largest term is $n$ and there are $n$
+recognised that, because the largest term is $n$ and there are $n$
 terms, the summation is less than $n^2$. If we are lucky, the closed
 form solution is a polynomial. Using that as a working assumption, we
 can invoke a technique called [guess-and-test]{.term}. We will guess that the closed-form solution for this
@@ -155,7 +155,7 @@ f(n)                & = &  \frac{n (n + 1)}{2}
 
 Once again, we still do not have a proof that $f(n) = n(n+1)/2$. Why?
 Because we did not prove that $f(n)/n = (n+1)/2$ nor that
-$f(n)/f(n-1) = (n+1)(n-1)$. We merely hypothesized patterns from looking
+$f(n)/f(n-1) = (n+1)(n-1)$. We merely hypothesised patterns from looking
 at a few terms. Fortunately, it is easy to check our hypothesis with
 induction.
 :::
@@ -177,7 +177,7 @@ summation, to see if we can detect a pattern.
   $f(n)$   1/2   3/4   7/8   15/16   31/32   63/64
 $1-f(n)$   1/2   1/4   1/8    1/16    1/32    1/64
 
-By direct inspection of the second line of the table, we might recognize
+By direct inspection of the second line of the table, we might recognise
 the pattern $f(n) = \frac{2^n-1}{2^n}$. A simple induction proof can
 then prove that this always holds true. Alternatively, consider if we
 hadn't noticed the pattern for the form of $f(n)$. We might observe
@@ -289,7 +289,7 @@ $$
 = n\,2^{n+1} - \left ( 2^{n+1} - 2 \right )
 $$
 
-Finally, reorganize the equation:
+Finally, reorganise the equation:
 
 $$
 = (n-1)2^{n+1} + 2

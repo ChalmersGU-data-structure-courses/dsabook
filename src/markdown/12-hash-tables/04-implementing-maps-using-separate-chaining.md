@@ -23,7 +23,7 @@ The initialisation not only creates the internal table, but also populates it wi
 
     datatype SeparateChainingHashSet:
         ...
-        initialize(capacity):
+        initialise(capacity):
             size = 0
             table = new Array(capacity)
             for i in 0 .. capacity-1:

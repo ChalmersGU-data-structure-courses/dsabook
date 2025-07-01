@@ -61,7 +61,7 @@ times longer on average beyond the home position than before deletions.
 
 Two possible solutions to this problem are
 
-1.  Do a local reorganization upon deletion to try to shorten the
+1.  Do a local reorganisation upon deletion to try to shorten the
     average path length. For example, after deleting a key, continue to
     follow the probe sequence of that key and swap records further down
     the probe sequence into the slot of the recently deleted record

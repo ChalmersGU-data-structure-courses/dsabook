@@ -32,8 +32,8 @@ for later use because they save space, and the tree structure can be
 reconstructed as needed for later processing.
 
 Sequential tree implementations can be used to
-[serialize](#serialization){.term} a tree
-structure. Serialization is the process of storing an object as a series
+[serialise](#serialisation){.term} a tree
+structure. Serialisation is the process of storing an object as a series
 of bytes, typically so that the data structure can be transmitted
 between computers. This capability is important when using data
 structures in a distributed processing environment.
@@ -46,7 +46,7 @@ about structure typically needs to be stored. A general tree, because it
 has the most flexible shape, tends to require the most additional shape
 information. There are many possible sequential tree implementation
 schemes. We will begin by describing methods appropriate to binary
-trees, then generalize to an implementation appropriate to a general
+trees, then generalise to an implementation appropriate to a general
 tree structure.
 
 Because every node of a binary tree is either a leaf or has two
@@ -97,7 +97,7 @@ we know that the size of the node list will be about twice
 the number of nodes (i.e., the overhead fraction is 1/2). The extra
 space is required by the `null` pointers. We should be able to store the
 node list more compactly. However, any sequential implementation must
-recognize when a leaf node has been reached, that is, a leaf node
+recognise when a leaf node has been reached, that is, a leaf node
 indicates the end of a subtree. One way to do this is to explicitly list
 with each node whether it is an internal node or a leaf. If a node $X$
 is an internal node, then we know that its two children (which may be
@@ -175,7 +175,7 @@ Reconstructing a general from its sequential representation.
 <inlineav id="SequentialGenTreeCON" src="General/SequentialGenTreeCON.js" name="General Tree sequential representation Slideshow" links="General/SequentialTreeCON.css"/>
 :::
 
-Note that this representation for serializing general trees cannot be
+Note that this representation for serialising general trees cannot be
 used for binary trees. This is because a binary tree is not merely a
 restricted form of general tree with at most two children. Every binary
 tree node has a left and a right child, though either or both might be

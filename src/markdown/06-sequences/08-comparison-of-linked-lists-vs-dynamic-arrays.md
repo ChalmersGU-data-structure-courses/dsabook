@@ -31,7 +31,7 @@ This means that if we are implementing an application that has hard real-time co
 Given a collection of elements to store, they take up some amount of
 space whether they are simple integers or large objects with many
 fields. Any container data structure like a stack, a queue or a list then requires some
-additional space to organize the elements being stored. This additional
+additional space to organise the elements being stored. This additional
 space is called [overhead]{.term}.
 
 - Array-based lists have the disadvantage that the *capacity* of the internal array is larger than the actual size of the list.

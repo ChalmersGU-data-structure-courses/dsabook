@@ -78,7 +78,7 @@ records and find one that matches a given key. However, we typically
 would like for the keys to define a [total order]{.term},
 which means that we can always tell which of two keys is greater than
 the other. Using key types with total orderings gives the database
-implementor the opportunity to organize a collection of records in a way
+implementor the opportunity to organise a collection of records in a way
 that makes searching more efficient. An example is storing the records
 in sorted order in an array, which permits a [binary search]{.term}. Fortunately,
 in practice most fields of most records consist of simple data types
@@ -161,7 +161,7 @@ Using this we can easily implement a **Map** from an underlying
 
 ### Sorting using comparables
 
-To keep them clear and simple, visualizations for sorting algorithms
+To keep them clear and simple, visualisations for sorting algorithms
 will usually show them as operating on integer values stored in an
 array. But almost never do people really want to sort an array of
 integers. But to be useful, a real sorting algorithm typically has to

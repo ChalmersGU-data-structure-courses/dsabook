@@ -45,7 +45,7 @@ Now you can use the calculator to answer the following questions.
 <avembed id="BirthdayFIB" src="Hashing/BirthdayFIB.html" type="ka" name="Birthday Problem Exercise"/>
 :::
 
-To be practical, a database organized by hashing must store records in a
+To be practical, a database organised by hashing must store records in a
 hash table that is not so large that it wastes space. To balance time
 and space efficiency, this means that the hash table should be
 around half full (see @sec:analysis-of-hash-tables). Because
