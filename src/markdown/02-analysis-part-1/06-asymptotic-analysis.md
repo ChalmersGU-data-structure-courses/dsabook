@@ -5,9 +5,15 @@
 - Prio 3: add another example
 :::
 
-Here are two views of a graph illustrating the growth rates for six equations.
-The right view shows in detail the lower-left portion of the top view.
-The horizontal axis represents input size. The vertical axis can
+::: latex
+@Fig:growthGraphs gives two views of a graph illustrating the growth rates for six equations.
+:::
+
+::: online
+@Fig:growthGraphs gives two views of a graph illustrating the growth rates for six equations.
+We repeat the graph here, where
+the right view shows in detail the lower-left portion of the top view.
+The horizontal axis represents input size, and the vertical axis can
 represent time, space, or any other measure of cost.
 
 ```{.matplotlib dpi=200}
@@ -40,6 +46,8 @@ plt2.plot(xs, ys_2expn, '-');  plt2.text(7.3, 290, '2^n')
 plt2.plot(xs, ys_fact, '-');   plt2.text(4.9, 290, 'n!')
 plt2.set_title('Zoomed in')
 ```
+
+:::
 
 <!--
 <inlineav id="GrowthRatesCON" src="AlgAnal/GrowthRatesCON.js" script="DataStructures/Plot.js" name="DataStructures/Plot.js AlgAnal/GrowthRatesCON" links="AlgAnal/GrowthRatesCON.css" height="450px" static/>
@@ -184,7 +192,7 @@ But it is much more difficult to reason about $\Theta(f)$, and therefore we will
 So, is the lower bound useless?
 -- No, definitely not.
 The main use case for $\Omega$ is when we want to classify *problems*, not algorithms.
-One example is when proving that the lower bound for sorting is $\Omega(n\log n)$, which we do in section @sec:case-study-lower-bounds-for-sorting.
+One example is when proving that the lower bound for sorting is $\Omega(n\log n)$, which we do in @sec:case-study-lower-bounds-for-sorting.
 But classifying problems is out of scope for this book, so we will not use $\Omega$ much.
 
 

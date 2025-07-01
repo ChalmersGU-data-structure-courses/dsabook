@@ -133,15 +133,12 @@ on the new computer.
 
 The [growth rate]{.term} for an algorithm is the
 rate at which the cost of the algorithm grows as the size of its input
-grows. The following figure shows a graph for six equations, each meant
+grows. @Fig:growthGraphs shows a graph for six equations, each meant
 to describe the running time for a particular program or algorithm. A
 variety of growth rates that are representative of typical algorithms
 are shown.
 
-Here are two views of a graph illustrating the growth rates for six equations.
-The right view shows in detail the lower-left portion of the top view.
-The horizontal axis represents input size. The vertical axis can
-represent time, space, or any other measure of cost.
+<div id="fig:growthGraphs">
 
 ```{.matplotlib dpi=200}
 import math
@@ -173,6 +170,12 @@ plt2.plot(xs, ys_2expn, '-');  plt2.text(7.3, 290, '2^n')
 plt2.plot(xs, ys_fact, '-');   plt2.text(4.9, 290, 'n!')
 plt2.set_title('Zoomed in')
 ```
+
+Illustration of the growth rates for six equations.
+The right view shows in detail the lower-left portion of the top view.
+The horizontal axis represents input size.
+The vertical axis can represent time, space, or any other measure of cost.
+</div>
 
 <!--
 <inlineav id="GrowthRatesCON" src="AlgAnal/GrowthRatesCON.js" script="DataStructures/Plot.js" name="DataStructures/Plot.js AlgAnal/GrowthRatesCON" links="AlgAnal/GrowthRatesCON.css" height="450px" static/>
