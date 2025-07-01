@@ -5,21 +5,41 @@ from pathlib import Path
 from html.parser import HTMLParser
 
 
-def main(*infiles: str):
+AllContents: dict[Path, str] = {}
+HtmlIDs: dict[str, list[str]] = {}
+
+def main(*infiles: str|Path):
     """Postprocess each of the infiles"""
+    infiles = tuple(Path(inf) for inf in infiles)
+    # Read all infiles
     for inf in infiles:
         with open(inf) as IN:
-            contents = IN.read()
-            IN.close
-        contents = postprocess(contents)
+            contents = AllContents[inf] = IN.read()
+            for m in re.finditer(r'<[a-z]+[^<>]* id="([^"]+)"', contents):
+                HtmlIDs.setdefault(m[1], []).append(inf.name)
+    # Postprocess each file
+    for inf, contents in AllContents.items():
+        contents = re.sub(HrefMatch, lambda m: fix_href(m, inf), contents)
+        contents = convert_animations(contents)
         with open(inf, "w") as OUT:
             print(contents, file=OUT)
 
 
-def postprocess(contents: str) -> str:
-    """Take a HTML string and return a HTML string"""
-    contents = convert_animations(contents)
-    return contents
+HrefMatch = re.compile(r'(<a [^<>]*\bhref=)"#([^"]+)"')
+
+def fix_href(m: re.Match[str], inf: Path) -> str:
+    prefix, id = m[1], m[2]
+    if id not in HtmlIDs:
+        print(f"Anchor not found: #{id}")
+        return m[0]
+    reffiles = HtmlIDs[id]
+    if inf.name in reffiles:
+        return m[0]
+    if len(reffiles) > 1:
+        print(f"Ambiguous anchor #{id}, found in files: {reffiles}", file=sys.stderr)
+    print(f"Redirecting anchor #{id} --> {reffiles[0]}", file=sys.stderr)
+    return f'{prefix}"{reffiles[0]}#{id}"'
+
 
 
 ###############################################################################
