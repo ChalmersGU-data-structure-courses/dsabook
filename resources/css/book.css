@@ -174,16 +174,15 @@ blockquote {
 /* Tables */
 
 table {
-    margin: var(--block-margin) 0;
+    margin: var(--block-margin) auto;
     border-collapse: collapse;
-    width: 100%;
     overflow-x: auto;
-    display: block;
     font-variant-numeric: lining-nums tabular-nums;
 }
 
 table caption {
     margin-bottom: calc(0.75 * var(--block-margin));
+    font-style: italic;
 }
 
 tbody {
