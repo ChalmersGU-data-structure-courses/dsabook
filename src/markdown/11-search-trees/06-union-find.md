@@ -1,12 +1,12 @@
 
-## Case study: The union/find algorithm
+## Disjoint sets and the Union/Find algorithm {#disjoint-sets}
 
 ::: TODO
 - Prio 2: add use case = Kruskal's algorithm
 - Prio 3: update text and code
 :::
 
-[General trees](#general-tree){.term} are trees
+[General trees](#general-tree){.term} (@sec:general-trees) are trees
 whose [internal nodes](#internal-node){.term}
 have no fixed number of [children](#child){.term}. Compared to general trees,
 [binary trees](#binary-tree){.term} are
@@ -27,13 +27,19 @@ because it is inadequate for such important operations as finding the
 leftmost child or the right sibling for a node. Thus, it may seem to be
 a poor idea to implement a general tree in this way. However, the parent
 pointer implementation stores precisely the information required to
-answer the following, useful question: **Given two nodes, are they in
-the same tree?** To answer this question, we need only follow the series
+answer the following, useful question:
+***Given two nodes, are they in the same tree?***
+
+:::::: latex
+\booklink{Read the rest online}{11.6}{sec:disjoint-sets}
+::::::
+
+:::::: online
+
+To answer this question, we need only follow the series
 of parent pointers from each node to its respective root. If both nodes
 reach the same root, then they must be in the same tree. If the roots
-are different, then the two nodes are not in the same tree. The process
-of finding the ultimate root for a given node we will call
-[FIND]{.term}.
+are different, then the two nodes are not in the same tree.
 
 ### Parent pointer trees
 
@@ -44,15 +50,15 @@ A collection of disjoint sets partitions some objects such that every
 object is in exactly one of the disjoint sets. There are two basic
 operations that we wish to support:
 
-1.  Determine if two objects are in the same set (the FIND operation), and
-2.  Merge two sets together.
+1.  Determine if two objects are in the same set (the **Find** operation), and
+2.  Merge two sets together (the **Union** operation).
 
 Because two merged sets are united, the merging operation is called
-[UNION]{.term} and the whole process of
+**Union** and the whole process of
 determining if two objects are in the same set and then merging the sets
-goes by the name [UNION/FIND]{.term}.
+goes by the name **[Union/Find]{.term}**.
 
-To implement UNION/FIND, we represent each disjoint set with a separate
+To implement **Union/Find**, we represent each disjoint set with a separate
 general tree. Two objects are in the same disjoint set if they are in
 the same tree. Every node of the tree (except for the root) has
 precisely one parent. Thus, each node requires the same space to
@@ -64,11 +70,11 @@ for each disjoint set), so we also store the parent value with each
 object in the array. Those nodes that are the roots of their respective
 trees store an appropriate indicator. Note that this representation
 means that a single array is being used to implement a collection of
-trees. This makes it easy to merge trees together with UNION operations.
+trees. This makes it easy to merge trees together with **Union** operations.
 
-Here is an implementation for parent pointer trees and the UNION/FIND process.
+Here is an implementation for parent pointer trees and the **Union/Find** process.
 
-    // General Tree implementation for UNION/FIND
+    // General tree implementation for Union/Find
     datatype ParentPointerTree:
         array: Array of Int
 
@@ -79,14 +85,14 @@ Here is an implementation for parent pointer trees and the UNION/FIND process.
                 array[i] = -1  // We use -1 to say that this is a root
 
         // Merge two subtrees if they are different:
-        UNION(a: Int, b: Int):
-            root1 = FIND(a)    // Find root of node a
-            root2 = FIND(b)    // Find root of node b
+        union(a: Int, b: Int):
+            root1 = find(a)    // Find root of node a
+            root2 = find(b)    // Find root of node b
             if root1 != root2: // Merge two trees
                 array[root1] = root2
 
         // Return the root of current's tree
-        FIND(current: Int) -> Int:
+        find(current: Int) -> Int:
             while array[current] != -1:
                 current = self.array[current]
             return current  // Now we are at the root
@@ -94,16 +100,17 @@ Here is an implementation for parent pointer trees and the UNION/FIND process.
 The `ParentPointerTree` class has an array where each array position
 corresponds to one object in some collection. Each array element stores
 the array index for its parent. There are two main methods to implement.
-Method `UNION` merges two sets together, where each set corresponds to a
-tree. Method `FIND` is used to find the ultimate root for a node.
+**Union** merges two sets together, where each set corresponds to a
+tree. **Find** is used to find the ultimate root for a node.
 
-An application using the UNION/FIND operations should store a set of $n$
+An application using the **Union/Find** operations should store a set of $n$
 objects, where each object is assigned a unique index in the range 0 to
 $n-1$. The indices refer to the corresponding parent pointers in the
-array. Class `ParentPointerTree` creates and initializes the UNION/FIND array,
-and methods `UNION` and `FIND` take array indices as inputs.
+array. Class `ParentPointerTree` creates and initializes the **Union/Find** array,
+and methods **Union** and **Find** take array indices as inputs.
+@Fig:UFfig visualises the parent pointer array.
 
-:::: {#UFfig}
+<div id="fig:UFfig">
 <inlineav id="UFfigCON" src="General/UFfigCON.js" name="General/UFfigCON" links="General/UFCON.css" static/>
 
 The parent pointer array implementation. Each node corresponds to a
@@ -114,7 +121,7 @@ a special value, such as -1. This is represented graphically in the
 figure by a slash in the "Parent's Index" box. This figure shows two
 trees stored in the same parent pointer array, one rooted at $F$ (with a
 total of 9 nodes), and the other rooted at $J$ (with a total of 1 node).
-::::
+</div>
 
 ### Equivalence classes
 
@@ -131,17 +138,17 @@ the same tree. Likewise for $B$ and $C$. We can recognize that $A$ and
 $C$ are equivalent because they must also be in the same tree.
 
 There are many practical uses for disjoint sets and representing
-equivalences. For example, consider this graph of ten nodes labeled $A$
-through $J$.
+equivalences. For example, consider the graph of ten nodes labeled $A$
+through $J$, in @fig:UFconcom.
 
-:::: {#UFconcom}
+<div id="fig:UFconcom">
 <inlineav id="UFconcomCON" src="General/UFconcomCON.js" name="General/UFconcomCON" links="General/UFCON.css" static/>
 
 A graph with two connected components. The tree of
-[Figure #UFfig](#UFfig) shows the corresponding
+@fig:UFfig shows the corresponding
 tree structure resulting form processing the edges to determine the
 connected components.
-::::
+</div>
 
 Notice that for nodes $A$ through $I$, there is some series of edges
 that connects any pair of these nodes, but node $J$ is disconnected from
@@ -155,16 +162,16 @@ other. A subset of equivalent (connected) edges in a graph is called a
 quickly classify the objects into disjoint sets that correspond to the
 connected components.
 
-Another use for UNION/FIND occurs in
+Another use for disjoint sets occurs in
 [Kruskal's algorithm]{.term} for computing the
-[minimal-cost spanning tree]{.term} for a [graph]{.term}. That algorithm
+[minimum spanning tree]{.term} for a [graph]{.term}. That algorithm
 seeks to select the cheapest subset of the edges that still connects all
 of the nodes in the graph. It does so by processing all edges of the
 graph from shortest to longest, only adding an edge to the connecting
 subset if it does not connect two nodes that already have some series of
 edges connecting them.
 
-The input to the UNION/FIND algorithm is typically a series of
+The input to the **Union/Find** algorithm is typically a series of
 equivalence pairs. In the case of the connected components example, the
 equivalence pairs would simply be the set of edges in the graph. An
 equivalence pair might say that object $C$ is equivalent to object $A$.
@@ -173,13 +180,13 @@ relates $A$ and $B$, then by implication $C$ is also equivalent to $B$.
 Thus, an equivalence pair may cause two subsets to merge, each of which
 contains several objects.
 
-Equivalence classes can be managed efficiently with the UNION/FIND
+Equivalence classes can be managed efficiently with the **Union/Find**
 algorithm. Initially, each object is at the root of its own tree. An
 equivalence pair is processed by checking to see if both objects of the
-pair are in the same tree by calling `FIND` on each of them. If their
+pair are in the same tree by calling **Find** on each of them. If their
 roots are the same, then no change need be made because the objects are
 already in the same equivalence class. Otherwise, the two equivalence
-classes should be merged by the `UNION` method.
+classes should be merged by the **Union** method.
 
 The parent pointer representation places no limit on the number of nodes
 that can share a parent. To make equivalence processing as efficient as
@@ -208,13 +215,13 @@ $\log n$ times when $n$ equivalences are processed (since each addition
 to the depth must be accompanied by at least doubling the size of the
 tree).
 
-Here is an implementation for the UNION method when using weighted union.
+Here is an implementation for **Union** when using weighted union.
 
     datatype ParentPointerTree:
         ...
-        UNION(a, b):
-            root1 = FIND(a)     // Find root of node a
-            root2 = FIND(b)     // Find root of node b
+        union(a, b):
+            root1 = find(a)     // Find root of node a
+            root2 = find(b)     // Find root of node b
             if root1 != root2:  // Merge with weighted union
                 if weights[root2] > weights[root1]:
                     array[root1] = root2
@@ -225,7 +232,7 @@ Here is an implementation for the UNION method when using weighted union.
 
 
 ::: dsvis
-The following slideshow illustrates a series of UNION operations with
+The following slideshow illustrates a series of **Union** operations with
 weighted union.
 
 <inlineav id="UFCON" src="General/UFCON.js" name="Union/Find Example" links="General/UFCON.css"/>
@@ -243,17 +250,17 @@ $X$ to $R$ to point directly to $R$. This can be implemented by first
 finding $R$. A second pass is then made along the path from $X$ to $R$,
 assigning the parent field of each node encountered to $R$.
 Alternatively, a recursive algorithm can be implemented as follows. This
-version of `FIND` not only returns the root of the current node, but
+version of **Find** not only returns the root of the current node, but
 also makes all ancestors of the current node point to the root.
 
     datatype ParentPointerTree:
         ...
         // Return the root of current's tree with path compression
-        FIND(current):
+        find(current):
             if array[current] == -1:
                 return current  // Base case: we are at the root
             else:
-                array[current] = FIND(array[current])
+                array[current] = find(array[current])
                 return array[current]
 
 
@@ -264,17 +271,17 @@ step in the previous example.
 <inlineav id="pathcompCON" src="General/pathcompCON.js" name="Union/Find Path Compression Example" links="General/UFCON.css"/>
 :::
 
-Path compression keeps the cost of each FIND operation very close to
+Path compression keeps the cost of each **Find** operation very close to
 constant.
 
 To be more precise about what is meant by "very close to constant",
-the cost of path compression for $n$ FIND operations on $n$ nodes (when
+the cost of path compression for $n$ **Find** operations on $n$ nodes (when
 combined with the weighted union rule for joining sets) is approximately
 $O(n \log^* n)$. The notation $\log^* n$ means the number of times
 that the log of $n$ must be taken before $n \leq 1$. For example,
 $\log^* 65536$ is 4 because $\log 65536 = 16, \log 16 = 4, \log 4 = 2$,
 and finally $\log 2 = 1$. Thus, $\log^* n$ grows *very* slowly, so the
-cost for a series of $n$ FIND operations is very close to $n$.
+cost for a series of $n$ **Find** operations is very close to $n$.
 
 Note that this does not mean that the tree resulting from processing $n$
 equivalence pairs necessarily has depth $O(\log^* n)$. One can
@@ -289,7 +296,7 @@ of [amortized analysis]{.term}.
 <!--
 The expression $\log^* n$ is closely related to the inverse of
 Ackermann's function. For more information about Ackermann's function
-and the cost of path compression for UNION/FIND, see
+and the cost of path compression for **Union/Find**, see
 \[[Tarjan, 1975](#tarjan75){.citation}\].
 The survey article by \[[Galil & Italiano, 1991](#galilitaliano91){.citation}\]
 covers many aspects of the equivalence class problem.
@@ -300,3 +307,5 @@ TODO
 
 <avembed id="UnionFindPRO" src="General/UnionFindPRO.html" type="pe" name="Union/Find Proficiency Exercise"/>
 :::
+
+::::::
