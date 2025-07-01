@@ -9,7 +9,11 @@
 
 The AVL tree is a BST with the following additional property:
 
+> For every node, the heights of its subtrees differ by at most 1.
+
+<!-- This line is a liiiittle too long for the book
 > For every node, the heights of its left and right subtrees differ by at most 1.
+ -->
 
 As long as the tree maintains this property, if the tree contains $n$
 nodes, then it has a depth of at most $O(\log n)$. As a result, search
