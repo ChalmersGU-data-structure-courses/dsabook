@@ -1,4 +1,6 @@
 
+:::::: online
+
 ### Acyclic graphs: Topological sort {#topological-sort}
 
 ::: TODO
@@ -27,15 +29,15 @@ J3, J2, J6, J4, J5, J7.
 
 ![An example graph for topological sort.
 Seven tasks have dependencies as shown by the directed graph
-](images/GraphToposort.png){width=60% #GraphToposort}
+](images/GraphToposort.png){width=60% #fig:GraphToposort}
 
 #### Depth-first algorithm
 
-A topological sort may be found by performing a DFS on the graph. When a
-vertex is visited, no action is taken (i.e., function `preVisit` does
-nothing). When the recursion pops back to that vertex, function
-`postVisit` adds the vertex to a stack. In the end, the stack is
-returned to the caller.
+A topological sort may be found by performing a [depth-first search]{.term} (DFS) on the graph.
+When a vertex is visited, no action is taken
+(i.e., function *preVisit* from @sec:depth-first-search does nothing).
+When the recursion pops back to that vertex, function *postVisit* adds the vertex to a stack.
+In the end, the stack is returned to the caller.
 
 The reason that we use a stack is that this algorithm produces the
 vertices in reverse topological order. And if we pop the elements in the
@@ -45,27 +47,23 @@ So the DFS algorithm yields a topological sort in reverse order. It does
 not matter where the sort starts, as long as all vertices are visited in
 the end. Here is implementation for the DFS-based algorithm.
 
-    function topsortDFS(G):
+    function topsortDFS(graph):
         visited = new Set()
         sortedVertices = new Stack()
-        for each v in G.vertices():
+        for each v in graph.vertices():
             if v not in visited:
-                topsortHelperDFS(G, v, sortedVertices, visited)
+                topsortHelperDFS(graph, v, sortedVertices, visited)
         return sortedVertices
 
-    function topsortHelperDFS(G, v, sortedVertices, visited):
+    function topsortHelperDFS(graph, v, sortedVertices, visited):
         if v not in visited:
             visited.add(v)
-            for each edge in G.outgoingEdges(v):
-                w = edge.end
-                topsortHelperDFS(G, w, sortedVertices, visited)
+            for each e in graph.outgoingEdges(v):
+                topsortHelperDFS(graph, e.end, sortedVertices, visited)
             sortedVertices.push(v)  // postVisit
 
-Using this algorithm starting at J1 and visiting adjacent neighbors in
-alphabetic order, vertices of the graph in
-[Figure #TopSort](#TopSort) are pushed to the stack
-in the order J7, J5, J4, J6, J2, J3, J1. Popping them one by one yields
-the topological sort J1, J3, J2, J6, J4, J5, J7.
+If we use this algorithm starting at vertex J1 in @fig:GraphToposort and visit adjacent neighbors in alphabetic order, the vertices of the graph are pushed to the stack in the order J7, J5, J4, J6, J2, J3, J1.
+If we now pop them one by one we get the topological sort J1, J3, J2, J6, J4, J5, J7.
 
 ::: dsvis
 Here is another example.
@@ -75,7 +73,7 @@ Here is another example.
 
 #### Queue-based algorithm
 
-We can implement topological sort using a queue instead of recursion, as follows.
+We can also implement topological sort using a *queue* instead of recursion, as follows.
 
 First visit all edges, counting the number of edges that lead to each
 vertex (i.e., count the number of prerequisites for each vertex). All
@@ -89,44 +87,46 @@ vertices to the final list, then the graph contains a cycle (i.e., there
 is no possible ordering for the tasks that does not violate some
 prerequisite). The order in which the vertices are added to the final
 list is the correct one, so if traverse the final list we will get the
-elements in topological order. Applying the queue version of topological
-sort to the graph of [Figure #TopSort](#TopSort)
-produces J1, J2, J3, J6, J4, J5, J7. Here is an
-implementation for the algorithm.
+elements in topological order.
 
-    function topsortBFS(G):
+Applying the queue version of topological sort to the graph of @fig:GraphToposort produces J1, J2, J3, J6, J4, J5, J7.
+Here is an implementation of the algorithm.
+
+    function topsortBFS(graph):
         // Initialize the prerequisite counts
-        counts = new Map()
-        for each v in G.vertices():
+        counts = new Map() of vertices to prerequisite count
+        for each v in graph.vertices():
             counts.put(v, 0)
-        for each v in G.vertices():
-            for each edge in G.outgoingEdges(v):
-                // Add one to v's prerequisite count
+        for each v in graph.vertices():
+            for each edge in graph.outgoingEdges(v):
+                // Increase v's prerequisite count
                 newCount = counts.get(edge.end) + 1
                 counts.put(edge.end, newCount)
 
         // Initialize the queue
-        Q = new Queue()
-        for each v in G.vertices():
+        queue = new Queue()
+        for each v in graph.vertices():
             // Only add vertices that have no prerequisites
             if counts.get(v) == 0:
-                Q.enqueue(v)
+                queue.enqueue(v)
 
         // Process the vertices
         sortedVertices = new Queue()
-        while not Q.isEmpty():
-            v = Q.dequeue()
+        while not queue.isEmpty():
+            v = queue.dequeue()
             sortedVertices.enqueue(v)  // preVisit
-            for each edge in G.outgoingEdges(v):
+            for each e in graph.outgoingEdges(v):
+                // Decrease v's prerequisite count
                 newCount = counts.get(edge.end) - 1
                 counts.put(edge.end, newCount)
-                if counts.get(edge.end) == 0:
-                    Q.enqueue(edge.end)
-
+                if newCount == 0:
+                    queue.enqueue(e.end)
         return sortedVertices
 
 ::: dsvis
-TODO
+Here is an illustration of the queue-based algorithm.
 
 <inlineav id="topSortQCON" src="Graph/topSortQCON.js" name="topSortQCON Slideshow" links="Graph/topSortQCON.css"/>
 :::
+
+::::::

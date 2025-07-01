@@ -9,10 +9,7 @@
 - Prio 2: use cases
 :::
 
-
-### Shortest-paths on unweighted graphs
-
-If you have an unweighted graph, the [shortest path]{.term} between two vertices is the smallest number of edges you
+If you have an *unweighted* graph, the [shortest path]{.term} between two vertices is the smallest number of edges you
 have to pass to get from one of the vertices to the other.
 
 If you agument the [breadth-first search]{.term} algorithm from @sec:breadth-first-search
@@ -21,7 +18,7 @@ from, if will give you the shortest path between the start vertex and
 any other vertex. However, things become sligthly more complicated if
 the graph is weighted.
 
-### Shortest-paths on weighted graphs
+#### Shortest-paths on weighted graphs
 
 On a road map, a road connecting two towns is typically labeled with its
 distance. We can model a road network as a directed graph whose edges

@@ -39,19 +39,19 @@ These are depicted in @fig:GraphTypes.
 
 ![Some types of graphs](images/GraphTypes.png){width=90% #fig:GraphTypes}
 
-An edge connecting Vertices $a$ and $b$ is written $(a, b)$. Such an
+An edge connecting vertices $a$ and $b$ is written $(a, b)$. Such an
 edge is said to be [incident]{.term} with
-Vertices $a$ and $b$. The two vertices are said to be
+vertices $a$ and $b$. The two vertices are said to be
 [adjacent]{.term}. If the edge is directed from
 $a$ to $b$, then we say that $a$ is adjacent to $b$, and $b$ is adjacent
 from $a$. The [degree]{.term} of a vertex is the
-number of edges it is incident with. For example, Vertex $e$ in @fig:GraphNeighbors has a
+number of edges it is incident with. For example, vertex $e$ in @fig:GraphNeighbors has a
 degree of three.
 
 In a directed graph, the [out degree]{.term} for
 a vertex is the number of neighbors adjacent from it (or the number of
 edges going out from it), while the [in degree]{.term} is the number of neighbors adjacent to it (or the number of
-edges coming in to it). In @fig:GraphTypes (c), the in degree of Vertex 1 is two,
+edges coming in to it). In @fig:GraphTypes (c), the in degree of vertex 1 is two,
 and its out degree is one.
 
 <!-- <inlineav id="GneighborCON" src="Graph/GneighborCON.js" name="Graph/GneighborCON" links="Graph/GraphDefCON.css" static/> -->

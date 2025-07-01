@@ -10,7 +10,7 @@
 
 We will now present an algorithm to solve the
 [single-source shortest paths problem]{.term}.
-Given Vertex $S$ in Graph $\mathbf{G}$, find a shortest path from $S$ to
+Given vertex $S$ in Graph $\mathbf{G}$, find a shortest path from $S$ to
 every other vertex in $\mathbf{G}$. We might want only the shortest path
 between two vertices, $S$ and $T$. However in the worst case, finding
 the shortest path from $S$ to $T$ requires us to find the shortest paths
@@ -21,25 +21,28 @@ here will only compute the distance to every such vertex, rather than
 recording the actual path. Recording the path requires only simple
 modifications to the algorithm.
 
+<!--
 Computer networks provide an application for the single-source
 shortest-paths problem. The goal is to find the cheapest way for one
 computer to broadcast a message to all other computers on the network.
 The network can be modeled by a graph with edge weights indicating time
 or cost to send a message to a neighboring computer.
+-->
 
-For unweighted graphs (or whenever all edges have the same cost), the
-single-source shortest paths can be found using a simple breadth-first
-search. When weights are added, BFS will not give the correct answer.
+As mentioned in the previous section,
+the shortest path between two vertices can be found using a simple breadth-first search,
+for *unweighted* graphs (or whenever all edges have the same cost).
+However, when weights are added, BFS will not give the correct answer.
 
 One approach to solving this problem when the edges have differing
 weights might be to process the vertices in a fixed order. Label the
-vertices $v_0$ to $v_{n-1}$, with $S = v_0$. When processing Vertex
+vertices $v_0$ to $v_{n-1}$, with $S = v_0$. When processing vertex
 $v_1$, we take the edge connecting $v_0$ and $v_1$. When processing
 $v_2$, we consider the shortest distance from $v_0$ to $v_2$ and compare
 that to the shortest distance from $v_0$ to $v_1$ to $v_2$. When
-processing Vertex $v_i$, we consider the shortest path for Vertices
+processing vertex $v_i$, we consider the shortest path for vertices
 $v_0$ through $v_{i-1}$ that have already been processed. Unfortunately,
-the true shortest path to $v_i$ might go through Vertex $v_j$ for
+the true shortest path to $v_i$ might go through vertex $v_j$ for
 $j > i$. Such a path will not be considered by this algorithm. However,
 the problem would not occur if we process the vertices in order of
 distance from $S$. Assume that we have processed in order of distance
@@ -58,71 +61,81 @@ In other words, the shortest path from $S$ to $X$ is the minimum over
 all paths that go from $S$ to $U$, then have an edge from $U$ to $X$,
 where $U$ is some vertex in $\mathbf{S}$.
 
-This solution is usually referred to as Dijkstra's algorithm. It works
+This solution is usually referred to as [Dijkstra's algorithm]{.term}. It works
 by maintaining a distance estimate $\mathbf{D}(X)$ for all vertices $X$
 in $\mathbf{V}$. The elements of $\mathbf{D}$ are initialized to the
 value $\infty$ (positive infinity). Vertices are processed in order of distance from $S$.
 Whenever a vertex $v$ is processed, $\mathbf{D}(X)$ is updated for every
-neighbor $X$ of $V$. Here is an implementation for Dijkstra's
-algorithm. At the end, array `D` will contain the shortest distance values.
+neighbor $X$ of $V$.
 
-    // Compute shortest path distances from s
-    function dijkstra(G, s):
-        visited = new Set()
-        D = new Map()
-        for each v in G.vertices():
-            D.put(v, ∞)  // Initialise distances
-        D.put(s, 0)  // The distance from s to s is 0
+Dijkstra's algorithm is quite similar to [Prim's algorithm]{.term} for finding
+the minimum spanning tree (@sec:prims-algorithm). The primary difference is that we are
+seeking, not the next vertex which is closest to the MST, but rather the
+the next vertex which is closest to the start vertex.
+Thus the following lines in Prim's algorithm:
 
-        repeat G.vertxCount() times:  // Process the vertices
-            v = minVertex(G, D, visited)  // Find next-closest vertex
+    if e.weight < distances.get(e.end):
+        distances.put(e.end, e.weight)
+
+are replaced with the following lines in Dijkstra's algorithm:
+
+    dist = distances.get(v) + e.weight
+    if dist < distances.get(e.end):
+        distances.put(e.end, dist)
+
+Here is an implementation for Dijkstra's algorithm.
+At the end, `distances` will contain the shortest distance from the start to each reachable vertex.
+
+    function dijkstra(graph, start):
+        visited = new Set() of vertices
+        distances = new Map() of vertices to their distance from start
+        distances.put(start, 0)  // The distance from start to start is 0
+
+        repeat graph.size times:
+            v = minVertex(graph, distances, visited)  // Find next-closest vertex
             visited.add(v)
-            if D.get(v) == ∞:
-                return D  // Vertex v is unreachable
-            for each e in G.outgoingEdges(v):
+            for each e in graph.outgoingEdges(v):
                 w = e.end
-                dist = D.get(v) + e.weight
-                if dist < D.get(w): // If the new distance is shorter...
-                    D.put(w, dist)  // ...update w with the new distance
-        return D
-
+                dist = distances.get(v) + e.weight
+                if e.end not in distances or dist < distances.get(e.end):
+                    // If the new distance to the endpoint is shorter...
+                    distances.put(e.end, dist)  // ...update the endpoint with the new distance
+        return distances
 
 ::: dsvis
-TODO
+Here is a visualisation of Dijkstra's algorithm.
 
 <inlineav id="DijkstraCON" src="Graph/DijkstraCON.js" name="Dijkstra Slideshow" links="Graph/DijkstraCON.css"/>
 :::
 
-There are two reasonable solutions to the key issue of finding the
-unvisited vertex with minimum distance value during each pass through
-the main `for` loop. The first method is simply to scan through the list
-of $|\mathbf{V}|$ vertices searching for the minimum value, as follows:
+#### Finding the minimum vertex
 
-    // Find the unvisited vertex with the smalled distance
-    function minVertex(G, D, visited):
+Just as for Prim's algorithm, there are two ways of finding the next-closest vertex.
+We can scan through all vertices searching for the minimum value
+(note that this code is exactly the same as for Prim's algorithm):
+
+    function minVertex(graph, distances, visited):
         minV = null
-        for each v in G.vertices():
+        for each v in graph.vertices():
             if v not in visited:
-                if minV is null or D.get(v) < D.get(minV):
+                if minV is null or distances.get(v) < distances.get(minV):
                     minV = v
         return minV
 
+And just as for Prim's algorithm, this will give us a complexity which is quadratic in the number of vertices, $O(|\mathbf{V}|^2)$.
 
-Because this scan is done $|\mathbf{V}|$ times, and because each edge
-requires a constant-time update to `D`, the total cost for this approach
-is $O(|\mathbf{V}|^2 + |\mathbf{E}|) =
-O(|\mathbf{V}|^2)$, because $|\mathbf{E}|$ is in
-$O(|\mathbf{V}|^2)$.
+### Using a priority queue
 
-An alternative approach is to store unprocessed vertices in a min-heap
+An alternative approach is to store unprocessed vertices in a [minimum priority queue](#priority-queue){.term},
+such as a [binary heap]{.term},
 ordered by their distance from the processed vertices. The next-closest
 vertex can be found in the heap in $O(\log |\mathbf{V}|)$ time.
 Every time we modify $\mathbf{D}(X)$, we could reorder $X$ in the heap
-by deleting and reinserting it. This is an example of a
-[priority queue]{.term}
-with priority update. To implement true priority updating, we would need
+by deleting and reinserting it. This is an example of a priority queue with priority update.
+However, to implement true priority updating, we would need
 to store with each vertex its position within the heap so that we can
 remove its old distances whenever it is updated by processing new edges.
+
 A simpler approach is to add the new (always smaller) distance value for
 a given vertex as a new record in the heap. The smallest value for a
 given vertex currently in the heap will be found first, and greater
@@ -133,43 +146,44 @@ of elements in the heap from $O(|\mathbf{V}|)$ to
 $O(|\mathbf{E}|)$ in the worst case. But in practice this only adds
 a slight increase to the depth of the heap. The time complexity is
 $O((|\mathbf{V}| + |\mathbf{E}|) \log |\mathbf{E}|)$, because for
-each edge that we process we must reorder the heap. We use the `KVPair`
-class to store key-value pairs in the heap, with the edge weight as the
-key and the target vertex as the value. here is the implementation for
-Dijkstra's algorithm using a heap.
+each edge that we process we must reorder the heap.
 
-    // Dijkstra's shortest-paths: priority queue version
-    function dijkstraPQ(G, s):
-        visited = new Set()
-        D = new Map()
-        for (V v : G.vertices())
-            D.put(v, ∞)  // Initialize distance
-        D.put(s, 0)  // The distance from s to s is 0
+Here is the implementation for Dijkstra's algorithm using a priority queue.
 
-        agenda = new PriorityQueue()
-        agenda.add(new KVPair(0, s))  // Initial vertex
+    function dijkstraPQ(graph, start):
+        visited = new Set() of vertices
+        distances = new Map() of vertices to their distance from start
+        agenda = new PriorityQueue() of vertices ordered by their distance from start
+        // The distance from start to start is 0:
+        distances.put(start, 0)
+        agenda.add(start) with priority 0
 
         while not agenda.isEmpty():
-            v = agenda.removeMin().value
+            v = agenda.removeMin()
             if v not in visited:
                 visited.add(v)
-                if D.get(v) == ∞:
-                    return D  // Vertex v is unreachable
-                for each e in G.outgoingEdges():
-                    w = e.end
-                    dist = D.get(v) + e.weight
-                    if dist < D.get(w): // If the new distance is shorter...
-                        D.put(w, dist)  // ...update w with the new distance...
-                        agenda.add(new KVPair(dist, w))  // ...and add it to the agenda
+                for each e in graph.outgoingEdges():
+                    dist = distances.get(v) + e.weight
+                    if w not in distances or dist < distances.get(e.end):
+                        // If the new distance to the endpoint is shorter,
+                        // update the endpoint with the new distance, and add it to the agenda
+                        distances.put(e.end, dist)
+                        agenda.add(e.end) with priority dist
+        return distances
 
+
+#### Which version is the best?
 
 Using `minVertex` to scan the vertex list for the minimum value is more
 efficient when the graph is dense, that is, when $|\mathbf{E}|$
-approaches $|\mathbf{V}|^2$. Using a heap is more efficient when the
+approaches $|\mathbf{V}|^2$.
+Using a priority is more efficient when the
 graph is sparse because its cost is
-$O((|\mathbf{V}| + |\mathbf{E}|) \log |\mathbf{E}|)$. However, when
-the graph is dense, this cost can become as great as
+$O((|\mathbf{V}| + |\mathbf{E}|) \log |\mathbf{E}|)$.
+When the graph is dense, this cost can become as great as
 $O(|\mathbf{V}|^2 \log |\mathbf{E}|) = O(|\mathbf{V}|^2 \log |\mathbf{V}|)$.
+
+In practice, most graphs are sparse so unless you know that the graph is dense you should use the priority queue version.
 
 ::: dsvis
 Now you can practice using Dijkstra's algorithm.

@@ -33,7 +33,7 @@ for.
 The next section covers some basic graph terminology. The
 rest of the chapter will describe fundamental representations for graphs,
 provide a reference implementation, and cover core graph algorithms
-including traversal, topological sort, shortest paths algorithms, and
+including [traversal]{.term}, [topological sort]{.term}, [shortest paths]{.term} algorithms, and
 algorithms to find the [minimum spanning tree]{.term}. Besides being useful
 and interesting in their own right, these algorithms illustrate the use
 of many other data structures presented throughout the course.

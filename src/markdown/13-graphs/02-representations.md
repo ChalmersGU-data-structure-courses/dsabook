@@ -9,7 +9,7 @@ There are two commonly used methods for representing graphs. The
 [adjacency matrix]{.term} for a graph is a
 $|\mathbf{V}| \times |\mathbf{V}|$ array. We typically label the
 vertices from $v_0$ through $v_{|\mathbf{V}|-1}$. Row $i$ of the
-adjacency matrix contains entries for Vertex $v_i$. Column $j$ in row
+adjacency matrix contains entries for vertex $v_i$. Column $j$ in row
 $i$ is marked if there is an edge from $v_i$ to $v_j$ and is not marked
 otherwise. The space requirements for the adjacency matrix are
 $O(|\mathbf{V}|^2)$.
@@ -17,16 +17,16 @@ $O(|\mathbf{V}|^2)$.
 The second common representation for graphs is the
 [adjacency list]{.term}. The adjacency list is
 an array of linked lists. The array is $|\mathbf{V}|$ items long, with
-position $i$ storing a pointer to the linked list of edges for Vertex
+position $i$ storing a pointer to the linked list of edges for vertex
 $v_i$. This linked list represents the edges by the vertices that are
-adjacent to Vertex $v_i$.
+adjacent to vertex $v_i$.
 
 Here is an example of the two representations on a directed graph. The
-entry for Vertex 0 stores 1 and 4 because there are two edges in the
-graph leaving Vertex 0, with one going to Vertex 1 and one going to
-Vertex 4. The list for Vertex 2 stores an entry for Vertex 4 because
-there is an edge from Vertex 2 to Vertex 4, but no entry for Vertex 3
-because this edge comes into Vertex 2 rather than going out.
+entry for vertex 0 stores 1 and 4 because there are two edges in the
+graph leaving vertex 0, with one going to vertex 1 and one going to
+vertex 4. The list for vertex 2 stores an entry for vertex 4 because
+there is an edge from vertex 2 to vertex 4, but no entry for vertex 3
+because this edge comes into vertex 2 rather than going out.
 
 <!-- <inlineav id="GdirRepCON" src="Graph/GdirRepCON.js" name="Graph/GdirRepCON" links="Graph/GraphDefCON.css" static/> -->
 
@@ -34,12 +34,12 @@ because this edge comes into Vertex 2 rather than going out.
 
 Both the adjacency matrix and the adjacency list can be used to store
 directed or undirected graphs. Each edge of an undirected graph
-connecting Vertices $u$ and $v$ is represented by two directed edges:
+connecting vertices $u$ and $v$ is represented by two directed edges:
 one from $u$ to $v$ and one from $v$ to $u$. Here is an example of the
 two representations on an undirected graph. We see that there are twice
 as many edge entries in both the adjacency matrix and the adjacency
-list. For example, for the undirected graph, the list for Vertex 2
-stores an entry for both Vertex 3 and Vertex 4.
+list. For example, for the undirected graph, the list for vertex 2
+stores an entry for both vertex 3 and vertex 4.
 
 <!-- <inlineav id="GundirRepCON" src="Graph/GundirRepCON.js" name="Graph/GundirRepCON" links="Graph/GraphDefCON.css" static/> -->
 

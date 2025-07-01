@@ -239,7 +239,7 @@ A free tree is:
 :::::::::: question ::::::::::
 ![Example directed graph](images/QuizGraphDirected.png)
 
-What is the *out*-degree of Vertex 1?
+What is the *out*-degree of vertex 1?
 
 <input type="number" value="3" min="0"/>
 
@@ -255,7 +255,7 @@ What is the *out*-degree of Vertex 1?
 :::::::::: question ::::::::::
 ![Example directed graph](images/QuizGraphDirected.png)
 
-What is the *in*-degree of Vertex 2?
+What is the *in*-degree of vertex 2?
 
 <input type="number" value="2" min="0"/>
 
@@ -318,7 +318,7 @@ A simple path:
 :::::::::: question ::::::::::
 ![Example undirected graph](images/QuizGraphUndirected.png)
 
-What is the degree of Vertex 4?
+What is the degree of vertex 4?
 
 <input type="number" value="3" min="0"/>
 
