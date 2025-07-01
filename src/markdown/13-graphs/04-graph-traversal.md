@@ -46,7 +46,7 @@ infinite loop when it encounters a cycle.
 
 Once the traversal algorithm completes, we can check to see if all
 vertices have been processed by checking whether they are in the set
-`Visited`. If not all vertices are in this set, we can continue the
+`visited`. If not all vertices are in this set, we can continue the
 traversal from another unvisited vertex. Note that this process works
 regardless of whether the graph is directed or undirected. To ensure
 visiting all vertices, `graphTraverse` could be called as follows on a
@@ -78,7 +78,7 @@ directed or undirected graphs.
 
 The recursive DFS algorithm can be described as simply as this:
 
-    visit(v):
+    function visit(v):
         if v is unvisited:
             mark v as visited
             recursively visit all adjacent vertices
@@ -90,7 +90,7 @@ it, resulting in a depth-first search tree.
 <inlineav id="DFSCON" src="Graph/DFSCON.js" name="Depth-First Search Slideshow" links="Graph/DFSCON.css"/>
 :::
 
-Here is an implementation for the DFS algorithm.
+Here is a slightly more detailed implementation of the DFS algorithm.
 
     function traverseDFS(G, v, visited):
         if v not in visited:
@@ -106,9 +106,7 @@ during the search. Just as a preorder tree traversal requires action
 before the subtrees are visited, some graph traversals require that a
 vertex be processed before ones further along in the DFS. Alternatively,
 some applications require activity *after* the remaining vertices are
-processed; hence the call to function `postVisit`. This would be a
-natural opportunity to make use of the
-[visitor]{.term} design pattern.
+processed; hence the call to function `postVisit`.
 
 ::: dsvis
 The following visualization shows a random graph each time that you
@@ -161,7 +159,7 @@ edges (the "children") have been traversed.
                 preVisit(G, v)
                 for each edge in G.outgoingEdges(v):
                     agenda.enqueue(edge.end)
-                // postVisit is not possible in a stack or queue based version!
+                // postVisit is not possible in BFS search!
 
 
 *Fun fact*: If you replace the queue with a stack (and the
@@ -184,9 +182,11 @@ Here is an exercise for you to practice BFS.
 <avembed id="BFSPE" src="Graph/BFSPE.html" type="pe" name="BFS Proficiency Exercise"/>
 :::
 
+<!--
 ### Generic graph search
 
 ::: TODO
 - generic graph search algorithm from the slides
 - this includes DFS, BFS, UCS, A*
 :::
+-->
