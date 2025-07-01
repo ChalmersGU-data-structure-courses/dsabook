@@ -1,5 +1,5 @@
 
-### Kruskal's algorithm
+## Kruskal's algorithm for finding the MST {#kruskals-algorithm}
 
 ::: TODO
 - Prio 2: first show more abstract pseudocode, not using union/find

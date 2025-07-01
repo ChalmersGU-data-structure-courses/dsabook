@@ -1,5 +1,5 @@
 
-### All-pairs shortest paths: Floyd's algorithm
+### All-pairs shortest paths: Floyd's algorithm {#floyds-algorithm}
 
 ::: TODO
 - Prio 3: use cases

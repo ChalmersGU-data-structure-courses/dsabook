@@ -1,5 +1,5 @@
 
-## Dijkstra's shortest-path algorithm
+## Dijkstra's shortest-path algorithm {#dijkstras-algorithm}
 
 ::: TODO
 - Prio 2:

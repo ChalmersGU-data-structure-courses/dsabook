@@ -1,5 +1,5 @@
 
-### Prim's algorithm
+## Prim's algorithm for finding the MST {#prims-algorithm}
 
 ::: TODO
 - Prio 2: reformulate as a generic graph search algorithm
@@ -72,7 +72,7 @@ TODO
 ### Invariants
  -->
 
-### Prim's algorithm – priority queue implementation
+### Priority queue implementation of Prim's algorithm
 
 ::: TODO
 - can be removed if we use the generic algorithm?

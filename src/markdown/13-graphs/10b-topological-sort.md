@@ -1,5 +1,5 @@
 
-### Acyclic graphs: Topological sort
+### Acyclic graphs: Topological sort {#topological-sort}
 
 ::: TODO
 - Prio 3: simplify code

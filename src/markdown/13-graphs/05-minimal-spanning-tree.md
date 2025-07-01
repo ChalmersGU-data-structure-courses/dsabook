@@ -1,5 +1,5 @@
 
-## Minimum spanning trees, MST
+## Minimum spanning trees, MST {#minimum-spanning-trees}
 
 ::: TODO
 - Prio 2: add use cases
@@ -37,4 +37,12 @@ different MST with equal cost.
 
 <!--
 ### Use cases for minimum spanning trees
+ -->
+
+<!--
+### Algorithms for finding the MST
+
+::: TODO
+- Prio 2: overview description of Kruskal, Prim and Boruvka
+:::
  -->
