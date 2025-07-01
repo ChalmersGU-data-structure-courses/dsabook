@@ -16,7 +16,7 @@ the right view shows in detail the lower-left portion of the top view.
 The horizontal axis represents input size, and the vertical axis can
 represent time, space, or any other measure of cost.
 
-```{.matplotlib dpi=200}
+```{.matplotlib dpi=200 alt="Illustration of the growth rates for six equations"}
 import math
 import numpy as np
 import matplotlib.pyplot as plt
