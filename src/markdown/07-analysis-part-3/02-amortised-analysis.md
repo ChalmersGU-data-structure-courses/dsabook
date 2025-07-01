@@ -9,25 +9,25 @@
 :::
 
 This section presents the concept of
-[amortized analysis]{.term}, which is the
+[amortised analysis]{.term}, which is the
 analysis for a series of operations taken as a whole. In particular,
-amortized analysis allows us to deal with the situation where the
+amortised analysis allows us to deal with the situation where the
 worst-case cost for $n$ operations is less than $n$ times the worst-case
 cost of any one operation. Rather than focusing on the individual cost
-of each operation independently and summing them, amortized analysis
+of each operation independently and summing them, amortised analysis
 looks at the cost of the entire series and "charges" each individual
 operation with a share of the total cost.
 
 The standard example for amortised analysis is dynamic arrays which were introduced in @sec:dynamic-arrays.
 In that section we gave an informal argument why it is important to grow the array in the right way.
-If we do it by doubling the array size, we get *amortised* constant time for all basic operatinos,
+If we do it by doubling the array size, we get *amortised* constant time for all basic operations,
 but if we do it in the wrong way we get linear time operations in the worst case.
 
 Dynamic arrays are such an important example for amortised analysis that we will devote the whole of next section to them.
 But before that we will explain the concepts and give some other examples.
 
 <!--
-We can apply the technique of amortized analysis in the case of a series
+We can apply the technique of amortised analysis in the case of a series
 of sequential searches in an unsorted array. For $n$ random searches,
 the average-case cost for each search is $n/2$, and so the *expected*
 total cost for the series is $n^2/2$. Unfortunately, in the worst case
@@ -63,7 +63,7 @@ $n\cdot O(1) + n\cdot O(n) = O(n+n^2) = O(n^2)$.
 Since we performed $2n$ operations, we get an average complexity per operation of $O(n^2)/2n = O(n)$.
 This analysis is unreasonably pessimistic.
 Clearly it is not really possible to pop $n$ elements each time *multipop* is called.
-Analysis that focuses on single operations cannot deal with this global limit, and so we turn to amortized analysis to model the entire series of operations.
+Analysis that focuses on single operations cannot deal with this global limit, and so we turn to amortised analysis to model the entire series of operations.
 
 We can reason like this instead:
 $n$ elements are pushed to the stack, and each of these elements can only be popped once.
@@ -138,9 +138,9 @@ In other words, the average number of bits flipped on each increment is 2, leadi
 Therefore, the amortised cost for *increment* is $O(M)/M = O(1)$.
 :::
 
-Our final example uses amortized analysis to prove a relationship
+Our final example uses amortised analysis to prove a relationship
 between the cost of the [move-to-front]{.term}
-[self-organizing list]{.term} heuristic and the cost for the optimal static
+[self-organising list]{.term} heuristic and the cost for the optimal static
 ordering of the list.
 
 Recall that, for a series of search operations, the minimum cost for a
@@ -151,19 +151,19 @@ accessed record is first (and thus has least cost), followed by the next
 most frequently accessed record, and so on.
 
 ::: example
-#### Example: Self-organizing lists
+#### Example: Self-organising lists
 
 **Theorem:** The total number of comparisons required by any series $S$
-of $n$ or more searches on a [self-organizing list]{.term} of length $n$ using
+of $n$ or more searches on a [self-organising list]{.term} of length $n$ using
 the move-to-front heuristic is never more than twice the total number of
 comparisons required when series $S$ is applied to the list stored in
 its optimal static order.
 
 **Proof:** Each comparison of the search key with a record in the list
 is either successful or unsuccessful. For $m$ searches, there must be
-exactly $m$ successful comparisons for both the self-organizing list and
+exactly $m$ successful comparisons for both the self-organising list and
 the static list. The total number of unsuccessful comparisons in the
-self-organizing list is the sum, over all pairs of distinct keys, of the
+self-organising list is the sum, over all pairs of distinct keys, of the
 number of unsuccessful comparisons made between that pair.
 
 Consider a particular pair of keys: $A$ and $B$. For any sequence of

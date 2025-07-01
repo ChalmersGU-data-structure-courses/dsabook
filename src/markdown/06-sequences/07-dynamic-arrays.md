@@ -1,5 +1,5 @@
 
-## Dynamic arrays
+## Dynamic arrays {#dynamic-arrays}
 
 ::: TODO
 - Prio 1: invariants
