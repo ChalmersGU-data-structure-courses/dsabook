@@ -43,7 +43,6 @@ the same number of leaves. This fact allows us to compute the space
 requirements for a full binary tree implementation whose leaves require
 a different amount of space from its internal nodes.
 
-:::: {#FullTree}
 ::: topic
 #### Theorem: Full binary tree theorem
 
@@ -79,7 +78,6 @@ iii\) **Induction Step:**
 
 By mathematical induction the theorem holds for all values of $n > 0$.
 :::
-::::
 
 When analyzing the space requirements for a binary tree implementation,
 it is useful to know how many empty subtrees a tree contains. A simple
@@ -88,7 +86,6 @@ empty subtrees there are in *any* binary tree, whether full or not. Here
 are two approaches to proving the following theorem, and each suggests a
 useful way of thinking about binary trees.
 
-:::: {#SubTreeThrm}
 ::: topic
 #### Theorem: Number of subtrees
 
@@ -117,6 +114,5 @@ with parents. In other words, there are $n-1$ non-empty children.
 Because the total number of children is $2n$, the remaining $n+1$
 children must be empty.
 :::
-::::
 
 ::::::
