@@ -1,5 +1,5 @@
 
-## Implementing general trees
+### Sequential tree representations
 
 ::: TODO
 - Prio 2: rewrite text, include:
@@ -7,15 +7,18 @@
     - similarity with graphs
 :::
 
-### Sequential tree representations
-
-::: TODO
-- move first part to chapter intro?
-:::
-
 Next we consider a fundamentally different approach to implementing
 trees. The goal is to store a series of node values with the minimum
-information needed to reconstruct the tree structure. This approach,
+information needed to reconstruct the tree structure.
+
+
+:::::: latex
+\booklink{Read the rest online}{11.7}{sec:sequential-tree-representations}
+::::::
+
+:::::: online
+
+This approach,
 known as a [sequential tree representation]{.term}, has the advantage of saving space because no pointers are
 stored. It has the disadvantage that accessing any node in the tree
 requires sequentially processing all nodes that appear before it in the
@@ -59,25 +62,25 @@ be interpreted as leaf nodes, and these can be listed explicitly. Such
 an augmented node list provides enough information to recover the tree
 structure.
 
-:::: {#BinExampb}
+<div id="fig:BinExampb">
 <inlineav id="BinExampCON" src="Binary/BinExampCON.js" name="Binary/BinExampCON" links="Binary/BinExampCON.css" static/>
 
 Sample binary tree for sequential tree implementation examples.
-::::
+</div>
 
 ::: dsvis
-TODO
+Reconstructing the original tree in @fig:BinExampb from its sequential representation.
 
 <inlineav id="SequentialTreeCON" src="General/SequentialTreeCON.js" name="First sequential representation Slideshow" links="General/SequentialTreeCON.css"/>
 :::
 
 ::: dsvis
-TODO
+Practice exercise for sequential tree representation.
 
 <avembed id="SequentialTreePRO" src="General/SequentialTreePRO.html" type="ka" name="First Sequential Representation Exercise"/>
 :::
 
-### Alternative sequential representation
+#### Alternative sequential representation
 
 To illustrate the difficulty involved in using the sequential tree
 representation for processing, consider searching for the right child of
@@ -112,7 +115,7 @@ binary tree stores no `null` values with this implementation, and so
 requires less overhead.
 
 ::: dsvis
-TODO
+Reconstructing the original tree in @fig:BinExampb from the alternative sequential representation.
 
 <inlineav id="SequentialTreeAltCON" src="General/SequentialTreeAltCON.js" name="Second sequential representation Slideshow" links="General/SequentialTreeCON.css"/>
 :::
@@ -128,12 +131,12 @@ high-order (sign) bit of the integer value could be used as the mark
 bit.
 
 ::: dsvis
-TODO
+Practice exercise for the alternative sequential representation.
 
 <avembed id="SequentialTreeAltPRO" src="General/SequentialTreeAltPRO.html" type="ka" name="Alternate Sequential Representation Exercise"/>
 :::
 
-### Bit vector representation
+#### Bit vector representation
 
 Another approach is to store a separate bit vector to represent the
 status of each node. In this case, each node of the tree corresponds to
@@ -141,18 +144,18 @@ one bit in the bit vector. A value of "1" could indicate an internal
 node, and "0" could indicate a leaf node.
 
 ::: dsvis
-TODO
+Reconstructing the shape of the tree in @fig:BinExampb from its bit vector representation.
 
 <inlineav id="SequentialTreeBitsCON" src="General/SequentialTreeBitsCON.js" name="Bit vector sequential representation Slideshow" links="General/SequentialTreeCON.css"/>
 :::
 
 ::: dsvis
-TODO
+Practice exercise for the bit vector representation.
 
 <avembed id="SequentialTreeBitVectorPRO" src="General/SequentialTreeBitVectorPRO.html" type="ka" name="Bit Vector Sequential Representation Exercise"/>
 :::
 
-### Serialising general trees
+#### Serialising general trees
 
 Storing general trees by means of a sequential implementation requires
 that more explicit structural information be included with the node
@@ -167,7 +170,7 @@ node that is also the last child for its parent would indicate this by
 two or more successive ")" symbols.
 
 ::: dsvis
-TODO
+Reconstructing a general from its sequential representation.
 
 <inlineav id="SequentialGenTreeCON" src="General/SequentialGenTreeCON.js" name="General Tree sequential representation Slideshow" links="General/SequentialTreeCON.css"/>
 :::
@@ -177,11 +180,12 @@ used for binary trees. This is because a binary tree is not merely a
 restricted form of general tree with at most two children. Every binary
 tree node has a left and a right child, though either or both might be
 empty. So this representation cannot let us distinguish whether node $D$
-in [Figure #BinExampb](#BinExampb) is the left
-or right child of node $B$.
+in @fig:BinExampb is the left or right child of node $B$.
 
 ::: dsvis
-TODO
+Practice exercise for sequential representation of general trees.
 
 <avembed id="SequentialTreeGenTreePRO" src="General/SequentialTreeGenTreePRO.html" type="ka" name="General Tree Sequential Representation Exercise"/>
 :::
+
+::::::

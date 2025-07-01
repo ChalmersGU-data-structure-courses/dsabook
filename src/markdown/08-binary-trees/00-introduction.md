@@ -22,3 +22,5 @@ This chapter covers terminology used for discussing binary trees (@sec:binary-tr
 tree traversals (@sec:traversing-a-binary-tree),
 approaches to implementing tree nodes (@sec:implementing-binary-trees),
 and various examples of binary trees.
+The chapter concludes by discussing non-binary trees, i.e., trees with more (or less) than two children (@sec:general-trees).
+

@@ -1,5 +1,5 @@
 
-## Non-binary trees
+## General trees
 
 ::: TODO
 - Prio 3: update text
@@ -36,25 +36,24 @@ these nodes are partitioned into $n > 0$ disjoint sets $\mathbf{T}_0$,
 $\mathbf{T}_1$, \..., $\mathbf{T}_{n-1}$, each of which is a tree, and
 whose roots $R_1, R_2, ..., R_n$, respectively, are children of $R$. The
 subsets $\mathbf{T}_i (0 \leq i < n)$ are said to be
-[subtrees](#subtree){.term} of $\mathbf{T}$.
+[subtrees]{.term} of $\mathbf{T}$.
 These subtrees are ordered in that $\mathbf{T}_i$ is said to come before
 $\mathbf{T}_j$ if $i < j$. By convention, the subtrees are arranged from
 left to right with subtree $\mathbf{T}_0$ called the leftmost child of
 $R$. A node's [out degree]{.term} is the number
 of children for that node. A [forest]{.term} is
 a collection of one or more trees.
-[Figure #GenTreeFig](#GenTreeFig) presents further tree
+@Fig:GeneralTree presents further tree
 notation generalized from the notation for binary trees.
 
-:::: {#GenTreeFig}
-<inlineav id="GenTreeCON" src="General/GenTreeCON.js" name="General/GenTreeCON" links="General/GenTreeCON.css" static/>
+<!-- <inlineav id="GenTreeCON" src="General/GenTreeCON.js" name="General/GenTreeCON" links="General/GenTreeCON.css" static/> -->
 
-Notation for general trees. Node $P$ is the parent of nodes $V$, $S1$,
+![Notation for general trees. Node $P$ is the parent of nodes $V$, $S1$,
 and $S2$. Thus, $V$, $S1$, and $S2$ are children of $P$. Nodes $R$ and
 $P$ are ancestors of $V$. Nodes $V$, $S1$, and $S2$ are called
-[siblings](#sibling){.term}. The oval surrounds
+[siblings]{.term}. The oval surrounds
 the subtree having $V$ as its root.
-::::
+](images/GeneralTree.png){width=70% #fig:GeneralTree}
 
 Each node in a tree has precisely one parent, except for the root, which
 has no parent. From this observation, it immediately follows that a tree
@@ -114,7 +113,7 @@ can be invented. However, inorder traversals are generally not useful
 with general trees.
 
 ::: dsvis
-TODO
+Visualisation of preorder traversal.
 
 <inlineav id="GenTreePreTravCON" src="General/GenTreePreTravCON.js" name="General Tree Preorder Traversal Slideshow" links="General/GenTreeCON.css"/>
 :::
@@ -126,7 +125,7 @@ we can move to $T$'s right sibling, and then to that node's right
 sibling, and so on.
 
 ::: dsvis
-TODO
+Visualisation of postorder traversal.
 
 <inlineav id="GenTreePostTravCON" src="General/GenTreePostTravCON.js" name="General Tree Postorder Traversal Slideshow" links="General/GenTreeCON.css"/>
 :::
