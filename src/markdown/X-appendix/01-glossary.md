@@ -1443,7 +1443,7 @@ An algorithm to solve the
 in a [graph]{.term}. This is a
 [greedy algorithm]{.term}. It is nearly
 identical to [Prim's algorithm]{.term} for
-finding a [minimal-cost spanning tree]{.term},
+finding a [minimum spanning tree]{.term},
 with the only difference being the calculation done to
 update the best-known distance.
 
@@ -2839,7 +2839,7 @@ terms of the sum of values associated with each item.
 
 ### Kruskal's algorithm
 
-An algorithm for computing the [MCST]{.term}
+An algorithm for computing the [MST]{.term}
 of a [graph]{.term}. During processing, it
 makes use of the [UNION/FIND]{.term} process
 to efficiently determine of two vertices are within the same
@@ -3393,18 +3393,18 @@ value less than its
 [children](#child){.term}. As a consequence,
 the node with minimum key value is at the [root]{.term}.
 
+### minimum spanning tree
 ### minimal-cost spanning tree
-### minimal spanning tree
-### MCST
 ### MST
+### MCST
 
-Abbreviated as MCST, or sometimes as MST. Derived from a
-[weighted graph]{.term}, the MCST is the
+Abbreviated as MST, or sometimes as MCST. Derived from a
+[weighted graph]{.term}, the MST is the
 [subset]{.term} of the graph's
 [edges](#edge){.term} that maintains the
 connectivitiy of the graph while having lowest total cost (as
 defined by the sum of the [weights](#weight){.term}
-of the edges in the MCST). The result is referred to as
+of the edges in the MST). The result is referred to as
 a [tree]{.term} because it would never have
 a [cycle]{.term} (since an edge could be
 removed from the cycle and still preserve connectivity). Two
@@ -4044,7 +4044,7 @@ unit circle in the complex plain.
 ### Prim's algorithm
 
 A [greedy algorithm]{.term} for computing
-the [MCST]{.term} of a
+the [MST]{.term} of a
 [graph]{.term}. It is nearly identical to
 [Dijkstra's algorithm]{.term} for solving
 the [single-source shortest paths problem]{.term},

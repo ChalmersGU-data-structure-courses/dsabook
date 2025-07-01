@@ -18,7 +18,7 @@ search the collection efficiently. We might sort customer records by zip
 code so that when we print an advertisement we can then mail them more
 cheaply. We might use sorting to help an algorithm to solve some other
 problem. For example, [Kruskal's algorithm]{.term} to find
-[minimal-cost spanning trees]{.term}
+[minimum spanning trees]{.term}
 must sort the edges of a graph by their lengths before it
 can process them.
 

@@ -5,13 +5,13 @@
 - Prio 2: first show more abstract pseudocode, not using union/find
 :::
 
-Our next MCST algorithm is commonly referred to as
+Our next MST algorithm is commonly referred to as
 [Kruskal's algorithm]{.term}. Kruskal's
 algorithm is also a simple, greedy algorithm. First partition the set of
 vertices into $|\mathbf{V}|$
 [disjoint sets](#union-find){.term},
 each consisting of one vertex. Then process the edges in order of
-weight. An edge is added to the MCST, and two disjoint sets combined, if
+weight. An edge is added to the MST, and two disjoint sets combined, if
 the edge connects two vertices in different disjoint sets. This process
 is repeated until only one disjoint set remains.
 
@@ -30,10 +30,10 @@ The only tricky part to this algorithm is determining if two vertices
 belong to the same equivalence class. Fortunately, the ideal algorithm
 is available for the purpose -- the [UNION/FIND]{.term} algorithm.
 Here is an implementation for Kruskal's algorithm. Note that since the
-MCST will never have more than $|\mathbf{V}|-1$ edges, we can return as
-soon as the MCST contains enough edges.
+MST will never have more than $|\mathbf{V}|-1$ edges, we can return as
+soon as the MST contains enough edges.
 
-    // Kruskal's MCST algorithm
+    // Kruskal's MST algorithm
     function kruskal(G):
         A = new ParentPointerTree()
         for each v in G.vertices():
@@ -44,14 +44,14 @@ soon as the MCST contains enough edges.
             for each e in G.outgoingEdges(v):
                 edges.add(new KVPair(e.weight, e))
 
-        numEdgesInMCST = 0
+        numEdgesInMST = 0
         while not edges.isEmpty():
             e = edges.removeMin()
             if A.FIND(e.start) != A.FIND(e.end):  // If the vertices are not connected...
-                AddEdgetoMCST(edge)               // ...add this edge to the MCST
-                numEdgesInMCST = numEdgesInMCST + 1
-                if numEdgesInMCST >= G.vertexCount()-1:
-                    return A                      // Stop when the MCST has |V|-1 edges
+                AddEdgetoMST(edge)                // ...add this edge to the MST
+                numEdgesInMST = numEdgesInMST + 1
+                if numEdgesInMST >= G.vertexCount()-1:
+                    return A                      // Stop when the MST has |V|-1 edges
                 A.UNION(e.start, e.end)           // Connect the two vertices
 
 
