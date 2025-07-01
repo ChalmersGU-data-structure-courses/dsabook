@@ -34,7 +34,7 @@ We can use a heap to implement a very simple sorting algorithm:
 2. Remove each element in turn from the heap, putting it in its right place in the original array.
 
 :::::: latex
-\booklink{Read the rest online}{9.3}{sec:in-place-heapsort}
+\booklink{Read the rest online}{9.3}{sec:case-study-heapsort}
 ::::::
 
 Since the heap returns the smallest elements first, they will be inserted in sorted order into the new array.

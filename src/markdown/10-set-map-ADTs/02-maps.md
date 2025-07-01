@@ -108,6 +108,6 @@ the multimap.
                 return new Set()
 
 Note that we don't have to `put` the updated set back into the database (in the `add` method).
-This is because complex data structures are *mutable*, as explained in @sec:mutable-and-immutable-data.
+This is because complex data structures are *mutable*, as explained in @sec:programming-preliminaries.
 
 :::

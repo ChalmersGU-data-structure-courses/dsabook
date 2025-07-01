@@ -83,7 +83,7 @@ Here is an interactive explanation of this recurrence relation.
 <inlineav id="LinearRecurrencesNCON" src="AlgAnal/LinearRecurrencesNCON.js" name="AlgAnal/LinearRecurrencesNCON" links="AlgAnal/LinearRecurrencesNCON.css"/>
 :::
 
-A more complicated example is the standard [Mergesort].
+A more complicated example is the standard [Mergesort]{.term}.
 This takes a list of size $n$, splits it in half, performs Mergesort on each half, and finally merges the two sublists in $n$ steps.
 The cost for this can be modeled as
 
@@ -441,7 +441,7 @@ depends on the ratio $r = b^k/a$. There are three cases.
 
 Case (1)
 
-:   $r<1$. From the list of useful summations in @sec:summations,
+:   $r<1$. From the list of useful summations in @sec:mathematical-preliminaries,
     $\sum_{i=0}^{m} r^i < 1/(1-r)$, which is a constant.
 
     Thus,
