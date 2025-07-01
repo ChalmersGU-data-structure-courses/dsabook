@@ -15,17 +15,19 @@ def main(*infiles: str|Path):
     for inf in infiles:
         with open(inf) as IN:
             contents = AllContents[inf] = IN.read()
-            for m in re.finditer(r'<[a-z]+[^<>]* id="([^"]+)"', contents):
+            for m in re.finditer(AnchorMatch, contents):
                 HtmlIDs.setdefault(m[1], []).append(inf.name)
     # Postprocess each file
     for inf, contents in AllContents.items():
+        # print(contents, file=sys.stderr)
         contents = re.sub(HrefMatch, lambda m: fix_href(m, inf), contents)
         contents = convert_animations(contents)
         with open(inf, "w") as OUT:
             print(contents, file=OUT)
 
 
-HrefMatch = re.compile(r'(<a [^<>]*\bhref=)"#([^"]+)"')
+AnchorMatch = re.compile(r'<[a-z]+[^<>]+?\bid="([^"<>]+?)"')
+HrefMatch = re.compile(r'(<a\b[^<>]+?\bhref=)"#([^"<>]+?)"')
 
 def fix_href(m: re.Match[str], inf: Path) -> str:
     prefix, id = m[1], m[2]
