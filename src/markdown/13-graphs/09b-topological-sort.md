@@ -18,17 +18,16 @@ completed without violating at least one prerequisite. The process of
 laying out the vertices of a DAG in a linear order to meet the
 prerequisite rules is called a [topological sort]{.term}.
 
-[Figure #TopSort](#TopSort) illustrates the
+@Fig:GraphToposort illustrates the
 problem. An acceptable topological sort for this example is J1, J2, J3,
 J4, J5, J6, J7. However, other orders are also acceptable, such as J1,
 J3, J2, J6, J4, J5, J7.
 
-:::: {#TopSort}
-<inlineav id="topSortCON" src="Graph/topSortCON.js" name="Graph/topSortCON" static/>
+<!-- <inlineav id="topSortCON" src="Graph/topSortCON.js" name="Graph/topSortCON" static/> -->
 
-An example graph for topological sort. Seven tasks have dependencies as
-shown by the directed graph.
-::::
+![An example graph for topological sort.
+Seven tasks have dependencies as shown by the directed graph
+](images/GraphToposort.png){width=60% #GraphToposort}
 
 #### Depth-first algorithm
 

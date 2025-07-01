@@ -25,17 +25,15 @@ Thus, the MST is a free tree with $|\mathbf{V}| - 1$ edges. The name
 "minimum-cost spanning tree" comes from the fact that the required set
 of edges forms a tree, it spans the vertices (i.e., it connects them
 together), and it has minimum cost.
-[Figure #MSTdgm](#MSTdgm) shows the MST for an
-example graph.
+@Fig:GraphMST shows the MST for an example graph.
 
-:::: {#MSTdgm}
-<inlineav id="MCSTCON" src="Graph/MCSTCON.js" name="Graph/MCSTCON" static/>
+<!-- <inlineav id="MCSTCON" src="Graph/MCSTCON.js" name="Graph/MCSTCON" static/> -->
 
-A graph and its MST. All edges appear in the original graph. Those
+![A graph and its MST. All edges appear in the original graph. Those
 edges drawn with heavy lines indicate the subset making up the MST.
 Note that edge $(C, F)$ could be replaced with edge $(D, F)$ to form a
 different MST with equal cost.
-::::
+](images/GraphMST.png){width=40% #fig:GraphMST}
 
 <!--
 ### Use cases for minimum spanning trees

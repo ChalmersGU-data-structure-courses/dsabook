@@ -156,7 +156,7 @@ are connected by (at least) edges $e_j$ (selected by Prim's algorithm
 to be in the MST) and $e'$ (the "correct" edge to be placed in the
 MST). Note that the path from $v_w$ to $v_j$ cannot include any marked
 vertex $v_i, i \leq j$, because to do so would form a cycle.
-](images/PrimMST.png){width=60% #fig:PrimProof}
+](images/PrimMST.png){width=50% #fig:PrimProof}
 
 
 ::: dsvis

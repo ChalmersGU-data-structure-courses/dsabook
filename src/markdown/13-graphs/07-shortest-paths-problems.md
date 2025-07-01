@@ -36,7 +36,7 @@ a trivial problem, because the shortest path may not be along the edge
 (if any) connecting two vertices, but rather may be along a path
 involving one or more intermediate vertices.
 
-For example, in [Figure #DistExamp](#DistExamp),
+For example, in @fig:GraphShortestPath,
 the cost of the path from $A$ to $B$ to $D$ is 15. The cost
 of the edge directly from $A$ to $D$ is 20. The cost of the path from
 $A$ to $C$ to $B$ to $D$ is 10. Thus, the shortest path from $A$ to $D$
@@ -49,11 +49,9 @@ from $A$ to $D$. Because there is no edge from $E$ to $B$,
 $\mathbf{w}(E, B) = \infty$. Note that $\mathbf{w}(D, A) = \infty$
 because the graph is directed. We assume that all weights are positive.
 
-:::: {#DistExamp}
-<inlineav id="DistanceExampCON" src="Graph/DistanceExampCON.js" name="Graph/DistanceExampCON" static/>
+<!-- <inlineav id="DistanceExampCON" src="Graph/DistanceExampCON.js" name="Graph/DistanceExampCON" static/> -->
 
-Example graph for shortest-path definitions.
-::::
+![Example graph for shortest-path definitions](images/GraphShortestPath.png){width=40% #fig:GraphShortestPath}
 
 <!--
 ### Use cases for shortest paths

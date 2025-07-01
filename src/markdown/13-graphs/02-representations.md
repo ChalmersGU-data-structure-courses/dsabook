@@ -28,11 +28,9 @@ Vertex 4. The list for Vertex 2 stores an entry for Vertex 4 because
 there is an edge from Vertex 2 to Vertex 4, but no entry for Vertex 3
 because this edge comes into Vertex 2 rather than going out.
 
-:::: {#Directed}
-<inlineav id="GdirRepCON" src="Graph/GdirRepCON.js" name="Graph/GdirRepCON" links="Graph/GraphDefCON.css" static/>
+<!-- <inlineav id="GdirRepCON" src="Graph/GdirRepCON.js" name="Graph/GdirRepCON" links="Graph/GraphDefCON.css" static/> -->
 
-Representing a directed graph.
-::::
+![Representing a directed graph](images/GraphRepresentDirected.png){width=80% #fig:GraphRepresentDirected}
 
 Both the adjacency matrix and the adjacency list can be used to store
 directed or undirected graphs. Each edge of an undirected graph
@@ -43,11 +41,9 @@ as many edge entries in both the adjacency matrix and the adjacency
 list. For example, for the undirected graph, the list for Vertex 2
 stores an entry for both Vertex 3 and Vertex 4.
 
-:::: {#Undirected}
-<inlineav id="GundirRepCON" src="Graph/GundirRepCON.js" name="Graph/GundirRepCON" links="Graph/GraphDefCON.css" static/>
+<!-- <inlineav id="GundirRepCON" src="Graph/GundirRepCON.js" name="Graph/GundirRepCON" links="Graph/GraphDefCON.css" static/> -->
 
-Representing an undirected graph.
-::::
+![Representing an undirected graph](images/GraphRepresentUndirected.png){width=80% #fig:GraphRepresentUndirected}
 
 The storage requirements for the adjacency list depend on both the
 number of edges and the number of vertices in the graph. There must be
@@ -57,11 +53,11 @@ edge must appear on one of the lists. Thus, the cost is
 $O(|\mathbf{V}| + |\mathbf{E}|)$.
 
 Sometimes we want to store weights or distances with each each edge,
-such as in [Figure #GraphTerms](#GraphTerms)
-(c). This is easy with the adjacency matrix, where we will just store
-values for the weights in the matrix. In
-[Figure #Directed](#Directed) and
-[Figure #Undirected](#Undirected) we store a value of
+such as in @fig:GraphTypes (c).
+This is easy with the adjacency matrix, where we will just store
+values for the weights in the matrix.
+In @fig:GraphRepresentDirected and @fig:GraphRepresentUndirected
+we store a value of
 "1" at each position just to show that the edge exists. That could
 have been done using a single bit, but since bit manipulation is
 typically complicated in most programming languages, an implementation
@@ -69,14 +65,17 @@ might store a byte or an integer at each matrix position. For a weighted
 graph, we would need to store at each position in the matrix enough
 space to represent the weight, which might typically be an integer.
 
-The adjacency list needs to explicitly store a weight with each edge. In
-the adjacency list shown below, each linked list node is shown storing
+The adjacency list needs to explicitly store a weight with each edge.
+In the adjacency list in @fig:GraphRepresentWeighted,
+each linked list node is shown storing
 two values. The first is the index for the neighbor at the end of the
 associated edge. The second is the value for the weight. As with the
 adjacency matrix, this value requires space to represent, typically an
 integer.
 
-<inlineav id="GweightedCON" src="Graph/GweightedCON.js" name="Graph/GweightedCON" links="Graph/GraphDefCON.css" static/>
+<!-- <inlineav id="GweightedCON" src="Graph/GweightedCON.js" name="Graph/GweightedCON" links="Graph/GraphDefCON.css" static/> -->
+
+![Representing a weighted graph](images/GraphRepresentWeighted.png){width=80% #fig:GraphRepresentWeighted}
 
 Which graph representation is more space efficient depends on the number
 of edges in the graph. The adjacency list stores information only for
