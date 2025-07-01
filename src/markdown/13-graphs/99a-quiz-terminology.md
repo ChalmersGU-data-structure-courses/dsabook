@@ -31,7 +31,7 @@ there is an edge joining them.
 
 ::: hints
 - Neighboring vertices are adjacent to one another.
-- Two vertices are considered neighbors if there is an edge connecting them.
+- Two vertices are considered neighbours if there is an edge connecting them.
 :::
 ::::::::::::::::::::::::::::::
 
@@ -271,13 +271,13 @@ What is the *in*-degree of vertex 2?
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.
 
-Two vertices can be adjacent even if they are not neighbors.
+Two vertices can be adjacent even if they are not neighbours.
 
 - [x] False
 - [ ] True
 
 ::: hints
-- Two vertices are consider neighbors if there is an edge connecting them.
+- Two vertices are consider neighbours if there is an edge connecting them.
 - Neighboring vertices are adjacent to one another.
 :::
 ::::::::::::::::::::::::::::::

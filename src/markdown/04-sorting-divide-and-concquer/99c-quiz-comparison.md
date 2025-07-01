@@ -58,7 +58,7 @@ relative order of records with equal keys?
 
 <!--
 :::::::::: question ::::::::::
-Which sorting algorithm makes use of Insertion sort's best case behavior?
+Which sorting algorithm makes use of Insertion sort's best case behaviour?
 
 - [x] Shellsort
 - [ ] Heapsort

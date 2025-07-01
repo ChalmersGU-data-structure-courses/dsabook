@@ -14,7 +14,7 @@ Insertion sort (as the code is written in this chapter) is a stable sorting algo
 - [ ] False
 
 ::: hints
-- Think of the behavior of every pass through the inner for loop of the insertion sort if the elements are equal.
+- Think of the behaviour of every pass through the inner for loop of the insertion sort if the elements are equal.
 :::
 ::::::::::::::::::::::::::::::
 

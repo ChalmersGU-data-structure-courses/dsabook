@@ -41,7 +41,7 @@ case? Normally we are not interested in the best case, because this
 might happen only rarely and generally is too optimistic for a fair
 characterisation of the algorithm's running time. In other words,
 analysis based on the best case is not likely to be representative of
-the behavior of the algorithm. However, there are rare instances where a
+the behaviour of the algorithm. However, there are rare instances where a
 best-case analysis is useful -- in particular, when the best case has
 high probability of occurring.
 For example, if we know that the array we want to sort is *almost sorted*,
@@ -61,7 +61,7 @@ cost of running the program many times on many different inputs --
 worst-case analysis might not be a representative measure of the
 algorithm's performance. Often we prefer to know the average-case
 running time. This means that we would like to know the *typical*
-behavior of the algorithm on inputs of size $n$.
+behaviour of the algorithm on inputs of size $n$.
 
 ### The problem with average case
 

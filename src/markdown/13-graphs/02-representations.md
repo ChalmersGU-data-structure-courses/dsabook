@@ -68,7 +68,7 @@ space to represent the weight, which might typically be an integer.
 The adjacency list needs to explicitly store a weight with each edge.
 In the adjacency list in @fig:GraphRepresentWeighted,
 each linked list node is shown storing
-two values. The first is the index for the neighbor at the end of the
+two values. The first is the index for the neighbour at the end of the
 associated edge. The second is the value for the weight. As with the
 adjacency matrix, this value requires space to represent, typically an
 integer.
@@ -104,9 +104,9 @@ are now 12 edges represented instead of 6).
 
 The adjacency matrix often requires a higher asymptotic cost for an
 algorithm than would result if the adjacency list were used. The reason
-is that it is common for a graph algorithm to visit each neighbor of
+is that it is common for a graph algorithm to visit each neighbour of
 each vertex. Using the adjacency list, only the actual edges connecting
-a vertex to its neighbors are examined. However, the adjacency matrix
+a vertex to its neighbours are examined. However, the adjacency matrix
 must look at each of its $|\mathbf{V}|$ potential edges, yielding a
 total cost of $O(|\mathbf{V}^2|)$ time when the algorithm might
 otherwise require only $O(|\mathbf{V}| + |\mathbf{E}|)$ time. This

@@ -121,7 +121,7 @@ they went in.
 
 
 :::::::::: question ::::::::::
-Queue behavior is typically referred to as:
+Queue behaviour is typically referred to as:
 
 - [x] First-In, First-Out
 - [ ] Last-In, First-Out

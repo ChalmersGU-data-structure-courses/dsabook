@@ -44,9 +44,9 @@ Given an edge, we can use the attributes *start* and
         weight: Float = 1.0   // weight, defaults to 1.0
 
 Nearly every graph algorithm presented in this chapter will require
-visits to all neighbors of a given vertex. The `outgoingEdges` method
+visits to all neighbours of a given vertex. The `outgoingEdges` method
 returns a collection containing the edges that originate in the given
-vertex. To get the neighbors you can simply call `e.end` for each
+vertex. To get the neighbours you can simply call `e.end` for each
 outgoing edge `e`. The following lines appear in many graph algorithms:
 
     for each Edge e in G.outgoingEdges(v):
@@ -105,7 +105,7 @@ The `vertices` method returns a collection of all vertices, which
 in this case is just the numbers $0\ldots |\mathbf{V}|-1$.
 
 Given a vertex $v$, the `outgoingEdges` method scans through row `v` of
-the matrix to locate the positions of the various neighbors. It creates
+the matrix to locate the positions of the various neighbours. It creates
 an edge for each neighbour and adds it to a list.
 
 ### Adjacency list

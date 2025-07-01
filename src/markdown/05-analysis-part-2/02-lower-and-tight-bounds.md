@@ -71,7 +71,7 @@ For $g$ to be a lower bound, this definition *does not* require that $f(n) \geq 
 It only requires that this happen often enough, in particular that it happen for an infinite number of values for $n$.
 Motivation for this alternate definition can be found in the following example.
 
-Assume a particular algorithm has the following behavior:
+Assume a particular algorithm has the following behaviour:
 
 \begin{eqnarray*}
 T(n)
@@ -96,12 +96,12 @@ $T(n) \geq k\cdot n^2$ for all $n>n_0$. The alternative
 definition does result in a lower bound of $\Omega(n^2)$ for this
 algorithm, which seems to fit common sense more closely.
 Fortunately, few real algorithms or computer programs display the
-pathological behavior of this example. Our first definition for
+pathological behaviour of this example. Our first definition for
 $\Omega$ generally yields the expected result.
 
 As you can see from this discussion, asymptotic bounds notation is
 not a law of nature. It is merely a powerful modeling tool used to
-describe the behavior of algorithms.
+describe the behaviour of algorithms.
 
 ### Tight bounds: the $\Theta$ notation
 
@@ -125,7 +125,7 @@ algorithm, the upper and lower bounds always meet. That is because in
 some sense we have a perfect analysis for the algorithm, embodied by the
 running-time equation. For many algorithms (or their instantiations as
 programs), it is easy to come up with the equation that defines their
-runtime behavior. The analysis for most commonly used algorithms is well
+runtime behaviour. The analysis for most commonly used algorithms is well
 understood and we can almost always give a $\Theta$ analysis for them.
 However, the class of [NP-Complete]{.term}
 problems all have no definitive $\Theta$ analysis, just some

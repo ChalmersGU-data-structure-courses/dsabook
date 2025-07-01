@@ -66,7 +66,7 @@ graph traversals described next.
 Our first method for organised graph traversal is called
 [depth-first search]{.term} (DFS). Whenever a
 vertex $v$ is visited during the search, DFS will recursively visit all
-of $v$ 's unvisited neighbors. Equivalently, DFS will add all edges
+of $v$ 's unvisited neighbours. Equivalently, DFS will add all edges
 leading out of $v$ to a stack. The next vertex to be visited is
 determined by popping the stack and following that edge. The effect is
 to follow one branch through the graph to its conclusion, then it will
@@ -110,7 +110,7 @@ processed; hence the call to function `postVisit`.
 
 ::: dsvis
 The following visualisation shows a random graph each time that you
-start it, so that you can see the behavior on different examples. It can
+start it, so that you can see the behaviour on different examples. It can
 show you DFS run on a directed graph or an undirected graph. Be sure to
 look at an example for each type of graph.
 
@@ -169,7 +169,7 @@ call stack to remember which vertices to visit.
 
 ::: dsvis
 The following visualisation shows a random graph each time that you
-start it, so that you can see the behavior on different examples. It can
+start it, so that you can see the behaviour on different examples. It can
 show you BFS run on a directed graph or an undirected graph. Be sure to
 look at an example for each type of graph.
 

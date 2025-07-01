@@ -20,7 +20,7 @@ Bubble sort (as the code is written in this chapter) is a stable sorting algorit
 - The first iteration of the inner for loop moves through
 the array from bottom to top, comparing adjacent elements.
 - If the lower-indexed element is greater than its
-higher-indexed neighbor, then the two are swapped.
+higher-indexed neighbour, then the two are swapped.
 :::
 ::::::::::::::::::::::::::::::
 

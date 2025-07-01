@@ -14,7 +14,7 @@ algorithm maintains the relative order of records with equal keys.
 - [x] False
 
 ::: hints
-- Think of the behavior for partition if there are two equal key values in the array.
+- Think of the behaviour for partition if there are two equal key values in the array.
 - Is it possible for the two equal keys to reverse positions?
 :::
 ::::::::::::::::::::::::::::::
@@ -87,7 +87,7 @@ impact on the number of comparisons required by Quicksort
 
 ::: hints
 - Does Quicksort change when it make a comparison according to the order of the array input values?
-- Yes, the order of input can change a lot about Quicksort's behavior.
+- Yes, the order of input can change a lot about Quicksort's behaviour.
 :::
 ::::::::::::::::::::::::::::::
 

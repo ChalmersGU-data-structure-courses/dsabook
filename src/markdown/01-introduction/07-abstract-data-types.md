@@ -10,12 +10,12 @@ Earlier, we introduced the term [data type]{.term}, which refers to a type along
 For instance, integers form a data type, and addition is an operation that can be performed on them.
 These are known as _concrete_ data types, meaning they consist of actual values and a specific implementation.
 In contrast, an [abstract data type]{.term} (ADT) does not specify concrete values or implementations.
-Instead, it defines a data type purely in terms of a set of operations and the expected behavior of those operations, as determined by their inputs and outputs.
+Instead, it defines a data type purely in terms of a set of operations and the expected behaviour of those operations, as determined by their inputs and outputs.
 An ADT does not dictate _how_ the operations should be implemented, and multiple implementations are often possible.
 These implementation details are hidden from the user—a concept known as [encapsulation]{.term}.
 The set of operations offered by an abstract data type is known as its [application programming interface](#interface){.term} (API).
 
-Using an ADT, we can distinguish between the logical behavior of a data type and its actual implementation in a concrete program.
+Using an ADT, we can distinguish between the logical behaviour of a data type and its actual implementation in a concrete program.
 A classic example is the [list]{.term} abstract data type, which support the following set of operations:
 
     interface List of T:
@@ -26,7 +26,7 @@ A classic example is the [list]{.term} abstract data type, which support the fol
 
 A list can be implemented using either an array or a linked list.
 Users of a list do not need to know which implementation is used in order to make use of its functionality.
-The actual implementations of an ADT rely on specific _data structures_ to realise the desired behavior of the operations -- for example, calculating the size of a list.
+The actual implementations of an ADT rely on specific _data structures_ to realise the desired behaviour of the operations -- for example, calculating the size of a list.
 
 Although different implementations of an abstract data type offer the same set of operations, the choice of [data structure]{.term} can significantly impact the _efficiency_ of those operations.
 Often, there are trade-offs involved: optimising one operation may come at the cost of another.

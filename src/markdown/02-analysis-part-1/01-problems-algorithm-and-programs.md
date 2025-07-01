@@ -32,7 +32,7 @@ always result in the same output every time the function is computed
 using that particular input.
 
 This concept of all problems behaving like mathematical functions might
-not match your intuition for the behavior of computer programs. You
+not match your intuition for the behaviour of computer programs. You
 might know of programs to which you can give the same input value on two
 separate occasions, and two different outputs will result. For example,
 if you type `date` to a typical Linux command line prompt, you will get

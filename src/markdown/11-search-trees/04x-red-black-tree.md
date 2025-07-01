@@ -136,7 +136,7 @@ Here is an implementation of red-black trees:
         def put(key, value):
             // Add a key-value pair, or update the value associated with an existing key.
             // This is the same as BSTMap.put, except that it rebalances the node afterwards,
-            // and colors the root node black.
+            // and colours the root node black.
             root = putHelper(root, key, value)
             root.isRed = false
 

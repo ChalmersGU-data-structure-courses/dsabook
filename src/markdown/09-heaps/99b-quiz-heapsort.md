@@ -68,7 +68,7 @@ impact on the number of comparisons required by Heapsort
 - [ ] There is a big difference, the asymptotic running time can change
 
 ::: hints
-- Can Heapsort's behavior change depending on outcome of
+- Can Heapsort's behaviour change depending on outcome of
 a comparison?
 - Yes, it changes things a little bit in that it might
 move things up and down the heap more or less.

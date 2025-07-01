@@ -954,23 +954,23 @@ induction hypothesis.
    :scripts: AV/Background/twoColorCON.js
    :align: center
 
-   A two-coloring for the regions formed by three lines in the plane.
+   A two-colouring for the regions formed by three lines in the plane.
 -->
 
 <!--
 ::: example
-#### Example: Two-coloring
-Define a [two-coloring]{.term} for a
-set of regions as a way of assigning one of two colors to each region
-such that no two regions sharing a side have the same color.
-For example, a chessboard is two-colored.
-Figure #TwoColor shows a two-coloring for the plane
+#### Example: Two-colouring
+Define a [two-colouring]{.term} for a
+set of regions as a way of assigning one of two colours to each region
+such that no two regions sharing a side have the same colour.
+For example, a chessboard is two-coloured.
+Figure #TwoColor shows a two-colouring for the plane
 with three lines.
-We will assume that the two colors to be used are black and white.
+We will assume that the two colours to be used are black and white.
 
 **Theorem:**
 The set of regions formed by $n$ infinite lines in the plane
-can be two-colored.
+can be two-coloured.
 
 **Proof:**
 

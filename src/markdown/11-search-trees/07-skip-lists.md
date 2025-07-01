@@ -182,7 +182,7 @@ low. There is only one chance in 1024 that ten nodes in a row will be at
 level 0. The motto of probabilistic data structures such as the skip
 list is "Don't worry, be happy". We simply accept the results of
 `randomLevel` and expect that probability will eventually work in our
-favor. The advantage of this approach is that the algorithms are simple,
+favour. The advantage of this approach is that the algorithms are simple,
 while requiring only $O(\log n)$ time for all operations in the
 average case. For a skip list of size $n$, the expected memory usage is
 $2n$. This is because a level $l$ node needs $l+1$ forward pointers, but
@@ -205,7 +205,7 @@ the BST is constrained by the actual order of inputs and searches.
 In contrast, the skip list's performance does not depend on the order
 in which values are inserted into the list. In a sense, the data are
 "randomised" automatically as part of the skip list's probabilistic
-behavior when the depths of the nodes are selected. As the number of
+behaviour when the depths of the nodes are selected. As the number of
 nodes in the skip list increases, the probability of encountering the
 worst case decreases geometrically. Thus, the skip list illustrates a
 tension between the theoretical worst case (in this case, $O(n)$

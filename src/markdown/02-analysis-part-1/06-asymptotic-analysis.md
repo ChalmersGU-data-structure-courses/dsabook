@@ -93,7 +93,7 @@ Asymptotic analysis is a form of "back of the envelope"
 [estimation]{.term} for
 algorithm resource consumption. It provides a simplified model of the
 running time or other resource needs of an algorithm. This
-simplification usually helps you understand the behavior of your
+simplification usually helps you understand the behaviour of your
 algorithms. Just be aware of the limitations to asymptotic analysis in
 the rare situation where the constant is important.
 

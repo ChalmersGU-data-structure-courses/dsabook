@@ -34,7 +34,7 @@ analytical approaches.
 Be warned that comparative timing of programs is a difficult business,
 often subject to experimental errors arising from uncontrolled factors
 (system load, the language or compiler used, etc.). The most important
-concern is that you might be biased in favor of one of the programs. If
+concern is that you might be biased in favour of one of the programs. If
 you are biased, this is certain to be reflected in the timings. One look
 at competing software or hardware vendors' advertisements should
 convince you of this. The most common pitfall when writing two programs

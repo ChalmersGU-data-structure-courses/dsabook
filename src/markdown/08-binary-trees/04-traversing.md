@@ -186,7 +186,7 @@ result is that there is no performance improvement.
 
 Perhaps the writer of `preorder2` wants to protect against the case
 where the root is `null`. But `preorder2` has an error. While
-`preorder2` insures that no recursive calls will be made on empty
+`preorder2` ensures that no recursive calls will be made on empty
 subtrees, it will fail if the original call from outside passes in a
 null pointer. This would occur if the original tree is empty. Since an
 empty tree is a legitimate input to the initial call on the function,

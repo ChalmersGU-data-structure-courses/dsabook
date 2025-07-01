@@ -16,7 +16,7 @@ always the chance that one of the programs was "better written" than
 the other, and therefore the relative qualities of the underlying
 algorithms are not truly represented by their implementations. This can
 easily occur when the programmer has a bias regarding the algorithms.
-Third, the choice of empirical test cases might unfairly favor one
+Third, the choice of empirical test cases might unfairly favour one
 algorithm. Fourth, you could find that even the better of the two
 algorithms does not fall within your resource budget. In that case you
 must begin the entire process again with yet another program

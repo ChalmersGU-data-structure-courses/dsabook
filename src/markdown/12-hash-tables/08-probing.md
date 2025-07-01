@@ -27,7 +27,7 @@ Now the problem is illustrated here:
 :::
 ::::::
 
-Again, the ideal behavior for a collision resolution mechanism is that
+Again, the ideal behaviour for a collision resolution mechanism is that
 each empty slot in the table will have equal probability of receiving
 the next record inserted (assuming that every slot in the table has
 equal probability of being hashed to initially). This tendency of linear

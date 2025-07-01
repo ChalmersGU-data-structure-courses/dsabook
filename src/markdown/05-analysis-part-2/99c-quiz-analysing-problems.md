@@ -304,14 +304,14 @@ some size, it has to be much more than $\log n$.
 :::::::::: question ::::::::::
 A decision tree is:
 
-- [x] A model for the behavior of an algorithm based on the decisions that it makes
+- [x] A model for the behaviour of an algorithm based on the decisions that it makes
 - [ ] A tree that helps you to decide which permutation sorts the input
 - [ ] A tree that searches for the lower bound for sorting
 - [ ] A search tree
 
 ::: hints
 - A decision tree is not a search tree.
-- A decision tree is a model for behavior, not an algorithm.
+- A decision tree is a model for behaviour, not an algorithm.
 :::
 ::::::::::::::::::::::::::::::
 

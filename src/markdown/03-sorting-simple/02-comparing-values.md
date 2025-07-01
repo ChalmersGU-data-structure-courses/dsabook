@@ -102,7 +102,7 @@ the record now using one field as the key, and later using another
 field? Or search sometimes on one key, and at other times on another?
 The problem is that the "keyness" of a given field is not an inherent
 property within the record, but rather depends on the context. So, you
-cannot always count on being able to use your favorite method name (or
+cannot always count on being able to use your favourite method name (or
 even the comparable interface) to extract the desired key value.
 
     interface Comparable:

@@ -62,7 +62,7 @@ the end. Here is implementation for the DFS-based algorithm.
                 topsortHelperDFS(graph, e.end, sortedVertices, visited)
             sortedVertices.push(v)  // postVisit
 
-If we use this algorithm starting at vertex J1 in @fig:GraphToposort and visit adjacent neighbors in alphabetic order, the vertices of the graph are pushed to the stack in the order J7, J5, J4, J6, J2, J3, J1.
+If we use this algorithm starting at vertex J1 in @fig:GraphToposort and visit adjacent neighbours in alphabetic order, the vertices of the graph are pushed to the stack in the order J7, J5, J4, J6, J2, J3, J1.
 If we now pop them one by one we get the topological sort J1, J3, J2, J6, J4, J5, J7.
 
 ::: dsvis
@@ -79,9 +79,9 @@ First visit all edges, counting the number of edges that lead to each
 vertex (i.e., count the number of prerequisites for each vertex). All
 vertices with no prerequisites are placed on the queue. We then begin
 processing the queue. When vertex $v$ is taken off of the queue, it is
-added to a list containing the topological order, and all neighbors of
+added to a list containing the topological order, and all neighbours of
 $v$ (that is, all vertices that have $v$ as a prerequisite) have their
-counts decremented by one. Place on the queue any neighbor whose count
+counts decremented by one. Place on the queue any neighbour whose count
 becomes zero. If the queue becomes empty without having added all
 vertices to the final list, then the graph contains a cycle (i.e., there
 is no possible ordering for the tasks that does not violate some

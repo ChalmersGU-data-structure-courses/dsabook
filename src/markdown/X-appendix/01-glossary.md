@@ -31,7 +31,7 @@ of a [data type]{.term} within some
 language, independent of an implementation. The
 [interface]{.term} for the ADT is defined in
 terms of a [type]{.term} and a set of
-operations on that type. The behavior of each operation is
+operations on that type. The behaviour of each operation is
 determined by its inputs and outputs. An ADT does not specify *how*
 the data type is implemented. These implementation details are
 hidden from the user of the ADT and protected from outside access, a
@@ -87,7 +87,7 @@ An implementation for a [graph]{.term} that
 uses an (array-based) [list]{.term} to
 represent the [vertices](#vertex){.term} of
 the graph, and each vertex is in turn represented by a (linked) list
-of the vertices that are [neighbors](#neighbor){.term}.
+of the vertices that are [neighbours](#neighbour){.term}.
 
 ### adjacency matrix
 
@@ -327,7 +327,7 @@ the actual data records.
 A variant on the [B+ tree]{.term}. The B* tree is identical to the B+ tree,
 except for the rules used to split and merge nodes. Instead of splitting a
 node in half when it overflows, the B* tree gives some
-records to its neighboring sibling, if possible. If the sibling is
+records to its neighbouring sibling, if possible. If the sibling is
 also full, then these two nodes split into three. Similarly, when a
 node underflows, it is combined with its two siblings, and the total
 reduced to two nodes. Thus, the nodes are always at least two thirds
@@ -437,7 +437,7 @@ service the memory request. The rationale is that this will be the
 method that best preserves large blocks needed for unusually large
 requests. The disadvantage is that it tends to cause
 [external fragmentation]{.term} in the form
-of small, unuseable memory blocks.
+of small, unusable memory blocks.
 
 ### big-$O$ notation
 
@@ -624,14 +624,14 @@ list implementation becomes more space efficient.
 
 A [graph]{.term}
 [traversal]{.term} algorithm. As the name
-implies, all immediate [neighbors](#neighbor){.term}
+implies, all immediate [neighbours](#neighbour){.term}
 for a [node]{.term} are
 [visited](#visit){.term} before any
 more-distant nodes are visited. BFS is driven by a
 [queue]{.term}. A start vertex is placed on
 the queue. Then, until the queue is empty, a node is taken off the
 queue, visited, and and then any [unvisited]{.term}
-neighbors are placed onto the queue.
+neighbours are placed onto the queue.
 
 ### bubble sort
 
@@ -1029,10 +1029,10 @@ complexity is the default, so we omit the word "time".
 Given a class hierarchy representing a set of objects, and a
 container for a collection of objects, the composite
 [design pattern]{.term} addresses the
-relationship between the object hierarchy and a bunch of behaviors
+relationship between the object hierarchy and a bunch of behaviours
 on the objects. In the composite design, each object is required to
-implement the collection of behaviors. This is in contrast to the
-procedural approach where a behavior (such as a tree
+implement the collection of behaviours. This is in contrast to the
+procedural approach where a behaviour (such as a tree
 [traversal]{.term}) is implemented as a
 method on the object collection (such as a [tree]{.term}).
 Procedural tree traversal requires that the tree have
@@ -1041,7 +1041,7 @@ object types ([internal](#internal-node){.term}
 or [leaf nodes](#leaf-node){.term})
 that the tree might contain. The composite approach
 would have the tree call the "traversal" method on its root node,
-which then knows how to perform the "traversal" behavior. This
+which then knows how to perform the "traversal" behaviour. This
 might in turn require invoking the traversal method of other objects
 (in this case, the children of the root).
 
@@ -1267,10 +1267,10 @@ Free the memory allocated to an unused object.
 
 ### decision tree
 
-A theoretical construct for modeling the behavior of algorithms.
+A theoretical construct for modeling the behaviour of algorithms.
 Each point at which the algorithm makes a decision (such as an if
 statement) is modeled by a branch in the tree that represents the
-algorithms behavior. Decision trees can be used in
+algorithms behaviour. Decision trees can be used in
 [lower bounds proofs](#lower-bounds-proof){.term},
 such as the proof that sorting requires
 $\Omega(n \log n)$ comparisons in the [worst case]{.term}.
@@ -1287,7 +1287,7 @@ Copying the actual content of a [pointee]{.term}.
 
 In [graph]{.term} terminology, the degree
 for a [vertex]{.term} is its number of
-[neighbors](#neighbor){.term}. In a
+[neighbours](#neighbour){.term}. In a
 [directed graph]{.term}, the
 [in degree]{.term} is the number of edges
 directed into the vertex, and the [out degree]{.term}
@@ -1326,7 +1326,7 @@ A [graph]{.term}
 is [visited](#visit){.term} during the
 traversal, DFS will [recursively](#recursion){.term}
 visit all of $v$ 's [unvisited]{.term}
-[neighbors](#neighbor){.term}.
+[neighbours](#neighbour){.term}.
 
 ### depth-first search tree
 
@@ -1396,7 +1396,7 @@ one symbol.
 ### deterministic algorithm
 
 An algorithm that does not involve any element of randomness, and so
-its behavior on a given input will always be the same. This is in
+its behaviour on a given input will always be the same. This is in
 contrast to a [randomised algorithm]{.term}.
 
 ### deterministic finite automata
@@ -1406,7 +1406,7 @@ contrast to a [randomised algorithm]{.term}.
 An [automata]{.term} or abstract machine that can
 process an input string (shown on a tape) from left to right. There is a
 control unit (with [states](#state){.term}),
-behavior defined for what to do when in a given state and with a given
+behaviour defined for what to do when in a given state and with a given
 symbol on the current square of the tape. All that we can "do" is
 change state before going to the next letter to the right.
 
@@ -1671,7 +1671,7 @@ Abbreviation for *data structures and algorithms*.
 Something that is changes (in contrast to [static]{.term}).
 In computer programming, dynamic normally refers to
 something that happens at run time. For example, run-time analysis
-is analysis of the program's behavior, as opposed to its (static)
+is analysis of the program's behaviour, as opposed to its (static)
 text or structure dynamic binding or dynamic memory allocation
 occurs at run time.
 
@@ -2274,7 +2274,7 @@ The halting problem is to answer this question:   Given a computer
 program $P$ and an input $I$, will program $P$ halt when executed on
 input $I$? This problem has been proved impossible to solve in the
 general case. Thus, it is an example of an
-[unsolveable problem]{.term}.
+[unsolvable problem]{.term}.
 
 ### handle
 
@@ -2953,7 +2953,7 @@ the equation
 $$r(i) = (r(i-1)\times b) \bmod t$$
 
 where $b$ and $t$ are constants. These constants must be well chosen
-for the resulting series of numbers to have desireable properties as
+for the resulting series of numbers to have desirable properties as
 a random number sequence.
 
 ### linear growth rate
@@ -3495,10 +3495,10 @@ for a problem, where the proof makes an inappropriate
 assumption that any algorithm must operate in some manner (typically
 in the way that some known algorithm behaves).
 
-### neighbor
+### neighbour
 
 In a [graph]{.term}, a
-[node]{.term} $w$ is said to be a neighbor
+[node]{.term} $w$ is said to be a neighbour
 of [node]{.term} $v$ if there is an
 [edge]{.term} from $v$ to $w$.
 
@@ -3908,7 +3908,7 @@ both of the children does not exist, then a null pointer is stored.
 An
 [object-oriented programming](#object-oriented-programming-paradigm){.term}
 term meaning *one name, many forms*. It describes the
-ability of software to change its behavior dynamically. Two basic
+ability of software to change its behaviour dynamically. Two basic
 forms exist:   [run-time polymorphism]{.term}
 and [compile-time polymorphism]{.term}.
 
@@ -4353,7 +4353,7 @@ of being selected.
 ### randomised algorithm
 
 An algorithm that involves some form of randomness to control its
-behavior. The ultimate goal of a randomised algorithm is to improve
+behaviour. The ultimate goal of a randomised algorithm is to improve
 performance over a deterministic algorithm to solve the same
 problem. There are a number of variations on this theme. A "Las
 Vegas algorithm" returns a correct result, but the amount of time
@@ -4987,7 +4987,7 @@ creating new software.
 
 The possible solutions to a problem. This typically refers to an
 [optimisation problem]{.term}, where some
-solutions are more desireable than others.
+solutions are more desirable than others.
 
 ### solution tree
 
@@ -5176,7 +5176,7 @@ Something that is not changing (in contrast to
 [dynamic]{.term}). In computer programming,
 static normally refers to something that happens at compile time.
 For example, static analysis is analysis of the program's text or
-structure, as opposed to its run-time behavior. Static binding or
+structure, as opposed to its run-time behaviour. Static binding or
 static memory allocation occurs at compile time.
 
 ### static scoping
@@ -5534,7 +5534,7 @@ perform the necessary work to compute the function.
 
 ### Turing-decidable
 
-A language is Turing-decideable if there exists a Turing machine
+A language is Turing-decidable if there exists a Turing machine
 that can clearly indicate for every string whether that string is in
 the language or not. Every Turing-decidable language is also
 Turing-acceptable, because the Turing machine that can decide if the
@@ -5552,10 +5552,10 @@ computation that can be performed by any known computer.
 
 In set notation, another term for a [sequence]{.term}.
 
-### two-coloring
+### two-colouring
 
-An assignment from two colors to regions in an image such that no
-two regions sharing a side have the same color.
+An assignment from two colours to regions in an image such that no
+two regions sharing a side have the same colour.
 
 ### type
 
@@ -5631,7 +5631,7 @@ $A \rightarrow B$, where $A, B \in$ the set of
 the grammar. Any grammar with unit productions can be rewritten to
 remove them.
 
-### unsolveable problem
+### unsolvable problem
 
 A problem that can proved impossible to solve on a computer. The
 classic example is the [halting problem]{.term}.
@@ -5814,7 +5814,7 @@ memory from a [memory pool]{.term}. Worst
 fit will always allocate from the largest free block. The rationale
 is that this will be the method least likely to cause
 [external fragmentation]{.term} in the form
-of small, unuseable memory blocks. The disadvantage is that it tends
+of small, unusable memory blocks. The disadvantage is that it tends
 to eliminate the availability of large freeblocks needed for
 unusually large requests.
 

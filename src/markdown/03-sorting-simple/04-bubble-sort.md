@@ -12,7 +12,7 @@ It's not even particularly intuitive -- nobody is going to come naturally to bub
 
 Bubble sort consists of a simple double `for` loop.
 The inner `for` loop moves through the array from left to right, comparing adjacent elements.
-If an element is greater than its right neighbor, then the two are swapped.
+If an element is greater than its right neighbour, then the two are swapped.
 Once the largest element is encountered, this process will
 cause it to "bubble" up to the right of the array (which is where
 Bubble sort gets its name). The second pass through the array repeats

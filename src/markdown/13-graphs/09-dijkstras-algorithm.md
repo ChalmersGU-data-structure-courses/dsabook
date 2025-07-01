@@ -26,7 +26,7 @@ Computer networks provide an application for the single-source
 shortest-paths problem. The goal is to find the cheapest way for one
 computer to broadcast a message to all other computers on the network.
 The network can be modeled by a graph with edge weights indicating time
-or cost to send a message to a neighboring computer.
+or cost to send a message to a neighbouring computer.
 -->
 
 As mentioned in the previous section,
@@ -66,7 +66,7 @@ by maintaining a distance estimate $\mathbf{D}(X)$ for all vertices $X$
 in $\mathbf{V}$. The elements of $\mathbf{D}$ are initialised to the
 value $\infty$ (positive infinity). Vertices are processed in order of distance from $S$.
 Whenever a vertex $v$ is processed, $\mathbf{D}(X)$ is updated for every
-neighbor $X$ of $V$.
+neighbour $X$ of $V$.
 
 Dijkstra's algorithm is quite similar to [Prim's algorithm]{.term} for finding
 the minimum spanning tree (@sec:prims-algorithm). The primary difference is that we are

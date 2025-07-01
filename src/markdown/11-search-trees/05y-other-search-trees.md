@@ -27,7 +27,7 @@ are stored in the right branch.
 Recall that the Huffman coding tree stored in the left branch all
 letters whose codes start with 0, and in the right branch all letters
 whose codes start with 1. We can use this same concept to store records
-in a search tree that is slightly different from the behavior of a BST.
+in a search tree that is slightly different from the behaviour of a BST.
 We can view all keys stored as appearing on a numberline. The BST splits
 the numberline based on the positions of key values as it receives them.
 In contrast, we could split key values based on their binary

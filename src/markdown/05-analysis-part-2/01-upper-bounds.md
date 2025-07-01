@@ -7,7 +7,7 @@
 
 Several terms are used to describe the running-time equation for an
 algorithm. These terms -- and their associated symbols -- indicate
-precisely what aspect of the algorithm's behavior is being described.
+precisely what aspect of the algorithm's behaviour is being described.
 One is the [upper bound]{.term} for the growth
 of the algorithm's running time. It indicates the upper or highest
 growth rate that the algorithm can have.
@@ -88,7 +88,7 @@ If someone asked you out of the blue "Who is the best?" your natural
 reaction should be to reply "Best at what?" In the same way, if you
 are asked "What is the growth rate of this algorithm", you would need
 to ask "When? Best case? Average case? Or worst case?" Some algorithms
-have the same behavior no matter which input instance of a given size
+have the same behaviour no matter which input instance of a given size
 that they receive. An example is finding the maximum in an array of
 integers. But for many algorithms, it makes a big difference which
 particular input of a given size is involved, such as when searching an

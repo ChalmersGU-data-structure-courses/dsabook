@@ -60,7 +60,7 @@ in $t$ seconds?
 - [ ] $64n$
 
 ::: hints
-- This problem has an exponential growth rate. The behavior
+- This problem has an exponential growth rate. The behaviour
 of an exponential growth rate is different from a polynomial growth rate.
 - With a polynomial growth rate, a faster computer leads to a
 new problem size that is bigger by some factor multiplied by

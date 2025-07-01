@@ -134,7 +134,7 @@ Here is a warmup practice exercise for Heapsort.
 #### Heapsort proficiency practice
 
 Now test yourself to see how well you understand Heapsort. Can you
-reproduce its behavior?
+reproduce its behaviour?
 
 <avembed id="heapsortPRO" src="Sorting/heapsortPRO.html" type="pe" name="Heapsort Proficiency Exercise"/>
 :::

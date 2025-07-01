@@ -49,12 +49,12 @@ number of edges it is incident with. For example, vertex $e$ in @fig:GraphNeighb
 degree of three.
 
 In a directed graph, the [out degree]{.term} for
-a vertex is the number of neighbors adjacent from it (or the number of
-edges going out from it), while the [in degree]{.term} is the number of neighbors adjacent to it (or the number of
+a vertex is the number of neighbours adjacent from it (or the number of
+edges going out from it), while the [in degree]{.term} is the number of neighbours adjacent to it (or the number of
 edges coming in to it). In @fig:GraphTypes (c), the in degree of vertex 1 is two,
 and its out degree is one.
 
-<!-- <inlineav id="GneighborCON" src="Graph/GneighborCON.js" name="Graph/GneighborCON" links="Graph/GraphDefCON.css" static/> -->
+<!-- <inlineav id="GneighbourCON" src="Graph/GneighbourCON.js" name="Graph/GneighbourCON" links="Graph/GraphDefCON.css" static/> -->
 
 ![Neighbors and incidence](images/GraphNeighbors.png){width=80% #fig:GraphNeighbors}
 

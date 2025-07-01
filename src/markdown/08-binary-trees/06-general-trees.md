@@ -78,8 +78,8 @@ the index for the desired child. That combined with a function that
 returns the number of children for a given node would support the
 ability to access any node or process all children of a node.
 Unfortunately, this view of access tends to bias the choice for node
-implementations in favor of an array-based approach, because these
-functions favor random access to a list of children.
+implementations in favour of an array-based approach, because these
+functions favour random access to a list of children.
 
 An alternative is to provide access to a **List** of the children pointers.
 This list can be an array-based list or a linked list or even a dynamic

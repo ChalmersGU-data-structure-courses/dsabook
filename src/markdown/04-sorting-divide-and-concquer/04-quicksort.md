@@ -221,7 +221,7 @@ This visualisation explains the best-case running time of Quicksort
 <inlineav id="QuickSortBestCaseCON" src="Sorting/QuickSortBestCaseCON.js" name="Quicksort Best Case Analysis Slideshow" links="Sorting/QuickSortBestCaseCON.css"/>
 :::
 
-Quicksort's average-case behavior falls somewhere between the extremes
+Quicksort's average-case behaviour falls somewhere between the extremes
 of worst and best case. Average-case analysis considers the cost for all
 possible arrangements of input, summing the costs and dividing by the
 number of cases. We make one reasonable simplifying assumption: At each

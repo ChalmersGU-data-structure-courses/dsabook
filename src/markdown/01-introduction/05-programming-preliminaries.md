@@ -117,7 +117,7 @@ Here is an example of a nested `for` loop:
 
 *Important note*: the range `i..j` is *inclusive*, meaning that the endpoint `j` is *included* in the sequence.
 This is different to how a language such as Python does it, where `range(i,j)` does not include `j`.
-Sometimes this can be a matter of life and death (of your program), so be sure to translate the algorithms in a correct way to your favorite programming language!
+Sometimes this can be a matter of life and death (of your program), so be sure to translate the algorithms in a correct way to your favourite programming language!
 
 Some modern programming languages (such as Python and Java) have syntactic sugar for *iterators*.
 Although this is very convenient in many cases, we will not make use of iterators in this book, just to keep things as simple as possible.

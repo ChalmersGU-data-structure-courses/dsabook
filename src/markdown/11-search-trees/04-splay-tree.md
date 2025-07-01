@@ -11,7 +11,7 @@ Like the AVL tree, the splay tree is not actually a distinct data
 structure, but rather reimplements the BST insert, delete, and search
 methods to improve the performance of a BST. The goal of these revised
 methods is to provide guarantees on the time required by a series of
-operations, thereby avoiding the worst-case linear time behavior of
+operations, thereby avoiding the worst-case linear time behaviour of
 standard BST operations. No single operation in the splay tree is
 guaranteed to be efficient. Instead, the access rules of the splay tree
 guarantee that a series of $m$ operations will take $O(m \log n)$ time
