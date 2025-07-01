@@ -91,6 +91,13 @@ In the example, we let each *push* save an extra operation "for later", which is
 In a way we can say that each *push* takes 2 time units instead of one, and this extra time unit is saved so that *multipop* can make use of it.
 These storage of "for later" operations is called the *potential*.
 
+
+:::::: latex
+\booklink{Read the rest online}{7.2}{sec:amortised-analysis}
+::::::
+
+:::::: online
+
 ::: example
 #### Example: Incrementing a binary counter
 
@@ -190,3 +197,5 @@ same for both methods, the total number of comparisons required by
 move-to-front is less than twice the number of comparisons required by
 the optimal static ordering.
 :::
+
+::::::

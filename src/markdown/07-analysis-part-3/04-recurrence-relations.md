@@ -107,6 +107,13 @@ typical divide-and-conquer algorithms such as Mergesort yield
 recurrences of a form that fits a pattern for which we have a ready
 solution.
 
+
+:::::: latex
+\booklink{Read the rest online}{7.4}{sec:recur-relations}
+::::::
+
+:::::: online
+
 ### Estimating upper and lower bounds
 
 The first approach to solving recurrences is to guess the answer and
@@ -586,3 +593,5 @@ for $\mathcal{H}_{n+1}$, the Harmonic Series.
 This is a standard summation,
 $\mathcal{H}_{n+1} \in O(\log n)$, so the final solution is
 $O(n \log n)$.
+
+::::::

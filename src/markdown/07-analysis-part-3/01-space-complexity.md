@@ -48,6 +48,12 @@ kept to a minimum while allowing maximum access. The need to maintain a
 balance between these opposing goals is what makes the study of data
 structures so interesting.
 
+:::::: latex
+\booklink{Read the rest online}{7.1}{sec:space-complexity-of-data-structures}
+::::::
+
+:::::: online
+
 ::: example
 #### Example: Integers
 
@@ -101,6 +107,7 @@ With this new representation we could reduce the space complexity from quadratic
 
 This last example discussed two possible implementations of *graphs*, and we will discuss this further in [chapter @sec:graphs].
 
+::::::
 
 ### Space complexity of algorithms
 
@@ -131,6 +138,13 @@ To make this work we have to change the implementation somewhat, and this can be
 The most common solution is called bottom-up mergesort, and it has an additional space usage of $O(n)$.
 :::
 
+:::::: latex
+So, mergesort is not an in-place algorithm because it uses at least linear additional space.
+
+\booklink{Read the rest online}{7.1}{sec:space-complexity-of-algorithms}
+::::::
+
+:::::: online
 So, mergesort is not an in-place algorithm because it uses at least linear additional space.
 But what about quicksort, didn't we say that it is in-place?
 
@@ -154,8 +168,9 @@ Therefore the additional memory usage for quicksort will be at least logarithmic
 The quicksort example shows that perhaps we were too strict when we defined what an *in-place* algorithm is.
 A more realistic definition is to say that an algorithm is in-place if it never uses more than $O(\log n)$ additional space.
 
+::::::
 
-### Space/time tradeoff
+### Space/time tradeoff {#space-time-tradeoff}
 
 One important aspect of algorithm design is referred to as the
 [space/time tradeoff]{.term} principle. The
@@ -168,6 +183,13 @@ less space but runs slower. Conversely, many programs can be modified to
 pre-store results or reorganize information to allow faster running time
 at the expense of greater storage requirements. Typically, such changes
 in time and space are both by a constant factor.
+
+
+:::::: latex
+\booklink{Read the rest online}{7.1}{sec:space-time-tradeoff}
+::::::
+
+:::::: online
 
 A classic example of a space/time tradeoff is the
 [lookup table]{.term}. A lookup table pre-stores
@@ -245,3 +267,5 @@ is going to be less than the disk-reading time saved by reducing the
 storage requirements. Naturally this principle does not hold true in all
 cases, but it is good to keep in mind when designing programs that
 process information stored on disk.
+
+::::::
