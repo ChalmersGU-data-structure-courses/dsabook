@@ -73,6 +73,15 @@ understanding of recursion and so indicate poor programming. If you are
 inclined toward using a parent pointer, consider if there is a more
 efficient implementation possible.
 
+#### Binary trees
+
+Our final datatype for binary trees is in fact very similar to the linked lists that we introduced in @sec:stacks-implemented-as-linked-lists -- we need a reference to the root node and the total size of the tree:
+
+    datatype BinaryTree:
+        root: BinaryNode = null
+        size: Int = 0
+
+
 ### Differentiating between internal nodes and leaves
 
 An important decision in the design of a pointer-based node
