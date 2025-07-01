@@ -87,7 +87,6 @@ operations in most programming languages. Summing the contents of an
 array containing $n$ integers is not, because the cost depends on the
 value of $n$ (i.e., the size of the input).
 
-::::: {#SeqMax}
 :::: example
 #### Example: Largest value in an array
 
@@ -137,7 +136,6 @@ $$
 This equation describes the growth rate for the running time of the
 largest-value sequential search algorithm.
 ::::
-:::::
 
 :::: latex
 More examples can be found in the online version of the book.

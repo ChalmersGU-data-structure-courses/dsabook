@@ -635,13 +635,12 @@ This section briefly introduces three commonly used proof techniques:
 
 3) proof by mathematical induction.
 
-<!-- .. index:: ! proof; direct -->
 
 In general, a [direct proof]{.term} is just a "logical explanation".
 A direct proof is sometimes referred to as an argument by deduction.
 This is simply an argument in terms of logic.
 
- **Direct Proof**
+#### Direct Proof
 
 Many direct proofs are written in English with words such as "if ... then".
 In this case logic notation such as $P \Rightarrow Q$ can often help express the proof.
@@ -652,7 +651,6 @@ In some domains, proofs are essentially a series of state changes from a start s
 Formal predicate logic can be viewed in this way, with the various "rules of logic" being used to make the changes from one formula or combining a couple of formulas to make a new formula on the route to the destination.
 Symbolic manipulations to solve integration problems in introductory calculus classes are similar in spirit, as are high school geometry proofs.
 
-:::: {#SumDirect}
 ::: example
 #### Example: Sum of first $n$ integers
 Here is a direct proof that $\sum_{i=1}^n i = (n+1)n/2$.
@@ -662,10 +660,8 @@ Likewise for the third term and third-from-the-end term.
 We can go on and pair up terms like this, such that there are $n/2$ pairs that each sum to $n+1$, for a total sum of $(n+1)n/2$.
 You can check for yourself that this is true even if $n$ is odd (and so the middle value of the series has no partner).
 :::
-::::
-<!-- .. index:: ! proof; by contradiction -->
 
-**Proof by Contradiction**
+#### Proof by Contradiction
 
 The simplest way to *disprove* a theorem or statement is to find a counter-example to the theorem.
 Unfortunately, no number of examples supporting a theorem is sufficient to prove that the theorem is correct.
@@ -700,9 +696,7 @@ A related proof technique is [proving the contrapositive]{.term}.
 We can prove that $P \Rightarrow Q$ by proving $(\mathrm{not}\ Q) \Rightarrow (\mathrm{not}\ P)$.
 This technique works because the [truth table]{.term} for the two logical statements are the same.
 
-<!-- .. index:: ! proof; by induction -->
-
-**Proof by Mathematical Induction**
+#### Proof by Mathematical Induction
 
 Mathematical induction can be used to prove a wide variety of theorems.
 Induction also provides a useful way to think about algorithm design, because it encourages you to think about solving a problem by building up from simple subproblems.
@@ -753,7 +747,6 @@ The induction hypothesis does not come out of thin air.
 It is true if and only if the theorem itself is true, and therefore is reliable within the proof context.
 Using the induction hypothesis to do work is exactly the same as using a recursive call to do work.
 
-:::: {#SumIEx}
 ::: example
 #### Example: Sum of first $n$ integers
 Here is a sample proof by mathematical induction.
@@ -798,7 +791,6 @@ The proof is by mathematical induction.
     \mathbf{S}(n) = \sum_{i=1}^n i = n(n+1)/2.
     $$
 :::
-::::
 
 Note carefully what took place in this example.
 First we cast $\mathbf{S}(n)$ in terms of a smaller occurrence of the problem: $\mathbf{S}(n) = \mathbf{S}(n-1) + n$.
@@ -813,7 +805,6 @@ other, but certainly the writer of the direct proof version had
 to discover an insight unique to that problem that might
 not be helpful or relevant when proving other summations.
 
-:::: {#nOdds}
 ::: example
 #### Example: Sum of odd numbers
 Here is another simple proof by induction that illustrates
@@ -858,10 +849,8 @@ $$
 \sum_{i=1}^n (2i - 1) = n^2.
 $$
 :::
-::::
 -->
 
-:::: {#FactRecurProof}
 ::: example
 #### Example: Recurrence relation
 This example shows how we can use induction to prove that a proposed
@@ -893,10 +882,8 @@ $$
 for $n > 1$.
 Thus, we have proved the theorem correct by mathematical induction.
 :::
-::::
 
 <!--
-:::: {#ThmStamps}
 ::: example
 #### Example: Stamps
 This example uses induction without involving summations or other
@@ -928,7 +915,6 @@ In either case, we now have a value of n made up of
 2 cent and 5 cent stamps.
 Thus, by mathematical induction, the theorem is correct.
 :::
-::::
 
 ::: example
 #### Example: Divisible by prime
@@ -972,7 +958,6 @@ induction hypothesis.
 -->
 
 <!--
-:::: {#ThmRegion}
 ::: example
 #### Example: Two-coloring
 Define a [two-coloring]{.term} for a
@@ -996,7 +981,6 @@ can be two-colored.
     :output: show
 
 :::
-::::
 
 Compare the proof in Example [Example](#ThmRegion) with that in
 Example [Example](#ThmStamps).

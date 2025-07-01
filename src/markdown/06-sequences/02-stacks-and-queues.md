@@ -164,7 +164,6 @@ overhead imposed by the recursive function calls. In some cases, such as
 the factorial function above, recursion can easily be replaced by
 iteration.
 
-::::: {#StackFact}
 :::: example
 #### Example: Factorial function
 
@@ -185,7 +184,6 @@ Here, we simply push successively smaller values of $n$ onto the stack
 until the base case is reached, then repeatedly pop off the stored
 values and multiply them into the result.
 ::::
-:::::
 
 An iterative form of the factorial function is both simpler and faster
 than the version shown in the example. But it is not always possible to

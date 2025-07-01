@@ -471,7 +471,6 @@ Case (3)
 We can summarize the above derivation as the following theorem,
 sometimes referred to as the [master theorem]{.term}.
 
-:::: {#RecurThm}
 ::: topic
 #### Theorem: The master theorem
 
@@ -489,7 +488,6 @@ T(n) \in
 $$
 
 :::
-::::
 
 This theorem may be applied whenever appropriate, rather than
 re-deriving the solution for the recurrence.

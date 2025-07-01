@@ -36,7 +36,6 @@ Lower bound
 : $f\in\Omega(g)$ **iff** there exist positive numbers $k$ and $n_0$ such that $f(n)\geq k\cdot g(n)$ for all $n>n_0$
 
 
-:::: {#AAnalEx}
 ::: example
 #### Example: Quadratic algorithm
 
@@ -50,7 +49,6 @@ for all $n > 1$. So, $T(n) \geq c n^2$ for $c = c_1$ and
 $n_0 = 1$. Therefore, $T(n)$ is in $\Omega(n^2)$ by the
 definition.
 :::
-::::
 
 It is also true that the equation of the example above is in $\Omega(n)$.
 However, as with big-$O$ notation, we wish to get the "tightest" (for $\Omega$ notation, the largest) bound possible.
