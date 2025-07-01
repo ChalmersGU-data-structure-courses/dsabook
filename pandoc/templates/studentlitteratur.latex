@@ -29,8 +29,7 @@ $endif$
 \usepackage{ccicons}
 
 \makeatletter
-
-%% Make font and line spacing slighly smaller:
+%% Make font and line spacing slightly smaller:
 
 \renewcommand{\normalsize}{%
    \@setfontsize\normalsize{10}{13}%{10.4}{14}%
