@@ -13,176 +13,139 @@ A [binary search tree]{.term}
 ([BST]{.term}) is a
 [binary tree]{.term} that conforms to the
 following condition, known as the
-[binary search tree property]{.term}. All
-[nodes](#node){.term} stored in the left subtree
-of a node whose [key]{.term} value is $K$ have
-key values less than or equal to $K$. All nodes stored in the right
-subtree of a node whose key value is $K$ have key values greater than $K$.
-[The figure below](#BSTShape) shows two
+[binary search tree property]{.term}:
+
+> All [nodes]{.term} stored in the left subtree of a node whose [key]{.term} value is $K$ have key values less than or equal to $K$. All nodes stored in the right subtree of a node whose key value is $K$ have key values greater than $K$.
+
+@Fig:BSTShape below shows two
 BSTs for a collection of values. One consequence of the binary search
 tree property is that if the BST nodes are printed using an
 [inorder traversal]{.term}, then the resulting enumeration will be in sorted order from
 lowest to highest.
 
-:::: figure
-#### Figure: Example BSTs {- #BSTShape}
+<div id="fig:BSTShape">
 
+::: latex
+\phantom{.}\hfill
+\subbottom[]{
+    \begin{forest}
+    for tree={circle,draw,fit=rectangle},
+    [37 [24 [7] [32]] [42 [NULL,rectangle,phantom] [120]]]
+    \end{forest}
+}\hfill\hfill\subbottom[]{
+    \begin{forest}
+    for tree={circle,draw,fit=rectangle},
+    [7 [NULL,rectangle,phantom] [37 [32 [24] [NULL,rectangle,phantom]] [120 [42] [NULL,rectangle,phantom]]]]
+    \end{forest}
+}\hfill\phantom{.}
+:::
+
+::: online
 <inlineav id="BSTShapeCON" src="Binary/BSTShapeCON.js" name="Binary/BSTShapeCON" links="Binary/BSTShapeCON.css" static/>
+:::
 
-Two Binary Search Trees for a collection of values. Tree (a) results if
-values are inserted in the order 37, 24, 42, 7, 2, 40, 42, 32, 120. Tree
-(b) results if the same values are inserted in the order 120, 42, 42, 7,
-2, 32, 37, 24, 40.
-::::
+Two Binary Search Trees for a collection of values.
+Tree (a) results if values are inserted in the order 37, 24, 42, 120, 32, 7.
+Tree (b) results if the same values are inserted in the order 7, 37, 42, 32, 120, 24.
+</div>
 
-BST nodes are very similar to linked list nodes, but instead of just one child they have up to two children.
+The only thing that differentiates a BST from a normal binary tree is the BST property.
+This property is an *invariant*, as as explained in @sec:invariants-preconditions-and-postconditions,
+and it is a condition that the BST *always* must satisfy.
 
-    class BSTNode of K and V:
-        key: K           // the key that are used for looking up values
+Invariants are not stored in the datatype, so the actual declaration for a BST is exactly the same as a normal binary tree:
+
+    datatype BST:
+        root: BinaryNode = null
+        size: Int = 0
+
+The BST property is therefore not explicit in the datatype declaration, but instead it is something that all operations must satisfy.
+Whenever we implement a new operation, we have to make sure that we never break the property.
+
+<!--
+BST nodes are very similar to linked list nodes, but instead of just one child they two.
+
+    class BSTNode of T:
+        elem: T          // the element stored in the node
         value: V         // the value associated with the key
         left: BSTNode    // the left subtree, initially null
         right: BSTNode   // the right subtree, initially null
-
 
 Here is a datatype declaration for the BST Map:
 
     datatype BSTMap of K to V implements Map:
         root: BSTNode = null
         size: Int = 0
+ -->
 
 <!--
 ### Invariants
  -->
 
 
-### Searching in a BST
+#### Searching in a BST
 
-::: TODO
-- both iterative and recursive versions
-:::
+Because of the BST property, we don't have to search the whole tree if we want to find an element.
+Instead, we can start at the root node and compare its value with the value we are searching for.
+If the value is smaller than the root, we know that we can disregard everything in the right subtree.
+(And conversely, if the value is larger, we can disregard the left subtree.)
 
-Iterative version:
+Now, assuming that the value was smaller than the root, we can go to the left child and compare again.
+If the value now is larger than the child, we can continue into the child's right subtree.
+We continue this until we have found the value in a node, or until we reach an empty child.
+If we reach an empty child we know that the value is not in the tree.
+Here is a possible implementation of a method that returns true if the element is in the tree:
 
-    datatype BSTMap implements Map:
+    datatype BST:
         ...
-        get(key):
+        contains(elem):
             node = root
             while node is not null:
-                if key < node.key:
+                if elem == node.elem:
+                    return true
+                else if elem < node.elem:
                     node = node.left
-                else if key > node.key:
+                else if elem > node.elem:
                     node = node.right
-                else: // now key == node.key
-                    return node.value
-            return null
+            return false
 
-Recursive version:
 
-The first operation that we will look at in detail will find the record
-that matches a given key. Notice that in the BST class, public member
-function `get` calls private member function `getHelper`. Method `get`
-takes the search key as an explicit parameter and its BST as an implicit
-parameter, and returns the record that matches the key. However, the
-find operation is most easily implemented as a recursive function whose
-parameters are the root of a subtree and the search key. Member
-`getHelper` has the desired form for this recursive subroutine and is
-implemented as follows.
+#### Inserting into a BST
 
-    datatype BSTMap implements Map:
+When we want to insert an element we first have to search for it, similar to what we did above.
+If it already exists we don't have to do anything, and if it isn't in the tree we create a new node and attach it to the right place.
+But how do we know where to add the new node?
+The variable `node` becomes null if the element isn't found, so we have nothing to attach the node to -- instead we want to attach the new node to the *previous* tree node that we looked at.
+The solution is to add another temporary variable, `parent`, which points to the parent of `node` -- i.e., its value in the previous iteration.
+
+Now, after we have completed the search, and the element wasn't found, we can simply create a new node and attach it as a child to `parent`.
+Depending on if the element is smaller or larger than the parent element, we make it a left or right child.
+Alternatively, if the tree is empty then we have to attach the new node directly to the root.
+
+    datatype BST:
         ...
-        get(key):
-            return getHelper(root, key)
-
-        getHelper(node, key):
-            if node is null:
-                return null
-            else if key < node.key:
-                return getHelper(node.left, key)
-            else if key > node.key:
-                return getHelper(node.right, key)
-            else: // key == node.key
-                return node.value
-
-
-::: dsvis
-TODO
-
-<inlineav id="BSTsearchCON" src="Binary/BSTsearchCON.js" name="BST Search Slideshow" links="Binary/BSTCON.css"/>
-:::
-
-::: dsvis
-TODO
-
-<avembed id="BSTsearchPRO" src="Binary/BSTsearchPRO.html" type="pe" name="BST Search Proficiency Exercise"/>
-:::
-
-### Inserting into a BST
-
-::: TODO
-- both iterative and recursive versions
-:::
-
-Iterative version:
-
-    datatype BSTMap implements Map:
-        ...
-        put(key, value):
+        add(elem):
+            // Search for the parent of the new node.
             parent = null
             node = root
             while node is not null:
-                if key < node.key:
-                    parent = node
+                parent = node
+                if elem == node.elem
+                    return  // The element is already in the BST, so we do nothing.
+                else if elem < node.elem:
                     node = node.left
-                else if key > node.key:
-                    parent = node
+                else if elem > node.elem:
                     node = node.right
-                else: // now key == node.key
-                    node.value = value
-                    return
-            // The key doesn't exist so we create a new node and attach it to the parent:
-            node = new BSTNode(key, value)
-            if key < parent.key:
+
+            // Create a new node and attach it to the parent.
+            node = new BinaryNode(elem)
+            if parent is null:
+                root = node  // The tree is empty, so we update the root.
+            else if elem < parent.elem:
                 parent.left = node
-            else: // key > parent.key
+            else if elem > parent.elem:
                 parent.right = node
             size = size + 1
-
-
-Recursive version:
-
-Now we look at how to insert a new node into the BST.
-
-    datatype BSTMap implements Map:
-        ...
-        put(key, value):
-            root = putHelper(root, key, value)
-
-        putHelper(node, key, value):
-            // Helper method for 'put', returns the updated node.
-            if node is null:
-                size = size + 1
-                return new BSTNode(key, value)
-            else if key < node.key:
-                node.left = putHelper(node.left, key, value)
-            else if key > node.key:
-                node.right = putHelper(node.right, key, value)
-            else: // key == node.key
-                node.value = value
-            return node
-
-
-::: dsvis
-TODO
-
-<inlineav id="BSTinsertCON" src="Binary/BSTinsertCON.js" name="BST Insert Slideshow" links="Binary/BSTCON.css"/>
-:::
-
-Note that, except for the last node in the path, `putHelp` will not
-actually change the child pointer for any of the nodes that are visited.
-In that sense, many of the assignments seem redundant. However, the cost
-of these additional assignments is worth paying to keep the insertion
-process simple. The alternative is to check if a given assignment is
-necessary, which is probably more expensive than the assignment!
 
 We have to decide what to do when the node that we want to insert has a
 key value equal to the key of some node already in the tree. If during
@@ -195,45 +158,137 @@ duplicate in the left subtree.
 The shape of a BST depends on the order in which elements are inserted.
 A new element is added to the BST as a new leaf node, potentially
 increasing the depth of the tree.
-[Figure #BSTShape](#BSTShape) illustrates two BSTs
+@Fig:BSTShape illustrates two BSTs
 for a collection of values. It is possible for the BST containing $n$
 nodes to be a chain of nodes with height $n$. This would happen if, for
 example, all elements were inserted in sorted order. In general, it is
 preferable for a BST to be as shallow as possible. This keeps the
 average cost of a BST operation low.
 
+
+### Recursive search and insert
+
+Bot searching and insertion can be implemented as recursive function too, and it is instructive to see how to to that.
+And since we showed the *set* operations `contains` and `add` above, we will show how to implement recursive versions of the *map* operations `get` and `put`.
+
+:::::: latex
+\booklink{Read the rest online}{11.1}{sec:recursive-search-and-insert}
+::::::
+
+:::::: online
+
+Note that this means that our binary tree nodes will have the instance variables *key* and *value*, instead of the single *elem* that we used earlier.
+
+#### Getting the value for a key
+First we will look at the `get` operation for finding the record that matches a given key.
+To accomplish this we need a recursive helper function which takes a node as argument, and we start by calling this function with the root:
+
+    datatype BSTMap implements Map:
+        ...
+        get(key):
+            return getHelper(root, key)
+
+The function `getHelper` performs the same iteration as we did earlier with `contains`, but implicitly as recursive calls.
+When the key is found it returns the value of the node, and if the key doesn't exist it returns null:
+
+        getHelper(node, key):
+            if node is null:
+                return null
+            else if key < node.key:
+                return getHelper(node.left, key)
+            else if key > node.key:
+                return getHelper(node.right, key)
+            else if key == node.key:
+                return node.value
+
+
 ::: dsvis
-TODO
+Here is an interactive explanation of searching in a BST.
+
+<inlineav id="BSTsearchCON" src="Binary/BSTsearchCON.js" name="BST Search Slideshow" links="Binary/BSTCON.css"/>
+:::
+
+::: dsvis
+Here is an exercise on the BST search algorithm.
+
+<avembed id="BSTsearchPRO" src="Binary/BSTsearchPRO.html" type="pe" name="BST Search Proficiency Exercise"/>
+:::
+
+#### Setting the value for a key
+
+Now we look at how to set the value of a key.
+Yet again we need a recursive helper function which we call with the root of the tree.
+This function returns a pointer to the updated tree, and we have to make sure to update the root to this updated tree.
+
+    datatype BSTMap implements Map:
+        ...
+        put(key, value):
+            root = putHelper(root, key, value)
+
+We do the same as for `getHelper` as for `putHelper` above, but we have to update the value of each child pointer in the path to be the new updated tree.
+
+        putHelper(node, key, value):
+            if node is null:
+                size = size + 1
+                return new BSTNode(key, value)
+            else if key < node.key:
+                node.left = putHelper(node.left, key, value)
+            else if key > node.key:
+                node.right = putHelper(node.right, key, value)
+            else if key == node.key:
+                node.value = value
+            return node
+
+
+::: dsvis
+Here is an interactive explanation of recursive insertion.
+
+<inlineav id="BSTinsertCON" src="Binary/BSTinsertCON.js" name="BST Insert Slideshow" links="Binary/BSTCON.css"/>
+:::
+
+Note that, except for the last node in the path, `putHelper` will not
+actually change the child pointer for any of the nodes that are visited.
+In that sense, many of the assignments seem redundant. However, the cost
+of these additional assignments is worth paying to keep the insertion
+process simple. The alternative is to check if a given assignment is
+necessary, which is probably more expensive than the assignment!
+
+::: dsvis
+Here is an exercise on BST insertion.
 
 <avembed id="BSTinsertPRO" src="Binary/BSTinsertPRO.html" type="pe" name="BST Insert Proficiency Exercise"/>
 :::
 
-### Removing from a BST
+::::::
 
-::: TODO
-- both iterative and recursive versions
-:::
+### Removing from a BST
 
 Removing a node from a BST is a bit trickier than inserting a node, but
 it is not complicated if all of the possible cases are considered
 individually. Before tackling the general node removal process, we need
 a useful companion method, `largestNode`, which returns a pointer to the
-node containing the maximum value in the subtree.
+node containing the maximum value in a subtree.
 
-    datatype BSTMap implements Map:
+    function largestNode(node):
+        while node.right is not null:
+            node = node.right
+        return node
+
+This time we will show a *recursive* implementation of `remove`.
+For this we need a recursive helper function which we initially call with the root of the tree.
+
+    datatype BSTMap:
         ...
-        largestNode(node):
-            while node.right is not null:
-                node = node.right
-            return node
+        remove(key):
+            root = removeHelper(root, key)
 
 Now we are ready for the `removeHelper` method. Removing a node with
 given key value $R$ from the BST requires that we first find $R$ and
 then remove it from the tree. So, the first part of the remove operation
 is a search to find $R$. Once $R$ is found, there are several
 possibilities. If $R$ has no children, then $R$'s parent has its
-pointer set to NULL. If $R$ has one child, then $R$'s parent has its
-pointer set to $R$'s child (similar to `deleteMax`). The problem comes
+pointer set to **null**. If $R$ has one child, then $R$'s parent has its
+pointer set to $R$'s child. The problem comes
 if $R$ has two children. One simple approach, though expensive, is to
 set $R$'s parent to point to one of $R$'s subtrees, and then reinsert
 the remaining subtree's nodes one at a time. A better alternative is to
@@ -248,11 +303,13 @@ value less than (or equal to) the one being removed. If either of these
 values replace the one being removed, then the BST property is
 maintained.
 
+:::::: online
 ::: dsvis
-TODO
+Here is an interactive explanation of BST deletion.
 
 <inlineav id="BSTremoveCON" src="Binary/BSTremoveCON.js" name="BST remove Slideshow" links="Binary/BSTCON.css"/>
 :::
+::::::
 
 When duplicate node values do not appear in the tree, it makes no
 difference whether the replacement is the greatest value from the left
@@ -273,14 +330,9 @@ with the least value from its right subtree.
 :::
 
 The code for removal is shown here.
-
-    datatype BSTMap:
-        ...
-        remove(key):
-            root = removeHelper(root, key)
+Note that the helper function returns the updated subtree, and we have to make sure to update the child pointers to this updated tree.
 
         removeHelper(node, key):
-            // Helper method for 'remove', returns the updated node.
             if node is null:
                 return null
             else if key < node.key:
@@ -289,7 +341,7 @@ The code for removal is shown here.
             else if key > node.key:
                 node.right = removeHelper(node.right, key)
                 return node
-            else: // key == node.key
+            else if key == node.key:
                 if node.left is null:
                     size = size - 1
                     return node.right
@@ -304,16 +356,74 @@ The code for removal is shown here.
                     return node
 
 
+:::::: latex
+\booklink{Read the rest online}{11.1}{sec:removing-from-a-bst}
+::::::
+
+:::::: online
+
+    datatype BSTMap:
+        ...
+        remove(key):
+            parent = null
+            node = root
+            while node is not null:
+                parent = node
+                if key < node.key:
+                    node = node.left
+                else if key > node.key:
+                    node = node.right
+                else: // key == node.key
+                    break  // we found the key so break out of the loop
+            if node is null:
+                return  // the key is not in the tree, so do nothing
+
+            // node to be deleted has at most one child
+            if node.left is null or node.right is null:
+                // newNode will replace the node to be deleted
+                if node.left is null:
+                    newNode = node.right
+                else: // node.right is null
+                    newNode = node.left
+
+                if parent is null:
+                    root = newNode  // the node to be deleted is the root, so update the root
+                else if node == parent.left:
+                    parent.left = newNode  // node is a left child, so make newNode a left child
+                else: // node == parent.right
+                    parent.right = newNode  // node is a right child, so make newNode a right child
+
+                node = None
+
+            // node to be deleted has two children
+            else:
+                predecessorParent = null
+                predecessor = node.left
+                while predecessor.right is not null:
+                    predecessorParent = predecessor
+                    predecessor = predecessor.right
+
+                node.key = predecessor.key
+                node.value = predecessor.value
+
+                if predecessorParent is null:
+                    node.left = predecessor.left
+                else:
+                    predecessorParent.right = predecessor.left
+
 ::: dsvis
-TODO
+Here is an exercise on BST deletion.
 
 <avembed id="BSTremovePRO" src="Binary/BSTremovePRO.html" type="pe" name="BST Remove Proficiency Exercise"/>
 :::
 
+::::::
+
+
 ### Analysis
 
-The cost for `getHelper` and `putHelper` is the depth of the node found
-or inserted. The cost for `removeHelper` is the depth of the node being
+The cost for `contains`, `get`, `add`, and `put` is the depth of the node found
+or inserted. The cost for `remove` is the depth of the node being
 removed, or in the case when this node has two children, the depth of
 the node with smallest value in its right subtree. Thus, in the worst
 case, the cost for any one of these operations is the depth of the
@@ -336,27 +446,17 @@ height $n$. The cost of insertion in this case will be
 $\sum_{i=1}^{n} i \in O(n^2)$.
 
 Traversing a BST costs $O(n)$ regardless of the shape of the tree.
-Each node is visited exactly once, and each child pointer is followed
-exactly once.
-
-Below is an example traversal, named `printHelper`. It performs an
-inorder traversal on the BST to print the node keys, in sorted order.
-
-    function printHelper(node):
-        if node is not null:
-            printHelper(node.left)
-            print(node.key)
-            printHelper(node.right)
+Each node is visited exactly once, and each child pointer is followed exactly once.
+For example, if we want to print the nodes in ascending order we can perform an inorder traversal (@sec:traversing-a-binary-tree), which then will take time linear in the size of the tree.
 
 While the BST is simple to implement and efficient when the tree is
 balanced, the possibility of its being unbalanced is a serious
 liability. There are techniques for organizing a BST to guarantee good
 performance. Two examples are the
-[AVL tree]{.term} (see section @sec:avl-trees) and the
-[splay tree]{.term} (see section @sec:splay-trees). There
+[AVL tree]{.term} (see @sec:avl-trees) and the
+[splay tree]{.term} (see @sec:splay-trees). There
 also exist other types of search trees that are guaranteed to remain
-balanced, such as the
-[2-3 Tree]{.term}.
+balanced, such as the [red-black tree]{.term} or the [2-3 Tree]{.term}.
 
 
 ### Guided information flow
@@ -389,11 +489,10 @@ Thus, at each node we need only visit the left subtree until we reach a
 leaf node.
 :::
 
-Here is a problem that typically needs to visit more than just a single
-path, but not all of the nodes.
 
 ::: dsvis
-TODO
+Here is a problem that typically needs to visit more than just a single
+path, but not all of the nodes.
 
 <inlineav id="IneffBinaryTreeRangeCON" src="Binary/IneffBinaryTreeRangeCON.js" name="Inefficient Binary Tree Traversal on Range Slide Show" links="Binary/BSTCON.css"/>
 :::

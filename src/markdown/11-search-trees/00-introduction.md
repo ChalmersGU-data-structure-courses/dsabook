@@ -8,9 +8,11 @@ However, as we will see, a problem with BSTs is that they might become *unbalanc
 If the tree is unbalanced, all basic operations (searching, adding and removing) become linear in the size of the tree, $O(n)$.
 
 The solution to that problem is make the trees automatically rebalance.
-This can be done in many different ways, some examples are AVL trees, Splay trees and Red-black trees,
+This can be done in many different ways, some examples are [AVL trees](#avl-tree){.term} (@sec:avl-trees), [Splay trees](#splay-tree){.term} (@sec:splay-trees) and [Red-black trees]{.term},
 who all have their own way of making the basic operaitions logarithmic, $O(\log n)$, in the size of the tree.
+Another way of keeping the trees balanced is to use *non-binary* trees, such as 2-3 trees or more general B-trees, but we currently don't cover them in this book.
 
-Another way of keeping the trees balanced is to use *non-binary* trees, such as 2-3 trees or more general B-trees.
 
-In the end of the chapter we will discuss more specialised kinds of search trees, such as prefix trees or Tries, and even structures that are not directly trees, such as Skip lists.
+
+Not all data structures used for searching are trees --
+in the end of the chapter we discuss [Skip lists]{.term}, which is an interesting hybrid between a tree and a [linked list]{.term} (@sec:stacks-implemented-as-linked-lists).

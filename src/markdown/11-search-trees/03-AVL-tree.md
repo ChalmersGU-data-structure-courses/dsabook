@@ -7,9 +7,11 @@
 - Prio 2: move some things about rotations to previous overview section
 :::
 
-The AVL tree is a BST with the following additional property: For every
-node, the heights of its left and right subtrees differ by at most 1. As
-long as the tree maintains this property, if the tree contains $n$
+The AVL tree is a BST with the following additional property:
+
+> For every node, the heights of its left and right subtrees differ by at most 1.
+
+As long as the tree maintains this property, if the tree contains $n$
 nodes, then it has a depth of at most $O(\log n)$. As a result, search
 for any node will cost $O(\log n)$, and if the updates can be done in
 time proportional to the depth of the node inserted or deleted, then
@@ -19,7 +21,7 @@ The key to making the AVL tree work is to alter the insert and delete
 routines so as to maintain the balance property. Of course, to be
 practical, we must be able to implement the revised update routines in
 $O(\log n)$ time. To maintain the balance property, we are going to
-use what are called [rotations](#rotation){.term}.
+use what are called [rotations]{.term}.
 
 <!--
 ### Invariants
@@ -30,18 +32,6 @@ use what are called [rotations](#rotation){.term}.
 Rotation is an operation that takes a node in the tree and moves it one level higher.
 @Fig:SingleRotation illustrates rotation. Here, $P$ and $S$ are nodes, while $A$, $B$ and
 $C$ represent subtrees.
-
-In figure (a), node $S$ is the left child of the root. A *right rotation*
-transforms it into the tree shown in figure (b),
-where node $S$ has become the root. Note that, because the value of
-$S$ is less than the value of $P$, $P$ must become $S$'s right child.
-Right rotation means transforming a tree from having the shape in (a) to
-having the shape in (b).
-
-A *left rotation* is the opposite process: starting from the tree in
-(b), transforming it to the tree in (a), by lifting node $P$ up. Notice
-that a right rotation tends to make the tree more right-leaning, while a
-left rotation tends to make it more left-leaning.
 
 ![Rotation.
 In a rotation, node $S$ is promoted to the root, rotating with
@@ -55,6 +45,18 @@ Going from (a) to (b) is called a *right rotation*. We can also go from
 rotation*. In general, a right rotation makes the tree more
 right-leaning, and a left rotation makes it more left-leaning.
 ](images/SingRot.png){width=60% #fig:SingleRotation}
+
+In figure (a), node $S$ is the left child of the root. A *right rotation*
+transforms it into the tree shown in figure (b),
+where node $S$ has become the root. Note that, because the value of
+$S$ is less than the value of $P$, $P$ must become $S$'s right child.
+Right rotation means transforming a tree from having the shape in (a) to
+having the shape in (b).
+
+A *left rotation* is the opposite process: starting from the tree in
+(b), transforming it to the tree in (a), by lifting node $P$ up. Notice
+that a right rotation tends to make the tree more right-leaning, while a
+left rotation tends to make it more left-leaning.
 
 ### AVL tree insertion
 
@@ -106,11 +108,14 @@ the AVL tree balance property. The case where the excess node is in the
 left child of the right child of $S$ is handled in the same way.
 ](images/AVLDblRot.png){width=60% #fig:AVLdouble}
 
-The AVL tree insert algorithm begins with a normal BST insert. Then as
+AVL tree insertion and deletion are easiest to implement as recursive functions.
+They are very similar to the normal BST insertion and deletion, but as
 the recursion unwinds up the tree, we perform the appropriate rotation
-on any node that is found to be unbalanced. Deletion is similar;
-however, consideration for unbalanced nodes must begin at the level of
-the *deleteMin* operation.
+on any node that is found to be unbalanced.
+
+:::::: latex
+\booklink{Read the rest online}{11.3}{sec:avl-tree-insertion}
+::::::
 
 ::: example
 #### Example: AVL insertion
@@ -122,6 +127,9 @@ Case 2. This requires a double rotation to fix. After the rotation, 5
 becomes the left child of 24, 2 becomes the left child of 5, and 7
 becomes the right child of 5.
 :::
+
+
+:::::: online
 
 To try out AVL insertion yourself and see how it works, see [AVL Tree
 Visualization](https://www.cs.usfca.edu/~galles/visualization/AVLtree.html).
@@ -262,3 +270,5 @@ Here are some helper functions:
         x.left = B
         y.right = x
         return y
+
+::::::
