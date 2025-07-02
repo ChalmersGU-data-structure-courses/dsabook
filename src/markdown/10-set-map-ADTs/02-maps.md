@@ -42,15 +42,12 @@ To find the item with barcode `code` we call `database.get(code)`.
 
     datatype CashRegister:
         database: Map of String to Item = new Map()
-
         // Put the item in the database.
         put(p: Item):
             database.put(p.ean, p)
-
         // Remove an item from the database.
         remove(p: Item):
             database.remove(p.ean)
-
         // Find the item with the given EAN code.
         find(ean: String) -> Item:
             return database.get(ean)
@@ -87,7 +84,6 @@ the multimap.
 
     datatype SearchEngine:
         database: Map of String to Set of Document = new Map()
-
         // Add a new document to the database.
         add(doc: Document):
             for each word in doc.contents:
@@ -98,7 +94,6 @@ the multimap.
                 // Get the set of documents containing this word, and add the document.
                 set = database.get(word)
                 set.add(doc)
-
         // Find all documents containing a given word.
         find(word: String) -> Set of Document:
             if database.containsKey(word):

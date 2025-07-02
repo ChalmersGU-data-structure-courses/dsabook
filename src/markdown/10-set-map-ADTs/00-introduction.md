@@ -84,7 +84,7 @@ example, Java's
 [TreeSet](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/TreeSet.html)
 and
 [TreeMap](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/TreeMap.html),
-and Python's:
+and Python's
 [sets](https://docs.python.org/3/tutorial/datastructures.html#sets) and
 [dictionaries](https://docs.python.org/3/tutorial/datastructures.html#dictionaries).
 By the end of this book you will understand how all of these work.

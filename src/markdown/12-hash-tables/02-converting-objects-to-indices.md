@@ -47,7 +47,7 @@ Therefore, computing the hash table index for a given object is a two-step proce
 The simplest way to compress a hash code $h\geq 0$ into a table index $i$, is to take $h$ **modulo** the array size $m$:
 
 \begin{eqnarray*}
-i &=& h \mathop{\%} m
+i &=& h \mod m
 \end{eqnarray*}
 
 This is called *modular compression* and is the most common compression method.

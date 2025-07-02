@@ -14,6 +14,12 @@ implementation will use a hash function that distributes the records
 evenly among the buckets so that as few records as possible go into the
 overflow bucket.
 
+:::::: latex
+\booklink{Read the rest online}{12.11}{sec:bucket-hashing}
+::::::
+
+:::::: online
+
 When searching for a record, the first step is to hash the key to
 determine which bucket should contain the record. The records in this
 bucket are then searched. If the desired key value is not found and the
@@ -66,3 +72,5 @@ unnecessary disk accesses.
 
 <avembed id="HashBucket2PRO" src="Hashing/HashBucket2PRO.html" type="ka" name="Alternate Bucket Hashing Proficiency Exercise"/>
 :::
+
+::::::

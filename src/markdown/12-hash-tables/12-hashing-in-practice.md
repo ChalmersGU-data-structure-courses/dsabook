@@ -88,7 +88,15 @@ linked list of $2^k$ strings.
 Note that this would not be improved by using an open addressing hash
 table, because then we would get a primary cluster with $2^k$ strings.
 
-### How are hash tables implemented in standard libraries?
+### How are hash tables implemented in standard libraries? {#hashing-standard-libraries}
+
+:::::: latex
+\booklink{Read the rest online}{12.12}{sec:hashing-standard-libraries}
+::::::
+
+XXXX
+
+:::::: online
 
 #### Java API
 
@@ -162,3 +170,5 @@ Here's a summary of the internal implementation:
 -   The maximum load factor for resizing is 0.66.
 -   See the source code here:
     <https://github.com/python/cpython/blob/main/Objects/dictobject.c>
+
+::::::

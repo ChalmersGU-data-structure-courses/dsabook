@@ -16,6 +16,14 @@
 :::
 -->
 
+In this section we discuss XXX
+
+:::::: latex
+\booklink{Read the rest online}{12.10}{sec:better-hash-functions}
+::::::
+
+:::::: online
+
 ### Binning
 
 Say we are given keys in the range 0 to 999, and have a hash table of
@@ -207,3 +215,5 @@ hash functions.
 
 <avembed id="HashFuncFIBSumm" src="Hashing/HashFuncFIBSumm.html" type="ka" name="Hash Function Pick Slot Summary"/>
 :::
+
+::::::

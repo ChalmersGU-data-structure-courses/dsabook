@@ -79,15 +79,16 @@ key range it can be difficult to devise a hash function that does a good
 job of distributing the records throughout the table, especially if the
 input distribution is not known in advance.
 
-There are many reasons why data values might be poorly distributed.
+There are many reasons why data values might be poorly distributed:
 
 1.  Natural frequency distributions tend to follow a common pattern
     where a few of the entities occur frequently while most entities
     occur relatively rarely. For example, consider the populations of
-    the 100 largest cities in the United States. If you plot these
+    the 100 largest cities. If you plot these
     populations on a numberline, most of them will be clustered toward
-    the low side, with a few outliers on the high side. This is an
-    example of a Zipf distribution. Viewed the other way, the home town
+    the low side, with a few outliers on the high side.
+    <!-- This is an example of a Zipf distribution.  -->
+    Viewed the other way, the home town
     for a given person is far more likely to be a particular large city
     than a particular small town.
 2.  Collected data are likely to be skewed in some way. Field samples

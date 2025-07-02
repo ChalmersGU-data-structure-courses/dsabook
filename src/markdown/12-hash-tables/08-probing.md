@@ -5,7 +5,7 @@
 - Prio 3: examples, tests
 :::
 
-### The problem with linear probing
+<!-- ### The problem with linear probing -->
 
 While linear probing is probably the first idea that comes to mind when
 considering collision resolution policies, it is not the only one
@@ -27,6 +27,10 @@ Now the problem is illustrated here:
 :::
 ::::::
 
+:::::: latex
+\booklink{Read the rest online}{12.8}{sec:different-probing-strategies}
+::::::
+
 Again, the ideal behaviour for a collision resolution mechanism is that
 each empty slot in the table will have equal probability of receiving
 the next record inserted (assuming that every slot in the table has
@@ -34,6 +38,8 @@ equal probability of being hashed to initially). This tendency of linear
 probing to cluster items together is known as
 [primary clustering]{.term}. Small clusters tend
 to merge into big clusters, making the problem worse.
+
+:::::: online
 
 The problem with primary clustering is that it leads to long probe
 sequences, which increases execution time. However, linear probing is

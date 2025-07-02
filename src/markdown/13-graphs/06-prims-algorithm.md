@@ -127,6 +127,10 @@ Here is the implementation for Dijkstra's algorithm using a priority queue.
 
 ### Correctness of Prim's algorithm
 
+:::::: latex
+\booklink{Read the rest online}{12.12}{sec:hashing-standard-libraries}
+::::::
+
 Prim's algorithm is an example of a greedy algorithm. At each step in
 the `for` loop, we select the least-cost edge that connects some marked
 vertex to some unmarked vertex. The algorithm does not otherwise check
@@ -136,6 +140,7 @@ generates a spanning tree (because each pass through the `for` loop adds
 one edge and one unmarked vertex to the spanning tree until all vertices
 have been added), but does this tree have minimum cost?
 
+:::::: online
 ::: example
 #### Theorem: Prim's algorithm produces a minimum-cost spanning tree.
 
@@ -182,3 +187,4 @@ Here is an exercise for Prim's algorithm.
 
 <avembed id="PrimPE" src="Graph/PrimPE.html" type="pe" name="Prim's Algorithm Proficiency Exercise"/>
 :::
+::::::

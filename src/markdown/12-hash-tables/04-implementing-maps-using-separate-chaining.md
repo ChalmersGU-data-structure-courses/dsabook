@@ -129,28 +129,18 @@ It is straightforward to modify the implementation above to become a key-value m
     datatype SeparateChainingHashMap implements Map:
         table: Array of Maps
         ...
-
         get(key):
             // Similar to contains for hash sets, but use Map.get instead:
-            ...
-            return bin.get(key)
-
+            ... return bin.get(key)
         put(key, value):
             // Similar to add for hash sets, but use Map.put instead:
-            ...
-            bin.put(key, value)
-            ...
-
+            ... bin.put(key, value) ...
         remove(key):
             // Similar to remove for hash sets, but use Map.remove instead:
-            ...
-            bin.remove(key)
-            ...
-
+            ... bin.remove(key) ...
         resizeTable(newCapacity):
             // Similar to resizeTable for hash sets, but use put instead:
-            ...
-                for each key, value in bin:
+            ... for each key, value in bin:
                     put(key, value)
 
 

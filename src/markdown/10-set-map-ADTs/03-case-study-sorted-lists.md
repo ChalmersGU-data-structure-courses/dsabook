@@ -1,7 +1,7 @@
 
-## Case study: Implementing sets and maps using sorted lists
+## Case study: Implementing sets using sorted lists
 
-### Implementing sets
+<!-- ### Implementing sets -->
 
 We can implement either of these ADTs using an array. For a set, we can
 use an array of elements.
@@ -46,7 +46,7 @@ about two data structures that are more suitable for implementing sets
 and maps: binary search trees and hash tables.
 
 
-### Complexity analysis
+<!-- ### Complexity analysis -->
 
 
 ### Implementing maps
