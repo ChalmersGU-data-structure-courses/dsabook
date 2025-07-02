@@ -47,7 +47,7 @@ experiences with sorting a relatively few physical objects.
 Here is an implementation for Quicksort. Parameters `left` and `right`
 define the left and right indices, respectively, for the subarray being
 sorted. The initial call to `quickSort` would be
-`quickSort(arr,0,arr.size-1)`, just as for mergesort.
+`quickSort(arr,0,arr.size-1)`, just as for Mergesort.
 
     function quickSort(arr, left, right):
         if left >= right:                           // Base case: Subarray length is ≤ 1

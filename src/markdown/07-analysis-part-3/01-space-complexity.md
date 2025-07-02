@@ -115,12 +115,12 @@ We are not only interested in knowing how much memory a data structure will use,
 When we analyse space usage of algorithms, we are usually only interested in the *additional* space that the algorithm uses during execution.
 
 Let's say that an algorithm is *in-place* if it only uses constant additional space, $O(1)$.
-For example, insertion sort is in-place, because it only allocates a constant number of variables to complete.
+For example, Insertion sort is in-place, because it only allocates a constant number of variables to complete.
 
 ::: example
 #### Example: Mergesort
 
-How much additional space does mergesort use?
+How much additional space does Mergesort use?
 Mergesort is a divide-and-conquer algorithm that calls itself recursively, halving the size of the problem in each call.
 The step that uses additional memory is the merging process, where we have to allocate a new array that we can fill with the merged values.
 
@@ -130,42 +130,42 @@ In the third level we allocate $2^2 = 4$ arrays, each of size $n/2^2 = n/4$.
 Continuing down we see that in level $k$ we allocate $2^k$ arrays, each of size $n/2^k$.
 
 As you can see, each level uses up an additional $O(n)$ space, because $2^k \cdot n/2^k = n$.
-And, since we already know that mergesort continues for $\log n$ levels, we get an additional space usage of $O(n \log n)$.
+And, since we already know that Mergesort continues for $\log n$ levels, we get an additional space usage of $O(n \log n)$.
 
-But it is possible to improve the space usage of mergesort.
+But it is possible to improve the space usage of Mergesort.
 Instead of allocating new arrays at each level, we can create one single additional array of size $n$ and then use only that auxilliary array.
 To make this work we have to change the implementation somewhat, and this can be done in several ways.
-The most common solution is called bottom-up mergesort, and it has an additional space usage of $O(n)$.
+The most common solution is called bottom-up Mergesort, and it has an additional space usage of $O(n)$.
 :::
 
 :::::: latex
-So, mergesort is not an in-place algorithm because it uses at least linear additional space.
+So, Mergesort is not an in-place algorithm because it uses at least linear additional space.
 
 \booklink{Read the rest online}{7.1}{sec:space-complexity-of-algorithms}
 ::::::
 
 :::::: online
-So, mergesort is not an in-place algorithm because it uses at least linear additional space.
-But what about quicksort, didn't we say that it is in-place?
+So, Mergesort is not an in-place algorithm because it uses at least linear additional space.
+But what about Quicksort, didn't we say that it is in-place?
 
 ::: example
 #### Example: Quicksort
 
-How much additional space does quicksort use?
-Just as mergesort, quicksort is also a divide-and-conquer algorithm, but in this case we cannot be certain that it halves the problem size in each call.
-We have already showed that quicksort is quadratic $O(n^2)$ in the worst case (if we are unlucky with the pivot selection).
+How much additional space does Quicksort use?
+Just as Mergesort, Quicksort is also a divide-and-conquer algorithm, but in this case we cannot be certain that it halves the problem size in each call.
+We have already showed that Quicksort is quadratic $O(n^2)$ in the worst case (if we are unlucky with the pivot selection).
 
-Now, quicksort is a recursive algorithm, and whenever we make a recursive call the system has to allocate some memory for storing information on what to do when returning from the recursion.
+Now, Quicksort is a recursive algorithm, and whenever we make a recursive call the system has to allocate some memory for storing information on what to do when returning from the recursion.
 This is done by pushing some memory block (of constant size) onto the *call stack*.
-But when quicksort is unlucky and gets quadratic behaviour, it will use a linear number of recursion levels.
-Therefore the additional memory usage for quicksort is linear $O(n)$, so it is not in-place.
+But when Quicksort is unlucky and gets quadratic behaviour, it will use a linear number of recursion levels.
+Therefore the additional memory usage for Quicksort is linear $O(n)$, so it is not in-place.
 
 But let's assume that we have a good pivot selection algorithm (and well-behaved input), so that we get the normal $O(n \log n)$ behaviour.
-Quicksort will still allocate memory on the call stack for the recursive calls, and just as mergesort we will never get fewer than $O(\log n)$ recursive levels.
-Therefore the additional memory usage for quicksort will be at least logarithmic $O(\log n)$ in the worst case.
+Quicksort will still allocate memory on the call stack for the recursive calls, and just as Mergesort we will never get fewer than $O(\log n)$ recursive levels.
+Therefore the additional memory usage for Quicksort will be at least logarithmic $O(\log n)$ in the worst case.
 :::
 
-The quicksort example shows that perhaps we were too strict when we defined what an *in-place* algorithm is.
+The Quicksort example shows that perhaps we were too strict when we defined what an *in-place* algorithm is.
 A more realistic definition is to say that an algorithm is in-place if it never uses more than $O(\log n)$ additional space.
 
 ::::::

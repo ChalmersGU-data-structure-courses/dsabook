@@ -7,18 +7,18 @@ In-place
 :   All three algorithms are *in-place*, because we modify the array and only make use of a constant number of additional variables.
 
 Stability
-:   Both bubble sort and insertion sort are *stable*.
+:   Both Bubble sort and Insertion sort are *stable*.
     They only swap adjacent elements, and they will never swap two equal elements.
     Therefore the relative order of equal elements will be preserved.
 
-    However, insertion sort is not stable, and this is because it can swap over long distances.
-    For example, if we insertion sort the array [2,2,1], then the first swap (putting 1 into the first position) will change the relative order between the first and the second 2.
+    However, Selection sort is not stable, and this is because it can swap over long distances.
+    For example, if we Selection sort the array [2,2,1], then the first swap (putting 1 into the first position) will change the relative order between the first and the second 2.
 
 Adaptivity
 :   Insertion sort is *adaptive*, because its best-case complexity is better than its worst-case.
-    If the list is almost sorted, insertion sort is way much faster than if the list is completely unsorted.
+    If the list is almost sorted, Insertion sort is way much faster than if the list is completely unsorted.
 
-    Bubble sort and selection sort however, are not adaptive -- they are always quadratic regardless of the input array.
+    Bubble sort and Selection sort however, are not adaptive -- they are always quadratic regardless of the input array.
 
 Here is a summary table of the categorisations.
 

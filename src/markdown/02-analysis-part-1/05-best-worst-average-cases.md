@@ -2,7 +2,7 @@
 ## Best, worst, and average cases
 
 ::: TODO
-- Prio 3: examples (e.g., quicksort, insertion sort)
+- Prio 3: examples (e.g., Quicksort, Insertion sort)
 :::
 
 For some algorithms, the running time is always determined by the input size $n$.
@@ -45,7 +45,7 @@ the behaviour of the algorithm. However, there are rare instances where a
 best-case analysis is useful -- in particular, when the best case has
 high probability of occurring.
 For example, if we know that the array we want to sort is *almost sorted*,
-we can take advantage of the best-case running time of insertion sort.
+we can take advantage of the best-case running time of Insertion sort.
 
 How about the worst case? The advantage to analysing the worst case is
 that you know for certain that the algorithm must perform at least that

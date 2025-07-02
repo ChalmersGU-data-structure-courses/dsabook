@@ -27,15 +27,15 @@ Tie this to invariants.
 
 A sorted array is a suitable way to implement a set or a map that *never
 changes*, that is where we never need to add or remove items after the
-array is created. We start by sorting the array, using either quicksort
-or mergesort, and then we can use binary search to find items in it.
+array is created. We start by sorting the array, using either Quicksort
+or Mergesort, and then we can use binary search to find items in it.
 Sorted arrays also support the *sorted set* and *sorted map* operations
 such as *range queries* -- these can also be implemented using binary search.
 
 Sorted arrays can also be useful in cases where we always add *many*
 items in one go. Given a sorted array $A$, and an unsorted list of items
 $B$, we can add the items in $B$ to $A$ as follows. First we sort $B$,
-then we merge $A$ and $B$, using the merge algorithm from mergesort.
+then we merge $A$ and $B$, using the merge algorithm from Mergesort.
 Note that the merge step takes linear time, and sorting $B$ takes a bit
 more than linear time, so this is a lot faster than adding all the items
 from $B$ one by one (which would take quadratic time).

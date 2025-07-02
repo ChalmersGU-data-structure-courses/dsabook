@@ -451,10 +451,10 @@ $f(n) \in O(g(n))$ or even $f(n) = O(g(n))$.
 
 ### binary insert sort
 
-A variation on [insertion sort]{.term} where
+A variation on [Insertion sort]{.term} where
 the position of the value being inserted is located by binary
 search, and then put into place. In normal usage this is not an
-improvement on standard insertion sort because of the expense of
+improvement on standard Insertion sort because of the expense of
 moving many items in the [array]{.term}. But
 it is directly useful if the cost of comparison is high compared to
 that of moving an element, or is theoretically useful if we only
@@ -633,14 +633,14 @@ the queue. Then, until the queue is empty, a node is taken off the
 queue, visited, and and then any [unvisited]{.term}
 neighbours are placed onto the queue.
 
-### bubble sort
+### Bubble sort
 
 A simple sort that requires $O(n^2)$ time in
 [best](#best-case){.term},
 [average](#average-case){.term}, and
 [worst](#worst-case){.term} cases. Even an
 optimised version will normally run slower than
-[insertion sort]{.term}, so it has little to
+[Insertion sort]{.term}, so it has little to
 recommend it.
 
 ### bucket
@@ -1829,8 +1829,8 @@ A swap of adjacent records in an [array]{.term}.
 
 A sort that relies solely on exchanges (swaps of adjacent records)
 to reorder the list.
-[insertion sort]{.term} and
-[bubble sort]{.term} are examples of
+[Insertion sort]{.term} and
+[Bubble sort]{.term} are examples of
 exchange sorts. All exchange sorts require $O(n^2)$ time in the
 [worst case]{.term}.
 
@@ -2579,7 +2579,7 @@ this traversal will
 [enumerate](#enumeration){.term} the nodes
 in sorted order.
 
-### insertion sort
+### Insertion sort
 
 A sorting algorithm with $O(n^2)$
 [average](#average-case){.term} and
@@ -3249,7 +3249,7 @@ traditional to use as a measure of cost the number of
 [comparisons](#comparison){.term} made
 between the key values of record pairs.
 
-### mergesort
+### Mergesort
 
 A sorting algorithm that requires $O(n \log n)$ in the
 [best](#best-case){.term},
@@ -4290,7 +4290,7 @@ $i^2$ as term $i$ of the probe sequence.
 A list-like structure in which elements are inserted only at one
 end, and removed only from the other one end.
 
-### quicksort
+### Quicksort
 
 A sort that is $O(n \log n)$ in the
 [best](#best-case){.term} and
@@ -4322,7 +4322,7 @@ have unique key values, than at least $\Omega(\log n)$ digits are
 required, leading to an $\Omega(n \log n)$ sorting algorithm that
 tends to be much slower than other sorting algorithms like
 [Quicksort]{.term} or
-[mergesort]{.term}.
+[Mergesort]{.term}.
 
 ### random access
 
@@ -4732,7 +4732,7 @@ the [I/O head]{.term} from one
 considered the most expensive step during a
 [disk access]{.term}.
 
-### selection sort
+### Selection sort
 
 While this sort requires $O(n^2)$ time in the
 [best](#best-case){.term},
@@ -4740,7 +4740,7 @@ While this sort requires $O(n^2)$ time in the
 [worst](#worst-case){.term} cases, it
 requires only $O(n)$ swap operations. Thus, it does relatively
 well in applications where swaps are expensive. It can be viewed as
-an optimisation on [bubble sort]{.term},
+an optimisation on [Bubble sort]{.term},
 where a swap is deferred until the end of each iteration.
 
 ### self-organising list
@@ -4845,7 +4845,7 @@ actual content.
 ### Shellsort
 
 A sort that relies on the best-case cost of
-[insertion sort]{.term} to improve over
+[Insertion sort]{.term} to improve over
 $O(n^2)$ [worst case]{.term} cost.
 
 ### shifting method

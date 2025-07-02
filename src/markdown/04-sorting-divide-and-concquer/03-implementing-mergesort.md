@@ -3,7 +3,7 @@
 
 ::: TODO
 - Prio 1: short introduction
-- Prio 3: bottomup, runbased mergesort, powersort
+- Prio 3: bottomup, runbased Mergesort, powersort
 :::
 
 Implementing Mergesort presents some technical difficulties.
@@ -74,17 +74,17 @@ Then we can create a wrapper function that takes care of the initialisation, and
 
 
 <!--
-### Bottom-up mergesort
+### Bottom-up Mergesort
 
 ::: TODO
 - using lists of lists
 - arrays: using run-lengths of 1, 2, 4, 8, ...
 :::
 
-### Run-based mergesort
+### Run-based Mergesort
 
 ::: TODO
-- "natural" mergesort in Wikipedia
+- "natural" Mergesort in Wikipedia
 - find already sorted runs, store run-starts in array
 - merge adjacent runs
 - Optimisation: decide which runs to merge

@@ -93,7 +93,7 @@ Now here is a full proficiency exercise to put it all together.
 ::: TODO
 - Change the long lists to an image
 - complexity
-- cutoff to insertion sort *does not* change complexity
+- cutoff to Insertion sort *does not* change complexity
 - stable, not in-place
 :::
 
@@ -130,7 +130,7 @@ Then we have to merge them before returning the sorted sub-array to the previous
     - Merging these two arrays requires $n$ units of work.
 
 In summary, each level spends $O(n)$ time, and there are $k=\log n$ levels.
-So the total running time of mergesort is $O(n \log n)$.
+So the total running time of Mergesort is $O(n \log n)$.
 Note that this cost is unaffected by the relative order of the values being sorted, thus this analysis holds for the best, average, and worst cases.
 
 

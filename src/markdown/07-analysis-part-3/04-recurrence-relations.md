@@ -529,7 +529,7 @@ case (2) of the theorem, $T(n) \in O(n \log n)$.
 - Average-case is **not** a good thing - what are we averaging on?
 :::
 
-In @sec:complexity-analysis-1, we determined that the average-case analysis of quicksort
+In @sec:complexity-analysis-1, we determined that the average-case analysis of Quicksort
 had the following recurrence:
 
 \begin{eqnarray*}

@@ -46,9 +46,9 @@ TODO
 <inlineav id="TrieTimelineCON" src="Development/TrieTimelineCON.js" name="Trie timeline Slideshow" links="Development/TreeTrieCON.css"/>
 :::
 
-### Analogy between search trees and quicksort
+### Analogy between search trees and Quicksort
 
-::: TDOO
+::: TODO
 - quicksort == BST
 - multikey quicksort / radix sort == TST
 - etc (see article by Sedgewick and Wayne)

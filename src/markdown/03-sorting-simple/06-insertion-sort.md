@@ -11,8 +11,8 @@ Then you take another book from the pile and put it in the bookshelf, in the cor
 As you take each book, you would add it in the bookshelf in the correct position to always keep the shelf sorted.
 This simple approach is the inspiration for our third sorting algorithm, called [Insertion sort]{.term}.
 
-Just as for selection sort, the description above is not in-place.
-But just as for selection sort, it's relatively easy to turn it into an in-place algorithm, by remembering an invisible separator between the sorted books (on the left) and the still-unsorted books (on the right).
+Just as for Selection sort, the description above is not in-place.
+But just as for Selection sort, it's relatively easy to turn it into an in-place algorithm, by remembering an invisible separator between the sorted books (on the left) and the still-unsorted books (on the right).
 
 Insertion sort iterates through a list of elements. For each iteration,
 the current element is inserted in turn at the correct position within a
@@ -69,11 +69,11 @@ Just as for the previous sorting algorithms, we have a nested for loop, where th
     - in the absolute worst case, we always have to move the element to the front of the list, so the number of comparisons will be $i-1$
     - in the best case, the element is already in place, and then we only need one comparison
 
-Therefore, the worst case complexity of insertion sort is $\sum_0^n i$, which is quadratic, $O(n^2)$.
+Therefore, the worst case complexity of Insertion sort is $\sum_0^n i$, which is quadratic, $O(n^2)$.
 In the best case -- when the list is already sorted -- the complexity is instead linear, $O(n)$, because we only have to do one comparison per iteration.
 
 ::: dsvis
-Here is an explanation of the worst case cost of insertion sort.
+Here is an explanation of the worst case cost of Insertion sort.
 
 <inlineav id="InsertionSortWorstCaseCON" src="Sorting/InsertionSortWorstCaseCON.js" name="Insertion Sort Worst Case Slideshow" links="Sorting/InsertionSort.css"/>
 :::

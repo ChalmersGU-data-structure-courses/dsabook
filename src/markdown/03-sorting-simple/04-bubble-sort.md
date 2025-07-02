@@ -8,7 +8,7 @@
 Our first sorting algorithm is called [Bubble sort]{.term}.
 Bubble sort is often the first sorting algorithm that you learn, because it is relatively easy to understand and implement.
 However, it is rather slow, even compared to the other quadratic sorting algorithms that we will introduce in the next sections -- [Selection sort]{.term} and [Insertion sort]{.term}.
-It's not even particularly intuitive -- nobody is going to come naturally to bubble sort as a way to sort their bookshelf, their Bridge hand or their pile of bills, like they might with Insertion sort or Selection sort.
+It's not even particularly intuitive -- nobody is going to come naturally to Bubble sort as a way to sort their bookshelf, their Bridge hand or their pile of bills, like they might with Insertion sort or Selection sort.
 
 Bubble sort consists of a simple double `for` loop.
 The inner `for` loop moves through the array from left to right, comparing adjacent elements.
@@ -48,7 +48,7 @@ algorithms will simply assume that the records are
 :::
 
 ::: dsvis
-Here is a visualisation of the first pass of bubble sorting an array of integers.
+Here is a visualisation of the first pass of Bubble sorting an array of integers.
 
 <inlineav id="bubblesortS1CON" src="Sorting/bubblesortS1CON.js" name="Bubble Sort Slideshow 1" links="Sorting/BubbleSortAnalysisCON.css"/>
 :::
@@ -95,7 +95,7 @@ So the total number of iterations is
 \end{eqnarray*}
 
 And this sum has the value $n(n-1)/2$, which means the runtime complexity is *quadratic*, $O(n^2)$.
-Note that this is regardless of how the initial array looks like, so bubble sort has the same best- and worst-case complexity.
+Note that this is regardless of how the initial array looks like, so Bubble sort has the same best- and worst-case complexity.
 
 ::: dsvis
 The following visualisation illustrates the running time analysis of Bubble sort.

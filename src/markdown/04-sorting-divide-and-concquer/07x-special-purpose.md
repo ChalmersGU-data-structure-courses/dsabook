@@ -19,7 +19,7 @@
 
 ::: TODO
 - Radix sort: sorting strings or numbers as digit sequences (or bit sequences)
-- Multi-key quicksort (aka three-way radix quicksort)
+- Multi-key Quicksort (aka three-way radix Quicksort)
 - Example: Suffix arrays
 :::
 -->

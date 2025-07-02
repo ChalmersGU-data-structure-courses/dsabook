@@ -14,7 +14,7 @@ Insertion sort (as the code is written in this chapter) is a stable sorting algo
 - [ ] False
 
 ::: hints
-- Think of the behaviour of every pass through the inner for loop of the insertion sort if the elements are equal.
+- Think of the behaviour of every pass through the inner for loop of the Insertion sort if the elements are equal.
 :::
 ::::::::::::::::::::::::::::::
 
@@ -231,7 +231,7 @@ When is Insertion sort a good choice for sorting an array?
 - Because Insertion sort is simple, it tends to cost only a
 little bit per comparison when compared to more complicated
 sorting algorithms.
-- Remember that insertion sort implementation is made up
+- Remember that Insertion sort implementation is made up
 of two nested for loops.
 - The outer for loop is executed $n-1$ times.
 While the number of times the inner for loop executes depends
