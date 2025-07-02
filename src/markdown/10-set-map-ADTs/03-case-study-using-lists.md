@@ -89,7 +89,7 @@ requires an underlying simpler implementation -- and there a linked list works v
 There is a way to speed up *one* of the operations, by using a sorted array instead of a linked list.
 If we have a sorted array of elements, the `contains` method can use
 [binary search]{.term} (@sec:binary-search), which takes logarithmic time
-(@sec:case-study-nalysing-binary-search).
+(@sec:case-study-analysing-binary-search).
 Hence looking up items will be really efficient.
 
 Unfortunately, modifying the data structure is still slow.

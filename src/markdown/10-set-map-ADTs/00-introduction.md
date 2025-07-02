@@ -57,8 +57,8 @@ class that implements a set or a map, in such a way that adding,
 removing and searching can be done efficiently? In this book we will see
 several different ways of implementing sets and maps.
 
-- In @sec:case-study-implementing-sets-using-sorted-lists,
-we will see how to implement a set or a map using a list. By
+- In @sec:case-study-implementing-sets-using-lists,
+we will see how to implement a set or a map using a list or an array. By
 sorting the items in the list, it is possible to look up information
 efficiently. However, it turns out that adding and removing items is
 quite expensive. A list is a suitable way of storing a set or a map if
