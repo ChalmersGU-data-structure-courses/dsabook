@@ -37,6 +37,7 @@ In such cases, it is often not possible to implement all operations efficiently,
 Additionally, one implementation may be more efficient for small datasets (thousands of elements), whereas another may scale better for large datasets (millions of elements).
 The most suitable data structure depends on the specific use case, and making informed and well-reasoned choices is one of the central goals of this book.
 
+:::::: online
 ::: example
 #### Example: Collection of records
 
@@ -55,6 +56,7 @@ Therefore, if a database application only requires exact-match queries, hashing 
 But if the application needs to support range queries—such as finding all records with values between X and Y—the B-tree is preferred.
 Despite their performance differences, both data structures address the same core problem: how to efficiently update and search a large collection of records.
 :::
+::::::
 
 The concept of an ADT can help us to focus on key issues even in non-computing applications.
 

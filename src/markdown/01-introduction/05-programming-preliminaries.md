@@ -6,13 +6,13 @@
 - for x = 1 to 10 -- is 10 included or not?
 :::
 
-This section explains the pseudocode that we will use throughout the book.
-In addition, we introduce the programming preliminaries that we assume you are familiar with.
-If you're comfortable with these preliminaries, you can safely skip ahead to the next section.
-
 :::::: latex
 \booklink{Read the rest online}{1.5}{sec:programming-preliminaries}
 ::::::
+
+This section explains the pseudocode that we will use throughout the book.
+In addition, we introduce the programming preliminaries that we assume you are familiar with.
+If you're comfortable with these preliminaries, you can safely skip ahead to the next section.
 
 :::::: html
 

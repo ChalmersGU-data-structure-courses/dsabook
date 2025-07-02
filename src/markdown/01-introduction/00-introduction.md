@@ -19,7 +19,7 @@ them is at the heart of computer science. And that is what this book is
 about -- helping you to understand how to structure information to
 support efficient processing.
 
-Any course on Data Structures and Algorithms will try to teach you about
+Any course on data structures and algorithms will try to teach you about
 three things:
 
 1.  It will present a collection of commonly used data structures and

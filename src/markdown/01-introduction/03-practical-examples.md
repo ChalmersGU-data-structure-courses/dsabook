@@ -7,8 +7,92 @@
 - Prio 3: add a 4th example
 :::
 
+Here we list some real-world examples where data structures and algorithms are crucial.
 
-### Banks
+#### Search engines
+
+The World Wide Web (WWW), often referred to as the Internet, has completely changed how we access and use information.
+With just a few clicks, we can explore an enormous number of websites filled with text, videos, and images on a wide variety of topics.
+The amount of content available is staggering, with millions of pages and an endless stream of data at our fingertips.
+But this vast amount of information also presents challenges.
+It can be overwhelming to sort through all the sources available online.
+Finding the exact address of a website on your own is nearly impossible.
+
+This is where search engines come in.
+Search engines like Google, Bing, and DuckDuckGo help us find the information we need by organising the Internet and making it searchable.
+This process of organising information is called indexing.
+
+Most of us use search engines every day without thinking about the incredible job they do.
+The image below shows the results of a search for “binary search”:
+
+![Searching the Internet with Google](resources/images/Google.png){ width=75% }
+
+It is already impressive to be shown a list of relevant web pages, but it is even more astonishing that, in this case, Google found 331 million results in just _0.23 seconds_.
+
+Now imagine you are designing a search engine that must index billions of web pages.
+Each page has a unique address, called a Uniform Resource Locator (URL), and is associated with a set of keywords.
+When a user submits a search query, the engine must quickly find all the relevant pages.
+A simple list is not an efficient way to store and retrieve this information.
+With billions of pages, it is not practical to check each one in order.
+Even if looking at a single page takes only a millisecond, going through them all would take years.
+To handle this challenge, we need smart ways to store and search through the data.
+
+Let’s consider a simpler version of this problem.
+Suppose we use an array that connects keywords to lists of related web pages.
+A basic approach would be to go through the array one element at a time until we find the keyword.
+This works, but it becomes very slow as the array grows larger.
+To improve efficiency, we can _sort_ the array of keywords alphabetically.
+Then, instead of scanning from the beginning, we start in the middle of the array and compare the search word with the keyword at that position:
+
+- If they match, we return the corresponding list of web pages.
+- If the search word is smaller, we continue the search in the lower half of the array.
+- If it’s larger, we search in the upper half.
+
+Each step cuts the number of possibilities in half.
+So, how many times can we divide the array in half before we narrow it down to one element?
+This is a logarithmic process, meaning we divide the search space in half again and again.
+With an array of one billion keywords, we would need only about 39 steps to find the right one.
+
+This model is simplified.
+In reality, search engines do much more than just match keywords.
+They also rank pages by relevance and take many details into account, such as whether letters are uppercase or lowercase, and whether the user is combining terms with “and” or “or”.
+
+
+#### Databases
+
+A company is developing a database system containing information about
+cities and towns in Europe. There are many thousands of
+cities and towns, and the database program should allow users to find
+information about a particular place by name (another example of an
+exact-match query). Users should also be able to find all places that
+match a particular value or range of values for attributes such as
+location or population size. This is known as a
+[range query]{.term}.
+
+A reasonable database system must answer queries quickly enough to
+satisfy the patience of a typical user. For an exact-match query,
+a fraction of a second is satisfactory. If the database is meant to support range
+queries that can return many cities that match the query specification,
+the user might tolerate the entire operation to take a little longer, perhaps
+a couple of seconds. To meet this requirement, it will be necessary to
+support operations that process range queries efficiently by processing
+all cities in the range as a batch, rather than as a series of
+operations on individual cities.
+
+The hash table suggested in the previous example is inappropriate for
+implementing our city database, because it cannot perform efficient
+range queries. The [B-tree]{.term} supports large databases, insertion
+and deletion of data records, and range queries. However, a simple
+[linear index]{.term} would be more appropriate if the database is created once,
+and then never changed, such as an atlas accessed from a website.
+
+:::::: latex
+\booklink{More examples online}{1.3}{sec:practical-examples}
+::::::
+
+:::::: online
+
+#### Banks
 
 A bank must support many types of transactions with its customers, but
 we will examine a simple model where customers wish to open accounts,
@@ -61,80 +145,4 @@ operations. However, the hash table can be reorganised periodically to
 restore the system to peak efficiency. Such reorganisation can occur
 offline so as not to affect ATM transactions.
 
-
-### Databases
-
-A company is developing a database system containing information about
-cities and towns in Europe. There are many thousands of
-cities and towns, and the database program should allow users to find
-information about a particular place by name (another example of an
-exact-match query). Users should also be able to find all places that
-match a particular value or range of values for attributes such as
-location or population size. This is known as a
-[range query]{.term}.
-
-A reasonable database system must answer queries quickly enough to
-satisfy the patience of a typical user. For an exact-match query,
-a fraction of a second is satisfactory. If the database is meant to support range
-queries that can return many cities that match the query specification,
-the user might tolerate the entire operation to take a little longer, perhaps
-a couple of seconds. To meet this requirement, it will be necessary to
-support operations that process range queries efficiently by processing
-all cities in the range as a batch, rather than as a series of
-operations on individual cities.
-
-The hash table suggested in the previous example is inappropriate for
-implementing our city database, because it cannot perform efficient
-range queries. The [B-tree]{.term} supports large databases, insertion
-and deletion of data records, and range queries. However, a simple
-[linear index]{.term} would be more appropriate if the database is created once,
-and then never changed, such as an atlas accessed from a website.
-
-
-### Search engines
-
-The World Wide Web (WWW), often referred to as the Internet, has completely changed how we access and use information.
-With just a few clicks, we can explore an enormous number of websites filled with text, videos, and images on a wide variety of topics.
-The amount of content available is staggering, with millions of pages and an endless stream of data at our fingertips.
-But this vast amount of information also presents challenges.
-It can be overwhelming to sort through all the sources available online.
-Finding the exact address of a website on your own is nearly impossible.
-
-This is where search engines come in.
-Search engines like Google, Bing, and DuckDuckGo help us find the information we need by organising the Internet and making it searchable.
-This process of organising information is called indexing.
-
-Most of us use search engines every day without thinking about the incredible job they do.
-The image below shows the results of a search for “binary search”:
-
-![Searching the Internet with Google](resources/images/Google.png){ width=75% }
-
-It is already impressive to be shown a list of relevant web pages, but it is even more astonishing that, in this case, Google found 331 million results in just _0.23 seconds_.
-
-Now imagine you are designing a search engine that must index billions of web pages.
-Each page has a unique address, called a Uniform Resource Locator (URL), and is associated with a set of keywords.
-When a user submits a search query, the engine must quickly find all the relevant pages.
-A simple list is not an efficient way to store and retrieve this information.
-With billions of pages, it is not practical to check each one in order.
-Even if looking at a single page takes only a millisecond, going through them all would take years.
-To handle this challenge, we need smart ways to store and search through the data.
-
-Let’s consider a simpler version of this problem.
-Suppose we use an array that connects keywords to lists of related web pages.
-A basic approach would be to go through the array one element at a time until we find the keyword.
-This works, but it becomes very slow as the array grows larger.
-To improve efficiency, we can _sort_ the array of keywords alphabetically.
-Then, instead of scanning from the beginning, we start in the middle of the array and compare the search word with the keyword at that position:
-
-- If they match, we return the corresponding list of web pages.
-- If the search word is smaller, we continue the search in the lower half of the array.
-- If it’s larger, we search in the upper half.
-
-Each step cuts the number of possibilities in half.
-So, how many times can we divide the array in half before we narrow it down to one element?
-This is a logarithmic process, meaning we divide the search space in half again and again.
-With an array of one billion keywords, we would need only about 39 steps to find the right one.
-
-This model is simplified.
-In reality, search engines do much more than just match keywords.
-They also rank pages by relevance and take many details into account, such as whether letters are uppercase or lowercase, and whether the user is combining terms with “and” or “or”.
+::::::
