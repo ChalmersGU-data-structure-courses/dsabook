@@ -59,18 +59,15 @@ We can use the upper bound to define an ordering between complexity classes,
 where we write $O(f)\leq O(g)$ for $f\in O(g)$.
 Using this we can infer the following hierarchy of complexity classes:
 
-$$
-O(1) < O(\log n) < O(\sqrt{n}) < O(n) < O(n\log n) < O(n^2) < \cdots
-$$
-$$
-\cdots < O(n^2\log n) < O(n^3) < O(n^k) < O(2^n) < O(10^n) < O(n!)
-$$
+\begin{multline*}
+O(1) < O(\log(\log n)) < O(\log n) < O(\sqrt{n}) < O(n) < O(n\log n) < \cdots \\
+\cdots < O(n^2) < O(n^2\log n) < O(n^3) < O(n^k) < O(2^n) < O(10^n) < O(n!)
+\end{multline*}
 
 Note that we use strict equality here, and trust that you intuitively understand the difference between $\leq$ and $<$.
+One interesting consequence of asymptotic complexity is that the base of a logarithm becomes irrelevant:
 
-One interesting consequence of asymptotic complexity is that the base of a logarithm becomes irrelevant, i.e.:
-
-$$ O(\log_2(n)) = O(\ln(n)) = O(\log_10(n)) $$
+$$ O(\log_2(n)) = O(\ln(n)) = O(\log_{10}(n)) $$
 
 So we usually just write $O(\log n)$.
 The reason why the base is irrelevant is a direct consequence of the logarithm laws.
@@ -82,7 +79,7 @@ But we will come back to this issue in [chapter @sec:algorithm-analysis-theory].
 
 ### Analysing code fragments
 
-When we want to analyse the complexity of code fragments, the following three rules of thumb one will get us very far:
+When we want to analyse the complexity of code fragments, the following three rules of thumb will get us very far:
 
 - An **atomic operation** is always $O(1)$
 
@@ -110,7 +107,7 @@ E.g., suppose that we have the three operations $p_1\in O(f_1)$, $p_2\in O(f_2)$
 The complexity of the sequence $\langle p_1; p_2; p_3\rangle$ will then be sum of the parts, i.e.:
 
 $$
-p_1; p_2; p_3 \in O(f_1) + O(f_2) + O(f_3) = O(\max(f_1, f_2, f_3))
+\langle p_1; p_2; p_3\rangle \in O(f_1) + O(f_2) + O(f_3) = O(\max(f_1, f_2, f_3))
 $$
 
 #### Loops and iterations
@@ -126,7 +123,7 @@ The loop performs $p$ once for every element in $A$, meaning that $p$ will be ex
 Therefore the complexity of a loop is:
 
 $$
-(\mbox{for}\ x \in A: p) \in |A|\cdot O(f) = n\cdot O(f) = O(n\cdot f)
+\rangle\mbox{for}\ x \in A: p\langle \in |A|\cdot O(f) = n\cdot O(f) = O(n\cdot f)
 $$
 
 Note that $p$ can be a complex operation, for example a loop itself.
@@ -136,8 +133,8 @@ And then the outer loop $\langle \mbox{for}\ x \in A: p\rangle$ will be in $n\cd
 
 ### Examples of algorithm analysis {#alg-analysis-examples}
 
-::::: {#AssignAnal}
-:::: example
+:::::: online
+::: example
 #### Example: Simple assignment
 
 We begin with an analysis of a simple assignment to an integer variable.
@@ -145,11 +142,10 @@ We begin with an analysis of a simple assignment to an integer variable.
     a = b
 
 Because the assignment statement takes constant time, it is $O(1)$.
-::::
-:::::
+:::
+::::::
 
-::::: {#FLAnal}
-:::: example
+::: example
 #### Example: Simple for-loop
 
 Consider a simple `for` loop.
@@ -163,13 +159,12 @@ third line takes constant time so, by simplifying rule (4), the total
 cost for executing the two lines making up the `for` loop is
 $O(n)$. By rule (3), the cost of the entire code fragment is also
 $O(n)$.
-::::
-:::::
+:::
 
 ::: latex
-More examples can be found in the online version of the book.
-
 \booklink{More examples online}{2.7}{sec:alg-analysis-examples}
+
+More examples can be found in the online version of the book.
 :::
 
 ::: online
@@ -304,7 +299,7 @@ So, the complexity of the code fragment above is actually linear, $O(n)$, and no
 
 Note that this is an exception where the simple analysis rules do not give a tight enough bound.
 But in almost all cases the rules work fine, and when they don't it's usually only by a logarithmic factor.
-(And as we all know, logarithmic factors are not that big a deal when it comes to computational copmlexity.)
+(And as we all know, logarithmic factors are not that big a deal when it comes to computational complexity.)
 ::::
 
 <!-- TODO
@@ -345,12 +340,12 @@ which takes constant time. Thus, the cost of the factorial function, if
 we wish to measure cost in terms of the number of multiplication
 operations, is one more than the number of multiplications made by the
 recursive call on the smaller input. Because the base case does no
-multiplications, its cost is zero. Thus, the running time for this
+multiplications, its cost is constant. Thus, the running time for this
 function can be expressed as
 
 \begin{eqnarray*}
 T(n) &=& T(n-1) + 1, \textrm{ for } n>1 \\
-T(1) &=& 0
+T(1) &=& 1
 \end{eqnarray*}
 
 The closed-form solution for this recurrence relation is $O(n)$.

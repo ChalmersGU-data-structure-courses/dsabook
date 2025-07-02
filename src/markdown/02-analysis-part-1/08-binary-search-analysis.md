@@ -27,7 +27,7 @@ If we expand the recurrence, we will find that we can do so only $\log n$ times 
 - For a problem of size $n$, we have $1$ unit of work plus the amount of work required for one subproblem of size $n/2$: $O(n) = 1 + O(n/2)$
 - For a problem of size $n/2$, we have $1$ unit of work plus the amount of work required for one subproblem of size $n/4$: $O(n) = 1 + (1 + O(n/4))$
 - For a problem of size $n/4$, we have $1$ unit of work plus the amount of work required for one subproblem of size $n/8$: $O(n) = 1 + (1 + (1 + O(n/8)))$
-- ...etc, until we reach a subproblem of size $1$: $O(n) = 1 + (1 + (1 + (1 + (1 + (\ldots)))))$
+- ...etc, until we reach a subproblem of size $1$: $O(n) = \underbrace{1 + (1 + (1 + (\ldots)))}_{\log n \text{~levels}}$
 
 Thus, the closed form solution of $O(n) = O(n/2) + 1$ can be modeled by the summation
 

@@ -62,7 +62,7 @@ Explanations:
 - The third column shows the value for $n'$, the new maximum size for the problem that can be run in the same time on the new machine that is ten times faster.
   Variable $n'$ is the greatest size for the problem that can run in 100,000 basic operations.
 - The fourth column shows how the size of $n$ changed to become $n'$ on the new machine.
-- The fifth column shows the increase in the problem size as the ratio of $n'$ to $n$.
+- The fifth column shows the increase in problem size as the ratio of $n'$ to $n$.
 
 This table illustrates many important points. The first two equations
 are both linear; only the value of the constant factor has changed. In
@@ -140,7 +140,7 @@ are shown.
 
 <div id="fig:growthGraphs">
 
-```{.matplotlib dpi=200}
+```{.matplotlib dpi=300}
 import math
 import numpy as np
 import matplotlib.pyplot as plt
@@ -224,15 +224,15 @@ input sizes. Once again, we see that the growth rate has a tremendous
 effect on the resources consumed by an algorithm.
 
 
-        n         $\log\log n$   $\log n$     $n$         $n\log n$       $n^2$      $n^3$     $2^n$
----------------- -------------- ---------- ---------- -----------------  ---------  ---------- --------------------
-     $10$            $1.7$       $3.3$       $10$            $33$        $100$      $10^3$     $10^3$
-    $100$            $2.7$       $6.6$      $100$           $664$        $10^4$     $10^6$     $10^{30}$
-  $1K = 1000$        $3.3$        $10$     $1000$          $10^4$        $10^6$     $10^9$     $10^{300}$
- $10K = 10^4$        $3.7$      $13.3$     $10^4$     $1.3\cdot 10^5$    $10^8$     $10^{12}$  $10^{3000}$
-$100K = 10^5$        $4.1$      $16.6$     $10^5$     $1.6\cdot 10^6$    $10^{10}$  $10^{15}$  $10^{30,000}$
-  $1M = 10^6$        $4.3$        $20$     $10^6$     $2\cdot 10^7$      $10^{12}$  $10^{18}$  $10^{300,000}$
-  $1G = 10^9$        $4.9$        $30$     $10^9$     $3\cdot 10^{10}$   $10^{18}$  $10^{27}$  $10^{300,000,000}$
+        n         $\log n$     $n$         $n\log n$       $n^2$      $n^3$     $2^n$                  $n!$
+---------------- ---------- ---------- -----------------  ---------  ---------- --------------------   ------------
+     $10$         $3.3$       $10$            $33$        $100$      $10^3$     $10^3$                 $10^{6}$
+    $100$         $6.6$      $100$           $664$        $10^4$     $10^6$     $10^{30}$              $10^{158}$
+  $1K = 1000$      $10$     $1000$          $10^4$        $10^6$     $10^9$     $10^{300}$             $10^{2567}$
+ $10K = 10^4$    $13.3$     $10^4$     $1.3\cdot 10^5$    $10^8$     $10^{12}$  $10^{3000}$            $10^{35,659}$
+$100K = 10^5$    $16.6$     $10^5$     $1.6\cdot 10^6$    $10^{10}$  $10^{15}$  $10^{30,000}$          $\cdots$
+  $1M = 10^6$      $20$     $10^6$     $2\cdot 10^7$      $10^{12}$  $10^{18}$  $10^{300,000}$         $\cdots$
+  $1G = 10^9$      $30$     $10^9$     $3\cdot 10^{10}$   $10^{18}$  $10^{27}$  $\cdots$               $\cdots$
 
 : Costs for representative growth rates {#tbl:growth-rates}
 

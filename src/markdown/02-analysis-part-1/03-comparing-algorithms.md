@@ -87,34 +87,32 @@ operations in most programming languages. Summing the contents of an
 array containing $n$ integers is not, because the cost depends on the
 value of $n$ (i.e., the size of the input).
 
+Because the most important factor affecting running time is normally
+the size of the input, for a given input size $n$ we often express the time
+$T$ to run the algorithm as a function of $n$, written as $T(n)$.
+We will always assume $T(n)$ is a non-negative value.
+
 :::: example
 #### Example: Largest value in an array
 
 Consider a simple algorithm to solve the problem of finding the largest
 value in an array of $n$ integers. The algorithm looks at each integer
-in turn, saving the position of the largest value seen so far. This
-algorithm is called the *largest-value sequential search* and is
-illustrated by the following function:
+in turn, saving the position of the largest value seen so far:
 
     // Return position of largest value in integer array arr
     function largest(arr):
         pos = 0                    // Position of pos element seen.
         for i in 1 .. arr.size-1:  // For each element,
-            if arr[pos] < arr[i]:  // if A[i] is larger,
+            if arr[pos] < arr[i]:  // if arr[i] is larger,
                 pos = i            // remember its position.
         return pos                 // Return pos position
 
 Here, the size of the problem is `arr.size`, the number of integers
-stored in array `arr`. The basic operation is to compare an integer's
+stored in the array. The basic operation is to compare a
 value to that of the largest value seen so far. It is reasonable to
 assume that it takes a fixed amount of time to do one such comparison,
-regardless of the value of the two integers or their positions in the
+regardless of the values or their positions in the
 array.
-
-Because the most important factor affecting running time is normally
-size of the input, for a given input size $n$ we often express the time
-$T$ to run the algorithm as a function of $n$, written as $T(n)$.
-We will always assume $T(n)$ is a non-negative value.
 
 Let us call $c$ the amount of time required to compare two integers in
 function `largest`. We do not care right now what the precise value of
@@ -133,8 +131,6 @@ $$
 T(n) = cn
 $$
 
-This equation describes the growth rate for the running time of the
-largest-value sequential search algorithm.
 ::::
 
 :::: latex
