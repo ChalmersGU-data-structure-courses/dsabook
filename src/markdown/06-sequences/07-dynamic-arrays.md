@@ -68,13 +68,11 @@ needed to resize it. But we could have done something else, like:
 -   Grow the size by 1 element
 
 But which is best, and why?
-
 There is a tradeoff: if we grow the array by a lot, we might waste
 memory. For example, immediately after we double the size, half of the
 array's capacity is unused, so we use twice as much memory as needed.
 On the other hand, if we grow the array by a small amount, we need to
 resize it more often.
-
 We will explore these tradeoffs by looking at the performance of the
 following small program under different resizing strategies:
 
