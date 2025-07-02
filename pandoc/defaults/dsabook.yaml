@@ -20,11 +20,11 @@ metadata:
   linkReferences: true
   autoSectionLabels: true
   nameInLink: true
-  figPrefix: ["figure", "figures"]
-  eqnPrefix: ["equation", "equations"]
-  tblPrefix: ["table", "tables"]
-  lstPrefix: ["list", "lists"]
-  secPrefix: ["section", "sections"]
+  figPrefix: ["Figure", "Figures"]
+  eqnPrefix: ["Equation", "Equations"]
+  tblPrefix: ["Table", "Tables"]
+  lstPrefix: ["List", "Lists"]
+  secPrefix: ["Section", "Sections"]
 
 
 
