@@ -1,0 +1,67 @@
+# yaml-language-server: $schema=https://json.schemastore.org/yamllint.json
+
+metadata:
+  title: Data Structures and Algorithms
+
+  author:
+    - Peter Ljunglöf
+    - Alex Gerdes
+    - (editors)
+
+  date: 2016–2025
+
+  # Settings for panflute:
+  panflute-path: pandoc/filters
+  panflute-filters:
+    - generic-filter
+
+  # Settings for pandoc-crossref:
+  chapters: true
+  linkReferences: true
+  autoSectionLabels: true
+  nameInLink: true
+  figPrefix: ["Figure", "Figures"]
+  eqnPrefix: ["Equation", "Equations"]
+  tblPrefix: ["Table", "Tables"]
+  lstPrefix: ["List", "Lists"]
+  secPrefix: ["Section", "Sections"]
+
+
+
+variables:
+  lang: en-GB
+
+title-prefix: DSABook
+# Specify STRING as a prefix at the beginning of the title that appears in the HTML header
+
+reader: markdown
+# pandoc --from=markdown --list-extensions
+
+number-sections: true
+# Number section headings in LaTeX, ConTeXt, HTML, Docx, ms, or EPUB output.
+# By default, sections are not numbered. Sections with class unnumbered will never be numbered,
+# even if --number-sections is specified.
+
+top-level-division: chapter
+# Treat top-level headings as the given division type in LaTeX, ConTeXt, DocBook, and TEI output.
+# The hierarchy order is part, chapter, then section; all headings are shifted such that
+# the top-level heading becomes the specified type.
+
+syntax-definitions: [pandoc/syntax-highlight/pseudo.xml]
+# Instructs pandoc to load a KDE XML syntax definition file, which will be used for syntax highlighting
+# of appropriately marked code blocks. This can be used to add support for new languages or to use altered
+# syntax definitions for existing languages. This option may be repeated to add multiple syntax definitions.
+
+indented-code-classes: [pseudo]
+# Specify classes to use for indented code blocks–for example, perl,numberLines or haskell.
+# Multiple classes may be separated by spaces or commas.
+
+reference-location: block
+# reference-location: block|section|document
+# Specify whether footnotes (and references, if reference-links is set) are placed at
+# the end of the current (top-level) block, the current section, or the document. The default is document.
+
+filters:
+  - pandoc-plot
+  - panflute
+  - pandoc-crossref

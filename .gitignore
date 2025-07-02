@@ -2,11 +2,19 @@
 # Temporary files/directories
 _local*
 _private*
-_temp*
 *~
 *.bak
 \#*#
 .#*
+build
+plots
+temp
+tmp
+
+# Generated files
+book.pdf
+dsabook.pdf
+dsabook.tex
 
 # MacOS-specific files
 .DS_Store
@@ -14,4 +22,21 @@ _temp*
 # Cached and compiled Python files
 __pycache__/
 *.py[cod]
+
+# VS Code
+.vscode
+
+# Core latex/pdflatex auxiliary files:
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+.*.lb
 

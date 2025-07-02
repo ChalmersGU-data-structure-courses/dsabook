@@ -1,0 +1,73 @@
+@charset "utf-8";
+
+:root {
+    --font-size: 12pt;
+    --text-font: Georgia, serif;
+    --code-font: Courier, "Courier New", monospace;
+    --border-radius: 1rem;
+    --block-margin: 1rem;
+
+    --alert-bgcolor: Yellow;
+    --body-bgcolor: #FFFEFA;
+    --border-color: Sienna;
+    --box-bgcolor: FloralWhite;
+    --code-bgcolor: FloralWhite;
+    --html-bgcolor: AntiqueWhite;
+    --link-color: DarkRed;
+    --quote-color: DarkSlateGrey;
+    --term-color: DarkGreen;
+    --text-color: Black;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --alert-bgcolor: FireBrick;
+        --body-bgcolor: Black;
+        --border-color: SandyBrown;
+        --box-bgcolor: #201810;
+        --code-bgcolor: #201810;
+        --html-bgcolor: Black;
+        --link-color: SandyBrown;
+        --quote-color: AntiqueWhite;
+        --term-color: PaleGreen;
+        --text-color: White;
+    }    
+}
+
+/* A mixture of the following two CSS resets:
+   - Josh Comeau: https://www.joshwcomeau.com/css/custom-css-reset/
+   - Andy Bell: https://piccalil.li/blog/a-more-modern-css-reset/
+*/
+
+*, *::before, *::after {
+    /* This setting made SVG boxes look terrible: */
+	/* box-sizing: border-box; */
+}
+* {
+	margin: 0;
+	padding: 0;
+}
+input, button, textarea, select {
+	font: inherit;
+}
+body {
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4, button, input, label {
+  	line-height: 1.1;
+}
+p, h1, h2, h3, h4, h5, h6 {
+	overflow-wrap: break-word;
+}
+picture, video, canvas, svg {
+	display: block;
+	max-width: 100%;
+}
+img {
+	display: inline-block;
+	max-width: 100%;
+}
+
+/* End CSS reset */
+

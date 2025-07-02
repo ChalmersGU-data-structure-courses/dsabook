@@ -1,0 +1,438 @@
+$passoptions.latex()$
+\documentclass[
+$for(babel-otherlangs)$
+  $babel-otherlangs$,
+$endfor$
+$if(babel-lang)$
+  $babel-lang$,
+$endif$
+$if(fontsize)$
+  $fontsize$,
+$endif$
+$if(papersize)$
+  $papersize$paper,
+$endif$
+$for(classoption)$
+  $classoption$$sep$,
+$endfor$
+]{$documentclass$}
+$if(beamerarticle)$
+\usepackage{beamerarticle} % needs to be loaded first
+$endif$
+\usepackage{xcolor}
+$if(geometry)$
+\usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
+$endif$
+\usepackage{amsmath,amssymb}
+\usepackage[utf8]{inputenc}
+
+\usepackage{ccicons}
+
+\makeatletter
+%% Make font and line spacing slightly smaller:
+
+\renewcommand{\normalsize}{%
+   \@setfontsize\normalsize{10}{13}%{10.4}{14}%
+   \abovedisplayskip 6.5\p@ \@plus2\p@ \@minus2\p@%
+  %  \abovedisplayskip 7\p@ \@plus2\p@ \@minus2\p@%
+   \belowdisplayskip \abovedisplayskip%
+   \abovedisplayshortskip \z@ \@plus2\p@%
+   \belowdisplayshortskip 6\p@ \@plus2\p@ \@minus2\p@%
+   \let\@listi\@listI}
+\normalsize
+\renewcommand{\small}{%
+   \@setfontsize\small{9}{12}%{9.5}{13}%
+   \abovedisplayskip 6\p@ \@plus2\p@ \@minus2\p@%
+  %  \abovedisplayskip 6.5\p@ \@plus2\p@ \@minus2\p@%
+   \belowdisplayskip \abovedisplayskip%
+   \abovedisplayshortskip \z@ \@plus2\p@%
+   \belowdisplayshortskip 5\p@ \@plus2\p@ \@minus2\p@%
+   \def\@listi{\leftmargin\leftmargini%
+               \topsep 12pt%13pt%
+               \parsep \z@%
+               \itemsep \parsep%
+               \itemindent \z@%
+               \setlength{\parfillskip}{0pt plus 1fill}%
+              }%
+}
+\renewcommand{\footnotesize}{%
+   \@setfontsize\footnotesize{8}{11}%{8.5}{12}%
+   \abovedisplayskip 6\p@ \@plus2\p@ \@minus2\p@%
+   \abovedisplayshortskip \z@ \@plus\p@%
+   \belowdisplayshortskip 4\p@ \@plus2\p@ \@minus2\p@%
+   \def\@listi{\leftmargin\leftmargini%
+               \topsep 11pt%12pt%
+               \parsep \z@%
+               \itemsep \parsep%
+               \itemindent \z@%
+               \setlength{\parfillskip}{0pt plus 1fill}%
+             }%
+   \belowdisplayskip \abovedisplayskip%
+}
+\renewcommand{\miniscule}{\@setfontsize\miniscule{7}{9}}%{7.5}{9}}
+\renewcommand{\tiny}{\@setfontsize\tiny{6.5}{8}}%{6.9}{8}}
+\renewcommand{\scriptsize}{\@setfontsize\scriptsize{7}{9}}%{7.5}{9}}
+\renewcommand{\large}{\@setfontsize\large{12}{16}}%{12}{16}}
+\renewcommand{\Large}{\@setfontsize\Large{14}{20}}%{14}{20}}
+\renewcommand{\LARGE}{\@setfontsize\LARGE{17}{23}}%{17}{23}}
+\renewcommand{\huge}{\@setfontsize\huge{20}{24}}%{20}{24}}
+\renewcommand{\Huge}{\@setfontsize\Huge{24}{30}}%{24}{30}}
+\renewcommand{\HUGE}{\@setfontsize\Huge{28}{33}}%{28}{33}}
+
+\renewcommand{\stdl@copyrightmsg}{%
+  \textcopyright~%
+  THE AUTHORS%
+  % \MakeUppercase{$for(author)$$author$$sep$ $endfor$}%
+}
+
+\renewcommand{\maketitle}{%
+  %%%% Title page:
+  \thispagestyle{empty}
+  \noindent\hspace*{34.5mm}\begin{minipage}[t]{70mm}%
+    \vspace*{36pt}%
+    \begin{tikzpicture}[node distance=0mm,
+      tbox/.style={inner sep=0pt,align=left}]
+      \node[tbox,anchor=south west] (title) at (0,0) {%
+        \begin{varwidth}{70mm}
+          \raggedright\normalfont\fontsize{20}{24}\selectfont\thetitle
+        \end{varwidth}
+      };
+      \node[tbox,below=of title.south west,anchor=north west,minimum height=14pt] (subtitle) {%
+        \begin{varwidth}{70mm}
+          \raggedright\normalsize\itshape\thesubtitle
+        \end{varwidth}
+      };
+      \node[tbox, below=of subtitle.south west,anchor=north west, minimum height=4mm] (spacing) {};
+      \node[tbox,fit={(title) (subtitle) (spacing)}] (A) {};
+      \draw[line width=0.3pt,below=2mm] (A.south west) -- (A.south east);
+    \end{tikzpicture}
+    \par\vspace*{2mm}
+      \normalfont\fontsize{11}{15}\scshape\textls[100]{\MakeLowercase\theauthor}\par
+    \vspace*{7.5mm}
+    \normalfont\fontsize{10}{15}\thetranslator
+    \if\theedition1\relax\else
+    \vspace{7.5mm}
+    \stdl@Ordinal{\theedition}~\stdl@editionnamex\par\fi
+  \end{minipage}
+  % \vfill
+  % \noindent\hspace*{34.5mm}\begin{minipage}[t]{70mm}
+  %   \includegraphics{Studlit_inlaga_svart_08}
+  % \end{minipage}
+  \newpage
+  %%%% Copyright page:
+  \thispagestyle{empty}
+  \enlargethispage{10mm}
+  \noindent\begin{minipage}[t]{79.2mm}
+    \normalfont\fontsize{8.5}{13}\selectfont\RaggedRight%
+    \thecovertext
+  \end{minipage}
+  \vfill
+  \noindent\begin{minipage}[t]{82mm}%{79.2mm}
+    \setlength{\parindent}{0pt}\setlength{\parskip}{2.5mm}
+    \raggedright
+    \tikz[baseline] {%
+      \draw[thick,rounded corners=2pt] (0,0) -- (3ex,0) -- (60:3ex) -- cycle;
+      \draw[very thick,line cap=round] (1.5ex, 0.55ex) -- (1.5ex, 1.45ex);
+    }
+    \sffamily\fontsize{8.5}{13}\selectfont\textbf{Copying prohibited}\par
+    \normalfont\fontsize{8.5}{13}\selectfont
+
+    This book is protected by the Swedish Copyright Act. Apart from \\
+    the restricted rights for teachers and students to copy material \\
+    for educational purposes, as regulated by the Bonus Copyright \\
+    Access agreement, any copying is prohibited. For information \\
+    about this agreement, please contact your course coordinator \\
+    or Bonus Copyright Access.
+
+    Some parts of this book is licensed under MIT and some under \\
+    Creative Commons \ccbyncsaeu\ CC BY-NC-SA 4.0.
+
+    Material that was added prior to 2025-03-10 is licensed under \\
+    the MIT license. To view a copy of this license, visit \\
+    \url{https://opensource.org/license/mit/}
+
+    Material that was added after 2025-03-10 is licensed under \\
+    CC BY-NC-SA 4.0. To view a copy of this license, visit \\
+    \url{https://creativecommons.org/licenses/by-nc-sa/4.0/}
+
+
+    \ccAttribution~\textbf{BY}: Credit must be given to the authors. \\
+    \ccShareAlike~\textbf{SA}: Adaptations must be shared under the same terms. \\
+    \ccNonCommercialEU~\textbf{NC}: Only noncommercial use of your work is permitted.
+    \par
+    \vspace*{2.5mm}
+    \theartnr
+    \theisbn
+    \stdl@editionname~\theedition:1
+
+    \stdl@copyrightmsg
+
+    \stdl@thetranslator
+    \thetechnicalreview
+    \thecoverlayout
+    \thecoverimage
+    \vspace{2.5mm}\theprinter~\theprintyear
+  \end{minipage}
+  \newpage
+}
+
+\makeatother
+
+% Studentlitteratur default is \vspace*{86pt}
+\renewcommand{\aftertoctitle}{\pagestyle{frontheadings}\thispagestyle{frontchapter}\par\nobreak\vspace*{50pt}}
+
+% \usepackage{studentlitteratur-thm}
+
+
+\usepackage{titlesec}
+% Make \subsubsection behave like \paragraph:
+\titleformat{\subsubsection}[runin]{\sffamily\normalsize\bfseries}{\thesubsubsection}{1em}{}
+\titleformat{\paragraph}[runin]{\sffamily\normalsize}{\theparagraph}{1em}{}
+\titlespacing*{\section}{0pt}{5ex plus 1ex minus .2ex}{1ex}
+\titlespacing*{\subsection}{0pt}{3.5ex plus 1ex minus .2ex}{1ex}
+\titlespacing*{\subsubsection}{0pt}{2.5ex plus .5ex minus .2ex}{1em}
+\titlespacing*{\paragraph}{0pt}{2.5ex plus .5ex minus .2ex}{1em}
+
+\usepackage{tikz}
+\usepackage{forest}
+\usetikzlibrary{calc,shapes.multipart,chains,arrows}
+
+\usepackage{qrcode}
+
+\newcommand{\marginQR}[3]{%
+  \begin{marginfigure}%
+    \tiny\sffamily%
+    \vspace{-1mm}\caption*{\centering #2}%
+    \qrcode[height=12mm]{#3}\\%
+    \vspace{-1mm}\caption*{\centering #1}%
+  \end{marginfigure}%
+}
+
+\newcommand{\baseURL}{https://chalmersgu-data-structure-courses.github.io/dsabook}
+
+\newcommand{\booklink}[3]{%
+  \marginQR{#1}{Section \ref{#3}}{\baseURL/html/section-#2.html\##3}%
+}
+
+\usepackage{newunicodechar}
+\newunicodechar{≤}{\ensuremath{\leq}}
+\newunicodechar{≥}{\ensuremath{\geq}}
+\newunicodechar{∞}{\ensuremath{\inf}}
+
+%% This is to fool LaTeX that 'subfig' has already been loaded,
+%% because Studentlitteratur uses 'subcaption' instead.
+\expandafter\def\csname ver@subfig.sty\endcsname{}
+
+%% Section numbering
+\setsecnumdepth{subsection}
+\settocdepth{section}
+
+%% No paragraph indentation after some environments
+\usepackage{noindentafter}
+\NoIndentAfterEnv{pandoccrossrefsubfigures}
+\NoIndentAfterEnv{itemize}
+\NoIndentAfterEnv{enumerate}
+\NoIndentAfterEnv{description}
+\NoIndentAfterEnv{Shaded}
+\NoIndentAfterEnv{eqnarray}
+\NoIndentAfterEnv{eqnarray*}
+\NoIndentAfterEnv{equation}
+\NoIndentAfterEnv{equation*}
+\NoIndentAfterEnv{align}
+\NoIndentAfterEnv{align*}
+\NoIndentAfterEnv{center}
+\NoIndentAfterEnv{longtable}
+\NoIndentAfterCmd{\]}
+
+$font-settings.latex()$
+$common.latex()$
+
+\usepackage[scaled=0.9]{inconsolata}  %% sans-serif, ok bold, no italics, Ø-like 0
+% \usepackage[zerostyle=c]{newtxtt} %% serif, ok bold, slanted italics, any kind of 0: c=Ø-like, d=dotted, a=O-like
+% \usepackage[scaled]{GoMono}  %% serif, ok bold, slanted italics, Ø-like 0
+% \usepackage[scaled]{DejaVuSansMono}  %% sans-serif, ok bold, slanted italics, dotted 0
+% \usepackage[scaled]{beramono}  %% sans-serif, ok bold, slanted italics, dotted 0
+% \usepackage[scaled]{FiraMono}  %% sans-serif, a bit too bold, slanted italics, dotted 0
+% \renewcommand\ttdefault{lmtt}  %% serif, very little bold, real italics, O-like 0
+% \usepackage{courier}  %% serif, too bold, slanted italics, O-like 0
+
+%% Fonts and colors
+\renewcommand{\colsubsection}{black}  % we don't want the spot color in subsections
+
+%% Font settings for code blocks
+%% The commented ones are Pandoc's default settings
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},fontsize=\small,baselinestretch=0.9,xleftmargin=\parindent}
+\renewcommand{\AlertTok}         [1]{\textbf{#1}}
+\renewcommand{\AnnotationTok}    [1]{\textbf{\textit{#1}}}
+\renewcommand{\AttributeTok}     [1]{#1}
+\renewcommand{\BaseNTok}         [1]{#1}
+\renewcommand{\BuiltInTok}       [1]{#1}
+\renewcommand{\CharTok}          [1]{\textit{#1}}
+\renewcommand{\CommentTok}       [1]{\textcolor{darkgray}{\footnotesize\rmfamily\textit{#1}}}
+\renewcommand{\CommentVarTok}    [1]{\textcolor{darkgray}{\footnotesize\rmfamily\textbf{\textit{#1}}}}
+\renewcommand{\ConstantTok}      [1]{{#1}}
+\renewcommand{\ControlFlowTok}   [1]{\textbf{#1}}
+\renewcommand{\DataTypeTok}      [1]{#1}
+\renewcommand{\DecValTok}        [1]{#1}
+\renewcommand{\DocumentationTok} [1]{\textit{#1}}
+\renewcommand{\ErrorTok}         [1]{\textbf{#1}}
+\renewcommand{\ExtensionTok}     [1]{#1}
+\renewcommand{\FloatTok}         [1]{#1}
+\renewcommand{\FunctionTok}      [1]{#1}
+\renewcommand{\ImportTok}        [1]{\textbf{#1}}
+\renewcommand{\InformationTok}   [1]{\textbf{\textit{#1}}}
+\renewcommand{\KeywordTok}       [1]{\textbf{#1}}
+\renewcommand{\NormalTok}        [1]{#1}
+\renewcommand{\OperatorTok}      [1]{#1}
+\renewcommand{\OtherTok}         [1]{#1}
+\renewcommand{\PreprocessorTok}  [1]{#1}
+\renewcommand{\RegionMarkerTok}  [1]{#1}
+\renewcommand{\SpecialCharTok}   [1]{\textit{#1}}
+\renewcommand{\SpecialStringTok} [1]{\textit{#1}}
+\renewcommand{\StringTok}        [1]{\textit{#1}}
+\renewcommand{\VariableTok}      [1]{\textcolor{darkgray}{\textbf{#1}}}
+\renewcommand{\VerbatimStringTok}[1]{\textit{#1}}
+\renewcommand{\WarningTok}       [1]{\textbf{\textit{#1}}}
+
+%% Uncomment these when we want to make a colour-pdf:
+% \renewcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+% \renewcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+% \renewcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+% \renewcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+% \renewcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{#1}}
+% \renewcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+% \renewcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\rmfamily\textit{#1}}}
+% \renewcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\rmfamily\textbf{\textit{#1}}}}
+% \renewcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+% \renewcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+% \renewcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+% \renewcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+% \renewcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+% \renewcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+% \renewcommand{\ExtensionTok}[1]{#1}
+% \renewcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+% \renewcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+% \renewcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{\textbf{#1}}}
+% \renewcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+% \renewcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+% \renewcommand{\NormalTok}[1]{#1}
+% \renewcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+% \renewcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+% \renewcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+% \renewcommand{\RegionMarkerTok}[1]{#1}
+% \renewcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+% \renewcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+% \renewcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+% \renewcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+% \renewcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+% \renewcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+
+$for(header-includes)$
+$header-includes$
+$endfor$
+$after-header-includes.latex()$
+$hypersetup.latex()$
+
+$if(title)$
+\title{$title$$if(thanks)$\thanks{$thanks$}$endif$}
+$endif$
+$if(subtitle)$
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{$subtitle$}
+$endif$
+\author{$for(author)$$author$$sep$ \and $endfor$}
+\date{$date$}
+
+\edition{1}
+\artnr{xxxxx}
+\isbn{xxx--xxx--xx-x}
+%\covertext{Omslaget visar ett prov på den vita blankhet som kan infinna sig under gynnsamma förutsättningar.}
+%\coverlayout{Moderna omslag}
+%\coverimage{Pelle Persson}
+\copyrightyear{2012}
+\printer{The Printer, City}
+\printyear{2012}
+
+\expandafter\def\expandafter\normalsize\expandafter{%
+    \normalsize%
+    \setlength\abovedisplayskip{-6pt}%
+    \setlength\belowdisplayskip{8pt}%
+    \setlength\abovedisplayshortskip{-8pt}%
+    \setlength\belowdisplayshortskip{2pt}%
+}
+
+\begin{document}
+$if(has-frontmatter)$
+\frontmatter
+$endif$
+$if(title)$
+\maketitle
+$if(abstract)$
+\begin{abstract}
+$abstract$
+\end{abstract}
+$endif$
+$endif$
+
+$for(include-before)$
+$include-before$
+
+$endfor$
+$if(toc)$
+$if(toc-title)$
+\renewcommand*\contentsname{$toc-title$}
+$endif$
+{
+$if(colorlinks)$
+\hypersetup{linkcolor=$if(toccolor)$$toccolor$$else$$endif$}
+$endif$
+\tableofcontents*
+}
+$endif$
+$if(lof)$
+\listoffigures
+$endif$
+$if(lot)$
+\listoftables
+$endif$
+$if(linestretch)$
+\setstretch{$linestretch$}
+$endif$
+$if(has-frontmatter)$
+\mainmatter
+$endif$
+$body$
+
+$if(has-frontmatter)$
+\backmatter
+$endif$
+$if(nocite-ids)$
+\nocite{$for(nocite-ids)$$it$$sep$, $endfor$}
+$endif$
+$if(natbib)$
+$if(bibliography)$
+$if(biblio-title)$
+$if(has-chapters)$
+\renewcommand\bibname{$biblio-title$}
+$else$
+\renewcommand\refname{$biblio-title$}
+$endif$
+$endif$
+\bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
+
+$endif$
+$endif$
+$if(biblatex)$
+\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+
+$endif$
+$for(include-after)$
+$include-after$
+
+$endfor$
+\end{document}

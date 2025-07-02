@@ -1,0 +1,32 @@
+#ListRecDSCON {
+  height: 120px;
+}
+
+#BinRecDSCON {
+  height: 190px;
+}
+
+#BinRecDSCON .jsavcanvas {
+  height: 180px;
+}
+
+#ListRecDSCON .jsavcanvas {
+  height: 110px;
+}
+
+
+#SumBinaryTreeCON {
+  height: 450px;
+}
+
+
+#SumBinaryTreeCON .jsavlabel { 
+  width: 200px;
+  height: 100px;
+  color: blue;
+  background-image: url(../Icons/person.png);
+  background-size: auto 70%;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  text-align: center;
+}

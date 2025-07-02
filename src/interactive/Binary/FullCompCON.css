@@ -1,0 +1,16 @@
+#FullCompCON {
+ height: 185px;
+}
+
+#FullCompCON .jsavnode.jsavtreenode {
+  min-width: 10px;
+  max-width: 10px;
+  min-height: 10px;
+  max-height: 10px;
+  background-color: #000000;
+  border-color: #000000;
+}
+
+svg {
+  stroke-width: 1;
+}

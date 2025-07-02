@@ -1,0 +1,62 @@
+
+.quiz {
+    background-color: var(--box-bgcolor);
+}
+
+.quiz .correct {
+    background-color: #8f8;
+}
+
+.quiz .wrong {
+    background-color: #f66;
+}
+
+@media (prefers-color-scheme: dark) {
+    .quiz .correct {
+        background-color: green;
+    }
+    .quiz .wrong {
+        background-color: red;
+    }
+}
+
+
+select, input, button {
+	margin: 0 0.4rem;
+	padding: 0.2rem 0.4rem;
+    color: var(--text-color);
+	background-color: var(--body-bgcolor);
+	border: 1px solid var(--border-color);
+	border-radius: calc(var(--border-radius)/2);
+}
+
+input[type="checkbox"], input[type="radio"] {
+    font-size: inherit;
+	width: 1rem;
+	height: 1rem;
+	vertical-align: middle;
+}
+
+select:hover:not(:disabled), input:hover:not(:disabled), button:hover:not(:disabled) {
+	cursor: pointer;
+}
+
+input:active:not(:disabled), button:active:not(:disabled), button.selected:not(:disabled) {
+	background-color: var(--border-color);
+	color: var(--body-bgcolor);
+}
+
+*:disabled, *:disabled * {
+	background: transparent;
+	color: var(--border-color);
+}
+
+/* The extra [class] is a hack that increases specificity enough to override a similar rule in reveal.js */
+ul.task-list[class] {
+    list-style: none;
+}
+
+ul.task-list li input[type="checkbox"] {
+	width: 1rem;
+    margin: 0.2rem 0.4rem 0.4rem -1.4rem;
+}

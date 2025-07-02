@@ -1,0 +1,63 @@
+<!--
+    Array-Based List Addition mini-proficiency exercise.
+    Written by Junyang Chen and Cliff Shaffer, modified by Peter Ljunglöf
+  -->
+
+<!DOCTYPE html>
+<html data-require="jsav math StaticArrayList-Add-PRO">
+  <head>
+    <title>Array-Based List Addition Proficiency Exercise</title>
+    <script src="../../lib/require-2.1.14.min.js"></script>
+    <script src="../../khan-exercises/local-only/main.js" ></script>
+    <style>
+      #StaticArrayListAddPRO .jsavcanvas {
+        height: 170px;
+      }
+    </style>
+  </head>
+
+  <body data-height="750" data-width="950">
+    <div class="exercise">
+      <div class="vars">
+        <var id="arr_size">Khan.randRange(4, 6)</var>
+        <var id="add_value">Khan.randRange(0, 999)</var>
+        <var id="add_pos">Khan.randRange(0, arr_size-1)</var>
+        <var id="JSAV">staticArrayListAddPRO.initJSAV(arr_size, add_pos,add_value)</var>
+      </div>
+      <div class="problems">
+        <div id="StaticArrayListAddPROp"> <!-- Supresses answer box -->
+          <p class="problem">Your task in this exercise is to show the
+            behavior for adding elements to an array-based list.</p>
+          <div class="question">
+            <p>In the array displayed below, your task is to add
+              <b><var>add_value</var></b> at position
+              <b><var>add_pos</var></b>.
+            <p>To move an element, click on it (to highlight it), then
+              click on where you want it to go. You can insert the new
+              value <b><var>add_value</var></b> into a highlighted
+              array position by clicking the "Add" button.</p>
+            <input id="reset" type="button" value="Reset" />
+            <input id="insert" type="button" value="Add" />
+            <div id="StaticArrayListAddPRO" class="jsavcanvas"></div>
+          </div>
+          <div class="solution" data-type="custom">
+            <div class="guess"> [staticArrayListAddPRO.userInput] </div>
+            <div class="validator-function">
+              if (!staticArrayListAddPRO.checkAnswer() && !guess[0]) {
+                return ""; // User did not click, and correct answer is not
+                           // initial array state
+              } else { return staticArrayListAddPRO.checkAnswer(); }
+            </div>
+          </div>
+          <div class="hints">
+            <p>To shift elements one position to the
+              right, the first step could be swapping element
+              <var>arr_size-1</var> with position <var>arr_size</var></p>
+            <p>Then, keep swapping element i with i+1 until you make
+              the insertion position empty for insertion </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

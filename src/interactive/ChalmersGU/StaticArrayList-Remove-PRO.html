@@ -1,0 +1,62 @@
+<!--
+    Array-Based List Remove mini-proficiency exercise.
+    Written by Junyang Chen and Cliff Shaffer, modified by Peter Ljunglöf
+  -->
+
+<!DOCTYPE html>
+<html data-require="jsav math StaticArrayList-Remove-PRO">
+  <head>
+    <title>Array-Based List Remove Proficiency Exercise</title>
+    <script src="../../lib/require-2.1.14.min.js"></script>
+    <script src="../../khan-exercises/local-only/main.js" ></script>
+    <style>
+      #reset { margin-right: 20px;}
+
+      #StaticArrayListRemovePRO .jsavcanvas {
+      height: 220px;
+      }
+    </style>
+  </head>
+
+  <body data-height="750" data-width="950">
+    <div class="exercise">
+      <div class="vars">
+        <var id="arrSize">staticArrayListRemovePRO.getSize(1, 6)</var>
+        <var id="removePos">staticArrayListRemovePRO.getPos()</var>
+        <var id="JSAV">staticArrayListRemovePRO.initJSAV(arrSize, removePos)</var>
+      </div>
+
+      <div class="problems">
+        <div id="StaticArrayListRemovePROp"> <!-- Supresses answer box -->
+          <p class="problem">Your task in this exercise is to show the
+            behavior for array-based list deletion.
+          <div class="question">
+            <p>In the array displayed below, your task is to remove the element
+              at position <b><var>removePos</var></b>.</p>
+            <p>Click on a value to highlight it, then click on the return
+              box to remember the highlighted element.
+              Move elements in the array as appropriate by first clicking
+              on the element that you want to move (to highlight it), then
+              click on where it goes.</p>
+            <input id="reset" type="button" value="Reset" />
+            <div id="StaticArrayListRemovePRO" class="jsavcanvas"></div>
+          </div>
+          <div class="solution" data-type="custom">
+            <div class="guess"> [staticArrayListRemovePRO.userInput] </div>
+            <div class="validator-function">
+              if (!staticArrayListRemovePRO.checkAnswer(arrSize) && !guess[0]) {
+                return ""; // User did not click, and correct answer is not
+                           // initial array state
+              } else { return staticArrayListRemovePRO.checkAnswer(arrSize); }
+            </div>
+          </div>
+          <div class="hints">
+            <p>Move the element being removed to the return box.</p>
+            <p>If element being removed is not the last element of the array, shift
+              all elements after the removed one position to the left.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

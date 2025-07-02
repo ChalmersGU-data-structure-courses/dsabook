@@ -1,0 +1,282 @@
+
+html {
+    font-size: var(--font-size);
+    font-family: var(--text-font);
+    color: var(--text-color);
+    background-color: var(--html-bgcolor);
+}
+
+body {
+    hyphens: auto;
+    overflow-wrap: break-word;
+    font-kerning: normal;
+    text-align: justify;
+}
+
+header, footer, main {
+    max-width: 60rem;
+    margin: 0 auto;
+}
+
+main {
+    padding: 1rem 3rem;
+    background-color: var(--body-bgcolor);
+    border: 1px solid var(--border-color);
+}
+
+/* Navigation menu */
+
+header nav h1 {
+    font-size: 1.2rem;
+    font-weight: normal;
+}
+
+header nav, footer nav {
+    margin: 1rem 3rem;
+}
+
+nav.sitenav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-wrap: nowrap;
+}
+
+nav.sitenav a {
+    text-decoration: none;
+}
+
+nav.sitenav .navbutton {
+    margin: 0 0.4rem;
+    padding: 0.2rem 0.4rem;
+    background-color: var(--body-bgcolor);
+    border: 1px solid var(--border-color);
+    border-radius: calc(var(--border-radius)/2);
+}
+
+nav.sitenav > * {
+    text-align: center;
+}
+
+nav.sitenav > *:first-child {
+    margin-right: auto;
+}
+
+nav.sitenav > *:last-child {
+    margin-left: auto;
+}
+
+/* Front page */
+
+#title-block-header {
+    margin-bottom: calc(4 * var(--block-margin));
+    text-align: center;
+}
+
+#title-block-header .author {
+    margin: 0;
+}
+
+#TOC li {
+    list-style: none;
+    margin: 0;
+}
+
+#TOC ul {
+    padding-left: calc(1.5 * var(--block-margin));
+}
+
+#TOC ul ul ul {
+    margin-bottom: 0;
+}
+
+#TOC > ul {
+    padding-left: 0;
+}
+
+#TOC a:not(:hover) {
+    text-decoration: none;
+}
+
+/* Assorted elements */
+
+svg {
+    height: auto;
+    max-width: 100%;
+}
+
+hr {
+    background-color: var(--border-color);
+    border: none;
+    height: 2px;
+    margin: var(--block-margin) 0;
+}
+
+/* Blocks */
+
+h1, h2, h3, h4, h5, h6, p, ol, ul, dl, figcaption {
+    margin: var(--block-margin) 0;
+}
+
+/* Headings */
+
+h1 { font-size: 1.6rem; }
+h2 { font-size: 1.2rem; }
+h3 { font-size: 1.1rem; }
+
+h4, h5, h6 {
+    font-size: 1rem;
+    font-style: italic;
+}
+
+h6 {
+    font-weight: normal;
+}
+
+/* Lists and blockquotes */
+
+ol, ul {
+    padding-left: 2rem;
+}
+
+li {
+    margin: 0.5rem 0;
+}
+li.jsavcodeline {
+    margin: 0;
+}
+
+li > ol, li > ul {
+    margin-top: 0;
+}
+
+dt {
+    font-style: italic;
+}
+
+dd {
+    margin-left: 2rem;
+}
+
+dd > p:first-child {
+    margin-top: 0.2rem;
+}
+
+blockquote {
+    margin: var(--block-margin) 0;
+    margin-right: 2rem;
+    padding-left: var(--block-margin);
+    border-left: 2px solid var(--border-color);
+    color: var(--quote-color);
+}
+
+/* Tables */
+
+table {
+    margin: var(--block-margin) auto;
+    border-collapse: collapse;
+    overflow-x: auto;
+    font-variant-numeric: lining-nums tabular-nums;
+}
+
+table caption {
+    margin-bottom: calc(0.75 * var(--block-margin));
+    font-style: italic;
+}
+
+tbody {
+    margin-top: calc(0.5 * var(--block-margin));
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+th {
+    border-top: 1px solid var(--border-color);
+    padding: calc(0.25 * var(--block-margin)) calc(0.5 * var(--block-margin));
+}
+
+td {
+    padding: calc(0.125 * var(--block-margin)) calc(0.5 * var(--block-margin));
+}
+
+/* Images, figures */
+
+figure {
+    text-align: center;
+}
+
+figcaption {
+    font-style: italic;
+}
+
+/* Highlighted blocks */
+
+.topic, .example, .figure, .alert, .note, .quiz, .TODO, div.embedContainer, div.jsavcontainer, details {
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    margin: var(--block-margin) 0;
+    padding: 0 var(--block-margin);
+}
+
+.figure, .topic, .example, div.embedContainer, div.jsavcontainer {
+    background-color: var(--box-bgcolor);
+}
+
+.alert {
+    background-color: var(--alert-bgcolor);
+}
+
+.topic .jsavcontainer {
+    background-color: transparent;
+    border: none;
+}
+
+.example .jsavcontainer {
+    background-color: transparent;
+    border: none;
+}
+
+.TODO::before {
+    content: "TODO";
+    font-weight: bold;
+    display: block;
+}
+.TODO {
+    background-color: var(--alert-bgcolor);
+}
+.TODO ul, .TODO li {
+    margin: 0;
+}
+
+
+/* Details, summary */
+
+summary * {
+    display: inline;
+    cursor: pointer;
+}
+
+
+/* Make JSAV containers *not* use the dark color scheme */
+
+@media (prefers-color-scheme: dark) {
+    div.jsavcontainer, div.embedContainer {
+        background-color: floralWhite;
+        color: black;
+    }
+}
+
+/* Links */
+
+a, a:visited {
+    color: var(--link-color);
+}
+
+.smallcaps {
+    font-variant: small-caps;
+}
+
+.term, .term:visited {
+    color: var(--term-color);
+}

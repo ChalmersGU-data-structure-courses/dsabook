@@ -1,0 +1,21 @@
+{
+  "translations" : {
+    "en": {
+      ".avTitle": "Bubble Sort Visualization",
+      "av_Authors": "Cliff Shaffer and Brandon Watkins",
+      "#about": "About",
+      "#run": "Run",
+      "#reset": "Reset",
+      "#arraysizeLabel": " List size: ",
+      "#arrayValuesLabel": " Your values: ",
+      "av_arrValsPlaceholder": "Type some array values, or click 'run' to use random values",
+      "av_c1": "For each pass, we will move left to right swapping adjacent elements as needed. Each pass moves the next largest element into its final position (these will be shown in yellow).",
+      "av_c2": "Starting pass ",
+      "av_c3": "For each element moving through the list",
+      "av_c4": "Compare elements",
+      "av_c5": "Swap",
+      "av_c6": "Done this pass. The last element processed is now in its final position.",
+      "av_c7": "Done sorting!"
+    }
+  }
+}

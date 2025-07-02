@@ -1,0 +1,80 @@
+<!--
+Linked List Insertion mini-proficiency exercise.
+Written by Junyang Chen and Cliff Shaffer, modified by Peter Ljunglöf
+-->
+<!DOCTYPE html>
+<html data-require="jsav math LinkedList-Add-PRO">
+  <head>
+    <title>Linked List Insertion Proficiency Exercise</title>
+    <script src="../../lib/require-2.1.14.min.js"></script>
+    <script src="../../khan-exercises/local-only/main.js" ></script>
+    <style>
+    #LinkedList-Add-PRO .jsavcanvas {
+      height: 150px;
+    }
+    #LinkedList-Add-PRO .bgColor {
+      font-size: 130%;
+      background-color: yellow;
+    }
+    </style>
+  </head>
+  <body data-height="700" data-width="950">
+    <div class="exercise">
+      <div class="vars">
+        <var id="arr_size">Khan.randRange(5, 7)</var>
+        <var id="insert_value">Khan.randRange(0, 999)</var>
+        <var id="insert_pos">Khan.randRange(1, arr_size-1)</var>
+        <var id="JSAV">LinkedListAddPRO.initJSAV(arr_size, insert_pos,insert_value)</var>
+      </div>
+      <div class="problems">
+        <div id="LinkedList-Add-PROp">
+        <p class="problem">
+          Your task in this exercise is to show the behavior for linked list
+          insertion, by inserting the value <b><var>insert_value</var></b> to
+          the given position. In the process, you will need to create a new node
+          and move some pointers.
+        </p>
+        <div class="question">
+          <p> To move an element value from one node to another, click on it (to
+            highlight it), then click on the element position in the node where
+            you want it to go. You can insert the new value
+            <b><var>insert_value</var></b> into a highlighted node by clicking the
+            "Insert Value" button. You can create a new list node by clicking the
+            "New Node" button.
+          </p>
+          <p> To change a pointer, click on its box (on the right
+            side of the node) to highlight it, then click on the node that you
+            want it to point to.
+            Note that you can you can only assign pointers to nodes that are visible to the algorithm!
+            The visible nodes are new nodes, and the one pointed to by <b>prev</b>, and their successors.
+            To move the <b>prev</b> pointer forward, click the "Move Forward" button.
+          </p>
+          <input id="reset" type="button" value="Reset" />
+          <input id="MoveForward" type="button" value="Move Forward" />
+          <input id="NewNode" type="button" value="New Node" />
+          <input id="insert" type="button" value="Insert Value" />
+          <div id="LinkedList-Add-PRO" class="jsavcanvas"></div>
+        </div>
+        <div class="solution" data-type="custom">
+          <div class="guess"> [LinkedListAddPRO.userInput] </div>
+          <div class="validator-function">
+            if (!LinkedListAddPRO.checkAnswer() && !guess[0]) {
+            return ""; // User did not click, and correct answer is not
+            // initial array state
+            } else { return LinkedListAddPRO.checkAnswer(arr_size); }
+          </div>
+        </div>
+        <div class="hints">
+          <p>You want to reproduce the behavior of the insertion
+            function. Try starting with a new node.</p>
+          <p>Point the prev pointer to the node <em>before</em> the node
+            where you want to insert the value.</p>
+          <p>Now you need to fix up the pointers. Click the new node's
+            pointer box, then click the node that should follow it.
+            Click the preceeding node's pointer box, then click the new node.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

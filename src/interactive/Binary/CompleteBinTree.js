@@ -1,0 +1,23 @@
+$(document).ready(function() {
+  "use strict";
+  var av = new JSAV("CompleteBinTree", {animationMode: "none"});
+  var btTop = -5;
+  var btLeft = 300;
+  var bt = av.ds.binarytree({nodegap: 25, left: btLeft, top: btTop});
+  bt.root("0");
+  var rt = bt.root();
+  rt.left("1");
+  rt.left().left("3");
+  rt.left().right("4");
+  rt.left().left().left("7");
+  rt.left().left().right("8");
+  rt.left().right().left("9");
+  rt.left().right().right("10");
+  rt.right("2");
+  rt.right().right("6");
+  rt.right().left("5");
+  rt.right().left().left("11");
+  bt.layout();
+  av.displayInit();
+  av.recorded();
+});
