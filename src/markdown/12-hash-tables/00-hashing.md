@@ -23,20 +23,20 @@ properly. Designers need to pay careful attention to all of the details
 involved with implementing a hash system.
 
 A hash system stores records in an array called a
-[hash table]{.term}, which we will call `HT` below.
+[hash table]{.term}, which we will call $\textit{HT}$ below.
 Hashing works by performing a computation on a search key $k$ in a way
-that is intended to identify the position in `HT` that contains the
+that is intended to identify the position in $\textit{HT}$ that contains the
 record with key $k$. The function that does this calculation is called
 the [hash function]{.term}, and will be denoted by $\mathbf{h}$. Since hashing
 schemes place records in the table in whatever order satisfies the needs
 of the address calculation, records are not ordered by value. A position
-in the hash table is also known as a [slot]{.term}. The number of slots in hash table `HT` will be denoted by
+in the hash table is also known as a [slot]{.term}. The number of slots in hash table $\textit{HT}$ will be denoted by
 the variable $m$ with slots numbered from 0 to $m-1$.
 
 The goal for a hashing system is to arrange things such that, for any
 key value $k$ and some hash function $\mathbf{h}$, $i = \mathbf{h}(k)$ is a slot
 in the table such that $0 \leq i < m$, and we have the key of the record
-stored at `HT`[$i$] equal to $k$.
+stored at $\textit{HT}[i]$ equal to $k$.
 
 Since the records are not ordered by value, hashing is not a good method for answering
 range searches. In other words, we cannot easily find all records (if
@@ -58,9 +58,8 @@ stored on disk (the other is the [B-tree]{.term}).
 
 As a simple (though unrealistic) example of hashing, consider storing
 $n$ records, each with a unique key value in the range 0 to $n-1$. A
-record with key $k$ can be stored in `HT`[$k$], and so the hash function
-is $\mathbf{h}(k) = k$. To find the record with key value $k$, look in
-`HT`[$k$].
+record with key $k$ can be stored in $\textit{HT}[k]$, and so the hash function
+is $\mathbf{h}(k) = k$. To find the record with key value $k$, look in $\textit{HT}[k]$.
 
 <inlineav id="hashIntroCON" src="Hashing/hashIntroCON.js" name="Hashing Intro Slideshow" links="Hashing/hashIntroCON.css"/>
 :::
