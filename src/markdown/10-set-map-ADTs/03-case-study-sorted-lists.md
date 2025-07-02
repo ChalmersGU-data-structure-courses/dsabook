@@ -1,36 +1,108 @@
 
-## Case study: Implementing sets using sorted lists
+## Case study: Implementing sets using lists
 
 <!-- ### Implementing sets -->
 
-We can implement either of these ADTs using an array. For a set, we can
-use an array of elements.
-We have one further choice: should the array be *sorted* or *unsorted*?
+Both sets and maps can be implemented using lists.
+For a set, we can use a simple list of elements.
 
-An unsorted array is usually not an appropriate choice, because the
-`contains` method must use *linear search*, which takes linear time.
-Thus we cannot really look up items in the set or map efficiently.
+#### Using a linked list
 
-A sorted array is a lot better. The `contains` method can use *binary
-search*, which takes logarithmic time. Hence looking up items is
-efficient. Unfortunately, modifying the data structure is slow. If we
-want to `add` an item to a sorted array, we have to keep the array
-sorted -- and that means we need to *insert* the new item at the right
-place in the array, using the insertion algorithm from Insertion Sort.
-This takes linear time in the worst case. Similarly, to `remove` an item
-without creating a hole in the array, we need to move all the items that
-come after one space backwards. This also takes linear time.
+Recall from @sec:stacks-implemented-as-linked-lists that a linked list consists of nodes pointing to their successors:
 
-:::TODO
-Tie this to invariants.
-:::
+    datatype SetNode of T:
+        elem: T             // Value for this node
+        next: SetNode of T  // Pointer to next node in list
 
-A sorted array is a suitable way to implement a set or a map that *never
+Just as for linked stacks, our set datatype will consist of a pointer to the head of the list, and its size.
+We also have to give the operations for `contains`, `add` and `remove`.
+
+    datatype LinkedSet implements Set:
+        head: Node = null   // Pointer to head of list
+        size: Int = 0       // Size of list
+
+Searching in a linked list is a simple while loop where we start at the head and continue down the list.
+If we reach the end of the list we return `false`, because the element wasn't found:
+
+    datatype LinkedSet:
+        ...
+        contains(elem):
+            node = head
+            while node is not null:
+                if elem == node.elem:
+                    return true   // We found the element, so return true
+                node = node.next  // Move to the next list node
+            return false          // We reached the end of the list
+
+To add an element we first have to check if it is already there -- sets are not allowed to contain the same element twice.
+If it is not in the list we can just attach a new list node before the head of the list (and increase the size):
+
+    datatype LinkedSet:
+        ...
+        add(elem):
+            if not contains(elem):
+                newHead = new Node(elem, head)  // Create a new node pointing to the current head
+                head = newHead   // Redirect the head to the new node
+                size = size + 1
+
+Removing an element is slightly trickier.
+If we want to remove a certain node from the list, we have to redirect the `next` pointer from the *previous* node.
+So we have to search for the node *before* the node we want to remove.
+We can do that by keeping a `prev` pointer while iterating through the list.
+
+    class LinkedSet:
+        ...
+        remove(elem):
+            prev = null
+            node = head
+            while node is not null:
+                if elem == node.elem:  // We found the node to remove
+                    if prev is null:
+                        head = node.next
+                    else:
+                        prev.next = node.next
+                    node.next = null  // For garbage collection
+                    size = size - 1
+                    return
+                prev = node
+                node = node.next
+
+Note that we have a special case:
+if `prev` is null it is the head itself that we want to remove, because there is not previous node yet.
+
+#### Linear complexity
+
+It is clear that all the operations are linear in the size of the list, $O(n)$, because in the worst case we have to look at all nodes.
+In later chapters we will see how to improve the efficiency, by using
+
+-   [Balanced search trees](#balanced-tree){.term} (@sec:self-balancing-trees), which bring down
+    the complexity of the operations to $O(\log n)$.
+-   [Hash tables](#hash-table){.term} ([Chapter @sec:hash-tables]), which make
+    the operations constant time, $O(1)$.
+
+But some times it is enough to use a simple linked list-based implementation.
+And in fact, the [separate chaining]{.term} hash table (@sec:separate-chaining)
+requires an underlying simpler implementation -- and there a linked list works very fine!
+
+#### Using a sorted array
+
+There is a way to speed up *one* of the operations, by using a sorted array instead of a linked list.
+If we have a sorted array of elements, the `contains` method can use
+[binary search]{.term} (@sec:binary-search), which takes logarithmic time
+(@sec:case-study-nalysing-binary-search).
+Hence looking up items will be really efficient.
+
+Unfortunately, modifying the data structure is still slow.
+If we want to `add` an item to a sorted array, we have to keep the array sorted -- and that means we need to *insert* the new item at the right place in the array, using the insertion algorithm from Insertion Sort (@sec:insertion-sort).
+This takes linear time in the worst case.
+Similarly, to `remove` an item without creating a hole in the array, we need to shift a bunch of elements in the array, and this also takes linear time.
+
+However, a sorted array is a suitable way to implement a set or a map that *never
 changes*, that is where we never need to add or remove items after the
 array is created. We start by sorting the array, using either Quicksort
 or Mergesort, and then we can use binary search to find items in it.
 Sorted arrays also support the *sorted set* and *sorted map* operations
-such as *range queries* -- these can also be implemented using binary search.
+such as *range queries* (see @sec:sorted-sets-and-maps), because these can also be implemented using binary search.
 
 Sorted arrays can also be useful in cases where we always add *many*
 items in one go. Given a sorted array $A$, and an unsorted list of items
@@ -40,172 +112,40 @@ Note that the merge step takes linear time, and sorting $B$ takes a bit
 more than linear time, so this is a lot faster than adding all the items
 from $B$ one by one (which would take quadratic time).
 
-An array is not a good way to implement a set or a map, if we need both
-`add`, `remove` and `contains` to be efficient. Later we will learn
-about two data structures that are more suitable for implementing sets
-and maps: binary search trees and hash tables.
-
-
-<!-- ### Complexity analysis -->
-
-
 ### Implementing maps
 
-We can implement either of these ADTs using an array. For a set, we can
-use an array of elements. For a map, we have two choices:
+If we want to implement a map instead of a set, we have two choices:
 
--   In languages which support *tuples* as a data type (such as Python),
-    we can have an array of *key-value* pairs.
--   Alternatively, we can use two arrays. One array, `keys`, holds the
-    keys and the other array, `values`, holds the corresponding values.
-    The two arrays must be "kept in sync" so that `values[i]` holds
-    the value associated with key `keys[i]`.
+-   We can have a list or array of *key-value* pairs.
+-   Alternatively, we can use two lists or arrays, one for holding the keys and another for holding the values.
+    The two lists must be "kept in sync" so that a key with its value occurs at the same position.
 
+Note that these maps are exactly as slow as the corresponding sets (linked lists and sorted arrays), so they are not useful for working with large collections -- for this we refer to [Chapters @sec:search-trees] and [-@sec:hash-tables].
 
-It is not difficult to implement a **Map** using a list. The problem is
-that all the operations -- searching for a key, updating the value for
-a key, and removing a key -- will be linear in the number of entries,
-$O(n)$.
+#### Using a linked list
 
-In later chapters we will see how to improve the efficiency, by using
+If we want to implement the map using a linked list, the easiest is probably to have list nodes that contain both the keays and the values:
 
--   [Balanced search trees](#balanced-tree){.term} (@sec:self-balancing-trees), which bring down
-    the complexity of the operations to $O(\log n)$.
--   [Hash tables](#hash-table){.term} ([Chapter @sec:hash-tables]), which make
-    the operations constant time, $O(1)$.
+    datatype MapNode of K to V:
+        key: K          // Key for this node
+        value: V        // Value for this node
+        next: MapNode   // Pointer to next node in list
 
-But some times it is enough to use a simple list-based implementation.
-And in fact, the
-[separate chaining]{.term} hash map (@sec:separate-chaining)
-requires an underlying simpler map implementation -- and there a linked
-list works very fine!
+The map operations `get`, `put` and `remove` are minor modifications to the set operations that we defined earlier.
+We leave them as an exercise to the reader to implement.
 
-#### Using a list of key-value pairs
+#### Using a sorted array
 
-A very simple way of implementing a **Map** using a list, is to use
-[key-value pairs](#key-value-pair){.term}.
+If we want to use a sorted array, one possibility is to use two arrays -- one for the keys and another for the values.
 
-    datatype KVPair of K and V:
-        key: K
-        value: V
+    datatype SortedArrayMap of K to V:
+        keys: Array of K
+        values: Array of V
+        size: Int
 
+The implementations of the set methods are left as exercises to the reader, but there are some important things to remember:
 
-Now we can create a **Map** class that uses an underlying **List** of
-**KVPair**. So the only thing we need is really an internal variable
-referring to the underlying list.
+- The `keys` and `values` must be kept in sync, so that `keys[i]` is always the key for the value in `values[i]`
+- This means that we have to remember to modify both arrays in the same way -- if we delete the $i$th element we have to delete both `keys[i]` and `values[i]` (and shift the arrays in the same way)
 
-    datatype LinkedMap implements Map:
-        internalList: LinkedList of KVPair = new LinkedList()
-
-Finding the value for a certain key is easy. We just iterate through all
-entries and stop whenever we find a matching key.
-
-    datatype LinkedMap implements Map:
-        ...
-        get(key):
-            for each entry in internalList:
-                if key == entry.key:
-                    return entry.value
-            return null
-
-Setting a value for a given key means to search the list for a matching
-key, and then updating the value. If we cannot find the key, we add a
-new **KVPair** to the list.
-
-    datatype LinkedMap implements Map:
-        ...
-        put(key, value):
-            for each entry in internalList:
-                if key == entry.key:
-                    entry.value = value
-                    return
-            // The key isn't present, so we add a new key-value pair to the list.
-            // Because it's a linked list we add the pair to the front of the list.
-            internalList.add(0, new KVPair(key, value))
-
-In this example we're using a linked list, but we could equally well
-have used a dynamic array list. The only thing we have to think about is
-to add new pairs at the right location (beginning or end of the list)
--- because linked lists prefer adding at the front, while array lists
-rather add to the back of the list.
-
-Other methods can be deferred to the underlying list.
-
-    class LinkedMap implements Map:
-        ...
-        size():
-            return internalList.size
-
-(Note that since the number of entries can vary, we need `size` to be a method and not a property.)
-
-
-#### How to remove keys from the map
-
-There is one problem with this simple map implementation -- how to
-remove keys from it. One possibility would be to first search for the
-index where the key is located, and then remove that index from the
-list.
-
-But this would be slightly inefficient, because removing an element from
-a certain position takes $O(n)$ time in the worst case. So, first we
-find the position (which takes $O(n)$ time), and then we remove it
-(which takes another $O(n)$ time). This is double the work than it
-should be, which is unnecessary.
-
-    class LinkedMap implements Map:
-        ...
-        // This method is sub-optimal, because it makes two passes:
-        // First a search to find the index, and then a loop delete that index.
-        remove(key):
-            i = 0
-            for each entry in internalList:
-                if key == entry.key:
-                    internalList.remove(i)
-                    return entry.value
-                i = i + 1
-            return null
-
-If we allow ourselves to peek into the inner workings of the linked list, we can make a more efficient version.
-Note that to be able to remove a list node, we need a pointer to the *previous* node.
-This makes it possible for us to repoint the `next` pointer from the previous node to its new next node.
-Therefore we keep two variables, `prev` that points to the previous node, and `current` that points to the current.
-
-    class LinkedMap implements Map:
-        ...
-        remove(key):
-            prev = null
-            current = internalList.head
-            while current is not null:
-                if key == current.key:
-                    if prev is null:
-                        // Special case: if prev is null,
-                        // it's the list head that needs to be repointed.
-                        internalList.head = current.next
-                    else:
-                        prev.next = current.next
-                    current.next = null  // For garbage collection
-                    internalList.size = internalList.size - 1
-                    return current.value
-                prev = current
-                current = current.next
-            return null
-
-It is not good programming practice that one datatype (or class, or module) looks into the implementation details of another one.
-Therefore, a real library for linked lists should have more public methods to be able to implement an efficient version without having to look into its implementation.
-
-For example, the **Iterator** interface in Java provides a "remove-the-current-node" method, so it is possible to implement optimise map removal just like above.
-
-#### Using linked key-value nodes
-
-An alternative to using an underlying list of key-value pairs is to modify the implementation of linked lists just slightly.
-This gives us more control of the implementation, with the tradeoff that we have to reimplement some things.
-
-Instead of using linked list nodes with just one value, we used key-value nodes.
-
-    datatype KVNode of K and V:
-        key: K        // Key for this node
-        value: V      // Value for this node
-        next: KVNode  // Pointer to next node in list
-
-The actual implementation of the datatype LinkedMap now becomes an exercise for the reader.
 
