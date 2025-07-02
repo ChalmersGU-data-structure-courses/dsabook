@@ -5,13 +5,25 @@
 - Prio 1: update the text in Summary of asymptotic notations
 :::
 
+[Big-$O$ notation]{.term} describes an upper bound.
+In other words, big-$O$ states a claim about the greatest amount of some resource (usually time) that is required by an algorithm for some class of inputs of size $n$.
+A similar notation is used to describe the least *amount* of a resource that an algorithm needs for some class of input.
+This is denoted by the symbol $\Omega$, pronounced "big-Omega" or just "Omega".
+
 The definition for big-$O$ allows us to greatly overestimate the cost for an algorithm.
-But sometimes we know a tight bound -- that is, a bound that truly reflects the cost of the algorithm or program with a constant factor.
+But sometimes we know a *tight* bound -- that is, a bound that truly reflects the cost of the algorithm or program with a constant factor.
 In that case, we can express this more accurate state of our knowledge using the tight bound $\Theta$ instead of using big-$O$.
+
+:::::: latex
+\booklink{Read the rest online}{5.2}{sec:lower-bounds-and-tight-bounds}
+::::::
 
 However, it is usually much more difficult to reason about the tight bound,
 for example, the simplifying rules for addition and multiplication do not hold for $\Theta$.
-Therefore we will almost exclusively use the upper bound big-$O$ notation.
+Furthermore, we are very rarely interested in the lower bound when we analyse algorithms, so
+therefore we will almost exclusively use the upper bound big-$O$ notation.
+
+:::::: online
 
 ::: note
 In this section we assume that all functions are *monotonically increasing*, just as we did in the previous section.
@@ -27,7 +39,6 @@ In other words, big-$O$ states a claim about the greatest amount of some resourc
 A similar notation is used to describe the least amount of a resource that an algorithm needs for some class of input.
 Like big-$O$, this is a measure of the algorithm's growth rate.
 And like big-$O$, it works for any resource (usually time), and for some particular class of inputs of size $n$.
-
 The [lower bound]{.term} for an algorithm (or a problem, as we will discuss in @sec:analysing-problems) is denoted by the symbol $\Omega$, pronounced "big-Omega" or just "Omega".
 The following definition for $\Omega$ is symmetric with the definition of big-$O$.
 
@@ -240,3 +251,5 @@ $$
 because $n$ grows faster than $\log n$.
 Thus, $f\in\Omega(g)$ (or equivalently, $g\in O(f)$).
 :::
+
+::::::

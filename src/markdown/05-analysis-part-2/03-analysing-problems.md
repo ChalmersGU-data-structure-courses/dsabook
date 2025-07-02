@@ -71,12 +71,18 @@ So, to summarise: The upper bound for a problem is the best that you *can* do, w
 If those two are the same, then we can say that we really understand our problem.
 
 
-### Case study: Lower bounds for sorting
+### Case study: Lower bounds for sorting {#lower-bounds-for-sorting}
+
+:::::: latex
+\booklink{Read the rest online}{5.3}{sec:lower-bounds-for-sorting}
+::::::
 
 By now you have seen many analyses for algorithms.
 These analyses generally define the worst-case upper bounds.
 For many of the algorithms presented so far, analysis has been quite easy.
 This section considers a more difficult task: An analysis for the cost of a *problem* as opposed to an *algorithm*.
+
+:::::: online
 
 As we explained earlier, the lower bound defines the best possible cost for *any* algorithm that solves the problem, including algorithms not yet invented.
 Once we know the lower bound for the problem, we know that no future algorithm can possibly be (asymptotically) more efficient.
@@ -151,3 +157,5 @@ conclude that the problem of sorting requires $\Theta(n \log n)$ time.
 As a corollary, we know that no comparison-based sorting algorithm can
 improve on existing $\Theta(n \log n)$ time sorting algorithms by more
 than a constant factor.
+
+::::::

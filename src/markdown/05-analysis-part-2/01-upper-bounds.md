@@ -73,6 +73,7 @@ for all $n > 1$. So, $T(n) \leq c n^2$ for $c = c_1 + c_2$, and
 $n_0 = 1$. Therefore, $T(n)$ is in $O(n^2)$ by the definition.
 :::
 
+<!--
 ::: example
 #### Example: Accessing an array cell
 
@@ -83,6 +84,7 @@ say in this case that $T(n)$ is in $O(c)$. However, it is
 traditional to say that an algorithm whose running time has a constant
 upper bound is in $O(1)$.
 :::
+-->
 
 If someone asked you out of the blue "Who is the best?" your natural
 reaction should be to reply "Best at what?" In the same way, if you
@@ -118,12 +120,18 @@ $O(n)$.
 
 We introduced simplifying rules in @sec:simplification-rules, but repeat them here in compact form:
 
-     Rule              Simplification                                                       Alternatively
----  ----------------  -------------------------------------------------------------------  -------------------------------
+     Rule              Simplification
+---  ----------------  -------------------------------------------------------------------
 (1)  Transitivity      if $f\in O(g)$ and $g\in O(h)$, then $f\in O(h)$
-(2)  Constant $k>0$    if $f\in O(g)$, then $k\cdot f\in O(g)$                              $k \cdot O(g) = O(g)$
-(3)  Addition          if $f\in O(g)$ and $f'\in O(g')$, then $f+f'\in O(\max(g,g'))$       $O(g) + O(g') = O(\max(g,g'))$
-(4)  Multiplication    if $f\in O(g)$ and $f'\in O(g')$, then $f\cdot f'\in O(g\cdot g')$   $O(g) \cdot O(g') = O(g\cdot g')$
+(2)  Constant $k>0$    if $f\in O(g)$, then $k\cdot f\in O(g)$
+(3)  Addition          if $f\in O(g)$ and $f'\in O(g')$, then $f+f'\in O(\max(g,g'))$
+(4)  Multiplication    if $f\in O(g)$ and $f'\in O(g')$, then $f\cdot f'\in O(g\cdot g')$
+
+<!--
+(2) alternatively, $k \cdot O(g) = O(g)$)
+(3) alternatively, $O(g) + O(g') = O(\max(g,g'))$)
+(4) alternatively, $O(g) \cdot O(g') = O(g\cdot g')$)
+ -->
 
 Using these rules we can easily determine the asymptotic growth rate for many algorithms.
 
@@ -138,10 +146,9 @@ One interesting consequence of asymptotic complexity is that the base of a logar
 
 $$ O(\log_2(n)) = O(\ln(n)) = O(\log_10(n)) $$
 
-The reason for this is that according to the logarithm laws, $\log_b(n) = \log_a(n) \cdot \frac{1}{\log_a(b)}$.
-But $\frac{1}{\log_a(b)}$ is a constant which we can ignore, so $O(\log_b(n)) = O(\log_a(n))$.
+The reason for this is that according to the logarithm laws, $\log_b(n) = \log_a(n) \cdot 1/\log_a(b)$.
+But $1/\log_a(b)$ is a constant which we can ignore, so $O(\log_b(n)) = O(\log_a(n))$.
 Therefore we can just ignore the base and write $O(\log n)$.
-
 (Note that this *does not* hold for exponential growth -- e.g., $2^n\in O(10^n)$, but $10^n\not\in O(2^n)$.)
 
 Another consequence of the logarithm laws is that it doesn't really matter if you take the logarithm from a linear, quadratic, cubic, or any power function:
@@ -149,7 +156,6 @@ Another consequence of the logarithm laws is that it doesn't really matter if yo
 $$ O(\log n) = O(\log n^2) = O(\log n^3) = O(\log n^k) $$
 
 The reason for this is that $\log n^k = k\cdot\log n$ according to the logarithm laws, so the exponent $k$ becomes a multiplicative constant and can be ignored.
-
 However, taking the power of a logarithm cannot be ignored, so $O(\log n)$ and $O(\log^2 n)$ are different complexity classes.
 
 
