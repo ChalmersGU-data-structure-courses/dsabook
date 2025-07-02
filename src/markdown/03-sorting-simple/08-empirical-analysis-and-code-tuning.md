@@ -5,6 +5,10 @@
 - Prio 3: are the other simple optimisations?
 :::
 
+:::::: latex
+\booklink{Read the rest online}{3.8}{sec:empirical-analysis-and-code-tuning}
+::::::
+
 Since sorting is such an important application, it is natural for
 programmers to want to optimise their sorting code to run faster. Of
 course all quadratic sorts (Insertion sort, Bubble sort and Selection
@@ -17,6 +21,9 @@ about code tuning by seeing which of these ideas actually turn out to
 give better performance. It is also interesting to see the relative
 performance of the three algorithms, as well as how various programming
 languages compare.
+
+
+:::::: online
 
 ### Empirical comparison
 
@@ -158,3 +165,4 @@ Now, you can test whether you understand how this optimisation works.
 <avembed id="insertionSortWithoutSwapPRO" src="Sorting/insertionSortWithoutSwapPRO.html" type="pe" name="Insertion Sort Without Swap Proficiency Exercise"/>
 :::
 
+::::::
