@@ -84,8 +84,7 @@ functions favour random access to a list of children.
 An alternative is to provide access to a **List** of the children pointers.
 This list can be an array-based list or a linked list or even a dynamic
 function generating the children on demand. The only thing we will assume is
-that it follows the **List** ADT, as described in the section about
-[the List ADT].
+that it follows the **List** ADT, as described in @sec:general-lists.
 
     // General tree nodes
     datatype GTNode of T:
