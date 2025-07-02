@@ -105,7 +105,7 @@ So, the average space usage will be $O(n) + n\cdot O(k) = O(n) + O(n) = O(n)$.
 With this new representation we could reduce the space complexity from quadratic $O(n^2)$ to linear $O(n)$.
 :::
 
-This last example discussed two possible implementations of *graphs*, and we will discuss this further in [chapter @sec:graphs].
+This last example discussed two possible implementations of *graphs*, and we will discuss this further in [Chapter @sec:graphs].
 
 ::::::
 

@@ -157,7 +157,7 @@ So we declare a class **KVPair** that we will use in our example code.
 
 Using this we can easily implement a **Map** from an underlying
 **List**, which we will discuss further in the
-[chapter about linear structures](#implementing-maps-using-lists).
+[Chapter about linear structures](#implementing-maps-using-lists).
 
 ### Sorting using comparables
 

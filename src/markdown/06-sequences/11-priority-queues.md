@@ -36,7 +36,7 @@ queue supports the following operations:
 
 ### ADT for priority queues
 
-In [chapter @sec:priority-queues-and-heaps], we will see how to implement a priority queue so that
+In [Chapter @sec:priority-queues-and-heaps], we will see how to implement a priority queue so that
 both adding and removing the minimum take $O(\log n)$ time.
 
     interface PriorityQueue of T extends Collection:
@@ -189,4 +189,4 @@ This means that `removeMin` will be a very efficient, constant time operation, j
 However, inserting an element into a sorted list, keeping it sorted, is in the worst case linear, $O(n)$.
 Therefore, our sorting example in @sec:use-cases-for-priority-queues becomes a quadratic implementation, $O(n^2)$, if we use this naive implementation of priority queues.
 
-Later, in [chapter @sec:priority-queues-and-heaps], we will show a more efficient version of priority queues, based on *binary trees*.
+Later, in [Chapter @sec:priority-queues-and-heaps], we will show a more efficient version of priority queues, based on *binary trees*.
