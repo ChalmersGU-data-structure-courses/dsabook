@@ -47,9 +47,15 @@ rotation moves $S$ higher in the tree by adjusting its position with
 respect to its parent and grandparent. A side effect of the rotations is
 a tendency to balance the tree. There are three types of rotation.
 
-<!--
-### Invariants
- -->
+Note that even if you only search for a value, *the tree structure is changed*
+because the found node will be splayed to the root.
+This is a big difference between splay trees and the search trees we have looked at previously.
+
+:::::: latex
+\booklink{Read the rest online}{11.4}{sec:splay-trees}
+::::::
+
+:::::: online
 
 ### Splaying
 
@@ -136,12 +142,6 @@ tree. Regardless of balance, splaying will make frequently accessed
 nodes stay near the top of the tree, resulting in reduced access cost.
 Proof that the splay tree meets the guarantee of $O(m \log n)$ is beyond
 the scope of our study.
-
-:::::: latex
-\booklink{Read the rest online}{11.4}{sec:searching-in-a-splay-tree}
-::::::
-
-:::::: online
 
 ::: example
 #### Example: Searching in a splay tree
