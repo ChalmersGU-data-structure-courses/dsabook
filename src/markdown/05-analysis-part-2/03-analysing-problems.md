@@ -50,7 +50,7 @@ The algorithm must at least look at every element in the input, just to determin
 Thus, any sorting algorithm must take at least $\Omega(n)$ time.
 For many problems, this observation that each of the $n$ inputs must be looked at leads to an easy $\Omega(n)$ lower bound.
 
-In the previous chapter about sorting, you learned about some sorting algorithms whose running time is in $O(n^2)$ -- bubble sort, selection sort and insertion sort.
+In a previous chapter about sorting, you learned about some sorting algorithms whose running time is in $O(n^2)$ -- bubble sort, selection sort and insertion sort.
 But you also learned about the linearithmic sorting algorithms quicksort and mergesort with a running time in $O(n\log n)$.
 Thus, the problem of sorting can be said to have an upper bound in $O(n\log n)$.
 How do we close the gap between $\Omega(n)$ and $O(n\log n)$?
