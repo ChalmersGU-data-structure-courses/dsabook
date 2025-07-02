@@ -5,6 +5,10 @@
 - Prio 3: redo the tests, better
 :::
 
+:::::: latex
+\booklink{Read the rest online}{4.6}{sec:empirical-comparison-of-sorting-algorithms}
+::::::
+
 Which sorting algorithm is fastest? Asymptotic complexity analysis lets
 us distinguish between $O(n^2)$ and $O(n \log n)$ algorithms,
 but it does not help distinguish between algorithms with the same
@@ -12,6 +16,7 @@ asymptotic complexity. Nor does asymptotic analysis say anything about
 which algorithm is best for sorting small lists. For answers to these
 questions, we can turn to empirical testing.
 
+:::::: online
 
 Sort                    1K      10K     100K       1M      10M   100K sorted   100K reversed
 ------------------  -------  -------  -------   ------  ------- ------------- ---------------
@@ -69,3 +74,5 @@ We also see that Insertion sort is the fastest algorithm of all if the input is 
 Quicksort with a cutoff to Insertion sort is clearly the best overall algorithm,
 but recall that this experiment was only run on random integer arrays.
 In general, optimising the various algorithms makes a noticeable improvement for larger array sizes.
+
+::::::

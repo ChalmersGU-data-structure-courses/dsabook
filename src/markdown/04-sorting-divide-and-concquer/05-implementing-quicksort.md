@@ -1,4 +1,4 @@
-## Implementing quicksort
+## Implementing Quicksort
 
 ::: TODO
 - Prio 2: dangers with quadratic behaviour: hackers
@@ -27,16 +27,13 @@ Here is more detailed pseudocode that takes the details into account:
             // as long as it hasn't passed the right pointer, *and* the value is smaller than the pivot.
             while left <= right and A[left] < A[pivot]:
                 left = left + 1
-
             // Move the right pointer leftwards as far as possible,
             // as long as it hasn't passed the left pointer, *and* the value is greater than the pivot.
             while left <= right and A[right] > A[pivot]:
                 right = right - 1
-
             // Break out of the loop if the pointers has passed each other.
             if left > right:
                 break
-
             // Otherwise, swap the elements and move both pointers one step towards each other.
             swap(A, left, right)
             left = left + 1
@@ -53,6 +50,11 @@ It is also possible to start by putting the pivot at the end of the subarray.
 In that case we have to swap the pivot value with the *left* pointer in the end.
 This is an equally good alternative partitioning algorithm.
 
+:::::: latex
+\booklink{Read the rest online}{4.5}{sec:partition}
+::::::
+
+:::::: online
 ::: topic
 #### An alternative partitioning algorithm
 
@@ -77,7 +79,7 @@ In this case we start by putting the pivot at the end of the subarray.
 
 However, Lomuto's partitioning algorithm is somewhat less efficient than Hoare's algorithm, because it makes more swaps.
 :::
-
+::::::
 
 ### Selecting the pivot
 
@@ -157,6 +159,11 @@ The answer can only be determined by empirical testing, but on modern machines t
 
 Note that this improvement can also be used for Mergesort!
 
+:::::: latex
+\booklink{Read the rest online}{4.6}{sec:more-practical-improvements}
+::::::
+
+:::::: online
 #### Running Insertion sort in a single final pass
 
 There is a variant of this optimisation: When
@@ -188,3 +195,4 @@ suggested above, most of the function calls will already have been
 eliminated. Thus, eliminating the remaining function calls will yield
 only a modest speedup.
 
+::::::

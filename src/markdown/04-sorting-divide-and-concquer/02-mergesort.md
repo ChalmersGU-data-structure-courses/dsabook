@@ -35,6 +35,8 @@ Here is a visualisation that illustrates how Mergesort works.
 <avembed id="mergesortAV" src="Sorting/mergesortAV.html" type="ss" name="Mergesort Visualisation"/>
 :::
 
+#### Merge
+
 The hardest step to understand about Mergesort is the merge function.
 The merge function starts by examining the first record of each sublist
 and picks the smaller value as the smallest record overall. This smaller
@@ -89,6 +91,7 @@ Now here is a full proficiency exercise to put it all together.
 ### Complexity analysis
 
 ::: TODO
+- Change the long lists to an image
 - complexity
 - cutoff to insertion sort *does not* change complexity
 - stable, not in-place

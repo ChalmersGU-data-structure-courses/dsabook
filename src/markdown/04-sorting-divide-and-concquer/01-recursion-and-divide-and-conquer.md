@@ -76,26 +76,24 @@ will eventually make it's way back to the person who asked.
 #### Example: The Fibonacci sequence
 
 Here is an example of a function that is naturally written using recursion.
-
 The Fibonacci sequence is the series of numbers: 1, 1, 2, 3, 5, 8, 13, 21, 34, ...
 Any number in the sequence is found by adding up the two numbers before it,
 and the first two numbers in the sequence are both 1.
-
 Mathematically, the $n$th Fibonacci number is calculated recursively like this:
 
-\begin{eqnarray*}
-f(n) &=& f(n-1) + f(n-2) \\
-f(0) &=& f(1) \; = \; 1
-\end{eqnarray*}
+\begin{align*}
+f(0) = f(1) &= 1 \\
+f(n)        &= f(n-1) + f(n-2)
+\end{align*}
 
 The first row is the *recursive case*, and the second row defines the two *base cases*.
 This mathematical definition is easily translated into pseudocode:
 
-   function fibonacci(n):
-      if n <= 1:
-         return 1
-      else:
-         return fibonacci(n - 1) + fibonacci(n - 2)
+    function fibonacci(n):
+        if n <= 1:
+            return 1
+        else:
+            return fibonacci(n - 1) + fibonacci(n - 2)
 
 :::
 

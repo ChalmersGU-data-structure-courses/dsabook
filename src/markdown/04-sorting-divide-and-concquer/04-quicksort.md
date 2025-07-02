@@ -104,7 +104,7 @@ will partition.
 
     function partition(A, left, right, pivot) -> Int:
         swap A[pivot] with A[left]
-        repeat until left > right:
+        while left ≤ right:
             move left rightwards until A[left] < A[pivot]
             move right leftwards until A[right] > A[pivot]
             swap A[left] with A[right]
@@ -150,7 +150,8 @@ Here is a visualisation illustrating the running time analysis of the partition 
 <inlineav id="QuickSortPartitionAnalysisCON" src="Sorting/QuickSortPartitionAnalysisCON.js" name="Quicksort Partition Analysis Slideshow" links="Sorting/QuickSortPartitionAnalysisCON.css"/>
 :::
 
-### Putting it together
+:::::: online
+#### Putting it together
 
 ::: dsvis
 Here is a visualisation for the entire Quicksort algorithm.
@@ -170,6 +171,7 @@ Quicksort.
 
 <avembed id="quicksortPRO" src="Sorting/quicksortPRO.html" type="pe" name="Quicksort Proficiency Exercise"/>
 :::
+::::::
 
 
 ### Complexity analysis
@@ -203,6 +205,8 @@ extremely unlikely to happen. When selecting the middle position of the
 current subarray, it is still unlikely to happen. It does not take many
 good partitionings for Quicksort to work fairly well.
 
+#### Best-case complexity
+
 Here is an explanation of the best-case running time of Quicksort:
 
 - The pivot partitions the array into two halves of size $N/2$ each. This requires $O(N)$ amount of work.
@@ -221,15 +225,15 @@ This visualisation explains the best-case running time of Quicksort
 <inlineav id="QuickSortBestCaseCON" src="Sorting/QuickSortBestCaseCON.js" name="Quicksort Best Case Analysis Slideshow" links="Sorting/QuickSortBestCaseCON.css"/>
 :::
 
+#### Average-case complexity
+
 Quicksort's average-case behaviour falls somewhere between the extremes
 of worst and best case. Average-case analysis considers the cost for all
 possible arrangements of input, summing the costs and dividing by the
 number of cases. We make one reasonable simplifying assumption: At each
 partition step, the pivot is equally likely to end in any position in
 the (sorted) array. In other words, the pivot is equally likely to break
-an array into partitions of sizes 0 and $N-1$, or 1 and $N-2$, and so
-on.
-
+an array into partitions of sizes 0 and $N-1$, or 1 and $N-2$, and so on.
 Given this assumption, the average-case cost is computed from the
 following equation:
 
