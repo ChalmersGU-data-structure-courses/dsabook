@@ -132,9 +132,9 @@ Furthermore, a *good* hash function should also respect the following:
 
 The requirements above tells us that the following is a valid hash function, because is both deterministic and preserves equality:
 
-\begin{eqnarray*}
-\mathbf{h}(x) &=& 42
-\end{eqnarray*}
+$$
+\mathbf{h}(x) = 42
+$$
 
 However, it's a really bad hash function, because it gives the worst possible distribution.
 :::
@@ -157,9 +157,9 @@ Here are some basic principles for creating good (or at least mostly-good-enough
 
 Since the value of a hash function should be an integer, it is very easy to just let value be its own hash code, if it's an integer.
 
-\begin{eqnarray*}
-\mathbf{h}(x) &=& x
-\end{eqnarray*}
+$$
+\mathbf{h}(x) = x
+$$
 
 This function is clearly deterministic and preserves equality, and it is very efficient too.
 But how about the distribution -- is it uniform?
@@ -222,17 +222,17 @@ Therefore all the following strings will get the same hash code:
 So we want our hash function to take all character in a string into account, but also their position in the string.
 One common way is to treat the sequence of characters, $s=c_0c_1\ldots c_n$ as a polynomial over some constant $p$, like this:
 
-\begin{eqnarray*}
+$$
 \mathbf{h}(c_0c_1c_2\ldots c_n)
-&=& c_0 + c_1p + c_2p^2 + c_3p^3 + \cdots + c_np^n
-\end{eqnarray*}
+= c_0 + c_1p + c_2p^2 + c_3p^3 + \cdots + c_np^n
+$$
 
 This kind of polynomial can be calculated efficiently using *Horner's method*, as a nested multiplication:
 
-\begin{eqnarray*}
+$$
 \mathbf{h}(c_0c_1c_2\ldots c_n)
-&=& c_0 + p\left(c_1 + p\left(c_2 + p\left(c_3 + \cdots + p(c_{n-1} + pc_n)\cdots\right)\right)\right)
-\end{eqnarray*}
+= c_0 + p\left(c_1 + p\left(c_2 + p\left(c_3 + \cdots + p(c_{n-1} + pc_n)\cdots\right)\right)\right)
+$$
 
 Which in turn is just a fancier way of writing a simple loop over all characters, and accumulating the hash code:
 

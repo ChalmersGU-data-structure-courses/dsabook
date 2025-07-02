@@ -60,10 +60,10 @@ substituting 0, 1, and 2 for $n$ leads to three simultaneous equations.
 Because the summation when $n=0$ is just 0, $c_3$ must be 0. For $n=1$
 and $n=2$ we get the two equations
 
-\begin{eqnarray*}
-c_1 + c_2     & = &  1 \\
-4 c_1 + 2 c_2 & = &  3
-\end{eqnarray*}
+\begin{align*}
+c_1 + c_2     &=  1 \\
+4 c_1 + 2 c_2 &=  3
+\end{align*}
 
 which in turn yield $c_1 = 1/2$ and $c_2 = 1/2$. Thus, if the
 closed-form solution for the summation **is** a polynomial, then it can
@@ -144,14 +144,14 @@ $f(n) = n(n+1)/2$.
 Dividing $f(n)$ by $f(n-1)$ does not give so obvious a result, but it
 provides another useful illustration.
 
-\begin{eqnarray*}
-\frac{f(n)}{f(n-1)} & = &  \frac{n+1}{n-1} \\
-f(n) (n-1)          & = &  (n+1) f(n-1)  \\
-f(n) (n-1)          & = &  (n+1) (f(n) - n) \\
-n f(n) - f(n)       & = &  n f(n) + f(n) - n^2 - n \\
-2 f(n)              & = &  n^2 + n = n (n+1) \\
-f(n)                & = &  \frac{n (n + 1)}{2}
-\end{eqnarray*}
+\begin{align*}
+\frac{f(n)}{f(n-1)} &=  \frac{n+1}{n-1} \\
+f(n) (n-1)          &=  (n+1) f(n-1)  \\
+f(n) (n-1)          &=  (n+1) (f(n) - n) \\
+n f(n) - f(n)       &=  n f(n) + f(n) - n^2 - n \\
+2 f(n)              &=  n^2 + n = n (n+1) \\
+f(n)                &=  \frac{n (n + 1)}{2}
+\end{align*}
 
 Once again, we still do not have a proof that $f(n) = n(n+1)/2$. Why?
 Because we did not prove that $f(n)/n = (n+1)/2$ nor that
@@ -210,17 +210,17 @@ $$
 
 We can now subtract the one equation from the other, as follows:
 
-\begin{eqnarray*}
-f(n) - rf(n) & = & a + ar + ar^2 + ar^3 + \cdots + ar^{n} \\
-             &   & \; - (ar + ar^2 + ar^3 + \cdots + ar^n) - ar^{n+1}
-\end{eqnarray*}
+\begin{multline*}
+f(n) - rf(n) = a + ar + ar^2 + ar^3 + \cdots + ar^{n} \\
+             - (ar + ar^2 + ar^3 + \cdots + ar^n) - ar^{n+1}
+\end{multline*}
 
 The result leaves only the end terms:
 
-\begin{eqnarray*}
-f(n) - rf(n)  & = &  \sum_{i=0}^{n} ar^i - r\sum_{i=0}^{n} ar^i \\
-(1-r)f(n)     & = &  a - ar^{n+1}
-\end{eqnarray*}
+\begin{align*}
+f(n) - rf(n)  &=  \sum_{i=0}^{n} ar^i - r\sum_{i=0}^{n} ar^i \\
+(1-r)f(n)     &=  a - ar^{n+1}
+\end{align*}
 
 Thus, we get the result
 
@@ -250,10 +250,10 @@ The $i$ th term of $2\,f(n)$ is $i \cdot 2^{i+1}$, while the $(i+1)$ th
 term of $f(n)$ is $(i+1) \cdot 2^{i+1}$. Subtracting one expression from
 the other yields the summation of $2^i$ and a few non-canceled terms:
 
-\begin{eqnarray*}
-2f(n) - f(n) & = & 2\sum_{i=1}^n i\,2^i - \sum_{i=1}^n i\,2^i  \\
-             & = & \sum_{i=1}^n i\,2^{i+1} - \sum_{i=1}^n i\,2^i
-\end{eqnarray*}
+\begin{align*}
+2f(n) - f(n) &= 2\sum_{i=1}^n i\,2^i - \sum_{i=1}^n i\,2^i  \\
+             &= \sum_{i=1}^n i\,2^{i+1} - \sum_{i=1}^n i\,2^i
+\end{align*}
 
 Shift $i$ 's value in the second summation, substituting $(i+1)$ for
 $i$:

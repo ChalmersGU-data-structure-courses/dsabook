@@ -1609,10 +1609,10 @@ using [recursion]{.term}.
 A common form of [recurrence relation]{.term}
 that have the form
 
-\begin{eqnarray*}
-T(n) &=& a T(n/b) + cn^k \\
-T(1) &=& c
-\end{eqnarray*}
+\begin{align*}
+T(n) &= a T(n/b) + cn^k \\
+T(1) &= c
+\end{align*}
 
 where $a$, $b$, $c$, and $k$ are constants. In general, this
 recurrence describes a problem of size $n$ divided into $a$

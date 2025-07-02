@@ -43,10 +43,10 @@ slower, nor too much faster, than the claimed growth rate.
 :::::::::: question ::::::::::
 Determine the proper relationship between the following pair of functions.
 
-\begin{eqnarray*}
-f(n) &=& \log n^2 \\
-g(n) &=& \log n + 5
-\end{eqnarray*}
+\begin{align*}
+f(n) &= \log n^2 \\
+g(n) &= \log n + 5
+\end{align*}
 
 - [x] $f(n)$ is $\Theta(g(n))$
 - [ ] $f(n)$ is in $\Omega(g(n))$
@@ -64,10 +64,10 @@ g(n) &=& \log n + 5
 :::::::::: question ::::::::::
 Determine the proper relationship between the following pair of functions.
 
-\begin{eqnarray*}
-f(n) &=& \sqrt n \\
-g(n) &=& \log n^2
-\end{eqnarray*}
+\begin{align*}
+f(n) &= \sqrt n \\
+g(n) &= \log n^2
+\end{align*}
 
 - [x] $f(n)$ is $\Omega(g(n))$
 - [ ] $f(n)$ is $\Theta(g(n))$
@@ -85,10 +85,10 @@ g(n) &=& \log n^2
 :::::::::: question ::::::::::
 Determine the proper relationship between the following pair of functions.
 
-\begin{eqnarray*}
-f(n) &=& \log^2 n \\
-g(n) &=& \log n
-\end{eqnarray*}
+\begin{align*}
+f(n) &= \log^2 n \\
+g(n) &= \log n
+\end{align*}
 
 - [x] $f(n)$ is $\Omega(g(n))$
 - [ ] $f(n)$ is $\Theta(g(n))$
@@ -106,10 +106,10 @@ g(n) &=& \log n
 :::::::::: question ::::::::::
 Determine the proper relationship between the following pair of functions.
 
-\begin{eqnarray*}
-f(n) &=& n \\
-g(n) &=& \log^2 n
-\end{eqnarray*}
+\begin{align*}
+f(n) &= n \\
+g(n) &= \log^2 n
+\end{align*}
 
 - [x] $f(n)$ is $\Omega(g(n))$
 - [ ] $f(n)$ is $\Theta(g(n))$
@@ -127,10 +127,10 @@ g(n) &=& \log^2 n
 :::::::::: question ::::::::::
 Determine the proper relationship between the following pair of functions.
 
-\begin{eqnarray*}
-f(n) &=& n \log n + n \\
-g(n) &=& \log n
-\end{eqnarray*}
+\begin{align*}
+f(n) &= n \log n + n \\
+g(n) &= \log n
+\end{align*}
 
 - [x] $f(n)$ is $\Omega(g(n))$
 - [ ] $f(n)$ is $\Theta(g(n))$
@@ -148,10 +148,10 @@ g(n) &=& \log n
 :::::::::: question ::::::::::
 Determine the proper relationship between the following pair of functions.
 
-\begin{eqnarray*}
-f(n) &=& \log n^2 \\
-g(n) &=& (\log n)^2
-\end{eqnarray*}
+\begin{align*}
+f(n) &= \log n^2 \\
+g(n) &= (\log n)^2
+\end{align*}
 
 - [ ] $f(n)$ is $\Omega(g(n))$
 - [ ] $f(n)$ is $\Theta(g(n))$
@@ -169,10 +169,10 @@ g(n) &=& (\log n)^2
 :::::::::: question ::::::::::
 Determine the proper relationship between the following pair of functions.
 
-\begin{eqnarray*}
-f(n) &=& 10 \\
-g(n) &=& \log 10
-\end{eqnarray*}
+\begin{align*}
+f(n) &= 10 \\
+g(n) &= \log 10
+\end{align*}
 
 - [ ] $f(n)$ is $\Omega(g(n))$
 - [x] $f(n)$ is $\Theta(g(n))$
@@ -190,10 +190,10 @@ g(n) &=& \log 10
 :::::::::: question ::::::::::
 Determine the proper relationship between the following pair of functions.
 
-\begin{eqnarray*}
-f(n) &=& 2^n \\
-g(n) &=& 10 n^2
-\end{eqnarray*}
+\begin{align*}
+f(n) &= 2^n \\
+g(n) &= 10 n^2
+\end{align*}
 
 - [x] $f(n)$ is $\Omega(g(n))$
 - [ ] $f(n)$ is $\Theta(g(n))$
@@ -211,10 +211,10 @@ g(n) &=& 10 n^2
 :::::::::: question ::::::::::
 Determine the proper relationship between the following pair of functions.
 
-\begin{eqnarray*}
-f(n) &=& 2^n \\
-g(n) &=& n \log n
-\end{eqnarray*}
+\begin{align*}
+f(n) &= 2^n \\
+g(n) &= n \log n
+\end{align*}
 
 - [x] $f(n)$ is $\Omega(g(n))$
 - [ ] $f(n)$ is $\Theta(g(n))$
@@ -232,10 +232,10 @@ g(n) &=& n \log n
 :::::::::: question ::::::::::
 Determine the proper relationship between the following pair of functions.
 
-\begin{eqnarray*}
-f(n) &=& 2^n \\
-g(n) &=& 3^n
-\end{eqnarray*}
+\begin{align*}
+f(n) &= 2^n \\
+g(n) &= 3^n
+\end{align*}
 
 - [ ] $f(n)$ is $\Omega(g(n))$
 - [ ] $f(n)$ is $\Theta(g(n))$
@@ -253,10 +253,10 @@ g(n) &=& 3^n
 :::::::::: question ::::::::::
 Determine the proper relationship between the following pair of functions.
 
-\begin{eqnarray*}
-f(n) &=& 2^n \\
-g(n) &=& n^n
-\end{eqnarray*}
+\begin{align*}
+f(n) &= 2^n \\
+g(n) &= n^n
+\end{align*}
 
 - [ ] $f(n)$ is $\Omega(g(n))$
 - [ ] $f(n)$ is $\Theta(g(n))$

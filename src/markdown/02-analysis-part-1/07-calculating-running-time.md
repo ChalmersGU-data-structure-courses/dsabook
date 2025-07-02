@@ -343,10 +343,10 @@ recursive call on the smaller input. Because the base case does no
 multiplications, its cost is constant. Thus, the running time for this
 function can be expressed as
 
-\begin{eqnarray*}
-T(n) &=& T(n-1) + 1, \textrm{ for } n>1 \\
-T(1) &=& 1
-\end{eqnarray*}
+\begin{align*}
+T(n) &= T(n-1) + 1, \textrm{ for } n>1 \\
+T(1) &= 1
+\end{align*}
 
 The closed-form solution for this recurrence relation is $O(n)$.
 Recurrence relations are discussed further in @sec:recur-relations.

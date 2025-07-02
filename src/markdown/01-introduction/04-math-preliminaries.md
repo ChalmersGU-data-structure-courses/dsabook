@@ -498,32 +498,32 @@ Since this appears so often, it will help you later if you can get comfortable w
 
 Here is a list of useful summations, along with their closed-form solutions.
 
-\begin{eqnarray*}
-\sum_{i = 1}^{n} i &=& \frac{n (n+1)}{2} \\
-\sum_{i = 1}^{n} i^2 &=& \frac{2 n^3 + 3 n^2 + n}{6} = \frac{n(2n + 1)(n + 1)}{6} \\
-\sum_{i = 1}^{\log n} n &=& n \log n \\
-\sum_{i = 0}^\infty a^i &=& \frac{1}{1-a}  ~~~ \mbox{if} \ 0 < a < 1 \\
-\sum_{i = 0}^{n} a^i &=& \frac{a^{n+1} - 1}{a - 1}  ~~~ \mbox{if} \ a \neq 1
-\end{eqnarray*}
+\begin{align*}
+\sum_{i = 1}^{n} i &= \frac{n (n+1)}{2} \\
+\sum_{i = 1}^{n} i^2 &= \frac{2 n^3 + 3 n^2 + n}{6} = \frac{n(2n + 1)(n + 1)}{6} \\
+\sum_{i = 1}^{\log n} n &= n \log n \\
+\sum_{i = 0}^\infty a^i &= \frac{1}{1-a}  ~~~ \mbox{if} \ 0 < a < 1 \\
+\sum_{i = 0}^{n} a^i &= \frac{a^{n+1} - 1}{a - 1}  ~~~ \mbox{if} \ a \neq 1
+\end{align*}
 
 As special cases to the last summation, we have the following two:
 
-\begin{eqnarray*}
-\sum_{i = 1}^{n} \frac{1}{2^i} &=& 1 - \frac{1}{2^n} \\
-\sum_{i = 0}^{n} 2^i &=& 2^{n+1} - 1 \\
-\end{eqnarray*}
+\begin{align*}
+\sum_{i = 1}^{n} \frac{1}{2^i} &= 1 - \frac{1}{2^n} \\
+\sum_{i = 0}^{n} 2^i &= 2^{n+1} - 1
+\end{align*}
 
 As a corollary to the previous summation:
 
-\begin{eqnarray*}
-\sum_{i = 0}^{\log n} 2^i &=& 2^{\log n + 1} - 1 = 2n - 1
-\end{eqnarray*}
+\begin{align*}
+\sum_{i = 0}^{\log n} 2^i &= 2^{\log n + 1} - 1 = 2n - 1
+\end{align*}
 
 Finally:
 
-\begin{eqnarray*}
-\sum_{i = 1}^{n} \frac{i}{2^i} &=& 2 - \frac{n+2}{2^n}
-\end{eqnarray*}
+\begin{align*}
+\sum_{i = 1}^{n} \frac{i}{2^i} &= 2 - \frac{n+2}{2^n}
+\end{align*}
 
 <!--
 The sum of reciprocals from 1 to $n$, called the [Harmonic Series]{.term} and written $\mathcal{H}_n$, has a value between $\log_e n$ and $\log_e n + 1$.
@@ -779,11 +779,11 @@ The proof is by mathematical induction.
     and because $\mathbf{S}(n) = \mathbf{S}(n-1) + n$,
     we can substitute for $\mathbf{S}(n-1)$ to get
 
-    \begin{eqnarray*}
-    \sum_{i=1}^n i &=& \left(\sum_{i=1}^{n-1} i\right) + n
+    \begin{align*}
+    \sum_{i=1}^n i &= \left(\sum_{i=1}^{n-1} i\right) + n
                         = \frac{(n-1)(n)}{2} + n\\
-                    &=&\frac{n^2 - n + 2n}{2} = \frac{n(n+1)}{2}.
-    \end{eqnarray*}
+                    &=\frac{n^2 - n + 2n}{2} = \frac{n(n+1)}{2}.
+    \end{align*}
 
     Thus, by mathematical induction,
 
@@ -836,12 +836,12 @@ replace the partial summation (shown in brackets in the first line)
 with its closed-form solution.
 After that, algebra takes care of the rest.
 
-\begin{eqnarray*}
-\sum_{i=1}^n (2i - 1) &=& \left[ \sum_{i=1}^{n-1} (2i - 1) \right] + 2n - 1\\
-                        &=& [(n-1)^2] + 2n - 1\\
-                        &=& n^2 - 2n + 1 + 2n - 1\\
-                        &=& n^2.
-\end{eqnarray*}
+\begin{align*}
+\sum_{i=1}^n (2i - 1) &= \left[ \sum_{i=1}^{n-1} (2i - 1) \right] + 2n - 1\\
+                        &= [(n-1)^2] + 2n - 1\\
+                        &= n^2 - 2n + 1 + 2n - 1\\
+                        &= n^2.
+\end{align*}
 
 Thus, by mathematical induction,
 
@@ -859,10 +859,10 @@ closed-form solution for a [recurrence relation]{.term} is correct.
 **Theorem:**
 The following recurrence relation has closed-form solution $T(n) = n - 1$:
 
-\begin{eqnarray*}
-T(n) &=& T(n-1) + 1 \\
-T(1) &=& 0
-\end{eqnarray*}
+\begin{align*}
+T(n) &= T(n-1) + 1 \\
+T(1) &= 0
+\end{align*}
 
 
 **Proof:**
@@ -1182,9 +1182,9 @@ The LCM method is quite simple.
 We begin by picking a [seed]{.term} that we will call $r_1$.
 Then, we can compute successive terms as follows, where $b$ and $t$ are some constant positive integers.
 
-\begin{eqnarray*}
-r_i &=& (b\cdot r_{i-1}) \;\mathrm{mod}\; t
-\end{eqnarray*}
+\begin{align*}
+r_i &= (b\cdot r_{i-1}) \;\mathrm{mod}\; t
+\end{align*}
 
 By definition of the $\mathrm{mod}$ function, all generated numbers must be in the range 0 to $t-1$.
 Now, consider what happens when $r_i = r_j$ for values $i$ and $j$.
@@ -1199,11 +1199,11 @@ To see why, consider the following example.
 #### Example: Varying the $t$ value
 Given a $t$ value of 13, we can get very different results depending on the $b$ value that we pick, in ways that are hard to predict.
 
-\begin{eqnarray*}
-r_i \;=\; (6\cdot r_{i-1}) \;\mathrm{mod}\; 13  &=&  \ldots, 1, 6, 10, 8, 9, 2, 12, 7, 3, 5, 4, 11, 1, \ldots  \\
-r_i \;=\; (7\cdot r_{i-1}) \;\mathrm{mod}\; 13  &=&  \ldots, 1, 7, 10, 5, 9, 11, 12, 6, 3, 8, 4, 2, 1, \ldots \\
-r_i \;=\; (5\cdot r_{i-1}) \;\mathrm{mod}\; 13  &=&  \ldots, 1, 5, 12, 8, 1, \ldots
-\end{eqnarray*}
+\begin{align*}
+r_i \;=\; (6\cdot r_{i-1}) \mod 13  &=  \ldots, 1, 6, 10, 8, 9, 2, 12, 7, 3, 5, 4, 11, 1, \ldots  \\
+r_i \;=\; (7\cdot r_{i-1}) \mod 13  &=  \ldots, 1, 7, 10, 5, 9, 11, 12, 6, 3, 8, 4, 2, 1, \ldots \\
+r_i \;=\; (5\cdot r_{i-1}) \mod 13  &=  \ldots, 1, 5, 12, 8, 1, \ldots
+\end{align*}
 
 In the case of $b=5$, the generator goes through only a short sequence before repeating, with the series depending on the seed value chosen.
 Clearly, a $b$ value of 5 is far inferior to $b$ values of 6 or 7 in this example.
@@ -1211,9 +1211,9 @@ Clearly, a $b$ value of 5 is far inferior to $b$ values of 6 or 7 in this exampl
 
 If you would like to write a simple LCM random number generator of your own, an effective one can be made with the following formula:
 
-\begin{eqnarray*}
-r_i &=& (16807 \cdot r_{i-1}) \;\mathrm{mod}\; 2^{31} - 1
-\end{eqnarray*}
+\begin{align*}
+r_i &= (16807 \cdot r_{i-1}) \mod 2^{31} - 1
+\end{align*}
 
 Another approach is based on using a computer chip that generates random numbers resulting from "thermal noise" in the system.
 Time will tell if this approach replaces deterministic approaches.

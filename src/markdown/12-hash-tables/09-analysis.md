@@ -55,9 +55,9 @@ then this is approximately $(n/m)^i$. The expected number of probes is
 one plus the sum over $i \geq 1$ of the probability of $i$ collisions,
 which is approximately
 
-\begin{eqnarray*}
-1 + \sum_{i=1}^\infty (n/m)^i &=& 1/(1-\alpha)
-\end{eqnarray*}
+$$
+1 + \sum_{i=1}^\infty (n/m)^i = 1/(1-\alpha)
+$$
 
 The cost for a successful search (or a deletion) has the same cost as
 originally inserting that record. However, the expected value for the

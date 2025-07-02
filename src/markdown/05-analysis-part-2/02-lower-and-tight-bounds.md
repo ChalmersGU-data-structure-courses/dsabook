@@ -84,14 +84,13 @@ Motivation for this alternate definition can be found in the following example.
 
 Assume a particular algorithm has the following behaviour:
 
-\begin{eqnarray*}
-T(n)
-&=&
+$$
+T(n) =
 \left\{ \begin{array}{ll}
     n  & \mbox{for all odd}\ n \\
     n^2/100 \;& \mbox{for all even}\ n
 \end{array} \right.
-\end{eqnarray*}
+$$
 
 From this definition, $n^2/100 \geq k\cdot n^2$ for all even $n$, for any $k<0.01$.
 So, $T(n) \geq k\cdot n^2$ for an infinite number of values of $n$.
