@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Bucket hashing</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+<link href="../interactive/Hashing/buckethashCON.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-12.10.html" class="navbutton">&lt;&lt;</a>
+<a href="section-12.10.html" accesskey="p" rel="previous">Better hash functions</a>
+</div>
+<div>
+<a href="section-12.12.html" accesskey="n" rel="next">Hash tables in practice</a>
+<a href="section-12.12.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:bucket-hashing" class="level2" data-number="12.11">
+<h2 data-number="12.11"><span class="header-section-number">12.11</span>
+Bucket hashing</h2>
+<p>One implementation for open addressing groups hash table slots into
+<a href="section-14.html#bucket" class="term"
+title="In bucket hashing, a bucket is a sequence of slots in the hash table that are grouped together.">buckets</a>.
+The
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>
+slots of the hash table are divided into
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
+buckets, with each bucket consisting of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mi>/</mi><mi>B</mi></mrow><annotation encoding="application/x-tex">M/B</annotation></semantics></math>
+slots. The hash function assigns each record to the first slot within
+one of the buckets. If this slot is already occupied, then the bucket
+slots are searched sequentially until an open slot is found. If a bucket
+is entirely full, then the record is stored in an <a
+href="section-14.html#overflow-bucket" class="term"
+title="In bucket hashing, this is the bucket into which a record is placed if the bucket containing the record&#39;s home slot is full. The overflow bucket is logically considered to have infinite capacity, though in practice search and insert will become relatively expensive if many records are stored in the overflow bucket.">overflow
+bucket</a> of infinite capacity at the end of the table. All buckets
+share the same overflow bucket. A good implementation will use a hash
+function that distributes the records evenly among the buckets so that
+as few records as possible go into the overflow bucket.</p>
+<div class="online">
+<p>When searching for a record, the first step is to hash the key to
+determine which bucket should contain the record. The records in this
+bucket are then searched. If the desired key value is not found and the
+bucket still has free slots, then the search is complete. If the bucket
+is full, then it is possible that the desired record is stored in the
+overflow bucket. In this case, the overflow bucket must be searched
+until the record is found or all records in the overflow bucket have
+been checked. If many records are in the overflow bucket, this will be
+an expensive process.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Demonstration of bucket hashing.</p>
+</summary>
+<p>
+<div id="buckethashCON1" class="ssAV" data-short-name="buckethashCON1" data-long-name="Bucket Hashing Slideshow 1" alt="Bucket Hashing Slideshow 1" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Now you can try it yourself.</p>
+</summary>
+<p>
+<div id="HashBucketPRO" class="embedContainer">
+<iframe id="HashBucketPRO_iframe" aria-label="HashBucketPRO" src="../interactive/Hashing/HashBucketPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</div>
+<section id="sec:an-alternative-approach-to-bucket-hashing"
+class="level3" data-number="12.11.1">
+<h3 data-number="12.11.1"><span
+class="header-section-number">12.11.1</span> An alternative approach to
+bucket hashing</h3>
+<p>A simple variation on bucket hashing is to hash a key value to some
+slot in the hash table as though bucketing were not being used. If the
+home position is full, then we search through the rest of the bucket to
+find an empty slot. If all slots in this bucket are full, then the
+record is assigned to the overflow bucket. The advantage of this
+approach is that initial collisions are reduced, because any slot can be
+a home position rather than just the first slot in the bucket.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Demonstration of alternative bucket hashing.</p>
+</summary>
+<p>
+<div id="buckethashCON2" class="ssAV" data-short-name="buckethashCON2" data-long-name="Bucket Hashing Slideshow 2" alt="Bucket Hashing Slideshow 2" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<p>Bucket methods are good for implementing hash tables stored on disk,
+because the bucket size can be set to the size of a disk block. Whenever
+search or insertion occurs, the entire bucket is read into memory.
+Because the entire bucket is then in memory, processing an insert or
+search operation requires only one disk access, unless the bucket is
+full. If the bucket is full, then the overflow bucket must be retrieved
+from disk as well. Naturally, overflow should be kept small to minimise
+unnecessary disk accesses.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<section id="sec:exercise-bucket-hashing" class="level4 unnumbered">
+<h4 class="unnumbered">Exercise: Bucket hashing</h4>
+</summary>
+<p>
+<div id="HashBucket2PRO" class="embedContainer">
+<iframe id="HashBucket2PRO_iframe" aria-label="HashBucket2PRO" src="../interactive/Hashing/HashBucket2PRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</section>
+</div>
+</section>
+</div>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-12.10.html" class="navbutton">&lt;&lt;</a>
+<a href="section-12.10.html" accesskey="p" rel="previous">Better hash functions</a>
+</div>
+<div class="navlink">
+<a href="section-12.12.html" accesskey="n" rel="next">Hash tables in practice</a>
+<a href="section-12.12.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+<script type="text/javascript" src="../interactive/Hashing/buckethashCON1.js"></script>
+<script type="text/javascript" src="../interactive/Hashing/buckethashCON2.js"></script>
+</body>
+</html>
+

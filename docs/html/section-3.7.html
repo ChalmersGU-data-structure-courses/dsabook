@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Summary analysis of basic sorting algorithms</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-3.6.html" class="navbutton">&lt;&lt;</a>
+<a href="section-3.6.html" accesskey="p" rel="previous">Insertion sort</a>
+</div>
+<div>
+<a href="section-3.8.html" accesskey="n" rel="next">Empirical analysis and code tuning</a>
+<a href="section-3.8.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:summary-analysis-of-basic-sorting-algorithms"
+class="level2" data-number="3.7">
+<h2 data-number="3.7"><span class="header-section-number">3.7</span>
+Summary analysis of basic sorting algorithms</h2>
+<p>How can we categorise our three sorting algorithms according to the
+terminology that we introduced in <a
+href="section-3.1.html#sec:terminology-and-notation">Section 3.1</a>?</p>
+<dl>
+<dt>In-place</dt>
+<dd>
+All three algorithms are <em>in-place</em>, because we modify the array
+and only make use of a constant number of additional variables.
+</dd>
+<dt>Stability</dt>
+<dd>
+<p>Both Bubble sort and Insertion sort are <em>stable</em>. They only
+swap adjacent elements, and they will never swap two equal elements.
+Therefore the relative order of equal elements will be preserved.</p>
+<p>However, Selection sort is not stable, and this is because it can
+swap over long distances. For example, if we Selection sort the array
+[2,2,1], then the first swap (putting 1 into the first position) will
+change the relative order between the first and the second 2.</p>
+</dd>
+<dt>Adaptivity</dt>
+<dd>
+<p>Insertion sort is <em>adaptive</em>, because its best-case complexity
+is better than its worst-case. If the list is almost sorted, Insertion
+sort is way much faster than if the list is completely unsorted.</p>
+<p>Bubble sort and Selection sort however, are not adaptive – they are
+always quadratic regardless of the input array.</p>
+</dd>
+</dl>
+<p>Here is a summary table of the categorisations.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"> </th>
+<th style="text-align: center;">Bubble</th>
+<th style="text-align: center;">Selection</th>
+<th style="text-align: center;">Insertion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">In place?</td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;">yes</td>
+</tr>
+<tr>
+<td style="text-align: left;">Stable?</td>
+<td style="text-align: center;">yes</td>
+<td style="text-align: center;">no</td>
+<td style="text-align: center;">yes</td>
+</tr>
+<tr>
+<td style="text-align: left;">Adaptive?</td>
+<td style="text-align: center;">no</td>
+<td style="text-align: center;">no</td>
+<td style="text-align: center;">yes</td>
+</tr>
+</tbody>
+</table>
+<p>Here is a summary table for the cost of Bubble sort, Selection sort,
+and Insertion sort, in terms of their required number of comparisons and
+swaps in the best and worst cases. The running time for each of these
+sorts is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>
+in the worst case.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;"> </th>
+<th style="text-align: center;">Bubble</th>
+<th style="text-align: center;">Selection</th>
+<th style="text-align: center;">Insertion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;"><strong>Comparisons:</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: right;">Best case</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></td>
+</tr>
+<tr>
+<td style="text-align: right;">Worst case</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></td>
+</tr>
+<tr>
+<td style="text-align: right;"><strong>Swaps:</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: right;">Best case</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0</mn><annotation encoding="application/x-tex">0</annotation></semantics></math></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0</mn><annotation encoding="application/x-tex">0</annotation></semantics></math></td>
+</tr>
+<tr>
+<td style="text-align: right;">Worst case</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></td>
+</tr>
+</tbody>
+</table>
+<section id="sec:inversions-and-the-reason-for-the-quadratic-behaviour"
+class="level3" data-number="3.7.1">
+<h3 data-number="3.7.1"><span class="header-section-number">3.7.1</span>
+Inversions and the reason for the quadratic behaviour</h3>
+<p>The remaining sorting algorithms presented in the next chapter are
+significantly better than these three under typical conditions. But
+before continuing on,</p>
+<p>These three sorting algorithms are all quadratic, but can we say
+something about <em>why</em> they are so slow? The crucial bottleneck is
+that only <em>adjacent</em> records are compared, and swapped (for
+Insertion and Bubble sort). To analyse this we first need to define the
+concept of <em>inversion</em>.</p>
+<p>An <em>inversion</em> occurs when there are two elements in an array
+that come in the wrong order. Formally, if
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo stretchy="false" form="prefix">[</mo><mi>i</mi><mo stretchy="false" form="postfix">]</mo><mo>&gt;</mo><mi>A</mi><mo stretchy="false" form="prefix">[</mo><mi>j</mi><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">A[i]&gt;A[j]</annotation></semantics></math>
+for array indices
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>&lt;</mo><mi>j</mi></mrow><annotation encoding="application/x-tex">i&lt;j</annotation></semantics></math>,
+then there is an inversion between
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>
+(or between
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo stretchy="false" form="prefix">[</mo><mi>i</mi><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">A[i]</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo stretchy="false" form="prefix">[</mo><mi>j</mi><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">A[j]</annotation></semantics></math>
+if that is unambiguous). For example, in the array [B,C,X,D,E] there are
+inversions between indices 2 and 3 (elements X and D are out of order),
+and between indices 2 and 4 (elements X and E).</p>
+<p>The number of inversions in an array is one measure of how sorted the
+array is (but not the only such measure). The most unsorted array
+according to this definition is reversely sorted, because then all pairs
+of indices are inversions. So, the maximum number of inversions is the
+number of pairs, which is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n(n-1)/2</annotation></semantics></math>.</p>
+<p>Now, assume that we have an array, and we swap two adjacent elements
+(that are out of order, i.e., an inversion). This will reduce the number
+of inversions with at most 1, because all other inversions in the array
+will still be inversions. Therefore, any algorithm which can only swap
+<em>adjacent</em> elements has to perform at least as many swaps as
+there are inversions. And since there are
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mi>/</mi><mn>2</mn><mo>=</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">n(n-1)/2 = O(n^2)</annotation></semantics></math>
+inversions in the worst case, any such algorithm will at least be
+quadratic,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>.
+This includes Insertion sort and Bubble sort.</p>
+<p>But how about Selection sort? It does not swap adjacent elements, so
+is there perhaps a possibility that we can optimise it to be better than
+quadratic? – Unfortunately not, and this is because Selection sort
+compares only adjacent elements. Assume that we swap two non-adjacent
+elements, that have
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>
+elements in between themselves. If we are extremely lucky this single
+swap can reduce the number of inversions by
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>d</mi></mrow><annotation encoding="application/x-tex">2d</annotation></semantics></math>.
+However, our assumption was that we can only <em>compare adjacent</em>
+elements, and to be able to know which two indices to swap we have to
+compare all adjacent elements in between them. So we need to perform at
+least
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">d+1</annotation></semantics></math>
+comparisons to decide which indices to swap. Therefore, we need
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo>+</mo><mn>1</mn><mo>=</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">d+1=O(d)</annotation></semantics></math>
+comparisons to reduce the number of inversions by
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>d</mi><mo>=</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">2d=O(d)</annotation></semantics></math>.
+And since there are
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>
+inversions in the worst case, we need at least
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>
+comparisons.</p>
+<p>Therefore, all sorting algorithms that can only compare adjacent
+elements (or swap adjacent elements) are doomed to be quadratic in the
+worst case,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>.
+This includes the algorithms we have presented so far, and numerous
+other.</p>
+<p>In the next chapter we will present sorting algorithms that are
+significantly better than these three under typical conditions. How can
+they circumvent the quadratic behaviour? – They compare and swap
+non-adjacent elements (and they do it in a smart way).</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Inversions proficiency exercise</p>
+</summary>
+<p>
+<div id="FindInversionsPRO" class="embedContainer">
+<iframe id="FindInversionsPRO_iframe" aria-label="FindInversionsPRO" src="../interactive/Sorting/FindInversionsPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</div>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-3.6.html" class="navbutton">&lt;&lt;</a>
+<a href="section-3.6.html" accesskey="p" rel="previous">Insertion sort</a>
+</div>
+<div class="navlink">
+<a href="section-3.8.html" accesskey="n" rel="next">Empirical analysis and code tuning</a>
+<a href="section-3.8.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

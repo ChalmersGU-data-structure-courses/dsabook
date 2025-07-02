@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Implementing sets and maps using separate
+chaining</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-12.3.html" class="navbutton">&lt;&lt;</a>
+<a href="section-12.3.html" accesskey="p" rel="previous">Separate chaining</a>
+</div>
+<div>
+<a href="section-12.5.html" accesskey="n" rel="next">Open addressing</a>
+<a href="section-12.5.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:implementing-sets-and-maps-using-separate-chaining"
+class="level2" data-number="12.4">
+<h2 data-number="12.4"><span class="header-section-number">12.4</span>
+Implementing sets and maps using separate chaining</h2>
+<p>In this section we go into more details in how to get a working
+implementation. First we show how to implement a <em>hash set</em>, an
+then we discuss how to extend this into a <em>hash map</em>.</p>
+<section id="sec:implementing-sets" class="level3" data-number="12.4.1">
+<h3 data-number="12.4.1"><span
+class="header-section-number">12.4.1</span> Implementing sets</h3>
+<p>A separate chaining hash set consists of an internal array
+<code>table</code> of sets. We don’t have to specify what kind of sets,
+as long as it supports the basic set methods. Usually it’s perfectly
+fine to use a very simple linked list and not something more fancy. To
+initialise the table, we first create the internal array of some initial
+minimum capacity:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> SeparateChainingHashSet <span class="kw">implements</span> <span class="bu">Set</span>:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    table: <span class="bu">Array</span> <span class="kw">of</span> Sets</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span>: <span class="bu">Int</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">constructor</span>():</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        initialise(MIN_CAPACITY)</span></code></pre></div>
+<p>To simplify things we put the initialisation in a method of its own,
+because we will reuse it later when resizing the table. The
+initialisation not only creates the internal table, but also populates
+it with new empty sets.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> SeparateChainingHashSet:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    initialise(capacity):</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">size</span> <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        table <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(capacity)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="dv">0</span> .. capacity<span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>            table[i] <span class="op">=</span> <span class="kw">new</span> <span class="bu">Set</span>()</span></code></pre></div>
+<p>Note that we keep the total number of elements in a variable
+<code>size</code>. It is possible to calculate this value by summing the
+sizes of all bins, but this takes time so we remember it in a variable
+instead. This also means that we have to update the variable whenever
+the size of a bin changes.</p>
+<section id="sec:searching-for-an-element" class="level4 unnumbered">
+<h4 class="unnumbered">Searching for an element</h4>
+<p>To see if the set contains a given element, we look it up in the
+corresponding bin:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> SeparateChainingHashSet:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">contains</span>(elem):</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        bin <span class="op">=</span> table[hashIndex(elem)]</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> bin.<span class="bu">contains</span>(elem)</span></code></pre></div>
+</section>
+<section id="sec:adding-an-element" class="level4 unnumbered">
+<h4 class="unnumbered">Adding an element</h4>
+<p>To add an element we add it to the bin where it should belong. If the
+size of the bin changed, we know that the key wasn’t in the bin
+previously, and then we know that the number of elements have increased.
+We also have to check if the load factor becomes too large, and then we
+resize the internal table.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> SeparateChainingHashSet:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">add</span>(elem):</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        bin <span class="op">=</span> table[hashIndex(elem)]</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        oldBinSize <span class="op">=</span> bin.<span class="bu">size</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        bin.<span class="bu">add</span>(elem)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> bin.<span class="bu">size</span> <span class="op">&gt;</span> oldBinSize:</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>            <span class="bu">size</span> <span class="op">=</span> <span class="bu">size</span> <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> loadFactor() <span class="op">&gt;</span> MAX_LOAD_FACTOR:</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                resizeTable(table.<span class="bu">size</span> <span class="op">*</span> MULTIPLIER)</span></code></pre></div>
+</section>
+<section id="sec:removing-an-element" class="level4 unnumbered">
+<h4 class="unnumbered">Removing an element</h4>
+<p>To remove a value, we do the same: find the underlying bin and remove
+the value. If we actually removed the element (i.e., if it existed in
+the bin), then we decrease the total size. We also check if the table
+becomes too sparse, and then decrease the internal table by a
+factor.</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> SeparateChainingHashSet:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">remove</span>(elem):</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        bin <span class="op">=</span> table[hashIndex(elem)]</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        oldBinSize <span class="op">=</span> bin.<span class="bu">size</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        bin.<span class="bu">remove</span>(elem)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> bin.<span class="bu">size</span> <span class="op">&lt;</span> oldBinSize:</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>            <span class="bu">size</span> <span class="op">=</span> <span class="bu">size</span> <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> loadFactor() <span class="op">&lt;</span> MIN_LOAD_FACTOR:</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>                resizeTable(table.<span class="bu">size</span> <span class="op">/</span> MULTIPLIER)</span></code></pre></div>
+</section>
+<section id="sec:load-factor-and-constants" class="level4 unnumbered">
+<h4 class="unnumbered">Load factor and constants</h4>
+<p>The load factor is simply the total number of elements divided by the
+number of bins, or
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mi>m</mi></mrow><annotation encoding="application/x-tex">n/m</annotation></semantics></math>:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> SeparateChainingHashSet:</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    loadFactor():</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">size</span> <span class="op">/</span> table.<span class="bu">size</span></span></code></pre></div>
+<p>The constants for min and max load factors, and the resizing factor,
+are a bit arbitrary. With the following values, we ensure that the table
+on average contains between 0.5 and 2 entries per table index.
+Increasing these values leads to more better memory usage, but also more
+conflicts (i.e., longer search times). Also, we enlarge by 50%, or
+reduce by 33%, each time we resize the table. Increasing this value
+means that resizing will happen less often, but instead the memory usage
+will increase.</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> SeparateChainingHashSet:</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    MIN_CAPACITY <span class="op">=</span> <span class="dv">8</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    MIN_LOAD_FACTOR <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    MAX_LOAD_FACTOR <span class="op">=</span> <span class="fl">2.0</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    MULTIPLIER <span class="op">=</span> <span class="fl">1.5</span></span></code></pre></div>
+</section>
+<section id="sec:resizing-the-internal-table" class="level4 unnumbered">
+<h4 class="unnumbered">Resizing the internal table</h4>
+<p>When we resize the internal table, it is very important that we
+<em>do not keep</em> the old hash indices for the keys, because they
+will not be the same after resizing. Instead we save the current
+internal table to a temporary variable, and reinitialise the table to
+the new capacity. Then we iterate through all bins and entries in the
+old table, and simply insert them again into the new resized table.</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> SeparateChainingHashSet:</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    resizeTable(newCapacity):</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> newCapacity <span class="op">&gt;=</span> MIN_CAPACITY:</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>            oldTable <span class="op">=</span> table</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>            initialise(newCapacity)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> <span class="kw">each</span> bin <span class="kw">in</span> oldTable:</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> <span class="kw">each</span> elem <span class="kw">in</span> bin:</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">add</span>(elem)</span></code></pre></div>
+</section>
+</section>
+<section id="sec:implementing-maps-1" class="level3"
+data-number="12.4.2">
+<h3 data-number="12.4.2"><span
+class="header-section-number">12.4.2</span> Implementing maps</h3>
+<p>It is straightforward to modify the implementation above to become a
+key-value map instead of a set.</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> SeparateChainingHashMap <span class="kw">implements</span> <span class="bu">Map</span>:</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    table: <span class="bu">Array</span> <span class="kw">of</span> Maps</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">get</span>(key):</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Similar to contains for hash sets, but use Map.get instead:</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        ... <span class="cf">return</span> bin.<span class="bu">get</span>(key)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">put</span>(key, value):</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Similar to add for hash sets, but use Map.put instead:</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>        ... bin.<span class="bu">put</span>(key, value) ...</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">remove</span>(key):</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Similar to remove for hash sets, but use Map.remove instead:</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>        ... bin.<span class="bu">remove</span>(key) ...</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    resizeTable(newCapacity):</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Similar to resizeTable for hash sets, but use put instead:</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>        ... <span class="cf">for</span> <span class="kw">each</span> key, value <span class="kw">in</span> bin:</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>                <span class="bu">put</span>(key, value)</span></code></pre></div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<section id="sec:exercise-separate-chaining" class="level3"
+data-number="12.4.3">
+<h3 data-number="12.4.3"><span
+class="header-section-number">12.4.3</span> Exercise: Separate
+chaining</h3>
+</summary>
+<p>
+<div id="OpenHashPRO" class="embedContainer">
+<iframe id="OpenHashPRO_iframe" aria-label="OpenHashPRO" src="../interactive/Hashing/OpenHashPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</section>
+</div>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-12.3.html" class="navbutton">&lt;&lt;</a>
+<a href="section-12.3.html" accesskey="p" rel="previous">Separate chaining</a>
+</div>
+<div class="navlink">
+<a href="section-12.5.html" accesskey="n" rel="next">Open addressing</a>
+<a href="section-12.5.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

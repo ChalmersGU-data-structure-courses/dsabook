@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Sets and maps</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-9.5.html" class="navbutton">&lt;&lt;</a>
+<a href="section-9.5.html" accesskey="p" rel="previous">Review questions</a>
+</div>
+<div>
+<a href="section-10.1.html" accesskey="n" rel="next">Sets</a>
+<a href="section-10.1.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:sets-and-maps" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Sets
+and maps</h1>
+<p>Many programming tasks involve <em>finding the right piece of
+information</em> in a large dataset. That is, we have a collection of
+items, and we want to quickly retrieve the items matching certain
+criteria. Here are some examples of information retrieval problems:</p>
+<ul>
+<li><em>Spell-checking:</em> Given a set containing all valid English
+words, check if a given string is present in the set (i.e. is a valid
+word).</li>
+<li><em>Cash register:</em> Given a database of all items for sale in a
+supermarket, find information about the item with a given <em>EAN
+code</em>.- <em>Search engine:</em> Given a collection of documents
+(e.g. web pages), find all documents containing a given word.</li>
+<li><em>Between X and Y:</em> Given a list of all Swedish towns and
+their populations, are there any towns whose population is between 5,000
+and 10,000? And if so, which are these towns?</li>
+</ul>
+<p>These problems can all be addressed using two abstract data types
+(ADTs): the <em>set</em> and the <em>map</em>. Both provide efficient
+ways to manage a collection of elements, supporting operations to find,
+add, and remove elements.</p>
+<p>In this section, we’ll explore what sets and maps are, how they work,
+and how they can be applied to solve the four example problems
+introduced above.</p>
+<p>You may have already used sets and maps in programming, because
+almost every programming language provides an implementation for them.
+For example, Java provides the <a
+href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/HashSet.html">HashSet</a>
+and <a
+href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/HashMap.html">HashMap</a>
+classes, and Python provides <a
+href="https://docs.python.org/3/tutorial/datastructures.html#sets">sets</a>
+and <a
+href="https://docs.python.org/3/tutorial/datastructures.html#dictionaries">dictionaries</a>
+(another word for maps) as part of their standard libraries.</p>
+<p>Sets and maps are useful in a huge variety of computer programs, and
+are perhaps the most useful of all data structures. But how can we
+design a class that implements a set or a map, in such a way that
+adding, removing and searching can be done efficiently? In this book we
+will see several different ways of implementing sets and maps.</p>
+<ul>
+<li><p>In <a
+href="section-10.3.html#sec:case-study-implementing-sets-using-lists">Section 10.3</a>,
+we will see how to implement a set or a map using a list or an array. By
+sorting the items in the list, it is possible to look up information
+efficiently. However, it turns out that adding and removing items is
+quite expensive. A list is a suitable way of storing a set or a map if
+its contents never changes.</p></li>
+<li><p>In <a href="section-11.html#sec:search-trees">Chapter 11</a>, we
+learn about <em>balanced binary search trees (BSTs)</em>, a data
+structure for sets and maps where adding, removing and searching are all
+efficient. BSTs also support the <em>sorted map</em> operations that we
+used i n our final example.</p></li>
+<li><p>In <a href="section-12.html#sec:hash-tables">Chapter 12</a>, we
+learn about <em>hash tables</em>, another way to implement the set and
+map ADTs. In a hash table, <code>add</code>, <code>remove</code> and
+<code>contains</code> are even faster than in a BST, but hash tables are
+somewhat harder to use than BSTs, and do not support the <em>sorted
+map</em> operations.</p></li>
+</ul>
+<p>Balanced BSTs and hash tables are the main ways that sets and maps
+are implemented in practice. Almost every programming language provides
+sets and maps as a built-in feature, based on one of these technologies.
+For example, Java’s <a
+href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/HashSet.html">HashSet</a>,
+<a
+href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/HashMap.html">HashMap</a>,
+<a
+href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/TreeSet.html">TreeSet</a>
+and <a
+href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/TreeMap.html">TreeMap</a>,
+and Python’s <a
+href="https://docs.python.org/3/tutorial/datastructures.html#sets">sets</a>
+and <a
+href="https://docs.python.org/3/tutorial/datastructures.html#dictionaries">dictionaries</a>.
+By the end of this book you will understand how all of these work.</p>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-9.5.html" class="navbutton">&lt;&lt;</a>
+<a href="section-9.5.html" accesskey="p" rel="previous">Review questions</a>
+</div>
+<div class="navlink">
+<a href="section-10.1.html" accesskey="n" rel="next">Sets</a>
+<a href="section-10.1.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

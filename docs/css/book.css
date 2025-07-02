@@ -174,16 +174,15 @@ blockquote {
 /* Tables */
 
 table {
-    margin: var(--block-margin) 0;
+    margin: var(--block-margin) auto;
     border-collapse: collapse;
-    width: 100%;
     overflow-x: auto;
-    display: block;
     font-variant-numeric: lining-nums tabular-nums;
 }
 
 table caption {
     margin-bottom: calc(0.75 * var(--block-margin));
+    font-style: italic;
 }
 
 tbody {
@@ -205,13 +204,15 @@ td {
 
 figure {
     text-align: center;
+}
+
+figcaption {
     font-style: italic;
 }
 
-
 /* Highlighted blocks */
 
-.topic, .example, .figure, .alert, .note, div.embedContainer, div.jsavcontainer {
+.topic, .example, .figure, .alert, .note, .quiz, .TODO, div.embedContainer, div.jsavcontainer, details {
     border-radius: var(--border-radius);
     border: 1px solid var(--border-color);
     margin: var(--block-margin) 0;
@@ -242,14 +243,18 @@ figure {
     display: block;
 }
 .TODO {
-    border-radius: var(--border-radius);
-    border: 1px solid var(--border-color);
-    margin: var(--block-margin) 0;
-    padding: 0 var(--block-margin);
     background-color: var(--alert-bgcolor);
 }
 .TODO ul, .TODO li {
     margin: 0;
+}
+
+
+/* Details, summary */
+
+summary * {
+    display: inline;
+    cursor: pointer;
 }
 
 

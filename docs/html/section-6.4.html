@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Queues implemented as linked lists</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+<link href="../interactive/ChalmersGU/CGU-Styles.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-6.3.html" class="navbutton">&lt;&lt;</a>
+<a href="section-6.3.html" accesskey="p" rel="previous">Stacks implemented as linked lists</a>
+</div>
+<div>
+<a href="section-6.5.html" accesskey="n" rel="next">Stacks implemented using arrays</a>
+<a href="section-6.5.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:queues-implemented-as-linked-lists" class="level2"
+data-number="6.4">
+<h2 data-number="6.4"><span class="header-section-number">6.4</span>
+Queues implemented as linked lists</h2>
+<p>The linked queue implementation is an adaptation of the linked list.
+The only thing is that we have to add a pointer to the rear node in the
+queue, to be able to add new elements efficiently.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Linked queue – introduction.</p>
+</summary>
+<p>
+<div id="LinkedQueue-Intro-CON" class="ssAV" data-short-name="LinkedQueue-Intro-CON" data-long-name="Linked Queue Intro" alt="Linked Queue Intro" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<p>So the datatype for linked queues contains three instance variables,
+including the size of the queue:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> LinkedQueue <span class="kw">implements</span> <span class="bu">Queue</span>:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    front: Node <span class="op">=</span> <span class="va">null</span>   <span class="co">// Pointer to front node</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    rear: Node <span class="op">=</span> <span class="va">null</span>    <span class="co">// Pointer to rear node</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span>: <span class="bu">Int</span> <span class="op">=</span> <span class="dv">0</span>        <span class="co">// Size of queue</span></span></code></pre></div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<section id="sec:enqueueing-to-a-linked-queue"
+class="level4 unnumbered">
+<h4 class="unnumbered">Enqueueing to a linked queue</h4>
+</summary>
+<p>
+<div id="LinkedQueue-Enqueue-CON" class="ssAV" data-short-name="LinkedQueue-Enqueue-CON" data-long-name="Linked Queue Enqueue" alt="Linked Queue Enqueue" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</section>
+</div>
+<p>To enqueue a new element onto the stack, we first have to create a
+new node and set its value. But instead of inserting the node at the
+front of the queue, we add it to the rear. To do this we have to assign
+the next pointer of the current rear to the new node, and after that we
+can redirect the rear pointer. We also have to handle the special case
+when the queue is empty – then the new node will be both front and rear,
+so we have to assign the front variable too.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> LinkedQueue:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">enqueue</span>(elem):</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        newRear <span class="op">=</span> <span class="kw">new</span> Node(elem, <span class="va">null</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">size</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>            front <span class="op">=</span> newRear</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>            rear.<span class="bu">next</span> <span class="op">=</span> newRear</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        rear <span class="op">=</span> newRear</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">size</span> <span class="op">=</span> <span class="bu">size</span> <span class="op">+</span> <span class="dv">1</span></span></code></pre></div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Linked queue – enqueue exercise.</p>
+</summary>
+<p>
+<div id="LinkedQueue-Enqueue-PRO" class="embedContainer">
+<iframe id="LinkedQueue-Enqueue-PRO_iframe" aria-label="LinkedQueue-Enqueue-PRO" src="../interactive/ChalmersGU/LinkedQueue-Enqueue-PRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<section id="sec:dequeueing-from-a-linked-queue"
+class="level4 unnumbered">
+<h4 class="unnumbered">Dequeueing from a linked queue</h4>
+</summary>
+<p>
+<div id="LinkedQueue-Dequeue-CON" class="ssAV" data-short-name="LinkedQueue-Dequeue-CON" data-long-name="Linked Queue Dequeue" alt="Linked Queue Dequeue" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</section>
+</div>
+<p>Dequeueing from a queue is actually exactly the same as popping from
+a stack, where we use the front of the queue instead of the stack top.
+There is only additional one thing we must assure – if the final queue
+becomes empty, we have to delete the rear pointer too, otherwise it will
+point to a non-existing element.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> LinkedQueue:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">dequeue</span>():</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        removed <span class="op">=</span> front</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        front <span class="op">=</span> removed.<span class="bu">next</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        removed.<span class="bu">next</span> <span class="op">=</span> <span class="va">null</span>  <span class="co">// For garbage collection</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">size</span> <span class="op">=</span> <span class="bu">size</span> <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">size</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>            rear <span class="op">=</span> <span class="va">null</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> removed.elem</span></code></pre></div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Linked queue – dequeue exercise.</p>
+</summary>
+<p>
+<div id="LinkedQueue-Dequeue-PRO" class="embedContainer">
+<iframe id="LinkedQueue-Dequeue-PRO_iframe" aria-label="LinkedQueue-Dequeue-PRO" src="../interactive/ChalmersGU/LinkedQueue-Dequeue-PRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</div>
+<section id="sec:case-study-sorting-a-linked-list-using-mergesort"
+class="level3" data-number="6.4.1">
+<h3 data-number="6.4.1"><span class="header-section-number">6.4.1</span>
+Case study: Sorting a linked list using Mergesort</h3>
+<p>We introduced Mergesort in <a
+href="section-4.2.html#sec:mergesort">Section 4.2</a>, and then we
+showed how to sort an array. But Mergesort can also be used to sort
+linked lists, because it does not require random access to the list
+elements. Thus, Mergesort is the method of choice when the input is in
+the form of a linked list.</p>
+<div class="online">
+<p>In fact, the only thing we need is to access the front and back of
+the linked list, which means that we can use Mergesort on linked queues.
+So, how do we implement splitting and merging?</p>
+<p>Splitting the input list into two equal halves presents some
+difficulty. Since we’re using a linked list we cannot find the middle
+easily. But we can use a little trick instead: assign elements of the
+input list alternating between the two sublists. The first element is
+assigned to the first sublist, the second element to the second sublist,
+the third to first sublist, the fourth to the second sublist, and so on.
+Or in pseudocode:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> split(L) <span class="op">-&gt;</span> pair <span class="kw">of</span> two lists:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    L1, L2 <span class="op">=</span> empty linked lists</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> x <span class="kw">in</span> L:</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">add</span> x <span class="kw">to</span> L1 (even iterations) <span class="kw">or</span> L2 (odd iterations)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> L1, L2</span></code></pre></div>
+<p>(Note that it doesn’t matter if we add <code>x</code> to the front or
+back of <code>L1</code> and <code>L2</code>, because the lists will be
+sorted anyway.)</p>
+<p>Merging two sorted linked lists is straightforward, because we need
+only remove items from the front of the input lists and append them to
+the end of the output list. The Mergesort pseudocode in <a
+href="section-4.2.html#sec:mergesort">Section 4.2</a> can be used with
+linked lists directly.</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> merge(L1, L2):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    answer <span class="op">=</span> <span class="kw">new</span> empty linked list</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> L1 <span class="kw">and</span> L2 are nonempty:</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> L1.<span class="bu">peek</span>() <span class="op">&lt;=</span> L2.<span class="bu">peek</span>():</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>            <span class="bu">enqueue</span> L1.<span class="bu">dequeue</span>() <span class="kw">to</span> answer</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>            <span class="bu">enqueue</span> L2.<span class="bu">dequeue</span>() <span class="kw">to</span> answer</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">enqueue</span> <span class="kw">all</span> remaining elements <span class="kw">of</span> L1 <span class="kw">and</span> L2</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> L</span></code></pre></div>
+</div>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-6.3.html" class="navbutton">&lt;&lt;</a>
+<a href="section-6.3.html" accesskey="p" rel="previous">Stacks implemented as linked lists</a>
+</div>
+<div class="navlink">
+<a href="section-6.5.html" accesskey="n" rel="next">Stacks implemented using arrays</a>
+<a href="section-6.5.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+<script type="text/javascript" src="../interactive/ChalmersGU/LinkedQueue-Intro-CON.js"></script>
+<script type="text/javascript" src="../interactive/ChalmersGU/LinkedQueue-Enqueue-CON.js"></script>
+<script type="text/javascript" src="../interactive/ChalmersGU/LinkedQueue-Dequeue-CON.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Best, worst, and average cases</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+<link href="../interactive/AlgAnal/AnalCasesCON.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-2.4.html" class="navbutton">&lt;&lt;</a>
+<a href="section-2.4.html" accesskey="p" rel="previous">Growth rates</a>
+</div>
+<div>
+<a href="section-2.6.html" accesskey="n" rel="next">Asymptotic analysis</a>
+<a href="section-2.6.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:best-worst-and-average-cases" class="level2"
+data-number="2.5">
+<h2 data-number="2.5"><span class="header-section-number">2.5</span>
+Best, worst, and average cases</h2>
+<p>For some algorithms, the running time is always determined by the
+input size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.
+Consider the algorithm that finds the largest value in an array using
+sequential search algorithm. For any given size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+there are inifinitely many possible inputs – all imaginable arrays of
+size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.
+However, no matter what array of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+that the algorithm looks at, its running time will always be the same.
+This is because it always looks at every element in the array exactly
+once.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Consider the problem of finding the factorial of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.</p>
+</summary>
+<p>
+<div id="AnalCasesSameCON" class="ssAV" data-short-name="AnalCasesSameCON" data-long-name="Simple analysis cases slideshow" alt="Simple analysis cases slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<p>For most algorithms however, different inputs of a given size require
+different amounts of time. For example, consider the problem of
+searching an array containing
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+integers to find the one with a particular value
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>K</mi><annotation encoding="application/x-tex">K</annotation></semantics></math>.
+The sequential search algorithm begins at the first position in the
+array and looks at each value in turn until
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>K</mi><annotation encoding="application/x-tex">K</annotation></semantics></math>
+is found, and then it stops. So there is a wide range of possible
+running times for the algorithm, which is different from the
+largest-value search algorithm above.</p>
+<ul>
+<li>If
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>K</mi><annotation encoding="application/x-tex">K</annotation></semantics></math>
+is the first element, only one value is examined – this is the <em>best
+case</em>, because it is not possible for sequential search to look at
+less than one value.</li>
+<li>If
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>K</mi><annotation encoding="application/x-tex">K</annotation></semantics></math>
+is the last element, the algorithm must examine
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+values – this is the <em>worst case</em>, because sequential search
+never looks at more than each of the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+values in the array.</li>
+</ul>
+<p>If we run sequential search many times on many different arrays of
+size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
+and many different values of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>K</mi><annotation encoding="application/x-tex">K</annotation></semantics></math>,
+we expect the algorithm on average to go halfway through the array
+before finding the value we seek. So, on average, the algorithm examines
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">(n+1)/2</annotation></semantics></math>
+values – this is the <em>average case</em>.</p>
+<p>However, note that the average case depends on an important
+assumption: that the searched value
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>K</mi><annotation encoding="application/x-tex">K</annotation></semantics></math> is
+independent from how the values in the array is distributed! More about
+that below.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is an example.</p>
+</summary>
+<p>
+<div id="AnalCasesDiffCON" class="ssAV" data-short-name="AnalCasesDiffCON" data-long-name="Best, Worst, and Average cases slideshow" alt="Best, Worst, and Average cases slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<p>When analysing an algorithm, should we study the best, worst, or
+average case? Normally we are not interested in the best case, because
+this might happen only rarely and generally is too optimistic for a fair
+characterisation of the algorithm’s running time. In other words,
+analysis based on the best case is not likely to be representative of
+the behaviour of the algorithm. However, there are rare instances where
+a best-case analysis is useful – in particular, when the best case has
+high probability of occurring. For example, if we know that the array we
+want to sort is <em>almost sorted</em>, we can take advantage of the
+best-case running time of Insertion sort.</p>
+<p>How about the worst case? The advantage to analysing the worst case
+is that you know for certain that the algorithm must perform at least
+that well. This is especially important for real-time applications, such
+as for the computers that monitor an air traffic control system. Here,
+it would not be acceptable to use an algorithm that can handle
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+airplanes quickly enough <em>most of the time</em>, but which fails to
+perform quickly enough when all
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+airplanes are coming from the same direction.</p>
+<p>For other applications – in particular when we wish to aggregate the
+cost of running the program many times on many different inputs –
+worst-case analysis might not be a representative measure of the
+algorithm’s performance. Often we prefer to know the average-case
+running time. This means that we would like to know the <em>typical</em>
+behaviour of the algorithm on inputs of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.</p>
+<section id="sec:the-problem-with-average-case" class="level3"
+data-number="2.5.1">
+<h3 data-number="2.5.1"><span class="header-section-number">2.5.1</span>
+The problem with average case</h3>
+<p>Unfortunately, average-case analysis is not always possible.
+Average-case analysis first requires that we understand how the actual
+inputs to the program (and their costs) are distributed with respect to
+the set of all possible inputs to the program. For example, it was
+stated previously that the sequential search algorithm on average
+examines half of the array values. This is only true if the element with
+value
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>K</mi><annotation encoding="application/x-tex">K</annotation></semantics></math>
+is equally likely to appear in any position in the array. If this
+assumption is not correct, then the algorithm does <em>not</em>
+necessarily examine half of the array values in the average case.</p>
+<p>How the data is distributed has a significant effect on almost all
+data structures and algorithms, such as those based on <a
+href="section-14.html#hashing" class="term"
+title="A search method that uses a hash function to convert a search key value into a position within a hash table. In a properly implemented hash system, that position in the table will have high probability of containing the record that matches the key value. Sometimes, the hash function will return a position that does not store the desired key, due to a process called collision. In that case, the desired record is found through a process known as collision resolution.">hashing</a>
+and <a href="section-14.html#binary-search-tree" class="term"
+title="A binary tree that imposes the following constraint on its node values: The search key value for any node $A$ must be greater than the (key) values for all nodes in the left subtree of $A$, and less than the key values for all nodes in the right subtree of $A$. Some convention must be adopted if multiple nodes with the same key value are permitted, typically these are required to be in the right subtree.">binary
+search trees</a>. Incorrect assumptions about data distribution can have
+disastrous consequences on a program’s space or time performance.
+Unusual data distributions can also be used to advantage, such as is
+done by <a href="section-14.html#self-organising-list" class="term"
+title="A list that, over a series of search operations, will make use of some heuristic to re-order its elements in an effort to improve search times. Generally speaking, search is done sequentially from the beginning, but the self-organising heuristic will attempt to put the records that are most likely to be searched for at or near the front of the list. While typically not as efficient as binary search on a sorted list, self-organising lists do not require that the list be sorted (and so do not pay the cost of doing the sorting operation).">self-organising
+lists</a> and <a href="section-14.html#splay-tree" class="term"
+title="A variant implementation for the BST, which differs from the standard BST in that it uses modified insert and remove methods in order to keep the tree balanced. Similar to an AVL tree in that it uses the concept of rotations in the insert and remove operations. While a splay tree does not guarentee that the tree is balanced, it does guarentee that a series of $n$ operations on the tree will have a total cost of $O(n \log n)$ cost, meaning that any given operation can be viewed as having amortised cost of $O(\log n)$.">splay
+trees</a>.</p>
+<p>Relying on average-case analysis can be very dangerous for all
+applications where you don’t have full control over your data. For
+example, all kinds of databases that are publicly available are a risk.
+Even if “bad” data are extremely unlikely to occur in your use cases,
+you can be certain that there are people out there who gladly will try
+to exploit any kind of weakness in your system. If there is just a tiny
+risk of a worst-case scenario, this opens up for <em>denial-of-service
+attacks</em> on your system.</p>
+<p>In summary, for real-time applications and for applications that are
+openly available, we should always prefer a worst-case analysis of an
+algorithm. In other cases we usually desire an average-case analysis,
+but then we need to know enough about how the input is distributed.
+However, this is often difficult to calculate, so in most cases we must
+anyway resort to worst-case analysis.</p>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-2.4.html" class="navbutton">&lt;&lt;</a>
+<a href="section-2.4.html" accesskey="p" rel="previous">Growth rates</a>
+</div>
+<div class="navlink">
+<a href="section-2.6.html" accesskey="n" rel="next">Asymptotic analysis</a>
+<a href="section-2.6.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+<script type="text/javascript" src="../interactive/AlgAnal/AnalCasesSameCON.js"></script>
+<script type="text/javascript" src="../interactive/AlgAnal/AnalCasesDiffCON.js"></script>
+</body>
+</html>
+

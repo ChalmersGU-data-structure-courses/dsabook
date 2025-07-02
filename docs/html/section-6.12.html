@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Review questions</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-6.11.html" class="navbutton">&lt;&lt;</a>
+<a href="section-6.11.html" accesskey="p" rel="previous">Priority queues</a>
+</div>
+<div>
+<a href="section-7.html" accesskey="n" rel="next">Algorithm analysis, part 3: Advanced theory</a>
+<a href="section-7.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:ch06-review" class="level2" data-number="6.12">
+<h2 data-number="6.12"><span class="header-section-number">6.12</span>
+Review questions</h2>
+<p>This final section contains some review questions about the contents
+of this chapter.</p>
+<section id="sec:review-questions-stacks-and-queues" class="level3 quiz"
+data-number="6.12.1">
+<h3 data-number="6.12.1"><span
+class="header-section-number">6.12.1</span> Review questions: Stacks and
+queues</h3>
+<p>Here are some general practice questions about stacks and queues.</p>
+<div class="question">
+<p>Which value of a stack is accessible?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />The top item</label></li>
+<li><label><input type="checkbox" />The front item</label></li>
+<li><label><input type="checkbox" />The root</label></li>
+<li><label><input type="checkbox" />The bottom item</label></li>
+<li><label><input type="checkbox" />The rear item</label></li>
+<li><label><input type="checkbox" />The highest-valued item</label></li>
+<li><label><input type="checkbox" />The lowest-valued item</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Stacks do not care about the relative order of the values for the
+items it stores.</li>
+<li>A stack gives access only to the last item that was inserted.</li>
+<li>This is called the “top” item.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>It is an error to pop data from a(n) _______ stack.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Empty</label></li>
+<li><label><input type="checkbox" />Full</label></li>
+<li><label><input type="checkbox" />Initialised</label></li>
+<li><label><input type="checkbox" />Array-based</label></li>
+<li><label><input type="checkbox" />Linked</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>“Pop” means to remove.</li>
+<li>When can we not remove anything?</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In the linked implementation of a queue, a new item would be
+added:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />At the rear</label></li>
+<li><label><input type="checkbox" />At the head</label></li>
+<li><label><input type="checkbox" />At the current position</label></li>
+<li><label><input type="checkbox" />After all other entries that are
+greater than the new entry</label></li>
+<li><label><input type="checkbox" />After all other entries that are
+smaller than the new entry</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>We don’t care about value order in a queue.</li>
+<li>In a queue, we always add at the rear.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The following sequence of operations is performed on a queue:</p>
+<blockquote>
+<p>enqueue(1), enqueue(2), dequeue, enqueue(1), enqueue(2), dequeue,
+dequeue, dequeue, enqueue(2), dequeue</p>
+</blockquote>
+<p>The values will be output in this order:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />1,2,1,2,2</label></li>
+<li><label><input type="checkbox" />1,2,1,1,2</label></li>
+<li><label><input type="checkbox" />2,2,1,1,2</label></li>
+<li><label><input type="checkbox" />2,2,1,2,2</label></li>
+<li><label><input type="checkbox" />2,1,2,2,1</label></li>
+<li><label><input type="checkbox" />2,1,2,2,2</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Trace the operations, one by one.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>One difference between a queue and a stack is:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Queues use two ends of
+the structure; stacks use only one</label></li>
+<li><label><input type="checkbox" />Queues require linked lists, but
+stacks do not</label></li>
+<li><label><input type="checkbox" />Stacks require linked lists, but
+queues do not</label></li>
+<li><label><input type="checkbox" />Stacks use two ends of the
+structure, queues use only one</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Stacks and queues can both be implemented using a linked
+structure.</li>
+<li>The key difference is which end(s) the two stuctures access for
+insert and remove operations.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>If the characters ‘D’, ‘C’, ‘B’, ‘A’ are placed in a stack (in that
+order), and then removed one at a time, in what order will they be
+removed?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />ABCD</label></li>
+<li><label><input type="checkbox" />ABDC</label></li>
+<li><label><input type="checkbox" />DCAB</label></li>
+<li><label><input type="checkbox" />DCBA</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Items come off of a stack in the opposite order from how they went
+in.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Queue behaviour is typically referred to as:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />First-In,
+First-Out</label></li>
+<li><label><input type="checkbox" />Last-In, First-Out</label></li>
+<li><label><input type="checkbox" />First Come, First
+Served</label></li>
+<li><label><input type="checkbox" />Just-in-Time</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>In a queue, we remove the one that came in first.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>It is an error to dequeue data from a(n) _______ queue.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Empty</label></li>
+<li><label><input type="checkbox" />Full</label></li>
+<li><label><input type="checkbox" />Array-based</label></li>
+<li><label><input type="checkbox" />Linked</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>“Dequeue” means to remove. When can we not remove from a
+queue?-</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which value of a queue is accessible?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />The front
+item</label></li>
+<li><label><input type="checkbox" />The top item</label></li>
+<li><label><input type="checkbox" />The root</label></li>
+<li><label><input type="checkbox" />The bottom item</label></li>
+<li><label><input type="checkbox" />The rear item</label></li>
+<li><label><input type="checkbox" />The highest-valued item</label></li>
+<li><label><input type="checkbox" />The lowest-valued item</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>In a queue, we remove from (access) the front (and insert at the
+rear).</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The Stack is best characterised as:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Last-In,
+First-Out</label></li>
+<li><label><input type="checkbox" />First-In, First-Out</label></li>
+<li><label><input type="checkbox" />First come, First
+Served</label></li>
+<li><label><input type="checkbox" />Just-in-Time</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>The queue is called “First-in, First-out”</li>
+<li>The stack is called “Last-in, First-out”</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In the linked implementation of a queue, a new item would be added to
+the:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Rear</label></li>
+<li><label><input type="checkbox" />Front</label></li>
+<li><label><input type="checkbox" />Current position</label></li>
+<li><label><input type="checkbox" />None of these</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>In any queue implementation, we always add to the rear.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>If the characters ‘D’, ‘C’, ‘B’, ‘A’ are placed in a queue (in that
+order), and then removed one at a time, in what order will they be
+removed?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />DCBA</label></li>
+<li><label><input type="checkbox" />ABCD</label></li>
+<li><label><input type="checkbox" />ABDC</label></li>
+<li><label><input type="checkbox" />DCAB</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Items are removed from a queue in the same order as they
+arrived.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Stack A has entries a, b, c (in that order with a on top), while
+Stack B is initially empty. When an entry is popped out of stack A, it
+can be printed immediately or pushed to stack B. When an entry is popped
+out of stack B, it can only be printed. Which of the following
+permutations of a, b, c is not possible to print?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />c a b</label></li>
+<li><label><input type="checkbox" />b a c</label></li>
+<li><label><input type="checkbox" />b c a</label></li>
+<li><label><input type="checkbox" />a b c</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>We can manage to get “c” to print first.</li>
+<li>But to do so requires putting “a” and then “b” into stack B.-</li>
+<li>Which then means that they must come out of B and be printed in
+reverse order.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The following sequence of operations is performed on a stack:</p>
+<blockquote>
+<p>push(1), push(2), pop, push(1), push(2), pop, pop, pop, push(2),
+pop</p>
+</blockquote>
+<p>The values will be output in this order:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />2,2,1,1,2</label></li>
+<li><label><input type="checkbox" />1,2,1,2,2</label></li>
+<li><label><input type="checkbox" />1,2,2,1,2</label></li>
+<li><label><input type="checkbox" />2,2,1,2,2</label></li>
+<li><label><input type="checkbox" />2,1,2,2,1</label></li>
+<li><label><input type="checkbox" />2,1,2,2,2</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Trace the series of operations onto a stack.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="sec:review-questions-linked-lists" class="level3 quiz"
+data-number="6.12.2">
+<h3 data-number="6.12.2"><span
+class="header-section-number">6.12.2</span> Review questions: Linked
+lists</h3>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>The physical order in memory for the nodes of a linked list is the
+same as the order in which the nodes appear in the list.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>When you create a new object, you have no control over where it is
+in memory.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>In a singly linked list implementation, to access the predecessor of
+the current node we must start at the first node in the list.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>In a singly linked list we are unable to move directly backwards in
+the list.</li>
+<li>So, the only alternative is to start at the front and move down to
+the previous node.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In a linked list, the successive elements in the list:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Need not occupy
+contiguous space in memory</label></li>
+<li><label><input type="checkbox" />Must occupy contiguous space in
+memory</label></li>
+<li><label><input type="checkbox" />Must not occupy contiguous space in
+memory</label></li>
+<li><label><input type="checkbox" />None of these</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Unlike an array-based list, the linked list is created by linking
+together separate objects.</li>
+<li>Those objects can be created at any time, and you don’t control
+where they are in memory when they are made.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>To find an element with value
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
+in a linked list with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+nodes requires how many nodes to be visited in the worst case?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+nodes</label></li>
+<li><label><input type="checkbox" />Two nodes</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n</annotation></semantics></math>
+nodes</label></li>
+<li><label><input type="checkbox" />One node</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>n</mi><mn>2</mn></msup><annotation encoding="application/x-tex">n^2</annotation></semantics></math>
+nodes</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>How many nodes might we have to visit to find the one that we are
+looking for?</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Given a linked list implementation, inserting a new element to
+arbitrary position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+takes how long in the average case?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(i)</annotation></semantics></math>
+time</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>
+time</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math>
+time</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>
+time</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>
+time</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>We can’t insert until we reach the proper position.</li>
+<li>How long does it take to reach position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+in a linked list?</li>
+<li>Once we get there, it takes only a couple of assignments to put the
+new node in place.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Given a linked list implementation, deleting the element at arbitrary
+position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+takes how long in the average case?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(i)</annotation></semantics></math>
+time</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math>
+time</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>
+time</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>
+time</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>
+time</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>You cannot delete a node until you get to it.</li>
+<li>Starting from the front, how long does it take to get to the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>th
+node?</li>
+<li>Once you do reach the node, then you can remove it in constant
+time.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>To access the node at position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+in a singly-linked list</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />requires that all its
+predecessors be visited</label></li>
+<li><label><input type="checkbox" />takes one step</label></li>
+<li><label><input type="checkbox" />takes two steps</label></li>
+<li><label><input type="checkbox" />requires that all its successors be
+visited</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>How can we reach the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>th
+position?</li>
+<li>We have to work from the front.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="sec:review-questions-static-array-based-lists"
+class="level3 quiz" data-number="6.12.3">
+<h3 data-number="6.12.3"><span
+class="header-section-number">6.12.3</span> Review questions: Static
+array-based lists</h3>
+<div class="question">
+<p>In an array-based list, the successive elements in the list:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Must occupy contiguous
+space in memory</label></li>
+<li><label><input type="checkbox" />Need not occupy contiguous space in
+memory</label></li>
+<li><label><input type="checkbox" />Must not occupy contiguous space in
+memory</label></li>
+<li><label><input type="checkbox" />None of these</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>The list elements are stored in an array.</li>
+<li>Where in the array should they go?</li>
+<li>The list element in list position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+will be stored in array position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Given an array-based list implementation, inserting a new element
+just before the last value takes how long in the worst case?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math>
+time</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>
+time</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>
+time</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>
+time</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>We only need to shift one single value: the last element.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Given an array-based list implementation, inserting a new element to
+arbitrary position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+takes how long in the worst case?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>
+time</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math>
+time</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>
+time</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>
+time</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+could be anywhere in the list.</li>
+<li>We will need to shift values from position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+to the list end forward by one position.</li>
+<li>How many we shift depends on the value of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>.</li>
+<li>In the worst case, it will be all the elements in the list.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Given an array-based list implementation, deleting the second-to-last
+element takes how long in the worst case?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math>
+time</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>
+time</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>
+time</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>
+time</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>We only need to shift one single value: the last element.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Given an array-based list implementation, deleting the element at an
+arbitrary position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+takes how long in the worst case?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>
+time</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math>
+time</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>
+time</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>
+time</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+could be anywhere in the list (of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+values).</li>
+<li>We will need to shift values from position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+to the list end back by one position.</li>
+<li>How many we shift depends on the value of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>.</li>
+<li>In the worst case, it will be all the elements in the list.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="sec:summary-questions" class="level3 quiz"
+data-number="6.12.4">
+<h3 data-number="6.12.4"><span
+class="header-section-number">6.12.4</span> Summary questions</h3>
+<p>Here are some general practice questions about various data
+structures in this chapter.</p>
+<div class="question">
+<p>The term “LIFO” is associated with which data structure?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Stack</label></li>
+<li><label><input type="checkbox" />List</label></li>
+<li><label><input type="checkbox" />Queue</label></li>
+<li><label><input type="checkbox" />All of these</label></li>
+<li><label><input type="checkbox" />None of these</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>LIFO means “Last-in, First-out”.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which of the following is not a linear data structure?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />These are all linear data
+structures</label></li>
+<li><label><input type="checkbox" />Queue</label></li>
+<li><label><input type="checkbox" />Array-based list</label></li>
+<li><label><input type="checkbox" />Linked list</label></li>
+<li><label><input type="checkbox" />Stack</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>We studied all of these data structures in this chapter.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which data structure would be used to implement recursion?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Stack</label></li>
+<li><label><input type="checkbox" />Queue</label></li>
+<li><label><input type="checkbox" />Array-based list</label></li>
+<li><label><input type="checkbox" />Linked list</label></li>
+<li><label><input type="checkbox" />Tree</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>When unwinding from recursion, we say that you “pop” the recursive
+“stack”.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which data structure allows insertion only at the top, and deletion
+only at the top?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Stack</label></li>
+<li><label><input type="checkbox" />Queue</label></li>
+<li><label><input type="checkbox" />Array-based list</label></li>
+<li><label><input type="checkbox" />Linked list</label></li>
+<li><label><input type="checkbox" />Tree</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>We use the term “top” with only one of these data structures.</li>
+<li>We add and remove at the “top” with the stack.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which data structure allows insertion only at the back, and removing
+only from the front?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Queue</label></li>
+<li><label><input type="checkbox" />Stack</label></li>
+<li><label><input type="checkbox" />Array-based list</label></li>
+<li><label><input type="checkbox" />Linked list</label></li>
+<li><label><input type="checkbox" />Tree</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>We did not cover trees in this chapter.</li>
+<li>Lists do not restrict where inserts and removes take place.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The terms “enqueue” and “dequeue” are associated with which data
+structure?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Queue</label></li>
+<li><label><input type="checkbox" />Stack</label></li>
+<li><label><input type="checkbox" />Array</label></li>
+<li><label><input type="checkbox" />List</label></li>
+<li><label><input type="checkbox" />All of these</label></li>
+<li><label><input type="checkbox" />None of these</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>What does “enqueue” and “dequeue” mean?</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The terms “add/insert” and “delete” are traditionally associated with
+which data structure(s)?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />List</label></li>
+<li><label><input type="checkbox" />Stack</label></li>
+<li><label><input type="checkbox" />Queue</label></li>
+<li><label><input type="checkbox" />All of these</label></li>
+<li><label><input type="checkbox" />None of these</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Stacks and Queues have special terminology that is used instead of
+the more general “insert” and “delete”.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The term “FIFO” is associated with which data structure?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Queue</label></li>
+<li><label><input type="checkbox" />List</label></li>
+<li><label><input type="checkbox" />Stack</label></li>
+<li><label><input type="checkbox" />Freelist</label></li>
+<li><label><input type="checkbox" />All of these</label></li>
+<li><label><input type="checkbox" />None of these</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>FIFO means “first-in, first-out”</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which of the following is not a linear data structure?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Tree</label></li>
+<li><label><input type="checkbox" />Queue</label></li>
+<li><label><input type="checkbox" />Array-based list</label></li>
+<li><label><input type="checkbox" />Linked list</label></li>
+<li><label><input type="checkbox" />Stack</label></li>
+<li><label><input type="checkbox" />These are all linear data
+structures</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Which is the one data structure not covered in this chapter?</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The terms “push” and “pop” are associated with which data
+structure?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Stack</label></li>
+<li><label><input type="checkbox" />Queue</label></li>
+<li><label><input type="checkbox" />Array</label></li>
+<li><label><input type="checkbox" />List</label></li>
+<li><label><input type="checkbox" />All of these</label></li>
+<li><label><input type="checkbox" />None of these</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>“Push” and “pop” are special terminology associated with one of
+these data structures.</li>
+<li>You push items onto a stack, and pull them off.</li>
+</ul>
+</div>
+</div>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-6.11.html" class="navbutton">&lt;&lt;</a>
+<a href="section-6.11.html" accesskey="p" rel="previous">Priority queues</a>
+</div>
+<div class="navlink">
+<a href="section-7.html" accesskey="n" rel="next">Algorithm analysis, part 3: Advanced theory</a>
+<a href="section-7.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

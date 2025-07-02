@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Maps, or dictionaries</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-10.1.html" class="navbutton">&lt;&lt;</a>
+<a href="section-10.1.html" accesskey="p" rel="previous">Sets</a>
+</div>
+<div>
+<a href="section-10.3.html" accesskey="n" rel="next">Case study: Implementing sets using lists</a>
+<a href="section-10.3.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:maps-or-dictionaries" class="level2"
+data-number="10.2">
+<h2 data-number="10.2"><span class="header-section-number">10.2</span>
+Maps, or dictionaries</h2>
+<p>A <em>map</em> (or dictionary) represents a set of <em>keys</em>,
+where each key has an associated <em>value</em>. We can <em>add</em> and
+<em>remove</em> keys, but when we add a key we must specify what
+<em>value</em> we want to associated with it. We can <em>check</em> if a
+given key is present in the map. We can also <em>look up</em> a key to
+find the associated value.</p>
+<p>A map cannot contain duplicate <em>keys</em>, so each key is
+associated with exactly one value. If we call <code>put(k,v)</code>, but
+the key <code>k</code> is already present, then the value associated
+with <code>k</code> gets changed to <code>v</code>. On the other hand, a
+map <em>can</em> contain duplicate <em>values</em>: two keys can have
+the same value. Here is a possible minimal interface for maps:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Map</span> <span class="kw">of</span> K <span class="kw">to</span> V <span class="kw">extends</span> <span class="bu">Collection</span> <span class="kw">of</span> K:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">put</span>(key: K, value: V)        <span class="co">// Sets the value of the given key.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">get</span>(key: K) <span class="op">-&gt;</span> V             <span class="co">// Returns the value associated with the given key, or `null` if the key is not there.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">remove</span>(key: K)               <span class="co">// Removes the value associated with the given key.</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">containsKey</span>(key: K) <span class="op">-&gt;</span> Bool  <span class="co">// Returns true if the key has an associated value.</span></span></code></pre></div>
+<p>Note that maps depend on two different types, the keys <code>K</code>
+and the values <code>V</code>. These types can be the same or different,
+depending on the needs of your application.</p>
+<section id="sec:example-cash-register"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Cash register</h4>
+<p>The map is a perfect match for our supermarket example:</p>
+<ul>
+<li><em>Cash register:</em> Given a database of all items for sale in a
+supermarket, find information about the item with a given <em>EAN
+code</em>.</li>
+</ul>
+<p>Here, the key should be the EAN code that the barcode scanner
+recognises, and the value should be a record containing information
+about the item. If the EAN code is stored in a field <code>ean</code>,
+then to put an item <code>p</code> in the database we call
+<code>database.put(p.ean, p)</code>. To find the item with barcode
+<code>code</code> we call <code>database.get(code)</code>.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> Item</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    ean: String</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    name: String</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    price: <span class="bu">Number</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    expires: Date</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> CashRegister:</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    database: <span class="bu">Map</span> <span class="kw">of</span> String <span class="kw">to</span> Item <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>()</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Put the item in the database.</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">put</span>(p: Item):</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        database.<span class="bu">put</span>(p.ean, p)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Remove an item from the database.</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">remove</span>(p: Item):</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        database.<span class="bu">remove</span>(p.ean)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Find the item with the given EAN code.</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    find(ean: String) <span class="op">-&gt;</span> Item:</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> database.<span class="bu">get</span>(ean)</span></code></pre></div>
+</section>
+<section id="sec:multimaps" class="level3" data-number="10.2.1">
+<h3 data-number="10.2.1"><span
+class="header-section-number">10.2.1</span> Multimaps</h3>
+<p>Maps have the restriction that each key has only one value. However,
+sometimes we want to store a list of records, where some records might
+have the same key. Then we want something like a map, but where a key
+can have multiple values associated with it. This structure is called a
+<em>multimap</em>.</p>
+<p>Unfortunately, most programming languages do not provide a multimap
+data structure. Instead, we can implement it ourselves. The idea is to
+use a map, whose value type is a <em>set</em> of the actual values that
+we are interested in.</p>
+<section id="sec:example-search-engine"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Search engine</h4>
+<p>A multimap is the perfect data structure for our search engine
+example:</p>
+<ul>
+<li>Given a collection of documents (e.g. web pages), find all web pages
+containing a given word.</li>
+</ul>
+<p>To find all documents containing a given word, we will build a
+multimap, where the key is a word, and the values are all documents
+containing that word. Then, searching for a word will just mean looking
+it up in the multimap.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// We model a document as a list of words.</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> Document:</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    contents: <span class="bu">Collection</span> <span class="kw">of</span> String</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> SearchEngine:</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    database: <span class="bu">Map</span> <span class="kw">of</span> String <span class="kw">to</span> <span class="bu">Set</span> <span class="kw">of</span> Document <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>()</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Add a new document to the database.</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">add</span>(doc: Document):</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="kw">each</span> word <span class="kw">in</span> doc.contents:</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="kw">not</span> database.<span class="bu">containsKey</span>(word):</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>                <span class="co">// This is the first document containing this word.</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>                database.<span class="bu">put</span>(word, <span class="kw">new</span> <span class="bu">Set</span>())</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>            <span class="co">// Get the set of documents containing this word, and add the document.</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>            <span class="bu">set</span> <span class="op">=</span> database.<span class="bu">get</span>(word)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>            <span class="bu">set</span>.<span class="bu">add</span>(doc)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Find all documents containing a given word.</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    find(word: String) <span class="op">-&gt;</span> <span class="bu">Set</span> <span class="kw">of</span> Document:</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> database.<span class="bu">containsKey</span>(word):</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> database.<span class="bu">get</span>(word)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>            <span class="co">// If the word is not found, return an empty set.</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="kw">new</span> <span class="bu">Set</span>()</span></code></pre></div>
+<p>Note that we don’t have to <code>put</code> the updated set back into
+the database (in the <code>add</code> method). This is because complex
+data structures are <em>mutable</em>, as explained in <a
+href="section-1.5.html#sec:programming-preliminaries">Section 1.5</a>.</p>
+</section>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-10.1.html" class="navbutton">&lt;&lt;</a>
+<a href="section-10.1.html" accesskey="p" rel="previous">Sets</a>
+</div>
+<div class="navlink">
+<a href="section-10.3.html" accesskey="n" rel="next">Case study: Implementing sets using lists</a>
+<a href="section-10.3.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

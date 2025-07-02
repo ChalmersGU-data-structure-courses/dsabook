@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Implementing sets and maps using open
+addressing</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-12.5.html" class="navbutton">&lt;&lt;</a>
+<a href="section-12.5.html" accesskey="p" rel="previous">Open addressing</a>
+</div>
+<div>
+<a href="section-12.7.html" accesskey="n" rel="next">Deletion in open addressing</a>
+<a href="section-12.7.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:implementing-sets-and-maps-using-open-addressing"
+class="level2" data-number="12.6">
+<h2 data-number="12.6"><span class="header-section-number">12.6</span>
+Implementing sets and maps using open addressing</h2>
+<p>An open addressing hash set consists of an internal array
+<code>table</code> of elements. Apart from the special value
+<code>null</code>, denoting an empty slot, the table must also allow the
+special value <code>DELETED</code>, denoting a slot that has been
+deleted. To initialise the table, we first create the internal array of
+some initial minimum capacity:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> OpenAddressingHashSet <span class="kw">implements</span> <span class="bu">Set</span>:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    table <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(MIN_CAPACITY)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span> <span class="op">=</span> <span class="dv">0</span></span></code></pre></div>
+<p>As already explained, all main methods (<code>contains</code>,
+<code>add</code> and <code>remove</code>) use the same probing function
+to get the same probe sequence. This is implemented by the method
+<code>hashAndProbe</code> that was shown in the previous section. In
+this way, a record not in its home position can always be recovered.</p>
+<p>To search for an element we probe the table for a position and check
+if the slot contains the element we are looking for:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> OpenAddressingHashSet:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">contains</span>(elem):</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> hashAndProbe(elem)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> table[i] <span class="op">==</span> elem</span></code></pre></div>
+<p>When we want to add an element we first have to search for it. If the
+element isn’t found, the probing returns the index to an empty slot,
+which we then can assign the element. Now we have to increase the size
+of the set, and check if we have exceeded the maximum allowed load
+factor. If the load factor is too large, then we resize the internal
+table – which was explained in the previous section.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> OpenAddressingHashSet:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">add</span>(elem):</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> hashAndProbe(elem)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> table[i] <span class="kw">is</span> <span class="va">null</span>:</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            table[i] <span class="op">=</span> elem</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            <span class="bu">size</span> <span class="op">=</span> <span class="bu">size</span> <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> loadFactor() <span class="op">&gt;</span> MAX_LOAD_FACTOR:</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                resizeTable(table.<span class="bu">size</span> <span class="op">*</span> MULTIPLIER)</span></code></pre></div>
+<p>Deleting from an open addressing hash table was explained briefly in
+the last section and we will go into more details in the next
+section.</p>
+<p>We use the same constants as for the separate chaining hash table,
+but the values are different. Most importantly, the max load factor must
+be smaller than 1, since there can only be one value per array slot.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> OpenAddressingHashSet:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    MIN_CAPACITY <span class="op">=</span> <span class="dv">8</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    MIN_LOAD_FACTOR <span class="op">=</span> <span class="fl">0.3</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    MAX_LOAD_FACTOR <span class="op">=</span> <span class="fl">0.7</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    MULTIPLIER <span class="op">=</span> <span class="fl">1.5</span></span></code></pre></div>
+<section id="sec:resizing" class="level3" data-number="12.6.1">
+<h3 data-number="12.6.1"><span
+class="header-section-number">12.6.1</span> Resizing</h3>
+<p>When we resize the internal table, it is very important that we
+<em>do not keep</em> the old hash indices for the keys, because they
+will not be the same after resizing. This is exactly the same as for
+separate chaining. Instead we save the current internal table to a
+temporary variable, and reinitialise the table to the new capacity. Then
+we iterate through all entries in the old table, and simply insert them
+again into the new resized table.</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> SeparateChainingHashSet:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    resizeTable(newCapacity):</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        oldTable <span class="op">=</span> table                <span class="co">// Remember the old table.</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        table <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(newCapacity)  <span class="co">// Reset the internal table.</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">size</span> <span class="op">=</span> <span class="dv">0</span>                        <span class="co">// Reset the number of elements.</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="kw">each</span> elem <span class="kw">in</span> oldTable:</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> elem <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span> <span class="kw">and</span> <span class="kw">not</span> <span class="va">DELETED</span>:</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>                <span class="bu">add</span> elem</span></code></pre></div>
+<p>Now we can get rid of all the deleted slots, simply by not adding
+them to the new table.</p>
+</section>
+<section id="sec:implementing-maps-2" class="level3"
+data-number="12.6.2">
+<h3 data-number="12.6.2"><span
+class="header-section-number">12.6.2</span> Implementing maps</h3>
+<p>If we want to implement a map instead of a set, we have to store both
+a key and a value in the same slot. This can be done in two ways: either
+one array of key-value pairs, or two arrays of the same length – one for
+the keys and another for the values. Here we will use the second
+approach.</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> OpenAddressingHashMap <span class="kw">implements</span> <span class="bu">Map</span>:</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    keys <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(MIN_CAPACITY)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    values <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(MIN_CAPACITY)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span> <span class="op">=</span> <span class="dv">0</span></span></code></pre></div>
+<p>The changes that has to be made are these, compared to how we
+implemented sets:</p>
+<ul>
+<li>when searching in the hash table, we have to use the
+<code>keys</code> array (which was the <code>table</code> array for the
+hash set)</li>
+<li>when getting and setting the value, we use the same index in the
+<code>values</code> array</li>
+</ul>
+<p>Searching is straightforward:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> OpenAddressingHashSet:</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">get</span>(key):</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> hashAndProbe(key)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> keys[i] <span class="op">==</span> key:</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> values[i]</span></code></pre></div>
+<p>Setting the value for a key becomes slightly longer, because we have
+to check if the key already exists or not. If the key doesn’t exist we
+have to increase the size and check if we need to resize the tables.</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> OpenAddressingHashSet:</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">put</span>(key, value):</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> hashAndProbe(key)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        values[i] <span class="op">=</span> value</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> keys[i] <span class="kw">is</span> <span class="va">null</span>:</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>            keys[i] <span class="op">=</span> key</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>            <span class="bu">size</span> <span class="op">=</span> <span class="bu">size</span> <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> loadFactor() <span class="op">&gt;</span> MAX_LOAD_FACTOR:</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>                resizeTable(keys.<span class="bu">size</span> <span class="op">*</span> MULTIPLIER)</span></code></pre></div>
+<p>Reisizing is very similar to that for sets, we just have to remember
+to reset both internal tables (<code>keys</code> and
+<code>values</code>).</p>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-12.5.html" class="navbutton">&lt;&lt;</a>
+<a href="section-12.5.html" accesskey="p" rel="previous">Open addressing</a>
+</div>
+<div class="navlink">
+<a href="section-12.7.html" accesskey="n" rel="next">Deletion in open addressing</a>
+<a href="section-12.7.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

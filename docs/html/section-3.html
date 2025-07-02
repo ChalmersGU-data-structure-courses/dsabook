@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Sorting, part 1: Simple algorithms</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+<link href="../interactive/Sorting/SortNotationS1CON.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-2.11.html" class="navbutton">&lt;&lt;</a>
+<a href="section-2.11.html" accesskey="p" rel="previous">Review questions</a>
+</div>
+<div>
+<a href="section-3.1.html" accesskey="n" rel="next">Terminology and notation</a>
+<a href="section-3.1.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:sorting-simple" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span>
+Sorting, part 1: Simple algorithms</h1>
+<p>We have seen that, when an array is sorted in ascending order,
+<em>binary search</em> can be used to find items in it efficiently. But
+what about when we have a collection of data that is not in any order?
+If we will often need to search for items in the data, it makes sense to
+<em>sort the data</em> first. In this chapter we will study algorithms
+for sorting arrays in ascending order.</p>
+<p>We sort many things in our everyday lives: A handful of cards when
+playing Bridge; bills and other piles of paper; jars of spices; and so
+on. And we have many intuitive strategies that we can use to do the
+sorting, depending on how many objects we have to sort and how hard they
+are to move around. Sorting is also one of the most frequently performed
+computing tasks. We might sort the records in a database so that we can
+search the collection efficiently. We might sort customer records by zip
+code so that when we print an advertisement we can then mail them more
+cheaply. We might use sorting to help an algorithm to solve some other
+problem. For example, <a href="section-14.html#kruskals-algorithm"
+class="term"
+title="An algorithm for computing the MST of a graph. During processing, it makes use of the UNION/FIND process to efficiently determine of two vertices are within the same subgraph.">Kruskal’s
+algorithm</a> to find <a href="section-14.html#minimum-spanning-tree"
+class="term"
+title="Abbreviated as MST, or sometimes as MCST. Derived from a weighted graph, the MST is the subset of the graph&#39;s edges that maintains the connectivitiy of the graph while having lowest total cost (as defined by the sum of the weights of the edges in the MST). The result is referred to as a tree because it would never have a cycle (since an edge could be removed from the cycle and still preserve connectivity). Two algorithms to solve this problem are Prim&#39;s algorithm and Kruskal&#39;s algorithm.">minimum
+spanning trees</a> must sort the edges of a graph by their lengths
+before it can process them.</p>
+<p>Because sorting is so important, naturally it has been studied
+intensively and many algorithms have been devised. Some of these
+algorithms are straightforward adaptations of schemes we use in everyday
+life. For example, a natural way to sort your cards in a bridge hand is
+to go from left to right, and place each card in turn in its correct
+position relative to the other cards that you have already sorted. This
+is the idea behind <a href="section-14.html#insertion-sort" class="term"
+title="A sorting algorithm with $O(n^2)$ average and worst case cost, and $O(n)$ best case cost. This best case cost makes it useful when we have reason to expect the input to be nearly sorted.">Insertion
+sort</a>. Other sorting algorithms are totally alien to how humans do
+things, having been invented to sort thousands or even millions of
+records stored on the computer. For example, no normal person would use
+<a href="section-14.html#quicksort" class="term"
+title="A sort that is $O(n \log n)$ in the best and average cases, though $O(n^2)$ in the worst case. However, a reasonable implmentation will make the worst case occur under exceedingly rare circumstances. Due to its tight inner loop, it tends to run better than any other known sort in general cases. Thus, it is a popular sort to use in code libraries. It works by divide and conquer, by selecting a pivot value, splitting the list into parts that are either less than or greater than the pivot, and then sorting the two parts.">Quicksort</a>
+to order a pile of bills by date, even though Quicksort is one of the
+standard sorting algorithms of choice for most software libraries. After
+years of study, there are still unsolved problems related to sorting.
+New algorithms are still being developed and refined for special-purpose
+applications.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<section id="sec:the-sorting-problem" class="level4 unnumbered">
+<h4 class="unnumbered">The sorting problem</h4>
+</summary>
+<p>
+<div id="SortNotationS1CON" class="ssAV" data-short-name="SortNotationS1CON" data-long-name="Sorting Terminology and Notation Slideshow 1" alt="Sorting Terminology and Notation Slideshow 1" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</section>
+</div>
+<p>Sorting can be divided into two kinds depending on how we compare the
+items in the list:</p>
+<dl>
+<dt>Natural sorting</dt>
+<dd>
+The items have some kind of natural order. For example, sorting a list
+of words in alphabetical order, or sorting a list of numbers.
+</dd>
+<dt>Key-based sorting</dt>
+<dd>
+Here, each item has a <em>key</em>, and we want to sort the items so
+that the keys come in order. For example, sorting a list of towns by
+population, or sorting a list of persons by their age.
+</dd>
+</dl>
+<p>Note that if we sort according to a <em>key</em>, it doesn’t have to
+be explicitly stored in the object, but can instead be calculated on
+demand. E.g., if we want to sort a list of words case-insensitively, we
+can use a lower-case transformation when doing the comparisons. This is
+usually done by a <a href="section-14.html#comparator" class="term"
+title="A function given as a parameter to a method of a library (or alternatively, a parameter for a C++ template or a Java generic). The comparator function concept provides a generic way to encapulate the process of performing a comparison between two objects of a specific type. For example, if we want to write a generic sorting routine, that can handle any record type, we can require that the user of the sorting routine passes in a comparator function to define how records in the collection are to be compared.">comparator</a>
+(in Java), or by a <a
+href="https://docs.python.org/3/howto/sorting.html#key-functions">key
+function</a> (in Python).</p>
+<p>The following two chapters cover several standard algorithms
+appropriate for sorting a collection of records. In these chapters we
+concentrate on <em>natural sorting</em>, but all the algorithms work
+just as well for <em>key-based sorting</em> – and we trust that you are
+a mature enough programmer to be able to infer how to do this. The first
+chapter discusses three simple, but relatively slow, algorithms that
+require <a href="section-14.html#quadratic-growth-rate" class="term"
+title="A growth rate function of the form $cn^2$ where $n$ is the input size and $c$ is a constant.">quadratic</a>
+time in the size of the array. The following chapter then presents two
+algorithms with considerably better performance, with <a
+href="section-14.html#linearithmic-growth-rate" class="term"
+title="For input size $n$, a growth rate of $cn \log n$ (for $c$ any positive constant). In other words, the cost of the associated function is slightly larger than linear on the input size.">linearithmic</a>
+worst-case or average-case running time.</p>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-2.11.html" class="navbutton">&lt;&lt;</a>
+<a href="section-2.11.html" accesskey="p" rel="previous">Review questions</a>
+</div>
+<div class="navlink">
+<a href="section-3.1.html" accesskey="n" rel="next">Terminology and notation</a>
+<a href="section-3.1.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+<script type="text/javascript" src="../interactive/Sorting/SortNotationS1CON.js"></script>
+</body>
+</html>
+

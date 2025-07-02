@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Mathematical preliminaries</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+<link href="../interactive/AlgAnal/SummationOneToNCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/AlgAnal/SummationTwoPowerICON.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-1.3.html" class="navbutton">&lt;&lt;</a>
+<a href="section-1.3.html" accesskey="p" rel="previous">Practical examples</a>
+</div>
+<div>
+<a href="section-1.5.html" accesskey="n" rel="next">Programming preliminaries</a>
+<a href="section-1.5.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:mathematical-preliminaries" class="level2"
+data-number="1.4">
+<h2 data-number="1.4"><span class="header-section-number">1.4</span>
+Mathematical preliminaries</h2>
+<p>This section presents the mathematical preliminaries assumed to be
+familiar to the reader. It serves as a review and reference, allowing
+you to revisit relevant sections when encountering unfamiliar notation
+or mathematical techniques in later chapters. If you’re comfortable with
+these preliminaries, you can safely skip ahead to the next section.</p>
+<div class="html">
+<section id="sec:sets" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1"><span class="header-section-number">1.4.1</span>
+Sets</h3>
+<p>The concept of a set in the mathematical sense has wide application
+in computer science. The notations and techniques of set theory are
+commonly used when describing and implementing algorithms because the
+abstractions associated with sets often help to clarify and simplify
+algorithm design.</p>
+<p>A <a href="section-14.html#set" class="term"
+title="A collection of distinguishable members or elements.">set</a> is
+a collection of distinguishable <a href="section-14.html#member"
+class="term"
+title="In set notation, this is a synonym for element. In abstract design, a data item is a member of a type. In an object-oriented language, data members are data fields in an object.">members</a>
+or <a href="section-14.html#element" class="term"
+title="One value or member in a set.">elements</a>. The members are
+typically drawn from some larger population known as the <a
+href="section-14.html#base-type" class="term"
+title="The data type for the elements in a set. For example, the set might consist of the integer values 3, 5, and 7. In this example, the base type is integers.">base
+type</a>. Each member of a set is either a <a
+href="section-14.html#primitive-element" class="term"
+title="In set notation, this is a single element that is a member of the base type for the set. This is as opposed to an element of the set being another set.">primitive
+element</a> of the base type or is a set itself. There is no concept of
+duplication in a set. Each value from the base type is either in the set
+or not in the set. For example, a set named
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐏</mi><annotation encoding="application/x-tex">\mathbf{P}</annotation></semantics></math>
+might consist of the three integers 7, 11, and 42. In this case,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐏</mi><annotation encoding="application/x-tex">\mathbf{P}</annotation></semantics></math>’s
+members are 7, 11, and 42, and the base type is integer.</p>
+<p>The following table shows the symbols commonly used to express sets
+and their relationships.</p>
+<table>
+<tbody>
+<tr>
+<td
+style="text-align: left;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mn>1</mn><mo>,</mo><mn>4</mn><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{1, 4\}</annotation></semantics></math></td>
+<td style="text-align: left;">A set composed of the members 1 and 4</td>
+</tr>
+<tr>
+<td
+style="text-align: left;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mi>x</mi><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">|</mo><mspace width="0.222em"></mspace><mi>x</mi><mspace width="0.222em"></mspace><mtext mathvariant="normal">is prime</mtext><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{x ~|~ x\ \mbox{is prime}\}</annotation></semantics></math></td>
+<td style="text-align: left;">A set definition using a set comprehension
+(e.g., the set of all primes)</td>
+</tr>
+<tr>
+<td
+style="text-align: left;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>∈</mo><mi>𝐏</mi></mrow><annotation encoding="application/x-tex">x\in\mathbf{P}</annotation></semantics></math></td>
+<td
+style="text-align: left;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>
+is a member of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐏</mi><annotation encoding="application/x-tex">\mathbf{P}</annotation></semantics></math></td>
+</tr>
+<tr>
+<td
+style="text-align: left;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>∉</mo><mi>𝐏</mi></mrow><annotation encoding="application/x-tex">x\notin\mathbf{P}</annotation></semantics></math></td>
+<td
+style="text-align: left;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>
+is not a member of set
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐏</mi><annotation encoding="application/x-tex">\mathbf{P}</annotation></semantics></math></td>
+</tr>
+<tr>
+<td
+style="text-align: left;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>∅</mi><annotation encoding="application/x-tex">\emptyset</annotation></semantics></math></td>
+<td style="text-align: left;">The null or empty set</td>
+</tr>
+<tr>
+<td
+style="text-align: left;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>𝐏</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|\mathbf{P}|</annotation></semantics></math></td>
+<td style="text-align: left;">Cardinality: the size of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐏</mi><annotation encoding="application/x-tex">\mathbf{P}</annotation></semantics></math>,
+or its number of members</td>
+</tr>
+<tr>
+<td
+style="text-align: left;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐏</mi><mo>⊆</mo><mi>𝐐</mi></mrow><annotation encoding="application/x-tex">\mathbf{P}\subseteq\mathbf{Q}</annotation></semantics></math></td>
+<td
+style="text-align: left;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐏</mi><annotation encoding="application/x-tex">\mathbf{P}</annotation></semantics></math>
+is included in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐐</mi><annotation encoding="application/x-tex">\mathbf{Q}</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐏</mi><annotation encoding="application/x-tex">\mathbf{P}</annotation></semantics></math>
+is a subset of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐐</mi><annotation encoding="application/x-tex">\mathbf{Q}</annotation></semantics></math></td>
+</tr>
+<tr>
+<td
+style="text-align: left;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐏</mi><mo>⊇</mo><mi>𝐐</mi></mrow><annotation encoding="application/x-tex">\mathbf{P}\supseteq\mathbf{Q}</annotation></semantics></math></td>
+<td
+style="text-align: left;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐐</mi><annotation encoding="application/x-tex">\mathbf{Q}</annotation></semantics></math>
+is included in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐏</mi><annotation encoding="application/x-tex">\mathbf{P}</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐏</mi><annotation encoding="application/x-tex">\mathbf{P}</annotation></semantics></math>
+is a superset of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐐</mi><annotation encoding="application/x-tex">\mathbf{Q}</annotation></semantics></math></td>
+</tr>
+<tr>
+<td
+style="text-align: left;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐏</mi><mo>∪</mo><mi>𝐐</mi></mrow><annotation encoding="application/x-tex">\mathbf{P}\cup\mathbf{Q}</annotation></semantics></math></td>
+<td style="text-align: left;">Union: all elements appearing in any of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐏</mi><annotation encoding="application/x-tex">\mathbf{P}</annotation></semantics></math>
+<em>or</em>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐐</mi><annotation encoding="application/x-tex">\mathbf{Q}</annotation></semantics></math></td>
+</tr>
+<tr>
+<td
+style="text-align: left;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐏</mi><mo>∩</mo><mi>𝐐</mi></mrow><annotation encoding="application/x-tex">\mathbf{P}\cap\mathbf{Q}</annotation></semantics></math></td>
+<td style="text-align: left;">Intersection: all elements appearing in
+both
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐏</mi><annotation encoding="application/x-tex">\mathbf{P}</annotation></semantics></math>
+<em>and</em>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐐</mi><annotation encoding="application/x-tex">\mathbf{Q}</annotation></semantics></math></td>
+</tr>
+<tr>
+<td
+style="text-align: left;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐏</mi><mo>−</mo><mi>𝐐</mi></mrow><annotation encoding="application/x-tex">\mathbf{P}-\mathbf{Q}</annotation></semantics></math></td>
+<td style="text-align: left;">Difference: all elements of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐏</mi><annotation encoding="application/x-tex">\mathbf{P}</annotation></semantics></math>
+<em>not</em> in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐐</mi><annotation encoding="application/x-tex">\mathbf{Q}</annotation></semantics></math></td>
+</tr>
+<tr>
+<td
+style="text-align: left;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐏</mi><mo>×</mo><mi>𝐐</mi></mrow><annotation encoding="application/x-tex">\mathbf{P}\times\mathbf{Q}</annotation></semantics></math></td>
+<td style="text-align: left;">(Cartesian) product: all possible pairs
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(x,y)</annotation></semantics></math>
+with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>∈</mo><mi>𝐏</mi></mrow><annotation encoding="application/x-tex">x\in\mathbf{P}</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>∈</mo><mi>𝐐</mi></mrow><annotation encoding="application/x-tex">y\in\mathbf{Q}</annotation></semantics></math></td>
+</tr>
+<tr>
+<td
+style="text-align: left;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mi>𝐏</mi></msup><annotation encoding="application/x-tex">2^\mathbf{P}</annotation></semantics></math>
+or
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝒫</mi><mo stretchy="false" form="prefix">(</mo><mi>𝐏</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{P}(\mathbf{P})</annotation></semantics></math></td>
+<td style="text-align: left;">Powerset: all possible subsets of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐏</mi><annotation encoding="application/x-tex">\mathbf{P}</annotation></semantics></math></td>
+</tr>
+</tbody>
+</table>
+<p>Here are some examples of this notation in use. First define two
+sets,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐏</mi><annotation encoding="application/x-tex">\mathbf{P}</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐐</mi><annotation encoding="application/x-tex">\mathbf{Q}</annotation></semantics></math>.</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐏</mi><mo>=</mo><mo stretchy="false" form="prefix">{</mo><mn>2</mn><mo>,</mo><mn>3</mn><mo>,</mo><mn>5</mn><mo stretchy="false" form="postfix">}</mo><mo>,</mo><mspace width="2.0em"></mspace><mi>𝐐</mi><mo>=</mo><mo stretchy="false" form="prefix">{</mo><mn>5</mn><mo>,</mo><mn>10</mn><mo stretchy="false" form="postfix">}</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\mathbf{P} = \{2, 3, 5\}, \qquad \mathbf{Q} = \{5, 10\}.
+</annotation></semantics></math></p>
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>𝐏</mi><mo stretchy="false" form="prefix">|</mo><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">|\mathbf{P}| = 3</annotation></semantics></math>
+(because
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐏</mi><annotation encoding="application/x-tex">\mathbf{P}</annotation></semantics></math>
+has three members) and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>𝐐</mi><mo stretchy="false" form="prefix">|</mo><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">|\mathbf{Q}| = 2</annotation></semantics></math>
+(because
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐐</mi><annotation encoding="application/x-tex">\mathbf{Q}</annotation></semantics></math>
+has two members). Both of these sets are finite in length. Other sets
+can be infinite, for example, the set of integers.</p>
+<p>The union of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐏</mi><annotation encoding="application/x-tex">\mathbf{P}</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐐</mi><annotation encoding="application/x-tex">\mathbf{Q}</annotation></semantics></math>,
+written
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐏</mi><mo>∪</mo><mi>𝐐</mi></mrow><annotation encoding="application/x-tex">\mathbf{P} \cup \mathbf{Q}</annotation></semantics></math>,
+is the set of elements in either
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐏</mi><annotation encoding="application/x-tex">\mathbf{P}</annotation></semantics></math>
+or
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐐</mi><annotation encoding="application/x-tex">\mathbf{Q}</annotation></semantics></math>,
+which is {2, 3, 5, 10}. The intersection of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐏</mi><annotation encoding="application/x-tex">\mathbf{P}</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐐</mi><annotation encoding="application/x-tex">\mathbf{Q}</annotation></semantics></math>,
+written
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐏</mi><mo>∩</mo><mi>𝐐</mi></mrow><annotation encoding="application/x-tex">\mathbf{P} \cap \mathbf{Q}</annotation></semantics></math>,
+is the set of elements that appear in both
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐏</mi><annotation encoding="application/x-tex">\mathbf{P}</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐐</mi><annotation encoding="application/x-tex">\mathbf{Q}</annotation></semantics></math>,
+which is {5}. The set difference of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐏</mi><annotation encoding="application/x-tex">\mathbf{P}</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐐</mi><annotation encoding="application/x-tex">\mathbf{Q}</annotation></semantics></math>,
+written
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐏</mi><mo>−</mo><mi>𝐐</mi></mrow><annotation encoding="application/x-tex">\mathbf{P} - \mathbf{Q}</annotation></semantics></math>,
+is the set of elements that occur in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐏</mi><annotation encoding="application/x-tex">\mathbf{P}</annotation></semantics></math>
+but not in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐐</mi><annotation encoding="application/x-tex">\mathbf{Q}</annotation></semantics></math>,
+which is {2, 3}. Note that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐏</mi><mo>∪</mo><mi>𝐐</mi><mo>=</mo><mi>𝐐</mi><mo>∪</mo><mi>𝐏</mi></mrow><annotation encoding="application/x-tex">\mathbf{P} \cup \mathbf{Q} = \mathbf{Q} \cup \mathbf{P}</annotation></semantics></math>
+and that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐏</mi><mo>∩</mo><mi>𝐐</mi><mo>=</mo><mi>𝐐</mi><mo>∩</mo><mi>𝐏</mi></mrow><annotation encoding="application/x-tex">\mathbf{P} \cap \mathbf{Q} = \mathbf{Q} \cap \mathbf{P}</annotation></semantics></math>,
+but in general
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐏</mi><mo>−</mo><mi>𝐐</mi><mo>≠</mo><mi>𝐐</mi><mo>−</mo><mi>𝐏</mi></mrow><annotation encoding="application/x-tex">\mathbf{P} - \mathbf{Q} \neq \mathbf{Q} - \mathbf{P}</annotation></semantics></math>.
+In this example,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐐</mi><mo>−</mo><mi>𝐏</mi><mo>=</mo><mo stretchy="false" form="prefix">{</mo><mn>10</mn><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\mathbf{Q} - \mathbf{P}  = \{10\}</annotation></semantics></math>.
+Finally, the set {5, 3, 2} is indistinguishable from set
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐏</mi><annotation encoding="application/x-tex">\mathbf{P}</annotation></semantics></math>,
+because sets have no concept of order. Likewise, set {2, 3, 2, 5} is
+also indistinguishable from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐏</mi><annotation encoding="application/x-tex">\mathbf{P}</annotation></semantics></math>,
+because sets have no concept of duplicate elements.</p>
+<p>The <a href="section-14.html#set-product" class="term"
+title="Written $\mathbf{Q} \times \mathbf{P}$, the set product is a set of ordered pairs such that ordered pair $(a, b)$ is in the product whenever $a \in \mathbf{P}$ and $b \in \mathbf{Q}$. For example, when $\mathbf{P} = {2, 3, 5}$ and $\mathbf{Q} = {5, 10}$, $\mathbf{Q} \times \mathbf{P} = {(2, 5), (2, 10), (3, 5), (3, 10), (5, 5), (5, 10)}$.">set
+product</a> or <a href="section-14.html#cartesian-product" class="term"
+title="For sets, this is another name for the set product.">Cartesian
+product</a> of two sets
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐏</mi><mo>×</mo><mi>𝐐</mi></mrow><annotation encoding="application/x-tex">\mathbf{P} \times \mathbf{Q}</annotation></semantics></math>
+is a set of ordered pairs. For our example sets, the set product would
+be:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mo stretchy="false" form="prefix">(</mo><mn>2</mn><mo>,</mo><mn>5</mn><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mn>2</mn><mo>,</mo><mn>10</mn><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mn>3</mn><mo>,</mo><mn>5</mn><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mn>3</mn><mo>,</mo><mn>10</mn><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mn>5</mn><mo>,</mo><mn>5</mn><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mn>5</mn><mo>,</mo><mn>10</mn><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">}</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\{(2, 5),\ (2, 10),\ (3, 5),\ (3, 10),\ (5, 5),\ (5, 10)\}.
+</annotation></semantics></math></p>
+<p>The <a href="section-14.html#powerset" class="term"
+title="For a set $\mathbf{S}$, the power set is the set of all possible subsets for $\mathbf{S}$.">powerset</a>
+of a set
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐏</mi><annotation encoding="application/x-tex">\mathbf{P}</annotation></semantics></math>
+(denoted
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mi>𝐏</mi></msup><annotation encoding="application/x-tex">2^\mathbf{P}</annotation></semantics></math>
+or
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝒫</mi><mo stretchy="false" form="prefix">(</mo><mi>𝐏</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{P}(\mathbf{P})</annotation></semantics></math>)
+is the set of all possible subsets of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐏</mi><annotation encoding="application/x-tex">\mathbf{P}</annotation></semantics></math>.
+For our example set
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐏</mi><annotation encoding="application/x-tex">\mathbf{P}</annotation></semantics></math>,
+the powerset would be:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mi>∅</mi><mo>,</mo><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">{</mo><mn>2</mn><mo stretchy="false" form="postfix">}</mo><mo>,</mo><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">{</mo><mn>3</mn><mo stretchy="false" form="postfix">}</mo><mo>,</mo><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">{</mo><mn>5</mn><mo stretchy="false" form="postfix">}</mo><mo>,</mo><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">{</mo><mn>2</mn><mo>,</mo><mn>3</mn><mo stretchy="false" form="postfix">}</mo><mo>,</mo><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">{</mo><mn>2</mn><mo>,</mo><mn>5</mn><mo stretchy="false" form="postfix">}</mo><mo>,</mo><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">{</mo><mn>3</mn><mo>,</mo><mn>5</mn><mo stretchy="false" form="postfix">}</mo><mo>,</mo><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">{</mo><mn>2</mn><mo>,</mo><mn>3</mn><mo>,</mo><mn>5</mn><mo stretchy="false" form="postfix">}</mo><mo stretchy="false" form="postfix">}</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+\{ \emptyset,\ \{2\},\ \{3\},\ \{5\},\ \{2, 3\},\ \{2, 5\},\ \{3, 5\},\ \{2, 3, 5\} \}.
+</annotation></semantics></math></p>
+<p>A collection of elements without a specific order, similar to a set,
+but allowing multiple occurrences of each element, is called a <a
+href="section-14.html#bag" class="term"
+title="In set notation, a bag is a collection of elements with no order (like a set), but which allows for duplicate-valued elements (unlike a set).">bag</a>.
+A bag is also known as a multiset and an element that appears more than
+once is called a duplicate. </p>
+<p>A <a href="section-14.html#sequence" class="term"
+title="In set notation, a collection of elements with an order, and which may contain duplicate-valued elements. A sequence is also sometimes called a tuple or a vector.">sequence</a>
+is an ordered collection of elements of the same type that may include
+duplicates. A sequence can for example be implemented as a list, an
+array, or a vector. We can access elements in a sequence using
+zero-based indexing, where the index 0 refers to the first element, 1 to
+the second, and so on. We will use square brackets
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">[</mo><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">[]</annotation></semantics></math>
+to enclose the elements of a sequence. For example,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">[</mo><mn>3</mn><mo>,</mo><mn>4</mn><mo>,</mo><mn>5</mn><mo>,</mo><mn>4</mn><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">[3, 4, 5, 4]</annotation></semantics></math>
+is a sequence. Note that sequence
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">[</mo><mn>3</mn><mo>,</mo><mn>5</mn><mo>,</mo><mn>4</mn><mo>,</mo><mn>4</mn><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">[3, 5, 4, 4]</annotation></semantics></math>
+is distinct from sequence
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">[</mo><mn>3</mn><mo>,</mo><mn>4</mn><mo>,</mo><mn>5</mn><mo>,</mo><mn>4</mn><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">[3, 4, 5, 4]</annotation></semantics></math>,
+and both are distinct from sequence
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">[</mo><mn>3</mn><mo>,</mo><mn>4</mn><mo>,</mo><mn>5</mn><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">[3, 4, 5]</annotation></semantics></math>.</p>
+</section>
+<section id="sec:relations" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2"><span class="header-section-number">1.4.2</span>
+Relations</h3>
+<p>A binary <a href="section-14.html#relation" class="term"
+title="In set notation, a relation $R$ over set $\mathbf{S}$ is a set of ordered pairs from $\mathbf{S}$.">relation</a>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+over set
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐒</mi><annotation encoding="application/x-tex">\mathbf{S}</annotation></semantics></math>
+is a set of ordered pairs from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐒</mi><annotation encoding="application/x-tex">\mathbf{S}</annotation></semantics></math>,
+i.e.,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>⊆</mo><mi>𝐒</mi><mo>×</mo><mi>𝐒</mi></mrow><annotation encoding="application/x-tex">R\subseteq\mathbf{S}\times\mathbf{S}</annotation></semantics></math>.
+As an example of a relation, if
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐒</mi><annotation encoding="application/x-tex">\mathbf{S}</annotation></semantics></math>
+is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{a, b, c\}</annotation></semantics></math>,
+then</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>,</mo><mi>c</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mo stretchy="false" form="prefix">(</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mo stretchy="false" form="prefix">(</mo><mi>c</mi><mo>,</mo><mi>b</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">
+\{ (a, c), (b, c), (c, b) \}
+</annotation></semantics></math></p>
+<p>is a relation, and</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>,</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>,</mo><mi>c</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mo stretchy="false" form="prefix">(</mo><mi>b</mi><mo>,</mo><mi>b</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mo stretchy="false" form="prefix">(</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo><mo stretchy="false" form="prefix">(</mo><mi>c</mi><mo>,</mo><mi>c</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">
+\{ (a, a), (a, c), (b, b), (b, c), (c, c) \}
+</annotation></semantics></math></p>
+<p>is a different relation. If tuple
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(x, y)</annotation></semantics></math>
+is in relation
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>,
+we may use the infix notation
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mi>R</mi><mi>y</mi></mrow><annotation encoding="application/x-tex">xRy</annotation></semantics></math>.
+We often use relations, such as the less than operator
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>&lt;</mo><annotation encoding="application/x-tex">&lt;</annotation></semantics></math>),
+on the natural numbers, which includes ordered pairs such as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>,</mo><mn>3</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(1, 3)</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mn>2</mn><mo>,</mo><mn>23</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(2, 23)</annotation></semantics></math>,
+but not
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mn>3</mn><mo>,</mo><mn>2</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(3, 2)</annotation></semantics></math>
+or
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mn>2</mn><mo>,</mo><mn>2</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(2, 2)</annotation></semantics></math>.
+Rather than writing the relationship in terms of ordered pairs, we
+typically use an infix notation for such relations, writing
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>&lt;</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">1&lt;3</annotation></semantics></math>.</p>
+<p>The most important properties of relations are as follows:</p>
+<ul>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+is <a href="section-14.html#reflexive" class="term"
+title="In set notation, binary relation $R$ on set $S$ is reflexive if $aRa$ for all $a \in \mathbf{S}$.">reflexive</a>
+if
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mi>R</mi><mi>a</mi></mrow><annotation encoding="application/x-tex">aRa</annotation></semantics></math>.</li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+is <a href="section-14.html#irreflexive" class="term"
+title="In set notation, binary relation $R$ on set $S$ is irreflexive if $aRa$ is never in the relation for any $a \in \mathbf{S}$.">irreflexive</a>
+if
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mi>R</mi><mi>a</mi></mrow><annotation encoding="application/x-tex">aRa</annotation></semantics></math>
+is never true.</li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+is <a href="section-14.html#symmetric" class="term"
+title="In set notation, relation $R$ is symmetric if whenever $aRb$, then $bRa$, for all $a, b \in \mathbf{S}$.">symmetric</a>
+if whenever
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mi>R</mi><mi>b</mi></mrow><annotation encoding="application/x-tex">aRb</annotation></semantics></math>,
+then
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi><mi>R</mi><mi>a</mi></mrow><annotation encoding="application/x-tex">bRa</annotation></semantics></math>.</li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+is <a href="section-14.html#antisymmetric" class="term"
+title="In set notation, relation $R$ is antisymmetric if whenever $aRb$ and $bRa$, then $a = b$, for all $a, b \in \mathbf{S}$.">antisymmetric</a>
+if whenever
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mi>R</mi><mi>b</mi></mrow><annotation encoding="application/x-tex">aRb</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi><mi>R</mi><mi>a</mi></mrow><annotation encoding="application/x-tex">bRa</annotation></semantics></math>,
+then
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>=</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a = b</annotation></semantics></math>.</li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+is <a href="section-14.html#transitive" class="term"
+title="In set notation, relation $R$ is transitive if whenever $aRb$ and $bRc$, then $aRc$, for all $a, b, c \in \mathbf{S}$.">transitive</a>
+if whenever
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mi>R</mi><mi>b</mi></mrow><annotation encoding="application/x-tex">aRb</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi><mi>R</mi><mi>c</mi></mrow><annotation encoding="application/x-tex">bRc</annotation></semantics></math>,
+then
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mi>R</mi><mi>c</mi></mrow><annotation encoding="application/x-tex">aRc</annotation></semantics></math>.</li>
+</ul>
+<p>(Here
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+is a binary relation over a set
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐒</mi><annotation encoding="application/x-tex">\mathbf{S}</annotation></semantics></math>,
+and the condition holds for all
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo>∈</mo><mi>𝐒</mi></mrow><annotation encoding="application/x-tex">a, b, c \in \mathbf{S}</annotation></semantics></math>.)</p>
+<p>As examples, for the natural numbers,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>&lt;</mo><annotation encoding="application/x-tex">&lt;</annotation></semantics></math>
+is irreflexive (because
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mi>R</mi><mi>a</mi></mrow><annotation encoding="application/x-tex">aRa</annotation></semantics></math>
+is never true), antisymmetric (because there is no case where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mi>R</mi><mi>b</mi></mrow><annotation encoding="application/x-tex">aRb</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi><mi>R</mi><mi>a</mi></mrow><annotation encoding="application/x-tex">bRa</annotation></semantics></math>),
+and transitive. Relation
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>≤</mo><annotation encoding="application/x-tex">\leq</annotation></semantics></math>
+is reflexive, antisymmetric, and transitive. Relation
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>=</mo><annotation encoding="application/x-tex">=</annotation></semantics></math>
+is reflexive, symmetric (and antisymmetric!), and transitive. For
+people, the relation “is a sibling of” is symmetric and transitive. If
+we define a person to be a sibling of themself, then it is reflexive; if
+we define a person not to be a sibling of themself, then it is
+irreflexive.</p>
+<section id="sec:equivalence-relations" class="level4 unnumbered">
+<h4 class="unnumbered">Equivalence relations</h4>
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+is an <a href="section-14.html#equivalence-relation" class="term"
+title="Relation $R$ is an equivalence relation on set $\mathbf{S}$ if it is reflexive, symmetric, and transitive.">equivalence
+relation</a> on set
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐒</mi><annotation encoding="application/x-tex">\mathbf{S}</annotation></semantics></math>
+if it is <em>reflexive</em>, <em>symmetric</em>, and
+<em>transitive</em>. An equivalence relation can be used to partition a
+set into <a href="section-14.html#equivalence-class" class="term"
+title="An equivalence relation can be used to partition a set into equivalence classes.">equivalence
+classes</a>. If two elements
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>
+are equivalent to each other, we write
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>≡</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a \equiv b</annotation></semantics></math>.</p>
+<p>A <a href="section-14.html#partition" class="term"
+title="In Quicksort, the process of splitting a list into two sublists, such that one sublist has values less than the pivot value, and the other with values greater than the pivot. This process takes $O(i)$ time on a sublist of length $i$.">partition</a>
+of a set
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐒</mi><annotation encoding="application/x-tex">\mathbf{S}</annotation></semantics></math>
+is a collection of subsets that are <a href="section-14.html#disjoint"
+class="term"
+title="Two parts of a data structure or two collections with no objects in common are disjoint. This term is often used in conjunction with a data structure that has nodes (such as a tree). Also used in the context of sets, where two subsets are disjoint if they share no elements.">disjoint</a>
+from each other and whose union is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐒</mi><annotation encoding="application/x-tex">\mathbf{S}</annotation></semantics></math>.
+There’s a close correspondence between equivalence relations and
+partitions: an equivalence relation on a set
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐒</mi><annotation encoding="application/x-tex">\mathbf{S}</annotation></semantics></math>
+partitions the set into disjoint subsets (the subset of equivalent
+elements). But the opposite is also true: if you have a partition of a
+set
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐒</mi><annotation encoding="application/x-tex">\mathbf{S}</annotation></semantics></math>
+you can easily define a corresponding equivalence relation (elements are
+equivalent if they belong to the same partition).</p>
+<p>An obvious example of an equivalence relation is the relation
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>=</mo><annotation encoding="application/x-tex">=</annotation></semantics></math>
+on natural numbers. Examples on real-life objects are “have the same
+colour”, or “as heavy as”. And if we look at strings, “have the same
+length” is an equivalence relation too.</p>
+</section>
+<section id="sec:partial-orders" class="level4 unnumbered">
+<h4 class="unnumbered">Partial orders</h4>
+<p>A binary relation is called a <a href="section-14.html#partial-order"
+class="term"
+title="In set notation, a binary relation is called a partial order if it is antisymmetric and transitive. If the relation is also reflexive, then it is a non-strict partial order. Alternatively, if the relation is also irreflexive, then it is a strict partial order.">partial
+order</a> if it is <em>antisymmetric</em> and <em>transitive</em>. If
+the relation is reflexive, it is called a <a
+href="section-14.html#non-strict-partial-order" class="term"
+title="In set notation, a relation that is reflexive, antisymmetric, and transitive.">non-strict
+partial order</a>. If the relation is <a
+href="section-14.html#irreflexive" class="term"
+title="In set notation, binary relation $R$ on set $S$ is irreflexive if $aRa$ is never in the relation for any $a \in \mathbf{S}$.">irreflexive</a>,
+it is called a <a href="section-14.html#strict-partial-order"
+class="term"
+title="In set notation, a relation that is irreflexive, antisymmetric, and transitive.">strict
+partial order</a>. The set on which the partial order is defined is
+called a <a href="section-14.html#partially-ordered-set" class="term"
+title="The set on which a partial order is defined is called a partially ordered set.">partially
+ordered set</a> or a <a href="section-14.html#poset" class="term"
+title="Another name for a partially ordered set.">poset</a>. Elements
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math>
+of a set are <a href="section-14.html#comparable" class="term"
+title="The concept that two objects can be compared to determine if they are equal or not, or to determine which one is greater than the other. In set notation, elements $x$ and $y$ of a set are comparable under a given relation $R$ if either $xRy$ or $yRx$. To be reliably compared for a greater/lesser relationship, the values being compared must belong to a total order. In programming, the property of a data type such that two elements of the type can be compared to determine if they are the same (a weaker version), or which of the two is larger (a stronger version). `Comparable` is also the name of an interface in Java that asserts a comparable relationship between objects within a class, and `.compareTo()` is the `Comparable` interface method that implements the actual comparison between two objects of the class.">comparable</a>
+under a given relation
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+if either
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mi>R</mi><mi>y</mi></mrow><annotation encoding="application/x-tex">xRy</annotation></semantics></math>
+or
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mi>R</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">yRx</annotation></semantics></math>.
+If every pair of distinct elements in a partial order are comparable,
+then the order is called a <a href="section-14.html#total-order"
+class="term"
+title="A binary relation on a set where every pair of distinct elements in the set are comparable (that is, one can determine which of the two is greater than the other).">total
+order</a> or <a href="section-14.html#linear-order" class="term"
+title="Another term for total order.">linear order</a>.</p>
+</section>
+<section id="sec:example-less-than" class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Less-than</h4>
+<p>For the integers, relations
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>&lt;</mo><annotation encoding="application/x-tex">&lt;</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>≤</mo><annotation encoding="application/x-tex">\leq</annotation></semantics></math>
+define partial orders. Operation
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>&lt;</mo><annotation encoding="application/x-tex">&lt;</annotation></semantics></math>
+is a total order because, for every pair of integers
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math>
+such that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>≠</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">x \neq y</annotation></semantics></math>,
+either
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>&lt;</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">x &lt; y</annotation></semantics></math>
+or
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>&lt;</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">y &lt; x</annotation></semantics></math>.
+Likewise,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>≤</mo><annotation encoding="application/x-tex">\leq</annotation></semantics></math>
+is a total order because, for every pair of integers
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math>
+such that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>≠</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">x \neq y</annotation></semantics></math>,
+either
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>≤</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">x \leq y</annotation></semantics></math>
+or
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>≤</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">y \leq x</annotation></semantics></math>.</p>
+</section>
+<section id="sec:example-subsets" class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Subsets</h4>
+<p>For the powerset of the integers, the subset operator defines a
+partial order (because it is antisymmetric and transitive). For example,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo stretchy="false" form="postfix">}</mo><mo>⊆</mo><mo stretchy="false" form="prefix">{</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mn>3</mn><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{1, 2\}\subseteq\{1, 2, 3\}</annotation></semantics></math>.
+However, sets {1, 2} and {1, 3} are not comparable by the subset
+operator, because neither is a subset of the other. Therefore, the
+subset operator does not define a total order on the powerset of the
+integers.</p>
+</section>
+</section>
+<section id="sec:miscellaneous-notations" class="level3"
+data-number="1.4.3">
+<h3 data-number="1.4.3"><span class="header-section-number">1.4.3</span>
+Miscellaneous notations</h3>
+<p>We now define several mathematical terms and concepts, providing a
+reference for future use.</p>
+<dl>
+<dt>Units of measure:</dt>
+<dd>
+<p>We will use the following notation for units of measure. “B” will be
+used as an abbreviation for bytes, “b” for bits, “KB” for kilobytes
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>10</mn></msup><mo>=</mo><mn>1024</mn></mrow><annotation encoding="application/x-tex">2^{10} = 1024</annotation></semantics></math>
+bytes), “MB” for megabytes
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mn>20</mn></msup><annotation encoding="application/x-tex">2^{20}</annotation></semantics></math>
+bytes) “GB” for gigabytes
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mn>30</mn></msup><annotation encoding="application/x-tex">2^{30}</annotation></semantics></math>
+bytes) and “ms” for milliseconds (a millisecond is 1/1000 of a second).
+Spaces are not placed between the number and the unit abbreviation when
+a power of two is intended. Thus a disk drive of size 25 gigabytes
+(where a gigabyte is intended as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mn>30</mn></msup><annotation encoding="application/x-tex">2^{30}</annotation></semantics></math>
+bytes) will be written as “25GB”. Spaces are used when a decimal value
+is intended. An amount of 2000 bits would therefore be written “2 Kb”
+while “2Kb” represents 2048 bits. 2000 milliseconds is written as 2000
+ms. Note that in this book large amounts of storage are nearly always
+measured in powers of two and times in powers of ten.</p>
+</dd>
+</dl>
+<dl>
+<dt>Permutations:</dt>
+<dd>
+<p>A <a href="section-14.html#permutation" class="term"
+title="A permutation of a sequence $\mathbf{S}$ is the elements of $\mathbf{S}$ arranged in some order.">permutation</a>
+of a sequence
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐒</mi><annotation encoding="application/x-tex">\mathbf{S}</annotation></semantics></math>
+is simply the members of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐒</mi><annotation encoding="application/x-tex">\mathbf{S}</annotation></semantics></math>
+arranged in some order. For example, a permutation of the integers 1
+through
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+would be those values arranged in some order. If the sequence contains
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+distinct members, then there are
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>!</mi></mrow><annotation encoding="application/x-tex">n!</annotation></semantics></math>
+different permutations for the sequence. This is because there are
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+choices for the first member in the permutation; for each choice of
+first member there are
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>
+choices for the second member, and so on. Sometimes one would like to
+obtain a <a href="section-14.html#random-permutation" class="term"
+title="One of the $n!$ possible permutations for a set of $n$ element is selected in such a way that each permutation has equal probability of being selected.">random
+permutation</a> for a sequence, that is, one of the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>!</mi></mrow><annotation encoding="application/x-tex">n!</annotation></semantics></math>
+possible permutations is selected in such a way that each permutation
+has equal probability of being selected.</p>
+</dd>
+</dl>
+<dl>
+<dt>Logic Notation:</dt>
+<dd>
+<p>We will occasionally make use of the notation of symbolic logic.</p>
+<ul>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>⇒</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A \Rightarrow B</annotation></semantics></math>
+means “if
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+then
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>”
+– i.e., that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+implies
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>.</li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>⇔</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A \Leftrightarrow B</annotation></semantics></math>
+means
+“<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+if and only if
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>”
+– i.e., that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
+are equivalent.</li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>∨</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A \vee B</annotation></semantics></math>
+means
+“<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+or
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>”
+– the disjunction of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>.</li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>∧</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A \wedge B</annotation></semantics></math>
+means
+“<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>”
+– the conjunction of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>.</li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>¬</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">\neg A</annotation></semantics></math>
+means “not
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>”
+– the negation of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>.</li>
+</ul>
+</dd>
+<dt>Floor and ceiling:</dt>
+<dd>
+<p>The <a href="section-14.html#floor" class="term"
+title="Written $\lfloor x \rfloor$, for real value $x$ the floor is the greatest integer $\leq x$.">floor</a>
+of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>
+(written
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⌊</mo><mi>x</mi><mo stretchy="false" form="postfix">⌋</mo></mrow><annotation encoding="application/x-tex">\lfloor x \rfloor</annotation></semantics></math>)
+takes real value
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>
+and returns the greatest integer
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≤</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">\leq x</annotation></semantics></math>.
+For example,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⌊</mo><mn>3.4</mn><mo stretchy="false" form="postfix">⌋</mo><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">\lfloor 3.4 \rfloor = 3</annotation></semantics></math>,
+as does
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⌊</mo><mn>3.0</mn><mo stretchy="false" form="postfix">⌋</mo></mrow><annotation encoding="application/x-tex">\lfloor 3.0 \rfloor</annotation></semantics></math>,
+while
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⌊</mo><mi>−</mi><mn>3.4</mn><mo stretchy="false" form="postfix">⌋</mo><mo>=</mo><mi>−</mi><mn>4</mn></mrow><annotation encoding="application/x-tex">\lfloor -3.4 \rfloor = -4</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⌊</mo><mi>−</mi><mn>3.0</mn><mo stretchy="false" form="postfix">⌋</mo><mo>=</mo><mi>−</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">\lfloor -3.0 \rfloor = -3</annotation></semantics></math>.
+The <a href="section-14.html#ceiling" class="term"
+title="Written $\lceil x \rceil$, for real value $x$ the ceiling is the least integer $\geq x$.">ceiling</a>
+of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>
+(written
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⌈</mo><mi>x</mi><mo stretchy="false" form="postfix">⌉</mo></mrow><annotation encoding="application/x-tex">\lceil x \rceil</annotation></semantics></math>)
+takes real value
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>
+and returns the least integer
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">\geq x</annotation></semantics></math>.
+For example,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⌈</mo><mn>3.4</mn><mo stretchy="false" form="postfix">⌉</mo><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">\lceil 3.4 \rceil = 4</annotation></semantics></math>,
+as does
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⌈</mo><mn>4.0</mn><mo stretchy="false" form="postfix">⌉</mo></mrow><annotation encoding="application/x-tex">\lceil 4.0 \rceil</annotation></semantics></math>,
+while
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⌈</mo><mi>−</mi><mn>3.4</mn><mo stretchy="false" form="postfix">⌉</mo><mo>=</mo><mo stretchy="false" form="prefix">⌈</mo><mi>−</mi><mn>3.0</mn><mo stretchy="false" form="postfix">⌉</mo><mo>=</mo><mi>−</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">\lceil -3.4 \rceil = \lceil -3.0 \rceil = -3</annotation></semantics></math>.</p>
+</dd>
+<dt>Modulus function:</dt>
+<dd>
+<p>The <a href="section-14.html#modulus" class="term"
+title="The modulus function returns the remainder of an integer division. Sometimes written $n \bmod m$ in mathematical expressions, the syntax in many programming languages is `n % m`.">modulus</a>
+(or <a href="section-14.html#mod" class="term"
+title="The modulus function returns the remainder of an integer division. Sometimes written $n \bmod m$ in mathematical expressions, the syntax in many programming languages is `n % m`.">mod</a>)
+function returns the remainder of an integer division. Sometimes written
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mspace width="0.278em"></mspace><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow><mspace width="0.278em"></mspace><mi>m</mi></mrow><annotation encoding="application/x-tex">n \;\mathrm{mod}\; m</annotation></semantics></math>
+in mathematical expressions, the syntax in many programming languages is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n % m</annotation></semantics></math>.
+From the definition of remainder,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mspace width="0.278em"></mspace><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow><mspace width="0.278em"></mspace><mi>m</mi></mrow><annotation encoding="application/x-tex">n \;\mathrm{mod}\; m</annotation></semantics></math>
+is the integer
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>
+such that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mi>q</mi><mi>m</mi><mo>+</mo><mi>r</mi></mrow><annotation encoding="application/x-tex">n = qm + r</annotation></semantics></math>
+for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>q</mi><annotation encoding="application/x-tex">q</annotation></semantics></math>
+an integer, and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>r</mi><mo stretchy="false" form="prefix">|</mo><mo>&lt;</mo><mo stretchy="false" form="prefix">|</mo><mi>m</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|r| &lt; |m|</annotation></semantics></math>.
+Therefore, the result of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mspace width="0.278em"></mspace><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow><mspace width="0.278em"></mspace><mi>m</mi></mrow><annotation encoding="application/x-tex">n \;\mathrm{mod}\; m</annotation></semantics></math>
+must be between 0 and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">m-1</annotation></semantics></math>
+when
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
+are positive integers. For example,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn><mrow><mi>mod</mi><mo>&#8289;</mo></mrow><mn>3</mn><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">5\mathop{mod}3 = 2</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>25</mn><mrow><mi>mod</mi><mo>&#8289;</mo></mrow><mn>3</mn><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">25\mathop{mod}3 = 1</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn><mrow><mi>mod</mi><mo>&#8289;</mo></mrow><mn>7</mn><mo>=</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">5\mathop{mod}7 = 5</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn><mrow><mi>mod</mi><mo>&#8289;</mo></mrow><mn>5</mn><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">5\mathop{mod}5 = 0</annotation></semantics></math>.</p>
+<p>There is more than one way to assign values to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>q</mi><annotation encoding="application/x-tex">q</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>,
+depending on how integer division is interpreted. The most common
+mathematical definition computes the mod function as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mspace width="0.278em"></mspace><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow><mspace width="0.278em"></mspace><mi>m</mi><mo>=</mo><mi>n</mi><mo>−</mo><mi>m</mi><mo stretchy="false" form="prefix">⌊</mo><mi>n</mi><mi>/</mi><mi>m</mi><mo stretchy="false" form="postfix">⌋</mo></mrow><annotation encoding="application/x-tex">n \;\mathrm{mod}\; m = n - m\lfloor n/m\rfloor</annotation></semantics></math>.
+In this case,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><mn>3</mn><mspace width="0.278em"></mspace><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow><mspace width="0.278em"></mspace><mn>5</mn><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">-3 \;\mathrm{mod}\; 5 = 2</annotation></semantics></math>.
+However, Java and C++ compilers typically use the underlying processor’s
+machine instruction for computing integer arithmetic. On many computers
+this is done by truncating the resulting fraction, meaning
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mspace width="0.278em"></mspace><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow><mspace width="0.278em"></mspace><mi>m</mi><mo>=</mo><mi>n</mi><mo>−</mo><mi>m</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi mathvariant="normal">t</mi><mi mathvariant="normal">r</mi><mi mathvariant="normal">u</mi><mi mathvariant="normal">n</mi><mi mathvariant="normal">c</mi></mrow><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mi>/</mi><mi>m</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">n \;\mathrm{mod}\; m = n - m (\mathrm{trunc}(n/m))</annotation></semantics></math>.
+Under this definition,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><mn>3</mn><mspace width="0.278em"></mspace><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow><mspace width="0.278em"></mspace><mn>5</mn><mo>=</mo><mi>−</mi><mn>3</mn></mrow><annotation encoding="application/x-tex">-3 \;\mathrm{mod}\; 5 = -3</annotation></semantics></math>.
+Another language might do something different.</p>
+<p>Unfortunately, for many applications this is not what the user wants
+or expects. For example, many <a href="section-14.html#hash-system"
+class="term"
+title="The implementation for search based on hash lookup in a hash table. The search key is processed by a hash function, which returns a position in a hash table, which hopefully is the correct position in which to find the record corresponding to the search key.">hash
+systems</a> will perform some computation on a record’s <a
+href="section-14.html#key" class="term"
+title="A field or part of a larger record used to represent that record for the purpose of searching or comparing. Another term for search key.">key</a>
+value and then take the result modulo the hash table size. The
+expectation here would be that the result is a legal index into the hash
+table, not a negative number. Implementers of hash functions must either
+ensure that the result of the computation is always positive, or else
+add the hash table size to the result of the modulo function when that
+result is negative.</p>
+</dd>
+</dl>
+</section>
+<section id="sec:logarithms" class="level3" data-number="1.4.4">
+<h3 data-number="1.4.4"><span class="header-section-number">1.4.4</span>
+Logarithms</h3>
+<p>The <a href="section-14.html#logarithm" class="term"
+title="The *logarithm* of base $b$ for value $y$ is the power to which $b$ is raised to get $y$.">logarithm</a>
+of base
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>
+for value
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math>
+is the power to which
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>
+is raised to get
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math>.
+Normally, this is written as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>b</mi></msub><mi>y</mi><mo>=</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">\log_b y = x</annotation></semantics></math>.
+Thus, if
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>b</mi></msub><mi>y</mi><mo>=</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">\log_b y = x</annotation></semantics></math>
+then
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>b</mi><mi>x</mi></msup><mo>=</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">b^x = y</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>b</mi><mrow><mi>l</mi><mi>o</mi><msub><mi>g</mi><mi>b</mi></msub><mi>y</mi></mrow></msup><mo>=</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">b^{log_b y} = y</annotation></semantics></math>.</p>
+<p>Logarithms are used frequently by programmers. Here are two typical
+uses.</p>
+<section id="sec:example-minimum-bits"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Minimum bits</h4>
+<p>Many programs require an encoding for a collection of objects. What
+is the minimum number of bits needed to represent
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+distinct code values? The answer is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⌈</mo><msub><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mn>2</mn></msub><mi>n</mi><mo stretchy="false" form="postfix">⌉</mo></mrow><annotation encoding="application/x-tex">\lceil \log_2 n \rceil</annotation></semantics></math>
+bits. For example, if you have 1000 codes to store, you will require at
+least
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⌈</mo><msub><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mn>2</mn></msub><mn>1000</mn><mo stretchy="false" form="postfix">⌉</mo><mo>=</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">\lceil \log_2 1000 \rceil = 10</annotation></semantics></math>
+bits to have 1000 different codes (10 bits provide 1024 distinct code
+values).</p>
+</section>
+<section id="sec:example-binary-search"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Binary search</h4>
+<p>Consider the <a href="section-14.html#binary-search" class="term"
+title="A standard recursive algorithm for finding the record with a given search key value within a sorted list. It runs in $O(\log n)$ time. At each step, look at the middle of the current sublist, and throw away the half of the records whose keys are either too small or too large.">binary
+search</a> algorithm for finding a given value within an array sorted by
+value from lowest to highest. Binary search first looks at the middle
+element and determines if the value being searched for is in the upper
+half or the lower half of the array. The algorithm then continues
+splitting the appropriate subarray in half until the desired value is
+found. How many times can an array of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+be split in half until only one element remains in the final subarray?
+The answer is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⌈</mo><msub><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mn>2</mn></msub><mi>n</mi><mo stretchy="false" form="postfix">⌉</mo></mrow><annotation encoding="application/x-tex">\lceil \log_2 n \rceil</annotation></semantics></math>
+times.</p>
+</section>
+<p>Nearly all logarithms we use have a base of two. This is because data
+structures and algorithms most often divide things in half, or store
+codes with binary bits. Whenever you see the notation
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n</annotation></semantics></math>,
+either
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mn>2</mn></msub><mi>n</mi></mrow><annotation encoding="application/x-tex">\log_2 n</annotation></semantics></math>
+is meant or else the term is being used asymptotically and so the actual
+base does not matter. For logarithms using any base other than two, we
+will show the base explicitly.</p>
+<p>Logarithms have the following properties, for any positive values of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>,
+and any positive integers
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>.</p>
+<ol type="1">
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mi>m</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo>+</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">\log (nm) = \log n + \log m</annotation></semantics></math>.</li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mi>/</mi><mi>m</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo>−</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">\log (n/m) = \log n - \log m</annotation></semantics></math>.</li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mi>r</mi></msup><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>r</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">\log (n^r) = r \log n</annotation></semantics></math>.</li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>a</mi></msub><mi>n</mi><mo>=</mo><msub><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>b</mi></msub><mi>n</mi><mi>/</mi><msub><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>b</mi></msub><mi>a</mi></mrow><annotation encoding="application/x-tex">\log_a n = \log_b n / \log_b a</annotation></semantics></math>.</li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>b</mi><mrow><msub><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>b</mi></msub><mi>n</mi></mrow></msup><mo>=</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">b^{\log_b n} = n</annotation></semantics></math>.</li>
+</ol>
+<p>The first two properties state that the logarithm of two numbers
+multiplied (or divided) can be found by adding (or subtracting) the
+logarithms of the two numbers. Property (3) is simply an extension of
+property (1). Property (4) tells us that, for variable
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+and any two integer constants
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>a</mi></msub><mi>n</mi></mrow><annotation encoding="application/x-tex">\log_a n</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>b</mi></msub><mi>n</mi></mrow><annotation encoding="application/x-tex">\log_b n</annotation></semantics></math>
+differ by the constant factor
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>b</mi></msub><mi>a</mi></mrow><annotation encoding="application/x-tex">\log_b a</annotation></semantics></math>,
+regardless of the value of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.
+Most runtime analyses we use are of a type that ignores constant factors
+in costs. Property (4) says that such analyses need not be concerned
+with the base of the logarithm, because this can change the total cost
+only by a constant factor.</p>
+<p>When discussing logarithms, exponents often lead to confusion.
+Property (3) tells us that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi>log</mi><mo>&#8289;</mo></mrow><msup><mi>n</mi><mn>2</mn></msup><mo>=</mo><mn>2</mn><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n^2 = 2 \log n</annotation></semantics></math>.
+How do we indicate the square of the logarithm (as opposed to the
+logarithm of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>n</mi><mn>2</mn></msup><annotation encoding="application/x-tex">n^2</annotation></semantics></math>)?
+This could be written as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><msup><mo stretchy="false" form="postfix">)</mo><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">(\log n)^2</annotation></semantics></math>,
+but it is traditional to use
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mn>2</mn></msup><mi>n</mi></mrow><annotation encoding="application/x-tex">\log^2 n</annotation></semantics></math>.
+On the other hand, we might want to take the logarithm of the logarithm
+of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.
+This is written
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">\log \log n</annotation></semantics></math>.</p>
+</section>
+<section id="sec:summations" class="level3" data-number="1.4.5">
+<h3 data-number="1.4.5"><span class="header-section-number">1.4.5</span>
+Summations</h3>
+<p>Most programs contain loop constructs. When analysing running time
+costs for programs with loops, we need to add up the costs for each time
+the loop is executed. This is an example of a <a
+href="section-14.html#summation" class="term"
+title="The sum of costs for some function applied to a range of parameter values. Often written using Sigma notation. For example, the sum of the integers from 1 to $n$ can be written as $\sum_{i=1}^{n} i$.">summation</a>.
+Summations are simply the sum of costs for some function applied to a
+range of parameter values. Summations are typically written with the
+following “Sigma” notation:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">
+\sum_{i=1}^{n} f(i)
+</annotation></semantics></math></p>
+<p>This notation indicates that we are summing the value of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f(i)</annotation></semantics></math>
+over some range of (integer) values. The parameter to the expression and
+its initial value are indicated below the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>∑</mo><annotation encoding="application/x-tex">\sum</annotation></semantics></math>
+symbol. Here, the notation
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i=1</annotation></semantics></math>
+indicates that the parameter is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+and that it begins with the value 1. At the top of the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>∑</mo><annotation encoding="application/x-tex">\sum</annotation></semantics></math>
+symbol is the expression
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.
+This indicates the maximum value for the parameter
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>.
+Thus, this notation means to sum the values of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f(i)</annotation></semantics></math>
+as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+ranges across the integers from 1 through
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.
+This can also be written
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mn>2</mn><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>⋯</mi><mo>+</mo><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f(1) + f(2) + \cdots + f(n-1) + f(n)</annotation></semantics></math>.
+Within a sentence, Sigma notation is typeset as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\sum_{i=1}^{n} f(i)</annotation></semantics></math>.</p>
+<p>Given a summation, you often wish to replace it with an algebraic
+expression with the same value as the summation. This is known as a <a
+href="section-14.html#closed-form-solution" class="term"
+title="An algebraic equation with the same value as a summation or recurrence relation. The process of replacing the summation or recurrence with its closed-form solution is known as solving the summation or recurrence.">closed-form
+solution</a>, and the process of replacing the summation with its
+closed-form solution is known as solving the summation. For example, the
+summation
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup><mn>1</mn></mrow><annotation encoding="application/x-tex">\sum_{i=1}^{n} 1</annotation></semantics></math>
+is simply the expression “1” summed
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+times (remember that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+ranges from 1 to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>).
+Because the sum of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+ones is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
+the closed-form solution is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here are explanations about the closed form solutions of two
+summations that you will see many times in this book. Since this appears
+so often, it will help you later if you can get comfortable with it.</p>
+</summary>
+<p>
+<div id="SummationOneToNCON" class="ssAV" data-short-name="SummationOneToNCON" data-long-name="AlgAnal/SummationOneToNCON" alt="AlgAnal/SummationOneToNCON" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>
+<div id="SummationTwoPowerICON" class="ssAV" data-short-name="SummationTwoPowerICON" data-long-name="AlgAnal/SummationTwoPowerICON" alt="AlgAnal/SummationTwoPowerICON" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<p>Here is a list of useful summations, along with their closed-form
+solutions.</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>i</mi></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mfrac><mrow><mi>n</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><mn>2</mn></mfrac></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msup><mi>i</mi><mn>2</mn></msup></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mfrac><mrow><mn>2</mn><msup><mi>n</mi><mn>3</mn></msup><mo>+</mo><mn>3</mn><msup><mi>n</mi><mn>2</mn></msup><mo>+</mo><mi>n</mi></mrow><mn>6</mn></mfrac><mo>=</mo><mfrac><mrow><mi>n</mi><mo stretchy="false" form="prefix">(</mo><mn>2</mn><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><mn>6</mn></mfrac></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi></mrow></munderover><mi>n</mi></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mo accent="false">∞</mo></munderover><msup><mi>a</mi><mi>i</mi></msup></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>−</mo><mi>a</mi></mrow></mfrac><mspace width="0.222em"></mspace><mspace width="0.222em"></mspace><mspace width="0.222em"></mspace><mtext mathvariant="normal">if</mtext><mspace width="0.222em"></mspace><mn>0</mn><mo>&lt;</mo><mi>a</mi><mo>&lt;</mo><mn>1</mn></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></munderover><msup><mi>a</mi><mi>i</mi></msup></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mfrac><mrow><msup><mi>a</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>−</mo><mn>1</mn></mrow><mrow><mi>a</mi><mo>−</mo><mn>1</mn></mrow></mfrac><mspace width="0.222em"></mspace><mspace width="0.222em"></mspace><mspace width="0.222em"></mspace><mtext mathvariant="normal">if</mtext><mspace width="0.222em"></mspace><mi>a</mi><mo>≠</mo><mn>1</mn></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align*}
+\sum_{i = 1}^{n} i &amp;= \frac{n (n+1)}{2} \\
+\sum_{i = 1}^{n} i^2 &amp;= \frac{2 n^3 + 3 n^2 + n}{6} = \frac{n(2n + 1)(n + 1)}{6} \\
+\sum_{i = 1}^{\log n} n &amp;= n \log n \\
+\sum_{i = 0}^\infty a^i &amp;= \frac{1}{1-a}  ~~~ \mbox{if} \ 0 &lt; a &lt; 1 \\
+\sum_{i = 0}^{n} a^i &amp;= \frac{a^{n+1} - 1}{a - 1}  ~~~ \mbox{if} \ a \neq 1
+\end{align*}</annotation></semantics></math></p>
+<p>As special cases to the last summation, we have the following
+two:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mfrac><mn>1</mn><msup><mn>2</mn><mi>i</mi></msup></mfrac></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mn>1</mn><mo>−</mo><mfrac><mn>1</mn><msup><mn>2</mn><mi>n</mi></msup></mfrac></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mi>n</mi></munderover><msup><mn>2</mn><mi>i</mi></msup></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><msup><mn>2</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>−</mo><mn>1</mn></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align*}
+\sum_{i = 1}^{n} \frac{1}{2^i} &amp;= 1 - \frac{1}{2^n} \\
+\sum_{i = 0}^{n} 2^i &amp;= 2^{n+1} - 1
+\end{align*}</annotation></semantics></math></p>
+<p>As a corollary to the previous summation:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mrow><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi></mrow></munderover><msup><mn>2</mn><mi>i</mi></msup></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><msup><mn>2</mn><mrow><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>−</mo><mn>1</mn><mo>=</mo><mn>2</mn><mi>n</mi><mo>−</mo><mn>1</mn></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align*}
+\sum_{i = 0}^{\log n} 2^i &amp;= 2^{\log n + 1} - 1 = 2n - 1
+\end{align*}</annotation></semantics></math></p>
+<p>Finally:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mfrac><mi>i</mi><msup><mn>2</mn><mi>i</mi></msup></mfrac></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mn>2</mn><mo>−</mo><mfrac><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow><msup><mn>2</mn><mi>n</mi></msup></mfrac></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align*}
+\sum_{i = 1}^{n} \frac{i}{2^i} &amp;= 2 - \frac{n+2}{2^n}
+\end{align*}</annotation></semantics></math></p>
+</section>
+<section id="sec:mathematical-proof-techniques" class="level3"
+data-number="1.4.6">
+<h3 data-number="1.4.6"><span class="header-section-number">1.4.6</span>
+Mathematical proof techniques</h3>
+<p>Solving any problem has two distinct parts: the investigation and the
+argument. Students are too used to seeing only the argument in their
+textbooks and lectures. But to be successful in school (and in life
+after school), one needs to be good at both, and to understand the
+differences between these two phases of the process. To solve the
+problem, you must investigate successfully. That means engaging the
+problem, and working through until you find a solution. Then, to give
+the answer to your client (whether that “client” be your instructor when
+writing answers on a homework assignment or exam, or a written report to
+your boss), you need to be able to make the argument in a way that gets
+the solution across clearly and succinctly. The argument phase involves
+good technical writing skills and the ability to make a clear, logical
+argument.</p>
+<p>Being conversant with standard proof techniques can help you in this
+process. Knowing how to write a good proof helps in many ways. First, it
+clarifies your thought process, which in turn clarifies your
+explanations. Second, if you use one of the standard proof structures
+such as proof by contradiction or an induction proof, then both you and
+your reader are working from a shared understanding of that structure.
+That makes for less complexity to your reader to understand your proof,
+because the reader need not decode the structure of your argument from
+scratch.</p>
+<p>This section briefly introduces three commonly used proof
+techniques:</p>
+<ol type="1">
+<li><p>deduction, or direct proof,</p></li>
+<li><p>proof by contradiction, and</p></li>
+<li><p>proof by mathematical induction.</p></li>
+</ol>
+<p>In general, a <a href="section-14.html#direct-proof" class="term"
+title="In general, a direct proof is just a &#39;logical explanation&#39;. A direct proof is sometimes referred to as an argument by deduction. This is simply an argument in terms of logic. Often written in English with words such as &#39;if ... then&#39;, it could also be written with logic notation such as $P \Rightarrow Q$.">direct
+proof</a> is just a “logical explanation”. A direct proof is sometimes
+referred to as an argument by deduction. This is simply an argument in
+terms of logic.</p>
+<section id="sec:direct-proof" class="level4 unnumbered">
+<h4 class="unnumbered">Direct Proof</h4>
+<p>Many direct proofs are written in English with words such as “if …
+then”. In this case logic notation such as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>⇒</mo><mi>Q</mi></mrow><annotation encoding="application/x-tex">P \Rightarrow Q</annotation></semantics></math>
+can often help express the proof. Even if we don’t wish to use symbolic
+logic notation, we can still take advantage of fundamental theorems of
+logic to structure our arguments. For example, if we want to prove that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Q</mi><annotation encoding="application/x-tex">Q</annotation></semantics></math>
+are equivalent, we can first prove
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>⇒</mo><mi>Q</mi></mrow><annotation encoding="application/x-tex">P \Rightarrow Q</annotation></semantics></math>
+and then prove
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo>⇒</mo><mi>P</mi></mrow><annotation encoding="application/x-tex">Q \Rightarrow P</annotation></semantics></math>.</p>
+<p>In some domains, proofs are essentially a series of state changes
+from a start state to an end state. Formal predicate logic can be viewed
+in this way, with the various “rules of logic” being used to make the
+changes from one formula or combining a couple of formulas to make a new
+formula on the route to the destination. Symbolic manipulations to solve
+integration problems in introductory calculus classes are similar in
+spirit, as are high school geometry proofs.</p>
+</section>
+<section id="sec:example-sum-of-first-n-integers"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Sum of first
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+integers</h4>
+<p>Here is a direct proof that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup><mi>i</mi><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mi>n</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">\sum_{i=1}^n i = (n+1)n/2</annotation></semantics></math>.
+If we take the first and last terms of the series, since they are 1 and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
+of course they sum to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n+1</annotation></semantics></math>.
+If we take the second term and next-to-last term, since they are 2 and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>,
+they also sum to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n+1</annotation></semantics></math>.
+Likewise for the third term and third-from-the-end term. We can go on
+and pair up terms like this, such that there are
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n/2</annotation></semantics></math>
+pairs that each sum to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n+1</annotation></semantics></math>,
+for a total sum of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mi>n</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">(n+1)n/2</annotation></semantics></math>.
+You can check for yourself that this is true even if
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+is odd (and so the middle value of the series has no partner).</p>
+</section>
+<section id="sec:proof-by-contradiction" class="level4 unnumbered">
+<h4 class="unnumbered">Proof by Contradiction</h4>
+<p>The simplest way to <em>disprove</em> a theorem or statement is to
+find a counter-example to the theorem. Unfortunately, no number of
+examples supporting a theorem is sufficient to prove that the theorem is
+correct. However, there is an approach that is vaguely similar to
+disproving by counter-example, called <a
+href="section-14.html#proof-by-contradiction" class="term"
+title="A mathematical proof technique that proves a theorem by first assuming that the theorem is false, and then uses a chain of reasoning to reach a logical contradiction. Since when the theorem is false a logical contradiction arises, the conclusion is that the theorem must be true.">proof
+by contradiction</a>. To prove a theorem by contradiction, we first
+<em>assume</em> that the theorem is <em>false</em>. We then find a
+logical contradiction stemming from this assumption. If the logic used
+to find the contradiction is correct, then the only way to resolve the
+contradiction is to recognise that the assumption that the theorem is
+false must be incorrect. That is, we conclude that the theorem must be
+true.</p>
+</section>
+<section id="sec:example-no-largest-integer"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: No largest integer</h4>
+<p>Here is a simple proof by contradiction.</p>
+<p><strong>Theorem:</strong> There is no largest integer.</p>
+<p><strong>Proof by contradiction:</strong></p>
+<p><strong>Step 1. Contrary assumption:</strong> Assume that there
+<em>is</em> a largest integer. Call it
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
+(for “biggest”).</p>
+<p><strong>Step 2. Show this assumption leads to a
+contradiction:</strong> Consider
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mo>=</mo><mi>B</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">C = B + 1</annotation></semantics></math>.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>
+is an integer because it is the sum of two integers. Also,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mo>&gt;</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">C &gt; B</annotation></semantics></math>,
+which means that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
+is not the largest integer after all. Thus, we have reached a
+contradiction. The only possible flaw in our reasoning is the initial
+assumption that the theorem is false. Thus, we conclude that the theorem
+is correct.</p>
+</section>
+<p>A related proof technique is <a
+href="section-14.html#proving-the-contrapositive" class="term"
+title="We can prove that $P \Rightarrow Q$ by proving $(\mathrm{not} Q) \Rightarrow (\mathrm{not} P)$.">proving
+the contrapositive</a>. We can prove that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>⇒</mo><mi>Q</mi></mrow><annotation encoding="application/x-tex">P \Rightarrow Q</annotation></semantics></math>
+by proving
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mrow><mi mathvariant="normal">n</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">t</mi></mrow><mspace width="0.222em"></mspace><mi>Q</mi><mo stretchy="false" form="postfix">)</mo><mo>⇒</mo><mo stretchy="false" form="prefix">(</mo><mrow><mi mathvariant="normal">n</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">t</mi></mrow><mspace width="0.222em"></mspace><mi>P</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(\mathrm{not}\ Q) \Rightarrow (\mathrm{not}\ P)</annotation></semantics></math>.
+This technique works because the <a href="section-14.html#truth-table"
+class="term"
+title="In symbolic logic, a table that contains as rows all possible combinations of the boolean variables, with a column that shows the outcome (true or false) for the expression when given that row&#39;s truth assignment for the boolean variables.">truth
+table</a> for the two logical statements are the same.</p>
+<section id="sec:proof-by-mathematical-induction"
+class="level4 unnumbered">
+<h4 class="unnumbered">Proof by Mathematical Induction</h4>
+<p>Mathematical induction can be used to prove a wide variety of
+theorems. Induction also provides a useful way to think about algorithm
+design, because it encourages you to think about solving a problem by
+building up from simple subproblems. Induction can help to prove that a
+recursive function produces the correct result. Understanding recursion
+is a big step toward understanding induction, and vice versa, since they
+work by essentially the same process.</p>
+<p>Within the context of algorithm analysis, one of the most important
+uses for mathematical induction is as a method to test a hypothesis.
+When seeking a <a href="section-14.html#closed-form-solution"
+class="term"
+title="An algebraic equation with the same value as a summation or recurrence relation. The process of replacing the summation or recurrence with its closed-form solution is known as solving the summation or recurrence.">closed-form
+solution</a> for a <a href="section-14.html#summation" class="term"
+title="The sum of costs for some function applied to a range of parameter values. Often written using Sigma notation. For example, the sum of the integers from 1 to $n$ can be written as $\sum_{i=1}^{n} i$.">summation</a>
+or <a href="section-14.html#recurrence-relation" class="term"
+title="A recurrence relation (or less formally, recurrence) defines a function by means of an expression that includes one or more (smaller) instances of itself. A classic example is the recursive definition for the factorial function, $F(n) = n*F(n-1)$.">recurrence</a>,
+we might first guess or otherwise acquire evidence that a particular
+formula is the correct solution. If the formula is indeed correct, it is
+often an easy matter to prove that fact with an induction proof.</p>
+<p>Let <strong>Thrm</strong> be a theorem to prove, and express
+<strong>Thrm</strong> in terms of a positive integer parameter
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.
+Mathematical induction states that <strong>Thrm</strong> is true for any
+value of parameter
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+(for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>≥</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">n \geq c</annotation></semantics></math>,
+where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>
+is some constant) if the following two conditions are true:</p>
+<ol type="1">
+<li><p><a href="section-14.html#base-case" class="term"
+title="In recursion or proof by induction, the base case is the termination condition. This is a simple input or value that can be solved (or proved in the case of induction) without resorting to a recursive call (or the induction hypothesis).">Base
+Case</a>: <strong>Thrm</strong> holds for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">n = c</annotation></semantics></math>,
+and</p></li>
+<li><p><a href="section-14.html#induction-step" class="term"
+title="Part of a proof by induction. In its simplest form, this is a proof of the implication that if the theorem holds for $n-1$, then it holds for $n$. As an alternative, see strong induction.">Induction
+Step</a>: If <strong>Thrm</strong> holds for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n - 1</annotation></semantics></math>,
+then <strong>Thrm</strong> holds for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.</p></li>
+</ol>
+<p>Proving the base case is usually easy, typically requiring that some
+small value such as 1 be substituted for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+in the theorem and applying simple algebra or logic as necessary to
+verify the theorem. Proving the induction step is sometimes easy, and
+sometimes difficult. Proving induction step (in conjunction with
+verifying the base case) yields a satisfactory proof by mathematical
+induction.</p>
+<p>The two conditions that make up the induction proof combine to
+demonstrate that <strong>Thrm</strong> holds for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">n=2</annotation></semantics></math>
+as an extension of the fact that <strong>Thrm</strong> holds for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n=1</annotation></semantics></math>.
+This fact, combined again with condition (2), indicates that
+<strong>Thrm</strong> also holds for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">n=3</annotation></semantics></math>,
+and so on. Thus, <strong>Thrm</strong> holds for all values of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+(larger than the base cases) once the two conditions have been
+proved.</p>
+<p>What makes mathematical induction so powerful (and so mystifying to
+most people at first) is that we can take advantage of the
+<em>assumption</em> that <strong>Thrm</strong> holds for all values less
+than
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+as a tool to help us prove that <strong>Thrm</strong> holds for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.
+This is known as the <a href="section-14.html#induction-hypothesis"
+class="term"
+title="The key assumption used in a proof by induction, that the theorem to be proved holds for smaller instances of the theorem. The induction hypothesis is equivalent to the recursive call in a recursive function.">induction
+hypothesis</a>. Having this assumption to work with makes the induction
+step easier to prove than tackling the original theorem itself. Being
+able to rely on the induction hypothesis provides extra information that
+we can bring to bear on the problem.</p>
+<p>Recursion and induction have many similarities. Both are anchored on
+one or more base cases. A recursive function relies on the ability to
+call itself to get the answer for smaller instances of the problem.
+Likewise, induction proofs rely on the truth of the induction hypothesis
+to prove the theorem. The induction hypothesis does not come out of thin
+air. It is true if and only if the theorem itself is true, and therefore
+is reliable within the proof context. Using the induction hypothesis to
+do work is exactly the same as using a recursive call to do work.</p>
+</section>
+<section id="sec:example-sum-of-first-n-integers-1"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Sum of first
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+integers</h4>
+<p>Here is a sample proof by mathematical induction. Call the sum of the
+first
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+positive integers
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐒</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\mathbf{S}(n)</annotation></semantics></math>.</p>
+<p><strong>Theorem:</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐒</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>n</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">\mathbf{S}(n) = n(n+1)/2</annotation></semantics></math>.</p>
+<p><strong>Proof:</strong> The proof is by mathematical induction.</p>
+<ol type="1">
+<li><p><strong>Check the base case.</strong> For
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n = 1</annotation></semantics></math>,
+verify that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐒</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>1</mn><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>+</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">\mathbf{S}(1) = 1(1+1)/2</annotation></semantics></math>.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐒</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\mathbf{S}(1)</annotation></semantics></math>
+is simply the sum of the first positive number, which is 1. Because
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>+</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mi>/</mi><mn>2</mn><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">1(1+1)/2 = 1</annotation></semantics></math>,
+the formula is correct for the base case.</p></li>
+<li><p><strong>State the induction hypothesis.</strong> The induction
+hypothesis is</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐒</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></munderover><mi>i</mi><mo>=</mo><mfrac><mrow><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><mn>2</mn></mfrac><mo>=</mo><mfrac><mrow><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><mn>2</mn></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
+ \mathbf{S}(n-1) = \sum_{i=1}^{n-1} i =
+ \frac{(n-1)((n-1)+1)}{2} = \frac{(n-1)(n)}{2}.
+ </annotation></semantics></math></p></li>
+<li><p><strong>Use the assumption from the induction hypothesis
+for</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>
+<strong>to show that the result is true for</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.
+The induction hypothesis states that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐒</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">\mathbf{S}(n-1) =  (n-1)(n)/2</annotation></semantics></math>,
+and because
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐒</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>𝐒</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">\mathbf{S}(n) = \mathbf{S}(n-1) + n</annotation></semantics></math>,
+we can substitute for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐒</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\mathbf{S}(n-1)</annotation></semantics></math>
+to get</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>i</mi></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></munderover><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>n</mi><mo>=</mo><mfrac><mrow><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><mn>2</mn></mfrac><mo>+</mo><mi>n</mi></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mfrac><mrow><msup><mi>n</mi><mn>2</mn></msup><mo>−</mo><mi>n</mi><mo>+</mo><mn>2</mn><mi>n</mi></mrow><mn>2</mn></mfrac><mo>=</mo><mfrac><mrow><mi>n</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><mn>2</mn></mfrac><mi>.</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align*}
+ \sum_{i=1}^n i &amp;= \left(\sum_{i=1}^{n-1} i\right) + n
+                     = \frac{(n-1)(n)}{2} + n\\
+                 &amp;=\frac{n^2 - n + 2n}{2} = \frac{n(n+1)}{2}.
+ \end{align*}</annotation></semantics></math></p>
+<p>Thus, by mathematical induction,</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐒</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>i</mi><mo>=</mo><mi>n</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mi>/</mi><mn>2</mn><mi>.</mi></mrow><annotation encoding="application/x-tex">
+ \mathbf{S}(n) = \sum_{i=1}^n i = n(n+1)/2.
+ </annotation></semantics></math></p></li>
+</ol>
+</section>
+<p>Note carefully what took place in this example. First we cast
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐒</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\mathbf{S}(n)</annotation></semantics></math>
+in terms of a smaller occurrence of the problem:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐒</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>𝐒</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">\mathbf{S}(n) = \mathbf{S}(n-1) + n</annotation></semantics></math>.
+This is important because once
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐒</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\mathbf{S}(n-1)</annotation></semantics></math>
+comes into the picture, we can use the induction hypothesis to replace
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐒</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\mathbf{S}(n-1)</annotation></semantics></math>
+with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">(n-1)(n)/2</annotation></semantics></math>.
+From here, it is simple algebra to prove that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐒</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">\mathbf{S}(n-1) + n</annotation></semantics></math>
+equals the right-hand side of the original theorem.</p>
+<section id="sec:example-recurrence-relation"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Recurrence relation</h4>
+<p>This example shows how we can use induction to prove that a proposed
+closed-form solution for a <a href="section-14.html#recurrence-relation"
+class="term"
+title="A recurrence relation (or less formally, recurrence) defines a function by means of an expression that includes one or more (smaller) instances of itself. A classic example is the recursive definition for the factorial function, $F(n) = n*F(n-1)$.">recurrence
+relation</a> is correct.</p>
+<p><strong>Theorem:</strong> The following recurrence relation has
+closed-form solution
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">T(n) = n - 1</annotation></semantics></math>:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mn>1</mn></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mn>0</mn></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align*}
+T(n) &amp;= T(n-1) + 1 \\
+T(1) &amp;= 0
+\end{align*}</annotation></semantics></math></p>
+<p><strong>Proof:</strong> To prove the base case, we observe from the
+definition that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mn>2</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mn>1</mn><mo>=</mo><mn>0</mn><mo>+</mo><mn>1</mn><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">T(2) = T(1) + 1 = 0 + 1 = 1</annotation></semantics></math>.
+From the proposed closed-form solution we get
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mn>2</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>2</mn><mo>−</mo><mn>1</mn><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">T(2) = 2 - 1 = 1</annotation></semantics></math>,
+which matches the definition.</p>
+<p>The induction hypothesis is that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>n</mi><mo>−</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">T(n-1) = n-2</annotation></semantics></math>.
+Combining the definition of the recurrence with the induction
+hypothesis, we see immediately that</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mn>1</mn><mo>=</mo><mi>n</mi><mo>−</mo><mn>2</mn><mo>+</mo><mn>1</mn><mo>=</mo><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">
+T(n) = T(n-1) + 1 = n-2 + 1 = n-1
+</annotation></semantics></math></p>
+<p>for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>&gt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n &gt; 1</annotation></semantics></math>.
+Thus, we have proved the theorem correct by mathematical induction.</p>
+</section>
+</section>
+<section id="sec:estimation" class="level3" data-number="1.4.7">
+<h3 data-number="1.4.7"><span class="header-section-number">1.4.7</span>
+Estimation</h3>
+<p>The concept of <a href="section-14.html#estimation" class="term"
+title="As a technical skill, this is the process of generating a rough estimate in order to evaluate the feasibility of a proposed solution. This is sometimes known as &#39;back of the napkin&#39; or &#39;back of the envelope&#39; calculation. The estimation process can be formalised as (1) determine the major parameters that affect the problem, (2) derive an equation that relates the parameters to the problem, then (3) select values for the parameters and apply the equation to yield an estimated solution.">estimation</a>
+might be unfamiliar to many readers. Estimation is not a mathematical
+technique, but rather a general engineering skill. This is sometimes
+known as “back of the napkin” or “back of the envelope” calculation.
+Both nicknames suggest that only a rough estimate is produced. It is
+very useful to computer scientists doing design work, because any
+proposed solution whose estimated resource requirements fall well
+outside the problem’s resource constraints can be discarded immediately,
+allowing time for greater analysis of more promising solutions.</p>
+<p><a href="section-14.html#estimation" class="term"
+title="As a technical skill, this is the process of generating a rough estimate in order to evaluate the feasibility of a proposed solution. This is sometimes known as &#39;back of the napkin&#39; or &#39;back of the envelope&#39; calculation. The estimation process can be formalised as (1) determine the major parameters that affect the problem, (2) derive an equation that relates the parameters to the problem, then (3) select values for the parameters and apply the equation to yield an estimated solution.">Estimation</a>
+techniques are a standard part of engineering curricula but are often
+neglected in computer science. Estimation is no substitute for rigorous,
+detailed analysis of a problem, but it can help to decide when a
+rigorous analysis is warranted: If the initial estimate indicates that
+the solution is unworkable, then further analysis is probably
+unnecessary.</p>
+<p>Estimation can be formalised by the following three-step process:</p>
+<ol type="1">
+<li>Determine the major parameters that affect the problem.</li>
+<li>Derive an equation that relates the parameters to the problem.</li>
+<li>Select values for the parameters, and apply the equation to yield an
+estimated solution.</li>
+</ol>
+<p>When doing estimations, a good way to reassure yourself that the
+estimate is reasonable is to do it in two different ways. In general, if
+you want to know what comes out of a system, you can either try to
+estimate that directly, or you can estimate what goes into the system
+(assuming that what goes in must later come out). If both approaches
+(independently) give similar answers, then this should build confidence
+in the estimate.</p>
+<p>When calculating, be sure that your units match. For example, do not
+add feet and pounds. Verify that the result is in the correct units.
+Always keep in mind that the output of a calculation is only as good as
+its input. The more uncertain your valuation for the input parameters in
+Step 3, the more uncertain the output value. However, back of the
+envelope calculations are often meant only to get an answer within an
+order of magnitude, or perhaps within a factor of two. Before doing an
+estimate, you should decide on acceptable error bounds, such as within
+25%, within a factor of two, and so forth. Once you are confident that
+an estimate falls within your error bounds, leave it alone! Do not try
+to get a more precise estimate than necessary for your purpose.</p>
+<section id="sec:example-bookcases-for-a-million-pages"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Bookcases for a million pages</h4>
+<p>How many bookcases does it take to store books containing one million
+pages? Let’s estimate that a book of 200 pages requires one cm on the
+library shelf (it will help to look at the size of any handy book),
+yielding about 50 metres of shelf space for one million pages. If a
+shelf is 80 cm wide, then around 60-65 shelves are required. If a
+bookcase contains 6 shelves, this yields about 10 bookcases.</p>
+<p>To reach this conclusion, we estimated the number of pages per cm,
+the width of a shelf, and the number of shelves in a bookcase. Any of
+these estimates can be wrong: books have thinner or thicker paper,
+shelves can be narrower or wider, and bookcases can have more or less
+shelves. Let’s say that the paper thickness can vary ±50%, that shelves
+can be 60–100 cm wide, and that there can be 5–8 shelves in a bookcase.
+This suggests that in the extreme case we might be wrong by a factor
+2–3, but it’s much more likely that some of the errors even out so that
+our estimate is much more accurate.</p>
+</section>
+</section>
+<section id="sec:random-numbers" class="level3" data-number="1.4.8">
+<h3 data-number="1.4.8"><span class="header-section-number">1.4.8</span>
+Random numbers</h3>
+<p>The success of randomised algorithms depends on having access to a
+good random number generator. While modern compilers are likely to
+include a random number generator that is good enough for most purposes,
+it is helpful to understand how they work, and to even be able to
+construct your own in case you don’t trust the one provided. This is
+easy to do.</p>
+<p>First, let us consider what a random sequence is. From the following
+list, which appears to be a sequence of “random” numbers?</p>
+<ul>
+<li>1, 1, 1, 1, 1, 1, 1, 1, 1, …</li>
+<li>1, 2, 3, 4, 5, 6, 7, 8, 9, …</li>
+<li>2, 7, 1, 8, 2, 8, 1, 8, 2, …</li>
+</ul>
+<p>In fact, all three happen to be the beginning of a some sequence in
+which one could continue the pattern to generate more values (in case
+you do not recognise it, the third one is the initial digits of the
+irrational constant
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>e</mi><annotation encoding="application/x-tex">e</annotation></semantics></math>).
+Viewed as a series of digits, ideally every possible sequence has equal
+probability of being generated (even the three sequences above). In
+fact, definitions of randomness generally have features such as:</p>
+<ul>
+<li>One cannot predict the next item better than by guessing.</li>
+<li>The series cannot be described more briefly than simply listing it
+out. This is the <a href="section-14.html#equidistribution-property"
+class="term"
+title="In random number theory, this means that a given series of random numbers cannot be described more briefly than simply listing it out.">equidistribution
+property</a>.</li>
+</ul>
+<p>There is no such thing as a random number sequence, only “random
+enough” sequences. A sequence is <a href="section-14.html#pseudo-random"
+class="term"
+title="In random number theory this means that, given all past terms in the series, no future term of the series can be accurately predicted in polynomial time.">pseudo
+random</a> if no future term can be predicted in polynomial time, given
+all past terms.</p>
+<p>Most computer systems use a deterministic algorithm to select
+pseudorandom numbers. The most commonly used approach historically is
+known as the <a href="section-14.html#linear-congruential-method"
+class="term"
+title="In random number theory, a process for computing the next number in a pseudo-random sequence. Starting from a seed, the next term $r(i)$ in the series is calculated from term $r(i-1)$ by the equation $$r(i) = (r(i-1)\times b) \bmod t$$ where $b$ and $t$ are constants. These constants must be well chosen for the resulting series of numbers to have desirable properties as a random number sequence.">Linear
+Congruential Method</a> (LCM). The LCM method is quite simple. We begin
+by picking a <a href="section-14.html#seed" class="term"
+title="In random number theory, the starting value for a random number series. Typically used with any linear congruential method.">seed</a>
+that we will call
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>r</mi><mn>1</mn></msub><annotation encoding="application/x-tex">r_1</annotation></semantics></math>.
+Then, we can compute successive terms as follows, where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>
+are some constant positive integers.</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><msub><mi>r</mi><mi>i</mi></msub></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mi>b</mi><mo>⋅</mo><msub><mi>r</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false" form="postfix">)</mo><mspace width="0.278em"></mspace><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow><mspace width="0.278em"></mspace><mi>t</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align*}
+r_i &amp;= (b\cdot r_{i-1}) \;\mathrm{mod}\; t
+\end{align*}</annotation></semantics></math></p>
+<p>By definition of the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow><annotation encoding="application/x-tex">\mathrm{mod}</annotation></semantics></math>
+function, all generated numbers must be in the range 0 to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">t-1</annotation></semantics></math>.
+Now, consider what happens when
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>r</mi><mi>i</mi></msub><mo>=</mo><msub><mi>r</mi><mi>j</mi></msub></mrow><annotation encoding="application/x-tex">r_i = r_j</annotation></semantics></math>
+for values
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>.
+Of course then
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>r</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>r</mi><mrow><mi>j</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">r_{i+1} = r_{j+1}</annotation></semantics></math>
+which means that we have a repeating cycle.</p>
+<p>Since the values coming out of the random number generator are
+between 0 and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">t-1</annotation></semantics></math>,
+the longest cycle that we can hope for has length
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>.
+In fact, since
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>r</mi><mn>0</mn></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">r_0 = 0</annotation></semantics></math>,
+it cannot even be quite this long. It turns out that to get a good
+result, it is crucial to pick good values for both
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>.
+To see why, consider the following example.</p>
+<section id="sec:example-varying-the-t-value"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Varying the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>
+value</h4>
+<p>Given a
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>
+value of 13, we can get very different results depending on the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>
+value that we pick, in ways that are hard to predict.</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><msub><mi>r</mi><mi>i</mi></msub><mspace width="0.278em"></mspace><mo>=</mo><mspace width="0.278em"></mspace><mo stretchy="false" form="prefix">(</mo><mn>6</mn><mo>⋅</mo><msub><mi>r</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false" form="postfix">)</mo><mrow><mspace width="0.444em"></mspace><mrow><mi>mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mn>13</mn></mrow></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mi>…</mi><mo>,</mo><mn>1</mn><mo>,</mo><mn>6</mn><mo>,</mo><mn>10</mn><mo>,</mo><mn>8</mn><mo>,</mo><mn>9</mn><mo>,</mo><mn>2</mn><mo>,</mo><mn>12</mn><mo>,</mo><mn>7</mn><mo>,</mo><mn>3</mn><mo>,</mo><mn>5</mn><mo>,</mo><mn>4</mn><mo>,</mo><mn>11</mn><mo>,</mo><mn>1</mn><mo>,</mo><mi>…</mi></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><msub><mi>r</mi><mi>i</mi></msub><mspace width="0.278em"></mspace><mo>=</mo><mspace width="0.278em"></mspace><mo stretchy="false" form="prefix">(</mo><mn>7</mn><mo>⋅</mo><msub><mi>r</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false" form="postfix">)</mo><mrow><mspace width="0.444em"></mspace><mrow><mi>mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mn>13</mn></mrow></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mi>…</mi><mo>,</mo><mn>1</mn><mo>,</mo><mn>7</mn><mo>,</mo><mn>10</mn><mo>,</mo><mn>5</mn><mo>,</mo><mn>9</mn><mo>,</mo><mn>11</mn><mo>,</mo><mn>12</mn><mo>,</mo><mn>6</mn><mo>,</mo><mn>3</mn><mo>,</mo><mn>8</mn><mo>,</mo><mn>4</mn><mo>,</mo><mn>2</mn><mo>,</mo><mn>1</mn><mo>,</mo><mi>…</mi></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><msub><mi>r</mi><mi>i</mi></msub><mspace width="0.278em"></mspace><mo>=</mo><mspace width="0.278em"></mspace><mo stretchy="false" form="prefix">(</mo><mn>5</mn><mo>⋅</mo><msub><mi>r</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false" form="postfix">)</mo><mrow><mspace width="0.444em"></mspace><mrow><mi>mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mn>13</mn></mrow></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mi>…</mi><mo>,</mo><mn>1</mn><mo>,</mo><mn>5</mn><mo>,</mo><mn>12</mn><mo>,</mo><mn>8</mn><mo>,</mo><mn>1</mn><mo>,</mo><mi>…</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align*}
+r_i \;=\; (6\cdot r_{i-1}) \mod 13  &amp;=  \ldots, 1, 6, 10, 8, 9, 2, 12, 7, 3, 5, 4, 11, 1, \ldots  \\
+r_i \;=\; (7\cdot r_{i-1}) \mod 13  &amp;=  \ldots, 1, 7, 10, 5, 9, 11, 12, 6, 3, 8, 4, 2, 1, \ldots \\
+r_i \;=\; (5\cdot r_{i-1}) \mod 13  &amp;=  \ldots, 1, 5, 12, 8, 1, \ldots
+\end{align*}</annotation></semantics></math></p>
+<p>In the case of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi><mo>=</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">b=5</annotation></semantics></math>,
+the generator goes through only a short sequence before repeating, with
+the series depending on the seed value chosen. Clearly, a
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>
+value of 5 is far inferior to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>
+values of 6 or 7 in this example.</p>
+</section>
+<p>If you would like to write a simple LCM random number generator of
+your own, an effective one can be made with the following formula:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><msub><mi>r</mi><mi>i</mi></msub></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mn>16807</mn><mo>⋅</mo><msub><mi>r</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false" form="postfix">)</mo><mrow><mspace width="0.444em"></mspace><mrow><mi>mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><msup><mn>2</mn><mn>31</mn></msup></mrow><mo>−</mo><mn>1</mn></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align*}
+r_i &amp;= (16807 \cdot r_{i-1}) \mod 2^{31} - 1
+\end{align*}</annotation></semantics></math></p>
+<p>Another approach is based on using a computer chip that generates
+random numbers resulting from “thermal noise” in the system. Time will
+tell if this approach replaces deterministic approaches.</p>
+</section>
+</div>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-1.3.html" class="navbutton">&lt;&lt;</a>
+<a href="section-1.3.html" accesskey="p" rel="previous">Practical examples</a>
+</div>
+<div class="navlink">
+<a href="section-1.5.html" accesskey="n" rel="next">Programming preliminaries</a>
+<a href="section-1.5.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+<script type="text/javascript" src="../interactive/AlgAnal/SummationOneToNCON.js"></script>
+<script type="text/javascript" src="../interactive/AlgAnal/SummationTwoPowerICON.js"></script>
+</body>
+</html>
+

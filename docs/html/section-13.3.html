@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Implementing graphs</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-13.2.html" class="navbutton">&lt;&lt;</a>
+<a href="section-13.2.html" accesskey="p" rel="previous">Graph representations</a>
+</div>
+<div>
+<a href="section-13.4.html" accesskey="n" rel="next">Traversing graphs</a>
+<a href="section-13.4.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:implementing-graphs" class="level2" data-number="13.3">
+<h2 data-number="13.3"><span class="header-section-number">13.3</span>
+Implementing graphs</h2>
+<p>We next turn to the problem of implementing a general-purpose <a
+href="section-14.html#graph" class="term"
+title="A graph $\mathbf{G} = (\mathbf{V}, \mathbf{E})$ consists of a set of vertices $\mathbf{V}$ and a set of edges $\mathbf{E}$, such that each edge in $\mathbf{E}$ is a connection between a pair of vertices in $\mathbf{V}$.">graph</a>
+class. There are two traditional approaches to representing graphs: The
+<a href="section-14.html#adjacency-matrix" class="term"
+title="An implementation for a graph that uses a 2-dimensional array where each row and each column corresponds to a vertex in the graph. A given row and column in the matrix corresponds to an edge from the vertex corresponding to the row to the vertex corresponding to the column.">adjacency
+matrix</a> and the <a href="section-14.html#adjacency-list" class="term"
+title="An implementation for a graph that uses an (array-based) list to represent the vertices of the graph, and each vertex is in turn represented by a (linked) list of the vertices that are neighbours.">adjacency
+list</a>. In this section we will show actual implementations for each
+approach. We will begin with an interface defining an ADT for graphs
+that a given implementation must meet.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Graph</span> <span class="kw">of</span> V:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span>: <span class="bu">Int</span>                       <span class="co">// The number of vertices in the graph.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    vertices() <span class="op">-&gt;</span> <span class="bu">Collection</span> <span class="kw">of</span> V   <span class="co">// Returns all vertices in the graph.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    outgoingEdges(v: V) <span class="op">-&gt;</span> <span class="bu">Collection</span> <span class="kw">of</span> <span class="bu">Edge</span> <span class="kw">of</span> V</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                                    <span class="co">// Returns the edges that originates in vertex v.</span></span></code></pre></div>
+<p>Note that this API is quite generic, and perhaps not suited for all
+kinds of implementations. For example, the adjacency matrix
+implementation works best if the vertices are integers in the range
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mi>…</mi><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="false" form="prefix">|</mo><mi>−</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">0\ldots |\mathbf{V}|-1</annotation></semantics></math>
+where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|\mathbf{V}|</annotation></semantics></math>
+is the number of vertices.</p>
+<p>According to this interface, the size of the graph is the number of
+vertices,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|\mathbf{V}|</annotation></semantics></math>,
+and there is no method that returns the number of edges,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>𝐄</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|\mathbf{E}|</annotation></semantics></math>.
+A practical implementation would have methods for both of these sizes,
+as well as methods for adding vertices and edges to the graph (and
+removing too).</p>
+<p>Given an edge, we can use the attributes <em>start</em> and
+<em>end</em> to know the adjacent vertices, and <em>weight</em> to know
+its weight.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> <span class="bu">Edge</span> <span class="kw">of</span> V:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    start: V              <span class="co">// start vertex</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    end: V                <span class="co">// end vertex</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    weight: <span class="bu">Float</span> <span class="op">=</span> <span class="fl">1.0</span>   <span class="co">// weight, defaults to 1.0</span></span></code></pre></div>
+<p>Nearly every graph algorithm presented in this chapter will require
+visits to all neighbours of a given vertex. The
+<code>outgoingEdges</code> method returns a collection containing the
+edges that originate in the given vertex. To get the neighbours you can
+simply call <code>e.end</code> for each outgoing edge <code>e</code>.
+The following lines appear in many graph algorithms:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="kw">each</span> <span class="bu">Edge</span> e <span class="kw">in</span> G.outgoingEdges(v):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    w <span class="op">=</span> e.end</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> w <span class="kw">is</span> <span class="kw">not</span> <span class="kw">in</span> visited:</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">add</span> w <span class="kw">to</span> visited</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        ...do something with v, w, <span class="kw">or</span> e...</span></code></pre></div>
+<p>Here, <code>visited</code> is a set of vertices to keep track that we
+don’t visit a vertex twice.</p>
+<p>It is reasonably straightforward to implement our graph ADT using
+either the adjacency list or adjacency matrix. The sample
+implementations presented here do not address the issue of how the graph
+is actually created. The user of these implementations must add
+functionality for this purpose, perhaps reading the graph description
+from a file.</p>
+<section id="sec:adjacency-matrix" class="level3" data-number="13.3.1">
+<h3 data-number="13.3.1"><span
+class="header-section-number">13.3.1</span> Adjacency matrix</h3>
+<p>Here is an implementation for the adjacency matrix. To simplify the
+implementation we assume that the vertices are integers
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mi>…</mi><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0\ldots n-1</annotation></semantics></math>:
+then we can use the vertices as indices in the adjacency matrix.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> MatrixGraph <span class="kw">implements</span> <span class="bu">Graph</span>:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// The edge matrix is an n x n matrix of weights.</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    edgeMatrix: <span class="bu">Array</span> <span class="kw">of</span> (<span class="bu">Array</span> <span class="kw">of</span> Edges)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span>: <span class="bu">Int</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">constructor</span>(vertexCount):</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        edgeMatrix <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(<span class="bu">size</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="op">=</span> <span class="dv">0</span> .. <span class="bu">size</span><span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>            edgeMatrix[i] <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(<span class="bu">size</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    vertices():</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> the collection [<span class="dv">0</span>, <span class="dv">1</span>, ..., <span class="bu">size</span><span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    outgoingEdges(v):</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        outgoing <span class="op">=</span> <span class="kw">new</span> <span class="bu">List</span>()</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> w <span class="kw">in</span> <span class="dv">0</span> .. <span class="bu">size</span><span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>            weight <span class="op">=</span> edgeMatrix[v][w]</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>            <span class="co">// We use the special weight 0 to indicate that there is no edge.</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> weight <span class="op">!=</span> <span class="dv">0</span>:</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>                outgoing.<span class="bu">append</span>(<span class="kw">new</span> <span class="bu">Edge</span>(v, w, weight))</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> outgoing</span></code></pre></div>
+<p>The edge matrix is implemented as an integer array of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>×</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">n \times n</annotation></semantics></math>
+for a graph of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+vertices. Position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(i, j)</annotation></semantics></math>
+in the matrix stores the weight for edge
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(i, j)</annotation></semantics></math>
+if it exists. A weight of zero for edge
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(i, j)</annotation></semantics></math>
+is used to indicate that no edge connects vertices
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>.</p>
+<p>This means that this simple implementation of an adjacency matrix
+does not work for all kinds of vertex types, but only for integer
+vertices. In addition, the vertices must be numbered
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mi>…</mi><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="false" form="prefix">|</mo><mi>−</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">0\ldots |\mathbf{V}|-1</annotation></semantics></math>.
+The <code>vertices</code> method returns a collection of all vertices,
+which in this case is just the numbers
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mi>…</mi><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="false" form="prefix">|</mo><mi>−</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">0\ldots |\mathbf{V}|-1</annotation></semantics></math>.</p>
+<p>Given a vertex
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>,
+the <code>outgoingEdges</code> method scans through row <code>v</code>
+of the matrix to locate the positions of the various neighbours. It
+creates an edge for each neighbour and adds it to a list.</p>
+</section>
+<section id="sec:adjacency-list" class="level3" data-number="13.3.2">
+<h3 data-number="13.3.2"><span
+class="header-section-number">13.3.2</span> Adjacency list</h3>
+<p>Here is an implementation of the adjacency list representation for
+graphs. This implementation uses a generic type for vertices, so that
+you can use strings or anything else.</p>
+<p>Its main data structure is a map from vertices to sets of edges.
+Exactly which kind of map or set we use can depend on our needs, but it
+can e.g. be any of the ones we have discussed earlier in the book.</p>
+<p>One specific implementation that is particularly suited for an
+adjacency list <a href="section-14.html#separate-chaining" class="term"
+title="In hashing, a synonym for open hashing">separate chaining</a>
+hash map, backed with a set implemented as a <a
+href="section-14.html#linked-list" class="term"
+title="An implementation for the list ADT that uses dynamic allocation of link nodes to store the list elements. Common variants are the singly linked list, doubly linked list and circular list. The overhead required is the pointers in each link node.">linked
+list</a>. In that case, for each vertex we store a linked list of all
+the edges originating from that vertex. This makes the method
+<code>outgoingEdges</code> very efficient, because the only thing we
+have to do is to look up the given vertex in the internal map. To make
+the methods <code>vertexCount</code> and <code>vertices</code>
+efficient, we in addition store the vertices separately in the set
+<code>verticesSet</code>.</p>
+<p>The implementations of the API methods are quite straightforward, as
+can be seen here:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> AdjacencyGraph <span class="kw">implements</span> <span class="bu">Graph</span>:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    edgesMap: <span class="bu">Map</span> from V <span class="kw">to</span> <span class="bu">Edge</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>()</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    vertices: <span class="bu">Set</span> <span class="kw">of</span> V <span class="op">=</span> <span class="kw">new</span> <span class="bu">Set</span>()</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span>: <span class="bu">Int</span> <span class="op">=</span> vertices.<span class="bu">size</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    vertices():</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> verticesSet</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    outgoingEdges(v):</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> edgesMap.<span class="bu">get</span>(v)</span></code></pre></div>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-13.2.html" class="navbutton">&lt;&lt;</a>
+<a href="section-13.2.html" accesskey="p" rel="previous">Graph representations</a>
+</div>
+<div class="navlink">
+<a href="section-13.4.html" accesskey="n" rel="next">Traversing graphs</a>
+<a href="section-13.4.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

@@ -1,3 +1,7 @@
+#quicksortCON .jsavoutput.jsavline {
+  height: 2em;
+}
+
 .jsavindex.jsavarrow.leftarrow::before {
   border-color: blue transparent transparent;
 }

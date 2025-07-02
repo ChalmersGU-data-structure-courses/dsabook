@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Case study: Analysing dynamic arrays</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-7.2.html" class="navbutton">&lt;&lt;</a>
+<a href="section-7.2.html" accesskey="p" rel="previous">Amortised analysis</a>
+</div>
+<div>
+<a href="section-7.4.html" accesskey="n" rel="next">Recurrence relations</a>
+<a href="section-7.4.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:case-study-analysing-dynamic-arrays" class="level2"
+data-number="7.3">
+<h2 data-number="7.3"><span class="header-section-number">7.3</span>
+Case study: Analysing dynamic arrays</h2>
+<p>Dynamic arrays, as discussed in <a
+href="section-6.7.html#sec:dynamic-arrays">Section 6.7</a>, are a
+flexible data structure that efficiently manages collections of elements
+whose size may change over time. Unlike fixed-size arrays, dynamic
+arrays automatically resize themselves to accommodate additional
+elements, making them especially useful when the total number of
+elements is not known in advance.</p>
+<p>In this case study, we will analyse the time and memory complexity of
+dynamic arrays, with a particular focus on the operation of adding an
+element. This operation is central to understanding dynamic arrays
+because:</p>
+<ul>
+<li>Retrieving an element by index is identical to regular arrays and
+operates in constant time.</li>
+<li>Removing an element involves similar considerations as inserting,
+particularly regarding shifting elements, so we will not cover it
+separately here.</li>
+</ul>
+<section id="sec:complexity-of-adding-an-element-to-a-dynamic-array"
+class="level4 unnumbered">
+<h4 class="unnumbered">Complexity of adding an element to a dynamic
+array</h4>
+<p>Let us first consider adding an element at the end of a dynamic
+array. In most cases, this operation is efficient, as it simply places
+the new element in the next available position in the internal array and
+takes constant time. However, when the array is full, it must resize
+itself to accommodate the new element. This resizing involves allocating
+a new array, typically twice the size of the original, copying all
+existing elements to this new array, and then inserting the new element.
+This step is more expensive and takes linear time in the number of
+elements. The amortised time complexity of appending arises from this
+pattern: although individual operations may occasionally be costly, the
+overall cost of performing many appends remains low, averaging out to
+constant time per operation.</p>
+<p>To illustrate this, consider a dynamic array that starts with a
+capacity of 1. When you append the first element, it fits perfectly. The
+next time you append, the array is full, so it resizes to a capacity of
+2, copying the existing element. The next append fills this new
+capacity, leading to another resize to 4, and so on. Each time the array
+resizes, it doubles its capacity and copies all existing elements to the
+new array. This means that the number of elements copied during a resize
+operation grows as follows:</p>
+<ul>
+<li>1 element copied when resizing from 1 to 2,</li>
+<li>2 elements copied when resizing from 2 to 4,</li>
+<li>4 elements copied when resizing from 4 to 8,</li>
+<li>and so on.</li>
+</ul>
+<p>The total number of elements copied during all these resizes can be
+summed up as follows:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>+</mo><mn>2</mn><mo>+</mo><mn>4</mn><mo>+</mo><mi>…</mi><mo>+</mo><mi>n</mi><mo>=</mo><mn>2</mn><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">
+1 + 2 + 4 + \ldots + n = 2n - 1
+</annotation></semantics></math></p>
+<p>where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+is the final size of the array. This means that the total cost of
+copying elements during all resizes is proportional to the final size of
+the array
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.
+So, while a single append operation may take linear time due to
+resizing, the average time per append operation across many appends is
+<em>constant</em>. This is because the expensive operations (the
+resizes) are infrequent compared to the many inexpensive appends that do
+not require resizing. Thus, the <em>amortised time complexity</em> for
+appending an element to a dynamic array is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math>,
+meaning that on average, each append operation takes constant time.</p>
+<p>The above analysis assumes that we add an element at the end of the
+dynamic array. If we consider adding an element at the beginning or in
+the middle of the array, the situation changes significantly. In these
+cases, the dynamic array must shift existing elements to make space for
+the new element. This shifting operation takes linear time in the number
+of elements, as each element must be moved one position to the right.
+Therefore, inserting an element at the beginning or in the middle of a
+dynamic array has a time complexity of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>,
+where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+is the number of elements in the array. This is an important point to
+consider when choosing a data structure for a specific use case.</p>
+</section>
+<section id="sec:memory-complexity-of-dynamic-arrays"
+class="level4 unnumbered">
+<h4 class="unnumbered">Memory complexity of dynamic arrays</h4>
+<p>The memory complexity of dynamic arrays is also an important aspect
+to consider. When a dynamic array resizes, it typically allocates a new
+array that is <em>larger</em> than the current one. The memory used by a
+dynamic array is proportional to its capacity, not just the number of
+elements it currently holds. Thus, the memory complexity of a dynamic
+array is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>,
+where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+is the current number of elements in the array. This can lead to
+situations where the dynamic array uses more memory than strictly
+necessary.</p>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-7.2.html" class="navbutton">&lt;&lt;</a>
+<a href="section-7.2.html" accesskey="p" rel="previous">Amortised analysis</a>
+</div>
+<div class="navlink">
+<a href="section-7.4.html" accesskey="n" rel="next">Recurrence relations</a>
+<a href="section-7.4.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

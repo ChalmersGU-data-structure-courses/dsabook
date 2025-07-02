@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Recursion and divide-and-conquer</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-4.html" class="navbutton">&lt;&lt;</a>
+<a href="section-4.html" accesskey="p" rel="previous">Sorting, part 2: Divide-and-conquer algorithms</a>
+</div>
+<div>
+<a href="section-4.2.html" accesskey="n" rel="next">Mergesort</a>
+<a href="section-4.2.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:recursion-and-divide-and-conquer" class="level2"
+data-number="4.1">
+<h2 data-number="4.1"><span class="header-section-number">4.1</span>
+Recursion and divide-and-conquer</h2>
+<p>An <a href="section-14.html#algorithm" class="term"
+title="A method or a process followed to solve a problem.">algorithm</a>
+(or a function in a computer program) is <a
+href="section-14.html#recursion" class="term"
+title="The process of using recursive calls. An algorithm is recursive if it calls itself to do part of its work. See recursion.">recursive</a>
+if it invokes itself to do part of its work.</p>
+<section id="sec:recursion" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1"><span class="header-section-number">4.1.1</span>
+Recursion</h3>
+<p>Recursion makes it possible to solve complex problems using programs
+that are concise, easily understood, and algorithmically efficient.
+Recursion is the process of solving a large problem by reducing it to
+one or more sub-problems which are identical in structure to the
+original problem and somewhat simpler to solve. Once the original
+subdivision has been made, the sub-problems divided into new ones which
+are even less complex. Eventually, the sub-problems become so simple
+that they can be then solved without further subdivision. Ultimately,
+the complete solution is obtained by reassembling the solved
+components.</p>
+<p>For a recursive approach to be successful, the recursive “call to
+itself” must be on a smaller problem than the one originally attempted.
+In general, a recursive algorithm must have two parts:</p>
+<ol type="1">
+<li><p>The <a href="section-14.html#base-case" class="term"
+title="In recursion or proof by induction, the base case is the termination condition. This is a simple input or value that can be solved (or proved in the case of induction) without resorting to a recursive call (or the induction hypothesis).">base
+case</a>, which handles a simple input that can be solved without
+resorting to a recursive call, and</p></li>
+<li><p>The recursive part which contains one or more recursive calls to
+the algorithm. In every recursive call, the parameters must be in some
+sense “closer” to the base case than those of the original
+call.</p></li>
+</ol>
+<p>Recursion has no counterpart in everyday, physical-world problem
+solving. The concept can be difficult to grasp because it requires you
+to think about problems in a new way. When first learning recursion, it
+is common for people to think a lot about the recursive process. We will
+spend some time in this section going over the details for how recursion
+works. But when writing recursive functions, it is best to stop thinking
+about how the recursion works beyond the recursive call. You should
+adopt the attitude that the sub-problems will take care of themselves,
+that when you call the function recursively it will return the right
+answer. You just worry about the base cases and how to recombine the
+sub-problems.</p>
+<p>Newcomers who are unfamiliar with recursion often find it hard to
+accept that it is used primarily as a tool for simplifying the design
+and description of algorithms. A recursive algorithm does not always
+yield the most efficient computer program for solving the problem
+because recursion involves function calls, which are typically more
+expensive than other alternatives such as a while loop. However, the
+recursive approach usually provides an algorithm that is reasonably
+efficient. If necessary, the clear, recursive solution can later be
+modified to yield a faster implementation.</p>
+<p>Imagine that someone in a movie theater asks you what row you’re
+sitting in. You don’t want to count, so you ask the person in front of
+you what row they are sitting in, knowing that they will tell you a
+number one less than your row number. The person in front could ask the
+person in front of them. This will keep happening until word reaches the
+front row and it is easy to respond: “I’m in row 1!” From there, the
+correct message (incremented by one each row) will eventually make it’s
+way back to the person who asked.</p>
+<section id="sec:example-the-fibonacci-sequence"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: The Fibonacci sequence</h4>
+<p>Here is an example of a function that is naturally written using
+recursion. The Fibonacci sequence is the series of numbers: 1, 1, 2, 3,
+5, 8, 13, 21, 34, … Any number in the sequence is found by adding up the
+two numbers before it, and the first two numbers in the sequence are
+both 1. Mathematically, the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>th
+Fibonacci number is calculated recursively like this:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mn>1</mn></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>2</mn><mo stretchy="false" form="postfix">)</mo></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align*}
+f(0) = f(1) &amp;= 1 \\
+f(n)        &amp;= f(n-1) + f(n-2)
+\end{align*}</annotation></semantics></math></p>
+<p>The first row is the <em>recursive case</em>, and the second row
+defines the two <em>base cases</em>. This mathematical definition is
+easily translated into pseudocode:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> fibonacci(n):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">&lt;=</span> <span class="dv">1</span>:</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> fibonacci(n <span class="op">-</span> <span class="dv">1</span>) <span class="op">+</span> fibonacci(n <span class="op">-</span> <span class="dv">2</span>)</span></code></pre></div>
+</section>
+</section>
+<section id="sec:divide-and-conquer" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2"><span class="header-section-number">4.1.2</span>
+Divide and conquer</h3>
+<p>Solving a “big” problem recursively means to solve one or more
+smaller versions of the problem, and using those solutions of the
+smaller problems to solve the “big” problem.</p>
+<p>Sometimes it is possible to divide a problem into <em>more than
+one</em> smaller sub-problems. This is the basis for
+<em>divide-and-conquer</em> algorithms, which can be found in several
+different areas, such as integer and matrix multiplication,
+computational geometry, and syntactical parsing. In this chapter we will
+how divide-and-conquer can be used to derive two efficient sorting
+algorithms, Mergesort and Quicksort.</p>
+<p>Both Mergesort and Quicksort splits the array into two sub-arrays,
+which can be sorted independently of each other. The key point to making
+the algorithms efficient is that the sub-arrays must be (approximately)
+the same size, so that the problem sizes are (approximately) halved in
+each iteration.</p>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-4.html" class="navbutton">&lt;&lt;</a>
+<a href="section-4.html" accesskey="p" rel="previous">Sorting, part 2: Divide-and-conquer algorithms</a>
+</div>
+<div class="navlink">
+<a href="section-4.2.html" accesskey="n" rel="next">Mergesort</a>
+<a href="section-4.2.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Stacks implemented as linked lists</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+<link href="../interactive/ChalmersGU/CGU-Styles.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-6.2.html" class="navbutton">&lt;&lt;</a>
+<a href="section-6.2.html" accesskey="p" rel="previous">Stacks and queues</a>
+</div>
+<div>
+<a href="section-6.4.html" accesskey="n" rel="next">Queues implemented as linked lists</a>
+<a href="section-6.4.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:stacks-implemented-as-linked-lists" class="level2"
+data-number="6.3">
+<h2 data-number="6.3"><span class="header-section-number">6.3</span>
+Stacks implemented as linked lists</h2>
+<p>In this section we present one of the two traditional implementations
+for lists, usually called a <a href="section-14.html#linked-list"
+class="term"
+title="An implementation for the list ADT that uses dynamic allocation of link nodes to store the list elements. Common variants are the singly linked list, doubly linked list and circular list. The overhead required is the pointers in each link node.">linked
+list</a>. The linked list uses <a
+href="section-14.html#dynamic-memory-allocation" class="term"
+title="A programming technique where linked objects in a data structure are created from free store as needed. When no longer needed, the object is either returned to free store or left as garbage, depending on the programming language.">dynamic
+memory allocation</a>, that is, it allocates memory for new list
+elements as needed. The following diagram illustrates the linked list
+concept. There are three <a href="section-14.html#node" class="term"
+title="The objects that make up a linked structure such as a linked list or binary tree. Typically, nodes are allocated using dynamic memory allocation. In graph terminology, the nodes are more commonly called vertices.">nodes</a>
+that are “linked” together. Each node has two boxes. The box on the
+right holds a link to the next node in the list. Notice that the
+rightmost node does not have any link coming out of this box.</p>
+<div class="online">
+<p>
+<div id="LinkedList-Overview-CON" class="ssAV" data-short-name="LinkedList-Overview-CON" data-long-name="Linked List Overview" alt="Linked List Overview" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</div>
+<section id="sec:linked-list-nodes" class="level4 unnumbered">
+<h4 class="unnumbered">Linked list nodes</h4>
+<p>Because a list node is a distinct object (as opposed to simply a cell
+in an array), it is good practice to make a separate data type for list
+nodes. Objects of the data type <code>Node</code> contain a field
+<code>elem</code> to store the element value, and a field
+<code>next</code> to store a pointer to the next node on the list.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> Node <span class="kw">of</span> T:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    elem: T          <span class="co">// Value for this node</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">next</span>: Node <span class="kw">of</span> T  <span class="co">// Pointer to next node in list</span></span></code></pre></div>
+<p>The list built from such nodes is called a <a
+href="section-14.html#singly-linked-list" class="term"
+title="A linked list implementation variant where each list node contains access a pointer only to the next element in the list.">singly
+linked list</a>, or a <a href="section-14.html#one-way-list"
+class="term"
+title="A linked list implementation variant where each list node contains access a pointer only to the next element in the list.">one-way
+list</a>, because each list node has a single pointer to the next node
+on the list.</p>
+<p>In this section and the next we describe how to use linked lists to
+implement stacks and queues, and in <a
+href="section-6.9.html#sec:double-ended-queues">Section 6.9</a> and <a
+href="section-6.10.html#sec:general-lists">Section 6.10</a> we will
+discuss extensions such as double-ended queues and general lists.</p>
+</section>
+<section id="sec:linked-stacks" class="level4 unnumbered">
+<h4 class="unnumbered">Linked stacks</h4>
+<p>The linked stack implementation is quite simple. Elements are
+inserted and removed only from the head of the list. Here is a visual
+representation for a linked stack.</p>
+<div class="online">
+<p>
+<div id="LinkedStack-Overview-CON" class="ssAV" data-short-name="LinkedStack-Overview-CON" data-long-name="Linked Stack Overview" alt="Linked Stack Overview" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</div>
+<p>Our data type for linked stacks contains two instance variables, one
+pointer to the head of the stack (called the <code>top</code>), and a
+variable storing the number of elements. (This second variable is in
+theory unnecessary, but it improves the efficiency of getting the stack
+size).</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> LinkedStack <span class="kw">implements</span> <span class="bu">Stack</span>:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    top: Node <span class="op">=</span> <span class="va">null</span>   <span class="co">// Pointer to top of stack</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span>: <span class="bu">Int</span> <span class="op">=</span> <span class="dv">0</span>      <span class="co">// Size of stack</span></span></code></pre></div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<section id="sec:pushing-to-a-linked-stack" class="level4 unnumbered">
+<h4 class="unnumbered">Pushing to a linked stack</h4>
+</summary>
+<p>
+<div id="LinkedStack-Push-CON" class="ssAV" data-short-name="LinkedStack-Push-CON" data-long-name="Linked Stack Push" alt="Linked Stack Push" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</section>
+</div>
+<p>To push a new element onto the stack, we first have to create a new
+node and set its value. Then we set its next pointer to the current top
+of the stack, and after that we can redirect the top to the new node. We
+also have to increase the size of the stack by one. The actions to
+create the node, set its value and pointer, and then redirect the stack
+top, can be done in one single line, like this:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> LinkedStack:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">push</span>(elem):</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        top <span class="op">=</span> <span class="kw">new</span> Node(elem, top)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">size</span> <span class="op">=</span> <span class="bu">size</span> <span class="op">+</span> <span class="dv">1</span></span></code></pre></div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Linked stack – push exercise.</p>
+</summary>
+<p>
+<div id="LstackPushPRO" class="embedContainer">
+<iframe id="LstackPushPRO_iframe" aria-label="LstackPushPRO" src="../interactive/ChalmersGU/LstackPushPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<section id="sec:popping-from-a-linked-stack" class="level4 unnumbered">
+<h4 class="unnumbered">Popping from a linked stack</h4>
+</summary>
+<p>
+<div id="LinkedStack-Pop-CON" class="ssAV" data-short-name="LinkedStack-Pop-CON" data-long-name="Linked Stack Pop" alt="Linked Stack Pop" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</section>
+</div>
+<p>To pop the topmost element off the stack, we first have to remember a
+pointer to the current top node, because we want to return its value
+after we have updated the stack. Then we can redirect the stack top to
+the next node. After that we decrease the size and return the value of
+the removed node:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> LinkedStack:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">pop</span>():</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        removed <span class="op">=</span> top</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        top <span class="op">=</span> removed.<span class="bu">next</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        removed.<span class="bu">next</span> <span class="op">=</span> <span class="va">null</span>  <span class="co">// For garbage collection</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">size</span> <span class="op">=</span> <span class="bu">size</span> <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> removed.elem</span></code></pre></div>
+<p>Note that we also set the <code>next</code> pointer of the old top to
+<strong>null</strong>. This is to help the garbage collection system
+actually remove the whole node when noone is using it anymore.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Linked stack – pop exercise.</p>
+</summary>
+<p>
+<div id="LstackPopPRO" class="embedContainer">
+<iframe id="LstackPopPRO_iframe" aria-label="LstackPopPRO" src="../interactive/ChalmersGU/LstackPopPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</div>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-6.2.html" class="navbutton">&lt;&lt;</a>
+<a href="section-6.2.html" accesskey="p" rel="previous">Stacks and queues</a>
+</div>
+<div class="navlink">
+<a href="section-6.4.html" accesskey="n" rel="next">Queues implemented as linked lists</a>
+<a href="section-6.4.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+<script type="text/javascript" src="../interactive/ChalmersGU/LinkedList-Overview-CON.js"></script>
+<script type="text/javascript" src="../interactive/ChalmersGU/LinkedStack-Overview-CON.js"></script>
+<script type="text/javascript" src="../interactive/ChalmersGU/LinkedStack-Push-CON.js"></script>
+<script type="text/javascript" src="../interactive/ChalmersGU/LinkedStack-Pop-CON.js"></script>
+</body>
+</html>
+

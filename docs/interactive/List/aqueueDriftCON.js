@@ -15,7 +15,7 @@ $(document).ready(function() {
     "sc6": "<code>enqueue</code> the value 3.",
     "sc7": "<code>enqueue</code> the value 30.",
     "sc8": "<code>enqueue</code> the value 4.",
-    "sc9": "Now, both the enqueue and the dequeue operations can be performed in <em>&theta;(1)</em> time because no other elements in the queue need be moved."
+    "sc9": "Now, both the enqueue and the dequeue operations can be performed in <em>O(1)</em> time because no other elements in the queue need be moved."
   };
 
   // Relative offsets
@@ -41,7 +41,7 @@ $(document).ready(function() {
   arrRear.addClass([0], "processing");
   arr.addClass([3], "processing");
   var arrSize = av.ds.array([4], {indexed: false, left: 200, top: topMargin + 70});
-  av.label("listSize", {left: 145, top: topMargin + 74});
+  av.label("size", {left: 166, top: topMargin + 74});
   av.step();
 
   // Slide 3

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Empirical comparison of sorting algorithms</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-4.5.html" class="navbutton">&lt;&lt;</a>
+<a href="section-4.5.html" accesskey="p" rel="previous">Implementing Quicksort</a>
+</div>
+<div>
+<a href="section-4.7.html" accesskey="n" rel="next">Review questions</a>
+<a href="section-4.7.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:empirical-comparison-of-sorting-algorithms"
+class="level2" data-number="4.6">
+<h2 data-number="4.6"><span class="header-section-number">4.6</span>
+Empirical comparison of sorting algorithms</h2>
+<p>Which sorting algorithm is fastest? Asymptotic complexity analysis
+lets us distinguish between
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>
+algorithms, but it does not help distinguish between algorithms with the
+same asymptotic complexity. Nor does asymptotic analysis say anything
+about which algorithm is best for sorting small lists. For answers to
+these questions, we can turn to empirical testing.</p>
+<div class="online">
+<div id="tbl:empirical-sorting-python">
+<table>
+<caption>Table 4.1: Runtime in seconds for Python implementations, using
+CPython version 3.11</caption>
+<thead>
+<tr>
+<th style="text-align: left;">Sort</th>
+<th style="text-align: center;">1K</th>
+<th style="text-align: center;">10K</th>
+<th style="text-align: center;">100K</th>
+<th style="text-align: center;">1M</th>
+<th style="text-align: center;">10M</th>
+<th style="text-align: center;">100K sorted</th>
+<th style="text-align: center;">100K reversed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Insertion sort</td>
+<td style="text-align: center;">0.009</td>
+<td style="text-align: center;">0.88</td>
+<td style="text-align: center;">82</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">0.003</td>
+<td style="text-align: center;">175</td>
+</tr>
+<tr>
+<td style="text-align: left;">Bubble sort</td>
+<td style="text-align: center;">0.020</td>
+<td style="text-align: center;">2.08</td>
+<td style="text-align: center;">211</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">97</td>
+<td style="text-align: center;">280</td>
+</tr>
+<tr>
+<td style="text-align: left;">Selection sort</td>
+<td style="text-align: center;">0.006</td>
+<td style="text-align: center;">0.68</td>
+<td style="text-align: center;">68</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">66</td>
+<td style="text-align: center;">66</td>
+</tr>
+<tr>
+<td style="text-align: left;">Mergesort</td>
+<td style="text-align: center;">0.001</td>
+<td style="text-align: center;">0.009</td>
+<td style="text-align: center;">0.105</td>
+<td style="text-align: center;">1.26</td>
+<td style="text-align: center;">17.4</td>
+<td style="text-align: center;">0.084</td>
+<td style="text-align: center;">0.087</td>
+</tr>
+<tr>
+<td style="text-align: left;">Merge (cutoff 20)</td>
+<td style="text-align: center;">0.000</td>
+<td style="text-align: center;">0.006</td>
+<td style="text-align: center;">0.077</td>
+<td style="text-align: center;">1.00</td>
+<td style="text-align: center;">15.1</td>
+<td style="text-align: center;">0.048</td>
+<td style="text-align: center;">0.071</td>
+</tr>
+<tr>
+<td style="text-align: left;">Quicksort</td>
+<td style="text-align: center;">0.000</td>
+<td style="text-align: center;">0.006</td>
+<td style="text-align: center;">0.074</td>
+<td style="text-align: center;">0.95</td>
+<td style="text-align: center;">12.6</td>
+<td style="text-align: center;">0.045</td>
+<td style="text-align: center;">0.047</td>
+</tr>
+<tr>
+<td style="text-align: left;">Quick (cutoff 20)</td>
+<td style="text-align: center;">0.000</td>
+<td style="text-align: center;">0.005</td>
+<td style="text-align: center;">0.066</td>
+<td style="text-align: center;">0.87</td>
+<td style="text-align: center;">11.8</td>
+<td style="text-align: center;">0.030</td>
+<td style="text-align: center;">0.032</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="tbl:empirical-sorting-java">
+<table>
+<caption>Table 4.2: Runtime in seconds for Java implementations, using
+OpenJDK version 22.0 (note that the arrays are 4 times larger than for
+the Python tests)</caption>
+<thead>
+<tr>
+<th style="text-align: left;">Sort</th>
+<th style="text-align: center;">4K</th>
+<th style="text-align: center;">40K</th>
+<th style="text-align: center;">400K</th>
+<th style="text-align: center;">4M</th>
+<th style="text-align: center;">40M</th>
+<th style="text-align: center;">400K sorted</th>
+<th style="text-align: center;">400K reversed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Insertion sort</td>
+<td style="text-align: center;">0.015</td>
+<td style="text-align: center;">0.62</td>
+<td style="text-align: center;">69</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">0.01</td>
+<td style="text-align: center;">126</td>
+</tr>
+<tr>
+<td style="text-align: left;">Bubble sort</td>
+<td style="text-align: center;">0.018</td>
+<td style="text-align: center;">1.46</td>
+<td style="text-align: center;">312</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">35</td>
+<td style="text-align: center;">175</td>
+</tr>
+<tr>
+<td style="text-align: left;">Selection sort</td>
+<td style="text-align: center;">0.023</td>
+<td style="text-align: center;">0.96</td>
+<td style="text-align: center;">112</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">41</td>
+<td style="text-align: center;">79</td>
+</tr>
+<tr>
+<td style="text-align: left;">Mergesort</td>
+<td style="text-align: center;">0.001</td>
+<td style="text-align: center;">0.010</td>
+<td style="text-align: center;">0.14</td>
+<td style="text-align: center;">1.06</td>
+<td style="text-align: center;">13.2</td>
+<td style="text-align: center;">0.11</td>
+<td style="text-align: center;">0.12</td>
+</tr>
+<tr>
+<td style="text-align: left;">Merge (cutoff 20)</td>
+<td style="text-align: center;">0.001</td>
+<td style="text-align: center;">0.009</td>
+<td style="text-align: center;">0.12</td>
+<td style="text-align: center;">1.03</td>
+<td style="text-align: center;">12.3</td>
+<td style="text-align: center;">0.10</td>
+<td style="text-align: center;">0.10</td>
+</tr>
+<tr>
+<td style="text-align: left;">Quicksort</td>
+<td style="text-align: center;">0.001</td>
+<td style="text-align: center;">0.008</td>
+<td style="text-align: center;">0.06</td>
+<td style="text-align: center;">0.66</td>
+<td style="text-align: center;">8.2</td>
+<td style="text-align: center;">0.04</td>
+<td style="text-align: center;">0.03</td>
+</tr>
+<tr>
+<td style="text-align: left;">Quick (cutoff 20)</td>
+<td style="text-align: center;">0.001</td>
+<td style="text-align: center;">0.007</td>
+<td style="text-align: center;">0.06</td>
+<td style="text-align: center;">0.57</td>
+<td style="text-align: center;">8.0</td>
+<td style="text-align: center;">0.04</td>
+<td style="text-align: center;">0.04</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Tables <a
+href="section-4.6.html#tbl:empirical-sorting-python">4.1</a>, <a
+href="section-4.6.html#tbl:empirical-sorting-java">4.2</a> above show
+timing results for actual implementations of the sorting algorithms
+presented in this chapter. The algorithms compared include Insertion
+sort (<a href="section-3.6.html#sec:insertion-sort">Section 3.6</a>),
+Bubble sort (<a
+href="section-3.4.html#sec:bubble-sort">Section 3.4</a>), Selection sort
+(<a href="section-3.5.html#sec:selection-sort">Section 3.5</a>),
+Quicksort (<a href="section-4.4.html#sec:quicksort">Section 4.4</a>),
+and Mergesort (<a
+href="section-4.2.html#sec:mergesort">Section 4.2</a>).</p>
+<p>For Quicksort and Mergesort, two versions are compared: the basic
+implementation, and an optimised version that falls back to Insertion
+sort for sublists of length below 20.</p>
+<p>The various sorting algorithms are shown for random integer arrays of
+sizes being multiples of 10. The final two columns of each table show
+the performance for the algorithms on inputs of size 100,000 (400,000
+for the Java tests) where the numbers are in ascending (sorted) and
+descending (reverse sorted) order, respectively. These columns
+demonstrate best-case performance for some algorithms and worst-case
+performance for others. They also show that for some algorithms, the
+order of input has little effect.</p>
+<p>These figures show a number of interesting results. As expected, the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>
+sorts are quite poor performers for large arrays. Insertion sort and
+Selection sort outperforms Bubble sort in all cases. We also see that
+Insertion sort is the fastest algorithm of all if the input is already
+sorted. Quicksort with a cutoff to Insertion sort is clearly the best
+overall algorithm, but recall that this experiment was only run on
+random integer arrays. In general, optimising the various algorithms
+makes a noticeable improvement for larger array sizes.</p>
+</div>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-4.5.html" class="navbutton">&lt;&lt;</a>
+<a href="section-4.5.html" accesskey="p" rel="previous">Implementing Quicksort</a>
+</div>
+<div class="navlink">
+<a href="section-4.7.html" accesskey="n" rel="next">Review questions</a>
+<a href="section-4.7.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Graphs</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-12.13.html" class="navbutton">&lt;&lt;</a>
+<a href="section-12.13.html" accesskey="p" rel="previous">Review questions</a>
+</div>
+<div>
+<a href="section-13.1.html" accesskey="n" rel="next">Definitions and properties</a>
+<a href="section-13.1.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:graphs" class="level1" data-number="13">
+<h1 data-number="13"><span class="header-section-number">13</span>
+Graphs</h1>
+<p>Graphs provide the ultimate in data structure flexibility. A graph
+consists of a set of nodes, and a set of edges where an edge connects
+two nodes. Trees and lists can be viewed as special cases of graphs.</p>
+<p>Graphs are used to model both real-world systems and abstract
+problems, and are the data structure of choice in many applications.
+Here is a small sampling of the types of problems that graphs are
+routinely used for.</p>
+<ol type="1">
+<li>Modeling connectivity in computer and communications networks.</li>
+<li>Representing an abstract map as a set of locations with distances
+between locations. This can be used to compute shortest routes between
+locations such as in a GPS routefinder.</li>
+<li>Modeling flow capacities in transportation networks to find which
+links create the bottlenecks.</li>
+<li>Finding a path from a starting condition to a goal condition. This
+is a common way to model problems in artificial intelligence
+applications and computerised game players.</li>
+<li>Modeling computer algorithms, to show transitions from one program
+state to another.</li>
+<li>Finding an acceptable order for finishing subtasks in a complex
+activity, such as constructing large buildings.</li>
+<li>Modeling relationships such as family trees, business or military
+organisations, and scientific taxonomies.</li>
+</ol>
+<p>The next section covers some basic graph terminology. The rest of the
+chapter will describe fundamental representations for graphs, provide a
+reference implementation, and cover core graph algorithms including <a
+href="section-14.html#traversal" class="term"
+title="Any process for visiting all of the objects in a collection (such as a tree or graph) in some order.">traversal</a>,
+<a href="section-14.html#topological-sort" class="term"
+title="The process of laying out the vertices of a DAG in a linear order such that no vertex $A$ in the order is preceded by a vertex that can be reached by a (directed) path from $A$. Usually the (directed) edges in the graph define a prerequisite system, and the goal of the topological sort is to list the vertices in an order such that no prerequisites are violated.">topological
+sort</a>, <a href="section-14.html#shortest-path" class="term"
+title="Given a graph with distances or weights on the edges, the shortest path between two nodes is the path with least total distance or weight. Examples of the shortest paths problems are the single-source shortest paths problem and the all-pairs shortest paths problem.">shortest
+paths</a> algorithms, and algorithms to find the <a
+href="section-14.html#minimum-spanning-tree" class="term"
+title="Abbreviated as MST, or sometimes as MCST. Derived from a weighted graph, the MST is the subset of the graph&#39;s edges that maintains the connectivitiy of the graph while having lowest total cost (as defined by the sum of the weights of the edges in the MST). The result is referred to as a tree because it would never have a cycle (since an edge could be removed from the cycle and still preserve connectivity). Two algorithms to solve this problem are Prim&#39;s algorithm and Kruskal&#39;s algorithm.">minimum
+spanning tree</a>. Besides being useful and interesting in their own
+right, these algorithms illustrate the use of many other data structures
+presented throughout the course.</p>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-12.13.html" class="navbutton">&lt;&lt;</a>
+<a href="section-12.13.html" accesskey="p" rel="previous">Review questions</a>
+</div>
+<div class="navlink">
+<a href="section-13.1.html" accesskey="n" rel="next">Definitions and properties</a>
+<a href="section-13.1.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

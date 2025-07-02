@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Practical examples</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-1.2.html" class="navbutton">&lt;&lt;</a>
+<a href="section-1.2.html" accesskey="p" rel="previous">Selecting a data structure</a>
+</div>
+<div>
+<a href="section-1.4.html" accesskey="n" rel="next">Mathematical preliminaries</a>
+<a href="section-1.4.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:practical-examples" class="level2" data-number="1.3">
+<h2 data-number="1.3"><span class="header-section-number">1.3</span>
+Practical examples</h2>
+<p>Here we list some real-world examples where data structures and
+algorithms are crucial.</p>
+<section id="sec:search-engines" class="level4 unnumbered">
+<h4 class="unnumbered">Search engines</h4>
+<p>The World Wide Web (WWW), often referred to as the Internet, has
+completely changed how we access and use information. With just a few
+clicks, we can explore an enormous number of websites filled with text,
+videos, and images on a wide variety of topics. The amount of content
+available is staggering, with millions of pages and an endless stream of
+data at our fingertips. But this vast amount of information also
+presents challenges. It can be overwhelming to sort through all the
+sources available online. Finding the exact address of a website on your
+own is nearly impossible.</p>
+<p>This is where search engines come in. Search engines like Google,
+Bing, and DuckDuckGo help us find the information we need by organising
+the Internet and making it searchable. This process of organising
+information is called indexing.</p>
+<p>Most of us use search engines every day without thinking about the
+incredible job they do. The image below shows the results of a search
+for “binary search”:</p>
+<figure>
+<img src="resources/images/Google.png" style="width:75.0%"
+alt="Searching the Internet with Google" />
+<figcaption aria-hidden="true">Searching the Internet with
+Google</figcaption>
+</figure>
+<p>It is already impressive to be shown a list of relevant web pages,
+but it is even more astonishing that, in this case, Google found 331
+million results in just <em>0.23 seconds</em>.</p>
+<p>Now imagine you are designing a search engine that must index
+billions of web pages. Each page has a unique address, called a Uniform
+Resource Locator (URL), and is associated with a set of keywords. When a
+user submits a search query, the engine must quickly find all the
+relevant pages. A simple list is not an efficient way to store and
+retrieve this information. With billions of pages, it is not practical
+to check each one in order. Even if looking at a single page takes only
+a millisecond, going through them all would take years. To handle this
+challenge, we need smart ways to store and search through the data.</p>
+<p>Let’s consider a simpler version of this problem. Suppose we use an
+array that connects keywords to lists of related web pages. A basic
+approach would be to go through the array one element at a time until we
+find the keyword. This works, but it becomes very slow as the array
+grows larger. To improve efficiency, we can <em>sort</em> the array of
+keywords alphabetically. Then, instead of scanning from the beginning,
+we start in the middle of the array and compare the search word with the
+keyword at that position:</p>
+<ul>
+<li>If they match, we return the corresponding list of web pages.</li>
+<li>If the search word is smaller, we continue the search in the lower
+half of the array.</li>
+<li>If it’s larger, we search in the upper half.</li>
+</ul>
+<p>Each step cuts the number of possibilities in half. So, how many
+times can we divide the array in half before we narrow it down to one
+element? This is a logarithmic process, meaning we divide the search
+space in half again and again. With an array of one billion keywords, we
+would need only about 39 steps to find the right one.</p>
+<p>This model is simplified. In reality, search engines do much more
+than just match keywords. They also rank pages by relevance and take
+many details into account, such as whether letters are uppercase or
+lowercase, and whether the user is combining terms with “and” or
+“or”.</p>
+</section>
+<section id="sec:databases" class="level4 unnumbered">
+<h4 class="unnumbered">Databases</h4>
+<p>A company is developing a database system containing information
+about cities and towns in Europe. There are many thousands of cities and
+towns, and the database program should allow users to find information
+about a particular place by name (another example of an exact-match
+query). Users should also be able to find all places that match a
+particular value or range of values for attributes such as location or
+population size. This is known as a <a
+href="section-14.html#range-query" class="term"
+title="Records are returned if their relevant key value falls within a specified range.">range
+query</a>.</p>
+<p>A reasonable database system must answer queries quickly enough to
+satisfy the patience of a typical user. For an exact-match query, a
+fraction of a second is satisfactory. If the database is meant to
+support range queries that can return many cities that match the query
+specification, the user might tolerate the entire operation to take a
+little longer, perhaps a couple of seconds. To meet this requirement, it
+will be necessary to support operations that process range queries
+efficiently by processing all cities in the range as a batch, rather
+than as a series of operations on individual cities.</p>
+<p>The hash table suggested in the previous example is inappropriate for
+implementing our city database, because it cannot perform efficient
+range queries. The <a href="section-14.html#b-tree" class="term"
+title="A method for indexing a large collection of records. A B-tree is a balanced tree that typically has high branching factor (commonly as much as 100 children per internal node), causing the tree to be very shallow. When stored on disk, the node size is selected to be same as the desired unit of I/O (hence some multiple of the disk sector size). This makes it easy to gain access to the record associated with a given search key stored in the tree with few disk accesses. The most commonly implemented variant of the B-tree is the B+ tree.">B-tree</a>
+supports large databases, insertion and deletion of data records, and
+range queries. However, a simple <a href="section-14.html#linear-index"
+class="term"
+title="A form of indexing that stores key-value pairs in a sorted array. Typically this is used for an index to a large collection of records stored on disk, where the linear index itself might be on disk or in main memory. It allows for efficient search (including for range queries), but it is not good for inserting and deleting entries in the array. Therefore, it is an ideal indexing structure for when the system needs to do range queries but the collection of records never changes once the linear index has been created.">linear
+index</a> would be more appropriate if the database is created once, and
+then never changed, such as an atlas accessed from a website.</p>
+</section>
+<section id="sec:banks" class="level4 unnumbered online">
+<h4 class="unnumbered">Banks</h4>
+<p>A bank must support many types of transactions with its customers,
+but we will examine a simple model where customers wish to open
+accounts, close accounts, and add money or withdraw money from accounts.
+We can consider this problem at two distinct levels: (1) the
+requirements for the physical infrastructure and workflow process that
+the bank uses in its interactions with its customers, and (2) the
+requirements for the database system that manages the accounts.</p>
+<p>The typical customer opens and closes accounts far less often than
+accessing the account. Customers are willing to spend many minutes
+during the process of opening or closing the account, but are typically
+not willing to wait more than a brief time for individual account
+transactions such as a deposit or withdrawal. These observations can be
+considered as informal specifications for the time constraints on the
+problem.</p>
+<p>It is common practice for banks to provide two tiers of service.
+Human tellers or automated teller machines (ATMs) support customer
+access to account balances and updates such as deposits and withdrawals.
+Special service representatives are typically provided (during
+restricted hours) to handle opening and closing accounts. Teller and ATM
+transactions are expected to take little time. Opening or closing an
+account can take much longer (perhaps up to an hour from the customer’s
+perspective).</p>
+<p>From a database perspective, we see that ATM transactions do not
+modify the database significantly. For simplicity, assume that if money
+is added or removed, this transaction simply changes the value stored in
+an account record. Adding a new account to the database is allowed to
+take several minutes. Deleting an account need have no time constraint,
+because from the customer’s point of view all that matters is that all
+the money be returned (equivalent to a withdrawal). From the bank’s
+point of view, the account record might be removed from the database
+system after business hours, or at the end of the monthly account
+cycle.</p>
+<p>When considering the choice of data structure to use in the database
+system that manages customer accounts, we see that a data structure that
+has little concern for the cost of deletion, but is highly efficient for
+search and moderately efficient for insertion, should meet the resource
+constraints imposed by this problem. Records are accessible by unique
+account number (sometimes called an <a
+href="section-14.html#exact-match-query" class="term"
+title="Records are accessed by unique identifier.">exact-match
+query</a>). One data structure that meets these requirements is the <a
+href="section-14.html#hashing" class="term"
+title="A search method that uses a hash function to convert a search key value into a position within a hash table. In a properly implemented hash system, that position in the table will have high probability of containing the record that matches the key value. Sometimes, the hash function will return a position that does not store the desired key, due to a process called collision. In that case, the desired record is found through a process known as collision resolution.">hash
+table</a>. Hash tables allow for extremely fast exact-match search. A
+record can be modified quickly when the modification does not affect its
+space requirements. Hash tables also support efficient insertion of new
+records. While deletions can also be supported efficiently, too many
+deletions lead to some degradation in performance for the remaining
+operations. However, the hash table can be reorganised periodically to
+restore the system to peak efficiency. Such reorganisation can occur
+offline so as not to affect ATM transactions.</p>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-1.2.html" class="navbutton">&lt;&lt;</a>
+<a href="section-1.2.html" accesskey="p" rel="previous">Selecting a data structure</a>
+</div>
+<div class="navlink">
+<a href="section-1.4.html" accesskey="n" rel="next">Mathematical preliminaries</a>
+<a href="section-1.4.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

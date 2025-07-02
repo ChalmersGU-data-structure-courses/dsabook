@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Iteration, recursion, and information flow</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+<link href="../interactive/Binary/WriteTrav.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Binary/BSTCheckCON.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-8.4.html" class="navbutton">&lt;&lt;</a>
+<a href="section-8.4.html" accesskey="p" rel="previous">Traversing a binary tree</a>
+</div>
+<div>
+<a href="section-8.6.html" accesskey="n" rel="next">General trees</a>
+<a href="section-8.6.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:iteration-recursion-and-information-flow"
+class="level2" data-number="8.5">
+<h2 data-number="8.5"><span class="header-section-number">8.5</span>
+Iteration, recursion, and information flow</h2>
+<p>Handling information flow in a recursive function can be a challenge.
+In any given function, we might need to be concerned with either or both
+of:</p>
+<ol type="1">
+<li>Passing down the correct information needed by the function to do
+its work,</li>
+<li>Returning (passing up) information to the recursive function’s
+caller.</li>
+</ol>
+<p>Any given problems might need to do either or both. This section
+contains some examples and exercises.</p>
+<div class="online">
+<section id="sec:local-traversal" class="level3" data-number="8.5.1">
+<h3 data-number="8.5.1"><span class="header-section-number">8.5.1</span>
+Local traversal</h3>
+<p>Local traversal involves going to each node in the tree to do some
+operation. Such functions need no information from the parent (other
+than a pointer to the current node), and pass no information back.
+Examples include preorder traversal and incrementing the value of every
+node by one.</p>
+</section>
+<section id="sec:passing-down-information" class="level3"
+data-number="8.5.2">
+<h3 data-number="8.5.2"><span class="header-section-number">8.5.2</span>
+Passing down information</h3>
+<p>Slightly more complicated is the situation where every node needs the
+same piece of information to be passed to it. An example would be
+incrementing the value for all nodes by some amount. In this case, the
+value parameter is simply passed on unchanged in all recursive
+calls.</p>
+<p>Many functions need information that changes from node to node. A
+simple example is a function to set the value for each node of the tree
+to be its depth. In this case, the depth is passed as a parameter to the
+function, and each recursive call must adjust that value (by adding
+one).</p>
+</section>
+<section id="sec:collect-and-return" class="level3" data-number="8.5.3">
+<h3 data-number="8.5.3"><span class="header-section-number">8.5.3</span>
+Collect-and-return</h3>
+<p>Collect-and-return requires that we communicate information back up
+the tree to the caller. Simple examples are to count the number of nodes
+in a tree, or to sum the values of all the nodes.</p>
+<section id="sec:example-number-of-nodes-in-a-tree"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Number of nodes in a tree</h4>
+<p>Consider the problem of counting (and returning) the number of nodes
+in a binary tree. The key insight is that the total count for any
+(non-empty) subtree is one for the root plus the counts for the left and
+right subtrees. Where do left and right subtree counts come from? Calls
+to function <code>count</code> on the subtrees will compute this for us.
+Thus, we can implement <code>count</code> as follows.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> count(node):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> node <span class="kw">is</span> <span class="va">null</span>:</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">0</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">+</span> count(node.left) <span class="op">+</span> count(node.right)</span></code></pre></div>
+<p>The following solution is correct but inefficient as it does
+redundant checks on the left and the right child of each visited
+node.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> inefficient_count(node):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> node <span class="kw">is</span> <span class="va">null</span>:</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">0</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    count <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> node.left <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span>:</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        count <span class="op">=</span> count <span class="op">+</span> inefficient_count(node.left)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> node.right <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span>:</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        count <span class="op">=</span> count <span class="op">+</span> inefficient_count(node.right)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> node.left <span class="kw">is</span> <span class="va">null</span> <span class="kw">and</span> node.right <span class="kw">is</span> <span class="va">null</span>:</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span> <span class="op">+</span> count</span></code></pre></div>
+</section>
+<p>When you write a recursive function that returns a value, such as
+counting the number of nodes in the subtree, you have to make sure that
+your function actually returns a value. A common mistake is to make a
+recursive call and not capture the returned value. Another common
+mistake is to not return a value.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Common mistakes when implementing recursive functions.</p>
+</summary>
+<p>
+<div id="BinaryTreeMistakesCON" class="ssAV" data-short-name="BinaryTreeMistakesCON" data-long-name="Binary Tree Common Mistakes Slideshow" alt="Binary Tree Common Mistakes Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+</section>
+<section id="sec:combining-information-flows" class="level3"
+data-number="8.5.4">
+<h3 data-number="8.5.4"><span class="header-section-number">8.5.4</span>
+Combining information flows</h3>
+<p>Many functions require both that information be passed in, and that
+information be passed back. Let’s start with a relatively simple case.
+If we want to check if some node in the tree has a particular value,
+that value has to be passed down, and the count has to be passed back
+up. The downward flow is simple, as the value being checked for never
+changes. The information passed up has the simple collect-and-return
+style: Return True if and only if one of the children returns True.</p>
+</section>
+<section id="sec:combination-problems" class="level3"
+data-number="8.5.5">
+<h3 data-number="8.5.5"><span class="header-section-number">8.5.5</span>
+Combination problems</h3>
+<p>Slightly more complicated problems combine what we have seen so far.
+Information passing down the tree changes from node to node. Data passed
+back up the tree uses the collect-and-return paradigm.</p>
+</section>
+<section id="sec:a-hard-information-flow-problem" class="level3"
+data-number="8.5.6">
+<h3 data-number="8.5.6"><span class="header-section-number">8.5.6</span>
+A hard information flow problem</h3>
+<p>Sometimes, passing the right information up and down the tree to
+control a recursive function gets complicated. The information flow
+itself is simple enough, but deciding what to pass might be tricky.</p>
+<p>A more difficult example is illustrated by the following problem.
+Given an arbitrary binary tree we wish to determine if, for every node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>,
+are all nodes in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>’s
+left subtree less than the value of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>,
+and are all nodes in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>’s
+right subtree greater than the value of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>?
+(This happens to be the definition for a binary search tree.)
+Unfortunately, to make this decision we need to know some context that
+is not available just by looking at the node’s parent or children.</p>
+<section id="sec:example-binary-search-tree"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Binary search tree</h4>
+<p>To be a binary search tree, the left child of the node with value 40
+must have a value between 20 and 40.</p>
+<p>
+<div id="BSTCheckCON" class="ssAV" data-short-name="BSTCheckCON" data-long-name="Binary/BSTCheckCON" alt="Binary/BSTCheckCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</section>
+<p>As shown in the figure above it is not enough to verify that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>’s
+left child has a value less than that of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>,
+and that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>’s
+right child has a greater value. Nor is it enough to verify that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+has a value consistent with that of its parent. In fact, we need to know
+information about what range of values is legal for a given node. That
+information might come from any of the node’s ancestors. Thus, relevant
+range information must be passed down the tree. We can implement this
+function as follows.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> checkBST(node, low, high):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> node <span class="kw">is</span> <span class="va">null</span>:</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">true</span>  <span class="co">// Base case: empty subtree</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    rootval <span class="op">=</span> node.elem</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> (low <span class="op">&lt;=</span> rootval <span class="op">&lt;=</span> high):</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">false</span>  <span class="co">// Value out of range</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (checkBST(node.left, low, rootval) <span class="kw">and</span>  <span class="co">// Check left subtree</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>            checkBST(node.right, rootval, high))   <span class="co">// Check right subtree</span></span></code></pre></div>
+<p>How should we call this function on a given tree? Or in other words,
+what should be the initial <code>low</code> and <code>high</code>
+values? If we don’t have any other constraints we can let the initial
+range be as large as possible, so we call the function like this:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>checkBST(tree, <span class="op">-</span>∞, ∞)</span></code></pre></div>
+</section>
+</div>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-8.4.html" class="navbutton">&lt;&lt;</a>
+<a href="section-8.4.html" accesskey="p" rel="previous">Traversing a binary tree</a>
+</div>
+<div class="navlink">
+<a href="section-8.6.html" accesskey="n" rel="next">General trees</a>
+<a href="section-8.6.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+<script type="text/javascript" src="../interactive/Binary/BinaryTreeMistakesCON.js"></script>
+<script type="text/javascript" src="../interactive/Binary/BSTCheckCON.js"></script>
+</body>
+</html>
+

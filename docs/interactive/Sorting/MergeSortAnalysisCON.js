@@ -66,14 +66,13 @@ $(document).ready(function() {
 
   // Slide 1
   av.umsg(interpret["Slide 1"]);
-  av.displayInit();
 
   // Slide 2
   for (i = 0; i < 8; i++) {
     arr_values[i] = parseInt(Math.random() * 20, 10);
   }
   arr = av.ds.array(arr_values, {left: 60, top: 0, indexed: false});
-  av.step();
+  av.displayInit();
 
   // Slide 3
   av.umsg(interpret["Slide 3"]);

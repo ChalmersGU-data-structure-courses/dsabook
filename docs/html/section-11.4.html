@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Splay trees</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-11.3.html" class="navbutton">&lt;&lt;</a>
+<a href="section-11.3.html" accesskey="p" rel="previous">AVL trees</a>
+</div>
+<div>
+<a href="section-11.5.html" accesskey="n" rel="next">Disjoint sets and the Union/Find algorithm</a>
+<a href="section-11.5.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:splay-trees" class="level2" data-number="11.4">
+<h2 data-number="11.4"><span class="header-section-number">11.4</span>
+Splay trees</h2>
+<p>Like the AVL tree, the splay tree is not actually a distinct data
+structure, but rather reimplements the BST insert, delete, and search
+methods to improve the performance of a BST. The goal of these revised
+methods is to provide guarantees on the time required by a series of
+operations, thereby avoiding the worst-case linear time behaviour of
+standard BST operations. No single operation in the splay tree is
+guaranteed to be efficient. Instead, the access rules of the splay tree
+guarantee that a series of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
+operations will take
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>m</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(m \log n)</annotation></semantics></math>
+time for a tree of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+nodes whenever
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>≥</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">m \geq n</annotation></semantics></math>.
+Thus, a single insert or search operation could take
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>
+time. However,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
+such operations are guaranteed to require a total of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>m</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(m \log n)</annotation></semantics></math>
+time, for an average cost of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>
+per access operation. This is a desirable performance guarantee for any
+search-tree structure.</p>
+<p>Unlike the AVL tree, the splay tree is not guaranteed to be height
+balanced. What is guaranteed is that the total cost of the entire series
+of accesses will be cheap. Ultimately, it is the cost of the series of
+operations that matters, not whether the tree is balanced. Maintaining
+balance is really done only for the sake of reaching this time
+efficiency goal.</p>
+<p>The splay tree access functions operate in a manner reminiscent of
+the <a href="section-14.html#move-to-front" class="term"
+title="A heuristic used to maintain a self-organising list. Under this heuristic, whenever a record is accessed it is moved to the front of the list. Analogous to the least recently used heuristic for maintaining a buffer pool.">move-to-front</a>
+rule for <a href="section-14.html#self-organising-list" class="term"
+title="A list that, over a series of search operations, will make use of some heuristic to re-order its elements in an effort to improve search times. Generally speaking, search is done sequentially from the beginning, but the self-organising heuristic will attempt to put the records that are most likely to be searched for at or near the front of the list. While typically not as efficient as binary search on a sorted list, self-organising lists do not require that the list be sorted (and so do not pay the cost of doing the sorting operation).">self-organising
+lists</a> (see <a
+href="section-7.2.html#sec:amortised-analysis">Section 7.2</a>), and of
+the path compression technique for managing a series of <a
+href="section-14.html#union-find" class="term"
+title="A process for mainining a collection of disjoint sets. The FIND operation determines which disjoint set a given object resides in, and the UNION operation combines two disjoint sets when it is determined that they are members of the same equivalence class under some equivalence relation.">Union/Find</a>
+operations (see <a
+href="section-11.5.html#sec:disjoint-sets">Section 11.5</a>). These
+access functions tend to make the tree more balanced, but an individual
+access will not necessarily result in a more balanced tree.</p>
+<p>Whenever a node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
+is accessed (e.g., when
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
+is inserted, deleted, or is the goal of a search), the splay tree
+performs a process called <a href="section-14.html#splaying"
+class="term"
+title="The act of performing an rebalancing operation on a splay tree.">splaying</a>.
+Splaying moves
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
+to the root of the BST. When
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
+is being deleted, splaying moves the parent of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
+to the root. As in the AVL tree, a splay of node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
+consists of a series of <a href="section-14.html#rotation" class="term"
+title="In the AVL tree and splay tree, a rotation is a local operation performed on a node, its children, and its grandchildren that can result in reordering their relationship. The goal of performing a rotation is to make the tree more balanced.">rotations</a>.
+A rotation moves
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
+higher in the tree by adjusting its position with respect to its parent
+and grandparent. A side effect of the rotations is a tendency to balance
+the tree. There are three types of rotation.</p>
+<p>Note that even if you only search for a value, <em>the tree structure
+is changed</em> because the found node will be splayed to the root. This
+is a big difference between splay trees and the search trees we have
+looked at previously.</p>
+<div class="online">
+<section id="sec:splaying" class="level3" data-number="11.4.1">
+<h3 data-number="11.4.1"><span
+class="header-section-number">11.4.1</span> Splaying</h3>
+<p>A <a href="section-14.html#single-rotation" class="term"
+title="A type of rebalancing operation used by the splay tree and AVL tree.">single
+rotation</a> is performed only if
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
+is a child of the root node. The single rotation is illustrated by <a
+href="#fig:SingProm">Figure 11.7</a>. It basically switches
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
+with its parent in a way that retains the BST property. While this
+figure is slightly different from <a
+href="section-11.3.html#fig:AVLsingle">Figure 11.5</a>, in fact the splay tree single
+rotation is identical to the AVL tree single rotation.</p>
+<figure id="fig:SingProm">
+<img src="images/SingRot.png" style="width:60.0%"
+alt="Figure 11.7: Splay tree single rotation. This rotation takes place only when the node being splayed is a child of the root. Here, node S is promoted to the root, rotating with node P. Because the value of S is less than the value of P, P must become S ’s right child. The positions of subtrees A, B, and C are altered as appropriate to maintain the BST property, but the contents of these subtrees remains unchanged. (a) The original tree with P as the parent. (b) The tree after a rotation takes place. Performing a single rotation a second time will return the tree to its original shape. Equivalently, if (b) is the initial configuration of the tree (i.e., S is at the root and P is its right child), then (a) shows the result of a single rotation to splay P to the root." />
+<figcaption aria-hidden="true">Figure 11.7: Splay tree single rotation.
+This rotation takes place only when the node being splayed is a child of
+the root. Here, node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
+is promoted to the root, rotating with node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>.
+Because the value of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
+is less than the value of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>
+must become
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
+’s right child. The positions of subtrees
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>
+are altered as appropriate to maintain the BST property, but the
+contents of these subtrees remains unchanged. (a) The original tree with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>
+as the parent. (b) The tree after a rotation takes place. Performing a
+single rotation a second time will return the tree to its original
+shape. Equivalently, if (b) is the initial configuration of the tree
+(i.e.,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
+is at the root and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>
+is its right child), then (a) shows the result of a single rotation to
+splay
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>
+to the root.</figcaption>
+</figure>
+<p>Unlike the AVL tree, the splay tree requires two types of double
+rotation. Double rotations involve
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>,
+its parent (call it
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>),
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
+’s grandparent (call it
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>).
+The effect of a double rotation is to move
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
+up two levels in the tree.</p>
+<dl>
+<dt>ZigZag</dt>
+<dd>
+<p>The first double rotation is called a <em>zigzag rotation</em>. It
+takes place when either of the following two conditions are met:</p>
+<ol type="1">
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
+is the left child of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>
+is the right child of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>.</li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
+is the right child of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>
+is the left child of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>.</li>
+</ol>
+<p>In other words, a zigzag rotation is used when
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
+form a zigzag. The zigzag rotation is illustrated by <a
+href="#fig:ZigZag">Figure 11.8</a>.</p>
+</dd>
+<dt>ZigZig</dt>
+<dd>
+<p>The other double rotation is known as a <a
+href="section-14.html#zigzig" class="term"
+title="A type of rebalancing operation used by splay trees.">zigzig</a>
+rotation. It takes place when either of the following two conditions are
+met:</p>
+<ol type="1">
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
+is the left child of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>,
+which is in turn the left child of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>.</li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
+is the right child of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>,
+which is in turn the right child of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>.</li>
+</ol>
+<p>Thus, a zigzig rotation takes place in those situations where a
+zigzag rotation is not appropriate. The zigzig rotation is illustrated
+by <a href="#fig:ZigZig">Figure 11.9</a>.</p>
+</dd>
+</dl>
+<figure id="fig:ZigZag">
+<img src="images/ZigZag.png" style="width:60.0%"
+alt="Figure 11.8: Splay tree zigzag rotation. (a) The original tree with S, P, and G in zigzag formation. (b) The tree after the rotation takes place. The positions of subtrees A, B, C, and D are altered as appropriate to maintain the BST property." />
+<figcaption aria-hidden="true">Figure 11.8: Splay tree zigzag rotation.
+(a) The original tree with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>
+in zigzag formation. (b) The tree after the rotation takes place. The
+positions of subtrees
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>
+are altered as appropriate to maintain the BST property.</figcaption>
+</figure>
+<figure id="fig:ZigZig">
+<img src="images/ZigZig.png" style="width:60.0%"
+alt="Figure 11.9: Splay tree zigzig rotation. (a) The original tree with S, P, and G in zigzig formation. (b) The tree after the rotation takes place. The positions of subtrees A, B, C, and D are altered as appropriate to maintain the BST property." />
+<figcaption aria-hidden="true">Figure 11.9: Splay tree zigzig rotation.
+(a) The original tree with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>
+in zigzig formation. (b) The tree after the rotation takes place. The
+positions of subtrees
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>
+are altered as appropriate to maintain the BST property.</figcaption>
+</figure>
+<p>Note that zigzag rotations tend to make the tree more balanced,
+because they bring subtrees
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>
+up one level while moving subtree
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>
+down one level. The result is often a reduction of the tree’s height by
+one. While <a href="#fig:ZigZag">Figure 11.8</a> appears somewhat
+different from <a href="section-11.3.html#fig:AVLdouble">Figure 11.6</a>, in fact the
+zigzag rotation is identical to the AVL tree double rotation. Zigzig
+promotions and single rotations do not typically reduce the height of
+the tree; they merely bring the newly accessed record toward the
+root.</p>
+</section>
+<section id="sec:searching-in-a-splay-tree" class="level3"
+data-number="11.4.2">
+<h3 data-number="11.4.2"><span
+class="header-section-number">11.4.2</span> Searching in a splay
+tree</h3>
+<p>The splay tree’s search operation is identical to searching in a BST.
+However, once the value has been found, it is splayed to the root. This
+means that when you search for a value <em>the tree structure is
+changed</em>. This is a big difference between splay trees and the
+search trees we have looked at previously.</p>
+<p>Splaying a node involves a series of double rotations until the node
+reaches either the root or the child of the root. Then, if necessary, a
+single rotation makes it the root. This process tends to re-balance the
+tree. Regardless of balance, splaying will make frequently accessed
+nodes stay near the top of the tree, resulting in reduced access cost.
+Proof that the splay tree meets the guarantee of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>m</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(m \log n)</annotation></semantics></math>
+is beyond the scope of our study.</p>
+<section id="sec:example-searching-in-a-splay-tree"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Searching in a splay tree</h4>
+<p>Consider a search for value 89 in the splay tree of <a
+href="#fig:SplayEx">Figure 11.10</a> (a). The splay tree’s search
+operation is identical to searching in a BST. However, once the value
+has been found, it is splayed to the root. Three rotations are required
+in this example. The first is a zigzig rotation, whose result is shown
+in figure (b). The second is a zigzag rotation, whose result is shown in
+figure (c). The final step is a single rotation resulting in the tree of
+figure (d). Notice that the splaying process has made the tree
+shallower.</p>
+</section>
+<figure id="fig:SplayEx">
+<img src="images/SplayEx.png" style="width:60.0%"
+alt="Figure 11.10: Example of splaying after performing a search in a splay tree. After finding the node with key value 89, that node is splayed to the root by performing three rotations. (a) The original splay tree. (b) The result of performing a zigzig rotation on the node with key value 89 in the tree of (a). (c) The result of performing a zigzag rotation on the node with key value 89 in the tree of (b). (d) The result of performing a single rotation on the node with key value 89 in the tree of (c). If the search had been for 91, the search would have been unsuccessful with the node storing key value 89 being that last one visited. In that case, the same splay operations would take place." />
+<figcaption aria-hidden="true">Figure 11.10: Example of splaying after
+performing a search in a splay tree. After finding the node with key
+value 89, that node is splayed to the root by performing three
+rotations. (a) The original splay tree. (b) The result of performing a
+zigzig rotation on the node with key value 89 in the tree of (a). (c)
+The result of performing a zigzag rotation on the node with key value 89
+in the tree of (b). (d) The result of performing a single rotation on
+the node with key value 89 in the tree of (c). If the search had been
+for 91, the search would have been unsuccessful with the node storing
+key value 89 being that last one visited. In that case, the same splay
+operations would take place.</figcaption>
+</figure>
+</section>
+</div>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-11.3.html" class="navbutton">&lt;&lt;</a>
+<a href="section-11.3.html" accesskey="p" rel="previous">AVL trees</a>
+</div>
+<div class="navlink">
+<a href="section-11.5.html" accesskey="n" rel="next">Disjoint sets and the Union/Find algorithm</a>
+<a href="section-11.5.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

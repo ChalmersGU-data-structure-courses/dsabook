@@ -1,5 +1,5 @@
-#HeapSortAnalysisCON {
-  height: 400px;
+#HeapSortAnalysisCON .jsavoutput.jsavline {
+  height: 2em;
 }
 #HeapSortAnalysisCON .jsavnode {
   line-height: 20px !important;

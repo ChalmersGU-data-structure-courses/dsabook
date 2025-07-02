@@ -280,6 +280,20 @@ p.topic-title {
     margin-top: 10px;
 }
 
+/* -- examples ---------------------------------------------------------------- */
+
+div.example {
+    border: 1px solid #ccc;
+    padding: 7px 7px 0 7px;
+    margin: 10px 0 10px 0;
+}
+
+p.example-title {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
 /* -- admonitions ----------------------------------------------------------- */
 
 div.admonition {

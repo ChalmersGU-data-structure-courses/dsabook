@@ -33,7 +33,7 @@ $(document).ready(function() {
   arrRear.addClass([0], "processing");
   arr.addClass([6], "processing");
   var arrSize = av.ds.array([4], {indexed: false, left: 200, top: topMargin + 70});
-  av.label("listSize", {left: 147, top: topMargin + 74});
+  av.label("size", {left: 168, top: topMargin + 74});
 
   // Slide 1
   av.umsg(interpret["sc1"]);

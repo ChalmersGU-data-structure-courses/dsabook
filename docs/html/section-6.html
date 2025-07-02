@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Stacks, queues, and lists</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-5.5.html" class="navbutton">&lt;&lt;</a>
+<a href="section-5.5.html" accesskey="p" rel="previous">Review questions</a>
+</div>
+<div>
+<a href="section-6.1.html" accesskey="n" rel="next">Collections</a>
+<a href="section-6.1.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:stacks-queues-and-lists" class="level1"
+data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Stacks,
+queues, and lists</h1>
+<p>If your program needs to store a few things – numbers, payroll
+records, or job descriptions for example – the simplest and most
+effective approach might be to put them in a list. Only when you have to
+organise and search through a large number of things do more
+sophisticated data structures like <a href="section-14.html#search-tree"
+class="term"
+title="A tree data structure that makes search by key value more efficient. A type of container, it is common to implement an index using a search tree. A good search tree implementation will guarentee that insertion, deletion, and search operations are all $O(\log n)$.">search
+trees</a> become necessary. Many applications don’t require any form of
+search, and they do not require that an ordering be placed on the
+objects being stored. Some applications require that actions be
+performed in a strict chronological order, processing objects in the
+order that they arrived, or perhaps processing objects in the reverse of
+the order that they arrived. For all these situations, a simple list
+structure is appropriate.</p>
+<p>This chapter describes two different representations lists-like
+structures, the <a href="section-14.html#linked-list" class="term"
+title="An implementation for the list ADT that uses dynamic allocation of link nodes to store the list elements. Common variants are the singly linked list, doubly linked list and circular list. The overhead required is the pointers in each link node.">linked
+list</a> and the <a href="section-14.html#array-based-list" class="term"
+title="An implementation for the list ADT that uses an array to store the list elements. Typical implementations fix the array size at creation of the list, and the overhead is the number of array positions that are presently unused.">array-based
+list</a>. We also show how these representations can be used to
+implement important list-like structures such as the <a
+href="section-14.html#stack" class="term"
+title="A list-like structure in which elements may be inserted or removed from only one end.">stack</a>
+and the <a href="section-14.html#queue" class="term"
+title="A list-like structure in which elements are inserted only at one end, and removed only from the other one end.">queue</a>.
+Along with presenting these fundamental data structures, the other goals
+of the chapter are to:</p>
+<ol type="1">
+<li>Give examples that show the separation of a logical representation
+in the form of an ADT from a physical implementation as a data
+structure.</li>
+<li>Illustrate the use of asymptotic analysis in the context of simple
+operations that you might already be familiar with. In this way you can
+begin to see how asymptotic analysis works, without the complications
+that arise when analysing more sophisticated algorithms and data
+structures.</li>
+</ol>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-5.5.html" class="navbutton">&lt;&lt;</a>
+<a href="section-5.5.html" accesskey="p" rel="previous">Review questions</a>
+</div>
+<div class="navlink">
+<a href="section-6.1.html" accesskey="n" rel="next">Collections</a>
+<a href="section-6.1.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

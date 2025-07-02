@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Code tuning</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-2.8.html" class="navbutton">&lt;&lt;</a>
+<a href="section-2.8.html" accesskey="p" rel="previous">Case study: Analysing binary search</a>
+</div>
+<div>
+<a href="section-2.10.html" accesskey="n" rel="next">Empirical analysis</a>
+<a href="section-2.10.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:code-tuning" class="level2" data-number="2.9">
+<h2 data-number="2.9"><span class="header-section-number">2.9</span>
+Code tuning</h2>
+<div class="html">
+<p>In practice, there is not such a big difference in running time
+between an algorithm with growth rate
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>
+and another with growth rate
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>.
+There is, however, an enormous difference in running time between
+algorithms with growth rates of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>.
+As you shall see during the course of your study of common data
+structures and algorithms, there are many problems whose obvious
+solution requires
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>
+time, but that also have a solution requiring
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>
+time. Examples include sorting and searching, two of the most important
+computer problems.</p>
+<p>While not nearly so important as changing an algorithm to reduce its
+growth rate, “code tuning” can also lead to dramatic improvements in
+running time. Code tuning is the art of hand-optimising a program to run
+faster or require less storage. For many programs, code tuning can
+reduce running time or cut the storage requirements by a factor of two
+or more. Even speedups by a factor of five to ten are not uncommon.
+Occasionally, you can get an even bigger speedup by converting from a
+symbolic representation of the data to a numeric coding scheme on which
+you can do direct computation.</p>
+<p>Note that code tuning does not change the complexity of an algorithm,
+because it only affects the multiplicative factor. So we cannot use
+complexity analysis to understand the improvements by code tuning.
+Instead, the most important tuning tool is <em>empirical
+analysis</em>.</p>
+<p>Here are some suggestions for ways to speed up your programs by code
+tuning. The most important thing to realise is that most statements in a
+program do not have much effect on the running time of that program.
+There are normally just a few key subroutines, possibly even key lines
+of code within the key subroutines, that account for most of the running
+time. There is little point to cutting in half the running time of a
+subroutine that accounts for only 1% of the total running time. Focus
+your attention on those parts of the program that have the most
+impact.</p>
+<p>When tuning code, it is important to gather good timing statistics.
+Many compilers and operating systems include profilers and other special
+tools to help gather information on both time and space use. These are
+invaluable when trying to make a program more efficient, because they
+can tell you where to invest your effort.</p>
+<p>A lot of code tuning is based on the principle of avoiding work
+rather than speeding up work. A common situation occurs when we can test
+for a condition that lets us skip some work. However, such a test is
+never completely free. Care must be taken that the cost of the test does
+not exceed the amount of work saved. While one test might be cheaper
+than the work potentially saved, the test must always be made and the
+work can be avoided only some fraction of the time.</p>
+<section id="sec:example-computer-graphics"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Computer graphics</h4>
+<p>A common operation in computer graphics applications is to find which
+among a set of complex objects contains a given point in space. Many
+useful data structures and algorithms have been developed to deal with
+variations of this problem. Most such implementations involve the
+following tuning step. Directly testing whether a given complex object
+contains the point in question is relatively expensive. Instead, we can
+screen for whether the point is contained within a <a
+href="section-14.html#bounding-box" class="term"
+title="A box (usually aligned to the coordinate axes of the reference system) that contains a (potentially complex) object. In graphics and computational geometry, complex objects might be associated with a bounding box for use by algorithms that search for objects in a particular location. The idea is that if the bounding box is not within the area of interest, then neither is the object. Checking the bounding box is cheaper than checking the object, but it does require some time. So if enough objects are not outside the area of interest, this approach will not save time. But if most objects are outside of the area of interest, then checking bounding boxes first can save a lot of time.">bounding
+box</a> for the object. The bounding box is simply the smallest
+rectangle (usually defined to have sides perpendicular to the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math>
+axes) that contains the object. If the point is not in the bounding box,
+then it cannot be in the object. If the point is in the bounding box,
+only then would we conduct the full comparison of the object versus the
+point. Note that if the point is outside the bounding box, we saved time
+because the bounding box test is cheaper than the comparison of the full
+object versus the point. But if the point is inside the bounding box,
+then that test is redundant because we still have to compare the point
+against the object. Typically the amount of work avoided by making this
+test is greater than the cost of making the test on every object.</p>
+</section>
+<p>Be careful not to use tricks that make the program unreadable. Most
+code tuning is simply cleaning up a carelessly written program, not
+taking a clear program and adding tricks. In particular, you should
+develop an appreciation for the capabilities of modern compilers to make
+extremely good optimisations of expressions. “Optimisation of
+expressions” here means a rearrangement of arithmetic or logical
+expressions to run more efficiently. Be careful not to damage the
+compiler’s ability to do such optimisations for you in an effort to
+optimise the expression yourself. Always check that your “optimisations”
+really do improve the program by running the program before and after
+the change on a suitable benchmark set of input. It is very hard to do
+better than a good compiler.</p>
+<p>The greatest time and space improvements come from a better data
+structure or algorithm. The most important rule of code tuning is:</p>
+<div class="center">
+<p><strong><em>First tune the algorithm, then tune the
+code.</em></strong></p>
+</div>
+</div>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-2.8.html" class="navbutton">&lt;&lt;</a>
+<a href="section-2.8.html" accesskey="p" rel="previous">Case study: Analysing binary search</a>
+</div>
+<div class="navlink">
+<a href="section-2.10.html" accesskey="n" rel="next">Empirical analysis</a>
+<a href="section-2.10.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

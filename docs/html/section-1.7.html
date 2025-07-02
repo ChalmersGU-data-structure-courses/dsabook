@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Abstract data types</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-1.6.html" class="navbutton">&lt;&lt;</a>
+<a href="section-1.6.html" accesskey="p" rel="previous">Case study: Searching in a list</a>
+</div>
+<div>
+<a href="section-1.8.html" accesskey="n" rel="next">Review questions</a>
+<a href="section-1.8.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:abstract-data-types" class="level2" data-number="1.7">
+<h2 data-number="1.7"><span class="header-section-number">1.7</span>
+Abstract data types</h2>
+<p>Earlier, we introduced the term <a href="section-14.html#data-type"
+class="term"
+title="A type together with a collection of operations to manipulate the type.">data
+type</a>, which refers to a type along with a collection of operations
+for manipulating values of that type. For instance, integers form a data
+type, and addition is an operation that can be performed on them. These
+are known as <em>concrete</em> data types, meaning they consist of
+actual values and a specific implementation. In contrast, an <a
+href="section-14.html#abstract-data-type" class="term"
+title="Abbreviated ADT. The specification of a data type within some language, independent of an implementation. The interface for the ADT is defined in terms of a type and a set of operations on that type. The behaviour of each operation is determined by its inputs and outputs. An ADT does not specify *how* the data type is implemented. These implementation details are hidden from the user of the ADT and protected from outside access, a concept referred to as encapsulation.">abstract
+data type</a> (ADT) does not specify concrete values or implementations.
+Instead, it defines a data type purely in terms of a set of operations
+and the expected behaviour of those operations, as determined by their
+inputs and outputs. An ADT does not dictate <em>how</em> the operations
+should be implemented, and multiple implementations are often possible.
+These implementation details are hidden from the user—a concept known as
+<a href="section-14.html#encapsulation" class="term"
+title="In programming, the concept of hiding implementation details from the user of an ADT, and protecting data members of an object from outside access.">encapsulation</a>.
+The set of operations offered by an abstract data type is known as its
+<a href="section-14.html#interface" class="term"
+title="An interface is a class-like structure that only contains method signatures and fields. An interface does not contain an implementation of the methods or any data members.">application
+programming interface</a> (API).</p>
+<p>Using an ADT, we can distinguish between the logical behaviour of a
+data type and its actual implementation in a concrete program. A classic
+example is the <a href="section-14.html#list" class="term"
+title="A finite, ordered sequence of data items known as elements. This is close to the mathematical concept of a sequence. Note that &#39;ordered&#39; in this definition means that the list elements have position. It does not refer to the relationship between key values for the list elements (that is, &#39;ordered&#39; does not mean &#39;sorted&#39;).">list</a>
+abstract data type, which support the following set of operations:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">List</span> <span class="kw">of</span> T:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">add</span>(i: <span class="bu">Int</span>, x: T)   <span class="co">// Adds x at position i; where 0 ≤ i ≤ size.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">get</span>(i: <span class="bu">Int</span>) <span class="op">-&gt;</span> T    <span class="co">// Returns the element at position i; where 0 ≤ i &lt; size.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">set</span>(i: <span class="bu">Int</span>, x: T)   <span class="co">// Replaces the value at position i with x; where 0 ≤ i &lt; size.</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">remove</span>(i: <span class="bu">Int</span>)      <span class="co">// Removes the element at position i; where 0 ≤ i &lt; size.</span></span></code></pre></div>
+<p>A list can be implemented using either an array or a linked list.
+Users of a list do not need to know which implementation is used in
+order to make use of its functionality. The actual implementations of an
+ADT rely on specific <em>data structures</em> to realise the desired
+behaviour of the operations – for example, calculating the size of a
+list.</p>
+<p>Although different implementations of an abstract data type offer the
+same set of operations, the choice of <a
+href="section-14.html#data-structure" class="term"
+title="The implementation for an ADT.">data structure</a> can
+significantly impact the <em>efficiency</em> of those operations. Often,
+there are trade-offs involved: optimising one operation may come at the
+cost of another. For example, an array-based list allows fast access to
+elements at specific indices, while a linked-list implementation excels
+at inserting elements at the front. Furthermore, different applications
+may prioritise different operations. One program might frequently
+perform operation A, while another relies more heavily on operation B.
+In such cases, it is often not possible to implement all operations
+efficiently, so multiple implementations of the same ADT are needed.
+Additionally, one implementation may be more efficient for small
+datasets (thousands of elements), whereas another may scale better for
+large datasets (millions of elements). The most suitable data structure
+depends on the specific use case, and making informed and well-reasoned
+choices is one of the central goals of this book.</p>
+<div class="online">
+<section id="sec:example-collection-of-records"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Collection of records</h4>
+<p>A <em>database</em> is a structured collection of data that can be
+easily accessed, managed, and updated. Each item in a database is
+typically called a <em>record</em>, which consists of multiple fields
+containing information—such as a name, an ID number, or an address.
+Efficiently organising, storing, and searching these records is a key
+challenge in database design.</p>
+<p>Two popular implementations for managing large disk-based database
+applications are <a href="section-14.html#hashing" class="term"
+title="A search method that uses a hash function to convert a search key value into a position within a hash table. In a properly implemented hash system, that position in the table will have high probability of containing the record that matches the key value. Sometimes, the hash function will return a position that does not store the desired key, due to a process called collision. In that case, the desired record is found through a process known as collision resolution.">hashing</a>
+and the <a href="section-14.html#b-tree" class="term"
+title="A method for indexing a large collection of records. A B-tree is a balanced tree that typically has high branching factor (commonly as much as 100 children per internal node), causing the tree to be very shallow. When stored on disk, the node size is selected to be same as the desired unit of I/O (hence some multiple of the disk sector size). This makes it easy to gain access to the record associated with a given search key stored in the tree with few disk accesses. The most commonly implemented variant of the B-tree is the B+ tree.">B-tree</a>.
+Both support efficient insertion and deletion of records, as well as
+exact-match queries. However, they differ in the types of queries they
+handle best. Hashing is particularly efficient for exact-match queries,
+where you are looking for a record with a specific key. On the other
+hand, B-trees are better suited for <em>range queries</em>, where you
+want to retrieve all records with keys within a certain interval. In
+such cases, hashing becomes inefficient.</p>
+<p>Therefore, if a database application only requires exact-match
+queries, hashing is typically the better choice. But if the application
+needs to support range queries—such as finding all records with values
+between X and Y—the B-tree is preferred. Despite their performance
+differences, both data structures address the same core problem: how to
+efficiently update and search a large collection of records.</p>
+</section>
+</div>
+<p>The concept of an ADT can help us to focus on key issues even in
+non-computing applications.</p>
+<section id="sec:example-cars" class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Cars</h4>
+<p>When operating a car, the primary activities are steering,
+accelerating, and braking. On nearly all passenger cars, you steer by
+turning the steering wheel, accelerate by pushing the gas pedal, and
+brake by pushing the brake pedal. This design for cars can be viewed as
+an ADT with operations “steer”, “accelerate”, and “brake”. Two cars
+might implement these operations in radically different ways, say with
+different types of engine, or front- versus rear-wheel drive. Yet, most
+drivers can operate many different cars because the ADT presents a
+uniform method of operation that does not require the driver to
+understand the specifics of any particular engine or drive design. These
+differences are deliberately hidden.</p>
+</section>
+<p>The concept of an ADT is one instance of an important principle that
+must be understood by any successful computer scientist: managing
+complexity through abstraction. A central theme of computer science is
+complexity and techniques for handling it. Humans deal with complexity
+by assigning a label to an assembly of objects or concepts and then
+manipulating the label in place of the assembly. Cognitive psychologists
+call such a label a <em>metaphor</em>. A particular label might be
+related to other pieces of information or other labels. This collection
+can in turn be given a label, forming a hierarchy of concepts and
+labels. This hierarchy of labels allows us to focus on important issues
+while ignoring unnecessary details.</p>
+<section id="sec:example-computers-hard-drives-and-cpus"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Computers, hard drives, and CPUs</h4>
+<p>We apply the label “hard drive” to a collection of hardware that
+manipulates data on a particular type of storage device, and we apply
+the label “CPU” to the hardware that controls execution of computer
+instructions. These and other labels are gathered together under the
+label “computer”. Because even the smallest home computers today have
+millions of components, some form of abstraction is necessary to
+comprehend how a computer operates.</p>
+</section>
+<p>Consider how you might go about the process of designing a complex
+computer program that implements and manipulates an ADT. The ADT is
+implemented in one part of the program by a particular data structure.
+While designing those parts of the program that use the ADT, you can
+think in terms of operations on the data type without concern for the
+data structure’s implementation. Without this ability to simplify your
+thinking about a complex program, you would have no hope of
+understanding or implementing it.</p>
+<p>Most of the abstract data types we introduce in this book are
+collections, that is, structures that store elements of an arbitrary
+type. The earlier example of a list illustrates this: a list is a
+collection that holds elements, which can be of any type.</p>
+<p>We group these collection-based ADTs into two main categories:</p>
+<ul>
+<li>Linear collections</li>
+<li>Sets and maps</li>
+</ul>
+<p>In addition to these, we also introduce graphs, along with their
+commonly used implementations.</p>
+<p>The rest of this gives a high-level overview of the ADTs covered
+throughout the course. <a href="#fig:adt-overview">Figure 1.1</a>
+summarises these ADTs and highlights how they relate to one another.
+Each ADT will be discussed in more detail later in the book, including
+their operations and the data structures used to implement them.</p>
+<figure id="fig:adt-overview">
+<img src="resources/images/ADT_overview.png"
+alt="Figure 1.1: An overview of ADTs with their common implementations" />
+<figcaption aria-hidden="true">Figure 1.1: An overview of ADTs with
+their common implementations</figcaption>
+</figure>
+<section id="sec:adt-linear-collections" class="level3"
+data-number="1.7.1">
+<h3 data-number="1.7.1"><span class="header-section-number">1.7.1</span>
+Linear collections</h3>
+<p>Linear collections are a category of abstract data types in which the
+order of the elements matters. This means that each element has a
+specific position in the sequence, and operations on the ADT are
+sensitive to this order. Insertion, removal, and retrieval operations
+often depend on the position within the sequence.</p>
+<p>The ordered sequence ADTs found in this book are:</p>
+<ul>
+<li><p><strong>Stacks</strong>: sequences with a Last-In-First-Out
+(LIFO) ordering</p></li>
+<li><p><strong>Queues</strong>: sequences with a First-In-First-Out
+(FIFO) ordering</p></li>
+<li><p><strong>Double-ended queues</strong> (deques): allow insertion
+and removal at both ends</p></li>
+<li><p><strong>Priority queues</strong>: return elements based on
+priority rather than insertion order</p></li>
+<li><p><strong>General lists</strong>: support adding, removing, and
+accessing elements</p></li>
+</ul>
+<p>Ordered sequences are used in many applications and algorithms where
+the order of operations or items is important. For example, maintaining
+a task list, simulating a line of customers, or a editor’s undo/redo
+history.</p>
+</section>
+<section id="sec:adt-sets-and-maps" class="level3" data-number="1.7.2">
+<h3 data-number="1.7.2"><span class="header-section-number">1.7.2</span>
+Sets and maps</h3>
+<p>Many programming tasks involve <em>retrieving specific
+information</em> from a large dataset. For example, given a collection
+of people, how do we efficiently find the person with a specific
+personnummer? Two key abstract data types are commonly used to solve
+such information retrieval problems:</p>
+<ul>
+<li><p><strong>Sets</strong>: represent unordered collections of
+distinct items. They support operations to <em>add</em> and
+<em>remove</em> elements, and to <em>check</em> whether a particular
+element is present. Duplicate elements are not allowed.</p></li>
+<li><p><strong>Maps</strong> (also called dictionaries): represent
+collections of <em>key-value pairs</em>, where each <em>key</em> maps to
+a corresponding <em>value</em>. Operations include <em>adding</em> or
+<em>removing</em> key-value pairs, <em>checking</em> if a key is
+present, and <em>retrieving</em> the value associated with a given key.
+Like sets, maps do not allow duplicate keys.</p></li>
+</ul>
+<p>Most implementations of both sets and maps are designed to support
+fast insertion, deletion, and lookup operations, making them ideal for
+managing collections where quick access to data is important.</p>
+</section>
+<section id="sec:adt-graphs" class="level3" data-number="1.7.3">
+<h3 data-number="1.7.3"><span class="header-section-number">1.7.3</span>
+Graphs</h3>
+<p>Another well-known abstract data type is the <em>graph</em>. Graphs
+are used to model relationships between elements, where each element is
+called a <em>node</em> or <em>vertex</em>. A <em>relation</em> between
+two nodes is represented by an <em>edge</em>, which may carry additional
+information to describe the nature or strength of the relationship—such
+as distance, cost, or capacity.</p>
+<p>Graphs appear in many real-world scenarios, often in surprising ways.
+A classic example is a map, where cities are represented as nodes and
+roads (with distances) as edges. Graph algorithms can then be used to
+solve problems such as finding the shortest route between two cities.
+Another, less obvious example is the structure of Java programs: the
+dependencies between Java classes can be represented as a graph. This
+representation helps us determine the correct order to compile classes
+based on their dependencies.</p>
+<p>Graphs are a fundamental concept in computer science, and we dedicate
+an entire chapter to them in this book. <a
+href="section-13.html#sec:graphs">Chapter 13</a> explores how graphs can
+be represented and how we can traverse and manipulate them using various
+algorithms.</p>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-1.6.html" class="navbutton">&lt;&lt;</a>
+<a href="section-1.6.html" accesskey="p" rel="previous">Case study: Searching in a list</a>
+</div>
+<div class="navlink">
+<a href="section-1.8.html" accesskey="n" rel="next">Review questions</a>
+<a href="section-1.8.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

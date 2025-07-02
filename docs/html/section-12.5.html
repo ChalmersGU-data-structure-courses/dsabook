@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Open addressing</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+<link href="../interactive/Hashing/linProbeCON.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-12.4.html" class="navbutton">&lt;&lt;</a>
+<a href="section-12.4.html" accesskey="p" rel="previous">Implementing sets and maps using separate chaining</a>
+</div>
+<div>
+<a href="section-12.6.html" accesskey="n" rel="next">Implementing sets and maps using open addressing</a>
+<a href="section-12.6.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:open-addressing" class="level2" data-number="12.5">
+<h2 data-number="12.5"><span class="header-section-number">12.5</span>
+Open addressing</h2>
+<p>We now turn to the other commonly used form of hashing: <a
+href="section-14.html#open-addressing" class="term"
+title="A hash system where all records are stored in slots of the hash table. This is in contrast to an open hash system.">open
+addressing</a> (also called <a href="section-14.html#closed"
+class="term"
+title="A set is closed over a (binary) operation if, whenever the operation is applied to two members of the set, the result is a member of the set.">closed
+hashing</a>).</p>
+<p>Compared to <a href="section-14.html#separate-chaining" class="term"
+title="In hashing, a synonym for open hashing">separate chaining</a> (<a
+href="section-12.3.html#sec:separate-chaining">Section 12.3</a>), we now
+store all elements directly in the hash table. Each element
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>E</mi><annotation encoding="application/x-tex">E</annotation></semantics></math>
+has a <a href="section-14.html#home-position" class="term"
+title="In hashing, a synonym for home slot.">home position</a> that is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="bold">𝐡</mtext><mo stretchy="false" form="prefix">(</mo><mi>E</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\textbf{h}(E)</annotation></semantics></math>,
+the slot computed by the hash function. If
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>E</mi><annotation encoding="application/x-tex">E</annotation></semantics></math>
+is to be inserted and another record already occupies its home position,
+then
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>E</mi><annotation encoding="application/x-tex">E</annotation></semantics></math>
+will be stored at some other slot in the table. It is the business of
+the <a href="section-14.html#collision-resolution" class="term"
+title="The outcome of a collision resolution policy.">collision
+resolution</a> policy to determine which slot that will be. Naturally,
+the same policy must be followed during search as during insertion, so
+that any element not found in its home position can be recovered by
+repeating the collision resolution process.</p>
+<p>We will still denote the size of the internal arraw as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
+and the total number of elements as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
+and the load factor is still calculated in the same way, as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mi>m</mi></mrow><annotation encoding="application/x-tex">n/m</annotation></semantics></math>.
+Note that since all elements are stored in the array,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+can never be larger than
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>,
+so the load factor must always be smaller than 1.</p>
+<section id="sec:implementation-overview" class="level4 unnumbered">
+<h4 class="unnumbered">Implementation overview</h4>
+<p>The internal table in separate chaining consists of pointers to a
+linked list (or some other kind of set data structure). Open addressing,
+in contrast, stores the elements themselves directly in the table:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> OpenAddressingHashTable <span class="kw">of</span> Elem:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    table: <span class="bu">Array</span> <span class="kw">of</span> Elem</span></code></pre></div>
+<p>To implement a method on an open addressing hash table we first have
+to find the correct table index for the element in question, and then we
+can apply the method on the slot.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> OpenAddressingHashTable:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    method(elem, ...extra arguments...):</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> hashAndProbe(elem)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        apply method <span class="kw">to</span> table[i]</span></code></pre></div>
+</section>
+<section id="sec:hashing-and-probing" class="level4 unnumbered">
+<h4 class="unnumbered">Hashing and probing</h4>
+<p>The goal of <a href="section-14.html#collision-resolution"
+class="term"
+title="The outcome of a collision resolution policy.">collision
+resolution</a> is to find a free slot in the hash table when the “home
+position” for the record is already occupied. We can view any collision
+resolution method as generating a sequence of hash table slots that can
+potentially hold the record. The first slot in the sequence will be the
+home position for the key. If the home position is occupied, then the
+collision resolution policy goes to the next slot in the sequence. If
+this is occupied as well, then another slot must be found, and so on.
+This sequence of slots is known as the <a
+href="section-14.html#probe-sequence" class="term"
+title="In hashing, the series of slots visited by the probe function during collision resolution.">probe
+sequence</a>, and it is generated by some <a
+href="section-14.html#probe-function" class="term"
+title="In hashing, the function used by a collision resolution method to calculate where to look next in the hash table.">probe
+function</a> that we will call <strong>p</strong>.</p>
+<p>The simplest probe function is <em>linear probing</em>, which tries
+all consecutive positions starting from the home position. Once the
+bottom of the table is reached, the probe sequence wraps around to the
+beginning of the table (since the last step is to mod the result to the
+table size). Linear probing has the virtue that all slots in the table
+will be candidates for inserting a new record before the probe sequence
+returns to the home position.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a visualisation of how linear probing works.</p>
+</summary>
+<p>
+<div id="linProbeCON1" class="ssAV" data-short-name="linProbeCON1" data-long-name="Linear Probing Slideshow 1" alt="Linear Probing Slideshow 1" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<p>In the following code we iterate through all possible
+<em>offsets</em> 0, 1, 2, …, etc.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> OpenAddressingHashTable:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    hashAndProbe(elem):</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        home <span class="op">=</span> hashIndex(elem)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> offset <span class="kw">in</span> <span class="dv">0</span> .. table.<span class="bu">size</span><span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            i <span class="op">=</span> (home <span class="op">+</span> offset) <span class="op">%</span> table.<span class="bu">size</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> table[i] <span class="op">==</span> elem <span class="kw">or</span> table[i] <span class="kw">is</span> <span class="va">null</span>:</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> i</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">throw</span> <span class="cf">error</span> <span class="st">&quot;Hash table full&quot;</span></span></code></pre></div>
+<p>Linear probing has some drawbacks, and there are several alternative
+strategies which we will discuss later in <a
+href="section-12.8.html#sec:different-probing-strategies">Section 12.8</a>.</p>
+</section>
+<section id="sec:finding-and-inserting" class="level4 unnumbered">
+<h4 class="unnumbered">Finding and inserting</h4>
+<p>Searching for an element in an open addressing hash table is
+straightforward: <code>hashAndProbe</code> returns a slot, and all we
+have to do is to check that it points to the correct element.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> OpenAddressingHashTable:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">contains</span>(elem):</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> hashAndProbe(elem)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> table[i] <span class="op">==</span> elem</span></code></pre></div>
+<p>To add an element we first find the correct slot, and then we set the
+value in that slot:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> OpenAddressingHashTable:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">add</span>(elem):</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> hashAndProbe(elem)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        table[i] <span class="op">=</span> elem</span></code></pre></div>
+</section>
+<section id="sec:collisions-and-clusters" class="level4 unnumbered">
+<h4 class="unnumbered">Collisions and clusters</h4>
+<p>When the table gets more and more populated, it starts building
+<em>clusters</em> – sequences of neighbouring non-empty slots in the
+table. The efficiency of the basic operations depend crucially on the
+size of the largest cluster. Assume we want to search for an element
+that’s not in the table, but happens to have its home position as the
+very first slot in a large cluster. Then we have to inspect every slot
+in the cluster before we can be certain that the element is not
+there.</p>
+<p>Note that a cluster can consist of elements that all have different
+hash codes and different home positions – as long as the neighbouring
+slots are occupied they all belong to the same cluster. Therefore it’s
+not only important that the hash function gives different hash codes for
+different elements – ideally the hash codes should be spread apart as
+much as possible, even if the elements themselves are very close to each
+other.</p>
+<p>It is possible to reduce some clustering by using different probing
+strategies than simple linear probing, see <a
+href="section-12.8.html#sec:different-probing-strategies">Section 12.8</a>
+for more details.</p>
+</section>
+<section id="sec:deleting" class="level4 unnumbered">
+<h4 class="unnumbered">Deleting</h4>
+<p>The difficult part when implementing deletion is how to handle
+clusters.</p>
+<p>Assume for example that we have a cluster of five elements
+[<em>A</em>, <em>B</em>, <em>C</em>, <em>D</em>, <em>E</em>], and we
+want to remove <em>C</em>. If we simply clear the slot we will get the
+two clusters [<em>A</em>, <em>B</em>] and [<em>D</em>, <em>E</em>]. Let
+us also assume that the home positions of <em>D</em> is in the beginning
+of the original large cluster – i.e., <em>A</em> and <em>D</em> have the
+same home positions.</p>
+<p>Now, what happens if we try to search for <em>D</em> in the table,
+after we have removed <em>C</em>? It will start searching in the first
+cluster and inspect slots <em>A</em> and <em>B</em>, but then it
+encounters an empty slot and stops. So it will report that <em>D</em> is
+not in the table, even though it hasn’t been deleted.</p>
+<p>Therefore we cannot just clear slots that we want to delete. The
+simplest solution is instead to <em>mark</em> the slot in some way. The
+most common way is to use a special value which is not used anywhere
+else, which will be the new value of the slot. This special
+<code>DELETED</code> value is sometimes called a <a
+href="section-14.html#tombstone" class="term"
+title="In hashing, a tombstone is used to mark a slot in the hash table where a record has been deleted. Its purpose is to allow the collision resolution process to probe through that slot (so that records further down the probe sequence are not unreachable after deleting the record), while also allowing the slot to be reused by a future insert operation.">tombstone</a>.</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> OpenAddressingHashTable:</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">delete</span>(elem):</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> hashAndProbe(elem)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        table[i] <span class="op">=</span> <span class="va">DELETED</span></span></code></pre></div>
+<p>Things are not exactly as simple as they look here, there are some
+details that are very important to get right, we will discuss these
+details later in <a
+href="section-12.7.html#sec:deletion-in-open-addressing">Section 12.7</a>.</p>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-12.4.html" class="navbutton">&lt;&lt;</a>
+<a href="section-12.4.html" accesskey="p" rel="previous">Implementing sets and maps using separate chaining</a>
+</div>
+<div class="navlink">
+<a href="section-12.6.html" accesskey="n" rel="next">Implementing sets and maps using open addressing</a>
+<a href="section-12.6.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+<script type="text/javascript" src="../interactive/Hashing/linProbeCON1.js"></script>
+</body>
+</html>
+

@@ -6,11 +6,10 @@ $(document).ready(function() {
   var av = new JSAV(av_name);
   var pseudo = av.code([
     "pop():",
-    "    // Precondition: stackSize > 0",
     "    removed = top",
     "    top = removed.next",
     "    removed.next = null",
-    "    stackSize = stackSize - 1",
+    "    size = size - 1",
     "    return removed.elem",
   ], {lineNumbers: false});
 
@@ -39,7 +38,7 @@ $(document).ready(function() {
   av.umsg("<code>top</code> points to the first node.");
   firstnode.highlight();
   pseudo.unhighlight(1);
-  pseudo.highlight(3);
+  pseudo.highlight(2);
   av.step();
 
   // Slide
@@ -55,8 +54,8 @@ $(document).ready(function() {
   list.get(1).highlight();
   topPointer.target(list.get(1));
   list.layout();
-  pseudo.unhighlight(3);
-  pseudo.highlight(4);
+  pseudo.unhighlight(2);
+  pseudo.highlight(3);
   av.step();
 
   // Slide
@@ -64,24 +63,24 @@ $(document).ready(function() {
   firstnode.addClass("unused");
   firstnode.edgeToNext().hide();
   list.layout();
-  pseudo.unhighlight(4);
-  pseudo.highlight(5);
+  pseudo.unhighlight(3);
+  pseudo.highlight(4);
   av.step();
 
   // Slide
   av.umsg("Decrease the stack size by 1.");
   firstnode.hide();
   list.layout();
-  pseudo.unhighlight(5);
-  pseudo.highlight(6);
+  pseudo.unhighlight(4);
+  pseudo.highlight(5);
   av.step();
 
   // Slide
   av.umsg("The element value is returned.");
   arrIt.highlight();
   list.get(1).unhighlight();
-  pseudo.unhighlight(6);
-  pseudo.highlight(7);
+  pseudo.unhighlight(5);
+  pseudo.highlight(6);
   av.step();
   av.recorded();
 });

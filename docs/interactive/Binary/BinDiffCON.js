@@ -3,8 +3,8 @@ $(document).ready(function() {
   var av = new JSAV("BinDiffCON", {animationMode: "none"});
   // Setup first row of trees
   var btTop = 0;
-  var btLeft = 250;
-  var btRight = 455;
+  var btLeft = 120;
+  var btRight = 220;
   var bt = av.ds.binarytree({nodegap: 30, top: btTop, left: btLeft});
   bt.root("A");
   var rt = bt.root();
@@ -22,15 +22,16 @@ $(document).ready(function() {
   av.label("(b)", {left: btRight + 35, top: btTop + 105});
 
   // Setup second row of trees
-  btTop = 155;
+  // btTop = 155;
+  btLeft += 400 - 20; btRight += 400 + 20;
   var bt3 = av.ds.binarytree({nodegap: 30, left: btLeft, top: btTop});
   bt3.root("A");
   bt3.root().left("B");
   bt3.root().right("");
-  bt3.root().right("EMPTY").addClass("clearnode");
+  bt3.root().right("NULL").addClass("clearnode");
   var bt4 = av.ds.binarytree({nodegap: 30, left: btRight, top: btTop});
   bt4.root("A");
-  bt4.root().left("EMPTY").addClass("clearnode");
+  bt4.root().left("NULL").addClass("clearnode");
   bt4.root().right("B");
   bt3.layout();
   bt4.layout();

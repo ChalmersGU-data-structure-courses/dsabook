@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Review questions</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-13.10.html" class="navbutton">&lt;&lt;</a>
+<a href="section-13.10.html" accesskey="p" rel="previous">Specialised algorithms on weighted graphs</a>
+</div>
+<div>
+<a href="section-14.html" accesskey="n" rel="next">Glossary</a>
+<a href="section-14.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:ch13-review" class="level2" data-number="13.11">
+<h2 data-number="13.11"><span class="header-section-number">13.11</span>
+Review questions</h2>
+<p>This final section contains some review questions about the contents
+of this chapter.</p>
+<section id="sec:review-questions-graph-terminology" class="level3 quiz"
+data-number="13.11.1">
+<h3 data-number="13.11.1"><span
+class="header-section-number">13.11.1</span> Review questions: Graph
+terminology</h3>
+<div class="question">
+<p>When a vertex
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Q</mi><annotation encoding="application/x-tex">Q</annotation></semantics></math>
+is connected by an edge to a vertex
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>K</mi><annotation encoding="application/x-tex">K</annotation></semantics></math>,
+what is the term for their relationship?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Q</mi><annotation encoding="application/x-tex">Q</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>K</mi><annotation encoding="application/x-tex">K</annotation></semantics></math>
+are adjacent</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Q</mi><annotation encoding="application/x-tex">Q</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>K</mi><annotation encoding="application/x-tex">K</annotation></semantics></math>
+are incident</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Q</mi><annotation encoding="application/x-tex">Q</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>K</mi><annotation encoding="application/x-tex">K</annotation></semantics></math>
+are insecure</label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Q</mi><annotation encoding="application/x-tex">Q</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>K</mi><annotation encoding="application/x-tex">K</annotation></semantics></math>
+are isolated</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>An edge connecting two vertices is incident on these vertices.</li>
+<li>Two vertices connected by an edge are adjacent.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>Two vertices of a graph are ADJACENT if there is an edge joining
+them.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Neighboring vertices are adjacent to one another.</li>
+<li>Two vertices are considered neighbours if there is an edge
+connecting them.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<figure>
+<img src="images/QuizGraphComponents.png" alt="Example graph" />
+<figcaption aria-hidden="true">Example graph</figcaption>
+</figure>
+<p>Answer TRUE or FALSE.</p>
+<p>Vertices 3 and 4 are adjacent.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Two vertices are adjacent if there exists and edge between
+them.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<figure>
+<img src="images/QuizGraphComponents.png" alt="Example graph" />
+<figcaption aria-hidden="true">Example graph</figcaption>
+</figure>
+<p>How many connected components does this graph have?</p>
+<p><input type="number" value="3" min="0"/></p>
+<div class="hints">
+<ul>
+<li>The maximally connected subgraphs of an undirected graph are called
+connected components.</li>
+<li>Vertices 0, 1, 2, 3, and 4 form one connnected component</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>A DAG is a directed graph without cycles.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A DAG is a Directed Acyclic Graph.</li>
+<li>An acyclic graph has no cycles.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Given a subset S of the vertices in a graph, when all vertices in S
+connect to all other vertices in S, this is called a:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />clique</label></li>
+<li><label><input type="checkbox" />connected component</label></li>
+<li><label><input type="checkbox" />directed graph</label></li>
+<li><label><input type="checkbox" />DAG</label></li>
+<li><label><input type="checkbox" />sparse graph</label></li>
+<li><label><input type="checkbox" />sparse matrix</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A clique is a subset of the graph where all the vertices in the
+subgraph connect to the other vertices.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A complete graph is a clique of size:</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>V</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|V|</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>E</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|E|</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>n</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|n|</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A graph containing all possible edges is said to be a complete
+graph</li>
+<li>Any subset of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>
+where all vertices in the subset connect to all other vertices in the
+subset is called a clique</li>
+<li>A complete graph is a clique of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>V</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|V|</annotation></semantics></math>.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A graph containing all possible edges is a _____ graph</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />complete</label></li>
+<li><label><input type="checkbox" />full</label></li>
+<li><label><input type="checkbox" />dense</label></li>
+<li><label><input type="checkbox" />sparse</label></li>
+<li><label><input type="checkbox" />directed</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A dense graph is a graph with many edges.</li>
+<li>A sparse graph is a graph with relatively few edges.</li>
+<li>A complete graph is a graph containing all possible edges.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A graph without cycles is called a/an:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />acyclic
+graph</label></li>
+<li><label><input type="checkbox" />undirected graph</label></li>
+<li><label><input type="checkbox" />directed graph</label></li>
+<li><label><input type="checkbox" />simple graph</label></li>
+<li><label><input type="checkbox" />connected graph</label></li>
+<li><label><input type="checkbox" />complete graph</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>An acyclilc graph has no cycles.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The number of edges incident to a vertex called its:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />degree</label></li>
+<li><label><input type="checkbox" />count</label></li>
+<li><label><input type="checkbox" />number</label></li>
+<li><label><input type="checkbox" />size</label></li>
+<li><label><input type="checkbox" />depth</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>An edge connecting vertices is said to be incident.</li>
+<li>The degree of a vertex is the number of graph edges it touches.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A digraph is a:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />directed
+graph</label></li>
+<li><label><input type="checkbox" />undirected graph</label></li>
+<li><label><input type="checkbox" />connected component</label></li>
+<li><label><input type="checkbox" />DAG</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A directed graph is also called a digraph.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A graph with directed edges is called a</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />directed
+graph</label></li>
+<li><label><input type="checkbox" />labeled graph</label></li>
+<li><label><input type="checkbox" />weighted graph</label></li>
+<li><label><input type="checkbox" />complete graph</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A graph with edges directed from one vertex to another is a directed
+graph.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>All graphs must have edges.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />False</label></li>
+<li><label><input type="checkbox" />True</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A graph is a set of edges and vertcies.</li>
+<li>The set of edges may be empty.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A free tree is:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />a connected graph with no
+cycles</label></li>
+<li><label><input type="checkbox" />a connected graph with only simple
+cycles</label></li>
+<li><label><input type="checkbox" />an unconnected graph with no
+cycles</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A free tree is a connected, undirected graph with no cycles.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<figure>
+<img src="images/QuizGraphDirected.png" alt="Example directed graph" />
+<figcaption aria-hidden="true">Example directed graph</figcaption>
+</figure>
+<p>What is the <em>out</em>-degree of vertex 1?</p>
+<p><input type="number" value="3" min="0"/></p>
+<div class="hints">
+<ul>
+<li>The <em>in</em>-degree of a vertex is the number of edges going
+<em>into</em> the vertex.</li>
+<li>The <em>out</em>-degree of a vertex is the number of edges going
+<em>out</em> of the vertex.</li>
+<li>Vertex 1 has an three outgoing and two incoming edges.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<figure>
+<img src="images/QuizGraphDirected.png" alt="Example directed graph" />
+<figcaption aria-hidden="true">Example directed graph</figcaption>
+</figure>
+<p>What is the <em>in</em>-degree of vertex 2?</p>
+<p><input type="number" value="2" min="0"/></p>
+<div class="hints">
+<ul>
+<li>The <em>in</em>-degree of a vertex is the number of edges going
+<em>into</em> the vertex.</li>
+<li>The <em>out</em>-degree of a vertex is the number of edges going
+<em>out</em> of the vertex.</li>
+<li>Vertex 2 has an one outgoing and two incoming edges.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>Two vertices can be adjacent even if they are not neighbours.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />False</label></li>
+<li><label><input type="checkbox" />True</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Two vertices are consider neighbours if there is an edge connecting
+them.</li>
+<li>Neighboring vertices are adjacent to one another.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A simple cycle:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />must have all vertices
+unique except that the first and last vertices are the same</label></li>
+<li><label><input type="checkbox" />allows repetition of vertices so
+long as the length of the path is less than 5</label></li>
+<li><label><input type="checkbox" />allows repetition of vertices so
+long as no edge is repeated</label></li>
+<li><label><input type="checkbox" />must have all vertices be
+unique</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A cyle is simple if all vertices on the cycle are distinct, with the
+first and last vertices being the same.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A simple path:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />must have all vertices be
+unique</label></li>
+<li><label><input type="checkbox" />allows repetition of vertices so
+long as the length of the path is less than 5</label></li>
+<li><label><input type="checkbox" />allows repetition of vertices so
+long as no edge is repeated</label></li>
+<li><label><input type="checkbox" />must have all vertices unique except
+that the first and last vertices are the same</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A path is simple if all vertices on the path are distinct.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<figure>
+<img src="images/QuizGraphUndirected.png"
+alt="Example undirected graph" />
+<figcaption aria-hidden="true">Example undirected graph</figcaption>
+</figure>
+<p>What is the degree of vertex 4?</p>
+<p><input type="number" value="3" min="0"/></p>
+<div class="hints">
+<ul>
+<li>The degree of a vertex is the number of edges that the vertex
+touches.</li>
+<li>Vertex 4 has three incident edges.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>A weighted graph must have edge weights and be directed.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />False</label></li>
+<li><label><input type="checkbox" />True</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>A weighted graph must have edge weights.</li>
+<li>A weighted graph can be a directed or undirected graph.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="sec:review-questions-graph-space-requirements"
+class="level3 quiz" data-number="13.11.2">
+<h3 data-number="13.11.2"><span
+class="header-section-number">13.11.2</span> Review questions: Graph
+space requirements</h3>
+<p><em>Warning</em>! Read the conditions for the problems in this set
+very carefully!</p>
+<div class="question">
+<p>Assume for an <em>directed unweighted</em> graph with 6 vertices and
+14 edges, that a vertex index requires 2 bytes, and a pointer requires 4
+bytes.</p>
+<p>Calculate the byte requirements for an <em>adjacency list</em>.</p>
+<p><input type="number" value="108" min="0"/> </p>
+<div class="hints">
+<ul>
+<li>Since the graph is unweighted, the adjacency list does not store any
+weight information.</li>
+<li>The adjacency list has an array (of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>V</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|V|</annotation></semantics></math>)
+which points to a list of edges.</li>
+<li>Every edge appears once on the list. And for each edge there has to
+be a vertex ID and a pointer to the next edge.</li>
+<li>It uses
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">|</mo><mi>V</mi><mo stretchy="false" form="prefix">|</mo><mi>⋅</mi><mtext mathvariant="normal">pointer</mtext><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">|</mo><mi>E</mi><mo stretchy="false" form="prefix">|</mo><mi>⋅</mi><mo stretchy="false" form="prefix">(</mo><mtext mathvariant="normal">vertex-index</mtext><mo>+</mo><mtext mathvariant="normal">pointer</mtext><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(|V| \cdot \textrm{pointer}) + (|E| \cdot (\textrm{vertex-index} + \textrm{pointer}))</annotation></semantics></math>
+bytes.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Assume for an <em>directed unweighted</em> graph with 6 vertices and
+14 edges, that a vertex index requires 2 bytes, and a pointer requires 4
+bytes.</p>
+<p>Calculate the byte requirements for an <em>adjacency matrix</em>.</p>
+<p><input type="number" value="36" min="0"/> </p>
+<div class="hints">
+<ul>
+<li>Since the graph is unweighted, you can assume that each matrix
+element stores one byte to represent the edge.</li>
+<li>The matrix is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>V</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|V|</annotation></semantics></math>
+by
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>V</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|V|</annotation></semantics></math>.</li>
+<li>Each position of the matrix needs one byte.</li>
+<li>It uses
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>V</mi><msup><mo stretchy="false" form="prefix">|</mo><mn>2</mn></msup><mo>⋅</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">|V|^2 \cdot 1</annotation></semantics></math>
+bytes.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Assume for an <em>directed weighted</em> graph with 9 vertices and 11
+edges, that a vertex index requires 5 bytes, a pointer requires 4 bytes.
+and that edge weights require 8 bytes.</p>
+<p>Calculate the byte requirements for an <em>adjacency list</em>.</p>
+<p><input type="number" value="223" min="0"/> </p>
+<div class="hints">
+<ul>
+<li>The adjacency list has an array (of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>V</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|V|</annotation></semantics></math>)
+which points to a list of edges.</li>
+<li>Every edge appears once on the list. And for each edge there has to
+be a vertex ID, a weight and a pointer to the next edge.</li>
+<li>It uses
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">|</mo><mi>V</mi><mo stretchy="false" form="prefix">|</mo><mi>⋅</mi><mtext mathvariant="normal">pointer</mtext><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">|</mo><mi>E</mi><mo stretchy="false" form="prefix">|</mo><mi>⋅</mi><mo stretchy="false" form="prefix">(</mo><mtext mathvariant="normal">vertex-index</mtext><mo>+</mo><mtext mathvariant="normal">edge-weight</mtext><mo>+</mo><mtext mathvariant="normal">pointer</mtext><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(|V| \cdot \textrm{pointer}) + (|E| \cdot (\textrm{vertex-index} + \textrm{edge-weight} + \textrm{pointer}))</annotation></semantics></math>
+bytes.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Assume for an <em>directed weighted</em> graph with 9 vertices and 11
+edges, that a vertex index requires 5 bytes, a pointer requires 4 bytes.
+and that edge weights require 8 bytes.</p>
+<p>Calculate the byte requirements for an <em>adjacency matrix</em>.</p>
+<p><input type="number" value="648" min="0"/> </p>
+<div class="hints">
+<ul>
+<li>The matrix is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>V</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|V|</annotation></semantics></math>
+by
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>V</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|V|</annotation></semantics></math>.</li>
+<li>Each position of the matrix needs
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtext mathvariant="normal">edge-weight</mtext><annotation encoding="application/x-tex">\textrm{edge-weight}</annotation></semantics></math>
+byte.</li>
+<li>It uses
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>V</mi><msup><mo stretchy="false" form="prefix">|</mo><mn>2</mn></msup><mo>⋅</mo><mtext mathvariant="normal">edge-weight</mtext></mrow><annotation encoding="application/x-tex">|V|^2 \cdot \textrm{edge-weight}</annotation></semantics></math>
+bytes.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Assume for an <em>undirected unweighted</em> graph with 7 vertices
+and 17 edges, that a vertex index requires 6 bytes, and a pointer
+requires 2 bytes.</p>
+<p>Calculate the byte requirements for an <em>adjacency list</em>.</p>
+<p><input type="number" value="286" min="0"/> </p>
+<div class="hints">
+<ul>
+<li>Since the graph is unweighted, the adjacency list does not store any
+weight information.</li>
+<li>Since the graph is undirected, each undirected edge is represented
+by two directed edges.</li>
+<li>The adjacency list has an array (of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>V</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|V|</annotation></semantics></math>)
+which points to a list of edges.</li>
+<li>Every edge appears twice on the list (the graph is undirected, so we
+need the directed edge in each direction). And for each edge there has
+to be a vertex ID and a pointer to the next edge.</li>
+<li>It uses
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">|</mo><mi>V</mi><mo stretchy="false" form="prefix">|</mo><mi>⋅</mi><mtext mathvariant="normal">pointer</mtext><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mo stretchy="false" form="prefix">(</mo><mn>2</mn><mi>⋯</mi><mo stretchy="false" form="prefix">|</mo><mi>E</mi><mo stretchy="false" form="prefix">|</mo><mi>⋅</mi><mo stretchy="false" form="prefix">(</mo><mtext mathvariant="normal">vertex-index</mtext><mo>+</mo><mtext mathvariant="normal">pointer</mtext><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(|V| \cdot \textrm{pointer}) + (2 \cdots |E| \cdot (\textrm{vertex-index} + \textrm{pointer}))</annotation></semantics></math>
+bytes.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Assume for an <em>undirected unweighted</em> graph with 7 vertices
+and 17 edges, that a vertex index requires 6 bytes, and a pointer
+requires 2 bytes.</p>
+<p>Calculate the byte requirements for an <em>adjacency matrix</em>.</p>
+<p><input type="number" value="49" min="0"/> </p>
+<div class="hints">
+<ul>
+<li>Since the graph is unweighted, you can assume that each matrix
+element stores one byte to represent the edge.</li>
+<li>Since the graph is undirected, each undirected edge is represented
+by two directed edges.</li>
+<li>The matrix is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>V</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|V|</annotation></semantics></math>
+by
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>V</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|V|</annotation></semantics></math>.</li>
+<li>Each position of the matrix needs one byte.</li>
+<li>It uses
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>V</mi><msup><mo stretchy="false" form="prefix">|</mo><mn>2</mn></msup><mo>⋅</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">|V|^2 \cdot 1</annotation></semantics></math>
+bytes.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Assume for an <em>undirected weighted</em> graph with 10 vertices and
+15 edges, that a vertex index requires 1 byte, a pointer requires 2
+bytes. and that edge weights require 4 bytes.</p>
+<p>Calculate the byte requirements for an <em>adjacency list</em>.</p>
+<p><input type="number" value="230" min="0"/> </p>
+<div class="hints">
+<ul>
+<li>Since the graph is undirected, each undirected edge is represented
+by two directed edges.</li>
+<li>The adjacency list has an array (of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>V</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|V|</annotation></semantics></math>)
+which points to a list of edges.</li>
+<li>Every edge appears twice on the list (the graph is undirected, so we
+need the directed edge in each direction). And for each edge there has
+to be a vertex ID, a weight and a pointer to the next edge.</li>
+<li>It uses
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">|</mo><mi>V</mi><mo stretchy="false" form="prefix">|</mo><mi>⋅</mi><mtext mathvariant="normal">pointer</mtext><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mo stretchy="false" form="prefix">(</mo><mn>2</mn><mi>⋯</mi><mo stretchy="false" form="prefix">|</mo><mi>E</mi><mo stretchy="false" form="prefix">|</mo><mi>⋅</mi><mo stretchy="false" form="prefix">(</mo><mtext mathvariant="normal">vertex-index</mtext><mo>+</mo><mtext mathvariant="normal">edge-weight</mtext><mo>+</mo><mtext mathvariant="normal">pointer</mtext><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(|V| \cdot \textrm{pointer}) + (2 \cdots |E| \cdot (\textrm{vertex-index} + \textrm{edge-weight} + \textrm{pointer}))</annotation></semantics></math>
+bytes.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Assume for an <em>undirected weighted</em> graph with 10 vertices and
+15 edges, that a vertex index requires 1 byte, a pointer requires 2
+bytes, and that edge weights require 4 bytes.</p>
+<p>Calculate the byte requirements for an <em>adjacency matrix</em>.</p>
+<p><input type="number" value="400" min="0"/> </p>
+<div class="hints">
+<ul>
+<li>Since the graph is undirected, each undirected edge is represented
+by two directed edges.</li>
+<li>The matrix is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>V</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|V|</annotation></semantics></math>
+by
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>V</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|V|</annotation></semantics></math>.</li>
+<li>Each position of the matrix needs
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtext mathvariant="normal">edge-weight</mtext><annotation encoding="application/x-tex">\textrm{edge-weight}</annotation></semantics></math>
+byte.</li>
+<li>It uses
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>V</mi><msup><mo stretchy="false" form="prefix">|</mo><mn>2</mn></msup><mo>⋅</mo><mtext mathvariant="normal">edge-weight</mtext></mrow><annotation encoding="application/x-tex">|V|^2 \cdot \textrm{edge-weight}</annotation></semantics></math>
+bytes.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="sec:summary-questions-1" class="level3 quiz"
+data-number="13.11.3">
+<h3 data-number="13.11.3"><span
+class="header-section-number">13.11.3</span> Summary questions</h3>
+<figure>
+<img src="images/GraphCM.png" style="width:60.0%"
+alt="A concept map for the term “graph”" />
+<figcaption aria-hidden="true">A concept map for the term
+“graph”</figcaption>
+</figure>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>An acyclic graph can have cycles.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Look at these terms on the concept map.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A Graph data structure contains ______</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Vertices and
+edges</label></li>
+<li><label><input type="checkbox" />Adjacency lists and Adjacency
+matrices</label></li>
+<li><label><input type="checkbox" />Directed and undirected
+graphs</label></li>
+<li><label><input type="checkbox" />Weighed and unweighted
+graphs</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Look at these terms on the concept map.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Another name for “Directed graph” is ______</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Digraph</label></li>
+<li><label><input type="checkbox" />Direct graph</label></li>
+<li><label><input type="checkbox" />Bigraph</label></li>
+<li><label><input type="checkbox" />Dir-graph</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Look at these terms on the concept map.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which of the following is true?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />None of the
+above</label></li>
+<li><label><input type="checkbox" />A graph may contain no edges and
+many vertices</label></li>
+<li><label><input type="checkbox" />A graph may contain many edges and
+no vertices</label></li>
+<li><label><input type="checkbox" />A graph may contain no edges and no
+vertices</label></li>
+<li><label><input type="checkbox" />None of the above</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Look at these terms on the concept map.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A Graph data structure can be implemented by ______</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />An adjacency matrix or
+adjacency list</label></li>
+<li><label><input type="checkbox" />Edges</label></li>
+<li><label><input type="checkbox" />Vertices</label></li>
+<li><label><input type="checkbox" />An adjacency matrix or adjacency
+list</label></li>
+<li><label><input type="checkbox" />All of the above</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Look at these terms on the concept map.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A directed graph that has no cycles is a(n) _____</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Acyclic directed
+graph</label></li>
+<li><label><input type="checkbox" />Directed graph</label></li>
+<li><label><input type="checkbox" />Undirected graph</label></li>
+<li><label><input type="checkbox" />Acyclic graph</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Look at these terms on the concept map.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which of these terms does not fit with the others?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Dense graph</label></li>
+<li><label><input type="checkbox" />Shortest path</label></li>
+<li><label><input type="checkbox" />Traversal</label></li>
+<li><label><input type="checkbox" />Topological sort</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Look at these terms on the concept map.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which of the following are a type of graph data structure?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />All of the
+above</label></li>
+<li><label><input type="checkbox" />Sparse graph</label></li>
+<li><label><input type="checkbox" />Unweighted graph</label></li>
+<li><label><input type="checkbox" />Dense graph</label></li>
+<li><label><input type="checkbox" />All of the above</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Look at these terms on the concept map.</li>
+</ul>
+</div>
+</div>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-13.10.html" class="navbutton">&lt;&lt;</a>
+<a href="section-13.10.html" accesskey="p" rel="previous">Specialised algorithms on weighted graphs</a>
+</div>
+<div class="navlink">
+<a href="section-14.html" accesskey="n" rel="next">Glossary</a>
+<a href="section-14.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

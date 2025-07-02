@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Specialised algorithms on weighted graphs</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+<link href="../interactive/Graph/topSortDFSCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Graph/topSortQCON.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-13.9.html" class="navbutton">&lt;&lt;</a>
+<a href="section-13.9.html" accesskey="p" rel="previous">Dijkstra’s shortest-path algorithm</a>
+</div>
+<div>
+<a href="section-13.11.html" accesskey="n" rel="next">Review questions</a>
+<a href="section-13.11.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:specialised-graph-algorithms" class="level2"
+data-number="13.10">
+<h2 data-number="13.10"><span class="header-section-number">13.10</span>
+Specialised algorithms on weighted graphs</h2>
+<p>In this section we present two specialised algorithms on weighted
+directed graphs:</p>
+<dl>
+<dt>Floyd’s algorithm</dt>
+<dd>
+This algorithm finds the shortest paths between <em>all pairs of
+vertices</em> in a graph.
+</dd>
+<dt>Topological sort</dt>
+<dd>
+This algorithm sorts the vertices of a <em>directed acyclic graph</em>
+(DAG), so that no edges point “backwards”. This is crucial to solve
+various scheduling problems.
+</dd>
+</dl>
+<section id="sec:floyds-algorithm" class="level3 online"
+data-number="13.10.1">
+<h3 data-number="13.10.1"><span
+class="header-section-number">13.10.1</span> All-pairs shortest paths:
+Floyd’s algorithm</h3>
+<p>We next consider the problem of finding the shortest distance between
+all pairs of vertices in the graph, called the <a
+href="section-14.html#all-pairs-shortest-paths-problem" class="term"
+title="Given a graph with weights or distances on the edges, find the shortest paths between every pair of vertices in the graph. One approach to solving this problem is Floyd&#39;s algorithm, which uses the dynamic programming algorithmic technique.">all-pairs
+shortest paths problem</a>. To be precise, for every
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mo>,</mo><mi>w</mi><mo>∈</mo><mi>𝐕</mi></mrow><annotation encoding="application/x-tex">v, w \in \mathbf{V}</annotation></semantics></math>,
+calculate
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo>,</mo><mi>w</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">d(v, w)</annotation></semantics></math>.</p>
+<p>One solution is to run <a href="section-14.html#dijkstras-algorithm"
+class="term"
+title="An algorithm to solve the single-source shortest paths problem in a graph. This is a greedy algorithm. It is nearly identical to Prim&#39;s algorithm for finding a minimum spanning tree, with the only difference being the calculation done to update the best-known distance.">Dijkstra’s
+algorithm</a>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|\mathbf{V}|</annotation></semantics></math>
+times, each time computing the shortest path from a different start
+vertex. If
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐆</mi><annotation encoding="application/x-tex">\mathbf{G}</annotation></semantics></math>
+is sparse (that is,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>𝐄</mi><mo stretchy="false" form="prefix">|</mo><mo>∈</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="false" form="prefix">|</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">|\mathbf{E}| \in O(|\mathbf{V}|)</annotation></semantics></math>)
+then this is a good solution, because the total cost will be
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><msup><mo stretchy="false" form="prefix">|</mo><mn>2</mn></msup><mo>+</mo><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="false" form="prefix">|</mo><mo stretchy="false" form="prefix">|</mo><mi>𝐄</mi><mo stretchy="false" form="prefix">|</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="false" form="prefix">|</mo><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><msup><mo stretchy="false" form="prefix">|</mo><mn>2</mn></msup><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="false" form="prefix">|</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(|\mathbf{V}|^2 + |\mathbf{V}||\mathbf{E}| \log
+|\mathbf{V}|) = O(|\mathbf{V}|^2 \log |\mathbf{V}|)</annotation></semantics></math>
+for the version of Dijkstra’s algorithm based on priority queues. For a
+dense graph, the priority queue version of Dijkstra’s algorithm yields a
+cost of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><msup><mo stretchy="false" form="prefix">|</mo><mn>3</mn></msup><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="false" form="prefix">|</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(|\mathbf{V}|^3 \log |\mathbf{V}|)</annotation></semantics></math>,
+but the version using <code>minVertex</code> yields a cost of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><msup><mo stretchy="false" form="prefix">|</mo><mn>3</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(|\mathbf{V}|^3)</annotation></semantics></math>.</p>
+<p>Another solution that limits processing time to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><msup><mo stretchy="false" form="prefix">|</mo><mn>3</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(|\mathbf{V}|^3)</annotation></semantics></math>
+regardless of the number of edges is known as Floyd’s algorithm. It is
+an example of dynamic programming. The chief problem with solving this
+problem is organising the search process so that we do not repeatedly
+solve the same subproblems. We will do this organisation through the use
+of the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>-path.
+Define a <a href="section-14.html#k-path" class="term"
+title="In Floyd&#39;s algorithm, a k-path is a path between two vertices $i$ and $j$ that can only go through vertices with an index value less than or equal to $k$.">k-path</a>
+from vertex
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>
+to vertex
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math>
+to be any path whose intermediate vertices (aside from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math>)
+all have indices less than
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>.
+A 0-path is defined to be a direct edge from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math>.
+<a href="#fig:GraphFloydExample">Figure 13.13</a> illustrates the
+concept of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>-paths.</p>
+<figure id="fig:GraphFloydExample">
+<img src="images/GraphFloydExample.png"
+alt="Figure 13.13: An example of k-paths in Floyd’s algorithm. Path 1, 3 is a 0-path by definition. Path 3, 0, 2 is not a 0-path, but it is a 1-path (as well as a 2-path, a 3-path, and a 4-path) because the largest intermediate vertex is 0. Path 1, 3, 2 is a 4-path, but not a 3-path because the intermediate vertex is 3. All paths in this graph are 4-paths." />
+<figcaption aria-hidden="true">Figure 13.13: An example of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>-paths
+in Floyd’s algorithm. Path 1, 3 is a 0-path by definition. Path 3, 0, 2
+is not a 0-path, but it is a 1-path (as well as a 2-path, a 3-path, and
+a 4-path) because the largest intermediate vertex is 0. Path 1, 3, 2 is
+a 4-path, but not a 3-path because the intermediate vertex is 3. All
+paths in this graph are 4-paths.</figcaption>
+</figure>
+<p>Define
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi mathvariant="normal">D</mi><mi>k</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>v</mi><mo>,</mo><mi>w</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\mathrm{D}_k(v, w)</annotation></semantics></math>
+to be the length of the shortest
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>-path
+from vertex
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>
+to vertex
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math>.
+Assume that we already know the shortest
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>-path
+from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math>.
+The shortest
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo>+</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(k+1)</annotation></semantics></math>-path
+either goes through vertex
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+or it does not. If it does go through
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>,
+then the best path is the best
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>-path
+from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+followed by the best
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>-path
+from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math>.
+Otherwise, we should keep the best
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>-path
+seen before. Floyd’s algorithm simply checks all of the possibilities in
+a triple loop. Here is the implementation for Floyd’s algorithm. At the
+end of the algorithm, array <code>D</code> stores the all-pairs shortest
+distances.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> floyd(graph):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    distances <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>() <span class="kw">of</span> vertex pairs <span class="kw">to</span> distances</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> v <span class="kw">in</span> graph.vertices():</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="kw">each</span> w <span class="kw">in</span> graph.vertices():</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>            distances.<span class="bu">put</span>((v, w), ∞)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        distances.<span class="bu">put</span>((v, v), <span class="dv">0</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="kw">each</span> e <span class="kw">in</span> G.outgoingEdges(v):</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            distances.<span class="bu">put</span>((v, e.end), e.weight)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Compute all k-paths</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> k <span class="kw">in</span> graph.vertices():</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="kw">each</span> v <span class="kw">in</span> graph.vertices():</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> <span class="kw">each</span> w <span class="kw">in</span> graph.vertices():</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>                dist <span class="op">=</span> distances.<span class="bu">get</span>(v, k) <span class="op">+</span> distances.<span class="bu">get</span>(k, w)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> dist <span class="op">&lt;</span> distances.<span class="bu">get</span>(v, w):</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>                    distances.<span class="bu">put</span>((v, w), dist)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> distances</span></code></pre></div>
+<p>Clearly this algorithm requires
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><msup><mo stretchy="false" form="prefix">|</mo><mn>3</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(|\mathbf{V}|^3)</annotation></semantics></math>
+running time, and it is the best choice for dense graphs because it is
+(relatively) fast and easy to implement.</p>
+</section>
+<section id="sec:topological-sort" class="level3 online"
+data-number="13.10.2">
+<h3 data-number="13.10.2"><span
+class="header-section-number">13.10.2</span> Acyclic graphs: Topological
+sort</h3>
+<p>Assume that we need to schedule a series of tasks, such as classes or
+construction jobs, where we cannot start one task until after its
+prerequisites are completed. We wish to organise the tasks into a linear
+order that allows us to complete them one at a time without violating
+any prerequisites. We can model the problem using a DAG. The graph is
+directed because one task is a prerequisite of another – the vertices
+have a directed relationship. It is acyclic because a cycle would
+indicate a conflicting series of prerequisites that could not be
+completed without violating at least one prerequisite. The process of
+laying out the vertices of a DAG in a linear order to meet the
+prerequisite rules is called a <a
+href="section-14.html#topological-sort" class="term"
+title="The process of laying out the vertices of a DAG in a linear order such that no vertex $A$ in the order is preceded by a vertex that can be reached by a (directed) path from $A$. Usually the (directed) edges in the graph define a prerequisite system, and the goal of the topological sort is to list the vertices in an order such that no prerequisites are violated.">topological
+sort</a>.</p>
+<p><a href="#fig:GraphToposort">Figure 13.14</a> illustrates the
+problem. An acceptable topological sort for this example is J1, J2, J3,
+J4, J5, J6, J7. However, other orders are also acceptable, such as J1,
+J3, J2, J6, J4, J5, J7.</p>
+<figure id="fig:GraphToposort">
+<img src="images/GraphToposort.png" style="width:60.0%"
+alt="Figure 13.14: An example graph for topological sort. Seven tasks have dependencies as shown by the directed graph" />
+<figcaption aria-hidden="true">Figure 13.14: An example graph for
+topological sort. Seven tasks have dependencies as shown by the directed
+graph</figcaption>
+</figure>
+<section id="sec:depth-first-algorithm" class="level4 unnumbered">
+<h4 class="unnumbered">Depth-first algorithm</h4>
+<p>A topological sort may be found by performing a <a
+href="section-14.html#depth-first-search" class="term"
+title="A graph traversal algorithm. Whenever a $v$ is visited during the traversal, DFS will recursively visit all of $v$ &#39;s unvisited neighbours.">depth-first
+search</a> (DFS) on the graph. When a vertex is visited, no action is
+taken (i.e., function <em>preVisit</em> from <a
+href="section-13.4.html#sec:depth-first-search">Section 13.4.1</a> does
+nothing). When the recursion pops back to that vertex, function
+<em>postVisit</em> adds the vertex to a stack. In the end, the stack is
+returned to the caller.</p>
+<p>The reason that we use a stack is that this algorithm produces the
+vertices in reverse topological order. And if we pop the elements in the
+stack, they will be popped in topological order.</p>
+<p>So the DFS algorithm yields a topological sort in reverse order. It
+does not matter where the sort starts, as long as all vertices are
+visited in the end. Here is implementation for the DFS-based
+algorithm.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> topsortDFS(graph):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    visited <span class="op">=</span> <span class="kw">new</span> <span class="bu">Set</span>()</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    sortedVertices <span class="op">=</span> <span class="kw">new</span> <span class="bu">Stack</span>()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> v <span class="kw">in</span> graph.vertices():</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> v <span class="kw">not</span> <span class="kw">in</span> visited:</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>            topsortHelperDFS(graph, v, sortedVertices, visited)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sortedVertices</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> topsortHelperDFS(graph, v, sortedVertices, visited):</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> v <span class="kw">not</span> <span class="kw">in</span> visited:</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        visited.<span class="bu">add</span>(v)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="kw">each</span> e <span class="kw">in</span> graph.outgoingEdges(v):</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>            topsortHelperDFS(graph, e.end, sortedVertices, visited)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        sortedVertices.<span class="bu">push</span>(v)  <span class="co">// postVisit</span></span></code></pre></div>
+<p>If we use this algorithm starting at vertex J1 in <a
+href="#fig:GraphToposort">Figure 13.14</a> and visit adjacent neighbours
+in alphabetic order, the vertices of the graph are pushed to the stack
+in the order J7, J5, J4, J6, J2, J3, J1. If we now pop them one by one
+we get the topological sort J1, J3, J2, J6, J4, J5, J7.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is another example.</p>
+</summary>
+<p>
+<div id="topSortDFSCON" class="ssAV" data-short-name="topSortDFSCON" data-long-name="TopSort Slideshow" alt="TopSort Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+</section>
+<section id="sec:queue-based-algorithm" class="level4 unnumbered">
+<h4 class="unnumbered">Queue-based algorithm</h4>
+<p>We can also implement topological sort using a <em>queue</em> instead
+of recursion, as follows.</p>
+<p>First visit all edges, counting the number of edges that lead to each
+vertex (i.e., count the number of prerequisites for each vertex). All
+vertices with no prerequisites are placed on the queue. We then begin
+processing the queue. When vertex
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>
+is taken off of the queue, it is added to a list containing the
+topological order, and all neighbours of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>
+(that is, all vertices that have
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>
+as a prerequisite) have their counts decremented by one. Place on the
+queue any neighbour whose count becomes zero. If the queue becomes empty
+without having added all vertices to the final list, then the graph
+contains a cycle (i.e., there is no possible ordering for the tasks that
+does not violate some prerequisite). The order in which the vertices are
+added to the final list is the correct one, so if traverse the final
+list we will get the elements in topological order.</p>
+<p>Applying the queue version of topological sort to the graph of <a
+href="#fig:GraphToposort">Figure 13.14</a> produces J1, J2, J3, J6, J4,
+J5, J7. Here is an implementation of the algorithm.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> topsortBFS(graph):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Initialise the prerequisite counts</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    counts <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>() <span class="kw">of</span> vertices <span class="kw">to</span> prerequisite count</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> v <span class="kw">in</span> graph.vertices():</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        counts.<span class="bu">put</span>(v, <span class="dv">0</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> v <span class="kw">in</span> graph.vertices():</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="kw">each</span> edge <span class="kw">in</span> graph.outgoingEdges(v):</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>            <span class="co">// Increase v&#39;s prerequisite count</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>            newCount <span class="op">=</span> counts.<span class="bu">get</span>(edge.end) <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>            counts.<span class="bu">put</span>(edge.end, newCount)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Initialise the queue</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    queue <span class="op">=</span> <span class="kw">new</span> <span class="bu">Queue</span>()</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> v <span class="kw">in</span> graph.vertices():</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Only add vertices that have no prerequisites</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> counts.<span class="bu">get</span>(v) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>            queue.<span class="bu">enqueue</span>(v)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Process the vertices</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    sortedVertices <span class="op">=</span> <span class="kw">new</span> <span class="bu">Queue</span>()</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="kw">not</span> queue.<span class="bu">isEmpty</span>():</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>        v <span class="op">=</span> queue.<span class="bu">dequeue</span>()</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>        sortedVertices.<span class="bu">enqueue</span>(v)  <span class="co">// preVisit</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="kw">each</span> e <span class="kw">in</span> graph.outgoingEdges(v):</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>            <span class="co">// Decrease v&#39;s prerequisite count</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>            newCount <span class="op">=</span> counts.<span class="bu">get</span>(edge.end) <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>            counts.<span class="bu">put</span>(edge.end, newCount)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> newCount <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>                queue.<span class="bu">enqueue</span>(e.end)</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sortedVertices</span></code></pre></div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is an illustration of the queue-based algorithm.</p>
+</summary>
+<p>
+<div id="topSortQCON" class="ssAV" data-short-name="topSortQCON" data-long-name="topSortQCON Slideshow" alt="topSortQCON Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+</section>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-13.9.html" class="navbutton">&lt;&lt;</a>
+<a href="section-13.9.html" accesskey="p" rel="previous">Dijkstra’s shortest-path algorithm</a>
+</div>
+<div class="navlink">
+<a href="section-13.11.html" accesskey="n" rel="next">Review questions</a>
+<a href="section-13.11.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+<script type="text/javascript" src="../interactive/Graph/topSortDFSCON.js"></script>
+<script type="text/javascript" src="../interactive/Graph/topSortQCON.js"></script>
+</body>
+</html>
+

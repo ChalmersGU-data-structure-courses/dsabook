@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Trees</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-7.5.html" class="navbutton">&lt;&lt;</a>
+<a href="section-7.5.html" accesskey="p" rel="previous">Multiple parameters</a>
+</div>
+<div>
+<a href="section-8.1.html" accesskey="n" rel="next">Binary trees</a>
+<a href="section-8.1.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:trees" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span>
+Trees</h1>
+<p><a href="section-14.html#tree" class="term"
+title="A tree $\mathbf{T}$ is a finite set of one or more nodes such that there is one designated node $R$, called the root of $\mathbf{T}$. If the set $(\mathbf{T} -{R})$ is not empty, these nodes are partitioned into $n &gt; 0$ disjoint sets $\mathbf{T}_0$, $\mathbf{T}_1$, ..., $\mathbf{T}_{n-1}$, each of which is a tree, and whose roots $R_1, R_2, ..., R_n$, respectively, are children of $R$.">Tree</a>
+structures enable efficient access and efficient update to large
+collections of data. <a href="section-14.html#binary-tree" class="term"
+title="A finite set of nodes which is either empty, or else has a root node together two binary trees, called the left and right subtrees, which are disjoint from each other and from the root.">Binary
+trees</a> in particular are widely used and relatively easy to
+implement. But binary trees are useful for many things besides
+searching. Just a few examples of applications that trees can speed up
+include describing mathematical expressions and the syntactic elements
+of computer programs (using expression trees, see <a
+href="section-8.3.html#sec:differentiating-between-internal-nodes-and-leaves">Section 8.3.1</a>),
+prioritising jobs (using binary heaps, see <a
+href="section-9.2.html#sec:binary-heaps">Section 9.2</a>), or organising
+the information needed to drive data compression algorithms (using
+Huffman coding, see <a
+href="section-9.4.html#sec:case-study-huffman-coding">Section 9.4</a>).</p>
+<p>This chapter covers terminology used for discussing binary trees (<a
+href="section-8.1.html#sec:binary-trees">Section 8.1</a>), tree
+traversals (<a
+href="section-8.4.html#sec:traversing-a-binary-tree">Section 8.4</a>),
+approaches to implementing tree nodes (<a
+href="section-8.3.html#sec:implementing-binary-trees">Section 8.3</a>),
+and various examples of binary trees. The chapter concludes by
+discussing non-binary trees, i.e., trees with more (or less) than two
+children (<a
+href="section-8.6.html#sec:general-trees">Section 8.6</a>).</p>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-7.5.html" class="navbutton">&lt;&lt;</a>
+<a href="section-7.5.html" accesskey="p" rel="previous">Multiple parameters</a>
+</div>
+<div class="navlink">
+<a href="section-8.1.html" accesskey="n" rel="next">Binary trees</a>
+<a href="section-8.1.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

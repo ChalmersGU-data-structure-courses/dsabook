@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – General trees</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+<link href="../interactive/General/GenTreeCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Binary/BinExampCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/General/SequentialTreeCON.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-8.5.html" class="navbutton">&lt;&lt;</a>
+<a href="section-8.5.html" accesskey="p" rel="previous">Iteration, recursion, and information flow</a>
+</div>
+<div>
+<a href="section-8.7.html" accesskey="n" rel="next">Review questions</a>
+<a href="section-8.7.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:general-trees" class="level2" data-number="8.6">
+<h2 data-number="8.6"><span class="header-section-number">8.6</span>
+General trees</h2>
+<p>Many organisations are hierarchical in nature, such as the military
+and most businesses. Consider a company with a president and some number
+of vice presidents who report to the president. Each vice president has
+some number of direct subordinates, and so on. If we wanted to model
+this company with a data structure, it would be natural to think of the
+president in the root node of a tree, the vice presidents at level 1,
+and their subordinates at lower levels in the tree as we go down the
+organisational hierarchy.</p>
+<p>Because the number of vice presidents is likely to be more than two,
+this company’s organisation cannot easily be represented by a binary
+tree. We need instead to use a tree whose nodes have an arbitrary number
+of children. Unfortunately, when we permit trees to have nodes with an
+arbitrary number of children, they become much harder to implement than
+binary trees. We consider such trees in this chapter. To distinguish
+them from binary trees, we use the term <a
+href="section-14.html#general-tree" class="term"
+title="A tree in which any given node can have any number of children. This is in contrast to, for example, a binary tree where each node has a fixed number of children (some of which might be `null`). General tree nodes tend to be harder to implement for this reason.">general
+tree</a>.</p>
+<p>In this section we will examine general tree terminology and define a
+basic class for general trees.</p>
+<section id="sec:definitions-and-terminology" class="level3"
+data-number="8.6.1">
+<h3 data-number="8.6.1"><span class="header-section-number">8.6.1</span>
+Definitions and terminology</h3>
+<p>A <a href="section-14.html#tree" class="term"
+title="A tree $\mathbf{T}$ is a finite set of one or more nodes such that there is one designated node $R$, called the root of $\mathbf{T}$. If the set $(\mathbf{T} -{R})$ is not empty, these nodes are partitioned into $n &gt; 0$ disjoint sets $\mathbf{T}_0$, $\mathbf{T}_1$, ..., $\mathbf{T}_{n-1}$, each of which is a tree, and whose roots $R_1, R_2, ..., R_n$, respectively, are children of $R$.">tree</a>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐓</mi><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>
+is a finite set of one or more nodes such that there is one designated
+node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>,
+called the root of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐓</mi><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>.
+If the set
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>𝐓</mi><mo>−</mo><mo stretchy="false" form="prefix">{</mo><mi>R</mi><mo stretchy="false" form="postfix">}</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(\mathbf{T} -\{R\})</annotation></semantics></math>
+is not empty, these nodes are partitioned into
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">n &gt; 0</annotation></semantics></math>
+disjoint sets
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝐓</mi><mn>0</mn></msub><annotation encoding="application/x-tex">\mathbf{T}_0</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝐓</mi><mn>1</mn></msub><annotation encoding="application/x-tex">\mathbf{T}_1</annotation></semantics></math>,
+...,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝐓</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><annotation encoding="application/x-tex">\mathbf{T}_{n-1}</annotation></semantics></math>,
+each of which is a tree, and whose roots
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mn>1</mn></msub><mo>,</mo><msub><mi>R</mi><mn>2</mn></msub><mo>,</mo><mi>.</mi><mi>.</mi><mi>.</mi><mo>,</mo><msub><mi>R</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">R_1, R_2, ..., R_n</annotation></semantics></math>,
+respectively, are children of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>.
+The subsets
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝐓</mi><mi>i</mi></msub><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo>≤</mo><mi>i</mi><mo>&lt;</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\mathbf{T}_i (0 \leq i &lt; n)</annotation></semantics></math>
+are said to be <a href="section-14.html#subtree" class="term"
+title="A subtree is a subset of the nodes of a binary tree that includes some node $R$ of the tree as the subtree root along with all the descendants of $R$.">subtrees</a>
+of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐓</mi><annotation encoding="application/x-tex">\mathbf{T}</annotation></semantics></math>.
+These subtrees are ordered in that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝐓</mi><mi>i</mi></msub><annotation encoding="application/x-tex">\mathbf{T}_i</annotation></semantics></math>
+is said to come before
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝐓</mi><mi>j</mi></msub><annotation encoding="application/x-tex">\mathbf{T}_j</annotation></semantics></math>
+if
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>&lt;</mo><mi>j</mi></mrow><annotation encoding="application/x-tex">i &lt; j</annotation></semantics></math>.
+By convention, the subtrees are arranged from left to right with subtree
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝐓</mi><mn>0</mn></msub><annotation encoding="application/x-tex">\mathbf{T}_0</annotation></semantics></math>
+called the leftmost child of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>.
+A node’s <a href="section-14.html#out-degree" class="term"
+title="In graph terminology, the out degree for a vertex is the number of edges directed out of the vertex.">out
+degree</a> is the number of children for that node. A <a
+href="section-14.html#forest" class="term"
+title="A collection of one or more trees.">forest</a> is a collection of
+one or more trees. <a href="#fig:GeneralTree">Figure 8.6</a> presents
+further tree notation generalised from the notation for binary
+trees.</p>
+<figure id="fig:GeneralTree">
+<img src="images/GeneralTree.png" style="width:70.0%"
+alt="Figure 8.6: Notation for general trees. Node P is the parent of nodes V, S1, and S2. Thus, V, S1, and S2 are children of P. Nodes R and P are ancestors of V. Nodes V, S1, and S2 are called siblings. The oval surrounds the subtree having V as its root." />
+<figcaption aria-hidden="true">Figure 8.6: Notation for general trees.
+Node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>
+is the parent of nodes
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">S1</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">S2</annotation></semantics></math>.
+Thus,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">S1</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">S2</annotation></semantics></math>
+are children of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>.
+Nodes
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math>
+are ancestors of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>.
+Nodes
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">S1</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">S2</annotation></semantics></math>
+are called <a href="section-14.html#sibling" class="term"
+title="In a tree, a sibling of node $A$ is any other node with the same parent as $A$.">siblings</a>.
+The oval surrounds the subtree having
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>
+as its root.</figcaption>
+</figure>
+<p>Each node in a tree has precisely one parent, except for the root,
+which has no parent. From this observation, it immediately follows that
+a tree with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+nodes must have
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>
+edges because each node, aside from the root, has one edge connecting
+that node to its parent.</p>
+</section>
+<section id="sec:adt-for-general-trees" class="level3"
+data-number="8.6.2">
+<h3 data-number="8.6.2"><span class="header-section-number">8.6.2</span>
+ADT for general trees</h3>
+<p>Before discussing general tree implementations, we should first make
+precise what operations such implementations must support. Any
+implementation must be able to initialise a tree. Given a tree, we need
+access to the root of that tree. There must be some way to access the
+children of a node. In the case of binary tree nodes, this was done by
+providing instance variables for the left and right child pointers.
+Unfortunately, because we do not know in advance how many children a
+given node will have in the general tree, we cannot give explicit
+functions to access each child. An alternative must be found that works
+for an unknown number of children.</p>
+<p>One choice would be to provide a function that takes as its parameter
+the index for the desired child. That combined with a function that
+returns the number of children for a given node would support the
+ability to access any node or process all children of a node.
+Unfortunately, this view of access tends to bias the choice for node
+implementations in favour of an array-based approach, because these
+functions favour random access to a list of children.</p>
+<p>An alternative is to provide access to a <strong>List</strong> of the
+children pointers. This list can be an array-based list or a linked list
+or even a dynamic function generating the children on demand. The only
+thing we will assume is that it follows the <strong>List</strong> ADT,
+as described in <a
+href="section-6.10.html#sec:general-lists">Section 6.10</a>.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// General tree nodes</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> GTNode <span class="kw">of</span> T:</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    elem: T                   <span class="co">// This is the value, just as for binary nodes</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    children: <span class="bu">List</span> <span class="kw">of</span> GTNode  <span class="co">// All children of the node</span></span></code></pre></div>
+</section>
+<section id="sec:traversing-a-general-tree" class="level3"
+data-number="8.6.3">
+<h3 data-number="8.6.3"><span class="header-section-number">8.6.3</span>
+Traversing a general tree</h3>
+<p>There are three traditional <span class="tree">tree traversals</span>
+for <a href="section-14.html#binary-tree" class="term"
+title="A finite set of nodes which is either empty, or else has a root node together two binary trees, called the left and right subtrees, which are disjoint from each other and from the root.">binary
+trees</a>: <a href="section-14.html#preorder-traversal" class="term"
+title="In a binary tree, a traversal that first visits the root, then recursively visits the left child, then recursively visits the right child.">preorder</a>,
+<a href="section-14.html#postorder-traversal" class="term"
+title="In a binary tree, a traversal that first recursively visits the left child, then recursively visits the right child, and then visits the root.">postorder</a>,
+and <a href="section-14.html#inorder-traversal" class="term"
+title="In a binary tree, a traversal that first recursively visits the left child, then visits the root, and then recursively visits the right child. In a binary search tree, this traversal will enumerate the nodes in sorted order.">inorder</a>
+(see <a
+href="section-8.4.html#sec:traversing-a-binary-tree">Section 8.4</a>).
+For general trees, preorder and postorder traversals are defined with
+meanings similar to their binary tree counterparts. Preorder traversal
+of a general tree first visits the root of the tree, then performs a
+preorder traversal of each subtree from left to right. A postorder
+traversal of a general tree performs a postorder traversal of the root’s
+subtrees from left to right, then visits the root. Inorder traversal
+does not have a natural definition for the general tree, because there
+is no particular number of children for an internal node. An arbitrary
+definition – such as visit the leftmost subtree in inorder, then the
+root, then visit the remaining subtrees in inorder – can be invented.
+However, inorder traversals are generally not useful with general
+trees.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Visualisation of preorder traversal.</p>
+</summary>
+<p>
+<div id="GenTreePreTravCON" class="ssAV" data-short-name="GenTreePreTravCON" data-long-name="General Tree Preorder Traversal Slideshow" alt="General Tree Preorder Traversal Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<p>To perform a preorder traversal, it is necessary to visit each of the
+children for a given node (say
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>)
+from left to right. This is accomplished by starting at R’s leftmost
+child (call it
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>T</mi><annotation encoding="application/x-tex">T</annotation></semantics></math>).
+From
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>T</mi><annotation encoding="application/x-tex">T</annotation></semantics></math>,
+we can move to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>T</mi><annotation encoding="application/x-tex">T</annotation></semantics></math>’s
+right sibling, and then to that node’s right sibling, and so on.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Visualisation of postorder traversal.</p>
+</summary>
+<p>
+<div id="GenTreePostTravCON" class="ssAV" data-short-name="GenTreePostTravCON" data-long-name="General Tree Postorder Traversal Slideshow" alt="General Tree Postorder Traversal Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<p>Using the General Tree class shown above, here are implementations to
+process the nodes of a general tree in preorder and in postorder. The
+code is very simple, but this is because we defer all the complexity to
+the underlying <strong>List</strong> implementation of the children.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> preorder(node):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    process(node)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> child <span class="kw">in</span> node.children:</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        preorder(child)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> postorder(node):</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> child <span class="kw">in</span> node.children:</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        postorder(child)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    process(node)</span></code></pre></div>
+</section>
+<section id="sec:sequential-tree-representations" class="level3"
+data-number="8.6.4">
+<h3 data-number="8.6.4"><span class="header-section-number">8.6.4</span>
+Sequential tree representations</h3>
+<p>Next we consider a fundamentally different approach to implementing
+trees. The goal is to store a series of node values with the minimum
+information needed to reconstruct the tree structure.</p>
+<div class="online">
+<p>This approach, known as a <a
+href="section-14.html#sequential-tree-representation" class="term"
+title="A representation that stores a series of node values with the minimum information needed to reconstruct the tree structure. This is a technique for serialising a tree.">sequential
+tree representation</a>, has the advantage of saving space because no
+pointers are stored. It has the disadvantage that accessing any node in
+the tree requires sequentially processing all nodes that appear before
+it in the node list. In other words, node access must start at the
+beginning of the node list, processing nodes sequentially in whatever
+order they are stored until the desired node is reached. Thus, one
+primary virtue of the other implementations discussed in this section is
+lost: efficient access (typically
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>
+time) to arbitrary nodes in the tree. Sequential tree implementations
+are ideal for archiving trees on disk for later use because they save
+space, and the tree structure can be reconstructed as needed for later
+processing.</p>
+<p>Sequential tree implementations can be used to <a
+href="section-14.html#serialisation" class="term"
+title="The process of taking a data structure in memory and representing it as a sequence of bytes. This is sometimes done in order to transmit the data structure across a network or store the data structure in a stream, such as on disk. Deserialisation reconstructs the original data structure from the serialised representation.">serialise</a>
+a tree structure. Serialisation is the process of storing an object as a
+series of bytes, typically so that the data structure can be transmitted
+between computers. This capability is important when using data
+structures in a distributed processing environment.</p>
+<p>A sequential tree implementation typically stores the node values as
+they would be enumerated by a preorder traversal, along with sufficient
+information to describe the tree’s shape. If the tree has restricted
+form, for example if it is a full binary tree, then less information
+about structure typically needs to be stored. A general tree, because it
+has the most flexible shape, tends to require the most additional shape
+information. There are many possible sequential tree implementation
+schemes. We will begin by describing methods appropriate to binary
+trees, then generalise to an implementation appropriate to a general
+tree structure.</p>
+<p>Because every node of a binary tree is either a leaf or has two
+(possibly empty) children, we can take advantage of this fact to
+implicitly represent the tree’s structure. The most straightforward
+sequential tree implementation lists every node value as it would be
+enumerated by a preorder traversal. Unfortunately, the node values alone
+do not provide enough information to recover the shape of the tree. In
+particular, as we read the series of node values, we do not know when a
+leaf node has been reached. However, we can treat all non-empty nodes as
+internal nodes with two (possibly empty) children. Only NULL values will
+be interpreted as leaf nodes, and these can be listed explicitly. Such
+an augmented node list provides enough information to recover the tree
+structure.</p>
+<figure id="fig:BinExampb" class="subfigures">
+<p>
+<div id="BinExampCON" class="ssAV" data-short-name="BinExampCON" data-long-name="Binary/BinExampCON" alt="Binary/BinExampCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<figcaption><p>Figure 8.7: Sample binary tree for sequential tree
+implementation examples.. </p></figcaption>
+</figure>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Reconstructing the original tree in <a
+href="#fig:BinExampb">Figure 8.7</a> from its sequential
+representation.</p>
+</summary>
+<p>
+<div id="SequentialTreeCON" class="ssAV" data-short-name="SequentialTreeCON" data-long-name="First sequential representation Slideshow" alt="First sequential representation Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Practice exercise for sequential tree representation.</p>
+</summary>
+<p>
+<div id="SequentialTreePRO" class="embedContainer">
+<iframe id="SequentialTreePRO_iframe" aria-label="SequentialTreePRO" src="../interactive/General/SequentialTreePRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</div>
+<section id="sec:alternative-sequential-representation"
+class="level4 unnumbered">
+<h4 class="unnumbered">Alternative sequential representation</h4>
+<p>To illustrate the difficulty involved in using the sequential tree
+representation for processing, consider searching for the right child of
+the root node. We must first move sequentially through the node list of
+the left subtree. Only at this point do we reach the value of the root’s
+right child. Clearly the sequential representation is space efficient,
+but not time efficient for descending through the tree along some
+arbitrary path.</p>
+<p>Assume that each node value takes a constant amount of space. An
+example would be if the node value is a positive integer and
+<code>null</code> is indicated by the value zero. From the <a
+href="section-14.html#full-binary-tree-theorem" class="term"
+title="This theorem states that the number of leaves in a non-empty full binary tree is one more than the number of internal nodes. Equivalently, then number of null pointers in a standard pointer-based implementation for binary tree nodes is one more than the number of nodes in the binary tree.">Full
+Binary Tree Theorem</a>, we know that the size of the node list will be
+about twice the number of nodes (i.e., the overhead fraction is 1/2).
+The extra space is required by the <code>null</code> pointers. We should
+be able to store the node list more compactly. However, any sequential
+implementation must recognise when a leaf node has been reached, that
+is, a leaf node indicates the end of a subtree. One way to do this is to
+explicitly list with each node whether it is an internal node or a leaf.
+If a node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
+is an internal node, then we know that its two children (which may be
+subtrees) immediately follow
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
+in the node list. If
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
+is a leaf node, then the next node in the list is the right child of
+some ancestor of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>,
+not the right child of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>.
+In particular, the next node will be the child of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
+‘s most recent ancestor that has not yet seen its right child. However,
+this assumes that each internal node does in fact have two children, in
+other words, that the tree is full. Empty children must be indicated in
+the node list explicitly. Assume that internal nodes are marked with a
+prime (’) and that leaf nodes show no mark. Empty children of internal
+nodes are indicated by “/”, but the (empty) children of leaf nodes are
+not represented at all. Note that a full binary tree stores no
+<code>null</code> values with this implementation, and so requires less
+overhead.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Reconstructing the original tree in <a
+href="#fig:BinExampb">Figure 8.7</a> from the alternative sequential
+representation.</p>
+</summary>
+<p>
+<div id="SequentialTreeAltCON" class="ssAV" data-short-name="SequentialTreeAltCON" data-long-name="Second sequential representation Slideshow" alt="Second sequential representation Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<p>Storing
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+extra bits can be a considerable savings over storing
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+<code>null</code> values. In the example above, each node was shown with
+a mark if it is internal, or no mark if it is a leaf. This requires that
+each node value has space to store the mark bit. This might be true if,
+for example, the node value were stored as a 4-byte integer but the
+range of the values sored was small enough so that not all bits are
+used. An example would be if all node values must be positive. Then the
+high-order (sign) bit of the integer value could be used as the mark
+bit.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Practice exercise for the alternative sequential representation.</p>
+</summary>
+<p>
+<div id="SequentialTreeAltPRO" class="embedContainer">
+<iframe id="SequentialTreeAltPRO_iframe" aria-label="SequentialTreeAltPRO" src="../interactive/General/SequentialTreeAltPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</div>
+</section>
+<section id="sec:bit-vector-representation" class="level4 unnumbered">
+<h4 class="unnumbered">Bit vector representation</h4>
+<p>Another approach is to store a separate bit vector to represent the
+status of each node. In this case, each node of the tree corresponds to
+one bit in the bit vector. A value of “1” could indicate an internal
+node, and “0” could indicate a leaf node.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Reconstructing the shape of the tree in <a
+href="#fig:BinExampb">Figure 8.7</a> from its bit vector
+representation.</p>
+</summary>
+<p>
+<div id="SequentialTreeBitsCON" class="ssAV" data-short-name="SequentialTreeBitsCON" data-long-name="Bit vector sequential representation Slideshow" alt="Bit vector sequential representation Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Practice exercise for the bit vector representation.</p>
+</summary>
+<p>
+<div id="SequentialTreeBitVectorPRO" class="embedContainer">
+<iframe id="SequentialTreeBitVectorPRO_iframe" aria-label="SequentialTreeBitVectorPRO" src="../interactive/General/SequentialTreeBitVectorPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</div>
+</section>
+<section id="sec:serialising-general-trees" class="level4 unnumbered">
+<h4 class="unnumbered">Serialising general trees</h4>
+<p>Storing general trees by means of a sequential implementation
+requires that more explicit structural information be included with the
+node list. Not only must the general tree implementation indicate
+whether a node is leaf or internal, it must also indicate how many
+children the node has. Alternatively, the implementation can indicate
+when a node’s child list has come to an end. The next example dispenses
+with marks for internal or leaf nodes. Instead it includes a special
+mark (we will use the “)” symbol) to indicate the end of a child list.
+All leaf nodes are followed by a “)” symbol because they have no
+children. A leaf node that is also the last child for its parent would
+indicate this by two or more successive “)” symbols.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Reconstructing a general from its sequential representation.</p>
+</summary>
+<p>
+<div id="SequentialGenTreeCON" class="ssAV" data-short-name="SequentialGenTreeCON" data-long-name="General Tree sequential representation Slideshow" alt="General Tree sequential representation Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<p>Note that this representation for serialising general trees cannot be
+used for binary trees. This is because a binary tree is not merely a
+restricted form of general tree with at most two children. Every binary
+tree node has a left and a right child, though either or both might be
+empty. So this representation cannot let us distinguish whether node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>
+in <a href="#fig:BinExampb">Figure 8.7</a> is the left or right child of
+node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Practice exercise for sequential representation of general trees.</p>
+</summary>
+<p>
+<div id="SequentialTreeGenTreePRO" class="embedContainer">
+<iframe id="SequentialTreeGenTreePRO_iframe" aria-label="SequentialTreeGenTreePRO" src="../interactive/General/SequentialTreeGenTreePRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</div>
+</section>
+</div>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-8.5.html" class="navbutton">&lt;&lt;</a>
+<a href="section-8.5.html" accesskey="p" rel="previous">Iteration, recursion, and information flow</a>
+</div>
+<div class="navlink">
+<a href="section-8.7.html" accesskey="n" rel="next">Review questions</a>
+<a href="section-8.7.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+<script type="text/javascript" src="../interactive/General/GenTreePreTravCON.js"></script>
+<script type="text/javascript" src="../interactive/General/GenTreePostTravCON.js"></script>
+<script type="text/javascript" src="../interactive/Binary/BinExampCON.js"></script>
+<script type="text/javascript" src="../interactive/General/SequentialTreeCON.js"></script>
+<script type="text/javascript" src="../interactive/General/SequentialTreeAltCON.js"></script>
+<script type="text/javascript" src="../interactive/General/SequentialTreeBitsCON.js"></script>
+<script type="text/javascript" src="../interactive/General/SequentialGenTreeCON.js"></script>
+</body>
+</html>
+

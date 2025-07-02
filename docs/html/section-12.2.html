@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Converting objects to table indices</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-12.1.html" class="navbutton">&lt;&lt;</a>
+<a href="section-12.1.html" accesskey="p" rel="previous">Hash functions</a>
+</div>
+<div>
+<a href="section-12.3.html" accesskey="n" rel="next">Separate chaining</a>
+<a href="section-12.3.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:converting-objects-to-table-indices" class="level2"
+data-number="12.2">
+<h2 data-number="12.2"><span class="header-section-number">12.2</span>
+Converting objects to table indices</h2>
+<p>We want to be able to build hash tables for any kind of object – be
+it a string, a complex datatype of persons, or an x-ray image. But we
+(i.e., the ones implementing the hash table) do not know which kind of
+object the user (i.e., the one using the hash table) wants to put in
+their hash table. Therefore the easiest is to <em>delegate</em> the
+implementation of the hash function to the object itself. By this we
+mean that every datatype (strings, persons, x-ray images) should have a
+designated method that turns a specific object into an integer, just as
+for the Person datatype we showed in the end of the last section:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> Person:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    firstName: String</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    middleName: String</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    lastName: String</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    hashCode() <span class="op">-&gt;</span> <span class="bu">Integer</span>:</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        code <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> part <span class="kw">in</span> (firstName, middleName, lastName):</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>            code <span class="op">=</span> p<span class="op">*</span>code <span class="op">+</span> part.hashCode()</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> code</span></code></pre></div>
+<p>This is a very common strategy in many programming languages – e.g.,
+in Java this designated method is called exactly
+<code>hashCode()</code>, and in Python it is called
+<code>__hash__()</code>.</p>
+<section id="sec:compressing-a-hash-code" class="level3"
+data-number="12.2.1">
+<h3 data-number="12.2.1"><span
+class="header-section-number">12.2.1</span> Compressing a hash code</h3>
+<p>Internally, a hash table is an array of a fixed length, say
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>,
+and each of these
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
+slots represent a bucket which contains some objects. The hash function
+should help us by telling in which bucket we should search for the given
+object.</p>
+<p>Now, the problem is that the datatypes and objects have no idea how
+large the internal array is, i.e., which array index they should return.
+Instead, the only thing that the <code>hashCode()</code> method can do
+is to return an arbitrary integer. So, how can we solve this
+dilemma?</p>
+<p>The solution is to implement a function that transforms an arbitrary
+hash code into an array index. This is called <em>compression</em> – we
+compress the arbitrary integer that is the hash code into an array index
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>≤</mo><mi>i</mi><mo>&lt;</mo><mi>m</mi></mrow><annotation encoding="application/x-tex">0\leq i&lt;m</annotation></semantics></math>.</p>
+<p>Therefore, computing the hash table index for a given object is a
+two-step process:</p>
+<ol type="1">
+<li>First calculate the hash code which is an arbitrary integer – this
+is calculated by the object itself.</li>
+<li>Then compress the hash code into a table index
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>≤</mo><mi>i</mi><mo>&lt;</mo><mi>m</mi></mrow><annotation encoding="application/x-tex">0\leq i&lt;m</annotation></semantics></math>
+– this is calculated by an internal function in the hash table.</li>
+</ol>
+</section>
+<section id="sec:modular-compression" class="level3"
+data-number="12.2.2">
+<h3 data-number="12.2.2"><span
+class="header-section-number">12.2.2</span> Modular compression</h3>
+<p>The simplest way to compress a hash code
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo>≥</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">h\geq 0</annotation></semantics></math>
+into a table index
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>,
+is to take
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>h</mi><annotation encoding="application/x-tex">h</annotation></semantics></math>
+<strong>modulo</strong> the array size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>=</mo><mi>h</mi><mrow><mspace width="0.444em"></mspace><mrow><mi>mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mi>m</mi></mrow></mrow><annotation encoding="application/x-tex">
+i = h \mod m
+</annotation></semantics></math></p>
+<p>This is called <em>modular compression</em> and is the most common
+compression method.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is an interactive explanation of modular compression.</p>
+</summary>
+<p>
+<div id="hashFuncExCON1" class="ssAV" data-short-name="hashFuncExCON1" data-long-name="Hash Function Slideshow 1" alt="Hash Function Slideshow 1" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<p>Recall that it is common to use an integer as its own hash code. Now
+we see that this is not the full picture, because the integer will then
+be compressed into the internal array of the hash table. Assume that we
+have an integer hash table of sixteen slots – then the combined hash
+function will be the same as the modular compression:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="bu">hash</span>(n):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> n <span class="op">%</span> <span class="dv">16</span></span></code></pre></div>
+<p>Note that the values 0 to 15 can be represented with four bits (i.e.,
+0000 to 1111). The value returned by this hash function depends solely
+on the least significant four bits of the key. Because these bits are
+likely to be poorly distributed (as an example, a high percentage of the
+keys might be even numbers, which means that the low order bit is zero),
+the result will also be poorly distributed. This example shows that the
+size of the table
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
+can have a big effect on the performance of a hash system.</p>
+<p>One way to get a better distribution is to always let the size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
+of the internal array be a prime number.</p>
+</section>
+<section id="sec:negative-hash-codes" class="level3"
+data-number="12.2.3">
+<h3 data-number="12.2.3"><span
+class="header-section-number">12.2.3</span> Negative hash codes</h3>
+<p>However, in general integers are signed, so the method
+<code>hashCode()</code> might return a negative integer. If we take this
+modulo
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>,
+we might get a negative result. A negative index is not suitable as a
+table index, so first we have to make the hash code positive.</p>
+<p>One way to do this is to mask off the sign bit. Most programming
+languages use integers in the range
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><msup><mn>2</mn><mn>31</mn></msup><mo>≤</mo><mi>h</mi><mo>&lt;</mo><msup><mn>2</mn><mn>31</mn></msup></mrow><annotation encoding="application/x-tex">-2^{31}\leq h&lt;2^{31}</annotation></semantics></math>.
+In these cases we can e.g. use <code>h &amp; 0x7fffffff</code> to make
+the hash code positive.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> compress(h):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    h <span class="op">=</span> h <span class="op">&amp;</span> <span class="bn">0x7fffffff</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> h <span class="op">%</span> m</span></code></pre></div>
+</section>
+<section id="sec:the-hash-code-never-changes" class="level3"
+data-number="12.2.4">
+<h3 data-number="12.2.4"><span
+class="header-section-number">12.2.4</span> The hash code never
+changes</h3>
+<p>The generic hash codes should never change, because hashing must be
+predictable. Therefore we don’t have to recalculate the hash code when
+we resize the internal table, it is only the table indices that have to
+be updated.</p>
+<p>One implication of this is that it’s only meaningful to calculate
+hash codes for <em>immutable objects</em>, i.e., objects that don’t
+change (after they are initialised). Many programming languages make a
+difference between <em>tuples</em> and <em>lists</em>, where the latter
+are <em>mutable</em>. This means that we can add elements to and remove
+from lists, but we cannot do that with tuples. Once the tuple is
+initialised we cannot change it – and therefore we can use a tuple as an
+object in a hash table.</p>
+<p>Python uses this fact to optimise their built-in hash tables by
+storing the hash codes together with the keys and values. This increases
+the size of the table slightly, but on the other hand it ensures that
+hash codes are not calculated more than once.</p>
+<p>In Java, the optimisation is delegated to the object classes
+themselves. E.g., a Java string only calculates its hash code once and
+then stores it in an instance variable for immediate lookup.</p>
+</section>
+<section id="sec:handling-collisions" class="level3"
+data-number="12.2.5">
+<h3 data-number="12.2.5"><span
+class="header-section-number">12.2.5</span> Handling collisions</h3>
+<p>So far we have talked about how to calculate an array index for an
+arbitrary object. One thing we haven’t discussed yet is what we should
+do if two two different objects get assigned the same slots in the
+table.</p>
+<p>Assume that we have an internal array of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><mn>16</mn></mrow><annotation encoding="application/x-tex">m=16</annotation></semantics></math>,
+and we use modular compression like above. Then every 16th integer will
+get the same array index, such as the integers 7, 23, 39, 55, etc.</p>
+<p>So, one very important question is how to handle <em>collision</em>,
+i.e., when two objects want to occupy the same slot. There are two main
+approaches to this, two <em>collision resolution strategies</em>:</p>
+<dl>
+<dt>Separate chaining</dt>
+<dd>
+The internal array contains pointers to <em>collections</em> of objects
+– it could be linked lists, self-balancing trees, or some other suitable
+data structure.
+</dd>
+<dt>Open addressing</dt>
+<dd>
+The internal array contains the objects themselves. Collisions are
+handled by <em>probing</em> the array – i.e., searching through the
+table to find an empty slot.
+</dd>
+</dl>
+<p>Both of these are common – e.g., the Java standard library implements
+a separate chaining hash table, while the Python sets and dictionaries
+are implemented using open addressing hash tables.</p>
+<p>We will start by describing separate chaining hash tables in <a
+href="section-12.3.html#sec:separate-chaining">Section 12.3</a>, and
+then continue with open addressing in <a
+href="section-12.5.html#sec:open-addressing">Section 12.5</a>.</p>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-12.1.html" class="navbutton">&lt;&lt;</a>
+<a href="section-12.1.html" accesskey="p" rel="previous">Hash functions</a>
+</div>
+<div class="navlink">
+<a href="section-12.3.html" accesskey="n" rel="next">Separate chaining</a>
+<a href="section-12.3.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+<script type="text/javascript" src="../interactive/Hashing/hashFuncExCON1.js"></script>
+</body>
+</html>
+

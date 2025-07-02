@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Implementing priority queues using binary
+trees</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-9.html" class="navbutton">&lt;&lt;</a>
+<a href="section-9.html" accesskey="p" rel="previous">Priority queues and heaps</a>
+</div>
+<div>
+<a href="section-9.2.html" accesskey="n" rel="next">Binary heaps</a>
+<a href="section-9.2.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:implementing-priority-queues-using-binary-trees"
+class="level2" data-number="9.1">
+<h2 data-number="9.1"><span class="header-section-number">9.1</span>
+Implementing priority queues using binary trees</h2>
+<p>A normal linear data structure, such as a <a
+href="section-14.html#linked-list" class="term"
+title="An implementation for the list ADT that uses dynamic allocation of link nodes to store the list elements. Common variants are the singly linked list, doubly linked list and circular list. The overhead required is the pointers in each link node.">linked
+list</a> or <a href="section-14.html#dynamic-array" class="term"
+title="Arrays, once allocated, are of fixed size. A dynamic array puts an interface around the array so as to appear to allow the array to grow and shrink in size as necessary. Typically this is done by allocating a new copy, copying the contents of the old array, and then returning the old array to free store. If done correctly, the amortised cost for dynamically resizing the array can be made constant. In some programming languages such as Java, the term vector is used as a synonym for dynamic array.">dynamic
+array</a>, cannot implement a priority queue efficiently. This is
+because either insertion or removal will take linear time,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>,
+in the worst case.</p>
+<ul>
+<li>If we use unordered lists, then searching for the element with the
+highest priority will be linear.</li>
+<li>If we instead use sorted lists, then inserting an element into that
+list will be linear.</li>
+</ul>
+<p>In this we show how to use binary trees instead of lists, to
+implement priority queues.</p>
+<section id="sec:the-heap-property" class="level3" data-number="9.1.1">
+<h3 data-number="9.1.1"><span class="header-section-number">9.1.1</span>
+The heap property</h3>
+<p>The main idea is that we always keep the highest priority element as
+the root of the tree. This means that we have constant access to it, so
+the method <code>getMin</code> will always be constant time.</p>
+<p>In general, a <a href="section-14.html#heap" class="term"
+title="The head data structure is a complete binary tree with the requirement that every node has a value greater than its children (called a max heap), or else the requirement that every node has a value less than its children (called a min heap). Since it is a complete binary tree, a heap is nearly always implemented using an array rather than an explicit tree structure. To add a new value to a heap, or to remove the extreme value (the max value in a max-heap or min value in a min-heap) and update the heap, takes $O(\log n)$ time in the worst case. However, if given all of the values in an unordered array, the values can be re-arranged to form a heap in only $O(n)$ time. Due to its space and time efficiency, the heap is a popular choice for implementing a priority queue. Uncommonly, *heap* is a synonym for free store.">heap</a>
+is a tree which satisfies the <em>heap property</em>:</p>
+<ul>
+<li>Every tree node has at least as high priority as all its
+children</li>
+</ul>
+<p>One immediate consequence of this property is that the root in a heap
+always contains the element with the highest priority.</p>
+<p>Now, how do we implement these heaps so that they will always be
+efficient? There are actually several possible ways to do this, each
+having their own advantages and disadvantages. Some heap data
+structurues are <em>leftist heaps</em>, <em>skew heaps</em>,
+<em>Fibonacci heaps</em>, <em>2-3 heaps</em>, <em>binomial heaps</em>,
+and many more.</p>
+<p>In this chapter we will focus on the most basic heap implementation,
+<em>binary heaps</em>. What makes this implementation special is that it
+stores the tree as an array, which makes it very space-efficient.</p>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-9.html" class="navbutton">&lt;&lt;</a>
+<a href="section-9.html" accesskey="p" rel="previous">Priority queues and heaps</a>
+</div>
+<div class="navlink">
+<a href="section-9.2.html" accesskey="n" rel="next">Binary heaps</a>
+<a href="section-9.2.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

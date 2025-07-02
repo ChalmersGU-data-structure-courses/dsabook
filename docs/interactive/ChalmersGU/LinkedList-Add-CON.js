@@ -6,7 +6,6 @@ $(document).ready(function() {
   var av = new JSAV(av_name);
   var pseudo = av.code([
     "add(i, x):",
-    "    // Precondition: 0 <= i <= listSize",
     "    if i == 0:",
     "        head = new Node(x, head)",
     "    else:",
@@ -14,7 +13,7 @@ $(document).ready(function() {
     "        repeat i-1 times:",
     "            prev = prev.next",
     "        prev.next = new Node(x, prev.next)",
-    "    listSize = listSize + 1",
+    "    size = size + 1",
   ], {lineNumbers: false});
 
   // Offsets
@@ -32,7 +31,7 @@ $(document).ready(function() {
   var addPos = 3;
   var addValue = 42;
   var listSize = 5;
-  av.label("listSize", {left: 20, top: -10});
+  av.label("size", {left: 45, top: -5});
   var listSizeArr = av.ds.array([listSize], {indexed: false, top: -15, left: 80});
 
   // Horizontal arrow in step 4 pointing to item 12
@@ -43,7 +42,7 @@ $(document).ready(function() {
 
   // Slide
   av.umsg(`
-Here is an example showing how to add the value ${addValue} at position ${addPos}, 
+Here is an example showing how to add the value ${addValue} at position ${addPos},
 i.e., between the values ${l.get(addPos-1).value()} and ${l.get(addPos).value()}.
 `);
   pseudo.highlight(1);
@@ -53,7 +52,7 @@ i.e., between the values ${l.get(addPos-1).value()} and ${l.get(addPos).value()}
   av.umsg(`First we move the <code>prev</code> pointer to the node before position ${addPos}.`);
   prevP.show();
   pseudo.unhighlight(1);
-  pseudo.highlight([6,7,8]);
+  pseudo.highlight([5,6,7]);
   for (let i=0; i<addPos; i++) {
     prevP.target(l.get(i));
     av.step();
@@ -61,8 +60,8 @@ i.e., between the values ${l.get(addPos-1).value()} and ${l.get(addPos).value()}
 
   // Slide
   av.umsg("Create a new list node.");
-  pseudo.unhighlight([6,7,8]);
-  pseudo.highlight(9);
+  pseudo.unhighlight([5,6,7]);
+  pseudo.highlight(8);
   var newNode = l.newNode("");
   // Set the position for the new node
   newNode.css({top: 50, left: 222});
@@ -104,8 +103,8 @@ i.e., between the values ${l.get(addPos-1).value()} and ${l.get(addPos).value()}
 
   // Slide
   av.umsg("Increase the list size by 1.");
-  pseudo.unhighlight(9);
-  pseudo.highlight(10);
+  pseudo.unhighlight(8);
+  pseudo.highlight(9);
   l.get(addPos).unhighlight();
   listSizeArr.value(0, listSize+1);
   listSizeArr.highlight(0);
@@ -115,6 +114,6 @@ i.e., between the values ${l.get(addPos-1).value()} and ${l.get(addPos).value()}
   av.umsg("Finished!");
   prevP.hide();
   listSizeArr.unhighlight(0);
-  pseudo.unhighlight(10);
+  pseudo.unhighlight(9);
   av.recorded();
 });

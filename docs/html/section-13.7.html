@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Kruskal’s algorithm for finding the MST</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+<link href="../interactive/Graph/kruskalCON.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-13.6.html" class="navbutton">&lt;&lt;</a>
+<a href="section-13.6.html" accesskey="p" rel="previous">Prim’s algorithm for finding the MST</a>
+</div>
+<div>
+<a href="section-13.8.html" accesskey="n" rel="next">Shortest-paths problems</a>
+<a href="section-13.8.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:kruskals-algorithm" class="level2" data-number="13.7">
+<h2 data-number="13.7"><span class="header-section-number">13.7</span>
+Kruskal’s algorithm for finding the MST</h2>
+<p>Our next MST algorithm is commonly referred to as <a
+href="section-14.html#kruskals-algorithm" class="term"
+title="An algorithm for computing the MST of a graph. During processing, it makes use of the UNION/FIND process to efficiently determine of two vertices are within the same subgraph.">Kruskal’s
+algorithm</a>. Kruskal’s algorithm is also a simple, greedy algorithm.
+First partition the set of vertices into
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|\mathbf{V}|</annotation></semantics></math>
+<a href="section-14.html#union-find" class="term"
+title="A process for mainining a collection of disjoint sets. The FIND operation determines which disjoint set a given object resides in, and the UNION operation combines two disjoint sets when it is determined that they are members of the same equivalence class under some equivalence relation.">disjoint
+sets</a>, each consisting of one vertex. Then process the edges in order
+of weight. An edge is added to the MST, and two disjoint sets combined,
+if the edge connects two vertices in different disjoint sets. This
+process is repeated until only one disjoint set remains.</p>
+<p>The edges can be processed in order of weight by putting them in an
+array and then sorting the array. Another possibility is to use a
+<em>minimum</em> <a href="section-14.html#priority-queue" class="term"
+title="An ADT whose primary operations of insert of records, and deletion of the greatest (or, in an alternative implementation, the least) valued record. Most often implemented using the heap data structure. The name comes from a common application where the records being stored represent tasks, with the ordering values based on the priorities of the tasks.">priority
+queue</a>, similar to what we did in <a
+href="section-14.html#prims-algorithm" class="term"
+title="A greedy algorithm for computing the MST of a graph. It is nearly identical to Dijkstra&#39;s algorithm for solving the single-source shortest paths problem, with the only difference being the calculation done to update the best-known distance.">Prim’s
+algorithm</a> in the previous section.</p>
+<p>The only tricky part to this algorithm is determining if two vertices
+belong to the same equivalence class. Fortunately, the ideal algorithm
+is available for the purpose – the <a href="section-14.html#union-find"
+class="term"
+title="A process for mainining a collection of disjoint sets. The FIND operation determines which disjoint set a given object resides in, and the UNION operation combines two disjoint sets when it is determined that they are members of the same equivalence class under some equivalence relation.">Union/Find</a>
+algorithm, described in <a
+href="section-11.5.html#sec:disjoint-sets">Section 11.5</a>. Here is an
+implementation for Kruskal’s algorithm. Note that since the MST will
+never have more than
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="false" form="prefix">|</mo><mi>−</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">|\mathbf{V}|-1</annotation></semantics></math>
+edges, we can return as soon as the MST contains enough edges.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> kruskal(graph):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    edges <span class="op">=</span> <span class="kw">all</span> edges <span class="kw">in</span> graph</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    sort edges by their weight</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    mst <span class="op">=</span> <span class="kw">new</span> <span class="bu">Set</span>() <span class="kw">of</span> edges</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    forest <span class="op">=</span> <span class="kw">new</span> ParentPointerTree(graph.<span class="bu">size</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="kw">not</span> edges.<span class="bu">isEmpty</span>():</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        e <span class="op">=</span> edges.<span class="bu">removeMin</span>()</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> forest.find(e.start) <span class="op">!=</span> forest.find(e.end):</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>            mst.<span class="bu">add</span>(edge)     <span class="co">// If the vertices are not connected, add the edge to the MST</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> mst.<span class="bu">size</span> <span class="op">&gt;=</span> graph.<span class="bu">size</span><span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> mst    <span class="co">// Return when the MST has |V|-1 edges</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>            forest.union(e.start, e.end)  <span class="co">// Connect the two vertices</span></span></code></pre></div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a visualisation of Kruskal’s algorithm. To the left is the
+<code>forest</code>, the disjoint set of trees, and to the right is a
+list of all edges together with their weights.</p>
+</summary>
+<p>
+<div id="kruskalCON" class="ssAV" data-short-name="kruskalCON" data-long-name="Kruskal Slideshow" alt="Kruskal Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<p>Kruskal’s algorithm is dominated by the time required to process the
+edges. The <strong>Find</strong> and <strong>Union</strong> functions
+are nearly constant in time if path compression and weighted union is
+used. Thus, the total cost of the algorithm is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">|</mo><mi>𝐄</mi><mo stretchy="false" form="prefix">|</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">|</mo><mi>𝐄</mi><mo stretchy="false" form="prefix">|</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(|\mathbf{E}| \log |\mathbf{E}|)</annotation></semantics></math>
+in the worst case, when nearly all edges must be processed before all
+the edges of the spanning tree are found and the algorithm can stop.
+More often the edges of the spanning tree are the shorter ones, and only
+about
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|\mathbf{V}|</annotation></semantics></math>
+edges must be processed. If so, the cost is often close to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="false" form="prefix">|</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">|</mo><mi>𝐄</mi><mo stretchy="false" form="prefix">|</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(|\mathbf{V}| \log |\mathbf{E}|)</annotation></semantics></math>
+in the average case (provided we use a priority queue instead of sorting
+all edges in advance).</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is an exercise for Kruskal’s algorithm.</p>
+</summary>
+<p>
+<div id="KruskalPE" class="embedContainer">
+<iframe id="KruskalPE_iframe" aria-label="KruskalPE" src="../interactive/Graph/KruskalPE.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</div>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-13.6.html" class="navbutton">&lt;&lt;</a>
+<a href="section-13.6.html" accesskey="p" rel="previous">Prim’s algorithm for finding the MST</a>
+</div>
+<div class="navlink">
+<a href="section-13.8.html" accesskey="n" rel="next">Shortest-paths problems</a>
+<a href="section-13.8.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+<script type="text/javascript" src="../interactive/Graph/kruskalCON.js"></script>
+</body>
+</html>
+

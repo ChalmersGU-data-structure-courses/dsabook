@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Implementing Mergesort</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+<link href="../interactive/Sorting/mergeImplS1CON.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-4.2.html" class="navbutton">&lt;&lt;</a>
+<a href="section-4.2.html" accesskey="p" rel="previous">Mergesort</a>
+</div>
+<div>
+<a href="section-4.4.html" accesskey="n" rel="next">Quicksort</a>
+<a href="section-4.4.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:implementing-mergesort" class="level2"
+data-number="4.3">
+<h2 data-number="4.3"><span class="header-section-number">4.3</span>
+Implementing Mergesort</h2>
+<p>Implementing Mergesort presents some technical difficulties. The
+pseudocode in the last section is quite vague and we have to figure out
+how to make it work for arrays.</p>
+<p>First, splitting an input array into two subarrays is easy. We don’t
+even have to copy any elements, but we can use the same idea as for
+binary search: use <code>left</code> and <code>right</code> indices to
+refer to a subarray. To split this subarray into two halves, we just
+calculate the middle index, <code>mid</code> =
+<code>(left+right)/2</code>.</p>
+<p>The main function for sorting a subarray can now be written like
+this:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Sort the subarray arr[left .. right]</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> mergeSort(arr, left, right):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> left <span class="op">&gt;=</span> right:               <span class="co">// Base case: Subarray length is ≤ 1</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    mid <span class="op">=</span> <span class="bu">int</span>((left <span class="op">+</span> right) <span class="op">/</span> <span class="dv">2</span>)   <span class="co">// The midpoint is where the second half starts</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    mergeSort(arr, left, mid<span class="op">-</span><span class="dv">1</span>)     <span class="co">// Mergesort first half</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    mergeSort(arr, mid, right)      <span class="co">// Mergesort second half</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    merge(arr, left, mid, right)    <span class="co">// Merge the two sorted halves</span></span></code></pre></div>
+<p>The initial call would be <code>mergeSort(arr,0,arr.size-1)</code>,
+which sorts the whole array <code>arr</code>.</p>
+<p>The difficulty comes when we want to merge the two sorted subarrays.
+This cannot be done in-place (or rather, it is very very complicated to
+do it in-place). So we need an auxiliary array which we can merge the
+elements into.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Merge the sorted subarrays arr[left .. mid-1] and arr[mid .. right]</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> merge(arr, left, mid, right):</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    temp <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Merge the two sublists into the auxiliary array</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    i1 <span class="op">=</span> left</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    i2 <span class="op">=</span> mid</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> left .. right:</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i2 <span class="op">&gt;</span> right:           <span class="co">// Right sublist exhausted</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>            temp[i] <span class="op">=</span> arr[i1]</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>            i1 <span class="op">=</span> i1 <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> i1 <span class="op">&gt;</span> mid:        <span class="co">// Left sublist exhausted</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>            temp[i] <span class="op">=</span> arr[i2]</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>            i2 <span class="op">=</span> i2 <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> arr[i1] <span class="op">&lt;=</span> arr[i2]:  <span class="co">// Get smaller value</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>            temp[i] <span class="op">=</span> arr[i1]</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>            i1 <span class="op">=</span> i1 <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>            temp[i] <span class="op">=</span> arr[i2]</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>            i2 <span class="op">=</span> i2 <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Copy the elements back from the auxiliary array</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> left .. right:</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        arr[i] <span class="op">=</span> temp[i]</span></code></pre></div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a visualisation for the merge step.</p>
+</summary>
+<p>
+<div id="mergeImplS1CON" class="ssAV" data-short-name="mergeImplS1CON" data-long-name="Mergesort Implementation Slideshow" alt="Mergesort Implementation Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<p>Notice that the merge function will create a new auxiliary array
+every time it is called. This is quite inefficient, because it takes
+some time to allocate memory for a new array, which can be destroyed
+directly when merge is finished. One simple optimisation is to create
+one single auxiliary array before the first call, and reuse this array
+in all invocations of merge. The only thing we would have to do is to
+add an extra argument to <code>mergeSort</code> and <code>merge</code>,
+for the reference to the auxiliary array. Then we can create a wrapper
+function that takes care of the initialisation, and makes the first
+recursive call:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> mergeSort(arr):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    temp <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(arr.<span class="bu">size</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    mergeSort(arr, temp, <span class="dv">0</span>, arr.<span class="bu">size</span><span class="op">-</span><span class="dv">1</span>)</span></code></pre></div>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-4.2.html" class="navbutton">&lt;&lt;</a>
+<a href="section-4.2.html" accesskey="p" rel="previous">Mergesort</a>
+</div>
+<div class="navlink">
+<a href="section-4.4.html" accesskey="n" rel="next">Quicksort</a>
+<a href="section-4.4.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+<script type="text/javascript" src="../interactive/Sorting/mergeImplS1CON.js"></script>
+</body>
+</html>
+

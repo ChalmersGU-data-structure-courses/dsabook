@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Quicksort</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+<link href="../interactive/Sorting/quicksortCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Sorting/QuickSortPartitionAnalysisCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Sorting/QuickSortWorstCaseCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Sorting/QuickSortBestCaseCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Sorting/QuickSortAverageCaseCON.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-4.3.html" class="navbutton">&lt;&lt;</a>
+<a href="section-4.3.html" accesskey="p" rel="previous">Implementing Mergesort</a>
+</div>
+<div>
+<a href="section-4.5.html" accesskey="n" rel="next">Implementing Quicksort</a>
+<a href="section-4.5.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:quicksort" class="level2" data-number="4.4">
+<h2 data-number="4.4"><span class="header-section-number">4.4</span>
+Quicksort</h2>
+<p>While Mergesort uses the most obvious form of divide and conquer
+(split the list in half then sort the halves), this is not the only way
+that we can break down the sorting problem. We saw that doing the merge
+step for Mergesort when using an array implementation is not so easy. So
+perhaps a different divide and conquer strategy might turn out to be
+more efficient?</p>
+<p><a href="section-14.html#quicksort" class="term"
+title="A sort that is $O(n \log n)$ in the best and average cases, though $O(n^2)$ in the worst case. However, a reasonable implmentation will make the worst case occur under exceedingly rare circumstances. Due to its tight inner loop, it tends to run better than any other known sort in general cases. Thus, it is a popular sort to use in code libraries. It works by divide and conquer, by selecting a pivot value, splitting the list into parts that are either less than or greater than the pivot, and then sorting the two parts.">Quicksort</a>
+is aptly named because, when properly implemented, it is one of the
+fastest known general-purpose in-memory sorting algorithms in the
+average case. It does not require the extra array needed by Mergesort,
+so it is space efficient as well. Quicksort is widely used, and is
+typically the algorithm implemented in a library sort routine such as
+the UNIX <code>qsort</code> function. Interestingly, Quicksort is
+hampered by exceedingly poor worst-case performance, thus making it
+inappropriate for certain applications.</p>
+<p>Quicksort first selects a value called the <a
+href="section-14.html#pivot" class="term"
+title="In Quicksort, the value that is used to split the list into sublists, one with lesser values than the pivot, the other with greater values than the pivot.">pivot</a>.
+Assume that the input array contains
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+records with key values less than the pivot. The records are then
+rearranged in such a way that the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+values less than the pivot are placed in the first, or leftmost,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+positions in the array, the pivot itself is placed at index
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>,
+and the values greater than or equal to the pivot are placed in the
+last, or rightmost,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mi>k</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-k-1</annotation></semantics></math>
+positions. This is called a <a href="section-14.html#partition"
+class="term"
+title="In Quicksort, the process of splitting a list into two sublists, such that one sublist has values less than the pivot value, and the other with values greater than the pivot. This process takes $O(i)$ time on a sublist of length $i$.">partition</a>
+of the array. The values placed in a given partition need not (and
+typically will not) be sorted with respect to each other. All that is
+required is that all values end up in the correct partition. The pivot
+value itself is placed in position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>.
+Quicksort then proceeds to sort the resulting subarrays now on either
+side of the pivot, one of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+and the other of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mi>k</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-k-1</annotation></semantics></math>.
+How are these values sorted? Because Quicksort is such a good algorithm,
+using Quicksort on the subarrays would be appropriate.</p>
+<p>Unlike some of the sorts that we have seen earlier in this chapter,
+Quicksort might not seem very “natural” in that it is not an approach
+that a person is likely to use to sort real objects. But it should not
+be too surprising that a really efficient sort for huge numbers of
+abstract objects on a computer would be rather different from our
+experiences with sorting a relatively few physical objects.</p>
+<p>Here is an implementation for Quicksort. Parameters <code>left</code>
+and <code>right</code> define the left and right indices, respectively,
+for the subarray being sorted. The initial call to
+<code>quickSort</code> would be
+<code>quickSort(arr,0,arr.size-1)</code>, just as for Mergesort.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> quickSort(arr, left, right):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> left <span class="op">&gt;=</span> right:                           <span class="co">// Base case: Subarray length is ≤ 1</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    pivot <span class="op">=</span> findPivot(arr, left, right)         <span class="co">// Pick a pivot index</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    pivot <span class="op">=</span> partition(arr, left, right, pivot)  <span class="co">// Partition and update pivot</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    quickSort(arr, left, pivot<span class="op">-</span><span class="dv">1</span>)               <span class="co">// Sort left partition</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    quickSort(arr, pivot<span class="op">+</span><span class="dv">1</span>, right)              <span class="co">// Sort right partition</span></span></code></pre></div>
+<p>Function <code>partition</code> will move records to the appropriate
+partition and then return the final position of the pivot. This is the
+correct position of the pivot in the final, sorted array. By doing so,
+we guarantee that at least one value (the pivot) will not be processed
+in the recursive calls to <code>quickSort</code>. Even if a bad pivot is
+selected, yielding a completely empty partition to one side of the
+pivot, the larger partition will contain at most
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>
+records.</p>
+<p>Selecting a pivot can be done in many ways. The simplest is to use
+the first key. However, if the input is sorted or reverse sorted, this
+will produce a poor partitioning with all values to one side of the
+pivot. One simple way to avoid this problem is to select the middle
+position in the array. Here is a simple <code>findPivot</code> function
+implementing this idea. Note that later in the chapter we will discuss
+better pivot selection strategies.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> findPivot(arr, left, right) <span class="op">-&gt;</span> <span class="bu">Int</span>:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Not-so-good pivot selection: always choose the middle element.</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">int</span>((left <span class="op">+</span> right) <span class="op">/</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Quicksort pivot proficiency exercise</p>
+</summary>
+<p>
+<div id="QuicksortPivotPRO" class="embedContainer">
+<iframe id="QuicksortPivotPRO_iframe" aria-label="QuicksortPivotPRO" src="../interactive/Sorting/QuicksortPivotPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</div>
+<section id="sec:partition" class="level3" data-number="4.4.1">
+<h3 data-number="4.4.1"><span class="header-section-number">4.4.1</span>
+Partition</h3>
+<p>We now turn to partitioning. If we knew in advance how many keys are
+less than the pivot, we could simply copy records with key values less
+than the pivot to the low end of the array, and records with larger keys
+to the high end. Because we do not know in advance how many keys are
+less than the pivot, we use a clever algorithm that moves indices
+inwards from the ends of the subarray, swapping values as necessary
+until the two indices meet.</p>
+<p>Since Quicksort is a recursive algorithm, we will not only partition
+the whole array, but also subarrays. Therefore <code>partition</code>
+needs the positions of the leftmost and rightmost elements in the
+subarray that we will partition.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> partition(arr, left, right, pivot) <span class="op">-&gt;</span> <span class="bu">Int</span>:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    swap arr[pivot] with arr[left]</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> left ≤ right:</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        move left rightwards until arr[left] <span class="op">&lt;</span> arr[pivot]</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        move right leftwards until arr[right] <span class="op">&gt;</span> arr[pivot]</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        swap arr[left] with arr[right]</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    swap arr[pivot] with arr[right]</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> right</span></code></pre></div>
+<p>The partition function first puts the pivot at the leftmost position
+in the subarray. Then it moves the <em>left</em> and <em>right</em>
+pointers towards each other; until they both point to values which are
+unordered relative to the pivot value. Now the <em>left</em> and
+<em>right</em> values can be swapped, which puts them both in their
+correct partition. The loop continues until the <em>left</em> and
+<em>right</em> pointers have passed each other.</p>
+<p>Finally, it puts the pivot at its correct position, by swapping with
+the <em>right</em> pointer. Why is <em>right</em> the correct pivot
+position, and not <em>left</em>? This is because we initially put the
+pivot first in the subarray, so the value that is swapped with the pivot
+must be smaller.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a visualisation of the partitioning algorithm.</p>
+</summary>
+<p>
+<div id="quicksortCON" class="ssAV" data-short-name="quicksortCON" data-long-name="Quicksort Partition Slideshow" alt="Quicksort Partition Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Quicksort partition proficiency exercise.</p>
+</summary>
+<p>
+<div id="QuicksortPartitPRO" class="embedContainer">
+<iframe id="QuicksortPartitPRO_iframe" aria-label="QuicksortPartitPRO" src="../interactive/Sorting/QuicksortPartitPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</div>
+<p>To analyse Quicksort, we first analyse the functions for finding the
+pivot and partitioning a subarray of length
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>.
+Clearly, <code>findPivot</code> takes constant time for any
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>.</p>
+<p>The total cost of the partition operation is constrained by how far
+<code>left</code> and <code>right</code> can move inwards.</p>
+<ul>
+<li>The swap operation in the body of the main loop guarantees that
+<code>left</code> and <code>right</code> move at least one step each.
+Thus, the maximum number of times <code>swap</code> can be executed is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">(k-1)/2</annotation></semantics></math>.</li>
+<li>In any case, since <code>left</code> and <code>right</code> always
+move towards each other, it will take a total of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">k-1</annotation></semantics></math>
+steps until they meet.</li>
+<li>Thus, the running time of the partition function is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(k)</annotation></semantics></math>.</li>
+</ul>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a visualisation illustrating the running time analysis of the
+partition function.</p>
+</summary>
+<p>
+<div id="QuickSortPartitionAnalysisCON" class="ssAV" data-short-name="QuickSortPartitionAnalysisCON" data-long-name="Quicksort Partition Analysis Slideshow" alt="Quicksort Partition Analysis Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<section id="sec:putting-it-together" class="level4 unnumbered online">
+<h4 class="unnumbered">Putting it together</h4>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a visualisation for the entire Quicksort algorithm.</p>
+</summary>
+<p>This visualisation shows you how the logical decomposition caused by
+the partitioning process works. In the visualisation, the separate
+sub-partitions are separated out to match the recursion tree. In
+reality, there is only a single array involved (as you will see in the
+proficiency exercise that follows the visualisation).</p>
+<p>
+<div id="quicksortAV" class="embedContainer">
+<iframe id="quicksortAV_iframe" aria-label="quicksortAV" src="../interactive/Sorting/quicksortAV.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a complete proficiency exercise to see how well you
+understand Quicksort.</p>
+</summary>
+<p>
+<div id="quicksortPRO" class="embedContainer">
+<iframe id="quicksortPRO_iframe" aria-label="quicksortPRO" src="../interactive/Sorting/quicksortPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</div>
+</section>
+</section>
+<section id="sec:complexity-analysis-1" class="level3"
+data-number="4.4.2">
+<h3 data-number="4.4.2"><span class="header-section-number">4.4.2</span>
+Complexity analysis</h3>
+<p>Quicksort’s worst case will occur when the pivot does a poor job of
+breaking the array, that is, when there are no records in one partition,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>
+records in the other.</p>
+<ul>
+<li>The pivot partitions the array into two parts: one of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0</mn><annotation encoding="application/x-tex">0</annotation></semantics></math>
+and the other of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>.
+This requires
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>
+units of work.</li>
+<li>In the second level, the pivot breaks it into two parts: one of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0</mn><annotation encoding="application/x-tex">0</annotation></semantics></math>
+and the other of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">n-2</annotation></semantics></math>.
+This requires
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">n-2</annotation></semantics></math>
+units of work.</li>
+<li>In the third level, the pivot breaks it into two parts: one of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0</mn><annotation encoding="application/x-tex">0</annotation></semantics></math>
+and the other of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">n-3</annotation></semantics></math>.
+This requires
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">n-3</annotation></semantics></math>
+units of work.</li>
+<li>…</li>
+<li>In the last level, the pivot breaks a partition of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>2</mn><annotation encoding="application/x-tex">2</annotation></semantics></math>
+into two parts: one of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0</mn><annotation encoding="application/x-tex">0</annotation></semantics></math>
+and the other of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>.
+This requires a single unit of work.</li>
+</ul>
+<p>Thus, the total amount of work is determined by the summation:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>i</mi><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>n</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mspace width="0.278em"></mspace><mo>∈</mo><mspace width="0.278em"></mspace><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">
+\sum_{i=1}^{n} i = \frac{1}{2} n (n-1) \; \in \; O(n^2)
+</annotation></semantics></math></p>
+<p>Therefore, the worst case running time of Quicksort is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>This visualisation explains the worst-case running time of
+Quicksort</p>
+</summary>
+<p>
+<div id="QuickSortWorstCaseCON" class="ssAV" data-short-name="QuickSortWorstCaseCON" data-long-name="Quicksort Worst Case Analysis Slideshow" alt="Quicksort Worst Case Analysis Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<p>This is terrible, no better than Insertion or Selection sort. When
+will this worst case occur? Only when each pivot yields a bad
+partitioning of the array. If the pivot values are selected at random,
+then this is extremely unlikely to happen. When selecting the middle
+position of the current subarray, it is still unlikely to happen. It
+does not take many good partitionings for Quicksort to work fairly
+well.</p>
+<section id="sec:best-case-complexity" class="level4 unnumbered">
+<h4 class="unnumbered">Best-case complexity</h4>
+<p>Here is an explanation of the best-case running time of
+Quicksort:</p>
+<ul>
+<li>The pivot partitions the array into two halves of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n/2</annotation></semantics></math>
+each. This requires
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>
+amount of work.</li>
+<li>For each of the two partitions, the pivot breaks it into halves of
+size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mn>4</mn></mrow><annotation encoding="application/x-tex">n/4</annotation></semantics></math>
+each. This requires
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>
+amount of work.</li>
+<li>For each of the four partitions, the pivot breaks it into halves of
+size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mn>8</mn></mrow><annotation encoding="application/x-tex">n/8</annotation></semantics></math>
+each. This requires
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>
+amount of work.</li>
+<li>…</li>
+<li>In the last level, we reach
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+partitions each of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>.
+This requires
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>
+amount of work.</li>
+</ul>
+<p>Thus, at each level, all partition steps for that level do a total of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>
+work. And if we always can find the perfect pivot, there will be only
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n</annotation></semantics></math>
+levels. So the best-case running time of Quicksort is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>This visualisation explains the best-case running time of
+Quicksort</p>
+</summary>
+<p>
+<div id="QuickSortBestCaseCON" class="ssAV" data-short-name="QuickSortBestCaseCON" data-long-name="Quicksort Best Case Analysis Slideshow" alt="Quicksort Best Case Analysis Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+</section>
+<section id="sec:average-case-complexity" class="level4 unnumbered">
+<h4 class="unnumbered">Average-case complexity</h4>
+<p>Quicksort’s average-case behaviour falls somewhere between the
+extremes of worst and best case. Average-case analysis considers the
+cost for all possible arrangements of input, summing the costs and
+dividing by the number of cases. We make one reasonable simplifying
+assumption: At each partition step, the pivot is equally likely to end
+in any position in the (sorted) array. In other words, the pivot is
+equally likely to break an array into partitions of sizes 0 and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>,
+or 1 and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">n-2</annotation></semantics></math>,
+and so on. Given this assumption, the average-case cost is computed from
+the following equation:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mi>c</mi><mi>n</mi><mo>+</mo><mfrac><mn>1</mn><mi>n</mi></mfrac><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></munderover><mo stretchy="false" form="prefix">[</mo><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo>−</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">]</mo></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mi>c</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align*}
+T(n) &amp;= cn + \frac{1}{n}\sum_{k=0}^{n-1}[T(k) + T(n - 1 - k)]
+\\
+T(0) = T(1) &amp;= c
+\end{align*}</annotation></semantics></math></p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>This visualisation will help you to understand how this recurrence
+relation was formed.</p>
+</summary>
+<p>
+<div id="QuickSortAverageCaseCON" class="ssAV" data-short-name="QuickSortAverageCaseCON" data-long-name="Quicksort Average Case Analysis Slideshow" alt="Quicksort Average Case Analysis Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<p>This is an unusual situation that the average case cost and the worst
+case cost have asymptotically different growth rates. Consider what
+“average case” actually means. We compute an average cost for inputs of
+size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+by summing up for every possible input of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+the product of the running time cost of that input times the probability
+that that input will occur. To simplify things, we assumed that every
+permutation is equally likely to occur. Thus, finding the average means
+summing up the cost for every permutation and dividing by the number of
+permutations (which is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>!</mi></mrow><annotation encoding="application/x-tex">n!</annotation></semantics></math>).
+We know that some of these
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>!</mi></mrow><annotation encoding="application/x-tex">n!</annotation></semantics></math>
+inputs cost
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>.
+But the sum of all the permutation costs has to be
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mi>!</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(n!)(O(n \log n))</annotation></semantics></math>.
+Given the extremely high cost of the worst inputs, there must be very
+few of them. In fact, there cannot be a constant fraction of the inputs
+with cost
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>.
+If even, say, 1% of the inputs have cost
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>,
+this would lead to an average cost of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>.
+Thus, as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+grows, the fraction of inputs with high cost must be going toward a
+limit of zero. We can conclude that Quicksort will run fast if we can
+avoid those very few bad input permutations. This is why picking a good
+pivot is so important.</p>
+</section>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-4.3.html" class="navbutton">&lt;&lt;</a>
+<a href="section-4.3.html" accesskey="p" rel="previous">Implementing Mergesort</a>
+</div>
+<div class="navlink">
+<a href="section-4.5.html" accesskey="n" rel="next">Implementing Quicksort</a>
+<a href="section-4.5.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+<script type="text/javascript" src="../interactive/Sorting/quicksortCODE.js"></script>
+<script type="text/javascript" src="../interactive/Sorting/quicksortCON.js"></script>
+<script type="text/javascript" src="../interactive/Sorting/QuickSortPartitionAnalysisCON.js"></script>
+<script type="text/javascript" src="../interactive/Sorting/QuickSortWorstCaseCON.js"></script>
+<script type="text/javascript" src="../interactive/Sorting/QuickSortBestCaseCON.js"></script>
+<script type="text/javascript" src="../interactive/Sorting/QuickSortAverageCaseCON.js"></script>
+</body>
+</html>
+

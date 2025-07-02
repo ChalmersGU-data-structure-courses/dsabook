@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Comparing algorithms</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-2.2.html" class="navbutton">&lt;&lt;</a>
+<a href="section-2.2.html" accesskey="p" rel="previous">Invariants, preconditions, and postconditions</a>
+</div>
+<div>
+<a href="section-2.4.html" accesskey="n" rel="next">Growth rates</a>
+<a href="section-2.4.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:comparing-algorithms" class="level2" data-number="2.3">
+<h2 data-number="2.3"><span class="header-section-number">2.3</span>
+Comparing algorithms</h2>
+<p>How do you compare two algorithms for solving some problem in terms
+of efficiency? We could implement both algorithms as computer programs
+and then run them on a suitable range of inputs, measuring how much of
+the resources in question each program uses. This approach is often
+unsatisfactory for four reasons. First, there is the effort involved in
+programming and testing two algorithms when at best you want to keep
+only one. Second, when empirically comparing two algorithms there is
+always the chance that one of the programs was “better written” than the
+other, and therefore the relative qualities of the underlying algorithms
+are not truly represented by their implementations. This can easily
+occur when the programmer has a bias regarding the algorithms. Third,
+the choice of empirical test cases might unfairly favour one algorithm.
+Fourth, you could find that even the better of the two algorithms does
+not fall within your resource budget. In that case you must begin the
+entire process again with yet another program implementing a new
+algorithm. But, how would you know if any algorithm can meet the
+resource budget? Perhaps the problem is simply too difficult for any
+implementation to be within budget.</p>
+<p>These problems can often be avoided by using asymptotic analysis.
+Asymptotic analysis measures the efficiency of an algorithm, or its
+implementation as a program, as the input size becomes large. It is
+actually an estimating technique and does not tell us anything about the
+relative merits of two programs where one is always “slightly faster”
+than the other. However, asymptotic analysis has proved useful to
+computer scientists who must determine if a particular algorithm is
+worth considering for implementation.</p>
+<p>The critical resource for a program is most often its running time.
+However, you cannot pay attention to running time alone. You must also
+be concerned with other factors such as the space required to run the
+program (both main memory and disk space). Typically you will analyse
+the <em>time</em> required for an <em>algorithm</em> (or the
+instantiation of an algorithm in the form of a program), and the
+<em>space</em> required for a <em>data structure</em>.</p>
+<p>Many factors affect the running time of a program. Some relate to the
+environment in which the program is compiled and run. Such factors
+include the speed of the computer’s CPU, bus, and peripheral hardware.
+Competition with other users for the computer’s (or the network’s)
+resources can make a program slow to a crawl. The programming language
+and the quality of code generated by a particular compiler can have a
+significant effect. The “coding efficiency” of the programmer who
+converts the algorithm to a program can have a tremendous impact as
+well.</p>
+<p>If you need to get a program working within time and space
+constraints on a particular computer, all of these factors can be
+relevant. Yet, none of these factors address the differences between two
+algorithms or data structures. To be fair, if you want to compare two
+programs derived from two algorithms for solving the same problem, they
+should both be compiled with the same compiler and run on the same
+computer under the same conditions. As much as possible, the same amount
+of care should be taken in the programming effort devoted to each
+program to make the implementations “equally efficient”. In this sense,
+all of the factors mentioned above should cancel out of the comparison
+because they apply to both algorithms equally.</p>
+<p>If you truly wish to understand the running time of an algorithm,
+there are other factors that are more appropriate to consider than
+machine speed, programming language, compiler, and so forth. Ideally we
+would measure the running time of the algorithm under standard benchmark
+conditions. However, we have no way to calculate the running time
+reliably other than to run an implementation of the algorithm on some
+computer. The only alternative is to use some other measure as a
+surrogate for running time.</p>
+<section id="sec:input-size" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1"><span class="header-section-number">2.3.1</span>
+Basic operations and input size</h3>
+<p>Of primary consideration when estimating an algorithm’s performance
+is the number of <a href="section-14.html#basic-operation" class="term"
+title="Examples of basic operations include inserting a data item into the data structure, deleting a data item from the data structure, and finding a specified data item.">basic
+operations</a> required by the algorithm to process an input of a
+certain size. The terms “basic operations” and “size” are both rather
+vague and depend on the algorithm being analysed. Size is often the
+number of inputs processed. For example, when comparing sorting
+algorithms the size of the problem is typically measured by the number
+of records to be sorted. A basic operation must have the property that
+its time to complete does not depend on the particular values of its
+operands. Adding or comparing two integer variables are examples of
+basic operations in most programming languages. Summing the contents of
+an array containing
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+integers is not, because the cost depends on the value of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+(i.e., the size of the input).</p>
+<p>Because the most important factor affecting running time is normally
+the size of the input, for a given input size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+we often express the time
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>T</mi><annotation encoding="application/x-tex">T</annotation></semantics></math>
+to run the algorithm as a function of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
+written as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">T(n)</annotation></semantics></math>.
+We will always assume
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">T(n)</annotation></semantics></math>
+is a non-negative value.</p>
+<section id="sec:example-largest-value-in-an-array"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Largest value in an array</h4>
+<p>Consider a simple algorithm to solve the problem of finding the
+largest value in an array of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+integers. The algorithm looks at each integer in turn, saving the
+position of the largest value seen so far:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Return position of largest value in integer array arr</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> largest(arr):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    pos <span class="op">=</span> <span class="dv">0</span>                    <span class="co">// Position of pos element seen.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="dv">1</span> .. arr.<span class="bu">size</span><span class="op">-</span><span class="dv">1</span>:  <span class="co">// For each element,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> arr[pos] <span class="op">&lt;</span> arr[i]:  <span class="co">// if arr[i] is larger,</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            pos <span class="op">=</span> i            <span class="co">// remember its position.</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pos                 <span class="co">// Return pos position</span></span></code></pre></div>
+<p>Here, the size of the problem is <code>arr.size</code>, the number of
+integers stored in the array. The basic operation is to compare a value
+to that of the largest value seen so far. It is reasonable to assume
+that it takes a fixed amount of time to do one such comparison,
+regardless of the values or their positions in the array.</p>
+<p>Let us call
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>
+the amount of time required to compare two integers in function
+<code>largest</code>. We do not care right now what the precise value of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>
+might be. Nor are we concerned with the time required to increment
+variable
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+because this must be done for each value in the array, or the time for
+the actual assignment when a larger value is found, or the little bit of
+extra time taken to initialise <code>pos</code>. We just want a
+reasonable approximation for the time taken to execute the algorithm.
+The total time to run <code>largest</code> is therefore approximately
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">cn</annotation></semantics></math>,
+because we must make
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+comparisons, with each comparison costing
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>
+time. We say that function <code>largest</code> (and by extension, the
+largest-value sequential search algorithm for any typical
+implementation) has a running time expressed by the equation</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>c</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">
+T(n) = cn
+</annotation></semantics></math></p>
+</section>
+<div class="online">
+<section id="sec:example-accessing-the-first-array-value"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Accessing the first array value</h4>
+<p>The running time of a statement that assigns the first value of an
+integer array to a variable is simply the time required to copy the
+value of the first array value. We can assume this assignment takes a
+constant amount of time regardless of the value. Let us call
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>c</mi><mn>1</mn></msub><annotation encoding="application/x-tex">c_1</annotation></semantics></math>
+the amount of time necessary to copy an integer. No matter how large the
+array on a typical computer (given reasonable conditions for memory and
+array size), the time to copy the value from the first position of the
+array is always
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>c</mi><mn>1</mn></msub><annotation encoding="application/x-tex">c_1</annotation></semantics></math>.
+Thus, the equation for this algorithm is simply</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>c</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">
+T(n) = c_1
+</annotation></semantics></math></p>
+<p>indicating that the size of the input
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+has no effect on the running time. This is called a <a
+href="section-14.html#constant-running-time" class="term"
+title="The cost of a function whose running time is not related to its input size. In big-$O$ notation, this is traditionally written as $O(1)$.">constant
+running time</a>.</p>
+</section>
+<section id="sec:example-nested-for-loop"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Nested for-loop</h4>
+<p>Consider the following code:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sum</span> <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="dv">0</span> .. n<span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="dv">0</span> .. n<span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">sum</span> <span class="op">=</span> <span class="bu">sum</span> <span class="op">+</span> <span class="dv">1</span></span></code></pre></div>
+<p>What is the running time for this code fragment? Clearly it takes
+longer to run when
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+is larger. The basic operation in this example is the increment
+operation for variable <code>sum</code>. We can assume that incrementing
+takes constant time; call this time
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>c</mi><mn>2</mn></msub><annotation encoding="application/x-tex">c_2</annotation></semantics></math>.
+(We can ignore the time required to initialise <code>sum</code>, and to
+increment the loop counters <code>i</code> and <code>j</code>. In
+practice, these costs can safely be bundled into time
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>c</mi><mn>2</mn></msub><annotation encoding="application/x-tex">c_2</annotation></semantics></math>.)
+The total number of increment operations is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>n</mi><mn>2</mn></msup><annotation encoding="application/x-tex">n^2</annotation></semantics></math>.
+Thus, we say that the running time is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>c</mi><mn>2</mn></msub><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">T(n) = c_2 n^2</annotation></semantics></math>.</p>
+</section>
+</div>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-2.2.html" class="navbutton">&lt;&lt;</a>
+<a href="section-2.2.html" accesskey="p" rel="previous">Invariants, preconditions, and postconditions</a>
+</div>
+<div class="navlink">
+<a href="section-2.4.html" accesskey="n" rel="next">Growth rates</a>
+<a href="section-2.4.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

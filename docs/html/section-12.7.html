@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Deletion in open addressing</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+<link href="../interactive/Hashing/collisionCON.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-12.6.html" class="navbutton">&lt;&lt;</a>
+<a href="section-12.6.html" accesskey="p" rel="previous">Implementing sets and maps using open addressing</a>
+</div>
+<div>
+<a href="section-12.8.html" accesskey="n" rel="next">Different probing strategies</a>
+<a href="section-12.8.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:deletion-in-open-addressing" class="level2"
+data-number="12.7">
+<h2 data-number="12.7"><span class="header-section-number">12.7</span>
+Deletion in open addressing</h2>
+<p>When deleting records from a hash table, there are two important
+considerations.</p>
+<ol type="1">
+<li>Deleting a record must not hinder later searches. In other words,
+the search process must still pass through the newly emptied slot to
+reach records whose probe sequence passed through this slot. Thus, the
+delete process cannot simply clear the slot, because this will isolate
+records further down the probe sequence.</li>
+<li>We do not want to make positions in the hash table unusable because
+of deletion. The freed slot should be available to a future
+insertion.</li>
+</ol>
+<p>Both of these problems can be resolved by placing a special mark in
+place of the deleted record, called a <a
+href="section-14.html#tombstone" class="term"
+title="In hashing, a tombstone is used to mark a slot in the hash table where a record has been deleted. Its purpose is to allow the collision resolution process to probe through that slot (so that records further down the probe sequence are not unreachable after deleting the record), while also allowing the slot to be reused by a future insert operation.">tombstone</a>.
+The tombstone indicates that a record once occupied the slot but does so
+no longer. If a tombstone is encountered when searching along a probe
+sequence, the search procedure continues with the search. When a
+tombstone is encountered during insertion, that slot can be used to
+store the new record. However, to avoid inserting duplicate keys, it
+will still be necessary for the search procedure to follow the probe
+sequence until a truly empty position has been found, simply to verify
+that a duplicate is not in the table. However, the new record would
+actually be inserted into the slot of the first tombstone
+encountered.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>TODO</p>
+</summary>
+<p>
+<div id="hashdelCON" class="ssAV" data-short-name="hashdelCON" data-long-name="Hash Deletion Slideshow" alt="Hash Deletion Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a practice exercise.</p>
+</summary>
+<p>
+<div id="HashingDelPRO" class="embedContainer">
+<iframe id="HashingDelPRO_iframe" aria-label="HashingDelPRO" src="../interactive/Hashing/HashingDelPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</div>
+<p>The use of tombstones allows searches to work correctly and allows
+reuse of deleted slots. However, after a series of intermixed insertion
+and deletion operations, some slots will contain tombstones. This will
+tend to lengthen the average distance from a record’s home position to
+the record itself, beyond where it could be if the tombstones did not
+exist. A typical database application will first load a collection of
+records into the hash table and then progress to a phase of intermixed
+insertions and deletions. After the table is loaded with the initial
+collection of records, the first few deletions will lengthen the average
+probe sequence distance for records (it will add tombstones). Over time,
+the average distance will reach an equilibrium point because insertions
+will tend to decrease the average distance by filling in tombstone
+slots. For example, after initially loading records into the database,
+the average path distance might be 1.2 (i.e., an average of 0.2 accesses
+per search beyond the home position will be required). After a series of
+insertions and deletions, this average distance might increase to 1.6
+due to tombstones. This seems like a small increase, but it is three
+times longer on average beyond the home position than before
+deletions.</p>
+<p>Two possible solutions to this problem are</p>
+<ol type="1">
+<li>Do a local reorganisation upon deletion to try to shorten the
+average path length. For example, after deleting a key, continue to
+follow the probe sequence of that key and swap records further down the
+probe sequence into the slot of the recently deleted record (being
+careful not to remove any key from its probe sequence). This will not
+work for all collision resolution policies.</li>
+<li>Periodically rehash the table by reinserting all records into a new
+hash table. Not only will this remove the tombstones, but it also
+provides an opportunity to place the most frequently accessed records
+into their home positions.</li>
+</ol>
+<p>Note that since we are using a dynamic array when implementing hash
+tables, this can be viewed as a version of the second solution above
+(because all tombstones will be removed when the internal array is
+resized).</p>
+<section id="sec:simple-implementation-of-deletion" class="level3"
+data-number="12.7.1">
+<h3 data-number="12.7.1"><span
+class="header-section-number">12.7.1</span> Simple implementation of
+deletion</h3>
+<p>If we are implementing a map (and not a set), then we actually don’t
+need to use a special value <code>DELETED</code> to represent the
+tombstone. Instead, since we are using two internal arrays (one for the
+keys and one for the values), there are actually two possible ways of
+storing empty entries. We use this to encode both empty slots and
+tombstones:</p>
+<ul>
+<li>If the <em>keys</em> cell is empty (<code>keys[i] is null</code>),
+then the slot is unoccupied.</li>
+<li>If the <em>values</em> cell is empy
+(<code>values[i] is null</code>), then the slot is a tombstone.</li>
+</ul>
+<p>So, when we remove an entry, we do not remove the key, but instead
+set the value to <code>null</code>. This will make the slot a
+tombstone.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> OpenAddressingHashMap:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">remove</span>(key):</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> hashAndProbe(key)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> keys[i] <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span> <span class="kw">and</span> values[i] <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span>:</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            <span class="co">// Make the slot a tombstone by setting the value to null.</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>            values[i] <span class="op">=</span> <span class="va">null</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            <span class="bu">size</span> <span class="op">=</span> <span class="bu">size</span> <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> loadFactor() <span class="op">&lt;</span> MIN_LOAD_FACTOR:</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                resizeTable(keys.<span class="bu">size</span> <span class="op">*</span> MULTIPLIER)</span></code></pre></div>
+<p>The current code has one problem: Adding new entries will never make
+use of the tombstones, but will only insert into completely empty slots.
+It is possible to fix this by implementing a sligthly different version
+of <code>hashAndProbe</code>, which will only be used by the
+<code>put</code> method. This is left as an exercise to the reader.</p>
+</section>
+<section id="sec:two-load-factors" class="level3" data-number="12.7.2">
+<h3 data-number="12.7.2"><span
+class="header-section-number">12.7.2</span> Two load factors</h3>
+<p>There is however a bigger problem with our code above. When we remove
+keys we reduce the size of the hash table, but we haven’t actually
+changed the number of occupied slot. Instead we turned a slot from
+having a value into a tombstone. So, the variable <code>size</code> –
+which is the number
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+of key/value pairs – does not say how many slots are actually
+occupied.</p>
+<p>If we are very unlucky we might end up in a table that has a nice
+load factor, but where almost all slots are tombstones. But the table
+doesn’t know this, so it will not try to resize and instead we will get
+a drop in performance.</p>
+<p>To make deletion work properly together with resizing, we have to
+keep track of <em>two</em> instance variables – the number of occupied
+slots (<code>size</code>), and the number of tombstones:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> OpenAddressingHashMap <span class="kw">implements</span> <span class="bu">Map</span>:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    keys <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(MIN_CAPACITY)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    values <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(MIN_CAPACITY)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span> <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    tombstones <span class="op">=</span> <span class="dv">0</span></span></code></pre></div>
+<p>When we have tombstones in our table, there are two possible ways of
+thinking about the load factor – depending on if we want to include the
+tombstones or not. And both variants are useful!</p>
+<ul>
+<li>When adding elements, we need to know if there are too few
+completely empty slots left, giving the load factor
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>+</mo><mi>d</mi><mi>/</mi><mi>m</mi></mrow><annotation encoding="application/x-tex">n + d / m</annotation></semantics></math>
+(where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+is the number of occupied slots and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>
+the number of tombstones).</li>
+<li>When deleting elements, we need to know if there are too few
+occupied slots, giving the load factor
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mi>m</mi></mrow><annotation encoding="application/x-tex">n / m</annotation></semantics></math>.</li>
+</ul>
+<p>All this combined result in slightly more complicated code for our
+methods. E.g., when deleting a key/value pair – or rather, turning the
+slot into a tombstone – we have to decrease the <code>size</code>
+variable, but we also have to increase the variable
+<code>tombstones</code>.</p>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-12.6.html" class="navbutton">&lt;&lt;</a>
+<a href="section-12.6.html" accesskey="p" rel="previous">Implementing sets and maps using open addressing</a>
+</div>
+<div class="navlink">
+<a href="section-12.8.html" accesskey="n" rel="next">Different probing strategies</a>
+<a href="section-12.8.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+<script type="text/javascript" src="../interactive/Hashing/hashdelCON.js"></script>
+</body>
+</html>
+

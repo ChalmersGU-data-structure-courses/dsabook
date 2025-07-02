@@ -7,7 +7,7 @@ $(document).ready(function() {
   var av = new JSAV(av_name);
 
   var interpret = {
-    "av_c1": "Here is the process for inserting a new record into a heap.",
+    "av_c1": "Here is the process for inserting a new record into a <em>max</em> heap.",
     "av_c2": "We put the new value at the end of the array.",
     "av_c3": "Now we have to start moving the value upward in the heap, as appropriate."
   };

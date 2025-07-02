@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Asymptotic analysis</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-2.5.html" class="navbutton">&lt;&lt;</a>
+<a href="section-2.5.html" accesskey="p" rel="previous">Best, worst, and average cases</a>
+</div>
+<div>
+<a href="section-2.7.html" accesskey="n" rel="next">Algorithm analysis in practice</a>
+<a href="section-2.7.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:asymptotic-analysis" class="level2" data-number="2.6">
+<h2 data-number="2.6"><span class="header-section-number">2.6</span>
+Asymptotic analysis</h2>
+<div class="online">
+<p><a href="section-2.4.html#fig:growthGraphs">Figure 2.1</a> gives two views of a graph
+illustrating the growth rates for six equations. We repeat the graph
+here, where the right view shows in detail the lower-left portion of the
+top view. The horizontal axis represents input size, and the vertical
+axis can represent time, space, or any other measure of cost.</p>
+<figure alt="Illustration of the growth rates for six equations">
+<img src="plots/pandocplot5962948553409289641.png"
+alt="Illustration of the growth rates for six equations" />
+</figure>
+</div>
+<p>Despite the larger constant for the curve labeled
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>10</mn><mi>n</mi></mrow><annotation encoding="application/x-tex">10 n</annotation></semantics></math>
+in the figure above,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">2 n^2</annotation></semantics></math>
+crosses it at the relatively small value of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">n = 5</annotation></semantics></math>.
+What if we double the value of the constant in front of the linear
+equation? As shown in the graph,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>20</mn><mi>n</mi></mrow><annotation encoding="application/x-tex">20 n</annotation></semantics></math>
+is surpassed by
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">2 n^2</annotation></semantics></math>
+once
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">n = 10</annotation></semantics></math>.
+The additional factor of two for the linear <a
+href="section-14.html#growth-rate" class="term"
+title="The rate at which a function grows. How quickly the function grows when its input grows. Also called its *order of growth*. A function $f$ has growth rate bounded by a function $g$ if the values of $f$ are eventually bounded by those of $g$ up to some constant factor. We often shorten this (somewhat confusingly) by saying that $f$ has growth rate $g$ or that $f$ has order of growth $g$. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \leq c g(n)$ for all $n \geq n_0$. We then say that $f$ has growth rate less or equal that of $g$ and write $f \in O(g)$ (big-$O$ notation). This defines the preorder of growth rates. In algorithm analysis, we sometimes speak of the growth rate of an algorithm. By that, we mean the growth rate of the complexity of the algorithm, the rate at which the cost of the algorithm grows as the size of its input grows. This is also called the asymptotic complexity of that algorithm.">growth
+rate</a> does not much matter. It only doubles the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>-coordinate
+for the intersection point. In general, changes to a constant factor in
+either equation only shift <em>where</em> the two curves cross, not
+<em>whether</em> the two curves cross.</p>
+<p>When you buy a faster computer or a faster compiler, the new problem
+size that can be run in a given amount of time for a given growth rate
+is larger by the same factor, regardless of the constant on the
+running-time equation. The time curves for two algorithms with different
+growth rates still cross, regardless of their running-time equation
+constants. For these reasons, we usually ignore the constants when we
+want an estimate of the growth rate for the running time or other
+resource requirements of an algorithm. This simplifies the analysis and
+keeps us thinking about the most important aspect: the growth rate. This
+is called <a href="section-14.html#asymptotic-algorithm-analysis"
+class="term"
+title="A method for estimating the efficiency of an algorithm or computer program by identifying its asymptotic complexity, the growth rate of its complexity function. Asymptotic analysis also gives a way to define the inherent difficulty of a problem. We frequently use the term algorithm analysis to mean the same thing.">asymptotic
+algorithm analysis</a>. To be precise, asymptotic analysis refers to the
+study of an algorithm as the input size “gets big” or reaches a limit
+(in the calculus sense). However, it has proved to be so useful to
+ignore all constant factors that asymptotic analysis is used for most
+algorithm comparisons.</p>
+<p>In rare situations, it is not reasonable to ignore the constants.
+When comparing algorithms meant to run on small values of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
+the constant can have a large effect. For example, if the problem
+requires you to sort many collections of exactly five records, then a
+sorting algorithm designed for sorting thousands of records is probably
+not appropriate, even if its asymptotic analysis indicates good
+performance. There are rare cases where the constants for two algorithms
+under comparison can differ by a factor of 1000 or more, making the one
+with lower growth rate impractical for typical problem sizes due to its
+large constant. Asymptotic analysis is a form of “back of the envelope”
+<a href="section-14.html#estimation" class="term"
+title="As a technical skill, this is the process of generating a rough estimate in order to evaluate the feasibility of a proposed solution. This is sometimes known as &#39;back of the napkin&#39; or &#39;back of the envelope&#39; calculation. The estimation process can be formalised as (1) determine the major parameters that affect the problem, (2) derive an equation that relates the parameters to the problem, then (3) select values for the parameters and apply the equation to yield an estimated solution.">estimation</a>
+for algorithm resource consumption. It provides a simplified model of
+the running time or other resource needs of an algorithm. This
+simplification usually helps you understand the behaviour of your
+algorithms. Just be aware of the limitations to asymptotic analysis in
+the rare situation where the constant is important.</p>
+<section id="sec:orders-of-growth" class="level3" data-number="2.6.1">
+<h3 data-number="2.6.1"><span class="header-section-number">2.6.1</span>
+Orders of growth</h3>
+<p>To be able to discuss orders of growth for algorithms we need to do
+some abstractions. The most important abstraction is to describe the
+runtime of an algorithm as a mathematical function from the input size
+to a number. We actually don’t care how we encode the input size, as
+long as it is proportional to the actual size of the input. So we can,
+e.g., use the number of cells in an array as input, instead of trying to
+figure out the exact memory usage of the array. And in the same way, we
+don’t care about the unit of measure for the result – it can be actual
+runtime, in seconds, minutes or hours, but it’s more common to think
+about the number of “basic operations”. Already here we have abstracted
+away lots of things that relate to hardware, which is vital because we
+want to analyse algorithms, not implementations. So we will say things
+like “the runtime of algorithm
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐀</mi><annotation encoding="application/x-tex">\mathbf{A}</annotation></semantics></math>
+is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f(n)</annotation></semantics></math>”.</p>
+<p>Now, the easiest way to view order of growth is not as an absolute
+propery of an algorithm, but instead as a relation between functions.
+When we say that an algorithm is quadratic, we actually mean that the
+mathematical function
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f(n)</annotation></semantics></math>
+that describes the abstract runtime of the algorithm, is related to the
+quadratic function
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">g(n) = n^2</annotation></semantics></math>
+in some way.</p>
+<p>So, how can we relate functions using orders of growth? We do this by
+saying that one function is a <em>bound</em> of another function. E.g.,
+when we say that an algorithm
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐀</mi><annotation encoding="application/x-tex">\mathbf{A}</annotation></semantics></math>
+is quadratic, we actually mean that the function
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>n</mi><mn>2</mn></msup><annotation encoding="application/x-tex">n^2</annotation></semantics></math>
+is an upper bound of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐀</mi><annotation encoding="application/x-tex">\mathbf{A}</annotation></semantics></math>.
+The following are informal definitions of <em>upper</em>, <em>lower</em>
+and <em>tight</em> bounds – we will define them more rigorously in <a
+href="section-5.html#sec:algorithm-analysis-theory">Chapter 5</a>.</p>
+<dl>
+<dt>Upper bound</dt>
+<dd>
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>f</mi><annotation encoding="application/x-tex">f</annotation></semantics></math>
+is an upper bound of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>g</mi><annotation encoding="application/x-tex">g</annotation></semantics></math>
+<strong>iff</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>f</mi><annotation encoding="application/x-tex">f</annotation></semantics></math>
+grows <em>at least as fast</em> as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>g</mi><annotation encoding="application/x-tex">g</annotation></semantics></math>,
+and we write this
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo>∈</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>g</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f\in O(g)</annotation></semantics></math></p>
+</dd>
+<dt>Lower bound</dt>
+<dd>
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>f</mi><annotation encoding="application/x-tex">f</annotation></semantics></math>
+is a lower bound of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>g</mi><annotation encoding="application/x-tex">g</annotation></semantics></math>
+<strong>iff</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>f</mi><annotation encoding="application/x-tex">f</annotation></semantics></math>
+grows <em>at most as fast</em> as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>g</mi><annotation encoding="application/x-tex">g</annotation></semantics></math>,
+and we write this
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo>∈</mo><mi mathvariant="normal">Ω</mi><mo stretchy="false" form="prefix">(</mo><mi>g</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f\in\Omega(g)</annotation></semantics></math></p>
+</dd>
+<dt>Tight bound</dt>
+<dd>
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>f</mi><annotation encoding="application/x-tex">f</annotation></semantics></math>
+is a tight bound of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>g</mi><annotation encoding="application/x-tex">g</annotation></semantics></math>
+<strong>iff</strong> both functions grow <em>at the same rate</em>, and
+we write this
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo>∈</mo><mi mathvariant="normal">Θ</mi><mo stretchy="false" form="prefix">(</mo><mi>g</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f\in\Theta(g)</annotation></semantics></math></p>
+</dd>
+</dl>
+</section>
+<section id="sec:should-we-use-o-omega-or-theta" class="level3"
+data-number="2.6.2">
+<h3 data-number="2.6.2"><span class="header-section-number">2.6.2</span>
+Should we use
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>O</mi><annotation encoding="application/x-tex">O</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi mathvariant="normal">Ω</mi><annotation encoding="application/x-tex">\Omega</annotation></semantics></math>
+or
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi mathvariant="normal">Θ</mi><annotation encoding="application/x-tex">\Theta</annotation></semantics></math>?</h3>
+<p>If an algorithm has a lower bound of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Ω</mi><mo stretchy="false" form="prefix">(</mo><mi>f</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\Omega(f)</annotation></semantics></math>,
+we know that it will never run asymptotically faster than
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>f</mi><annotation encoding="application/x-tex">f</annotation></semantics></math>.
+But this is usually not very useful knowledge, because we are more
+interested in knowing how the algorithm works on on bad inputs.
+Therefore the upper bound
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>f</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(f)</annotation></semantics></math>
+is by far the most common complexity measure that people use, and this
+is what we will be using in this book.</p>
+<p>One could argue that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Θ</mi><mo stretchy="false" form="prefix">(</mo><mi>f</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\Theta(f)</annotation></semantics></math>
+would be an even better measure, because it gives more information about
+an algorithm. But it is much more difficult to reason about
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Θ</mi><mo stretchy="false" form="prefix">(</mo><mi>f</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\Theta(f)</annotation></semantics></math>,
+and therefore we will almost exclusively use the upper bound notation
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>f</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(f)</annotation></semantics></math>.</p>
+<p>So, is the lower bound useless? – No, definitely not. The main use
+case for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi mathvariant="normal">Ω</mi><annotation encoding="application/x-tex">\Omega</annotation></semantics></math>
+is when we want to classify <em>problems</em>, not algorithms. One
+example is when proving that the lower bound for sorting is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Ω</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\Omega(n\log n)</annotation></semantics></math>,
+which we do in <a
+href="section-5.3.html#sec:lower-bounds-for-sorting">Section 5.3.1</a>.
+But classifying problems is out of scope for this book, so we will not
+use
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi mathvariant="normal">Ω</mi><annotation encoding="application/x-tex">\Omega</annotation></semantics></math>
+much.</p>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-2.5.html" class="navbutton">&lt;&lt;</a>
+<a href="section-2.5.html" accesskey="p" rel="previous">Best, worst, and average cases</a>
+</div>
+<div class="navlink">
+<a href="section-2.7.html" accesskey="n" rel="next">Algorithm analysis in practice</a>
+<a href="section-2.7.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

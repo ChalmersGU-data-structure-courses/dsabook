@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Mergesort</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+<link href="../interactive/Sorting/MergeSortAnalysisCON.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-4.1.html" class="navbutton">&lt;&lt;</a>
+<a href="section-4.1.html" accesskey="p" rel="previous">Recursion and divide-and-conquer</a>
+</div>
+<div>
+<a href="section-4.3.html" accesskey="n" rel="next">Implementing Mergesort</a>
+<a href="section-4.3.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:mergesort" class="level2" data-number="4.2">
+<h2 data-number="4.2"><span class="header-section-number">4.2</span>
+Mergesort</h2>
+<p>A natural approach to problem solving is divide and conquer. To use
+divide and conquer when sorting, we might consider breaking the list to
+be sorted into pieces, process the pieces, and then put them back
+together somehow. A simple way to do this would be to split the list in
+half, sort the halves, and then merge the sorted halves together. This
+is the idea behind <a href="section-14.html#mergesort" class="term"
+title="A sorting algorithm that requires $O(n \log n)$ in the best, average, and worst cases. Conceptually it is simple: Split the list in half, sort the halves, then merge them together. It is a bit complicated to implement efficiently on an array.">Mergesort</a>.</p>
+<p>Mergesort is one of the simplest sorting algorithms conceptually, and
+has good performance both in the asymptotic sense and in empirical
+running time. Unfortunately, even though it is based on a simple
+concept, it is relatively difficult to implement in practice. Here is a
+pseudocode sketch of Mergesort:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> mergeSort(arr):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> A.<span class="bu">size</span> <span class="op">&lt;=</span> <span class="dv">1</span>:</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    L1 <span class="op">=</span> half <span class="kw">of</span> arr</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    L2 <span class="op">=</span> other half <span class="kw">of</span> arr</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    mergeSort(L1)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    mergeSort(L2)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    merge(L1, L2)</span></code></pre></div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a visualisation that illustrates how Mergesort works.</p>
+</summary>
+<p>
+<div id="mergesortAV" class="embedContainer">
+<iframe id="mergesortAV_iframe" aria-label="mergesortAV" src="../interactive/Sorting/mergesortAV.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</div>
+<section id="sec:merge" class="level4 unnumbered">
+<h4 class="unnumbered">Merge</h4>
+<p>The hardest step to understand about Mergesort is the merge function.
+The merge function starts by examining the first record of each sublist
+and picks the smaller value as the smallest record overall. This smaller
+value is removed from its sublist and placed into the output list.
+Merging continues in this way, comparing the front records of the
+sublists and continually appending the smaller to the output list until
+no more input records remain.</p>
+<p>Here is pseudocode for merging two lists:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> merge(L1, L2):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    answer <span class="op">=</span> <span class="kw">new</span> empty list</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> L1 <span class="kw">and</span> L2 are nonempty:</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> first element <span class="kw">of</span> L1</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> first element <span class="kw">of</span> L2</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> x <span class="op">&lt;=</span> y:</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>            <span class="bu">append</span> x <span class="kw">to</span> answer</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>            <span class="bu">remove</span> x from L1</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>            <span class="bu">append</span> y <span class="kw">to</span> answer</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            <span class="bu">remove</span> y from L2</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Now only one of L1 and L2 is nonempty, so append its remaining elements</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">append</span> <span class="kw">all</span> elements <span class="kw">of</span> L1 <span class="kw">or</span> L2 <span class="kw">to</span> answer</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> answer</span></code></pre></div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a visualisation for the merge operation.</p>
+</summary>
+<p>
+<div id="mergesortCON" class="ssAV" data-short-name="mergesortCON" data-long-name="Merging Slideshow" alt="Merging Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<section id="sec:practice-exercise-merging" class="level4 unnumbered">
+<h4 class="unnumbered">Practice exercise: Merging</h4>
+</summary>
+<p>Here is a Mergesort warmup exercise to practice merging.</p>
+<p>
+<div id="MergesortMergePRO" class="embedContainer">
+<iframe id="MergesortMergePRO_iframe" aria-label="MergesortMergePRO" src="../interactive/Sorting/MergesortMergePRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</section>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<section id="sec:practice-exercise-merge-sort" class="level3"
+data-number="4.2.1">
+<h3 data-number="4.2.1"><span class="header-section-number">4.2.1</span>
+Practice exercise: Merge sort</h3>
+</summary>
+<p>Now here is a full proficiency exercise to put it all together.</p>
+<p>
+<div id="mergesortPRO" class="embedContainer">
+<iframe id="mergesortPRO_iframe" aria-label="mergesortPRO" src="../interactive/Sorting/mergesortPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</section>
+</div>
+</section>
+<section id="sec:complexity-analysis" class="level3"
+data-number="4.2.2">
+<h3 data-number="4.2.2"><span class="header-section-number">4.2.2</span>
+Complexity analysis</h3>
+<p>Consider repeatedly splitting an array of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+elements, where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+is a power of 2. The recursion will go down
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">k=\log n</annotation></semantics></math>
+levels until there are only
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>-element
+arrays left. Each recursion level is shown as one row in this table:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Level</th>
+<th style="text-align: center;">How many parts</th>
+<th style="text-align: center;">Size per part</th>
+<th style="text-align: center;">Splitting each part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">The full array</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+elements</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>×</mo><mi>n</mi><mo>=</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">1\times n = n</annotation></semantics></math>
+units of work</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>2</mn><annotation encoding="application/x-tex">2</annotation></semantics></math>
+halves</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n/2</annotation></semantics></math>
+elements</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>×</mo><mi>n</mi><mi>/</mi><mn>2</mn><mo>=</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">2\times n/2 = n</annotation></semantics></math>
+units of work</td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>4</mn><annotation encoding="application/x-tex">4</annotation></semantics></math>
+quarters</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mn>4</mn></mrow><annotation encoding="application/x-tex">n/4</annotation></semantics></math>
+elements</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mo>×</mo><mi>n</mi><mi>/</mi><mn>4</mn><mo>=</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">4\times n/4 = n</annotation></semantics></math>
+units of work</td>
+</tr>
+<tr>
+<td style="text-align: center;">…</td>
+<td style="text-align: center;">…</td>
+<td style="text-align: center;">…</td>
+<td style="text-align: center;">…</td>
+</tr>
+<tr>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n/2</annotation></semantics></math>
+subarrays</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>2</mn><annotation encoding="application/x-tex">2</annotation></semantics></math>
+elements</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mn>2</mn><mo>×</mo><mn>2</mn><mo>=</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">n/2\times 2 = n</annotation></semantics></math>
+units of work</td>
+</tr>
+</tbody>
+</table>
+<p>After a sub-array has been split, the next level is called
+recursively which returns the sorted splits. Then we have to merge them
+before returning the sorted sub-array to the previous level, which is
+shown in the following table:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Level</th>
+<th style="text-align: center;">How many parts</th>
+<th style="text-align: center;">Size per part</th>
+<th style="text-align: center;">Merging pairs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+singleton arrays</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>
+element each</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>×</mo><mn>1</mn><mo>=</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">n\times 1 = n</annotation></semantics></math>
+units of work</td>
+</tr>
+<tr>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">k-1</annotation></semantics></math></td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n/2</annotation></semantics></math>
+pairs</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>2</mn><annotation encoding="application/x-tex">2</annotation></semantics></math>
+elements each</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mn>2</mn><mo>×</mo><mn>2</mn><mo>=</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">n/2\times 2 = n</annotation></semantics></math>
+units of work</td>
+</tr>
+<tr>
+<td style="text-align: center;">…</td>
+<td style="text-align: center;">…</td>
+<td style="text-align: center;">…</td>
+<td style="text-align: center;">…</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>4</mn><annotation encoding="application/x-tex">4</annotation></semantics></math>
+subarrays</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mn>4</mn></mrow><annotation encoding="application/x-tex">n/4</annotation></semantics></math>
+elements each</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mo>×</mo><mi>n</mi><mi>/</mi><mn>4</mn><mo>=</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">4\times n/4 = n</annotation></semantics></math>
+units of work</td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>2</mn><annotation encoding="application/x-tex">2</annotation></semantics></math>
+subarrays</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n/2</annotation></semantics></math>
+elements each</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>×</mo><mi>n</mi><mi>/</mi><mn>2</mn><mo>=</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">2\times n/2 = n</annotation></semantics></math>
+units of work</td>
+</tr>
+</tbody>
+</table>
+<p>In summary, each level spends
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>
+time, and there are
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">k=\log n</annotation></semantics></math>
+levels. So the total running time of Mergesort is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>.
+Note that this cost is unaffected by the relative order of the values
+being sorted, thus this analysis holds for the best, average, and worst
+cases.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>This visualisation provides a running time analysis for
+Mergesort.</p>
+</summary>
+<p>
+<div id="MergeSortAnalysisCON" class="ssAV" data-short-name="MergeSortAnalysisCON" data-long-name="Mergesort Analysis Slideshow" alt="Mergesort Analysis Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-4.1.html" class="navbutton">&lt;&lt;</a>
+<a href="section-4.1.html" accesskey="p" rel="previous">Recursion and divide-and-conquer</a>
+</div>
+<div class="navlink">
+<a href="section-4.3.html" accesskey="n" rel="next">Implementing Mergesort</a>
+<a href="section-4.3.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+<script type="text/javascript" src="../interactive/Sorting/mergesortCON.js"></script>
+<script type="text/javascript" src="../interactive/Sorting/MergeSortAnalysisCON.js"></script>
+</body>
+</html>
+

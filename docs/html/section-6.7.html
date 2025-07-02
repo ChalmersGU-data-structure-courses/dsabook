@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Dynamic arrays</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+<link href="../interactive/ChalmersGU/CGU-Styles.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/List/ListArrayDynamicZoomCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/List/ListArrayDynamicCON.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-6.6.html" class="navbutton">&lt;&lt;</a>
+<a href="section-6.6.html" accesskey="p" rel="previous">Queues implemented using arrays</a>
+</div>
+<div>
+<a href="section-6.8.html" accesskey="n" rel="next">Comparison of linked lists vs dynamic arrays</a>
+<a href="section-6.8.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:dynamic-arrays" class="level2" data-number="6.7">
+<h2 data-number="6.7"><span class="header-section-number">6.7</span>
+Dynamic arrays</h2>
+<p>The problem with static array-based stacks and queues is that they
+have limited capacity. We get an error if we try to add new elements
+when the internal array is full.</p>
+<p>To solve this problem we have to make the internal array
+<em>dynamic</em> – meaning that we increase the size of the array when
+it becomes full. (We should also shrink the array to save space whenever
+it contains too few elements.)</p>
+<section id="sec:resizing-the-internal-array" class="level3"
+data-number="6.7.1">
+<h3 data-number="6.7.1"><span class="header-section-number">6.7.1</span>
+Resizing the internal array</h3>
+<p>How can we modify our data type to allow for any number of elements?
+Remember that array are always <em>fixed-size</em>, so we cannot change
+the array size. Instead we have to create new a larger array whenever
+the capacity is exceeded, and copy over all elements to the new one.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> ArrayStack:  <span class="co">// or ArrayQueue</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    resizeArray(newCapacity):</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        oldArray <span class="op">=</span> internalArray  <span class="co">// Remember the old array</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        internalArray <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(newCapacity)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="dv">0</span> .. <span class="bu">size</span><span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>            internalArray[i] <span class="op">=</span> oldArray[i]</span></code></pre></div>
+<p>So, how large should the new internal array be? For now, let’s
+<strong><em>double the size of the internal array</em></strong> when we
+need to resize, which means that we add the following if-clause to the
+methods <code>push</code> or <code>enqueue</code>:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">size</span> <span class="op">&gt;=</span> internalArray.<span class="bu">size</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>        resizeArray(internalArray.<span class="bu">size</span> <span class="op">*</span> <span class="dv">2</span>)</span></code></pre></div>
+<p>That’s the only difference from the <code>push</code> method from
+<strong>ArrayStack</strong> from earlier. So the new dynamic
+<code>push</code> will look like this:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> ArrayStack:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">push</span>(x):</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">size</span> <span class="op">&gt;=</span> internalArray.<span class="bu">size</span>:</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>            resizeArray(internalArray.<span class="bu">size</span> <span class="op">*</span> <span class="dv">2</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        internalArray[<span class="bu">size</span>] <span class="op">=</span> x</span></code></pre></div>
+<p>As we will explain below, we don’t have to double the size, but we
+can multiply by 3 or 1.5 or 1.1. The important point is that we don’t
+add a constant number, but increase the size by a factor.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Dynamic array list.</p>
+</summary>
+<p>
+<div id="DynamicArrayList-Append-CON" class="ssAV" data-short-name="DynamicArrayList-Append-CON" data-long-name="Dynamic Array-based List Addition Slideshow" alt="Dynamic Array-based List Addition Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+</section>
+<section id="sec:how-much-to-increase-the-array-size" class="level3"
+data-number="6.7.2">
+<h3 data-number="6.7.2"><span class="header-section-number">6.7.2</span>
+How much to increase the array size</h3>
+<p>In the code above we doubled the size of the internal array whenever
+we needed to resize it. But we could have done something else, like:</p>
+<ul>
+<li>Triple the size</li>
+<li>Grow the size by 10%</li>
+<li>Grow the size by 100 elements</li>
+<li>Grow the size by 1 element</li>
+</ul>
+<p>But which is best, and why? There is a tradeoff: if we grow the array
+by a lot, we might waste memory. For example, immediately after we
+double the size, half of the array’s capacity is unused, so we use twice
+as much memory as needed. On the other hand, if we grow the array by a
+small amount, we need to resize it more often. We will explore these
+tradeoffs by looking at the performance of the following small program
+under different resizing strategies:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>stack <span class="op">=</span> <span class="kw">new</span> ArrayStack()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="dv">1</span> .. n:</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    stack.<span class="bu">push</span>(i)</span></code></pre></div>
+<p>The program builds a stack of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+by repeatedly calling <code>push</code>. In this case, we could have
+used a static array-based stack of capacity
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.
+So we would like the dynamic array-based stack to have comparable
+performance to the static array-based stack. This means that the program
+ought to take <em>linear</em> time,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>.</p>
+<section id="sec:growing-by-a-constant-amount"
+class="level4 unnumbered">
+<h4 class="unnumbered">Growing by a constant amount</h4>
+<p>What happens if we only grow the internal array by 1 element when we
+resize it?</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">size</span> <span class="op">&gt;=</span> internalArray.<span class="bu">size</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    resizeArray(internalArray.<span class="bu">size</span> <span class="op">+</span> <span class="dv">1</span>)</span></code></pre></div>
+<p>Every time we call <code>push</code>, the internal array will be
+resized. Resizing the array takes linear time, because if the internal
+array has size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
+it has to copy
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+elements from the internal array to the new array. To put it another
+way, the loop body <code>internalArray[i]=oldArray[i]</code> will be
+executed
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+times.</p>
+<p>Now suppose we run the program above to create a list of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+elements. Adding up all the calls to <code>resizeArray</code> that
+happen, how many times does an array element get copied from the
+internal array to the new array (that is, how many times does the
+statement <code>internalArray[i]=oldArray[i]</code> get executed)? The
+array size is initially 1, so we get the following calls:</p>
+<table>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>resizeArray(2)</code></td>
+<td style="text-align: right;">copying</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math></td>
+<td style="text-align: left;">element</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>resizeArray(3)</code></td>
+<td style="text-align: right;">copying</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>2</mn><annotation encoding="application/x-tex">2</annotation></semantics></math></td>
+<td style="text-align: left;">elements</td>
+</tr>
+<tr>
+<td style="text-align: left;">. . .</td>
+<td style="text-align: right;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>resizeArray(n-1)</code></td>
+<td style="text-align: right;">copying</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">n-2</annotation></semantics></math></td>
+<td style="text-align: left;">elements</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>resizeArray(n)</code></td>
+<td style="text-align: right;">copying</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math></td>
+<td style="text-align: left;">elements</td>
+</tr>
+</tbody>
+</table>
+<p>In total, there are
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>+</mo><mn>2</mn><mo>+</mo><mi>.</mi><mi>.</mi><mi>.</mi><mo>+</mo><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">1+2+...+(n-1)</annotation></semantics></math>
+element copy operations, which is equal to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mi>/</mi><mn>2</mn><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo>−</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n(n-1)/2 = (n^2-n)/2</annotation></semantics></math>.
+This means that the program takes <em>quadratic</em> time,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>,
+not linear!</p>
+<p>Suppose for example that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>000</mn><mo>,</mo><mn>000</mn></mrow><annotation encoding="application/x-tex">n = 1,000,000</annotation></semantics></math>.
+Using the formula above, the number of times an array element gets
+copied is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>999</mn><mo>,</mo><mn>999</mn><mo>×</mo><mn>1</mn><mo>,</mo><mn>000</mn><mo>,</mo><mn>000</mn><mspace width="0.278em"></mspace><mi>/</mi><mspace width="0.278em"></mspace><mn>2</mn><mo>=</mo><mn>499</mn><mo>,</mo><mn>999</mn><mo>,</mo><mn>500</mn><mo>,</mo><mn>000</mn></mrow><annotation encoding="application/x-tex">999,999 \times 1,000,000\;/\;2 = 499,999,500,000</annotation></semantics></math>.
+If copying one array element takes 1 ns, then the program spends nearly
+10 minutes just resizing the array!</p>
+<p>What happens if we instead grow the array by 100 elements every time?
+You can try the calculation yourself, for say
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>000</mn><mo>,</mo><mn>000</mn></mrow><annotation encoding="application/x-tex">n = 1,000,000</annotation></semantics></math>.
+What happens is that <code>resizeArray</code> gets called 100 times less
+often – so there 100 times fewer elements copied. But the runtime is
+still quadratic. When
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>000</mn><mo>,</mo><mn>000</mn></mrow><annotation encoding="application/x-tex">n = 1,000,000</annotation></semantics></math>,
+the total number of elements copied is about
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn><mo>,</mo><mn>000</mn><mo>,</mo><mn>000</mn><mo>,</mo><mn>000</mn></mrow><annotation encoding="application/x-tex">5,000,000,000</annotation></semantics></math>
+– still far too many.</p>
+<div class="online">
+<div class="note">
+<p><em>Note</em>: You can get a precise number of elements copied by
+using the formula for an <a
+href="https://en.wikipedia.org/wiki/Arithmetic_progression">arithmetic
+progression</a>.</p>
+</div>
+</div>
+<p>In short, <strong><em>growing the array size by a constant amount is
+bad</em></strong>, because a loop that repeatedly adds to the array will
+take quadratic time.</p>
+</section>
+<section id="sec:growing-by-a-constant-factor"
+class="level4 unnumbered">
+<h4 class="unnumbered">Growing by a constant factor</h4>
+<p>One way to think about the problem is: as the array gets bigger,
+resizing it gets more expensive. So, to make up for that, when the array
+is bigger we need to grow it by more, so that we don’t have to resize as
+often. One way to do this is to always double the array size when it
+gets full. This turns out to work well!</p>
+<p>Suppose that we run the example program with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>1000</mn></mrow><annotation encoding="application/x-tex">n = 1000</annotation></semantics></math>,
+i.e. we add 1000 elements to the list. As before, the internal array
+initially has a size of 1. What calls to <code>resizeArray</code>
+happen, and how many elements get copied each time?</p>
+<table>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>resizeArray(2)</code></td>
+<td style="text-align: right;">copying</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math></td>
+<td style="text-align: left;">element</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>resizeArray(4)</code></td>
+<td style="text-align: right;">copying</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>2</mn><annotation encoding="application/x-tex">2</annotation></semantics></math></td>
+<td style="text-align: left;">elements</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>resizeArray(4)</code></td>
+<td style="text-align: right;">copying</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>4</mn><annotation encoding="application/x-tex">4</annotation></semantics></math></td>
+<td style="text-align: left;">elements</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>resizeArray(8)</code></td>
+<td style="text-align: right;">copying</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>8</mn><annotation encoding="application/x-tex">8</annotation></semantics></math></td>
+<td style="text-align: left;">elements</td>
+</tr>
+<tr>
+<td style="text-align: left;">. . .</td>
+<td style="text-align: right;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>resizeArray(256)</code></td>
+<td style="text-align: right;">copying</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>128</mn><annotation encoding="application/x-tex">128</annotation></semantics></math></td>
+<td style="text-align: left;">elements</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>resizeArray(512)</code></td>
+<td style="text-align: right;">copying</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>256</mn><annotation encoding="application/x-tex">256</annotation></semantics></math></td>
+<td style="text-align: left;">elements</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>resizeArray(1024)</code></td>
+<td style="text-align: right;">copying</td>
+<td
+style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>512</mn><annotation encoding="application/x-tex">512</annotation></semantics></math></td>
+<td style="text-align: left;">elements</td>
+</tr>
+</tbody>
+</table>
+<p>You can see that the array gets resized a whole lot at the beginning
+– but as it gets bigger, it gets resized much less often. We can read
+off how many elements get copied:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>+</mo><mn>2</mn><mo>+</mo><mn>4</mn><mo>+</mo><mn>8</mn><mo>+</mo><mn>16</mn><mo>+</mo><mn>32</mn><mo>+</mo><mn>64</mn><mo>+</mo><mn>128</mn><mo>+</mo><mn>256</mn><mo>+</mo><mn>512</mn><mo>=</mo><mn>1023</mn></mrow><annotation encoding="application/x-tex">1+2+4+8+16+32+64+128+256+512 = 1023</annotation></semantics></math>.</p>
+<p>Since the array starts from size 1 and always doubles, the array size
+is always a power of two. So to calculate the total number of elements
+copied, instead of adding up all the terms by hand, we can use the
+following formula:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>0</mn></msup><mo>+</mo><msup><mn>2</mn><mn>1</mn></msup><mo>+</mo><msup><mn>2</mn><mn>2</mn></msup><mo>+</mo><mi>.</mi><mi>.</mi><mi>.</mi><mo>+</mo><msup><mn>2</mn><mi>n</mi></msup><mspace width="0.278em"></mspace><mo>=</mo><mspace width="0.278em"></mspace><msup><mn>2</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">
+2^0+2^1+2^2+...+2^n \;=\; 2^{n+1}-1
+</annotation></semantics></math></p>
+<p>Suppose that we now choose
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>000</mn><mo>,</mo><mn>000</mn></mrow><annotation encoding="application/x-tex">n=1,000,000</annotation></semantics></math>.
+How many elements get copied? In this case the final array size will be
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>20</mn></msup><mo>=</mo><mn>1</mn><mo>,</mo><mn>048</mn><mo>,</mo><mn>576</mn></mrow><annotation encoding="application/x-tex">2^{20} = 1,048,576</annotation></semantics></math>.
+The array size will eventually grow from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mn>18</mn></msup><annotation encoding="application/x-tex">2^{18}</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mn>19</mn></msup><annotation encoding="application/x-tex">2^{19}</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mn>20</mn></msup><annotation encoding="application/x-tex">2^{20}</annotation></semantics></math>
+elements, with the final call to <code>resizeArray</code> copying
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mn>19</mn></msup><annotation encoding="application/x-tex">2^{19}</annotation></semantics></math>
+elements. Using the formula above, the total number of elements copied
+is:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>0</mn></msup><mo>+</mo><msup><mn>2</mn><mn>1</mn></msup><mo>+</mo><msup><mn>2</mn><mn>2</mn></msup><mo>+</mo><mi>.</mi><mi>.</mi><mi>.</mi><mo>+</mo><msup><mn>2</mn><mn>19</mn></msup><mspace width="0.278em"></mspace><mo>=</mo><mspace width="0.278em"></mspace><msup><mn>2</mn><mn>20</mn></msup><mo>−</mo><mn>1</mn><mspace width="0.278em"></mspace><mo>=</mo><mspace width="0.278em"></mspace><mn>1</mn><mo>,</mo><mn>048</mn><mo>,</mo><mn>575</mn></mrow><annotation encoding="application/x-tex">
+2^0+2^1+2^2+...+2^{19} \;=\; 2^{20}-1 \;=\; 1,048,575
+</annotation></semantics></math></p>
+<p>Compared to when we grew the array by a fixed size of 1 element, this
+is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>500</mn><mo>,</mo><mn>000</mn></mrow><annotation encoding="application/x-tex">500,000</annotation></semantics></math>
+times fewer! So this in fact seems to be nice and efficient.</p>
+<p>Let us now generalise to an arbitrary
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.
+The worst case is when the final call to <code>add</code> has to resize
+the array – that happens when
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+is one more than a power of two,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn><mo>=</mo><msup><mn>2</mn><mi>k</mi></msup></mrow><annotation encoding="application/x-tex">n-1 = 2^k</annotation></semantics></math>.
+In that case, the final call to <code>resizeArray</code> grows the array
+from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mi>k</mi></msup><annotation encoding="application/x-tex">2^k</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msup><annotation encoding="application/x-tex">2^{k+1}</annotation></semantics></math>,
+copying
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mi>k</mi></msup><annotation encoding="application/x-tex">2^k</annotation></semantics></math>
+elements. The total number of elements copied is:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>0</mn></msup><mo>+</mo><msup><mn>2</mn><mn>1</mn></msup><mo>+</mo><msup><mn>2</mn><mn>2</mn></msup><mo>+</mo><mi>.</mi><mi>.</mi><mi>.</mi><mo>+</mo><msup><mn>2</mn><mi>k</mi></msup><mspace width="0.278em"></mspace><mo>=</mo><mspace width="0.278em"></mspace><msup><mn>2</mn><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>−</mo><mn>1</mn><mspace width="0.278em"></mspace><mo>=</mo><mspace width="0.278em"></mspace><mn>2</mn><mo>⋅</mo><msup><mn>2</mn><mi>k</mi></msup><mo>−</mo><mn>1</mn><mspace width="0.278em"></mspace><mo>=</mo><mspace width="0.278em"></mspace><mn>2</mn><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo>−</mo><mn>1</mn><mspace width="0.278em"></mspace><mo>=</mo><mspace width="0.278em"></mspace><mn>2</mn><mi>n</mi><mo>−</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">
+2^0+2^1+2^2+...+2^k \;=\; 2^{k+1} - 1 \;=\; 2 \cdot 2^k - 1 \;=\; 2(n-1) - 1 \;=\; 2n-3
+</annotation></semantics></math></p>
+<p>In fact, we have just proved the following result.</p>
+</section>
+<section id="sec:theorem-array-doubling"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Theorem: Array-doubling</h4>
+<p>When using the array-doubling strategy, calling <code>add</code>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+times starting from an empty dynamic array list causes fewer than
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>n</mi></mrow><annotation encoding="application/x-tex">2n</annotation></semantics></math>
+elements to be copied.</p>
+</section>
+<p>In short, the overhead of using a dynamic array list is at most
+<em>two array elements copied per element that we add</em>. But copying
+an array element is an extremely cheap operation, so dynamic array lists
+implemented using array doubling have almost no overhead, compared to
+<span class="online"><strong>ASDASDA</strong></span> static array lists.
+In particular, the complexity of our example program is <em>linear</em>,
+just as we wanted.</p>
+<div class="online">
+<p>What happens if we instead grow the array by 50%? In fact, it still
+works out fine - the program takes linear time to run. To see this, you
+can use the same argument as above, but instead of using the formula
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>0</mn></msup><mo>+</mo><msup><mn>2</mn><mn>1</mn></msup><mo>+</mo><mi>.</mi><mi>.</mi><mi>.</mi><mo>+</mo><msup><mn>2</mn><mi>k</mi></msup><mo>=</mo><msup><mn>2</mn><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">2^0+2^1+...+2^k = 2^{k+1}</annotation></semantics></math>,
+you have to use the formula for a general <a
+href="https://en.wikipedia.org/wiki/Geometric_progression">geometric
+progression</a>. What you get is an overhead of <em>three elements
+copied per element added</em>.</p>
+<p>In fact, <strong><em>growing the array by any constant
+factor</em></strong> works, because the same geometric progression
+reasoning applies. We can calculate the exact performance overhead of
+growing the array by any given factor:</p>
+<section id="sec:theorem-growing-by-a-factor"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Theorem: Growing by a factor</h4>
+<p>If we grow the array by a factor of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>&gt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">k &gt; 1</annotation></semantics></math>
+when resizing it, then the overhead is at most
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>+</mo><mn>1</mn><mi>/</mi><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">1+1/(k-1)</annotation></semantics></math>
+elements copied per <code>add</code>. For example, when growing by 20%
+(k = 1.2), the overhead is 6 elements copied per <code>add</code>.</p>
+</section>
+<p>In short, when resizing a dynamic array list, we should <strong>grow
+the array size by a constant factor</strong>. when adding many elements,
+this guarantees that we only have a constant factor of performance
+overhead due to occasional resizing. We can choose a large factor (such
+as 2) if we want fast performance, or a low factor (such as 1.2) if we
+want to save memory.</p>
+<section id="sec:constant-amount-vs-constant-factor"
+class="level4 unnumbered">
+<h4 class="unnumbered">Constant amount vs constant factor</h4>
+<p><a href="#fig:ListGrowthGraph">Figure 6.1</a> shows just how big the
+performance difference is between the two resizing strategies: growing
+the array by a constant amount, and scaling it by a constant factor. The
+graph plots how many elements need to be copied, as a function of how
+many elements we add to the list.</p>
+<figure id="fig:ListGrowthGraph" class="subfigures">
+<p>
+<div id="ListArrayDynamicZoomCON" class="ssAV" data-short-name="ListArrayDynamicZoomCON" data-long-name="DataStructures/Plot.js List/ListArrayDynamicZoomCON" alt="DataStructures/Plot.js List/ListArrayDynamicZoomCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<figcaption><p>Figure 6.1: The performance difference between growing
+the array by a constant amount, and scaling it by a constant factor.
+</p></figcaption>
+</figure>
+<p>Notice that although growing by 10000 seems pretty good at first, for
+largest lists it’s worse than growing by 10% (a factor of 1.1). We can
+see this more clearly if we zoom out the graph, making the
+<em>x</em>-axis go up to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>10</mn><mo>,</mo><mn>000</mn><mo>,</mo><mn>000</mn></mrow><annotation encoding="application/x-tex">10,000,000</annotation></semantics></math>
+instead of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>,</mo><mn>000</mn><mo>,</mo><mn>000</mn></mrow><annotation encoding="application/x-tex">1,000,000</annotation></semantics></math>,
+as shown in <a href="#fig:ListGrowthGraphZoom">Figure 6.2</a>.</p>
+<figure id="fig:ListGrowthGraphZoom" class="subfigures">
+<p>
+<div id="ListArrayDynamicCON" class="ssAV" data-short-name="ListArrayDynamicCON" data-long-name="DataStructures/Plot.js List/ListArrayDynamicCON" alt="DataStructures/Plot.js List/ListArrayDynamicCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<figcaption><p>Figure 6.2: <a href="#fig:ListGrowthGraph">Figure 6.1</a>
+zoomed out 10 times.. </p></figcaption>
+</figure>
+<p>Though you can’t see it in the graph, at
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mn>10</mn><mo>,</mo><mn>000</mn><mo>,</mo><mn>000</mn></mrow><annotation encoding="application/x-tex">x=10,000,000</annotation></semantics></math>,
+growing by 10,000 is <strong>5,000 times</strong> slower than growing by
+10%! This is because the “growing by 10,000” strategy takes quadratic
+time: if we do 10 times as many calls to <code>add</code>, it takes 100
+times as long. Quadratic algorithms always lose to linear algorithms
+eventually!</p>
+</section>
+</div>
+</section>
+<section id="sec:resizing-an-array-based-queue" class="level3"
+data-number="6.7.3">
+<h3 data-number="6.7.3"><span class="header-section-number">6.7.3</span>
+Resizing an array-based queue</h3>
+<p>When we resize the internal array, we cannot keep the positions of
+the elements. If the queue is wrapped around (i.e., if <code>rear</code>
+&lt; <code>front</code>) then we might end up in a large gap in the
+middle of the queue.</p>
+<p>Instead we reset the <code>front</code> and <code>rear</code>
+pointers so that we copy the first queue element to position 0 of the
+new array, the second to position 1, etc. Apart from that, the
+implementation is similar to the one for lists and queues.</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> ArrayQueue:</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    resizeArray(newCapacity):</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        oldArray <span class="op">=</span> internalArray  <span class="co">// Remember the old array</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        internalArray <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(newCapacity)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> pos <span class="kw">in</span> <span class="dv">0</span> .. <span class="bu">size</span><span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>            oldPos <span class="op">=</span> (pos <span class="op">+</span> front) <span class="op">%</span> internalArray.<span class="bu">size</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>            internalArray[pos] <span class="op">=</span> oldArray[oldPos]</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        front <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        rear <span class="op">=</span> <span class="bu">size</span> <span class="op">-</span> <span class="dv">1</span></span></code></pre></div>
+</section>
+<section id="sec:shrinking-the-internal-array" class="level3"
+data-number="6.7.4">
+<h3 data-number="6.7.4"><span class="header-section-number">6.7.4</span>
+Shrinking the internal array</h3>
+<p>Now we know how to make a dynamic array stack (as well as a queue)
+that has room for any number of elements.</p>
+<p>But the problem is that if we first build a large stack (or queue)
+with 1000’s of elements, and then remove most of them, we will still
+have a large internal array where almost all cells are unused. So, let’s
+resize the array also when removing elements! When the array contains
+too many unused cells, we shrink it to half the size.</p>
+<p>Now, it’s important that we <em>don’t</em> shrink the array when it’s
+half full. Why is that? Let’s consider the following sequence of
+additions and deletions:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">push</span>(<span class="st">&quot;A&quot;</span>)<span class="op">;</span> <span class="bu">pop</span>()<span class="op">;</span> <span class="bu">push</span>(<span class="st">&quot;B&quot;</span>)<span class="op">;</span> <span class="bu">pop</span>()<span class="op">;</span> <span class="bu">push</span>(<span class="st">&quot;C&quot;</span>)<span class="op">;</span> <span class="bu">pop</span>()<span class="op">;</span> <span class="bu">push</span>(<span class="st">&quot;D&quot;</span>)<span class="op">;</span> <span class="bu">pop</span>()<span class="op">;</span> ...</span></code></pre></div>
+<p>If we are unlucky and the array is full just before the sequence
+starts, then the first push will have to resize the array. Then when we
+pop that element, the list becomes less than half-full, and we have to
+resize again. Then the next push will resize, and the next pop will also
+resize. And so on… This will lead to a linear-time resize every time we
+push/pop, and so the final complexity will be linear (per operation) and
+not constant time. Which is not what we want.</p>
+<p>How can we alleviate this? The solution is to wait even longer until
+we shrink the internal array! E.g., we can shrink the array (i.e., halve
+it), when it is only 1/3 full. Note that the factors 1/3 and 1/2 are not
+important, as explained earlier. The only thing that matters is that the
+minimum load factor (1/3) is <em>smaller</em> than the shrinking factor
+(1/2).</p>
+<p>In summary, to get a dynamically shrinking stack (or queue), we can
+add the following lines right before the end of the <code>pop</code>
+method (or the <code>dequeue</code> method):</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">size</span> <span class="op">&lt;=</span> internalArray.<span class="bu">size</span> <span class="op">*</span> <span class="dv">1</span><span class="op">/</span><span class="dv">3</span>:</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    resizeArray(internalArray.<span class="bu">size</span> <span class="op">*</span> <span class="dv">1</span><span class="op">/</span><span class="dv">2</span>)</span></code></pre></div>
+<p>That’s the only difference from previous <code>pop</code> method (and
+<code>dequeue</code> for queues).</p>
+<p>So the dynamic <code>pop</code> method will look like this:</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> ArrayStack:</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">pop</span>():</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">size</span> <span class="op">=</span> <span class="bu">size</span> <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> internalArray[<span class="bu">size</span>]</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        internalArray[<span class="bu">size</span>] <span class="op">=</span> <span class="va">null</span>  <span class="co">// For garbage collection</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">size</span> <span class="op">&lt;=</span> internalArray.<span class="bu">size</span> <span class="op">*</span> <span class="dv">1</span><span class="op">/</span><span class="dv">3</span>:</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>            resizeArray(internalArray.<span class="bu">size</span> <span class="op">*</span> <span class="dv">1</span><span class="op">/</span><span class="dv">2</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> result</span></code></pre></div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Dynamic array list – deletion.</p>
+</summary>
+<p>
+<div id="DynamicArrayList-Remove-CON" class="ssAV" data-short-name="DynamicArrayList-Remove-CON" data-long-name="Dynamic Array-based List Deletion Slideshow" alt="Dynamic Array-based List Deletion Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-6.6.html" class="navbutton">&lt;&lt;</a>
+<a href="section-6.6.html" accesskey="p" rel="previous">Queues implemented using arrays</a>
+</div>
+<div class="navlink">
+<a href="section-6.8.html" accesskey="n" rel="next">Comparison of linked lists vs dynamic arrays</a>
+<a href="section-6.8.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+<script type="text/javascript" src="../interactive/ChalmersGU/DynamicArrayList-Append-CON.js"></script>
+<script type="text/javascript" src="../interactive/DataStructures/Plot.js"></script>
+<script type="text/javascript" src="../interactive/List/ListArrayDynamicZoomCON.js"></script>
+<script type="text/javascript" src="../interactive/List/ListArrayDynamicCON.js"></script>
+<script type="text/javascript" src="../interactive/ChalmersGU/DynamicArrayList-Remove-CON.js"></script>
+</body>
+</html>
+

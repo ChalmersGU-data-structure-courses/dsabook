@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Different probing strategies</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+<link href="../interactive/Hashing/linProbeCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Hashing/collisionCON.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-12.7.html" class="navbutton">&lt;&lt;</a>
+<a href="section-12.7.html" accesskey="p" rel="previous">Deletion in open addressing</a>
+</div>
+<div>
+<a href="section-12.9.html" accesskey="n" rel="next">Analysis of hash tables</a>
+<a href="section-12.9.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:different-probing-strategies" class="level2"
+data-number="12.8">
+<h2 data-number="12.8"><span class="header-section-number">12.8</span>
+Different probing strategies</h2>
+<p>While linear probing is probably the first idea that comes to mind
+when considering collision resolution policies, it is not the only one
+possible. Probe function <strong>p</strong> allows us many options for
+how to do collision resolution. In fact, linear probing is one of the
+worst collision resolution methods.</p>
+<div class="online">
+<section id="sec:example-the-problem-with-linear-probing"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: The problem with linear probing</h4>
+<p>Recall how linear probing works:</p>
+<p>
+<div id="linProbeCON1" class="ssAV" data-short-name="linProbeCON1" data-long-name="Linear Probing Slideshow 1" alt="Linear Probing Slideshow 1" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>Now the problem is illustrated here:</p>
+<p>
+<div id="linProbeCON2" class="ssAV" data-short-name="linProbeCON2" data-long-name="Linear Probing Slideshow 2" alt="Linear Probing Slideshow 2" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</section>
+</div>
+<p>Again, the ideal behaviour for a collision resolution mechanism is
+that each empty slot in the table will have equal probability of
+receiving the next record inserted (assuming that every slot in the
+table has equal probability of being hashed to initially). This tendency
+of linear probing to cluster items together is known as <a
+href="section-14.html#primary-clustering" class="term"
+title="In hashing, the tendency in certain collision resolution methods to create clustering in sections of the hash table. The classic example is linear probing. This tends to happen when a group of keys follow the same probe sequence during collision resolution.">primary
+clustering</a>. Small clusters tend to merge into big clusters, making
+the problem worse.</p>
+<div class="online">
+<p>The problem with primary clustering is that it leads to long probe
+sequences, which increases execution time. However, linear probing is
+still a very common probing method, because it is so simple and can be
+implemented efficiently.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<section id="sec:exercise-practice-linear-probing"
+class="level4 unnumbered">
+<h4 class="unnumbered">Exercise: Practice linear probing</h4>
+</summary>
+<p>
+<div id="HashLinearPPRO" class="embedContainer">
+<iframe id="HashLinearPPRO_iframe" aria-label="HashLinearPPRO" src="../interactive/Hashing/HashLinearPPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</section>
+</div>
+<section id="sec:linear-probing-by-steps" class="level3"
+data-number="12.8.1">
+<h3 data-number="12.8.1"><span
+class="header-section-number">12.8.1</span> Linear probing by steps</h3>
+<p>How can we avoid primary clustering? One possible improvement might
+be to use linear probing, but to skip slots by some constant
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>
+other than 1. This would make the probe function
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="bold">𝐩</mtext><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo>,</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>c</mi><mi>i</mi></mrow><annotation encoding="application/x-tex">\textbf{p}(k, i) = ci</annotation></semantics></math>,
+and so the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+th slot in the probe sequence will be
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mtext mathvariant="bold">𝐡</mtext><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>i</mi><mi>c</mi><mo stretchy="false" form="postfix">)</mo><mrow><mspace width="0.444em"></mspace><mrow><mi>mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mi>m</mi></mrow></mrow><annotation encoding="application/x-tex">(\textbf{h}(k) + ic) \mod m</annotation></semantics></math>.
+In this way, records with adjacent home positions will not follow the
+same probe sequence.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Example: linear probing by steps</p>
+</summary>
+<p>
+<div id="collisionCON1" class="ssAV" data-short-name="collisionCON1" data-long-name="Linear Probing By Steps Slideshow 1" alt="Linear Probing By Steps Slideshow 1" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<p>One quality of a good probe sequence is that it will cycle through
+all slots in the hash table before returning to the home position.
+Clearly linear probing (which “skips” slots by one each time) does this.
+Unfortunately, not all values for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>
+will make this happen. For example, if
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">c = 2</annotation></semantics></math>
+and the table contains an even number of slots, then any key whose home
+position is in an even slot will have a probe sequence that cycles
+through only the even slots. Likewise, the probe sequence for a key
+whose home position is in an odd slot will cycle through the odd slots.
+Thus, this combination of table size and linear probing constant
+effectively divides the records into two sets stored in two disjoint
+sections of the hash table. So long as both sections of the table
+contain the same number of records, this is not really important.
+However, just from chance it is likely that one section will become
+fuller than the other, leading to more collisions and poorer performance
+for those records. The other section would have fewer records, and thus
+better performance. But the overall system performance will be degraded,
+as the additional cost to the side that is more full outweighs the
+improved performance of the less-full side.</p>
+<p>Constant
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>
+must be relatively prime to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
+to generate a linear probing sequence that visits all slots in the table
+(that is,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
+must share no factors). For a hash table of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">m = 10</annotation></semantics></math>,
+if
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>
+is any one of 1, 3, 7, or 9, then the probe sequence will visit all
+slots for any key. When
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><mn>11</mn></mrow><annotation encoding="application/x-tex">m = 11</annotation></semantics></math>,
+any value for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>
+between 1 and 10 generates a probe sequence that visits all slots for
+every key.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Example: Using a relative prime step factor.</p>
+</summary>
+<p>
+<div id="collisionCON2" class="ssAV" data-short-name="collisionCON2" data-long-name="Linear Probing By Steps Slideshow 2" alt="Linear Probing By Steps Slideshow 2" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Now you can practice linear probing by different step sizes.</p>
+</summary>
+<p>
+<div id="HashLinearStepPPRO" class="embedContainer">
+<iframe id="HashLinearStepPPRO_iframe" aria-label="HashLinearStepPPRO" src="../interactive/Hashing/HashLinearStepPPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</div>
+</section>
+<section id="sec:pseudo-random-probing" class="level3"
+data-number="12.8.2">
+<h3 data-number="12.8.2"><span
+class="header-section-number">12.8.2</span> Pseudo-random probing</h3>
+<p>Consider the situation where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">c = 2</annotation></semantics></math>
+and we wish to insert a record with key
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>1</mn></msub><annotation encoding="application/x-tex">k_1</annotation></semantics></math>
+such that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="bold">𝐡</mtext><mo stretchy="false" form="prefix">(</mo><msub><mi>k</mi><mn>1</mn></msub><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">\textbf{h}(k_1) = 3</annotation></semantics></math>.
+The probe sequence for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>1</mn></msub><annotation encoding="application/x-tex">k_1</annotation></semantics></math>
+is 3, 5, 7, 9, and so on. If another key
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>2</mn></msub><annotation encoding="application/x-tex">k_2</annotation></semantics></math>
+has home position at slot 5, then its probe sequence will be 5, 7, 9,
+and so on. The probe sequences of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>1</mn></msub><annotation encoding="application/x-tex">k_1</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>2</mn></msub><annotation encoding="application/x-tex">k_2</annotation></semantics></math>
+are linked together in a manner that contributes to clustering. In other
+words, linear probing with a value of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mo>&gt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">c &gt; 1</annotation></semantics></math>
+does not solve the problem of primary clustering. We would like to find
+a probe function that does not link keys together in this way. We would
+prefer that the probe sequence for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>1</mn></msub><annotation encoding="application/x-tex">k_1</annotation></semantics></math>
+after the first step on the sequence should not be identical to the
+probe sequence of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>2</mn></msub><annotation encoding="application/x-tex">k_2</annotation></semantics></math>.
+Instead, their probe sequences should diverge.</p>
+<p>The ideal probe function would select the next position on the probe
+sequence at random from among the unvisited slots; that is, the probe
+sequence should be a random permutation of the hash table positions.
+Unfortunately, we cannot actually select the next position in the probe
+sequence at random, because we would not be able to duplicate this same
+probe sequence when searching for the key. However, we can do something
+similar called <a href="section-14.html#pseudo-random-probing"
+class="term"
+title="In hashing, this is a collision resolution method that stores a random permutation of the values 1 through the size of the hash table. Term $i$ of the probe sequence is simply the value of position $i$ in the permuation.">pseudo-random
+probing</a>. In pseudo-random probing, the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+th slot in the probe sequence is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mtext mathvariant="bold">𝐡</mtext><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><msub><mi>r</mi><mi>i</mi></msub><mo stretchy="false" form="postfix">)</mo><mrow><mspace width="0.444em"></mspace><mrow><mi>mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mi>m</mi></mrow></mrow><annotation encoding="application/x-tex">(\textbf{h}(k) + r_i) \mod m</annotation></semantics></math>
+where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>r</mi><mi>i</mi></msub><annotation encoding="application/x-tex">r_i</annotation></semantics></math>
+is the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+th value in a random permutation of the numbers from 1 to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">m-1</annotation></semantics></math>.
+All inserts and searches must use the same sequence of random numbers.
+The probe function would be
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="bold">𝐩</mtext><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo>,</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mtext mathvariant="bold">𝐏𝐞𝐫𝐦𝐮𝐭𝐚𝐭𝐢𝐨𝐧</mtext><mo stretchy="false" form="prefix">[</mo><mi>i</mi><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">\textbf{p}(k, i) = \textbf{Permutation}[i]</annotation></semantics></math>
+where <strong>Permutation</strong> is an array of length
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
+that stores a value of 0 in position <strong>Permutation[0]</strong>,
+and stores a random permutation of the values from 1 to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">m - 1</annotation></semantics></math>
+in slots 1 to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">m - 1</annotation></semantics></math>.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Slideshow for pseudo-random probing</p>
+</summary>
+<p>
+<div id="collisionCON3" class="ssAV" data-short-name="collisionCON3" data-long-name="Pseudo-Random Probing Slideshow" alt="Pseudo-Random Probing Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a practice exercise for pseudo-random probing.</p>
+</summary>
+<p>
+<div id="HashPseudoRandomPPRO" class="embedContainer">
+<iframe id="HashPseudoRandomPPRO_iframe" aria-label="HashPseudoRandomPPRO" src="../interactive/Hashing/HashPseudoRandomPPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Pseudo-random probing exhibits another desirable feature in a hash
+function.</p>
+</summary>
+<p>
+<div id="collisionCON4" class="ssAV" data-short-name="collisionCON4" data-long-name="Avoiding the Train" alt="Avoiding the Train" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+</section>
+<section id="sec:quadratic-probing" class="level3" data-number="12.8.3">
+<h3 data-number="12.8.3"><span
+class="header-section-number">12.8.3</span> Quadratic probing</h3>
+<p>Another probe function that eliminates primary clustering is called
+<a href="section-14.html#quadratic-probing" class="term"
+title="In hashing, this is a collision resolution method that computes term $i$ of the probe sequence using some quadratic equation $ai^2 _ bi + c$ for suitable constants $a, b, c$. The simplest form is simply to use $i^2$ as term $i$ of the probe sequence.">quadratic
+probing</a>. Here the probe function is some quadratic function
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="bold">𝐩</mtext><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo>,</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>c</mi><mn>1</mn></msub><msup><mi>i</mi><mn>2</mn></msup><mo>+</mo><msub><mi>c</mi><mn>2</mn></msub><mi>i</mi><mo>+</mo><msub><mi>c</mi><mn>3</mn></msub></mrow><annotation encoding="application/x-tex">\textbf{p}(k, i) = c_1 i^2 + c_{2}i + c_3</annotation></semantics></math>
+for some choice of constants
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>c</mi><mn>1</mn></msub><annotation encoding="application/x-tex">c_1</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>c</mi><mn>2</mn></msub><annotation encoding="application/x-tex">c_2</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>c</mi><mn>3</mn></msub><annotation encoding="application/x-tex">c_3</annotation></semantics></math>.</p>
+<p>The simplest variation is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="bold">𝐩</mtext><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo>,</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msup><mi>i</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\textbf{p}(k, i) = i^2</annotation></semantics></math>
+(i.e.,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>c</mi><mn>1</mn></msub><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">c_1 = 1</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>c</mi><mn>2</mn></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">c_2 = 0</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>c</mi><mn>3</mn></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">c_3 = 0</annotation></semantics></math>).
+Then the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+th value in the probe sequence would be
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mtext mathvariant="bold">𝐡</mtext><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><msup><mi>i</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo><mrow><mspace width="0.444em"></mspace><mrow><mi>mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mi>m</mi></mrow></mrow><annotation encoding="application/x-tex">(\textbf{h}(k) + i^2) \mod m</annotation></semantics></math>.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>How quadratic probing works.</p>
+</summary>
+<p>
+<div id="collisionCON5" class="ssAV" data-short-name="collisionCON5" data-long-name="Quadratic Probing Slideshow" alt="Quadratic Probing Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Now you can practice quadratic probing.</p>
+</summary>
+<p>
+<div id="HashQuadraticPPRO" class="embedContainer">
+<iframe id="HashQuadraticPPRO_iframe" aria-label="HashQuadraticPPRO" src="../interactive/Hashing/HashQuadraticPPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</div>
+<p>There is one problem with quadratic probing: Its probe sequence
+typically will not visit all slots in the hash table.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>The problem with quadratic probing.</p>
+</summary>
+<p>
+<div id="collisionCON6" class="ssAV" data-short-name="collisionCON6" data-long-name="Quadratic Probing Problem" alt="Quadratic Probing Problem" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<p>For many hash table sizes, this probe function will cycle through a
+relatively small number of slots. If all slots on that cycle happen to
+be full, this means that the record cannot be inserted at all! A more
+realistic example is a table with 105 slots. The probe sequence starting
+from any given slot will only visit 23 other slots in the table. If all
+24 of these slots should happen to be full, even if other slots in the
+table are empty, then the record cannot be inserted because the probe
+sequence will continually hit only those same 24 slots.</p>
+<p>Fortunately, it is possible to get good results from quadratic
+probing at low cost. The right combination of probe function and table
+size will visit many slots in the table. In particular, if the hash
+table size is a prime number and the probe function is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="bold">𝐩</mtext><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo>,</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msup><mi>i</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\textbf{p}(k, i) = i^2</annotation></semantics></math>,
+then at least half the slots in the table will be visited. Thus, if the
+table is less than half full, we can be certain that a free slot will be
+found. Alternatively, if the hash table size is a power of two and the
+probe function is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="bold">𝐩</mtext><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo>,</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msup><mi>i</mi><mn>2</mn></msup><mo>+</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">\textbf{p}(k, i) = (i^2 + i)/2</annotation></semantics></math>,
+then every slot in the table will be visited by the probe function.</p>
+</section>
+<section id="sec:double-hashing" class="level3" data-number="12.8.4">
+<h3 data-number="12.8.4"><span
+class="header-section-number">12.8.4</span> Double hashing</h3>
+<p>Both pseudo-random probing and quadratic probing eliminate primary
+clustering, which is the name given to the the situation when keys share
+substantial segments of a probe sequence. If two keys hash to the same
+home position, however, then they will always follow the same probe
+sequence for every collision resolution method that we have seen so far.
+The probe sequences generated by pseudo-random and quadratic probing
+(for example) are entirely a function of the home position, not the
+original key value. This is because function <strong>p</strong> ignores
+its input parameter
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+for these collision resolution methods. If the hash function generates a
+cluster at a particular home position, then the cluster remains under
+pseudo-random and quadratic probing. This problem is called <a
+href="section-14.html#secondary-clustering" class="term"
+title="In hashing, the tendency in certain collision resolution methods to create clustering in sections of the hash table. In primary clustering, this is caused by a cluster of keys that don&#39;t necessarily hash to the same slot but which following significant portions of the same probe sequence during collision resolution. Secondary clustering results from the keys hashing to the same slot of the table (and so a collision resolution method that is not affected by the key value must use the same probe sequence for all such keys). This problem can be resolved by double hashing since its probe sequence is determined in part by a second hash function.">secondary
+clustering</a>.</p>
+<p>To avoid secondary clustering, we need to have the probe sequence
+make use of the original key value in its decision-making process. A
+simple technique for doing this is to return to linear probing by a
+constant step size for the probe function, but to have that constant be
+determined by a second hash function,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mtext mathvariant="bold">𝐡</mtext><mn>2</mn></msub><annotation encoding="application/x-tex">\textbf{h}_2</annotation></semantics></math>.
+Thus, the probe sequence would be of the form
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="bold">𝐩</mtext><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo>,</mo><mi>i</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>⋅</mi><msub><mtext mathvariant="bold">𝐡</mtext><mn>2</mn></msub><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\textbf{p}(k, i) = \cdot \textbf{h}_2(k)</annotation></semantics></math>.
+This method is called <a href="section-14.html#double-hashing"
+class="term"
+title="A collision resolution method. A second hash function is used to generate a value $c$ on the key. That value is then used by this key as the step size in linear probing by steps. Since different keys use different step sizes (as generated by the second hash function), this process avoids the clustering caused by standard linear probing by steps.">double
+hashing</a>.</p>
+<p>There are important restrictions on
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>h</mi><mn>2</mn></msub><annotation encoding="application/x-tex">h_2</annotation></semantics></math>.
+Most importantly, the value returned by
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>h</mi><mn>2</mn></msub><annotation encoding="application/x-tex">h_2</annotation></semantics></math>
+must never be zero (or
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>)
+because that will immediately lead to an infinite loop as the probe
+sequence makes no progress. However, a good implementation of double
+hashing should also ensure that all of the probe sequence constants are
+relatively prime to the table size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>.
+For example, if the hash table size were 100 and the step size for
+linear probing (as generated by function
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>h</mi><mn>2</mn></msub><annotation encoding="application/x-tex">h_2</annotation></semantics></math>)
+were 50, then there would be only one slot on the probe sequence. If
+instead the hash table size is 101 (a prime number), than any step size
+less than 101 will visit every slot in the table.</p>
+<p>This can be achieved easily. One way is to select
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
+to be a prime number, and have
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mtext mathvariant="bold">𝐡</mtext><mn>2</mn></msub><annotation encoding="application/x-tex">\textbf{h}_2</annotation></semantics></math>
+return a value in the range
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>≤</mo><msub><mtext mathvariant="bold">𝐡</mtext><mn>2</mn></msub><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo><mo>≤</mo><mi>m</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">1 \leq \textbf{h}_2(k) \leq m - 1</annotation></semantics></math>.
+We can do this by using this secondary hash function:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mtext mathvariant="bold">𝐡</mtext><mn>2</mn></msub><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>1</mn><mo>+</mo><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mrow><mspace width="0.444em"></mspace><mrow><mi>mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo></mrow><mi>m</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\textbf{h}_2(k) = 1 + (k \mod (m-1))</annotation></semantics></math>.
+An alternative is to set
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><msup><mn>2</mn><mi>q</mi></msup></mrow><annotation encoding="application/x-tex">m = 2^q</annotation></semantics></math>
+for some value
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>q</mi><annotation encoding="application/x-tex">q</annotation></semantics></math>
+and have
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mtext mathvariant="bold">𝐡</mtext><mn>2</mn></msub><annotation encoding="application/x-tex">\textbf{h}_2</annotation></semantics></math>
+return an odd value between 1 and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mi>q</mi></msup><annotation encoding="application/x-tex">2^q</annotation></semantics></math>.
+We can get that result with this secondary hash function:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mtext mathvariant="bold">𝐡</mtext><mn>2</mn></msub><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mi>/</mi><mi>m</mi><mo stretchy="false" form="postfix">)</mo><mrow><mspace width="0.444em"></mspace><mrow><mi>mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo></mrow><mi>m</mi><mi>/</mi><mn>2</mn><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mo>*</mo><mn>2</mn><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\textbf{h}_2(k) = (((k/m) \mod (m/2)) * 2) + 1</annotation></semantics></math>.</p>
+<div class="note">
+<p><em>Note</em>: The secondary hash function
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mtext mathvariant="bold">𝐡</mtext><mn>2</mn></msub><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mi>/</mi><mi>m</mi><mo stretchy="false" form="postfix">)</mo><mrow><mspace width="0.444em"></mspace><mrow><mi>mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo></mrow><mi>m</mi><mi>/</mi><mn>2</mn><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mo>*</mo><mn>2</mn><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\textbf{h}_2(k) = (((k/m) \mod (m/2)) * 2) + 1</annotation></semantics></math>
+might seem rather mysterious, so let’s break this down. This is being
+used in the context of two facts: (1) We want the function to return an
+odd value that is less than
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
+the hash table size, and (2) we are using a hash table of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><msup><mn>2</mn><mi>q</mi></msup></mrow><annotation encoding="application/x-tex">m = 2^q</annotation></semantics></math>,
+which means that taking the mod of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
+is using the bottom
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>q</mi><annotation encoding="application/x-tex">q</annotation></semantics></math>
+bits of the key value. OK, since
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mtext mathvariant="bold">𝐡</mtext><mn>2</mn></msub><annotation encoding="application/x-tex">\textbf{h}_2</annotation></semantics></math>
+is multiplying something by 2 and adding 1, we guarentee that it is an
+odd number. Now,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mrow><mspace width="0.444em"></mspace><mrow><mi>mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo></mrow><mi>m</mi><mi>/</mi><mn>2</mn><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mo>*</mo><mn>2</mn><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">((X \mod (m/2)) * 2) + 1</annotation></semantics></math>
+must be in the range 1 and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">m-1</annotation></semantics></math>
+(if you need to, play around with this on paper to convince yourself
+that this is true). This is exactly what we want. The last piece of the
+puzzle is the first part
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mi>/</mi><mi>m</mi></mrow><annotation encoding="application/x-tex">k/m</annotation></semantics></math>.
+That is not strictly necessary. But remember that since the table size
+is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><msup><mn>2</mn><mi>q</mi></msup></mrow><annotation encoding="application/x-tex">m = 2^q</annotation></semantics></math>,
+this is the same as shifting the key value right by
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>q</mi><annotation encoding="application/x-tex">q</annotation></semantics></math>
+bits. In other words, we are not using the bottom
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>q</mi><annotation encoding="application/x-tex">q</annotation></semantics></math>
+bits to decide on the second hash function value, which is especially a
+good thing if we used the bottom
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>q</mi><annotation encoding="application/x-tex">q</annotation></semantics></math>
+bits to decide on the first hash function value! In other words, we
+really do not want the value of the step sized used by the linear
+probing to be fixed to the slot in the hash table that we chose. So we
+are using the next
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>q</mi><annotation encoding="application/x-tex">q</annotation></semantics></math>
+bits of the key value instead. Note that this would only be a good idea
+if we have keys in a large enough key range, that is, we want plenty of
+use of those second
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>q</mi><annotation encoding="application/x-tex">q</annotation></semantics></math>
+bits in the key range. This will be true if the max key value uses at
+least
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>m</mi></mrow><annotation encoding="application/x-tex">2m</annotation></semantics></math>
+bits, meaning that the max key value should be at least the square of
+the hash table size. This is not a problem for typical hashing
+applications.</p>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Calculating the secondary hash when the table size
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>)
+is prime.</p>
+</summary>
+<p>
+<div id="collisionCON7" class="ssAV" data-short-name="collisionCON7" data-long-name="Double Hashing Slideshow 2" alt="Double Hashing Slideshow 2" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>Secondary hash when the table size
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>)
+is a power of 2.</p>
+<p>
+<div id="collisionCON8" class="ssAV" data-short-name="collisionCON8" data-long-name="Double Hashing Slideshow 3" alt="Double Hashing Slideshow 3" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Double hashing exercise.</p>
+</summary>
+<p>
+<div id="HashDoublePPRO" class="embedContainer">
+<iframe id="HashDoublePPRO_iframe" aria-label="HashDoublePPRO" src="../interactive/Hashing/HashDoublePPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</div>
+</section>
+</div>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-12.7.html" class="navbutton">&lt;&lt;</a>
+<a href="section-12.7.html" accesskey="p" rel="previous">Deletion in open addressing</a>
+</div>
+<div class="navlink">
+<a href="section-12.9.html" accesskey="n" rel="next">Analysis of hash tables</a>
+<a href="section-12.9.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+<script type="text/javascript" src="../interactive/Hashing/linProbeCON1.js"></script>
+<script type="text/javascript" src="../interactive/Hashing/linProbeCON2.js"></script>
+<script type="text/javascript" src="../interactive/Hashing/collisionCON1.js"></script>
+<script type="text/javascript" src="../interactive/Hashing/collisionCON2.js"></script>
+<script type="text/javascript" src="../interactive/Hashing/collisionCON3.js"></script>
+<script type="text/javascript" src="../interactive/Hashing/collisionCON4.js"></script>
+<script type="text/javascript" src="../interactive/Hashing/collisionCON5.js"></script>
+<script type="text/javascript" src="../interactive/Hashing/collisionCON6.js"></script>
+<script type="text/javascript" src="../interactive/Hashing/collisionCON7.js"></script>
+<script type="text/javascript" src="../interactive/Hashing/collisionCON8.js"></script>
+</body>
+</html>
+

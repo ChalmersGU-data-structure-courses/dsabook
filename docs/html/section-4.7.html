@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Review questions</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-4.6.html" class="navbutton">&lt;&lt;</a>
+<a href="section-4.6.html" accesskey="p" rel="previous">Empirical comparison of sorting algorithms</a>
+</div>
+<div>
+<a href="section-5.html" accesskey="n" rel="next">Algorithm analysis, part 2: Theory</a>
+<a href="section-5.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:ch04-review" class="level2" data-number="4.7">
+<h2 data-number="4.7"><span class="header-section-number">4.7</span>
+Review questions</h2>
+<p>This final section contains some review questions about the contents
+of this chapter.</p>
+<section id="sec:review-questions-mergesort" class="level3 quiz"
+data-number="4.7.1">
+<h3 data-number="4.7.1"><span class="header-section-number">4.7.1</span>
+Review questions: Mergesort</h3>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>Mergesort (as the code is written in this chapter) is a stable
+sorting algorithm. Recall that a stable sorting algorithm maintains the
+relative order of records with equal keys.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>What happens when two equal values are compared during merge?</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>You must merge 2 sorted lists of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
+respectively. The number of comparisons needed in the worst case by the
+merge algorithm will be:</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>+</mo><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">m+n-1</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">mn</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi>max</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>m</mi><mo>,</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\max(m,n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi>min</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>m</mi><mo>,</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\min(m,n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>+</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">m+n</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Each comparison puts one record in the final sorted array.</li>
+<li>You don’t compare when there is only one record.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the most complicated part of the Mergesort algorithm?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Merging the sorted halves
+back together</label></li>
+<li><label><input type="checkbox" />Finding the midpoint</label></li>
+<li><label><input type="checkbox" />Partitioning the array</label></li>
+<li><label><input type="checkbox" />Achieving the base case</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>There is no partition in Mergesort.</li>
+<li>The two main parts of Mergesort are splitting and merging.</li>
+<li>Splitting is easy – just cut the list into two halves.</li>
+<li>Merging is not hard, but it is more complicated than splitting.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In which cases are the time complexities the same for Mergesort?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Worst, Average and
+Best</label></li>
+<li><label><input type="checkbox" />Worst and Best</label></li>
+<li><label><input type="checkbox" />Best and Average</label></li>
+<li><label><input type="checkbox" />Worst and Average</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Mergesort’s cost vary according to the order of the array input
+values?</li>
+<li>No, it does not matter what order the input values have.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The order of the input records has what impact on the number of
+comparisons required by Mergesort (as presented in this chapter)?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />None</label></li>
+<li><label><input type="checkbox" />There is a constant factor
+difference</label></li>
+<li><label><input type="checkbox" />There is a big difference, the
+asymptotic running time can change</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Mergesort change when it make a comparison according to the
+order of the array input values?</li>
+<li>No, it does not matter what order the input values have.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the worst-case time for Mergesort to sort an array of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+records?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mi>n</mi></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^n)</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Mergesort’s number of comparisons depend on the particular
+order of the input array?</li>
+<li>No, it does not.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the running time of Mergesort when the input is an array
+where all record values are equal?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mi>n</mi></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n ^ n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Mergesort’s number of comparisons depend on the particular
+order of the input array?</li>
+<li>No, it does not.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>When is Mergesort a good choice for sorting an array?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />We need a reasonably fast
+algorithm with a good worst case cost</label></li>
+<li><label><input type="checkbox" />Each record requires a large amount
+of memory</label></li>
+<li><label><input type="checkbox" />Each record requires a small amount
+of memory</label></li>
+<li><label><input type="checkbox" />The processor speed is
+fast</label></li>
+<li><label><input type="checkbox" />The array contains many
+records</label></li>
+<li><label><input type="checkbox" />We need good best-case running
+time</label></li>
+<li><label><input type="checkbox" />None of these
+situations</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Mergesort’s number of comparisons depend on the particular
+order of the input array?</li>
+<li>No, it does not.</li>
+<li>This makes it reliable in the worst case.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In the worst case, the total number of comparisons for Mergesort is
+closest to: - [x]
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n \log n</annotation></semantics></math>
+- [ ]
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+- [ ]
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>n</mi><mn>2</mn></msup><annotation encoding="application/x-tex">n^2</annotation></semantics></math>
+- [ ]
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>n</mi><mn>2</mn></msup><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n^2/2</annotation></semantics></math></p>
+<div class="hints">
+<ul>
+<li>What is the asymptotic cost of Mergesort?</li>
+<li>Only one of these answers looks like the asymptotic cost.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The array-based implementation for Mergesort uses how many
+arrays?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>2</mn><annotation encoding="application/x-tex">2</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<p>There are
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n</annotation></semantics></math>
+passes. But the implementation is careful to reuse the auxilliary array
+rather than make a new one on each pass. So Mergesort requires the
+original array and an auxilliary array.</p>
+</div>
+</div>
+</section>
+<section id="sec:review-questions-quicksort" class="level3 quiz"
+data-number="4.7.2">
+<h3 data-number="4.7.2"><span class="header-section-number">4.7.2</span>
+Review questions: Quicksort</h3>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>Quicksort (as the code is written in this chapter) is a stable
+sorting algorithm. Recall that a stable sorting algorithm maintains the
+relative order of records with equal keys.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />True</label></li>
+<li><label><input type="checkbox" checked="" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Think of the behaviour for partition if there are two equal key
+values in the array.</li>
+<li>Is it possible for the two equal keys to reverse positions?</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>On average, how many comparisons does Quicksort require to sort 1000
+records (to the nearest 1000 comparisons)?</p>
+<p><input type="text" value="10000" placeholder="Round to nearest 1000"/></p>
+<div class="hints">
+<ul>
+<li>What is Quicksort’s average case running time?</li>
+<li>It is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><msub><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mn>2</mn></msub><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log_2 n)</annotation></semantics></math></li>
+<li>This means about
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>10</mn><mo>⋅</mo><mn>1000</mn></mrow><annotation encoding="application/x-tex">10 \cdot 1000</annotation></semantics></math>
+comparisons are required</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>If it takes a given computer one second on average to run Quicksort
+on an array of 1000 records, how long (to the nearest thousand seconds)
+will it take to run Quicksort on 1,000,000 records?</p>
+<p>(You know from this statement that the machine can do about 10,000
+comparisons per second. To get the answer, you first need to compute
+about how many total comparisons 1,000,000 records will require.)</p>
+<p><input type="text" value="2000" placeholder="Round to nearest 1000"/></p>
+<div class="hints">
+<ul>
+<li>What is Quicksort’s average case running time?</li>
+<li>It is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><msub><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mn>2</mn></msub><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log_2 n)</annotation></semantics></math></li>
+<li>This means
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>10</mn><mo>⋅</mo><mn>1000</mn></mrow><annotation encoding="application/x-tex">10 \cdot 1000</annotation></semantics></math>
+instructions ran in one second for an input of 1000 records</li>
+<li>What is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><msub><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mn>2</mn></msub><mi>n</mi></mrow><annotation encoding="application/x-tex">n \log_2 n</annotation></semantics></math>
+when
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>000</mn><mo>,</mo><mn>000</mn></mrow><annotation encoding="application/x-tex">n = 1,000,000</annotation></semantics></math>?</li>
+<li>It is about
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>20</mn><mo>⋅</mo><mn>1</mn><mo>,</mo><mn>000</mn><mo>,</mo><mn>000</mn></mrow><annotation encoding="application/x-tex">20 \cdot 1,000,000</annotation></semantics></math></li>
+<li>How many seconds is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>20</mn><mo>,</mo><mn>000</mn><mo>,</mo><mn>000</mn><mi>/</mi><mn>10</mn><mo>,</mo><mn>000</mn></mrow><annotation encoding="application/x-tex">20,000,000/10,000</annotation></semantics></math>?</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>In which cases are the time complexities the same for Quicksort?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Best and Average
+only</label></li>
+<li><label><input type="checkbox" />Worst and Best only</label></li>
+<li><label><input type="checkbox" />Worst and Average only</label></li>
+<li><label><input type="checkbox" />Worst, Average, and
+Best</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>There are a few really bad inputs.</li>
+<li>While there are a few bad inputs, they are so few as to not affect
+the average or best cases.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>The order of the input records has what impact on the number of
+comparisons required by Quicksort (as presented in this chapter)?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />There is a big
+difference, the asymptotic running time can change</label></li>
+<li><label><input type="checkbox" />None</label></li>
+<li><label><input type="checkbox" />There is a constant factor
+difference</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Quicksort change when it make a comparison according to the
+order of the array input values?</li>
+<li>Yes, the order of input can change a lot about Quicksort’s
+behaviour.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the worst-case cost for Quicksort to sort an array of n
+elements?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>There are a few really bad inputs.</li>
+<li>The bad cases have pivots that repeatedly reduce the partition size
+by one.</li>
+<li>That leads to a series of partition sizes of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>2</mn><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">n-2&gt;</annotation></semantics></math>,
+and so on.</li>
+<li>Since the time to process a partition is linear on its size, this in
+turn leads to a cost for the whole algorithm that is the sum of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+from 2 to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>,
+that you should be very familiar with.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the best-case cost for Quicksort to sort an array of n
+elements?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>While there are a few bad inputs, they are so few as to not affect
+the best case.</li>
+<li>The best thing that can happen is that every pivot split its
+partition in half.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A disadvantage of Quicksort is:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Its worst-case running
+time is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></label></li>
+<li><label><input type="checkbox" />It needs an extra array for
+auxilliary storage</label></li>
+<li><label><input type="checkbox" />It is stable</label></li>
+<li><label><input type="checkbox" />Its average-case running time is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>How does Quicksort do in the worst case?</li>
+<li>It requires
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>,
+which is pretty bad.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>(For the version of the algorithm as presented in this chapter) What
+is the running time of Quicksort when the input is an array where all
+record values are equal?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mi>n</mi></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n ^ n)</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>What does the partition step do?</li>
+<li>It splits the array into a partition with all values on one
+side.</li>
+<li>This is very bad.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Quicksort’s worst-case case cost is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>
+and its average-case cost is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>.
+This means that the fraction of input cases with cost
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>
+must:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Drop as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+grows</label></li>
+<li><label><input type="checkbox" />Never happen</label></li>
+<li><label><input type="checkbox" />Happen only once</label></li>
+<li><label><input type="checkbox" />Be less than half</label></li>
+<li><label><input type="checkbox" />Be less than 1 in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math></label></li>
+<li><label><input type="checkbox" />Be less than 1 in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>!</mi></mrow><annotation encoding="application/x-tex">n!</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>For any size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
+it does happen that there are inputs that have cost
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>n</mi><mn>2</mn></msup><annotation encoding="application/x-tex">n^2</annotation></semantics></math>.</li>
+<li>But if there were a constant fraction of such cases regardless of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
+then the average would also be
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>n</mi><mn>2</mn></msup><annotation encoding="application/x-tex">n^2</annotation></semantics></math>.</li>
+<li>So the fraction must be be dropping as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+grows.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What is the worst-case cost for Quicksort’s partition step?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Partition moves indices inwards until the meet.</li>
+<li>Each step either swaps or moves indices.</li>
+<li>No record can swap more than once, and the total number of index
+moves can only be the length of the partition.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>When selecting a pivot value, a simple thing to do is to always pick
+from the same place in the partition. If we use this approach, does it
+matter whether we always pick from the first position in the partition,
+the last position in the partition, or the middle position in the
+partition?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />It is better to pick the
+middle value</label></li>
+<li><label><input type="checkbox" />It is better to pick the first
+value</label></li>
+<li><label><input type="checkbox" />It is better to pick the last
+value</label></li>
+<li><label><input type="checkbox" />It doesn’t really matter, they are
+all equally good or bad</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>If you pick the first or last one, then sorted input will give the
+worst case performance.</li>
+<li>If you pick the middle value, then it is still possible to get
+worst-case performance.</li>
+<li>But to do so requires a very specific and unusual permuation that
+will normally occur very rarely.</li>
+<li>If all permuations were equally likely, then it wouldn’t matter. But
+in practice, the sorted input is much more likely to occur.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>When is Quicksort a good choice for sorting an array?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />In most standard
+situations where you want to sort many records</label></li>
+<li><label><input type="checkbox" />Each record requires a large amount
+of memory</label></li>
+<li><label><input type="checkbox" />Each record requires a small amount
+of memory</label></li>
+<li><label><input type="checkbox" />The processor speed is
+fast</label></li>
+<li><label><input type="checkbox" />We need a reasonably fast algorithm
+with a good worst case</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Quicksort doesn’t change its performance based on record size.</li>
+<li>What are Quicksort’s average and worst case costs?</li>
+<li>Quicksort’s strength is its average case cost, not its worst case
+cost.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="sec:review-questions-comparison-of-sorting-algorithms"
+class="level3 quiz" data-number="4.7.3">
+<h3 data-number="4.7.3"><span class="header-section-number">4.7.3</span>
+Review questions: Comparison of sorting algorithms</h3>
+<p>Here are a few multiple choice questions that ask you to compare the
+sorting algorithms that we learned about in the last two chapters.</p>
+<div class="question">
+<p>Answer TRUE or FALSE.</p>
+<p>Selection sort is generally faster than the Bubble sort on the same
+input.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />True</label></li>
+<li><label><input type="checkbox" />False</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Selection sort can be viewed as an optimisation of Bubble sort.</li>
+<li>On each pass, Selection sort just picks out the next record, while
+Bubble sort has to do a lot of swapping.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>How are Selection sort and Quicksort similar?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />They can both swap
+non-adjacent records</label></li>
+<li><label><input type="checkbox" />They are both
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>
+sorts</label></li>
+<li><label><input type="checkbox" />They both use
+divide-and-conquer</label></li>
+<li><label><input type="checkbox" />Both have quadratic average case
+time</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Does Selection sort use divide-and-conquer? No.</li>
+<li>Can Selection sort run in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>
+time? No.</li>
+<li>How long does Quicksort need in the average case?</li>
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math></li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>(For the implementations as presented in this chapter:) Which of the
+following sorts is not stable?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Quicksort</label></li>
+<li><label><input type="checkbox" />Insertion sort</label></li>
+<li><label><input type="checkbox" />Mergesort</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Which of the mentioned algorithms will not maintain the relative
+order of records with equal keys?</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>What do we call the property of a sorting algorithm that gaurantees
+that records with the same key value occur in the same order in the
+sorted list as in the original, unsorted list?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Stable</label></li>
+<li><label><input type="checkbox" />Consistent</label></li>
+<li><label><input type="checkbox" />External</label></li>
+<li><label><input type="checkbox" />Linear</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>“Linear” refers to an algorithm cost.</li>
+<li>“External” refers to an algorithm to sort records on disk.</li>
+<li>“Consistent” is not standard terminology related to sorting.</li>
+<li>“Stable” sorting algorithms preserve the relative order of
+equal-valued keys.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>A person sorting a hand of cards might reasonably use which sorting
+algorithm?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Insertion
+sort</label></li>
+<li><label><input type="checkbox" />Bubble sort</label></li>
+<li><label><input type="checkbox" />Quicksort</label></li>
+<li><label><input type="checkbox" />Mergesort</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Think about each algorithm in turn, and imagine yourself trying to
+use it for sorting a hand of cards.</li>
+<li>If you pick up the first two cards you might put them in order, then
+pick up the next card, and so on.</li>
+<li>Or you might pick up all the cards to start, but then still sort
+them from left to right.</li>
+<li>What sorting algorithm resembles this procedure?</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Consider what happens if someone accidently calls sort on a file that
+is already sorted. Which of the following sorting methods will be the
+most efficient if the input is already in sorted order?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Insertion
+sort</label></li>
+<li><label><input type="checkbox" />Bubble sort</label></li>
+<li><label><input type="checkbox" />Selection sort</label></li>
+<li><label><input type="checkbox" />Mergesort</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Which algorithm will make an iteration “quit early” depending on the
+values seen during comparisons?</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which of the following sorting methods will be best if the number of
+swaps done is the only measure of efficiency?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Selection
+sort</label></li>
+<li><label><input type="checkbox" />Bubble sort</label></li>
+<li><label><input type="checkbox" />Insertion sort</label></li>
+<li><label><input type="checkbox" />Mergesort</label></li>
+<li><label><input type="checkbox" />Quicksort</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>This sorting algorithms finds the minimum value, swaps it with the
+value in the first position, and repeats these steps for the remainder
+of the list.</li>
+<li>It does no more than
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+swaps.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>Which of the following sorting algorithms has a worst case complexity
+of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>?</p>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Mergesort</label></li>
+<li><label><input type="checkbox" />Bubble sort</label></li>
+<li><label><input type="checkbox" />Selection sort</label></li>
+<li><label><input type="checkbox" />Insertion sort</label></li>
+<li><label><input type="checkbox" />Quicksort</label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Bubble sort, Insertion sort, and Selection sort are referred to as
+“quadratic sorts” because of their worst-case time cost.</li>
+<li>Quicksort’s worst-case behaviour comes when the pivot is chosen
+badly.</li>
+</ul>
+</div>
+</div>
+<div class="question">
+<p>When Mergesort merges two sorted lists of sizes
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+into a sorted list of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>+</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">m+n</annotation></semantics></math>,
+it requires how many comparisons in the worst case?</p>
+<ul class="task-list">
+<li><label><input type="checkbox"
+checked="" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>+</mo><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">m+n-1</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>+</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">m+n</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n+1</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>m</mi><mo>+</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log m + \log n)</annotation></semantics></math></label></li>
+<li><label><input
+type="checkbox" /><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>m</mi><mo>+</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log m + \log n + 1)</annotation></semantics></math></label></li>
+</ul>
+<div class="hints">
+<ul>
+<li>Merging compares two records, and selects the smaller.</li>
+<li>Each record gets selected once, and each selection requires a
+comparison.</li>
+<li>However, the last record does not need a comparison to be selected
+because there is no longer anything to compare it to.</li>
+</ul>
+</div>
+</div>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-4.6.html" class="navbutton">&lt;&lt;</a>
+<a href="section-4.6.html" accesskey="p" rel="previous">Empirical comparison of sorting algorithms</a>
+</div>
+<div class="navlink">
+<a href="section-5.html" accesskey="n" rel="next">Algorithm analysis, part 2: Theory</a>
+<a href="section-5.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

@@ -7,12 +7,11 @@ $(document).ready(function() {
   var av = new JSAV(av_name);
   var pseudo = av.code([
     "dequeue():",
-    "    // Precondition: queueSize > 0",
     "    removed = front",
     "    front = removed.next",
     "    removed.next = null   // For garbage collection",
-    "    queueSize = queueSize - 1",
-    "    if queueSize == 0:",
+    "    size = size - 1",
+    "    if size == 0:",
     "        rear = null",
     "    return removed.elem",
   ], {lineNumbers: false});
@@ -40,36 +39,36 @@ $(document).ready(function() {
   av.umsg("Store the dequeued value.");
   list.get(0).highlight();
   itP.show();
-  pseudo.setCurrentLine(3);
+  pseudo.setCurrentLine(2);
   av.step();
 
   // Slide
   av.umsg("Advance front to point to the new link node.");
   list.get(0).unhighlight();
   frontP.target(list.get(1));
-  pseudo.setCurrentLine(4);
+  pseudo.setCurrentLine(3);
   av.step();
 
   // Slide
   av.umsg("Remove the next pointer of the removed node.");
   list.get(0).edgeToNext().hide();
   list.layout();
-  pseudo.setCurrentLine(5);
+  pseudo.setCurrentLine(4);
   av.step();
 
   // Slide
   av.umsg("Decrease the queue size by 1.");
-  pseudo.setCurrentLine(6);
+  pseudo.setCurrentLine(5);
   av.step();
 
   // Slide
   av.umsg("Check that the queue is not empty. If it were, this would be a special case requiring <code>rear</code> to be adjusted.");
-  pseudo.setCurrentLine(7);
+  pseudo.setCurrentLine(6);
   av.step();
 
   // Slide
   av.umsg("Return the dequeued value.");
   list.get(0).highlight();
-  pseudo.setCurrentLine(9);
+  pseudo.setCurrentLine(8);
   av.recorded();
 });

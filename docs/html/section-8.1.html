@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Binary trees</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+<link href="../interactive/Binary/BinExampCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Binary/FullCompCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Binary/RecursiveDSCON.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-8.html" class="navbutton">&lt;&lt;</a>
+<a href="section-8.html" accesskey="p" rel="previous">Trees</a>
+</div>
+<div>
+<a href="section-8.2.html" accesskey="n" rel="next">Case study: Full binary trees</a>
+<a href="section-8.2.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:binary-trees" class="level2" data-number="8.1">
+<h2 data-number="8.1"><span class="header-section-number">8.1</span>
+Binary trees</h2>
+<p>A <a href="section-14.html#binary-tree" class="term"
+title="A finite set of nodes which is either empty, or else has a root node together two binary trees, called the left and right subtrees, which are disjoint from each other and from the root.">binary
+tree</a> is made up of a finite set of elements called <a
+href="section-14.html#node" class="term"
+title="The objects that make up a linked structure such as a linked list or binary tree. Typically, nodes are allocated using dynamic memory allocation. In graph terminology, the nodes are more commonly called vertices.">nodes</a>.
+This set either is empty or consists of a node called the <a
+href="section-14.html#root" class="term"
+title="In a tree, the topmost node of the tree. All other nodes in the tree are descendants of the root.">root</a>
+together with two binary trees, called the left and right <a
+href="section-14.html#subtree" class="term"
+title="A subtree is a subset of the nodes of a binary tree that includes some node $R$ of the tree as the subtree root along with all the descendants of $R$.">subtrees</a>,
+which are disjoint from each other and from the root. (Disjoint means
+that they have no nodes in common.) The roots of these subtrees are <a
+href="section-14.html#child" class="term"
+title="In a tree, the set of nodes directly pointed to by a node $R$ are the children of $R$.">children</a>
+of the root. There is an <a href="section-14.html#edge" class="term"
+title="The connection that links two nodes in a tree, linked list, or graph.">edge</a>
+from a node to each of its children, and a node is said to be the <a
+href="section-14.html#parent" class="term"
+title="In a tree, the node $P$ that directly links to a node $A$ is the parent of $A$. $A$ is the child of $P$.">parent</a>
+of its children.</p>
+<p>If
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>n</mi><mn>1</mn></msub><mo>,</mo><msub><mi>n</mi><mn>2</mn></msub><mo>,</mo><mi>.</mi><mi>.</mi><mi>.</mi><mo>,</mo><msub><mi>n</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">n_1, n_2, ..., n_k</annotation></semantics></math>
+is a sequence of nodes in the tree such that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>n</mi><mi>i</mi></msub><annotation encoding="application/x-tex">n_i</annotation></semantics></math>
+is the parent of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>n</mi><mi>i</mi></msub><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n_i+1</annotation></semantics></math>
+for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>≤</mo><mi>i</mi><mo>&lt;</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">1 \leq i &lt; k</annotation></semantics></math>,
+then this sequence is called a <a href="section-14.html#path"
+class="term"
+title="In tree or graph terminology, a sequence of vertices $v_1, v_2, ..., v_n$ forms a path of length $n-1$ if there exist edges from $v_i$ to $v_{i+1}$ for $1 \leq i &lt; n$.">path</a>
+from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>n</mi><mn>1</mn></msub><annotation encoding="application/x-tex">n_1</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>n</mi><mi>k</mi></msub><annotation encoding="application/x-tex">n_k</annotation></semantics></math>.
+The <a href="section-14.html#length" class="term"
+title="In a list, the number of elements. In a string, the number of characters.">length</a>
+of the path is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">k-1</annotation></semantics></math>.
+If there is a path from node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+to node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>,
+then
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+is an <a href="section-14.html#ancestor" class="term"
+title="In a tree, for a given node $A$, any node on a path from $A$ up to the root is an ancestor of $A$.">ancestor</a>
+of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>
+is a <a href="section-14.html#descendant" class="term"
+title="In a tree, the set of all nodes that have a node $A$ as an ancestor are the descendants of $A$. In other words, all of the nodes that can be reached from $A$ by progressing downwards in tree. Another way to say it is: The children of $A$, their children, and so on.">descendant</a>
+of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>.
+Thus, all nodes in the tree are descendants of the root of the tree,
+while the root is the ancestor of all nodes. The <a
+href="section-14.html#depth" class="term"
+title="The depth of a node $M$ in a tree is the length of the path from the root of the tree to $M$.">depth</a>
+of a node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>
+in the tree is the length of the path from the root of the tree to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>.
+The <a href="section-14.html#height" class="term"
+title="The height of a tree is one more than the depth of the deepest node in the tree.">height</a>
+of a tree is the depth of the deepest node in the tree. All nodes of
+depth
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>
+are at <a href="section-14.html#level" class="term"
+title="In a tree, all nodes of depth $d$ are at level $d$ in the tree. The root is the only node at level 0, and its depth is 0.">level</a>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>
+in the tree. The root is the only node at level 0, and its depth is 0. A
+<a href="section-14.html#leaf-node" class="term"
+title="In a binary tree, leaf node is any node that has two empty children. (Note that a binary tree is defined so that every node has two children, and that is why the leaf node has to have two empty children, rather than no children.) In a general tree, any node is a leaf node if it has no children.">leaf
+node</a> is any node that has two empty children. An <a
+href="section-14.html#internal-node" class="term"
+title="In a tree, any node that has at least one non-empty child is an internal node.">internal
+node</a> is any node that has at least one non-empty child.</p>
+<figure id="fig:example_bintree" class="subfigures">
+<div class="online">
+<p>
+<div id="BinExampCON" class="ssAV" data-short-name="BinExampCON" data-long-name="Binary/BinExampCON" alt="Binary/BinExampCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</div>
+<figcaption><p>Figure 8.1: An example binary tree. </p></figcaption>
+</figure>
+<p><a href="#fig:example_bintree">Figure 8.1</a> above illustrates the
+various terms used to identify parts of a binary tree. Node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+is the root, and nodes
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>
+are
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>’s
+children. Nodes
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>
+together form a subtree. Node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
+has two children: Its left child is the empty tree and its right child
+is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>.
+Nodes
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>E</mi><annotation encoding="application/x-tex">E</annotation></semantics></math>
+are ancestors of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>.
+Nodes
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>E</mi><annotation encoding="application/x-tex">E</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>
+make up level 2 of the tree; node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+is at level 0. The edges from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>E</mi><annotation encoding="application/x-tex">E</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>
+form a path of length 3. Nodes
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>H</mi><annotation encoding="application/x-tex">H</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>I</mi><annotation encoding="application/x-tex">I</annotation></semantics></math>
+are leaves. Nodes
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>E</mi><annotation encoding="application/x-tex">E</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>
+are internal nodes. The depth of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>I</mi><annotation encoding="application/x-tex">I</annotation></semantics></math>
+is 3. The height of this tree is 3.</p>
+<p><a href="#fig:two_bintrees">Figure 8.2</a> below illustrates an
+important point regarding the structure of binary trees. Because
+<em>all</em> binary tree nodes have two children (one or both of which
+might be empty), the two binary trees (a) and (b) in the figure are
+<em>not</em> the same.</p>
+<figure id="fig:two_bintrees" class="subfigures">
+<div class="online">
+<p>
+<div id="BinDiffCON" class="ssAV" data-short-name="BinDiffCON" data-long-name="Binary/BinDiffCON" alt="Binary/BinDiffCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</div>
+<figcaption><p>Figure 8.2: Two different binary trees: (a) the root has
+a non-empty left child; (b) the root has a non-empty right child; and
+(c) the same tree as (a), with the missing right child made explicit;
+(d) the same tree as (b), with the missing left child made explicit.
+</p></figcaption>
+</figure>
+<p>Two restricted forms of binary tree are sufficiently important to
+warrant special names. Each node in a <a
+href="section-14.html#full-tree" class="term"
+title="A binary tree is full if every node is either a leaf node or else it is an internal node with two non-empty children.">full
+binary tree</a> is either (1) an internal node with exactly two
+non-empty children or (2) a leaf. A <a
+href="section-14.html#complete-binary-tree" class="term"
+title="A binary tree where the nodes are filled in row by row, with the bottom row filled in left to right. Due to this requirement, there is only one tree of $n$ nodes for any value of $n$. Since storing the records in an array in row order leads to a simple mapping from a node&#39;s position in the array to its parent, siblings, and children, the array representation is most commonly used to implement the complete binary tree. The heap data structure is a complete binary tree with partial ordering constraints on the node values.">complete
+binary tree</a> has a restricted shape obtained by starting at the root
+and filling the tree by levels from left to right. In the complete
+binary tree of height
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>,
+all levels except possibly level
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>
+are completely full. The bottom level has its nodes filled in from the
+left side.</p>
+<p><a href="#fig:full_complete_bintrees">Figure 8.3</a> below
+illustrates the differences between full and complete binary trees.
+There is no particular relationship between these two tree shapes; that
+is, the tree (a) is full but not complete while the tree (b) is complete
+but not full. The <a href="section-14.html#binary-heap" class="term"
+title="The head data structure is a complete binary tree with the requirement that every node has a value greater than its children (called a max heap), or else the requirement that every node has a value less than its children (called a min heap). Since it is a complete binary tree, a heap is nearly always implemented using an array rather than an explicit tree structure. To add a new value to a heap, or to remove the extreme value (the max value in a max-heap or min value in a min-heap) and update the heap, takes $O(\log n)$ time in the worst case. However, if given all of the values in an unordered array, the values can be re-arranged to form a heap in only $O(n)$ time. Due to its space and time efficiency, the heap is a popular choice for implementing a priority queue. Uncommonly, *heap* is a synonym for free store.">binary
+heap</a> (<a href="section-9.2.html#sec:binary-heaps">Section 9.2</a>)
+is an example of a complete binary tree. The <a
+href="section-14.html#huffman-coding-tree" class="term"
+title="A Huffman coding tree is a full binary tree that is used to represent letters (or other symbols) efficiently. Each letter is associated with a node in the tree, and is then given a Huffman code based on the position of the associated node. A Huffman coding tree is an example of a binary trie.">Huffman
+coding tree</a> (<a
+href="section-9.4.html#sec:case-study-huffman-coding">Section 9.4</a>)
+is an example of a full binary tree.</p>
+<figure id="fig:full_complete_bintrees" class="subfigures">
+<div class="online">
+<p>
+<div id="FullCompCON" class="ssAV" data-short-name="FullCompCON" data-long-name="Binary/FullCompCON" alt="Binary/FullCompCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</div>
+<figcaption><p>Figure 8.3: Examples of full and complete binary trees:
+(a) is full but not complete; (b) is complete but not full.
+</p></figcaption>
+</figure>
+<div class="note">
+<p><em>Note</em>: While these definitions for full and complete binary
+tree are the ones most commonly used, they are not universal. Because
+the common meaning of the words “full” and “complete” are quite similar,
+there is little that you can do to distinguish between them other than
+to memorise the definitions. Here is a memory aid that you might find
+useful: “Complete” is a wider word than “full”, and complete binary
+trees tend to be wider than full binary trees because each level of a
+complete binary tree is as wide as possible.</p>
+</div>
+<section id="sec:binary-trees-are-recursive-data-structures"
+class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1"><span class="header-section-number">8.1.1</span>
+Binary trees are recursive data structures</h3>
+<p>A <a href="section-14.html#recursive-data-structure" class="term"
+title="A data structure that is partially composed of smaller or simpler instances of the same data structure. For example, linked lists and binary trees can be viewed as recursive data structures.">recursive
+data structure</a> is a data structure that is partially composed of
+smaller or simpler instances of the same data structure. For example, <a
+href="section-14.html#linked-list" class="term"
+title="An implementation for the list ADT that uses dynamic allocation of link nodes to store the list elements. Common variants are the singly linked list, doubly linked list and circular list. The overhead required is the pointers in each link node.">linked
+lists</a> and <a href="section-14.html#binary-tree" class="term"
+title="A finite set of nodes which is either empty, or else has a root node together two binary trees, called the left and right subtrees, which are disjoint from each other and from the root.">binary
+trees</a> can be viewed as recursive data structures. A list is a
+recursive data structure because a list can be defined as either (1) an
+empty list or (2) a node followed by a list. A binary tree is typically
+defined as (1) an empty tree or (2) a node pointing to two binary trees,
+one its left child and the other one its right child.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>The recursive relationships used to define a structure provide a
+natural model for any recursive algorithm on the structure.</p>
+</summary>
+<p>
+<div id="ListRecDSCON" class="ssAV" data-short-name="ListRecDSCON" data-long-name="Binary/ListRecDSCON" alt="Binary/ListRecDSCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>
+<div id="BinRecDSCON" class="ssAV" data-short-name="BinRecDSCON" data-long-name="Binary/BinRecDSCON" alt="Binary/BinRecDSCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<p>One way to think about recursion is to see it as <em>delegation</em>:
+Suppose you want to compute the sum of the values stored in a binary
+tree. And since you are a lazy person you don’t want to do most of the
+work yourself, so you ask two friends to help you.</p>
+<ul>
+<li>The first friend will take the left subtree to sum it.</li>
+<li>The second friend will take the right subtree to sum it.</li>
+<li>The only thing you have to do is to sum the values that got from
+your friends.</li>
+</ul>
+<p>You don’t need to think about how your friends (the recursive calls)
+calculated their sums, as long as you accept that they are correct.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a visual explanation of the same idea.</p>
+</summary>
+<p>
+<div id="SumBinaryTreeCON" class="ssAV" data-short-name="SumBinaryTreeCON" data-long-name="Sum values in a Binary Tree Slide Show" alt="Sum values in a Binary Tree Slide Show" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-8.html" class="navbutton">&lt;&lt;</a>
+<a href="section-8.html" accesskey="p" rel="previous">Trees</a>
+</div>
+<div class="navlink">
+<a href="section-8.2.html" accesskey="n" rel="next">Case study: Full binary trees</a>
+<a href="section-8.2.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+<script type="text/javascript" src="../interactive/Binary/BinExampCON.js"></script>
+<script type="text/javascript" src="../interactive/Binary/BinDiffCON.js"></script>
+<script type="text/javascript" src="../interactive/Binary/FullCompCON.js"></script>
+<script type="text/javascript" src="../interactive/Binary/ListRecDSCON.js"></script>
+<script type="text/javascript" src="../interactive/Binary/BinRecDSCON.js"></script>
+<script type="text/javascript" src="../interactive/Binary/SumBinaryTreeCON.js"></script>
+</body>
+</html>
+

@@ -11,7 +11,7 @@
     userInput: null,  // Boolean: Tells us if user ever did anything
 
     initJSAV: function(arrSize, sortPos) {
-      var i, j, bigindex;
+      var i, j, minIndex;
       answerArr.length = 0; // Out with the old
       // Give random numbers in range 0..999
       for (i = 0; i < arrSize; i++) {
@@ -19,14 +19,14 @@
       }
 
       // Do a partial selection sort to set things up
-      for (i = arrSize - 1; i > sortPos; i--) {
-        bigindex = 0;
-        for (j = 1; j <= i; j++) {
-          if (answerArr[j] > answerArr[bigindex]) {
-            bigindex = j;
+      for (i = 0; i < sortPos; i++) {
+        minIndex = i;
+        for (j = i+1; j < arrSize; j++) {
+          if (answerArr[j] < answerArr[minIndex]) {
+            minIndex = j;
           }
         }
-        swap(answerArr, bigindex, i);
+        swap(answerArr, minIndex, i);
       }
       // Now make a copy
       cloneArr = answerArr.slice(0);
@@ -34,13 +34,13 @@
       reset(sortPos);
 
       // Compute the correct Answer
-      bigindex = 0;
-      for (j = 1; j <= sortPos; j++) {
-        if (answerArr[j] > answerArr[bigindex]) {
-          bigindex = j;
+      minIndex = sortPos;
+      for (j = sortPos+1; j < arrSize; j++) {
+        if (answerArr[j] < answerArr[minIndex]) {
+          minIndex = j;
         }
       }
-      swap(answerArr, bigindex, sortPos);
+      swap(answerArr, minIndex, sortPos);
 
       // Set up handler for reset button
       $("#reset").click(function() { reset(sortPos); });

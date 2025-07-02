@@ -1,7 +1,7 @@
 
 /*********************************************************/
 
-#ListADT-Positions-CON { 
+#ListADT-Positions-CON {
   height: 190px;
 }
 
@@ -22,7 +22,7 @@
 /*********************************************************/
 
 #StaticArrayList-Vars-CON {
-  height: 280px;
+  height: 220px;
 }
 
 #StaticArrayList-Vars-CON .jsavoutput.jsavline {
@@ -91,13 +91,13 @@
 /*********************************************************/
 
 #DynamicArrayList-Append-CON {
-    height: 350px;
+    height: 340px;
     width: 900px;
 }
 
 #DynamicArrayList-Append-CON .jsavcode {
   margin-left: 300px;
-  width: 520px;
+  width: 450px;
 }
 
 #DynamicArrayList-Append-CON .jsavoutput.jsavline {
@@ -107,7 +107,7 @@
 /*********************************************************/
 
 #DynamicArrayList-Remove-CON {
-    height: 360px;
+    height: 370px;
     width: 870px;
 }
 
@@ -249,7 +249,7 @@
 /*********************************************************/
 
 #LinkedStack-Push-CON {
-  height: 210px;
+  height: 250px;
 }
 
 #LinkedStack-Push-CON .jsavoutput.jsavline {
@@ -266,7 +266,7 @@
 /*********************************************************/
 
 #LinkedStack-Pop-CON {
-  height: 250px;
+  height: 260px;
 }
 
 #LinkedStack-Pop-CON .jsavoutput.jsavline {
@@ -275,7 +275,7 @@
 
 #LinkedStack-Pop-CON .jsavcode {
   position: relative;
-  top: -20px;
+  top: -10px;
   left: 195px;
   width: 400px;
 }
@@ -289,7 +289,7 @@
 /*********************************************************/
 
 #LinkedQueue-Intro-CON {
-  height: 300px;
+  height: 250px;
 }
 
 #LinkedQueue-Intro-CON .jsavoutput.jsavline {
@@ -300,7 +300,7 @@
   position: relative;
   left: 150px;
   top: -10px;
-  width:535px;
+  width:400px;
 }
 
 /*********************************************************/
@@ -317,7 +317,7 @@
   position: relative;
   left: 195px;
   top: -10px;
-  width:450px;
+  width:400px;
 }
 
 /*********************************************************/
@@ -334,7 +334,7 @@
   position: relative;
   left: 150px;
   top: -10px;
-  width:550px;
+  width:500px;
 }
 
 /*********************************************************/

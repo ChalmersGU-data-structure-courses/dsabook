@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Hash functions</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-12.html" class="navbutton">&lt;&lt;</a>
+<a href="section-12.html" accesskey="p" rel="previous">Hash tables</a>
+</div>
+<div>
+<a href="section-12.2.html" accesskey="n" rel="next">Converting objects to table indices</a>
+<a href="section-12.2.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:hash-functions" class="level2" data-number="12.1">
+<h2 data-number="12.1"><span class="header-section-number">12.1</span>
+Hash functions</h2>
+<p>Hashing generally takes records whose key values come from a large
+range and stores those records in a table with a relatively small number
+of slots. Collisions occur when two records hash to the same slot in the
+table. If we are careful – or lucky – when selecting a hash function,
+then the actual number of collisions will be few. Unfortunately, even
+under the best of circumstances, collisions are nearly unavoidable. To
+illustrate, consider a classroom full of students. What is the
+probability that some pair of students shares the same birthday (i.e.,
+the same day of the year, not necessarily the same year)? If there are
+23 students, then the odds are about even that two will share a
+birthday. This is despite the fact that there are 365 days in which
+students can have birthdays (ignoring leap years). On most days, no
+student in the class has a birthday. With more students, the probability
+of a shared birthday increases. The mapping of students to days based on
+their birthday is similar to assigning records to slots in a table (of
+size 365) using the birthday as a hash function. Note that this
+observation tells us nothing about <em>which</em> students share a
+birthday, or on <em>which</em> days of the year shared birthdays
+fall.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<section id="sec:example-birthday-calculator" class="level4 unnumbered">
+<h4 class="unnumbered">Example: Birthday calculator</h4>
+</summary>
+<p>Try it for yourself. You can use the calculator to see the
+probability of a collision. The default values are set to show the
+number of people in a room such that the chance of a duplicate is just
+over 50%. But you can set any table size and any number of records to
+determine the probability of a collision under those conditions.</p>
+<p>
+<div id="Birthday" class="embedContainer">
+<iframe id="Birthday_iframe" aria-label="Birthday" src="../interactive/Hashing/Birthday.html" width="100%" height="177" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+<p>Now you can use the calculator to answer the following questions.</p>
+<p>
+<div id="BirthdayFIB" class="embedContainer">
+<iframe id="BirthdayFIB_iframe" aria-label="BirthdayFIB" src="../interactive/Hashing/BirthdayFIB.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</section>
+</div>
+<p>To be practical, a database organised by hashing must store records
+in a hash table that is not so large that it wastes space. To balance
+time and space efficiency, this means that the hash table should be
+around half full (see <a
+href="section-12.9.html#sec:analysis-of-hash-tables">Section 12.9</a>).
+Because collisions are extremely likely to occur under these conditions
+(by chance, any record inserted into a table that is half full should
+have a collision half of the time), does this mean that we need not
+worry about how well a hash function does at avoiding collisions?
+Absolutely not. The difference between using a good hash function and a
+bad hash function makes a big difference in practice in the number of
+records that must be examined when searching or inserting to the table.
+Technically, any function that maps all possible key values to a slot in
+the hash table is a hash function. In the extreme case, even a function
+that maps all records to the same slot in the array is a hash function,
+but it does nothing to help us find records during a search
+operation.</p>
+<p>We would like to pick a hash function that maps keys to slots in a
+way that makes each slot in the hash table have equal probablility of
+being filled for the actual set keys being used. Unfortunately, we
+normally have no control over the distribution of key values for the
+actual records in a given database or collection. So how well any
+particular hash function does depends on the actual distribution of the
+keys used within the allowable key range. In some cases, incoming data
+are well distributed across their key range. For example, if the input
+is a set of random numbers selected uniformly from the key range, any
+hash function that assigns the key range so that each slot in the hash
+table receives an equal share of the range will likely also distribute
+the input records uniformly within the table. However, in many
+applications the incoming records are highly clustered or otherwise
+poorly distributed. When input records are not well distributed
+throughout the key range it can be difficult to devise a hash function
+that does a good job of distributing the records throughout the table,
+especially if the input distribution is not known in advance. There are
+many reasons why data values might be poorly distributed:</p>
+<ol type="1">
+<li>Natural frequency distributions tend to follow a common pattern
+where a few of the entities occur frequently while most entities occur
+relatively rarely. For example, consider the populations of the 100
+largest cities. If you plot these populations on a numberline, most of
+them will be clustered toward the low side, with a few outliers on the
+high side. Viewed the other way, the home town for a given person is far
+more likely to be a particular large city than a particular small
+town.</li>
+<li>Collected data are likely to be skewed in some way. Field samples
+might be rounded to, say, the nearest 5 (i.e., all numbers end in 5 or
+0).</li>
+<li>If the input is a collection of common English words, the beginning
+letter will be poorly distributed.</li>
+</ol>
+<p>Note that for items 2 and 3 on the list above, either high- or
+low-order bits of the key are poorly distributed. When designing hash
+functions, we are generally faced with one of two situations:</p>
+<ol type="1">
+<li>We know nothing about the distribution of the incoming keys. In this
+case, we wish to select a hash function that evenly distributes the key
+range across the hash table, while avoiding obvious opportunities for
+clustering such as hash functions that are sensitive to the high- or
+low-order bits of the key value.</li>
+<li>We know something about the distribution of the incoming keys. In
+this case, we should use a distribution-dependent hash function that
+avoids assigning clusters of related key values to the same hash table
+slot. For example, if hashing English words, we should <em>not</em> hash
+on the value of the first character because this is likely to be
+unevenly distributed.</li>
+</ol>
+<p>In the rest of this section, and in <a
+href="section-12.10.html#sec:better-hash-functions">Section 12.10</a>,
+you will see several examples of hash functions that illustrate these
+points.</p>
+<section id="sec:properties-of-a-hash-function" class="level3"
+data-number="12.1.1">
+<h3 data-number="12.1.1"><span
+class="header-section-number">12.1.1</span> Properties of a hash
+function</h3>
+<p>Any hash function
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐡</mi><annotation encoding="application/x-tex">\mathbf{h}</annotation></semantics></math>
+must respect the following properties:</p>
+<ul>
+<li>it must be <em>deterministic</em>:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐡</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\mathbf{h}(a)</annotation></semantics></math>
+must always return the same value for a given
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>,
+regardless of when it is called</li>
+<li>it must <em>preserve equality</em>: if
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>
+is equal to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>,
+then
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐡</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\mathbf{h}(a)</annotation></semantics></math>
+must be equal to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐡</mi><mo stretchy="false" form="prefix">(</mo><mi>b</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\mathbf{h}(b)</annotation></semantics></math></li>
+</ul>
+<p>Furthermore, a <em>good</em> hash function should also respect the
+following:</p>
+<ul>
+<li><em>uniform distribution</em>:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐡</mi><annotation encoding="application/x-tex">\mathbf{h}</annotation></semantics></math>
+should map the expected inputs as evenly as possible over the possible
+output values</li>
+<li><em>efficiency</em>: the hash function should be fast to
+calculate</li>
+</ul>
+<section id="sec:example-the-worst-hash-function"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: The worst hash function</h4>
+<p>The requirements above tells us that the following is a valid hash
+function, because is both deterministic and preserves equality:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐡</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>42</mn></mrow><annotation encoding="application/x-tex">
+\mathbf{h}(x) = 42
+</annotation></semantics></math></p>
+<p>However, it’s a really bad hash function, because it gives the worst
+possible distribution.</p>
+</section>
+<p>This means that if you implement a hash table which uses this
+constant hash function, it will still work. It will answer all your
+questions correctly, and insertion and deletion will work just as
+expected. But it will be extremely slow – as slow as if you had used a
+simple list of values.</p>
+</section>
+<section id="sec:basic-principles-of-hash-functions" class="level3"
+data-number="12.1.2">
+<h3 data-number="12.1.2"><span
+class="header-section-number">12.1.2</span> Basic principles of hash
+functions</h3>
+<p>Here are some basic principles for creating good (or at least
+mostly-good-enough) hash functions.</p>
+<section id="sec:integers-characters-and-enumerations"
+class="level4 unnumbered">
+<h4 class="unnumbered">Integers, characters and enumerations</h4>
+<p>Since the value of a hash function should be an integer, it is very
+easy to just let value be its own hash code, if it’s an integer.</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐡</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">
+\mathbf{h}(x) = x
+</annotation></semantics></math></p>
+<p>This function is clearly deterministic and preserves equality, and it
+is very efficient too. But how about the distribution – is it
+uniform?</p>
+<p>This depends on how the keys are distributed in the data, and this
+depends on the application we have in mind. As an example, assume that
+we only have even-numbered keys in our data – then only half of all
+possible hash codes will be used.</p>
+<p>A more realistic example is if we want to search for people using
+their length. Person lengths are not uniformly distributed, but instead
+they have a normal distribution. This means that the hash codes will
+also be normal distributed, and there will be many collisions for
+lengths that are closer to the average length.</p>
+<p>However, despite the possibly skewed distribution, it is still quite
+common to use a number as its own hash code. The reason for this is that
+it is so simple and efficient to do so.</p>
+<p>Note that this simple strategy works for all kinds of atomic values,
+such as Unicode characters or enumeration types. All these are anyway
+encoded as integers internally by the compiler.</p>
+</section>
+<section id="sec:floating-point-numbers" class="level4 unnumbered">
+<h4 class="unnumbered">Floating point numbers</h4>
+<p>There is an international standard for encoding floating point
+numbers, called IEEE 754, which almost all modern processors use. The
+details of the encoding are not important, what matters to us is that it
+encodes every floating point number in a fixed number of bytes.</p>
+<p>One very easy and common hash function for floating point numbers is
+to simply use it as it is, but interpret the byte sequence as an
+integer. This means that the floating point value 42.0 will <em>not</em>
+have the hash code 42, but instead something completely different.
+However, this is not a problem in our case since the only thing we need
+to know is that it respects the requirements of a hash function. Just as
+above, it is clearly both efficient, deterministic and preserves
+equality, and the distribution is most definitely not worse than the
+integer distribution.</p>
+</section>
+<section id="sec:strings-1" class="level4 unnumbered">
+<h4 class="unnumbered">Strings</h4>
+<p>But how can we handle more complex values, such as strings? A string
+is a sequence of characters, of arbitrary length, so how can we
+calculate a good hash code for a given string?</p>
+<ul>
+<li><p>How about taking the hash code of the first character in the
+string? No, that’s not a good idea because you will get an awful
+distribution – all strings starting with “a” will get the same hash
+code, such as “abacus”, “ape”, and “aperture”.</p></li>
+<li><p>So, perhaps we can take the sum of the first, the middle and the
+last characters? That’s better but still not very good – common strings
+such as “state”, “summarise” and “signature” will get the same hash
+code.</p></li>
+</ul>
+<p>In both these cases the hash function will have a very skewed
+distribution, and the main reason is that they don’t take every single
+character into account. So an important rule of thumb is to use every
+part of a complex object when calculating the hash code. But how should
+these hash codes be combined? One way is to just sum all of them:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> hashCode(<span class="bu">string</span>):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    code <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> char <span class="kw">in</span> <span class="bu">string</span>:</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        code <span class="op">=</span> code <span class="op">+</span> hashCode(char)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> code</span></code></pre></div>
+<p>This is much better than the previous suggestions, but still not very
+good. Each character in the string will influence the final hash code,
+but it does not take their internal order into account. Therefore all
+the following strings will get the same hash code: “alter”, “later”, and
+“alert”.</p>
+</section>
+<section id="sec:horners-method-for-strings-lists-and-other-sequences"
+class="level4 unnumbered">
+<h4 class="unnumbered">Horner’s method for strings, lists and other
+sequences</h4>
+<p>So we want our hash function to take all character in a string into
+account, but also their position in the string. One common way is to
+treat the sequence of characters,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mo>=</mo><msub><mi>c</mi><mn>0</mn></msub><msub><mi>c</mi><mn>1</mn></msub><mi>…</mi><msub><mi>c</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">s=c_0c_1\ldots c_n</annotation></semantics></math>
+as a polynomial over some constant
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>,
+like this:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐡</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>c</mi><mn>0</mn></msub><msub><mi>c</mi><mn>1</mn></msub><msub><mi>c</mi><mn>2</mn></msub><mi>…</mi><msub><mi>c</mi><mi>n</mi></msub><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>c</mi><mn>0</mn></msub><mo>+</mo><msub><mi>c</mi><mn>1</mn></msub><mi>p</mi><mo>+</mo><msub><mi>c</mi><mn>2</mn></msub><msup><mi>p</mi><mn>2</mn></msup><mo>+</mo><msub><mi>c</mi><mn>3</mn></msub><msup><mi>p</mi><mn>3</mn></msup><mo>+</mo><mi>⋯</mi><mo>+</mo><msub><mi>c</mi><mi>n</mi></msub><msup><mi>p</mi><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">
+\mathbf{h}(c_0c_1c_2\ldots c_n)
+= c_0 + c_1p + c_2p^2 + c_3p^3 + \cdots + c_np^n
+</annotation></semantics></math></p>
+<p>This kind of polynomial can be calculated efficiently using
+<em>Horner’s method</em>, as a nested multiplication:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐡</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>c</mi><mn>0</mn></msub><msub><mi>c</mi><mn>1</mn></msub><msub><mi>c</mi><mn>2</mn></msub><mi>…</mi><msub><mi>c</mi><mi>n</mi></msub><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>c</mi><mn>0</mn></msub><mo>+</mo><mi>p</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>c</mi><mn>1</mn></msub><mo>+</mo><mi>p</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>c</mi><mn>2</mn></msub><mo>+</mo><mi>p</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>c</mi><mn>3</mn></msub><mo>+</mo><mi>⋯</mi><mo>+</mo><mi>p</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>c</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>+</mo><mi>p</mi><msub><mi>c</mi><mi>n</mi></msub><mo stretchy="false" form="postfix">)</mo><mi>⋯</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+\mathbf{h}(c_0c_1c_2\ldots c_n)
+= c_0 + p\left(c_1 + p\left(c_2 + p\left(c_3 + \cdots + p(c_{n-1} + pc_n)\cdots\right)\right)\right)
+</annotation></semantics></math></p>
+<p>Which in turn is just a fancier way of writing a simple loop over all
+characters, and accumulating the hash code:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> hashCode(<span class="bu">string</span>):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    code <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">each</span> char <span class="kw">in</span> <span class="bu">string</span>:</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        code <span class="op">=</span> p<span class="op">*</span>code <span class="op">+</span> hashCode(char)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> code</span></code></pre></div>
+<p>To get the best distribution, we should use a not-too-small prime
+number for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>.
+(The standard hash function for strings in Java is exactly like this,
+where they use
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mn>31</mn></mrow><annotation encoding="application/x-tex">p=31</annotation></semantics></math>.)</p>
+<p>Note that Horner’s method can be used for all kinds of sequences,
+such as lists or tuples.</p>
+</section>
+<section id="sec:complex-values" class="level4 unnumbered">
+<h4 class="unnumbered">Complex values</h4>
+<p>So how can we handle complex values, such as general datatypes or
+objects? E.g., how do we define a hash function for the following
+datatype for person names:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> Person:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    firstName: String</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    middleName: String</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    lastName: String</span></code></pre></div>
+<p>We can use the same strategy as we did for strings – simply treat the
+three elements as a sequence and apply Horner’s method:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> Person:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    hashCode():</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        code <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> part <span class="kw">in</span> (firstName, middleName, lastName):</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>            code <span class="op">=</span> p<span class="op">*</span>code <span class="op">+</span> part.hashCode()</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> code</span></code></pre></div>
+<p>However, sometimes we don’t want to use all instance variables when
+calculating the hash code. Assume that we want to be able to search for
+just the last name, i.e., to find all persons having the same last name.
+Then we can build a hash table of persons, where the hash codes are only
+calculated from the last names. If we want to also be able to search for
+first names, we have to build <em>another</em> hash table – where the
+hash codes are calculated from the first names.</p>
+</section>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-12.html" class="navbutton">&lt;&lt;</a>
+<a href="section-12.html" accesskey="p" rel="previous">Hash tables</a>
+</div>
+<div class="navlink">
+<a href="section-12.2.html" accesskey="n" rel="next">Converting objects to table indices</a>
+<a href="section-12.2.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

@@ -3,26 +3,27 @@
 }
 
 #QuickSortAverageCaseCON .jsavoutput.jsavline {
-  height: 50px;
+  height: 70px;
+  margin-bottom: 0;
 }
 
 .smallLabel{
-	font-size: 11px; 
+	font-size: 11px;
 	text-align: center;
 }
 
 .mediumLabel{
-  font-size: 14px; 
-  text-align: center;		
+  font-size: 14px;
+  text-align: center;
 }
 
 .mediumLabel2{
-  font-size: 12px; 
-  text-align: center;			
+  font-size: 12px;
+  text-align: center;
 }
 
 .largeLabel{
-	font-size: 16px; 
-	text-align: center;	
+	font-size: 16px;
+	text-align: center;
 }
 

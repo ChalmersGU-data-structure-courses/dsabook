@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Space bounds</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-7.html" class="navbutton">&lt;&lt;</a>
+<a href="section-7.html" accesskey="p" rel="previous">Algorithm analysis, part 3: Advanced theory</a>
+</div>
+<div>
+<a href="section-7.2.html" accesskey="n" rel="next">Amortised analysis</a>
+<a href="section-7.2.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:space-bounds" class="level2" data-number="7.1">
+<h2 data-number="7.1"><span class="header-section-number">7.1</span>
+Space bounds</h2>
+<p>Besides time, space is the other computing resource that is commonly
+of concern to programmers. Just as computers have become much faster
+over the years, they have also received greater allotments of memory.
+Even so, the amount of available disk space or main memory can be
+significant constraints for algorithm designers.</p>
+<p>The analysis techniques used to measure space requirements are
+similar to those used to measure time requirements. However, while time
+requirements are normally measured for an algorithm that manipulates a
+particular data structure, space requirements are normally determined
+for the data structure itself. The concepts of asymptotic analysis for
+growth rates on input size apply completely to measuring space
+requirements.</p>
+<section id="sec:space-complexity-of-data-structures" class="level3"
+data-number="7.1.1">
+<h3 data-number="7.1.1"><span class="header-section-number">7.1.1</span>
+Space complexity of data structures</h3>
+<p>Time complexity helps us to abstract away from hardware-specific
+details, constant factors and lower-order terms, so that we can focus on
+what has the most impact for large inputs. In the same way we want to
+abstract away from the actual memory usage in bytes, and instead focus
+on how the memory used by a data structure depends on the data size.</p>
+<section id="sec:example-arrays-and-linked-lists"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Arrays and linked lists</h4>
+<p>What are the space requirements for an array of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+integers? If each integer requires
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+bytes, then the array requires
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">kn</annotation></semantics></math>
+bytes, which is in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>.</p>
+<p>What are the space requirements for a linked list of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+integers? Each linked node requires
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+bytes for the integer, plus (say)
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+additional bytes for the pointer to the next node. Therefore the linked
+list requires
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>k</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">2kn</annotation></semantics></math>
+bytes, which is also in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>.</p>
+</section>
+<p>A data structure’s primary purpose is to store data in a way that
+allows efficient access to those data. To provide efficient access, it
+may be necessary to store additional information about where the data
+are within the data structure. For example, each node of a linked list
+must store a pointer to the next value on the list. All such information
+stored in addition to the actual data values is referred to as <a
+href="section-14.html#overhead" class="term"
+title="All information stored by a data structure aside from the actual data. For example, the pointer fields in a linked list or BST, or the unused positions in an array-based list.">overhead</a>.
+Ideally, overhead should be kept to a minimum while allowing maximum
+access. The need to maintain a balance between these opposing goals is
+what makes the study of data structures so interesting.</p>
+<div class="online">
+<section id="sec:example-integers" class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Integers</h4>
+<p>How much memory does an integer use? This might sound like a stupid
+question – don’t we usually just assume that integers use a fixed size,
+such as 32 bits or 64 bits?</p>
+<p>Yes and no – most programming languages have fixed-size integers, and
+then their space usage is constant,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math>.
+But fixed-size integers are actually just an approximation of integers.
+A 64-bit integer can only store values in the range
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>−</mi><msup><mn>2</mn><mn>63</mn></msup></mrow><annotation encoding="application/x-tex">-2^{63}</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mn>63</mn></msup><annotation encoding="application/x-tex">2^{63}</annotation></semantics></math>,
+and although this is enough for most purposes there are cases when we
+need to calculate integers of arbitrary size. Most modern languages have
+a special datatype for arbitrary-size integers (e.g., Javascript has
+BigInt and Java has BigInteger), while languages such as Python even has
+arbitrary-size integers as the default numeric type.</p>
+<p>So, how much memory does in arbitrary-size integer use? Normally they
+need a number of bytes that is proportional to the number of bits in the
+binary representation. The space usage is therefore
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>,
+where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+is the length of the binary representation.</p>
+<p>But what is the space usage in terms of the integer itself? This
+boils down to the question how many bits are there in the binary
+representation of a number. Since you can store
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mi>n</mi></msup><annotation encoding="application/x-tex">2^n</annotation></semantics></math>
+different integers in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+bits, we need a logarithmic number of bits to store an arbitrary
+integer. Therefore the space usage of an integer is logarithmic,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>
+to store an integer
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.</p>
+</section>
+<p>And finally a more complex example, about friendship:</p>
+<section id="sec:example-friendship-links"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Friendship links</h4>
+<p>Imagine that we want to keep track of friendships between
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+people. We can do this with a 2-dimensional array of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>×</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">n \times n</annotation></semantics></math>
+(a matrix). Each row of the matrix represents the friends of an
+individual, with the columns indicating who has that individual as a
+friend. For example, if person
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>
+is a friend of person
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>,
+then we place a mark in column
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>
+of row
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+in the array. Likewise, we should also place a mark in column
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+of row
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>
+if we assume that friendship works both ways. For
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+people, the total size of the matrix is in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>.</p>
+<p>But is this the best representation of friendship links? Assume that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+grows large, and we want to include every person in Sweden (which has
+around
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>10</mn><mi>M</mi></mrow><annotation encoding="application/x-tex">10M</annotation></semantics></math>
+people). Then the matrix will have around
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><msup><mn>10</mn><mn>7</mn></msup><msup><mo stretchy="false" form="postfix">)</mo><mn>2</mn></msup><mo>=</mo><msup><mn>10</mn><mn>14</mn></msup></mrow><annotation encoding="application/x-tex">(10^7)^2 = 10^{14}</annotation></semantics></math>
+cells. How many friends will an average person have? This varies of
+course, but it’s extremely unlikely that they have more than say 100
+friends. So the total number of friendship links should be at most
+around
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>10</mn><mi>M</mi><mo>×</mo><mn>100</mn><mo>=</mo><msup><mn>10</mn><mn>9</mn></msup></mrow><annotation encoding="application/x-tex">10M\times 100 = 10^9</annotation></semantics></math>,
+which is several orders of magnitudes less than the size of the matrix.
+So is there a better representation?</p>
+<p>Instead of storing a
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>×</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">n\times n</annotation></semantics></math>
+matrix, we can store an array of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+with pointers to lists of numbers. Now, if array cell
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>
+points to a list containing
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>,
+then person
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math> is
+a friend of person
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>.
+How many friends does a person have, on average? Of course we cannot
+know that, but it sounds reasonable that the average number of friends
+does not depend on the size of the dataset. That it doesn’t depend on
+the size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+is just another way of saying that it is bounded by some constant
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>.
+Now, our array of friendship lists will consist of one array of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+lists of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+(on average). So, the average space usage will be
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>n</mi><mo>⋅</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n) + n\cdot O(k) = O(n) + O(n) = O(n)</annotation></semantics></math>.
+With this new representation we could reduce the space complexity from
+quadratic
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>
+to linear
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>.</p>
+</section>
+<p>This last example discussed two possible implementations of
+<em>graphs</em>, and we will discuss this further in <a
+href="section-13.html#sec:graphs">Chapter 13</a>.</p>
+</div>
+</section>
+<section id="sec:space-complexity-of-algorithms" class="level3"
+data-number="7.1.2">
+<h3 data-number="7.1.2"><span class="header-section-number">7.1.2</span>
+Space complexity of algorithms</h3>
+<p>We are not only interested in knowing how much memory a data
+structure will use, but also what the space complexity of an
+<em>algorithm</em> is. When we analyse space usage of algorithms, we are
+usually only interested in the <em>additional</em> space that the
+algorithm uses during execution.</p>
+<p>Let’s say that an algorithm is <em>in-place</em> if it only uses
+constant additional space,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math>.
+For example, Insertion sort is in-place, because it only allocates a
+constant number of variables to complete.</p>
+<section id="sec:example-mergesort" class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Mergesort</h4>
+<p>How much additional space does Mergesort use? Mergesort is a
+divide-and-conquer algorithm that calls itself recursively, halving the
+size of the problem in each call. The step that uses additional memory
+is the merging process, where we have to allocate a new array that we
+can fill with the merged values.</p>
+<p>In the first level we have to allocate one array of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.
+In the second level we allocate two arrays, each of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n/2</annotation></semantics></math>.
+In the third level we allocate
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>2</mn></msup><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">2^2 = 4</annotation></semantics></math>
+arrays, each of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><msup><mn>2</mn><mn>2</mn></msup><mo>=</mo><mi>n</mi><mi>/</mi><mn>4</mn></mrow><annotation encoding="application/x-tex">n/2^2 = n/4</annotation></semantics></math>.
+Continuing down we see that in level
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+we allocate
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mi>k</mi></msup><annotation encoding="application/x-tex">2^k</annotation></semantics></math>
+arrays, each of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><msup><mn>2</mn><mi>k</mi></msup></mrow><annotation encoding="application/x-tex">n/2^k</annotation></semantics></math>.</p>
+<p>As you can see, each level uses up an additional
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>
+space, because
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mi>k</mi></msup><mo>⋅</mo><mi>n</mi><mi>/</mi><msup><mn>2</mn><mi>k</mi></msup><mo>=</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">2^k \cdot n/2^k = n</annotation></semantics></math>.
+And, since we already know that Mergesort continues for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n</annotation></semantics></math>
+levels, we get an additional space usage of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>.</p>
+<p>But it is possible to improve the space usage of Mergesort. Instead
+of allocating new arrays at each level, we can create one single
+additional array of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+and then use only that auxilliary array. To make this work we have to
+change the implementation somewhat, and this can be done in several
+ways. The most common solution is called bottom-up Mergesort, and it has
+an additional space usage of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>.</p>
+</section>
+<div class="online">
+<p>So, Mergesort is not an in-place algorithm because it uses at least
+linear additional space. But what about Quicksort, didn’t we say that it
+is in-place?</p>
+<section id="sec:example-quicksort" class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Quicksort</h4>
+<p>How much additional space does Quicksort use? Just as Mergesort,
+Quicksort is also a divide-and-conquer algorithm, but in this case we
+cannot be certain that it halves the problem size in each call. We have
+already showed that Quicksort is quadratic
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>
+in the worst case (if we are unlucky with the pivot selection).</p>
+<p>Now, Quicksort is a recursive algorithm, and whenever we make a
+recursive call the system has to allocate some memory for storing
+information on what to do when returning from the recursion. This is
+done by pushing some memory block (of constant size) onto the <em>call
+stack</em>. But when Quicksort is unlucky and gets quadratic behaviour,
+it will use a linear number of recursion levels. Therefore the
+additional memory usage for Quicksort is linear
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>,
+so it is not in-place.</p>
+<p>But let’s assume that we have a good pivot selection algorithm (and
+well-behaved input), so that we get the normal
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>
+behaviour. Quicksort will still allocate memory on the call stack for
+the recursive calls, and just as Mergesort we will never get fewer than
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>
+recursive levels. Therefore the additional memory usage for Quicksort
+will be at least logarithmic
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>
+in the worst case.</p>
+</section>
+<p>The Quicksort example shows that perhaps we were too strict when we
+defined what an <em>in-place</em> algorithm is. A more realistic
+definition is to say that an algorithm is in-place if it never uses more
+than
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>
+additional space.</p>
+</div>
+</section>
+<section id="sec:space-time-tradeoff" class="level3"
+data-number="7.1.3">
+<h3 data-number="7.1.3"><span class="header-section-number">7.1.3</span>
+Space/time tradeoff</h3>
+<p>One important aspect of algorithm design is referred to as the <a
+href="section-14.html#space-time-tradeoff" class="term"
+title="Many programs can be designed to either speed processing at the cost of additional storage, or reduce storage at the cost of additional processing time.">space/time
+tradeoff</a> principle. The space/time tradeoff principle says that one
+can often achieve a reduction in time if one is willing to sacrifice
+space or vice versa. Many programs can be modified to reduce storage
+requirements by “packing” or encoding information. “Unpacking” or
+decoding the information requires additional time. Thus, the resulting
+program uses less space but runs slower. Conversely, many programs can
+be modified to pre-store results or reorganise information to allow
+faster running time at the expense of greater storage requirements.
+Typically, such changes in time and space are both by a constant
+factor.</p>
+<div class="online">
+<p>A classic example of a space/time tradeoff is the <a
+href="section-14.html#lookup-table" class="term"
+title="A table of pre-calculated values, used to speed up processing time when the values are going to be viewed many times. The costs to this approach are the space required for the table and the time required to compute the table. This is an example of a space/time tradeoff.">lookup
+table</a>. A lookup table pre-stores the value of a function that would
+otherwise be computed each time it is needed. For example, 12! is the
+greatest value for the factorial function that can be stored in a 32-bit
+<code>int</code> variable. If you are writing a program that often
+computes factorials, it is likely to be much more time efficient to
+simply pre-compute and store the 12 values in a table. Whenever the
+program needs the value of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>!</mi></mrow><annotation encoding="application/x-tex">n!</annotation></semantics></math>
+it can simply check the lookup table. (If
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>&gt;</mo><mn>12</mn></mrow><annotation encoding="application/x-tex">n &gt; 12</annotation></semantics></math>,
+the value is too large to store as an <code>int</code> variable anyway.)
+Compared to the time required to compute factorials, it may be well
+worth the small amount of additional space needed to store the lookup
+table.</p>
+<p>Lookup tables can also store approximations for an expensive function
+such as sine or cosine. If you compute this function only for exact
+degrees or are willing to approximate the answer with the value for the
+nearest degree, then a lookup table storing the computation for exact
+degrees can be used instead of repeatedly computing the sine function.
+Note that initially building the lookup table requires a certain amount
+of time. Your application must use the lookup table often enough to make
+this initialisation worthwhile.</p>
+<section id="sec:example-binsort" class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Binsort</h4>
+<p>Another example of the space/time tradeoff is typical of what a
+programmer might encounter when trying to optimise space. Here is a
+simple code fragment for sorting an array of integers. We assume that
+this is a special case where there are
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+integers whose values are a permutation of the integers from 0 to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>.
+This is an example of a <a href="section-14.html#binsort" class="term"
+title="A sort that works by taking each record and placing it into a bin based on its value. The bins are then gathered up in order to sort the list. It is generally not practical in this form, but it is the conceptual underpinning of the radix sort.">binsort</a>.
+Binsort assigns each value to an array position corresponding to its
+value.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>newArr <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(arr.<span class="bu">size</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="dv">0</span> .. arr.<span class="bu">size</span><span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    newArr[arr[i]] <span class="op">=</span> arr[i]</span></code></pre></div>
+<p>This is efficient and requires
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>
+time. However, it also requires two arrays of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
+so the additional space usage is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>.</p>
+<p>Next is a code fragment that places the permutation in order but does
+so within the same array (thus it is an example of an <em>in-place</em>
+sort).</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="dv">0</span> .. arr.<span class="bu">size</span><span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> arr[i] <span class="op">!=</span> i:</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        swap(arr, i, arr[i])  <span class="co">// Swap element arr[i] with arr[arr[i]]</span></span></code></pre></div>
+<p>The function <code>swap(arr,i,j)</code> exchanges elements
+<code>i</code> and <code>j</code> in array <code>arr</code>. It may not
+be obvious that the second code fragment actually sorts the array. To
+see that this does work, notice that each pass through the
+<code>for</code> loop will at least move the integer with value
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+to its correct position in the array, and that during this iteration,
+the value of <code>arr[i]</code> must be greater than or equal to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>.
+A total of at most
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+<code>swap</code> operations take place, because an integer cannot be
+moved out of its correct position once it has been placed there, and
+each swap operation places at least one integer in its correct position.
+Thus, this code fragment has cost
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>,
+just as the first fragment. However, it requires more time to run than
+the first code fragment. On an ordinary computer the second version
+takes nearly twice as long to run as the first, but it only needs
+constant additional space (for the <code>i</code> variable).</p>
+</section>
+<p>A second principle for the relationship between a program’s space and
+time requirements applies to programs that process information <a
+href="section-14.html#file-processing" class="term"
+title="The domain with computer science that deals with processing data stored on a disk drive (in a file), or more broadly, dealing with data stored on any peripheral storage device. Two fundamental properties make dealing with data on a peripheral device different from dealing with data in main memory: (1) Reading/writing data on a peripheral storage device is far slower than reading/writing data to main memory (for example, a typical disk drive is about a million times slower than RAM). (2) All I/O to a peripheral device is typically in terms of a block of data (for example, nearly all disk drives do all I/O in terms of blocks of 512 bytes).">stored
+on disk</a>. Strangely enough, the disk-based space/time tradeoff
+principle is almost the reverse of the space/time tradeoff principle for
+programs using main memory.</p>
+<p>The <a href="section-14.html#disk-based-space-time-tradeoff"
+class="term"
+title="In contrast to the standard space/time tradeoff, this principle states that the smaller you can make your disk storage requirements, the faster your program will run. This is because the time to read information from disk is enormous compared to computation time, so almost any amount of additional computation needed to unpack the data is going to be less than the disk-reading time saved by reducing the storage requirements.">disk-based
+space/time tradeoff</a> principle states that the smaller you can make
+your disk storage requirements, the faster your program will run. This
+is because the time to read information from disk is enormous compared
+to computation time, so almost any amount of additional computation
+needed to unpack the data is going to be less than the disk-reading time
+saved by reducing the storage requirements. Naturally this principle
+does not hold true in all cases, but it is good to keep in mind when
+designing programs that process information stored on disk.</p>
+</div>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-7.html" class="navbutton">&lt;&lt;</a>
+<a href="section-7.html" accesskey="p" rel="previous">Algorithm analysis, part 3: Advanced theory</a>
+</div>
+<div class="navlink">
+<a href="section-7.2.html" accesskey="n" rel="next">Amortised analysis</a>
+<a href="section-7.2.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Case study: Implementing sets using lists</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-10.2.html" class="navbutton">&lt;&lt;</a>
+<a href="section-10.2.html" accesskey="p" rel="previous">Maps, or dictionaries</a>
+</div>
+<div>
+<a href="section-10.4.html" accesskey="n" rel="next">Sorted sets and maps</a>
+<a href="section-10.4.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:case-study-implementing-sets-using-lists"
+class="level2" data-number="10.3">
+<h2 data-number="10.3"><span class="header-section-number">10.3</span>
+Case study: Implementing sets using lists</h2>
+<p>Both sets and maps can be implemented using lists. For a set, we can
+use a simple list of elements.</p>
+<section id="sec:using-a-linked-list" class="level4 unnumbered">
+<h4 class="unnumbered">Using a linked list</h4>
+<p>Recall from <a
+href="section-6.3.html#sec:stacks-implemented-as-linked-lists">Section 6.3</a>
+that a linked list consists of nodes pointing to their successors:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> SetNode <span class="kw">of</span> T:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    elem: T             <span class="co">// Value for this node</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">next</span>: SetNode <span class="kw">of</span> T  <span class="co">// Pointer to next node in list</span></span></code></pre></div>
+<p>Just as for linked stacks, our set datatype will consist of a pointer
+to the head of the list, and its size. We also have to give the
+operations for <code>contains</code>, <code>add</code> and
+<code>remove</code>.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> LinkedSet <span class="kw">implements</span> <span class="bu">Set</span>:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    head: Node <span class="op">=</span> <span class="va">null</span>   <span class="co">// Pointer to head of list</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span>: <span class="bu">Int</span> <span class="op">=</span> <span class="dv">0</span>       <span class="co">// Size of list</span></span></code></pre></div>
+<p>Searching in a linked list is a simple while loop where we start at
+the head and continue down the list. If we reach the end of the list we
+return <code>false</code>, because the element wasn’t found:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> LinkedSet:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">contains</span>(elem):</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        node <span class="op">=</span> head</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> node <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span>:</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> elem <span class="op">==</span> node.elem:</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> <span class="va">true</span>   <span class="co">// We found the element, so return true</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>            node <span class="op">=</span> node.<span class="bu">next</span>  <span class="co">// Move to the next list node</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">false</span>          <span class="co">// We reached the end of the list</span></span></code></pre></div>
+<p>To add an element we first have to check if it is already there –
+sets are not allowed to contain the same element twice. If it is not in
+the list we can just attach a new list node before the head of the list
+(and increase the size):</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> LinkedSet:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">add</span>(elem):</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> <span class="bu">contains</span>(elem):</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>            newHead <span class="op">=</span> <span class="kw">new</span> Node(elem, head)  <span class="co">// Create a new node pointing to the current head</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>            head <span class="op">=</span> newHead   <span class="co">// Redirect the head to the new node</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>            <span class="bu">size</span> <span class="op">=</span> <span class="bu">size</span> <span class="op">+</span> <span class="dv">1</span></span></code></pre></div>
+<p>Removing an element is slightly trickier. If we want to remove a
+certain node from the list, we have to redirect the <code>next</code>
+pointer from the <em>previous</em> node. So we have to search for the
+node <em>before</em> the node we want to remove. We can do that by
+keeping a <code>prev</code> pointer while iterating through the
+list.</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LinkedSet:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">remove</span>(elem):</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        prev <span class="op">=</span> <span class="va">null</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        node <span class="op">=</span> head</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> node <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span>:</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> elem <span class="op">==</span> node.elem:  <span class="co">// We found the node to remove</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> prev <span class="kw">is</span> <span class="va">null</span>:</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>                    head <span class="op">=</span> node.<span class="bu">next</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span>:</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>                    prev.<span class="bu">next</span> <span class="op">=</span> node.<span class="bu">next</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>                node.<span class="bu">next</span> <span class="op">=</span> <span class="va">null</span>  <span class="co">// For garbage collection</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>                <span class="bu">size</span> <span class="op">=</span> <span class="bu">size</span> <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>            prev <span class="op">=</span> node</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>            node <span class="op">=</span> node.<span class="bu">next</span></span></code></pre></div>
+<p>Note that we have a special case: if <code>prev</code> is null it is
+the head itself that we want to remove, because there is not previous
+node yet.</p>
+</section>
+<section id="sec:linear-complexity" class="level4 unnumbered">
+<h4 class="unnumbered">Linear complexity</h4>
+<p>It is clear that all the operations are linear in the size of the
+list,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>,
+because in the worst case we have to look at all nodes. In later
+chapters we will see how to improve the efficiency, by using</p>
+<ul>
+<li><a href="section-14.html#balanced-tree" class="term"
+title="A tree where the subtrees meet some criteria for being balanced. Two possibilities are that the tree is height balanced, or that the tree has a roughly equal number of nodes in each subtree.">Balanced
+search trees</a> (<a
+href="section-11.2.html#sec:self-balancing-trees">Section 11.2</a>),
+which bring down the complexity of the operations to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>.</li>
+<li><a href="section-14.html#hash-table" class="term"
+title="The data structure (usually an array) that stores data records for lookup using hashing.">Hash
+tables</a> (<a href="section-12.html#sec:hash-tables">Chapter 12</a>),
+which make the operations constant time,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math>.</li>
+</ul>
+<p>But some times it is enough to use a simple linked list-based
+implementation. And in fact, the <a
+href="section-14.html#separate-chaining" class="term"
+title="In hashing, a synonym for open hashing">separate chaining</a>
+hash table (<a
+href="section-12.3.html#sec:separate-chaining">Section 12.3</a>)
+requires an underlying simpler implementation – and there a linked list
+works very fine!</p>
+</section>
+<section id="sec:using-a-sorted-array" class="level4 unnumbered">
+<h4 class="unnumbered">Using a sorted array</h4>
+<p>There is a way to speed up <em>one</em> of the operations, by using a
+sorted array instead of a linked list. If we have a sorted array of
+elements, the <code>contains</code> method can use <a
+href="section-14.html#binary-search" class="term"
+title="A standard recursive algorithm for finding the record with a given search key value within a sorted list. It runs in $O(\log n)$ time. At each step, look at the middle of the current sublist, and throw away the half of the records whose keys are either too small or too large.">binary
+search</a> (<a
+href="section-1.6.html#sec:binary-search">Section 1.6.1</a>), which
+takes logarithmic time (<a
+href="section-2.8.html#sec:case-study-analysing-binary-search">Section 2.8</a>).
+Hence looking up items will be really efficient.</p>
+<p>Unfortunately, modifying the data structure is still slow. If we want
+to <code>add</code> an item to a sorted array, we have to keep the array
+sorted – and that means we need to <em>insert</em> the new item at the
+right place in the array, using the insertion algorithm from Insertion
+Sort (<a href="section-3.6.html#sec:insertion-sort">Section 3.6</a>).
+This takes linear time in the worst case. Similarly, to
+<code>remove</code> an item without creating a hole in the array, we
+need to shift a bunch of elements in the array, and this also takes
+linear time.</p>
+<p>However, a sorted array is a suitable way to implement a set or a map
+that <em>never changes</em>, that is where we never need to add or
+remove items after the array is created. We start by sorting the array,
+using either Quicksort or Mergesort, and then we can use binary search
+to find items in it. Sorted arrays also support the <em>sorted set</em>
+and <em>sorted map</em> operations such as <em>range queries</em> (see
+<a href="section-10.4.html#sec:sorted-sets-and-maps">Section 10.4</a>),
+because these can also be implemented using binary search.</p>
+<p>Sorted arrays can also be useful in cases where we always add
+<em>many</em> items in one go. Given a sorted array
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>,
+and an unsorted list of items
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>,
+we can add the items in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+as follows. First we sort
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>,
+then we merge
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>,
+using the merge algorithm from Mergesort. Note that the merge step takes
+linear time, and sorting
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
+takes a bit more than linear time, so this is a lot faster than adding
+all the items from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
+one by one (which would take quadratic time).</p>
+</section>
+<section id="sec:implementing-maps" class="level3" data-number="10.3.1">
+<h3 data-number="10.3.1"><span
+class="header-section-number">10.3.1</span> Implementing maps</h3>
+<p>If we want to implement a map instead of a set, we have two
+choices:</p>
+<ul>
+<li>We can have a list or array of <em>key-value</em> pairs.</li>
+<li>Alternatively, we can use two lists or arrays, one for holding the
+keys and another for holding the values. The two lists must be “kept in
+sync” so that a key with its value occurs at the same position.</li>
+</ul>
+<p>Note that these maps are exactly as slow as the corresponding sets
+(linked lists and sorted arrays), so they are not useful for working
+with large collections – for this we refer to <a
+href="section-11.html#sec:search-trees">Chapters 11</a> and <a
+href="section-12.html#sec:hash-tables">12</a>.</p>
+<section id="sec:using-a-linked-list-1" class="level4 unnumbered">
+<h4 class="unnumbered">Using a linked list</h4>
+<p>If we want to implement the map using a linked list, the easiest is
+probably to have list nodes that contain both the keays and the
+values:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> MapNode <span class="kw">of</span> K <span class="kw">to</span> V:</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    key: K          <span class="co">// Key for this node</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    value: V        <span class="co">// Value for this node</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">next</span>: MapNode   <span class="co">// Pointer to next node in list</span></span></code></pre></div>
+<p>The map operations <code>get</code>, <code>put</code> and
+<code>remove</code> are minor modifications to the set operations that
+we defined earlier. We leave them as an exercise to the reader to
+implement.</p>
+</section>
+<section id="sec:using-a-sorted-array-1" class="level4 unnumbered">
+<h4 class="unnumbered">Using a sorted array</h4>
+<p>If we want to use a sorted array, one possibility is to use two
+arrays – one for the keys and another for the values.</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> SortedArrayMap <span class="kw">of</span> K <span class="kw">to</span> V:</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    keys: <span class="bu">Array</span> <span class="kw">of</span> K</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    values: <span class="bu">Array</span> <span class="kw">of</span> V</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span>: <span class="bu">Int</span></span></code></pre></div>
+<p>The implementations of the set methods are left as exercises to the
+reader, but there are some important things to remember:</p>
+<ul>
+<li>The <code>keys</code> and <code>values</code> must be kept in sync,
+so that <code>keys[i]</code> is always the key for the value in
+<code>values[i]</code></li>
+<li>This means that we have to remember to modify both arrays in the
+same way – if we delete the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>th
+element we have to delete both <code>keys[i]</code> and
+<code>values[i]</code> (and shift the arrays in the same way)</li>
+</ul>
+</section>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-10.2.html" class="navbutton">&lt;&lt;</a>
+<a href="section-10.2.html" accesskey="p" rel="previous">Maps, or dictionaries</a>
+</div>
+<div class="navlink">
+<a href="section-10.4.html" accesskey="n" rel="next">Sorted sets and maps</a>
+<a href="section-10.4.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Amortised analysis</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-7.1.html" class="navbutton">&lt;&lt;</a>
+<a href="section-7.1.html" accesskey="p" rel="previous">Space bounds</a>
+</div>
+<div>
+<a href="section-7.3.html" accesskey="n" rel="next">Case study: Analysing dynamic arrays</a>
+<a href="section-7.3.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:amortised-analysis" class="level2" data-number="7.2">
+<h2 data-number="7.2"><span class="header-section-number">7.2</span>
+Amortised analysis</h2>
+<p>This section presents the concept of <a
+href="section-14.html#amortised-analysis" class="term"
+title="Analysing the amortised complexity of an algorithm or problem.">amortised
+analysis</a>, which is the analysis for a series of operations taken as
+a whole. In particular, amortised analysis allows us to deal with the
+situation where the worst-case cost for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+operations is less than
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+times the worst-case cost of any one operation. Rather than focusing on
+the individual cost of each operation independently and summing them,
+amortised analysis looks at the cost of the entire series and “charges”
+each individual operation with a share of the total cost.</p>
+<p>The standard example for amortised analysis is dynamic arrays which
+were introduced in <a
+href="section-6.7.html#sec:dynamic-arrays">Section 6.7</a>. In that
+section we gave an informal argument why it is important to grow the
+array in the right way. If we do it by doubling the array size, we get
+<em>amortised</em> constant time for all basic operations, but if we do
+it in the wrong way we get linear time operations in the worst case.</p>
+<p>Dynamic arrays are such an important example for amortised analysis
+that we will devote the whole of next section to them. But before that
+we will explain the concepts and give some other examples.</p>
+<section id="sec:example-multipop-on-stacks"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Multipop on stacks</h4>
+<p>Assume that we want to add a new operation <em>multipop</em> on
+stacks, where
+<em>multipop</em>(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>)
+will pop the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+topmost elements off the stack. The operation is implemented in the
+straightforward by simply repeating a single <em>pop</em> operation
+<em>k</em> times.</p>
+<p>What is the time complexity of this new operation? Since we’re
+repeating the constant-time <em>pop</em> operation
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+times, we get a time complexity of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(k)</annotation></semantics></math>.
+And the worst case of this is when
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math> is
+as large as possible, i.e., the stack size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.
+So the worst-case complexity for <em>multipop</em> is linear in the
+stack size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>.</p>
+<p>This is quite correct, the worst-case complexity of a single call to
+<em>multipop</em> is linear in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.
+But what is the complexity of executing a large number of stack
+operations in sequence?</p>
+<p>Let’s say that we start from an empty stack and execute a sequence of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+<em>push</em> operations and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+<em>multipop</em> operations. Using our analysis above, the whole
+sequence of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>n</mi></mrow><annotation encoding="application/x-tex">2n</annotation></semantics></math>
+operations will have worst-case complexity
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>⋅</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>n</mi><mo>⋅</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>+</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">n\cdot O(1) + n\cdot O(n) = O(n+n^2) = O(n^2)</annotation></semantics></math>.
+Since we performed
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>n</mi></mrow><annotation encoding="application/x-tex">2n</annotation></semantics></math>
+operations, we get an average complexity per operation of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo><mi>/</mi><mn>2</mn><mi>n</mi><mo>=</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)/2n = O(n)</annotation></semantics></math>.
+This analysis is unreasonably pessimistic. Clearly it is not really
+possible to pop
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+elements each time <em>multipop</em> is called. Analysis that focuses on
+single operations cannot deal with this global limit, and so we turn to
+amortised analysis to model the entire series of operations.</p>
+<p>We can reason like this instead:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+elements are pushed to the stack, and each of these elements can only be
+popped once. The sum of costs for all calls to <em>multipop</em> can
+never be more than the total number of elements that has been pushed on
+the stack, which is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.
+This means that the total complexity of our
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+calls to <em>multipop</em> must be in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>.
+This is the same complexity as the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math> calls
+to <em>pop</em>, so our total complexity cannot be worse than
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n) + O(n) = O(n)</annotation></semantics></math>.</p>
+<p>Therefore the average worst-case complexity per operation must be
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mi>/</mi><mi>n</mi><mo>=</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)/n = O(1)</annotation></semantics></math>,
+i.e., constant.</p>
+</section>
+<p>In the <em>multipop</em> example we got two different complexities
+for the <em>multipop</em> operation: first we found that it is linear in
+the stack size,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>,
+but when averaging over a sequence of operations we found that it is
+constant,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math>.
+So, which complexity is the right one?</p>
+<p>Actually, both are correct. The worst-case complexity for a single
+call to <em>multipop</em> is linear in the worst case, but the
+<em>amortised</em> complexity is constant. This means that when
+executing <em>multipop</em> many many times, it will behave as it is
+constant time: some individual calls might take longer time, but this is
+balanced out by other calls that are fast.</p>
+<p>In the example we used a very hand-waving, informal argument, but the
+underlying idea is the concept of a <a href="section-14.html#potential"
+class="term"
+title="A concept in amortised complexity for operations on a data structure. We choose a *potential function* that associates an arbitrary non-negative value of *stored cost* (stored energy) with each state of the data structure. We then define the amortised cost of a run of the operation to be its cost as given by the the cost model plus the change in potential. The complexity modified this way is called amortised complexity. An example is adding an element to a dynamic array. When the dynamic array is not full, adding an element is quick and we store some of that saved cost by increasing the potential. When the dynamic array is full capacity, we perform an expensive reallocation, but compensate that cost by resetting the potential from a high value to zero. Let us define the potential of a dynamic array with capacity $c$ and size $n$ to be $max(2n-c,0)$. Assuming we double the capacity on reallocation, the operation of adding an element then has constant amortised complexity. The concept comes from potential energy in physics. For example, in the graviational field of the earth, kinetic energy may be stored as potential energy.">potential</a>.
+In the potential method we let cheap operations “save up” some
+additional work that can be used by more expensive operations later. In
+the example, we let each <em>push</em> save an extra operation “for
+later”, which is then used by <em>multipop</em>. In a way we can say
+that each <em>push</em> takes 2 time units instead of one, and this
+extra time unit is saved so that <em>multipop</em> can make use of it.
+These storage of “for later” operations is called the
+<em>potential</em>.</p>
+<div class="online">
+<section id="sec:example-incrementing-a-binary-counter"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Incrementing a binary counter</h4>
+<p>As another example of amortised analysis, consider the process of
+incrementing a binary counter. We want to show that this operation
+(<em>increment</em>) takes amortised constant time in the size of the
+counter. Since the counter is stored as a binary number, we say that the
+size of the counter is the number of bits it uses.</p>
+<p>The <em>increment</em> operation can be implemented like this.</p>
+<ul>
+<li>Iterate over the bits in the counter, starting from the lowest-order
+bit (the rightmost bit).
+<ul>
+<li>Change each 1-bit to a 0, until the first 0-bit is encountered.</li>
+<li>Then change this 0-bit to 1 and return.</li>
+</ul></li>
+</ul>
+<p>For example, to increment the number 175 (bitstring
+<code>10101111</code>), we flip the four rightmost 1’s to 0, and then
+the next 0-bit to 1. This results in the bitstring
+<code>10110000</code>, which is the number 176.</p>
+<p>The worst case example is when the counter consists of only 1’s, such
+as the number 255 (bitstring <code>11111111</code>). In this case the
+complexity of <em>increment</em> is linear,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>,
+in the number of bits
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.
+So what is the amortised complexity of <em>increment</em>?</p>
+<p>If we count from 0 through
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><msup><mn>2</mn><mi>n</mi></msup><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">m = 2^n-1</annotation></semantics></math>,
+what is the average cost for <em>increment</em>? Naive worst-case
+analysis says that each increment costs
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>.
+But it is rare to have so many bits processed in one single increment.
+In fact, half of the time the low-order bit is <code>0</code>, and so
+only that bit is processed. One quarter of the time, the low-order two
+bits are <code>01</code>, and so only the low-order two bits are
+processed. Another way to view this is that the low-order bit is always
+flipped, the bit to its left is flipped half the time, the next bit one
+quarter of the time, and so on. We can capture this with the following
+summation (charging costs to bits going from right to left):</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>+</mo><mfrac><mn>1</mn><mn>4</mn></mfrac><mo>+</mo><mfrac><mn>1</mn><mn>8</mn></mfrac><mo>+</mo><mi>⋯</mi><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></munderover><mfrac><mn>1</mn><msup><mn>2</mn><mi>i</mi></msup></mfrac><mo>&lt;</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">
+1 + \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \cdots
+= \sum_{i=0}^{n-1} \frac{1}{2^i}
+&lt; 2
+</annotation></semantics></math></p>
+<p>In other words, the average number of bits flipped on each increment
+is 2, leading to a total cost of only
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>⋅</mo><mi>m</mi><mo>∈</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>m</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">2 \cdot m\in O(m)</annotation></semantics></math>
+for a series of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
+increments. Therefore, the amortised cost for <em>increment</em> is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>m</mi><mo stretchy="false" form="postfix">)</mo><mi>/</mi><mi>m</mi><mo>=</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(m)/m = O(1)</annotation></semantics></math>.</p>
+</section>
+<p>Our final example uses amortised analysis to prove a relationship
+between the cost of the <a href="section-14.html#move-to-front"
+class="term"
+title="A heuristic used to maintain a self-organising list. Under this heuristic, whenever a record is accessed it is moved to the front of the list. Analogous to the least recently used heuristic for maintaining a buffer pool.">move-to-front</a>
+<a href="section-14.html#self-organising-list" class="term"
+title="A list that, over a series of search operations, will make use of some heuristic to re-order its elements in an effort to improve search times. Generally speaking, search is done sequentially from the beginning, but the self-organising heuristic will attempt to put the records that are most likely to be searched for at or near the front of the list. While typically not as efficient as binary search on a sorted list, self-organising lists do not require that the list be sorted (and so do not pay the cost of doing the sorting operation).">self-organising
+list</a> heuristic and the cost for the optimal static ordering of the
+list.</p>
+<p>Recall that, for a series of search operations, the minimum cost for
+a static list results when the list is sorted by frequency of access to
+its records. This is the optimal ordering for the records if we never
+allow the positions of records to change, because the most-frequently
+accessed record is first (and thus has least cost), followed by the next
+most frequently accessed record, and so on.</p>
+<section id="sec:example-self-organising-lists"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Self-organising lists</h4>
+<p><strong>Theorem:</strong> The total number of comparisons required by
+any series
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
+of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+or more searches on a <a href="section-14.html#self-organising-list"
+class="term"
+title="A list that, over a series of search operations, will make use of some heuristic to re-order its elements in an effort to improve search times. Generally speaking, search is done sequentially from the beginning, but the self-organising heuristic will attempt to put the records that are most likely to be searched for at or near the front of the list. While typically not as efficient as binary search on a sorted list, self-organising lists do not require that the list be sorted (and so do not pay the cost of doing the sorting operation).">self-organising
+list</a> of length
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+using the move-to-front heuristic is never more than twice the total
+number of comparisons required when series
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
+is applied to the list stored in its optimal static order.</p>
+<p><strong>Proof:</strong> Each comparison of the search key with a
+record in the list is either successful or unsuccessful. For
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
+searches, there must be exactly
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
+successful comparisons for both the self-organising list and the static
+list. The total number of unsuccessful comparisons in the
+self-organising list is the sum, over all pairs of distinct keys, of the
+number of unsuccessful comparisons made between that pair.</p>
+<p>Consider a particular pair of keys:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>.
+For any sequence of searches
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>,
+the total number of (unsuccessful) comparisons between
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
+is identical to the number of comparisons between
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
+required for the subsequence of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
+made up only of searches for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+or
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>.
+Call this subsequence
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>S</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><annotation encoding="application/x-tex">S_{AB}</annotation></semantics></math>.
+In other words, including searches for other keys does not affect the
+relative position of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
+and so does not affect the relative contribution to the total cost of
+the unsuccessful comparisons between
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>.</p>
+<p>The number of unsuccessful comparisons between
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
+made by the move-to-front heuristic on subsequence
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>S</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><annotation encoding="application/x-tex">S_{AB}</annotation></semantics></math>
+is at most twice the number of unsuccessful comparisons between
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
+required when
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>S</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><annotation encoding="application/x-tex">S_{AB}</annotation></semantics></math>
+is applied to the optimal static ordering for the list. To see this,
+assume that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>S</mi><mrow><mi>A</mi><mi>B</mi></mrow></msub><annotation encoding="application/x-tex">S_{AB}</annotation></semantics></math>
+contains
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+s and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
+s, with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>≤</mo><mi>j</mi></mrow><annotation encoding="application/x-tex">i \leq j</annotation></semantics></math>.
+Under the optimal static ordering,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+unsuccessful comparisons are required because
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
+must appear before
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+in the list (because its access frequency is higher). Move-to-front will
+yield an unsuccessful comparison whenever the request sequence changes
+from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
+or from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>.
+The total number of such changes possible is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>i</mi></mrow><annotation encoding="application/x-tex">2i</annotation></semantics></math>
+because each change involves an
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+and each
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+can be part of at most two changes.</p>
+<p>Because the total number of unsuccessful comparisons required by
+move-to-front for any given pair of keys is at most twice that required
+by the optimal static ordering, the total number of unsuccessful
+comparisons required by move-to-front for all pairs of keys is also at
+most twice as high. Because the number of successful comparisons is the
+same for both methods, the total number of comparisons required by
+move-to-front is less than twice the number of comparisons required by
+the optimal static ordering.</p>
+</section>
+</div>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-7.1.html" class="navbutton">&lt;&lt;</a>
+<a href="section-7.1.html" accesskey="p" rel="previous">Space bounds</a>
+</div>
+<div class="navlink">
+<a href="section-7.3.html" accesskey="n" rel="next">Case study: Analysing dynamic arrays</a>
+<a href="section-7.3.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

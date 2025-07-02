@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Bubble sort</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+<link href="../interactive/Sorting/BubbleSortAnalysisCON.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-3.3.html" class="navbutton">&lt;&lt;</a>
+<a href="section-3.3.html" accesskey="p" rel="previous">Overview of algorithms</a>
+</div>
+<div>
+<a href="section-3.5.html" accesskey="n" rel="next">Selection sort</a>
+<a href="section-3.5.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:bubble-sort" class="level2" data-number="3.4">
+<h2 data-number="3.4"><span class="header-section-number">3.4</span>
+Bubble sort</h2>
+<p>Our first sorting algorithm is called <a
+href="section-14.html#bubble-sort" class="term"
+title="A simple sort that requires $O(n^2)$ time in best, average, and worst cases. Even an optimised version will normally run slower than Insertion sort, so it has little to recommend it.">Bubble
+sort</a>. Bubble sort is often the first sorting algorithm that you
+learn, because it is relatively easy to understand and implement.
+However, it is rather slow, even compared to the other quadratic sorting
+algorithms that we will introduce in the next sections – <a
+href="section-14.html#selection-sort" class="term"
+title="While this sort requires $O(n^2)$ time in the best, average, and worst cases, it requires only $O(n)$ swap operations. Thus, it does relatively well in applications where swaps are expensive. It can be viewed as an optimisation on Bubble sort, where a swap is deferred until the end of each iteration.">Selection
+sort</a> and <a href="section-14.html#insertion-sort" class="term"
+title="A sorting algorithm with $O(n^2)$ average and worst case cost, and $O(n)$ best case cost. This best case cost makes it useful when we have reason to expect the input to be nearly sorted.">Insertion
+sort</a>. It’s not even particularly intuitive – nobody is going to come
+naturally to Bubble sort as a way to sort their bookshelf, their Bridge
+hand or their pile of bills, like they might with Insertion sort or
+Selection sort.</p>
+<p>Bubble sort consists of a simple double <code>for</code> loop. The
+inner <code>for</code> loop moves through the array from left to right,
+comparing adjacent elements. If an element is greater than its right
+neighbour, then the two are swapped. Once the largest element is
+encountered, this process will cause it to “bubble” up to the right of
+the array (which is where Bubble sort gets its name). The second pass
+through the array repeats this process. However, because we know that
+the largest element already reached the right of the array on the first
+pass, there is no need to compare the rightmost two elements on the
+second pass. Likewise, each succeeding pass through the array compares
+adjacent elements, looking at one less element toward the end than in
+the preceding pass. Here is an implementation:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> bubbleSort(arr):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> arr.<span class="bu">size</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="dv">0</span> .. n<span class="op">-</span><span class="dv">2</span>:</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Bubble up the i&#39;th element</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="dv">1</span> .. n<span class="op">-</span>i<span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> arr[j<span class="op">-</span><span class="dv">1</span>] <span class="op">&gt;</span> arr[j]:</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                swap(arr, j<span class="op">-</span><span class="dv">1</span>, j)</span></code></pre></div>
+<section id="sec:bubble-sort-visualisation"
+class="level4 unnumbered online">
+<h4 class="unnumbered">Bubble sort visualisation</h4>
+<div class="note">
+<p>Note that to make the explanation for the sorting algorithms as
+simple as possible, our visualisations will show the array as though it
+stored simple integers rather than more complex records. But you should
+realise that in practice, there is rarely any point to sorting an array
+of simple integers. Nearly always we want to sort more complex records
+that each have a <a href="section-14.html#key" class="term"
+title="A field or part of a larger record used to represent that record for the purpose of searching or comparing. Another term for search key.">key</a>
+value. In such cases we must have a way to associate a key value with a
+record. The sorting algorithms will simply assume that the records are
+<a href="section-14.html#comparable" class="term"
+title="The concept that two objects can be compared to determine if they are equal or not, or to determine which one is greater than the other. In set notation, elements $x$ and $y$ of a set are comparable under a given relation $R$ if either $xRy$ or $yRx$. To be reliably compared for a greater/lesser relationship, the values being compared must belong to a total order. In programming, the property of a data type such that two elements of the type can be compared to determine if they are the same (a weaker version), or which of the two is larger (a stronger version). `Comparable` is also the name of an interface in Java that asserts a comparable relationship between objects within a class, and `.compareTo()` is the `Comparable` interface method that implements the actual comparison between two objects of the class.">comparable</a>.</p>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a visualisation of the first pass of Bubble sorting an array
+of integers.</p>
+</summary>
+<p>
+<div id="bubblesortS1CON" class="ssAV" data-short-name="bubblesortS1CON" data-long-name="Bubble Sort Slideshow 1" alt="Bubble Sort Slideshow 1" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Now we continue with the second pass.</p>
+</summary>
+<p>However, since the largest element has “bubbled” to the very right,
+we will not need to look at it again.</p>
+<p>
+<div id="bubblesortS2CON" class="ssAV" data-short-name="bubblesortS2CON" data-long-name="Bubble Sort Slideshow 2" alt="Bubble Sort Slideshow 2" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>Bubble sort continues in this way until the entire array is
+sorted.</p>
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>The following visualisation shows the complete Bubble sort. You can
+input your own data if you like.</p>
+</summary>
+<p>
+<div id="bubblesortAV" class="embedContainer">
+<iframe id="bubblesortAV_iframe" aria-label="bubblesortAV" src="../interactive/Sorting/bubblesortAV.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Now try for yourself to see if you understand how Bubble sort
+works.</p>
+</summary>
+<p>
+<div id="BubsortPRO" class="embedContainer">
+<iframe id="BubsortPRO_iframe" aria-label="BubsortPRO" src="../interactive/Sorting/BubsortPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</div>
+</section>
+<section id="sec:bubble-sort-analysis" class="level3"
+data-number="3.4.1">
+<h3 data-number="3.4.1"><span class="header-section-number">3.4.1</span>
+Bubble sort analysis</h3>
+<p>We have a nested for loop, where the inner loop depends on the loop
+variable of the outer loop.</p>
+<ul>
+<li>The outer loop is iterated
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>
+times in total.</li>
+<li>In iteration
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>,
+the number of comparisons made by the inner loop is always
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mi>i</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-i-1</annotation></semantics></math>.</li>
+</ul>
+<p>So the total number of iterations is</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>2</mn><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>⋯</mi><mo>+</mo><mn>1</mn><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></munderover><mi>i</mi></mrow><annotation encoding="application/x-tex">
+(n-1) + (n-2) + \cdots + 1 = \sum_{i=1}^{n-1} i
+</annotation></semantics></math></p>
+<p>And this sum has the value
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n(n-1)/2</annotation></semantics></math>,
+which means the runtime complexity is <em>quadratic</em>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>.
+Note that this is regardless of how the initial array looks like, so
+Bubble sort has the same best- and worst-case complexity.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>The following visualisation illustrates the running time analysis of
+Bubble sort.</p>
+</summary>
+<p>
+<div id="BubbleSortAnalysisCON" class="ssAV" data-short-name="BubbleSortAnalysisCON" data-long-name="Bubble Sort Analysis Slideshow" alt="Bubble Sort Analysis Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<p>The number of swaps required depends on how often an element is less
+than the one immediately preceding it in the array. In the worst case
+this will happen in every single comparison, leading to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>
+number of swaps. If we assume that the initial array is random, we can
+expect that about half of the comparisons will lead to a swap. So the
+average case number of swaps is also quadratic,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>.
+However, if the initial array is already sorted we don’t have to perform
+any swaps at all, so in the best case the number of swaps is constant
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math>.
+(But recall that the best case is not something we should rely
+upon.)</p>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-3.3.html" class="navbutton">&lt;&lt;</a>
+<a href="section-3.3.html" accesskey="p" rel="previous">Overview of algorithms</a>
+</div>
+<div class="navlink">
+<a href="section-3.5.html" accesskey="n" rel="next">Selection sort</a>
+<a href="section-3.5.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+<script type="text/javascript" src="../interactive/Sorting/bubblesortS1CON.js"></script>
+<script type="text/javascript" src="../interactive/Sorting/bubblesortS2CON.js"></script>
+<script type="text/javascript" src="../interactive/Sorting/BubbleSortAnalysisCON.js"></script>
+</body>
+</html>
+

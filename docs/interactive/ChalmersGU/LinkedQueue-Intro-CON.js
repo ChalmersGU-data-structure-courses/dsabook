@@ -6,15 +6,10 @@ $(document).ready(function() {
   var av_name = "LinkedQueue-Intro-CON";
   var av = new JSAV(av_name);
   var pseudo = av.code([
-    "class LinkedQueue: implements Queue:",
-    "    front      // Pointer to front queue node",
-    "    rear       // Pointer to rear queue node",
-    "    queueSize  // Size of queue",
-    "",
-    "    LinkedQueue():",
-    "        front = null",
-    "        rear = null",
-    "        queueSize = 0",
+    "datatype LinkedQueue implements Queue:",
+    "    front = null",
+    "    rear = null",
+    "    size = 0",
   ], {lineNumbers: false});
 
   var leftMargin = 20;
@@ -43,8 +38,6 @@ $(document).ready(function() {
 
   // Slide
   av.umsg("On initialization, the front and rear pointers will be null.");
-  pseudo.unhighlight([2,3]);
-  pseudo.highlight([7,8]);
   list.hide();
   frontP.hide();
   rearP.hide();
@@ -55,7 +48,7 @@ $(document).ready(function() {
 
   // Slide
   av.umsg("When the queue is nonempty, <code>front</code> will always point to the header node while rear points to the last node in the queue.");
-  pseudo.unhighlight([7,8]);
+  pseudo.unhighlight([2,3]);
   listInit.hide();
   frontIP.hide();
   rearIP.hide();

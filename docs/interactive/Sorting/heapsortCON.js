@@ -5,7 +5,7 @@ $(document).ready(function() {
 
   var interpret = {
     "av_c1": "Initially, we start with our unsorted array.",
-    "av_c2": "The first step is to heapify the array. We use a Max-heap, which might seem counter-intuitive at first. But you should see why soon.",
+    "av_c2": "The first step is to heapify the array. We use a <em>max</em>-heap, which might seem counter-intuitive at first. But you should see why soon.",
     "av_c3": "Done heapifying.",
     "av_c4": "Now we will 'delete' the max element, which actually moves it to the end of the current heap.",
     "av_c5": "This is why we are using a max-heap. The maximum element is going to end up at the end of the array.",

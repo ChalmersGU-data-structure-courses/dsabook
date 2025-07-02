@@ -6,8 +6,11 @@ $(document).ready(function() {
   var av = new JSAV(av_name);
   var pseudo = av.code([
     "push(x):",
-    "    top = new Node(x, top)",
-    "    stackSize = stackSize + 1",
+    "    n = new Node()",
+    "    n.elem = x",
+    "    n.next = top",
+    "    top = n",
+    "    size = size + 1",
   ], {lineNumbers: false});
 
   // Relative offsets
@@ -41,23 +44,29 @@ $(document).ready(function() {
 
   // Slide
   av.umsg("Set the value of the new node.");
+  pseudo.unhighlight(2);
+  pseudo.highlight(3);
   av.effects.copyValue(arr, 0, newnode);
   av.step();
 
   // Slide
   av.umsg("Modify the <code>next</code> field of the newly created link node to point to the top of the stack");
+  pseudo.unhighlight(3);
+  pseudo.highlight(4);
   newnode.edgeToNext().show();
   av.step();
 
   // Slide
   av.umsg("Then set top to point to the new link node.");
+  pseudo.unhighlight(4);
+  pseudo.highlight(5);
   topPointer.target(newnode);
   av.step();
 
   // Slide
   av.umsg("Increase stack size by 1.");
   newnode.unhighlight();
-  pseudo.unhighlight(2);
-  pseudo.highlight(3);
+  pseudo.unhighlight(5);
+  pseudo.highlight(6);
   av.recorded();
 });

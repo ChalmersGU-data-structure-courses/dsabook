@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Terminology and notation</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-3.html" class="navbutton">&lt;&lt;</a>
+<a href="section-3.html" accesskey="p" rel="previous">Sorting, part 1: Simple algorithms</a>
+</div>
+<div>
+<a href="section-3.2.html" accesskey="n" rel="next">Comparing values</a>
+<a href="section-3.2.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:terminology-and-notation" class="level2"
+data-number="3.1">
+<h2 data-number="3.1"><span class="header-section-number">3.1</span>
+Terminology and notation</h2>
+<p>Formally, the <em>sorting problem</em> is to arrange a list of
+elements
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mn>1</mn></msub><mo>,</mo><msub><mi>a</mi><mn>2</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>a</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">a_1,a_2,\ldots,a_n</annotation></semantics></math>
+into any order
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>s</mi><annotation encoding="application/x-tex">s</annotation></semantics></math>
+such that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><msub><mi>s</mi><mn>1</mn></msub></msub><mo>≤</mo><msub><mi>a</mi><msub><mi>s</mi><mn>2</mn></msub></msub><mo>≤</mo><mi>⋯</mi><mo>≤</mo><msub><mi>a</mi><msub><mi>s</mi><mi>n</mi></msub></msub></mrow><annotation encoding="application/x-tex">a_{s_1}\leq a_{s_2}\leq\cdots\leq a_{s_n}</annotation></semantics></math>.
+In other words, the sorting problem is to arrange a set of elements so
+that they are in non-decreasing order.</p>
+<p>Note that the definition above is for <em>natural sorting</em>. If we
+instead are interested in the more general problem of <em>key-based
+sorting</em>, the definition becomes slightly more complicated: The
+(key-based) <em>sorting problem</em> is to arrange the list into any
+order
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>s</mi><annotation encoding="application/x-tex">s</annotation></semantics></math>
+such that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><msub><mi>s</mi><mn>1</mn></msub></msub><mo>,</mo><msub><mi>a</mi><msub><mi>s</mi><mn>2</mn></msub></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>a</mi><msub><mi>s</mi><mi>n</mi></msub></msub></mrow><annotation encoding="application/x-tex">a_{s_1},a_{s_2},\ldots,a_{s_n}</annotation></semantics></math>
+have keys obeying the property
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><msub><mi>s</mi><mn>1</mn></msub></msub><mo>≤</mo><msub><mi>k</mi><msub><mi>s</mi><mn>2</mn></msub></msub><mo>≤</mo><mi>⋯</mi><mo>≤</mo><msub><mi>k</mi><msub><mi>s</mi><mi>n</mi></msub></msub></mrow><annotation encoding="application/x-tex">k_{s_1}\leq k_{s_2}\leq\cdots\leq k_{s_n}</annotation></semantics></math>.</p>
+<section id="sec:comparing-algorithms-1" class="level3"
+data-number="3.1.1">
+<h3 data-number="3.1.1"><span class="header-section-number">3.1.1</span>
+Comparing algorithms</h3>
+<p>When comparing two sorting algorithms, the simplest approach would be
+to program both and measure their running times. This is an example of
+<em>empirical comparison</em> (see <a
+href="section-3.8.html#sec:empirical-analysis-and-code-tuning">Section 3.8</a>).
+However, doing fair empirical comparisons can be tricky because the
+running time for many sorting algorithms depends on specifics of the
+input values. The number of records, the size of the keys and the
+records, the allowable range of the key values, and the amount by which
+the input records are “out of order” can all greatly affect the relative
+running times for sorting algorithms.</p>
+<p>When analysing sorting algorithms, it is traditional to measure the
+cost by <em>counting the number of comparisons</em> made between keys.
+This measure is usually closely related to the actual running time for
+the algorithm and has the advantage of being machine and data-type
+independent. However, in some cases records might be so large that their
+physical movement might take a significant fraction of the total running
+time. If so, it might be appropriate to measure the cost by counting
+<em>the number of swap operations</em> performed by the algorithm.</p>
+<p>In most applications we can assume that all records and keys are of
+fixed length, and that a single comparison or a single swap operation
+requires a constant amount of time regardless of which keys are
+involved. However, some special situations “change the rules” for
+comparing sorting algorithms. For example, an application with records
+or keys having widely varying length (such as sorting a sequence of
+variable length strings) cannot expect all comparisons to cost roughly
+the same. Not only do such situations require special measures for
+analysis, they also will usually benefit from a special-purpose sorting
+technique.</p>
+<p>Other applications require that a small number of records be sorted,
+but that the sort be performed frequently. An example would be an
+application that repeatedly sorts groups of five numbers. In such cases,
+asymptotic analysis is usually of not much help. Instead it will be
+important to reduce the constant factors that are ignored by complexity
+analysis. Then we might very well find that the best algorithm can be
+one of the very simple “slow” algorithms, such as <a
+href="section-14.html#insertion-sort" class="term"
+title="A sorting algorithm with $O(n^2)$ average and worst case cost, and $O(n)$ best case cost. This best case cost makes it useful when we have reason to expect the input to be nearly sorted.">Insertion
+sort</a>.</p>
+<p>Finally, some situations require that a sorting algorithm use as
+little memory as possible. We will call attention to sorting algorithms
+that require significant extra memory beyond the input array.</p>
+</section>
+<section id="sec:terminology" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2"><span class="header-section-number">3.1.2</span>
+Terminology</h3>
+<p>Here are some important terminology which we can use to categorise
+different algorithms.</p>
+<dl>
+<dt>Stability</dt>
+<dd>
+As defined, the sorting problem allows input with two or more records
+that have the same key value. But it does not specify how these should
+be ordered, which means that there can be several possible solutions to
+the problem. Sometimes it is desirable to maintain the initial ordering
+between two elements that compare equal. A sorting algorithm is said to
+be <em>stable</em> if it does not change the relative ordering of
+records with identical key values. Many, but not all, of the sorting
+algorithms presented in this book are stable, or can be made stable with
+minor changes.
+</dd>
+<dt>Adaptivity</dt>
+<dd>
+An <em>adaptive</em> sorting algorithm can take advantage of the
+existing order in the input. In general this means that the algorithm
+runs faster if the list is almost sorted, compared to if the list is
+completely random. The classic example of an adaptive sorting algorithm
+is <a href="section-14.html#insertion-sort" class="term"
+title="A sorting algorithm with $O(n^2)$ average and worst case cost, and $O(n)$ best case cost. This best case cost makes it useful when we have reason to expect the input to be nearly sorted.">Insertion
+sort</a>.
+</dd>
+<dt>In-place</dt>
+<dd>
+An <em>in-place</em> sorting algorithm modifies the input array directly
+and does not build a new array for the sorted result. Usually one also
+requires that the algorithm does not allocate too much extra space while
+operating, where “not too much” can mean at most logarithmic extra
+memory in the size of the array. One sorting algorithm which is
+<em>not</em> in-place is <a href="section-14.html#mergesort"
+class="term"
+title="A sorting algorithm that requires $O(n \log n)$ in the best, average, and worst cases. Conceptually it is simple: Split the list in half, sort the halves, then merge them together. It is a bit complicated to implement efficiently on an array.">Mergesort</a>,
+while most other algorithms are.
+</dd>
+</dl>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-3.html" class="navbutton">&lt;&lt;</a>
+<a href="section-3.html" accesskey="p" rel="previous">Sorting, part 1: Simple algorithms</a>
+</div>
+<div class="navlink">
+<a href="section-3.2.html" accesskey="n" rel="next">Comparing values</a>
+<a href="section-3.2.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

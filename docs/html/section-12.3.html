@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Separate chaining</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+<link href="../interactive/Hashing/openhashCON.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-12.2.html" class="navbutton">&lt;&lt;</a>
+<a href="section-12.2.html" accesskey="p" rel="previous">Converting objects to table indices</a>
+</div>
+<div>
+<a href="section-12.4.html" accesskey="n" rel="next">Implementing sets and maps using separate chaining</a>
+<a href="section-12.4.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:separate-chaining" class="level2" data-number="12.3">
+<h2 data-number="12.3"><span class="header-section-number">12.3</span>
+Separate chaining</h2>
+<p>While the goal of a hash function is to minimise collisions, some
+collisions are unavoidable in practice. Thus, hashing implementations
+must include some form of collision resolution policy. Collision
+resolution techniques can be broken into two classes: <a
+href="section-14.html#separate-chaining" class="term"
+title="In hashing, a synonym for open hashing">separate chaining</a>
+(also called open hashing) and <a href="section-14.html#open-addressing"
+class="term"
+title="A hash system where all records are stored in slots of the hash table. This is in contrast to an open hash system.">open
+addressing</a> (also called closed hashing). (Yes, it is confusing when
+“open hashing” means the opposite of “open addressing”, but
+unfortunately, that is the way it is.) The difference between the two
+has to do with whether collisions are stored outside the table (separate
+chaining), or whether collisions result in storing one of the records at
+another slot in the table (open addressing).</p>
+<p>The simplest form of separate chaining defines each slot in the hash
+table to be the head of a linked list. All records that hash to a
+particular slot are placed on that slot’s linked list. The following
+figure illustrates a hash table where each slot points to a linked list
+to hold the records associated with that slot. The hash function used is
+the simple mod function.</p>
+<p>
+<div id="openhashCON" class="ssAV" data-short-name="openhashCON" data-long-name="Hashing/openhashCON" alt="Hashing/openhashCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>Records within a slot’s list can be ordered in several ways: by
+insertion order, by key value order, or by frequency-of-access order.
+Ordering the list by key value provides an advantage in the case of an
+unsuccessful search, because we know to stop searching the list once we
+encounter a key that is greater than the one being searched for. If
+records on the list are unordered or ordered by frequency, then an
+unsuccessful search will need to visit every record on the list.</p>
+<p>Given a table of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
+storing
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+records, the hash function will (ideally) spread the records evenly
+among the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
+positions in the table, yielding on average
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mi>m</mi></mrow><annotation encoding="application/x-tex">n/m</annotation></semantics></math>
+records for each list. This value,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mi>m</mi></mrow><annotation encoding="application/x-tex">n/m</annotation></semantics></math>,
+is commonly called the <a href="section-14.html#load-factor"
+class="term"
+title="In hashing this is the fraction of the hash table slots that contain a record. Hash systems usually try to keep the load factor below 50%.">load
+factor</a>.</p>
+<p>Assuming that the table has more slots than there are records to be
+stored, we can hope that few slots will contain more than one record. In
+the case where a list is empty or has only one record, a search requires
+only one access to the list. Thus, the average cost for hashing should
+be
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math>.
+However, if clustering causes many records to hash to only a few of the
+slots, then the cost to access a record will be much higher because many
+elements on the linked list must be searched.</p>
+<p>Separate chaining is most appropriate when the hash table is kept in
+main memory, with the lists implemented by a standard in-memory linked
+list. Storing a separate chaining hash table on disk in an efficient way
+is difficult, because members of a given linked list might be stored on
+different disk blocks. This would result in multiple disk accesses when
+searching for a particular key value, which defeats the purpose of using
+hashing.</p>
+<p>There are similarities between separate chaining and <a
+href="section-14.html#binsort" class="term"
+title="A sort that works by taking each record and placing it into a bin based on its value. The bins are then gathered up in order to sort the list. It is generally not practical in this form, but it is the conceptual underpinning of the radix sort.">Binsort</a>.
+One way to view separate chaining is that each record is simply placed
+in a bin. While multiple records may hash to the same bin, this initial
+binning should still greatly reduce the number of records accessed by a
+search operation. In a similar fashion, a simple Binsort reduces the
+number of records in each bin to a small number that can be sorted in
+some other way.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<section id="sec:exercise-practicing-separate-chaining"
+class="level4 unnumbered">
+<h4 class="unnumbered">Exercise: Practicing separate chaining</h4>
+</summary>
+<p>
+<div id="OpenHashPRO" class="embedContainer">
+<iframe id="OpenHashPRO_iframe" aria-label="OpenHashPRO" src="../interactive/Hashing/OpenHashPRO.html" width="100%" height="630" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</section>
+</div>
+<section id="sec:alternatives-to-a-linked-list" class="level3"
+data-number="12.3.1">
+<h3 data-number="12.3.1"><span
+class="header-section-number">12.3.1</span> Alternatives to a linked
+list</h3>
+<p>There is nothing that requires us to use a linked list as the
+underlying data structure, it could be a dynamic array or a balanced
+search tree too. (In fact, Java’s hash tables use a combination of
+linked lists and balanced trees.)</p>
+<p>Conceptually, a hash table can use any kind of collection data
+structure – the only thing that the actual array does is to partition
+the large collection into
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
+disjoint collections. If the hash function is good and distributes the
+objects evenly among the bins, all operations will become
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
+times faster (because the bins are
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
+times smaller than the original large collection).</p>
+</section>
+<section id="sec:resizing-is-important" class="level3"
+data-number="12.3.2">
+<h3 data-number="12.3.2"><span
+class="header-section-number">12.3.2</span> Resizing is important</h3>
+<p>Just as for dynamic arrays, it is important that we resize the
+internal table when it becomes too large (or too small). That is, we
+change the size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
+so that it is proportional to the number of table entries.</p>
+<p>If
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
+is always proportional to the number of entries, <em>and</em> if we have
+a good hash function, the number of elements in a bin will remain
+approximately constant. And then all operations will be expected
+constant time.</p>
+</section>
+<section id="sec:implementation" class="level3" data-number="12.3.3">
+<h3 data-number="12.3.3"><span
+class="header-section-number">12.3.3</span> Implementation</h3>
+<p>Now we will give a very generic overview how to implement a separate
+chaining hash table. In the next section we will discuss implementation
+in more detail.</p>
+<p>As already mentioned, a separate chaining hash table
+<em>partitions</em> its elements into an array of smaller collections,
+or <em>bins</em>.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> SeparateChainingHashTable:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    table: <span class="bu">Array</span> <span class="kw">of</span> Collections</span></code></pre></div>
+<p>Note that we don’t have to know what type of collections the bins
+are, the only thing we have to know is that they support the same
+methods that we want the hash table to support. To implement any kind of
+method, we first have to to decide on a bin and then <em>delegate</em>
+the method to that bin. We use the hash function to decide which bin to
+delegate to, and then simply call the method of that bin, with the same
+arguments as we got in the first place:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> SeparateChainingHashTable:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    method(elem, ...extra arguments...):</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        bin <span class="op">=</span> table[hashIndex(elem)]</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> bin.method(elem, ...extra arguments...)</span></code></pre></div>
+<p>As explained in the previous chapter, the hash index for an element
+consists of first getting the hash code and then compressing it to an
+array index.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> SeparateChainingHashTable:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    hashIndex(elem):</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">hash</span> <span class="op">=</span> elem.hashCode()</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">hash</span> <span class="op">=</span> <span class="bu">hash</span> <span class="op">&amp;</span> <span class="bn">0x7fffffff</span>  <span class="co">// make the hash code non-negative</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">hash</span> <span class="op">%</span> table.<span class="bu">size</span></span></code></pre></div>
+<p>There are of course some more details one has to take care of to get
+a working implementation. For example, we have not discussed how to
+calculate the size of the hash table, i.e., the total number of
+elements. We have also not discussed how to handle bins that are not
+initialised yet.</p>
+</section>
+<section id="sec:load-factor-and-resizing" class="level3"
+data-number="12.3.4">
+<h3 data-number="12.3.4"><span
+class="header-section-number">12.3.4</span> Load factor and
+resizing</h3>
+<p>The efficiency of a hash table depends on two factors:</p>
+<ol type="1">
+<li>how well the elements are distributed between the bins</li>
+<li>the size of each bin</li>
+</ol>
+<p>The first factor depends on the hash function, and for now we simply
+assume that it is good – meaning that it distributes the elements evenly
+among the bins. The second factor depends on the load factor – if there
+are
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+elements in total and we have
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
+bins, then there are
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mi>m</mi></mrow><annotation encoding="application/x-tex">n/m</annotation></semantics></math>
+elements per bin on average. Assuming that our underlying collections
+are simple linked lists, then all main operations (searching, adding,
+deleting) are linear in the load factor.</p>
+<p>The key point to making hash tables efficient is to make sure that
+the load factor never becomes larger than a constant – the <em>maximum
+load factor</em>. If we have a constant load factor and a good hash
+function, then all operations on hash tables will be constant time,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math>.</p>
+<p>To be able to do this we have to <em>resize</em> the internal table
+when the number of elements grow. But we already know how to do this –
+use a dynamic array! So, whenever we implement a method that can change
+the number of elements, we have to check if we need to resize the table.
+Here is how we can do this:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> SeparateChainingHashTable:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    method(elem, ...extra arguments...):</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        bin <span class="op">=</span> table[hashIndex(elem)]</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> bin.method(elem, ...extra arguments...)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> load factor <span class="kw">is</span> too large:</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>            resizeTable(table.<span class="bu">size</span> <span class="op">*</span> MULTIPLIER)</span></code></pre></div>
+<p>Recall from the dynamic arrays that we have to <em>multiply</em> by a
+factor (the <code>MULTIPLIER</code>) when resizing the table, not adding
+a constant.</p>
+<p>When we resize the internal table, it is very important that we
+<em>do not keep</em> the old hash indices for the keys, because they
+will not be the same after resizing. Instead we save the current
+internal table to a temporary variable, and reinitialise the table to
+the new capacity. Then we iterate through all bins and entries in the
+old table, and simply insert them again into the new resized table.</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> SeparateChainingHashTable:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    resizeTable(newCapacity):</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        oldTable <span class="op">=</span> table                <span class="co">// Remember the old table.</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        table <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(newCapacity)  <span class="co">// Reset the internal table.</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">size</span> <span class="op">=</span> <span class="dv">0</span>                        <span class="co">// Reset the number of elements.</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="kw">each</span> bin <span class="kw">in</span> oldTable:</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>            <span class="bu">add</span> <span class="kw">each</span> elem <span class="kw">in</span> bin</span></code></pre></div>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-12.2.html" class="navbutton">&lt;&lt;</a>
+<a href="section-12.2.html" accesskey="p" rel="previous">Converting objects to table indices</a>
+</div>
+<div class="navlink">
+<a href="section-12.4.html" accesskey="n" rel="next">Implementing sets and maps using separate chaining</a>
+<a href="section-12.4.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+<script type="text/javascript" src="../interactive/Hashing/openhashCON.js"></script>
+</body>
+</html>
+

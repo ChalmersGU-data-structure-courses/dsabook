@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Insertion sort</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+<link href="../interactive/Sorting/InsertionSort.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-3.5.html" class="navbutton">&lt;&lt;</a>
+<a href="section-3.5.html" accesskey="p" rel="previous">Selection sort</a>
+</div>
+<div>
+<a href="section-3.7.html" accesskey="n" rel="next">Summary analysis of basic sorting algorithms</a>
+<a href="section-3.7.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:insertion-sort" class="level2" data-number="3.6">
+<h2 data-number="3.6"><span class="header-section-number">3.6</span>
+Insertion sort</h2>
+<p>Consider again the problem of sorting a pile of books. Another
+intuitive approach might be to pick up the two topmost books in the pile
+and put them in order in the bookshelf. Then you take another book from
+the pile and put it in the bookshelf, in the correct position with
+respect to the first two, and so on. As you take each book, you would
+add it in the bookshelf in the correct position to always keep the shelf
+sorted. This simple approach is the inspiration for our third sorting
+algorithm, called <a href="section-14.html#insertion-sort" class="term"
+title="A sorting algorithm with $O(n^2)$ average and worst case cost, and $O(n)$ best case cost. This best case cost makes it useful when we have reason to expect the input to be nearly sorted.">Insertion
+sort</a>.</p>
+<p>Just as for Selection sort, the description above is not in-place.
+But just as for Selection sort, it’s relatively easy to turn it into an
+in-place algorithm, by remembering an invisible separator between the
+sorted books (on the left) and the still-unsorted books (on the
+right).</p>
+<p>Insertion sort iterates through a list of elements. For each
+iteration, the current element is inserted in turn at the correct
+position within a sorted list composed of those elements already
+processed. Here is an implementation. The input is an array named
+<code>arr</code> that stores
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+elements.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> insertionSort(arr):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> arr.<span class="bu">size</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="dv">1</span> .. n<span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Move the i&#39;th element to its correct position.</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        j <span class="op">=</span> i</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> j <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> arr[j] <span class="op">&lt;</span> arr[j<span class="op">-</span><span class="dv">1</span>]:</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>            swap(arr, j, j<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            j <span class="op">=</span> j<span class="op">-</span><span class="dv">1</span></span></code></pre></div>
+<section id="sec:insertion-sort-visualisation"
+class="level4 unnumbered online">
+<h4 class="unnumbered">Insertion sort visualisation</h4>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here we see the first few iterations of Insertion sort.</p>
+</summary>
+<p>
+<div id="insertionsortCON" class="ssAV" data-short-name="insertionsortCON" data-long-name="Insertion Sort Slideshow" alt="Insertion Sort Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<p>This continues on with each element in turn. Call the current element
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>.
+Insertion sort will move it to the left so long as it is smaller than
+element immediately preceding it. As an element is less than or equal to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>
+is encountered, <code>insertionSort</code> is done with that element
+because all elements to its left in the array must be smaller.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>The following visualisation shows the complete Insertion sort. You
+can input your own data if you like.</p>
+</summary>
+<p>
+<div id="insertionsortAV" class="embedContainer">
+<iframe id="insertionsortAV_iframe" aria-label="insertionsortAV" src="../interactive/Sorting/insertionsortAV.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Now try for yourself to see if you understand how Insertion sort
+works.</p>
+</summary>
+<p>
+<div id="InssortPRO" class="embedContainer">
+<iframe id="InssortPRO_iframe" aria-label="InssortPRO" src="../interactive/Sorting/InssortPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</div>
+</section>
+<section id="sec:insertion-sort-analysis" class="level3"
+data-number="3.6.1">
+<h3 data-number="3.6.1"><span class="header-section-number">3.6.1</span>
+Insertion sort analysis</h3>
+<p>Just as for the previous sorting algorithms, we have a nested for
+loop, where the inner loop depends on the loop variable of the outer
+loop.</p>
+<ul>
+<li>The outer loop is iterated
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>
+times in total.</li>
+<li>The inner loop is harder to analyse since it depends on how many
+elements in positions
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>,</mo><mi>…</mi><mo>,</mo><mi>i</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0,\ldots,i-1</annotation></semantics></math>
+are smaller than the element in position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>.
+<ul>
+<li>in the absolute worst case, we always have to move the element to
+the front of the list, so the number of comparisons will be
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i-1</annotation></semantics></math></li>
+<li>in the best case, the element is already in place, and then we only
+need one comparison</li>
+</ul></li>
+</ul>
+<p>Therefore, the worst case complexity of Insertion sort is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mo>∑</mo><mn>0</mn><mi>n</mi></msubsup><mi>i</mi></mrow><annotation encoding="application/x-tex">\sum_0^n i</annotation></semantics></math>,
+which is quadratic,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>.
+In the best case – when the list is already sorted – the complexity is
+instead linear,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>,
+because we only have to do one comparison per iteration.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is an explanation of the worst case cost of Insertion sort.</p>
+</summary>
+<p>
+<div id="InsertionSortWorstCaseCON" class="ssAV" data-short-name="InsertionSortWorstCaseCON" data-long-name="Insertion Sort Worst Case Slideshow" alt="Insertion Sort Worst Case Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>And here is an explanation of the cost of the best case.</p>
+</summary>
+<p>
+<div id="InsertionSortBestCaseCON" class="ssAV" data-short-name="InsertionSortBestCaseCON" data-long-name="Insertion Sort Best Case Slideshow" alt="Insertion Sort Best Case Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>And here is the average case cost.</p>
+</summary>
+<p>
+<div id="InsertionSortAverageCaseCON" class="ssAV" data-short-name="InsertionSortAverageCaseCON" data-long-name="Insertion Sort Average Case Slideshow" alt="Insertion Sort Average Case Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<p>While the best case is significantly faster than the average and
+worst cases, the average and worst cases are usually more reliable
+indicators of the “typical” running time. However, there are situations
+where we can expect the input to be in sorted or nearly sorted order.
+One example is when an already sorted list is slightly disordered by a
+small number of additions to the list; restoring sorted order using
+Insertion sort might be a good idea if we know that the disordering is
+slight. And even when the input is not perfectly sorted, Insertion
+sort’s cost goes up in proportion to the number of inversions. So a
+“nearly sorted” list will always be cheap to sort with Insertion sort.
+An example of an algorithm that take advantage of Insertion sort’s
+near-best-case running time is <a href="section-14.html#shellsort"
+class="term"
+title="A sort that relies on the best-case cost of Insertion sort to improve over $O(n^2)$ worst case cost.">Shellsort</a>.</p>
+<p>Counting comparisons or swaps yields similar results. Each time
+through the inner <code>for</code> loop yields both a comparison and a
+swap, except the last (i.e., the comparison that fails the inner
+<code>for</code> loop’s test), which has no swap. Thus, the number of
+swaps for the entire sort operation is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>
+less than the number of comparisons. This is 0 in the best case, and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>
+in the average and worst cases.</p>
+<p>Later we will see algorithms whose growth rate is much better than
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math>.
+Thus for larger arrays, Insertion sort will not be so good a performer
+as other algorithms. So Insertion sort is not the best sorting algorithm
+to use in most situations. But there are special situations where it is
+ideal. We already know that Insertion sort works great when the input is
+sorted or nearly so. Another good time to use Insertion sort is when the
+array is very small, since Insertion sort is so simple. The algorithms
+that have better asymptotic growth rates tend to be more complicated,
+which leads to larger constant factors in their running time. That means
+they typically need fewer comparisons for larger arrays, but they cost
+more per comparison. This observation might not seem that helpful, since
+even an algorithm with high cost per comparison will be fast on small
+input sizes. But there are times when we might need to do many, many
+sorts on very small arrays. You should spend some time right now trying
+to think of a situation where you will need to sort many small arrays.
+Actually, it happens a lot.</p>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-3.5.html" class="navbutton">&lt;&lt;</a>
+<a href="section-3.5.html" accesskey="p" rel="previous">Selection sort</a>
+</div>
+<div class="navlink">
+<a href="section-3.7.html" accesskey="n" rel="next">Summary analysis of basic sorting algorithms</a>
+<a href="section-3.7.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+<script type="text/javascript" src="../interactive/Sorting/insertionsortCON.js"></script>
+<script type="text/javascript" src="../interactive/Sorting/InsertionSortWorstCaseCON.js"></script>
+<script type="text/javascript" src="../interactive/Sorting/InsertionSortBestCaseCON.js"></script>
+<script type="text/javascript" src="../interactive/Sorting/InsertionSortAverageCaseCON.js"></script>
+</body>
+</html>
+

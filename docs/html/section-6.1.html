@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Collections</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-6.html" class="navbutton">&lt;&lt;</a>
+<a href="section-6.html" accesskey="p" rel="previous">Stacks, queues, and lists</a>
+</div>
+<div>
+<a href="section-6.2.html" accesskey="n" rel="next">Stacks and queues</a>
+<a href="section-6.2.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:collections" class="level2" data-number="6.1">
+<h2 data-number="6.1"><span class="header-section-number">6.1</span>
+Collections</h2>
+<p>A <em>collection</em> is a general term for structures like lists and
+queues. It holds multiple elements and supports two main operations:
+checking the number of elements and iterating through them one at a
+time.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Collection</span> <span class="kw">of</span> T:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// We assume that we can iterate over the elements in the collection, using a for loop.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span>: <span class="bu">Int</span>               <span class="co">// The number of elements in this collection.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">isEmpty</span>() <span class="op">-&gt;</span> Bool:      <span class="co">// Returns true if the collection is empty.</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">size</span> <span class="op">==</span> <span class="dv">0</span></span></code></pre></div>
+<p>Note that this very interface will not be implemented as it is, but
+instead we will use this as a base interface that we extend in different
+ways, e.g., for lists or sets or priority queues.</p>
+<section id="sec:what-is-a-sequence" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1"><span class="header-section-number">6.1.1</span>
+What is a sequence?</h3>
+<p>We all have an intuitive understanding of what we mean by a “list”.
+We want to turn this intuitive understanding into a concrete data
+structure with implementations for its operations. The most important
+concept related to lists is that of <a href="section-14.html#position"
+class="term"
+title="The defining property of the list ADT, this is the concept that list elements are in a position. Many list ADTs support access by position.">position</a>.
+In other words, we perceive that there is a first element in the list, a
+second element, and so on. So, define a <a href="section-14.html#list"
+class="term"
+title="A finite, ordered sequence of data items known as elements. This is close to the mathematical concept of a sequence. Note that &#39;ordered&#39; in this definition means that the list elements have position. It does not refer to the relationship between key values for the list elements (that is, &#39;ordered&#39; does not mean &#39;sorted&#39;).">list</a>
+to be a finite, ordered sequence of data items known as <a
+href="section-14.html#element" class="term"
+title="One value or member in a set.">elements</a>. This is close to the
+mathematical concept of a <a href="section-14.html#sequence"
+class="term"
+title="In set notation, a collection of elements with an order, and which may contain duplicate-valued elements. A sequence is also sometimes called a tuple or a vector.">sequence</a>.</p>
+<p>“Ordered” in this definition means that each element has a position
+in the list. So the term “ordered” in this context does
+<strong><em>not</em></strong> mean that the list elements are sorted by
+value. (Of course, we can always choose to sort the elements on the list
+if we want; it’s just that keeping the elements sorted is not an
+inherent property of being a list.)</p>
+<p>Each list element must have some data type. In the simple list
+implementations discussed in this chapter, all elements of the list are
+usually assumed to have the same data type, although there is no
+conceptual objection to lists whose elements have differing data types
+if the application requires it. The operations defined as part of the
+list <a href="section-14.html#adt" class="term"
+title="Abbreviated ADT. The specification of a data type within some language, independent of an implementation. The interface for the ADT is defined in terms of a type and a set of operations on that type. The behaviour of each operation is determined by its inputs and outputs. An ADT does not specify *how* the data type is implemented. These implementation details are hidden from the user of the ADT and protected from outside access, a concept referred to as encapsulation.">ADTs</a>
+depend on the elemental <a href="section-14.html#data-type" class="term"
+title="A type together with a collection of operations to manipulate the type.">data
+type</a>. For example, the queue ADT can be used for queues of integers,
+queues of characters, queues of payroll records, even queues of
+queues.</p>
+<p>A list is said to be <a href="section-14.html#empty" class="term"
+title="For a container class, the state of containing no elements.">empty</a>
+when it contains no elements. The number of elements currently stored is
+called the <a href="section-14.html#length" class="term"
+title="In a list, the number of elements. In a string, the number of characters.">length</a>
+(or size) of the list. The beginning of the list is called the <a
+href="section-14.html#head" class="term"
+title="The beginning of a list.">head</a>, the end of the list is called
+the <a href="section-14.html#tail" class="term"
+title="The end of a list.">tail</a>.</p>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-6.html" class="navbutton">&lt;&lt;</a>
+<a href="section-6.html" accesskey="p" rel="previous">Stacks, queues, and lists</a>
+</div>
+<div class="navlink">
+<a href="section-6.2.html" accesskey="n" rel="next">Stacks and queues</a>
+<a href="section-6.2.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

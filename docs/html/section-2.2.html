@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Invariants, preconditions, and postconditions</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-2.1.html" class="navbutton">&lt;&lt;</a>
+<a href="section-2.1.html" accesskey="p" rel="previous">Problems, algorithms, and programs</a>
+</div>
+<div>
+<a href="section-2.3.html" accesskey="n" rel="next">Comparing algorithms</a>
+<a href="section-2.3.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:invariants-preconditions-and-postconditions"
+class="level2" data-number="2.2">
+<h2 data-number="2.2"><span class="header-section-number">2.2</span>
+Invariants, preconditions, and postconditions</h2>
+<p>When we formulate a problem, and describe a data structure or an
+algorithm, it is useful to describe them in terms of invariants, or pre-
+and postconditions.</p>
+<p>These properties are very useful tools for analysing the correctness
+of an algorithm. But they are also pedagogical tools, they help our
+understanding how an data structure or algorithm works.</p>
+<section id="sec:invariants" class="level4 unnumbered">
+<h4 class="unnumbered">Invariants</h4>
+<p>Simply formulated, an invariant is a condition (or a set of
+conditions) that must always hold for your data structure, or
+algorithm.</p>
+<p>Invariants can be more or less detailed, but if we make them too
+detailed they might be a hinder for our understanding. Therefore we will
+keep them on a quite high level, in line with our decision to present
+algorithms in high-level pseudocode. We trust that you, the reader, is
+experienced enough to translate both pseudocode and invariants into more
+detailed descriptions.</p>
+</section>
+<section id="sec:preconditions-and-postconditions"
+class="level4 unnumbered">
+<h4 class="unnumbered">Preconditions and postconditions</h4>
+<p>Invariants can often be formulated as preconditions and
+postconditions on an algorithm: what do we assume of the inputs to the
+algorithm, and what can we promise about the output if the input is
+well-formed?</p>
+<p>As an example, assume that we want to insert an element into a sorted
+list. An natural precondition is then that the input list is already
+sorted, and a postcondition would then be that the list is still sorted
+after the element is inserted. These specific pre- and postconditions
+are perhaps too obvious, so we usually don’t spell them out – they are
+understood from the problem formulation, which says that we are working
+with a sorted list.</p>
+<p>Keeping in line with our high-level approach, we often don’t
+formulate specific pre- and postconditions, but instead write more
+abstract invariants.</p>
+</section>
+<section id="sec:example-binary-search-1"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Binary search</h4>
+<p>In <a href="section-1.6.html#sec:binary-search">Section 1.6.1</a> we
+introduced binary search. What kind of invariants can be useful to
+understand the algorithm better? A precondition is of course that the
+array is sorted, but this is so obvious that we don’t have to spell it
+out.</p>
+<p>More interesting is to look into the algorithm itself. Binary search
+consists of a loop which updates two variables, <code>low</code> and
+<code>high</code>. So, can we say something about these variables?</p>
+<p>Yes, we can say that after each iteration of the binary search loop,
+we know that the value we search for lies between the cells pointed to
+by <code>low</code> and <code>high</code> (if it’s in the array at all).
+This means that we can formulate the following invariants:</p>
+<ul>
+<li>When searching for <code>v</code> in a sorted array
+<code>arr</code>, then <code>arr[low]</code>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>≤</mo><annotation encoding="application/x-tex">\leq</annotation></semantics></math>
+<code>v</code>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>≤</mo><annotation encoding="application/x-tex">\leq</annotation></semantics></math>
+<code>arr[high]</code> after each iteration of the main loop.</li>
+<li>The interval <code>high</code> - <code>low</code> strictly decreases
+in each iteration.</li>
+</ul>
+<p>Knowing these invariants, it becomes much easier to convince
+ourselves that the algorithm is correct and always terminates.</p>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-2.1.html" class="navbutton">&lt;&lt;</a>
+<a href="section-2.1.html" accesskey="p" rel="previous">Problems, algorithms, and programs</a>
+</div>
+<div class="navlink">
+<a href="section-2.3.html" accesskey="n" rel="next">Comparing algorithms</a>
+<a href="section-2.3.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

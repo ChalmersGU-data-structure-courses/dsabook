@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Graph representations</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-13.1.html" class="navbutton">&lt;&lt;</a>
+<a href="section-13.1.html" accesskey="p" rel="previous">Definitions and properties</a>
+</div>
+<div>
+<a href="section-13.3.html" accesskey="n" rel="next">Implementing graphs</a>
+<a href="section-13.3.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:graph-representations" class="level2"
+data-number="13.2">
+<h2 data-number="13.2"><span class="header-section-number">13.2</span>
+Graph representations</h2>
+<p>There are two commonly used methods for representing graphs. The <a
+href="section-14.html#adjacency-matrix" class="term"
+title="An implementation for a graph that uses a 2-dimensional array where each row and each column corresponds to a vertex in the graph. A given row and column in the matrix corresponds to an edge from the vertex corresponding to the row to the vertex corresponding to the column.">adjacency
+matrix</a> for a graph is a
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="false" form="prefix">|</mo><mi>×</mi><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|\mathbf{V}| \times |\mathbf{V}|</annotation></semantics></math>
+array. We typically label the vertices from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mn>0</mn></msub><annotation encoding="application/x-tex">v_0</annotation></semantics></math>
+through
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mrow><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="false" form="prefix">|</mo><mi>−</mi><mn>1</mn></mrow></msub><annotation encoding="application/x-tex">v_{|\mathbf{V}|-1}</annotation></semantics></math>.
+Row
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+of the adjacency matrix contains entries for vertex
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>i</mi></msub><annotation encoding="application/x-tex">v_i</annotation></semantics></math>.
+Column
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>
+in row
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+is marked if there is an edge from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>i</mi></msub><annotation encoding="application/x-tex">v_i</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>j</mi></msub><annotation encoding="application/x-tex">v_j</annotation></semantics></math>
+and is not marked otherwise. The space requirements for the adjacency
+matrix are
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><msup><mo stretchy="false" form="prefix">|</mo><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(|\mathbf{V}|^2)</annotation></semantics></math>.</p>
+<p>The second common representation for graphs is the <a
+href="section-14.html#adjacency-list" class="term"
+title="An implementation for a graph that uses an (array-based) list to represent the vertices of the graph, and each vertex is in turn represented by a (linked) list of the vertices that are neighbours.">adjacency
+list</a>. The adjacency list is an array of linked lists. The array is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|\mathbf{V}|</annotation></semantics></math>
+items long, with position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+storing a pointer to the linked list of edges for vertex
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>i</mi></msub><annotation encoding="application/x-tex">v_i</annotation></semantics></math>.
+This linked list represents the edges by the vertices that are adjacent
+to vertex
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>i</mi></msub><annotation encoding="application/x-tex">v_i</annotation></semantics></math>.</p>
+<p>Here is an example of the two representations on a directed graph.
+The entry for vertex 0 stores 1 and 4 because there are two edges in the
+graph leaving vertex 0, with one going to vertex 1 and one going to
+vertex 4. The list for vertex 2 stores an entry for vertex 4 because
+there is an edge from vertex 2 to vertex 4, but no entry for vertex 3
+because this edge comes into vertex 2 rather than going out.</p>
+<figure id="fig:GraphRepresentDirected">
+<img src="images/GraphRepresentDirected.png" style="width:80.0%"
+alt="Figure 13.7: Representing a directed graph" />
+<figcaption aria-hidden="true">Figure 13.7: Representing a directed
+graph</figcaption>
+</figure>
+<p>Both the adjacency matrix and the adjacency list can be used to store
+directed or undirected graphs. Each edge of an undirected graph
+connecting vertices
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>
+is represented by two directed edges: one from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>
+and one from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>u</mi><annotation encoding="application/x-tex">u</annotation></semantics></math>.
+Here is an example of the two representations on an undirected graph. We
+see that there are twice as many edge entries in both the adjacency
+matrix and the adjacency list. For example, for the undirected graph,
+the list for vertex 2 stores an entry for both vertex 3 and vertex
+4.</p>
+<figure id="fig:GraphRepresentUndirected">
+<img src="images/GraphRepresentUndirected.png" style="width:80.0%"
+alt="Figure 13.8: Representing an undirected graph" />
+<figcaption aria-hidden="true">Figure 13.8: Representing an undirected
+graph</figcaption>
+</figure>
+<p>The storage requirements for the adjacency list depend on both the
+number of edges and the number of vertices in the graph. There must be
+an array entry for each vertex (even if the vertex is not adjacent to
+any other vertex and thus has no elements on its linked list), and each
+edge must appear on one of the lists. Thus, the cost is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="false" form="prefix">|</mo><mi>+</mi><mo stretchy="false" form="prefix">|</mo><mi>𝐄</mi><mo stretchy="false" form="prefix">|</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(|\mathbf{V}| + |\mathbf{E}|)</annotation></semantics></math>.</p>
+<p>Sometimes we want to store weights or distances with each each edge,
+such as in <a href="section-13.1.html#fig:GraphTypes">Figure 13.1</a> (c). This is easy
+with the adjacency matrix, where we will just store values for the
+weights in the matrix. In <a
+href="#fig:GraphRepresentDirected">Figure 13.7</a> and <a
+href="#fig:GraphRepresentUndirected">Figure 13.8</a> we store a value of
+“1” at each position just to show that the edge exists. That could have
+been done using a single bit, but since bit manipulation is typically
+complicated in most programming languages, an implementation might store
+a byte or an integer at each matrix position. For a weighted graph, we
+would need to store at each position in the matrix enough space to
+represent the weight, which might typically be an integer.</p>
+<p>The adjacency list needs to explicitly store a weight with each edge.
+In the adjacency list in <a
+href="#fig:GraphRepresentWeighted">Figure 13.9</a>, each linked list
+node is shown storing two values. The first is the index for the
+neighbour at the end of the associated edge. The second is the value for
+the weight. As with the adjacency matrix, this value requires space to
+represent, typically an integer.</p>
+<figure id="fig:GraphRepresentWeighted">
+<img src="images/GraphRepresentWeighted.png" style="width:80.0%"
+alt="Figure 13.9: Representing a weighted graph" />
+<figcaption aria-hidden="true">Figure 13.9: Representing a weighted
+graph</figcaption>
+</figure>
+<p>Which graph representation is more space efficient depends on the
+number of edges in the graph. The adjacency list stores information only
+for those edges that actually appear in the graph, while the adjacency
+matrix requires space for each potential edge, whether it exists or not.
+However, the adjacency matrix requires no overhead for pointers, which
+can be a substantial cost, especially if the only information stored for
+an edge is one bit to indicate its existence. As the graph becomes
+denser, the adjacency matrix becomes relatively more space efficient.
+Sparse graphs are likely to have their adjacency list representation be
+more space efficient.</p>
+<section id="sec:example-memory-usage"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Memory usage</h4>
+<p>Assume that a vertex index requires two bytes, a pointer requires
+four bytes, and an edge weight requires two bytes. Then, each link node
+in the adjacency list needs
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>+</mo><mn>2</mn><mo>+</mo><mn>4</mn><mo>=</mo><mn>8</mn></mrow><annotation encoding="application/x-tex">2 + 2 + 4 = 8</annotation></semantics></math>
+bytes. The adjacency matrix for the directed graph above requires
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo stretchy="false" form="prefix">|</mo><msup><mi>𝐕</mi><mn>2</mn></msup><mo stretchy="false" form="prefix">|</mo><mo>=</mo><mn>50</mn></mrow><annotation encoding="application/x-tex">2 |\mathbf{V}^2| = 50</annotation></semantics></math>
+bytes while the adjacency list requires
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="false" form="prefix">|</mo><mi>+</mi><mn>8</mn><mo stretchy="false" form="prefix">|</mo><mi>𝐄</mi><mo stretchy="false" form="prefix">|</mo><mo>=</mo><mn>68</mn></mrow><annotation encoding="application/x-tex">4 |\mathbf{V}| + 8 |\mathbf{E}| = 68</annotation></semantics></math>
+bytes. For the undirected version of the graph above, the adjacency
+matrix requires the same space as before, while the adjacency list
+requires
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="false" form="prefix">|</mo><mi>+</mi><mn>8</mn><mo stretchy="false" form="prefix">|</mo><mi>𝐄</mi><mo stretchy="false" form="prefix">|</mo><mo>=</mo><mn>116</mn></mrow><annotation encoding="application/x-tex">4 |\mathbf{V}| + 8 |\mathbf{E}| = 116</annotation></semantics></math>
+bytes (because there are now 12 edges represented instead of 6).</p>
+</section>
+<p>The adjacency matrix often requires a higher asymptotic cost for an
+algorithm than would result if the adjacency list were used. The reason
+is that it is common for a graph algorithm to visit each neighbour of
+each vertex. Using the adjacency list, only the actual edges connecting
+a vertex to its neighbours are examined. However, the adjacency matrix
+must look at each of its
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|\mathbf{V}|</annotation></semantics></math>
+potential edges, yielding a total cost of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">|</mo><msup><mi>𝐕</mi><mn>2</mn></msup><mo stretchy="false" form="prefix">|</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(|\mathbf{V}^2|)</annotation></semantics></math>
+time when the algorithm might otherwise require only
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="false" form="prefix">|</mo><mi>+</mi><mo stretchy="false" form="prefix">|</mo><mi>𝐄</mi><mo stretchy="false" form="prefix">|</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(|\mathbf{V}| + |\mathbf{E}|)</annotation></semantics></math>
+time. This is a considerable disadvantage when the graph is sparse, but
+not when the graph is closer to full.</p>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-13.1.html" class="navbutton">&lt;&lt;</a>
+<a href="section-13.1.html" accesskey="p" rel="previous">Definitions and properties</a>
+</div>
+<div class="navlink">
+<a href="section-13.3.html" accesskey="n" rel="next">Implementing graphs</a>
+<a href="section-13.3.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

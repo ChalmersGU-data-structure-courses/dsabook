@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Programming preliminaries</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-1.4.html" class="navbutton">&lt;&lt;</a>
+<a href="section-1.4.html" accesskey="p" rel="previous">Mathematical preliminaries</a>
+</div>
+<div>
+<a href="section-1.6.html" accesskey="n" rel="next">Case study: Searching in a list</a>
+<a href="section-1.6.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:programming-preliminaries" class="level2"
+data-number="1.5">
+<h2 data-number="1.5"><span class="header-section-number">1.5</span>
+Programming preliminaries</h2>
+<p>This section explains the pseudocode that we will use throughout the
+book. In addition, we introduce the programming preliminaries that we
+assume you are familiar with. If you’re comfortable with these
+preliminaries, you can safely skip ahead to the next section.</p>
+<div class="html">
+<section id="sec:pseudocode" class="level3" data-number="1.5.1">
+<h3 data-number="1.5.1"><span class="header-section-number">1.5.1</span>
+Pseudocode</h3>
+<p>There is a difference between knowing a programming language and
+understanding programming itself. The ultimate goal of studying data
+structures and algorithms is to develop programming skills, regardless
+of the language used.</p>
+<p>To keep our examples accessible, this book uses pseudocode rather
+than a specific programming language like Python or Java. Pseudocode
+provides a structured yet informal way to describe algorithms, focusing
+on logic and flow without strict syntax rules. Its simplicity and use of
+common programming constructs, such as loops and conditionals, make it
+easy to understand and translate into actual code. The pseudocode in
+this book is designed to be straightforward to convert into real
+programming languages.</p>
+<p>In the following sections, we will introduce fundamental programming
+concepts and, where applicable, specify the pseudocode conventions we
+use. For example, the following function is written in our pseudocode
+calculates the factorial of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> fact(n: <span class="bu">Int</span>) <span class="op">-&gt;</span> <span class="bu">Int</span>:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="op">=</span> <span class="dv">2</span> <span class="kw">to</span> n:</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        res <span class="op">=</span> res <span class="op">*</span> i</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> res</span></code></pre></div>
+<p>Our pseudocode includes the fundamental components of a programming
+language.</p>
+<dl>
+<dt>Variables</dt>
+<dd>
+<p>A variable is a name for a value, for which we use lower case
+alphabetic characters and allow underscore and numbers. A variable can
+have a type, but we don’t specify it when it does not matter or is
+evident from the context. We use the following notation:
+<code>var: &lt;type&gt;</code>. Note that type names begin with a
+capital letter.</p>
+<p>Examples: <code>res</code>, <code>n: Int</code>, <code>i</code>,
+<code>b0: Bool</code>, <code>intermediate_result</code></p>
+</dd>
+<dt>Types</dt>
+<dd>
+<p>A <a href="section-14.html#type" class="term"
+title="A collection of values.">type</a> defines a set of values along
+with the operations (or functions) that can be performed on them. For
+example, the Boolean type consists of the values <code>true</code> and
+<code>false</code>. Data types can be categorised as primitive or
+compound. Primitive types represent basic values, while compound types,
+such as arrays, tuples, and lists, are constructed using other types.
+For instance, an array is always an array of a specific type.</p>
+<p>In our pseudocode, we sometimes use type variables to indicate that a
+compound data type is parameterised by another type. For example,
+<code>List of A</code> represents a list containing elements of some
+type A. To distinguish type variables, we use capital letters.</p>
+<p>Examples: the primitive type <code>Int</code> or <code>Bool</code>,
+or the collection type <code>Array of Bool</code></p>
+</dd>
+<dt>Literals</dt>
+<dd>
+<p>A literal is the representation of a value in concrete syntax (that
+is, in the source code). The value that a literal represents has a
+specific type.</p>
+<p>Examples: the integer <code>1</code>, the character <code>'1'</code>,
+the floating point number <code>1.0</code>, the boolean
+<code>false</code></p>
+</dd>
+<dt>Operators</dt>
+<dd>
+<p>An operator is a symbol or keyword that represents an action or
+computation to be performed on one or more <em>operands</em> (which can
+be values or variables). The application of an operator is usually
+written infix, that is, the name of the operation is written
+<em>between</em> its operands. The mathematical operators have the usual
+precedence and in case of equal precedence we treat the as left
+associative.</p>
+<p>Examples: <code>+</code>, <code>*</code>, <code>%</code>,
+<code>&lt;</code></p>
+<p>Note that we use <code>==</code> for the equality operator, and
+<code>=</code> for assignment.</p>
+</dd>
+<dt>Expressions</dt>
+<dd>
+<p>An expression can be a variable, a literal, or an operation (or
+function) applied to one or more expressions, ultimately producing a
+value.</p>
+<p>Examples: <code>1 + 2</code>, <code>true &amp;&amp; false</code>,
+<code>(1 + 2) * n</code></p>
+</dd>
+<dt>Statements</dt>
+<dd>
+<p>We have the following kind of statements:</p>
+<ul>
+<li>Declaration: to declare a variable with a given name and value, and
+an optional type.</li>
+<li>Assignment: to assign a value to a variable.</li>
+<li>Conditional: execute a block of statements depending on a boolean
+expression, we use the common <code>if-then</code> or
+<code>if-then-else</code> statements.</li>
+<li>Loop: iteratively execute a block of statements, see below.</li>
+<li>Return: a <code>return</code> halts the execution of a function and
+returns a value to the caller of the function.</li>
+</ul>
+</dd>
+</dl>
+<section id="sec:loops-iteration" class="level4 unnumbered">
+<h4 class="unnumbered">Loops, iteration</h4>
+<p>We use two kind of loops, <code>while</code> and
+<code>for</code>:</p>
+<ul>
+<li>a <code>while</code>-loop executes a block of statements until a
+boolean expression is <code>false</code></li>
+<li>a <code>for</code>-loop traverses over a collection of elements</li>
+<li>in some cases we can <code>break</code> out of a loop inside its
+body</li>
+</ul>
+<p>Often we want to iterate over integers, and then it’s important to
+know if the end point is included or not. We will use <code>i..j</code>
+to describe the increasing seqeunce from <code>i</code> to
+<code>j</code> (i.e., <code>0..10</code> is the sequence
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mn>9</mn><mo>,</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">0, 1, \ldots, 9, 10</annotation></semantics></math>).
+Here is an example of a nested <code>for</code> loop:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="dv">0</span> .. n<span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> i<span class="op">+</span><span class="dv">1</span> .. n:</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        do something with i <span class="kw">and</span> j</span></code></pre></div>
+<p><em>Important note</em>: the range <code>i..j</code> is
+<em>inclusive</em>, meaning that the endpoint <code>j</code> is
+<em>included</em> in the sequence. This is different to how a language
+such as Python does it, where <code>range(i,j)</code> does not include
+<code>j</code>. Sometimes this can be a matter of life and death (of
+your program), so be sure to translate the algorithms in a correct way
+to your favourite programming language!</p>
+<p>Some modern programming languages (such as Python and Java) have
+syntactic sugar for <em>iterators</em>. Although this is very convenient
+in many cases, we will not make use of iterators in this book, just to
+keep things as simple as possible.</p>
+</section>
+</section>
+<section id="sec:data-types" class="level3" data-number="1.5.2">
+<h3 data-number="1.5.2"><span class="header-section-number">1.5.2</span>
+Data types</h3>
+<p>As mentioned earlier, a data type consists of a set of values and the
+operations that can be performed on them. Primitive data types are basic
+types provided by a programming language (including our pseudocode) and
+cannot be user-defined. Some data structures, such as arrays and lists,
+are built into many languages and organise collections of values, while
+compound data types, such as classes or algebraic data types, allow
+users to define their own structures. The next sections introduce the
+data types used in this book.</p>
+<section id="sec:primitive-data-types" class="level4 unnumbered">
+<h4 class="unnumbered">Primitive data types</h4>
+<p>We use the following primitive data types:</p>
+<ul>
+<li><strong>Bool</strong>: This data type has only two possible values:
+<code>true</code> and <code>false</code>. It supports logical operations
+such as conjunction (<code>and</code>), disjunction (<code>or</code>),
+and negation.</li>
+<li><strong>Int</strong>: Represents whole numbers. Unless specified
+otherwise, we assume integers of arbitrary size, though in some cases,
+we may use fixed-size integers (32-bit or 64-bit), which will be
+explicitly stated. Standard arithmetic operations, such as addition,
+multiplication, and integer division, are supported.</li>
+<li><strong>Float</strong>: Represents floating-point numbers with
+limited precision, which depends on the programming language and, in
+some cases, the underlying computer architecture. It supports common
+operations like addition, subtraction, multiplication, and
+division.</li>
+<li><strong>Char</strong>: Represents individual characters. Unless
+otherwise specified, we assume fixed-size Unicode encoding, though in
+some cases, 8-bit ASCII may be used.</li>
+</ul>
+<p>In addition to the primitive data types mentioned earlier, there is
+also <code>null</code> (referred to as <code>None</code> in some
+languages), a special value that represents the absence of a value or an
+unknown state.</p>
+</section>
+<section id="sec:arrays" class="level4 unnumbered">
+<h4 class="unnumbered">Arrays</h4>
+<p>Arrays are one of the fundamental data structures in programming
+because they are directly supported by the computer’s memory system and
+offer excellent performance. Accessing or modifying an element in an
+array is extremely fast, making arrays important for many
+algorithms.</p>
+<div class="note">
+<p><em>Note to Python programmers</em>: Python doesn’t have arrays,
+instead they have <em>lists</em> which are written like this:
+<code>[1,2,3]</code>. There is one important difference between arrays
+and Python lists: any given array has a fixed size. However, Python
+lists can change in size – for example, the <code>append</code> method
+adds a new element to the list, increasing its size. In this book, we
+will work with arrays that have a <em>fixed</em> size. Python lists are
+so-called <a href="section-14.html#dynamic-array" class="term"
+title="Arrays, once allocated, are of fixed size. A dynamic array puts an interface around the array so as to appear to allow the array to grow and shrink in size as necessary. Typically this is done by allocating a new copy, copying the contents of the old array, and then returning the old array to free store. If done correctly, the amortised cost for dynamically resizing the array can be made constant. In some programming languages such as Java, the term vector is used as a synonym for dynamic array.">dynamic
+arrays</a> – we will discuss how they work in <a
+href="section-6.7.html#sec:dynamic-arrays">Section 6.7</a>.</p>
+</div>
+<p>Before using an array, you must declare it and specify its size. Once
+created, an array has a fixed size and cannot be resized. This
+limitation means that operations like concatenating two arrays require
+creating a new array large enough to hold all elements.</p>
+<p>One key advantage of arrays is their efficient retrieval of elements.
+When an array is allocated, memory is reserved in a contiguous block,
+ensuring that all elements are stored next to each other. This structure
+allows quick access to any element using its index by directly
+calculating its memory location.</p>
+<p>In our pseudocode, we use the following syntax to declare an array,
+retrieve an element, and update an element:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Make a copy of the input array, and increment every value in the copied array.</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Return the copied array.</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> addOne(input: <span class="bu">Array</span> <span class="kw">of</span> <span class="bu">Int</span>) <span class="op">-&gt;</span> <span class="bu">Array</span> <span class="kw">of</span> <span class="bu">Int</span>:</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    output <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(input.<span class="bu">size</span>) <span class="kw">of</span> <span class="bu">Int</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="dv">0</span> .. input.<span class="bu">size</span><span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        output[i] <span class="op">=</span> input[i] <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> output</span></code></pre></div>
+<p>This example highlights several key features of arrays.</p>
+<ul>
+<li>First, our pseudocode follows zero-based indexing, meaning the first
+element is at index 0, the second at index 1, and so on. The last
+element is located at an index equal to the array’s size minus one.</li>
+<li>The size of an array can be accessed using the <code>size</code>
+property.</li>
+<li>To retrieve an element from an array, we use square bracket
+notation. For instance, <code>input[2]</code> retrieves the third
+element of the input array.</li>
+<li>Similarly, updating an element follows the same notation:
+<code>input[2] = 10</code> assigns a new value to the third
+element.</li>
+</ul>
+<p>In the example above, we explicitly declare the types of array
+variables to illustrate our pseudocode conventions. However, in many
+cases, we may omit type annotations for simplicity.</p>
+<p><strong>References</strong>: In most programming languages, including
+our pseudocode, arrays are stored as references rather than direct
+values. This means that when you assign one array variable to another,
+you are copying the reference (or pointer) to the original array, not
+the array itself.</p>
+<p>For example:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(<span class="dv">3</span>) <span class="kw">of</span> <span class="bu">Int</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>a[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> a        <span class="co">// &#39;b&#39; now refers to the same array as &#39;a&#39;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>b[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a[<span class="dv">0</span>])  <span class="co">// Outputs 20, because &#39;a&#39; and &#39;b&#39; point to the same array</span></span></code></pre></div>
+<p>Since <code>b</code> holds a reference to the same array as
+<code>a</code>, any modifications made through <code>b</code> will also
+affect <code>a</code>. If you want to create a separate copy, you need
+to explicitly copy the array element by element.</p>
+<p><strong>Array slices</strong>: A prominent feature in the popular
+programming language Python are <em>array slices</em>. You can use a
+slice to select a part of an array, for example, the first ten elements.
+However, such a slice creates a new array and copies the selected
+elements from the original array. This means that using slices is quite
+slow.</p>
+<p>Therefore we will not use array slices in this book. Instead we can
+use a pair of array indices <code>i</code>, <code>j</code> to refer to a
+specific slice of the array. This is, e.g., done already in <a
+href="section-1.6.html#sec:binary-search">Section 1.6.1</a> where we
+introduce the <em>binary search</em> algorithm.</p>
+</section>
+<section id="sec:strings" class="level4 unnumbered">
+<h4 class="unnumbered">Strings</h4>
+<p>A string is an immutable sequence of characters, meaning that once
+defined (e.g., <code>str = "data"</code>), it cannot be modified. In
+this sense, strings behave like values, similar to integers or boolean
+values. While you can access individual characters using indexing, you
+cannot change them. Any modification, such as concatenation or
+replacement, results in the creation of a new string rather than
+altering the original one. Because strings are internally represented as
+arrays, operations like concatenation and comparison are not
+constant-time and may involve overhead depending on the string
+length.</p>
+</section>
+<section id="sec:tuples" class="level4 unnumbered">
+<h4 class="unnumbered">Tuples</h4>
+<p>A tuple is an <em>ordered</em>, <em>immutable</em> collection of
+elements. Unlike arrays, which allow modification of its elements,
+tuples cannot be changed after they are created. They can store multiple
+values of different types and are often used when a fixed grouping of
+related data is needed.</p>
+<p>We use the following notation in our pseudocode:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>point <span class="op">=</span> (<span class="dv">3</span>, <span class="dv">4</span>)                <span class="co">// A tuple with two elements</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>person <span class="op">=</span> (<span class="st">&quot;Geert&quot;</span>, <span class="dv">30</span>, True)  <span class="co">// A tuple with different data types</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(point[<span class="dv">0</span>])               <span class="co">// Accessing first element</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>point[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">5</span>                  <span class="co">// This is not allowed, tuples are immutable</span></span></code></pre></div>
+<p>Tuples are useful for returning multiple values from a function,
+grouping related data, and working with fixed collections that should
+not be modified.</p>
+</section>
+</section>
+<section id="sec:mutable-and-immutable-data" class="level3"
+data-number="1.5.3">
+<h3 data-number="1.5.3"><span class="header-section-number">1.5.3</span>
+Mutable and immutable data</h3>
+<p>For many algorithms, the ability to use mutable data can lead to more
+efficient solutions. However, mutability comes with its drawbacks: it
+increases the risk of making mistakes, and immutable data is often
+easier to reason about and debug.</p>
+<p>In our pseudocode, we assume the following data types are
+immutable:</p>
+<ul>
+<li>Primitive data types (such as integers and characters),</li>
+<li>Strings</li>
+<li>Tuples</li>
+</ul>
+<p>On the other hand, the following data types are mutable:</p>
+<ul>
+<li>Arrays</li>
+<li>Compound data types (see below)</li>
+</ul>
+</section>
+<section id="sec:functions" class="level3" data-number="1.5.4">
+<h3 data-number="1.5.4"><span class="header-section-number">1.5.4</span>
+Functions</h3>
+<p>We have already seen several examples of functions. A function starts
+with the keyword function, followed by its name. Functions can have zero
+or more parameters, and we assume a call-by-value evaluation
+strategy.</p>
+<p>It is important to note that collection types (such as arrays) and
+compound data types are reference types. When assigning an array or a
+compound data type to a variable, what gets stored is a reference to the
+actual data, not a copy of the data itself. This means that if you pass
+an array as an argument to a function, the reference is copied, not the
+entire array. As a result, any modifications made to the array inside
+the function will persist when the function returns.</p>
+<p>Functions can also be recursive, meaning they call themselves within
+their own body. Recursion is often used in divide-and-conquer
+algorithms, though it is not limited to them. When analysing recursive
+functions, it is important to remember that function calls are not free
+– they consume memory on the stack, which can become a limiting factor
+if recursion depth is too large.</p>
+</section>
+<section id="sec:interfaces" class="level3" data-number="1.5.5">
+<h3 data-number="1.5.5"><span class="header-section-number">1.5.5</span>
+Interfaces</h3>
+<p>In our pseudocode, we introduce the concept of an <em>interface</em>
+to distinguish between an abstract data type (ADT) and its concrete
+implementation. An interface defines a set of operations that a data
+type must support, without specifying how those operations are
+implemented. This allows us to describe the behaviour of a data type
+separately from its internal representation.</p>
+<p>An abstract data type (ADT) is a high-level description of a data
+structure that focuses on what operations are available rather than how
+they are executed. For example, an ADT for a stack may define operations
+such as <code>push</code> and <code>pop</code>,but it does not specify
+whether the stack is implemented using an array or a linked list. A
+concrete implementation provides the actual data structure and the logic
+for performing the operations defined in the interface. Different
+implementations of the same interface can exist, each with different
+performance characteristics.</p>
+<p>We use the following notation for interfaces in our pseudocode:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Stack</span> <span class="kw">of</span> T:</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">push</span>(value: T)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">pop</span>() <span class="op">-&gt;</span> T</span></code></pre></div>
+<p>Using an interface, we can define a data type’s expected behaviour
+and provide multiple implementations in our pseudocode. By using
+interfaces, we clarify the conceptual structure of a data type, making
+it easier to explain, compare, and analyse different
+implementations.</p>
+</section>
+<section id="sec:compound-data-types" class="level3"
+data-number="1.5.6">
+<h3 data-number="1.5.6"><span class="header-section-number">1.5.6</span>
+Compound data types</h3>
+<p>We often need to combine different data types to store complex
+information. These are known as <em>compound data types</em>. Nearly
+every programming language supports compound data types, although the
+specific implementation can vary between languages. For example, in
+Java, compound data types are typically created using classes, which
+allow you to combine instance variables of potentially different types.
+In Python, you can achieve this using classes, dataclasses, or
+dictionaries. In functional programming languages, such as Haskell, you
+can define algebraic data types to combine values in various ways.</p>
+<p>Our goal is to keep things simple and explain the concept in a way
+that can be easily translated into the syntax of any programming
+language you prefer. For this reason, we have adopted a straightforward
+notation for compound data types in our pseudocode. Here is an example
+of how to define a dynamic array (see <a
+href="section-6.7.html#sec:dynamic-arrays">Section 6.7</a>):</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> ArrayStack <span class="kw">of</span> T <span class="kw">implements</span> <span class="bu">Stack</span> <span class="kw">of</span> T:</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    data: <span class="bu">Array</span> <span class="kw">of</span> T</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span>: <span class="bu">int</span> <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">constructor</span> ArrayStack(capacity):</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        data <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(capacity) <span class="kw">of</span> T</span></code></pre></div>
+<p>A datatype can also have “internal functions” (called
+<em>methods</em> in object-oriented languages), and they have access to
+the internal variables:</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> ArrayStack ...:</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    (...)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">push</span>(value: T):</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        data[<span class="bu">size</span>] <span class="op">=</span> value</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">size</span> <span class="op">=</span> <span class="bu">size</span> <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">pop</span>() <span class="op">-&gt;</span> T:</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">size</span> <span class="op">=</span> <span class="bu">size</span> <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> data[<span class="bu">size</span>]</span></code></pre></div>
+<p>This example uses an array to store the stack elements and
+demonstrates how to define a compound data type. We define a new
+compound data type using the keyword <code>datatype</code>. A
+<code>datatype</code> can implement an <code>interface</code>, making it
+a subtype of the interface.</p>
+<p>Note that we usually don’t write the keyword <code>function</code>
+when it appears within a datatype definition.</p>
+<p>To create a concrete instance of a <code>datatype</code>, we use the
+following notation:</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>stack: <span class="bu">Stack</span> <span class="kw">of</span> <span class="bu">Int</span> <span class="op">=</span> <span class="kw">new</span> ArrayStack(<span class="dv">100</span>) <span class="kw">of</span> <span class="bu">Int</span></span></code></pre></div>
+<p>We can then call member functions like this:</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">next</span> <span class="op">=</span> stack.<span class="bu">pop</span>()</span></code></pre></div>
+<section id="sec:simplified-definitions" class="level4 unnumbered">
+<h4 class="unnumbered">Simplified definitions</h4>
+<p>Note that, in our pseudocode, we simplify by omitting details we
+consider irrelevant, such as constructor handling, default values, and
+other specifics. This means that our ArrayStack can also be defined
+without an explicit constructor:</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> ArrayStack(capacity) <span class="kw">implements</span> <span class="bu">Stack</span>:</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    data: <span class="bu">Array</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(capacity)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span>: <span class="bu">int</span> <span class="op">=</span> <span class="dv">0</span></span></code></pre></div>
+<p>The above definition is the same as the first one – we can deduce how
+the constructor must look like from the datatype declaration. Note that
+we also removed the type variable <code>T</code> because it can be
+deduced from the context.</p>
+<p>Another example datatype are <em>linked list nodes</em> (see <a
+href="section-6.3.html#sec:stacks-implemented-as-linked-lists">Section 6.3</a>):</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> ListNode <span class="kw">of</span> T:</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    value: T</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">next</span>:  ListNode <span class="kw">of</span> T</span></code></pre></div>
+<p>This definition is an abbreviation of the following:</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> ListNode <span class="kw">of</span> T:</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    value: T</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">next</span>:  ListNode <span class="kw">of</span> T</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">constructor</span>(value, <span class="bu">next</span>):</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        value <span class="op">=</span> value</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">next</span> <span class="op">=</span> <span class="bu">next</span></span></code></pre></div>
+<p>But as you can see, the constructor is straightforward so we won’t
+write it down. We trust that you are competent programmers and can
+deduce yourself how to implement these simplified definitions in your
+favourite programming language.</p>
+</section>
+<section id="sec:extending-datatypes" class="level4 unnumbered">
+<h4 class="unnumbered">Extending datatypes</h4>
+<p>We can <em>extend</em> a datatype by adding more variables, e.g.,
+here a definition of <em>doubly-linked list nodes</em> (see <a
+href="section-6.9.html#sec:double-ended-queues">Section 6.9</a>):</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> DoubleNode <span class="kw">extends</span> ListNode:</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    prev: ListNode</span></code></pre></div>
+<p>The ellipsis (…) is to remind you that there are already variables
+that are taken from the <code>ListNode</code> datatype.</p>
+<p>Sometimes the argument to the constructor isn’t an internal variable,
+and then we have to be more explicit about the internal variables:</p>
+<p>This example uses an array to store the stack elements and
+demonstrates how to define a compound data type. We define a new
+compound data type using the keyword <code>datatype</code>. A
+<code>datatype</code> can implement an <code>interface</code>, making it
+a subtype of the interface.</p>
+</section>
+<section id="sec:examples-binary-tree-nodes" class="level4 unnumbered">
+<h4 class="unnumbered">Examples: binary tree nodes</h4>
+<p>Here’s a final example of <em>binary tree nodes</em> (see <a
+href="section-8.3.html#sec:implementing-binary-trees">Section 8.3</a>):</p>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> TreeNode:</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    value</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    left:  TreeNode <span class="op">=</span> <span class="va">null</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    right: TreeNode <span class="op">=</span> <span class="va">null</span></span></code></pre></div>
+<p>The definition leaves out the following details:</p>
+<ul>
+<li>the value type <code>T</code></li>
+<li>the constructor</li>
+<li>that <code>left</code> and <code>right</code> have default values
+(<code>null</code>) if they are not given to the constructor</li>
+</ul>
+<p>So a more explicit definition would be like this:</p>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> TreeNode <span class="kw">of</span> T:</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    value: T</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    left:  TreeNode <span class="kw">of</span> T</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    right: TreeNode <span class="kw">of</span> T</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">constructor</span> TreeNode(value, left<span class="op">=</span><span class="va">null</span>, right<span class="op">=</span><span class="va">null</span>):</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>        value <span class="op">=</span> value</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        left  <span class="op">=</span> left</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>        right <span class="op">=</span> right</span></code></pre></div>
+<p>We can of course also define some methods, or internal functions,
+that operate on the internal variables:</p>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> TreeNode:</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    (...)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Return true if a node doesn&#39;t have any children.</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    isLeaf() <span class="op">-&gt;</span> Bool:</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> left <span class="kw">is</span> <span class="va">null</span> <span class="kw">and</span> right <span class="kw">is</span> <span class="va">null</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Return the number of nodes, including myself.</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    treeSize() <span class="op">-&gt;</span> <span class="bu">Int</span>:</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>        n <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> left <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span>:</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>            n <span class="op">=</span> n <span class="op">+</span> left.treeSize()</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> right <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span>:</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>            n <span class="op">=</span> n <span class="op">+</span> right.treeSize()</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> n</span></code></pre></div>
+<p>Note that the last definition, <code>treeSize</code>, is a
+<em>recursive</em> function.</p>
+<p>Also note that <code>treeSize</code> has to check that the children
+actually are tree nodes before calculating their size. Another
+possibility is to have a global function that takes the tree node as an
+argument:</p>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> treeSize(node: TreeNode) <span class="op">-&gt;</span> <span class="bu">Int</span>:</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> node <span class="kw">is</span> <span class="va">null</span>:</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">0</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span> <span class="op">+</span> treeSize(node.left) <span class="op">+</span> treeSize(node.right)</span></code></pre></div>
+</section>
+<section id="sec:complex-features-that-are-not-used"
+class="level4 unnumbered">
+<h4 class="unnumbered">Complex features that are not used</h4>
+<p>We intentionally avoid complex features from object-oriented
+languages, focusing instead on clarity and easy translation to your
+preferred programming language. So you do <em>not</em> have to know
+about these things to follow the algorithms in this book:</p>
+<dl>
+<dt>Multiple inheritance</dt>
+<dd>
+<p>Being able to extend multiple classes or interfaces is useful for
+defining e.g. user interfaces, but it is not something we will use in
+this book.</p>
+</dd>
+<dt>Static methods, class variables, etc.</dt>
+<dd>
+<p>This is useful for not cluttering up the global namespace, so very
+useful when you write larger programs. But it is not needed for
+describing algorithms and data structures.</p>
+</dd>
+<dt>Referencing super classes</dt>
+<dd>
+<p>Being able to refer to methods of a super-class can also be useful in
+some contexts, but again, not something we need here.</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="sec:computer-memory" class="level3" data-number="1.5.7">
+<h3 data-number="1.5.7"><span class="header-section-number">1.5.7</span>
+Computer memory</h3>
+<p>To run a program we need to first load the program in memory before
+we can start executing. A program uses memory as well to store
+information that it needs for calculations. A program has access to two
+different memory regions: the stack and the heap. The stack is a memory
+region that stores local variables, function call information, and
+return values. When a function is called, its local variables and return
+address are pushed onto the stack, and when the function exits, they are
+removed. Since the stack follows a last-in, first-out (LIFO) order,
+memory allocation and deallocation happen in a predictable way, making
+it efficient.</p>
+<p>The heap, on the other hand, is a more flexible memory area used for
+<em>dynamic</em> allocation. Memory allocated on the heap persists until
+explicitly freed or garbage-collected, making it useful for objects with
+longer lifetimes. Unlike the stack, the heap does not follow a strict
+order for allocation and deallocation, which can lead to fragmentation
+and slower access times. While stack allocation is fast and automatic,
+heap allocation requires more overhead and manual memory management.</p>
+<p>The stack and heap are part of the so called <em>internal memory</em>
+and consists of high-speed storage components like Random Access Memory
+(RAM) and cache that are directly accessible by the CPU. This memory is
+volatile, meaning data is lost when power is turned off, and is used to
+store actively running programs and data. Because of its speed, internal
+memory is important for efficient program execution.</p>
+<p>External memory, or secondary storage, includes non-volatile devices
+such as hard drives, solid-state drives, and USB storage. Unlike
+internal memory, it persists data even when the system is powered off
+and is used for long-term storage. External memory usually has a much
+larger capacity than internal memory, but it is significantly slower
+because data must be fetched and loaded into RAM before it can be
+processed.</p>
+<section id="sec:caching" class="level4 unnumbered">
+<h4 class="unnumbered">Caching</h4>
+<p>Caching is a technique used to accelerate data access by temporarily
+storing frequently used information in a smaller, high-speed memory area
+called a cache. When a program requests data, the processor first checks
+whether it is available in the cache. If the data is found, it can be
+retrieved almost instantly, avoiding the need to access slower main
+memory. Cache memory is located very close to the processor, often
+integrated directly into the CPU, allowing it to fetch values in just a
+few clock cycles, significantly improving performance.</p>
+</section>
+</section>
+</div>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-1.4.html" class="navbutton">&lt;&lt;</a>
+<a href="section-1.4.html" accesskey="p" rel="previous">Mathematical preliminaries</a>
+</div>
+<div class="navlink">
+<a href="section-1.6.html" accesskey="n" rel="next">Case study: Searching in a list</a>
+<a href="section-1.6.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

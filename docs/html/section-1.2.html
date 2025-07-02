@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Selecting a data structure</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-1.1.html" class="navbutton">&lt;&lt;</a>
+<a href="section-1.1.html" accesskey="p" rel="previous">Motivation</a>
+</div>
+<div>
+<a href="section-1.3.html" accesskey="n" rel="next">Practical examples</a>
+<a href="section-1.3.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:selecting-a-data-structure" class="level2"
+data-number="1.2">
+<h2 data-number="1.2"><span class="header-section-number">1.2</span>
+Selecting a data structure</h2>
+<p>It should go without saying that people write programs to solve
+problems. However, sometimes programmers forget this. So it is crucial
+to keep this truism in mind when selecting a <a
+href="section-14.html#data-structure" class="term"
+title="The implementation for an ADT.">data structure</a> to solve a
+particular <a href="section-14.html#problem" class="term"
+title="A task to be performed. It is best thought of as a function or a mapping of inputs to outputs.">problem</a>.
+Only by first analysing the problem to determine the performance goals
+that must be achieved can there be any hope of selecting the right data
+structure for the job. Poor program designers ignore this analysis step
+and apply a data structure that they are familiar with but which is
+inappropriate to the problem. The result is typically a slow program.
+Conversely, there is no sense in adopting a complex representation to
+“improve” a program that can meet its performance goals when implemented
+using a simpler design.</p>
+<p>When selecting a data structure to solve a problem, you should follow
+these steps.</p>
+<ol type="1">
+<li>Analyse your problem to determine the <a
+href="section-14.html#basic-operation" class="term"
+title="Examples of basic operations include inserting a data item into the data structure, deleting a data item from the data structure, and finding a specified data item.">basic
+operations</a> that must be supported. Examples of basic operations
+include inserting a data item into the data structure, deleting a data
+item from the data structure, and finding a specified data item.</li>
+<li>Quantify the resource constraints for each operation.</li>
+<li>Select the data structure that best meets these requirements.</li>
+</ol>
+<p>This three-step approach to selecting a data structure
+operationalises a data-centered view of the design process. The first
+concern is for the data and the operations to be performed on them, the
+next concern is the representation of those data, and the final concern
+is the implementation of that representation.</p>
+<p>Resource constraints on certain key operations, such as search,
+inserting data records, and deleting data records, normally drive the
+data structure selection process. Many issues relating to the relative
+importance of these operations are addressed by the following three
+questions, which you should ask yourself whenever you must choose a data
+structure.</p>
+<ol type="1">
+<li>Are all data items inserted into the data structure at the
+beginning, or are insertions interspersed with other operations? Static
+applications (where the data are loaded at the beginning and never
+change) typically get by with simpler data structures to get an
+efficient implementation, while dynamic applications often require
+something more complicated.</li>
+<li>Can data items be deleted? If so, this will probably make the
+implementation more complicated.</li>
+<li>Are all data items processed in some well-defined order, or is
+searching for specific data items allowed? Efficient search generally
+requires more complex data structures.</li>
+</ol>
+<p>Each data structure has associated costs and benefits. In practice,
+it is hardly ever true that one data structure is better than another
+for use in all situations. If one data structure or algorithm is
+superior to another in all respects, the inferior one will usually have
+long been forgotten. For nearly every data structure and algorithm
+presented in this book, you will see examples of where it is the best
+choice. Some of the examples might surprise you.</p>
+<p>A data structure requires a certain amount of space for each data
+item it stores, a certain amount of time to perform a single basic
+operation, and a certain amount of programming effort. Each problem has
+constraints on available space and time. Each solution to a problem
+makes use of the basic operations in some relative proportion, and the
+data structure selection process must account for this. Only after a
+careful analysis of your problem’s characteristics can you determine the
+best data structure for the task.</p>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-1.1.html" class="navbutton">&lt;&lt;</a>
+<a href="section-1.1.html" accesskey="p" rel="previous">Motivation</a>
+</div>
+<div class="navlink">
+<a href="section-1.3.html" accesskey="n" rel="next">Practical examples</a>
+<a href="section-1.3.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

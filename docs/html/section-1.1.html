@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Motivation</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-1.html" class="navbutton">&lt;&lt;</a>
+<a href="section-1.html" accesskey="p" rel="previous">Introduction</a>
+</div>
+<div>
+<a href="section-1.2.html" accesskey="n" rel="next">Selecting a data structure</a>
+<a href="section-1.2.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:motivation" class="level2" data-number="1.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span>
+Motivation</h2>
+<p>You might think that with ever more powerful computers, program
+efficiency is becoming less important. After all, processor speed and
+memory size still continue to improve. Won’t today’s efficiency problem
+be solved by tomorrow’s hardware?</p>
+<p>The short answer to this question is <strong><em>no</em></strong>! It
+is not at all certain that a twice as fast computer can solve twice as
+large problems. On the contrary – most interesting problems are very
+difficult, in the sense that if we increase the computing power we can
+still only solve a very small increase in the size of the problem.</p>
+<p>As we develop more powerful computers, our history so far has always
+been to use that additional computing power to tackle more complex
+problems, be it in the form of more sophisticated user interfaces,
+bigger problem sizes, or new problems previously deemed computationally
+infeasible. More complex problems demand more computation, making the
+need for efficient programs even greater. Unfortunately, as tasks become
+more complex, they become less like our everyday experience. So today’s
+computer scientists must be trained to have a thorough understanding of
+the principles behind efficient program design, because their ordinary
+life experiences often do not apply when designing computer
+programs.</p>
+<p>In the most general sense, a <a href="section-14.html#data-structure"
+class="term" title="The implementation for an ADT.">data structure</a>
+is any data representation and its associated operations. Even an
+integer or floating point number stored on the computer can be viewed as
+a simple data structure. More commonly, people use the term “data
+structure” to mean an organisation or structuring for a collection of
+data items. A sorted list of integers stored in an array is an example
+of such a structuring. These ideas are explored further in <a
+href="section-1.7.html#sec:abstract-data-types">Section 1.7</a> about <a
+href="section-14.html#abstract-data-type" class="term"
+title="Abbreviated ADT. The specification of a data type within some language, independent of an implementation. The interface for the ADT is defined in terms of a type and a set of operations on that type. The behaviour of each operation is determined by its inputs and outputs. An ADT does not specify *how* the data type is implemented. These implementation details are hidden from the user of the ADT and protected from outside access, a concept referred to as encapsulation.">abstract
+data types</a>.</p>
+<p>Given sufficient space to store a collection of <a
+href="section-14.html#data-item" class="term"
+title="A piece of information or a record whose value is drawn from a type.">data
+items</a>, it is always possible to search for specified items within
+the collection, print or otherwise process the data items in any desired
+order, or modify the value of any particular data item. The most obvious
+example is an unsorted array containing all of the data items. It is
+possible to perform all necessary operations on an unsorted array.
+However, using the proper data structure can make the difference between
+a program running in a few seconds and one requiring many days. For
+example, searching for a given record in a <a
+href="section-14.html#hash-table" class="term"
+title="The data structure (usually an array) that stores data records for lookup using hashing.">hash
+table</a> is much faster than searching for it in an unsorted array.</p>
+<p>A solution is said to be <a href="section-14.html#efficient"
+class="term"
+title="A solution is said to be efficient if it solves the problem within the required resource constraints. A solution is sometimes said to be efficient if it requires fewer resources than known alternatives, regardless of whether it meets any particular requirements.">efficient</a>
+if it solves the problem within the required <a
+href="section-14.html#resource-constraints" class="term"
+title="Examples of resource constraints include the total space available to store the data (possibly divided into separate main memory and disk space constraints) and the time allowed to perform each subtask.">resource
+constraints</a>. Examples of resource constraints include the total
+space available to store the data – possibly divided into separate main
+memory and disk space constraints – and the time allowed to perform each
+subtask. A solution is sometimes said to be efficient if it requires
+fewer resources than known alternatives, regardless of whether it meets
+any particular requirements. The <a href="section-14.html#cost"
+class="term"
+title="The amount of resources that given run of an algorithm consumes.">cost</a>
+of a solution is the amount of resources that the solution consumes.
+Most often, cost is measured in terms of one key resource such as time,
+with the implied assumption that the solution meets the other resource
+constraints.</p>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-1.html" class="navbutton">&lt;&lt;</a>
+<a href="section-1.html" accesskey="p" rel="previous">Introduction</a>
+</div>
+<div class="navlink">
+<a href="section-1.2.html" accesskey="n" rel="next">Selecting a data structure</a>
+<a href="section-1.2.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

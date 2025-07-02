@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Empirical analysis</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-2.9.html" class="navbutton">&lt;&lt;</a>
+<a href="section-2.9.html" accesskey="p" rel="previous">Code tuning</a>
+</div>
+<div>
+<a href="section-2.11.html" accesskey="n" rel="next">Review questions</a>
+<a href="section-2.11.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:empirical-analysis" class="level2" data-number="2.10">
+<h2 data-number="2.10"><span class="header-section-number">2.10</span>
+Empirical analysis</h2>
+<div class="html">
+<p><a href="section-14.html#algorithm-analysis" class="term"
+title="A method for estimating the efficiency of an algorithm or computer program by identifying its asymptotic complexity, the growth rate of its complexity function. Asymptotic analysis also gives a way to define the inherent difficulty of a problem. We frequently use the term algorithm analysis to mean the same thing.">Asymptotic
+algorithm analysis</a> is an analytic tool, whereby we model the key
+aspects of an algorithm to determine the growth rate of the algorithm as
+the input size grows. It has proved hugely practical, guiding developers
+to use more efficient algorithms. But it is really an <a
+href="section-14.html#estimation" class="term"
+title="As a technical skill, this is the process of generating a rough estimate in order to evaluate the feasibility of a proposed solution. This is sometimes known as &#39;back of the napkin&#39; or &#39;back of the envelope&#39; calculation. The estimation process can be formalised as (1) determine the major parameters that affect the problem, (2) derive an equation that relates the parameters to the problem, then (3) select values for the parameters and apply the equation to yield an estimated solution.">estimation</a>
+technique, and it has its limitations. These include the effects at
+small problem size, determining the finer distinctions between
+algorithms with the same growth rate, and the inherent difficulty of
+doing mathematical modeling for more complex problems.</p>
+<section id="sec:comparative-timing" class="level3"
+data-number="2.10.1">
+<h3 data-number="2.10.1"><span
+class="header-section-number">2.10.1</span> Comparative timing</h3>
+<p>An alternative to analytical approaches are empirical ones. The most
+obvious empirical approach is simply to run two competitors and see
+which performs better. In this way we might overcome the deficiencies of
+analytical approaches.</p>
+<p>Be warned that comparative timing of programs is a difficult
+business, often subject to experimental errors arising from uncontrolled
+factors (system load, the language or compiler used, etc.). The most
+important concern is that you might be biased in favour of one of the
+programs. If you are biased, this is certain to be reflected in the
+timings. One look at competing software or hardware vendors’
+advertisements should convince you of this. The most common pitfall when
+writing two programs to compare their performance is that one receives
+more code-tuning effort than the other, since code tuning can often
+reduce running time by a factor of five to ten. If the running times for
+two programs differ by a constant factor regardless of input size (i.e.,
+their growth rates are the same), then differences in code tuning might
+account for any difference in running time. Be suspicious of empirical
+comparisons in this situation.</p>
+</section>
+<section id="sec:simulation" class="level3" data-number="2.10.2">
+<h3 data-number="2.10.2"><span
+class="header-section-number">2.10.2</span> Simulation</h3>
+<p>Another approach to analytical analysis is simulation. The idea of
+simulation is to model the problem with a computer program. This is
+different from empirical analysis where you evaluate a solution, but a
+simulation is used for learning more about the problem. The main purpose
+of a simulation is to perform analysis that might be too difficult to do
+mathematically.</p>
+<p>Often simulation and empirical analysis go hand-in-hand: we can use
+simulation to generate a large number of inputs so that we can study an
+algorithm empirically instead of analytically. It is often extremely
+difficult to do a credible average-case analysis analytically, because
+it is uncommon that the input to a problem is randomly distributed.
+Assuming a uniform distribution will often lead to wrong conclusion
+about the average running time of an algorithm. For example, which
+sorting algorithm is the best to use depends a lot on how the data is
+distributed.</p>
+<section id="sec:example-sorting-english-words"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: sorting English words</h4>
+<p>Assume that we want to create an alphabetically sorted list of words
+from a collection of English texts. There are an infinite number of
+possible strings that can occur, but some strings are much more common
+than others. How can we know how the data is distributed, on
+average?</p>
+<p>George Zipf observed already in 1932 that the relative frequency of
+the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>-th
+most common word in a language is approximately inversely proportional
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.
+[refer to Wikipedia Zipf’s law] We can use this observation to simulate
+a number of large texts, which we then can use for making an empirical
+comparison between different sorting algorithms.</p>
+</section>
+</section>
+</div>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-2.9.html" class="navbutton">&lt;&lt;</a>
+<a href="section-2.9.html" accesskey="p" rel="previous">Code tuning</a>
+</div>
+<div class="navlink">
+<a href="section-2.11.html" accesskey="n" rel="next">Review questions</a>
+<a href="section-2.11.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

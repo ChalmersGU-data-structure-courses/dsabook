@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Common misunderstandings</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-5.3.html" class="navbutton">&lt;&lt;</a>
+<a href="section-5.3.html" accesskey="p" rel="previous">Analysing problems</a>
+</div>
+<div>
+<a href="section-5.5.html" accesskey="n" rel="next">Review questions</a>
+<a href="section-5.5.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:common-misunderstandings" class="level2"
+data-number="5.4">
+<h2 data-number="5.4"><span class="header-section-number">5.4</span>
+Common misunderstandings</h2>
+<p><a href="section-14.html#asymptotic-analysis" class="term"
+title="A method for estimating the efficiency of an algorithm or computer program by identifying its asymptotic complexity, the growth rate of its complexity function. Asymptotic analysis also gives a way to define the inherent difficulty of a problem. We frequently use the term algorithm analysis to mean the same thing.">Asymptotic
+analysis</a> is one of the most intellectually difficult topics that
+undergraduate computer science majors are confronted with. Most people
+find <a href="section-14.html#growth-rate" class="term"
+title="The rate at which a function grows. How quickly the function grows when its input grows. Also called its *order of growth*. A function $f$ has growth rate bounded by a function $g$ if the values of $f$ are eventually bounded by those of $g$ up to some constant factor. We often shorten this (somewhat confusingly) by saying that $f$ has growth rate $g$ or that $f$ has order of growth $g$. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \leq c g(n)$ for all $n \geq n_0$. We then say that $f$ has growth rate less or equal that of $g$ and write $f \in O(g)$ (big-$O$ notation). This defines the preorder of growth rates. In algorithm analysis, we sometimes speak of the growth rate of an algorithm. By that, we mean the growth rate of the complexity of the algorithm, the rate at which the cost of the algorithm grows as the size of its input grows. This is also called the asymptotic complexity of that algorithm.">growth
+rates</a> and asymptotic analysis confusing and so develop
+misconceptions about either the concepts or the terminology. It helps to
+know what the standard points of confusion are, in hopes of avoiding
+them.</p>
+<p>One problem with differentiating the concepts of <a
+href="section-14.html#upper-bound" class="term"
+title="An upper bound for a growth rate $f$ is any growth rate $g$ that is greater than or equal to it. Formally, there are constants $n_0 \geq 0$ and $C &gt; 0$ such that $f(n) \leq C g(n)$ for all $n \geq n_0$. We also write $f \in O(g)$ or slightly imprecisely $f(n) \in O(g(n))$ (this is big-$O$ notation). Usually, we are interested in finding an upper bound $g$ that has a simple expression compared to $f$, but is still sharp (there is not much room for improvement). In algorithm analysis, an upper bound for an algorithm is an upper bound for the asymptotic complexity of the algorithm, the growth rate of its complexity. In practice, we are looking for the best possible upper bound that has a simple mathematical expression. For example, we may write $T(n) \in O(n^2)$ if $T$ is the (time) complexity of the algorithm to say that the complexity is quadratic, i.e. the asymptoptic complexity of the algorithm has as upper bound the growth rate given by squaring.">upper</a>
+and <a href="section-14.html#lower-bound" class="term"
+title="An lower bound for a growth rate $f$ is any growth rate $g$ that is less than or equal to it. Formally, there are constants $n_0 \geq 0$ and $c &gt; 0$ such that $f(n) \geq c g(n)$ for all $n \geq n_0$. We also write $f \in \Omega(g)$ or slightly imprecisely $f(n) \in \Omega(g(n))$ (this is Omega notation). Usually, we are interested in finding a lower bound $g$ that has a simple expression compared to $f$, but is still sharp (there is not much room for improvement). In algorithm analysis, a lower bound for an algorithm is a lower bound for the asymptotic complexity of the algorithm, the growth rate of its complexity.">lower
+bounds</a> is that, for most algorithms that you will encounter, it is
+easy to recognise the true growth rate for that algorithm. Given
+complete knowledge about a cost function, the upper and lower bound for
+that cost function are always the same. Thus, the distinction between an
+upper and a lower bound is only worthwhile when you have incomplete
+knowledge about the thing being measured. We can use the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi mathvariant="normal">Θ</mi><annotation encoding="application/x-tex">\Theta</annotation></semantics></math>-notation
+to indicate that there is no meaningful difference between what we know
+about the growth rates of the upper and lower bound (which is usually
+the case for simple algorithms).</p>
+<p>It is a common mistake to confuse the concepts of upper bound or
+lower bound on the one hand, and <a href="section-14.html#worst-case"
+class="term"
+title="In algorithm analysis, specifically complexity of an algorithm, the problem instance from among all problem instances for a given input size $n$ that has the greatest cost. Every input size $n$ has its own worst case. We **never** consider the worst case as removed from input size.">worst
+case</a> or <a href="section-14.html#best-case" class="term"
+title="In algorithm analysis, specifically complexity of an algorithm, the problem instance from among all problem instances for a given input size $n$ that has least cost. Every input size $n$ has its own best case. We **never** consider the best case as removed from input size.">best
+case</a> on the other. The best, worst, or <a
+href="section-14.html#average-case" class="term"
+title="In algorithm analysis, specifically complexity of an algorithm, the average of the costs for all problem instances of a given input size $n$. If not all problem instances have equal probability of occurring, then the average case must be calculated using a weighted average that is specified with the problem (for example, every input may be equally likely). Every input size $n$ has its own average case. We **never** consider the average case as removed from input size.">average
+cases</a> each <strong>define a cost</strong> for a specific input
+instance (or specific set of instances for the average case). In
+contrast, upper and lower bounds describe our understanding of the
+<strong>growth rate</strong> for that cost measure. So to define the
+growth rate for an algorithm or problem, we need to determine what we
+are measuring (the best, worst, or average case) and also our
+description for what we know about the growth rate of that cost measure
+(big-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>O</mi><annotation encoding="application/x-tex">O</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi mathvariant="normal">Ω</mi><annotation encoding="application/x-tex">\Omega</annotation></semantics></math>,
+or
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi mathvariant="normal">Θ</mi><annotation encoding="application/x-tex">\Theta</annotation></semantics></math>).</p>
+<p>The upper bound for an algorithm is not the same as the worst case
+for that algorithm for a given input of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.
+What is being bounded is not the actual cost (which you can determine
+for a given value of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>),
+but rather the <strong>growth rate</strong> for the cost. There cannot
+be a growth rate for a single point, such as a particular value of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.
+The growth <strong>rate</strong> applies to the <strong>change</strong>
+in cost as a <strong>change</strong> in input size occurs. Likewise, the
+lower bound is not the same as the best case for a given size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.</p>
+<p>Another common misconception is thinking that the best case for an
+algorithm occurs when the input size is as small as possible, or that
+the worst case occurs when the input size is as large as possible. What
+is correct is that best- and worse-case instances exist for each
+possible size of input. That is, for all inputs of a given size, say
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
+one (or more) of the inputs of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+is the best and one (or more) of the inputs of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+is the worst. Often (but not always!), we can characterise the best
+input case for an arbitrary size, and we can characterise the worst
+input case for an arbitrary size. Ideally, we can determine the growth
+rate for the characterised best, worst, and average cases as the input
+size grows.</p>
+<section id="sec:example-best-case-for-sequential-search"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Best case for sequential search</h4>
+<p>What is the growth rate of the best case for sequential search? For
+any array of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
+the best case occurs when the value we are looking for appears in the
+first position of the array. This is true regardless of the size of the
+array. Thus, the best case (for arbitrary size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>)
+occurs when the desired value is in the first of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+positions, and its cost is 1. It is <em>not</em> correct to say that the
+best case occurs when
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n=1</annotation></semantics></math>.</p>
+</section>
+<section id="sec:best-case-upper-bound-or-worst-case-lower-bound"
+class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1"><span class="header-section-number">5.4.1</span>
+Best-case upper bound, or worst-case lower bound?</h3>
+<p>Note that even though it is possible to analyse all possible
+combinations of (upper/lower/tight) bounds, and (best/worst/average)
+case, there are only a few combinations that are of interest.</p>
+<p>When it comes to analysing algorithms, we are usually not at all
+interested in any best-case analysis. After all, knowing that an
+algorithm performs well in some very lucky cases doesn’t say if it’s a
+good algorithm – it is much more important to know how it performs on
+worst-case inputs, or sometimes in the average case.</p>
+<p>In the same way, it is not very interesting to learn about the lower
+bound of an algorithm. This tells us that the algorithm cannot run
+faster than the lower bound, but usually this lower bound is very fast
+anyway.</p>
+<p>That leaves us with analysing the worst-case upper bound, or
+sometimes the average-case behaviour. So this is what we almost always
+do.</p>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-5.3.html" class="navbutton">&lt;&lt;</a>
+<a href="section-5.3.html" accesskey="p" rel="previous">Analysing problems</a>
+</div>
+<div class="navlink">
+<a href="section-5.5.html" accesskey="n" rel="next">Review questions</a>
+<a href="section-5.5.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

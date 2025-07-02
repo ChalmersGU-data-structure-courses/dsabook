@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Search trees</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-10.4.html" class="navbutton">&lt;&lt;</a>
+<a href="section-10.4.html" accesskey="p" rel="previous">Sorted sets and maps</a>
+</div>
+<div>
+<a href="section-11.1.html" accesskey="n" rel="next">Binary search trees</a>
+<a href="section-11.1.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:search-trees" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span>
+Search trees</h1>
+<p>This chapter covers <em>binary search trees (BSTs)</em>, a data
+structure that uses a binary tree to implement a set or a map.</p>
+<p>However, as we will see, a problem with BSTs is that they might
+become <em>unbalanced</em>, which make them inefficient. If the tree is
+unbalanced, all basic operations (searching, adding and removing) become
+linear in the size of the tree,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>.</p>
+<p>The solution to that problem is make the trees automatically
+rebalance. This can be done in many different ways, some examples are <a
+href="section-14.html#avl-tree" class="term"
+title="A variant implementation for the BST, which differs from the standard BST in that it uses modified insert and remove methods in order to keep the tree balanced. Similar to a splay tree in that it uses the concept of rotations in the insert and remove operations.">AVL
+trees</a> (<a href="section-11.3.html#sec:avl-trees">Section 11.3</a>),
+<a href="section-14.html#splay-tree" class="term"
+title="A variant implementation for the BST, which differs from the standard BST in that it uses modified insert and remove methods in order to keep the tree balanced. Similar to an AVL tree in that it uses the concept of rotations in the insert and remove operations. While a splay tree does not guarentee that the tree is balanced, it does guarentee that a series of $n$ operations on the tree will have a total cost of $O(n \log n)$ cost, meaning that any given operation can be viewed as having amortised cost of $O(\log n)$.">Splay
+trees</a> (<a href="section-11.4.html#sec:splay-trees">Section 11.4</a>)
+and <a href="section-14.html#red-black-tree" class="term"
+title="A balanced variation on a BST.">Red-black trees</a>, who all have
+their own way of making the basic operaitions logarithmic,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>,
+in the size of the tree. Another way of keeping the trees balanced is to
+use <em>non-binary</em> trees, such as 2-3 trees or more general
+B-trees, but we currently don’t cover them in this book.</p>
+<p>Not all data structures used for searching are trees – in the end of
+the chapter we discuss <a href="section-14.html#skip-list" class="term"
+title="A form of linked list that adds additional links to improve the cost of fundamental operations like insert, delete, and search. It is a probabilistic data structure since it adds the additional links using a probabilistic algorithm. It can implement a dictionary more efficiently than a BST, and is roughly as difficult to implement.">Skip
+lists</a>, which is an interesting hybrid between a tree and a <a
+href="section-14.html#linked-list" class="term"
+title="An implementation for the list ADT that uses dynamic allocation of link nodes to store the list elements. Common variants are the singly linked list, doubly linked list and circular list. The overhead required is the pointers in each link node.">linked
+list</a> (<a
+href="section-6.3.html#sec:stacks-implemented-as-linked-lists">Section 6.3</a>).</p>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-10.4.html" class="navbutton">&lt;&lt;</a>
+<a href="section-10.4.html" accesskey="p" rel="previous">Sorted sets and maps</a>
+</div>
+<div class="navlink">
+<a href="section-11.1.html" accesskey="n" rel="next">Binary search trees</a>
+<a href="section-11.1.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Traversing a binary tree</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+<link href="../interactive/Binary/BinExampCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Binary/BTCON.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-8.3.html" class="navbutton">&lt;&lt;</a>
+<a href="section-8.3.html" accesskey="p" rel="previous">Implementing binary trees</a>
+</div>
+<div>
+<a href="section-8.5.html" accesskey="n" rel="next">Iteration, recursion, and information flow</a>
+<a href="section-8.5.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:traversing-a-binary-tree" class="level2"
+data-number="8.4">
+<h2 data-number="8.4"><span class="header-section-number">8.4</span>
+Traversing a binary tree</h2>
+<p>Often we wish to process a binary tree by “visiting” each of its
+nodes, each time performing a specific action such as printing the
+contents of the node. Any process for visiting all of the nodes in some
+order is called a <a href="section-14.html#traversal" class="term"
+title="Any process for visiting all of the objects in a collection (such as a tree or graph) in some order.">traversal</a>.
+Any traversal that lists every node in the tree exactly once is called
+an <a href="section-14.html#enumeration" class="term"
+title="The process by which a traversal lists every object in the container exactly once. Thus, a traversal that prints the nodes is said to enumerate the nodes. An enumeration can also refer to the actual listing that is produced by the traversal (as well as the process that created that listing).">enumeration</a>
+of the tree’s nodes. Some applications do not require that the nodes be
+visited in any particular order as long as each node is visited
+precisely once. For other applications, nodes must be visited in an
+order that preserves some relationship.</p>
+<section id="sec:preorder-postorder-and-inorder" class="level3"
+data-number="8.4.1">
+<h3 data-number="8.4.1"><span class="header-section-number">8.4.1</span>
+Preorder, postorder and inorder</h3>
+<p>There are three main strategies for traversing a binary tree,
+depending on when we want to visit a node in relation to its children
+(and all their subtrees).</p>
+<dl>
+<dt>Preorder traversal</dt>
+<dd>
+Visit each node only <em>before</em> we visit its children (and their
+subtrees). For example, this is useful if we want to create a copy of a
+tree. First we create a copy of the current node, and then we can
+directly copy its subtrees into the new node.
+</dd>
+<dt>Postorder traversal</dt>
+<dd>
+Visit each node only <em>after</em> we visit its children (and their
+subtrees). This is useful when we want to delete a tree to free storage
+space. Before we can delete the current node, we should delete all its
+children (and its children’s children and so on).
+</dd>
+<dt>Inorder traversal</dt>
+<dd>
+First visit the left child (including its entire subtree), then visit
+the node, and finally visit the right child (including its entire
+subtree). If the tree is a <a href="section-14.html#binary-search-tree"
+class="term"
+title="A binary tree that imposes the following constraint on its node values: The search key value for any node $A$ must be greater than the (key) values for all nodes in the left subtree of $A$, and less than the key values for all nodes in the right subtree of $A$. Some convention must be adopted if multiple nodes with the same key value are permitted, typically these are required to be in the right subtree.">binary
+search tree</a>, then we can use inorder traversal to list all values in
+increasing order.
+</dd>
+</dl>
+<p><a href="section-8.4.html#tbl:visiting-orders">Table 8.1</a> shows in
+which order the nodes in the example tree from <a
+href="section-8.1.html#fig:example_bintree">Figure 8.1</a> are visited, depending on the
+traversal strategy.</p>
+<div id="tbl:visiting-orders">
+<table>
+<caption>Table 8.1: Visiting order for the example tree in <a
+href="section-8.1.html#fig:example_bintree">Figure 8.1</a></caption>
+<thead>
+<tr>
+<th style="text-align: left;">Traversal</th>
+<th style="text-align: left;">Visiting order</th>
+<th style="text-align: left;">When is the root visited?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Preorder</td>
+<td style="text-align: left;"><strong>A, B, D, C, E, G, F, H,
+I</strong></td>
+<td style="text-align: left;">A is the first visited node</td>
+</tr>
+<tr>
+<td style="text-align: left;">Postorder</td>
+<td style="text-align: left;"><strong>D, B, G, E, H, I, F, C,
+A</strong></td>
+<td style="text-align: left;">A is the very last node to visit</td>
+</tr>
+<tr>
+<td style="text-align: left;">Inorder</td>
+<td style="text-align: left;"><strong>B, D, A, G, E, C, H, F,
+I</strong></td>
+<td style="text-align: left;">after visiting the left subtree (B,
+D)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="online">
+<p>As a reminder, here is the example tree again:</p>
+<p>
+<div id="BinExampCON" class="ssAV" data-short-name="BinExampCON" data-long-name="Binary/BinExampCON" alt="Binary/BinExampCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<section id="sec:interactive-explanations" class="level4 unnumbered">
+<h4 class="unnumbered">Interactive explanations</h4>
+</section>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a visualisation of preorder traversal.</p>
+</summary>
+<p>
+<div id="preorderCON" class="ssAV" data-short-name="preorderCON" data-long-name="Preorder Traversal Slideshow" alt="Preorder Traversal Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>And a visualisation of postorder traversal.</p>
+</summary>
+<p>
+<div id="postorderCON" class="ssAV" data-short-name="postorderCON" data-long-name="Postorder Traversal Slideshow" alt="Postorder Traversal Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>And finally a visualisation of inorder traversal.</p>
+</summary>
+<p>
+<div id="inorderCON" class="ssAV" data-short-name="inorderCON" data-long-name="Inorder Traversal Slideshow" alt="Inorder Traversal Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+</section>
+<section id="sec:traversing-implementation" class="level3"
+data-number="8.4.2">
+<h3 data-number="8.4.2"><span class="header-section-number">8.4.2</span>
+Implementation</h3>
+<p>A traversal routine is naturally written as a recursive function. The
+initial call to the traversal function passes in a pointer to the root
+node of the tree. The traversal function visits the node and its
+children (if any) in the desired order. Here is a very generic
+pseudocode for all kinds of traversal:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> traverse(node):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> node <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span>:      <span class="co">// Only continue if this is a tree</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        visitPreorder(node)   <span class="co">// Visit root node (PREORDER traversal)</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        traverse(node.left)   <span class="co">// Process all nodes in left subtree</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        visitInorder(node)    <span class="co">// Visit root node (INORDER traversal)</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        traverse(node.right)  <span class="co">// Process all nodes in right subtree</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        visitPostorder(node)  <span class="co">// Visit root node (POSTORDER traversal)</span></span></code></pre></div>
+<div class="online">
+<p>For example, preorder traversal specifies that a node should be
+visited before its children. Then we can remove the lines for inorder
+and postorder, and we get the following preorder traversal function:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> preorder(node):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> node <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span>:      <span class="co">// Only continue if this is a tree</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        visit(node)           <span class="co">// Visit root node</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        preorder(node.left)   <span class="co">// Process all nodes in left subtree</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        preorder(node.right)  <span class="co">// Process all nodes in right subtree</span></span></code></pre></div>
+<p>Function <code>preorder</code> first checks that the tree is not
+empty (if it is, then the traversal is done and <code>preorder</code>
+simply returns). Otherwise, <code>preorder</code> makes a call to
+<code>visit</code>, which processes the root node (i.e., prints the
+value or performs whatever computation as required by the application).
+Function <code>preorder</code> is then called recursively on the left
+subtree, which will visit all nodes in that subtree. Finally,
+<code>preorder</code> is called on the right subtree, visiting all nodes
+in the right subtree. Postorder and inorder traversals are similar. They
+simply change the order in which the node and its children are visited,
+as appropriate.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<section id="sec:preorder-traversal-practice" class="level4 unnumbered">
+<h4 class="unnumbered">Preorder traversal practice</h4>
+</summary>
+<p>
+<div id="btTravPreorderPRO" class="embedContainer">
+<iframe id="btTravPreorderPRO_iframe" aria-label="btTravPreorderPRO" src="../interactive/Binary/btTravPreorderPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</section>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<section id="sec:postorder-traversal-practice"
+class="level4 unnumbered">
+<h4 class="unnumbered">Postorder traversal practice</h4>
+</summary>
+<p>
+<div id="btTravPostorderPRO" class="embedContainer">
+<iframe id="btTravPostorderPRO_iframe" aria-label="btTravPostorderPRO" src="../interactive/Binary/btTravPostorderPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</section>
+</div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<section id="sec:inorder-traversal-practice" class="level4 unnumbered">
+<h4 class="unnumbered">Inorder traversal practice</h4>
+</summary>
+<p>
+<div id="btTravInorderPRO" class="embedContainer">
+<iframe id="btTravInorderPRO_iframe" aria-label="btTravInorderPRO" src="../interactive/Binary/btTravInorderPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</section>
+</div>
+<section id="sec:more-about-implementing-tree-traversals" class="level3"
+data-number="8.4.3">
+<h3 data-number="8.4.3"><span class="header-section-number">8.4.3</span>
+More about implementing tree traversals</h3>
+<p>Recall that any recursive function requires the following:</p>
+<ol type="1">
+<li>The base case and its action.</li>
+<li>The recursive case and its action.</li>
+</ol>
+<p>In this section, we will talk about some details related to correctly
+and clearly implementing recursive tree traversals.</p>
+<section id="sec:base-case" class="level4 unnumbered">
+<h4 class="unnumbered">Base case</h4>
+<p>In binary tree traversals, most often the base case is to check if we
+have an empty tree. A common mistake is to check the child pointers of
+the current node, and only make the recursive call for a non-null
+child.</p>
+<p>Recall the basic preorder traversal function.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> preorder(node):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> node <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span>:      <span class="co">// Only continue if this is a tree</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        visit(node)           <span class="co">// Visit root node</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        preorder(node.left)   <span class="co">// Process all nodes in left subtree</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        preorder(node.right)  <span class="co">// Process all nodes in right subtree</span></span></code></pre></div>
+<p>Here is an alternate design for the preorder traversal, in which the
+left and right pointers of the current node are checked so that the
+recursive call is made only on non-empty children.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// This is a bad idea:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> preorder2(node):</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    visit(node)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> node.left <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span>:</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        preorder2(node.left)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> node.right <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span>:</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        preorder2(node.right)</span></code></pre></div>
+<p>At first, it might appear that <code>preorder2</code> is more
+efficient than <code>preorder</code>, because it makes only half as many
+recursive calls (since it won’t try to call on a null pointer). On the
+other hand, <code>preorder2</code> must access the left and right child
+pointers twice as often. The net result is that there is no performance
+improvement.</p>
+<p>Perhaps the writer of <code>preorder2</code> wants to protect against
+the case where the root is <code>null</code>. But <code>preorder2</code>
+has an error. While <code>preorder2</code> ensures that no recursive
+calls will be made on empty subtrees, it will fail if the original call
+from outside passes in a null pointer. This would occur if the original
+tree is empty. Since an empty tree is a legitimate input to the initial
+call on the function, there is no safe way to avoid this case. So it is
+necessary that the first thing you do on a binary tree traversal is to
+check that the root is not <code>null</code>. If we try to fix
+<code>preorder2</code> by adding this test, then making the tests on the
+children is completely redundant because the pointer will be checked
+again in the recursive call.</p>
+<p>The design of <code>preorder2</code> is inferior to that of
+<code>preorder</code> for a deeper reason as well. Looking at the
+children to see if they are <code>null</code> means that we are worrying
+too much about something that can be dealt with just as well by the
+children. This makes the function more complex, which can become a real
+problem for more complex tree structures. Even in the relatively simple
+<code>preorder2</code> function, we had to write two tests for
+<code>null</code> rather than the one needed by <code>preorder</code>.
+This makes it more complicated than the original version. The key issue
+is that it is much easier to write a recursive function on a tree when
+we only think about the needs of the current node. Whenever we can, we
+want to let the children take care of themselves. In this case, we care
+that the current node is not <code>null</code>, and we care about how to
+invoke the recursion on the children, but we do <strong>not</strong>
+have to care about how or when that is done.</p>
+</section>
+<section id="sec:the-recursive-call" class="level4 unnumbered">
+<h4 class="unnumbered">The recursive call</h4>
+<p>The secret to success when writing a recursive function is to not
+worry about how the recursive call works. Just accept that it will work
+correctly. One aspect of this principle is not to worry about checking
+your children when you don’t need to. You should only look at the values
+of your children if you need to know those values in order to compute
+some property of the current node. Child values should not be used to
+decide whether to call them recursively. Make the call, and let their
+own base case handle it.</p>
+</section>
+<section id="sec:example-changing-the-node-values-in-a-tree"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Changing the node values in a tree</h4>
+<p>Consider the problem of incrementing the value for each node in a
+binary tree. The following solution has an error, since it does
+redundant manipulation to the left and the right children of each
+node.</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> inefficient_increment(node):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> node <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span>:</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        node.elem <span class="op">=</span> node.elem <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> node.left <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span>:</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>            node.left.elem <span class="op">=</span> node.left.elem <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>            inefficient_increment(node.left.left)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> node.right <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span>:</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>            node.right.elem <span class="op">=</span> node.right.elem <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>            inefficient_increment(node.right.right)</span></code></pre></div>
+<p>The efficient solution should not explicitly set the child values
+that way. Changing the value of a node does not depend on the child
+values. So the function should simply increment the node value, and make
+recursive calls on the children.</p>
+</section>
+<p>In rare problems, you might need to explicitly check if the children
+are null or access the child values for each node. For example, you
+might need to check if all nodes in a tree satisfy the property that
+each node stores the sum of its left and right children. In this
+situation, you must look at the values of the children to decide
+something about the current node. You do <strong>not</strong> look at
+the children to decide whether to make a recursive call.</p>
+</section>
+</div>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-8.3.html" class="navbutton">&lt;&lt;</a>
+<a href="section-8.3.html" accesskey="p" rel="previous">Implementing binary trees</a>
+</div>
+<div class="navlink">
+<a href="section-8.5.html" accesskey="n" rel="next">Iteration, recursion, and information flow</a>
+<a href="section-8.5.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+<script type="text/javascript" src="../interactive/Binary/BinExampCON.js"></script>
+<script type="text/javascript" src="../interactive/Binary/preorderCON.js"></script>
+<script type="text/javascript" src="../interactive/Binary/postorderCON.js"></script>
+<script type="text/javascript" src="../interactive/Binary/inorderCON.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Comparison of linked lists vs dynamic arrays</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-6.7.html" class="navbutton">&lt;&lt;</a>
+<a href="section-6.7.html" accesskey="p" rel="previous">Dynamic arrays</a>
+</div>
+<div>
+<a href="section-6.9.html" accesskey="n" rel="next">Double-ended queues</a>
+<a href="section-6.9.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:comparison-of-linked-lists-vs-dynamic-arrays"
+class="level2" data-number="6.8">
+<h2 data-number="6.8"><span class="header-section-number">6.8</span>
+Comparison of linked lists vs dynamic arrays</h2>
+<p>Now that you have seen two substantially different implementations
+for stacks and queues, it is natural to ask which is better. In
+particular, if you must implement a stack or a queue for some task,
+which implementation should you choose?</p>
+<section id="sec:time-complexity" class="level4 unnumbered">
+<h4 class="unnumbered">Time complexity</h4>
+<p>All the basic operations for the array-based and linked list
+implementations take constant time, so from a time efficiency
+perspective, neither has a significant advantage.</p>
+<p>Array-based lists are usually slightly faster because they can make
+use of the internal memory cache that modern computers have, but it
+depends on many factors – the programming language, the operating
+system, the processor, etc.</p>
+<p>One little disadvantage with array-based lists is that the operations
+are only <em>amortised</em> constant time. We will discuss amortised
+time more in <a
+href="section-7.2.html#sec:amortised-analysis">Section 7.2</a> later.
+But what it means in practice is that push, pos, enqueue and dequeue are
+only guaranteed to be constant time <em>on average</em> if we run many
+operations. Now and then (very rarely) the internal array will be
+resized, and then the operation might take longer time than usual.</p>
+<p>This means that if we are implementing an application that has hard
+real-time constraints, a linked list might be a slightly better
+choice.</p>
+</section>
+<section id="sec:memory-usage" class="level4 unnumbered">
+<h4 class="unnumbered">Memory usage</h4>
+<p>Given a collection of elements to store, they take up some amount of
+space whether they are simple integers or large objects with many
+fields. Any container data structure like a stack, a queue or a list
+then requires some additional space to organise the elements being
+stored. This additional space is called <a
+href="section-14.html#overhead" class="term"
+title="All information stored by a data structure aside from the actual data. For example, the pointer fields in a linked list or BST, or the unused positions in an array-based list.">overhead</a>.</p>
+<ul>
+<li><p>Array-based lists have the disadvantage that the
+<em>capacity</em> of the internal array is larger than the actual size
+of the list. When the array has recently been reallocated, a substantial
+amount of space might be tied up in a largely empty array. This empty
+space is the overhead required by the array-based list.</p></li>
+<li><p>Linked lists on the other hand have the advantage that they only
+need space for the objects actually on the list. However, each list node
+needs to allocate memory for the pointer to the next node, and all of
+these pointers combined is the overhead required by the array-based
+list.</p></li>
+</ul>
+<p>The amount of space required by a linked list is directly
+proportional to the number of elements
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.
+Assuming that each list node takes up
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+bytes of memory, the full list will use
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">kn</annotation></semantics></math>
+bytes. The amount of space required by an array-based list is in the
+worst case three times as much as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+times the size of an array cell. (This worst case will arise when we
+remove a lot of elements from the list, because we wait until it is 1/3
+full until we shrink the array). So assuming that one array cell takes
+up
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>
+bytes, the full array-based list will use at least
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">Cn</annotation></semantics></math>
+bytes, and at most
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>3</mn><mi>c</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">3cn</annotation></semantics></math>
+bytes.</p>
+<p>So, which one is the best? It depends on the size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+of the list nodes, compared to the size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>
+of the array cells. Array-based lists have the advantage that there is
+no wasted space for an individual element. Linked lists require that an
+extra pointer for the <code>next</code> field be added to every list
+node. So the linked list has these <code>next</code> pointers as
+overhead. In many cases,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>
+is 2–3 times as large as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>,
+so they will be quite similar in size on average. But this depends on
+the programming language, the operating system, and perhaps other
+factors.</p>
+<p>Note that these calculations exclude the memory used by the actual
+list elements, since the lists themselves only contain pointers to the
+elements! And in many cases, the objects themselves are much larger than
+the list nodes (or array cells).</p>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-6.7.html" class="navbutton">&lt;&lt;</a>
+<a href="section-6.7.html" accesskey="p" rel="previous">Dynamic arrays</a>
+</div>
+<div class="navlink">
+<a href="section-6.9.html" accesskey="n" rel="next">Double-ended queues</a>
+<a href="section-6.9.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

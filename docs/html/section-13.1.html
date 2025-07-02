@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Definitions and properties</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-13.html" class="navbutton">&lt;&lt;</a>
+<a href="section-13.html" accesskey="p" rel="previous">Graphs</a>
+</div>
+<div>
+<a href="section-13.2.html" accesskey="n" rel="next">Graph representations</a>
+<a href="section-13.2.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:definitions-and-properties" class="level2"
+data-number="13.1">
+<h2 data-number="13.1"><span class="header-section-number">13.1</span>
+Definitions and properties</h2>
+<p>A <a href="section-14.html#graph" class="term"
+title="A graph $\mathbf{G} = (\mathbf{V}, \mathbf{E})$ consists of a set of vertices $\mathbf{V}$ and a set of edges $\mathbf{E}$, such that each edge in $\mathbf{E}$ is a connection between a pair of vertices in $\mathbf{V}$.">graph</a>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐆</mi><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mi>𝐕</mi><mo>,</mo><mi>𝐄</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\mathbf{G} = (\mathbf{V}, \mathbf{E})</annotation></semantics></math>
+consists of a set of <a href="section-14.html#vertex" class="term"
+title="Another name for a node in a graph.">vertices</a>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐕</mi><annotation encoding="application/x-tex">\mathbf{V}</annotation></semantics></math>
+and a set of <a href="section-14.html#edge" class="term"
+title="The connection that links two nodes in a tree, linked list, or graph.">edges</a>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐄</mi><annotation encoding="application/x-tex">\mathbf{E}</annotation></semantics></math>,
+such that each edge in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐄</mi><annotation encoding="application/x-tex">\mathbf{E}</annotation></semantics></math>
+is a connection between a pair of vertices in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐕</mi><annotation encoding="application/x-tex">\mathbf{V}</annotation></semantics></math>.
+The number of vertices is written
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|\mathbf{V}|</annotation></semantics></math>,
+and the number of edges is written
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>𝐄</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|\mathbf{E}|</annotation></semantics></math>.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>𝐄</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|\mathbf{E}|</annotation></semantics></math>
+can range from zero to a maximum of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><msup><mo stretchy="false" form="prefix">|</mo><mn>2</mn></msup><mo>−</mo><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">|\mathbf{V}|^2 - |\mathbf{V}|</annotation></semantics></math>.</p>
+<div class="note">
+<p><em>Note</em>: Some graph applications require that a given pair of
+vertices can have multiple or parallel edges connecting them, or that a
+vertex can have an edge to itself. However, the applications discussed
+here do not require either of these special cases. To simplify our graph
+API, we will assume that there are no duplicate edges.</p>
+</div>
+<p>A graph whose edges are not directed is called an <a
+href="section-14.html#undirected-graph" class="term"
+title="A graph whose edges do not have a direction.">undirected
+graph</a>, as shown in part (a) of the following figure. A graph with
+edges directed from one vertex to another (as in (b)) is called a <a
+href="section-14.html#directed-graph" class="term"
+title="A graph whose edges each are directed from one of its defining vertices to the other.">directed
+graph</a> or <a href="section-14.html#digraph" class="term"
+title="A graph whose edges each are directed from one of its defining vertices to the other.">digraph</a>.
+A graph with labels associated with its vertices (as in (c)) is called a
+<a href="section-14.html#labeled-graph" class="term"
+title="A graph with labels associated with the nodes.">labeled
+graph</a>. Associated with each edge may be a cost or <a
+href="section-14.html#weight" class="term"
+title="A cost or distance most often associated with an edge in a graph.">weight</a>.
+A graph whose edges have weights (as in (c)) is said to be a <a
+href="section-14.html#weighted-graph" class="term"
+title="A graph whose edges each have an associated weight or cost.">weighted
+graph</a>. These are depicted in <a
+href="#fig:GraphTypes">Figure 13.1</a>.</p>
+<figure id="fig:GraphTypes">
+<img src="images/GraphTypes.png" style="width:90.0%"
+alt="Figure 13.1: Some types of graphs" />
+<figcaption aria-hidden="true">Figure 13.1: Some types of
+graphs</figcaption>
+</figure>
+<p>An edge connecting vertices
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>
+is written
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(a, b)</annotation></semantics></math>.
+Such an edge is said to be <a href="section-14.html#incident"
+class="term"
+title="In graph terminology, an edge connecting two vertices is said to be incident with those vertices. The two vertices are said to be adjacent.">incident</a>
+with vertices
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>.
+The two vertices are said to be <a href="section-14.html#adjacent"
+class="term"
+title="Two nodes of a tree or two vertices of a graph are said to be adjacent if they have an edge connecting them. If the edge is directed from $a$ to $b$, then we say that $a$ is adjacent to $b$, and $b$ is adjacent from $a$.">adjacent</a>.
+If the edge is directed from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>,
+then we say that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>
+is adjacent to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>,
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>
+is adjacent from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>.
+The <a href="section-14.html#degree" class="term"
+title="In graph terminology, the degree for a vertex is its number of neighbours. In a directed graph, the in degree is the number of edges directed into the vertex, and the out degree is the number of edges directed out of the vertex. In tree terminology, the degree for a node is its number of children.">degree</a>
+of a vertex is the number of edges it is incident with. For example,
+vertex
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>e</mi><annotation encoding="application/x-tex">e</annotation></semantics></math>
+in <a href="#fig:GraphNeighbors">Figure 13.2</a> has a degree of
+three.</p>
+<p>In a directed graph, the <a href="section-14.html#out-degree"
+class="term"
+title="In graph terminology, the out degree for a vertex is the number of edges directed out of the vertex.">out
+degree</a> for a vertex is the number of neighbours adjacent from it (or
+the number of edges going out from it), while the <a
+href="section-14.html#in-degree" class="term"
+title="In graph terminology, the in degree for a vertex is the number of edges directed into the vertex.">in
+degree</a> is the number of neighbours adjacent to it (or the number of
+edges coming in to it). In <a href="#fig:GraphTypes">Figure 13.1</a>
+(c), the in degree of vertex 1 is two, and its out degree is one.</p>
+<figure id="fig:GraphNeighbors">
+<img src="images/GraphNeighbors.png" style="width:80.0%"
+alt="Figure 13.2: Neighbors and incidence" />
+<figcaption aria-hidden="true">Figure 13.2: Neighbors and
+incidence</figcaption>
+</figure>
+<p>A sequence of vertices
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mn>1</mn></msub><mo>,</mo><msub><mi>v</mi><mn>2</mn></msub><mo>,</mo><mi>.</mi><mi>.</mi><mi>.</mi><mo>,</mo><msub><mi>v</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">v_1, v_2, ..., v_n</annotation></semantics></math>
+forms a <a href="section-14.html#path" class="term"
+title="In tree or graph terminology, a sequence of vertices $v_1, v_2, ..., v_n$ forms a path of length $n-1$ if there exist edges from $v_i$ to $v_{i+1}$ for $1 \leq i &lt; n$.">path</a>
+of length
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>
+if there exist edges from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>i</mi></msub><annotation encoding="application/x-tex">v_i</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub><annotation encoding="application/x-tex">v_{i+1}</annotation></semantics></math>
+for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>≤</mo><mi>i</mi><mo>&lt;</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">1 \leq i &lt; n</annotation></semantics></math>.
+A path is a <a href="section-14.html#simple-path" class="term"
+title="In graph terminology, a path is simple if all vertices on the path are distinct.">simple
+path</a> if all vertices on the path are distinct. The <a
+href="section-14.html#length" class="term"
+title="In a list, the number of elements. In a string, the number of characters.">length</a>
+of a path is the number of edges it contains. A <a
+href="section-14.html#cycle" class="term"
+title="In graph terminology, a cycle is a path of length three or more that connects some vertex $v_1$ to itself.">cycle</a>
+is a path of length three or more that connects some vertex
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mn>1</mn></msub><annotation encoding="application/x-tex">v_1</annotation></semantics></math>
+to itself. A cycle is a <a href="section-14.html#simple-cycle"
+class="term"
+title="In graph terminology, a cycle is simple if its corresponding path is simple, except that the first and last vertices of the cycle are the same.">simple
+cycle</a> if the path is simple, except for the first and last vertices
+being the same. These are depicted in <a
+href="#fig:GraphPaths">Figure 13.3</a>.</p>
+<figure id="fig:GraphPaths">
+<img src="images/GraphPaths.png" style="width:90.0%"
+alt="Figure 13.3: Different types of paths" />
+<figcaption aria-hidden="true">Figure 13.3: Different types of
+paths</figcaption>
+</figure>
+<p>An undirected graph is a <a href="section-14.html#connected-graph"
+class="term"
+title="An undirected graph is a connected graph if there is at least one path from any vertex to any other.">connected
+graph</a> if there is at least one path from any vertex to any other.
+The maximally connected subgraphs of an undirected graph are called <a
+href="section-14.html#connected-component" class="term"
+title="In an undirected graph, a subset of the nodes such that each node in the subset can be reached from any other node in that subset.">connected
+components</a>. For example, <a
+href="#fig:GraphConnectedComponents">Figure 13.4</a> shows an undirected
+graph with three connected components.</p>
+<figure id="fig:GraphConnectedComponents">
+<img src="images/GraphConnectedComponents.png" style="width:35.0%"
+alt="Figure 13.4: An undirected graph with three connected components" />
+<figcaption aria-hidden="true">Figure 13.4: An undirected graph with
+three connected components</figcaption>
+</figure>
+<p>A graph with relatively few edges is called a <a
+href="section-14.html#sparse-graph" class="term"
+title="A graph where the actual number of edges is much less than the possible number of edges. Generally, this is interpreted to mean that the degree for any vertex in the graph is relatively low.">sparse
+graph</a>, while a graph with many edges is called a <a
+href="section-14.html#dense-graph" class="term"
+title="A graph where the actual number of edges is a large fraction of the possible number of edges. Generally, this is interpreted to mean that the degree for any vertex in the graph is relatively high.">dense
+graph</a>. A graph containing all possible edges is said to be a <a
+href="section-14.html#complete-graph" class="term"
+title="A graph where every vertex connects to every other vertex.">complete
+graph</a>. A <a href="section-14.html#subgraph" class="term"
+title="A subgraph $\mathbf{S}$ is formed from graph $\mathbf{G}$ by selecting a subset $\mathbf{V}_s$ of $\mathbf{G}$&#39;s vertices and a subset $\mathbf{E}_s$ of $\mathbf{G}$&#39;s edges such that for every edge $e \in \mathbf{E}_s$, both vertices of $e$ are in $\mathbf{V}_s$.">subgraph</a>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐒</mi><annotation encoding="application/x-tex">\mathbf{S}</annotation></semantics></math>
+is formed from graph
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐆</mi><annotation encoding="application/x-tex">\mathbf{G}</annotation></semantics></math>
+by selecting a subset
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝐕</mi><mi>s</mi></msub><annotation encoding="application/x-tex">\mathbf{V}_s</annotation></semantics></math>
+of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐆</mi><annotation encoding="application/x-tex">\mathbf{G}</annotation></semantics></math>’s
+vertices and a subset
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝐄</mi><mi>s</mi></msub><annotation encoding="application/x-tex">\mathbf{E}_s</annotation></semantics></math>
+of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐆</mi><annotation encoding="application/x-tex">\mathbf{G}</annotation></semantics></math>
+’s edges such that for every edge
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>e</mi><mo>∈</mo><msub><mi>𝐄</mi><mi>s</mi></msub></mrow><annotation encoding="application/x-tex">e  \in \mathbf{E}_s</annotation></semantics></math>,
+both vertices of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>e</mi><annotation encoding="application/x-tex">e</annotation></semantics></math>
+are in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝐕</mi><mi>s</mi></msub><annotation encoding="application/x-tex">\mathbf{V}_s</annotation></semantics></math>.
+Any subgraph of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>
+where all vertices in the graph connect to all other vertices in the
+subgraph is called a <a href="section-14.html#clique" class="term"
+title="In graph terminology, a clique is a subgraph, defined as any subset $U$ of the graph&#39;s vertices such that every vertex in $U$ has an edge to every other vertex in $U$. The size of the clique is the number of vertices in the clique.">clique</a>.
+See <a href="#fig:GraphSparseDense">Figure 13.5</a> for examples of
+these kinds of graphs.</p>
+<figure id="fig:GraphSparseDense">
+<img src="images/GraphSparseDense.png" style="width:100.0%"
+alt="Figure 13.5: Sparse, dense and complete graphs" />
+<figcaption aria-hidden="true">Figure 13.5: Sparse, dense and complete
+graphs</figcaption>
+</figure>
+<p>A graph without cycles is called an <a
+href="section-14.html#acyclic-graph" class="term"
+title="In graph terminology, a graph that contains no cycles.">acyclic
+graph</a>. Thus, a directed graph without cycles is called a <a
+href="section-14.html#directed-acyclic-graph" class="term"
+title="A graph with no cycles. Abbreviated as DAG. Note that a DAG is not necessarily a tree since a given node might have multiple parents.">directed
+acyclic graph</a> or <a href="section-14.html#dag" class="term"
+title="A graph with no cycles. Abbreviated as DAG. Note that a DAG is not necessarily a tree since a given node might have multiple parents.">DAG</a>.
+They are shown in <a href="#fig:GraphAcyclic">Figure 13.6</a>.</p>
+<figure id="fig:GraphAcyclic">
+<img src="images/GraphAcyclic.png" style="width:80.0%"
+alt="Figure 13.6: Acyclic graph types" />
+<figcaption aria-hidden="true">Figure 13.6: Acyclic graph
+types</figcaption>
+</figure>
+<p>A <a href="section-14.html#free-tree" class="term"
+title="A connected, undirected graph with no simple cycles. An equivalent definition is that a free tree is connected and has $|\mathbf{V}| - 1$ edges.">free
+tree</a> is a connected, undirected graph with no simple cycles. An
+equivalent definition is that a free tree is connected and has
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="false" form="prefix">|</mo><mi>−</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">|\mathbf{V}| - 1</annotation></semantics></math>
+edges.</p>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-13.html" class="navbutton">&lt;&lt;</a>
+<a href="section-13.html" accesskey="p" rel="previous">Graphs</a>
+</div>
+<div class="navlink">
+<a href="section-13.2.html" accesskey="n" rel="next">Graph representations</a>
+<a href="section-13.2.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

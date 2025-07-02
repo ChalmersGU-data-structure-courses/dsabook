@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Stacks and queues</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-6.1.html" class="navbutton">&lt;&lt;</a>
+<a href="section-6.1.html" accesskey="p" rel="previous">Collections</a>
+</div>
+<div>
+<a href="section-6.3.html" accesskey="n" rel="next">Stacks implemented as linked lists</a>
+<a href="section-6.3.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:stacks-and-queues" class="level2" data-number="6.2">
+<h2 data-number="6.2"><span class="header-section-number">6.2</span>
+Stacks and queues</h2>
+<p>The <a href="section-14.html#stack" class="term"
+title="A list-like structure in which elements may be inserted or removed from only one end.">stack</a>
+is a list-like structure in which elements may be inserted or removed
+from only one end. This is an extremely simplistic ADT, but it is
+nevertheless used in many many algorithms. The restrictions make stacks
+very inflexible, but they also make stacks both efficient (for those
+operations they can do) and easy to implement. Many applications require
+only the limited form of insert and remove operations that stacks
+provide. In such cases, it is more efficient to use the simpler stack
+data structure rather than a generic list.</p>
+<p>Despite their restrictions, stacks have many uses. Thus, a special
+vocabulary for stacks has developed. Accountants used stacks long before
+the invention of the computer. They called the stack a “<a
+href="section-14.html#lifo" class="term"
+title="Abbreviation for &#39;last-in, first-out&#39;. This is the access paradigm for a stack, and an old terminolgy for the stack is &#39;LIFO list&#39;.">LIFO</a>”
+list, which stands for “Last-In, First-Out.” Note that one implication
+of the LIFO policy is that stacks remove elements in reverse order of
+their arrival.</p>
+<p>Like the stack, the <a href="section-14.html#queue" class="term"
+title="A list-like structure in which elements are inserted only at one end, and removed only from the other one end.">queue</a>
+is a list-like structure that provides restricted access to its
+elements. Queue elements may only be inserted at the back (called an <a
+href="section-14.html#enqueue" class="term"
+title="A specialised term used to indicate inserting an element onto a queue.">enqueue</a>
+operation) and removed from the front (called a <a
+href="section-14.html#dequeue" class="term"
+title="A specialised term used to indicate removing an element from a queue.">dequeue</a>
+operation). Queues operate like standing in line at a movie theater
+ticket counter. If nobody cheats, then newcomers go to the back of the
+line. The person at the front of the line is the next to be served.
+Thus, queues release their elements in order of arrival. In Britain, a
+line of people is called a “queue”, and getting into line to wait for
+service is called “queuing up”. Accountants have used queues since long
+before the existence of computers. They call a queue a “<a
+href="section-14.html#fifo" class="term"
+title="Abbreviation for &#39;first-in, first-out&#39;. This is the access paradigm for a queue, and an old terminology for the queue is &#39;FIFO list&#39;.">FIFO</a>”
+list, which stands for “First-In, First-Out”.</p>
+<section id="sec:adt-for-stacks" class="level4 unnumbered">
+<h4 class="unnumbered">ADT for stacks</h4>
+<p>The accessible element of the stack is called the <em>top</em>
+element. Elements are not said to be inserted, they are <a
+href="section-14.html#push" class="term"
+title="A specialised term used to indicate inserting an element onto a stack.">pushed</a>
+onto the stack. When removed, an element is said to be <a
+href="section-14.html#pop" class="term"
+title="A specialised term used to indicate removing an element from a stack.">popped</a>
+from the stack. Here is our <a href="section-14.html#adt" class="term"
+title="Abbreviated ADT. The specification of a data type within some language, independent of an implementation. The interface for the ADT is defined in terms of a type and a set of operations on that type. The behaviour of each operation is determined by its inputs and outputs. An ADT does not specify *how* the data type is implemented. These implementation details are hidden from the user of the ADT and protected from outside access, a concept referred to as encapsulation.">ADT</a>
+for stacks:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Stack</span> <span class="kw">of</span> T <span class="kw">extends</span> <span class="bu">Collection</span>:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">push</span>(x: T)     <span class="co">// Pushes x on top of the stack.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">pop</span>() <span class="op">-&gt;</span> T     <span class="co">// Pops the top of the stack and returns it.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">peek</span>() <span class="op">-&gt;</span> T    <span class="co">// Returns the top element, without removing it.</span></span></code></pre></div>
+<p>There are two main approaches to implementing stacks: the <a
+href="section-14.html#linked-stack" class="term"
+title="Analogous to a linked list, this uses dynamic allocation of nodes to store the elements when implementing the stack ADT.">linked
+stack</a> and the <a href="section-14.html#array-based-stack"
+class="term"
+title="Analogous to an array-based list, this uses an array to store the elements when implementing the stack ADT.">array-based
+stack</a>. They will be discussed in Sections <a
+href="section-6.3.html#sec:stacks-implemented-as-linked-lists">6.3</a>,
+<a href="section-6.5.html#sec:stacks-implemented-using-arrays">6.5</a>
+and <a href="section-6.7.html#sec:dynamic-arrays">6.7</a>.</p>
+</section>
+<section id="sec:adt-for-queues" class="level4 unnumbered">
+<h4 class="unnumbered">ADT for queues</h4>
+<p>The accessible element of the queue is called the <em>front</em>
+element. Inserting is called <a href="section-14.html#enqueue"
+class="term"
+title="A specialised term used to indicate inserting an element onto a queue.">enqueue</a>
+and removing <a href="section-14.html#dequeue" class="term"
+title="A specialised term used to indicate removing an element from a queue.">dequeue</a>.
+Here is our <a href="section-14.html#adt" class="term"
+title="Abbreviated ADT. The specification of a data type within some language, independent of an implementation. The interface for the ADT is defined in terms of a type and a set of operations on that type. The behaviour of each operation is determined by its inputs and outputs. An ADT does not specify *how* the data type is implemented. These implementation details are hidden from the user of the ADT and protected from outside access, a concept referred to as encapsulation.">ADT</a>
+for queues:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> <span class="bu">Queue</span> <span class="kw">of</span> T <span class="kw">extends</span> <span class="bu">Collection</span>:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">enqueue</span>(x: T)    <span class="co">// Enqueues x at the end of the queue.</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">dequeue</span>() <span class="op">-&gt;</span> T   <span class="co">// Dequeues the frontmost element.</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">peek</span>() <span class="op">-&gt;</span> T      <span class="co">// Returns the frontmost element, without removing it.</span></span></code></pre></div>
+<p>There are two main queue implementations: the <a
+href="section-14.html#linked-queue" class="term"
+title="Analogous to a linked list, this uses dynamic allocation of nodes to store the elements when implementing the queue ADT.">linked
+queue</a> and the <a href="section-14.html#array-based-queue"
+class="term"
+title="Analogous to an array-based list, this uses an array to store the elements when implementing the queue ADT.">array-based
+queue</a>. They are discussed in Sections <a
+href="section-6.4.html#sec:queues-implemented-as-linked-lists">6.4</a>,
+<a href="section-6.6.html#sec:queues-implemented-using-arrays">6.6</a>
+and <a href="section-6.7.html#sec:dynamic-arrays">6.7</a>.</p>
+</section>
+<section id="sec:case-study-implementing-recursion" class="level3"
+data-number="6.2.1">
+<h3 data-number="6.2.1"><span class="header-section-number">6.2.1</span>
+Case study: Implementing recursion</h3>
+<div class="online">
+<div class="alert">
+<p>WARNING! You should not read this section unless you are already
+comfortable with implementing <a href="section-14.html#recursion"
+class="term"
+title="The process of using recursive calls. An algorithm is recursive if it calls itself to do part of its work. See recursion.">recursive
+functions</a>. One of the biggest hang-ups for students learning
+recursion is too much focus on the recursive “process”. The right way to
+think about recursion is to just think about the return value that the
+recursive call gives back. Thinking about <em>how</em> that answer is
+computed just gets in the way of understanding. There are good reasons
+to understand how recursion is implemented, but helping you to write
+recursive functions is not one of them.</p>
+</div>
+</div>
+<p>Perhaps the most common computer application that uses [stacks] is
+not even visible to its users. This is the implementation of subroutine
+calls in most programming language <a
+href="section-14.html#runtime-environment" class="term"
+title="The environment in which a program (of a particular programming language) executes. The runtime environment handles such activities as managing the runtime stack, the free store, and the garbage collector, and it conducts the execution of the program.">runtime
+environments</a>. A subroutine call is normally implemented by <a
+href="section-14.html#push" class="term"
+title="A specialised term used to indicate inserting an element onto a stack.">pushing</a>
+necessary information about the subroutine (including the return
+address, parameters, and local variables) onto a stack. This information
+is called an <a href="section-14.html#activation-record" class="term"
+title="The entity that is stored on the runtime stack during program execution. It stores any active local variable and the return address from which a new subroutine is being called, so that this information can be recovered when the subroutine terminates.">activation
+record</a>. Further subroutine calls add to the stack. Each return from
+a subroutine <a href="section-14.html#pop" class="term"
+title="A specialised term used to indicate removing an element from a stack.">pops</a>
+the top activation record off the stack.</p>
+<div class="online">
+<p>As an example, here is a recursive implementation for the factorial
+function.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Recursively compute and return n-factoral (n!)</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> factorialRecursive(n):</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">&lt;=</span> <span class="dv">1</span>:</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Base case: return base solution</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Recursive call for n &gt; 1</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> n <span class="op">*</span> factorialRecursive(n<span class="op">-</span><span class="dv">1</span>)</span></code></pre></div>
+<p>Here is an illustration for how the internal processing works.</p>
+<figure>
+<img src="images/RecurSta.png"
+alt="Implementing recursion with a stack" />
+<figcaption aria-hidden="true">Implementing recursion with a
+stack</figcaption>
+</figure>
+<p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>
+values indicate the address of the program instruction to return to
+after completing the current function call. On each recursive function
+call to <code>fact</code>, both the return address and the current value
+of <code>n</code> must be saved. Each return from <code>fact</code> pops
+the top activation record off the stack.</p>
+<p>Consider what happens when we call <code>fact</code> with the value
+4. We use
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>
+to indicate the address of the program instruction where the call to
+<code>fact</code> is made. Thus, the stack must first store the address
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>,
+and the value 4 is passed to <code>fact</code>. Next, a recursive call
+to <code>fact</code> is made, this time with value 3. We will name the
+program address from which the call is made
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>β</mi><mn>1</mn></msub><annotation encoding="application/x-tex">\beta_1</annotation></semantics></math>.
+The address
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>β</mi><mn>1</mn></msub><annotation encoding="application/x-tex">\beta_1</annotation></semantics></math>,
+along with the current value for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+(which is 4), is saved on the stack. Function <code>fact</code> is
+invoked with input parameter 3.</p>
+<p>In similar manner, another recursive call is made with input
+parameter 2, requiring that the address from which the call is made (say
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>β</mi><mn>2</mn></msub><annotation encoding="application/x-tex">\beta_2</annotation></semantics></math>)
+and the current value for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+(which is 3) are stored on the stack. A final recursive call with input
+parameter 1 is made, requiring that the stack store the calling address
+(say
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>β</mi><mn>3</mn></msub><annotation encoding="application/x-tex">\beta_3</annotation></semantics></math>)
+and current value (which is 2).</p>
+<p>At this point, we have reached the base case for <code>fact</code>,
+and so the recursion begins to unwind. Each return from
+<code>fact</code> involves popping the stored value for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+from the stack, along with the return address from the function call.
+The return value for <code>fact</code> is multiplied by the restored
+value for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
+and the result is returned.</p>
+<p>Because an activation record must be created and placed onto the
+stack for each subroutine call, making subroutine calls is a relatively
+expensive operation. While recursion is often used to make
+implementation easy and clear, sometimes you might want to eliminate the
+overhead imposed by the recursive function calls. In some cases, such as
+the factorial function above, recursion can easily be replaced by
+iteration.</p>
+<section id="sec:example-factorial-function"
+class="level4 unnumbered example">
+<h4 class="unnumbered">Example: Factorial function</h4>
+<p>As a simple example of replacing recursion with a stack, consider the
+following non-recursive version of the factorial function.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> factorialStack(n):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    S <span class="op">=</span> <span class="kw">new</span> <span class="bu">Stack</span>()</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> n <span class="op">&gt;</span> <span class="dv">1</span>:</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        S.<span class="bu">push</span>(n)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        n <span class="op">=</span> n <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> S.<span class="bu">size</span> <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        result <span class="op">=</span> result <span class="op">*</span> S.<span class="bu">pop</span>()</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result</span></code></pre></div>
+<p>Here, we simply push successively smaller values of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+onto the stack until the base case is reached, then repeatedly pop off
+the stored values and multiply them into the result.</p>
+</section>
+<p>An iterative form of the factorial function is both simpler and
+faster than the version shown in the example. But it is not always
+possible to replace recursion with iteration. Recursion, or some
+imitation of it, is necessary when implementing algorithms that require
+multiple branching such as in the Towers of Hanoi algorithm, or when
+traversing a binary tree (<a
+href="section-8.4.html#sec:traversing-a-binary-tree">Section 8.4</a>).
+The <a href="section-14.html#mergesort">Mergesort</a> and <a
+href="section-14.html#quicksort">Quicksort</a> sorting algorithms also
+require recursion.</p>
+<p>Fortunately, it is always possible to imitate recursion with a stack.
+Recursive algorithms lend themselves to efficient implementation with a
+stack when the amount of information needed to describe a sub-problem is
+small. For example, <a href="section-14.html#quicksort">Quicksort</a>
+can effectively use a stack to replace its recursion since only bounds
+information for the subarray to be processed needs to be saved.</p>
+<p>Let us now turn to a non-recursive version of the Towers of Hanoi
+function, which cannot be done iteratively.</p>
+<section id="sec:use-case-towers-of-hanoi" class="level4 unnumbered">
+<h4 class="unnumbered">Use case: Towers of Hanoi</h4>
+<p>Here is a recursive implementation for Towers of Hanoi.</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Compute the moves to solve a Tower of Hanoi puzzle.</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Function &#39;move&#39; does (or prints) the actual move of a disk from one pole to another.</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> towersRecursive(n, start, goal, temp):</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>:                               <span class="co">// Base case</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    towersRecursive(n<span class="op">-</span><span class="dv">1</span>, start, temp, goal)  <span class="co">// Recursive call: n-1 rings</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    move(start, goal)                        <span class="co">// Move bottom disk to goal</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    towersRecursive(n<span class="op">-</span><span class="dv">1</span>, temp, goal, start)  <span class="co">// Recursive call: n-1 rings</span></span></code></pre></div>
+<p><code>towersRecursive</code> makes two recursive calls: one to move
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>
+rings off the bottom ring, and another to move these
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>
+rings back to the goal pole. We can eliminate the recursion by using a
+stack to store a representation of the three operations that
+<code>towersRecursive</code> must perform: two recursive calls and a
+move operation. To do so, we must first come up with a representation of
+the various operations, implemented as a data type whose objects will be
+stored on the stack.</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> Task:</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    oper: MOVE <span class="kw">or</span> TOH</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    n: <span class="bu">Int</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    start, temp, goal: Pole</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> towersStack(n, start, goal, temp):</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    S <span class="op">=</span> <span class="kw">new</span> LinkedStack()</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    S.<span class="bu">push</span>(<span class="kw">new</span> Task(TOH, n, start, goal, temp))</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> S.<span class="bu">size</span> <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        it <span class="op">=</span> S.<span class="bu">pop</span>()          <span class="co">// Get next task</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> it.oper <span class="op">==</span> MOVE:   <span class="co">// Do a move</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>            move(it.start, it.goal)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> it.num <span class="op">&gt;</span> <span class="dv">0</span>:   <span class="co">// Imitate TOH recursive solution (in reverse)</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>            S.<span class="bu">push</span>(<span class="kw">new</span> Task(TOH, it.num<span class="op">-</span><span class="dv">1</span>, it.temp, it.goal, it.start))</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>            S.<span class="bu">push</span>(<span class="kw">new</span> Task(MOVE, <span class="dv">0</span>, it.start, it.goal))</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>            S.<span class="bu">push</span>(<span class="kw">new</span> Task(TOH, it.num<span class="op">-</span><span class="dv">1</span>, it.start, it.temp, it.goal))</span></code></pre></div>
+<p>We first enumerate the possible operations MOVE and TOH, to indicate
+calls to the <code>move</code> function and recursive calls to
+<code>towersStack</code>, respectively. The datatype <code>Task</code>
+stores five values: an operation value (indicating either a MOVE or a
+new TOH operation), the number of rings, and the three poles. Note that
+the move operation actually needs only to store information about two
+poles. Thus, there are two constructors: one to store the state when
+imitating a recursive call, and one to store the state for a move
+operation.</p>
+<p>An array-based stack is used because we know that the stack will need
+to store exactly
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2n+1</annotation></semantics></math>
+elements. The new version <code>towersStack</code> begins by placing on
+the stack a description of the initial problem for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+rings. The rest of the function is simply a <code>while</code> loop that
+pops the stack and executes the appropriate operation. In the case of a
+<code>TOH</code> operation (for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">n&gt;0</annotation></semantics></math>),
+we store on the stack representations for the three operations executed
+by the recursive version. However, these operations must be placed on
+the stack in reverse order, so that they will be popped off in the
+correct order.</p>
+</section>
+</div>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-6.1.html" class="navbutton">&lt;&lt;</a>
+<a href="section-6.1.html" accesskey="p" rel="previous">Collections</a>
+</div>
+<div class="navlink">
+<a href="section-6.3.html" accesskey="n" rel="next">Stacks implemented as linked lists</a>
+<a href="section-6.3.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+

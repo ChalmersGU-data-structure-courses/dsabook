@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Binary heaps</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+<link href="../interactive/Binary/HeapsIndCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Binary/heapbuildProofCON.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-9.1.html" class="navbutton">&lt;&lt;</a>
+<a href="section-9.1.html" accesskey="p" rel="previous">Implementing priority queues using binary trees</a>
+</div>
+<div>
+<a href="section-9.3.html" accesskey="n" rel="next">Case study: Heapsort</a>
+<a href="section-9.3.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:binary-heaps" class="level2" data-number="9.2">
+<h2 data-number="9.2"><span class="header-section-number">9.2</span>
+Binary heaps</h2>
+<p>This section presents the <a href="section-14.html#binary-heap"
+class="term"
+title="The head data structure is a complete binary tree with the requirement that every node has a value greater than its children (called a max heap), or else the requirement that every node has a value less than its children (called a min heap). Since it is a complete binary tree, a heap is nearly always implemented using an array rather than an explicit tree structure. To add a new value to a heap, or to remove the extreme value (the max value in a max-heap or min value in a min-heap) and update the heap, takes $O(\log n)$ time in the worst case. However, if given all of the values in an unordered array, the values can be re-arranged to form a heap in only $O(n)$ time. Due to its space and time efficiency, the heap is a popular choice for implementing a priority queue. Uncommonly, *heap* is a synonym for free store.">binary
+heap</a> data structure. In addition to beaing a <em>heap</em>, meaning
+that it satisfies the heap property, it is also a <a
+href="section-14.html#complete-binary-tree" class="term"
+title="A binary tree where the nodes are filled in row by row, with the bottom row filled in left to right. Due to this requirement, there is only one tree of $n$ nodes for any value of $n$. Since storing the records in an array in row order leads to a simple mapping from a node&#39;s position in the array to its parent, siblings, and children, the array representation is most commonly used to implement the complete binary tree. The heap data structure is a complete binary tree with partial ordering constraints on the node values.">complete
+binary tree</a>.</p>
+<p>Recall that complete binary trees have all levels except the bottom
+filled out completely, and the bottom level has all of its nodes filled
+in from left to right. Thus, a complete binary tree of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+nodes has only one possible shape. You might think that a complete
+binary tree is such an unusual occurrence that there is no reason to
+develop a special implementation for it. However, it has two very nice
+properties:</p>
+<ul>
+<li>its height is <em>logarithmic</em> in the number of nodes</li>
+<li>it can be stored in an array, so it is very
+<em>space-efficient</em></li>
+</ul>
+<section id="sec:representing-complete-binary-trees-as-arrays"
+class="level3" data-number="9.2.1">
+<h3 data-number="9.2.1"><span class="header-section-number">9.2.1</span>
+Representing complete binary trees as arrays</h3>
+<p>From the <a href="section-14.html#full-binary-tree-theorem"
+class="term"
+title="This theorem states that the number of leaves in a non-empty full binary tree is one more than the number of internal nodes. Equivalently, then number of null pointers in a standard pointer-based implementation for binary tree nodes is one more than the number of nodes in the binary tree.">full
+binary tree theorem</a>, we know that a large fraction of the space in a
+typical binary tree node implementation is devoted to structural <a
+href="section-14.html#overhead" class="term"
+title="All information stored by a data structure aside from the actual data. For example, the pointer fields in a linked list or BST, or the unused positions in an array-based list.">overhead</a>,
+not to storing data. Here we present a simple, compact implementation
+for <a href="section-14.html#complete-binary-tree" class="term"
+title="A binary tree where the nodes are filled in row by row, with the bottom row filled in left to right. Due to this requirement, there is only one tree of $n$ nodes for any value of $n$. Since storing the records in an array in row order leads to a simple mapping from a node&#39;s position in the array to its parent, siblings, and children, the array representation is most commonly used to implement the complete binary tree. The heap data structure is a complete binary tree with partial ordering constraints on the node values.">complete
+binary trees</a>. First, note that a complete binary tree of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+nodes has only one possible shape. This means that we can store the
+nodes directly in an array, without having to include the children
+pointers. Instead we can use simple calculations to find the array
+indices of the children or the parent of a given node.</p>
+<p>We begin by assigning numbers to the node positions in the complete
+binary tree, level by level, from left to right as shown in <a
+href="#fig:example_complete_bintree">Figure 9.1</a>. Note that we start
+by assigning the root the number 0.</p>
+<figure id="fig:example_complete_bintree" class="subfigures">
+<div class="online">
+<p>
+<div id="CompleteBinTree" class="ssAV" data-short-name="CompleteBinTree" data-long-name="Binary/CompleteBinTree" alt="Binary/CompleteBinTree" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</div>
+<figcaption><p>Figure 9.1: Complete binary tree node numbering.
+</p></figcaption>
+</figure>
+<p>An array can store the data values of the tree efficiently, placing
+each value in the array position corresponding to that node’s position
+within the tree. The following table lists the array indices for the
+children, parent, and siblings of each node in the figure.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Position</th>
+<th style="text-align: center;">0</th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">5</th>
+<th style="text-align: center;">6</th>
+<th style="text-align: center;">7</th>
+<th style="text-align: center;">8</th>
+<th style="text-align: center;">9</th>
+<th style="text-align: center;">10</th>
+<th style="text-align: center;">11</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Parent</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr>
+<td style="text-align: left;">Left Child</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+</tr>
+<tr>
+<td style="text-align: left;">Right Child</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+</tr>
+<tr>
+<td style="text-align: left;">Left Sibling</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">–</td>
+</tr>
+<tr>
+<td style="text-align: left;">Right Sibling</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+</tr>
+</tbody>
+</table>
+<p>Looking at the table, you should see a pattern regarding the
+positions of a node’s relatives within the array. Simple formulas can be
+derived for calculating the array index for each relative of a node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>’s
+index. No explicit pointers are necessary to reach a node’s left or
+right child. This means there is no overhead to the array implementation
+if the array is selected to be of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+for a tree of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+nodes.</p>
+<p>The formulae for calculating the array indices of the various
+relatives of a node are as follows. The total number of nodes in the
+tree is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.
+The index of the node in question is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>,
+which must fall in the range 0 to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>.</p>
+<ul>
+<li>Parent(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>)
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo><mo stretchy="false" form="prefix">⌊</mo><mo stretchy="false" form="prefix">(</mo><mi>r</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mi>/</mi><mn>2</mn><mo stretchy="false" form="postfix">⌋</mo></mrow><annotation encoding="application/x-tex">= \lfloor(r - 1)/2\rfloor</annotation></semantics></math>
+if
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>≠</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">r \neq 0</annotation></semantics></math>.</li>
+<li>Left
+child(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>)
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo><mn>2</mn><mi>r</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">= 2r + 1</annotation></semantics></math>
+if
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>r</mi><mo>+</mo><mn>1</mn><mo>&lt;</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">2r + 1 &lt; n</annotation></semantics></math>.</li>
+<li>Right
+child(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>)
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo><mn>2</mn><mi>r</mi><mo>+</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">= 2r + 2</annotation></semantics></math>
+if
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>r</mi><mo>+</mo><mn>2</mn><mo>&lt;</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">2r + 2 &lt; n</annotation></semantics></math>.</li>
+<li>Left
+sibling(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>)
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo><mi>r</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">= r - 1</annotation></semantics></math>
+if
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>
+is even and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>≠</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">r \neq 0</annotation></semantics></math>.</li>
+<li>Right
+sibling(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>)
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo><mi>r</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">= r + 1</annotation></semantics></math>
+if
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>
+is odd and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>+</mo><mn>1</mn><mo>&lt;</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">r + 1 &lt; n</annotation></semantics></math>.</li>
+</ul>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a practice exercise for calculating the array indices of
+nodes.</p>
+</summary>
+<p>
+<div id="CompleteFIB" class="embedContainer">
+<iframe id="CompleteFIB_iframe" aria-label="CompleteFIB" src="../interactive/Binary/CompleteFIB.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</div>
+</section>
+<section id="sec:implementing-binary-heaps" class="level3"
+data-number="9.2.2">
+<h3 data-number="9.2.2"><span class="header-section-number">9.2.2</span>
+Implementing binary heaps</h3>
+<p>Be sure not to confuse the logical representation of a heap with its
+physical implementation by means of the array-based complete binary
+tree. The two are not synonymous because the logical view of the heap is
+actually a tree structure, while the typical physical implementation
+uses an array.</p>
+<p>Here is an implementation for <em>min</em>-heaps. It uses a dynamic
+array (see <a
+href="section-6.7.html#sec:dynamic-arrays">Section 6.7</a>) that will
+resize automatically when the number of elements change.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> MinHeap <span class="kw">implements</span> <span class="bu">PriorityQueue</span>:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    heap <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(<span class="dv">10</span>)  <span class="co">// 10 is the initial capacity.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span> <span class="op">=</span> <span class="dv">0</span>              <span class="co">// The initial heap contains 0 elements.</span></span></code></pre></div>
+<p>Note that, because we use an array to store the heap, we indicate the
+nodes by their logical position within the heap rather than by a pointer
+to the node. In practice, the logical heap position corresponds to the
+identically numbered physical position in the array.</p>
+<p>Since it is a heap, we know that the first element always contains
+the element with the highest priority:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> MinHeap <span class="kw">implements</span> <span class="bu">PriorityQueue</span>:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">getMin</span>():</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">size</span> <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> heap[<span class="dv">0</span>]</span></code></pre></div>
+<p>The datatype contains some private auxiliary methods that are used
+when adding and removing elements from the heap: <code>isLeaf</code>
+tells if a position represents a leaf in the tree, while
+<code>getLeftChild</code>, <code>getRightChild</code> and
+<code>getParent</code> return the position for the left child, right
+child, and parent of the position passed, respectively.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> MinHeap:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    isLeaf(pos):</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pos <span class="op">&gt;=</span> <span class="bu">size</span> <span class="op">/</span> <span class="dv">2</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    getLeftChild(pos):</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">2</span> <span class="op">*</span> pos <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    getRightChild(pos):</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">2</span> <span class="op">*</span> pos <span class="op">+</span> <span class="dv">2</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    getParent(pos):</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="bu">int</span>((pos <span class="op">-</span> <span class="dv">1</span>) <span class="op">/</span> <span class="dv">2</span>)</span></code></pre></div>
+<p>We also need an auxiliary method for swapping two elements in the
+heap.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> MinHeap:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    swap(i, j):</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        heap[i], heap[j] <span class="op">=</span> heap[j], heap[i]</span></code></pre></div>
+<p>Finally, since we use a dynamic array we have to be able to resize
+the internal array. This is explained in further detail in <a
+href="section-6.7.html#sec:dynamic-arrays">Section 6.7</a>.</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> MinHeap:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    resizeHeap(newCapacity):</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        oldHeap <span class="op">=</span> heap</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        heap <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(newCapacity)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="dv">0</span> .. <span class="bu">size</span><span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>            heap[i] <span class="op">=</span> oldHeap[i]</span></code></pre></div>
+</section>
+<section id="sec:inserting-into-a-heap" class="level3"
+data-number="9.2.3">
+<h3 data-number="9.2.3"><span class="header-section-number">9.2.3</span>
+Inserting into a heap</h3>
+<p>Here is how to insert a new element
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>
+into the heap:</p>
+<ul>
+<li>First put the new value at the end of the array.</li>
+<li>Now move the value upward in the heap, comparing with its
+parent.</li>
+<li>If
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>
+has a higher priority than its parent, swap the two corresponding array
+cells.</li>
+<li>Continue until
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>
+does not have higher priority than its parent.</li>
+</ul>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a visual explanation of insertion into a
+<em>max</em>-heap.</p>
+</summary>
+<p>
+<div id="heapinsertCON" class="ssAV" data-short-name="heapinsertCON" data-long-name="Heap insert Slideshow" alt="Heap insert Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<p>Here is an alternative explanation: If the heap takes up the first
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+positions of its array prior to the call to <code>add</code>, it must
+take up the first
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n+1</annotation></semantics></math>
+positions after. To accomplish this, <code>add</code> first places
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>
+at position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+of the array. Of course,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>
+is unlikely to be in the correct position. To move
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>
+to the right place, it is compared to its parent’s value. If the value
+of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>
+is less than or equal to the value of its parent, then it is in the
+correct place and the insert routine is finished. If the value of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>
+is greater than that of its parent, then the two elements swap
+positions. From here, the process of comparing
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>
+to its (current) parent continues until
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>
+reaches its correct position.</p>
+<p>Here is the pseudocode for insertion in our <em>min</em>-heap. Note
+that we use a helper method for “sifting” a value up the tree.</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> MinHeap:</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">add</span>(elem):</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">size</span> <span class="op">&gt;=</span> heap.<span class="bu">size</span>:</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>            resizeHeap(heap.<span class="bu">size</span> <span class="op">*</span> <span class="dv">2</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        heap[<span class="bu">size</span>] <span class="op">=</span> elem      <span class="co">// Add the element at end of the heap.</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        siftUp(<span class="bu">size</span>)           <span class="co">// Put it in its correct place.</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">size</span> <span class="op">=</span> <span class="bu">size</span> <span class="op">+</span> <span class="dv">1</span>        <span class="co">// Increase the size of the heap.</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    siftUp(pos):</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> pos <span class="op">&gt;</span> <span class="dv">0</span>:         <span class="co">// Stop when we reach the root (if not earlier).</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>            parent <span class="op">=</span> getParent(pos)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> heap[pos] <span class="op">&gt;=</span> heap[parent]:</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> pos     <span class="co">// Stop if the parent is smaller or equal.</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>            swap(pos, parent)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>            pos <span class="op">=</span> parent       <span class="co">// Move up one level in the tree.</span></span></code></pre></div>
+<p><em>Important note</em>: One common mistake is to start at the root
+and work yourself downwards through the heap. However, this approach
+does not work because the heap must maintain the shape of a complete
+binary tree.</p>
+<p>Since the heap is a complete binary tree, its height is guaranteed to
+be the minimum possible. In particular, a heap containing
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+nodes will have a height of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>.
+Intuitively, we can see that this must be true because each level that
+we add will slightly more than double the number of nodes in the tree
+(the
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+th level has
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mi>i</mi></msup><annotation encoding="application/x-tex">2^i</annotation></semantics></math>
+nodes, and the sum of the first
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
+levels is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msup><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2^{i+1}-1</annotation></semantics></math>).
+Starting at 1, we can double only
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n</annotation></semantics></math>
+times to reach a value of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.
+To be precise, the height of a heap with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+nodes is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⌈</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo>+</mo><mn>1</mn><mo stretchy="false" form="postfix">⌉</mo></mrow><annotation encoding="application/x-tex">\lceil \log n + 1 \rceil</annotation></semantics></math>.</p>
+<p>Each call to <code>add</code> takes
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>
+time in the worst case, because the value being inserted can move at
+most the distance from the bottom of the tree to the top of the tree.
+Thus, to insert
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+values into the heap, if we insert them one at a time, will take
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>
+time in the worst case.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<section id="sec:exercise-insert-into-a-min-heap"
+class="level4 unnumbered">
+<h4 class="unnumbered">Exercise: Insert into a <em>min</em>-heap</h4>
+</summary>
+<p>
+<div id="heapinsertPRO" class="embedContainer">
+<iframe id="heapinsertPRO_iframe" aria-label="heapinsertPRO" src="../interactive/Binary/heapinsertPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</section>
+</div>
+</section>
+<section id="sec:removing-from-the-heap" class="level3"
+data-number="9.2.4">
+<h3 data-number="9.2.4"><span class="header-section-number">9.2.4</span>
+Removing from the heap</h3>
+<p>Here is how to remove the highest-priority element
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>
+from a binary heap:</p>
+<ul>
+<li>We know that the highest-priority element is at the tree root,
+i.e. array position 0.</li>
+<li>We also know that we need to reduce the array/heap size by 1 – so we
+can swap the first an last positions.</li>
+<li>Now the new root element does not satisfy the heap property.</li>
+<li>We move the new root downward in the heap – in each step comparing
+with the <em>highest-priority</em> child.</li>
+<li>Continue until
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>
+has a higher priority than both its children.</li>
+</ul>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a visual explanation of removing from a
+<em>max</em>-heap.</p>
+</summary>
+<p>
+<div id="heapmaxCON" class="ssAV" data-short-name="heapmaxCON" data-long-name="Remove Max Slideshow" alt="Remove Max Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<p>Because the heap is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n</annotation></semantics></math>
+levels deep, the cost of deleting the maximum element is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>
+in the average and worst cases.</p>
+<p>Here is the pseudocode for removing the minimum value from our
+<em>min</em>-heap. Note that we use a helper method for “sifting” a
+value down the tree.</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> MinHeap:</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">removeMin</span>():</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        removed <span class="op">=</span> heap[<span class="dv">0</span>]   <span class="co">// Remember the current minimum value, to return in the end.</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        swap(<span class="dv">0</span>, <span class="bu">size</span><span class="op">-</span><span class="dv">1</span>)     <span class="co">// Swap the last array element into the first position...</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">size</span> <span class="op">=</span> <span class="bu">size</span> <span class="op">-</span> <span class="dv">1</span>     <span class="co">// ...and remove the last element, by decreasing the size.</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">size</span> <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>            siftDown(<span class="dv">0</span>)     <span class="co">// Put the new root in its correct place.</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> removed</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    siftDown(pos):</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="kw">not</span> isLeaf(pos):   <span class="co">// Stop when we reach a leaf (if not earlier).</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>            child <span class="op">=</span> getLeftChild(pos)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>            right <span class="op">=</span> getRightChild(pos)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> right <span class="op">&lt;</span> <span class="bu">size</span> <span class="kw">and</span> heap[right] <span class="op">&lt;</span> heap[child]:</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>                child <span class="op">=</span> right    <span class="co">// &#39;child&#39; is now the index of the child with smaller value.</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> heap[child] <span class="op">&gt;=</span> heap[pos]:</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> pos       <span class="co">// Stop if the parent is smaller or equal.</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>            swap(pos, child)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>            pos <span class="op">=</span> child          <span class="co">// Move down one level in the tree.</span></span></code></pre></div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<section id="sec:exercise-delete-from-a-min-heap"
+class="level4 unnumbered">
+<h4 class="unnumbered">Exercise: Delete from a <em>min</em>-heap</h4>
+</summary>
+<p>
+<div id="heapremovePRO" class="embedContainer">
+<iframe id="heapremovePRO_iframe" aria-label="heapremovePRO" src="../interactive/Binary/heapremovePRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</section>
+</div>
+</section>
+<section id="sec:binary-heaps-as-priority-queues" class="level3"
+data-number="9.2.5">
+<h3 data-number="9.2.5"><span class="header-section-number">9.2.5</span>
+Binary heaps as priority queues</h3>
+<p>The heap is a natural implementation for the priority queue discussed
+at the beginning of this chapter. Jobs can be added to the heap (using
+their priority value as the ordering key) when needed. Method
+<code>removeMin</code> can be called whenever a new job is to be
+executed. Priority queues can be helpful for solving graph problems such
+as finding the <a href="section-14.html#shortest-path" class="term"
+title="Given a graph with distances or weights on the edges, the shortest path between two nodes is the path with least total distance or weight. Examples of the shortest paths problems are the single-source shortest paths problem and the all-pairs shortest paths problem.">shortest
+path</a> and finding the <a href="section-14.html#minimum-spanning-tree"
+class="term"
+title="Abbreviated as MST, or sometimes as MCST. Derived from a weighted graph, the MST is the subset of the graph&#39;s edges that maintains the connectivitiy of the graph while having lowest total cost (as defined by the sum of the weights of the edges in the MST). The result is referred to as a tree because it would never have a cycle (since an edge could be removed from the cycle and still preserve connectivity). Two algorithms to solve this problem are Prim&#39;s algorithm and Kruskal&#39;s algorithm.">minimum
+spanning tree</a>.</p>
+</section>
+<section id="sec:changing-the-priority-of-elements" class="level3"
+data-number="9.2.6">
+<h3 data-number="9.2.6"><span class="header-section-number">9.2.6</span>
+Changing the priority of elements</h3>
+<p>For some applications, objects might get their priority modified. One
+solution to this is to remove the object and reinsert it. Another
+solution is to change the priority value of the object, and then update
+its position in the heap. In any of these cases the application needs to
+know the position of the object in the heap.</p>
+<p>To be able to know the position of an arbitrary object in the heap,
+we need some auxiliary data structure with which we can find the
+position of an object. This auxiliary structure can be any kind of <a
+href="section-14.html#map" class="term"
+title="A data structure that relates a key to a record.">map</a>, which
+we will introduce later in <a
+href="section-10.html#sec:sets-and-maps">Chapter 10</a>.</p>
+<p>Assuming that we know the position of the object, we either have to
+remove it from the heap, or modify its priority.</p>
+<ul>
+<li><p>To remove the object at an arbitrary position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>,
+we first swap it with the last position. Then we sift the new value at
+position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>,
+either up or down depending on the priorities of the parent and
+children.</p></li>
+<li><p>To modify the priority of the object at position
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>,
+we first modify it and then sift the value up or down depending on the
+priorities of the parent and children.</p></li>
+</ul>
+</section>
+<section id="sec:building-a-heap" class="level3" data-number="9.2.7">
+<h3 data-number="9.2.7"><span class="header-section-number">9.2.7</span>
+Building a heap</h3>
+<p>If all
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+values are available at the beginning of the building process, we can
+build the heap faster than just inserting the values into the heap one
+by one.</p>
+<div class="online">
+<p>Consider this example, with two possible ways to heapify the array
+[1,2,3,4,5,6,7] into a <em>max</em>-heap:</p>
+<p>
+<div id="HeapBldChoiceCON" class="ssAV" data-short-name="HeapBldChoiceCON" data-long-name="Heap Build Choices" alt="Heap Build Choices" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<ul>
+<li>The upper (a) heap is built by a series of nine exchanges in the
+order (4-2), (4-1), (2-1), (5-2), (5-4), (6-3), (6-5), (7-5),
+(7-6).</li>
+<li>The lower (b) heap is built by a series of four exchanges in the
+order (5-2), (7-3), (7-1), (6-1).</li>
+</ul>
+<p>From the example, it is clear that the heap for any given set of
+numbers is not unique, and we see that some rearrangements of the input
+values require fewer exchanges than others to build the heap. So, how do
+we pick the best rearrangement?</p>
+<p>One good algorithm stems from induction. Suppose that the left and
+right subtrees of the root are already heaps, and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+is the name of the element at the root. This situation is illustrated by
+this figure:</p>
+<p>
+<div id="HeapsIndCON" class="ssAV" data-short-name="HeapsIndCON" data-long-name="Binary/HeapsIndCON" alt="Binary/HeapsIndCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+</p>
+<p>In this case there are two possibilities.</p>
+<ul>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+has a priority which is higher or equal to both its children. In this
+case, construction is complete.</p></li>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+has a priority which is lower than one or both of its children.</p>
+<p>In this case,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+should be exchanged with the highest-priority child. The result will be
+a heap, except that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+might still have a lower priority than one or both of its (new)
+children. In this case, we simply continue the process of “pushing down”
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+until it reaches a level where it has a higher priority than its
+children, or is a leaf node.</p>
+<p>This process is implemented by the method
+<code>siftDown</code>.</p></li>
+</ul>
+<p>This approach assumes that the subtrees are already heaps, suggesting
+that a complete algorithm can be obtained by visiting the nodes in some
+order such that the children of a node are visited <em>before</em> the
+node itself. One simple way to do this is simply to work from the high
+index of the array to the low index. Actually, the build process need
+not visit the leaf nodes (they can never move down because they are
+already at the bottom), so the building algorithm can start in the
+middle of the array, with the first internal node.</p>
+<ul>
+<li>Iterate through the internal array indices
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>=</mo><mi>m</mi><mo>,</mo><mi>m</mi><mo>−</mo><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">i = m, m-1, \ldots, 0</annotation></semantics></math>
+in backwards order, where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
+is the parent of the last element (approximately
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">n/2</annotation></semantics></math>).</li>
+<li>For each index
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>,
+sift down its value.</li>
+</ul>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a visualisation of the build process for a
+<em>max</em>-heap.</p>
+</summary>
+<p>
+<div id="heapbuildCON" class="ssAV" data-short-name="heapbuildCON" data-long-name="Heapbuild Slideshow" alt="Heapbuild Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+<p>The method <code>buildHeap</code> implements the building
+algorithm:</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> MinHeap:</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    buildHeap(array):</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        heap <span class="op">=</span> array                <span class="co">// Initialise the heap to the given array.</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">size</span> <span class="op">=</span> heap.<span class="bu">size</span>            <span class="co">// The capacity of the heap is used in full.</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        mid <span class="op">=</span> getParent(<span class="bu">size</span><span class="op">-</span><span class="dv">1</span>)     <span class="co">// Find the parent of the last leaf.</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> mid, mid<span class="op">-</span><span class="dv">1</span> .. <span class="dv">0</span>:   <span class="co">// Iterate the internal nodes backwards.</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>            siftDown(i)             <span class="co">// Sift each internal node down.</span></span></code></pre></div>
+<p>Note that this method overwrites the existing heap (if there is one).
+Also note that the original array will be modified, so the method is
+<em>destructive</em>! The advantage is that it doesn’t allocate any new
+memory.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<section id="sec:exercise-building-a-min-heap"
+class="level4 unnumbered">
+<h4 class="unnumbered">Exercise: Building a <em>min</em>-heap</h4>
+</summary>
+<p>
+<div id="heapbuildPRO" class="embedContainer">
+<iframe id="heapbuildPRO_iframe" aria-label="heapbuildPRO" src="../interactive/Binary/heapbuildPRO.html" width="100%" height="600" scrolling="no">
+Your browser does not support iframes.
+</iframe>
+</div>
+</p>
+</details>
+</section>
+</div>
+<p>What is the cost of <code>buildHeap</code>? Clearly it is the sum of
+the costs for the calls to <code>siftDown</code>. Each
+<code>siftDown</code> operation can cost at most the number of levels it
+takes for the node being sifted to reach the bottom of the tree. In any
+complete tree, approximately half of the nodes are leaves and so cannot
+be moved downward at all. One quarter of the nodes are one level above
+the leaves, and so their elements can move down at most one level. At
+each step up the tree we get half the number of nodes as were at the
+previous level, and an additional height of one. The maximum sum of
+total distances that elements can go is therefore</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi></mrow></munderover><mo stretchy="false" form="prefix">(</mo><mi>i</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mfrac><mi>n</mi><msup><mn>2</mn><mi>i</mi></msup></mfrac><mo>=</mo><mfrac><mi>n</mi><mn>2</mn></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi></mrow></munderover><mfrac><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow><msup><mn>2</mn><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msup></mfrac></mrow><annotation encoding="application/x-tex">
+\sum_{i=1}^{\log n} (i-1)\frac{n}{2^i}
+= \frac{n}{2}\sum_{i=1}^{\log n} \frac{i-1}{2^{i-1}}
+</annotation></semantics></math></p>
+<p>The summation on the right <a href="section-14.html#summation"
+class="term"
+title="The sum of costs for some function applied to a range of parameter values. Often written using Sigma notation. For example, the sum of the integers from 1 to $n$ can be written as $\sum_{i=1}^{n} i$.">is
+known</a> to have a closed-form solution of approximately 2, so this
+algorithm takes
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>
+time in the worst case. This is better than building the heap one
+element at a time, which would cost
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log n)</annotation></semantics></math>
+in the worst case. </p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is a visual explanation of the cost of
+<code>buildHeap</code>.</p>
+</summary>
+<p>
+<div id="heapbuildProofCON" class="ssAV" data-short-name="heapbuildProofCON" data-long-name="Heap build analysis proof Slideshow" alt="Heap build analysis proof Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+</p>
+</details>
+</div>
+</div>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-9.1.html" class="navbutton">&lt;&lt;</a>
+<a href="section-9.1.html" accesskey="p" rel="previous">Implementing priority queues using binary trees</a>
+</div>
+<div class="navlink">
+<a href="section-9.3.html" accesskey="n" rel="next">Case study: Heapsort</a>
+<a href="section-9.3.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+<script type="text/javascript" src="../interactive/Binary/CompleteBinTree.js"></script>
+<script type="text/javascript" src="../interactive/DataStructures/binaryheap.js"></script>
+<script type="text/javascript" src="../interactive/Binary/heapinsertCON.js"></script>
+<script type="text/javascript" src="../interactive/Binary/heapmaxCON.js"></script>
+<script type="text/javascript" src="../interactive/Binary/HeapBldChoiceCON.js"></script>
+<script type="text/javascript" src="../interactive/Binary/HeapsIndCON.js"></script>
+<script type="text/javascript" src="../interactive/Binary/heapbuildCON.js"></script>
+<script type="text/javascript" src="../interactive/Binary/heapbuildProofCON.js"></script>
+</body>
+</html>
+

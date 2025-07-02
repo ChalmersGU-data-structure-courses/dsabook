@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Peter Ljunglöf" />
+  <meta name="author" content="Alex Gerdes" />
+  <meta name="author" content="(editors)" />
+  <title>DSABook – Shortest-paths problems</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/book.css" />
+  <link rel="stylesheet" href="../css/code.css" />
+  <link rel="stylesheet" href="../css/math.css" />
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/mobile.css" />
+  <link rel="stylesheet" href="../css/print.css" />
+  
+  <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/jquery.ui.min.css" type="text/css" />
+  <link rel="stylesheet" href="../lib/odsaStyle.css" type="text/css" />
+
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:    './',
+      VERSION:     '0.4.1',
+      COLLAPSE_INDEX: false,
+      FILE_SUFFIX: '.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+
+  <script type="text/javascript" src="../lib/jquery.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.migrate.min.js"></script>
+  <script type="text/javascript" src="../lib/localforage.min.js"></script>
+  <script type="text/javascript" src="../lib/accessibility.js"></script>
+  <script type="text/javascript" src="../lib/jquery.ui.min.js"></script>
+  <script type="text/javascript" src="../lib/jquery.transit.js"></script>
+  <script type="text/javascript" src="../lib/raphael.js"></script>
+  <script type="text/javascript" src="../lib/JSAV.js"></script>
+  <script type="text/javascript" src="../lib/config.js"></script>
+  <script type="text/javascript" src="../lib/timeme.js"></script>
+  <script type="text/javascript" src="../lib/odsaUtils.js"></script>
+  <script type="text/javascript" src="../lib/odsaMOD.js"></script>
+  <script type="text/javascript" src="../lib/d3.min.js"></script>
+  <script type="text/javascript" src="../lib/d3-selection-multi.v1.min.js"></script>
+  <script type="text/javascript" src="../lib/dataStructures.js"></script>
+  <script type="text/javascript" src="../lib/conceptMap.js"></script>
+
+  <script>
+    ODSA.SETTINGS.MODULE_SECTIONS = [
+    'internal-variables', 
+    'getting-and-setting-values', 
+    'adding-elements', 
+    'add-practice-exericse', 
+    'removing-elements', 
+    'remove-practice-exericise', 
+    'static-array-based-list-summary-questions', 
+    'static-array-based-list:-full-code',
+    ];
+    ODSA.SETTINGS.MODULE_NAME = "DSABook";
+    ODSA.SETTINGS.MODULE_LONG_NAME = "Data Structures and Algorithms";
+    JSAV_OPTIONS['lang']='en';
+    JSAV_EXERCISE_OPTIONS['code']='pseudo';
+  </script>
+
+  
+  <script type="text/javascript" src="../scripts/quizhandler.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="sitenav">
+<div></div>
+<h1><a href="index.html" class="navbutton" accesskey="t" rel="top">Data Structures and Algorithms</a></h1>
+<div></div>
+</nav>
+<nav class="sitenav">
+<div>
+<a href="section-13.7.html" class="navbutton">&lt;&lt;</a>
+<a href="section-13.7.html" accesskey="p" rel="previous">Kruskal’s algorithm for finding the MST</a>
+</div>
+<div>
+<a href="section-13.9.html" accesskey="n" rel="next">Dijkstra’s shortest-path algorithm</a>
+<a href="section-13.9.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</header>
+
+<main>
+<section id="sec:shortest-paths-problems" class="level2"
+data-number="13.8">
+<h2 data-number="13.8"><span class="header-section-number">13.8</span>
+Shortest-paths problems</h2>
+<p>If you have an <em>unweighted</em> graph, the <a
+href="section-14.html#shortest-path" class="term"
+title="Given a graph with distances or weights on the edges, the shortest path between two nodes is the path with least total distance or weight. Examples of the shortest paths problems are the single-source shortest paths problem and the all-pairs shortest paths problem.">shortest
+path</a> between two vertices is the smallest number of edges you have
+to pass to get from one of the vertices to the other.</p>
+<p>If you agument the <a href="section-14.html#breadth-first-search"
+class="term"
+title="A graph traversal algorithm. As the name implies, all immediate neighbours for a node are visited before any more-distant nodes are visited. BFS is driven by a queue. A start vertex is placed on the queue. Then, until the queue is empty, a node is taken off the queue, visited, and and then any unvisited neighbours are placed onto the queue.">breadth-first
+search</a> algorithm from <a
+href="section-13.4.html#sec:breadth-first-search">Section 13.4.2</a> to
+remember which vertex a visited vertex came from, if will give you the
+shortest path between the start vertex and any other vertex. However,
+things become sligthly more complicated if the graph is weighted.</p>
+<section id="sec:shortest-paths-on-weighted-graphs"
+class="level4 unnumbered">
+<h4 class="unnumbered">Shortest-paths on weighted graphs</h4>
+<p>On a road map, a road connecting two towns is typically labeled with
+its distance. We can model a road network as a directed graph whose
+edges are labeled with real numbers. These numbers represent the
+distance (or other cost metric, such as travel time) between two
+vertices. These labels may be called <a href="section-14.html#weight"
+class="term"
+title="A cost or distance most often associated with an edge in a graph.">weights</a>,
+<a href="section-14.html#cost" class="term"
+title="The amount of resources that given run of an algorithm consumes.">costs</a>,
+or <a href="section-14.html#distance" class="term"
+title="In graph representations, a synonym for weight.">distances</a>,
+depending on the application. Given such a graph, a typical problem is
+to find the total length of the shortest path between two specified
+vertices. This is not a trivial problem, because the shortest path may
+not be along the edge (if any) connecting two vertices, but rather may
+be along a path involving one or more intermediate vertices.</p>
+<p>For example, in <a href="#fig:GraphShortestPath">Figure 13.12</a>,
+the cost of the path from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>
+is 15. The cost of the edge directly from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>
+is 20. The cost of the path from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>
+is 10. Thus, the shortest path from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>
+is 10 (rather than along the edge connecting
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>).
+We use the notation
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐝</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo>,</mo><mi>D</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">\mathbf{d}(A, D) = 10</annotation></semantics></math>
+to indicate that the shortest distance from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>
+is 10. In the figure, there is no path from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>E</mi><annotation encoding="application/x-tex">E</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>,
+so we set
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐝</mi><mo stretchy="false" form="prefix">(</mo><mi>E</mi><mo>,</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>∞</mi></mrow><annotation encoding="application/x-tex">\mathbf{d}(E, B) = \infty</annotation></semantics></math>.
+We define
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐰</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo>,</mo><mi>D</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>20</mn></mrow><annotation encoding="application/x-tex">\mathbf{w}(A, D) = 20</annotation></semantics></math>
+to be the weight of edge
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo>,</mo><mi>D</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(A, D)</annotation></semantics></math>,
+that is, the weight of the direct connection from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>.
+Because there is no edge from
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>E</mi><annotation encoding="application/x-tex">E</annotation></semantics></math>
+to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐰</mi><mo stretchy="false" form="prefix">(</mo><mi>E</mi><mo>,</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>∞</mi></mrow><annotation encoding="application/x-tex">\mathbf{w}(E, B) = \infty</annotation></semantics></math>.
+Note that
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐰</mi><mo stretchy="false" form="prefix">(</mo><mi>D</mi><mo>,</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>∞</mi></mrow><annotation encoding="application/x-tex">\mathbf{w}(D, A) = \infty</annotation></semantics></math>
+because the graph is directed. We assume that all weights are
+positive.</p>
+<figure id="fig:GraphShortestPath">
+<img src="images/GraphShortestPath.png" style="width:40.0%"
+alt="Figure 13.12: Example graph for shortest-path definitions" />
+<figcaption aria-hidden="true">Figure 13.12: Example graph for
+shortest-path definitions</figcaption>
+</figure>
+</section>
+</section>
+</main>
+
+<footer>
+<nav class="sitenav">
+<div class="navlink">
+<a href="section-13.7.html" class="navbutton">&lt;&lt;</a>
+<a href="section-13.7.html" accesskey="p" rel="previous">Kruskal’s algorithm for finding the MST</a>
+</div>
+<div class="navlink">
+<a href="section-13.9.html" accesskey="n" rel="next">Dijkstra’s shortest-path algorithm</a>
+<a href="section-13.9.html" class="navbutton">&gt;&gt;</a>
+</div>
+</nav>
+</footer>
+
+</body>
+</html>
+
