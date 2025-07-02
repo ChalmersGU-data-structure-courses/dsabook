@@ -94,7 +94,7 @@ table, because then we would get a primary cluster with $2^k$ strings.
 \booklink{Read the rest online}{12.12}{sec:hashing-standard-libraries}
 ::::::
 
-XXXX
+In this section we discuss how hash tables are implemented in different standard libraries.
 
 :::::: online
 

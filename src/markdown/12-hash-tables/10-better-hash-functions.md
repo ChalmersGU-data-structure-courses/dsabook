@@ -1,5 +1,5 @@
 
-## Better hash functions
+## Better hash functions {#better-hash-functions}
 
 ::: TODO
 - Prio 1: introduction
@@ -16,11 +16,11 @@
 :::
 -->
 
-In this section we discuss XXX
-
 :::::: latex
 \booklink{Read the rest online}{12.10}{sec:better-hash-functions}
 ::::::
+
+In this section we discuss different strategies for making better hash functions.
 
 :::::: online
 
