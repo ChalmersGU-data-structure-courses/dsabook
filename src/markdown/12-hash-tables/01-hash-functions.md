@@ -78,7 +78,6 @@ distributed. When input records are not well distributed throughout the
 key range it can be difficult to devise a hash function that does a good
 job of distributing the records throughout the table, especially if the
 input distribution is not known in advance.
-
 There are many reasons why data values might be poorly distributed:
 
 1.  Natural frequency distributions tend to follow a common pattern
@@ -97,11 +96,9 @@ There are many reasons why data values might be poorly distributed:
 3.  If the input is a collection of common English words, the beginning
     letter will be poorly distributed.
 
-Note that for items 2 and 3 on this list, either high- or low-order bits
+Note that for items 2 and 3 on the list above, either high- or low-order bits
 of the key are poorly distributed.
-
-When designing hash functions, we are generally faced with one of two
-situations:
+When designing hash functions, we are generally faced with one of two situations:
 
 1.  We know nothing about the distribution of the incoming keys. In this
     case, we wish to select a hash function that evenly distributes the

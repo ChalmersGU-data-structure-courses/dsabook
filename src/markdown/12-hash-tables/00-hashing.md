@@ -78,9 +78,7 @@ slots must be mapped to from multiple key values. Given a hash function
 **h** and two keys $k_1$ and $k_2$, if
 $\mathbf{h}(k_1) = \beta = \mathbf{h}(k_2)$ where $\beta$ is a slot in
 the table, then we say that $k_1$ and $k_2$ have a
-[collision]{.term} at slot $\beta$ under hash
-function **h**.
-
+[collision]{.term} at slot $\beta$ under hash function **h**.
 Finding a record with key value $k$ in a database organised by hashing
 follows a two-step procedure:
 

@@ -1,5 +1,5 @@
 
-## Analysis of hash tables
+## Analysis of hash tables {#analysis-of-hash-tables}
 
 ::: TODO
 - Prio 1: write about separate chaining

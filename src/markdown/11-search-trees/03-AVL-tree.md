@@ -135,10 +135,8 @@ becomes the right child of 5.
 
 :::::: online
 
-To try out AVL insertion yourself and see how it works, see [AVL Tree
-Visualisation](https://www.cs.usfca.edu/~galles/visualisation/AVLtree.html).
-You can also find a few more examples under [AVL
-Trees](https://bradfieldcs.com/algos/trees/avl-trees/).
+To try out AVL insertion yourself and see how it works, see the AVL tree visualisation here:
+https://chalmersgu-data-structure-courses.github.io/dsvis/collections.html
 
 Here is an implementation of AVL trees:
 
