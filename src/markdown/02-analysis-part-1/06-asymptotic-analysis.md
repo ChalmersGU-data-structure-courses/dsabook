@@ -114,7 +114,7 @@ When we say that an algorithm is quadratic, we actually mean that the mathematic
 So, how can we relate functions using orders of growth?
 We do this by saying that one function is a *bound* of another function.
 E.g., when we say that an algorithm $\mathbf{A}$ is quadratic, we actually mean that the function $n^2$ is an upper bound of $\mathbf{A}$.
-The following are the most common definitions of *upper*, *lower* and *tight* bounds:
+The following are informal definitions of *upper*, *lower* and *tight* bounds -- we will define them more rigorously in [Chapter @sec:algorithm-analysis-theory].
 
 Upper bound
 
@@ -126,59 +126,8 @@ Lower bound
 
 Tight bound
 
-: $f$ is a lower bound of $g$ **iff** both functions grow *at the same rate*, and we write this $f\in\Theta(g)$
+: $f$ is a tight bound of $g$ **iff** both functions grow *at the same rate*, and we write this $f\in\Theta(g)$
 
-
-### Defining orders of growth
-
-How do we define upper and lower bounds?
-First, if $g$ is an upper bound of $f$, then this should mean something like $f(n)\leq g(n)$ *in the long run*.
-What we mean by this is that whenever $n$ becomes sufficiently large, then $f(n)$ should not outgrow $g(n)$.
-
-But this is not all there is to it.
-We have already mentioned that we want to abstract away from constant factors --
-if algorithm $\mathbf{A}$ is twice as fast as algorithm $\mathbf{B}$, then they grow at the same rate, and we want our notation to capture that.
-So what we want to say is that $f(n)\leq k\cdot g(n)$, for some arbitrary constant $k$.
-
-Now we can give formal definitions of upper, lower and tight bounds:
-
-Upper bound
-
-: $f\in O(g)$ **iff** there exist positive numbers $k$ and $n_0$ such that $f(n) \leq k\cdot g(n)$ for all $n>n_0$
-
-Lower bound
-
-: $f\in\Omega(g)$ **iff** there exist positive numbers $k$ and $n_0$ such that $f(n)\geq k\cdot g(n)$ for all $n>n_0$
-
-: or equivalently: $f\in\Omega(g)$ **iff** $g\in O(f)$
-
-Tight bound
-
-: $f\in\Theta(g)$ **iff** there exist positive numbers $k_1$, $k_2$ and $n_0$ such that $k_1\cdot g(n) \leq f(n) \leq k_2\cdot g(n)$ for all $n>n_0$
-
-: or equivalently: $f\in\Theta(g)$ **iff** $f\in O(g) \wedge f\in\Omega(g)$
-
-These definitions assume that $f$ and $g$ are *monotonically increasing*, i.e., that they never decrease when the input increases.
-But since we will only be using them for comparing computational resources, they will always be monotonically increasing.
-
-::: example
-#### Example: Comparing two functions
-
-Assume $f(n) = n^2$ and $g(n) = 1000n\log n$.
-How can we use the definitions above to prove that $f\in\Omega(g)$?
-
-We have to find positive numbers $k$ and $n_0$ so that $f(n)\geq k\cdot g(n)$.
-Since $g$ has a constant factor of 1000, we can try with $k=0.001$:
-
-$$
-k\cdot g(n) = 0.001 \cdot 1000n\log n = n\log n
-$$
-
-Now we readily see that $f(n) = n^2$ is larger than $k\cdot g(n) = n\log n$ for all $n\geq 1$, so we can set $n_0 = 1$.
-
-Note that there are plenty of possible values to choose from, such as $k=1$ and $n_0=13,789$.
-We can even use very large values such as $k=n_0=10^{99}$, what we are interested in is after all what happens when $n$ grows infinitly large.
-:::
 
 ### Should we use $O$, $\Omega$ or $\Theta$?
 

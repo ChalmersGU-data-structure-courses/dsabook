@@ -22,7 +22,17 @@ case"). For example, if $n^2$ grows as fast as $T(n)$ (the
 running time of our algorithm) for the worst-case input, we would say
 the algorithm is "in $O(n^2)$ in the worst case".
 
-We already defined the upper bound in @sec:defining-orders-of-growth, like this:
+### Formal definition
+
+So, how do we define the upper bound?
+First, if $g$ is an upper bound of $f$, then this should mean something like $f(n)\leq g(n)$ *in the long run*.
+What we mean by this is that whenever $n$ becomes sufficiently large, then $f(n)$ should not outgrow $g(n)$.
+
+But this is not all there is to it.
+We have already mentioned that we want to abstract away from constant factors --
+if algorithm $\mathbf{A}$ is twice as fast as algorithm $\mathbf{B}$, then they grow at the same rate, and we want our notation to capture that.
+So what we want to say is that $f(n)\leq k\cdot g(n)$, for some arbitrary constant $k$.
+This gives us the following formal definition:
 
 Upper bound
 
@@ -39,14 +49,32 @@ the algorithm *always* executes in less than or equal to $k\cdot g(n)$ steps for
 ::: note
 Note that the definition is somewhat simplified, it only works if $f$ and $g$ are *monotonically increasing*.
 This means that if $x\leq y$ then $f(x)\leq f(y)$, so the value can never decrease whenever $x$ increases.
-
 But this is not a real restriction for our purposes, because there are no algorithms that becomes faster when the input size grows.
 In the very best case, the runtime of an algorithm can be independent of the input size, but this is also monotonically increasing.
-
 If we were to allow any non-monotonic functions, then the definition of upper bound would become slightly more complicated.
 You can look up the formal definition in mathematical textbooks, or in Wikipedia.
 :::
 
+::: example
+#### Example: Comparing two functions
+
+Assume $f(n) = n(\log n)^2$ and $g(n) = 0.001\cdot n^2$.
+How can we use the definitions above to prove that $f \in O(g)$?
+
+We have to find positive numbers $k$ and $n_0$ so that $f(n)\leq k\cdot g(n)$.
+Since $g$ has a constant factor of 0.001, we can try with $k=1000$:
+
+$$
+k\cdot g(n) = 1000 \cdot 0.001 \cdot n^2 = n^2
+$$
+
+Now we readily see that $f(n) = n(\log n)^2$ is smaller than $k\cdot g(n) = n^2$ for all $n\geq 1$, so we can set $n_0 = 1$.
+
+Note that there are plenty of possible values to choose from, such as $k=1$ and $n_0=13,789$.
+We can even use very large values such as $k=n_0=10^{99}$, since we are only interested in what happens when $n$ grows infinitly large.
+:::
+
+<!--
 ::: example
 #### Example: Sequential search
 
@@ -58,6 +86,7 @@ in the array, then in the average case $T(n) = c_s n/2$. For
 all values of $n > 1$, $c_s n/2 \leq c_s n$. Therefore, by the
 definition, $T(n)$ is in $O(n)$ for $n_0 = 1$ and $c = c_s$.
 :::
+ -->
 
 ::: example
 #### Example: Quadratic algorithm
