@@ -38,7 +38,7 @@ positions.
 From this discussion, we see that the expected cost of hashing is a
 function of how full the table is. Define the
 [load factor]{.term} for the table as
-$\alpha = N/M$, where $N$ is the number of records currently in the
+$\alpha = n/m$, where $n$ is the number of records currently in the
 table.
 
 An estimate of the expected cost for an insertion (or an unsuccessful
@@ -48,15 +48,15 @@ permutation of the slots in the hash table. Assuming that every slot in
 the table has equal probability of being the home slot for the next
 record, the probability of finding the home position occupied is
 $\alpha$. The probability of finding both the home position occupied and
-the next slot on the probe sequence occupied is $(N(N-1))/(M(M-1))$. The
+the next slot on the probe sequence occupied is $(n(n-1))/(m(m-1))$. The
 probability of $i$ collisions is
-$(N(N-1) ... (N-i+1))/(M(M-1) ... (M-i+1))$. If $N$ and $M$ are large,
-then this is approximately $(N/M)^i$. The expected number of probes is
+$(n(n-1) ... (n-i+1))/(m(m-1) ... (m-i+1))$. If $n$ and $m$ are large,
+then this is approximately $(n/m)^i$. The expected number of probes is
 one plus the sum over $i \geq 1$ of the probability of $i$ collisions,
 which is approximately
 
 \begin{eqnarray*}
-1 + \sum_{i=1}^\infty (N/M)^i &=& 1/(1-\alpha)
+1 + \sum_{i=1}^\infty (n/m)^i &=& 1/(1-\alpha)
 \end{eqnarray*}
 
 The cost for a successful search (or a deletion) has the same cost as

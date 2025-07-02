@@ -111,7 +111,7 @@ left as an exercise to the reader.
 There is however a bigger problem with our code above.
 When we remove keys we reduce the size of the hash table, but we haven't actually changed the number of occupied slot.
 Instead we turned a slot from having a value into a tombstone.
-So, the variable `size` -- which is the number $N$ of key/value pairs -- does not say how many slots are actually occupied.
+So, the variable `size` -- which is the number $n$ of key/value pairs -- does not say how many slots are actually occupied.
 
 If we are very unlucky we might end up in a table that has a nice load factor, but where almost all slots are tombstones.
 But the table doesn't know this, so it will not try to resize and instead we will get a drop in performance.
@@ -130,10 +130,10 @@ thinking about the load factor -- depending on if we want to include
 the tombstones or not. And both variants are useful!
 
 -   When adding elements, we need to know if there are too few
-    completely empty slots left, giving the load factor $N + D / M$
-    (where $N$ is the number of occupied slots and $D$ the number of tombstones).
+    completely empty slots left, giving the load factor $n + d / m$
+    (where $n$ is the number of occupied slots and $d$ the number of tombstones).
 -   When deleting elements, we need to know if there are too few
-    occupied slots, giving the load factor $N / M$.
+    occupied slots, giving the load factor $n / m$.
 
 All this combined result in slightly more complicated code for our methods.
 E.g., when deleting a key/value pair -- or rather, turning the slot into a tombstone -- we have to decrease the `size` variable, but we also have to increase the variable `tombstones`.

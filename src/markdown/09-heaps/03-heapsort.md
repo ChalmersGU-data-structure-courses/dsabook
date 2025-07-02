@@ -40,12 +40,12 @@ We can use a heap to implement a very simple sorting algorithm:
 Since the heap returns the smallest elements first, they will be inserted in sorted order into the new array.
 Here is pseudocode:
 
-    function naiveHeapsort(A):
+    function naiveHeapsort(arr):
         heap = new MinHeap()
-        for i in 0 .. A.size-1:
-            heap.add(A[i])
-        for i in 0 .. A.size-1:
-            A[i] = heap.removeMin()
+        for i in 0 .. arr.size-1:
+            heap.add(arr[i])
+        for i in 0 .. arr.size-1:
+            arr[i] = heap.removeMin()
 
 :::::: online
 What is the time complexity of this algorithm?
@@ -110,15 +110,15 @@ Here is a visualisation of the Heapsort algorithm.
 
 A complete implementation is as follows.
 
-    function heapsort(A):
+    function heapsort(arr):
         // First, convert the array to a max heap.
         heap = new MaxHeap()
-        heap.buildHeap(A)
+        heap.buildHeap(arr)
 
         // Then, repeatedly remove each maximum element from the heap,
         // and put it just after the heap.
-        N = heap.size
-        for size in N-1, N-2 .. 0:
+        n = heap.size
+        for size in n-1, n-2 .. 0:
             heap.swap(0, size)  // Put the max element at the end of the heap.
             heap.size = size    // Change the heap size so it excludes the max element.
             heap.siftDown(0)    // Now, sift the temporary root down.

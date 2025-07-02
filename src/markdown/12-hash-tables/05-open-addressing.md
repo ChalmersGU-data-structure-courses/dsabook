@@ -16,8 +16,8 @@ If $E$ is to be inserted and another record already occupies its home position, 
 It is the business of the [collision resolution]{.term} policy to determine which slot that will be.
 Naturally, the same policy must be followed during search as during insertion, so that any element not found in its home position can be recovered by repeating the collision resolution process.
 
-We will still denote the size of the internal arraw as $M$ and the total number of elements as $N$, and the load factor is still calculated in the same way, as $N/M$.
-Note that since all elements are stored in the array, $N$ can never be larger than $M$, so the load factor must always be smaller than 1.
+We will still denote the size of the internal arraw as $m$ and the total number of elements as $n$, and the load factor is still calculated in the same way, as $n/m$.
+Note that since all elements are stored in the array, $n$ can never be larger than $m$, so the load factor must always be smaller than 1.
 
 
 #### Implementation overview

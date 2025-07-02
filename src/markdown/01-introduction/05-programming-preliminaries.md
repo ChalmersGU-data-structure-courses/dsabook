@@ -111,8 +111,8 @@ Often we want to iterate over integers, and then it's important to know if the e
 We will use `i..j` to describe the increasing seqeunce from `i` to `j` (i.e., `0..10` is the sequence $0, 1, \ldots, 9, 10$).
 Here is an example of a nested `for` loop:
 
-    for i in 0 .. N-1:
-        for j in i+1 .. N:
+    for i in 0 .. n-1:
+        for j in i+1 .. n:
             do something with i and j
 
 *Important note*: the range `i..j` is *inclusive*, meaning that the endpoint `j` is *included* in the sequence.

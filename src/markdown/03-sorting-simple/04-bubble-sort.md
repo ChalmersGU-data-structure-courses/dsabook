@@ -23,13 +23,13 @@ Likewise, each succeeding pass through the array compares adjacent
 elements, looking at one less element toward the end than in the
 preceding pass. Here is an implementation:
 
-    function bubbleSort(A):
-        N = A.size
-        for i in 0 .. N-2:
+    function bubbleSort(arr):
+        n = arr.size
+        for i in 0 .. n-2:
             // Bubble up the i'th element
-            for j in 1 .. N-i-1:
-                if A[j-1] > A[j]:
-                    swap(A, j-1, j)
+            for j in 1 .. n-i-1:
+                if arr[j-1] > arr[j]:
+                    swap(arr, j-1, j)
 
 
 ::::: online :::::
@@ -85,8 +85,8 @@ Now try for yourself to see if you understand how Bubble sort works.
 
 We have a nested for loop, where the inner loop depends on the loop variable of the outer loop.
 
-- The outer loop is iterated $N-1$ times in total.
-- In iteration $i$, the number of comparisons made by the inner loop is always $N-i-1$.
+- The outer loop is iterated $n-1$ times in total.
+- In iteration $i$, the number of comparisons made by the inner loop is always $n-i-1$.
 
 So the total number of iterations is
 
@@ -94,7 +94,7 @@ So the total number of iterations is
 (n-1) + (n-2) + \cdots + 1 &=& \sum_{i=1}^{n-1} i
 \end{eqnarray*}
 
-And this sum has the value $N(N-1)/2$, which means the runtime complexity is *quadratic*, $O(N^2)$.
+And this sum has the value $n(n-1)/2$, which means the runtime complexity is *quadratic*, $O(n^2)$.
 Note that this is regardless of how the initial array looks like, so bubble sort has the same best- and worst-case complexity.
 
 ::: dsvis
@@ -104,9 +104,9 @@ The following visualisation illustrates the running time analysis of Bubble sort
 :::
 
 The number of swaps required depends on how often an element is less than the one immediately preceding it in the array.
-In the worst case this will happen in every single comparison, leading to $O(N^2)$ number of swaps.
+In the worst case this will happen in every single comparison, leading to $O(n^2)$ number of swaps.
 If we assume that the initial array is random, we can expect that about half of the comparisons will lead to a swap.
-So the average case number of swaps is also quadratic, $O(N^2)$.
+So the average case number of swaps is also quadratic, $O(n^2)$.
 However, if the initial array is already sorted we don't have to perform any swaps at all, so in the best case the number of swaps is constant $O(1)$.
 (But recall that the best case is not something we should rely upon.)
 

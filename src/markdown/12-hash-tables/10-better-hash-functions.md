@@ -134,7 +134,7 @@ characters. We start with a simple summation function.
 
 
 This function sums the ASCII values of the letters in a string. If the
-hash table size $M$ is small compared to the resulting summations, then
+hash table size $m$ is small compared to the resulting summations, then
 this hash function should do a good job of distributing strings evenly
 among the hash table slots, because it gives equal weight to all
 characters in the string. This is an example of the
@@ -142,7 +142,7 @@ characters in the string. This is an example of the
 function.
 
 As with many other hash functions, the final step is to apply the
-modulus operator to the result, using table size $M$ to generate a value
+modulus operator to the result, using table size $m$ to generate a value
 within the table range. If the sum is not sufficiently large, then the
 modulus operator will yield a poor distribution. For example, because
 the ASCII value for 'A' is 65 and 'Z' is 90, the sum will always be in

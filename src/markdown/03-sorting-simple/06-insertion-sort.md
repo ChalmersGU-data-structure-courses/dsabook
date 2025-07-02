@@ -17,15 +17,15 @@ But just as for selection sort, it's relatively easy to turn it into an in-place
 Insertion sort iterates through a list of elements. For each iteration,
 the current element is inserted in turn at the correct position within a
 sorted list composed of those elements already processed. Here is an
-implementation. The input is an array named $A$ that stores $N$ elements.
+implementation. The input is an array named `arr` that stores $n$ elements.
 
-    function insertionSort(A):
-        N = A.size
-        for i in 1 .. N-1:
+    function insertionSort(arr):
+        n = arr.size
+        for i in 1 .. n-1:
             // Move the i'th element to its correct position.
             j = i
-            while j > 0 and A[j] < A[j-1]:
-                swap(A, j, j-1)
+            while j > 0 and arr[j] < arr[j-1]:
+                swap(arr, j, j-1)
                 j = j-1
 
 :::::::: online
@@ -64,13 +64,13 @@ Now try for yourself to see if you understand how Insertion sort works.
 
 Just as for the previous sorting algorithms, we have a nested for loop, where the inner loop depends on the loop variable of the outer loop.
 
-- The outer loop is iterated $N-1$ times in total.
+- The outer loop is iterated $n-1$ times in total.
 - The inner loop is harder to analyse since it depends on how many elements in positions $0,\ldots,i-1$ are smaller than the element in position $i$.
     - in the absolute worst case, we always have to move the element to the front of the list, so the number of comparisons will be $i-1$
     - in the best case, the element is already in place, and then we only need one comparison
 
-Therefore, the worst case complexity of insertion sort is $\sum_0^N i$, which is quadratic, $O(N^2)$.
-In the best case -- when the list is already sorted -- the complexity is instead linear, $O(N)$, because we only have to do one comparison per iteration.
+Therefore, the worst case complexity of insertion sort is $\sum_0^n i$, which is quadratic, $O(n^2)$.
+In the best case -- when the list is already sorted -- the complexity is instead linear, $O(n)$, because we only have to do one comparison per iteration.
 
 ::: dsvis
 Here is an explanation of the worst case cost of insertion sort.
@@ -106,11 +106,11 @@ Counting comparisons or swaps yields similar results. Each time through
 the inner `for` loop yields both a comparison and a swap, except the
 last (i.e., the comparison that fails the inner `for` loop's test),
 which has no swap. Thus, the number of swaps for the entire sort
-operation is $N-1$ less than the number of comparisons. This is 0 in the
-best case, and $O(N^2)$ in the average and worst cases.
+operation is $n-1$ less than the number of comparisons. This is 0 in the
+best case, and $O(n^2)$ in the average and worst cases.
 
 Later we will see algorithms whose growth rate is much better than
-$O(N^2)$. Thus for larger arrays, Insertion sort will not be so
+$O(n^2)$. Thus for larger arrays, Insertion sort will not be so
 good a performer as other algorithms. So Insertion sort is not the best
 sorting algorithm to use in most situations. But there are special
 situations where it is ideal. We already know that Insertion sort works

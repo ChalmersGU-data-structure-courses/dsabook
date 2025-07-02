@@ -4,7 +4,7 @@
 In the sections following we will introduce three basic sorting algorithms.
 Here we will give very short descriptions of each of them, and later go through them in more detail.
 
-For these short descriptions, assume that we want to sort $N$ books in a bookshelf.
+For these short descriptions, assume that we want to sort $n$ books in a bookshelf.
 It doesn't matter what we want to sort the books by -- it could be by author, or title, or perhaps height.
 We only need to know how to compare two books, where we say that the "smaller" book should come before the "larger" in the final ordered bookshelf.
 
@@ -20,7 +20,7 @@ This can be done in many different ways, but the commonest implementation is to 
 After the first iteration we have moved the largest book to the far end of the bookshelf.
 The next iteration will move the second largest book to its right location (next to the largest book), and so on.
 Repeat this left-to-right pass until the list is sorted.
-It's perhaps not obvious, but in fact we only have to do this at most $N$ times.
+It's perhaps not obvious, but in fact we only have to do this at most $n$ times.
 
 ### Selection sort overview
 
@@ -46,10 +46,10 @@ Just as for selection sort, this description suggests that it is not in-place, b
 ### Summary
 
 So, what is the complexity of these three algorithms?
-All of them has an outer loop that is repeated $N$ times, so how long time does their inner loops take?
+All of them has an outer loop that is repeated $n$ times, so how long time does their inner loops take?
 
-- *Bubble sort*: one left-to-right pass iterates through the whole shelf, so it's linear $O(N)$.
-- *Selection sort*: finding the smallest book in an unsorted collection is linear $O(N)$.
-- *Insertion sort*: inserting one book in the correct position in a sorted list is linear $O(N)$.
+- *Bubble sort*: one left-to-right pass iterates through the whole shelf, so it's linear $O(n)$.
+- *Selection sort*: finding the smallest book in an unsorted collection is linear $O(n)$.
+- *Insertion sort*: inserting one book in the correct position in a sorted list is linear $O(n)$.
 
-Therefore, the total complexity of each of the algorithms is quadratic, $O(N^2)$.
+Therefore, the total complexity of each of the algorithms is quadratic, $O(n^2)$.

@@ -60,7 +60,7 @@ To analyse this we first need to define the concept of *inversion*.
 An *inversion* occurs when there are two elements in an array that come in the wrong order.
 Formally, if $A[i]>A[j]$ for array indices $i<j$, then there is an inversion between $i$ and $j$
 (or between $A[i]$ and $A[j]$ if that is unambiguous).
-For example, in the array [A,B,X,C,D] there are inversions between indices 2 and 3 (elements X and C are out of order), and between indices 2 and 4 (elements X and D).
+For example, in the array [B,C,X,D,E] there are inversions between indices 2 and 3 (elements X and D are out of order), and between indices 2 and 4 (elements X and E).
 
 The number of inversions in an array is one measure of how sorted the array is (but not the only such measure).
 The most unsorted array according to this definition is reversely sorted, because then all pairs of indices are inversions.

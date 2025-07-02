@@ -103,11 +103,11 @@ Which is the best definition for collision in a hash table?
 
 
 :::::::::: question ::::::::::
-(Recall that $M$ refers to the size of a hash table.)
+(Recall that $m$ refers to the size of a hash table.)
 A hash function must:
 
-- [x] Return a value between 0 and $M-1$
-- [ ] Return a value between 1 and $M$
+- [x] Return a value between 0 and $m-1$
+- [ ] Return a value between 1 and $m$
 - [ ] Return the position of a free slot in the table
 - [ ] Return the hash value for the key
 - [ ] Return values in equal distribution throughout the table

@@ -114,15 +114,15 @@ Which of the following is true of separate chaining?
 
 
 :::::::::: question ::::::::::
-A separate chaining table has an array size of $N$.
+A separate chaining table has an array size of $n$.
 What is the maximum number of records that
 can be stored in the table?
 
 - [x] There is no maximum
-- [ ] $N/2$
-- [ ] $N$
-- [ ] $N-1$
-- [ ] $N-2$
+- [ ] $n/2$
+- [ ] $n$
+- [ ] $n-1$
+- [ ] $n-2$
 
 ::: hints
 - In separate chaining, where are the records stored?

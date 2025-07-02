@@ -68,10 +68,10 @@ this purpose, perhaps reading the graph description from a file.
 
 Here is an implementation for the adjacency matrix.
 To simplify the implementation we assume that the vertices are integers
-$0\ldots N-1$: then we can use the vertices as indices in the adjacency matrix.
+$0\ldots n-1$: then we can use the vertices as indices in the adjacency matrix.
 
     datatype MatrixGraph implements Graph:
-        // The edge matrix is an N x N matrix of weights.
+        // The edge matrix is an n x n matrix of weights.
         edgeMatrix: Array of (Array of Edges)
         size: Int
 

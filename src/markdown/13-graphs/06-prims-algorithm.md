@@ -7,11 +7,11 @@
 
 The first of our two algorithms for finding MSTs is commonly referred
 to as [Prim's algorithm]{.term}. Prim's
-algorithm is very simple. Start with any vertex $N$ in the graph,
-setting the MST to be $N$ initially. Pick the least-cost edge connected
-to $N$. This edge connects $N$ to another vertex; call this $M$. Add
-vertex $M$ and edge $(N, M)$ to the MST. Next, pick the least-cost edge
-coming from either $N$ or $M$ to any other vertex in the graph. Add this
+algorithm is very simple. Start with any vertex $n$ in the graph,
+setting the MST to be $n$ initially. Pick the least-cost edge connected
+to $n$. This edge connects $n$ to another vertex; call this $m$. Add
+vertex $m$ and edge $(n, m)$ to the MST. Next, pick the least-cost edge
+coming from either $n$ or $m$ to any other vertex in the graph. Add this
 edge and the new vertex it reaches to the MST. This process continues,
 at each step expanding the MST by selecting the least-cost edge from a
 vertex currently in the MST to a vertex not currently in the MST.

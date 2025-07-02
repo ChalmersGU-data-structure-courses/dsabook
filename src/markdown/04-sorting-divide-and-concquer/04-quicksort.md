@@ -27,14 +27,14 @@ values less than the pivot. The records are then rearranged in such a
 way that the $k$ values less than the pivot are placed in the first, or
 leftmost, $k$ positions in the array, the pivot itself is placed at
 index $k$, and the values greater than or equal to the pivot are placed
-in the last, or rightmost, $N-k-1$ positions. This is called a
+in the last, or rightmost, $n-k-1$ positions. This is called a
 [partition]{.term} of the array. The values
 placed in a given partition need not (and typically will not) be sorted
 with respect to each other. All that is required is that all values end
 up in the correct partition. The pivot value itself is placed in
 position $k$. Quicksort then proceeds to sort the resulting subarrays
 now on either side of the pivot, one of size $k$ and the other of size
-$N-k-1$. How are these values sorted? Because Quicksort is such a good
+$n-k-1$. How are these values sorted? Because Quicksort is such a good
 algorithm, using Quicksort on the subarrays would be appropriate.
 
 Unlike some of the sorts that we have seen earlier in this chapter,
@@ -47,15 +47,15 @@ experiences with sorting a relatively few physical objects.
 Here is an implementation for Quicksort. Parameters `left` and `right`
 define the left and right indices, respectively, for the subarray being
 sorted. The initial call to `quickSort` would be
-`quickSort(A,0,A.size-1)`, just as for mergesort.
+`quickSort(arr,0,arr.size-1)`, just as for mergesort.
 
-    function quickSort(A, left, right):
-        if left >= right:                         // Base case: Subarray length is ≤ 1
+    function quickSort(arr, left, right):
+        if left >= right:                           // Base case: Subarray length is ≤ 1
             return
-        pivot = findPivot(A, left, right)         // Pick a pivot index
-        pivot = partition(A, left, right, pivot)  // Partition the subarray; update pivot with its new position
-        quickSort(A, left, pivot-1)               // Sort left partition
-        quickSort(A, pivot+1, right)              // Sort right partition
+        pivot = findPivot(arr, left, right)         // Pick a pivot index
+        pivot = partition(arr, left, right, pivot)  // Partition and update pivot
+        quickSort(arr, left, pivot-1)               // Sort left partition
+        quickSort(arr, pivot+1, right)              // Sort right partition
 
 
 Function `partition` will move records to the appropriate partition and
@@ -64,7 +64,7 @@ position of the pivot in the final, sorted array. By doing so, we
 guarantee that at least one value (the pivot) will not be processed in
 the recursive calls to `quickSort`. Even if a bad pivot is selected,
 yielding a completely empty partition to one side of the pivot, the
-larger partition will contain at most $N-1$ records.
+larger partition will contain at most $n-1$ records.
 
 Selecting a pivot can be done in many ways. The simplest is to use the
 first key. However, if the input is sorted or reverse sorted, this will
@@ -73,7 +73,7 @@ One simple way to avoid this problem is to select the middle position in
 the array. Here is a simple `findPivot` function implementing this idea.
 Note that later in the chapter we will discuss better pivot selection strategies.
 
-    function findPivot(A, left, right) -> Int:
+    function findPivot(arr, left, right) -> Int:
         // Not-so-good pivot selection: always choose the middle element.
         return int((left + right) / 2)
 
@@ -102,13 +102,13 @@ whole array, but also subarrays. Therefore `partition` needs the
 positions of the leftmost and rightmost elements in the subarray that we
 will partition.
 
-    function partition(A, left, right, pivot) -> Int:
-        swap A[pivot] with A[left]
+    function partition(arr, left, right, pivot) -> Int:
+        swap arr[pivot] with arr[left]
         while left ≤ right:
-            move left rightwards until A[left] < A[pivot]
-            move right leftwards until A[right] > A[pivot]
-            swap A[left] with A[right]
-        swap A[pivot] with A[right]
+            move left rightwards until arr[left] < arr[pivot]
+            move right leftwards until arr[right] > arr[pivot]
+            swap arr[left] with arr[right]
+        swap arr[pivot] with arr[right]
         return right
 
 The partition function first puts the pivot at the leftmost position in the subarray.
@@ -176,21 +176,21 @@ Quicksort.
 
 ### Complexity analysis
 
-Quicksort's worst case will occur when the pivot does a poor job of breaking the array, that is, when there are no records in one partition, and $N-1$ records in the other.
+Quicksort's worst case will occur when the pivot does a poor job of breaking the array, that is, when there are no records in one partition, and $n-1$ records in the other.
 
-- The pivot partitions the array into two parts: one of size $0$ and the other of size $N-1$. This requires $N-1$ units of work.
-- In the second level, the pivot breaks it into two parts: one of size $0$ and the other of size $N-2$. This requires $N-2$ units of work.
-- In the third level, the pivot breaks it into two parts: one of size $0$ and the other of size $N-3$. This requires $N-3$ units of work.
+- The pivot partitions the array into two parts: one of size $0$ and the other of size $n-1$. This requires $n-1$ units of work.
+- In the second level, the pivot breaks it into two parts: one of size $0$ and the other of size $n-2$. This requires $n-2$ units of work.
+- In the third level, the pivot breaks it into two parts: one of size $0$ and the other of size $n-3$. This requires $n-3$ units of work.
 - ...
 - In the last level, the pivot breaks a partition of size $2$ into two parts: one of size $0$ and the other of size $1$. This requires a single unit of work.
 
 Thus, the total amount of work is determined by the summation:
 
 \begin{eqnarray*}
-\sum_{i=1}^{N} i &=& \frac{1}{2} N (N-1) \; \in \; O(N^2)
+\sum_{i=1}^{n} i &=& \frac{1}{2} n (n-1) \; \in \; O(n^2)
 \end{eqnarray*}
 
-Therefore, the worst case running time of Quicksort is $O(N^2)$.
+Therefore, the worst case running time of Quicksort is $O(n^2)$.
 
 ::: dsvis
 This visualisation explains the worst-case running time of Quicksort
@@ -209,15 +209,15 @@ good partitionings for Quicksort to work fairly well.
 
 Here is an explanation of the best-case running time of Quicksort:
 
-- The pivot partitions the array into two halves of size $N/2$ each. This requires $O(N)$ amount of work.
-- For each of the two partitions, the pivot breaks it into halves of size $N/4$ each. This requires $O(N)$ amount of work.
-- For each of the four partitions, the pivot breaks it into halves of size $N/8$ each. This requires $O(N)$ amount of work.
+- The pivot partitions the array into two halves of size $n/2$ each. This requires $O(n)$ amount of work.
+- For each of the two partitions, the pivot breaks it into halves of size $n/4$ each. This requires $O(n)$ amount of work.
+- For each of the four partitions, the pivot breaks it into halves of size $n/8$ each. This requires $O(n)$ amount of work.
 - ...
-- In the last level, we reach $N$ partitions each of size $1$. This requires $O(N)$ amount of work.
+- In the last level, we reach $n$ partitions each of size $1$. This requires $O(n)$ amount of work.
 
-Thus, at each level, all partition steps for that level do a total of $O(N)$ work.
-And if we always can find the perfect pivot, there will be only $\log N$ levels.
-So the best-case running time of Quicksort is $O(N \log N)$.
+Thus, at each level, all partition steps for that level do a total of $O(n)$ work.
+And if we always can find the perfect pivot, there will be only $\log n$ levels.
+So the best-case running time of Quicksort is $O(n \log n)$.
 
 ::: dsvis
 This visualisation explains the best-case running time of Quicksort
@@ -233,7 +233,7 @@ possible arrangements of input, summing the costs and dividing by the
 number of cases. We make one reasonable simplifying assumption: At each
 partition step, the pivot is equally likely to end in any position in
 the (sorted) array. In other words, the pivot is equally likely to break
-an array into partitions of sizes 0 and $N-1$, or 1 and $N-2$, and so on.
+an array into partitions of sizes 0 and $n-1$, or 1 and $n-2$, and so on.
 Given this assumption, the average-case cost is computed from the
 following equation:
 

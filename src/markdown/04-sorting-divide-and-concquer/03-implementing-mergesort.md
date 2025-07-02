@@ -17,43 +17,43 @@ To split this subarray into two halves, we just calculate the middle index,
 
 The main function for sorting a subarray can now be written like this:
 
-    // Sort the subarray A[left .. right]
-    function mergeSort(A, left, right):
-        if left >= right:              // Base case: Subarray length is ≤ 1
+    // Sort the subarray arr[left .. right]
+    function mergeSort(arr, left, right):
+        if left >= right:               // Base case: Subarray length is ≤ 1
             return
-        mid = int((left + right) / 2)  // The midpoint is where the second half starts
-        mergeSort(A, left, mid-1)      // Mergesort first half
-        mergeSort(A, mid, right)       // Mergesort second half
-        merge(A, left, mid, right)     // Merge the two sorted halves
+        mid = int((left + right) / 2)   // The midpoint is where the second half starts
+        mergeSort(arr, left, mid-1)     // Mergesort first half
+        mergeSort(arr, mid, right)      // Mergesort second half
+        merge(arr, left, mid, right)    // Merge the two sorted halves
 
-The initial call would be `mergeSort(A,0,A.size-1)`, which sorts the whole array `A`.
+The initial call would be `mergeSort(arr,0,arr.size-1)`, which sorts the whole array `arr`.
 
 The difficulty comes when we want to merge the two sorted subarrays.
 This cannot be done in-place (or rather, it is very very complicated to do it in-place).
 So we need an auxiliary array which we can merge the elements into.
 
-    // Merge the sorted subarrays A[left .. mid-1] and A[mid .. right]
-    function merge(A, left, mid, right):
+    // Merge the sorted subarrays arr[left .. mid-1] and arr[mid .. right]
+    function merge(arr, left, mid, right):
         temp = new Array
         // Merge the two sublists into the auxiliary array
         i1 = left
         i2 = mid
         for i in left .. right:
             if i2 > right:           // Right sublist exhausted
-                temp[i] = A[i1]
+                temp[i] = arr[i1]
                 i1 = i1 + 1
             else if i1 > mid:        // Left sublist exhausted
-                temp[i] = A[i2]
+                temp[i] = arr[i2]
                 i2 = i2 + 1
-            else if A[i1] <= A[i2]:  // Get smaller value
-                temp[i] = A[i1]
+            else if arr[i1] <= arr[i2]:  // Get smaller value
+                temp[i] = arr[i1]
                 i1 = i1 + 1
             else:
-                temp[i] = A[i2]
+                temp[i] = arr[i2]
                 i2 = i2 + 1
         // Copy the elements back from the auxiliary array
         for i in left .. right:
-            A[i] = temp[i]
+            arr[i] = temp[i]
 
 
 ::: dsvis
@@ -68,9 +68,9 @@ One simple optimisation is to create one single auxiliary array before the first
 The only thing we would have to do is to add an extra argument to `mergeSort` and `merge`, for the reference to the auxiliary array.
 Then we can create a wrapper function that takes care of the initialisation, and makes the first recursive call:
 
-    function mergeSort(A):
-        temp = new Array(A.size)
-        mergeSort(A, temp, 0, A.size-1)
+    function mergeSort(arr):
+        temp = new Array(arr.size)
+        mergeSort(arr, temp, 0, arr.size-1)
 
 
 <!--

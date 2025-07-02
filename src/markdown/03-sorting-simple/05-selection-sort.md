@@ -25,14 +25,14 @@ To find the next-smallest element we have to search through the entire unsorted 
 
 Here is an implementation for Selection sort.
 
-    function selectionSort(A):
-        N = A.size
-        for i in 0 .. N-1:               // Select i'th smallest element
-            minIndex = i                 // Current smallest index
-            for j in i+1 .. N-1:         // Find the smallest value
-                if A[j] > A[minIndex]:   // Found something smaller
-                    minIndex = j         // Remember smaller index
-            swap(A, i, minIndex)         // Put it into place
+    function selectionSort(arr):
+        n = arr.size
+        for i in 0 .. n-1:                  // Select i'th smallest element
+            minIndex = i                    // Current smallest index
+            for j in i+1 .. n-1:            // Find the smallest value
+                if arr[j] > arr[minIndex]:  // Found something smaller
+                    minIndex = j            // Remember smaller index
+            swap(arr, i, minIndex)          // Put it into place
 
 Any algorithm can be written in slightly different ways.
 For example, we could have written Selection sort to find the largest element and put it at the end of the array, then the next
@@ -80,15 +80,15 @@ Now try for yourself to see if you understand how Selection sort works.
 
 We have a nested for loop, where the inner loop depends on the loop variable of the outer loop.
 
-- The outer loop is iterated $N$ times in total.
-- In iteration $i$, the number of comparisons made by the inner loop is always $N-i-1$.
+- The outer loop is iterated $n$ times in total.
+- In iteration $i$, the number of comparisons made by the inner loop is always $n-i-1$.
 
 As you might notice, this is exactly the same as the number of comparisons bubble sort makes.
-So, selection sort makes $N(N-1)/2$ comparisons, which is quadratic, $O(N^2)$.
+So, selection sort makes $n(n-1)/2$ comparisons, which is quadratic, $O(n^2)$.
 
 The advantage compared to bubble sort is that selection sort makes a lot fewer swaps.
-For each outer iteration it only makes one swap, so the total number of swaps will be $N-1$ (we get the last element in place "for free").
-So, selection sort makes a linear number of swaps, $O(N)$.
+For each outer iteration it only makes one swap, so the total number of swaps will be $n-1$ (we get the last element in place "for free").
+So, selection sort makes a linear number of swaps, $O(n)$.
 
 ::: dsvis
 This visualisation analyses the number of comparisons and swaps required by Selection sort.

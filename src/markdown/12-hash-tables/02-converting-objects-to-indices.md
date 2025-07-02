@@ -26,7 +26,7 @@ This is a very common strategy in many programming languages -- e.g., in Java th
 
 ### Compressing a hash code
 
-Internally, a hash table is an array of a fixed length, say $M$, and each of these $M$ slots represent a bucket which contains some objects.
+Internally, a hash table is an array of a fixed length, say $m$, and each of these $m$ slots represent a bucket which contains some objects.
 The hash function should help us by telling in which bucket we should search for the given object.
 
 Now, the problem is that the datatypes and objects have no idea how large the internal array is, i.e., which array index they should return.
@@ -34,20 +34,20 @@ Instead, the only thing that the `hashCode()` method can do is to return an arbi
 So, how can we solve this dilemma?
 
 The solution is to implement a function that transforms an arbitrary hash code into an array index.
-This is called *compression* -- we compress the arbitrary integer that is the hash code into an array index $0\leq i<M$.
+This is called *compression* -- we compress the arbitrary integer that is the hash code into an array index $0\leq i<m$.
 
 Therefore, computing the hash table index for a given object is a two-step process:
 
 1. First calculate the hash code which is an arbitrary integer -- this is calculated by the object itself.
-2. Then compress the hash code into a table index $0\leq i<M$ -- this is calculated by an internal function in the hash table.
+2. Then compress the hash code into a table index $0\leq i<m$ -- this is calculated by an internal function in the hash table.
 
 
 ### Modular compression
 
-The simplest way to compress a hash code $h\geq 0$ into a table index $i$, is to take $h$ **modulo** the array size $M$:
+The simplest way to compress a hash code $h\geq 0$ into a table index $i$, is to take $h$ **modulo** the array size $m$:
 
 \begin{eqnarray*}
-i &=& h \mathop{\%} M
+i &=& h \mathop{\%} m
 \end{eqnarray*}
 
 This is called *modular compression* and is the most common compression method.
@@ -71,16 +71,16 @@ on the least significant four bits of the key. Because these bits are
 likely to be poorly distributed (as an example, a high percentage of the
 keys might be even numbers, which means that the low order bit is zero),
 the result will also be poorly distributed. This example shows that the
-size of the table $M$ can have a big effect on the performance of a hash system.
+size of the table $m$ can have a big effect on the performance of a hash system.
 
-One way to get a better distribution is to always let the size $M$ of the internal array be a prime number.
+One way to get a better distribution is to always let the size $m$ of the internal array be a prime number.
 
 
 ### Negative hash codes
 
 However, in general integers are signed, so the method
 `hashCode()` might return a negative integer. If we take this modulo
-$M$, we might get a negative result. A negative index is not suitable as
+$m$, we might get a negative result. A negative index is not suitable as
 a table index, so first we have to make the hash code positive.
 
 One way to do this is to mask off the sign bit.
@@ -89,7 +89,7 @@ In these cases we can e.g. use `h & 0x7fffffff` to make the hash code positive.
 
     function compress(h):
         h = h & 0x7fffffff
-        return h % M
+        return h % m
 
 
 ### The hash code never changes
@@ -125,7 +125,7 @@ it in an instance variable for immediate lookup.
 So far we have talked about how to calculate an array index for an arbitrary object.
 One thing we haven't discussed yet is what we should do if two two different objects get assigned the same slots in the table.
 
-Assume that we have an internal array of size $M=16$, and we use modular compression like above.
+Assume that we have an internal array of size $m=16$, and we use modular compression like above.
 Then every 16th integer will get the same array index, such as the integers 7, 23, 39, 55, etc.
 
 So, one very important question is how to handle *collision*, i.e., when two objects want to occupy the same slot.

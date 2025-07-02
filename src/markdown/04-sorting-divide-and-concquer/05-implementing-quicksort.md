@@ -17,30 +17,30 @@ There were some important details that we didn't mention in the pseudocode for p
 
 Here is more detailed pseudocode that takes the details into account:
 
-    function partition(A, left, right, pivot) -> Int:
-        swap(A, left, pivot)   // Put pivot at the leftmost index
+    function partition(arr, left, right, pivot) -> Int:
+        swap(arr, left, pivot)   // Put pivot at the leftmost index
         pivot = left
-        left = left + 1        // Start partitioning from the element after the pivot
+        left = left + 1          // Start partitioning from the element after the pivot
 
         while true:
             // Move the left pointer rightwards as far as possible,
             // as long as it hasn't passed the right pointer, *and* the value is smaller than the pivot.
-            while left <= right and A[left] < A[pivot]:
+            while left <= right and arr[left] < arr[pivot]:
                 left = left + 1
             // Move the right pointer leftwards as far as possible,
             // as long as it hasn't passed the left pointer, *and* the value is greater than the pivot.
-            while left <= right and A[right] > A[pivot]:
+            while left <= right and arr[right] > arr[pivot]:
                 right = right - 1
             // Break out of the loop if the pointers has passed each other.
             if left > right:
                 break
             // Otherwise, swap the elements and move both pointers one step towards each other.
-            swap(A, left, right)
+            swap(arr, left, right)
             left = left + 1
             right = right - 1
 
-        swap(A, pivot, right)   // Finally, move the pivot into place
-        return right            // Return the position of the pivot
+        swap(arr, pivot, right)   // Finally, move the pivot into place
+        return right              // Return the position of the pivot
 
 
 As we mentioned in the previous section, we swap the pivot with the value at the *right* pointer.
@@ -65,16 +65,16 @@ Below we call them $i$ and $j$, where $i\leq j$.
 The invariant is that the elements from *left* to $i-1$ are less than the pivot, and the elements from $i$ to $j$ are greater than or equal to the pivot.
 In this case we start by putting the pivot at the end of the subarray.
 
-    function partition(A, left, right, pivot) -> Int:
-        swap A[pivot] with A[right]
+    function partition(arr, left, right, pivot) -> Int:
+        swap arr[pivot] with arr[right]
         pivot = right
         right = right - 1
         i = left
         for j in left .. right:
-            if A[j] <= A[pivot]:
-                swap(A, i, j)
+            if arr[j] <= arr[pivot]:
+                swap(arr, i, j)
                 i = i + 1
-        swap A[pivot] with A[i]
+        swap arr[pivot] with arr[i]
         return i
 
 However, Lomuto's partitioning algorithm is somewhat less efficient than Hoare's algorithm, because it makes more swaps.

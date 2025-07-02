@@ -172,14 +172,14 @@ Assume that all variables are integers.
 Determine $O$ for the following code fragment.
 Assume that all variables are integers.
 
-Assume that array A contains $n$ values, "random" takes constant time,
+Assume that array `arr` contains $n$ values, "random" takes constant time,
 and "sort" takes $n \log n$ time.
 
     sum = 0
     for i = 0 to n-1:
         for j = 0 to n-1:
-            A[j] = random(n)
-        sort(A)
+            arr[j] = random(n)
+        sort(arr)
 
 - [x] $O(n^2 \log n)$
 - [ ] $O(\log n)$
@@ -203,12 +203,12 @@ and "sort" takes $n \log n$ time.
 Determine $O$ for the following code fragment.
 Assume that all variables are integers.
 
-Assume array A contains a random permutation of the values from 0 to $n-1$.
+Assume array `arr` contains a random permutation of the values from 0 to $n-1$.
 
     sum = 0
     for i = 0 to n-1:
         j = 0
-        while A[j] != i:
+        while arr[j] != i:
             sum = sum + 1
             j = j + 1
 

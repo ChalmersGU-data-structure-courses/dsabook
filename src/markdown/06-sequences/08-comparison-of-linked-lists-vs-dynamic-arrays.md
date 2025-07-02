@@ -42,21 +42,21 @@ space is called [overhead]{.term}.
   However, each list node needs to allocate memory for the pointer to the next node, and all of these pointers combined is the overhead required by the array-based list.
 
 The amount of space required by a linked list is directly proportional
-to the number of elements $n$. Assuming that each list node takes up $K$
-bytes of memory, the full list will use $Kn$ bytes. The amount of space
+to the number of elements $n$. Assuming that each list node takes up $k$
+bytes of memory, the full list will use $kn$ bytes. The amount of space
 required by an array-based list is in the worst case three times as much
 as $n$ times the size of an array cell. (This worst case will arise when
 we remove a lot of elements from the list, because we wait until it is
 1/3 full until we shrink the array). So assuming that one array cell
-takes up $C$ bytes, the full array-based list will use at least $Cn$
-bytes, and at most $3Cn$ bytes.
+takes up $c$ bytes, the full array-based list will use at least $Cn$
+bytes, and at most $3cn$ bytes.
 
-So, which one is the best? It depends on the size of the list nodes $K$,
-compared to the size of the array cells $C$. Array-based lists have the
+So, which one is the best? It depends on the size $k$ of the list nodes,
+compared to the size $c$ of the array cells. Array-based lists have the
 advantage that there is no wasted space for an individual element.
 Linked lists require that an extra pointer for the `next` field be added
 to every list node. So the linked list has these `next` pointers as
-overhead. In many cases, $K$ is 2--3 times as large as $C$, so they will
+overhead. In many cases, $k$ is 2--3 times as large as $c$, so they will
 be quite similar in size on average. But this depends on the programming
 language, the operating system, and perhaps other factors.
 

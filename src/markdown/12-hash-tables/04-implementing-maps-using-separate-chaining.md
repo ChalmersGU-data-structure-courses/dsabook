@@ -80,7 +80,7 @@ We also check if the table becomes too sparse, and then decrease the internal ta
 
 #### Load factor and constants
 
-The load factor is simply the total number of elements divided by the number of bins, or $N/M$:
+The load factor is simply the total number of elements divided by the number of bins, or $n/m$:
 
     datatype SeparateChainingHashSet:
         ...

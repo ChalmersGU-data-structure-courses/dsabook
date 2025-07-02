@@ -118,16 +118,16 @@ How many ways can $n$ distinct values be arranged?
 
 
 :::::::::: question ::::::::::
-If I is the number of inversions in an input array of n records,
+If $i$ is the number of inversions in an input array of n records,
 then Insertion sort will require how many swaps?
 
-- [x] $I$
-- [ ] $n - I$
-- [ ] $I - n$
+- [x] $i$
+- [ ] $n - i$
+- [ ] $i - n$
 - [ ] $n$
 - [ ] $n^2/2$
-- [ ] $I + n$
-- [ ] $I - 1$
+- [ ] $i + n$
+- [ ] $i - 1$
 - [ ] $n - 1$
 
 ::: hints

@@ -72,7 +72,7 @@ The space usage is therefore $O(n)$, where $n$ is the length of the binary repre
 But what is the space usage in terms of the integer itself?
 This boils down to the question how many bits are there in the binary representation of a number.
 Since you can store $2^n$ different integers in $n$ bits, we need a logarithmic number of bits to store an arbitrary integer.
-Therefore the space usage of an integer is logarithmic, $O(\log N)$ to store an integer $N$.
+Therefore the space usage of an integer is logarithmic, $O(\log n)$ to store an integer $n$.
 :::
 
 And finally a more complex example, about friendship:
@@ -223,8 +223,9 @@ this is a special case where there are $n$ integers whose values are a
 permutation of the integers from 0 to $n-1$. This is an example of a [binsort]{.term}.
 Binsort assigns each value to an array position corresponding to its value.
 
-    for i in 0 .. A.size-1:
-        B[A[i]] = A[i]
+    newArr = new Array(arr.size)
+    for i in 0 .. arr.size-1:
+        newArr[arr[i]] = arr[i]
 
 This is efficient and requires $O(n)$ time.
 However, it also requires two arrays of size $n$, so the additional space usage is $O(n)$.
@@ -232,16 +233,16 @@ However, it also requires two arrays of size $n$, so the additional space usage 
 Next is a code fragment that places the permutation in order but does so within the same array
 (thus it is an example of an *in-place* sort).
 
-    for i in 0 .. A.size-1:
-        while A[i] != i:
-            swap(A, i, A[i])  // Swap element A[i] with A[A[i]]
+    for i in 0 .. arr.size-1:
+        while arr[i] != i:
+            swap(arr, i, arr[i])  // Swap element arr[i] with arr[arr[i]]
 
-The function `swap(A,i,j)` exchanges elements `i` and `j` in array `A`. It
+The function `swap(arr,i,j)` exchanges elements `i` and `j` in array `arr`. It
 may not be obvious that the second code fragment actually sorts the
 array. To see that this does work, notice that each pass through the
 `for` loop will at least move the integer with value $i$ to its correct
 position in the array, and that during this iteration, the value of
-`A[i]` must be greater than or equal to $i$. A total of at most $n$
+`arr[i]` must be greater than or equal to $i$. A total of at most $n$
 `swap` operations take place, because an integer cannot be moved out of
 its correct position once it has been placed there, and each swap
 operation places at least one integer in its correct position.

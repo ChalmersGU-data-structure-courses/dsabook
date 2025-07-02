@@ -20,11 +20,11 @@ running time. Unfortunately, even though it is based on a simple
 concept, it is relatively difficult to implement in practice. Here is a
 pseudocode sketch of Mergesort:
 
-    function mergeSort(A):
+    function mergeSort(arr):
         if A.size <= 1:
             return
-        L1 = half of A
-        L2 = other half of A
+        L1 = half of arr
+        L2 = other half of arr
         mergeSort(L1)
         mergeSort(L2)
         merge(L1, L2)
@@ -97,40 +97,40 @@ Now here is a full proficiency exercise to put it all together.
 - stable, not in-place
 :::
 
-Consider repeatedly splitting an array of $N$ elements, where $N=2^k$ is a power of 2:
+Consider repeatedly splitting an array of $n$ elements, where $n=2^k$ is a power of 2:
 
 - The first level consists of the full array:
-    - Splitting the full array into two halves requires $N$ units of work.
-- The second level consists of two halves, with $N/2$ elements each:
-    - Splitting one of the halves into two requires $N/2$ units of work.
-    - Splitting the other half into two requires $N/2$ units of work.
-    - In total $2\times N/2 = N$ units of work.
-- The third level consists of four quarters, with $N/4$ elements each:
-    - Splitting each of the quarters requires $N/4$ units of work.
-    - In total $4\times N/4=N$ units of work.
+    - Splitting the full array into two halves requires $n$ units of work.
+- The second level consists of two halves, with $n/2$ elements each:
+    - Splitting one of the halves into two requires $n/2$ units of work.
+    - Splitting the other half into two requires $n/2$ units of work.
+    - In total $2\times n/2 = n$ units of work.
+- The third level consists of four quarters, with $n/4$ elements each:
+    - Splitting each of the quarters requires $n/4$ units of work.
+    - In total $4\times n/4=n$ units of work.
 - ...
-- ...until level $k$, which consists of $N/2$ sub-arrays, each of which contains only $2$ elements.
+- ...until level $k$, which consists of $n/2$ sub-arrays, each of which contains only $2$ elements.
     - Splitting each of the pairs requires $2$ units of work.
-    - In total $N/2\times 2=N$ units of work.
+    - In total $n/2\times 2=n$ units of work.
 
 After a sub-array has been split, the next level is called recursively which returns the sorted splits.
 Then we have to merge them before returning the sorted sub-array to the previous level:
 
-- Level $k$ consists of $N/2$ pairs of singleton arrays.
+- Level $k$ consists of $n/2$ pairs of singleton arrays.
     - To merge a pair we have to look at each of the values, so it requires $2$ units of work.
-    - In total $N/2\times 2=N$ units of work.
-- Level $k-1$ consists of $N/4$ pairs of sorted $2$-element arrays.
+    - In total $n/2\times 2=n$ units of work.
+- Level $k-1$ consists of $n/4$ pairs of sorted $2$-element arrays.
     - Merging two $2$-elements arrays requires $4$ units of work.
-    - In total $N/4\times 4=N$ units.
+    - In total $n/4\times 4=n$ units.
 - ...
-- Level two consists of $2$ pairs of sorted $N/4$-element arrays.
-    - Merging two $N/4$-element arrays requires $N/2$ units of work.
-    - In total $2\times N/2=N$.
-- And finally the first level constists of one pair of sorted $N/2$-element arrays.
-    - Merging these two arrays requires $N$ units of work.
+- Level two consists of $2$ pairs of sorted $n/4$-element arrays.
+    - Merging two $n/4$-element arrays requires $n/2$ units of work.
+    - In total $2\times n/2=n$.
+- And finally the first level constists of one pair of sorted $n/2$-element arrays.
+    - Merging these two arrays requires $n$ units of work.
 
-In summary, each level spends $O(N)$ time, and there are $k=\log N$ levels.
-So the total running time of mergesort is $O(N \log N)$.
+In summary, each level spends $O(n)$ time, and there are $k=\log n$ levels.
+So the total running time of mergesort is $O(n \log n)$.
 Note that this cost is unaffected by the relative order of the values being sorted, thus this analysis holds for the best, average, and worst cases.
 
 

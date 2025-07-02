@@ -4964,12 +4964,12 @@ related to the position of a falling snowflake. The replacement
 selection process is analogous to a snowplow that moves around a
 circular track picking up snow. In steady state, given a certain
 amount of snow equivalent to [working memory]{.term}
-size $M$, an amount of snow (incoming records from the
+size $m$, an amount of snow (incoming records from the
 input stream) is expected to fall ahead of the plow as the size of
 the working memory during one cycle of the plow (analogously, one
 run of the replacement selection algorithm). Thus, the snowplow is
 expected in one pass (one run of replacement selection) to pick up
-$2M$ snow.
+$2 m$ snow.
 
 ### software engineering
 

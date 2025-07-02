@@ -93,8 +93,8 @@ dynamic array (see @sec:dynamic-arrays)
 that will resize automatically when the number of elements change.
 
     datatype MinHeap implements PriorityQueue:
-        H = new Array(10)  // 10 is the initial capacity.
-        size = 0           // The initial heap contains 0 elements.
+        heap = new Array(10)  // 10 is the initial capacity.
+        size = 0              // The initial heap contains 0 elements.
 
 Note that, because we use an array to store the heap, we indicate the nodes by their logical position within the heap rather than by a pointer to the node.
 In practice, the logical heap position corresponds to the identically numbered physical position in the array.
@@ -104,9 +104,8 @@ Since it is a heap, we know that the first element always contains the element w
     datatype MinHeap implements PriorityQueue:
         ...
         getMin():
-            // Precondition: the heap must contain some elements.
             if size > 0:
-                return H[0]
+                return heap[0]
 
 The datatype contains some private auxiliary methods that are used when adding and removing elements from the heap:
 `isLeaf` tells if a position represents a leaf in the tree, while
@@ -116,13 +115,10 @@ The datatype contains some private auxiliary methods that are used when adding a
         ...
         isLeaf(pos):
             return pos >= size / 2
-
         getLeftChild(pos):
             return 2 * pos + 1
-
         getRightChild(pos):
             return 2 * pos + 2
-
         getParent(pos):
             return int((pos - 1) / 2)
 
@@ -131,7 +127,7 @@ We also need an auxiliary method for swapping two elements in the heap.
     datatype MinHeap:
         ...
         swap(i, j):
-            H[i], H[j] = H[j], H[i]
+            heap[i], heap[j] = heap[j], heap[i]
 
 Finally, since we use a dynamic array we have to be able to resize the internal array.
 This is explained in further detail in @sec:dynamic-arrays.
@@ -139,10 +135,10 @@ This is explained in further detail in @sec:dynamic-arrays.
     datatype MinHeap:
         ...
         resizeHeap(newCapacity):
-            oldH = H
-            H = new Array(newCapacity)
+            oldHeap = heap
+            heap = new Array(newCapacity)
             for i in 0 .. size-1:
-                H[i] = oldH[i]
+                heap[i] = oldHeap[i]
 
 
 <!--
@@ -182,19 +178,19 @@ Note that we use a helper method for "sifting" a value up the tree.
     datatype MinHeap:
         ...
         add(elem):
-            if size >= H.size:
-                resizeHeap(H.size * 2)
-            H[size] = elem      // Add the element at end of the heap.
-            siftUp(size)        // Put it in its correct place.
-            size = size + 1     // Increase the size of the heap.
+            if size >= heap.size:
+                resizeHeap(heap.size * 2)
+            heap[size] = elem      // Add the element at end of the heap.
+            siftUp(size)           // Put it in its correct place.
+            size = size + 1        // Increase the size of the heap.
 
         siftUp(pos):
-            while pos > 0:       // Stop when we reach the root (if not earlier).
+            while pos > 0:         // Stop when we reach the root (if not earlier).
                 parent = getParent(pos)
-                if H[pos] >= H[parent]:
-                    return pos   // Stop if the parent is smaller or equal.
+                if heap[pos] >= heap[parent]:
+                    return pos     // Stop if the parent is smaller or equal.
                 swap(pos, parent)
-                pos = parent     // Move up one level in the tree.
+                pos = parent       // Move up one level in the tree.
 
 *Important note*:
 One common mistake is to start at the root and work yourself downwards through the heap.
@@ -248,23 +244,23 @@ Note that we use a helper method for "sifting" a value down the tree.
     datatype MinHeap:
         ...
         removeMin():
-            removed = H[0]      // Remember the current minimum value, to return in the end.
-            swap(0, size-1)  // Swap the last array element into the first position...
+            removed = heap[0]   // Remember the current minimum value, to return in the end.
+            swap(0, size-1)     // Swap the last array element into the first position...
             size = size - 1     // ...and remove the last element, by decreasing the size.
             if size > 0:
                 siftDown(0)     // Put the new root in its correct place.
             return removed
 
         siftDown(pos):
-            while not isLeaf(pos):          // Stop when we reach a leaf (if not earlier).
+            while not isLeaf(pos):   // Stop when we reach a leaf (if not earlier).
                 child = getLeftChild(pos)
                 right = getRightChild(pos)
-                if right < size and H[right] < H[child]:
-                    child = right           // 'child' is now the index of the child with smaller value.
-                if H[child] >= H[pos]:
-                    return pos              // Stop if the parent is smaller or equal.
+                if right < size and heap[right] < heap[child]:
+                    child = right    // 'child' is now the index of the child with smaller value.
+                if heap[child] >= heap[pos]:
+                    return pos       // Stop if the parent is smaller or equal.
                 swap(pos, child)
-                pos = child                 // Move down one level in the tree.
+                pos = child          // Move down one level in the tree.
 
 ::: dsvis
 #### Exercise: Delete from a *min*-heap
@@ -286,14 +282,15 @@ The heap is a natural implementation for the priority queue discussed at
 the beginning of this chapter. Jobs can be added to the heap (using
 their priority value as the ordering key) when needed. Method
 `removeMin` can be called whenever a new job is to be executed.
-
 Priority queues can be helpful for solving graph problems such as
 finding the [shortest path]{.term} and
 finding the [minimum spanning tree]{.term}.
+
+<!--
 For a story about Priority Queues and dragons, see
 [Computational Fairy Tales: Stacks, Queues, Priority Queues, and the Prince's Complaint Line][EXT]
-
 [EXT]: http://computationaltales.blogspot.com/2011/04/stacks-queues-priority-queues-and.html
+-->
 
 ### Changing the priority of elements
 
@@ -303,7 +300,7 @@ Another solution is to change the priority value of the object, and then update 
 In any of these cases the application needs to know the position of the object in the heap.
 
 To be able to know the position of an arbitrary object in the heap, we need some auxiliary data structure with which we can find the position of an object.
-This auxiliary structure can be any kind of [map]{.term}, which we will discuss later in chapters X--Y.
+This auxiliary structure can be any kind of [map]{.term}, which we will introduce later in [Chapter @sec:sets-and-maps].
 
 Assuming that we know the position of the object, we either have to remove it from the heap, or modify its priority.
 
@@ -378,8 +375,8 @@ The method `buildHeap` implements the building algorithm:
     datatype MinHeap:
         ...
         buildHeap(array):
-            H = array                   // Initialise the heap to the given array.
-            size = H.size               // The capacity of the heap is used in full.
+            heap = array                // Initialise the heap to the given array.
+            size = heap.size            // The capacity of the heap is used in full.
             mid = getParent(size-1)     // Find the parent of the last leaf.
             for i in mid, mid-1 .. 0:   // Iterate the internal nodes backwards.
                 siftDown(i)             // Sift each internal node down.

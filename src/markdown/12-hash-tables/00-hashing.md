@@ -31,11 +31,11 @@ the [hash function]{.term}, and will be denoted by $\mathbf{h}$. Since hashing
 schemes place records in the table in whatever order satisfies the needs
 of the address calculation, records are not ordered by value. A position
 in the hash table is also known as a [slot]{.term}. The number of slots in hash table `HT` will be denoted by
-the variable $M$ with slots numbered from 0 to $M-1$.
+the variable $m$ with slots numbered from 0 to $m-1$.
 
 The goal for a hashing system is to arrange things such that, for any
 key value $k$ and some hash function $\mathbf{h}$, $i = \mathbf{h}(k)$ is a slot
-in the table such that $0 \leq i < M$, and we have the key of the record
+in the table such that $0 \leq i < m$, and we have the key of the record
 stored at `HT`[$i$] equal to $k$.
 
 Since the records are not ordered by value, hashing is not a good method for answering

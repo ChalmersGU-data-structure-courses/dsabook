@@ -76,16 +76,16 @@ greater than $j$. Thus, we never need to check higher-positioned values
 again, which could save many iterations even if there are a few swaps
 lower down. Here is code to implement this approach.
 
-    function bubbleCheckSwap(A):
-        N = A.size
-        while N > 1:
+    function bubbleCheckSwap(arr):
+        n = arr.size
+        while n > 1:
             newN = 0
-            for j in 1 .. N-1:
+            for j in 1 .. n-1:
                 // Check if this pair is out of order:
-                if A[j-1] > A[j]:
-                    swap(A, j-1, j)
+                if arr[j-1] > arr[j]:
+                    swap(arr, j-1, j)
                     newN = j
-            N = newN
+            n = newN
 
 Unfortunately, as can be seen in the table, this doesn't improve the timings. Why not?
 
@@ -116,7 +116,7 @@ swap even if the current element is already in its correct location.
 For example, if the smallest element is already
 leftmost in the array, then `selectionSort` will still call `swap`
 with the two position parameters being the same.
-I.e., it will call `swap(A,i,i)`, which has no effect whatsoever, except wasting some time.
+I.e., it will call `swap(arr,i,i)`, which has no effect whatsoever, except wasting some time.
 Thus, the total number of swaps done by Selection
 sort is always $n-1$ in the best, average and worst cases. It might seem
 like a good idea to test if the positions are the same before calling
@@ -141,15 +141,15 @@ temporary variable, and then shift all of the elements with greater value
 one step to the right. Here is an implementation for Insertion sort using this
 optimisation.
 
-    function insertionSortShift(A):
-        N = A.size
-        for i in 1 .. N-1:
-            temp = A[i]
+    function insertionSortShift(arr):
+        n = arr.size
+        for i in 1 .. n-1:
+            temp = arr[i]
             j = i
-            while j > 0 and temp < A[j-1]:
-                A[j] = A[j-1]
+            while j > 0 and temp < arr[j-1]:
+                arr[j] = arr[j-1]
                 j = j-1
-            A[j] = temp
+            arr[j] = temp
 
 In this case the optimisation actually is a substantial improvement.
 The reason is that swapping requires three assignments per element and shifting requires only one assignment per element.

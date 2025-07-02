@@ -159,16 +159,16 @@ value at position $i-1$.
 
 
 :::::::::: question ::::::::::
-If $I$ is the number of
+If $i$ is the number of
 inversions in an input array of $n$ elements,
 then Insertion sort will run in what time?
 
-- [x] $O(n+I)$
-- [ ] $O(n - I)$
-- [ ] $O(I - n)$
+- [x] $O(n+i)$
+- [ ] $O(n - i)$
+- [ ] $O(i - n)$
 - [ ] $O(n)$
 - [ ] $O(n^2)$
-- [ ] $O(I)$
+- [ ] $O(i)$
 
 ::: hints
 - Insertion sort has to do $n$ passes where it compares at least once.

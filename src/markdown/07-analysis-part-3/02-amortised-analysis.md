@@ -118,7 +118,7 @@ The worst case example is when the counter consists of only 1's, such as the num
 In this case the complexity of *increment* is linear, $O(n)$, in the number of bits $n$.
 So what is the amortised complexity of *increment*?
 
-If we count from 0 through $M = 2^n-1$, what is the average cost for *increment*?
+If we count from 0 through $m = 2^n-1$, what is the average cost for *increment*?
 Naive worst-case analysis says that each increment costs $O(n)$.
 But it is rare to have so many bits processed in one single increment.
 In fact, half of the time the low-order bit is `0`, and so only that bit is processed.
@@ -134,8 +134,8 @@ $$
 < 2
 $$
 
-In other words, the average number of bits flipped on each increment is 2, leading to a total cost of only $2 \cdot M\in O(M)$ for a series of $M$ increments.
-Therefore, the amortised cost for *increment* is $O(M)/M = O(1)$.
+In other words, the average number of bits flipped on each increment is 2, leading to a total cost of only $2 \cdot m\in O(m)$ for a series of $m$ increments.
+Therefore, the amortised cost for *increment* is $O(m)/m = O(1)$.
 :::
 
 Our final example uses amortised analysis to prove a relationship

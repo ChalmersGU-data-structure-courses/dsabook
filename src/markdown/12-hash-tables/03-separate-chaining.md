@@ -37,10 +37,10 @@ encounter a key that is greater than the one being searched for. If
 records on the list are unordered or ordered by frequency, then an
 unsuccessful search will need to visit every record on the list.
 
-Given a table of size $M$ storing $N$ records, the hash function will
-(ideally) spread the records evenly among the $M$ positions in the
-table, yielding on average $N/M$ records for each list. This value,
-$N/M$, is commonly called the [load factor]{.term}.
+Given a table of size $m$ storing $n$ records, the hash function will
+(ideally) spread the records evenly among the $m$ positions in the
+table, yielding on average $n/m$ records for each list. This value,
+$n/m$, is commonly called the [load factor]{.term}.
 
 Assuming that the table has more slots than there are records to be
 stored, we can hope that few slots will contain more than one record. In
@@ -86,18 +86,18 @@ and balanced trees.)
 
 Conceptually, a hash table can use any kind of collection data structure
 -- the only thing that the actual array does is to partition the large
-collection into $M$ disjoint collections. If the hash function is good
+collection into $m$ disjoint collections. If the hash function is good
 and distributes the objects evenly among the bins, all operations will
-become $M$ times faster (because the bins are $M$ times smaller than the
+become $m$ times faster (because the bins are $m$ times smaller than the
 original large collection).
 
 ### Resizing is important
 
 Just as for dynamic arrays, it is important that we resize the internal
 table when it becomes too large (or too small). That is, we change the
-size $M$ so that it is proportional to the number of table entries.
+size $m$ so that it is proportional to the number of table entries.
 
-If $M$ is always proportional to the number of entries, *and* if we have
+If $m$ is always proportional to the number of entries, *and* if we have
 a good hash function, the number of elements in a bin will remain
 approximately constant. And then all operations will be expected
 constant time.
@@ -144,7 +144,7 @@ The efficiency of a hash table depends on two factors:
 2. the size of each bin
 
 The first factor depends on the hash function, and for now we simply assume that it is good -- meaning that it distributes the elements evenly among the bins.
-The second factor depends on the load factor -- if there are $N$ elements in total and we have $M$ bins, then there are $N/M$ elements per bin on average.
+The second factor depends on the load factor -- if there are $n$ elements in total and we have $m$ bins, then there are $n/m$ elements per bin on average.
 Assuming that our underlying collections are simple linked lists, then all main operations (searching, adding, deleting) are linear in the load factor.
 
 The key point to making hash tables efficient is to make sure that the load factor never becomes larger than a constant -- the *maximum load factor*.
