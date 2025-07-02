@@ -2,31 +2,28 @@
 ## Binary heaps
 
 This section presents the [binary heap]{.term} data structure.
-In addition to beaing a *heap*, meaning that it satisfies the heap property, it is also a [complete binary tree]{.term}.
+In addition to being a *heap*, meaning that it satisfies the heap property, it is also a [complete binary tree]{.term}.
 
 Recall that complete binary trees have all levels except the bottom filled out completely, and the bottom level has all of its nodes filled in from left to right.
-Thus, a complete binary tree of $n$ nodes has only one possible shape.
+Thus, a complete binary tree of $n$ nodes has only _one_ possible shape.
 You might think that a complete binary tree is such an unusual occurrence that there is no reason to develop a special implementation for it.
 However, it has two very nice properties:
 
 - its height is *logarithmic* in the number of nodes
 - it can be stored in an array, so it is very *space-efficient*
 
-
 ### Representing complete binary trees as arrays
 
-From the [full binary tree theorem]{.term},
-we know that a large fraction of the space in a typical
-binary tree node implementation is devoted to structural
-[overhead]{.term}, not to storing data.
-Here we present a simple, compact implementation for [complete binary trees]{.term}.
-First, note that a complete binary tree of $n$ nodes has only one possible shape.
-This means that we can store the nodes directly in an array, without having to include the children pointers.
-Instead we can use simple calculations to find the array indices of the children or the parent of a given node.
+Since there is exactly one representation of a complete binary tree, we can take advantage of this and store it, maybe surprisingly, in an array.
+In contrast to other representations of binary trees, we don't need to include pointers to the children or parent nodes.
+This allows for a simple, compact implementation for [complete binary trees]{.term}.
+Instead of pointers, we can use simple calculations to find the array indices of the children or the parent of a given node.
 
-We begin by assigning numbers to the node positions in the complete
-binary tree, level by level, from left to right as shown in @fig:example_complete_bintree.
-Note that we start by assigning the root the number 0.
+To represent a complete binary tree in an array, we assign a unique array index to each node based on its position in the tree.
+We number the nodes level by level, starting from the root at the top and moving left to right within each level.
+The root node is assigned index 0, its left child index 1, its right child index 2, and so on.
+This systematic numbering ensures that each node's position in the array directly corresponds to its logical position in the tree, making it easy to compute the indices of parent and child nodes using simple arithmetic.
+@Fig:example_complete_bintree shows an example of a complete binary tree with 12 nodes, where the nodes are numbered according to this scheme.
 
 <div id="fig:example_complete_bintree">
 
@@ -44,35 +41,55 @@ Complete binary tree node numbering
 </div>
 
 An array can store the data values of the tree efficiently, placing each value in the array position corresponding to that node's position within the tree.
-The following table lists the array indices for the children, parent, and siblings of each node in the figure.
+For example, the following binary heap:
 
+::: latex
+\begin{center}
+\begin{forest}
+for tree={circle,draw,l=0,s sep=5mm}, [A [L [O] [R]] [G [I] [,phantom]]]
+\end{forest}
+\end{center}
+:::
 
-Position         0      1     2     3     4     5     6     7     8     9    10    11
--------------- ------ ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----
-Parent           --     0     0     1     1     2     2     3     3     4     4     5
-Left Child       1      3     5     7     9    11    --    --    --    --    --    --
-Right Child      2      4     6     8    10    --    --    --    --    --    --    --
-Left Sibling     --    --     1    --     3    --    5     --     7    --     9    --
-Right Sibling    --     2    --     4    --     6    --     8    --    10    --    --
+::: online
+![An example binary heap](images/BinTreeHeap.png){width=30% #fig:HeapTreeExample}
+:::
 
-Looking at the table, you should see a pattern regarding the positions
-of a node's relatives within the array. Simple formulas can be derived
-for calculating the array index for each relative of a node $R$ from
-$R$'s index. No explicit pointers are necessary to reach a node's left
-or right child. This means there is no overhead to the array
-implementation if the array is selected to be of size $n$ for a tree of
-$n$ nodes.
+is represented in an array as follows:
 
-The formulae for calculating the array indices of the various relatives
-of a node are as follows. The total number of nodes in the tree is $n$.
-The index of the node in question is $r$, which must fall in the range 0
-to $n-1$.
+::: latex
+\begin{center}
+\scalebox{0.8}{
+\begin{tikzpicture}
+    % Draw array boxes
+    \foreach \i/\val in {0/A, 1/L, 2/G, 3/O, 4/R, 5/I} {
+        \draw (\i*1.5, 0) rectangle ++(1.5, 1);
+        \node at (\i*1.5 + 0.75, 0.5) {\val};
+        \node[below=3pt] at (\i*1.5 + 0.75, 0) {\i};
+    }
 
--   Parent($r$) $= \lfloor(r - 1)/2\rfloor$ if $r \neq 0$.
--   Left child($r$) $= 2r + 1$ if $2r + 1 < n$.
--   Right child($r$) $= 2r + 2$ if $2r + 2 < n$.
--   Left sibling($r$) $= r - 1$ if $r$ is even and $r \neq 0$.
--   Right sibling($r$) $= r + 1$ if $r$ is odd and $r + 1 < n$.
+    \draw[->] (1*1.5 + 0.75, 1) to[out=60, in=120] node[below] {left} (3*1.5 + 0.75, 1);
+    \draw[->] (1*1.5 + 0.75, 1) to[out=70, in=110] node[above] {right} (4*1.5 + 0.75, 1);
+    \draw[->] (1*1.5 + 0.75, 1) to[out=120, in=60] node[above] {parent} (0*1.5 + 0.75, 1);
+
+\end{tikzpicture}
+}
+\end{center}
+:::
+
+::: online
+![Array representation of the example heap](images/ArrayHeap.png){width=40% #fig:HeapArrayExample}
+:::
+
+You can use simple formulas to compute the array index of a node's relatives in a complete binary tree with $n$ nodes, given a node at index $i$:
+
+- $\text{parent}(i) = \left\lfloor \frac{i - 1}{2} \right\rfloor$ (if $i \neq 0$)
+- $\text{left\_child}(i) = 2i + 1$ (if $2i + 1 < n$)
+- $\text{right\_child}(i) = 2i + 2$ (if $2i + 2 < n$)
+- $\text{left\_sibling}(i) = i - 1$ (if $i$ is even and $i \neq 0$)
+- $\text{right\_sibling}(i) = i + 1$ (if $i$ is odd and $i + 1 < n$)
+
+For example, the left child of node 1 (which contains value L) is at index $2 \cdot 1 + 1 = 3$.
 
 ::: dsvis
 Here is a practice exercise for calculating the array indices of nodes.
