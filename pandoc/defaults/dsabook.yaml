@@ -14,6 +14,7 @@ metadata:
   panflute-path: pandoc/filters
   panflute-filters:
     - generic-filter
+    - alt-title-filter
 
   # Settings for pandoc-crossref:
   chapters: true
