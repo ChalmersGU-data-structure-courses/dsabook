@@ -9,5 +9,5 @@
 This final section contains some review questions about the contents of this chapter.
 
 :::::: latex
-\booklink{Answer quiz online}{8.6}{sec:ch08-review}
+\booklink{Answer quiz online}{8.7}{sec:ch08-review}
 ::::::

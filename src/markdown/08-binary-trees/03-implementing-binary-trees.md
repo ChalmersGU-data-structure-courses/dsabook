@@ -50,6 +50,7 @@ Illustration of a typical pointer-based binary tree implementation, where each n
 
 Here is a simple implementation for binary tree nodes, which can store one single element in each node.
 Every `BinaryNode` object also has two pointers, one to its left child and another to its right child.
+\
 
     datatype BinaryNode of T:
         elem: T            // Element for this node.

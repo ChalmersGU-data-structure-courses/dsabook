@@ -13,7 +13,7 @@ information needed to reconstruct the tree structure.
 
 
 :::::: latex
-\booklink{Read the rest online}{11.7}{sec:sequential-tree-representations}
+\booklink{Read the rest online}{8.6}{sec:sequential-tree-representations}
 ::::::
 
 :::::: online

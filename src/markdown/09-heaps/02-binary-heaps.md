@@ -117,6 +117,7 @@ Note that, because we use an array to store the heap, we indicate the nodes by t
 In practice, the logical heap position corresponds to the identically numbered physical position in the array.
 
 Since it is a heap, we know that the first element always contains the element with the highest priority:
+\
 
     datatype MinHeap implements PriorityQueue:
         ...
@@ -261,7 +262,7 @@ Note that we use a helper method for "sifting" a value down the tree.
     datatype MinHeap:
         ...
         removeMin():
-            removed = heap[0]   // Remember the current minimum value, to return in the end.
+            removed = heap[0]   // Remember the current minimum, to return in the end.
             swap(0, size-1)     // Swap the last array element into the first position...
             size = size - 1     // ...and remove the last element, by decreasing the size.
             if size > 0:
