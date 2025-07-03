@@ -21,6 +21,7 @@ simplest form.
     If $f\in O(g)$ and $g\in O(h)$, then $f\in O(h)$
 
     This first rule says that if some function $g(n)$ is an upper bound for your cost function, then any upper bound for $g(n)$ is also an upper bound for your cost function.
+    \
 
 (2) **Constant factor**:
     If $f\in O(g)$, then $k\cdot f\in O(g)$, for any constant $k>0$
@@ -28,6 +29,7 @@ simplest form.
       - Special case: $O(k) = O(1)$ for all constants $k>0$
 
     The significance of this rule is that you can ignore any multiplicative constants in your equations when using big-$O$ notation.
+    \
 
 (3) **Addition**:
     If $f\in O(g)$ and $f'\in O(g')$, then $f+f' \in O(\max(g,g'))$
@@ -35,6 +37,7 @@ simplest form.
       - Special case: if $f,f'\in O(g)$, then $f+f' \in O(g)$
 
     This rule says that given two parts of a program run in sequence (whether two statements or two sections of code), you need consider only the more expensive part.
+    \
 
 (4) **Multiplication**:
     If $f\in O(g)$ and $f'\in O(g')$, then $f\cdot f' \in O(g\cdot g')$
@@ -82,10 +85,12 @@ But we will come back to this issue in [Chapter @sec:algorithm-analysis-theory].
 When we want to analyse the complexity of code fragments, the following three rules of thumb will get us very far:
 
 - An **atomic operation** is always $O(1)$
+  \
 
 - A **sequence**, $\langle p_1;p_2\rangle$,
   has the complexity $O(\max(f_1,f_2))$,
   where $p_i\in O(f_i)$
+  \
 
 - An **iteration**, $\langle\mbox{for}\ x \in A: p\rangle$,
   has the complexity $n\cdot O(f) = O(n\cdot f)$,

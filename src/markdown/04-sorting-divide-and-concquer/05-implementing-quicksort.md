@@ -160,7 +160,7 @@ The answer can only be determined by empirical testing, but on modern machines t
 Note that this improvement can also be used for Mergesort!
 
 :::::: latex
-\booklink{Read the rest online}{4.6}{sec:more-practical-improvements}
+\booklink{Read the rest online}{4.5}{sec:more-practical-improvements}
 ::::::
 
 :::::: online

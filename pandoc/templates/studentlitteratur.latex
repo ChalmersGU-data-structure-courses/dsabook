@@ -354,9 +354,9 @@ $endif$
 %\covertext{Omslaget visar ett prov på den vita blankhet som kan infinna sig under gynnsamma förutsättningar.}
 %\coverlayout{Moderna omslag}
 %\coverimage{Pelle Persson}
-\copyrightyear{2012}
-\printer{The Printer, City}
-\printyear{2012}
+\copyrightyear{2025}
+\printer{xxx}
+\printyear{2025}
 
 \expandafter\def\expandafter\normalsize\expandafter{%
     \normalsize%

@@ -39,10 +39,10 @@ So we need an auxiliary array which we can merge the elements into.
         i1 = left
         i2 = mid
         for i in left .. right:
-            if i2 > right:           // Right sublist exhausted
+            if i2 > right:               // Right sublist exhausted
                 temp[i] = arr[i1]
                 i1 = i1 + 1
-            else if i1 > mid:        // Left sublist exhausted
+            else if i1 > mid:            // Left sublist exhausted
                 temp[i] = arr[i2]
                 i2 = i2 + 1
             else if arr[i1] <= arr[i2]:  // Get smaller value

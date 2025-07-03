@@ -102,6 +102,12 @@ whole array, but also subarrays. Therefore `partition` needs the
 positions of the leftmost and rightmost elements in the subarray that we
 will partition.
 
+The partition function first puts the pivot at the leftmost position in the subarray.
+Then it moves the *left* and *right* pointers towards each other;
+until they both point to values which are unordered relative to the pivot value.
+Now the *left* and *right* values can be swapped, which puts them both in their correct partition.
+The loop continues until the *left* and *right* pointers have passed each other.
+
     function partition(arr, left, right, pivot) -> Int:
         swap arr[pivot] with arr[left]
         while left ≤ right:
@@ -110,12 +116,6 @@ will partition.
             swap arr[left] with arr[right]
         swap arr[pivot] with arr[right]
         return right
-
-The partition function first puts the pivot at the leftmost position in the subarray.
-Then it moves the *left* and *right* pointers towards each other;
-until they both point to values which are unordered relative to the pivot value.
-Now the *left* and *right* values can be swapped, which puts them both in their correct partition.
-The loop continues until the *left* and *right* pointers have passed each other.
 
 Finally, it puts the pivot at its correct position, by swapping with the *right* pointer.
 Why is *right* the correct pivot position, and not *left*?

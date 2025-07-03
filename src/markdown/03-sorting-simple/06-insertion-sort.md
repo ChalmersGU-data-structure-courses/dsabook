@@ -17,7 +17,7 @@ But just as for Selection sort, it's relatively easy to turn it into an in-place
 Insertion sort iterates through a list of elements. For each iteration,
 the current element is inserted in turn at the correct position within a
 sorted list composed of those elements already processed. Here is an
-implementation. The input is an array named `arr` that stores $n$ elements.
+implementation.
 
     function insertionSort(arr):
         n = arr.size
@@ -27,6 +27,8 @@ implementation. The input is an array named `arr` that stores $n$ elements.
             while j > 0 and arr[j] < arr[j-1]:
                 swap(arr, j, j-1)
                 j = j-1
+
+The input is an array named `arr` that stores $n$ elements.
 
 :::::::: online
 #### Insertion sort visualisation

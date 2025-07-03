@@ -3,6 +3,7 @@
 
 A _collection_ is a general term for structures like lists and queues.
 It holds multiple elements and supports two main operations: checking the number of elements and iterating through them one at a time.
+\
 
     interface Collection of T:
         // We assume that we can iterate over the elements in the collection, using a for loop.
