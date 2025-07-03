@@ -118,17 +118,18 @@ Here is the implementation for Dijkstra's algorithm using a priority queue.
                 for each e in graph.outgoingEdges():
                     if e.end not in distances or dist < distances.get(e.end):
                         // If the edge makes the endpoint closer to the MST,
-                        // update the endpoint with the new distance, add it to the MST and the agenda
+                        // update the endpoint with the new distance,
+                        // add it to the MST and the agenda
                         distances.put(e.end, e.weight)
                         parent.put(e.end, v)
                         agenda.add(e.end) with priority e.weight
         return parent
 
 
-### Correctness of Prim's algorithm
+### Correctness of Prim's algorithm {#prims-correctness}
 
 :::::: latex
-\booklink{Read the rest online}{12.12}{sec:hashing-standard-libraries}
+\booklink{Read the rest online}{13.6}{sec:prims-correctness}
 ::::::
 
 Prim's algorithm is an example of a greedy algorithm. At each step in

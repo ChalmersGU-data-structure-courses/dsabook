@@ -52,11 +52,13 @@ closest vertex; call it $X$.
 
 A shortest path from $S$ to $X$ must have its next-to-last vertex in
 $S$. Thus,
+\
 
-$$
+\begin{equation*}
 \mathbf{d}(S, X) = \min_{U \in \mathbf{S}}(\mathbf{d}(S, U) + \mathbf{w}(U, X))
-$$
+\end{equation*}
 
+\
 In other words, the shortest path from $S$ to $X$ is the minimum over
 all paths that go from $S$ to $U$, then have an edge from $U$ to $X$,
 where $U$ is some vertex in $\mathbf{S}$.
@@ -99,8 +101,8 @@ At the end, `distances` will contain the shortest distance from the start to eac
                 dist = distances.get(v) + e.weight
                 if e.end not in distances or dist < distances.get(e.end):
                     // If the new distance to the endpoint is shorter...
-                    distances.put(e.end, dist)  // ...update the endpoint with the new distance
-        return distances
+                    distances.put(e.end, dist)  // ...update the endpoint with
+        return distances                        // the new distance
 
 ::: dsvis
 Here is a visualisation of Dijkstra's algorithm.

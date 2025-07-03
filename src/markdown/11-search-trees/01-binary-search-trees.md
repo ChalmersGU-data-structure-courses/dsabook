@@ -331,6 +331,7 @@ with the least value from its right subtree.
 
 The code for removal is shown here.
 Note that the helper function returns the updated subtree, and we have to make sure to update the child pointers to this updated tree.
+\
 
         removeHelper(node, key):
             if node is null:

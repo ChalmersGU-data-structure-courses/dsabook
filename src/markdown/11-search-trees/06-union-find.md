@@ -31,7 +31,7 @@ answer the following, useful question:
 ***Given two nodes, are they in the same tree?***
 
 :::::: latex
-\booklink{Read the rest online}{11.6}{sec:disjoint-sets}
+\booklink{Read the rest online}{11.5}{sec:disjoint-sets}
 ::::::
 
 :::::: online

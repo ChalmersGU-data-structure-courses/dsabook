@@ -32,7 +32,7 @@ compromise between difficulty of implementation and performance.
 
 
 :::::: latex
-\booklink{Read the rest online}{11.7}{sec:skip-lists}
+\booklink{Read the rest online}{11.6}{sec:skip-lists}
 ::::::
 
 :::::: online
