@@ -179,7 +179,7 @@ $endif$
 \makeatother
 
 % Studentlitteratur default is \vspace*{86pt}
-\renewcommand{\aftertoctitle}{\pagestyle{frontheadings}\thispagestyle{frontchapter}\par\nobreak\vspace*{50pt}}
+\renewcommand{\aftertoctitle}{\pagestyle{frontheadings}\thispagestyle{frontchapter}\par\nobreak\vspace*{20pt}}
 
 % \usepackage{studentlitteratur-thm}
 
