@@ -78,3 +78,12 @@ latex:
 book:
 	@echo "Running pandoc + pdfLaTeX --> $(BOOK)..."
 	@time $(PANDOC) --defaults=dsabook-studentlitteratur.yaml --output=$(BOOK) $(MD_FILES)
+
+greyscale-images:
+	@rm -f resources/_local_greyscale_images
+	@mkdir resources/_local_greyscale_images
+	@cd resources/images; for f in *.*; do magick $$f -colorspace Gray -background white -alpha remove -alpha off ../_local_greyscale_images/$$f; done
+
+check-greyscale:
+	@echo "# This should print nothing if the file is true greyscale"
+	@gs -o - -sDEVICE=inkcov dsabook.pdf | grep -E '0\.0*[1-9].+ 0\.0*[1-9]' | cat
