@@ -16,6 +16,9 @@ the right view shows in detail the lower-left portion of the top view.
 The horizontal axis represents input size, and the vertical axis can
 represent time, space, or any other measure of cost.
 
+![](images/GrowthRatesGraph.png)
+
+<!--
 ```{.matplotlib dpi=200 alt="Illustration of the growth rates for six equations"}
 import math
 import numpy as np
@@ -46,6 +49,7 @@ plt2.plot(xs, ys_2expn, '-');  plt2.text(7.3, 290, '2^n')
 plt2.plot(xs, ys_fact, '-');   plt2.text(4.9, 290, 'n!')
 plt2.set_title('Zoomed in')
 ```
+-->
 
 :::
 

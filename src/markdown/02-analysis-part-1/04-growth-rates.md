@@ -138,6 +138,13 @@ to describe the running time for a particular program or algorithm. A
 variety of growth rates that are representative of typical algorithms
 are shown.
 
+![Illustration of the growth rates for six equations.
+The right view shows in detail the lower-left portion of the top view.
+The horizontal axis represents input size.
+The vertical axis can represent time, space, or any other measure of cost.
+](images/GrowthRatesGraph.png){#fig:growthGraphs}
+
+<!--
 <div id="fig:growthGraphs">
 
 ```{.matplotlib dpi=300}
@@ -176,6 +183,7 @@ The right view shows in detail the lower-left portion of the top view.
 The horizontal axis represents input size.
 The vertical axis can represent time, space, or any other measure of cost.
 </div>
+-->
 
 <!--
 <inlineav id="GrowthRatesCON" src="AlgAnal/GrowthRatesCON.js" script="DataStructures/Plot.js" name="DataStructures/Plot.js AlgAnal/GrowthRatesCON" links="AlgAnal/GrowthRatesCON.css" height="450px" static/>
