@@ -11,11 +11,6 @@ plots
 temp
 tmp
 
-# Generated files
-book.pdf
-dsabook.pdf
-dsabook.tex
-
 # MacOS-specific files
 .DS_Store
 

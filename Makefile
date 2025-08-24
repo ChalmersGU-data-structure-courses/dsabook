@@ -1,4 +1,4 @@
-.PHONY: all default clean preprocess pandoc postprocess install deploy check-links server pdf
+.PHONY: all default clean preprocess pandoc postprocess install deploy check-links server
 
 # Default is to build all chapters
 # Run `make CHAPTER=02` to only build chapter 2
@@ -12,8 +12,6 @@ MARKDOWN  := $(SRC)/markdown
 TEMP      := _temp
 BUILD     := build
 HTML      := $(BUILD)/html
-PDF       := book.pdf
-BOOK      := dsabook.pdf
 DOCS      := docs
 
 # Source Files
@@ -66,15 +64,3 @@ check-links:
 
 server:
 	$(PYTHON) -m http.server -d $(BUILD) 8000
-
-pdf:
-	@echo "Running pandoc + XeTeX --> $(PDF)..."
-	@time $(PANDOC) --defaults=dsabook-latex.yaml --output=$(PDF) $(MD_FILES)
-
-latex:
-	@echo "Running pandoc --> $(BOOK:.pdf=.tex)..."
-	@time $(PANDOC) --defaults=dsabook-studentlitteratur.yaml --to=latex --output=$(BOOK:.pdf=.tex) $(MD_FILES)
-
-book:
-	@echo "Running pandoc + pdfLaTeX --> $(BOOK)..."
-	@time $(PANDOC) --defaults=dsabook-studentlitteratur.yaml --output=$(BOOK) $(MD_FILES)
