@@ -15,9 +15,8 @@ common node implementation includes a value field and pointers to the
 two children.
 @Fig:bintree_with_pointers is an illustration of how the tree from @fig:example_bintree looks like, where the child pointers are shown explicitly.
 
-<div id="fig:bintree_with_pointers">
-
-::: latex
+::: {.latex-figure #fig:bintree_with_pointers}
+```
 \begin{tikzpicture}
 \tikzstyle{every node}=[rectangle split, rectangle split horizontal, rectangle split parts=3, draw]
 \node (A) {\nodepart{second} A};
@@ -39,14 +38,10 @@ two children.
 \draw[*->] ($(F.one)   + (0.2,0.1)$) -- (H);
 \draw[*->] ($(F.three) + (0.0,0.1)$) -- (I);
 \end{tikzpicture}
-:::
-
-::: online
-<inlineav id="BTnullpointerCON" src="Binary/BTnullpointerCON.js" name="Binary/BTnullpointerCON" links="Binary/BTCON.css Binary/BTnullpointerCON.css" static/>
-:::
+```
 
 Illustration of a typical pointer-based binary tree implementation, where each node stores two child pointers and a value
-</div>
+:::
 
 Here is a simple implementation for binary tree nodes, which can store one single element in each node.
 Every `BinaryNode` object also has two pointers, one to its left child and another to its right child.
@@ -103,9 +98,8 @@ the child pointers. But it seems wasteful to store child pointers in the
 leaf nodes. Thus, there are many reasons why it can save space to have
 separate implementations for internal and leaf nodes.
 
-<div id="fig:expression_tree">
-
-::: latex
+::: {.latex-figure #fig:expression_tree}
+```
 \begin{tikzpicture}
 \tikzstyle{binnode}=[rectangle split, rectangle split horizontal, rectangle split parts=3, draw]
 \tikzstyle{leafnode}=[circle, draw]
@@ -132,14 +126,10 @@ separate implementations for internal and leaf nodes.
 \draw[*->] ($(H.one)   + (0.2,0.1)$) -- (J);
 \draw[*->] ($(H.three) + (0.0,0.1)$) -- (K);
 \end{tikzpicture}
-:::
-
-::: online
-<inlineav id="expressionTreeCON" src="Binary/expressionTreeCON.js" name="Binary/expressionTreeCON" links="Binary/BTCON.css Binary/expressionTreeCON.css" static/>
-:::
+```
 
 An example of an expression tree for $4x(2x + a) - c$
-</div>
+:::
 
 As an example of a tree that stores different information at the leaf
 and internal nodes, consider the expression tree illustrated by @fig:expression_tree.
@@ -164,7 +154,6 @@ definition for an object, and a [subclass]{.term} modifies the base class to add
 We will not discuss further how to implement different kind of tree nodes
 more in this book, but will just assume that all nodes are of the same class.
 
-<!-- TODO:
-Add information about data types and functional languages
--->
-
+::: TODO
+- Add information about data types and functional languages
+:::

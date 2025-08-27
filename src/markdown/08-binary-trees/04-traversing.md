@@ -57,9 +57,15 @@ Inorder               **B, D, A, G, E, C, H, F, I**     after visiting the left 
 
 
 ::: online
+
 As a reminder, here is the example tree again:
 
-<inlineav id="BinExampCON" src="Binary/BinExampCON.js" name="Binary/BinExampCON" links="Binary/BinExampCON.css" static/>
+```latex-figure {width="30%"}
+\begin{forest}
+for tree={circle,draw,fit=rectangle},
+[A [B [NULL,rectangle,phantom] [D]] [C [E [G] [NULL,rectangle,phantom]] [F [H] [I]]]]
+\end{forest}
+```
 
 #### Interactive explanations
 :::

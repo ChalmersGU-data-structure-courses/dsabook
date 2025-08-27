@@ -31,7 +31,23 @@ nodes might have only one leaf. This occurs when the internal nodes are
 arranged in a chain ending in a single leaf as shown in the following figure.
 In this example, the number of leaves is low because each internal node has only one non-empty child.
 
-<inlineav id="UnaryTreeExampleCON" src="Binary/UnaryTreeExampleCON.js" name="Binary/UnaryTreeExampleCON" links="Binary/UnaryTreeExampleCON.css" static/>
+::: {.latex-figure #fig:right_leaning_tree}
+```
+\begin{forest}
+for tree={circle,draw,s sep+=10pt},
+[~
+    [,phantom]
+    [~,l sep+=20pt,s sep+=10pt
+        [,phantom]
+        [~,edge=dashed,edge label={node[midway,right,font=\scriptsize]{Any number of internal nodes}}
+            [,phantom]
+            [~]
+]]]
+\end{forest}
+```
+
+A right-leaning tree with one single leaf
+:::
 
 To find an upper bound on the number of leaves for a
 tree of $n$ internal nodes, first note that the upper bound will occur

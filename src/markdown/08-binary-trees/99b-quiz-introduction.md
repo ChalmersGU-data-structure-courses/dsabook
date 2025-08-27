@@ -3,7 +3,16 @@
 ### Review questions: Example binary tree
 
 
-![Here's an example binary tree](images/BintreeExercise.png)
+::: {.latex-figure width=30%}
+```
+\begin{forest}
+for tree={circle,draw,fit=rectangle,s sep+=5pt},
+[24 [12 [11] [13]] [21 [20 [17] [99,phantom]] [30 [40] [99,phantom]]]]
+\end{forest}
+```
+
+Here's an example binary tree
+:::
 
 :::::::::: question ::::::::::
 How many internal nodes does this tree have?

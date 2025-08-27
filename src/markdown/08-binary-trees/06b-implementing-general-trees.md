@@ -62,11 +62,19 @@ be interpreted as leaf nodes, and these can be listed explicitly. Such
 an augmented node list provides enough information to recover the tree
 structure.
 
-<div id="fig:BinExampb">
-<inlineav id="BinExampCON" src="Binary/BinExampCON.js" name="Binary/BinExampCON" links="Binary/BinExampCON.css" static/>
-
+::: {.latex-figure #fig:BinExampb width=25%}
+```
+\begin{forest}
+for tree={circle,draw,fit=rectangle,s sep+=5pt},
+[A
+    [B [,phantom] [D]]
+    [C [E [G] [,phantom]] [F [H] [i]]]
+]
+\end{forest}
+```
 Sample binary tree for sequential tree implementation examples.
-</div>
+:::
+
 
 ::: dsvis
 Reconstructing the original tree in @fig:BinExampb from its sequential representation.

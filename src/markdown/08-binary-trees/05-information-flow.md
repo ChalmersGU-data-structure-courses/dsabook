@@ -147,7 +147,20 @@ just by looking at the node's parent or children.
 To be a binary search tree, the left child of the node with value 40
 must have a value between 20 and 40.
 
-<inlineav id="BSTCheckCON" src="Binary/BSTCheckCON.js" name="Binary/BSTCheckCON" links="Binary/BSTCheckCON.css" static/>
+``` {.latex-figure width="25%"}
+\begin{forest}
+for tree={circle,draw,s sep+=20pt},
+[20
+    [,phantom]
+    [50
+        [40,s sep-=20pt
+            [20 to 40,ellipse]
+            [,phantom]
+        ]
+        [75]
+]]
+\end{forest}
+```
 :::
 
 As shown in the figure above
