@@ -13,7 +13,7 @@ metadata:
   # Settings for panflute:
   panflute-path: pandoc/filters
   panflute-filters:
-    - generic-filter
+    - html-filter
 
   # Settings for pandoc-crossref:
   chapters: true
@@ -27,9 +27,15 @@ metadata:
   secPrefix: ["Section", "Sections"]
 
 
-
 variables:
   lang: en-GB
+
+
+filters:
+  - pandoc-plot
+  - panflute
+  - pandoc-crossref
+
 
 title-prefix: DSABook
 # Specify STRING as a prefix at the beginning of the title that appears in the HTML header
@@ -61,7 +67,84 @@ reference-location: block
 # Specify whether footnotes (and references, if reference-links is set) are placed at
 # the end of the current (top-level) block, the current section, or the document. The default is document.
 
-filters:
-  - pandoc-plot
-  - panflute
-  - pandoc-crossref
+writer: chunkedhtml
+# pandoc --to=chunkedhtml --list-extensions
+
+template: dsabook.html
+# Use the specified file as a custom template for the generated document.
+# Implies --standalone. See Templates, below, for a description of template syntax.
+# If no extension is specified, an extension corresponding to the writer will be added,
+# so that --template=special looks for special.html for HTML output.
+
+css:
+  - ../css/main.css
+  - ../css/book.css
+  - ../css/code.css
+  - ../css/math.css
+  - ../css/quiz.css
+  - ../css/mobile.css
+  - ../css/print.css
+# Link to a CSS style sheet. This option can be used repeatedly to include multiple files.
+
+table-of-contents: true
+toc-depth: 3
+
+# highlight-style: tango
+# pandoc --list-highlight-styles
+# pygments, tango, espresso, zenburn, kate, monochrome, breezedark, haddock
+
+
+html-math-method:
+  method: mathml
+  # method: MathJax
+  # method: katex
+# Convert TeX math to MathML, MathJax, or KaTeX.
+
+section-divs: true
+# Wrap sections in <section> tags, and attach identifiers to the enclosing <section> rather than the heading itself.
+
+split-level: 2
+# Specify the heading level at which to split an EPUB or chunked HTML document into separate files.
+
+chunk-template: "section-%s.html"
+# Specify a template for the filenames in a chunkedhtml document.
+# In the template, %n will be replaced by the chunk number (padded with leading 0s to 3 digits),
+# %s with the section number of the chunk, %h with the heading text (with formatting removed),
+# %i with the section identifier. For example, %section-%s-%i.html might be resolved to
+# section-1.1-introduction.html. The characters / and \ are not allowed in chunk templates and will be ignored.
+# The default is %s-%i.html.
+
+include-in-header:
+  - pandoc/includes/opendsa-header.html
+  - pandoc/includes/quiz-header.html
+# Include contents of FILE, verbatim, at the end of the header.
+# This can be used, for example, to include special CSS or JavaScript in HTML documents.
+
+# include-before-body:
+#   - inc.tex
+# Include contents of FILE, verbatim, at the beginning of the document body
+# (e.g. after the <body> tag in HTML, or the \begin{document} command in LaTeX).
+# This can be used to include navigation bars or banners in HTML documents.
+
+# include-after-body:
+#   - inc.tex
+# Include contents of FILE, verbatim, at the end of the document body
+# (before the </body> tag in HTML, or the \end{document} command in LaTeX).
+
+# html-q-tags: true
+# Use <q> tags for quotes in HTML.
+
+# wrap: auto|none|preserve
+# Determine how text is wrapped in the output (the source code, not the rendered version).
+# With auto (the default), pandoc will attempt to wrap lines to the column width specified
+# by --columns (default 72). With none, pandoc will not wrap lines at all. With preserve,
+# pandoc will attempt to preserve the wrapping from the source document (that is, where there
+# are nonsemantic newlines in the source, there will be nonsemantic newlines in the output as well).
+# In ipynb output, this option affects wrapping of the contents of Markdown cells.
+
+# columns: NUMBER
+# Specify length of lines in characters. This affects text wrapping in the generated source code
+
+strip-comments: true
+# Strip out HTML comments in the Markdown or Textile source, rather than passing them on
+

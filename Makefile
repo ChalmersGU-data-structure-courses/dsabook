@@ -39,7 +39,7 @@ preprocess: clean
 pandoc: preprocess
 	@mkdir -p $(BUILD)
 	@echo "Running pandoc..."
-	@time $(PANDOC) --defaults=dsabook-html.yaml --output=$(HTML) $(TEMP)/*.md
+	@time $(PANDOC) --output=$(HTML) $(TEMP)/*.md
 	@rm -fr $(TEMP)
 
 postprocess: pandoc
