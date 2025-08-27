@@ -204,10 +204,24 @@ td {
 
 figure {
     text-align: center;
+    margin: var(--block-margin);
 }
 
 figcaption {
+    text-align: center;
     font-style: italic;
+    width: 100%;
+    margin-top: 0;
+}
+
+figcaption p, figure figure figcaption {
+    margin: 0;
+}
+
+.subfigures {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 /* Highlighted blocks */

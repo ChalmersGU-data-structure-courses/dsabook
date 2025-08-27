@@ -20,7 +20,7 @@ MD_FILES  := $(sort $(wildcard $(MARKDOWN)/$(CHAPTER)*/*.md) $(wildcard $(MARKDO
 
 # Tools
 PYTHON    := python3
-PANDOC    := pandoc --resource-path=$(RSC) --data-dir=pandoc --defaults=dsabook.yaml
+PANDOC    := pandoc --verbose --resource-path=$(RSC) --data-dir=pandoc --defaults=dsabook.yaml
 HTMLTEST  := htmltest
 
 default: install

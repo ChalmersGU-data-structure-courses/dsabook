@@ -10,11 +10,6 @@ metadata:
 
   date: 2016–2025
 
-  # Settings for panflute:
-  panflute-path: pandoc/filters
-  panflute-filters:
-    - html-filter
-
   # Settings for pandoc-crossref:
   chapters: true
   linkReferences: true
@@ -25,6 +20,8 @@ metadata:
   tblPrefix: ["Table", "Tables"]
   lstPrefix: ["List", "Lists"]
   secPrefix: ["Section", "Sections"]
+  # Doesn't work, don't know why:
+  # subfigureChildTemplate: ($$i$$)
 
 
 variables:
@@ -32,8 +29,8 @@ variables:
 
 
 filters:
+  - html-filter.py
   - pandoc-plot
-  - panflute
   - pandoc-crossref
 
 
