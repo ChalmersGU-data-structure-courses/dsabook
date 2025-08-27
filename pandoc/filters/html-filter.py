@@ -11,6 +11,8 @@ CLASSES_TO_REMOVE = "TODO latex pdf".split()
 RENDERED_IMAGES_DIR = Path('rendered-images')
 RENDERED_IMAGES_DIR.mkdir(parents=True, exist_ok=True)
 
+MISSING_IMAGE = Path('images/missing-image')
+
 
 def has_class(elem, cls):
     return cls in getattr(elem, 'classes', ())
@@ -52,8 +54,9 @@ def make_details(elem, doc):
 
 def latex_figure(elem, doc):
     if has_class(elem, 'latex-figure'):
+        draft = doc.get_metadata('draft')
         if isinstance(elem, pf.CodeBlock):
-            return render_latex_figure(elem.text, elem.identifier, elem.attributes)
+            return render_latex_figure(elem.text, elem.identifier, elem.attributes, draft=draft)
         elif isinstance(elem, pf.Div):
             caption = elem.content.pop()
             assert all(isinstance(sub, pf.CodeBlock) for sub in elem.content), (
@@ -62,9 +65,9 @@ def latex_figure(elem, doc):
                 f"latex_figure: There must be a caption at the end (figure {elem.identifier})")
             if len(elem.content) == 1:
                 # elem.attributes['caption'] = caption
-                return render_latex_figure(elem.content[0].text, elem.identifier, elem.attributes, caption)
+                return render_latex_figure(elem.content[0].text, elem.identifier, elem.attributes, caption, draft=draft)
             subfigs = [
-                render_latex_figure(sub.text, sub.identifier, sub.attributes)
+                render_latex_figure(sub.text, sub.identifier, sub.attributes, draft=draft)
                 for sub in elem.content
             ]
             elem.content = subfigs + [caption]
@@ -88,15 +91,18 @@ LATEX_FIGURE_TEMPLATE = r"""
 def hash_filename(code):
     return "fig:" + hashlib.md5(code.encode()).hexdigest()
 
-def render_latex_figure(code, identifier, attributes, caption=None):
-    base = RENDERED_IMAGES_DIR / (identifier or hash_filename(code))
-    with open(base.with_suffix('.tex'), 'w') as F:
-        print(LATEX_FIGURE_TEMPLATE % (code,), file=F)
-    # Render directly to SVG in Texlive-2025?
-    cmd = ['latex', base.name]
-    subprocess.run(cmd, cwd=RENDERED_IMAGES_DIR, capture_output=True)
-    cmd = ['magick', '-density', '150', base.with_suffix('.dvi').name, base.with_suffix('.png').name]
-    subprocess.run(cmd, cwd=RENDERED_IMAGES_DIR, capture_output=True)
+def render_latex_figure(code, identifier, attributes, caption=None, draft=False):
+    if draft:
+        base = MISSING_IMAGE
+    else:
+        base = RENDERED_IMAGES_DIR / (identifier or hash_filename(code))
+        with open(base.with_suffix('.tex'), 'w') as F:
+            print(LATEX_FIGURE_TEMPLATE % (code,), file=F)
+        # Render directly to SVG in Texlive-2025?
+        cmd = ['latex', base.name]
+        subprocess.run(cmd, cwd=RENDERED_IMAGES_DIR, capture_output=True)
+        cmd = ['magick', '-density', '150', base.with_suffix('.dvi').name, base.with_suffix('.png').name]
+        subprocess.run(cmd, cwd=RENDERED_IMAGES_DIR, capture_output=True)
 
     if not caption and 'caption' in attributes:
         caption = pf.Para(pf.Str(attributes['caption']))
