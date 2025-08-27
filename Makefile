@@ -13,6 +13,7 @@ TEMP      := _temp
 BUILD     := build
 HTML      := $(BUILD)/html
 DOCS      := docs
+GENERATED := rendered-images plots
 
 # Source Files
 GLOSSARY  := $(MARKDOWN)/X-appendix/01-glossary.md
@@ -23,13 +24,14 @@ PYTHON    := python3
 PANDOC    := pandoc --verbose --resource-path=$(RSC) --data-dir=pandoc --defaults=dsabook.yaml
 HTMLTEST  := htmltest
 
+
 default: install
 
 all: install check-links
 
 clean:
 	@echo "Cleaning..."
-	@rm -rf $(TEMP) $(BUILD)
+	@rm -rf $(TEMP) $(BUILD) $(GENERATED)
 
 preprocess: clean
 	@mkdir -p $(TEMP)
