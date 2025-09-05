@@ -31,21 +31,30 @@ nodes might have only one leaf. This occurs when the internal nodes are
 arranged in a chain ending in a single leaf as shown in the following figure.
 In this example, the number of leaves is low because each internal node has only one non-empty child.
 
-::: {.latex-figure #fig:right_leaning_tree}
+::: {.jsav-figure #fig:right_leaning_tree}
 ```
-\begin{forest}
-for tree={circle,draw,s sep+=10pt},
-[~
-    [,phantom]
-    [~,l sep+=20pt,s sep+=10pt
-        [,phantom]
-        [~,edge=dashed,edge label={node[midway,right,font=\scriptsize]{Any number of internal nodes}}
-            [,phantom]
-            [~]
-]]]
-\end{forest}
+var AV = NewAV();
+AddCSS(`.dashed {
+  stroke-dasharray: 5, 5;
+}`);
+AddCSS(`.jsavnode.jsavtreenode {
+  min-width: 20px; max-width: 20px;
+  min-height: 20px; max-height: 20px;
+}`);
+var btTop = -5;
+var btLeft = 305;
+var bt = AV.ds.binarytree({nodegap: 30, left: btLeft, top: btTop});
+bt.root(" ");
+var rt = bt.root();
+rt.right(" ");
+rt.right().right(" ");
+rt.right().edgeToRight().addClass("dashed");
+rt.right().right().right(" ");
+AV.label("Any number of internal nodes", {left: 400, top: 70});
+bt.layout();
+AV.displayInit();
+AV.recorded();
 ```
-
 A right-leaning tree with one single leaf
 :::
 

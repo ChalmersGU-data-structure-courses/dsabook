@@ -60,11 +60,24 @@ Inorder               **B, D, A, G, E, C, H, F, I**     after visiting the left 
 
 As a reminder, here is the example tree again:
 
-```latex-figure {width="30%"}
-\begin{forest}
-for tree={circle,draw,fit=rectangle},
-[A [B [NULL,rectangle,phantom] [D]] [C [E [G] [NULL,rectangle,phantom]] [F [H] [I]]]]
-\end{forest}
+```jsav-figure
+var AV = NewAV();
+var btTop = -5;
+var btLeft = 305;
+var bt = AV.ds.binarytree({nodegap: 15, left: btLeft, top: btTop});
+bt.root("A");
+var rt = bt.root();
+rt.left("B");
+rt.left().right("D");
+rt.right("C");
+rt.right().left("E");
+rt.right().left().left("G");
+rt.right().right("F");
+rt.right().right().left("H");
+rt.right().right().right("I");
+bt.layout();
+AV.displayInit();
+AV.recorded();
 ```
 
 #### Interactive explanations

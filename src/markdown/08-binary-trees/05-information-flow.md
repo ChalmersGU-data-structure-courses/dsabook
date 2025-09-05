@@ -147,19 +147,28 @@ just by looking at the node's parent or children.
 To be a binary search tree, the left child of the node with value 40
 must have a value between 20 and 40.
 
-``` {.latex-figure width="25%"}
-\begin{forest}
-for tree={circle,draw,s sep+=20pt},
-[20
-    [,phantom]
-    [50
-        [40,s sep-=20pt
-            [20 to 40,ellipse]
-            [,phantom]
-        ]
-        [75]
-]]
-\end{forest}
+```jsav-figure
+var AV = NewAV();
+AddCSS(`.jsavlabel{z-index:1000}`);
+// Setup the init location of tree
+var btTop = 0;
+var btLeft = 180 + 150;
+var cirOpt = {fill: "white"};
+
+var bt = AV.ds.binarytree({nodegap: 15, left: btLeft, top: btTop});
+bt.root("20");
+var rt = bt.root();
+rt.right("50");
+rt.right().left("40");
+rt.right().right("75");
+rt.right().left().left(""); // the covered leaf node
+
+//adding the leaf node "20 to 40"
+AV.label("20 to 40", {visible: true, left: 318, top: 147});
+AV.g.ellipse(345, 173, 35, 16, cirOpt);
+bt.layout();
+AV.displayInit();
+AV.recorded();
 ```
 :::
 

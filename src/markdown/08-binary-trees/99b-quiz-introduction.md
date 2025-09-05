@@ -2,17 +2,27 @@
 :::::::::::::::::::::::::::::::::::::::: quiz ::::::::::::::::::::::::::::::::::::::::
 ### Review questions: Example binary tree
 
+Here's an example binary tree:
 
-::: {.latex-figure width=30%}
+```jsav-figure
+var AV = NewAV();
+var btTop = -5;
+var btLeft = 305;
+var bt = AV.ds.binarytree({nodegap: 15, left: btLeft, top: btTop});
+bt.root("24");
+var rt = bt.root();
+rt.left("12");
+rt.left().left("11");
+rt.left().right("13");
+rt.right("21");
+rt.right().left("20");
+rt.right().left().left("17");
+rt.right().right("30");
+rt.right().right().left("40");
+bt.layout();
+AV.displayInit();
+AV.recorded();
 ```
-\begin{forest}
-for tree={circle,draw,fit=rectangle,s sep+=5pt},
-[24 [12 [11] [13]] [21 [20 [17] [99,phantom]] [30 [40] [99,phantom]]]]
-\end{forest}
-```
-
-Here's an example binary tree
-:::
 
 :::::::::: question ::::::::::
 How many internal nodes does this tree have?

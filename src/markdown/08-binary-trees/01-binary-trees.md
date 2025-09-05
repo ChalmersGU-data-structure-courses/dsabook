@@ -43,14 +43,26 @@ only node at level 0, and its depth is 0. A
 empty children. An [internal node]{.term} is any
 node that has at least one non-empty child.
 
-::: {.latex-figure #fig:example_bintree}
+::: {.jsav-figure #fig:example_bintree}
+``` {latex-width=0.3}
+var AV = NewAV();
+var btTop = -5;
+var btLeft = 305;
+var bt = AV.ds.binarytree({nodegap: 15, left: btLeft, top: btTop});
+bt.root("A");
+var rt = bt.root();
+rt.left("B");
+rt.left().right("D");
+rt.right("C");
+rt.right().left("E");
+rt.right().left().left("G");
+rt.right().right("F");
+rt.right().right().left("H");
+rt.right().right().right("I");
+bt.layout();
+AV.displayInit();
+AV.recorded();
 ```
-\begin{forest}
-for tree={circle,draw,fit=rectangle},
-[A [B [NULL,rectangle,phantom] [D]] [C [E [G] [NULL,rectangle,phantom]] [F [H] [I]]]]
-\end{forest}
-```
-
 An example binary tree
 :::
 
@@ -71,26 +83,49 @@ point regarding the structure of binary trees. Because *all* binary tree
 nodes have two children (one or both of which might be empty), the two
 binary trees (a) and (b) in the figure are *not* the same.
 
-::: {.latex-figure #fig:two_bintrees}
+::: {.jsav-figure #fig:two_bintrees}
 ```
-\begin{forest}
-for tree={circle,draw,fit=rectangle}, [A [B] [NULL,rectangle,phantom]]
-\end{forest}
-```
-```
-\begin{forest}
-for tree={circle,draw,fit=rectangle}, [A [NULL,rectangle,phantom] [B]]
-\end{forest}
-```
-```
-\begin{forest}
-for tree={circle,draw,fit=rectangle}, [A [B] [NULL,rectangle,draw=none]]
-\end{forest}
-```
-```
-\begin{forest}
-for tree={circle,draw,fit=rectangle}, [A [NULL,rectangle,draw=none] [B]]
-\end{forest}
+var AV = NewAV();
+// Setup first row of trees
+var btTop = 0;
+var btLeft = 120;
+var btRight = 220;
+var bt = AV.ds.binarytree({nodegap: 30, top: btTop, left: btLeft});
+bt.root("A");
+var rt = bt.root();
+rt.left("B");
+
+var bt2 = AV.ds.binarytree({nodegap: 30, top: btTop, left: btRight});
+bt2.root("A");
+bt2.root().right("B");
+
+bt.layout();
+bt2.layout();
+
+// Add first row of labels
+AV.label("(a)", {left: btLeft + 40, top: btTop + 105});
+AV.label("(b)", {left: btRight + 35, top: btTop + 105});
+
+// Setup second row of trees
+// btTop = 155;
+btLeft += 400 - 20; btRight += 400 + 20;
+var bt3 = AV.ds.binarytree({nodegap: 30, left: btLeft, top: btTop});
+bt3.root("A");
+bt3.root().left("B");
+bt3.root().right("");
+bt3.root().right("NULL").addClass("clearnode");
+var bt4 = AV.ds.binarytree({nodegap: 30, left: btRight, top: btTop});
+bt4.root("A");
+bt4.root().left("NULL").addClass("clearnode");
+bt4.root().right("B");
+bt3.layout();
+bt4.layout();
+
+// Add second row of labels
+AV.label("(c)", {left: btLeft + 40, top: btTop + 105});
+AV.label("(d)", {left: btRight + 35, top: btTop + 105});
+AV.displayInit();
+AV.recorded();
 ```
 
 Two different binary trees:
@@ -117,18 +152,54 @@ full but not complete while the tree (b) is complete but not full.
 The [binary heap]{.term} (@sec:binary-heaps) is an example of a complete binary tree.
 The [Huffman coding tree]{.term} (@sec:case-study-huffman-coding) is an example of a full binary tree.
 
-::: {.latex-figure #fig:full_complete_bintrees}
-```
-\begin{forest}
-for tree={circle,draw,fill=black,l=0,s sep=10mm}, [{} [{} [{}] [{} [{}] [{}]]] [{}]]
-\end{forest}
-```
-```
-\begin{forest}
-for tree={circle,draw,fill=black,l=0,s sep=5mm}, [{} [{} [{} [{}] [{}]] [{} [{}] [{}]]] [{} [{} [{}] [,phantom]] [{}]]]
-\end{forest}
-```
+::: {.jsav-figure #fig:full_complete_bintrees}
+``` {latex-width=0.6}
+var AV = NewAV();
+AddCSS(`.jsavnode.jsavtreenode {
+  min-width: 10px;
+  max-width: 10px;
+  min-height: 10px;
+  max-height: 10px;
+  background-color: #000000;
+  border-color: #000000;
+}`);
+// Setup first row of trees
+var btTop = 0;
+var btLeft = 225;
+var btRight = 425;
+var bt = AV.ds.binarytree({nodegap: 25, left: btLeft, top: btTop});
+bt.root("");
+var rt = bt.root();
+rt.left("");
+rt.left().left("");
+rt.left().right("");
+rt.left().right().left("");
+rt.left().right().right("");
+rt.right("");
 
+var bt2 = AV.ds.binarytree({nodegap: 25, left: btRight, top: btTop});
+var rt2 = bt2.root("");
+rt2.left("");
+rt2.left().left("");
+rt2.left().right("");
+rt2.left().left().left("");
+rt2.left().left().right("");
+rt2.left().right().left("");
+rt2.left().right().right("");
+rt2.right("");
+rt2.right().right("");
+rt2.right().left("");
+rt2.right().left().left("");
+
+bt.layout();
+bt2.layout();
+
+// Add first row of labels
+AV.label("(a)", {left: btLeft + 35, top: btTop + 135});
+AV.label("(b)", {left: btRight + 115, top: btTop + 135});
+AV.displayInit();
+AV.recorded();
+```
 Examples of full and complete binary trees:
 (a) is full but not complete; (b) is complete but not full
 :::

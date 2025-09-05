@@ -62,19 +62,27 @@ be interpreted as leaf nodes, and these can be listed explicitly. Such
 an augmented node list provides enough information to recover the tree
 structure.
 
-::: {.latex-figure #fig:BinExampb width=25%}
-```
-\begin{forest}
-for tree={circle,draw,fit=rectangle,s sep+=5pt},
-[A
-    [B [,phantom] [D]]
-    [C [E [G] [,phantom]] [F [H] [i]]]
-]
-\end{forest}
-```
-Sample binary tree for sequential tree implementation examples.
-:::
+Here is again the example binary tree from @fig:example_bintree, which will be used in the examples below:
 
+```jsav-figure
+var AV = NewAV();
+var btTop = -5;
+var btLeft = 305;
+var bt = AV.ds.binarytree({nodegap: 15, left: btLeft, top: btTop});
+bt.root("A");
+var rt = bt.root();
+rt.left("B");
+rt.left().right("D");
+rt.right("C");
+rt.right().left("E");
+rt.right().left().left("G");
+rt.right().right("F");
+rt.right().right().left("H");
+rt.right().right().right("I");
+bt.layout();
+AV.displayInit();
+AV.recorded();
+```
 
 ::: dsvis
 Reconstructing the original tree in @fig:BinExampb from its sequential representation.

@@ -46,35 +46,20 @@ this in the obvious way by storing two pointers: one to the node
 following it (as in the singly linked list), and a second pointer to the
 node preceding it.
 
-::: latex
-\begin{center}
-\begin{tikzpicture}[
-    double link/.style n args=1{
-        on chain,
-        rectangle split,
-        rectangle split horizontal,
-        rectangle split parts=3,
-        anchor=center,
-        draw,
-        node contents={\nodepart{two}#1\nodepart{three}},
-    },
-    start chain=going right,
-]
-    \node [on chain, double link={8}];
-    \node [join={by <->}, double link={20}];
-    \node [join={by <->}, double link={23}];
-    \node [join={by <->}, double link={12}];
-    \node [join={by <->}, double link={15}];
-    \node [join={by <->}, double link={42}];
-    \path [<-, draw, shorten >=10pt] (chain-1.two north) |- node [at end] {head} ++(-.8,.5);
-    \path [<-, draw, shorten >=10pt] (chain-6.two north) |- node [at end] {tail} ++(-.8,.5);
-\end{tikzpicture}
-\end{center}
-:::
-
-::: online
-<inlineav id="DoublyLinkedList-CON" src="ChalmersGU/DoublyLinkedList-CON.js" script="DataStructures/DoubleLinkList.js" name="ChalmersGU/DoublyLinkedList-CON" links="DataStructures/DoubleLinkList.css ChalmersGU/CGU-Styles.css" static/>
-:::
+```{.jsav-figure scripts="DataStructures/DoubleLinkList.js" links="DataStructures/DoubleLinkList.css"}
+var AV = NewAV();
+// Relative offsets
+var leftMargin = 180;
+var topMargin = 40;
+// JSAV list
+var l = AV.ds.dlist({nodegap: 30, center: false, left: leftMargin, top: topMargin});
+l.addFirst(42).addFirst(15).addFirst(12).addFirst(23).addFirst(20).addFirst(8);
+l.layout();
+AV.pointer("head", l.get(0));
+AV.pointer("tail", l.get(5));
+AV.displayInit();
+AV.recorded();
+```
 
 The most common reason to use a doubly linked list is because it gives
 an additional possibility to move both forwards and backwards in the

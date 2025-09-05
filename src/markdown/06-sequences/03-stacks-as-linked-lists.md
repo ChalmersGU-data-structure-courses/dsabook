@@ -13,30 +13,14 @@ are three [nodes]{.term} that are
 "linked" together. Each node has two boxes. The box on the right holds a link to the next node in the list.
 Notice that the rightmost node does not have any link coming out of this box.
 
-::: online
-<inlineav id="LinkedList-Overview-CON" src="ChalmersGU/LinkedList-Overview-CON.js" name="Linked List Overview" links="ChalmersGU/CGU-Styles.css" static/>
-:::
-
-::: latex
-\begin{center}
-\begin{tikzpicture}[
-    list/.style={
-        rectangle split,
-        rectangle split parts=2,
-        rectangle split horizontal,
-        draw
-    },
-    >=stealth,
-    start chain
-]
-  \node[list, on chain] (A) {\phantom{99}};
-  \node[list, on chain] (B) {\phantom{99}};
-  \node[list, on chain, rectangle split part fill={white,black!50}] (C) {\phantom{99}};
-  \draw[*->] let \p1 = (A.two), \p2 = (A.center) in (\x1,\y2) -- (B);
-  \draw[*->] let \p1 = (B.two), \p2 = (B.center) in (\x1,\y2) -- (C);
-\end{tikzpicture}
-\end{center}
-:::
+```jsav-figure
+var av = NewAV();
+var l = av.ds.list({nodegap: 30});
+l.addFirst("").addFirst("").addFirst("");
+l.layout();
+av.displayInit();
+av.recorded();
+```
 
 #### Linked list nodes
 
@@ -56,25 +40,15 @@ In this section and the next we describe how to use linked lists to implement st
 The linked stack implementation is quite simple.
 Elements are inserted and removed only from the head of the list. Here is a visual representation for a linked stack.
 
-::: online
-<inlineav id="LinkedStack-Overview-CON" src="ChalmersGU/LinkedStack-Overview-CON.js" name="Linked Stack Overview" links="ChalmersGU/CGU-Styles.css" static/>
-:::
-
-::: latex
-\begin{center}
-\begin{tikzpicture}[
-    every node/.style={rectangle split, rectangle split parts=2, rectangle split horizontal},
-    node distance=1em, start chain, every join/.style={->, shorten <=-4.5pt}
-]
-  \node[draw, on chain, join] { 20 };
-  \node[draw, on chain, join] { 23 };
-  \node[draw, on chain, join] {  8 };
-  \node[draw, on chain, join] { 12 };
-  \node[draw, on chain, join, rectangle split part fill={white,black!50}] { 15 };
-  \path [<-, draw, shorten >=10pt] (chain-1.one north) |- node [at end] {top} ++(-1,.5);
-\end{tikzpicture}
-\end{center}
-:::
+```jsav-figure
+var AV = NewAV();
+var l = AV.ds.list({nodegap: 30, top: 40, left: 250});
+l.addFirst(15).addFirst(12).addFirst(8).addFirst(23).addFirst(20);
+l.layout();
+AV.pointer("top", l.get(0));
+AV.displayInit();
+AV.recorded();
+```
 
 Our data type for linked stacks contains two instance variables, one pointer to the head of the stack (called the `top`), and a variable storing the number of elements.
 (This second variable is in theory unnecessary, but it improves the efficiency of getting the stack size).

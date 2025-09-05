@@ -15,29 +15,60 @@ common node implementation includes a value field and pointers to the
 two children.
 @Fig:bintree_with_pointers is an illustration of how the tree from @fig:example_bintree looks like, where the child pointers are shown explicitly.
 
-::: {.latex-figure #fig:bintree_with_pointers}
+::: {.jsav-figure #fig:bintree_with_pointers}
 ```
-\begin{tikzpicture}
-\tikzstyle{every node}=[rectangle split, rectangle split horizontal, rectangle split parts=3, draw]
-\node (A) {\nodepart{second} A};
-\node (B) [below left  = 5mm and 15mm of A] {\nodepart{second} B};
-\node (C) [below right = 5mm and 15mm of A] {\nodepart{second} C};
-\node (D) [below right = 5mm and  0mm of B] {\nodepart{second} D};
-\node (E) [below left  = 5mm and  0mm of C] {\nodepart{second} E};
-\node (F) [below right = 5mm and  0mm of C] {\nodepart{second} F};
-\node (G) [below left  = 5mm and  0mm of E] {\nodepart{second} G};
-\node (H) [below left  = 5mm and  0mm of F] {\nodepart{second} H};
-\node (I) [below right = 5mm and  0mm of F] {\nodepart{second} I};
+var AV = NewAV();
+AddCSS(`.jsavcanvas {width: 600px}`)
+AV.ds.array([" ", "A", " "], {left: 180});
+var topDiff = 50;
+var arrB = AV.ds.array(["/", "B", " "], {left: 40, top: topDiff});
+arrB.css(0, {"background-color": "LightGray"});
+AV.ds.array([" ", "C", " "], {left: 320, top: topDiff});
 
-\draw[*->] ($(A.one)   + (0.2,0.1)$) -- (B);
-\draw[*->] ($(A.three) + (0.0,0.1)$) -- (C);
-\draw[*->] ($(B.three) + (0.0,0.1)$) -- (D);
-\draw[*->] ($(C.one)   + (0.2,0.1)$) -- (E);
-\draw[*->] ($(C.three) + (0.0,0.1)$) -- (F);
-\draw[*->] ($(E.one)   + (0.2,0.1)$) -- (G);
-\draw[*->] ($(F.one)   + (0.2,0.1)$) -- (H);
-\draw[*->] ($(F.three) + (0.0,0.1)$) -- (I);
-\end{tikzpicture}
+topDiff += 50;
+var arrD = AV.ds.array(["/", "D", "/"], {left: 70, top: topDiff});
+arrD.css(0, {"background-color": "LightGray"});
+var arrE = AV.ds.array([" ", "E", "/"], {left: 230, top: topDiff});
+arrE.css(2, {"background-color": "LightGray"});
+AV.ds.array([" ", "F", " "], {left: 410, top: topDiff});
+
+topDiff += 50;
+var arrG = AV.ds.array(["/", "G", "/"], {left: 150, top: topDiff});
+var arrH = AV.ds.array(["/", "H", "/"], {left: 350, top: topDiff});
+var arrI = AV.ds.array(["/", "I", "/"], {left: 470, top: topDiff});
+arrG.css(0, {"background-color": "LightGray"});
+arrG.css(2, {"background-color": "LightGray"});
+arrH.css(0, {"background-color": "LightGray"});
+arrH.css(2, {"background-color": "LightGray"});
+arrI.css(0, {"background-color": "LightGray"});
+arrI.css(2, {"background-color": "LightGray"});
+
+//line for A - B
+AV.g.line(200, 40, 90, 70, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+//line for A - C
+AV.g.line(250, 40, 370, 70, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+//line for B - D
+AV.g.line(115, 90, 120, 120, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+//line for C - E
+AV.g.line(340, 90, 280, 120, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+//line for C - F
+AV.g.line(395, 90, 450, 120, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+//line for E - G
+AV.g.line(250, 140, 200, 170, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+//line for F - H
+AV.g.line(430, 140, 395, 170, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+//line for F - I
+AV.g.line(485, 140, 515, 170, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+AV.displayInit();
+AV.recorded();
 ```
 
 Illustration of a typical pointer-based binary tree implementation, where each node stores two child pointers and a value
@@ -98,34 +129,73 @@ the child pointers. But it seems wasteful to store child pointers in the
 leaf nodes. Thus, there are many reasons why it can save space to have
 separate implementations for internal and leaf nodes.
 
-::: {.latex-figure #fig:expression_tree}
-```
-\begin{tikzpicture}
-\tikzstyle{binnode}=[rectangle split, rectangle split horizontal, rectangle split parts=3, draw]
-\tikzstyle{leafnode}=[circle, draw]
-\node[binnode]  (A)                                   {\nodepart{second} $-$};
-\node[binnode]  (B) [below left  = 5mm and 10mm of A] {\nodepart{second} $\times$};
-\node[leafnode] (C) [below right = 5mm and 10mm of A] {$c$};
-\node[binnode]  (D) [below left  = 5mm and  5mm of B] {\nodepart{second} $\times$};
-\node[binnode]  (E) [below right = 5mm and  5mm of B] {\nodepart{second} $+$};
-\node[leafnode] (F) [below left  = 5mm and  0mm of D] {$4$};
-\node[leafnode] (G) [below right = 5mm and  0mm of D] {$x$};
-\node[binnode]  (H) [below left  = 5mm and -5mm of E] {\nodepart{second} $\times$};
-\node[leafnode] (I) [below right = 5mm and  0mm of E] {$a$};
-\node[leafnode] (J) [below left  = 5mm and  0mm of H] {$2$};
-\node[leafnode] (K) [below right = 5mm and  0mm of H] {$x$};
+::: {.jsav-figure #fig:expression_tree}
+``` {latex-width=0.5}
+var AV = NewAV();
+AddCSS(`.internalnode {
+  border-radius: 50px;
+  background-color: white;
+  line-height: 22px;
+  z-index: 100; /* Prevents the tails of the edges from showing up in the background of the node */
+}`);
+AV.ds.array([" ", "&ndash;", " "], {left: 420});
 
-\draw[*->] ($(A.one)   + (0.2,0.1)$) -- (B);
-\draw[*->] ($(A.three) + (0.0,0.1)$) -- (C);
-\draw[*->] ($(B.one)   + (0.2,0.1)$) -- (D);
-\draw[*->] ($(B.three) + (0.0,0.1)$) -- (E);
-\draw[*->] ($(D.one)   + (0.2,0.1)$) -- (F);
-\draw[*->] ($(D.three) + (0.0,0.1)$) -- (G);
-\draw[*->] ($(E.one)   + (0.2,0.1)$) -- (H);
-\draw[*->] ($(E.three) + (0.0,0.1)$) -- (I);
-\draw[*->] ($(H.one)   + (0.2,0.1)$) -- (J);
-\draw[*->] ($(H.three) + (0.0,0.1)$) -- (K);
-\end{tikzpicture}
+var topDiff = 60;
+AV.ds.array([" ", "&times;", " "], {left: 350, top: topDiff});
+var arr3 = AV.ds.array(["<em>c</em>"], {left: 520, top: topDiff});
+arr3.addClass([0], "internalnode");
+
+topDiff += 60;
+AV.ds.array([" ", "&times;", " "], {left: 240, top: topDiff});
+AV.ds.array([" ", "+", " "], {left: 460, top: topDiff});
+
+topDiff += 60;
+var arr6 = AV.ds.array(["4"], {left: 240, top: topDiff});
+var arr7 = AV.ds.array(["<em>x</em>"], {left: 300, top: topDiff});
+AV.ds.array([" ", "&times;", " "], {left: 400, top: topDiff});
+var arr9 = AV.ds.array(["<em>a</em>"], {left: 550, top: topDiff});
+arr6.addClass([0], "internalnode");
+arr7.addClass([0], "internalnode");
+arr9.addClass([0], "internalnode");
+
+topDiff += 60;
+var arr10 = AV.ds.array(["2"], {left: 400, top: topDiff});
+var arr11 = AV.ds.array(["<em>x</em>"], {left: 460, top: topDiff});
+arr10.addClass([0], "internalnode");
+arr11.addClass([0], "internalnode");
+
+//line for [-] - [*]
+AV.g.line(440, 40, 400, 80, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+//line for [-] - c
+AV.g.line(495, 40, 535, 80, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+//line for [*] - [*]
+AV.g.line(370, 100, 290, 140, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+//line for [*] - [+]
+AV.g.line(425, 100, 505, 140, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+//line for [*] - 4
+AV.g.line(255, 160, 255, 200, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+//line for [*] - x
+AV.g.line(315, 160, 315, 200, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+//line for [+] - [*]
+AV.g.line(475, 160, 450, 200, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+//line for [+] - a
+AV.g.line(535, 160, 565, 200, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+//line for [*] - 2
+AV.g.line(420, 220, 420, 260, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+//line for [*] - x
+AV.g.line(475, 220, 475, 260, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+AV.displayInit();
+AV.recorded();
 ```
 
 An example of an expression tree for $4x(2x + a) - c$
