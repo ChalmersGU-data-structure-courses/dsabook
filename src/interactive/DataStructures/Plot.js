@@ -57,7 +57,7 @@
     // funcs: list of functions to plot, each should be in the form
     //   ["name", function, "line colour"]
     //   e.g. ["sin", Math.sin, "red"]
-    plotFuncs: function(name, width, height, xmargin, ymargin, xMax, yMax, boxX, boxY, funcs) {
+    plotFuncs: function(name, width, height, xmargin, ymargin, xMax, yMax, boxX, boxY, funcs, scale) {
       "use strict";
       var i;
       var av = new JSAV(name, {animationMode: "none"});
@@ -90,23 +90,35 @@
         y1 -= stepy1;
       }
 
+      function superscript(n) {
+        var lookupsuper = {'0':'⁰', '1':'¹', '2':'²', '3':'³', '4':'⁴', '5':'⁵', '6':'⁶', '7':'⁷', '8':'⁸', '9':'⁹'};
+        var digits = String(n);
+        var superdigits = "";
+        for (var c of digits) {
+          superdigits += lookupsuper[c] || c;
+        }
+        return superdigits;
+      }
+
       //plot1 x-axis labels
-      var labelx1_x = xStart;
-      var labelx1_y = yStart - 5;
+      var labelx1_x = xStart - 5;
+      var labelx1_y = yStart - 10;
       for (i = 0; i <= 10; i++) {
         var x = Math.floor(xMax/10 * i);
-        var len = String(x).length;
-        av.label(x, {left: labelx1_x-6*len/2, top: labelx1_y});
+        var lbl = String(x);
+        if (scale && x>0) lbl = String(Math.round(x / (10**scale))) + "·10" + superscript(scale);
+        av.label(lbl, {left: labelx1_x-6*lbl.length/2, top: labelx1_y});
         labelx1_x += width/10;
       }
 
       // plot1 y-axis labels
-      var labely1_x = xStart - 10;
-      var labely1_y = yStart - 20;
+      var labely1_x = xStart - 20;
+      var labely1_y = yStart - 25;
       for (i = 0; i <= 10; i++) {
         var y = Math.floor(yMax/10 * i);
-        var len = String(y).length;
-        av.label(y, {left: labely1_x-6*len, top: labely1_y}).addClass("yLabel");
+        var lbl = String(y);
+        if (scale && y>0) lbl = String(Math.round(y / (10**scale))) + "·10" + superscript(scale);
+        av.label(lbl, {left: labely1_x-6*lbl.length, top: labely1_y}).addClass("yLabel");
         labely1_y -= height/10;
       }
 

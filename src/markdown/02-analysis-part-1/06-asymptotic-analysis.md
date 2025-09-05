@@ -29,31 +29,25 @@ ys_2n2 = 2*(xs**2)
 ys_2expn = 2**xs
 ys_fact = np.vectorize(math.gamma)(xs+1)
 plt1.set_xlim(0, 50); plt1.set_ylim(0, 1400)
-plt1.plot(xs, ys_10n, '--');   plt1.text(45, ys_10n[-1], '10n')
-plt1.plot(xs, ys_20n, '--');   plt1.text(45, ys_20n[-1], '20n')
-plt1.plot(xs, ys_5nlogn, '-'); plt1.text(xs[375], 1300, '5n log2(n)')
-plt1.plot(xs, ys_2n2, '-');    plt1.text(xs[200], 1300, '2 n^2')
-plt1.plot(xs, ys_2expn, '-');  plt1.text(xs[110], 1300, '2^n')
+plt1.plot(xs, ys_10n, '--');   plt1.text(45, ys_10n[-1], '10·n')
+plt1.plot(xs, ys_20n, '--');   plt1.text(45, ys_20n[-1], '20·n')
+plt1.plot(xs, ys_5nlogn, '-'); plt1.text(xs[375], 1300, '5n·log₂(n)')
+plt1.plot(xs, ys_2n2, '-');    plt1.text(xs[200], 1300, '2·n²')
+plt1.plot(xs, ys_2expn, '-');  plt1.text(xs[110], 1300, '2ⁿ')
 plt1.plot(xs, ys_fact, '-');   plt1.text(xs[40], 1300, 'n!')
 plt1.plot([11,11,0], [0,308,308], ':', color='gray')
 plt1.set_title('Growth rates for 6 equations')
 plt2.set_xlim(0, 11); plt2.set_ylim(0, 308);
-plt2.plot(xs, ys_10n, '--');   plt2.text(10, ys_10n[110]-30, '10n')
-plt2.plot(xs, ys_20n, '--');   plt2.text(10, ys_20n[110]-30, '20n')
-plt2.plot(xs, ys_5nlogn, '-'); plt2.text(10, ys_5nlogn[110]-50, '5n log2(n)')
-plt2.plot(xs, ys_2n2, '-');    plt2.text(10, ys_2n2[110], '2 n^2')
-plt2.plot(xs, ys_2expn, '-');  plt2.text(7.3, 290, '2^n')
+plt2.plot(xs, ys_10n, '--');   plt2.text(10, ys_10n[110]-30, '10·n')
+plt2.plot(xs, ys_20n, '--');   plt2.text(10, ys_20n[110]-30, '20·n')
+plt2.plot(xs, ys_5nlogn, '-'); plt2.text(9.5, ys_5nlogn[110]-50, '5n·log₂(n)')
+plt2.plot(xs, ys_2n2, '-');    plt2.text(10, ys_2n2[110], '2·n²')
+plt2.plot(xs, ys_2expn, '-');  plt2.text(7.3, 290, '2ⁿ')
 plt2.plot(xs, ys_fact, '-');   plt2.text(4.9, 290, 'n!')
 plt2.set_title('Zoomed in')
 ```
-
 :::
 
-<!--
-<inlineav id="GrowthRatesCON" src="AlgAnal/GrowthRatesCON.js" script="DataStructures/Plot.js" name="DataStructures/Plot.js AlgAnal/GrowthRatesCON" links="AlgAnal/GrowthRatesCON.css" height="450px" static/>
-
-<inlineav id="GrowthRatesZoomCON" src="AlgAnal/GrowthRatesZoomCON.js" script="DataStructures/Plot.js" name="DataStructures/Plot.js AlgAnal/GrowthRatesZoomCON" links="AlgAnal/GrowthRatesZoomCON.css" height="420px" static/>
--->
 
 
 Despite the larger constant for the curve labeled $10 n$ in the figure
