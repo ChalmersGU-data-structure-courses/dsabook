@@ -29,7 +29,7 @@ that a duplicate is not in the table. However, the new record would
 actually be inserted into the slot of the first tombstone encountered.
 
 ::: dsvis
-TODO
+The deletion process in action.
 
 <inlineav id="hashdelCON" src="Hashing/hashdelCON.js" name="Hash Deletion Slideshow" links="Hashing/collisionCON.css"/>
 :::

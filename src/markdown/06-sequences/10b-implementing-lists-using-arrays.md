@@ -35,7 +35,7 @@ largest possible size. Then the underlying array is initialised, and the
 size counter is set to 0 because there are no elements yet.
 
 ::: dsvis
-TODO
+The internals of an array-based list.
 
 <inlineav id="StaticArrayList-Vars-CON" src="ChalmersGU/StaticArrayList-Vars-CON.js" name="Static Array-based List Variables Slideshow"/>
 :::
@@ -53,7 +53,7 @@ You can simulate it by creating a list with a number of empty elements:
 Random access to any element in the list is quick and easy.
 
 ::: dsvis
-TODO
+Finding a value by its position.
 
 <inlineav id="StaticArrayList-Intro-CON" src="ChalmersGU/StaticArrayList-Intro-CON.js" name="Static Array-based List Intro Slideshow" links="ChalmersGU/CGU-Styles.css"/>
 :::
@@ -81,7 +81,7 @@ methods must maintain this property.
 Appending elements at the tail of an array-based list is super-fast.
 
 ::: dsvis
-TODO
+Appending to the end of an array-based list.
 
 <inlineav id="StaticArrayList-Append-CON" src="ChalmersGU/StaticArrayList-Append-CON.js" name="Static Array-based List Append Slideshow" links="ChalmersGU/CGU-Styles.css"/>
 :::
@@ -90,7 +90,7 @@ However, adding an element at the head of the list requires shifting all
 existing elements in the array by one position toward the tail.
 
 ::: dsvis
-TODO
+Inserting at the head of the list.
 
 <inlineav id="StaticArrayList-Add-CON" src="ChalmersGU/StaticArrayList-Add-CON.js" name="Static Array-based List Insertion Slideshow" links="ChalmersGU/CGU-Styles.css"/>
 :::
@@ -113,7 +113,7 @@ elements, which is $O(n)$.
 #### Practice exercise
 
 ::: dsvis
-TODO
+Practice exercise about inserting into an array-based list.
 
 <avembed id="StaticArrayList-Add-PRO" src="ChalmersGU/StaticArrayList-Add-PRO.html" type="ka" name="Array-based List Add Exercise"/>
 :::
@@ -127,7 +127,7 @@ we want to remove the element at position $i$, then $n - i - 1$ elements
 must shift toward the head, as shown in the following slideshow.
 
 ::: dsvis
-TODO
+Removing an element at a certain position in the list.
 
 <inlineav id="StaticArrayList-Remove-CON" src="ChalmersGU/StaticArrayList-Remove-CON.js" name="Static Array-based List Remove" links="ChalmersGU/CGU-Styles.css"/>
 :::
@@ -150,7 +150,7 @@ elements, which is $O(n)$.
 #### Practice exercise
 
 ::: dsvis
-TODO
+Practise exercise about removing from an array-based list.
 
 <avembed id="StaticArrayList-Remove-PRO" src="ChalmersGU/StaticArrayList-Remove-PRO.html" type="ka" name="Array-based List Remove Exercise"/>
 :::

@@ -68,7 +68,7 @@ Apart from these four, we also want to know the number of elements, to be able t
 So we make the List interface be a Collection too.
 
 ::: dsvis
-TODO
+Insertion into a linked list, overview.
 
 <inlineav id="ListADT-Positions-CON" src="ChalmersGU/ListADT-Positions-CON.js" name="List ADT Positions Slideshow" links="ChalmersGU/CGU-Styles.css"/>
 :::
@@ -108,7 +108,7 @@ We can use the same structure as for stacks when implementing general linked lis
         size: Int = 0       // Size of list
 
 ::: dsvis
-TODO
+Iterating through a linked list.
 
 <inlineav id="LinkedList-Iteration-CON" src="ChalmersGU/LinkedList-Iteration-CON.js" name="Linked List Slideshow 1" links="ChalmersGU/CGU-Styles.css"/>
 :::
@@ -119,7 +119,7 @@ However, if we want to add or remove nodes, there is a problem with
 using a pointer to the `current` node.
 
 ::: dsvis
-TODO
+The problem with using a pointer to the `current` node.
 
 <inlineav id="LinkedList-Problems-CON" src="ChalmersGU/LinkedList-Problems-CON.js" name="Linked List Add/Remove Problems" links="ChalmersGU/CGU-Styles.css"/>
 :::
@@ -136,15 +136,13 @@ current node. This is the solution we will adopt.
 #### Adding a node
 
 ::: dsvis
-TODO
+How to insert an element using a pointer to the node *before* the current node.
 
 <inlineav id="LinkedList-Add-CON" src="ChalmersGU/LinkedList-Add-CON.js" name="Linked List Add Slideshow" links="ChalmersGU/CGU-Styles.css"/>
 :::
 
 ::: dsvis
-
-Here are some special cases for linked list insertion: Inserting at the
-beginning of a list, and appending at the end.
+Here are some special cases for linked list insertion: Inserting at the beginning of a list, and appending at the end.
 
 <inlineav id="LinkedList-AddSpecial-CON" src="ChalmersGU/LinkedList-AddSpecial-CON.js" name="Linked List Add Special Cases Slideshow" links="ChalmersGU/CGU-Styles.css"/>
 :::
@@ -174,7 +172,7 @@ Here's an exercise for adding a value to a linked list.
 #### Removing a node
 
 ::: dsvis
-TODO
+How to delete from a linked list.
 
 <inlineav id="LinkedList-Remove-CON" src="ChalmersGU/LinkedList-Remove-CON.js" name="Linked List Remove Slideshow" links="ChalmersGU/CGU-Styles.css"/>
 :::
