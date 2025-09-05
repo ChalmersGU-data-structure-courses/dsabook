@@ -85,7 +85,7 @@ AV.recorded();
 ```
 
 ::: dsvis
-Reconstructing the original tree in @fig:BinExampb from its sequential representation.
+Reconstructing the original tree in @fig:example_bintree from its sequential representation.
 
 <inlineav id="SequentialTreeCON" src="General/SequentialTreeCON.js" name="First sequential representation Slideshow" links="General/SequentialTreeCON.css"/>
 :::
@@ -131,7 +131,7 @@ binary tree stores no `null` values with this implementation, and so
 requires less overhead.
 
 ::: dsvis
-Reconstructing the original tree in @fig:BinExampb from the alternative sequential representation.
+Reconstructing the original tree in @fig:example_bintree from the alternative sequential representation.
 
 <inlineav id="SequentialTreeAltCON" src="General/SequentialTreeAltCON.js" name="Second sequential representation Slideshow" links="General/SequentialTreeCON.css"/>
 :::
@@ -160,7 +160,7 @@ one bit in the bit vector. A value of "1" could indicate an internal
 node, and "0" could indicate a leaf node.
 
 ::: dsvis
-Reconstructing the shape of the tree in @fig:BinExampb from its bit vector representation.
+Reconstructing the shape of the tree in @fig:example_bintree from its bit vector representation.
 
 <inlineav id="SequentialTreeBitsCON" src="General/SequentialTreeBitsCON.js" name="Bit vector sequential representation Slideshow" links="General/SequentialTreeCON.css"/>
 :::
@@ -196,7 +196,7 @@ used for binary trees. This is because a binary tree is not merely a
 restricted form of general tree with at most two children. Every binary
 tree node has a left and a right child, though either or both might be
 empty. So this representation cannot let us distinguish whether node $D$
-in @fig:BinExampb is the left or right child of node $B$.
+in @fig:example_bintree is the left or right child of node $B$.
 
 ::: dsvis
 Practice exercise for sequential representation of general trees.
