@@ -163,7 +163,7 @@ The rest of this gives a high-level overview of the ADTs covered throughout the 
 @Fig:adt-overview summarises these ADTs and highlights how they relate to one another.
 Each ADT will be discussed in more detail later in the book, including their operations and the data structures used to implement them.
 
-![An overview of ADTs with their common implementations](resources/images/ADT_overview.png){#fig:adt-overview}
+![An overview of ADTs with their common implementations](images/ADT_overview.png){#fig:adt-overview}
 
 
 ### Linear collections {#adt-linear-collections}
