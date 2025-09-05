@@ -30,6 +30,7 @@ metadata:
     - max-header-numbering
     - make-details
     - latex-figure
+    - jsav-figure
 
 
 variables:

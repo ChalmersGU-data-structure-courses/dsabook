@@ -21,6 +21,7 @@ def main(*infiles: str|Path):
     for inf, contents in AllContents.items():
         # print(contents, file=sys.stderr)
         contents = re.sub(HrefMatch, lambda m: fix_href(m, inf), contents)
+        contents = move_links_to_header(contents)
         contents = convert_animations(contents)
         with open(inf, "w") as OUT:
             print(contents, file=OUT)
@@ -42,6 +43,17 @@ def fix_href(m: re.Match[str], inf: Path) -> str:
     print(f"Redirecting anchor #{id} --> {reffiles[0]}", file=sys.stderr)
     return f'{prefix}"{reffiles[0]}#{id}"'
 
+
+###############################################################################
+
+linksre = re.compile(r"<link [^<>]*>")
+
+def move_links_to_header(contents: str) -> str:
+    header, mid, body = contents.partition("</head>")
+    all_links = linksre.findall(body)
+    body = linksre.sub("", body)
+    contents = header + "\n".join(sorted(set(all_links))) + mid + body
+    return contents
 
 
 ###############################################################################
