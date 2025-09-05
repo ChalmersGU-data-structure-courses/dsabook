@@ -25,11 +25,12 @@ problem. An acceptable topological sort for this example is J1, J2, J3,
 J4, J5, J6, J7. However, other orders are also acceptable, such as J1,
 J3, J2, J6, J4, J5, J7.
 
-<!-- <inlineav id="topSortCON" src="Graph/topSortCON.js" name="Graph/topSortCON" static/> -->
-
-![An example graph for topological sort.
-Seven tasks have dependencies as shown by the directed graph
-](images/GraphToposort.png){width=60% #fig:GraphToposort}
+::: {.jsav-figure #fig:GraphToposort}
+``` {src="Graph/topSortCON.js"}
+```
+An example graph for topological sort.
+Seven tasks have dependencies as shown by the directed graph.
+:::
 
 #### Depth-first algorithm
 

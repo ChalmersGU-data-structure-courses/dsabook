@@ -28,9 +28,11 @@ vertex 4. The list for vertex 2 stores an entry for vertex 4 because
 there is an edge from vertex 2 to vertex 4, but no entry for vertex 3
 because this edge comes into vertex 2 rather than going out.
 
-<!-- <inlineav id="GdirRepCON" src="Graph/GdirRepCON.js" name="Graph/GdirRepCON" links="Graph/GraphDefCON.css" static/> -->
-
-![Representing a directed graph](images/GraphRepresentDirected.png){width=80% #fig:GraphRepresentDirected}
+::: {.jsav-figure #fig:GraphRepresentDirected}
+``` {src="Graph/GdirRepCON.js" links="Graph/GraphDefCON.css"}
+```
+Representing a directed graph
+:::
 
 Both the adjacency matrix and the adjacency list can be used to store
 directed or undirected graphs. Each edge of an undirected graph
@@ -41,9 +43,11 @@ as many edge entries in both the adjacency matrix and the adjacency
 list. For example, for the undirected graph, the list for vertex 2
 stores an entry for both vertex 3 and vertex 4.
 
-<!-- <inlineav id="GundirRepCON" src="Graph/GundirRepCON.js" name="Graph/GundirRepCON" links="Graph/GraphDefCON.css" static/> -->
-
-![Representing an undirected graph](images/GraphRepresentUndirected.png){width=80% #fig:GraphRepresentUndirected}
+::: {.jsav-figure #fig:GraphRepresentUndirected}
+``` {src="Graph/GundirRepCON.js" links="Graph/GraphDefCON.css"}
+```
+Representing an undirected graph
+:::
 
 The storage requirements for the adjacency list depend on both the
 number of edges and the number of vertices in the graph. There must be
@@ -73,9 +77,11 @@ associated edge. The second is the value for the weight. As with the
 adjacency matrix, this value requires space to represent, typically an
 integer.
 
-<!-- <inlineav id="GweightedCON" src="Graph/GweightedCON.js" name="Graph/GweightedCON" links="Graph/GraphDefCON.css" static/> -->
-
-![Representing a weighted graph](images/GraphRepresentWeighted.png){width=80% #fig:GraphRepresentWeighted}
+::: {.jsav-figure #fig:GraphRepresentWeighted}
+``` {src="Graph/GweightedCON.js" links="Graph/GraphDefCON.css"}
+```
+Representing a weighted graph
+:::
 
 Which graph representation is more space efficient depends on the number
 of edges in the graph. The adjacency list stores information only for

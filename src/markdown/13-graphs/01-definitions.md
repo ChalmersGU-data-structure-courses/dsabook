@@ -35,9 +35,11 @@ whose edges have weights (as in (c)) is said to be a
 [weighted graph]{.term}.
 These are depicted in @fig:GraphTypes.
 
-<!-- <inlineav id="GdirundirCON" src="Graph/GdirundirCON.js" name="Graph/GdirundirCON" links="Graph/GraphDefCON.css" static/> -->
-
-![Some types of graphs](images/GraphTypes.png){width=90% #fig:GraphTypes}
+::: {.jsav-figure #fig:GraphTypes}
+``` {src="Graph/GdirundirCON.js" links="Graph/GraphDefCON.css"}
+```
+Some types of graphs
+:::
 
 An edge connecting vertices $a$ and $b$ is written $(a, b)$. Such an
 edge is said to be [incident]{.term} with
@@ -54,9 +56,11 @@ edges going out from it), while the [in degree]{.term} is the number of neighbou
 edges coming in to it). In @fig:GraphTypes (c), the in degree of vertex 1 is two,
 and its out degree is one.
 
-<!-- <inlineav id="GneighbourCON" src="Graph/GneighbourCON.js" name="Graph/GneighbourCON" links="Graph/GraphDefCON.css" static/> -->
-
-![Neighbors and incidence](images/GraphNeighbors.png){width=80% #fig:GraphNeighbors}
+::: {.jsav-figure #fig:GraphNeighbors}
+``` {src="Graph/GneighbourCON.js" links="Graph/GraphDefCON.css"}
+```
+Neighbors and incidence
+:::
 
 A sequence of vertices $v_1, v_2, ..., v_n$ forms a
 [path]{.term} of length $n-1$ if there exist
@@ -68,18 +72,22 @@ $v_1$ to itself. A cycle is a [simple cycle]{.term} if the path is simple, excep
 vertices being the same.
 These are depicted in @fig:GraphPaths.
 
-<!-- <inlineav id="GpathDefCON" src="Graph/GpathDefCON.js" name="Graph/GpathDefCON" links="Graph/GraphDefCON.css" static/> -->
-
-![Different types of paths](images/GraphPaths.png){width=90% #fig:GraphPaths}
+::: {.jsav-figure #fig:GraphPaths}
+``` {src="Graph/GpathDefCON.js" links="Graph/GraphDefCON.css"}
+```
+Different types of paths
+:::
 
 An undirected graph is a [connected graph]{.term} if there is at least one path from any vertex to any other.
 The maximally connected subgraphs of an undirected graph are called
 [connected components](#connected-component){.term}. For example, @fig:GraphConnectedComponents shows an undirected graph with
 three connected components.
 
-<!-- <inlineav id="GconcomCON" src="Graph/GconcomCON.js" name="Graph/GconcomCON" links="Graph/GraphDefCON.css" static/> -->
-
-![An undirected graph with three connected components](images/GraphConnectedComponents.png){width=35% #fig:GraphConnectedComponents}
+::: {.jsav-figure #fig:GraphConnectedComponents}
+``` {src="Graph/GconcomCON.js" links="Graph/GraphDefCON.css"}
+```
+An undirected graph with three connected components
+:::
 
 A graph with relatively few edges is called a
 [sparse graph]{.term}, while a graph with many
@@ -95,17 +103,21 @@ graph connect to all other vertices in the subgraph is called a
 [clique]{.term}.
 See @fig:GraphSparseDense for examples of these kinds of graphs.
 
-<!-- <inlineav id="GsparseDefCON" src="Graph/GsparseDefCON.js" name="Graph/GsparseDefCON" links="Graph/GraphDefCON.css" static/> -->
-
-![Sparse, dense and complete graphs](images/GraphSparseDense.png){width=100% #fig:GraphSparseDense}
+::: {.jsav-figure #fig:GraphSparseDense}
+``` {src="Graph/GsparseDefCON.js" links="Graph/GraphDefCON.css"}
+```
+Sparse, dense and complete graphs
+:::
 
 A graph without cycles is called an [acyclic graph]{.term}. Thus, a directed graph without cycles is called a
 [directed acyclic graph]{.term} or [DAG]{.term}.
 They are shown in @fig:GraphAcyclic.
 
-<!-- <inlineav id="GacyclicDefCON" src="Graph/GacyclicDefCON.js" name="Graph/GacyclicDefCON" links="Graph/GraphDefCON.css" static/> -->
-
-![Acyclic graph types](images/GraphAcyclic.png){width=80% #fig:GraphAcyclic}
+::: {.jsav-figure #fig:GraphAcyclic}
+``` {src="Graph/GacyclicDefCON.js" links="Graph/GraphDefCON.css"}
+```
+Acyclic graph types
+:::
 
 A [free tree]{.term} is a connected, undirected
 graph with no simple cycles. An equivalent definition is that a free

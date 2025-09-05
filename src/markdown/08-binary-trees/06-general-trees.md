@@ -46,14 +46,16 @@ a collection of one or more trees.
 @Fig:GeneralTree presents further tree
 notation generalised from the notation for binary trees.
 
-<!-- <inlineav id="GenTreeCON" src="General/GenTreeCON.js" name="General/GenTreeCON" links="General/GenTreeCON.css" static/> -->
-
-![Notation for general trees. Node $P$ is the parent of nodes $V$, $S1$,
-and $S2$. Thus, $V$, $S1$, and $S2$ are children of $P$. Nodes $R$ and
-$P$ are ancestors of $V$. Nodes $V$, $S1$, and $S2$ are called
-[siblings]{.term}. The oval surrounds
-the subtree having $V$ as its root.
-](images/GeneralTree.png){width=70% #fig:GeneralTree}
+::: {.jsav-figure #fig:GeneralTree}
+``` {src="General/GenTreeCON.js" links="General/GenTreeCON.css"}
+```
+Notation for general trees.
+Node **P** is the parent of nodes **V**, **S1**, and **S2**.
+Thus, **V**, **S1**, and **S2** are children of **P**.
+Nodes **R** and **P** are ancestors of **V**.
+Nodes **V**, **S1**, and **S2** are called [siblings]{.term}.
+The oval surrounds the subtree having **V** as its root.
+:::
 
 Each node in a tree has precisely one parent, except for the root, which
 has no parent. From this observation, it immediately follows that a tree

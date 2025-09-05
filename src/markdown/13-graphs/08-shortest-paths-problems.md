@@ -46,9 +46,11 @@ from $A$ to $D$. Because there is no edge from $E$ to $B$,
 $\mathbf{w}(E, B) = \infty$. Note that $\mathbf{w}(D, A) = \infty$
 because the graph is directed. We assume that all weights are positive.
 
-<!-- <inlineav id="DistanceExampCON" src="Graph/DistanceExampCON.js" name="Graph/DistanceExampCON" static/> -->
-
-![Example graph for shortest-path definitions](images/GraphShortestPath.png){width=40% #fig:GraphShortestPath}
+::: {.jsav-figure #fig:GraphShortestPath}
+``` {src="Graph/DistanceExampCON.js"}
+```
+Example graph for shortest-path definitions
+:::
 
 <!--
 ### Use cases for shortest paths

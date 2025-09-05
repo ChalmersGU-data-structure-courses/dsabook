@@ -27,13 +27,14 @@ of edges forms a tree, it spans the vertices (i.e., it connects them
 together), and it has minimum cost.
 @Fig:GraphMST shows the MST for an example graph.
 
-<!-- <inlineav id="MCSTCON" src="Graph/MCSTCON.js" name="Graph/MCSTCON" static/> -->
-
-![A graph and its MST. All edges appear in the original graph. Those
-edges drawn with heavy lines indicate the subset making up the MST.
-Note that edge $(C, F)$ could be replaced with edge $(D, F)$ to form a
-different MST with equal cost.
-](images/GraphMST.png){width=40% #fig:GraphMST}
+::: {.jsav-figure #fig:GraphMST}
+``` {src="Graph/MCSTCON.js"}
+```
+A graph and its MST.
+All edges appear in the original graph.
+Those edges drawn with heavy lines indicate the subset making up the MST.
+Note that edge $(C, F)$ could be replaced with edge $(D, F)$ to form a different MST with equal cost.
+:::
 
 <!--
 ### Use cases for minimum spanning trees
