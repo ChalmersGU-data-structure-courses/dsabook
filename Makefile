@@ -21,9 +21,8 @@ MD_FILES  := $(sort $(wildcard $(MARKDOWN)/$(CHAPTER)*/*.md) $(wildcard $(MARKDO
 
 # Tools
 PYTHON    := python3
-PANDOC    := pandoc --verbose --resource-path=$(RSC) --data-dir=pandoc --defaults=dsabook.yaml
+PANDOC    := pandoc --resource-path=$(RSC) --data-dir=pandoc --defaults=dsabook.yaml
 HTMLTEST  := htmltest
-
 
 default: install
 
@@ -41,7 +40,7 @@ preprocess: clean
 pandoc: preprocess
 	@mkdir -p $(BUILD)
 	@echo "Running pandoc..."
-	time $(PANDOC) $(DRAFT) --output=$(HTML) $(TEMP)/*.md
+	@time $(PANDOC) --output=$(HTML) $(TEMP)/*.md
 	@rm -fr $(TEMP)
 
 postprocess: pandoc
@@ -55,9 +54,6 @@ install: postprocess
 	@cp -r $(SRC)/khan-exercises $(BUILD)/ || true
 	@cp -r $(RSC)/*              $(BUILD)/ || true
 	@cp -r $(LIB)                $(BUILD)/ || true
-
-draft: DRAFT = --metadata=draft
-draft: install
 
 deploy: install
 	@echo "Deploying..."
