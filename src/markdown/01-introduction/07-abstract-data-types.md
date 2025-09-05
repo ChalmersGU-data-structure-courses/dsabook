@@ -119,13 +119,10 @@ on physical implementations for a given data structure. Other sections
 use the logical ADT for the data structure in the context of a
 higher-level task.
 
-:::: figure
-#### Figure: ADTs, data structures, and data items
-
-<inlineav id="ADTCON" src="Design/ADTCON.js" name="Design/ADTCON" links="Design/ADTCON.css" static/>
-
-The relationship between data items, abstract data types, and data
-structures.
+:::: {.jsav-figure #fig:ADTCON}
+``` {src="Design/ADTCON.js" links="Design/ADTCON.css"}
+```
+The relationship between data items, abstract data types, and data structures.
 :::: -->
 
 <!-- As we saw, the ADT defines the logical form of the data type, while the

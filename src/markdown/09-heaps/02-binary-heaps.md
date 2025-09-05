@@ -25,38 +25,37 @@ The root node is assigned index 0, its left child index 1, its right child index
 This systematic numbering ensures that each node's position in the array directly corresponds to its logical position in the tree, making it easy to compute the indices of parent and child nodes using simple arithmetic.
 @Fig:example_complete_bintree shows an example of a complete binary tree with 12 nodes, where the nodes are numbered according to this scheme.
 
-<div id="fig:example_complete_bintree">
-
-::: latex
-\begin{forest}
-for tree={circle,draw,l=0,s sep=5mm}, [0 [1 [3 [7] [8]] [4 [9] [10]]] [2 [5 [11] [,phantom]] [6]]]
-\end{forest}
-:::
-
-::: online
-<inlineav id="CompleteBinTree" src="Binary/CompleteBinTree.js" name="Binary/CompleteBinTree" static/>
-:::
-
+::: {.jsav-figure #fig:example_complete_bintree}
+``` {src="Binary/CompleteBinTree.js"}
+```
 Complete binary tree node numbering
-</div>
+:::
 
 An array can store the data values of the tree efficiently, placing each value in the array position corresponding to that node's position within the tree.
-For example, the following binary heap:
+For example, the binary heap in @fig:HeapTreeExample is represented in an array as in @fig:HeapArrayExample.
 
-::: latex
-\begin{center}
-\begin{forest}
-for tree={circle,draw,l=0,s sep=5mm}, [A [L [O] [R]] [G [I] [,phantom]]]
-\end{forest}
-\end{center}
+::: {.jsav-figure #fig:HeapTreeExample}
+```
+var av = NewAV();
+var btTop = -5;
+var btLeft = 300;
+var bt = av.ds.binarytree({nodegap: 25, left: btLeft, top: btTop});
+bt.root("A");
+var rt = bt.root();
+rt.left("L");
+rt.left().left("O");
+rt.left().right("R");
+rt.right("G");
+rt.right().left("I");
+bt.layout();
+av.displayInit();
+av.recorded();
+```
+An example binary heap
 :::
 
-::: online
-![An example binary heap](images/BinTreeHeap.png){width=30% #fig:HeapTreeExample}
-:::
 
-is represented in an array as follows:
-
+<!-- TODO: convert this into a JSAV figure
 ::: latex
 \begin{center}
 \scalebox{0.8}{
@@ -67,19 +66,15 @@ is represented in an array as follows:
         \node at (\i*1.5 + 0.75, 0.5) {\val};
         \node[below=3pt] at (\i*1.5 + 0.75, 0) {\i};
     }
-
     \draw[->] (1*1.5 + 0.75, 1) to[out=60, in=120] node[below] {left} (3*1.5 + 0.75, 1);
     \draw[->] (1*1.5 + 0.75, 1) to[out=70, in=110] node[above] {right} (4*1.5 + 0.75, 1);
     \draw[->] (1*1.5 + 0.75, 1) to[out=120, in=60] node[above] {parent} (0*1.5 + 0.75, 1);
-
 \end{tikzpicture}
 }
 \end{center}
-:::
+::: -->
 
-::: online
 ![Array representation of the example heap](images/ArrayHeap.png){width=40% #fig:HeapArrayExample}
-:::
 
 You can use simple formulas to compute the array index of a node's relatives in a complete binary tree with $n$ nodes, given a node at index $i$:
 
@@ -340,7 +335,8 @@ into the heap one by one.
 :::::: online
 Consider this example, with two possible ways to heapify the array [1,2,3,4,5,6,7] into a *max*-heap:
 
-<inlineav id="HeapBldChoiceCON" src="Binary/HeapBldChoiceCON.js" script="DataStructures/binaryheap.js" name="Heap Build Choices" static/>
+``` {.jsav-figure src="Binary/HeapBldChoiceCON.js" script="DataStructures/binaryheap.js"}
+```
 
 - The upper (a) heap is built by a series of nine exchanges in the order (4-2), (4-1), (2-1), (5-2), (5-4), (6-3), (6-5), (7-5), (7-6).
 - The lower (b) heap is built by a series of four exchanges in the order (5-2), (7-3), (7-1), (6-1).
@@ -354,7 +350,8 @@ One good algorithm stems from induction. Suppose that the left and right
 subtrees of the root are already heaps, and $R$ is the name of the
 element at the root. This situation is illustrated by this figure:
 
-<inlineav id="HeapsIndCON" src="Binary/HeapsIndCON.js" name="Binary/HeapsIndCON" links="Binary/HeapsIndCON.css" static/>
+``` {.jsav-figure src="Binary/HeapsIndCON.js" links="Binary/HeapsIndCON.css"}
+```
 
 In this case there are two possibilities.
 

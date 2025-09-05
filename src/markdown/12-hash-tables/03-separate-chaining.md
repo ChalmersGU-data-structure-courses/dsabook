@@ -22,12 +22,15 @@ in the table (open addressing).
 
 The simplest form of separate chaining defines each slot in the hash
 table to be the head of a linked list. All records that hash to a
-particular slot are placed on that slot's linked list. The following
-figure illustrates a hash table where each slot points to a linked list
-to hold the records associated with that slot. The hash function used is
-the simple mod function.
+particular slot are placed on that slot's linked list.
+@Fig:openhashCON illustrates a separate chaining hash table.
 
-<inlineav id="openhashCON" src="Hashing/openhashCON.js" name="Hashing/openhashCON" links="Hashing/openhashCON.css" static/>
+::: {.jsav-figure #fig:openhashCON}
+``` {src="Hashing/openhashCON.js" links="Hashing/openhashCON.css"}
+```
+A hash table where each slot points to a linked list to hold the records associated with that slot.
+The hash function used is the simple mod function.
+:::
 
 Records within a slot's list can be ordered in several ways: by
 insertion order, by key value order, or by frequency-of-access order.

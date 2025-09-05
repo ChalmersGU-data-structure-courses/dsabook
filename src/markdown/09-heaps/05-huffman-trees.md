@@ -358,7 +358,8 @@ This figure shows an impossible Huffman tree, where the two nodes
 with least weight, $l_1$ and $l_2$, are not the deepest nodes in the
 tree. Triangles represent subtrees.
 
-<inlineav id="HuffProofCON" src="Binary/HuffProofCON.js" name="Binary/HuffProofCON" links="Binary/HuffProofCON.css" static/>
+``` {.jsav-figure src="Binary/HuffProofCON.js" links="Binary/HuffProofCON.css"}
+```
 :::
 
 Using this lemma we can prove the following theorem:

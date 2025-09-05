@@ -233,9 +233,11 @@ child and the other one its right child.
 The recursive relationships used to define a structure provide a natural
 model for any recursive algorithm on the structure.
 
-<inlineav id="ListRecDSCON" src="Binary/ListRecDSCON.js" name="Binary/ListRecDSCON" links="Binary/RecursiveDSCON.css" static/>
+``` {.jsav-figure src="Binary/ListRecDSCON.js" links="Binary/RecursiveDSCON.css"}
+```
 
-<inlineav id="BinRecDSCON" src="Binary/BinRecDSCON.js" name="Binary/BinRecDSCON" links="Binary/RecursiveDSCON.css" static/>
+``` {.jsav-figure src="Binary/BinRecDSCON.js" links="Binary/RecursiveDSCON.css"}
+```
 ::::
 
 One way to think about recursion is to see it as *delegation*:

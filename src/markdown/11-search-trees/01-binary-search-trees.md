@@ -23,31 +23,13 @@ tree property is that if the BST nodes are printed using an
 [inorder traversal]{.term}, then the resulting enumeration will be in sorted order from
 lowest to highest.
 
-<div id="fig:BSTShape">
-
-::: latex
-\phantom{.}\hfill
-\subbottom[]{
-    \begin{forest}
-    for tree={circle,draw,fit=rectangle},
-    [37 [24 [7] [32]] [42 [NULL,rectangle,phantom] [120]]]
-    \end{forest}
-}\hfill\hfill\subbottom[]{
-    \begin{forest}
-    for tree={circle,draw,fit=rectangle},
-    [7 [NULL,rectangle,phantom] [37 [32 [24] [NULL,rectangle,phantom]] [120 [42] [NULL,rectangle,phantom]]]]
-    \end{forest}
-}\hfill\phantom{.}
-:::
-
-::: online
-<inlineav id="BSTShapeCON" src="Binary/BSTShapeCON.js" name="Binary/BSTShapeCON" links="Binary/BSTShapeCON.css" static/>
-:::
-
+::: {.jsav-figure #fig:BSTShape}
+``` {src="Binary/BSTShapeCON.js" links="Binary/BSTShapeCON.css"}
+```
 Two Binary Search Trees for a collection of values.
 Tree (a) results if values are inserted in the order 37, 24, 42, 120, 32, 7.
 Tree (b) results if the same values are inserted in the order 7, 37, 42, 32, 120, 24.
-</div>
+:::
 
 The only thing that differentiates a BST from a normal binary tree is the BST property.
 This property is an *invariant*, as as explained in @sec:invariants-preconditions-and-postconditions,

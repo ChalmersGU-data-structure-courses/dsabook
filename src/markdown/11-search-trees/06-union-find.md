@@ -110,9 +110,9 @@ array. Class `ParentPointerTree` creates and initialises the **Union/Find** arra
 and methods **Union** and **Find** take array indices as inputs.
 @Fig:UFfig visualises the parent pointer array.
 
-<div id="fig:UFfig">
-<inlineav id="UFfigCON" src="General/UFfigCON.js" name="General/UFfigCON" links="General/UFCON.css" static/>
-
+::: {.jsav-figure #fig:UFfig}
+``` {src="General/UFfigCON.js" links="General/UFCON.css"}
+```
 The parent pointer array implementation. Each node corresponds to a
 position in the node array, which stores its value and a pointer to its
 parent. The parent pointers are represented by an array index
@@ -121,7 +121,7 @@ a special value, such as -1. This is represented graphically in the
 figure by a slash in the "Parent's Index" box. This figure shows two
 trees stored in the same parent pointer array, one rooted at $F$ (with a
 total of 9 nodes), and the other rooted at $J$ (with a total of 1 node).
-</div>
+:::
 
 ### Equivalence classes
 
@@ -141,14 +141,14 @@ There are many practical uses for disjoint sets and representing
 equivalences. For example, consider the graph of ten nodes labeled $A$
 through $J$, in @fig:UFconcom.
 
-<div id="fig:UFconcom">
-<inlineav id="UFconcomCON" src="General/UFconcomCON.js" name="General/UFconcomCON" links="General/UFCON.css" static/>
-
+::: {.jsav-figure #fig:UFconcom}
+``` {src="General/UFconcomCON.js" links="General/UFCON.css"}
+```
 A graph with two connected components. The tree of
 @fig:UFfig shows the corresponding
 tree structure resulting form processing the edges to determine the
 connected components.
-</div>
+:::
 
 Notice that for nodes $A$ through $I$, there is some series of edges
 that connects any pair of these nodes, but node $J$ is disconnected from
