@@ -23,13 +23,21 @@ metadata:
   # Doesn't work, don't know why:
   # subfigureChildTemplate: ($$i$$)
 
+  # Settings for panflute:
+  panflute-path: pandoc/filters
+  panflute-filters:
+    - remove-classes
+    - max-header-numbering
+    - make-details
+    - latex-figure
+
 
 variables:
   lang: en-GB
 
 
 filters:
-  - html-filter.py
+  - panflute
   - pandoc-plot
   - pandoc-crossref
 
