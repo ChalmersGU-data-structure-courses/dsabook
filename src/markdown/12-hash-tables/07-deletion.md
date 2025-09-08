@@ -31,7 +31,8 @@ actually be inserted into the slot of the first tombstone encountered.
 ::: dsvis
 The deletion process in action.
 
-<inlineav id="hashdelCON" src="Hashing/hashdelCON.js" name="Hash Deletion Slideshow" links="Hashing/collisionCON.css"/>
+``` {.jsav-animation src="Hashing/hashdelCON.js" links="Hashing/collisionCON.css"}
+```
 :::
 
 ::: dsvis

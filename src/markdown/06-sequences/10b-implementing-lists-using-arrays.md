@@ -37,7 +37,8 @@ size counter is set to 0 because there are no elements yet.
 ::: dsvis
 The internals of an array-based list.
 
-<inlineav id="StaticArrayList-Vars-CON" src="ChalmersGU/StaticArrayList-Vars-CON.js" name="Static Array-based List Variables Slideshow"/>
+``` {.jsav-animation src="ChalmersGU/StaticArrayList-Vars-CON.js"}
+```
 :::
 
     datatype ArrayList implements List:
@@ -55,7 +56,8 @@ Random access to any element in the list is quick and easy.
 ::: dsvis
 Finding a value by its position.
 
-<inlineav id="StaticArrayList-Intro-CON" src="ChalmersGU/StaticArrayList-Intro-CON.js" name="Static Array-based List Intro Slideshow" links="ChalmersGU/CGU-Styles.css"/>
+``` {.jsav-animation src="ChalmersGU/StaticArrayList-Intro-CON.js" links="ChalmersGU/CGU-Styles.css"}
+```
 :::
 
 As you can see below, there are no loops in the methods `get` and `set`,
@@ -83,7 +85,8 @@ Appending elements at the tail of an array-based list is super-fast.
 ::: dsvis
 Appending to the end of an array-based list.
 
-<inlineav id="StaticArrayList-Append-CON" src="ChalmersGU/StaticArrayList-Append-CON.js" name="Static Array-based List Append Slideshow" links="ChalmersGU/CGU-Styles.css"/>
+``` {.jsav-animation src="ChalmersGU/StaticArrayList-Append-CON.js" links="ChalmersGU/CGU-Styles.css"}
+```
 :::
 
 However, adding an element at the head of the list requires shifting all
@@ -92,7 +95,8 @@ existing elements in the array by one position toward the tail.
 ::: dsvis
 Inserting at the head of the list.
 
-<inlineav id="StaticArrayList-Add-CON" src="ChalmersGU/StaticArrayList-Add-CON.js" name="Static Array-based List Insertion Slideshow" links="ChalmersGU/CGU-Styles.css"/>
+``` {.jsav-animation src="ChalmersGU/StaticArrayList-Add-CON.js" links="ChalmersGU/CGU-Styles.css"}
+```
 :::
 
 Therefore, if we want to add an element at position $i$, then
@@ -129,7 +133,8 @@ must shift toward the head, as shown in the following slideshow.
 ::: dsvis
 Removing an element at a certain position in the list.
 
-<inlineav id="StaticArrayList-Remove-CON" src="ChalmersGU/StaticArrayList-Remove-CON.js" name="Static Array-based List Remove" links="ChalmersGU/CGU-Styles.css"/>
+``` {.jsav-animation src="ChalmersGU/StaticArrayList-Remove-CON.js" links="ChalmersGU/CGU-Styles.css"}
+```
 :::
 
 In the worst case, insertion or removal each requires moving all $n$

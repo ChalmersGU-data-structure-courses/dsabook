@@ -124,7 +124,8 @@ This is because we initially put the pivot first in the subarray, so the value t
 ::: dsvis
 Here is a visualisation of the partitioning algorithm.
 
-<inlineav id="quicksortCON" src="Sorting/quicksortCON.js" script="Sorting/quicksortCODE.js" name="Quicksort Partition Slideshow" links="Sorting/quicksortCON.css"/>
+``` {.jsav-animation src="Sorting/quicksortCON.js" scripts="Sorting/quicksortCODE.js" links="Sorting/quicksortCON.css"}
+```
 :::
 
 ::: dsvis
@@ -147,7 +148,8 @@ The total cost of the partition operation is constrained by how far `left` and `
 ::: dsvis
 Here is a visualisation illustrating the running time analysis of the partition function.
 
-<inlineav id="QuickSortPartitionAnalysisCON" src="Sorting/QuickSortPartitionAnalysisCON.js" name="Quicksort Partition Analysis Slideshow" links="Sorting/QuickSortPartitionAnalysisCON.css"/>
+``` {.jsav-animation src="Sorting/QuickSortPartitionAnalysisCON.js" links="Sorting/QuickSortPartitionAnalysisCON.css"}
+```
 :::
 
 :::::: online
@@ -195,7 +197,8 @@ Therefore, the worst case running time of Quicksort is $O(n^2)$.
 ::: dsvis
 This visualisation explains the worst-case running time of Quicksort
 
-<inlineav id="QuickSortWorstCaseCON" src="Sorting/QuickSortWorstCaseCON.js" name="Quicksort Worst Case Analysis Slideshow" links="Sorting/QuickSortWorstCaseCON.css"/>
+``` {.jsav-animation src="Sorting/QuickSortWorstCaseCON.js" links="Sorting/QuickSortWorstCaseCON.css"}
+```
 :::
 
 This is terrible, no better than Insertion or Selection sort. When will
@@ -222,7 +225,8 @@ So the best-case running time of Quicksort is $O(n \log n)$.
 ::: dsvis
 This visualisation explains the best-case running time of Quicksort
 
-<inlineav id="QuickSortBestCaseCON" src="Sorting/QuickSortBestCaseCON.js" name="Quicksort Best Case Analysis Slideshow" links="Sorting/QuickSortBestCaseCON.css"/>
+``` {.jsav-animation src="Sorting/QuickSortBestCaseCON.js" links="Sorting/QuickSortBestCaseCON.css"}
+```
 :::
 
 #### Average-case complexity
@@ -247,7 +251,8 @@ T(0) = T(1) &= c
 This visualisation will help you to understand how this recurrence
 relation was formed.
 
-<inlineav id="QuickSortAverageCaseCON" src="Sorting/QuickSortAverageCaseCON.js" name="Quicksort Average Case Analysis Slideshow" links="Sorting/QuickSortAverageCaseCON.css"/>
+``` {.jsav-animation src="Sorting/QuickSortAverageCaseCON.js" links="Sorting/QuickSortAverageCaseCON.css"}
+```
 :::
 
 This is an unusual situation that the average case cost and the worst

@@ -15,7 +15,8 @@ A simple conversion of the array-based stack implementation is not efficient.
 ::: dsvis
 Array queue -- positions.
 
-<inlineav id="aqueueFirstCON" src="List/aqueueFirstCON.js" name="Array-based Queue Positions Slideshow" links="List/aqueueCON.css"/>
+``` {.jsav-animation src="List/aqueueFirstCON.js" links="List/aqueueCON.css"}
+```
 :::
 
 A more efficient implementation can be obtained by relaxing the requirement that all elements of the queue must be in the beginning of the array.
@@ -27,13 +28,15 @@ This means that we need two variables, for the positions of the front and the re
 ::: dsvis
 Array queue -- drifting.
 
-<inlineav id="aqueueDriftCON" src="List/aqueueDriftCON.js" name="Array-based Queue Drift Slideshow" links="List/aqueueCON.css"/>
+``` {.jsav-animation src="List/aqueueDriftCON.js" links="List/aqueueCON.css"}
+```
 :::
 
 ::: dsvis
 Array queue -- bad representation.
 
-<inlineav id="aqueueBadCON" src="List/aqueueBadCON.js" name="Array-based Queue Bad Representation Slideshow" links="List/aqueueCON.css"/>
+``` {.jsav-animation src="List/aqueueBadCON.js" links="List/aqueueCON.css"}
+```
 :::
 
 ### Circular queues
@@ -49,7 +52,8 @@ Instead of just using $i+1$ for the next position, we have to use $(i+1)\mathop{
 ::: dsvis
 Circular array queue.
 
-<inlineav id="aqueueCircularCON" src="List/aqueueCircularCON.js" script="DataStructures/CircularQueue.js" name="Circular Array-based Queue Slideshow" links="List/aqueueCON.css"/>
+``` {.jsav-animation src="List/aqueueCircularCON.js" scripts="DataStructures/CircularQueue.js" links="List/aqueueCON.css"}
+```
 :::
 
 There remains one more subtle problem to the array-based queue implementation.
@@ -58,7 +62,8 @@ How can we recognise when the queue is empty or full?
 ::: dsvis
 Circular array queue -- empty.
 
-<inlineav id="aqueueEmptyCON" src="List/aqueueEmptyCON.js" script="DataStructures/CircularQueue.js" name="Empty Circular Array-based Queue Slideshow" links="List/aqueueCON.css"/>
+``` {.jsav-animation src="List/aqueueEmptyCON.js" scripts="DataStructures/CircularQueue.js" links="List/aqueueCON.css"}
+```
 :::
 
 If the array has size $n$, then it can store queues of size $0$ to $n$ --

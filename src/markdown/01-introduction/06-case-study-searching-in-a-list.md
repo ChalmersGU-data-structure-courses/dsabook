@@ -98,7 +98,8 @@ Here is the method in pseudocode:
 ::: dsvis
 And here is an illustration of the binary search algorithm.
 
-<inlineav id="binarySearchCON" src="Searching/binarySearchCON.js" name="Binary Search Algorithm Slideshow" links="Searching/binarySearchCON.css"/>
+``` {.jsav-animation src="Searching/binarySearchCON.js" links="Searching/binarySearchCON.css"}
+```
 :::
 
 With the right math techniques, it is not too hard to show that the cost of binary search on an array of $n$ values is at most $\log_2 n$.

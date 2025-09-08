@@ -37,13 +37,15 @@ following slideshows present this in more detail.
 ::: dsvis
 TODO
 
-<inlineav id="TreeTimelineCON" src="Development/TreeTimelineCON.js" name="Tree timeline Slideshow" links="Development/TreeTrieCON.css"/>
+``` {.jsav-animation src="Development/TreeTimelineCON.js" links="Development/TreeTrieCON.css"}
+```
 :::
 
 ::: dsvis
 TODO
 
-<inlineav id="TrieTimelineCON" src="Development/TrieTimelineCON.js" name="Trie timeline Slideshow" links="Development/TreeTrieCON.css"/>
+``` {.jsav-animation src="Development/TrieTimelineCON.js" links="Development/TreeTrieCON.css"}
+```
 :::
 
 ### Analogy between search trees and Quicksort

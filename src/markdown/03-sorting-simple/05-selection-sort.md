@@ -45,7 +45,8 @@ That version of Selection sort would behave very similar to our Bubble sort impl
 ::: dsvis
 Consider the example of the following array.
 
-<inlineav id="selectionsortS1CON" src="Sorting/selectionsortS1CON.js" name="Selection Sort Slideshow 1" links="Sorting/selectionsortSCON.css"/>
+``` {.jsav-animation src="Sorting/selectionsortS1CON.js" links="Sorting/selectionsortSCON.css"}
+```
 :::
 
 ::: dsvis
@@ -53,7 +54,8 @@ Now we continue with the second pass.
 
 However, since the smallest element is already at the beginning, we will not need to look at it again.
 
-<inlineav id="selectionsortS2CON" src="Sorting/selectionsortS2CON.js" name="Selection Sort Slideshow 2" links="Sorting/selectionsortSCON.css"/>
+``` {.jsav-animation src="Sorting/selectionsortS2CON.js" links="Sorting/selectionsortSCON.css"}
+```
 :::
 
 Selection sort continues in this way until the entire array is sorted.
@@ -93,7 +95,8 @@ So, Selection sort makes a linear number of swaps, $O(n)$.
 ::: dsvis
 This visualisation analyses the number of comparisons and swaps required by Selection sort.
 
-<inlineav id="SelectionSortAnalysisCON" src="Sorting/SelectionSortAnalysisCON.js" name="Selection Sort Analysis Slideshow" links="Sorting/SelectionSortAnalysisCON.css"/>
+``` {.jsav-animation src="Sorting/SelectionSortAnalysisCON.js" links="Sorting/SelectionSortAnalysisCON.css"}
+```
 :::
 
 <!-- The following is only interesting for low-level languages (e.g. C), other languages do this by default, so we skip it.
@@ -108,6 +111,7 @@ visualisation. Additional space is needed to store the pointers, but the
 return is a faster swap operation.
 
 :::: {#PointerSwap}
-<inlineav id="ptrSwapCON" src="Sorting/ptrSwapCON.js" name="Selection Sort Pointer Swap" links="Sorting/ptrSwapCON.css"/>
+``` {.jsav-animation src="Sorting/ptrSwapCON.js" links="Sorting/ptrSwapCON.css"}
+```
 ::::
 -->

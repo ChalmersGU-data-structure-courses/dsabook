@@ -14,7 +14,8 @@ This is because it always looks at every element in the array exactly once.
 ::: dsvis
 Consider the problem of finding the factorial of $n$.
 
-<inlineav id="AnalCasesSameCON" src="AlgAnal/AnalCasesSameCON.js" name="Simple analysis cases slideshow" links="AlgAnal/AnalCasesCON.css"/>
+``` {.jsav-animation src="AlgAnal/AnalCasesSameCON.js" links="AlgAnal/AnalCasesCON.css"}
+```
 :::
 
 For most algorithms however, different inputs of a given size require different amounts of time.
@@ -33,7 +34,8 @@ However, note that the average case depends on an important assumption: that the
 ::: dsvis
 Here is an example.
 
-<inlineav id="AnalCasesDiffCON" src="AlgAnal/AnalCasesDiffCON.js" name="Best, Worst, and Average cases slideshow" links="AlgAnal/AnalCasesCON.css"/>
+``` {.jsav-animation src="AlgAnal/AnalCasesDiffCON.js" links="AlgAnal/AnalCasesCON.css"}
+```
 :::
 
 When analysing an algorithm, should we study the best, worst, or average

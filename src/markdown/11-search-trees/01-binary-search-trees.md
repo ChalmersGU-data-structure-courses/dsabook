@@ -187,7 +187,8 @@ When the key is found it returns the value of the node, and if the key doesn't e
 ::: dsvis
 Here is an interactive explanation of searching in a BST.
 
-<inlineav id="BSTsearchCON" src="Binary/BSTsearchCON.js" name="BST Search Slideshow" links="Binary/BSTCON.css"/>
+``` {.jsav-animation src="Binary/BSTsearchCON.js" links="Binary/BSTCON.css"}
+```
 :::
 
 ::: dsvis
@@ -225,7 +226,8 @@ We do the same as for `getHelper` as for `putHelper` above, but we have to updat
 ::: dsvis
 Here is an interactive explanation of recursive insertion.
 
-<inlineav id="BSTinsertCON" src="Binary/BSTinsertCON.js" name="BST Insert Slideshow" links="Binary/BSTCON.css"/>
+``` {.jsav-animation src="Binary/BSTinsertCON.js" links="Binary/BSTCON.css"}
+```
 :::
 
 Note that, except for the last node in the path, `putHelper` will not
@@ -289,7 +291,8 @@ maintained.
 ::: dsvis
 Here is an interactive explanation of BST deletion.
 
-<inlineav id="BSTremoveCON" src="Binary/BSTremoveCON.js" name="BST remove Slideshow" links="Binary/BSTCON.css"/>
+``` {.jsav-animation src="Binary/BSTremoveCON.js" links="Binary/BSTCON.css"}
+```
 :::
 ::::::
 
@@ -477,7 +480,8 @@ leaf node.
 Here is a problem that typically needs to visit more than just a single
 path, but not all of the nodes.
 
-<inlineav id="IneffBinaryTreeRangeCON" src="Binary/IneffBinaryTreeRangeCON.js" name="Inefficient Binary Tree Traversal on Range Slide Show" links="Binary/BSTCON.css"/>
+``` {.jsav-animation src="Binary/IneffBinaryTreeRangeCON.js" links="Binary/BSTCON.css"}
+```
 :::
 
 <!-- ### Binary Search Tree Small Count Exercise -->

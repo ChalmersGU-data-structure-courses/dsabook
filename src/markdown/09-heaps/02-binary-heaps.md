@@ -170,7 +170,8 @@ Here is how to insert a new element $V$ into the heap:
 ::: dsvis
 Here is a visual explanation of insertion into a *max*-heap.
 
-<inlineav id="heapinsertCON" src="Binary/heapinsertCON.js" script="DataStructures/binaryheap.js" name="Heap insert Slideshow"/>
+``` {.jsav-animation src="Binary/heapinsertCON.js" scripts="DataStructures/binaryheap.js"}
+```
 :::
 
 Here is an alternative explanation: If the heap
@@ -245,7 +246,8 @@ Here is how to remove the highest-priority element $V$ from a binary heap:
 ::: dsvis
 Here is a visual explanation of removing from a *max*-heap.
 
-<inlineav id="heapmaxCON" src="Binary/heapmaxCON.js" script="DataStructures/binaryheap.js" name="Remove Max Slideshow"/>
+``` {.jsav-animation src="Binary/heapmaxCON.js" scripts="DataStructures/binaryheap.js"}
+```
 :::
 
 Because the heap is $\log n$ levels deep, the cost of deleting the
@@ -285,7 +287,8 @@ Note that we use a helper method for "sifting" a value down the tree.
 ::: dsvis
 #### Exercise: Removing from a *min*-heap
 
-<inlineav id="heapremoveCON" src="Binary/heapremoveCON.js" script="DataStructures/binaryheap.js" name="Remove Any Slideshow"/>
+``` {.jsav-animation src="Binary/heapremoveCON.js" scripts="DataStructures/binaryheap.js"}
+```
 :::
 -->
 
@@ -382,7 +385,8 @@ array, with the first internal node.
 ::: dsvis
 Here is a visualisation of the build process for a *max*-heap.
 
-<inlineav id="heapbuildCON" src="Binary/heapbuildCON.js" script="DataStructures/binaryheap.js" name="Heapbuild Slideshow"/>
+``` {.jsav-animation src="Binary/heapbuildCON.js" scripts="DataStructures/binaryheap.js"}
+```
 :::
 
 The method `buildHeap` implements the building algorithm:
@@ -434,7 +438,8 @@ time and $O(n^2)$ worst-case time required to build the BST. -->
 ::: dsvis
 Here is a visual explanation of the cost of `buildHeap`.
 
-<inlineav id="heapbuildProofCON" src="Binary/heapbuildProofCON.js" script="DataStructures/binaryheap.js" name="Heap build analysis proof Slideshow" links="Binary/heapbuildProofCON.css"/>
+``` {.jsav-animation src="Binary/heapbuildProofCON.js" scripts="DataStructures/binaryheap.js" links="Binary/heapbuildProofCON.css"}
+```
 :::
 
 ::::::

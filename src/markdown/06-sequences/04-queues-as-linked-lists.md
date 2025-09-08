@@ -31,7 +31,8 @@ queue, to be able to add new elements efficiently.
 ::: dsvis
 Linked queue -- introduction.
 
-<inlineav id="LinkedQueue-Intro-CON" src="ChalmersGU/LinkedQueue-Intro-CON.js" name="Linked Queue Intro" links="ChalmersGU/CGU-Styles.css"/>
+``` {.jsav-animation src="ChalmersGU/LinkedQueue-Intro-CON.js" links="ChalmersGU/CGU-Styles.css"}
+```
 :::
 
 So the datatype for linked queues contains three instance variables, including the size of the queue:
@@ -48,7 +49,8 @@ So the datatype for linked queues contains three instance variables, including t
 ::: dsvis
 #### Enqueueing to a linked queue
 
-<inlineav id="LinkedQueue-Enqueue-CON" src="ChalmersGU/LinkedQueue-Enqueue-CON.js" name="Linked Queue Enqueue" links="ChalmersGU/CGU-Styles.css"/>
+``` {.jsav-animation src="ChalmersGU/LinkedQueue-Enqueue-CON.js" links="ChalmersGU/CGU-Styles.css"}
+```
 :::
 
 To enqueue a new element onto the stack, we first have to create a new node and set its value.
@@ -77,7 +79,8 @@ Linked queue -- enqueue exercise.
 ::: dsvis
 #### Dequeueing from a linked queue
 
-<inlineav id="LinkedQueue-Dequeue-CON" src="ChalmersGU/LinkedQueue-Dequeue-CON.js" name="Linked Queue Dequeue" links="ChalmersGU/CGU-Styles.css"/>
+``` {.jsav-animation src="ChalmersGU/LinkedQueue-Dequeue-CON.js" links="ChalmersGU/CGU-Styles.css"}
+```
 :::
 
 Dequeueing from a queue is actually exactly the same as popping from a stack, where we use the front of the queue instead of the stack top.

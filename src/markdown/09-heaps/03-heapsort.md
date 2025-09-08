@@ -105,7 +105,8 @@ Here is an overview of the idea:
 ::: dsvis
 Here is a visualisation of the Heapsort algorithm.
 
-<inlineav id="heapsortCON" src="Sorting/heapsortCON.js" script="DataStructures/binaryheap.js" name="Heapsort Slideshow"/>
+``` {.jsav-animation src="Sorting/heapsortCON.js" scripts="DataStructures/binaryheap.js"}
+```
 :::
 
 A complete implementation is as follows.
@@ -155,7 +156,8 @@ Therefore the worst-case complexity of Heapsort is linearithmic, $O(n \log n)$.
 ::: dsvis
 This visualisation explains the running time analysis of Heapsort.
 
-<inlineav id="HeapSortAnalysisCON" src="Sorting/HeapSortAnalysisCON.js" script="DataStructures/binaryheap.js" name="Heapsort Analysis Slideshow" links="Sorting/HeapSortAnalysisCON.css"/>
+``` {.jsav-animation src="Sorting/HeapSortAnalysisCON.js" scripts="DataStructures/binaryheap.js" links="Sorting/HeapSortAnalysisCON.css"}
+```
 :::
 
 While typically slower than Quicksort by a constant factor (because

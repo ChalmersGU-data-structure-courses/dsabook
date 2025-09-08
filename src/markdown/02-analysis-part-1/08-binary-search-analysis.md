@@ -38,7 +38,8 @@ $$
 ::: dsvis
 Here is a visual explanation of the complexity of binary search.
 
-<inlineav id="BsearchDandCRecurCON" src="AlgAnal/BsearchDandCRecurCON.js" name="Binary Search recurrence slideshow" links="AlgAnal/BsearchDandCRecurCON.css"/>
+``` {.jsav-animation src="AlgAnal/BsearchDandCRecurCON.js" links="AlgAnal/BsearchDandCRecurCON.css"}
+```
 :::
 
 Comparing sequential search to binary search, we see that as $n$ grows,

@@ -159,7 +159,8 @@ Assume the following relative frequencies for eight selected letters:
 
 Here is a slideshow that illustrates the Huffman tree construction process for these letters.
 
-<inlineav id="huffmanBuildCON" src="Binary/huffmanBuildCON.js" script="DataStructures/huffman.js" name="Huffman Coding Tree Slideshow: Build" links="DataStructures/huffman.css Binary/huffmanCON.css"/>
+``` {.jsav-animation src="Binary/huffmanBuildCON.js" scripts="DataStructures/huffman.js" links="DataStructures/huffman.css Binary/huffmanCON.css"}
+```
 :::
 ::::::
 
@@ -204,7 +205,8 @@ connecting a node with its right child.
 ::: dsvis
 This process is illustrated by the following slideshow, for our 8-letter example above.
 
-<inlineav id="huffmanLabelCON" src="Binary/huffmanLabelCON.js" script="DataStructures/huffman.js" name="Huffman Coding Tree Slideshow: Label Edges" links="DataStructures/huffman.css Binary/huffmanCON.css"/>
+``` {.jsav-animation src="Binary/huffmanLabelCON.js" scripts="DataStructures/huffman.js" links="DataStructures/huffman.css Binary/huffmanCON.css"}
+```
 :::
 
 Now that we see how the edges associate with bits in the code, it is a
@@ -214,7 +216,8 @@ corresponds to a leaf node in the tree).
 ::: dsvis
 Here is an illustration of how to transform the Huffman tree for our running example into bit codes.
 
-<inlineav id="huffmanCodesCON" src="Binary/huffmanCodesCON.js" script="DataStructures/huffman.js" name="Huffman Coding Tree Slideshow: Setting Codes" links="DataStructures/huffman.css Binary/huffmanCON.css"/>
+``` {.jsav-animation src="Binary/huffmanCodesCON.js" scripts="DataStructures/huffman.js" links="DataStructures/huffman.css Binary/huffmanCON.css"}
+```
 :::
 
 Now that we have a code for each character, encoding a text message is done
@@ -239,7 +242,8 @@ branch.
 ::: dsvis
 The following slideshow shows how to decode a message by traversing our example Huffman tree.
 
-<inlineav id="huffmanDecodeCON" src="Binary/huffmanDecodeCON.js" script="DataStructures/huffman.js" name="Huffman Coding Tree Slideshow: Decoding" links="DataStructures/huffman.css Binary/huffmanCON.css"/>
+``` {.jsav-animation src="Binary/huffmanDecodeCON.js" scripts="DataStructures/huffman.js" links="DataStructures/huffman.css Binary/huffmanCON.css"}
+```
 :::
 
 ::: dsvis

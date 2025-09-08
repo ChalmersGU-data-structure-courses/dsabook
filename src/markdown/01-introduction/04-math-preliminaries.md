@@ -477,24 +477,12 @@ Because the sum of $n$ ones is $n$, the closed-form solution is $n$.
 Here are explanations about the closed form solutions of two summations that you will see many times in this book.
 Since this appears so often, it will help you later if you can get comfortable with it.
 
-<inlineav id="SummationOneToNCON" src="AlgAnal/SummationOneToNCON.js" name="AlgAnal/SummationOneToNCON" links="AlgAnal/SummationOneToNCON.css"/>
+``` {.jsav-animation src="AlgAnal/SummationOneToNCON.js" links="AlgAnal/SummationOneToNCON.css"}
+```
 
-<inlineav id="SummationTwoPowerICON" src="AlgAnal/SummationTwoPowerICON.js" name="AlgAnal/SummationTwoPowerICON" links="AlgAnal/SummationTwoPowerICON.css"/>
+``` {.jsav-animation src="AlgAnal/SummationTwoPowerICON.js" links="AlgAnal/SummationTwoPowerICON.css"}
+```
 :::
-
-<!--
-.. inlineav:: SummationOneToNCON ss
-   :long_name: Summation of the first N Integers visualisation
-   :links: AV/Background/SummationOneToNCON.css
-   :scripts: AV/Background/SummationOneToNCON.js
-   :output: show
-
-.. inlineav:: SummationTwoPowerICON ss
-   :long_name: Summation Two Power I visualisation
-   :links: AV/Background/SummationTwoPowerICON.css
-   :scripts: AV/Background/SummationTwoPowerICON.js
-   :output: show
--->
 
 Here is a list of useful summations, along with their closed-form solutions.
 

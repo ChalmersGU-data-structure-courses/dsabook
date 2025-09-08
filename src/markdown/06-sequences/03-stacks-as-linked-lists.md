@@ -66,7 +66,8 @@ Our data type for linked stacks contains two instance variables, one pointer to 
 ::: dsvis
 #### Pushing to a linked stack
 
-<inlineav id="LinkedStack-Push-CON" src="ChalmersGU/LinkedStack-Push-CON.js" name="Linked Stack Push" links="ChalmersGU/CGU-Styles.css"/>
+``` {.jsav-animation src="ChalmersGU/LinkedStack-Push-CON.js" links="ChalmersGU/CGU-Styles.css"}
+```
 :::
 
 To push a new element onto the stack, we first have to create a new node and set its value.
@@ -92,7 +93,8 @@ Linked stack -- push exercise.
 ::: dsvis
 #### Popping from a linked stack
 
-<inlineav id="LinkedStack-Pop-CON" src="ChalmersGU/LinkedStack-Pop-CON.js" name="Linked Stack Pop" links="ChalmersGU/CGU-Styles.css"/>
+``` {.jsav-animation src="ChalmersGU/LinkedStack-Pop-CON.js" links="ChalmersGU/CGU-Styles.css"}
+```
 :::
 
 To pop the topmost element off the stack, we first have to remember a pointer to the current top node, because we want to return its value after we have updated the stack.

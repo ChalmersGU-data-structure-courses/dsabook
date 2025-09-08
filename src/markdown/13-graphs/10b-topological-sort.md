@@ -69,7 +69,8 @@ If we now pop them one by one we get the topological sort J1, J3, J2, J6, J4, J5
 ::: dsvis
 Here is another example.
 
-<inlineav id="topSortDFSCON" src="Graph/topSortDFSCON.js" name="TopSort Slideshow" links="Graph/topSortDFSCON.css"/>
+``` {.jsav-animation src="Graph/topSortDFSCON.js" links="Graph/topSortDFSCON.css"}
+```
 :::
 
 #### Queue-based algorithm
@@ -127,7 +128,8 @@ Here is an implementation of the algorithm.
 ::: dsvis
 Here is an illustration of the queue-based algorithm.
 
-<inlineav id="topSortQCON" src="Graph/topSortQCON.js" name="topSortQCON Slideshow" links="Graph/topSortQCON.css"/>
+``` {.jsav-animation src="Graph/topSortQCON.js" links="Graph/topSortQCON.css"}
+```
 :::
 
 ::::::

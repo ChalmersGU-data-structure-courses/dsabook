@@ -55,7 +55,8 @@ This is called *modular compression* and is the most common compression method.
 ::: dsvis
 Here is an interactive explanation of modular compression.
 
-<inlineav id="hashFuncExCON1" src="Hashing/hashFuncExCON1.js" name="Hash Function Slideshow 1"/>
+``` {.jsav-animation src="Hashing/hashFuncExCON1.js"}
+```
 :::
 
 Recall that it is common to use an integer as its own hash code.

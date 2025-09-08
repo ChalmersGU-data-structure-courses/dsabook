@@ -92,7 +92,8 @@ mistake is to not return a value.
 ::: dsvis
 Common mistakes when implementing recursive functions.
 
-<inlineav id="BinaryTreeMistakesCON" src="Binary/BinaryTreeMistakesCON.js" name="Binary Tree Common Mistakes Slideshow" links="Binary/WriteTrav.css"/>
+``` {.jsav-animation src="Binary/BinaryTreeMistakesCON.js" links="Binary/WriteTrav.css"}
+```
 :::
 
 <!-- ### Binary Tree Check Sum Exercise -->

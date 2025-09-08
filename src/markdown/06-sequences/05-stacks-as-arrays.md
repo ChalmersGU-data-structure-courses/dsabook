@@ -18,7 +18,8 @@ Note that here we use an internal *capacity* of 1000 for the internal array, but
 ::: dsvis
 #### Where should the top of the stack be?
 
-<inlineav id="DynamicArrayStack-Top-CON" src="ChalmersGU/DynamicArrayStack-Top-CON.js" name="Array stack top position slideshow" links="ChalmersGU/CGU-Styles.css"/>
+``` {.jsav-animation src="ChalmersGU/DynamicArrayStack-Top-CON.js" links="ChalmersGU/CGU-Styles.css"}
+```
 :::
 
 The only important design decision to be made is which end of the array should represent the top of the stack.
@@ -38,7 +39,8 @@ Then we don't have to shift around a lot of element, but instead just move the p
 ::: dsvis
 #### Pushing to the stack
 
-<inlineav id="DynamicArrayStack-Push-CON" src="ChalmersGU/DynamicArrayStack-Push-CON.js" name="Array stack push slideshow" links="ChalmersGU/CGU-Styles.css"/>
+``` {.jsav-animation src="ChalmersGU/DynamicArrayStack-Push-CON.js" links="ChalmersGU/CGU-Styles.css"}
+```
 :::
 
 The *size* variable refers to the last uninhabited cell in the array.
@@ -60,7 +62,8 @@ Array stack -- push exercise.
 ::: dsvis
 #### Popping from the stack
 
-<inlineav id="DynamicArrayStack-Pop-CON" src="ChalmersGU/DynamicArrayStack-Pop-CON.js" name="Array stack pop slideshow" links="ChalmersGU/CGU-Styles.css"/>
+``` {.jsav-animation src="ChalmersGU/DynamicArrayStack-Pop-CON.js" links="ChalmersGU/CGU-Styles.css"}
+```
 :::
 
 To pop an element from the stack we do the reverse of pushing:

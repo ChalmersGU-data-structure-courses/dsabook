@@ -116,7 +116,8 @@ with general trees.
 ::: dsvis
 Visualisation of preorder traversal.
 
-<inlineav id="GenTreePreTravCON" src="General/GenTreePreTravCON.js" name="General Tree Preorder Traversal Slideshow" links="General/GenTreeCON.css"/>
+``` {.jsav-animation src="General/GenTreePreTravCON.js" links="General/GenTreeCON.css"}
+```
 :::
 
 To perform a preorder traversal, it is necessary to visit each of the
@@ -128,7 +129,8 @@ sibling, and so on.
 ::: dsvis
 Visualisation of postorder traversal.
 
-<inlineav id="GenTreePostTravCON" src="General/GenTreePostTravCON.js" name="General Tree Postorder Traversal Slideshow" links="General/GenTreeCON.css"/>
+``` {.jsav-animation src="General/GenTreePostTravCON.js" links="General/GenTreeCON.css"}
+```
 :::
 
 Using the General Tree class shown above, here are implementations to

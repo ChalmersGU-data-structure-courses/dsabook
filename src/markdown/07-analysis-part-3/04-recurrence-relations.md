@@ -55,7 +55,8 @@ So, the closed form solution of $T(n) = T(n-1)+1$ can be modeled by the summatio
 ::: dsvis
 Here is an interactive explanation of the recurrence relation $T(n)=T(n-1)+1$.
 
-<inlineav id="LinearRecurrencesCON" src="AlgAnal/LinearRecurrencesCON.js" name="AlgAnal/LinearRecurrencesCON" links="AlgAnal/LinearRecurrencesCON.css"/>
+``` {.jsav-animation src="AlgAnal/LinearRecurrencesCON.js" links="AlgAnal/LinearRecurrencesCON.css"}
+```
 :::
 
 A slightly more complicated recurrence is
@@ -80,7 +81,8 @@ This is also a standard summation that we know, with the solution $T(n) = n(n+1)
 ::: dsvis
 Here is an interactive explanation of this recurrence relation.
 
-<inlineav id="LinearRecurrencesNCON" src="AlgAnal/LinearRecurrencesNCON.js" name="AlgAnal/LinearRecurrencesNCON" links="AlgAnal/LinearRecurrencesNCON.css"/>
+``` {.jsav-animation src="AlgAnal/LinearRecurrencesNCON.js" links="AlgAnal/LinearRecurrencesNCON.css"}
+```
 :::
 
 A more complicated example is the standard [Mergesort]{.term}.
@@ -345,7 +347,8 @@ In the beginning of this section we showed how to expand some very simple recurr
 Here is a more complicated example, where we want to find the closed form solution of
 $T(n) = 2T(n/2) + 5n^2$; $T(1) = 7$.
 
-<inlineav id="ExpandRecurrenceCON" src="AlgAnal/ExpandRecurrenceCON.js" name="Divide-and-Conquer Expansion Slideshow" links="AlgAnal/ExpandRecurrenceCON.css"/>
+``` {.jsav-animation src="AlgAnal/ExpandRecurrenceCON.js" links="AlgAnal/ExpandRecurrenceCON.css"}
+```
 :::
 
 <!--
@@ -421,7 +424,8 @@ T(n)  &=  aT(n/b) + cn^k \\
 ::: dsvis
 Here is a more visual presentation of this same derivation.
 
-<inlineav id="DandCRecurrenceCON" src="AlgAnal/DandCRecurrenceCON.js" name="Divide-and-Conquer Expansion Slideshow2" links="AlgAnal/DandCRecurrenceCON.css"/>
+``` {.jsav-animation src="AlgAnal/DandCRecurrenceCON.js" links="AlgAnal/DandCRecurrenceCON.css"}
+```
 :::
 
 So, we are left with this result:

@@ -33,7 +33,8 @@ an expensive process.
 ::: dsvis
 Demonstration of bucket hashing.
 
-<inlineav id="buckethashCON1" src="Hashing/buckethashCON1.js" name="Bucket Hashing Slideshow 1" links="Hashing/buckethashCON.css"/>
+``` {.jsav-animation src="Hashing/buckethashCON1.js" links="Hashing/buckethashCON.css"}
+```
 :::
 
 ::: dsvis
@@ -55,7 +56,8 @@ rather than just the first slot in the bucket.
 ::: dsvis
 Demonstration of alternative bucket hashing.
 
-<inlineav id="buckethashCON2" src="Hashing/buckethashCON2.js" name="Bucket Hashing Slideshow 2" links="Hashing/buckethashCON.css"/>
+``` {.jsav-animation src="Hashing/buckethashCON2.js" links="Hashing/buckethashCON.css"}
+```
 :::
 
 Bucket methods are good for implementing hash tables stored on disk,

@@ -36,7 +36,8 @@ The input is an array named `arr` that stores $n$ elements.
 ::: dsvis
 Here we see the first few iterations of Insertion sort.
 
-<inlineav id="insertionsortCON" src="Sorting/insertionsortCON.js" name="Insertion Sort Slideshow" links="Sorting/InsertionSort.css"/>
+``` {.jsav-animation src="Sorting/insertionsortCON.js" links="Sorting/InsertionSort.css"}
+```
 :::
 
 This continues on with each element in turn.
@@ -77,19 +78,22 @@ In the best case -- when the list is already sorted -- the complexity is instead
 ::: dsvis
 Here is an explanation of the worst case cost of Insertion sort.
 
-<inlineav id="InsertionSortWorstCaseCON" src="Sorting/InsertionSortWorstCaseCON.js" name="Insertion Sort Worst Case Slideshow" links="Sorting/InsertionSort.css"/>
+``` {.jsav-animation src="Sorting/InsertionSortWorstCaseCON.js" links="Sorting/InsertionSort.css"}
+```
 :::
 
 ::: dsvis
 And here is an explanation of the cost of the best case.
 
-<inlineav id="InsertionSortBestCaseCON" src="Sorting/InsertionSortBestCaseCON.js" name="Insertion Sort Best Case Slideshow" links="Sorting/InsertionSort.css"/>
+``` {.jsav-animation src="Sorting/InsertionSortBestCaseCON.js" links="Sorting/InsertionSort.css"}
+```
 :::
 
 ::: dsvis
 And here is the average case cost.
 
-<inlineav id="InsertionSortAverageCaseCON" src="Sorting/InsertionSortAverageCaseCON.js" name="Insertion Sort Average Case Slideshow" links="Sorting/InsertionSort.css"/>
+``` {.jsav-animation src="Sorting/InsertionSortAverageCaseCON.js" links="Sorting/InsertionSort.css"}
+```
 :::
 
 While the best case is significantly faster than the average and worst

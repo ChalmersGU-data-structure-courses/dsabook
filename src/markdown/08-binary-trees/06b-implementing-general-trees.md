@@ -87,7 +87,8 @@ AV.recorded();
 ::: dsvis
 Reconstructing the original tree in @fig:example_bintree from its sequential representation.
 
-<inlineav id="SequentialTreeCON" src="General/SequentialTreeCON.js" name="First sequential representation Slideshow" links="General/SequentialTreeCON.css"/>
+``` {.jsav-animation src="General/SequentialTreeCON.js" links="General/SequentialTreeCON.css"}
+```
 :::
 
 ::: dsvis
@@ -133,7 +134,8 @@ requires less overhead.
 ::: dsvis
 Reconstructing the original tree in @fig:example_bintree from the alternative sequential representation.
 
-<inlineav id="SequentialTreeAltCON" src="General/SequentialTreeAltCON.js" name="Second sequential representation Slideshow" links="General/SequentialTreeCON.css"/>
+``` {.jsav-animation src="General/SequentialTreeAltCON.js" links="General/SequentialTreeCON.css"}
+```
 :::
 
 Storing $n$ extra bits can be a considerable savings over storing $n$
@@ -162,7 +164,8 @@ node, and "0" could indicate a leaf node.
 ::: dsvis
 Reconstructing the shape of the tree in @fig:example_bintree from its bit vector representation.
 
-<inlineav id="SequentialTreeBitsCON" src="General/SequentialTreeBitsCON.js" name="Bit vector sequential representation Slideshow" links="General/SequentialTreeCON.css"/>
+``` {.jsav-animation src="General/SequentialTreeBitsCON.js" links="General/SequentialTreeCON.css"}
+```
 :::
 
 ::: dsvis
@@ -188,7 +191,8 @@ two or more successive ")" symbols.
 ::: dsvis
 Reconstructing a general from its sequential representation.
 
-<inlineav id="SequentialGenTreeCON" src="General/SequentialGenTreeCON.js" name="General Tree sequential representation Slideshow" links="General/SequentialTreeCON.css"/>
+``` {.jsav-animation src="General/SequentialGenTreeCON.js" links="General/SequentialTreeCON.css"}
+```
 :::
 
 Note that this representation for serialising general trees cannot be

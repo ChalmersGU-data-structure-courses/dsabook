@@ -35,7 +35,8 @@ recognise if our proposed solution is badly wrong.
 ::: dsvis
 TODO
 
-<inlineav id="SummationOneToNCON" src="AlgAnal/SummationOneToNCON.js" name="AlgAnal/SummationOneToNCON" links="AlgAnal/SummationOneToNCON.css"/>
+``` {.jsav-animation src="AlgAnal/SummationOneToNCON.js" links="AlgAnal/SummationOneToNCON.css"}
+```
 :::
 
 Let us now consider some ways that we might hit upon an exact equation
@@ -300,7 +301,8 @@ $$
 ::: dsvis
 Here is another example.
 
-<inlineav id="GeometricSumProofCON" src="AlgAnal/GeometricSumProofCON.js" name="AlgAnal/GeometricSumProofCON" links="AlgAnal/GeometricSumProofCON.css"/>
+``` {.jsav-animation src="AlgAnal/GeometricSumProofCON.js" links="AlgAnal/GeometricSumProofCON.css"}
+```
 :::
 
 -->

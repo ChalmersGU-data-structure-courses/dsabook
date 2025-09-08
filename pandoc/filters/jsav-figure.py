@@ -5,7 +5,6 @@ Pandoc filter: figures from javascript, the JSAV library
 
 from pathlib import Path
 import hashlib
-import subprocess
 import panflute as pf
 
 RENDERED_IMAGES_DIR = Path('rendered-images')
@@ -13,7 +12,7 @@ RENDERED_IMAGES_DIR.mkdir(parents=True, exist_ok=True)
 
 JSAV_FIGURE_TEMPLATE = """
 <div id="{id}" class="ssAV" data-short-name="{id}" data-long-name="{name}" alt="{name}" tabIndex="-1">
-<div class="jsavcanvas"></div>
+{controls}<div class="jsavcanvas"></div>
 </div>
 {links}
 {scripts}
@@ -26,19 +25,28 @@ JSAV_FIGURE_TEMPLATE = """
 </script>
 """
 
+JSAV_CONTROLS = """
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+""".strip()
+
 
 ID_COUNTER = {'n': 0}
 
-def generate_image_id(code, attributes):
+def generate_id(code, attributes):
     ID_COUNTER['n'] += 1
     hashstr = str(ID_COUNTER['n']) + ":" + attributes.get('name','') + ":" + code
     return "img-jsav-" + hashlib.md5(hashstr.encode()).hexdigest()
 
 
 def jsav_figure(elem, doc):
-    if isinstance(elem, (pf.Div, pf.CodeBlock)) and 'jsav-figure' in elem.classes:
+    if not isinstance(elem, (pf.Div, pf.CodeBlock)):
+        return
+    if 'jsav-figure' in elem.classes or 'jsav-animation' in elem.classes:
+        is_animation = 'jsav-animation' in elem.classes
         if isinstance(elem, pf.CodeBlock):
-            html_code = render_jsav_figure(elem.text, elem.attributes)
+            html_code = render_jsav_figure(elem.text, elem.attributes, is_animation)
             if 'caption' in elem.attributes:
                 assert elem.identifier.startswith("fig:")
                 return pf.Div(
@@ -57,16 +65,15 @@ def jsav_figure(elem, doc):
         assert isinstance(caption, pf.Para), (
             f"latex_figure: There must be a caption at the end (figure {elem.identifier})")
         if len(elem.content) == 1:
+            attributes = elem.attributes | elem.content[0].attributes
             return pf.Figure(
-                pf.RawBlock(render_jsav_figure(
-                    elem.content[0].text, elem.attributes|elem.content[0].attributes
-                )),
+                pf.RawBlock(render_jsav_figure(elem.content[0].text, attributes, is_animation)),
                 identifier = elem.identifier,
                 caption = pf.Caption(caption),
             )
         elem.content = [
             pf.Figure(
-                pf.RawBlock(render_jsav_figure(sub.text, sub.attributes)),
+                pf.RawBlock(render_jsav_figure(sub.text, sub.attributes, is_animation)),
                 identifier = sub.identifier,
                 caption = pf.Caption(pf.Para(pf.Str(sub.attributes['caption']))) if 'caption' in sub.attributes else None,
             )
@@ -74,11 +81,11 @@ def jsav_figure(elem, doc):
         ] + [caption]
 
 
-def render_jsav_figure(code, attributes):
+def render_jsav_figure(code, attributes, is_animation):
     if 'src' in attributes:
         id = Path(attributes['src']).with_suffix('').name
     else:
-        id = generate_image_id(code, attributes)
+        id = generate_id(code, attributes)
     return JSAV_FIGURE_TEMPLATE.format(**{
         'id': id,
         'name': attributes.get('name', id),
@@ -93,6 +100,7 @@ def render_jsav_figure(code, attributes):
             for ln in attributes.get(opt, '').split()
         ),
         'code': code,
+        'controls': JSAV_CONTROLS if is_animation else '',
     })
 
 

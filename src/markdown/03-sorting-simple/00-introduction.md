@@ -42,7 +42,8 @@ applications.
 ::: dsvis
 #### The sorting problem
 
-<inlineav id="SortNotationS1CON" src="Sorting/SortNotationS1CON.js" name="Sorting Terminology and Notation Slideshow 1" links="Sorting/SortNotationS1CON.css"/>
+``` {.jsav-animation src="Sorting/SortNotationS1CON.js" links="Sorting/SortNotationS1CON.css"}
+```
 :::
 
 Sorting can be divided into two kinds depending on how we compare the items in the list:

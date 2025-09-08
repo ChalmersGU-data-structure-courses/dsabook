@@ -45,7 +45,8 @@ soon as the MST contains enough edges.
 Here is a visualisation of Kruskal's algorithm.
 To the left is the `forest`, the disjoint set of trees, and to the right is a list of all edges together with their weights.
 
-<inlineav id="kruskalCON" src="Graph/kruskalCON.js" name="Kruskal Slideshow" links="Graph/kruskalCON.css"/>
+``` {.jsav-animation src="Graph/kruskalCON.js" links="Graph/kruskalCON.css"}
+```
 :::
 
 Kruskal's algorithm is dominated by the time required to process the

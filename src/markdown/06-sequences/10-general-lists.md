@@ -70,7 +70,8 @@ So we make the List interface be a Collection too.
 ::: dsvis
 Insertion into a linked list, overview.
 
-<inlineav id="ListADT-Positions-CON" src="ChalmersGU/ListADT-Positions-CON.js" name="List ADT Positions Slideshow" links="ChalmersGU/CGU-Styles.css"/>
+``` {.jsav-animation src="ChalmersGU/ListADT-Positions-CON.js" links="ChalmersGU/CGU-Styles.css"}
+```
 :::
 
 The `List` member functions allow you to build a list with elements in
@@ -110,7 +111,8 @@ We can use the same structure as for stacks when implementing general linked lis
 ::: dsvis
 Iterating through a linked list.
 
-<inlineav id="LinkedList-Iteration-CON" src="ChalmersGU/LinkedList-Iteration-CON.js" name="Linked List Slideshow 1" links="ChalmersGU/CGU-Styles.css"/>
+``` {.jsav-animation src="ChalmersGU/LinkedList-Iteration-CON.js" links="ChalmersGU/CGU-Styles.css"}
+```
 :::
 
 #### Adding and removing nodes
@@ -121,7 +123,8 @@ using a pointer to the `current` node.
 ::: dsvis
 The problem with using a pointer to the `current` node.
 
-<inlineav id="LinkedList-Problems-CON" src="ChalmersGU/LinkedList-Problems-CON.js" name="Linked List Add/Remove Problems" links="ChalmersGU/CGU-Styles.css"/>
+``` {.jsav-animation src="ChalmersGU/LinkedList-Problems-CON.js" links="ChalmersGU/CGU-Styles.css"}
+```
 :::
 
 So, using a `current` pointer, it is possible to add and remove nodes,
@@ -138,13 +141,15 @@ current node. This is the solution we will adopt.
 ::: dsvis
 How to insert an element using a pointer to the node *before* the current node.
 
-<inlineav id="LinkedList-Add-CON" src="ChalmersGU/LinkedList-Add-CON.js" name="Linked List Add Slideshow" links="ChalmersGU/CGU-Styles.css"/>
+``` {.jsav-animation src="ChalmersGU/LinkedList-Add-CON.js" links="ChalmersGU/CGU-Styles.css"}
+```
 :::
 
 ::: dsvis
 Here are some special cases for linked list insertion: Inserting at the beginning of a list, and appending at the end.
 
-<inlineav id="LinkedList-AddSpecial-CON" src="ChalmersGU/LinkedList-AddSpecial-CON.js" name="Linked List Add Special Cases Slideshow" links="ChalmersGU/CGU-Styles.css"/>
+``` {.jsav-animation src="ChalmersGU/LinkedList-AddSpecial-CON.js" links="ChalmersGU/CGU-Styles.css"}
+```
 :::
 
 Here's the code for addition.
@@ -174,7 +179,8 @@ Here's an exercise for adding a value to a linked list.
 ::: dsvis
 How to delete from a linked list.
 
-<inlineav id="LinkedList-Remove-CON" src="ChalmersGU/LinkedList-Remove-CON.js" name="Linked List Remove Slideshow" links="ChalmersGU/CGU-Styles.css"/>
+``` {.jsav-animation src="ChalmersGU/LinkedList-Remove-CON.js" links="ChalmersGU/CGU-Styles.css"}
+```
 :::
 
 Here's the code for deletion:

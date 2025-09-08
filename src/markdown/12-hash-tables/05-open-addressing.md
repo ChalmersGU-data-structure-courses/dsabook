@@ -62,7 +62,8 @@ to the home position.
 ::: dsvis
 Here is a visualisation of how linear probing works.
 
-<inlineav id="linProbeCON1" src="Hashing/linProbeCON1.js" name="Linear Probing Slideshow 1" links="Hashing/linProbeCON.css"/>
+``` {.jsav-animation src="Hashing/linProbeCON1.js" links="Hashing/linProbeCON.css"}
+```
 :::
 
 In the following code we iterate through all possible *offsets* 0, 1, 2, ..., etc.

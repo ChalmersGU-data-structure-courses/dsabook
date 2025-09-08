@@ -253,5 +253,6 @@ You don't need to think about how your friends (the recursive calls) calculated 
 ::: dsvis
 Here is a visual explanation of the same idea.
 
-<inlineav id="SumBinaryTreeCON" src="Binary/SumBinaryTreeCON.js" name="Sum values in a Binary Tree Slide Show" links="Binary/RecursiveDSCON.css"/>
+``` {.jsav-animation src="Binary/SumBinaryTreeCON.js" links="Binary/RecursiveDSCON.css"}
+```
 :::

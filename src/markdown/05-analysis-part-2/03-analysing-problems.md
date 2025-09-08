@@ -145,7 +145,8 @@ second, the algorithm takes the right branch.
 Here is a visualisation that illustrates decision trees and the sorting
 lower bound proof.
 
-<inlineav id="SortingLowerBoundCON" src="Sorting/SortingLowerBoundCON.js" name="Sorting Lower Bound Slideshow" links="Sorting/SortingLowerBoundCON.css"/>
+``` {.jsav-animation src="Sorting/SortingLowerBoundCON.js" links="Sorting/SortingLowerBoundCON.css"}
+```
 :::
 
 Any sorting algorithm requiring $\Omega(n \log n)$ comparisons in the

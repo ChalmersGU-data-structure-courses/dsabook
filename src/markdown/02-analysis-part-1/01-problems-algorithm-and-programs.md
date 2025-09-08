@@ -139,12 +139,13 @@ and unambiguous. Algorithms must be correct, of finite length, and must
 terminate for all inputs. A [program]{.term} is
 an instantiation of an algorithm in a programming language.
 
-::: dsvis
-The following slideshow should help you to visualise the differences.
-
 ::: TODO
 - Prio 3: this visualisation is really ugly
 :::
 
-<inlineav id="ProblemAlgorithmCON" src="AlgAnal/ProblemAlgorithmCON.js" name="Problem, Algorithm, and Program definitions Slideshow" links="AlgAnal/ProblemAlgorithmCON.css"/>
+::: dsvis
+The following slideshow should help you to visualise the differences.
+
+``` {.jsav-animation src="AlgAnal/ProblemAlgorithmCON.js" links="AlgAnal/ProblemAlgorithmCON.css"}
+```
 :::
