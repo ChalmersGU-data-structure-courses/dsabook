@@ -37,7 +37,7 @@ size counter is set to 0 because there are no elements yet.
 ::: dsvis
 The internals of an array-based list.
 
-``` {.jsav-animation src="ChalmersGU/StaticArrayList-Vars-CON.js"}
+``` {.jsav-animation src="ChalmersGU/StaticArrayList-Vars-CON.js" name="Static Array-based List Variables Slideshow"}
 ```
 :::
 
@@ -56,7 +56,7 @@ Random access to any element in the list is quick and easy.
 ::: dsvis
 Finding a value by its position.
 
-``` {.jsav-animation src="ChalmersGU/StaticArrayList-Intro-CON.js" links="ChalmersGU/CGU-Styles.css"}
+``` {.jsav-animation src="ChalmersGU/StaticArrayList-Intro-CON.js" links="ChalmersGU/CGU-Styles.css" name="Static Array-based List Intro Slideshow"}
 ```
 :::
 
@@ -85,7 +85,7 @@ Appending elements at the tail of an array-based list is super-fast.
 ::: dsvis
 Appending to the end of an array-based list.
 
-``` {.jsav-animation src="ChalmersGU/StaticArrayList-Append-CON.js" links="ChalmersGU/CGU-Styles.css"}
+``` {.jsav-animation src="ChalmersGU/StaticArrayList-Append-CON.js" links="ChalmersGU/CGU-Styles.css" name="Static Array-based List Append Slideshow"}
 ```
 :::
 
@@ -95,7 +95,7 @@ existing elements in the array by one position toward the tail.
 ::: dsvis
 Inserting at the head of the list.
 
-``` {.jsav-animation src="ChalmersGU/StaticArrayList-Add-CON.js" links="ChalmersGU/CGU-Styles.css"}
+``` {.jsav-animation src="ChalmersGU/StaticArrayList-Add-CON.js" links="ChalmersGU/CGU-Styles.css" name="Static Array-based List Insertion Slideshow"}
 ```
 :::
 
@@ -133,7 +133,7 @@ must shift toward the head, as shown in the following slideshow.
 ::: dsvis
 Removing an element at a certain position in the list.
 
-``` {.jsav-animation src="ChalmersGU/StaticArrayList-Remove-CON.js" links="ChalmersGU/CGU-Styles.css"}
+``` {.jsav-animation src="ChalmersGU/StaticArrayList-Remove-CON.js" links="ChalmersGU/CGU-Styles.css" name="Static Array-based List Remove Slideshow"}
 ```
 :::
 

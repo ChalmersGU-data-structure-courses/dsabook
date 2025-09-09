@@ -98,7 +98,7 @@ Here is the method in pseudocode:
 ::: dsvis
 And here is an illustration of the binary search algorithm.
 
-``` {.jsav-animation src="Searching/binarySearchCON.js" links="Searching/binarySearchCON.css"}
+``` {.jsav-animation src="Searching/binarySearchCON.js" links="Searching/binarySearchCON.css" name="Binary Search Algorithm Slideshow"}
 ```
 :::
 

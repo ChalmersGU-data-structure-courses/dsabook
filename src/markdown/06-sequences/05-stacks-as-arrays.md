@@ -18,7 +18,7 @@ Note that here we use an internal *capacity* of 1000 for the internal array, but
 ::: dsvis
 #### Where should the top of the stack be?
 
-``` {.jsav-animation src="ChalmersGU/DynamicArrayStack-Top-CON.js" links="ChalmersGU/CGU-Styles.css"}
+``` {.jsav-animation src="ChalmersGU/DynamicArrayStack-Top-CON.js" links="ChalmersGU/CGU-Styles.css" name="Array stack top position slideshow"}
 ```
 :::
 
@@ -39,7 +39,7 @@ Then we don't have to shift around a lot of element, but instead just move the p
 ::: dsvis
 #### Pushing to the stack
 
-``` {.jsav-animation src="ChalmersGU/DynamicArrayStack-Push-CON.js" links="ChalmersGU/CGU-Styles.css"}
+``` {.jsav-animation src="ChalmersGU/DynamicArrayStack-Push-CON.js" links="ChalmersGU/CGU-Styles.css" name="Array stack push slideshow"}
 ```
 :::
 
@@ -62,7 +62,7 @@ Array stack -- push exercise.
 ::: dsvis
 #### Popping from the stack
 
-``` {.jsav-animation src="ChalmersGU/DynamicArrayStack-Pop-CON.js" links="ChalmersGU/CGU-Styles.css"}
+``` {.jsav-animation src="ChalmersGU/DynamicArrayStack-Pop-CON.js" links="ChalmersGU/CGU-Styles.css" name="Array stack pop slideshow"}
 ```
 :::
 

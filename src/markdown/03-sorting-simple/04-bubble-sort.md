@@ -50,7 +50,7 @@ algorithms will simply assume that the records are
 ::: dsvis
 Here is a visualisation of the first pass of Bubble sorting an array of integers.
 
-``` {.jsav-animation src="Sorting/bubblesortS1CON.js" links="Sorting/BubbleSortAnalysisCON.css"}
+``` {.jsav-animation src="Sorting/bubblesortS1CON.js" links="Sorting/BubbleSortAnalysisCON.css" name="Bubble Sort Slideshow 1"}
 ```
 :::
 
@@ -59,7 +59,7 @@ Now we continue with the second pass.
 
 However, since the largest element has "bubbled" to the very right, we will not need to look at it again.
 
-``` {.jsav-animation src="Sorting/bubblesortS2CON.js" links="Sorting/BubbleSortAnalysisCON.css"}
+``` {.jsav-animation src="Sorting/bubblesortS2CON.js" links="Sorting/BubbleSortAnalysisCON.css" name="Bubble Sort Slideshow 2"}
 ```
 
 Bubble sort continues in this way until the entire array is sorted.
@@ -102,7 +102,7 @@ Note that this is regardless of how the initial array looks like, so Bubble sort
 ::: dsvis
 The following visualisation illustrates the running time analysis of Bubble sort.
 
-``` {.jsav-animation src="Sorting/BubbleSortAnalysisCON.js" links="Sorting/BubbleSortAnalysisCON.css"}
+``` {.jsav-animation src="Sorting/BubbleSortAnalysisCON.js" links="Sorting/BubbleSortAnalysisCON.css" name="Bubble Sort Analysis Slideshow"}
 ```
 :::
 

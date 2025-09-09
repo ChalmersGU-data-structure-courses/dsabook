@@ -87,7 +87,7 @@ The recursive DFS algorithm can be described as simply as this:
 This visualisation shows a graph and the result of performing a DFS on
 it, resulting in a depth-first search tree.
 
-``` {.jsav-animation src="Graph/DFSCON.js" links="Graph/DFSCON.css"}
+``` {.jsav-animation src="Graph/DFSCON.js" links="Graph/DFSCON.css" name="Depth-First Search Slideshow"}
 ```
 :::
 
@@ -143,7 +143,7 @@ vertices level by level from top to bottom.
 This visualisation shows a graph and the result of performing a BFS on
 it, resulting in a breadth-first search tree.
 
-``` {.jsav-animation src="Graph/BFSCON.js" links="Graph/BFSCON.css"}
+``` {.jsav-animation src="Graph/BFSCON.js" links="Graph/BFSCON.css" name="Breadth-First Search Slideshow"}
 ```
 :::
 

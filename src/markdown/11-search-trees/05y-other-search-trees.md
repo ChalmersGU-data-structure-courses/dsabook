@@ -37,14 +37,14 @@ following slideshows present this in more detail.
 ::: dsvis
 TODO
 
-``` {.jsav-animation src="Development/TreeTimelineCON.js" links="Development/TreeTrieCON.css"}
+``` {.jsav-animation src="Development/TreeTimelineCON.js" links="Development/TreeTrieCON.css" name="Tree timeline Slideshow"}
 ```
 :::
 
 ::: dsvis
 TODO
 
-``` {.jsav-animation src="Development/TrieTimelineCON.js" links="Development/TreeTrieCON.css"}
+``` {.jsav-animation src="Development/TrieTimelineCON.js" links="Development/TreeTrieCON.css" name="Trie timeline Slideshow"}
 ```
 :::
 

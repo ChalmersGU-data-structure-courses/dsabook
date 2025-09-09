@@ -14,7 +14,7 @@ This is because it always looks at every element in the array exactly once.
 ::: dsvis
 Consider the problem of finding the factorial of $n$.
 
-``` {.jsav-animation src="AlgAnal/AnalCasesSameCON.js" links="AlgAnal/AnalCasesCON.css"}
+``` {.jsav-animation src="AlgAnal/AnalCasesSameCON.js" links="AlgAnal/AnalCasesCON.css" name="Simple analysis cases slideshow"}
 ```
 :::
 
@@ -34,7 +34,7 @@ However, note that the average case depends on an important assumption: that the
 ::: dsvis
 Here is an example.
 
-``` {.jsav-animation src="AlgAnal/AnalCasesDiffCON.js" links="AlgAnal/AnalCasesCON.css"}
+``` {.jsav-animation src="AlgAnal/AnalCasesDiffCON.js" links="AlgAnal/AnalCasesCON.css" name="Best, Worst, and Average cases slideshow"}
 ```
 :::
 

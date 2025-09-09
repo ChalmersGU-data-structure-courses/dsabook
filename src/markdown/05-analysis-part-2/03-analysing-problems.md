@@ -145,7 +145,7 @@ second, the algorithm takes the right branch.
 Here is a visualisation that illustrates decision trees and the sorting
 lower bound proof.
 
-``` {.jsav-animation src="Sorting/SortingLowerBoundCON.js" links="Sorting/SortingLowerBoundCON.css"}
+``` {.jsav-animation src="Sorting/SortingLowerBoundCON.js" links="Sorting/SortingLowerBoundCON.css" name="Sorting Lower Bound Slideshow"}
 ```
 :::
 

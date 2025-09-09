@@ -54,7 +54,7 @@ constant number, but increase the size by a factor.
 ::: dsvis
 Dynamic array list.
 
-``` {.jsav-animation src="ChalmersGU/DynamicArrayList-Append-CON.js" links="ChalmersGU/CGU-Styles.css"}
+``` {.jsav-animation src="ChalmersGU/DynamicArrayList-Append-CON.js" links="ChalmersGU/CGU-Styles.css" name="Dynamic Array-based List Addition Slideshow"}
 ```
 :::
 
@@ -360,7 +360,7 @@ So the dynamic `pop` method will look like this:
 ::: dsvis
 Dynamic array list -- deletion.
 
-``` {.jsav-animation src="ChalmersGU/DynamicArrayList-Remove-CON.js" links="ChalmersGU/CGU-Styles.css"}
+``` {.jsav-animation src="ChalmersGU/DynamicArrayList-Remove-CON.js" links="ChalmersGU/CGU-Styles.css" name="Dynamic Array-based List Deletion Slideshow"}
 ```
 :::
 

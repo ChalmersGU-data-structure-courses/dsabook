@@ -159,7 +159,7 @@ Assume the following relative frequencies for eight selected letters:
 
 Here is a slideshow that illustrates the Huffman tree construction process for these letters.
 
-``` {.jsav-animation src="Binary/huffmanBuildCON.js" scripts="DataStructures/huffman.js" links="DataStructures/huffman.css Binary/huffmanCON.css"}
+``` {.jsav-animation src="Binary/huffmanBuildCON.js" scripts="DataStructures/huffman.js" links="DataStructures/huffman.css Binary/huffmanCON.css" name="Huffman Coding Tree Slideshow: Build"}
 ```
 :::
 ::::::
@@ -205,7 +205,7 @@ connecting a node with its right child.
 ::: dsvis
 This process is illustrated by the following slideshow, for our 8-letter example above.
 
-``` {.jsav-animation src="Binary/huffmanLabelCON.js" scripts="DataStructures/huffman.js" links="DataStructures/huffman.css Binary/huffmanCON.css"}
+``` {.jsav-animation src="Binary/huffmanLabelCON.js" scripts="DataStructures/huffman.js" links="DataStructures/huffman.css Binary/huffmanCON.css" name="Huffman Coding Tree Slideshow: Label Edges"}
 ```
 :::
 
@@ -216,7 +216,7 @@ corresponds to a leaf node in the tree).
 ::: dsvis
 Here is an illustration of how to transform the Huffman tree for our running example into bit codes.
 
-``` {.jsav-animation src="Binary/huffmanCodesCON.js" scripts="DataStructures/huffman.js" links="DataStructures/huffman.css Binary/huffmanCON.css"}
+``` {.jsav-animation src="Binary/huffmanCodesCON.js" scripts="DataStructures/huffman.js" links="DataStructures/huffman.css Binary/huffmanCON.css" name="Huffman Coding Tree Slideshow: Setting Codes"}
 ```
 :::
 
@@ -242,7 +242,7 @@ branch.
 ::: dsvis
 The following slideshow shows how to decode a message by traversing our example Huffman tree.
 
-``` {.jsav-animation src="Binary/huffmanDecodeCON.js" scripts="DataStructures/huffman.js" links="DataStructures/huffman.css Binary/huffmanCON.css"}
+``` {.jsav-animation src="Binary/huffmanDecodeCON.js" scripts="DataStructures/huffman.js" links="DataStructures/huffman.css Binary/huffmanCON.css" name="Huffman Coding Tree Slideshow: Decoding"}
 ```
 :::
 

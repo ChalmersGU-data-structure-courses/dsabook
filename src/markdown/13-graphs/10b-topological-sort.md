@@ -69,7 +69,7 @@ If we now pop them one by one we get the topological sort J1, J3, J2, J6, J4, J5
 ::: dsvis
 Here is another example.
 
-``` {.jsav-animation src="Graph/topSortDFSCON.js" links="Graph/topSortDFSCON.css"}
+``` {.jsav-animation src="Graph/topSortDFSCON.js" links="Graph/topSortDFSCON.css" name="TopSort Slideshow"}
 ```
 :::
 

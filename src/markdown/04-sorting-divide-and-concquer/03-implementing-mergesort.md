@@ -59,7 +59,7 @@ So we need an auxiliary array which we can merge the elements into.
 ::: dsvis
 Here is a visualisation for the merge step.
 
-``` {.jsav-animation src="Sorting/mergeImplS1CON.js" links="Sorting/mergeImplS1CON.css"}
+``` {.jsav-animation src="Sorting/mergeImplS1CON.js" links="Sorting/mergeImplS1CON.css" name="Mergesort Implementation Slideshow"}
 ```
 :::
 

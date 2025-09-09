@@ -235,7 +235,7 @@ Here is an implementation for **Union** when using weighted union.
 The following slideshow illustrates a series of **Union** operations with
 weighted union.
 
-``` {.jsav-animation src="General/UFCON.js" links="General/UFCON.css"}
+``` {.jsav-animation src="General/UFCON.js" links="General/UFCON.css" name="Union/Find Example"}
 ```
 :::
 
@@ -269,7 +269,7 @@ also makes all ancestors of the current node point to the root.
 The following slide show illustrates path compression using the last
 step in the previous example.
 
-``` {.jsav-animation src="General/pathcompCON.js" links="General/UFCON.css"}
+``` {.jsav-animation src="General/pathcompCON.js" links="General/UFCON.css" name="Union/Find Path Compression Example"}
 ```
 :::
 

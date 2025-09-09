@@ -33,7 +33,7 @@ an expensive process.
 ::: dsvis
 Demonstration of bucket hashing.
 
-``` {.jsav-animation src="Hashing/buckethashCON1.js" links="Hashing/buckethashCON.css"}
+``` {.jsav-animation src="Hashing/buckethashCON1.js" links="Hashing/buckethashCON.css" name="Bucket Hashing Slideshow 1"}
 ```
 :::
 
@@ -56,7 +56,7 @@ rather than just the first slot in the bucket.
 ::: dsvis
 Demonstration of alternative bucket hashing.
 
-``` {.jsav-animation src="Hashing/buckethashCON2.js" links="Hashing/buckethashCON.css"}
+``` {.jsav-animation src="Hashing/buckethashCON2.js" links="Hashing/buckethashCON.css" name="Bucket Hashing Slideshow 2"}
 ```
 :::
 

@@ -42,7 +42,7 @@ applications.
 ::: dsvis
 #### The sorting problem
 
-``` {.jsav-animation src="Sorting/SortNotationS1CON.js" links="Sorting/SortNotationS1CON.css"}
+``` {.jsav-animation src="Sorting/SortNotationS1CON.js" links="Sorting/SortNotationS1CON.css" name="Sorting Terminology and Notation Slideshow 1"}
 ```
 :::
 

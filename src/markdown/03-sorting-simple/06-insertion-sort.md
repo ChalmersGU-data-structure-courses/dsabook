@@ -36,7 +36,7 @@ The input is an array named `arr` that stores $n$ elements.
 ::: dsvis
 Here we see the first few iterations of Insertion sort.
 
-``` {.jsav-animation src="Sorting/insertionsortCON.js" links="Sorting/InsertionSort.css"}
+``` {.jsav-animation src="Sorting/insertionsortCON.js" links="Sorting/InsertionSort.css" name="Insertion Sort Slideshow"}
 ```
 :::
 
@@ -78,21 +78,21 @@ In the best case -- when the list is already sorted -- the complexity is instead
 ::: dsvis
 Here is an explanation of the worst case cost of Insertion sort.
 
-``` {.jsav-animation src="Sorting/InsertionSortWorstCaseCON.js" links="Sorting/InsertionSort.css"}
+``` {.jsav-animation src="Sorting/InsertionSortWorstCaseCON.js" links="Sorting/InsertionSort.css" name="Insertion Sort Worst Case Slideshow"}
 ```
 :::
 
 ::: dsvis
 And here is an explanation of the cost of the best case.
 
-``` {.jsav-animation src="Sorting/InsertionSortBestCaseCON.js" links="Sorting/InsertionSort.css"}
+``` {.jsav-animation src="Sorting/InsertionSortBestCaseCON.js" links="Sorting/InsertionSort.css" name="Insertion Sort Best Case Slideshow"}
 ```
 :::
 
 ::: dsvis
 And here is the average case cost.
 
-``` {.jsav-animation src="Sorting/InsertionSortAverageCaseCON.js" links="Sorting/InsertionSort.css"}
+``` {.jsav-animation src="Sorting/InsertionSortAverageCaseCON.js" links="Sorting/InsertionSort.css" name="Insertion Sort Average Case Slideshow"}
 ```
 :::
 

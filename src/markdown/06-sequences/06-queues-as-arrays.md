@@ -15,7 +15,7 @@ A simple conversion of the array-based stack implementation is not efficient.
 ::: dsvis
 Array queue -- positions.
 
-``` {.jsav-animation src="List/aqueueFirstCON.js" links="List/aqueueCON.css"}
+``` {.jsav-animation src="List/aqueueFirstCON.js" links="List/aqueueCON.css" name="Array-based Queue Positions Slideshow"}
 ```
 :::
 
@@ -28,14 +28,14 @@ This means that we need two variables, for the positions of the front and the re
 ::: dsvis
 Array queue -- drifting.
 
-``` {.jsav-animation src="List/aqueueDriftCON.js" links="List/aqueueCON.css"}
+``` {.jsav-animation src="List/aqueueDriftCON.js" links="List/aqueueCON.css" name="Array-based Queue Drift Slideshow"}
 ```
 :::
 
 ::: dsvis
 Array queue -- bad representation.
 
-``` {.jsav-animation src="List/aqueueBadCON.js" links="List/aqueueCON.css"}
+``` {.jsav-animation src="List/aqueueBadCON.js" links="List/aqueueCON.css" name="Array-based Queue Bad Representation Slideshow"}
 ```
 :::
 
@@ -52,7 +52,7 @@ Instead of just using $i+1$ for the next position, we have to use $(i+1)\mathop{
 ::: dsvis
 Circular array queue.
 
-``` {.jsav-animation src="List/aqueueCircularCON.js" scripts="DataStructures/CircularQueue.js" links="List/aqueueCON.css"}
+``` {.jsav-animation src="List/aqueueCircularCON.js" scripts="DataStructures/CircularQueue.js" links="List/aqueueCON.css" name="Circular Array-based Queue Slideshow"}
 ```
 :::
 
@@ -62,7 +62,7 @@ How can we recognise when the queue is empty or full?
 ::: dsvis
 Circular array queue -- empty.
 
-``` {.jsav-animation src="List/aqueueEmptyCON.js" scripts="DataStructures/CircularQueue.js" links="List/aqueueCON.css"}
+``` {.jsav-animation src="List/aqueueEmptyCON.js" scripts="DataStructures/CircularQueue.js" links="List/aqueueCON.css" name="Empty Circular Array-based Queue Slideshow"}
 ```
 :::
 

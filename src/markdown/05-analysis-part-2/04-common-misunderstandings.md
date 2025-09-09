@@ -84,6 +84,6 @@ That leaves us with analysing the worst-case upper bound, or sometimes the avera
 
 
 <!-- This explanation is not very pedagogical
-``` {.jsav-animation src="AlgAnal/MisunderstandingsGraphCON.js" links="AlgAnal/MisunderstandingsGraphCON.css"}
+``` {.jsav-animation src="AlgAnal/MisunderstandingsGraphCON.js" links="AlgAnal/MisunderstandingsGraphCON.css" name="Example's graph Visualisation"}
 ```
 -->

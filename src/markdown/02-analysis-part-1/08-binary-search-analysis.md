@@ -38,7 +38,7 @@ $$
 ::: dsvis
 Here is a visual explanation of the complexity of binary search.
 
-``` {.jsav-animation src="AlgAnal/BsearchDandCRecurCON.js" links="AlgAnal/BsearchDandCRecurCON.css"}
+``` {.jsav-animation src="AlgAnal/BsearchDandCRecurCON.js" links="AlgAnal/BsearchDandCRecurCON.css" name="Binary Search recurrence slideshow"}
 ```
 :::
 

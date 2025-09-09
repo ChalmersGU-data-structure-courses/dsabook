@@ -55,7 +55,7 @@ This is called *modular compression* and is the most common compression method.
 ::: dsvis
 Here is an interactive explanation of modular compression.
 
-``` {.jsav-animation src="Hashing/hashFuncExCON1.js"}
+``` {.jsav-animation src="Hashing/hashFuncExCON1.js" name="Hash Function Slideshow 1"}
 ```
 :::
 

@@ -61,7 +61,7 @@ $n$ records, each with a unique key value in the range 0 to $n-1$. A
 record with key $k$ can be stored in $\textit{HT}[k]$, and so the hash function
 is $\mathbf{h}(k) = k$. To find the record with key value $k$, look in $\textit{HT}[k]$.
 
-``` {.jsav-animation src="Hashing/hashIntroCON.js" links="Hashing/hashIntroCON.css"}
+``` {.jsav-animation src="Hashing/hashIntroCON.js" links="Hashing/hashIntroCON.css" name="Hashing Intro Slideshow"}
 ```
 :::
 

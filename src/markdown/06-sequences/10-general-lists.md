@@ -70,7 +70,7 @@ So we make the List interface be a Collection too.
 ::: dsvis
 Insertion into a linked list, overview.
 
-``` {.jsav-animation src="ChalmersGU/ListADT-Positions-CON.js" links="ChalmersGU/CGU-Styles.css"}
+``` {.jsav-animation src="ChalmersGU/ListADT-Positions-CON.js" links="ChalmersGU/CGU-Styles.css" name="List ADT Positions Slideshow"}
 ```
 :::
 
@@ -111,7 +111,7 @@ We can use the same structure as for stacks when implementing general linked lis
 ::: dsvis
 Iterating through a linked list.
 
-``` {.jsav-animation src="ChalmersGU/LinkedList-Iteration-CON.js" links="ChalmersGU/CGU-Styles.css"}
+``` {.jsav-animation src="ChalmersGU/LinkedList-Iteration-CON.js" links="ChalmersGU/CGU-Styles.css" name="Linked List Slideshow 1"}
 ```
 :::
 
@@ -123,7 +123,7 @@ using a pointer to the `current` node.
 ::: dsvis
 The problem with using a pointer to the `current` node.
 
-``` {.jsav-animation src="ChalmersGU/LinkedList-Problems-CON.js" links="ChalmersGU/CGU-Styles.css"}
+``` {.jsav-animation src="ChalmersGU/LinkedList-Problems-CON.js" links="ChalmersGU/CGU-Styles.css" name="Linked List Add/Remove Problems"}
 ```
 :::
 
@@ -141,14 +141,14 @@ current node. This is the solution we will adopt.
 ::: dsvis
 How to insert an element using a pointer to the node *before* the current node.
 
-``` {.jsav-animation src="ChalmersGU/LinkedList-Add-CON.js" links="ChalmersGU/CGU-Styles.css"}
+``` {.jsav-animation src="ChalmersGU/LinkedList-Add-CON.js" links="ChalmersGU/CGU-Styles.css" name="Linked List Add Slideshow"}
 ```
 :::
 
 ::: dsvis
 Here are some special cases for linked list insertion: Inserting at the beginning of a list, and appending at the end.
 
-``` {.jsav-animation src="ChalmersGU/LinkedList-AddSpecial-CON.js" links="ChalmersGU/CGU-Styles.css"}
+``` {.jsav-animation src="ChalmersGU/LinkedList-AddSpecial-CON.js" links="ChalmersGU/CGU-Styles.css" name="Linked List Add Special Cases Slideshow"}
 ```
 :::
 
@@ -179,7 +179,7 @@ Here's an exercise for adding a value to a linked list.
 ::: dsvis
 How to delete from a linked list.
 
-``` {.jsav-animation src="ChalmersGU/LinkedList-Remove-CON.js" links="ChalmersGU/CGU-Styles.css"}
+``` {.jsav-animation src="ChalmersGU/LinkedList-Remove-CON.js" links="ChalmersGU/CGU-Styles.css" name="Linked List Remove Slideshow"}
 ```
 :::
 

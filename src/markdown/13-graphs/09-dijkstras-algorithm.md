@@ -107,7 +107,7 @@ At the end, `distances` will contain the shortest distance from the start to eac
 ::: dsvis
 Here is a visualisation of Dijkstra's algorithm.
 
-``` {.jsav-animation src="Graph/DijkstraCON.js" links="Graph/DijkstraCON.css"}
+``` {.jsav-animation src="Graph/DijkstraCON.js" links="Graph/DijkstraCON.css" name="Dijkstra Slideshow"}
 ```
 :::
 

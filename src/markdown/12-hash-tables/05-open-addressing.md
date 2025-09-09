@@ -62,7 +62,7 @@ to the home position.
 ::: dsvis
 Here is a visualisation of how linear probing works.
 
-``` {.jsav-animation src="Hashing/linProbeCON1.js" links="Hashing/linProbeCON.css"}
+``` {.jsav-animation src="Hashing/linProbeCON1.js" links="Hashing/linProbeCON.css" name="Linear Probing Slideshow 1"}
 ```
 :::
 

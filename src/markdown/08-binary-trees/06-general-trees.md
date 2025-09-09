@@ -116,7 +116,7 @@ with general trees.
 ::: dsvis
 Visualisation of preorder traversal.
 
-``` {.jsav-animation src="General/GenTreePreTravCON.js" links="General/GenTreeCON.css"}
+``` {.jsav-animation src="General/GenTreePreTravCON.js" links="General/GenTreeCON.css" name="General Tree Preorder Traversal Slideshow"}
 ```
 :::
 
@@ -129,7 +129,7 @@ sibling, and so on.
 ::: dsvis
 Visualisation of postorder traversal.
 
-``` {.jsav-animation src="General/GenTreePostTravCON.js" links="General/GenTreeCON.css"}
+``` {.jsav-animation src="General/GenTreePostTravCON.js" links="General/GenTreeCON.css" name="General Tree Postorder Traversal Slideshow"}
 ```
 :::
 

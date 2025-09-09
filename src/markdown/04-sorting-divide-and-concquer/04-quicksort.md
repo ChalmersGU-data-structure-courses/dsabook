@@ -124,7 +124,7 @@ This is because we initially put the pivot first in the subarray, so the value t
 ::: dsvis
 Here is a visualisation of the partitioning algorithm.
 
-``` {.jsav-animation src="Sorting/quicksortCON.js" scripts="Sorting/quicksortCODE.js" links="Sorting/quicksortCON.css"}
+``` {.jsav-animation src="Sorting/quicksortCON.js" scripts="Sorting/quicksortCODE.js" links="Sorting/quicksortCON.css" name="Quicksort Partition Slideshow"}
 ```
 :::
 
@@ -148,7 +148,7 @@ The total cost of the partition operation is constrained by how far `left` and `
 ::: dsvis
 Here is a visualisation illustrating the running time analysis of the partition function.
 
-``` {.jsav-animation src="Sorting/QuickSortPartitionAnalysisCON.js" links="Sorting/QuickSortPartitionAnalysisCON.css"}
+``` {.jsav-animation src="Sorting/QuickSortPartitionAnalysisCON.js" links="Sorting/QuickSortPartitionAnalysisCON.css" name="Quicksort Partition Analysis Slideshow"}
 ```
 :::
 
@@ -197,7 +197,7 @@ Therefore, the worst case running time of Quicksort is $O(n^2)$.
 ::: dsvis
 This visualisation explains the worst-case running time of Quicksort
 
-``` {.jsav-animation src="Sorting/QuickSortWorstCaseCON.js" links="Sorting/QuickSortWorstCaseCON.css"}
+``` {.jsav-animation src="Sorting/QuickSortWorstCaseCON.js" links="Sorting/QuickSortWorstCaseCON.css" name="Quicksort Worst Case Analysis Slideshow"}
 ```
 :::
 
@@ -225,7 +225,7 @@ So the best-case running time of Quicksort is $O(n \log n)$.
 ::: dsvis
 This visualisation explains the best-case running time of Quicksort
 
-``` {.jsav-animation src="Sorting/QuickSortBestCaseCON.js" links="Sorting/QuickSortBestCaseCON.css"}
+``` {.jsav-animation src="Sorting/QuickSortBestCaseCON.js" links="Sorting/QuickSortBestCaseCON.css" name="Quicksort Best Case Analysis Slideshow"}
 ```
 :::
 
@@ -251,7 +251,7 @@ T(0) = T(1) &= c
 This visualisation will help you to understand how this recurrence
 relation was formed.
 
-``` {.jsav-animation src="Sorting/QuickSortAverageCaseCON.js" links="Sorting/QuickSortAverageCaseCON.css"}
+``` {.jsav-animation src="Sorting/QuickSortAverageCaseCON.js" links="Sorting/QuickSortAverageCaseCON.css" name="Quicksort Average Case Analysis Slideshow"}
 ```
 :::
 

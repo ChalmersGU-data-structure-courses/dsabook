@@ -86,21 +86,21 @@ AV.recorded();
 ::: dsvis
 Here is a visualisation of preorder traversal.
 
-``` {.jsav-animation src="Binary/preorderCON.js" links="Binary/BTCON.css"}
+``` {.jsav-animation src="Binary/preorderCON.js" links="Binary/BTCON.css" name="Preorder Traversal Slideshow"}
 ```
 :::
 
 ::: dsvis
 And a visualisation of postorder traversal.
 
-``` {.jsav-animation src="Binary/postorderCON.js" links="Binary/BTCON.css"}
+``` {.jsav-animation src="Binary/postorderCON.js" links="Binary/BTCON.css" name="Postorder Traversal Slideshow"}
 ```
 :::
 
 ::: dsvis
 And finally a visualisation of inorder traversal.
 
-``` {.jsav-animation src="Binary/inorderCON.js" links="Binary/BTCON.css"}
+``` {.jsav-animation src="Binary/inorderCON.js" links="Binary/BTCON.css" name="Inorder Traversal Slideshow"}
 ```
 :::
 

@@ -65,7 +65,7 @@ Here is pseudocode for merging two lists:
 ::: dsvis
 Here is a visualisation for the merge operation.
 
-``` {.jsav-animation src="Sorting/mergesortCON.js"}
+``` {.jsav-animation src="Sorting/mergesortCON.js" name="Merging Slideshow"}
 ```
 :::
 
@@ -163,6 +163,6 @@ Note that this cost is unaffected by the relative order of the values being sort
 ::: dsvis
 This visualisation provides a running time analysis for Mergesort.
 
-``` {.jsav-animation src="Sorting/MergeSortAnalysisCON.js" links="Sorting/MergeSortAnalysisCON.css"}
+``` {.jsav-animation src="Sorting/MergeSortAnalysisCON.js" links="Sorting/MergeSortAnalysisCON.css" name="Mergesort Analysis Slideshow"}
 ```
 :::

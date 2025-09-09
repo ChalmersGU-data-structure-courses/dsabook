@@ -44,7 +44,7 @@ This information lets us know which edge goes into the MST when vertex *v* is pr
 ::: dsvis
 Here is a visualisation of Prim's algorithm.
 
-``` {.jsav-animation src="Graph/primCON.js" links="Graph/primCON.css"}
+``` {.jsav-animation src="Graph/primCON.js" links="Graph/primCON.css" name="Prim's Minimum Cost Spanning Tree Algorithm Slideshow"}
 ```
 :::
 

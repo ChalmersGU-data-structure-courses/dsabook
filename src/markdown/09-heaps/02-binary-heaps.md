@@ -170,7 +170,7 @@ Here is how to insert a new element $V$ into the heap:
 ::: dsvis
 Here is a visual explanation of insertion into a *max*-heap.
 
-``` {.jsav-animation src="Binary/heapinsertCON.js" scripts="DataStructures/binaryheap.js"}
+``` {.jsav-animation src="Binary/heapinsertCON.js" scripts="DataStructures/binaryheap.js" name="Heap insert Slideshow"}
 ```
 :::
 
@@ -246,7 +246,7 @@ Here is how to remove the highest-priority element $V$ from a binary heap:
 ::: dsvis
 Here is a visual explanation of removing from a *max*-heap.
 
-``` {.jsav-animation src="Binary/heapmaxCON.js" scripts="DataStructures/binaryheap.js"}
+``` {.jsav-animation src="Binary/heapmaxCON.js" scripts="DataStructures/binaryheap.js" name="Remove Max Slideshow"}
 ```
 :::
 
@@ -285,9 +285,9 @@ Note that we use a helper method for "sifting" a value down the tree.
 
 <!-- Don't include removing of arbitrary nodes
 ::: dsvis
-#### Exercise: Removing from a *min*-heap
+#### Removing arbitrary nodes
 
-``` {.jsav-animation src="Binary/heapremoveCON.js" scripts="DataStructures/binaryheap.js"}
+``` {.jsav-animation src="Binary/heapremoveCON.js" scripts="DataStructures/binaryheap.js" name="Remove Any Slideshow"}
 ```
 :::
 -->
@@ -385,7 +385,7 @@ array, with the first internal node.
 ::: dsvis
 Here is a visualisation of the build process for a *max*-heap.
 
-``` {.jsav-animation src="Binary/heapbuildCON.js" scripts="DataStructures/binaryheap.js"}
+``` {.jsav-animation src="Binary/heapbuildCON.js" scripts="DataStructures/binaryheap.js" name="Heapbuild Slideshow"}
 ```
 :::
 
@@ -438,7 +438,7 @@ time and $O(n^2)$ worst-case time required to build the BST. -->
 ::: dsvis
 Here is a visual explanation of the cost of `buildHeap`.
 
-``` {.jsav-animation src="Binary/heapbuildProofCON.js" scripts="DataStructures/binaryheap.js" links="Binary/heapbuildProofCON.css"}
+``` {.jsav-animation src="Binary/heapbuildProofCON.js" scripts="DataStructures/binaryheap.js" links="Binary/heapbuildProofCON.css" name="Heap build analysis proof Slideshow"}
 ```
 :::
 

@@ -31,7 +31,7 @@ queue, to be able to add new elements efficiently.
 ::: dsvis
 Linked queue -- introduction.
 
-``` {.jsav-animation src="ChalmersGU/LinkedQueue-Intro-CON.js" links="ChalmersGU/CGU-Styles.css"}
+``` {.jsav-animation src="ChalmersGU/LinkedQueue-Intro-CON.js" links="ChalmersGU/CGU-Styles.css" name="Linked Queue Intro"}
 ```
 :::
 
@@ -49,7 +49,7 @@ So the datatype for linked queues contains three instance variables, including t
 ::: dsvis
 #### Enqueueing to a linked queue
 
-``` {.jsav-animation src="ChalmersGU/LinkedQueue-Enqueue-CON.js" links="ChalmersGU/CGU-Styles.css"}
+``` {.jsav-animation src="ChalmersGU/LinkedQueue-Enqueue-CON.js" links="ChalmersGU/CGU-Styles.css" name="Linked Queue Enqueue"}
 ```
 :::
 
@@ -79,7 +79,7 @@ Linked queue -- enqueue exercise.
 ::: dsvis
 #### Dequeueing from a linked queue
 
-``` {.jsav-animation src="ChalmersGU/LinkedQueue-Dequeue-CON.js" links="ChalmersGU/CGU-Styles.css"}
+``` {.jsav-animation src="ChalmersGU/LinkedQueue-Dequeue-CON.js" links="ChalmersGU/CGU-Styles.css" name="Linked Queue Dequeue"}
 ```
 :::
 

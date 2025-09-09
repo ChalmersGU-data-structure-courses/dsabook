@@ -19,12 +19,12 @@ collision resolution methods.
 
 Recall how linear probing works:
 
-``` {.jsav-animation src="Hashing/linProbeCON1.js" links="Hashing/linProbeCON.css"}
+``` {.jsav-animation src="Hashing/linProbeCON1.js" links="Hashing/linProbeCON.css" name="Linear Probing Slideshow 1"}
 ```
 
 Now the problem is illustrated here:
 
-``` {.jsav-animation src="Hashing/linProbeCON2.js" links="Hashing/linProbeCON.css"}
+``` {.jsav-animation src="Hashing/linProbeCON2.js" links="Hashing/linProbeCON.css" name="Linear Probing Slideshow 2"}
 ```
 :::
 ::::::
@@ -67,7 +67,7 @@ positions will not follow the same probe sequence.
 ::: dsvis
 Example: linear probing by steps
 
-``` {.jsav-animation src="Hashing/collisionCON1.js" links="Hashing/collisionCON.css"}
+``` {.jsav-animation src="Hashing/collisionCON1.js" links="Hashing/collisionCON.css" name="Linear Probing By Steps Slideshow 1"}
 ```
 :::
 
@@ -100,7 +100,7 @@ a probe sequence that visits all slots for every key.
 ::: dsvis
 Example: Using a relative prime step factor.
 
-``` {.jsav-animation src="Hashing/collisionCON2.js" links="Hashing/collisionCON.css"}
+``` {.jsav-animation src="Hashing/collisionCON2.js" links="Hashing/collisionCON.css" name="Linear Probing By Steps Slideshow 2"}
 ```
 :::
 
@@ -143,7 +143,7 @@ values from 1 to $m - 1$ in slots 1 to $m - 1$.
 ::: dsvis
 Slideshow for pseudo-random probing
 
-``` {.jsav-animation src="Hashing/collisionCON3.js" links="Hashing/collisionCON.css"}
+``` {.jsav-animation src="Hashing/collisionCON3.js" links="Hashing/collisionCON.css" name="Pseudo-Random Probing Slideshow"}
 ```
 :::
 
@@ -157,7 +157,7 @@ Here is a practice exercise for pseudo-random probing.
 Pseudo-random probing exhibits another desirable feature in a hash
 function.
 
-``` {.jsav-animation src="Hashing/collisionCON4.js" links="Hashing/collisionCON.css"}
+``` {.jsav-animation src="Hashing/collisionCON4.js" links="Hashing/collisionCON.css" name="Avoiding the Train"}
 ```
 :::
 
@@ -176,7 +176,7 @@ would be $(\textbf{h}(k) + i^2) \mod m$.
 ::: dsvis
 How quadratic probing works.
 
-``` {.jsav-animation src="Hashing/collisionCON5.js" links="Hashing/collisionCON.css"}
+``` {.jsav-animation src="Hashing/collisionCON5.js" links="Hashing/collisionCON.css" name="Quadratic Probing Slideshow"}
 ```
 :::
 
@@ -192,7 +192,7 @@ typically will not visit all slots in the hash table.
 ::: dsvis
 The problem with quadratic probing.
 
-``` {.jsav-animation src="Hashing/collisionCON6.js" links="Hashing/collisionCON.css"}
+``` {.jsav-animation src="Hashing/collisionCON6.js" links="Hashing/collisionCON.css" name="Quadratic Probing Problem"}
 ```
 :::
 
@@ -290,12 +290,12 @@ table size. This is not a problem for typical hashing applications.
 ::: dsvis
 Calculating the secondary hash when the table size ($m$) is prime.
 
-``` {.jsav-animation src="Hashing/collisionCON7.js" links="Hashing/collisionCON.css"}
+``` {.jsav-animation src="Hashing/collisionCON7.js" links="Hashing/collisionCON.css" name="Double Hashing Slideshow 2"}
 ```
 
 Secondary hash when the table size ($m$) is a power of 2.
 
-``` {.jsav-animation src="Hashing/collisionCON8.js" links="Hashing/collisionCON.css"}
+``` {.jsav-animation src="Hashing/collisionCON8.js" links="Hashing/collisionCON.css" name="Double Hashing Slideshow 3"}
 ```
 :::
 

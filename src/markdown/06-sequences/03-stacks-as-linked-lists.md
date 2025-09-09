@@ -66,7 +66,7 @@ Our data type for linked stacks contains two instance variables, one pointer to 
 ::: dsvis
 #### Pushing to a linked stack
 
-``` {.jsav-animation src="ChalmersGU/LinkedStack-Push-CON.js" links="ChalmersGU/CGU-Styles.css"}
+``` {.jsav-animation src="ChalmersGU/LinkedStack-Push-CON.js" links="ChalmersGU/CGU-Styles.css" name="Linked Stack Push"}
 ```
 :::
 
@@ -93,7 +93,7 @@ Linked stack -- push exercise.
 ::: dsvis
 #### Popping from a linked stack
 
-``` {.jsav-animation src="ChalmersGU/LinkedStack-Pop-CON.js" links="ChalmersGU/CGU-Styles.css"}
+``` {.jsav-animation src="ChalmersGU/LinkedStack-Pop-CON.js" links="ChalmersGU/CGU-Styles.css" name="Linked Stack Pop"}
 ```
 :::
 

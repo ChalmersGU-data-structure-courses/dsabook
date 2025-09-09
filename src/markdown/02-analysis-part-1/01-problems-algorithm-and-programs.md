@@ -146,6 +146,6 @@ an instantiation of an algorithm in a programming language.
 ::: dsvis
 The following slideshow should help you to visualise the differences.
 
-``` {.jsav-animation src="AlgAnal/ProblemAlgorithmCON.js" links="AlgAnal/ProblemAlgorithmCON.css"}
+``` {.jsav-animation src="AlgAnal/ProblemAlgorithmCON.js" links="AlgAnal/ProblemAlgorithmCON.css" name="Problem, Algorithm, and Program definitions Slideshow"}
 ```
 :::

@@ -46,7 +46,7 @@ hashing strings based on the first letter in the string.
 ::: dsvis
 Demonstration of the Binning hash function.
 
-``` {.jsav-animation src="Hashing/hashFuncExCON2.js"}
+``` {.jsav-animation src="Hashing/hashFuncExCON2.js" name="Hash Function Slideshow 2"}
 ```
 :::
 

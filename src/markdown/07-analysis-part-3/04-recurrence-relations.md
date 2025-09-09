@@ -347,7 +347,7 @@ In the beginning of this section we showed how to expand some very simple recurr
 Here is a more complicated example, where we want to find the closed form solution of
 $T(n) = 2T(n/2) + 5n^2$; $T(1) = 7$.
 
-``` {.jsav-animation src="AlgAnal/ExpandRecurrenceCON.js" links="AlgAnal/ExpandRecurrenceCON.css"}
+``` {.jsav-animation src="AlgAnal/ExpandRecurrenceCON.js" links="AlgAnal/ExpandRecurrenceCON.css" name="Divide-and-Conquer Expansion Slideshow"}
 ```
 :::
 
@@ -424,7 +424,7 @@ T(n)  &=  aT(n/b) + cn^k \\
 ::: dsvis
 Here is a more visual presentation of this same derivation.
 
-``` {.jsav-animation src="AlgAnal/DandCRecurrenceCON.js" links="AlgAnal/DandCRecurrenceCON.css"}
+``` {.jsav-animation src="AlgAnal/DandCRecurrenceCON.js" links="AlgAnal/DandCRecurrenceCON.css" name="Divide-and-Conquer Expansion Slideshow 2"}
 ```
 :::
 
