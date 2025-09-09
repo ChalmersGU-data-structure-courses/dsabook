@@ -80,7 +80,8 @@ Note that later in the chapter we will discuss better pivot selection strategies
 ::: dsvis
 Quicksort pivot proficiency exercise
 
-<avembed id="QuicksortPivotPRO" src="Sorting/QuicksortPivotPRO.html" type="ka" name="Quicksort Pivot Proficiency Exercise"/>
+```{.jsav-embedded src="Sorting/QuicksortPivotPRO.html" type="ka" name="Quicksort Pivot Proficiency Exercise"}
+```
 :::
 
 <!--
@@ -131,7 +132,8 @@ Here is a visualisation of the partitioning algorithm.
 ::: dsvis
 Quicksort partition proficiency exercise.
 
-<avembed id="QuicksortPartitPRO" src="Sorting/QuicksortPartitPRO.html" type="ka" name="Quicksort Partition Proficiency Exercise"/>
+```{.jsav-embedded src="Sorting/QuicksortPartitPRO.html" type="ka" name="Quicksort Partition Proficiency Exercise"}
+```
 :::
 
 To analyse Quicksort, we first analyse the functions for finding the pivot and partitioning a subarray of length $k$.
@@ -164,14 +166,16 @@ sub-partitions are separated out to match the recursion tree. In
 reality, there is only a single array involved (as you will see in the
 proficiency exercise that follows the visualisation).
 
-<avembed id="quicksortAV" src="Sorting/quicksortAV.html" type="ss" name="Quicksort Visualisation"/>
+```{.jsav-embedded src="Sorting/quicksortAV.html" type="ss" name="Quicksort Visualisation"}
+```
 :::
 
 ::: dsvis
 Here is a complete proficiency exercise to see how well you understand
 Quicksort.
 
-<avembed id="quicksortPRO" src="Sorting/quicksortPRO.html" type="pe" name="Quicksort Proficiency Exercise"/>
+```{.jsav-embedded src="Sorting/quicksortPRO.html" type="pe" name="Quicksort Proficiency Exercise"}
+```
 :::
 ::::::
 

@@ -232,9 +232,11 @@ $100K = 10^5$    $16.6$      $10^5$     $1.6\cdot 10^6$    $10^{10}$   $10^{15}$
 ::: dsvis
 ### Growth rates exercises
 
-<avembed id="CompareGrowth" src="AlgAnal/CompareGrowth.html" type="ka" name="Comparing Growth Rates Exercise"/>
+```{.jsav-embedded src="AlgAnal/CompareGrowth.html" type="ka" name="Comparing Growth Rates Exercise"}
+```
 
-<avembed id="GrowthRatesPRO" src="AlgAnal/GrowthRatesPRO.html" type="ka" name="Growth Rates Ordering Exercise"/>
+```{.jsav-embedded src="AlgAnal/GrowthRatesPRO.html" type="ka" name="Growth Rates Ordering Exercise"}
+```
 :::
 
 <!-- TODO

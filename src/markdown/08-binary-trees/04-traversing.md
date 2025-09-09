@@ -148,19 +148,22 @@ order in which the node and its children are visited, as appropriate.
 ::: dsvis
 #### Preorder traversal practice
 
-<avembed id="btTravPreorderPRO" src="Binary/btTravPreorderPRO.html" type="pe" name="Binary Tree Preorder Traversal Exercise"/>
+```{.jsav-embedded src="Binary/btTravPreorderPRO.html" type="pe" name="Binary Tree Preorder Traversal Exercise"}
+```
 :::
 
 ::: dsvis
 #### Postorder traversal practice
 
-<avembed id="btTravPostorderPRO" src="Binary/btTravPostorderPRO.html" type="pe" name="Binary Tree Postorder Traversal Exercise"/>
+```{.jsav-embedded src="Binary/btTravPostorderPRO.html" type="pe" name="Binary Tree Postorder Traversal Exercise"}
+```
 :::
 
 ::: dsvis
 #### Inorder traversal practice
 
-<avembed id="btTravInorderPRO" src="Binary/btTravInorderPRO.html" type="pe" name="Binary Tree Inorder Traversal Exercise"/>
+```{.jsav-embedded src="Binary/btTravInorderPRO.html" type="pe" name="Binary Tree Inorder Traversal Exercise"}
+```
 :::
 
 

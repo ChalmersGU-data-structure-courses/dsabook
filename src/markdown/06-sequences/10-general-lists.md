@@ -171,7 +171,8 @@ Here's the code for addition.
 ::: dsvis
 Here's an exercise for adding a value to a linked list.
 
-<avembed id="LinkedList-Add-PRO" src="ChalmersGU/LinkedList-Add-PRO.html" type="ka" name="Linked List Add Exercise"/>
+```{.jsav-embedded src="ChalmersGU/LinkedList-Add-PRO.html" type="ka" name="Linked List Add Exercise"}
+```
 :::
 
 #### Removing a node
@@ -206,7 +207,8 @@ Here's the code for deletion:
 ::: dsvis
 And here's an exercise.
 
-<avembed id="LinkedList-Remove-PRO" src="ChalmersGU/LinkedList-Remove-PRO.html" type="ka" name="Linked List Remove Exercise" height="700"/>
+```{.jsav-embedded src="ChalmersGU/LinkedList-Remove-PRO.html" type="ka" name="Linked List Remove Exercise" height="700"}
+```
 :::
 
 #### Complexity analysis

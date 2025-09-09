@@ -68,13 +68,15 @@ Bubble sort continues in this way until the entire array is sorted.
 ::: dsvis
 The following visualisation shows the complete Bubble sort. You can input your own data if you like.
 
-<avembed id="bubblesortAV" src="Sorting/bubblesortAV.html" type="ss" name="Bubble Sort Visualisation"/>
+```{.jsav-embedded src="Sorting/bubblesortAV.html" type="ss" name="Bubble Sort Visualisation"}
+```
 :::
 
 ::: dsvis
 Now try for yourself to see if you understand how Bubble sort works.
 
-<avembed id="BubsortPRO" src="Sorting/BubsortPRO.html" type="ka" name="Bubble Sort Proficiency Exercise"/>
+```{.jsav-embedded src="Sorting/BubsortPRO.html" type="ka" name="Bubble Sort Proficiency Exercise"}
+```
 :::
 
 ::::::::::

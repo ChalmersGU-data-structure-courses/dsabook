@@ -249,7 +249,8 @@ The following slideshow shows how to decode a message by traversing our example 
 ::: dsvis
 #### Practice exercise: Huffman decoding
 
-<avembed id="HuffmanDecodePRO" src="Binary/HuffmanDecodePRO.html" type="ka" name="Huffman Decoding Proficiency Exercise"/>
+```{.jsav-embedded src="Binary/HuffmanDecodePRO.html" type="ka" name="Huffman Decoding Proficiency Exercise"}
+```
 :::
 
 ### How efficient is Huffman coding?
@@ -327,7 +328,8 @@ will not be as expected either.
 You can use the following visualisation to create a Huffman tree for
 your own set of letters and frequencies.
 
-<avembed id="huffmanCustomBuildAV" src="Binary/huffmanCustomBuildAV.html" type="ss" name="Huffman Custom Build"/>
+```{.jsav-embedded src="Binary/huffmanCustomBuildAV.html" type="ss" name="Huffman Custom Build"}
+```
 :::
 
 ### Proof of optimality for Huffman coding

@@ -55,7 +55,8 @@ So, to push an element onto the stack, we assign `internalArray[size]` and then 
 ::: dsvis
 Array stack -- push exercise.
 
-<avembed id="DynamicArrayStack-Push-PRO" src="ChalmersGU/DynamicArrayStack-Push-PRO.html" type="ka" name="Array-based Stack Push Exercise"/>
+```{.jsav-embedded src="ChalmersGU/DynamicArrayStack-Push-PRO.html" type="ka" name="Array-based Stack Push Exercise"}
+```
 :::
 
 
@@ -82,7 +83,8 @@ After that we can clear the old top cell in the array and return the result.
 ::: dsvis
 Array stack -- pop exercise.
 
-<avembed id="DynamicArrayStack-Pop-PRO" src="ChalmersGU/DynamicArrayStack-Pop-PRO.html" type="ka" name="Array-based Stack Pop Exercise"/>
+```{.jsav-embedded src="ChalmersGU/DynamicArrayStack-Pop-PRO.html" type="ka" name="Array-based Stack Pop Exercise"}
+```
 :::
 
 

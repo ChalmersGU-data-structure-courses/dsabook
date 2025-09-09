@@ -119,7 +119,8 @@ elements, which is $O(n)$.
 ::: dsvis
 Practice exercise about inserting into an array-based list.
 
-<avembed id="StaticArrayList-Add-PRO" src="ChalmersGU/StaticArrayList-Add-PRO.html" type="ka" name="Array-based List Add Exercise"/>
+```{.jsav-embedded src="ChalmersGU/StaticArrayList-Add-PRO.html" type="ka" name="Array-based List Add Exercise"}
+```
 :::
 
 #### Removing elements
@@ -157,7 +158,8 @@ elements, which is $O(n)$.
 ::: dsvis
 Practise exercise about removing from an array-based list.
 
-<avembed id="StaticArrayList-Remove-PRO" src="ChalmersGU/StaticArrayList-Remove-PRO.html" type="ka" name="Array-based List Remove Exercise"/>
+```{.jsav-embedded src="ChalmersGU/StaticArrayList-Remove-PRO.html" type="ka" name="Array-based List Remove Exercise"}
+```
 :::
 
 <!--

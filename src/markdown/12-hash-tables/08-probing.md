@@ -51,7 +51,8 @@ implemented efficiently.
 ::: dsvis
 #### Exercise: Practice linear probing
 
-<avembed id="HashLinearPPRO" src="Hashing/HashLinearPPRO.html" type="ka" name="Linear Probing Proficiency Exercise"/>
+```{.jsav-embedded src="Hashing/HashLinearPPRO.html" type="ka" name="Linear Probing Proficiency Exercise"}
+```
 :::
 
 
@@ -107,7 +108,8 @@ Example: Using a relative prime step factor.
 ::: dsvis
 Now you can practice linear probing by different step sizes.
 
-<avembed id="HashLinearStepPPRO" src="Hashing/HashLinearStepPPRO.html" type="ka" name="Linear Probing By Steps Proficiency Exercise"/>
+```{.jsav-embedded src="Hashing/HashLinearStepPPRO.html" type="ka" name="Linear Probing By Steps Proficiency Exercise"}
+```
 :::
 
 ### Pseudo-random probing
@@ -150,7 +152,8 @@ Slideshow for pseudo-random probing
 ::: dsvis
 Here is a practice exercise for pseudo-random probing.
 
-<avembed id="HashPseudoRandomPPRO" src="Hashing/HashPseudoRandomPPRO.html" type="ka" name="Pseudo-Random Probing Proficiency Exercise"/>
+```{.jsav-embedded src="Hashing/HashPseudoRandomPPRO.html" type="ka" name="Pseudo-Random Probing Proficiency Exercise"}
+```
 :::
 
 ::: dsvis
@@ -183,7 +186,8 @@ How quadratic probing works.
 ::: dsvis
 Now you can practice quadratic probing.
 
-<avembed id="HashQuadraticPPRO" src="Hashing/HashQuadraticPPRO.html" type="ka" name="Quadratic Probing Proficiency Exercise"/>
+```{.jsav-embedded src="Hashing/HashQuadraticPPRO.html" type="ka" name="Quadratic Probing Proficiency Exercise"}
+```
 :::
 
 There is one problem with quadratic probing: Its probe sequence
@@ -302,7 +306,8 @@ Secondary hash when the table size ($m$) is a power of 2.
 ::: dsvis
 Double hashing exercise.
 
-<avembed id="HashDoublePPRO" src="Hashing/HashDoublePPRO.html" type="ka" name="Double Hashing Proficiency Exercise"/>
+```{.jsav-embedded src="Hashing/HashDoublePPRO.html" type="ka" name="Double Hashing Proficiency Exercise"}
+```
 :::
 
 ::::::

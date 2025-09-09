@@ -32,7 +32,8 @@ pseudocode sketch of Mergesort:
 ::: dsvis
 Here is a visualisation that illustrates how Mergesort works.
 
-<avembed id="mergesortAV" src="Sorting/mergesortAV.html" type="ss" name="Mergesort Visualisation"/>
+```{.jsav-embedded src="Sorting/mergesortAV.html" type="ss" name="Mergesort Visualisation"}
+```
 :::
 
 #### Merge
@@ -74,7 +75,8 @@ Here is a visualisation for the merge operation.
 
 Here is a Mergesort warmup exercise to practice merging.
 
-<avembed id="MergesortMergePRO" src="Sorting/MergesortMergePRO.html" type="ka" name="Mergesort Merging Proficiency Exercise"/>
+```{.jsav-embedded src="Sorting/MergesortMergePRO.html" type="ka" name="Mergesort Merging Proficiency Exercise"}
+```
 :::
 
 ::: dsvis
@@ -82,7 +84,8 @@ Here is a Mergesort warmup exercise to practice merging.
 
 Now here is a full proficiency exercise to put it all together.
 
-<avembed id="mergesortPRO" src="Sorting/mergesortPRO.html" type="pe" name="Mergesort Proficiency Exercise"/>
+```{.jsav-embedded src="Sorting/mergesortPRO.html" type="pe" name="Mergesort Proficiency Exercise"}
+```
 :::
 
 <!--

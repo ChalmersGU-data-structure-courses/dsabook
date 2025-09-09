@@ -94,7 +94,8 @@ Reconstructing the original tree in @fig:example_bintree from its sequential rep
 ::: dsvis
 Practice exercise for sequential tree representation.
 
-<avembed id="SequentialTreePRO" src="General/SequentialTreePRO.html" type="ka" name="First Sequential Representation Exercise"/>
+```{.jsav-embedded src="General/SequentialTreePRO.html" type="ka" name="First Sequential Representation Exercise"}
+```
 :::
 
 #### Alternative sequential representation
@@ -151,7 +152,8 @@ bit.
 ::: dsvis
 Practice exercise for the alternative sequential representation.
 
-<avembed id="SequentialTreeAltPRO" src="General/SequentialTreeAltPRO.html" type="ka" name="Alternate Sequential Representation Exercise"/>
+```{.jsav-embedded src="General/SequentialTreeAltPRO.html" type="ka" name="Alternate Sequential Representation Exercise"}
+```
 :::
 
 #### Bit vector representation
@@ -171,7 +173,8 @@ Reconstructing the shape of the tree in @fig:example_bintree from its bit vector
 ::: dsvis
 Practice exercise for the bit vector representation.
 
-<avembed id="SequentialTreeBitVectorPRO" src="General/SequentialTreeBitVectorPRO.html" type="ka" name="Bit Vector Sequential Representation Exercise"/>
+```{.jsav-embedded src="General/SequentialTreeBitVectorPRO.html" type="ka" name="Bit Vector Sequential Representation Exercise"}
+```
 :::
 
 #### Serialising general trees
@@ -205,7 +208,8 @@ in @fig:example_bintree is the left or right child of node $B$.
 ::: dsvis
 Practice exercise for sequential representation of general trees.
 
-<avembed id="SequentialTreeGenTreePRO" src="General/SequentialTreeGenTreePRO.html" type="ka" name="General Tree Sequential Representation Exercise"/>
+```{.jsav-embedded src="General/SequentialTreeGenTreePRO.html" type="ka" name="General Tree Sequential Representation Exercise"}
+```
 :::
 
 ::::::

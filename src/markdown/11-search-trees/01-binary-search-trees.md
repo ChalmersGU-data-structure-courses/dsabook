@@ -194,7 +194,8 @@ Here is an interactive explanation of searching in a BST.
 ::: dsvis
 Here is an exercise on the BST search algorithm.
 
-<avembed id="BSTsearchPRO" src="Binary/BSTsearchPRO.html" type="pe" name="BST Search Proficiency Exercise"/>
+```{.jsav-embedded src="Binary/BSTsearchPRO.html" type="pe" name="BST Search Proficiency Exercise"}
+```
 :::
 
 #### Setting the value for a key
@@ -240,7 +241,8 @@ necessary, which is probably more expensive than the assignment!
 ::: dsvis
 Here is an exercise on BST insertion.
 
-<avembed id="BSTinsertPRO" src="Binary/BSTinsertPRO.html" type="pe" name="BST Insert Proficiency Exercise"/>
+```{.jsav-embedded src="Binary/BSTinsertPRO.html" type="pe" name="BST Insert Proficiency Exercise"}
+```
 :::
 
 ::::::
@@ -400,7 +402,8 @@ Note that the helper function returns the updated subtree, and we have to make s
 ::: dsvis
 Here is an exercise on BST deletion.
 
-<avembed id="BSTremovePRO" src="Binary/BSTremovePRO.html" type="pe" name="BST Remove Proficiency Exercise"/>
+```{.jsav-embedded src="Binary/BSTremovePRO.html" type="pe" name="BST Remove Proficiency Exercise"}
+```
 :::
 
 ::::::

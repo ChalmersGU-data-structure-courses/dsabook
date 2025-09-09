@@ -100,7 +100,8 @@ debug and understand at best, and are often machine dependent at worst.
 ::: dsvis
 Here is an exercise for the space requirements of binary trees.
 
-<avembed id="TreeOverheadFIB" src="Binary/TreeOverheadFIB.html" type="ka" name="Tree Overhead Exercise"/>
+```{.jsav-embedded src="Binary/TreeOverheadFIB.html" type="ka" name="Tree Overhead Exercise"}
+```
 :::
 
 ::::::

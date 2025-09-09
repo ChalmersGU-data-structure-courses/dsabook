@@ -162,7 +162,8 @@ This is consistent with the results for Selection sort, where we concluded that 
 ::: dsvis
 Now, you can test whether you understand how this optimisation works.
 
-<avembed id="insertionSortWithoutSwapPRO" src="Sorting/insertionSortWithoutSwapPRO.html" type="pe" name="Insertion Sort Without Swap Proficiency Exercise"/>
+```{.jsav-embedded src="Sorting/insertionSortWithoutSwapPRO.html" type="pe" name="Insertion Sort Without Swap Proficiency Exercise"}
+```
 :::
 
 ::::::

@@ -38,7 +38,8 @@ The deletion process in action.
 ::: dsvis
 Here is a practice exercise.
 
-<avembed id="HashingDelPRO" src="Hashing/HashingDelPRO.html" type="pe" name="Hash Deletion Proficiency Exercise"/>
+```{.jsav-embedded src="Hashing/HashingDelPRO.html" type="pe" name="Hash Deletion Proficiency Exercise"}
+```
 :::
 
 The use of tombstones allows searches to work correctly and allows reuse

@@ -48,13 +48,15 @@ As an element is less than or equal to $x$ is encountered, `insertionSort` is do
 ::: dsvis
 The following visualisation shows the complete Insertion sort. You can input your own data if you like.
 
-<avembed id="insertionsortAV" src="Sorting/insertionsortAV.html" type="ss" name="Insertion Sort Visualisation"/>
+```{.jsav-embedded src="Sorting/insertionsortAV.html" type="ss" name="Insertion Sort Visualisation"}
+```
 :::
 
 ::: dsvis
 Now try for yourself to see if you understand how Insertion sort works.
 
-<avembed id="InssortPRO" src="Sorting/InssortPRO.html" type="ka" name="Insertion Sort Proficiency Exercise"/>
+```{.jsav-embedded src="Sorting/InssortPRO.html" type="ka" name="Insertion Sort Proficiency Exercise"}
+```
 :::
 
 ::::::::

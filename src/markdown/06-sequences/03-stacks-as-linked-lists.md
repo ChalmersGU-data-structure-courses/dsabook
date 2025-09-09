@@ -85,7 +85,8 @@ The actions to create the node, set its value and pointer, and then redirect the
 ::: dsvis
 Linked stack -- push exercise.
 
-<avembed id="LstackPushPRO" src="ChalmersGU/LstackPushPRO.html" type="ka" name="Linked Stack Push Exercise"/>
+```{.jsav-embedded src="ChalmersGU/LstackPushPRO.html" type="ka" name="Linked Stack Push Exercise"}
+```
 :::
 
 <!-- #### Popping from a linked stack -->
@@ -116,6 +117,7 @@ This is to help the garbage collection system actually remove the whole node whe
 ::: dsvis
 Linked stack -- pop exercise.
 
-<avembed id="LstackPopPRO" src="ChalmersGU/LstackPopPRO.html" type="ka" name="Linked Stack Pop Exercise"/>
+```{.jsav-embedded src="ChalmersGU/LstackPopPRO.html" type="ka" name="Linked Stack Pop Exercise"}
+```
 :::
 

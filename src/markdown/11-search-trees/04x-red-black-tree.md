@@ -9,12 +9,13 @@
 
 ### Exercise 1
 
-<avembed-todo id="redBlackTreeColoring" src="Development/redBlackTreeColoring.html" type="pe" name="Red-Black Tree Coloring Exercise"/>
+``` {.jsav-embedded src="Development/redBlackTreeColoring.html" type="pe" name="Red-Black Tree Coloring Exercise"}
+```
 
 ### Exercise 2
 
-<avembed-todo id="redBlackTreePRO" src="Development/redBlackTreePRO.html" type="pe" name="Red-Black Tree Proficiency Exercise"/>
-
+``` {.jsav-embedded src="Development/redBlackTreePRO.html" type="pe" name="Red-Black Tree Proficiency Exercise"}
+```
 
 A 2-3 tree is a conceptually elegant way to maintain a balanced search
 tree. By extending the binary search tree with 3-nodes, we can keep the

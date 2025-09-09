@@ -136,8 +136,8 @@ For people, the relation "is a sibling of" is symmetric and transitive.
 If we define a person to be a sibling of themself, then it is reflexive; if we define a person not to be a sibling of themself, then it is irreflexive.
 
 <!--
-.. avembed:: Exercises/Background/SetTFrelation.html ka
-   :long_name: Relations Exercise
+``` {.jsav-embedded src="Background/SetTFrelation.html" type="ka" name="Relations Exercise"}
+```
 -->
 
 #### Equivalence relations
@@ -209,8 +209,8 @@ This relation is an equivalence relation because
 -->
 
 <!--
-.. avembed:: Exercises/Background/SetTFequivrel.html ka
-   :long_name: Equivalence Exercise
+``` {.jsav-embedded src="Background/SetTFequivrel.html" type="ka" name="Equivalence Exercise"}
+```
 -->
 
 #### Partial orders
@@ -238,8 +238,8 @@ Therefore, the subset operator does not define a total order on the powerset of 
 :::
 
 <!--
-.. avembed:: Exercises/Background/SetTFpartialorder.html ka
-   :long_name: PartialOrder Exercise
+``` {.jsav-embedded src="Background/SetTFpartialorder.html" type="ka" name ="PartialOrder Exercise"}
+```
 -->
 
 ### Miscellaneous notations
@@ -443,8 +443,8 @@ logarithm for the result.
 
 Here is some practice with manipulating logarithms.
 
-.. avembed:: Exercises/Background/MathLogSumm.html ka
-   :long_name: Logarithms Practice Questions
+``` {.jsav-embedded src="Background/MathLogSumm.html" type="ka" name="Logarithms Practice Questions"}
+```
  -->
 
 ### Summations
@@ -1136,8 +1136,8 @@ total.
 
 Here are some practice questions for the sections in this chapter.
 
-.. avembed:: Exercises/Background/MathBgSumm.html ka
-   :long_name: Math Background Summary Questions
+``` {.jsav-embedded src="Background/MathBgSumm.html" type="ka" name="Math Background Summary Questions"}
+```
  -->
 
 ### Random numbers

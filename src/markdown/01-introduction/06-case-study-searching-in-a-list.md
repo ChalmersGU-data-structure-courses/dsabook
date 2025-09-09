@@ -127,7 +127,8 @@ Another variation is returning the position of the greatest value less than the 
 :::: dsvis
 #### Binary search exercise
 
-<avembed id="binarySearchPRO" src="Searching/binarySearchPRO.html" type="pe" name="Binary Search Proficiency Exercise"/>
+```{.jsav-embedded src="Searching/binarySearchPRO.html" type="pe" name="Binary Search Proficiency Exercise"}
+```
 :::
 
 <!--

@@ -40,7 +40,8 @@ Demonstration of bucket hashing.
 ::: dsvis
 Now you can try it yourself.
 
-<avembed id="HashBucketPRO" src="Hashing/HashBucketPRO.html" type="ka" name="Bucket Hashing Proficiency Exercise"/>
+```{.jsav-embedded src="Hashing/HashBucketPRO.html" type="ka" name="Bucket Hashing Proficiency Exercise"}
+```
 :::
 
 ### An alternative approach to bucket hashing
@@ -72,7 +73,8 @@ unnecessary disk accesses.
 ::: dsvis
 #### Exercise: Bucket hashing
 
-<avembed id="HashBucket2PRO" src="Hashing/HashBucket2PRO.html" type="ka" name="Alternate Bucket Hashing Proficiency Exercise"/>
+```{.jsav-embedded src="Hashing/HashBucket2PRO.html" type="ka" name="Alternate Bucket Hashing Proficiency Exercise"}
+```
 :::
 
 ::::::

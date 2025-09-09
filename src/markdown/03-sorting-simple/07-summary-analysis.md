@@ -96,5 +96,6 @@ How can they circumvent the quadratic behaviour?
 ::: dsvis
 Inversions proficiency exercise
 
-<avembed id="FindInversionsPRO" src="Sorting/FindInversionsPRO.html" type="ka" name="Inversions Proficiency Exercise"/>
+```{.jsav-embedded src="Sorting/FindInversionsPRO.html" type="ka" name="Inversions Proficiency Exercise"}
+```
 :::

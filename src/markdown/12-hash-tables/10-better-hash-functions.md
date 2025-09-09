@@ -127,7 +127,8 @@ digits. The key point is that the middle two digits of the result (5 and
 Here is a little calculator for you to see how this works. Start with
 '4567' as an example.
 
-<avembed id="MidSquare" src="Hashing/MidSquare.html" type="pe" name="Mid-Square Calculator"/>
+```{.jsav-embedded src="Hashing/MidSquare.html" type="pe" name="Mid-Square Calculator"}
+```
 :::
 
 ### A simple hash function for strings
@@ -168,7 +169,8 @@ will result in the same hash value.
 ::: dsvis
 Now you can try it out with this calculator.
 
-<avembed id="StringSimple" src="Hashing/StringSimple.html" type="pe" name="Simple String Folding Calculator"/>
+```{.jsav-embedded src="Hashing/StringSimple.html" type="pe" name="Simple String Folding Calculator"}
+```
 :::
 
 ### Improved string folding
@@ -199,7 +201,8 @@ table.
 ::: dsvis
 Now you can try it out with this calculator.
 
-<avembed id="StringSfold" src="Hashing/StringSfold.html" type="pe" name="Improved String Folding Calculator"/>
+```{.jsav-embedded src="Hashing/StringSfold.html" type="pe" name="Improved String Folding Calculator"}
+```
 :::
 
 For any sufficiently long string, the sum will typically cause a 32-bit
@@ -214,7 +217,8 @@ Now here is an exercise to let you practice these various hash
 functions. You should use the calculators above for the more complicated
 hash functions.
 
-<avembed id="HashFuncFIBSumm" src="Hashing/HashFuncFIBSumm.html" type="ka" name="Hash Function Pick Slot Summary"/>
+```{.jsav-embedded src="Hashing/HashFuncFIBSumm.html" type="ka" name="Hash Function Pick Slot Summary"}
+```
 :::
 
 ::::::

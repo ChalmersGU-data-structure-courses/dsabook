@@ -187,6 +187,7 @@ vertex $v_i, i \leq j$, because to do so would form a cycle.
 ::: dsvis
 Here is an exercise for Prim's algorithm.
 
-<avembed id="PrimPE" src="Graph/PrimPE.html" type="pe" name="Prim's Algorithm Proficiency Exercise"/>
+```{.jsav-embedded src="Graph/PrimPE.html" type="pe" name="Prim's Algorithm Proficiency Exercise"}
+```
 :::
 ::::::

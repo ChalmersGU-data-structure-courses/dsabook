@@ -115,7 +115,8 @@ start it, so that you can see the behaviour on different examples. It can
 show you DFS run on a directed graph or an undirected graph. Be sure to
 look at an example for each type of graph.
 
-<avembed id="DFSAV" src="Graph/DFSAV.html" type="ss" name="DFS AV"/>
+```{.jsav-embedded src="Graph/DFSAV.html" type="ss" name="DFS AV"}
+```
 :::
 
 DFS processes each edge once in a directed graph. In an undirected
@@ -126,7 +127,8 @@ $O(|\mathbf{V}| + |\mathbf{E}|)$.
 ::: dsvis
 Here is an exercise for you to practice DFS.
 
-<avembed id="DFSPE" src="Graph/DFSPE.html" type="pe" name="DFS Proficiency Exercise"/>
+```{.jsav-embedded src="Graph/DFSPE.html" type="pe" name="DFS Proficiency Exercise"}
+```
 :::
 
 ### Breadth-first search
@@ -175,13 +177,15 @@ start it, so that you can see the behaviour on different examples. It can
 show you BFS run on a directed graph or an undirected graph. Be sure to
 look at an example for each type of graph.
 
-<avembed id="BFSAV" src="Graph/BFSAV.html" type="ss" name="BFS AV"/>
+```{.jsav-embedded src="Graph/BFSAV.html" type="ss" name="BFS AV"}
+```
 :::
 
 ::: dsvis
 Here is an exercise for you to practice BFS.
 
-<avembed id="BFSPE" src="Graph/BFSPE.html" type="pe" name="BFS Proficiency Exercise"/>
+```{.jsav-embedded src="Graph/BFSPE.html" type="pe" name="BFS Proficiency Exercise"}
+```
 :::
 
 <!--

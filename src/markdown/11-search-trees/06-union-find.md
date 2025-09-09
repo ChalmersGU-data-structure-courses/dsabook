@@ -307,7 +307,8 @@ covers many aspects of the equivalence class problem.
 ::: dsvis
 Union/Find practise exercise.
 
-<avembed id="UnionFindPRO" src="General/UnionFindPRO.html" type="pe" name="Union/Find Proficiency Exercise"/>
+```{.jsav-embedded src="General/UnionFindPRO.html" type="pe" name="Union/Find Proficiency Exercise"}
+```
 :::
 
 ::::::

@@ -89,7 +89,8 @@ For example, the left child of node 1 (which contains value L) is at index $2 \c
 ::: dsvis
 Here is a practice exercise for calculating the array indices of nodes.
 
-<avembed id="CompleteFIB" src="Binary/CompleteFIB.html" type="ka" name="Complete Tree Exercise"/>
+```{.jsav-embedded src="Binary/CompleteFIB.html" type="ka" name="Complete Tree Exercise"}
+```
 :::
 
 ### Implementing binary heaps
@@ -229,7 +230,8 @@ $O(n \log n)$ time in the worst case.
 ::: dsvis
 #### Exercise: Insert into a *min*-heap
 
-<avembed id="heapinsertPRO" src="Binary/heapinsertPRO.html" type="pe" name="Heap Insert Proficiency Exercise"/>
+```{.jsav-embedded src="Binary/heapinsertPRO.html" type="pe" name="Heap Insert Proficiency Exercise"}
+```
 :::
 
 
@@ -280,7 +282,8 @@ Note that we use a helper method for "sifting" a value down the tree.
 ::: dsvis
 #### Exercise: Delete from a *min*-heap
 
-<avembed id="heapremovePRO" src="Binary/heapremovePRO.html" type="pe" name="Heap Remove Exercise"/>
+```{.jsav-embedded src="Binary/heapremovePRO.html" type="pe" name="Heap Remove Exercise"}
+```
 :::
 
 <!-- Don't include removing of arbitrary nodes
@@ -407,7 +410,8 @@ The advantage is that it doesn't allocate any new memory.
 ::: dsvis
 #### Exercise: Building a *min*-heap
 
-<avembed id="heapbuildPRO" src="Binary/heapbuildPRO.html" type="pe" name="Heap Build Proficiency Exercise"/>
+```{.jsav-embedded src="Binary/heapbuildPRO.html" type="pe" name="Heap Build Proficiency Exercise"}
+```
 :::
 
 What is the cost of `buildHeap`? Clearly it is the sum of the costs for

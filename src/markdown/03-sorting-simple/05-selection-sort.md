@@ -63,13 +63,15 @@ Selection sort continues in this way until the entire array is sorted.
 ::: dsvis
 The following visualisation puts it all together. You can input your own data if you like.
 
-<avembed id="selectionsortAV" src="Sorting/selectionsortAV.html" type="ss" name="Selection Sort Visualisation"/>
+``` {.jsav-embedded src="Sorting/selectionsortAV.html"}
+```
 :::
 
 ::: dsvis
 Now try for yourself to see if you understand how Selection sort works.
 
-<avembed id="SelsortPRO" src="Sorting/SelsortPRO.html" type="ka" name="Selection Sort Proficiency Exercise"/>
+``` {.jsav-embedded src="Sorting/SelsortPRO.html"}
+```
 :::
 
 ::::::::

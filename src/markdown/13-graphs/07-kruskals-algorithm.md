@@ -63,7 +63,8 @@ we use a priority queue instead of sorting all edges in advance).
 ::: dsvis
 Here is an exercise for Kruskal's algorithm.
 
-<avembed id="KruskalPE" src="Graph/KruskalPE.html" type="pe" name="Kruskal's Algorithm Proficiency Exercise"/>
+```{.jsav-embedded src="Graph/KruskalPE.html" type="pe" name="Kruskal's Algorithm Proficiency Exercise"}
+```
 :::
 
 <!--

@@ -147,6 +147,7 @@ It is straightforward to modify the implementation above to become a key-value m
 ::: dsvis
 ###  Exercise: Separate chaining
 
-<avembed id="OpenHashPRO" src="Hashing/OpenHashPRO.html" type="ka" name="Separate Chaining Proficiency Exercise"/>
+```{.jsav-embedded src="Hashing/OpenHashPRO.html" type="ka" name="Separate Chaining Proficiency Exercise"}
+```
 :::
 

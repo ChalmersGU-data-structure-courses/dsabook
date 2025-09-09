@@ -128,7 +128,8 @@ A complete implementation is as follows.
 ::: dsvis
 Here is a warmup practice exercise for Heapsort.
 
-<avembed id="HeapsortStepPRO" src="Sorting/HeapsortStepPRO.html" type="ka" name="Heapsort RemoveMax Proficiency Exercise"/>
+```{.jsav-embedded src="Sorting/HeapsortStepPRO.html" type="ka" name="Heapsort RemoveMax Proficiency Exercise"}
+```
 :::
 
 ::: dsvis
@@ -137,7 +138,8 @@ Here is a warmup practice exercise for Heapsort.
 Now test yourself to see how well you understand Heapsort. Can you
 reproduce its behaviour?
 
-<avembed id="heapsortPRO" src="Sorting/heapsortPRO.html" type="pe" name="Heapsort Proficiency Exercise"/>
+```{.jsav-embedded src="Sorting/heapsortPRO.html" type="pe" name="Heapsort Proficiency Exercise"}
+```
 :::
 
 #### Analysis of in-place Heapsort

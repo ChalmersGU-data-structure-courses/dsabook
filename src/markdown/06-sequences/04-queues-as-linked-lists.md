@@ -73,7 +73,8 @@ We also have to handle the special case when the queue is empty -- then the new 
 ::: dsvis
 Linked queue -- enqueue exercise.
 
-<avembed id="LinkedQueue-Enqueue-PRO" src="ChalmersGU/LinkedQueue-Enqueue-PRO.html" type="ka" name="Linked Queue Enqueue Exercise"/>
+```{.jsav-embedded src="ChalmersGU/LinkedQueue-Enqueue-PRO.html" type="ka" name="Linked Queue Enqueue Exercise"}
+```
 :::
 
 ::: dsvis
@@ -100,7 +101,8 @@ There is only additional one thing we must assure -- if the final queue becomes 
 ::: dsvis
 Linked queue -- dequeue exercise.
 
-<avembed id="LinkedQueue-Dequeue-PRO" src="ChalmersGU/LinkedQueue-Dequeue-PRO.html" type="ka" name="Linked Queue Dequeue Exercise"/>
+```{.jsav-embedded src="ChalmersGU/LinkedQueue-Dequeue-PRO.html" type="ka" name="Linked Queue Dequeue Exercise"}
+```
 :::
 
 

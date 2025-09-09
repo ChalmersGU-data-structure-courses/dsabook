@@ -38,11 +38,13 @@ in a room such that the chance of a duplicate is just over 50%. But you
 can set any table size and any number of records to determine the
 probability of a collision under those conditions.
 
-<avembed id="Birthday" src="Hashing/Birthday.html" type="ss" name="Birthday Problem Calculator" height="177"/>
+```{.jsav-embedded src="Hashing/Birthday.html" type="ss" name="Birthday Problem Calculator" height="177"}
+```
 
 Now you can use the calculator to answer the following questions.
 
-<avembed id="BirthdayFIB" src="Hashing/BirthdayFIB.html" type="ka" name="Birthday Problem Exercise"/>
+```{.jsav-embedded src="Hashing/BirthdayFIB.html" type="ka" name="Birthday Problem Exercise"}
+```
 :::
 
 To be practical, a database organised by hashing must store records in a

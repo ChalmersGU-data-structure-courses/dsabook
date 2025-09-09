@@ -72,7 +72,8 @@ each bin to a small number that can be sorted in some other way.
 ::: dsvis
 #### Exercise: Practicing separate chaining
 
-<avembed id="OpenHashPRO" src="Hashing/OpenHashPRO.html" type="ka" name="Separate Chaining Proficiency Exercise" height="630"/>
+```{.jsav-embedded src="Hashing/OpenHashPRO.html" type="ka" name="Separate Chaining Proficiency Exercise" height="630"}
+```
 :::
 
 <!--

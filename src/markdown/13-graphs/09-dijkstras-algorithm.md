@@ -191,7 +191,8 @@ In practice, most graphs are sparse so unless you know that the graph is dense y
 ::: dsvis
 Now you can practice using Dijkstra's algorithm.
 
-<avembed id="DijkstraPE" src="Graph/DijkstraPE.html" type="pe" name="Dijkstra's Algorithm Proficiency Exercise"/>
+```{.jsav-embedded src="Graph/DijkstraPE.html" type="pe" name="Dijkstra's Algorithm Proficiency Exercise"}
+```
 :::
 
 <!--
