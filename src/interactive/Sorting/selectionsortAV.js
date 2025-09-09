@@ -64,7 +64,6 @@ $(document).ready(function() {
       pseudo.setCurrentLine("inloop");
       av.step();
       for (j = i + 1; j < arr.size(); j++) {
-        console.log("P", minIndex, i, j)
         arr.addClass(j, "processing");
         av.umsg(interpret("av_c7"));
         pseudo.setCurrentLine("compare");

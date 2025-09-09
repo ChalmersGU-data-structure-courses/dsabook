@@ -234,6 +234,8 @@ figcaption p, figure figure figcaption {
 
 .figure, .topic, .example, div.embedContainer, div.jsavcontainer {
     background-color: var(--box-bgcolor);
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .alert {
