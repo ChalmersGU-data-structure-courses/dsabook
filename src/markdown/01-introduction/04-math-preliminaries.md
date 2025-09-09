@@ -574,11 +574,8 @@ We will go deeper into recurrence relations when we analyse the complexity of di
 -->
 
 <!--
-.. inlineav:: LinearRecurrencesCON ss
-   :long_name: Linear Recurrences Slideshow
-   :links: AV/Background/LinearRecurrencesCON.css
-   :scripts: AV/Background/LinearRecurrencesCON.js
-   :output: show
+``` {.jsav-animation src="Background/LinearRecurrencesCON.js" links="Background/LinearRecurrencesCON.css" name="Linear Recurrences Slideshow"}
+```
 -->
 
 <!--
@@ -592,11 +589,8 @@ $$
 <!--
 Again, we will use expansion to help us find a closed form solution.
 
-.. inlineav:: LinearRecurrencesNCON ss
-   :long_name: Linear Recurrences Slideshow (n)
-   :links: AV/Background/LinearRecurrencesNCON.css
-   :scripts: AV/Background/LinearRecurrencesNCON.js
-   :output: show
+``` {.jsav-animation src="Background/LinearRecurrencesNCON.js" links="Background/LinearRecurrencesNCON.css" name="Linear Recurrences Slideshow (n)"}
+```
 -->
 
 ### Mathematical proof techniques
@@ -936,13 +930,8 @@ induction hypothesis.
 -->
 
 <!--
-.. _TwoColor:
-.. inlineav:: twoColorCON dgm
-   :links: AV/Background/twoColorCON.css
-   :scripts: AV/Background/twoColorCON.js
-   :align: center
-
-   A two-colouring for the regions formed by three lines in the plane.
+``` {.jsav-animation src="Background/twoColorCON.js" links="Background/twoColorCON.css" caption="A two-colouring for the regions formed by three lines in the plane."}
+```
 -->
 
 <!--
@@ -962,12 +951,8 @@ can be two-coloured.
 
 **Proof:**
 
-.. inlineav:: TwoColoringProofCON ss
-    :long_name: Two Coloring Proof Slideshow
-    :links: AV/Background/TwoColoringProofCON.css
-    :scripts: AV/Background/TwoColoringProofCON.js
-    :output: show
-
+``` {.jsav-animation src="Background/TwoColoringProofCON.js" links="Background/TwoColoringProofCON.css" name="Two Coloring Proof Slideshow"}
+```
 :::
 
 Compare the proof in Example [Example](#ThmRegion) with that in
