@@ -2,7 +2,6 @@
 import re
 import sys
 from pathlib import Path
-from html.parser import HTMLParser
 
 
 AllContents: dict[Path, str] = {}
@@ -11,18 +10,23 @@ HtmlIDs: dict[str, list[str]] = {}
 def main(*infiles: str|Path):
     """Postprocess each of the infiles"""
     infiles = tuple(Path(inf) for inf in infiles)
-    # Read all infiles
+    fix_references(*infiles)
+    move_links_to_header(*infiles)
+
+
+###############################################################################
+## Fix cross-section references so they point to the correct html file
+
+def fix_references(*infiles: Path):
+    # Read all infiles, remember all anchors
     for inf in infiles:
         with open(inf) as IN:
             contents = AllContents[inf] = IN.read()
             for m in re.finditer(AnchorMatch, contents):
                 HtmlIDs.setdefault(m[1], []).append(inf.name)
-    # Postprocess each file
+    # Fix references for each file
     for inf, contents in AllContents.items():
-        # print(contents, file=sys.stderr)
         contents = re.sub(HrefMatch, lambda m: fix_href(m, inf), contents)
-        contents = move_links_to_header(contents)
-        contents = convert_animations(contents)
         with open(inf, "w") as OUT:
             print(contents, file=OUT)
 
@@ -45,94 +49,20 @@ def fix_href(m: re.Match[str], inf: Path) -> str:
 
 
 ###############################################################################
+## Move <link> tags to the html header
 
 linksre = re.compile(r"<link [^<>]*>")
 
-def move_links_to_header(contents: str) -> str:
-    header, mid, body = contents.partition("</head>")
-    all_links = linksre.findall(body)
-    body = linksre.sub("", body)
-    contents = header + "\n".join(sorted(set(all_links))) + mid + body
-    return contents
-
-
-###############################################################################
-## Include code to make OpenDSA animations and exercises work
-
-# Matching pseudo-HTML tags for animations and exercises
-
-match_tag = re.compile(r"<(inlineav|avembed) [^<>]*/>")
-
-class MyTagParser(HTMLParser):
-    def handle_starttag(self, tag: str, attrs: list[tuple[str, str|None]]):
-        self.tag = tag
-        self.attrs = dict(attrs)
-
-def parse_tag(s: str) -> tuple[str, dict[str, str]]:
-    p = MyTagParser()
-    p.feed(s)
-    return (p.tag, p.attrs) # type: ignore
-
-
-# HTML templates for the different animations and exercises
-
-templates: dict[str, str] = {}
-
-templates["avembed"] = """
-<div id="{id}" class="embedContainer">
-<iframe id="{id}_iframe" aria-label="{id}" src="../interactive/{src}" width="{width}" height="{height}" scrolling="no">
-Your browser does not support iframes.
-</iframe>
-</div>
-"""
-
-templates["inlineav"] = """
-<div id="{id}" class="ssAV" data-short-name="{id}" data-long-name="{name}" alt="{name}" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-"""
-
-templates["inlineav-static"] = """
-<div id="{id}" class="ssAV" data-short-name="{id}" data-long-name="{name}" alt="{name}" tabIndex="-1">
-<div class="jsavcanvas"></div>
-</div>
-"""
-
-
-def convert_animations(contents: str) -> str:
-    """Convert each animation using its template, and include necessary scripts and stylesheets"""
-    scripts: list[str] = []
-    links: list[str] = []
-
-    def convert(m: re.Match[str]) -> str:
-        tag, attrs = parse_tag(m[0])
-        scr = attrs.get("script")
-        if scr and scr not in scripts:
-            scripts.append(scr)
-        if tag == "inlineav":
-            scripts.append(attrs["src"])
-        if attrs.get('links'):
-            for link in attrs['links'].split():
-                if link not in links:
-                    links.append(link)
-        if "static" in attrs:
-            tag += "-static"
-        attrs.setdefault("width", "100%")
-        attrs.setdefault("height", "600")
-        tmpl = templates[tag]
-        return tmpl.format(**attrs)
-
-    contents = match_tag.sub(convert, contents)
-    for scr in scripts:
-        tag = f'<script type="text/javascript" src="../interactive/{scr}"></script>'
-        contents = re.sub(r"</body>", f'{tag}\n</body>', contents)
-    for ln in links:
-        tag = f'<link href="../interactive/{ln}" rel="stylesheet" type="text/css"/>'
-        contents = re.sub(r"</head>", f'{tag}\n</head>', contents)
-    return contents
+def move_links_to_header(*infiles: Path):
+    for inf in infiles:
+        with open(inf) as IN:
+            contents = IN.read()
+        header, mid, body = contents.partition("</head>")
+        all_links = linksre.findall(body)
+        body = linksre.sub("", body)
+        contents = header + "\n".join(sorted(set(all_links))) + mid + body
+        with open(inf, "w") as OUT:
+            print(contents, file=OUT)
 
 
 ###############################################################################
