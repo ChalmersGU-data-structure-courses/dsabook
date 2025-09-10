@@ -12,6 +12,7 @@ def main(*infiles: str|Path):
     infiles = tuple(Path(inf) for inf in infiles)
     fix_references(*infiles)
     move_links_to_header(*infiles)
+    fix_toc(*infiles)
 
 
 ###############################################################################
@@ -63,6 +64,32 @@ def move_links_to_header(*infiles: Path):
         contents = header + "\n".join(sorted(set(all_links))) + mid + body
         with open(inf, "w") as OUT:
             print(contents, file=OUT)
+
+
+###############################################################################
+## Make subsubsections in TOC collapsible, putting a <details> around them
+
+def fix_toc(*infiles: Path):
+    for inf in infiles:
+        if inf.name != 'index.html':
+            continue
+        with open(inf) as IN:
+            contents = IN.read()
+        contents = SubsubsectionMatch.sub(r'<details><summary>\1</summary>\2</details>', contents)
+        with open(inf, "w") as OUT:
+            OUT.write(contents)
+
+SubsubsectionMatch = re.compile(
+    r'''
+    (   <a \s+ href="section-\d+\.\d+\.html[^<>]*>
+        <span[^<>]*> [^<>]+ </span>
+        [^<>]+ </a>
+    )
+    (   [^<>]* <ul> .+? </ul>
+    )
+    ''',
+    re.VERBOSE | re.DOTALL
+)
 
 
 ###############################################################################

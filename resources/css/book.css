@@ -67,7 +67,7 @@ nav.sitenav > *:last-child {
     margin-left: auto;
 }
 
-/* Front page */
+/* Front page, table of contents */
 
 #title-block-header {
     margin-bottom: calc(4 * var(--block-margin));
@@ -83,16 +83,31 @@ nav.sitenav > *:last-child {
     margin: 0;
 }
 
+#TOC > ul > li {
+    margin: var(--block-margin) 0;
+}
+
 #TOC ul {
-    padding-left: calc(1.5 * var(--block-margin));
+    padding-left: 0;
+    margin: 0;
+}
+
+#TOC ul ul {
+    padding-left: calc(2 * var(--block-margin));
 }
 
 #TOC ul ul ul {
-    margin-bottom: 0;
+    padding-left: calc(1.5 * var(--block-margin));
 }
 
-#TOC > ul {
-    padding-left: 0;
+#TOC details {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+#TOC summary {
+    list-style-position: outside;
 }
 
 #TOC a:not(:hover) {
@@ -143,7 +158,7 @@ ol, ul {
 li {
     margin: 0.5rem 0;
 }
-li.jsavcodeline {
+li.jsavcodeline, li.jsavnode {
     margin: 0;
 }
 
