@@ -48,11 +48,14 @@ developed and maintained at Virginia Tech.
 The OpenDSA project source texts were originally written in restructuredText,
 and we have translated them to Pandoc Markdown.
 
-### Licence
+### License
 
-The original OpenDSA project is published using the MIT licence,
-so all text from that project are still MIT licenced.
+The original OpenDSA project is published using the MIT license, so all text from that project are still MIT licensed.
+However, all new text are licensed under a Creative Commons Non-Commercial license.
+To be more specific:
 
-However, all new text are licenced under a slightly modified licence,
-saying that you are not allowed to use that text for publishing
-printed books.
+- Material that was added prior to 10th March, 2025, is licensed under the MIT license.
+  See the file `LICENSE-MIT.txt` for a copy of the license, or visit https://opensource.org/license/mit/
+
+- Material that was added after 10th March, 2025, is licensed under CC BY-NC-SA 4.0.
+  See the file `LICENSE-CC-BY-NC-SA-4.0.txt` for a copy of the license, or visit https://creativecommons.org/licenses/by-nc-sa/4.0/

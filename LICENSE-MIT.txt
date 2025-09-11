@@ -1,6 +1,8 @@
-MIT License
+Material in this repository that was added prior to 10th March, 2025, is licensed under:
 
-Copyright (c) 2024 Data structure courses at Chalmers & Univ. of Gothenburg
+# The MIT License
+
+Copyright (c) 2025 Data structure courses at Chalmers & Univ. of Gothenburg
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
