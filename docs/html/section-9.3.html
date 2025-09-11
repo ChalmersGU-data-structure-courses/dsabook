@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,8 +68,7 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Sorting/HeapSortAnalysisCON.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/Sorting/HeapSortAnalysisCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -163,14 +163,24 @@ sorted.</li>
 <summary>
 <p>Here is a visualisation of the Heapsort algorithm.</p>
 </summary>
-<p>
+
 <div id="heapsortCON" class="ssAV" data-short-name="heapsortCON" data-long-name="Heapsort Slideshow" alt="Heapsort Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/DataStructures/binaryheap.js"></script>
+<script type="text/javascript" src="../interactive/Sorting/heapsortCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("heapsortCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#heapsortCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>A complete implementation is as follows.</p>
@@ -192,13 +202,13 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a hr
 <summary>
 <p>Here is a warmup practice exercise for Heapsort.</p>
 </summary>
-<p>
+
 <div id="HeapsortStepPRO" class="embedContainer">
 <iframe id="HeapsortStepPRO_iframe" aria-label="HeapsortStepPRO" src="../interactive/Sorting/HeapsortStepPRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 <div class="dsvis">
@@ -210,13 +220,13 @@ class="level4 unnumbered">
 </summary>
 <p>Now test yourself to see how well you understand Heapsort. Can you
 reproduce its behaviour?</p>
-<p>
+
 <div id="heapsortPRO" class="embedContainer">
 <iframe id="heapsortPRO_iframe" aria-label="heapsortPRO" src="../interactive/Sorting/heapsortPRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </section>
 </div>
@@ -250,14 +260,24 @@ elements in the array.</li>
 <p>This visualisation explains the running time analysis of
 Heapsort.</p>
 </summary>
-<p>
+
 <div id="HeapSortAnalysisCON" class="ssAV" data-short-name="HeapSortAnalysisCON" data-long-name="Heapsort Analysis Slideshow" alt="Heapsort Analysis Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/DataStructures/binaryheap.js"></script>
+<script type="text/javascript" src="../interactive/Sorting/HeapSortAnalysisCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("HeapSortAnalysisCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#HeapSortAnalysisCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>While typically slower than Quicksort by a constant factor (because
@@ -313,9 +333,7 @@ the value swapped to the top is never pushed down the heap.</p>
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/DataStructures/binaryheap.js"></script>
-<script type="text/javascript" src="../interactive/Sorting/heapsortCON.js"></script>
-<script type="text/javascript" src="../interactive/Sorting/HeapSortAnalysisCON.js"></script>
 </body>
 </html>
+
 

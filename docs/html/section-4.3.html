@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,8 +68,7 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Sorting/mergeImplS1CON.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/Sorting/mergeImplS1CON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -129,10 +129,10 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a hr
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    i1 <span class="op">=</span> left</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    i2 <span class="op">=</span> mid</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> left .. right:</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i2 <span class="op">&gt;</span> right:           <span class="co">// Right sublist exhausted</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i2 <span class="op">&gt;</span> right:               <span class="co">// Right sublist exhausted</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>            temp[i] <span class="op">=</span> arr[i1]</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>            i1 <span class="op">=</span> i1 <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> i1 <span class="op">&gt;</span> mid:        <span class="co">// Left sublist exhausted</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> i1 <span class="op">&gt;</span> mid:            <span class="co">// Left sublist exhausted</span></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>            temp[i] <span class="op">=</span> arr[i2]</span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>            i2 <span class="op">=</span> i2 <span class="op">+</span> <span class="dv">1</span></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span> arr[i1] <span class="op">&lt;=</span> arr[i2]:  <span class="co">// Get smaller value</span></span>
@@ -149,14 +149,23 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a hr
 <summary>
 <p>Here is a visualisation for the merge step.</p>
 </summary>
-<p>
+
 <div id="mergeImplS1CON" class="ssAV" data-short-name="mergeImplS1CON" data-long-name="Mergesort Implementation Slideshow" alt="Mergesort Implementation Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Sorting/mergeImplS1CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("mergeImplS1CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#mergeImplS1CON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>Notice that the merge function will create a new auxiliary array
@@ -189,7 +198,7 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a hr
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/Sorting/mergeImplS1CON.js"></script>
 </body>
 </html>
+
 

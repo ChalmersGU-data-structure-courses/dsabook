@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,8 +68,7 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/ChalmersGU/CGU-Styles.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/ChalmersGU/CGU-Styles.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -103,14 +103,23 @@ queue, to be able to add new elements efficiently.</p>
 <summary>
 <p>Linked queue – introduction.</p>
 </summary>
-<p>
+
 <div id="LinkedQueue-Intro-CON" class="ssAV" data-short-name="LinkedQueue-Intro-CON" data-long-name="Linked Queue Intro" alt="Linked Queue Intro" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/ChalmersGU/LinkedQueue-Intro-CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("LinkedQueue-Intro-CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#LinkedQueue-Intro-CON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>So the datatype for linked queues contains three instance variables,
@@ -127,14 +136,23 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a hr
 class="level4 unnumbered">
 <h4 class="unnumbered">Enqueueing to a linked queue</h4>
 </summary>
-<p>
+
 <div id="LinkedQueue-Enqueue-CON" class="ssAV" data-short-name="LinkedQueue-Enqueue-CON" data-long-name="Linked Queue Enqueue" alt="Linked Queue Enqueue" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/ChalmersGU/LinkedQueue-Enqueue-CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("LinkedQueue-Enqueue-CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#LinkedQueue-Enqueue-CON "+rule)}
+    
+  });
+</script>
+
 </details>
 </section>
 </div>
@@ -161,13 +179,13 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a hr
 <summary>
 <p>Linked queue – enqueue exercise.</p>
 </summary>
-<p>
+
 <div id="LinkedQueue-Enqueue-PRO" class="embedContainer">
 <iframe id="LinkedQueue-Enqueue-PRO_iframe" aria-label="LinkedQueue-Enqueue-PRO" src="../interactive/ChalmersGU/LinkedQueue-Enqueue-PRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 <div class="dsvis">
@@ -177,14 +195,23 @@ Your browser does not support iframes.
 class="level4 unnumbered">
 <h4 class="unnumbered">Dequeueing from a linked queue</h4>
 </summary>
-<p>
+
 <div id="LinkedQueue-Dequeue-CON" class="ssAV" data-short-name="LinkedQueue-Dequeue-CON" data-long-name="Linked Queue Dequeue" alt="Linked Queue Dequeue" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/ChalmersGU/LinkedQueue-Dequeue-CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("LinkedQueue-Dequeue-CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#LinkedQueue-Dequeue-CON "+rule)}
+    
+  });
+</script>
+
 </details>
 </section>
 </div>
@@ -209,13 +236,13 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a hr
 <summary>
 <p>Linked queue – dequeue exercise.</p>
 </summary>
-<p>
+
 <div id="LinkedQueue-Dequeue-PRO" class="embedContainer">
 <iframe id="LinkedQueue-Dequeue-PRO_iframe" aria-label="LinkedQueue-Dequeue-PRO" src="../interactive/ChalmersGU/LinkedQueue-Dequeue-PRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 <section id="sec:case-study-sorting-a-linked-list-using-mergesort"
@@ -281,9 +308,7 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a hr
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/ChalmersGU/LinkedQueue-Intro-CON.js"></script>
-<script type="text/javascript" src="../interactive/ChalmersGU/LinkedQueue-Enqueue-CON.js"></script>
-<script type="text/javascript" src="../interactive/ChalmersGU/LinkedQueue-Dequeue-CON.js"></script>
 </body>
 </html>
+
 

@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -68,8 +69,7 @@
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 <link href="../interactive/Graph/topSortDFSCON.css" rel="stylesheet" type="text/css"/>
-<link href="../interactive/Graph/topSortQCON.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/Graph/topSortQCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -266,11 +266,23 @@ problem. An acceptable topological sort for this example is J1, J2, J3,
 J4, J5, J6, J7. However, other orders are also acceptable, such as J1,
 J3, J2, J6, J4, J5, J7.</p>
 <figure id="fig:GraphToposort">
-<img src="images/GraphToposort.png" style="width:60.0%"
-alt="Figure 13.14: An example graph for topological sort. Seven tasks have dependencies as shown by the directed graph" />
-<figcaption aria-hidden="true">Figure 13.14: An example graph for
-topological sort. Seven tasks have dependencies as shown by the directed
-graph</figcaption>
+
+<div id="topSortCON" class="ssAV" data-short-name="topSortCON" data-long-name="topSortCON" alt="topSortCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/Graph/topSortCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("topSortCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#topSortCON "+rule)}
+    
+  });
+</script>
+
+<figcaption><p>Figure 13.14: An example graph for topological sort.
+Seven tasks have dependencies as shown by the directed
+graph.</p></figcaption>
 </figure>
 <section id="sec:depth-first-algorithm" class="level4 unnumbered">
 <h4 class="unnumbered">Depth-first algorithm</h4>
@@ -315,14 +327,23 @@ we get the topological sort J1, J3, J2, J6, J4, J5, J7.</p>
 <summary>
 <p>Here is another example.</p>
 </summary>
-<p>
+
 <div id="topSortDFSCON" class="ssAV" data-short-name="topSortDFSCON" data-long-name="TopSort Slideshow" alt="TopSort Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Graph/topSortDFSCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("topSortDFSCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#topSortDFSCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 </section>
@@ -386,14 +407,23 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a hr
 <summary>
 <p>Here is an illustration of the queue-based algorithm.</p>
 </summary>
-<p>
-<div id="topSortQCON" class="ssAV" data-short-name="topSortQCON" data-long-name="topSortQCON Slideshow" alt="topSortQCON Slideshow" tabIndex="-1">
+
+<div id="topSortQCON" class="ssAV" data-short-name="topSortQCON" data-long-name="topSortQCON" alt="topSortQCON" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Graph/topSortQCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("topSortQCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#topSortQCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 </section>
@@ -414,8 +444,7 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a hr
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/Graph/topSortDFSCON.js"></script>
-<script type="text/javascript" src="../interactive/Graph/topSortQCON.js"></script>
 </body>
 </html>
+
 

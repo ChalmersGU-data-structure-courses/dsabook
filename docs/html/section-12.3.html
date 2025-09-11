@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,8 +68,7 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Hashing/openhashCON.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/Hashing/openhashCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -111,15 +111,28 @@ chaining), or whether collisions result in storing one of the records at
 another slot in the table (open addressing).</p>
 <p>The simplest form of separate chaining defines each slot in the hash
 table to be the head of a linked list. All records that hash to a
-particular slot are placed on that slot’s linked list. The following
-figure illustrates a hash table where each slot points to a linked list
-to hold the records associated with that slot. The hash function used is
-the simple mod function.</p>
-<p>
-<div id="openhashCON" class="ssAV" data-short-name="openhashCON" data-long-name="Hashing/openhashCON" alt="Hashing/openhashCON" tabIndex="-1">
+particular slot are placed on that slot’s linked list. <a
+href="#fig:openhashCON">Figure 12.1</a> illustrates a separate chaining
+hash table.</p>
+<figure id="fig:openhashCON">
+
+<div id="openhashCON" class="ssAV" data-short-name="openhashCON" data-long-name="openhashCON" alt="openhashCON" tabIndex="-1">
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Hashing/openhashCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("openhashCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#openhashCON "+rule)}
+    
+  });
+</script>
+
+<figcaption><p>Figure 12.1: A hash table where each slot points to a
+linked list to hold the records associated with that slot. The hash
+function used is the simple mod function.</p></figcaption>
+</figure>
 <p>Records within a slot’s list can be ordered in several ways: by
 insertion order, by key value order, or by frequency-of-access order.
 Ordering the list by key value provides an advantage in the case of an
@@ -174,13 +187,13 @@ some other way.</p>
 class="level4 unnumbered">
 <h4 class="unnumbered">Exercise: Practicing separate chaining</h4>
 </summary>
-<p>
+
 <div id="OpenHashPRO" class="embedContainer">
 <iframe id="OpenHashPRO_iframe" aria-label="OpenHashPRO" src="../interactive/Hashing/OpenHashPRO.html" width="100%" height="630" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </section>
 </div>
@@ -336,7 +349,7 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a hr
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/Hashing/openhashCON.js"></script>
 </body>
 </html>
+
 

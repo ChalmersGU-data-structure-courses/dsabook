@@ -67,7 +67,7 @@ nav.sitenav > *:last-child {
     margin-left: auto;
 }
 
-/* Front page */
+/* Front page, table of contents */
 
 #title-block-header {
     margin-bottom: calc(4 * var(--block-margin));
@@ -83,16 +83,31 @@ nav.sitenav > *:last-child {
     margin: 0;
 }
 
+#TOC > ul > li {
+    margin: var(--block-margin) 0;
+}
+
 #TOC ul {
-    padding-left: calc(1.5 * var(--block-margin));
+    padding-left: 0;
+    margin: 0;
+}
+
+#TOC ul ul {
+    padding-left: calc(2 * var(--block-margin));
 }
 
 #TOC ul ul ul {
-    margin-bottom: 0;
+    padding-left: calc(1.5 * var(--block-margin));
 }
 
-#TOC > ul {
-    padding-left: 0;
+#TOC details {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+#TOC summary {
+    list-style-position: outside;
 }
 
 #TOC a:not(:hover) {
@@ -115,7 +130,7 @@ hr {
 
 /* Blocks */
 
-h1, h2, h3, h4, h5, h6, p, ol, ul, dl, figcaption {
+h1, h2, h3, h4, h5, h6, p, ol, ul, dl, figure, figcaption {
     margin: var(--block-margin) 0;
 }
 
@@ -143,7 +158,7 @@ ol, ul {
 li {
     margin: 0.5rem 0;
 }
-li.jsavcodeline {
+li.jsavcodeline, li.jsavnode {
     margin: 0;
 }
 
@@ -207,7 +222,20 @@ figure {
 }
 
 figcaption {
+    text-align: center;
     font-style: italic;
+    width: 100%;
+    margin-top: 0;
+}
+
+figcaption p, figure figure figcaption {
+    margin: 0;
+}
+
+.subfigures {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 /* Highlighted blocks */
@@ -221,6 +249,8 @@ figcaption {
 
 .figure, .topic, .example, div.embedContainer, div.jsavcontainer {
     background-color: var(--box-bgcolor);
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .alert {

@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,8 +68,7 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Sorting/MergeSortAnalysisCON.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/Sorting/MergeSortAnalysisCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -120,13 +120,13 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a hr
 <summary>
 <p>Here is a visualisation that illustrates how Mergesort works.</p>
 </summary>
-<p>
+
 <div id="mergesortAV" class="embedContainer">
 <iframe id="mergesortAV_iframe" aria-label="mergesortAV" src="../interactive/Sorting/mergesortAV.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 <section id="sec:merge" class="level4 unnumbered">
@@ -159,14 +159,23 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a hr
 <summary>
 <p>Here is a visualisation for the merge operation.</p>
 </summary>
-<p>
+
 <div id="mergesortCON" class="ssAV" data-short-name="mergesortCON" data-long-name="Merging Slideshow" alt="Merging Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Sorting/mergesortCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("mergesortCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#mergesortCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <div class="dsvis">
@@ -176,13 +185,13 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a hr
 <h4 class="unnumbered">Practice exercise: Merging</h4>
 </summary>
 <p>Here is a Mergesort warmup exercise to practice merging.</p>
-<p>
+
 <div id="MergesortMergePRO" class="embedContainer">
 <iframe id="MergesortMergePRO_iframe" aria-label="MergesortMergePRO" src="../interactive/Sorting/MergesortMergePRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </section>
 </div>
@@ -195,13 +204,13 @@ data-number="4.2.1">
 Practice exercise: Merge sort</h3>
 </summary>
 <p>Now here is a full proficiency exercise to put it all together.</p>
-<p>
+
 <div id="mergesortPRO" class="embedContainer">
 <iframe id="mergesortPRO_iframe" aria-label="mergesortPRO" src="../interactive/Sorting/mergesortPRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </section>
 </div>
@@ -371,14 +380,23 @@ cases.</p>
 <p>This visualisation provides a running time analysis for
 Mergesort.</p>
 </summary>
-<p>
+
 <div id="MergeSortAnalysisCON" class="ssAV" data-short-name="MergeSortAnalysisCON" data-long-name="Mergesort Analysis Slideshow" alt="Mergesort Analysis Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Sorting/MergeSortAnalysisCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("MergeSortAnalysisCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#MergeSortAnalysisCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 </section>
@@ -398,8 +416,7 @@ Mergesort.</p>
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/Sorting/mergesortCON.js"></script>
-<script type="text/javascript" src="../interactive/Sorting/MergeSortAnalysisCON.js"></script>
 </body>
 </html>
+
 

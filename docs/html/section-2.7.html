@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -120,7 +121,8 @@ then
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">g(n)</annotation></semantics></math>
 is an upper bound for your cost function, then any upper bound for
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">g(n)</annotation></semantics></math>
-is also an upper bound for your cost function.</p></li>
+is also an upper bound for your cost function.<br />
+</p></li>
 <li><p><strong>Constant factor</strong>: If
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo>∈</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>g</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f\in O(g)</annotation></semantics></math>,
 then
@@ -136,7 +138,8 @@ for all constants
 <p>The significance of this rule is that you can ignore any
 multiplicative constants in your equations when using
 big-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>O</mi><annotation encoding="application/x-tex">O</annotation></semantics></math>
-notation.</p></li>
+notation.<br />
+</p></li>
 <li><p><strong>Addition</strong>: If
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo>∈</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>g</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f\in O(g)</annotation></semantics></math>
 and
@@ -151,7 +154,8 @@ then
 </ul>
 <p>This rule says that given two parts of a program run in sequence
 (whether two statements or two sections of code), you need consider only
-the more expensive part.</p></li>
+the more expensive part.<br />
+</p></li>
 <li><p><strong>Multiplication</strong>: If
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo>∈</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>g</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f\in O(g)</annotation></semantics></math>
 and
@@ -228,13 +232,15 @@ Analysing code fragments</h3>
 following three rules of thumb will get us very far:</p>
 <ul>
 <li><p>An <strong>atomic operation</strong> is always
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></p></li>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math><br />
+</p></li>
 <li><p>A <strong>sequence</strong>,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⟨</mo><msub><mi>p</mi><mn>1</mn></msub><mo>;</mo><msub><mi>p</mi><mn>2</mn></msub><mo stretchy="false" form="postfix">⟩</mo></mrow><annotation encoding="application/x-tex">\langle p_1;p_2\rangle</annotation></semantics></math>,
 has the complexity
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>max</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>f</mi><mn>1</mn></msub><mo>,</mo><msub><mi>f</mi><mn>2</mn></msub><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\max(f_1,f_2))</annotation></semantics></math>,
 where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mi>i</mi></msub><mo>∈</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>f</mi><mi>i</mi></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">p_i\in O(f_i)</annotation></semantics></math></p></li>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mi>i</mi></msub><mo>∈</mo><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>f</mi><mi>i</mi></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">p_i\in O(f_i)</annotation></semantics></math><br />
+</p></li>
 <li><p>An <strong>iteration</strong>,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⟨</mo><mtext mathvariant="normal">for</mtext><mspace width="0.222em"></mspace><mi>x</mi><mo>∈</mo><mi>A</mi><mo>:</mo><mi>p</mi><mo stretchy="false" form="postfix">⟩</mo></mrow><annotation encoding="application/x-tex">\langle\mbox{for}\ x \in A: p\rangle</annotation></semantics></math>,
 has the complexity
@@ -622,4 +628,5 @@ href="section-7.4.html#sec:recur-relations">Section 7.4</a>.</p>
 
 </body>
 </html>
+
 

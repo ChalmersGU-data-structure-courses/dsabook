@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,8 +68,7 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Searching/binarySearchCON.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/Searching/binarySearchCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -200,14 +200,23 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a hr
 <summary>
 <p>And here is an illustration of the binary search algorithm.</p>
 </summary>
-<p>
+
 <div id="binarySearchCON" class="ssAV" data-short-name="binarySearchCON" data-long-name="Binary Search Algorithm Slideshow" alt="Binary Search Algorithm Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Searching/binarySearchCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("binarySearchCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#binarySearchCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>With the right math techniques, it is not too hard to show that the
@@ -238,13 +247,13 @@ array.</p>
 <section id="sec:binary-search-exercise" class="level4 unnumbered">
 <h4 class="unnumbered">Binary search exercise</h4>
 </summary>
-<p>
+
 <div id="binarySearchPRO" class="embedContainer">
 <iframe id="binarySearchPRO_iframe" aria-label="binarySearchPRO" src="../interactive/Searching/binarySearchPRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </section>
 </div>
@@ -266,7 +275,7 @@ Your browser does not support iframes.
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/Searching/binarySearchCON.js"></script>
 </body>
 </html>
+
 

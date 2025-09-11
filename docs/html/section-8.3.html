@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,9 +68,6 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Binary/BTCON.css" rel="stylesheet" type="text/css"/>
-<link href="../interactive/Binary/BTnullpointerCON.css" rel="stylesheet" type="text/css"/>
-<link href="../interactive/Binary/expressionTreeCON.css" rel="stylesheet" type="text/css"/>
 </head>
 
 <body>
@@ -102,26 +100,85 @@ definition, all binary tree nodes have two children, though one or both
 children can be empty. Binary tree nodes typically contain a value
 field, with the type of the field depending on the application. The most
 common node implementation includes a value field and pointers to the
-two children. <a href="#fig:bintree_with_pointers">Figure 8.4</a> is an
+two children. <a href="#fig:bintree_with_pointers">Figure 8.5</a> is an
 illustration of how the tree from <a
 href="section-8.1.html#fig:example_bintree">Figure 8.1</a> looks like, where the child
 pointers are shown explicitly.</p>
-<figure id="fig:bintree_with_pointers" class="subfigures">
-<div class="online">
-<p>
-<div id="BTnullpointerCON" class="ssAV" data-short-name="BTnullpointerCON" data-long-name="Binary/BTnullpointerCON" alt="Binary/BTnullpointerCON" tabIndex="-1">
+<figure id="fig:bintree_with_pointers">
+
+<div id="img-jsav-25ee86761084f8f40ef22e6d516e3a2c" class="ssAV" data-short-name="img-jsav-25ee86761084f8f40ef22e6d516e3a2c" data-long-name="img-jsav-25ee86761084f8f40ef22e6d516e3a2c" alt="img-jsav-25ee86761084f8f40ef22e6d516e3a2c" tabIndex="-1">
 <div class="jsavcanvas"></div>
 </div>
-</p>
-</div>
-<figcaption><p>Figure 8.4: Illustration of a typical pointer-based
+
+
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("img-jsav-25ee86761084f8f40ef22e6d516e3a2c", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#img-jsav-25ee86761084f8f40ef22e6d516e3a2c "+rule)}
+    var AV = NewAV();
+AddCSS(`.jsavcanvas {width: 600px}`)
+AV.ds.array([" ", "A", " "], {left: 180});
+var topDiff = 50;
+var arrB = AV.ds.array(["/", "B", " "], {left: 40, top: topDiff});
+arrB.css(0, {"background-color": "LightGray"});
+AV.ds.array([" ", "C", " "], {left: 320, top: topDiff});
+
+topDiff += 50;
+var arrD = AV.ds.array(["/", "D", "/"], {left: 70, top: topDiff});
+arrD.css(0, {"background-color": "LightGray"});
+var arrE = AV.ds.array([" ", "E", "/"], {left: 230, top: topDiff});
+arrE.css(2, {"background-color": "LightGray"});
+AV.ds.array([" ", "F", " "], {left: 410, top: topDiff});
+
+topDiff += 50;
+var arrG = AV.ds.array(["/", "G", "/"], {left: 150, top: topDiff});
+var arrH = AV.ds.array(["/", "H", "/"], {left: 350, top: topDiff});
+var arrI = AV.ds.array(["/", "I", "/"], {left: 470, top: topDiff});
+arrG.css(0, {"background-color": "LightGray"});
+arrG.css(2, {"background-color": "LightGray"});
+arrH.css(0, {"background-color": "LightGray"});
+arrH.css(2, {"background-color": "LightGray"});
+arrI.css(0, {"background-color": "LightGray"});
+arrI.css(2, {"background-color": "LightGray"});
+
+//line for A - B
+AV.g.line(200, 40, 90, 70, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+//line for A - C
+AV.g.line(250, 40, 370, 70, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+//line for B - D
+AV.g.line(115, 90, 120, 120, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+//line for C - E
+AV.g.line(340, 90, 280, 120, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+//line for C - F
+AV.g.line(395, 90, 450, 120, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+//line for E - G
+AV.g.line(250, 140, 200, 170, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+//line for F - H
+AV.g.line(430, 140, 395, 170, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+//line for F - I
+AV.g.line(485, 140, 515, 170, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+AV.displayInit();
+AV.recorded();
+  });
+</script>
+
+<figcaption><p>Figure 8.5: Illustration of a typical pointer-based
 binary tree implementation, where each node stores two child pointers
-and a value. </p></figcaption>
+and a value</p></figcaption>
 </figure>
 <p>Here is a simple implementation for binary tree nodes, which can
 store one single element in each node. Every <code>BinaryNode</code>
 object also has two pointers, one to its left child and another to its
-right child.</p>
+right child.<br />
+</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> BinaryNode <span class="kw">of</span> T:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    elem: T            <span class="co">// Element for this node.</span></span>
@@ -182,27 +239,97 @@ title="A type of quadtree that stores point data in two dimensions. The root of 
 Quadtree</a>,</span> and the <a href="section-14.html#expression-tree"
 class="term"
 title="A tree structure meant to represent a mathematical expression. Internal nodes of the expression tree are operators in the expression, with the subtrees being the sub-expressions that are its operand. All leaf nodes are operands.">expression
-tree</a> illustrated by <a href="#fig:expression_tree">Figure 8.5</a>
+tree</a> illustrated by <a href="#fig:expression_tree">Figure 8.6</a>
 below. By definition, only internal nodes have non-empty children. If we
 use the same node implementation for both internal and leaf nodes, then
 both must store the child pointers. But it seems wasteful to store child
 pointers in the leaf nodes. Thus, there are many reasons why it can save
 space to have separate implementations for internal and leaf nodes.</p>
-<figure id="fig:expression_tree" class="subfigures">
-<div class="online">
-<p>
-<div id="expressionTreeCON" class="ssAV" data-short-name="expressionTreeCON" data-long-name="Binary/expressionTreeCON" alt="Binary/expressionTreeCON" tabIndex="-1">
+<figure id="fig:expression_tree">
+
+<div id="img-jsav-749820f6afab4b60c93a51712cc02d13" class="ssAV" data-short-name="img-jsav-749820f6afab4b60c93a51712cc02d13" data-long-name="img-jsav-749820f6afab4b60c93a51712cc02d13" alt="img-jsav-749820f6afab4b60c93a51712cc02d13" tabIndex="-1">
 <div class="jsavcanvas"></div>
 </div>
-</p>
-</div>
-<figcaption><p>Figure 8.5: An example of an expression tree for
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mi>x</mi><mo stretchy="false" form="prefix">(</mo><mn>2</mn><mi>x</mi><mo>+</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>−</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">4x(2x + a) - c</annotation></semantics></math>.
-</p></figcaption>
+
+
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("img-jsav-749820f6afab4b60c93a51712cc02d13", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#img-jsav-749820f6afab4b60c93a51712cc02d13 "+rule)}
+    var AV = NewAV();
+AddCSS(`.internalnode {
+  border-radius: 50px;
+  background-color: white;
+  line-height: 22px;
+  z-index: 100; /* Prevents the tails of the edges from showing up in the background of the node */
+}`);
+AV.ds.array([" ", "&ndash;", " "], {left: 420});
+
+var topDiff = 60;
+AV.ds.array([" ", "&times;", " "], {left: 350, top: topDiff});
+var arr3 = AV.ds.array(["<em>c</em>"], {left: 520, top: topDiff});
+arr3.addClass([0], "internalnode");
+
+topDiff += 60;
+AV.ds.array([" ", "&times;", " "], {left: 240, top: topDiff});
+AV.ds.array([" ", "+", " "], {left: 460, top: topDiff});
+
+topDiff += 60;
+var arr6 = AV.ds.array(["4"], {left: 240, top: topDiff});
+var arr7 = AV.ds.array(["<em>x</em>"], {left: 300, top: topDiff});
+AV.ds.array([" ", "&times;", " "], {left: 400, top: topDiff});
+var arr9 = AV.ds.array(["<em>a</em>"], {left: 550, top: topDiff});
+arr6.addClass([0], "internalnode");
+arr7.addClass([0], "internalnode");
+arr9.addClass([0], "internalnode");
+
+topDiff += 60;
+var arr10 = AV.ds.array(["2"], {left: 400, top: topDiff});
+var arr11 = AV.ds.array(["<em>x</em>"], {left: 460, top: topDiff});
+arr10.addClass([0], "internalnode");
+arr11.addClass([0], "internalnode");
+
+//line for [-] - [*]
+AV.g.line(440, 40, 400, 80, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+//line for [-] - c
+AV.g.line(495, 40, 535, 80, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+//line for [*] - [*]
+AV.g.line(370, 100, 290, 140, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+//line for [*] - [+]
+AV.g.line(425, 100, 505, 140, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+//line for [*] - 4
+AV.g.line(255, 160, 255, 200, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+//line for [*] - x
+AV.g.line(315, 160, 315, 200, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+//line for [+] - [*]
+AV.g.line(475, 160, 450, 200, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+//line for [+] - a
+AV.g.line(535, 160, 565, 200, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+//line for [*] - 2
+AV.g.line(420, 220, 420, 260, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+//line for [*] - x
+AV.g.line(475, 220, 475, 260, {"stroke-width": 2, "arrow-end": "classic-wide-long"});
+
+AV.displayInit();
+AV.recorded();
+  });
+</script>
+
+<figcaption><p>Figure 8.6: An example of an expression tree for
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mi>x</mi><mo stretchy="false" form="prefix">(</mo><mn>2</mn><mi>x</mi><mo>+</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>−</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">4x(2x + a) - c</annotation></semantics></math></p></figcaption>
 </figure>
 <p>As an example of a tree that stores different information at the leaf
 and internal nodes, consider the expression tree illustrated by <a
-href="#fig:expression_tree">Figure 8.5</a>. The expression tree
+href="#fig:expression_tree">Figure 8.6</a>. The expression tree
 represents an algebraic expression composed of binary operators such as
 addition, subtraction, multiplication, and division. Internal nodes
 store operators, while the leaves store operands. The tree of the figure
@@ -342,13 +469,13 @@ worst.</p>
 <summary>
 <p>Here is an exercise for the space requirements of binary trees.</p>
 </summary>
-<p>
+
 <div id="TreeOverheadFIB" class="embedContainer">
 <iframe id="TreeOverheadFIB_iframe" aria-label="TreeOverheadFIB" src="../interactive/Binary/TreeOverheadFIB.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 </div>
@@ -369,8 +496,7 @@ Your browser does not support iframes.
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/Binary/BTnullpointerCON.js"></script>
-<script type="text/javascript" src="../interactive/Binary/expressionTreeCON.js"></script>
 </body>
 </html>
+
 

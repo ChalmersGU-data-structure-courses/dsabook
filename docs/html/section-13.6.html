@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,8 +68,7 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Graph/primCON.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/Graph/primCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -150,14 +150,23 @@ processed.</p>
 <summary>
 <p>Here is a visualisation of Prim’s algorithm.</p>
 </summary>
-<p>
+
 <div id="primCON" class="ssAV" data-short-name="primCON" data-long-name="Prim's Minimum Cost Spanning Tree Algorithm Slideshow" alt="Prim's Minimum Cost Spanning Tree Algorithm Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Graph/primCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("primCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#primCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <section id="sec:finding-the-minimum-vertex" class="level4 unnumbered">
@@ -243,14 +252,14 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a hr
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> <span class="kw">each</span> e <span class="kw">in</span> graph.outgoingEdges():</span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> e.end <span class="kw">not</span> <span class="kw">in</span> distances <span class="kw">or</span> dist <span class="op">&lt;</span> distances.<span class="bu">get</span>(e.end):</span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>                    <span class="co">// If the edge makes the endpoint closer to the MST,</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>                    <span class="co">// update the endpoint with the new distance, add it to the MST and the agenda</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>                    distances.<span class="bu">put</span>(e.end, e.weight)</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>                    parent.<span class="bu">put</span>(e.end, v)</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>                    agenda.<span class="bu">add</span>(e.end) with priority e.weight</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> parent</span></code></pre></div>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>                    <span class="co">// update the endpoint with the new distance,</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>                    <span class="co">// add it to the MST and the agenda</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>                    distances.<span class="bu">put</span>(e.end, e.weight)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>                    parent.<span class="bu">put</span>(e.end, v)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>                    agenda.<span class="bu">add</span>(e.end) with priority e.weight</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> parent</span></code></pre></div>
 </section>
-<section id="sec:correctness-of-prims-algorithm" class="level3"
-data-number="13.6.2">
+<section id="sec:prims-correctness" class="level3" data-number="13.6.2">
 <h3 data-number="13.6.2"><span
 class="header-section-number">13.6.2</span> Correctness of Prim’s
 algorithm</h3>
@@ -364,13 +373,13 @@ because to do so would form a cycle.</figcaption>
 <summary>
 <p>Here is an exercise for Prim’s algorithm.</p>
 </summary>
-<p>
+
 <div id="PrimPE" class="embedContainer">
 <iframe id="PrimPE_iframe" aria-label="PrimPE" src="../interactive/Graph/PrimPE.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 </div>
@@ -391,7 +400,7 @@ Your browser does not support iframes.
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/Graph/primCON.js"></script>
 </body>
 </html>
+
 

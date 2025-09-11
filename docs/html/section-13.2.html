@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,7 +68,7 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-</head>
+<link href="../interactive/Graph/GraphDefCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -137,10 +138,22 @@ vertex 4. The list for vertex 2 stores an entry for vertex 4 because
 there is an edge from vertex 2 to vertex 4, but no entry for vertex 3
 because this edge comes into vertex 2 rather than going out.</p>
 <figure id="fig:GraphRepresentDirected">
-<img src="images/GraphRepresentDirected.png" style="width:80.0%"
-alt="Figure 13.7: Representing a directed graph" />
-<figcaption aria-hidden="true">Figure 13.7: Representing a directed
-graph</figcaption>
+
+<div id="GdirRepCON" class="ssAV" data-short-name="GdirRepCON" data-long-name="GdirRepCON" alt="GdirRepCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/Graph/GdirRepCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("GdirRepCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#GdirRepCON "+rule)}
+    
+  });
+</script>
+
+<figcaption><p>Figure 13.7: Representing a directed
+graph</p></figcaption>
 </figure>
 <p>Both the adjacency matrix and the adjacency list can be used to store
 directed or undirected graphs. Each edge of an undirected graph
@@ -162,10 +175,22 @@ matrix and the adjacency list. For example, for the undirected graph,
 the list for vertex 2 stores an entry for both vertex 3 and vertex
 4.</p>
 <figure id="fig:GraphRepresentUndirected">
-<img src="images/GraphRepresentUndirected.png" style="width:80.0%"
-alt="Figure 13.8: Representing an undirected graph" />
-<figcaption aria-hidden="true">Figure 13.8: Representing an undirected
-graph</figcaption>
+
+<div id="GundirRepCON" class="ssAV" data-short-name="GundirRepCON" data-long-name="GundirRepCON" alt="GundirRepCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/Graph/GundirRepCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("GundirRepCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#GundirRepCON "+rule)}
+    
+  });
+</script>
+
+<figcaption><p>Figure 13.8: Representing an undirected
+graph</p></figcaption>
 </figure>
 <p>The storage requirements for the adjacency list depend on both the
 number of edges and the number of vertices in the graph. There must be
@@ -193,10 +218,22 @@ neighbour at the end of the associated edge. The second is the value for
 the weight. As with the adjacency matrix, this value requires space to
 represent, typically an integer.</p>
 <figure id="fig:GraphRepresentWeighted">
-<img src="images/GraphRepresentWeighted.png" style="width:80.0%"
-alt="Figure 13.9: Representing a weighted graph" />
-<figcaption aria-hidden="true">Figure 13.9: Representing a weighted
-graph</figcaption>
+
+<div id="GweightedCON" class="ssAV" data-short-name="GweightedCON" data-long-name="GweightedCON" alt="GweightedCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/Graph/GweightedCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("GweightedCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#GweightedCON "+rule)}
+    
+  });
+</script>
+
+<figcaption><p>Figure 13.9: Representing a weighted
+graph</p></figcaption>
 </figure>
 <p>Which graph representation is more space efficient depends on the
 number of edges in the graph. The adjacency list stores information only
@@ -256,4 +293,5 @@ not when the graph is closer to full.</p>
 
 </body>
 </html>
+
 

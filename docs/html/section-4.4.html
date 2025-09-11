@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,12 +68,11 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Sorting/quicksortCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Sorting/QuickSortAverageCaseCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Sorting/QuickSortBestCaseCON.css" rel="stylesheet" type="text/css"/>
 <link href="../interactive/Sorting/QuickSortPartitionAnalysisCON.css" rel="stylesheet" type="text/css"/>
 <link href="../interactive/Sorting/QuickSortWorstCaseCON.css" rel="stylesheet" type="text/css"/>
-<link href="../interactive/Sorting/QuickSortBestCaseCON.css" rel="stylesheet" type="text/css"/>
-<link href="../interactive/Sorting/QuickSortAverageCaseCON.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/Sorting/quicksortCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -188,13 +188,13 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a hr
 <summary>
 <p>Quicksort pivot proficiency exercise</p>
 </summary>
-<p>
+
 <div id="QuicksortPivotPRO" class="embedContainer">
 <iframe id="QuicksortPivotPRO_iframe" aria-label="QuicksortPivotPRO" src="../interactive/Sorting/QuicksortPivotPRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 <section id="sec:partition" class="level3" data-number="4.4.1">
@@ -211,6 +211,13 @@ until the two indices meet.</p>
 the whole array, but also subarrays. Therefore <code>partition</code>
 needs the positions of the leftmost and rightmost elements in the
 subarray that we will partition.</p>
+<p>The partition function first puts the pivot at the leftmost position
+in the subarray. Then it moves the <em>left</em> and <em>right</em>
+pointers towards each other; until they both point to values which are
+unordered relative to the pivot value. Now the <em>left</em> and
+<em>right</em> values can be swapped, which puts them both in their
+correct partition. The loop continues until the <em>left</em> and
+<em>right</em> pointers have passed each other.</p>
 <div class="sourceCode" id="cb3"><pre
 class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> partition(arr, left, right, pivot) <span class="op">-&gt;</span> <span class="bu">Int</span>:</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    swap arr[pivot] with arr[left]</span>
@@ -220,13 +227,6 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a hr
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        swap arr[left] with arr[right]</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    swap arr[pivot] with arr[right]</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> right</span></code></pre></div>
-<p>The partition function first puts the pivot at the leftmost position
-in the subarray. Then it moves the <em>left</em> and <em>right</em>
-pointers towards each other; until they both point to values which are
-unordered relative to the pivot value. Now the <em>left</em> and
-<em>right</em> values can be swapped, which puts them both in their
-correct partition. The loop continues until the <em>left</em> and
-<em>right</em> pointers have passed each other.</p>
 <p>Finally, it puts the pivot at its correct position, by swapping with
 the <em>right</em> pointer. Why is <em>right</em> the correct pivot
 position, and not <em>left</em>? This is because we initially put the
@@ -237,14 +237,24 @@ must be smaller.</p>
 <summary>
 <p>Here is a visualisation of the partitioning algorithm.</p>
 </summary>
-<p>
+
 <div id="quicksortCON" class="ssAV" data-short-name="quicksortCON" data-long-name="Quicksort Partition Slideshow" alt="Quicksort Partition Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Sorting/quicksortCODE.js"></script>
+<script type="text/javascript" src="../interactive/Sorting/quicksortCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("quicksortCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#quicksortCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <div class="dsvis">
@@ -252,13 +262,13 @@ must be smaller.</p>
 <summary>
 <p>Quicksort partition proficiency exercise.</p>
 </summary>
-<p>
+
 <div id="QuicksortPartitPRO" class="embedContainer">
 <iframe id="QuicksortPartitPRO_iframe" aria-label="QuicksortPartitPRO" src="../interactive/Sorting/QuicksortPartitPRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 <p>To analyse Quicksort, we first analyse the functions for finding the
@@ -286,14 +296,23 @@ steps until they meet.</li>
 <p>Here is a visualisation illustrating the running time analysis of the
 partition function.</p>
 </summary>
-<p>
+
 <div id="QuickSortPartitionAnalysisCON" class="ssAV" data-short-name="QuickSortPartitionAnalysisCON" data-long-name="Quicksort Partition Analysis Slideshow" alt="Quicksort Partition Analysis Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Sorting/QuickSortPartitionAnalysisCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("QuickSortPartitionAnalysisCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#QuickSortPartitionAnalysisCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <section id="sec:putting-it-together" class="level4 unnumbered online">
@@ -308,13 +327,13 @@ the partitioning process works. In the visualisation, the separate
 sub-partitions are separated out to match the recursion tree. In
 reality, there is only a single array involved (as you will see in the
 proficiency exercise that follows the visualisation).</p>
-<p>
+
 <div id="quicksortAV" class="embedContainer">
 <iframe id="quicksortAV_iframe" aria-label="quicksortAV" src="../interactive/Sorting/quicksortAV.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 <div class="dsvis">
@@ -323,13 +342,13 @@ Your browser does not support iframes.
 <p>Here is a complete proficiency exercise to see how well you
 understand Quicksort.</p>
 </summary>
-<p>
+
 <div id="quicksortPRO" class="embedContainer">
 <iframe id="quicksortPRO_iframe" aria-label="quicksortPRO" src="../interactive/Sorting/quicksortPRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 </section>
@@ -386,14 +405,23 @@ This requires a single unit of work.</li>
 <p>This visualisation explains the worst-case running time of
 Quicksort</p>
 </summary>
-<p>
+
 <div id="QuickSortWorstCaseCON" class="ssAV" data-short-name="QuickSortWorstCaseCON" data-long-name="Quicksort Worst Case Analysis Slideshow" alt="Quicksort Worst Case Analysis Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Sorting/QuickSortWorstCaseCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("QuickSortWorstCaseCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#QuickSortWorstCaseCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>This is terrible, no better than Insertion or Selection sort. When
@@ -446,14 +474,23 @@ levels. So the best-case running time of Quicksort is
 <p>This visualisation explains the best-case running time of
 Quicksort</p>
 </summary>
-<p>
+
 <div id="QuickSortBestCaseCON" class="ssAV" data-short-name="QuickSortBestCaseCON" data-long-name="Quicksort Best Case Analysis Slideshow" alt="Quicksort Best Case Analysis Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Sorting/QuickSortBestCaseCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("QuickSortBestCaseCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#QuickSortBestCaseCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 </section>
@@ -482,14 +519,23 @@ T(0) = T(1) &amp;= c
 <p>This visualisation will help you to understand how this recurrence
 relation was formed.</p>
 </summary>
-<p>
+
 <div id="QuickSortAverageCaseCON" class="ssAV" data-short-name="QuickSortAverageCaseCON" data-long-name="Quicksort Average Case Analysis Slideshow" alt="Quicksort Average Case Analysis Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Sorting/QuickSortAverageCaseCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("QuickSortAverageCaseCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#QuickSortAverageCaseCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>This is an unusual situation that the average case cost and the worst
@@ -543,12 +589,7 @@ pivot is so important.</p>
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/Sorting/quicksortCODE.js"></script>
-<script type="text/javascript" src="../interactive/Sorting/quicksortCON.js"></script>
-<script type="text/javascript" src="../interactive/Sorting/QuickSortPartitionAnalysisCON.js"></script>
-<script type="text/javascript" src="../interactive/Sorting/QuickSortWorstCaseCON.js"></script>
-<script type="text/javascript" src="../interactive/Sorting/QuickSortBestCaseCON.js"></script>
-<script type="text/javascript" src="../interactive/Sorting/QuickSortAverageCaseCON.js"></script>
 </body>
 </html>
+
 

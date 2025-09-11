@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,10 +68,7 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Binary/BinExampCON.css" rel="stylesheet" type="text/css"/>
-<link href="../interactive/Binary/FullCompCON.css" rel="stylesheet" type="text/css"/>
-<link href="../interactive/Binary/RecursiveDSCON.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/Binary/RecursiveDSCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -175,15 +173,38 @@ node</a> is any node that has two empty children. An <a
 href="section-14.html#internal-node" class="term"
 title="In a tree, any node that has at least one non-empty child is an internal node.">internal
 node</a> is any node that has at least one non-empty child.</p>
-<figure id="fig:example_bintree" class="subfigures">
-<div class="online">
-<p>
-<div id="BinExampCON" class="ssAV" data-short-name="BinExampCON" data-long-name="Binary/BinExampCON" alt="Binary/BinExampCON" tabIndex="-1">
+<figure id="fig:example_bintree">
+
+<div id="img-jsav-afde394e56d64088bd72e2ad08cdd6a4" class="ssAV" data-short-name="img-jsav-afde394e56d64088bd72e2ad08cdd6a4" data-long-name="img-jsav-afde394e56d64088bd72e2ad08cdd6a4" alt="img-jsav-afde394e56d64088bd72e2ad08cdd6a4" tabIndex="-1">
 <div class="jsavcanvas"></div>
 </div>
-</p>
-</div>
-<figcaption><p>Figure 8.1: An example binary tree. </p></figcaption>
+
+
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("img-jsav-afde394e56d64088bd72e2ad08cdd6a4", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#img-jsav-afde394e56d64088bd72e2ad08cdd6a4 "+rule)}
+    var AV = NewAV();
+var btTop = -5;
+var btLeft = 305;
+var bt = AV.ds.binarytree({nodegap: 15, left: btLeft, top: btTop});
+bt.root("A");
+var rt = bt.root();
+rt.left("B");
+rt.left().right("D");
+rt.right("C");
+rt.right().left("E");
+rt.right().left().left("G");
+rt.right().right("F");
+rt.right().right().left("H");
+rt.right().right().right("I");
+bt.layout();
+AV.displayInit();
+AV.recorded();
+  });
+</script>
+
+<figcaption><p>Figure 8.1: An example binary tree</p></figcaption>
 </figure>
 <p><a href="#fig:example_bintree">Figure 8.1</a> above illustrates the
 various terms used to identify parts of a binary tree. Node
@@ -246,19 +267,66 @@ important point regarding the structure of binary trees. Because
 <em>all</em> binary tree nodes have two children (one or both of which
 might be empty), the two binary trees (a) and (b) in the figure are
 <em>not</em> the same.</p>
-<figure id="fig:two_bintrees" class="subfigures">
-<div class="online">
-<p>
-<div id="BinDiffCON" class="ssAV" data-short-name="BinDiffCON" data-long-name="Binary/BinDiffCON" alt="Binary/BinDiffCON" tabIndex="-1">
+<figure id="fig:two_bintrees">
+
+<div id="img-jsav-40f8fcec05098b2bc7c1fb78e7195ee5" class="ssAV" data-short-name="img-jsav-40f8fcec05098b2bc7c1fb78e7195ee5" data-long-name="img-jsav-40f8fcec05098b2bc7c1fb78e7195ee5" alt="img-jsav-40f8fcec05098b2bc7c1fb78e7195ee5" tabIndex="-1">
 <div class="jsavcanvas"></div>
 </div>
-</p>
-</div>
+
+
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("img-jsav-40f8fcec05098b2bc7c1fb78e7195ee5", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#img-jsav-40f8fcec05098b2bc7c1fb78e7195ee5 "+rule)}
+    var AV = NewAV();
+// Setup first row of trees
+var btTop = 0;
+var btLeft = 120;
+var btRight = 220;
+var bt = AV.ds.binarytree({nodegap: 30, top: btTop, left: btLeft});
+bt.root("A");
+var rt = bt.root();
+rt.left("B");
+
+var bt2 = AV.ds.binarytree({nodegap: 30, top: btTop, left: btRight});
+bt2.root("A");
+bt2.root().right("B");
+
+bt.layout();
+bt2.layout();
+
+// Add first row of labels
+AV.label("(a)", {left: btLeft + 40, top: btTop + 105});
+AV.label("(b)", {left: btRight + 35, top: btTop + 105});
+
+// Setup second row of trees
+// btTop = 155;
+btLeft += 400 - 20; btRight += 400 + 20;
+var bt3 = AV.ds.binarytree({nodegap: 30, left: btLeft, top: btTop});
+bt3.root("A");
+bt3.root().left("B");
+bt3.root().right("");
+bt3.root().right("NULL").addClass("clearnode");
+var bt4 = AV.ds.binarytree({nodegap: 30, left: btRight, top: btTop});
+bt4.root("A");
+bt4.root().left("NULL").addClass("clearnode");
+bt4.root().right("B");
+bt3.layout();
+bt4.layout();
+
+// Add second row of labels
+AV.label("(c)", {left: btLeft + 40, top: btTop + 105});
+AV.label("(d)", {left: btRight + 35, top: btTop + 105});
+AV.displayInit();
+AV.recorded();
+  });
+</script>
+
 <figcaption><p>Figure 8.2: Two different binary trees: (a) the root has
 a non-empty left child; (b) the root has a non-empty right child; and
 (c) the same tree as (a), with the missing right child made explicit;
-(d) the same tree as (b), with the missing left child made explicit.
-</p></figcaption>
+(d) the same tree as (b), with the missing left child made
+explicit</p></figcaption>
 </figure>
 <p>Two restricted forms of binary tree are sufficiently important to
 warrant special names. Each node in a <a
@@ -289,17 +357,68 @@ title="A Huffman coding tree is a full binary tree that is used to represent let
 coding tree</a> (<a
 href="section-9.4.html#sec:case-study-huffman-coding">Section 9.4</a>)
 is an example of a full binary tree.</p>
-<figure id="fig:full_complete_bintrees" class="subfigures">
-<div class="online">
-<p>
-<div id="FullCompCON" class="ssAV" data-short-name="FullCompCON" data-long-name="Binary/FullCompCON" alt="Binary/FullCompCON" tabIndex="-1">
+<figure id="fig:full_complete_bintrees">
+
+<div id="img-jsav-2456d20ba243d8dcda8fa498b09f4863" class="ssAV" data-short-name="img-jsav-2456d20ba243d8dcda8fa498b09f4863" data-long-name="img-jsav-2456d20ba243d8dcda8fa498b09f4863" alt="img-jsav-2456d20ba243d8dcda8fa498b09f4863" tabIndex="-1">
 <div class="jsavcanvas"></div>
 </div>
-</p>
-</div>
+
+
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("img-jsav-2456d20ba243d8dcda8fa498b09f4863", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#img-jsav-2456d20ba243d8dcda8fa498b09f4863 "+rule)}
+    var AV = NewAV();
+AddCSS(`.jsavnode.jsavtreenode {
+  min-width: 10px;
+  max-width: 10px;
+  min-height: 10px;
+  max-height: 10px;
+  background-color: #000000;
+  border-color: #000000;
+}`);
+// Setup first row of trees
+var btTop = 0;
+var btLeft = 225;
+var btRight = 425;
+var bt = AV.ds.binarytree({nodegap: 25, left: btLeft, top: btTop});
+bt.root("");
+var rt = bt.root();
+rt.left("");
+rt.left().left("");
+rt.left().right("");
+rt.left().right().left("");
+rt.left().right().right("");
+rt.right("");
+
+var bt2 = AV.ds.binarytree({nodegap: 25, left: btRight, top: btTop});
+var rt2 = bt2.root("");
+rt2.left("");
+rt2.left().left("");
+rt2.left().right("");
+rt2.left().left().left("");
+rt2.left().left().right("");
+rt2.left().right().left("");
+rt2.left().right().right("");
+rt2.right("");
+rt2.right().right("");
+rt2.right().left("");
+rt2.right().left().left("");
+
+bt.layout();
+bt2.layout();
+
+// Add first row of labels
+AV.label("(a)", {left: btLeft + 35, top: btTop + 135});
+AV.label("(b)", {left: btRight + 115, top: btTop + 135});
+AV.displayInit();
+AV.recorded();
+  });
+</script>
+
 <figcaption><p>Figure 8.3: Examples of full and complete binary trees:
-(a) is full but not complete; (b) is complete but not full.
-</p></figcaption>
+(a) is full but not complete; (b) is complete but not
+full</p></figcaption>
 </figure>
 <div class="note">
 <p><em>Note</em>: While these definitions for full and complete binary
@@ -334,16 +453,34 @@ one its left child and the other one its right child.</p>
 <p>The recursive relationships used to define a structure provide a
 natural model for any recursive algorithm on the structure.</p>
 </summary>
-<p>
-<div id="ListRecDSCON" class="ssAV" data-short-name="ListRecDSCON" data-long-name="Binary/ListRecDSCON" alt="Binary/ListRecDSCON" tabIndex="-1">
+
+<div id="ListRecDSCON" class="ssAV" data-short-name="ListRecDSCON" data-long-name="ListRecDSCON" alt="ListRecDSCON" tabIndex="-1">
 <div class="jsavcanvas"></div>
 </div>
-</p>
-<p>
-<div id="BinRecDSCON" class="ssAV" data-short-name="BinRecDSCON" data-long-name="Binary/BinRecDSCON" alt="Binary/BinRecDSCON" tabIndex="-1">
+
+<script type="text/javascript" src="../interactive/Binary/ListRecDSCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("ListRecDSCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#ListRecDSCON "+rule)}
+    
+  });
+</script>
+
+
+<div id="BinRecDSCON" class="ssAV" data-short-name="BinRecDSCON" data-long-name="BinRecDSCON" alt="BinRecDSCON" tabIndex="-1">
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Binary/BinRecDSCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("BinRecDSCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#BinRecDSCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>One way to think about recursion is to see it as <em>delegation</em>:
@@ -363,14 +500,23 @@ calculated their sums, as long as you accept that they are correct.</p>
 <summary>
 <p>Here is a visual explanation of the same idea.</p>
 </summary>
-<p>
+
 <div id="SumBinaryTreeCON" class="ssAV" data-short-name="SumBinaryTreeCON" data-long-name="Sum values in a Binary Tree Slide Show" alt="Sum values in a Binary Tree Slide Show" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Binary/SumBinaryTreeCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("SumBinaryTreeCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#SumBinaryTreeCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 </section>
@@ -390,12 +536,7 @@ calculated their sums, as long as you accept that they are correct.</p>
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/Binary/BinExampCON.js"></script>
-<script type="text/javascript" src="../interactive/Binary/BinDiffCON.js"></script>
-<script type="text/javascript" src="../interactive/Binary/FullCompCON.js"></script>
-<script type="text/javascript" src="../interactive/Binary/ListRecDSCON.js"></script>
-<script type="text/javascript" src="../interactive/Binary/BinRecDSCON.js"></script>
-<script type="text/javascript" src="../interactive/Binary/SumBinaryTreeCON.js"></script>
 </body>
 </html>
+
 

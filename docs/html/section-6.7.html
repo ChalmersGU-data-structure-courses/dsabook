@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -68,9 +69,7 @@
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 <link href="../interactive/ChalmersGU/CGU-Styles.css" rel="stylesheet" type="text/css"/>
-<link href="../interactive/List/ListArrayDynamicZoomCON.css" rel="stylesheet" type="text/css"/>
-<link href="../interactive/List/ListArrayDynamicCON.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/List/ListArrayDynamicCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -144,14 +143,23 @@ add a constant number, but increase the size by a factor.</p>
 <summary>
 <p>Dynamic array list.</p>
 </summary>
-<p>
+
 <div id="DynamicArrayList-Append-CON" class="ssAV" data-short-name="DynamicArrayList-Append-CON" data-long-name="Dynamic Array-based List Addition Slideshow" alt="Dynamic Array-based List Addition Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/ChalmersGU/DynamicArrayList-Append-CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("DynamicArrayList-Append-CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#DynamicArrayList-Append-CON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 </section>
@@ -464,15 +472,25 @@ performance difference is between the two resizing strategies: growing
 the array by a constant amount, and scaling it by a constant factor. The
 graph plots how many elements need to be copied, as a function of how
 many elements we add to the list.</p>
-<figure id="fig:ListGrowthGraph" class="subfigures">
-<p>
-<div id="ListArrayDynamicZoomCON" class="ssAV" data-short-name="ListArrayDynamicZoomCON" data-long-name="DataStructures/Plot.js List/ListArrayDynamicZoomCON" alt="DataStructures/Plot.js List/ListArrayDynamicZoomCON" tabIndex="-1">
+<figure id="fig:ListGrowthGraph">
+
+<div id="ListArrayDynamicZoomCON" class="ssAV" data-short-name="ListArrayDynamicZoomCON" data-long-name="ListArrayDynamicZoomCON" alt="ListArrayDynamicZoomCON" tabIndex="-1">
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/DataStructures/Plot.js"></script>
+<script type="text/javascript" src="../interactive/List/ListArrayDynamicZoomCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("ListArrayDynamicZoomCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#ListArrayDynamicZoomCON "+rule)}
+    
+  });
+</script>
+
 <figcaption><p>Figure 6.1: The performance difference between growing
-the array by a constant amount, and scaling it by a constant factor.
-</p></figcaption>
+the array by a constant amount, and scaling it by a constant
+factor.</p></figcaption>
 </figure>
 <p>Notice that although growing by 10000 seems pretty good at first, for
 largest lists it’s worse than growing by 10% (a factor of 1.1). We can
@@ -482,14 +500,24 @@ see this more clearly if we zoom out the graph, making the
 instead of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>,</mo><mn>000</mn><mo>,</mo><mn>000</mn></mrow><annotation encoding="application/x-tex">1,000,000</annotation></semantics></math>,
 as shown in <a href="#fig:ListGrowthGraphZoom">Figure 6.2</a>.</p>
-<figure id="fig:ListGrowthGraphZoom" class="subfigures">
-<p>
-<div id="ListArrayDynamicCON" class="ssAV" data-short-name="ListArrayDynamicCON" data-long-name="DataStructures/Plot.js List/ListArrayDynamicCON" alt="DataStructures/Plot.js List/ListArrayDynamicCON" tabIndex="-1">
+<figure id="fig:ListGrowthGraphZoom">
+
+<div id="ListArrayDynamicCON" class="ssAV" data-short-name="ListArrayDynamicCON" data-long-name="ListArrayDynamicCON" alt="ListArrayDynamicCON" tabIndex="-1">
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/DataStructures/Plot.js"></script>
+<script type="text/javascript" src="../interactive/List/ListArrayDynamicCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("ListArrayDynamicCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#ListArrayDynamicCON "+rule)}
+    
+  });
+</script>
+
 <figcaption><p>Figure 6.2: <a href="#fig:ListGrowthGraph">Figure 6.1</a>
-zoomed out 10 times.. </p></figcaption>
+zoomed out 10 times.</p></figcaption>
 </figure>
 <p>Though you can’t see it in the graph, at
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mn>10</mn><mo>,</mo><mn>000</mn><mo>,</mo><mn>000</mn></mrow><annotation encoding="application/x-tex">x=10,000,000</annotation></semantics></math>,
@@ -578,14 +606,23 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb9-1"><a hr
 <summary>
 <p>Dynamic array list – deletion.</p>
 </summary>
-<p>
+
 <div id="DynamicArrayList-Remove-CON" class="ssAV" data-short-name="DynamicArrayList-Remove-CON" data-long-name="Dynamic Array-based List Deletion Slideshow" alt="Dynamic Array-based List Deletion Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/ChalmersGU/DynamicArrayList-Remove-CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("DynamicArrayList-Remove-CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#DynamicArrayList-Remove-CON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 </section>
@@ -605,11 +642,7 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb9-1"><a hr
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/ChalmersGU/DynamicArrayList-Append-CON.js"></script>
-<script type="text/javascript" src="../interactive/DataStructures/Plot.js"></script>
-<script type="text/javascript" src="../interactive/List/ListArrayDynamicZoomCON.js"></script>
-<script type="text/javascript" src="../interactive/List/ListArrayDynamicCON.js"></script>
-<script type="text/javascript" src="../interactive/ChalmersGU/DynamicArrayList-Remove-CON.js"></script>
 </body>
 </html>
+
 

@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -68,8 +69,7 @@
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
 <link href="../interactive/AlgAnal/SummationOneToNCON.css" rel="stylesheet" type="text/css"/>
-<link href="../interactive/AlgAnal/SummationTwoPowerICON.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/AlgAnal/SummationTwoPowerICON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -968,22 +968,40 @@ the closed-form solution is
 summations that you will see many times in this book. Since this appears
 so often, it will help you later if you can get comfortable with it.</p>
 </summary>
-<p>
-<div id="SummationOneToNCON" class="ssAV" data-short-name="SummationOneToNCON" data-long-name="AlgAnal/SummationOneToNCON" alt="AlgAnal/SummationOneToNCON" tabIndex="-1">
+
+<div id="SummationOneToNCON" class="ssAV" data-short-name="SummationOneToNCON" data-long-name="SummationOneToNCON" alt="SummationOneToNCON" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
-<p>
-<div id="SummationTwoPowerICON" class="ssAV" data-short-name="SummationTwoPowerICON" data-long-name="AlgAnal/SummationTwoPowerICON" alt="AlgAnal/SummationTwoPowerICON" tabIndex="-1">
+
+<script type="text/javascript" src="../interactive/AlgAnal/SummationOneToNCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("SummationOneToNCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#SummationOneToNCON "+rule)}
+    
+  });
+</script>
+
+
+<div id="SummationTwoPowerICON" class="ssAV" data-short-name="SummationTwoPowerICON" data-long-name="SummationTwoPowerICON" alt="SummationTwoPowerICON" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/AlgAnal/SummationTwoPowerICON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("SummationTwoPowerICON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#SummationTwoPowerICON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>Here is a list of useful summations, along with their closed-form
@@ -1532,8 +1550,7 @@ tell if this approach replaces deterministic approaches.</p>
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/AlgAnal/SummationOneToNCON.js"></script>
-<script type="text/javascript" src="../interactive/AlgAnal/SummationTwoPowerICON.js"></script>
 </body>
 </html>
+
 

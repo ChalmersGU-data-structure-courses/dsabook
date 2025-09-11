@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,8 +68,7 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Sorting/InsertionSort.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/Sorting/InsertionSort.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -112,10 +112,7 @@ right).</p>
 <p>Insertion sort iterates through a list of elements. For each
 iteration, the current element is inserted in turn at the correct
 position within a sorted list composed of those elements already
-processed. Here is an implementation. The input is an array named
-<code>arr</code> that stores
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-elements.</p>
+processed. Here is an implementation.</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> insertionSort(arr):</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> arr.<span class="bu">size</span></span>
@@ -125,6 +122,9 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a hr
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> j <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> arr[j] <span class="op">&lt;</span> arr[j<span class="op">-</span><span class="dv">1</span>]:</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>            swap(arr, j, j<span class="op">-</span><span class="dv">1</span>)</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            j <span class="op">=</span> j<span class="op">-</span><span class="dv">1</span></span></code></pre></div>
+<p>The input is an array named <code>arr</code> that stores
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+elements.</p>
 <section id="sec:insertion-sort-visualisation"
 class="level4 unnumbered online">
 <h4 class="unnumbered">Insertion sort visualisation</h4>
@@ -133,14 +133,23 @@ class="level4 unnumbered online">
 <summary>
 <p>Here we see the first few iterations of Insertion sort.</p>
 </summary>
-<p>
+
 <div id="insertionsortCON" class="ssAV" data-short-name="insertionsortCON" data-long-name="Insertion Sort Slideshow" alt="Insertion Sort Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Sorting/insertionsortCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("insertionsortCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#insertionsortCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>This continues on with each element in turn. Call the current element
@@ -156,13 +165,13 @@ because all elements to its left in the array must be smaller.</p>
 <p>The following visualisation shows the complete Insertion sort. You
 can input your own data if you like.</p>
 </summary>
-<p>
+
 <div id="insertionsortAV" class="embedContainer">
 <iframe id="insertionsortAV_iframe" aria-label="insertionsortAV" src="../interactive/Sorting/insertionsortAV.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 <div class="dsvis">
@@ -171,13 +180,13 @@ Your browser does not support iframes.
 <p>Now try for yourself to see if you understand how Insertion sort
 works.</p>
 </summary>
-<p>
+
 <div id="InssortPRO" class="embedContainer">
 <iframe id="InssortPRO_iframe" aria-label="InssortPRO" src="../interactive/Sorting/InssortPRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 </section>
@@ -218,14 +227,23 @@ because we only have to do one comparison per iteration.</p>
 <summary>
 <p>Here is an explanation of the worst case cost of Insertion sort.</p>
 </summary>
-<p>
+
 <div id="InsertionSortWorstCaseCON" class="ssAV" data-short-name="InsertionSortWorstCaseCON" data-long-name="Insertion Sort Worst Case Slideshow" alt="Insertion Sort Worst Case Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Sorting/InsertionSortWorstCaseCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("InsertionSortWorstCaseCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#InsertionSortWorstCaseCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <div class="dsvis">
@@ -233,14 +251,23 @@ because we only have to do one comparison per iteration.</p>
 <summary>
 <p>And here is an explanation of the cost of the best case.</p>
 </summary>
-<p>
+
 <div id="InsertionSortBestCaseCON" class="ssAV" data-short-name="InsertionSortBestCaseCON" data-long-name="Insertion Sort Best Case Slideshow" alt="Insertion Sort Best Case Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Sorting/InsertionSortBestCaseCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("InsertionSortBestCaseCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#InsertionSortBestCaseCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <div class="dsvis">
@@ -248,14 +275,23 @@ because we only have to do one comparison per iteration.</p>
 <summary>
 <p>And here is the average case cost.</p>
 </summary>
-<p>
+
 <div id="InsertionSortAverageCaseCON" class="ssAV" data-short-name="InsertionSortAverageCaseCON" data-long-name="Insertion Sort Average Case Slideshow" alt="Insertion Sort Average Case Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Sorting/InsertionSortAverageCaseCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("InsertionSortAverageCaseCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#InsertionSortAverageCaseCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>While the best case is significantly faster than the average and
@@ -315,10 +351,7 @@ Actually, it happens a lot.</p>
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/Sorting/insertionsortCON.js"></script>
-<script type="text/javascript" src="../interactive/Sorting/InsertionSortWorstCaseCON.js"></script>
-<script type="text/javascript" src="../interactive/Sorting/InsertionSortBestCaseCON.js"></script>
-<script type="text/javascript" src="../interactive/Sorting/InsertionSortAverageCaseCON.js"></script>
 </body>
 </html>
+
 

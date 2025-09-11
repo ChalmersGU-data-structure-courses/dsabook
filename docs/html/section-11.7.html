@@ -7,7 +7,7 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Review questions</title>
+  <title>DSABook – Skip lists</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,7 +68,10 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-</head>
+<link href="../interactive/DataStructures/SkipList.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/SearchStruct/SkipListInsertCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/SearchStruct/SkipListIntroCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/SearchStruct/SkipListRmvCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -80,73 +84,299 @@
 <nav class="sitenav">
 <div>
 <a href="section-11.6.html" class="navbutton">&lt;&lt;</a>
-<a href="section-11.6.html" accesskey="p" rel="previous">Skip lists</a>
+<a href="section-11.6.html" accesskey="p" rel="previous">Disjoint sets and the Union/Find algorithm</a>
 </div>
 <div>
-<a href="section-12.html" accesskey="n" rel="next">Hash tables</a>
-<a href="section-12.html" class="navbutton">&gt;&gt;</a>
+<a href="section-11.8.html" accesskey="n" rel="next">Review questions</a>
+<a href="section-11.8.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:ch11-review" class="level2" data-number="11.7">
+<section id="sec:skip-lists" class="level2" data-number="11.7">
 <h2 data-number="11.7"><span class="header-section-number">11.7</span>
-Review questions</h2>
-<p>This final section contains some review questions about the contents
-of this chapter.</p>
-<section id="sec:review-questions-binary-search-trees"
-class="level3 quiz" data-number="11.7.1">
-<h3 data-number="11.7.1"><span
-class="header-section-number">11.7.1</span> Review questions: Binary
-search trees</h3>
-<div class="question">
-<p>Answer TRUE or FALSE.</p>
-<p>A BST is another name for a binary tree.</p>
-<ul class="task-list">
-<li><label><input type="checkbox" />True</label></li>
-<li><label><input type="checkbox" checked="" />False</label></li>
-</ul>
-<div class="hints">
-<ul>
-<li>A binary tree is either empty, or else a root node with two binary
-trees as children.</li>
-<li>A BST (binary search tree) is a binary tree where, for every node N,
-all nodes in the left subtree of N have key values less than the key
-value of N, and all nodes in the right subtree of N have key values
-greater than the key value of N.</li>
-</ul>
+Skip lists</h2>
+<p>This section presents a probabilistic search structure called the <a
+href="section-14.html#skip-list" class="term"
+title="A form of linked list that adds additional links to improve the cost of fundamental operations like insert, delete, and search. It is a probabilistic data structure since it adds the additional links using a probabilistic algorithm. It can implement a dictionary more efficiently than a BST, and is roughly as difficult to implement.">skip
+list</a>. Like the <a href="section-14.html#bst" class="term"
+title="A binary tree that imposes the following constraint on its node values: The search key value for any node $A$ must be greater than the (key) values for all nodes in the left subtree of $A$, and less than the key values for all nodes in the right subtree of $A$. Some convention must be adopted if multiple nodes with the same key value are permitted, typically these are required to be in the right subtree.">BST</a>,
+skip lists are designed to overcome a basic limitation of array-based
+and linked lists: Either search or update operations require linear
+time. The skip list is an example of a <a
+href="section-14.html#probabilistic-data-structure" class="term"
+title="Any data structure that uses probabilistic algorithms to perform its operations. A good example is the skip list.">probabilistic
+data structure</a>, because it makes some of its decisions at
+random.</p>
+<p>Skip lists provide an alternative to the BST and related tree
+structures. The primary problem with the BST is that it may easily
+become unbalanced. The <a href="section-14.html#2-3-tree" class="term"
+title="A specialised form of the B-tree where each internal node has either 2 children or 3 children. Key values are ordered to maintain the binary search tree property. The 2-3 tree is always height balanced, and its insert, search, and remove operations all have $O(\log n)$ cost.">2-3
+Tree</a> is guaranteed to remain balanced regardless of the order in
+which data values are inserted, but it is rather complicated to
+implement. The <a href="section-14.html#avl-tree" class="term"
+title="A variant implementation for the BST, which differs from the standard BST in that it uses modified insert and remove methods in order to keep the tree balanced. Similar to a splay tree in that it uses the concept of rotations in the insert and remove operations.">AVL
+tree</a> and the <a href="section-14.html#splay-tree" class="term"
+title="A variant implementation for the BST, which differs from the standard BST in that it uses modified insert and remove methods in order to keep the tree balanced. Similar to an AVL tree in that it uses the concept of rotations in the insert and remove operations. While a splay tree does not guarentee that the tree is balanced, it does guarentee that a series of $n$ operations on the tree will have a total cost of $O(n \log n)$ cost, meaning that any given operation can be viewed as having amortised cost of $O(\log n)$.">splay
+tree</a> are also guaranteed to provide good performance, but at the
+cost of added complexity as compared to the BST. The skip list is easier
+to implement than known balanced tree structures. The skip list is not
+guaranteed to provide good performance (where good performance is
+defined as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>
+search, insertion, and deletion time), but it will provide good
+performance with extremely high probability (unlike the BST which has a
+good chance of performing poorly). As such it represents a good
+compromise between difficulty of implementation and performance.</p>
+<div class="online">
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Here is an illustration of the basic idea behind skip lists.</p>
+</summary>
+
+<div id="SkipListIntroCON" class="ssAV" data-short-name="SkipListIntroCON" data-long-name="SkipListIntroCON" alt="SkipListIntroCON" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
 </div>
+
+
+<script type="text/javascript" src="../interactive/DataStructures/SkipList.js"></script>
+<script type="text/javascript" src="../interactive/SearchStruct/SkipListIntroCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("SkipListIntroCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#SkipListIntroCON "+rule)}
+    
+  });
+</script>
+
+</details>
 </div>
-<div class="question">
-<p>BST search, insert, and delete operations typically run in time
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(d)</annotation></semantics></math>.
-What is
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>?</p>
-<ul class="task-list">
-<li><label><input type="checkbox" checked="" />The depth of the relevant
-node in the tree</label></li>
-<li><label><input type="checkbox" />The number of divisions at each
-level</label></li>
-<li><label><input type="checkbox" />The number of entries in each
-node</label></li>
-<li><label><input type="checkbox" />The number of nodes in the
-tree</label></li>
-<li><label><input type="checkbox" />The total number of entries in all
-the nodes of the tree</label></li>
-</ul>
-<div class="hints">
-<ul>
-<li>Think about a given insert or search operation.</li>
-<li>How many nodes get looked at?</li>
-<li>The operation moves down the tree, looking at a node at each level
-that it visits.</li>
-<li>So the total work is the number of nodes that it visits, which is
-the same as the depth of the last node.</li>
-</ul>
+<p>We can continue adding pointers to selected nodes in this way – give
+a third pointer to every fourth node, give a fourth pointer to every
+eighth node, and so on – until we reach the ultimate of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n</annotation></semantics></math>
+pointers in the first and middle nodes for a list of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+nodes. To search, start with the bottom row of pointers, going as far as
+possible and skipping many nodes at a time. Then, shift up to shorter
+and shorter steps as required. With this arrangement, the worst-case
+number of accesses is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>.</p>
+<p>We will store with each skip list node an array named
+<code>forward</code> that stores the pointers. Position
+<code>forward[0]</code> stores a level 0 pointer,
+<code>forward[1]</code> stores a level 1 pointer, and so on:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> SkipNode <span class="kw">of</span> K, V:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    key: K</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    value: V</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    forward: <span class="bu">Array</span> <span class="kw">of</span> SkipNode</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">constructor</span>(key, value, level):</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        key <span class="op">=</span> key</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        value <span class="op">=</span> value</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        forward <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(level <span class="op">+</span> <span class="dv">1</span>)</span></code></pre></div>
+<p>The skip list object includes data member <code>level</code> that
+stores the highest level for any node currently in the skip list. The
+skip list stores a header node named <code>head</code> with
+<code>level+1</code> pointers where the head level is initially 0 and
+the level is set to -1 for the empty list. The start of the SkipList
+class follows:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> SkipList K <span class="kw">to</span> V <span class="kw">implements</span> <span class="bu">Map</span>:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    head  <span class="op">=</span> <span class="kw">new</span> SkipNode(<span class="va">null</span>, <span class="va">null</span>, <span class="dv">0</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    level <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">size</span>  <span class="op">=</span> <span class="dv">0</span></span></code></pre></div>
+<p>The <code>get</code> method works as follows.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> SkipList <span class="kw">implements</span> <span class="bu">Map</span>:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Look up the value associated with a key.</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">get</span>(key):</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> head  <span class="co">// Dummy header node</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> level, level<span class="op">-</span><span class="dv">1</span> .. <span class="dv">0</span>:  <span class="co">// For each level...</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">while</span> x.forward[i] <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span> <span class="kw">and</span> key <span class="op">&gt;</span> x.forward[i].key:  <span class="co">// ...go forward</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                x <span class="op">=</span> x.forward[i]  <span class="co">// Go one last step</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> x.forward[<span class="dv">0</span>]  <span class="co">// Move to actual record, if it exists</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> x <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span> <span class="kw">and</span> key <span class="op">==</span> x.key:</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> x.value  <span class="co">// Got it</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">null</span>  <span class="co">// It&#39;s not there</span></span></code></pre></div>
+<p>The ideal skip list is organised so that (if the head node is not
+counted) half of the nodes have only one pointer, one quarter have two,
+one eighth have three, and so on. And ideally, the distances would be
+equally spaced; in effect this is a “perfectly balanced” skip list.
+Maintaining such balance would be expensive during the normal process of
+insertions and deletions. The key to skip lists is that we do not worry
+about any of this. Whenever inserting a node, we assign it a level
+(i.e., some number of pointers). The assignment is random, using a
+geometric distribution yielding a 50% probability that the node will
+have one pointer, a 25% probability that it will have two, and so on.
+The following function determines the level based on such a
+distribution.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> randomLevel():</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    level <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> random() <span class="op">&lt;</span> <span class="fl">0.5</span>:</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        level <span class="op">=</span> level <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> lev</span></code></pre></div>
+<p>Once the proper level for the node has been determined, the next step
+is to find where the node should be inserted and link it in as
+appropriate at all of its levels. Here is an implementation for
+inserting a new value into the skip list followed by a visualisation of
+the process. Note that we build an <code>update</code> array as we
+progress through the skip list, so that we can update the pointers for
+the nodes that will precede the one being inserted.</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> SkipList <span class="kw">implements</span> <span class="bu">Map</span>:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Add a key-value pair, or update the value associated with an existing key.</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">put</span>(key, value):</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        newLevel <span class="op">=</span> randomLevel()  <span class="co">// New node&#39;s level</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> newLevel <span class="op">&gt;</span> level:  <span class="co">// If new node is deeper...</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>            adjustHead(newLevel)  <span class="co">// ...adjust the header</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Track end of level:</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        update <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(level <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> head  <span class="co">// Start at header node</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="op">=</span> level <span class="kw">downto</span> <span class="dv">0</span>:  <span class="co">// Find insert position</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">while</span> x.forward[i] <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span> <span class="kw">and</span> key <span class="op">&gt;</span> x.forward[i].key:</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>                x <span class="op">=</span> x.forward[i]</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>            update[i] <span class="op">=</span> x  <span class="co">// Track end at level i</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> x.forward[<span class="dv">0</span>]  <span class="co">// Move to actual record, if it exists</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> x <span class="kw">is</span> <span class="kw">not</span> <span class="va">null</span> <span class="kw">and</span> key <span class="op">==</span> x.key:</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>            x.value <span class="op">=</span> value  <span class="co">// The key exists: update the value</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>            <span class="co">// Otherwise, create a new node and insert it into place:</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>            y <span class="op">=</span> <span class="kw">new</span> SkipNode(key, value, newLevel)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> i <span class="op">=</span> <span class="dv">0</span> <span class="kw">to</span> newLevel:  <span class="co">// Splice into list</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>                y.forward[i] <span class="op">=</span> update[i].forward[i]  <span class="co">// Who y points to</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>                update[i].forward[i] <span class="op">=</span> y  <span class="co">// Who points to y</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>            <span class="bu">size</span> <span class="op">=</span> <span class="bu">size</span> <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    adjustHead(newLevel):</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>        temp <span class="op">=</span> head</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>        head <span class="op">=</span> <span class="kw">new</span> SkipNode(<span class="va">null</span>, <span class="va">null</span>, newLevel)</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="op">=</span> <span class="dv">0</span> <span class="kw">to</span> level:</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>            head.forward[i] <span class="op">=</span> temp.forward[i]</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>        level <span class="op">=</span> newLevel</span></code></pre></div>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Interactive explanation of skip list insertion.</p>
+</summary>
+
+<div id="SkipListInsertCON" class="ssAV" data-short-name="SkipListInsertCON" data-long-name="SkipListInsertCON" alt="SkipListInsertCON" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
 </div>
+
+
+<script type="text/javascript" src="../interactive/DataStructures/SkipList.js"></script>
+<script type="text/javascript" src="../interactive/SearchStruct/SkipListInsertCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("SkipListInsertCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#SkipListInsertCON "+rule)}
+    
+  });
+</script>
+
+</details>
 </div>
-</section>
+<p>The <code>remove</code> function is similar to insertion in that the
+<code>update</code> array is built as part of searching for the record
+to be deleted. Then those nodes specified by the update array have their
+forward pointers adjusted to point around the node being deleted.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Interactive explanation of skip list removal.</p>
+</summary>
+
+<div id="SkipListRmvCON" class="ssAV" data-short-name="SkipListRmvCON" data-long-name="SkipListRmvCON" alt="SkipListRmvCON" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+
+<script type="text/javascript" src="../interactive/DataStructures/SkipList.js"></script>
+<script type="text/javascript" src="../interactive/SearchStruct/SkipListRmvCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("SkipListRmvCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#SkipListRmvCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<p>A newly inserted node could have a high level generated by
+<code>randomLevel</code>, or a low level. It is possible that many nodes
+in the skip list could have many pointers, leading to unnecessary insert
+cost and yielding poor (i.e.,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>)
+performance during search, because not many nodes will be skipped.
+Conversely, too many nodes could have a low level. In the worst case,
+all nodes could be at level 0, equivalent to a regular linked list. If
+so, search will again require
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>
+time. However, the probability that performance will be poor is quite
+low. There is only one chance in 1024 that ten nodes in a row will be at
+level 0. The motto of probabilistic data structures such as the skip
+list is “Don’t worry, be happy”. We simply accept the results of
+<code>randomLevel</code> and expect that probability will eventually
+work in our favour. The advantage of this approach is that the
+algorithms are simple, while requiring only
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>
+time for all operations in the average case. For a skip list of size
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
+the expected memory usage is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>n</mi></mrow><annotation encoding="application/x-tex">2n</annotation></semantics></math>.
+This is because a level
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>l</mi><annotation encoding="application/x-tex">l</annotation></semantics></math>
+node needs
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">l+1</annotation></semantics></math>
+forward pointers, but occurs with probability
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mn>2</mn><mrow><mo stretchy="false" form="prefix">(</mo><mi>l</mi><mo>+</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow></msup><annotation encoding="application/x-tex">2^{(l+1)}</annotation></semantics></math>.
+So a skip list is expected to have
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mo>∑</mo><mrow><mi>l</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>l</mi><mo>=</mo><mi>∞</mi></mrow></msubsup><mo stretchy="false" form="prefix">(</mo><mi>l</mi><mo>+</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mi>/</mi><msup><mn>2</mn><mrow><mo stretchy="false" form="prefix">(</mo><mi>l</mi><mo>+</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow></msup></mrow><annotation encoding="application/x-tex">\sum_{l=0}^{l=\infty} (l+1)/2^{(l+1)}</annotation></semantics></math>
+pointers, which is 2. Thus, the number of pointers needed by both the
+BST and the skip list are expected to be the same.</p>
+<p>In practice, the skip list will probably have better performance than
+a BST storing the same data. The BST can have bad performance caused by
+the order in which data are inserted. For example, if
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+nodes are inserted into a BST in ascending order of their key values,
+then the BST will look like a linked list with the deepest node at depth
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>.
+If the data inserted over the life of the BST could be randomly ordered,
+then the probability distribution for the cost of the insert and search
+operations would be similar to that of the skip list. The problem for
+the BST is that this randomisation does not happen in fact, but rather
+the BST is constrained by the actual order of inputs and searches.</p>
+<p>In contrast, the skip list’s performance does not depend on the order
+in which values are inserted into the list. In a sense, the data are
+“randomised” automatically as part of the skip list’s probabilistic
+behaviour when the depths of the nodes are selected. As the number of
+nodes in the skip list increases, the probability of encountering the
+worst case decreases geometrically. Thus, the skip list illustrates a
+tension between the theoretical worst case (in this case,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math>
+for a skip list operation), and a rapidly increasing probability of
+average-case performance of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>,
+that characterises probabilistic data structures.</p>
+</div>
 </section>
 </main>
 
@@ -154,15 +384,16 @@ the same as the depth of the last node.</li>
 <nav class="sitenav">
 <div class="navlink">
 <a href="section-11.6.html" class="navbutton">&lt;&lt;</a>
-<a href="section-11.6.html" accesskey="p" rel="previous">Skip lists</a>
+<a href="section-11.6.html" accesskey="p" rel="previous">Disjoint sets and the Union/Find algorithm</a>
 </div>
 <div class="navlink">
-<a href="section-12.html" accesskey="n" rel="next">Hash tables</a>
-<a href="section-12.html" class="navbutton">&gt;&gt;</a>
+<a href="section-11.8.html" accesskey="n" rel="next">Review questions</a>
+<a href="section-11.8.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </footer>
 
 </body>
 </html>
+
 

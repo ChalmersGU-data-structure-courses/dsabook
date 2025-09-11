@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -122,15 +123,27 @@ connects them together), and it has minimum cost. <a
 href="#fig:GraphMST">Figure 13.10</a> shows the MST for an example
 graph.</p>
 <figure id="fig:GraphMST">
-<img src="images/GraphMST.png" style="width:40.0%"
-alt="Figure 13.10: A graph and its MST. All edges appear in the original graph. Those edges drawn with heavy lines indicate the subset making up the MST. Note that edge (C, F) could be replaced with edge (D, F) to form a different MST with equal cost." />
-<figcaption aria-hidden="true">Figure 13.10: A graph and its MST. All
-edges appear in the original graph. Those edges drawn with heavy lines
-indicate the subset making up the MST. Note that edge
+
+<div id="MCSTCON" class="ssAV" data-short-name="MCSTCON" data-long-name="MCSTCON" alt="MCSTCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/Graph/MCSTCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("MCSTCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#MCSTCON "+rule)}
+    
+  });
+</script>
+
+<figcaption><p>Figure 13.10: A graph and its MST. All edges appear in
+the original graph. Those edges drawn with heavy lines indicate the
+subset making up the MST. Note that edge
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>C</mi><mo>,</mo><mi>F</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(C, F)</annotation></semantics></math>
 could be replaced with edge
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>D</mi><mo>,</mo><mi>F</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(D, F)</annotation></semantics></math>
-to form a different MST with equal cost.</figcaption>
+to form a different MST with equal cost.</p></figcaption>
 </figure>
 </section>
 </main>
@@ -150,4 +163,5 @@ to form a different MST with equal cost.</figcaption>
 
 </body>
 </html>
+
 

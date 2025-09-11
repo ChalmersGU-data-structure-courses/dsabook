@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,8 +68,7 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/List/aqueueCON.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/List/aqueueCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -116,14 +116,23 @@ elements to be able to enqueue, again giving complexity
 <summary>
 <p>Array queue – positions.</p>
 </summary>
-<p>
+
 <div id="aqueueFirstCON" class="ssAV" data-short-name="aqueueFirstCON" data-long-name="Array-based Queue Positions Slideshow" alt="Array-based Queue Positions Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/List/aqueueFirstCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("aqueueFirstCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#aqueueFirstCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>A more efficient implementation can be obtained by relaxing the
@@ -141,14 +150,23 @@ position, and then we increase the front variable.</li>
 <summary>
 <p>Array queue – drifting.</p>
 </summary>
-<p>
+
 <div id="aqueueDriftCON" class="ssAV" data-short-name="aqueueDriftCON" data-long-name="Array-based Queue Drift Slideshow" alt="Array-based Queue Drift Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/List/aqueueDriftCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("aqueueDriftCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#aqueueDriftCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <div class="dsvis">
@@ -156,14 +174,23 @@ position, and then we increase the front variable.</li>
 <summary>
 <p>Array queue – bad representation.</p>
 </summary>
-<p>
+
 <div id="aqueueBadCON" class="ssAV" data-short-name="aqueueBadCON" data-long-name="Array-based Queue Bad Representation Slideshow" alt="Array-based Queue Bad Representation Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/List/aqueueBadCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("aqueueBadCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#aqueueBadCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <section id="sec:circular-queues" class="level3" data-number="6.6.1">
@@ -191,14 +218,24 @@ is the size of the array).</p>
 <summary>
 <p>Circular array queue.</p>
 </summary>
-<p>
+
 <div id="aqueueCircularCON" class="ssAV" data-short-name="aqueueCircularCON" data-long-name="Circular Array-based Queue Slideshow" alt="Circular Array-based Queue Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/DataStructures/CircularQueue.js"></script>
+<script type="text/javascript" src="../interactive/List/aqueueCircularCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("aqueueCircularCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#aqueueCircularCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>There remains one more subtle problem to the array-based queue
@@ -209,14 +246,24 @@ full?</p>
 <summary>
 <p>Circular array queue – empty.</p>
 </summary>
-<p>
+
 <div id="aqueueEmptyCON" class="ssAV" data-short-name="aqueueEmptyCON" data-long-name="Empty Circular Array-based Queue Slideshow" alt="Empty Circular Array-based Queue Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/DataStructures/CircularQueue.js"></script>
+<script type="text/javascript" src="../interactive/List/aqueueEmptyCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("aqueueEmptyCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#aqueueEmptyCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>If the array has size
@@ -289,20 +336,20 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a hr
 class="level4 unnumbered">
 <h4 class="unnumbered">Array-based queue practice exercises</h4>
 </summary>
-<p>
+
 <div id="AqueueEnqueuePRO" class="embedContainer">
 <iframe id="AqueueEnqueuePRO_iframe" aria-label="AqueueEnqueuePRO" src="../interactive/ChalmersGU/AqueueEnqueuePRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
-<p>
+
+
 <div id="AqueueDequeuePRO" class="embedContainer">
 <iframe id="AqueueDequeuePRO_iframe" aria-label="AqueueDequeuePRO" src="../interactive/ChalmersGU/AqueueDequeuePRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </section>
 </div>
@@ -324,12 +371,7 @@ Your browser does not support iframes.
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/List/aqueueFirstCON.js"></script>
-<script type="text/javascript" src="../interactive/List/aqueueDriftCON.js"></script>
-<script type="text/javascript" src="../interactive/List/aqueueBadCON.js"></script>
-<script type="text/javascript" src="../interactive/DataStructures/CircularQueue.js"></script>
-<script type="text/javascript" src="../interactive/List/aqueueCircularCON.js"></script>
-<script type="text/javascript" src="../interactive/List/aqueueEmptyCON.js"></script>
 </body>
 </html>
+
 

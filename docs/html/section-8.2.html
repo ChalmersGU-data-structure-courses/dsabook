@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,7 +68,6 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Binary/UnaryTreeExampleCON.css" rel="stylesheet" type="text/css"/>
 </head>
 
 <body>
@@ -119,11 +119,44 @@ internal nodes might have only one leaf. This occurs when the internal
 nodes are arranged in a chain ending in a single leaf as shown in the
 following figure. In this example, the number of leaves is low because
 each internal node has only one non-empty child.</p>
-<p>
-<div id="UnaryTreeExampleCON" class="ssAV" data-short-name="UnaryTreeExampleCON" data-long-name="Binary/UnaryTreeExampleCON" alt="Binary/UnaryTreeExampleCON" tabIndex="-1">
+<figure id="fig:right_leaning_tree">
+
+<div id="img-jsav-f08a3aa1c6edc88a93c78d2e02b2e964" class="ssAV" data-short-name="img-jsav-f08a3aa1c6edc88a93c78d2e02b2e964" data-long-name="img-jsav-f08a3aa1c6edc88a93c78d2e02b2e964" alt="img-jsav-f08a3aa1c6edc88a93c78d2e02b2e964" tabIndex="-1">
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("img-jsav-f08a3aa1c6edc88a93c78d2e02b2e964", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#img-jsav-f08a3aa1c6edc88a93c78d2e02b2e964 "+rule)}
+    var AV = NewAV();
+AddCSS(`.dashed {
+  stroke-dasharray: 5, 5;
+}`);
+AddCSS(`.jsavnode.jsavtreenode {
+  min-width: 20px; max-width: 20px;
+  min-height: 20px; max-height: 20px;
+}`);
+var btTop = -5;
+var btLeft = 305;
+var bt = AV.ds.binarytree({nodegap: 30, left: btLeft, top: btTop});
+bt.root(" ");
+var rt = bt.root();
+rt.right(" ");
+rt.right().right(" ");
+rt.right().edgeToRight().addClass("dashed");
+rt.right().right().right(" ");
+AV.label("Any number of internal nodes", {left: 400, top: 70});
+bt.layout();
+AV.displayInit();
+AV.recorded();
+  });
+</script>
+
+<figcaption><p>Figure 8.4: A right-leaning tree with one single
+leaf</p></figcaption>
+</figure>
 <p>To find an upper bound on the number of leaves for a tree of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
 internal nodes, first note that the upper bound will occur when each
@@ -302,7 +335,7 @@ children must be empty.</p>
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/Binary/UnaryTreeExampleCON.js"></script>
 </body>
 </html>
+
 

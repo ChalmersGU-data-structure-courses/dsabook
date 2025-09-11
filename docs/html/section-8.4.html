@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,9 +68,7 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Binary/BinExampCON.css" rel="stylesheet" type="text/css"/>
-<link href="../interactive/Binary/BTCON.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/Binary/BTCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -181,11 +180,36 @@ D)</td>
 </div>
 <div class="online">
 <p>As a reminder, here is the example tree again:</p>
-<p>
-<div id="BinExampCON" class="ssAV" data-short-name="BinExampCON" data-long-name="Binary/BinExampCON" alt="Binary/BinExampCON" tabIndex="-1">
+
+<div id="img-jsav-09f35b6c56211d13d44ea410cb66d02b" class="ssAV" data-short-name="img-jsav-09f35b6c56211d13d44ea410cb66d02b" data-long-name="img-jsav-09f35b6c56211d13d44ea410cb66d02b" alt="img-jsav-09f35b6c56211d13d44ea410cb66d02b" tabIndex="-1">
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("img-jsav-09f35b6c56211d13d44ea410cb66d02b", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#img-jsav-09f35b6c56211d13d44ea410cb66d02b "+rule)}
+    var AV = NewAV();
+var btTop = -5;
+var btLeft = 305;
+var bt = AV.ds.binarytree({nodegap: 15, left: btLeft, top: btTop});
+bt.root("A");
+var rt = bt.root();
+rt.left("B");
+rt.left().right("D");
+rt.right("C");
+rt.right().left("E");
+rt.right().left().left("G");
+rt.right().right("F");
+rt.right().right().left("H");
+rt.right().right().right("I");
+bt.layout();
+AV.displayInit();
+AV.recorded();
+  });
+</script>
+
 <section id="sec:interactive-explanations" class="level4 unnumbered">
 <h4 class="unnumbered">Interactive explanations</h4>
 </section>
@@ -195,14 +219,23 @@ D)</td>
 <summary>
 <p>Here is a visualisation of preorder traversal.</p>
 </summary>
-<p>
+
 <div id="preorderCON" class="ssAV" data-short-name="preorderCON" data-long-name="Preorder Traversal Slideshow" alt="Preorder Traversal Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Binary/preorderCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("preorderCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#preorderCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <div class="dsvis">
@@ -210,14 +243,23 @@ D)</td>
 <summary>
 <p>And a visualisation of postorder traversal.</p>
 </summary>
-<p>
+
 <div id="postorderCON" class="ssAV" data-short-name="postorderCON" data-long-name="Postorder Traversal Slideshow" alt="Postorder Traversal Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Binary/postorderCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("postorderCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#postorderCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <div class="dsvis">
@@ -225,14 +267,23 @@ D)</td>
 <summary>
 <p>And finally a visualisation of inorder traversal.</p>
 </summary>
-<p>
+
 <div id="inorderCON" class="ssAV" data-short-name="inorderCON" data-long-name="Inorder Traversal Slideshow" alt="Inorder Traversal Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Binary/inorderCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("inorderCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#inorderCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 </section>
@@ -280,13 +331,13 @@ as appropriate.</p>
 <section id="sec:preorder-traversal-practice" class="level4 unnumbered">
 <h4 class="unnumbered">Preorder traversal practice</h4>
 </summary>
-<p>
+
 <div id="btTravPreorderPRO" class="embedContainer">
 <iframe id="btTravPreorderPRO_iframe" aria-label="btTravPreorderPRO" src="../interactive/Binary/btTravPreorderPRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </section>
 </div>
@@ -297,13 +348,13 @@ Your browser does not support iframes.
 class="level4 unnumbered">
 <h4 class="unnumbered">Postorder traversal practice</h4>
 </summary>
-<p>
+
 <div id="btTravPostorderPRO" class="embedContainer">
 <iframe id="btTravPostorderPRO_iframe" aria-label="btTravPostorderPRO" src="../interactive/Binary/btTravPostorderPRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </section>
 </div>
@@ -313,13 +364,13 @@ Your browser does not support iframes.
 <section id="sec:inorder-traversal-practice" class="level4 unnumbered">
 <h4 class="unnumbered">Inorder traversal practice</h4>
 </summary>
-<p>
+
 <div id="btTravInorderPRO" class="embedContainer">
 <iframe id="btTravInorderPRO_iframe" aria-label="btTravInorderPRO" src="../interactive/Binary/btTravInorderPRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </section>
 </div>
@@ -451,10 +502,7 @@ the children to decide whether to make a recursive call.</p>
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/Binary/BinExampCON.js"></script>
-<script type="text/javascript" src="../interactive/Binary/preorderCON.js"></script>
-<script type="text/javascript" src="../interactive/Binary/postorderCON.js"></script>
-<script type="text/javascript" src="../interactive/Binary/inorderCON.js"></script>
 </body>
 </html>
+
 

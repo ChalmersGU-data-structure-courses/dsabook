@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,8 +68,7 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/ChalmersGU/CGU-Styles.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/ChalmersGU/CGU-Styles.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -110,14 +110,23 @@ internal array, but we could use any positive value.</p>
 class="level4 unnumbered">
 <h4 class="unnumbered">Where should the top of the stack be?</h4>
 </summary>
-<p>
+
 <div id="DynamicArrayStack-Top-CON" class="ssAV" data-short-name="DynamicArrayStack-Top-CON" data-long-name="Array stack top position slideshow" alt="Array stack top position slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/ChalmersGU/DynamicArrayStack-Top-CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("DynamicArrayStack-Top-CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#DynamicArrayStack-Top-CON "+rule)}
+    
+  });
+</script>
+
 </details>
 </section>
 </div>
@@ -140,14 +149,23 @@ element, but instead just move the pointer to the left or the right.</p>
 <section id="sec:pushing-to-the-stack" class="level4 unnumbered">
 <h4 class="unnumbered">Pushing to the stack</h4>
 </summary>
-<p>
+
 <div id="DynamicArrayStack-Push-CON" class="ssAV" data-short-name="DynamicArrayStack-Push-CON" data-long-name="Array stack push slideshow" alt="Array stack push slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/ChalmersGU/DynamicArrayStack-Push-CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("DynamicArrayStack-Push-CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#DynamicArrayStack-Push-CON "+rule)}
+    
+  });
+</script>
+
 </details>
 </section>
 </div>
@@ -165,13 +183,13 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a hr
 <summary>
 <p>Array stack – push exercise.</p>
 </summary>
-<p>
+
 <div id="DynamicArrayStack-Push-PRO" class="embedContainer">
 <iframe id="DynamicArrayStack-Push-PRO_iframe" aria-label="DynamicArrayStack-Push-PRO" src="../interactive/ChalmersGU/DynamicArrayStack-Push-PRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 <div class="dsvis">
@@ -180,14 +198,23 @@ Your browser does not support iframes.
 <section id="sec:popping-from-the-stack" class="level4 unnumbered">
 <h4 class="unnumbered">Popping from the stack</h4>
 </summary>
-<p>
+
 <div id="DynamicArrayStack-Pop-CON" class="ssAV" data-short-name="DynamicArrayStack-Pop-CON" data-long-name="Array stack pop slideshow" alt="Array stack pop slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/ChalmersGU/DynamicArrayStack-Pop-CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("DynamicArrayStack-Pop-CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#DynamicArrayStack-Pop-CON "+rule)}
+    
+  });
+</script>
+
 </details>
 </section>
 </div>
@@ -208,13 +235,13 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a hr
 <summary>
 <p>Array stack – pop exercise.</p>
 </summary>
-<p>
+
 <div id="DynamicArrayStack-Pop-PRO" class="embedContainer">
 <iframe id="DynamicArrayStack-Pop-PRO_iframe" aria-label="DynamicArrayStack-Pop-PRO" src="../interactive/ChalmersGU/DynamicArrayStack-Pop-PRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 <section id="sec:example-implementing-two-stacks-using-one-array"
@@ -231,13 +258,41 @@ This is particularly effective when elements are taken from one stack
 and given to the other. If instead both stacks grow at the same time,
 then the free space in the middle of the array will be exhausted
 quickly.</p>
-<div class="online">
-<p>
-<div id="LinkedStack-Twostack-CON" class="ssAV" data-short-name="LinkedStack-Twostack-CON" data-long-name="Two Stacks in the same Array" alt="Two Stacks in the same Array" tabIndex="-1">
+
+<div id="img-jsav-b8c09125c83e255141105610e91fb8a4" class="ssAV" data-short-name="img-jsav-b8c09125c83e255141105610e91fb8a4" data-long-name="img-jsav-b8c09125c83e255141105610e91fb8a4" alt="img-jsav-b8c09125c83e255141105610e91fb8a4" tabIndex="-1">
 <div class="jsavcanvas"></div>
 </div>
-</p>
-</div>
+
+
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("img-jsav-b8c09125c83e255141105610e91fb8a4", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#img-jsav-b8c09125c83e255141105610e91fb8a4 "+rule)}
+    var AV = NewAV();
+var leftMarg = 180;
+var topMarg = 40;
+AV.g.rect(leftMarg, topMarg, 500, 31);
+AV.g.line(leftMarg + 31, topMarg, leftMarg + 31, topMarg + 31);
+AV.g.line(leftMarg + 31 * 2, topMarg, leftMarg + 31 * 2, topMarg + 31);
+for (var i = 0; i < 4; i++) {
+AV.g.line(leftMarg + 376 + 31 * i, topMarg,
+            leftMarg + 376 + 31 * i, topMarg + 31);
+}
+AV.label("top1", {left: leftMarg + 20, top: topMarg - 55});
+AV.g.line(leftMarg + 30, topMarg - 20, leftMarg + 45, topMarg - 2,
+        {"arrow-end": "classic-wide-long", "stroke-width": 2});
+AV.label("top2", {left: leftMarg + 376 + 20, top: topMarg - 55});
+AV.g.line(leftMarg + 376 + 30, topMarg - 20, leftMarg + 376 + 15, topMarg - 2,
+        {"arrow-end": "classic-wide-long", "stroke-width": 2});
+AV.g.line(leftMarg + 82, topMarg + 16, leftMarg + 82 + 35, topMarg + 16,
+        {"stroke-width": 2, "arrow-end": "block-wide-long"});
+AV.g.line(leftMarg + 356, topMarg + 16, leftMarg + 356 - 35, topMarg + 16,
+        {"stroke-width": 2, "arrow-end": "block-wide-long"});
+AV.displayInit();
+AV.recorded();
+  });
+</script>
+
 </section>
 </section>
 </main>
@@ -255,10 +310,7 @@ quickly.</p>
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/ChalmersGU/DynamicArrayStack-Top-CON.js"></script>
-<script type="text/javascript" src="../interactive/ChalmersGU/DynamicArrayStack-Push-CON.js"></script>
-<script type="text/javascript" src="../interactive/ChalmersGU/DynamicArrayStack-Pop-CON.js"></script>
-<script type="text/javascript" src="../interactive/ChalmersGU/LinkedStack-Twostack-CON.js"></script>
 </body>
 </html>
+
 

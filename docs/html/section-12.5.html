@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,8 +68,7 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Hashing/linProbeCON.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/Hashing/linProbeCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -181,14 +181,23 @@ returns to the home position.</p>
 <summary>
 <p>Here is a visualisation of how linear probing works.</p>
 </summary>
-<p>
+
 <div id="linProbeCON1" class="ssAV" data-short-name="linProbeCON1" data-long-name="Linear Probing Slideshow 1" alt="Linear Probing Slideshow 1" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Hashing/linProbeCON1.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("linProbeCON1", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#linProbeCON1 "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>In the following code we iterate through all possible
@@ -299,7 +308,7 @@ href="section-12.7.html#sec:deletion-in-open-addressing">Section 12.7</a>.</p>
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/Hashing/linProbeCON1.js"></script>
 </body>
 </html>
+
 

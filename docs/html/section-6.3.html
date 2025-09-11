@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,8 +68,7 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/ChalmersGU/CGU-Styles.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/ChalmersGU/CGU-Styles.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -109,13 +109,25 @@ title="The objects that make up a linked structure such as a linked list or bina
 that are “linked” together. Each node has two boxes. The box on the
 right holds a link to the next node in the list. Notice that the
 rightmost node does not have any link coming out of this box.</p>
-<div class="online">
-<p>
-<div id="LinkedList-Overview-CON" class="ssAV" data-short-name="LinkedList-Overview-CON" data-long-name="Linked List Overview" alt="Linked List Overview" tabIndex="-1">
+
+<div id="img-jsav-e1d52288fd9ee5a65e938a99a2bf6a9f" class="ssAV" data-short-name="img-jsav-e1d52288fd9ee5a65e938a99a2bf6a9f" data-long-name="img-jsav-e1d52288fd9ee5a65e938a99a2bf6a9f" alt="img-jsav-e1d52288fd9ee5a65e938a99a2bf6a9f" tabIndex="-1">
 <div class="jsavcanvas"></div>
 </div>
-</p>
-</div>
+
+
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("img-jsav-e1d52288fd9ee5a65e938a99a2bf6a9f", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#img-jsav-e1d52288fd9ee5a65e938a99a2bf6a9f "+rule)}
+    var av = NewAV();
+var l = av.ds.list({nodegap: 30});
+l.addFirst("").addFirst("").addFirst("");
+l.layout();
+av.displayInit();
+av.recorded();
+  });
+</script>
+
 <section id="sec:linked-list-nodes" class="level4 unnumbered">
 <h4 class="unnumbered">Linked list nodes</h4>
 <p>Because a list node is a distinct object (as opposed to simply a cell
@@ -146,13 +158,26 @@ discuss extensions such as double-ended queues and general lists.</p>
 <p>The linked stack implementation is quite simple. Elements are
 inserted and removed only from the head of the list. Here is a visual
 representation for a linked stack.</p>
-<div class="online">
-<p>
-<div id="LinkedStack-Overview-CON" class="ssAV" data-short-name="LinkedStack-Overview-CON" data-long-name="Linked Stack Overview" alt="Linked Stack Overview" tabIndex="-1">
+
+<div id="img-jsav-5cc54333495449d5cc528c7a1ec3a090" class="ssAV" data-short-name="img-jsav-5cc54333495449d5cc528c7a1ec3a090" data-long-name="img-jsav-5cc54333495449d5cc528c7a1ec3a090" alt="img-jsav-5cc54333495449d5cc528c7a1ec3a090" tabIndex="-1">
 <div class="jsavcanvas"></div>
 </div>
-</p>
-</div>
+
+
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("img-jsav-5cc54333495449d5cc528c7a1ec3a090", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#img-jsav-5cc54333495449d5cc528c7a1ec3a090 "+rule)}
+    var AV = NewAV();
+var l = AV.ds.list({nodegap: 30, top: 40, left: 250});
+l.addFirst(15).addFirst(12).addFirst(8).addFirst(23).addFirst(20);
+l.layout();
+AV.pointer("top", l.get(0));
+AV.displayInit();
+AV.recorded();
+  });
+</script>
+
 <p>Our data type for linked stacks contains two instance variables, one
 pointer to the head of the stack (called the <code>top</code>), and a
 variable storing the number of elements. (This second variable is in
@@ -168,14 +193,23 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a hr
 <section id="sec:pushing-to-a-linked-stack" class="level4 unnumbered">
 <h4 class="unnumbered">Pushing to a linked stack</h4>
 </summary>
-<p>
+
 <div id="LinkedStack-Push-CON" class="ssAV" data-short-name="LinkedStack-Push-CON" data-long-name="Linked Stack Push" alt="Linked Stack Push" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/ChalmersGU/LinkedStack-Push-CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("LinkedStack-Push-CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#LinkedStack-Push-CON "+rule)}
+    
+  });
+</script>
+
 </details>
 </section>
 </div>
@@ -196,13 +230,13 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a hr
 <summary>
 <p>Linked stack – push exercise.</p>
 </summary>
-<p>
+
 <div id="LstackPushPRO" class="embedContainer">
 <iframe id="LstackPushPRO_iframe" aria-label="LstackPushPRO" src="../interactive/ChalmersGU/LstackPushPRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 <div class="dsvis">
@@ -211,14 +245,23 @@ Your browser does not support iframes.
 <section id="sec:popping-from-a-linked-stack" class="level4 unnumbered">
 <h4 class="unnumbered">Popping from a linked stack</h4>
 </summary>
-<p>
+
 <div id="LinkedStack-Pop-CON" class="ssAV" data-short-name="LinkedStack-Pop-CON" data-long-name="Linked Stack Pop" alt="Linked Stack Pop" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/ChalmersGU/LinkedStack-Pop-CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("LinkedStack-Pop-CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#LinkedStack-Pop-CON "+rule)}
+    
+  });
+</script>
+
 </details>
 </section>
 </div>
@@ -244,13 +287,13 @@ actually remove the whole node when noone is using it anymore.</p>
 <summary>
 <p>Linked stack – pop exercise.</p>
 </summary>
-<p>
+
 <div id="LstackPopPRO" class="embedContainer">
 <iframe id="LstackPopPRO_iframe" aria-label="LstackPopPRO" src="../interactive/ChalmersGU/LstackPopPRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 </section>
@@ -270,10 +313,7 @@ Your browser does not support iframes.
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/ChalmersGU/LinkedList-Overview-CON.js"></script>
-<script type="text/javascript" src="../interactive/ChalmersGU/LinkedStack-Overview-CON.js"></script>
-<script type="text/javascript" src="../interactive/ChalmersGU/LinkedStack-Push-CON.js"></script>
-<script type="text/javascript" src="../interactive/ChalmersGU/LinkedStack-Pop-CON.js"></script>
 </body>
 </html>
+
 

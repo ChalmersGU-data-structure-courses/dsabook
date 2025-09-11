@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -122,14 +123,23 @@ string.</p>
 <summary>
 <p>Demonstration of the Binning hash function.</p>
 </summary>
-<p>
+
 <div id="hashFuncExCON2" class="ssAV" data-short-name="hashFuncExCON2" data-long-name="Hash Function Slideshow 2" alt="Hash Function Slideshow 2" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Hashing/hashFuncExCON2.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("hashFuncExCON2", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#hashFuncExCON2 "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>In general with binning we store the record with key value
@@ -158,7 +168,7 @@ low-order digits, while binning into an array of size 10 or 100 looks at
 the high-order digits.</p>
 <p>As another example, consider hashing a collection of keys whose
 values follow a normal distribution, as illustrated by <a
-href="#fig:HashNormal">Figure 12.2</a>. Keys near the mean of the normal
+href="#fig:HashNormal">Figure 12.3</a>. Keys near the mean of the normal
 distribution are far more likely to occur than keys near the tails of
 the distribution. For a given slot, think of where the keys come from
 within the distribution. Binning would be taking thick slices out of the
@@ -174,8 +184,8 @@ and some are near the center. Thus, each table slot is equally likely
 (roughly) to get a key value.</p>
 <figure id="fig:HashNormal">
 <img src="images/HashNormalGrey.png" style="width:100.0%"
-alt="Figure 12.2: A comparison of binning vs. modulus as a hash function" />
-<figcaption aria-hidden="true">Figure 12.2: A comparison of binning
+alt="Figure 12.3: A comparison of binning vs. modulus as a hash function" />
+<figcaption aria-hidden="true">Figure 12.3: A comparison of binning
 vs. modulus as a hash function</figcaption>
 </figure>
 </section>
@@ -193,7 +203,7 @@ bits of the result, giving a value in the range 0 to
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mi>r</mi></msup><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2^{r}-1</annotation></semantics></math>.
 This works well because most or all bits of the key value contribute to
 the result. For example, consider records whose keys are 4-digit numbers
-in base 10, as shown in <a href="#fig:MidSquare">Figure 12.3</a>. The
+in base 10, as shown in <a href="#fig:MidSquare">Figure 12.4</a>. The
 goal is to hash these key values to a table of size 100 (i.e., a range
 of 0 to 99). This range is equivalent to two digits in base 10. That is,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">r = 2</annotation></semantics></math>.
@@ -207,8 +217,8 @@ all tend to be small numbers, then their squares will only affect the
 low-order digits of the hash value.</p>
 <figure id="fig:MidSquare">
 <img src="images/MidSquare.png" style="width:15.0%"
-alt="Figure 12.3: Mid-square method example" />
-<figcaption aria-hidden="true">Figure 12.3: Mid-square method
+alt="Figure 12.4: Mid-square method example" />
+<figcaption aria-hidden="true">Figure 12.4: Mid-square method
 example</figcaption>
 </figure>
 <p>An example of the mid-square method. This image shows the traditional
@@ -228,13 +238,13 @@ affected by every digit of the input.</p>
 <p>Here is a little calculator for you to see how this works. Start with
 ‘4567’ as an example.</p>
 </summary>
-<p>
+
 <div id="MidSquare" class="embedContainer">
 <iframe id="MidSquare_iframe" aria-label="MidSquare" src="../interactive/Hashing/MidSquare.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 <section id="sec:a-simple-hash-function-for-strings" class="level3"
@@ -280,13 +290,13 @@ no effect on the result. E.g., all permutations of the string
 <summary>
 <p>Now you can try it out with this calculator.</p>
 </summary>
-<p>
+
 <div id="StringSimple" class="embedContainer">
 <iframe id="StringSimple_iframe" aria-label="StringSimple" src="../interactive/Hashing/StringSimple.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 </section>
@@ -321,13 +331,13 @@ to hash to slot 39 in the table.</p>
 <summary>
 <p>Now you can try it out with this calculator.</p>
 </summary>
-<p>
+
 <div id="StringSfold" class="embedContainer">
 <iframe id="StringSfold_iframe" aria-label="StringSfold" src="../interactive/Hashing/StringSfold.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 <p>For any sufficiently long string, the sum will typically cause a
@@ -343,13 +353,13 @@ when the goal is to compute a hash function.</p>
 <p>Now here is an exercise to let you practice these various hash
 functions. You should use the calculators above for the more complicated
 hash functions.</p>
-<p>
+
 <div id="HashFuncFIBSumm" class="embedContainer">
 <iframe id="HashFuncFIBSumm_iframe" aria-label="HashFuncFIBSumm" src="../interactive/Hashing/HashFuncFIBSumm.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </section>
 </div>
@@ -371,7 +381,7 @@ Your browser does not support iframes.
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/Hashing/hashFuncExCON2.js"></script>
 </body>
 </html>
+
 

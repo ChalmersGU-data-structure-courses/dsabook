@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -195,12 +196,37 @@ full.</li>
 class="level3 quiz" data-number="8.7.2">
 <h3 data-number="8.7.2"><span class="header-section-number">8.7.2</span>
 Review questions: Example binary tree</h3>
-<figure>
-<img src="images/BintreeExercise.png"
-alt="Here’s an example binary tree" />
-<figcaption aria-hidden="true">Here’s an example binary
-tree</figcaption>
-</figure>
+<p>Here’s an example binary tree:</p>
+
+<div id="img-jsav-a96ed01a2189fbf7d85d2fa3ee1bd81c" class="ssAV" data-short-name="img-jsav-a96ed01a2189fbf7d85d2fa3ee1bd81c" data-long-name="img-jsav-a96ed01a2189fbf7d85d2fa3ee1bd81c" alt="img-jsav-a96ed01a2189fbf7d85d2fa3ee1bd81c" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+
+
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("img-jsav-a96ed01a2189fbf7d85d2fa3ee1bd81c", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#img-jsav-a96ed01a2189fbf7d85d2fa3ee1bd81c "+rule)}
+    var AV = NewAV();
+var btTop = -5;
+var btLeft = 305;
+var bt = AV.ds.binarytree({nodegap: 15, left: btLeft, top: btTop});
+bt.root("24");
+var rt = bt.root();
+rt.left("12");
+rt.left().left("11");
+rt.left().right("13");
+rt.right("21");
+rt.right().left("20");
+rt.right().left().left("17");
+rt.right().right("30");
+rt.right().right().left("40");
+bt.layout();
+AV.displayInit();
+AV.recorded();
+  });
+</script>
+
 <div class="question">
 <p>How many internal nodes does this tree have?</p>
 <p><input type="text" value="5"/></p>
@@ -483,4 +509,5 @@ pointers by <code>preorder2</code>.</li>
 
 </body>
 </html>
+
 

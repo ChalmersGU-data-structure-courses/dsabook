@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,8 +68,7 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/AlgAnal/ProblemAlgorithmCON.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/AlgAnal/ProblemAlgorithmCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -269,14 +269,23 @@ is an instantiation of an algorithm in a programming language.</p>
 <p>The following slideshow should help you to visualise the
 differences.</p>
 </summary>
-<p>
+
 <div id="ProblemAlgorithmCON" class="ssAV" data-short-name="ProblemAlgorithmCON" data-long-name="Problem, Algorithm, and Program definitions Slideshow" alt="Problem, Algorithm, and Program definitions Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/AlgAnal/ProblemAlgorithmCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("ProblemAlgorithmCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#ProblemAlgorithmCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 </section>
@@ -296,7 +305,7 @@ differences.</p>
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/AlgAnal/ProblemAlgorithmCON.js"></script>
 </body>
 </html>
+
 

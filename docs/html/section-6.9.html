@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,9 +68,7 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/DataStructures/DoubleLinkList.css" rel="stylesheet" type="text/css"/>
-<link href="../interactive/ChalmersGU/CGU-Styles.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/DataStructures/DoubleLinkList.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -107,13 +106,31 @@ node and also to the preceding node on the list. The doubly linked list
 node accomplishes this in the obvious way by storing two pointers: one
 to the node following it (as in the singly linked list), and a second
 pointer to the node preceding it.</p>
-<div class="online">
-<p>
-<div id="DoublyLinkedList-CON" class="ssAV" data-short-name="DoublyLinkedList-CON" data-long-name="ChalmersGU/DoublyLinkedList-CON" alt="ChalmersGU/DoublyLinkedList-CON" tabIndex="-1">
+
+<div id="img-jsav-56f75469b93db7b10e3b2019e6d51019" class="ssAV" data-short-name="img-jsav-56f75469b93db7b10e3b2019e6d51019" data-long-name="img-jsav-56f75469b93db7b10e3b2019e6d51019" alt="img-jsav-56f75469b93db7b10e3b2019e6d51019" tabIndex="-1">
 <div class="jsavcanvas"></div>
 </div>
-</p>
-</div>
+
+<script type="text/javascript" src="../interactive/DataStructures/DoubleLinkList.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("img-jsav-56f75469b93db7b10e3b2019e6d51019", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#img-jsav-56f75469b93db7b10e3b2019e6d51019 "+rule)}
+    var AV = NewAV();
+// Relative offsets
+var leftMargin = 180;
+var topMargin = 40;
+// JSAV list
+var l = AV.ds.dlist({nodegap: 30, center: false, left: leftMargin, top: topMargin});
+l.addFirst(42).addFirst(15).addFirst(12).addFirst(23).addFirst(20).addFirst(8);
+l.layout();
+AV.pointer("head", l.get(0));
+AV.pointer("tail", l.get(5));
+AV.displayInit();
+AV.recorded();
+  });
+</script>
+
 <p>The most common reason to use a doubly linked list is because it
 gives an additional possibility to move both forwards and backwards in
 the list, and to efficiently add and remove elements from both ends.</p>
@@ -217,8 +234,7 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a hr
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/DataStructures/DoubleLinkList.js"></script>
-<script type="text/javascript" src="../interactive/ChalmersGU/DoublyLinkedList-CON.js"></script>
 </body>
 </html>
+
 

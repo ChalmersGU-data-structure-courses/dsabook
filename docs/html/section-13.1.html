@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,7 +68,7 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-</head>
+<link href="../interactive/Graph/GraphDefCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -142,10 +143,21 @@ title="A graph whose edges each have an associated weight or cost.">weighted
 graph</a>. These are depicted in <a
 href="#fig:GraphTypes">Figure 13.1</a>.</p>
 <figure id="fig:GraphTypes">
-<img src="images/GraphTypes.png" style="width:90.0%"
-alt="Figure 13.1: Some types of graphs" />
-<figcaption aria-hidden="true">Figure 13.1: Some types of
-graphs</figcaption>
+
+<div id="GdirundirCON" class="ssAV" data-short-name="GdirundirCON" data-long-name="GdirundirCON" alt="GdirundirCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/Graph/GdirundirCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("GdirundirCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#GdirundirCON "+rule)}
+    
+  });
+</script>
+
+<figcaption><p>Figure 13.1: Some types of graphs</p></figcaption>
 </figure>
 <p>An edge connecting vertices
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>
@@ -193,10 +205,21 @@ degree</a> is the number of neighbours adjacent to it (or the number of
 edges coming in to it). In <a href="#fig:GraphTypes">Figure 13.1</a>
 (c), the in degree of vertex 1 is two, and its out degree is one.</p>
 <figure id="fig:GraphNeighbors">
-<img src="images/GraphNeighbors.png" style="width:80.0%"
-alt="Figure 13.2: Neighbors and incidence" />
-<figcaption aria-hidden="true">Figure 13.2: Neighbors and
-incidence</figcaption>
+
+<div id="GneighborCON" class="ssAV" data-short-name="GneighborCON" data-long-name="GneighborCON" alt="GneighborCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/Graph/GneighborCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("GneighborCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#GneighborCON "+rule)}
+    
+  });
+</script>
+
+<figcaption><p>Figure 13.2: Neighbors and incidence</p></figcaption>
 </figure>
 <p>A sequence of vertices
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mn>1</mn></msub><mo>,</mo><msub><mi>v</mi><mn>2</mn></msub><mo>,</mo><mi>.</mi><mi>.</mi><mi>.</mi><mo>,</mo><msub><mi>v</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">v_1, v_2, ..., v_n</annotation></semantics></math>
@@ -227,10 +250,21 @@ cycle</a> if the path is simple, except for the first and last vertices
 being the same. These are depicted in <a
 href="#fig:GraphPaths">Figure 13.3</a>.</p>
 <figure id="fig:GraphPaths">
-<img src="images/GraphPaths.png" style="width:90.0%"
-alt="Figure 13.3: Different types of paths" />
-<figcaption aria-hidden="true">Figure 13.3: Different types of
-paths</figcaption>
+
+<div id="GpathDefCON" class="ssAV" data-short-name="GpathDefCON" data-long-name="GpathDefCON" alt="GpathDefCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/Graph/GpathDefCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("GpathDefCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#GpathDefCON "+rule)}
+    
+  });
+</script>
+
+<figcaption><p>Figure 13.3: Different types of paths</p></figcaption>
 </figure>
 <p>An undirected graph is a <a href="section-14.html#connected-graph"
 class="term"
@@ -243,10 +277,22 @@ components</a>. For example, <a
 href="#fig:GraphConnectedComponents">Figure 13.4</a> shows an undirected
 graph with three connected components.</p>
 <figure id="fig:GraphConnectedComponents">
-<img src="images/GraphConnectedComponents.png" style="width:35.0%"
-alt="Figure 13.4: An undirected graph with three connected components" />
-<figcaption aria-hidden="true">Figure 13.4: An undirected graph with
-three connected components</figcaption>
+
+<div id="GconcomCON" class="ssAV" data-short-name="GconcomCON" data-long-name="GconcomCON" alt="GconcomCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/Graph/GconcomCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("GconcomCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#GconcomCON "+rule)}
+    
+  });
+</script>
+
+<figcaption><p>Figure 13.4: An undirected graph with three connected
+components</p></figcaption>
 </figure>
 <p>A graph with relatively few edges is called a <a
 href="section-14.html#sparse-graph" class="term"
@@ -284,10 +330,22 @@ title="In graph terminology, a clique is a subgraph, defined as any subset $U$ o
 See <a href="#fig:GraphSparseDense">Figure 13.5</a> for examples of
 these kinds of graphs.</p>
 <figure id="fig:GraphSparseDense">
-<img src="images/GraphSparseDense.png" style="width:100.0%"
-alt="Figure 13.5: Sparse, dense and complete graphs" />
-<figcaption aria-hidden="true">Figure 13.5: Sparse, dense and complete
-graphs</figcaption>
+
+<div id="GsparseDefCON" class="ssAV" data-short-name="GsparseDefCON" data-long-name="GsparseDefCON" alt="GsparseDefCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/Graph/GsparseDefCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("GsparseDefCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#GsparseDefCON "+rule)}
+    
+  });
+</script>
+
+<figcaption><p>Figure 13.5: Sparse, dense and complete
+graphs</p></figcaption>
 </figure>
 <p>A graph without cycles is called an <a
 href="section-14.html#acyclic-graph" class="term"
@@ -299,10 +357,21 @@ acyclic graph</a> or <a href="section-14.html#dag" class="term"
 title="A graph with no cycles. Abbreviated as DAG. Note that a DAG is not necessarily a tree since a given node might have multiple parents.">DAG</a>.
 They are shown in <a href="#fig:GraphAcyclic">Figure 13.6</a>.</p>
 <figure id="fig:GraphAcyclic">
-<img src="images/GraphAcyclic.png" style="width:80.0%"
-alt="Figure 13.6: Acyclic graph types" />
-<figcaption aria-hidden="true">Figure 13.6: Acyclic graph
-types</figcaption>
+
+<div id="GacyclicDefCON" class="ssAV" data-short-name="GacyclicDefCON" data-long-name="GacyclicDefCON" alt="GacyclicDefCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/Graph/GacyclicDefCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("GacyclicDefCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#GacyclicDefCON "+rule)}
+    
+  });
+</script>
+
+<figcaption><p>Figure 13.6: Acyclic graph types</p></figcaption>
 </figure>
 <p>A <a href="section-14.html#free-tree" class="term"
 title="A connected, undirected graph with no simple cycles. An equivalent definition is that a free tree is connected and has $|\mathbf{V}| - 1$ edges.">free
@@ -328,4 +397,5 @@ edges.</p>
 
 </body>
 </html>
+
 

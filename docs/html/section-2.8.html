@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,8 +68,7 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/AlgAnal/BsearchDandCRecurCON.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/AlgAnal/BsearchDandCRecurCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -168,14 +168,23 @@ can be modeled by the summation</p>
 <summary>
 <p>Here is a visual explanation of the complexity of binary search.</p>
 </summary>
-<p>
+
 <div id="BsearchDandCRecurCON" class="ssAV" data-short-name="BsearchDandCRecurCON" data-long-name="Binary Search recurrence slideshow" alt="Binary Search recurrence slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/AlgAnal/BsearchDandCRecurCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("BsearchDandCRecurCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#BsearchDandCRecurCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>Comparing sequential search to binary search, we see that as
@@ -230,7 +239,7 @@ tables</a> (<a href="section-12.html#sec:hash-tables">Chapter
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/AlgAnal/BsearchDandCRecurCON.js"></script>
 </body>
 </html>
+
 

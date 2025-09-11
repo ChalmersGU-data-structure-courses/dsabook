@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,11 +68,10 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/AlgAnal/LinearRecurrencesCON.css" rel="stylesheet" type="text/css"/>
-<link href="../interactive/AlgAnal/LinearRecurrencesNCON.css" rel="stylesheet" type="text/css"/>
-<link href="../interactive/AlgAnal/ExpandRecurrenceCON.css" rel="stylesheet" type="text/css"/>
 <link href="../interactive/AlgAnal/DandCRecurrenceCON.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/AlgAnal/ExpandRecurrenceCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/AlgAnal/LinearRecurrencesCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/AlgAnal/LinearRecurrencesNCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -166,14 +166,23 @@ can be modeled by the summation
 <p>Here is an interactive explanation of the recurrence relation
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">T(n)=T(n-1)+1</annotation></semantics></math>.</p>
 </summary>
-<p>
-<div id="LinearRecurrencesCON" class="ssAV" data-short-name="LinearRecurrencesCON" data-long-name="AlgAnal/LinearRecurrencesCON" alt="AlgAnal/LinearRecurrencesCON" tabIndex="-1">
+
+<div id="LinearRecurrencesCON" class="ssAV" data-short-name="LinearRecurrencesCON" data-long-name="LinearRecurrencesCON" alt="LinearRecurrencesCON" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/AlgAnal/LinearRecurrencesCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("LinearRecurrencesCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#LinearRecurrencesCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>A slightly more complicated recurrence is</p>
@@ -200,14 +209,23 @@ This is also a standard summation that we know, with the solution
 <summary>
 <p>Here is an interactive explanation of this recurrence relation.</p>
 </summary>
-<p>
-<div id="LinearRecurrencesNCON" class="ssAV" data-short-name="LinearRecurrencesNCON" data-long-name="AlgAnal/LinearRecurrencesNCON" alt="AlgAnal/LinearRecurrencesNCON" tabIndex="-1">
+
+<div id="LinearRecurrencesNCON" class="ssAV" data-short-name="LinearRecurrencesNCON" data-long-name="LinearRecurrencesNCON" alt="LinearRecurrencesNCON" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/AlgAnal/LinearRecurrencesNCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("LinearRecurrencesNCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#LinearRecurrencesNCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>A more complicated example is the standard <a
@@ -628,14 +646,23 @@ form solution of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>2</mn><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mi>/</mi><mn>2</mn><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mn>5</mn><msup><mi>n</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">T(n) = 2T(n/2) + 5n^2</annotation></semantics></math>;
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>7</mn></mrow><annotation encoding="application/x-tex">T(1) = 7</annotation></semantics></math>.</p>
 </summary>
-<p>
+
 <div id="ExpandRecurrenceCON" class="ssAV" data-short-name="ExpandRecurrenceCON" data-long-name="Divide-and-Conquer Expansion Slideshow" alt="Divide-and-Conquer Expansion Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/AlgAnal/ExpandRecurrenceCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("ExpandRecurrenceCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#ExpandRecurrenceCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 </section>
@@ -688,14 +715,23 @@ T(n)  &amp;=  aT(n/b) + cn^k \\
 <summary>
 <p>Here is a more visual presentation of this same derivation.</p>
 </summary>
-<p>
-<div id="DandCRecurrenceCON" class="ssAV" data-short-name="DandCRecurrenceCON" data-long-name="Divide-and-Conquer Expansion Slideshow2" alt="Divide-and-Conquer Expansion Slideshow2" tabIndex="-1">
+
+<div id="DandCRecurrenceCON" class="ssAV" data-short-name="DandCRecurrenceCON" data-long-name="Divide-and-Conquer Expansion Slideshow 2" alt="Divide-and-Conquer Expansion Slideshow 2" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/AlgAnal/DandCRecurrenceCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("DandCRecurrenceCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#DandCRecurrenceCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>So, we are left with this result:</p>
@@ -914,10 +950,7 @@ so the final solution is
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/AlgAnal/LinearRecurrencesCON.js"></script>
-<script type="text/javascript" src="../interactive/AlgAnal/LinearRecurrencesNCON.js"></script>
-<script type="text/javascript" src="../interactive/AlgAnal/ExpandRecurrenceCON.js"></script>
-<script type="text/javascript" src="../interactive/AlgAnal/DandCRecurrenceCON.js"></script>
 </body>
 </html>
+
 

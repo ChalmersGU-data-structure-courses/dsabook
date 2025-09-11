@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,8 +68,7 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/ChalmersGU/CGU-Styles.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/ChalmersGU/CGU-Styles.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -147,16 +147,25 @@ List interface be a Collection too.</p>
 <div class="dsvis">
 <details open="true">
 <summary>
-<p>TODO</p>
+<p>Insertion into a linked list, overview.</p>
 </summary>
-<p>
+
 <div id="ListADT-Positions-CON" class="ssAV" data-short-name="ListADT-Positions-CON" data-long-name="List ADT Positions Slideshow" alt="List ADT Positions Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/ChalmersGU/ListADT-Positions-CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("ListADT-Positions-CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#ListADT-Positions-CON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>The <code>List</code> member functions allow you to build a list with
@@ -199,16 +208,25 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a hr
 <div class="dsvis">
 <details open="true">
 <summary>
-<p>TODO</p>
+<p>Iterating through a linked list.</p>
 </summary>
-<p>
+
 <div id="LinkedList-Iteration-CON" class="ssAV" data-short-name="LinkedList-Iteration-CON" data-long-name="Linked List Slideshow 1" alt="Linked List Slideshow 1" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/ChalmersGU/LinkedList-Iteration-CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("LinkedList-Iteration-CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#LinkedList-Iteration-CON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <section id="sec:adding-and-removing-nodes" class="level4 unnumbered">
@@ -218,16 +236,26 @@ using a pointer to the <code>current</code> node.</p>
 <div class="dsvis">
 <details open="true">
 <summary>
-<p>TODO</p>
+<p>The problem with using a pointer to the <code>current</code>
+node.</p>
 </summary>
-<p>
+
 <div id="LinkedList-Problems-CON" class="ssAV" data-short-name="LinkedList-Problems-CON" data-long-name="Linked List Add/Remove Problems" alt="Linked List Add/Remove Problems" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/ChalmersGU/LinkedList-Problems-CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("LinkedList-Problems-CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#LinkedList-Problems-CON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>So, using a <code>current</code> pointer, it is possible to add and
@@ -244,16 +272,26 @@ adopt.</p>
 <div class="dsvis">
 <details open="true">
 <summary>
-<p>TODO</p>
+<p>How to insert an element using a pointer to the node <em>before</em>
+the current node.</p>
 </summary>
-<p>
+
 <div id="LinkedList-Add-CON" class="ssAV" data-short-name="LinkedList-Add-CON" data-long-name="Linked List Add Slideshow" alt="Linked List Add Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/ChalmersGU/LinkedList-Add-CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("LinkedList-Add-CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#LinkedList-Add-CON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <div class="dsvis">
@@ -262,14 +300,23 @@ adopt.</p>
 <p>Here are some special cases for linked list insertion: Inserting at
 the beginning of a list, and appending at the end.</p>
 </summary>
-<p>
+
 <div id="LinkedList-AddSpecial-CON" class="ssAV" data-short-name="LinkedList-AddSpecial-CON" data-long-name="Linked List Add Special Cases Slideshow" alt="Linked List Add Special Cases Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/ChalmersGU/LinkedList-AddSpecial-CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("LinkedList-AddSpecial-CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#LinkedList-AddSpecial-CON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>Here’s the code for addition.</p>
@@ -291,13 +338,13 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a hr
 <summary>
 <p>Here’s an exercise for adding a value to a linked list.</p>
 </summary>
-<p>
+
 <div id="LinkedList-Add-PRO" class="embedContainer">
 <iframe id="LinkedList-Add-PRO_iframe" aria-label="LinkedList-Add-PRO" src="../interactive/ChalmersGU/LinkedList-Add-PRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 </section>
@@ -306,16 +353,25 @@ Your browser does not support iframes.
 <div class="dsvis">
 <details open="true">
 <summary>
-<p>TODO</p>
+<p>How to delete from a linked list.</p>
 </summary>
-<p>
+
 <div id="LinkedList-Remove-CON" class="ssAV" data-short-name="LinkedList-Remove-CON" data-long-name="Linked List Remove Slideshow" alt="Linked List Remove Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/ChalmersGU/LinkedList-Remove-CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("LinkedList-Remove-CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#LinkedList-Remove-CON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>Here’s the code for deletion:</p>
@@ -341,13 +397,13 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a hr
 <summary>
 <p>And here’s an exercise.</p>
 </summary>
-<p>
+
 <div id="LinkedList-Remove-PRO" class="embedContainer">
 <iframe id="LinkedList-Remove-PRO_iframe" aria-label="LinkedList-Remove-PRO" src="../interactive/ChalmersGU/LinkedList-Remove-PRO.html" width="100%" height="700" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 </section>
@@ -401,16 +457,25 @@ elements yet.</p>
 <div class="dsvis">
 <details open="true">
 <summary>
-<p>TODO</p>
+<p>The internals of an array-based list.</p>
 </summary>
-<p>
+
 <div id="StaticArrayList-Vars-CON" class="ssAV" data-short-name="StaticArrayList-Vars-CON" data-long-name="Static Array-based List Variables Slideshow" alt="Static Array-based List Variables Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/ChalmersGU/StaticArrayList-Vars-CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("StaticArrayList-Vars-CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#StaticArrayList-Vars-CON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <div class="sourceCode" id="cb6"><pre
@@ -427,16 +492,25 @@ fixed-size array as explained just above.</p>
 <div class="dsvis">
 <details open="true">
 <summary>
-<p>TODO</p>
+<p>Finding a value by its position.</p>
 </summary>
-<p>
+
 <div id="StaticArrayList-Intro-CON" class="ssAV" data-short-name="StaticArrayList-Intro-CON" data-long-name="Static Array-based List Intro Slideshow" alt="Static Array-based List Intro Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/ChalmersGU/StaticArrayList-Intro-CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("StaticArrayList-Intro-CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#StaticArrayList-Intro-CON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>As you can see below, there are no loops in the methods
@@ -464,16 +538,25 @@ super-fast.</p>
 <div class="dsvis">
 <details open="true">
 <summary>
-<p>TODO</p>
+<p>Appending to the end of an array-based list.</p>
 </summary>
-<p>
+
 <div id="StaticArrayList-Append-CON" class="ssAV" data-short-name="StaticArrayList-Append-CON" data-long-name="Static Array-based List Append Slideshow" alt="Static Array-based List Append Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/ChalmersGU/StaticArrayList-Append-CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("StaticArrayList-Append-CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#StaticArrayList-Append-CON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>However, adding an element at the head of the list requires shifting
@@ -481,16 +564,25 @@ all existing elements in the array by one position toward the tail.</p>
 <div class="dsvis">
 <details open="true">
 <summary>
-<p>TODO</p>
+<p>Inserting at the head of the list.</p>
 </summary>
-<p>
+
 <div id="StaticArrayList-Add-CON" class="ssAV" data-short-name="StaticArrayList-Add-CON" data-long-name="Static Array-based List Insertion Slideshow" alt="Static Array-based List Insertion Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/ChalmersGU/StaticArrayList-Add-CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("StaticArrayList-Add-CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#StaticArrayList-Add-CON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>Therefore, if we want to add an element at position
@@ -517,15 +609,15 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb8-1"><a hr
 <div class="dsvis">
 <details open="true">
 <summary>
-<p>TODO</p>
+<p>Practice exercise about inserting into an array-based list.</p>
 </summary>
-<p>
+
 <div id="StaticArrayList-Add-PRO" class="embedContainer">
 <iframe id="StaticArrayList-Add-PRO_iframe" aria-label="StaticArrayList-Add-PRO" src="../interactive/ChalmersGU/StaticArrayList-Add-PRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 </section>
@@ -543,16 +635,25 @@ slideshow.</p>
 <div class="dsvis">
 <details open="true">
 <summary>
-<p>TODO</p>
+<p>Removing an element at a certain position in the list.</p>
 </summary>
-<p>
-<div id="StaticArrayList-Remove-CON" class="ssAV" data-short-name="StaticArrayList-Remove-CON" data-long-name="Static Array-based List Remove" alt="Static Array-based List Remove" tabIndex="-1">
+
+<div id="StaticArrayList-Remove-CON" class="ssAV" data-short-name="StaticArrayList-Remove-CON" data-long-name="Static Array-based List Remove Slideshow" alt="Static Array-based List Remove Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/ChalmersGU/StaticArrayList-Remove-CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("StaticArrayList-Remove-CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#StaticArrayList-Remove-CON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>In the worst case, insertion or removal each requires moving all
@@ -576,15 +677,15 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb9-1"><a hr
 <div class="dsvis">
 <details open="true">
 <summary>
-<p>TODO</p>
+<p>Practise exercise about removing from an array-based list.</p>
 </summary>
-<p>
+
 <div id="StaticArrayList-Remove-PRO" class="embedContainer">
 <iframe id="StaticArrayList-Remove-PRO_iframe" aria-label="StaticArrayList-Remove-PRO" src="../interactive/ChalmersGU/StaticArrayList-Remove-PRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 </section>
@@ -664,17 +765,7 @@ listobject.c</a>]</li>
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/ChalmersGU/ListADT-Positions-CON.js"></script>
-<script type="text/javascript" src="../interactive/ChalmersGU/LinkedList-Iteration-CON.js"></script>
-<script type="text/javascript" src="../interactive/ChalmersGU/LinkedList-Problems-CON.js"></script>
-<script type="text/javascript" src="../interactive/ChalmersGU/LinkedList-Add-CON.js"></script>
-<script type="text/javascript" src="../interactive/ChalmersGU/LinkedList-AddSpecial-CON.js"></script>
-<script type="text/javascript" src="../interactive/ChalmersGU/LinkedList-Remove-CON.js"></script>
-<script type="text/javascript" src="../interactive/ChalmersGU/StaticArrayList-Vars-CON.js"></script>
-<script type="text/javascript" src="../interactive/ChalmersGU/StaticArrayList-Intro-CON.js"></script>
-<script type="text/javascript" src="../interactive/ChalmersGU/StaticArrayList-Append-CON.js"></script>
-<script type="text/javascript" src="../interactive/ChalmersGU/StaticArrayList-Add-CON.js"></script>
-<script type="text/javascript" src="../interactive/ChalmersGU/StaticArrayList-Remove-CON.js"></script>
 </body>
 </html>
+
 

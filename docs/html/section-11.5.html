@@ -7,7 +7,7 @@
   <meta name="author" content="Peter Ljunglöf" />
   <meta name="author" content="Alex Gerdes" />
   <meta name="author" content="(editors)" />
-  <title>DSABook – Disjoint sets and the Union/Find algorithm</title>
+  <title>DSABook – 2-3 trees and B-trees</title>
   <link rel="stylesheet" href="../css/main.css" />
   <link rel="stylesheet" href="../css/book.css" />
   <link rel="stylesheet" href="../css/code.css" />
@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,8 +68,11 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/General/UFCON.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/Indexing/BPTree.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Indexing/BPTreeCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Indexing/BTreeCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Indexing/TTPTreeCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/Indexing/twoThreeTreeCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -84,455 +88,778 @@
 <a href="section-11.4.html" accesskey="p" rel="previous">Splay trees</a>
 </div>
 <div>
-<a href="section-11.6.html" accesskey="n" rel="next">Skip lists</a>
+<a href="section-11.6.html" accesskey="n" rel="next">Disjoint sets and the Union/Find algorithm</a>
 <a href="section-11.6.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </header>
 
 <main>
-<section id="sec:disjoint-sets" class="level2" data-number="11.5">
+<section id="sec:trees-and-b-trees" class="level2" data-number="11.5">
 <h2 data-number="11.5"><span class="header-section-number">11.5</span>
-Disjoint sets and the Union/Find algorithm</h2>
-<p><a href="section-14.html#general-tree" class="term"
-title="A tree in which any given node can have any number of children. This is in contrast to, for example, a binary tree where each node has a fixed number of children (some of which might be `null`). General tree nodes tend to be harder to implement for this reason.">General
-trees</a> (<a href="section-8.6.html#sec:general-trees">Section 8.6</a>)
-are trees whose <a href="section-14.html#internal-node" class="term"
-title="In a tree, any node that has at least one non-empty child is an internal node.">internal
-nodes</a> have no fixed number of <a href="section-14.html#child"
-class="term"
-title="In a tree, the set of nodes directly pointed to by a node $R$ are the children of $R$.">children</a>.
-Compared to general trees, <a href="section-14.html#binary-tree"
-class="term"
-title="A finite set of nodes which is either empty, or else has a root node together two binary trees, called the left and right subtrees, which are disjoint from each other and from the root.">binary
-trees</a> are relatively easy to implement because each internal node of
-a binary tree can just store two pointers to reach its (potential)
-children. In a general tree, we have to deal with the fact that a given
-node might have no children or few children or many children.</p>
-<p>Even in a general tree, each node can have only one <a
-href="section-14.html#parent" class="term"
-title="In a tree, the node $P$ that directly links to a node $A$ is the parent of $A$. $A$ is the child of $P$.">parent</a>.
-If we didn’t need to go from a node to its children, but instead only
-needed to go from a node to its parent, then implementing a node would
-be easy. A simple way to represent such a general tree would be to store
-for each node only a pointer to that node’s parent. We will call this
-the <a href="section-14.html#parent-pointer-representation" class="term"
-title="For trees, a node implementation where each node stores only a pointer to its parent, rather than to its children. This makes it easy to go up the tree toward the root, but not down the tree toward the leaves. This is most appropriate for solving the UNION/FIND problem.">parent
-pointer representation</a> for general trees. Clearly this
-implementation is not general purpose, because it is inadequate for such
-important operations as finding the leftmost child or the right sibling
-for a node. Thus, it may seem to be a poor idea to implement a general
-tree in this way. However, the parent pointer implementation stores
-precisely the information required to answer the following, useful
-question: <strong><em>Given two nodes, are they in the same
-tree?</em></strong></p>
-<div class="online">
-<p>To answer this question, we need only follow the series of parent
-pointers from each node to its respective root. If both nodes reach the
-same root, then they must be in the same tree. If the roots are
-different, then the two nodes are not in the same tree.</p>
-<section id="sec:parent-pointer-trees" class="level3"
-data-number="11.5.1">
+2-3 trees and B-trees</h2>
+<p>This section presents a data structure called the 2-3 tree, as well
+as its generalizations – the B-tree and the B<sup>+</sup> tree.</p>
+<section id="sec:trees-1" class="level3" data-number="11.5.1">
 <h3 data-number="11.5.1"><span
-class="header-section-number">11.5.1</span> Parent pointer trees</h3>
-<p>The parent pointer representation is most often used to maintain a
-collection of <a href="section-14.html#disjoint-sets" class="term"
-title="A collection of sets, any pair of which share no elements in common. A collection of disjoint sets partitions some objects such that every object is in exactly one of the disjoint sets.">disjoint
-sets</a>. Two disjoint sets share no members in common (their
-intersection is empty). A collection of disjoint sets partitions some
-objects such that every object is in exactly one of the disjoint sets.
-There are two basic operations that we wish to support:</p>
+class="header-section-number">11.5.1</span> 2-3 trees</h3>
+<p>Recall that in a binary tree, every node has one key and two
+children. In a 2-3 tree, there are instead two different kinds of nodes,
+called <em>2-nodes</em> and <em>3-nodes</em>:</p>
+<ul>
+<li>A 2-node has one key and two children, just the same as a node in a
+binary tree.</li>
+<li>A 3-node has <em>two</em> keys and <em>three</em> children.</li>
+</ul>
+<p>Here is an example of a 2-3 tree. In this tree, the root is a 3-node:
+it has two keys (18 and 32) and three children. The left child of the
+root is a 2-node containing the key 12. (In practice, nodes might
+contain key-value pairs, but the figures will show only the keys.)</p>
+<figure id="fig:TTexample">
+
+<div id="twoThreedgmCON" class="ssAV" data-short-name="twoThreedgmCON" data-long-name="twoThreedgmCON" alt="twoThreedgmCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/Indexing/twoThreeTreeCON.js"></script>
+<script type="text/javascript" src="../interactive/Indexing/twoThreedgmCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("twoThreedgmCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#twoThreedgmCON "+rule)}
+    
+  });
+</script>
+
+<figcaption><p>Figure 11.11: An example of a 2-3 tree.</p></figcaption>
+</figure>
+<p>In order to be valid, a 2-3 tree must obey certain properties.
+Firstly, every node must obey a <em>search tree</em> property similar to
+BSTs:</p>
+<ul>
+<li>For a 2-node with key
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>:
+<ul>
+<li>All keys in the left subtree must be less than
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>.</li>
+<li>All keys in the right subtree must be greater than
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>.</li>
+</ul></li>
+<li>For a 3-node with keys
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>1</mn></msub><annotation encoding="application/x-tex">k_1</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>2</mn></msub><annotation encoding="application/x-tex">k_2</annotation></semantics></math>:
+<ul>
+<li>We must have
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mn>1</mn></msub><mo>&lt;</mo><msub><mi>k</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">k_1 &lt; k_2</annotation></semantics></math>.</li>
+<li>All keys in the left subtree must be less than
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>1</mn></msub><annotation encoding="application/x-tex">k_1</annotation></semantics></math>.</li>
+<li>All keys in the middle subtree must be between
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>1</mn></msub><annotation encoding="application/x-tex">k_1</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>2</mn></msub><annotation encoding="application/x-tex">k_2</annotation></semantics></math>.</li>
+<li>All keys in the right subtree must be greater than
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>k</mi><mn>2</mn></msub><annotation encoding="application/x-tex">k_2</annotation></semantics></math>.</li>
+</ul></li>
+</ul>
+<p>Secondly, all leaf nodes must be at the same level in the tree. When
+a tree obeys this property, we say that it is <a
+href="section-14.html#height-balanced" class="term"
+title="The condition the depths of each subtree in a tree are roughly the same.">height
+balanced</a>. So a 2-3 tree is always height balanced. You can check
+that the tree above is a valid 2-3 tree: It is made of 2-nodes and
+3-nodes, obeys the search tree property and is height balanced.</p>
+<p>So far, it seems that we have just taken the idea of a BST and
+complicated it by adding another type of node. Why have we done this?
+The reason is the height balance property. Height balance ensures that
+the tree has <em>logarithmic</em> height, so that search takes
+logarithmic time. But also, the algorithms for insertion and deletion in
+a 2-3 tree keep the tree height balanced (and also take logarithmic
+time). It is not possible in general to keep a BST height balanced – we
+will see that adding 3-nodes is what allows us to do so.</p>
+<section id="sec:searching-in-a-2-3-tree" class="level4 unnumbered">
+<h4 class="unnumbered">Searching in a 2-3 tree</h4>
+<p>Searching for a key in a 2-3 tree is similar to searching in a BST.
+Search begins at the root. If the root does not contain the search key
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>,
+then the search progresses to the only subtree that can possibly contain
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>.
+The key(s) stored in the root node determine which is the correct
+subtree. For example, if searching for the key 30 in the tree of <a
+href="#fig:TTexample">Figure 11.11</a>, we begin with the root node.
+Because 30 is between 18 and 33, it can only be in the middle subtree.
+Searching the middle child of the root node yields the desired record.
+If searching for 15, then the first step is again to search the root
+node. Because 15 is less than 18, the first (left) branch is taken. At
+the next level, we take the second branch to the leaf node containing
+15. If the search key were 16, then upon encountering the leaf
+containing 15 we would find that the search key is not in the tree.</p>
+</section>
+<section id="sec:inserting-into-a-2-3-tree" class="level4 unnumbered">
+<h4 class="unnumbered">Inserting into a 2-3 tree</h4>
+<p>Insertion into a 2-3 tree is similar to insertion into a BST to the
+extent that the new record is placed in the appropriate leaf node.
+Unlike BST insertion, a new child is not created to hold the record
+being inserted, that is, the 2-3 tree does not grow downward. The first
+step is to find the leaf node that would contain the record if it were
+in the tree. If this leaf node contains only one key, then the new
+record can be added to that node with no further modification to the
+tree, as illustrated in the following visualization.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Inserting into a non-full leaf node.</p>
+</summary>
+
+<div id="simpleInsertCON" class="ssAV" data-short-name="simpleInsertCON" data-long-name="2-3 Tree Insert Slideshow" alt="2-3 Tree Insert Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/Indexing/twoThreeTreeCON.js"></script>
+<script type="text/javascript" src="../interactive/Indexing/simpleInsertCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("simpleInsertCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#simpleInsertCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<p>If we insert the new record into a leaf node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math>
+that already contains two records, then more space must be created.
+Consider the two records of node
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math>
+and the record to be inserted without further concern for which two were
+already in
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math>
+and which is the new record. The first step is to split
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math>
+into two nodes. Thus, a new node – call it
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>L</mi><mo>′</mo></msup><annotation encoding="application/x-tex">L&#39;</annotation></semantics></math>
+– must be created.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math>
+receives the record with the least of the three keys, and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>L</mi><mo>′</mo></msup><annotation encoding="application/x-tex">L&#39;</annotation></semantics></math>
+receives the greatest of the three. The record with the middle of the
+three keys is passed up to the parent node along with a pointer to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>L</mi><mo>′</mo></msup><annotation encoding="application/x-tex">L&#39;</annotation></semantics></math>.
+This is called a <a href="section-14.html#promotion" class="term"
+title="In the context of certain balanced tree structures such as the 2-3 tree, a promotion takes place when an insertion causes the node to overflow. In the case of the 2-3 tree, the key with the middlemost value is sent to be stored in the parent.">promotion</a>.
+The promoted key is then inserted into the parent. If the parent
+currently contains only one record (and thus has only two children),
+then the promoted record and the pointer to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>L</mi><mo>′</mo></msup><annotation encoding="application/x-tex">L&#39;</annotation></semantics></math>
+are simply added to the parent node. If the parent is full, then the
+split-and-promote process is repeated. Here is an example of a a simple
+promotion.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Inserting when the leaf node needs to be split.</p>
+</summary>
+
+<div id="promoteCON" class="ssAV" data-short-name="promoteCON" data-long-name="2-3 Tree Insert Promotion Slideshow" alt="2-3 Tree Insert Promotion Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/Indexing/twoThreeTreeCON.js"></script>
+<script type="text/javascript" src="../interactive/Indexing/promoteCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("promoteCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#promoteCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<p>Here is an illustration for what happens when promotions require the
+root to split, adding a new level to the tree. Note that all leaf nodes
+continue to have equal depth.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>Inserting when the root node needs to be split, adding a new tree
+level.</p>
+</summary>
+
+<div id="splitCON" class="ssAV" data-short-name="splitCON" data-long-name="2-3 Tree Insert Split Slideshow" alt="2-3 Tree Insert Split Slideshow" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/Indexing/twoThreeTreeCON.js"></script>
+<script type="text/javascript" src="../interactive/Indexing/splitCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("splitCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#splitCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+</section>
+<section id="sec:deleting-from-a-2-3-tree" class="level4 unnumbered">
+<h4 class="unnumbered">Deleting from a 2-3 tree</h4>
+<p>When deleting a record from the 2-3 tree, there are three cases to
+consider.</p>
 <ol type="1">
-<li>Determine if two objects are in the same set (the
-<strong>Find</strong> operation), and</li>
-<li>Merge two sets together (the <strong>Union</strong> operation).</li>
+<li>The simplest occurs when the record is to be removed from a leaf
+node containing two records. In this case, the record is simply removed,
+and no other nodes are affected.</li>
+<li>The second case occurs when the only record in a leaf node is to be
+removed.</li>
+<li>The third case occurs when a record is to be removed from an
+internal node.</li>
 </ol>
-<p>Because two merged sets are united, the merging operation is called
-<strong>Union</strong> and the whole process of determining if two
-objects are in the same set and then merging the sets goes by the name
-<strong><a href="section-14.html#union-find" class="term"
-title="A process for mainining a collection of disjoint sets. The FIND operation determines which disjoint set a given object resides in, and the UNION operation combines two disjoint sets when it is determined that they are members of the same equivalence class under some equivalence relation.">Union/Find</a></strong>.</p>
-<p>To implement <strong>Union/Find</strong>, we represent each disjoint
-set with a separate general tree. Two objects are in the same disjoint
-set if they are in the same tree. Every node of the tree (except for the
-root) has precisely one parent. Thus, each node requires the same space
-to represent it. The collection of objects is typically stored in an
-array, where each element of the array corresponds to one object, and
-each element stores the object’s value (or a pointer to the object). The
-objects also correspond to nodes in the various disjoint trees (one tree
-for each disjoint set), so we also store the parent value with each
-object in the array. Those nodes that are the roots of their respective
-trees store an appropriate indicator. Note that this representation
-means that a single array is being used to implement a collection of
-trees. This makes it easy to merge trees together with
-<strong>Union</strong> operations.</p>
-<p>Here is an implementation for parent pointer trees and the
-<strong>Union/Find</strong> process.</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// General tree implementation for Union/Find</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> ParentPointerTree:</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    array: <span class="bu">Array</span> <span class="kw">of</span> <span class="bu">Int</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">constructor</span>(<span class="bu">size</span>):</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Each node is its own root to start</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        array <span class="op">=</span> <span class="kw">new</span> <span class="bu">Array</span>(<span class="bu">size</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="dv">0</span> .. <span class="bu">size</span><span class="op">-</span><span class="dv">1</span>:</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>            array[i] <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>  <span class="co">// We use -1 to say that this is a root</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Merge two subtrees if they are different:</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    union(a: <span class="bu">Int</span>, b: <span class="bu">Int</span>):</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        root1 <span class="op">=</span> find(a)    <span class="co">// Find root of node a</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        root2 <span class="op">=</span> find(b)    <span class="co">// Find root of node b</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> root1 <span class="op">!=</span> root2: <span class="co">// Merge two trees</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>            array[root1] <span class="op">=</span> root2</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Return the root of current&#39;s tree</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    find(current: <span class="bu">Int</span>) <span class="op">-&gt;</span> <span class="bu">Int</span>:</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> array[current] <span class="op">!=</span> <span class="op">-</span><span class="dv">1</span>:</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>            current <span class="op">=</span> self.array[current]</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> current  <span class="co">// Now we are at the root</span></span></code></pre></div>
-<p>The <code>ParentPointerTree</code> class has an array where each
-array position corresponds to one object in some collection. Each array
-element stores the array index for its parent. There are two main
-methods to implement. <strong>Union</strong> merges two sets together,
-where each set corresponds to a tree. <strong>Find</strong> is used to
-find the ultimate root for a node.</p>
-<p>An application using the <strong>Union/Find</strong> operations
-should store a set of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-objects, where each object is assigned a unique index in the range 0 to
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math>.
-The indices refer to the corresponding parent pointers in the array.
-Class <code>ParentPointerTree</code> creates and initialises the
-<strong>Union/Find</strong> array, and methods <strong>Union</strong>
-and <strong>Find</strong> take array indices as inputs. <a
-href="#fig:UFfig">Figure 11.11</a> visualises the parent pointer
-array.</p>
-<figure id="fig:UFfig" class="subfigures">
-<p>
-<div id="UFfigCON" class="ssAV" data-short-name="UFfigCON" data-long-name="General/UFfigCON" alt="General/UFfigCON" tabIndex="-1">
-<div class="jsavcanvas"></div>
-</div>
-</p>
-<figcaption><p>Figure 11.11: The parent pointer array implementation.
-Each node corresponds to a position in the node array, which stores its
-value and a pointer to its parent. The parent pointers are represented
-by an array index corresponding to the position of the parent. The root
-of any tree stores a special value, such as -1. This is represented
-graphically in the figure by a slash in the “Parent’s Index” box. This
-figure shows two trees stored in the same parent pointer array, one
-rooted at
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math>
-(with a total of 9 nodes), and the other rooted at
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>J</mi><annotation encoding="application/x-tex">J</annotation></semantics></math>
-(with a total of 1 node).. </p></figcaption>
-</figure>
-</section>
-<section id="sec:equivalence-classes" class="level3"
-data-number="11.5.2">
-<h3 data-number="11.5.2"><span
-class="header-section-number">11.5.2</span> Equivalence classes</h3>
-<p>Consider the problem of assigning the members of a set to disjoint
-subsets called <a href="section-14.html#equivalence-class" class="term"
-title="An equivalence relation can be used to partition a set into equivalence classes.">equivalence
-classes</a>. Recall that an <a
-href="section-14.html#equivalence-relation" class="term"
-title="Relation $R$ is an equivalence relation on set $\mathbf{S}$ if it is reflexive, symmetric, and transitive.">equivalence
-relation</a> is <a href="section-14.html#reflexive" class="term"
-title="In set notation, binary relation $R$ on set $S$ is reflexive if $aRa$ for all $a \in \mathbf{S}$.">reflexive</a>,
-<a href="section-14.html#symmetric" class="term"
-title="In set notation, relation $R$ is symmetric if whenever $aRb$, then $bRa$, for all $a, b \in \mathbf{S}$.">symmetric</a>,
-and <a href="section-14.html#transitive" class="term"
-title="In set notation, relation $R$ is transitive if whenever $aRb$ and $bRc$, then $aRc$, for all $a, b, c \in \mathbf{S}$.">transitive</a>.
-Thus, if objects
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
-are equivalent, and objects
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>
-are equivalent, then we must be able to recognise that objects
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>
-are also equivalent. In this representation, since
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
-are equivalent, they must be in the same tree. Likewise for
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>.
-We can recognise that
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>
-are equivalent because they must also be in the same tree.</p>
-<p>There are many practical uses for disjoint sets and representing
-equivalences. For example, consider the graph of ten nodes labeled
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
-through
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>J</mi><annotation encoding="application/x-tex">J</annotation></semantics></math>,
-in <a href="#fig:UFconcom">Figure 11.12</a>.</p>
-<figure id="fig:UFconcom" class="subfigures">
-<p>
-<div id="UFconcomCON" class="ssAV" data-short-name="UFconcomCON" data-long-name="General/UFconcomCON" alt="General/UFconcomCON" tabIndex="-1">
-<div class="jsavcanvas"></div>
-</div>
-</p>
-<figcaption><p>Figure 11.12: A graph with two connected components. The
-tree of <a href="#fig:UFfig">Figure 11.11</a> shows the corresponding
-tree structure resulting form processing the edges to determine the
-connected components.. </p></figcaption>
-</figure>
-<p>Notice that for nodes
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
-through
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>I</mi><annotation encoding="application/x-tex">I</annotation></semantics></math>,
-there is some series of edges that connects any pair of these nodes, but
-node
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>J</mi><annotation encoding="application/x-tex">J</annotation></semantics></math>
-is disconnected from the rest of the nodes. Such a graph might be used
-to represent connections such as wires between components on a circuit
-board, or roads between cities. We can consider two nodes of the graph
-to be equivalent if there is a path between them. Thus, nodes
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>H</mi><annotation encoding="application/x-tex">H</annotation></semantics></math>,
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>E</mi><annotation encoding="application/x-tex">E</annotation></semantics></math>
-would be considered as equivalent, but
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>J</mi><annotation encoding="application/x-tex">J</annotation></semantics></math>
-is not equivalent to any other. A subset of equivalent (connected) edges
-in a graph is called a <a href="section-14.html#connected-component"
-class="term"
-title="In an undirected graph, a subset of the nodes such that each node in the subset can be reached from any other node in that subset.">connected
-component</a>. The goal is to quickly classify the objects into disjoint
-sets that correspond to the connected components.</p>
-<p>Another use for disjoint sets occurs in <a
-href="section-14.html#kruskals-algorithm" class="term"
-title="An algorithm for computing the MST of a graph. During processing, it makes use of the UNION/FIND process to efficiently determine of two vertices are within the same subgraph.">Kruskal’s
-algorithm</a> for computing the <a
-href="section-14.html#minimum-spanning-tree" class="term"
-title="Abbreviated as MST, or sometimes as MCST. Derived from a weighted graph, the MST is the subset of the graph&#39;s edges that maintains the connectivitiy of the graph while having lowest total cost (as defined by the sum of the weights of the edges in the MST). The result is referred to as a tree because it would never have a cycle (since an edge could be removed from the cycle and still preserve connectivity). Two algorithms to solve this problem are Prim&#39;s algorithm and Kruskal&#39;s algorithm.">minimum
-spanning tree</a> for a <a href="section-14.html#graph" class="term"
-title="A graph $\mathbf{G} = (\mathbf{V}, \mathbf{E})$ consists of a set of vertices $\mathbf{V}$ and a set of edges $\mathbf{E}$, such that each edge in $\mathbf{E}$ is a connection between a pair of vertices in $\mathbf{V}$.">graph</a>.
-That algorithm seeks to select the cheapest subset of the edges that
-still connects all of the nodes in the graph. It does so by processing
-all edges of the graph from shortest to longest, only adding an edge to
-the connecting subset if it does not connect two nodes that already have
-some series of edges connecting them.</p>
-<p>The input to the <strong>Union/Find</strong> algorithm is typically a
-series of equivalence pairs. In the case of the connected components
-example, the equivalence pairs would simply be the set of edges in the
-graph. An equivalence pair might say that object
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>
-is equivalent to object
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>.
-If so,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
-are placed in the same subset. If a later equivalence relates
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>,
-then by implication
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>
-is also equivalent to
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>.
-Thus, an equivalence pair may cause two subsets to merge, each of which
-contains several objects.</p>
-<p>Equivalence classes can be managed efficiently with the
-<strong>Union/Find</strong> algorithm. Initially, each object is at the
-root of its own tree. An equivalence pair is processed by checking to
-see if both objects of the pair are in the same tree by calling
-<strong>Find</strong> on each of them. If their roots are the same, then
-no change need be made because the objects are already in the same
-equivalence class. Otherwise, the two equivalence classes should be
-merged by the <strong>Union</strong> method.</p>
-<p>The parent pointer representation places no limit on the number of
-nodes that can share a parent. To make equivalence processing as
-efficient as possible, the distance from each node to the root of its
-respective tree should be as small as possible. Thus, we would like to
-keep the height of the trees small when merging two equivalence classes
-together. Ideally, each tree would have all nodes pointing directly to
-the root. Achieving this goal all the time would require too much
-additional processing to be worth the effort, so we must settle for
-getting as close as possible.</p>
-</section>
-<section id="sec:weighted-union" class="level3" data-number="11.5.3">
-<h3 data-number="11.5.3"><span
-class="header-section-number">11.5.3</span> Weighted union</h3>
-<p>A low-cost approach to reducing the height is to be smart about how
-two trees are joined together. One simple technique, called the <a
-href="section-14.html#weighted-union-rule" class="term"
-title="When merging two disjoint sets using the UNION/FIND algorithm, the weighted union rule is used to determine which subtree&#39;s root points to the other. The root of the subtree with fewer nodes will be set to point to the root of the subtree with more nodes. In this way, the average depth of nodes in the resulting tree will be less than if the assignment had been made in the other direction.">weighted
-union rule</a>, joins the tree with fewer nodes to the tree with more
-nodes by making the smaller tree’s root point to the root of the bigger
-tree. This will limit the total depth of the tree to
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>,
-because the depth of nodes only in the smaller tree will now increase by
-one, and the depth of the deepest node in the combined tree can only be
-at most one deeper than the deepest node before the trees were combined.
-The total number of nodes in the combined tree is therefore at least
-twice the number in the smaller subtree. Thus, the depth of any node can
-be increased at most
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n</annotation></semantics></math>
-times when
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-equivalences are processed (since each addition to the depth must be
-accompanied by at least doubling the size of the tree).</p>
-<p>Here is an implementation for <strong>Union</strong> when using
-weighted union.</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> ParentPointerTree:</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    union(a, b):</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        root1 <span class="op">=</span> find(a)     <span class="co">// Find root of node a</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        root2 <span class="op">=</span> find(b)     <span class="co">// Find root of node b</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> root1 <span class="op">!=</span> root2:  <span class="co">// Merge with weighted union</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> weights[root2] <span class="op">&gt;</span> weights[root1]:</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                array[root1] <span class="op">=</span> root2</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                weights[root2] <span class="op">=</span> weights[root2] <span class="op">+</span> weights[root1]</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                array[root2] <span class="op">=</span> root1</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                weights[root1] <span class="op">=</span> weights[root1] <span class="op">+</span> weights[root2]</span></code></pre></div>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>The following slideshow illustrates a series of
-<strong>Union</strong> operations with weighted union.</p>
-</summary>
-<p>
-<div id="UFCON" class="ssAV" data-short-name="UFCON" data-long-name="Union/Find Example" alt="Union/Find Example" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-</p>
-</details>
-</div>
-</section>
-<section id="sec:path-compression" class="level3" data-number="11.5.4">
-<h3 data-number="11.5.4"><span
-class="header-section-number">11.5.4</span> Path compression</h3>
-<p>The weighted union rule helps to minimise the depth of the tree, but
-we can do better than this. <a href="section-14.html#path-compression"
-class="term"
-title="When implementing the UNION/FIND algorithm, path compression is a local optimisation step that can be performed during the FIND step. Once the root of the tree for the current object has been found, the path to the root can be traced a second time, with all objects in the tree made to point directly to the root. This reduces the depth of the tree from typically $O(\log n)$ to nearly constant.">Path
-compression</a> is a method that tends to create extremely shallow
-trees. Path compression takes place while finding the root for a given
-node
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>.
-Call this root
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>.
-Path compression resets the parent of every node on the path from
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
-to
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
-to point directly to
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>.
-This can be implemented by first finding
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>.
-A second pass is then made along the path from
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
-to
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>,
-assigning the parent field of each node encountered to
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>.
-Alternatively, a recursive algorithm can be implemented as follows. This
-version of <strong>Find</strong> not only returns the root of the
-current node, but also makes all ancestors of the current node point to
-the root.</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">datatype</span> ParentPointerTree:</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Return the root of current&#39;s tree with path compression</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    find(current):</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> array[current] <span class="op">==</span> <span class="op">-</span><span class="dv">1</span>:</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> current  <span class="co">// Base case: we are at the root</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>            array[current] <span class="op">=</span> find(array[current])</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> array[current]</span></code></pre></div>
-<div class="dsvis">
-<details open="true">
-<summary>
-<p>The following slide show illustrates path compression using the last
-step in the previous example.</p>
-</summary>
-<p>
-<div id="pathcompCON" class="ssAV" data-short-name="pathcompCON" data-long-name="Union/Find Path Compression Example" alt="Union/Find Path Compression Example" tabIndex="-1">
-<span class="jsavcounter"></span>
-<div class="jsavcontrols"></div>
-<p class="jsavoutput jsavline"></p>
-<div class="jsavcanvas"></div>
-</div>
-</p>
-</details>
-</div>
-<p>Path compression keeps the cost of each <strong>Find</strong>
-operation very close to constant.</p>
-<p>To be more precise about what is meant by “very close to constant”,
-the cost of path compression for
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-<strong>Find</strong> operations on
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-nodes (when combined with the weighted union rule for joining sets) is
-approximately
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><msup><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mo>*</mo></msup><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log^* n)</annotation></semantics></math>.
-The notation
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mo>*</mo></msup><mi>n</mi></mrow><annotation encoding="application/x-tex">\log^* n</annotation></semantics></math>
-means the number of times that the log of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-must be taken before
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>≤</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n \leq 1</annotation></semantics></math>.
-For example,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mo>*</mo></msup><mn>65536</mn></mrow><annotation encoding="application/x-tex">\log^* 65536</annotation></semantics></math>
-is 4 because
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mn>65536</mn><mo>=</mo><mn>16</mn><mo>,</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mn>16</mn><mo>=</mo><mn>4</mn><mo>,</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mn>4</mn><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">\log 65536 = 16, \log 16 = 4, \log 4 = 2</annotation></semantics></math>,
-and finally
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mn>2</mn><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\log 2 = 1</annotation></semantics></math>.
-Thus,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mo>*</mo></msup><mi>n</mi></mrow><annotation encoding="application/x-tex">\log^* n</annotation></semantics></math>
-grows <em>very</em> slowly, so the cost for a series of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-<strong>Find</strong> operations is very close to
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.</p>
-<p>Note that this does not mean that the tree resulting from processing
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-equivalence pairs necessarily has depth
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><msup><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mo>*</mo></msup><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log^* n)</annotation></semantics></math>.
-One can devise a series of equivalence operations that yields
+<p>In both the second and the third cases, the deleted record is
+replaced with another that can take its place while maintaining the
+correct order, similar to removing a node from a BST. If the tree is
+sparse enough, there is no such record available that will allow all
+nodes to still maintain at least one record. In this situation, sibling
+nodes are merged together. The delete operation for the 2-3 tree is
+quite complex and will not be described further. Instead, a complete
+discussion of deletion will be postponed until the next section, where
+it can be generalized for a particular variant of the B-tree.</p>
+<p>The 2-3 tree insert and delete routines do not add new nodes at the
+bottom of the tree. Instead they cause leaf nodes to split or merge,
+possibly causing a ripple effect moving up the tree to the root. If
+necessary the root will split, causing a new root node to be created and
+making the tree one level deeper. On deletion, if the last two children
+of the root merge, then the root node is removed and the tree will lose
+a level. In either case, all leaf nodes are always at the same level.
+When all leaf nodes are at the same level, we say that a tree is <a
+href="section-14.html#height-balanced" class="term"
+title="The condition the depths of each subtree in a tree are roughly the same.">height
+balanced</a>. Because the 2-3 tree is height balanced, and every
+internal node has at least two children, we know that the maximum depth
+of the tree is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">\log n</annotation></semantics></math>.
+Thus, all 2-3 tree insert, find, and delete operations require
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>
-depth for the resulting tree. However, many of the equivalences in such
-a series will look only at the roots of the trees being merged,
-requiring little processing time. The <em>total</em> amount of
-processing time required for
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-operations will be
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><msup><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mo>*</mo></msup><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(n \log^* n)</annotation></semantics></math>,
-yielding nearly constant time for each equivalence operation. This is an
-example of <a href="section-14.html#amortised-analysis" class="term"
-title="Analysing the amortised complexity of an algorithm or problem.">amortised
-analysis</a>.</p>
+time.</p>
+</section>
+</section>
+<section id="sec:b-trees" class="level3" data-number="11.5.2">
+<h3 data-number="11.5.2"><span
+class="header-section-number">11.5.2</span> B-trees</h3>
+<p>B-trees are usually attributed to R. Bayer and E. McCreight who
+described the B-tree in a 1972 paper. By 1979, B-trees had replaced
+virtually all large-file access methods other than hashing. B-trees, or
+some variant of B-trees, are <em>the</em> standard file organization for
+applications requiring insertion, deletion, and key range searches. They
+are used to implement most modern file systems. B-trees address
+effectively all of the major problems encountered when implementing
+disk-based search trees:</p>
+<ol type="1">
+<li>The B-tree is shallow, in part because the tree is always height
+balanced (all leaf nodes are at the same level), and in part because the
+branching factor is quite high. So only a small number of disk blocks
+are accessed to reach a given record.</li>
+<li>Update and search operations affect only those disk blocks on the
+path from the root to the leaf node containing the query record. The
+fewer the number of disk blocks affected during an operation, the less
+disk I/O is required.</li>
+<li>B-trees keep related records (that is, records with similar key
+values) on the same disk block, which helps to minimize disk I/O on
+range searches.</li>
+<li>B-trees guarantee that every node in the tree will be full at least
+to a certain minimum percentage. This improves space efficiency while
+reducing the typical number of disk fetches necessary during a search or
+update operation.</li>
+</ol>
+<p>A B-tree of order
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
+is defined to have the following shape properties:</p>
+<ul>
+<li>The root is either a leaf or has at least two children.</li>
+<li>Each internal node, except for the root, has between
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">⌈</mo><mi>m</mi><mi>/</mi><mn>2</mn><mo stretchy="false" form="postfix">⌉</mo></mrow><annotation encoding="application/x-tex">\lceil m/2 \rceil</annotation></semantics></math>
+and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>
+children.</li>
+<li>All leaves are at the same level in the tree, so the tree is always
+height balanced.</li>
+</ul>
+<p>The B-tree is a generalization of the 2-3 tree. Put another way, a
+2-3 tree is a B-tree of order three.</p>
+<p>Normally, the size of a node in the B-tree is chosen to fill a disk
+block, so a typical implementation of B-tree nodes allows 100 or more
+children. Thus, a B-tree node is equivalent to a disk block, and a
+“pointer” value stored in the tree is actually the number of the block
+containing the child node (usually interpreted as an offset from the
+beginning of the corresponding disk file). In a typical application, the
+B-tree’s access to the disk file will be managed using a <a
+href="section-14.html#buffer-pool" class="term"
+title="A collection of one or more buffers. The buffer pool is an example of a cache. It is stored in primary storage, and holds data that is expected to be used in the near future. When a data value is requested, the buffer pool is searched first. If the value is found in the buffer pool, then secondary storage need not be accessed. If the value is not found in the buffer pool, then it must be fetched from secondary storage. A number of traditional heuristics have been developed for deciding which data to flush from the buffer pool when new data must be stored, such as least recently used.">buffer
+pool</a> and a block-replacement scheme such as <a
+href="section-14.html#lru" class="term"
+title="Abbreviated LRU, it is a popular heuristic to use for deciding which buffer in a buffer pool to flush when data in the buffer pool must be replaced by new data being read into a cache. Analogous to the move-to-front heuristic for maintaining a self-organising list.">LRU</a>.</p>
+<p><a href="#fig:BTexample">Figure 11.12</a> shows a B-tree of order
+four. Each node contains up to three keys, and internal nodes have up to
+four children.</p>
+<figure id="fig:BTexample">
+
+<div id="BTreedgmCON" class="ssAV" data-short-name="BTreedgmCON" data-long-name="BTreedgmCON" alt="BTreedgmCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/Indexing/BTreeCON.js"></script>
+<script type="text/javascript" src="../interactive/Indexing/BTreedgmCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("BTreedgmCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#BTreedgmCON "+rule)}
+    
+  });
+</script>
+
+<figcaption><p>Figure 11.12: An example B-tree of order
+four.</p></figcaption>
+</figure>
+<section id="sec:searching-in-a-b-tree" class="level4 unnumbered">
+<h4 class="unnumbered">Searching in a B-tree</h4>
+<p>Searching in a B-tree is a generalization of searching in a 2-3 tree.
+It is an alternating two-step process, beginning with the root node of
+the B-tree.</p>
+<ol type="1">
+<li>Perform a binary search on the records in the current node. If a
+record with the search key is found, then return that record. If the
+current node is a leaf node and the key is not found, then report an
+unsuccessful search.</li>
+<li>Otherwise, follow the proper branch and repeat the process.</li>
+</ol>
+<p>For example, consider a search for the record with key value 47 in
+the tree of <a href="#fig:BTexample">Figure 11.12</a>. The root node is
+examined and the second (right) branch taken. After examining the node
+at level 1, the third branch is taken to the next level to arrive at the
+leaf node containing a record with key value 47.</p>
+</section>
+<section id="sec:insertion-into-a-b-tree" class="level4 unnumbered">
+<h4 class="unnumbered">Insertion into a B-tree</h4>
+<p>B-tree insertion is a generalization of 2-3 tree insertion. The first
+step is to find the leaf node that should contain the key to be
+inserted, space permitting. If there is room in this node, then insert
+the key. If there is not, then split the node into two and promote the
+middle key to the parent. If the parent becomes full, then it is split
+in turn, and its middle key promoted.</p>
+<p>Note that this insertion process is guaranteed to keep all nodes at
+least half full. For example, when we attempt to insert into a full
+internal node of a B-tree of order four, there will now be five children
+that must be dealt with. The node is split into two nodes containing two
+keys each, thus retaining the B-tree property. The middle of the five
+children is promoted to its parent.</p>
+</section>
+</section>
+<section id="sec:b-trees-1" class="level3" data-number="11.5.3">
+<h3 data-number="11.5.3"><span
+class="header-section-number">11.5.3</span> B<sup>+</sup> trees</h3>
+<p>The previous section mentioned that B-trees are universally used to
+implement large-scale disk-based systems. Actually, the B-tree as
+described in the previous section is almost never implemented. What is
+most commonly implemented is a variant of the B-tree, called the
+B<sup>+</sup> tree.</p>
+<div class="online">
+<p>If we want to be able to search in a collection of records that will
+never change, then a <a href="section-14.html#linear-index" class="term"
+title="A form of indexing that stores key-value pairs in a sorted array. Typically this is used for an index to a large collection of records stored on disk, where the linear index itself might be on disk or in main memory. It allows for efficient search (including for range queries), but it is not good for inserting and deleting entries in the array. Therefore, it is an ideal indexing structure for when the system needs to do range queries but the collection of records never changes once the linear index has been created.">linear
+index</a> is a very simple and efficient data structure. This is simply
+a sorted array of search keys with pointers to the actual records. To
+search in a linear index we can simply perform a standard binary search
+(recall <a
+href="section-1.6.html#sec:case-study-searching-in-a-list">Section 1.6</a>).</p>
+<p>The problem is how to handle insertion into and deletion from our
+database. We could try to keep the core idea of storing a sorted
+array-based list, but make it more flexible by breaking the list into
+manageable chunks that are more easily updated.</p>
+<ul>
+<li><p>How might we do that? First, we need to decide how big the chunks
+should be. Since the data are on disk, it seems reasonable to store a
+chunk that is the size of a disk block, or a small multiple of the disk
+block size. If the next record to be inserted belongs to a chunk that
+hasn’t filled its block then we can just insert it there. The fact that
+this might cause other records in that chunk to move a little bit in the
+array is not important, since this does not cause any extra disk
+accesses so long as we move data within that chunk.</p></li>
+<li><p>But what if the chunk fills up the entire block that contains it?
+We could just split it in half.</p></li>
+<li><p>What if we want to delete a record? We could just take the
+deleted record out of the chunk, but we might not want a lot of
+near-empty chunks. So we could put adjacent chunks together if they have
+only a small amount of data between them. Or we could shuffle data
+between adjacent chunks that together contain more data.</p></li>
+</ul>
+<p>The big problem would be how to find the desired chunk when
+processing a record with a given key. Perhaps some sort of tree-like
+structure could be used to locate the appropriate chunk? These ideas are
+exactly what motivate the B<sup>+</sup> tree. The B<sup>+</sup> tree is
+essentially a mechanism for managing a sorted array-based list, where
+the list is broken into chunks.</p>
+<p>The most significant difference between the B<sup>+</sup> tree and
+the BST or the standard B-tree is that the B<sup>+</sup> tree stores
+records only at the leaf nodes. Internal nodes store key values, but
+these are used solely as placeholders to guide the search. This means
+that internal nodes are significantly different in structure from leaf
+nodes. Internal nodes store keys to guide the search, associating each
+key with a pointer to a child B<sup>+</sup> tree node. Leaf nodes store
+the actual records, where the main requirement is that the leaf nodes
+store enough records to remain at least half full. The leaf nodes of a
+B<sup>+</sup> tree are normally linked together to form a <a
+href="section-14.html#doubly-linked-list" class="term"
+title="A linked list implementation variant where each list node contains access pointers to both the previous element and the next element on the list.">doubly
+linked list</a>. Thus, the entire collection of records can be traversed
+in sorted order by visiting all the leaf nodes on the linked list.</p>
+<p>Each internal node should be assumed to hold in the leftmost position
+an additional key that is less than or equal to any possible key value
+in the node’s leftmost subtree. B<sup>+</sup> tree implementations
+typically store an additional dummy record in the leftmost leaf node
+whose key value is less than any legal key value.</p>
+<p>Let’s see in some detail how the simplest B<sup>+</sup> tree works.
+This would be the “2-3<sup>+</sup> tree”, or a B<sup>+</sup> tree of
+order 3.</p>
 <div class="dsvis">
 <details open="true">
 <summary>
-<p>TODO</p>
+<p>An example of building a “2-3<sup>+</sup> tree”.</p>
 </summary>
-<p>
-<div id="UnionFindPRO" class="embedContainer">
-<iframe id="UnionFindPRO_iframe" aria-label="UnionFindPRO" src="../interactive/General/UnionFindPRO.html" width="100%" height="600" scrolling="no">
-Your browser does not support iframes.
-</iframe>
+
+<div id="TTPbuildCON" class="ssAV" data-short-name="TTPbuildCON" data-long-name="TTPbuildCON" alt="TTPbuildCON" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
 </div>
-</p>
+
+
+<script type="text/javascript" src="../interactive/Indexing/BPlusTreeNode.js"></script>
+<script type="text/javascript" src="../interactive/Indexing/BPlusTree.js"></script>
+<script type="text/javascript" src="../interactive/Indexing/TTPbuildCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("TTPbuildCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#TTPbuildCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
-</section>
+<p>Next, let’s see how to search.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>An example of searching a “2-3<sup>+</sup> tree”.</p>
+</summary>
+
+<div id="TTPfindCON" class="ssAV" data-short-name="TTPfindCON" data-long-name="TTPfindCON" alt="TTPfindCON" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
 </div>
+
+
+<script type="text/javascript" src="../interactive/Indexing/BPlusTreeNode.js"></script>
+<script type="text/javascript" src="../interactive/Indexing/BPlusTree.js"></script>
+<script type="text/javascript" src="../interactive/Indexing/TTPfindCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("TTPfindCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#TTPfindCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<p>Finally, let’s see an example of deleting from the “2-3<sup>+</sup>
+tree”.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>An example of deleting from a “2-3<sup>+</sup> tree”.</p>
+</summary>
+
+<div id="TTPdeleteCON" class="ssAV" data-short-name="TTPdeleteCON" data-long-name="TTPdeleteCON" alt="TTPdeleteCON" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+
+<script type="text/javascript" src="../interactive/Indexing/BPlusTreeNode.js"></script>
+<script type="text/javascript" src="../interactive/Indexing/BPlusTree.js"></script>
+<script type="text/javascript" src="../interactive/Indexing/TTPdeleteCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("TTPdeleteCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#TTPdeleteCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<p>Now, let’s extend these ideas to a B<sup>+</sup> tree of higher
+order.</p>
+<p>B<sup>+</sup> trees are exceptionally good for range queries. Once
+the first record in the range has been found, the rest of the records
+with keys in the range can be accessed by sequential processing of the
+remaining records in the first node, and then continuing down the linked
+list of leaf nodes as far as necessary. Search in a B<sup>+</sup> tree
+is nearly identical to search in a regular B-tree, except that the
+search must always continue to the proper leaf node. Even if the
+search-key value is found in an internal node, this is only a
+placeholder and does not provide access to the actual record. The
+following visualisation illustrates how to to this for a B<sup>+</sup>
+tree.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>An example of search in a B<sup>+</sup> tree of order four. Internal
+nodes must store between two and four children.</p>
+</summary>
+
+<div id="BPfindCON" class="ssAV" data-short-name="BPfindCON" data-long-name="BPfindCON" alt="BPfindCON" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+
+<script type="text/javascript" src="../interactive/Indexing/BPlusTreeNode.js"></script>
+<script type="text/javascript" src="../interactive/Indexing/BPlusTree.js"></script>
+<script type="text/javascript" src="../interactive/Indexing/BPfindCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("BPfindCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#BPfindCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<p>B<sup>+</sup> tree insertion is similar to B-tree insertion. First,
+the leaf
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math>
+that should contain the record is found. If
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math>
+is not full, then the new record is added, and no other B<sup>+</sup>
+tree nodes are affected. If
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math>
+is already full, split it in two (dividing the records evenly among the
+two nodes) and promote a copy of the least-valued key in the newly
+formed right node. As with the 2-3 tree, promotion might cause the
+parent to split in turn, perhaps eventually leading to splitting the
+root and causing the B<sup>+</sup> tree to gain a new level.
+B<sup>+</sup> tree insertion keeps all leaf nodes at equal depth. The
+following figure illustrates the insertion process through several
+examples.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>An example of building a B<sup>+</sup> tree of order four.</p>
+</summary>
+
+<div id="BPbuildCON" class="ssAV" data-short-name="BPbuildCON" data-long-name="BPbuildCON" alt="BPbuildCON" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+
+<script type="text/javascript" src="../interactive/Indexing/BPlusTreeNode.js"></script>
+<script type="text/javascript" src="../interactive/Indexing/BPlusTree.js"></script>
+<script type="text/javascript" src="../interactive/Indexing/BPbuildCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("BPbuildCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#BPbuildCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<p>To delete a record
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+from a B<sup>+</sup> tree, first locate the leaf
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math>
+that contains
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>.
+If
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math>
+is more than half full, then we need only remove
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>,
+leaving
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math>
+still at least half full. This is demonstrated by the following
+visualisation.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>An example of deletion in a B<sup>+</sup> tree of order four.</p>
+</summary>
+
+<div id="BPdeleteCON" class="ssAV" data-short-name="BPdeleteCON" data-long-name="BPdeleteCON" alt="BPdeleteCON" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+
+<script type="text/javascript" src="../interactive/Indexing/BPlusTreeNode.js"></script>
+<script type="text/javascript" src="../interactive/Indexing/BPlusTree.js"></script>
+<script type="text/javascript" src="../interactive/Indexing/BPdeleteCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("BPdeleteCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#BPdeleteCON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+<p>If deleting a record reduces the number of records in the node below
+the minimum threshold (called an <a href="section-14.html#underflow"
+class="term"
+title="The condition where the amount of data stored in an entity has dropped below some minimum threshold. For example, a node in a B-tree is required to be at least half full. If a record deletion causes the node to be less than half full, then it is in a condition of underflow, and something has to be done to correct this.">underflow</a>),
+then we must do something to keep the node sufficiently full. The first
+choice is to look at the node’s adjacent siblings to determine if they
+have a spare record that can be used to fill the gap. If so, then enough
+records are transferred from the sibling so that both nodes have about
+the same number of records. This is done so as to delay as long as
+possible the next time when a delete causes this node to underflow
+again. This process might require that the parent node has its
+placeholder key value revised to reflect the true first key value in
+each node.</p>
+<p>If neither sibling can lend a record to the under-full node (call it
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>),
+then
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>
+must give its records to a sibling and be removed from the tree. There
+is certainly room to do this, because the sibling is at most half full
+(remember that it had no records to contribute to the current node), and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>
+has become less than half full because it is under-flowing. This merge
+process combines two subtrees of the parent, which might cause it to
+underflow in turn. If the last two children of the root merge together,
+then the tree loses a level.</p>
+<p>The B<sup>+</sup> tree requires that all nodes be at least half full
+(except for the root). Thus, the storage utilization must be at least
+50%. This is satisfactory for many implementations, but note that
+keeping nodes fuller will result both in less space required (because
+there is less empty space in the disk file) and in more efficient
+processing (fewer blocks on average will be read into memory because the
+amount of information in each block is greater). </p>
+<p>Finally, here is an example of building a B<sup>+</sup> tree of order
+five. You can compare this to the example above of building a tree of
+order four with the same records.</p>
+<div class="dsvis">
+<details open="true">
+<summary>
+<p>An example of building a B<sup>+</sup> tree of degree 5</p>
+</summary>
+
+<div id="BPbuild5CON" class="ssAV" data-short-name="BPbuild5CON" data-long-name="BPbuild5CON" alt="BPbuild5CON" tabIndex="-1">
+<span class="jsavcounter"></span>
+<div class="jsavcontrols"></div>
+<p class="jsavoutput jsavline"></p>
+<div class="jsavcanvas"></div>
+</div>
+
+
+<script type="text/javascript" src="../interactive/Indexing/BPlusTreeNode.js"></script>
+<script type="text/javascript" src="../interactive/Indexing/BPlusTree.js"></script>
+<script type="text/javascript" src="../interactive/Indexing/BPbuild5CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("BPbuild5CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#BPbuild5CON "+rule)}
+    
+  });
+</script>
+
+</details>
+</div>
+</div>
+</section>
+<section id="sec:analysis-of-b-trees" class="level3"
+data-number="11.5.4">
+<h3 data-number="11.5.4"><span
+class="header-section-number">11.5.4</span> Analysis of B-trees</h3>
+<p>The asymptotic cost of search, insertion, and deletion of records
+from B-trees and B<sup>+</sup> trees is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>
+where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+is the total number of records in the tree. However, the base of the
+logarithm is the (average) branching factor of the tree. Typical
+database applications use extremely high branching factors, perhaps 100
+or more. Thus, in practice the B-tree and its variants are extremely
+shallow.</p>
+<p>As an illustration, consider a B-tree of order 100 and leaf nodes
+that contain up to 100 records.</p>
+<ul>
+<li>B-trees with height one (that is, just a single leaf node) can have
+at most 100 records.</li>
+<li>B-trees with height two (a root internal node whose children are
+leaves) must have at least 100 records (2 leaves with 50 records each),
+and at most 10,000 records (100 leaves with 100 records each).</li>
+<li>B-trees with height three must have at least 5000 records (two
+second-level nodes with 50 children containing 50 records each), and at
+most one million records (100 second-level nodes with 100 full children
+each).</li>
+<li>B-trees with height four must have at least 250,000 records and at
+most 100 million records.</li>
+<li>Thus, it would require an <em>extremely</em> large database to
+generate a B-tree of more than height four.</li>
+</ul>
+<p>The B-tree split and insert rules guarantee that every node (except
+perhaps the root) is at least half full. So they are on average about
+3/4 full. But the internal nodes are purely overhead, since the keys
+stored there are used only by the tree to direct search, rather than
+store actual data. Does this overhead amount to a significant use of
+space? No, because once again the high fan-out rate of the tree
+structure means that the vast majority of nodes are leaf nodes. A <a
+href="section-14.html#k-ary-tree" class="term"
+title="A type of full tree where every internal node has exactly $K$ children.">k-ary
+tree</a> has approximately
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mi>k</mi></mrow><annotation encoding="application/x-tex">1/k</annotation></semantics></math>
+of its nodes as internal nodes. This means that while half of a full
+binary tree’s nodes are internal nodes, in a B-tree of order 100
+probably only about
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mn>75</mn></mrow><annotation encoding="application/x-tex">1/75</annotation></semantics></math>
+of its nodes are internal nodes. This means that the overhead associated
+with internal nodes is very low.</p>
+<p>We can reduce the number of disk fetches required for the B-tree even
+more by using the following methods. First, the upper levels of the tree
+can be stored in main memory at all times. Because the tree branches so
+quickly, the top two levels (levels 0 and 1) require relatively little
+space. If the B-tree is only height four, then at most two disk fetches
+(internal nodes at level two and leaves at level three) are required to
+reach the pointer to any given record.</p>
+</section>
 </section>
 </main>
 
@@ -543,16 +870,13 @@ Your browser does not support iframes.
 <a href="section-11.4.html" accesskey="p" rel="previous">Splay trees</a>
 </div>
 <div class="navlink">
-<a href="section-11.6.html" accesskey="n" rel="next">Skip lists</a>
+<a href="section-11.6.html" accesskey="n" rel="next">Disjoint sets and the Union/Find algorithm</a>
 <a href="section-11.6.html" class="navbutton">&gt;&gt;</a>
 </div>
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/General/UFfigCON.js"></script>
-<script type="text/javascript" src="../interactive/General/UFconcomCON.js"></script>
-<script type="text/javascript" src="../interactive/General/UFCON.js"></script>
-<script type="text/javascript" src="../interactive/General/pathcompCON.js"></script>
 </body>
 </html>
+
 

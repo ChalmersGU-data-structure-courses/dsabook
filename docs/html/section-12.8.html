@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,9 +68,8 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Hashing/linProbeCON.css" rel="stylesheet" type="text/css"/>
 <link href="../interactive/Hashing/collisionCON.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/Hashing/linProbeCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -106,23 +106,41 @@ worst collision resolution methods.</p>
 class="level4 unnumbered example">
 <h4 class="unnumbered">Example: The problem with linear probing</h4>
 <p>Recall how linear probing works:</p>
-<p>
+
 <div id="linProbeCON1" class="ssAV" data-short-name="linProbeCON1" data-long-name="Linear Probing Slideshow 1" alt="Linear Probing Slideshow 1" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Hashing/linProbeCON1.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("linProbeCON1", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#linProbeCON1 "+rule)}
+    
+  });
+</script>
+
 <p>Now the problem is illustrated here:</p>
-<p>
+
 <div id="linProbeCON2" class="ssAV" data-short-name="linProbeCON2" data-long-name="Linear Probing Slideshow 2" alt="Linear Probing Slideshow 2" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Hashing/linProbeCON2.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("linProbeCON2", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#linProbeCON2 "+rule)}
+    
+  });
+</script>
+
 </section>
 </div>
 <p>Again, the ideal behaviour for a collision resolution mechanism is
@@ -146,13 +164,13 @@ implemented efficiently.</p>
 class="level4 unnumbered">
 <h4 class="unnumbered">Exercise: Practice linear probing</h4>
 </summary>
-<p>
+
 <div id="HashLinearPPRO" class="embedContainer">
 <iframe id="HashLinearPPRO_iframe" aria-label="HashLinearPPRO" src="../interactive/Hashing/HashLinearPPRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </section>
 </div>
@@ -176,14 +194,23 @@ same probe sequence.</p>
 <summary>
 <p>Example: linear probing by steps</p>
 </summary>
-<p>
+
 <div id="collisionCON1" class="ssAV" data-short-name="collisionCON1" data-long-name="Linear Probing By Steps Slideshow 1" alt="Linear Probing By Steps Slideshow 1" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Hashing/collisionCON1.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("collisionCON1", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#collisionCON1 "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>One quality of a good probe sequence is that it will cycle through
@@ -232,14 +259,23 @@ every key.</p>
 <summary>
 <p>Example: Using a relative prime step factor.</p>
 </summary>
-<p>
+
 <div id="collisionCON2" class="ssAV" data-short-name="collisionCON2" data-long-name="Linear Probing By Steps Slideshow 2" alt="Linear Probing By Steps Slideshow 2" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Hashing/collisionCON2.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("collisionCON2", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#collisionCON2 "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <div class="dsvis">
@@ -247,13 +283,13 @@ every key.</p>
 <summary>
 <p>Now you can practice linear probing by different step sizes.</p>
 </summary>
-<p>
+
 <div id="HashLinearStepPPRO" class="embedContainer">
 <iframe id="HashLinearStepPPRO_iframe" aria-label="HashLinearStepPPRO" src="../interactive/Hashing/HashLinearStepPPRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 </section>
@@ -321,14 +357,23 @@ in slots 1 to
 <summary>
 <p>Slideshow for pseudo-random probing</p>
 </summary>
-<p>
+
 <div id="collisionCON3" class="ssAV" data-short-name="collisionCON3" data-long-name="Pseudo-Random Probing Slideshow" alt="Pseudo-Random Probing Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Hashing/collisionCON3.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("collisionCON3", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#collisionCON3 "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <div class="dsvis">
@@ -336,13 +381,13 @@ in slots 1 to
 <summary>
 <p>Here is a practice exercise for pseudo-random probing.</p>
 </summary>
-<p>
+
 <div id="HashPseudoRandomPPRO" class="embedContainer">
 <iframe id="HashPseudoRandomPPRO_iframe" aria-label="HashPseudoRandomPPRO" src="../interactive/Hashing/HashPseudoRandomPPRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 <div class="dsvis">
@@ -351,14 +396,23 @@ Your browser does not support iframes.
 <p>Pseudo-random probing exhibits another desirable feature in a hash
 function.</p>
 </summary>
-<p>
+
 <div id="collisionCON4" class="ssAV" data-short-name="collisionCON4" data-long-name="Avoiding the Train" alt="Avoiding the Train" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Hashing/collisionCON4.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("collisionCON4", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#collisionCON4 "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 </section>
@@ -391,14 +445,23 @@ th value in the probe sequence would be
 <summary>
 <p>How quadratic probing works.</p>
 </summary>
-<p>
+
 <div id="collisionCON5" class="ssAV" data-short-name="collisionCON5" data-long-name="Quadratic Probing Slideshow" alt="Quadratic Probing Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Hashing/collisionCON5.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("collisionCON5", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#collisionCON5 "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <div class="dsvis">
@@ -406,13 +469,13 @@ th value in the probe sequence would be
 <summary>
 <p>Now you can practice quadratic probing.</p>
 </summary>
-<p>
+
 <div id="HashQuadraticPPRO" class="embedContainer">
 <iframe id="HashQuadraticPPRO_iframe" aria-label="HashQuadraticPPRO" src="../interactive/Hashing/HashQuadraticPPRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 <p>There is one problem with quadratic probing: Its probe sequence
@@ -422,14 +485,23 @@ typically will not visit all slots in the hash table.</p>
 <summary>
 <p>The problem with quadratic probing.</p>
 </summary>
-<p>
+
 <div id="collisionCON6" class="ssAV" data-short-name="collisionCON6" data-long-name="Quadratic Probing Problem" alt="Quadratic Probing Problem" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Hashing/collisionCON6.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("collisionCON6", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#collisionCON6 "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>For many hash table sizes, this probe function will cycle through a
@@ -575,25 +647,43 @@ applications.</p>
 (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>)
 is prime.</p>
 </summary>
-<p>
+
 <div id="collisionCON7" class="ssAV" data-short-name="collisionCON7" data-long-name="Double Hashing Slideshow 2" alt="Double Hashing Slideshow 2" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Hashing/collisionCON7.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("collisionCON7", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#collisionCON7 "+rule)}
+    
+  });
+</script>
+
 <p>Secondary hash when the table size
 (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>)
 is a power of 2.</p>
-<p>
+
 <div id="collisionCON8" class="ssAV" data-short-name="collisionCON8" data-long-name="Double Hashing Slideshow 3" alt="Double Hashing Slideshow 3" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Hashing/collisionCON8.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("collisionCON8", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#collisionCON8 "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <div class="dsvis">
@@ -601,13 +691,13 @@ is a power of 2.</p>
 <summary>
 <p>Double hashing exercise.</p>
 </summary>
-<p>
+
 <div id="HashDoublePPRO" class="embedContainer">
 <iframe id="HashDoublePPRO_iframe" aria-label="HashDoublePPRO" src="../interactive/Hashing/HashDoublePPRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 </section>
@@ -628,16 +718,7 @@ Your browser does not support iframes.
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/Hashing/linProbeCON1.js"></script>
-<script type="text/javascript" src="../interactive/Hashing/linProbeCON2.js"></script>
-<script type="text/javascript" src="../interactive/Hashing/collisionCON1.js"></script>
-<script type="text/javascript" src="../interactive/Hashing/collisionCON2.js"></script>
-<script type="text/javascript" src="../interactive/Hashing/collisionCON3.js"></script>
-<script type="text/javascript" src="../interactive/Hashing/collisionCON4.js"></script>
-<script type="text/javascript" src="../interactive/Hashing/collisionCON5.js"></script>
-<script type="text/javascript" src="../interactive/Hashing/collisionCON6.js"></script>
-<script type="text/javascript" src="../interactive/Hashing/collisionCON7.js"></script>
-<script type="text/javascript" src="../interactive/Hashing/collisionCON8.js"></script>
 </body>
 </html>
+
 

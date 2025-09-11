@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,8 +68,7 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Graph/kruskalCON.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/Graph/kruskalCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -120,7 +120,7 @@ is available for the purpose – the <a href="section-14.html#union-find"
 class="term"
 title="A process for mainining a collection of disjoint sets. The FIND operation determines which disjoint set a given object resides in, and the UNION operation combines two disjoint sets when it is determined that they are members of the same equivalence class under some equivalence relation.">Union/Find</a>
 algorithm, described in <a
-href="section-11.5.html#sec:disjoint-sets">Section 11.5</a>. Here is an
+href="section-11.6.html#sec:disjoint-sets">Section 11.6</a>. Here is an
 implementation for Kruskal’s algorithm. Note that since the MST will
 never have more than
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">|</mo><mi>𝐕</mi><mo stretchy="false" form="prefix">|</mo><mi>−</mi><mn>1</mn></mrow><annotation encoding="application/x-tex">|\mathbf{V}|-1</annotation></semantics></math>
@@ -145,14 +145,23 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a hr
 <code>forest</code>, the disjoint set of trees, and to the right is a
 list of all edges together with their weights.</p>
 </summary>
-<p>
+
 <div id="kruskalCON" class="ssAV" data-short-name="kruskalCON" data-long-name="Kruskal Slideshow" alt="Kruskal Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Graph/kruskalCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("kruskalCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#kruskalCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>Kruskal’s algorithm is dominated by the time required to process the
@@ -174,13 +183,13 @@ all edges in advance).</p>
 <summary>
 <p>Here is an exercise for Kruskal’s algorithm.</p>
 </summary>
-<p>
+
 <div id="KruskalPE" class="embedContainer">
 <iframe id="KruskalPE_iframe" aria-label="KruskalPE" src="../interactive/Graph/KruskalPE.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 </section>
@@ -199,7 +208,7 @@ Your browser does not support iframes.
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/Graph/kruskalCON.js"></script>
 </body>
 </html>
+
 

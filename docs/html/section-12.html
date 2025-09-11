@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,8 +68,7 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Hashing/hashIntroCON.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/Hashing/hashIntroCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -80,8 +80,8 @@
 </nav>
 <nav class="sitenav">
 <div>
-<a href="section-11.7.html" class="navbutton">&lt;&lt;</a>
-<a href="section-11.7.html" accesskey="p" rel="previous">Review questions</a>
+<a href="section-11.8.html" class="navbutton">&lt;&lt;</a>
+<a href="section-11.8.html" accesskey="p" rel="previous">Review questions</a>
 </div>
 <div>
 <a href="section-12.1.html" accesskey="n" rel="next">Hash functions</a>
@@ -185,14 +185,23 @@ To find the record with key value
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>,
 look in
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="italic">𝐻𝑇</mtext><mo stretchy="false" form="prefix">[</mo><mi>k</mi><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">\textit{HT}[k]</annotation></semantics></math>.</p>
-<p>
+
 <div id="hashIntroCON" class="ssAV" data-short-name="hashIntroCON" data-long-name="Hashing Intro Slideshow" alt="Hashing Intro Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Hashing/hashIntroCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("hashIntroCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#hashIntroCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </section>
 </div>
@@ -243,8 +252,8 @@ resolution</a> policy.</li>
 <footer>
 <nav class="sitenav">
 <div class="navlink">
-<a href="section-11.7.html" class="navbutton">&lt;&lt;</a>
-<a href="section-11.7.html" accesskey="p" rel="previous">Review questions</a>
+<a href="section-11.8.html" class="navbutton">&lt;&lt;</a>
+<a href="section-11.8.html" accesskey="p" rel="previous">Review questions</a>
 </div>
 <div class="navlink">
 <a href="section-12.1.html" accesskey="n" rel="next">Hash functions</a>
@@ -253,7 +262,7 @@ resolution</a> policy.</li>
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/Hashing/hashIntroCON.js"></script>
 </body>
 </html>
+
 

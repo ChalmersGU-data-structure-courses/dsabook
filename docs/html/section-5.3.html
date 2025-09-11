@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,8 +68,7 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Sorting/SortingLowerBoundCON.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/Sorting/SortingLowerBoundCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -310,14 +310,23 @@ branch.</p>
 <p>Here is a visualisation that illustrates decision trees and the
 sorting lower bound proof.</p>
 </summary>
-<p>
+
 <div id="SortingLowerBoundCON" class="ssAV" data-short-name="SortingLowerBoundCON" data-long-name="Sorting Lower Bound Slideshow" alt="Sorting Lower Bound Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Sorting/SortingLowerBoundCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("SortingLowerBoundCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#SortingLowerBoundCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>Any sorting algorithm requiring
@@ -354,7 +363,7 @@ time sorting algorithms by more than a constant factor.</p>
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/Sorting/SortingLowerBoundCON.js"></script>
 </body>
 </html>
+
 

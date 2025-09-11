@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,8 +68,7 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Graph/DijkstraCON.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/Graph/DijkstraCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -187,11 +187,13 @@ to
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
 must have its next-to-last vertex in
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>.
-Thus,</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐝</mi><mo stretchy="false" form="prefix">(</mo><mi>S</mi><mo>,</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><munder><mi>min</mi><mrow><mi>U</mi><mo>∈</mo><mi>𝐒</mi></mrow></munder><mo stretchy="false" form="prefix">(</mo><mi>𝐝</mi><mo stretchy="false" form="prefix">(</mo><mi>S</mi><mo>,</mo><mi>U</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>𝐰</mi><mo stretchy="false" form="prefix">(</mo><mi>U</mi><mo>,</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">
+Thus,<br />
+</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐝</mi><mo stretchy="false" form="prefix">(</mo><mi>S</mi><mo>,</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><munder><mi>min</mi><mrow><mi>U</mi><mo>∈</mo><mi>𝐒</mi></mrow></munder><mo stretchy="false" form="prefix">(</mo><mi>𝐝</mi><mo stretchy="false" form="prefix">(</mo><mi>S</mi><mo>,</mo><mi>U</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>𝐰</mi><mo stretchy="false" form="prefix">(</mo><mi>U</mi><mo>,</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\begin{equation*}
 \mathbf{d}(S, X) = \min_{U \in \mathbf{S}}(\mathbf{d}(S, U) + \mathbf{w}(U, X))
-</annotation></semantics></math></p>
-<p>In other words, the shortest path from
+\end{equation*}</annotation></semantics></math></p>
+<p><br />
+In other words, the shortest path from
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
 to
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
@@ -263,21 +265,30 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a hr
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>            dist <span class="op">=</span> distances.<span class="bu">get</span>(v) <span class="op">+</span> e.weight</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> e.end <span class="kw">not</span> <span class="kw">in</span> distances <span class="kw">or</span> dist <span class="op">&lt;</span> distances.<span class="bu">get</span>(e.end):</span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>                <span class="co">// If the new distance to the endpoint is shorter...</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>                distances.<span class="bu">put</span>(e.end, dist)  <span class="co">// ...update the endpoint with the new distance</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> distances</span></code></pre></div>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>                distances.<span class="bu">put</span>(e.end, dist)  <span class="co">// ...update the endpoint with</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> distances                        <span class="co">// the new distance</span></span></code></pre></div>
 <div class="dsvis">
 <details open="true">
 <summary>
 <p>Here is a visualisation of Dijkstra’s algorithm.</p>
 </summary>
-<p>
+
 <div id="DijkstraCON" class="ssAV" data-short-name="DijkstraCON" data-long-name="Dijkstra Slideshow" alt="Dijkstra Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Graph/DijkstraCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("DijkstraCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#DijkstraCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <section id="sec:finding-the-minimum-vertex-1"
@@ -377,13 +388,13 @@ is dense you should use the priority queue version.</p>
 <summary>
 <p>Now you can practice using Dijkstra’s algorithm.</p>
 </summary>
-<p>
+
 <div id="DijkstraPE" class="embedContainer">
 <iframe id="DijkstraPE_iframe" aria-label="DijkstraPE" src="../interactive/Graph/DijkstraPE.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 </section>
@@ -404,7 +415,7 @@ Your browser does not support iframes.
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/Graph/DijkstraCON.js"></script>
 </body>
 </html>
+
 

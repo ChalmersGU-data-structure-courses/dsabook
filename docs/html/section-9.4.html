@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,10 +68,9 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/DataStructures/huffman.css" rel="stylesheet" type="text/css"/>
-<link href="../interactive/Binary/huffmanCON.css" rel="stylesheet" type="text/css"/>
 <link href="../interactive/Binary/HuffProofCON.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/Binary/huffmanCON.css" rel="stylesheet" type="text/css"/>
+<link href="../interactive/DataStructures/huffman.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -363,14 +363,25 @@ letters:</p>
 </table>
 <p>Here is a slideshow that illustrates the Huffman tree construction
 process for these letters.</p>
-<p>
+
 <div id="huffmanBuildCON" class="ssAV" data-short-name="huffmanBuildCON" data-long-name="Huffman Coding Tree Slideshow: Build" alt="Huffman Coding Tree Slideshow: Build" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+
+<script type="text/javascript" src="../interactive/DataStructures/huffman.js"></script>
+<script type="text/javascript" src="../interactive/Binary/huffmanBuildCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("huffmanBuildCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#huffmanBuildCON "+rule)}
+    
+  });
+</script>
+
 </section>
 </div>
 <p>Here is pseudocode for the tree-building process. It takes a list of
@@ -418,14 +429,25 @@ connecting a node with its right child.</p>
 <p>This process is illustrated by the following slideshow, for our
 8-letter example above.</p>
 </summary>
-<p>
+
 <div id="huffmanLabelCON" class="ssAV" data-short-name="huffmanLabelCON" data-long-name="Huffman Coding Tree Slideshow: Label Edges" alt="Huffman Coding Tree Slideshow: Label Edges" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+
+<script type="text/javascript" src="../interactive/DataStructures/huffman.js"></script>
+<script type="text/javascript" src="../interactive/Binary/huffmanLabelCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("huffmanLabelCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#huffmanLabelCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>Now that we see how the edges associate with bits in the code, it is
@@ -437,14 +459,25 @@ character corresponds to a leaf node in the tree).</p>
 <p>Here is an illustration of how to transform the Huffman tree for our
 running example into bit codes.</p>
 </summary>
-<p>
+
 <div id="huffmanCodesCON" class="ssAV" data-short-name="huffmanCodesCON" data-long-name="Huffman Coding Tree Slideshow: Setting Codes" alt="Huffman Coding Tree Slideshow: Setting Codes" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+
+<script type="text/javascript" src="../interactive/DataStructures/huffman.js"></script>
+<script type="text/javascript" src="../interactive/Binary/huffmanCodesCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("huffmanCodesCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#huffmanCodesCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>Now that we have a code for each character, encoding a text message
@@ -474,14 +507,25 @@ branch.</p>
 <p>The following slideshow shows how to decode a message by traversing
 our example Huffman tree.</p>
 </summary>
-<p>
+
 <div id="huffmanDecodeCON" class="ssAV" data-short-name="huffmanDecodeCON" data-long-name="Huffman Coding Tree Slideshow: Decoding" alt="Huffman Coding Tree Slideshow: Decoding" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+
+<script type="text/javascript" src="../interactive/DataStructures/huffman.js"></script>
+<script type="text/javascript" src="../interactive/Binary/huffmanDecodeCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("huffmanDecodeCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#huffmanDecodeCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <div class="dsvis">
@@ -491,13 +535,13 @@ our example Huffman tree.</p>
 class="level4 unnumbered">
 <h4 class="unnumbered">Practice exercise: Huffman decoding</h4>
 </summary>
-<p>
+
 <div id="HuffmanDecodePRO" class="embedContainer">
 <iframe id="HuffmanDecodePRO_iframe" aria-label="HuffmanDecodePRO" src="../interactive/Binary/HuffmanDecodePRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </section>
 </div>
@@ -624,13 +668,13 @@ will not be as expected either.</p>
 <p>You can use the following visualisation to create a Huffman tree for
 your own set of letters and frequencies.</p>
 </summary>
-<p>
+
 <div id="huffmanCustomBuildAV" class="embedContainer">
 <iframe id="huffmanCustomBuildAV_iframe" aria-label="huffmanCustomBuildAV" src="../interactive/Binary/huffmanCustomBuildAV.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 </section>
@@ -688,11 +732,20 @@ with least weight,
 and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>l</mi><mn>2</mn></msub><annotation encoding="application/x-tex">l_2</annotation></semantics></math>,
 are not the deepest nodes in the tree. Triangles represent subtrees.</p>
-<p>
-<div id="HuffProofCON" class="ssAV" data-short-name="HuffProofCON" data-long-name="Binary/HuffProofCON" alt="Binary/HuffProofCON" tabIndex="-1">
+
+<div id="HuffProofCON" class="ssAV" data-short-name="HuffProofCON" data-long-name="HuffProofCON" alt="HuffProofCON" tabIndex="-1">
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Binary/HuffProofCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("HuffProofCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#HuffProofCON "+rule)}
+    
+  });
+</script>
+
 </div>
 <p>Using this lemma we can prove the following theorem:</p>
 <div class="topic">
@@ -782,12 +835,7 @@ external path length.</p>
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/DataStructures/huffman.js"></script>
-<script type="text/javascript" src="../interactive/Binary/huffmanBuildCON.js"></script>
-<script type="text/javascript" src="../interactive/Binary/huffmanLabelCON.js"></script>
-<script type="text/javascript" src="../interactive/Binary/huffmanCodesCON.js"></script>
-<script type="text/javascript" src="../interactive/Binary/huffmanDecodeCON.js"></script>
-<script type="text/javascript" src="../interactive/Binary/HuffProofCON.js"></script>
 </body>
 </html>
+
 

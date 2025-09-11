@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,9 +68,8 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Sorting/selectionsortSCON.css" rel="stylesheet" type="text/css"/>
 <link href="../interactive/Sorting/SelectionSortAnalysisCON.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/Sorting/selectionsortSCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -153,14 +153,23 @@ class="level4 unnumbered online">
 <summary>
 <p>Consider the example of the following array.</p>
 </summary>
-<p>
+
 <div id="selectionsortS1CON" class="ssAV" data-short-name="selectionsortS1CON" data-long-name="Selection Sort Slideshow 1" alt="Selection Sort Slideshow 1" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Sorting/selectionsortS1CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("selectionsortS1CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#selectionsortS1CON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <div class="dsvis">
@@ -170,14 +179,23 @@ class="level4 unnumbered online">
 </summary>
 <p>However, since the smallest element is already at the beginning, we
 will not need to look at it again.</p>
-<p>
-<div id="selectionsortS2CON" class="ssAV" data-short-name="selectionsortS2CON" data-long-name="Selection Sort Slideshow 2" alt="Selection Sort Slideshow 2" tabIndex="-1">
+
+<div id="selectionsortS2CON" class="ssAV" data-short-name="selectionsortS2CON" data-long-name="Selection Sort Slideshow 1" alt="Selection Sort Slideshow 1" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Sorting/selectionsortS2CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("selectionsortS2CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#selectionsortS2CON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>Selection sort continues in this way until the entire array is
@@ -188,13 +206,13 @@ sorted.</p>
 <p>The following visualisation puts it all together. You can input your
 own data if you like.</p>
 </summary>
-<p>
+
 <div id="selectionsortAV" class="embedContainer">
 <iframe id="selectionsortAV_iframe" aria-label="selectionsortAV" src="../interactive/Sorting/selectionsortAV.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 <div class="dsvis">
@@ -203,13 +221,13 @@ Your browser does not support iframes.
 <p>Now try for yourself to see if you understand how Selection sort
 works.</p>
 </summary>
-<p>
+
 <div id="SelsortPRO" class="embedContainer">
 <iframe id="SelsortPRO_iframe" aria-label="SelsortPRO" src="../interactive/Sorting/SelsortPRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 </section>
@@ -246,14 +264,23 @@ a linear number of swaps,
 <p>This visualisation analyses the number of comparisons and swaps
 required by Selection sort.</p>
 </summary>
-<p>
+
 <div id="SelectionSortAnalysisCON" class="ssAV" data-short-name="SelectionSortAnalysisCON" data-long-name="Selection Sort Analysis Slideshow" alt="Selection Sort Analysis Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Sorting/SelectionSortAnalysisCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("SelectionSortAnalysisCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#SelectionSortAnalysisCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 </section>
@@ -273,9 +300,7 @@ required by Selection sort.</p>
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/Sorting/selectionsortS1CON.js"></script>
-<script type="text/javascript" src="../interactive/Sorting/selectionsortS2CON.js"></script>
-<script type="text/javascript" src="../interactive/Sorting/SelectionSortAnalysisCON.js"></script>
 </body>
 </html>
+
 

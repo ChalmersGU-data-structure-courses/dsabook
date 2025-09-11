@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,9 +68,8 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Graph/DFSCON.css" rel="stylesheet" type="text/css"/>
 <link href="../interactive/Graph/BFSCON.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/Graph/DFSCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -184,14 +184,23 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb2-1"><a hr
 <p>This visualisation shows a graph and the result of performing a DFS
 on it, resulting in a depth-first search tree.</p>
 </summary>
-<p>
+
 <div id="DFSCON" class="ssAV" data-short-name="DFSCON" data-long-name="Depth-First Search Slideshow" alt="Depth-First Search Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Graph/DFSCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("DFSCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#DFSCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>Here is a slightly more detailed implementation of the DFS
@@ -220,13 +229,13 @@ start it, so that you can see the behaviour on different examples. It
 can show you DFS run on a directed graph or an undirected graph. Be sure
 to look at an example for each type of graph.</p>
 </summary>
-<p>
+
 <div id="DFSAV" class="embedContainer">
 <iframe id="DFSAV_iframe" aria-label="DFSAV" src="../interactive/Graph/DFSAV.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 <p>DFS processes each edge once in a directed graph. In an undirected
@@ -238,13 +247,13 @@ visited, but only once, so the total cost is
 <summary>
 <p>Here is an exercise for you to practice DFS.</p>
 </summary>
-<p>
+
 <div id="DFSPE" class="embedContainer">
 <iframe id="DFSPE_iframe" aria-label="DFSPE" src="../interactive/Graph/DFSPE.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 </section>
@@ -266,14 +275,23 @@ equivalent to visiting vertices level by level from top to bottom.</p>
 <p>This visualisation shows a graph and the result of performing a BFS
 on it, resulting in a breadth-first search tree.</p>
 </summary>
-<p>
+
 <div id="BFSCON" class="ssAV" data-short-name="BFSCON" data-long-name="Breadth-First Search Slideshow" alt="Breadth-First Search Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Graph/BFSCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("BFSCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#BFSCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>Here is an implementation for BFS. Note that it’s not possible to
@@ -303,13 +321,13 @@ start it, so that you can see the behaviour on different examples. It
 can show you BFS run on a directed graph or an undirected graph. Be sure
 to look at an example for each type of graph.</p>
 </summary>
-<p>
+
 <div id="BFSAV" class="embedContainer">
 <iframe id="BFSAV_iframe" aria-label="BFSAV" src="../interactive/Graph/BFSAV.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 <div class="dsvis">
@@ -317,13 +335,13 @@ Your browser does not support iframes.
 <summary>
 <p>Here is an exercise for you to practice BFS.</p>
 </summary>
-<p>
+
 <div id="BFSPE" class="embedContainer">
 <iframe id="BFSPE_iframe" aria-label="BFSPE" src="../interactive/Graph/BFSPE.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 </section>
@@ -343,8 +361,7 @@ Your browser does not support iframes.
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/Graph/DFSCON.js"></script>
-<script type="text/javascript" src="../interactive/Graph/BFSCON.js"></script>
 </body>
 </html>
+
 

@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,9 +68,8 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Binary/BSTShapeCON.css" rel="stylesheet" type="text/css"/>
 <link href="../interactive/Binary/BSTCON.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/Binary/BSTShapeCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -127,18 +127,25 @@ href="section-14.html#inorder-traversal" class="term"
 title="In a binary tree, a traversal that first recursively visits the left child, then visits the root, and then recursively visits the right child. In a binary search tree, this traversal will enumerate the nodes in sorted order.">inorder
 traversal</a>, then the resulting enumeration will be in sorted order
 from lowest to highest.</p>
-<figure id="fig:BSTShape" class="subfigures">
-<div class="online">
-<p>
-<div id="BSTShapeCON" class="ssAV" data-short-name="BSTShapeCON" data-long-name="Binary/BSTShapeCON" alt="Binary/BSTShapeCON" tabIndex="-1">
+<figure id="fig:BSTShape">
+
+<div id="BSTShapeCON" class="ssAV" data-short-name="BSTShapeCON" data-long-name="BSTShapeCON" alt="BSTShapeCON" tabIndex="-1">
 <div class="jsavcanvas"></div>
 </div>
-</p>
-</div>
+
+<script type="text/javascript" src="../interactive/Binary/BSTShapeCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("BSTShapeCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#BSTShapeCON "+rule)}
+    
+  });
+</script>
+
 <figcaption><p>Figure 11.1: Two Binary Search Trees for a collection of
 values. Tree (a) results if values are inserted in the order 37, 24, 42,
 120, 32, 7. Tree (b) results if the same values are inserted in the
-order 7, 37, 42, 32, 120, 24.. </p></figcaption>
+order 7, 37, 42, 32, 120, 24.</p></figcaption>
 </figure>
 <p>The only thing that differentiates a BST from a normal binary tree is
 the BST property. This property is an <em>invariant</em>, as as
@@ -290,14 +297,23 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a hr
 <summary>
 <p>Here is an interactive explanation of searching in a BST.</p>
 </summary>
-<p>
+
 <div id="BSTsearchCON" class="ssAV" data-short-name="BSTsearchCON" data-long-name="BST Search Slideshow" alt="BST Search Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Binary/BSTsearchCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("BSTsearchCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#BSTsearchCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <div class="dsvis">
@@ -305,13 +321,13 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb5-1"><a hr
 <summary>
 <p>Here is an exercise on the BST search algorithm.</p>
 </summary>
-<p>
+
 <div id="BSTsearchPRO" class="embedContainer">
 <iframe id="BSTsearchPRO_iframe" aria-label="BSTsearchPRO" src="../interactive/Binary/BSTsearchPRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 </section>
@@ -346,14 +362,23 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb7-1"><a hr
 <summary>
 <p>Here is an interactive explanation of recursive insertion.</p>
 </summary>
-<p>
+
 <div id="BSTinsertCON" class="ssAV" data-short-name="BSTinsertCON" data-long-name="BST Insert Slideshow" alt="BST Insert Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Binary/BSTinsertCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("BSTinsertCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#BSTinsertCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>Note that, except for the last node in the path,
@@ -368,13 +393,13 @@ probably more expensive than the assignment!</p>
 <summary>
 <p>Here is an exercise on BST insertion.</p>
 </summary>
-<p>
+
 <div id="BSTinsertPRO" class="embedContainer">
 <iframe id="BSTinsertPRO_iframe" aria-label="BSTinsertPRO" src="../interactive/Binary/BSTinsertPRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 </section>
@@ -446,14 +471,23 @@ property is maintained.</p>
 <summary>
 <p>Here is an interactive explanation of BST deletion.</p>
 </summary>
-<p>
-<div id="BSTremoveCON" class="ssAV" data-short-name="BSTremoveCON" data-long-name="BST remove Slideshow" alt="BST remove Slideshow" tabIndex="-1">
+
+<div id="BSTremoveCON" class="ssAV" data-short-name="BSTremoveCON" data-long-name="BST Remove Slideshow" alt="BST Remove Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Binary/BSTremoveCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("BSTremoveCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#BSTremoveCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 </div>
@@ -481,7 +515,8 @@ node with the least value from its right subtree.</p>
 </div>
 <p>The code for removal is shown here. Note that the helper function
 returns the updated subtree, and we have to make sure to update the
-child pointers to this updated tree.</p>
+child pointers to this updated tree.<br />
+</p>
 <div class="sourceCode" id="cb10"><pre
 class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>    removeHelper(node, key):</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> node <span class="kw">is</span> <span class="va">null</span>:</span>
@@ -560,13 +595,13 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb11-1"><a h
 <summary>
 <p>Here is an exercise on BST deletion.</p>
 </summary>
-<p>
+
 <div id="BSTremovePRO" class="embedContainer">
 <iframe id="BSTremovePRO_iframe" aria-label="BSTremovePRO" src="../interactive/Binary/BSTremovePRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 </div>
@@ -675,14 +710,23 @@ reach a leaf node.</p>
 <p>Here is a problem that typically needs to visit more than just a
 single path, but not all of the nodes.</p>
 </summary>
-<p>
+
 <div id="IneffBinaryTreeRangeCON" class="ssAV" data-short-name="IneffBinaryTreeRangeCON" data-long-name="Inefficient Binary Tree Traversal on Range Slide Show" alt="Inefficient Binary Tree Traversal on Range Slide Show" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Binary/IneffBinaryTreeRangeCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("IneffBinaryTreeRangeCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#IneffBinaryTreeRangeCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 </section>
@@ -702,11 +746,7 @@ single path, but not all of the nodes.</p>
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/Binary/BSTShapeCON.js"></script>
-<script type="text/javascript" src="../interactive/Binary/BSTsearchCON.js"></script>
-<script type="text/javascript" src="../interactive/Binary/BSTinsertCON.js"></script>
-<script type="text/javascript" src="../interactive/Binary/BSTremoveCON.js"></script>
-<script type="text/javascript" src="../interactive/Binary/IneffBinaryTreeRangeCON.js"></script>
 </body>
 </html>
+
 

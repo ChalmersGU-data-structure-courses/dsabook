@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,8 +68,7 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Sorting/SortNotationS1CON.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/Sorting/SortNotationS1CON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -91,9 +91,12 @@
 </header>
 
 <main>
-<section id="sec:sorting-simple" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span>
-Sorting, part 1: Simple algorithms</h1>
+<section id="sec:sorting-simple" class="level1" data-number="3"
+data-latex="Sorting, part 1: \mbox{Simple algorithms}">
+<h1 data-number="3"
+data-latex="Sorting, part 1: \mbox{Simple algorithms}"><span
+class="header-section-number">3</span> Sorting, part 1: Simple
+algorithms</h1>
 <p>We have seen that, when an array is sorted in ascending order,
 <em>binary search</em> can be used to find items in it efficiently. But
 what about when we have a collection of data that is not in any order?
@@ -141,14 +144,23 @@ applications.</p>
 <section id="sec:the-sorting-problem" class="level4 unnumbered">
 <h4 class="unnumbered">The sorting problem</h4>
 </summary>
-<p>
+
 <div id="SortNotationS1CON" class="ssAV" data-short-name="SortNotationS1CON" data-long-name="Sorting Terminology and Notation Slideshow 1" alt="Sorting Terminology and Notation Slideshow 1" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Sorting/SortNotationS1CON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("SortNotationS1CON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#SortNotationS1CON "+rule)}
+    
+  });
+</script>
+
 </details>
 </section>
 </div>
@@ -205,7 +217,7 @@ worst-case or average-case running time.</p>
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/Sorting/SortNotationS1CON.js"></script>
 </body>
 </html>
+
 

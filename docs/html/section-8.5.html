@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,9 +68,7 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Binary/WriteTrav.css" rel="stylesheet" type="text/css"/>
-<link href="../interactive/Binary/BSTCheckCON.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/Binary/WriteTrav.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -179,14 +178,23 @@ mistake is to not return a value.</p>
 <summary>
 <p>Common mistakes when implementing recursive functions.</p>
 </summary>
-<p>
+
 <div id="BinaryTreeMistakesCON" class="ssAV" data-short-name="BinaryTreeMistakesCON" data-long-name="Binary Tree Common Mistakes Slideshow" alt="Binary Tree Common Mistakes Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Binary/BinaryTreeMistakesCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("BinaryTreeMistakesCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#BinaryTreeMistakesCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 </section>
@@ -236,11 +244,40 @@ class="level4 unnumbered example">
 <h4 class="unnumbered">Example: Binary search tree</h4>
 <p>To be a binary search tree, the left child of the node with value 40
 must have a value between 20 and 40.</p>
-<p>
-<div id="BSTCheckCON" class="ssAV" data-short-name="BSTCheckCON" data-long-name="Binary/BSTCheckCON" alt="Binary/BSTCheckCON" tabIndex="-1">
+
+<div id="img-jsav-2e7232f6bcb37cceb342496ca792a15b" class="ssAV" data-short-name="img-jsav-2e7232f6bcb37cceb342496ca792a15b" data-long-name="img-jsav-2e7232f6bcb37cceb342496ca792a15b" alt="img-jsav-2e7232f6bcb37cceb342496ca792a15b" tabIndex="-1">
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("img-jsav-2e7232f6bcb37cceb342496ca792a15b", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#img-jsav-2e7232f6bcb37cceb342496ca792a15b "+rule)}
+    var AV = NewAV();
+AddCSS(`.jsavlabel{z-index:1000}`);
+// Setup the init location of tree
+var btTop = 0;
+var btLeft = 180 + 150;
+var cirOpt = {fill: "white"};
+
+var bt = AV.ds.binarytree({nodegap: 15, left: btLeft, top: btTop});
+bt.root("20");
+var rt = bt.root();
+rt.right("50");
+rt.right().left("40");
+rt.right().right("75");
+rt.right().left().left(""); // the covered leaf node
+
+//adding the leaf node "20 to 40"
+AV.label("20 to 40", {visible: true, left: 318, top: 147});
+AV.g.ellipse(345, 173, 35, 16, cirOpt);
+bt.layout();
+AV.displayInit();
+AV.recorded();
+  });
+</script>
+
 </section>
 <p>As shown in the figure above it is not enough to verify that
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>’s
@@ -290,8 +327,7 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb4-1"><a hr
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/Binary/BinaryTreeMistakesCON.js"></script>
-<script type="text/javascript" src="../interactive/Binary/BSTCheckCON.js"></script>
 </body>
 </html>
+
 

@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,8 +68,7 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Hashing/buckethashCON.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/Hashing/buckethashCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -128,14 +128,23 @@ an expensive process.</p>
 <summary>
 <p>Demonstration of bucket hashing.</p>
 </summary>
-<p>
+
 <div id="buckethashCON1" class="ssAV" data-short-name="buckethashCON1" data-long-name="Bucket Hashing Slideshow 1" alt="Bucket Hashing Slideshow 1" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Hashing/buckethashCON1.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("buckethashCON1", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#buckethashCON1 "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <div class="dsvis">
@@ -143,13 +152,13 @@ an expensive process.</p>
 <summary>
 <p>Now you can try it yourself.</p>
 </summary>
-<p>
+
 <div id="HashBucketPRO" class="embedContainer">
 <iframe id="HashBucketPRO_iframe" aria-label="HashBucketPRO" src="../interactive/Hashing/HashBucketPRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 <section id="sec:an-alternative-approach-to-bucket-hashing"
@@ -169,14 +178,23 @@ a home position rather than just the first slot in the bucket.</p>
 <summary>
 <p>Demonstration of alternative bucket hashing.</p>
 </summary>
-<p>
+
 <div id="buckethashCON2" class="ssAV" data-short-name="buckethashCON2" data-long-name="Bucket Hashing Slideshow 2" alt="Bucket Hashing Slideshow 2" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Hashing/buckethashCON2.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("buckethashCON2", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#buckethashCON2 "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>Bucket methods are good for implementing hash tables stored on disk,
@@ -193,13 +211,13 @@ unnecessary disk accesses.</p>
 <section id="sec:exercise-bucket-hashing" class="level4 unnumbered">
 <h4 class="unnumbered">Exercise: Bucket hashing</h4>
 </summary>
-<p>
+
 <div id="HashBucket2PRO" class="embedContainer">
 <iframe id="HashBucket2PRO_iframe" aria-label="HashBucket2PRO" src="../interactive/Hashing/HashBucket2PRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </section>
 </div>
@@ -221,8 +239,7 @@ Your browser does not support iframes.
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/Hashing/buckethashCON1.js"></script>
-<script type="text/javascript" src="../interactive/Hashing/buckethashCON2.js"></script>
 </body>
 </html>
+
 

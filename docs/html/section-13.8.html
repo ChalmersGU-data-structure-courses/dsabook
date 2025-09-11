@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -183,10 +184,22 @@ Note that
 because the graph is directed. We assume that all weights are
 positive.</p>
 <figure id="fig:GraphShortestPath">
-<img src="images/GraphShortestPath.png" style="width:40.0%"
-alt="Figure 13.12: Example graph for shortest-path definitions" />
-<figcaption aria-hidden="true">Figure 13.12: Example graph for
-shortest-path definitions</figcaption>
+
+<div id="DistanceExampCON" class="ssAV" data-short-name="DistanceExampCON" data-long-name="DistanceExampCON" alt="DistanceExampCON" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+
+<script type="text/javascript" src="../interactive/Graph/DistanceExampCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("DistanceExampCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#DistanceExampCON "+rule)}
+    
+  });
+</script>
+
+<figcaption><p>Figure 13.12: Example graph for shortest-path
+definitions</p></figcaption>
 </figure>
 </section>
 </section>
@@ -207,4 +220,5 @@ shortest-path definitions</figcaption>
 
 </body>
 </html>
+
 

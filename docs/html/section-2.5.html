@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,8 +68,7 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/AlgAnal/AnalCasesCON.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/AlgAnal/AnalCasesCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -115,14 +115,23 @@ once.</p>
 <p>Consider the problem of finding the factorial of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.</p>
 </summary>
-<p>
+
 <div id="AnalCasesSameCON" class="ssAV" data-short-name="AnalCasesSameCON" data-long-name="Simple analysis cases slideshow" alt="Simple analysis cases slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/AlgAnal/AnalCasesSameCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("AnalCasesSameCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#AnalCasesSameCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>For most algorithms however, different inputs of a given size require
@@ -171,14 +180,23 @@ that below.</p>
 <summary>
 <p>Here is an example.</p>
 </summary>
-<p>
+
 <div id="AnalCasesDiffCON" class="ssAV" data-short-name="AnalCasesDiffCON" data-long-name="Best, Worst, and Average cases slideshow" alt="Best, Worst, and Average cases slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/AlgAnal/AnalCasesDiffCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("AnalCasesDiffCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#AnalCasesDiffCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <p>When analysing an algorithm, should we study the best, worst, or
@@ -268,8 +286,7 @@ anyway resort to worst-case analysis.</p>
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/AlgAnal/AnalCasesSameCON.js"></script>
-<script type="text/javascript" src="../interactive/AlgAnal/AnalCasesDiffCON.js"></script>
 </body>
 </html>
+
 

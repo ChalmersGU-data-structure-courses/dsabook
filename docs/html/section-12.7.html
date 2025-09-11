@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/quiz.css" />
   <link rel="stylesheet" href="../css/mobile.css" />
   <link rel="stylesheet" href="../css/print.css" />
+  <style id="dynamicStyleSheet"></style>
   
   <link rel="stylesheet" href="../lib/JSAV.css" type="text/css" />
   <link rel="stylesheet" href="../lib/odsaMOD.css" type="text/css" />
@@ -67,8 +68,7 @@
 
   
   <script type="text/javascript" src="../scripts/quizhandler.js"></script>
-<link href="../interactive/Hashing/collisionCON.css" rel="stylesheet" type="text/css"/>
-</head>
+<link href="../interactive/Hashing/collisionCON.css" rel="stylesheet" type="text/css"/></head>
 
 <body>
 
@@ -124,16 +124,25 @@ encountered.</p>
 <div class="dsvis">
 <details open="true">
 <summary>
-<p>TODO</p>
+<p>The deletion process in action.</p>
 </summary>
-<p>
+
 <div id="hashdelCON" class="ssAV" data-short-name="hashdelCON" data-long-name="Hash Deletion Slideshow" alt="Hash Deletion Slideshow" tabIndex="-1">
 <span class="jsavcounter"></span>
 <div class="jsavcontrols"></div>
 <p class="jsavoutput jsavline"></p>
 <div class="jsavcanvas"></div>
 </div>
-</p>
+
+<script type="text/javascript" src="../interactive/Hashing/hashdelCON.js"></script>
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("hashdelCON", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#hashdelCON "+rule)}
+    
+  });
+</script>
+
 </details>
 </div>
 <div class="dsvis">
@@ -141,13 +150,13 @@ encountered.</p>
 <summary>
 <p>Here is a practice exercise.</p>
 </summary>
-<p>
+
 <div id="HashingDelPRO" class="embedContainer">
 <iframe id="HashingDelPRO_iframe" aria-label="HashingDelPRO" src="../interactive/Hashing/HashingDelPRO.html" width="100%" height="600" scrolling="no">
 Your browser does not support iframes.
 </iframe>
 </div>
-</p>
+
 </details>
 </div>
 <p>The use of tombstones allows searches to work correctly and allows
@@ -285,7 +294,7 @@ variable, but we also have to increase the variable
 </nav>
 </footer>
 
-<script type="text/javascript" src="../interactive/Hashing/hashdelCON.js"></script>
 </body>
 </html>
+
 
