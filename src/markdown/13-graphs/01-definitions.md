@@ -57,7 +57,7 @@ edges coming in to it). In @fig:GraphTypes (c), the in degree of vertex 1 is two
 and its out degree is one.
 
 ::: {.jsav-figure #fig:GraphNeighbors}
-``` {src="Graph/GneighbourCON.js" links="Graph/GraphDefCON.css"}
+``` {src="Graph/GneighborCON.js" links="Graph/GraphDefCON.css"}
 ```
 Neighbors and incidence
 :::
