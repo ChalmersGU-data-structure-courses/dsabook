@@ -75,21 +75,24 @@ def fix_toc(*infiles: Path):
             continue
         with open(inf) as IN:
             contents = IN.read()
-        contents = SubsubsectionMatch.sub(r'<details><summary>\1</summary>\2</details>', contents)
+        contents = contents.replace('</a>', '@')  # Hack for making the regex simpler
+        contents, n1 = re.subn(
+            r'(<a \s+ href="section-[^<>]+> \s* <span [^<>]*> ([\d.]+) [^@]+ @) (\s* <ul>)',
+            mk_details, contents, flags = re.VERBOSE
+        )
+        contents, n2 = re.subn(
+            r'(</ul>) (\s* </li>)', r'\1</details>\2',
+            contents, flags = re.VERBOSE
+        )
+        contents = contents.replace('@', '</a>')
+        assert n1 == n2, "Mismatch in the number of <details> vs </details> in TOC"
         with open(inf, "w") as OUT:
             OUT.write(contents)
 
-SubsubsectionMatch = re.compile(
-    r'''
-    (   <a \s+ href="section-\d+\.\d+\.html[^<>]*>
-        <span[^<>]*> [^<>]+ </span>
-        [^<>]+ </a>
-    )
-    (   [^<>]* <ul> .+? </ul>
-    )
-    ''',
-    re.VERBOSE | re.DOTALL
-)
+def mk_details(m: re.Match[str]) -> str:
+    level = len(m[2].split('.'))
+    details_tag = "<details open>" if level <= 1 else "<details>"
+    return f'{details_tag}<summary>{m[1]}</summary>{m[3]}'
 
 
 ###############################################################################
