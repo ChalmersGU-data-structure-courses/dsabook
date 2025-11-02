@@ -143,16 +143,32 @@ of a complete binary tree with 12 nodes, where the nodes are numbered
 according to this scheme.</p>
 <figure id="fig:example_complete_bintree">
 
-<div id="CompleteBinTree" class="ssAV" data-short-name="CompleteBinTree" data-long-name="CompleteBinTree" alt="CompleteBinTree" tabIndex="-1">
+<div id="img-jsav-8c9325e4805085cc5680b716565a5b38" class="ssAV" data-short-name="img-jsav-8c9325e4805085cc5680b716565a5b38" data-long-name="img-jsav-8c9325e4805085cc5680b716565a5b38" alt="img-jsav-8c9325e4805085cc5680b716565a5b38" tabIndex="-1">
 <div class="jsavcanvas"></div>
 </div>
 
-<script type="text/javascript" src="../interactive/Binary/CompleteBinTree.js"></script>
+
 <script>
   $(document).ready(function(){
-    function NewAV() {return new JSAV("CompleteBinTree", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#CompleteBinTree "+rule)}
-    
+    function NewAV() {return new JSAV("img-jsav-8c9325e4805085cc5680b716565a5b38", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#img-jsav-8c9325e4805085cc5680b716565a5b38 "+rule)}
+    let av = NewAV();
+let bt = av.ds.binarytree({nodegap: 25});
+let rt = bt.root("0");
+rt.left("1");
+rt.right("2");
+rt.left().left("3");
+rt.left().right("4");
+rt.right().left("5");
+rt.right().right("6");
+rt.left().left().left("7");
+rt.left().left().right("8");
+rt.left().right().left("9");
+rt.left().right().right("10");
+rt.right().left().left("11");
+bt.layout();
+av.displayInit();
+av.recorded();
   });
 </script>
 
@@ -166,39 +182,70 @@ href="#fig:HeapTreeExample">Figure 9.2</a> is represented in an array as
 in <a href="#fig:HeapArrayExample">Figure 9.3</a>.</p>
 <figure id="fig:HeapTreeExample">
 
-<div id="img-jsav-dff4dca0ec4769c8a07e2755af556671" class="ssAV" data-short-name="img-jsav-dff4dca0ec4769c8a07e2755af556671" data-long-name="img-jsav-dff4dca0ec4769c8a07e2755af556671" alt="img-jsav-dff4dca0ec4769c8a07e2755af556671" tabIndex="-1">
+<div id="img-jsav-aefdd635a83b00c95cc6725c8152494e" class="ssAV" data-short-name="img-jsav-aefdd635a83b00c95cc6725c8152494e" data-long-name="img-jsav-aefdd635a83b00c95cc6725c8152494e" alt="img-jsav-aefdd635a83b00c95cc6725c8152494e" tabIndex="-1">
 <div class="jsavcanvas"></div>
 </div>
 
 
 <script>
   $(document).ready(function(){
-    function NewAV() {return new JSAV("img-jsav-dff4dca0ec4769c8a07e2755af556671", {animationMode: "none"})}
-    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#img-jsav-dff4dca0ec4769c8a07e2755af556671 "+rule)}
-    var av = NewAV();
-var btTop = -5;
-var btLeft = 300;
-var bt = av.ds.binarytree({nodegap: 25, left: btLeft, top: btTop});
-bt.root("A");
-var rt = bt.root();
-rt.left("L");
-rt.left().left("O");
-rt.left().right("R");
-rt.right("G");
-rt.right().left("I");
+    function NewAV() {return new JSAV("img-jsav-aefdd635a83b00c95cc6725c8152494e", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#img-jsav-aefdd635a83b00c95cc6725c8152494e "+rule)}
+    let av = NewAV();
+let bt = av.ds.binarytree({nodegap: 25});
+let rt = bt.root("8");
+rt.left("17");
+rt.right("12");
+rt.left().left("33");
+rt.left().right("28").highlight();
+rt.right().left("43");
+rt.right().right("15");
+rt.left().left().left("34");
+rt.left().left().right("87");
+rt.left().right().left("75");
+rt.left().right().right("47");
+rt.right().left().left("47");
 bt.layout();
 av.displayInit();
 av.recorded();
   });
 </script>
 
-<figcaption><p>Figure 9.2: An example binary heap</p></figcaption>
+<figcaption><p>Figure 9.2: An example binary <em>min</em>-heap, where a
+smaller value indicates a higher priority. The node containing the value
+“28” is highlighted, its parent has the value “17” and the children are
+“75” and “47”.</p></figcaption>
 </figure>
 <figure id="fig:HeapArrayExample">
-<img src="images/ArrayHeap.png" style="width:40.0%"
-alt="Figure 9.3: Array representation of the example heap" />
-<figcaption aria-hidden="true">Figure 9.3: Array representation of the
-example heap</figcaption>
+
+<div id="img-jsav-4215a5b2a38dc0b156853ff39341bdd9" class="ssAV" data-short-name="img-jsav-4215a5b2a38dc0b156853ff39341bdd9" data-long-name="img-jsav-4215a5b2a38dc0b156853ff39341bdd9" alt="img-jsav-4215a5b2a38dc0b156853ff39341bdd9" tabIndex="-1">
+<div class="jsavcanvas"></div>
+</div>
+
+
+<script>
+  $(document).ready(function(){
+    function NewAV() {return new JSAV("img-jsav-4215a5b2a38dc0b156853ff39341bdd9", {animationMode: "none"})}
+    function AddCSS(rule) {document.getElementById("dynamicStyleSheet").sheet.insertRule("#img-jsav-4215a5b2a38dc0b156853ff39341bdd9 "+rule)}
+    var av = NewAV();
+AddCSS(`.jsavpointerarea {border: none; background-color: transparent}`);
+var theArray = ["8", "17", "12", "33", "28", "43", "15", "34", "87", "75", "47", "47"];
+var arr = av.ds.array(theArray, {indexed: true, left: 240, top: 40});
+arr.highlight(4);
+av.pointer("", arr, {left: -1, targetIndex: 4, anchor:"top", myAnchor:"bottom"});
+av.pointer("parent", arr, {left: -15, targetIndex: 1, anchor:"right top", myAnchor:"left bottom"});
+av.pointer("left child", arr, {left: -35, targetIndex: 9});
+av.pointer("right child", arr, {left: -20, targetIndex: 10, anchor:"right top", myAnchor:"left bottom"});
+console.log(arr);
+av.displayInit();
+av.recorded();
+  });
+</script>
+
+<figcaption><p>Figure 9.3: Array representation of the example heap in
+<a href="#fig:HeapTreeExample">Figure 9.2</a>. The highlighted node “28”
+is highlighted here too, and the parent, and left and right children are
+indicated.</p></figcaption>
 </figure>
 <p>You can use simple formulas to compute the array index of a node’s
 relatives in a complete binary tree with
