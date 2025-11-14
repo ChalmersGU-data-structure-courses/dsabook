@@ -95,6 +95,7 @@
 			<item>throw</item>
 			<item>return</item>
 			<item>try</item>
+			<item>until</item>
 			<item>while</item>
 			<item>repeat</item>
 			<item>precondition</item>
