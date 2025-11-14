@@ -1,7 +1,7 @@
 $(document).ready(function () {
   "use strict";
   var av = new JSAV("DistanceExampCON", {"animationMode": "none"});
-  var g = av.ds.graph({width: 300, height: 200,
+  var g = av.ds.graph({width: 360, height: 200,
                          layout: "manual", directed: true});
   var a = g.addNode("A", {"left": 0, "top":  75});
   var b = g.addNode("B", {"left": 100, "top":  0});

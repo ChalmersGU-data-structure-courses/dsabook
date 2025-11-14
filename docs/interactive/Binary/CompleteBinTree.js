@@ -2,7 +2,7 @@ $(document).ready(function() {
   "use strict";
   var av = new JSAV("CompleteBinTree", {animationMode: "none"});
   var btTop = -5;
-  var btLeft = 300;
+  var btLeft = 250;
   var bt = av.ds.binarytree({nodegap: 25, left: btLeft, top: btTop});
   bt.root("0");
   var rt = bt.root();
@@ -17,6 +17,8 @@ $(document).ready(function() {
   rt.right().right("6");
   rt.right().left("5");
   rt.right().left().left("11");
+  rt.right().left().right("12");
+  rt.right().right().left("13");
   bt.layout();
   av.displayInit();
   av.recorded();

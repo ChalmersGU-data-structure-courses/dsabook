@@ -222,8 +222,8 @@ correct partition. The loop continues until the <em>left</em> and
 class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> partition(arr, left, right, pivot) <span class="op">-&gt;</span> <span class="bu">Int</span>:</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    swap arr[pivot] with arr[left]</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> left ≤ right:</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        move left rightwards until arr[left] <span class="op">&lt;</span> arr[pivot]</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        move right leftwards until arr[right] <span class="op">&gt;</span> arr[pivot]</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        move left rightwards <span class="cf">until</span> arr[left] ≥ arr[pivot]</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        move right leftwards <span class="cf">until</span> arr[right] ≤ arr[pivot]</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        swap arr[left] with arr[right]</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    swap arr[pivot] with arr[right]</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> right</span></code></pre></div>
