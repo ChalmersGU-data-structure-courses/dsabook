@@ -112,8 +112,8 @@ The loop continues until the *left* and *right* pointers have passed each other.
     function partition(arr, left, right, pivot) -> Int:
         swap arr[pivot] with arr[left]
         while left ≤ right:
-            move left rightwards until arr[left] < arr[pivot]
-            move right leftwards until arr[right] > arr[pivot]
+            move left rightwards until arr[left] ≥ arr[pivot]
+            move right leftwards until arr[right] ≤ arr[pivot]
             swap arr[left] with arr[right]
         swap arr[pivot] with arr[right]
         return right
