@@ -16,7 +16,7 @@ two children.
 @Fig:bintree_with_pointers is an illustration of how the tree from @fig:example_bintree looks like, where the child pointers are shown explicitly.
 
 ::: {.jsav-figure #fig:bintree_with_pointers}
-```
+``` {latex-zoom=0.8}
 var AV = NewAV();
 AddCSS(`.jsavcanvas {width: 600px}`)
 AV.ds.array([" ", "A", " "], {left: 180});
@@ -130,7 +130,7 @@ leaf nodes. Thus, there are many reasons why it can save space to have
 separate implementations for internal and leaf nodes.
 
 ::: {.jsav-figure #fig:expression_tree}
-``` {latex-width=0.5}
+```
 var AV = NewAV();
 AddCSS(`.internalnode {
   border-radius: 50px;

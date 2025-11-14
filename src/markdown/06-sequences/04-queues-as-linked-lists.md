@@ -6,26 +6,16 @@ only thing is that we have to add a pointer to the rear node in the
 queue, to be able to add new elements efficiently.
 
 ::: latex
-\begin{center}
-\begin{tikzpicture}[
-    every node/.style={
-        rectangle split,
-        rectangle split parts=2,
-        rectangle split horizontal,
-        draw
-    },
-    node distance=1em,
-    start chain,
-    every join/.style={->, shorten <=-4.5pt}
-]
-  \node[on chain, join] { 42 };
-  \node[on chain, join] {  5 };
-  \node[on chain, join] { 10 };
-  \node[on chain, join, rectangle split part fill={white,black!50}] { 25 };
-  \path [<-, draw, shorten >=10pt] (chain-1.one north) |- node [at end] {front} ++(-1,.5);
-  \path [<-, draw, shorten >=10pt] (chain-4.one north) |- node [at end] {rear} ++(-1,.5);
-\end{tikzpicture}
-\end{center}
+```jsav-figure
+var AV = NewAV();
+var l = AV.ds.list({nodegap: 30, top: 40, left: 250});
+l.addFirst(25).addFirst(10).addFirst(5).addFirst(40);
+l.layout();
+AV.pointer("front", l.get(0), {left:-15});
+AV.pointer("rear", l.get(3), {anchor:"right top", myAnchor:"left bottom", left:-15});
+AV.displayInit();
+AV.recorded();
+```
 :::
 
 ::: dsvis

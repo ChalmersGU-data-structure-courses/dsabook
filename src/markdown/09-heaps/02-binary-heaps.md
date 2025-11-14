@@ -26,7 +26,24 @@ This systematic numbering ensures that each node's position in the array directl
 @Fig:example_complete_bintree shows an example of a complete binary tree with 12 nodes, where the nodes are numbered according to this scheme.
 
 ::: {.jsav-figure #fig:example_complete_bintree}
-``` {src="Binary/CompleteBinTree.js"}
+```
+let av = NewAV();
+let bt = av.ds.binarytree({nodegap: 25});
+let rt = bt.root("0");
+rt.left("1");
+rt.right("2");
+rt.left().left("3");
+rt.left().right("4");
+rt.right().left("5");
+rt.right().right("6");
+rt.left().left().left("7");
+rt.left().left().right("8");
+rt.left().right().left("9");
+rt.left().right().right("10");
+rt.right().left().left("11");
+bt.layout();
+av.displayInit();
+av.recorded();
 ```
 Complete binary tree node numbering
 :::
@@ -36,24 +53,46 @@ For example, the binary heap in @fig:HeapTreeExample is represented in an array 
 
 ::: {.jsav-figure #fig:HeapTreeExample}
 ```
-var av = NewAV();
-var btTop = -5;
-var btLeft = 300;
-var bt = av.ds.binarytree({nodegap: 25, left: btLeft, top: btTop});
-bt.root("A");
-var rt = bt.root();
-rt.left("L");
-rt.left().left("O");
-rt.left().right("R");
-rt.right("G");
-rt.right().left("I");
+let av = NewAV();
+let bt = av.ds.binarytree({nodegap: 25});
+let rt = bt.root("8");
+rt.left("17");
+rt.right("12");
+rt.left().left("33");
+rt.left().right("28").highlight();
+rt.right().left("43");
+rt.right().right("15");
+rt.left().left().left("34");
+rt.left().left().right("87");
+rt.left().right().left("75");
+rt.left().right().right("47");
+rt.right().left().left("47");
 bt.layout();
 av.displayInit();
 av.recorded();
 ```
-An example binary heap
+An example binary *min*-heap, where a smaller value indicates a higher priority.
+The node containing the value "28" is highlighted, its parent has the value "17" and the children are "75" and "47".
 :::
 
+::: {.jsav-figure #fig:HeapArrayExample}
+```
+var av = NewAV();
+AddCSS(`.jsavpointerarea {border: none; background-color: transparent}`);
+var theArray = ["8", "17", "12", "33", "28", "43", "15", "34", "87", "75", "47", "47"];
+var arr = av.ds.array(theArray, {indexed: true, left: 240, top: 40});
+arr.highlight(4);
+av.pointer("", arr, {left: -1, targetIndex: 4, anchor:"top", myAnchor:"bottom"});
+av.pointer("parent", arr, {left: -15, targetIndex: 1, anchor:"right top", myAnchor:"left bottom"});
+av.pointer("left child", arr, {left: -35, targetIndex: 9});
+av.pointer("right child", arr, {left: -20, targetIndex: 10, anchor:"right top", myAnchor:"left bottom"});
+console.log(arr);
+av.displayInit();
+av.recorded();
+```
+Array representation of the example heap in @fig:HeapTreeExample.
+The highlighted node "28" is highlighted here too, and the parent, and left and right children are indicated.
+:::
 
 <!-- TODO: convert this into a JSAV figure
 ::: latex
@@ -74,7 +113,7 @@ An example binary heap
 \end{center}
 ::: -->
 
-![Array representation of the example heap](images/ArrayHeap.png){width=40% #fig:HeapArrayExample}
+<!-- ![Array representation of the example heap](images/ArrayHeap.png){width=40% #fig:HeapArrayExample} -->
 
 You can use simple formulas to compute the array index of a node's relatives in a complete binary tree with $n$ nodes, given a node at index $i$:
 

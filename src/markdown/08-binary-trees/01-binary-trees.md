@@ -44,7 +44,7 @@ empty children. An [internal node]{.term} is any
 node that has at least one non-empty child.
 
 ::: {.jsav-figure #fig:example_bintree}
-``` {latex-width=0.3}
+```
 var AV = NewAV();
 var btTop = -5;
 var btLeft = 305;
@@ -108,7 +108,7 @@ AV.label("(b)", {left: btRight + 35, top: btTop + 105});
 
 // Setup second row of trees
 // btTop = 155;
-btLeft += 400 - 20; btRight += 400 + 20;
+btLeft += 350 - 20; btRight += 350 + 20;
 var bt3 = AV.ds.binarytree({nodegap: 30, left: btLeft, top: btTop});
 bt3.root("A");
 bt3.root().left("B");
@@ -153,7 +153,7 @@ The [binary heap]{.term} (@sec:binary-heaps) is an example of a complete binary 
 The [Huffman coding tree]{.term} (@sec:case-study-huffman-coding) is an example of a full binary tree.
 
 ::: {.jsav-figure #fig:full_complete_bintrees}
-``` {latex-width=0.6}
+```
 var AV = NewAV();
 AddCSS(`.jsavnode.jsavtreenode {
   min-width: 10px;
