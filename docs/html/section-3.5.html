@@ -134,7 +134,7 @@ class="sourceCode pseudo"><code class="sourceCode pseudo"><span id="cb1-1"><a hr
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="dv">0</span> .. n<span class="op">-</span><span class="dv">1</span>:                  <span class="co">// Select i&#39;th smallest element</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        minIndex <span class="op">=</span> i                    <span class="co">// Current smallest index</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> i<span class="op">+</span><span class="dv">1</span> .. n<span class="op">-</span><span class="dv">1</span>:            <span class="co">// Find the smallest value</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> arr[j] <span class="op">&gt;</span> arr[minIndex]:  <span class="co">// Found something smaller</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> arr[j] <span class="op">&lt;</span> arr[minIndex]:  <span class="co">// Found something smaller</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                minIndex <span class="op">=</span> j            <span class="co">// Remember smaller index</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        swap(arr, i, minIndex)          <span class="co">// Put it into place</span></span></code></pre></div>
 <p>Any algorithm can be written in slightly different ways. For example,

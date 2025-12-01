@@ -30,7 +30,7 @@ Here is an implementation for Selection sort.
         for i in 0 .. n-1:                  // Select i'th smallest element
             minIndex = i                    // Current smallest index
             for j in i+1 .. n-1:            // Find the smallest value
-                if arr[j] > arr[minIndex]:  // Found something smaller
+                if arr[j] < arr[minIndex]:  // Found something smaller
                     minIndex = j            // Remember smaller index
             swap(arr, i, minIndex)          // Put it into place
 
