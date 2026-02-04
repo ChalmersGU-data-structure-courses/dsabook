@@ -60,7 +60,7 @@ Note that if we sort according to a *key*, it doesn't have to be explicitly stor
 E.g., if we want to sort a list of words case-insensitively, we can use a lower-case transformation when doing the comparisons.
 This is usually done by a [comparator]{.term} (in Java), or by a [key function](https://docs.python.org/3/howto/sorting.html#key-functions) (in Python).
 
-The following two chapters cover several standard algorithms appropriate for sorting a collection of records.
+The following chapters cover several standard algorithms appropriate for sorting a collection of records.
 In these chapters we concentrate on *natural sorting*, but all the algorithms work just as well for *key-based sorting* -- and we trust that you are a mature enough programmer to be able to infer how to do this.
-The first chapter discusses three simple, but relatively slow, algorithms that require [quadratic](#quadratic-growth-rate){.term} time in the size of the array.
-The following chapter then presents two algorithms with considerably better performance, with [linearithmic](#linearithmic-growth-rate){.term} worst-case or average-case running time.
+This chapter discusses three simple, but relatively slow, algorithms that require [quadratic](#quadratic-growth-rate){.term} time in the size of the array.
+[Chapter @sec:sorting-divide-and-conquer] then presents two algorithms with considerably better performance, with [linearithmic](#linearithmic-growth-rate){.term} worst-case or average-case running time.

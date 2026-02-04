@@ -128,7 +128,7 @@ The loop performs $p$ once for every element in $A$, meaning that $p$ will be ex
 Therefore the complexity of a loop is:
 
 $$
-\rangle\mbox{for}\ x \in A: p\langle \in |A|\cdot O(f) = n\cdot O(f) = O(n\cdot f)
+\langle\mbox{for}\ x \in A: p\rangle \in |A|\cdot O(f) = n\cdot O(f) = O(n\cdot f)
 $$
 
 Note that $p$ can be a complex operation, for example a loop itself.
@@ -166,6 +166,24 @@ $O(n)$. By rule (3), the cost of the entire code fragment is also
 $O(n)$.
 :::
 
+::: example
+#### Example: Simple sorting algorithms
+
+The basic sorting algorithms from [Chapter @sec:sorting-simple], Bubble sort, Selection sort and Insertion sort, all have the same structure. They consist of a nested `for` loop, where the outer loop is iterated $n$ times:
+
+        for i in 0 .. n-1:   // Outer loop, repeated n times
+            for j in ...:    // Inner loop, repeated up to n times
+                do some constant operations
+
+The outer `for` loop is repeated $O(n)$ times.
+The inner loop is slightly different for the different algorithms, but in the worst case it will repeat $O(n)$ times too.
+The body of the inner loop consists of constant-time operations, such as an `if`-clause or swapping of two elements.
+Exactly what is not of interest for a complexity analysis -- the only interesting fact is that the body is constant time, $O(1)$
+
+By the simplifying rule (4) we can multiply all these values together, so the total worst-case time complexity is
+$O(n) \cdot O(n) \cdot O(1) = O(n^2)$.
+:::
+
 ::: latex
 \booklink{More examples online}{2.7}{sec:alg-analysis-examples}
 
@@ -195,7 +213,7 @@ constant time; call it $c_1$.
 The second `for` loop is just like the one in example with one `for` loop and takes $c_2 n \in O(n)$ time.
 
 The first `for` loop is a double loop and requires a special technique.
-We work from the inside of the loop outward. The expression `sum++`
+We work from the inside of the loop outward. The expression `sum=sum+1`
 requires constant time; call it $c_3$. Because the inner `for` loop is
 executed $j$ times, by simplifying rule (4) it has cost $c_3j$. The
 outer `for` loop is executed $n$ times, but each time the cost of the

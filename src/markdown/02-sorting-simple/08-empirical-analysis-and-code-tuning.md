@@ -9,12 +9,10 @@
 \booklink{Read the rest online}{3.8}{sec:empirical-analysis-and-code-tuning}
 ::::::
 
-Since sorting is such an important application, it is natural for
-programmers to want to optimise their sorting code to run faster. Of
-course all quadratic sorts (Insertion sort, Bubble sort and Selection
-sort) are relatively slow. Each has (as the name "quadratic" suggests)
-$O(n^2)$ worst case running time. The best way to speed them up is
-to find a better sorting algorithm. Nonetheless, there have been many
+Since sorting is such an important application, it is natural for programmers to want to optimise their sorting code to run faster.
+The sorts presented in this chapter (Insertion sort, Bubble sort and Selection sort) are all relatively slow, because they have quadratic runtime behaviour in the worst case.
+The best way to speed them up is to find a better sorting algorithm.
+Nonetheless, there have been many
 suggestions given over the years about how to speed up one or another of
 these particular algorithms. There are useful lessons to be learned
 about code tuning by seeing which of these ideas actually turn out to
@@ -32,7 +30,7 @@ In addition, we implemented one proposed optimisation for each of them.
 
 Each algorithm is run on random integer arrays of sizes 10,000 to 80,000, and the times reported are in seconds.
 This will give an indication of the *average* running time for the algorithms
-(provided that the elements are distributed uniformly -- recall the problems with average-case analysis, discussed in @sec:the-problem-with-average-case).
+(provided that the elements are distributed uniformly -- read more about the problems with average-case analysis, discussed in @sec:the-problem-with-average-case).
 
 Sort                   Python (10k)     Python (20k)     Java (20k)     Java (40k)     Java (80k)
 -------------------- ---------------- ---------------- -------------- -------------- ---------------
@@ -125,9 +123,9 @@ number of swaps.
 
 However, as is clear from the experiments, this doesn't have any effect at all.
 Actually, we shouldn't have expected this to make any big
-difference since we are only talking about $O(n)$ swaps in any case.
-Selection sort makes $O(n^2)$ comparisons, which quickly outnumbers the number of swaps,
-so removing one single swap is not worth it.
+difference since we are only talking about around $n$ swaps in any case.
+In contrast, the number of comparisons grows quadratically, which quickly outnumbers the number of swaps.
+So removing one single swap is not worth it.
 
 ### Optimising Insertion sort
 

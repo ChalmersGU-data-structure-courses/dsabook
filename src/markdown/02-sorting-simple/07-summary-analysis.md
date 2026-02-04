@@ -31,7 +31,7 @@ Adaptive?         no            no            yes
 
 Here is a summary table for the cost of Bubble sort, Selection sort, and Insertion sort,
 in terms of their required number of comparisons and swaps in the best and worst cases.
-The running time for each of these sorts is $O(n^2)$ in the worst case.
+The $O$-notation will be explained in later @sec:asymptotic-analysis, but for now it suffices that $O(n^2)$ means a quadratic growth rate while $O(n)$ means a linear growth rate.
 
             &nbsp;    Bubble      Selection      Insertion
 ------------------ ------------ -------------  -------------
@@ -42,16 +42,16 @@ The running time for each of these sorts is $O(n^2)$ in the worst case.
          Best case      $0$        $O(n)$           $0$
         Worst case   $O(n^2)$      $O(n)$        $O(n^2)$
 
+The important takeaway from this table is that each of these sorts has a quadratic runtime behaviour in the worst case.
+
 
 ### Inversions and the reason for the quadratic behaviour
 
 ::: TODO
-- Should this move to chapter 5 (analysis pt 2)?
+- Should this move to chapter 5 (analysis pt 2, section 5.3 Analysing problems)?
 ::::
 
-The remaining sorting algorithms presented in the next chapter are
-significantly better than these three under typical conditions. But
-before continuing on,
+The remaining sorting algorithms presented in [Chapter @sec:sorting-divide-and-conquer] are significantly better than these three under typical conditions.
 
 These three sorting algorithms are all quadratic, but can we say something about *why* they are so slow?
 The crucial bottleneck is that only *adjacent* records are compared, and swapped (for Insertion and Bubble sort).
@@ -64,12 +64,12 @@ For example, in the array [B,C,X,D,E] there are inversions between indices 2 and
 
 The number of inversions in an array is one measure of how sorted the array is (but not the only such measure).
 The most unsorted array according to this definition is reversely sorted, because then all pairs of indices are inversions.
-So, the maximum number of inversions is the number of pairs, which is $n(n-1)/2$.
+So, the maximum number of inversions is the number of pairs, which is $n(n-1)/2$, or quadratic.
 
 Now, assume that we have an array, and we swap two adjacent elements (that are out of order, i.e., an inversion).
 This will reduce the number of inversions with at most 1, because all other inversions in the array will still be inversions.
 Therefore, any algorithm which can only swap *adjacent* elements has to perform at least as many swaps as there are inversions.
-And since there are $n(n-1)/2 = O(n^2)$ inversions in the worst case, any such algorithm will at least be quadratic, $O(n^2)$.
+And since there are a quadratic number of inversions in the worst case, any such algorithm will at least be quadratic.
 This includes Insertion sort and Bubble sort.
 
 ::: TODO
@@ -83,13 +83,13 @@ Assume that we swap two non-adjacent elements, that have $d$ elements in between
 If we are extremely lucky this single swap can reduce the number of inversions by $2d$.
 However, our assumption was that we can only *compare adjacent* elements, and to be able to know which two indices to swap we have to compare all adjacent elements in between them.
 So we need to perform at least $d+1$ comparisons to decide which indices to swap.
-Therefore, we need $d+1=O(d)$ comparisons to reduce the number of inversions by $2d=O(d)$.
-And since there are $O(n^2)$ inversions in the worst case, we need at least $O(n^2)$ comparisons.
+Therefore, we need $d+1$ comparisons to reduce the number of inversions by $2d$.
+And since there are $n(n-1)/2$ inversions in the worst case, we need at least $n(n-1)/4$ comparisons, which is a quadratic growth rate.
 
-Therefore, all sorting algorithms that can only compare adjacent elements (or swap adjacent elements) are doomed to be quadratic in the worst case, $O(n^2)$.
+Therefore, all sorting algorithms that can only compare adjacent elements (or swap adjacent elements) are doomed to be quadratic in the worst case.
 This includes the algorithms we have presented so far, and numerous other.
 
-In the next chapter we will present sorting algorithms that are significantly better than these three under typical conditions.
+In [Chapter @sec:sorting-divide-and-conquer] we will present sorting algorithms that are significantly better than these three under typical conditions.
 How can they circumvent the quadratic behaviour?
 -- They compare and swap non-adjacent elements (and they do it in a smart way).
 

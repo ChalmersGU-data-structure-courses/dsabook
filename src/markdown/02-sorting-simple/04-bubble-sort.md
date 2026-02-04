@@ -87,19 +87,25 @@ Now try for yourself to see if you understand how Bubble sort works.
 
 ### Bubble sort analysis
 
+How long time does it take to Bubble sort an array of $n$ elements?
+As already mentioned in @sec:comparing-algorithms this depends on many things, but a standard measure is to count the number of comparisons.
+So how many comparisons are done by Bubble sort?
+
 We have a nested for loop, where the inner loop depends on the loop variable of the outer loop.
 
 - The outer loop is iterated $n-1$ times in total.
 - In iteration $i$, the number of comparisons made by the inner loop is always $n-i-1$.
 
-So the total number of iterations is
+So the total number of comparisons is
 
 $$
-(n-1) + (n-2) + \cdots + 1 = \sum_{i=1}^{n-1} i
+(n-1) + (n-2) + \cdots + 1  =  \sum_{i=1}^{n-1} i  =  \frac{1}{2} n (n-1)
 $$
 
-And this sum has the value $n(n-1)/2$, which means the runtime complexity is *quadratic*, $O(n^2)$.
-Note that this is regardless of how the initial array looks like, so Bubble sort has the same best- and worst-case complexity.
+As we will learn later (in @sec:growth-rates), we usually discard constant factors, and instead we are interested in the general "growth rate" of an algorithm.
+And since $n(n-1)$ is very close to $n^2$, we say that the number of comparisons grows *quadratically* with the size of the array.
+
+Note that this is regardless of how the initial array looks like -- Bubble sort always uses the same number of comparisons.
 
 ::: dsvis
 The following visualisation illustrates the running time analysis of Bubble sort.
@@ -108,10 +114,7 @@ The following visualisation illustrates the running time analysis of Bubble sort
 ```
 :::
 
-The number of swaps required depends on how often an element is less than the one immediately preceding it in the array.
-In the worst case this will happen in every single comparison, leading to $O(n^2)$ number of swaps.
-If we assume that the initial array is random, we can expect that about half of the comparisons will lead to a swap.
-So the average case number of swaps is also quadratic, $O(n^2)$.
-However, if the initial array is already sorted we don't have to perform any swaps at all, so in the best case the number of swaps is constant $O(1)$.
-(But recall that the best case is not something we should rely upon.)
-
+If we instead want to know how many swaps that are required, this depends on how often an element is less than the one immediately preceding it in the array.
+In the worst case this will happen in every single comparison, leading to the same number of swaps, *quadratic*.
+If we assume that the initial array is random, we can expect that about half of the comparisons will lead to a swap, which is also quadratic (recall that constant factors don't matter).
+However, if the initial array is already sorted we don't have to perform any swaps at all -- but we should never rely on the best case anyway, so this doesn't give much information.

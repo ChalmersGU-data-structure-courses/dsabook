@@ -88,11 +88,11 @@ We have a nested for loop, where the inner loop depends on the loop variable of 
 - In iteration $i$, the number of comparisons made by the inner loop is always $n-i-1$.
 
 As you might notice, this is exactly the same as the number of comparisons Bubble sort makes.
-So, Selection sort makes $n(n-1)/2$ comparisons, which is quadratic, $O(n^2)$.
+So, Selection sort makes $n(n-1)/2$ comparisons, which is quadratic.
 
 The advantage compared to Bubble sort is that Selection sort makes a lot fewer swaps.
 For each outer iteration it only makes one swap, so the total number of swaps will be $n-1$ (we get the last element in place "for free").
-So, Selection sort makes a linear number of swaps, $O(n)$.
+So, Selection sort makes a *linear* number of swaps, meaning that it grows linearly with the size of the array.
 
 ::: dsvis
 This visualisation analyses the number of comparisons and swaps required by Selection sort.

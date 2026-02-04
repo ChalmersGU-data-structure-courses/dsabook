@@ -43,6 +43,8 @@ Now we can proceed like as *Insertion sort*:
 
 Just as for Selection sort, this description suggests that it is not in-place, but there is a simple in-place version, which we will introduce later.
 
+
+<!--
 ### Summary
 
 So, what is the complexity of these three algorithms?
@@ -53,3 +55,4 @@ All of them has an outer loop that is repeated $n$ times, so how long time does 
 - *Insertion sort*: inserting one book in the correct position in a sorted list is linear $O(n)$.
 
 Therefore, the total complexity of each of the algorithms is quadratic, $O(n^2)$.
+-->

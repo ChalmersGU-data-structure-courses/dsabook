@@ -74,8 +74,8 @@ Just as for the previous sorting algorithms, we have a nested for loop, where th
     - in the absolute worst case, we always have to move the element to the front of the list, so the number of comparisons will be $i-1$
     - in the best case, the element is already in place, and then we only need one comparison
 
-Therefore, the worst case complexity of Insertion sort is $\sum_0^n i$, which is quadratic, $O(n^2)$.
-In the best case -- when the list is already sorted -- the complexity is instead linear, $O(n)$, because we only have to do one comparison per iteration.
+Therefore, in the worst case the number of comparisons is $\sum_0^n i$, which is quadratic just like Bubble sort and Selection sort.
+In the best case -- when the list is already sorted -- the number of comparisons is instead linear, because we only have to do one comparison per iteration.
 
 ::: dsvis
 Here is an explanation of the worst case cost of Insertion sort.
@@ -91,16 +91,8 @@ And here is an explanation of the cost of the best case.
 ```
 :::
 
-::: dsvis
-And here is the average case cost.
-
-``` {.jsav-animation src="Sorting/InsertionSortAverageCaseCON.js" links="Sorting/InsertionSort.css" name="Insertion Sort Average Case Slideshow"}
-```
-:::
-
-While the best case is significantly faster than the average and worst
-cases, the average and worst cases are usually more reliable indicators
-of the "typical" running time. However, there are situations where we
+While the best case is significantly faster than the worst case, the worst case is usually a more reliable indicator of the "typical" running time.
+However, there are situations where we
 can expect the input to be in sorted or nearly sorted order. One example
 is when an already sorted list is slightly disordered by a small number
 of additions to the list; restoring sorted order using Insertion sort
@@ -114,11 +106,11 @@ Counting comparisons or swaps yields similar results. Each time through
 the inner `for` loop yields both a comparison and a swap, except the
 last (i.e., the comparison that fails the inner `for` loop's test),
 which has no swap. Thus, the number of swaps for the entire sort
-operation is $n-1$ less than the number of comparisons. This is 0 in the
-best case, and $O(n^2)$ in the average and worst cases.
+operation is $n-1$ less than the number of comparisons.
+This is 0 in the best case, and quadratc in the worst case.
 
-Later we will see algorithms whose growth rate is much better than
-$O(n^2)$. Thus for larger arrays, Insertion sort will not be so
+Later we will see algorithms whose worst case growth rate is much better than quadratic.
+Thus for larger arrays, Insertion sort will not be so
 good a performer as other algorithms. So Insertion sort is not the best
 sorting algorithm to use in most situations. But there are special
 situations where it is ideal. We already know that Insertion sort works
