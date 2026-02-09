@@ -14,6 +14,37 @@
 - Prio 2: merge quizzes (files 01q, 01q2), perhaps move to another section?
 :::
 
+### Trees {-}
+
+A tree is similar to a linked list: it consists of nodes which point to other nodes. The difference is that a linked list node has *one* possible successor node, but a tree can link to *many* other nodes. These nodes are called the *children* of the parent node.
+
+A linked list start with one node, the *head*, and correspondingly a tree starts with one single node, the *root*. Normally we draw a tree upside-down, like this:
+
+![](images/GenericTree.png)
+
+### Binary trees {-}
+
+The most common type of trees are *binary* trees. The main reason for this is because they are the simplest to implement, and we very rarely need something else.
+
+A binary tree node always has exactly two children. But any of the children can be **null**, and sometimes we are sloppy and say that it has one child, or no children. When you see the tree on the left you must know that it actually looks like the tree on the right, where the black dots mean **null** nodes:
+
+![](images/BinTree-WithNullNodes.png)
+
+A node with no children (or more correctly, with only **null** children) is called a *leaf*, and a non-leaf node is called an *inner* node.
+
+The datatype (class definition) for binary trees look very similar to linked lists, the only difference is that tree nodes have *two* children instead of one.
+
+```
+class BinTree:          class TreeNode:
+    root: TreeNode          elem: Value
+    size: Int               left: TreeNode
+                            right: TreeNode
+```
+
+If we want to use these to implement a *map* (instead of a set), the nodes should contain both a *key* and a *value*, instead of a single element.
+
+------
+
 A [binary tree]{.term} is made up of a finite
 set of elements called [nodes]{.term}.
 This set either is empty or consists of a node called the

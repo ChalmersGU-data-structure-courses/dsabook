@@ -6,6 +6,29 @@
 - Prio 2: refer to previous chapter
 :::
 
+Let’s say we want to print the contents of a binary tree. There are many different ways we can do that, but there are three very common strategies:
+
+- *preorder*:  first print the value, then the left subtree, then the right
+- *inorder*:   first print the left subtree, then the value, finally the right subtree
+- *postorder*: first print the left subtree, then the right, and finally the value
+
+All of these are easily implemented using a recursive algorithm:
+
+```
+preorder(node):             inorder(node):              postorder(node):
+    print(node.elem)            inorder(node.left)          postorder(node.left)
+    preorder(node.left)         print(node.elem)            postorder(node.right)
+    preorder(node.right)        inorder(node.right)         print(node.elem)
+```
+
+The only difference is when we decide to “visit” the current node. For the example tree (on the previous page), they will print the following:
+
+- *preorder*:  A B D C E G F
+- *inorder*:   D B A G E C F
+- *postorder*: D B G E F C A
+
+----------------
+
 Often we wish to process a binary tree by "visiting" each of its
 nodes, each time performing a specific action such as printing the
 contents of the node. Any process for visiting all of the nodes in some
