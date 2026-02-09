@@ -16,6 +16,84 @@ meaning that we increase the size of the array when it becomes full.
 ### Invariants
  -->
 
+ If you are used to program in Python or Javascript, you might think that the built-in arrays are very basic and simple objects, but they are not. Other programming languages such as Java, C, etc, have arrays and there is a very big difference between arrays and python-style arrays: arrays always have a fixed size. When you create a new array in Java you always have to specify its length. This tells the computer to find some free space in the computer memory where the array can fit. An array is always “tight” – neighbouring elements will be neighbours in the computer memory too. This means that looking up a specific array index is really fast (constant-time in fact), since we can infer the memory position from the array index instantly.
+
+A Python-style array does not have a fixed length. You can add and remove elements without having to worry about memory allocation. They are in fact implemented as our first data structure, *dynamic arrays*. This data structure works like a normal array on steroids: they can change their size. All normal array operations are still efficient (constant-time), and adding and removing elements are efficient too. But note that it is only efficient to append to the end of the array (and remove from the end)! If you try to insert elements in the beginning it becomes awfully slow. Compare these two:
+
+```
+list = []                    list = []
+for k in range(100_000):     for k in range(100_000):
+    list.append(k)               list.insert(0, k)
+```
+
+### Dynamic array, first version
+
+So, how can we implement dynamic arrays using static arrays? The simplest possible is to do something like this:
+
+```
+class DynamicArray:
+    arr = new Static Array of size 0
+    size(): return arr.size     //
+    get(i): return arr[i]       //  call the methods of the underlying array
+    set(i, val): arr[i] = val   //
+    append(val):
+        if size == arr.size: resize()
+        arr[size] = val
+        size = size + 1
+    resize():
+        old = arr
+        arr = new Static Array of size (old.size + 1)
+        copy all elements from old to arr    ← this takes time!
+```
+
+(If you want to try this in Python you have to pretend that you have static arrays.)
+
+It should be quite obvious that this code is slooooow. Assume that we have managed to append 1 million values to our dynamic array, and want to append a new value. Now we have to create a new array and copy 1,000,000 elements from the old array to the new. Appending an element is linear in the size of the array, $O(n)$.
+
+Why can’t we just extend the old array? Well, sometimes we can, if we are lucky, if there is available free space right next to the existing array. But computers are messy, running many programs at once who all want their share of the memory. So often it’s not possible to extend the array, and then the only thing we can do is to create a new larger one and copy over the elements.
+
+### Second version
+
+Ok, so extending the internal static array by one element makes it slow. But what if we allocate a larger array that has some space to grow? Now we need an additional variable saying how many elements we have, because the internal array is most likely larger than that.
+
+```
+class DynamicArray:
+    arr = new Static Array of size 10
+    size = 0
+    append(val):
+        if size == arr.size: resize()
+        // the rest is like in version 1
+    resize():
+        old = arr
+        arr = new Static Array of size (old.size + 10)
+        copy all elements from old to arr
+```
+
+Now we only have to copy the array every 10th time we append. This should improve things, right? Yes, it improves things, but only with a factor 10. And remember that constant factors cannot change the asymptotic complexity – append is still linear, O(n), in the worst case.
+
+### Third version, now we’re talking
+
+Version 2 was almost right – we have to create a new array sometimes and copy all elements, and we don’t want to do it too often. The trick is to not increase the size by a constant, but instead *multiply*! So let’s double the size every time the internal array becomes full.
+
+```
+class DynamicArray:
+    (...)
+    resize():
+        old = arr
+        arr = new Static Array of size (old.size * 2)
+        copy all elements from old to arr
+```
+
+Let’s try it out… and behold, appending 1 million elements runs *a lot faster*! How can that be? Hmm, there is almost no difference with version 2: most of the time we don’t have to resize and then append is constant time. But now and then we have to resize and then it becomes linear time. So the worst-case scenario is $O(n)$, but why does it behave much faster? To analyse this we have to introduce *amortised complexity*.
+
+### Multiplying by any factor
+
+In version 3 we doubled the array size whenever we resized. But we don’t have to double the size, we can instead increase by 50% or only 10%. As long as we multiply with a constant instead of adding a constant, our dynamic array will behave really nice. In fact, in practice it is impractical to double the size, because this will increase the memory usage by quite a lot – on average 25% of the array will be unused.
+
+For example, the Java standard library has the class ArrayList which is a dynamic array – it grows by 50% each time (multiplies by 1½). And the built-in lists in Python grow by as little as 12% (multiplies by 1⅛). This means that they have to grow more often but on the other hand they don’t use as much memory.
+
+ -----------------------------------
+
 ### Resizing the internal array
 
 How can we modify our data type to allow for any number of elements?
