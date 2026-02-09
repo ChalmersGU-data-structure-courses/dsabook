@@ -5,6 +5,35 @@
 - Prio 1: add info about sparse / dense
 :::
 
+A graph consists of a set of vertices (or nodes), and edges. We usually denote the vertices as $V$ and the edges as $E$. The size of a graph is the number of vertices $n=|V|$, but we often write just $V$ (or $E$) instead of $|V|$ (or $|E|$).
+
+The *degree* of a vertex is the number of edges that is connected to it. This means that the sum of all degrees is $2|E|$, because every edge is counted twice. We can classify graphs according to their average degree:
+
+- In a *sparse* graph the number of edges are small, something like $E \in O(V)$, and the average degree is close to constant.
+- In a *dense* graph the number of edges are large, something like $E \in O(V^2)$, and the average degree grows with the size of the graph.
+
+In the following we will most of the time assume that the graphs are sparse, partly because this makes our reasoning easier (we can assume that $O(E) = O(V)$), but mainly because these are the most common graphs.
+
+In a *directed* graph each vertex has an *outdegree* and an *indegree*. The sum of all outdegrees is the same as the sum of all indegrees, which is $|E|$. Some notions (such as the minimum spanning tree) are only defined for undirected graphs.
+
+In a *weighted* graph all edges have a weight. Many algorithms only work on graphs with positive weights, for example Dijkstra’s algorithm. An *unweighted* graph is the same as a graph where all weights are 1.
+
+Here is an example of a weighted undirected graph:
+
+![](images/Graphs-Example.png)
+
+A *path* is a sequence of vertices $v_0, \ldots, v_n$ where there exists an edge between each vertex pair $v_{i–1}, v_i$.
+The *length* of a path is the number $n$ of edges, and the *cost* of a path is the sum of the weights of its edges.
+A *cycle* is a path (of at least length 3) that starts and ends in the same vertex.
+An *acyclic* graph is a graph that doesn’t have any cycles.
+A *directed acyclic graph* (DAG) is a common kind of graph for which there are many special algorithms.
+
+A *subgraph* is a subset of the vertices of a graph, plus all edges that connect them. A graph is *connected* if there is a path between any pair of vertices. A connected subgraph is called a *connected component*. If the graph is directed we instead talk about *strongly connected components*.
+
+In graph theory, a *tree* is an undirected connected acyclic graph. This is slightly different from the trees we talked about earlier, for example a (graph) tree is undirected. But we can turn a (graph) tree into a (tree) tree by deciding which vertex should be the root, and then direct all edges to go from the root to its children.
+
+---------------
+
 
 A [graph]{.term}
 $\mathbf{G} = (\mathbf{V}, \mathbf{E})$ consists of a set of

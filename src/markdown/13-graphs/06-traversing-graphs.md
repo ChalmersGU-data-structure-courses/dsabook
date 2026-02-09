@@ -8,6 +8,80 @@
     - remembering visited nodes
 :::
 
+One thing we often want to do is to *traverse* a graph, starting from a given vertex. An important constraint when traversing a graph is that we should only visit each vertex once. Therefore we have to keep track of which vertices we have visited so far.
+
+Here is the basic algorithm for any kind of graph traversal:
+
+- Initialise the agenda with the start vertex
+- While the agenda is not empty:
+    - Remove some vertex $v$ from the agenda
+    - If $v$ is not visited:
+        - Mark $v$ as visited
+        - Do something with $v$ (for example print it)
+        - Add the end vertices of $v$’s outgoing edges to the agenda
+
+Note that I left the agenda unspecified – what do I mean by adding and removing from it? Actually it can be any data structure that supports adding and removing. Such as a stack, or a queue, or a priority queue.
+
+- If the agenda is a stack, we get *depth-first search* (DFS)
+- If the agenda is a queue, we get *breadth-first search* (BFS)
+- And if it’s a priority queue? – we will discuss that in @sec:prims-algorithm
+
+Note that DFS can visit the vertices in quite different order depending on in which order the outgoing edges of a vertex are returned. That doesn’t matter – they are all depth-first search orders. (And the same holds for BFS of course.)
+
+How do we mark the visited vertices? In some graph implementations it is possible to actually mark vertices, but another very common way is to have a set where you add the vertices one at the time. This is what we will do in this book.
+
+### Recursive depth-first search
+
+When we call a function recursively, the current program state is pushed onto the call stack, so that it knows where to continue when the subroutine is finished. This can be utilised in traversal – instead of having an explicit stack for the agenda, we can make a recursive version of DFS:
+
+- To visit vertex $v$:
+    - If $v$ is not visited:
+        - Mark $v$ as visited
+        - Do something with $v$ (for example print it)
+        - Visit the end vertex of each of $v$’s outgoing edges
+
+This is a very common way of traversing a graph or a tree (remember the preorder, inorder and postorder traversals of binary trees). Note that it will not visit the vertices in exactly the same order as if we use iterative DFS version with an explicit stack.
+
+### Traversing a tree
+
+If the graph is a tree we don’t have to check if a vertex is visited, because there are no cycles – apart from that the code is the same. This is also how we traverse “normal” trees such as BSTs and the like – the “outgoing edges” are then the children of a node.
+
+### Use case: reachability
+
+DFS (or BFS) can be used to find all vertices that are *reachable* from a given vertex – just run DFS (or BFS), and return the set of visited vertices. But why is that useful?
+
+One example use case is *garbage collection* (GC). The mark-and-sweep algorithm was one of the first GC algorithms. It models the working memory as a graph, where the objects and functions are vertices, and the variables are edges that point to other objects. The mark-and-sweep algorithm is simple:
+
+- Start from the *root set* – all objects that are referred to by some variable in the call stack, or by a global variable.
+- **Mark:** perform DFS from each object in the root set, marking the visited.
+- **Sweep:** scan all objects in memory – if it is not marked, delete it.
+
+The main disadvantage with mark-and-sweep is that it cannot be run in parallel with the “real” program, so it has to be suspended when it’s time for garbage collection. Modern garbage collectors use various modifications and optimisations.
+
+### Use case: shortest path
+
+If the graph is unweighted, then BFS will visit the vertices in increasing distance from the start – BFS is a *shortest path* algorithm! (More about this in @sec:shortest-paths-problems.)
+
+### Example problem: finding a cycle in a graph
+
+There are two famous cycle-finding problems for undirected graphs that are deceivingly similar – but one of them is almost trivial to solve while the other is extremely difficult!
+
+- **Euler path**: find a path that uses every edge exactly once.
+
+  ![](images/Graphs-EulerPath.png)
+
+  There are simple algorithms that can find an Euler path in linear time, read more here: https://en.wikipedia.org/wiki/Eulerian_path
+
+- **Hamiltonian path**: find a path that visits every vertex exactly once.
+
+  ![](images/Graphs-HamiltonPath.png)
+
+  The problem of finding a Hamiltonian path is a special case of the *Travelling Salesman Problem*, which is one of the most famous *NP-complete problems*. So finding a Hamiltonian path is (most probably) exponential in the size of the graph. https://en.wikipedia.org/wiki/Hamiltonian_path_problem
+
+
+------------------
+
+
 Many graph applications need to visit the vertices of a graph in some
 specific order based on the graph's topology. This is known as a graph
 [traversal]{.term} and is similar in concept to

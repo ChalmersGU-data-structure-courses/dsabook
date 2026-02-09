@@ -5,6 +5,75 @@
 - Prio 2: reformulate as a generic graph search algorithm
 :::
 
+### Generic graph search
+
+Recall the basic algorithm for any kind of graph traversal:
+
+- Initialise the agenda with the start vertex
+- While the agenda is not empty:
+    - Remove some vertex $v$ from the agenda
+    - If $v$ is not visited:
+        - Mark $v$ as visited
+        - Do something with $v$ (for example print it)
+        - Add the end vertices of $v$’s outgoing edges to the agenda
+
+(We can do a minor optimisation here: In the final bullet point we only need to add *unvisited* vertices to the agenda. This will reduce the size of the agenda – but we cannot replace the first if-clause (“if v is not visited”), this is still needed.)
+
+In @sec:traversing-graphs we wrote that if the agenda is a stack we get depth-first search, and if it is a queue we get breadth-first. But what happens if we use a priority queue?
+
+This depends on what we use as the priority values. If we have a weighted graph, then it’s natural to use the weights. In this case we get another MST algorithm: Prim’s.
+
+### Prim’s algorithm
+
+Kruskal’s algorithm repeatedly adds edges to an *unconnected* subgraph, until it becomes fully connected (and without cycles). While the algorithm is running, the set of edges does not have to be a tree – instead it consists of a *forest*, or a set of trees.
+
+Prim’s algorithm on the other hand, starts from a single tree and grows this tree by adding edges to it. In every iteration it finds the “cheapest” edge that can be used to extend the tree. Finding this edge cannot be done by sorting all edges like we did in Kruskal’s algorithm – instead we need to have a collection of potential edges, ordered by their weight. This can be done with a priority queue! (But note, a priority queue of edges, not vertices.)
+
+In each iteration we select the current best candidate. This is the least-cost edge that at some point has been added to the priority queue. Now we can test if we can extend the MST with the edge. This can be done unless it creates a cycle – which it does if the endpoint is already in the MST. If it will create a cycle we discard the edge and try the next best. Otherwise we add it to the MST – and add new potential candidate edges to the priority queue.
+
+Which new potential candidates do we need to add? The only change we did to the MST was to add a new vertex, so we only have to look at the outgoing edges from that new vertex. (All other vertices in the MST have already been taken care of earlier.)
+
+So, here is Prim’s MST algorithm, formulated as generic graph search. We need two auxiliary data structures apart from the actual MST: the agenda (which is a priority queue of edges ordered by weight), and the visited vertices (which is a set of the vertices that are in the MST). We start the algorithm by giving it a *start* vertex:
+
+- Initialise the agenda, the visited vertices, and the MST
+- Add a *dummy edge* ending in the start vertex, to the agenda
+- While the agenda is not empty:
+    - Remove the cheapest edge *e* from the agenda
+    - If *e.end* is not visited:
+        - Add *e.end* to the visited vertices, and add *e* to the MST
+        - Stop when the MST is complete (when its size is $V–1$)
+        - Add the outgoing edges of *e.end* to the agenda,  but only the ones whose endpoints are unvisited
+
+Note that we initialise the agenda with a “dummy edge”. This is an edge that doesn’t exist in the graph, and its only purpose is to act as a “seed” that starts the process. This dummy edge can for example be a 0-weight edge that goes from *start* to *start* – it actually doesn’t matter what its weight and start vertex is, we only need it to add the outgoing edges of the *start* vertex to the agenda.
+
+Also note that in the final bullet point I have included the small optimisation I mentioned earlier (“but only the ones whose endpoints are unvisited”).
+
+Recall our example graph, with the following two MSTs:
+
+![](images/Graphs-TwoMSTs.png)
+
+Let’s run Prim’s algorithm on it, starting from A:
+
+- First add a dummy edge to the agenda, which is directly removed.
+- Mark $A$ as visited and add its outgoing edges $AB_4$ and $AC_7$ to the agenda.
+- Remove $AB_4$ from the agenda and add it to the MST, mark $B$ as visited and add its outgoing edges $BC_2$ and $BD_9$ to the agenda. (We don’t add $BA_4$ since its endpoint $A$ is already visited.)
+- Remove $BC_2$ from the agenda and add to the MST, mark $C$ as visited and add its (unvisited) outgoing edges $CE_7$ and $CD_8$ to the agenda.
+- Remove $AC_7$ from the agenda, but skip it since its endpoint is already visited.
+- Remove $CE_7$ from the agenda and add to the MST, mark $E$ as visited and add its outgoing edges $EF_8$ and $ED_9$ to the agenda.
+- Remove $CD_8$ from the agenda and add to the MST, mark $D$ as visited and add its remaining unvisited outgoing edge $DF_4$ to the agenda.
+- Remove $DF_4$ from the agenda and add to the MST, and mark $F$ as visited.
+- Now we can stop because we have visited all vertices. Left on the agenda are the edges $EF_8$, $BD_9$ and $ED_9$ – if we had continued the while loop we would have noticed that all of their endpoints are already visited.
+
+This gives the left MST – if we remove $EF_8$ before $CD_8$ we would get the right MST.
+
+What is the time complexity of Prim’s algorithm?
+
+In the worst case all edges in the graph are added to the agenda, so the agenda will have size $O(E)$, and since adding an element to a priority queue is logarithmic, we get the total time build the agenda to be $O(E \log(E))$. (We can also reason that we will in the worst case iterate through all edges, so the while loop runs O(E) times. And since removing from a priority queue is logarithmic, each loop body is $O(log(E))$ and the total time is therefore O(E log(E)).)
+
+Furthermore, we know that $E \in O(V^2)$, and therefore $O(\log(E)) = O(\log(V^2))$ = $O(2 \log(V)) = O(\log(V))$. So the total complexity of Prim’s algorithm can be written as $O(E \log(V))$.
+
+--------------------
+
 Now we introduce another algorithm for finding the MST, commonly referred to as [Prim's algorithm]{.term}.
 Prim's algorithm is very simple. Start with any vertex $n$ in the graph,
 setting the MST to be $n$ initially. Pick the least-cost edge connected

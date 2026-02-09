@@ -5,6 +5,45 @@
 - Prio 2: update text, (semi)formal definitions
 :::
 
+There are two main ways of implementing graphs:
+
+- *Adjacency list*: a map from vertices to its outgoing edges – this can be a BST, a hash table, or some other map data structure. If the vertices are exactly the numbers $0, 1, \ldots, n–1$, the map can be a simple array (where the value of a vertex is the index in the array).
+
+- *Adjacency matrix*: a 2-dimensional matrix where the rows and columns denote vertices (assuming that the vertices are the numbers $0, 1, \ldots, n–1$). A specific cell then denotes the edge from its column vertex to its row vertex – we can for example store the *weight* of the edge in the cell.
+
+Here is how the two representations look for the example graph:
+
+![](images/Graphs-Representations.png)
+
+Note that every edge occurs twice – because the graph is undirected.
+
+The adjacency list is the most common for implementing generic sparse graphs, and is very useful for many algorithms. The adjacency matrix is more useful for very dense graphs – if the graph is sparse, most of the cells in the matrix will be empty so it will use up too much memory. In this course we will assume adjacency lists unless otherwise specified.
+
+There is no commonly agreed-upon ADT for graphs, but here we will only assume the following operations:
+
+```
+class Graph:
+	vertices() 	// return a list of all vertices
+	edges()	// return a list of all edges
+	outgoingEdges(v) 	// return a list of edges leaving a vertex
+```
+
+Note that this interface is tailor-made for the adjacency list representation, because the method *outgoingEdges* is just a wrapper around the implementation.
+
+We also assume a class of edges like this:
+
+```
+class Edge:
+	start, end 	// the start and end vertex
+	weight 	// the weight
+```
+
+Note that for every outgoing edge e from a vertex v, we see that v = e.start.
+Also note that in this implementation, all edges are inherently directed – this means that we represent an undirected graph as a directed graph where each undirected edge becomes two directed.
+
+----------------
+
+
 There are two commonly used methods for representing graphs. The
 [adjacency matrix]{.term} for a graph is a
 $|\mathbf{V}| \times |\mathbf{V}|$ array. We typically label the
