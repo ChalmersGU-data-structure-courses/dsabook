@@ -9,6 +9,99 @@
 - Prio 3: both recursive and iterative versions
 :::
 
+Binary search trees (BST) are binary trees that satisfy the following invariant:
+
+- all elements in the left subtree are *smaller* than the node element, which in turn is *smaller* than all elements in the right subtree
+
+So the example tree from before (@sec:binary-trees) is not a BST, but the following is:
+
+![](images/BST-Example.png)
+
+To search for an element in a BST, we start at the root and compare. If what we search for is smaller than the node value, we can search in the left subtree, and if it is larger we can search in the right subtree.
+
+How do we add an element to a BST? First of all we have to search for it – if it is already in the tree we do nothing. But if the element is not in the tree, we know where it should be – it should be a child of the last node we compared with. If the element is smaller, we add a new node as a left child, and if the element is larger we add the new node as a right child.
+
+### Deleting from a BST
+
+Searching and adding are straightforward to implement. Deletion is a little trickier, but not too hard. The first we have to do is to find the node with the element we want to remove, using the standard search algorithm. Now there are three possible cases:
+
+- It is a leaf node (A, D and G in the example tree). This is easy – we can just remove the parent’s pointer to the node.
+- It has one single child (B and E in the example tree). This is also easy – simply point the parent’s pointer to the child node directly.
+- It has two children (C and F in the example tree). This is the tricky case.
+
+To delete an inner node in a BST we don’t actually delete the node, because then we would have to restructure the tree quite a lot. Instead we replace its value with another value. The question is which value can we replace with?
+
+We know that all elements in the left subtree is smaller than the value we want to delete. This subtree has a largest element, and if we delete this largest element from the left subtree we can put it in the parent node instead. So we replace the element we want to delete by the largest of the elements in the left subtree.
+
+(*Alternatively*, we can replace it with the smallest of the elements in the right subtree. It doesn’t matter, we can just pick a strategy.)
+
+Ok, did we solve anything by doing this? We want to delete an element, and to be able to do that we have to delete an element in a subtree… yes, this works because we know that the largest element in a tree never has two children! (And we know the same for the smallest element.) So, if we delete the largest element in the subtree we know that we will have one of the two easy cases, so no infinite recursion or anything.
+
+Now we’re almost done, but how do we find the largest element in the left subtree? Easy, we just start in the left subtree and go as far to the right as possible. Then we will end up in the largest element.
+
+For example, let’s delete the root node C from our example tree.
+
+- The largest element in the left subtree is B.
+- We delete B from the left subtree.
+- And finally we can replace the value C by B in the root node.
+
+Alternatively, if we decide to replace with the smallest element in the right subtree:
+
+- The smallest element in the right subtree is D.
+- We delete D from the left subtree.
+- And finally we can replace the value C by D in the root node.
+
+In the end we will get one of the following two BSTs:
+
+![](images/BST-ExampleDeleteRoot.png)
+
+Notice that both of these trees are different representations of exactly the same set!
+
+### The effect of order of insertion
+
+There are infinitely many BSTs that represent the same set. (No, I’m just kidding, but the are exponentially many.) For example, all of these implement the same set:
+
+![](images/BST-ExampleVariants.png)
+
+### Complexity analysis
+
+The complexity of the operations all depend on how efficient the search algorithm is. And this depends a lot on the structure of the tree.
+
+When we search for an element we go down one level in the tree every time we compare with a node. So the worst case is when we search for a value that is in the lowest possible level. Which is the same as the *height* of the tree. And the height depends on the tree structure. If the tree is *balanced*, meaning that all leaves are on the same level, then the height is logarithmic in the number of nodes, and then searching is $O(\log(n))$. But if the tree us *unbalanced*, for example as the extremely right-leaning tree above, then the height is the same as the number of nodes, and search becomes linear $O(n)$.
+
+If we build a BST from a sorted list (or reversely sorted), then we will get an extremely unbalanced tree. And if the list is completely random, it is possible to prove that thefinal BST will be quite balanced, and the expected complexity will be logarithmic.
+
+(This is similar to Quicksort with take-first pivot: if we sort an already sorted array it will be quadratic, but if the list is random the complexity will be linearithmic.)
+
+In any case, almost noone uses plain BSTs because there is no guarantee of their worst-case complexity. But there are plenty of useful data structures that are based on BSTs and which have good worst-case guarantees. They accomplish this by automatically rebalancing themselves when necessary. One example of such a self-balancing search tree are the AVL trees (which I will talk about tomorrow).
+
+### Test them yourself
+
+There are nice interactive visualisations of BSTs (and other search trees) here:
+https://chalmersgu-data-structure-courses.github.io/dsvis/collections.html
+
+### Implementing maps instead of sets
+
+The only real difference if we want to implement a map instead of a set, is the definition of the tree nodes. Every node now has to store both the key and the value:
+
+```
+class TreeNode:
+    key: Key
+    value: Value
+    left: TreeNode
+    right: TreeNode
+```
+
+When searching we only compare with the key, and the same when deleting.
+
+When we set/update a key-value pair we have two possibilities:
+
+- The key is already present: then we just change the value in the node.
+- The key is not there: then we add a new tree node.
+
+
+----------------
+
 A [binary search tree]{.term}
 ([BST]{.term}) is a
 [binary tree]{.term} that conforms to the

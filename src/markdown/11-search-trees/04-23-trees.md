@@ -1,5 +1,151 @@
 ## 2-3 trees and B-trees
 
+AVL trees do not ensure that a tree is perfectly balanced, the height invariant cannot give a better guarantee than that the height is within a constant times the optimal height. But if we allow for more than two children per node it is possible to ensure that all trees are of optimal height. This is done by the 2-3 trees.
+
+2-3 trees have two kinds of nodes: 2-nodes (normal binary nodes), and 3-nodes. A 3-node has two values (we call them **a** and **b**) and three children (called **p**, **q** and **r**). The BST invariant is generalised to the following:
+
+- everything in the left subtree (**p**) < **a** < everything in the middle subtree (**q**)
+- everything in the middle subtree (**q**) < **b** < everything in the right subtree (**r**)
+
+In addition 2-3 trees have the following height invariant:
+
+- all children of a node have the same height
+
+Since 2-3 trees have two different kinds of nodes, all operations have to account for both of them, and all possible combinations that can occur. Conceptually the operations are not difficult to understand, but they can be quite complex because of all cases we have to take care of.
+
+### Searching in a 2-3 tree
+
+To search for a *key* we do the same as for BSTs, start at the root and follow a path down through the tree. When we encounter a 3-node we do like this:
+
+- if *key* < **a**: search in the left subtree (**p**)
+- if **a** < *key* < **b**: search in the middle subtree (**q**)
+- if **b** < *key*: search in the right subtree (**r**)
+
+So, the same strategy as for BSTs, but more cases to handle.
+
+### Inserting into a 2-3 tree
+
+Conceptually the idea is the same as for AVL trees: first we search for the leaf where the value should be inserted, then we insert the value, and finally we rebalance if necessary. However, both the insertion and the rebalancing processes are quite different from AVL trees.
+
+When we search for the value, we reach a leaf where it should be added. Then we convert the node into a higher-ranked node and insert the value at its correct place. So, a 2-node becomes a 3-node, and a 3-node becomes a 4-node, and all is fine…
+
+But wait, we don’t have 4-nodes!
+
+When a node becomes too full, we split it. So the 4-node will become two 2-nodes. But wait, two 2-nodes only have room for two values – where should the third value go? We put the low and high values in one 2-node each, and then we *promote* the middle value to the parent.
+
+Here is how it can look like when we insert c into a leaf node consisting of a and b. The resulting leaf node becomes too big, so we split and promote the middle value:
+
+![](images/TwoThree-InsertSplit.png)
+
+Promoting a value means that we insert it into the parent node. If the parent is a 2-node, then we just change it to a 3-node and we’re done. But if the parent is a 3-node, we are back in the same situation as before: we get a 4-node that we need to split, and then we promote *its* middle value to its parent. Like this:
+
+![](images/TwoThree-InsertSplitMiddle.png)
+
+Note that splitting a node and promoting the middle value upwards does not change the height of the tree, as long as we end up in a 2-node – because then we can stop our promotion path. This means that the height invariant is not broken.
+
+But what happens if we never reach a 2-node? If we promote all the way up to the root, and the root is also a 3-node, we simply split the root and create a new root with the promoted value.
+
+To see how all this works, go to the visualisation here:
+https://chalmersgu-data-structure-courses.github.io/dsvis/collections.html?algorithm=BTree
+
+First insert “A L G O R I T H M” into the empty tree, and you will get the following tree:
+
+![](images/TwoThree-Algorithm.png)
+
+- Now, insert P. You will see how the rightmost leaf is split, and the middle value (R) is promoted to the parent to create the 3-node [O,R].
+- Then, insert K. The leaf [L,M] will be split and L is promoted to the parent [O,R]. This will also split, and the middle element O is promoted to the root to form the 3-node [I,O].
+- Finally, insert “B C D E” into the tree. The first three insertions will create 3-nodes, so that when inserting E we have to split all the nodes all the way up to the root. Now the root has to be split, and we get a new level to the tree.
+
+Implementing insertion is not very difficult, but there are some cases to handle (for example, if the new element is smaller, or in between, or larger, than the existing elements). On the other hand, you don’t have to implement any rotations, but there is instead just the splitting and promoting.
+
+### Deleting from a 2-3 tree (optional)
+
+The basic idea is a mirror of insertion: first delete the element from the node, then we rebalance the tree to keep the invariants. There are three main cases:
+
+- The simplest case is when we remove from a 3-node that is a leaf – then we can simply remove it, and convert the 3-node to a 2-node.
+- The second case is if the leaf node is a 2-node, which contains just one value – then the resulting node will be a “1-node”, which is not valid. More about this below.
+- The third case is when we want to remove a value from an internal node. This is similar to when we remove a value from a BST node with two children – we don’t delete the actual node, but instead replace its value with a value from another node which is easier to delete. This turns this case into case 1 or 2.
+
+To solve case 2 we try to “steal” a value from a sibling. This works if any sibling is a 3-node: then we can “rotate” over the parent that lies between the nodes, like this:
+
+![](images/TwoThree-DeleteSteal.png)
+
+If neither sibling is a 3-node, we cannot steal anything. In this situation we can instead *merge* our empty node with a sibling and the parent that lies between. This is the opposite of splitting. When merging we create a new 3-node with the sibling value and the parent value, which is *demoted*. Here is an example:
+
+![](images/TwoThree-DeleteMerge.png)
+
+Note that if the parent had been a 2-node, then it would become a 1-node after merging, and so the stealing/merging continues upwards in the tree.
+
+Although the basic idea of deletion in a 2-3 tree is not very difficult, there are a lot of different cases that we have to handle, so the code becomes quite large. In this course you don’t have to learn how to perform deletion from 2-3 trees.
+
+### Complexity analysis
+
+Searching in a 2-3 tree is logarithmic in the number of nodes, $O(\log(n))$, because the height of the tree is logarithmic.
+
+When we insert into a 2-3 tree, we start from a leaf and try to grow it. If the leaf becomes overfull, we split and promote the insertion to the parent. In the worst case we have to continue promoting all the way up to the root. Since the tree has logarithmic height, this can in the worst case continue a logarithmic number of times. So insertion is also logarithmic, $O(\log(n))$.
+Deletion has exactly the same analysis (but more cases to take care of). In the worst case we have to merge and demote a parent value, and this could continue all the way to the root. Therefore deletion is also logarithmic, $O(\log(n))$.
+
+### B-trees
+
+Noone actually uses 2-3 trees (but see red-black trees below): they are more complex to implement than AVL trees and do not give any particular improvement. But 2-3 trees are still very important, because their basic idea can be generalised to much larger nodes. These are called B-trees, and 2-3 trees is one kind of B-trees.
+
+Any B-tree has a predefined *order*, which is the largest node type that is allowed, also called the *maximum degree* if its nodes. So, a 2-3 tree is a B-tree of order 3, and a B-tree of order 10 can have nodes with up to 10 children.
+
+The invariants for a B-tree of order $m$ are like this:
+
+- everything in subtree $\mathbf{p}_{i–1}$ < $\mathbf{a}_i$ < everything in subtree $\mathbf{p}_i$
+  (for all node values a1, …, ak, where k is the number of children)
+- all children $\mathbf{p}_0, \ldots, \mathbf{p}_k$ of a node have the same height
+- all nodes have at most $m$ children, that is $k \leq m$
+- all internal nodes (except the root) have at least $m/2$ children, that is, $k \geq m/2$
+
+It is the final bullet that ensures that the height of a B-tree is logarithmic in the number of elements. (And it is also the reason why we cannot have 1-nodes in a 2-3 tree, because 1 < 3/2.)
+
+Therefore, a B-tree of order 4 can have nodes with 2, 3 or 4 children, and is often called a 2-3-4 tree. But a B-tree of order 5 can only have 3-, 4- and 5-nodes.
+
+When inserting into a B-tree of order $m$, we do the same as for 2-3 trees: first insert it into a leaf, and if that leaf becomes overfull, we split it and promote the middle element to the parent. If that happens, we know that the overfull node has exactly $m+1$ children. Splitting this will result in two nodes with size $m/2$, and the middle element is propagated upwards. So the invariants are preserved by splitting.
+
+Just as for 2-3 trees, deleting results in many cases for stealing elements from neighbouring nodes, and merging when nodes become too sparse.
+
+### File systems, databases, and B+ trees
+
+B-trees is the most common data structure for managing file systems, as well as very large databases. Normally, the size of a node in the B-tree is chosen to fill a disk block of the particular file system, so a typical B-tree implementation has an order of 100 or more. This means that we can reduce the number of disk accesses, by loading a full B-tree node from the (slow-ish) disk to the (much faster) internal memory.
+
+B-trees of high order are very shallow. For example, how many values can we store in a B-tree of order, if its height is only 4 (meaning that we have the root, two internal level, and then the leaves)?
+
+- the root can store $99$ values and have $100$ children,
+- each of the $100$ children can store $99$ values and have $100$ children,
+- each of these $100^2$ children can store $99$ values and have $100$ children,
+- so we get $100^3$ leaves, each with up to $99$ values
+
+This gives $99 + 99 \cdot 100 + 99 \cdot 100^2 + 99 \cdot 100^3$ = $99 \cdot (1 + 100 + 100^2 + 100^3)$ = 100 million.
+
+So, a B-tree of order 100 and height 4 can store up to 100 million elements. This is usually enough for most file systems and databases.
+
+In practice, B-trees are not used either – instead the normal implementation is to use B+ trees. The main difference is that the internal nodes in a B+ tree only stores the search keys, while all values are stored in the leaves. One reason for this is that normally the search keys are much smaller than the values which are usually big records. So the internal nodes can be more compact (and therefore of a higher order). Another reason is that it becomes very easy to iterate through all values in order.
+
+In this course you do not have to know much more about B-trees than that they are a generalisation of 2-3 trees, and that they (or rather, a variant) are the most common data structure for managing file systems and very large databases.
+
+### Red-black trees and 2-3-4 trees (optional)
+
+2-3-4 trees are actually used in practice in many data structure implementations, but they are then called *red-black trees*. The key insight is that any 2-3-4 tree can be converted to a binary search tree, where each node has a binary value. This value is called the “colour”, and a node can be either black or red. The conversion looks like this, for any 2-, 3- or 4-node:
+
+![](images/TwoThree-Redblack-vs-234.png)
+
+All the special cases for insertion and deletion in a 2-3-4 tree can be translated into rules for the red-black tree. The advantage is that we don’t need a complicated node structure, but can use our our standard BST nodes (augmented with a colour).
+
+There is even a translation from 2-3 trees into a subclass of red-black trees, the so called *left-leaning* red-black trees (or right-leaning, which are equivalent), or AA trees. But all of this is optional reading, you can find more information on Wikipedia:
+
+- https://en.wikipedia.org/wiki/Red-black_tree
+- https://en.wikipedia.org/wiki/Left-leaning_red-black_tree
+- https://en.wikipedia.org/wiki/AA_tree
+
+### Test them yourself
+Here are nice interactive visualisations of B-trees, red-black trees and other trees:
+https://chalmersgu-data-structure-courses.github.io/dsvis/collections.html
+
+----------
+
 This section presents a data structure called the 2-3 tree, as well as its generalizations -- the B-tree and the B^+^ tree.
 
 
