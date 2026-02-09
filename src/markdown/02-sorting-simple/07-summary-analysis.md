@@ -1,6 +1,29 @@
 
 ## Summary analysis of basic sorting algorithms
 
+So, are Selection and Insertion sort stable, adaptive, and/or in-place?
+
+- *Both are in-place*, which can be seen from the standard implementations.
+- *Insertion sort is adaptive*: if the list is already sorted, then the inner loop will quit immediately. So Insertion sort is *linear* when the list is sorted. It is also much faster if the input is almost sorted, so very good adaptivity.
+- *Selection sort is not adaptive*: the inner loop always has to look at all unsorted elements to find the minimal one, so the number of iterations never change depending on the structure of the input (it only depends on the input size).
+- *Insertion sort is stable*: each element moves backwards but never switch places with an equal element.
+- *But Selection sort is not stable*: a counter-example is the following array: [5, 3, 5, 1, 5].
+
+Here is an explanation why Selection sort is not stable.
+
+Assume that we want to sort the following list of names, by the family name initial:
+
+[ Ada L, Grace H, Barbara L, Adele G, Hedy L ]
+
+In the first iteration we find the smallest initial (Adele G), and swaps with the first name (Ada L). After this we have:
+
+[ Adele G, Grace H, Barbara L, Ada L, Hedy L ]
+
+Notice now that the list has become sorted by the initial, but Ada L was swapped in between Barbara L and Hedy L. When we continue the sorting the internal order between these three will not change, because the list is already sorted – so this will also be the final result. So Selection sort changed the order between the three names with equal initials.
+
+
+-----------------
+
 How can we categorise our three sorting algorithms according to the terminology that we introduced in @sec:terminology-and-notation?
 
 In-place

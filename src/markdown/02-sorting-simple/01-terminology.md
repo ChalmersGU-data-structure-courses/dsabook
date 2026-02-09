@@ -52,6 +52,19 @@ require significant extra memory beyond the input array.
 
 ### Terminology
 
+We introduce some useful terminology for classifying sorting algorithms:
+
+Stability
+:   When the algorithm does not change the order between equal elements. For example, if there are several books by the same author, we might want to keep their original order.
+
+Adaptivity
+:   When the algorithm is more efficient when the array is already sorted (or almost sorted).
+
+In-place
+:   When the memory use of the algorithm does not grow (too much) when the array size grows. This means that we cannot use an additional array, and therefore have to modify the original array.
+
+-------------
+
 Here are some important terminology which we can use to categorise different algorithms.
 
 Stability
