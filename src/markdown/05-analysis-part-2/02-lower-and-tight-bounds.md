@@ -5,6 +5,23 @@
 - Prio 1: update the text in Summary of asymptotic notations
 :::
 
+Usually it is not the upper bound we want to know, but instead we are more interested in the *tight bound*. That is, we don’t want to say that Mergesort is quadratic, $O(n^2)$, when we know it is linearithmic, $O(n \log(n))$.
+
+To be able to define the tight bound we also have to introduce the lower bound:
+
+- **Upper bound**: 	$f \in      O(g)$  **iff**  $f$ grows *at least* as fast as $g$
+- **Lower bound**: 	$f \in \Omega(g)$  **iff**  $f$ grows *at most*  as fast as $g$
+- **Tight bound**: 	$f \in \Theta(g)$  **iff**  both functions grow at the same rate
+
+The formal definition of the lower bound is the same as for the upper bound, but using $\geq$ instead of $\leq$, and the definition of tight bound is that something is both an upper and a lower bound at the same time.
+
+So, why don’t we always use the tight bound? This is because it is much more difficult to reason about actual code using the tight bound. The addition and multiplication laws do not hold in general for tight bounds: for example, if $f \in \Theta(g)$ and $f' \in \Theta(g')$, then it is not guaranteed that $f \cdot f' \in \Theta(g \cdot g')$.
+
+You don’t have to learn the lower bound and tight bound by heart, but you should know how to reason with the upper bound, big-O. In the written exam we might ask you to give the asymptotic complexity for some example code. Then you should answer in big-O notation, but *as tight as possible*. This means that if the code is linear, $O(n)$, then you can’t answer $O(n^2)$, because there is a tighter complexity class.
+
+
+--------
+
 [Big-$O$ notation]{.term} describes an upper bound.
 In other words, big-$O$ states a claim about the greatest amount of some resource (usually time) that is required by an algorithm for some class of inputs of size $n$.
 A similar notation is used to describe the least *amount* of a resource that an algorithm needs for some class of input.

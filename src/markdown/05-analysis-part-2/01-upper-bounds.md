@@ -5,6 +5,64 @@
 - Prio 1: formal definition
 :::
 
+Big-O describes the *upper bound* of the growth rate of a function (such as the time to run an algorithm). This means that big-O tells us that a function *will not grow faster* than some other function. But what does this mean?
+
+If $g$ is an upper bound of $f$, then this should mean something like $f(n) \leq g(n)$ in *the long run*. That is, whenever $n$ becomes sufficiently large, $f(n)$ should not outgrow $g(n)$.
+
+But this is not all there is to it – we also want to abstract away from constant factors. If algorithm **A** is twice as fast as algorithm **B**, we want to be able to say that they grow at the same rate. So what we actually want to say is that $f(n) \leq k \cdot g(n)$, for some arbitrary constant $k$. This gives us the following formal definition:
+
+- $f \in O(g)$  **if and only if** there are positive numbers $k$ and $n_0$ such that $f(n) \leq k\cdot g(n)$ for all $n > n_0$
+
+If this is the case we say that $g$ is an *upper bound* of $f$.
+
+(The definition is slightly incorrect, but enough for our purposes: the formal definition also uses absolut values $|f(n)|$, but in our setting the functions are always positive (there is no algorithm that uses negative time or space).)
+
+Note that we use set membership, $f \in O(g)$. This is because we view $O(g)$ as the set of all functions $f$ for which the definition holds. And this means that for example $O(5x^2-7x+100\log_2(x)+10^9)$, $O(5x^2)$, and $O(x^2)$ all describe the same set. We will always use the most compact way of describing this set, in this case $O(x^2)$.
+
+### Big-O and logarithms
+
+One interesting consequence of asymptotic complexity is that the base of a logarithm becomes irrelevant:
+
+$$ O(\log_⁡2(n)) = O(\ln⁡(n)) = O(\log⁡_{10}(n)) $$
+
+The reason for this is that according to the logarithm laws, $\log⁡_b(n) = \log⁡_a(n)\cdot 1/\log⁡_a(b)$. But $1/\log⁡_a(b)$ is a constant which we can ignore inside big-O, so $O(\log⁡_b(n)) = O(\log⁡_a(n))$. Therefore we can just ignore the base and write $O(\log⁡(n))$.
+
+(Note that this does not hold for exponential growth – e.g., $2^n \in O(10^n)$, but $10^n \notin O(2^n)$.)
+
+Another consequence of the logarithm laws is that it doesn't really matter if you take the logarithm from a linear, quadratic, cubic, or any power function:
+
+$$ O(\log⁡(n)) = O(\log(⁡n^2)) = O(\log(⁡n^3)) = O(\log(⁡n^k)) $$
+
+The reason for this is that $\log⁡(n^k) = k\cdot\log⁡(n)$ according to the logarithm laws, so the exponent $k$ becomes a multiplicative constant and can be ignored.
+
+However, taking the *power* of a logarithm cannot be ignored, so $O(\log⁡(n))$ and $O(\log(n)^2)$ are different complexity classes.
+
+### Complexity classes and the complexity hierarchy
+
+Big-O classifies all functions and algorithms into *complexity classes*, and these classes form a hierarchy – the *complexity hierarchy*. There are infinitely many complexity classes, but the most common ones are the following:
+
+$$ O(1) < O(\log(n)) < O(n) < O(n \log(n)) < O(n^2) < O(n^2 \log(n)) < O(n^3) < \cdots < O(2^n) < \cdots $$
+
+Note that I have excluded many many complexity classes, for example $O(\log(n)^2)$ and $O(\sqrt{n})$. You can try to figure out where in the hierarchy they should be placed.
+
+### Laws for big-O
+
+The definition of big-O only gives an *upper bound* of a function. One effect of this is that $f \in O(g)$ even if $f$ grows *faster* than $g$. For example, if $f$ is logarithmic, we can say that $f \in O(\log(n))$, but it is also true that $f \in O(n)$ or even $f \in O(n^2)$. So the complexity hierarchy above could also be formulated using subset notation:
+
+$$ O(1) \subsetneq O(\log(n)) \subsetneq O(n) \subsetneq O(n \log(n)) \subsetneq O(n^2) \subsetneq \cdots $$
+
+Using the definition the following laws are quite straightforward to prove:
+
+1. **Transitivity**:    if  $f \in O(g)$  and  $g \in O(h)$,  then  $f \in O(h)$
+2. **Constant** $k>0$:  if  $f \in O(g)$, then $k \cdot f \in O(g)$
+3. **Addition**:        if  $f \in O(g)$  and  $f' \in O(g')$, then  $f + f' \in O(\max(g, g'))$
+4. **Multiplication**:  if  $f \in O(g)$  and  $f' \in O(g')$, then  $f \cdot f' \in O(g \cdot g')$
+
+These laws are the basis for our standard complexity analysis of algorithms: a sequence of operations corresponds to addition, a loop corresponds to multiplication, etc.
+
+
+----------------
+
 Several terms are used to describe the running-time equation for an
 algorithm. These terms -- and their associated symbols -- indicate
 precisely what aspect of the algorithm's behaviour is being described.

@@ -5,6 +5,19 @@
 - Prio 2: rewrite this text, more examples and help in how to analyse problems
 :::
 
+The lower bound, $\Omega$, is not interesting at all when we want to analyse an algorithm, because we are not interested in how fast it can be, but instead of how slow it can be.
+
+But if we want to analyse a *problem* instead of an algorithm, then it is $\Omega$ we want to know. If we know a lower bound for a problem then we know that there cannot be any algorithm that has better complexity than that.
+
+It is usually very difficult to show that a problem has a certain lower bound, so nothing I expect you to come up with in your lifetime (I haven’t done it for sure:). But here is a standard example:
+
+- Sorting an array of $n$ elements is trivially $\Omega(n)$, because we at the very least have to look at least once at every element.
+- But it is possible to prove that the sorting problem is actually $\Omega(n \log(n))$, for *comparison-based* sorting algorithms. This means that there are no sorting algorithm that has better complexity than $O(n \log(n))$, so Mergesort is an *asymptotically optimal* sorting algorithm.
+- By a comparison-based algorithm, we mean that the only way we compare elements are by comparing two elements and deciding which of them should come first. All the sorting algorithms we have looked at are comparison-based.
+
+
+------------------------
+
 You most often use the techniques of algorithm analysis to analyse an [algorithm]{.term}
 (or the instantiation of an algorithm as a [program]{.term}).
 But you can also use these same techniques to analyse the cost of a [problem]{.term}.
