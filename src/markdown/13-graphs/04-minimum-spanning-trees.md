@@ -1,5 +1,5 @@
 
-## Minimum spanning trees, MST {#minimum-spanning-trees}
+## Minimum spanning trees
 
 ::: TODO
 - Prio 2: add use cases

@@ -1,13 +1,12 @@
 
-## Prim's algorithm for finding the MST {#prims-algorithm}
+## Prim's MST algorithm {#prims-algorithm}
 
 ::: TODO
 - Prio 2: reformulate as a generic graph search algorithm
 :::
 
-The first of our two algorithms for finding MSTs is commonly referred
-to as [Prim's algorithm]{.term}. Prim's
-algorithm is very simple. Start with any vertex $n$ in the graph,
+Now we introduce another algorithm for finding the MST, commonly referred to as [Prim's algorithm]{.term}.
+Prim's algorithm is very simple. Start with any vertex $n$ in the graph,
 setting the MST to be $n$ initially. Pick the least-cost edge connected
 to $n$. This edge connects $n$ to another vertex; call this $m$. Add
 vertex $m$ and edge $(n, m)$ to the MST. Next, pick the least-cost edge

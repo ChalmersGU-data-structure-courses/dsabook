@@ -1,7 +1,7 @@
 
 :::::: online
 
-### Acyclic graphs: Topological sort {#topological-sort}
+### Directed acyclic graphs: Topological sort {#topological-sort}
 
 ::: TODO
 - Prio 3: simplify code

@@ -1,15 +1,13 @@
 
-## Kruskal's algorithm for finding the MST {#kruskals-algorithm}
+## Kruskal's MST algorithm {#kruskals-algorithm}
 
 ::: TODO
 - Prio 2: first show more abstract pseudocode, not using union/find
 :::
 
-Our next MST algorithm is commonly referred to as
-[Kruskal's algorithm]{.term}. Kruskal's
-algorithm is also a simple, greedy algorithm. First partition the set of
-vertices into $|\mathbf{V}|$
-[disjoint sets](#union-find){.term},
+Our first MST algorithm is commonly referred to as [Kruskal's algorithm]{.term}.
+Kruskal's algorithm is also a simple, greedy algorithm.
+First partition the set of vertices into $|\mathbf{V}|$ [disjoint sets](#union-find){.term},
 each consisting of one vertex. Then process the edges in order of
 weight. An edge is added to the MST, and two disjoint sets combined, if
 the edge connects two vertices in different disjoint sets. This process
