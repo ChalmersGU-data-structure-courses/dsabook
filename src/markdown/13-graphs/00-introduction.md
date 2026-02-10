@@ -1,5 +1,5 @@
 
-# Graphs
+# Graphs {#graphs}
 
 ::: TODO
 - Prio 2: move parts of this text to the 1st section

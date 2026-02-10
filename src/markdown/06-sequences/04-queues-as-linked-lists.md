@@ -96,14 +96,14 @@ Linked queue -- dequeue exercise.
 :::
 
 
-### Case study: Sorting a linked list using Mergesort
+### Case study: Sorting a linked list using Mergesort {#mergesort-linked-list}
 
 We introduced Mergesort in @sec:mergesort, and then we showed how to sort an array.
 But Mergesort can also be used to sort linked lists, because it does not require random access to the list elements.
 Thus, Mergesort is the method of choice when the input is in the form of a linked list.
 
 :::::: latex
-\booklink{Read the rest online}{6.4}{sec:case-study-sorting-a-linked-list-using-mergesort}
+\booklink{Read the rest online}{6.4}{sec:mergesort-linked-list}
 ::::::
 
 :::::: online

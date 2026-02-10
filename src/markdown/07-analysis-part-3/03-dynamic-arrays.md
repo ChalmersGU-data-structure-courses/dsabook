@@ -1,5 +1,5 @@
 
-## Case study: Analysing dynamic arrays
+## Case study: Analysing dynamic arrays {#analysing-dynamic-arrays}
 
 Dynamic arrays, as discussed in @sec:dynamic-arrays, are a flexible data structure that efficiently manages collections of elements whose size may change over time.
 Unlike fixed-size arrays, dynamic arrays automatically resize themselves to accommodate additional elements, making them especially useful when the total number of elements is not known in advance.

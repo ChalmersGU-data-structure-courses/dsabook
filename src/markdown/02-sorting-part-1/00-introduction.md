@@ -1,5 +1,5 @@
 
-# Sorting, part 1: Simple algorithms {#sorting-simple latex="Sorting, part 1: \mbox{Simple algorithms}"}
+# Sorting, part 1 {#sorting-part-1 latex="Sorting, part 1: \mbox{Simple algorithms}"}
 
 We have seen that, when an array is sorted in ascending order, *binary
 search* can be used to find items in it efficiently. But what about when
@@ -63,4 +63,4 @@ This is usually done by a [comparator]{.term} (in Java), or by a [key function](
 The following chapters cover several standard algorithms appropriate for sorting a collection of records.
 In these chapters we concentrate on *natural sorting*, but all the algorithms work just as well for *key-based sorting* -- and we trust that you are a mature enough programmer to be able to infer how to do this.
 This chapter discusses three simple, but relatively slow, algorithms that require [quadratic](#quadratic-growth-rate){.term} time in the size of the array.
-[Chapter @sec:sorting-divide-and-conquer] then presents two algorithms with considerably better performance, with [linearithmic](#linearithmic-growth-rate){.term} worst-case or average-case running time.
+[Chapter @sec:sorting-part-2] then presents two algorithms with considerably better performance, with [linearithmic](#linearithmic-growth-rate){.term} worst-case or average-case running time.

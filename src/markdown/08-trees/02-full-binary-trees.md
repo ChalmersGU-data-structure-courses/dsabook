@@ -1,10 +1,10 @@
 
-## Case study: Full binary trees
+## Case study: Full binary trees {#full-binary-trees}
 
 :::::: latex
 This section discusses one particular kind of binary trees, where all nodes have either two children or no children, and how you can reason about them.
 
-\booklink{Read the rest online}{8.2}{sec:case-study-full-binary-trees}
+\booklink{Read the rest online}{8.2}{sec:full-binary-trees}
 ::::::
 
 

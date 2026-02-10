@@ -545,7 +545,7 @@ $T(n) = 2T(n/2) + 5n^2$; $T(1) = 7$.
 #### Example: Building a heap
 
 Our next example models the cost of the algorithm to build a heap. You
-should recall that to build a [heap](#heaps-and-priority-queues),
+should recall that to build a [heap](#heaps),
 we first heapify the two subheaps, then push down the root
 to its proper position. The cost is:
 
@@ -711,7 +711,7 @@ Because $a=2$, $b=2$, $c=1$, and $k=1$, we find that $2 = 2^1$. Applying
 case (2) of the theorem, $T(n) \in O(n \log n)$.
 :::
 
-### Case study: Average-case analysis of Quicksort
+### Case study: Average-case analysis of Quicksort {#average-analysis-quicksort}
 
 ::: TODO
 - Average-case is **not** a good thing - what are we averaging on?

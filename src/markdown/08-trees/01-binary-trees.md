@@ -181,7 +181,7 @@ the differences between full and complete binary trees. There is no
 particular relationship between these two tree shapes; that is, the tree (a) is
 full but not complete while the tree (b) is complete but not full.
 The [binary heap]{.term} (@sec:binary-heaps) is an example of a complete binary tree.
-The [Huffman coding tree]{.term} (@sec:case-study-huffman-coding) is an example of a full binary tree.
+The [Huffman coding tree]{.term} (@sec:huffman-coding) is an example of a full binary tree.
 
 ::: {.jsav-figure #fig:full_complete_bintrees}
 ```

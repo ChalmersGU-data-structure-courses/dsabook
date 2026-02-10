@@ -1,5 +1,5 @@
 
-# Algorithm analysis, part 3: Advanced theory
+# Algorithm analysis, part 3 {#analysis-part-3}
 
 In this chapter, we move beyond basic runtime analysis to develop a richer understanding of algorithm performance.
 We consider not only execution time, but also memory usage.

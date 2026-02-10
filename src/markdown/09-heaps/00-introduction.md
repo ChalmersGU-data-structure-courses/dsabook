@@ -1,4 +1,4 @@
-# Priority queues and heaps
+# Heaps {#heaps}
 
 In @sec:priority-queues we introduced priority queues and showed how to implement them using sorted lists.
 However, this is not a very good implementation, because inserting elements into the sorted list is linear, $O(n)$, in the worst case.

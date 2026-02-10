@@ -257,7 +257,7 @@ They are discussed in [@sec:queues-implemented-as-linked-lists;@sec:queues-imple
  -->
 
 
-### Case study: Implementing recursion
+### Case study: Implementing recursion {#implementing-recursion}
 
 :::::: online
 ::: alert
@@ -288,7 +288,7 @@ calls add to the stack. Each return from a subroutine
 off the stack.
 
 :::::: latex
-\booklink{Read the rest online}{6.2}{sec:case-study-implementing-recursion}
+\booklink{Read the rest online}{6.2}{sec:implementing-recursion}
 ::::::
 
 

@@ -108,7 +108,7 @@ When we say that an algorithm is quadratic, we actually mean that the mathematic
 So, how can we relate functions using orders of growth?
 We do this by saying that one function is a *bound* of another function.
 E.g., when we say that an algorithm $\mathbf{A}$ is quadratic, we actually mean that the function $n^2$ is an upper bound of $\mathbf{A}$.
-The following are informal definitions of *upper*, *lower* and *tight* bounds -- we will define them more rigorously in [Chapter @sec:algorithm-analysis-theory].
+The following are informal definitions of *upper*, *lower* and *tight* bounds -- we will define them more rigorously in [Chapter @sec:analysis-part-2].
 
 Upper bound
 

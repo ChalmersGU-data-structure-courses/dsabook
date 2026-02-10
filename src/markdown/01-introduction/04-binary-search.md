@@ -1,5 +1,5 @@
 
-## Case study: Searching in a list {#case-study-searching-in-a-list}
+## Case study: Binary search {#binary-search}
 
 Assume that you want to search for a particular book in a bookshelf, for example you want to find a book by a certain author. If the shelf is not sorted the only thing you can do is to go through each book at the time and see if it's the right one. This is called *linear search*, because you look at each book in turn (linearly). Now imagine that the bookshelf is actually a whole library -- it will take some time.
 

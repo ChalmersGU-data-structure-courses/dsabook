@@ -4,7 +4,7 @@
     - including the file 04b
 :::
 
-## Case study: Huffman coding
+## Case study: Huffman coding {#huffman-coding}
 
 One can often gain an improvement in space requirements in exchange for
 a penalty in running time. There are many situations where this is a
@@ -14,7 +14,7 @@ save space. Later, they can be uncompressed for use, which costs some
 time, but only once.
 
 :::::: latex
-\booklink{Read the rest online}{9.4}{sec:case-study-huffman-coding}
+\booklink{Read the rest online}{9.4}{sec:huffman-coding}
 ::::::
 
 We often represent a set of items in a computer program by assigning a

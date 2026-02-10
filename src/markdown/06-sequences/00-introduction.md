@@ -1,5 +1,5 @@
 
-# Stacks, queues, and lists
+# Sequences {#sequences}
 
 ::: TODO
 - Prio 2: update the text, include all ADTs (e.g. prio. queues too)

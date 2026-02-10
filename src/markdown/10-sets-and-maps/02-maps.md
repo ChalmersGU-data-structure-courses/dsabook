@@ -1,5 +1,5 @@
 
-## Maps, or dictionaries
+## Maps, or dictionaries {#maps}
 
 A *map* (or dictionary) represents a set of *keys*, where each key has an associated
 *value*. We can *add* and *remove* keys, but when we add a key we must

@@ -1,7 +1,7 @@
 
 :::::: html
 
-# Bibliography
+## Bibliography
 
 ::: glossary
 

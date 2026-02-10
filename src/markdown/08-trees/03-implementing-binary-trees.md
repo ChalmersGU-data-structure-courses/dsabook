@@ -119,7 +119,7 @@ the same class for both will simplify the implementation, but might be
 an inefficient use of space. Some applications require data values only
 for the leaves. Other applications require one type of value for the
 leaves and another for the internal nodes. Examples include
-the [Huffman coding tree]{.term} (see @sec:case-study-huffman-coding),
+the [Huffman coding tree]{.term} (see @sec:huffman-coding),
 [the [binary trie]{.term}, the [PR Quadtree]{.term},]{.online}
 and the [expression tree]{.term} illustrated by @fig:expression_tree below.
 By definition, only

@@ -1,5 +1,5 @@
 
-# Trees
+# Trees {#trees}
 
 ::: TODO
 - Prio 2: update introduction
@@ -16,7 +16,7 @@ and the syntactic elements of computer programs
 (using expression trees, see @sec:differentiating-between-internal-nodes-and-leaves),
 prioritising jobs (using binary heaps, see @sec:binary-heaps), or
 organising the information needed to drive
-data compression algorithms (using Huffman coding, see @sec:case-study-huffman-coding).
+data compression algorithms (using Huffman coding, see @sec:huffman-coding).
 
 This chapter covers terminology used for discussing binary trees (@sec:binary-trees),
 tree traversals (@sec:traversing-a-binary-tree),

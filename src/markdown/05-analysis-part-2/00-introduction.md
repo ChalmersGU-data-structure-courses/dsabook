@@ -1,5 +1,5 @@
 
-# Algorithm analysis, part 2: Theory {#algorithm-analysis-theory}
+# Algorithm analysis, part 2: Theory {#analysis-part-2}
 
 So far I have just talked about complexity informally, hand-waved a little and said that we can disregard constants. Now is the time to make these things more precise.
 
@@ -21,7 +21,7 @@ Note that sometimes big-O is too abstract. Sometimes we are actually interested 
 
 ----------
 
-In [Chapter @sec:algorithm-analysis-introduction] we introduced the ideas behind algorithmic analysis, and explained the basics on an abstract level.
+In [Chapter @sec:analysis-part-1] we introduced the ideas behind algorithmic analysis, and explained the basics on an abstract level.
 Now that you understand everything about sorting algorithms, we can go into more depth with our analysis tools.
 Recall that we introduced the upper, lower and tight bounds in @sec:orders-of-growth:
 

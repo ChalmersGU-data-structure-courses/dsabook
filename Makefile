@@ -16,7 +16,7 @@ DOCS      := docs
 GENERATED := rendered-images plots
 
 # Source Files
-GLOSSARY  := $(MARKDOWN)/X-appendix/01-glossary.md
+GLOSSARY  := $(MARKDOWN)/X-appendix/03-glossary.md
 MD_FILES  := $(sort $(wildcard $(MARKDOWN)/$(CHAPTER)*/*.md) $(wildcard $(MARKDOWN)/*/00-*.md) $(wildcard $(MARKDOWN)/*.md))
 
 # Tools

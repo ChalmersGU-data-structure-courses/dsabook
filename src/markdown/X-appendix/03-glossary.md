@@ -1,7 +1,7 @@
 
 :::::: html
 
-# Glossary
+## Glossary
 
 ::: glossary
 

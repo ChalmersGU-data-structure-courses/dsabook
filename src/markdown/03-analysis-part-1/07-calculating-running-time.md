@@ -77,7 +77,7 @@ The reason why the base is irrelevant is a direct consequence of the logarithm l
 
 ::: online
 We leave as an exercise to the reader to figure out both the definition of $<$ and why the logarithm base is irrelevant.
-But we will come back to this issue in [Chapter @sec:algorithm-analysis-theory].
+But we will come back to this issue in [Chapter @sec:analysis-part-2].
 :::
 
 ### Analysing code fragments
@@ -169,7 +169,7 @@ $O(n)$.
 ::: example
 #### Example: Simple sorting algorithms
 
-The basic sorting algorithms from [Chapter @sec:sorting-simple], Bubble sort, Selection sort and Insertion sort, all have the same structure. They consist of a nested `for` loop, where the outer loop is iterated $n$ times:
+The basic sorting algorithms from [Chapter @sec:sorting-part-1], Bubble sort, Selection sort and Insertion sort, all have the same structure. They consist of a nested `for` loop, where the outer loop is iterated $n$ times:
 
         for i in 0 .. n-1:   // Outer loop, repeated n times
             for j in ...:    // Inner loop, repeated up to n times

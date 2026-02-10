@@ -1,4 +1,4 @@
-# Introduction
+# Introduction {#introduction}
 
 ::: TODO
 - Prio 2: are the lists actually the ones we want to emphasise?
@@ -62,3 +62,16 @@ problem. Throughout the book we use asymptotic analysis techniques to
 estimate the time cost for every algorithm presented. This allows you to
 see how each algorithm compares to other algorithms for solving the same
 problem in terms of its efficiency.
+
+
+This book assumes that you are already familiar with mathematics and programming, corresponding to a semester of university studies.
+The online appendices present what we assume that you already know about mathematical and programming.
+They serve as a review and reference, allowing you to revisit relevant sections in later chapters.
+
+:::::: latex
+\booklink{Read the rest online}{1.4}{sec:mathematical-preliminaries}
+::::::
+
+:::::: latex
+\booklink{Read the rest online}{1.5}{sec:programming-preliminaries}
+::::::

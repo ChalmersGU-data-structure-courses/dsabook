@@ -74,7 +74,7 @@ The important takeaway from this table is that each of these sorts has a quadrat
 - Should this move to chapter 5 (analysis pt 2, section 5.3 Analysing problems)?
 ::::
 
-The remaining sorting algorithms presented in [Chapter @sec:sorting-divide-and-conquer] are significantly better than these three under typical conditions.
+The remaining sorting algorithms presented in [Chapter @sec:sorting-part-2] are significantly better than these three under typical conditions.
 
 These three sorting algorithms are all quadratic, but can we say something about *why* they are so slow?
 The crucial bottleneck is that only *adjacent* records are compared, and swapped (for Insertion and Bubble sort).
@@ -112,7 +112,7 @@ And since there are $n(n-1)/2$ inversions in the worst case, we need at least $n
 Therefore, all sorting algorithms that can only compare adjacent elements (or swap adjacent elements) are doomed to be quadratic in the worst case.
 This includes the algorithms we have presented so far, and numerous other.
 
-In [Chapter @sec:sorting-divide-and-conquer] we will present sorting algorithms that are significantly better than these three under typical conditions.
+In [Chapter @sec:sorting-part-2] we will present sorting algorithms that are significantly better than these three under typical conditions.
 How can they circumvent the quadratic behaviour?
 -- They compare and swap non-adjacent elements (and they do it in a smart way).
 

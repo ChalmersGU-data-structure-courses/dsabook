@@ -1,7 +1,7 @@
 
-## Case study: Analysing binary search
+## Case study: Analysing binary search {#analysing-binary-search}
 
-Now we will discuss the algorithmic complexity of the two search algorithms that we introduced in @sec:case-study-searching-in-a-list.
+Now we will discuss the algorithmic complexity of the two search algorithms that we introduced in @sec:binary-search.
 
 In @sec:input-size, we deduced that the running time for linear search on an array if size $n$ is $O(n)$.
 If we assume that the value is equally likely to appear in any location, this complexity is both the average case and the worst case.
@@ -53,7 +53,7 @@ search position in binary search is more expensive than just
 incrementing the current position, as sequential search does.
 
 However, binary search comes with a precondition: the array must be sorted.
-And sorting an array is a time-consuming operation -- in fact it is $O(n\log n)$ in the worst case, as we will see in [Chapter @sec:sorting-divide-and-conquer].
+And sorting an array is a time-consuming operation -- in fact it is $O(n\log n)$ in the worst case, as we will see in [Chapter @sec:sorting-part-2].
 So there's a tradeoff here -- to be able to search the array efficiently we need to keep it sorted.
 This is not much of a problem if this is something we only have to do once, but it can be very costly if the array changes because we insert and delete elements.
 Only in the context of the complete problem to be solved can we know whether the advantage outweighs the disadvantage.
