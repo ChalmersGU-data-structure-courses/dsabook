@@ -1,5 +1,5 @@
 
-# Algorithm analysis, part 2: Theory {#analysis-part-2}
+# Algorithm analysis, part 2 {#analysis-part-2}
 
 So far I have just talked about complexity informally, hand-waved a little and said that we can disregard constants. Now is the time to make these things more precise.
 
