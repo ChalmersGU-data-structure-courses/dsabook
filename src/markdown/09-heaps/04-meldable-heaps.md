@@ -1,4 +1,3 @@
-<!--
 ## Meldable heaps
 
 ::: TODO
@@ -13,11 +12,18 @@
 
 ### Leftist heap
 
+***Start with Q7 from the exam 2026-01-15***
+
+
 ### Skew heap
+
+
+<!--
 
 ### Binomial heap
 
 ::: TODO
 - maybe this is too advanced, since it uses a set of heaps
 :::
+
 -->

@@ -1,5 +1,5 @@
 
-## Implementing graphs
+### Implementing graphs
 
 ::: TODO
 - Prio 2: simplify code

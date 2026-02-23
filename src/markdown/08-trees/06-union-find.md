@@ -1,5 +1,5 @@
 
-## Disjoint sets and the Union/Find algorithm {#disjoint-sets}
+## Case study: Disjoint sets {#disjoint-sets}
 
 ::: TODO
 - Prio 2: add use case = Kruskal's algorithm

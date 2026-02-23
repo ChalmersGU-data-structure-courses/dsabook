@@ -1,5 +1,10 @@
 
-## Double-ended queues
+## Lists
+
+***Bla bla: stacks and queus are very limited, and there are gradually more advanced sequence ADTs***
+
+
+### Double-ended queues
 
 ::: TODO
 - Prio 1: hide this section until written

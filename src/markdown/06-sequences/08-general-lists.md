@@ -1,5 +1,5 @@
 
-## General lists
+### General lists
 
 ::: TODO
 - Prio 2: invariants
@@ -39,7 +39,7 @@ Collection.
 
 :::::: online
 
-### ADT for general lists
+#### ADT for general lists
 
 Now we can define the ADT for a list object in terms of a set of
 operations on that object. We will use an interface to formally define

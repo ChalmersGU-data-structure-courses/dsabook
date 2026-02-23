@@ -3,7 +3,6 @@
 
 ::: TODO
 - Prio 3: are the priority lists as we want them?
-- Prio 3: should this section be already this early?
 :::
 
 It should go without saying that people write programs to solve

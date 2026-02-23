@@ -1,5 +1,5 @@
 
-## Growth rates
+### Growth rates
 
 ::: TODO
 - Prio 2: is this a good way of introducing the concept of growth rates?

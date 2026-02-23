@@ -1,5 +1,5 @@
 
-## Comparison of linked lists vs dynamic arrays
+### Comparison of linked lists vs dynamic arrays
 
 ::: TODO
 - Prio 1: rewrite

@@ -1,5 +1,5 @@
 
-## Code tuning
+## Code tuning and empirical analysis
 
 ::: TODO
 - Prio 3: discuss constant factors (not covered by asymptotic complexity/analysis)

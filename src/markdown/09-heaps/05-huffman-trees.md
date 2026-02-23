@@ -1,7 +1,6 @@
 
 ::: TODO
 - Prio 2: make the text shorter (this is just an example anyway)
-    - including the file 04b
 :::
 
 ## Case study: Huffman coding {#huffman-coding}
