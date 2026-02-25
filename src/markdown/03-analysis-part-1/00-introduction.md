@@ -13,7 +13,7 @@ The basic idea of complexity analysis is to abstract away details so that we can
 - We remove constant factors, because these depend on your specific computer, programming language, etc. So, instead of writing $34.3 n^2$ we just write $n^2$.
 - We remove lower-order terms, because they will not matter when the input becomes large enough. So, instead of writing $n\log(n) + n^2 + n^2\log(n) + 999999$, we just write $n^2\log(n)$.
 
-### Computational complexity of an algorithm {-}
+#### Computational complexity of an algorithm
 
 What is *computational complexity*?
 - How much resources does an algorithm use, in relation to quantitative properties of its input?
@@ -41,7 +41,7 @@ So, exact values of $T(n)$ are not relevant. What matters is the asymptotic beha
 
 Asymptotic complexity = “the order of growth of the complexity function”.
 
-### Different kinds of input {-}
+#### Different kinds of input
 
 We can talk about the *best-case*, or the *worst-case*, or even the *average-case* complexity of an algorithm. But in practice we almost always only use the worst-case complexity: the best case is pretty useless (we should always prepare for the worst), and the average case is difficult to reason about.
 
@@ -53,7 +53,7 @@ The worst case is particularly important if you cannot guarantee that the data i
 
 The average case can be very useful if we know more about the data. For example, if we know that our input is *almost* sorted, then Insertion sort suddenly becomes a really really efficient algorithm.
 
-### Order of growth, the big-O notation {-}
+#### Order of growth, the big-O notation
 
 More formally we use the big-O notation, which has a precise mathematical definition (to be discussed in a later lecture). This allows us to say things like the following:
 
@@ -88,13 +88,13 @@ From these laws we can infer some rules of thumb for analysing algorithms:
 - If we have a loop that repeats a statement $p$ a number of times (say $O(n)$ times), then the complexity is $O(n) \cdot O(p)$
     - note: if the loop is only run a constant $k$ number of iterations, then we can disregard the constant, because $k \cdot O(p) = O(1) \cdot O(p) = O(p)$
 
-### How to use the rules for big-O {-}
+#### How to use the rules for big-O
 
 So how do we analyse the sorting algorithms? Both Selection and Insertion sort have a very simple structure – it’s just a loop within a loop. The outer loop makes $n$ iterations, and the inner loop makes anything from 1 to $n$ iterations. The worst case of the inner loop is then $O(n)$, and the outer loop is $O(n)$, so in total we get $O(n^2)$.
 
 But what about binary search? Here we have a single loop, but how many iterations does it make? At each iteration the search interval is halved, and we stop when the interval is only one element. So, how many times can we halve a number until it becomes 1? This is done by the 2-logarithm: binary search iterates at most $\log_2(n)$ times (rounded upwards). So, the loop is iterated a logarithmic number of times, $O(\log(n))$, and the loop body is constant, $O(1)$. Therefore binary search is logarithmic.
 
-### Logarithmic order of growth {-}
+#### Logarithmic order of growth
 
 But wait, why do we write $\log(n)$ instead of $\log_2(n)$? This is a fun consequence of the logarithm law that $\log_a(b) = \log_a(n) / \log_b(n)$:
 
@@ -106,7 +106,7 @@ Another consequence of the logarithm laws is that $O(\log(n)) = O(\log(n^2)) = O
 
 But note that $O(\log(n)) < O(\log(n)^2) < O(\log(n)^3) < …$ (sometimes math is weird).
 
-### How to decide $n$ {-}
+#### How to decide $n$
 
 Most of the times it is quite straightforward to decide what $n$ is for a given type of input. For example, if the input is an array, then $n$ is normally the length of the array. If the input is a binary search tree, then $n$ is usually the number of nodes. If we want to analyse a set or a dictionary, we can let $n$ be the number of elements (or keys) in the set (or dictionary).
 
