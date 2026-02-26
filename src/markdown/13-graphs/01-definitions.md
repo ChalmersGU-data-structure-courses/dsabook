@@ -5,6 +5,8 @@
 - Prio 1: add info about sparse / dense
 :::
 
+<!-- START NOTES -->
+
 A graph consists of a set of vertices (or nodes), and edges. We usually denote the vertices as $V$ and the edges as $E$. The size of a graph is the number of vertices $n=|V|$, but we often write just $V$ (or $E$) instead of $|V|$ (or $|E|$).
 
 The *degree* of a vertex is the number of edges that is connected to it. This means that the sum of all degrees is $2|E|$, because every edge is counted twice. We can classify graphs according to their average degree:
@@ -31,6 +33,8 @@ A *directed acyclic graph* (DAG) is a common kind of graph for which there are m
 A *subgraph* is a subset of the vertices of a graph, plus all edges that connect them. A graph is *connected* if there is a path between any pair of vertices. A connected subgraph is called a *connected component*. If the graph is directed we instead talk about *strongly connected components*.
 
 In graph theory, a *tree* is an undirected connected acyclic graph. This is slightly different from the trees we talked about earlier, for example a (graph) tree is undirected. But we can turn a (graph) tree into a (tree) tree by deciding which vertex should be the root, and then direct all edges to go from the root to its children.
+
+<!-- END NOTES -->
 
 ---------------
 

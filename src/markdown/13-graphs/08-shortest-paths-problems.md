@@ -9,6 +9,8 @@
 - Prio 2: use cases
 :::
 
+<!-- START NOTES -->
+
 Another well-known and very common problem is to find the shortest path between two vertices in a weighted graph. This time the graph can be directed too.
 
 The prototypical example is if the graph represents a road network and you want to find the shortest route between two vertices. Note that “shortest” doesn’t have to mean a distance in kilometers – if the weights denote travel times, then the problem will be to find the *fastest* route.
@@ -23,6 +25,8 @@ If we want to know the shortest paths to every vetex from a given start vertex, 
 
 ![](images/Graphs-TwoSPTs.png)
 
+
+<!-- END NOTES -->
 
 ---------------
 

@@ -5,6 +5,8 @@
 - Prio 1: invariants
 :::
 
+<!-- START NOTES -->
+
 The problem with static array-based stacks and queues is that they have limited capacity.
 We get an error if we try to add new elements when the internal array is full.
 
@@ -92,7 +94,9 @@ In version 3 we doubled the array size whenever we resized. But we don’t have 
 
 For example, the Java standard library has the class ArrayList which is a dynamic array – it grows by 50% each time (multiplies by 3/2). And the built-in lists in Python grow by as little as 12% (multiplies by 9/8). This means that they have to grow more often but on the other hand they don’t use as much memory.
 
- -----------------------------------
+<!-- END NOTES -->
+
+-----------------------------------
 
 ### Resizing the internal array
 

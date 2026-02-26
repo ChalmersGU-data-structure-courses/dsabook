@@ -8,6 +8,8 @@
     - remembering visited nodes
 :::
 
+<!-- START NOTES -->
+
 One thing we often want to do is to *traverse* a graph, starting from a given vertex. An important constraint when traversing a graph is that we should only visit each vertex once. Therefore we have to keep track of which vertices we have visited so far.
 
 Here is the basic algorithm for any kind of graph traversal:
@@ -78,6 +80,8 @@ There are two famous cycle-finding problems for undirected graphs that are decei
 
   The problem of finding a Hamiltonian path is a special case of the *Travelling Salesman Problem*, which is one of the most famous *NP-complete problems*. So finding a Hamiltonian path is (most probably) exponential in the size of the graph. https://en.wikipedia.org/wiki/Hamiltonian_path_problem
 
+
+<!-- END NOTES -->
 
 ------------------
 

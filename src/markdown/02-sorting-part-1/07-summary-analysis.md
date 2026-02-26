@@ -1,6 +1,8 @@
 
 ## Summary analysis of basic sorting algorithms
 
+<!-- START NOTES -->
+
 So, are Selection and Insertion sort stable, adaptive, and/or in-place?
 
 - *Both are in-place*, which can be seen from the standard implementations.
@@ -21,6 +23,7 @@ In the first iteration we find the smallest initial (Adele G), and swaps with th
 
 Notice now that the list has become sorted by the initial, but Ada L was swapped in between Barbara L and Hedy L. When we continue the sorting the internal order between these three will not change, because the list is already sorted – so this will also be the final result. So Selection sort changed the order between the three names with equal initials.
 
+<!-- END NOTES -->
 
 -----------------
 

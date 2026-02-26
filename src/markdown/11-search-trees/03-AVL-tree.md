@@ -7,6 +7,8 @@
 - Prio 2: move some things about rotations to previous overview section
 :::
 
+<!-- START NOTES -->
+
 (AVL stands for its inventors, Georgy Adelson-Velsky and Evgenii Landis.)
 
 Tree nodes in AVL trees store an additional property, their *balance factor*. This is not really a “factor” (it has nothing to do with multiplication), but rather the difference of height between the right and the left subtree:
@@ -132,6 +134,8 @@ This has the same complexity as Mergesort, and is as good as the best sorting al
 
 There are nice interactive visualisations of AVL trees (and other search trees) here:
 https://chalmersgu-data-structure-courses.github.io/dsvis/collections.html
+
+<!-- END NOTES -->
 
 --------------
 

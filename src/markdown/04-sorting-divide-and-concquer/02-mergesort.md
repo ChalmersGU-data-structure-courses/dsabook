@@ -7,6 +7,8 @@
 - Prio 3: invariants
 :::
 
+<!-- START NOTES -->
+
 Today’s algorithm, Mergesort, is a perfect example of a divide-and-conquer algorithm. The general structure looks like this (compare with the general structure above):
 
 To sort an array:
@@ -129,6 +131,7 @@ Mergesort splits the input array into two equal-size arrays. But what happens if
 
 Merging will then be the same as inserting this singleton element into a sorted array, and this is exactly what Insertion sort does! So conceptually, we can view Insertion sort as a corner case of Mergesort, where we split very unevenly.
 
+<!-- END NOTES -->
 
 ------------------
 

@@ -5,6 +5,8 @@
 - Prio 2: first show more abstract pseudocode, not using union/find
 :::
 
+<!-- START NOTES -->
+
 This algorithm is conceptually very simple.
 
 - Start with an empty MST
@@ -44,6 +46,8 @@ There is a much better data structure for storing the MST – the *disjoint-set*
 
 Therefore, if we use a disjoint-set to store the MST, Kruskal’s algorithm is $O(E \log*(E))$ – which in practice is the same as $O(E)$. But first we have to sort the edges, which anyway takes $O(E \log(E))$ time, which is then the total complexity. But note that since $E \in O(V^2)$ and $O(\log(V^2)) = O(2 \log(V)) = O(\log(V))$, the total complexity of Kruskal’s algorithm can be written as $O(E \log(V))$.
 More information about the disjoint-set can be found in @sec:disjoint-sets if you are interested. (It’s a quite cool data structure, so worth the read:)
+
+<!-- END NOTES -->
 
 ------------------
 

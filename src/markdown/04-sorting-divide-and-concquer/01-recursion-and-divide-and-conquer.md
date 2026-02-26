@@ -100,6 +100,8 @@ This mathematical definition is easily translated into pseudocode:
 
 ### Divide and conquer
 
+<!-- START NOTES -->
+
 There is an important class of recursive algorithms that are called divide-and-conquer. The basic idea is to solve a bigger problem by dividing it into smaller sub-problems. For some problems (such as sorting), this can lead to a drastic improvement of the efficiency of finding a solution.
 
 For divide-and-conquer to be an improvement of a “traditional” solution, it is important that you in each step divide the problem into more than one sub-problem, and that they should be approximately the same size. For example, recursive binary search divides the problem into one smaller problem, not two. This makes it easy to make an iterative version that behaves the same. Therefore I do not count binary search as a divide-and-conquer algorithm (but some people do…).
@@ -112,6 +114,7 @@ Divide-and-conquer algorithms are usually very difficult to make iterative, so t
 
 Note that the final step, to combine the solutions, is as important as dividing the problem. There are many standard examples of divide-and-conquer algorithms: multiplication of large numbers, matrix multiplication and other matrix algorithms, geometrical algorithms, syntactic parsing, calculating Fourier transforms, and of course, sorting.
 
+<!-- END NOTES -->
 
 -----------
 

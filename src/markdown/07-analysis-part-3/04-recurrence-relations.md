@@ -6,6 +6,8 @@
 - Prio 3: example: matrix multiplication, Strassen's algorithm
 :::
 
+<!-- START NOTES -->
+
 So far we have analysed only two recursive algorithms: Binary search and Mergesort.
 
 (We never did a real analysis of Quicksort, because in the worst case it degrades to Selection sort, and we already know its complexity.)
@@ -188,6 +190,7 @@ https://en.wikipedia.org/wiki/Computational_complexity_of_matrix_multiplication
 Most of these algorithms are impractical even though they are optimally the best, and this is because the constants involved are so big that they become faster only for matrices that are astronomically big. (Such algorithms are called “galactic”.)
 But some of the sub-cubic algorithms for matrix multiplication are actually useful, and one of them is Strassen’s algorithm, from 1969. The basic idea is similar to the Karatsuba algorithm: it trades expensive multiplications for inexpensive additions. Strassen reduced the number of multiplications in each recursive step by one, from $2^3 = 8$ to only 7. This gives the recurrence relation $T(n) = 7 \cdot T(n/2) + O(n^2)$, which in turn gives a complexity of $O(n^{\log_2(7)}) \approx O(n^{2.8})$.
 
+<!-- END NOTES -->
 
 ----------------
 

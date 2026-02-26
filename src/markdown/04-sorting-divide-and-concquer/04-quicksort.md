@@ -6,6 +6,8 @@
 - Prio 2: make the text more coherent
 :::
 
+<!-- START NOTES -->
+
 Mergesort uses a very simple approach for splitting the array, but spends almost all its time in the merging step. But there’s also another problem with merging: it is difficult to efficiently implement in-place, so Mergesort have to use an additional array which will eat some memory. An alternative is to spend more time in the splitting phase so that the merging can be simplified.
 
 Partition
@@ -114,6 +116,7 @@ Let’s say that we always select the smallest possible pivot. This means that t
 
 This is exactly how Selection sort works! So conceptually, we can view Selection sort as a corner case of Quicksort, where we partition very unevenly.
 
+<!-- END NOTES -->
 
 --------------
 

@@ -5,6 +5,8 @@
 - Prio 1: update the text in Summary of asymptotic notations
 :::
 
+<!-- START NOTES -->
+
 Usually it is not the upper bound we want to know, but instead we are more interested in the *tight bound*. That is, we don’t want to say that Mergesort is quadratic, $O(n^2)$, when we know it is linearithmic, $O(n \log(n))$.
 
 To be able to define the tight bound we also have to introduce the lower bound:
@@ -19,6 +21,7 @@ So, why don’t we always use the tight bound? This is because it is much more d
 
 You don’t have to learn the lower bound and tight bound by heart, but you should know how to reason with the upper bound, big-O. In the written exam we might ask you to give the asymptotic complexity for some example code. Then you should answer in big-O notation, but *as tight as possible*. This means that if the code is linear, $O(n)$, then you can’t answer $O(n^2)$, because there is a tighter complexity class.
 
+<!-- END NOTES -->
 
 --------
 

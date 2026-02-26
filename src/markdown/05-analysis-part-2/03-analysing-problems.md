@@ -5,6 +5,8 @@
 - Prio 2: rewrite this text, more examples and help in how to analyse problems
 :::
 
+<!-- START NOTES -->
+
 The lower bound, $\Omega$, is not interesting at all when we want to analyse an algorithm, because we are not interested in how fast it can be, but instead of how slow it can be.
 
 But if we want to analyse a *problem* instead of an algorithm, then it is $\Omega$ we want to know. If we know a lower bound for a problem then we know that there cannot be any algorithm that has better complexity than that.
@@ -15,6 +17,7 @@ It is usually very difficult to show that a problem has a certain lower bound, s
 - But it is possible to prove that the sorting problem is actually $\Omega(n \log(n))$, for *comparison-based* sorting algorithms. This means that there are no sorting algorithm that has better complexity than $O(n \log(n))$, so Mergesort is an *asymptotically optimal* sorting algorithm.
 - By a comparison-based algorithm, we mean that the only way we compare elements are by comparing two elements and deciding which of them should come first. All the sorting algorithms we have looked at are comparison-based.
 
+<!-- END NOTES -->
 
 ------------------------
 

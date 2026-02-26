@@ -5,6 +5,8 @@
 - Prio 1: formal definition
 :::
 
+<!-- START NOTES -->
+
 Big-O describes the *upper bound* of the growth rate of a function (such as the time to run an algorithm). This means that big-O tells us that a function *will not grow faster* than some other function. But what does this mean?
 
 If $g$ is an upper bound of $f$, then this should mean something like $f(n) \leq g(n)$ in *the long run*. That is, whenever $n$ becomes sufficiently large, $f(n)$ should not outgrow $g(n)$.
@@ -60,6 +62,7 @@ Using the definition the following laws are quite straightforward to prove:
 
 These laws are the basis for our standard complexity analysis of algorithms: a sequence of operations corresponds to addition, a loop corresponds to multiplication, etc.
 
+<!-- END NOTES -->
 
 ----------------
 

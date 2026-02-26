@@ -1,6 +1,8 @@
 
 ## Overview of algorithms
 
+<!-- START NOTES -->
+
 Imagine that we want to sort books in a bookshelf -- what different strategies can we use to do that?
 
 First, let's imagine that the books are not in the shelf yet -- they are in an unordered pile on the floor. Now there are two main strategies you can use -- just repeat the following until there are no more books on the floor.
@@ -37,6 +39,8 @@ Insertion sort
 :   You don't have to first find the position and then "slide" the books. Instead you can remove the unsorted book (holding it in your hand), and compare it with each of the sorted books from the right. If it is smaller, you slide the shelved book and look at the next. Otherwise you found the right spot for your book.
 
 Often the array consists of complex objects and not just simple numbers. For example, if the objects are books they probably contain quite a lot of information, and we might want to sort by title, or author family name, or year of publication, or ISBN number, or number of pages. Then we need to use different *comparators*, or comparison functions, when sorting.
+
+<!-- END NOTES -->
 
 ----------
 

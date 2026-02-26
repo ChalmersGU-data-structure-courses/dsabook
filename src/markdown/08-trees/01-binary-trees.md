@@ -14,6 +14,8 @@
 - Prio 2: merge quizzes (files 01q, 01q2), perhaps move to another section?
 :::
 
+<!-- START NOTES -->
+
 ### Trees {-}
 
 A tree is similar to a linked list: it consists of nodes which point to other nodes. The difference is that a linked list node has *one* possible successor node, but a tree can link to *many* other nodes. These nodes are called the *children* of the parent node.
@@ -42,6 +44,8 @@ class BinTree:          class TreeNode:
 ```
 
 If we want to use these to implement a *map* (instead of a set), the nodes should contain both a *key* and a *value*, instead of a single element.
+
+<!-- END NOTES -->
 
 ------
 

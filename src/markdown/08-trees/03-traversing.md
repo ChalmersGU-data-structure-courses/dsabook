@@ -6,6 +6,8 @@
 - Prio 2: refer to previous chapter
 :::
 
+<!-- START NOTES -->
+
 Let’s say we want to print the contents of a binary tree. There are many different ways we can do that, but there are three very common strategies:
 
 - *preorder*:  first print the value, then the left subtree, then the right
@@ -26,6 +28,8 @@ The only difference is when we decide to “visit” the current node. For the e
 - *preorder*:  A B D C E G F
 - *inorder*:   D B A G E C F
 - *postorder*: D B G E F C A
+
+<!-- END NOTES -->
 
 ----------------
 

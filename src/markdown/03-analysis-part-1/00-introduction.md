@@ -7,6 +7,8 @@
 :::
 
 
+<!-- START NOTES -->
+
 The basic idea of complexity analysis is to abstract away details so that we can see how an algorithm behaves in general, for very big inputs.
 
 - The input is simplified to one single number (often written $n$). Usually not the size in bytes, because this depends on your specific computer, programming language, etc. Instead it can be the size of the array, or the length of the string, or the number of edges in the graph, etc.
@@ -114,7 +116,7 @@ But how about a graph? Should we analyse depending on the number of vertices or 
 
 And sometimes we might want to use a different $n$ of some reason. For example, if we analyse Insertion sort, $n$ could be a measure of how sorted the array is (there are several ways to measure this) – but this is uninteresting if we analyse Selection sort.
 
-
+<!-- END NOTES -->
 
 -----------------------
 

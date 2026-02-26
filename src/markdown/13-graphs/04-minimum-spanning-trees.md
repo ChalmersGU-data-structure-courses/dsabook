@@ -5,6 +5,8 @@
 - Prio 2: add use cases
 :::
 
+<!-- START NOTES -->
+
 A *spanning tree* of an undirected graph is a tree that includes (spans) all the vertices of the graph. This of course assumes that the graph is connected, otherwise it is not possible. (An unconnected graph can instead have a spanning *forest*.)
 
 **Fact**. The number of edges in a spanning tree is exactly $V–1$.
@@ -23,6 +25,7 @@ The MST is used in many different algorithms, and there are a lot of use cases w
 
 In this book you will learn two algorithms for finding the MST of a graph.
 
+<!-- END NOTES -->
 
 -------------
 

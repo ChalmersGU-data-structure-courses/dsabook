@@ -52,6 +52,8 @@ require significant extra memory beyond the input array.
 
 ### Terminology
 
+<!-- START NOTES -->
+
 We introduce some useful terminology for classifying sorting algorithms:
 
 Stability
@@ -62,6 +64,8 @@ Adaptivity
 
 In-place
 :   When the memory use of the algorithm does not grow (too much) when the array size grows. This means that we cannot use an additional array, and therefore have to modify the original array.
+
+<!-- END NOTES -->
 
 -------------
 

@@ -5,6 +5,8 @@
 - Prio 2: reformulate as a generic graph search algorithm
 :::
 
+<!-- START NOTES -->
+
 ### Generic graph search
 
 Recall the basic algorithm for any kind of graph traversal:
@@ -71,6 +73,8 @@ What is the time complexity of Prim’s algorithm?
 In the worst case all edges in the graph are added to the agenda, so the agenda will have size $O(E)$, and since adding an element to a priority queue is logarithmic, we get the total time build the agenda to be $O(E \log(E))$. (We can also reason that we will in the worst case iterate through all edges, so the while loop runs O(E) times. And since removing from a priority queue is logarithmic, each loop body is $O(log(E))$ and the total time is therefore O(E log(E)).)
 
 Furthermore, we know that $E \in O(V^2)$, and therefore $O(\log(E)) = O(\log(V^2))$ = $O(2 \log(V)) = O(\log(V))$. So the total complexity of Prim’s algorithm can be written as $O(E \log(V))$.
+
+<!-- END NOTES -->
 
 --------------------
 

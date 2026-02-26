@@ -5,6 +5,8 @@
 - Prio 2: update text, (semi)formal definitions
 :::
 
+<!-- START NOTES -->
+
 There are two main ways of implementing graphs:
 
 - *Adjacency list*: a map from vertices to its outgoing edges – this can be a BST, a hash table, or some other map data structure. If the vertices are exactly the numbers $0, 1, \ldots, n–1$, the map can be a simple array (where the value of a vertex is the index in the array).
@@ -40,6 +42,8 @@ class Edge:
 
 Note that for every outgoing edge e from a vertex v, we see that v = e.start.
 Also note that in this implementation, all edges are inherently directed – this means that we represent an undirected graph as a directed graph where each undirected edge becomes two directed.
+
+<!-- END NOTES -->
 
 ----------------
 

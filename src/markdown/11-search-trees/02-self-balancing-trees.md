@@ -5,11 +5,15 @@
 - Prio 2: write an overview of rotations
 :::
 
+<!-- START NOTES -->
+
 As we saw, binary search trees (BST) work fine when we insert elements in a somewhat random order. Then the height of the final tree will grow logarithmically in the number of nodes, which is another way of saying that the tree is quite balanced.
 
 The problem with BSTs is that we cannot guarantee that the tree will be balanced, and if we insert elements in the wrong order (for example in sorted order), then it will become very unbalanced. That’s where self-balancing trees come in.
 
 A *self-balancing* tree ensures that it will always be balanced, regardless in what order elements are added or removed from the tree. There are many many different kinds of self-balancing trees, and we will not have time to look into more than a couple. Today we will talk about AVL trees and next week it will be 2-3 trees and B-trees.
+
+<!-- END NOTES -->
 
 -----------
 

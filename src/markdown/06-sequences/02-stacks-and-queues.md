@@ -7,6 +7,8 @@
 - Prio 2: make the case study more compact
 :::
 
+<!-- START NOTES -->
+
 Stacks and queues are our first *abstract data types* (ADTs). Each of them has an interface that says how to use them, but it doesn’t say how they are implemented. And both of them can be implemented in different ways, using different *data structures*.
 
 Both stacks and queues are collections of objects, where you can add elements and remove them one by one. The difference between them is in which order the elements are removed. So, when are stacks and queues used? Most of us can easily find situations where a queue is appropriate, and it feels more “democratic” to attend to issues in the order they arrive, than the opposite. But in fact stacks are much more common in programming. The main reason for this is that stacks are fundamental if we want to implement recursion and function calls.
@@ -185,6 +187,7 @@ One interesting thing with lists is that it is impossible (or at least ver diffi
 
 The most common implementation of a general list is a dynamic array, and that is how both Python lists and Java ArrayLists do it. For both of them it is inefficient to insert and remove elements at the beginning.
 
+<!-- END NOTES -->
 
 -------
 

@@ -1,6 +1,8 @@
 
 # Algorithm analysis, part 2 {#analysis-part-2}
 
+<!-- START NOTES -->
+
 So far I have just talked about complexity informally, hand-waved a little and said that we can disregard constants. Now is the time to make these things more precise.
 
 We use the term “asymptotic complexity” to describe how a function behaves when its input grows larger and larger. This is a very vague term and can mean many things. For example, the following function:
@@ -18,6 +20,8 @@ However, this formulation is still too detailed for our purposes. Most of the ti
 This is where the big-O notation comes in. Using this we can say something about the asymptotic complexity of an algorithm, in a mathematically precise way, without having to deal with constant factors that only makes reasoning harder.
 
 Note that sometimes big-O is too abstract. Sometimes we are actually interested in the constant factors too, for example if we want to compare two algorithms with the same big-O complexity. But you don’t have to learn how to do this in this course, you only have to learn about big-O (and its sister notations).
+
+<!-- END NOTES -->
 
 ----------
 

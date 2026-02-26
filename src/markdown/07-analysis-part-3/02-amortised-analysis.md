@@ -8,6 +8,8 @@
 - Prio 3: make self-organising lists a "case study"
 :::
 
+<!-- START NOTES -->
+
 The worst case complexity of appending to a dynamic array is linear in the length of the array – because if we are unlucky we have to resize it. But why does it not behave like that?
 
 This is because most of the time we are lucky. If we append to the dynamic array enough times, the cost of one expensive operation will be evened out by the cheap cost of all the lucky appends. We say that the *amortised* cost of appending to a dynamic array is constant.
@@ -82,6 +84,8 @@ Amortised complexity
 
 Expected complexity
 :   is used when the algorithm uses randomisation. Standard worst-case analysis can only reason about the extremely unlikely worst case of a random dice roll, but expected complexity can reason about how the algorithm is expected to behave on the worst case input. One example is again Quicksort: if we use a random pivot we get *expected* linearithmic complexity, which is much better than the quadratic complexity of non-random Quicksort.
+
+<!-- END NOTES -->
 
 ------------------
 

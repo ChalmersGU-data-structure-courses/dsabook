@@ -8,6 +8,8 @@
 - Prio 2: simplify code
 :::
 
+<!-- START NOTES -->
+
 We can nudge Prim’s algorithm just a little to get a (single-source) shortest path algorithm. The only thing we have to do is to use another priority. Instead of using the weight of the current edge, we use the *total cost* of the whole path from the start vertex. This means that the agenda will still contain edges, but their priority is different from the weight of the edge.
 
 The algorithm is usually called *Dijkstra’s algorithm*, but also *uniform cost search*:
@@ -101,6 +103,8 @@ Note that if the heuristics is *not* admissible, then A* will still find a path,
 ### Greedy search (optional)
 
 Another way to order the priority queue is to not care at all about $g(v)$, the cost from *start* to $v$ – instead we let only the heuristics $h(v)$ affect the search. This is called *greedy* search. The resulting path is often very far from optimal – but on the other hand it usually finds some result much quicker than A* or Dijkstra does.
+
+<!-- END NOTES -->
 
 -------------------
 

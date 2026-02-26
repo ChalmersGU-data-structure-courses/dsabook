@@ -1,5 +1,7 @@
 ## 2-3 trees and B-trees
 
+<!-- START NOTES -->
+
 AVL trees do not ensure that a tree is perfectly balanced, the height invariant cannot give a better guarantee than that the height is within a constant times the optimal height. But if we allow for more than two children per node it is possible to ensure that all trees are of optimal height. This is done by the 2-3 trees.
 
 2-3 trees have two kinds of nodes: 2-nodes (normal binary nodes), and 3-nodes. A 3-node has two values (we call them **a** and **b**) and three children (called **p**, **q** and **r**). The BST invariant is generalised to the following:
@@ -143,6 +145,8 @@ There is even a translation from 2-3 trees into a subclass of red-black trees, t
 ### Test them yourself
 Here are nice interactive visualisations of B-trees, red-black trees and other trees:
 https://chalmersgu-data-structure-courses.github.io/dsvis/collections.html
+
+<!-- END NOTES -->
 
 ----------
 

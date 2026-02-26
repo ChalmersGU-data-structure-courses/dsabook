@@ -9,6 +9,8 @@
 - Prio 3: both recursive and iterative versions
 :::
 
+<!-- START NOTES -->
+
 Binary search trees (BST) are binary trees that satisfy the following invariant:
 
 - all elements in the left subtree are *smaller* than the node element, which in turn is *smaller* than all elements in the right subtree
@@ -99,6 +101,8 @@ When we set/update a key-value pair we have two possibilities:
 - The key is already present: then we just change the value in the node.
 - The key is not there: then we add a new tree node.
 
+
+<!-- END NOTES -->
 
 ----------------
 
