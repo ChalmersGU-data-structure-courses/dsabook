@@ -64,10 +64,10 @@ The modified Prim algorithm looks something like this:
         - Stop when all vertices have been visited
         - For each outgoing edge $e$:
             - Let $cost = e.weight$ (Prim), or $w + e.weight$ (Dijkstra)
-            - If $e.end$ is not in agenda or has worse priority than *cost*:
-                - If $e.end$ is in the agenda: update its priority to *cost*
-                - Otherwise: add *e.end* with priority *cost*
-                - Set *backpointers*[$v$] = $e$
+            - If $e.end$ is in the agenda and has better priority than *cost*: skip this iteration
+            - If $e.end$ is in the agenda: update its priority to *cost*
+            - Otherwise: add *e.end* with priority *cost*
+            - Set *backpointers*[$v$] = $e$
 
 This modified algorithm can sometimes be quite a lot faster than our simpler version (with useless agenda entries) – this depends a lot on the graph. If we use a *Fibonacci heap* instead of a binary heap, the time complexity goes down to $O(E + V \log(V))$. Furthermore, if the graph is dense the number of edges $E$ dominates over the number of vertices $V$, so we get $O(E)$ instead of $O(E \log(V))$.
 
