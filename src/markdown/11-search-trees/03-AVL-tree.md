@@ -27,7 +27,7 @@ When we draw AVL trees we usually write the balance factor beside each node. Her
 
 So how can we ensure that we never break the balancing invariant?
 
-### Inserting into an AVL tree
+#### Inserting into an AVL tree
 
 First we insert using the standard BST procedure. This might break the invariant of some ancestor node. For example, if we want to add H to the previous trees, then they will look like this, where the balance factors that are changed are shown in red:
 
@@ -39,7 +39,7 @@ Notice that the left tree is still AVL balanced, so we don’t have to do anythi
 
 One important thing to note is that the parent node has to be updated too: before the rotation its right child was F, but after the rotation its right child will be G instead.
 
-### Single rotations
+#### Single rotations
 
 The example above was when the unbalanced node had a *right-right imbalance*. This was solved by a *single left* rotation. The mirror situation, a *left-left* imbalance, is of course solved in the mirrored way, by a *single right rotation*.
 
@@ -55,7 +55,7 @@ There is another possibility, if the subtree $t_2$ is as high as $t_3$:
 
 Now the result is not perfect, but at least the inner nodes X and Y become AVL balanced.
 
-### Double rotations
+#### Double rotations
 
 There is a third right-heavy case, and that is when the *right-left* grandchild ($t_2$) is higher than the *right-right* ($t_3$). If we perform a single rotation over X we won’t win anything:
 
@@ -69,13 +69,13 @@ The solution is to perform a *double rotation*. First we transform the right-lef
 
 And now all nodes are balanced!
 
-### Deleting a node
+#### Deleting a node
 
 Deletion in an AVL tree is similar to addition: first we use the normal BST deletion, and then we rebalance the parent nodes.
 
 It is more tricky to implement deletion than addition, because there are more cases to take care of. Therefore we won’t do AVL deletion in this course.
 
-### Complexity analysis
+#### Complexity analysis
 
 How much extra time does it take to rebalance the tree?
 
@@ -89,7 +89,7 @@ In fact, rebalancing after addition is constant time, because the tree will alwa
 
 In summary, we have come up with our first *efficient* general-purpose data structure for sets and maps. This is also one of the most common ones in practice, and very easy to implement.
 
-### Implementing AVL tree nodes
+#### Implementing AVL tree nodes
 
 The only thing we have to change, compared to BST nodes, is that we need to store the balance for each node. This extra variable have the only possible values +1, 0 and –1:
 
@@ -103,7 +103,7 @@ class AVLNode:
 
 (An alternative is to store the subtree height in each node, and then we can calculate the balance as the difference of heights between each child.)
 
-### Ordered sets and maps
+#### Ordered sets and maps
 
 Search trees have an additional property that for example hash tables do not: the elements are stored in sorted order. This means that we can implement some additional operations that sometimes are very useful: we can find the *minimum* or *maximum* values easily, and we can even find the *predecessor* or *successor* of a given value, or the *floor* or *ceiling*.
 
@@ -114,7 +114,7 @@ Search trees have an additional property that for example hash tables do not: th
 
 And of course there are corresponding operations for *ordered maps* too.
 
-### Yet another sorting algorithm
+#### Yet another sorting algorithm
 
 Using AVL trees we can define a very simple but efficient sorting algorithm. First we build an AVL tree from all elements, and then we do an *inorder traversal* to get the elements in sorted order:
 
@@ -130,7 +130,7 @@ What is the complexity of this algorithm? The slowest part is building the tree:
 
 This has the same complexity as Mergesort, and is as good as the best sorting algorithms. So why don’t anyone use it? It is because the hidden constants are bigger than Mergesort: it takes longer time and also uses more extra memory.
 
-### Test them yourself
+#### Test them yourself
 
 There are nice interactive visualisations of AVL trees (and other search trees) here:
 https://chalmersgu-data-structure-courses.github.io/dsvis/collections.html

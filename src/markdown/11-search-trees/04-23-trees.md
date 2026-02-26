@@ -15,7 +15,7 @@ In addition 2-3 trees have the following height invariant:
 
 Since 2-3 trees have two different kinds of nodes, all operations have to account for both of them, and all possible combinations that can occur. Conceptually the operations are not difficult to understand, but they can be quite complex because of all cases we have to take care of.
 
-### Searching in a 2-3 tree
+#### Searching in a 2-3 tree
 
 To search for a *key* we do the same as for BSTs, start at the root and follow a path down through the tree. When we encounter a 3-node we do like this:
 
@@ -25,7 +25,7 @@ To search for a *key* we do the same as for BSTs, start at the root and follow a
 
 So, the same strategy as for BSTs, but more cases to handle.
 
-### Inserting into a 2-3 tree
+#### Inserting into a 2-3 tree
 
 Conceptually the idea is the same as for AVL trees: first we search for the leaf where the value should be inserted, then we insert the value, and finally we rebalance if necessary. However, both the insertion and the rebalancing processes are quite different from AVL trees.
 
@@ -60,7 +60,7 @@ First insert “A L G O R I T H M” into the empty tree, and you will get the f
 
 Implementing insertion is not very difficult, but there are some cases to handle (for example, if the new element is smaller, or in between, or larger, than the existing elements). On the other hand, you don’t have to implement any rotations, but there is instead just the splitting and promoting.
 
-### Deleting from a 2-3 tree (optional)
+#### Deleting from a 2-3 tree (optional)
 
 The basic idea is a mirror of insertion: first delete the element from the node, then we rebalance the tree to keep the invariants. There are three main cases:
 
@@ -80,14 +80,14 @@ Note that if the parent had been a 2-node, then it would become a 1-node after m
 
 Although the basic idea of deletion in a 2-3 tree is not very difficult, there are a lot of different cases that we have to handle, so the code becomes quite large. In this course you don’t have to learn how to perform deletion from 2-3 trees.
 
-### Complexity analysis
+#### Complexity analysis
 
 Searching in a 2-3 tree is logarithmic in the number of nodes, $O(\log(n))$, because the height of the tree is logarithmic.
 
 When we insert into a 2-3 tree, we start from a leaf and try to grow it. If the leaf becomes overfull, we split and promote the insertion to the parent. In the worst case we have to continue promoting all the way up to the root. Since the tree has logarithmic height, this can in the worst case continue a logarithmic number of times. So insertion is also logarithmic, $O(\log(n))$.
 Deletion has exactly the same analysis (but more cases to take care of). In the worst case we have to merge and demote a parent value, and this could continue all the way to the root. Therefore deletion is also logarithmic, $O(\log(n))$.
 
-### B-trees
+#### B-trees
 
 Noone actually uses 2-3 trees (but see red-black trees below): they are more complex to implement than AVL trees and do not give any particular improvement. But 2-3 trees are still very important, because their basic idea can be generalised to much larger nodes. These are called B-trees, and 2-3 trees is one kind of B-trees.
 
@@ -109,7 +109,7 @@ When inserting into a B-tree of order $m$, we do the same as for 2-3 trees: firs
 
 Just as for 2-3 trees, deleting results in many cases for stealing elements from neighbouring nodes, and merging when nodes become too sparse.
 
-### File systems, databases, and B+ trees
+#### File systems, databases, and B+ trees
 
 B-trees is the most common data structure for managing file systems, as well as very large databases. Normally, the size of a node in the B-tree is chosen to fill a disk block of the particular file system, so a typical B-tree implementation has an order of 100 or more. This means that we can reduce the number of disk accesses, by loading a full B-tree node from the (slow-ish) disk to the (much faster) internal memory.
 
@@ -128,7 +128,7 @@ In practice, B-trees are not used either – instead the normal implementation i
 
 In this course you do not have to know much more about B-trees than that they are a generalisation of 2-3 trees, and that they (or rather, a variant) are the most common data structure for managing file systems and very large databases.
 
-### Red-black trees and 2-3-4 trees (optional)
+#### Red-black trees and 2-3-4 trees (optional)
 
 2-3-4 trees are actually used in practice in many data structure implementations, but they are then called *red-black trees*. The key insight is that any 2-3-4 tree can be converted to a binary search tree, where each node has a binary value. This value is called the “colour”, and a node can be either black or red. The conversion looks like this, for any 2-, 3- or 4-node:
 
@@ -142,7 +142,7 @@ There is even a translation from 2-3 trees into a subclass of red-black trees, t
 - https://en.wikipedia.org/wiki/Left-leaning_red-black_tree
 - https://en.wikipedia.org/wiki/AA_tree
 
-### Test them yourself
+#### Test them yourself
 Here are nice interactive visualisations of B-trees, red-black trees and other trees:
 https://chalmersgu-data-structure-courses.github.io/dsvis/collections.html
 

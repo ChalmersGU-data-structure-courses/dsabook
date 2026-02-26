@@ -45,7 +45,7 @@ Afterwards the shortest path tree contains the edges $AB$, $BC$, $BD$, $CE$ and 
 
 If we want to extract an actual path from $A$ to for example $F$, we can store the SPT as backpointers – a map from vertices to the edge that ends in that vertex. Then we can build the path backwards from $F$ to $A$ by following the backpointers.
 
-### Useless entries in the agenda (optional)
+#### Useless entries in the agenda (optional)
 
 Sometimes we add an edge to the agenda that will in the end not be used because another edge with the same endpoint had lower weight. This is what happened to the edges $AC$ and $CD$ in our Dijkstra example. So, if we use our algorithm we will sometimes have entries in our agenda that will turn out to be useless. Can we improve this somehow?
 
@@ -75,7 +75,7 @@ This modified algorithm can sometimes be quite a lot faster than our simpler ver
 
 If you don’t have access to an updateable priority queue, it is still possible to adopt some of the ideas to our simpler algorithm. We can keep a map from vertices to costs (the currently best known cost to that vertex), and only add an edge to the agenda if this will improve the best cost for the end vertex of the edge.
 
-### A* algorithm (optional)
+#### A* algorithm (optional)
 
 Dijkstra’s algorithm is blind – it has no idea whatsoever in which direction it should search. The only controlling mechanism is the priority queue, and it is ordered by the total cost of the path from the start – that is, the path you have already walked.
 
@@ -100,7 +100,7 @@ Another example of an admissible and consistent heuristics is $h(v) = 0$. In thi
 
 Note that if the heuristics is *not* admissible, then A* will still find a path, but this path is not guaranteed to be the shortest. However, it will usually find that path quicker, so increasing the heuristics (for example by multiplying with some constant) can sometimes be good if we have a very large graph and want to find *some* path but not necessarily the shortest.
 
-### Greedy search (optional)
+#### Greedy search (optional)
 
 Another way to order the priority queue is to not care at all about $g(v)$, the cost from *start* to $v$ – instead we let only the heuristics $h(v)$ affect the search. This is called *greedy* search. The resulting path is often very far from optimal – but on the other hand it usually finds some result much quicker than A* or Dijkstra does.
 

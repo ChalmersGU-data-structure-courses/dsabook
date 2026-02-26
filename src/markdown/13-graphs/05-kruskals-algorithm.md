@@ -38,7 +38,7 @@ This function loops over all edges in the MST, and in the worst case this contai
 
 What is then the complexity of Kruskal’s algorithm? Well, we iterate over $O(E)$ edges, and test each of these for cyclicity, so we get $O(VE)$. If the graph is sparse, $E \in O(V)$ and the complexity can be simplified to $O(V^2)$, but if it is very dense, $E \in O(V^2)$ and the complexity is the same as $O(V^3)$.
 
-### Using a disjoint-set instead of a normal set
+#### Using a disjoint-set instead of a normal set
 
 This complexity is if we store the MST as a set, but it is possible to do much better.
 

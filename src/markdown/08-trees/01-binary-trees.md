@@ -16,7 +16,7 @@
 
 <!-- START NOTES -->
 
-### Trees {-}
+#### Trees
 
 A tree is similar to a linked list: it consists of nodes which point to other nodes. The difference is that a linked list node has *one* possible successor node, but a tree can link to *many* other nodes. These nodes are called the *children* of the parent node.
 
@@ -24,7 +24,7 @@ A linked list start with one node, the *head*, and correspondingly a tree starts
 
 ![](images/GenericTree.png)
 
-### Binary trees {-}
+#### Binary trees
 
 The most common type of trees are *binary* trees. The main reason for this is because they are the simplest to implement, and we very rarely need something else.
 

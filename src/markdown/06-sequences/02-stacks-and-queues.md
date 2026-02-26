@@ -15,7 +15,7 @@ Both stacks and queues are collections of objects, where you can add elements an
 
 Whenever a function calls another function, the system must remember the current local state: what it should continue with after the call is done, what are the values of the local variables, etc. Therefore it creates an object with all this information, and pushes it to the *call stack*. Now, if the new function calls yet another function, that local state is pushed to the call stack. When this third function ends, the system can pop the previous local state from the call stack and continue processing the second function. And when this function ends, the call stack is popped once again so that it can continue where the first function was paused.
 
-### Stacks and queues as abstract data types (ADT)
+#### Stacks and queues as abstract data types (ADT)
 
 A stack or a queue needs to have the following operations, as the absolut minimum:
 
@@ -43,7 +43,7 @@ Don’t be fooled by different names! The important thing is their semantics, an
 
 So, how do we implement stacks and queues? The interesting thing with these two ADTs is that there are several possible data structures that can implement them!
 
-### Stacks as (dynamic) arrays
+#### Stacks as (dynamic) arrays
 
 Last time we talked about dynamic arrays, and showed that appending to the end is very efficient (but inserting at the beginning is slow). Can we make use of that to implement a stack? Yes, we just have to think of the array as reversed:
 
@@ -53,13 +53,13 @@ Now push() is exactly the same as append(). If we want we can use different name
 
 How about popping()? It’s just opposite of pushing, where we decrease the size of the internal array. Note that it is good habit to delete the popped element from the array (that is, assigning that array cell to null), so that the garbage collector can remove it when it’s no longer used.
 
-### Decreasing the size of a dynamic array
+#### Decreasing the size of a dynamic array
 
 But what about the size of the internal array when we pop? Assume that we have pushed 1 million elements to the stack, and then popped them all – then our internal array will still occupy (at least) 1 million cells in memory. Is it possible to decrease the size of the internal array when popping?
 
 Yes, it is, but then it is very important that we don’t resize it too soon. Let’s say that we double the size when pushing – then we cannot halve the size when it is half full. Instead we have to wait until the array is *less than half full*, for example 1/3 full.
 
-### Queues as circular (dynamic) arrays
+#### Queues as circular (dynamic) arrays
 
 A dynamic array is perfectly suited for implementing a stack, but can we also use it to implement a queue? Enqueueing is as easy-peasy as pushing to a stack – just append to the dynamic array. But how do we remove elements from the front – without having to shift all elements?
 
@@ -96,7 +96,7 @@ There are several ways to copy the elements.  Here are two other possibilities t
 
 ![](images/CircularQueue6.png)
 
-### Stacks as linked lists
+#### Stacks as linked lists
 
 One very nice thing with stacks and queues is that we can use a completely different implementation – there are different data structures that implement each ADT.
 
@@ -129,7 +129,7 @@ What will happen with the old head Node object? When there is nothing that point
 
 What is the complexity of the stack operations? That’s quite simple: both push and pop consists of only constant time operations, and there is no looping or similar involved, so both of them must be constant, $O(1)$.
 
-### Queues as linked lists
+#### Queues as linked lists
 
 Implementing a queue is a little more tricky. It is still easy to remove elements – we can reuse the pop operation from stacks. But now we don’t want to add elements to the front, but instead at the very end. The only way to do that with the linked list from above is to traverse the whole linked list. And this is of course linear in the number of elements. That won’t do.
 
@@ -148,7 +148,7 @@ But how about enqueueing? Now we want to add the new node to the back instead. T
 
 The complexity is still constant – the operations are slightly more complex that for stacks, but only by a constant.
 
-### Queues as pairs of stacks (optional)
+#### Queues as pairs of stacks (optional)
 
 One special property of stacks is that if we push a sequence of elements and then pop them all, we get them in *reversed* order. And of course, if we do the same again, we get our original order back. This insight can be used for a third possible implementation of queues, which uses use two stacks – one “enqueue” stack and another “dequeue” stack.
 
@@ -164,7 +164,7 @@ However, once in a while, dequeueing will be slow because we have to move all el
 
 This kind of queue matches very well with the functional programming paradigm, so it is the method of choice in for example Haskell.
 
-### Double-ended queues (deques)
+#### Double-ended queues (deques)
 
 A double-ended queue is both a stack and a queue at the same time. We can add and remove elements both from the front and the back (but not in the middle):
 
@@ -179,7 +179,7 @@ However, it is not as easy to implement a deque using a linked list. The solutio
 
 Now, to add or remove an element, we have to make sure we assign both the *next* and *prev* pointers, for the neighbouring nodes. This can be a little tricky, but in the end it’s not very complicated.
 
-### General lists
+#### General lists
 
 Stacks and queues (and deques) are special cases of a more general abstract data type, the list. In a general list you can access any element by its position in the list, you can replace elements, and you can insert and remove elements. Python lists are one example, and the ArrayList in Java is another.
 

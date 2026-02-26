@@ -23,7 +23,7 @@ To search for an element in a BST, we start at the root and compare. If what we 
 
 How do we add an element to a BST? First of all we have to search for it – if it is already in the tree we do nothing. But if the element is not in the tree, we know where it should be – it should be a child of the last node we compared with. If the element is smaller, we add a new node as a left child, and if the element is larger we add the new node as a right child.
 
-### Deleting from a BST
+#### Deleting from a BST
 
 Searching and adding are straightforward to implement. Deletion is a little trickier, but not too hard. The first we have to do is to find the node with the element we want to remove, using the standard search algorithm. Now there are three possible cases:
 
@@ -59,13 +59,13 @@ In the end we will get one of the following two BSTs:
 
 Notice that both of these trees are different representations of exactly the same set!
 
-### The effect of order of insertion
+#### The effect of order of insertion
 
 There are infinitely many BSTs that represent the same set. (No, I’m just kidding, but the are exponentially many.) For example, all of these implement the same set:
 
 ![](images/BST-ExampleVariants.png)
 
-### Complexity analysis
+#### Complexity analysis
 
 The complexity of the operations all depend on how efficient the search algorithm is. And this depends a lot on the structure of the tree.
 
@@ -77,12 +77,12 @@ If we build a BST from a sorted list (or reversely sorted), then we will get an 
 
 In any case, almost noone uses plain BSTs because there is no guarantee of their worst-case complexity. But there are plenty of useful data structures that are based on BSTs and which have good worst-case guarantees. They accomplish this by automatically rebalancing themselves when necessary. One example of such a self-balancing search tree are the AVL trees (which I will talk about tomorrow).
 
-### Test them yourself
+#### Test them yourself
 
 There are nice interactive visualisations of BSTs (and other search trees) here:
 https://chalmersgu-data-structure-courses.github.io/dsvis/collections.html
 
-### Implementing maps instead of sets
+#### Implementing maps instead of sets
 
 The only real difference if we want to implement a map instead of a set, is the definition of the tree nodes. Every node now has to store both the key and the value:
 

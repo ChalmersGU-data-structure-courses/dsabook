@@ -32,7 +32,7 @@ Note that DFS can visit the vertices in quite different order depending on in wh
 
 How do we mark the visited vertices? In some graph implementations it is possible to actually mark vertices, but another very common way is to have a set where you add the vertices one at the time. This is what we will do in this book.
 
-### Recursive depth-first search
+#### Recursive depth-first search
 
 When we call a function recursively, the current program state is pushed onto the call stack, so that it knows where to continue when the subroutine is finished. This can be utilised in traversal – instead of having an explicit stack for the agenda, we can make a recursive version of DFS:
 
@@ -44,11 +44,11 @@ When we call a function recursively, the current program state is pushed onto th
 
 This is a very common way of traversing a graph or a tree (remember the preorder, inorder and postorder traversals of binary trees). Note that it will not visit the vertices in exactly the same order as if we use iterative DFS version with an explicit stack.
 
-### Traversing a tree
+#### Traversing a tree
 
 If the graph is a tree we don’t have to check if a vertex is visited, because there are no cycles – apart from that the code is the same. This is also how we traverse “normal” trees such as BSTs and the like – the “outgoing edges” are then the children of a node.
 
-### Use case: reachability
+#### Use case: reachability
 
 DFS (or BFS) can be used to find all vertices that are *reachable* from a given vertex – just run DFS (or BFS), and return the set of visited vertices. But why is that useful?
 
@@ -60,11 +60,11 @@ One example use case is *garbage collection* (GC). The mark-and-sweep algorithm 
 
 The main disadvantage with mark-and-sweep is that it cannot be run in parallel with the “real” program, so it has to be suspended when it’s time for garbage collection. Modern garbage collectors use various modifications and optimisations.
 
-### Use case: shortest path
+#### Use case: shortest path
 
 If the graph is unweighted, then BFS will visit the vertices in increasing distance from the start – BFS is a *shortest path* algorithm! (More about this in @sec:shortest-paths-problems.)
 
-### Example problem: finding a cycle in a graph
+#### Example problem: finding a cycle in a graph
 
 There are two famous cycle-finding problems for undirected graphs that are deceivingly similar – but one of them is almost trivial to solve while the other is extremely difficult!
 

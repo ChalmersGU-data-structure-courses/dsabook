@@ -7,7 +7,7 @@
 
 <!-- START NOTES -->
 
-### Generic graph search
+#### Generic graph search
 
 Recall the basic algorithm for any kind of graph traversal:
 
@@ -25,7 +25,7 @@ In @sec:traversing-graphs we wrote that if the agenda is a stack we get depth-fi
 
 This depends on what we use as the priority values. If we have a weighted graph, then it’s natural to use the weights. In this case we get another MST algorithm: Prim’s.
 
-### Prim’s algorithm
+#### Prim’s algorithm
 
 Kruskal’s algorithm repeatedly adds edges to an *unconnected* subgraph, until it becomes fully connected (and without cycles). While the algorithm is running, the set of edges does not have to be a tree – instead it consists of a *forest*, or a set of trees.
 

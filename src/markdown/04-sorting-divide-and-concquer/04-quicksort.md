@@ -63,13 +63,13 @@ After the partitioning is finished we know the following:
 - The left part is not sorted, but all the elements in the left part should be somewhere in there. This means that we can recursively sort the left part.
 - The same for the right part.
 
-### Alternative partitioning algorithm
+#### Alternative partitioning algorithm
 
 There is another common partitioning algorithm, where both pointers start at the left side and move to the right – but one of them moves faster than the other. This algorithm is called *Lomuto* partitioning (and the one I described is called *Hoare* partitioning). You can read more about this alternative algorithm on Wikipedia:
 
 - https://en.wikipedia.org/wiki/Quicksort#Lomuto_partition_scheme
 
-### Selecting a pivot
+#### Selecting a pivot
 
 So, what is a good pivot? The best is to select the *median* element (not the average and not the middle!). This will make the two partitions the same size and we will get the best performance. In this case the complexity analysis is exactly the same as for Mergesort, so Quicksort is linearithmic, $O(n \log(n))$, ***but only if*** we select a good pivot.
 
@@ -86,7 +86,7 @@ The problem arises as soon as you are not 100% certain where the data comes from
 So, how can we find a good pivot that is secure to hackers? One simple way is to select a random element. If we do this, we can prove that the *expected* complexity of Quicksort is linearithmic. Another possibility is to shuffle the array before sorting, and then use the simplest possible pivot which is always taking the first. This has the same effect as selecting a random pivot.
 
 
-### Putting it together
+#### Putting it together
 
 What remains is to give the final algorithm for Quicksort. The overall structure is very similar to Mergesort, but since the algorithm is in-place it doesn’t return anything.
 
@@ -104,11 +104,11 @@ Here is the final algorithm sketch for sorting the slice *low*...*high* of a giv
 
 Note that we don’t include the pivot itself (which mid points to) in the slices of the recursive calls (we use *mid*–1 and *mid*+1 respectively). This is because we know that after partitioning the pivot is in its final correct position.
 
-### Optimising by backing off to Insertion sort
+#### Optimising by backing off to Insertion sort
 
 Just as for Mergesort we can back off to Insertion sort (or Selection sort) whenever the array slice becomes too small. This is a small and simple optimisation that can give good effects.
 
-### Selection sort as a variant of Quicksort (optional)
+#### Selection sort as a variant of Quicksort (optional)
 
 What happens if we are extremely unlucky (or stupid) with the pivot selection?
 

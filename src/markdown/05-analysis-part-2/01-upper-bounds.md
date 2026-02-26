@@ -21,7 +21,7 @@ If this is the case we say that $g$ is an *upper bound* of $f$.
 
 Note that we use set membership, $f \in O(g)$. This is because we view $O(g)$ as the set of all functions $f$ for which the definition holds. And this means that for example $O(5x^2-7x+100\log_2(x)+10^9)$, $O(5x^2)$, and $O(x^2)$ all describe the same set. We will always use the most compact way of describing this set, in this case $O(x^2)$.
 
-### Big-O and logarithms
+#### Big-O and logarithms
 
 One interesting consequence of asymptotic complexity is that the base of a logarithm becomes irrelevant:
 
@@ -39,7 +39,7 @@ The reason for this is that $\log(n^k) = k\cdot\log(n)$ according to the logarit
 
 However, taking the *power* of a logarithm cannot be ignored, so $O(\log(n))$ and $O(\log(n)^2)$ are different complexity classes.
 
-### Complexity classes and the complexity hierarchy
+#### Complexity classes and the complexity hierarchy
 
 Big-O classifies all functions and algorithms into *complexity classes*, and these classes form a hierarchy – the *complexity hierarchy*. There are infinitely many complexity classes, but the most common ones are the following:
 
@@ -47,7 +47,7 @@ $$ O(1) < O(\log(n)) < O(n) < O(n \log(n)) < O(n^2) < O(n^2 \log(n)) < O(n^3) < 
 
 Note that I have excluded many many complexity classes, for example $O(\log(n)^2)$ and $O(\sqrt{n})$. You can try to figure out where in the hierarchy they should be placed.
 
-### Laws for big-O
+#### Laws for big-O
 
 The definition of big-O only gives an *upper bound* of a function. One effect of this is that $f \in O(g)$ even if $f$ grows *faster* than $g$. For example, if $f$ is logarithmic, we can say that $f \in O(\log(n))$, but it is also true that $f \in O(n)$ or even $f \in O(n^2)$. So the complexity hierarchy above could also be formulated using subset notation:
 
@@ -83,7 +83,7 @@ case"). For example, if $n^2$ grows as fast as $T(n)$ (the
 running time of our algorithm) for the worst-case input, we would say
 the algorithm is "in $O(n^2)$ in the worst case".
 
-### Formal definition
+#### Formal definition
 
 So, how do we define the upper bound?
 First, if $g$ is an upper bound of $f$, then this should mean something like $f(n)\leq g(n)$ *in the long run*.

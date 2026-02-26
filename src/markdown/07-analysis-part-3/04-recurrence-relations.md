@@ -52,7 +52,7 @@ For example, what are the solutions to the following recurrences?
 - $T(n)  =  3 T(n/2) + O(n^2)$
 - $T(n)  =  7 T(n/2) + O(n^2)$
 
-### The Master theorem (optional)
+#### The Master theorem (optional)
 
 Yes, there is a general way to solve many recurrence relations (but not all)!
 This is called the *Master theorem* (yes, a very humble name...), and it can be formulated like this:
@@ -112,7 +112,7 @@ In the final three examples, $b$ is still 2, but $a$ is either 3 or 7, and $k$ i
 - if $a = 3$ and $k = 2$, then $a < b^k$ and we get the third case, so $T(n) \in O(n^2)$
 - if $a = 7$ and $k = 2$ we’re back in the first case, $a > b^k$, so $T(n) \in O(n^{\log_2(7)}) \approx O(n^{2.8})$
 
-### Case study: Karatsuba multiplication (optional)
+#### Case study: Karatsuba multiplication (optional)
 
 How do we multiply numbers? If they are small enough they are handled efficiently by the processor, but what if the numbers are large with thousands of digits each?
 
@@ -178,7 +178,7 @@ The Master theorem now tells us that $T(n) \in O(n^{\log_2(3)}) \approx O(n^{1.6
 The first who noticed this algorithm was Anatoly Karatsuba in 1960 and therefore it is called *Karatsuba multiplication*. Here is more information about the algorithm, together with information about even faster algorithms:
 https://en.wikipedia.org/wiki/Karatsuba_algorithm
 
-### Case study: matrix multiplication (optional)
+#### Case study: matrix multiplication (optional)
 
 How can we calculate the cross product $C = A \times B$ of two square matrices $A$ and $B$?
 

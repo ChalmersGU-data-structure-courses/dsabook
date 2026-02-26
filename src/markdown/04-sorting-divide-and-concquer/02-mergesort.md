@@ -21,7 +21,7 @@ Now we only have to know how to split and merge. Splitting is really easy: just 
 
 To merge two sorted arrays, we iterate through them in parallel. We do this by having two pointers, one for each array. (Note: a pointer here just means an array index – something that tells us where in the array to look.)
 
-### The base case! {-}
+#### The base case!
 
 Hopefully you noticed that forgot a very important part in my algorithm. The way I described divide-and-conquer, it will continue calling the recursive step 2 endlessly, so we need a way to stop it all. This is called the *base case*.
 
@@ -29,7 +29,7 @@ Just before the very first divide step, we have to check if the problem is small
 
 The standard base case for Mergesort is a *singleton* array – an array with only one element. This array is of course already sorted, so the solution is to just return it.
 
-### Merging two sorted arrays {-}
+#### Merging two sorted arrays
 
 Here is the algorithm for merging two sorted arrays, *left* and *right*:
 
@@ -44,13 +44,13 @@ Here is the algorithm for merging two sorted arrays, *left* and *right*:
 
 You can try to sort a bookshelf in this way. You will quickly notice that it is very difficult to do the merging in-place, efficiently (that is, without “sliding” the books in the left part). But if you instead move the books out of the shelf and merge back in, it becomes easy. And this intuition is true also for a computer implementation – making Mergesort in-place is difficult, and quite costly. This is the main disadvantage with this sorting algorithm – we need to allocate extra space.
 
-### Allocating extra space in practice {-}
+#### Allocating extra space in practice
 
 Creating a new temporary array in each recursive call takes some time, and it is often more efficient to do that once and for all before the first recursive call. You can do this by creating a new empty array with the same size as the original array, before starting the recursion. Then you give both the original array and the temporary array as arguments to the recursive Mergesort function.
 
 And remember, you should not use slicing because that copies a new array. Instead you should use two pointers (array indices), *low* and *high*, to indicate what part of the array you want to sort. Just as you did for binary search.
 
-### Complexity analysis {-}
+##### Complexity analysis
 
 How efficient is Mergesort? Recall that Selection and Insertion sort are quadratic, $O(n^2)$, because they use two nested for loops, each of them linear.
 
@@ -83,7 +83,7 @@ I assumed that we had exactly $n = 2^k$ elements, but we get the same complexity
 
 Now we have concluded that Mergesort is a linearithmic algorithm, $O(n \log(n))$. This is much much faster than the previous sorts which are quadratic, $O(n^2)$. In fact, linearithmic is in practice almost linear, because $\log(n)$ grows so slow.
 
-### In-place, stability, and adaptivity
+#### In-place, stability, and adaptivity
 
 Recall our categorisation of sorting algorithms? Now we are ready to categorise Mergesort:
 
@@ -91,13 +91,13 @@ Recall our categorisation of sorting algorithms? Now we are ready to categorise 
 - Stable: *yes*, two equal elements will never swap places.
 - Adaptive: *no*, the algorithm takes the same time regardless of how the array is sorted from the start.
 
-### Divide-heavy or combine-heavy
+#### Divide-heavy or combine-heavy
 
 Most divide-and-conquer algorithms spend most of their time in one of the steps. Either they do the heavy work in the divide step (making combine trivial), or most work is in the combine step (making dividing easy). Mergesort is of the latter kind.
 
 So, is there any other divide-and-conquer sort that is divide-heavy instead? Yes, it is called Quicksort and is the topic for @sec:quicksort.
 
-### Using a backoff algorithm
+#### Using a backoff algorithm
 
 Mergesort is way faster than Insertion and Selection sort for large arrays because of the better complexity. But when the arrays are small (perhaps 50 elements or so), the “slower” algorithms are actually faster – the reason for this is that Mergesort is more complex which leads to larger constant factors.
 
@@ -105,7 +105,7 @@ This fact, that there are algorithms that are faster on small arrays, can be use
 
 Note that this will not change the complexity of the implementation, but it can anyway improve the speed by some factor. Also note that the exact cutoff depends a lot on what computer you have, what programming language you use, etc. The only way to know which array size is the optimal is to do a lot of testing – but a rule of thumb is that it’s probably faster to use Insertion sort on a 10–20 element array.
 
-### Bottom-up Mergesort (optional)
+#### Bottom-up Mergesort (optional)
 
 If you look at the figure above that showed all the splitting steps, you might wonder why all this recursive splitting is necessary in the first place. We will anyway have to split all the way down to a bunch of singleton arrays before we can start merging.
 
@@ -125,7 +125,7 @@ There is a lot more that can be said about run-based Mergesort. One thing that h
 
 > https://www.wild-inter.net/publications/munro-wild-2018
 
-### Insertion sort as a variant of Mergesort (optional)
+#### Insertion sort as a variant of Mergesort (optional)
 
 Mergesort splits the input array into two equal-size arrays. But what happens if we split in another way? What if we always make the right part just one single element?
 
