@@ -90,7 +90,7 @@ Let’s try it out… and behold, appending 1 million elements runs *a lot faste
 
 In version 3 we doubled the array size whenever we resized. But we don’t have to double the size, we can instead increase by 50% or only 10%. As long as we multiply with a constant instead of adding a constant, our dynamic array will behave really nice. In fact, in practice it is impractical to double the size, because this will increase the memory usage by quite a lot – on average 25% of the array will be unused.
 
-For example, the Java standard library has the class ArrayList which is a dynamic array – it grows by 50% each time (multiplies by 1½). And the built-in lists in Python grow by as little as 12% (multiplies by 1⅛). This means that they have to grow more often but on the other hand they don’t use as much memory.
+For example, the Java standard library has the class ArrayList which is a dynamic array – it grows by 50% each time (multiplies by 3/2). And the built-in lists in Python grow by as little as 12% (multiplies by 9/8). This means that they have to grow more often but on the other hand they don’t use as much memory.
 
  -----------------------------------
 

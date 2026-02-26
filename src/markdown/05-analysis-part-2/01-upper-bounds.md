@@ -23,19 +23,19 @@ Note that we use set membership, $f \in O(g)$. This is because we view $O(g)$ as
 
 One interesting consequence of asymptotic complexity is that the base of a logarithm becomes irrelevant:
 
-$$ O(\log_⁡2(n)) = O(\ln⁡(n)) = O(\log⁡_{10}(n)) $$
+$$ O(\log_2(n)) = O(\ln(n)) = O(\log_{10}(n)) $$
 
-The reason for this is that according to the logarithm laws, $\log⁡_b(n) = \log⁡_a(n)\cdot 1/\log⁡_a(b)$. But $1/\log⁡_a(b)$ is a constant which we can ignore inside big-O, so $O(\log⁡_b(n)) = O(\log⁡_a(n))$. Therefore we can just ignore the base and write $O(\log⁡(n))$.
+The reason for this is that according to the logarithm laws, $\log_b(n) = \log_a(n)\cdot 1/\log_a(b)$. But $1/\log_a(b)$ is a constant which we can ignore inside big-O, so $O(\log_b(n)) = O(\log_a(n))$. Therefore we can just ignore the base and write $O(\log(n))$.
 
 (Note that this does not hold for exponential growth – e.g., $2^n \in O(10^n)$, but $10^n \notin O(2^n)$.)
 
 Another consequence of the logarithm laws is that it doesn't really matter if you take the logarithm from a linear, quadratic, cubic, or any power function:
 
-$$ O(\log⁡(n)) = O(\log(⁡n^2)) = O(\log(⁡n^3)) = O(\log(⁡n^k)) $$
+$$ O(\log(n)) = O(\log(n^2)) = O(\log(n^3)) = O(\log(n^k)) $$
 
-The reason for this is that $\log⁡(n^k) = k\cdot\log⁡(n)$ according to the logarithm laws, so the exponent $k$ becomes a multiplicative constant and can be ignored.
+The reason for this is that $\log(n^k) = k\cdot\log(n)$ according to the logarithm laws, so the exponent $k$ becomes a multiplicative constant and can be ignored.
 
-However, taking the *power* of a logarithm cannot be ignored, so $O(\log⁡(n))$ and $O(\log(n)^2)$ are different complexity classes.
+However, taking the *power* of a logarithm cannot be ignored, so $O(\log(n))$ and $O(\log(n)^2)$ are different complexity classes.
 
 ### Complexity classes and the complexity hierarchy
 

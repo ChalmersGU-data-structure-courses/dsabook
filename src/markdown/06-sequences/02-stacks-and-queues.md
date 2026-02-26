@@ -55,7 +55,7 @@ How about popping()? It’s just opposite of pushing, where we decrease the size
 
 But what about the size of the internal array when we pop? Assume that we have pushed 1 million elements to the stack, and then popped them all – then our internal array will still occupy (at least) 1 million cells in memory. Is it possible to decrease the size of the internal array when popping?
 
-Yes, it is, but then it is very important that we don’t resize it too soon. Let’s say that we double the size when pushing – then we cannot halve the size when it is half full. Instead we have to wait until the array is *less than half full*, for example ⅓ full.
+Yes, it is, but then it is very important that we don’t resize it too soon. Let’s say that we double the size when pushing – then we cannot halve the size when it is half full. Instead we have to wait until the array is *less than half full*, for example 1/3 full.
 
 ### Queues as circular (dynamic) arrays
 
