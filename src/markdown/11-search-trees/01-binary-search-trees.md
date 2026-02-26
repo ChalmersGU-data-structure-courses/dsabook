@@ -21,27 +21,27 @@ So the example tree from before (@sec:binary-trees) is not a BST, but the follow
 
 To search for an element in a BST, we start at the root and compare. If what we search for is smaller than the node value, we can search in the left subtree, and if it is larger we can search in the right subtree.
 
-How do we add an element to a BST? First of all we have to search for it – if it is already in the tree we do nothing. But if the element is not in the tree, we know where it should be – it should be a child of the last node we compared with. If the element is smaller, we add a new node as a left child, and if the element is larger we add the new node as a right child.
+How do we add an element to a BST? First of all we have to search for it -- if it is already in the tree we do nothing. But if the element is not in the tree, we know where it should be -- it should be a child of the last node we compared with. If the element is smaller, we add a new node as a left child, and if the element is larger we add the new node as a right child.
 
 #### Deleting from a BST
 
 Searching and adding are straightforward to implement. Deletion is a little trickier, but not too hard. The first we have to do is to find the node with the element we want to remove, using the standard search algorithm. Now there are three possible cases:
 
-- It is a leaf node (A, D and G in the example tree). This is easy – we can just remove the parent’s pointer to the node.
-- It has one single child (B and E in the example tree). This is also easy – simply point the parent’s pointer to the child node directly.
+- It is a leaf node (A, D and G in the example tree). This is easy -- we can just remove the parent's pointer to the node.
+- It has one single child (B and E in the example tree). This is also easy -- simply point the parent's pointer to the child node directly.
 - It has two children (C and F in the example tree). This is the tricky case.
 
-To delete an inner node in a BST we don’t actually delete the node, because then we would have to restructure the tree quite a lot. Instead we replace its value with another value. The question is which value can we replace with?
+To delete an inner node in a BST we don't actually delete the node, because then we would have to restructure the tree quite a lot. Instead we replace its value with another value. The question is which value can we replace with?
 
 We know that all elements in the left subtree is smaller than the value we want to delete. This subtree has a largest element, and if we delete this largest element from the left subtree we can put it in the parent node instead. So we replace the element we want to delete by the largest of the elements in the left subtree.
 
-(*Alternatively*, we can replace it with the smallest of the elements in the right subtree. It doesn’t matter, we can just pick a strategy.)
+(*Alternatively*, we can replace it with the smallest of the elements in the right subtree. It doesn't matter, we can just pick a strategy.)
 
-Ok, did we solve anything by doing this? We want to delete an element, and to be able to do that we have to delete an element in a subtree… yes, this works because we know that the largest element in a tree never has two children! (And we know the same for the smallest element.) So, if we delete the largest element in the subtree we know that we will have one of the two easy cases, so no infinite recursion or anything.
+Ok, did we solve anything by doing this? We want to delete an element, and to be able to do that we have to delete an element in a subtree... yes, this works because we know that the largest element in a tree never has two children! (And we know the same for the smallest element.) So, if we delete the largest element in the subtree we know that we will have one of the two easy cases, so no infinite recursion or anything.
 
-Now we’re almost done, but how do we find the largest element in the left subtree? Easy, we just start in the left subtree and go as far to the right as possible. Then we will end up in the largest element.
+Now we're almost done, but how do we find the largest element in the left subtree? Easy, we just start in the left subtree and go as far to the right as possible. Then we will end up in the largest element.
 
-For example, let’s delete the root node C from our example tree.
+For example, let's delete the root node C from our example tree.
 
 - The largest element in the left subtree is B.
 - We delete B from the left subtree.
@@ -61,7 +61,7 @@ Notice that both of these trees are different representations of exactly the sam
 
 #### The effect of order of insertion
 
-There are infinitely many BSTs that represent the same set. (No, I’m just kidding, but the are exponentially many.) For example, all of these implement the same set:
+There are infinitely many BSTs that represent the same set. (No, I'm just kidding, but the are exponentially many.) For example, all of these implement the same set:
 
 ![](images/BST-ExampleVariants.png)
 

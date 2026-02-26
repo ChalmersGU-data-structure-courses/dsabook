@@ -208,7 +208,7 @@ static ArrayList<Person> getPeople() {
     people.add(new Person("Andrea", "Tarrodi", 1981));
     people.add(new Person("Diana", "Čemerytė", 1974));
     people.add(new Person("Elfrida", "Andrée", 1841));
-    people.add(new Person("Guy", "d’Hardelot", 1858));
+    people.add(new Person("Guy", "d'Hardelot", 1858));
     people.add(new Person("Nadia", "Boulanger", 1887));
     people.add(new Person("Lili", "Boulanger", 1893));
     return people;
@@ -250,7 +250,7 @@ interface Comparable<E> {
 
 Let's say that we want the natural ordering to be to compare persons by
 their family name. Then we let `Person` implement the `Comparable`
-interface by overriding `.compareTo(…)`:
+interface by overriding `.compareTo(...)`:
 ```java
 class Person implements Comparable<Person> {
     // ...as above...
@@ -281,7 +281,7 @@ Resulting in:
 Two things to note, which we address later:
 
 1.  Guy d'Hardelot and Diana Čemerytė come last -- this is because
-    `.compareTo(…)` gives a case-sensitive ordering and doesn't care
+    `.compareTo(...)` gives a case-sensitive ordering and doesn't care
     ignore diacritics.
 2.  Nadia Boulanger comes before Lili, even though L comes before N in
     the alphabet.
@@ -314,13 +314,13 @@ class BirthYearComparator implements Comparator<Person> {
 *Notes*:
 
 1.  Don't compare numbers by using subtraction! This might lead to
-    overflow and rounding errors. Instead use the static `.compare(…)`
+    overflow and rounding errors. Instead use the static `.compare(...)`
     methods that are built into the number classes (`Integer`, `Double`,
     etc).
 2.  Since numbers are not objects, you cannot use
-    `one.birthYear.compareTo(…)`. You can do
-    `new Integer(one.birthYear).compareTo(…)`, or you can use
-    `Integer.compare(…)` as above.
+    `one.birthYear.compareTo(...)`. You can do
+    `new Integer(one.birthYear).compareTo(...)`, or you can use
+    `Integer.compare(...)` as above.
 
 And here's the class for comparing by given name:
 ```java
@@ -392,8 +392,8 @@ more:
 byGivenName = Comparator.comparing(Person::givenName);
 ```
 
--   *Note*: We use `.comparingInt(…)` when defining `byBirthYear`. It's
-    not strictly necessary (i.e., we can use `.comparing(…)`), but it
+-   *Note*: We use `.comparingInt(...)` when defining `byBirthYear`. It's
+    not strictly necessary (i.e., we can use `.comparing(...)`), but it
     makes things slightly more efficient.
 
 #### Comparing several fields
@@ -423,7 +423,7 @@ Comparator<Person> byFullName = new FullNameComparator();
 ```
 
 If we have many fields this gets quite cumbersome (and error-prone). But
-using the functional interface, and the magic `.thenComparing(…)`
+using the functional interface, and the magic `.thenComparing(...)`
 method, it's really easy:
 ```java
 byFullName = Comparator.comparing(Person::familyName)
@@ -453,7 +453,7 @@ problem with Guy and Diana coming last in the list.
 
 #### Case-insensitive and language-specific comparisons
 
-The Java **String** class has a method `.compareToIgnoringCase(…)` which
+The Java **String** class has a method `.compareToIgnoringCase(...)` which
 is what it sounds like.
 
 But you shouldn't use it if you're serious about handling text
@@ -574,7 +574,7 @@ public class ComparatorExample {
         people.add(new Person("Andrea", "Tarrodi", 1981));
         people.add(new Person("Diana", "Čemerytė", 1974));
         people.add(new Person("Elfrida", "Andrée", 1841));
-        people.add(new Person("Guy", "d’Hardelot", 1858));
+        people.add(new Person("Guy", "d'Hardelot", 1858));
         people.add(new Person("Nadia", "Boulanger", 1887));
         people.add(new Person("Lili", "Boulanger", 1893));
         return people;

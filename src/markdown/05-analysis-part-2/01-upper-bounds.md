@@ -11,7 +11,7 @@ Big-O describes the *upper bound* of the growth rate of a function (such as the 
 
 If $g$ is an upper bound of $f$, then this should mean something like $f(n) \leq g(n)$ in *the long run*. That is, whenever $n$ becomes sufficiently large, $f(n)$ should not outgrow $g(n)$.
 
-But this is not all there is to it – we also want to abstract away from constant factors. If algorithm **A** is twice as fast as algorithm **B**, we want to be able to say that they grow at the same rate. So what we actually want to say is that $f(n) \leq k \cdot g(n)$, for some arbitrary constant $k$. This gives us the following formal definition:
+But this is not all there is to it -- we also want to abstract away from constant factors. If algorithm **A** is twice as fast as algorithm **B**, we want to be able to say that they grow at the same rate. So what we actually want to say is that $f(n) \leq k \cdot g(n)$, for some arbitrary constant $k$. This gives us the following formal definition:
 
 - $f \in O(g)$  **if and only if** there are positive numbers $k$ and $n_0$ such that $f(n) \leq k\cdot g(n)$ for all $n > n_0$
 
@@ -29,7 +29,7 @@ $$ O(\log_2(n)) = O(\ln(n)) = O(\log_{10}(n)) $$
 
 The reason for this is that according to the logarithm laws, $\log_b(n) = \log_a(n)\cdot 1/\log_a(b)$. But $1/\log_a(b)$ is a constant which we can ignore inside big-O, so $O(\log_b(n)) = O(\log_a(n))$. Therefore we can just ignore the base and write $O(\log(n))$.
 
-(Note that this does not hold for exponential growth – e.g., $2^n \in O(10^n)$, but $10^n \notin O(2^n)$.)
+(Note that this does not hold for exponential growth -- e.g., $2^n \in O(10^n)$, but $10^n \notin O(2^n)$.)
 
 Another consequence of the logarithm laws is that it doesn't really matter if you take the logarithm from a linear, quadratic, cubic, or any power function:
 
@@ -41,7 +41,7 @@ However, taking the *power* of a logarithm cannot be ignored, so $O(\log(n))$ an
 
 #### Complexity classes and the complexity hierarchy
 
-Big-O classifies all functions and algorithms into *complexity classes*, and these classes form a hierarchy – the *complexity hierarchy*. There are infinitely many complexity classes, but the most common ones are the following:
+Big-O classifies all functions and algorithms into *complexity classes*, and these classes form a hierarchy -- the *complexity hierarchy*. There are infinitely many complexity classes, but the most common ones are the following:
 
 $$ O(1) < O(\log(n)) < O(n) < O(n \log(n)) < O(n^2) < O(n^2 \log(n)) < O(n^3) < \cdots < O(2^n) < \cdots $$
 

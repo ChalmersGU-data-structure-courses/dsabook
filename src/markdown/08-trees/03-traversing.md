@@ -8,7 +8,7 @@
 
 <!-- START NOTES -->
 
-Let’s say we want to print the contents of a binary tree. There are many different ways we can do that, but there are three very common strategies:
+Let's say we want to print the contents of a binary tree. There are many different ways we can do that, but there are three very common strategies:
 
 - *preorder*:  first print the value, then the left subtree, then the right
 - *inorder*:   first print the left subtree, then the value, finally the right subtree
@@ -23,7 +23,7 @@ preorder(node):             inorder(node):              postorder(node):
     preorder(node.right)        inorder(node.right)         print(node.elem)
 ```
 
-The only difference is when we decide to “visit” the current node. For the example tree (on the previous page), they will print the following:
+The only difference is when we decide to "visit" the current node. For the example tree (on the previous page), they will print the following:
 
 - *preorder*:  A B D C E G F
 - *inorder*:   D B A G E C F

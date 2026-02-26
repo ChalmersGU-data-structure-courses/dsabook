@@ -155,7 +155,7 @@ In addition to the primitive data types mentioned earlier, there is also `null` 
 
 #### Arrays
 
-Arrays are one of the fundamental data structures in programming because they are directly supported by the computer’s memory system and offer excellent performance.
+Arrays are one of the fundamental data structures in programming because they are directly supported by the computer's memory system and offer excellent performance.
 Accessing or modifying an element in an array is extremely fast, making arrays important for many algorithms.
 
 ::: note
@@ -188,7 +188,7 @@ In our pseudocode, we use the following syntax to declare an array, retrieve an 
 This example highlights several key features of arrays.
 
 - First, our pseudocode follows zero-based indexing, meaning the first element is at index 0, the second at index 1, and so on.
-  The last element is located at an index equal to the array’s size minus one.
+  The last element is located at an index equal to the array's size minus one.
 - The size of an array can be accessed using the `size` property.
 - To retrieve an element from an array, we use square bracket notation. For instance, `input[2]` retrieves the third element of the input array.
 - Similarly, updating an element follows the same notation: `input[2] = 10` assigns a new value to the third element.

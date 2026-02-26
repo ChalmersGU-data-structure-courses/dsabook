@@ -9,7 +9,7 @@
 
 <!-- START NOTES -->
 
-Today’s algorithm, Mergesort, is a perfect example of a divide-and-conquer algorithm. The general structure looks like this (compare with the general structure above):
+Today's algorithm, Mergesort, is a perfect example of a divide-and-conquer algorithm. The general structure looks like this (compare with the general structure above):
 
 To sort an array:
 
@@ -19,15 +19,15 @@ To sort an array:
 
 Now we only have to know how to split and merge. Splitting is really easy: just divide the array in half. The problem is how to implement merging.
 
-To merge two sorted arrays, we iterate through them in parallel. We do this by having two pointers, one for each array. (Note: a pointer here just means an array index – something that tells us where in the array to look.)
+To merge two sorted arrays, we iterate through them in parallel. We do this by having two pointers, one for each array. (Note: a pointer here just means an array index -- something that tells us where in the array to look.)
 
 #### The base case!
 
 Hopefully you noticed that forgot a very important part in my algorithm. The way I described divide-and-conquer, it will continue calling the recursive step 2 endlessly, so we need a way to stop it all. This is called the *base case*.
 
-Just before the very first divide step, we have to check if the problem is small enough. If so we don’t have to divide it further but can instead just return the trivial solution. Exactly what a “small enough” problem is, and what its “trivial solution” is, depends on the problem at hand.
+Just before the very first divide step, we have to check if the problem is small enough. If so we don't have to divide it further but can instead just return the trivial solution. Exactly what a "small enough" problem is, and what its "trivial solution" is, depends on the problem at hand.
 
-The standard base case for Mergesort is a *singleton* array – an array with only one element. This array is of course already sorted, so the solution is to just return it.
+The standard base case for Mergesort is a *singleton* array -- an array with only one element. This array is of course already sorted, so the solution is to just return it.
 
 #### Merging two sorted arrays
 
@@ -42,7 +42,7 @@ Here is the algorithm for merging two sorted arrays, *left* and *right*:
 4. Finally there are some stray elements in either *left* or *right*:
     - Just add them to the end of the *result*.
 
-You can try to sort a bookshelf in this way. You will quickly notice that it is very difficult to do the merging in-place, efficiently (that is, without “sliding” the books in the left part). But if you instead move the books out of the shelf and merge back in, it becomes easy. And this intuition is true also for a computer implementation – making Mergesort in-place is difficult, and quite costly. This is the main disadvantage with this sorting algorithm – we need to allocate extra space.
+You can try to sort a bookshelf in this way. You will quickly notice that it is very difficult to do the merging in-place, efficiently (that is, without "sliding" the books in the left part). But if you instead move the books out of the shelf and merge back in, it becomes easy. And this intuition is true also for a computer implementation -- making Mergesort in-place is difficult, and quite costly. This is the main disadvantage with this sorting algorithm -- we need to allocate extra space.
 
 #### Allocating extra space in practice
 
@@ -56,24 +56,24 @@ How efficient is Mergesort? Recall that Selection and Insertion sort are quadrat
 
 The analysis is actually not trivial because Mergesort is a recursive algorithm, and reasoning about recursion is very difficult in general. However, we can visualise how Mergesort works in a way that will make the complexity clearer.
 
-First, let’s assume that the array consists of exactly $n = 2^k$ elements. In the first recursive call it will split this array into two with $2^{k-1}$ elements each. Both of these will be split into two arrays each, so $4$ (= $2^2$) arrays of size $2^{k-2}$. And these will in turn be split into $2^3$ arrays of size $2^{k-3}$, until in the end we have $2^k$ arrays with only one element. Here is a picture of how the splitting goes:
+First, let's assume that the array consists of exactly $n = 2^k$ elements. In the first recursive call it will split this array into two with $2^{k-1}$ elements each. Both of these will be split into two arrays each, so $4$ (= $2^2$) arrays of size $2^{k-2}$. And these will in turn be split into $2^3$ arrays of size $2^{k-3}$, until in the end we have $2^k$ arrays with only one element. Here is a picture of how the splitting goes:
 
 ![](images/MergesortSplit.png)
 
-Note that each of these levels contain exactly $n = 2^k$ elements – the size of each level is the same!
+Note that each of these levels contain exactly $n = 2^k$ elements -- the size of each level is the same!
 
-Now, when we have reached the base case, we can start merging the smaller arrays. First each pair of the $2^k$ singleton arrays are merged into two-element arrays. Then each pair of these $2^{k–1}$ two-element arrays are merged into 4-element arrays. Then each pair of these $2^{k–2}$ 4-element arrays are merged, and so on. In the end we will merge two arrays of size $2^{k–1}$ into the final sorted array, like this:
+Now, when we have reached the base case, we can start merging the smaller arrays. First each pair of the $2^k$ singleton arrays are merged into two-element arrays. Then each pair of these $2^{k-1}$ two-element arrays are merged into 4-element arrays. Then each pair of these $2^{k-2}$ 4-element arrays are merged, and so on. In the end we will merge two arrays of size $2^{k-1}$ into the final sorted array, like this:
 
 ![](images/MergesortMerge.png)
 
 Just as for splitting we note that each level contains exactly $n = 2^k$ elements. So how does this relate to complexity?
 
-- First we recall that merging is more expensive than splitting, so it’s enough to only analyse the merging steps.
+- First we recall that merging is more expensive than splitting, so it's enough to only analyse the merging steps.
 - What is the complexity of merging two arrays of size $m$? Note that in each iteration we increase one of the pointers, so when both pointers have reached the end, we have executed $m+m$ iterations. So merging is linear, $O(m)$.
-- In each level $r$ we merge $2^r$ arrays, each of size $2^{k–r}$. So the total complexity of merging one full level is $O(2^r \cdot 2^{k–r})$. And since $2^r \cdot 2^{k–r} = 2^k$, we get $O(2^k)$.
+- In each level $r$ we merge $2^r$ arrays, each of size $2^{k-r}$. So the total complexity of merging one full level is $O(2^r \cdot 2^{k-r})$. And since $2^r \cdot 2^{k-r} = 2^k$, we get $O(2^k)$.
 - We have in total $k$ levels, so in the end we get the final complexity $O(k \cdot 2^k)$.
 
-But wait, does this mean that Mergesort is exponential? No, definitely not! Recall that $k$ is not the size of the original array – the size $n$ is $2^k$, so we get the following final complexity in the size of the array (because $O(k) = O(\log_2(n)) = O(\log(n))$):
+But wait, does this mean that Mergesort is exponential? No, definitely not! Recall that $k$ is not the size of the original array -- the size $n$ is $2^k$, so we get the following final complexity in the size of the array (because $O(k) = O(\log_2(n)) = O(\log(n))$):
 
 $$ O(n \log(n)) $$
 
@@ -99,11 +99,11 @@ So, is there any other divide-and-conquer sort that is divide-heavy instead? Yes
 
 #### Using a backoff algorithm
 
-Mergesort is way faster than Insertion and Selection sort for large arrays because of the better complexity. But when the arrays are small (perhaps 50 elements or so), the “slower” algorithms are actually faster – the reason for this is that Mergesort is more complex which leads to larger constant factors.
+Mergesort is way faster than Insertion and Selection sort for large arrays because of the better complexity. But when the arrays are small (perhaps 50 elements or so), the "slower" algorithms are actually faster -- the reason for this is that Mergesort is more complex which leads to larger constant factors.
 
 This fact, that there are algorithms that are faster on small arrays, can be used for a very simple optimisation. Whenever the size of the input array is small enough (say, less than 20 elements), we can call Insertion or Selection sort on that array instead of continuing with Mergesort.
 
-Note that this will not change the complexity of the implementation, but it can anyway improve the speed by some factor. Also note that the exact cutoff depends a lot on what computer you have, what programming language you use, etc. The only way to know which array size is the optimal is to do a lot of testing – but a rule of thumb is that it’s probably faster to use Insertion sort on a 10–20 element array.
+Note that this will not change the complexity of the implementation, but it can anyway improve the speed by some factor. Also note that the exact cutoff depends a lot on what computer you have, what programming language you use, etc. The only way to know which array size is the optimal is to do a lot of testing -- but a rule of thumb is that it's probably faster to use Insertion sort on a 10--20 element array.
 
 #### Bottom-up Mergesort (optional)
 
@@ -111,7 +111,7 @@ If you look at the figure above that showed all the splitting steps, you might w
 
 There is a version of Mergesort that short-circuits the splitting by dividing the whole array into singleton arrays already at the start. Then it does one pass over this whole array of arrays and merge each pair of singletons into two-element arrays. And then each pair of two-element arrays into four-element arrays, and so on until we have merged the whole array. The structure is exactly as the figure earlier showing the merging steps. This variant is called *bottom-up Mergesort* (as opposed to the original top-down Mergesort). Bottom-up Mergesort can be implemented without recursion, instead every level becomes an iteration in an outer loop. But just as the top-down variant it still needs to allocate additional space for the merging.
 
-If we implement bottom-up Mergesort we can be even smarter. Instead of splitting the array into the smallest possible parts (that is, singleton arrays), we can make use of the “natural order” that’s already in the array. Even an array which is very random contains sorted subarrays. For example, assume we want to sort the following array:
+If we implement bottom-up Mergesort we can be even smarter. Instead of splitting the array into the smallest possible parts (that is, singleton arrays), we can make use of the "natural order" that's already in the array. Even an array which is very random contains sorted subarrays. For example, assume we want to sort the following array:
 
 $$ [3, 88, 65, 34, 42, 67, 7, 65, 99, 8] $$
 
@@ -121,7 +121,7 @@ $$ [3, 88],  [65],  [34, 42, 67],  [7, 65, 99],  [8] $$
 
 Now we can continue merging smaller arrays into larger. This version is called *run-based Mergesort*, and it is one of the most efficient sorting algorithms. For example, it is what Python uses as its standard sorting algorithm.
 
-There is a lot more that can be said about run-based Mergesort. One thing that has a big effect on the efficiency is in which order we choose to merge the runs – we want the runs to be as equal as possible in size. There are many different strategies to do this, and the following blog post gives a good introduction if you are interested:
+There is a lot more that can be said about run-based Mergesort. One thing that has a big effect on the efficiency is in which order we choose to merge the runs -- we want the runs to be as equal as possible in size. There are many different strategies to do this, and the following blog post gives a good introduction if you are interested:
 
 > https://www.wild-inter.net/publications/munro-wild-2018
 

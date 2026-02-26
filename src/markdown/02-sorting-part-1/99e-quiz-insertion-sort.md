@@ -61,7 +61,7 @@ about $n^2/4$. This means that:
 
 - [ ] The growth rates are the same
 - [ ] The runtime in the average case is about half that of the worst case
-– [x] Both of the above
+- [x] Both of the above
 - [ ] None of the above
 
 ::: hints

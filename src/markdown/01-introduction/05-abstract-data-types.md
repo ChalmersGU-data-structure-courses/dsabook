@@ -12,7 +12,7 @@ These are known as _concrete_ data types, meaning they consist of actual values 
 In contrast, an [abstract data type]{.term} (ADT) does not specify concrete values or implementations.
 Instead, it defines a data type purely in terms of a set of operations and the expected behaviour of those operations, as determined by their inputs and outputs.
 An ADT does not dictate _how_ the operations should be implemented, and multiple implementations are often possible.
-These implementation details are hidden from the user—a concept known as [encapsulation]{.term}.
+These implementation details are hidden from the user -- a concept known as [encapsulation]{.term}.
 The set of operations offered by an abstract data type is known as its [application programming interface](#interface){.term} (API).
 
 Using an ADT, we can distinguish between the logical behaviour of a data type and its actual implementation in a concrete program.
@@ -42,7 +42,7 @@ The most suitable data structure depends on the specific use case, and making in
 #### Example: Collection of records
 
 A _database_ is a structured collection of data that can be easily accessed, managed, and updated.
-Each item in a database is typically called a _record_, which consists of multiple fields containing information—such as a name, an ID number, or an address.
+Each item in a database is typically called a _record_, which consists of multiple fields containing information -- such as a name, an ID number, or an address.
 Efficiently organising, storing, and searching these records is a key challenge in database design.
 
 Two popular implementations for managing large disk-based database applications are [hashing]{.term} and the [B-tree]{.term}.
@@ -53,7 +53,7 @@ On the other hand, B-trees are better suited for _range queries_, where you want
 In such cases, hashing becomes inefficient.
 
 Therefore, if a database application only requires exact-match queries, hashing is typically the better choice.
-But if the application needs to support range queries—such as finding all records with values between X and Y—the B-tree is preferred.
+But if the application needs to support range queries -- such as finding all records with values between X and Y -- the B-tree is preferred.
 Despite their performance differences, both data structures address the same core problem: how to efficiently update and search a large collection of records.
 :::
 ::::::
@@ -182,7 +182,7 @@ The ordered sequence ADTs found in this book are:
 - **General lists**: support adding, removing, and accessing elements
 
 Ordered sequences are used in many applications and algorithms where the order of operations or items is important.
-For example, maintaining a task list, simulating a line of customers, or a editor’s undo/redo history.
+For example, maintaining a task list, simulating a line of customers, or a editor's undo/redo history.
 
 ### Sets and maps {#adt-sets-and-maps}
 
@@ -206,7 +206,7 @@ Most implementations of both sets and maps are designed to support fast insertio
 
 Another well-known abstract data type is the _graph_.
 Graphs are used to model relationships between elements, where each element is called a _node_ or _vertex_.
-A _relation_ between two nodes is represented by an _edge_, which may carry additional information to describe the nature or strength of the relationship—such as distance, cost, or capacity.
+A _relation_ between two nodes is represented by an _edge_, which may carry additional information to describe the nature or strength of the relationship -- such as distance, cost, or capacity.
 
 Graphs appear in many real-world scenarios, often in surprising ways.
 A classic example is a map, where cities are represented as nodes and roads (with distances) as edges.

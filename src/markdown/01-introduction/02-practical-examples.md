@@ -23,7 +23,7 @@ Search engines like Google, Bing, and DuckDuckGo help us find the information we
 This process of organising information is called indexing.
 
 Most of us use search engines every day without thinking about the incredible job they do.
-The image below shows the results of a search for “binary search”:
+The image below shows the results of a search for "binary search":
 
 ![Searching the Internet with Google](images/Google.png){ width=75% }
 
@@ -37,7 +37,7 @@ With billions of pages, it is not practical to check each one in order.
 Even if looking at a single page takes only a millisecond, going through them all would take years.
 To handle this challenge, we need smart ways to store and search through the data.
 
-Let’s consider a simpler version of this problem.
+Let's consider a simpler version of this problem.
 Suppose we use an array that connects keywords to lists of related web pages.
 A basic approach would be to go through the array one element at a time until we find the keyword.
 This works, but it becomes very slow as the array grows larger.
@@ -46,7 +46,7 @@ Then, instead of scanning from the beginning, we start in the middle of the arra
 
 - If they match, we return the corresponding list of web pages.
 - If the search word is smaller, we continue the search in the lower half of the array.
-- If it’s larger, we search in the upper half.
+- If it's larger, we search in the upper half.
 
 Each step cuts the number of possibilities in half.
 So, how many times can we divide the array in half before we narrow it down to one element?
@@ -55,7 +55,7 @@ With an array of one billion keywords, we would need only about 39 steps to find
 
 This model is simplified.
 In reality, search engines do much more than just match keywords.
-They also rank pages by relevance and take many details into account, such as whether letters are uppercase or lowercase, and whether the user is combining terms with “and” or “or”.
+They also rank pages by relevance and take many details into account, such as whether letters are uppercase or lowercase, and whether the user is combining terms with "and" or "or".
 
 
 #### Databases

@@ -10,7 +10,7 @@
 
 <!-- START NOTES -->
 
-The worst case complexity of appending to a dynamic array is linear in the length of the array – because if we are unlucky we have to resize it. But why does it not behave like that?
+The worst case complexity of appending to a dynamic array is linear in the length of the array -- because if we are unlucky we have to resize it. But why does it not behave like that?
 
 This is because most of the time we are lucky. If we append to the dynamic array enough times, the cost of one expensive operation will be evened out by the cheap cost of all the lucky appends. We say that the *amortised* cost of appending to a dynamic array is constant.
 
@@ -20,11 +20,11 @@ Amortised complexity of dynamic arrays
 
 So how can we analyse dynamic array append?
 
-Let’s assume that we already have a dynamic array that is half-empty. The underlying backing array has size $2n$ and it is filled with $n+1$ elements, like this:
+Let's assume that we already have a dynamic array that is half-empty. The underlying backing array has size $2n$ and it is filled with $n+1$ elements, like this:
 
 ![](images/DynamicArray1.png)
 
-Now we append $n$ new elements to the array. The first $n–1$ appends are cheap, $O(1)$, after which the backing array becomes full:
+Now we append $n$ new elements to the array. The first $n-1$ appends are cheap, $O(1)$, after which the backing array becomes full:
 
 ![](images/DynamicArray2.png)
 
@@ -32,7 +32,7 @@ The very last append forces us to resize the array, which is an expensive linear
 
 ![](images/DynamicArray3.png)
 
-The total cost for all these n appends is $(n–1)O(1) + O(n) = O(n) + O(n) = O(2n) = O(n)$. On average this means $O(n)/n = O(1)$ per operation.
+The total cost for all these n appends is $(n-1)O(1) + O(n) = O(n) + O(n) = O(2n) = O(n)$. On average this means $O(n)/n = O(1)$ per operation.
 
 This is why we can say that appending to a dynamic array is $O(n)$ in the worst case, but the amortised complexity is constant, $O(1)$.
 
@@ -42,20 +42,20 @@ In most cases amortised complexity is what we are interested in, but there are s
 
 If we are implementing a very time-critical system, where we must guarantee that an operation never ever takes more than (for example) 0.0001 microseconds, then a dynamic array might not be the best option. But then we definitely should not use Python or Java either, but instead a tailor-made low-level programming language.
 
-#### The “accounting” method for analysing amortised complexity
+#### The "accounting" method for analysing amortised complexity
 
-There are several different methods for amortised analysis, and the argument we will use is called the “accounting” method. This method is simple and intuitive to use, in particular if we want to prove that an operation has constant amortised complexity. If we want to prove other amortised complexities (such as logarithmic), the “potential” method is usually better suited.
+There are several different methods for amortised analysis, and the argument we will use is called the "accounting" method. This method is simple and intuitive to use, in particular if we want to prove that an operation has constant amortised complexity. If we want to prove other amortised complexities (such as logarithmic), the "potential" method is usually better suited.
 
 - https://en.wikipedia.org/wiki/Accounting_method_(computer_science)
 - https://en.wikipedia.org/wiki/Potential_method
 
-The idea with the accounting method is that whenever we perform a cheap (fast) operation we “pay” some extra time that we save in an “account”. The saved time can then be used to pay when we encounter an expensive (slow) operation. If we can show that we will never run out of savings in our account, then we have proved the amortised complexity of our operation.
+The idea with the accounting method is that whenever we perform a cheap (fast) operation we "pay" some extra time that we save in an "account". The saved time can then be used to pay when we encounter an expensive (slow) operation. If we can show that we will never run out of savings in our account, then we have proved the amortised complexity of our operation.
 
-In other words, every time we perform a fast operation, we pretend that it is slower than it actually is. This additional time that we (pretend to) spend is added to our account. Then when there is a slow operation, we can use the saved time to ”pay for” the slow operation.
+In other words, every time we perform a fast operation, we pretend that it is slower than it actually is. This additional time that we (pretend to) spend is added to our account. Then when there is a slow operation, we can use the saved time to "pay for" the slow operation.
 
 #### Using the accounting method for dynamic arrays
 
-Assume that a fast append (no resizing) takes 1 unit of time. But we *pretend* that every append will cost us 3 time units – one is used for the actual time it takes to do a (fast) append, and the additional 2 units are saved in our account. So, after performing $k$ fast appends our account contains $2k$ time units.
+Assume that a fast append (no resizing) takes 1 unit of time. But we *pretend* that every append will cost us 3 time units -- one is used for the actual time it takes to do a (fast) append, and the additional 2 units are saved in our account. So, after performing $k$ fast appends our account contains $2k$ time units.
 
 Now assume that we start with a dynamic array of size $n$, and an empty account. Since the account is empty, our last append operation cannot have been a fast one. Therefore the backing array must have been newly resized to size $2n$, and it is half-full. Therefore we can perform $n$ fast appends until we need to resize it again. So, when it is time to resize we have $2n$ time units in our account. Now we have to resize the backing array and copy all our $2n$ elements, which is exactly what we have in our account. So after the resize we have a half-full array and an empty account, again. The important thing to note is that we never get a negative amount in our account!
 
@@ -74,10 +74,10 @@ Amortised complexity           ...a sequence of calls to the operation
 Expected complexity            ...random choices made by the operation
 -----------------------------  ---------------------------------------------
 
-All three types are orthogonal to each other, which means that we can talk about “amortised average-case complexity” or “expected amortised complexity”, or even “expected amortised average-case complexity”. (And we can add “asymptotic” too: “asymptotic expected amortised average-case complexity”…)
+All three types are orthogonal to each other, which means that we can talk about "amortised average-case complexity" or "expected amortised complexity", or even "expected amortised average-case complexity". (And we can add "asymptotic" too: "asymptotic expected amortised average-case complexity"...)
 
 Average-case complexity
-:   can be used when an algorithm behaves well for most “well-behaved” input, but there are some few extreme inputs that make the algorithm behave bad. The typical example is Quicksort, which has quadratic worst-case complexity, but usually behaves linearithmic (unless there is some evil hacker that tries to break it). The main difficulty with average-case complexity is to decide what is the average case.
+:   can be used when an algorithm behaves well for most "well-behaved" input, but there are some few extreme inputs that make the algorithm behave bad. The typical example is Quicksort, which has quadratic worst-case complexity, but usually behaves linearithmic (unless there is some evil hacker that tries to break it). The main difficulty with average-case complexity is to decide what is the average case.
 
 Amortised complexity
 :   is used for operations that are supposed to be used many times on the same data structure, such as changing, adding or deleting elements. If the operation most of the time behaves well, but once in a while can take time, then we use amortisation to infer what the complexity is for executing a sequence of operations. The prototypical case is dynamic arrays.

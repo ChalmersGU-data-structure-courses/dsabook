@@ -9,10 +9,10 @@
 
 A *spanning tree* of an undirected graph is a tree that includes (spans) all the vertices of the graph. This of course assumes that the graph is connected, otherwise it is not possible. (An unconnected graph can instead have a spanning *forest*.)
 
-**Fact**. The number of edges in a spanning tree is exactly $V–1$.
+**Fact**. The number of edges in a spanning tree is exactly $V-1$.
 (Why is this? Try to convince yourself about it.)
 
-If the graph is weighted, a *minimum spanning tree* (MST) is a spanning tree whose total cost is as small as possible. A graph often has several MSTs – for example, if all weights are the same, then all spanning trees are MSTs. But note this little theorem:
+If the graph is weighted, a *minimum spanning tree* (MST) is a spanning tree whose total cost is as small as possible. A graph often has several MSTs -- for example, if all weights are the same, then all spanning trees are MSTs. But note this little theorem:
 
 **Theorem**. If all weights are distinct from each other, there is exactly one MST.
 (See proof here: https://en.wikipedia.org/wiki/Minimum_spanning_tree#Uniqueness)
@@ -21,7 +21,7 @@ Our example graph has two possible MSTs:
 
 ![](images/Graphs-TwoMSTs.png)
 
-The MST is used in many different algorithms, and there are a lot of use cases which rely heavily on finding the MST – for example, when designing all kinds of networks, such as computer networks, telecommunications networks, transportation networks, water supply networks, and electrical grids.
+The MST is used in many different algorithms, and there are a lot of use cases which rely heavily on finding the MST -- for example, when designing all kinds of networks, such as computer networks, telecommunications networks, transportation networks, water supply networks, and electrical grids.
 
 In this book you will learn two algorithms for finding the MST of a graph.
 

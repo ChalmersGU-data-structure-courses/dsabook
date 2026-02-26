@@ -13,7 +13,7 @@ This algorithm is conceptually very simple.
 - Sort all edges by weight
 - For each edge $e$:
     - Add $e$ to the MST unless that creates a cycle
-    - Stop when the MST is complete (when the size is $V–1$)
+    - Stop when the MST is complete (when the size is $V-1$)
 
 This is how it works for our example graph:
 
@@ -23,7 +23,7 @@ This is how it works for our example graph:
 4. Then we add $CE_7$ and $CD_8$.
 5. Now we can stop because the MST contains 5 edges.
 
-Note that since there are several edges with the same weight. For most of them it doesn’t make any difference, except for $CD_8$ and $EF_8$. They have the same weight, and if $EF_8$ had been visited before $CD_8$ we would have got the second MST instead.
+Note that since there are several edges with the same weight. For most of them it doesn't make any difference, except for $CD_8$ and $EF_8$. They have the same weight, and if $EF_8$ had been visited before $CD_8$ we would have got the second MST instead.
 
 The problem is how to know if an edge will create a cycle. How can we do that? This is not difficult: if both the start and end vertex is in the MST, then adding the edge will create a cycle. So, if we store the MST as a set of edges we can define this function:
 
@@ -34,18 +34,18 @@ The problem is how to know if an edge will create a cycle. How can we do that? T
         - If *edge.end* = *e.start* or *e.end*, then *containsEnd* = True
     - Return True if both *containsStart* and *containsEnd*
 
-This function loops over all edges in the MST, and in the worst case this contains $V–1$ edges, so the complexity is $O(V)$.
+This function loops over all edges in the MST, and in the worst case this contains $V-1$ edges, so the complexity is $O(V)$.
 
-What is then the complexity of Kruskal’s algorithm? Well, we iterate over $O(E)$ edges, and test each of these for cyclicity, so we get $O(VE)$. If the graph is sparse, $E \in O(V)$ and the complexity can be simplified to $O(V^2)$, but if it is very dense, $E \in O(V^2)$ and the complexity is the same as $O(V^3)$.
+What is then the complexity of Kruskal's algorithm? Well, we iterate over $O(E)$ edges, and test each of these for cyclicity, so we get $O(VE)$. If the graph is sparse, $E \in O(V)$ and the complexity can be simplified to $O(V^2)$, but if it is very dense, $E \in O(V^2)$ and the complexity is the same as $O(V^3)$.
 
 #### Using a disjoint-set instead of a normal set
 
 This complexity is if we store the MST as a set, but it is possible to do much better.
 
-There is a much better data structure for storing the MST – the *disjoint-set* (also called union-find). For now, the only thing we need to know about the disjoint-set now is that it supports the operations we needs efficiently, in *almost* constant time. To be precise, the complexity of the operations is $O(\log*(n))$, which is an extremely slow-growing function: it’s so slow that $\log*(n) \leq 5$ for all $n \leq 2^{65536}$. So, $\log*(n)$ is constant for *all practical purposes*.
+There is a much better data structure for storing the MST -- the *disjoint-set* (also called union-find). For now, the only thing we need to know about the disjoint-set now is that it supports the operations we needs efficiently, in *almost* constant time. To be precise, the complexity of the operations is $O(\log*(n))$, which is an extremely slow-growing function: it's so slow that $\log*(n) \leq 5$ for all $n \leq 2^{65536}$. So, $\log*(n)$ is constant for *all practical purposes*.
 
-Therefore, if we use a disjoint-set to store the MST, Kruskal’s algorithm is $O(E \log*(E))$ – which in practice is the same as $O(E)$. But first we have to sort the edges, which anyway takes $O(E \log(E))$ time, which is then the total complexity. But note that since $E \in O(V^2)$ and $O(\log(V^2)) = O(2 \log(V)) = O(\log(V))$, the total complexity of Kruskal’s algorithm can be written as $O(E \log(V))$.
-More information about the disjoint-set can be found in @sec:disjoint-sets if you are interested. (It’s a quite cool data structure, so worth the read:)
+Therefore, if we use a disjoint-set to store the MST, Kruskal's algorithm is $O(E \log*(E))$ -- which in practice is the same as $O(E)$. But first we have to sort the edges, which anyway takes $O(E \log(E))$ time, which is then the total complexity. But note that since $E \in O(V^2)$ and $O(\log(V^2)) = O(2 \log(V)) = O(\log(V))$, the total complexity of Kruskal's algorithm can be written as $O(E \log(V))$.
+More information about the disjoint-set can be found in @sec:disjoint-sets if you are interested. (It's a quite cool data structure, so worth the read:)
 
 <!-- END NOTES -->
 

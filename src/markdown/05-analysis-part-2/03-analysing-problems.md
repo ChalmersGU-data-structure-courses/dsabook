@@ -11,7 +11,7 @@ The lower bound, $\Omega$, is not interesting at all when we want to analyse an 
 
 But if we want to analyse a *problem* instead of an algorithm, then it is $\Omega$ we want to know. If we know a lower bound for a problem then we know that there cannot be any algorithm that has better complexity than that.
 
-It is usually very difficult to show that a problem has a certain lower bound, so nothing I expect you to come up with in your lifetime (I haven’t done it for sure:). But here is a standard example:
+It is usually very difficult to show that a problem has a certain lower bound, so nothing I expect you to come up with in your lifetime (I haven't done it for sure:). But here is a standard example:
 
 - Sorting an array of $n$ elements is trivially $\Omega(n)$, because we at the very least have to look at least once at every element.
 - But it is possible to prove that the sorting problem is actually $\Omega(n \log(n))$, for *comparison-based* sorting algorithms. This means that there are no sorting algorithm that has better complexity than $O(n \log(n))$, so Mergesort is an *asymptotically optimal* sorting algorithm.

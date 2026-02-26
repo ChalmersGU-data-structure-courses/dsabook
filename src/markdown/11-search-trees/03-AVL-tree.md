@@ -11,15 +11,15 @@
 
 (AVL stands for its inventors, Georgy Adelson-Velsky and Evgenii Landis.)
 
-Tree nodes in AVL trees store an additional property, their *balance factor*. This is not really a “factor” (it has nothing to do with multiplication), but rather the difference of height between the right and the left subtree:
+Tree nodes in AVL trees store an additional property, their *balance factor*. This is not really a "factor" (it has nothing to do with multiplication), but rather the difference of height between the right and the left subtree:
 
-- BF(N) = balance factor of N = height(N.right) – height(N.left)
+- BF(N) = balance factor of N = height(N.right) -- height(N.left)
 
 AVL trees ensure that they are balanced, by enforcing the following *invariant*:
 
-- –1 ≤ BF(N) ≤ 1 for all nodes N in the tree
+- --1 ≤ BF(N) ≤ 1 for all nodes N in the tree
 
-Note that this doesn’t mean that AVL trees are perfectly balanced. But this invariant guarantees that the height of the tree is never more than 1.44 times the height of a perfectly balanced binary search tree. (Side note: 1.44 is not $\sqrt{2}$, but instead $1/\log_2(\phi)$.) The exact constant is (as always when it comes to complexity) not important, but what it says is that the maximum height of an AVL tree is $O(\log(n))$ where $n$ is its size.
+Note that this doesn't mean that AVL trees are perfectly balanced. But this invariant guarantees that the height of the tree is never more than 1.44 times the height of a perfectly balanced binary search tree. (Side note: 1.44 is not $\sqrt{2}$, but instead $1/\log_2(\phi)$.) The exact constant is (as always when it comes to complexity) not important, but what it says is that the maximum height of an AVL tree is $O(\log(n))$ where $n$ is its size.
 
 When we draw AVL trees we usually write the balance factor beside each node. Here are two balanced AVL trees representing the same set {A,B,C,D,E,F,G}:
 
@@ -33,7 +33,7 @@ First we insert using the standard BST procedure. This might break the invariant
 
 ![](images/AVL-Unbalanced.png)
 
-Notice that the left tree is still AVL balanced, so we don’t have to do anything more. But in the right tree, the ancestor node F have become unbalanced. This is a so-called *right-right* imbalance, and this can be solved by a “simple left rotation”.
+Notice that the left tree is still AVL balanced, so we don't have to do anything more. But in the right tree, the ancestor node F have become unbalanced. This is a so-called *right-right* imbalance, and this can be solved by a "simple left rotation".
 
 ![](images/AVL-LeftRotate1.png)
 
@@ -57,7 +57,7 @@ Now the result is not perfect, but at least the inner nodes X and Y become AVL b
 
 #### Double rotations
 
-There is a third right-heavy case, and that is when the *right-left* grandchild ($t_2$) is higher than the *right-right* ($t_3$). If we perform a single rotation over X we won’t win anything:
+There is a third right-heavy case, and that is when the *right-left* grandchild ($t_2$) is higher than the *right-right* ($t_3$). If we perform a single rotation over X we won't win anything:
 
 ![](images/AVL-WrongDoubleRotate.png)
 
@@ -73,7 +73,7 @@ And now all nodes are balanced!
 
 Deletion in an AVL tree is similar to addition: first we use the normal BST deletion, and then we rebalance the parent nodes.
 
-It is more tricky to implement deletion than addition, because there are more cases to take care of. Therefore we won’t do AVL deletion in this course.
+It is more tricky to implement deletion than addition, because there are more cases to take care of. Therefore we won't do AVL deletion in this course.
 
 #### Complexity analysis
 
@@ -85,13 +85,13 @@ Since an AVL tree is balanced, there are never more than $O(\log(n))$ ancestors 
 
 Rebalancing one single node is constant time. It involves one or two rotations, and a rotation is constant time. Therefore, rebalancing a tree after insertion or deletion is logarithmic, $O(\log(n))$.
 
-In fact, rebalancing after addition is constant time, because the tree will always be balanced after the first rebalancing. But this doesn’t change the complexity of addition, because it is logarithmic to find the insertion point.
+In fact, rebalancing after addition is constant time, because the tree will always be balanced after the first rebalancing. But this doesn't change the complexity of addition, because it is logarithmic to find the insertion point.
 
 In summary, we have come up with our first *efficient* general-purpose data structure for sets and maps. This is also one of the most common ones in practice, and very easy to implement.
 
 #### Implementing AVL tree nodes
 
-The only thing we have to change, compared to BST nodes, is that we need to store the balance for each node. This extra variable have the only possible values +1, 0 and –1:
+The only thing we have to change, compared to BST nodes, is that we need to store the balance for each node. This extra variable have the only possible values +1, 0 and --1:
 
 ```
 class AVLNode:
@@ -128,7 +128,7 @@ function avlsort(list):
 
 What is the complexity of this algorithm? The slowest part is building the tree: it is a loop over $n$ elements and each iteration adds to the tree, which is logarithmic in $n$. The final complexity of the loop is $O(n \log(n))$, and since inorder traversal is linear, the complexity of sorting via an AVL tree is $O(n \log(n))$.
 
-This has the same complexity as Mergesort, and is as good as the best sorting algorithms. So why don’t anyone use it? It is because the hidden constants are bigger than Mergesort: it takes longer time and also uses more extra memory.
+This has the same complexity as Mergesort, and is as good as the best sorting algorithms. So why don't anyone use it? It is because the hidden constants are bigger than Mergesort: it takes longer time and also uses more extra memory.
 
 #### Test them yourself
 

@@ -6,7 +6,7 @@
 :::
 
 :::: latex
-Asymptotic algorithm analysis is a method for estimating how an algorithm’s performance scales with input size.
+Asymptotic algorithm analysis is a method for estimating how an algorithm's performance scales with input size.
 While it helps identify efficient algorithms, it has limitations such as inaccuracy for small inputs and difficulty modeling complex problems.
 The full text can be read online.
 

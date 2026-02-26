@@ -92,7 +92,7 @@ of the following properties:
     concrete for instructing a human cook, but not for programming an
     automated cookie-making factory.
 3.  There must be *no ambiguity* about which step is performed next.
-    Typically, the next step follows directly from the algorithm’s description.
+    Typically, the next step follows directly from the algorithm's description.
     When the algorithm includes selection mechanisms, such as `if`-statements, these allow for alternative execution paths.
     However, the choice of which path to follow must always be unambiguous at the moment the decision is made.
 4.  It must be composed of a *finite* number of steps. If the

@@ -1038,7 +1038,7 @@ The concept of [estimation]{.term} might be unfamiliar to many readers.
 Estimation is not a mathematical technique, but rather a general engineering skill.
 This is sometimes known as "back of the napkin" or "back of the envelope" calculation.
 Both nicknames suggest that only a rough estimate is produced.
-It is very useful to computer scientists doing design work, because any proposed solution whose estimated resource requirements fall well outside the problem’s resource constraints can be discarded immediately, allowing time for greater analysis of more promising solutions.
+It is very useful to computer scientists doing design work, because any proposed solution whose estimated resource requirements fall well outside the problem's resource constraints can be discarded immediately, allowing time for greater analysis of more promising solutions.
 
 [Estimation]{.term} techniques are a standard part of engineering curricula but are often neglected in computer science.
 Estimation is no substitute for rigorous, detailed analysis of a problem, but it can help to decide when a rigorous analysis is warranted: If the initial estimate indicates that the solution is unworkable, then further analysis is probably unnecessary.
