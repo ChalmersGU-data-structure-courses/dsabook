@@ -3,7 +3,7 @@
 Panflute filter: remove classes that are not supposed to be in the html
 """
 
-import panflute as pf
+from panflute_helper import run_filter
 
 # The following <div>s should be removed, and all their content:
 CONTENT_TO_REMOVE = "TODO latex pdf".split()
@@ -21,7 +21,7 @@ def remove_classes(elem, doc):
 
 
 def main(doc = None):
-    return pf.run_filter(remove_classes, doc=doc)
+    return run_filter(remove_classes, doc=doc)
 
 if __name__ == '__main__':
     main()

@@ -4,6 +4,7 @@ Panflute filter: Make subheadings (below level 3) unnumbered
 """
 
 import panflute as pf
+from panflute_helper import run_filter
 
 MAX_HEADER_NUMBERING_LEVEL = 3
 
@@ -15,7 +16,7 @@ def max_header_numbering(elem, doc):
 
 
 def main(doc = None):
-    return pf.run_filter(max_header_numbering, doc=doc)
+    return run_filter(max_header_numbering, doc=doc)
 
 if __name__ == '__main__':
     main()

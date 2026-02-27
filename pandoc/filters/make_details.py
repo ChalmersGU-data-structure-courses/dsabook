@@ -4,6 +4,7 @@ Panflute filter: Put visualisation blocks inside a <details> block
 """
 
 import panflute as pf
+from panflute_helper import run_filter
 
 
 def make_details(elem, doc):
@@ -21,7 +22,7 @@ def make_details(elem, doc):
 
 
 def main(doc = None):
-    return pf.run_filter(make_details, doc=doc)
+    return run_filter(make_details, doc=doc)
 
 if __name__ == '__main__':
     main()

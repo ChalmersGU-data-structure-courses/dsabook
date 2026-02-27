@@ -6,6 +6,7 @@ Pandoc filter: figures from javascript, the JSAV library
 from pathlib import Path
 import hashlib
 import panflute as pf
+from panflute_helper import run_filter
 
 RENDERED_IMAGES_DIR = Path('rendered-images')
 RENDERED_IMAGES_DIR.mkdir(parents=True, exist_ok=True)
@@ -133,7 +134,7 @@ def render_jsav_figure(code, attributes, jsav_class):
 
 
 def main(doc = None):
-    return pf.run_filter(jsav_figure, doc=doc)
+    return run_filter(jsav_figure, doc=doc)
 
 if __name__ == '__main__':
     main()

@@ -26,11 +26,11 @@ metadata:
   # Settings for panflute:
   panflute-path: pandoc/filters
   panflute-filters:
-    - remove-classes
-    - max-header-numbering
-    - make-details
-    - latex-figure
-    - jsav-figure
+    - remove_classes
+    - max_header_numbering
+    - make_details
+    - latex_figure
+    - jsav_figure
 
 
 variables:

@@ -8,6 +8,7 @@ from pathlib import Path
 import hashlib
 import subprocess
 import panflute as pf
+from panflute_helper import run_filter
 
 RENDERED_IMAGES_DIR = Path('rendered-images')
 RENDERED_IMAGES_DIR.mkdir(parents=True, exist_ok=True)
@@ -86,7 +87,7 @@ def render_latex_figure(code, identifier, attributes, caption=None):
 
 
 def main(doc = None):
-    return pf.run_filter(latex_figure, doc=doc)
+    return run_filter(latex_figure, doc=doc)
 
 if __name__ == '__main__':
     main()
