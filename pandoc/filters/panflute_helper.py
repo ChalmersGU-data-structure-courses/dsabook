@@ -1,9 +1,7 @@
 # type: ignore
 
-import sys
 import time
 import inspect
-
 import panflute as pf
 
 
@@ -12,5 +10,5 @@ def run_filter(*args, **xargs):
     mod = inspect.getmodule(frm[0])
     t0 = time.time()
     result = pf.run_filter(*args, **xargs)
-    print(f"...panflute filter {mod.__name__}: {time.time()-t0:0.2f} s", file=sys.stderr)
+    pf.debug(f"...Panflute filter {mod.__name__}: {time.time()-t0:0.2f} s")
     return result

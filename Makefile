@@ -29,26 +29,31 @@ default: install
 all: install check-links
 
 clean:
-	@echo "Cleaning..."
+	@echo
+	@echo "# Cleaning..."
 	@rm -rf $(TEMP) $(BUILD) $(GENERATED)
 
 preprocess: clean
 	@mkdir -p $(TEMP)
-	@echo "Preprocessing..."
+	@echo
+	@echo "# Preprocessing..."
 	@time $(PYTHON) scripts/preprocess.py $(TEMP) $(GLOSSARY) $(MD_FILES)
 
 pandoc: preprocess
 	@mkdir -p $(BUILD)
-	@echo "Running pandoc..."
+	@echo
+	@echo "# Running pandoc..."
 	@time $(PANDOC) --output=$(HTML) $(TEMP)/*.md
 	@rm -fr $(TEMP)
 
 postprocess: pandoc
-	@echo "Postprocessing..."
+	@echo
+	@echo "# Postprocessing..."
 	@time $(PYTHON) scripts/postprocess.py $(HTML)/*.html
 
 install: postprocess
-	@echo "Installing..."
+	@echo
+	@echo "# Installing..."
 	@cp    $(SRC)/index.html     $(BUILD)/ || true
 	@cp -r $(SRC)/interactive    $(BUILD)/ || true
 	@cp -r $(SRC)/khan-exercises $(BUILD)/ || true
@@ -56,7 +61,8 @@ install: postprocess
 	@cp -r $(LIB)                $(BUILD)/ || true
 
 deploy: install
-	@echo "Deploying..."
+	@echo
+	@echo "# Deploying..."
 	@rm -fr $(DOCS)
 	@cp -r $(BUILD) $(DOCS) || true
 
