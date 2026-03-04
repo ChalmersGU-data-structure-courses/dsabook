@@ -1,5 +1,5 @@
 
-### Growth rates
+## Order of growth
 
 ::: TODO
 - Prio 2: is this a good way of introducing the concept of growth rates?
@@ -8,135 +8,92 @@
     - rename 2nd subheading - ugly to have "growth rates" twice
 :::
 
-<!--
-### Faster computer, or faster algorithm?
--->
+Imagine that you are a bookworm and you have 10,000 books divided into 100 bookshelfs.
+Now you want to sort all your books so that you can search for them quickly (using binary search of course).
+You use one of the sorting algorithms from [Chapter @sec:sorting-part-1]
+and notice it takes one hours to sort the books in one shelf.
 
-Imagine that you have a problem to solve, and you know of an algorithm
-whose running time is proportional to $n^2$ where $n$ is a measure of
-the input size. Unfortunately, the resulting program takes ten times too
-long to run. If you replace your current computer with a new one that is
-ten times faster, will the $n^2$ algorithm become acceptable? If the
-problem size remains the same, then perhaps the faster computer will
-allow you to get your work done quickly enough even with an algorithm
-having a high growth rate. But a funny thing happens to most people who
-get a faster computer. They don't run the same problem faster. They run
-a bigger problem! Say that on your old computer you were content to sort
-10,000 records because that could be done by the computer during your
-lunch break. On your new computer you might hope to sort 100,000 records
-in the same time. You won't be back from lunch any sooner, so you are
-better off solving a larger problem. And because the new machine is ten
-times faster, you would like to sort ten times as many records.
+- How long time will it take to sort all your books?
+- If you buy a sorting robot that is 100 times faster than you are,
+  will you then be able to sort all your books in one hour?
 
-If your algorithm's growth rate is linear (i.e., if the equation that
-describes the running time on input size $n$ is $T(n) = cn$ for
-some constant $c$), then 100,000 records on the new machine will be
-sorted in the same time as 10,000 records on the old machine. If the
-algorithm's growth rate is greater than $cn$, such as $c_1n^2$, then
-you will *not* be able to do a problem ten times the size in the same
-amount of time on a machine that is ten times faster.
+The sorting algorithms from [Chapter @sec:sorting-part-1]
+all have a running time proportional to $n^2$ where $n$ is the number of books.
+This means that if you double the size of the input, the running time will quadruple.
+And if you multiply the input size by 100, the running time will be $100^2 = 10,000$ times slower.
+So, it will take 10,000 hours for you to sort all your books.
+And your very expensive sorting robot will still take 100 hours.
+
+So maybe it is not worth the money to buy a faster robot,
+but instead to try to find a sorting algorithm that has better algorithmic complexity.
+
 
 ### Getting a faster computer
 
-How much larger problems a faster computer solve in the same amount of time?
-Say that the old machine could solve a problem of size $n$ in an hour,
-and that the new machine is ten times faster than the old.
-What is the largest problem that the new machine can solve in one hour?
-@Tbl:problem-size-speedup shows just that for five running-time functions.
+How much larger problems can a faster computer solve in the same amount of time?
+Or, equivalently, how much larger problems can we solve if we spend more time?
+@Tbl:problem-size-speedup shows just that some common running-time functions.
 
 
-  Growth rate    Max $n$ (old)   Max $n'$ (new)   Relation $n$ and $n'$                        $n'/n$
---------------- --------------- ----------------  ---------------------------------------- ---------------
-     $10 n$        $1,000$         $10,000$       $n' = n\cdot 10$                               $10$
-     $20 n$          $500$          $5,000$       $n' = n\cdot 10$                               $10$
- $5 n \log n$        $250$          $1,842$       $n' \approx \frac{0.1386n}{W(0.1386n)}$       $7.4$
-    $2 n^2$           $70$            $223$       $n' = n\cdot\sqrt{10}$                        $3.2$
-      $2^n$           $13$             $16$       $n' = n + 3$                               $\approx 1$
+    Growth rate             1 ms        10 ms         100 ms              1 s
+-----------------------  ---------  ------------  --------------  ---------------
+ $2\cdot\log_2(n)$         $32$      $10^{15}$      $10^{150}$       $10^{1500}$
+ $n/2$                     $20$          $200$         $2,000$          $20,000$
+ $n$                       $10$          $100$         $1,000$          $10,000$
+ $n\cdot\log_2(n)/4$       $11$           $66$           $453$           $3,408$
+ $n^2/10$                  $10$           $31$           $100$             $316$
+ $2^n/20$                   $7$           $11$            $14$              $17$
 
-: The increase in problem size that can be run in the same time on a computer that is ten times faster {#tbl:problem-size-speedup}
+: Maximum problem sizes that can be handled in 1, 10, 100 and 1,000 milliseconds
+  {#tbl:problem-size-speedup}
 
-Explanations:
+This table illustrates many important points.
+The two equations $n$ and $n/2$ are both *linear*; only the value of the constant factor has changed.
+In both cases, if we spend ten times more work we can solve a ten times larger problem.
+In other words, while the value of the constant does affect the absolute size of the problem
+that can be solved in a fixed amount of time,
+it does not affect the *improvement* in problem size (as a proportion to the original size).
+This relationship holds true regardless of the algorithm's growth rate:
+Constant factors never affect the relative improvement gained by working longer or faster.
 
-- The first column lists the right-hand sides for five growth rate equations.
-- The second column shows the maximum value for $n$ that can be run in 10,000 basic operations on the old machine.
-- The third column shows the value for $n'$, the new maximum size for the problem that can be run in the same time on the new machine that is ten times faster.
-  Variable $n'$ is the greatest size for the problem that can run in 100,000 basic operations.
-- The fourth column shows how the size of $n$ changed to become $n'$ on the new machine.
-- The fifth column shows the increase in problem size as the ratio of $n'$ to $n$.
+The first equation denotes a *logarithmic* growth rate, $T(n) = 2\cdot\log_2(n)$.
+It could for example be the time to find a book in your sorted bookshelf using binary search (@sec:binary-search).
+In this case we search 32 books in one millisecond.
+But in 10 ms we can search in $10^{15}$ books,
+and in 100 ms we can search a library with more books than there are atoms in the universe.
 
-This table illustrates many important points. The first two equations
-are both linear; only the value of the constant factor has changed. In
-both cases, the machine that is ten times faster gives an increase in
-problem size by a factor of ten. In other words, while the value of the
-constant does affect the absolute size of the problem that can be solved
-in a fixed amount of time, it does not affect the *improvement* in
-problem size (as a proportion to the original size) gained by a faster
-computer. This relationship holds true regardless of the algorithm's
-growth rate: Constant factors never affect the relative improvement
-gained by a faster computer.
+The *quadratic* algorithm, $T(n) = n^2/10$, does not receive nearly as great an improvement
+from the longer working time as a linear algorithm.
+Instead of an improvement by a factor of hundred (if we let it run for 100 times longer),
+the improvement is only the square root of that: $\sqrt{100}=10$.
 
-An algorithm with time equation $T(n) = 2n^2$ does not receive
-nearly as great an improvement from the faster machine as an algorithm
-with linear growth rate. Instead of an improvement by a factor of ten,
-the improvement is only the square root of that:
-$\sqrt{10} \approx 3.16$. Thus, the algorithm with higher growth rate
-not only solves a smaller problem in a given time in the first place, it
-*also* receives less of a speedup from a faster computer. As computers
-get ever faster, the disparity in problem sizes becomes ever greater.
+The algorithm in between linear and quadratic, $T(n) = n\log(n)/4$,
+improves almost like the linear one, but not quite.
+Its growth rate is sometimes called *linearithmic* or *log-linear*,
+and it is a common growth rate for many algorithms
+(for example the Mergesort algorithm in @sec:mergesort).
 
-The algorithm with growth rate $T(n) = 5 n \log n$ improves by
-a greater amount than the one with quadratic growth rate, but not by as
-great an amount as the algorithms with linear growth rates.
+Note that something special happens in the case of the *exponential* algorithm, $T(n) = 2^n/20$.
+It can only be used to solve very small problems,
+and if you spend 10 times longer it can still only solve a problem of size $n+3$
+(to be precise, it is $n + \log_2(10)$).
+The increase in problem size for an exponential algorithm is by a constant addition, not by a multiplicative factor.
+If you spend 1 second instead of 1 millisecond you can still only solve a problem of size 17,
+and it would take you 15 hours to solve a problem of size 30.
+A problem of size 50 will take more than 1,700 years!
+Thus, exponential growth is radically different than the other growth rates shown in the table.
 
-Note that something special happens in the case of the algorithm whose
-running time grows exponentially. If you look at its plot on a graph,
-the curve for the algorithm whose time is proportional to $2^n$ goes up
-very quickly as $n$ grows. The increase in problem size on the machine
-ten times as fast is about $n + 3$ (to be precise, it is
-$n + \log_2 10$). The increase in problem size for an algorithm with
-exponential growth rate is by a constant addition, not by a
-multiplicative factor. Because the old value of $n$ was 13, the new
-problem size is 16. If next year you buy another computer ten times
-faster yet, then the new computer (100 times faster than the original
-computer) will only run a problem of size 19. If you had a second
-program whose growth rate is $2^n$ and for which the original computer
-could run a problem of size 1000 in an hour, than a machine ten times
-faster can run a problem only of size 1003 in an hour! Thus, an
-exponential growth rate is radically different than the other growth
-rates shown in the table. The significance of this difference is an
-important topic in
-[computational complexity theory]{.term}.
-
-Instead of buying a faster computer, consider what happens if you
-replace an algorithm whose running time is proportional to $n^2$ with a
-new algorithm whose running time is proportional to $n \log n$. In a
-graph relating growth rate functions to input size, a fixed amount of
-time would appear as a horizontal line. If the line for the amount of
-time available to solve your problem is above the point at which the
-curves for the two growth rates in question meet, then the algorithm
-whose running time grows less quickly is faster. An algorithm with
-running time $T(n)=n^2$ requires $1000 \times 1000 = 1,000,000$
-time steps for an input of size $n=1000$. An algorithm with running time
-$T(n) = n \log n$ requires $1000 \times 10 = 10,000$ time steps
-for an input of size $n = 1000$, which is an improvement of much more
-than a factor of ten when compared to the algorithm with running time
-$T(n) = n^2$. Because $n^2 > 10 n \log n$ whenever $n > 58$, if
-the typical problem size is larger than 58 for this example, then you
-would be much better off changing algorithms instead of buying a
-computer ten times faster. Furthermore, when you do buy a faster
-computer, an algorithm with a slower growth rate provides a greater
-benefit in terms of larger problem size that can run in a certain time
-on the new computer.
+In summary, buying a faster computer will only work for some algorithms
+-- if they are logarithmic, linear or linearithmic then a faster computer might have a real impact.
+But if your algorithm is quadratic or worse then it is often better to change to
+an algorithm with better growth rate, than to buy a new computer.
+(Provided *there is* a better algorithm, of course!)
 
 
-### Comparing different growth rates
+### Plotting and tabulating growth rates
 
-The [growth rate]{.term} for an algorithm is the
-rate at which the cost of the algorithm grows as the size of its input
-grows. @Fig:growthGraphs shows a graph for six equations, each meant
-to describe the running time for a particular program or algorithm. A
-variety of growth rates that are representative of typical algorithms
-are shown.
+Another way of comparing different growth rates is to draw a graph.
+@Fig:growthGraphs plots the six growth rate equations from above.
 
 ::: {#fig:growthGraphs}
 ```{.matplotlib dpi=300}
@@ -145,86 +102,64 @@ import numpy as np
 import matplotlib.pyplot as plt
 fig, (plt1, plt2) = plt.subplots(1, 2, figsize=(14,5))
 xs = np.linspace(0, 50, 500)
-ys_10n = 10*xs
-ys_20n = 20*xs
-ys_5nlogn = 5*xs*np.log2(xs)
-ys_2n2 = 2*(xs**2)
-ys_2expn = 2**xs
-ys_fact = np.vectorize(math.gamma)(xs+1)
-plt1.set_xlim(0, 50); plt1.set_ylim(0, 1400)
-plt1.plot(xs, ys_10n, '--');   plt1.text(45, ys_10n[-1], '10·n')
-plt1.plot(xs, ys_20n, '--');   plt1.text(45, ys_20n[-1], '20·n')
-plt1.plot(xs, ys_5nlogn, '-'); plt1.text(xs[375], 1300, '5n·log₂(n)')
-plt1.plot(xs, ys_2n2, '-');    plt1.text(xs[200], 1300, '2·n²')
-plt1.plot(xs, ys_2expn, '-');  plt1.text(xs[110], 1300, '2ⁿ')
-plt1.plot(xs, ys_fact, '-');   plt1.text(xs[40], 1300, 'n!')
-plt1.plot([11,11,0], [0,308,308], ':', color='gray')
-plt1.set_title('Growth rates for 6 equations')
-plt2.set_xlim(0, 11); plt2.set_ylim(0, 308);
-plt2.plot(xs, ys_10n, '--');   plt2.text(10, ys_10n[110]-30, '10·n')
-plt2.plot(xs, ys_20n, '--');   plt2.text(10, ys_20n[110]-30, '20·n')
-plt2.plot(xs, ys_5nlogn, '-'); plt2.text(9.5, ys_5nlogn[110]-50, '5n·log₂(n)')
-plt2.plot(xs, ys_2n2, '-');    plt2.text(10, ys_2n2[110], '2·n²')
-plt2.plot(xs, ys_2expn, '-');  plt2.text(7.3, 290, '2ⁿ')
-plt2.plot(xs, ys_fact, '-');   plt2.text(4.9, 290, 'n!')
+ys_2logn = 2*np.log2(xs)
+ys_n_2 = xs/2
+ys_1n = xs
+ys_nlogn_4 = xs*np.log2(xs)/4
+ys_n2_10 = (xs**2)/10
+ys_expn_20 = 2**xs/20
+plt1.set_xlim(0, 50); plt1.set_ylim(0, 70)
+plt1.plot(xs, ys_n_2, '--');   plt1.text(46, ys_n_2[-1]+2, 'n/2')
+plt1.plot(xs, ys_1n, '--');   plt1.text(47, ys_1n[-1], 'n')
+plt1.plot(xs, ys_2logn, '-');   plt1.text(43, ys_2logn[-1]+2, '2·log₂(n)')
+plt1.plot(xs, ys_nlogn_4, '-'); plt1.text(38, 65, 'n·log₂(n)/4')
+plt1.plot(xs, ys_n2_10, '-');    plt1.text(21, 65, 'n²/10')
+plt1.plot(xs, ys_expn_20, '-');  plt1.text(12, 65, '2ⁿ/20')
+plt1.plot([2,2,13,13], [0,16,16,0], ':', color='gray')
+plt1.set_title('Growth rates for 5 equations')
+plt2.set_xlim(2, 13); plt2.set_ylim(0, 16);
+plt2.plot(xs, ys_n_2, '--');   plt2.text(12.2, ys_n_2[100]+0.4, 'n/2')
+plt2.plot(xs, ys_1n, '--');   plt2.text(12.4, ys_1n[130], 'n')
+plt2.plot(xs, ys_2logn, '-');   plt2.text(11.5, ys_2logn[130]+0.2, '2·log₂(n)')
+plt2.plot(xs, ys_nlogn_4, '-'); plt2.text(11.3, ys_nlogn_4[109], 'n·log₂(n)/4')
+plt2.plot(xs, ys_n2_10, '-');    plt2.text(11.2, 15, 'n²/10')
+plt2.plot(xs, ys_expn_20, '-');  plt2.text(7.2, 15, '2ⁿ/20')
 plt2.set_title('Zoomed in')
 ```
 
-Illustration of the growth rates for six equations.
+Illustration of growth rates for different algorithms.
 The right view shows in detail the lower-left portion of the top view.
 The horizontal axis represents input size.
 The vertical axis can represent time, space, or any other measure of cost.
 :::
 
-The two equations labeled $10n$ and $20n$ are graphed by straight lines.
-A growth rate of $cn$ (for $c$ any positive constant) is often referred
-to as a [linear growth rate]{.term} or running
-time. This means that as the value of $n$ grows, the running time of the
-algorithm grows in the same proportion. Doubling the value of $n$
-roughly doubles the running time. An algorithm whose running-time
-equation has a highest-order term containing a factor of $n^2$ is said
-to have a [quadratic growth rate]{.term}. In the
-figure, the line labeled $2n^2$ represents a quadratic growth rate. The
-line labeled $2^n$ represents an
-[exponential growth rate]{.term}. This name
-comes from the fact that $n$ appears in the exponent. The line labeled
-$n!$ also grows exponentially.
+As you can see from the figure, the difference between a linear algorithm
+with cost $T(n) = n$ and a quadratic algorithm with cost $T(n) = n^2/10$
+becomes tremendous as $n$ grows.
+From $n > 10$ the quadratic algorithm becomes slower than the linear,
+and this difference increases as $n$ grows.
+This is despite the fact that $n^2/10$ has a smaller constant factor than $n$.
 
-As you can see from the figure, the difference between an algorithm
-whose running time has cost $T(n) = 10n$ and another with cost
-$T(n) = 2n^2$ becomes tremendous as $n$ grows. For $n > 5$, the
-algorithm with running time $T(n) = 2n^2$ is already much
-slower. This is despite the fact that $10n$ has a greater constant
-factor than $2n^2$. Comparing the two curves marked $20n$ and $2n^2$
-shows that changing the constant factor for one of the equations only
-shifts the point at which the two curves cross. For $n>10$, the
-algorithm with cost $T(n) = 2n^2$ is slower than the algorithm
-with cost $T(n) = 20n$. This graph also shows that the equation
-$T(n) = 5 n \log n$ grows somewhat more quickly than both
-$T(n) = 10 n$ and $T(n) = 20 n$, but not nearly so
-quickly as the equation $T(n) = 2n^2$. For constants
-$a, b > 1, n^a$ grows faster than either $\log^b n$ or $\log n^b$.
-Finally, algorithms with cost $T(n) = 2^n$ or
-$T(n) = n!$ are prohibitively expensive for even modest values
-of $n$. Note that for constants $a, b \geq 1, a^n$ grows faster than
-$n^b$.
+The graph also shows that the equation $T(n) = n\log_2(n)/4$
+grows somewhat more quickly than the linear equations,
+but not nearly so quickly as the quadratic equation.
+In fact, $n^a$ always grows faster than bot $\log(n)^b$ and $\log(n^b)$,
+for all constants $a,b>1$.
 
-We can get some further insight into relative growth rates for various
-algorithms from @tbl:growth-rates below. Most of the growth rates that
-appear in typical algorithms are shown, along with some representative
-input sizes. Once again, we see that the growth rate has a tremendous
-effect on the resources consumed by an algorithm.
+We also see that exponential algorithms are prohibitively expensive for even modest values of $n$.
+Note that $a^n$ grows faster than $n^b$ for all constants $a,b>1$.
 
+Finally, @tbl:growth-rates shows the difference between the growth rates when $n$ becomes larger and larger.
+Once again, we see that the growth rate has a tremendous effect on the resources consumed by an algorithm.
 
-        n         $\log n$     $n$         $n\log n$       $n^2$       $n^3$     $2^n$                  $n!$
----------------- ---------- ---------- ------------------ ----------- ---------- --------------------   ------------
-     $10$         $3.3$       $10$            $33$         $100$       $10^3$    $10^3$                 $10^{6}$
-    $100$         $6.6$      $100$           $664$         $10^4$      $10^6$    $10^{30}$              $10^{158}$
-  $1K = 1,000$     $10$      $1,000$          $10^4$       $10^6$      $10^9$    $10^{300}$             $10^{2567}$
- $10K = 10^4$    $13.3$      $10^4$     $1.3\cdot 10^5$    $10^8$      $10^{12}$ $10^{3000}$            $10^{35,659}$
-$100K = 10^5$    $16.6$      $10^5$     $1.6\cdot 10^6$    $10^{10}$   $10^{15}$ $10^{30,000}$          $10^{456,573}$
-  $1M = 10^6$      $20$      $10^6$     $2\cdot 10^7$      $10^{12}$   $10^{18}$ $10^{300,000}$         $\cdots$
-  $1G = 10^9$      $30$      $10^9$     $3\cdot 10^{10}$   $10^{18}$   $10^{27}$ $\cdots$               $\cdots$
+    Growth rate              $n=10$             $100$              $1,000$                $10^4$              $10^5$
+-----------------------  ------------  --------------------  -------------------  -------------------  -------------------
+ $2\cdot\log_2(n)$            $7$                $13$                 $20$                    $27$               $33$
+ $n/2$                        $5$                $50$                $500$                 $5,000$           $50,000$
+ $n$                         $10$               $100$              $1,000$                $10,000$          $100,000$
+ $n\cdot\log_2(n)/4$          $8$               $166$              $2,491$                $33,219$          $415,241$
+ $n^2/10$                    $10$             $1,000$            $100,000$            $10,000,000$             $10^9$
+ $2^n/20$                    $51$        $6\cdot 10^{28}$     $5\cdot 10^{300}$           $\cdots$           $\cdots$
 
 : Costs for representative growth rates {#tbl:growth-rates}
 

@@ -130,7 +130,7 @@ it.
 This chapter introduces the motivation, basic notation, and fundamental
 techniques of algorithm analysis. We focus on a methodology known as
 [asymptotic algorithm analysis]{.term}, or
-simply [asymptotic analysis]{.term}.
+simply asymptotic analysis.
 
 Asymptotic analysis estimates the resource consumption of an algorithm,
 called its [complexity]{.term}. Here, resource
@@ -138,7 +138,7 @@ consumption can mean runtime, memory use, API calls, or any other
 measure. Instead of computing this resource consumption exactly,
 asymptotic analysis is only interested in its
 [growth rate]{.term} (also called
-[order of growth]{.term}). The growth rate is
+order of growth). The growth rate is
 what determines the resource consumption for large inputs. Thankfully,
 growth rate expressions are relatively easy to compare. This allows us
 to decide which of two algorithms is better at solving the same problem.
