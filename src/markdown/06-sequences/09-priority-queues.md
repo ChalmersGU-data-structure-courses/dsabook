@@ -37,7 +37,7 @@ queue supports the following operations:
 ### ADT for priority queues
 
 In [Chapter @sec:heaps], we will see how to implement a priority queue so that
-both adding and removing the minimum take $O(\log n)$ time.
+both adding and removing the minimum take $O(\log(n))$ time.
 
     interface PriorityQueue of T extends Collection:
         add(x: T)         // Adds x to the priority queue.
@@ -81,8 +81,8 @@ Here is an implementation of this algorithm in code:
 
 What is the time complexity of this algorithm? Well, for an input list
 of size $n$, the algorithm calls `add` $n$ times and `removeMin` $n$
-times. In a binary heap, `add` and `removeMin` both take $O(\log n)$
-time. Therefore, the total runtime is $O(n \log n)$ -- as efficient as
+times. In a binary heap, `add` and `removeMin` both take $O(\log(n))$
+time. Therefore, the total runtime is $O(n \log(n))$ -- as efficient as
 any of the sorting algorithms we have seen so far!
 :::
 
@@ -105,9 +105,9 @@ One way is to use sorting. If we store the transactions in an array and
 sort it by value, then the highest-value transactions will be at the end
 of the array. If there are *n* transactions in total, then transactions
 number $n-100\ldots n-1$ are the ones we need. If we use an efficient
-sorting algorithm, this will take $O(n \log n)$ time. (More generally,
+sorting algorithm, this will take $O(n \log(n))$ time. (More generally,
 this gives us an algorithm for finding the largest $k$ items in a list
-of $n$ items, in $O(n \log n)$ time.)
+of $n$ items, in $O(n \log(n))$ time.)
 
 Now suppose that we want to monitor the transactions *throughout* the
 day. At any point, we want to be able to find the 100 highest-valued
@@ -116,7 +116,7 @@ transactions *so far* today. How can we do this?
 We could still use the sorting approach, but we would need to sort the
 list of transactions *every time* we wanted to find the 100 top
 transactions. This may be prohibitively expensive if there are a lot of
-transactions: it takes $O(n \log n)$ time every time we do it.
+transactions: it takes $O(n \log(n))$ time every time we do it.
 
 We can do better with the help of a priority queue. The idea is to have
 a priority queue that holds the *100 highest-value transactions* only.
@@ -164,7 +164,7 @@ transaction. Here it is in code:
 What is the complexity of `add`? Well, in fact it takes constant time,
 because the priority queue has a constant maximum size of 100 elements.
 If we generalise this problem to keeping track of the top $k$
-transactions, then the complexity of `add` is $O(\log k)$.
+transactions, then the complexity of `add` is $O(\log(k))$.
 :::
 
 ::::::

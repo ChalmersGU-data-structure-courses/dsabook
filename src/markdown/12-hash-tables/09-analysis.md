@@ -65,7 +65,7 @@ insertion cost depends on the value of $\alpha$ not at the time of
 deletion, but rather at the time of the original insertion. We can
 derive an estimate of this cost (essentially an average over all the
 insertion costs) by integrating from 0 to the current value of $\alpha$,
-yielding a result of $(1/\alpha) \log_e 1/(1-\alpha).$
+yielding a result of $(1/\alpha) \log_e(1/(1-\alpha))$.
 
 It is important to realise that these equations represent the expected
 cost for operations when using the unrealistic assumption that the probe
@@ -92,7 +92,7 @@ show the cost for deletion (equivalently, successful search).
 From the figure, you should see that the cost for hashing when the table
 is not too full is typically close to one record access. This is
 extraordinarily efficient, much better than binary search which requires
-$\log n$ record accesses. As $\alpha$ increases, so does the expected
+$\log(n)$ record accesses. As $\alpha$ increases, so does the expected
 cost. For small values of $\alpha$, the expected cost is low. It remains
 below two until the hash table is about half full. When the table is
 nearly empty, adding a new record to the table does not increase the

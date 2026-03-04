@@ -32,7 +32,7 @@ equal keys might not remain in the same order after sorting)
 
 ::: hints
 - Heapsort does not need auxilliary storage.
-- Heapsort runs in $O(n \log n)$ time.
+- Heapsort runs in $O(n \log(n))$ time.
 - Equal-valued records might be in different sides of the
 heap, and can get out of relative order.
 :::
@@ -73,7 +73,7 @@ a comparison?
 - Yes, it changes things a little bit in that it might
 move things up and down the heap more or less.
 - But this does not matter, because removing a value
-from the heap normally costs $\log n$.
+from the heap normally costs $\log(n)$.
 :::
 ::::::::::::::::::::::::::::::
 
@@ -84,9 +84,9 @@ What is the worst-case time for
 Heapsort to sort an array of n records that each have unique
 key values?
 
-- [x] $O(n \log n)$
+- [x] $O(n \log(n))$
 - [ ] $O(n)$
-- [ ] $O(\log n)$
+- [ ] $O(\log(n))$
 - [ ] $O(n^2)$
 - [ ] $O(n^n)$
 
@@ -106,9 +106,9 @@ when the input is an array where all key values are equal?
 
 - [x] $O(n)$
 - [ ] $O(n^2)$
-- [ ] $O(\log n)$
+- [ ] $O(\log(n))$
 - [ ] $O(n ^ n)$
-- [ ] $O(n \log n)$
+- [ ] $O(n \log(n))$
 
 ::: hints
 - Heapsort has the same asymptotic cost in the best, average,
@@ -128,7 +128,7 @@ How much auxilliary space or overhead
 (beyond the array holding the records) is needed by Heapsort?
 
 - [x] $O(1)$
-- [ ] $O(\log n)$
+- [ ] $O(\log(n))$
 - [ ] $O(n)$
 - [ ] $O(n^2)$
 

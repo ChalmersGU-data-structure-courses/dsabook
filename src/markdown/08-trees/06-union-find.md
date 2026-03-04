@@ -205,13 +205,13 @@ trees are joined together. One simple technique, called the
 [weighted union rule]{.term}, joins the tree
 with fewer nodes to the tree with more nodes by making the smaller
 tree's root point to the root of the bigger tree. This will limit the
-total depth of the tree to $O(\log n)$, because the depth of nodes only
+total depth of the tree to $O(\log(n))$, because the depth of nodes only
 in the smaller tree will now increase by one, and the depth of the
 deepest node in the combined tree can only be at most one deeper than
 the deepest node before the trees were combined. The total number of
 nodes in the combined tree is therefore at least twice the number in the
 smaller subtree. Thus, the depth of any node can be increased at most
-$\log n$ times when $n$ equivalences are processed (since each addition
+$\log(n)$ times when $n$ equivalences are processed (since each addition
 to the depth must be accompanied by at least doubling the size of the
 tree).
 
@@ -279,24 +279,24 @@ constant.
 To be more precise about what is meant by "very close to constant",
 the cost of path compression for $n$ **Find** operations on $n$ nodes (when
 combined with the weighted union rule for joining sets) is approximately
-$O(n \log^* n)$. The notation $\log^* n$ means the number of times
-that the log of $n$ must be taken before $n \leq 1$. For example,
-$\log^* 65536$ is 4 because $\log 65536 = 16, \log 16 = 4, \log 4 = 2$,
-and finally $\log 2 = 1$. Thus, $\log^* n$ grows *very* slowly, so the
+$O(n \log^*(n))$. The notation $\log^*(n)$ means the number of times
+that the logarithm of $n$ must be taken before $n \leq 1$. For example,
+$\log^*(65536)$ is 4 because $\log(65536) = 16, \log(16) = 4, \log(4) = 2$,
+and finally $\log(2) = 1$. Thus, $\log^*(n)$ grows *very* slowly, so the
 cost for a series of $n$ **Find** operations is very close to $n$.
 
 Note that this does not mean that the tree resulting from processing $n$
-equivalence pairs necessarily has depth $O(\log^* n)$. One can
-devise a series of equivalence operations that yields $O(\log n)$
+equivalence pairs necessarily has depth $O(\log^*(n))$. One can
+devise a series of equivalence operations that yields $O(\log(n))$
 depth for the resulting tree. However, many of the equivalences in such
 a series will look only at the roots of the trees being merged,
 requiring little processing time. The *total* amount of processing time
-required for $n$ operations will be $O(n \log^* n)$, yielding
+required for $n$ operations will be $O(n \log^*(n))$, yielding
 nearly constant time for each equivalence operation. This is an example
 of [amortised analysis]{.term}.
 
 <!--
-The expression $\log^* n$ is closely related to the inverse of
+The expression $\log^*(n)$ is closely related to the inverse of
 Ackermann's function. For more information about Ackermann's function
 and the cost of path compression for **Union/Find**, see
 \[[Tarjan, 1975](#tarjan75){.citation}\].

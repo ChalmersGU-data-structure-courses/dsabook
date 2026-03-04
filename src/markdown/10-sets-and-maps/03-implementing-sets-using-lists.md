@@ -76,7 +76,7 @@ It is clear that all the operations are linear in the size of the list, $O(n)$, 
 In later chapters we will see how to improve the efficiency, by using
 
 -   [Balanced search trees](#balanced-tree){.term} (@sec:self-balancing-trees), which bring down
-    the complexity of the operations to $O(\log n)$.
+    the complexity of the operations to $O(\log(n))$.
 -   [Hash tables](#hash-table){.term} ([Chapter @sec:hash-tables]), which make
     the operations constant time, $O(1)$.
 

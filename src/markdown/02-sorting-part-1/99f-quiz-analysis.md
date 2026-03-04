@@ -146,7 +146,7 @@ The total number of pairs of records among $n$ records is:
 - [ ] $n$
 - [ ] $2n$
 - [ ] $2n^2$
-- [ ] $n \log n$
+- [ ] $n \log(n)$
 - [ ] $n!$
 - [ ] $n!/2$
 - [ ] $n(n+1)/2$

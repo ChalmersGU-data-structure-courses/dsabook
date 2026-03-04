@@ -277,8 +277,8 @@ On deletion, if the last two children of the root merge,
 then the root node is removed and the tree will lose a level.
 In either case, all leaf nodes are always at the same level.
 When all leaf nodes are at the same level, we say that a tree is [height balanced]{.term}.
-Because the 2-3 tree is height balanced, and every internal node has at least two children, we know that the maximum depth of the tree is $\log n$.
-Thus, all 2-3 tree insert, find, and delete operations require $O(\log n)$ time.
+Because the 2-3 tree is height balanced, and every internal node has at least two children, we know that the maximum depth of the tree is $\log(n)$.
+Thus, all 2-3 tree insert, find, and delete operations require $O(\log(n))$ time.
 
 <!--
 [Click here](http://www.cs.usfca.edu/~galles/visualization/BTree.html)
@@ -510,7 +510,7 @@ for another visualization that will let you construct and interact with a B^+^ t
 
 ### Analysis of B-trees
 
-The asymptotic cost of search, insertion, and deletion of records from B-trees and B^+^ trees is $O(\log n)$ where $n$ is the total number of records in the tree.
+The asymptotic cost of search, insertion, and deletion of records from B-trees and B^+^ trees is $O(\log(n))$ where $n$ is the total number of records in the tree.
 However, the base of the logarithm is the (average) branching factor of the tree.
 Typical database applications use extremely high branching factors, perhaps 100 or more.
 Thus, in practice the B-tree and its variants are extremely shallow.

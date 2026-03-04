@@ -216,13 +216,13 @@ All these different bounds correspond to comparison operators between complexity
 Using these correspondences and the simplifying rules we can infer the following hierarchy of complexity classes:
 
 $$
-O(1) < O(\log n) < O(n) < O(n\log n) < O(n^2) < O(n^2\log n) < O(n^3) < \cdots < O(n^k) < O(2^n) < \cdots
+O(1) < O(\log(n)) < O(n) < O(n\log(n)) < O(n^2) < O(n^2\log(n)) < O(n^3) < \cdots < O(n^k) < O(2^n) < \cdots
 $$
 
 Zooming in on the very efficient (sub-linear) complexity classes we have:
 
 $$
-O(1) < O(\log \log n) < O(\log n) = O(\log n^2) = O(\log n^3) < O(\log^2 n) < O(\log^3 n) < O(\sqrt[3]{n}) < O(\sqrt{n}) < O(n)
+O(1) < O(\log(\log(n))) < O(\log(n)) = O(\log(n^2)) = O(\log(n^3)) < O(\log(n)^2) < O(\log(n)^3) < O(\sqrt[3]{n}) < O(\sqrt{n}) < O(n)
 $$
 
 And if we instead look closer on the extreme other end of the scale:
@@ -257,17 +257,17 @@ Little-Omega   $f \in \omega(g)$   $k = \infty$
 ::: example
 #### Example: Comparing two functions
 
-Assume $f(n) = n^2$ and $g(n) = 1000n\log n$.
+Assume $f(n) = n^2$ and $g(n) = 1000n\log(n)$.
 Is $f$ in $O(g)$, $\Omega(g)$, or $\Theta(g)$?
 To answer this we can calculate the limit of the quotient $f(n)/g(n)$ when $n$ grows:
 
 $$
 \lim_{n \rightarrow \infty} \frac{f(n)}{g(n)} =
-\lim_{n \rightarrow \infty} \frac{n^2}{1000n\log n} =
-\frac{1}{1000}\cdot\lim_{n \rightarrow \infty} \frac{n}{\log n} = \infty
+\lim_{n \rightarrow \infty} \frac{n^2}{1000n\log(n)} =
+\frac{1}{1000}\cdot\lim_{n \rightarrow \infty} \frac{n}{\log(n)} = \infty
 $$
 
-because $n$ grows faster than $\log n$.
+because $n$ grows faster than $\log(n)$.
 Thus, $f\in\Omega(g)$ (or equivalently, $g\in O(f)$).
 :::
 

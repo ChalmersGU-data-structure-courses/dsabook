@@ -232,7 +232,7 @@ And just as for Prim's algorithm, this will give us a complexity which is quadra
 An alternative approach is to store unprocessed vertices in a [minimum priority queue](#priority-queue){.term},
 such as a [binary heap]{.term},
 ordered by their distance from the processed vertices. The next-closest
-vertex can be found in the heap in $O(\log |\mathbf{V}|)$ time.
+vertex can be found in the heap in $O(\log(|\mathbf{V}|))$ time.
 Every time we modify $\mathbf{D}(X)$, we could reorder $X$ in the heap
 by deleting and reinserting it. This is an example of a priority queue with priority update.
 However, to implement true priority updating, we would need
@@ -248,7 +248,7 @@ inserting distance values in this way is that it will raise the number
 of elements in the heap from $O(|\mathbf{V}|)$ to
 $O(|\mathbf{E}|)$ in the worst case. But in practice this only adds
 a slight increase to the depth of the heap. The time complexity is
-$O((|\mathbf{V}| + |\mathbf{E}|) \log |\mathbf{E}|)$, because for
+$O((|\mathbf{V}| + |\mathbf{E}|) \log(|\mathbf{E}|))$, because for
 each edge that we process we must reorder the heap.
 
 Here is the implementation for Dijkstra's algorithm using a priority queue.
@@ -282,9 +282,9 @@ efficient when the graph is dense, that is, when $|\mathbf{E}|$
 approaches $|\mathbf{V}|^2$.
 Using a priority is more efficient when the
 graph is sparse because its cost is
-$O((|\mathbf{V}| + |\mathbf{E}|) \log |\mathbf{E}|)$.
+$O((|\mathbf{V}| + |\mathbf{E}|) \log(|\mathbf{E}|))$.
 When the graph is dense, this cost can become as great as
-$O(|\mathbf{V}|^2 \log |\mathbf{E}|) = O(|\mathbf{V}|^2 \log |\mathbf{V}|)$.
+$O(|\mathbf{V}|^2 \log(|\mathbf{E}|)) = O(|\mathbf{V}|^2 \log(|\mathbf{V}|))$.
 
 In practice, most graphs are sparse so unless you know that the graph is dense you should use the priority queue version.
 

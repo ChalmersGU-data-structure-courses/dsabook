@@ -107,7 +107,7 @@ characteristics:
 
 -   It's a separate chaining hash table.
 -   Small buckets (\<8 elements) are linked lists, but larger buckets
-    are red-black trees instead. This ensures $O(n \log n)$ worst time
+    are red-black trees instead. This ensures $O(n \log(n))$ worst time
     complexity, but it's linear if the data is well-behaved.
 -   The size of the hash table is a power of two ($n=2^k$) -- meaning
     that the resizing factor is 2.

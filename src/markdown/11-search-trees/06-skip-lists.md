@@ -24,7 +24,7 @@ values are inserted, but it is rather complicated to implement. The
 provide good performance, but at the cost of added complexity as
 compared to the BST. The skip list is easier to implement than known
 balanced tree structures. The skip list is not guaranteed to provide
-good performance (where good performance is defined as $O(\log n)$
+good performance (where good performance is defined as $O(\log(n))$
 search, insertion, and deletion time), but it will provide good
 performance with extremely high probability (unlike the BST which has a
 good chance of performing poorly). As such it represents a good
@@ -46,12 +46,12 @@ Here is an illustration of the basic idea behind skip lists.
 
 We can continue adding pointers to selected nodes in this way -- give
 a third pointer to every fourth node, give a fourth pointer to every
-eighth node, and so on -- until we reach the ultimate of $\log n$
+eighth node, and so on -- until we reach the ultimate of $\log(n)$
 pointers in the first and middle nodes for a list of $n$ nodes. To
 search, start with the bottom row of pointers, going as far as possible
 and skipping many nodes at a time. Then, shift up to shorter and shorter
 steps as required. With this arrangement, the worst-case number of
-accesses is $O(\log n)$.
+accesses is $O(\log(n))$.
 
 We will store with each skip list node an array named `forward` that
 stores the pointers. Position `forward[0]` stores a level 0 pointer,
@@ -186,7 +186,7 @@ level 0. The motto of probabilistic data structures such as the skip
 list is "Don't worry, be happy". We simply accept the results of
 `randomLevel` and expect that probability will eventually work in our
 favour. The advantage of this approach is that the algorithms are simple,
-while requiring only $O(\log n)$ time for all operations in the
+while requiring only $O(\log(n))$ time for all operations in the
 average case. For a skip list of size $n$, the expected memory usage is
 $2n$. This is because a level $l$ node needs $l+1$ forward pointers, but
 occurs with probability $2^{(l+1)}$. So a skip list is expected to have
@@ -213,7 +213,7 @@ nodes in the skip list increases, the probability of encountering the
 worst case decreases geometrically. Thus, the skip list illustrates a
 tension between the theoretical worst case (in this case, $O(n)$
 for a skip list operation), and a rapidly increasing probability of
-average-case performance of $O(\log n)$, that characterises
+average-case performance of $O(\log(n))$, that characterises
 probabilistic data structures.
 
 <!--

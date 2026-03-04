@@ -354,7 +354,7 @@ Implementers of hash functions must either ensure that the result of the computa
 ### Logarithms
 
 The [logarithm]{.term} of base $b$ for value $y$ is the power to which $b$ is raised to get $y$.
-Normally, this is written as $\log_b y = x$.  Thus, if $\log_b y = x$ then $b^x = y$, and $b^{log_b y} = y$.
+Normally, this is written as $\log_b(y) = x$.  Thus, if $\log_b(y) = x$ then $b^x = y$, and $b^{log_b y} = y$.
 
 Logarithms are used frequently by programmers.
 Here are two typical uses.
@@ -363,8 +363,8 @@ Here are two typical uses.
 #### Example: Minimum bits
 Many programs require an encoding for a collection of objects.
 What is the minimum number of bits needed to represent $n$ distinct code values?
-The answer is $\lceil \log_2 n \rceil$ bits.
-For example, if you have 1000 codes to store, you will require at least $\lceil \log_2 1000 \rceil = 10$ bits to have 1000 different codes (10 bits provide 1024 distinct code values).
+The answer is $\lceil \log_2(n) \rceil$ bits.
+For example, if you have 1000 codes to store, you will require at least $\lceil \log_2(1000) \rceil = 10$ bits to have 1000 different codes (10 bits provide 1024 distinct code values).
 :::
 
 ::: example
@@ -373,25 +373,25 @@ Consider the [binary search]{.term} algorithm for finding a given value within a
 Binary search first looks at the middle element and determines if the value being searched for is in the upper half or the lower half of the array.
 The algorithm then continues splitting the appropriate subarray in half until the desired value is found.
 How many times can an array of size $n$ be split in half until only one element remains in the final subarray?
-The answer is $\lceil \log_2 n \rceil$ times.
+The answer is $\lceil \log_2(n) \rceil$ times.
 :::
 
 Nearly all logarithms we use have a base of two.
 This is because data structures and algorithms most often divide things in half, or store codes with binary bits.
-Whenever you see the notation $\log n$, either $\log_2 n$ is meant or else the term is being used asymptotically and so the actual base does not matter.
+Whenever you see the notation $\log(n)$, either $\log_2(n)$ is meant or else the term is being used asymptotically and so the actual base does not matter.
 For logarithms using any base other than two, we will show the base explicitly.
 
 Logarithms have the following properties, for any positive values of $m$, $n$, and $r$, and any positive integers $a$ and $b$.
 
-1) $\log (nm) = \log n + \log m$.
-2) $\log (n/m) = \log n - \log m$.
-3) $\log (n^r) = r \log n$.
-4) $\log_a n = \log_b n / \log_b a$.
-5) $b^{\log_b n} = n$.
+1) $\log(nm) = \log(n) + \log(m)$.
+2) $\log(n/m) = \log(n) - \log(m)$.
+3) $\log(n^r) = r \log(n)$.
+4) $\log_a(n) = \log_b(n) / \log_b(a)$.
+5) $b^{\log_b(n)} = n$.
 
 The first two properties state that the logarithm of two numbers multiplied (or divided) can be found by adding (or subtracting) the logarithms of the two numbers.
 Property (3) is simply an extension of property (1).
-Property (4) tells us that, for variable $n$ and any two integer constants $a$ and $b$, $\log_a n$ and $\log_b n$ differ by the constant factor $\log_b a$, regardless of the value of $n$.
+Property (4) tells us that, for variable $n$ and any two integer constants $a$ and $b$, $\log_a(n)$ and $\log_b(n)$ differ by the constant factor $\log_b(a)$, regardless of the value of $n$.
 Most runtime analyses we use are of a type that ignores constant factors in costs.
 Property (4) says that such analyses need not be concerned with the base of the logarithm, because this can change the total cost only by a constant factor.
 
@@ -399,25 +399,25 @@ Property (4) says that such analyses need not be concerned with the base of the 
 A useful identity to know is:
 
 $$
-2^{\log n} = n
+2^{\log(n)} = n
 $$
 
-To give some intuition for why this is true: What does it mean to take the log (base 2) of $n$?
-If $\log_2 n = x$, then $x$ is the power to which you need to raise 2 to get back to $n$.
-So of course, $2^{\log n} = n$ when the base of the log is 2.
+To give some intuition for why this is true: What does it mean to take the logarithm (base 2) of $n$?
+If $\log_2(n) = x$, then $x$ is the power to which you need to raise 2 to get back to $n$.
+So of course, $2^{\log(n)} = n$ when the base of the logarithm is 2.
 -->
 
 When discussing logarithms, exponents often lead to confusion.
-Property (3) tells us that $\log n^2 = 2 \log n$.
-How do we indicate the square of the logarithm (as opposed to the logarithm of $n^2$)?
-This could be written as $(\log n)^2$, but it is traditional to use $\log^2 n$.
+Property (3) tells us that $\log(n^2) = 2 \log(n)$.
+In contrast the square of the logarithm (as opposed to the logarithm of $n^2$)
+is sometimes written as $\log^2(n)$, but we will use $\log(n)^2$.
 On the other hand, we might want to take the logarithm of the logarithm of $n$.
-This is written $\log \log n$.
+This is written $\log(\log(n))$.
 
 <!-- (Removing this, it's only used in UNION-FIND, and already explained there)
-A special notation is used in the rare case when we need to know how many times we must take the log of a number before we reach a value $\leq 1$.
-This quantity is written $\log^* n$.
-For example, $\log^* 1024 = 4$ because $\log 1024 = 10$, $\log 10 \approx 3.33$, $\log 3.33 \approx 1.74$, and $\log 1.74 < 1$, which is a total of 4 log operations.
+A special notation is used in the rare case when we need to know how many times we must take the logarithm of a number before we reach a value $\leq 1$.
+This quantity is written $\log^*(n)$.
+For example, $\log^*(1024) = 4$ because $\log(1024) = 10$, $\log(10) \approx 3.33$, $\log(3.33) \approx 1.74$, and $\log(1.74) < 1$, which is a total of 4 logarithm operations.
 -->
 
 <!--
@@ -485,7 +485,7 @@ Here is a list of useful summations, along with their closed-form solutions.
 \begin{align*}
 \sum_{i = 1}^{n} i &= \frac{n (n+1)}{2} \\
 \sum_{i = 1}^{n} i^2 &= \frac{2 n^3 + 3 n^2 + n}{6} = \frac{n(2n + 1)(n + 1)}{6} \\
-\sum_{i = 1}^{\log n} n &= n \log n \\
+\sum_{i = 1}^{\log(n)} n &= n \log(n) \\
 \sum_{i = 0}^\infty a^i &= \frac{1}{1-a}  ~~~ \mbox{if} \ 0 < a < 1 \\
 \sum_{i = 0}^{n} a^i &= \frac{a^{n+1} - 1}{a - 1}  ~~~ \mbox{if} \ a \neq 1
 \end{align*}
@@ -500,7 +500,7 @@ As special cases to the last summation, we have the following two:
 As a corollary to the previous summation:
 
 \begin{align*}
-\sum_{i = 0}^{\log n} 2^i &= 2^{\log n + 1} - 1 = 2n - 1
+\sum_{i = 0}^{\log(n)} 2^i &= 2^{\log(n) + 1} - 1 = 2n - 1
 \end{align*}
 
 Finally:
@@ -510,11 +510,11 @@ Finally:
 \end{align*}
 
 <!--
-The sum of reciprocals from 1 to $n$, called the [Harmonic Series]{.term} and written $\mathcal{H}_n$, has a value between $\log_e n$ and $\log_e n + 1$.
+The sum of reciprocals from 1 to $n$, called the [Harmonic Series]{.term} and written $\mathcal{H}_n$, has a value between $\log_e(n)$ and $\log_e(n) + 1$.
 To be more precise, as $n$ grows, the summation grows closer to
 
 $$
-\mathcal{H}_n \approx \log_e n + \gamma + \frac{1}{2n},
+\mathcal{H}_n \approx \log_e(n) + \gamma + \frac{1}{2n},
 $$
 
 where $\gamma$ is Euler's constant and has the value 0.5772...

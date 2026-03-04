@@ -516,17 +516,17 @@ case, the cost for any one of these operations is the depth of the
 deepest node in the tree. This is why it is desirable to keep BSTs
 [balanced](#balanced-tree){.term}, that is, with
 least possible height. If a binary tree is balanced, then the height for
-a tree of $n$ nodes is approximately $\log n$. However, if the tree is
+a tree of $n$ nodes is approximately $\log(n)$. However, if the tree is
 completely unbalanced, for example in the shape of a linked list, then
 the height for a tree with $n$ nodes can be as great as $n$. Thus, a
 balanced BST will in the average case have operations costing
-$O(\log n)$, while a badly unbalanced BST can have operations in
+$O(\log(n))$, while a badly unbalanced BST can have operations in
 the worst case costing $O(n)$. Consider the situation where we
 construct a BST of $n$ nodes by inserting records one at a time. If we
 are fortunate to have them arrive in an order that results in a balanced
 tree (a "random" order is likely to be good enough for this purpose),
-then each insertion will cost on average $O(\log n)$, for a total
-cost of $O(n \log n)$. However, if the records are inserted in
+then each insertion will cost on average $O(\log(n))$, for a total
+cost of $O(n \log(n))$. However, if the records are inserted in
 order of increasing value, then the resulting tree will be a chain of
 height $n$. The cost of insertion in this case will be
 $\sum_{i=1}^{n} i \in O(n^2)$.

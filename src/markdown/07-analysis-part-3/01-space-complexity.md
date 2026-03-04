@@ -72,7 +72,7 @@ The space usage is therefore $O(n)$, where $n$ is the length of the binary repre
 But what is the space usage in terms of the integer itself?
 This boils down to the question how many bits are there in the binary representation of a number.
 Since you can store $2^n$ different integers in $n$ bits, we need a logarithmic number of bits to store an arbitrary integer.
-Therefore the space usage of an integer is logarithmic, $O(\log n)$ to store an integer $n$.
+Therefore the space usage of an integer is logarithmic, $O(\log(n))$ to store an integer $n$.
 :::
 
 And finally a more complex example, about friendship:
@@ -130,7 +130,7 @@ In the third level we allocate $2^2 = 4$ arrays, each of size $n/2^2 = n/4$.
 Continuing down we see that in level $k$ we allocate $2^k$ arrays, each of size $n/2^k$.
 
 As you can see, each level uses up an additional $O(n)$ space, because $2^k \cdot n/2^k = n$.
-And, since we already know that Mergesort continues for $\log n$ levels, we get an additional space usage of $O(n \log n)$.
+And, since we already know that Mergesort continues for $\log(n)$ levels, we get an additional space usage of $O(n \log(n))$.
 
 But it is possible to improve the space usage of Mergesort.
 Instead of allocating new arrays at each level, we can create one single additional array of size $n$ and then use only that auxilliary array.
@@ -160,13 +160,13 @@ This is done by pushing some memory block (of constant size) onto the *call stac
 But when Quicksort is unlucky and gets quadratic behaviour, it will use a linear number of recursion levels.
 Therefore the additional memory usage for Quicksort is linear $O(n)$, so it is not in-place.
 
-But let's assume that we have a good pivot selection algorithm (and well-behaved input), so that we get the normal $O(n \log n)$ behaviour.
-Quicksort will still allocate memory on the call stack for the recursive calls, and just as Mergesort we will never get fewer than $O(\log n)$ recursive levels.
-Therefore the additional memory usage for Quicksort will be at least logarithmic $O(\log n)$ in the worst case.
+But let's assume that we have a good pivot selection algorithm (and well-behaved input), so that we get the normal $O(n \log(n))$ behaviour.
+Quicksort will still allocate memory on the call stack for the recursive calls, and just as Mergesort we will never get fewer than $O(\log(n))$ recursive levels.
+Therefore the additional memory usage for Quicksort will be at least logarithmic $O(\log(n))$ in the worst case.
 :::
 
 The Quicksort example shows that perhaps we were too strict when we defined what an *in-place* algorithm is.
-A more realistic definition is to say that an algorithm is in-place if it never uses more than $O(\log n)$ additional space.
+A more realistic definition is to say that an algorithm is in-place if it never uses more than $O(\log(n))$ additional space.
 
 ::::::
 

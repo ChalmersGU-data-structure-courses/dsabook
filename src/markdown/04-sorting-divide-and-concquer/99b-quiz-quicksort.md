@@ -29,7 +29,7 @@ On average, how many comparisons does Quicksort require to sort 1000 records
 
 ::: hints
 - What is Quicksort's average case running time?
-- It is $O(n \log_2 n)$
+- It is $O(n \log(n))$
 - This means about $10 \cdot 1000$ comparisons are required
 :::
 ::::::::::::::::::::::::::::::
@@ -50,9 +50,9 @@ total comparisons 1,000,000 records will require.)
 
 ::: hints
 - What is Quicksort's average case running time?
-- It is $O(n \log_2 n)$
+- It is $O(n \log(n))$
 - This means $10 \cdot 1000$ instructions ran in one second for an input of 1000 records
-- What is $n \log_2 n$ when $n = 1,000,000$?
+- What is $n \log_2(n)$ when $n = 1,000,000$?
 - It is about $20 \cdot 1,000,000$
 - How many seconds is $20,000,000/10,000$?
 :::
@@ -98,8 +98,8 @@ What is the worst-case cost for Quicksort to sort an array of n elements?
 
 - [x] $O(n^2)$
 - [ ] $O(n)$
-- [ ] $O(\log n)$
-- [ ] $O(n \log n)$
+- [ ] $O(\log(n))$
+- [ ] $O(n \log(n))$
 
 ::: hints
 - There are a few really bad inputs.
@@ -115,9 +115,9 @@ that is the sum of $i$ from 2 to $n-1$, that you should be very familiar with.
 :::::::::: question ::::::::::
 What is the best-case cost for Quicksort to sort an array of n elements?
 
-- [x] $O(n \log n)$
+- [x] $O(n \log(n))$
 - [ ] $O(n)$
-- [ ] $O(\log n)$
+- [ ] $O(\log(n))$
 - [ ] $O(n^2)$
 
 ::: hints
@@ -150,8 +150,8 @@ What is the running time of Quicksort when the input is an array where all recor
 
 - [x] $O(n^2)$
 - [ ] $O(n)$
-- [ ] $O(\log n)$
-- [ ] $O(n \log n)$
+- [ ] $O(\log(n))$
+- [ ] $O(n \log(n))$
 - [ ] $O(n ^ n)$
 
 ::: hints
@@ -165,7 +165,7 @@ What is the running time of Quicksort when the input is an array where all recor
 
 :::::::::: question ::::::::::
 Quicksort's worst-case case cost is $O(n^2)$ and its
-average-case cost is $O(n \log n)$. This means that
+average-case cost is $O(n \log(n))$. This means that
 the fraction of input cases with cost $O(n^2)$ must:
 
 - [x] Drop as $n$ grows
@@ -208,8 +208,8 @@ What is the worst-case cost for Quicksort's partition step?
 
 - [x] $O(n)$
 - [ ] $O(n^2)$
-- [ ] $O(\log n)$
-- [ ] $O(n \log n)$
+- [ ] $O(\log(n))$
+- [ ] $O(n \log(n))$
 
 ::: hints
 - Partition moves indices inwards until the meet.

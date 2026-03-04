@@ -70,7 +70,7 @@ This gives the left MST -- if we remove $EF_8$ before $CD_8$ we would get the ri
 
 What is the time complexity of Prim's algorithm?
 
-In the worst case all edges in the graph are added to the agenda, so the agenda will have size $O(E)$, and since adding an element to a priority queue is logarithmic, we get the total time build the agenda to be $O(E \log(E))$. (We can also reason that we will in the worst case iterate through all edges, so the while loop runs O(E) times. And since removing from a priority queue is logarithmic, each loop body is $O(log(E))$ and the total time is therefore O(E log(E)).)
+In the worst case all edges in the graph are added to the agenda, so the agenda will have size $O(E)$, and since adding an element to a priority queue is logarithmic, we get the total time build the agenda to be $O(E \log(E))$. (We can also reason that we will in the worst case iterate through all edges, so the while loop runs O(E) times. And since removing from a priority queue is logarithmic, each loop body is $O(\log(E))$ and the total time is therefore O(E \log(E)).)
 
 Furthermore, we know that $E \in O(V^2)$, and therefore $O(\log(E)) = O(\log(V^2))$ = $O(2 \log(V)) = O(\log(V))$. So the total complexity of Prim's algorithm can be written as $O(E \log(V))$.
 
@@ -154,7 +154,7 @@ $O(|\mathbf{V}|^2)$.
 An alternative approach is to store unprocessed vertices in a [minimum priority queue](#priority-queue){.term},
 such as a [binary heap]{.term},
 ordered by their distance from the processed vertices. The next-closest
-vertex can be found in the heap in $O(\log |\mathbf{V}|)$ time.
+vertex can be found in the heap in $O(\log(|\mathbf{V}|))$ time.
 Every time we modify $\mathbf{D}(X)$, we could reorder $X$ in the heap
 by deleting and reinserting it. This is an example of a priority queue with priority update.
 However, to implement true priority updating, we would need
@@ -170,7 +170,7 @@ inserting distance values in this way is that it will raise the number
 of elements in the heap from $O(|\mathbf{V}|)$ to
 $O(|\mathbf{E}|)$ in the worst case. But in practice this only adds
 a slight increase to the depth of the heap. The time complexity is
-$O((|\mathbf{V}| + |\mathbf{E}|) \log |\mathbf{E}|)$, because for
+$O((|\mathbf{V}| + |\mathbf{E}|) \log(|\mathbf{E}|))$, because for
 each edge that we process we must reorder the heap.
 
 Here is the implementation for Dijkstra's algorithm using a priority queue.

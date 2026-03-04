@@ -68,8 +68,8 @@ to sort an array of $n$ records?
 
 - [x] $O(n^2)$
 - [ ] $O(n)$
-- [ ] $O(\log n)$
-- [ ] $O(n \log n)$
+- [ ] $O(\log(n))$
+- [ ] $O(n \log(n))$
 - [ ] $O(n^n)$
 
 ::: hints
@@ -86,8 +86,8 @@ when the input is an array where all elements are equal?
 
 - [x] $O(n^2)$
 - [ ] $O(n)$
-- [ ] $O(\log n)$
-- [ ] $O(n \log n)$
+- [ ] $O(\log(n))$
+- [ ] $O(n \log(n))$
 
 ::: hints
 - Each comparison test in the inner for loop will fail
@@ -106,8 +106,8 @@ when the input array has values that are in reverse sort order?
 
 - [x] $O(n^2)$
 - [ ] $O(n)$
-- [ ] $O(\log n)$
-- [ ] $O(n \log n)$
+- [ ] $O(\log(n))$
+- [ ] $O(n \log(n))$
 
 ::: hints
 - On each iteration, the $i$th record will have to move to the start of the array.
@@ -124,8 +124,8 @@ when the input is an array that has already been sorted?
 
 - [x] $O(n^2)$
 - [ ] $O(n)$
-- [ ] $O(\log n)$
-- [ ] $O(n \log n)$
+- [ ] $O(\log(n))$
+- [ ] $O(n \log(n))$
 
 ::: hints
 - Each test in the inner for loop will fail because the

@@ -18,10 +18,10 @@ from a different start vertex. If $\mathbf{G}$ is sparse (that is,
 $|\mathbf{E}| \in O(|\mathbf{V}|)$) then this is a good solution,
 because the total cost will be
 $O(|\mathbf{V}|^2 + |\mathbf{V}||\mathbf{E}| \log
-|\mathbf{V}|) = O(|\mathbf{V}|^2 \log |\mathbf{V}|)$ for the
+|\mathbf{V}|) = O(|\mathbf{V}|^2 \log(|\mathbf{V}|))$ for the
 version of Dijkstra's algorithm based on priority queues. For a dense
 graph, the priority queue version of Dijkstra's algorithm yields a cost
-of $O(|\mathbf{V}|^3 \log |\mathbf{V}|)$, but the version using
+of $O(|\mathbf{V}|^3 \log(|\mathbf{V}|))$, but the version using
 `minVertex` yields a cost of $O(|\mathbf{V}|^3)$.
 
 Another solution that limits processing time to $O(|\mathbf{V}|^3)$

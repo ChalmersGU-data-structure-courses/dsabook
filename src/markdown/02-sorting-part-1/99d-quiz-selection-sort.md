@@ -64,7 +64,7 @@ How many times does Selection sort call the swap function on an array of $n$ rec
 - [x] $n-1$
 - [ ] $1$
 - [ ] $n$
-- [ ] $n \log n$
+- [ ] $n \log(n)$
 - [ ] $n^2$
 - [ ] It depends on the order of the records
 
@@ -122,8 +122,8 @@ What is the worst-case time for Selection sort to sort an array of n records?
 
 - [x] $O(n^2)$
 - [ ] $O(n)$
-- [ ] $O(\log n)$
-- [ ] $O(n \log n)$
+- [ ] $O(\log(n))$
+- [ ] $O(n \log(n))$
 
 ::: hints
 - Does Selection sort's order and number of comparisons depend on the particular order of the input array?
@@ -141,8 +141,8 @@ when the input is an array that has already been sorted?
 
 - [x] $O(n^2)$
 - [ ] $O(n)$
-- [ ] $O(\log n)$
-- [ ] $O(n \log n)$
+- [ ] $O(\log(n))$
+- [ ] $O(n \log(n))$
 
 ::: hints
 - Each test in the inner for loop will be the same no
@@ -158,8 +158,8 @@ when the input is an array that has all equal values?
 
 - [x] $O(n^2)$
 - [ ] $O(n)$
-- [ ] $O(\log n)$
-- [ ] $O(n \log n)$
+- [ ] $O(\log(n))$
+- [ ] $O(n \log(n))$
 
 ::: hints
 - Each test in the inner for loop will be the same no
@@ -201,7 +201,7 @@ In the worst case, the total number of swaps done by Selection sort is closest t
 - [x] $n$
 - [ ] $n^2/2$
 - [ ] $n^2$
-- [ ] $n \log n$
+- [ ] $n \log(n)$
 
 ::: hints
 - Does Selection sort's number of swaps depend on the particular order of the input array?

@@ -119,7 +119,7 @@ You can look up the formal definition in mathematical textbooks, or in Wikipedia
 ::: example
 #### Example: Comparing two functions
 
-Assume $f(n) = n(\log n)^2$ and $g(n) = 0.001\cdot n^2$.
+Assume $f(n) = n(\log(n))^2$ and $g(n) = 0.001\cdot n^2$.
 How can we use the definitions above to prove that $f \in O(g)$?
 
 We have to find positive numbers $k$ and $n_0$ so that $f(n)\leq k\cdot g(n)$.
@@ -129,7 +129,7 @@ $$
 k\cdot g(n) = 1000 \cdot 0.001 \cdot n^2 = n^2
 $$
 
-Now we readily see that $f(n) = n(\log n)^2$ is smaller than $k\cdot g(n) = n^2$ for all $n\geq 1$, so we can set $n_0 = 1$.
+Now we readily see that $f(n) = n(\log(n))^2$ is smaller than $k\cdot g(n) = n^2$ for all $n\geq 1$, so we can set $n_0 = 1$.
 
 Note that there are plenty of possible values to choose from, such as $k=1$ and $n_0=13,789$.
 We can even use very large values such as $k=n_0=10^{99}$, since we are only interested in what happens when $n$ grows infinitly large.
@@ -234,18 +234,18 @@ Using these rules we can easily determine the asymptotic growth rate for many al
 
 One interesting consequence of asymptotic complexity is that the base of a logarithm becomes irrelevant:
 
-$$ O(\log_2(n)) = O(\ln(n)) = O(\log_10(n)) $$
+$$ O(\log_2(n)) = O(\ln(n)) = O(\log_{10}(n)) $$
 
 The reason for this is that according to the logarithm laws, $\log_b(n) = \log_a(n) \cdot 1/\log_a(b)$.
 But $1/\log_a(b)$ is a constant which we can ignore, so $O(\log_b(n)) = O(\log_a(n))$.
-Therefore we can just ignore the base and write $O(\log n)$.
+Therefore we can just ignore the base and write $O(\log(n))$.
 (Note that this *does not* hold for exponential growth -- e.g., $2^n\in O(10^n)$, but $10^n\not\in O(2^n)$.)
 
 Another consequence of the logarithm laws is that it doesn't really matter if you take the logarithm from a linear, quadratic, cubic, or any power function:
 
-$$ O(\log n) = O(\log n^2) = O(\log n^3) = O(\log n^k) $$
+$$ O(\log(n)) = O(\log(n^2)) = O(\log(n^3)) = O(\log(n^k)) $$
 
-The reason for this is that $\log n^k = k\cdot\log n$ according to the logarithm laws, so the exponent $k$ becomes a multiplicative constant and can be ignored.
-However, taking the power of a logarithm cannot be ignored, so $O(\log n)$ and $O(\log^2 n)$ are different complexity classes.
+The reason for this is that $\log(n^k) = k\cdot\log(n)$ according to the logarithm laws, so the exponent $k$ becomes a multiplicative constant and can be ignored.
+However, taking the power of a logarithm cannot be ignored, so $O(\log(n))$ and $O(\log(n)^2)$ are different complexity classes.
 
 

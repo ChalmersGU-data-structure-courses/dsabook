@@ -127,8 +127,8 @@ The $n$ nodes in a binary tree can be visited in:
 
 - [x] $O(n)$ time
 - [ ] $O(1)$ time
-- [ ] $O(\log n)$ time
-- [ ] $O(n \log n)$ time
+- [ ] $O(\log(n))$ time
+- [ ] $O(n \log(n))$ time
 - [ ] $O(n^2)$ time
 
 ::: hints

@@ -44,8 +44,8 @@ slower, nor too much faster, than the claimed growth rate.
 Determine the proper relationship between the following pair of functions.
 
 \begin{align*}
-f(n) &= \log n^2 \\
-g(n) &= \log n + 5
+f(n) &= \log(n^2) \\
+g(n) &= \log(n) + 5
 \end{align*}
 
 - [x] $f(n)$ is $\Theta(g(n))$
@@ -66,7 +66,7 @@ Determine the proper relationship between the following pair of functions.
 
 \begin{align*}
 f(n) &= \sqrt n \\
-g(n) &= \log n^2
+g(n) &= \log(n^2)
 \end{align*}
 
 - [x] $f(n)$ is $\Omega(g(n))$
@@ -86,8 +86,8 @@ g(n) &= \log n^2
 Determine the proper relationship between the following pair of functions.
 
 \begin{align*}
-f(n) &= \log^2 n \\
-g(n) &= \log n
+f(n) &= \log(n)^2 \\
+g(n) &= \log(n)
 \end{align*}
 
 - [x] $f(n)$ is $\Omega(g(n))$
@@ -108,7 +108,7 @@ Determine the proper relationship between the following pair of functions.
 
 \begin{align*}
 f(n) &= n \\
-g(n) &= \log^2 n
+g(n) &= \log(n)^2
 \end{align*}
 
 - [x] $f(n)$ is $\Omega(g(n))$
@@ -128,8 +128,8 @@ g(n) &= \log^2 n
 Determine the proper relationship between the following pair of functions.
 
 \begin{align*}
-f(n) &= n \log n + n \\
-g(n) &= \log n
+f(n) &= n \log(n) + n \\
+g(n) &= \log(n)
 \end{align*}
 
 - [x] $f(n)$ is $\Omega(g(n))$
@@ -149,8 +149,8 @@ g(n) &= \log n
 Determine the proper relationship between the following pair of functions.
 
 \begin{align*}
-f(n) &= \log n^2 \\
-g(n) &= (\log n)^2
+f(n) &= \log(n^2) \\
+g(n) &= \log(n)^2
 \end{align*}
 
 - [ ] $f(n)$ is $\Omega(g(n))$
@@ -171,7 +171,7 @@ Determine the proper relationship between the following pair of functions.
 
 \begin{align*}
 f(n) &= 10 \\
-g(n) &= \log 10
+g(n) &= \log(10)
 \end{align*}
 
 - [ ] $f(n)$ is $\Omega(g(n))$
@@ -213,7 +213,7 @@ Determine the proper relationship between the following pair of functions.
 
 \begin{align*}
 f(n) &= 2^n \\
-g(n) &= n \log n
+g(n) &= n \log(n)
 \end{align*}
 
 - [x] $f(n)$ is $\Omega(g(n))$
@@ -276,8 +276,8 @@ Which of these is the best lower bound for a growth rate of $5n + 3$?
 
 - [x] $\Omega(n)$
 - [ ] $\Omega(n^2)$
-- [ ] $\Omega(n \log n)$
-- [ ] $\Omega(\log n)$
+- [ ] $\Omega(n \log(n))$
+- [ ] $\Omega(\log(n))$
 - [ ] $\Omega(1)$
 
 ::: hints

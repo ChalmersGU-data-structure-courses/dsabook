@@ -337,8 +337,8 @@ Here is an explanation of the best-case running time of Quicksort:
 - In the last level, we reach $n$ partitions each of size $1$. This requires $O(n)$ amount of work.
 
 Thus, at each level, all partition steps for that level do a total of $O(n)$ work.
-And if we always can find the perfect pivot, there will be only $\log n$ levels.
-So the best-case running time of Quicksort is $O(n \log n)$.
+And if we always can find the perfect pivot, there will be only $\log(n)$ levels.
+So the best-case running time of Quicksort is $O(n \log(n))$.
 
 ::: dsvis
 This visualisation explains the best-case running time of Quicksort
@@ -383,7 +383,7 @@ permutation is equally likely to occur. Thus, finding the average means
 summing up the cost for every permutation and dividing by the number of
 permutations (which is $n!$). We know that some of these $n!$ inputs
 cost $O(n^2)$. But the sum of all the permutation costs has to be
-$(n!)(O(n \log n))$. Given the extremely high cost of the worst inputs,
+$(n!)(O(n \log(n)))$. Given the extremely high cost of the worst inputs,
 there must be very few of them. In fact, there cannot be a constant
 fraction of the inputs with cost $O(n^2)$. If even, say, 1% of the
 inputs have cost $O(n^2)$, this would lead to an average cost of

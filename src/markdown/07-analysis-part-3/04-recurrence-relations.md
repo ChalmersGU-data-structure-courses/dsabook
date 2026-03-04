@@ -360,17 +360,17 @@ cannot work because $c 2 n = 2 c n$ and there is no room for the extra
 $n$ cost to join the two pieces together. Thus, the true cost must be
 somewhere between $cn$ and $n^2$.
 
-Let us now try $T(n) \leq n \log n$. For the base case, the
+Let us now try $T(n) \leq n \log(n)$. For the base case, the
 definition of the recurrence sets
-$T(1) = 1 \leq (2 \cdot \log 2) = 2$. Assume (induction
-hypothesis) that $T(n) \leq n \log n$. Then,
+$T(1) = 1 \leq (2 \cdot \log(2)) = 2$. Assume (induction
+hypothesis) that $T(n) \leq n \log(n)$. Then,
 
 $$
-T(2n) = 2T(n) + 2n \leq 2n \log n + 2n
-\leq 2n(\log n + 1) \leq 2 n \log 2n
+T(2n) = 2T(n) + 2n \leq 2n \log(n) + 2n
+\leq 2n(\log(n) + 1) \leq 2 n \log(2n)
 $$
 
-Therefore we have proved that $T(n)$ is in $O(n\log n)$.
+Therefore we have proved that $T(n)$ is in $O(n\log(n))$.
 :::
 
 The following two examples are about the growth rates of a function (the factorial and the Fibonacci sequence),
@@ -426,12 +426,12 @@ differences are significant in an asymptotic sense, or just constant
 factor differences?
 
 We can use logarithms to help us get an idea about the relative growth
-rates of these functions. Clearly, $\log 2^n = n$. Equally clearly,
-$\log n^n = n \log n$. We can easily see from this that $2^n$ is
+rates of these functions. Clearly, $\log(2^n) = n$. Equally clearly,
+$\log(n^n) = n \log(n)$. We can easily see from this that $2^n$ is
 $o(n^n)$, that is, $n^n$ grows asymptotically faster than $2^n$.
 
 How does $n!$ fit into this? We can again take advantage of logarithms.
-Obviously $n! \leq n^n$, so we know that $\log n!$ is $O(n \log n)$. But
+Obviously $n! \leq n^n$, so we know that $\log(n!)$ is $O(n \log(n))$. But
 what about a lower bound for the factorial function? Consider the
 following.
 
@@ -446,19 +446,19 @@ n!  &=  n \times (n - 1) \times \cdots \times \frac{n}{2} \times
 Therefore
 
 $$
-\log n! \geq \log(\frac{n}{2})^{n/2} =
+\log(n!) \geq \log(\frac{n}{2})^{n/2} =
 (\frac{n}{2})\log(\frac{n}{2})
 $$
 
-In other words, $\log n!$ is in $\Omega(n \log n)$. Thus,
-$\log n! = \Theta(n \log n)$.
+In other words, $\log(n!)$ is in $\Omega(n \log(n))$. Thus,
+$\log(n!) = \Theta(n \log(n))$.
 
 Note that this does **not** mean that $n! = \Theta(n^n)$. Because
-$\log n^2 = 2 \log n$, it follows that $\log n = \Theta(\log n^2)$ but
-$n \neq \Theta(n^2)$. The log function often works as a "flattener"
-when dealing with asymptotics. That is, whenever $\log f(n)$ is in
-$O(\log g(n))$ we know that $f(n)$ is in $O(g(n))$. But knowing that
-$\log f(n) = \Theta(\log g(n))$ does not necessarily mean that
+$\log(n^2) = 2 \log(n)$, it follows that $\log(n) = \Theta(\log(n^2))$ but
+$n \neq \Theta(n^2)$. The logarithm function often works as a "flattener"
+when dealing with asymptotics. That is, whenever $\log(f(n))$ is in
+$O(\log(g(n)))$ we know that $f(n)$ is in $O(g(n))$. But knowing that
+$\log(f(n)) = \Theta(\log(g(n)))$ does not necessarily mean that
 $f(n) = \Theta(g(n))$.
 :::
 
@@ -553,27 +553,27 @@ we first heapify the two subheaps, then push down the root
 to its proper position. The cost is:
 
 $$
-f(n) \leq 2f(n/2) + 2 \log n
+f(n) \leq 2f(n/2) + 2 \log(n)
 $$
 
 Let us find a closed form solution for this recurrence. We can expand
 the recurrence a few times to see that
 
 \begin{align*}
-f(n) &\leq  2f(n/2) + 2 \log n \\
-     &\leq  2[2f(n/4) + 2 \log n/2] + 2 \log n \\
-     &\leq  2[2(2f(n/8) + 2 \log n/4) + 2 \log n/2] + 2 \log n
+f(n) &\leq  2f(n/2) + 2 \log(n) \\
+     &\leq  2[2f(n/4) + 2 \log(n/2)] + 2 \log(n) \\
+     &\leq  2[2(2f(n/8) + 2 \log(n/4)) + 2 \log(n/2)] + 2 \log(n)
 \end{align*}
 
 We can deduce from this expansion that this recurrence is equivalent to
 following summation and its derivation:
 
 \begin{align*}
-f(n)  &\leq  \sum_{i=0}^{\log n -1} 2^{i+1} \log(n/2^i) \\
-      &=  2 \sum_{i=0}^{\log n -1} 2^i (\log n - i) \\
-      &=  2 \log n \sum_{i=0}^{\log n -1} 2^i - 4 \sum_{i=0}^{\log n -1} i 2^{i-1} \\
-      &=  2 n \log n - 2 \log n - 2 n \log n + 4n -4 \\
-      &=  4n - 2 \log n - 4
+f(n)  &\leq  \sum_{i=0}^{\log(n) -1} 2^{i+1} \log(n/2^i) \\
+      &=  2 \sum_{i=0}^{\log(n) -1} 2^i (\log(n) - i) \\
+      &=  2 \log(n) \sum_{i=0}^{\log(n) -1} 2^i - 4 \sum_{i=0}^{\log(n) -1} i 2^{i-1} \\
+      &=  2 n \log(n) - 2 \log(n) - 2 n \log(n) + 4n -4 \\
+      &=  4n - 2 \log(n) - 4
 \end{align*}
 
 :::
@@ -625,13 +625,13 @@ $$
 At this point, it is useful to note that
 
 $$
-a^m = a^{\log_bn} = n^{\log_ba}.
+a^m = a^{\log_b(n)} = n^{\log_b(a)}.
 $$
 
 This gives us
 
 $$
-T(n) = c n^{\log_ba} \sum_{i=0}^{m} (b^k/a)^i
+T(n) = c n^{\log_b(a)} \sum_{i=0}^{m} (b^k/a)^i
 $$
 
 The summation part of this equation is a geometric series whose sum
@@ -643,19 +643,19 @@ Case (1)
     $\sum_{i=0}^{m} r^i < 1/(1-r)$, which is a constant.
 
     Thus,
-    $T(n) \in O(a^m) = O(n^{\log_b a})$.
+    $T(n) \in O(a^m) = O(n^{\log_b(a)})$.
 
 Case (2)
 
 :   $r=1$. Because $r = b^k/a$, we know that $a = b^k$. From the
-    definition of logarithms it follows immediately that $k = \log_b a$.
-    Also note that since we defined $n = b^m$, then $m = \log_b n$.
+    definition of logarithms it follows immediately that $k = \log_b(a)$.
+    Also note that since we defined $n = b^m$, then $m = \log_b(n)$.
 
     Thus,
-    $\sum_{i=0}^{m} r^i = m + 1 = \log_bn + 1$.
+    $\sum_{i=0}^{m} r^i = m + 1 = \log_b(n) + 1$.
 
-    Because $a^m = n^{\log_b a} = n^k$, we have
-    $T(n) \in O(n^{\log_ba}\log_b n) = O(n^k\log_b n)$.
+    Because $a^m = n^{\log_b(a)} = n^k$, we have
+    $T(n) \in O(n^{\log_b(a)}\log_b(n)) = O(n^k\log_b(n))$.
 
 Case (3)
 
@@ -679,8 +679,8 @@ relationships hold.
 $$
 T(n) \in
 \left\{ \begin{array}{ll}
-    O(n^{\log_ba})  &  \mbox{if}\ a > b^k \\
-    O(n^k\log_b n)  &  \mbox{if}\ a = b^k \\
+    O(n^{\log_b(a)})  &  \mbox{if}\ a > b^k \\
+    O(n^k\log_b(n))  &  \mbox{if}\ a = b^k \\
     O(n^k)          &  \mbox{if}\ a < b^k
 \end{array} \right.
 $$
@@ -711,7 +711,7 @@ T(1) &= 1
 \end{align*}
 
 Because $a=2$, $b=2$, $c=1$, and $k=1$, we find that $2 = 2^1$. Applying
-case (2) of the theorem, $T(n) \in O(n \log n)$.
+case (2) of the theorem, $T(n) \in O(n \log(n))$.
 :::
 
 ### Case study: Average-case analysis of Quicksort {#average-analysis-quicksort}
@@ -782,7 +782,7 @@ T(n+1)  &\leq  2c + \frac{n+2}{n+1} T(n)\\
 
 for $\mathcal{H}_{n+1}$, the Harmonic Series.
 This is a standard summation,
-$\mathcal{H}_{n+1} \in O(\log n)$, so the final solution is
-$O(n \log n)$.
+$\mathcal{H}_{n+1} \in O(\log(n))$, so the final solution is
+$O(n \log(n))$.
 
 ::::::

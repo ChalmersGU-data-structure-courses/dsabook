@@ -252,19 +252,19 @@ However, this approach does not work because the heap must maintain the shape of
 
 Since the heap is a complete binary tree, its height is guaranteed to be
 the minimum possible. In particular, a heap containing $n$ nodes will
-have a height of $O(\log n)$. Intuitively, we can see that this
+have a height of $O(\log(n))$. Intuitively, we can see that this
 must be true because each level that we add will slightly more than
 double the number of nodes in the tree (the $i$ th level has $2^i$
 nodes, and the sum of the first $i$ levels is $2^{i+1}-1$). Starting at
-1, we can double only $\log n$ times to reach a value of $n$. To be
+1, we can double only $\log(n)$ times to reach a value of $n$. To be
 precise, the height of a heap with $n$ nodes is
-$\lceil \log n + 1 \rceil$.
+$\lceil \log(n) + 1 \rceil$.
 
-Each call to `add` takes $O(\log n)$ time in the worst case,
+Each call to `add` takes $O(\log(n))$ time in the worst case,
 because the value being inserted can move at most the distance from the
 bottom of the tree to the top of the tree. Thus, to insert $n$ values
 into the heap, if we insert them one at a time, will take
-$O(n \log n)$ time in the worst case.
+$O(n \log(n))$ time in the worst case.
 
 ::: dsvis
 #### Exercise: Insert into a *min*-heap
@@ -291,8 +291,8 @@ Here is a visual explanation of removing from a *max*-heap.
 ```
 :::
 
-Because the heap is $\log n$ levels deep, the cost of deleting the
-maximum element is $O(\log n)$ in the average and worst cases.
+Because the heap is $\log(n)$ levels deep, the cost of deleting the
+maximum element is $O(\log(n))$ in the average and worst cases.
 
 Here is the pseudocode for removing the minimum value from our *min*-heap.
 Note that we use a helper method for "sifting" a value down the tree.
@@ -464,8 +464,8 @@ as were at the previous level, and an additional height of one. The
 maximum sum of total distances that elements can go is therefore
 
 $$
-\sum_{i=1}^{\log n} (i-1)\frac{n}{2^i}
-= \frac{n}{2}\sum_{i=1}^{\log n} \frac{i-1}{2^{i-1}}
+\sum_{i=1}^{\log(n)} (i-1)\frac{n}{2^i}
+= \frac{n}{2}\sum_{i=1}^{\log(n)} \frac{i-1}{2^{i-1}}
 $$
 
 
@@ -473,9 +473,9 @@ The summation on the right
 [is known](#summation){.term} to
 have a closed-form solution of approximately 2, so this algorithm takes
 $O(n)$ time in the worst case. This is better than building the
-heap one element at a time, which would cost $O(n \log n)$ in the
+heap one element at a time, which would cost $O(n \log(n))$ in the
 worst case.
-<!-- It is also faster than the $O(n \log n)$ average-case
+<!-- It is also faster than the $O(n \log(n))$ average-case
 time and $O(n^2)$ worst-case time required to build the BST. -->
 
 ::: dsvis

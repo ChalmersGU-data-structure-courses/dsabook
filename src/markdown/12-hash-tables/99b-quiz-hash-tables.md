@@ -72,7 +72,7 @@ on a properly tuned hash system that stores $n$ records?
 - [x] $O(1)$
 - [ ] $O(n^2)$
 - [ ] $O(n)$
-- [ ] $O(\log n)$
+- [ ] $O(\log(n))$
 
 ::: hints
 - If the system is working right, you should only need to

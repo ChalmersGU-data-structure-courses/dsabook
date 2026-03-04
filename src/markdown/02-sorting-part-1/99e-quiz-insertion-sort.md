@@ -25,7 +25,7 @@ When implementing Insertion sort, a binary search could be used to locate the po
 the first $i-1$ elements of the array into which element $i$ should be inserted. Using binary search will:
 
 - [x] Not speed up the asymptotic running time because shifting the elements to make room for the insert will require $O(i)$ time.
-- [ ] Speed up the asymptotic running time because the position to insert will be found in $O(\log i)$ time.
+- [ ] Speed up the asymptotic running time because the position to insert will be found in $O(\log(i))$ time.
 - [ ] Speed up the asymptotic running time because shifting the elements to make room for the insert will require $O(i)$ time.
 - [ ] None of these answers is correct.
 
@@ -43,12 +43,12 @@ elements of the array into which element $i$ should be
 inserted. In this implementation, the worst case time will be:
 
 - [x] $O(n^2)$
-- [ ] $O(n \log n)$
+- [ ] $O(n \log(n))$
 - [ ] $O(n)$
-- [ ] $O(\log n)$
+- [ ] $O(\log(n))$
 
 ::: hints
-- The position to insert could be found in $O (\log i)$,
+- The position to insert could be found in $O (\log(i))$,
 but shifting the elements to makeroom for the insert will still require $O(i)$ time
 :::
 ::::::::::::::::::::::::::::::
@@ -108,8 +108,8 @@ What is the worst-case time for Insertion sort to sort an array of n elements?
 
 - [x] $O(n^2)$
 - [ ] $O(n)$
-- [ ] $O(\log n)$
-- [ ] $O(n \log n)$
+- [ ] $O(\log(n))$
+- [ ] $O(n \log(n))$
 
 ::: hints
 - In the worst case, each element must make its way to the
@@ -129,8 +129,8 @@ What is the best-case time for Insertion sort to sort an array of n elements?
 
 - [x] $O(n)$
 - [ ] $O(n^2)$
-- [ ] $O(\log n)$
-- [ ] $O(n \log n)$
+- [ ] $O(\log(n))$
+- [ ] $O(n \log(n))$
 
 ::: hints
 - The best-case cost occurs when the elements are already in sorted order from lowest to highest.
@@ -145,8 +145,8 @@ What is the running time of Insertion sort when the input is an array where all 
 
 - [x] $O(n)$
 - [ ] $O(n^2)$
-- [ ] $O(\log n)$
-- [ ] $O(n \log n)$
+- [ ] $O(\log(n))$
+- [ ] $O(n \log(n))$
 - [ ] $O(n ^ n)$
 
 ::: hints
@@ -184,8 +184,8 @@ What is the running time for Insertion sort when the input array has values that
 
 - [x] $O(n^2)$
 - [ ] $O(n)$
-- [ ] $O(\log n)$
-- [ ] $O(n \log n)$
+- [ ] $O(\log(n))$
+- [ ] $O(n \log(n))$
 
 ::: hints
 - On each iteration, the $i$th element will have to move to the start of the array.
@@ -200,8 +200,8 @@ What is the running time of Insertion sort when the input is an array that has a
 
 - [x] $O(n)$
 - [ ] $O(n^2)$
-- [ ] $O(\log n)$
-- [ ] $O(n \log n)$
+- [ ] $O(\log(n))$
+- [ ] $O(n \log(n))$
 
 ::: hints
 - Each test in the inner for loop will fail because the
@@ -248,7 +248,7 @@ In the worst case, the total number of comparisons for Insertion sort is closest
 - [x] $n^2/2$
 - [ ] $n$
 - [ ] $n^2$
-- [ ] $n \log n$
+- [ ] $n \log(n)$
 
 ::: hints
 - Insertion sort's implementation is made up of two nested for loops.

@@ -51,9 +51,9 @@ Here is pseudocode:
 What is the time complexity of this algorithm?
 
 - We have two very similar for loops, iterating over the range of the array.
-- The body of each loop is logarithmic, so the total loop complexity is $O(n \log n)$.
+- The body of each loop is logarithmic, so the total loop complexity is $O(n \log(n))$.
 
-So, we have two loops with linearithmic complexity, and therefore the algorithm is linearithmic too, $O(n \log n)$.
+So, we have two loops with linearithmic complexity, and therefore the algorithm is linearithmic too, $O(n \log(n))$.
 This means that `naiveHeapsort` is an efficient sorting algorithm.
 However, our algorithm has some disadvantages:
 
@@ -78,7 +78,7 @@ Heapsort has all of the advantages just listed. The complete binary tree
 is balanced, its array representation is space efficient, and we can
 load all values into the tree at once, taking advantage of the efficient
 `buildHeap` function. The asymptotic performance of Heapsort when all of
-the records have unique key values is $O(n \log n)$ in the best,
+the records have unique key values is $O(n \log(n))$ in the best,
 average, and worst cases. It is not as fast as Quicksort in the average
 case (by a constant factor), but Heapsort has special properties that
 will make it particularly useful for
@@ -149,11 +149,11 @@ Here is an analysis of the time complexity of Heapsort:
 - The first step in Heapsort is to heapify the array.
   This will cost $O(n)$ running time for an array of size $n$.
 - Then it swaps each element with the root node and "sifts" it down the heap.
-    - Sifting down is logarithmic, $O(\log n)$, in the worst case, since the height of the tree is logarithmic.
+    - Sifting down is logarithmic, $O(\log(n))$, in the worst case, since the height of the tree is logarithmic.
     - And this is done for each of the $n$ elements in the array.
-- So, the second loop is linearithmic, $O(n \log n)$.
+- So, the second loop is linearithmic, $O(n \log(n))$.
 
-Therefore the worst-case complexity of Heapsort is linearithmic, $O(n \log n)$.
+Therefore the worst-case complexity of Heapsort is linearithmic, $O(n \log(n))$.
 
 ::: dsvis
 This visualisation explains the running time analysis of Heapsort.
@@ -167,9 +167,9 @@ unloading the heap using `removeMax` is somewhat slower than
 Quicksort's series of partitions), Heapsort has one special advantage
 over the other sorts studied so far. Building the heap is relatively
 cheap, requiring $O(n)$ time. Removing the maximum-valued record
-from the heap requires $O(\log n)$ time in the worst case. Thus, if
+from the heap requires $O(\log(n))$ time in the worst case. Thus, if
 we wish to find the $k$ records with the largest key values in an array,
-we can do so in time $O(n + k \log n)$. If $k$ is small, this is a
+we can do so in time $O(n + k \log(n))$. If $k$ is small, this is a
 substantial improvement over the time required to find the $k$
 largest-valued records using one of the other sorting methods described
 earlier (many of which would require sorting all of the array first).

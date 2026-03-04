@@ -14,11 +14,11 @@ methods is to provide guarantees on the time required by a series of
 operations, thereby avoiding the worst-case linear time behaviour of
 standard BST operations. No single operation in the splay tree is
 guaranteed to be efficient. Instead, the access rules of the splay tree
-guarantee that a series of $m$ operations will take $O(m \log n)$ time
+guarantee that a series of $m$ operations will take $O(m \log(n))$ time
 for a tree of $n$ nodes whenever $m \geq n$. Thus, a single insert or
 search operation could take $O(n)$ time. However, $m$ such operations
-are guaranteed to require a total of $O(m \log n)$ time, for an average
-cost of $O(\log n)$ per access operation. This is a desirable
+are guaranteed to require a total of $O(m \log(n))$ time, for an average
+cost of $O(\log(n))$ per access operation. This is a desirable
 performance guarantee for any search-tree structure.
 
 Unlike the AVL tree, the splay tree is not guaranteed to be height
@@ -140,7 +140,7 @@ reaches either the root or the child of the root. Then, if necessary, a
 single rotation makes it the root. This process tends to re-balance the
 tree. Regardless of balance, splaying will make frequently accessed
 nodes stay near the top of the tree, resulting in reduced access cost.
-Proof that the splay tree meets the guarantee of $O(m \log n)$ is beyond
+Proof that the splay tree meets the guarantee of $O(m \log(n))$ is beyond
 the scope of our study.
 
 ::: example

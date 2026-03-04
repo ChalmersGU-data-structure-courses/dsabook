@@ -79,7 +79,7 @@ Mergesort works by splitting a list of $n$
 numbers in half, then sorting each half recursively, and
 finally merging the two halves.
 Which of the following list implementations would allow
-Mergesort to work in $O(n \log n)$ time?
+Mergesort to work in $O(n \log(n))$ time?
 
 *Multiple choices are possible!*
 
@@ -137,9 +137,9 @@ to the order of the array input values?
 :::::::::: question ::::::::::
 What is the worst-case time for Mergesort to sort an array of $n$ records?
 
-- [x] $O(n \log n)$
+- [x] $O(n \log(n))$
 - [ ] $O(n)$
-- [ ] $O(\log n)$
+- [ ] $O(\log(n))$
 - [ ] $O(n^2)$
 - [ ] $O(n^n)$
 
@@ -156,9 +156,9 @@ What is the worst-case time for Mergesort to sort an array of $n$ records?
 What is the running time of Mergesort
 when the input is an array where all record values are equal?
 
-- [x] $O(n \log n)$
+- [x] $O(n \log(n))$
 - [ ] $O(n^2)$
-- [ ] $O(\log n)$
+- [ ] $O(\log(n))$
 - [ ] $O(n ^ n)$
 - [ ] $O(n)$
 
@@ -192,7 +192,7 @@ When is Mergesort a good choice for sorting an array?
 
 :::::::::: question ::::::::::
 In the worst case, the total number of comparisons for Mergesort is closest to:
-- [x] $n \log n$
+- [x] $n \log(n)$
 - [ ] $n$
 - [ ] $n^2$
 - [ ] $n^2/2$
@@ -211,10 +211,10 @@ The array-based implementation for Mergesort uses how many arrays?
 - [x] $2$
 - [ ] $1$
 - [ ] $n$
-- [ ] $\log n$
+- [ ] $\log(n)$
 
 ::: hints
-There are $\log n$ passes.
+There are $\log(n)$ passes.
 But the implementation is careful to reuse the auxilliary array rather than make a new one on each pass.
 So Mergesort requires the original array and an auxilliary array.
 :::

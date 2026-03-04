@@ -12,7 +12,7 @@ where each internal node has either 2 children or 3 children. Key
 values are ordered to maintain the
 [binary search tree property]{.term}. The
 2-3 tree is always height balanced, and its insert, search, and
-remove operations all have $O(\log n)$ cost.
+remove operations all have $O(\log(n))$ cost.
 
 ### 80/20 rule
 
@@ -465,7 +465,7 @@ care to count the cost of comparisons.
 A standard [recursive](#recursion){.term}
 algorithm for finding the [record]{.term}
 with a given [search key]{.term} value
-within a sorted list. It runs in $O(\log n)$ time. At each step,
+within a sorted list. It runs in $O(\log(n))$ time. At each step,
 look at the middle of the current sublist, and throw away the half
 of the records whose keys are either too small or too large.
 
@@ -1273,7 +1273,7 @@ statement) is modeled by a branch in the tree that represents the
 algorithms behaviour. Decision trees can be used in
 [lower bounds proofs](#lower-bounds-proof){.term},
 such as the proof that sorting requires
-$\Omega(n \log n)$ comparisons in the [worst case]{.term}.
+$\Omega(n \log(n))$ comparisons in the [worst case]{.term}.
 
 ### decision problem
 
@@ -2309,8 +2309,8 @@ requires exponential running time.
 ### harmonic series
 
 The sum of reciprocals from 1 to $n$ is called the harmonic series,
-and is written $\mathcal{H}_n$. This sum has a value between $\log_e n$
-and $\log_e n + 1$.
+and is written $\mathcal{H}_n$. This sum has a value between $\log_e(n)$
+and $\log_e(n) + 1$.
 
 ### hash function
 
@@ -2376,7 +2376,7 @@ it is a complete binary tree, a heap is nearly always implemented
 using an [array]{.term} rather than an
 explicit tree structure. To add a new value to a heap, or to remove
 the extreme value (the max value in a max-heap or min value in a
-min-heap) and update the heap, takes $O(\log n)$ time in the
+min-heap) and update the heap, takes $O(\log(n))$ time in the
 [worst case]{.term}. However, if given all
 of the values in an unordered array, the values can be re-arranged
 to form a heap in only $O(n)$ time. Due to its space and time
@@ -2387,7 +2387,7 @@ Uncommonly, *heap* is a synonym for [free store]{.term}.
 
 ### heapsort
 
-A sorting algorithm that costs $O(n \log n)$ time in the
+A sorting algorithm that costs $O(n \log(n))$ time in the
 [best](#best-case){.term},
 [average](#average-case){.term}, and
 [worst](#worst-case){.term} cases. It tends
@@ -2483,7 +2483,7 @@ based on the number of bits of information needed to uniquely
 specify the answer. Sometimes referred to as a "Shannon theoretic
 lower bound" due to Shannon's work on information theory and
 entropy. An example is that sorting has a lower bound of
-$\Omega(\log_2 n!)$ because there are $n!$ possible orderings for
+$\Omega(\log(n!))$ because there are $n!$ possible orderings for
 $n$ values. This observation alone does not make the lower bound
 tight, because it is possible that no algorithm could actually reach
 the information theory lower limit.
@@ -2662,7 +2662,7 @@ the subarray as a fraction of the distance between the known key
 values. So it will next check that computed location, thus narrowing
 the search for the next iteration. Given reasonable key value
 distribution, the [average case]{.term} for interpolation search will
-be $O(\log \log n)$, or better than the expected cost of
+be $O(\log(\log(n)))$, or better than the expected cost of
 [binary search]{.term}. Nonetheless, binary
 search is expected to be faster in nearly all practical situations
 due to the small difference between the two costs, combined with the
@@ -2964,7 +2964,7 @@ linear on the input size.
 
 ### linearithmic growth rate
 
-For input size $n$, a growth rate of $cn \log n$ (for $c$ any positive
+For input size $n$, a growth rate of $cn \log(n)$ (for $c$ any positive
 constant). In other words, the cost of the associated function is
 slightly larger than linear on the input size.
 
@@ -3108,7 +3108,7 @@ to which $b$ is raised to get $y$.
 
 ### logarithmic growth rate
 
-For input size $n$, a growth rate of $c \log n$ (for $c$ any positive
+For input size $n$, a growth rate of $c \log(n)$ (for $c$ any positive
 constant). In other words, the cost of the associated function is
 logarithmic on the input size.
 
@@ -3161,7 +3161,7 @@ simple lower bound based on the concept that the minimum amount of
 processing is related to looking at all of the problem's input.
 However, some problems have a higher lower bound than that. For
 example, the lower bound for the problem of sorting
-($\Omega(n \log n)$) is greater than the input size to sorting
+($\Omega(n \log(n))$) is greater than the input size to sorting
 ($n$). Proving such "non-trivial" lower bounds for problems is
 notoriously difficult.
 
@@ -3251,7 +3251,7 @@ between the key values of record pairs.
 
 ### Mergesort
 
-A sorting algorithm that requires $O(n \log n)$ in the
+A sorting algorithm that requires $O(n \log(n))$ in the
 [best](#best-case){.term},
 [average](#average-case){.term}, and
 [worst](#worst-case){.term} cases.
@@ -3824,7 +3824,7 @@ performed during the FIND step. Once the root of the tree for the
 current object has been found, the path to the root can be traced a
 second time, with all objects in the tree made to point directly to
 the root. This reduces the depth of the tree from typically
-$O(\log n)$ to nearly constant.
+$O(\log(n))$ to nearly constant.
 
 ### peripheral storage
 
@@ -4292,7 +4292,7 @@ end, and removed only from the other one end.
 
 ### Quicksort
 
-A sort that is $O(n \log n)$ in the
+A sort that is $O(n \log(n))$ in the
 [best](#best-case){.term} and
 [average](#average-case){.term} cases,
 though $O(n^2)$ in the [worst case]{.term}.
@@ -4318,8 +4318,8 @@ keys in $k$ passes, where each pass sorts the records according to
 the current digit. At the end of the process, the records will be
 sorted. This can be efficient if the number of digits is small
 compared to the number of records. However, if the $n$ records all
-have unique key values, than at least $\Omega(\log n)$ digits are
-required, leading to an $\Omega(n \log n)$ sorting algorithm that
+have unique key values, than at least $\Omega(\log(n))$ digits are
+required, leading to an $\Omega(n \log(n))$ sorting algorithm that
 tends to be much slower than other sorting algorithms like
 [Quicksort]{.term} or
 [Mergesort]{.term}.
@@ -4634,11 +4634,11 @@ the problem. For an unsorted array, it is $\Omega(n)$
 [comparisons](#comparison){.term} in the
 [worst case]{.term}, typically proved using
 an [adversary argument]{.term}. For a sorted
-array, it is $\Omega(\log n)$ in the worst case, typically proved
+array, it is $\Omega(\log(n))$ in the worst case, typically proved
 using an argument similar to the
 [sorting lower bound]{.term} proof. Indeed,
 it is possible to search a sorted array in the average case in
-$O(\log n)$ time.
+$O(\log(n))$ time.
 
 ### search problem
 
@@ -4656,7 +4656,7 @@ A type of [container]{.term}, it is common
 to implement an [index](#indexing){.term}
 using a search tree. A good search tree implementation will
 guarentee that insertion, deletion, and search operations are all
-$O(\log n)$.
+$O(\log(n))$.
 
 ### search trie
 
@@ -5003,17 +5003,17 @@ the list are arranged so that their [key]{.term}
 values are in ascending order. If the list uses an
 [array-based list]{.term} implementation,
 then it can use [binary search]{.term} for a
-cost of $O(\log n)$. But both insertion and deletion will be
+cost of $O(\log(n))$. But both insertion and deletion will be
 require $O(n)$ time.
 
 ### sorting lower bound
 
 The lower bound for the [problem]{.term} of
 [sorting](#sorting-problem){.term} is
-$\Omega(n \log n)$. This is traditionally proved using a
+$\Omega(n \log(n))$. This is traditionally proved using a
 [decision tree]{.term} model for sorting
 algorithms, and recognising that the minimum depth of the decision
-tree for any sorting algorithm is $\Omega(n \log n)$ since there are
+tree for any sorting algorithm is $\Omega(n \log(n))$ since there are
 $n!$ permutations of the $n$ input records to distinguish between
 during the sorting process.
 
@@ -5107,9 +5107,9 @@ concept of [rotations](#rotation){.term} in
 the insert and remove operations. While a splay tree does not
 guarentee that the tree is balanced, it does guarentee that a series
 of $n$ operations on the tree will have a total cost of
-$O(n \log n)$ cost, meaning that any given operation can be
+$O(n \log(n))$ cost, meaning that any given operation can be
 viewed as having [amortised cost]{.term} of
-$O(\log n)$.
+$O(\log(n))$.
 
 ### splaying
 
@@ -5190,7 +5190,7 @@ for matrix multiplication. When multiplying two $n \times n$
 matrices, this algorithm runs faster than the $O(n^3)$ time
 required by the standard matrix multiplication algorithm.
 Specifically, Strassen's algorithm requires time
-$O(n^{\log_2 7})$ time. This is achieved by refactoring the
+$O(n^{\log_2(7)})$ time. This is achieved by refactoring the
 sub-matrix multiplication and addition operations so as to need only
 7 sub-matrix multiplications instead of 8, at a cost of additional
 sub-matrix addition operations. Thus, while the asymptotic cost is

@@ -87,7 +87,7 @@ shown by [Example #SumIEx](#SumIEx). The
 induction proof is necessary because our initial assumption that the
 solution is a simple polynomial could be wrong. For example, it might
 have been that the true solution includes a logarithmic term, such as
-$c_1n^2 + c_2 n \log n$. The process shown here is essentially fitting a
+$c_1n^2 + c_2 n \log(n)$. The process shown here is essentially fitting a
 curve to a fixed number of points. Because there is always an $n$-degree
 polynomial that fits $n+1$ points, we have not done enough work to be
 sure that we to know the true equation without the induction proof.

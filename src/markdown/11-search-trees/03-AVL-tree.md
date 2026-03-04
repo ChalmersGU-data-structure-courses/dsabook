@@ -148,15 +148,15 @@ The AVL tree is a BST with the following additional property:
  -->
 
 As long as the tree maintains this property, if the tree contains $n$
-nodes, then it has a depth of at most $O(\log n)$. As a result, search
-for any node will cost $O(\log n)$, and if the updates can be done in
+nodes, then it has a depth of at most $O(\log(n))$. As a result, search
+for any node will cost $O(\log(n))$, and if the updates can be done in
 time proportional to the depth of the node inserted or deleted, then
-updates will also cost $O(\log n)$, even in the worst case.
+updates will also cost $O(\log(n))$, even in the worst case.
 
 The key to making the AVL tree work is to alter the insert and delete
 routines so as to maintain the balance property. Of course, to be
 practical, we must be able to implement the revised update routines in
-$O(\log n)$ time. To maintain the balance property, we are going to
+$O(\log(n))$ time. To maintain the balance property, we are going to
 use what are called [rotations]{.term}.
 
 <!--
@@ -220,7 +220,7 @@ Cases 1 and 4 are symmetric, as are cases 2 and 3. Note also that the
 unbalanced nodes must be on the path from the root to the newly inserted
 node.
 
-Our problem now is how to balance the tree in $O(\log n)$ time. It turns
+Our problem now is how to balance the tree in $O(\log(n))$ time. It turns
 out that we can do this using a series of rotations. Cases 1 and 4 can
 be fixed using a [single rotation]{.term}, as
 shown in @fig:AVLsingle.

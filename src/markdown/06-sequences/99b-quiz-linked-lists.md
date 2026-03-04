@@ -66,7 +66,7 @@ nodes to be visited in the worst case?
 
 - [x] $n$ nodes
 - [ ] Two nodes
-- [ ] $\log n$ nodes
+- [ ] $\log(n)$ nodes
 - [ ] One node
 - [ ] $n^2$ nodes
 
@@ -86,8 +86,8 @@ takes how long in the average case?
 - [x] $O(i)$ time
 - [ ] $O(n)$ time
 - [ ] $O(1)$ time
-- [ ] $O(\log n)$ time
-- [ ] $O(n \log n)$ time
+- [ ] $O(\log(n))$ time
+- [ ] $O(n \log(n))$ time
 
 ::: hints
 - We can't insert until we reach the proper position.
@@ -108,8 +108,8 @@ average case?
 - [x] $O(i)$ time
 - [ ] $O(1)$ time
 - [ ] $O(n)$ time
-- [ ] $O(\log n)$ time
-- [ ] $O(n \log n)$ time
+- [ ] $O(\log(n))$ time
+- [ ] $O(n \log(n))$ time
 
 ::: hints
 - You cannot delete a node until you get to it.

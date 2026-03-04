@@ -67,17 +67,17 @@ Thus, any sorting algorithm must take at least $\Omega(n)$ time.
 For many problems, this observation that each of the $n$ inputs must be looked at leads to an easy $\Omega(n)$ lower bound.
 
 In the previous chapters about sorting, you learned about some sorting algorithms whose running time is in $O(n^2)$ -- Bubble sort, Selection sort and Insertion sort.
-But you also learned about the linearithmic sorting algorithms Quicksort and Mergesort with a running time in $O(n\log n)$.
-Thus, the problem of sorting can be said to have an upper bound in $O(n\log n)$.
-How do we close the gap between $\Omega(n)$ and $O(n\log n)$?
+But you also learned about the linearithmic sorting algorithms Quicksort and Mergesort with a running time in $O(n\log(n))$.
+Thus, the problem of sorting can be said to have an upper bound in $O(n\log(n))$.
+How do we close the gap between $\Omega(n)$ and $O(n\log(n))$?
 Can there be even better sorting algorithms than Mergesort and Quicksort?
-If you can think of no algorithm whose worst-case growth rate is better than $O(n\log n)$, and if you have discovered no analysis technique to show that the least cost for the problem of sorting in the worst case is greater than $\Omega(n)$, then you cannot know for sure whether or not there is a better algorithm.
+If you can think of no algorithm whose worst-case growth rate is better than $O(n\log(n))$, and if you have discovered no analysis technique to show that the least cost for the problem of sorting in the worst case is greater than $\Omega(n)$, then you cannot know for sure whether or not there is a better algorithm.
 
 Should we search for a faster algorithm?
 Many have tried, without success.
-Fortunately (or perhaps unfortunately?), we can prove that *any* sorting algorithm must have running time in $\Omega(n \log n)$ in the worst case.
+Fortunately (or perhaps unfortunately?), we can prove that *any* sorting algorithm must have running time in $\Omega(n \log(n))$ in the worst case.
 So, the problem of sorting has a linearithmic lower bound, which is the same as the upper bounds for the best sorting algorithms.
-Thus, we can conclude that the problem of sorting is $\Theta(n \log n)$ in the worst case, because the upper and lower bounds have met.
+Thus, we can conclude that the problem of sorting is $\Theta(n \log(n))$ in the worst case, because the upper and lower bounds have met.
 
 Knowing the lower bound for a problem does not give you a good algorithm.
 But it does help you to know when to stop looking.
@@ -113,11 +113,11 @@ Alternatively, any sorting algorithm must at least look at every input
 value to recognise whether the input values are in sorted order. So,
 based on our current knowledge of sorting algorithms and the size of the
 input, we know that the *problem* of sorting is bounded by $\Omega(n)$
-and $O(n \log n)$.
+and $O(n \log(n))$.
 
 This section presents one of the most important and most useful proofs
 in computer science: No sorting algorithm based on key comparisons can
-possibly be faster than $\Omega(n \log n)$ in the worst case. This proof
+possibly be faster than $\Omega(n \log(n))$ in the worst case. This proof
 is important for three reasons. First, knowing that widely used sorting
 algorithms are asymptotically optimal is reassuring. In particular, it
 means that you need not bang your head against the wall searching for an
@@ -139,14 +139,14 @@ the direct comparison of two key values. For example, [Insertion sort]{.term}
 sequentially compares the value to be inserted into the sorted list
 until a comparison against the next value in the list fails.
 
-The proof that any comparison sort requires $\Omega(n \log n)$ comparisons in the worst case is structured as follows:
+The proof that any comparison sort requires $\Omega(n \log(n))$ comparisons in the worst case is structured as follows:
 
 1. First, comparison-based decisions can be modeled as the branches in a tree.
    This means that any sorting algorithm based on comparisons between records can be viewed as a binary tree whose nodes correspond to the comparisons, and whose branches correspond to the possible outcomes.
 2. Next, the minimum number of leaves in the resulting tree is shown to be the factorial of $n$.
-3. Finally, the minimum depth of a tree with $n!$ leaves is shown to be in $\Omega(n \log n)$.
+3. Finally, the minimum depth of a tree with $n!$ leaves is shown to be in $\Omega(n \log(n))$.
 
-Before presenting the proof of an $\Omega(n \log n)$ lower bound for
+Before presenting the proof of an $\Omega(n \log(n))$ lower bound for
 sorting, we first must define the concept of a
 [decision tree]{.term}. A decision tree is a
 binary tree that can model the processing for any algorithm that makes
@@ -165,14 +165,14 @@ lower bound proof.
 ```
 :::
 
-Any sorting algorithm requiring $\Omega(n \log n)$ comparisons in the
-worst case requires $\Omega(n \log n)$ running time in the worst case.
-Because any sorting algorithm requires $\Omega(n \log n)$ running time,
-the problem of sorting also requires $\Omega(n \log n)$ time. We already
-know of sorting algorithms with $O(n \log n)$ running time, so we can
-conclude that the problem of sorting requires $\Theta(n \log n)$ time.
+Any sorting algorithm requiring $\Omega(n \log(n))$ comparisons in the
+worst case requires $\Omega(n \log(n))$ running time in the worst case.
+Because any sorting algorithm requires $\Omega(n \log(n))$ running time,
+the problem of sorting also requires $\Omega(n \log(n))$ time. We already
+know of sorting algorithms with $O(n \log(n))$ running time, so we can
+conclude that the problem of sorting requires $\Theta(n \log(n))$ time.
 As a corollary, we know that no comparison-based sorting algorithm can
-improve on existing $\Theta(n \log n)$ time sorting algorithms by more
+improve on existing $\Theta(n \log(n))$ time sorting algorithms by more
 than a constant factor.
 
 ::::::

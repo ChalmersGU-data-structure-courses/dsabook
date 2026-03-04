@@ -53,8 +53,7 @@ Since $n^2$ grows faster than $n$,
 -   $n^4$ grows faster than $n^2$. (Square boths sides.)
 -   $n$ grows faster than $\sqrt{n}$. ($n = (\sqrt{n})^2$. Replace $n$
     with $\sqrt{n}$.)
--   $2 \log n$ grows *no slower* than $\log n$. (Take $\log$ of both
-    sides. Log "flattens" growth rates.)
+-   $2 \log(n)$ grows *no slower* than $\log(n)$. (Take $\log$ of both sides. Logarithm "flattens" growth rates.)
 
 Since $n!$ grows faster than $2^n$,
 
@@ -63,18 +62,18 @@ Since $n!$ grows faster than $2^n$,
 -   $n!^2$ grows faster than $2^{2n}$. (Square both sides.)
 -   $\sqrt{n!}$ grows faster than $\sqrt{2^n}$. (Take square root of
     both sides.)
--   $\log n!$ grows *no slower* than $n$. (Take log of both sides.
-    Actually, it grows faster since $\log n! \in O(n \log n)$.)
+-   $\log(n!)$ grows *no slower* than $n$. (Take logarithm of both sides.
+    Actually, it grows faster since $\log(n!) \in O(n \log(n))$.)
 
 If $f$ grows faster than $g$, then must $\sqrt{f}$ grow faster than
 $\sqrt{g}$? Yes.
 
-Must $\log f$ grow faster than $\log g$? No. $\log n \approx \log n^2$
+Must $\log(f)$ grow faster than $\log(g)$? No. $\log(n) \approx \log(n^2)$
 within a constant factor, that is, the growth **rate** is the same!
 
-$\log n$ is related to $n$ in exactly the same way that $n$ is related
+$\log(n)$ is related to $n$ in exactly the same way that $n$ is related
 to $2^n$.
 
-$2^{\log n} = n$.
+$2^{\log(n)} = n$.
 
 -->

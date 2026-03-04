@@ -27,15 +27,15 @@ while Bubble sort has to do a lot of swapping.
 How are Selection sort and Quicksort similar?
 
 - [x] They can both swap non-adjacent records
-- [ ] They are both $O(n \log n)$ sorts
+- [ ] They are both $O(n \log(n))$ sorts
 - [ ] They both use divide-and-conquer
 - [ ] Both have quadratic average case time
 
 ::: hints
 - Does Selection sort use divide-and-conquer? No.
-- Can Selection sort run in $O(n \log n)$ time? No.
+- Can Selection sort run in $O(n \log(n))$ time? No.
 - How long does Quicksort need in the average case?
-- $O(n \log n)$
+- $O(n \log(n))$
 :::
 ::::::::::::::::::::::::::::::
 
@@ -152,7 +152,7 @@ for the remainder of the list.
 
 :::::::::: question ::::::::::
 Which of the following sorting algorithms has a worst case complexity of
-$O(n \log n)$?
+$O(n \log(n))$?
 
 - [x] Mergesort
 - [ ] Bubble sort
@@ -178,8 +178,8 @@ into a sorted list of size $m+n$, it requires how many comparisons in the worst 
 - [ ] $m$
 - [ ] $n$
 - [ ] $n+1$
-- [ ] $O(\log m + \log n)$
-- [ ] $O(\log m + \log n + 1)$
+- [ ] $O(\log(m) + \log(n))$
+- [ ] $O(\log(m) + \log(n) + 1)$
 
 ::: hints
 - Merging compares two records, and selects the smaller.

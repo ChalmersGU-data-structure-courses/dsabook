@@ -15,8 +15,8 @@ It lets you insert, delete, and search for records based on a search key
 value. When properly implemented, these operations can be performed in
 constant time. In fact, a properly tuned hash system typically looks at
 only one or two records for each search, insert, or delete operation.
-This is better than the $O(\log n)$ cost required to do a binary search
-on a sorted array of $n$ records, or the $O(\log n)$ cost required to do
+This is better than the $O(\log(n))$ cost required to do a binary search
+on a sorted array of $n$ records, or the $O(\log(n))$ cost required to do
 an operation on a self-balancing binary search tree. However, even though hashing is
 based on a very simple idea, it is surprisingly difficult to implement
 properly. Designers need to pay careful attention to all of the details

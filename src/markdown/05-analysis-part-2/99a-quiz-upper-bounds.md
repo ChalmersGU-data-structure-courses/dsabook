@@ -56,15 +56,15 @@ What is the smallest integer $k$ such that $\sqrt n$ is in $O(n^k)$?
 
 
 :::::::::: question ::::::::::
-What is the smallest integer $k$ such that $n \log n$ is in $O(n^k)$?
+What is the smallest integer $k$ such that $n \log(n)$ is in $O(n^k)$?
 
 <input type="text" value="2"/>
 
 ::: hints
-- $n \log n$ is bigger than $n^{1}$.
+- $n \log(n)$ is bigger than $n^{1}$.
 - So, that means 1 is too small.
-- But, $n \log n$ is less than $n^2$.
-- Actually $n \log n$ is less than $n^{1+a}$ even for tiny positive values of $a$.
+- But, $n \log(n)$ is less than $n^2$.
+- Actually $n \log(n)$ is less than $n^{1+a}$ even for tiny positive values of $a$.
 :::
 ::::::::::::::::::::::::::::::
 
@@ -75,8 +75,8 @@ Which of these is the best upper bound for a growth rate of $5n + 3$?
 
 - [x] $O(n)$
 - [ ] $O(n^2)$
-- [ ] $O(n \log n)$
-- [ ] $O(\log n)$
+- [ ] $O(n \log(n))$
+- [ ] $O(\log(n))$
 - [ ] $O(1)$
 
 ::: hints
@@ -90,9 +90,9 @@ and lower order terms from a polynomial that defines the growth rate.
 :::::::::: question ::::::::::
 Which of these is the best upper bound for a growth rate of $5n + 3$?
 
-- [x] $O(n \log n)$
+- [x] $O(n \log(n))$
 - [ ] $O(n^2)$
-- [ ] $O(\log n)$
+- [ ] $O(\log(n))$
 - [ ] $O(1)$
 
 ::: hints

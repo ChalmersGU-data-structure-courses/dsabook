@@ -9,7 +9,7 @@ If the tree is unbalanced, all basic operations (searching, adding and removing)
 
 The solution to that problem is make the trees automatically rebalance.
 This can be done in many different ways, some examples are [AVL trees](#avl-tree){.term} (@sec:avl-trees), [Splay trees](#splay-tree){.term} (@sec:splay-trees) and [Red-black trees]{.term},
-who all have their own way of making the basic operaitions logarithmic, $O(\log n)$, in the size of the tree.
+who all have their own way of making the basic operaitions logarithmic, $O(\log(n))$, in the size of the tree.
 Another way of keeping the trees balanced is to use *non-binary* trees, such as 2-3 trees or more general B-trees, but we currently don't cover them in this book.
 
 

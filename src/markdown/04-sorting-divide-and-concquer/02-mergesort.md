@@ -230,7 +230,7 @@ Now here is a full proficiency exercise to put it all together.
 :::
 
 Consider repeatedly splitting an array of $n$ elements, where $n$ is a power of 2.
-The recursion will go down $k=\log n$ levels until there are only $1$-element arrays left.
+The recursion will go down $k=\log(n)$ levels until there are only $1$-element arrays left.
 Each recursion level is shown as one row in this table:
 
   Level       How many parts      Size per part         Splitting each part
@@ -286,8 +286,8 @@ which is shown in the following table:
     - Merging these two arrays requires $n$ units of work.
 -->
 
-In summary, each level spends $O(n)$ time, and there are $k=\log n$ levels.
-So the total running time of Mergesort is $O(n \log n)$.
+In summary, each level spends $O(n)$ time, and there are $k=\log(n)$ levels.
+So the total running time of Mergesort is $O(n \log(n))$.
 Note that this cost is unaffected by the relative order of the values being sorted, thus this analysis holds for the best, average, and worst cases.
 
 

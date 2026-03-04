@@ -302,7 +302,7 @@ $$
 $$
 
 A fixed-length code for these eight letters would require
-$\log 8 = 3$ bits per letter as opposed to about 2.57 bits per letter
+$\log_2(8) = 3$ bits per letter as opposed to about 2.57 bits per letter
 for Huffman coding. Thus, Huffman coding is expected to save about 14%
 for this set of letters.
 :::

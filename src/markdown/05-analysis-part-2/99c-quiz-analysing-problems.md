@@ -120,7 +120,7 @@ the least cost that any algorithm could reach.
 Answer TRUE or FALSE.
 
 The worst case upper bound for sorting an array
-is $O(n \log n)$ since this is the cost of the best
+is $O(n \log(n))$ since this is the cost of the best
 algorithm (in the worst case) that we know about.
 
 - [x] True
@@ -136,7 +136,7 @@ algorithm (in the worst case) that we know about.
 :::::::::: question ::::::::::
 Answer TRUE or FALSE.
 
-The lower bound of the sorting problem is $\Omega(n \log n)$
+The lower bound of the sorting problem is $\Omega(n \log(n))$
 because we can prove that this is the best cost that any sorting
 algorithm could reach.
 
@@ -154,7 +154,7 @@ algorithm could reach.
 Answer TRUE or FALSE.
 
 The worst case lower bound for sorting an array
-is $O(n \log n)$ since this is the cost of the best
+is $O(n \log(n))$ since this is the cost of the best
 algorithm (in the worst case) that we know about.
 
 - [ ] True
@@ -164,7 +164,7 @@ algorithm (in the worst case) that we know about.
 - Just because we don't know of a better algorithm does not
 mean that there is no better algorithm.
 - While it is true that the lower bound for sorting
-is $O(n \log n)$, this is not the right reason.
+is $O(n \log(n))$, this is not the right reason.
 - The right reason is because we can prove that no algorithm
 can do better.
 :::
@@ -177,7 +177,7 @@ can do better.
 Answer TRUE or FALSE.
 
 The proof that the lower bound for the
-sorting problem is $\Omega(n \log n)$ technically
+sorting problem is $\Omega(n \log(n))$ technically
 only applies to comparison-based sorting. This means that we
 can find other approaches (such as radix sort) to solve the
 problem faster.
@@ -266,7 +266,7 @@ Which of the following is NOT relevant to the sorting problem lower bounds proof
 
 - [x] The worst-case cost for Bubble sort is $\Theta(n^2)$
 - [ ] The number of permutations for $n$ records is $n!$
-- [ ] A tree with $n$ nodes has a depth of at least $\log n$
+- [ ] A tree with $n$ nodes has a depth of at least $\log(n)$
 - [ ] Any sorting algorithm can be modeled using a decision tree
 
 ::: hints
@@ -280,21 +280,19 @@ Which of the following is NOT relevant to the sorting problem lower bounds proof
 
 
 :::::::::: question ::::::::::
-$\log n!$ is:
+$\log(n!)$ is:
 
-- [x] $\Omega(n \log n)$
+- [x] $\Omega(n \log(n))$
 - [ ] $\Omega(n^2)$
 - [ ] $\Omega(n)$
-- [ ] $\Omega(\log n)$
+- [ ] $\Omega(\log(n))$
 - [ ] $\Omega(n^n)$
 
 ::: hints
-- Since $n! \leq n^n$, it follows that
-$\log n! \leq \log n^n = n \log n$.
-So that eliminates anything bigger than $n \log n$.
-- There are $n$ terms in $n!$, and
-you need to take the log of each of them. Since they have
-some size, it has to be much more than $\log n$.
+- Since $n! \leq n^n$, it follows that $\log(n!) \leq \log(n^n) = n \log(n)$.
+  So that eliminates anything bigger than $n \log(n)$.
+- There are $n$ terms in $n!$, and you need to take the logarithm of each of them.
+  Since they have some size, it has to be much more than $\log(n)$.
 - It turns out to be worse than just $n$.
 :::
 ::::::::::::::::::::::::::::::

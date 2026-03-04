@@ -27,8 +27,8 @@ takes how long in the worst case?
 
 - [x] $O(1)$ time
 - [ ] $O(n)$ time
-- [ ] $O(\log n)$ time
-- [ ] $O(n \log n)$ time
+- [ ] $O(\log(n))$ time
+- [ ] $O(n \log(n))$ time
 
 ::: hints
 - We only need to shift one single value: the last element.
@@ -44,8 +44,8 @@ takes how long in the worst case?
 
 - [x] $O(n)$ time
 - [ ] $O(1)$ time
-- [ ] $O(\log n)$ time
-- [ ] $O(n \log n)$ time
+- [ ] $O(\log(n))$ time
+- [ ] $O(n \log(n))$ time
 
 ::: hints
 - Position $i$ could be anywhere in the list.
@@ -63,8 +63,8 @@ deleting the second-to-last element takes how long in the worst case?
 
 - [x] $O(1)$ time
 - [ ] $O(n)$ time
-- [ ] $O(\log n)$ time
-- [ ] $O(n \log n)$ time
+- [ ] $O(\log(n))$ time
+- [ ] $O(n \log(n))$ time
 
 ::: hints
 - We only need to shift one single value: the last element.
@@ -80,8 +80,8 @@ how long in the worst case?
 
 - [x] $O(n)$ time
 - [ ] $O(1)$ time
-- [ ] $O(\log n)$ time
-- [ ] $O(n \log n)$ time
+- [ ] $O(\log(n))$ time
+- [ ] $O(n \log(n))$ time
 
 ::: hints
 - Position $i$ could be anywhere in the list (of $n$ values).
