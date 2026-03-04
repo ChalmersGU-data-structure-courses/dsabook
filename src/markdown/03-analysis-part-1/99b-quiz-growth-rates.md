@@ -68,7 +68,7 @@ the original problem size that can done in the same amount of time.
 - But with an exponential growth rate, we only get an additive improvement.
 - Regardless of the value of $t$, the machine that
 is 64 times faster can only do a problem size that is 6
-larger in the same amount of time (because $\log 64 = 6$).
+larger in the same amount of time (because $\log(64) = 6$).
 :::
 ::::::::::::::::::::::::::::::
 

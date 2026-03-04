@@ -14,11 +14,11 @@ Assume that all variables are integers.
     d = a + e
 
 - [x] $O(1)$
-- [ ] $O(\log n)$
-- [ ] $O(n \log n)$
+- [ ] $O(\log(n))$
+- [ ] $O(n \log(n))$
 - [ ] $O(n)$
 - [ ] $O(n^2)$
-- [ ] $O(n^2 \log n)$
+- [ ] $O(n^2 \log(n))$
 - [ ] $O(n^3)$
 - [ ] $O(2^n)$
 
@@ -39,11 +39,11 @@ Assume that all variables are integers.
             sum = sum + 1
 
 - [x] $O(n)$
-- [ ] $O(\log n)$
-- [ ] $O(n \log n)$
+- [ ] $O(\log(n))$
+- [ ] $O(n \log(n))$
 - [ ] $O(1)$
 - [ ] $O(n^2)$
-- [ ] $O(n^2 \log n)$
+- [ ] $O(n^2 \log(n))$
 - [ ] $O(n^3)$
 - [ ] $O(2^n)$
 
@@ -65,11 +65,11 @@ Assume that all variables are integers.
         sum = sum + 1
 
 - [x] $O(n^2)$
-- [ ] $O(\log n)$
-- [ ] $O(n \log n)$
+- [ ] $O(\log(n))$
+- [ ] $O(n \log(n))$
 - [ ] $O(1)$
 - [ ] $O(n)$
-- [ ] $O(n^2 \log n)$
+- [ ] $O(n^2 \log(n))$
 - [ ] $O(n^3)$
 - [ ] $O(2^n)$
 
@@ -92,11 +92,11 @@ Assume that all variables are integers.
             AA[j][i] = tmp
 
 - [x] $O(n^2)$
-- [ ] $O(\log n)$
-- [ ] $O(n \log n)$
+- [ ] $O(\log(n))$
+- [ ] $O(n \log(n))$
 - [ ] $O(1)$
 - [ ] $O(n)$
-- [ ] $O(n^2 \log n)$
+- [ ] $O(n^2 \log(n))$
 - [ ] $O(n^3)$
 - [ ] $O(2^n)$
 
@@ -121,12 +121,12 @@ Assume that all variables are integers.
             j = j * 2
 
 
-- [x] $O(n \log n)$
-- [ ] $O(\log n)$
+- [x] $O(n \log(n))$
+- [ ] $O(\log(n))$
 - [ ] $O(n^2)$
 - [ ] $O(1)$
 - [ ] $O(n)$
-- [ ] $O(n^2 \log n)$
+- [ ] $O(n^2 \log(n))$
 - [ ] $O(n^3)$
 - [ ] $O(2^n)$
 
@@ -150,12 +150,12 @@ Assume that all variables are integers.
             sum = sum + 1
         i = i * 2
 
-- [x] $O(n \log n)$
-- [ ] $O(\log n)$
+- [x] $O(n \log(n))$
+- [ ] $O(\log(n))$
 - [ ] $O(n^2)$
 - [ ] $O(1)$
 - [ ] $O(n)$
-- [ ] $O(n^2 \log n)$
+- [ ] $O(n^2 \log(n))$
 - [ ] $O(n^3)$
 - [ ] $O(2^n)$
 
@@ -173,7 +173,7 @@ Determine $O$ for the following code fragment.
 Assume that all variables are integers.
 
 Assume that array `arr` contains $n$ values, "random" takes constant time,
-and "sort" takes $n \log n$ time.
+and "sort" takes $n \log(n)$ time.
 
     sum = 0
     for i = 0 to n-1:
@@ -181,12 +181,12 @@ and "sort" takes $n \log n$ time.
             arr[j] = random(n)
         sort(arr)
 
-- [x] $O(n^2 \log n)$
-- [ ] $O(\log n)$
+- [x] $O(n^2 \log(n))$
+- [ ] $O(\log(n))$
 - [ ] $O(n^2)$
 - [ ] $O(1)$
 - [ ] $O(n)$
-- [ ] $O(n \log n)$
+- [ ] $O(n \log(n))$
 - [ ] $O(n^3)$
 - [ ] $O(2^n)$
 
@@ -213,11 +213,11 @@ Assume array `arr` contains a random permutation of the values from 0 to $n-1$.
             j = j + 1
 
 - [x] $O(n^2)$
-- [ ] $O(\log n)$
-- [ ] $O(n^2 \log n)$
+- [ ] $O(\log(n))$
+- [ ] $O(n^2 \log(n))$
 - [ ] $O(1)$
 - [ ] $O(n)$
-- [ ] $O(n \log n)$
+- [ ] $O(n \log(n))$
 - [ ] $O(n^3)$
 - [ ] $O(2^n)$
 
@@ -242,11 +242,11 @@ Assume that all variables are integers.
         sum = sum + n
 
 - [x] $O(n)$
-- [ ] $O(\log n)$
-- [ ] $O(n^2 \log n)$
+- [ ] $O(\log(n))$
+- [ ] $O(n^2 \log(n))$
 - [ ] $O(1)$
 - [ ] $O(n^2)$
-- [ ] $O(n \log n)$
+- [ ] $O(n \log(n))$
 - [ ] $O(n^3)$
 - [ ] $O(2^n)$
 
