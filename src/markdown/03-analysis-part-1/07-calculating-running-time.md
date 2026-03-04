@@ -63,8 +63,8 @@ where we write $O(f)\leq O(g)$ for $f\in O(g)$.
 Using this we can infer the following hierarchy of complexity classes:
 
 \begin{multline*}
-O(1) < O(\log(\log n)) < O(\log n) < O(\sqrt{n}) < O(n) < O(n\log n) < \cdots \\
-\cdots < O(n^2) < O(n^2\log n) < O(n^3) < O(n^k) < O(2^n) < O(10^n) < O(n!)
+O(1) < O(\log(\log(n))) < O(\log(n)) < O(\sqrt{n}) < O(n) < O(n\log(n)) < \cdots \\
+\cdots < O(n^2) < O(n^2\log(n)) < O(n^3) < O(n^k) < O(2^n) < O(10^n) < O(n!)
 \end{multline*}
 
 Note that we use strict equality here, and trust that you intuitively understand the difference between $\leq$ and $<$.
@@ -72,7 +72,7 @@ One interesting consequence of asymptotic complexity is that the base of a logar
 
 $$ O(\log_2(n)) = O(\ln(n)) = O(\log_{10}(n)) $$
 
-So we usually just write $O(\log n)$.
+So we usually just write $O(\log(n))$.
 The reason why the base is irrelevant is a direct consequence of the logarithm laws.
 
 ::: online
@@ -264,35 +264,35 @@ Not all doubly nested `for` loops are strictly $O(n^2)$, the following is an exa
 
     sum1 = 0
     k = 1
-    while k <= n:            // Do log n times.
+    while k <= n:            // Do log(n) times.
         for j in 0 .. n-1:   // Do n times.
             sum1 = sum1 + 1
         k = k * 2
 
 To make our analysis easier, we will assume that $n$ is a power of two.
-The code fragment has its outer `for` loop executed $\log n+1$ times because on each iteration $k$ is multiplied by two until it reaches $n$.
+The code fragment has its outer `for` loop executed $\log(n+1)$ times because on each iteration $k$ is multiplied by two until it reaches $n$.
 Now, because the inner loop always executes $n$ times, the total cost for can be expressed as
 
 $$
-\sum_{i=0}^{\log n} n = n \log n
+\sum_{i=0}^{\log(n)} n = n \log(n)
 $$
 
-So the cost of this double loop is $O(n \log n)$.
+So the cost of this double loop is $O(n \log(n))$.
 Note that the summation variable $i$ is the logarithm of the loop variable $k$, i.e. $k = 2^i$.
 
-Our analysis rules give the same result: the outer loop is logarithmic and the inner loop is linear, so we multiply them to $O(n \log n)$.
+Our analysis rules give the same result: the outer loop is logarithmic and the inner loop is linear, so we multiply them to $O(n \log(n))$.
 ::::
 :::
 
 ### Advanced algorithm analysis
 
 The rules of thumb above do not always give the tightest possible complexity.
-In some (rare) cases the simple analysis might give a complexity of say $O(n \log n)$,
+In some (rare) cases the simple analysis might give a complexity of say $O(n \log(n))$,
 but a more detailed analysis will give a tighter bound, such as $O(n)$.
 So, is there something wrong with the rules?
 
 No, the rules are correct, and this is because the $O$ notation gives an *upper bound*.
-Recall that every function $f\in O(n)$ is also in $O(n\log n)$, since $O(n) < O(n\log n)$.
+Recall that every function $f\in O(n)$ is also in $O(n\log(n))$, since $O(n) < O(n\log(n))$.
 
 :::: example
 #### Example: A nested loop with linear complexity
@@ -301,23 +301,23 @@ If we take the non-quadratic example above and just do a very small change, we g
 
     sum2 = 0
     k = 1
-    while k <= n:            // Do log n times.
+    while k <= n:            // Do log(n) times.
         for j in 0 .. k-1:   // Do k times.
             sum2 = sum2 + 1
         k = k * 2
 
 The only difference is that the inner loop runs $k$ times, instead of $n$ times.
-The rules of thumb gives us the same complexity as before, $O(n \log n)$, but a more careful analysis reveals a tighter bound.
+The rules of thumb gives us the same complexity as before, $O(n \log(n))$, but a more careful analysis reveals a tighter bound.
 
-The outer loop is executed $\log n+1$ times, and the inner loop has cost $k$, which doubles each time.
+The outer loop is executed $\log(n+1)$ times, and the inner loop has cost $k$, which doubles each time.
 This can be expressed as the following summation, where $n$ is assumed to be a power of two and again $k = 2^i$.
 
 $$
-1 + 2 + 4 + \cdots + \log n = \sum_{i=0}^{\log n} 2^i
+1 + 2 + 4 + \cdots + \log(n) = \sum_{i=0}^{\log(n)} 2^i
 $$
 
 Now, as mentioned in @sec:mathematical-preliminaries, this summation has a closed form solution
-$2^{\log n + 1} - 1 = 2n - 1$.
+$2^{\log(n) + 1} - 1 = 2n - 1$.
 So, the complexity of the code fragment above is actually linear, $O(n)$, and not linearithmic.
 
 Note that this is an exception where the simple analysis rules do not give a tight enough bound.

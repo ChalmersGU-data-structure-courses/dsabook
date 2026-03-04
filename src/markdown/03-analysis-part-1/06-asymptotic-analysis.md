@@ -16,34 +16,34 @@ the right view shows in detail the lower-left portion of the top view.
 The horizontal axis represents input size, and the vertical axis can
 represent time, space, or any other measure of cost.
 
-```{.matplotlib dpi=200 alt="Illustration of the growth rates for six equations"}
+```{.matplotlib dpi=300 alt="Illustration of the growth rates for six equations"}
 import math
 import numpy as np
 import matplotlib.pyplot as plt
 fig, (plt1, plt2) = plt.subplots(1, 2, figsize=(14,5))
 xs = np.linspace(0, 50, 500)
-ys_10n = 10*xs
-ys_20n = 20*xs
-ys_5nlogn = 5*xs*np.log2(xs)
-ys_2n2 = 2*(xs**2)
-ys_2expn = 2**xs
-ys_fact = np.vectorize(math.gamma)(xs+1)
-plt1.set_xlim(0, 50); plt1.set_ylim(0, 1400)
-plt1.plot(xs, ys_10n, '--');   plt1.text(45, ys_10n[-1], '10·n')
-plt1.plot(xs, ys_20n, '--');   plt1.text(45, ys_20n[-1], '20·n')
-plt1.plot(xs, ys_5nlogn, '-'); plt1.text(xs[375], 1300, '5n·log₂(n)')
-plt1.plot(xs, ys_2n2, '-');    plt1.text(xs[200], 1300, '2·n²')
-plt1.plot(xs, ys_2expn, '-');  plt1.text(xs[110], 1300, '2ⁿ')
-plt1.plot(xs, ys_fact, '-');   plt1.text(xs[40], 1300, 'n!')
-plt1.plot([11,11,0], [0,308,308], ':', color='gray')
-plt1.set_title('Growth rates for 6 equations')
-plt2.set_xlim(0, 11); plt2.set_ylim(0, 308);
-plt2.plot(xs, ys_10n, '--');   plt2.text(10, ys_10n[110]-30, '10·n')
-plt2.plot(xs, ys_20n, '--');   plt2.text(10, ys_20n[110]-30, '20·n')
-plt2.plot(xs, ys_5nlogn, '-'); plt2.text(9.5, ys_5nlogn[110]-50, '5n·log₂(n)')
-plt2.plot(xs, ys_2n2, '-');    plt2.text(10, ys_2n2[110], '2·n²')
-plt2.plot(xs, ys_2expn, '-');  plt2.text(7.3, 290, '2ⁿ')
-plt2.plot(xs, ys_fact, '-');   plt2.text(4.9, 290, 'n!')
+ys_2logn = 2*np.log2(xs)
+ys_n_2 = xs/2
+ys_1n = xs
+ys_nlogn_4 = xs*np.log2(xs)/4
+ys_n2_10 = (xs**2)/10
+ys_expn_20 = 2**xs/20
+plt1.set_xlim(0, 50); plt1.set_ylim(0, 70)
+plt1.plot(xs, ys_n_2, '--');   plt1.text(46, ys_n_2[-1]+2, 'n/2')
+plt1.plot(xs, ys_1n, '--');   plt1.text(47, ys_1n[-1], 'n')
+plt1.plot(xs, ys_2logn, '-');   plt1.text(43, ys_2logn[-1]+2, '2·log₂(n)')
+plt1.plot(xs, ys_nlogn_4, '-'); plt1.text(38, 65, 'n·log₂(n)/4')
+plt1.plot(xs, ys_n2_10, '-');    plt1.text(21, 65, 'n²/10')
+plt1.plot(xs, ys_expn_20, '-');  plt1.text(12, 65, '2ⁿ/20')
+plt1.plot([2,2,13,13], [0,16,16,0], ':', color='gray')
+plt1.set_title('Growth rates for 5 equations')
+plt2.set_xlim(2, 13); plt2.set_ylim(0, 16);
+plt2.plot(xs, ys_n_2, '--');   plt2.text(12.2, ys_n_2[100]+0.4, 'n/2')
+plt2.plot(xs, ys_1n, '--');   plt2.text(12.4, ys_1n[130], 'n')
+plt2.plot(xs, ys_2logn, '-');   plt2.text(11.5, ys_2logn[130]+0.2, '2·log₂(n)')
+plt2.plot(xs, ys_nlogn_4, '-'); plt2.text(11.3, ys_nlogn_4[109], 'n·log₂(n)/4')
+plt2.plot(xs, ys_n2_10, '-');    plt2.text(11.2, 15, 'n²/10')
+plt2.plot(xs, ys_expn_20, '-');  plt2.text(7.2, 15, '2ⁿ/20')
 plt2.set_title('Zoomed in')
 ```
 :::
@@ -135,7 +135,7 @@ But it is much more difficult to reason about $\Theta(f)$, and therefore we will
 So, is the lower bound useless?
 -- No, definitely not.
 The main use case for $\Omega$ is when we want to classify *problems*, not algorithms.
-One example is when proving that the lower bound for sorting is $\Omega(n\log n)$, which we do in @sec:lower-bounds-for-sorting.
+One example is when proving that the lower bound for sorting is $\Omega(n\log(n))$, which we do in @sec:lower-bounds-for-sorting.
 But classifying problems is out of scope for this book, so we will not use $\Omega$ much.
 
 

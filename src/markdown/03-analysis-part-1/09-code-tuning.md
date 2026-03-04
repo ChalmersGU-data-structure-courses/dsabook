@@ -18,12 +18,12 @@ The full text can be read online.
 :::: html
 In practice, there is not such a big difference in running time between
 an algorithm with growth rate $O(n)$ and another with growth rate
-$O(n \log n)$. There is, however, an enormous difference in running
-time between algorithms with growth rates of $O(n \log n)$ and
+$O(n \log(n))$. There is, however, an enormous difference in running
+time between algorithms with growth rates of $O(n \log(n))$ and
 $O(n^2)$. As you shall see during the course of your study of
 common data structures and algorithms, there are many problems whose
 obvious solution requires $O(n^2)$ time, but that also have a
-solution requiring $O(n \log n)$ time. Examples include sorting and
+solution requiring $O(n \log(n))$ time. Examples include sorting and
 searching, two of the most important computer problems.
 
 While not nearly so important as changing an algorithm to reduce its
