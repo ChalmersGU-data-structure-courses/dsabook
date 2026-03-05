@@ -249,3 +249,71 @@ The reason for this is that $\log(n^k) = k\cdot\log(n)$ according to the logarit
 However, taking the power of a logarithm cannot be ignored, so $O(\log(n))$ and $O(\log(n)^2)$ are different complexity classes.
 
 
+### Recursive functions
+
+Determining the execution time of a recursive subroutine can be
+difficult. The running time for a recursive subroutine is typically best
+expressed by a [recurrence relation]{.term}. For example, the recursive factorial
+function calls itself with a value one less than its input value. The
+result of this recursive call is then multiplied by the input value,
+which takes constant time. Thus, the cost of the factorial function, if
+we wish to measure cost in terms of the number of multiplication
+operations, is one more than the number of multiplications made by the
+recursive call on the smaller input. Because the base case does no
+multiplications, its cost is constant. Thus, the running time for this
+function can be expressed as
+
+\begin{align*}
+T(n) &= T(n-1) + 1, \textrm{ for } n>1 \\
+T(1) &= 1
+\end{align*}
+
+The closed-form solution for this recurrence relation is $O(n)$.
+Recurrence relations are discussed further in @sec:recur-relations.
+
+### Advanced algorithm analysis
+
+The rules of thumb above do not always give the tightest possible complexity.
+In some (rare) cases the simple analysis might give a complexity of say $O(n \log(n))$,
+but a more detailed analysis will give a tighter bound, such as $O(n)$.
+So, is there something wrong with the rules?
+
+No, the rules are correct, and this is because the $O$ notation gives an *upper bound*.
+Recall that every function $f\in O(n)$ is also in $O(n\log(n))$, since $O(n) < O(n\log(n))$.
+
+:::: example
+#### Example: A nested loop with linear complexity
+
+If we take the non-quadratic example above and just do a very small change, we get a completely different complexity.
+
+    sum2 = 0
+    k = 1
+    while k <= n:            // Do log(n) times.
+        for j in 0 .. k-1:   // Do k times.
+            sum2 = sum2 + 1
+        k = k * 2
+
+The only difference is that the inner loop runs $k$ times, instead of $n$ times.
+The rules of thumb gives us the same complexity as before, $O(n \log(n))$, but a more careful analysis reveals a tighter bound.
+
+The outer loop is executed $\log(n+1)$ times, and the inner loop has cost $k$, which doubles each time.
+This can be expressed as the following summation, where $n$ is assumed to be a power of two and again $k = 2^i$.
+
+$$
+1 + 2 + 4 + \cdots + \log(n) = \sum_{i=0}^{\log(n)} 2^i
+$$
+
+Now, as mentioned in @sec:mathematical-preliminaries, this summation has a closed form solution
+$2^{\log(n) + 1} - 1 = 2n - 1$.
+So, the complexity of the code fragment above is actually linear, $O(n)$, and not linearithmic.
+
+Note that this is an exception where the simple analysis rules do not give a tight enough bound.
+But in almost all cases the rules work fine, and when they don't it's usually only by a logarithmic factor.
+(And as we all know, logarithmic factors are not that big a deal when it comes to computational complexity.)
+::::
+
+<!-- TODO
+We need to think about a technique for visualising the running time of
+some loop constructs. This can be very similar to how we visualise
+reaching the closed form solution of summations.
+-->

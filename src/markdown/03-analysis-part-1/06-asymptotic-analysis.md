@@ -49,28 +49,27 @@ plt2.set_title('Zoomed in')
 :::
 
 
-
-Despite the larger constant for the curve labeled $10 n$ in the figure
-above, $2 n^2$ crosses it at the relatively small value of $n = 5$. What
-if we double the value of the constant in front of the linear equation?
-As shown in the graph, $20 n$ is surpassed by $2 n^2$ once $n = 10$. The
-additional factor of two for the linear [growth rate]{.term} does not much matter. It only doubles the $x$-coordinate
-for the intersection point. In general, changes to a constant factor in
+Despite the smaller constant for the quadratic curve labeled $n^2/10$ in the figure
+above, it crosses the linear curve $n/2$ at the relatively small value of $n = 5$.
+What if we double the value of the constant in front of the linear equation?
+As shown in the graph, $n$ is surpassed by $n^2/10$ as soon as $n = 10$.
+The additional factor of two for the linear growth rate does not matter much.
+It only doubles the $x$-coordinate for the intersection point.
+In general, changes to a constant factor in
 either equation only shift *where* the two curves cross, not *whether*
 the two curves cross.
 
 When you buy a faster computer or a faster compiler, the new problem
 size that can be run in a given amount of time for a given growth rate
-is larger by the same factor, regardless of the constant on the
-running-time equation. The time curves for two algorithms with different
+is larger by the same factor.
+The time curves for two algorithms with different
 growth rates still cross, regardless of their running-time equation
-constants. For these reasons, we usually ignore the constants when we
-want an estimate of the growth rate for the running time or other
-resource requirements of an algorithm. This simplifies the analysis and
-keeps us thinking about the most important aspect: the growth rate. This
-is called [asymptotic algorithm analysis]{.term}. To be precise, asymptotic analysis refers to the study of
-an algorithm as the input size "gets big" or reaches a limit (in the
-calculus sense). However, it has proved to be so useful to ignore all
+constants. Therefore we usually ignore the constants when we
+want an estimate of the growth rate of an algorithm.
+This simplifies the analysis and keeps us thinking about the most important aspect: the growth rate.
+This is called [asymptotic algorithm analysis]{.term}.
+Asymptotic analysis refers to the study of an algorithm as the input "gets larger and larger".
+In fact, it has proved to be so useful to ignore all
 constant factors that asymptotic analysis is used for most algorithm
 comparisons.
 
@@ -83,9 +82,8 @@ even if its asymptotic analysis indicates good performance. There are
 rare cases where the constants for two algorithms under comparison can
 differ by a factor of 1000 or more, making the one with lower growth
 rate impractical for typical problem sizes due to its large constant.
-Asymptotic analysis is a form of "back of the envelope"
-[estimation]{.term} for
-algorithm resource consumption. It provides a simplified model of the
+
+Asymptotic analysis provides a simplified model of the
 running time or other resource needs of an algorithm. This
 simplification usually helps you understand the behaviour of your
 algorithms. Just be aware of the limitations to asymptotic analysis in
@@ -95,32 +93,46 @@ the rare situation where the constant is important.
 ### Orders of growth
 
 To be able to discuss orders of growth for algorithms we need to do some abstractions.
-The most important abstraction is to describe the runtime of an algorithm as a mathematical function from the input size to a number.
-We actually don't care how we encode the input size, as long as it is proportional to the actual size of the input.
-So we can, e.g., use the number of cells in an array as input, instead of trying to figure out the exact memory usage of the array.
-And in the same way, we don't care about the unit of measure for the result -- it can be actual runtime, in seconds, minutes or hours, but it's more common to think about the number of "basic operations".
-Already here we have abstracted away lots of things that relate to hardware, which is vital because we want to analyse algorithms, not implementations.
-So we will say things like "the runtime of algorithm $\mathbf{A}$ is $f(n)$".
+The most important abstraction is to describe the runtime of an algorithm
+as a mathematical function from the input size to a number.
+We actually don't care how we encode the input size,
+as long as it is proportional to the actual size of the input.
+So we can, e.g., use the number of cells in an array as input,
+instead of trying to figure out the exact memory usage of the array.
+And in the same way, we don't care about the unit of measure for the result
+-- it can be actual runtime, in seconds, minutes or hours,
+but it's more common to think about the number of "basic operations".
+Already here we have abstracted away lots of things that relate to hardware,
+which is vital because we want to analyse algorithms, not implementations.
+So we will say things like "the runtime of algorithm **A** is $f(n)$".
 
-Now, the easiest way to view order of growth is not as an absolute propery of an algorithm, but instead as a relation between functions.
-When we say that an algorithm is quadratic, we actually mean that the mathematical function $f(n)$ that describes the abstract runtime of the algorithm, is related to the quadratic function $g(n) = n^2$ in some way.
+Now, the easiest way to view order of growth is not as an absolute propery of an algorithm,
+but instead as a relation between functions.
+When we say that an algorithm is quadratic,
+we actually mean that the mathematical function $f(n)$ that describes the abstract runtime of the algorithm,
+is related to the quadratic function $g(n) = n^2$ in some way.
 
 So, how can we relate functions using orders of growth?
 We do this by saying that one function is a *bound* of another function.
-E.g., when we say that an algorithm $\mathbf{A}$ is quadratic, we actually mean that the function $n^2$ is an upper bound of $\mathbf{A}$.
-The following are informal definitions of *upper*, *lower* and *tight* bounds -- we will define them more rigorously in [Chapter @sec:analysis-part-2].
+E.g., when we say that an algorithm **A** is quadratic,
+we actually mean that the function $n^2$ is an upper bound of **A**.
+The following are informal definitions of *upper*, *lower* and *tight* bounds
+-- we will define them more rigorously in [Chapter @sec:analysis-part-2].
 
 Upper bound
 
-: $f$ is an upper bound of $g$ **iff** $f$ grows *at least as fast* as $g$, and we write this $f\in O(g)$
+:   $f$ is an upper bound of $g$ **if and only if**
+    $f$ grows *at least as fast* as $g$, and we write this $f\in O(g)$.
 
 Lower bound
 
-: $f$ is a lower bound of $g$ **iff** $f$ grows *at most as fast* as $g$, and we write this $f\in\Omega(g)$
+:   $f$ is a lower bound of $g$ **if and only if**
+    $f$ grows *at most as fast* as $g$, and we write this $f\in\Omega(g)$.
 
 Tight bound
 
-: $f$ is a tight bound of $g$ **iff** both functions grow *at the same rate*, and we write this $f\in\Theta(g)$
+:   $f$ is a tight bound of $g$ **if and only if**
+    both functions grow *at the same rate*, and we write this $f\in\Theta(g)$.
 
 
 ### Should we use $O$, $\Omega$ or $\Theta$?
@@ -133,7 +145,7 @@ One could argue that $\Theta(f)$ would be an even better measure, because it giv
 But it is much more difficult to reason about $\Theta(f)$, and therefore we will almost exclusively use the upper bound notation $O(f)$.
 
 So, is the lower bound useless?
--- No, definitely not.
+No, definitely not.
 The main use case for $\Omega$ is when we want to classify *problems*, not algorithms.
 One example is when proving that the lower bound for sorting is $\Omega(n\log(n))$, which we do in @sec:lower-bounds-for-sorting.
 But classifying problems is out of scope for this book, so we will not use $\Omega$ much.

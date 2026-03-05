@@ -5,11 +5,23 @@
 - Prio 3: examples (e.g., Quicksort, Insertion sort)
 :::
 
+We can talk about the *best-case*, or the *worst-case*, or even the *average-case* complexity of an algorithm. But in practice we almost always only use the worst-case complexity: the best case is pretty useless (we should always prepare for the worst), and the average case is difficult to reason about.
+
+- The best case is quite useless -- we should always prepare for the worst.
+- The average case is difficult to reason about -- for example we need to know what distribution the input has, and this is difficult.
+- The worst case is what we usually analyse -- it is much easier to calculate than the average case, and it gives valuable information about what might happen if we are unlucky.
+
+The worst case is particularly important if you cannot guarantee that the data is not contaminated -- for example by a malicious hacker.
+
+The average case can be very useful if we know more about the data. For example, if we know that our input is *almost* sorted, then Insertion sort suddenly becomes a really really efficient algorithm.
+
+
+
+
 For some algorithms, the running time is always determined by the input size $n$.
-Consider the algorithm that finds the largest value in an array using sequential search algorithm.
-For any given size $n$ there are inifinitely many possible inputs -- all imaginable arrays of size $n$.
-However, no matter what array of size $n$ that the algorithm looks at, its running time will always be the same.
-This is because it always looks at every element in the array exactly once.
+Consider for example Selection sort (@sec:selection-sort):
+the total number of times the body of the inner loop will be executed is $n+\cdots+2+1=n(n+1)/2$.
+So the running time only depends on the size $n$, regardless of how the array looks like.
 
 ::: dsvis
 Consider the problem of finding the factorial of $n$.
@@ -19,20 +31,25 @@ Consider the problem of finding the factorial of $n$.
 :::
 
 For most algorithms however, different inputs of a given size require different amounts of time.
-For example, consider the problem of searching an array containing $n$ integers to find the one with a particular value $K$.
-The sequential search algorithm begins at the first position in the array and looks at each value in turn until $K$ is found, and then it stops.
-So there is a wide range of possible running times for the algorithm, which is different from the largest-value search algorithm above.
+For example, consider Insertion sort (@sec:insertion-sort):
+the outer `for`-loop always iterates the same number of times,
+but the inner `while`-loop only runs until it finds the correct place for the element to insert.
+So there is a wide range of possible running times for the algorithm, which is different from Selection sort.
 
-- If $K$ is the first element, only one value is examined -- this is the *best case*, because it is not possible for sequential search to look at less than one value.
-- If $K$ is the last element, the algorithm must examine $n$ values -- this is the *worst case*, because sequential search never looks at more than each of the $n$ values in the array.
+- If the array is already sorted, then each element is in its correct place and the `while`-loop will not iterate at all.
+  This is the *best case*, because it is not possible for a while loop to run faster than that.
+- If the array is reversely sorted, then each element has to move as far as possible, to the very first position in the array.
+  This is the *worst case*, because the `while`-loop runs for as many iterations as it possibly can.
 
-If we run sequential search many times on many different arrays of size $n$, and many different values of $K$, we expect the algorithm on average to go halfway through the array before finding the value we seek.
-So, on average, the algorithm examines $(n+1)/2$ values -- this is the *average case*.
-
-However, note that the average case depends on an important assumption: that the searched value $K$ is independent from how the values in the array is distributed! More about that below.
+If we run Insertion sort many times on many different arrays of size $n$,
+we could expect the `while`-loop on average to go halfway through the array before finding the correct insertion index.
+So, in the *average case* Insertion sort runs for half as many iterations as the worst case.
+However, this definition of the average case depends on an important assumption:
+that every possible array is equally probable, or in other words, that the possible arrays are uniformly distributed!
+More about that below.
 
 ::: dsvis
-Here is an example.
+Here is an example where we reason about the Sequential search algorithm from @sec:sequential-search.
 
 ``` {.jsav-animation src="AlgAnal/AnalCasesDiffCON.js" links="AlgAnal/AnalCasesCON.css" name="Best, Worst, and Average cases slideshow"}
 ```
@@ -52,11 +69,9 @@ we can take advantage of the best-case running time of Insertion sort.
 How about the worst case? The advantage to analysing the worst case is
 that you know for certain that the algorithm must perform at least that
 well. This is especially important for real-time applications, such as
-for the computers that monitor an air traffic control system. Here, it
-would not be acceptable to use an algorithm that can handle $n$
-airplanes quickly enough *most of the time*, but which fails to perform
-quickly enough when all $n$ airplanes are coming from the same
-direction.
+for the computers that monitor an air traffic control system,
+and for programs that accept data from untrusted sources,
+such as an online database system.
 
 For other applications -- in particular when we wish to aggregate the
 cost of running the program many times on many different inputs --
@@ -72,11 +87,11 @@ average-case analysis is not always possible. Average-case analysis
 first requires that we understand how the actual inputs to the program
 (and their costs) are distributed with respect to the set of all
 possible inputs to the program. For example, it was stated previously
-that the sequential search algorithm on average examines half of the
-array values. This is only true if the element with value $K$ is equally
-likely to appear in any position in the array. If this assumption is not
-correct, then the algorithm does *not* necessarily examine half of the
-array values in the average case.
+that Insertion sort on average runs for half the number of iterations as the worst case.
+This is only true if every possible array is equally likely as input.
+This assumption is usually *not* correct for most applications where we need to sort values.
+For example, if the input to the array consist of book authors,
+then the vast majority of arrays will never ever appear.
 
 How the data is distributed has a significant effect on
 almost all data structures and algorithms, such as those based on

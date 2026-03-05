@@ -1,48 +1,86 @@
 
-## Code tuning and empirical analysis
+## Empirical analysis and code tuning
 
 ::: TODO
 - Prio 3: discuss constant factors (not covered by asymptotic complexity/analysis)
 - Prio 3: add an image explaining the graphics example
 :::
 
-::: latex
-Code tuning involves optimising specific parts of a program to improve performance, often by reducing runtime or memory usage.
-While it doesn't change the algorithm's complexity, it can lead to significant speedups, sometimes by a factor of five to ten.
-Effective tuning focuses on the most time-consuming parts of the code and is best guided by empirical analysis and profiling tools.
-The full text can be read online.
+Asymptotic algorithm analysis is an analytical tool for estimating
+how the performance of an algorithm scales with input size.
+It has proved hugely practical, guiding developers to use more efficient algorithms.
+But it has its limitations, including the effects at small problem sizes, and
+determining the finer distinctions between algorithms with the same growth rate.
 
-\booklink{Read section online}{2.9}{sec:code-tuning}
+If our algorithm is too complex to be analysed, or
+if we want to learn about its average behaviour, or
+how it behaves on small problem sizes, we can use empirical approaches.
+These include runing tests on actual or simulated data and then analysing the results.
+
+Empirical approaches are often used when optimising an implementation, so called *code tuning*.
+If we want to improve a program it is important to know what gives the best effect,
+and to know this we need to do empirical testing.
+Empirical testing and code tuning often goes hand in hand.
+
+### Comparative timing
+
+An alternative to analytical approaches are empirical ones.
+The most obvious empirical approach is simply to run two competitors and see which performs better.
+In this way we might overcome some of the deficiencies of analytical approaches.
+
+Be warned that comparative timing of programs is a difficult business,
+often subject to experimental errors arising from uncontrolled factors
+(system load, the language or compiler used, etc.).
+The most important concern is that you might be biased in favour of one of the programs.
+If you are biased, this is certain to be reflected in the timings.
+
+The most common pitfall when comparing two programs is that one is more optimised than the other.
+If the running times for two programs differ by a constant factor regardless of input size
+(i.e., their growth rates are the same), if might simply be the case that one is more optimised.
+Be suspicious of empirical comparisons in this situation.
+
+### Simulation
+
+Another approach to analytical analysis is simulation.
+The idea of simulation is to model the problem with a computer program.
+This is different from empirical analysis where you evaluate a solution,
+but a simulation is used for learning more about the problem.
+The main purpose of a simulation is to perform analysis that might be too difficult to do mathematically.
+
+Often simulation and empirical analysis go hand-in-hand:
+we can use simulation to generate a large number of inputs so that we can study an algorithm empirically instead of analytically.
+It is often extremely difficult to do a credible average-case analysis analytically,
+because it is uncommon that the input to a problem is randomly distributed.
+Assuming a uniform distribution will often lead to wrong conclusion about the average running time of an algorithm.
+For example, which sorting algorithm is the best to use depends a lot on how the data is distributed.
+
+::: example
+#### Example: sorting English words
+
+Assume that we want to create an alphabetically sorted list of words from a collection of English texts.
+There are an infinite number of possible strings that can occur, but some strings are much more common than others.
+How can we know how the data is distributed, on average?
+
+George Zipf observed already in 1932 that the relative frequency of the $n$-th most common word in a language
+is approximately inversely proportional to $n$. [refer to Wikipedia Zipf's law]
+We can use this observation to simulate a number of large texts,
+which we then can use for making an empirical comparison between different sorting algorithms.
 :::
 
-:::: html
-In practice, there is not such a big difference in running time between
-an algorithm with growth rate $O(n)$ and another with growth rate
-$O(n \log(n))$. There is, however, an enormous difference in running
-time between algorithms with growth rates of $O(n \log(n))$ and
-$O(n^2)$. As you shall see during the course of your study of
-common data structures and algorithms, there are many problems whose
-obvious solution requires $O(n^2)$ time, but that also have a
-solution requiring $O(n \log(n))$ time. Examples include sorting and
-searching, two of the most important computer problems.
 
-While not nearly so important as changing an algorithm to reduce its
-growth rate, "code tuning" can also lead to dramatic improvements in
-running time. Code tuning is the art of hand-optimising a program to run
+### Code tuning
+
+While not nearly so important as changing an algorithm to reduce its growth rate,
+*code tuning* can also lead to dramatic improvements in running time.
+Code tuning is the art of hand-optimising a program to run
 faster or require less storage. For many programs, code tuning can
 reduce running time or cut the storage requirements by a factor of two
 or more. Even speedups by a factor of five to ten are not uncommon.
-Occasionally, you can get an even bigger speedup by converting from a
-symbolic representation of the data to a numeric coding scheme on which
-you can do direct computation.
 
-Note that code tuning does not change the complexity of an algorithm, because it only affects the multiplicative factor.
+Note that code tuning does not change the complexity of an algorithm,
+because it only affects the multiplicative factor.
 So we cannot use complexity analysis to understand the improvements by code tuning.
 Instead, the most important tuning tool is *empirical analysis*.
-
-<!-- TODO
-Give an example of this type of representational change.
--->
 
 Here are some suggestions for ways to speed up your programs by code
 tuning. The most important thing to realise is that most statements in a
@@ -109,5 +147,3 @@ structure or algorithm. The most important rule of code tuning is:
 ::: center
 ***First tune the algorithm, then tune the code.***
 :::
-
-::::
