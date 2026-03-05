@@ -35,14 +35,14 @@ Or, equivalently, how much larger problems can we solve if we spend more time?
 @Tbl:problem-size-speedup shows just that some common running-time functions.
 
 
-    Growth rate             1 ms        10 ms         100 ms              1 s
------------------------  ---------  ------------  --------------  ---------------
- $2\cdot\log_2(n)$         $32$      $10^{15}$      $10^{150}$       $10^{1500}$
- $n/2$                     $20$          $200$         $2,000$          $20,000$
- $n$                       $10$          $100$         $1,000$          $10,000$
- $n\cdot\log_2(n)/4$       $11$           $66$           $453$           $3,408$
- $n^2/10$                  $10$           $31$           $100$             $316$
- $2^n/20$                   $7$           $11$            $14$              $17$
+Growth rate              1 ms        10 ms        100 ms       1 second
+---------------------  ------  -----------  ------------  -------------
+$2\cdot\log_2(n)$        $32$    $10^{15}$    $10^{150}$    $10^{1500}$
+$n/2$                    $20$        $200$       $2,000$       $20,000$
+$n$                      $10$        $100$       $1,000$       $10,000$
+$n\cdot\log_2(n)/4$      $11$         $66$         $453$        $3,408$
+$n^2/10$                 $10$         $31$         $100$          $316$
+$2^n/20$                  $7$         $11$          $14$           $17$
 
 : Maximum problem sizes that can be handled in 1, 10, 100 and 1,000 milliseconds
   {#tbl:problem-size-speedup}
@@ -143,23 +143,21 @@ This is despite the fact that $n^2/10$ has a smaller constant factor than $n$.
 The graph also shows that the equation $T(n) = n\log_2(n)/4$
 grows somewhat more quickly than the linear equations,
 but not nearly so quickly as the quadratic equation.
-In fact, $n^a$ always grows faster than bot $\log(n)^b$ and $\log(n^b)$,
-for all constants $a,b>1$.
-
+In fact, $n^a$ always grows faster than bot $\log(n)^b$ and $\log(n^b)$, for all constants $a,b>1$.
 We also see that exponential algorithms are prohibitively expensive for even modest values of $n$.
 Note that $a^n$ grows faster than $n^b$ for all constants $a,b>1$.
 
 Finally, @tbl:growth-rates shows the difference between the growth rates when $n$ becomes larger and larger.
 Once again, we see that the growth rate has a tremendous effect on the resources consumed by an algorithm.
 
-    Growth rate              $n=10$             $100$              $1,000$                $10^4$              $10^5$
------------------------  ------------  --------------------  -------------------  -------------------  -------------------
- $2\cdot\log_2(n)$            $7$                $13$                 $20$                    $27$               $33$
- $n/2$                        $5$                $50$                $500$                 $5,000$           $50,000$
- $n$                         $10$               $100$              $1,000$                $10,000$          $100,000$
- $n\cdot\log_2(n)/4$          $8$               $166$              $2,491$                $33,219$          $415,241$
- $n^2/10$                    $10$             $1,000$            $100,000$            $10,000,000$             $10^9$
- $2^n/20$                    $51$        $6\cdot 10^{28}$     $5\cdot 10^{300}$           $\cdots$           $\cdots$
+Growth rate              $n=10$               $100$              $1,000$          $10^4$       $10^5$
+---------------------  --------  ------------------  -------------------  --------------  -----------
+$2\cdot\log_2(n)$           $7$                $13$                 $20$            $27$         $33$
+$n/2$                       $5$                $50$                $500$         $5,000$     $50,000$
+$n$                        $10$               $100$              $1,000$        $10,000$    $100,000$
+$n\cdot\log_2(n)/4$         $8$               $166$              $2,491$        $33,219$    $415,241$
+$n^2/10$                   $10$             $1,000$            $100,000$    $10,000,000$       $10^9$
+$2^n/20$                   $51$    $6\cdot 10^{28}$    $5\cdot 10^{300}$        $\cdots$     $\cdots$
 
 : Costs for representative growth rates {#tbl:growth-rates}
 
