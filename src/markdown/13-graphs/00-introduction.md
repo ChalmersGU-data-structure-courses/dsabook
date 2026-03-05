@@ -1,39 +1,41 @@
 
 # Graphs {#graphs}
 
+Graphs are a very flexible family of data structures used in a wide range of applications. 
+A graph consists of a set of vertices (nodes) and a set of edges, where each edge connects
+two vertices. Here are visual representations of two different graphs, each with four vertices 
+labelled A,B,C, and D). Note that the second graph is carrying data in the edges as well 
+as in the vertices. We will cover all the terminology required to classify these 
+and other graphs in this chapter.
+
 ::: TODO
-- Prio 2: move parts of this text to the 1st section
+- How do you scale this? Also add proper figure with reference.
 :::
 
-Graphs provide the ultimate in data structure flexibility. A graph
-consists of a set of nodes, and a set of edges where an edge connects
-two nodes. Trees and lists can be viewed as special cases of graphs.
+![](images/Graphs-examples.svg)
 
-Graphs are used to model both real-world systems and abstract problems,
-and are the data structure of choice in many applications. Here is a
-small sampling of the types of problems that graphs are routinely used
-for.
+Graphs are used to model both real-world systems and abstract problems. 
+Modelling a domain as a graph involves considering what 
+vertices and edges represent. Here is a
+small sampling of what graphs can be used to model:
 
-1.  Modeling connectivity in computer and communications networks.
-2.  Representing an abstract map as a set of locations with distances
-    between locations. This can be used to compute shortest routes
-    between locations such as in a GPS routefinder.
-3.  Modeling flow capacities in transportation networks to find which
-    links create the bottlenecks.
-4.  Finding a path from a starting condition to a goal condition. This
-    is a common way to model problems in artificial intelligence
-    applications and computerised game players.
-5.  Modeling computer algorithms, to show transitions from one program
-    state to another.
-6.  Finding an acceptable order for finishing subtasks in a complex
-    activity, such as constructing large buildings.
-7.  Modeling relationships such as family trees, business or military
-    organisations, and scientific taxonomies.
+1.  Connectivity in computer and communications networks. 
+    Vertices are computers and edges are direct network connections.
+2.  An abstract map of a road network with distances. Vertices are road 
+    intersections and edges are roads between them.
+3.  Acceptable orders in which to finishing subtasks in a complex
+    activity, such as compiling a program. Vertices are tasks and
+    edges represent a task depending on another task to finish before it can start.
+4.  Any kind of relationships, e.g. between users of a social media application.
+    Vertices are users, edges are relationships like friendship, following or blocking.
+5.  The World Wide Web forms a graph where vertices are web pages and edges
+    are links.
+6.  The memory content of a running object oriented program forms a graph 
+    where vertices are objects and edges are references.
 
 The next section covers some basic graph terminology. The
 rest of the chapter will describe fundamental representations for graphs,
 provide a reference implementation, and cover core graph algorithms
 including [traversal]{.term}, [topological sort]{.term}, [shortest paths]{.term} algorithms, and
-algorithms to find the [minimum spanning tree]{.term}. Besides being useful
-and interesting in their own right, these algorithms illustrate the use
-of many other data structures presented throughout the course.
+algorithms to find the [minimum spanning tree]{.term}.
+
