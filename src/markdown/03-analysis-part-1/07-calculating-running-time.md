@@ -201,8 +201,8 @@ More examples can be found in the online version of the book.
 Consider a simple `for` loop.
 
     sum = 0
-    for i in 0 .. n-1:
-        sum = sum + n
+    for i in 1 .. n:
+        sum = sum + i
 
 The first line is $O(1)$. The `for` loop is repeated $n$ times. The
 third line takes constant time so, by simplifying rule (4), the total
@@ -239,11 +239,11 @@ are nested.
 
 
     sum = 0
-    for j in 0 .. n-1:      // First for loop
-        for i in 0 .. j-1:  // is a double loop.
+    for i in 1 .. n:      // First for loop
+        for j in 1 .. j:  // is a double loop.
             sum = sum + 1
-    for k in 0 .. n-1:      // Second for loop.
-        arr[k] = k
+    for k in 1 .. n:      // Second for loop.
+        sum = sum + 1
 
 
 This code fragment has three separate statements: the first assignment
@@ -277,20 +277,20 @@ $O(c_1 + c_2 n + c_3 n^2)$ is simply $O(n^2)$.
 Compare the asymptotic analysis for the following two code fragments.
 
     sum1 = 0
-    for i in 0 .. n-1:       // First double loop.
-        for j in 0 .. n-1:   // Do n times.
+    for i in 1 .. n:       // First double loop.
+        for j in 1 .. n:   // Do n times.
             sum1 = sum1 + 1
 
     sum2 = 0
-    for i in 0 .. n-1:       // Second double loop.
-        for j in 0 .. i-1:   // Do i times.
+    for i in 1 .. n:       // Second double loop.
+        for j in 1 .. i:   // Do i times.
             sum2 = sum2 + 1
 
 In the first double loop, the inner `for` loop always executes $n$
 times. Because the outer loop executes $n$ times, it should be obvious
 that the statement `sum1=sum1+1` is executed precisely $n^2$ times. The
 second loop is similar to the one analysed in the previous example, with
-cost $\sum_{j = 1}^{n} j$. This is approximately $\frac{1}{2} n^2$.
+cost $\sum_{j = 1}^{n} j$. This is approximately $n^2/2$.
 Thus, both double loops cost $O(n^2)$, though the second requires
 about half the time of the first.
 ::::
@@ -301,15 +301,16 @@ about half the time of the first.
 
 Not all doubly nested `for` loops are strictly $O(n^2)$, the following is an example.
 
-    sum1 = 0
+    sum = 0
     k = 1
-    while k <= n:            // Do log(n) times.
-        for j in 0 .. n-1:   // Do n times.
-            sum1 = sum1 + 1
+    while k <= n:          // Do log(n) times.
+        for j in 1 .. n:   // Do n times.
+            sum = sum + 1
         k = k * 2
 
 To make our analysis easier, we will assume that $n$ is a power of two.
-The code fragment has its outer `for` loop executed $\log(n+1)$ times because on each iteration $k$ is multiplied by two until it reaches $n$.
+The code fragment has its outer `for` loop executed $\log(n+1)$ times because
+on each iteration $k$ is multiplied by two until it reaches $n$.
 Now, because the inner loop always executes $n$ times, the total cost for can be expressed as
 
 $$
@@ -319,7 +320,8 @@ $$
 So the cost of this double loop is $O(n \log(n))$.
 Note that the summation variable $i$ is the logarithm of the loop variable $k$, i.e. $k = 2^i$.
 
-Our analysis rules give the same result: the outer loop is logarithmic and the inner loop is linear, so we multiply them to $O(n \log(n))$.
+Our analysis rules give the same result: the outer loop is logarithmic and the inner loop is linear,
+so we multiply them to $O(n \log(n))$.
 ::::
 
 :::
