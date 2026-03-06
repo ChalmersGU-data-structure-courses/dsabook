@@ -29,9 +29,9 @@ It is a common mistake to confuse the concepts of upper bound or lower
 bound on the one hand, and [worst case]{.term}
 or [best case]{.term} on the other. The best,
 worst, or [average cases](#average-case){.term}
-each **define a cost** for a specific input instance (or specific set of
+each *define a cost* for a specific input instance (or specific set of
 instances for the average case). In contrast, upper and lower bounds
-describe our understanding of the **growth rate** for that cost measure.
+describe our understanding of the *growth rate* for that cost measure.
 So to define the growth rate for an algorithm or problem, we need to
 determine what we are measuring (the best, worst, or average case) and
 also our description for what we know about the growth rate of that cost
@@ -40,9 +40,9 @@ measure (big-$O$, $\Omega$, or $\Theta$).
 The upper bound for an algorithm is not the same as the worst case for
 that algorithm for a given input of size $n$. What is being bounded is
 not the actual cost (which you can determine for a given value of $n$),
-but rather the **growth rate** for the cost. There cannot be a growth
+but rather the *growth rate* for the cost. There cannot be a growth
 rate for a single point, such as a particular value of $n$. The growth
-**rate** applies to the **change** in cost as a **change** in input size
+rate applies to the change in cost as a change in input size
 occurs. Likewise, the lower bound is not the same as the best case for a
 given size $n$.
 
@@ -59,28 +59,29 @@ can determine the growth rate for the characterised best, worst, and
 average cases as the input size grows.
 
 ::: example
-#### Example: Best case for sequential search
+#### Example: Best case for binary search
 
 What is the growth rate of the best case for sequential search? For any
 array of size $n$, the best case occurs when the value we are looking
-for appears in the first position of the array. This is true regardless
+for appears in the center position of the array. This is true regardless
 of the size of the array. Thus, the best case (for arbitrary size $n$)
-occurs when the desired value is in the first of $n$ positions, and its
-cost is 1. It is *not* correct to say that the best case occurs when
-$n=1$.
+occurs when the desired value is in position $n/2$, and its cost is 1.
+It is *not* correct to say that the best case occurs when $n=1$.
 :::
 
 ### Best-case upper bound, or worst-case lower bound?
 
-Note that even though it is possible to analyse all possible combinations of (upper/lower/tight) bounds, and (best/worst/average) case, there are only a few combinations that are of interest.
+Note that even though it is possible to analyse all possible combinations of (upper/lower/tight) bounds,
+and (best/worst/average) case, there are only a few combinations that are of interest.
 
 When it comes to analysing algorithms, we are usually not at all interested in any best-case analysis.
-After all, knowing that an algorithm performs well in some very lucky cases doesn't say if it's a good algorithm -- it is much more important to know how it performs on worst-case inputs, or sometimes in the average case.
-
+After all, knowing that an algorithm performs well in some very lucky cases doesn't say if it's a good algorithm
+-- it is much more important to know how it performs on worst-case inputs, or sometimes in the average case.
 In the same way, it is not very interesting to learn about the lower bound of an algorithm.
 This tells us that the algorithm cannot run faster than the lower bound, but usually this lower bound is very fast anyway.
 
-That leaves us with analysing the worst-case upper bound, or sometimes the average-case behaviour. So this is what we almost always do.
+That leaves us with analysing the worst-case upper bound, or sometimes the average-case behaviour.
+So this is what we almost always do.
 
 
 <!-- This explanation is not very pedagogical

@@ -5,29 +5,14 @@
 - Prio 2: rewrite this text, more examples and help in how to analyse problems
 :::
 
-<!-- START NOTES -->
-
-The lower bound, $\Omega$, is not interesting at all when we want to analyse an algorithm, because we are not interested in how fast it can be, but instead of how slow it can be.
-
-But if we want to analyse a *problem* instead of an algorithm, then it is $\Omega$ we want to know. If we know a lower bound for a problem then we know that there cannot be any algorithm that has better complexity than that.
-
-It is usually very difficult to show that a problem has a certain lower bound, so nothing I expect you to come up with in your lifetime (I haven't done it for sure:). But here is a standard example:
-
-- Sorting an array of $n$ elements is trivially $\Omega(n)$, because we at the very least have to look at least once at every element.
-- But it is possible to prove that the sorting problem is actually $\Omega(n \log(n))$, for *comparison-based* sorting algorithms. This means that there are no sorting algorithm that has better complexity than $O(n \log(n))$, so Mergesort is an *asymptotically optimal* sorting algorithm.
-- By a comparison-based algorithm, we mean that the only way we compare elements are by comparing two elements and deciding which of them should come first. All the sorting algorithms we have looked at are comparison-based.
-
-<!-- END NOTES -->
-
-------------------------
-
-You most often use the techniques of algorithm analysis to analyse an [algorithm]{.term}
-(or the instantiation of an algorithm as a [program]{.term}).
+You most often use the techniques of algorithm analysis to analyse an [algorithm]{.term}.
 But you can also use these same techniques to analyse the cost of a [problem]{.term}.
 The key question that we want to ask is: How hard is a problem?
 
-Certainly we should expect that in some sense, the problem of sorting a list of records is harder than the problem of searching a list of records for a given key value.
-Certainly the algorithms that we know for sorting some records seem to be more expensive than the algorithms that we know for searching those same records.
+We should expect that in some sense,
+the problem of sorting an array is harder than the problem of searching in the array.
+Certainly the algorithms that we know for sorting seem to be more expensive than the algorithms that we know for searching.
+But how can we know that for certain?
 
 What we need are useful definitions for the upper bound and lower bound of a *problem*, instead of an algorithm.
 
@@ -36,55 +21,60 @@ But we can make algorithms as bad as we want, so that is not useful.
 Instead, what is useful is to say that a problem is only as hard as what we *can* do.
 In other words, we should define the upper bound for a problem to be the *best* algorithm that we know for the problem.
 
-But what does it then mean to give a lower bound for a problem?
-Lower bound refers to the minimum that any algorithm *must* cost.
-For example, when searching an unsorted list, we *must* look at every record.
-When sorting a list, we *must* look at every record (to even know if it is sorted).
+In contrast, the lower bound refers to the minimum that any algorithm *must* cost.
+For example, when sorting an array, we *must* look at every element, so sorting must be in $\Omega(n)$.
 
 So, how do upper and lower bounds relate to the key question -- how hard is a problem?
 As we have argued, the upper bound relies on our knowledge of the currently best algorithm.
 But how can we be certain that this algorithm is as good as it can be?
 To know this we have to know about the lower bound of the problem,
-i.e., the lower bound tells us how hard a problem is.
+in other words, if we know a lower bound for a problem then
+we know that there cannot be any algorithm with a better complexity.
 
-As a rule of thumb we can say:
+As we already noted in @sec:lower-bounds-and-tight-bounds,
+the lower bound, $\Omega$, is usually not interesting when we want to analyse an algorithm.
+But if we want to analyse a *problem* instead of an algorithm, then it is $\Omega$ we want to know.
+So as a rule of thumb we can say:
 
 - when we analyse an algorithm, we are interested in the *upper bound*, big-$O$
 - when we analyse a problem, we are instead interested in the *lower bound*, $\Omega$
 
-It is much easier to show that an algorithm (or program) is in $\Omega(f)$ than it is to show that a problem is in $\Omega(f)$.
-For a problem to be in $\Omega(f)$ means that *every* algorithm that solves the problem is in $\Omega(f)$, even algorithms that we have not thought of!
+It is much easier to reason about algorithms than about problems.
+For a problem to be in $\Omega(f)$ means that *every* algorithm that solves the problem is in $\Omega(f)$,
+even algorithms that we have not thought of!
 In other words, *every* algorithm *must* have at least this cost.
 So, to prove a lower bound, we need an argument that is true, even for algorithms that we don't know.
 
-So far all of our examples of algorithm analysis give "obvious" results, with big-$O$ always matching $\Omega$.
-To understand how big-$O$, $\Omega$, and $\Theta$ notations are properly used to describe our understanding of a problem or an algorithm, it is best to consider an example where you do not already know a lot about the problem.
+
+It is usually very difficult to show that a problem has a certain lower bound, so nothing I expect you to come up with in your lifetime (I haven't done it for sure:). But here is a standard example:
+
+- Sorting an array of $n$ elements is trivially $\Omega(n)$, because we at the very least have to look at least once at every element.
+- But it is possible to prove that the sorting problem is actually $\Omega(n \log(n))$, for *comparison-based* sorting algorithms. This means that there are no sorting algorithm that has better complexity than $O(n \log(n))$, so Mergesort is an *asymptotically optimal* sorting algorithm.
+- By a comparison-based algorithm, we mean that the only way we compare elements are by comparing two elements and deciding which of them should come first. All the sorting algorithms we have looked at are comparison-based.
+
 
 Let us look ahead to analysing the problem of sorting to see how this process works.
 What is the least possible cost for any sorting algorithm in the worst case?
 The algorithm must at least look at every element in the input, just to determine that the input is truly sorted.
 Thus, any sorting algorithm must take at least $\Omega(n)$ time.
-For many problems, this observation that each of the $n$ inputs must be looked at leads to an easy $\Omega(n)$ lower bound.
 
-In the previous chapters about sorting, you learned about some sorting algorithms whose running time is in $O(n^2)$ -- Bubble sort, Selection sort and Insertion sort.
-But you also learned about the linearithmic sorting algorithms Quicksort and Mergesort with a running time in $O(n\log(n))$.
+In the previous chapters you learned about some quadratic algorithms and some linearithmic algorithms (for example Mergesort).
 Thus, the problem of sorting can be said to have an upper bound in $O(n\log(n))$.
 How do we close the gap between $\Omega(n)$ and $O(n\log(n))$?
-Can there be even better sorting algorithms than Mergesort and Quicksort?
-If you can think of no algorithm whose worst-case growth rate is better than $O(n\log(n))$, and if you have discovered no analysis technique to show that the least cost for the problem of sorting in the worst case is greater than $\Omega(n)$, then you cannot know for sure whether or not there is a better algorithm.
+Can there be even better sorting algorithms than Mergesort?
+Regardless how many linearithmic algorithms we come up with,
+we still cannot be certain that there is no with a better complexity.
 
-Should we search for a faster algorithm?
-Many have tried, without success.
-Fortunately (or perhaps unfortunately?), we can prove that *any* sorting algorithm must have running time in $\Omega(n \log(n))$ in the worst case.
-So, the problem of sorting has a linearithmic lower bound, which is the same as the upper bounds for the best sorting algorithms.
-Thus, we can conclude that the problem of sorting is $\Theta(n \log(n))$ in the worst case, because the upper and lower bounds have met.
+Fortunately, we can prove that *any* sorting algorithm must be in $\Omega(n \log(n))$.
+So, the problem of sorting has a linearithmic lower bound,
+which is the same as the upper bounds for the best sorting algorithms.
+Thus, we can conclude that the problem of sorting is $\Theta(n \log(n))$ in the worst case,
+because the upper and lower bounds have met.
 
-Knowing the lower bound for a problem does not give you a good algorithm.
-But it does help you to know when to stop looking.
-If the lower bound for the problem matches the upper bound for the algorithm (within a constant factor), then we know that we can find an algorithm that is better only by a constant factor.
-
-So, to summarise: The upper bound for a problem is the best that you *can* do, while the lower bound for a problem is the least work that you *must* do.
-If those two are the same, then we can say that we really understand our problem.
+Knowing the lower bound for a problem does not give you a good algorithm,
+but it does help you to know when to stop looking.
+So, to summarise: The upper bound for a problem is the best that you *can* do,
+while the lower bound for a problem is the least work that you *must* do.
 
 
 ### Case study: Lower bounds for sorting {#lower-bounds-for-sorting}
@@ -96,7 +86,9 @@ If those two are the same, then we can say that we really understand our problem
 By now you have seen many analyses for algorithms.
 These analyses generally define the worst-case upper bounds.
 For many of the algorithms presented so far, analysis has been quite easy.
-This section considers a more difficult task: An analysis for the cost of a *problem* as opposed to an *algorithm*.
+This section considers a more difficult task:
+An analysis for the cost of a *problem* as opposed to an *algorithm*,
+or to be more precise, the lower bound of the sorting problem.
 
 :::::: online
 

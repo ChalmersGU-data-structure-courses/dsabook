@@ -116,38 +116,12 @@ So, how can we relate functions using orders of growth?
 We do this by saying that one function is a *bound* of another function.
 E.g., when we say that an algorithm **A** is quadratic,
 we actually mean that the function $n^2$ is an upper bound of **A**.
-The following are informal definitions of *upper*, *lower* and *tight* bounds
--- we will define them more rigorously in [Chapter @sec:analysis-part-2].
 
 Upper bound
 
-:   $f$ is an upper bound of $g$ **if and only if**
-    $f$ grows *at least as fast* as $g$, and we write this $f\in O(g)$.
+:   $g$ is an upper bound of $f$ **if and only if**
+    $f$ grows *at most as fast* as $g$, and we write this $f\in O(g)$.
 
-Lower bound
-
-:   $f$ is a lower bound of $g$ **if and only if**
-    $f$ grows *at most as fast* as $g$, and we write this $f\in\Omega(g)$.
-
-Tight bound
-
-:   $f$ is a tight bound of $g$ **if and only if**
-    both functions grow *at the same rate*, and we write this $f\in\Theta(g)$.
-
-
-### Should we use $O$, $\Omega$ or $\Theta$?
-
-If an algorithm has a lower bound of $\Omega(f)$, we know that it will never run asymptotically faster than $f$.
-But this is usually not very useful knowledge, because we are more interested in knowing how the algorithm works on on bad inputs.
-Therefore the upper bound $O(f)$ is by far the most common complexity measure that people use, and this is what we will be using in this book.
-
-One could argue that $\Theta(f)$ would be an even better measure, because it gives more information about an algorithm.
-But it is much more difficult to reason about $\Theta(f)$, and therefore we will almost exclusively use the upper bound notation $O(f)$.
-
-So, is the lower bound useless?
-No, definitely not.
-The main use case for $\Omega$ is when we want to classify *problems*, not algorithms.
-One example is when proving that the lower bound for sorting is $\Omega(n\log(n))$, which we do in @sec:lower-bounds-for-sorting.
-But classifying problems is out of scope for this book, so we will not use $\Omega$ much.
-
-
+The upper bound is by far the most common notion we use,
+but there are also the *lower* and the *tight* bounds.
+They will be discussed later in @sec:lower-and-tight-bounds.

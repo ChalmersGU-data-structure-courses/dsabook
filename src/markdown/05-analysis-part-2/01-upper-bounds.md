@@ -1,5 +1,5 @@
 
-## Upper bounds: the big-$O$ notation
+## Upper bounds: the big-$O$ notation {#upper-bounds}
 
 ::: TODO
 - Prio 1: formal definition
@@ -153,7 +153,7 @@ For example, binary search is a logarithmic algorithm, $O(\log(n))$,
 but it is also true to say that binary search is in $O(n)$ or even in $O(n^2)$.
 So the complexity hierarchy above could also be formulated using subset notation:
 
-$$ O(1) \subset O(\log(n)) \subset O(n) \subsetneq O(n \log(n)) \subsetneq O(n^2) \subsetneq \cdots $$
+$$ O(1) \subset O(\log(n)) \subset O(n) \subset O(n \log(n)) \subset O(n^2) \subset \cdots $$
 
 However, we always seek to describe the complexity of an algorithm using
 the tightest (lowest) possible upper bound.
