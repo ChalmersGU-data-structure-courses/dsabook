@@ -18,26 +18,26 @@ The members are typically drawn from some larger population known as the [base t
 Each member of a set is either a [primitive element]{.term} of the base type or is a set itself.
 There is no concept of duplication in a set.
 Each value from the base type is either in the set or not in the set.
-For example, a set named $\mathbf{P}$ might consist of the three integers 7, 11, and 42.
-In this case, $\mathbf{P}$'s members are 7, 11, and 42, and the base type is integer.
+For example, a set named $P$ might consist of the three integers 7, 11, and 42.
+In this case, $P$'s members are 7, 11, and 42, and the base type is integer.
 
 The following table shows the symbols commonly used to express sets and their relationships.
 
---------------------------------------------- ---------------------------------------------------------------------------------------------
-$\{1, 4\}$                                    A set composed of the members 1 and 4
-$\{x ~|~ x\ \mbox{is prime}\}$                A set definition using a set comprehension (e.g., the set of all primes)
-$x\in\mathbf{P}$                              $x$ is a member of $\mathbf{P}$
-$x\notin\mathbf{P}$                           $x$ is not a member of set $\mathbf{P}$
-$\emptyset$                                   The null or empty set
-$|\mathbf{P}|$                                Cardinality: the size of $\mathbf{P}$, or its number of members
-$\mathbf{P}\subseteq\mathbf{Q}$               $\mathbf{P}$ is included in $\mathbf{Q}$, $\mathbf{P}$ is a subset of $\mathbf{Q}$
-$\mathbf{P}\supseteq\mathbf{Q}$               $\mathbf{Q}$ is included in $\mathbf{P}$, $\mathbf{P}$ is a superset of $\mathbf{Q}$
-$\mathbf{P}\cup\mathbf{Q}$                    Union: all elements appearing in any of $\mathbf{P}$ *or* $\mathbf{Q}$
-$\mathbf{P}\cap\mathbf{Q}$                    Intersection: all elements appearing in both $\mathbf{P}$ *and* $\mathbf{Q}$
-$\mathbf{P}-\mathbf{Q}$                       Difference: all elements of $\mathbf{P}$ *not* in $\mathbf{Q}$
-$\mathbf{P}\times\mathbf{Q}$                  (Cartesian) product: all possible pairs $(x,y)$ with $x\in\mathbf{P}$ and $y\in\mathbf{Q}$
-$2^\mathbf{P}$ or $\mathcal{P}(\mathbf{P})$   Powerset: all possible subsets of $\mathbf{P}$
---------------------------------------------- ---------------------------------------------------------------------------------------------
+-----------------------------------  -------------------------------------------------------------------------------
+$\{1, 4\}$                           A set composed of the members 1 and 4
+$\{x ~|~ x\ \mbox{is prime}\}$       A set definition using a set comprehension (e.g., the set of all primes)
+$x\in P$                             $x$ is a member of $P$
+$x\notin P$                          $x$ is not a member of set $P$
+$\emptyset$                          The null or empty set
+$|P|$                                Cardinality: the size of $P$, or its number of members
+$P\subseteq Q$                       $P$ is included in $Q$, $P$ is a subset of $Q$
+$P\supseteq Q$                       $Q$ is included in $P$, $P$ is a superset of $Q$
+$P\cup Q$                            Union: all elements appearing in any of $P$ *or* $Q$
+$P\cap Q$                            Intersection: all elements appearing in both $P$ *and* $Q$
+$P-Q$                                Difference: all elements of $P$ *not* in $Q$
+$P\times Q$                          (Cartesian) product: all possible pairs $(x,y)$ with $x\in P$ and $y\in Q$
+$2^P$ or $\mathcal{P}(P)$            Powerset: all possible subsets of $P$
+-----------------------------------  -------------------------------------------------------------------------------
 
 ::: TODO
 - (Peter) I think the examples below are unnecessary: the students should know all this.
@@ -45,35 +45,35 @@ $2^\mathbf{P}$ or $\mathcal{P}(\mathbf{P})$   Powerset: all possible subsets of 
 :::
 
 Here are some examples of this notation in use.
-First define two sets, $\mathbf{P}$ and $\mathbf{Q}$.
+First define two sets, $P$ and $Q$.
 
 $$
-\mathbf{P} = \{2, 3, 5\}, \qquad \mathbf{Q} = \{5, 10\}.
+P = \{2, 3, 5\}, \qquad Q = \{5, 10\}.
 $$
 
-$|\mathbf{P}| = 3$ (because $\mathbf{P}$ has three members) and $|\mathbf{Q}| = 2$
-(because $\mathbf{Q}$ has two members).
+$|P| = 3$ (because $P$ has three members) and $|Q| = 2$
+(because $Q$ has two members).
 Both of these sets are finite in length.
 Other sets can be infinite, for example, the set of integers.
 
-The union of $\mathbf{P}$ and $\mathbf{Q}$, written $\mathbf{P} \cup \mathbf{Q}$, is the set of elements in either $\mathbf{P}$ or $\mathbf{Q}$, which is {2, 3, 5, 10}.
-The intersection of $\mathbf{P}$ and $\mathbf{Q}$, written $\mathbf{P} \cap \mathbf{Q}$, is the set of elements that appear in both $\mathbf{P}$ and $\mathbf{Q}$, which is {5}.
-The set difference of $\mathbf{P}$ and $\mathbf{Q}$, written $\mathbf{P} - \mathbf{Q}$, is the set of elements that occur in $\mathbf{P}$ but not in
-$\mathbf{Q}$, which is {2, 3}.
-Note that $\mathbf{P} \cup \mathbf{Q} = \mathbf{Q} \cup \mathbf{P}$ and that $\mathbf{P} \cap \mathbf{Q} = \mathbf{Q} \cap \mathbf{P}$, but in general $\mathbf{P} - \mathbf{Q} \neq \mathbf{Q} - \mathbf{P}$.
-In this example, $\mathbf{Q} - \mathbf{P}  = \{10\}$.
-Finally, the set {5, 3, 2} is indistinguishable from set $\mathbf{P}$, because sets have no concept of order.
-Likewise, set {2, 3, 2, 5} is also indistinguishable from $\mathbf{P}$, because sets have no concept of duplicate elements.
+The union of $P$ and $Q$, written $P \cup Q$, is the set of elements in either $P$ or $Q$, which is {2, 3, 5, 10}.
+The intersection of $P$ and $Q$, written $P \cap Q$, is the set of elements that appear in both $P$ and $Q$, which is {5}.
+The set difference of $P$ and $Q$, written $P - Q$, is the set of elements that occur in $P$ but not in
+$Q$, which is {2, 3}.
+Note that $P \cup Q = Q \cup P$ and that $P \cap Q = Q \cap P$, but in general $P - Q \neq Q - P$.
+In this example, $Q - P  = \{10\}$.
+Finally, the set {5, 3, 2} is indistinguishable from set $P$, because sets have no concept of order.
+Likewise, set {2, 3, 2, 5} is also indistinguishable from $P$, because sets have no concept of duplicate elements.
 
-The [set product]{.term} or [Cartesian product]{.term} of two sets $\mathbf{P} \times \mathbf{Q}$ is a set of ordered pairs.
+The [set product]{.term} or [Cartesian product]{.term} of two sets $P \times Q$ is a set of ordered pairs.
 For our example sets, the set product would be:
 
 $$
 \{(2, 5),\ (2, 10),\ (3, 5),\ (3, 10),\ (5, 5),\ (5, 10)\}.
 $$
 
-The [powerset]{.term} of a set $\mathbf{P}$ (denoted $2^\mathbf{P}$ or $\mathcal{P}(\mathbf{P})$) is the set of all possible subsets of $\mathbf{P}$.
-For our example set $\mathbf{P}$, the powerset would be:
+The [powerset]{.term} of a set $P$ (denoted $2^P$ or $\mathcal{P}(P)$) is the set of all possible subsets of $P$.
+For our example set $P$, the powerset would be:
 
 $$
 \{ \emptyset,\ \{2\},\ \{3\},\ \{5\},\ \{2, 3\},\ \{2, 5\},\ \{3, 5\},\ \{2, 3, 5\} \}.
@@ -96,8 +96,8 @@ Note that sequence $[3, 5, 4, 4]$ is distinct from sequence $[3, 4, 5, 4]$, and 
 
 ### Relations
 
-A binary [relation]{.term} $R$ over set $\mathbf{S}$ is a set of ordered pairs from $\mathbf{S}$, i.e., $R\subseteq\mathbf{S}\times\mathbf{S}$.
-As an example of a relation, if $\mathbf{S}$ is $\{a, b, c\}$, then
+A binary [relation]{.term} $R$ over set $S$ is a set of ordered pairs from $S$, i.e., $R\subseteq S\times S$.
+As an example of a relation, if $S$ is $\{a, b, c\}$, then
 
 $$
 \{ (a, c), (b, c), (c, b) \}
@@ -122,9 +122,10 @@ The most important properties of relations are as follows:
 * $R$ is [antisymmetric]{.term} if whenever $aRb$ and $bRa$, then $a = b$.
 * $R$ is [transitive]{.term} if whenever $aRb$ and $bRc$, then $aRc$.
 
-(Here $R$ is a binary relation over a set $\mathbf{S}$, and the condition holds for all $a, b, c \in \mathbf{S}$.)
+(Here $R$ is a binary relation over a set $S$, and the condition holds for all $a, b, c \in S$.)
 
-As examples, for the natural numbers, $<$ is irreflexive (because $aRa$ is never true), antisymmetric (because there is no case where $aRb$ and
+As examples, for the natural numbers, $<$ is irreflexive (because $aRa$ is never true),
+antisymmetric (because there is no case where $aRb$ and
 $bRa$), and transitive.
 Relation $\leq$ is reflexive, antisymmetric, and transitive.
 Relation $=$ is reflexive, symmetric (and antisymmetric!), and transitive.
@@ -138,15 +139,15 @@ If we define a person to be a sibling of themself, then it is reflexive; if we d
 
 #### Equivalence relations
 
-$R$ is an [equivalence relation]{.term} on set $\mathbf{S}$ if it is *reflexive*, *symmetric*, and *transitive*.
+$R$ is an [equivalence relation]{.term} on set $S$ if it is *reflexive*, *symmetric*, and *transitive*.
 An equivalence relation can be used to partition a set into [equivalence classes]{.term}.
 If two elements $a$ and $b$ are equivalent to each other, we write $a \equiv b$.
 
-A [partition]{.term} of a set $\mathbf{S}$ is a collection of subsets that are [disjoint]{.term} from each other and whose union is $\mathbf{S}$.
+A [partition]{.term} of a set $S$ is a collection of subsets that are [disjoint]{.term} from each other and whose union is $S$.
 There's a close correspondence between equivalence relations and partitions:
-an equivalence relation on a set $\mathbf{S}$ partitions the set into disjoint subsets (the subset of equivalent elements).
+an equivalence relation on a set $S$ partitions the set into disjoint subsets (the subset of equivalent elements).
 But the opposite is also true:
-if you have a partition of a set $\mathbf{S}$ you can easily define a corresponding equivalence relation (elements are equivalent if they belong to the same partition).
+if you have a partition of a set $S$ you can easily define a corresponding equivalence relation (elements are equivalent if they belong to the same partition).
 
 <!-- The [Union-Find]{.term} algorithm efficiently maintains equivalence classes on a set. -->
 
@@ -184,22 +185,22 @@ to define an equivalence relation.
 For the set of integers, use the modulus function
 to define a binary relation such that two numbers
 $x$ and $y$ are in the relation if and only if
-$x \;\mathrm{mod}\; m = y \;\mathrm{mod}\; m$.
+$x \;\text{mod}\; m = y \;\text{mod}\; m$.
 Thus, for $m = 4$, $\langle1, 5\rangle$ is in the
-relation because $1 \;\mathrm{mod}\; 4 = 5 \;\mathrm{mod}\; 4$.
+relation because $1 \;\text{mod}\; 4 = 5 \;\text{mod}\; 4$.
 We see that modulus used in this way defines an equivalence
 relation on the integers, and this relation can be used to
 partition the integers into $m$ equivalence classes.
 This relation is an equivalence relation because
 
-1. $x \;\mathrm{mod}\; m = x \;\mathrm{mod}\; m$ for all $x$;
+1. $x \;\text{mod}\; m = x \;\text{mod}\; m$ for all $x$;
 
-2. if $x \;\mathrm{mod}\; m = y \;\mathrm{mod}\; m$,
-    then $y \;\mathrm{mod}\; m = x \;\mathrm{mod}\; m$; and
+2. if $x \;\text{mod}\; m = y \;\text{mod}\; m$,
+    then $y \;\text{mod}\; m = x \;\text{mod}\; m$; and
 
-3. if $x \;\mathrm{mod}\; m = y \;\mathrm{mod}\; m$ and
-    $y \;\mathrm{mod}\; m = z \;\mathrm{mod}\; m$, then
-    $x \;\mathrm{mod}\; m = z \;\mathrm{mod}\; m$.
+3. if $x \;\text{mod}\; m = y \;\text{mod}\; m$ and
+    $y \;\text{mod}\; m = z \;\text{mod}\; m$, then
+    $x \;\text{mod}\; m = z \;\text{mod}\; m$.
 :::
 
 -->
@@ -288,7 +289,7 @@ The symbol "$\approx$" means "approximately equal."
 
 Permutations:
 
-:   A [permutation]{.term} of a sequence $\mathbf{S}$ is simply the members of $\mathbf{S}$ arranged in some order.
+:   A [permutation]{.term} of a sequence $S$ is simply the members of $S$ arranged in some order.
 For example, a permutation of the integers 1 through $n$ would be those values arranged in some order.
 If the sequence contains $n$ distinct members, then there are $n!$ different permutations for the sequence.
 This is because there are $n$ choices for the first member in the permutation; for each choice of first member there are $n-1$ choices for the second member, and so on.
@@ -333,17 +334,22 @@ For example, $\lceil 3.4 \rceil = 4$, as does $\lceil 4.0 \rceil$, while $\lceil
 Modulus function:
 
 :   The [modulus]{.term} (or [mod]{.term}) function returns the remainder of an integer division.
-Sometimes written $n \;\mathrm{mod}\; m$ in mathematical expressions, the syntax in many programming languages is $n % m$.
-From the definition of remainder, $n \;\mathrm{mod}\; m$ is the integer $r$ such that $n = qm + r$ for $q$ an integer, and $|r| < |m|$.
-Therefore, the result of $n \;\mathrm{mod}\; m$ must be between 0 and $m-1$ when $n$ and $m$ are positive integers.
-For example, $5\mathop{mod}3 = 2$, $25\mathop{mod}3 = 1$, $5\mathop{mod}7 = 5$, and $5\mathop{mod}5 = 0$.
+Sometimes written $n\mathop{\text{mod}}m$ in mathematical expressions,
+the syntax in many programming languages is $n\mathop{\%}m$.
+From the definition of remainder, $n\mathop{\text{mod}}m$ is
+the integer $r$ such that $n = qm + r$ for $q$ an integer, and $|r| < |m|$.
+Therefore, the result of $n \;\text{mod}\; m$ must be between 0 and $m-1$ when $n$ and $m$ are positive integers.
+For example, $5\mathop{\text{mod}}3 = 2$, $25\mathop{\text{mod}}3 = 1$,
+$5\mathop{\text{mod}}7 = 5$, and $5\mathop{\text{mod}}5 = 0$.
 
     There is more than one way to assign values to $q$ and $r$, depending on how integer division is interpreted.
-The most common mathematical definition computes the mod function as $n \;\mathrm{mod}\; m = n - m\lfloor n/m\rfloor$.
-In this case, $-3 \;\mathrm{mod}\; 5 = 2$.
-However, Java and C++ compilers typically use the underlying processor's machine instruction for computing integer arithmetic.
-On many computers this is done by truncating the resulting fraction, meaning $n \;\mathrm{mod}\; m = n - m (\mathrm{trunc}(n/m))$.
-Under this definition, $-3 \;\mathrm{mod}\; 5 = -3$.
+The most common mathematical definition computes the mod function as $n\mathop{\text{mod}}m = n - m\lfloor n/m\rfloor$.
+In this case, $-3 \;\text{mod}\; 5 = 2$.
+However, Java and C++ compilers typically use the underlying
+processor's machine instruction for computing integer arithmetic.
+On many computers this is done by truncating the resulting fraction,
+meaning $n\mathop{\text{mod}}m = n - m (\text{trunc}(n/m))$.
+Under this definition, $-3\mathop{\text{mod}}5 = -3$.
 Another language might do something different.
 
     Unfortunately, for many applications this is not what the user wants or expects.
@@ -671,7 +677,7 @@ Thus, we conclude that the theorem is correct.
 :::
 
 A related proof technique is [proving the contrapositive]{.term}.
-We can prove that $P \Rightarrow Q$ by proving $(\mathrm{not}\ Q) \Rightarrow (\mathrm{not}\ P)$.
+We can prove that $P \Rightarrow Q$ by proving $(\text{not}\ Q) \Rightarrow (\text{not}\ P)$.
 This technique works because the [truth table]{.term} for the two logical statements are the same.
 
 #### Proof by Mathematical Induction
@@ -728,16 +734,16 @@ Using the induction hypothesis to do work is exactly the same as using a recursi
 ::: example
 #### Example: Sum of first $n$ integers
 Here is a sample proof by mathematical induction.
-Call the sum of the first $n$ positive integers $\mathbf{S}(n)$.
+Call the sum of the first $n$ positive integers $S(n)$.
 
-**Theorem:** $\mathbf{S}(n) = n(n+1)/2$.
+**Theorem:** $S(n) = n(n+1)/2$.
 
 **Proof:**
 The proof is by mathematical induction.
 
 1. **Check the base case.**
-    For $n = 1$, verify that $\mathbf{S}(1) = 1(1+1)/2$.
-    $\mathbf{S}(1)$ is simply the sum of the first positive
+    For $n = 1$, verify that $S(1) = 1(1+1)/2$.
+    $S(1)$ is simply the sum of the first positive
     number, which is 1.
     Because $1(1+1)/2 = 1$, the formula is correct for the base
     case.
@@ -746,16 +752,16 @@ The proof is by mathematical induction.
     The induction hypothesis is
 
     $$
-    \mathbf{S}(n-1) = \sum_{i=1}^{n-1} i =
+    S(n-1) = \sum_{i=1}^{n-1} i =
     \frac{(n-1)((n-1)+1)}{2} = \frac{(n-1)(n)}{2}.
     $$
 
 3. **Use the assumption from the induction hypothesis for**
     $n-1$ **to show that the result is true for** $n$.
     The induction hypothesis states that
-    $\mathbf{S}(n-1) =  (n-1)(n)/2$,
-    and because $\mathbf{S}(n) = \mathbf{S}(n-1) + n$,
-    we can substitute for $\mathbf{S}(n-1)$ to get
+    $S(n-1) =  (n-1)(n)/2$,
+    and because $S(n) = S(n-1) + n$,
+    we can substitute for $S(n-1)$ to get
 
     \begin{align*}
     \sum_{i=1}^n i &= \left(\sum_{i=1}^{n-1} i\right) + n
@@ -766,14 +772,14 @@ The proof is by mathematical induction.
     Thus, by mathematical induction,
 
     $$
-    \mathbf{S}(n) = \sum_{i=1}^n i = n(n+1)/2.
+    S(n) = \sum_{i=1}^n i = n(n+1)/2.
     $$
 :::
 
 Note carefully what took place in this example.
-First we cast $\mathbf{S}(n)$ in terms of a smaller occurrence of the problem: $\mathbf{S}(n) = \mathbf{S}(n-1) + n$.
-This is important because once $\mathbf{S}(n-1)$ comes into the picture, we can  use the induction hypothesis to replace $\mathbf{S}(n-1)$ with $(n-1)(n)/2$.
-From here, it is simple algebra to prove that $\mathbf{S}(n-1) + n$ equals the right-hand side of the original theorem.
+First we cast $S(n)$ in terms of a smaller occurrence of the problem: $S(n) = S(n-1) + n$.
+This is important because once $S(n-1)$ comes into the picture, we can  use the induction hypothesis to replace $S(n-1)$ with $(n-1)(n)/2$.
+From here, it is simple algebra to prove that $S(n-1) + n$ equals the right-hand side of the original theorem.
 
 <!--
 We can compare the induction proof of Example [Example](#SumIEx)
@@ -1152,10 +1158,10 @@ We begin by picking a [seed]{.term} that we will call $r_1$.
 Then, we can compute successive terms as follows, where $b$ and $t$ are some constant positive integers.
 
 \begin{align*}
-r_i &= (b\cdot r_{i-1}) \;\mathrm{mod}\; t
+r_i &= (b\cdot r_{i-1}) \;\text{mod}\; t
 \end{align*}
 
-By definition of the $\mathrm{mod}$ function, all generated numbers must be in the range 0 to $t-1$.
+By definition of the $\text{mod}$ function, all generated numbers must be in the range 0 to $t-1$.
 Now, consider what happens when $r_i = r_j$ for values $i$ and $j$.
 Of course then $r_{i+1} = r_{j+1}$ which means that we have a repeating cycle.
 

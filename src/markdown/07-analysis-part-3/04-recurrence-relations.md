@@ -341,7 +341,7 @@ that $T(n) \leq n^2$ implies that $T(2n) \leq (2n)^2$ for
 $n = 2^N, N \geq 1$. The induction hypothesis is
 
 $$
-T(i) \leq i^2,\ \textrm{for all}\ i \leq n
+T(i) \leq i^2, \text{ for all } i \leq n
 $$
 
 It follows that

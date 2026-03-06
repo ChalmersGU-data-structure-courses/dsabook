@@ -29,18 +29,18 @@ a basic class for general trees.
 
 ### Definitions and terminology
 
-A [tree]{.term} $\mathbf{T}$ is a finite set of
-one or more nodes such that there is one designated node $R$, called the
-root of $\mathbf{T}$. If the set $(\mathbf{T} -\{R\})$ is not empty,
-these nodes are partitioned into $n > 0$ disjoint sets $\mathbf{T}_0$,
-$\mathbf{T}_1$, \..., $\mathbf{T}_{n-1}$, each of which is a tree, and
-whose roots $R_1, R_2, ..., R_n$, respectively, are children of $R$. The
-subsets $\mathbf{T}_i (0 \leq i < n)$ are said to be
-[subtrees]{.term} of $\mathbf{T}$.
-These subtrees are ordered in that $\mathbf{T}_i$ is said to come before
-$\mathbf{T}_j$ if $i < j$. By convention, the subtrees are arranged from
-left to right with subtree $\mathbf{T}_0$ called the leftmost child of
-$R$. A node's [out degree]{.term} is the number
+A [tree]{.term} $T$ is a finite set of
+one or more nodes such that there is one designated node $r$, called the
+root of $T$. If the set $(T -\{r\})$ is not empty,
+these nodes are partitioned into $n > 0$ disjoint sets $T_0$,
+$T_1$, \..., $T_{n-1}$, each of which is a tree, and
+whose roots $r_1, r_2, ..., r_n$, respectively, are children of $r$. The
+subsets $T_i (0 \leq i < n)$ are said to be
+[subtrees]{.term} of $T$.
+These subtrees are ordered in that $T_i$ is said to come before
+$T_j$ if $i < j$. By convention, the subtrees are arranged from
+left to right with subtree $T_0$ called the leftmost child of
+$r$. A node's [out degree]{.term} is the number
 of children for that node. A [forest]{.term} is
 a collection of one or more trees.
 @Fig:GeneralTree presents further tree
@@ -121,8 +121,8 @@ Visualisation of preorder traversal.
 :::
 
 To perform a preorder traversal, it is necessary to visit each of the
-children for a given node (say $R$) from left to right. This is
-accomplished by starting at R's leftmost child (call it $T$). From $T$,
+children for a given node (say $r$) from left to right. This is
+accomplished by starting at $r$'s leftmost child (call it $T$). From $T$,
 we can move to $T$'s right sibling, and then to that node's right
 sibling, and so on.
 

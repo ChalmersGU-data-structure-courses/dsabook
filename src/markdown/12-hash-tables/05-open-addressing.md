@@ -11,7 +11,7 @@
 We now turn to the other commonly used form of hashing: [open addressing]{.term} (also called [closed hashing]{.term}).
 
 Compared to [separate chaining]{.term} (@sec:separate-chaining), we now store all elements directly in the hash table.
-Each element $E$ has a [home position]{.term} that is $\textbf{h}(E)$, the slot computed by the hash function.
+Each element $E$ has a [home position]{.term} that is $\mathbf{h}(E)$, the slot computed by the hash function.
 If $E$ is to be inserted and another record already occupies its home position, then $E$ will be stored at some other slot in the table.
 It is the business of the [collision resolution]{.term} policy to determine which slot that will be.
 Naturally, the same policy must be followed during search as during insertion, so that any element not found in its home position can be recovered by repeating the collision resolution process.

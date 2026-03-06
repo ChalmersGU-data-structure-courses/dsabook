@@ -381,20 +381,20 @@ minimum external path weight for the given set of letters.
 -   **Induction Hypothesis:** Assume that any tree created by
     `buildHuffmanTree` that contains $n-1$ leaves has minimum external path
     length.
--   **Induction Step:** Given a Huffman tree $\mathbf{T}$ built by
+-   **Induction Step:** Given a Huffman tree $T$ built by
     `buildHuffmanTree` with $n$ leaves, $n \geq 2$, suppose that
     $w_1 \leq w_2 \leq ... \leq w_n$ where $w_1$ to $w_n$ are the
     weights of the letters. Call $V$ the parent of the letters with
     frequencies $w_1$ and $w_2$. From the lemma, we know that the leaf
     nodes containing the letters with frequencies $w_1$ and $w_2$ are
-    as deep as any nodes in $\mathbf{T}$. If any other leaf nodes in
+    as deep as any nodes in $T$. If any other leaf nodes in
     the tree were deeper, we could reduce their weighted path length
     by swapping them with $w_1$ or $w_2$. But the lemma tells us that
-    no such deeper nodes exist. Call $\mathbf{T}'$ the Huffman tree
-    that is identical to $\mathbf{T}$ except that node $V$ is replaced
+    no such deeper nodes exist. Call $T'$ the Huffman tree
+    that is identical to $T$ except that node $V$ is replaced
     with a leaf node $V'$ whose weight is $w_1 + w_2$. By the
-    induction hypothesis, $\mathbf{T}'$ has minimum external path
-    length. Returning the children to $V'$ restores tree $\mathbf{T}$,
+    induction hypothesis, $T'$ has minimum external path
+    length. Returning the children to $V'$ restores tree $T$,
     which must also have minimum external path length.
 
  Thus by mathematical induction, function `buildHuffmanTree` creates the

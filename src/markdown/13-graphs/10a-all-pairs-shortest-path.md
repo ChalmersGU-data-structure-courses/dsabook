@@ -43,7 +43,7 @@ because the intermediate vertex is 3. All paths in this graph are
 4-paths.
 ](images/GraphFloydExample.png){#fig:GraphFloydExample}
 
-Define $\mathrm{D}_k(v, w)$ to be the length of the shortest $k$-path from
+Define $D_k(v, w)$ to be the length of the shortest $k$-path from
 vertex $v$ to vertex $w$. Assume that we already know the shortest
 $k$-path from $v$ to $w$. The shortest $(k+1)$-path either goes through
 vertex $k$ or it does not. If it does go through $k$, then the best path
@@ -51,7 +51,7 @@ is the best $k$-path from $v$ to $k$ followed by the best $k$-path from
 $k$ to $w$. Otherwise, we should keep the best $k$-path seen before.
 Floyd's algorithm simply checks all of the possibilities in a triple
 loop. Here is the implementation for Floyd's algorithm. At the end of
-the algorithm, array `D` stores the all-pairs shortest distances.
+the algorithm, array $D$ stores the all-pairs shortest distances.
 
     function floyd(graph):
         distances = new Map() of vertex pairs to distances

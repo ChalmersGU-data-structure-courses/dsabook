@@ -69,8 +69,8 @@ Circular array queue -- empty.
 If the array has size $n$, then it can store queues of size $0$ to $n$ --
 therefore it can store $n+1$ different queue lengths.
 But both when the queue is empty (size $0$) and when it is full (size $n$),
-the $\mathit{front}$ variable is one larger than $\mathit{rear}$.
-So, if $\mathit{front}=\mathit{rear}+1$, is the queue empty or full?
+the `front` variable is one larger than `rear`.
+So, if `front==rear+1`, is the queue empty or full?
 
 One obvious solution is to keep an explicit count of the number of
 elements in the queue, i.e., using a special *size* variable.

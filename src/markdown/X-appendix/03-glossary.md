@@ -209,7 +209,7 @@ ancestor of $A$.
 ### antisymmetric
 
 In set notation, relation $R$ is antisymmetric if whenever $aRb$ and
-$bRa$, then $a = b$, for all $a, b \in \mathbf{S}$.
+$bRa$, then $a = b$, for all $a, b \in S$.
 
 ### approximation algorithm
 
@@ -1792,7 +1792,7 @@ to partition a set into equivalence classes.
 
 ### equivalence relation
 
-Relation $R$ is an equivalence relation on set $\mathbf{S}$ if it is
+Relation $R$ is an equivalence relation on set $S$ if it is
 [reflexive]{.term},
 [symmetric]{.term}, and
 [transitive]{.term}.
@@ -2126,7 +2126,7 @@ allocated from [free store]{.term}.
 
 A connected, [undirected graph]{.term} with
 no simple cycles. An equivalent definition is that a free tree is
-connected and has $|\mathbf{V}| - 1$ edges.
+connected and has $|V| - 1$ edges.
 
 ### frequency count
 
@@ -2202,11 +2202,11 @@ A formal definition for what strings make up a
 ### graph
 
 A [graph]{.term}
-$\mathbf{G} = (\mathbf{V}, \mathbf{E})$ consists of a set of
-[vertices](#vertex){.term} $\mathbf{V}$ and
-a set of [edges](#edge){.term} $\mathbf{E}$,
-such that each edge in $\mathbf{E}$ is a connection between a pair
-of vertices in $\mathbf{V}$.
+$G = (V, E)$ consists of a set of
+[vertices](#vertex){.term} $V$ and
+a set of [edges](#edge){.term} $E$,
+such that each edge in $E$ is a connection between a pair
+of vertices in $V$.
 
 ### greedy algorithm
 
@@ -2706,7 +2706,7 @@ the part of the machinery that actually reads data from the disk.
 ### irreflexive
 
 In set notation, binary relation $R$ on set $S$ is irreflexive if
-$aRa$ is never in the relation for any $a \in \mathbf{S}$.
+$aRa$ is never in the relation for any $a \in S$.
 
 ### indexed sequential access method
 ### ISAM
@@ -3834,8 +3834,8 @@ example is a [disk drive]{.term}.
 
 ### permutation
 
-A permutation of a sequence $\mathbf{S}$ is the
-[elements](#element){.term} of $\mathbf{S}$
+A permutation of a sequence $S$ is the
+[elements](#element){.term} of $S$
 arranged in some order.
 
 ### persistent
@@ -3971,9 +3971,9 @@ potential energy.
 
 ### powerset
 
-For a [set]{.term} $\mathbf{S}$, the power
+For a [set]{.term} $S$, the power
 set is the set of all possible [subsets](#subset){.term}
-for $\mathbf{S}$.
+for $S$.
 
 ### PR quadtree
 
@@ -4220,7 +4220,7 @@ middlemost value is sent to be stored in the parent.
 ### proving the contrapositive
 
 We can prove that $P \Rightarrow Q$ by proving
-$(\mathrm{not}\ Q) \Rightarrow (\mathrm{not}\ P)$.
+$(\text{not }Q) \Rightarrow (\text{not }P)$.
 
 ### pseudo polynomial
 
@@ -4480,7 +4480,7 @@ or method.
 ### reflexive
 
 In set notation, binary relation $R$ on set $S$ is reflexive if
-$aRa$ for all $a \in \mathbf{S}$.
+$aRa$ for all $a \in S$.
 
 ### region quadtree
 
@@ -4511,8 +4511,8 @@ expression defines some [regular language]{.term}.
 
 ### relation
 
-In set notation, a relation $R$ over set $\mathbf{S}$ is a set of
-ordered pairs from $\mathbf{S}$.
+In set notation, a relation $R$ over set $S$ is a set of
+ordered pairs from $S$.
 
 ### replacement selection
 
@@ -4829,11 +4829,11 @@ description. Example:   $\{x\ |\ x\ \mbox{is a positive integer}\}$.
 
 ### set product
 
-Written $\mathbf{Q} \times \mathbf{P}$, the set product is a set of
+Written $Q \times P$, the set product is a set of
 ordered pairs such that ordered pair $(a, b)$ is in the product
-whenever $a \in \mathbf{P}$ and $b \in \mathbf{Q}$. For example,
-when $\mathbf{P} = \{2, 3, 5\}$ and $\mathbf{Q} = \{5, 10\}$,
-$\mathbf{Q} \times \mathbf{P} =
+whenever $a \in P$ and $b \in Q$. For example,
+when $P = \{2, 3, 5\}$ and $Q = \{5, 10\}$,
+$Q \times P =
 \{(2, 5),\ (2, 10),\ (3, 5),\ (3, 10),\ (5, 5),\ (5, 10)\}$.
 
 ### shallow copy
@@ -5249,13 +5249,13 @@ from some other class.
 
 ### subgraph
 
-A subgraph $\mathbf{S}$ is formed from [graph]{.term}
-$\mathbf{G}$ by selecting a [subset]{.term}
-$\mathbf{V}_s$ of $\mathbf{G}$'s
-[vertices](#vertex){.term} and a subset $\mathbf{E}_s$
-of $\mathbf{G}$'s [edges](#edge){.term}
-such that for every edge $e \in \mathbf{E}_s$, both vertices of $e$
-are in $\mathbf{V}_s$.
+A subgraph $S$ is formed from [graph]{.term}
+$G$ by selecting a [subset]{.term}
+$V_s$ of $G$'s
+[vertices](#vertex){.term} and a subset $E_s$
+of $G$'s [edges](#edge){.term}
+such that for every edge $e \in E_s$, both vertices of $e$
+are in $V_s$.
 
 ### subset
 
@@ -5308,7 +5308,7 @@ compiler to do its job.
 ### symmetric
 
 In set notation, relation $R$ is symmetric if whenever $aRb$, then
-$bRa$, for all $a, b \in \mathbf{S}$.
+$bRa$, for all $a, b \in S$.
 
 ### symmetric matrix
 
@@ -5444,7 +5444,7 @@ transducer.
 ### transitive
 
 In set notation, relation $R$ is transitive if whenever $aRb$ and
-$bRc$, then $aRc$, for all $a, b, c \in \mathbf{S}$.
+$bRc$, then $aRc$, for all $a, b, c \in S$.
 
 ### transpose
 
@@ -5470,13 +5470,13 @@ in some order.
 
 ### tree
 
-A tree $\mathbf{T}$ is a finite set of one or more
+A tree $T$ is a finite set of one or more
 [nodes](#node){.term} such that there is one
 designated node $R$, called the [root]{.term}
-of $\mathbf{T}$. If the set $(\mathbf{T} -\{R\})$ is
+of $T$. If the set $(T -\{R\})$ is
 not empty, these nodes are partitioned into $n > 0$
-[disjoint sets]{.term} $\mathbf{T}_0$,
-$\mathbf{T}_1$, \..., $\mathbf{T}_{n-1}$, each of which is a tree,
+[disjoint sets]{.term} $T_0$,
+$T_1$, \..., $T_{n-1}$, each of which is a tree,
 and whose [roots](#root){.term}
 $R_1, R_2, ..., R_n$, respectively, are
 [children](#child){.term} of $R$.
