@@ -2,17 +2,14 @@
 # Graphs {#graphs}
 
 Graphs are a very flexible family of data structures used in a wide range of applications. 
-A graph consists of a set of vertices (nodes) and a set of edges, where each edge connects
-two vertices. Here are visual representations of two different graphs, each with four vertices 
-labelled A,B,C, and D). Note that the second graph is carrying data in the edges as well 
-as in the vertices. We will cover all the terminology required to classify these 
-and other graphs in this chapter.
+Like trees, there is no single graph data structure, but rather a family of similar 
+data structures. A graph always consists of a set of vertices (nodes) and a set of 
+edges, where each edge connects two vertices. 
+Here are visual representations of two small graphs.
 
-::: TODO
-- How do you scale this? Also add proper figure with reference.
-:::
 
-![](images/Graphs-examples.svg)
+![Two example graphs, each with four vertices labelled A,B,C, and D. The right one also carries numbers in edges.](images/Graphs-examples.svg){width=60% #fig:GraphExamples} 
+
 
 Graphs are used to model both real-world systems and abstract problems. 
 Modelling a domain as a graph involves considering what 
@@ -33,7 +30,7 @@ small sampling of what graphs can be used to model:
 6.  The memory content of a running object oriented program forms a graph 
     where vertices are objects and edges are references.
 
-The next section covers some basic graph terminology. The
+The next section covers basic graph terminology. The
 rest of the chapter will describe fundamental representations for graphs,
 provide a reference implementation, and cover core graph algorithms
 including [traversal]{.term}, [topological sort]{.term}, [shortest paths]{.term} algorithms, and
