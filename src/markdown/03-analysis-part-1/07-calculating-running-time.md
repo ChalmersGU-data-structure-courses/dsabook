@@ -73,28 +73,17 @@ But regardless of the problems, we will from now on use these simplifying rules
 when discussing the cost for a program or an algorithm.
 
 
-### The complexity hierarchy
+### Complexity classes
 
 We can use the upper bound to define an ordering between complexity classes,
 where we write $O(f)\leq O(g)$ for $f\in O(g)$.
-Using this we can infer the following hierarchy of complexity classes:
+There are infinitely many complexity classes, but the most common ones are the following:
 
-\begin{multline*}
-O(1) < O(\log(n)) < O(\log(n)^2) < O(\sqrt{n}) < O(n) < O(n\log(n)) < \cdots \\
-\cdots < O(n^2) < O(n^2 \log(n)) < O(n^3) < \cdots < O(2^n) < O(10^n) < \cdots < O(n!)
-\end{multline*}
+$$ O(1) < O(\log(n)) < O(n) < O(n \log(n)) < O(n^2) < O(n^2 \log(n)) < O(n^3) < \cdots < O(2^n) < \cdots $$
 
-One interesting consequence of asymptotic complexity is that the base of a logarithm becomes irrelevant:
+Note that we have excluded many many classes, for example $O(\log(n)^2)$ and $O(\sqrt{n})$.
+You can try to figure out where in the hierarchy they should be placed.
 
-$$ O(\log_2(n)) = O(\ln(n)) = O(\log_{10}(n)) $$
-
-So we usually just write $O(\log(n))$.
-The reason why the base is irrelevant is a direct consequence of the logarithm laws.
-
-::: online
-We leave as an exercise to the reader to figure out both the definition of $<$ and why the logarithm base is irrelevant.
-But we will come back to this issue in [Chapter @sec:analysis-part-2].
-:::
 
 ### Analysing code fragments
 
