@@ -5,134 +5,72 @@
 - Prio 1: formal definition
 :::
 
-<!-- START NOTES -->
+Several terms are used to describe the running-time equation for an algorithm.
+The most common term is the [upper bound]{.term} of the growth rate of a function.
+The upper bound is denoted by the big-$O$ notation,
+where $f\in O(g)$ is pronounced "$g$ is an upper bound of $f$".
+This tells us that the function $f$ will not grow faster than the function $g$.
+But what does this mean?
 
-Big-O describes the *upper bound* of the growth rate of a function (such as the time to run an algorithm). This means that big-O tells us that a function *will not grow faster* than some other function. But what does this mean?
+If $g$ is an upper bound of $f$, that is $f\in O(g)$,
+then this means that $f(n) \leq g(n)$ in *the long run*.
+That is, whenever $n$ becomes sufficiently large, $f(n)$ must not outgrow $g(n)$.
 
-If $g$ is an upper bound of $f$, then this should mean something like $f(n) \leq g(n)$ in *the long run*. That is, whenever $n$ becomes sufficiently large, $f(n)$ should not outgrow $g(n)$.
-
-But this is not all there is to it -- we also want to abstract away from constant factors. If algorithm **A** is twice as fast as algorithm **B**, we want to be able to say that they grow at the same rate. So what we actually want to say is that $f(n) \leq k \cdot g(n)$, for some arbitrary constant $k$. This gives us the following formal definition:
-
-- $f \in O(g)$  **if and only if** there are positive numbers $k$ and $n_0$ such that $f(n) \leq k\cdot g(n)$ for all $n > n_0$
-
-If this is the case we say that $g$ is an *upper bound* of $f$.
-
-(The definition is slightly incorrect, but enough for our purposes: the formal definition also uses absolut values $|f(n)|$, but in our setting the functions are always positive (there is no algorithm that uses negative time or space).)
-
-Note that we use set membership, $f \in O(g)$. This is because we view $O(g)$ as the set of all functions $f$ for which the definition holds. And this means that for example $O(5x^2-7x+100\log_2(x)+10^9)$, $O(5x^2)$, and $O(x^2)$ all describe the same set. We will always use the most compact way of describing this set, in this case $O(x^2)$.
-
-#### Big-O and logarithms
-
-One interesting consequence of asymptotic complexity is that the base of a logarithm becomes irrelevant:
-
-$$ O(\log_2(n)) = O(\ln(n)) = O(\log_{10}(n)) $$
-
-The reason for this is that according to the logarithm laws, $\log_b(n) = \log_a(n)\cdot 1/\log_a(b)$. But $1/\log_a(b)$ is a constant which we can ignore inside big-O, so $O(\log_b(n)) = O(\log_a(n))$. Therefore we can just ignore the base and write $O(\log(n))$.
-
-(Note that this does not hold for exponential growth -- e.g., $2^n \in O(10^n)$, but $10^n \notin O(2^n)$.)
-
-Another consequence of the logarithm laws is that it doesn't really matter if you take the logarithm from a linear, quadratic, cubic, or any power function:
-
-$$ O(\log(n)) = O(\log(n^2)) = O(\log(n^3)) = O(\log(n^k)) $$
-
-The reason for this is that $\log(n^k) = k\cdot\log(n)$ according to the logarithm laws, so the exponent $k$ becomes a multiplicative constant and can be ignored.
-
-However, taking the *power* of a logarithm cannot be ignored, so $O(\log(n))$ and $O(\log(n)^2)$ are different complexity classes.
-
-#### Complexity classes and the complexity hierarchy
-
-Big-O classifies all functions and algorithms into *complexity classes*, and these classes form a hierarchy -- the *complexity hierarchy*. There are infinitely many complexity classes, but the most common ones are the following:
-
-$$ O(1) < O(\log(n)) < O(n) < O(n \log(n)) < O(n^2) < O(n^2 \log(n)) < O(n^3) < \cdots < O(2^n) < \cdots $$
-
-Note that I have excluded many many complexity classes, for example $O(\log(n)^2)$ and $O(\sqrt{n})$. You can try to figure out where in the hierarchy they should be placed.
-
-#### Laws for big-O
-
-The definition of big-O only gives an *upper bound* of a function. One effect of this is that $f \in O(g)$ even if $f$ grows *faster* than $g$. For example, if $f$ is logarithmic, we can say that $f \in O(\log(n))$, but it is also true that $f \in O(n)$ or even $f \in O(n^2)$. So the complexity hierarchy above could also be formulated using subset notation:
-
-$$ O(1) \subsetneq O(\log(n)) \subsetneq O(n) \subsetneq O(n \log(n)) \subsetneq O(n^2) \subsetneq \cdots $$
-
-Using the definition the following laws are quite straightforward to prove:
-
-1. **Transitivity**:    if  $f \in O(g)$  and  $g \in O(h)$,  then  $f \in O(h)$
-2. **Constant** $k>0$:  if  $f \in O(g)$, then $k \cdot f \in O(g)$
-3. **Addition**:        if  $f \in O(g)$  and  $f' \in O(g')$, then  $f + f' \in O(\max(g, g'))$
-4. **Multiplication**:  if  $f \in O(g)$  and  $f' \in O(g')$, then  $f \cdot f' \in O(g \cdot g')$
-
-These laws are the basis for our standard complexity analysis of algorithms: a sequence of operations corresponds to addition, a loop corresponds to multiplication, etc.
-
-<!-- END NOTES -->
-
-----------------
-
-Several terms are used to describe the running-time equation for an
-algorithm. These terms -- and their associated symbols -- indicate
-precisely what aspect of the algorithm's behaviour is being described.
-One is the [upper bound]{.term} for the growth
-of the algorithm's running time. It indicates the upper or highest
-growth rate that the algorithm can have.
-
-Because the phrase "has an upper bound to its growth rate of $f(n)$"
-is long and often used when discussing algorithms, we adopt a special
-notation, called [big-$O$ notation]{.term}. If
-the upper bound for an algorithm's growth rate (for, say, the worst
-case) is $f(n)$, then we would write that this algorithm is "in the set
-$O(f(n))$ in the worst case" (or just "in $O(f(n))$ in the worst
-case"). For example, if $n^2$ grows as fast as $T(n)$ (the
-running time of our algorithm) for the worst-case input, we would say
-the algorithm is "in $O(n^2)$ in the worst case".
-
-#### Formal definition
-
-So, how do we define the upper bound?
-First, if $g$ is an upper bound of $f$, then this should mean something like $f(n)\leq g(n)$ *in the long run*.
-What we mean by this is that whenever $n$ becomes sufficiently large, then $f(n)$ should not outgrow $g(n)$.
-
-But this is not all there is to it.
-We have already mentioned that we want to abstract away from constant factors --
-if algorithm $\mathbf{A}$ is twice as fast as algorithm $\mathbf{B}$, then they grow at the same rate, and we want our notation to capture that.
-So what we want to say is that $f(n)\leq k\cdot g(n)$, for some arbitrary constant $k$.
+But this is not all there is to it -- we also want to abstract away from constant factors.
+If one algorithm is twice as fast as another algorithm,
+then they grow at the same rate, and we want our notation to capture that.
+So what we actually want to say is that $f(n) \leq k \cdot g(n)$, for some arbitrary constant $k$.
 This gives us the following formal definition:
 
 Upper bound
 
-: $f\in O(g)$ **iff** there exist positive numbers $k$ and $n_0$ such that $f(n) \leq k\cdot g(n)$ for all $n>n_0$
+:   $f \in O(g)$
+    **if and only if** there are positive numbers $k$ and $n_0$
+    such that $f(n) \leq k\cdot g(n)$ for all $n > n_0$.
 
-The constant $n_0$ is the smallest value of $n$ for which the claim of an upper bound holds true.
-Usually $n_0$ is small, such as 1, but does not need to be.
-You must also be able to pick some constant $k$, but it is irrelevant what the value for $k$ actually is.
-In other words, the definition says that for *all* inputs of the type in question
-(such as the worst case for all inputs of size $n$)
-that are large enough (i.e., $n > n_0$),
-the algorithm *always* executes in less than or equal to $k\cdot g(n)$ steps for some constant $k$.
+If this is the case we say that $g$ is an *upper bound* of $f$.
+
+It is irrelevant what the values $k$ and $n_0$ are in the end
+-- as long as you can find *any* values so that the inequality holds, you have found an upper bound.
+They could be in the order of millions,
+but for most common algorithms the constants $k$ and $n_0$ can be quite small.
+
+Some authors write $f=O(g)$ for the upper bound, but we use set membership, $f \in O(g)$.
+This is because we view $O(g)$ as the set of all functions $f$ for which the definition holds.
+And this means that for example
+$O(x^2)$, $O(5x^2)$, and $O(5x^2-7x+100\log_2(x)+10^9)$, all describe the same set.
+However, we will always use the most compact way of describing this set, in this case $O(x^2)$.
 
 ::: note
-Note that the definition is somewhat simplified, it only works if $f$ and $g$ are *monotonically increasing*.
+The definition is somewhat simplified, it only works if $f$ and $g$ are *monotonically increasing*.
 This means that if $x\leq y$ then $f(x)\leq f(y)$, so the value can never decrease whenever $x$ increases.
-But this is not a real restriction for our purposes, because there are no algorithms that becomes faster when the input size grows.
-In the very best case, the runtime of an algorithm can be independent of the input size, but this is also monotonically increasing.
-If we were to allow any non-monotonic functions, then the definition of upper bound would become slightly more complicated.
-You can look up the formal definition in mathematical textbooks, or in Wikipedia.
+But this is not a real restriction for the purposes of algorithm analysis,
+because there are no algorithms that becomes faster when the input size grows.
+In the very best case, the runtime of an algorithm can be independent of the input size,
+but this is also monotonically increasing.
+The mathematical definition that allows any non-monotonic functions is slightly more complicated,
+and can be found in mathematical textbooks, or in Wikipedia.
 :::
 
 ::: example
 #### Example: Comparing two functions
 
-Assume $f(n) = n(\log(n))^2$ and $g(n) = 0.001\cdot n^2$.
+Assume $f(n) = n\cdot\log(n)^2$ and $g(n) = 0.001\cdot n^2$.
 How can we use the definitions above to prove that $f \in O(g)$?
 
 We have to find positive numbers $k$ and $n_0$ so that $f(n)\leq k\cdot g(n)$.
-Since $g$ has a constant factor of 0.001, we can try with $k=1000$:
+Since $g$ has a constant factor of $0.001$, we can try with $k=1000$:
 
 $$
 k\cdot g(n) = 1000 \cdot 0.001 \cdot n^2 = n^2
 $$
 
-Now we readily see that $f(n) = n(\log(n))^2$ is smaller than $k\cdot g(n) = n^2$ for all $n\geq 1$, so we can set $n_0 = 1$.
+Now we readily see that $f(n) = n\cdot\log(n)^2$ is
+smaller than $k\cdot g(n) = n^2$ for all $n\geq 1$, so we can set $n_0 = 1$.
 
 Note that there are plenty of possible values to choose from, such as $k=1$ and $n_0=13,789$.
-We can even use very large values such as $k=n_0=10^{99}$, since we are only interested in what happens when $n$ grows infinitly large.
+We can even use very large values such as $k=n_0=10^{99}$,
+since we are only interested in what happens when $n$ grows infinitly large.
 :::
 
 <!--
@@ -152,15 +90,15 @@ definition, $T(n)$ is in $O(n)$ for $n_0 = 1$ and $c = c_s$.
 ::: example
 #### Example: Quadratic algorithm
 
-For a particular algorithm, $T(n) = c_1 n^2 + c_2 n$ in the
-average case where $c_1$ and $c_2$ are positive numbers. Then,
+Assume that for a particular algorithm, $T(n) = c n^2 + d n$.
+If both $c$ and $d$ are positive, then this holds for all $n>1$:
 
 $$
-c_1 n^2 + c_2 n \leq c_1 n^2 + c_2 n^2 \leq (c_1 + c_2)n^2
+c n^2 + d n \leq c n^2 + d n^2 \leq (c + d) n^2
 $$
 
-for all $n > 1$. So, $T(n) \leq c n^2$ for $c = c_1 + c_2$, and
-$n_0 = 1$. Therefore, $T(n)$ is in $O(n^2)$ by the definition.
+So, $T(n) \leq k\cdot n^2$ for $k = c + d$, and $n_0 = 1$.
+Therefore, $T(n)\in O(n^2)$ by the definition.
 :::
 
 <!--
@@ -176,39 +114,55 @@ upper bound is in $O(1)$.
 :::
 -->
 
-If someone asked you out of the blue "Who is the best?" your natural
-reaction should be to reply "Best at what?" In the same way, if you
-are asked "What is the growth rate of this algorithm", you would need
-to ask "When? Best case? Average case? Or worst case?" Some algorithms
-have the same behaviour no matter which input instance of a given size
-that they receive. An example is finding the maximum in an array of
-integers. But for many algorithms, it makes a big difference which
-particular input of a given size is involved, such as when searching an
-unsorted array for a particular value. So any statement about the upper
-bound of an algorithm must be in the context of some specific class of
-inputs of size $n$. We measure this upper bound nearly always on the
-best-case, average-case, or worst-case inputs. Thus, we cannot say,
-"this algorithm has an upper bound to its growth rate of $n^2$"
-because that is an incomplete statement. We must say something like,
-"this algorithm has an upper bound to its growth rate of $n^2$ *in the
-average case*".
 
-Knowing that something is in $O(f(n))$ says only how bad things can be.
-Perhaps things are not nearly so bad. Because sequential search is in
-$O(n)$ in the worst case, it is also true to say that sequential search
-is in $O(n^2)$. But sequential search is practical for large $n$ in a
-way that is not true for some other algorithms in $O(n^2)$. We always
-seek to define the running time of an algorithm with the tightest
-(lowest) possible upper bound. Thus, we prefer to say that sequential
-search is in $O(n)$. This also explains why the phrase "is in
-$O(f(n))$" or the notation "$\in O(f(n))$" is used instead of "is
-$O(f(n))$" or "$= O(f(n))$". There is no strict equality to the use
-of big-$O$ notation. $O(n)$ is in $O(n^2)$, but $O(n^2)$ is not in
-$O(n)$.
+### Big-$O$ and logarithms
+
+One interesting consequence of asymptotic complexity is that the base of a logarithm becomes irrelevant:
+
+$$ O(\log_2(n)) = O(\log_e(n)) = O(\log_{10}(n)) $$
+
+The reason for this is that according to the logarithm laws, $\log_b(n) = \log_a(n)\cdot 1/\log_a(b)$.
+But $1/\log_a(b)$ is a constant which we can ignore inside big-$O$, so $O(\log_b(n)) = O(\log_a(n))$.
+Therefore we can just ignore the base and write $O(\log(n))$.
+
+Another consequence of the logarithm laws is that it doesn't really matter
+if you take the logarithm from a linear, quadratic, cubic, or any power function:
+
+$$ O(\log(n)) = O(\log(n^2)) = O(\log(n^3)) = O(\log(n^k)) $$
+
+The reason for this is that $\log(n^k) = k\cdot\log(n)$ according to the logarithm laws,
+so the exponent $k$ becomes a multiplicative constant and can be ignored.
+
+However, taking the *power* of a logarithm cannot be ignored,
+so $O(\log(n))$ and $O(\log(n)^2)$ are different complexity classes.
+
+
+### The complexity hierarchy
+
+Big-$O$ classifies all functions and algorithms into *complexity classes*,
+and these classes form a hierarchy -- the *complexity hierarchy*.
+
+\begin{multline*}
+O(1) < O(\log(n)) < O(\log(n)^2) < O(\sqrt{n}) < O(n) < O(n\log(n)) < \cdots \\
+\cdots < O(n^2) < O(n^2 \log(n)) < O(n^3) < \cdots < O(2^n) < O(10^n) < \cdots < O(n!)
+\end{multline*}
+
+The definition of big-O only gives an *upper bound* of a function.
+One effect of this is that $f\in O(g)$ even if $f$ grows *faster* than $g$.
+For example, binary search is a logarithmic algorithm, $O(\log(n))$,
+but it is also true to say that binary search is in $O(n)$ or even in $O(n^2)$.
+So the complexity hierarchy above could also be formulated using subset notation:
+
+$$ O(1) \subset O(\log(n)) \subset O(n) \subsetneq O(n \log(n)) \subsetneq O(n^2) \subsetneq \cdots $$
+
+However, we always seek to describe the complexity of an algorithm using
+the tightest (lowest) possible upper bound.
+Thus, we will always say that binary search is in $O(\log(n))$.
+
 
 ### Simplifying rules
 
-We introduced simplifying rules in @sec:simplification-rules, but repeat them here in compact form:
+Using the definition the simplifying rules from @sec:simplification-rules are quite straightforward to prove:
 
      Rule              Simplification
 ---  ----------------  -------------------------------------------------------------------
@@ -226,55 +180,48 @@ We introduced simplifying rules in @sec:simplification-rules, but repeat them he
 Using these rules we can easily determine the asymptotic growth rate for many algorithms.
 
 - Rule (2) says that any constant-time operation is $O(1)$.
-- Rule (3) says that if you have a sequence of statements, you only need to consider the most expensive statement: $O(\max(f_1,\ldots,f_k))$.
-- Rule (4) says that if you have a loop that repeats a statement $p$ a number of times, the total cost is the cost of $p$ times the number of iterations: $O(n\cdot f)$.
-- Rule (2) also says that if you repeat a statement $p$ a *constant* number of times, you can treat it as you only execute $p$ once.
-
-### big-$O$ and logarithms
-
-One interesting consequence of asymptotic complexity is that the base of a logarithm becomes irrelevant:
-
-$$ O(\log_2(n)) = O(\ln(n)) = O(\log_{10}(n)) $$
-
-The reason for this is that according to the logarithm laws, $\log_b(n) = \log_a(n) \cdot 1/\log_a(b)$.
-But $1/\log_a(b)$ is a constant which we can ignore, so $O(\log_b(n)) = O(\log_a(n))$.
-Therefore we can just ignore the base and write $O(\log(n))$.
-(Note that this *does not* hold for exponential growth -- e.g., $2^n\in O(10^n)$, but $10^n\not\in O(2^n)$.)
-
-Another consequence of the logarithm laws is that it doesn't really matter if you take the logarithm from a linear, quadratic, cubic, or any power function:
-
-$$ O(\log(n)) = O(\log(n^2)) = O(\log(n^3)) = O(\log(n^k)) $$
-
-The reason for this is that $\log(n^k) = k\cdot\log(n)$ according to the logarithm laws, so the exponent $k$ becomes a multiplicative constant and can be ignored.
-However, taking the power of a logarithm cannot be ignored, so $O(\log(n))$ and $O(\log(n)^2)$ are different complexity classes.
+- Rule (3) says that if you have a sequence of statements,
+  you only need to consider the most expensive statement: $O(\max(f_1,\ldots,f_k))$.
+- Rule (4) says that if you have a loop that repeats a statement $p$ a number of times $n$,
+  the total cost is the cost of $p$ times the number of iterations: $O(n\cdot f)$.
+- Rule (2) also says that if you repeat a statement $p$ a *constant* number of times,
+  you can treat it as you only execute $p$ once.
 
 
 ### Recursive functions
 
-Determining the execution time of a recursive subroutine can be
-difficult. The running time for a recursive subroutine is typically best
-expressed by a [recurrence relation]{.term}. For example, the recursive factorial
-function calls itself with a value one less than its input value. The
-result of this recursive call is then multiplied by the input value,
-which takes constant time. Thus, the cost of the factorial function, if
-we wish to measure cost in terms of the number of multiplication
-operations, is one more than the number of multiplications made by the
-recursive call on the smaller input. Because the base case does no
-multiplications, its cost is constant. Thus, the running time for this
-function can be expressed as
+Determining the execution time of a recursive function can be difficult.
+This is typically best expressed by a [recurrence relation]{.term}.
+
+For example, the recursive version of binary search calls itself
+with an interval that is half the size of its input interval.
+Apart from the recursive call, the function makes some constant time work.
+We can model this as the following recurrence relation,
+where $T(1)=1$ denotes the constant time work of the base case:
 
 \begin{align*}
-T(n) &= T(n-1) + 1, \textrm{ for } n>1 \\
+T(n) &= T(n/2) + 1, \mbox{ for } n>1 \\
 T(1) &= 1
 \end{align*}
 
-The closed-form solution for this recurrence relation is $O(n)$.
+Another example is Mergesort, which calls itself *twice* with an halved interval.
+After the recursive calls it merges the results, which takes linear time.
+This gives the following recurrence relation:
+
+\begin{align*}
+T(n) &= 2\cdot T(n/2) + n, \mbox{ for } n>1 \\
+T(1) &= 1
+\end{align*}
+
+The closed-form solutions for these recurrence relations are
+$O(\log(n))$ and $O(n\log(n))$, respectievly.
 Recurrence relations are discussed further in @sec:recur-relations.
+
 
 ### Advanced algorithm analysis
 
-The rules of thumb above do not always give the tightest possible complexity.
-In some (rare) cases the simple analysis might give a complexity of say $O(n \log(n))$,
+The simplification rules from above do not always give the tightest possible complexity.
+In some rare cases the simple analysis might give a complexity of say $O(n \log(n))$,
 but a more detailed analysis will give a tighter bound, such as $O(n)$.
 So, is there something wrong with the rules?
 
@@ -284,36 +231,35 @@ Recall that every function $f\in O(n)$ is also in $O(n\log(n))$, since $O(n) < O
 :::: example
 #### Example: A nested loop with linear complexity
 
-If we take the non-quadratic example above and just do a very small change, we get a completely different complexity.
+Recall the non-quadratic nested loop in @sec:alg-analysis-examples.
+If we just change the inner `for`-loop a little bit we get
+the following nested loop, which has a nontrivial complexity:
 
-    sum2 = 0
+    sum = 0
     k = 1
-    while k <= n:            // Do log(n) times.
-        for j in 0 .. k-1:   // Do k times.
-            sum2 = sum2 + 1
+    while k <= n:          // Do log(n) times.
+        for j in 1 .. k:   // Do k times.
+            sum = sum + 1
         k = k * 2
 
-The only difference is that the inner loop runs $k$ times, instead of $n$ times.
-The rules of thumb gives us the same complexity as before, $O(n \log(n))$, but a more careful analysis reveals a tighter bound.
+Since $k$ is multiplied by 2 in each iteration, the outer `while`-loop runs $\log(n)$ times.
+But the inner `for`-loop then runs $k$ times,
+and since $k\in O(n)$ the simplification rules tell us that the code is in $O(n\log(n))$.
+But a more careful analysis reveals a tighter bound.
 
-The outer loop is executed $\log(n+1)$ times, and the inner loop has cost $k$, which doubles each time.
-This can be expressed as the following summation, where $n$ is assumed to be a power of two and again $k = 2^i$.
+If we assume that $n=2^d$ is a power of two, then the outer loop is executed $d=\log_2(n)$ times.
+The inner loop has cost $k$, which starts from 1 and doubles after each outer loop iteration.
+This can be expressed as the following summation, where $k = 2^i$:
 
-$$
-1 + 2 + 4 + \cdots + \log(n) = \sum_{i=0}^{\log(n)} 2^i
-$$
+$$ 1 + 2 + 4 + \cdots + 2^d = \sum_{i=0}^{d} 2^i $$
 
-Now, as mentioned in @sec:mathematical-preliminaries, this summation has a closed form solution
-$2^{\log(n) + 1} - 1 = 2n - 1$.
-So, the complexity of the code fragment above is actually linear, $O(n)$, and not linearithmic.
+Now, this is a well-known summation with the following solution:
+
+$$ 2^{k+1} - 1 = 2^{\log_2(n)+1} - 1 = 2n - 1 $$
+
+So, the code fragment above is actually linear, $O(n)$, and not linearithmic.
 
 Note that this is an exception where the simple analysis rules do not give a tight enough bound.
 But in almost all cases the rules work fine, and when they don't it's usually only by a logarithmic factor.
-(And as we all know, logarithmic factors are not that big a deal when it comes to computational complexity.)
+(And as we already know, logarithmic factors are not that big a deal when it comes to computational complexity.)
 ::::
-
-<!-- TODO
-We need to think about a technique for visualising the running time of
-some loop constructs. This can be very similar to how we visualise
-reaching the closed form solution of summations.
--->
