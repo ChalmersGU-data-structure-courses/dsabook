@@ -1,5 +1,5 @@
 
-# Sorting, part 1 {#sorting-part-1 latex="Sorting, part 1: \mbox{Simple algorithms}"}
+# Sorting, part 1 {#sorting-part-1}
 
 We have seen that, when an array is sorted in ascending order, *binary
 search* can be used to find items in it efficiently. But what about when
