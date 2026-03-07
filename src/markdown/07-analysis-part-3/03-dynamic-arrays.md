@@ -1,58 +1,59 @@
 
 ## Case study: Analysing dynamic arrays {#analysing-dynamic-arrays}
 
-Dynamic arrays, as discussed in @sec:dynamic-arrays, are a flexible data structure that efficiently manages collections of elements whose size may change over time.
-Unlike fixed-size arrays, dynamic arrays automatically resize themselves to accommodate additional elements, making them especially useful when the total number of elements is not known in advance.
+Dynamic arrays were discussed in @sec:dynamic-arrays, and is a data structure that behaves just like a normal array,
+but where size may change over time.
+A dynamic array has a underlying *backing array* which is a normal fixed-size array.
+When the backing array becomes full it resizes to a larger fixed-size array.
 
-In this case study, we will analyse the time and memory complexity of dynamic arrays, with a particular focus on the operation of adding an element. This operation is central to understanding dynamic arrays because:
+In section @sec:dynamic-arrays we alreay showed that the key insight is to not increase the size by a constant,
+but instead *multiply* with some factor.
+If we do this, then the amortised complexity of appending an element to the array is constant, $O(1)$.
+In this section we will use the accounting method to show the same thing.
 
-- Retrieving an element by index is identical to regular arrays and operates in constant time.
-- Removing an element involves similar considerations as inserting, particularly regarding shifting elements, so we will not cover it separately here.
+The main operation of interest is *append*, which increases the size of the dynamic array by one.
+All other operations (that is, getting and setting values at a certain index)
+are directly mapped to the backing array, and therefore we can assume that they are constant time.
 
-#### Complexity of adding an element to a dynamic array
+### Doubling the array size
 
-Let us first consider adding an element at the end of a dynamic array.
-In most cases, this operation is efficient, as it simply places the new element in the next available position in the internal array and takes constant time.
-However, when the array is full, it must resize itself to accommodate the new element.
-This resizing involves allocating a new array, typically twice the size of the original, copying all existing elements to this new array, and then inserting the new element.
-This step is more expensive and takes linear time in the number of elements.
-The amortised time complexity of appending arises from this pattern: although individual operations may occasionally be costly, the overall cost of performing many appends remains low, averaging out to constant time per operation.
+When we append to the array, there are two possibilities:
 
-To illustrate this, consider a dynamic array that starts with a capacity of 1. When you append the first element, it fits perfectly.
-The next time you append, the array is full, so it resizes to a capacity of 2, copying the existing element.
-The next append fills this new capacity, leading to another resize to 4, and so on.
-Each time the array resizes, it doubles its capacity and copies all existing elements to the new array.
-This means that the number of elements copied during a resize operation grows as follows:
+- In most cases the backing array is not full, and then the only thing we do is to
+  increase the *size* variable of the dynamic array.
+  Let us assume that this "fast" append takes 1 unit of time.
 
-- 1 element copied when resizing from 1 to 2,
-- 2 elements copied when resizing from 2 to 4,
-- 4 elements copied when resizing from 4 to 8,
-- and so on.
+- Now and then the backing array becomes full and we have to resize,
+  and for now we assume that we simply *double* the size.
+  If the size of the full backing array is $n$, we will create a new backing array of size $2n$,
+  and then copy all $n$ elements over from the old to the new array.
+  The main cost is to copy the elements, so a "slow" append costs $n$ time units.
 
-The total number of elements copied during all these resizes can be summed up as follows:
+To pay for the slow appends, we pretend that the every fast append will cost 3 time units instead of one.
+One unit is used for the actual time it takes, and the additional 2 units are saved in our account.
+So, after performing $n$ fast appends our account contains $2n$ time units.
 
-$$
-1 + 2 + 4 + \ldots + n = 2n - 1
-$$
+Now, assume that we start with a dynamic array of size $n$, and an empty account.
+Since the account is empty, our last append operation cannot have been a fast one.
+Therefore the backing array must have been newly resized to size $2n$, and it is populated with $n$ elements.
+This means that we can perform $n$ fast appends until we need to resize it again.
+So, when it is time to resize we have $2n$ time units in our account, and a backing array of size $2n$.
+Now it's time to resize the backing array again:
+we have to copy all our $2n$ elements, but this is exactly what we have in our account!
+So the amortised cost of resizing is constant, because we used our savings for this.
+After the resize we have a half-full array and an empty account, again.
 
-where $n$ is the final size of the array.
-This means that the total cost of copying elements during all resizes is proportional to the final size of the array $n$.
-So, while a single append operation may take linear time due to resizing, the average time per append operation across many appends is _constant_.
-This is because the expensive operations (the resizes) are infrequent compared to the many inexpensive appends that do not require resizing.
-Thus, the *amortised time complexity* for appending an element to a dynamic array is $O(1)$, meaning that on average, each append operation takes constant time.
+The important things to note are that we never get a negative amount in our account,
+and that we can always use our savings to resize the backing array.
 
-The above analysis assumes that we add an element at the end of the dynamic array.
-If we consider adding an element at the beginning or in the middle of the array, the situation changes significantly.
-In these cases, the dynamic array must shift existing elements to make space for the new element.
-This shifting operation takes linear time in the number of elements, as each element must be moved one position to the right.
-Therefore, inserting an element at the beginning or in the middle of a dynamic array has a time complexity of $O(n)$, where $n$ is the number of elements in the array.
-This is an important point to consider when choosing a data structure for a specific use case.
+### Resizing by any constant factor
 
-#### Memory complexity of dynamic arrays
+What if we don't double the size of the backing array,
+but instead multiply with another constant factor $k>1$?
+This means that if the backing array has size $n$, it will be resized to size $kn$.
 
-The memory complexity of dynamic arrays is also an important aspect to consider.
-When a dynamic array resizes, it typically allocates a new array that is _larger_ than the current one.
-The memory used by a dynamic array is proportional to its capacity, not just the number of elements it currently holds.
-Thus, the memory complexity of a dynamic array is $O(n)$, where $n$ is the current number of elements in the array.
-This can lead to situations where the dynamic array uses more memory than strictly necessary.
-
+The argument above still holds, but the pretended cost for the fast append should be $1+\frac{k}{k-1}$ instead of 3.
+This means that every fast append will save $\frac{k}{k-1}$ time units in our account.
+After appending $(k-1)n$ elements, the backing array is full again,
+and then our account contains $(k-1)n\cdot\frac{k}{k-1} = kn$ time units.
+This is exactly what we need to pay for the resize.
