@@ -539,45 +539,7 @@ $T(n) = 2T(n/2) + 5n^2$; $T(1) = 7$.
 ```
 :::
 
-<!--
-::: TODO
-- We haven't introduced heaps yet - so this should move to later
-:::
 
-::: example
-#### Example: Building a heap
-
-Our next example models the cost of the algorithm to build a heap. You
-should recall that to build a [heap](#heaps),
-we first heapify the two subheaps, then push down the root
-to its proper position. The cost is:
-
-$$
-f(n) \leq 2f(n/2) + 2 \log(n)
-$$
-
-Let us find a closed form solution for this recurrence. We can expand
-the recurrence a few times to see that
-
-\begin{align*}
-f(n) &\leq  2f(n/2) + 2 \log(n) \\
-     &\leq  2[2f(n/4) + 2 \log(n/2)] + 2 \log(n) \\
-     &\leq  2[2(2f(n/8) + 2 \log(n/4)) + 2 \log(n/2)] + 2 \log(n)
-\end{align*}
-
-We can deduce from this expansion that this recurrence is equivalent to
-following summation and its derivation:
-
-\begin{align*}
-f(n)  &\leq  \sum_{i=0}^{\log(n) -1} 2^{i+1} \log(n/2^i) \\
-      &=  2 \sum_{i=0}^{\log(n) -1} 2^i (\log(n) - i) \\
-      &=  2 \log(n) \sum_{i=0}^{\log(n) -1} 2^i - 4 \sum_{i=0}^{\log(n) -1} i 2^{i-1} \\
-      &=  2 n \log(n) - 2 \log(n) - 2 n \log(n) + 4n -4 \\
-      &=  4n - 2 \log(n) - 4
-\end{align*}
-
-:::
--->
 
 ### Divide-and-conquer recurrences
 
