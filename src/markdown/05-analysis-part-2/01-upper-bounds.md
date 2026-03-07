@@ -200,7 +200,7 @@ We can model this as the following recurrence relation,
 where $T(1)=1$ denotes the constant time work of the base case:
 
 \begin{align*}
-T(n) &= T(n/2) + 1, \mbox{ for } n>1 \\
+T(n) &= T(n/2) + 1, \text{ for } n>1 \\
 T(1) &= 1
 \end{align*}
 
@@ -209,7 +209,7 @@ After the recursive calls it merges the results, which takes linear time.
 This gives the following recurrence relation:
 
 \begin{align*}
-T(n) &= 2\cdot T(n/2) + n, \mbox{ for } n>1 \\
+T(n) &= 2\cdot T(n/2) + n, \text{ for } n>1 \\
 T(1) &= 1
 \end{align*}
 

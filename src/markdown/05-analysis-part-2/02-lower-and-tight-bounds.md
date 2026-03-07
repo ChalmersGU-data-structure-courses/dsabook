@@ -98,8 +98,8 @@ Assume a particular algorithm has the following behaviour:
 $$
 T(n) =
 \left\{ \begin{array}{ll}
-    n  & \mbox{for all odd}\ n \\
-    n^2/100 \;& \mbox{for all even}\ n
+    n  & \text{for all odd } n \\
+    n^2/100 \;& \text{for all even } n
 \end{array} \right.
 $$
 
