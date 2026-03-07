@@ -25,7 +25,7 @@ The following table shows the symbols commonly used to express sets and their re
 
 -----------------------------------  -------------------------------------------------------------------------------
 $\{1, 4\}$                           A set composed of the members 1 and 4
-$\{x ~|~ x\ \mbox{is prime}\}$       A set definition using a set comprehension (e.g., the set of all primes)
+$\{x ~|~ x \text{ is prime}\}$       A set definition using a set comprehension (e.g., the set of all primes)
 $x\in P$                             $x$ is a member of $P$
 $x\notin P$                          $x$ is not a member of set $P$
 $\emptyset$                          The null or empty set
@@ -492,8 +492,8 @@ Here is a list of useful summations, along with their closed-form solutions.
 \sum_{i = 1}^{n} i &= \frac{n (n+1)}{2} \\
 \sum_{i = 1}^{n} i^2 &= \frac{2 n^3 + 3 n^2 + n}{6} = \frac{n(2n + 1)(n + 1)}{6} \\
 \sum_{i = 1}^{\log(n)} n &= n \log(n) \\
-\sum_{i = 0}^\infty a^i &= \frac{1}{1-a}  ~~~ \mbox{if} \ 0 < a < 1 \\
-\sum_{i = 0}^{n} a^i &= \frac{a^{n+1} - 1}{a - 1}  ~~~ \mbox{if} \ a \neq 1
+\sum_{i = 0}^\infty a^i &= \frac{1}{1-a}  ~~~ \text{if } 0 < a < 1 \\
+\sum_{i = 0}^{n} a^i &= \frac{a^{n+1} - 1}{a - 1}  ~~~ \text{if } a \neq 1
 \end{align*}
 
 As special cases to the last summation, we have the following two:
@@ -541,23 +541,23 @@ A [recurrence relation]{.term} defines a function by means of an expression that
 A classic example is the recursive definition for the factorial function:
 
 $$
-n! = (n-1)! \cdot n ~~~ \mbox{for}\ n>1; \quad 1! = 0! = 1.
+n! = (n-1)! \cdot n ~~~ \text{for } n>1; \quad 1! = 0! = 1.
 $$
 
 Another standard example of a recurrence is the Fibonacci sequence:
 
 $$
-\mbox{Fib}(n) = \mbox{Fib}(n-1) + \mbox{Fib}(n-2) ~~~ \mbox{for}\ n>2;
-\quad\mbox{Fib}(1) = \mbox{Fib}(2) = 1.
+\text{Fib}(n) = \text{Fib}(n-1) + \text{Fib}(n-2) ~~~ \text{for } n>2;
+\quad\text{Fib}(1) = \text{Fib}(2) = 1.
 $$
 
 From this definition, the first seven numbers of the Fibonacci sequence are
 
 $$
-1, 1, 2, 3, 5, 8,\ \mbox{and}\ 13.
+1, 1, 2, 3, 5, 8, \text{ and } 13.
 $$
 
-Notice that this definition contains two parts: the general definition for $\mbox{Fib}(n)$ and the base cases for $\mbox{Fib}(1)$ and $\mbox{Fib}(2)$.
+Notice that this definition contains two parts: the general definition for $\text{Fib}(n)$ and the base cases for $\text{Fib}(1)$ and $\text{Fib}(2)$.
 Likewise, the definition for factorial contains a recursive part and base cases.
 
 Recurrence relations are often used to model the cost of recursive functions.
@@ -565,7 +565,7 @@ For example, the number of multiplications required by a recursive version of th
 This can be defined using the following recurrence:
 
 $$
-T(n) = T(n-1) + 1 ~~~ \mbox{for}\ n>1;
+T(n) = T(n-1) + 1 ~~~ \text{for } n>1;
 \quad T(0) = T(1) = 0.
 $$
 

@@ -95,7 +95,7 @@ When we want to analyse the complexity of code fragments, the following three ru
   has the complexity $O(\max(f_1,f_2,f_3))$,
   where $p_i\in O(f_i)$
 
-- An **iteration**, $\langle\mbox{for}\ x \in A: p\rangle$,
+- An **iteration**, $\langle\text{for } x \in A: p\rangle$,
   has the complexity $n\cdot O(f) = O(n\cdot f)$,
   where $n=|A|$ and $p\in O(f)$
 
@@ -136,19 +136,19 @@ What if we perform some operation $p\in O(f)$ for each element in an array $A$, 
 It depends on the size of the array: if we assume that the array has $n$ elements, what is the complexity of the following loop?
 
 $$
-\mbox{for}\ x \in A: p
+\text{for } x \in A: p
 $$
 
 The loop performs $p$ once for every element in $A$, meaning that $p$ will be executed $n$ times.
 Therefore the complexity of a loop is:
 
 $$
-\langle\mbox{for}\ x \in A: p\rangle \in n\cdot O(f) = O(n\cdot f)
+\langle\text{for } x \in A: p\rangle \in n\cdot O(f) = O(n\cdot f)
 $$
 
 Note that $p$ can be a complex operation, for example a loop itself.
 If $p$ is a simple loop over A, with a constant-time operation in its body, then $p\in O(n)$.
-And then the outer loop $\langle \mbox{for}\ x \in A: p\rangle$ will be in $n\cdot O(n) = O(n^2)$.
+And then the outer loop $\langle\text{for } x \in A: p\rangle$ will be in $n\cdot O(n) = O(n^2)$.
 
 *Don't be fooled by loops*!
 Not all loops runs $n$ iterations, for example our array $A$ could very well consist of $n^2$ elements,

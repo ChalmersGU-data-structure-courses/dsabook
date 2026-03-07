@@ -4824,8 +4824,8 @@ or [elements](#element){.term}.
 
 ### set former
 
-A way to define the membership of a set, by using a text
-description. Example:   $\{x\ |\ x\ \mbox{is a positive integer}\}$.
+A way to define the membership of a set, by using a text description. Example:
+$\{x\ |\ x \text{ is a positive integer}\}$.
 
 ### set product
 
