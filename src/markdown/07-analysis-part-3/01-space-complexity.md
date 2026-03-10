@@ -48,11 +48,13 @@ kept to a minimum while allowing maximum access. The need to maintain a
 balance between these opposing goals is what makes the study of data
 structures so interesting.
 
+<!--
 :::::: latex
 \booklink{Read the rest online}{7.1}{sec:space-complexity-of-data-structures}
 ::::::
 
 :::::: online
+-->
 
 ::: example
 #### Example: Integers
@@ -110,7 +112,7 @@ So, the average space usage will be $O(n) + n\cdot O(k) = O(n) + O(n) = O(n)$.
 With this new representation we could reduce the space complexity from quadratic $O(n^2)$ to linear $O(n)$.
 :::
 
-::::::
+<!-- :::::: -->
 
 ### Space complexity of algorithms
 
