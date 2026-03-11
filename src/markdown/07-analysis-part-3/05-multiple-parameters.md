@@ -51,7 +51,7 @@ Matrix representation
 
 Array of lists
 
-:   Now we have an array $F'$ of size $n$, which in turn maps to a list of people.
+:   Now we have a size $n$ array $F'$ such that $F'[i]$ is a list of the people that person $i$ is friends with.
     We still need the array $P$ for looking up the index of a person.
 
     To test if $a$ and $b$ are friends, we find the index $i$ of person $a$, which is logarithmic in $n$.
@@ -68,48 +68,37 @@ a picture. Pictures are often represented by a two-dimensional array,
 and a pixel is one cell in the array. The value of a pixel is either the
 code value for the colour, or a value for the intensity of the picture at
 that pixel. Assume that each pixel can take any integer value in the
-range 0 to $C - 1$. The problem is to find the number of pixels of each
+range 0 to $c-1$. The problem is to find the number of pixels of each
 colour value and then sort the colour values with respect to the number of
 times each value appears in the picture. Assume that the picture is a
-rectangle with $P$ pixels. A pseudocode algorithm to solve the problem
+rectangle with $p$ pixels. A pseudocode algorithm to solve the problem
 follows.
 
-    // Initialise the counts:
-    for i in 0 .. C-1:
+
+    for i in 0 .. c-1:    // Initialise the counts.
         count[i] = 0
-    // Increment the pixel value count for each of the pixels:
-    for i in 0 .. P-1:
+    for i in 0 .. p-1:    // Increment the colour value count for each pixel.
         count[value(i)] = count[value(i)]+1
-    // Sort the pixel value counts:
-    sort(count)
+    sort(count)           // Sort the pixel value counts.
 
-In this example, `count` is an array of size `C` that stores the number
-of pixels for each colour value. Function `value(i)` returns the colour
-value for pixel $i$.
+In this example, `count` is an array of size $c$ that stores the number of pixels for each colour value.
+The function `value` returns the colour value for a pixel $i$.
 
-The time for the first `for` loop (which initialises `count`) is based
-on the number of colours, $C$. The time for the second loop (which
-determines the number of pixels with each colour) is $O(P)$. The
-time for the final line, the call to `sort`, depends on the cost of the
-sorting algorithm used. We will assume that the sorting algorithm has
-cost $O(P \log(P))$ if $P$ items are sorted, thus yielding
-$O(P \log(P))$ as the total algorithm cost.
+The time for the first `for`-loop (which initialises `count`) is linear in the number of colours, $O(c)$.
+The time for the second loop (which determines the number of pixels with each colour) is $O(p)$.
+The time for the final line, the call to `sort`, depends on the cost of the sorting algorithm used.
+If we assume that we use a linearithmic algorithm such as Mergesort, it costs $O(c\log(c))$.
 
-Is this a good representation for the cost of this algorithm? What is
-actually being sorted? It is not the pixels, but rather the colours. What
-if $C$ is much smaller than $P$? Then the estimate of $O(P \log(P))$
-is pessimistic, because much fewer than $P$ items are being sorted.
-Instead, we should use $P$ as our analysis variable for steps that look
-at each pixel, and $C$ as our analysis variable for steps that look at
-colours. Then we get $O(C)$ for the initialisation loop, $O(P)$
-for the pixel count loop, and $O(C \log(C))$ for the sorting
-operation. This yields a total cost of $O(P + C \log(C))$.
+So the final complexity of pseudocode depends on both $p$ and $c$, and can be written as $p + c\log(c)$.
+Which takes the longest time -- the linear part (incrementing the colour values), or the linearithmic part (sorting)?
+This depends on the size of the image ($p$), compared to the range of colour values ($c$).
+For example, a normal GIF-image has $c=256$ possible colours, and perhaps $1000\times 1000$ pixels.
+So $p$ is in the order of a million, which is much larger than $c\log(c)$, so in this case the $O(p)$ part will dominate.
 
-Why can we not simply use the value of $C$ for input size and say that
-the cost of the algorithm is $O(C \log(C))$? Because, $C$ is
-typically much less than $P$. For example, a picture might have 1000
-$\times$ 1000 pixels and a range of 256 possible colours. So, $P$ is one
-million, which is much larger than $C \log(C)$. But, if $P$ is smaller,
-or $C$ larger (even if it is still less than $P$), then $C \log(C)$ can
-become the larger quantity. Thus, neither variable should be ignored.
+On the other hand, a high-definition image can have $2^16$ values for red, green and blue, which gives $c=(2^16)^3$.
+Even it has a very high resolution of say $100,000\times 50,000$ (that is, $p\approx (2^16)^2$),
+then $c$ will still be much larger than $p$.
+So for a high-resolution, high-definition image, the time for sorting, $O(c\log c)$ will dominate.
+
+Therefore, neither variable should be ignored in the complexity analysis of the algorithm.
 :::
