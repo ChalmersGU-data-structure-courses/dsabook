@@ -5,6 +5,8 @@
 - Prio 2: update text, (semi)formal definitions
 :::
 
+
+
 <!-- START NOTES -->
 
 There are two main ways of implementing graphs:

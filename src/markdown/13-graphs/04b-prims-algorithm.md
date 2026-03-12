@@ -1,8 +1,8 @@
 
-## Prim's MST algorithm {#prims-algorithm}
+### Prim's MST algorithm {#prims-algorithm}
 
 ::: TODO
-- Prio 2: reformulate as a generic graph search algorithm
+- Rewrite to start from Dijkstra's
 :::
 
 <!-- START NOTES -->

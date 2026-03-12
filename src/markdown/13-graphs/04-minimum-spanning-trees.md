@@ -1,5 +1,5 @@
 
-## Minimum spanning trees
+## Minimum spanning trees and Prim's algorithm
 
 ::: TODO
 - Prio 2: add use cases

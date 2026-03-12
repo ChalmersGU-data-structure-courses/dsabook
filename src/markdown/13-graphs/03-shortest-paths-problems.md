@@ -1,5 +1,5 @@
 
-## Shortest-paths problems
+## Shortest-paths problems and Dijkstra's algorithm
 
 ::: TODO
 - Prio 2: introduction, discussing

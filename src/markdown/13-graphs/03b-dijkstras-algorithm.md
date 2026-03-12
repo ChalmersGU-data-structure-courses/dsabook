@@ -1,11 +1,8 @@
 
-## Dijkstra's shortest-path algorithm {#dijkstras-algorithm}
+### Dijkstra's shortest-path algorithm {#dijkstras-algorithm}
 
 ::: TODO
-- Prio 2:
-    - use the generic graph search algorithm
-    - aka uniform-cost search
-- Prio 2: simplify code
+- Rewrite to go from DFS instead of Prims
 :::
 
 <!-- START NOTES -->
