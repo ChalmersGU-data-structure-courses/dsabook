@@ -19,13 +19,12 @@ the current element is inserted in turn at the correct position within a
 sorted list composed of those elements already processed. Here is an
 implementation.
 
-    function insertionSort(arr):
-        n = arr.size
-        for i in 1 .. n-1:
-            // Move the i'th element to its correct position.
-            j = i
-            while j > 0 and arr[j] < arr[j-1]:
-                swap(arr, j, j-1)
+    function insertionSort(array):
+        n = array.size
+        for i in 1 .. n-1:                           // Put the i'th element in its correct position:
+            j = i                                    //     Start at the end of the sorted part
+            while j > 0 and array[j] < array[j-1]:   //     Go backwards until we find the position:
+                swap(array, j, j-1)                  //         Move the element one step forward
                 j = j-1
 
 The input is an array named `arr` that stores $n$ elements.

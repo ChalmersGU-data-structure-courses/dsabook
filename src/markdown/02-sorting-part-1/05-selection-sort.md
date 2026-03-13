@@ -23,16 +23,14 @@ In other words, Selection sort first finds the smallest element in an unsorted l
 Its unique feature is that there are few swaps, much fewer than Bubble sort.
 To find the next-smallest element we have to search through the entire unsorted portion of the array, but only one swap is required to put the element into place.
 
-Here is an implementation for Selection sort.
-
-    function selectionSort(arr):
-        n = arr.size
-        for i in 0 .. n-1:                  // Select i'th smallest element
-            minIndex = i                    // Current smallest index
-            for j in i+1 .. n-1:            // Find the smallest value
-                if arr[j] < arr[minIndex]:  // Found something smaller
-                    minIndex = j            // Remember smaller index
-            swap(arr, i, minIndex)          // Put it into place
+    function selectionSort(array):
+        n = array.size
+        for i in 0 .. n-1:                      // Select the i'th smallest element:
+            minIndex = i                        //     Current smallest index
+            for j in i+1 .. n-1:                //     Find the smallest value:
+                if array[j] < array[minIndex]:  //         Found something smaller:
+                    minIndex = j                //             Remember the smaller index
+            swap(array, i, minIndex)            //     Put the smallest value into place
 
 Any algorithm can be written in slightly different ways.
 For example, we could have written Selection sort to find the largest element and put it at the end of the array, then the next

@@ -23,13 +23,12 @@ Likewise, each succeeding pass through the array compares adjacent
 elements, looking at one less element toward the end than in the
 preceding pass. Here is an implementation:
 
-    function bubbleSort(arr):
-        n = arr.size
-        for i in 0 .. n-2:
-            // Bubble up the i'th element
-            for j in 1 .. n-i-1:
-                if arr[j-1] > arr[j]:
-                    swap(arr, j-1, j)
+    function bubbleSort(array):
+        n = array.size
+        for i in 0 .. n-1:                   // Bubble up the i'th element:
+            for j in 1 .. n-i-1:             //     Go through the unsorted part:
+                if array[j-1] > array[j]:    //          Two neighbours are out of order:
+                    swap(array, j-1, j)      //              Swap them with each other
 
 
 ::::: online :::::

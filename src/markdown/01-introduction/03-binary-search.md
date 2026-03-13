@@ -24,11 +24,11 @@ go through each book at the time and see if it's the right one.
 This algorithm is called *sequential search*, because you look at each book in sequence.
 Here is a simple implementation:
 
-    function sequentialSearch(arr, val):
-        for i in 0 .. arr.size - 1:   // For each element in arr,
-            if arr[i] == val:         //     if we found it
-                return i              //         return this position.
-        return null                   // Otherwise, return null
+    function sequentialSearch(array, key):
+        for i in 0 .. array.size - 1:   // For each element in array:
+            if array[i] == key:         //     If we found the search key:
+                return i                //         return this position
+        return null                     // Otherwise, return null
 
 Now imagine that the bookshelf is actually a whole library
 (the British Library has more than 200 million catalogued items).
@@ -84,17 +84,17 @@ and we can only search for the same key that it is sorted after.
 So if the array is sorted by author, we cannot use binary search to search for a book title.
 Here is how you can implement the algorithm in pseudocode:
 
-    function binarySearch(arr, val):
-        low = 0                          // The lower marker, pointing to the first element in the interval.
-        high = arr.size - 1              // The upper marker, pointing to the lasat element in the interval.
-        while low <= high:               // Continue until the interval is empty.
-            mid = (low + high) / 2       // Find the index of the middle value.
-            if arr[mid] < val:           // Compare with the middle value in the interval.
-                low = mid + 1            // What we search for is in the upper half.
-            else if arr[mid] > val:
-                high = mid - 1           // What we search for is in the lower half.
+    function binarySearch(array, key):
+        low = 0                          // The lower marker, pointing to the first element in the interval
+        high = array.size - 1            // The upper marker, pointing to the lasat element in the interval
+        while low <= high:               // Continue until the interval is empty:
+            mid = (low + high) / 2       //     Find the index of the middle value
+            if array[mid] < key:         //     Compare with the middle value in the interval:
+                low = mid + 1            //         The search key is in the upper half
+            else if array[mid] > key:
+                high = mid - 1           //         The search key is in the lower half
             else:
-                return mid               // We found what we searched for!
+                return mid               //         We found the search key!
         return null                      // The value is not in the array.
 
 An important implementation detail is how to implement the markers.
