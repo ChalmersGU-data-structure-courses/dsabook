@@ -1,27 +1,20 @@
 
 ## Bubble sort
 
-::: TODO
-- Prio 3: write about invariants
-:::
-
-Our first sorting algorithm is called [Bubble sort]{.term}.
 Bubble sort is often the first sorting algorithm that you learn, because it is relatively easy to understand and implement.
-However, it is rather slow, even compared to the other quadratic sorting algorithms that we will introduce in the next sections -- [Selection sort]{.term} and [Insertion sort]{.term}.
-It's not even particularly intuitive -- nobody is going to come naturally to Bubble sort as a way to sort their bookshelf, their Bridge hand or their pile of bills, like they might with Insertion sort or Selection sort.
+However, it is rather slow, even compared to the other similar algorithms, Selection sort and Insertion sort.
+(It is not even particularly intuitive -- nobody is going to come naturally to Bubble sort as a way to sort their bookshelf,
+their Bridge hand or their pile of bills, like they might with Insertion sort or Selection sort.)
 
 Bubble sort consists of a simple double `for` loop.
 The inner `for` loop moves through the array from left to right, comparing adjacent elements.
 If an element is greater than its right neighbour, then the two are swapped.
-Once the largest element is encountered, this process will
-cause it to "bubble" up to the right of the array (which is where
-Bubble sort gets its name). The second pass through the array repeats
-this process. However, because we know that the largest
-element already reached the right of the array on the first pass, there is
-no need to compare the rightmost two elements on the second pass.
-Likewise, each succeeding pass through the array compares adjacent
-elements, looking at one less element toward the end than in the
-preceding pass. Here is an implementation:
+Once the largest element is encountered, it will "bubble" up to the right of the array (hence the name, Bubble sort).
+The second pass through the array repeats this process.
+However, because we know that the largest element already reached the right of the array on the first pass,
+there is no need to compare the rightmost two elements on the second pass.
+Likewise, each succeeding pass through the array compares adjacent elements,
+looking at one less element toward the end than in the preceding pass.
 
     function bubbleSort(array):
         n = array.size
@@ -80,14 +73,12 @@ Now try for yourself to see if you understand how Bubble sort works.
 
 ::::::::::
 
-<!--
-### Invariants
--->
 
-### Bubble sort analysis
+### Analysis of Bubble sort
 
 How long time does it take to Bubble sort an array of $n$ elements?
-As already mentioned in @sec:comparing-algorithms this depends on many things, but a standard measure is to count the number of comparisons.
+As already mentioned in @sec:comparing-algorithms this depends on many things,
+but a standard measure is to count the number of comparisons.
 So how many comparisons are done by Bubble sort?
 
 We have a nested for loop, where the inner loop depends on the loop variable of the outer loop.
@@ -101,10 +92,13 @@ $$
 (n-1) + (n-2) + \cdots + 1  =  \sum_{i=1}^{n-1} i  =  \frac{1}{2} n (n-1)
 $$
 
-As we will learn later (in @sec:growth-rates), we usually discard constant factors, and instead we are interested in the general "growth rate" of an algorithm.
-And since $n(n-1)$ is very close to $n^2$, we say that the number of comparisons grows *quadratically* with the size of the array.
+As we will learn later (in @sec:growth-rates), we usually discard constant factors,
+and instead we are interested in the general "growth rate" of an algorithm.
+And since $n(n-1)$ is very close to $n^2$,
+we say that the number of comparisons grows *quadratically* with the size of the array.
 
-Note that this is regardless of how the initial array looks like -- Bubble sort always uses the same number of comparisons.
+Note that this is regardless of how the initial array looks like
+-- Bubble sort always uses the same number of comparisons.
 
 ::: dsvis
 The following visualisation illustrates the running time analysis of Bubble sort.
@@ -113,7 +107,10 @@ The following visualisation illustrates the running time analysis of Bubble sort
 ```
 :::
 
-If we instead want to know how many swaps that are required, this depends on how often an element is less than the one immediately preceding it in the array.
+If we instead want to know how many swaps that are required,
+this depends on how often an element is less than the one immediately preceding it in the array.
 In the worst case this will happen in every single comparison, leading to the same number of swaps, *quadratic*.
-If we assume that the initial array is random, we can expect that about half of the comparisons will lead to a swap, which is also quadratic (recall that constant factors don't matter).
-However, if the initial array is already sorted we don't have to perform any swaps at all -- but we should never rely on the best case anyway, so this doesn't give much information.
+If we assume that the initial array is random, we can expect that about half of the comparisons will lead to a swap,
+which is also quadratic (recall that constant factors don't matter).
+However, if the initial array is already sorted we will not perform any swaps at all
+-- but we should never rely on the best case, so this doesn't give us much interesting information.

@@ -16,11 +16,10 @@ are to move around. Sorting is also one of the most frequently performed
 computing tasks. We might sort the records in a database so that we can
 search the collection efficiently. We might sort customer records by zip
 code so that when we print an advertisement we can then mail them more
-cheaply. We might use sorting to help an algorithm to solve some other
-problem. For example, [Kruskal's algorithm]{.term} to find
-[minimum spanning trees]{.term}
-must sort the edges of a graph by their lengths before it
-can process them.
+cheaply. We might use sorting to help an algorithm to solve some other problem.
+For example, [Kruskal's algorithm]{.term} is described in @sec:kruskal-algorithm.
+It builds [minimum spanning trees]{.term} and
+must sort the edges of a graph by their lengths before it can process them.
 
 Because sorting is so important, naturally it has been studied
 intensively and many algorithms have been devised. Some of these
@@ -62,5 +61,5 @@ This is usually done by a [comparator]{.term} (in Java), or by a [key function](
 
 The following chapters cover several standard algorithms appropriate for sorting a collection of records.
 In these chapters we concentrate on *natural sorting*, but all the algorithms work just as well for *key-based sorting* -- and we trust that you are a mature enough programmer to be able to infer how to do this.
-This chapter discusses three simple, but relatively slow, algorithms that require [quadratic](#quadratic-growth-rate){.term} time in the size of the array.
-[Chapter @sec:sorting-part-2] then presents two algorithms with considerably better performance, with [linearithmic](#linearithmic-growth-rate){.term} worst-case or average-case running time.
+This chapter discusses three simple algorithms that work well on small arrays, and
+[Chapter @sec:sorting-part-2] presents two algorithms with considerably better performance on large arrays.

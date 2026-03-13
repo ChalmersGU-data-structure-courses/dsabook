@@ -1,23 +1,21 @@
 
 ## Insertion sort
 
-::: TODO
-- Prio 3: write about invariants
-:::
 
 Consider again the problem of sorting a pile of books.
 Another intuitive approach might be to pick up the two topmost books in the pile and put them in order in the bookshelf.
-Then you take another book from the pile and put it in the bookshelf, in the correct position with respect to the first two, and so on.
+Then you take another book from the pile and put it in the bookshelf,
+in the correct position with respect to the first two, and so on.
 As you take each book, you would add it in the bookshelf in the correct position to always keep the shelf sorted.
 This simple approach is the inspiration for our third sorting algorithm, called [Insertion sort]{.term}.
 
 Just as for Selection sort, the description above is not in-place.
-But just as for Selection sort, it's relatively easy to turn it into an in-place algorithm, by remembering an invisible separator between the sorted books (on the left) and the still-unsorted books (on the right).
+But just as for Selection sort, it's relatively easy to turn it into an in-place algorithm,
+by remembering an invisible separator between the sorted books (on the left) and the still-unsorted books (on the right).
 
-Insertion sort iterates through a list of elements. For each iteration,
-the current element is inserted in turn at the correct position within a
-sorted list composed of those elements already processed. Here is an
-implementation.
+Insertion sort iterates through a list of elements.
+For each iteration, the current element is inserted in turn
+at the correct position within a sorted list composed of those elements already processed.
 
     function insertionSort(array):
         n = array.size
@@ -27,7 +25,6 @@ implementation.
                 swap(array, j, j-1)                  //         Move the element one step forward
                 j = j-1
 
-The input is an array named `arr` that stores $n$ elements.
 
 :::::::: online
 #### Insertion sort visualisation
@@ -60,9 +57,6 @@ Now try for yourself to see if you understand how Insertion sort works.
 
 ::::::::
 
-<!--
-### Invariants
--->
 
 ### Insertion sort analysis
 
@@ -74,7 +68,9 @@ Just as for the previous sorting algorithms, we have a nested for loop, where th
     - in the best case, the element is already in place, and then we only need one comparison
 
 Therefore, in the worst case the number of comparisons is $\sum_0^n i$, which is quadratic just like Bubble sort and Selection sort.
-In the best case -- when the list is already sorted -- the number of comparisons is instead linear, because we only have to do one comparison per iteration.
+In the best case -- when the list is already sorted -- we only have to do one comparison per iteration,
+so the number of comparisons is proportional to the size of the array.
+Counting swaps instead of comparisions yields the same results, because each iteration of the inner `while`-loop does both a comparison and a swap.
 
 ::: dsvis
 Here is an explanation of the worst case cost of Insertion sort.
@@ -90,45 +86,21 @@ And here is an explanation of the cost of the best case.
 ```
 :::
 
-While the best case is significantly faster than the worst case, the worst case is usually a more reliable indicator of the "typical" running time.
-However, there are situations where we
-can expect the input to be in sorted or nearly sorted order. One example
-is when an already sorted list is slightly disordered by a small number
-of additions to the list; restoring sorted order using Insertion sort
-might be a good idea if we know that the disordering is slight. And even
-when the input is not perfectly sorted, Insertion sort's cost goes up
-in proportion to the number of inversions. So a "nearly sorted" list
-will always be cheap to sort with Insertion sort.
-An example of an algorithm that take advantage of Insertion sort's near-best-case running time is [Shellsort]{.term}.
-
-Counting comparisons or swaps yields similar results. Each time through
-the inner `for` loop yields both a comparison and a swap, except the
-last (i.e., the comparison that fails the inner `for` loop's test),
-which has no swap. Thus, the number of swaps for the entire sort
-operation is $n-1$ less than the number of comparisons.
-This is 0 in the best case, and quadratc in the worst case.
+While the best case is significantly faster than the worst case,
+the worst case is usually a more reliable indicator of the "typical" running time.
+However, there are situations where we can expect the input to be in sorted or nearly sorted order.
+One example is when an already sorted list is slightly disordered by a small number of additions to the list;
+restoring sorted order using Insertion sort might be a good idea if we know that the disordering is slight.
+So a "nearly sorted" list will always be cheap to sort with Insertion sort.
+An example of an algorithm that take advantage of the near-best-case running time of Insertion sort is [Shellsort]{.term}.
 
 Later we will see algorithms whose worst case growth rate is much better than quadratic.
-Thus for larger arrays, Insertion sort will not be so
-good a performer as other algorithms. So Insertion sort is not the best
-sorting algorithm to use in most situations. But there are special
-situations where it is ideal. We already know that Insertion sort works
-great when the input is sorted or nearly so. Another good time to use
-Insertion sort is when the array is very small, since Insertion sort is
-so simple. The algorithms that have better asymptotic growth rates tend
-to be more complicated, which leads to larger constant factors in their
-running time. That means they typically need fewer comparisons for
-larger arrays, but they cost more per comparison. This observation might
-not seem that helpful, since even an algorithm with high cost per
-comparison will be fast on small input sizes. But there are times when
-we might need to do many, many sorts on very small arrays. You should
-spend some time right now trying to think of a situation where you will
-need to sort many small arrays. Actually, it happens a lot.
-
-<!--
-See [Computational Fairy Tales: Why Tailors Use Insertion Sort][FAIRYTALES] for a discussion on how the relative costs of
-search and insert can affect what is the best sort algorithm to use.
-
-[FAIRYTALES]: http://computationaltales.blogspot.com/2011/04/why-tailors-use-insertion-sort.html
--->
-
+Thus for larger arrays, Insertion sort will not be so good a performer as other algorithms.
+So Insertion sort is not the best sorting algorithm to use in most situations.
+But there are special situations where it is ideal.
+We already know that Insertion sort works great when the input is sorted or nearly so.
+Another good time to use Insertion sort is when the array is very small, since the algorithm is so simple.
+The algorithms that have better asymptotic growth rates tend to be more complicated,
+meaning that they typically need fewer comparisons for larger arrays, but they cost more per comparison.
+One very common optimisation for these more complicated algorithms is to introduce a *cutoff*,
+so that when the array to be sorted is small eonugh we switch to Insertion sort (or Selection sort).

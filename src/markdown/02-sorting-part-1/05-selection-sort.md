@@ -1,15 +1,13 @@
 
 ## Selection sort
 
-::: TODO
-- Prio 3: write about invariants
-:::
-
 Let's say you have a large pile of books that you want to put in your bookshelf, in alphabetical order by author's surname.
 How would you go about?
-One natural way to do handle this is to look through the pile until you find the first book (say, by an author named *Ajvide*), and put that first in the bookshelf.
-Then you look through the remaining pile until you find the second book (written by *Bengtsdotter*), and add that behind *Ajvide*.
-Then find the third book (by *Cassler*), and add behind *Bengtsdotter*.
+One natural way to do handle this is to look through the pile until you find the first book
+(say, by an author named *Alakoski*), and put that first in the bookshelf.
+Then you look through the remaining pile until you find the second book
+(written by *Beskow*), and add that behind *Alakoski*.
+Then find the third book (by *Carlberg*), and add behind *Beskow*.
 Proceed through the shrinking pile of books to select the next one in order until you are done.
 This is the inspiration for our next sorting algorithm, called [Selection sort]{.term}.
 
@@ -21,7 +19,8 @@ Whenever we have found the next book to put in place, we *swap* it with the book
 The $i$'th pass of Selection sort "selects" the $i$'th smallest element in the array, placing it at position $i$ in the array.
 In other words, Selection sort first finds the smallest element in an unsorted list, then the next smallest, and so on.
 Its unique feature is that there are few swaps, much fewer than Bubble sort.
-To find the next-smallest element we have to search through the entire unsorted portion of the array, but only one swap is required to put the element into place.
+To find the next-smallest element we have to search through the entire unsorted portion of the array,
+but only one swap is required to put the element into place.
 
     function selectionSort(array):
         n = array.size
@@ -33,9 +32,11 @@ To find the next-smallest element we have to search through the entire unsorted 
             swap(array, i, minIndex)            //     Put the smallest value into place
 
 Any algorithm can be written in slightly different ways.
-For example, we could have written Selection sort to find the largest element and put it at the end of the array, then the next
-smallest, and so on.
-That version of Selection sort would behave very similar to our Bubble sort implementation, except that rather than repeatedly swapping adjacent values to get the next-largest element into place, it instead remembers the position of the element to be selected and does one swap at the end.
+For example, we could have written Selection sort to
+find the largest element and put it at the end of the array, then the next smallest, and so on.
+That version of Selection sort would behave very similar to our Bubble sort implementation,
+except that rather than repeatedly swapping adjacent values to get the next-largest element into place,
+it instead remembers the position of the element to be selected and does one swap at the end.
 
 :::::::: online
 #### Selection sort visualisation
@@ -74,9 +75,6 @@ Now try for yourself to see if you understand how Selection sort works.
 
 ::::::::
 
-<!--
-### Invariants
--->
 
 ### Selection sort analysis
 
@@ -99,19 +97,3 @@ This visualisation analyses the number of comparisons and swaps required by Sele
 ```
 :::
 
-<!-- The following is only interesting for low-level languages (e.g. C), other languages do this by default, so we skip it.
-
-There is another approach to keeping the cost of swapping records low,
-and it can be used by any sorting algorithm even when the records are
-large. This is to have each element of the array store a pointer to a
-record rather than store the record itself. In this implementation, a
-swap operation need only exchange the pointer values. The large records
-do not need to move. This technique is illustrated by the following
-visualisation. Additional space is needed to store the pointers, but the
-return is a faster swap operation.
-
-:::: {#PointerSwap}
-``` {.jsav-animation src="Sorting/ptrSwapCON.js" links="Sorting/ptrSwapCON.css" name="Selection Sort Pointer Swap"}
-```
-::::
--->

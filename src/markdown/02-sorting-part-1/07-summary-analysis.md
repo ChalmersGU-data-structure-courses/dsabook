@@ -1,32 +1,6 @@
 
 ## Summary analysis of basic sorting algorithms
 
-<!-- START NOTES -->
-
-So, are Selection and Insertion sort stable, adaptive, and/or in-place?
-
-- *Both are in-place*, which can be seen from the standard implementations.
-- *Insertion sort is adaptive*: if the list is already sorted, then the inner loop will quit immediately. So Insertion sort is *linear* when the list is sorted. It is also much faster if the input is almost sorted, so very good adaptivity.
-- *Selection sort is not adaptive*: the inner loop always has to look at all unsorted elements to find the minimal one, so the number of iterations never change depending on the structure of the input (it only depends on the input size).
-- *Insertion sort is stable*: each element moves backwards but never switch places with an equal element.
-- *But Selection sort is not stable*: a counter-example is the following array: [5, 3, 5, 1, 5].
-
-Here is an explanation why Selection sort is not stable.
-
-Assume that we want to sort the following list of names, by the family name initial:
-
-[ Ada L, Grace H, Barbara L, Adele G, Hedy L ]
-
-In the first iteration we find the smallest initial (Adele G), and swaps with the first name (Ada L). After this we have:
-
-[ Adele G, Grace H, Barbara L, Ada L, Hedy L ]
-
-Notice now that the list has become sorted by the initial, but Ada L was swapped in between Barbara L and Hedy L. When we continue the sorting the internal order between these three will not change, because the list is already sorted -- so this will also be the final result. So Selection sort changed the order between the three names with equal initials.
-
-<!-- END NOTES -->
-
------------------
-
 How can we categorise our three sorting algorithms according to the terminology that we introduced in @sec:terminology-and-notation?
 
 In-place
@@ -38,13 +12,14 @@ Stability
     Therefore the relative order of equal elements will be preserved.
 
     However, Selection sort is not stable, and this is because it can swap over long distances.
-    For example, if we Selection sort the array [2,2,1], then the first swap (putting 1 into the first position) will change the relative order between the first and the second 2.
+    See the example below for an explanation why it is not stable.
 
 Adaptivity
-:   Insertion sort is *adaptive*, because its best-case complexity is better than its worst-case.
+:   Insertion sort is *adaptive*, because its best-case behaviour is much better than its worst-case.
     If the list is almost sorted, Insertion sort is way much faster than if the list is completely unsorted.
 
-    Bubble sort and Selection sort however, are not adaptive -- they are always quadratic regardless of the input array.
+    Bubble sort and Selection sort however, are not adaptive
+    -- they always perform the same number of comparisons regardless of the input array.
 
 Here is a summary table of the categorisations.
 
@@ -57,7 +32,8 @@ Adaptive?         no            no            yes
 
 Here is a summary table for the cost of Bubble sort, Selection sort, and Insertion sort,
 in terms of their required number of comparisons and swaps in the best and worst cases.
-The $O$-notation will be explained in later @sec:asymptotic-analysis, but for now it suffices that $O(n^2)$ means a quadratic growth rate while $O(n)$ means a linear growth rate.
+The $O$-notation will be explained later, in @sec:asymptotic-analysis,
+but for now it suffices that $O(n^2)$ means a quadratic growth rate while $O(n)$ means a linear growth rate.
 
             &nbsp;    Bubble      Selection      Insertion
 ------------------ ------------ -------------  -------------
@@ -68,7 +44,27 @@ The $O$-notation will be explained in later @sec:asymptotic-analysis, but for no
          Best case      $0$        $O(n)$           $0$
         Worst case   $O(n^2)$      $O(n)$        $O(n^2)$
 
-The important takeaway from this table is that each of these sorts has a quadratic runtime behaviour in the worst case.
+The important takeaway from this table is that each of these sorts has a *quadratic* runtime behaviour in the worst case.
+
+::: example
+#### Example: Why Selection sort is not stable
+
+Here is an explanation why Selection sort is not stable.
+Assume that we want to sort the following list of names, by the family name initial:
+
+> [ Ada L, Grace H, Barbara L, Adele G, Hedy L ]
+
+In the first iteration we find the smallest initial (Adele G), and swaps with the first name (Ada L).
+After this we have:
+
+> [ Adele G, Grace H, Barbara L, Ada L, Hedy L ]
+
+Notice now that the list has become sorted by the initial, but Ada L was swapped in between Barbara L and Hedy L.
+When we continue the sorting the internal order between these three will not change, because the list is already sorted
+-- and this will also be the final result.
+So Selection sort changed the order between the three names with equal initials.
+:::
+
 
 
 ### Inversions and the reason for the quadratic behaviour
