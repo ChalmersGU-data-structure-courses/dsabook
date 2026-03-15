@@ -27,13 +27,13 @@ In a minimum priority queue, the smallest element has the highest priority, wher
 #### Applications of priority queues
 
 Priority queues are particularly useful when tasks must be processed according to their urgency or importance rather than their arrival time.
-One example is resource management.
-Suppose several processes need access to a shared resource, such as CPU time.Each process may have a priority level, and the scheduler must always choose the highest-priority process next.
+One example is resource management: suppose several processes need access to a shared resource, such as CPU time.
+Each process may have a priority level, and the scheduler must always choose the highest-priority process next.
 
 Another example is a hospital emergency room system.
 Patients arrive at different times, but they are not necessarily treated in that order.
 Instead, patients with the most severe conditions are treated first.
-A priority queue can efficiently manage this kind of situation.
+A priority queue can be used to efficiently manage this kind of situation.
 
 #### Designing an efficient priority queue
 
@@ -54,7 +54,7 @@ Using a sorted array:
 
 :   In @sec:priority-queues we introduced priority queues and discussed how to implement them using sorted lists.
     The smallest element is always located at the beginning of the array.
-    Finding the minimum therefore takes O(1) time.
+    Finding the minimum therefore takes $O(1)$ time.
     However, insertion becomes expensive because the new element must be inserted at the correct position, which requires shifting elements.
 
     * Insert: $O(n)$
@@ -65,7 +65,7 @@ Using a sorted array:
 
 Using a reverse-sorted array:
 
-:   A slight improvement is to store elements in reverse sorted order, so the smallest element appears at the end of the array.
+:   A slight improvement is to store elements in _reverse sorted order_, so the smallest element appears at the end of the array.
     This allows deletion of the smallest element to be very efficient:
 
     * Insert: $O(n)$ (must still insert in correct position)
