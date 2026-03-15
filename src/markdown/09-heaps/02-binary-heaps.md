@@ -1,8 +1,41 @@
+## Heaps
+
+To achieve efficient implementations of priority queues, we use a data structure called a heap.
+The key idea behind heaps is that the element with the highest priority is always kept at the root of the tree.
+
+A heap organizes elements in a tree structure, but not every tree qualifies as a heap.
+The tree must satisfy a specific invariant known as the heap property.
+In general, a [heap]{.term} is a tree that satisfies the following rule:
+
+::: example
+#### The heap property
+
+Every node in the tree has at least as high priority as all of its children.
+:::
+
+This property guarantees that the element with the highest priority is always located at the root of the tree.
+As a result, we can access it immediately, which means that the operation `getMin` can always be performed in constant time.
+
+In the remainder of this chapter, we will use the terms 'highest priority' and 'smallest element' interchangeably, since we will primarily consider minimum priority queues, where the smallest element has the highest priority.
+
+The heap property is particularly suitable because it aligns well with the recursive nature of trees.
+Instead of requiring only the root to be the smallest element, the property is enforced locally at every node in the tree.
+Each node must be smaller than its children, and because this rule applies recursively throughout the structure, the root must necessarily be the smallest element in the entire tree.
+Designing invariants that apply uniformly to every node is often a useful strategy when working with tree-based data structures.
+
+The next question is how to implement heaps in a way that keeps operations efficient.
+In fact, there are several different heap structures, each with its own advantages and trade-offs.
+Examples include leftist heaps, skew heaps, Fibonacci heaps, binomial heaps, and 2–3 heaps, among others.
+Some of these structures are designed to support efficient merging of heaps, which will be discussed later in Section X.
+
+In this chapter, however, we focus on the most fundamental heap implementation: the _binary heap_.
 
 ## Binary heaps
 
 This section presents the [binary heap]{.term} data structure.
 In addition to being a *heap*, meaning that it satisfies the heap property, it is also a [complete binary tree]{.term}.
+
+What makes binary heaps particularly practical is that the tree can be stored directly in an array, which makes the structure both simple and space-efficient.
 
 Recall that complete binary trees have all levels except the bottom filled out completely, and the bottom level has all of its nodes filled in from left to right.
 Thus, a complete binary tree of $n$ nodes has only _one_ possible shape.
