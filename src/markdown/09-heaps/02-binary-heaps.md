@@ -32,31 +32,33 @@ In this chapter, however, we focus on the most fundamental heap implementation: 
 
 ## Binary heaps
 
-This section presents the [binary heap]{.term} data structure.
-In addition to being a *heap*, meaning that it satisfies the heap property, it is also a [complete binary tree]{.term}.
+The [binary heap]{.term} is a data structure that can be used to implement an efficient priority queue.
+It is organized as a tree that satisfies the heap property and has an additional invariant: it must also be a [complete binary tree]{.term}.
 
-What makes binary heaps particularly practical is that the tree can be stored directly in an array, which makes the structure both simple and space-efficient.
+Recall that a complete binary tree has all levels completely filled except possibly the last, and the last level is filled from left to right.
+As a result, a complete binary tree with $n$ nodes has exactly one possible shape.
+Because of this structure, the height $h$ of the tree satisfies: $2^h \le n \le 2^{h+1} - 1$, which implies that the height is $O(\log n)$.
+Complete binary trees are therefore balanced, and any operation that takes time proportional to the height of the tree runs in $O(\log n)$ time.
 
-Recall that complete binary trees have all levels except the bottom filled out completely, and the bottom level has all of its nodes filled in from left to right.
-Thus, a complete binary tree of $n$ nodes has only _one_ possible shape.
-You might think that a complete binary tree is such an unusual occurrence that there is no reason to develop a special implementation for it.
-However, it has two very nice properties:
+Using a complete tree has several advantages:
 
-- its height is *logarithmic* in the number of nodes
-- it can be stored in an array, so it is very *space-efficient*
+* It ensures that the tree remains balanced after adding an element to the tree.
+* A new element can only be placed in one specific position—the next available spot on the lowest level—so we do not need to decide where to insert it.
+* The tree can be stored directly in an array, making the implementation simple and space-efficient.
 
 ### Representing complete binary trees as arrays
 
-Since there is exactly one representation of a complete binary tree, we can take advantage of this and store it, maybe surprisingly, in an array.
-In contrast to other representations of binary trees, we don't need to include pointers to the children or parent nodes.
-This allows for a simple, compact implementation for [complete binary trees]{.term}.
-Instead of pointers, we can use simple calculations to find the array indices of the children or the parent of a given node.
+Since a complete binary tree has exactly one possible shape for a given number of nodes, we can take advantage of this structure and store it—perhaps surprisingly—directly in an array.
+Unlike other binary tree representations, we do not need explicit pointers to parent or child nodes.
+This leads to a simple and compact implementation of [complete binary trees]{.term}.
+Instead of pointers, the positions of a node’s parent and children can be determined using simple index calculations.
 
-To represent a complete binary tree in an array, we assign a unique array index to each node based on its position in the tree.
-We number the nodes level by level, starting from the root at the top and moving left to right within each level.
+To represent a complete binary tree in an array, we assign a unique array index to each node according to its position in the tree.
+The nodes are numbered level by level, starting at the root and proceeding from left to right within each level.
 The root node is assigned index 0, its left child index 1, its right child index 2, and so on.
-This systematic numbering ensures that each node's position in the array directly corresponds to its logical position in the tree, making it easy to compute the indices of parent and child nodes using simple arithmetic.
-@Fig:example_complete_bintree shows an example of a complete binary tree with 12 nodes, where the nodes are numbered according to this scheme.
+This systematic numbering ensures that a node’s position in the array directly corresponds to its logical position in the tree.
+As a result, the indices of a node’s parent and children can be computed easily using simple arithmetic.
+@Fig:example_complete_bintree illustrates this scheme with a complete binary tree containing 12 nodes.
 
 ::: {.jsav-figure #fig:example_complete_bintree}
 ```
@@ -78,11 +80,15 @@ bt.layout();
 av.displayInit();
 av.recorded();
 ```
-Complete binary tree node numbering
+Complete binary tree node numbering.
 :::
 
-An array can store the data values of the tree efficiently, placing each value in the array position corresponding to that node's position within the tree.
-For example, the binary heap in @fig:HeapTreeExample is represented in an array as in @fig:HeapArrayExample.
+
+An array can store the values of a complete binary tree efficiently by placing each value at the array index corresponding to the node's position in the tree.
+If the tree is traversed level by level, the nodes are visited in increasing index order: $0, 1, 2, \ldots, n-1$.
+In other words, the nodes of the tree are stored in the array level by level, with each level appearing consecutively.
+
+Consider the binary heap shown in @fig:HeapTreeExample:
 
 ::: {.jsav-figure #fig:HeapTreeExample}
 ```
@@ -104,9 +110,11 @@ bt.layout();
 av.displayInit();
 av.recorded();
 ```
-An example binary *min*-heap, where a smaller value indicates a higher priority.
+An example binary heap, where a smaller value indicates a higher priority.
 The node containing the value "28" is highlighted, its parent has the value "17" and the children are "75" and "47".
 :::
+
+This tree can be stored in an array as shown in @fig:HeapArrayExample:
 
 ::: {.jsav-figure #fig:HeapArrayExample}
 ```
@@ -153,10 +161,8 @@ You can use simple formulas to compute the array index of a node's relatives in 
 - $\text{parent}(i) = \left\lfloor \frac{i - 1}{2} \right\rfloor$ (if $i \neq 0$)
 - $\text{left\_child}(i) = 2i + 1$ (if $2i + 1 < n$)
 - $\text{right\_child}(i) = 2i + 2$ (if $2i + 2 < n$)
-- $\text{left\_sibling}(i) = i - 1$ (if $i$ is even and $i \neq 0$)
-- $\text{right\_sibling}(i) = i + 1$ (if $i$ is odd and $i + 1 < n$)
 
-For example, the left child of node 1 (which contains value L) is at index $2 \cdot 1 + 1 = 3$.
+For example, the left child of node at position 4 (which contains the value 28) is at index $2 \cdot 4 + 1 = 9$ (which contains the value 75).
 
 ::: dsvis
 Here is a practice exercise for calculating the array indices of nodes.
@@ -167,25 +173,24 @@ Here is a practice exercise for calculating the array indices of nodes.
 
 ### Implementing binary heaps
 
-Be sure not to confuse the logical representation of a heap with its
-physical implementation by means of the array-based complete binary
-tree. The two are not synonymous because the logical view of the heap is
-actually a tree structure, while the typical physical implementation
-uses an array.
+It is important not to confuse the logical representation of a heap with its physical implementation. 
+Logically, a heap is a tree structure that satisfies the heap property. 
+In practice, however, it is implemented using an array that represents a complete binary tree.
 
-Here is an implementation for *min*-heaps. It uses a
-dynamic array (see @sec:dynamic-arrays)
-that will resize automatically when the number of elements change.
+When describing heap operations, we will usually explain them in terms of tree operations, since this makes the behavior of the algorithms easier to understand conceptually. 
+Nevertheless, it is useful to remember that in an actual implementation these operations are carried out using array indices and array updates, rather than explicit tree pointers.
+
+We present an implementation for *min*-heaps. 
+It uses a dynamic array (see @sec:dynamic-arrays) that will resize automatically when the number of elements change.
 
     datatype MinHeap implements PriorityQueue:
         heap = new Array(10)  // 10 is the initial capacity.
         size = 0              // The initial heap contains 0 elements.
 
-Note that, because we use an array to store the heap, we indicate the nodes by their logical position within the heap rather than by a pointer to the node.
-In practice, the logical heap position corresponds to the identically numbered physical position in the array.
+Note that because the heap is stored in an array, we refer to nodes by their logical position in the heap rather than by pointers to node objects.
+In practice, this logical position corresponds directly to the same index in the underlying array, so the node’s position in the heap and its position in the array are identical.
 
-Since it is a heap, we know that the first element always contains the element with the highest priority:
-\
+Since the structure satisfies the heap property, the element at index 0, the root of a non-empty heap, always contains the element with the highest priority.
 
     datatype MinHeap implements PriorityQueue:
         ...
@@ -193,9 +198,7 @@ Since it is a heap, we know that the first element always contains the element w
             if size > 0:
                 return heap[0]
 
-The datatype contains some private auxiliary methods that are used when adding and removing elements from the heap:
-`isLeaf` tells if a position represents a leaf in the tree, while
-`getLeftChild`, `getRightChild` and `getParent` return the position for the left child, right child, and parent of the position passed, respectively.
+The datatype contains some private auxiliary methods that are used when adding and removing elements from the heap: `isLeaf` tells if a position represents a leaf in the tree, while `getLeftChild`, `getRightChild` and `getParent` return the position for the left child, right child, and parent of the position passed, respectively.
 
     datatype MinHeap:
         ...
@@ -215,6 +218,7 @@ We also need an auxiliary method for swapping two elements in the heap.
         swap(i, j):
             heap[i], heap[j] = heap[j], heap[i]
 
+<!--
 Finally, since we use a dynamic array we have to be able to resize the internal array.
 This is explained in further detail in @sec:dynamic-arrays.
 
@@ -226,9 +230,15 @@ This is explained in further detail in @sec:dynamic-arrays.
             for i in 0 .. size-1:
                 heap[i] = oldHeap[i]
 
+AG: we don't need to resize, we use a dynamic array.
+
+-->
 
 <!--
 ### Invariants
+
+No need to check completeness, since we can't have 'holes' in an array.
+
 -->
 
 ### Inserting into a heap
