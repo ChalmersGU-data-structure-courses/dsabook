@@ -83,7 +83,6 @@ av.recorded();
 Complete binary tree node numbering.
 :::
 
-
 An array can store the values of a complete binary tree efficiently by placing each value at the array index corresponding to the node's position in the tree.
 If the tree is traversed level by level, the nodes are visited in increasing index order: $0, 1, 2, \ldots, n-1$.
 In other words, the nodes of the tree are stored in the array level by level, with each level appearing consecutively.
@@ -159,8 +158,8 @@ The highlighted node "28" is highlighted here too, and the parent, and left and 
 You can use simple formulas to compute the array index of a node's relatives in a complete binary tree with $n$ nodes, given a node at index $i$:
 
 - $\text{parent}(i) = \left\lfloor \frac{i - 1}{2} \right\rfloor$ (if $i \neq 0$)
-- $\text{left\_child}(i) = 2i + 1$ (if $2i + 1 < n$)
-- $\text{right\_child}(i) = 2i + 2$ (if $2i + 2 < n$)
+- $\text{leftChild}(i) = 2i + 1$ (if $2i + 1 < n$)
+- $\text{rightChild}(i) = 2i + 2$ (if $2i + 2 < n$)
 
 For example, the left child of node at position 4 (which contains the value 28) is at index $2 \cdot 4 + 1 = 9$ (which contains the value 75).
 
@@ -173,50 +172,59 @@ Here is a practice exercise for calculating the array indices of nodes.
 
 ### Implementing binary heaps
 
-It is important not to confuse the logical representation of a heap with its physical implementation. 
-Logically, a heap is a tree structure that satisfies the heap property. 
+It is important not to confuse the logical representation of a heap with its physical implementation.
+Logically, a heap is a tree structure that satisfies the heap property.
 In practice, however, it is implemented using an array that represents a complete binary tree.
 
-When describing heap operations, we will usually explain them in terms of tree operations, since this makes the behavior of the algorithms easier to understand conceptually. 
+When describing heap operations, we will usually explain them in terms of tree operations, since this makes the behavior of the algorithms easier to understand conceptually.
 Nevertheless, it is useful to remember that in an actual implementation these operations are carried out using array indices and array updates, rather than explicit tree pointers.
 
-We present an implementation for *min*-heaps. 
+We present an implementation for a minimum heap.
 It uses a dynamic array (see @sec:dynamic-arrays) that will resize automatically when the number of elements change.
 
-    datatype MinHeap implements PriorityQueue:
-        heap = new Array(10)  // 10 is the initial capacity.
-        size = 0              // The initial heap contains 0 elements.
+    datatype MinHeap of T implements PriorityQueue of T:
+        heap = new DynamicArray of T
+        size = 0                       // The initial heap is empty
 
+The implementation uses the standard less-than (<) operator to compare elements of type `T`.
+The exact definition of this operator for values of type `T` determines the priority ordering of the elements in the heap.
+
+<!--
+When constructing a heap, you can specify how elements of type `T` should be compared by providing a function that determines whether its first argument is less than its second argument.
+By default, this comparison uses the standard less-than operator, which results in a minimum heap where smaller elements have higher priority.
+-->
+
+<!--
 Note that because the heap is stored in an array, we refer to nodes by their logical position in the heap rather than by pointers to node objects.
 In practice, this logical position corresponds directly to the same index in the underlying array, so the node’s position in the heap and its position in the array are identical.
+-->
 
-Since the structure satisfies the heap property, the element at index 0, the root of a non-empty heap, always contains the element with the highest priority.
+The data type includes several private auxiliary methods used when inserting and removing elements from the heap.
+The method `isLeaf` determines whether a given position corresponds to a leaf node in the tree, while `leftChild`, `rightChild`, and `parent` return the positions of the left child, right child, and parent of a given node, respectively.
 
-    datatype MinHeap implements PriorityQueue:
-        ...
-        getMin():
-            if size > 0:
-                return heap[0]
-
-The datatype contains some private auxiliary methods that are used when adding and removing elements from the heap: `isLeaf` tells if a position represents a leaf in the tree, while `getLeftChild`, `getRightChild` and `getParent` return the position for the left child, right child, and parent of the position passed, respectively.
+In addition, we include a convenience method that compares the values of two nodes based on their positions in the heap.
 
     datatype MinHeap:
         ...
         isLeaf(pos):
             return pos >= size / 2
-        getLeftChild(pos):
+        leftChild(pos):
             return 2 * pos + 1
-        getRightChild(pos):
+        rightChild(pos):
             return 2 * pos + 2
-        getParent(pos):
+        parent(pos):
             return int((pos - 1) / 2)
+        less(i, j):
+            return heap.get(i) < heap.get(j)
 
 We also need an auxiliary method for swapping two elements in the heap.
 
     datatype MinHeap:
         ...
         swap(i, j):
-            heap[i], heap[j] = heap[j], heap[i]
+            temp = heap.get(i)
+            heap.set(i, heap.get(j))
+            heap.set(j, temp)
 
 <!--
 Finally, since we use a dynamic array we have to be able to resize the internal array.
@@ -234,12 +242,34 @@ AG: we don't need to resize, we use a dynamic array.
 
 -->
 
-<!--
-### Invariants
+Finally, we define a method that verifies that the data structure satisfies the heap property.
 
-No need to check completeness, since we can't have 'holes' in an array.
+    datatype MinHeap:
+        ...
+        invariant():
+            for pos in 1 .. size - 1:
+                if less(pos, parent(pos)):
+                    return false
+            return true
 
--->
+Note that we do not need to check the completeness property, since the heap is stored in an array and arrays cannot contain gaps between elements.
+
+When implementing a data structure, it is often helpful to encode the invariants explicitly and verify them, possibly using assertions, within the various operations.
+This can make it easier to detect errors and ensure that the data structure remains valid after each modification.
+
+When modifying a data structure that must satisfy an invariant, the goal is to update the structure while ensuring the invariant still holds.
+In practice, it is often easier to separate these steps: first perform the modification, even if this temporarily breaks the invariant, and then repair the structure to restore it.
+We will follow this approach when defining the heap operations.
+
+#### Retrieving the highest-priority element
+
+Since the structure satisfies the heap property, the element at index 0, the root of a non-empty heap, always contains the element with the highest priority.
+
+    datatype MinHeap:
+        ...
+        getMin():
+            if size > 0:
+                return val(0)
 
 ### Inserting into a heap
 
@@ -275,23 +305,19 @@ Note that we use a helper method for "sifting" a value up the tree.
     datatype MinHeap:
         ...
         add(elem):
-            if size >= heap.size:
-                resizeHeap(heap.size * 2)
-            heap[size] = elem      // Add the element at end of the heap.
+            heap.add(elem)         // Add the element at end of the heap.
             siftUp(size)           // Put it in its correct place.
             size = size + 1        // Increase the size of the heap.
 
         siftUp(pos):
-            while pos > 0:         // Stop when we reach the root (if not earlier).
-                parent = getParent(pos)
-                if heap[pos] >= heap[parent]:
-                    return pos     // Stop if the parent is smaller or equal.
-                swap(pos, parent)
-                pos = parent       // Move up one level in the tree.
+            while pos > 0 and less(pos, parent(pos)):  // Continue as long as the parent is larger
+                swap(pos, parent(pos))
+                pos = parent(pos)       // Move up one level in the tree.
 
 *Important note*:
 One common mistake is to start at the root and work yourself downwards through the heap.
 However, this approach does not work because the heap must maintain the shape of a complete binary tree.
+If we do not want to break the completeness property there is only one place where we can add an element, namely at the end of the dynamic array.
 
 Since the heap is a complete binary tree, its height is guaranteed to be
 the minimum possible. In particular, a heap containing $n$ nodes will
@@ -343,24 +369,29 @@ Note that we use a helper method for "sifting" a value down the tree.
     datatype MinHeap:
         ...
         removeMin():
-            removed = heap[0]   // Remember the current minimum, to return in the end.
-            swap(0, size-1)     // Swap the last array element into the first position...
+            min = getMin()      // Remember the current minimum, to return in the end.
+            swap(0, size - 1)   // Swap the last array element into the first position...
             size = size - 1     // ...and remove the last element, by decreasing the size.
             if size > 0:
                 siftDown(0)     // Put the new root in its correct place.
-            return removed
+            return min
 
         siftDown(pos):
-            while not isLeaf(pos):   // Stop when we reach a leaf (if not earlier).
-                child = getLeftChild(pos)
-                right = getRightChild(pos)
-                if right < size and heap[right] < heap[child]:
-                    child = right    // 'child' is now the index of the child with smaller value.
-                if heap[child] >= heap[pos]:
-                    return pos       // Stop if the parent is smaller or equal.
-                swap(pos, child)
-                pos = child          // Move down one level in the tree.
+            while not isLeaf(pos):       // Stop when we reach a leaf (if not earlier).
+                child = smallestChild(pos)
+                if less(child, pos):
+                    swap(child, pos)     // Swap to fix the heap property and
+                    pos = child          // continue one level down in the tree.
+                else
+                    return               // Stop if the parent is smaller or equal.
 
+        smallestChild(pos):
+            child = leftChild(pos)
+            right = rightChild(pos)
+            if right < size and less(right, left):  // Check if there is a right child and if it is less
+                return right
+            else
+                return left
 ::: dsvis
 #### Exercise: Delete from a *min*-heap
 
@@ -481,7 +512,7 @@ The method `buildHeap` implements the building algorithm:
         buildHeap(array):
             heap = array                // Initialise the heap to the given array.
             size = heap.size            // The capacity of the heap is used in full.
-            mid = getParent(size-1)     // Find the parent of the last leaf.
+            mid = parent(size-1)        // Find the parent of the last leaf.
             for i in mid, mid-1 .. 0:   // Iterate the internal nodes backwards.
                 siftDown(i)             // Sift each internal node down.
 
