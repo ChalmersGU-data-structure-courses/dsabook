@@ -29,7 +29,7 @@ To turn this high level description of the algorithm into an efficient procedure
 function depthFirst(start: Vertex):
     visited = new empty set of vertices
     agenda = [(null, start)]
-    while (agenda is not empty):
+    while agenda is not empty:
         (from, to) = agenda.pop()
         if visited.contains(to):
             continue   // Skip to the next item on the agenda
@@ -72,7 +72,7 @@ Note that we are a bit vague about what result our depth first search algorithm 
 - If we only want to know if e.g. vertex $C$ is *reachable* from vertex $A$, we can run a traversal from $A$ and stop immidately when visiting $C$, returning true.
   This would allow several simplifications of the algorithm, since we do not need to track edges used at all, and could just keep vertices in the agenda. 
 - If we want to find a path from $A$ to $C$ we can also stop when reaching $C$, but we need to collect the edges we find along the way.
-- The most general result we can return is a tree with the starting vertex as the root. @fig:GraphTraversal1 shows an example of this, 
+- The most general result we can return is a tree with the starting vertex as the root. @fig:GraphTraversal2 shows an example of this, 
   for the same example graph as before.
 
 ![Steps of a depth first traversal, starting in $A$, using a stack and assuming `outgoingEdges` are given in alphabetical order of destination vertex. The right part shows the result as a tree. The algorithm can be described as: select the alphabetically last edge from the most recently visited vertex adjacent to an unvisited vertex.](images/Graphs-traversal2.svg){width=90% #fig:GraphTraversal2} 

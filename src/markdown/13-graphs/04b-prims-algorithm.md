@@ -7,8 +7,14 @@
 
 <!-- START NOTES -->
 
-#### Generic graph search
+Similar to Dijkstra's algorithm, Prim's uses a priority queue, but instead of prioritizing edges by total cost, they are prioritized only by their weight. 
+This means that an implementation of Dijkstras as we have seen before can be changed into Prim's as easily as changing `cost+weight` to just `weight`!
 
+![Steps of Prim's algorithm, starting in $A$. In each step, we simply select the cheapest edge from a visited to an unvisited vertex (shown underlined in the image).](images/Graphs-prims1.svg){width=90% #fig:GraphPrim1} 
+
+Figure @fig:GraphPrim1 shows the execution of Prim's algorithm. The algorithm is very easy to run with pen and paper: Simply circle the currently visited nodes, and select the edge with the lowest cost that intersects the perimeter of the circle. Note that after visiting $F$ in this example there are two edges with the same weight ($3$). Which one we choose depends on the inner working of the priority queue, and may affect the final shape of the MST, but the result will always be an MST.
+
+<!--
 Recall the basic algorithm for any kind of graph traversal:
 
 - Initialise the agenda with the start vertex
@@ -74,8 +80,12 @@ In the worst case all edges in the graph are added to the agenda, so the agenda 
 
 Furthermore, we know that $E \in O(V^2)$, and therefore $O(\log(E)) = O(\log(V^2))$ = $O(2 \log(V)) = O(\log(V))$. So the total complexity of Prim's algorithm can be written as $O(E \log(V))$.
 
+-->
+
 <!-- END NOTES -->
 
+
+<!--
 --------------------
 
 Now we introduce another algorithm for finding the MST, commonly referred to as [Prim's algorithm]{.term}.
@@ -141,10 +151,14 @@ is $O(|\mathbf{V}|^2 + |\mathbf{E}|) =
 O(|\mathbf{V}|^2)$, because $|\mathbf{E}|$ is in
 $O(|\mathbf{V}|^2)$.
 
+-->
+
 <!--
 ### Invariants
  -->
 
+
+<!--
 ### Priority queue implementation of Prim's algorithm
 
 ::: TODO
@@ -263,3 +277,4 @@ Here is an exercise for Prim's algorithm.
 ```
 :::
 ::::::
+-->

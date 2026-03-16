@@ -1,43 +1,36 @@
 
-## Shortest-paths problems and Dijkstra's algorithm
+## Shortest-path problems and Dijkstra's algorithm
 
 ::: TODO
 - Prio 2: introduction, discussing
     - directed/undirected graphs
     - remembering visited nodes
-    - shortest-path tree vs MST
 - Prio 2: use cases
 :::
 
 <!-- START NOTES -->
 
-Another well-known and very common problem is to find the shortest path between two vertices in a weighted graph. This time the graph can be directed too.
+Breadth-first traversal using a queue lets us find the shortest paths through an unweighted graph, but if we want to do something like finding the 
+fastest car route through a city we need to generalize to finding shortest routes in *weighted* graphs. 
+The prototypical example is if the graph represents a road network and you want to find the shortest route between two vertices. 
+Note that "shortest" doesn't have to mean a distance in kilometers -- if the weights denote travel times, then the problem will be to find the *fastest* route.
 
-The prototypical example is if the graph represents a road network and you want to find the shortest route between two vertices. Note that "shortest" doesn't have to mean a distance in kilometers -- if the weights denote travel times, then the problem will be to find the *fastest* route.
+But there are hundreds of other examples of shortest path problems that one might not even think of as graph in the first place. 
+For example, finding the best move in a chess game, solving a puzzle, proving a mathematical theorem, or even deciding what to say in a conversation, can be formulated as shortest-path problems in some graph.
 
-But there are hundreds of other examples of shortest path problems that one might not even think of as graph in the first place. For example, finding the best move in a chess game, solving a puzzle, proving a mathematical theorem, or even deciding what to say in a conversation, can be formulated as shortest-path problems in some graph.
+Formally, the *shortest path* between two vertices is a path whose total cost is as low as possible. 
+This of course assumes that there is a path, and from here on we will assume that the path actually exists. 
+Just as for BFS there might be several shortest paths -- that is, different paths with the same total cost.
 
-Formally, the *shortest path* between two vertices is a path whose total cost is as low as possible. This of course assumes that there is a path, and from here on we will assume that the path actually exists. Just as for MSTs there might be several shortest paths -- that is, different paths with the same total cost.
-
-We also have to distinguish between the shortest path and the path with the fewest edges -- for example, in our example graph the shortest path between $A$ and $E$ is $ABCE$ (cost 4+2+7 = 13), while there is a path with only two edges ($ACE$ with cost 7+7 = 14).
-
-If we want to know the shortest paths to every vetex from a given start vertex, we have the *single-source* problem. The solution is the shortest* path tree* (which is not only a tree, but a spanning tree). Here are the shortest path trees from $A$ and from $F$:
+As we saw with DFS for unweighted graphs, the algorithm does not only find a path from one vertex to another, but from one vertex to all others. 
+This is called the *single-source* shortest path problem. The solution is the *shortest path tree* (SPT). Here are the shortest path trees from $A$ and from $F$:
 
 ![](images/Graphs-TwoSPTs.png)
 
 
 <!-- END NOTES -->
-
+<!--
 ---------------
-
-If you have an *unweighted* graph, the [shortest path]{.term} between two vertices is the smallest number of edges you
-have to pass to get from one of the vertices to the other.
-
-If you agument the [breadth-first search]{.term} algorithm from @sec:breadth-first-search
-to remember which vertex a visited vertex came
-from, if will give you the shortest path between the start vertex and
-any other vertex. However, things become sligthly more complicated if
-the graph is weighted.
 
 #### Shortest-paths on weighted graphs
 
@@ -72,6 +65,7 @@ because the graph is directed. We assume that all weights are positive.
 ```
 Example graph for shortest-path definitions
 :::
+-->
 
 <!--
 ### Use cases for shortest paths
