@@ -33,7 +33,7 @@ function depthFirst(start: Vertex):
         (from, to) = agenda.pop()
         if visited.contains(to):
             continue   // Skip to the next item on the agenda
-        // Here we are visiting the vertex to for the first time
+        visited.add(to) // Visiting the vertex to for the first time
         for e:Edge in outgoingEdges(to):
             agenda.push(e)
 
@@ -92,7 +92,7 @@ function breadthFirst(start: Vertex):
         (from, to) = agenda.dequeue()
         if visited.contains(to):
             continue   // Skip to the next item on the agenda
-        // Here we are visiting the vertex to for the first time
+        visited.add(to) // Visiting the vertex to for the first time
         for e:Edge in outgoingEdges(to):
             agenda.enqueue(e)
 ```

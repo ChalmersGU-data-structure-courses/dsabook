@@ -36,7 +36,7 @@ function dijkstra(start: Vertex):
         (cost, from, to) = agenda.removeMin()
         if visited.contains(to):
             continue   // Skip to the next item on the agenda
-        // Here we are visiting the vertex to for the first time
+        visited.add(to) // Visiting the vertex to for the first time
         // cost is the cost of the shortest path to the vertex
         for (weight,from1, to1):Edge in outgoingEdges(to):
             agenda.add( (cost+weight, from1, to1) )
@@ -79,8 +79,11 @@ function dijkstra(start: Vertex):
     agenda.setPriority((null,A), 0)
     while agenda is not empty:
         (cost, from, to) = agenda.removeMin()
+        visited.add(to)
         for (weight,from1, to1):Edge in outgoingEdges(to):
-            if to1 is not in visited or agenda, or weight < agenda.getPriority(to1)
+            if visited.contains(to1):
+                continue
+            if cost+weight < agenda.getPriority(to1)
                 agenda.setPriority( (cost+weight, from1, to1) )
 
 ```
