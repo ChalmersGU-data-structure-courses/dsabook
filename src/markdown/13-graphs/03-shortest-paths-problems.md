@@ -11,21 +11,22 @@
 <!-- START NOTES -->
 
 Breadth-first traversal using a queue lets us find the shortest paths through an unweighted graph, but if we want to do something like finding the 
-fastest car route through a city we need to generalize to finding shortest routes in *weighted* graphs. 
-The prototypical example is if the graph represents a road network and you want to find the shortest route between two vertices. 
+fastest car route through a city we need to generalize to finding shortest paths in *weighted* graphs.  
 Note that "shortest" doesn't have to mean a distance in kilometers -- if the weights denote travel times, then the problem will be to find the *fastest* route.
 
-But there are hundreds of other examples of shortest path problems that one might not even think of as graph in the first place. 
+There are hundreds of other examples of shortest path problems that one might not even think of as graph in the first place. 
 For example, finding the best move in a chess game, solving a puzzle, proving a mathematical theorem, or even deciding what to say in a conversation, can be formulated as shortest-path problems in some graph.
 
 Formally, the *shortest path* between two vertices is a path whose total cost is as low as possible. 
 This of course assumes that there is a path, and from here on we will assume that the path actually exists. 
-Just as for BFS there might be several shortest paths -- that is, different paths with the same total cost.
+Just as for BFS there may be several shortest paths -- that is, different paths with the same total cost.
+
+![On the left is an undirected weighted graph, and on the right two different SPTs for $A$ and $F$ respecitvely, shown both in the graph and in standard tree notation.](images/Graphs-SPTs.svg){width=90% #fig:GraphSPTs}
 
 As we saw with DFS for unweighted graphs, the algorithm does not only find a path from one vertex to another, but from one vertex to all others. 
-This is called the *single-source* shortest path problem. The solution is the *shortest path tree* (SPT). Here are the shortest path trees from $A$ and from $F$:
+This is called the *single-source* shortest path problem. The solution is the *shortest path tree* (SPT). Figure @fig:GraphSPTs shows two shortest path trees in an example graph.
 
-![](images/Graphs-TwoSPTs.png)
+The trees show us things like `[A,D,E]` being the shortest path from $A$ to $E$ with a cost of $5$, and `[F,E,D]` being the shortest from $F$ to $D$. Neither of the trees help us figure out the shortest paths from $B$ to $E$, to do that we would need to construct an SPT for $B$.
 
 
 <!-- END NOTES -->

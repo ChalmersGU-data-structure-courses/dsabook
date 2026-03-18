@@ -44,7 +44,7 @@ There are some things to note here:
 - To get the process rolling, we add a fake edge to the starting vertex $A$, to add visiting $A$ to the agenda. 
 - The agenda doesn't only contain edges from visited vertices to unvisited ones. Sometimes it will contain edges between two visited vertices, which is why we need to do the visitation check after popping items from it. 
 - Its a bit silly to add edges to the agenda when the to-vertex of the edge is already visited, since these will just be ignored after popping them. 
-  For instance in the previous example, after selecting the edge (A,B) and visiting B, since the graph is undirected the edge (B,A) back to A will immediately be added to the agenda. So an obvious optimization is to add a second check for this in the for-loop, and only push edges that lead to unvisited vertices. 
+  For instance in the previous example, after selecting the edge $(A,B)$ and visiting $B$, since the graph is undirected the edge $(B,A)$ back to $A$ will immediately be added to the agenda. So an obvious optimization is to add a second check for this in the for-loop, and only push edges that lead to unvisited vertices. 
   This unfortunately does not let us remove the check in the while loop, as there can still be multiple edges to the same vertex in the agenda. 
 
 The edges selected and the order in which vertices are visited depend on the order in which `outgoingEdges(to)` produces edges. 
