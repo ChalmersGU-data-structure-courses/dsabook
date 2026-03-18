@@ -1,4 +1,4 @@
-
+<!--
 ### Implementing graphs
 
 ::: TODO
@@ -7,7 +7,6 @@
 - Prio 3: write about alternative approaches, infinite graphs
 :::
 
-<!-- ### ADT for graphs -->
 
 We next turn to the problem of implementing a general-purpose
 [graph]{.term} class. There are two traditional
@@ -141,6 +140,7 @@ The implementations of the API methods are quite straightforward, as can be seen
         outgoingEdges(v):
             return edgesMap.get(v)
 
+-->
 
 <!--
 ### Alternative approaches

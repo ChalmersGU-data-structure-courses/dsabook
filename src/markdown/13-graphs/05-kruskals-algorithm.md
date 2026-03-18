@@ -7,7 +7,9 @@
 
 <!-- START NOTES -->
 
-This algorithm is conceptually very simple.
+Kruskal's algorithm does exactly the same thing as Prim's algorithm: Given an undirected connected graph, it constructs an MST of the graph. 
+Kruskal's is different from the other alogorithms we have seen (DFS, BFS, Prim's and Dijkstra's) in that it is not a traversal. 
+We do not grow an expanding set of visited nodes.
 
 - Start with an empty MST
 - Sort all edges by weight
@@ -49,6 +51,7 @@ More information about the disjoint-set can be found in @sec:disjoint-sets if yo
 
 <!-- END NOTES -->
 
+<!--
 ------------------
 
 Our first MST algorithm is commonly referred to as [Kruskal's algorithm]{.term}.
@@ -110,6 +113,8 @@ Here is an exercise for Kruskal's algorithm.
 ```{.jsav-embedded src="Graph/KruskalPE.html" type="pe" name="Kruskal's Algorithm Proficiency Exercise"}
 ```
 :::
+
+-->
 
 <!--
 ### Invariants

@@ -23,6 +23,8 @@ Note that every edge occurs twice -- because the graph is undirected.
 
 The adjacency list is the most common for implementing generic sparse graphs, and is very useful for many algorithms. The adjacency matrix is more useful for very dense graphs -- if the graph is sparse, most of the cells in the matrix will be empty so it will use up too much memory. In this course we will assume adjacency lists unless otherwise specified.
 
+
+<!--
 There is no commonly agreed-upon ADT for graphs, but here we will only assume the following operations:
 
 ```
@@ -44,8 +46,13 @@ class Edge:
 
 Note that for every outgoing edge e from a vertex v, we see that v = e.start.
 Also note that in this implementation, all edges are inherently directed -- this means that we represent an undirected graph as a directed graph where each undirected edge becomes two directed.
+-->
+
 
 <!-- END NOTES -->
+
+
+<!--
 
 ----------------
 
@@ -163,3 +170,6 @@ total cost of $O(|\mathbf{V}^2|)$ time when the algorithm might
 otherwise require only $O(|\mathbf{V}| + |\mathbf{E}|)$ time. This
 is a considerable disadvantage when the graph is sparse, but not when
 the graph is closer to full.
+
+
+-->
