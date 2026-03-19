@@ -57,7 +57,23 @@ This is done by iterating through both sorted halves *in parallel*,
 and every time moving the smallest element to the final array.
 
 ::: algorithm
-#### Algorithm: Merge
+#### Algorithm: Merge (v1)
+
+First we need a temporary *result* array, initially empty.
+We also initialise two pointers to the first element of each sorted half.
+Now we repeat the following until one of the halves is empty:
+
+1. Compare the elements pointed to in each sorted half.
+2. Append the smallest of the two to the *result* array,
+   and move that pointer to the next element.
+
+Finally we can append the remaining elements in the nonempty half to the end of *result*.
+:::
+
+Here is the same algorithm but more detailed.
+
+::: algorithm
+#### Algorithm: Merge (v2)
 
 To merge two sorted arrays, *left* and *right*:
 
