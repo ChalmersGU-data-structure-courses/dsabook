@@ -228,6 +228,68 @@ And since sorting arrays of size $\frac{n}{2}$ and $n$ both have the same comple
 then that must be true for all array sizes in between, $\frac{n}{2}<n'<n$.
 
 
+### Implementing Mergesort
+
+Implementing Mergesort presents some technical difficulties.
+The algorithms above are quite vague and we have to figure out how to make it work in practice.
+
+First, splitting an input array into two subarrays is easy.
+We do not have to copy any elements, but we can use the same idea as for binary search:
+use array indices *left* and *right* to refer to an array interval.
+To split this subarray into two halves, we just calculate the middle index between *left* and *right*.
+
+The main function for sorting an interval can now be written like this:
+
+    // Sort the array interval left .. right
+    function mergeSort(array, left, right):
+        if left >= right:                   // Base case: Interval length is ≤ 1
+            return
+        mid = int((left + right) / 2)       // The midpoint is where the right half starts
+        mergeSort(array, left, mid-1)       // Mergesort the left half
+        mergeSort(array, mid, right)        // Mergesort the right half
+        merge(array, left, mid, right)      // Merge the two sorted halves
+
+The initial call would be `mergeSort(array,0,array.size-1)`, which sorts the whole array.
+
+Merging the sorted array intervals are quite straightforward from the description,
+we just have to keep track of the pointers to the two sorted halves.
+
+    // Merge the sorted array intervals left .. mid-1 and mid .. right
+    function merge(array, left, mid, right):
+        temp = new Array
+        j = left; k = mid                   // Pointers to the left and right intervals
+        for i in left .. right:             // Pointer to the temporary array
+            if j < mid and (k > right or array[j] <= array[k]):
+                temp[i] = array[j]          // The left element is smaller
+                j = j + 1                   // (or the right interval is exhausted)
+            else:
+                temp[i] = array[k]          // The right element is smaller
+                k = k + 1                   // (or the left interval is exhausted)
+        for i in left .. right:
+            array[i] = temp[i]              // Copy everything back from the temporary array
+
+
+::: dsvis
+Here is a visualisation for the merge step.
+
+``` {.jsav-animation src="Sorting/mergeImplS1CON.js" links="Sorting/mergeImplS1CON.css" name="Mergesort Implementation Slideshow"}
+```
+:::
+
+Notice that the merge function will create a new auxiliary array every time it is called.
+This is quite inefficient, because it takes some time to allocate memory for a new array,
+which can be destroyed directly when merge is finished.
+One simple optimisation is to create one single auxiliary array before the first call,
+and reuse this array in all invocations of merge.
+The only thing we would have to do is to add an extra argument to `mergeSort` and `merge`,
+for the reference to the auxiliary array.
+Then we can create a wrapper function that takes care of the initialisation, and makes the first recursive call:
+
+    function mergeSort(array):
+        temp = new Array(array.size)
+        mergeSort(array, temp, 0, array.size-1)
+
+
 ### Optimisations
 
 Just as we discussed for the previous sorting algorithms in @sec:empirical-analysis-and-code-tuning,
@@ -235,12 +297,17 @@ there are some optimisations one can do to the naive Mergesort algorithm from ab
 
 #### Use just one temporary array
 
-The first optimisation is very easy and will usually save some time, but not by a large amount.
-In the algorithm above we create a new temporary array in each recursive call,
-and creating a new array costs a little bit of time.
+Notice that in the implementation above, the merge function creates a new auxiliary array every time it is called.
+This is quite inefficient, because it takes some time to allocate memory for a new array,
+which will be be destroyed directly when merge is finished.
+A simple optimisation is to create one single auxiliary array before the very first recursive call,
+and reuse this array in all invocations of merge.
+The only thing we would have to do is to add an extra argument to `mergeSort` and `merge`, for the reference to the auxiliary array.
+Then we can create a wrapper function that takes care of the initialisation, and makes the first recursive call:
 
-Instead we can create one single temporary array just before we start sorting,
-and that array in every recursive call.
+    function mergeSort(array):
+        temp = new Array of size array.size
+        mergeSort(array, temp, 0, array.size-1)
 
 #### Using a backoff algorithm
 
@@ -248,13 +315,12 @@ Mergesort is way faster than Insertion and Selection sort for large arrays becau
 But when the arrays are small (perhaps 50 elements or so), the "slower" algorithms are actually faster
 -- the reason for this is that Mergesort is more complex which leads to larger constant factors.
 
-This fact, that there are algorithms that are faster on small arrays, can be used for a very simple optimisation. Whenever the size of the input array is small enough (say, less than 50 elements),
+This fact, that there are algorithms that are faster on small arrays, can be used for a very simple optimisation.
+Whenever the size of the input array is small enough (say, less than 50 elements),
 we can call Insertion or Selection sort on that array instead of continuing with Mergesort.
 
-Note that this will not change the complexity of the implementation,
-but it can nonetheless improve the speed by some factor.
-Also note that the exact cutoff depends a lot on what computer you have,
-what programming language you use, etc.
+Note that this will not change the complexity of the implementation, but it can nonetheless improve the speed by some factor.
+Also note that the exact cutoff depends a lot on what computer you have, what programming language you use, etc.
 The only way to know which array size is the optimal cutoff is to do a lot of testing
 -- but a rule of thumb is that it is probably faster to use Insertion sort on an array of up to 50 elements.
 
