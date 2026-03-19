@@ -268,17 +268,37 @@ Since the structure satisfies the heap property, the element at index 0, the roo
     datatype MinHeap:
         ...
         getMin():
-            if size > 0:
-                return val(0)
+            return heap.get(0)
+
+Note that the above definition does not account for the case where the heap is empty.
+Attempting to retrieve the first element of an empty dynamic array would fail, and therefore this method would fail as well.
+For the sake of brevity, we omit such sanity checks here and in the remainder of the chapter.
 
 ### Inserting into a heap
 
-Here is how to insert a new element $V$ into the heap:
+We want to be able to add elements to our heap.
+To preserve the completeness invariant, there is only one place where we can insert a new element: at the end of the array.
+However, the newly inserted element is not necessarily in the correct position, so the insertion may temporarily violate the heap invariant.
+We must therefore restore the heap property after adding the new element.
 
-- First put the new value at the end of the array.
-- Now move the value upward in the heap, comparing with its parent.
-- If $V$ has a higher priority than its parent, swap the two corresponding array cells.
-- Continue until $V$ does not have higher priority than its parent.
+The new element might have higher priority than its parent.
+In a min-heap, this means that the new element is smaller than its parent.
+If this happens, we swap the new element with its parent.
+We then repeat the same check from the new position, because the element may still be too small to remain there.
+This process continues until the element either reaches the root or has a parent with higher priority.
+
+Notice that we do not need to compare the new element with its parent's other child, if there is one.
+Before the insertion, the heap already satisfied the heap invariant, so the parent had higher priority than both of its children.
+Therefore, if the new element has higher priority than the parent, it must also have higher priority than the other child.
+On the other hand, if the new element does not have higher priority than its parent, then it is already in the correct position.
+So, to restore the heap invariant after insertion, it is enough to compare the new element only with its parent as it moves upward through the heap.
+
+Here is a summary of how to insert a new element $V$ into a heap:
+
+- Put $V$ at the end of the array.
+- Compare $V$ with its parent.
+- If $V$ has higher priority, swap it with the parent.
+- Repeat until $V$ reaches the correct position.
 
 ::: dsvis
 Here is a visual explanation of insertion into a *max*-heap.
@@ -287,19 +307,7 @@ Here is a visual explanation of insertion into a *max*-heap.
 ```
 :::
 
-Here is an alternative explanation: If the heap
-takes up the first $n$ positions of its array prior to the call to
-`add`, it must take up the first $n+1$ positions after. To accomplish
-this, `add` first places $V$ at position $n$ of the array. Of course,
-$V$ is unlikely to be in the correct position. To move $V$ to the right
-place, it is compared to its parent's value. If the value of $V$ is
-less than or equal to the value of its parent, then it is in the correct
-place and the insert routine is finished. If the value of $V$ is greater
-than that of its parent, then the two elements swap positions. From
-here, the process of comparing $V$ to its (current) parent continues
-until $V$ reaches its correct position.
-
-Here is the pseudocode for insertion in our *min*-heap.
+Here is the pseudocode for insertion in a *min*-heap.
 Note that we use a helper method for "sifting" a value up the tree.
 
     datatype MinHeap:
@@ -314,26 +322,20 @@ Note that we use a helper method for "sifting" a value up the tree.
                 swap(pos, parent(pos))
                 pos = parent(pos)       // Move up one level in the tree.
 
-*Important note*:
 One common mistake is to start at the root and work yourself downwards through the heap.
 However, this approach does not work because the heap must maintain the shape of a complete binary tree.
 If we do not want to break the completeness property there is only one place where we can add an element, namely at the end of the dynamic array.
 
-Since the heap is a complete binary tree, its height is guaranteed to be
-the minimum possible. In particular, a heap containing $n$ nodes will
-have a height of $O(\log(n))$. Intuitively, we can see that this
-must be true because each level that we add will slightly more than
-double the number of nodes in the tree (the $i$ th level has $2^i$
-nodes, and the sum of the first $i$ levels is $2^{i+1}-1$). Starting at
-1, we can double only $\log(n)$ times to reach a value of $n$. To be
-precise, the height of a heap with $n$ nodes is
-$\lceil \log(n) + 1 \rceil$.
+Since a heap is a complete binary tree, its height is as small as possible for the number of nodes it contains.
+A heap with $n$ nodes therefore has height $O(\log(n))$.
+Intuitively, this is because each new level in the tree can contain twice as many nodes as the previous level.
+The $i$th level contains $2^i$ nodes, and the first $i+1$ levels together contain $2^{i+1} - 1$ nodes.
+So the number of levels grows logarithmically with the number of nodes.
 
-Each call to `add` takes $O(\log(n))$ time in the worst case,
-because the value being inserted can move at most the distance from the
-bottom of the tree to the top of the tree. Thus, to insert $n$ values
-into the heap, if we insert them one at a time, will take
-$O(n \log(n))$ time in the worst case.
+Each call to `add` takes $O(\log(n))$ time in the worst case.
+This is because the inserted element can move upward by at most one level at a time.
+In the worst case, it moves from the last level all the way to the root.
+Therefore, inserting $n$ values one at a time takes $O(n \log(n))$ time in the worst case.
 
 ::: dsvis
 #### Exercise: Insert into a *min*-heap
@@ -369,11 +371,11 @@ Note that we use a helper method for "sifting" a value down the tree.
     datatype MinHeap:
         ...
         removeMin():
-            min = getMin()      // Remember the current minimum, to return in the end.
-            swap(0, size - 1)   // Swap the last array element into the first position...
-            size = size - 1     // ...and remove the last element, by decreasing the size.
-            if size > 0:
-                siftDown(0)     // Put the new root in its correct place.
+            min = getMin()       // Remember the current minimum, to return in the end.
+            swap(0, size-1)      // Swap the last element into the first position.
+            heap.remove(size-1)  // Remove the last element from the array
+            size = size - 1      // and decrease the size.
+            siftDown(0)          // Put the new root in its correct place.
             return min
 
         siftDown(pos):
