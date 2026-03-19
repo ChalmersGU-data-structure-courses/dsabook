@@ -33,7 +33,7 @@ For example, the following function is written in our pseudocode calculates the 
 
     function fact(n: Int) -> Int:
         res = 1
-        for i = 2 to n:
+        for i in 2 .. n:
             res = res * i
         return res
 
@@ -327,7 +327,7 @@ Here is an example of how to define a dynamic array (see @sec:dynamic-arrays):
 
     datatype ArrayStack of T implements Stack of T:
         data: Array of T
-        size: int = 0
+        size: Int = 0
 
         constructor ArrayStack(capacity):
             data = new Array(capacity) of T
