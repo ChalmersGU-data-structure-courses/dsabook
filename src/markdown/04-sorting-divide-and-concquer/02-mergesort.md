@@ -163,7 +163,7 @@ However, we can visualise how Mergesort works in a way that will make the comple
 
 First, let us assume that the array consists of exactly $n = 2^k$ elements.
 In the first recursive call it will split this array into two with $2^{k-1}$ elements each.
-Both of these will be split into two arrays each, so $2\times 2 = 4 arrays of size $2^{k-2}$.
+Both of these will be split into two arrays each, so $2\times 2 = 4$ arrays of size $2^{k-2}$.
 And these will in turn be split into $2\times 2\times 2=2^3$ arrays of size $2^{k-3}$,
 until in the end we have $2^k$ arrays with only one element.
 Here is a picture of how the splitting goes:
@@ -230,9 +230,8 @@ then that must be true for all array sizes in between, $\frac{n}{2}<n'<n$.
 
 ### Implementing Mergesort
 
-Implementing Mergesort presents some technical difficulties.
-The algorithms above are quite vague and we have to figure out how to make it work in practice.
-
+How can we use the algorithm descriptions above to implement Mergesort?
+The descriptions are quite vague and we have to figure out how to make it work in practice.
 First, splitting an input array into two subarrays is easy.
 We do not have to copy any elements, but we can use the same idea as for binary search:
 use array indices *left* and *right* to refer to an array interval.
@@ -266,7 +265,7 @@ we just have to keep track of the pointers to the two sorted halves.
                 temp[i] = array[k]          // The right element is smaller
                 k = k + 1                   // (or the left interval is exhausted)
         for i in left .. right:
-            array[i] = temp[i]              // Copy everything back from the temporary array
+            array[i] = temp[i]              // Copy everything back
 
 
 ::: dsvis
@@ -275,19 +274,6 @@ Here is a visualisation for the merge step.
 ``` {.jsav-animation src="Sorting/mergeImplS1CON.js" links="Sorting/mergeImplS1CON.css" name="Mergesort Implementation Slideshow"}
 ```
 :::
-
-Notice that the merge function will create a new auxiliary array every time it is called.
-This is quite inefficient, because it takes some time to allocate memory for a new array,
-which can be destroyed directly when merge is finished.
-One simple optimisation is to create one single auxiliary array before the first call,
-and reuse this array in all invocations of merge.
-The only thing we would have to do is to add an extra argument to `mergeSort` and `merge`,
-for the reference to the auxiliary array.
-Then we can create a wrapper function that takes care of the initialisation, and makes the first recursive call:
-
-    function mergeSort(array):
-        temp = new Array(array.size)
-        mergeSort(array, temp, 0, array.size-1)
 
 
 ### Optimisations
