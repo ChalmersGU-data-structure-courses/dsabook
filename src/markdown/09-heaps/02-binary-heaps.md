@@ -1,10 +1,13 @@
 ## Heaps
 
-To achieve efficient implementations of priority queues, we use a data structure called a heap.
-The key idea behind heaps is that the element with the highest priority is always kept at the root of the tree.
+A _heap_ provides a natural and efficient implementation of the priority queue introduced at the beginning of this chapter.
+Elements (or jobs) can be inserted into the heap using their priority as the ordering key, and the operation `removeMin` can be used whenever the next highest-priority element should be processed.
+Priority queues, and therefore heaps, are widely used in algorithms, particularly in graph problems such as finding the [shortest path]{.term} and computing a [minimum spanning tree]{.term}.
 
-A heap organizes elements in a tree structure, but not every tree qualifies as a heap.
-The tree must satisfy a specific invariant known as the heap property.
+To implement priority queues efficiently, we use a data structure called a heap.
+The central idea is to organize the data so that the element with the highest priority is always located at the root of the structure.
+A heap stores elements in a tree structure, but not every tree qualifies as a heap. 
+The tree must satisfy a specific invariant known as the heap property. 
 In general, a [heap]{.term} is a tree that satisfies the following rule:
 
 ::: example
@@ -300,6 +303,83 @@ Here is a summary of how to insert a new element $V$ into a heap:
 - If $V$ has higher priority, swap it with the parent.
 - Repeat until $V$ reaches the correct position.
 
+Let us illustrate this using the heap from @fig:HeapTreeExample.
+If we insert the value 10, we must first place it at the next free position, so that the tree remains complete.
+For clarity, we show the heap as a tree, but you should keep in mind that it is actually stored as an array.
+
+::: {.jsav-figure #fig:HeapInsert10Step1}
+```
+let av = NewAV();
+let bt = av.ds.binarytree({nodegap: 25});
+let rt = bt.root("8");
+rt.left("17");
+rt.right("12");
+rt.left().left("33");
+rt.left().right("28");
+rt.right().left("43");
+rt.right().right("15");
+rt.left().left().left("34");
+rt.left().left().right("87");
+rt.left().right().left("75");
+rt.left().right().right("47");
+rt.right().left().left("47");
+rt.right().left().right("10").highlight();
+bt.layout();
+av.displayInit();
+av.recorded();
+```
+After inserting 10, we place it at the next free position, shown here as the right child of 43.
+:::
+
+::: {.jsav-figure #fig:HeapInsert10Step2}
+```
+let av = NewAV();
+let bt = av.ds.binarytree({nodegap: 25});
+let rt = bt.root("8");
+rt.left("17");
+rt.right("12");
+rt.left().left("33");
+rt.left().right("28");
+rt.right().left("10").highlight();
+rt.right().right("15");
+rt.left().left().left("34");
+rt.left().left().right("87");
+rt.left().right().left("75");
+rt.left().right().right("47");
+rt.right().left().left("47");
+rt.right().left().right("43");
+bt.layout();
+av.displayInit();
+av.recorded();
+```
+Since 10 is smaller than its parent 43, the two elements swap positions.
+:::
+
+::: {.jsav-figure #fig:HeapInsert10Step3}
+```
+let av = NewAV();
+let bt = av.ds.binarytree({nodegap: 25});
+let rt = bt.root("8");
+rt.left("17");
+rt.right("10").highlight();
+rt.left().left("33");
+rt.left().right("28");
+rt.right().left("12");
+rt.right().right("15");
+rt.left().left().left("34");
+rt.left().left().right("87");
+rt.left().right().left("75");
+rt.left().right().right("47");
+rt.right().left().left("47");
+rt.right().left().right("43");
+bt.layout();
+av.displayInit();
+av.recorded();
+```
+The value 10 is still smaller than its new parent 12, so we swap once more.
+Now 10 has parent 8, which is smaller, so the insertion is complete.
+:::
+
 ::: dsvis
 Here is a visual explanation of insertion into a *max*-heap.
 
@@ -344,16 +424,40 @@ Therefore, inserting $n$ values one at a time takes $O(n \log(n))$ time in the w
 ```
 :::
 
+### Removing from a heap
 
-### Removing from the heap
+Heaps are often used to implement priority queues, where we repeatedly remove the element with the highest priority.
+This is the next element to be processed.
 
-Here is how to remove the highest-priority element $V$ from a binary heap:
+Finding this element is straightforward: it is always stored at the root of the heap, at index 0 in the array.
+In a min-heap, this is the smallest element.
 
-- We know that the highest-priority element is at the tree root, i.e. array position 0.
-- We also know that we need to reduce the array/heap size by 1 -- so we can swap the first an last positions.
-- Now the new root element does not satisfy the heap property.
-- We move the new root downward in the heap -- in each step comparing with the *highest-priority* child.
-- Continue until $V$ has a higher priority than both its children.
+To remove the highest-priority element, we remove the root.
+However, we cannot simply leave the root empty, since this would violate the requirement that the heap remains a complete binary tree.
+Instead, we replace the root with the last element in the array.
+We then reduce the size of the heap by one.
+This preserves completeness but may violate the heap property.
+
+The new root may now have lower priority than one or both of its children.
+To restore the heap property, we sift the element down the tree.
+At each step, we compare it with its children and swap it with the one that has higher priority.
+In a min-heap, this means swapping with the smaller of the two children.
+
+It is essential to choose the smaller child.
+Otherwise, the heap property could still be violated after the swap.
+Once the swap is performed, the element moves down the tree, and we repeat the process from its new position.
+
+This procedure continues until the element is in the correct position.
+That is, it has higher priority than both of its children, or it reaches a leaf.
+At that point, the heap property is restored.
+
+Here is a summary of how to remove the highest-priority element $V$ from a heap:
+
+- Swap the root element with the last element.
+- Reduce the size of the heap by one.
+- Compare the new root with its highest-priority child.
+- If the child has higher priority, swap them.
+- Repeat until the element reaches the correct position.
 
 ::: dsvis
 Here is a visual explanation of removing from a *max*-heap.
@@ -362,11 +466,12 @@ Here is a visual explanation of removing from a *max*-heap.
 ```
 :::
 
-Because the heap is $\log(n)$ levels deep, the cost of deleting the
-maximum element is $O(\log(n))$ in the average and worst cases.
+Each call to `removeMin` takes $O(\log(n))$ time in the worst case.
+This is because the element moved to the root can travel downward by at most one level at a time.
+In the worst case, it moves from the root all the way to a leaf.
 
-Here is the pseudocode for removing the minimum value from our *min*-heap.
-Note that we use a helper method for "sifting" a value down the tree.
+Here is the pseudocode for removing the minimum element from a min-heap. 
+Note that we use a helper method to sift an element down the tree, as well as another helper method to identify the smaller of its children.
 
     datatype MinHeap:
         ...
@@ -384,16 +489,19 @@ Note that we use a helper method for "sifting" a value down the tree.
                 if less(child, pos):
                     swap(child, pos)     // Swap to fix the heap property and
                     pos = child          // continue one level down in the tree.
-                else
+                else:
                     return               // Stop if the parent is smaller or equal.
 
         smallestChild(pos):
-            child = leftChild(pos)
+            left = leftChild(pos)
             right = rightChild(pos)
-            if right < size and less(right, left):  // Check if there is a right child and if it is less
+            if right < size and less(right, left):  // Check if there is a right child and if it is smaller
                 return right
-            else
+            else:
                 return left
+
+<!-- AG: should we add an example again? probably not -->
+
 ::: dsvis
 #### Exercise: Delete from a *min*-heap
 
@@ -408,22 +516,6 @@ Note that we use a helper method for "sifting" a value down the tree.
 ``` {.jsav-animation src="Binary/heapremoveCON.js" scripts="DataStructures/binaryheap.js" name="Remove Any Slideshow"}
 ```
 :::
--->
-
-### Binary heaps as priority queues
-
-The heap is a natural implementation for the priority queue discussed at
-the beginning of this chapter. Jobs can be added to the heap (using
-their priority value as the ordering key) when needed. Method
-`removeMin` can be called whenever a new job is to be executed.
-Priority queues can be helpful for solving graph problems such as
-finding the [shortest path]{.term} and
-finding the [minimum spanning tree]{.term}.
-
-<!--
-For a story about Priority Queues and dragons, see
-[Computational Fairy Tales: Stacks, Queues, Priority Queues, and the Prince's Complaint Line][EXT]
-[EXT]: http://computationaltales.blogspot.com/2011/04/stacks-queues-priority-queues-and.html
 -->
 
 ### Changing the priority of elements
