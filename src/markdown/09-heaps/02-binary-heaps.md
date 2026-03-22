@@ -503,7 +503,7 @@ Note that we use a helper method to sift an element down the tree, as well as an
 <!-- AG: should we add an example again? probably not -->
 
 ::: dsvis
-#### Exercise: Delete from a *min*-heap
+#### Exercise: Delete from a min-heap
 
 ```{.jsav-embedded src="Binary/heapremovePRO.html" type="pe" name="Heap Remove Exercise"}
 ```
@@ -520,20 +520,24 @@ Note that we use a helper method to sift an element down the tree, as well as an
 
 ### Changing the priority of elements
 
-For some applications, objects might get their priority modified.
-One solution to this is to remove the object and reinsert it.
-Another solution is to change the priority value of the object, and then update its position in the heap.
-In any of these cases the application needs to know the position of the object in the heap.
+In some applications, the priority of an element may change over time, or we may need to remove an element other than the root.
+To support such operations efficiently, we must know the position of the element in the heap.
 
-To be able to know the position of an arbitrary object in the heap, we need some auxiliary data structure with which we can find the position of an object.
-This auxiliary structure can be any kind of [map]{.term}, which we will introduce later in [Chapter @sec:sets-and-maps].
+However, the heap invariant is not helpful for locating an arbitrary element.
+It guarantees only that each node has higher priority than its children.
+It does not tell us how elements are distributed across different subtrees.
+As a result, when searching for a specific element, we cannot determine which subtree to explore next.
+In the worst case, we must traverse the entire tree, which takes $O(n)$ time.
 
-Assuming that we know the position of the object, we either have to remove it from the heap, or modify its priority.
+Once the element has been found, updating or removing it is straightforward.
+To remove an element, we swap it with the last element in the heap, reduce the size of the heap by one, and then restore the heap property.
+Depending on how the replacement element compares with its parent and children, we may need to sift it either up or down.
+To update the priority of an element, we again restore the heap property by sifting it up if its priority increases, or down if its priority decreases.
 
-- To remove the object at an arbitrary position $i$, we first swap it with the last position.
-  Then we sift the new value at position $i$, either up or down depending on the priorities of the parent and children.
-
-- To modify the priority of the object at position $i$, we first modify it and then sift the value up or down depending on the priorities of the parent and children.
+To avoid the costly $O(n)$ search, we can maintain an auxiliary data structure that keeps track of each element's position in the heap.
+For example, we can use a lookup table, or map, that associates each element with its index in the array.
+We will introduce this data structure later in [Chapter @sec:sets-and-maps].
+If lookup in this table takes $O(\log(n))$ time, then updates and removals of arbitrary elements also take $O(\log(n))$ time, because the remaining work consists only of restoring the heap property.
 
 ### Building a heap
 
