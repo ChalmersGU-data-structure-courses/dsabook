@@ -82,17 +82,32 @@ but it can also contain complex objects, for example information about books
 An array of complex objects can be sorted by different keys (such as author, title, physical size, ...),
 and we can only search for the same key that it is sorted after.
 So if the array is sorted by author, we cannot use binary search to search for a book title.
+
+::: algorithm
+### Algorithm: Binary search
+
+To search for a *key* in a given array,
+you start with an interval matching the who array.
+The repeat the following until *key* has been found, or the interval is empty:
+
+1. Compare *key* with the middle element in the interval.
+2. If *key* is equal, return the middle element.
+3. Set the interval to be lower or upper half,
+   depending on if *key* is smaller or larger than the middle element.
+
+:::
+
 Here is how you can implement the algorithm in pseudocode:
 
     function binarySearch(array, key):
-        low = 0                          // The lower marker, pointing to the first element in the interval
-        high = array.size - 1            // The upper marker, pointing to the lasat element in the interval
-        while low <= high:               // Continue until the interval is empty:
-            mid = (low + high) / 2       //     Find the index of the middle value
+        start = 0                        // The marker pointing to the first element in the interval
+        end = array.size - 1             // The marker pointing to the last element in the interval
+        while start <= end:              // Continue until the interval is empty:
+            mid = (start + end) / 2      //     Find the index of the middle value
             if array[mid] < key:         //     Compare with the middle value in the interval:
-                low = mid + 1            //         The search key is in the upper half
+                start = mid + 1          //         The search key is in the upper half
             else if array[mid] > key:
-                high = mid - 1           //         The search key is in the lower half
+                end = mid - 1            //         The search key is in the lower half
             else:
                 return mid               //         We found the search key!
         return null                      // The value is not in the array.
@@ -106,7 +121,7 @@ and the end marker is the index of the last book.
 
 *Warning*: one very common error when implementing binary search is to make a copy of the interval you want to search
 (this is called a "slice" in many programming languages).
-For example, in Python if you write `array[low:high]`, you will make a copy of the interval.
+For example, in Python if you write `array[start:end]`, you will make a copy of the interval.
 Imagine that the interval consists of 1 million elements,
 then the computer has to allocate space for a new array with 1 million elements,
 and copy all of them from the original array to the new.

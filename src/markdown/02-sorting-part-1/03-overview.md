@@ -80,3 +80,33 @@ Insertion sort
     If it is smaller, you slide the shelved book one step right and look at the one to the left.
     Otherwise you have found the right spot for your book, and can put it in the empty space.
 
+
+### Algorithms
+
+**TODO**: incorporate these with the rest of the text
+
+::: algorithm
+#### Algorithm: Selection sort
+
+Divide the array into a sorted and an unsorted part,
+the sorted part is to the left and initially empty.
+Then repeat the following until the unsorted part is empty:
+
+1. Find the smallest unsorted element, $e$.
+2. Swap $e$ with the leftmost of the unsorted elements.
+3. Now $e$ will belong to the sorted part, and the unsorted part has decreased by one.
+
+:::
+
+::: algorithm
+#### Algorithm: Insertion sort
+
+Divide the array into a sorted and an unsorted part,
+the sorted part is to the left and initially empty.
+Then repeat the following until the unsorted part is empty:
+
+1. Take the leftmost of the unsorted elements, $e$.
+2. While $e$ is out of order compared to its left neighbour, swap the two.
+3. Now $e$ will belong to the sorted part, and the unsorted part has decreased by one.
+
+:::
