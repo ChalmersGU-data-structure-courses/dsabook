@@ -491,6 +491,20 @@ The answer can only be determined by empirical testing, but on modern machines t
 Note that in @sec:using-a-backoff-algorithm we discussed exactly the same improvement for Mergesort.
 
 
+#### Running Insertion sort in a single final pass
+
+There is a variant of the optimisation above: When Quicksort partitions are below a certain size, do nothing!
+The values within that partition will be out of order. However, we do know that all
+values in the array to the left of the partition are smaller than all
+values in the partition. All values in the array to the right of the
+partition are greater than all values in the partition. Thus, even if
+Quicksort only gets the values to "nearly" the right locations, the
+array will be close to sorted. This is an ideal situation in which to
+take advantage of the best-case performance of Insertion sort. The final
+step is a single call to Insertion sort to process the entire array,
+putting the records into final sorted order.
+
+
 #### Alternative partitioning algorithm
 
 The partitioning algorithm we described in @sec:partition is called *Hoare* partitioning
@@ -537,3 +551,4 @@ Assuming that we have such an algorithm, the final Quicksort algorithm can be de
 
 Three-way partitioning is also called the *Dutch national flag problem*,
 and one possible algorithm to solve it is to modify the Lomuto partitioning scheme from above.
+
