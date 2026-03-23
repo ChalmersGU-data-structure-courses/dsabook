@@ -19,11 +19,11 @@ The idea behind *Mergesort* is to simply split the array in half.
 ::: algorithm
 #### Algorithm: Mergesort
 
-To sort an array:
+To sort an array using Mergesort:
 
-1. Split the array into two equal-sized arrays, *left* and *right*,
-2. then recursivle sort *left* into *sorted-left* and *right* into *sorted-right*,
-3. finally merge *sorted-left* and *sorted-right* into the final sorted array.
+1. Split the array into two halves of equal size,
+2. then recursively sort each half,
+3. finally merge the two sorted halves into the final sorted array.
 
 :::
 
@@ -37,11 +37,6 @@ Now we only have to know how to split and merge.
 Splitting is really easy: just divide the array in half.
 The problem is how to implement merging.
 
-<!-- To merge two sorted arrays, we iterate through them in parallel.
-We do this by having two pointers, one for each array.
-(Note: a pointer here just means an array index
--- something that tells us where in the array to look.) -->
-
 ::: dsvis
 Here is a visualisation that illustrates how Mergesort works.
 
@@ -54,38 +49,20 @@ Here is a visualisation that illustrates how Mergesort works.
 The hardest step to understand about Mergesort is how to
 merge the two sorted halves into a single sorted array.
 This is done by iterating through both sorted halves *in parallel*,
-and every time moving the smallest element to the final array.
+and every time moving the smallest element to the final result.
 
 ::: algorithm
-#### Algorithm: Merge (v1)
+#### Algorithm: Merge
 
-First we need a temporary *result* array, initially empty.
+First we need a temporary result array, initially empty.
 We also initialise two pointers to the first element of each sorted half.
 Now we repeat the following until one of the halves is empty:
 
 1. Compare the elements pointed to in each sorted half.
-2. Append the smallest of the two to the *result* array,
+2. Append the smallest of the two to the result array,
    and move that pointer to the next element.
 
-Finally we can append the remaining elements in the nonempty half to the end of *result*.
-:::
-
-Here is the same algorithm but more detailed.
-
-::: algorithm
-#### Algorithm: Merge (v2)
-
-To merge two sorted arrays, *left* and *right*:
-
-1. Create an empty *result* array.
-2. Point $i, j$ to the first element in *left* and *right*, respectively.
-3. Now loop until any of $i$ or $j$ has reached the end of its array:
-    - Compare *left*[$i$] with *right*[$j$],
-    - if *left*[$i$] is smaller, add it to the end of the *result* and increase $i$,
-    - if *right*[$j$] is smaller, add it to the end of the *result* and increase $j$.
-4. Finally there are some stray elements in either *left* or *right*:
-    - Just add them to the end of the *result*.
-
+Finally we can append the remaining elements in the nonempty half to the end of the result array.
 :::
 
 ::: dsvis
@@ -116,7 +93,7 @@ Now here is a full proficiency exercise to put it all together.
 
 ### Categorising Mergesort
 
-Note that the merging algorithm is not in-place, becaue we allocate space for the temporary *result* array.
+Note that the merging algorithm is not in-place, becaue we allocate space for the temporary result array.
 In is in fact possible to do the merging in-place,
 but this involves moving around elements in a way similar to Insertion sort,
 which is both is more complex and less efficient as the algorithm above.
@@ -132,7 +109,7 @@ we are now ready to categorise Mergesort:
 
 Mergesort splits the input array into two equal-size arrays.
 But what happens if we split in another way?
-What if we always make the right part just one single element?
+What if we always make the end part just one single element?
 
 Merging will then be the same as inserting this singleton element into a sorted array,
 and this is exactly what Insertion sort does!
@@ -234,37 +211,37 @@ How can we use the algorithm descriptions above to implement Mergesort?
 The descriptions are quite vague and we have to figure out how to make it work in practice.
 First, splitting an input array into two subarrays is easy.
 We do not have to copy any elements, but we can use the same idea as for binary search:
-use array indices *left* and *right* to refer to an array interval.
-To split this subarray into two halves, we just calculate the middle index between *left* and *right*.
+use array indices *start* and *end* to refer to an array interval.
+To split this subarray into two halves, we just calculate the middle index between *start* and *end*.
 
 The main function for sorting an interval can now be written like this:
 
-    // Sort the array interval left .. right
-    function mergeSort(array, left, right):
-        if left >= right:                   // Base case: Interval length is ≤ 1
+    // Sort the array interval start...end
+    function mergeSort(array, start, end):
+        if start >= end:                   // Base case: Interval length is ≤ 1
             return
-        mid = int((left + right) / 2)       // The midpoint is where the right half starts
-        mergeSort(array, left, mid-1)       // Mergesort the left half
-        mergeSort(array, mid, right)        // Mergesort the right half
-        merge(array, left, mid, right)      // Merge the two sorted halves
+        mid = int((start + end) / 2)       // The midpoint is where the second half starts
+        mergeSort(array, start, mid-1)     // Mergesort the first half
+        mergeSort(array, mid, end)         // Mergesort the second half
+        merge(array, start, mid, end)      // Merge the two sorted halves
 
 The initial call would be `mergeSort(array,0,array.size-1)`, which sorts the whole array.
 
 Merging the sorted array intervals are quite straightforward from the description,
 we just have to keep track of the pointers to the two sorted halves.
 
-    // Merge the sorted array intervals left .. mid-1 and mid .. right
-    function merge(array, left, mid, right):
+    // Merge the sorted array intervals start .. mid-1 and mid .. end
+    function merge(array, start, mid, end):
         temp = new Array
-        j = left; k = mid                   // Pointers to the left and right intervals
-        for i in left .. right:             // Pointer to the temporary array
-            if j < mid and (k > right or array[j] <= array[k]):
-                temp[i] = array[j]          // The left element is smaller
-                j = j + 1                   // (or the right interval is exhausted)
+        j = start; k = mid                  // Pointers to the sorted halves
+        for i in start .. end:              // Pointer to the temporary array
+            if j < mid and (k > end or array[j] <= array[k]):
+                temp[i] = array[j]          // The element from the first half is smaller
+                j = j + 1                   // (or the second half is exhausted)
             else:
-                temp[i] = array[k]          // The right element is smaller
-                k = k + 1                   // (or the left interval is exhausted)
-        for i in left .. right:
+                temp[i] = array[k]          // The element from the second half is smaller
+                k = k + 1                   // (or the first half is exhausted)
+        for i in start .. end:
             array[i] = temp[i]              // Copy everything back
 
 
