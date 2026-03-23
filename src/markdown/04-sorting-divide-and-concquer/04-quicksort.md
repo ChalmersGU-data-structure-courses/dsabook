@@ -6,270 +6,223 @@
 - Prio 2: make the text more coherent
 :::
 
-<!-- START NOTES -->
+Mergesort uses a very simple approach for splitting the array, but spends almost all its time in the merging step.
+But there is also another problem with merging: it is difficult to efficiently implement in-place,
+so Mergesort have to use an additional array which will use some memory.
+So is there a different divide-and-conquer strategy that is easier to make in-place?
 
-Mergesort uses a very simple approach for splitting the array, but spends almost all its time in the merging step. But there's also another problem with merging: it is difficult to efficiently implement in-place, so Mergesort have to use an additional array which will eat some memory. An alternative is to spend more time in the splitting phase so that the merging can be simplified.
+*Quicksort* uses another approach: it spends more of the time in splitting the array in parts,
+which then makes the merging step completely trivial.
+The overall algorithm is deceivingly similar to Mergesort:
 
-Partition
+::: algorithm
+#### Algorithm: Quicksort
 
-In Quicksort, the splitting phase is called *partition*. The idea is that we divide the array into two parts, where everything in the left part is smaller than everything in the right part. Then Quicksort calls itself with the two subarrays (just as Mergesort does), so that they are both sorted. Now we have to combine them, but this is much easier than in Mergesort, because we already know that everything in the left part is smaller than everything in the right part -- so we can just put them after each other.
+To sort an array using Quicksort:
 
-The biggest advantage of Quicksort over Mergesort is that partitioning can be done in-place, which merging cannot. And the main reason why we can partition in place is because we can swap elements with each other -- just as Selection sort does.
+1. Partition the array into two smaller parts,
+2. then recursively sort each part,
+3. finally concatenate the two parts into the final sorted array.
 
-The basic idea of partitioning is that we first select a pivot element -- this is the one that decides which will go in the left and right parts. Then we have two pointers starting at both ends of the array, moving towards each other. Whenever they encounter two elements that are in the wrong partition, they swap places. Or to be more exact: when the left pointer finds an element which is larger than the pivot, and the right pointer finds an element smaller than the pivot, the two elements swap. When the two pointers meet, the array has been partitioned.
+:::
 
-There is one final detail we have to figure out before we have a complete algorithm: what should happen with the pivot? We know that in the end it must be between the two partitions, but the problem is that we don't know exactly how big the partitions will be -- and therefore we cannot know in advance where to put the pivot.
+The main difference to Mergesort is in the splitting step, called *partition*.
+The idea is that we divide the array into two parts,
+where everything in the first part is smaller than everything in the second part.
+Then Quicksort calls itself with the two subarrays (just as Mergesort does), so that they are both sorted.
+Now we have to combine them, but this is much easier than in Mergesort,
+because we already know that everything in the first part is smaller than everything in the second part
+-- so we can just put them after each other.
 
-The standard solution is to first move the pivot out of the way -- then partition the rest of the array, and afterwards put it back in. One good place to put it is at the beginning, so the first we do is to swap it there. Then we partition the rest of the array. After the partitioning is finished and the pointers have passed each other, the right pointer will point to the last element in the left part. This is the final position of the pivot, so we can swap them. The final algorithm sketch is like this:
 
-1. Select a pivot element.
-2. Swap the pivot with the first element in the array.
-3. Partition the rest of the array.
-4. Swap the pivot back into the place that is indicated by the right pointer.
-5. Return the new position of the pivot -- this is something that Quicksort needs to know to be able to sort the two partitions recursively.
+### Partition
 
---------
+The biggest advantage of Quicksort over Mergesort is that partitioning can be done in-place, which merging cannot.
+And the main reason why we can partition in-place is because we can swap elements with each other.
 
-1. Select a pivot element:
+To partition an array interval, we first select a *pivot* element from the interval.
+This is the value that decides which will elements go in the lower and upper parts.
+Now we create two pointers that start at the interval ends and then move towards each other.
+Whenever they encounter two elements that are in the wrong partition, they swap places.
+Or in other words: when the *lower* element is larger than the pivot,
+and the *upper* element is smaller than the pivot, the two elements swap places.
+When the pointers pass each other, the array has been partitioned.
+
+There is one final detail we have to figure out before we have a complete algorithm:
+what should happen with the pivot?
+We know that in the end it must be in between the two partitions,
+but the problem is that we don't know exactly how big the partitions will be
+-- and therefore we cannot know in advance where to put the pivot.
+The standard solution is to first move the pivot out of the way
+-- then partition the rest of the array, and afterwards put it back in.
+One good place to put it is at the beginning,
+so the first we do is to swap it there and then we partition the rest of the array.
+After the partitioning is finished and the pointers have passed each other,
+the upper pointer will point to the last element in the lower part.
+This is the final position of the pivot, so we can swap it into place.
+
+::: algorithm
+#### Algorithm: Quicksort partition
+
+To partition an array interval:
+
+1.  First, select some pivot element from the interval.
+
+2.  Swap the pivot with the first element in the interval,
+    and initialise the lower and upper pointers to the second and last elements of the interval, respectively.
+
+3.  Repeat the following until the pointers have passed each other:
+
+    (a) Increase the lower pointer if its element is smaller than the pivot.
+    (b) Decrease the upper pointer if its element is larger than the pivot.
+    (c) If neither (a) nor (b) are true, swap the lower and upper elements with each other.
+
+4.  Swap the upper element with the pivot (which is now the first element in the interval).
+
+5.  Finally, Quicksort needs to know the final position of the pivot
+    to be able to sort the two partitions recursively, so we have to return the upper pointer.
+
+:::
+
+
+Here is a step-by-step example of partitioning.
+
+1.  First we select a pivot element:
 
     ![](images/QuicksortPartition1.png)
 
-2. Swap the pivot with the first element, and move the left pointer one step right:
+2.  Swap the pivot with the first element, and initialise the *lower* and *upper* pointers:
 
     ![](images/QuicksortPartition2.png)
 
 
-3. Partition the rest of the array. Move the pointers towards each other:
+3.  Partition the rest of the array. Move the pointers towards each other:
 
     ![](images/QuicksortPartition3.png)
 
-    Whenever left points to an element larger than the pivot, and right points to an element smaller than the pivot, swap them:
+    Whenever the *lower* element is larger than the pivot,
+    and the *upper* element is smaller than the pivot, swap them:
 
     ![](images/QuicksortPartition4.png)
 
-4. Finally, swap the pivot with the element at the right pointer:
+4.  Finally, swap the pivot with the element at the *upper* pointer:
 
     ![](images/QuicksortPartition5.png)
 
-5. Return the new position of the pivot:
+5.  Return the new position of the pivot:
 
     ![](images/QuicksortPartition6.png)
 
-Note that the partitioning is done completely in-place. This is different from Mergesort where we need to allocate space for a temporary array.
+Note that the partitioning is done completely in-place.
+This is different from Mergesort where we need to allocate space for a temporary array.
 
 After the partitioning is finished we know the following:
 
-- The pivot is in its final position in the sorted array, so it will never have to be touched again.
-- The left part is not sorted, but all the elements in the left part should be somewhere in there. This means that we can recursively sort the left part.
-- The same for the right part.
+-   The pivot is in its final position in the sorted array, so it will never have to be touched again.
+-   The left part is not sorted, but all the elements in the left part should be somewhere in there.
+    This means that we can recursively sort the left part.
+-   The same for the right part.
 
-#### Alternative partitioning algorithm
-
-There is another common partitioning algorithm, where both pointers start at the left side and move to the right -- but one of them moves faster than the other. This algorithm is called *Lomuto* partitioning (and the one I described is called *Hoare* partitioning). You can read more about this alternative algorithm on Wikipedia:
-
-- https://en.wikipedia.org/wiki/Quicksort#Lomuto_partition_scheme
-
-#### Selecting a pivot
-
-So, what is a good pivot? The best is to select the *median* element (not the average and not the middle!). This will make the two partitions the same size and we will get the best performance. In this case the complexity analysis is exactly the same as for Mergesort, so Quicksort is linearithmic, $O(n \log(n))$, ***but only if*** we select a good pivot.
-
-However, it is difficult to find the median efficiently -- we don't want to scan the whole array, because this takes time. Instead we have to use some approximation.
-
-- The easiest is to just pick the first element. This works well if the initial array is mostly random, but it's awful if it is already sorted.
-- Another common alternative is to pick the middle element. This makes it behave very nicely on sorted arrays (and on random arrays).
-- Even better is to look at some elements and pick the median of those -- most common is to take the median of the first, middle and last elements. This strategy is called *median-of-three*.
-
-However, whatever strategy we have for choosing the pivot there is a risk that we are unlucky. In other words, there are always arrays that will make the strategy select a bad pivot. This is usually not a problem if the data is "well-behaved" -- the pivot selected by middle or median-of-three pivot will be close to optimal, and Quicksort will be as the name says, quick.
-
-The problem arises as soon as you are not 100% certain where the data comes from. For example, if you implement a database that is connected to the internet, it can be exploited by a malicious hacker. If they know what strategy you use they can design input that will make your Quicksort algorithm quadratic instead of almost linear, and then bombard your database with such inputs which will make your server slow down to a halt.
-
-So, how can we find a good pivot that is secure to hackers? One simple way is to select a random element. If we do this, we can prove that the *expected* complexity of Quicksort is linearithmic. Another possibility is to shuffle the array before sorting, and then use the simplest possible pivot which is always taking the first. This has the same effect as selecting a random pivot.
-
-
-#### Putting it together
-
-What remains is to give the final algorithm for Quicksort. The overall structure is very similar to Mergesort, but since the algorithm is in-place it doesn't return anything.
-
-In the first call we want to sort the full array, but in the subsequent recursive calls we just want to sort parts of the array. Since we want to do this in-place, the input to the recursive calls is not the array slice, but two pointers saying which part of the array we want to sort. Let's call these two pointers low and high (we could also have called them left and right). So the recursive Quicksort function takes three arguments, low, high, and the original array.
-
-Now we're almost ready to implement Quicksort, but one small but important thing remains. We cannot know how big the left and right partitions will be, not until we have done the partitioning. So the partition function has to inform Quicksort how the partitions ended up -- and we do this is to return the final position of the pivot.
-
-Here is the final algorithm sketch for sorting the slice *low*...*high* of a given array:
-
-1. Select a pivot -- some element from the slice *low*...*high*.
-2. Partition *low*...*high* using the pivot.
-3. Assume mid is the final position of the pivot.
-4. Sort the slice *low*...*mid*--1, and
-5. sort the slice *mid*+1...*high*.
-
-Note that we don't include the pivot itself (which mid points to) in the slices of the recursive calls (we use *mid*--1 and *mid*+1 respectively). This is because we know that after partitioning the pivot is in its final correct position.
-
-#### Optimising by backing off to Insertion sort
-
-Just as for Mergesort we can back off to Insertion sort (or Selection sort) whenever the array slice becomes too small. This is a small and simple optimisation that can give good effects.
-
-#### Selection sort as a variant of Quicksort (optional)
-
-What happens if we are extremely unlucky (or stupid) with the pivot selection?
-
-Let's say that we always select the smallest possible pivot. This means that the left partition will always be empty, and the right partition will decrease by one in each step. The first time we will find the smallest element and put it first in the array. The second time we will find the second smallest element and put it after the first. Next time we will find the third smallest element and put it after the second. Etc.
-
-This is exactly how Selection sort works! So conceptually, we can view Selection sort as a corner case of Quicksort, where we partition very unevenly.
-
-<!-- END NOTES -->
-
---------------
-
-While Mergesort uses the most obvious form of divide and conquer (split
-the list in half then sort the halves), this is not the only way that we
-can break down the sorting problem. We saw that doing the merge step for
-Mergesort when using an array implementation is not so easy. So perhaps
-a different divide and conquer strategy might turn out to be more
-efficient?
-
-[Quicksort]{.term} is aptly named because, when
-properly implemented, it is one of the fastest known general-purpose
-in-memory sorting algorithms in the average case. It does not require
-the extra array needed by Mergesort, so it is space efficient as well.
-Quicksort is widely used, and is typically the algorithm implemented in
-a library sort routine such as the UNIX `qsort` function. Interestingly,
-Quicksort is hampered by exceedingly poor worst-case performance, thus
-making it inappropriate for certain applications.
-
-Quicksort first selects a value called the [pivot]{.term}. Assume that the input array contains $k$ records with key
-values less than the pivot. The records are then rearranged in such a
-way that the $k$ values less than the pivot are placed in the first, or
-leftmost, $k$ positions in the array, the pivot itself is placed at
-index $k$, and the values greater than or equal to the pivot are placed
-in the last, or rightmost, $n-k-1$ positions. This is called a
-[partition]{.term} of the array. The values
-placed in a given partition need not (and typically will not) be sorted
-with respect to each other. All that is required is that all values end
-up in the correct partition. The pivot value itself is placed in
-position $k$. Quicksort then proceeds to sort the resulting subarrays
-now on either side of the pivot, one of size $k$ and the other of size
-$n-k-1$. How are these values sorted? Because Quicksort is such a good
-algorithm, using Quicksort on the subarrays would be appropriate.
-
-Unlike some of the sorts that we have seen earlier in this chapter,
-Quicksort might not seem very "natural" in that it is not an approach
-that a person is likely to use to sort real objects. But it should not
-be too surprising that a really efficient sort for huge numbers of
-abstract objects on a computer would be rather different from our
-experiences with sorting a relatively few physical objects.
-
-Here is an implementation for Quicksort. Parameters `left` and `right`
-define the left and right indices, respectively, for the subarray being
-sorted. The initial call to `quickSort` would be
-`quickSort(arr,0,arr.size-1)`, just as for Mergesort.
-
-    function quickSort(arr, left, right):
-        if left >= right:                           // Base case: Subarray length is ≤ 1
-            return
-        pivot = findPivot(arr, left, right)         // Pick a pivot index
-        pivot = partition(arr, left, right, pivot)  // Partition and update pivot
-        quickSort(arr, left, pivot-1)               // Sort left partition
-        quickSort(arr, pivot+1, right)              // Sort right partition
-
-
-Function `partition` will move records to the appropriate partition and
-then return the final position of the pivot. This is the correct
-position of the pivot in the final, sorted array. By doing so, we
-guarantee that at least one value (the pivot) will not be processed in
-the recursive calls to `quickSort`. Even if a bad pivot is selected,
-yielding a completely empty partition to one side of the pivot, the
-larger partition will contain at most $n-1$ records.
-
-Selecting a pivot can be done in many ways. The simplest is to use the
-first key. However, if the input is sorted or reverse sorted, this will
-produce a poor partitioning with all values to one side of the pivot.
-One simple way to avoid this problem is to select the middle position in
-the array. Here is a simple `findPivot` function implementing this idea.
-Note that later in the chapter we will discuss better pivot selection strategies.
-
-    function findPivot(arr, left, right) -> Int:
-        // Not-so-good pivot selection: always choose the middle element.
-        return int((left + right) / 2)
-
-::: dsvis
-Quicksort pivot proficiency exercise
-
-```{.jsav-embedded src="Sorting/QuicksortPivotPRO.html" type="ka" name="Quicksort Pivot Proficiency Exercise"}
-```
-:::
-
-<!--
-### Invariants
--->
-
-### Partition
-
-We now turn to partitioning. If we knew in advance how many keys
-are less than the pivot, we could simply copy records with key
-values less than the pivot to the low end of the array, and records with
-larger keys to the high end. Because we do not know in advance how many
-keys are less than the pivot, we use a clever algorithm that moves
-indices inwards from the ends of the subarray, swapping values as
-necessary until the two indices meet.
-
-Since Quicksort is a recursive algorithm, we will not only partition the
-whole array, but also subarrays. Therefore `partition` needs the
-positions of the leftmost and rightmost elements in the subarray that we
-will partition.
-
-The partition function first puts the pivot at the leftmost position in the subarray.
-Then it moves the *left* and *right* pointers towards each other;
-until they both point to values which are unordered relative to the pivot value.
-Now the *left* and *right* values can be swapped, which puts them both in their correct partition.
-The loop continues until the *left* and *right* pointers have passed each other.
-
-    function partition(arr, left, right, pivot) -> Int:
-        swap arr[pivot] with arr[left]
-        while left ≤ right:
-            move left rightwards until arr[left] ≥ arr[pivot]
-            move right leftwards until arr[right] ≤ arr[pivot]
-            swap arr[left] with arr[right]
-        swap arr[pivot] with arr[right]
-        return right
-
-Finally, it puts the pivot at its correct position, by swapping with the *right* pointer.
-Why is *right* the correct pivot position, and not *left*?
-This is because we initially put the pivot first in the subarray, so the value that is swapped with the pivot must be smaller.
 
 ::: dsvis
 Here is a visualisation of the partitioning algorithm.
+We assume that we select the middle element as the pivot.
 
 ``` {.jsav-animation src="Sorting/quicksortCON.js" scripts="Sorting/quicksortCODE.js" links="Sorting/quicksortCON.css" name="Quicksort Partition Slideshow"}
 ```
 :::
 
 ::: dsvis
-Quicksort partition proficiency exercise.
+#### Quicksort partition proficiency exercise
 
 ```{.jsav-embedded src="Sorting/QuicksortPartitPRO.html" type="ka" name="Quicksort Partition Proficiency Exercise"}
 ```
 :::
 
-To analyse Quicksort, we first analyse the functions for finding the pivot and partitioning a subarray of length $k$.
-Clearly, `findPivot` takes constant time for any $k$.
 
-The total cost of the partition operation is constrained by how far `left` and `right` can move inwards.
+### Categorising Quicksort
 
-- The swap operation in the body of the main loop guarantees that `left` and `right` move at least one step each.
-  Thus, the maximum number of times `swap` can be executed is $(k-1)/2$.
-- In any case, since `left` and `right` always move towards each other, it will take a total of $k-1$ steps until they meet.
-- Thus, the running time of the partition function is $O(k)$.
+Compared to Mergesort, the partitioning process is completely in-place,
+but on the other hand we cannot be certain that the internal order between equal elements are preserved.
+This means that Quicksort is not a stable algorithm, and we have no guarantee for a good time complexity.
+Here is how we can categorise Quicksort according the three parameters from @sec:terminology:
+
+- In-place: *yes*, we do not have to create any intermediate arrays.
+- Stable: *no*, equal elements might change order.
+- Adaptive: *yes*, but it the complexity will never be better than linearithmic, $O(n\log(n))$.
+
+#### Selection sort as a variant of Quicksort (optional)
+
+What happens if we are extremely unlucky (or stupid) with the pivot selection?
+
+Let us say that we always select the smallest possible pivot.
+This means that the lower partition will always be empty, and the upper partition will decrease by one in each step.
+The first time we will find the smallest element and put it first in the array.
+The second time we will find the second smallest element and put it after the first.
+Next time we will find the third smallest element and put it after the second, and so on.
+
+This is exactly how Selection sort works!
+So conceptually, we can view Selection sort as a corner case of Quicksort, where we partition very unevenly.
 
 
-::: dsvis
-Here is a visualisation illustrating the running time analysis of the partition function.
+### Implementing Quicksort
 
-``` {.jsav-animation src="Sorting/QuickSortPartitionAnalysisCON.js" links="Sorting/QuickSortPartitionAnalysisCON.css" name="Quicksort Partition Analysis Slideshow"}
-```
-:::
+Now we're almost ready to implement Quicksort, but one small but important thing remains.
+We cannot know how big the left and right partitions will be, not until we have done the partitioning.
+So the partition function has to inform Quicksort how the partitions ended up
+-- and we do this is to return the final position of the pivot.
+So here is the final algorithm sketch for sorting the interval $\mathit{start}\ldots\mathit{end}$ of a given array:
 
-:::::: online
-#### Putting it together
+1.  Select an initial index $p_0$ of the pivot, from the interval $\mathit{start}\ldots\mathit{end}$.
+2.  Partition the interval using the pivot.
+    Assume that the pivot has afterwards moved to position $p$.
+3.  Sort the interval $\mathit{start}\ldots p{-}1$ and the interval $p{+}1\ldots\mathit{end}$.
+
+Note that we do not include the pivot itself in the intervals of the recursive calls.
+This is because we know that after partitioning the pivot is in its final correct position, $p$.
+Now it should be straightforward to give the pseudocode for the main Quicksort function:
+
+    // Sort the array interval start...end
+    function quickSort(array, start, end):
+        if start >= end:                         // Base case: Interval length is ≤ 1
+            return
+        p0 = findPivot(array, start, end)        // Pick an initial pivot index
+        p = partition(array, start, end, p0)     // Partition the interval and update the pivot index
+        quickSort(array, start, p-1)             // Quicksort the lower partition
+        quickSort(array, p+1, end)               // Quicksort the upper partition
+
+The partitioning will return the final position of the pivot,
+which is the correct position of the pivot in the final, sorted array.
+By doing so, we guarantee that at least one value (the pivot) will not be included in the recursive calls.
+So even if a bad pivot is selected, yielding a completely empty partition to one side of the pivot,
+the larger partition will still contain one less element than the input array.
+
+#### Implementing partitioning
+
+The information algorithm in @sec:partition can be implemented as pseudocode like this:
+
+    function partition(array, start, end, p) -> Int:
+        swap(array, start, p)              // Put the pivot at the start of the interval
+        low = start + 1; high = end        // Initialise the lower and upper pointers
+        while low <= high:                 // Continue until the pointers pass each other
+            if array[low] < array[p]:
+                low = low + 1              // Increase the lower pointer if its element is smaller than the pivot
+            else if array[high] > array[p]:
+                high = high - 1            // Increase the upper pointer if its element is larger than the pivot
+            else:
+                swap(array, low, high)     // Otherwise, swap the elements, and
+                low = low + 1              // move both pointers towards each other
+                high = high - 1
+        swap(array, p, high)               // Finally, swap the pivot into place, and
+        return high                        // return the new position of the pivot
+
+You might wonder why we swap the pivot with the value at the *upper* pointer,
+why not swapping with the lower pointer?
+This is because we started by putting the pivot at the start of the interval.
+An equally good alternative partitioning algorithm would be to
+first swap the pivot with the end of the interval
+--  but in that case we would have to do the final swap with the pivot with the *lower* pointer.
+
 
 ::: dsvis
 Here is a visualisation for the entire Quicksort algorithm.
@@ -291,26 +244,137 @@ Quicksort.
 ```{.jsav-embedded src="Sorting/quicksortPRO.html" type="pe" name="Quicksort Proficiency Exercise"}
 ```
 :::
-::::::
+
+
+<!--
+### Invariants
+-->
+
+
+### Selecting a pivot
+
+Perhaps the most important choice in implementing Quicksort is how to choose the pivot.
+Choosing a bad pivot can result in all elements of the array ending up in the same partition,
+in which case Quicksort ends up taking quadratic time.
+
+The best is to select the *median* value (that is, not the average and not the middle value).
+This will make the two partitions the same size and we will get the best performance.
+In this case the complexity analysis is exactly the same as for Mergesort,
+because each recursive step divides the interval in two halves.
+Therefore Quicksort is linearithmic, $O(n \log(n))$, ***but only if*** we always select a good pivot.
+
+However, it is difficult to find the median efficiently
+-- we do not want to scan the whole array before we start partitioning, because this takes time.
+Instead we have to use some approximation.
+
+#### First or last element
+
+Choosing the *first* or the *last* element of the array interval is a very simple strategy, but it is also bad.
+If the input array is sorted, then the first element of the interval
+will also be the smallest (and the last will be the largest).
+Hence all elements of the array will end up in one of the partitions.
+Worse, exactly the same thing will happen in all the recursive calls to Quicksort.
+Hence the partitioning will be as bad as possible, and Quicksort will end up taking quadratic time.
+
+The take-first or take-last strategy is also bad if the input is *almost* sorted,
+because the partitions will be very uneven in size and this is not good for Quicksort.
+
+#### Middle element
+
+A much better alternative is to pick the *middle* element of the interval.
+This makes partitioning behave very nicely sorted arrays, and on almost-sorted arrays.
+However, it is still very easy for a hacker to fool this strategy,
+so in practice, we have to use more sophisticated strategies.
+
+#### Median-of-three
+
+Even better is to look at a sample of the elements and pick the median of those.
+By far the most common is to take the median of the first, middle and last elements.
+This strategy is called *median-of-three*.
+
+For example, given the array [3, 1, 4, 1, 5, 9, 2],
+we pick out the elements 3 (first position), 1 (middle position) and 2 (last position).
+The median of 3, 1 and 2 is 2, so we pick 2 as the pivot.
+
+Median-of-three is not guaranteed to pick a good pivot:
+there are cases where it partitions the input array badly.
+However, these bad cases do not seem to occur in practice, so
+median-of-three is used by many real-world Quicksort implementations.
+
+#### Non-well-behaved input
+
+However, whatever strategy we have for choosing the pivot there is a risk that we are unlucky.
+In other words, there are always arrays that will make the strategy select a bad pivot.
+This is usually not a problem if the data is "well-behaved"
+-- the pivot selected by the take-middle or median-of-three strategy will be close to optimal,
+and Quicksort will be as the name says, quick.
+
+The problem arises as soon as you are not 100% certain where the data comes from.
+For example, if you implement a database that is connected to the internet, it can be exploited by a malicious hacker.
+If they know what strategy you use they can design input that
+will make your Quicksort algorithm quadratic instead of almost linear,
+and then bombard your database with such inputs which will make your server slow down to a halt.
+
+#### Random pivot
+
+So, how can we find a good pivot that is secure to hackers?
+One simple approach is to select a *random* element from the interval.
+This makes it extremely improbable that we will always get poor partitionings.
+In fact, it is possible to prove that the *expected* worst-case complexity of
+Quicksort with random pivot selection is linearithmic, $O(n\log(n))$.
+
+
+::: dsvis
+#### Quicksort pivot proficiency exercise
+
+In this exercise you should select which is the pivot element, if you always use the middle one.
+
+```{.jsav-embedded src="Sorting/QuicksortPivotPRO.html" type="ka" name="Quicksort Pivot Proficiency Exercise"}
+```
+:::
 
 
 ### Complexity analysis
 
-Quicksort's worst case will occur when the pivot does a poor job of breaking the array, that is, when there are no records in one partition, and $n-1$ records in the other.
+To analyse Quicksort, we first analyse the functions for finding the pivot and partitioning an interval of length $k$.
+All the pivot selection strategies above take constant time for any $k$, so
+the total cost of partitioning is constrained by how far the lower and upper pointers can move towards each other.
 
-- The pivot partitions the array into two parts: one of size $0$ and the other of size $n-1$. This requires $n-1$ units of work.
-- In the second level, the pivot breaks it into two parts: one of size $0$ and the other of size $n-2$. This requires $n-2$ units of work.
-- In the third level, the pivot breaks it into two parts: one of size $0$ and the other of size $n-3$. This requires $n-3$ units of work.
-- ...
-- In the last level, the pivot breaks a partition of size $2$ into two parts: one of size $0$ and the other of size $1$. This requires a single unit of work.
+-   In each step of the `while`-loop, either *low* or *high* (or both) moves one step.
+-   Since the pointers always move towards each other, it will take at most $k$ steps until they meet.
+-   So, the running time of the partition function is $O(k)$.
+
+
+::: dsvis
+Here is a visualisation illustrating the running time analysis of the partition function.
+
+``` {.jsav-animation src="Sorting/QuickSortPartitionAnalysisCON.js" links="Sorting/QuickSortPartitionAnalysisCON.css" name="Quicksort Partition Analysis Slideshow"}
+```
+:::
+
+#### Worst-case complexity
+
+Quicksort's worst case will occur when the pivot does a poor job of breaking the array,
+that is, when one partition becomes empty, and the other contains $n-1$ elements.
+
+-   The pivot partitions the array into two parts:
+    one of size $0$ and the other of size $n-1$.
+    This requires $n-1$ units of work.
+-   In the second level, the pivot breaks it into two parts:
+    one of size $0$ and the other of size $n-2$.
+    This requires $n-2$ units of work.
+-   In the third level, the pivot breaks it into two parts:
+    one of size $0$ and the other of size $n-3$.
+    This requires $n-3$ units of work.
+-   And so on until the last level, where the pivot breaks a partition of size $2$ into two parts:
+    one of size $0$ and the other of size $1$.
+    This requires a single unit of work.
 
 Thus, the total amount of work is determined by the summation:
 
 $$
 \sum_{i=1}^{n} i = \frac{1}{2} n (n-1) \; \in \; O(n^2)
 $$
-
-Therefore, the worst case running time of Quicksort is $O(n^2)$.
 
 ::: dsvis
 This visualisation explains the worst-case running time of Quicksort
@@ -319,25 +383,33 @@ This visualisation explains the worst-case running time of Quicksort
 ```
 :::
 
-This is terrible, no better than Insertion or Selection sort. When will
-this worst case occur? Only when each pivot yields a bad partitioning of
-the array. If the pivot values are selected at random, then this is
-extremely unlikely to happen. When selecting the middle position of the
-current subarray, it is still unlikely to happen. It does not take many
-good partitionings for Quicksort to work fairly well.
+So, the worst case running time of Quicksort is $O(n^2)$.
+This is terrible, no better than Insertion or Selection sort.
+When will this worst case occur?
+Only when each pivot yields a bad partitioning of the array.
+If the pivot values are selected at random, then this is extremely unlikely to happen.
+If we instead always select the middle element in the interval, it is still unlikely to happen *on well-behaved data*.
+It does not take many good partitionings for Quicksort to work fairly well.
 
 #### Best-case complexity
 
-Here is an explanation of the best-case running time of Quicksort:
+In @sec:best-worst-and-average-cases we argued why we should never be interested in the best-case complexity,
+but it is interesting and useful to analyse Quicksort in this way.
+The very best case occurs if we always selects the best possible pivot,
+which is the one that always partitions the array into equal-sized parts.
 
-- The pivot partitions the array into two halves of size $n/2$ each. This requires $O(n)$ amount of work.
-- For each of the two partitions, the pivot breaks it into halves of size $n/4$ each. This requires $O(n)$ amount of work.
-- For each of the four partitions, the pivot breaks it into halves of size $n/8$ each. This requires $O(n)$ amount of work.
-- ...
-- In the last level, we reach $n$ partitions each of size $1$. This requires $O(n)$ amount of work.
+-   The pivot partitions the array into two halves of size $n/2$ each.
+    This requires $O(n)$ amount of work.
+-   For each of the two partitions, the pivot breaks it into halves of size $n/4$ each.
+    This requires $O(n)$ amount of work.
+-   For each of the four partitions, the pivot breaks it into halves of size $n/8$ each.
+    This requires $O(n)$ amount of work.
+-   And so on until the last level, where we reach $n$ partitions each of size $1$.
+    This requires $O(n)$ amount of work.
 
-Thus, at each level, all partition steps for that level do a total of $O(n)$ work.
-And if we always can find the perfect pivot, there will be only $\log(n)$ levels.
+Note that this is exactly the same reasoning as for Mergesort.
+Thus, for each level, all partition steps for that level do a total of $O(n)$ work.
+And if we always can find the perfect pivot, there will be only $\log_2(n)$ levels.
 So the best-case running time of Quicksort is $O(n \log(n))$.
 
 ::: dsvis
@@ -349,15 +421,29 @@ This visualisation explains the best-case running time of Quicksort
 
 #### Average-case complexity
 
-Quicksort's average-case behaviour falls somewhere between the extremes
-of worst and best case. Average-case analysis considers the cost for all
-possible arrangements of input, summing the costs and dividing by the
-number of cases. We make one reasonable simplifying assumption: At each
-partition step, the pivot is equally likely to end in any position in
-the (sorted) array. In other words, the pivot is equally likely to break
-an array into partitions of sizes 0 and $n-1$, or 1 and $n-2$, and so on.
-Given this assumption, the average-case cost is computed from the
-following equation:
+Quicksort's average-case behaviour falls somewhere between the extremes of worst and best case.
+Average-case analysis considers the cost for all possible arrangements of input,
+and calculates the average cost, weighted by how the data is distributed.
+As we already discussed in @sec:the-problem-with-average-case,
+the average case is extremely difficult to reason about,
+because real-world data does not usually have an even distribution.
+
+For Quicksort it is possible to show that the number of "bad" cases are quickly outnumbered
+by the number of "good" cases, when the array size grows.
+This means that for *well-behaved* input, the average-case complexity of Quicksort
+is very likely to be closer to the best case than the worst case.
+
+In fact, if we select a *random pivot* in every step,
+then we can prove that the *expected* worst-case complexity is linearithimc, $O(n\log(n))$.
+
+::: dsvis
+#### Inferring the complexity with a random pivot
+
+If we use a random pivot, then at every step,
+the pivot is equally likely to end in any position in the array.
+In other words, the pivot is equally likely to break an array
+into partitions of sizes 0 and $n-1$, or 1 and $n-2$, and so on.
+Now the average-case cost $T(n)$ can be computed from the following equation:
 
 \begin{align*}
 T(n) &= cn + \frac{1}{n}\sum_{k=0}^{n-1}[T(k) + T(n - 1 - k)]
@@ -365,30 +451,89 @@ T(n) &= cn + \frac{1}{n}\sum_{k=0}^{n-1}[T(k) + T(n - 1 - k)]
 T(0) = T(1) &= c
 \end{align*}
 
-::: dsvis
-This visualisation will help you to understand how this recurrence
-relation was formed.
+The equation above is a *recurrence relation*, and we will discuss those in more detail in @sec:recurrence-relations.
+This visualisation will help you to understand how the recurrence relation was formed.
 
 ``` {.jsav-animation src="Sorting/QuickSortAverageCaseCON.js" links="Sorting/QuickSortAverageCaseCON.css" name="Quicksort Average Case Analysis Slideshow"}
 ```
 :::
 
-This is an unusual situation that the average case cost and the worst
-case cost have asymptotically different growth rates. Consider what
-"average case" actually means. We compute an average cost for inputs
-of size $n$ by summing up for every possible input of size $n$ the
-product of the running time cost of that input times the probability
-that that input will occur. To simplify things, we assumed that every
-permutation is equally likely to occur. Thus, finding the average means
-summing up the cost for every permutation and dividing by the number of
-permutations (which is $n!$). We know that some of these $n!$ inputs
-cost $O(n^2)$. But the sum of all the permutation costs has to be
-$(n!)(O(n \log(n)))$. Given the extremely high cost of the worst inputs,
-there must be very few of them. In fact, there cannot be a constant
-fraction of the inputs with cost $O(n^2)$. If even, say, 1% of the
-inputs have cost $O(n^2)$, this would lead to an average cost of
-$O(n^2)$. Thus, as $n$ grows, the fraction of inputs with high cost must
-be going toward a limit of zero. We can conclude that Quicksort will run
-fast if we can avoid those very few bad input permutations. This is why
-picking a good pivot is so important.
 
+### Variants and optimisations
+
+In this section we discuss some variants of Quicksort, and things we can do to improve its efficiency.
+
+
+#### Shuffle the array
+
+As we explained above, if we use a random pivot we get a good asymptotic behaviour,
+because the expected worst-case complexity will be $O(n\log(n))$.
+
+One alternative to using a random pivot is to *shuffle* the array before sorting, that is, rearranging it in random order.
+This only has to be done once before Quicksort begins, not in every recursive call.
+The advantage to doing this is that then we can safely use the simplest pivot selection strategy.
+And if we use the take-first pivot strategy we do not have to swap the pivot with the first element at the start of every partitioning.
+Depending on the computer and programming language, this can yield a slight improvement compared to using a random pivot.
+
+
+#### Backing off to Insertion sort
+
+A significant improvement can be gained by recognising that Quicksort is relatively slow when the array is small.
+This might not seem to be relevant if most of the time we sort large arrays,
+nor should it matter how long Quicksort takes in the rare instance when a small array is sorted because it will be fast anyway.
+But you should notice that Quicksort itself sorts many, many small arrays!
+This happens as a natural by-product of the divide and conquer approach.
+
+A simple improvement is to replace Quicksort with a faster sort for smaller array intervals.
+This is a very common improvement, and usually one uses Insertion sort as the backoff algorithm.
+Now, at what size should we switch to Insertion sort?
+The answer can only be determined by empirical testing, but on modern machines the answer is probably somewhere between 10 and 100.
+Note that in @sec:using-a-backoff-algorithm we discussed exactly the same improvement for Mergesort.
+
+
+#### Alternative partitioning algorithm
+
+The partitioning algorithm we described in @sec:partition is called *Hoare* partitioning
+(named after the computer scientist C.A.R. Hoare).
+There is another common partitioning algorithm, where both pointers start at the left side and move to the right
+-- but one of them moves faster than the other.
+This algorithm is called *Lomuto* partitioning (named after Nico Lomuto).
+
+In this algorithm we still have two pointers, but both start at the beginning of the array interval and move upwards.
+Below we call them $\mathit{low}$ and $\mathit{high}$, where $\mathit{low}\leq\mathit{high}$.
+The invariant is that the elements from $\mathit{start}$ to $\mathit{low}-1$ are always less than the pivot,
+and the elements from $\mathit{low}$ to $\mathit{high}$ are greater than or equal to the pivot.
+In Lomuto's partitioning scheme we start by putting the pivot at the *end* of the interval, not the beginning.
+
+    function partition(array, start, end, p):
+        swap(array, p, end)
+        low = start
+        for high in start .. end-1:
+            if array[high] <= array[end]:
+                swap(array, low, high)
+                low = low + 1
+        swap(array, end, low)
+        return low
+
+However, Lomuto's partitioning scheme is usually somewhat less efficient than Hoare's, because it makes more swaps.
+It also does not work very well if the array contains many equal elements.
+
+
+#### Three-way quicksort
+
+If the array contains many equal elements, there is a small optimisation we can do to the partitioning scheme.
+Our current formulation divides the array into one lower part, then the pivot, and finally the upper part.
+If the array happens to contain many duplicates of the pivot, it would be useful to put all of them next to each other.
+This means that the algorithm divides the array into *three* parts:
+the lower part, the equal part, and the upper part.
+Our partitioning algorithm then has to return *two* indices, giving the end of the lower part and the beginning of the upper.
+Assuming that we have such an algorithm, the final Quicksort algorithm can be described like this:
+
+1.  Select an initial pivot from the interval $\mathit{start}\ldots\mathit{end}$.
+2.  Partition the interval using the pivot.
+    Assume that the partitioning returns the positions $p$ (the end of the lower part)
+    and $q$ (the start of the upper part).
+3.  Sort the interval $\mathit{start}\ldots p$ and the interval $q\ldots\mathit{end}$.
+
+Three-way partitioning is also called the *Dutch national flag problem*,
+and one possible algorithm to solve it is to modify the Lomuto partitioning scheme from above.
