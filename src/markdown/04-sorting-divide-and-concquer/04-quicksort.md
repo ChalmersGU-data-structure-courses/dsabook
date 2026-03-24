@@ -75,7 +75,7 @@ To partition an array interval:
 
     (a) Increase the lower pointer if its element is smaller than the pivot.
     (b) Decrease the upper pointer if its element is larger than the pivot.
-    (c) If neither (a) nor (b) are true, swap the lower and upper elements with each other.
+    (c) Otherwise, swap the lower and upper elements, and move the pointers towards each other.
 
 4.  Swap the upper element with the pivot (which is now the first element in the interval).
 
@@ -151,7 +151,7 @@ Here is how we can categorise Quicksort according the three parameters from @sec
 - Stable: *no*, equal elements might change order.
 - Adaptive: *yes*, but it the complexity will never be better than linearithmic, $O(n\log(n))$.
 
-#### Selection sort as a variant of Quicksort (optional)
+#### Selection sort as a variant of Quicksort
 
 What happens if we are extremely unlucky (or stupid) with the pivot selection?
 
@@ -184,12 +184,12 @@ Now it should be straightforward to give the pseudocode for the main Quicksort f
 
     // Sort the array interval start...end
     function quickSort(array, start, end):
-        if start >= end:                         // Base case: Interval length is ≤ 1
+        if start >= end:                         // Base case: Interval length is ≤ 1.
             return
-        p0 = findPivot(array, start, end)        // Pick an initial pivot index
-        p = partition(array, start, end, p0)     // Partition the interval and update the pivot index
-        quickSort(array, start, p-1)             // Quicksort the lower partition
-        quickSort(array, p+1, end)               // Quicksort the upper partition
+        p0 = findPivot(array, start, end)        // Pick an initial pivot index.
+        p = partition(array, start, end, p0)     // Partition the interval and update the pivot index.
+        quickSort(array, start, p-1)             // Quicksort the lower partition.
+        quickSort(array, p+1, end)               // Quicksort the upper partition.
 
 The partitioning will return the final position of the pivot,
 which is the correct position of the pivot in the final, sorted array.
@@ -199,22 +199,23 @@ the larger partition will still contain one less element than the input array.
 
 #### Implementing partitioning
 
-The information algorithm in @sec:partition can be implemented as pseudocode like this:
+The informal algorithm in @sec:partition can be implemented as pseudocode like this:
 
     function partition(array, start, end, p) -> Int:
-        swap(array, start, p)              // Put the pivot at the start of the interval
-        low = start + 1; high = end        // Initialise the lower and upper pointers
-        while low <= high:                 // Continue until the pointers pass each other
-            if array[low] < array[p]:
-                low = low + 1              // Increase the lower pointer if its element is smaller than the pivot
-            else if array[high] > array[p]:
-                high = high - 1            // Increase the upper pointer if its element is larger than the pivot
+        swap(array, start, p)              // Put the pivot at the start of the interval.
+        pivot = array[start]               // Remember the pivot value, and
+        low = start + 1; high = end        // initialise the lower and upper pointers.
+        while low <= high:                 // Continue until the pointers pass each other.
+            if array[low] < pivot:
+                low = low + 1              // Increase the lower pointer if its element is smaller than the pivot.
+            else if array[high] > pivot:
+                high = high - 1            // Increase the upper pointer if its element is larger than the pivot.
             else:
                 swap(array, low, high)     // Otherwise, swap the elements, and
-                low = low + 1              // move both pointers towards each other
+                low = low + 1              // move both pointers towards each other.
                 high = high - 1
-        swap(array, p, high)               // Finally, swap the pivot into place, and
-        return high                        // return the new position of the pivot
+        swap(array, start, high)           // Finally, swap the pivot into place, and
+        return high                        // return the new position of the pivot.
 
 You might wonder why we swap the pivot with the value at the *upper* pointer,
 why not swapping with the lower pointer?
@@ -245,10 +246,17 @@ Quicksort.
 ```
 :::
 
+#### Invariants for partitioning
 
-<!--
-### Invariants
--->
+In @sec:internal-invariants we introduced invariants as a way of making algorithms precise and easier to reason about.
+This is very useful when implementing partitioning,
+because it can be difficult to understand the relation between the pointers *start*, *low*, *high*, and *end*.
+
+**Invariant**:
+After each iteration of the `while`-loop, the following invariants always hold:
+
+- everything in the interval *start+1...low-1* is smaller or equal to the pivot
+- everything in the interval *high+1...end* is larger or equal to the pivot
 
 
 ### Selecting a pivot
@@ -393,8 +401,10 @@ It does not take many good partitionings for Quicksort to work fairly well.
 
 #### Best-case complexity
 
-In @sec:best-worst-and-average-cases we argued why we should never be interested in the best-case complexity,
-but it is interesting and useful to analyse Quicksort in this way.
+In @sec:best-worst-and-average-cases we argued why we usually are not interested in the best-case complexity,
+but Quicksort is an exception to this.
+It is interesting and useful to analyse the best-case complexity of Quicksort,
+because the best case is so much more common than the worst case (in normal circumstances).
 The very best case occurs if we always selects the best possible pivot,
 which is the one that always partitions the array into equal-sized parts.
 
@@ -432,7 +442,6 @@ For Quicksort it is possible to show that the number of "bad" cases are quickly 
 by the number of "good" cases, when the array size grows.
 This means that for *well-behaved* input, the average-case complexity of Quicksort
 is very likely to be closer to the best case than the worst case.
-
 In fact, if we select a *random pivot* in every step,
 then we can prove that the *expected* worst-case complexity is linearithimc, $O(n\log(n))$.
 
@@ -505,31 +514,61 @@ step is a single call to Insertion sort to process the entire array,
 putting the records into final sorted order.
 
 
-#### Alternative partitioning algorithm
+#### Alternative partitioning approaches
 
-The partitioning algorithm we described in @sec:partition is called *Hoare* partitioning
+There are several possible ways we can translate the informal partitioning algorithm into working code.
+For example, in our implementation in @sec:implementing-quicksort
+we move the pointers at most one step in each iteration of the `while`-loop.
+An alternative is to move the pointers as far as possible during each iteration,
+and then the pseudocode will become like this:
+
+    function partition(array, start, end, p) -> Int:
+        swap(array, start, p)              // Swap the pivot with the first element in the interval.
+        pivot = array[start]               // Remember the pivot value, and
+        low = start + 1; high = end        // initialise the lower and upper pointers.
+        repeat:
+            while low <= high and array[low] < pivot:
+                low = low + 1              // Increase the lower pointer as long as its element is smaller than the pivot.
+            while low <= high and array[high] > pivot:
+                high = high - 1            // Increase the upper pointer as long as its element is larger than the pivot.
+            if low > high:
+                break                      // Break out of the loop when the pointers have passed each other.
+            swap(array, low, high)         // Otherwise, swap the elements, and
+            low = low + 1                  // move both pointers towards each other.
+            high = high - 1
+        swap(array, start, high)           // Finally, swap the pivot into place, and
+        return high                        // return the new position of the pivot.
+
+This version is ever so slightly faster than the one in @sec:implementing-quicksort,
+because in some cases it makes fewer comparisons.
+It is even possible to improve this one a little bit more,
+because we do not need test `low<=high` in the second inner while loop
+(try to reason for yourself why that is the case).
+
+The partitioning algorithm we described previously is called *Hoare* partitioning
 (named after the computer scientist C.A.R. Hoare).
 There is another common partitioning algorithm, where both pointers start at the left side and move to the right
 -- but one of them moves faster than the other.
 This algorithm is called *Lomuto* partitioning (named after Nico Lomuto).
-
 In this algorithm we still have two pointers, but both start at the beginning of the array interval and move upwards.
 Below we call them $\mathit{low}$ and $\mathit{high}$, where $\mathit{low}\leq\mathit{high}$.
 The invariant is that the elements from $\mathit{start}$ to $\mathit{low}-1$ are always less than the pivot,
 and the elements from $\mathit{low}$ to $\mathit{high}$ are greater than or equal to the pivot.
 In Lomuto's partitioning scheme we start by putting the pivot at the *end* of the interval, not the beginning.
 
-    function partition(array, start, end, p):
-        swap(array, p, end)
-        low = start
-        for high in start .. end-1:
-            if array[high] <= array[end]:
-                swap(array, low, high)
-                low = low + 1
-        swap(array, end, low)
-        return low
+    function partition(array, start, end, p) -> Int:
+        swap(array, p, end)                // Swap the pivot with the last element in the interval.
+        pivot = array[start]               // Remember the pivot value, and
+        low = start                        // initialise the lower pointer.
+        for high in start .. end-1:        // Iterate the upper pointer over the entire interval.
+            if array[high] <= pivot:
+                swap(array, low, high)     // Swap the lower and upper elements if the upper is smaller than the pivot, and
+                low = low + 1              // and increase the lower pointer.
+        swap(array, end, low)              // Finally, swap the pivot into place, and
+        return low                         // return the new position of the pivot.
 
-However, Lomuto's partitioning scheme is usually somewhat less efficient than Hoare's, because it makes more swaps.
+As you can see, Lomuto's partitioning scheme gives very simple and clean implementation,
+but it is usually somewhat less efficient than Hoare's, because it makes more swaps.
 It also does not work very well if the array contains many equal elements.
 
 
@@ -550,5 +589,4 @@ Assuming that we have such an algorithm, the final Quicksort algorithm can be de
 3.  Sort the interval $\mathit{start}\ldots p$ and the interval $q\ldots\mathit{end}$.
 
 Three-way partitioning is also called the *Dutch national flag problem*,
-and one possible algorithm to solve it is to modify the Lomuto partitioning scheme from above.
-
+and the most common algorithm for solving it is a modification the Lomuto partitioning scheme from above.
