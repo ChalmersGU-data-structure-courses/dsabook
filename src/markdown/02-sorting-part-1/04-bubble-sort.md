@@ -6,8 +6,21 @@ However, it is rather slow, even compared to the other similar algorithms, Selec
 (It is not even particularly intuitive -- nobody is going to come naturally to Bubble sort as a way to sort their bookshelf,
 their Bridge hand or their pile of bills, like they might with Insertion sort or Selection sort.)
 
-Bubble sort consists of a simple double `for` loop.
-The inner `for` loop moves through the array from left to right, comparing adjacent elements.
+::: algorithm
+#### Algorithm: Bubble sort
+
+Divide the array into an unsorted and a sorted part,
+the sorted part is to the right and initially empty.
+Then repeat the following until the unsorted part is empty:
+
+1.  Compare every adjacent pair of elements in the unsorted part, from left to right.
+    Swap them if they are out of order.
+2.  Now the sorted part has increased by one element, and the unsorted part has decreased by one.
+
+:::
+
+This can be implemented as a simple nested `for`-loop.
+The inner loop moves through the array from left to right, comparing adjacent elements.
 If an element is greater than its right neighbour, then the two are swapped.
 Once the largest element is encountered, it will "bubble" up to the right of the array (hence the name, Bubble sort).
 The second pass through the array repeats this process.

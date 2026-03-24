@@ -13,9 +13,23 @@ Just as for Selection sort, the description above is not in-place.
 But just as for Selection sort, it's relatively easy to turn it into an in-place algorithm,
 by remembering an invisible separator between the sorted books (on the left) and the still-unsorted books (on the right).
 
+::: algorithm
+#### Algorithm: Insertion sort
+
+Divide the array into a sorted and an unsorted part,
+the sorted part is to the left and initially empty.
+Then repeat the following until the unsorted part is empty:
+
+1. Take the leftmost of the unsorted elements, $e$.
+2. While $e$ is out of order compared to its left neighbour, swap the two.
+3. Now $e$ will belong to the sorted part, and the unsorted part has decreased by one.
+
+:::
+
 Insertion sort iterates through a list of elements.
 For each iteration, the current element is inserted in turn
 at the correct position within a sorted list composed of those elements already processed.
+The algorithm above can be implemented as follows in pseudocode:
 
     function insertionSort(array):
         n = array.size

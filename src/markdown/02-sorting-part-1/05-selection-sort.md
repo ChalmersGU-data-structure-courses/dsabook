@@ -16,11 +16,25 @@ But it is easy to turn this into an in-place algorithm, where all books are in t
 We just have to remember an invisible separator between the sorted books (on the left) and the still-unsorted books (on the right).
 Whenever we have found the next book to put in place, we *swap* it with the book that is in the way.
 
+::: algorithm
+#### Algorithm: Selection sort
+
+Divide the array into a sorted and an unsorted part,
+the sorted part is to the left and initially empty.
+Then repeat the following until the unsorted part is empty:
+
+1. Find the smallest unsorted element, $e$.
+2. Swap $e$ with the leftmost of the unsorted elements.
+3. Now $e$ will belong to the sorted part, and the unsorted part has decreased by one.
+
+:::
+
 The $i$'th pass of Selection sort "selects" the $i$'th smallest element in the array, placing it at position $i$ in the array.
 In other words, Selection sort first finds the smallest element in an unsorted list, then the next smallest, and so on.
 Its unique feature is that there are few swaps, much fewer than Bubble sort.
 To find the next-smallest element we have to search through the entire unsorted portion of the array,
 but only one swap is required to put the element into place.
+The algorithm above can be implemented as follows in pseudocode:
 
     function selectionSort(array):
         n = array.size
