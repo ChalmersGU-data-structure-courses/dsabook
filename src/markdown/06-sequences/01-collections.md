@@ -1,48 +1,54 @@
 
-## Collections
+## Collections and sequences
 
-A _collection_ is a general term for structures like lists and queues.
-It holds multiple elements and supports two main operations: checking the number of elements and iterating through them one at a time.
-\
+A _collection_ is a general term for a data structure that can contain multiple elements.
+In this chapter you will encounter stacks and queues, and more general lists,
+and in later chapters will we introduce sets and maps.
+The only thing we will require from a collection is that it supports two basic operations:
 
-    interface Collection of T:
-        // We assume that we can iterate over the elements in the collection, using a for loop.
-        size: Int               // The number of elements in this collection.
-        isEmpty() -> Bool:      // Returns true if the collection is empty.
-            return size == 0
+- it must know its own *size*, that is, the number of elements in the collection, and
+- it is possible to *iterate* over the elements.
 
-Note that this very interface will not be implemented as it is, but
-instead we will use this as a base interface that we extend in different
-ways, e.g., for lists or sets or priority queues.
+For convenience we often iterate the elements using a `for`-loop, like this:
+
+    for each x in C:
+        // do something with the element x
+
+When we describe the different ADTs (stacks, queues, lists, etc.), we can do this as pseudocode.
+Then we will call the ADT an *interface*, and
+this interface will *extend* the basic *Collection* interface.
+For example, here is how the interface for the stack ADT looks like:
+
+    interface Stack of T extends Collection:
+        push(x: T)     // Pushes x on top of the stack.
+        pop() -> T     // Pops the top of the stack and returns it.
+        peek() -> T    // Returns the top element, without removing it.
+
+This means that whenever we have a stack we know that we can use the methods
+*push*, *pop* and *peek*, as well as the *size* of the stack.
 
 ### What is a sequence?
 
-We all have an intuitive understanding of what we mean by a "list". We
-want to turn this intuitive understanding into a concrete data structure
-with implementations for its operations. The most important concept
-related to lists is that of [position]{.term}.
-In other words, we perceive that there is a first element in the list, a
-second element, and so on. So, define a [list]{.term} to be a finite, ordered sequence of data items known as
-[elements]{.term}. This is close to
-the mathematical concept of a [sequence]{.term}.
+We all have an intuitive understanding of what we mean by a "list".
+We want to turn this intuitive understanding into a concrete data structure with implementations for its operations.
+The most important concept related to lists is that of [position]{.term}.
+In other words, we perceive that there is a first element in the list, a second element, and so on.
+So, we define a [list]{.term} or a [sequence]{.term} to be a finite, ordered sequence of data items known as [elements]{.term}.
 
-"Ordered" in this definition means that each element has a position in
-the list. So the term "ordered" in this context does ***not*** mean that
-the list elements are sorted by value. (Of course, we can always choose
-to sort the elements on the list if we want; it's just that keeping the
-elements sorted is not an inherent property of being a list.)
+"Ordered" in this definition means that each element has a position in the list.
+So the term "ordered" in this context does ***not*** mean that the list elements are sorted by value.
+(Of course, we can always choose to sort the elements on the list if we want;
+it's just that keeping the elements sorted is not an inherent property of being a list.)
 
-Each list element must have some data type. In the simple list
-implementations discussed in this chapter, all elements of the list are
-usually assumed to have the same data type, although there is no
-conceptual objection to lists whose elements have differing data types
-if the application requires it. The operations defined as part of the
-list [ADTs]{.term} depend on the elemental [data type]{.term}.
-For example, the queue ADT can be used for queues of integers, queues of characters, queues of payroll records, even queues of queues.
+Each list element must have some data type.
+In the simple list implementations discussed in this chapter,
+all elements of the list are usually assumed to have the same data type
+(although there is no conceptual objection to lists whose elements have differing data types).
+For example, the queue ADT can be used for queues of integers, queues of characters,
+queues of payroll records, or even queues of queues.
 
-A list is said to be [empty]{.term} when it
-contains no elements. The number of elements currently stored is called
-the [length]{.term} (or size) of the list. The beginning
-of the list is called the [head]{.term}, the end
-of the list is called the [tail]{.term}.
+A list is said to be [empty]{.term} when it contains no elements.
+The number of elements currently stored is called the [length]{.term} (or size) of the list.
+The beginning of the list is called the [head]{.term},
+the end of the list is called the [tail]{.term}.
 
