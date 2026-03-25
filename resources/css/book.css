@@ -238,6 +238,38 @@ figcaption p, figure figure figcaption {
     justify-content: space-around;
 }
 
+/* Temporary: Grey-out and hide online blocks */
+
+#hide-online {
+    position: fixed;
+    top: 5px; right: 5px;
+    z-index: 1000;
+}
+
+#hide-online + label {
+    position: fixed;
+    top: 0px; right: 0px;
+    padding: 5px 30px 5px 5px;
+    font-size: 80%;
+    z-index: 900;
+    background-color: var(--html-bgcolor);
+    color: var(--link-color);
+}
+
+#hide-online:checked ~ main .dsvis,
+#hide-online:checked ~ main .online,
+#hide-online:checked ~ main .html,
+#hide-online:checked ~ main .quiz {
+    display: none;
+}
+
+.dsvis, .online, .html, .quiz {
+    background-color: #eee;
+}
+
+/* End temporary */
+
+
 /* Highlighted blocks */
 
 .topic, .example, .figure, .algorithm, .alert, .note, .quiz, .TODO,

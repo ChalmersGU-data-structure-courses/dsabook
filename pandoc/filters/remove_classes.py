@@ -9,7 +9,9 @@ from panflute_helper import run_filter
 CONTENT_TO_REMOVE = "TODO latex pdf".split()
 
 # The following <div>s should be removed, but not their content:
-CONTENT_TO_KEEP = "html online".split()
+# CONTENT_TO_KEEP = "html online".split()
+# Temporary: keep them to be able to show/hide
+CONTENT_TO_KEEP = ()
 
 
 def remove_classes(elem, doc):
