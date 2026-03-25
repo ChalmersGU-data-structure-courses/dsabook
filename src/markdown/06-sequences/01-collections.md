@@ -47,8 +47,7 @@ all elements of the list are usually assumed to have the same data type
 For example, the queue ADT can be used for queues of integers, queues of characters,
 queues of payroll records, or even queues of queues.
 
-A list is said to be [empty]{.term} when it contains no elements.
-The number of elements currently stored is called the [length]{.term} (or size) of the list.
-The beginning of the list is called the [head]{.term},
-the end of the list is called the [tail]{.term}.
-
+A list is said to be *empty* when it contains no elements.
+The number of elements currently stored is called the *length* or *size*,
+the beginning of the list is called the *head*, *top*, or *front*,
+and the end of the list is called the *tail*, *bottom*, *rear*, or *back*.
