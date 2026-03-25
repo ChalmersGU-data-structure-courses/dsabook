@@ -2,7 +2,8 @@
 ## Priority queues
 
 ::: TODO
-- Prio 1: invariants
+- Prio 1: Update so that it fits here, also update 00-introduction
+- Prio 2: invariants
 :::
 
 So far we have seen two [ADTs](#adt){.term} that
