@@ -62,7 +62,7 @@ How can we avoid primary clustering? One possible improvement might be
 to use linear probing, but to skip slots by some constant $c$ other
 than 1. This would make the probe function $\mathbf{p}(k, i) = ci$, and
 so the $i$ th slot in the probe sequence will be
-$(\mathbf{h}(k) + ic) \mod m$. In this way, records with adjacent home
+$(\mathbf{h}(k) + ic) \bmod m$. In this way, records with adjacent home
 positions will not follow the same probe sequence.
 
 ::: dsvis
@@ -134,7 +134,7 @@ sequence at random, because we would not be able to duplicate this same
 probe sequence when searching for the key. However, we can do something
 similar called [pseudo-random probing]{.term}.
 In pseudo-random probing, the $i$ th slot in the probe sequence is
-$(\mathbf{h}(k) + r_i) \mod m$ where $r_i$ is the $i$ th value in a
+$(\mathbf{h}(k) + r_i) \bmod m$ where $r_i$ is the $i$ th value in a
 random permutation of the numbers from 1 to $m-1$. All inserts and
 searches must use the same sequence of random numbers. The probe
 function would be $\mathbf{p}(k, i) = \textbf{Permutation}[i]$ where
@@ -174,7 +174,7 @@ $c_1$, $c_2$, and $c_3$.
 
 The simplest variation is $\mathbf{p}(k, i) = i^2$ (i.e., $c_1 = 1$,
 $c_2 = 0$, and $c_3 = 0$). Then the $i$ th value in the probe sequence
-would be $(\mathbf{h}(k) + i^2) \mod m$.
+would be $(\mathbf{h}(k) + i^2) \bmod m$.
 
 ::: dsvis
 How quadratic probing works.
@@ -256,22 +256,22 @@ hash table size is 101 (a prime number), than any step size less than
 This can be achieved easily. One way is to select $m$ to be a prime
 number, and have $\mathbf{h}_2$ return a value in the range
 $1 \leq \mathbf{h}_2(k) \leq m - 1$. We can do this by using this secondary
-hash function: $\mathbf{h}_2(k) = 1 + (k \mod (m-1))$. An alternative is
+hash function: $\mathbf{h}_2(k) = 1 + (k \bmod (m-1))$. An alternative is
 to set $m = 2^q$ for some value $q$ and have $\mathbf{h}_2$ return an
 odd value between 1 and $2^q$. We can get that result with this
 secondary hash function:
-$\mathbf{h}_2(k) = (((k/m) \mod (m/2)) * 2) + 1$.
+$\mathbf{h}_2(k) = (((k/m) \bmod (m/2)) * 2) + 1$.
 
 ::: note
 *Note*: The secondary hash function
-$\mathbf{h}_2(k) = (((k/m) \mod (m/2)) * 2) + 1$ might seem rather
+$\mathbf{h}_2(k) = (((k/m) \bmod (m/2)) * 2) + 1$ might seem rather
 mysterious, so let's break this down. This is being used in the
 context of two facts: (1) We want the function to return an odd
 value that is less than $m$ the hash table size, and (2) we are
 using a hash table of size $m = 2^q$, which means that taking the
-mod of size $m$ is using the bottom $q$ bits of the key value. OK,
+$\bmod$ of size $m$ is using the bottom $q$ bits of the key value. OK,
 since $\mathbf{h}_2$ is multiplying something by 2 and adding 1, we
-guarentee that it is an odd number. Now, $((X \mod (m/2)) * 2) + 1$
+guarentee that it is an odd number. Now, $((X \bmod (m/2)) * 2) + 1$
 must be in the range 1 and $m-1$ (if you need to, play around with
 this on paper to convince yourself that this is true). This is
 exactly what we want. The last piece of the puzzle is the first part

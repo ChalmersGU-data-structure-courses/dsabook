@@ -185,22 +185,22 @@ to define an equivalence relation.
 For the set of integers, use the modulus function
 to define a binary relation such that two numbers
 $x$ and $y$ are in the relation if and only if
-$x \;\text{mod}\; m = y \;\text{mod}\; m$.
+$x \bmod m = y \bmod m$.
 Thus, for $m = 4$, $\langle1, 5\rangle$ is in the
-relation because $1 \;\text{mod}\; 4 = 5 \;\text{mod}\; 4$.
+relation because $1 \bmod 4 = 5 \bmod 4$.
 We see that modulus used in this way defines an equivalence
 relation on the integers, and this relation can be used to
 partition the integers into $m$ equivalence classes.
 This relation is an equivalence relation because
 
-1. $x \;\text{mod}\; m = x \;\text{mod}\; m$ for all $x$;
+1. $x \bmod m = x \bmod m$ for all $x$;
 
-2. if $x \;\text{mod}\; m = y \;\text{mod}\; m$,
-    then $y \;\text{mod}\; m = x \;\text{mod}\; m$; and
+2. if $x \bmod m = y \bmod m$,
+    then $y \bmod m = x \bmod m$; and
 
-3. if $x \;\text{mod}\; m = y \;\text{mod}\; m$ and
-    $y \;\text{mod}\; m = z \;\text{mod}\; m$, then
-    $x \;\text{mod}\; m = z \;\text{mod}\; m$.
+3. if $x \bmod m = y \bmod m$ and
+    $y \bmod m = z \bmod m$, then
+    $x \bmod m = z \bmod m$.
 :::
 
 -->
@@ -333,23 +333,23 @@ For example, $\lceil 3.4 \rceil = 4$, as does $\lceil 4.0 \rceil$, while $\lceil
 
 Modulus function:
 
-:   The [modulus]{.term} (or [mod]{.term}) function returns the remainder of an integer division.
-Sometimes written $n\mathop{\text{mod}}m$ in mathematical expressions,
+:   The [modulus]{.term} (or $\bmod$) function returns the remainder of an integer division.
+Sometimes written $n \bmod m$ in mathematical expressions,
 the syntax in many programming languages is $n\mathop{\%}m$.
-From the definition of remainder, $n\mathop{\text{mod}}m$ is
+From the definition of remainder, $n \bmod m$ is
 the integer $r$ such that $n = qm + r$ for $q$ an integer, and $|r| < |m|$.
-Therefore, the result of $n \;\text{mod}\; m$ must be between 0 and $m-1$ when $n$ and $m$ are positive integers.
-For example, $5\mathop{\text{mod}}3 = 2$, $25\mathop{\text{mod}}3 = 1$,
-$5\mathop{\text{mod}}7 = 5$, and $5\mathop{\text{mod}}5 = 0$.
+Therefore, the result of $n \bmod m$ must be between 0 and $m-1$ when $n$ and $m$ are positive integers.
+For example, $5 \bmod 3 = 2$, $25 \bmod 3 = 1$,
+$5 \bmod 7 = 5$, and $5 \bmod 5 = 0$.
 
     There is more than one way to assign values to $q$ and $r$, depending on how integer division is interpreted.
-The most common mathematical definition computes the mod function as $n\mathop{\text{mod}}m = n - m\lfloor n/m\rfloor$.
-In this case, $-3 \;\text{mod}\; 5 = 2$.
+The most common mathematical definition computes the $\bmod$ function as $n \bmod m = n - m\lfloor n/m\rfloor$.
+In this case, $-3 \bmod 5 = 2$.
 However, Java and C++ compilers typically use the underlying
 processor's machine instruction for computing integer arithmetic.
 On many computers this is done by truncating the resulting fraction,
-meaning $n\mathop{\text{mod}}m = n - m (\text{trunc}(n/m))$.
-Under this definition, $-3\mathop{\text{mod}}5 = -3$.
+meaning $n \bmod m = n - m (\text{trunc}(n/m))$.
+Under this definition, $-3 \bmod 5 = -3$.
 Another language might do something different.
 
     Unfortunately, for many applications this is not what the user wants or expects.
@@ -1158,10 +1158,10 @@ We begin by picking a [seed]{.term} that we will call $r_1$.
 Then, we can compute successive terms as follows, where $b$ and $t$ are some constant positive integers.
 
 \begin{align*}
-r_i &= (b\cdot r_{i-1}) \;\text{mod}\; t
+r_i &= b\cdot r_{i-1} \pmod{t}
 \end{align*}
 
-By definition of the $\text{mod}$ function, all generated numbers must be in the range 0 to $t-1$.
+By definition of the $\bmod$ function, all generated numbers must be in the range 0 to $t-1$.
 Now, consider what happens when $r_i = r_j$ for values $i$ and $j$.
 Of course then $r_{i+1} = r_{j+1}$ which means that we have a repeating cycle.
 
@@ -1175,9 +1175,9 @@ To see why, consider the following example.
 Given a $t$ value of 13, we can get very different results depending on the $b$ value that we pick, in ways that are hard to predict.
 
 \begin{align*}
-r_i \;=\; (6\cdot r_{i-1}) \mod 13  &=  \ldots, 1, 6, 10, 8, 9, 2, 12, 7, 3, 5, 4, 11, 1, \ldots  \\
-r_i \;=\; (7\cdot r_{i-1}) \mod 13  &=  \ldots, 1, 7, 10, 5, 9, 11, 12, 6, 3, 8, 4, 2, 1, \ldots \\
-r_i \;=\; (5\cdot r_{i-1}) \mod 13  &=  \ldots, 1, 5, 12, 8, 1, \ldots
+r_i \;=\; 6\cdot r_{i-1} \pmod{13}  &=  \ldots, 1, 6, 10, 8, 9, 2, 12, 7, 3, 5, 4, 11, 1, \ldots  \\
+r_i \;=\; 7\cdot r_{i-1} \pmod{13}  &=  \ldots, 1, 7, 10, 5, 9, 11, 12, 6, 3, 8, 4, 2, 1, \ldots \\
+r_i \;=\; 5\cdot r_{i-1} \pmod{13}  &=  \ldots, 1, 5, 12, 8, 1, \ldots
 \end{align*}
 
 In the case of $b=5$, the generator goes through only a short sequence before repeating, with the series depending on the seed value chosen.
@@ -1187,7 +1187,7 @@ Clearly, a $b$ value of 5 is far inferior to $b$ values of 6 or 7 in this exampl
 If you would like to write a simple LCM random number generator of your own, an effective one can be made with the following formula:
 
 \begin{align*}
-r_i &= (16807 \cdot r_{i-1}) \mod 2^{31} - 1
+r_i &= 16807 \cdot r_{i-1} \pmod{2^{31}-1}
 \end{align*}
 
 Another approach is based on using a computer chip that generates random numbers resulting from "thermal noise" in the system.

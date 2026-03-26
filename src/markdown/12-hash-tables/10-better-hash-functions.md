@@ -59,13 +59,13 @@ result is in the range 0 to 9. There is no particular limit on the key
 range that binning could handle, so long as we know the maximum possible
 value in advance so that we can figure out what to divide the key value
 by. Alternatively, we could also take the result of any binning
-computation and then mod by the table size to be safe. So if we have
+computation and then $\bmod$ by the table size to be safe. So if we have
 keys that are bigger than 999 when dividing by 100, we can still make
-sure that the result is in the range 0 to 9 with a mod by 10 step at the
+sure that the result is in the range 0 to 9 with a $\bmod$ by 10 step at the
 end.
 
-Binning looks at the opposite part of the key value from the mod
-function. The mod function, for a power of two, looks at the low-order
+Binning looks at the opposite part of the key value from the $\bmod$
+function. The $\bmod$ function, for a power of two, looks at the low-order
 bits, while binning looks at the high-order bits. Or if you want to
 think in base 10 instead of base 2, modding by 10 or 100 looks at the
 low-order digits, while binning into an array of size 10 or 100 looks at
@@ -82,7 +82,7 @@ we use a hash table of size 8, we would divide the key range into 8
 equal-width slices and assign each slice to a slot in the table. Since a
 normal distribution is more likely to generate keys from the middle
 slice, the middle slot of the table is most likely to be used. In
-contrast, if we use the mod function, then we are assigning to any given
+contrast, if we use the $\bmod$ function, then we are assigning to any given
 slot in the table a series of thin slices in steps of 8. In the normal
 distribution, some of these slices associated with any given slot are
 near the tails, and some are near the center. Thus, each table slot is
