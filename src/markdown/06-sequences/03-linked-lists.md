@@ -113,8 +113,8 @@ because there is no way of doing that automatically.
     datatype LinkedStack:
         ...
         push(value):
-            this.top = new Node(value, this.top)
-            this.size = this.size + 1
+            top = new Node(value, top)
+            size = size + 1
 
 ::: dsvis
 Here we show how to push to a linked stack.
@@ -135,9 +135,9 @@ Popping is also straightforward from the description above, as long as we rememb
     datatype LinkedStack:
         ...
         pop():
-            removed = this.top
-            this.top = removed.next
-            this.size = this.size - 1
+            removed = top
+            top = removed.next
+            size = size - 1
             return removed.value
 
 After popping, what will happen with the old top node -- will we not have to delete it from memory?
@@ -211,11 +211,11 @@ otherwise it will point to a non-existing element.
     datatype LinkedQueue:
         ...
         dequeue():
-            removed = this.front
-            this.front = removed.next
-            this.size = this.size - 1
-            if this.size == 0:
-                this.rear = null
+            removed = front
+            front = removed.next
+            size = size - 1
+            if size == 0:
+                rear = null
             return removed.value
 
 
@@ -243,12 +243,12 @@ and then we can rassign the rear to the new node.
         ...
         enqueue(value):
             newRear = new Node(value, null)
-            if this.size == 0:
-                this.front = newRear
+            if size == 0:
+                front = newRear
             else:
-                this.rear.next = newRear
-            this.rear = newRear
-            this.size = this.size + 1
+                rear.next = newRear
+            rear = newRear
+            size = size + 1
 
 Note that we have to treat the empty queue specially:
 we cannot reassign the current rear (because there is no currect rear yet),
