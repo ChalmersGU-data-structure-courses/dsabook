@@ -1,74 +1,80 @@
 
-## Stacks implemented using arrays
+## Array-based stacks and queues
 
 ::: TODO
 - Prio 1: invariants
-- Prio 1: explanations of the pseudocode, not just the code (also file 05b)
 :::
 
-The array-based stack contains a pre-allocated internal array, and the size of the stack.
+In the last section we showed how to implement stacks and queues using linked lists.
+But we already have a built-in data structure which stores elements in some kind of order -- arrays.
+Can we use arrays to implement stacks and queues too?
+
+Yes, and we will show how to do that here.
+There is one big problem with using arrays -- they are always *fixed size*.
+So if we have an array of size 1000 we can only have a stack or queue with at most 1000 elements.
+This is a serious restriction, and in the next section we will show how to solve that
+-- a *dynamic array* has the same features as a normal array, but it can change its size dynamically.
+But in this section we will for now assume that we have a fixed maximum number of elements.
+
+### Array-based stacks
+
+An array-based stack uses an internal array as underlying storage, and this array has a predefined size.
+In this example the underlying array has an internal size of 1000:
 
     datatype ArrayStack implements Stack:
         internalArray = new Array(1000)  // Internal array containing the stack elements
-        size = 0                         // Size of stack, also index of the next free slot
+        size = 0                         // The size of the stack
 
-Note that here we use an internal *capacity* of 1000 for the internal array, but we could use any positive value.
+Note that 1000 is the internal *capacity* of the stack, it is not the actual size.
+When the stack is created it should be empty, and therefore the initial stack size is 0.
 
+The important design decision to be made is which end of the array should represent the top of the stack.
+It might be tempting to let the top be the first element in the array, i.e., the element at position 0.
+However, this is inefficient:
+whenever we want to push to or pop from the stack,
+we would have to shift all elements in the array one position to the left or to the right.
 
 ::: dsvis
-#### Where should the top of the stack be?
+Here we discuss where the top of the stack should be stored.
 
 ``` {.jsav-animation src="ChalmersGU/DynamicArrayStack-Top-CON.js" links="ChalmersGU/CGU-Styles.css" name="Array stack top position slideshow"}
 ```
 :::
 
-The only important design decision to be made is which end of the array should represent the top of the stack.
-It might be tempting to let the top be the first element in the array, i.e., the element at position 0.
-However, this is inefficient, because then we have to shift all elements in the array one position to the left or to the right, whenever we want to push to or pop from the stack.
+A much better solution is to have the top be the *last element*,
+that is, the element at position $n-1$ (if $n$ is the size of the stack).
+Then we do not have to shift around a lot of elements,
+but instead we can move the stack pointer to the left or the right.
 
-Much better is to have the top be the *last element*, i.e. the element at position $n-1$ (if $n$ is the number of elements).
-Then we don't have to shift around a lot of element, but instead just move the pointer to the left or the right.
+#### Pushing and popping
 
-<!--
-### Invariants
- -->
-<!--
-### Pushing to the stack
- -->
+In an array-based stack we do not need a separate pointer to the *top*,
+because it is the same as the *size* variable (minus 1).
+That is, the *size* points to the index of the next free array cell.
+Therefore, to push a value onto the stack, we assign `internalArray[size]` and then increase the size.
+
+    datatype ArrayStack:
+        ...
+        push(value):
+            internalArray[size] = value
+            size = size + 1
 
 ::: dsvis
-#### Pushing to the stack
+Here we show how to push to an array-based stack.
 
 ``` {.jsav-animation src="ChalmersGU/DynamicArrayStack-Push-CON.js" links="ChalmersGU/CGU-Styles.css" name="Array stack push slideshow"}
 ```
 :::
 
-The *size* variable refers to the last uninhabited cell in the array.
-So, to push an element onto the stack, we assign `internalArray[size]` and then increase the size.
-
-    datatype ArrayStack:
-        ...
-        push(elem):
-            internalArray[size] = elem
-            size = size + 1
-
 ::: dsvis
-Array stack -- push exercise.
+Here is a proficiency exercise about pushing to array-based stacks.
 
 ```{.jsav-embedded src="ChalmersGU/DynamicArrayStack-Push-PRO.html" type="ka" name="Array-based Stack Push Exercise"}
 ```
 :::
 
-
-::: dsvis
-#### Popping from the stack
-
-``` {.jsav-animation src="ChalmersGU/DynamicArrayStack-Pop-CON.js" links="ChalmersGU/CGU-Styles.css" name="Array stack pop slideshow"}
-```
-:::
-
 To pop an element from the stack we do the reverse of pushing:
-first we decrease the size, then we remember the result in a temporary variable.
+first we decrease the *size*, then we remember the result in a temporary variable.
 After that we can clear the old top cell in the array and return the result.
 
     datatype ArrayStack:
@@ -79,9 +85,19 @@ After that we can clear the old top cell in the array and return the result.
             internalArray[size] = null  // For garbage collection
             return result
 
+Note that it is important that we clear the old top value (by assigning the cell to *null*).
+Otherwise the old value will still be referred to by the internal array,
+and then the automatic garbage collection cannot remove the object.
 
 ::: dsvis
-Array stack -- pop exercise.
+Here we show how to pop from an array-based stack.
+
+``` {.jsav-animation src="ChalmersGU/DynamicArrayStack-Pop-CON.js" links="ChalmersGU/CGU-Styles.css" name="Array stack pop slideshow"}
+```
+:::
+
+::: dsvis
+Here is a proficiency exercise about popping from array-based stacks.
 
 ```{.jsav-embedded src="ChalmersGU/DynamicArrayStack-Pop-PRO.html" type="ka" name="Array-based Stack Pop Exercise"}
 ```
