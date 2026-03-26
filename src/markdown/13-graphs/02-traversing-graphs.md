@@ -8,10 +8,9 @@
 
 Many graph algorithms involve *traversing* a graph, starting from a given vertex and visit each reachable vertex once. This is similar to tree traversal, but made more difficult by the presence of cycles. A simple recursive procedure would get stuck in an infinite loop. 
 
-In each step: Selecting edge from a visited vertex to an unvisited vertex, and visit that vertex. Stop when there are no edges from visited to unvisited vertices.
+Instead we will use an iterative procedure, very similar to the ones shown for trees in @sec:tree-dfs, but keeping track of visited nodes to avoid infinite loops. Thus, in each step of the traversal: Select an edge from a visited vertex to an unvisited vertex, and visit that vertex. Stop when there are no edges from visited to unvisited vertices.
 
 By varying how we select the next edge, and what we do when we visit a vertex, we can implement a wide range of useful algorithms on graphs. 
-For this reason, a graph traversal is most intuitively formulated as an iterative procedure. 
 Most of the algorithms described in thuis chapter use two data structures: an *agenda* and a *visitation set*.
 
 - The agenda is the collection of edges we have discovered but not yet traversed. 
@@ -21,9 +20,14 @@ Most of the algorithms described in thuis chapter use two data structures: an *a
 
 ![Steps of a graph traversal in an undirected graph, starting in $A$. The circled areas are the set of visited vertices, and the pointed arrows show the selected edges. The edges with circles on them show the agenda. This traversal selects these edges in order: $(A,B) (A,E) (B,F) (A,D) (F,C)$.](images/Graphs-traversal1.svg){width=80% #fig:GraphTraversal1} 
 
-Figure @fig:GraphTraversal1 illustrates the how a graph traversal can unfold. The result is a set of directed edges. Importantly, these edges do *not* form a path. We do not select a vertex adjacent to the previous vertex we visited, but rather skip around to vertices that are adjacent to *some* visited vertex. The most apt way to describe the end result is a tree, and as you can see in the lower right of Figure @fig:GraphTraversal1, the selected edges form a tree with $A$ as the root. 
+@fig:GraphTraversal1 illustrates the how a graph traversal can unfold. 
+The result is a set of directed edges. Importantly, these edges do *not* form a path. 
+We do not select a vertex adjacent to the previous vertex we visited, but rather skip around to vertices that are adjacent to *some* visited vertex. 
+The most apt way to describe the end result is a tree, and as you can see in the lower right of @fig:GraphTraversal1, 
+the selected edges form a tree with $A$ as the root. 
 
-To turn this high level description of the algorithm into an efficient procedure, we need to decide how to represent the agenda. Using a stack for the agenda gives us a depth first traversal:
+To turn this high level description of the algorithm into an efficient procedure, we need to decide how to represent the agenda. 
+Just as with trees, using a stack for the agenda gives us a depth first traversal:
 
 ```
 function depthFirst(start: Vertex):
@@ -41,8 +45,8 @@ function depthFirst(start: Vertex):
 
 There are some things to note here:
 
-- To get the process rolling, we add a fake edge to the starting vertex $A$, to add visiting $A$ to the agenda. 
-- The agenda doesn't only contain edges from visited vertices to unvisited ones. Sometimes it will contain edges between two visited vertices, which is why we need to do the visitation check after popping items from it. 
+- To get the process rolling, we add a fake edge to the starting vertex $A$, to add the task of visiting $A$ to the agenda. 
+- The agenda does not only contain edges from visited vertices to unvisited ones. Sometimes it will contain edges between two visited vertices, which is why we need to do the visitation check after popping items from it. 
 - Its a bit silly to add edges to the agenda when the to-vertex of the edge is already visited, since these will just be ignored after popping them. 
   For instance in the previous example, after selecting the edge $(A,B)$ and visiting $B$, since the graph is undirected the edge $(B,A)$ back to $A$ will immediately be added to the agenda. So an obvious optimization is to add a second check for this in the for-loop, and only push edges that lead to unvisited vertices. 
   This unfortunately does not let us remove the check in the while loop, as there can still be multiple edges to the same vertex in the agenda. 

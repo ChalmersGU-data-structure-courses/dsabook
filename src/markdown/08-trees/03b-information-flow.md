@@ -201,3 +201,52 @@ as large as possible, so we call the function like this:
     checkBST(tree, -∞, ∞)
 
 ::::::
+
+
+### Iterative traversal and Depth-first traversal {#tree-dfs}
+
+Some programming languages have poor support for recursion. 
+It is possible to traverse a tree iteratively (using a loop) with a stack data structure.
+We call the stack our *agenda*, it is like a to-do list containing nodes that we need to process.
+Here is a piece of code that is structurally very similar to our recursive iterations, 
+but instead of making recursive calls we add child nodes to the agenda:
+
+```
+function DFS(root : Node):
+  agenda = new stack of nodes
+  agenda.push(root)
+  while agenda is not empty:
+    n : Node = agenda.pop()
+    process(n)
+    agenda.add(n.right)
+    agenda.add(n.left)
+```
+
+Try this code on a few example trees, writing up the content of the agenda after each iteration of the loop,
+and keep track of the order in which process is called for different nodes.
+You will notice that it mimics a pre-order recursive procedure.
+Note that moving `process(n)` below the add operations has no impact on the order in which nodes are processed. 
+Implementing inorder or postorder traversals using stack is possible, but much more complicated. 
+
+By modifying the data structure from a stack to a FIFO queue (and switching the order in which children are added), 
+we get a new traversal order. Try to figure out the pattern for this one:
+
+```
+function BFS(root : Node):
+  agenda = new stack of nodes
+  agenda.enque(root)
+  while agenda is not empty:
+    n : Node = agenda.dequeu()
+    process(n)
+    agenda.add(n.left)
+    agenda.add(n.right)
+```
+
+It will visit the nodes level by level, left to right. 
+That is it will first visit the root, then all the children of the root, then all the children of those nodes et cetera. 
+This traversal order is called a Breadth-First Search (BFS) as opposed to the stack-based Depth-First Search (DFS). 
+The naming is due to the tendency of DFS to visit nodes that are deep in the tree early, whereas BFS always visits all shallow nodes first.
+
+DFS is useful for a wide range of applications.
+It is also a good example of the power of data structures: By changing the data structure of our 
+agenda we can use the same or similar code to acchieve different useful behaviors. 
