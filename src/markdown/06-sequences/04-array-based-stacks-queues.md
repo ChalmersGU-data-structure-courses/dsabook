@@ -22,8 +22,8 @@ An array-based stack uses an internal array as underlying storage, and this arra
 In this example the underlying array has an internal size of 1000:
 
     datatype ArrayStack implements Stack:
-        internalArray = new Array(1000)  // Internal array containing the stack elements
-        size = 0                         // The size of the stack
+        internalArray = new Array(1000)    // Internal array containing the stack elements
+        size = 0                           // The size of the stack
 
 Note that 1000 is the internal *capacity* of the stack, it is not the actual size.
 When the stack is created it should be empty, and therefore the initial stack size is 0.
@@ -82,7 +82,7 @@ After that we can clear the old top cell in the array and return the result.
         pop():
             size = size - 1
             result = internalArray[size]
-            internalArray[size] = null  // For garbage collection
+            internalArray[size] = null     // For garbage collection
             return result
 
 Note that it is important that we clear the old top value (by assigning the cell to *null*).
@@ -211,18 +211,19 @@ If the *front* pointer points somewhere in the middle of the array there is plen
 And when we have dequeued a lot of elements, *front* will reach the end of the array
 -- so we treat it in the same way and let it wrap around too.
 
+Here is an example of a circular queue with 7 elements, stored inside an array with a capacity of 12.
+The element that was added most recently is "T", which is what the *rear* points to,
+and *front* points to "A", which is the one that has waited the longest.
+When we want to enqueue a new element, it will be assigned to the empty cell at index 3.
+
+![](images/CircularQueue1.png)
+
 ::: dsvis
 Circular array queue.
 
 ``` {.jsav-animation src="List/aqueueCircularCON.js" scripts="DataStructures/CircularQueue.js" links="List/aqueueCON.css" name="Circular Array-based Queue Slideshow"}
 ```
 :::
-
-Here is a traditional "flat" representation of a queue with 7 elements,
-where "T" was the element most recently added and "A" is the one that has waited the longest.
-When we want to enqueue a new element, it will be assigned to the empty cell at index 3.
-
-![](images/CircularQueue1.png)
 
 There remains one more subtle problem to the array-based queue implementation.
 How can we recognise when the queue is empty or full?
@@ -247,11 +248,11 @@ Our choice here is to keep an explicit count of the number of elements, in a var
 because this will make the code more similar to our other implementations.
 
     datatype ArrayQueue implements Queue:
-        internalArray = new Array(1000)  // Internal array containing the queue elements.
-        size = 0                         // The size of the queue.
-        front = 0                        // Index of the front element.
-        rear = -1                        // Index of the rear element.
-        nextPosition(i):                 // Return the next position after i.
+        internalArray = new Array(1000)    // Internal array containing the queue elements.
+        size = 0                           // The size of the queue.
+        front = 0                          // Index of the front element.
+        rear = -1                          // Index of the rear element.
+        nextPosition(i):                   // Return the next position after i.
             return (i + 1) mod internalArray.size
 
 Note that we add a helper method `nextPosition` which will come in handy, both for enqueueing and dequeueing.
@@ -267,7 +268,7 @@ When enqueueing, we increase the *rear* pointer (modulo the size of the internal
     datatype ArrayQueue:
         ...
         enqueue(x):
-            rear = nextPosition(rear)    // Circular increment
+            rear = nextPosition(rear)      // Circular increment
             internalArray[rear] = x
             size = size + 1
 
@@ -279,8 +280,8 @@ because otherwise it will never be garbage collecter.
         ...
         dequeue():
             result = internalArray[front]
-            internalArray[front] = null  // For garbage collection
-            front = nextPosition(front)  // Circular increment
+            internalArray[front] = null    // For garbage collection
+            front = nextPosition(front)    // Circular increment
             size = size - 1
             return result
 
