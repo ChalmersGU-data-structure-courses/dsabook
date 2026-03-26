@@ -111,7 +111,7 @@ function dijkstra(start: Vertex):
         (cost, from, to) = agenda.removeMin()
         if visited.contains(to):
             continue   // Skip to the next item on the agenda
-        result.put(new ParentNode(to, result.get(from))
+        result.put(to, new ParentTreeNode(to, result.get(from))
         for (weight,from1, to1):Edge in outgoingEdges(to):
             agenda.add( (cost+weight, from1, to1) )
     return result
