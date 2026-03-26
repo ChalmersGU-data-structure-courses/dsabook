@@ -5,6 +5,48 @@
 - Prio 1: invariants
 :::
 
+
+<!-- START NOTES -->
+
+
+A dynamic array is perfectly suited for implementing a stack, but can we also use it to implement a queue? Enqueueing is as easy-peasy as pushing to a stack -- just append to the dynamic array. But how do we remove elements from the front -- without having to shift all elements?
+
+We let the front of the queue change dynamically too! By this I mean that we keep two pointers -- one to the *front* and another to the *back*. Whenever we want to enqueue something we increase the *back* pointer, and when we want to dequeue we increase the *front* pointer.
+
+When the back pointer reaches the end of the array, we *don't have to resize* it! If the *front* pointer points somewhere in the middle of the array there is plenty of space at the beginning -- so we can "wrap around" the *back* pointer and let it start from the beginning. And when *front* reaches the end of the array, we let it wrap around too.
+
+Here is how a circular array queue can look like:
+
+![](images/CircularQueue1.png)
+
+This queue consists of 7 elements, where T was the element most recently added and A is the one that has waited the longest. When we want to enqueue a new element, it will be assigned to the empty cell at index 3.
+
+Now, let's say we add five more elements to this queue, then we get this situation:
+
+![](images/CircularQueue2.png)
+
+What happens if we want to enqueue yet another element? We have to resize the array, and we do this like before by doubling the size (or multiplying with 1.5 or some other factor). But now we have to be a little careful when copying over the elements to the new array -- we cannot just copy the elements to the same positions, because then we would end up in this situation:
+
+![](images/CircularQueue3.png)
+
+Instead we have to copy the elements, starting from front and going to the back, after which we have to reassign front and back to their new positions. This will lead to the following resized array:
+
+![](images/CircularQueue4.png)
+
+Now finally we can enqueue our new element in cell 12, after Ö.
+
+
+Alternative approaches (optional)
+
+There are several ways to copy the elements.  Here are two other possibilities that both are correct:
+
+![](images/CircularQueue5.png)
+
+![](images/CircularQueue6.png)
+
+<!-- END NOTES -->
+
+
 <!-- START NOTES -->
 
 The problem with static array-based stacks and queues is that they have limited capacity.
@@ -14,11 +56,7 @@ To solve this problem we have to make the internal array *dynamic* --
 meaning that we increase the size of the array when it becomes full.
 (We should also shrink the array to save space whenever it contains too few elements.)
 
-<!--
-#### Invariants
- -->
-
- If you are used to program in Python or Javascript, you might think that the built-in arrays are very basic and simple objects, but they are not. Other programming languages such as Java, C, etc, have arrays and there is a very big difference between arrays and python-style arrays: arrays always have a fixed size. When you create a new array in Java you always have to specify its length. This tells the computer to find some free space in the computer memory where the array can fit. An array is always "tight" -- neighbouring elements will be neighbours in the computer memory too. This means that looking up a specific array index is really fast (constant-time in fact), since we can infer the memory position from the array index instantly.
+If you are used to program in Python or Javascript, you might think that the built-in arrays are very basic and simple objects, but they are not. Other programming languages such as Java, C, etc, have arrays and there is a very big difference between arrays and python-style arrays: arrays always have a fixed size. When you create a new array in Java you always have to specify its length. This tells the computer to find some free space in the computer memory where the array can fit. An array is always "tight" -- neighbouring elements will be neighbours in the computer memory too. This means that looking up a specific array index is really fast (constant-time in fact), since we can infer the memory position from the array index instantly.
 
 A Python-style array does not have a fixed length. You can add and remove elements without having to worry about memory allocation. They are in fact implemented as our first data structure, *dynamic arrays*. This data structure works like a normal array on steroids: they can change their size. All normal array operations are still efficient (constant-time), and adding and removing elements are efficient too. But note that it is only efficient to append to the end of the array (and remove from the end)! If you try to insert elements in the beginning it becomes awfully slow. Compare these two:
 
@@ -94,7 +132,93 @@ In version 3 we doubled the array size whenever we resized. But we don't have to
 
 For example, the Java standard library has the class ArrayList which is a dynamic array -- it grows by 50% each time (multiplies by 3/2). And the built-in lists in Python grow by as little as 12% (multiplies by 9/8). This means that they have to grow more often but on the other hand they don't use as much memory.
 
+#### Complexity analysis
+
+The worst case complexity of appending to a dynamic array is linear in the length of the array -- because if we are unlucky we have to resize it. But why does it not behave like that?
+
+This is because most of the time we are lucky. If we append to the dynamic array enough times, the cost of one expensive operation will be evened out by the cheap cost of all the lucky appends. We say that the *amortised* cost of appending to a dynamic array is constant.
+
+Note that amortised complexity is a completely different concept from worst-/best-average case, so we can talk about the amortised worst-case complexity or the amortised average-case complexity.
+
+Amortised complexity of dynamic arrays
+
+So how can we analyse dynamic array append?
+
+Let's assume that we already have a dynamic array that is half-empty. The underlying backing array has size $2n$ and it is filled with $n+1$ elements, like this:
+
+![](images/DynamicArray1.png)
+
+Now we append $n$ new elements to the array. The first $n-1$ appends are cheap, $O(1)$, after which the backing array becomes full:
+
+![](images/DynamicArray2.png)
+
+The very last append forces us to resize the array, which is an expensive linear operation, $O(n)$. After this the backing array looks like this, which is the same as what we had at the start (but twice as large):
+
+![](images/DynamicArray3.png)
+
+The total cost for all these n appends is $(n-1)O(1) + O(n) = O(n) + O(n) = O(2n) = O(n)$. On average this means $O(n)/n = O(1)$ per operation.
+
+This is why we can say that appending to a dynamic array is $O(n)$ in the worst case, but the amortised complexity is constant, $O(1)$.
+
+
+#### Decreasing the size of a dynamic array
+
+But what about the size of the internal array when we pop? Assume that we have pushed 1 million elements to the stack, and then popped them all -- then our internal array will still occupy (at least) 1 million cells in memory. Is it possible to decrease the size of the internal array when popping?
+
+Yes, it is, but then it is very important that we don't resize it too soon. Let's say that we double the size when pushing -- then we cannot halve the size when it is half full. Instead we have to wait until the array is *less than half full*, for example 1/3 full.
+
 <!-- END NOTES -->
+
+
+
+
+Dynamic arrays, as discussed in @sec:dynamic-arrays, are a flexible data structure that efficiently manages collections of elements whose size may change over time.
+Unlike fixed-size arrays, dynamic arrays automatically resize themselves to accommodate additional elements, making them especially useful when the total number of elements is not known in advance.
+
+In this case study, we will analyse the time and memory complexity of dynamic arrays, with a particular focus on the operation of adding an element. This operation is central to understanding dynamic arrays because:
+
+- Retrieving an element by index is identical to regular arrays and operates in constant time.
+- Removing an element involves similar considerations as inserting, particularly regarding shifting elements, so we will not cover it separately here.
+
+#### Complexity of adding an element to a dynamic array
+
+Let us first consider adding an element at the end of a dynamic array.
+In most cases, this operation is efficient, as it simply places the new element in the next available position in the internal array and takes constant time.
+However, when the array is full, it must resize itself to accommodate the new element.
+This resizing involves allocating a new array, typically twice the size of the original, copying all existing elements to this new array, and then inserting the new element.
+This step is more expensive and takes linear time in the number of elements.
+The amortised time complexity of appending arises from this pattern: although individual operations may occasionally be costly, the overall cost of performing many appends remains low, averaging out to constant time per operation.
+
+To illustrate this, consider a dynamic array that starts with a capacity of 1. When you append the first element, it fits perfectly.
+The next time you append, the array is full, so it resizes to a capacity of 2, copying the existing element.
+The next append fills this new capacity, leading to another resize to 4, and so on.
+Each time the array resizes, it doubles its capacity and copies all existing elements to the new array.
+This means that the number of elements copied during a resize operation grows as follows:
+
+- 1 element copied when resizing from 1 to 2,
+- 2 elements copied when resizing from 2 to 4,
+- 4 elements copied when resizing from 4 to 8,
+- and so on.
+
+The total number of elements copied during all these resizes can be summed up as follows:
+
+$$
+1 + 2 + 4 + \ldots + n = 2n - 1
+$$
+
+where $n$ is the final size of the array.
+This means that the total cost of copying elements during all resizes is proportional to the final size of the array $n$.
+So, while a single append operation may take linear time due to resizing, the average time per append operation across many appends is _constant_.
+This is because the expensive operations (the resizes) are infrequent compared to the many inexpensive appends that do not require resizing.
+Thus, the *amortised time complexity* for appending an element to a dynamic array is $O(1)$, meaning that on average, each append operation takes constant time.
+
+The above analysis assumes that we add an element at the end of the dynamic array.
+If we consider adding an element at the beginning or in the middle of the array, the situation changes significantly.
+In these cases, the dynamic array must shift existing elements to make space for the new element.
+This shifting operation takes linear time in the number of elements, as each element must be moved one position to the right.
+Therefore, inserting an element at the beginning or in the middle of a dynamic array has a time complexity of $O(n)$, where $n$ is the number of elements in the array.
+This is an important point to consider when choosing a data structure for a specific use case.
+
 
 -----------------------------------
 
@@ -446,3 +570,69 @@ Dynamic array list -- deletion.
 ```
 :::
 
+
+### Comparison of linked lists vs dynamic arrays
+
+::: TODO
+- Prio 1: rewrite
+    - now this is written as if general lists have been introduced, but not stacks/queues
+    - "we will look at stacks and queues later"
+- Prio 1: move some parts to the section about general lists
+:::
+
+Now that you have seen two substantially different implementations for
+stacks and queues, it is natural to ask which is better. In particular, if you must
+implement a stack or a queue for some task, which implementation should you choose?
+
+#### Time complexity
+
+All the basic operations for the array-based and linked list implementations take constant time, so from a time efficiency perspective, neither has a significant advantage.
+
+Array-based lists are usually slightly faster because they can make use of the internal memory cache that modern computers have, but it depends on many factors -- the programming language, the operating system, the processor, etc.
+
+One little disadvantage with array-based lists is that the operations are only *amortised* constant time.
+We will discuss amortised time more in @sec:amortised-analysis later.
+But what it means in practice is that push, pos, enqueue and dequeue are only guaranteed to be constant time *on average* if we run many operations.
+Now and then (very rarely) the internal array will be resized, and then the operation might take longer time than usual.
+
+This means that if we are implementing an application that has hard real-time constraints, a linked list might be a slightly better choice.
+
+
+#### Memory usage
+
+Given a collection of elements to store, they take up some amount of
+space whether they are simple integers or large objects with many
+fields. Any container data structure like a stack, a queue or a list then requires some
+additional space to organise the elements being stored. This additional
+space is called [overhead]{.term}.
+
+- Array-based lists have the disadvantage that the *capacity* of the internal array is larger than the actual size of the list.
+  When the array has recently been reallocated, a substantial amount of space might be tied up in a largely empty array.
+  This empty space is the overhead required by the array-based list.
+
+- Linked lists on the other hand have the advantage that they only need space for the objects actually on the list.
+  However, each list node needs to allocate memory for the pointer to the next node, and all of these pointers combined is the overhead required by the array-based list.
+
+The amount of space required by a linked list is directly proportional
+to the number of elements $n$. Assuming that each list node takes up $k$
+bytes of memory, the full list will use $kn$ bytes. The amount of space
+required by an array-based list is in the worst case three times as much
+as $n$ times the size of an array cell. (This worst case will arise when
+we remove a lot of elements from the list, because we wait until it is
+1/3 full until we shrink the array). So assuming that one array cell
+takes up $c$ bytes, the full array-based list will use at least $Cn$
+bytes, and at most $3cn$ bytes.
+
+So, which one is the best? It depends on the size $k$ of the list nodes,
+compared to the size $c$ of the array cells. Array-based lists have the
+advantage that there is no wasted space for an individual element.
+Linked lists require that an extra pointer for the `next` field be added
+to every list node. So the linked list has these `next` pointers as
+overhead. In many cases, $k$ is 2--3 times as large as $c$, so they will
+be quite similar in size on average. But this depends on the programming
+language, the operating system, and perhaps other factors.
+
+Note that these calculations exclude the memory used by the actual list
+elements, since the lists themselves only contain pointers to the
+elements! And in many cases, the objects themselves are much larger than
+the list nodes (or array cells).
