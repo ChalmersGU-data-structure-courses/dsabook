@@ -31,8 +31,7 @@ small sampling of what graphs can be used to model:
     where vertices are objects and edges are references.
 
 The next section covers basic graph terminology. The
-rest of the chapter will describe fundamental representations for graphs,
-provide a reference implementation, and cover core graph algorithms
+rest of the chapter will cover core graph algorithms
 including [traversal]{.term}, [topological sort]{.term}, [shortest paths]{.term} algorithms, and
-algorithms to find the [minimum spanning tree]{.term}.
+algorithms to find the [minimum spanning tree]{.term}, as well as common representations and implementations of graphs.
 
