@@ -8,7 +8,7 @@
 
 Many graph algorithms involve *traversing* a graph, starting from a given vertex and visit each reachable vertex once. This is similar to tree traversal, but made more difficult by the presence of cycles. A simple recursive procedure would get stuck in an infinite loop. 
 
-Instead we will use an iterative procedure, very similar to the ones shown for trees in @sec:tree-dfs, but keeping track of visited vertices to avoid infinite loops. Thus, in each step of the traversal: Select an edge from a visited vertex to an unvisited vertex, and visit that vertex. Stop when there are no edges from visited to unvisited vertices.
+Instead we use an iterative procedure, very similar to the ones shown for trees in @sec:tree-dfs, but keeping track of visited vertices to avoid infinite loops. Thus, in each step of the traversal: Select an edge from a visited vertex to an unvisited vertex, and visit that vertex. Stop when there are no edges from visited to unvisited vertices.
 
 By varying how we select the next edge, and what we do when we visit a vertex, we can implement a wide range of useful algorithms on graphs. 
 Most of the algorithms described in thuis chapter use two data structures: an *agenda* and a *visitation set*.
@@ -20,8 +20,9 @@ Most of the algorithms described in thuis chapter use two data structures: an *a
 
 ![Steps of a graph traversal in an undirected graph, starting in $A$. The circled areas are the set of visited vertices, and the pointed arrows show the selected edges. The edges with circles on them show the agenda. This traversal selects these edges in order: $(A,B) (A,E) (B,F) (A,D) (F,C)$.](images/Graphs-traversal1.svg){width=80% #fig:GraphTraversal1} 
 
-@fig:GraphTraversal1 illustrates the how a graph traversal can unfold. 
-The result is a set of directed edges. Importantly, these edges do *not* form a path. 
+@fig:GraphTraversal1 illustrates the how a graph traversal can unfold. It shows a useful trick when trying to understand graph traversal algorithms on pen and paper: Circle the visited vertices, and the edges you cross will be the important parts of the agenda. 
+
+The result of the traversal is a set of directed edges. Importantly, these edges do *not* form a path. 
 We do not select a vertex adjacent to the previous vertex we visited, but rather skip around to vertices that are adjacent to *some* visited vertex. 
 The most apt way to describe the end result is a tree, and as you can see in the lower right of @fig:GraphTraversal1, 
 the selected edges form a tree with $A$ as the root. 
@@ -45,7 +46,7 @@ function depthFirst(start: Vertex):
 
 There are some things to note here:
 
-- To get the process rolling, we add a fake edge to the starting vertex $A$, to add the task of visiting $A$ to the agenda. 
+- To get the process rolling, we add a fake edge to the agenda, leading to the starting vertex $A$. This means the first thing the loop does is visit the starting vertex. 
 - The agenda does not only contain edges from visited vertices to unvisited ones. Sometimes it will contain edges between two visited vertices, which is why we need to do the visitation check after popping items from it. 
 - Its a bit silly to add edges to the agenda when the to-vertex of the edge is already visited, since these will just be ignored after popping them. 
   For instance in the previous example, after selecting the edge $(A,B)$ and visiting $B$, since the graph is undirected the edge $(B,A)$ back to $A$ will immediately be added to the agenda. So an obvious optimization is to add a second check for this in the for-loop, and only push edges that lead to unvisited vertices. 
@@ -65,11 +66,11 @@ In this table, we only show the steps that pass the visitation check (`to` is no
  (F,B)       [A,E,F,C,B]   [(A,B) (A,D) (E,B)] 
  (A,D)       [A,E,F,C,B,D] [(A,B)] 
 
-Keep in mind how a stack operates: Because `E` is the last edge in `outgoingEdges(A)`, it will be pushed last and be on top of the agenda after visiting `A`.
-Also note how after visiting `F`, there are three edges leading to B in the agenda. 
+Keep in mind how a stack operates: Because $E$ is the last edge in `outgoingEdges(A)`, it will be pushed last and be on top of the agenda after visiting `A`.
+Also note how after visiting $F$, there are three edges leading to $B$ in the agenda. 
 Because our agenda is a LIFO stack, the last one to be pushed is the one selected, the others are discarded. 
 This is what makes the algorithm depth first: it will tend to select vertices that are *deeper* in the sense that the constructed paths from the origin are longer.
-So one way of describing this algorithm: In each step, we select an edge from an edge from the vertex that was most recently visited and still has at least one unvisited adjacent vertex. 
+So one way of describing this algorithm: In each step, we select an edge from the vertex that was most recently visited and still has at least one unvisited adjacent vertex. 
 
 Note that we are a bit vague about what result our depth first search algorithm produces. This is because there are many applications for this algorithm, with small variations on when it stops.
 
@@ -84,7 +85,7 @@ Note that we are a bit vague about what result our depth first search algorithm 
 
 ### Breadth first traversal
 
-By changing the data type of the agenda from a stack to a queue, we get an even more useful algorithm. 
+By changing the data type of the agenda from a stack to a FIFO queue, we get an even more useful algorithm. 
 You do not have to study this code in detail if you already understood the depth first traversal code, it is exactly identical 
 other than using enqueue/dequeue instead of push/pop. 
 
@@ -114,11 +115,12 @@ Again, let us look at the execution of `breadthFirst(A)`, both technically and v
 
 ![Steps of a breadth first traversal, starting in $A$, using a stack and assuming `outgoingEdges` are given in alphabetical order of destination vertex. The right part shows the result as a tree. The algorithm can be described as: select the alphabetically first edge from the earliest visited vertex still adjacent to an unvisited vertex.](images/Graphs-traversal3.svg){width=90% #fig:GraphTraversal3} 
 
-You may notice the following pattern: The algorithm starts by visiting all vertices directly adjecent to $A$, then the vertices adjacent to those vertices, etc. This is not only for this graph, but for every graph, and regardless of the order in which edges are presented by `outgoingEdges`. Consider: After visiting $A$, its immediate neighbors will all be in the agenda and visited before anything else. After all those are visited, the agenda will have all the vertices that are two steps away from $A$, and after all those, three steps. Breadth first order will always visit vertices in order of their minimal distance from the starting vertex.
+You may notice the following pattern: The algorithm starts by visiting all vertices directly adjecent to $A$, then the vertices adjacent to those vertices, etc. This is not only for this graph, but for every graph, and regardless of the order in which edges are presented by `outgoingEdges`. Consider: After visiting $A$, its immediate neighbors will all be in the agenda and visited before anything else (because the agenda is a queue now). After all those are visited, the agenda will have all the vertices that are two steps away from $A$, and after all those, three steps. Breadth first order will always visit vertices in order of their minimal distance from the starting vertex.
 
 This further means that the tree produced will not only contain a path from $A$ to $C$, but that path is guaranteed to be the shortest possible one. 
 In fact, the tree contains shortest paths from $A$ to all other vertices. 
-This is supremely useful in a wide range of applications: Obviously things like pathfinding in maps or simulations, but also in applications like AI problem solving and most types of optimization problems. 
+This is supremely useful in a wide range of applications: 
+Obviously things like pathfinding in maps or simulations, but also in applications like AI problem solving and most types of optimization problems. 
 
 
 

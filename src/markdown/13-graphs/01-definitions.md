@@ -27,7 +27,7 @@ We can also roughly categorize graphs by the number of expected edges they have:
 
 An example of a sparse graph is a road network (where vertices are intersections). 
 Even the most chaotic intersection would have less than say ten outgoing roads. 
-If the road network expands, we wouldn't expect the average number of edges per vertex to grow. 
+If the road network expands, we would not expect the average number of edges per vertex to grow. 
 An example of a dense graph would be air traffic, where vertices are airports and edges are potential flight routes. 
 Here the graph would be complete (if you can fly a plane directly between any pairs of airports). 
 If we double the number of airports, the average number of edges per vertex will also double, and the total number of edges will quadruple. 
