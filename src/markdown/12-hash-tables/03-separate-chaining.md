@@ -29,7 +29,7 @@ particular slot are placed on that slot's linked list.
 ``` {src="Hashing/openhashCON.js" links="Hashing/openhashCON.css"}
 ```
 A hash table where each slot points to a linked list to hold the records associated with that slot.
-The hash function used is the simple $\bmod$ function.
+The hash function used is the simple modulus function.
 :::
 
 Records within a slot's list can be ordered in several ways: by

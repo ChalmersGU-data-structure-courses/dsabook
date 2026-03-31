@@ -21,7 +21,7 @@ the hash table limits the length of the string that can be hashed.
 
 
 :::::::::: question ::::::::::
-The simple $\bmod$ hash function makes use of:
+The simple modulus hash function makes use of:
 
 - [x] The low order digits or bits in the key
 - [ ] The high order digits or bits in the key
@@ -29,7 +29,7 @@ The simple $\bmod$ hash function makes use of:
 - [ ] All of the digits or bits in the key
 
 ::: hints
-- Think of taking a three-digit number $\bmod$ 10. What digit is used?
+- Think of taking a three-digit number modulus 10. What digit is used?
 :::
 ::::::::::::::::::::::::::::::
 

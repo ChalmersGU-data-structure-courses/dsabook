@@ -333,7 +333,7 @@ For example, $\lceil 3.4 \rceil = 4$, as does $\lceil 4.0 \rceil$, while $\lceil
 
 Modulus function:
 
-:   The [modulus]{.term} (or $\bmod$) function returns the remainder of an integer division.
+:   The [modulus]{.term} function returns the remainder of an integer division.
 Sometimes written $n \bmod m$ in mathematical expressions,
 the syntax in many programming languages is $n\mathop{\%}m$.
 From the definition of remainder, $n \bmod m$ is
@@ -343,7 +343,7 @@ For example, $5 \bmod 3 = 2$, $25 \bmod 3 = 1$,
 $5 \bmod 7 = 5$, and $5 \bmod 5 = 0$.
 
     There is more than one way to assign values to $q$ and $r$, depending on how integer division is interpreted.
-The most common mathematical definition computes the $\bmod$ function as $n \bmod m = n - m\lfloor n/m\rfloor$.
+The most common mathematical definition computes the modulus function as $n \bmod m = n - m\lfloor n/m\rfloor$.
 In this case, $-3 \bmod 5 = 2$.
 However, Java and C++ compilers typically use the underlying
 processor's machine instruction for computing integer arithmetic.
@@ -1161,7 +1161,7 @@ Then, we can compute successive terms as follows, where $b$ and $t$ are some con
 r_i &= b\cdot r_{i-1} \pmod{t}
 \end{align*}
 
-By definition of the $\bmod$ function, all generated numbers must be in the range 0 to $t-1$.
+By definition of the modulus function, all generated numbers must be in the range 0 to $t-1$.
 Now, consider what happens when $r_i = r_j$ for values $i$ and $j$.
 Of course then $r_{i+1} = r_{j+1}$ which means that we have a repeating cycle.
 

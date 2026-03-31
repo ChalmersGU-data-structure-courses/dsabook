@@ -269,7 +269,7 @@ mysterious, so let's break this down. This is being used in the
 context of two facts: (1) We want the function to return an odd
 value that is less than $m$ the hash table size, and (2) we are
 using a hash table of size $m = 2^q$, which means that taking the
-$\bmod$ of size $m$ is using the bottom $q$ bits of the key value. OK,
+modulus of size $m$ is using the bottom $q$ bits of the key value. OK,
 since $\mathbf{h}_2$ is multiplying something by 2 and adding 1, we
 guarentee that it is an odd number. Now, $((X \bmod (m/2)) * 2) + 1$
 must be in the range 1 and $m-1$ (if you need to, play around with
