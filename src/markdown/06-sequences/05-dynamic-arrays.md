@@ -190,7 +190,7 @@ We can calculate the exact performance overhead of growing the array by any give
 #### Theorem: Growing by a factor
 
 If we grow the array by a factor of $k > 1$ when resizing it,
-then the overhead is at most $1+1/(k-1)$ elements copied per element added to the dynamic array.
+then the overhead is at most $\frac{k}{k-1}$ elements copied per element added to the dynamic array.
 For example, when growing by 20% (k = 1.2), the overhead is 6 elements copied per add.
 :::
 
@@ -202,8 +202,8 @@ We can choose a large factor (such as 2) if we want fast performance,
 or a low factor (such as 1.2) if we want to save memory.
 
 For example, the Java standard library has the class ArrayList which is a dynamic array
--- it grows by 50% each time (multiplies by 3/2).
-And the built-in lists in Python grow by as little as 12% (multiplies by 9/8).
+-- it grows by 50% each time (multiplies by $\frac{3}{2}$).
+And the built-in lists in Python grow by as little as 12% (multiplies by $\frac{9}{8}$).
 This means that they have to grow more often but on the other hand they do not use as much memory.
 
 
@@ -235,7 +235,7 @@ This will lead to the following resized array:
 
 ![](images/CircularQueue4.png)
 
-Aparto from this detail, that we have to reset the pointers,
+Apart from this detail, that we have to reset the pointers,
 the implementation of resizing is similar to the one for stacks:
 
     datatype ArrayQueue:
