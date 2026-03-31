@@ -1,75 +1,86 @@
 
-## Other kinds of lists
+## Other kinds of sequences
 
-***TODO: Bla bla... stacks and queus are very limited, and there are gradually more advanced sequence ADTs***
+Stacks and queues are very simple abstract datatypes, and also very commonly used.
+Many many algorithms make use of some kind of "agenda",
+where they can remember things that have to be taken care of and then process them in the right order,
+and most of them do not require anything more complicated than a stack or a queue.
+
+But there are algorithms and programs that need sequences with more capabilities.
+It could be that they order the elements in a more "intelligent" way,
+or that they need to be able to look at more elements than just the "next in line".
+Here we will briefly discuss some common abstract datatypes for more complex sequences.
+
+
+### Priority queues
+
+Stacks and queues can be characterised by how long an element has to wait until it is removed:
+
+-   In a *stack*, the removed object is always the one *most recently inserted*.
+    Therefore an alternative name for a stack is a [LIFO]{.term} list
+    (where LIFO stands for "last-in-first-out").
+-   In a *queue*, the removed object is always the one *who has waited the longest*.
+    So the alternative name for a stack is a [FIFO]{.term} list
+    (standing for "first-in-first-out").
+
+A queue is an "impartial" data structure in the sense that no object
+gets an "unfair" treatment by to wait much longer than others before they are handled.
+This is often what ones wants, both in real life and in computer algorithms.
+But there are also many situations where we wish to choose the "most important" from a collection of people, tasks, or objects.
+The standard example is a hospital emergency room:
+there it is vital that patient are *not* treated in the order they arrived,
+but instead the "most critical" patients should have priority.
+When scheduling programs for execution in a multitasking operating system,
+at any given moment there might be several programs (usually called *jobs*) ready to run,
+and some jobs (for example, sensitive operating system tasks) are
+more important to run quickly than others (for example, backing up your data).
+
+When a collection of objects is organised by importance or priority, we call this a [priority queue]{.term}.
+This supports the same operations as stacks and queues: adding and removing elements,
+but the difference is in which order they are removed.
+
+-   In a *priority queue*, the removed object is always the one *with the highest priority*.
+
+Priority queues are discussed further in [Chapter @sec:heaps].
+
+<!-- #### Use case(s) for priority queues -->
 
 
 ### Double-ended queues
 
-::: TODO
-- Prio 1: hide this section until written
-- Prio 2: invariants, use cases, explaining text
+A double-ended queue (also known as a *deque*) is both a stack and a queue at the same time.
+This means that we can add and remove elements both from the front and the rear (but not in the middle).
+So a deque should support the folloing operations, efficiently:
+
+- `addFirst(x)` and `addLast(x)`
+- `removeFirst()` and `removeLast()`
+
+One simple way to implement a deque is to use a circular dynamic array, just as the one we used for queues.
+The main difference with queues is that the *front* and *rear* pointers are now able to move in both directions.
+The operation `addFirst` will move the *front* pointer to the left, and `addLast` will move the *rear* pointer to the right.
+And the opposite for `removeFirst` and `removeLast`, respectively.
+
+::: example
+#### Exercise: Implement a deque using a dynamic array
+
+Implement the class `ArrayDeque` which uses a circular dynamic array,
+together with the methods `addFirst`, `addLast`, `removeFirst` and `removeLast`.
 :::
 
-<!-- START NOTES -->
+<!-- #### Use case(s) for deques -->
 
-A double-ended queue is both a stack and a queue at the same time. We can add and remove elements both from the front and the back (but not in the middle):
+#### Double-linked lists
 
-- addFirst(x) and addLast(x)
-- removeFirst() and removeLast()
-
-One easy way to implement a deque is to use a circular dynamic array, just as the one we used for queues. I leave it as an exercise for you to figuring out the implementations of the four methods.
-
-However, it is not as easy to implement a deque using a linked list. The solution is to use a *double-linked list*, where each node points both forward and backward:
+However, it is not as easy to implement a deque using a linked list.
+The solution is to use a *double-linked list*, where each node points both forward and backward:
 
 ![](images/LinkedDeque.png)
 
-Now, to add or remove an element, we have to make sure we assign both the *next* and *prev* pointers, for the neighbouring nodes. This can be a little tricky, but in the end it's not very complicated.
 
-<!-- END NOTES -->
-
--------
-
-
-<!--
-### Double-ended queues, or deques
-
-    interface Deque of T extends Collection:
-        insertFirst(x: T)
-        insertLast(x: T)
-        removeFirst() -> T
-        removeLast() -> T
-        peekFirst() -> T
-        peekLast() -> T
-
-
-
-### Invariants
-
-
-### Use case(s) for deques
-
-
-### Implementing deques using circular dynamic arrays
-
-::: TODO
-- This is the same as the queue implementation, we just need some more methods
-:::
-
-### Implementing deques using doubly linked lists
--->
-
-::: TODO
-- With normal linked lists we cannot pop from the back
-:::
-
-The [singly linked list]{.term} (@sec:stacks-implemented-as-linked-lists) allows for direct access from a list node only to the next
-node in the list. A [doubly linked list]{.term}
-allows convenient access from a list node to the next node and also to
-the preceding node on the list. The doubly linked list node accomplishes
-this in the obvious way by storing two pointers: one to the node
-following it (as in the singly linked list), and a second pointer to the
-node preceding it.
+Previously we have only talked about *single-linked lists*.
+They allow for direct access from a list node only to the next node in the list.
+A *double-linked list* allows convenient access from a node both to the next node and the preceding node on the list.
+This is accomplished by storing two pointers, which we call *next* and *prev* (for "previous").
 
 ```{.jsav-figure scripts="DataStructures/DoubleLinkList.js" links="DataStructures/DoubleLinkList.css"}
 var AV = NewAV();
@@ -87,8 +98,12 @@ AV.recorded();
 ```
 
 The most common reason to use a doubly linked list is because it gives
-an additional possibility to move both forwards and backwards in the
-list, and to efficiently add and remove elements from both ends.
+an additional possibility to move both forwards and backwards in the list,
+and to efficiently add and remove elements from both ends.
+
+To add or remove an element, we have to make sure we assign both the *next* and *prev* pointers, for the neighbouring nodes.
+This can be a little tricky, but it is not fundementally difficult.
+Exactly how to do this is left as an exercise to the interested reader.
 
 :::::: latex
 \booklink{Read the rest online}{6.9}{sec:double-ended-queues}
@@ -96,88 +111,76 @@ list, and to efficiently add and remove elements from both ends.
 
 :::::: online
 
-Like our linked queue implementation, the doubly linked list makes use of two pointers -- one to the first element (the *head*), and one to the last element (the *tail*).
+Like our linked queue implementation, the doubly linked list makes use of two pointers
+-- one to the first element (the *head*), and one to the last element (the *tail*).
 
-Here is an implementation for the class variables and the internal list
-node class. The only real difference between single linked lists is that
-we have pointers to the previous node, and a pointer to the tail of the
-list.
+Here is an implementation for the class variables and the internal list node class.
+The only real difference between single linked lists is that we have pointers to the previous node,
+and a pointer to the tail of the list.
 
     datatype DoubleNode of T:
-        elem: T                 // Value for this node
-        prev: DoubleNode of T   // Pointer to previous node in list
-        next: DoubleNode of T   // Pointer to next node in list
+        elem: T                   // Value for this node
+        prev: DoubleNode of T     // Pointer to previous node in list
+        next: DoubleNode of T     // Pointer to next node in list
 
     datatype DoubleDeque implements Deque:
         head: DoubleNode = null   // Pointer to front of deque
         tail: DoubleNode = null   // Pointer to tail of deque
-        dequeSize: Int = 0        // Size of deque
+        size: Int = 0             // Size of deque
 
 
 The main advantage with doubly linked lists are that we can implement
 more advanced iterators
 ([ListIterator](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/ListIterator.html)
-in the Java standard API) that can move forward and backward through a
-list. In fact, Java's standard
+in the Java standard API) that can move forward and backward through a list. In fact, Java's standard
 [LinkedList](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/LinkedList.html)
 is implemented as a doubly linked list.
 
 
-
-#### Implementation of the list methods
-
-Getting and setting are exactly the same as for normal linked lists, so
-we don't show them here.
-
-
-#### Inserting elements
+#### Adding to a double-linked list
 
 Adding elements becomes a bit trickier, because we have to make sure that all pointers are updated correctly.
-We have to handle inserting into an empty list specially, because then both head and tail will point to the same cell.
+We have to handle adding to an empty list specially, because then both head and tail will point to the same cell.
 
     datatype DoubleDeque:
         ...
-        insertFirst(x):
-            if dequeSize == 0:
+        addFirst(x):
+            if size == 0:
                 head = tail = new DoubleNode(x, null, null)
             else:
                 newhead = new DoubleNode(x, null, head)
                 head.prev = newhead
                 head = newhead
-            dequeSize = dequeSize + 1
+            size = size + 1
 
-        insertLast(x):
-            if dequeSize == 0:
+        addLast(x):
+            if size == 0:
                 head = tail = new DoubleNode(x, null, null)
             else:
                 newtail = new DoubleNode(x, tail, null)
                 tail.next = newtail
                 tail = newtail
-            dequeSize = dequeSize + 1
+            size = size + 1
 
 
-#### Removing elements
+#### Removing from a double-linked list
 
 The same goes for removing elements -- the one-element list is a special case.
 
     datatype DoubleDeque:
         ...
         removeFirst():
-            // precondition: dequeSize > 0
             removed = head                      // Remember the current head
             head = removed.next                 // Re-point the head to the second node
             head.prev = null                    // Make sure the new head doesn't have any predecessor
-            removed.prev = removed.next = null  // For garbage collection
-            dequeSize = dequeSize - 1
+            size = size - 1
             return removed.elem
 
         removeLast():
-            // precondition: dequeSize > 0
             removed = tail                      // Remember the current tail
             tail = removed.prev                 // Re-point the tail to the predecessor node
             tail.next = null                    // Make sure the new tail doesn't have any successor
-            removed.prev = removed.next = null  // For garbage collection
-            dequeSize = dequeSize - 1
+            size = size - 1
             return removed.elem
 
 ::::::
@@ -185,40 +188,16 @@ The same goes for removing elements -- the one-element list is a special case.
 
 ### General lists
 
-<!-- START NOTES -->
-
-Stacks and queues (and deques) are special cases of a more general abstract data type, the list. In a general list you can access any element by its position in the list, you can replace elements, and you can insert and remove elements. Python lists are one example, and the ArrayList in Java is another.
-
-One interesting thing with lists is that it is impossible (or at least ver difficult) to make them efficient for all possible operations -- both accessing any position, and inserting and removing at any position. You can make them efficient for one kind of operation (for example, accessing by position), but then other operations will be slower (for example, inserting in the middle).
-
-The most common implementation of a general list is a dynamic array, and that is how both Python lists and Java ArrayLists do it. For both of them it is inefficient to insert and remove elements at the beginning.
-
-<!-- END NOTES -->
-
--------
-
 ::: TODO
 - Prio 2: invariants
 - Prio 2: refactor: much of the text is supposed to be the first in the chapter (see file 09b)
 - Prio 3: alternative APIs
 :::
 
-
-We need some notation to show the contents of a list, so we will use the
-same angle bracket notation that is normally used to represent
-[sequences]{.term}. To be consistent
-with standard array indexing, the first position on the list is denoted
-as 0. Thus, if there are $n$ elements in the list, they are given
-positions 0 through $n-1$ as
-$\langle\ a_0,\ a_1,\ ...,\ a_{n-1}\ \rangle$. The subscript indicates
-an element's position within the list. Using this notation, the empty
-list would appear as $\langle\ \rangle$.
-
-::: TODO
-- Dyn arrays can do most things efficient (except insert/remove from the middle)
-- (Doubly) linked lists can only modify from front/rear
-- But with a pointer it's efficient to modify in the mdidle (see Java Spliterator)
-:::
+Stacks and queues (and deques) are special cases of a more general abstract data type, the *list*.
+In a general list you can access any element by its position in the list,
+you can replace elements, and you can insert and remove elements.
+Python lists are one example, and the `ArrayList` in Java is another.
 
 What basic operations do we want our lists to support? Our common
 intuition about lists tells us that a list should be able to grow and
@@ -226,8 +205,24 @@ shrink in size as we insert and remove elements. We should be able to
 insert and remove elements from anywhere in the list. We should be able
 to gain access to any element's value, either to read it or to change
 it. Finally, we should be able to know the size of the list, and to
-iterate through the elements in the list -- i.e., the list should be a
-Collection.
+iterate through the elements in the list
+-- that is, the list should be a Collection.
+
+One interesting thing with lists is that it is impossible (or at least very difficult)
+to make them efficient for all possible operations
+-- looking up, inserting and removing at any position in the list.
+You can make them efficient for one kind of operation (for example, accessing by position),
+but then other operations will be slower (for example, inserting in the middle).
+
+The most common implementation of a general list is a dynamic array,
+and that is how both Python lists and the Java `ArrayList` do it.
+For both of them it is inefficient to insert and remove elements at the beginning.
+
+::: TODO
+- Dyn arrays can do most things efficient (except insert/remove from the middle)
+- (Doubly) linked lists can only modify from front/rear
+- But with a pointer it's efficient to modify in the middle (see Java Spliterator)
+:::
 
 :::::: latex
 \booklink{Read the rest online}{6.10}{sec:general-lists}
@@ -264,7 +259,7 @@ Apart from these four, we also want to know the number of elements, to be able t
 So we make the List interface be a Collection too.
 
 ::: dsvis
-Insertion into a linked list, overview.
+Insertion into a general list, overview.
 
 ``` {.jsav-animation src="ChalmersGU/ListADT-Positions-CON.js" links="ChalmersGU/CGU-Styles.css" name="List ADT Positions Slideshow"}
 ```
@@ -292,12 +287,8 @@ implementation, just the list ADT.
 There are two standard approaches to implementing lists, the
 [array-based list]{.term}, and the [linked list]{.term}.
 
-::::::
 
-
-### Implementing using linked lists
-
-:::::: online
+### Implementing general lists using linked lists
 
 We can use the same structure as for stacks when implementing general linked lists:
 
@@ -427,12 +418,8 @@ kind of iterator is called a
 which is part of Java's standard
 [LinkedList](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/LinkedList.html).
 
-::::::
-
 
 ### Implementing general lists using arrays
-
-:::::: online
 
 First we give a static implementation for array-based lists, named
 **ArrayList**. This inherits from the
@@ -593,28 +580,8 @@ Practise exercise about removing from an array-based list.
 ```
 :::
 
-<!--
-### Limitations
-
-::: TODO
-- What happens when the capacity is exceeded? See section about dynamic arrays
-:::
- -->
-
-<!--
-### Alternative approaches
-
-::: TODO
-- alternative interface
-:::
--->
-
-::::::
-
 
 ### When to use linked lists?
-
-:::::: online
 
 According to the calculations above, linked lists are worse than
 array-based lists, because all operations are slow (linear time). So why
@@ -636,12 +603,8 @@ But these advanced list iterators are not part of this course, and in
 fact there are not many algorithms where list iterators are particularly
 useful.
 
-::::::
-
 
 ### How are lists implemented in the standard libraries?
-
-:::::: online
 
 All serious languages have dynamic list implementations. Here are how
 they are implemented in Java and Python:

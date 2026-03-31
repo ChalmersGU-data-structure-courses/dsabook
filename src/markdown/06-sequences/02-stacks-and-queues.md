@@ -86,38 +86,6 @@ In the following sections we will see how to implement stacks and queues,
 either as *linked lists* (see @sec:linked-lists) or *dynamic arrays* (see [@sec:array-lists;@sec:dynamic-arrays]).
 
 
-### Queues and priority queues
-
-Stacks and queues can be characterised by how long an element has to wait until it is removed:
-
--   In a *stack*, the removed object is always the one *most recently inserted*.
-    Therefore an alternative name for a stack is a [LIFO]{.term} list
-    (where LIFO stands for "last-in-first-out").
--   In a *queue*, the removed object is always the one *who has waited the longest*.
-    So the alternative name for a stack is a [FIFO]{.term} list
-    (standing for "first-in-first-out").
-
-A queue is an "impartial" data structure in the sense that no object
-gets an "unfair" treatment by to wait much longer than others before they are handled.
-This is often what ones wants, both in real life and in computer algorithms.
-But there are also many situations where we wish to choose the "most important" from a collection of people, tasks, or objects.
-The standard example is a hospital emergency room:
-there it is vital that patient are *not* treated in the order they arrived,
-but instead the "most critical" patients should have priority.
-When scheduling programs for execution in a multitasking operating system,
-at any given moment there might be several programs (usually called *jobs*) ready to run,
-and some jobs (for example, sensitive operating system tasks) are
-more important to run quickly than others (for example, backing up your data).
-
-When a collection of objects is organised by importance or priority, we call this a [priority queue]{.term}.
-This supports the same operations as stacks and queues: adding and removing elements,
-but the difference is in which order they are removed.
-
--   In a *priority queue*, the removed object is always the one *with the highest priority*.
-
-Priority queues are discussed further in [Chapter @sec:heaps].
-
-
 ### Case study: Implementing recursion {#implementing-recursion}
 
 Perhaps the most common computer application that uses *stacks* is not even visible to its users.
