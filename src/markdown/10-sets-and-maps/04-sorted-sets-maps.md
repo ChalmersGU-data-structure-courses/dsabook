@@ -3,21 +3,22 @@
 
 Consider the final example problem from the introduction to this chapter:
 
-- *Between X and Y:* Given a list of all Swedish towns and their populations, are there any towns whose population is between 5,000 and 10,000? And if so, which are these towns?
+-   Given a list of all Swedish towns and their populations,
+    are there any towns whose population is between 5,000 and 10,000?
+    And if so, which are these towns?
 
 These are two example of *range queries*:
-given a set, finding if there are any elements within a given range;
-or given a map, finding all items whose key lies in a given range.
-Some set and map implementations support answering range queries efficiently; we say that these data structures implement *sorted sets* and *maps*.
+given a set, find if there are any elements within a given range;
+or given a map, find all items whose key lies in a given range.
+Some set and map implementations support answering range queries efficiently;
+we say that these data structures implement *sorted sets* and *maps*.
 
 ### Sorted sets
 
-::: example
-#### Example: Between X and Y
-
 The first example range query is:
 
-- Given a list of all Swedish towns and their populations, is there any town whose population is between 5,000 and 10,000?
+-   Given a list of all Swedish towns and their populations,
+    are there any towns whose population is between 5,000 and 10,000?
 
 One way to solve this problem would be to use a normal set of city populations.
 Then we could find the answer to our query by making a sequence of calls to `contains`:
@@ -38,13 +39,16 @@ If the populations are stored in a sorted array, we can use the following algori
 - Check if this population is at most 10,000.
 
 So, a sorted array can be used as an efficient implementation of a sorted set.
-However, as we saw in the previous section, sorted arrays are not the best choice if you want to add or remove elements.
-:::
+However, as we will see in @sec:implementing-using-arrays,
+sorted arrays are not the best choice if you also want to add or remove elements.
+For this purpose there are better implementations, such as the *search trees* from [Chapter @sec:search-trees].
+We say that these data structures implement *sorted sets*.
 
-Some set implementations support answering range queries efficiently, such as sorted lists as we saw in the example above.
-But there are other implementations too -- we say that these data structures implement *sorted sets*.
+Apart from the normal set operations,
+sorted sets support several other operations that take advantage of the natural order of the elements:
 
-Apart from range queries, sorted sets support several other operations that take advantage of the natural order of the elements:
+-   Finding all elements within a given range of values.
+    (This is the *range query* from above.)
 
 -   Finding the *smallest* or *largest* element in the set.
 
@@ -64,7 +68,7 @@ Apart from range queries, sorted sets support several other operations that take
         If $e$ is in the map, then the ceiling of $e$ is just $e$; otherwise it is the successor of $e$.
 
 These operations are summarised in this interface for sorted sets.
-Note that it *extends* the `Set` interface, it has all the methods that normal sets also have.
+Note that it *extends* the `Set` interface, so it has all the methods that normal sets also have.
 
     interface SortedSet of T extends Set:
         first() -> T          // Returns the first (smallest) element.
@@ -78,28 +82,25 @@ Note that it *extends* the `Set` interface, it has all the methods that normal s
 
 ### Sorted maps
 
-::: example
-#### Example: Between X and Y (again)
-
 Now consider the second range query in the example above:
 
-- Given a list of all Swedish towns and their populations, find the towns whose population is between 5,000 and 10,000.
+-   Given a list of all Swedish towns and their populations,
+    find the towns whose population is between 5,000 and 10,000.
 
 One way to solve this problem would be to use a *multimap* (see @sec:multimaps).
 The key would be a population number, and the values would be all towns having that population.
-Then we could find the required towns by making a sequence of `get(5,000)`, `get(5,001)`, ...., until `get(10,000)`.
+Then we could find the required towns by making a sequence of calls
+`get(5,000)`, `get(5,001)`, ..., until `get(10,000)`.
 
-But just as for the set range query, this is not feasible.
-Instead, we can store the towns an array which is sorted by population, and then use the following algorithm:
+But just as for the range queries for sets, this is not feasible.
+Instead, we can store the towns in an array which is sorted by population, and then use the following algorithm:
 
 - Find the position in the array of the *first* town that has a population of *at least* 5,000.
 - Find the position in the array of the *last* town that has a population of *at most* 10,000.
 - Now return all towns between those two positions in the array.
 
-:::
-
-The operation that is needed is: given a map, find all items whose key lies in a given range.
-Apart from range queries, sorted maps support similar operations as we introduced for sorted sets.
+The operation that is needed is: given a map, find all items whose key lies within a given range.
+And in addition to these range queries, sorted maps support similar operations as we introduced for sorted sets.
 
 Here is a possible interface for sorted maps, which extends the normal map interface.
 Note the similarity to the interface for sorted sets.
@@ -118,37 +119,28 @@ Note the similarity to the interface for sorted sets.
 ::: example
 #### Example: Small Swedish towns
 
-Here is how to use a sorted map ADT to find all Swedish towns having
-between 5,000 and 10,000 population. As there may be towns that have the
-same population, we need a *multimap*, where the key is the population and the value is a *set* of towns.
+Here is how to use a sorted map ADT to find all Swedish towns having between 5,000 and 10,000 population.
+We assume that cities have information about their name and population:
 
     datatype City:
         name: String
         population: Int
 
-    // Use a sorted map where the value is a list of cities.
-    datatype CityPopulations:
-        cities: SortedMap of Int to Set of City = new SortedMap()
+As there may be towns that have the same population, we need a *sorted multimap*,
+where the key is the population and the value is a *set* of towns:
 
-        // Add a new city to the database.
-        add(city: City):
-            if not cities.containsKey(city.population):
-                // This is the first city with this population.
-                    cities.put(city.population, new Set())
+    cityPopulations: SortedMap of Int to (Set of City)
 
-            // Get the set of documents containing this city.
-            set = cities.get(city.population)
-            set.add(doc)
+Now, to find all cities with a population between *lower* and *upper*,
+we iterate through all existing populations within the range,
+and then through all the cities for that population:
 
-        // Find all cities with a population between lower and upper
-        findBetween(lower: Int, upper: Int) -> Set of City:
-            result = new Set()
-            // The range query returns a collection of keys, i.e. populations.
-            for each population in cities.keysBetween(lower, upper):
-                // cities.get(population) returns the list of cities with that population.
-                for each city in cities.get(population):
-                    result.add(city)
-            return result
+    findBetween(lower: Int, upper: Int) -> Set of City:
+        result = new Set()
+        for each population in cities.keysBetween(lower, upper):
+            for each city in cities.get(population):
+                result.add(city)
+        return result
 
 :::
 
