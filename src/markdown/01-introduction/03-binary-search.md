@@ -84,7 +84,7 @@ and we can only search for the same key that it is sorted after.
 So if the array is sorted by author, we cannot use binary search to search for a book title.
 
 ::: algorithm
-### Algorithm: Binary search
+#### Algorithm: Binary search
 
 To search for a *key* in a given array,
 you start with an interval matching the who array.
