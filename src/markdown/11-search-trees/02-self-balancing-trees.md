@@ -5,38 +5,26 @@
 - Prio 2: write an overview of rotations
 :::
 
-<!-- START NOTES -->
+As we saw in the last section, binary search trees (BST) work fine when we insert elements in a somewhat random order.
+Then the height of the final tree will grow logarithmically in the number of nodes,
+which is another way of saying that the tree is quite balanced.
+The problem with BSTs is that we cannot guarantee that the tree will be balanced,
+and if we insert elements in an unfortunate order (for example in sorted order), then it will become very unbalanced.
+That is where self-balancing trees come in.
 
-As we saw, binary search trees (BST) work fine when we insert elements in a somewhat random order. Then the height of the final tree will grow logarithmically in the number of nodes, which is another way of saying that the tree is quite balanced.
+A *self-balancing* tree ensures that it will always be balanced,
+regardless in what order elements are added or removed from the tree.
+There are many many different kinds of self-balancing trees, and in this book we will only discuss a handful.
 
-The problem with BSTs is that we cannot guarantee that the tree will be balanced, and if we insert elements in the wrong order (for example in sorted order), then it will become very unbalanced. That's where self-balancing trees come in.
+The most straightforward is to start from a normal BST and modify its structure whenever we add or remove nodes.
+We do this by stating additional *balance invariants*,
+and whenever an invariant is broken we make sure to rebalance the tree to satisfy the invariant again.
 
-A *self-balancing* tree ensures that it will always be balanced, regardless in what order elements are added or removed from the tree. There are many many different kinds of self-balancing trees, and we will not have time to look into more than a couple. Today we will talk about AVL trees and next week it will be 2-3 trees and B-trees.
-
-<!-- END NOTES -->
-
------------
-
-The [Binary Search Tree]{.term} has a
-serious deficiency for practical use as a search structure. That is the
-fact that it can easily become unbalanced, so that some nodes are deep
-in the tree. In fact, it is possible for a BST with $n$ nodes to have a
-depth of $n$, making it no faster to search in the worst case than a
-linked list. If we could keep the tree balanced in some way, then search
-cost would only be $O(\log(n))$, a huge improvement.
-
-One solution to this problem is to adopt another search tree structure
-instead of using a BST at all. An example of such an alternative tree
-structure is the [2-3 tree]{.term} or the [B-tree]{.term}.
-But another alternative would be to modify the BST access
-functions in some way to guarantee that the tree performs well. This is
-an appealing concept, and the concept works well for heaps, whose access
-functions maintain the heap in the shape of a complete binary tree.
-Unfortunately, the heap keeps its balanced shape at the cost of weaker
-restrictions on the relative values of a node and its children, making
-it a bad search structure. And requiring that the BST always be in the
-shape of a complete binary tree requires excessive modification to the
-tree during update, as we see in the example in @fig:rebalanceBST.
+Therefore we need to come up with a good balancing invariant, and some method for rebalancing.
+Unfortunately, we cannot use the most obvious invariant -- that the tree must be completely balanced
+(or in other words, that the tree must be *complete*).
+The reason for this is that it costs too much to maintain this invariant,
+for example, @fig:rebalanceBST shows that we might need to reorganise the tree completely after each insertion.
 
 ![An attempt to re-balance a BST after insertion can be expensive. (a) A
 BST with six nodes in the shape of a complete binary tree. (b) A node
@@ -45,28 +33,141 @@ complete binary tree shape and the BST property, a major reorganisation
 of the tree is required.
 ](images/BSTBal.png){width=60% #fig:rebalanceBST}
 
-If we are willing to weaken the balance requirements, we can come up
-with alternative update routines that perform well both in terms of cost
-for the update and in balance for the resulting tree structure.
-The AVL tree (see @sec:avl-trees) works in this
-way, using insertion and deletion routines altered from those of the BST
-to ensure that, for every node, the depths of the left and right
-subtrees differ by at most one.
-The [red-black tree]{.term} is also a binary tree, which uses a different balancing mechanism.
+Instead we need to a find weaker balance invariant, and there are lots of different possibilities.
+For example, in @sec:AVL-trees we introduce the perhaps most famous of all self-balancing trees, the AVL tree,
+and in @sec:red-black-trees we briefly discuss Red-black trees which uses a slightly different invariant.
 
-A different approach to improving the performance of the BST is to not
-require that the tree always be balanced, but rather to expend some
-effort toward making the BST more balanced every time it is accessed.
-One example of such a compromise is called the
-splay tree (see @sec:splay-trees).
+::: example
+#### Example: Scapegoat trees
+
+One very simple solution is not require that the tree must be completely balanced,
+but instead to state that it must be balanced to *a certain degree*.
+This invariant can be formulated like follows:
+
+- Every tree node $t$ must be $\alpha$-balanced, meaning that
+    - $\text{size}(t.\text{left})\leq\alpha\cdot\text{size}(t)$, and
+    - $\text{size}(t.\text{right})\leq\alpha\cdot\text{size}(t)$.
+
+After inserting or deleting into the tree, a node might get $\alpha$-unbalanced.
+If this happens we simply rearrange the whole subtree at that node, making it completely balanced.
+This restructuring process takes quite long time because it is linear in the size of the subtree,
+but it can be shown that it will not happen too often.
+Using the techniques from @sec:amortised-analysis,
+it can be shown that the *amortised complexity* of insertion and deletion is logarithmic in the size of the tree, $O(\log(n))$.
+
+We will not discuss Scapegoat trees further in this book,
+and the implementation details are left as an exercise to the reader.
+:::
+
+Another possibility is to use non-binary trees --
+for example, in @sec:2-3-trees we introduce the 2-3 trees and the B-trees.
+Allowing the tree nodes to have more than two children makes it possible to keep the tree completely balanced at all times,
+and therefore 2-3 trees and B-trees have logarithmic complexity.
+
+In @sec:splay-trees we introduce *splay trees*, which use yet another approach.
+When you search for a value, the tree is rearranged so that the node that contains the value is moved to the root.
+A splay tree is *not* guaranteed to be balanced in any way, but it is possible to show that the *amortised* complexity is logarithmic.
 
 
-<!--
 ### Tree rotations
 
-::: TODO
-- overall idea of rotating in a tree
-- left, right, left-left, left-right, etc
-- steal from the AVL section
-:::
- -->
+Most self-balancing trees use *rotations* to restore their balance invariant,
+and there are two main forms -- the *single* and the *double* rotation.
+These rotations are used both by AVL trees, Red-black trees, Splay trees, and numerous other self-balancing BSTs.
+However, not all use rotations -- for example the Scapegoat tree above instead builds a completely new subtrees.
+
+In the following we only explain left rotations, but right rotations are of course analoguous.
+
+#### Single rotation
+
+Assume that a subtree is *right*-unbalanced --
+meaning that the right child has a larger size, or a larger height, or in some other way is "heavier" than the left child.
+Let us call the left child A, and the right child consists of the two subtrees B and C.
+To *left-rotate* this subtree, we make the right child $y$ the parent,
+and move the previous parent $x$ to the left so that it becomes a left child.
+When doing this, the previous left child of $y$ has to reattach itself as a right child of $x$ instead.
+
+```
+      |                     |
+      x                     y
+     / \                   / \
+    A   y      ===>       x   C
+       / \               / \
+      B   C             A   B
+```
+
+[](images/SingRot.png)
+
+If the right-right child $C$ was the "heaviest" of the subtrees,
+then this left-rotation should have made the subtree a little more balanced than before.
+
+*Note*:
+When you want to implement rotation, you have to remember to update the parent node too.
+Before the rotation its child was the $x$ node, but afterwards this should be $y$ instead.
+
+#### Double rotation
+
+However, if the right-left child $B$ was "heavier", then a left-rotation might not solve our problems.
+In that case, the only thing that happens is that the tree becomes left-heavy instead of right-heavy.
+
+To solve right-left cases, we have to do a *double* rotation.
+This means that we first make a single right rotation of the right child $y$,
+followed by a left rotation of the parent $x$.
+The first right rotation over the child transforms it into a right-right case,
+and then we can continue with a normal left rotation like above.
+
+```
+      |                    |                       |
+      x                    x                       z
+     / \                  / \                    /   \
+    A   y      ===>      A   z      ===>       x       y
+       / \                  / \               / \     / \
+      z   C                B1  y             A  B1   B2  C
+     / \                      / \
+    B1 B2                    B2  C
+```
+
+As you can see, the effect of a double rotation is that the right-left grandchild moves two levels up to become the new parent.
+
+#### Implementing rotations
+
+We implement a rotation by reassigning the child pointers of the involved nodes.
+The only complication is to make sure to do this in the right order,
+because when we reassign a child the old child is forgotten if we have not stored it somewhere else.
+
+In a single left rotation, the parent $x$ should become the new left child of $y$, so we can assign `y.left = x`.
+But before we do that we have to do something with $y$'s left child $B$.
+This should be the new right child of $x$, and since we already know $x$'s current right child, $y$,
+it is fine to start with this assignment, `x.right = y.left`.
+So, a single right rotation can be summarised in two simple pointer assignments:
+
+    x.right = y.left
+    y.left = x
+
+But note that the *parent* should get a new child too -- before it was $x$ and now it is $y$.
+The cleanest solution is if we implement a recursive function that calls itself for a child.
+Then the function can simply return $y$ instead of $x$ and trust that it will be resolved by the caller:
+
+    function rotate_right(x):
+        y = x.right
+        x.right = y.left
+        y.left = x
+        return y
+
+Otherwise we need to know the parent too, including if it is a left or right child of the parent --
+this is not difficult, but involves some more variables and if-clauses.
+
+To implement a double right-left rotation, we can do a right rotation on the right child,
+followed by a left rotation on the current, like this:
+
+    function rotate_right_left(x):
+        x.right = rotate_right(x.right)
+        return rotate_left(x)
+
+But we can also compress the two rotations into the following pointer assignments:
+
+    function rotate_right_left(x):
+        y = x.right; z = y.left
+        x.right = z.left; z.left = x
+        y.left = z.right; z.right = y
+        return z

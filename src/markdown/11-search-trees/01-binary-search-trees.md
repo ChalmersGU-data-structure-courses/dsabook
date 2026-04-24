@@ -142,7 +142,7 @@ To add a value $x$ to a BST node:
 - If the node is empty, return a node node with value $x$.
 - Compare $x$ with the node value:
     - If they are equal, return the node as it is.
-    - Otherwise, reassign the left or right child (depending on $x$ is smaller or larger)
+    - Otherwise, reassign the left or right child (depending on if $x$ is smaller or larger)
       with the result of adding $x$ to it.
 :::
 
