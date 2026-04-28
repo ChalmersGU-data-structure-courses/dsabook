@@ -1,4 +1,3 @@
-
 ## Case study: Heapsort {#heapsort}
 
 ::: TODO
@@ -30,7 +29,7 @@ the section "Quicksort Analysis" in chapter XX).
 
 We can use a heap to implement a very simple sorting algorithm:
 
-1. Insert all elements from the unsorted array into a *min*-heap.
+1. Insert all elements from the unsorted array into a min-heap.
 2. Remove each element in turn from the heap, putting it in its right place in the original array.
 
 :::::: latex

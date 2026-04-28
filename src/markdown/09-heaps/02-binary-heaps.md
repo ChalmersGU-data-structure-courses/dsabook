@@ -541,9 +541,7 @@ If lookup in this table takes $O(\log(n))$ time, then updates and removals of ar
 
 ### Building a heap
 
-If all $n$ values are available at the beginning of the building
-process, we can build the heap faster than just inserting the values
-into the heap one by one.
+If all $n$ values are available at the beginning of the building process, we can build the heap faster than just inserting the values into the heap one by one.
 
 :::::: latex
 \booklink{Read the rest online}{9.2}{sec:building-a-heap}
