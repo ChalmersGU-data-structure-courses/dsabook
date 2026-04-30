@@ -49,7 +49,7 @@ This invariant can be formulated like follows:
     - $\text{size}(t.\text{right})\leq\alpha\cdot\text{size}(t)$.
 
 After inserting or deleting into the tree, a node might get $\alpha$-unbalanced.
-If this happens we simply rearrange the whole subtree at that node, making it completely balanced.
+If this happens we rebuild the whole subtree at that node, making it completely balanced.
 This restructuring process takes quite long time because it is linear in the size of the subtree,
 but it can be shown that it will not happen too often.
 Using the techniques from @sec:amortised-analysis,
@@ -74,7 +74,7 @@ A splay tree is *not* guaranteed to be balanced in any way, but it is possible t
 Most self-balancing trees use *rotations* to restore their balance invariant,
 and there are two main forms -- the *single* and the *double* rotation.
 These rotations are used both by AVL trees, Red-black trees, Splay trees, and numerous other self-balancing BSTs.
-However, not all use rotations -- for example the Scapegoat tree above instead builds a completely new subtrees.
+However, not all use rotations -- for example the Scapegoat tree above instead builds a completely new subtree.
 
 In the following we only explain left rotations, but right rotations are of course analoguous.
 
@@ -82,10 +82,10 @@ In the following we only explain left rotations, but right rotations are of cour
 
 Assume that a subtree is *right*-unbalanced --
 meaning that the right child has a larger size, or a larger height, or in some other way is "heavier" than the left child.
-Let us call the left child A, and the right child consists of the two subtrees B and C.
+Let us call the left child $A$, and the right child consists of the two subtrees $B$ and $C$.
 To *left-rotate* this subtree, we make the right child $y$ the parent,
 and move the previous parent $x$ to the left so that it becomes a left child.
-When doing this, the previous left child of $y$ has to reattach itself as a right child of $x$ instead.
+When doing this, $B$ -- the previous left child of $y$ -- has to reattach itself as a right child of $x$ instead.
 
 ```
       |                     |
@@ -113,7 +113,7 @@ In that case, the only thing that happens is that the tree becomes left-heavy in
 To solve right-left cases, we have to do a *double* rotation.
 This means that we first make a single right rotation of the right child $y$,
 followed by a left rotation of the parent $x$.
-The first right rotation over the child transforms it into a right-right case,
+The first right rotation over the $y$ child transforms it into a right-right case,
 and then we can continue with a normal left rotation like above.
 
 ```
@@ -127,7 +127,7 @@ and then we can continue with a normal left rotation like above.
     B1 B2                    B2  C
 ```
 
-As you can see, the effect of a double rotation is that the right-left grandchild moves two levels up to become the new parent.
+As you can see, the effect of a double rotation is that the right-left grandchild $z$ moves two levels up to become the new parent.
 
 #### Implementing rotations
 
@@ -146,28 +146,19 @@ So, a single right rotation can be summarised in two simple pointer assignments:
 
 But note that the *parent* should get a new child too -- before it was $x$ and now it is $y$.
 The cleanest solution is if we implement a recursive function that calls itself for a child.
-Then the function can simply return $y$ instead of $x$ and trust that it will be resolved by the caller:
+Then the function can simply return $y$ instead of $x$ and trust that it will be resolved by the caller.
 
-    function rotate_right(x):
-        y = x.right
-        x.right = y.left
-        y.left = x
-        return y
-
-Otherwise we need to know the parent too, including if it is a left or right child of the parent --
+If we do not want a recursive implementation we need to keep track of the parent too,
+including if it is a left or right child of the parent --
 this is not difficult, but involves some more variables and if-clauses.
 
 To implement a double right-left rotation, we can do a right rotation on the right child,
 followed by a left rotation on the current, like this:
 
-    function rotate_right_left(x):
-        x.right = rotate_right(x.right)
-        return rotate_left(x)
+    x.right = rotate_right(x.right)
+    rotate_left(x)
 
-But we can also compress the two rotations into the following pointer assignments:
+But we can also compress the two rotations into the following four pointer assignments:
 
-    function rotate_right_left(x):
-        y = x.right; z = y.left
-        x.right = z.left; z.left = x
-        y.left = z.right; z.right = y
-        return z
+    x.right = z.left ; z.left = x
+    y.left = z.right ; z.right = y

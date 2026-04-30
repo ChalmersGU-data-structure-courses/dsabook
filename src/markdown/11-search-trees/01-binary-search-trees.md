@@ -13,8 +13,10 @@ A *binary search tree* (BST) is a binary tree that satisfies the following invar
 
 ::: example
 #### Invariant: Binary search trees
-All values in the left subtree are *smaller* than the node value,
-which in turn is *smaller* than all values in the right subtree
+For every node with value $v$:
+
+- all values in the left subtree are *smaller* than $v$$, and
+- $v$ is *smaller* than all values in the right subtree.
 :::
 
 The only thing that differentiates a BST from a normal binary tree is this invariant.

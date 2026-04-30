@@ -18,7 +18,7 @@ Note that this does not mean that AVL trees are perfectly balanced.
 But the invariant guarantees that the height of the tree is never more than
 1.44 times the height of a perfectly balanced binary search tree.
 (Side note: 1.44 is actually $1/\log_2(\phi)$, where $\phi=(1+\sqrt{5})/2$ is the *golden ratio*.)
-The exact constant is not important, as always when it comes to complexity,
+As always when it comes to complexity the exact constant is not important,
 but what it says is that the maximum height of an AVL tree is $O(\log(n))$ where $n$ is its size.
 
 To maintain the invariant, AVL trees need to store an additional property in every tree node, the *balance factor*.
@@ -150,7 +150,6 @@ So, in the worst case we will rebalance at most $O(\log(n))$ nodes after one ins
 Rebalancing one single node is constant time.
 It involves one or two rotations, and a rotation is constant time.
 Therefore, rebalancing a tree after insertion or deletion is logarithmic, $O(\log(n))$.
-
 In fact, rebalancing after addition is constant time, because the tree will always be balanced after the first rebalancing.
 But this doesn't change the complexity of addition, because it is logarithmic to find the insertion point.
 
@@ -190,6 +189,6 @@ it is a loop over $n$ elements and each iteration adds to the tree, which is log
 The final complexity of the loop is $O(n \log(n))$, and since inorder traversal is linear,
 the complexity of sorting via an AVL tree is $O(n \log(n))$.
 
-This has the same complexity as Mergesort, and is as good as the best sorting algorithms.
-So why don't anyone use it?
+This has the same complexity as Mergesort, which is as good as the best sorting algorithms.
+So why do not anyone use it?
 It is because the hidden constants are bigger than Mergesort: it takes longer time and also uses more extra memory.
