@@ -1,7 +1,35 @@
 
 ## Skip lists
 
+A *skip list* is not a tree, or at least not the kind of tree that we have talked about previously.
+It can be thought of as a very specialised implementation of a general (nonbinary) tree,
+but it is more common to think of it as a collection of linked lists.
+
+At the lowest level it is a standard sorted linked list.
+Then there is a sparser linked list, containing only approximately half of the nodes
+(meaning that the rest of the nodes are *skipped*).
+And then there is an even sparser list, including only one quarter of the nodes.
+This continues so that we have a logarithmic number of sparser and sparser linked lists.
+
+When searching for a value in a skip list,
+we can use the sparser linked lists to quickly jump over uninteresting nodes.
+Inserting a value is done using *randomness*,
+where we roll a die to decide how many of the lists should contain the new value.
+This makes skip lists a *randomised* data structure,
+which means that we cannot guarantee that the operations are efficient,
+but we can say that they are logarithmic *with extremely high probability*.
+Therefore, the *expected* worst-case complexity of skip lists are logarithmic, $O(\log(n))$.
+
+
+:::::: latex
+\booklink{Read the rest online}{11.6}{sec:skip-lists}
+::::::
+
+:::::: online
+
 ::: TODO
+- Prio 1: invariants
+- Prio 1: rewrite introduction (it's superseeded by the new text above)
 - Prio 3: discuss the relation with a tree
     - (i.e., why is this section in this chapter?)
 - Prio 3: less code, more explanations
@@ -30,12 +58,6 @@ performance with extremely high probability (unlike the BST which has a
 good chance of performing poorly). As such it represents a good
 compromise between difficulty of implementation and performance.
 
-
-:::::: latex
-\booklink{Read the rest online}{11.6}{sec:skip-lists}
-::::::
-
-:::::: online
 
 ::: dsvis
 Here is an illustration of the basic idea behind skip lists.

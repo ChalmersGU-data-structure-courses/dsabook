@@ -1,8 +1,28 @@
 
 ## Splay trees
 
+
+AVL trees and red-black trees are both extensions of binary search trees, BST.
+By storing some additional information in each node they can maintain their balance.
+(AVL trees store the height or balance, and red-black trees store the colour.)
+
+A *splay tree* is also a kind of self-balancing BST, but it does not store any additional information in the nodes.
+Instead it uses alternative implementations of the operations for searching, inserting, and deleting.
+Every time you call one of these operations, the tree is transformed to become a little more balanced.
+By doing these transformations in a smart way, we can ensure that the operations have *amortised* logarithmic complexity.
+More formally, running a sequence of $n$ operations on a tree of size $n$ will take $O(n\log(n))$ time --
+meaning that each operation will be logarithmic on average.
+
+
+:::::: latex
+\booklink{Read the rest online}{11.4}{sec:splay-trees}
+::::::
+
+:::::: online
+
 ::: TODO
 - Prio 1: invariants
+- Prio 1: rewrite introduction (it's superseeded by the new text above)
 - Prio 2: move some things about rotations to previous overview
 - Prio 3: analysis (is it too hard?)
 :::
@@ -50,12 +70,6 @@ a tendency to balance the tree. There are three types of rotation.
 Note that even if you only search for a value, *the tree structure is changed*
 because the found node will be splayed to the root.
 This is a big difference between splay trees and the search trees we have looked at previously.
-
-:::::: latex
-\booklink{Read the rest online}{11.4}{sec:splay-trees}
-::::::
-
-:::::: online
 
 ### Splaying
 
