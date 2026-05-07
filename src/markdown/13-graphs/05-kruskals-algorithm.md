@@ -7,8 +7,8 @@
 
 <!-- START NOTES -->
 
-Kruskal's algorithm does exactly the same thing as Prim's algorithm: Given an undirected connected graph, it constructs an MST of the graph. 
-Kruskal's is different from the other alogorithms we have seen (DFS, BFS, Prim's and Dijkstra's) in that it is not a traversal. 
+Kruskal's algorithm does exactly the same thing as Prim's algorithm: Given an undirected connected graph, it constructs an MST of the graph.
+Kruskal's is different from the other alogorithms we have seen (DFS, BFS, Prim's and Dijkstra's) in that it is not a traversal.
 We do not grow an expanding set of visited nodes.
 
 - Start with an empty MST

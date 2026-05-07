@@ -9,46 +9,43 @@
 Dijkstra's algorithm is perhaps the most well-known graph algorithm of all. It solves the single source shortest path problem for weighted graphs with non-negative weights. That is:
 
 - The graphs can be directed or undirected.
-- Every edge has a number called its weight. The cost of a path is the sum of the weights of the edges. 
+- Every edge has a number called its weight. The cost of a path is the sum of the weights of the edges.
 - The algorithm does not work in the presence of negative weights. For many applications this is not a problem, for instance if the weights signify time or distance, there would not be negative values.
 - The algorithm constructs a shortest path tree, finding the shortest (lowest cost) path from a starting vertex to all other vertices.
 
-The algorithm follows the same pattern as BFS and DFS: Keep an agenda of edges from visited to unvisited vertices. 
-For BFS, the agenda is a stack. 
+The algorithm follows the same pattern as BFS and DFS: Keep an agenda of edges from visited to unvisited vertices.
+For BFS, the agenda is a stack.
 For DFS, the agenda is a queue.
 For Dijkstra's algorithm, we use a min-priority queue, prioritized by the cost of the path formed from the starting vertex.
 
-This requires a little extra book-keeping since the agenda does not simply contain edges, it contains edges with priority values. 
-Figure @fig:GraphDijkstra1 illustrates this. Note e.g. how in the second step the agenda contains two options for visiting $E$, 
+This requires a little extra book-keeping since the agenda does not simply contain edges, it contains edges with priority values.
+Figure @fig:GraphDijkstra1 illustrates this. Note e.g. how in the second step the agenda contains two options for visiting $E$,
 either directly from $A$ at a cost of $6$ or using the path `[A,D,E]` at a cost of $2+3=5$.
 
-![Steps of Dijkstra's algorithm, starting in $A$. Visited vertices are annotated with the cost of their shortest path, and edges in the agenda with their cost on the form $c+w$ where $c$ is the cost to the origin vertex and $w$ the cost of the edge. The right part shows the resulting SPT.](images/Graphs-dijkstra1.svg){width=90% #fig:GraphDijkstra1} 
+![Steps of Dijkstra's algorithm, starting in $A$. Visited vertices are annotated with the cost of their shortest path, and edges in the agenda with their cost on the form $c+w$ where $c$ is the cost to the origin vertex and $w$ the cost of the edge. The right part shows the resulting SPT.](images/Graphs-dijkstra1.svg){width=90% #fig:GraphDijkstra1}
 
-To convince ourselves that this works, consider this: In the first step, it always selects the shortest edge $(A,X)$ from the starting vertex $A$ to some other vertex $X$ (in our example, $X=D$). We know there is no shorter path from $A$ to $X$, because any other path would start with a longer edge from $A$. The subsequent steps work similarly: We select the shortest path leading out of the set of visited vertices. Because any other path would start with a longer path from the set of visited vertices, we know that the path we use is a shortest path. 
+To convince ourselves that this works, consider this: In the first step, it always selects the shortest edge $(A,X)$ from the starting vertex $A$ to some other vertex $X$ (in our example, $X=D$). We know there is no shorter path from $A$ to $X$, because any other path would start with a longer edge from $A$. The subsequent steps work similarly: We select the shortest path leading out of the set of visited vertices. Because any other path would start with a longer path from the set of visited vertices, we know that the path we use is a shortest path.
 
 A simple implementaion of Dijkstra's would look like this:
 
-```
-function dijkstra(start: Vertex):
-    visited = new empty set of vertices
-    agenda = [(0, null, start)]
-    while agenda is not empty:
-        (cost, from, to) = agenda.removeMin()
-        if visited.contains(to):
-            continue   // Skip to the next item on the agenda
-        visited.add(to) // Visiting the vertex to for the first time
-        // cost is the cost of the shortest path to the vertex
-        for (weight,from1, to1):Edge in outgoingEdges(to):
-            agenda.add( (cost+weight, from1, to1) )
+    function dijkstra(start: Vertex):
+        visited = new empty set of vertices
+        agenda = [(0, null, start)]
+        while agenda is not empty:
+            (cost, from, to) = agenda.removeMin()
+            if visited.contains(to):
+                continue   // Skip to the next item on the agenda
+            visited.add(to) // Visiting the vertex to for the first time
+            // cost is the cost of the shortest path to the vertex
+            for (weight,from1, to1):Edge in outgoingEdges(to):
+                agenda.add( (cost+weight, from1, to1) )
 
-```
+As with DFS and BFS before, we can also analyze the agenda at each step of the algorithm.
+Again, we assume that we only add edges that lead to unvisited vertices, and we only show the steps that pass the visitation check:
 
-As with DFS and BFS before, we can also analyze the agenda at each step of the algorithm. 
-Again, we assume that we only add edges that lead to unvisited vertices, and we only show the steps that pass the visitation check: 
-
- (cost, from, to)  visited        agenda at end of iteration 
+ (cost, from, to)  visited        agenda at end of iteration
  ----------------  -------------  -------------------------------
- (0,null,A)        [A]            [(2,A,D) (4,A,B) (6,A,E)]  
+ (0,null,A)        [A]            [(2,A,D) (4,A,B) (6,A,E)]
  (2,A,D)           [A,D]          [(4,A,B) (5,D,E) (6,A,E)]
  (4,A,B)           [A,D,B]        [(5,D,E) (6,A,E) (7,B,F) (8,B,C)]
  (5,D,E)           [A,D,B,E]      [(6,A,E) (7,B,F) (8,B,C) (8,E,F)]
@@ -59,65 +56,59 @@ Again, we assume that we only add edges that lead to unvisited vertices, and we 
 
 ### Optimizing Dijkstra's algorithm
 
-There are several optimizations to Dijkstra's, involving keeping the agenda smaller. 
-Consider when we visit $F$ in the example in Figure @fig:GraphDijkstra1. 
-We have already found a path of cost $8$ to $C$ (`[A,B,C]`), yet we add an inferior 
-path to the agenda (`[A,B,F,C]` at cost $10$). When we eventually process that path, 
-it will be discarded by the visitation check. 
-We could avoid this by adding a map from vertices to costs, that efficiently give us the 
+There are several optimizations to Dijkstra's, involving keeping the agenda smaller.
+Consider when we visit $F$ in the example in Figure @fig:GraphDijkstra1.
+We have already found a path of cost $8$ to $C$ (`[A,B,C]`), yet we add an inferior
+path to the agenda (`[A,B,F,C]` at cost $10$). When we eventually process that path,
+it will be discarded by the visitation check.
+We could avoid this by adding a map from vertices to costs, that efficiently give us the
 best cost found so far for a vertex, and only add paths that improve the cost.
 
 Going one step further, we can observe that there should never be two edges to the same vertex in the agenda.
 When we find a better option for reaching a vertex, we should replace the old entry in the agenda with the improved one.
-This means the agenda will never contain more than one edge to a particular vertex, and that every edge in the agenda leads to an unvisited vertex 
+This means the agenda will never contain more than one edge to a particular vertex, and that every edge in the agenda leads to an unvisited vertex
 (so we can eliminate the visitation check after `removeMin`).
 
-```
-function dijkstra(start: Vertex):
-    visited = new empty set of vertices
-    agenda = new updateable priority queue with to-vertices as keys
-    agenda.setPriority(A, (0, null,A) )
-    while agenda is not empty:
-        (cost, from, to) = agenda.removeMin()
-        visited.add(to)
-        for (weight,from1, to1):Edge in outgoingEdges(to):
-            if visited.contains(to1):
-                continue
-            if cost+weight < agenda.getPriority(to1)
-                agenda.setPriority(to1, (cost+weight, from1, to1) )
-
-```
+    function dijkstra(start: Vertex):
+        visited = new empty set of vertices
+        agenda = new updateable priority queue with to-vertices as keys
+        agenda.setPriority(A, (0, null,A) )
+        while agenda is not empty:
+            (cost, from, to) = agenda.removeMin()
+            visited.add(to)
+            for (weight,from1, to1):Edge in outgoingEdges(to):
+                if visited.contains(to1):
+                    continue
+                if cost+weight < agenda.getPriority(to1)
+                    agenda.setPriority(to1, (cost+weight, from1, to1) )
 
 ### Extracting the SPT
 
-In all the traversal algorithms seen so far, we do not show how to extract the resulting tree. 
+In all the traversal algorithms seen so far, we do not show how to extract the resulting tree.
 A standard tree implementation where nodes point to their children does not support an efficient enough add operation,
 and it will not help us find the path to specific nodes.
-Instead we want a tree where nodes point to their parent, with the root pointing to `null`. 
+Instead we want a tree where nodes point to their parent, with the root pointing to `null`.
 This makes it easy to extend the tree with a new leaf by just attaching a new node to an existing node.
-It also means every node in the tree is essentially a linked list leading back to the root node. 
-Here is an implementation of Dijkstra's algorithm that returns a map from vertices to their shortest path. 
+It also means every node in the tree is essentially a linked list leading back to the root node.
+Here is an implementation of Dijkstra's algorithm that returns a map from vertices to their shortest path.
 
 
-```
-class ParentTreeNode
-    vertex: Vertex
-    parent: ParentTreeNode
+    class ParentTreeNode
+        vertex: Vertex
+        parent: ParentTreeNode
 
-function dijkstra(start: Vertex):
-    visited = new empty set of vertices
-    agenda = [(0, null, start)]
-    result = new map from Vertex to ParentTreeNode
-    while agenda is not empty:
-        (cost, from, to) = agenda.removeMin()
-        if visited.contains(to):
-            continue   // Skip to the next item on the agenda
-        result.put(to, new ParentTreeNode(to, result.get(from))
-        for (weight,from1, to1):Edge in outgoingEdges(to):
-            agenda.add( (cost+weight, from1, to1) )
-    return result
-
-```
+    function dijkstra(start: Vertex):
+        visited = new empty set of vertices
+        agenda = [(0, null, start)]
+        result = new map from Vertex to ParentTreeNode
+        while agenda is not empty:
+            (cost, from, to) = agenda.removeMin()
+            if visited.contains(to):
+                continue   // Skip to the next item on the agenda
+            result.put(to, new ParentTreeNode(to, result.get(from))
+            for (weight,from1, to1):Edge in outgoingEdges(to):
+                agenda.add( (cost+weight, from1, to1) )
+        return result
 
 <!-- START NOTES -->
 

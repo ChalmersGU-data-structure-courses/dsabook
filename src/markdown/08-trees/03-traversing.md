@@ -16,12 +16,10 @@ Let's say we want to print the contents of a binary tree. There are many differe
 
 All of these are easily implemented using a recursive algorithm:
 
-```
-preorder(node):             inorder(node):              postorder(node):
-    print(node.elem)            inorder(node.left)          postorder(node.left)
-    preorder(node.left)         print(node.elem)            postorder(node.right)
-    preorder(node.right)        inorder(node.right)         print(node.elem)
-```
+    preorder(node):             inorder(node):              postorder(node):
+        print(node.elem)            inorder(node.left)          postorder(node.left)
+        preorder(node.left)         print(node.elem)            postorder(node.right)
+        preorder(node.right)        inorder(node.right)         print(node.elem)
 
 The only difference is when we decide to "visit" the current node. For the example tree (on the previous page), they will print the following:
 
