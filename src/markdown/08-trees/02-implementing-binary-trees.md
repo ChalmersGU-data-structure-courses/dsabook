@@ -13,7 +13,19 @@ children can be empty. Binary tree nodes typically contain a value
 field, with the type of the field depending on the application. The most
 common node implementation includes a value field and pointers to the
 two children.
-@Fig:bintree_with_pointers is an illustration of how the tree from @fig:example_bintree looks like, where the child pointers are shown explicitly.
+
+Here is a simple implementation for binary tree nodes, which can store one single element in each node.
+Every `BinaryNode` object also has two pointers, one to its left child and another to its right child.
+\
+
+    datatype BinaryNode of T:
+        value: T           // Element for this node.
+        left: BinaryNode   // Pointer to left child.
+        right: BinaryNode  // Pointer to right child.
+
+
+@Fig:bintree_with_pointers is an illustration of how the tree from @fig:example_bintree looks in memory, 
+with child pointers shown explicitly.
 
 ::: {.jsav-figure #fig:bintree_with_pointers}
 ``` {latex-zoom=0.8}
@@ -71,24 +83,12 @@ AV.displayInit();
 AV.recorded();
 ```
 
-Illustration of a typical pointer-based binary tree implementation, where each node stores two child pointers and a value
+Illustration of a typical pointer-based binary tree implementation, where each node stores two child pointers and a value. 
+The empty cells are null values.
 :::
 
-Here is a simple implementation for binary tree nodes, which can store one single element in each node.
-Every `BinaryNode` object also has two pointers, one to its left child and another to its right child.
-\
-
-    datatype BinaryNode of T:
-        elem: T            // Element for this node.
-        left: BinaryNode   // Pointer to left child.
-        right: BinaryNode  // Pointer to right child.
-
-        isLeaf() -> bool:
-            // Return true if a leaf node, false otherwise.
-            return this.left is null and this.right is null
-
-We define a *leaf* to be a node with no children -- i.e., where both childen pointers point to nothing.
-
+It is easy to extend this `BinaryNode` for various applications, 
+for instance by including more data in nodes.
 Some programmers find it convenient to add a pointer to the node's
 parent, allowing easy upward movement in the tree. Using a parent
 pointer is somewhat analogous to adding a link to the previous node in a
@@ -100,9 +100,26 @@ understanding of recursion and so indicate poor programming. If you are
 inclined toward using a parent pointer, consider if there is a more
 efficient implementation possible.
 
-#### Binary trees
+Here is an example of programming using the type defined above. 
+It computes the height of a tree.
+Since `BinaryNode` is a recursive data type, it is usually natural 
+to write recursive functions on it, and the base case is usually
+an empty tree (null).
 
-Our final datatype for binary trees is in fact very similar to the linked lists that we introduced in @sec:stacks-implemented-as-linked-lists -- we need a reference to the root node and the total size of the tree:
+    function height(node : BinaryNode) -> int:
+        if node is null:
+            return 0
+        maxChildHeight = max(height(node.left), height(node.right))
+        return maxChildHeight+1
+
+Study the code and convince yourself that `height(A)` in @Fig:bintree_with_pointers 
+will return the value 4. Also consider how you would modify the code to compute size instead of height.
+
+#### Wrapper data type
+
+Our final datatype for binary trees is a wrapper class similar to the linked lists that we introduced 
+in @sec:stacks-implemented-as-linked-lists -- we need a reference to the root node (that is initially null) 
+and we can include meta-data such as the total size of the tree:
 
     datatype BinaryTree:
         root: BinaryNode = null

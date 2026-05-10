@@ -5,7 +5,7 @@
 - Prio 2: update section, here's what should be included:
     - General trees
     - Binary trees
-    - Binary search trees
+    - Binary search trees (should it? There's a chapter 11 for that.)
     - Properties
         - depth, size, branching factor
         - Perfect trees
@@ -14,40 +14,161 @@
 - Prio 2: merge quizzes (files 01q, 01q2), perhaps move to another section?
 :::
 
-<!-- START NOTES -->
+A very common type of trees are *binary* trees. 
+A binary tree is either empty (no nodes), or is a root node with a value and exactly two children (hence binary) that are also binary trees. 
+The children of a node has a specific order, so every node has a 
+left and a right child.
 
-#### Trees
+Sometimes binary trees are described as having at most two children, but that is unwieldy because there is a difference between having a right and a left child. When you see trees drawn as the on on the left below, it is important to understand that it is actually as on the right, with the black dots showing empty trees.
 
-A tree is similar to a linked list: it consists of nodes which point to other nodes. The difference is that a linked list node has *one* possible successor node, but a tree can link to *many* other nodes. These nodes are called the *children* of the parent node.
+![](images/Trees-BinaryTreeWithNulls.svg){width=70%}
 
-A linked list start with one node, the *head*, and correspondingly a tree starts with one single node, the *root*. Normally we draw a tree upside-down, like this:
+A node with no children (or more correctly, with only empty children) is 
+called a *leaf*. Non-leaf nodes are sometimes called *inner* nodes, 
+or *branches*. 
+In the illustration above, the nodes containing 5 and 6 are leaves. 
 
-![](images/GenericTree.png)
+![An example of a binary tree with nodes labeled by letters.](images/Trees-BinaryTreeExample.svg){width=60% #fig:example_bintree}
 
-#### Binary trees
+@fig:example_bintree shows a binary tree that we will be using as a running example. Study it and consider: Which nodes are leaves? How many empty subtrees are hidden in the picture? What is the path from node A to node H?
 
-The most common type of trees are *binary* trees. The main reason for this is because they are the simplest to implement, and we very rarely need something else.
+Its very common to talk about subtrees. For instance, node F is a child node of C, but it can also be considered the root of a tree containing F, H, and I.
 
-A binary tree node always has exactly two children. But any of the children can be **null**, and sometimes we are sloppy and say that it has one child, or no children. When you see the tree on the left you must know that it actually looks like the tree on the right, where the black dots mean **null** nodes:
+<!--
 
-![](images/BinTree-WithNullNodes.png)
+### Binary trees are recursive data structures
 
-A node with no children (or more correctly, with only **null** children) is called a *leaf*, and a non-leaf node is called an *inner* node.
+There are many ways to implement data structures, but the most 
+common one is a recursive data type that mimics the formal definition: 
+A binary tree is either empty (represented by null), 
+or it is a node with a left and a right child (that can also be null). 
 
-The datatype (class definition) for binary trees look very similar to linked lists, the only difference is that tree nodes have *two* children instead of one.
+    datatype BinaryNode of T:
+        value: T           // Element for this node.
+        left: BinaryNode   // Pointer to left child.
+        right: BinaryNode  // Pointer to right child.
 
+You may notice that this data type looks very similar to linked lists, the only difference is that tree nodes have *two* children instead of one. In fact, linked lists can be considered *unary trees*, trees where every node has one child (that can be null).
+
+A [recursive data structure]{.term} is a data
+structure that is partially composed of smaller or simpler instances of
+the same data structure. 
+[Linked lists](#linked-list){.term} and
+[binary trees](#binary-tree){.term} are both recursive data structures. 
+
+::: dsvis
+The recursive relationships used to define a structure provide a natural
+model for any recursive algorithm on the structure.
+
+``` {.jsav-figure src="Binary/ListRecDSCON.js" links="Binary/RecursiveDSCON.css"}
 ```
-class BinTree:          class TreeNode:
-    root: TreeNode          elem: Value
-    size: Int               left: TreeNode
-                            right: TreeNode
+
+``` {.jsav-figure src="Binary/BinRecDSCON.js" links="Binary/RecursiveDSCON.css"}
 ```
+::::
 
-If we want to use these to implement a *map* (instead of a set), the nodes should contain both a *key* and a *value*, instead of a single element.
+One way to think about recursion is to see it as *delegation*:
+Suppose you want to compute the sum of the values stored in a binary tree.
+You don't want to do most of the work yourself, so you ask two friends to help you.
 
-<!-- END NOTES -->
+- The first friend will take the left subtree to sum it.
+- The second friend will take the right subtree to sum it.
+- The only thing you have to do is to sum the values that got from your friends.
 
-------
+You don't need to think about how your friends (the recursive calls) calculated their sums, as long as you trust that they are correct.
+
+::: dsvis
+Here is a visual explanation of the same idea.
+
+``` {.jsav-animation src="Binary/SumBinaryTreeCON.js" links="Binary/RecursiveDSCON.css" name="Sum values in a Binary Tree Slide Show"}
+```
+:::
+
+-->
+
+### Full and complete binary trees
+
+Two restricted forms of binary tree are sufficiently important to
+warrant special names. Each node in a
+[full binary tree](#full-tree){.term} is either
+(1) an internal node with exactly two non-empty children or (2) a leaf.
+A [complete binary tree]{.term} has a restricted
+shape obtained by starting at the root and filling the tree by levels
+from left to right. In the complete binary tree of height $d$, all
+levels except possibly level $d$ are completely full. The bottom level
+has its nodes filled in from the left side.
+
+@Fig:full_complete_bintrees below illustrates
+the differences between full and complete binary trees. There is no
+particular relationship between these two tree shapes; that is, the tree (a) is
+full but not complete while the tree (b) is complete but not full.
+The [binary heap]{.term} (@sec:binary-heaps) is an example of a complete binary tree.
+The [Huffman coding tree]{.term} (@sec:huffman-coding) is an example of a full binary tree.
+
+::: {.jsav-figure #fig:full_complete_bintrees}
+```
+var AV = NewAV();
+AddCSS(`.jsavnode.jsavtreenode {
+  min-width: 10px;
+  max-width: 10px;
+  min-height: 10px;
+  max-height: 10px;
+  background-color: #000000;
+  border-color: #000000;
+}`);
+// Setup first row of trees
+var btTop = 0;
+var btLeft = 225;
+var btRight = 425;
+var bt = AV.ds.binarytree({nodegap: 25, left: btLeft, top: btTop});
+bt.root("");
+var rt = bt.root();
+rt.left("");
+rt.left().left("");
+rt.left().right("");
+rt.left().right().left("");
+rt.left().right().right("");
+rt.right("");
+
+var bt2 = AV.ds.binarytree({nodegap: 25, left: btRight, top: btTop});
+var rt2 = bt2.root("");
+rt2.left("");
+rt2.left().left("");
+rt2.left().right("");
+rt2.left().left().left("");
+rt2.left().left().right("");
+rt2.left().right().left("");
+rt2.left().right().right("");
+rt2.right("");
+rt2.right().right("");
+rt2.right().left("");
+rt2.right().left().left("");
+
+bt.layout();
+bt2.layout();
+
+// Add first row of labels
+AV.label("(a)", {left: btLeft + 35, top: btTop + 135});
+AV.label("(b)", {left: btRight + 115, top: btTop + 135});
+AV.displayInit();
+AV.recorded();
+```
+Examples of full and complete binary trees:
+(a) is full but not complete; (b) is complete but not full
+:::
+
+::: note
+*Note*: While these definitions for full and complete binary tree are the
+ones most commonly used, they are not universal. Because the common
+meaning of the words "full" and "complete" are quite similar,
+there is little that you can do to distinguish between them other
+than to memorise the definitions. Here is a memory aid that you
+might find useful: "Complete" is a wider word than "full", and
+complete binary trees tend to be wider than full binary trees
+because each level of a complete binary tree is as wide as possible.
+:::
+
+<!-- 
 
 A [binary tree]{.term} is made up of a finite
 set of elements called [nodes]{.term}.
@@ -163,131 +284,15 @@ AV.displayInit();
 AV.recorded();
 ```
 
+
+
 Two different binary trees:
 (a) the root has a non-empty left child;
 (b) the root has a non-empty right child; and
 (c) the same tree as (a), with the missing right child made explicit;
 (d) the same tree as (b), with the missing left child made explicit
 :::
-
-Two restricted forms of binary tree are sufficiently important to
-warrant special names. Each node in a
-[full binary tree](#full-tree){.term} is either
-(1) an internal node with exactly two non-empty children or (2) a leaf.
-A [complete binary tree]{.term} has a restricted
-shape obtained by starting at the root and filling the tree by levels
-from left to right. In the complete binary tree of height $d$, all
-levels except possibly level $d$ are completely full. The bottom level
-has its nodes filled in from the left side.
-
-@Fig:full_complete_bintrees below illustrates
-the differences between full and complete binary trees. There is no
-particular relationship between these two tree shapes; that is, the tree (a) is
-full but not complete while the tree (b) is complete but not full.
-The [binary heap]{.term} (@sec:binary-heaps) is an example of a complete binary tree.
-The [Huffman coding tree]{.term} (@sec:huffman-coding) is an example of a full binary tree.
-
-::: {.jsav-figure #fig:full_complete_bintrees}
-```
-var AV = NewAV();
-AddCSS(`.jsavnode.jsavtreenode {
-  min-width: 10px;
-  max-width: 10px;
-  min-height: 10px;
-  max-height: 10px;
-  background-color: #000000;
-  border-color: #000000;
-}`);
-// Setup first row of trees
-var btTop = 0;
-var btLeft = 225;
-var btRight = 425;
-var bt = AV.ds.binarytree({nodegap: 25, left: btLeft, top: btTop});
-bt.root("");
-var rt = bt.root();
-rt.left("");
-rt.left().left("");
-rt.left().right("");
-rt.left().right().left("");
-rt.left().right().right("");
-rt.right("");
-
-var bt2 = AV.ds.binarytree({nodegap: 25, left: btRight, top: btTop});
-var rt2 = bt2.root("");
-rt2.left("");
-rt2.left().left("");
-rt2.left().right("");
-rt2.left().left().left("");
-rt2.left().left().right("");
-rt2.left().right().left("");
-rt2.left().right().right("");
-rt2.right("");
-rt2.right().right("");
-rt2.right().left("");
-rt2.right().left().left("");
-
-bt.layout();
-bt2.layout();
-
-// Add first row of labels
-AV.label("(a)", {left: btLeft + 35, top: btTop + 135});
-AV.label("(b)", {left: btRight + 115, top: btTop + 135});
-AV.displayInit();
-AV.recorded();
-```
-Examples of full and complete binary trees:
-(a) is full but not complete; (b) is complete but not full
-:::
-
-::: note
-*Note*: While these definitions for full and complete binary tree are the
-ones most commonly used, they are not universal. Because the common
-meaning of the words "full" and "complete" are quite similar,
-there is little that you can do to distinguish between them other
-than to memorise the definitions. Here is a memory aid that you
-might find useful: "Complete" is a wider word than "full", and
-complete binary trees tend to be wider than full binary trees
-because each level of a complete binary tree is as wide as possible.
-:::
+-->
 
 
-### Binary trees are recursive data structures
 
-A [recursive data structure]{.term} is a data
-structure that is partially composed of smaller or simpler instances of
-the same data structure. For example,
-[linked lists](#linked-list){.term} and
-[binary trees](#binary-tree){.term} can be
-viewed as recursive data structures. A list is a recursive data
-structure because a list can be defined as either (1) an empty list or
-(2) a node followed by a list. A binary tree is typically defined as (1)
-an empty tree or (2) a node pointing to two binary trees, one its left
-child and the other one its right child.
-
-::: dsvis
-The recursive relationships used to define a structure provide a natural
-model for any recursive algorithm on the structure.
-
-``` {.jsav-figure src="Binary/ListRecDSCON.js" links="Binary/RecursiveDSCON.css"}
-```
-
-``` {.jsav-figure src="Binary/BinRecDSCON.js" links="Binary/RecursiveDSCON.css"}
-```
-::::
-
-One way to think about recursion is to see it as *delegation*:
-Suppose you want to compute the sum of the values stored in a binary tree.
-And since you are a lazy person you don't want to do most of the work yourself, so you ask two friends to help you.
-
-- The first friend will take the left subtree to sum it.
-- The second friend will take the right subtree to sum it.
-- The only thing you have to do is to sum the values that got from your friends.
-
-You don't need to think about how your friends (the recursive calls) calculated their sums, as long as you accept that they are correct.
-
-::: dsvis
-Here is a visual explanation of the same idea.
-
-``` {.jsav-animation src="Binary/SumBinaryTreeCON.js" links="Binary/RecursiveDSCON.css" name="Sum values in a Binary Tree Slide Show"}
-```
-:::

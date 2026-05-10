@@ -8,54 +8,45 @@
 
 <!-- START NOTES -->
 
-Let's say we want to print the contents of a binary tree. There are many different ways we can do that, but there are three very common strategies:
+Suppose we want to process the contents of a binary tree, 
+for instance by printing all the values or converting the tree to a list. 
+This is called a [traversal]{.term}ways we can do that, 
+but these are three common patterns that differ in the order they process values:
 
-- *preorder*:  first print the value, then the left subtree, then the right
-- *inorder*:   first print the left subtree, then the value, finally the right subtree
-- *postorder*: first print the left subtree, then the right, and finally the value
+- *preorder*:  first process the value, then the left subtree, then the right
+- *inorder*:   first process the left subtree, then the value, finally the right subtree
+- *postorder*: first process the left subtree, then the right, and finally the value
 
-All of these are easily implemented using a recursive algorithm:
+All of these are easily implemented using a simple recursive algorithm, 
+here for printing the values:
 
     preorder(node):             inorder(node):              postorder(node):
-        print(node.elem)            inorder(node.left)          postorder(node.left)
-        preorder(node.left)         print(node.elem)            postorder(node.right)
-        preorder(node.right)        inorder(node.right)         print(node.elem)
+        if node is null:            if node is null:            if node is null:
+            return                      return                      return
+        print(node.value)           inorder(node.left)          postorder(node.left)
+        preorder(node.left)         print(node.value)           postorder(node.right)
+        preorder(node.right)        inorder(node.right)         print(node.value)
 
-The only difference is when we decide to "visit" the current node. For the example tree (on the previous page), they will print the following:
+For our example tree (@fig:example_bintree), they will print the following:
 
-- *preorder*:  A B D C E G F
-- *inorder*:   D B A G E C F
-- *postorder*: D B G E F C A
+- *preorder*:  A B D C E G F H I
+- *inorder*:   B D A G E C H F I
+- *postorder*: D B G E H I F C A
 
-<!-- END NOTES -->
+It may not be immediately obvious that this is the order 
+produced by the procedures above, but "running" them on 
+pen and paper should convince you. From the code it is clear 
+that in `postorder(A)`, $A$ is be the last node to be printed. 
+More generally, postorder will always print both children before the parent, 
+so an order that prints C before either F or E would not be postorder.
 
-----------------
+Example cases for each of the orders:
 
-Often we wish to process a binary tree by "visiting" each of its
-nodes, each time performing a specific action such as printing the
-contents of the node. Any process for visiting all of the nodes in some
-order is called a [traversal]{.term}. Any
-traversal that lists every node in the tree exactly once is called an
-[enumeration]{.term} of the tree's nodes. Some
-applications do not require that the nodes be visited in any particular
-order as long as each node is visited precisely once. For other
-applications, nodes must be visited in an order that preserves some
-relationship.
+- *preorder*: Consider the file system tree in #fig:TreeExamples. A preorder can be used to print the directory structure with files nested inside their folders.
+- *inorder*: Printing the expression tree in @fig:expression_tree is an inorder traversal: First print the left operand, then the operator, then the right operand.
+- *postorder*: If we want to delete the tree in @Fig:bintree_with_pointers and free all the memory, we should do it from the bottom up, which is a postorder traversal.
 
 <!--
-### Depth-first and breadth-first
-
-::: TODO
-- BFS: use a queue
-- DFS: use a stack, or be recursive
-- for recursive DFS you can do preorder, postorder or inorder
-:::
- -->
-
-### Preorder, postorder and inorder
-
-There are three main strategies for traversing a binary tree, depending on when we want to visit a node in relation to its children (and all their subtrees).
-
 Preorder traversal
 :   Visit each node only *before* we visit its children (and their subtrees).
     For example, this is useful if we want to create a copy of a tree.
@@ -63,7 +54,7 @@ Preorder traversal
 
 Postorder traversal
 :   Visit each node only *after* we visit its children (and their subtrees).
-    This is useful when we want to delete a tree to free storage space.
+    This is useful when we want to delete a tree to free storage space (with manual memory management).
     Before we can delete the current node, we should delete all its children (and its children's children and so on).
 
 Inorder traversal
@@ -79,6 +70,52 @@ Postorder             **D, B, G, E, H, I, F, C, A**     A is the very last node 
 Inorder               **B, D, A, G, E, C, H, F, I**     after visiting the left subtree (B, D)
 
 : Visiting order for the example tree in @fig:example_bintree {#tbl:visiting-orders}
+-->
+
+### Iterative traversal and Depth-first traversal {#tree-dfs}
+
+Some programming languages have poor support for recursion.
+It is possible to traverse a tree iteratively (using a loop) with a stack data structure.
+We call the stack our *agenda*, consider it a to-do list containing nodes that we need to process.
+Here is a piece of code that is structurally very similar to our recursive iterations,
+but instead of making recursive calls we add child nodes to the agenda and loop:
+
+    function DFS(root : Node):    // DFS is for Depth First Search
+        agenda = new stack of nodes
+        agenda.push(root)         // Initially, we need to process the root
+        while agenda is not empty:
+            n : Node = agenda.pop()
+            process(n)
+            agenda.add(n.right)   // replaces the recursive call for n.right
+            agenda.add(n.left)    // replaces the recursive call for n.left
+
+Try this code on a few example trees, writing up the content of the agenda after each iteration of the loop,
+and keep track of the order in which `process` is called for different nodes.
+You will find that it mimics a pre-order recursive procedure.
+Note that moving `process(n)` below the add operations has no impact on the order in which nodes are processed.
+Implementing inorder or postorder traversals using stack is possible, but much more complicated.
+
+By modifying the data structure from a stack to a FIFO queue (and switching the order in which children are added),
+we get a new traversal order. Try to figure out the pattern for this one:
+
+    function BFS(root : Node):
+        agenda = new stack of nodes
+        agenda.enque(root)
+        while agenda is not empty:
+            n : Node = agenda.dequeu()
+            process(n)
+            agenda.add(n.left)
+            agenda.add(n.right)
+
+It will visit the nodes level by level, left to right.
+That is it will first visit the root, then all the children of the root, then all the children of those nodes et cetera.
+This traversal order is called a Breadth-First Search (BFS) as opposed to the stack-based Depth-First Search (DFS).
+The naming is due to the tendency of DFS to visit nodes that are deep in the tree early, whereas BFS always visits all shallow nodes first.
+
+BFS is useful for a wide range of applications.
+It is also a good example of the power of data structures: By changing the data structure of our
+agenda we can use the same or similar code to acchieve different useful behaviors.
+
 
 
 ::: online
@@ -305,3 +342,5 @@ make a recursive call.
 <!-- ### Binary Tree Increment By One Exercise -->
 
 ::::::
+
+
