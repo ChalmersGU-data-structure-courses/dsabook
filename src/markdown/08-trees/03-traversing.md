@@ -1,5 +1,5 @@
 
-## Traversing a binary tree
+## Traversing binary trees
 
 ::: TODO
 - Prio 1: add more text
@@ -100,17 +100,17 @@ we get a new traversal order. Try to figure out the pattern for this one:
 
     function BFS(root : Node):
         agenda = new stack of nodes
-        agenda.enque(root)
+        agenda.enqueue(root)
         while agenda is not empty:
-            n : Node = agenda.dequeu()
+            n : Node = agenda.dequeue()
             process(n)
             agenda.add(n.left)
             agenda.add(n.right)
 
-It will visit the nodes level by level, left to right.
-That is it will first visit the root, then all the children of the root, then all the children of those nodes et cetera.
+It will process the nodes level by level, left to right.
+That is it will first process the root, then all the children of the root, then all the children of those nodes et cetera. For @fig:example_bintree, it processes A,B,C,D,E,F,G,H,I in that order.
 This traversal order is called a Breadth-First Search (BFS) as opposed to the stack-based Depth-First Search (DFS).
-The naming is due to the tendency of DFS to visit nodes that are deep in the tree early, whereas BFS always visits all shallow nodes first.
+The naming is due to the tendency of DFS to process nodes that are deep in the tree early, whereas BFS always visits all shallow nodes first.
 
 BFS is useful for a wide range of applications.
 It is also a good example of the power of data structures: By changing the data structure of our

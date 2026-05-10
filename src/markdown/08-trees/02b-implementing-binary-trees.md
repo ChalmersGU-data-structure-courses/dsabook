@@ -19,11 +19,12 @@ Every `BinaryNode` object also has two pointers, one to its left child and anoth
 \
 
     datatype BinaryNode of T:
-        value: T           // Element for this node.
-        left: BinaryNode   // Pointer to left child.
-        right: BinaryNode  // Pointer to right child.
+        value: T                  // Element for this node.
+        left: BinaryNode = null   // Pointer to left child.
+        right: BinaryNode = null  // Pointer to right child.
 
-
+Note that an object of type `BinaryNode` does not actually represent a node in isolation, 
+but rather a whole subtree (since it contains its children). 
 @Fig:bintree_with_pointers is an illustration of how the tree from @fig:example_bintree looks in memory, 
 with child pointers shown explicitly.
 

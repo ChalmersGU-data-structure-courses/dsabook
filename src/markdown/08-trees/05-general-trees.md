@@ -6,25 +6,11 @@
 - Prio 3: add use cases
 :::
 
-Many organisations are hierarchical in nature, such as the military and
-most businesses. Consider a company with a president and some number of
-vice presidents who report to the president. Each vice president has
-some number of direct subordinates, and so on. If we wanted to model
-this company with a data structure, it would be natural to think of the
-president in the root node of a tree, the vice presidents at level 1,
-and their subordinates at lower levels in the tree as we go down the
-organisational hierarchy.
+Binary trees are important, but there are also plenty of uses for trees 
+with an arbitrary number of children. For instance the file system 
+example in the beginning of this chapter is not a binary tree 
+(a folder can contain more than two items).
 
-Because the number of vice presidents is likely to be more than two,
-this company's organisation cannot easily be represented by a binary
-tree. We need instead to use a tree whose nodes have an arbitrary number
-of children. Unfortunately, when we permit trees to have nodes with an
-arbitrary number of children, they become much harder to implement than
-binary trees. We consider such trees in this chapter. To distinguish
-them from binary trees, we use the term [general tree]{.term}.
-
-In this section we will examine general tree terminology and define
-a basic class for general trees.
 
 
 ### Definitions and terminology

@@ -32,7 +32,6 @@ In the illustration above, the nodes containing 5 and 6 are leaves.
 
 @fig:example_bintree shows a binary tree that we will be using as a running example. Study it and consider: Which nodes are leaves? How many empty subtrees are hidden in the picture? What is the path from node A to node H?
 
-Its very common to talk about subtrees. For instance, node F is a child node of C, but it can also be considered the root of a tree containing F, H, and I.
 
 <!--
 
