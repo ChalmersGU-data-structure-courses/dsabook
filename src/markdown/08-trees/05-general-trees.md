@@ -4,6 +4,7 @@
 ::: TODO
 - Prio 3: update text
 - Prio 3: add use cases
+- Prio ?: Include some of the set-theoretical definitions?
 :::
 
 Binary trees are important, but there are also plenty of uses for trees 
@@ -12,7 +13,7 @@ example in the beginning of this chapter is not a binary tree
 (a folder can contain more than two items).
 
 
-
+<!--
 ### Definitions and terminology
 
 A [tree]{.term} $T$ is a finite set of
@@ -47,57 +48,49 @@ Each node in a tree has precisely one parent, except for the root, which
 has no parent. From this observation, it immediately follows that a tree
 with $n$ nodes must have $n-1$ edges because each node, aside from the
 root, has one edge connecting that node to its parent.
+-->
 
 ### ADT for general trees
 
-Before discussing general tree implementations, we should first make
-precise what operations such implementations must support. Any
-implementation must be able to initialise a tree. Given a tree, we need
-access to the root of that tree. There must be some way to access the
-children of a node. In the case of binary tree nodes, this
-was done by providing instance variables for the
-left and right child pointers. Unfortunately, because we do not know in
-advance how many children a given node will have in the general tree, we
-cannot give explicit functions to access each child. An alternative must
-be found that works for an unknown number of children.
+We want our general trees to support the same operations as our binary trees. 
+That is, given a tree, we need access to the root node of it. 
+There also must be some way to access the children of a node. 
+Since general trees have an arbitrary number of children, we can not have 
+a variable name for each of them (as we did for binary trees with `right`/`left`).
 
-One choice would be to provide a function that takes as its parameter
-the index for the desired child. That combined with a function that
-returns the number of children for a given node would support the
-ability to access any node or process all children of a node.
-Unfortunately, this view of access tends to bias the choice for node
-implementations in favour of an array-based approach, because these
-functions favour random access to a list of children.
-
-An alternative is to provide access to a **List** of the children pointers.
+If order of children is important, a node containing a **List** of children 
+makes sense.
 This list can be an array-based list or a linked list or even a dynamic
-function generating the children on demand. The only thing we will assume is
+function generating the children on demand. The only thing we assume is
 that it follows the **List** ADT, as described in @sec:general-lists.
 
     // General tree nodes
     datatype GTNode of T:
-        elem: T                   // This is the value, just as for binary nodes
+        value: T                  // This is the value, just as for binary nodes
         children: List of GTNode  // All children of the node
 
+As you may recall, a list of nodes is sometimes referred to as a forest. 
+That makes little sense here as it would mean every tree contains a forest.
 
 ### Traversing a general tree
 
 There are three traditional
 [tree traversals]{.tree} for [binary trees](#binary-tree){.term}:
 [preorder](#preorder-traversal){.term}, [postorder](#postorder-traversal){.term},
-and [inorder](#inorder-traversal){.term} (see @sec:traversing-a-binary-tree).
+and [inorder](#inorder-traversal){.term} (see @sec:traversing-binary-trees).
 For general trees, preorder and postorder traversals are
 defined with meanings similar to their binary tree counterparts.
 Preorder traversal of a general tree first visits the root of the tree,
-then performs a preorder traversal of each subtree from left to right. A
-postorder traversal of a general tree performs a postorder traversal of
-the root's subtrees from left to right, then visits the root. Inorder
-traversal does not have a natural definition for the general tree,
+then performs a preorder traversal of each subtree from left to right 
+(start to end of the list of children). Postorder is generalized in a 
+similar way, with the processing of a value happening after the 
+recursive processing of the children.
+
+Inorder traversal does not have a natural definition for the general tree,
 because there is no particular number of children for an internal node.
 An arbitrary definition -- such as visit the leftmost subtree in
 inorder, then the root, then visit the remaining subtrees in inorder --
-can be invented. However, inorder traversals are generally not useful
-with general trees.
+can be invented, but has little use as a general pattern.
 
 ::: dsvis
 Visualisation of preorder traversal.
@@ -134,3 +127,8 @@ to the underlying **List** implementation of the children.
             postorder(child)
         process(node)
 
+Note that unlike a binary tree, this general tree does not contain any null values.
+A leaf is represented as a node with an empty list of children, not a node with two 
+null children. Depending on the intended application, it may however need to be possible
+to represent an empty tree. If that is done by a null value, then only the root of a 
+general tree can be null, but a child node is never null.

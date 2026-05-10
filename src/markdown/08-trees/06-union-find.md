@@ -28,7 +28,7 @@ leftmost child or the right sibling for a node. Thus, it may seem to be
 a poor idea to implement a general tree in this way. However, the parent
 pointer implementation stores precisely the information required to
 answer the following, useful question:
-***Given two nodes, are they in the same tree?***
+***Given two nodes in a forest, are they part of the same tree?***
 
 :::::: latex
 \booklink{Read the rest online}{11.5}{sec:disjoint-sets}

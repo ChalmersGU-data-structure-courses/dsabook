@@ -6,7 +6,7 @@
 :::
 
 [Tree]{.term} structures can enable efficient
-access and efficient update to large collections of data.
+access and updates to large collections of data.
 [Binary trees]{.term} in
 particular are widely used in data structures. 
 Trees can model any kind of hierarchical data, including
