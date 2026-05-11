@@ -33,7 +33,7 @@ Together, these rules enforce that trees look as in the example above: a hierarc
 - *ancestor*, *descendant*, *sibling*: Terms based on the child/parent analogy that are mostly self-explanatory.
 - A *path* is a sequence of nodes such that every node is the parent of the subsequent one. Often paths are from the root, but it could also be `[B,E]` or such in the example above. There are no paths between siblings or other distant relatives, only from ancestors to descendants. `[B,A,C]` is *not* a path in the example tree, since A is not a child of B.
 - The *height* of a tree or subtree is the longest path you can form starting from its root. The height of a node is one more than the maximum height of its children, and zero for empty trees. 
-- The *size* of a tree or subtree is the total number of nodes it contains. The height of a node is one more than the sum of the sizes of its children, and zero for empty trees. 
+- The *size* of a tree or subtree is the total number of nodes it contains. The size of a node is one more than the sum of the sizes of its children, and zero for empty trees. 
 
 Trees contain data in nodes, and when modelling a system as a tree, we need to consider 
 what data is contained in nodes, and what it means to be a child/parent.
