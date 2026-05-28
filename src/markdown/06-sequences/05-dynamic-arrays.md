@@ -3,6 +3,7 @@
 
 ::: TODO
 - Prio 1: invariants
+- Prio 1: move "Comparing linked lists and dynamic arrays" to new discussion section
 :::
 
 The problem with array-based stacks and queues is that they have limited capacity.

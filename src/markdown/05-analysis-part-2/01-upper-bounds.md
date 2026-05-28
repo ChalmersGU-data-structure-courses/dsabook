@@ -2,7 +2,7 @@
 ## Upper bounds: the big-$O$ notation {#upper-bounds}
 
 ::: TODO
-- Prio 1: formal definition
+- Prio 1: more running text, less formula - now it looks scattered
 :::
 
 Several terms are used to describe the running-time equation for an algorithm.

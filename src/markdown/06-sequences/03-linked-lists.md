@@ -3,6 +3,9 @@
 
 ::: TODO
 - Prio 1: invariants
+- Prio 1: move "Complexity analysis" to common discussion section later
+- Prio 1: move "Queues as pairs of stacks" to common discussion section later
+- Prio 1: move "Case study: sorting linked list" to new Online Section
 :::
 
 A linked list is a kind of "distributed" data structure,

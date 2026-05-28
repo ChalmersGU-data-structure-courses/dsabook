@@ -2,9 +2,10 @@
 ## Mergesort
 
 ::: TODO
-- Prio 1: complexity analysis
+- Prio 1: flatten some subsections
+- Prio 1: divide in two sections? Mergesort + Mergesort alternatives
 - Prio 2: general rewrite of the text
-- Prio 3: invariants
+- Prio 2: invariants
 :::
 
 A divide-and-conquer algorithm does the following things:

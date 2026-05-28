@@ -2,6 +2,7 @@
 ## Analysing problems
 
 ::: TODO
+- Prio 1: Make "Case study: lower bounds" a Section, which is only online, move after "Common misunderstandings"
 - Prio 2: rewrite this text, more examples and help in how to analyse problems
 :::
 

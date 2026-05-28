@@ -1,6 +1,10 @@
 
 ## Other kinds of sequences
 
+::: TODO
+- Prio 1: move online things to separate section
+:::
+
 Stacks and queues are very simple abstract datatypes, and also very commonly used.
 Many many algorithms make use of some kind of "agenda",
 where they can remember things that have to be taken care of and then process them in the right order,

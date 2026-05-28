@@ -1,6 +1,10 @@
 
 ## Summary of sorting algorithms
 
+::: TODO
+- Prio 1: a little more text, now it's mostly just two tables
+:::
+
 In this chapter and [chapter @sec:sorting-part-1]
 we discussed five different sorting algorithms in quite some detail.
 How can we compare these algorithms accoring to the terminology that we introduced in @sec:terminology-and-notation, as well as their complexity analysis?

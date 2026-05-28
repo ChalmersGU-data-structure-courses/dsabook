@@ -3,6 +3,7 @@
 
 ::: TODO
 - Prio 1: invariants
+- Prio 1: divide in two sections? Quicksort + Quicksort alternatives
 - Prio 2: make the text more coherent
 :::
 

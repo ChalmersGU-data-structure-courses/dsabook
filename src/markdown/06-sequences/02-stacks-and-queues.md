@@ -2,9 +2,11 @@
 ## Stacks and queues
 
 ::: TODO
-- Prio 1: invariants
-- Prio 1: use cases for queues
-- Prio 2: make the case study more compact
+- Prio 1: move a lot to new ADT chapter 8
+- Prio 1: merge with 6.1
+- Prio 1: make the "Case study: recursion" a Section, only online
+- Prio 2: invariants
+- Prio 2: use cases for queues
 :::
 
 Stacks and queues are our first *abstract data types* (ADTs).

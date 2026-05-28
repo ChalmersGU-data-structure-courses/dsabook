@@ -2,7 +2,7 @@
 ## Lower bounds and tight bounds
 
 ::: TODO
-- Prio 1: update the text in Summary of asymptotic notations
+- Prio 1: update Summary of asymptotic notations - make it a Figure instead
 :::
 
 [Big-$O$ notation]{.term} describes an upper bound.

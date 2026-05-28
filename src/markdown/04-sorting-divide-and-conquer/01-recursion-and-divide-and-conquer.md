@@ -1,6 +1,11 @@
 
 ## Recursion
 
+::: TODO
+- Prio 1: add example for recursive binary search
+- Prio 2: make the "divide-and-conquer" strategy an algorithm box
+:::
+
 Recursion makes it possible to solve complex problems using programs
 that are concise, easily understood, and algorithmically efficient.
 Recursion is the process of solving a large problem by reducing it to
