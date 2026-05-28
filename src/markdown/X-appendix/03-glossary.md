@@ -1,5 +1,5 @@
 
-:::::: html
+:::::: online
 
 ## Glossary
 

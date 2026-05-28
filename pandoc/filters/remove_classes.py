@@ -6,10 +6,10 @@ Panflute filter: remove classes that are not supposed to be in the html
 from panflute_helper import run_filter
 
 # The following <div>s should be removed, and all their content:
-CONTENT_TO_REMOVE = "TODO latex pdf".split()
+CONTENT_TO_REMOVE = "TODO latex".split()
 
 # The following <div>s should be removed, but not their content:
-# CONTENT_TO_KEEP = "html online".split()
+# CONTENT_TO_KEEP = "online".split()
 # Temporary: keep them to be able to show/hide
 CONTENT_TO_KEEP = ()
 
