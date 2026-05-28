@@ -2,6 +2,7 @@
 ## Practical examples
 
 ::: TODO
+- Prio 1: shorten the examples (at most one PDF page per example)
 - Prio 2: reorganise the examples
 - Prio 2: replace Bank with e.g. Social media
 - Prio 3: add a 4th example

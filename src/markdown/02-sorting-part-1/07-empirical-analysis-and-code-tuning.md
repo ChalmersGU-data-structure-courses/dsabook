@@ -1,13 +1,19 @@
 
+
+:::::: latex
+\stepcounter{section}
+\addcontentsline{toc}{section}{\numberline{\thesection\ldots} (Additional online material)}
+\section*{\thesection\ldots\ (Additional online material)}
+\booklink{Read the rest online}{\thesection}{sec:empirical-analysis-and-code-tuning}
+::::::
+
+:::::: online
+
 ## Empirical analysis and code tuning
 
 ::: TODO
 - Prio 3: are the other simple optimisations?
 :::
-
-:::::: latex
-\booklink{Read the rest online}{3.8}{sec:empirical-analysis-and-code-tuning}
-::::::
 
 Since sorting is such an important application, it is natural for programmers to want to optimise their sorting code to run faster.
 The sorts presented in this chapter (Insertion sort, Bubble sort and Selection sort) are all relatively slow, because they have quadratic runtime behaviour in the worst case.
@@ -19,9 +25,6 @@ about code tuning by seeing which of these ideas actually turn out to
 give better performance. It is also interesting to see the relative
 performance of the three algorithms, as well as how various programming
 languages compare.
-
-
-:::::: online
 
 ### Empirical comparison
 

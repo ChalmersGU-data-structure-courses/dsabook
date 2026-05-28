@@ -1,6 +1,10 @@
 
 ## Selection sort
 
+::: TODO
+- Prio 2: add figure next to the pseudocode showing the array and the variables in the middle of running
+:::
+
 Let's say you have a large pile of books that you want to put in your bookshelf, in alphabetical order by author's surname.
 How would you go about?
 One natural way to do handle this is to look through the pile until you find the first book

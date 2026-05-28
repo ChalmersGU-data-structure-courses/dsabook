@@ -1,6 +1,12 @@
 
 ## Comparing values
 
+::: TODO
+- Prio 1: Merge with subsection "Comparing algorithms" from previous section
+- Prio 2: Flatten subsections, reduce introduction
+- Prio 2: Use better terms for the "Python/Java way"
+:::
+
 If we want to sort some things, we have to be able to compare them, to
 decide which one is bigger. How do we compare two things? If all that we
 wanted to sort or search for was simple integer values, this would not

@@ -1,6 +1,11 @@
 
 ## Problems, algorithms, and programs
 
+::: TODO
+- Prio 2: Flatten subsections?
+- Prio 2: Shorten the text
+:::
+
 Programmers commonly deal with *problems*, *algorithms*, and computer *programs*.
 These are three distinct concepts.
 
@@ -19,11 +24,13 @@ must run in a "reasonable" amount of time.
 
 You have already encountered two fundamental computational problems:
 
-Searching in an array (@sec:binary-search)
+Searching in an array
 :   The input is an array and an element, and the output can for example be an array index.
+    (@Sec:binary-search)
 
-Sorting an array ([Chapter @sec:sorting-part-1])
+Sorting an array
 :   The input is an array, and the output is an array containing exactly the same elements but in increasing order.
+    ([Chapter @sec:sorting-part-1])
 
 Note that the input to a problem often includes things that we normally don't view as input.
 For example, for the problem of finding the fastest route between two cities (see @sec:shortest-path-problems),

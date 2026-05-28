@@ -2,6 +2,7 @@
 ## Best, worst, and average cases
 
 ::: TODO
+- Prio 2: shorten text on Average case
 - Prio 3: examples (e.g., Quicksort, Insertion sort)
 :::
 

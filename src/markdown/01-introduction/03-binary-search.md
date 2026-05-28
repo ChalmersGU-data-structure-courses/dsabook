@@ -1,7 +1,6 @@
 
 ::: TODO
-- Iterative vs recursive
-- Write the text on Even faster searching
+- Prio 3: (maybe) write the text on "Even faster searching"
 :::
 
 ## Case study: Searching in an array {#searching}
@@ -177,7 +176,6 @@ Another variation is returning the position of the greatest value less than the 
 <!--
 ### Even faster searching
 
-::: TODO
 - e.g. library search / interpolation search
 - e.g. searching for numbers: use an array
 - use a hash function -> see the hashing chapter

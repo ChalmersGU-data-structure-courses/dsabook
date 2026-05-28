@@ -1,6 +1,11 @@
 
 ## Terminology and notation
 
+::: TODO
+- Prio 1: move subsection "Comparing algorithms" to next section (Comparing values), and reduce it
+- Prio 1: flatten subsection "Terminology"
+:::
+
 Formally, the *sorting problem* is to arrange a list of elements $a_1,a_2,\ldots,a_n$ into any order $s$
 such that $a_{s_1}\leq a_{s_2}\leq\cdots\leq a_{s_n}$.
 In other words, the sorting problem is to arrange a set of elements so that they are in non-decreasing order.

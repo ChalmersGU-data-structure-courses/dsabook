@@ -1,6 +1,9 @@
 
 ## Insertion sort
 
+::: TODO
+- Prio 2: add figure next to the pseudocode showing the array and the variables in the middle of running
+:::
 
 Consider again the problem of sorting a pile of books.
 Another intuitive approach might be to pick up the two topmost books in the pile and put them in order in the bookshelf.

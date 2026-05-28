@@ -2,6 +2,7 @@
 ## Empirical analysis and code tuning
 
 ::: TODO
+- Prio 1: shorten text, flatten subsections
 - Prio 3: discuss constant factors (not covered by asymptotic complexity/analysis)
 - Prio 3: add an image explaining the graphics example
 :::

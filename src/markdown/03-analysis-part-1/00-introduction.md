@@ -2,21 +2,18 @@
 # Algorithm analysis, part 1 {#analysis-part-1}
 
 ::: TODO
-- Prio 3: also write about correctness, e.g. invariants
-- Prio 3: is the bullet list fine?
+- Prio 1: also write about correctness, e.g. invariants
+- Prio 1: is the bullet list fine?
 :::
 
 How long will a program take when I run it on a dataset ten times as
 large? If a particular program is slow, is it badly implemented or is it
 solving a hard problem? What order of improvement can I expect if I
 switch to a better algorithm? Questions like these ask us to consider
-the difficulty of a problem and the efficiency of approaches to solving
-it.
-
+the difficulty of a problem and the efficiency of approaches to solving it.
 This chapter introduces the motivation, basic notation, and fundamental
 techniques of algorithm analysis. We focus on a methodology known as
-[asymptotic algorithm analysis]{.term}, or
-simply asymptotic analysis.
+[asymptotic algorithm analysis]{.term}, or simply asymptotic analysis.
 
 Asymptotic analysis estimates the resource consumption of an algorithm,
 called its [complexity]{.term}. Here, resource

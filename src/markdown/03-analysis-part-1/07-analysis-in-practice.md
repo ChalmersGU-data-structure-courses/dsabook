@@ -2,6 +2,9 @@
 ## Algorithm analysis in practice
 
 ::: TODO
+- Prio 1: move online examples to a later "online" section
+- Prio 1: flatten subsections, rewrite
+- Prio 1: divide into two sections - Simplification + Analysing fragments?
 - Prio 2: add some "real" examples, i.e., more complex ones
 - Prio 2: briefly discuss functions and non-atomic statements
 :::

@@ -2,7 +2,9 @@
 ## Comparing algorithms
 
 ::: TODO
-- Prio 3: discuss how to abstract away things
+- Prio 2: Shorten subsection "What to measure"
+- Prio 2: Shorten examples
+- Prio 3: Discuss how to abstract away things
 :::
 
 If you have two algorithms that solves the same problem, how do you compare them in terms of efficiency?

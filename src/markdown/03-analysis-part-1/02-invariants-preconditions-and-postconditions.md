@@ -1,6 +1,11 @@
 
 ## Invariants, preconditions, and postconditions
 
+::: TODO
+- Prio 2: Flatten subsections?
+- Prio 2: Make examples shorter
+:::
+
 When we formulate a problem, and describe a data structure or an algorithm,
 it is useful to describe them in terms of [invariants]{.term}.
 Invariants are very useful tools for analysing the correctness of an algorithm.
@@ -64,11 +69,13 @@ and after each iteration of the outer loop, the size of the sorted part is incre
 We can specify this invariant more formally in terms of the outer loop variable `i`
 (where `n` is the size of the array `arr`):
 
-Bubble sort (@sec:bubble-sort)
+Bubble sort
 :   The rightmost subarray `arr[n-i...n]` is always sorted.
+    (@Sec:bubble-sort)
 
-Selection sort (@sec:selection-sort) and Insertion sort (@sec:insertion-sort)
+Selection sort and Insertion sort
 :   The leftmost subarray `arr[0...i]` is always sorted.
+    ([@Sec:selection-sort;@sec:insertion-sort])
 
 An interesting invariant for Bubble and Selection sort (which does not hold for Insertion sort!)
 is that the unsorted and sorted parts are strictly separated, like this:

@@ -1,6 +1,10 @@
 
 ## Overview of algorithms
 
+::: TODO
+- Prio 2: add nice figure(s) of insertion/selection/bubble sorting books in a bookshelf
+:::
+
 Imagine that we want to sort books in a bookshelf, what different strategies can we use to do that?
 Note that it doesn't matter what we want to sort the books by
 -- it could be by author, or title, or perhaps height.
@@ -59,7 +63,7 @@ We start with a very simple in-place sorting algorithm:
 
 Bubble sort
 :   As long as there are two adjacent books out of order, swap them.
-:   Note that this description is too unspecified to be a real algorithm --
+    Note that this description is too unspecified to be a real algorithm --
     in particular, we have to know in which order we should look at adjacent books.
 
 What about Selection sort and Insertion sort -- can we make them in-place?
@@ -70,12 +74,12 @@ Then we just repeat the following until there are no more unsorted books (meanin
 
 Selection sort
 :   Find the smallest unsorted book, and put it at the end of the sorted books.
-:   Note that you do not need to "slide" the books to make space for the new one
+    Note that you do not need to "slide" the books to make space for the new one
     -- instead you can simply swap the smallest unsorted book with the book just to the right of the marker, and then move the marker.
 
 Insertion sort
 :   Take the first unsorted book, and insert it in the correct position among the sorted books.
-:   Note that you do not have to first find the position and then "slide" the books.
+    Note that you do not have to first find the position and then "slide" the books.
     Instead you can remove the unsorted book (holding it in your hand), and compare it with each of the sorted books from the right.
     If it is smaller, you slide the shelved book one step right and look at the one to the left.
     Otherwise you have found the right spot for your book, and can put it in the empty space.

@@ -1,6 +1,10 @@
 
 ## Bubble sort
 
+::: TODO
+- Prio 2: add figure next to the pseudocode showing the array and the variables in the middle of running
+:::
+
 Bubble sort is often the first sorting algorithm that you learn, because it is relatively easy to understand and implement.
 However, it is rather slow, even compared to the other similar algorithms, Selection sort and Insertion sort.
 (It is not even particularly intuitive -- nobody is going to come naturally to Bubble sort as a way to sort their bookshelf,

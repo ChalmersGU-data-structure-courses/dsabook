@@ -1,6 +1,10 @@
 
 ## Case study: Analysing binary search {#analysing-binary-search}
 
+::: TODO
+- Prio 1: add self-explaining figure
+:::
+
 Now we will discuss the algorithmic complexity of the binary search algorithm from @sec:binary-search.
 
 The basic structure of the algorithm is a single `while`-loop,

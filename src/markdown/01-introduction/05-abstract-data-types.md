@@ -2,8 +2,8 @@
 ## Abstract data types
 
 ::: TODO
+- Prio 1: shorten the section, move details to new ADT chapter 8
 - Prio 2: analogy with Java interfaces (see preliminaries)
-- Prio 3: update the text and examples in section Terminology
 :::
 
 Earlier, we introduced the term [data type]{.term}, which refers to a type along with a collection of operations for manipulating values of that type.

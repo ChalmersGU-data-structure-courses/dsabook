@@ -1,6 +1,9 @@
 # Introduction {#introduction}
 
-***Extend this introduction just a little***
+::: TODO
+- Prio 1: Extend this introduction just a little
+- Prio 1: "How to read this book", starred sections are online, etc
+:::
 
 This book assumes that you are already familiar with mathematics and programming, corresponding to a semester of university studies.
 The online appendices present what we assume that you already know about mathematical and programming.
