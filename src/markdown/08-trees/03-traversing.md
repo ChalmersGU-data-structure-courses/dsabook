@@ -8,16 +8,17 @@
 
 <!-- START NOTES -->
 
-Suppose we want to process the contents of a binary tree, 
-for instance by printing all the values or converting the tree to a list. 
-This is called a [traversal]{.term}ways we can do that, 
+Suppose we want to process the contents of a binary tree,
+for instance by printing all the values or converting the tree to a list.
+This is called a [traversal]{.term}
+There are many different ways we can do that,
 but these are three common patterns that differ in the order they process values:
 
 - *preorder*:  first process the value, then the left subtree, then the right
 - *inorder*:   first process the left subtree, then the value, finally the right subtree
 - *postorder*: first process the left subtree, then the right, and finally the value
 
-All of these are easily implemented using a simple recursive algorithm, 
+All of these are easily implemented using a simple recursive algorithm,
 here for printing the values:
 
     preorder(node):             inorder(node):              postorder(node):
@@ -33,11 +34,11 @@ For our example tree (@fig:example_bintree), they will print the following:
 - *inorder*:   B D A G E C H F I
 - *postorder*: D B G E H I F C A
 
-It may not be immediately obvious that this is the order 
-produced by the procedures above, but "running" them on 
-pen and paper should convince you. From the code it is clear 
-that in `postorder(A)`, $A$ is be the last node to be printed. 
-More generally, postorder will always print both children before the parent, 
+It may not be immediately obvious that this is the order
+produced by the procedures above, but "running" them on
+pen and paper should convince you. From the code it is clear
+that in `postorder(A)`, $A$ is be the last node to be printed.
+More generally, postorder will always print both children before the parent,
 so an order that prints C before either F or E would not be postorder.
 
 Example cases for each of the orders:
