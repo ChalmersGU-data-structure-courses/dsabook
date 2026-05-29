@@ -2,6 +2,8 @@
 ## Converting objects to table indices
 
 ::: TODO
+- Prio 1: start by only talking about integer keys and wait with hashing and general objects until later
+- Prio 1: move the parts about objects and hashes later in chapter
 - Prio 2: write missing parts: other strategies, invariants, conflicts
 :::
 

@@ -2,6 +2,7 @@
 # Hash tables {#hash-tables}
 
 ::: TODO
+- Prio 1: rewrite introduction
 - Prio 2: update examples - they are not the best
 - Overview idea:
     - introduction: to index general objects (e.g. strings), we can use a hash function to calculate an array index

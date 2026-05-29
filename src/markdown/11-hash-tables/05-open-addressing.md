@@ -2,6 +2,7 @@
 ## Open addressing
 
 ::: TODO
+- Prio 1: reduce some code clutter
 - Prio 2: invariants
 - Prio 2:
     - Discuss: Load factor, what is a good LF?

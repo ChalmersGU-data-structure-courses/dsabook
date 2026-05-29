@@ -1,6 +1,10 @@
 
 ## Bucket hashing
 
+::: TODO
+- Prio 1: remove or make online
+:::
+
 One implementation for open addressing groups hash table slots into
 [buckets]{.term}. The $M$ slots of the
 hash table are divided into $B$ buckets, with each bucket consisting of

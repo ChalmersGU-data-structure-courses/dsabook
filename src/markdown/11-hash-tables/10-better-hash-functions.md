@@ -2,6 +2,8 @@
 ## Better hash functions {#better-hash-functions}
 
 ::: TODO
+- Prio 1: move all sections on hash functions here (or before here)
+- Prio 1: make this section online
 - Prio 1: introduction
 - Prio 2: more advanced hash functions
 :::

@@ -2,6 +2,7 @@
 ## Separate chaining
 
 ::: TODO
+- Prio 1: reduce some code clutter in Implementation and Resizing
 - Prio 2:
     - Discuss: Load factor, what is a good LF?
     - Discuss: When to resize

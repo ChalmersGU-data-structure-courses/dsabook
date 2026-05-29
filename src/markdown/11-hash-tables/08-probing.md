@@ -2,6 +2,7 @@
 ## Different probing strategies
 
 ::: TODO
+- Prio 1: increase text a little, and move rest to separate online section
 - Prio 3: examples, tests
 :::
 

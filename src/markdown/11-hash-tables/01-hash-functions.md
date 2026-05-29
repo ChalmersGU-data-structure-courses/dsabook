@@ -2,6 +2,7 @@
 ## Hash functions
 
 ::: TODO
+- Prio 1: move hashing much later in the chapter
 - Prio 2:
     - definitions, requirements
     - distribution of values, independence of values

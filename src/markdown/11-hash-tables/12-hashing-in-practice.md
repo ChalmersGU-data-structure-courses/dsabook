@@ -2,7 +2,8 @@
 ## Hash tables in practice
 
 ::: TODO
-- Prio 2: update text
+- Prio 1: write a little about Standard libraries?
+- Prio 1: update text
 :::
 
 Congratulations! You have reached the end of the hashing chapter. In

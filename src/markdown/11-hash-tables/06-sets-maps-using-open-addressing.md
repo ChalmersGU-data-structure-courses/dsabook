@@ -1,6 +1,11 @@
 
 ## Implementing sets and maps using open addressing
 
+::: TODO
+- Prio 1: reduce some code clutter
+- Prio 1: merge with previous section?
+:::
+
 An open addressing hash set consists of an internal array `table` of elements.
 Apart from the special value `null`, denoting an empty slot, the table must also allow the special value `DELETED`, denoting a slot that has been deleted.
 To initialise the table, we first create the internal array of some initial minimum capacity:

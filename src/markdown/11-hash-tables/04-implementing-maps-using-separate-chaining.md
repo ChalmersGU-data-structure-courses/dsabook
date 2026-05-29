@@ -1,6 +1,11 @@
 
 ## Implementing sets and maps using separate chaining
 
+::: TODO
+- Prio 1: reduce some code clutter
+- Prio 1: merge with previous section?
+:::
+
 In this section we go into more details in how to get a working implementation.
 First we show how to implement a *hash set*, an then we discuss how to extend this into a *hash map*.
 
