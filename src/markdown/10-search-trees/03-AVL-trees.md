@@ -2,9 +2,7 @@
 ## AVL trees
 
 ::: TODO
-- Prio 1: invariants
-- Prio 2: don't write the full source code
-- Prio 2: move some things about rotations to previous overview section
+- Prio 2: are all figures necessary?
 :::
 
 An AVL tree is a binary search tree with the following additional balancing invariant:

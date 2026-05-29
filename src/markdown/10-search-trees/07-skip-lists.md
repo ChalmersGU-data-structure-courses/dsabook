@@ -1,6 +1,10 @@
 
 ## Skip lists
 
+::: TODO
+- Prio 1: make section online
+:::
+
 A *skip list* is not a tree, or at least not the kind of tree that we have talked about previously.
 It can be thought of as a very specialised implementation of a general (nonbinary) tree,
 but it is more common to think of it as a collection of linked lists.

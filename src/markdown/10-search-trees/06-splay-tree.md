@@ -1,6 +1,9 @@
 
 ## Splay trees
 
+::: TODO
+- Prio 1: make section online
+:::
 
 AVL trees and red-black trees are both extensions of binary search trees, BST.
 By storing some additional information in each node they can maintain their balance.

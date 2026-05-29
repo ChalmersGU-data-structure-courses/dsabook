@@ -2,7 +2,7 @@
 ## Self-balancing trees
 
 ::: TODO
-- Prio 2: write an overview of rotations
+- Prio 2: is the subsection on Implementation ok?
 :::
 
 As we saw in the last section, binary search trees (BST) work fine when we insert elements in a somewhat random order.

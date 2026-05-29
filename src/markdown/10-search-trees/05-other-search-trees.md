@@ -3,9 +3,13 @@
 ## Other kinds of search trees
 
 ::: TODO
-- Prio 3: write this section
-- Prio 3: use cases, examples
+- Prio 1: write introduction
+- Prio 1: move Trees vs tries to separate online section
+- Prio 2: update texts
+- Prio 2: use cases, examples
 :::
+
+
 
 ### Tries, or prefix trees
 
@@ -55,4 +59,5 @@ TODO
 - multikey quicksort / radix sort == TST
 - etc (see article by Sedgewick and Wayne)
 :::
- -->
+
+-->

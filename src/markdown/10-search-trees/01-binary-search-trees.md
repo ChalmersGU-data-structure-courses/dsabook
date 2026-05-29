@@ -2,10 +2,7 @@
 ## Binary search trees
 
 ::: TODO
-- Prio 1: invariants
-- Prio 2: update pseudocode
-- Prio 2: explanations
-- Prio 3: update the section on guided information flow (file 01b)
+- Prio 2: can we reduce some code clutter?
 - Prio 3: both recursive and iterative versions
 :::
 
@@ -15,7 +12,7 @@ A *binary search tree* (BST) is a binary tree that satisfies the following invar
 #### Invariant: Binary search trees
 For every node with value $v$:
 
-- all values in the left subtree are *smaller* than $v$$, and
+- all values in the left subtree are *smaller* than $v$, and
 - $v$ is *smaller* than all values in the right subtree.
 :::
 
@@ -304,14 +301,13 @@ And just as for recursive addition, we need to wrap this function in a toplevel 
             root = removeHelper(x, root)
 
 
-:::::: online
 ::: dsvis
 Here is an interactive explanation of BST deletion.
 
 ``` {.jsav-animation src="Binary/BSTremoveCON.js" links="Binary/BSTCON.css" name="BST Remove Slideshow"}
 ```
 :::
-::::::
+
 
 ::: dsvis
 Here is an exercise on BST deletion.

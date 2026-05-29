@@ -1,5 +1,10 @@
 ## 2-3 trees and B-trees {#2-3-trees}
 
+::: TODO
+- Prio 1: move subsection about B+ trees to new online section
+- Prio 1: split into two sections? 2-3 trees and B trees
+:::
+
 AVL trees do not ensure that a tree is perfectly balanced --
 the height invariant cannot give a better guarantee than that
 the height is within a constant times the optimal height.
