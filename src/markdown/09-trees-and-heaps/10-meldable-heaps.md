@@ -1,7 +1,8 @@
+
 ## Meldable heaps
 
 ::: TODO
-- Prio 3: write this section:
+- Prio 1: write this section:
     - gist: "if we don't use complete trees there are several other possibilities"
 :::
 

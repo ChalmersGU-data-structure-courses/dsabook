@@ -1,9 +1,10 @@
 
+## Case study: Huffman coding {#huffman-coding}
+
 ::: TODO
+- Prio 1: make online
 - Prio 2: make the text shorter (this is just an example anyway)
 :::
-
-## Case study: Huffman coding {#huffman-coding}
 
 One can often gain an improvement in space requirements in exchange for
 a penalty in running time. There are many situations where this is a

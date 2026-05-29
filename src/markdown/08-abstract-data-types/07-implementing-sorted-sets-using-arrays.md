@@ -1,6 +1,11 @@
 
 ## Case study: Implementing using sorted arrays {#implementing-using-arrays}
 
+::: TODO
+- Prio 1: is this better as a section or subsection?
+- Prio 1: move complexity analysis to separate section for the whole chapter
+:::
+
 In @sec:implementing-using-linked-lists we showed how to implement sets and maps using linked lists.
 An alternative is to use a dynamic array instead,
 and if we make sure that the array is always sorted, we can at least make searching fast.

@@ -2,18 +2,18 @@
 # Trees {#trees}
 
 ::: TODO
-- Prio 2: update introduction
+- Prio 1: update introduction, include prio.queues & heaps
 :::
 
 [Tree]{.term} structures can enable efficient
 access and updates to large collections of data.
 [Binary trees]{.term} in
-particular are widely used in data structures. 
+particular are widely used in data structures.
 Trees can model any kind of hierarchical data, including
 things like mathematical expressions
 and the syntax of computer programs
 (using expression trees, see @sec:differentiating-between-internal-nodes-and-leaves).
-We will also see trees used for prioritising jobs 
+We will also see trees used for prioritising jobs
 (using binary heaps, see @sec:binary-heaps), and
 organising the information needed to drive
 data compression algorithms (using Huffman coding, see @sec:huffman-coding).

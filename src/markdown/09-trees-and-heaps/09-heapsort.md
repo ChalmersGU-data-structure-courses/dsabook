@@ -1,7 +1,8 @@
 ## Case study: Heapsort {#heapsort}
 
 ::: TODO
-- Prio 1: don't talk about BSTs here - they are not introduced yet
+- Prio 1: make online section (move last in chapter)
+- Prio 1: merge with subsection "Building a heap" from 08-binary-heaps
 - Prio 2: two stages:
     1. not in-place Heapsort (using a general prio.queue)
     2. in-place Heapsort (using a heap)

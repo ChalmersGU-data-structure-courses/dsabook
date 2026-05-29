@@ -1,11 +1,10 @@
 
 <!--
 ::: TODO
-- Prio 2: add summary text
-- Prio 2: create quizzes
+- Prio 1: create quizzes
 :::
 
-## Review questions {#ch10-review}
+## Review questions {#ch08-review}
 
 This final section contains some review questions about the contents of this chapter.
 

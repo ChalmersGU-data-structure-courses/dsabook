@@ -1,4 +1,11 @@
-# Priority queues and heaps {#heaps}
+
+## Priority queues
+
+::: TODO
+- Prio 1: merge with the file 02b
+- Prio 1: merge subsection "Designing an efficient priority queue" with next section
+- Prio 1: update text so it fits in this chapter
+:::
 
 A priority queue is a data structure that stores a collection of elements where each element has an associated priority.
 The key difference between priority queues and simpler structures such as stacks or queues lies in how elements are retrieved.

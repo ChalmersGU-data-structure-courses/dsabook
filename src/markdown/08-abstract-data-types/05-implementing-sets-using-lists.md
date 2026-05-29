@@ -1,6 +1,13 @@
 
 ## Case study: Implementing using linked lists {#implementing-using-linked-lists}
 
+::: TODO
+- Prio 1: reduce the lines of code
+- Prio 1: is this better as a section or subsection?
+- Prio 1: move complexity analysis to separate section for the whole chapter
+:::
+
+
 Both sets and maps can be implemented using simple linked lists.
 
 ### Implementing sets

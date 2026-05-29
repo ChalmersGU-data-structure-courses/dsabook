@@ -1,6 +1,10 @@
 
 ### Space requirements
 
+::: TODO
+- Prio 1: remove, or move to separate online section
+:::
+
 In this subsection we present techniques for calculating the amount of [overhead]{.term} required by a [binary tree]{.term}, based on its node implementation.
 
 :::::: latex

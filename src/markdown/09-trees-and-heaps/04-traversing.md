@@ -2,7 +2,9 @@
 ## Traversing binary trees
 
 ::: TODO
-- Prio 1: add more text
+- Prio 1: merge with subsection Traversal of next section (General trees)
+- Prio 1: move subsection Implementation to a separate online section
+- Prio 1: make some bullet lists into plain text instead? (now the section is a bit "scattered")
 - Prio 2: refer to previous chapter
 :::
 

@@ -2,6 +2,7 @@
 ### Sequential tree representations
 
 ::: TODO
+- Prio 1: remove, or move to separate online section
 - Prio 2: rewrite text, include:
     - how to implement
     - similarity with graphs

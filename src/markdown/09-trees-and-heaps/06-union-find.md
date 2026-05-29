@@ -2,6 +2,7 @@
 ## Case study: Disjoint sets {#disjoint-sets}
 
 ::: TODO
+- Prio 1: shorten text and make it *not* online
 - Prio 2: add use case = Kruskal's algorithm
 - Prio 3: update text and code
 :::

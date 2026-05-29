@@ -2,14 +2,14 @@
 ## General trees
 
 ::: TODO
-- Prio 3: update text
-- Prio 3: add use cases
-- Prio ?: Include some of the set-theoretical definitions?
+- Prio 1: remove section? (move important parts to 01-terminology)
+- Prio 2: add use cases
+- Prio 3: Include some of the set-theoretical definitions?
 :::
 
-Binary trees are important, but there are also plenty of uses for trees 
-with an arbitrary number of children. For instance the file system 
-example in the beginning of this chapter is not a binary tree 
+Binary trees are important, but there are also plenty of uses for trees
+with an arbitrary number of children. For instance the file system
+example in the beginning of this chapter is not a binary tree
 (a folder can contain more than two items).
 
 
@@ -52,13 +52,13 @@ root, has one edge connecting that node to its parent.
 
 ### ADT for general trees
 
-We want our general trees to support the same operations as our binary trees. 
-That is, given a tree, we need access to the root node of it. 
-There also must be some way to access the children of a node. 
-Since general trees have an arbitrary number of children, we can not have 
+We want our general trees to support the same operations as our binary trees.
+That is, given a tree, we need access to the root node of it.
+There also must be some way to access the children of a node.
+Since general trees have an arbitrary number of children, we can not have
 a variable name for each of them (as we did for binary trees with `right`/`left`).
 
-If order of children is important, a node containing a **List** of children 
+If order of children is important, a node containing a **List** of children
 makes sense.
 This list can be an array-based list or a linked list or even a dynamic
 function generating the children on demand. The only thing we assume is
@@ -69,7 +69,7 @@ that it follows the **List** ADT, as described in @sec:general-lists.
         value: T                  // This is the value, just as for binary nodes
         children: List of GTNode  // All children of the node
 
-As you may recall, a list of nodes is sometimes referred to as a forest. 
+As you may recall, a list of nodes is sometimes referred to as a forest.
 That makes little sense here as it would mean every tree contains a forest.
 
 ### Traversing a general tree
@@ -81,9 +81,9 @@ and [inorder](#inorder-traversal){.term} (see @sec:traversing-binary-trees).
 For general trees, preorder and postorder traversals are
 defined with meanings similar to their binary tree counterparts.
 Preorder traversal of a general tree first visits the root of the tree,
-then performs a preorder traversal of each subtree from left to right 
-(start to end of the list of children). Postorder is generalized in a 
-similar way, with the processing of a value happening after the 
+then performs a preorder traversal of each subtree from left to right
+(start to end of the list of children). Postorder is generalized in a
+similar way, with the processing of a value happening after the
 recursive processing of the children.
 
 Inorder traversal does not have a natural definition for the general tree,
@@ -128,7 +128,7 @@ to the underlying **List** implementation of the children.
         process(node)
 
 Note that unlike a binary tree, this general tree does not contain any null values.
-A leaf is represented as a node with an empty list of children, not a node with two 
+A leaf is represented as a node with an empty list of children, not a node with two
 null children. Depending on the intended application, it may however need to be possible
-to represent an empty tree. If that is done by a null value, then only the root of a 
+to represent an empty tree. If that is done by a null value, then only the root of a
 general tree can be null, but a child node is never null.

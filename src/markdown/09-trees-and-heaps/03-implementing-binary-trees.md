@@ -2,6 +2,7 @@
 ## Implementing binary trees
 
 ::: TODO
+- Prio 1: merge with previous section?
 - Prio 1: update pseudocode
 - Prio 3: extend text
 - Prio 3: look over the text for space requirements (file 03b)
@@ -23,9 +24,9 @@ Every `BinaryNode` object also has two pointers, one to its left child and anoth
         left: BinaryNode = null   // Pointer to left child.
         right: BinaryNode = null  // Pointer to right child.
 
-Note that an object of type `BinaryNode` does not actually represent a node in isolation, 
-but rather a whole subtree (since it contains its children). 
-@Fig:bintree_with_pointers is an illustration of how the tree from @fig:example_bintree looks in memory, 
+Note that an object of type `BinaryNode` does not actually represent a node in isolation,
+but rather a whole subtree (since it contains its children).
+@Fig:bintree_with_pointers is an illustration of how the tree from @fig:example_bintree looks in memory,
 with child pointers shown explicitly.
 
 ::: {.jsav-figure #fig:bintree_with_pointers}
@@ -84,11 +85,11 @@ AV.displayInit();
 AV.recorded();
 ```
 
-Illustration of a typical pointer-based binary tree implementation, where each node stores two child pointers and a value. 
+Illustration of a typical pointer-based binary tree implementation, where each node stores two child pointers and a value.
 The empty cells are null values.
 :::
 
-It is easy to extend this `BinaryNode` for various applications, 
+It is easy to extend this `BinaryNode` for various applications,
 for instance by including more data in nodes.
 Some programmers find it convenient to add a pointer to the node's
 parent, allowing easy upward movement in the tree. Using a parent
@@ -101,9 +102,9 @@ understanding of recursion and so indicate poor programming. If you are
 inclined toward using a parent pointer, consider if there is a more
 efficient implementation possible.
 
-Here is an example of programming using the type defined above. 
+Here is an example of programming using the type defined above.
 It computes the height of a tree.
-Since `BinaryNode` is a recursive data type, it is usually natural 
+Since `BinaryNode` is a recursive data type, it is usually natural
 to write recursive functions on it, and the base case is usually
 an empty tree (null).
 
@@ -113,13 +114,13 @@ an empty tree (null).
         maxChildHeight = max(height(node.left), height(node.right))
         return maxChildHeight+1
 
-Study the code and convince yourself that `height(A)` in @Fig:bintree_with_pointers 
+Study the code and convince yourself that `height(A)` in @Fig:bintree_with_pointers
 will return the value 4. Also consider how you would modify the code to compute size instead of height.
 
 #### Wrapper data type
 
-Our final datatype for binary trees is a wrapper class similar to the linked lists that we introduced 
-in @sec:stacks-implemented-as-linked-lists -- we need a reference to the root node (that is initially null) 
+Our final datatype for binary trees is a wrapper class similar to the linked lists that we introduced
+in @sec:stacks-implemented-as-linked-lists -- we need a reference to the root node (that is initially null)
 and we can include meta-data such as the total size of the tree:
 
     datatype BinaryTree:
