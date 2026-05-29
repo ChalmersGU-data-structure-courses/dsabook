@@ -2,10 +2,10 @@
 ## Multiple parameters
 
 ::: TODO
-- Prio 1: use graphs as example
+- Prio 1: shorten examples
 - Prio 2: add definitions
-- Prio 2: more examples
-- Prio 3: discuss different definitions and how they differ
+- Prio 2: more examples (only in a separate online section)
+- Prio 3: discuss different definitions and how they differ (only in separate online section)
 :::
 
 Sometimes the proper analysis for an algorithm requires multiple

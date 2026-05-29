@@ -2,6 +2,8 @@
 ## Space bounds
 
 ::: TODO
+- Prio 1: Shorten the examples, in particular Friendship links
+- Prio 1: Move the online example to a new section at the end of the chapter
 - Prio 2: add an example where two different solutions have different space complexities
 :::
 
@@ -204,13 +206,13 @@ in time and space are both by a constant factor.
 A classic example of a space/time tradeoff is the
 [lookup table]{.term}. A lookup table pre-stores
 the value of a function that would otherwise be computed each time it is
-needed. For example, 12! is the greatest value for the factorial
-function that can be stored in a 32-bit `int` variable. If you are
+needed. For example, 20! is the greatest value for the factorial
+function that can be stored in a 64-bit integer. If you are
 writing a program that often computes factorials, it is likely to be
-much more time efficient to simply pre-compute and store the 12 values
+much more time efficient to simply pre-compute and store the 20 values
 in a table. Whenever the program needs the value of $n!$ it can simply
-check the lookup table. (If $n > 12$, the value is too large to store as
-an `int` variable anyway.) Compared to the time required to compute
+check the lookup table. (If $n > 20$, the value is too large to store as
+an integer variable anyway.) Compared to the time required to compute
 factorials, it may be well worth the small amount of additional space
 needed to store the lookup table.
 

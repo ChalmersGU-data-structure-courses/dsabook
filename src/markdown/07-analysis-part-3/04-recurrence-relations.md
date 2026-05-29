@@ -2,8 +2,12 @@
 ## Recurrence relations {#recur-relations}
 
 ::: TODO
-- Prio 3: throughout this section, there are references to equations, both on this page and in the Summations section - these should be made into proper cross-references rather than hard-coded equation numbers
-- Prio 3: example: matrix multiplication, Strassen's algorithm
+- Prio 1: move subsection Master theorem to separate online section, and just show the theorem here
+    - can subsection Expanding recurrences be shortened, and the long version in a separate online section?
+    - but keep subsection Karatsuba in the book?
+- Prio 2: throughout this section, there are references to equations, both on this page and in the Summations section
+    - these should be made into proper cross-references rather than hard-coded equation numbers
+- Prio 3: add example: matrix multiplication, Strassen's algorithm
 :::
 
 In the previous chapters we have encountered three recursive algorithms:

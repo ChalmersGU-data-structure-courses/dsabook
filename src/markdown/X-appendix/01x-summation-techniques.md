@@ -3,8 +3,7 @@
 ## Summation techniques
 
 ::: TODO
-- Prio 2: update this text
-- Prio 3: relate to the rest of the chapter
+- Prio 1: merge with the math preliminaries section
 :::
 
 Consider the following simple summation.
