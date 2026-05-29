@@ -1,8 +1,8 @@
 
-### Iteration, recursion, and information flow
+## Iteration, recursion, and information flow
 
 ::: TODO
-- Prio 1: move to separate online section
+- Prio 1: make online section
 - Prio 2: remove short subsections? or extend them
 - Prio 2: discuss when to use iteration, recursion, BFS, DFS, etc, etc
 :::

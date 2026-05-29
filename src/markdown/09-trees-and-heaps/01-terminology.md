@@ -53,6 +53,15 @@ such as the parameter of a function call or the else-branch of an if-statement.
 For the file system example, nodes are files and folders.
 The parent of a node is the folder that contains it.
 
+### Implementing trees and tree nodes
+
+To implement a tree we define a wrapper class similar to the linked lists that we introduced
+in @sec:stacks-implemented-as-linked-lists -- we need a reference to the root node (that is initially null)
+and we can include meta-data such as the total size of the tree:
+
+    datatype Tree:
+        root: TreeNode = null
+        size: Int = 0
 
 There is no universal ADT or concrete data structure for trees,
 rather they form a family of data structures that differ in many ways.
@@ -60,4 +69,14 @@ One important difference is the number of children nodes can have,
 another is the significance of order of siblings.
 Consider the two examples: In the file system, the order of children of a node seems irrelevant.
 In the syntax tree, order matters, there is a big difference between $a<3$ and $3<a$ after all.
+
+If order of children is important,
+it makes sense to define a tree node to consist of a value and a list of children.
+This list can be an array-based list or a linked list or even a dynamic
+function generating the children on demand.
+The only thing we assume is that it follows the **List** ADT, as described in @sec:general-lists.
+
+    datatype TreeNode of T:
+        value: T                    // This is the value of the node
+        children: List of TreeNode  // All children of the node
 

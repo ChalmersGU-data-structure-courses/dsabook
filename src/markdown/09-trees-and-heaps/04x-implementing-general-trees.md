@@ -1,4 +1,6 @@
 
+<!--
+
 ### Sequential tree representations
 
 ::: TODO
@@ -214,3 +216,5 @@ Practice exercise for sequential representation of general trees.
 :::
 
 ::::::
+
+-->
