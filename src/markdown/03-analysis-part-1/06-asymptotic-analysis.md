@@ -4,7 +4,6 @@
 ::: TODO
 - Prio 1: shorten text?
 - Prio 1: flatten subsection
-- Prio 3: add another example
 :::
 
 ::: latex

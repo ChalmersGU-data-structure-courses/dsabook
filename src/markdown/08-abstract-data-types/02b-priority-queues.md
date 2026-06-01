@@ -3,7 +3,6 @@
 
 ::: TODO
 - Prio 1: Merge with file 02-...
-- Prio 1: remove the top-100 example, or move to a separate online section
 - Prio 2: add a better & shorter version of the top-100 example
 :::
 
@@ -88,13 +87,7 @@ time. Therefore, the total runtime is $O(n \log(n))$ -- as efficient as
 any of the sorting algorithms we have seen so far!
 :::
 
-:::::: latex
-More examples can be found in the online version of the book.
-\booklink{More examples online}{6.11}{sec:use-cases-for-priority-queues}
-::::::
-
-:::::: online
-
+<!--
 ::: example
 #### Example: Finding the top 100 items
 
@@ -168,5 +161,4 @@ because the priority queue has a constant maximum size of 100 elements.
 If we generalise this problem to keeping track of the top $k$
 transactions, then the complexity of `add` is $O(\log(k))$.
 :::
-
-::::::
+-->

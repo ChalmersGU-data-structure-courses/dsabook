@@ -1,9 +1,8 @@
 
-## Collections and sequences
+## Collections, stacks and queues
 
 ::: TODO
 - Prio 1: move a lot to new ADT chapter 8
-- Prio 1: merge with 6.2
 :::
 
 A _collection_ is a general term for a data structure that can contain multiple elements.

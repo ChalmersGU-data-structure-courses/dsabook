@@ -87,11 +87,6 @@ and deletion of data records, and range queries. However, a simple
 [linear index]{.term} would be more appropriate if the database is created once,
 and then never changed, such as an atlas accessed from a website.
 
-:::::: latex
-\booklink{More examples online}{1.3}{sec:practical-examples}
-::::::
-
-:::::: online
 
 #### Banks
 
@@ -146,4 +141,3 @@ operations. However, the hash table can be reorganised periodically to
 restore the system to peak efficiency. Such reorganisation can occur
 offline so as not to affect ATM transactions.
 
-::::::
