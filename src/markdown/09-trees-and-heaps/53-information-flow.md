@@ -1,8 +1,8 @@
+:::::: online
 
 ## Iteration, recursion, and information flow
 
 ::: TODO
-- Prio 1: make online section
 - Prio 2: remove short subsections? or extend them
 - Prio 2: discuss when to use iteration, recursion, BFS, DFS, etc, etc
 :::
@@ -14,14 +14,9 @@ of:
 1.  Passing down the correct information needed by the function to do its work,
 2.  Returning (passing up) information to the recursive function's caller.
 
-:::::: latex
-\booklink{Read the rest online}{8.5}{sec:iteration-recursion-and-information-flow}
-::::::
-
 Any given problems might need to do either or both.
 This section contains some examples and exercises.
 
-:::::: online
 #### Local traversal
 
 Local traversal involves going to each node in the tree to do some

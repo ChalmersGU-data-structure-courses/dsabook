@@ -168,10 +168,6 @@ Dynamic arrays -- addition.
 ```
 :::
 
-<!-- :::::: latex
-\booklink{Read the rest online}{6.7}{sec:how-much-to-increase-the-array-size}
-:::::: -->
-
 
 ### Multiplying by any factor
 
