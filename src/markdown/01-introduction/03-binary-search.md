@@ -1,9 +1,9 @@
 
+## Case study: Searching in an array {#searching}
+
 ::: TODO
 - Prio 3: (maybe) write the text on "Even faster searching"
 :::
-
-## Case study: Searching in an array {#searching}
 
 One of the most fundamental tasks that we use computers for is *searching*.
 We want to find an object that matches some criteria, in a collection of objects.

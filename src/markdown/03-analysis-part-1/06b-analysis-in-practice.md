@@ -1,9 +1,9 @@
 
+### Simplification rules
+
 ::: TODO
 - Prio 2: briefly discuss functions and non-atomic statements
 :::
-
-### Simplification rules
 
 There are many advantages with the big-$O$ notation.
 It allows us to analyse complex algorithms easily and
