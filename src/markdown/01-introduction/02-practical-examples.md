@@ -2,33 +2,21 @@
 ## Practical examples
 
 ::: TODO
-- Prio 1: shorten the examples (at most one PDF page per example)
-- Prio 2: reorganise the examples
-- Prio 2: replace Bank with e.g. Social media
 - Prio 3: add a 4th example
 :::
 
 Here we list some real-world examples where data structures and algorithms are crucial.
 
-#### Search engines
+#### Example: Search engines
 
-The World Wide Web (WWW), often referred to as the Internet, has completely changed how we access and use information.
-With just a few clicks, we can explore an enormous number of websites filled with text, videos, and images on a wide variety of topics.
-The amount of content available is staggering, with millions of pages and an endless stream of data at our fingertips.
-But this vast amount of information also presents challenges.
-It can be overwhelming to sort through all the sources available online.
-Finding the exact address of a website on your own is nearly impossible.
-
-This is where search engines come in.
-Search engines like Google, Bing, and DuckDuckGo help us find the information we need by organising the Internet and making it searchable.
-This process of organising information is called indexing.
+Search engines like DuckDuckGo, Google and Bing help us search for web pages that match our queries.
+This is not possible to do by just searching through each web page at a turn,
+simply because there are so many web pages on the Internet.
+To be able to find relevant pages quickly, all search engines organise the relevant information using *search indexes*.
 
 Most of us use search engines every day without thinking about the incredible job they do.
-The image below shows the results of a search for "binary search":
-
-![Searching the Internet with Google](images/Google.png){ width=75% }
-
-It is already impressive to be shown a list of relevant web pages, but it is even more astonishing that, in this case, Google found 331 million results in just _0.23 seconds_.
+For example, searching for the term "binary search" in DuckDuckGo takes just a fraction of a second,
+and there are 100s of millions of matching web pages.
 
 Now imagine you are designing a search engine that must index billions of web pages.
 Each page has a unique address, called a Uniform Resource Locator (URL), and is associated with a set of keywords.
@@ -39,25 +27,62 @@ Even if looking at a single page takes only a millisecond, going through them al
 To handle this challenge, we need smart ways to store and search through the data.
 
 Let's consider a simpler version of this problem.
-Suppose we use an array that connects keywords to lists of related web pages.
-A basic approach would be to go through the array one element at a time until we find the keyword.
-This works, but it becomes very slow as the array grows larger.
-To improve efficiency, we can _sort_ the array of keywords alphabetically.
-Then, instead of scanning from the beginning, we start in the middle of the array and compare the search word with the keyword at that position:
+Suppose we want to search for a book by a certain author in a big bookshelf.
+A basic approach would be to go through each book at a time until we find the right author.
+This works, but it becomes very slow as the number of books in the shelf grows larger.
+To improve efficiency, we can instead order the books alphabetically by author.
+Then, instead of scanning from the beginning, we can start by looking at the author of the middle book.
+If the book author is larger, we can exclude the upper half of the bookshelf,
+and if it is smaller we can exclude the lower half.
+In either case we have effectively reduced the search space by half in just one go.
+If our shelf contains one billion books, we would need only about 40 steps to find the right one.
+This search algorithm is called *binary search* and is the topic of the next section.
 
-- If they match, we return the corresponding list of web pages.
-- If the search word is smaller, we continue the search in the lower half of the array.
-- If it's larger, we search in the upper half.
-
-Each step cuts the number of possibilities in half.
-So, how many times can we divide the array in half before we narrow it down to one element?
-This is a logarithmic process, meaning we divide the search space in half again and again.
-With an array of one billion keywords, we would need only about 39 steps to find the right one.
-
-This model is simplified.
+Note that this is a very simplified model of a search engine.
 In reality, search engines do much more than just match keywords.
-They also rank pages by relevance and take many details into account, such as whether letters are uppercase or lowercase, and whether the user is combining terms with "and" or "or".
+They also rank pages by relevance and take many details into account,
+such as whether letters are uppercase or lowercase, and whether the user is combining terms with "and" or "or".
 
+
+#### Example: Railway connections
+
+Europe has a big network of railways, and we would like to have a database that contains all the relevant information.
+This database should contain information about all railway stations, what tracks there are that connect them,
+how long each of these tracks are and if there are several tracks in parallel.
+It also needs to know all the timetables of all trains, including how large each train is,
+the seat numbers of all train carriages, which is first and second class, and which seats are grouped together with a table.
+
+The database must be *distributed* because each country has their own rail network,
+there are several different railway companies that operate in different countries,
+and all of them use the same tracks and stations.
+It must also be possible to update the timetable information quickly, for example to show information about delays.
+
+Now, say that you want to travel from Paris, France, to Leksand, Sweden,
+and arrive in time to celebrate the traditional Swedish Midsummer festivities.
+To do this you want to search the database to find train connection so that you will arrive
+some time in the morning of Midsummer's eve.
+Finding appropriate train connections is an example of *shortest-path search* in a graph,
+and in addition the database needs to support *range queries* to make sure that we can arrive within a specified time range.
+
+In this book you will learn the basics of how you can implement a database system like this,
+even though the are many specialised data structures and algorithms that we will not have time to cover.
+
+
+#### Example: Job scheduling
+
+An operating system constantly runs many jobs in parallel,
+and it needs to know which jobs are more important and which are more resource intense.
+Every job should get a fair share of the resources, both the processor and the memory,
+and no job should take over from the others.
+But some jobs are more important than others, and they should be prioritised,
+but in the extreme so that all other jobs get stalled.
+Every now and then a job finishes, or a new job is started, and the operating system should handle this too.
+
+To be able to do this, the operating system needs information about each job, what resources it uses, and what is its priority.
+This is stored in a *priority queue*, which decides the next job to dedicate the attention to, when to change to another job,
+and how to update the priorities and other information.
+
+<!--
 
 #### Databases
 
@@ -140,4 +165,4 @@ deletions lead to some degradation in performance for the remaining
 operations. However, the hash table can be reorganised periodically to
 restore the system to peak efficiency. Such reorganisation can occur
 offline so as not to affect ATM transactions.
-
+-->

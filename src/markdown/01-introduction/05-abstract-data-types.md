@@ -1,62 +1,36 @@
 
 ## Abstract data types
 
-::: TODO
-- Prio 1: shorten the section, move details to new ADT chapter 8
-- Prio 2: analogy with Java interfaces (see preliminaries)
-:::
+An *abstract data type* (ADT) is how we describe what a data structure can do, or what kind of tasks it can be used for.
+This is done by describing what operations that can be performed on it, and how these operations should behave.
+Note that an ADT does not dictate *how* the operations should be implemented, and multiple implementations are often possible.
+The operations offered by an ADT is often called its *application programming interface* (API),
+and is similar to an interface or a protocol in an object-oriented language.
+By hiding the implementation details from the user, it is possible to change the underlying representation or an algorithm,
+without changing the API of the abstract data type.
 
-Earlier, we introduced the term [data type]{.term}, which refers to a type along with a collection of operations for manipulating values of that type.
-For instance, integers form a data type, and addition is an operation that can be performed on them.
-These are known as _concrete_ data types, meaning they consist of actual values and a specific implementation.
-In contrast, an [abstract data type]{.term} (ADT) does not specify concrete values or implementations.
-Instead, it defines a data type purely in terms of a set of operations and the expected behaviour of those operations, as determined by their inputs and outputs.
-An ADT does not dictate _how_ the operations should be implemented, and multiple implementations are often possible.
-These implementation details are hidden from the user -- a concept known as [encapsulation]{.term}.
-The set of operations offered by an abstract data type is known as its [application programming interface](#interface){.term} (API).
+Using an ADT, we can distinguish between the logical behaviour of a data structure and its actual implementation.
+A classic example is the *stack* abstract data type, which supports the following operations:
 
-Using an ADT, we can distinguish between the logical behaviour of a data type and its actual implementation in a concrete program.
-A classic example is the [list]{.term} abstract data type, which support the following set of operations:
+    interface Stack of T:
+        push(x: t)          // Pushes x on the top of the stack
+        pop() -> T          // Pops the top element off the stack and returns it
+        isEmpty() -> Bool   // Tells if the stack is empty or not
 
-    interface List of T:
-        add(i: Int, x: T)   // Adds x at position i; where 0 ≤ i ≤ size.
-        get(i: Int) -> T    // Returns the element at position i; where 0 ≤ i < size.
-        set(i: Int, x: T)   // Replaces the value at position i with x; where 0 ≤ i < size.
-        remove(i: Int)      // Removes the element at position i; where 0 ≤ i < size.
+A stack can be implemented using either a *dynamic array* or a *linked list*,
+and the users of a stack should not need to know which implementation is used.
+Using the terminology from object-oriented programming,
+dynamic arrays and linked lists are two separate *classes* that implements the stack interface.
 
-A list can be implemented using either an array or a linked list.
-Users of a list do not need to know which implementation is used in order to make use of its functionality.
-The actual implementations of an ADT rely on specific _data structures_ to realise the desired behaviour of the operations -- for example, calculating the size of a list.
+Often we can distinguish between *core* and *auxiliary* operations of an ADT.
+The core operations are the ones that define the "essence" of the data type,
+while the auxilary operations might simplify some use cases, but are not essential.
+For the example of stacks, here are some common auxiliary operations:
 
-Although different implementations of an abstract data type offer the same set of operations, the choice of [data structure]{.term} can significantly impact the _efficiency_ of those operations.
-Often, there are trade-offs involved: optimising one operation may come at the cost of another.
-For example, an array-based list allows fast access to elements at specific indices, while a linked-list implementation excels at inserting elements at the front.
-Furthermore, different applications may prioritise different operations.
-One program might frequently perform operation A, while another relies more heavily on operation B.
-In such cases, it is often not possible to implement all operations efficiently, so multiple implementations of the same ADT are needed.
-Additionally, one implementation may be more efficient for small datasets (thousands of elements), whereas another may scale better for large datasets (millions of elements).
-The most suitable data structure depends on the specific use case, and making informed and well-reasoned choices is one of the central goals of this book.
-
-:::::: online
-::: example
-#### Example: Collection of records
-
-A _database_ is a structured collection of data that can be easily accessed, managed, and updated.
-Each item in a database is typically called a _record_, which consists of multiple fields containing information -- such as a name, an ID number, or an address.
-Efficiently organising, storing, and searching these records is a key challenge in database design.
-
-Two popular implementations for managing large disk-based database applications are [hashing]{.term} and the [B-tree]{.term}.
-Both support efficient insertion and deletion of records, as well as exact-match queries.
-However, they differ in the types of queries they handle best.
-Hashing is particularly efficient for exact-match queries, where you are looking for a record with a specific key.
-On the other hand, B-trees are better suited for _range queries_, where you want to retrieve all records with keys within a certain interval.
-In such cases, hashing becomes inefficient.
-
-Therefore, if a database application only requires exact-match queries, hashing is typically the better choice.
-But if the application needs to support range queries -- such as finding all records with values between X and Y -- the B-tree is preferred.
-Despite their performance differences, both data structures address the same core problem: how to efficiently update and search a large collection of records.
-:::
-::::::
+    interface Stack of T:
+        (...)
+        size() -> Int   // Returns the number of elements on the stack
+        peek() -> T     // Returns the top element, but does not remove it
 
 The concept of an ADT can help us to focus on key issues even in non-computing applications.
 
@@ -75,6 +49,40 @@ uniform method of operation that does not require the driver to
 understand the specifics of any particular engine or drive design. These
 differences are deliberately hidden.
 :::
+
+### Choice of data structure
+
+Although different implementations of an abstract data type offer the same operations,
+the choice of data structure can significantly impact the *efficiency* of those operations.
+Often, there are trade-offs involved: optimising one operation may come at the cost of another.
+For example, a dynamic array stack is really fast most of the time,
+but every once in a while the underlying array needs to resize which is rather costly.
+In contrast, a linked list is more predictable --
+most of the time pushing and popping is slower than a dynamic array, but it never has to do any expensive resizing.
+Furthermore, different applications may prioritise different operations.
+One program might frequently perform operation A, while another relies more heavily on operation B.
+In such cases, it is often not possible to implement all operations efficiently,
+so multiple implementations of the same ADT are needed.
+Additionally, one data structure may be more efficient for small datasets (thousands of elements),
+whereas another may scale better for large datasets (millions of elements).
+The most suitable data structure depends on the specific use case,
+and making informed and well-reasoned choices is one of the central goals of this book.
+
+::: example
+#### Example: Databases
+
+A _database_ is a structured collection of data that can be easily accessed, managed, and updated.
+Each item in a database is typically called a _record_, which consists of multiple fields containing information -- such as a name, an ID number, or an address.
+Efficiently organising, storing, and searching these records is a key challenge in database design.
+
+Two popular implementations for managing large disk-based database applications are *hash tables* and *B-trees*.
+Both support efficient insertion and deletion of records, as well as exact-match queries.
+However, they differ in the types of queries they handle best.
+Hash tables are particularly efficient for exact-match queries, where you are looking for a record with a specific key.
+On the other hand, B-trees are better suited for _range queries_, where you want to retrieve all records with keys within a certain interval.
+:::
+
+### Abstract data types as metaphors
 
 The concept of an ADT is one instance of an important principle that must be understood by any successful computer scientist: managing complexity through abstraction.
 A central theme of computer science is complexity and techniques for handling it.
@@ -105,177 +113,48 @@ data structure's implementation. Without this ability to simplify your
 thinking about a complex program, you would have no hope of
 understanding or implementing it.
 
-<!-- Data types have both a [logical form]{.term} and
-a [physical form]{.term}. The definition of the
-data type in terms of an ADT is its logical form. The implementation of
-the data type as a data structure is its physical form. Sometimes you
-might see the term *concrete implementation*, but the word concrete is
-redundant. The figure below illustrates this relationship between
-logical and physical forms for data types. When you implement an ADT,
-you are dealing with the physical form of the associated data type. When
-you use an ADT elsewhere in your program, you are concerned with the
-associated data type's logical form. Some sections of this book focus
-on physical implementations for a given data structure. Other sections
-use the logical ADT for the data structure in the context of a
-higher-level task.
+### The core abstract data types
 
-:::: {.jsav-figure #fig:ADTCON}
-``` {src="Design/ADTCON.js" links="Design/ADTCON.css"}
-```
-The relationship between data items, abstract data types, and data structures.
-:::: -->
+Most of the abstract data types we introduce in this book are collections,
+that is, structures that store elements of an arbitrary type.
+They can be categorised in the following groups.
 
-<!-- As we saw, the ADT defines the logical form of the data type, while the
-data structure implements the physical form of the data type. Users of
-an ADT are typically programmers working in the same language as the
-implementer of the ADT. Typically, these programmers want to use the ADT
-as a component in another application. The interface to an ADT is also
-commonly referred to as the Application Programmer Interface, or API,
-for the ADT. The interface becomes a form of communication between two
-programmers. -->
+Sequences
+:   In a sequence the order between the elements matters.
+    This means that each element has a specific position in the sequence,
+    and operations on the ADT are sensitive to this order.
+    Insertion, removal, and retrieval operations often depend on the position within the sequence.
+    [Chapter @sec:sequences] covers stacks, queues, double-ended queues (deques), and general lists,
+    as well as the two main data structures that implement sequences -- dynamic arrays and linked lists.
 
-<!-- ::: example
-#### Example: API for a list class
+Priority queues
+:   A priority queue is also a kind of sequence, because the order matters.
+    But it is different from other seuences because the order depends on the *priority* of an element.
+    The core operations are similar to stacks and queues, but priority queues often have different use cases,
+    and they are implemented using completely different data structures.
+    [Chapter @sec:trees-and-heaps] discusses how to implement priority queues using different kinds of heaps.
 
-A particular programming environment might provide a library that
-includes a [list]{.term} class. The logical form
-of the list is defined by the public functions, their inputs, and their
-outputs that define the class. This might be all that you know about the
-list class implementation, and this should be all you need to know.
-Within the class, a variety of physical implementations for lists is
-possible.
-::: -->
+Sets
+:   A set represents an unordered collection of elements.
+    Just like in mathematical sets, an element can only occur once.
+    This means that adding an element sometimes doesn't change the set at all.
+    There are many different data structures that can be used to implement sets,
+    but they can be divided into two main groups --
+    where search trees are discussed in [chapter @sec:search-trees],
+    and hash tables in [chapter @sec:hash-tables].
 
-Most of the abstract data types we introduce in this book are collections, that is, structures that store elements of an arbitrary type.
-The earlier example of a list illustrates this: a list is a collection that holds elements, which can be of any type.
+Maps
+:   A map (or *dictionary*) is similar to a set, but represents a collection of *key-value pairs*.
+    The main idea is that you can use a map as a very simple database,
+    where you can look up the *value* for a given *key* (or change the value, or remove it).
+    This means that maps do not allow duplicate keys, just like sets do not allow duplicate elements.
+    Maps and sets are very similar to each other, and all data structures that can be used to implement
+    sets can also be used to implement maps.
 
-We group these collection-based ADTs into two main categories:
-
-- Linear collections
-- Sets and maps
-
-In addition to these, we also introduce graphs, along with their commonly used implementations.
-
-The rest of this gives a high-level overview of the ADTs covered throughout the course.
-@Fig:adt-overview summarises these ADTs and highlights how they relate to one another.
-Each ADT will be discussed in more detail later in the book, including their operations and the data structures used to implement them.
-
-![An overview of ADTs with their common implementations](images/ADT_overview.png){#fig:adt-overview}
-
-
-### Linear collections {#adt-linear-collections}
-
-Linear collections are a category of abstract data types in which the order of the elements matters.
-This means that each element has a specific position in the sequence, and operations on the ADT are sensitive to this order.
-Insertion, removal, and retrieval operations often depend on the position within the sequence.
-
-The ordered sequence ADTs found in this book are:
-
-- **Stacks**: sequences with a Last-In-First-Out (LIFO) ordering
-
-- **Queues**: sequences with a First-In-First-Out (FIFO) ordering
-
-- **Double-ended queues** (deques): allow insertion and removal at both ends
-
-- **Priority queues**: return elements based on priority rather than insertion order
-
-- **General lists**: support adding, removing, and accessing elements
-
-Ordered sequences are used in many applications and algorithms where the order of operations or items is important.
-For example, maintaining a task list, simulating a line of customers, or a editor's undo/redo history.
-
-### Sets and maps {#adt-sets-and-maps}
-
-Many programming tasks involve *retrieving specific information* from a large dataset.
-For example, given a collection of people, how do we efficiently find the person with a specific personnummer?
-Two key abstract data types are commonly used to solve such information retrieval problems:
-
-- **Sets**:
-  represent unordered collections of distinct items.
-  They support operations to *add* and *remove* elements, and to *check* whether a particular element is present.
-  Duplicate elements are not allowed.
-
-- **Maps** (also called dictionaries):
-  represent collections of *key-value pairs*, where each *key* maps to a corresponding *value*.
-  Operations include *adding* or *removing* key-value pairs, *checking* if a key is present, and *retrieving* the value associated with a given key.
-  Like sets, maps do not allow duplicate keys.
-
-Most implementations of both sets and maps are designed to support fast insertion, deletion, and lookup operations, making them ideal for managing collections where quick access to data is important.
-
-### Graphs {#adt-graphs}
-
-Another well-known abstract data type is the _graph_.
-Graphs are used to model relationships between elements, where each element is called a _node_ or _vertex_.
-A _relation_ between two nodes is represented by an _edge_, which may carry additional information to describe the nature or strength of the relationship -- such as distance, cost, or capacity.
-
-Graphs appear in many real-world scenarios, often in surprising ways.
-A classic example is a map, where cities are represented as nodes and roads (with distances) as edges.
-Graph algorithms can then be used to solve problems such as finding the shortest route between two cities.
-Another, less obvious example is the structure of Java programs: the dependencies between Java classes can be represented as a graph.
-This representation helps us determine the correct order to compile classes based on their dependencies.
-
-Graphs are a fundamental concept in computer science, and we dedicate an entire chapter to them in this book.
-[Chapter @sec:graphs] explores how graphs can be represented and how we can traverse and manipulate them using various algorithms.
-
-
-<!--
-### Comparison with standard libraries
-
-#### The standard Java API
-
-The standard Java API can be found here (this is Java SE 11):
-<https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/package-summary.html>. Here is a quick comparison
-beteween the interfaces we have defined above, and the most similar ones
-that are defined in the standard Java API:
-
-Iterable, Collection, List:
-
-:   These interfaces are similar to
-    [Iterable](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Iterable.html),
-    [Collection](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Collection.html)
-    and
-    [List](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html)
-    in the standard Java API, but with fewer methods.
-
-Stack:
-
-:   The main difference is that we define it as an interface
-    (because there are several possible implementations), but it's a
-    single class
-    [Stack](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Stack.html)
-    in the Java standard.
-
-Queue:
-
-:   The Java API has an interface
-    [Queue](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Queue.html)
-    which uses different method names.
-
-PriorityQueue:
-
-:   We define priority queues as an interface
-    (because there are several possible implementations), but in the
-    Java API it's a single class
-    [PriorityQueue](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/PriorityQueue.html)
-    that implements their
-    [Queue](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Queue.html)
-    interface. So the method names are different too.
-
-Set, SortedSet, Map, SortedMap:
-
-:   These interfaces are similar to
-    [Set](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Set.html),
-    [SortedSet](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/SortedSet.html),
-    [Map](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html)
-    and
-    [SortedMap](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/SortedMap.html)
-    in the Java API, but with fewer methods. Also, some methods are
-    simpler than the corresponding ones in the Java API.
-
-Graph:
-
-:   There is no interface (or class) for graphs in the standard Java API.
-
-
-#### The Python standard library
--->
+Graphs
+:   Graphs are used to model relationships between elements.
+    The elements in a graph are called *vertices* or *nodes*,
+    and the relations between vertices are represented by *edges*.
+    There are many different algorithms on graphs, such as finding the shortest path between two vertices,
+    or minimal set of edges that connect all vertices in a graph.
+    Graphs are introduced, together with some of their core algorithms, in [chapter @sec:graphs].

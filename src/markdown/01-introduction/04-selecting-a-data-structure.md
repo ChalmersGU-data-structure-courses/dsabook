@@ -5,62 +5,47 @@
 - Prio 3: are the priority lists as we want them?
 :::
 
-It should go without saying that people write programs to solve
-problems. However, sometimes programmers forget this. So it is crucial
-to keep this truism in mind when selecting a
-[data structure]{.term} to solve a particular
-[problem]{.term}. Only by first analysing the
-problem to determine the performance goals that must be achieved can
-there be any hope of selecting the right data structure for the job.
-Poor program designers ignore this analysis step and apply a data
-structure that they are familiar with but which is inappropriate to the
-problem. The result is typically a slow program. Conversely, there is no
-sense in adopting a complex representation to "improve" a program that
-can meet its performance goals when implemented using a simpler design.
+We write programs to solve problems.
+This might sound obvious, but sometimes we forget this and do not analyse the problem properly.
+If we ignore the problem analysis, the risk is that we apply a data structure that is inappropriate for the task,
+just because it is familiar to us and we have used it before.
+This usually results in a slow program, or a program that uses too much memory, or sometimes both.
 
-When selecting a data structure to solve a problem, you should follow
-these steps.
+On the other hand, sometimes we can adopt a data structure that is unnecessarily complex.
+This data structure might be very efficient for some very difficult problems,
+but if we will not encounter these problems it might be better to use a simpler data structure,
+that for example uses less memory.
 
-1.  Analyse your problem to determine the [basic operations]{.term}
-    that must be supported. Examples of basic operations include
-    inserting a data item into the data structure, deleting a data item
-    from the data structure, and finding a specified data item.
-2.  Quantify the resource constraints for each operation.
+1.  Analyse your problem to determine the operations that must be supported.
+    Examples of operations include inserting or deleting items, and searching in the data structure.
+2.  State the constraints for each operation -- how much (time or space) resources it is allowed to use.
 3.  Select the data structure that best meets these requirements.
 
-This three-step approach to selecting a data structure operationalises a
-data-centered view of the design process. The first concern is for the
-data and the operations to be performed on them, the next concern is the
-representation of those data, and the final concern is the
-implementation of that representation.
+The main idea with this three-step approach is that we analyse the *data* and what we want to do with the data.
+When we have done this it becomes easier to decide the representation of the data,
+and after that we can start developing the algoithms.
 
-Resource constraints on certain key operations, such as search,
-inserting data records, and deleting data records, normally drive the
-data structure selection process. Many issues relating to the relative
-importance of these operations are addressed by the following three
-questions, which you should ask yourself whenever you must choose a data
-structure.
+When analysing your problem and the data, the following three questions can help you deciding which data structure to use.
 
-1.  Are all data items inserted into the data structure at the
-    beginning, or are insertions interspersed with other operations?
-    Static applications (where the data are loaded at the beginning and
-    never change) typically get by with simpler data structures to get
-    an efficient implementation, while dynamic applications often
-    require something more complicated.
-2.  Can data items be deleted? If so, this will probably make the
-    implementation more complicated.
-3.  Are all data items processed in some well-defined order, or is
-    searching for specific data items allowed?
-    Efficient search
-    generally requires more complex data structures.
+1.  How do you insert items into the data structure?
+    If all items are inserted first and then never changed, we have a *static* application.
+    Then we can typically select a simpler data structure
+    than if we have a *dynamic* application where the data is updated during the course of the program.
+2.  Can items be deleted or modified?
+    If so, you will probably need a more complicated data structure.
+3.  Do you process the data in some well-defined order,
+    or will you search for any kind of items at any time?
+    Being able to search efficiently generally requires more complex data structures.
 
 Each data structure has associated costs and benefits. In practice, it
 is hardly ever true that one data structure is better than another for
-use in all situations. If one data structure or algorithm is superior to
-another in all respects, the inferior one will usually have long been
-forgotten. For nearly every data structure and algorithm presented in
-this book, you will see examples of where it is the best choice. Some of
-the examples might surprise you.
+use in all situations.
+If one data structure or algorithm had been superior to another in all respects,
+the inferior one would already be long forgotten and we wouldn't discsuss it.
+That being said, sometimes we will show an inferior data structure or algorithm,
+just because it is very simple -- and then we will show how to improve it.
+This is for example the case for Bubble sort, which is inferior to
+Selection sort and Insertion sort in all cases.
 
 A data structure requires a certain amount of space for each data item
 it stores, a certain amount of time to perform a single basic operation,

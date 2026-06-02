@@ -66,3 +66,10 @@ and Python's
 [sets](https://docs.python.org/3/tutorial/datastructures.html#sets) and
 [dictionaries](https://docs.python.org/3/tutorial/datastructures.html#dictionaries).
 By the end of this book you will understand how all of these work.
+
+
+The rest of this chapter gives a high-level overview of the ADTs covered throughout the course.
+@Fig:adt-overview summarises these ADTs and highlights how they relate to one another.
+Each ADT will be discussed in more detail later in the book, including their operations and the data structures used to implement them.
+
+![An overview of ADTs with their common implementations](images/ADT_overview.png){#fig:adt-overview}
