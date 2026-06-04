@@ -6,11 +6,14 @@
 - Prio 2: Shorten the text
 :::
 
+<!-- OPENDSA: START -->
 Programmers commonly deal with *problems*, *algorithms*, and computer *programs*.
 These are three distinct concepts.
+<!-- OPENDSA: END -->
 
 ### Problems
 
+<!-- OPENDSA: START -->
 As your intuition would suggest, a [problem]{.term} is a task to be performed. It is best thought of in terms
 of inputs and matching outputs. A problem definition should not include
 any constraints on *how* the problem is to be solved. The solution
@@ -21,6 +24,7 @@ solution. For any problem to be solved by a computer, there are always
 such constraints, whether stated or implied. For example, any computer
 program may use only the main memory and disk space available, and it
 must run in a "reasonable" amount of time.
+<!-- OPENDSA: END -->
 
 You have already encountered two fundamental computational problems:
 
@@ -50,6 +54,7 @@ An algorithm can be viewed as an implementation of a [function]{.term} in the ma
 But note that there are usually several ways of implementing the same functions
 -- and each of those give rise to a different algorithm.
 
+<!-- OPENDSA: START -->
 The advantage of knowing several solutions to a problem is that
 solution **A** might be more efficient than solution **B**
 for a specific variation of the problem,
@@ -60,14 +65,18 @@ a second might be the best for sorting a large collection of general objects, an
 a third might be the best for sorting a collection of variable-length strings.
 
 Something can only be called an algorithm if it has all of the following properties:
+<!-- OPENDSA: END -->
 
-1.  It must be *correct*.
+1.  <!-- OPENDSA: START -->
+    It must be *correct*.
     In other words, it must implement the desired function, converting each input a correct output.
     Note that every algorithm implements some function, because every algorithm maps every input to some output
     (even if that output is a program crash).
     At issue here is whether a given algorithm implements the *intended* function.
+    <!-- OPENDSA: END -->
 
-2.  It is composed of a series of *concrete steps*.
+2.  <!-- OPENDSA: START -->
+    It is composed of a series of *concrete steps*.
     Concrete means that the action described by that step is completely understood
     -- and doable -- by the person or machine that performs the algorithm.
     Each step must also be doable in a finite amount of time.
@@ -76,6 +85,7 @@ Something can only be called an algorithm if it has all of the following propert
     The ability to perform a step can depend on who or what is intended to execute the recipe.
     For example, the steps of a cookie recipe in a cookbook might be considered sufficiently concrete for instructing a human cook,
     but not for programming an automated cookie-making factory.
+    <!-- OPENDSA: END -->
 
 3.  There must be *no ambiguity* about which step is performed next.
     Typically, the next step follows directly from the algorithm's description.
@@ -84,9 +94,11 @@ Something can only be called an algorithm if it has all of the following propert
     Note that a random choice (such as acting on a coin flip) is unambiguous in this sense,
     because when we have tossed the coin we know what decision we will make.
 
-4.  It must be composed of a *finite* number of steps.
+4.  <!-- OPENDSA: START -->
+    It must be composed of a *finite* number of steps.
     If the description for the algorithm were made up of an infinite number of steps,
     we could never hope to write it down, nor implement it as a computer program.
+    <!-- OPENDSA: END -->
     To be able to specify complex algorithms in finite space,
     our algorithm description language (including English, Swedish and "pseudocode")
     must have some way of performing repeated actions in the form of loops or recursion.
@@ -118,21 +130,25 @@ The pseudocode version is somewhere in between the algorithm and an actual imple
 -- many of our algorithms will be presented in pseudocode like this,
 hoping that it will bridge the gap between the abstract algorithm and concrete implementations.
 
+<!-- OPENDSA: START -->
 The requirement that an algorithm must terminate means that not all computer programs implement an algorithm.
 Your operating system is one such program, as are most programs that interact with a user.
 However, you can think of the various tasks for an operating system
 (each with associated inputs and outputs) as individual problems,
 each one solved by a specific algorithm that terminates once its output is produced.
+<!-- OPENDSA: END -->
 
 In this book we try to describe algorithms and not programs,
 keeping them as abstract as possible, in pseudocode or plain English.
 We assume that you, the reader, is competent enough to be able to translate our descriptions and pseudocode into working programs in your favourite language.
 
+<!-- OPENDSA: START -->
 To summarise:
 A [problem]{.term} is a task to be performed, that maps inputs to matching outputs.
 An [algorithm]{.term} is a recipe for solving a problem whose steps are concrete and unambiguous.
 Algorithms must be correct, of finite length, and must terminate for all inputs.
 A [program]{.term} is an instantiation of an algorithm in a programming language.
+<!-- OPENDSA: END -->
 
 ::: TODO
 - Prio 3: this visualisation is really ugly

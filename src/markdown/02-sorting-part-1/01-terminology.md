@@ -16,6 +16,7 @@ The (key-based) *sorting problem* is to arrange the list into any order $s$ such
 
 ### Comparing algorithms
 
+<!-- OPENDSA: START -->
 When comparing two sorting algorithms, the simplest approach would be to
 program both and measure their running times. This is an example of
 *empirical comparison* (see @sec:empirical-analysis-and-code-tuning).
@@ -45,19 +46,24 @@ sorting a sequence of variable length strings) cannot expect all
 comparisons to cost roughly the same. Not only do such situations
 require special measures for analysis, they also will usually benefit
 from special-purpose sorting techniques.
+<!-- OPENDSA: END -->
 
 When analysing sorting algorithms we are most of the time interested in
 how they perform on very large arrays.
-But we can also have applications that require that a small number of records be sorted,
-but that the sort be performed frequently.
+But we can also have applications that
+<!-- OPENDSA: START -->
+require that a small number of records be sorted, but that the sort be performed frequently.
 An example would be an application that repeatedly sorts groups of five numbers.
+<!-- OPENDSA: END -->
 In such cases, the asymptotic analysis that we do for large arrays is usually of not much help.
 Instead it will be important to reduce the constant factors that are ignored by the analysis.
 Then we might very well find that the best algorithm can be one that performs very poorly on large arrays.
 
+<!-- OPENDSA: START -->
 Finally, some situations require that a sorting algorithm use as little
 memory as possible. We will call attention to sorting algorithms that
 require significant extra memory beyond the input array.
+<!-- OPENDSA: END -->
 
 ### Terminology
 
@@ -67,8 +73,10 @@ Stability
 :   Sometimes the array contains several elements that compare equal --
     for example, if we want to sort an array of books by author, it might contain several different books by the same author.
     Sometimes it is desirable to maintain the initial ordering between two elements that compare equal.
+    <!-- OPENDSA: START -->
     A sorting algorithm is said to be *stable* if it does not change the relative ordering of records with identical values.
     Many, but not all, of the sorting algorithms presented in this book are stable, or can be made stable with minor changes.
+    <!-- OPENDSA: END -->
 
 Adaptivity
 :   An *adaptive* sorting algorithm can take advantage of the existing order in the input.

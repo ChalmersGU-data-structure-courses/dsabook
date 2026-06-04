@@ -36,12 +36,14 @@ where the algorithm is modeled as a *recurrence relation*.
 
 Sequential search looks at every element in the array in the worst case, so its complexity is $O(n)$.
 This means that as $n$ grows, the $O(n)$ running time for sequential search
+<!-- OPENDSA: START -->
 quickly becomes much greater than the $O(\log(n))$ running time for binary search.
 Taken in isolation, binary search appears to be much more efficient than sequential search.
 This is despite the fact that the constant factor for binary search is greater
 than that for sequential search, because the calculation for the next
 search position in binary search is more expensive than just
 incrementing the current position, as sequential search does.
+<!-- OPENDSA: END -->
 
 However, binary search comes with a precondition:
 The array must be sorted, and sorting an array is a time-consuming operation

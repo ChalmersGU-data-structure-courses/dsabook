@@ -49,11 +49,13 @@ $2^n/20$                  $7$         $11$          $14$           $17$
 This table illustrates many important points.
 The two equations $n$ and $n/2$ are both *linear*; only the value of the constant factor has changed.
 In both cases, if we spend ten times more work we can solve a ten times larger problem.
+<!-- OPENDSA: START -->
 In other words, while the value of the constant does affect the absolute size of the problem
 that can be solved in a fixed amount of time,
 it does not affect the *improvement* in problem size (as a proportion to the original size).
 This relationship holds true regardless of the algorithm's growth rate:
 Constant factors never affect the relative improvement gained by working longer or faster.
+<!-- OPENDSA: END -->
 
 The first equation denotes a *logarithmic* growth rate, $T(n) = 2\cdot\log_2(n)$.
 It could for example be the time to find a book in your sorted bookshelf using binary search (@sec:binary-search).
@@ -147,7 +149,9 @@ We also see that exponential algorithms are prohibitively expensive for even mod
 Note that $a^n$ grows faster than $n^b$ for all constants $a,b>1$.
 
 Finally, @tbl:growth-rates shows the difference between the growth rates when $n$ becomes larger and larger.
+<!-- OPENDSA: START -->
 Once again, we see that the growth rate has a tremendous effect on the resources consumed by an algorithm.
+<!-- OPENDSA: END -->
 
 Growth rate              $n=10$               $100$              $1,000$          $10^4$       $10^5$
 ---------------------  --------  ------------------  -------------------  --------------  -----------

@@ -9,15 +9,19 @@
 
 If you have two algorithms that solves the same problem, how do you compare them in terms of efficiency?
 One way is to do an [empirical analysis]{.term}:
+<!-- OPENDSA: START -->
 implement both algorithms as computer programs and run them on a suitable range of inputs,
 measuring how much of the resources in question each program uses.
+<!-- OPENDSA: END -->
 
 This approach is often unsatisfactory, and there are two main reasons for that.
 First, testing can never cover all possible inputs and selecting good test cases is difficult.
 It's easy to forget to include some important types of tests,
 and this could unfairly favour one algorithm.
+<!-- OPENDSA: START -->
 Second, it is often the case that one of the programs was "better written" than the other,
 and therefore the qualities of the underlying algorithms are not truly represented by their implementations.
+<!-- OPENDSA: END -->
 
 These problems can often be avoided by using [asymptotic analysis]{.term}.
 The basic idea is to abstract away details so that we can measure
@@ -31,6 +35,7 @@ worth considering for implementation. -->
 
 ### What to measure
 
+<!-- OPENDSA: START -->
 The critical resource for a program is most often its running time.
 However, you cannot pay attention to running time alone. You must also
 be concerned with other factors such as the space required to run the
@@ -68,6 +73,7 @@ conditions. However, we have no way to calculate the running time
 reliably other than to run an implementation of the algorithm on some
 computer. The only alternative is to use some other measure as a
 surrogate for running time.
+<!-- OPENDSA: END -->
 
 In the end, asymptotic algorithm analysis can be phrased as the following question:
 
@@ -132,10 +138,12 @@ The most obvious is to count the number of *comparisons*, that is, the number of
 It is reasonable to assume that one such comparison takes a fixed amount of time,
 regardless of the values or their positions in the array, so it is a basic operation.
 
+<!-- OPENDSA: START -->
 Let us call $c$ the amount of time required to compare two integers in the function.
 We do not care what the precise value of $c$ might be.
 Nor are we concerned with the time required to increment
 variable $i$ because this must be done for each value in the array.
+<!-- OPENDSA: END -->
 We just want a reasonable approximation for the time taken to execute the algorithm.
 Now, the algorithm makes $n$ loop iterations, and since each comparison costs $c$,
 we can express the running time of the algorithm as:

@@ -37,16 +37,19 @@ When analysing your problem and the data, the following three questions can help
     or will you search for any kind of items at any time?
     Being able to search efficiently generally requires more complex data structures.
 
+<!-- OPENDSA: START -->
 Each data structure has associated costs and benefits. In practice, it
 is hardly ever true that one data structure is better than another for
 use in all situations.
 If one data structure or algorithm had been superior to another in all respects,
-the inferior one would already be long forgotten and we wouldn't discsuss it.
+the inferior one would already be long forgotten and we wouldn't discuss it.
+<!-- OPENDSA: END -->
 That being said, sometimes we will show an inferior data structure or algorithm,
 just because it is very simple -- and then we will show how to improve it.
 This is for example the case for Bubble sort, which is inferior to
 Selection sort and Insertion sort in all cases.
 
+<!-- OPENDSA: START -->
 A data structure requires a certain amount of space for each data item
 it stores, a certain amount of time to perform a single basic operation,
 and a certain amount of programming effort. Each problem has constraints
@@ -55,3 +58,4 @@ basic operations in some relative proportion, and the data structure
 selection process must account for this. Only after a careful analysis
 of your problem's characteristics can you determine the best data
 structure for the task.
+<!-- OPENDSA: END -->

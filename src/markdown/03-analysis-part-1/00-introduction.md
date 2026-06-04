@@ -6,6 +6,7 @@
 - Prio 1: is the bullet list fine?
 :::
 
+<!-- OPENDSA: START -->
 How long will a program take when I run it on a dataset ten times as
 large? If a particular program is slow, is it badly implemented or is it
 solving a hard problem? What order of improvement can I expect if I
@@ -52,3 +53,4 @@ The chapter concludes with a brief discussion of the practical
 difficulties encountered when empirically measuring the cost of a
 program, and some principles for code tuning to improve program
 efficiency.
+<!-- OPENDSA: END -->

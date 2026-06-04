@@ -33,6 +33,7 @@ Now imagine that the bookshelf is actually a whole library
 (the British Library has more than 200 million catalogued items).
 How long time will that take -- do I have to leave the computer running until tomorrow?
 
+<!-- OPENDSA: START -->
 Before we answer this we note that we do not really care exactly
 how long a particular program will run on a particular computer.
 We are more interested in some sort of estimate that will let us compare one approach with another.
@@ -40,6 +41,7 @@ This is the basic idea of [algorithm analysis]{.term}.
 
 In the case of sequential search, we see that if the value is in position $i$ of the array,
 then sequential search will have to look at $i$ values to find it.
+<!-- OPENDSA: END -->
 If the value is not in the array at all, then we must look at all array values
 -- this is the [worst case]{.term} of the algorithm.
 Since the amount of work is proportional to the size of the array,

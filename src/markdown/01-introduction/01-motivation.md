@@ -20,8 +20,10 @@ To organise our data we use different *data structures*,
 and to update or to analyse our data we use *algorithms* on these data structures.
 Therefore, it is impossible to know data structures without knowing algorithms, and the other way around.
 
+<!-- OPENDSA: START -->
 Representing information is fundamental to computer science.
 The primary purpose of most computer systems is not to perform calculations, but to store, update and retrieve information.
+<!-- OPENDSA: END -->
 Therefore, learning about data structures and algorithms is arguably the most important thing a programmer can do.
 You cannot say that you know how to program until you know at least the most basic data structures and algorithms.
 

@@ -7,6 +7,7 @@
 - Prio 2: Use better terms for the "Python/Java way"
 :::
 
+<!-- OPENDSA: START -->
 If we want to sort some things, we have to be able to compare them, to
 decide which one is bigger. How do we compare two things? If all that we
 wanted to sort or search for was simple integer values, this would not
@@ -35,6 +36,7 @@ we want in terms of a key value. For example, if searching for payroll
 records, we might wish to search for the record that matches a
 particular ID number. In this example the ID number is the
 [search key]{.term}.
+<!-- OPENDSA: END -->
 
 Finally, it is very often the case that we want to compare *virtual keys*,
 that is keys that are not explicitly stored in the record, but calculated on demand.

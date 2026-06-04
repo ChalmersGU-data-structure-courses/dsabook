@@ -49,7 +49,7 @@ plt2.set_title('Zoomed in')
 ```
 :::
 
-
+<!-- OPENDSA: START -->
 Despite the smaller constant for the quadratic curve labeled $n^2/10$ in the figure
 above, it crosses the linear curve $n/2$ at the relatively small value of $n = 5$.
 What if we double the value of the constant in front of the linear equation?
@@ -89,6 +89,7 @@ running time or other resource needs of an algorithm. This
 simplification usually helps you understand the behaviour of your
 algorithms. Just be aware of the limitations to asymptotic analysis in
 the rare situation where the constant is important.
+<!-- OPENDSA: END -->
 
 
 ### Orders of growth

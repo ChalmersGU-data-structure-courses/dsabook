@@ -1,6 +1,7 @@
 
 # Sorting, part 1 {#sorting-part-1}
 
+<!-- OPENDSA: START -->
 We have seen that, when an array is sorted in ascending order, *binary
 search* can be used to find items in it efficiently. But what about when
 we have a collection of data that is not in any order? If we will often
@@ -37,6 +38,7 @@ sorting algorithms of choice for most software libraries. After years of
 study, there are still unsolved problems related to sorting. New
 algorithms are still being developed and refined for special-purpose
 applications.
+<!-- OPENDSA: END -->
 
 ::: dsvis
 #### The sorting problem
@@ -47,6 +49,7 @@ applications.
 
 Sorting can be divided into two kinds depending on how we compare the items in the list:
 
+<!-- OPENDSA: START -->
 Natural sorting
 :   The items have some kind of natural order.
     For example, sorting a list of words in alphabetical order, or sorting a list of numbers.
@@ -60,6 +63,7 @@ E.g., if we want to sort a list of words case-insensitively, we can use a lower-
 This is usually done by a [comparator]{.term} (in Java), or by a [key function](https://docs.python.org/3/howto/sorting.html#key-functions) (in Python).
 
 The following chapters cover several standard algorithms appropriate for sorting a collection of records.
+<!-- OPENDSA: END -->
 In these chapters we concentrate on *natural sorting*, but all the algorithms work just as well for *key-based sorting* -- and we trust that you are a mature enough programmer to be able to infer how to do this.
 This chapter discusses three simple algorithms that work well on small arrays, and
 [Chapter @sec:sorting-part-2] presents two algorithms with considerably better performance on large arrays.

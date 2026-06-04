@@ -12,7 +12,9 @@ One natural way to do handle this is to look through the pile until you find the
 Then you look through the remaining pile until you find the second book
 (written by *Beskow*), and add that behind *Alakoski*.
 Then find the third book (by *Carlberg*), and add behind *Beskow*.
+<!-- OPENDSA: START -->
 Proceed through the shrinking pile of books to select the next one in order until you are done.
+<!-- OPENDSA: END -->
 This is the inspiration for our next sorting algorithm, called [Selection sort]{.term}.
 
 In the description above the books are not in the shelf from the start, which makes the algorithm not in-place.
@@ -34,8 +36,11 @@ Then repeat the following until the unsorted part is empty:
 :::
 
 The $i$'th pass of Selection sort "selects" the $i$'th smallest element in the array, placing it at position $i$ in the array.
+<!-- OPENDSA: START -->
 In other words, Selection sort first finds the smallest element in an unsorted list, then the next smallest, and so on.
-Its unique feature is that there are few swaps, much fewer than Bubble sort.
+Its unique feature is that there are few swaps,
+<!-- OPENDSA: END -->
+much fewer than Bubble sort.
 To find the next-smallest element we have to search through the entire unsorted portion of the array,
 but only one swap is required to put the element into place.
 The algorithm above can be implemented as follows in pseudocode:
@@ -53,8 +58,10 @@ Any algorithm can be written in slightly different ways.
 For example, we could have written Selection sort to
 find the largest element and put it at the end of the array, then the next smallest, and so on.
 That version of Selection sort would behave very similar to our Bubble sort implementation,
+<!-- OPENDSA: START -->
 except that rather than repeatedly swapping adjacent values to get the next-largest element into place,
 it instead remembers the position of the element to be selected and does one swap at the end.
+<!-- OPENDSA: END -->
 
 :::::::: online
 #### Selection sort visualisation

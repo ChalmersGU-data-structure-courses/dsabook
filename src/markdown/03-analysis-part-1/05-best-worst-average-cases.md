@@ -56,6 +56,7 @@ Here is an example where we reason about the Sequential search algorithm from @s
 ```
 :::
 
+<!-- OPENDSA: START -->
 When analysing an algorithm, should we study the best, worst, or average
 case? Normally we are not interested in the best case, because this
 might happen only rarely and generally is too optimistic for a fair
@@ -80,14 +81,16 @@ worst-case analysis might not be a representative measure of the
 algorithm's performance. Often we prefer to know the average-case
 running time. This means that we would like to know the *typical*
 behaviour of the algorithm on inputs of size $n$.
+<!-- OPENDSA: END -->
 
 ### The problem with average case
 
-Unfortunately,
-average-case analysis is not always possible. Average-case analysis
-first requires that we understand how the actual inputs to the program
-(and their costs) are distributed with respect to the set of all
-possible inputs to the program. For example, it was stated previously
+<!-- OPENDSA: START -->
+Unfortunately, average-case analysis is not always possible.
+Average-case analysis first requires that we understand how the actual inputs to the program
+(and their costs) are distributed with respect to the set of all possible inputs to the program.
+<!-- OPENDSA: END -->
+For example, it was stated previously
 that Insertion sort on average runs for half the number of iterations as the worst case.
 This is only true if every possible array is equally likely as input.
 This assumption is usually *not* correct for most applications where we need to sort values.
@@ -97,10 +100,12 @@ then the vast majority of arrays will never ever appear.
 How the data is distributed has a significant effect on
 almost all data structures and algorithms, such as those based on
 [hashing]{.term} and [binary search trees]{.term}.
+<!-- OPENDSA: START -->
 Incorrect assumptions about data distribution can have
 disastrous consequences on a program's space or time performance.
 Unusual data distributions can also be used to advantage, such as is
 done by [self-organising lists]{.term} and [splay trees]{.term}.
+<!-- OPENDSA: END -->
 
 Relying on average-case analysis can be very dangerous for all applications where you don't have full control over your data.
 For example, all kinds of databases that are publicly available are a risk.

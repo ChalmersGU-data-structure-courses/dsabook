@@ -7,8 +7,10 @@
 
 Bubble sort is often the first sorting algorithm that you learn, because it is relatively easy to understand and implement.
 However, it is rather slow, even compared to the other similar algorithms, Selection sort and Insertion sort.
+<!-- OPENDSA: START -->
 (It is not even particularly intuitive -- nobody is going to come naturally to Bubble sort as a way to sort their bookshelf,
 their Bridge hand or their pile of bills, like they might with Insertion sort or Selection sort.)
+<!-- OPENDSA: END -->
 
 ::: algorithm
 #### Algorithm: Bubble sort
@@ -27,11 +29,13 @@ This can be implemented as a simple nested `for`-loop.
 The inner loop moves through the array from left to right, comparing adjacent elements.
 If an element is greater than its right neighbour, then the two are swapped.
 Once the largest element is encountered, it will "bubble" up to the right of the array (hence the name, Bubble sort).
+<!-- OPENDSA: START -->
 The second pass through the array repeats this process.
 However, because we know that the largest element already reached the right of the array on the first pass,
 there is no need to compare the rightmost two elements on the second pass.
 Likewise, each succeeding pass through the array compares adjacent elements,
 looking at one less element toward the end than in the preceding pass.
+<!-- OPENDSA: END -->
 
     function bubbleSort(array):
         n = array.size

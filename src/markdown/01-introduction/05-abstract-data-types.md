@@ -32,6 +32,7 @@ For the example of stacks, here are some common auxiliary operations:
         size() -> Int   // Returns the number of elements on the stack
         peek() -> T     // Returns the top element, but does not remove it
 
+<!-- OPENDSA: START -->
 The concept of an ADT can help us to focus on key issues even in non-computing applications.
 
 ::: example
@@ -49,6 +50,7 @@ uniform method of operation that does not require the driver to
 understand the specifics of any particular engine or drive design. These
 differences are deliberately hidden.
 :::
+<!-- OPENDSA: END -->
 
 ### Choice of data structure
 
@@ -82,6 +84,8 @@ Hash tables are particularly efficient for exact-match queries, where you are lo
 On the other hand, B-trees are better suited for _range queries_, where you want to retrieve all records with keys within a certain interval.
 :::
 
+<!-- OPENDSA: START -->
+
 ### Abstract data types as metaphors
 
 The concept of an ADT is one instance of an important principle that must be understood by any successful computer scientist: managing complexity through abstraction.
@@ -112,6 +116,8 @@ think in terms of operations on the data type without concern for the
 data structure's implementation. Without this ability to simplify your
 thinking about a complex program, you would have no hope of
 understanding or implementing it.
+
+<!-- OPENDSA: END -->
 
 ### The core abstract data types
 

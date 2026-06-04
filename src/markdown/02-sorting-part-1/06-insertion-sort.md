@@ -29,9 +29,11 @@ Then repeat the following until the unsorted part is empty:
 
 :::
 
+<!-- OPENDSA: START -->
 Insertion sort iterates through a list of elements.
 For each iteration, the current element is inserted in turn
 at the correct position within a sorted list composed of those elements already processed.
+<!-- OPENDSA: END -->
 The algorithm above can be implemented as follows in pseudocode:
 
     function insertionSort(array):
@@ -104,13 +106,16 @@ And here is an explanation of the cost of the best case.
 :::
 
 While the best case is significantly faster than the worst case,
+<!-- OPENDSA: START -->
 the worst case is usually a more reliable indicator of the "typical" running time.
 However, there are situations where we can expect the input to be in sorted or nearly sorted order.
 One example is when an already sorted list is slightly disordered by a small number of additions to the list;
 restoring sorted order using Insertion sort might be a good idea if we know that the disordering is slight.
 So a "nearly sorted" list will always be cheap to sort with Insertion sort.
+<!-- OPENDSA: END -->
 An example of an algorithm that take advantage of the near-best-case running time of Insertion sort is [Shellsort]{.term}.
 
+<!-- OPENDSA: START -->
 Later we will see algorithms whose worst case growth rate is much better than quadratic.
 Thus for larger arrays, Insertion sort will not be so good a performer as other algorithms.
 So Insertion sort is not the best sorting algorithm to use in most situations.
@@ -119,5 +124,6 @@ We already know that Insertion sort works great when the input is sorted or near
 Another good time to use Insertion sort is when the array is very small, since the algorithm is so simple.
 The algorithms that have better asymptotic growth rates tend to be more complicated,
 meaning that they typically need fewer comparisons for larger arrays, but they cost more per comparison.
+<!-- OPENDSA: END -->
 One very common optimisation for these more complicated algorithms is to introduce a *cutoff*,
 so that when the array to be sorted is small eonugh we switch to Insertion sort (or Selection sort).

@@ -15,15 +15,19 @@ By "easily" we mean that there are some rules of thumb that covers almost all pr
 (1) **Transitivity**:
     If $f\in O(g)$ and $g\in O(h)$, then $f\in O(h)$.
     \
+    <!-- OPENDSA: START -->
     This first rule says that if some function $g(n)$ is an upper bound for your cost function,
     then any upper bound for $g(n)$ is also an upper bound for your cost function.
+    <!-- OPENDSA: END -->
     \
 
 (2) **Constant factor**:
     If $f\in O(g)$, then $k\cdot f\in O(g)$, for any constant $k>0$.
     \
+    <!-- OPENDSA: START -->
     The significance of this rule is that you can ignore any multiplicative constants
     in your equations when using big-$O$ notation.
+    <!-- OPENDSA: END -->
 
       - **Special case**: $O(k) = O(1)$ for all constants $k>0$
     \
@@ -31,9 +35,11 @@ By "easily" we mean that there are some rules of thumb that covers almost all pr
 (3) **Addition**:
     If $f\in O(g)$ and $f'\in O(g')$, then $f+f' \in O(\max(g,g'))$.
     \
+    <!-- OPENDSA: START -->
     This rule says that given two parts of a program run in sequence
     (whether two statements or two sections of code),
     you need consider only the more expensive part.
+    <!-- OPENDSA: END -->
 
       - **Special case**: if $f,f'\in O(g)$, then $f+f' \in O(g)$
     \
@@ -41,17 +47,21 @@ By "easily" we mean that there are some rules of thumb that covers almost all pr
 (4) **Multiplication**:
     If $f\in O(g)$ and $f'\in O(g')$, then $f\cdot f' \in O(g\cdot g')$
     \
+    <!-- OPENDSA: START -->
     The final rule is used to analyse simple loops in programs.
     If some action is repeated some number of times, and each repetition has the same cost,
     then the total cost is the cost of the action multiplied by
     the number of times that the action takes place.
+    <!-- OPENDSA: END -->
 
+<!-- OPENDSA: START -->
 Taking the first three rules collectively, you can ignore all constants and
 all lower-order terms to determine the asymptotic growth rate for any cost function.
 The advantages and dangers of ignoring constants were discussed in @sec:asymptotic-analysis.
 
 Ignoring lower-order terms is reasonable when performing an asymptotic analysis.
 The higher-order terms soon overpower the lower-order terms as $n$ becomes larger.
+<!-- OPENDSA: END -->
 Thus, if $f(n) = 3 n^4 + 5 n^2$, then $f(n)$ is in $O(n^4)$.
 The $n^2$ term contributes relatively little to the total cost for large $n$.
 
