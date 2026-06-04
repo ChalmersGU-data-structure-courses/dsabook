@@ -5,7 +5,7 @@
 - Prio 1: invariants
 - Prio 1: move "Complexity analysis" to common discussion section later
 - Prio 1: move "Queues as pairs of stacks" to common discussion section later
-- Prio 1: move "Case study: sorting linked list" to new Online Section
+- Prio 1: update figures
 :::
 
 A linked list is a kind of "distributed" data structure,
@@ -25,6 +25,7 @@ There are three [nodes]{.term} that are "linked" together.
 Each node contains a link to the next node in the list.
 Notice that the rightmost node does not have any outgoing link.
 
+::: online
 ```jsav-figure
 var av = NewAV();
 var l = av.ds.list({nodegap: 30});
@@ -33,6 +34,13 @@ l.layout();
 av.displayInit();
 av.recorded();
 ```
+:::
+
+::: latex
+```
+            [  |-]--> [   |-]--> [  |X]
+```
+:::
 
 With this organisation there is no easy way of knowing the total number of nodes,
 which means that the list has to store its size in a separate variable.
@@ -78,6 +86,7 @@ would be to iterate through the whole stack which takes time.
 
 Here is a visual representation for a linked stack.
 
+::: online
 ```jsav-figure
 var AV = NewAV();
 var l = AV.ds.list({nodegap: 30, top: 40, left: 250});
@@ -87,6 +96,15 @@ AV.pointer("top", l.get(0));
 AV.displayInit();
 AV.recorded();
 ```
+:::
+
+::: latex
+```
+     top
+      ↓
+    [ 20 |-]--> [ 23 |-]--> [ 8 |-]--> [ 12 |-]--> [ 15 |X]
+```
+:::
 
 #### Pushing and popping
 
@@ -178,6 +196,12 @@ When it comes to queues we also use a different terminology than for stacks
 and the last element is called the *rear* (instead of "bottom").
 
 ::: latex
+```
+    front                               rear
+      ↓                                  ↓
+    [ 42 |-]--> [ 5 |-]--> [ 10 |-]--> [ 25 |X]
+```
+<!--
 ```jsav-figure
 var AV = NewAV();
 var l = AV.ds.list({nodegap: 30, top: 40, left: 250});
@@ -188,6 +212,7 @@ AV.pointer("rear", l.get(3), {anchor:"right top", myAnchor:"left bottom", left:-
 AV.displayInit();
 AV.recorded();
 ```
+-->
 :::
 
 ::: dsvis

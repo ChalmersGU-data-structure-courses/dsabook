@@ -4,6 +4,7 @@
 ::: TODO
 - Prio 1: merge with previous section?
 - Prio 1: update pseudocode
+- Prio 1: update figures
 - Prio 3: extend text
 - Prio 3: look over the text for space requirements (file 03b)
 :::
@@ -29,8 +30,9 @@ but rather a whole subtree (since it contains its children).
 @Fig:bintree_with_pointers is an illustration of how the tree from @fig:example_bintree looks in memory,
 with child pointers shown explicitly.
 
-::: {.jsav-figure #fig:bintree_with_pointers}
-``` {latex-zoom=0.8}
+::: {#fig:bintree_with_pointers}
+:::: online
+```jsav-figure
 var AV = NewAV();
 AddCSS(`.jsavcanvas {width: 600px}`)
 AV.ds.array([" ", "A", " "], {left: 180});
@@ -84,6 +86,19 @@ AV.g.line(485, 140, 515, 170, {"stroke-width": 2, "arrow-end": "classic-wide-lon
 AV.displayInit();
 AV.recorded();
 ```
+::::
+
+:::: latex
+```
+             __________[ | A | ]__________
+            ↓                             ↓
+        [/| B | ]__               __[ | C | ]__
+                   ↓             ↓             ↓
+               [/| D |/]   __[ | E |/]   __[ | F | ]__
+                           ↓             ↓             ↓
+                       [/| G |/]     [/| H |/]     [/| I |/]
+```
+::::
 
 Illustration of a typical pointer-based binary tree implementation, where each node stores two child pointers and a value.
 The empty cells are null values.
@@ -148,8 +163,9 @@ the child pointers. But it seems wasteful to store child pointers in the
 leaf nodes. Thus, there are many reasons why it can save space to have
 separate implementations for internal and leaf nodes.
 
-::: {.jsav-figure #fig:expression_tree}
-```
+::: {#fig:expression_tree}
+:::: online
+```jsav-figure
 var AV = NewAV();
 AddCSS(`.internalnode {
   border-radius: 50px;
@@ -216,6 +232,19 @@ AV.g.line(475, 220, 475, 260, {"stroke-width": 2, "arrow-end": "classic-wide-lon
 AV.displayInit();
 AV.recorded();
 ```
+::::
+
+:::: latex
+```
+                 ______[ | - | ]______
+                ↓                     ↓
+          _____[ | * | ]_____       ( c )
+         ↓                   ↓
+     [ | * | ]         __[ | + | ]__
+     ↓       ↓         ↓            ↓
+   ( 4 )   ( x )   [/| G |/]      ( a )
+```
+::::
 
 An example of an expression tree for $4x(2x + a) - c$
 :::

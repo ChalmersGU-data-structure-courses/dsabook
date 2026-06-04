@@ -2,6 +2,7 @@
 ## Binary trees
 
 ::: TODO
+- Prio 1: update figures
 - Prio 2: update section, here's what should be included:
     - General trees
     - Binary trees
@@ -14,19 +15,19 @@
 - Prio 2: merge quizzes (files 01q, 01q2), perhaps move to another section?
 :::
 
-A very common type of trees are *binary* trees. 
-A binary tree is either empty (no nodes), or is a root node with a value and exactly two children (hence binary) that are also binary trees. 
-The children of a node has a specific order, so every node has a 
+A very common type of trees are *binary* trees.
+A binary tree is either empty (no nodes), or is a root node with a value and exactly two children (hence binary) that are also binary trees.
+The children of a node has a specific order, so every node has a
 left and a right child.
 
 Sometimes binary trees are described as having at most two children, but that is unwieldy because there is a difference between having a right and a left child. When you see trees drawn as the on on the left below, it is important to understand that it is actually as on the right, with the black dots showing empty trees.
 
 ![](images/Trees-BinaryTreeWithNulls.svg){width=70%}
 
-A node with no children (or more correctly, with only empty children) is 
-called a *leaf*. Non-leaf nodes are sometimes called *inner* nodes, 
-or *branches*. 
-In the illustration above, the nodes containing 5 and 6 are leaves. 
+A node with no children (or more correctly, with only empty children) is
+called a *leaf*. Non-leaf nodes are sometimes called *inner* nodes,
+or *branches*.
+In the illustration above, the nodes containing 5 and 6 are leaves.
 
 ![An example of a binary tree with nodes labeled by letters.](images/Trees-BinaryTreeExample.svg){width=60% #fig:example_bintree}
 
@@ -37,10 +38,10 @@ In the illustration above, the nodes containing 5 and 6 are leaves.
 
 ### Binary trees are recursive data structures
 
-There are many ways to implement data structures, but the most 
-common one is a recursive data type that mimics the formal definition: 
-A binary tree is either empty (represented by null), 
-or it is a node with a left and a right child (that can also be null). 
+There are many ways to implement data structures, but the most
+common one is a recursive data type that mimics the formal definition:
+A binary tree is either empty (represented by null),
+or it is a node with a left and a right child (that can also be null).
 
     datatype BinaryNode of T:
         value: T           // Element for this node.
@@ -51,9 +52,9 @@ You may notice that this data type looks very similar to linked lists, the only 
 
 A [recursive data structure]{.term} is a data
 structure that is partially composed of smaller or simpler instances of
-the same data structure. 
+the same data structure.
 [Linked lists](#linked-list){.term} and
-[binary trees](#binary-tree){.term} are both recursive data structures. 
+[binary trees](#binary-tree){.term} are both recursive data structures.
 
 ::: dsvis
 The recursive relationships used to define a structure provide a natural
@@ -104,8 +105,9 @@ full but not complete while the tree (b) is complete but not full.
 The [binary heap]{.term} (@sec:binary-heaps) is an example of a complete binary tree.
 The [Huffman coding tree]{.term} (@sec:huffman-coding) is an example of a full binary tree.
 
-::: {.jsav-figure #fig:full_complete_bintrees}
-```
+::: {#fig:full_complete_bintrees}
+:::: online
+```jsav-figure
 var AV = NewAV();
 AddCSS(`.jsavnode.jsavtreenode {
   min-width: 10px;
@@ -152,6 +154,22 @@ AV.label("(b)", {left: btRight + 115, top: btTop + 135});
 AV.displayInit();
 AV.recorded();
 ```
+::::
+
+:::: latex
+```
+            o                     ____ o ____
+           / \                   /           \
+          o   o                o               o
+         / \                 /   \           /   \
+        o   o              o       o       o       o
+           / \            / \     / \     /
+          o   o          o   o   o   o   o
+
+           (a)                        (b)
+```
+::::
+
 Examples of full and complete binary trees:
 (a) is full but not complete; (b) is complete but not full
 :::
@@ -167,7 +185,7 @@ complete binary trees tend to be wider than full binary trees
 because each level of a complete binary tree is as wide as possible.
 :::
 
-<!-- 
+<!--
 
 A [binary tree]{.term} is made up of a finite
 set of elements called [nodes]{.term}.

@@ -3,6 +3,7 @@
 
 ::: TODO
 - Prio 1: invariants
+- Prio 1: update figures
 :::
 
 In the last section we showed how to implement stacks and queues using linked lists.
@@ -117,6 +118,7 @@ taken from one stack and given to the other. If instead both stacks grow
 at the same time, then the free space in the middle of the array will be
 exhausted quickly.
 
+:::: online
 ```jsav-figure
 var AV = NewAV();
 var leftMarg = 180;
@@ -141,6 +143,15 @@ AV.g.line(leftMarg + 356, topMarg + 16, leftMarg + 356 - 35, topMarg + 16,
 AV.displayInit();
 AV.recorded();
 ```
+::::
+
+:::: latex
+```
+         top1                                     top2
+          ↓                                        ↓
+    [   |   |   --->                       <---   |   |   |   |   ]
+```
+::::
 :::
 
 

@@ -4,6 +4,7 @@
 ::: TODO
 - Prio 1: reduce the lines of code
 - Prio 1: move complexity analysis to separate section for the whole chapter
+- Prio 1: update figures
 :::
 
 Both sets and maps can be implemented using simple linked lists.
@@ -11,6 +12,8 @@ For a set, we can use a simple list of elements.
 
 Recall from @sec:stacks-implemented-as-linked-lists that a linked list consists of nodes pointing to their successors:
 
+
+::: online
 ```jsav-figure
 var av = NewAV();
 var l = av.ds.list({nodegap: 30});
@@ -19,6 +22,13 @@ l.layout();
 av.displayInit();
 av.recorded();
 ```
+:::
+
+::: latex
+```
+[  |-]--> [   |-]--> [  |X]
+```
+:::
 
 Now we have to implement the methods *contains*, *add*, and *remove*, and this is straightforward:
 

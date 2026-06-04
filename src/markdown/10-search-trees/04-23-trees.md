@@ -3,6 +3,8 @@
 ::: TODO
 - Prio 1: move subsection about B+ trees to new online section
 - Prio 1: split into two sections? 2-3 trees and B trees
+- Prio 1: update figures
+- Prio 1: show R/B tree that correponds to the 234-tree
 :::
 
 AVL trees do not ensure that a tree is perfectly balanced --
@@ -30,9 +32,22 @@ Here is an example of a 2-3 tree.
 In this tree, the root is a 3-node: it has two values (18 and 32) and three children.
 The left child of the root is a 2-node containing the key 12.
 
-::: {.jsav-figure #fig:TTexample}
-``` {src="Indexing/twoThreedgmCON.js" scripts="Indexing/twoThreeTreeCON.js" links="Indexing/twoThreeTreeCON.css"}
+::: {#fig:TTexample}
+:::: online
+```jsav-figure {src="Indexing/twoThreedgmCON.js" scripts="Indexing/twoThreeTreeCON.js" links="Indexing/twoThreeTreeCON.css"}
 ```
+::::
+
+:::: latex
+```
+                _________________ [ 18 | 32 ] _________________
+               /                       |                       \
+        [ 12 ]                    [ 23 | 30 ]                    [ 48 ]
+       /      \                 /      |     \                  /      \
+   [ 10 ]    [ 15 ]    [ 20 | 21 ]   [ 24 ]   [ 31 ]    [ 45 | 47 ]    [ 50 | 52 ]
+```
+::::
+
 An example of a 2-3 tree.
 :::
 
@@ -225,11 +240,23 @@ but on the other hand deleting elements is slightly more efficient than for AVL 
 There is even a translation from 2-3 trees into a subclass of red-black trees,
 the so called *left-leaning* red-black trees (or right-leaning, which are equivalent).
 
-::: {.jsav-figure #fig:BTexample}
-``` {src="Indexing/BTreedgmCON.js" scripts="Indexing/BTreeCON.js" links="Indexing/BTreeCON.css"}
+::: {#fig:BTexample}
+:::: online
+```jsav-figure {src="Indexing/BTreedgmCON.js" scripts="Indexing/BTreeCON.js" links="Indexing/BTreeCON.css"}
 ```
+::::
+
+:::: latex
+```
+                           _________ [ 24 ] _________
+                          /                          \
+               [ 15 | 20 ]                            [ 33 | 45 | 48 ]
+              /     |     \                         /      |    |      \
+   [ 10 | 12 ]    [ 18 ]   [ 21 | 23 ]   [ 30 | 30 ]   [ 38 ]  [ 47 ]   [ 50 | 52 | 60 ]
+```
+::::
+
 An example 2-3-4 tree -- each node contains up to three keys, and internal nodes have up to four children.
-(TODO: show the corresponding red-black tree.)
 :::
 
 

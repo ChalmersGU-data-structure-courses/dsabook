@@ -2,6 +2,7 @@
 ## Binary heaps
 
 ::: TODO
+- Prio 1: update figures
 - Prio 1: remove some code (replace with text)
 - Prio 1: move subsection "Building a heap" to a separate online section (together with Heapsort)
 :::
@@ -34,8 +35,9 @@ This systematic numbering ensures that a node’s position in the array directly
 As a result, the indices of a node’s parent and children can be computed easily using simple arithmetic.
 @Fig:example_complete_bintree illustrates this scheme with a complete binary tree containing 12 nodes.
 
-::: {.jsav-figure #fig:example_complete_bintree}
-```
+::: {#fig:example_complete_bintree}
+:::: online
+```jsav-figure
 let av = NewAV();
 let bt = av.ds.binarytree({nodegap: 25});
 let rt = bt.root("0");
@@ -54,6 +56,20 @@ bt.layout();
 av.displayInit();
 av.recorded();
 ```
+::::
+
+:::: latex
+```
+                                  ___ 0 ___
+                                /           \
+                              1               2
+                            /   \           /   \
+                          3       4       5       6
+                         / \     / \     /
+                        7   8   9  10   11
+```
+::::
+
 Complete binary tree node numbering.
 :::
 
@@ -63,8 +79,9 @@ In other words, the nodes of the tree are stored in the array level by level, wi
 
 Consider the binary heap shown in @fig:HeapTreeExample:
 
-::: {.jsav-figure #fig:HeapTreeExample}
-```
+::: {#fig:HeapTreeExample}
+:::: online
+```jsav-figure
 let av = NewAV();
 let bt = av.ds.binarytree({nodegap: 25});
 let rt = bt.root("8");
@@ -83,14 +100,29 @@ bt.layout();
 av.displayInit();
 av.recorded();
 ```
+::::
+
+:::: latex
+```
+                        ________ 8 ________
+                       /                   \
+                    17                       12
+                 /      \                 /      \
+              33         [28]          43          15
+             /  \        /  \         /
+           34    87    75    47     47
+```
+::::
+
 An example binary heap, where a smaller value indicates a higher priority.
 The node containing the value "28" is highlighted, its parent has the value "17" and the children are "75" and "47".
 :::
 
 This tree can be stored in an array as shown in @fig:HeapArrayExample:
 
-::: {.jsav-figure #fig:HeapArrayExample}
-```
+::: {#fig:HeapArrayExample}
+:::: online
+```jsav-figure
 var av = NewAV();
 AddCSS(`.jsavpointerarea {border: none; background-color: transparent}`);
 var theArray = ["8", "17", "12", "33", "28", "43", "15", "34", "87", "75", "47", "47"];
@@ -104,6 +136,16 @@ console.log(arr);
 av.displayInit();
 av.recorded();
 ```
+::::
+
+:::: latex
+```
+            parent           NODE               leftchild  rightchild
+               ↓              ↓                        ↓    ↓
+        [  8 | 17 | 12 | 33 | 28 | 43 | 15 | 34 | 87 | 75 | 47 | 47 ]
+```
+::::
+
 Array representation of the example heap in @fig:HeapTreeExample.
 The highlighted node "28" is highlighted here too, and the parent, and left and right children are indicated.
 :::
@@ -278,8 +320,9 @@ Let us illustrate this using the heap from @fig:HeapTreeExample.
 If we insert the value 10, we must first place it at the next free position, so that the tree remains complete.
 For clarity, we show the heap as a tree, but you should keep in mind that it is actually stored as an array.
 
-::: {.jsav-figure #fig:HeapInsert10Step1}
-```
+::: {#fig:HeapInsert10Step1}
+:::: online
+```jsav-figure
 let av = NewAV();
 let bt = av.ds.binarytree({nodegap: 25});
 let rt = bt.root("8");
@@ -299,11 +342,26 @@ bt.layout();
 av.displayInit();
 av.recorded();
 ```
+::::
+
+:::: latex
+```
+                        ________ 8 ________
+                       /                   \
+                    17                       12
+                 /      \                 /      \
+              33          28           43          15
+             /  \        /  \         /  \
+           34    87    75    47     47   [10]
+```
+::::
+
 After inserting 10, we place it at the next free position, shown here as the right child of 43.
 :::
 
-::: {.jsav-figure #fig:HeapInsert10Step2}
-```
+::: {#fig:HeapInsert10Step2}
+:::: online
+```jsav-figure
 let av = NewAV();
 let bt = av.ds.binarytree({nodegap: 25});
 let rt = bt.root("8");
@@ -323,11 +381,26 @@ bt.layout();
 av.displayInit();
 av.recorded();
 ```
+::::
+
+:::: latex
+```
+                        ________ 8 ________
+                       /                   \
+                    17                       12
+                 /      \                 /      \
+              33          28          [10]         15
+             /  \        /  \         /  \
+           34    87    75    47     47    43
+```
+::::
+
 Since 10 is smaller than its parent 43, the two elements swap positions.
 :::
 
-::: {.jsav-figure #fig:HeapInsert10Step3}
-```
+::: {#fig:HeapInsert10Step3}
+:::: online
+```jsav-figure
 let av = NewAV();
 let bt = av.ds.binarytree({nodegap: 25});
 let rt = bt.root("8");
@@ -347,6 +420,20 @@ bt.layout();
 av.displayInit();
 av.recorded();
 ```
+::::
+
+:::: latex
+```
+                        ________ 8 ________
+                       /                   \
+                    17                      [10]
+                 /      \                 /      \
+              33          28           12          15
+             /  \        /  \         /  \
+           34    87    75    47     47    43
+```
+::::
+
 The value 10 is still smaller than its new parent 12, so we swap once more.
 Now 10 has parent 8, which is smaller, so the insertion is complete.
 :::

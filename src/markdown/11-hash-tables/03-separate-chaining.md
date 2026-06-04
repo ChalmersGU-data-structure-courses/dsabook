@@ -3,6 +3,7 @@
 
 ::: TODO
 - Prio 1: reduce some code clutter in Implementation and Resizing
+- Prio 1: update figures
 - Prio 2:
     - Discuss: Load factor, what is a good LF?
     - Discuss: When to resize
@@ -26,9 +27,27 @@ table to be the head of a linked list. All records that hash to a
 particular slot are placed on that slot's linked list.
 @Fig:openhashCON illustrates a separate chaining hash table.
 
-::: {.jsav-figure #fig:openhashCON}
-``` {src="Hashing/openhashCON.js" links="Hashing/openhashCON.css"}
+::: {#fig:openhashCON}
+:::: online
+```sjav-figure {src="Hashing/openhashCON.js" links="Hashing/openhashCON.css"}
 ```
+::::
+
+:::: latex
+```
+    0  [-]--> [ 100 |-]--> [ 930 |X]
+    1  [ ]
+    2  [ ]
+    3  [-]--> [ 313 |X]
+    4  [ ]
+    5  [ ]
+    6  [ ]
+    7  [-]--> [ 977 |-]--> [ 207 |-]--> [ 157 |X]
+    8  [ ]
+    9  [-]--> [ 979 |X]
+```
+::::
+
 A hash table where each slot points to a linked list to hold the records associated with that slot.
 The hash function used is the simple modulus function.
 :::
