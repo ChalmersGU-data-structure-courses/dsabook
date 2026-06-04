@@ -6,41 +6,41 @@
 - Prio 1: add use cases
 :::
 
-<!-- OPENDSA: START -->
+<!-- NICSMA: START -->
 Many programming tasks involve *finding the right piece of information*
 in a large dataset.
 That is, we have a collection of items, and we want to quickly retrieve the items matching certain criteria.
 Here are some examples of information retrieval problems:
-<!-- OPENDSA: END -->
+<!-- NICSMA: END -->
 
 Spell-checking
-:   <!-- OPENDSA: START -->
+:   <!-- NICSMA: START -->
     Given a set containing all valid English words,
     check if a given string is present in the set (that is, if is a valid word).
-    <!-- OPENDSA: END -->
+    <!-- NICSMA: END -->
 
 Cash register
 :   Given a database of all items for sale in a supermarket,
     find information about the item with a given *EAN code*.
 
 Search engine
-:   <!-- OPENDSA: START -->
+:   <!-- NICSMA: START -->
     Given a collection of documents (such as, web pages),
     find all documents containing a given word.
-    <!-- OPENDSA: END -->
+    <!-- NICSMA: END -->
 
 Between X and Y
-:   <!-- OPENDSA: START -->
+:   <!-- NICSMA: START -->
     Given a list of all Swedish towns and their populations,
     are there any towns whose population is between 5,000 and 10,000?
-    <!-- OPENDSA: START -->
+    <!-- NICSMA: START -->
     And if so, which are these towns?
 
 These problems can all be addressed using two abstract data types (ADTs):  the *set* and the *map*.
 Both provide efficient ways to manage a collection of elements,
 supporting operations to find, add, and remove elements.
 
-<!-- OPENDSA: START -->
+<!-- NICSMA: START -->
 Sets and maps are useful in a huge variety of computer programs, and are
 perhaps the most useful of all data structures. But how can we design a
 class that implements a set or a map, in such a way that adding,
@@ -65,7 +65,7 @@ several different ways of implementing sets and maps.
 
 Search trees and hash tables are the main ways that sets and maps are implemented in practice.
 Almost every programming language provides sets and maps as a built-in feature, based on one of these technologies.
-<!-- OPENDSA: END -->
+<!-- NICSMA: END -->
 For example, Java's
 [HashSet](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/HashSet.html),
 [HashMap](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/HashMap.html),

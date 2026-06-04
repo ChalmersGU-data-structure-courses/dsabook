@@ -6,7 +6,7 @@
 - Prio 2: add a better & shorter version of the top-100 example
 :::
 
-<!-- OPENDSA: START -->
+<!-- NICSMA: START -->
 So far we have seen two [ADTs](#adt){.term} that
 represent a collection of objects, and support adding and removing
 objects:
@@ -17,6 +17,9 @@ objects:
 -   [Queues](#queue){.term}, where the object
     removed is always the one *first* inserted ([FIFO]{.term}).
 
+<!-- NICSMA: END -->
+
+<!-- OPENDSA: START -->
 There are many situations, both in real life and in computing
 applications, where we wish to choose the next "most important" from a
 collection of people, tasks, or objects. For example, doctors in a
@@ -27,7 +30,9 @@ there might be several programs (usually called
 [jobs]{.term}) ready to run. The next job
 selected is the one with the highest [priority]{.term}. Priority is indicated by a particular value associated
 with the job (and might change while the job remains in the wait list).
+<!-- OPENDSA: END -->
 
+<!-- NICSMA: END -->
 When a collection of objects is organised by importance or priority, we
 call this a [priority queue]{.term}. A priority
 queue supports the following operations:
@@ -35,9 +40,11 @@ queue supports the following operations:
 -   adding a new object to the priority queue
 -   removing the *smallest* object from the priority queue.
 
+<!-- NICSMA: END -->
 
 ### ADT for priority queues
 
+<!-- NICSMA: START -->
 In [Chapter @sec:heaps], we will see how to implement a priority queue so that
 both adding and removing the minimum take $O(\log(n))$ time.
 
@@ -51,7 +58,7 @@ in *ascending* order. There is also the possibility of ordering in
 descending order -- that kind of queue is called a *maximum priority
 queue*. If you have a minimum priority queue, it's straightforward to
 turn it into a maximum priority queue.
-<!-- OPENDSA: END -->
+<!-- NICSMA: END -->
 
 <!--
 ### Invariants
@@ -66,7 +73,7 @@ Now let's look at a couple of applications of priority queues.
 ::: example
 #### Example: Sorting
 
-<!-- OPENDSA: START -->
+<!-- NICSMA: START -->
 We can use a priority queue to make an efficient sorting algorithm. To
 sort a list of items:
 
@@ -75,7 +82,7 @@ sort a list of items:
     come out in ascending order.
 
 Here is an implementation of this algorithm in code:
-<!-- OPENDSA: END -->
+<!-- NICSMA: END -->
 
     function pqSort(arr):
         pq = new PriorityQueue()
@@ -84,13 +91,13 @@ Here is an implementation of this algorithm in code:
         for i in 0 .. arr.size-1:
             arr[i] = pq.removeMin()
 
-<!-- OPENDSA: START -->
+<!-- NICSMA: START -->
 What is the time complexity of this algorithm? Well, for an input list
 of size $n$, the algorithm calls `add` $n$ times and `removeMin` $n$
 times. In a binary heap, `add` and `removeMin` both take $O(\log(n))$
 time. Therefore, the total runtime is $O(n \log(n))$ -- as efficient as
 any of the sorting algorithms we have seen so far!
-<!-- OPENDSA: END -->
+<!-- NICSMA: END -->
 :::
 
 <!--

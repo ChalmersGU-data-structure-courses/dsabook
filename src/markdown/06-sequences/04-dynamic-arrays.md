@@ -74,10 +74,10 @@ How about increasing the capacity with 1000 elements, every time the array behom
             size = size + 1
 
 Suppose that we want to push $n$ values to an empty stack (where $n$ is much larger than 1000).
-<!-- OPENDSA: START -->
+<!-- NICSMA: START -->
 How many times does an array element get copied from the internal array to the new array
 (that is, how many times will the statement `internalArray[i]=oldArray[i]` be executed)?
-<!-- OPENDSA: END -->
+<!-- NICSMA: END -->
 Every 1000'th time the internal array becomes full and we need to resize it, so we get the following internal resizings:
 
 ----------------------  --------- ---------- ---------
@@ -95,11 +95,11 @@ $$
 = n(n-1)/500 \in O(n^2)
 $$
 
-<!-- OPENDSA: START -->
+<!-- NICSMA: START -->
 This means that the program takes *quadratic* time, $O(n^2)$, not linear!
 Suppose for example that $n$ is 1 million.
 Using the formula above, the number of times an array element gets copied is around 500 million
-<!-- OPENDSA: END -->
+<!-- NICSMA: END -->
 -- it copies on average 500 elements for every push to the stack.
 This is of course not acceptable.
 
@@ -109,14 +109,14 @@ and the complexity of pushing $n$ to the stack will still be quadratic, $O(n^2)
 
 ### Doubling the size
 
-<!-- OPENDSA: START -->
+<!-- NICSMA: START -->
 One way to think about the problem is this:
 as the array gets bigger, resizing it gets more expensive.
 So, to make up for that, when the array is bigger we need to grow it by *more*,
 so that we don't have to resize as often.
 One way to do this is to always *double* the array size when it gets full.
 This turns out to work well!
-<!-- OPENDSA: END -->
+<!-- NICSMA: END -->
 
 Suppose that we again push 1 million elements onto an empty stack.
 As before we start with a capacity of 1000 elements.
@@ -133,25 +133,25 @@ When will `resizeArray` be called, and how many elements get copied each time?
 `resizeArray(1,024,000)`     copying   $512,000$   elements
 -------------------------  --------- ------------- ---------
 
-<!-- OPENDSA: START -->
+<!-- NICSMA: START -->
 You can see that the array gets resized a whole lot at the beginning --
 but as it gets bigger, it gets resized less and less often.
 We can read off how many elements get copied:
-<!-- OPENDSA: END -->
+<!-- NICSMA: END -->
 
 $$ 1,000 + 2,000 + \cdots + 256,000 + 512,000 = 1,023,000 $$
 
 Compare this with the previous version where we increased the capacity with 1000 elements every time:
 then we needed to copy 500 million elements, but now we only need to copy 1 million.
 
-<!-- OPENDSA: START -->
+<!-- NICSMA: START -->
 Let us now generalise to an arbitrary $n$.
 The worst case is when the final *push* has to resize the array
 -- that happens when $n$ is one more than a power of two times 1000, $n-1 = 1000\cdot 2^k$.
 In that case, the final call to `resizeArray` grows the array
 from $1000\cdot 2^k$ to $1000\cdot 2^{k+1}$, copying $1000\cdot 2^k$ elements.
 The total number of elements copied is therefore:
-<!-- OPENDSA: END -->
+<!-- NICSMA: END -->
 
 $$
 1000\cdot (2^0 + 2^1 + 2^2 + \cdots + 2^k)
@@ -181,7 +181,7 @@ Dynamic arrays -- addition.
 
 ### Multiplying by any factor
 
-<!-- OPENDSA: START -->
+<!-- NICSMA: START -->
 What happens if we instead grow the array by 50%?
 In fact, it still works out fine - the program takes linear time to run.
 To see this, you can use the same argument as above, but instead of using the formula
@@ -208,7 +208,7 @@ when adding many elements, this guarantees that we only have
 a constant factor of performance overhead due to occasional resizing.
 We can choose a large factor (such as 2) if we want fast performance,
 or a low factor (such as 1.2) if we want to save memory.
-<!-- OPENDSA: END -->
+<!-- NICSMA: END -->
 
 For example, the Java standard library has the class ArrayList which is a dynamic array
 -- it grows by 50% each time (multiplies by $\frac{3}{2}$).
@@ -218,11 +218,9 @@ This means that they have to grow more often but on the other hand they do not u
 
 ### Resizing an array-based queue
 
-<!-- OPENDSA: START -->
 When we resize the internal array, we cannot keep the positions of the elements.
 If the queue is wrapped around (that is, if *rear* < *front*)
 then we might end up in a large gap in the middle of the queue.
-<!-- OPENDSA: END -->
 For example, the following queue consists of 7 elements,
 where T was the element most recently added and A is the one that has waited the longest:
 
@@ -239,11 +237,9 @@ But now we have to be a little careful when copying over the elements to the new
 
 ![](images/CircularQueue3.png)
 
-<!-- OPENDSA: START -->
 Instead we reset the *front* and *rear* pointers so that we copy
 the first queue element to position 0 of the new array,
 the second to position 1, and so on.
-<!-- OPENDSA: END -->
 This will lead to the following resized array:
 
 ![](images/CircularQueue4.png)
@@ -285,7 +281,7 @@ Consider the following sequence of additions and deletions:
 
 If we are unlucky and the array is full just before the sequence starts,
 then the first push will have to resize the array.
-<!-- OPENDSA: START -->
+<!-- NICSMA: START -->
 Then when we pop that element, the list becomes less than half-full, and we have to resize again.
 Then the next push will resize, and the next pop will also resize.
 And so on...
@@ -298,7 +294,7 @@ The solution is to wait even longer until we shrink the internal array!
 For example, we can shrink the array (that is, halve it), when it is only 1/3 full.
 Note that the factors 1/3 and 1/2 are not important, as explained earlier.
 The only thing that matters is that the minimum load factor (1/3) is *smaller* than the shrinking factor (1/2).
-<!-- OPENDSA: END -->
+<!-- NICSMA: END -->
 
 In summary, to get a dynamically shrinking stack (or queue),
 we can add the following lines right before the end of the *pop* or *dequeue* methods:
@@ -336,10 +332,8 @@ In particular, if you must implement a stack or a queue for some task, which imp
 
 #### Time complexity
 
-<!-- OPENDSA: START -->
 All the basic operations for the array-based and linked list implementations take constant time,
 so from a time efficiency perspective, neither has a significant advantage.
-<!-- OPENDSA: END -->
 
 Array-based lists are usually slightly faster because they can make use of
 the internal memory cache that modern computers have, but it depends on many factors
@@ -362,15 +356,20 @@ space whether they are simple integers or large objects with many
 fields. Any container data structure like a stack, a queue or a list then requires some
 additional space to organise the elements being stored.
 This additional space is called [overhead]{.term}.
+<!-- OPENDSA: END -->
 
 -   Array-based lists have the disadvantage that the *capacity* of the internal array
     is larger than the actual size of the list.
-    When the array has recently been reallocated, a substantial amount of space
-    might be tied up in a largely empty array.
+    When the array has recently been reallocated,
+    <!-- OPENDSA: START -->
+    a substantial amount of space might be tied up in a largely empty array.
     This empty space is the overhead required by the array-based list.
+    <!-- OPENDSA: END -->
 
--   Linked lists on the other hand have the advantage that they only need space
+-   <!-- OPENDSA: START -->
+    Linked lists on the other hand have the advantage that they only need space
     for the objects actually on the list.
+    <!-- OPENDSA: END -->
     However, each list node needs to allocate memory for the pointer to the next node,
     and all of these pointers combined is the overhead required by the array-based list.
 
@@ -385,11 +384,14 @@ takes up $c$ bytes, the full array-based list will use at least $Cn$
 bytes, and at most $3cn$ bytes.
 
 So, which one is the best? It depends on the size $k$ of the list nodes,
-compared to the size $c$ of the array cells. Array-based lists have the
+compared to the size $c$ of the array cells.
+<!-- OPENDSA: START -->
+Array-based lists have the
 advantage that there is no wasted space for an individual element.
 Linked lists require that an extra pointer for the *next* field be added
-to every list node. So the linked list has these *next* pointers as
-overhead. In many cases, $k$ is 2--3 times as large as $c$, so they will
+to every list node. So the linked list has these *next* pointers as overhead.
+<!-- OPENDSA: END -->
+In many cases, $k$ is 2--3 times as large as $c$, so they will
 be quite similar in size on average. But this depends on the programming
 language, the operating system, and perhaps other factors.
 
@@ -397,4 +399,4 @@ Note that these calculations exclude the memory used by the actual list
 elements, since the lists themselves only contain pointers to the
 elements! And in many cases, the objects themselves are much larger than
 the list nodes (or array cells).
-<!-- OPENDSA: END -->
+

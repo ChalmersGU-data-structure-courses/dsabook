@@ -20,23 +20,23 @@ The first example range query is:
 -   Given a list of all Swedish towns and their populations,
     are there any towns whose population is between 5,000 and 10,000?
 
-<!-- OPENDSA: START -->
+<!-- NICSMA: START -->
 One way to solve this problem would be to use a normal set of city populations.
 Then we could find the answer to our query by making a sequence of calls to `contains`:
-<!-- OPENDSA: END -->
+<!-- NICSMA: END -->
 
 - `contains(5000)` -- is there a town with population 5,000?
 - `contains(5001)` -- is there a town with population 5,001?
 - `contains(5002)` -- is there a town with population 5,002?
 - etc.
 
-<!-- OPENDSA: START -->
+<!-- NICSMA: START -->
 But this is not a sensible approach.
 We would need to make up to 5,000 calls to `contains`, and if we wanted to instead find if there are any cities in Europe having a population of between 1 and 2 million, we would need to up to 1,000,000 calls.
 
 There is a better way.
 If the populations are stored in a sorted array, we can use the following algorithm:
-<!-- OPENDSA: END -->
+<!-- NICSMA: END -->
 
 - Find the position in the array of the *first* town with a population of *at least* 5,000.
   (This can be done efficiently using [binary search].)
@@ -104,10 +104,10 @@ Instead, we can store the towns in an array which is sorted by population, and t
 - Now return all towns between those two positions in the array.
 
 The operation that is needed is:
-<!-- OPENDSA: START -->
+<!-- NICSMA: START -->
 given a map, find all items whose key lies within a given range.
 And in addition to these range queries, sorted maps support similar operations as we introduced for sorted sets.
-<!-- OPENDSA: END -->
+<!-- NICSMA: END -->
 
 Here is a possible interface for sorted maps, which extends the normal map interface.
 Note the similarity to the interface for sorted sets.
