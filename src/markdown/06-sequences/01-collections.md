@@ -33,6 +33,7 @@ This means that whenever we have a stack we know that we can use the methods
 
 ### What is a sequence?
 
+<!-- OPENDSA: START -->
 We all have an intuitive understanding of what we mean by a "list".
 We want to turn this intuitive understanding into a concrete data structure with implementations for its operations.
 The most important concept related to lists is that of [position]{.term}.
@@ -55,3 +56,4 @@ A list is said to be *empty* when it contains no elements.
 The number of elements currently stored is called the *length* or *size*,
 the beginning of the list is called the *head*, *top*, or *front*,
 and the end of the list is called the *tail*, *bottom*, *rear*, or *back*.
+<!-- OPENDSA: END -->

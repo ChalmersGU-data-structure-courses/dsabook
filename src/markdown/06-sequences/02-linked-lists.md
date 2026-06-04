@@ -18,10 +18,12 @@ the only thing a single person knows is who is standing behind them.
 A person can never know where in the line they stand, and when it is their turn.
 And the main "controller" of the list can only see the first person in the line.
 
+<!-- OPENDSA: START -->
 A linked list uses [dynamic memory allocation]{.term}, that is,
 it allocates memory for new list elements as needed.
 The following diagram illustrates the linked list concept.
 There are three [nodes]{.term} that are "linked" together.
+<!-- OPENDSA: END -->
 Each node contains a link to the next node in the list.
 Notice that the rightmost node does not have any outgoing link.
 
@@ -47,8 +49,10 @@ which means that the list has to store its size in a separate variable.
 
 ### Linked list nodes
 
+<!-- OPENDSA: START -->
 Because a list node is a distinct object (as opposed to simply a cell in an array),
 it is good practice to make a separate data type for list nodes.
+<!-- OPENDSA: END -->
 Each list node is a "wrapper" around an element,
 which means that it contains a reference to its underlying *value*.
 In addition it has a pointer to the *next* node in the list.

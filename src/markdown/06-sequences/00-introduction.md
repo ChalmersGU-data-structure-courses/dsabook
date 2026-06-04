@@ -6,16 +6,20 @@
 :::
 
 If your program needs to store a small number of things
+<!-- OPENDSA: START -->
 -- numbers, payroll records, or job descriptions for example
 -- the simplest and most effective approach might be to put them in a list.
+<!-- OPENDSA: END -->
 More sophisticated data structures such as [search trees](#search-tree){.term} or [hash tables]{.term}
 only become necessary when you have to organise and search through a large number of things.
+<!-- OPENDSA: START -->
 Many algorithms do not require any form of search, and
 they do not require that an ordering be placed on the objects being stored.
 Some algorithms require that actions be performed in a strict chronological order,
 processing objects in the order that they arrived,
 or perhaps processing objects in the reverse of the order that they arrived.
 For all these situations, a simple list structure is appropriate.
+<!-- OPENDSA: END -->
 
 This chapter describes two different representations lists-like data structures,
 the [linked list]{.term} and the [dynamic array]{.term}.

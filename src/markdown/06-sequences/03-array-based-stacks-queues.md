@@ -29,7 +29,9 @@ In this example the underlying array has an internal size of 1000:
 Note that 1000 is the internal *capacity* of the stack, it is not the actual size.
 When the stack is created it should be empty, and therefore the initial stack size is 0.
 
+<!-- OPENDSA: START -->
 The important design decision to be made is which end of the array should represent the top of the stack.
+<!-- OPENDSA: END -->
 It might be tempting to let the top be the first element in the array, i.e., the element at position 0.
 However, this is inefficient:
 whenever we want to push to or pop from the stack,
@@ -108,6 +110,7 @@ Here is a proficiency exercise about popping from array-based stacks.
 ::: example
 #### Example: Implementing two stacks using one array
 
+<!-- OPENDSA: START -->
 If you need to use two stacks at the same time, you can take advantage
 of the one-way growth of the array-based stack by using a single array
 to store two stacks. One stack grows inward from each end, hopefully leading to less wasted space.
@@ -117,6 +120,7 @@ other will shrink. This is particularly effective when elements are
 taken from one stack and given to the other. If instead both stacks grow
 at the same time, then the free space in the middle of the array will be
 exhausted quickly.
+<!-- OPENDSA: END -->
 
 :::: online
 ```jsav-figure
@@ -157,8 +161,10 @@ AV.recorded();
 
 ### Array-based queues
 
+<!-- OPENDSA: START -->
 An array-based queue is somewhat tricky to implement effectively.
 A simple conversion of the array-based stack is not efficient:
+<!-- OPENDSA: END -->
 
 -   If we let the queue front be the same as the stack top -- that is, the last element in the array --
     then we can easily enqueue new elements by simply moving the front pointer.
@@ -251,12 +257,16 @@ Circular array queue -- empty.
 ```
 :::
 
+<!-- OPENDSA: START -->
 One obvious solution is to keep an explicit count of the number of elements in the queue,
+<!-- OPENDSA: END -->
 that is, to use a special *size* variable.
 Another solution is to set *front* and *rear* to some unused number (such as $-1$) whenever the queue becomes empty.
+<!-- OPENDSA: START -->
 Which of these solutions to adopt is purely a matter of the implementor's taste in such affairs.
 Our choice here is to keep an explicit count of the number of elements, in a variable *size*,
 because this will make the code more similar to our other implementations.
+<!-- OPENDSA: END -->
 
     datatype ArrayQueue implements Queue:
         internalArray = new Array(1000)    // Internal array containing the queue elements.
@@ -274,7 +284,9 @@ we have to use $(i+1)\bmod n$ (where $n$ is the size of the array).
 
 #### Enqueueing and dequeueing
 
+<!-- OPENDSA: START -->
 When enqueueing, we increase the *rear* pointer (modulo the size of the internal array).
+<!-- OPENDSA: END -->
 
     datatype ArrayQueue:
         ...
@@ -283,7 +295,9 @@ When enqueueing, we increase the *rear* pointer (modulo the size of the internal
             internalArray[rear] = x
             size = size + 1
 
+<!-- OPENDSA: START -->
 When dequeueing, we increase the *front* pointer (modulo the size of the internal array).
+<!-- OPENDSA: END -->
 Just as for array-based stacks, we have to clear the array cell that was dequeued,
 because otherwise it will never be garbage collecter.
 
