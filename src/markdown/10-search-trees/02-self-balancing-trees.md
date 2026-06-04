@@ -26,12 +26,14 @@ Unfortunately, we cannot use the most obvious invariant -- that the tree must be
 The reason for this is that it costs too much to maintain this invariant,
 for example, @fig:rebalanceBST shows that we might need to reorganise the tree completely after each insertion.
 
+<!-- OPENDSA: START -->
 ![An attempt to re-balance a BST after insertion can be expensive. (a) A
 BST with six nodes in the shape of a complete binary tree. (b) A node
 with value 1 is inserted into the BST of (a). To maintain both the
 complete binary tree shape and the BST property, a major reorganisation
 of the tree is required.
 ](images/BSTBal.png){width=60% #fig:rebalanceBST}
+<!-- OPENDSA: END -->
 
 Instead we need to a find weaker balance invariant, and there are lots of different possibilities.
 For example, in @sec:AVL-trees we introduce the perhaps most famous of all self-balancing trees, the AVL tree,

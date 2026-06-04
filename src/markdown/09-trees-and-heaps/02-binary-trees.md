@@ -88,6 +88,7 @@ Here is a visual explanation of the same idea.
 
 ### Full and complete binary trees
 
+<!-- OPENDSA: START -->
 Two restricted forms of binary tree are sufficiently important to
 warrant special names. Each node in a
 [full binary tree](#full-tree){.term} is either
@@ -97,10 +98,14 @@ shape obtained by starting at the root and filling the tree by levels
 from left to right. In the complete binary tree of height $d$, all
 levels except possibly level $d$ are completely full. The bottom level
 has its nodes filled in from the left side.
+<!-- OPENDSA: END -->
 
+<!-- OPENDSA: START -->
 @Fig:full_complete_bintrees below illustrates
 the differences between full and complete binary trees. There is no
-particular relationship between these two tree shapes; that is, the tree (a) is
+particular relationship between these two tree shapes;
+<!-- OPENDSA: END -->
+that is, the tree (a) is
 full but not complete while the tree (b) is complete but not full.
 The [binary heap]{.term} (@sec:binary-heaps) is an example of a complete binary tree.
 The [Huffman coding tree]{.term} (@sec:huffman-coding) is an example of a full binary tree.
@@ -174,6 +179,7 @@ Examples of full and complete binary trees:
 (a) is full but not complete; (b) is complete but not full
 :::
 
+<!-- OPENDSA: START -->
 ::: note
 *Note*: While these definitions for full and complete binary tree are the
 ones most commonly used, they are not universal. Because the common
@@ -184,6 +190,7 @@ might find useful: "Complete" is a wider word than "full", and
 complete binary trees tend to be wider than full binary trees
 because each level of a complete binary tree is as wide as possible.
 :::
+<!-- OPENDSA: END -->
 
 <!--
 

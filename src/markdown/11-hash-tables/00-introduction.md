@@ -11,6 +11,7 @@
     - see hash table slides
 :::
 
+<!-- OPENDSA: START -->
 Hashing is a method for storing and retrieving records from a database.
 It lets you insert, delete, and search for records based on a search key
 value. When properly implemented, these operations can be performed in
@@ -53,6 +54,7 @@ to hashing and it is easy to devise an inefficient implementation.
 Hashing is suitable for both in-memory and disk-based searching and is
 one of the two most widely used methods for organising large databases
 stored on disk (the other is the [B-tree]{.term}).
+<!-- OPENDSA: END -->
 
 ::: dsvis
 #### Simple hashing example
@@ -66,6 +68,7 @@ is $\mathbf{h}(k) = k$. To find the record with key value $k$, look in *HT*[$k$]
 ```
 :::
 
+<!-- OPENDSA: START -->
 In most applications, there are many more values in the key range than
 there are slots in the hash table. For a more realistic example, suppose
 the key can take any value in the range 0 to 65,535 (i.e., the key is a
@@ -87,3 +90,5 @@ follows a two-step procedure:
 2.  Starting with slot $\mathbf{h}(k)$, locate the record containing key
     $k$ using (if necessary) a
     [collision resolution]{.term} policy.
+
+<!-- OPENDSA: END -->

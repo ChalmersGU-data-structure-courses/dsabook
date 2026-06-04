@@ -356,14 +356,17 @@ and this is the topic of the next section.
 
 ### Guided information flow
 
+<!-- OPENDSA: START -->
 When writing a recursive method to solve a problem that requires
 traversing a binary tree, we want to make sure that we are visiting the
 required nodes (no more and no less).
+<!-- OPENDSA: END -->
 
 In @sec:traversing-a-binary-tree we saw several tree traversals that visited every node of the tree,
 such as depth-first and breadth-first search.
 In this section we have also discussed searching, adding and removing in a BST,
 which each go down a single path of the tree.
+<!-- OPENDSA: START -->
 *Guided traversal* refers to problems that do not require visiting every node in the tree,
 though they typically require looking at more than one path through the tree.
 This means that the recursive function is making some decision at each node
@@ -379,6 +382,7 @@ A bad solution to this problem would visit every node of the tree.
 However, we can take advantage of the BST invariant to avoid visiting unnecessary nodes.
 You know that the values greater than the root are always in the right subtree,
 and those values less than the root are in the left subtree.
+<!-- OPENDSA: END -->
 Therefore, we do not have to visit the left subtree at all
 if the node value is smaller than the minimum value in the range.
 And, conversely, we do not have to visit the right subtree if the node is larger than the range maximum.

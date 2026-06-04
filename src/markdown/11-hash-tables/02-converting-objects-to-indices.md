@@ -68,6 +68,7 @@ Assume that we have an integer hash table of sixteen slots -- then the combined 
     function hash(n):
         return n % 16
 
+<!-- OPENDSA: START -->
 Note that the values 0 to 15 can be represented with four bits (i.e.,
 0000 to 1111). The value returned by this hash function depends solely
 on the least significant four bits of the key. Because these bits are
@@ -75,18 +76,21 @@ likely to be poorly distributed (as an example, a high percentage of the
 keys might be even numbers, which means that the low order bit is zero),
 the result will also be poorly distributed. This example shows that the
 size of the table $m$ can have a big effect on the performance of a hash system.
+<!-- OPENDSA: END -->
 
 One way to get a better distribution is to always let the size $m$ of the internal array be a prime number.
 
 
 ### Negative hash codes
 
+<!-- OPENDSA: START -->
 However, in general integers are signed, so the method
 `hashCode()` might return a negative integer. If we take this modulo
 $m$, we might get a negative result. A negative index is not suitable as
 a table index, so first we have to make the hash code positive.
 
 One way to do this is to mask off the sign bit.
+<!-- OPENDSA: END -->
 Most programming languages use integers in the range $-2^{31}\leq h<2^{31}$.
 In these cases we can e.g. use `h & 0x7fffffff` to make the hash code positive.
 
@@ -97,6 +101,7 @@ In these cases we can e.g. use `h & 0x7fffffff` to make the hash code positive.
 
 ### The hash code never changes
 
+<!-- OPENDSA: START -->
 The generic hash codes should never change, because hashing must be
 predictable. Therefore we don't have to recalculate the hash code when
 we resize the internal table, it is only the table indices that have to
@@ -105,10 +110,12 @@ be updated.
 One implication of this is that it's only meaningful to calculate hash
 codes for *immutable objects*, i.e., objects that don't change (after
 they are initialised).
+<!-- OPENDSA: END -->
 Many programming languages make a difference between *tuples* and *lists*, where the latter are *mutable*.
 This means that we can add elements to and remove from lists, but we cannot do that with tuples.
 Once the tuple is initialised we cannot change it -- and therefore we can use a tuple as an object in a hash table.
 
+<!-- OPENDSA: START -->
 Python uses this fact to optimise their built-in hash tables by storing
 the hash codes together with the keys and values. This increases the
 size of the table slightly, but on the other hand it ensures that hash
@@ -117,6 +124,7 @@ codes are not calculated more than once.
 In Java, the optimisation is delegated to the object classes themselves.
 E.g., a Java string only calculates its hash code once and then stores
 it in an instance variable for immediate lookup.
+<!-- OPENDSA: END -->
 
 <!--
 ### Invariants

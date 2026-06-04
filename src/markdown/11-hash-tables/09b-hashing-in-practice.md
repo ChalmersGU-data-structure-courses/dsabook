@@ -5,6 +5,8 @@
 - Prio 1: update text
 :::
 
+<!-- OPENDSA: START -->
+
 A properly tuned hashing system will return records with an
 average cost of less than two record accesses. This makes it a very
 effective way known to store a database of records to support
@@ -88,3 +90,5 @@ Note that this would not be improved by using an open addressing hash
 table, because then we would get a primary cluster with $2^k$ strings.
 
 ::::::
+
+<!-- OPENDSA: END -->

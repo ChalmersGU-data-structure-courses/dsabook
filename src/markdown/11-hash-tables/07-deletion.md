@@ -5,6 +5,7 @@
 - Prio 2: update text
 :::
 
+<!-- OPENDSA: START -->
 When deleting records from a hash table, there are two important
 considerations.
 
@@ -78,6 +79,7 @@ Note that since we are using a dynamic array when implementing hash
 tables, this can be viewed as a version of the second solution above
 (because all tombstones will be removed when the internal array is
 resized).
+<!-- OPENDSA: END -->
 
 ### Simple implementation of deletion
 
@@ -102,11 +104,13 @@ instead set the value to `null`. This will make the slot a tombstone.
                 if loadFactor() < MIN_LOAD_FACTOR:
                     resizeTable(keys.size * MULTIPLIER)
 
+<!-- OPENDSA: START -->
 The current code has one problem: Adding new entries will never make use
 of the tombstones, but will only insert into completely empty slots. It
 is possible to fix this by implementing a sligthly different version of
 `hashAndProbe`, which will only be used by the `put` method. This is
 left as an exercise to the reader.
+<!-- OPENDSA: END -->
 
 ### Two load factors
 
@@ -127,6 +131,7 @@ To make deletion work properly together with resizing, we have to keep track of 
         tombstones = 0
 
 
+<!-- OPENDSA: START -->
 When we have tombstones in our table, there are two possible ways of
 thinking about the load factor -- depending on if we want to include
 the tombstones or not. And both variants are useful!
@@ -136,6 +141,8 @@ the tombstones or not. And both variants are useful!
     (where $n$ is the number of occupied slots and $d$ the number of tombstones).
 -   When deleting elements, we need to know if there are too few
     occupied slots, giving the load factor $n / m$.
+
+<!-- OPENDSA: END -->
 
 All this combined result in slightly more complicated code for our methods.
 E.g., when deleting a key/value pair -- or rather, turning the slot into a tombstone -- we have to decrease the `size` variable, but we also have to increase the variable `tombstones`.

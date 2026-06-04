@@ -9,6 +9,7 @@ There are three traditional
 [tree traversals]{.tree} for [binary trees](#binary-tree){.term}:
 [preorder](#preorder-traversal){.term}, [postorder](#postorder-traversal){.term},
 and [inorder](#inorder-traversal){.term} (see @sec:traversing-binary-trees).
+<!-- OPENDSA: START -->
 For general trees, preorder and postorder traversals are
 defined with meanings similar to their binary tree counterparts.
 Preorder traversal of a general tree first visits the root of the tree,
@@ -35,6 +36,7 @@ children for a given node (say $r$) from left to right. This is
 accomplished by starting at $r$'s leftmost child (call it $T$). From $T$,
 we can move to $T$'s right sibling, and then to that node's right
 sibling, and so on.
+<!-- OPENDSA: END -->
 
 ::: dsvis
 Visualisation of postorder traversal.

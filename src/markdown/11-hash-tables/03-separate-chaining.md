@@ -9,6 +9,7 @@
     - Discuss: When to resize
 :::
 
+<!-- OPENDSA: START -->
 While the goal of a hash function is to minimise collisions, some
 collisions are unavoidable in practice. Thus, hashing implementations
 must include some form of collision resolution policy. Collision
@@ -26,6 +27,7 @@ The simplest form of separate chaining defines each slot in the hash
 table to be the head of a linked list. All records that hash to a
 particular slot are placed on that slot's linked list.
 @Fig:openhashCON illustrates a separate chaining hash table.
+<!-- OPENDSA: END -->
 
 ::: {#fig:openhashCON}
 :::: online
@@ -52,6 +54,7 @@ A hash table where each slot points to a linked list to hold the records associa
 The hash function used is the simple modulus function.
 :::
 
+<!-- OPENDSA: START -->
 Records within a slot's list can be ordered in several ways: by
 insertion order, by key value order, or by frequency-of-access order.
 Ordering the list by key value provides an advantage in the case of an
@@ -125,6 +128,7 @@ If $m$ is always proportional to the number of entries, *and* if we have
 a good hash function, the number of elements in a bin will remain
 approximately constant. And then all operations will be expected
 constant time.
+<!-- OPENDSA: END -->
 
 ### Implementation
 
@@ -189,9 +193,11 @@ Here is how we can do this:
 
 Recall from the dynamic arrays that we have to *multiply* by a factor (the `MULTIPLIER`) when resizing the table, not adding a constant.
 
+<!-- OPENDSA: START -->
 When we resize the internal table, it is very important that we *do not keep* the old hash indices for the keys, because they will not be the same after resizing.
 Instead we save the current internal table to a temporary variable, and reinitialise the table to the new capacity.
 Then we iterate through all bins and entries in the old table, and simply insert them again into the new resized table.
+<!-- OPENDSA: END -->
 
     datatype SeparateChainingHashTable:
         ...

@@ -11,6 +11,7 @@
     - not random, but random-like
 :::
 
+<!-- OPENDSA: START -->
 Hashing generally takes records whose key values come from a large range
 and stores those records in a table with a relatively small number of
 slots. Collisions occur when two records hash to the same slot in the
@@ -29,6 +30,7 @@ their birthday is similar to assigning records to slots in a table (of
 size 365) using the birthday as a hash function. Note that this
 observation tells us nothing about *which* students share a birthday, or
 on *which* days of the year shared birthdays fall.
+<!-- OPENDSA: END -->
 
 ::: dsvis
 #### Example: Birthday calculator
@@ -48,6 +50,7 @@ Now you can use the calculator to answer the following questions.
 ```
 :::
 
+<!-- OPENDSA: START -->
 To be practical, a database organised by hashing must store records in a
 hash table that is not so large that it wastes space. To balance time
 and space efficiency, this means that the hash table should be
@@ -114,6 +117,8 @@ When designing hash functions, we are generally faced with one of two situations
     table slot. For example, if hashing English words, we should *not*
     hash on the value of the first character because this is likely to
     be unevenly distributed.
+
+<!-- OPENDSA: END -->
 
 In the rest of this section, and in @sec:better-hash-functions, you will see several examples of hash functions that illustrate these points.
 

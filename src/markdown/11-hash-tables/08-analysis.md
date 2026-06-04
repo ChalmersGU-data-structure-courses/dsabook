@@ -7,6 +7,8 @@
 - Prio 3: for open addressing: discuss clustering
 :::
 
+<!-- OPENDSA: START -->
+
 How efficient is hashing? We can measure hashing performance in terms of
 the number of record accesses required when performing an operation. The
 primary operations of concern are insertion, deletion, and search. It is
@@ -122,3 +124,5 @@ comparison of hashing alternatives. Instead, the purpose was to analyse
 the proper loading factor that would be used in an efficient hashing
 system to balance time cost versus hash table size (space cost).
 -->
+
+<!-- OPENDSA: END -->

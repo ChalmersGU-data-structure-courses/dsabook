@@ -6,6 +6,7 @@
 - Prio 2: add a better & shorter version of the top-100 example
 :::
 
+<!-- OPENDSA: START -->
 So far we have seen two [ADTs](#adt){.term} that
 represent a collection of objects, and support adding and removing
 objects:
@@ -50,6 +51,7 @@ in *ascending* order. There is also the possibility of ordering in
 descending order -- that kind of queue is called a *maximum priority
 queue*. If you have a minimum priority queue, it's straightforward to
 turn it into a maximum priority queue.
+<!-- OPENDSA: END -->
 
 <!--
 ### Invariants
@@ -64,6 +66,7 @@ Now let's look at a couple of applications of priority queues.
 ::: example
 #### Example: Sorting
 
+<!-- OPENDSA: START -->
 We can use a priority queue to make an efficient sorting algorithm. To
 sort a list of items:
 
@@ -72,6 +75,7 @@ sort a list of items:
     come out in ascending order.
 
 Here is an implementation of this algorithm in code:
+<!-- OPENDSA: END -->
 
     function pqSort(arr):
         pq = new PriorityQueue()
@@ -80,11 +84,13 @@ Here is an implementation of this algorithm in code:
         for i in 0 .. arr.size-1:
             arr[i] = pq.removeMin()
 
+<!-- OPENDSA: START -->
 What is the time complexity of this algorithm? Well, for an input list
 of size $n$, the algorithm calls `add` $n$ times and `removeMin` $n$
 times. In a binary heap, `add` and `removeMin` both take $O(\log(n))$
 time. Therefore, the total runtime is $O(n \log(n))$ -- as efficient as
 any of the sorting algorithms we have seen so far!
+<!-- OPENDSA: END -->
 :::
 
 <!--

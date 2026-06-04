@@ -9,12 +9,14 @@
 - Prio 3: look over the text for space requirements (file 03b)
 :::
 
+<!-- OPENDSA: START -->
 In this section we examine one way to implement binary tree nodes. By
 definition, all binary tree nodes have two children, though one or both
 children can be empty. Binary tree nodes typically contain a value
 field, with the type of the field depending on the application. The most
 common node implementation includes a value field and pointers to the
 two children.
+<!-- OPENDSA: END -->
 
 Here is a simple implementation for binary tree nodes, which can store one single element in each node.
 Every `BinaryNode` object also has two pointers, one to its left child and another to its right child.
@@ -106,6 +108,7 @@ The empty cells are null values.
 
 It is easy to extend this `BinaryNode` for various applications,
 for instance by including more data in nodes.
+<!-- OPENDSA: START -->
 Some programmers find it convenient to add a pointer to the node's
 parent, allowing easy upward movement in the tree. Using a parent
 pointer is somewhat analogous to adding a link to the previous node in a
@@ -116,6 +119,7 @@ importantly, many uses of the parent pointer are driven by improper
 understanding of recursion and so indicate poor programming. If you are
 inclined toward using a parent pointer, consider if there is a more
 efficient implementation possible.
+<!-- OPENDSA: END -->
 
 Here is an example of programming using the type defined above.
 It computes the height of a tree.
@@ -145,6 +149,7 @@ and we can include meta-data such as the total size of the tree:
 
 ### Differentiating between internal nodes and leaves
 
+<!-- OPENDSA: START -->
 An important decision in the design of a pointer-based node
 implementation is whether the same class definition will be used for
 [leaves](#leaf-node){.term} and
@@ -162,6 +167,7 @@ implementation for both internal and leaf nodes, then both must store
 the child pointers. But it seems wasteful to store child pointers in the
 leaf nodes. Thus, there are many reasons why it can save space to have
 separate implementations for internal and leaf nodes.
+<!-- OPENDSA: END -->
 
 ::: {#fig:expression_tree}
 :::: online
@@ -249,6 +255,7 @@ AV.recorded();
 An example of an expression tree for $4x(2x + a) - c$
 :::
 
+<!-- OPENDSA: START -->
 As an example of a tree that stores different information at the leaf
 and internal nodes, consider the expression tree illustrated by @fig:expression_tree.
 The expression tree
@@ -269,6 +276,7 @@ store child pointers.
 allow us to differentiate leaf from internal nodes through
 the use of a [class hierarchy]{.term}. A [base class]{.term} provides a general
 definition for an object, and a [subclass]{.term} modifies the base class to add more detail.
+<!-- OPENDSA: END -->
 We will not discuss further how to implement different kind of tree nodes
 more in this book, but will just assume that all nodes are of the same class.
 

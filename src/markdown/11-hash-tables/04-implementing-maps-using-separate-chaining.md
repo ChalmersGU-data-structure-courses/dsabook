@@ -14,7 +14,9 @@ First we show how to implement a *hash set*, an then we discuss how to extend th
 A separate chaining hash set consists of an internal array `table` of sets.
 We don't have to specify what kind of sets, as long as it supports the basic set methods.
 Usually it's perfectly fine to use a very simple linked list and not something more fancy.
+<!-- OPENDSA: START -->
 To initialise the table, we first create the internal array of some initial minimum capacity:
+<!-- OPENDSA: END -->
 
     datatype SeparateChainingHashSet implements Set:
         table: Array of Sets
@@ -52,8 +54,11 @@ To see if the set contains a given element, we look it up in the corresponding b
 #### Adding an element
 
 To add an element we add it to the bin where it should belong.
-If the size of the bin changed, we know that the key wasn't in the bin previously, and then we know that the number of elements have increased.
+If the size of the bin changed, we know that the key wasn't in the bin previously,
+<!-- OPENDSA: START -->
+and then we know that the number of elements have increased.
 We also have to check if the load factor becomes too large, and then we resize the internal table.
+<!-- OPENDSA: END -->
 
     datatype SeparateChainingHashSet:
         ...
@@ -68,9 +73,11 @@ We also have to check if the load factor becomes too large, and then we resize t
 
 #### Removing an element
 
+<!-- OPENDSA: START -->
 To remove a value, we do the same: find the underlying bin and remove the value.
 If we actually removed the element (i.e., if it existed in the bin), then we decrease the total size.
 We also check if the table becomes too sparse, and then decrease the internal table by a factor.
+<!-- OPENDSA: END -->
 
     datatype SeparateChainingHashSet:
         ...
@@ -92,12 +99,15 @@ The load factor is simply the total number of elements divided by the number of 
         loadFactor():
             return size / table.size
 
+<!-- OPENDSA: START -->
 The constants for min and max load factors, and the resizing factor, are
 a bit arbitrary. With the following values, we ensure that the table on
 average contains between 0.5 and 2 entries per table index. Increasing
 these values leads to more better memory usage, but also more conflicts
 (i.e., longer search times). Also, we enlarge by 50%, or reduce by 33%,
-each time we resize the table. Increasing this value means that resizing
+each time we resize the table.
+<!-- OPENDSA: END -->
+Increasing this value means that resizing
 will happen less often, but instead the memory usage will increase.
 
     datatype SeparateChainingHashSet:

@@ -8,7 +8,9 @@
 
 An open addressing hash set consists of an internal array `table` of elements.
 Apart from the special value `null`, denoting an empty slot, the table must also allow the special value `DELETED`, denoting a slot that has been deleted.
+<!-- OPENDSA: START -->
 To initialise the table, we first create the internal array of some initial minimum capacity:
+<!-- OPENDSA: END -->
 
     datatype OpenAddressingHashSet implements Set:
         table = new Array(MIN_CAPACITY)
@@ -43,8 +45,10 @@ If the load factor is too large, then we resize the internal table -- which was 
 
 Deleting from an open addressing hash table was explained briefly in the last section and we will go into more details in the next section.
 
+<!-- OPENDSA: START -->
 We use the same constants as for the separate chaining hash table, but the values are different.
 Most importantly, the max load factor must be smaller than 1, since there can only be one value per array slot.
+<!-- OPENDSA: END -->
 
     datatype OpenAddressingHashSet:
         ...
@@ -55,10 +59,12 @@ Most importantly, the max load factor must be smaller than 1, since there can on
 
 ### Resizing
 
+<!-- OPENDSA: START -->
 When we resize the internal table, it is very important that we *do not keep* the old hash indices for the keys, because they will not be the same after resizing.
 This is exactly the same as for separate chaining.
 Instead we save the current internal table to a temporary variable, and reinitialise the table to the new capacity.
 Then we iterate through all entries in the old table, and simply insert them again into the new resized table.
+<!-- OPENDSA: END -->
 
     datatype SeparateChainingHashSet:
         ...

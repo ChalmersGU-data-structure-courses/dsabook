@@ -9,6 +9,7 @@
 [General trees](#general-tree){.term} (@sec:general-trees) are trees
 whose [internal nodes](#internal-node){.term}
 have no fixed number of [children](#child){.term}. Compared to general trees,
+<!-- OPENDSA: START -->
 [binary trees](#binary-tree){.term} are
 relatively easy to implement because each internal node of a binary tree
 can just store two pointers to reach its (potential) children. In a
@@ -29,3 +30,4 @@ a poor idea to implement a general tree in this way. However, the parent
 pointer implementation stores precisely the information required to
 answer the following, useful question:
 ***Given two nodes in a forest, are they part of the same tree?***
+<!-- OPENDSA: END -->

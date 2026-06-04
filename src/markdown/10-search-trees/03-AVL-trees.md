@@ -107,8 +107,11 @@ performing *right* rotations.
 ### Implementing insertion
 
 AVL tree insertion and deletion are easiest to implement as recursive functions.
-They are very similar to the normal BST insertion and deletion, but as the recursion unwinds up the tree,
+They are very similar to the normal BST insertion and deletion,
+<!-- OPENDSA: START -->
+but as the recursion unwinds up the tree,
 we perform the appropriate rotation on any node that is found to be unbalanced.
+<!-- OPENDSA: END -->
 
 ::: algorithm
 #### Algorithm: Adding to an AVL tree, recursively
