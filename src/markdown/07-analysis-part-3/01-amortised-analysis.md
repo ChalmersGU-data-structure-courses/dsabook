@@ -7,6 +7,7 @@
 - Prio 2: consider making the last subsection a section (Different types of average analysis)
 :::
 
+<!-- OPENDSA: START -->
 This section presents the concept of
 [amortised analysis]{.term}, which is the
 analysis for a series of operations taken as a whole. In particular,
@@ -16,6 +17,7 @@ cost of any one operation. Rather than focusing on the individual cost
 of each operation independently and summing them, amortised analysis
 looks at the cost of the entire series and "charges" each individual
 operation with a share of the total cost.
+<!-- OPENDSA: END -->
 
 The standard example for amortised analysis is dynamic arrays which were introduced in @sec:dynamic-arrays.
 In that section we gave an informal argument why it is important to grow the array in the right way.
@@ -46,8 +48,10 @@ a sequence of $n$ *push* operations and $n$ *multipop* operations.
 Using our analysis above, the whole sequence of $2n$ operations will have worst-case complexity
 $n\cdot O(1) + n\cdot O(n) = O(n+n^2) = O(n^2)$.
 Since we performed $2n$ operations, we get an average complexity per operation of $O(n^2)/2n = O(n)$.
+<!-- OPENDSA: START -->
 But this analysis is unreasonably pessimistic
 -- clearly it is not really possible to pop $n$ elements each time *multipop* is called.
+<!-- OPENDSA: END -->
 
 We can reason like this instead:
 $n$ elements are pushed to the stack, and each of these elements can only be popped once.

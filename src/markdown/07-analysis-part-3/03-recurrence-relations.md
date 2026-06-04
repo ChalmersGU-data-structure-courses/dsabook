@@ -51,8 +51,10 @@ Therefore we will in the future not print the base case unless necessary.
 
 We want to know which complexity class $T(n)$ belongs to, or in other words,
 we want to find a closed-form solution to the recursive equation.
+<!-- OPENDSA: START -->
 One approach is to expand the recurrence by replacing any occurrences of $T$
 on the right-hand side with its definition.
+<!-- OPENDSA: END -->
 Assuming that both the base case and the work done in each iteration is bounded by some constant $c$,
 we can infer that the recursive factorial function is linear, $O(n)$:
 

@@ -8,8 +8,10 @@
 - Prio 3: discuss different definitions and how they differ (only in separate online section)
 :::
 
+<!-- OPENDSA: START -->
 Sometimes the proper analysis for an algorithm requires multiple
 parameters to describe the cost. To illustrate the concept,
+<!-- OPENDSA: END -->
 recall the example about friendship links from @sec:space-complexity-of-data-structures.
 We argued that it was better to store the links as an array of lists,
 than to use an $n\times n$ matrix to store who is friend with who.
@@ -63,6 +65,7 @@ Array of lists
 ::: example
 #### Example: Pixel values in a picture
 
+<!-- OPENDSA: START -->
 Consider an algorithm to compute the rank ordering for counts of all pixel values in
 a picture. Pictures are often represented by a two-dimensional array,
 and a pixel is one cell in the array. The value of a pixel is either the
@@ -73,6 +76,7 @@ colour value and then sort the colour values with respect to the number of
 times each value appears in the picture. Assume that the picture is a
 rectangle with $p$ pixels. A pseudocode algorithm to solve the problem
 follows.
+<!-- OPENDSA: END -->
 
 
     for i in 0 .. c-1:    // Initialise the counts.
@@ -81,12 +85,14 @@ follows.
         count[value(i)] = count[value(i)]+1
     sort(count)           // Sort the pixel value counts.
 
+<!-- OPENDSA: START -->
 In this example, `count` is an array of size $c$ that stores the number of pixels for each colour value.
 The function `value` returns the colour value for a pixel $i$.
 
 The time for the first `for`-loop (which initialises `count`) is linear in the number of colours, $O(c)$.
 The time for the second loop (which determines the number of pixels with each colour) is $O(p)$.
 The time for the final line, the call to `sort`, depends on the cost of the sorting algorithm used.
+<!-- OPENDSA: END -->
 If we assume that we use a linearithmic algorithm such as Mergesort, it costs $O(c\log(c))$.
 
 So the final complexity of pseudocode depends on both $p$ and $c$, and can be written as $p + c\log(c)$.
