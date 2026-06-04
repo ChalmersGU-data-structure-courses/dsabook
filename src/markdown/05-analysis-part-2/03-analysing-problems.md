@@ -6,6 +6,7 @@
 :::
 
 You most often use the techniques of algorithm analysis to analyse an [algorithm]{.term}.
+<!-- OPENDSA: START -->
 But you can also use these same techniques to analyse the cost of a [problem]{.term}.
 The key question that we want to ask is: How hard is a problem?
 
@@ -20,6 +21,7 @@ One might start by thinking that the upper bound for a problem is how hard any a
 But we can make algorithms as bad as we want, so that is not useful.
 Instead, what is useful is to say that a problem is only as hard as what we *can* do.
 In other words, we should define the upper bound for a problem to be the *best* algorithm that we know for the problem.
+<!-- OPENDSA: END -->
 
 In contrast, the lower bound refers to the minimum that any algorithm *must* cost.
 For example, when sorting an array, we *must* look at every element, so sorting must be in $\Omega(n)$.
@@ -40,10 +42,12 @@ So as a rule of thumb we can say:
 - when we analyse a problem, we are instead interested in the *lower bound*, $\Omega$
 
 It is much easier to reason about algorithms than about problems.
+<!-- OPENDSA: START -->
 For a problem to be in $\Omega(f)$ means that *every* algorithm that solves the problem is in $\Omega(f)$,
 even algorithms that we have not thought of!
 In other words, *every* algorithm *must* have at least this cost.
 So, to prove a lower bound, we need an argument that is true, even for algorithms that we don't know.
+<!-- OPENDSA: END -->
 
 
 It is usually very difficult to show that a problem has a certain lower bound, so nothing I expect you to come up with in your lifetime (I haven't done it for sure:). But here is a standard example:
@@ -53,10 +57,12 @@ It is usually very difficult to show that a problem has a certain lower bound, s
 - By a comparison-based algorithm, we mean that the only way we compare elements are by comparing two elements and deciding which of them should come first. All the sorting algorithms we have looked at are comparison-based.
 
 
+<!-- OPENDSA: START -->
 Let us look ahead to analysing the problem of sorting to see how this process works.
 What is the least possible cost for any sorting algorithm in the worst case?
 The algorithm must at least look at every element in the input, just to determine that the input is truly sorted.
 Thus, any sorting algorithm must take at least $\Omega(n)$ time.
+<!-- OPENDSA: END -->
 
 In the previous chapters you learned about some quadratic algorithms and some linearithmic algorithms (for example Mergesort).
 Thus, the problem of sorting can be said to have an upper bound in $O(n\log(n))$.
@@ -68,13 +74,17 @@ we still cannot be certain that there is no with a better complexity.
 Fortunately, we can prove that *any* sorting algorithm must be in $\Omega(n \log(n))$.
 So, the problem of sorting has a linearithmic lower bound,
 which is the same as the upper bounds for the best sorting algorithms.
+<!-- OPENDSA: START -->
 Thus, we can conclude that the problem of sorting is $\Theta(n \log(n))$ in the worst case,
 because the upper and lower bounds have met.
+<!-- OPENDSA: END -->
 
+<!-- OPENDSA: START -->
 Knowing the lower bound for a problem does not give you a good algorithm,
 but it does help you to know when to stop looking.
 So, to summarise: The upper bound for a problem is the best that you *can* do,
 while the lower bound for a problem is the least work that you *must* do.
+<!-- OPENDSA: END -->
 
 
 ### Case study: Inversions and quadratic sorting algorithms {#inversions}

@@ -5,7 +5,9 @@
 - Prio 1: more running text, less formula - now it looks scattered
 :::
 
+<!-- OPENDSA: START -->
 Several terms are used to describe the running-time equation for an algorithm.
+<!-- OPENDSA: END -->
 The most common term is the [upper bound]{.term} of the growth rate of a function.
 The upper bound is denoted by the big-$O$ notation,
 where $f\in O(g)$ is pronounced "$g$ is an upper bound of $f$".

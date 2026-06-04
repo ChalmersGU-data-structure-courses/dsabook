@@ -5,6 +5,7 @@
 - Prio 2: update text, perhaps merge with another section?
 :::
 
+<!-- OPENDSA: START -->
 [Asymptotic analysis]{.term} is one of the most intellectually difficult topics that
 undergraduate computer science majors are confronted with. Most people
 find [growth rates](#growth-rate){.term} and
@@ -68,6 +69,7 @@ of the size of the array. Thus, the best case (for arbitrary size $n$)
 occurs when the desired value is in position $n/2$, and its cost is 1.
 It is *not* correct to say that the best case occurs when $n=1$.
 :::
+<!-- OPENDSA: END -->
 
 ### Best-case upper bound, or worst-case lower bound?
 

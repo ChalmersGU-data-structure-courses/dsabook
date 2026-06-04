@@ -192,11 +192,13 @@ Now it should be straightforward to give the pseudocode for the main Quicksort f
         quickSort(array, start, p-1)             // Quicksort the lower partition.
         quickSort(array, p+1, end)               // Quicksort the upper partition.
 
+<!-- OPENDSA: START -->
 The partitioning will return the final position of the pivot,
 which is the correct position of the pivot in the final, sorted array.
 By doing so, we guarantee that at least one value (the pivot) will not be included in the recursive calls.
 So even if a bad pivot is selected, yielding a completely empty partition to one side of the pivot,
 the larger partition will still contain one less element than the input array.
+<!-- OPENDSA: END -->
 
 #### Implementing partitioning
 
@@ -262,9 +264,11 @@ After each iteration of the `while`-loop, the following invariants always hold:
 
 ### Selecting a pivot
 
+<!-- OPENDSA: START -->
 Perhaps the most important choice in implementing Quicksort is how to choose the pivot.
 Choosing a bad pivot can result in all elements of the array ending up in the same partition,
 in which case Quicksort ends up taking quadratic time.
+<!-- OPENDSA: END -->
 
 The best is to select the *median* value (that is, not the average and not the middle value).
 This will make the two partitions the same size and we will get the best performance.
@@ -281,9 +285,11 @@ Instead we have to use some approximation.
 Choosing the *first* or the *last* element of the array interval is a very simple strategy, but it is also bad.
 If the input array is sorted, then the first element of the interval
 will also be the smallest (and the last will be the largest).
+<!-- OPENDSA: START -->
 Hence all elements of the array will end up in one of the partitions.
 Worse, exactly the same thing will happen in all the recursive calls to Quicksort.
 Hence the partitioning will be as bad as possible, and Quicksort will end up taking quadratic time.
+<!-- OPENDSA: END -->
 
 The take-first or take-last strategy is also bad if the input is *almost* sorted,
 because the partitions will be very uneven in size and this is not good for Quicksort.
@@ -301,6 +307,7 @@ Even better is to look at a sample of the elements and pick the median of those.
 By far the most common is to take the median of the first, middle and last elements.
 This strategy is called *median-of-three*.
 
+<!-- OPENDSA: START -->
 For example, given the array [3, 1, 4, 1, 5, 9, 2],
 we pick out the elements 3 (first position), 1 (middle position) and 2 (last position).
 The median of 3, 1 and 2 is 2, so we pick 2 as the pivot.
@@ -308,6 +315,7 @@ The median of 3, 1 and 2 is 2, so we pick 2 as the pivot.
 Median-of-three is not guaranteed to pick a good pivot:
 there are cases where it partitions the input array badly.
 However, these bad cases do not seem to occur in practice, so
+<!-- OPENDSA: END -->
 median-of-three is used by many real-world Quicksort implementations.
 
 #### Non-well-behaved input
@@ -393,10 +401,12 @@ This visualisation explains the worst-case running time of Quicksort
 :::
 
 So, the worst case running time of Quicksort is $O(n^2)$.
+<!-- OPENDSA: START -->
 This is terrible, no better than Insertion or Selection sort.
 When will this worst case occur?
 Only when each pivot yields a bad partitioning of the array.
 If the pivot values are selected at random, then this is extremely unlikely to happen.
+<!-- OPENDSA: END -->
 If we instead always select the middle element in the interval, it is still unlikely to happen *on well-behaved data*.
 It does not take many good partitionings for Quicksort to work fairly well.
 
@@ -432,8 +442,10 @@ This visualisation explains the best-case running time of Quicksort
 
 #### Average-case complexity
 
+<!-- OPENDSA: START -->
 Quicksort's average-case behaviour falls somewhere between the extremes of worst and best case.
 Average-case analysis considers the cost for all possible arrangements of input,
+<!-- OPENDSA: END -->
 and calculates the average cost, weighted by how the data is distributed.
 As we already discussed in @sec:the-problem-with-average-case,
 the average case is extremely difficult to reason about,
@@ -488,6 +500,7 @@ Depending on the computer and programming language, this can yield a slight impr
 
 #### Backing off to Insertion sort
 
+<!-- OPENDSA: START -->
 A significant improvement can be gained by recognising that Quicksort is relatively slow when the array is small.
 This might not seem to be relevant if most of the time we sort large arrays,
 nor should it matter how long Quicksort takes in the rare instance when a small array is sorted because it will be fast anyway.
@@ -495,15 +508,20 @@ But you should notice that Quicksort itself sorts many, many small arrays!
 This happens as a natural by-product of the divide and conquer approach.
 
 A simple improvement is to replace Quicksort with a faster sort for smaller array intervals.
+<!-- OPENDSA: END -->
 This is a very common improvement, and usually one uses Insertion sort as the backoff algorithm.
+<!-- OPENDSA: START -->
 Now, at what size should we switch to Insertion sort?
 The answer can only be determined by empirical testing, but on modern machines the answer is probably somewhere between 10 and 100.
+<!-- OPENDSA: END -->
 Note that in @sec:using-a-backoff-algorithm we discussed exactly the same improvement for Mergesort.
 
 
 #### Running Insertion sort in a single final pass
 
-There is a variant of the optimisation above: When Quicksort partitions are below a certain size, do nothing!
+There is a variant of the optimisation above:
+<!-- OPENDSA: START -->
+When Quicksort partitions are below a certain size, do nothing!
 The values within that partition will be out of order. However, we do know that all
 values in the array to the left of the partition are smaller than all
 values in the partition. All values in the array to the right of the
@@ -513,6 +531,7 @@ array will be close to sorted. This is an ideal situation in which to
 take advantage of the best-case performance of Insertion sort. The final
 step is a single call to Insertion sort to process the entire array,
 putting the records into final sorted order.
+<!-- OPENDSA: END -->
 
 
 #### Alternative partitioning approaches

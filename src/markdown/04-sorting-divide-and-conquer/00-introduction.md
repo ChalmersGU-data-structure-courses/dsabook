@@ -13,5 +13,7 @@ The main difference between the algorithms is how they do the dividing:
 [Radix sort]{.term} in turn divides the problem by working on one digit of the key at a time.
 
 We will also make use of different algorithm analysis techniques.
+<!-- OPENDSA: START -->
 Quicksort illustrates that it is possible for an algorithm to have an [average case]{.term} whose growth rate is significantly smaller than its [worst case]{.term}.
+<!-- OPENDSA: END -->
 We can use code tuning to improve these algorithms, by falling back to a simpler algorithm (such as [Insertion sort]{.term}) when the subarray is small enough.

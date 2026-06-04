@@ -5,10 +5,12 @@
 - Prio 1: update Summary of asymptotic notations - make it a Figure instead
 :::
 
+<!-- OPENDSA: START -->
 [Big-$O$ notation]{.term} describes an upper bound.
 In other words, big-$O$ states a claim about
 the greatest amount of some resource (usually time) that is required by an algorithm.
 A similar notation is used to describe the *least* amount of resources that an algorithm needs.
+<!-- OPENDSA: END -->
 This is the lower bound which is denoted by the symbol $\Omega$ (pronounced "Omega").
 However, we are very rarely interested in the lower bound when we analyse algorithms.
 
@@ -128,8 +130,10 @@ describe the behaviour of algorithms.
 ### Tight bounds: the $\Theta$ notation {#tight-bounds}
 
 The definitions for big-$O$ and $\Omega$ give us ways to describe the upper and lower bounds for an algorithm.
+<!-- OPENDSA: START -->
 When the upper and lower bounds are the same within a constant factor,
 we indicate this by using $\Theta$ (big-Theta) notation.
+<!-- OPENDSA: END -->
 An algorithm is said to be in $\Theta(h)$ if it is both in $O(h)$ and in $\Omega(h)$.
 
 Almost all algorithms we will discuss in this book have the same tight bound as their upper bound,
@@ -137,12 +141,14 @@ for example, binary search is in $\Theta(\log(n))$,
 sequential search is in $\Theta(n)$, and
 the sorting algorithms in [Chapter @sec:sorting-part-1] are all in $\Theta(n\log(n))$.
 
+<!-- OPENDSA: START -->
 The analysis for most commonly used algorithms is well understood and
 we can almost always give a $\Theta$ analysis for them.
 However, the class of [NP-Complete]{.term} problems all have no definitive $\Theta$ analysis,
 just some unsatisfying big-$O$ and $\Omega$ analyses.
 Even some "simple" programs are hard to analyse.
 Nobody currently knows the true upper or lower bounds for the following code fragment:
+<!-- OPENDSA: END -->
 
     while n > 1:
         if n is odd:

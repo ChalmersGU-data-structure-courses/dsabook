@@ -6,6 +6,7 @@
 - Prio 2: make the "divide-and-conquer" strategy an algorithm box
 :::
 
+<!-- OPENDSA: START -->
 Recursion makes it possible to solve complex problems using programs
 that are concise, easily understood, and algorithmically efficient.
 Recursion is the process of solving a large problem by reducing it to
@@ -41,7 +42,7 @@ computer program for solving the problem, because recursion involves function ca
 which are typically more expensive than other alternatives such as a while loop.
 However, the recursive approach usually provides an algorithm that is reasonably efficient.
 If necessary, the clear, recursive solution can later be modified to yield a faster implementation.
-
+<!-- OPENDSA: END -->
 
 ::: example
 #### Example: The Fibonacci sequence
@@ -63,8 +64,10 @@ where the first row is the *recursive case*, and the second row defines the two 
 
 ### Divide and conquer
 
+<!-- OPENDSA: START -->
 Solving a problem recursively means to solve one or more smaller versions of the problem,
 and using those solutions of the smaller problems to solve the original problem.
+<!-- OPENDSA: END -->
 Sometimes it is possible to divide a problem into *more than one* smaller sub-problems,
 and this is the basis for *divide-and-conquer* algorithms.
 
