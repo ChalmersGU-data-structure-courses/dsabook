@@ -16,7 +16,7 @@ For the algorithms we have presented, here is a slightly simplified summary:
 Let us look at the reasononing for this, and try to sort out some caveats.
 All our graph traversal algorithms (DFS, BFS, Dijkstra's, Prim's) are on the form:
 
-    function traverse(start: Vertex):
+    traverse(start: Vertex):
         visited = new empty set of vertices
         agenda = initalized with starting node
         while (agenda is not empty):

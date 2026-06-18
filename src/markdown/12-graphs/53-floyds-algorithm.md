@@ -52,7 +52,7 @@ Floyd's algorithm simply checks all of the possibilities in a triple
 loop. Here is the implementation for Floyd's algorithm. At the end of
 the algorithm, array $D$ stores the all-pairs shortest distances.
 
-    function floyd(graph):
+    floyd(graph):
         distances = new Map() of vertex pairs to distances
         for each v in graph.vertices():
             for each w in graph.vertices():

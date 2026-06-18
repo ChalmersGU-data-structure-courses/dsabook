@@ -36,7 +36,7 @@ at the correct position within a sorted list composed of those elements already 
 <!-- OPENDSA: END -->
 The algorithm above can be implemented as follows in pseudocode:
 
-    function insertionSort(array):
+    insertionSort(array):
         n = array.size
         for i in 1 .. n-1:                           // Put the i'th element in its correct position:
             j = i                                    //     Start at the end of the sorted part

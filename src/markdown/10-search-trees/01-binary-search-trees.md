@@ -150,7 +150,7 @@ The important part here is to realise that the recursive function should *return
 and then it is just a matter of reassigning the child.
 So the pseudocode becomes something like this:
 
-    function addHelper(x: Value, node: BinaryNode) -> BinaryNode:
+    addHelper(x: Value, node: BinaryNode) -> BinaryNode:
         if node is null:
             return BinaryNode(x)
         else if x == node.value:
@@ -268,14 +268,14 @@ One important thing to remember is that the recursive functions should return th
 just as the recursive version of adding a value, from above.
 First we need a helper function for finding the largest value from a subtree:
 
-    function findLargest(tree):
+    findLargest(tree):
         while tree.right is not null:
             tree = tree.right
         return tree.value
 
 Now we are ready to implement the main recursive function that deletes a value from a subtree:
 
-    function removeHelper(value, tree):
+    removeHelper(value, tree):
         if tree is null:
             // We did not find the value, so do nothing.
         else if value < tree.value:

@@ -270,7 +270,7 @@ otherwise. The `find` method needs no knowledge about the specific list
 implementation, just the list ADT.
 
     // Return true if k is in list L, false otherwise.
-    function find(L, k):
+    find(L, k):
         for each n in L:
             if k == n:
                 return true  // Found k.

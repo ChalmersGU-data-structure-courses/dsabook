@@ -47,7 +47,7 @@ So the DFS algorithm yields a topological sort in reverse order. It does
 not matter where the sort starts, as long as all vertices are visited in
 the end. Here is implementation for the DFS-based algorithm.
 
-    function topsortDFS(graph):
+    topsortDFS(graph):
         visited = new Set()
         sortedVertices = new Stack()
         for each v in graph.vertices():
@@ -55,7 +55,7 @@ the end. Here is implementation for the DFS-based algorithm.
                 topsortHelperDFS(graph, v, sortedVertices, visited)
         return sortedVertices
 
-    function topsortHelperDFS(graph, v, sortedVertices, visited):
+    topsortHelperDFS(graph, v, sortedVertices, visited):
         if v not in visited:
             visited.add(v)
             for each e in graph.outgoingEdges(v):
@@ -93,7 +93,7 @@ elements in topological order.
 Applying the queue version of topological sort to the graph of @fig:GraphToposort produces J1, J2, J3, J6, J4, J5, J7.
 Here is an implementation of the algorithm.
 
-    function topsortBFS(graph):
+    topsortBFS(graph):
         // Initialise the prerequisite counts
         counts = new Map() of vertices to prerequisite count
         for each v in graph.vertices():

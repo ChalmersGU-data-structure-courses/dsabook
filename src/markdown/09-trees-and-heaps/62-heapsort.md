@@ -82,7 +82,7 @@ Here is a visualisation of the Heapsort algorithm.
 
 A complete implementation is as follows.
 
-    function heapsort(arr):
+    heapsort(arr):
         // First, convert the array to a max heap.
         heap = new MaxHeap()
         heap.buildHeap(arr)

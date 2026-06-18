@@ -127,7 +127,7 @@ The size of the input is the size of the array -- let's call it $n$.
 The algorithm looks at each array value in turn, comparing with the given value.
 If the value is found it returns the position, otherwise it continues until the end of the array.
 
-    function sequentialSearch(arr, val):
+    sequentialSearch(arr, val):
         for i in 0 .. arr.size - 1:   // For each element in arr,
             if arr[i] == val:         //     if we found it
                 return i              //         return this position.

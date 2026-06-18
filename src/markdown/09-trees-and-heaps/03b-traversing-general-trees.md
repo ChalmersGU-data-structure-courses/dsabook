@@ -50,12 +50,12 @@ process the nodes of a general tree in preorder and in postorder.
 The code is very simple, but this is because we defer all the complexity
 to the underlying **List** implementation of the children.
 
-    function preorder(node):
+    preorder(node):
         process(node)
         for each child in node.children:
             preorder(child)
 
-    function postorder(node):
+    postorder(node):
         for each child in node.children:
             postorder(child)
         process(node)

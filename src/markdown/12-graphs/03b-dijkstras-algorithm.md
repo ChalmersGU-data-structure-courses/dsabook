@@ -28,7 +28,7 @@ To convince ourselves that this works, consider this: In the first step, it alwa
 
 A simple implementaion of Dijkstra's would look like this:
 
-    function dijkstra(start: Vertex):
+    dijkstra(start: Vertex):
         visited = new empty set of vertices
         agenda = [(0, null, start)]
         while agenda is not empty:
@@ -69,7 +69,7 @@ When we find a better option for reaching a vertex, we should replace the old en
 This means the agenda will never contain more than one edge to a particular vertex, and that every edge in the agenda leads to an unvisited vertex
 (so we can eliminate the visitation check after `removeMin`).
 
-    function dijkstra(start: Vertex):
+    dijkstra(start: Vertex):
         visited = new empty set of vertices
         agenda = new updateable priority queue with to-vertices as keys
         agenda.setPriority(A, (0, null,A) )
@@ -97,7 +97,7 @@ Here is an implementation of Dijkstra's algorithm that returns a map from vertic
         vertex: Vertex
         parent: ParentTreeNode
 
-    function dijkstra(start: Vertex):
+    dijkstra(start: Vertex):
         visited = new empty set of vertices
         agenda = [(0, null, start)]
         result = new map from Vertex to ParentTreeNode
@@ -298,7 +298,7 @@ are replaced with the following lines in Dijkstra's algorithm:
 Here is an implementation for Dijkstra's algorithm.
 At the end, `distances` will contain the shortest distance from the start to each reachable vertex.
 
-    function dijkstra(graph, start):
+    dijkstra(graph, start):
         visited = new Set() of vertices
         distances = new Map() of vertices to their distance from start
         distances.put(start, 0)  // The distance from start to start is 0
@@ -327,7 +327,7 @@ Just as for Prim's algorithm, there are two ways of finding the next-closest ver
 We can scan through all vertices searching for the minimum value
 (note that this code is exactly the same as for Prim's algorithm):
 
-    function minVertex(graph, distances, visited):
+    minVertex(graph, distances, visited):
         minV = null
         for each v in graph.vertices():
             if v not in visited:
@@ -363,7 +363,7 @@ each edge that we process we must reorder the heap.
 
 Here is the implementation for Dijkstra's algorithm using a priority queue.
 
-    function dijkstraPQ(graph, start):
+    dijkstraPQ(graph, start):
         visited = new Set() of vertices
         distances = new Map() of vertices to their distance from start
         agenda = new PriorityQueue() of vertices ordered by their distance from start

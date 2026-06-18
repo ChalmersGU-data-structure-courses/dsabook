@@ -56,7 +56,7 @@ right subtrees. Where do left and right subtree counts come from? Calls
 to function `count` on the subtrees will compute this for us. Thus, we
 can implement `count` as follows.
 
-    function count(node):
+    count(node):
         if node is null:
             return 0
         return 1 + count(node.left) + count(node.right)
@@ -64,7 +64,7 @@ can implement `count` as follows.
 The following solution is correct but inefficient as it does redundant
 checks on the left and the right child of each visited node.
 
-    function inefficient_count(node):
+    inefficient_count(node):
         if node is null:
             return 0
         count = 0
@@ -178,7 +178,7 @@ is legal for a given node. That information might come from any of the
 node's ancestors. Thus, relevant range information must be passed down
 the tree. We can implement this function as follows.
 
-    function checkBST(node, low, high):
+    checkBST(node, low, high):
         if node is null:
             return true  // Base case: empty subtree
 

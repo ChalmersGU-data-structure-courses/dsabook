@@ -123,7 +123,7 @@ have one pointer, a 25% probability that it will have two, and so on.
 The following function determines the level based on such a
 distribution.
 
-    function randomLevel():
+    randomLevel():
         level = 0
         while random() < 0.5:
             level = level + 1

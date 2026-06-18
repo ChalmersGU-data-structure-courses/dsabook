@@ -218,7 +218,7 @@ To split this subarray into two halves, we just calculate the middle index betwe
 The main function for sorting an interval can now be written like this:
 
     // Sort the array interval start...end
-    function mergeSort(array, start, end):
+    mergeSort(array, start, end):
         if start >= end:                   // Base case: Interval length is ≤ 1
             return
         mid = int((start + end) / 2)       // The midpoint is where the second half starts
@@ -232,7 +232,7 @@ Merging the sorted array intervals are quite straightforward from the descriptio
 we just have to keep track of the pointers to the two sorted halves.
 
     // Merge the sorted array intervals start .. mid-1 and mid .. end
-    function merge(array, start, mid, end):
+    merge(array, start, mid, end):
         temp = new Array
         j = start; k = mid                  // Pointers to the sorted halves
         for i in start .. end:              // Pointer to the temporary array
@@ -269,7 +269,7 @@ and reuse this array in all invocations of merge.
 The only thing we would have to do is to add an extra argument to `mergeSort` and `merge`, for the reference to the auxiliary array.
 Then we can create a wrapper function that takes care of the initialisation, and makes the first recursive call:
 
-    function mergeSort(array):
+    mergeSort(array):
         temp = new Array of size array.size
         mergeSort(array, temp, 0, array.size-1)
 

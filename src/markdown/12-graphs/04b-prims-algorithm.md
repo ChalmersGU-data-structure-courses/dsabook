@@ -101,7 +101,7 @@ vertex currently in the MST to a vertex not currently in the MST.
 The following code shows an implementation for Prim's algorithm that
 searches the distance matrix for the next closest vertex.
 
-    function prim(graph, start):
+    prim(graph, start):
         visited = new Set() of vertices
         parent = new Map() of vertices to vertices
         distances = new Map() of vertices to their distance from the MST
@@ -137,7 +137,7 @@ unvisited vertex with minimum distance value during each pass through
 the main `for` loop. The first method is simply to scan through the list
 of $|\mathbf{V}|$ vertices searching for the minimum value, as follows:
 
-    function minVertex(graph, distances, visited):
+    minVertex(graph, distances, visited):
         minV = null
         for each v in graph.vertices():
             if v not in visited:
@@ -189,7 +189,7 @@ each edge that we process we must reorder the heap.
 
 Here is the implementation for Dijkstra's algorithm using a priority queue.
 
-    function primPQ(graph, start):
+    primPQ(graph, start):
         visited = new Set() of vertices
         parent = new Map() of vertices to vertices
         distances = new Map() of vertices to their distance from the MST

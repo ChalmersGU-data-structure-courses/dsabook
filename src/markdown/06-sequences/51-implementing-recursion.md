@@ -15,7 +15,7 @@ Each return from a subroutine *pops* the top activation record off the stack.
 As an example, here is a recursive implementation for the factorial function.
 
     // Recursively compute and return n-factoral (n!)
-    function factorialRecursive(n):
+    factorialRecursive(n):
         if n <= 1:     // Base case: return base solution
             return 1
         else:          // Recursive call for n > 1
@@ -67,7 +67,7 @@ iteration.
 As a simple example of replacing recursion with a stack, consider the
 following non-recursive version of the factorial function.
 
-    function factorialStack(n):
+    factorialStack(n):
         S = new Stack()
         while n > 1:
             S.push(n)
@@ -107,7 +107,7 @@ Here is a recursive implementation for Towers of Hanoi.
 
     // Compute the moves to solve a Tower of Hanoi puzzle.
     // Function 'move' does (or prints) the actual move of a disk from one pole to another.
-    function towersRecursive(n, start, goal, temp):
+    towersRecursive(n, start, goal, temp):
         if n == 0:                               // Base case
             return
         towersRecursive(n-1, start, temp, goal)  // Recursive call: n-1 rings
@@ -127,7 +127,7 @@ stored on the stack.
         n: Int
         start, temp, goal: Pole
 
-    function towersStack(n, start, goal, temp):
+    towersStack(n, start, goal, temp):
         S = new LinkedStack()
         S.push(new Task(TOH, n, start, goal, temp))
         while S.size > 0:
@@ -176,7 +176,7 @@ The first element is assigned to the first sublist, the second element to the se
 the third to first sublist, the fourth to the second sublist, and so on.
 In pseudocode we can view it like this:
 
-    function split(L):
+    split(L):
         L1, L2 = new empty linked queues
         for each x in L:
             enqueue x to L1 (even iterations), or to L2 (odd iterations)
@@ -186,7 +186,7 @@ Merging two sorted linked lists is straightforward,
 because we need only remove items from the front of the input lists and append them to the end of the output list.
 The Mergesort pseudocode in @sec:mergesort can be used with linked lists directly.
 
-    function merge(L1, L2):
+    merge(L1, L2):
         answer = new empty linked queue
         while L1 and L2 are nonempty:
             if L1.peek() <= L2.peek():

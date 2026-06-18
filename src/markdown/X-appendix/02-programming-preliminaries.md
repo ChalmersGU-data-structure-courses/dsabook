@@ -31,7 +31,7 @@ We will demonstrate this translation for Python, Java, and Haskell.
 In the following sections, we will introduce fundamental programming concepts and, where applicable, specify the pseudocode conventions we use.
 For example, the following function is written in our pseudocode calculates the factorial of $n$:
 
-    function fact(n: Int) -> Int:
+    fact(n: Int) -> Int:
         res = 1
         for i in 2 .. n:
             res = res * i
@@ -179,7 +179,7 @@ In our pseudocode, we use the following syntax to declare an array, retrieve an 
 
     // Make a copy of the input array, and increment every value in the copied array.
     // Return the copied array.
-    function addOne(input: Array of Int) -> Array of Int:
+    addOne(input: Array of Int) -> Array of Int:
         output = new Array(input.size) of Int
         for i in 0 .. input.size-1:
             output[i] = input[i] + 1
@@ -339,17 +339,15 @@ A datatype can also have "internal functions" (called *methods* in object-orient
 
         push(value: T):
             data[size] = value
-            size = size + 1
+            size += 1
 
         pop() -> T:
-            size = size - 1
+            size -= 1
             return data[size]
 
 This example uses an array to store the stack elements and demonstrates how to define a compound data type.
 We define a new compound data type using the keyword `datatype`.
 A `datatype` can implement an `interface`, making it a subtype of the interface.
-
-Note that we usually don't write the keyword `function` when it appears within a datatype definition.
 
 To create a concrete instance of a `datatype`, we use the following notation:
 
@@ -447,9 +445,9 @@ We can of course also define some methods, or internal functions, that operate o
         treeSize() -> Int:
             n = 1
             if left is not null:
-                n = n + left.treeSize()
+                n += left.treeSize()
             if right is not null:
-                n = n + right.treeSize()
+                n += right.treeSize()
             return n
 
 Note that the last definition, `treeSize`, is a *recursive* function.
@@ -457,7 +455,7 @@ Note that the last definition, `treeSize`, is a *recursive* function.
 Also note that `treeSize` has to check that the children actually are tree nodes before calculating their size.
 Another possibility is to have a global function that takes the tree node as an argument:
 
-    function treeSize(node: TreeNode) -> Int:
+    treeSize(node: TreeNode) -> Int:
         if node is null:
             return 0
         else:

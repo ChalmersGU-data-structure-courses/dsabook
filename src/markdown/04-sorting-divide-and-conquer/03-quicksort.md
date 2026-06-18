@@ -184,7 +184,7 @@ This is because we know that after partitioning the pivot is in its final correc
 Now it should be straightforward to give the pseudocode for the main Quicksort function:
 
     // Sort the array interval start...end
-    function quickSort(array, start, end):
+    quickSort(array, start, end):
         if start >= end:                         // Base case: Interval length is ≤ 1.
             return
         p0 = findPivot(array, start, end)        // Pick an initial pivot index.
@@ -204,7 +204,7 @@ the larger partition will still contain one less element than the input array.
 
 The informal algorithm in @sec:partition can be implemented as pseudocode like this:
 
-    function partition(array, start, end, p) -> Int:
+    partition(array, start, end, p) -> Int:
         swap(array, start, p)              // Put the pivot at the start of the interval.
         pivot = array[start]               // Remember the pivot value, and
         low = start + 1; high = end        // initialise the lower and upper pointers.
@@ -542,7 +542,7 @@ we move the pointers at most one step in each iteration of the `while`-loop.
 An alternative is to move the pointers as far as possible during each iteration,
 and then the pseudocode will become like this:
 
-    function partition(array, start, end, p) -> Int:
+    partition(array, start, end, p) -> Int:
         swap(array, start, p)              // Swap the pivot with the first element in the interval.
         pivot = array[start]               // Remember the pivot value, and
         low = start + 1; high = end        // initialise the lower and upper pointers.
@@ -576,7 +576,7 @@ The invariant is that the elements from $\mathit{start}$ to $\mathit{low}-1$ are
 and the elements from $\mathit{low}$ to $\mathit{high}$ are greater than or equal to the pivot.
 In Lomuto's partitioning scheme we start by putting the pivot at the *end* of the interval, not the beginning.
 
-    function partition(array, start, end, p) -> Int:
+    partition(array, start, end, p) -> Int:
         swap(array, p, end)                // Swap the pivot with the last element in the interval.
         pivot = array[start]               // Remember the pivot value, and
         low = start                        // initialise the lower pointer.

@@ -47,7 +47,7 @@ We can use a heap to implement a very simple sorting algorithm:
 Since the heap returns the smallest elements first, they will be inserted in sorted order into the new array.
 Here is pseudocode:
 
-    function naiveHeapsort(arr):
+    naiveHeapsort(arr):
         heap = new MinHeap()
         for i in 0 .. arr.size-1:
             heap.add(arr[i])

@@ -151,7 +151,7 @@ Here is a slideshow that illustrates the Huffman tree construction process for t
 Here is pseudocode for the tree-building process.
 It takes a list of characters paired with their frequencies, and returns the final Huffman tree:
 
-    function buildHuffmanTree(frequencies):
+    buildHuffmanTree(frequencies):
         // Initialise a min-heap with Huffman leaves.
         huffmanHeap = new MinHeap()
         for each pair (char, freq) in frequencies:

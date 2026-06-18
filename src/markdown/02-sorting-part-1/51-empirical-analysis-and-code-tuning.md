@@ -69,7 +69,7 @@ greater than $j$. Thus, we never need to check higher-positioned values
 again, which could save many iterations even if there are a few swaps
 lower down. Here is code to implement this approach.
 
-    function bubbleCheckSwap(arr):
+    bubbleCheckSwap(arr):
         n = arr.size
         while n > 1:
             newN = 0
@@ -134,7 +134,7 @@ temporary variable, and then shift all of the elements with greater value
 one step to the right. Here is an implementation for Insertion sort using this
 optimisation.
 
-    function insertionSortShift(arr):
+    insertionSortShift(arr):
         n = arr.size
         for i in 1 .. n-1:
             temp = arr[i]

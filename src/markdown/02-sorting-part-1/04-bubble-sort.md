@@ -37,7 +37,7 @@ Likewise, each succeeding pass through the array compares adjacent elements,
 looking at one less element toward the end than in the preceding pass.
 <!-- OPENDSA: END -->
 
-    function bubbleSort(array):
+    bubbleSort(array):
         n = array.size
         for i in 0 .. n-1:                   // Bubble up the i'th element:
             for j in 1 .. n-i-1:             //     Go through the unsorted part:

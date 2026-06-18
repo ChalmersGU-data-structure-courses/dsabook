@@ -124,7 +124,7 @@ Here is a little calculator for you to see how this works. Start with
 Now we will examine some hash functions suitable for storing strings of
 characters. We start with a simple summation function.
 
-    function hashString(str):
+    hashString(str):
         h = 0
         for each char in str:
             h = h + ord(char)
@@ -167,7 +167,7 @@ If we instead multiply the hash with a prime number, before adding the
 next character, we get a much better distribution of the hash codes.
 This is Java's default hash code for strings, where the prime number is 31.
 
-    function hashStringImproved(str):
+    hashStringImproved(str):
         h = 0
         for each char in str:
             h = 31 * h + ord(char)

@@ -45,7 +45,7 @@ To find the next-smallest element we have to search through the entire unsorted 
 but only one swap is required to put the element into place.
 The algorithm above can be implemented as follows in pseudocode:
 
-    function selectionSort(array):
+    selectionSort(array):
         n = array.size
         for i in 0 .. n-1:                      // Select the i'th smallest element:
             minIndex = i                        //     Current smallest index

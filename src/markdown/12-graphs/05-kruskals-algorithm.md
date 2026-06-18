@@ -74,7 +74,7 @@ Here is an implementation for Kruskal's algorithm. Note that since the
 MST will never have more than $|\mathbf{V}|-1$ edges, we can return as
 soon as the MST contains enough edges.
 
-    function kruskal(graph):
+    kruskal(graph):
         edges = all edges in graph
         sort edges by their weight
         mst = new Set() of edges

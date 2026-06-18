@@ -7,7 +7,7 @@ The initial call to the traversal function passes in a pointer to the root node 
 The traversal function visits the node and its children (if any) in the desired order.
 Here is a very generic pseudocode for all kinds of traversal:
 
-    function traverse(node):
+    traverse(node):
         if node is not null:      // Only continue if this is a tree
             visitPreorder(node)   // Visit root node (PREORDER traversal)
             traverse(node.left)   // Process all nodes in left subtree
@@ -19,7 +19,7 @@ Here is a very generic pseudocode for all kinds of traversal:
 For example, preorder traversal specifies that a node should be visited before its children.
 Then we can remove the lines for inorder and postorder, and we get the following preorder traversal function:
 
-    function preorder(node):
+    preorder(node):
         if node is not null:      // Only continue if this is a tree
             visit(node)           // Visit root node
             preorder(node.left)   // Process all nodes in left subtree
@@ -75,7 +75,7 @@ the current node, and only make the recursive call for a non-null child.
 
 Recall the basic preorder traversal function.
 
-    function preorder(node):
+    preorder(node):
         if node is not null:      // Only continue if this is a tree
             visit(node)           // Visit root node
             preorder(node.left)   // Process all nodes in left subtree
@@ -86,7 +86,7 @@ left and right pointers of the current node are checked so that the
 recursive call is made only on non-empty children.
 
     // This is a bad idea:
-    function preorder2(node):
+    preorder2(node):
         visit(node)
         if node.left is not null:
             preorder2(node.left)
@@ -143,7 +143,7 @@ Consider the problem of incrementing the value for each node in a binary
 tree. The following solution has an error, since it does redundant
 manipulation to the left and the right children of each node.
 
-    function inefficient_increment(node):
+    inefficient_increment(node):
         if node is not null:
             node.elem = node.elem + 1
             if node.left is not null:

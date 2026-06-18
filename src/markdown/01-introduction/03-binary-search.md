@@ -23,7 +23,7 @@ go through each book at the time and see if it's the right one.
 This algorithm is called *sequential search*, because you look at each book in sequence.
 Here is a simple implementation:
 
-    function sequentialSearch(array, key):
+    sequentialSearch(array, key):
         for i in 0 .. array.size - 1:   // For each element in array:
             if array[i] == key:         //     If we found the search key:
                 return i                //         return this position
@@ -100,7 +100,7 @@ The repeat the following until *key* has been found, or the interval is empty:
 
 Here is how you can implement the algorithm in pseudocode:
 
-    function binarySearch(array, key):
+    binarySearch(array, key):
         start = 0                        // The marker pointing to the first element in the interval
         end = array.size - 1             // The marker pointing to the last element in the interval
         while start <= end:              // Continue until the interval is empty:

@@ -81,7 +81,7 @@ We call the stack our *agenda*, consider it a to-do list containing nodes that w
 Here is a piece of code that is structurally very similar to our recursive iterations,
 but instead of making recursive calls we add child nodes to the agenda and loop:
 
-    function DFS(root : Node):    // DFS is for Depth First Search
+    DFS(root : Node):    // DFS is for Depth First Search
         agenda = new stack of nodes
         agenda.push(root)         // Initially, we need to process the root
         while agenda is not empty:
@@ -99,7 +99,7 @@ Implementing inorder or postorder traversals using stack is possible, but much m
 By modifying the data structure from a stack to a FIFO queue (and switching the order in which children are added),
 we get a new traversal order. Try to figure out the pattern for this one:
 
-    function BFS(root : Node):
+    BFS(root : Node):
         agenda = new stack of nodes
         agenda.enqueue(root)
         while agenda is not empty:

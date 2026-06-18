@@ -30,7 +30,7 @@ the selected edges form a tree with $A$ as the root.
 To turn this high level description of the algorithm into an efficient procedure, we need to decide how to represent the agenda.
 Just as with trees, using a stack for the agenda gives us a depth first traversal:
 
-    function depthFirst(start: Vertex):
+    depthFirst(start: Vertex):
         visited = new empty set of vertices
         agenda = [(null, start)]
         while agenda is not empty:
@@ -86,7 +86,7 @@ By changing the data type of the agenda from a stack to a FIFO queue, we get an 
 You do not have to study this code in detail if you already understood the depth first traversal code, it is exactly identical
 other than using enqueue/dequeue instead of push/pop.
 
-    function breadthFirst(start: Vertex):
+    breadthFirst(start: Vertex):
         visited = new empty set of vertices
         agenda = [(null, start)]
         while (agenda is not empty):
@@ -206,7 +206,7 @@ regardless of whether the graph is directed or undirected. To ensure
 visiting all vertices, `graphTraverse` could be called as follows on a
 graph $\mathbf{G}$:
 
-    function graphTraverse(G):
+    graphTraverse(G):
         visited = new Set()
         for each v in G.vertices():
             if v not in visited:
@@ -232,7 +232,7 @@ directed or undirected graphs.
 
 The recursive DFS algorithm can be described as simply as this:
 
-    function visit(v):
+    visit(v):
         if v is unvisited:
             mark v as visited
             recursively visit all adjacent vertices
@@ -247,7 +247,7 @@ it, resulting in a depth-first search tree.
 
 Here is a slightly more detailed implementation of the DFS algorithm.
 
-    function traverseDFS(G, v, visited):
+    traverseDFS(G, v, visited):
         if v not in visited:
             visited.add(v)
             preVisit(G, v)
@@ -307,7 +307,7 @@ Here is an implementation for BFS. Note that it's not possible to call
 `postVisit` in BFS traversal, because you cannot know when the adjacent
 edges (the "children") have been traversed.
 
-    function traverseBFS(G, v, visited):
+    traverseBFS(G, v, visited):
         agenda = new Queue()
         agenda.enqueue(v)
         while not agenda.isEmpty()

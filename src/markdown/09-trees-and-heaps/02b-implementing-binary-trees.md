@@ -127,11 +127,11 @@ Since `BinaryNode` is a recursive data type, it is usually natural
 to write recursive functions on it, and the base case is usually
 an empty tree (null).
 
-    function height(node : BinaryNode) -> int:
+    height(node) -> int:
         if node is null:
             return 0
         maxChildHeight = max(height(node.left), height(node.right))
-        return maxChildHeight+1
+        return maxChildHeight + 1
 
 Study the code and convince yourself that `height(A)` in @Fig:bintree_with_pointers
 will return the value 4. Also consider how you would modify the code to compute size instead of height.
