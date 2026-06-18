@@ -66,7 +66,7 @@ Furthermore, many graphs are *implicit*, the developer never explicitly refers t
 Perhaps the most common kind of graphs is just a class where each object has references to multiple other objects of the same class.
 Consider for instance how this simple class forms a graph where vertices are people and edges are friendships:
 
-    class Person:
+    datatype Person:
         id: Int
         name: String
         friends: List of Person
@@ -94,7 +94,7 @@ We will assume that modifications and lookups on these data structures are all $
 This can either be acchieved using hashing with a perfect hash function,
 or by preprocessing the graph to assign each vertex a unique ID-number so they can be used to index arrays:
 
-    class VertexSet:
+    datatype VertexSet:
         arr = array of booleans of length |V|, initialized to false
         add(v : Vertex):
             arr[v.id]=true

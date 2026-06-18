@@ -175,7 +175,7 @@ in our table is a small constant. This involves two main techniques:
 
 
 <!--
-    class SeparateChainingHashMap:
+    datatype SeparateChainingHashMap:
         size = 0
         table = new Array of length 1 
         put(key, value):

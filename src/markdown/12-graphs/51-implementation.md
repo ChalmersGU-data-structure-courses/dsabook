@@ -129,7 +129,7 @@ efficient, we in addition store the vertices separately in the set
 
 The implementations of the API methods are quite straightforward, as can be seen here:
 
-    class AdjacencyGraph implements Graph:
+    datatype AdjacencyGraph implements Graph:
         edgesMap: Map from V to Edge = new Map()
         vertices: Set of V = new Set()
         size: Int = vertices.size

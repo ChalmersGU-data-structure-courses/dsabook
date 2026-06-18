@@ -93,7 +93,7 @@ It also means every node in the tree is essentially a linked list leading back t
 Here is an implementation of Dijkstra's algorithm that returns a map from vertices to their shortest path.
 
 
-    class ParentTreeNode
+    datatype ParentTreeNode:
         vertex: Vertex
         parent: ParentTreeNode
 
