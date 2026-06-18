@@ -2,85 +2,158 @@
 ## Priority queues
 
 ::: TODO
-- Prio 1: merge with the file 02b
-- Prio 1: merge subsection "Designing an efficient priority queue" with next section
-- Prio 1: update text so it fits in this chapter
+- Prio 2: add a better & shorter version of the top-100 example
 :::
 
-A priority queue is a data structure that stores a collection of elements where each element has an associated priority.
+<!-- OPENDSA: START -->
+There are many situations, both in real life and in computing applications,
+where we wish to choose the next "most important" from a collection of people, tasks, or objects.
+For example, doctors in a hospital emergency room often choose to see next the "most critical"
+patient rather than the one who arrived first.
+When scheduling programs for execution in a multitasking operating system,
+at any given moment there might be several programs (usually called *jobs*) ready to run. The
+next job selected is the one with the highest priority.
+<!-- OPENDSA: END -->
+
+A *priority queue* is a data structure that stores a collection of elements where each element has an associated priority.
 The key difference between priority queues and simpler structures such as stacks or queues lies in how elements are retrieved.
 In a stack, the last element inserted is returned first, and in a queue, the first element inserted is returned first.
 A priority queue, however, returns the element with the highest priority, regardless of when it was inserted.
-In the most common version of this structure, priority is determined by the smallest value, meaning that the smallest element is removed first.
+In the most common version of this structure, priority is determined by the smallest value,
+meaning that the smallest element is removed first.
 
-A priority queue typically supports three main operations:
+A priority queue typically supports three main operations --
+adding, removing and looking at the topmost element.
+Note that these are the same kind of operations as stacks and queues,
+the only difference is how the elements are ordered.
+Of this reason we use different names for the operations.
 
-    interface PriorityQueue of T extends Collection:
-        add(x: T)         // Adds x to the priority queue
-        removeMin() -> T  // Removes and returns the minimum element
-        getMin() -> T     // Returns the minimum element without removing it
+We also have to know how to compare the elements in the priority queue,
+or in other words, how to associate each element with a priority value.
+Furthermore, we have to decide what is meant with a "higher" priority:
+if one element compares smaller than another, is it more or less prioritised?
+There is no "correct" answer to this question, but it depends on your application.
+But a common choice is to let the *smaller* element have priority --
+and then we have a *minimum priority queue*
 
-Any implementation of this interface must be able to compare elements of type `T`, since the ordering between elements determines their priority.
-The way elements are compared defines what we mean by the 'smallest' element.
-For example, if a priority queue stores integers, we may use the natural ordering of numbers.
-In this case, smaller numbers have higher priority than larger ones.
-A priority queue that uses this ordering is called a minimum priority queue.
-If we instead reverse the natural order of the elements, we obtain a maximum priority queue, where larger elements have higher priority.
-In such cases, the methods are sometimes renamed to `removeMax()` and `getMax()` instead of `removeMin()` and `getMin()`.
+    interface MinPriorityQueue of T extends Collection:
+        add(elem: T)      // Adds an element to the priority queue.
+        removeMin() -> T  // Removes and returns the minimum element.
+        getMin() -> T     // Returns the minimum element without removing it.
 
+Alternatively we might want the larger value have priority,
+and then we have a *maximum priority queue*.
+This is not a big problem, because minimum and maximum priority queues are mirrors of each other --
+the only difference is that if we compare with $<$ or with $>$.
+(The operations are also called `removeMax` and `getMax`, but that goes without saying.)
+
+Therefore, we will mainly talk about minimum priority queues in this book,
+and leave as exercises for you to design everything as maximum priority queues.
 More generally, it is useful to think in terms of priority rather than minimum or maximum.
-In a minimum priority queue, the smallest element has the highest priority, whereas in a maximum priority queue, the largest element has the highest priority.
+In a minimum priority queue, the smallest element has the highest priority,
+whereas in a maximum priority queue, the largest element has the highest priority.
 
-#### Applications of priority queues
+::: example
+#### Example: Sorting
 
-Priority queues are particularly useful when tasks must be processed according to their urgency or importance rather than their arrival time.
-One example is resource management: suppose several processes need access to a shared resource, such as CPU time.
-Each process may have a priority level, and the scheduler must always choose the highest-priority process next.
+<!-- NICSMA: START -->
+We can use a priority queue to make an efficient sorting algorithm.
+To sort a list of items:
 
-Another example is a hospital emergency room system.
-Patients arrive at different times, but they are not necessarily treated in that order.
-Instead, patients with the most severe conditions are treated first.
-A priority queue can be used to efficiently manage this kind of situation.
+-   First create an empty priority queue, and add all the items to it.
+-   Then repeatedly find and remove the smallest item. The items will come out in ascending order.
 
-#### Designing an efficient priority queue
+Here is an implementation of this algorithm in code:
+<!-- NICSMA: END -->
 
-The central challenge in implementing a priority queue is choosing a data representation that supports all operations efficiently.
-To motivate the optimal solution, it helps to first consider simpler alternatives and understand their limitations.
+    pqSort(array):
+        pq = new PriorityQueue()
+        for each item in array:
+            pq.add(item)
+        for i in 0 .. array.size-1:
+            array[i] = pq.removeMin()
 
-Using an unsorted array:
+<!-- NICSMA: START -->
+What is the time complexity of this algorithm?
+Well, for an input list of size $n$, the algorithm calls `add` $n$ times and `removeMin` $n$ times.
+In @sec:binary-heaps we will introduce *binary heaps* where both operations take logarithmic time, $O(\log(n))$.
+Therefore, if we use binary heaps, the total runtime of our sorting algorithm is $O(n \log(n))$ --
+as efficient as any of the sorting algorithms we have seen so far!
+<!-- NICSMA: END -->
+:::
 
-:   One straightforward approach is to store the elements in a dynamic array without maintaining any particular order:
+<!--
+::: example
+#### Example: Finding the top 100 items
 
-    * Inserting an element is easy, simply append it to the end of the array: $O(1)$
-    * To find the minimum element, however, the entire array must be scanned: $O(n)$
-    * Deleting the minimum also requires scanning the array to find it and then removing it: $O(n)$
+Suppose that we are running a bank. Every day, every transaction that
+occurs at the bank is recorded in a list. When the bank closes at the
+end of the day, we would like to find the 100 highest-valued
+transactions from that day. How can we do it?
 
-    This approach makes insertion very fast, but finding or removing the smallest element becomes expensive.
+One way is to use sorting. If we store the transactions in an array and
+sort it by value, then the highest-value transactions will be at the end
+of the array. If there are *n* transactions in total, then transactions
+number $n-100\ldots n-1$ are the ones we need. If we use an efficient
+sorting algorithm, this will take $O(n \log(n))$ time. (More generally,
+this gives us an algorithm for finding the largest $k$ items in a list
+of $n$ items, in $O(n \log(n))$ time.)
 
-Using a sorted array:
+Now suppose that we want to monitor the transactions *throughout* the
+day. At any point, we want to be able to find the 100 highest-valued
+transactions *so far* today. How can we do this?
 
-:   In @sec:priority-queues we introduced priority queues and discussed how to implement them using sorted lists.
-    The smallest element is always located at the beginning of the array.
-    Finding the minimum therefore takes $O(1)$ time.
-    However, insertion becomes expensive because the new element must be inserted at the correct position, which requires shifting elements.
+We could still use the sorting approach, but we would need to sort the
+list of transactions *every time* we wanted to find the 100 top
+transactions. This may be prohibitively expensive if there are a lot of
+transactions: it takes $O(n \log(n))$ time every time we do it.
 
-    * Insert: $O(n)$
-    * Find minimum: $O(1)$
-    * Delete minimum: $O(n)$ (removing the first element requires shifting the rest)
+We can do better with the help of a priority queue. The idea is to have
+a priority queue that holds the *100 highest-value transactions* only.
+Whenever a new transaction comes in, we need to update the priority
+queue accordingly:
 
-    In this case, retrieving the smallest element is efficient, but updates to the structure are costly.
+1.  If the priority queue has fewer than 100 transactions (i.e. there
+    have been fewer than 100 transactions so far today), then add the
+    new transaction to the priority queue.
+2.  Otherwise, if the new transaction is *greater in value than the
+    lowest-valued of the top 100 transactions*, then remove that
+    transaction and add the new transaction.
+3.  Otherwise, don't add the new transaction to the priority queue
+    (it's not in the top 100).
 
-Using a reverse-sorted array:
+Notice that in step 2, we are comparing the new transaction to the
+*lowest-valued* of the top 100 transactions -- if the transactions are
+ordered by value, then this transaction can be found by calling
+`getMin`, and removed using `removeMin`. So this algorithm can be
+implemented efficiently using a priority queue.
 
-:   A slight improvement is to store elements in _reverse sorted order_, so the smallest element appears at the end of the array.
-    This allows deletion of the smallest element to be very efficient:
+In fact, we can simplify these three steps into two steps. First, we add
+the new transaction to the priority queue. This might make the priority
+queue grow to 101 transactions. If so, we remove the lowest-valued
+transaction. Here it is in code:
 
-    * Insert: $O(n)$ (must still insert in correct position)
-    * Find minimum: $O(1)$
-    * Delete minimum: $O(1)$
+    datatype Top100Transactions:
+        pq = new PriorityQueue()
+        // Assume that the Transaction type implements comparisons
+        // by comparing the value of the transaction.
 
-    Although deletion is now fast, insertion still requires linear time, which is not ideal for large datasets.
+        // Add a new transaction to the priority queue.
+        add(transaction):
+            pq.add(transaction)
+            // If the priority queue grows to 101 transactions,
+            // cut it down to 100 by removing the smallest-valued one.
+            if pq.size > 100:
+                pq.removeMin()
 
-A normal linear data structure, such as a [linked list]{.term} or [dynamic array]{.term}, cannot implement a priority queue efficiently.
-This is because either insertion or removal will take linear time, $O(n)$, in the worst case.
-In this chapter we will see how to use _binary trees_ to implement a much more efficient version of priority queues.
+        // Return the top 100 transactions.
+        top100():
+            return everything in pq
+
+
+What is the complexity of `add`? Well, in fact it takes constant time,
+because the priority queue has a constant maximum size of 100 elements.
+If we generalise this problem to keeping track of the top $k$
+transactions, then the complexity of `add` is $O(\log(k))$.
+:::
+-->

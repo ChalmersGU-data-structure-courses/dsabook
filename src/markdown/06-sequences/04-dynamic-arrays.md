@@ -3,7 +3,6 @@
 
 ::: TODO
 - Prio 1: invariants
-- Prio 1: move "Comparing linked lists and dynamic arrays" to new discussion section
 :::
 
 The problem with array-based stacks and queues is that they have limited capacity.
@@ -47,13 +46,11 @@ The basic idea is to not try to resize the internal array -- as we already menti
 Instead we create a *new* array of a larger size, and copy over the elements from the old array to the new.
 Afterwards we can forget about the old array because it will not be used anymore.
 
-    datatype ArrayStack, or ArrayQueue:
-        ...
-        resizeArray(newCapacity):
-            oldArray = internalArray                // Remember the old internal array
-            internalArray = new Array(newCapacity)  // Create a new internal array
-            for i in 0 .. size-1:
-                internalArray[i] = oldArray[i]      // Copy over all elements to the new array
+    resize(stack, newCapacity):
+        oldArray = stack.array                // Remember the old internal array
+        stack.array = new Array(newCapacity)  // Create a new internal array
+        for i in 0 .. stack.size-1:
+            stack.array[i] = oldArray[i]      // Copy over all elements to the new array
 
 Note that resizing the internal array is a *slow* operation,
 it has to iterate through all elements in the list and copy each one.
@@ -63,47 +60,46 @@ This is of course linear in the number of elements, $O(n)$.
 
 This means that we do not want to resize the array too often, so the question is how often do we want to resize?
 Or in other words, how large should the new internal array be -- what should be its capacity?
-How about increasing the capacity with 1000 elements, every time the array behomes full:
+How about increasing the capacity with 100 elements, every time the array behomes full:
 
-    class ArrayStack:
-        ...
-        push(value):
-            if size == internalArray.size:  // If the internal array is full,
-                resizeArray(size + 1000)    // increase its capacity with 1000 elements
-            internalArray[size] = value
-            size = size + 1
+    push(stack, value):
+        if stack.size == stack.array.size:    // If the internal array is full,
+            newCapacity = stack.size + 100   // increase its capacity with 100 elements
+            resize(stack, newCapacity)
+        stack.array[stack.size] = value
+        stack.size += 1
 
-Suppose that we want to push $n$ values to an empty stack (where $n$ is much larger than 1000).
+Suppose that we want to push $n$ values to an empty stack (where $n$ is much larger than 100).
 <!-- NICSMA: START -->
-How many times does an array element get copied from the internal array to the new array
-(that is, how many times will the statement `internalArray[i]=oldArray[i]` be executed)?
+How many times does an array element get copied from the internal array to the new array?
 <!-- NICSMA: END -->
-Every 1000'th time the internal array becomes full and we need to resize it, so we get the following internal resizings:
+(That is, how many times will the for-loop in `resize` be iterated?)
+Every 100'th time the internal array becomes full and we need to resize it, so we get the following internal resizings:
 
-----------------------  --------- ---------- ---------
-`resizeArray(2000)`       copying   $1000$   elements
-`resizeArray(3000)`       copying   $2000$   elements
+------------------  --------- --------- ---------
+`resize`($200$)       copying   $100$   elements
+`resize`($300$)       copying   $200$   elements
  . . .
-`resizeArray(n-1000)`     copying  $n-2000$  elements
-`resizeArray(n)`          copying  $n-1000$  elements
-----------------------  --------- ---------- ---------
+`resize`($n-100$)     copying  $n-200$  elements
+`resize`($n$)         copying  $n-100$  elements
+------------------  --------- --------- ---------
 
 In total, we will execute the copying statement the following number of times:
 
 $$
-1000 + 2000 + \cdots + (n-2000) + (n-1000) = 1000 \cdot \sum_1^{n/1000} i
-= n(n-1)/500 \in O(n^2)
+100 + 200 + \cdots + (n-200) + (n-100) = 100 \cdot \sum_1^{n/100} i
+= n(n-1)/50 \in O(n^2)
 $$
 
 <!-- NICSMA: START -->
 This means that the program takes *quadratic* time, $O(n^2)$, not linear!
 Suppose for example that $n$ is 1 million.
-Using the formula above, the number of times an array element gets copied is around 500 million
+Using the formula above, the number of times an array element gets copied is around 20 *billion*
 <!-- NICSMA: END -->
--- it copies on average 500 elements for every push to the stack.
+-- it copies on average 20,000 elements for every push to the stack.
 This is of course not acceptable.
 
-But what if we increase the capacity with 10,000 elements instead?
+But what if we increase the capacity with 1000 elements instead?
 This will unfortunately not help much -- the reasoning above still holds,
 and the complexity of pushing $n$ to the stack will still be quadratic, $O(n^2)$.
 
@@ -118,20 +114,24 @@ One way to do this is to always *double* the array size when it gets full.
 This turns out to work well!
 <!-- NICSMA: END -->
 
-Suppose that we again push 1 million elements onto an empty stack.
-As before we start with a capacity of 1000 elements.
-When will `resizeArray` be called, and how many elements get copied each time?
+    push(stack, value):
+        if stack.size == stack.array.size:   // If the internal array is full,
+            newCapacity = stack.size * 2     // double its capacity
+            ...
 
--------------------------  --------- ------------- ---------
-`resizeArray(2,000)`         copying    $1,000$    elements
-`resizeArray(4,000)`         copying    $2,000$    elements
-`resizeArray(4,000)`         copying    $4,000$    elements
-`resizeArray(8,000)`         copying    $8,000$    elements
+Suppose that we again push 1 million elements onto an empty stack.
+As before we start with a capacity of 100 elements.
+When will `resize` be called, and how many elements get copied each time?
+
+-----------------------  --------- ------------- ---------
+`resize`($200$)            copying    $100$      elements
+`resize`($400$)            copying    $200$      elements
+`resize`($800$)            copying    $400$      elements
  . . .
-`resizeArray(256,000)`       copying   $128,000$   elements
-`resizeArray(512,000)`       copying   $256,000$   elements
-`resizeArray(1,024,000)`     copying   $512,000$   elements
--------------------------  --------- ------------- ---------
+`resize`($409,600$)        copying   $204,800$   elements
+`resize`($819,200$)        copying   $409,600$   elements
+`resize`($1,638,400$)      copying   $819,200$   elements
+-----------------------  --------- ------------- ---------
 
 <!-- NICSMA: START -->
 You can see that the array gets resized a whole lot at the beginning --
@@ -139,24 +139,27 @@ but as it gets bigger, it gets resized less and less often.
 We can read off how many elements get copied:
 <!-- NICSMA: END -->
 
-$$ 1,000 + 2,000 + \cdots + 256,000 + 512,000 = 1,023,000 $$
+$$ 100 + 200 + \cdots + 409,600 + 819,200 = 1,638,300 $$
 
-Compare this with the previous version where we increased the capacity with 1000 elements every time:
-then we needed to copy 500 million elements, but now we only need to copy 1 million.
+Compare this with the previous version where we increased the capacity with 100 elements every time:
+then we needed to copy 20 billion elements, but now we only need to copy 1.6 million.
 
 <!-- NICSMA: START -->
 Let us now generalise to an arbitrary $n$.
-The worst case is when the final *push* has to resize the array
--- that happens when $n$ is one more than a power of two times 1000, $n-1 = 1000\cdot 2^k$.
-In that case, the final call to `resizeArray` grows the array
-from $1000\cdot 2^k$ to $1000\cdot 2^{k+1}$, copying $1000\cdot 2^k$ elements.
+The worst case is when the final *push* has to resize the array.
+This happens when $n$ is one more than a power of two times 100,
+that is, when $n-1 = 100\cdot 2^k$.
+In that case, the final call to `resize` grows the array
+from $100\cdot 2^k$ to $100\cdot 2^{k+1}$, copying $100\cdot 2^k$ elements.
 The total number of elements copied is therefore:
 <!-- NICSMA: END -->
 
+<!-- 100\cdot 2^0 + 100\cdot 2^1 + 100\cdot 2^2 + \cdots + 100\cdot 2^k -->
 $$
-1000\cdot (2^0 + 2^1 + 2^2 + \cdots + 2^k)
-=  1000\cdot 2^{k+1} - 1000
-=  2(n-1) - 1000  =  2n - 1002
+100\cdot(2^0 + 2^1 + 2^2 + \cdots + 2^k)
+=  100\cdot(2^{k+1} - 1)
+=  2\cdot(100\cdot 2^k) - 100
+=  2(n-1) - 100  =  2n - 102
 $$
 
 In fact, we have just proved the following result,
@@ -168,6 +171,7 @@ which holds regardless of what the initial capacity is.
 When using the array-doubling strategy,
 pushing $n$ elements to a stack implemented as a dynamic array
 causes fewer than $2n$ elements to be copied.
+Or in other words, pushing an element to a stack causes on average 2 elements to be copied.
 :::
 
 
@@ -247,16 +251,14 @@ This will lead to the following resized array:
 Apart from this detail, that we have to reset the pointers,
 the implementation of resizing is similar to the one for stacks:
 
-    datatype ArrayQueue:
-        ...
-        resizeArray(newCapacity):
-            oldArray = internalArray
-            internalArray = new Array(newCapacity)
-            for pos in 0 .. size-1:
-                oldPos = (pos + front) mod internalArray.size
-                internalArray[pos] = oldArray[oldPos]
-            front = 0
-            rear = size - 1
+    resize(queue, newCapacity):
+        oldArray = queue.array
+        queue.array = new Array(newCapacity)
+        for pos in 0 .. queue.size-1:
+            oldPos = (pos + front) mod queue.array.size
+            queue.array[pos] = oldArray[oldPos]
+        queue.front = 0
+        queue.rear = queue.size - 1
 
 Note that there are several ways to copy the elements, we do not have to reset *front* to zero.
 We can also keep *front* at its original position, but then the *rear* pointer will have to be updated.
@@ -297,22 +299,18 @@ The only thing that matters is that the minimum load factor (1/3) is *smaller* t
 <!-- NICSMA: END -->
 
 In summary, to get a dynamically shrinking stack (or queue),
-we can add the following lines right before the end of the *pop* or *dequeue* methods:
+we can test if it is less than 1/3 full right before the end of the *pop* or *dequeue* methods.
+And if it is, we resize the internal array to half its capacity.
+This means that the dynamic *pop* method for stacks will look like this:
 
-    if size <= internalArray.size * 1/3:
-        resizeArray(internalArray.size * 1/2)
-
-So the dynamic *pop* method for stacks will look like this:
-
-    datatype ArrayStack:
-        ...
-        pop():
-            size = size - 1
-            result = internalArray[size]
-            internalArray[size] = null    // For garbage collection
-            if size <= internalArray.size * 1/3:
-                resizeArray(internalArray.size * 1/2)
-            return result
+    pop(stack):
+        stack.size -= 1
+        result = stack.array[stack.size]
+        stack.array[stack.size] = null    // For garbage collection
+        if stack.size < stack.array.size * 1/3:
+            newCapacity = stack.array.size * 1/2
+            resize(stack, newCapacity)
+        return result
 
 ::: dsvis
 Dynamic arrays -- deletion.
@@ -320,83 +318,4 @@ Dynamic arrays -- deletion.
 ``` {.jsav-animation src="ChalmersGU/DynamicArrayList-Remove-CON.js" links="ChalmersGU/CGU-Styles.css" name="Dynamic Array-based List Deletion Slideshow"}
 ```
 :::
-
-
-### Comparing linked lists and dynamic arrays
-
-<!-- OPENDSA: START -->
-Now that you have seen two substantially different implementations for stacks and queues,
-it is natural to ask which is better.
-In particular, if you must implement a stack or a queue for some task, which implementation should you choose?
-<!-- OPENDSA: END -->
-
-#### Time complexity
-
-All the basic operations for the array-based and linked list implementations take constant time,
-so from a time efficiency perspective, neither has a significant advantage.
-
-Array-based lists are usually slightly faster because they can make use of
-the internal memory cache that modern computers have, but it depends on many factors
--- the programming language, the operating system, the processor, etc.
-
-One little disadvantage with array-based lists is that the operations are only *amortised* constant time.
-We will discuss amortised time more in @sec:amortised-analysis later.
-But what it means in practice is that *push*, *pop*, *enqueue* and *dequeue*
-are only guaranteed to be constant time *on average* if we run many operations.
-Now and then (very rarely) the internal array will be resized, and then the operation might take longer time than usual.
-
-This means that if we are implementing an application that has hard real-time constraints,
-a linked list might be a slightly better choice.
-
-#### Memory usage
-
-<!-- OPENDSA: START -->
-Given a collection of elements to store, they take up some amount of
-space whether they are simple integers or large objects with many
-fields. Any container data structure like a stack, a queue or a list then requires some
-additional space to organise the elements being stored.
-This additional space is called [overhead]{.term}.
-<!-- OPENDSA: END -->
-
--   Array-based lists have the disadvantage that the *capacity* of the internal array
-    is larger than the actual size of the list.
-    When the array has recently been reallocated,
-    <!-- OPENDSA: START -->
-    a substantial amount of space might be tied up in a largely empty array.
-    This empty space is the overhead required by the array-based list.
-    <!-- OPENDSA: END -->
-
--   <!-- OPENDSA: START -->
-    Linked lists on the other hand have the advantage that they only need space
-    for the objects actually on the list.
-    <!-- OPENDSA: END -->
-    However, each list node needs to allocate memory for the pointer to the next node,
-    and all of these pointers combined is the overhead required by the array-based list.
-
-The amount of space required by a linked list is directly proportional
-to the number of elements $n$. Assuming that each list node takes up $k$
-bytes of memory, the full list will use $kn$ bytes. The amount of space
-required by an array-based list is in the worst case three times as much
-as $n$ times the size of an array cell. (This worst case will arise when
-we remove a lot of elements from the list, because we wait until it is
-1/3 full until we shrink the array). So assuming that one array cell
-takes up $c$ bytes, the full array-based list will use at least $Cn$
-bytes, and at most $3cn$ bytes.
-
-So, which one is the best? It depends on the size $k$ of the list nodes,
-compared to the size $c$ of the array cells.
-<!-- OPENDSA: START -->
-Array-based lists have the
-advantage that there is no wasted space for an individual element.
-Linked lists require that an extra pointer for the *next* field be added
-to every list node. So the linked list has these *next* pointers as overhead.
-<!-- OPENDSA: END -->
-In many cases, $k$ is 2--3 times as large as $c$, so they will
-be quite similar in size on average. But this depends on the programming
-language, the operating system, and perhaps other factors.
-
-Note that these calculations exclude the memory used by the actual list
-elements, since the lists themselves only contain pointers to the
-elements! And in many cases, the objects themselves are much larger than
-the list nodes (or array cells).
 

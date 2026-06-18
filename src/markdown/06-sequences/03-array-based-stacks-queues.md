@@ -23,8 +23,8 @@ An array-based stack uses an internal array as underlying storage, and this arra
 In this example the underlying array has an internal size of 1000:
 
     datatype ArrayStack implements Stack:
-        internalArray = new Array(1000)    // Internal array containing the stack elements
-        size = 0                           // The size of the stack
+        array = new Array(1000)    // Internal array containing the stack elements
+        size = 0                   // The size of the stack
 
 Note that 1000 is the internal *capacity* of the stack, it is not the actual size.
 When the stack is created it should be empty, and therefore the initial stack size is 0.
@@ -54,13 +54,11 @@ but instead we can move the stack pointer to the left or the right.
 In an array-based stack we do not need a separate pointer to the *top*,
 because it is the same as the *size* variable (minus 1).
 That is, the *size* points to the index of the next free array cell.
-Therefore, to push a value onto the stack, we assign `internalArray[size]` and then increase the size.
+Therefore, to push a value onto the stack, we assign `array[size]` and then increase the size.
 
-    datatype ArrayStack:
-        ...
-        push(value):
-            internalArray[size] = value
-            size = size + 1
+    push(stack, value):
+        stack.array[stack.size] = value
+        stack.size += 1
 
 ::: dsvis
 Here we show how to push to an array-based stack.
@@ -80,13 +78,11 @@ To pop an element from the stack we do the reverse of pushing:
 first we decrease the *size*, then we remember the result in a temporary variable.
 After that we can clear the old top cell in the array and return the result.
 
-    datatype ArrayStack:
-        ...
-        pop():
-            size = size - 1
-            result = internalArray[size]
-            internalArray[size] = null     // For garbage collection
-            return result
+    pop(stack):
+        stack.size -= 1
+        result = stack.array[stack.size]
+        stack.array[stack.size] = null    // For garbage collection
+        return result
 
 Note that it is important that we clear the old top value (by assigning the cell to *null*).
 Otherwise the old value will still be referred to by the internal array,
@@ -269,17 +265,18 @@ because this will make the code more similar to our other implementations.
 <!-- OPENDSA: END -->
 
     datatype ArrayQueue implements Queue:
-        internalArray = new Array(1000)    // Internal array containing the queue elements.
-        size = 0                           // The size of the queue.
-        front = 0                          // Index of the front element.
-        rear = -1                          // Index of the rear element.
-        nextPosition(i):                   // Return the next position after i.
-            return (i + 1) mod internalArray.size
+        array = new Array(1000)    // Internal array containing the queue elements.
+        size = 0                   // The size of the queue.
+        front = 0                  // Index of the front element.
+        rear = -1                  // Index of the rear element.
 
-Note that we add a helper method `nextPosition` which will come in handy, both for enqueueing and dequeueing.
+We also add a helper function `nextPosition` which will come in handy, both for enqueueing and dequeueing.
 This is easily implemented through use of the *modulus* operator:
 instead of just using $i+1$ for the next position,
 we have to use $(i+1)\bmod n$ (where $n$ is the size of the array).
+
+    nextPosition(queue, i):
+        return (i + 1) mod queue.array.size
 
 
 #### Enqueueing and dequeueing
@@ -288,12 +285,10 @@ we have to use $(i+1)\bmod n$ (where $n$ is the size of the array).
 When enqueueing, we increase the *rear* pointer (modulo the size of the internal array).
 <!-- OPENDSA: END -->
 
-    datatype ArrayQueue:
-        ...
-        enqueue(x):
-            rear = nextPosition(rear)      // Circular increment
-            internalArray[rear] = x
-            size = size + 1
+    enqueue(queue, x):
+        queue.rear = nextPosition(queue, queue.rear)  // Circular increment
+        queue.array[queue.rear] = x
+        queue.size += 1
 
 <!-- OPENDSA: START -->
 When dequeueing, we increase the *front* pointer (modulo the size of the internal array).
@@ -301,14 +296,12 @@ When dequeueing, we increase the *front* pointer (modulo the size of the interna
 Just as for array-based stacks, we have to clear the array cell that was dequeued,
 because otherwise it will never be garbage collecter.
 
-    class ArrayQueue:
-        ...
-        dequeue():
-            result = internalArray[front]
-            internalArray[front] = null    // For garbage collection
-            front = nextPosition(front)    // Circular increment
-            size = size - 1
-            return result
+    dequeue(queue):
+        result = queue.array[queue.front]
+        queue.array[queue.front] = null                 // For garbage collection
+        queue.front = nextPosition(queue, queue.front)  // Circular increment
+        queue.size -= 1
+        return result
 
 
 ::: dsvis

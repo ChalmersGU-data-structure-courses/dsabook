@@ -1,17 +1,9 @@
 
-### Implementing sets using linked lists
+### Implementing sets and maps using linked lists
 
-::: TODO
-- Prio 1: reduce the lines of code
-- Prio 1: move complexity analysis to separate section for the whole chapter
-- Prio 1: update figures
-:::
-
-Both sets and maps can be implemented using simple linked lists.
-For a set, we can use a simple list of elements.
-
-Recall from @sec:stacks-implemented-as-linked-lists that a linked list consists of nodes pointing to their successors:
-
+A simple way to implement a set is to use a *linked list*.
+Recall from @sec:stacks-implemented-as-linked-lists that
+a linked list consists of nodes pointing to their successors:
 
 ::: online
 ```jsav-figure
@@ -30,64 +22,47 @@ av.recorded();
 ```
 :::
 
-Now we have to implement the methods *contains*, *add*, and *remove*, and this is straightforward:
+To search for an element we just iterate through all nodes and compare with the value we are looking for.
+To add an element we can simply insert it at the head of the list.
+But before we do that we have to search for it to check that it is not already in the list,
+because the set cannot have duplicate elements.
 
--   Searching in a linked list is a simple while loop where we start at the head and continue down the list.
-    If we reach the end of the list we return `false`, because the element wasn't found:
+To remove an element we search for it to get its node,
+and then we repoint the preceding node to the node following it, like this:
 
-        contains(elem):
-            node = head
-            while node is not null:   // Iterate through each node in the list
-                if elem == node.elem:
-                    return true       // We found the element, so return true
-                node = node.next      // Move to the next list node
-            return false              // We did not find the element, return false
+```
+... --> [ a |-]--> [ key |-]--> [ b |-]--> ...
 
--   To add an element we first have to check if it is already there -- sets are not allowed to contain the same element twice.
-    If it is not in the list we can just attach a new list node before the head of the list (and increase the size):
+to
 
-        add(elem):
-            if not contains(elem):
-                newHead = new Node(elem, head)  // Create a new node pointing to the current head
-                head = newHead                  // Redirect the head to the new node
-                size = size + 1                 // Increase the size of the set
+... --> [ a |-]---------------> [ b |-]--> ...
+                   [ key | ]
+```
 
--   Removing an element is slightly trickier.
-    If we want to remove a certain node from the list, we have to redirect the `next` pointer from the *previous* node.
-    So we have to search for the node *before* the node we want to remove.
-    We can do that by keeping a `prev` pointer while iterating through the list.
+Conceptually this is not difficult, but the code becomes a little complicated
+because we have to keep track of the preceding node:
 
-        remove(elem):
-            prev = null
-            node = head
-            while node is not null:      // Iterate through each node in the list
-                if elem == node.elem:    // We found the node to remove
-                    if prev is null:
-                        head = node.next
-                    else:
-                        prev.next = node.next
-                    size = size - 1      // Increase the size of the set
-                    return
-                prev = node
-                node = node.next
+    remove(set, key):
+        previous = null
+        node = set.head
+        while node is not null and key != node.key:
+            previous = node
+            node = node.next
+        if previous is null:
+            set.head = node.next
+        else:
+            previous.next = node.next
 
-    Note that we have a special case:
-    if `prev` is null it is the head itself that we want to remove, because there is not previous node yet.
+Note that we have a special case:
+if the preceding node is null it is the head of the list that should be removed.
 
-
-### Implementing maps
-
-If we want to implement a *map* instead of a set,
-we can use list nodes that contain both the *key* and the *value*:
+The linked list can easily be modified to implement a map instead of a set.
+We just augment the linked list nodes to also include the value:
 
     datatype MapNode of K to V:
-        key: K          // Key for this node
-        value: V        // Value for this node
-        next: MapNode   // Pointer to next node in list
+        key: K
+        value: V
+        next: MapNode
 
-The map operations `get`, `put` and `remove` are minor modifications to the corresponding set operations that we defined above.
-We leave them as an exercise to the reader to implement.
-
-Note that these maps are exactly as slow as the corresponding sets, so they are not useful for working with large collections
--- for this we refer to [Chapters @sec:search-trees] and [-@sec:hash-tables].
-
+Just as for priority queues, we can also use dynamic arrays to implement sets and maps,
+and we will discuss that in the next section.

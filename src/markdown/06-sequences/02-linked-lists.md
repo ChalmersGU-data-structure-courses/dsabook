@@ -3,8 +3,6 @@
 
 ::: TODO
 - Prio 1: invariants
-- Prio 1: move "Complexity analysis" to common discussion section later
-- Prio 1: move "Queues as pairs of stacks" to common discussion section later
 - Prio 1: update figures
 :::
 
@@ -17,13 +15,11 @@ So it is like a line of people facing backwards:
 the only thing a single person knows is who is standing behind them.
 A person can never know where in the line they stand, and when it is their turn.
 And the main "controller" of the list can only see the first person in the line.
+This means that there is no easy way of knowing the total number of people,
+if the controller needs that information it has to keep track of the size itself.
 
-<!-- OPENDSA: START -->
-A linked list uses [dynamic memory allocation]{.term}, that is,
-it allocates memory for new list elements as needed.
-The following diagram illustrates the linked list concept.
-There are three [nodes]{.term} that are "linked" together.
-<!-- OPENDSA: END -->
+The following figure shows a linked list with three values $a$, $b$ and $c$,
+where each value is encaspulated in a *list node*.
 Each node contains a link to the next node in the list.
 Notice that the rightmost node does not have any outgoing link.
 
@@ -31,7 +27,7 @@ Notice that the rightmost node does not have any outgoing link.
 ```jsav-figure
 var av = NewAV();
 var l = av.ds.list({nodegap: 30});
-l.addFirst("").addFirst("").addFirst("");
+l.addFirst("a").addFirst("b").addFirst("c");
 l.layout();
 av.displayInit();
 av.recorded();
@@ -40,38 +36,29 @@ av.recorded();
 
 ::: latex
 ```
-            [  |-]--> [   |-]--> [  |X]
+            [ a |-]--> [  b |-]--> [ c |X]
 ```
 :::
 
-With this organisation there is no easy way of knowing the total number of nodes,
-which means that the list has to store its size in a separate variable.
-
-### Linked list nodes
-
-<!-- OPENDSA: START -->
-Because a list node is a distinct object (as opposed to simply a cell in an array),
-it is good practice to make a separate data type for list nodes.
-<!-- OPENDSA: END -->
-Each list node is a "wrapper" around an element,
-which means that it contains a reference to its underlying *value*.
-In addition it has a pointer to the *next* node in the list.
-Here is how we can declare a list node as pseudocode:
+List nodes are distinct objects, as opposed to cells in an array.
+Therefore we declare a list node as a "wrapper" around a *value*,
+that also contains a pointer to the *next* node in the list:
 
     datatype Node of T:
         value: T          // Value for this node
         next: Node of T   // Pointer to the next node in the list
 
 How does the list end?
-Most languages have a designated "null" value which represent nothing at all
+Most languages have a designated "null" value which represents nothing at all
 -- in Java it is called `null`, and in Python it is `None`.
 So we will use that: if *next* is "null" then we have reached the end of the list.
+This is denoted by crossing out the next pointer in final node in the figure above.
 
 A list built from these very simple nodes is called a [singly linked list]{.term},
 because each list node has a single pointer to the next node on the list.
-In this section we describe how to use linked lists to implement stacks and queues,
-and in @sec:double-ended-queues and @sec:general-lists we will discuss extensions
-such as double-ended queues and general lists.
+There are also *doubly linked lists*, where each node also has a pointer to the previous node,
+but we will not discuss them in this section.
+Singly linked lists are all we need to implement stacks and queues.
 
 
 ### Stacks as linked lists
@@ -135,11 +122,9 @@ and we can even do all the actions in one single line of code.
 We also have to increase the size of the stack separately,
 because there is no way of doing that automatically.
 
-    datatype LinkedStack:
-        ...
-        push(value):
-            top = new Node(value, top)
-            size = size + 1
+    push(stack, value):
+        stack.top = new Node(value, stack.top)
+        stack.size += 1
 
 ::: dsvis
 Here we show how to push to a linked stack.
@@ -157,13 +142,11 @@ Here is a proficiency exercise about pushing to linked stacks.
 
 Popping is also straightforward from the description above, as long as we remember to decrease the size of the size.
 
-    datatype LinkedStack:
-        ...
-        pop():
-            removed = top
-            top = removed.next
-            size = size - 1
-            return removed.value
+    pop(stack):
+        removed = stack.top
+        stack.top = removed.next
+        stack.size -= 1
+        return removed.value
 
 After popping, what will happen with the old top node -- will we not have to delete it from memory?
 If we use a language that has automatic garbage collection (which most high-level languages do),
@@ -240,15 +223,13 @@ That is, if the queue becomes empty after we remove the *front* node,
 we have to remember to also delete the rear pointer,
 otherwise it will point to a non-existing element.
 
-    datatype LinkedQueue:
-        ...
-        dequeue():
-            removed = front
-            front = removed.next
-            size = size - 1
-            if size == 0:
-                rear = null
-            return removed.value
+    dequeue(queue):
+        removed = queue.front
+        queue.front = removed.next
+        if queue.front is null:
+            queue.rear = null
+        queue.size -= 1
+        return removed.value
 
 
 ::: dsvis
@@ -271,16 +252,14 @@ The important thing to remember is that the "old" rear has to be updated too.
 So we first have to point the current rear to the new node,
 and then we can rassign the rear to the new node.
 
-    datatype LinkedQueue:
-        ...
-        enqueue(value):
-            newRear = new Node(value, null)
-            if size == 0:
-                front = newRear
-            else:
-                rear.next = newRear
-            rear = newRear
-            size = size + 1
+    enqueue(queue, value):
+        newRear = new Node(value, null)
+        if queue.front is null:
+            queue.front = newRear
+        else:
+            queue.rear.next = newRear
+        queue.rear = newRear
+        queue.size += 1
 
 Note that we have to treat the empty queue specially:
 we cannot reassign the current rear (because there is no currect rear yet),
@@ -299,32 +278,4 @@ Here is a proficiency exercise about enqueuing to linked queues.
 ```{.jsav-embedded src="ChalmersGU/LinkedQueue-Enqueue-PRO.html" type="ka" name="Linked Queue Enqueue Exercise"}
 ```
 :::
-
-### Complexity analysis of linked lists
-
-What is the time complexity of adding to and removing from a stack or a queue?
-The analysis is trivial for all operations:
-both *push*, *pop*, *enqueue* and *dequeue* consist of only constant time operations,
-and there is no looping or similar involved, so all of them must be constant, $O(1)$.
-
-
-### Queues as pairs of stacks
-
-One special property of stacks is that
-if we push a sequence of elements and then pop them all, we get them in *reversed* order.
-And of course, if we do the same again, we get the original order back.
-This insight can be used for a another possible implementation of queues,
-which uses use two stacks -- one "enqueue" stack and another "dequeue" stack.
-
-- To enqueue an element we push it to the *enqueue stack*.
-- To dequeue an element we pop it from the *dequeue stack*.
-- If the dequeue stack is empty, we pop all elements from the *enqueue stack*, and push them one by one to the *dequeue stack*.
-
-This strategy works, because we will be popping from the *enqueue stack* in reverse order,
-and therefore we will in the end pop from the *dequeue stack* in the original order.
-Which is exactly how a queue should behave.
-
-However, once in a while, dequeueing will be slow because we have to move all elements from one stack to the other.
-But it is possible to show that dequeueing still has *amortised* constant time complexity.
-Amortisation will be explained more in @sec:amortised-analysis, so for now you will just have to take our word for it.
 
