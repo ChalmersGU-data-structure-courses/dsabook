@@ -219,7 +219,7 @@ Consider this example of a linear probing hash table.
 For simplicity, we implement a set instead of a map here, so there are only keys and no values:
 
 
-![An open addressing hash table of size 13, representing the set {A,B,C,D,E,F}. Since this is not a map, there are no values, only keys. The keys form three clusters: {A,B,C}, {D,E}, and {F}.](images/Hashing-LinProbe1.svg){width=80% #fig:LinProbe12}
+![An open addressing hash table of size 13, representing the set {A,B,C,D,E,F}. Since this is not a map, there are no values, only keys. The keys form three clusters: {A,B,C}, {D,E}, and {F}.](images/Hashing-LinProbe1.svg){width=80% #fig:LinProbe1}
 
 
 The three elements A, B, and C are adjacent in the (circular) array, forming what is called a cluster.
@@ -237,23 +237,159 @@ Resizing the table is not just necessary for performance, but also for correctne
 
 ## Resizing hash tables
 
-Load factor.
+In both separate chaining hash tables and open addressing, 
+we want to ensure that the hash table is not too crowded, 
+or performance will degrade. 
+With separate chaining, having a large enough table gives a 
+statistical guarantee that every linked list in the table 
+is short enough to be considered constant 
+(assuming a good enough hash function). 
+For open addressing there is a similar but more mathematically 
+complicated reasoning about the length of clusters.
 
-Rehash everything!
+Resizing of hash tables is similar to resizing of dynamic arrays, 
+but differ in two key aspects 
+(dynamic arrays can not be used for hash tables):
+
+* When we increase the size of a hash table, we can not simply 
+  copy elements to the new array. The values need to be re-hashed 
+  when the table size changes, or at least re-compressed with the 
+  new table size. 
+* Dynamic arrays only resize when they are full, hash tables need
+  to have empty space to ensure efficient lookups.
+
+The *load factor* of a hash table is the number of elements 
+divided by the length of the array. For open addressing hash 
+table the load factor is always between 0 and 1, for separate 
+chaining it can in principle exceed 1. The load factor of the 
+example in @fig:LinProbe1 is $6/13$, and in @fig:SepChain2 it 
+is $3/13$. As the load factor increases, the performance of 
+lookups in the hash table degrades.
+
+Hash table implementations use resizing to ensure a low load factor, 
+typically by deciding a threshold value at which a resize happens. 
+A lower threshold means higher memory usage, but less risk of collisions.
+A common threshold value is $0.75$, meaning values are moved to a new
+larger hash table when 75% of the table is filled (for open addressing).
+The threshold value can be tweaked by developers to find a good compromise 
+between memory usage and lookup performance.
 
 ## Deleting entries from open addressing hash tables
 
-Eeasy-peasy in separate chaining.
-Deletion by rehashing.
-Lazy deletion.
+In a separate chaining hash table, deletion is easy. 
+Just perform a lookup, and delete an entry from a linked list.
+For open addressing, things are more complicated.
+
+Recall that the invariant of a open addressing hash table 
+with linear probing is that there are no null values between 
+the ideal position of a key (`hash(key)%table.length`) and its
+actual position. Introducing a null value in the middle of a 
+cluster might cause lookups to fail for the keys in the 
+remainder of the cluster.
+
+Look at the table in @fig:LinProbe1. Depending on what 
+the hash value of E is, replacing D with a blank cell might 
+cause a lookup of E to fail, since lookups terminate when 
+reaching an empty cell. Moving E to cell 4 would solve the problem
+if `hash(E)%13=4`, but break the hash table if `hash(E)%13=5`.
+
+We will look at two ways of handling deletion in open addressing:
+
+* Re-hashing the rest of the cluster. If we are removing A in 
+  @fig:LinProbe1, deleting and re-adding B and C to the hash table 
+  and ensure the invariant holds.
+* Lazy deletion. 
+
+Lazy deletion means replacing the deleted value with a special 
+token, sometimes called a tombstone, that indicates a value was deleted.
+Tombstones are not considered empty when performing lookups, so lookups 
+succeed without any modifications.
+
+When inserting a new value, the tombstones can either be ignored or replaced.
+Replacing the tombstone requires some care. Consider what happens in 
+@fig:LinProbe1 if B is replaced by a tombstone, and then we try to add C. 
+Because C is already in the set, the operation should do nothing. 
+This means that even if we decide to replace the tombstone, we need to 
+search the whole cluster first.
+
+You may be concerned about the tombstones cluttering up the hash table, 
+and wonder how we get rid of them. The key is that during resizing, the 
+tombstones are never copied to the new table. 
+
+Lazy deletion is simple in theory, but there are a plenty of technicalities 
+to it, such as how to represent the tombstones. 
+In most programming languages you would use null values to represent an 
+empty table cell, but then we need a distinct non-value to represent a tombstone. 
+
+### Shrinking tables
+
+With our hash tables supporting removal of elements, we may want to set a lower 
+threshold for load factor, and shrink the table down to free up memory.
+This needs to be done carefully so repeated add/remove cycles 
+do not cause a resize on every operation.
+
+One strategy could be to try to maintain the load factor around $0.5$, and never 
+let it exceed $0.75$ or fall below $0.25$. Each resize would set the size of the table 
+to double the current number of elements (to a minimum of $1$), ensuring that the 
+load factor is always $0.5$ immediately after a resize.
 
 ## Quality of hash functions
 
-Correctness and equivalence.
+Implementations of hash tables typically do not include the hash functions, 
+those are instead written by the developers of the key class. 
+Built in classes like text strings typically have high quality hash functions,
+but user defined types require user defined hash functions. 
+There are several required and desirable properties of these hash functions:
 
-Distribution.
+* Consistency: The absolute requirement that equal values have equal hash codes. 
+  Essentially, any pair values that should be considered the same key 
+  in our hash tables need to have the same hash code. What this means 
+  in practice in languages like Java is that if you modify the equals 
+  method of a class, you also need to modify its hash code function.
+  Neglecting to do this will mean that a hash set can contain multiple 
+  copies of logically identical elements.
+* Distribution: The simplest aspect of this is that the probablility of 
+  two randomly selected values having the same hash code should be low. 
+  Even if this condition is satisfied .
+* Efficiency: Hashing needs to be fast. Every time a lookup is performed, 
+  a value gets hashed, and every time a hash table is resized all keys must
+  be rehashed as well. The computational cost of hashing can easily 
+  eclipse the cost of searching the table. One way of mitigating this, 
+  especially for resizing, is for objects to cache the result of hashing
+  so the first time `hash(x)` is called the result is stored in `x`
+  and simply returned in subsequent calls on the same object.
 
-Rule of thumb: Every change in input value gives change in hash value.
+Designing good hash functions is hard, and there are many pitfalls where 
+two perfectly reasonable looking hash functions have wildly different 
+performance characteristics. Generally, a good hash function behaves 
+somewhat chaotically, with any small change in a value should tend to result 
+in a drastic change in its hash value. 
+
+Consider this hash function for strings: take the character codes of all 
+characters and sum them up. For two randomly selected strings, this function 
+tends to have different values, but the small and somewhat common operation 
+of swapping two characters around does not result in a different hash code.
+For something like a database of thousands of anagrams of the same string, 
+all strings would have the same value. 
+
+There is an even more subtle issue with the propsed hash function. 
+Suppose we have a hash table with millions of email adresses as keys
+(so strings with a few hundred characters at most). 
+Even if the strings tend to have distinct characters, 
+every string will have a combined character code values below
+a hundred thousand or so. In a linear probing hash table with 
+capacity for tens of millions of strings, all strings will form a huge cluster 
+at the start of the table, killing lookup performance. 
+The hash codes are poorly distributed over the whole range of integers.
+
+
+
+<!--
+Even more subtle, some hash functions might mesh poorly with certain strategies
+for hash table resizing. Consider if we start with size 1, and then double. 
+The hash 
+-->
+
 
 Efficiency of hashing. Caching hash values. 
 
@@ -267,6 +403,8 @@ Clustering and load factor. Knuth's parking problem?
 
 Amortization of resizing.
 
+
+
 ## The many pitfalls of hash table performance
 
 Size of table, prime or factors of 2?
@@ -274,6 +412,13 @@ Size of table, prime or factors of 2?
 DOS Attacks by deliberate hash collisions.
 
 Multiply by 2 vs 37 in hash functions.
+
+Despite all these caveats, hash tables remain a true workhorse of modern 
+software development. It is not an exaggeration to say that most data 
+produced today is stored in a hash tables at one point or another, 
+since database management systems rely extensively on them for efficient 
+searching. Many computer languages have built in supoort for hash tables, such 
+as python dictionaries and Javascript objects. 
 
 ...
 
