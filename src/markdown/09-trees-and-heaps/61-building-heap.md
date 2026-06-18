@@ -61,8 +61,8 @@ The method `buildHeap` implements the building algorithm:
 
     datatype MinHeap:
         ...
-        buildHeap(array):
-            heap = array                // Initialise the heap to the given array.
+        buildHeap(arr):
+            heap = arr                  // Initialise the heap to the given array.
             size = heap.size            // The capacity of the heap is used in full.
             mid = parent(size-1)        // Find the parent of the last leaf.
             for i in mid, mid-1 .. 0:   // Iterate the internal nodes backwards.

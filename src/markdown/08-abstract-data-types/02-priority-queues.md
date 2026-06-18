@@ -66,12 +66,12 @@ To sort a list of items:
 Here is an implementation of this algorithm in code:
 <!-- NICSMA: END -->
 
-    pqSort(array):
+    pqSort(arr):
         pq = new PriorityQueue()
-        for each item in array:
+        for each item in arr:
             pq.add(item)
-        for i in 0 .. array.size-1:
-            array[i] = pq.removeMin()
+        for i in 0 .. arr.size-1:
+            arr[i] = pq.removeMin()
 
 <!-- NICSMA: START -->
 What is the time complexity of this algorithm?

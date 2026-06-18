@@ -70,25 +70,25 @@ Here is an implementation for parent pointer trees and the **Union/Find** proces
 
     // General tree implementation for Union/Find
     datatype ParentPointerTree:
-        array: Array of Int
+        arr: Array of Int
 
         constructor(size):
             // Each node is its own root to start
-            array = new Array(size)
+            arr = new Array(size)
             for i in 0 .. size-1:
-                array[i] = -1  // We use -1 to say that this is a root
+                arr[i] = -1  // We use -1 to say that this is a root
 
         // Merge two subtrees if they are different:
         union(a: Int, b: Int):
             root1 = find(a)    // Find root of node a
             root2 = find(b)    // Find root of node b
             if root1 != root2: // Merge two trees
-                array[root1] = root2
+                arr[root1] = root2
 
         // Return the root of current's tree
         find(current: Int) -> Int:
-            while array[current] != -1:
-                current = self.array[current]
+            while arr[current] != -1:
+                current = self.arr[current]
             return current  // Now we are at the root
 
 The `ParentPointerTree` class has an array where each array position
@@ -218,10 +218,10 @@ Here is an implementation for **Union** when using weighted union.
             root2 = find(b)     // Find root of node b
             if root1 != root2:  // Merge with weighted union
                 if weights[root2] > weights[root1]:
-                    array[root1] = root2
+                    arr[root1] = root2
                     weights[root2] += weights[root1]
                 else:
-                    array[root2] = root1
+                    arr[root2] = root1
                     weights[root1] += weights[root2]
 
 
@@ -252,11 +252,11 @@ also makes all ancestors of the current node point to the root.
         ...
         // Return the root of current's tree with path compression
         find(current):
-            if array[current] == -1:
+            if arr[current] == -1:
                 return current  // Base case: we are at the root
             else:
-                array[current] = find(array[current])
-                return array[current]
+                arr[current] = find(arr[current])
+                return arr[current]
 
 
 ::: dsvis

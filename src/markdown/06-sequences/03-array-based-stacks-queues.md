@@ -12,7 +12,7 @@ Can we use arrays to implement stacks and queues too?
 
 Yes, and we will show how to do that here.
 There is one big problem with using arrays -- they are always *fixed size*.
-So if we have an array of size 1000 we can only have a stack or queue with at most 1000 elements.
+So if we have an array of size 100 we can only have a stack or queue with at most 100 elements.
 This is a serious restriction, and in the next section we will show how to solve that
 -- a *dynamic array* has the same features as a normal array, but it can change its size dynamically.
 But in this section we will for now assume that we have a fixed maximum number of elements.
@@ -20,13 +20,13 @@ But in this section we will for now assume that we have a fixed maximum number o
 ### Array-based stacks
 
 An array-based stack uses an internal array as underlying storage, and this array has a predefined size.
-In this example the underlying array has an internal size of 1000:
+In this example the underlying array has an internal size of 100:
 
     datatype ArrayStack implements Stack:
-        array = new Array(1000)    // Internal array containing the stack elements
-        size = 0                   // The size of the stack
+        arr = new Array(100)    // Internal array containing the stack elements
+        size = 0                 // The size of the stack
 
-Note that 1000 is the internal *capacity* of the stack, it is not the actual size.
+Note that 100 is the internal *capacity* of the stack, it is not the actual size.
 When the stack is created it should be empty, and therefore the initial stack size is 0.
 
 <!-- OPENDSA: START -->
@@ -54,10 +54,10 @@ but instead we can move the stack pointer to the left or the right.
 In an array-based stack we do not need a separate pointer to the *top*,
 because it is the same as the *size* variable (minus 1).
 That is, the *size* points to the index of the next free array cell.
-Therefore, to push a value onto the stack, we assign `array[size]` and then increase the size.
+Therefore, to push a value onto the stack, we assign `arr[size]` and then increase the size.
 
     push(stack, value):
-        stack.array[stack.size] = value
+        stack.arr[stack.size] = value
         stack.size += 1
 
 ::: dsvis
@@ -80,8 +80,8 @@ After that we can clear the old top cell in the array and return the result.
 
     pop(stack):
         stack.size -= 1
-        result = stack.array[stack.size]
-        stack.array[stack.size] = null    // For garbage collection
+        result = stack.arr[stack.size]
+        stack.arr[stack.size] = null    // For garbage collection
         return result
 
 Note that it is important that we clear the old top value (by assigning the cell to *null*).
@@ -197,10 +197,10 @@ Array queue -- drifting.
 Note that both pointers will increase, they will never decrease.
 After a while, when we have enqueued enough elements, the *rear* pointer will reach the end of the array,
 and this will happen even if we have dequeued all previous elements!
-For example, suppose that we run *enqueue* directly followed by a *dequeue*, and we do this 1000 times.
+For example, suppose that we run *enqueue* directly followed by a *dequeue*, and we do this 100 times.
 The queue itself will never contain more than one element,
-but after repeating 1000 times the *rear* pointer has reached the end of the array
-(assuming that we allocated space for 1000 elements).
+but after repeating 100 times the *rear* pointer has reached the end of the array
+(assuming that we allocated space for 100 elements).
 The next time we enqueue an element the program will crash,
 because we try to refer to an array cell that does not exist.
 
@@ -265,10 +265,10 @@ because this will make the code more similar to our other implementations.
 <!-- OPENDSA: END -->
 
     datatype ArrayQueue implements Queue:
-        array = new Array(1000)    // Internal array containing the queue elements.
-        size = 0                   // The size of the queue.
-        front = 0                  // Index of the front element.
-        rear = -1                  // Index of the rear element.
+        array = new Array(100)    // Internal array containing the queue elements.
+        size = 0                  // The size of the queue.
+        front = 0                 // Index of the front element.
+        rear = -1                 // Index of the rear element.
 
 We also add a helper function `nextPosition` which will come in handy, both for enqueueing and dequeueing.
 This is easily implemented through use of the *modulus* operator:
@@ -276,7 +276,7 @@ instead of just using $i+1$ for the next position,
 we have to use $(i+1)\bmod n$ (where $n$ is the size of the array).
 
     nextPosition(queue, i):
-        return (i + 1) mod queue.array.size
+        return (i + 1) mod queue.arr.size
 
 
 #### Enqueueing and dequeueing
@@ -287,7 +287,7 @@ When enqueueing, we increase the *rear* pointer (modulo the size of the internal
 
     enqueue(queue, x):
         queue.rear = nextPosition(queue, queue.rear)  // Circular increment
-        queue.array[queue.rear] = x
+        queue.arr[queue.rear] = x
         queue.size += 1
 
 <!-- OPENDSA: START -->
@@ -297,8 +297,8 @@ Just as for array-based stacks, we have to clear the array cell that was dequeue
 because otherwise it will never be garbage collecter.
 
     dequeue(queue):
-        result = queue.array[queue.front]
-        queue.array[queue.front] = null                 // For garbage collection
+        result = queue.arr[queue.front]
+        queue.arr[queue.front] = null    // For garbage collection
         queue.front = nextPosition(queue, queue.front)  // Circular increment
         queue.size -= 1
         return result

@@ -218,32 +218,32 @@ To split this subarray into two halves, we just calculate the middle index betwe
 The main function for sorting an interval can now be written like this:
 
     // Sort the array interval start...end
-    mergeSort(array, start, end):
+    mergeSort(arr, start, end):
         if start >= end:                   // Base case: Interval length is ≤ 1
             return
         mid = int((start + end) / 2)       // The midpoint is where the second half starts
-        mergeSort(array, start, mid-1)     // Mergesort the first half
-        mergeSort(array, mid, end)         // Mergesort the second half
-        merge(array, start, mid, end)      // Merge the two sorted halves
+        mergeSort(arr, start, mid-1)     // Mergesort the first half
+        mergeSort(arr, mid, end)         // Mergesort the second half
+        merge(arr, start, mid, end)      // Merge the two sorted halves
 
-The initial call would be `mergeSort(array,0,array.size-1)`, which sorts the whole array.
+The initial call would be `mergeSort(arr,0,arr.size-1)`, which sorts the whole array.
 
 Merging the sorted array intervals are quite straightforward from the description,
 we just have to keep track of the pointers to the two sorted halves.
 
     // Merge the sorted array intervals start .. mid-1 and mid .. end
-    merge(array, start, mid, end):
+    merge(arr, start, mid, end):
         temp = new Array
         j = start; k = mid                 // Pointers to the sorted halves
         for i in start .. end:             // Pointer to the temporary array
-            if j < mid and (k > end or array[j] <= array[k]):
-                temp[i] = array[j]         // The element from the first half is smaller
+            if j < mid and (k > end or arr[j] <= arr[k]):
+                temp[i] = arr[j]         // The element from the first half is smaller
                 j += 1                     // (or the second half is exhausted)
             else:
-                temp[i] = array[k]         // The element from the second half is smaller
+                temp[i] = arr[k]         // The element from the second half is smaller
                 k += 1                     // (or the first half is exhausted)
         for i in start .. end:
-            array[i] = temp[i]             // Copy everything back
+            arr[i] = temp[i]             // Copy everything back
 
 
 ::: dsvis
@@ -269,9 +269,9 @@ and reuse this array in all invocations of merge.
 The only thing we would have to do is to add an extra argument to `mergeSort` and `merge`, for the reference to the auxiliary array.
 Then we can create a wrapper function that takes care of the initialisation, and makes the first recursive call:
 
-    mergeSort(array):
-        temp = new Array of size array.size
-        mergeSort(array, temp, 0, array.size-1)
+    mergeSort(arr):
+        temp = new Array of size arr.size
+        mergeSort(arr, temp, 0, arr.size-1)
 
 #### Using a backoff algorithm
 

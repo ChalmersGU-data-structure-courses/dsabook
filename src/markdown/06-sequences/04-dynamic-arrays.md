@@ -46,11 +46,11 @@ The basic idea is to not try to resize the internal array -- as we already menti
 Instead we create a *new* array of a larger size, and copy over the elements from the old array to the new.
 Afterwards we can forget about the old array because it will not be used anymore.
 
-    resize(stack, newCapacity):
-        oldArray = stack.array                // Remember the old internal array
-        stack.array = new Array(newCapacity)  // Create a new internal array
+    resize(stack, capacity):
+        oldArr = stack.arr               // Remember the old internal array
+        stack.arr = new Array(capacity)  // Create a new internal array
         for i in 0 .. stack.size-1:
-            stack.array[i] = oldArray[i]      // Copy over all elements to the new array
+            stack.arr[i] = oldArr[i]     // Copy over all elements to the new array
 
 Note that resizing the internal array is a *slow* operation,
 it has to iterate through all elements in the list and copy each one.
@@ -63,10 +63,10 @@ Or in other words, how large should the new internal array be -- what should be 
 How about increasing the capacity with 100 elements, every time the array behomes full:
 
     push(stack, value):
-        if stack.size == stack.array.size:    // If the internal array is full,
-            newCapacity = stack.size + 100   // increase its capacity with 100 elements
-            resize(stack, newCapacity)
-        stack.array[stack.size] = value
+        if stack.size == stack.arr.size:   // If the internal array is full,
+            capacity = stack.size + 100    // increase its capacity with 100 elements
+            resize(stack, capacity)
+        stack.arr[stack.size] = value
         stack.size += 1
 
 Suppose that we want to push $n$ values to an empty stack (where $n$ is much larger than 100).
@@ -99,7 +99,7 @@ Using the formula above, the number of times an array element gets copied is aro
 -- it copies on average 20,000 elements for every push to the stack.
 This is of course not acceptable.
 
-But what if we increase the capacity with 1000 elements instead?
+But what if we increase the capacity with 1,000 elements instead?
 This will unfortunately not help much -- the reasoning above still holds,
 and the complexity of pushing $n$ to the stack will still be quadratic, $O(n^2)$.
 
@@ -115,8 +115,8 @@ This turns out to work well!
 <!-- NICSMA: END -->
 
     push(stack, value):
-        if stack.size == stack.array.size:   // If the internal array is full,
-            newCapacity = stack.size * 2     // double its capacity
+        if stack.size == stack.arr.size:   // If the internal array is full,
+            capacity = stack.size * 2      // double its capacity
             ...
 
 Suppose that we again push 1 million elements onto an empty stack.
@@ -251,12 +251,12 @@ This will lead to the following resized array:
 Apart from this detail, that we have to reset the pointers,
 the implementation of resizing is similar to the one for stacks:
 
-    resize(queue, newCapacity):
-        oldArray = queue.array
-        queue.array = new Array(newCapacity)
+    resize(queue, capacity):
+        oldArr = queue.arr
+        queue.arr = new Array(capacity)
         for pos in 0 .. queue.size-1:
-            oldPos = (pos + front) mod queue.array.size
-            queue.array[pos] = oldArray[oldPos]
+            oldPos = (pos + front) mod queue.arr.size
+            queue.arr[pos] = oldArr[oldPos]
         queue.front = 0
         queue.rear = queue.size - 1
 
@@ -305,11 +305,11 @@ This means that the dynamic *pop* method for stacks will look like this:
 
     pop(stack):
         stack.size -= 1
-        result = stack.array[stack.size]
-        stack.array[stack.size] = null    // For garbage collection
-        if stack.size < stack.array.size * 1/3:
-            newCapacity = stack.array.size * 1/2
-            resize(stack, newCapacity)
+        result = stack.arr[stack.size]
+        stack.arr[stack.size] = null    // For garbage collection
+        if stack.size < stack.arr.size * 1/3:
+            capacity = stack.arr.size * 1/2
+            resize(stack, capacity)
         return result
 
 ::: dsvis

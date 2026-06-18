@@ -45,14 +45,14 @@ To find the next-smallest element we have to search through the entire unsorted 
 but only one swap is required to put the element into place.
 The algorithm above can be implemented as follows in pseudocode:
 
-    selectionSort(array):
-        n = array.size
-        for i in 0 .. n-1:                      // Select the i'th smallest element:
-            minIndex = i                        //     Current smallest index
-            for j in i+1 .. n-1:                //     Find the smallest value:
-                if array[j] < array[minIndex]:  //         Found something smaller:
-                    minIndex = j                //             Remember the smaller index
-            swap(array, i, minIndex)            //     Put the smallest value into place
+    selectionSort(arr):
+        n = arr.size
+        for i in 0 .. n-1:                   // Select the i'th smallest element:
+            minIndex = i                     //     Current smallest index
+            for j in i+1 .. n-1:             //     Find the smallest value:
+                if arr[j] < arr[minIndex]:   //         Found something smaller:
+                    minIndex = j             //             Remember the smaller index
+            swap(arr, i, minIndex)           //     Put the smallest value into place
 
 Any algorithm can be written in slightly different ways.
 For example, we could have written Selection sort to

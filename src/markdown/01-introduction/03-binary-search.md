@@ -23,9 +23,9 @@ go through each book at the time and see if it's the right one.
 This algorithm is called *sequential search*, because you look at each book in sequence.
 Here is a simple implementation:
 
-    sequentialSearch(array, key):
-        for i in 0 .. array.size - 1:   // For each element in array:
-            if array[i] == key:         //     If we found the search key:
+    sequentialSearch(arr, key):
+        for i in 0 .. arr.size - 1:     // For each element in the array:
+            if arr[i] == key:           //     If we found the search key:
                 return i                //         return this position
         return null                     // Otherwise, return null
 
@@ -100,18 +100,18 @@ The repeat the following until *key* has been found, or the interval is empty:
 
 Here is how you can implement the algorithm in pseudocode:
 
-    binarySearch(array, key):
-        start = 0                        // The marker pointing to the first element in the interval
-        end = array.size - 1             // The marker pointing to the last element in the interval
-        while start <= end:              // Continue until the interval is empty:
-            mid = (start + end) / 2      //     Find the index of the middle value
-            if array[mid] < key:         //     Compare with the middle value in the interval:
-                start = mid + 1          //         The search key is in the upper half
-            else if array[mid] > key:
-                end = mid - 1            //         The search key is in the lower half
+    binarySearch(arr, key):
+        start = 0                      // The marker pointing to the first element in the interval
+        end = arr.size - 1             // The marker pointing to the last element in the interval
+        while start <= end:            // Continue until the interval is empty:
+            mid = (start + end) / 2    //     Find the index of the middle value
+            if arr[mid] < key:         //     Compare with the middle value in the interval:
+                start = mid + 1        //         The search key is in the upper half
+            else if arr[mid] > key:
+                end = mid - 1          //         The search key is in the lower half
             else:
-                return mid               //         We found the search key!
-        return null                      // The value is not in the array.
+                return mid             //         We found the search key!
+        return null                    // The value is not in the array.
 
 An important implementation detail is how to implement the markers.
 Remember that we imagined them to be *between* two books -- how do we encode this in an algorithm?
@@ -122,7 +122,7 @@ and the end marker is the index of the last book.
 
 *Warning*: one very common error when implementing binary search is to make a copy of the interval you want to search
 (this is called a "slice" in many programming languages).
-For example, in Python if you write `array[start:end]`, you will make a copy of the interval.
+For example, in Python if you write `arr[start:end]`, you will make a copy of the interval.
 Imagine that the interval consists of 1 million elements,
 then the computer has to allocate space for a new array with 1 million elements,
 and copy all of them from the original array to the new.

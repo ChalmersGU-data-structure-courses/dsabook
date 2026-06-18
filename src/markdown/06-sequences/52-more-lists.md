@@ -452,8 +452,8 @@ The internals of an array-based list.
 :::
 
     datatype ArrayList implements List:
-        internalArray = new Array(capacity)  // Internal array containing the list elements
-        size = 0                             // Size of list
+        arr = new Array(capacity)   // Internal array containing the list elements
+        size = 0                    // Size of list
 
 *Note*: in Python you cannot create an array with a certain capacity.
 You can simulate it by creating a list with a number of empty elements:
@@ -477,11 +477,11 @@ which means that both require $O(1)$ time.
         ...
         get(i):
             // precondition: 0 <= i < size
-            return internalArray[i]
+            return arr[i]
 
         set(i, x):
             // precondition: 0 <= i < size
-            internalArray[i] = x
+            arr[i] = x
 
 
 #### Adding elements
@@ -517,11 +517,11 @@ elements, which is $O(n)$.
     datatype ArrayList:
         ...
         add(i, x):
-            // precondition: 0 <= i <= size < internalArray.size
+            // precondition: 0 <= i <= size < arr.size
             size += 1
             for k in size-1, size-2 .. i+1:
-                internalArray[k] = internalArray[k-1]
-            internalArray[i] = x
+                arr[k] = arr[k-1]
+            arr[i] = x
 
 
 #### Practice exercise
@@ -555,11 +555,11 @@ elements, which is $O(n)$.
         ...
         remove(i):
             // precondition: 0 <= i < size
-            x = internalArray[i]
+            x = arr[i]
             for k in i+1 .. size-1:
-                internalArray[k-1] = internalArray[k]
+                arr[k-1] = arr[k]
             size -= 1
-            internalArray[size] = null  // For garbage collection
+            arr[size] = null  // For garbage collection
             return x
 
 
