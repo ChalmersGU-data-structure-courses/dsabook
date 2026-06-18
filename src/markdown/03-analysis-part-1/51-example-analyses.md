@@ -15,7 +15,7 @@ Consider a simple `for` loop.
 
     sum = 0
     for i in 1 .. n:
-        sum = sum + i
+        sum += i
 
 The first line is $O(1)$. The `for` loop is repeated $n$ times. The
 third line takes constant time so, by simplifying rule (4), the total
@@ -53,9 +53,9 @@ are nested.
     sum = 0
     for i in 1 .. n:      // First for loop
         for j in 1 .. j:  // is a double loop.
-            sum = sum + 1
+            sum += 1
     for k in 1 .. n:      // Second for loop.
-        sum = sum + 1
+        sum += 1
 
 
 This code fragment has three separate statements: the first assignment
@@ -64,7 +64,7 @@ constant time; call it $c_1$.
 The second `for` loop is just like the one in example with one `for` loop and takes $c_2 n \in O(n)$ time.
 
 The first `for` loop is a double loop and requires a special technique.
-We work from the inside of the loop outward. The expression `sum=sum+1`
+We work from the inside of the loop outward. The expression `sum+=1`
 requires constant time; call it $c_3$. Because the inner `for` loop is
 executed $j$ times, by simplifying rule (4) it has cost $c_3j$. The
 outer `for` loop is executed $n$ times, but each time the cost of the
@@ -92,16 +92,16 @@ Compare the asymptotic analysis for the following two code fragments.
     sum1 = 0
     for i in 1 .. n:       // First double loop.
         for j in 1 .. n:   // Do n times.
-            sum1 = sum1 + 1
+            sum1 += 1
 
     sum2 = 0
     for i in 1 .. n:       // Second double loop.
         for j in 1 .. i:   // Do i times.
-            sum2 = sum2 + 1
+            sum2 += 1
 
 In the first double loop, the inner `for` loop always executes $n$
 times. Because the outer loop executes $n$ times, it should be obvious
-that the statement `sum1=sum1+1` is executed precisely $n^2$ times. The
+that the statement `sum1+=1` is executed precisely $n^2$ times. The
 second loop is similar to the one analysed in the previous example, with
 cost $\sum_{j = 1}^{n} j$. This is approximately $n^2/2$.
 Thus, both double loops cost $O(n^2)$, though the second requires
@@ -118,7 +118,7 @@ Not all doubly nested `for` loops are strictly $O(n^2)$, the following is an exa
     k = 1
     while k <= n:          // Do log(n) times.
         for j in 1 .. n:   // Do n times.
-            sum = sum + 1
+            sum += 1
         k = k * 2
 
 To make our analysis easier, we will assume that $n$ is a power of two.

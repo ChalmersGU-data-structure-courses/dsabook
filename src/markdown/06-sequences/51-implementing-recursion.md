@@ -71,7 +71,7 @@ following non-recursive version of the factorial function.
         S = new Stack()
         while n > 1:
             S.push(n)
-            n = n - 1
+            n -= 1
         result = 1
         while S.size > 0:
             result = result * S.pop()

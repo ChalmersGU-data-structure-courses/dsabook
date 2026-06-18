@@ -150,7 +150,7 @@ We have to handle adding to an empty list specially, because then both head and 
                 newhead = new DoubleNode(x, null, head)
                 head.prev = newhead
                 head = newhead
-            size = size + 1
+            size += 1
 
         addLast(x):
             if size == 0:
@@ -159,7 +159,7 @@ We have to handle adding to an empty list specially, because then both head and 
                 newtail = new DoubleNode(x, tail, null)
                 tail.next = newtail
                 tail = newtail
-            size = size + 1
+            size += 1
 
 
 #### Removing from a double-linked list
@@ -172,14 +172,14 @@ The same goes for removing elements -- the one-element list is a special case.
             removed = head                      // Remember the current head
             head = removed.next                 // Re-point the head to the second node
             head.prev = null                    // Make sure the new head doesn't have any predecessor
-            size = size - 1
+            size -= 1
             return removed.elem
 
         removeLast():
             removed = tail                      // Remember the current tail
             tail = removed.prev                 // Re-point the tail to the predecessor node
             tail.next = null                    // Make sure the new tail doesn't have any successor
-            size = size - 1
+            size -= 1
             return removed.elem
 
 
@@ -345,7 +345,7 @@ Here's the code for addition.
                 repeat i-1 times:
                     prev = prev.next
                 prev.next = new Node(x, prev.next)
-            size = size + 1
+            size += 1
 
 
 ::: dsvis
@@ -380,7 +380,7 @@ Here's the code for deletion:
                 removed = prev.next
                 prev.next = removed.next
             removed.next = null   // For garbage collection
-            size = size - 1
+            size -= 1
             return removed.elem
 
 
@@ -518,7 +518,7 @@ elements, which is $O(n)$.
         ...
         add(i, x):
             // precondition: 0 <= i <= size < internalArray.size
-            size = size + 1
+            size += 1
             for k in size-1, size-2 .. i+1:
                 internalArray[k] = internalArray[k-1]
             internalArray[i] = x
@@ -558,7 +558,7 @@ elements, which is $O(n)$.
             x = internalArray[i]
             for k in i+1 .. size-1:
                 internalArray[k-1] = internalArray[k]
-            size = size - 1
+            size -= 1
             internalArray[size] = null  // For garbage collection
             return x
 

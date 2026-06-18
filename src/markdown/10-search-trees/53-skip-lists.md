@@ -126,7 +126,7 @@ distribution.
     randomLevel():
         level = 0
         while random() < 0.5:
-            level = level + 1
+            level += 1
         return lev
 
 Once the proper level for the node has been determined, the next step is
@@ -160,7 +160,7 @@ the one being inserted.
                 for i = 0 to newLevel:  // Splice into list
                     y.forward[i] = update[i].forward[i]  // Who y points to
                     update[i].forward[i] = y  // Who points to y
-                size = size + 1
+                size += 1
 
         adjustHead(newLevel):
             temp = head

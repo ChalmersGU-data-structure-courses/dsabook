@@ -219,10 +219,10 @@ Here is an implementation for **Union** when using weighted union.
             if root1 != root2:  // Merge with weighted union
                 if weights[root2] > weights[root1]:
                     array[root1] = root2
-                    weights[root2] = weights[root2] + weights[root1]
+                    weights[root2] += weights[root1]
                 else:
                     array[root2] = root1
-                    weights[root1] = weights[root1] + weights[root2]
+                    weights[root1] += weights[root2]
 
 
 ::: dsvis

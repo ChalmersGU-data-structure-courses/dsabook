@@ -79,11 +79,11 @@ follows.
 <!-- OPENDSA: END -->
 
 
-    for i in 0 .. c-1:    // Initialise the counts.
+    for i in 0 .. c-1:        // Initialise the counts.
         count[i] = 0
-    for i in 0 .. p-1:    // Increment the colour value count for each pixel.
-        count[value(i)] = count[value(i)]+1
-    sort(count)           // Sort the pixel value counts.
+    for i in 0 .. p-1:        // Increment the colour value count for each pixel.
+        count[value(i)] += 1
+    sort(count)               // Sort the pixel value counts.
 
 <!-- OPENDSA: START -->
 In this example, `count` is an array of size $c$ that stores the number of pixels for each colour value.

@@ -141,7 +141,7 @@ optimisation.
             j = i
             while j > 0 and temp < arr[j-1]:
                 arr[j] = arr[j-1]
-                j = j-1
+                j -= 1
             arr[j] = temp
 
 In this case the optimisation actually is a substantial improvement.

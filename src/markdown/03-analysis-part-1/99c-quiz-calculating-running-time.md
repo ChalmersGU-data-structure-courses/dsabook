@@ -36,7 +36,7 @@ Assume that all variables are integers.
     sum = 0
     for i = 0 to 2:
         for j = 0 to n-1:
-            sum = sum + 1
+            sum += 1
 
 - [x] $O(n)$
 - [ ] $O(\log(n))$
@@ -62,7 +62,7 @@ Assume that all variables are integers.
 
     sum = 0
     for i = 0 to n*n-1:
-        sum = sum + 1
+        sum += 1
 
 - [x] $O(n^2)$
 - [ ] $O(\log(n))$
@@ -117,7 +117,7 @@ Assume that all variables are integers.
     for i = 1 to n:
         j = 1
         while j <= n:
-            sum = sum + 1
+            sum += 1
             j = j * 2
 
 
@@ -147,7 +147,7 @@ Assume that all variables are integers.
     i = 1
     while i <= n:
         for j = 1 to n:
-            sum = sum + 1
+            sum += 1
         i = i * 2
 
 - [x] $O(n \log(n))$
@@ -209,8 +209,8 @@ Assume array `arr` contains a random permutation of the values from 0 to $n-1$.
     for i = 0 to n-1:
         j = 0
         while arr[j] != i:
-            sum = sum + 1
-            j = j + 1
+            sum += 1
+            j += 1
 
 - [x] $O(n^2)$
 - [ ] $O(\log(n))$
@@ -237,9 +237,9 @@ Assume that all variables are integers.
     sum = 0
     if EVEN(n):
         for i = 0 to n-1:
-            sum = sum + 1
+            sum += 1
     else:
-        sum = sum + n
+        sum += n
 
 - [x] $O(n)$
 - [ ] $O(\log(n))$

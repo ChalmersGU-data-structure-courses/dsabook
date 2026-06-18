@@ -42,7 +42,7 @@ The algorithm above can be implemented as follows in pseudocode:
             j = i                                    //     Start at the end of the sorted part
             while j > 0 and array[j] < array[j-1]:   //     Go backwards until we find the position:
                 swap(array, j, j-1)                  //         Move the element one step forward
-                j = j-1
+                j -= 1
 
 
 :::::::: online

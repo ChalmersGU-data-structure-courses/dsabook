@@ -451,12 +451,12 @@ Note that we use a helper method for "sifting" a value up the tree.
     datatype MinHeap:
         ...
         add(elem):
-            heap.add(elem)         // Add the element at end of the heap.
-            siftUp(size)           // Put it in its correct place.
-            size = size + 1        // Increase the size of the heap.
+            heap.add(elem)     // Add the element at end of the heap.
+            siftUp(size)       // Put it in its correct place.
+            size += 1          // Increase the size of the heap.
 
         siftUp(pos):
-            while pos > 0 and less(pos, parent(pos)):  // Continue as long as the parent is larger
+            while pos > 0 and less(pos, parent(pos)):  // Continue as long as the parent is larger.
                 swap(pos, parent(pos))
                 pos = parent(pos)       // Move up one level in the tree.
 
@@ -536,8 +536,8 @@ Note that we use a helper method to sift an element down the tree, as well as an
         removeMin():
             min = getMin()       // Remember the current minimum, to return in the end.
             swap(0, size-1)      // Swap the last element into the first position.
-            heap.remove(size-1)  // Remove the last element from the array
-            size = size - 1      // and decrease the size.
+            heap.remove(size-1)  // Remove the last element from the array,
+            size -= 1            // and decrease the size.
             siftDown(0)          // Put the new root in its correct place.
             return min
 

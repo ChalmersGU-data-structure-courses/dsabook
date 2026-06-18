@@ -145,12 +145,12 @@ manipulation to the left and the right children of each node.
 
     inefficient_increment(node):
         if node is not null:
-            node.elem = node.elem + 1
+            node.elem += 1
             if node.left is not null:
-                node.left.elem = node.left.elem + 1
+                node.left.elem += 1
                 inefficient_increment(node.left.left)
             if node.right is not null:
-                node.right.elem = node.right.elem + 1
+                node.right.elem += 1
                 inefficient_increment(node.right.right)
 
 The efficient solution should not explicitly set the child values that

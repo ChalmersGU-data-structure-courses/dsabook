@@ -241,7 +241,7 @@ the following nested loop, which has a nontrivial complexity:
     k = 1
     while k <= n:          // Do log(n) times.
         for j in 1 .. k:   // Do k times.
-            sum = sum + 1
+            sum += 1
         k = k * 2
 
 Since $k$ is multiplied by 2 in each iteration, the outer `while`-loop runs $\log(n)$ times.

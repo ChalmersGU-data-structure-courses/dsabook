@@ -210,13 +210,13 @@ The informal algorithm in @sec:partition can be implemented as pseudocode like t
         low = start + 1; high = end        // initialise the lower and upper pointers.
         while low <= high:                 // Continue until the pointers pass each other.
             if array[low] < pivot:
-                low = low + 1              // Increase the lower pointer if its element is smaller than the pivot.
+                low += 1                   // Increase the lower pointer if its element is smaller than the pivot.
             else if array[high] > pivot:
-                high = high - 1            // Increase the upper pointer if its element is larger than the pivot.
+                high -= 1                  // Decrease the upper pointer if its element is larger than the pivot.
             else:
                 swap(array, low, high)     // Otherwise, swap the elements, and
-                low = low + 1              // move both pointers towards each other.
-                high = high - 1
+                low += 1                   // move both pointers towards each other.
+                high -= 1
         swap(array, start, high)           // Finally, swap the pivot into place, and
         return high                        // return the new position of the pivot.
 
@@ -543,21 +543,21 @@ An alternative is to move the pointers as far as possible during each iteration,
 and then the pseudocode will become like this:
 
     partition(array, start, end, p) -> Int:
-        swap(array, start, p)              // Swap the pivot with the first element in the interval.
-        pivot = array[start]               // Remember the pivot value, and
-        low = start + 1; high = end        // initialise the lower and upper pointers.
+        swap(array, start, p)         // Swap the pivot with the first element in the interval.
+        pivot = array[start]          // Remember the pivot value, and
+        low = start + 1; high = end   // initialise the lower and upper pointers.
         repeat:
             while low <= high and array[low] < pivot:
-                low = low + 1              // Increase the lower pointer as long as its element is smaller than the pivot.
+                low += 1              // Increase the lower pointer as long as its element is smaller than the pivot.
             while low <= high and array[high] > pivot:
-                high = high - 1            // Increase the upper pointer as long as its element is larger than the pivot.
+                high -= 1             // Increase the upper pointer as long as its element is larger than the pivot.
             if low > high:
-                break                      // Break out of the loop when the pointers have passed each other.
-            swap(array, low, high)         // Otherwise, swap the elements, and
-            low = low + 1                  // move both pointers towards each other.
-            high = high - 1
-        swap(array, start, high)           // Finally, swap the pivot into place, and
-        return high                        // return the new position of the pivot.
+                break                 // Break out of the loop when the pointers have passed each other.
+            swap(array, low, high)    // Otherwise, swap the elements, and
+            low += 1                  // move both pointers towards each other.
+            high -= 1
+        swap(array, start, high)      // Finally, swap the pivot into place, and
+        return high                   // return the new position of the pivot.
 
 This version is ever so slightly faster than the one in @sec:implementing-quicksort,
 because in some cases it makes fewer comparisons.
@@ -577,15 +577,15 @@ and the elements from $\mathit{low}$ to $\mathit{high}$ are greater than or equa
 In Lomuto's partitioning scheme we start by putting the pivot at the *end* of the interval, not the beginning.
 
     partition(array, start, end, p) -> Int:
-        swap(array, p, end)                // Swap the pivot with the last element in the interval.
-        pivot = array[start]               // Remember the pivot value, and
-        low = start                        // initialise the lower pointer.
-        for high in start .. end-1:        // Iterate the upper pointer over the entire interval.
+        swap(array, p, end)             // Swap the pivot with the last element in the interval.
+        pivot = array[start]            // Remember the pivot value, and
+        low = start                     // initialise the lower pointer.
+        for high in start .. end-1:     // Iterate the upper pointer over the entire interval.
             if array[high] <= pivot:
-                swap(array, low, high)     // Swap the lower and upper elements if the upper is smaller than the pivot, and
-                low = low + 1              // and increase the lower pointer.
-        swap(array, end, low)              // Finally, swap the pivot into place, and
-        return low                         // return the new position of the pivot.
+                swap(array, low, high)  // Swap the lower and upper elements if the upper is smaller than the pivot,
+                low += 1                // and increase the lower pointer.
+        swap(array, end, low)           // Finally, swap the pivot into place, and
+        return low                      // return the new position of the pivot.
 
 As you can see, Lomuto's partitioning scheme gives very simple and clean implementation,
 but it is usually somewhat less efficient than Hoare's, because it makes more swaps.

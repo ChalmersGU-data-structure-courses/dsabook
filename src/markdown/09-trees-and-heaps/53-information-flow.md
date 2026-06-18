@@ -69,9 +69,9 @@ checks on the left and the right child of each visited node.
             return 0
         count = 0
         if node.left is not null:
-            count = count + inefficient_count(node.left)
+            count += inefficient_count(node.left)
         if node.right is not null:
-            count = count + inefficient_count(node.right)
+            count += inefficient_count(node.right)
         if node.left is null and node.right is null:
             return 1
         else:

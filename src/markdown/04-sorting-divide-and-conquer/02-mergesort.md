@@ -234,16 +234,16 @@ we just have to keep track of the pointers to the two sorted halves.
     // Merge the sorted array intervals start .. mid-1 and mid .. end
     merge(array, start, mid, end):
         temp = new Array
-        j = start; k = mid                  // Pointers to the sorted halves
-        for i in start .. end:              // Pointer to the temporary array
+        j = start; k = mid                 // Pointers to the sorted halves
+        for i in start .. end:             // Pointer to the temporary array
             if j < mid and (k > end or array[j] <= array[k]):
-                temp[i] = array[j]          // The element from the first half is smaller
-                j = j + 1                   // (or the second half is exhausted)
+                temp[i] = array[j]         // The element from the first half is smaller
+                j += 1                     // (or the second half is exhausted)
             else:
-                temp[i] = array[k]          // The element from the second half is smaller
-                k = k + 1                   // (or the first half is exhausted)
+                temp[i] = array[k]         // The element from the second half is smaller
+                k += 1                     // (or the first half is exhausted)
         for i in start .. end:
-            array[i] = temp[i]              // Copy everything back
+            array[i] = temp[i]             // Copy everything back
 
 
 ::: dsvis
