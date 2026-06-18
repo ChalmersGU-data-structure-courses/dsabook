@@ -109,7 +109,6 @@ being affected by each digit of the input. That is, "4" affects the
 output digits 2, 0, 8, 5, an 7. But it has no affect on the last 3
 digits. The key point is that the middle two digits of the result (5 and
 7) are affected by every digit of the input.
-:::
 
 ::: dsvis
 Here is a little calculator for you to see how this works. Start with
