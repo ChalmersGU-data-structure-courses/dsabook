@@ -151,7 +151,7 @@ and then it is just a matter of reassigning the child.
 So the pseudocode becomes something like this:
 
     function addHelper(x: Value, node: BinaryNode) -> BinaryNode:
-        if node == null:
+        if node is null:
             return BinaryNode(x)
         else if x == node.value:
             return node
@@ -269,14 +269,14 @@ just as the recursive version of adding a value, from above.
 First we need a helper function for finding the largest value from a subtree:
 
     function findLargest(tree):
-        while tree.right != null:
+        while tree.right is not null:
             tree = tree.right
         return tree.value
 
 Now we are ready to implement the main recursive function that deletes a value from a subtree:
 
     function removeHelper(value, tree):
-        if tree == null:
+        if tree is null:
             // We did not find the value, so do nothing.
         else if value < tree.value:
             tree.left = removeHelper(value, tree.left)

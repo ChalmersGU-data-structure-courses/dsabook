@@ -178,7 +178,7 @@ Using AVL trees we can define a very simple but efficient sorting algorithm.
 First we build an AVL tree from all elements, and then we do an *inorder traversal*
 (see @sec:traversing-a-binary-tree) to get the elements in sorted order:
 
-    function avl_sort(list):
+    avlTreeSort(list):
         tree = new ampty AVL tree
         for each x in list:
             add x to tree
