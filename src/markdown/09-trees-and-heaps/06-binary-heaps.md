@@ -216,43 +216,29 @@ In practice, this logical position corresponds directly to the same index in the
 -->
 
 The data type includes several private auxiliary functions used when inserting and removing elements from the heap.
-The method `isLeaf` determines whether a given position corresponds to a leaf node in the tree, while `leftChild`, `rightChild`, and `parent` return the positions of the left child, right child, and parent of a given node, respectively.
+The function `isLeaf` determines whether a given position corresponds to a leaf node in the tree, while `leftChild`, `rightChild`, and `parent` return the positions of the left child, right child, and parent of a given node, respectively.
 
-In addition, we include a convenience method that compares the values of two nodes based on their positions in the heap.
+    isLeaf(pos, size):
+        return pos >= size / 2
+    leftChild(pos):
+        return 2 * pos + 1
+    rightChild(pos):
+        return 2 * pos + 2
+    parent(pos):
+        return int((pos - 1) / 2)
 
-    datatype MinHeap:
-        ...
-        isLeaf(pos):
-            return pos >= size / 2
-        leftChild(pos):
-            return 2 * pos + 1
-        rightChild(pos):
-            return 2 * pos + 2
-        parent(pos):
-            return int((pos - 1) / 2)
-        less(i, j):
-            return heap.get(i) < heap.get(j)
-
-We also need an auxiliary method for swapping two elements in the heap.
-
-    datatype MinHeap:
-        ...
-        swap(i, j):
-            temp = heap.get(i)
-            heap.set(i, heap.get(j))
-            heap.set(j, temp)
+We also use an auxiliary function `swap(arr,i,j)` for swapping the values in cells $i$ and $j$ in in array.
+(This is the same function as we used in Quicksort partition, see @sec:quicksort.)
 
 <!--
 Finally, since we use a dynamic array we have to be able to resize the internal array.
 This is explained in further detail in @sec:dynamic-arrays.
 
-    datatype MinHeap:
-        ...
-        resizeHeap(newCapacity):
-            oldHeap = heap
-            heap = new Array(newCapacity)
-            for i in 0 .. size-1:
-                heap[i] = oldHeap[i]
+    resize(arr, capacity):
+        oldArr = arr
+        arr = new Array(capacity)
+        for i in 0 .. oldArr.size-1:
+            arr[i] = oldArr[i]
 
 AG: we don't need to resize, we use a dynamic array.
 
@@ -260,13 +246,11 @@ AG: we don't need to resize, we use a dynamic array.
 
 Finally, we define a function that verifies that the data structure satisfies the heap property.
 
-    datatype MinHeap:
-        ...
-        invariant():
-            for pos in 1 .. size - 1:
-                if less(pos, parent(pos)):
-                    return false
-            return true
+    checkInvariant(heap):
+        for pos in 1 .. heap.size - 1:
+            if heap.arr[pos] < heap.arr[parent(pos)]:
+                return false
+        return true
 
 Note that we do not need to check the completeness property, since the heap is stored in an array and arrays cannot contain gaps between elements.
 
@@ -281,13 +265,11 @@ We will follow this approach when defining the heap operations.
 
 Since the structure satisfies the heap property, the element at index 0, the root of a non-empty heap, always contains the element with the highest priority.
 
-    datatype MinHeap:
-        ...
-        getMin():
-            return heap.get(0)
+    getMin(heap):
+        return heap.arr[0]
 
 Note that the above definition does not account for the case where the heap is empty.
-Attempting to retrieve the first element of an empty dynamic array would fail, and therefore this method would fail as well.
+Attempting to retrieve the first element of an empty dynamic array would fail, and therefore this operation would fail as well.
 For the sake of brevity, we omit such sanity checks here and in the remainder of the chapter.
 
 ### Inserting into a heap
@@ -446,19 +428,19 @@ Here is a visual explanation of insertion into a *max*-heap.
 :::
 
 Here is the pseudocode for insertion in a *min*-heap.
-Note that we use a helper method for "sifting" a value up the tree.
 
-    datatype MinHeap:
-        ...
-        add(elem):
-            heap.add(elem)     // Add the element at end of the heap.
-            siftUp(size)       // Put it in its correct place.
-            size += 1          // Increase the size of the heap.
+    add(heap, elem):
+        heap.arr.add(elem)           // Add the element at end of the heap.
+        siftUp(heap.arr, heap.size)  // Put it in its correct place.
+        heap.size += 1               // Increase the size of the heap.
 
-        siftUp(pos):
-            while pos > 0 and less(pos, parent(pos)):  // Continue as long as the parent is larger.
-                swap(pos, parent(pos))
-                pos = parent(pos)       // Move up one level in the tree.
+This code uses a helper function for "sifting" a value up the tree.
+
+    siftUp(arr, pos):
+        // Continue as long as the parent is larger.
+        while pos > 0 and arr[pos] < arr[parent(pos)]:
+            swap(arr, pos, parent(pos))
+            pos = parent(pos)    // Move up one level in the tree.
 
 One common mistake is to start at the root and work yourself downwards through the heap.
 However, this approach does not work because the heap must maintain the shape of a complete binary tree.
@@ -529,34 +511,33 @@ This is because the element moved to the root can travel downward by at most one
 In the worst case, it moves from the root all the way to a leaf.
 
 Here is the pseudocode for removing the minimum element from a min-heap.
-Note that we use a helper method to sift an element down the tree, as well as another helper method to identify the smaller of its children.
 
-    datatype MinHeap:
-        ...
-        removeMin():
-            min = getMin()       // Remember the current minimum, to return in the end.
-            swap(0, size-1)      // Swap the last element into the first position.
-            heap.remove(size-1)  // Remove the last element from the array,
-            size -= 1            // and decrease the size.
-            siftDown(0)          // Put the new root in its correct place.
-            return min
+    removeMin(heap):
+        min = heap.arr[0]               // Remember the current minimum, to return in the end.
+        swap(heap.arr, 0, heap.size-1)  // Swap the last element into the first position.
+        heap.arr.remove(heap.size-1)    // Remove the last element from the array,
+        heap.size -= 1                  // Decrease the size.
+        siftDown(heap.arr, 0)           // Put the new root in its correct place.
+        return min
 
-        siftDown(pos):
-            while not isLeaf(pos):       // Stop when we reach a leaf (if not earlier).
-                child = smallestChild(pos)
-                if less(child, pos):
-                    swap(child, pos)     // Swap to fix the heap property and
-                    pos = child          // continue one level down in the tree.
-                else:
-                    return               // Stop if the parent is smaller or equal.
+Note that we use a helper function to sift an element down the tree,
+as well as another helper function to identify the smaller of its children.
 
-        smallestChild(pos):
-            left = leftChild(pos)
-            right = rightChild(pos)
-            if right < size and less(right, left):  // Check if there is a right child and if it is smaller
-                return right
-            else:
-                return left
+    siftDown(arr, pos):
+        while not isLeaf(pos, arr.size):    // Stop when we reach a leaf (if not earlier).
+            child = smallestChild(arr, pos)
+            if child >= pos:                // Stop if the parent is smaller or equal.
+                return
+            swap(arr, child, pos)           // Swap to fix the heap property and
+            pos = child                     // continue one level down in the tree.
+
+    smallestChild(arr, pos):
+        left = leftChild(pos)
+        right = rightChild(pos)
+        if right < arr.size and arr[right] < arr[left]:
+            return right    // If there is a right child and if it is smaller
+        else:
+            return left
 
 <!-- AG: should we add an example again? probably not -->
 
