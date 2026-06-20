@@ -122,37 +122,37 @@ a move operation. To do so, we must first come up with a representation
 of the various operations, implemented as a data type whose objects will be
 stored on the stack.
 
-    datatype Task:
-        oper: MOVE or TOH
+    datatype Move:
+        start, goal, temp: Pole
+
+    datatype Towers:
         n: Int
-        start, temp, goal: Pole
+        start, goal, temp: Pole
 
     towersStack(n, start, goal, temp):
-        S = new LinkedStack()
-        S.push(new Task(TOH, n, start, goal, temp))
-        while S.size > 0:
-            it = S.pop()          // Get next task
-            if it.oper == MOVE:   // Do a move
-                move(it.start, it.goal)
-            else if it.num > 0:   // Imitate TOH recursive solution (in reverse)
-                S.push(new Task(TOH, it.num-1, it.temp, it.goal, it.start))
-                S.push(new Task(MOVE, 0, it.start, it.goal))
-                S.push(new Task(TOH, it.num-1, it.start, it.temp, it.goal))
+        S = new Stack()
+        S.push(new Towers(n, start, goal, temp))
+        while S is not empty:
+            task = S.pop()          // Get next task
+            if task is Move:        // Do a move
+                move(task.start, task.goal)
+            else if task.n > 0:     // Imitate TOH recursive solution (in reverse)
+                S.push(new Towers(task.n-1, task.temp, task.goal, task.start))
+                S.push(new Move(task.start, task.goal))
+                S.push(new Towers(task.n-1, task.start, task.temp, task.goal))
 
-We first enumerate the possible operations MOVE and TOH, to indicate
+We first enumerate the possible operations `Move` and `Towers`, to indicate
 calls to the `move` function and recursive calls to `towersStack`, respectively.
-The datatype `Task` stores five values: an operation value (indicating
-either a MOVE or a new TOH operation), the number of rings, and the
-three poles. Note that the move operation actually needs only to store
-information about two poles. Thus, there are two constructors: one to
+Both `Move` and `Towers` store the start and goal pole, but
+`Towers` in addition stores the temporary pole, and the number of rings.
+Thus, there are two constructors: one to
 store the state when imitating a recursive call, and one to store the
 state for a move operation.
 
-An array-based stack is used because we know that the stack will need to
-store exactly $2n+1$ elements. The new version `towersStack` begins by
+The new version `towersStack` begins by
 placing on the stack a description of the initial problem for $n$ rings.
 The rest of the function is simply a `while` loop that pops the stack
-and executes the appropriate operation. In the case of a `TOH` operation
+and executes the appropriate operation. In the case of a `Towers` operation
 (for $n>0$), we store on the stack representations for the three
 operations executed by the recursive version. However, these operations
 must be placed on the stack in reverse order, so that they will be
