@@ -154,25 +154,24 @@ The important part here is to realise that the recursive function should *return
 and then it is just a matter of reassigning the child.
 So the pseudocode becomes something like this:
 
-    addHelper(x: Value, node: BinaryNode) -> BinaryNode:
+    addHelper(node, x) -> BSTNode:
         if node is null:
-            return BinaryNode(x)
+            return new BSTNode(x)
         else if x == node.value:
             return node
         else if x < node.value:
-            node.left = addHelper(x, node.left)
+            node.left = addHelper(node.left, x)
         else if x > node.value:
-            node.right = addHelper(x, node.right)
+            node.right = addHelper(node.right, x)
+        return node
 
 The recursive function above is actually not the "real" function for adding a value,
 but instead an internal *helper* function.
 The toplevel function will have to call the helper with the *root* as the argument,
 and also update the root with the result.
 
-    datatype BSTSet:
-        ...
-        add(x):
-            root = addHelper(x, root)
+    add(bst, x):
+        bst.root = addHelper(bst.root, x)
 
 
 ::: dsvis
@@ -272,37 +271,35 @@ One important thing to remember is that the recursive functions should return th
 just as the recursive version of adding a value, from above.
 First we need a helper function for finding the largest value from a subtree:
 
-    findLargest(tree):
-        while tree.right is not null:
-            tree = tree.right
-        return tree.value
+    findLargest(node):
+        while node.right is not null:
+            node = node.right
+        return node.value
 
 Now we are ready to implement the main recursive function that deletes a value from a subtree:
 
-    removeHelper(value, tree):
-        if tree is null:
+    removeHelper(node, value) -> BSTNode:
+        if node is null:
             // We did not find the value, so do nothing.
-        else if value < tree.value:
-            tree.left = removeHelper(value, tree.left)
-        else if value > tree.value:
-            tree.right = removeHelper(value, tree.right)
-        else if tree has no children:
-            tree = null         // The node is a leaf, we can just delete it.
-        else if tree only has a left child:
-            tree = tree.left    // Replace the node with its only child.
-        else if tree only has a right child:
-            tree = tree.right   // Replace the node with its only child.
+        else if value < node.value:
+            node.left = removeHelper(node.left, value)
+        else if value > node.value:
+            node.right = removeHelper(node.right, value)
+        else if node has no children:
+            node = null         // The node is a leaf, we can just delete it.
+        else if node only has a left child:
+            node = node.left    // Replace the node with its only child.
+        else if node only has a right child:
+            node = node.right   // Replace the node with its only child.
         else:  // Now we know that this is an inner node
-            tree.value = findLargest(tree.left)              // Find the largest value in the left subtree,
-            tree.left = removeHelper(tree.value, tree.left)  // and delete this value.
-        return tree
+            node.value = findLargest(node.left)              // Find the largest value in the left subnode,
+            node.left = removeHelper(node.left, node.value)  // and delete this value.
+        return node
 
 And just as for recursive addition, we need to wrap this function in a toplevel call which starts with the tree root:
 
-    datatype BSTSet:
-        ...
-        remove(x):
-            root = removeHelper(x, root)
+        remove(bst, x):
+            bst.root = removeHelper(bst.root, x)
 
 
 ::: dsvis
