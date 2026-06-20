@@ -176,25 +176,26 @@ The first element is assigned to the first sublist, the second element to the se
 the third to first sublist, the fourth to the second sublist, and so on.
 In pseudocode we can view it like this:
 
-    split(L):
-        L1, L2 = new empty linked queues
-        for each x in L:
-            enqueue x to L1 (even iterations), or to L2 (odd iterations)
-        return L1, L2
+    split(list):
+        half1, half2 = new empty linked queues
+        for each x in list:
+            enqueue x to half1
+            swap half1 and half2
+        return half1, half2
 
 Merging two sorted linked lists is straightforward,
 because we need only remove items from the front of the input lists and append them to the end of the output list.
 The Mergesort pseudocode in @sec:mergesort can be used with linked lists directly.
 
-    merge(L1, L2):
+    merge(half1, half2):
         answer = new empty linked queue
-        while L1 and L2 are nonempty:
-            if L1.peek() <= L2.peek():
-                enqueue L1.dequeue() to answer
+        while half1 and half2 are nonempty:
+            if half1.peek() <= half2.peek():
+                enqueue half1.dequeue() to answer
             else:
-                enqueue L2.dequeue() to answer
-        enqueue all remaining elements of L1 and L2
-        return L
+                enqueue half2.dequeue() to answer
+        enqueue all remaining elements of half1 and half2 to answer
+        return answer
 
 ::::::
 

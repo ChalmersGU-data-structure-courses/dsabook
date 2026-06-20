@@ -269,12 +269,12 @@ if there is an occurrence of a given element in the list, and `false`
 otherwise. The `find` operation needs no knowledge about the specific list
 implementation, just the list ADT.
 
-    // Return true if k is in list L, false otherwise.
-    find(L, k):
-        for each n in L:
-            if k == n:
-                return true  // Found k.
-        return false         // k not found.
+    // Return true if key is in list, false otherwise.
+    find(list, key):
+        for each elem in list:
+            if key == elem:
+                return true  // Found key
+        return false         // key not found
 
 There are two standard approaches to implementing lists, the
 [array-based list]{.term}, and the [linked list]{.term}.
