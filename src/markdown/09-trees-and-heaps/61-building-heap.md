@@ -59,14 +59,12 @@ Here is a visualisation of the build process for a *max*-heap.
 
 The function `buildHeap` implements the building algorithm:
 
-    datatype MinHeap:
-        ...
-        buildHeap(arr):
-            heap = arr                  // Initialise the heap to the given array.
-            size = heap.size            // The capacity of the heap is used in full.
-            mid = parent(size-1)        // Find the parent of the last leaf.
-            for i in mid, mid-1 .. 0:   // Iterate the internal nodes backwards.
-                siftDown(i)             // Sift each internal node down.
+    buildHeap(heap, arr):
+        heap = arr                  // Initialise the heap to the given array.
+        size = heap.size            // The capacity of the heap is used in full.
+        mid = parent(size-1)        // Find the parent of the last leaf.
+        for i in mid, mid-1 .. 0:   // Iterate the internal nodes backwards.
+            siftDown(i)             // Sift each internal node down.
 
 Note that this operation overwrites the existing heap.
 Also note that the original array will be modified, so the operation is *destructive*!

@@ -141,46 +141,42 @@ is implemented as a doubly linked list.
 Adding elements becomes a bit trickier, because we have to make sure that all pointers are updated correctly.
 We have to handle adding to an empty list specially, because then both head and tail will point to the same cell.
 
-    datatype DoubleDeque:
-        ...
-        addFirst(x):
-            if size == 0:
-                head = tail = new DoubleNode(x, null, null)
-            else:
-                newhead = new DoubleNode(x, null, head)
-                head.prev = newhead
-                head = newhead
-            size += 1
+    addFirst(deque, x):
+        if deque.size == 0:
+            deque.head = deque.tail = new DoubleNode(x, null, null)
+        else:
+            newhead = new DoubleNode(x, null, deque.head)
+            deque.head.prev = newhead
+            deque.head = newhead
+        deque.size += 1
 
-        addLast(x):
-            if size == 0:
-                head = tail = new DoubleNode(x, null, null)
-            else:
-                newtail = new DoubleNode(x, tail, null)
-                tail.next = newtail
-                tail = newtail
-            size += 1
+    addLast(deque, x):
+        if deque.size == 0:
+            deque.head = deque.tail = new DoubleNode(x, null, null)
+        else:
+            newtail = new DoubleNode(x, deque.tail, null)
+            deque.tail.next = newtail
+            deque.tail = newtail
+        deque.size += 1
 
 
 #### Removing from a double-linked list
 
 The same goes for removing elements -- the one-element list is a special case.
 
-    datatype DoubleDeque:
-        ...
-        removeFirst():
-            removed = head                      // Remember the current head
-            head = removed.next                 // Re-point the head to the second node
-            head.prev = null                    // Make sure the new head doesn't have any predecessor
-            size -= 1
-            return removed.elem
+    removeFirst(deque):
+        removed = deque.head         // Remember the current head
+        deque.head = removed.next    // Re-point the head to the second node
+        deque.head.prev = null       // Make sure the new head doesn't have any predecessor
+        deque.size -= 1
+        return removed.elem
 
-        removeLast():
-            removed = tail                      // Remember the current tail
-            tail = removed.prev                 // Re-point the tail to the predecessor node
-            tail.next = null                    // Make sure the new tail doesn't have any successor
-            size -= 1
-            return removed.elem
+    removeLast(deque):
+        removed = deque.tail         // Remember the current tail
+        deque.tail = removed.prev    // Re-point the tail to the predecessor node
+        deque.tail.next = null       // Make sure the new tail doesn't have any successor
+        deque.size -= 1
+        return removed.elem
 
 
 ### General lists
@@ -334,18 +330,15 @@ Here are some special cases for linked list insertion: Inserting at the beginnin
 
 Here's the code for addition.
 
-    datatype LinkedList:
-        ...
-        add(i, x):
-            // precondition: 0 <= i <= size
-            if i == 0:
-                head = new Node(x, head)
-            else:
-                prev = head
-                repeat i-1 times:
-                    prev = prev.next
-                prev.next = new Node(x, prev.next)
-            size += 1
+    add(list, i, x):  // Add x to list at position i
+        if i == 0:
+            list.head = new Node(x, list.head)
+        else:
+            previous = list.head
+            repeat i-1 times:
+                previous = previous.next
+            previous.next = new Node(x, previous.next)
+        list.size += 1
 
 
 ::: dsvis
@@ -366,22 +359,19 @@ How to delete from a linked list.
 
 Here's the code for deletion:
 
-    datatype LinkedList:
-        ...
-        remove(self, i):
-            // precondition: 0 <= i < size
-            if i == 0:
-                removed = head
-                head = removed.next
-            else:
-                prev = head
-                repeat i-1 times:
-                    prev = prev.next
-                removed = prev.next
-                prev.next = removed.next
-            removed.next = null   // For garbage collection
-            size -= 1
-            return removed.elem
+    remove(list, i):  // Remove the element at position i from list
+        if i == 0:
+            removed = list.head
+            list.head = removed.next
+        else:
+            previous = list.head
+            repeat i-1 times:
+                previous = previous.next
+            removed = previous.next
+            previous.next = removed.next
+        removed.next = null   // For garbage collection
+        list.size -= 1
+        return removed.value
 
 
 ::: dsvis
@@ -470,18 +460,14 @@ Finding a value by its position.
 ```
 :::
 
-As you can see below, there are no loops in the methods `get` and `set`,
+As you can see below, there are no loops in the operations `get` and `set`,
 which means that both require $O(1)$ time.
 
-    datatype ArrayList:
-        ...
-        get(i):
-            // precondition: 0 <= i < size
-            return arr[i]
+    get(list, i):  // Get the value at position i
+        return list.arr[i]
 
-        set(i, x):
-            // precondition: 0 <= i < size
-            arr[i] = x
+    set(list, i, x):  // Set the value at position i to x
+        list.arr[i] = x
 
 
 #### Adding elements
@@ -514,14 +500,11 @@ $n - i - 1$ elements must shift toward the tail to leave room for the
 new element. In the worst case, adding elements requires moving all $n$
 elements, which is $O(n)$.
 
-    datatype ArrayList:
-        ...
-        add(i, x):
-            // precondition: 0 <= i <= size < arr.size
-            size += 1
-            for k in size-1, size-2 .. i+1:
-                arr[k] = arr[k-1]
-            arr[i] = x
+    add(list, i, x):  // Add x to list at position i
+        list.size += 1
+        for k in list.size-1, list.size-2 .. i+1:
+            list.arr[k] = list.arr[k-1]
+        list.arr[i] = x
 
 
 #### Practice exercise
@@ -551,16 +534,13 @@ Removing an element at a certain position in the list.
 In the worst case, insertion or removal each requires moving all $n$
 elements, which is $O(n)$.
 
-    datatype ArrayList:
-        ...
-        remove(i):
-            // precondition: 0 <= i < size
-            x = arr[i]
-            for k in i+1 .. size-1:
-                arr[k-1] = arr[k]
-            size -= 1
-            arr[size] = null  // For garbage collection
-            return x
+    remove(list, i):  // Remove the element at position i from list
+        x = list.arr[i]
+        for k in i+1 .. list.size-1:
+            list.arr[k-1] = list.arr[k]
+        list.size -= 1
+        list.arr[list.size] = null  // For garbage collection
+        return x
 
 
 #### Practice exercise

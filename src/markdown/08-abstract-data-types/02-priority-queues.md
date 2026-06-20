@@ -138,17 +138,17 @@ transaction. Here it is in code:
         // Assume that the Transaction type implements comparisons
         // by comparing the value of the transaction.
 
-        // Add a new transaction to the priority queue.
-        add(transaction):
-            pq.add(transaction)
-            // If the priority queue grows to 101 transactions,
-            // cut it down to 100 by removing the smallest-valued one.
-            if pq.size > 100:
-                pq.removeMin()
+    // Add a new transaction to the priority queue.
+    add(pq, transaction):
+        pq.add(transaction)
+        // If the priority queue grows to 101 transactions,
+        // cut it down to 100 by removing the smallest-valued one.
+        if pq.size > 100:
+            pq.removeMin()
 
-        // Return the top 100 transactions.
-        top100():
-            return everything in pq
+    // Return the top 100 transactions.
+    top100(pq):
+        return everything in pq
 
 
 What is the complexity of `add`? Well, in fact it takes constant time,

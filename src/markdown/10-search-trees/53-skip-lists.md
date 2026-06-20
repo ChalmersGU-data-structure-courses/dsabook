@@ -91,19 +91,16 @@ start of the SkipList class follows:
 
 The `contains` operation works as follows.
 
-    datatype SkipList implements Map:
-        ...
-        // Look up the value associated with a key.
-        get(key):
-            x = head  // Dummy header node
-            for i in level, level-1 .. 0:  // For each level...
-                while x.forward[i] is not null and key > x.forward[i].key:  // ...go forward
-                    x = x.forward[i]  // Go one last step
-            x = x.forward[0]  // Move to actual record, if it exists
-            if x is not null and key == x.key:
-                return x.value  // Got it
-            else:
-                return null  // It's not there
+    contains(skiplist, key):
+        x = skiplist.head  // Dummy header node
+        for i in skiplist.level, skiplist.level-1 .. 0:  // For each level...
+            while x.forward[i] is not null and key > x.forward[i].key:  // ...go forward
+                x = x.forward[i]  // Go one last step
+        x = x.forward[0]  // Move to actual record, if it exists
+        if x is not null and key == x.key:
+            return true  // Got it
+        else:
+            return false  // It's not there
 
 The ideal skip list is organised so that (if the head node is not
 counted) half of the nodes have only one pointer, one quarter have two,
@@ -122,7 +119,7 @@ distribution.
         level = 0
         while random() < 0.5:
             level += 1
-        return lev
+        return level
 
 Once the proper level for the node has been determined, the next step is
 to find where the node should be inserted and link it in as appropriate
@@ -132,37 +129,34 @@ Note that we build an `update` array as we progress through the skip
 list, so that we can update the pointers for the nodes that will precede
 the one being inserted.
 
-    datatype SkipList implements Map:
-        ...
-        // Add a key-value pair, or update the value associated with an existing key.
-        put(key, value):
-            newLevel = randomLevel()  // New node's level
-            if newLevel > level:  // If new node is deeper...
-                adjustHead(newLevel)  // ...adjust the header
-            // Track end of level:
-            update = new Array(level + 1)
-            x = head  // Start at header node
-            for i = level downto 0:  // Find insert position
-                while x.forward[i] is not null and key > x.forward[i].key:
-                    x = x.forward[i]
-                update[i] = x  // Track end at level i
-            x = x.forward[0]  // Move to actual record, if it exists
-            if x is not null and key == x.key:
-                x.value = value  // The key exists: update the value
-            else:
-                // Otherwise, create a new node and insert it into place:
-                y = new SkipNode(key, value, newLevel)
-                for i = 0 to newLevel:  // Splice into list
-                    y.forward[i] = update[i].forward[i]  // Who y points to
-                    update[i].forward[i] = y  // Who points to y
-                size += 1
+    put(skiplist, key, value):
+        newLevel = randomLevel()            // New node's level
+        if newLevel > skiplist.level:       // If new node is deeper...
+            adjustHead(skiplist, newLevel)  // ...adjust the header
+        // Track end of level:
+        update = new Array(skiplist.level + 1)
+        x = skiplist.head                   // Start at header node
+        for i = skiplist.level downto 0:    // Find insert position
+            while x.forward[i] is not null and key > x.forward[i].key:
+                x = x.forward[i]
+            update[i] = x     // Track end at level i
+        x = x.forward[0]      // Move to actual record, if it exists
+        if x is not null and key == x.key:
+            x.value = value   // The key exists: update the value
+        else:
+            // Otherwise, create a new node and insert it into place:
+            y = new SkipNode(key, value, newLevel)
+            for i = 0 to newLevel:  // Splice into list
+                y.forward[i] = update[i].forward[i]  // Who y points to
+                update[i].forward[i] = y  // Who points to y
+            size += 1
 
-        adjustHead(newLevel):
-            temp = head
-            head = new SkipNode(null, null, newLevel)
-            for i = 0 to level:
-                head.forward[i] = temp.forward[i]
-            level = newLevel
+    adjustHead(skiplist, newLevel):
+        temp = skiplist.head
+        skiplist.head = new SkipNode(null, null, newLevel)
+        for i = 0 to skiplist.level:
+            skiplist.head.forward[i] = temp.forward[i]
+        skiplist.level = newLevel
 
 
 ::: dsvis

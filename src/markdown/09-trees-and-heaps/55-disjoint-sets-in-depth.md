@@ -68,28 +68,29 @@ trees. This makes it easy to merge trees together with **Union** operations.
 
 Here is an implementation for parent pointer trees and the **Union/Find** process.
 
-    // General tree implementation for Union/Find
     datatype ParentPointerTree:
         arr: Array of Int
 
-        constructor(size):
-            // Each node is its own root to start
-            arr = new Array(size)
-            for i in 0 .. size-1:
-                arr[i] = -1  // We use -1 to say that this is a root
+    // Initialise the parent pointer tree.
+    init(pptree, size):
+        // Each node is its own root to start
+        pptree.arr = new Array(size)
+        for i in 0 .. size-1:
+            pptree.arr[i] = -1  // We use -1 to say that this is a root
 
-        // Merge two subtrees if they are different:
-        union(a: Int, b: Int):
-            root1 = find(a)    // Find root of node a
-            root2 = find(b)    // Find root of node b
-            if root1 != root2: // Merge two trees
-                arr[root1] = root2
+    // Merge two subtrees if they are different,
+    // where a and b are any nodes in their subtrees.
+    union(pptree, a, b):
+        root1 = find(pptree, a)   // Find root of node a
+        root2 = find(pptree, b)   // Find root of node b
+        if root1 != root2:        // Merge the two trees
+            pptree.arr[root1] = root2
 
-        // Return the root of current's tree
-        find(current: Int) -> Int:
-            while arr[current] != -1:
-                current = self.arr[current]
-            return current  // Now we are at the root
+    // Return the root of the tree that a belongs to.
+    find(pptree, a) -> Int:
+        while pptree.arr[a] != -1:
+            a = pptree.arr[a]
+        return a  // Now we are at the root
 
 The `ParentPointerTree` class has an array where each array position
 corresponds to one object in some collection. Each array element stores
@@ -211,18 +212,16 @@ tree).
 
 Here is an implementation for **Union** when using weighted union.
 
-    datatype ParentPointerTree:
-        ...
-        union(a, b):
-            root1 = find(a)     // Find root of node a
-            root2 = find(b)     // Find root of node b
-            if root1 != root2:  // Merge with weighted union
-                if weights[root2] > weights[root1]:
-                    arr[root1] = root2
-                    weights[root2] += weights[root1]
-                else:
-                    arr[root2] = root1
-                    weights[root1] += weights[root2]
+    union(pptree, a, b):
+        root1 = find(pptree, a)  // Find root of node a
+        root2 = find(pptree, b)  // Find root of node b
+        if root1 != root2:       // Merge with weighted union
+            if pptree.weights[root2] > pptree.weights[root1]:
+                pptree.arr[root1] = root2
+                pptree.weights[root2] += pptree.weights[root1]
+            else:
+                pptree.arr[root2] = root1
+                pptree.weights[root1] += pptree.weights[root2]
 
 
 ::: dsvis
@@ -248,15 +247,14 @@ Alternatively, a recursive algorithm can be implemented as follows. This
 version of **Find** not only returns the root of the current node, but
 also makes all ancestors of the current node point to the root.
 
-    datatype ParentPointerTree:
-        ...
-        // Return the root of current's tree with path compression
-        find(current):
-            if arr[current] == -1:
-                return current  // Base case: we are at the root
-            else:
-                arr[current] = find(arr[current])
-                return arr[current]
+    // Return the root of the tree that a belongs to,
+    // and update the tree with path compression.
+    find(pptree, a):
+        if pptree.arr[a] == -1:
+            return a  // Base case: we are at the root
+        else:
+            pptree.arr[a] = find(pptree, pptree.arr[a])
+            return pptree.arr[a]
 
 
 ::: dsvis

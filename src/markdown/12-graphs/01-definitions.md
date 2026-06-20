@@ -96,12 +96,12 @@ or by preprocessing the graph to assign each vertex a unique ID-number so they c
 
     datatype VertexSet:
         arr = array of booleans of length |V|, initialized to false
-        add(v : Vertex):
-            arr[v.id]=true
-        contains(V : Vertex):
-            return arr[v.id]
+    add(vertexset, v):
+        vertexset.arr[v.id] = true
+    contains(vertexset, v):
+        return vertexset.arr[v.id]
 
-We also assume standard lexicographical ordering for weighted edges, so the edge `(5,A,B)` is lesser than `(3,C,D)`.
+We also assume standard lexicographical ordering for weighted edges, so the edge `(5,A,B)` is larger than `(3,C,D)`.
 
 <!--
 
