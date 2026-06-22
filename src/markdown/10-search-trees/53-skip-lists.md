@@ -73,15 +73,10 @@ We will store with each skip list node an array named `forward` that
 stores the pointers. Position `forward[0]` stores a level 0 pointer,
 `forward[1]` stores a level 1 pointer, and so on:
 
-    datatype SkipNode of K, V:
-        key: K
-        value: V
-        forward: Array of SkipNode
-
-        constructor(key, value, level):
-            key = key
-            value = value
-            forward = new Array(level + 1)
+    datatype SkipNode:
+        value
+        level: Int
+        forward = new Array(level + 1) of SkipNodes
 
 The skip list object includes data member `level` that stores the
 highest level for any node currently in the skip list. The skip list
@@ -89,10 +84,10 @@ stores a header node named `head` with `level+1` pointers where the head
 level is initially 0 and the level is set to -1 for the empty list. The
 start of the SkipList class follows:
 
-    datatype SkipList K to V implements Map:
-        head  = new SkipNode(null, null, 0)
+    datatype SkipList:
+        head = new SkipNode(null, null, 0)
+        size = 0
         level = -1
-        size  = 0
 
 The `contains` operation works as follows.
 

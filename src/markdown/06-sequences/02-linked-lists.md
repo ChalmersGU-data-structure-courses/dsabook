@@ -44,9 +44,9 @@ List nodes are distinct objects, as opposed to cells in an array.
 Therefore we declare a list node as a "wrapper" around a *value*,
 that also contains a pointer to the *next* node in the list:
 
-    datatype Node of T:
-        value: T          // Value for this node
-        next: Node of T   // Pointer to the next node in the list
+    datatype Node:
+        next = null  // Pointer to the next node in the list
+        value        // Value for this node
 
 How does the list end?
 Most languages have a designated "null" value which represents nothing at all
@@ -68,8 +68,8 @@ Elements are inserted and removed only from the head of the list,
 so the only information we need is a pointer to the *top* of the stack.
 
     datatype LinkedStack implements Stack:
-        top: Node = null    // Pointer to the top of the stack
-        size: Int = 0       // Size of the stack
+        top = null   // Pointer to the top node of the stack
+        size = 0     // Size of the stack
 
 Note that we also added a variable *size* storing the number of elements.
 This is in theory unnecessary, but without it the only way of knowing the size
@@ -210,9 +210,9 @@ Linked queue -- introduction.
 :::
 
     datatype LinkedQueue implements Queue:
-        front: Node = null   // Pointer to the front node
-        rear: Node = null    // Pointer to the rear node
-        size: Int = 0        // Size of the queue
+        front = null   // Pointer to the front node
+        rear = null    // Pointer to the rear node
+        size = 0       // Size of the queue
 
 
 #### Enqueueing and dequeueing

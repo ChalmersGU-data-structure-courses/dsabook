@@ -130,10 +130,10 @@ but this is not a serious drawback because we can easily implement it ourselves.
 The idea is to use a *map*, whose value type is a *set* of the actual values that we are interested in:
 
     datatype Multimap of K to V:
-        internalMap: Map of K to (Set of V)
+        mmap: Map of K to (Set of V)
 
 To add a value to a multimap, we also need to provide its key,
-and then we can call `internalMap.get(key).add(value)`.
+and then we can call `mmap.get(key).add(value)`.
 (But note that we also have to handle the case where the key is not in the underlying map yet.)
 Other possible operations can be to remove a value (with an associated key),
 and to iterate over all values for a given key.

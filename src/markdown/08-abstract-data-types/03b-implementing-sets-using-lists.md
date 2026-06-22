@@ -59,10 +59,10 @@ if the preceding node is null it is the head of the list that should be removed.
 The linked list can easily be modified to implement a map instead of a set.
 We just augment the linked list nodes to also include the value:
 
-    datatype MapNode of K to V:
-        key: K
-        value: V
-        next: MapNode
+    datatype MapNode:
+        next = null  // Pointer to the next node in the list
+        key          // Key for this node
+        value        // Value for this node
 
 Just as for priority queues, we can also use dynamic arrays to implement sets and maps,
 and we will discuss that in the next section.

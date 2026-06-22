@@ -97,9 +97,9 @@ the leaf node to be the weight (frequency) of its associated letter.
 
 Here is a possible implementation of Huffman trees, where the type `T` can e.g. be letters:
 
-    datatype HuffmanTree of T:
+    datatype HuffmanTree:
         weight: Int
-        elem: T
+        value: T
         left: HuffmanTree
         right: HuffmanTree
 

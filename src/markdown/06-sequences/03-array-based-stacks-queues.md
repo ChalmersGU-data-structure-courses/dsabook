@@ -23,8 +23,8 @@ An array-based stack uses an internal array as underlying storage, and this arra
 In this example the underlying array has an internal size of 100:
 
     datatype ArrayStack implements Stack:
-        arr = new Array(100)    // Internal array containing the stack elements
-        size = 0                 // The size of the stack
+        arr = new Array(100)   // Internal array containing the stack elements
+        size = 0               // The size of the stack
 
 Note that 100 is the internal *capacity* of the stack, it is not the actual size.
 When the stack is created it should be empty, and therefore the initial stack size is 0.

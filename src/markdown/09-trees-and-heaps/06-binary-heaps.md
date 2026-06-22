@@ -198,12 +198,12 @@ Nevertheless, it is useful to remember that in an actual implementation these op
 We present an implementation for a minimum heap.
 It uses a dynamic array (see @sec:dynamic-arrays) that will resize automatically when the number of elements change.
 
-    datatype MinHeap of T implements PriorityQueue of T:
-        heap = new DynamicArray of T
-        size = 0                       // The initial heap is empty
+    datatype MinHeap implements PriorityQueue:
+        arr = new DynamicArray()   // The array storing the heap
+        size = 0                   // The initial heap is empty
 
-The implementation uses the standard less-than (<) operator to compare elements of type `T`.
-The exact definition of this operator for values of type `T` determines the priority ordering of the elements in the heap.
+The implementation uses the standard less-than (<) operator to compare elements.
+The exact definition of this operator determines the priority ordering of the elements in the heap.
 
 <!--
 When constructing a heap, you can specify how elements of type `T` should be compared by providing a function that determines whether its first argument is less than its second argument.

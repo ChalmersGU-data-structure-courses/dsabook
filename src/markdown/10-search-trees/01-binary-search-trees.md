@@ -41,10 +41,14 @@ Note that the BST invariant implies that all values in the tree are distinct fro
 which is exactly what we need to implement a *set*.
 Therefore, to implement a set we can reuse the binary tree implementation from @sec:binary-trees:
 
-    datatype BSTSet implements Set:
-        root: BinaryNode = null
-        size: Int = 0
+    datatype BST:
+        root = null   // Pointer to the root node of the tree
+        size = 0      // Size of the tree
 
+    datatype BSTNode:
+        left     // Pointer to left child
+        right    // Pointer to right child
+        value    // Value for this node
 
 #### Implementing multisets
 
@@ -61,11 +65,11 @@ while the right children are still always larger.
 Now, how can we implement a *map* using a BST?
 The only difference to a normal BST is that the nodes have to both a *key* and a *value*:
 
-    datatype BSTMapNode of K to V:
-        left: BSTMapNode
-        right: BSTMapNode
-        key: K
-        value: V
+    datatype BSTMapNode:
+        left      // Pointer to left child
+        right     // Pointer to right child
+        key       // Key for this node
+        value     // Value for this node
 
 The BST invariant should now only mention the *keys* in the subtrees, not the values.
 This is the only difference between a map and a set, implemented as BSTs.

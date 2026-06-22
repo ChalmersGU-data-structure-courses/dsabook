@@ -117,15 +117,15 @@ Here is an implementation for the class variables and the internal list node cla
 The only real difference between single linked lists is that we have pointers to the previous node,
 and a pointer to the tail of the list.
 
-    datatype DoubleNode of T:
-        elem: T                   // Value for this node
-        prev: DoubleNode of T     // Pointer to previous node in list
-        next: DoubleNode of T     // Pointer to next node in list
+    datatype DoubleNode:
+        value                // Value for this node
+        prev: DoubleNode     // Pointer to previous node in list
+        next: DoubleNode     // Pointer to next node in list
 
     datatype DoubleDeque implements Deque:
-        head: DoubleNode = null   // Pointer to front of deque
-        tail: DoubleNode = null   // Pointer to tail of deque
-        size: Int = 0             // Size of deque
+        head = null    // Pointer to the DoubleNode front of deque
+        tail = null    // Pointer to the DoubleNode tail of deque
+        size = 0       // Size of deque
 
 
 The main advantage with doubly linked lists are that we can implement
@@ -285,8 +285,8 @@ There are two standard approaches to implementing lists, the
 We can use the same structure as for stacks when implementing general linked lists:
 
     datatype LinkedList implements List:
-        head: Node = null   // Pointer to list header
-        size: Int = 0       // Size of list
+        head = null   // Pointer to list header node
+        size = 0      // Size of list
 
 ::: dsvis
 Iterating through a linked list.
