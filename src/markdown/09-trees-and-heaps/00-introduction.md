@@ -50,7 +50,7 @@ The [level]{.term} of a node is its distance from the root.
 Thus, the root is at level 0, its children are at level 1, and so on.
 The depth of a node is synonymous with its level.
 The [height]{.term} of a tree (or subtree) is the number of edges on the longest path from its root to a leaf.
-Consequently, a tree consisting of a single node has height 0. We define the height of an empty tree to be −1.
+Consequently, a tree consisting of a single node has height 0. We define the height of an empty tree to be $−1$.
 
 Another important question is whether the children of a node have a fixed order.
 In a file system, the order of the children of a folder is usually unimportant.
