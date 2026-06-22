@@ -2,7 +2,6 @@
 ## Motivation {#intro:motivation}
 
 ::: TODO
-- Prio 1: Merge the two sections into one
 - Prio 2: are the lists actually the ones we want to emphasise?
 - Prio 3: update the 1st paragraph with more up-to-date examples
 - Prio 3: is this a good motivation section?
