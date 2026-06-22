@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="360" viewBox="0 0 1080 360" fill="none" stroke="none">
+  <style>
+    .edge { stroke: #000; stroke-width: 3; stroke-linecap: round; }
+    .node { fill: #fff; stroke: #000; stroke-width: 3; }
+    .label { fill: #000; font-family: Arial, Helvetica, sans-serif; font-size: 20px; text-anchor: middle; }
+    .part { fill: #000; font-family: Arial, Helvetica, sans-serif; font-size: 18px; text-anchor: middle; }
+    .divider { stroke: #000; stroke-width: 1; }
+  </style>
+
+  <line x1="360" y1="20" x2="360" y2="330" class="divider"/>
+  <line x1="720" y1="20" x2="720" y2="330" class="divider"/>
+
+  <!-- Full but not complete -->
+  <line x1="180" y1="68" x2="130" y2="128" class="edge"/>
+  <line x1="180" y1="68" x2="230" y2="128" class="edge"/>
+  <line x1="130" y1="128" x2="90" y2="188" class="edge"/>
+  <line x1="130" y1="128" x2="170" y2="188" class="edge"/>
+  <line x1="170" y1="188" x2="150" y2="248" class="edge"/>
+  <line x1="170" y1="188" x2="190" y2="248" class="edge"/>
+  <line x1="230" y1="128" x2="210" y2="188" class="edge"/>
+  <line x1="230" y1="128" x2="250" y2="188" class="edge"/>
+  <circle cx="180" cy="68" r="14" class="node"/>
+  <circle cx="130" cy="128" r="14" class="node"/>
+  <circle cx="230" cy="128" r="14" class="node"/>
+  <circle cx="90" cy="188" r="14" class="node"/>
+  <circle cx="170" cy="188" r="14" class="node"/>
+  <circle cx="210" cy="188" r="14" class="node"/>
+  <circle cx="250" cy="188" r="14" class="node"/>
+  <circle cx="150" cy="248" r="14" class="node"/>
+  <circle cx="190" cy="248" r="14" class="node"/>
+  <text x="180" y="294" class="part">(a)</text>
+
+  <!-- Perfect -->
+  <line x1="540" y1="68" x2="480" y2="128" class="edge"/>
+  <line x1="540" y1="68" x2="600" y2="128" class="edge"/>
+  <line x1="480" y1="128" x2="440" y2="188" class="edge"/>
+  <line x1="480" y1="128" x2="520" y2="188" class="edge"/>
+  <line x1="600" y1="128" x2="560" y2="188" class="edge"/>
+  <line x1="600" y1="128" x2="640" y2="188" class="edge"/>
+  <circle cx="540" cy="68" r="14" class="node"/>
+  <circle cx="480" cy="128" r="14" class="node"/>
+  <circle cx="600" cy="128" r="14" class="node"/>
+  <circle cx="440" cy="188" r="14" class="node"/>
+  <circle cx="520" cy="188" r="14" class="node"/>
+  <circle cx="560" cy="188" r="14" class="node"/>
+  <circle cx="640" cy="188" r="14" class="node"/>
+  <text x="540" y="294" class="part">(b)</text>
+
+  <!-- Complete but not full -->
+  <line x1="900" y1="68" x2="840" y2="128" class="edge"/>
+  <line x1="900" y1="68" x2="960" y2="128" class="edge"/>
+  <line x1="840" y1="128" x2="800" y2="188" class="edge"/>
+  <line x1="840" y1="128" x2="880" y2="188" class="edge"/>
+  <line x1="960" y1="128" x2="920" y2="188" class="edge"/>
+  <circle cx="900" cy="68" r="14" class="node"/>
+  <circle cx="840" cy="128" r="14" class="node"/>
+  <circle cx="960" cy="128" r="14" class="node"/>
+  <circle cx="800" cy="188" r="14" class="node"/>
+  <circle cx="880" cy="188" r="14" class="node"/>
+  <circle cx="920" cy="188" r="14" class="node"/>
+  <text x="900" y="294" class="part">(c)</text>
+</svg>

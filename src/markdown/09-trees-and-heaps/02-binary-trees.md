@@ -1,5 +1,4 @@
-
-## Binary trees
+## Binary trees {#trees:binary-trees}
 
 ::: TODO
 - Prio 1: update figures
@@ -15,23 +14,37 @@
 - Prio 2: merge quizzes (files 01q, 01q2), perhaps move to another section?
 :::
 
-A very common type of trees are *binary* trees.
-A binary tree is either empty (no nodes), or is a root node with a value and exactly two children (hence binary) that are also binary trees.
-The children of a node has a specific order, so every node has a
-left and a right child.
+As we explained in the introduction, trees form a family of related structures.
+In a [general tree]{.term}, a node may have any number of children.
+The children may or may not have a meaningful order.
+Many applications fit that flexible model.
+But one special case is particularly important in data structures and algorithms: the [binary tree]{.term}.
 
-Sometimes binary trees are described as having at most two children, but that is unwieldy because there is a difference between having a right and a left child. When you see trees drawn as the on on the left below, it is important to understand that it is actually as on the right, with the black dots showing empty trees.
+A binary tree is either empty, or it consists of a root node with a value and exactly two children that are themselves binary trees.
+These two children are ordered.
+So we distinguish between the left child and the right child.
+It is common to say that a binary tree node has at most two children, but that description hides an important point.
+If a node has only one child, it matters whether that child is on the left or on the right.
+So it is often clearer to think of a binary tree node as always having a left subtree and a right subtree.
+Either subtree may be empty.
+
+This is illustrated below.
+The tree drawn on the left and the tree drawn on the right represent the same binary tree.
+The black dots make the empty subtrees explicit.
 
 ![](images/Trees-BinaryTreeWithNulls.svg){width=70%}
 
-A node with no children (or more correctly, with only empty children) is
-called a *leaf*. Non-leaf nodes are sometimes called *inner* nodes,
-or *branches*.
-In the illustration above, the nodes containing 5 and 6 are leaves.
+A node with two empty subtrees is called a *leaf node*.
+Non-leaf nodes are called *internal nodes*, or sometimes *branches*.
+In the illustration above, the nodes containing 5 and 6 are leaf nodes.
 
 ![An example of a binary tree with nodes labeled by letters.](images/Trees-BinaryTreeExample.svg){width=60% #fig:example_bintree}
 
-@fig:example_bintree shows a binary tree that we will be using as a running example. Study it and consider: Which nodes are leaves? How many empty subtrees are hidden in the picture? What is the path from node A to node H?
+@fig:example_bintree shows a binary tree that we will use as a running example.
+Study it and consider these questions:
+Which nodes are leaf nodes?
+How many empty subtrees are hidden in the picture?
+What is the path from node `A` to node `H`?
 
 
 <!--
@@ -86,97 +99,30 @@ Here is a visual explanation of the same idea.
 
 -->
 
-### Full and complete binary trees
+### Full, perfect, and complete binary trees
 
-<!-- OPENDSA: START -->
-Two restricted forms of binary tree are sufficiently important to
-warrant special names. Each node in a
-[full binary tree](#full-tree){.term} is either
-(1) an internal node with exactly two non-empty children or (2) a leaf.
-A [complete binary tree]{.term} has a restricted
-shape obtained by starting at the root and filling the tree by levels
-from left to right. In the complete binary tree of height $d$, all
-levels except possibly level $d$ are completely full. The bottom level
-has its nodes filled in from the left side.
-<!-- OPENDSA: END -->
+Several restricted forms of binary tree are sufficiently important to warrant special names.
+In a [full binary tree](#full-tree){.term}, every node is either a leaf node or an internal node with exactly two non-empty children.
+A [perfect binary tree]{.term} is a full binary tree in which all leaves are at the same level.
+Equivalently, every level of a perfect binary tree is completely full.
+A [complete binary tree]{.term} has a shape obtained by starting at the root and filling the tree level by level from left to right.
+In a complete binary tree of height $d$, all levels except possibly level $d$ are completely full.
+The bottom level is filled from the left side.
 
-<!-- OPENDSA: START -->
-@Fig:full_complete_bintrees below illustrates
-the differences between full and complete binary trees. There is no
-particular relationship between these two tree shapes;
-<!-- OPENDSA: END -->
-that is, the tree (a) is
-full but not complete while the tree (b) is complete but not full.
-The [binary heap]{.term} (@sec:binary-heaps) is an example of a complete binary tree.
-The [Huffman coding tree]{.term} (@sec:huffman-coding) is an example of a full binary tree.
+@Fig:full_complete_bintrees below illustrates the differences between full and complete binary trees.
+Neither property implies the other.
+A perfect binary tree satisfies both properties.
+In the figure, tree (a) is full but not complete, while tree (b) is complete but not full.
+A [binary heap]{.term} (@sec:binary-heaps) is an example of a complete binary tree.
+A [Huffman coding tree]{.term} (@sec:huffman-coding) is an example of a full binary tree.
 
 ::: {#fig:full_complete_bintrees}
-:::: online
-```jsav-figure
-var AV = NewAV();
-AddCSS(`.jsavnode.jsavtreenode {
-  min-width: 10px;
-  max-width: 10px;
-  min-height: 10px;
-  max-height: 10px;
-  background-color: #000000;
-  border-color: #000000;
-}`);
-// Setup first row of trees
-var btTop = 0;
-var btLeft = 225;
-var btRight = 425;
-var bt = AV.ds.binarytree({nodegap: 25, left: btLeft, top: btTop});
-bt.root("");
-var rt = bt.root();
-rt.left("");
-rt.left().left("");
-rt.left().right("");
-rt.left().right().left("");
-rt.left().right().right("");
-rt.right("");
+![Three binary trees illustrating the differences between full, perfect, and complete trees.](images/Trees-full-perfect-complete.svg){width=100%}
 
-var bt2 = AV.ds.binarytree({nodegap: 25, left: btRight, top: btTop});
-var rt2 = bt2.root("");
-rt2.left("");
-rt2.left().left("");
-rt2.left().right("");
-rt2.left().left().left("");
-rt2.left().left().right("");
-rt2.left().right().left("");
-rt2.left().right().right("");
-rt2.right("");
-rt2.right().right("");
-rt2.right().left("");
-rt2.right().left().left("");
-
-bt.layout();
-bt2.layout();
-
-// Add first row of labels
-AV.label("(a)", {left: btLeft + 35, top: btTop + 135});
-AV.label("(b)", {left: btRight + 115, top: btTop + 135});
-AV.displayInit();
-AV.recorded();
-```
-::::
-
-:::: latex
-```
-            o                     ____ o ____
-           / \                   /           \
-          o   o                o               o
-         / \                 /   \           /   \
-        o   o              o       o       o       o
-           / \            / \     / \     /
-          o   o          o   o   o   o   o
-
-           (a)                        (b)
-```
-::::
-
-Examples of full and complete binary trees:
-(a) is full but not complete; (b) is complete but not full
+Examples of restricted binary tree shapes:
+(a) is full but not complete,
+(b) is perfect and therefore both full and complete,
+and (c) is complete but not full.
 :::
 
 <!-- OPENDSA: START -->
@@ -317,6 +263,3 @@ Two different binary trees:
 (d) the same tree as (b), with the missing left child made explicit
 :::
 -->
-
-
-
