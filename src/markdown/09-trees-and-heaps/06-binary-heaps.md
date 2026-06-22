@@ -18,12 +18,12 @@ Complete binary trees are therefore balanced, and any operation that takes time 
 Using a complete tree has several advantages:
 
 * It ensures that the tree remains balanced after adding an element to the tree.
-* A new element can only be placed in one specific position—the next available spot on the lowest level—so we do not need to decide where to insert it.
+* A new element can only be placed in one specific position -- the next available spot on the lowest level -- so we do not need to decide where to insert it.
 * The tree can be stored directly in an array, making the implementation simple and space-efficient.
 
 ### Representing complete binary trees as arrays
 
-Since a complete binary tree has exactly one possible shape for a given number of nodes, we can take advantage of this structure and store it—perhaps surprisingly—directly in an array.
+Since a complete binary tree has exactly one possible shape for a given number of nodes, we can take advantage of this structure and store it -- perhaps surprisingly -- directly in an array.
 Unlike other binary tree representations, we do not need explicit pointers to parent or child nodes.
 This leads to a simple and compact implementation of [complete binary trees]{.term}.
 Instead of pointers, the positions of a node’s parent and children can be determined using simple index calculations.

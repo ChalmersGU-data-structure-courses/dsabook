@@ -38,7 +38,7 @@ Designing invariants that apply uniformly to every node is often a useful strate
 
 The next question is how to implement heaps in a way that keeps operations efficient.
 In fact, there are several different heap structures, each with its own advantages and trade-offs.
-Examples include leftist heaps, skew heaps, Fibonacci heaps, binomial heaps, and 2–3 heaps, among others.
+Examples include leftist heaps, skew heaps, Fibonacci heaps, binomial heaps, and 2-3 heaps, among others.
 Some of these structures are designed to support efficient merging of heaps, which will be discussed later in Section X.
 
 
