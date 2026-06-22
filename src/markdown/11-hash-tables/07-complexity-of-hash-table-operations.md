@@ -24,7 +24,7 @@ using Horner's method with base 31, adding "Aa" to the end of a string will impa
 the resulting hash code the same way that adding "BB" does.
 A hint for why this is the case: The character codes for 'a' and 'B' differ by exactly 31.
 This means that these strings have the same hash codes: "AaAa", "AaBB", "BBAa", "BBBB".
-In general, using strings of size $2k$, we can easily construct 2^k strings with colliding
+In general, using strings of size $2k$, we can easily construct $2^k$ strings with colliding
 hash values. This makies it easy to clog a hash table with, for instance, millions of
 emails addresses with colliding hash values.
 

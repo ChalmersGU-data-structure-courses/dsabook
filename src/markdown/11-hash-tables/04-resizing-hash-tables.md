@@ -12,8 +12,7 @@ For open addressing there is a similar but more mathematically
 complicated reasoning about the length of clusters.
 
 Resizing of hash tables is similar to resizing of dynamic arrays,
-but differ in two key aspects
-(dynamic arrays can not be used for hash tables):
+but differ in two key aspects:
 
 * When we increase the size of a hash table, we can not simply
   copy elements to the new array. The values need to be re-hashed

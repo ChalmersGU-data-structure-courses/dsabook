@@ -1,28 +1,37 @@
 
 ## Quality of hash functions {#hash-tables:hash-quality}
 
+::: TODO
+- Discuss why we want primes in Horner's method: gives best distribution
+:::
+
 Implementations of hash tables typically do not include the hash functions,
 those are instead written by the developers of the key class.
 Built in classes like text strings typically have high quality hash functions,
 but user defined types require user defined hash functions.
 There is one required and several desirable properties of these hash functions:
 
-* Consistency: The absolute requirement that equal values have equal hash codes.
+Consistency
+: The absolute requirement that equal values have equal hash codes.
   Essentially, any pair values that should be considered the same key
   in our hash tables need to have the same hash code. What this means
   in practice in languages like Java is that if you modify the equals
   method of a class, you also need to modify its hash code function.
   Neglecting to do this will mean that a hash set can contain multiple
   copies of logically identical elements.
-* Distribution: The simplest aspect of this is that the probablility of
+
+Distribution
+: The simplest aspect of this is that the probablility of
   two randomly selected values having the same hash code should be low.
-  Even if this condition is satisfied .
-* Efficiency: Hashing needs to be fast. Every time a lookup is performed,
+  Even if this condition is satisfied **TODO**.
+
+Efficiency
+: Hashing needs to be fast. Every time a lookup is performed,
   a value gets hashed, and every time a hash table is resized all keys must
   be rehashed as well. The computational cost of hashing can easily
   eclipse the cost of searching the table. One way of mitigating this,
   especially for resizing, is for objects to cache the result of hashing:
-  The first time `hash(x)` is called the result is stored in `x`
+  The first time $h(x)$ is called the result is stored in $x$
   and returned directly in subsequent calls on the same object.
 
 Designing good hash functions is hard, and there are many pitfalls where
@@ -95,8 +104,8 @@ Imagine what that would do to our email database,
 where most of the keys end with "ail.com", and thus get the same hash code.
 
 Horner's method is a popular way of hashing most types of compound objects.
-If we have a class with two instance variables `a` and `b`, then we
-would have `hash(x)=hash(x.a)*31+hash(b)`.
+If we have a class with two instance variables $a$ and $b$, then we
+would have $h(x) = h(x.a)\cdot 31 + h(x.b)$.
 
 There is much more to be said about writing hash functions, including technicalities
 of how to do it in various programming languages, but what we have demonstrated here

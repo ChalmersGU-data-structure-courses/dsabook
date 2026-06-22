@@ -1,47 +1,42 @@
 
-## Hash table implementation {#hash-tables:implementation}
+## Implementation of open addressing {#hash-tables:implementation}
 
 While seperate chaining is a bit easier in principle,
-linear probing is probably easier to implement because
+linear probing is arguably easier to implement because
 it does not require implementing operations on linked lists.
+Below is a very simple implementation of a linear probing hash set,
+where we leave out the problem of resizing (see section @sec:hash-tables:resizing).
 
-Below is an implementation of a linear probing hash set
-(with add and contain).
-It uses a common lookup operation for finding the position a value is in,
-or the first empty position after its ideal position if it is absent.
+    datatype LinearProbingSet implements Set:
+        arr = new Array()  // An array of values, indexed by hashcode and linear probing
+        size = 0           // The number of values in the set
 
-    datatype LinearProbingSet of T:
-        size : int = 0
-        table : Array of T = new Array of size 3
+To check if a value is in the set, we first find the position in the array where it *should* be,
+and then test if that cell is nonempty:
 
-    add(set : LinearProbingSet of T, value : T):
-        balanceFactor = set.size / set.table.length
-        if balanceFactor > threshold:   // this table is too crowded
-            set.table = resize(set.table, set.table.length * 2)
+    contains(hashset, value) -> Bool:
+        index = lookup(hashset.arr, value)
+        return hashset.arr[index] is not null
 
-        index = lookup(set, value)
-        if set.table[index] == null:
-            set.table[index] = value
-            set.size += 1
+To add a value to the set, we again find the position where it should be.
+If that cell is empty, we can add the value, and we must not forget to increase the size:
 
-    contains(set : LinearProbingSet of T, value : T):
-        index = lookup(set, value)
-        return set.table[index] != null
+    add(hashset, value):
+        index = lookup(hashset.arr, value)
+        if hashset.arr[index] is null:
+            hashset.arr[index] = value
+            hashset.size += 1
 
-    lookup(set : LinearProbingSet of T, value : T):
-        index = hash(value) % set.table.length
-        while set.table[index] != null:
-            if set.table[index] == value:
-                return index // value already present
-            index = (index + 1) % set.table.length
-        return index    // this is the position of a null value
+Both operations use a common operation `lookup` for finding the position of a value.
+If the value is not found, it returns the first empty position where it could have been:
 
-This implementation leaves out a few details, most notably:
-
-* A remove operation, either using lazy deletion or by re-hashing values in the relevant cluster.
-* The resize operation that creates a new larger table and re-adds all the values to it.
-* An iterator for values, some way of looping through the values of the set.
-  This could be implemented by converting the hash table to a list.
+    lookup(arr, value) -> Int:
+        index = hash(value) % arr.size      // Compress the hash value into the array size.
+        while arr[index] is not null:
+            if arr[index] == value:           // The value already present.
+                return index
+            index = (index + 1) % arr.size  // Linear probing.
+        return index                          // This is the position of a null value.
 
 Implementing a map instead of a set would be nearly identical,
 only with an additional value for each key.
