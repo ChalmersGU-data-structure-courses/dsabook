@@ -44,14 +44,18 @@ Some common tree terms are:
 - [Siblings]{.term} are nodes with the same parent.
 - A [path]{.term} is a sequence of nodes where each node is the parent of the next one.
 
-We will often describe trees using their *size* and *height*.
-The *size* of a tree is the number of nodes it contains.
-The [height]{.term} of a tree is the length of the longest path from the root to a leaf.
-An empty tree has size 0 and height 0.
+We will sometimes describe trees and nodes using the concepts of size, level, and height.
+The size of a tree is the number of nodes it contains.
+The [level]{.term} of a node is its distance from the root.
+Thus, the root is at level 0, its children are at level 1, and so on.
+The depth of a node is synonymous with its level.
+The [height]{.term} of a tree (or subtree) is the number of edges on the longest path from its root to a leaf.
+Consequently, a tree consisting of a single node has height 0. We define the height of an empty tree to be −1.
 
-Some trees care about the order of children, while others do not.
+Another important question is whether the children of a node have a fixed order.
 In a file system, the order of the children of a folder is usually unimportant.
-In a syntax tree, order matters a lot, because the expressions $a < 3$ and $3 < a$ mean different things.
+In a syntax tree, order matters,
+because the expressions $a < 3$ and $3 < a$ mean different things.
 This distinction will matter later when we compare general trees, binary trees, and heaps.
 
 ![Two familiar domains modelled as trees: Programming language syntax and file systems.](images/Trees-examples.svg){width=70% #fig:TreeExamples}
@@ -82,4 +86,3 @@ The chapter concludes with further case studies and with trees that have more, o
 ::: TODO
 The paragraph above refers to an online section, @sec:trees:general-trees
 :::
-
