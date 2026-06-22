@@ -1,5 +1,5 @@
 
-## Quicksort
+## Quicksort {#sorting-2:quicksort}
 
 ::: TODO
 - Prio 1: invariants
@@ -36,7 +36,7 @@ because we already know that everything in the first part is smaller than everyt
 -- so we can just put them after each other.
 
 
-### Partition
+### Partitioning {#sorting-2:partitioning}
 
 The biggest advantage of Quicksort over Mergesort is that partitioning can be done in-place, which merging cannot.
 And the main reason why we can partition in-place is because we can swap elements with each other.
@@ -146,7 +146,7 @@ We assume that we select the middle element as the pivot.
 Compared to Mergesort, the partitioning process is completely in-place,
 but on the other hand we cannot be certain that the internal order between equal elements are preserved.
 This means that Quicksort is not a stable algorithm, and we have no guarantee for a good time complexity.
-Here is how we can categorise Quicksort according the three parameters from @sec:terminology:
+Here is how we can categorise Quicksort according the three parameters from @sec:sorting-1:terminology:
 
 - In-place: *yes*, we do not have to create any intermediate arrays.
 - Stable: *no*, equal elements might change order.
@@ -166,7 +166,7 @@ This is exactly how Selection sort works!
 So conceptually, we can view Selection sort as a corner case of Quicksort, where we partition very unevenly.
 
 
-### Implementing Quicksort
+### Implementing Quicksort {#sorting-2:quicksort-implementation}
 
 Now we're almost ready to implement Quicksort, but one small but important thing remains.
 We cannot know how big the left and right partitions will be, not until we have done the partitioning.
@@ -202,7 +202,7 @@ the larger partition will still contain one less element than the input array.
 
 #### Implementing partitioning
 
-The informal algorithm in @sec:partition can be implemented as pseudocode like this:
+The informal algorithm in @sec:sorting-2:partitioning can be implemented as pseudocode like this:
 
     partition(arr, start, end, p) -> Int:
         swap(arr, start, p)              // Put the pivot at the start of the interval.
@@ -251,7 +251,7 @@ Quicksort.
 
 #### Invariants for partitioning
 
-In @sec:internal-invariants we introduced invariants as a way of making algorithms precise and easier to reason about.
+In @sec:analysis-1:invariants we introduced invariants as a way of making algorithms precise and easier to reason about.
 This is very useful when implementing partitioning,
 because it can be difficult to understand the relation between the pointers *start*, *low*, *high*, and *end*.
 
@@ -412,7 +412,7 @@ It does not take many good partitionings for Quicksort to work fairly well.
 
 #### Best-case complexity
 
-In @sec:best-worst-and-average-cases we argued why we usually are not interested in the best-case complexity,
+In @sec:analysis-1:complexity-cases we argued why we usually are not interested in the best-case complexity,
 but Quicksort is an exception to this.
 It is interesting and useful to analyse the best-case complexity of Quicksort,
 because the best case is so much more common than the worst case (in normal circumstances).
@@ -447,7 +447,7 @@ Quicksort's average-case behaviour falls somewhere between the extremes of worst
 Average-case analysis considers the cost for all possible arrangements of input,
 <!-- OPENDSA: END -->
 and calculates the average cost, weighted by how the data is distributed.
-As we already discussed in @sec:the-problem-with-average-case,
+As we already discussed in @sec:analysis-1:average-case-problem,
 the average case is extremely difficult to reason about,
 because real-world data does not usually have an even distribution.
 
@@ -473,7 +473,7 @@ T(n) &= cn + \frac{1}{n}\sum_{k=0}^{n-1}[T(k) + T(n - 1 - k)]
 T(0) = T(1) &= c
 \end{align*}
 
-The equation above is a *recurrence relation*, and we will discuss those in more detail in @sec:recurrence-relations.
+The equation above is a *recurrence relation*, and we will discuss those in more detail in @sec:analysis-3:recurrences.
 This visualisation will help you to understand how the recurrence relation was formed.
 
 ``` {.jsav-animation src="Sorting/QuickSortAverageCaseCON.js" links="Sorting/QuickSortAverageCaseCON.css" name="Quicksort Average Case Analysis Slideshow"}
@@ -481,7 +481,7 @@ This visualisation will help you to understand how the recurrence relation was f
 :::
 
 
-### Variants and optimisations
+### Variants and optimisations {#sorting-2:quicksort-optimisations}
 
 In this section we discuss some variants of Quicksort, and things we can do to improve its efficiency.
 
@@ -514,7 +514,7 @@ This is a very common improvement, and usually one uses Insertion sort as the ba
 Now, at what size should we switch to Insertion sort?
 The answer can only be determined by empirical testing, but on modern machines the answer is probably somewhere between 10 and 100.
 <!-- OPENDSA: END -->
-Note that in @sec:using-a-backoff-algorithm we discussed exactly the same improvement for Mergesort.
+Note that in @sec:sorting-2:mergesort-optimisations we discussed exactly the same improvement for Mergesort.
 
 
 #### Running Insertion sort in a single final pass
@@ -537,7 +537,7 @@ putting the records into final sorted order.
 #### Alternative partitioning approaches
 
 There are several possible ways we can translate the informal partitioning algorithm into working code.
-For example, in our implementation in @sec:implementing-quicksort
+For example, in our implementation above
 we move the pointers at most one step in each iteration of the `while`-loop.
 An alternative is to move the pointers as far as possible during each iteration,
 and then the pseudocode will become like this:
@@ -559,7 +559,7 @@ and then the pseudocode will become like this:
         swap(arr, start, high)       // Finally, swap the pivot into place, and
         return high                  // return the new position of the pivot.
 
-This version is ever so slightly faster than the one in @sec:implementing-quicksort,
+This version is ever so slightly faster than the one in @sec:sorting-2:quicksort-implementation,
 because in some cases it makes fewer comparisons.
 It is even possible to improve this one a little bit more,
 because we do not need test `low<=high` in the second inner while loop

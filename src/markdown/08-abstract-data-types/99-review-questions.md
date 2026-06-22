@@ -1,7 +1,7 @@
 
 <!--
 :::::: online
-## Review questions {#ch08-review}
+## Review questions {#ADTs:quizzes}
 This final section contains some review questions about the contents of this chapter.
 ::::::
 -->

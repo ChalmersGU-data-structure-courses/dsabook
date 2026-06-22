@@ -1,5 +1,5 @@
 
-## Linked lists
+## Linked lists {#sequences:linked-lists}
 
 ::: TODO
 - Prio 1: invariants
@@ -61,7 +61,7 @@ but we will not discuss them in this section.
 Singly linked lists are all we need to implement stacks and queues.
 
 
-### Stacks as linked lists
+### Stacks as linked lists {#sequences:linked-stacks}
 
 Implementing a stack as a linked list is quite simple.
 Elements are inserted and removed only from the head of the list,
@@ -169,7 +169,7 @@ Here is a proficiency exercise about popping from linked stacks.
 :::
 
 
-### Queues as linked lists
+### Queues as linked lists {#sequences:linked-queues}
 
 Implementing a queue is a little more tricky.
 It is still easy to remove elements -- we can simply reuse the pop operation.

@@ -1,5 +1,5 @@
 
 :::::: online
-## Review questions {#ch10-review}
+## Review questions {#search-trees:quizzes}
 This final section contains some review questions about the contents of this chapter.
 ::::::

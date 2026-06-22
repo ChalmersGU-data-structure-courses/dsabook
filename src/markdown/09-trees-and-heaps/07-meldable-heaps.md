@@ -1,5 +1,5 @@
 
-## Meldable heaps
+## Meldable heaps {#heaps:meldable-heaps}
 
 ::: TODO
 - Prio 1: write this section:

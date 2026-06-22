@@ -1,5 +1,5 @@
 
-## Motivation
+## Motivation {#intro:motivation}
 
 ::: TODO
 - Prio 1: Merge the two sections into one
@@ -139,7 +139,7 @@ That problem is 10,000 times larger, is it still feasible to do it using your ol
 These questions can be answered by algorithm analysis,
 and it is not at all certain that it must take 10,000 times longer to solve a 10,000 times larger problem --
 it depends on the algorithm.
-(For the specific example of searching in a list, we will discuss that in more detail in @sec:binary-search.)
+(For the specific example of searching in a list, we will discuss that in more detail in @sec:intro:binary-search.)
 
 A *data structure* is any kind of representation of some data, together with associated operations.
 This can mean almost anything, and even a simple integer or a string is a data structure.
@@ -195,7 +195,7 @@ viewed as a simple data structure. More commonly, people use the term
 "data structure" to mean an organisation or structuring for a
 collection of data items. A sorted list of integers stored in an array
 is an example of such a structuring. These ideas are explored further in
-@sec:abstract-data-types about [abstract data types]{.term}.
+@sec:intro:abstract-data-types about [abstract data types]{.term}.
 
 Given sufficient space to store a collection of
 [data items]{.term}, it is always

@@ -1,5 +1,5 @@
 
 :::::: online
-## Review questions {#ch06-review}
+## Review questions {#sequences:quizzes}
 This final section contains some review questions about the contents of this chapter.
 ::::::

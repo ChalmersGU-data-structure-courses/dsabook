@@ -1,5 +1,5 @@
 
-## Traversing trees
+## Traversing trees {#trees:traversal}
 
 ::: TODO
 - Prio 1: merge with 03b-traversion-general-trees

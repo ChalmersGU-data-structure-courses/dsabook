@@ -1,5 +1,5 @@
 
-## Mergesort
+## Mergesort {#sorting-2:mergesort}
 
 ::: TODO
 - Prio 1: flatten some subsections
@@ -45,7 +45,7 @@ Here is a visualisation that illustrates how Mergesort works.
 ```
 :::
 
-### Merge
+### Merging {#sorting-2:merging}
 
 The hardest step to understand about Mergesort is how to
 merge the two sorted halves into a single sorted array.
@@ -99,7 +99,7 @@ In is in fact possible to do the merging in-place,
 but this involves moving around elements in a way similar to Insertion sort,
 which is both is more complex and less efficient as the algorithm above.
 
-If you recall our categorisation of sorting algorithms from @sec:terminology,
+If you recall our categorisation of sorting algorithms from @sec:sorting-1:terminology,
 we are now ready to categorise Mergesort:
 
 - In-place: *no*, as we already mentioned it is very costly to make merging in-place.
@@ -124,7 +124,7 @@ or most work is in the combine step (making dividing easy).
 Mergesort is of the latter kind.
 
 So, is there any other divide-and-conquer sort that is divide-heavy instead?
-Yes, it is called Quicksort and is the topic for @sec:quicksort.
+Yes, it is called Quicksort and is the topic for @sec:sorting-2:quicksort.
 
 
 ### Complexity analysis
@@ -181,7 +181,7 @@ $$ O(n \log(n)) $$
 If you look at the picture above, you see that each level has $n$ elements and there are $\log(n)$ levels,
 and the final complexity is just each row times the number of levels.
 
-The linearithmic complexity of Mergesort is much much faster than the algorithms from [Chapter @sec:sorting-part-1],
+The linearithmic complexity of Mergesort is much much faster than the algorithms from [Chapter @sec:sorting-1],
 which are all quadratic, $O(n^2)$.
 In fact, $O(n\log(n))$ is in practice almost linear, because $\log(n)$ grows so much slower than any polynomial function.
 
@@ -206,7 +206,7 @@ And since sorting arrays of size $\frac{n}{2}$ and $n$ both have the same comple
 then that must be true for all array sizes in between, $\frac{n}{2}<n'<n$.
 
 
-### Implementing Mergesort
+### Implementing Mergesort {#sorting-2:mergesort-implementation}
 
 How can we use the algorithm descriptions above to implement Mergesort?
 The descriptions are quite vague and we have to figure out how to make it work in practice.
@@ -254,10 +254,9 @@ Here is a visualisation for the merge step.
 :::
 
 
-### Optimisations
+### Optimisations {#sorting-2:mergesort-optimisations}
 
-Just as we discussed for the previous sorting algorithms in @sec:empirical-analysis-and-code-tuning,
-there are some optimisations one can do to the naive Mergesort algorithm from above.
+There are some optimisations one can do to the naive Mergesort algorithm from above.
 
 #### Use just one temporary array
 

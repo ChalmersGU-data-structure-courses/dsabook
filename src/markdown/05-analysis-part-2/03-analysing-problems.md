@@ -1,5 +1,5 @@
 
-## Analysing problems
+## Analysing problems {#analysis-2:analysing-problems}
 
 ::: TODO
 - Prio 2: rewrite this text, more examples and help in how to analyse problems
@@ -33,7 +33,7 @@ To know this we have to know about the lower bound of the problem,
 in other words, if we know a lower bound for a problem then
 we know that there cannot be any algorithm with a better complexity.
 
-As we already noted in @sec:lower-bounds-and-tight-bounds,
+As we already noted in @sec:analysis-2:other-bounds,
 the lower bound, $\Omega$, is usually not interesting when we want to analyse an algorithm.
 But if we want to analyse a *problem* instead of an algorithm, then it is $\Omega$ we want to know.
 So as a rule of thumb we can say:
@@ -89,8 +89,8 @@ while the lower bound for a problem is the least work that you *must* do.
 
 ### Case study: Inversions and quadratic sorting algorithms {#inversions}
 
-The sorting algorithms in [Chapter @sec:sorting-part-2] are all asymptotically much better than
-the algorithms from [Chapter @sec:sorting-part-1].
+The sorting algorithms in [Chapter @sec:sorting-2] are all asymptotically much better than
+the algorithms from [Chapter @sec:sorting-1].
 Byt *why* is that -- or rather, why are Bubble, Selection and Insertion sort so much slower?
 The crucial bottleneck is that only *adjacent* records are compared or swapped.
 To analyse this we first need to define the concept of *inversion*.
@@ -127,7 +127,7 @@ Therefore, we need $d+1$ comparisons to reduce the number of inversions by $2d$.
 And since there are $n(n-1)/2$ inversions in the worst case, we need at least $n(n-1)/4$ comparisons, which is quadratic.
 
 Therefore, all sorting algorithms that can only compare or swap adjacent elements are doomed to be quadratic in the worst case.
-This includes the algorithms from [Chapter @sec:sorting-part-1], and numerous other.
+This includes the algorithms from [Chapter @sec:sorting-1], and numerous other.
 So what about Mergesort and Quicksort -- how can they circumvent the quadratic behaviour?
 This is because they compare and swap *non-adjacent* elements (and they do it in a smart way).
 

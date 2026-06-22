@@ -1,15 +1,14 @@
 :::::: online
 
-## Case study: Disjoint sets in depth {#disjoint-sets-in-depth}
+## Case study: Disjoint sets in depth {#trees:disjoint-sets-in-depth}
 
 ::: TODO
 - Prio 1: update text and code, refer to 04-disjoint-sets
 :::
 
-[General trees](#general-tree){.term} (@sec:general-trees) are trees
-whose [internal nodes](#internal-node){.term}
-have no fixed number of [children](#child){.term}. Compared to general trees,
-[binary trees](#binary-tree){.term} are
+[General trees](#general-tree){.term} are trees
+whose internal nodes have no fixed number of children.
+Compared to general trees, binary trees are
 relatively easy to implement because each internal node of a binary tree
 can just store two pointers to reach its (potential) children. In a
 general tree, we have to deal with the fact that a given node might have

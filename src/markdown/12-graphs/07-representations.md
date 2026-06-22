@@ -1,5 +1,5 @@
 
-## Graph representation and implementation
+## Graph representation and implementation {#graphs:representation}
 
 There are two main ways of implementing graphs:
 

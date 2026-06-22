@@ -1,5 +1,5 @@
 
-## Problems, algorithms, and programs
+## Problems, algorithms, and programs {#analysis-1:problems-and-algorithms}
 
 ::: TODO
 - Prio 2: Flatten subsections?
@@ -30,14 +30,14 @@ You have already encountered two fundamental computational problems:
 
 Searching in an array
 :   The input is an array and an element, and the output can for example be an array index.
-    (@Sec:binary-search)
+    (@Sec:intro:searching)
 
 Sorting an array
 :   The input is an array, and the output is an array containing exactly the same elements but in increasing order.
-    ([Chapter @sec:sorting-part-1])
+    ([Chapter @sec:sorting-1])
 
 Note that the input to a problem often includes things that we normally don't view as input.
-For example, for the problem of finding the fastest route between two cities (see @sec:shortest-path-problems),
+For example, for the problem of finding the fastest route between two cities (see @sec:graphs:shortest-path),
 it is obvious that we need to know the two cities and the road network.
 But if we want to calculate the travel time accurately, we also need information about what vehicle we will use,
 and perhaps even the weather conditions.
@@ -48,7 +48,7 @@ So these should also be inputs to the problem.
 An [algorithm]{.term} is a method or a process followed to solve a problem.
 There are usually many different algorithms that solves a given problem.
 For example, for the important problem of sorting there are over a dozen commonly used algorithms!
-(Some of them are discussed in [Chapters @sec:sorting-part-1] and [-@sec:sorting-part-2].)
+(Some of them are discussed in [Chapters @sec:sorting-1;@sec:sorting-2].)
 
 An algorithm can be viewed as an implementation of a [function]{.term} in the mathematical sense.
 But note that there are usually several ways of implementing the same functions
@@ -121,8 +121,8 @@ without changing the underlying algorithm.
 <!-- By definition, an algorithm must provide sufficient detail that it can be converted into a program when needed. -->
 
 The distinction between the terms "algorithm" and "program" is not always clear.
-For example, Selection sort is an algorithm which we described very abstractly using plain English in @sec:selection-sort-overview,
-but we also showed pseudocode in @sec:selection-sort.
+For example, Selection sort is an algorithm which we described very abstractly using plain English in @sec:sorting-1:overview,
+but we also showed pseudocode in @sec:sorting-1:selection-sort.
 Which one of these is the best description of the actual *algorithm*, and not a specific program?
 The abstract English description is closer to the "ideal" Selection sort algorithm,
 but it is also more prone to misunderstandings and unintended ambiguities.

@@ -1,6 +1,6 @@
 :::::: online
 
-## Directed acyclic graphs: Topological sort {#topological-sort}
+## Directed acyclic graphs: Topological sort {#graphs:topological-sort}
 
 ::: TODO
 - Prio 3: simplify code
@@ -35,7 +35,7 @@ Seven tasks have dependencies as shown by the directed graph.
 
 A topological sort may be found by performing a [depth-first search]{.term} (DFS) on the graph.
 When a vertex is visited, no action is taken
-(i.e., function *preVisit* from @sec:depth-first-search does nothing).
+(i.e., function *preVisit* from @sec:graphs:DFS does nothing).
 When the recursion pops back to that vertex, function *postVisit* adds the vertex to a stack.
 In the end, the stack is returned to the caller.
 

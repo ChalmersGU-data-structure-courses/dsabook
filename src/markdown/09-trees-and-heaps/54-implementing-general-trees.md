@@ -1,6 +1,6 @@
 :::::: online
 
-## Sequential tree representations
+## Implementing general trees {#trees:general-trees}
 
 ::: TODO
 - Prio 2: rewrite text, include:

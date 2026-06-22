@@ -1,4 +1,4 @@
-# Introduction {#introduction}
+# Introduction {#intro}
 
 ::: TODO
 - Prio 1: Extend this introduction just a little

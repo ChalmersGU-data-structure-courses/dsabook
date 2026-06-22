@@ -1,5 +1,5 @@
 
-# Sorting, part 1 {#sorting-part-1}
+# Sorting, part 1 {#sorting-1}
 
 <!-- OPENDSA: START -->
 We have seen that, when an array is sorted in ascending order, *binary
@@ -18,7 +18,7 @@ computing tasks. We might sort the records in a database so that we can
 search the collection efficiently. We might sort customer records by zip
 code so that when we print an advertisement we can then mail them more
 cheaply. We might use sorting to help an algorithm to solve some other problem.
-For example, [Kruskal's algorithm]{.term} is described in @sec:kruskal-algorithm.
+For example, [Kruskal's algorithm]{.term} is described in @sec:graphs:kruskals-algorithm.
 It builds [minimum spanning trees]{.term} and
 must sort the edges of a graph by their lengths before it can process them.
 
@@ -66,4 +66,4 @@ This is usually done by a [comparator]{.term} (in Java), or by a [key function](
 The following chapters cover several standard algorithms appropriate for sorting a collection of records.
 In these chapters we concentrate on *natural sorting*, but all the algorithms work just as well for *key-based sorting* -- and we trust that you are a mature enough programmer to be able to infer how to do this.
 This chapter discusses three simple algorithms that work well on small arrays, and
-[Chapter @sec:sorting-part-2] presents two algorithms with considerably better performance on large arrays.
+[Chapter @sec:sorting-2] presents two algorithms with considerably better performance on large arrays.

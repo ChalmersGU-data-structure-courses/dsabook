@@ -1,5 +1,5 @@
 
-## Kruskal's MST algorithm {#kruskals-algorithm}
+## Kruskal's MST algorithm {#graphs:kruskals-algorithm}
 
 ::: TODO
 - Prio 2: first show more abstract pseudocode, not using union/find
@@ -47,7 +47,7 @@ This complexity is if we store the MST as a set, but it is possible to do much b
 There is a much better data structure for storing the MST -- the *disjoint-set* (also called union-find). For now, the only thing we need to know about the disjoint-set now is that it supports the operations we needs efficiently, in *almost* constant time. To be precise, the complexity of the operations is $O(\log*(n))$, which is an extremely slow-growing function: it's so slow that $\log*(n) \leq 5$ for all $n \leq 2^{65536}$. So, $\log*(n)$ is constant for *all practical purposes*.
 
 Therefore, if we use a disjoint-set to store the MST, Kruskal's algorithm is $O(E \log*(E))$ -- which in practice is the same as $O(E)$. But first we have to sort the edges, which anyway takes $O(E \log(E))$ time, which is then the total complexity. But note that since $E \in O(V^2)$ and $O(\log(V^2)) = O(2 \log(V)) = O(\log(V))$, the total complexity of Kruskal's algorithm can be written as $O(E \log(V))$.
-More information about the disjoint-set can be found in @sec:disjoint-sets if you are interested. (It's a quite cool data structure, so worth the read:)
+More information about the disjoint-set can be found in @sec:trees:disjoint-sets if you are interested. (It's a quite cool data structure, so worth the read:)
 
 <!-- END NOTES -->
 
@@ -69,7 +69,7 @@ array and then sorting the array. Another possibility is to use a
 
 The only tricky part to this algorithm is determining if two vertices
 belong to the same equivalence class. Fortunately, the ideal algorithm
-is available for the purpose -- the [Union/Find]{.term} algorithm, described in @sec:disjoint-sets.
+is available for the purpose -- the [Union/Find]{.term} algorithm, described in @sec:trees:disjoint-sets.
 Here is an implementation for Kruskal's algorithm. Note that since the
 MST will never have more than $|\mathbf{V}|-1$ edges, we can return as
 soon as the MST contains enough edges.

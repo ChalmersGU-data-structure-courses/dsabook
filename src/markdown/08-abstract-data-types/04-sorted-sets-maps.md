@@ -1,5 +1,5 @@
 
-## Sorted sets and maps
+## Sorted sets and maps {#ADTs:sorted-sets-and-maps}
 
 One task that sets or maps cannot solve are *range queries*, such as this example:
 
@@ -16,14 +16,14 @@ because they do not have any suitable operations.
 
 Not all data structures for implementing sets and maps can answer range queries efficiently,
 so we cannot add these kind of operations to the set and map interfaces.
-For example, hash tables (see [chapter @sec:hash-tables]) cannot answer range queries efficiently.
+For example, hash tables (see [Chapter @sec:hash-tables]) cannot answer range queries efficiently.
 
 However, some data structures do support range queries,
-for example self-balancing search trees (see [chapter @sec:search-trees]).
+for example self-balancing search trees (see [Chapter @sec:search-trees]).
 For this reason we extend the set and map interfaces, and say that
 these data structures implement *sorted sets* and *maps*.
 
-### Sorted sets
+### Sorted sets {#ADTs:sorted-sets}
 
 The first example range query was:
 "are there any towns whose population is between 5,000 and 10,000?".
@@ -83,12 +83,12 @@ Note that it *extends* the `Set` interface, so it has all the methods that norma
                                 // Returns all keys such that low ≤ key ≤ high.
 -->
 
-### Sorted maps
+### Sorted maps {#ADTs:sorted-maps}
 
 Now consider the second range query in the example above:
 "find the towns whose population is between 5,000 and 10,000".
 
-One way to solve this problem would be to use a *multimap* (see @sec:multimaps).
+One way to solve this problem would be to use a *multimap* (see @sec:ADTs:multimaps).
 The key would be a population number, and the values would be all towns having that population.
 Then we could find the required towns by making a sequence of calls
 `get(5,000)`, `get(5,001)`, ..., until `get(10,000)`.
@@ -148,14 +148,15 @@ The range query "are there any elements between $a$ and $b$?",
 can then be answered by the following algorithm:
 
 -   Find the position in the array of the *smallest* element $e \geq a$.
-    (This can be done efficiently using *binary search*, from @sec:binary-search.)
+    (This can be done efficiently using *binary search*, from @sec:intro:binary-search.)
 -   Check if $e\leq b$.
 
 So, if we have a sorted array all kinds of range queries can be implemented efficiently.
 However, we get into trouble if we want to add or remove elements.
 Since we have to keep the array sorted at all times,
 we might have to move a lot of elements when we insert something,
-just as we did when we tried to implement a priority queue in @sec:implementing-PQs-with-lists.
+just as we did when we tried to implement a priority queue in
+@sec:ADTs:priority-queues.
 A similar problem occurs when we want to delete an element,
 we need to move the other elements to close the gap in the array.
 

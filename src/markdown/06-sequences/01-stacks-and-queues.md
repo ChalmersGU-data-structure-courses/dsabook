@@ -1,5 +1,5 @@
 
-## Stacks and queues
+## Stacks and queues {#sequences:stacks-and-queues}
 
 ::: TODO
 - Prio 2: invariants
@@ -59,5 +59,5 @@ and the names are very common in actual library implementations.
 
 One interesting thing with stacks and queues is that there are several possible data structures that can implement them.
 In the following sections we will see how to implement them
-either as *linked lists* (see @sec:linked-lists) or
-*dynamic arrays* (see [@sec:array-based-stacks-and-queues;@sec:dynamic-arrays]).
+either as *linked lists* (see @sec:sequences:linked-lists) or
+*dynamic arrays* (see [@sec:sequences:array-sequences;@sec:sequences:dynamic-arrays]).

@@ -1,5 +1,5 @@
 
-## Bubble sort
+## Bubble sort {#sorting-1:bubble-sort}
 
 ::: TODO
 - Prio 2: add figure next to the pseudocode showing the array and the variables in the middle of running
@@ -98,8 +98,7 @@ Now try for yourself to see if you understand how Bubble sort works.
 ### Analysis of Bubble sort
 
 How long time does it take to Bubble sort an array of $n$ elements?
-As already mentioned in @sec:comparing-algorithms this depends on many things,
-but a standard measure is to count the number of comparisons.
+This depends on many things, but a standard measure is to count the number of comparisons.
 So how many comparisons are done by Bubble sort?
 
 We have a nested for loop, where the inner loop depends on the loop variable of the outer loop.
@@ -113,7 +112,7 @@ $$
 (n-1) + (n-2) + \cdots + 1  =  \sum_{i=1}^{n-1} i  =  \frac{1}{2} n (n-1)
 $$
 
-As we will learn later (in @sec:growth-rates), we usually discard constant factors,
+As we will learn later (in @sec:analysis-1:order-of-growth), we usually discard constant factors,
 and instead we are interested in the general "growth rate" of an algorithm.
 And since $n(n-1)$ is very close to $n^2$,
 we say that the number of comparisons grows *quadratically* with the size of the array.

@@ -1,6 +1,6 @@
 :::::: online
 
-## Other kinds of sequences
+## Other kinds of sequences {#sequences:other-sequences}
 
 ::: TODO
 - Prio 1: move online things to separate section
@@ -17,7 +17,7 @@ or that they need to be able to look at more elements than just the "next in lin
 Here we will briefly discuss some common abstract datatypes for more complex sequences.
 
 
-### Priority queues
+### Priority queues {#sequences:priority-queues}
 
 Stacks and queues can be characterised by how long an element has to wait until it is removed:
 
@@ -51,7 +51,7 @@ Priority queues are discussed further in [Chapter @sec:heaps].
 <!-- #### Use case(s) for priority queues -->
 
 
-### Double-ended queues
+### Double-ended queues {#sequences:deques}
 
 A double-ended queue (also known as a *deque*) is both a stack and a queue at the same time.
 This means that we can add and remove elements both from the front and the rear (but not in the middle).
@@ -74,7 +74,7 @@ together with the operations `addFirst`, `addLast`, `removeFirst` and `removeLas
 
 <!-- #### Use case(s) for deques -->
 
-#### Double-linked lists
+#### Double-linked lists {#sequences:double-linked-lists}
 
 However, it is not as easy to implement a deque using a linked list.
 The solution is to use a *double-linked list*, where each node points both forward and backward:
@@ -179,7 +179,7 @@ The same goes for removing elements -- the one-element list is a special case.
         return removed.elem
 
 
-### General lists
+### General lists {#sequences:general-lists}
 
 ::: TODO
 - Prio 2: invariants
@@ -387,8 +387,7 @@ Locating a certain position $i$ in the list requires $i$ steps. The
 worst case is if we want to go to the last node, so the time complexity
 for above all operations is $O(n)$.
 
-This is much worse than the
-array-based list (@sec:implementing-general-lists-using-arrays), where
+This is much worse than the array-based list (see below), where
 these operations are $O(1)$. So are linked lists totally useless?
 No! But they don't work well with our current List interface.
 
@@ -403,10 +402,7 @@ which is part of Java's standard
 
 ### Implementing general lists using arrays
 
-First we give a static implementation for array-based lists, named
-**ArrayList**. This inherits from the
-List ADT (@sec:adt-for-general-lists), and must therefore
-implement all of the member functions of `List`.
+First we give a static implementation for array-based lists, named **ArrayList**.
 
 Unlike normal arrays, lists can change in size: we can add elements to
 and remove from them. How can this be implemented? Well, what we
@@ -592,7 +588,7 @@ they are implemented in Java and Python:
     it's up to the programmer to decide when to shrink it.
 -   Java's
     [java.util.LinkedList](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/LinkedList.html)
-    implements [doubly-linked list](#doubly-linked-list){.term} (@sec:double-ended-queues), so that the iterator can move forward and backward
+    implements [doubly-linked list](#doubly-linked-list){.term} (@sec:sequences:deques), so that the iterator can move forward and backward
     through the list. \[[Source:
     LinkedList.java](https://github.com/openjdk/jdk/blob/961dcffc862a4830fbf26791835a98c12d4b513e/src/java.base/share/classes/java/util/LinkedList.java#L974-L984)\]
 -   Python's standard lists are dynamic. In fact, Python doesn't even

@@ -1,5 +1,5 @@
 
-## Abstract data types {#intro-ADTs}
+## Abstract data types {#intro:abstract-data-types}
 
 An *abstract data type* (ADT) is how we describe what a data structure can do, or what kind of tasks it can be used for.
 This is done by describing what operations that can be performed on it, and how these operations should behave.
@@ -70,18 +70,18 @@ The ADTs we discuss in this book can be categorised in the following groups.
 Sequences
 :   In a sequence the order between the elements matters, and the ADT operations are sensitive to this order.
     Stacks and queues are the basic ADTs in this group, but there are also double-ended queues (deques), and general lists.
-    Sequences are introduced in [chapter @sec:sequences].
+    Sequences are introduced in [Chapter @sec:sequences].
 
 Priority queues
 :   A priority queue is also a kind of sequence, but it differs in that the order depends on the *priority* of an element.
     Priority queues often have different use cases than sequences,
     and they are implemented using special data structures, so we put them in a separate category.
-    Priority queues are discussed in more detail in [chapter @sec:trees-and-heaps].
+    Priority queues are discussed in more detail in [Chapter @sec:heaps].
 
 Sets
 :   A set is an unordered collection of elements, where an element can only occur once.
     Sets have no inherent order, but instead they are tailor-made for adding, removing and finding elements fast.
-    Implementations for sets and maps are discussed in [chapters @sec:search-trees;@sec:hash-tables].
+    Implementations for sets and maps are discussed in [Chapters @sec:search-trees;@sec:hash-tables].
 
 Maps
 :   A map (or *dictionary*) is often implemented using the same data structures as sets,
@@ -91,6 +91,6 @@ Maps
 Graphs
 :   Graphs are used to model relationships between elements,
     where the elements are called *vertices* and and the relations are represented by *edges*.
-    Graphs and their core algorithms are introduced in [chapter @sec:graphs].
+    Graphs and their core algorithms are introduced in [Chapter @sec:graphs].
 
-We will discuss abstract data types in more detail in [chapter @sec:abstract-data-types].
+We will discuss abstract data types in more detail in [Chapter @sec:ADTs].

@@ -2,7 +2,7 @@
 ### Implementing sets and maps using linked lists
 
 A simple way to implement a set is to use a *linked list*.
-Recall from @sec:stacks-implemented-as-linked-lists that
+Recall from @sec:sequences:linked-stacks that
 a linked list consists of nodes pointing to their successors:
 
 ::: online

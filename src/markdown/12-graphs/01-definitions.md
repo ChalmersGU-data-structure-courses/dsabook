@@ -1,5 +1,5 @@
 
-## Definitions and properties
+## Definitions and properties {#graphs:definitions}
 
 ::: TODO
 - Terminology: If length is number of edges and cost is total weight, why is it called "shortest path" and not "cheapest path"...

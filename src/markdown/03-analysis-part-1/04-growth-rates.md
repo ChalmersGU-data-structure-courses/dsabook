@@ -1,5 +1,5 @@
 
-## Order of growth
+## Order of growth {#analysis-1:order-of-growth}
 
 ::: TODO
 - Prio 2: is this a good way of introducing the concept of growth rates?
@@ -9,14 +9,14 @@
 
 Imagine that you are a bookworm and you have 10,000 books divided into 100 bookshelfs.
 Now you want to sort all your books so that you can search for them quickly (using binary search of course).
-You use one of the sorting algorithms from [Chapter @sec:sorting-part-1]
+You use one of the sorting algorithms from [Chapter @sec:sorting-1]
 and notice it takes one hours to sort the books in one shelf.
 
 - How long time will it take to sort all your books?
 - If you buy a sorting robot that is 100 times faster than you are,
   will you then be able to sort all your books in one hour?
 
-The sorting algorithms from [Chapter @sec:sorting-part-1]
+The sorting algorithms from [Chapter @sec:sorting-1]
 all have a running time proportional to $n^2$ where $n$ is the number of books.
 This means that if you double the size of the input, the running time will quadruple.
 And if you multiply the input size by 100, the running time will be $100^2 = 10,000$ times slower.
@@ -58,7 +58,8 @@ Constant factors never affect the relative improvement gained by working longer 
 <!-- OPENDSA: END -->
 
 The first equation denotes a *logarithmic* growth rate, $T(n) = 2\cdot\log_2(n)$.
-It could for example be the time to find a book in your sorted bookshelf using binary search (@sec:binary-search).
+It could for example be the time to find a book in your sorted bookshelf using binary search
+(recall @sec:intro:binary-search).
 In this case we search 32 books in one millisecond.
 But in 10 ms we can search in $10^{15}$ books,
 and in 100 ms we can search a library with more books than there are atoms in the universe.
@@ -72,7 +73,7 @@ The algorithm in between linear and quadratic, $T(n) = n\log(n)/4$,
 improves almost like the linear one, but not quite.
 Its growth rate is sometimes called *linearithmic* or *log-linear*,
 and it is a common growth rate for many algorithms
-(for example the Mergesort algorithm in @sec:mergesort).
+(for example the Mergesort algorithm in @sec:sorting-2:mergesort).
 
 Note that something special happens in the case of the *exponential* algorithm, $T(n) = 2^n/20$.
 It can only be used to solve very small problems,
@@ -166,7 +167,7 @@ $2^n/20$                   $51$    $6\cdot 10^{28}$    $5\cdot 10^{300}$        
 
 
 ::: dsvis
-### Growth rates exercises
+#### Growth rates exercises
 
 ```{.jsav-embedded src="AlgAnal/CompareGrowth.html" type="ka" name="Comparing Growth Rates Exercise"}
 ```

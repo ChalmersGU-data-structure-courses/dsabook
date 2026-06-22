@@ -1,10 +1,10 @@
 :::::: online
 
-## More about B+ trees
+## More about B+ trees {#search-trees:Bplus-trees}
 
 If we want to be able to search in a collection of records that will never change, then a [linear index]{.term} is a very simple and efficient data structure.
 This is simply a sorted array of search keys with pointers to the actual records.
-To search in a linear index we can simply perform a standard binary search (recall @sec:binary-search).
+To search in a linear index we can simply perform a standard binary search (recall @sec:intro:binary-search).
 
 The problem is how to handle insertion into and deletion from our database.
 We could try to keep the core idea of storing a sorted array-based list, but make it more flexible by breaking the list into manageable chunks that are more easily updated.

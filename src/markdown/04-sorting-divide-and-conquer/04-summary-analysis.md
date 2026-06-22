@@ -1,13 +1,14 @@
 
-## Summary of sorting algorithms
+## Summary of sorting algorithms {#sorting-2:summary}
 
 ::: TODO
 - Prio 1: a little more text, now it's mostly just two tables
 :::
 
-In this chapter and [chapter @sec:sorting-part-1]
+In this chapter and [Chapter @sec:sorting-1]
 we discussed five different sorting algorithms in quite some detail.
-How can we compare these algorithms accoring to the terminology that we introduced in @sec:terminology-and-notation, as well as their complexity analysis?
+How can we compare these algorithms accoring to the terminology that we
+introduced in @sec:sorting-1:terminology, as well as their complexity analysis?
 
 ### Stability, adaptivity and in-place
 

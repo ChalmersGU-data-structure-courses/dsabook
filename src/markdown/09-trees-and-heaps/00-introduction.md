@@ -8,7 +8,7 @@ Trees take a different approach: instead of continuing in a sequence, a node can
 This lets us represent _hierarchical_ relationships, and it also helps when we want fast access to values that are important in some way.
 
 Trees appear in many settings.
-We can use them to represent mathematical expressions and the syntax of computer programs (using expression trees, see @sec:differentiating-between-internal-nodes-and-leaves).
+We can use them to represent mathematical expressions and the syntax of computer programs.
 We can also use them to model file systems, where folders contain files and other folders.
 Later in this chapter we will see another important use: [heaps]{.term}, which organise data so that we can quickly find and remove the element with highest priority.
 
@@ -75,6 +75,11 @@ Instead, heaps maintain a local ordering rule between parents and children.
 That rule is strong enough to keep the highest-priority element at the root, while still allowing updates to be efficient.
 
 This chapter begins with the basic ideas and terminology for trees.
-We then discuss binary trees (@sec:binary-trees), tree traversals (@sec:traversing-binary-trees), and approaches to implementing tree nodes (@sec:implementing-binary-trees).
-After that we turn to heaps for priority queues (@sec:heaps), including binary heaps (@sec:binary-heaps).
-The chapter concludes with further case studies and with trees that have more, or fewer, than two children (@sec:general-trees).
+We then discuss binary trees (@sec:trees:binary-trees), tree traversals (@sec:trees:traversal), and approaches to implementing tree nodes (@sec:trees:implementing-binary-trees).
+After that we turn to heaps for priority queues (@sec:heaps), including binary heaps (@sec:heaps:binary-heaps).
+The chapter concludes with further case studies and with trees that have more, or fewer, than two children (@sec:trees:general-trees).
+
+::: TODO
+The paragraph above refers to an online section, @sec:trees:general-trees
+:::
+

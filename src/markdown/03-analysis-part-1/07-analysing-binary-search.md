@@ -1,11 +1,11 @@
 
-## Case study: Analysing binary search {#analysing-binary-search}
+## Case study: Analysing binary search {#analysis-1:binary-search}
 
 ::: TODO
 - Prio 1: add self-explaining figure
 :::
 
-Now we will discuss the algorithmic complexity of the binary search algorithm from @sec:binary-search.
+Now we will discuss the algorithmic complexity of the binary search algorithm from @sec:intro:binary-search.
 
 The basic structure of the algorithm is a single `while`-loop,
 so we have to figure out how many iterations it will make in the worst case.
@@ -48,7 +48,7 @@ incrementing the current position, as sequential search does.
 However, binary search comes with a precondition:
 The array must be sorted, and sorting an array is a time-consuming operation
 The sorting algorithms we have seen so far are all quadratic, $O(n^2)$,
-but there are faster ones with complexity $O(n\log(n))$, as you will see [Chapter @sec:sorting-part-2].
+but there are faster ones with complexity $O(n\log(n))$, as you will see [Chapter @sec:sorting-2].
 So there's a tradeoff here -- to be able to search the array efficiently we need to keep it sorted.
 
 Sequential search is not much of a problem if it is something we only have to do just a handful of times,

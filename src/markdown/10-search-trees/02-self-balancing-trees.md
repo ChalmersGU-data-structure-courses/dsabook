@@ -1,5 +1,5 @@
 
-## Self-balancing trees
+## Self-balancing trees {#search-trees:self-balancing}
 
 ::: TODO
 - Prio 2: is the subsection on Implementation ok?
@@ -36,8 +36,8 @@ of the tree is required.
 <!-- OPENDSA: END -->
 
 Instead we need to a find weaker balance invariant, and there are lots of different possibilities.
-For example, in @sec:AVL-trees we introduce the perhaps most famous of all self-balancing trees, the AVL tree,
-and in @sec:red-black-trees we briefly discuss Red-black trees which uses a slightly different invariant.
+For example, in @sec:search-trees:AVL-trees we introduce the perhaps most famous of all self-balancing trees, the AVL tree,
+and in @sec:search-trees:23-and-B-trees we discuss 2/3 trees and B-trees which use a different invariants.
 
 ::: example
 #### Example: Scapegoat trees
@@ -54,7 +54,7 @@ After inserting or deleting into the tree, a node might get $\alpha$-unbalanced.
 If this happens we rebuild the whole subtree at that node, making it completely balanced.
 This restructuring process takes quite long time because it is linear in the size of the subtree,
 but it can be shown that it will not happen too often.
-Using the techniques from @sec:amortised-analysis,
+Using the techniques from @sec:analysis-3:amortisation,
 it can be shown that the *amortised complexity* of insertion and deletion is logarithmic in the size of the tree, $O(\log(n))$.
 
 We will not discuss Scapegoat trees further in this book,
@@ -62,16 +62,16 @@ and the implementation details are left as an exercise to the reader.
 :::
 
 Another possibility is to use non-binary trees --
-for example, in @sec:2-3-trees we introduce the 2-3 trees and the B-trees.
+for example, in @sec:search-trees:23-and-B-trees we introduce the 2-3 trees and the B-trees.
 Allowing the tree nodes to have more than two children makes it possible to keep the tree completely balanced at all times,
 and therefore 2-3 trees and B-trees have logarithmic complexity.
 
-In @sec:splay-trees we introduce *splay trees*, which use yet another approach.
+<!-- In @sec:search-trees:splay-trees we introduce *splay trees*, which use yet another approach.
 When you search for a value, the tree is rearranged so that the node that contains the value is moved to the root.
-A splay tree is *not* guaranteed to be balanced in any way, but it is possible to show that the *amortised* complexity is logarithmic.
+A splay tree is *not* guaranteed to be balanced in any way, but it is possible to show that the *amortised* complexity is logarithmic. -->
 
 
-### Tree rotations
+### Tree rotations {#search-trees:rotations}
 
 Most self-balancing trees use *rotations* to restore their balance invariant,
 and there are two main forms -- the *single* and the *double* rotation.

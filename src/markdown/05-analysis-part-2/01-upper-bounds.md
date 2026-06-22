@@ -1,5 +1,5 @@
 
-## Upper bounds: the big-$O$ notation {#upper-bounds}
+## Upper bounds: the big-$O$ notation {#analysis-2:upper-bounds}
 
 ::: TODO
 - Prio 1: more running text, less formula - now it looks scattered
@@ -164,7 +164,7 @@ Thus, we will always say that binary search is in $O(\log(n))$.
 
 ### Simplifying rules
 
-Using the definition the simplifying rules from @sec:simplification-rules are quite straightforward to prove:
+Using the definition the simplifying rules from @sec:analysis-1:simplification-rules are quite straightforward to prove:
 
      Rule              Simplification
 ---  ----------------  -------------------------------------------------------------------
@@ -217,7 +217,7 @@ T(1) &= 1
 
 The closed-form solutions for these recurrence relations are
 $O(\log(n))$ and $O(n\log(n))$, respectievly.
-Recurrence relations are discussed further in @sec:recur-relations.
+Recurrence relations are discussed further in @sec:analysis-3:recurrences.
 
 
 ### Advanced algorithm analysis
@@ -230,10 +230,14 @@ So, is there something wrong with the rules?
 No, the rules are correct, and this is because the $O$ notation gives an *upper bound*.
 Recall that every function $f\in O(n)$ is also in $O(n\log(n))$, since $O(n) < O(n\log(n))$.
 
+::: TODO
+This example refers to an online example, @sec:sorting-2:empirical-comparison
+:::
+
 :::: example
 #### Example: A nested loop with linear complexity
 
-Recall the non-quadratic nested loop in @sec:alg-analysis-examples.
+Recall the non-quadratic nested loop in @sec:sorting-2:empirical-comparison.
 If we just change the inner `for`-loop a little bit we get
 the following nested loop, which has a nontrivial complexity:
 

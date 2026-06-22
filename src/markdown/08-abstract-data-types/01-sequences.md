@@ -1,5 +1,5 @@
 
-## Collections and sequences
+## Collections and sequences {#ADTs:sequences}
 
 A _collection_ is a general term for a data structure that can contain multiple elements.
 In this chapter you will encounter stacks and queues, and more general lists,
@@ -25,9 +25,9 @@ Then we will call the ADT an *interface*, and this interface will *extend* the b
 Note that the `isEmpty` operation is redundant because it can always be replaced by `size()==0`,
 but it is a handy shortcut so we keep it here.
 
-### Stacks and queues as abstract data types
+### Stacks and queues as abstract data types {#ADTs:stacks-and-queues}
 
-In @sec:stacks-and-queues we discuss how stacks and queues work,
+In @sec:sequences:stacks-and-queues we discussed how stacks and queues work,
 and that they only have two core operations -- adding and removing elememnts.
 As an ADT interface we can specify them like this:
 
@@ -47,7 +47,7 @@ Also note that the interfaces inherit the `size` and `isEmpty` operations from `
 
 ### Double-ended queues and general lists
 
-Double-ended queues and general lists were briefly mentioned in @sec:more-lists.
+Double-ended queues and general lists were briefly mentioned in @sec:sequences:more-sequences.
 A double-ended queue, or a *deque*, is a combination of a stack and a queue,
 meaning that we can add and remove from both ends of the list.
 This could be written as a combined ADT interface (at least if we had different names for the `peek` operations):
@@ -75,6 +75,7 @@ General lists can in turn be seen as an extension of deques, where we can insert
         set(i, x)       // Replace the element at position i with the value x.
         get(i) -> T     // Returns the element at position i.
 
-As we already mentioned in @sec:more-lists, it is not possible to implement this ADT such that all operations are efficient.
-For example, if we use a circular dynamic array (see @sec:array-based-queues),
+As we already mentioned in @sec:sequences:more-sequences,
+it is not possible to implement this ADT such that all operations are efficient.
+For example, if we use a circular dynamic array (see @sec:sequences:array-queues),
 `insert` and `remove` become inefficient when the position `i` is in the middle of the list.

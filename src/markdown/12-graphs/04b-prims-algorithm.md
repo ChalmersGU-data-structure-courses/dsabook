@@ -1,5 +1,5 @@
 
-### Prim's MST algorithm {#prims-algorithm}
+### Prim's MST algorithm {#graphs:prims-algorithm}
 
 ::: TODO
 - Rewrite to start from Dijkstra's
@@ -27,7 +27,7 @@ Recall the basic algorithm for any kind of graph traversal:
 
 (We can do a minor optimisation here: In the final bullet point we only need to add *unvisited* vertices to the agenda. This will reduce the size of the agenda -- but we cannot replace the first if-clause ("if v is not visited"), this is still needed.)
 
-In @sec:traversing-graphs we wrote that if the agenda is a stack we get depth-first search, and if it is a queue we get breadth-first. But what happens if we use a priority queue?
+In @sec:graphs:traversal we wrote that if the agenda is a stack we get depth-first search, and if it is a queue we get breadth-first. But what happens if we use a priority queue?
 
 This depends on what we use as the priority values. If we have a weighted graph, then it's natural to use the weights. In this case we get another MST algorithm: Prim's.
 
@@ -213,7 +213,7 @@ Here is the implementation for Dijkstra's algorithm using a priority queue.
         return parent
 
 
-### Correctness of Prim's algorithm {#prims-correctness}
+### Correctness of Prim's algorithm
 
 Prim's algorithm is an example of a greedy algorithm. At each step in
 the `for` loop, we select the least-cost edge that connects some marked

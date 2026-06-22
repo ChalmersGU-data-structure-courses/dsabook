@@ -1,6 +1,6 @@
 :::::: online
 
-## Case study: In-place heapsort
+## Case study: In-place heapsort {#heaps:heapsort}
 
 ::: TODO
 - Prio 2: properties (stability, in-place)
@@ -25,7 +25,7 @@ this is the same problem as Quicksort has with chosing a good pivot (see
 the section "Quicksort Analysis" in chapter XX).
 -->
 
-As already mentioned in @sec:case-study-heapsort,
+As already mentioned in @heaps:simple-heapsort,
 we can use a heap to implement a very simple sorting algorithm:
 
 1. Insert all elements from the unsorted array into a min-heap.
@@ -57,7 +57,7 @@ will make it particularly useful for
 used when sorting data sets too large to fit in main memory.
 -->
 
-In @sec:building-a-heap we saw that there is a more efficient way of turning an array into a heap, by using the `buildHeap` operation.
+In @sec:heaps:heapify we saw that there is a more efficient way of turning an array into a heap, by using the `buildHeap` operation.
 We can use this to implement a faster and in-place version of Heapsort.
 
 The crucial step here is to use a *max*-heap, which might seem counter-intuitive.

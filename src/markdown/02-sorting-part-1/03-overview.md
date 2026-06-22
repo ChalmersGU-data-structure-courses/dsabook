@@ -1,5 +1,5 @@
 
-## Overview of algorithms
+## Overview of algorithms {#sorting-1:overview}
 
 ::: TODO
 - Prio 2: add nice figure(s) of insertion/selection/bubble sorting books in a bookshelf

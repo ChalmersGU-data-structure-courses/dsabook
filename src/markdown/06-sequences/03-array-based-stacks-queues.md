@@ -1,5 +1,5 @@
 
-## Array-based stacks and queues
+## Array-based sequences {#sequences:array-sequences}
 
 ::: TODO
 - Prio 1: invariants
@@ -17,7 +17,7 @@ This is a serious restriction, and in the next section we will show how to solve
 -- a *dynamic array* has the same features as a normal array, but it can change its size dynamically.
 But in this section we will for now assume that we have a fixed maximum number of elements.
 
-### Array-based stacks
+### Array-based stacks {#sequences:array-stacks}
 
 An array-based stack uses an internal array as underlying storage, and this array has a predefined size.
 In this example the underlying array has an internal size of 100:
@@ -155,7 +155,7 @@ AV.recorded();
 :::
 
 
-### Array-based queues
+### Array-based queues {#sequences:array-queues}
 
 <!-- OPENDSA: START -->
 An array-based queue is somewhat tricky to implement effectively.

@@ -1,14 +1,13 @@
 
-## Case study: Disjoint sets {#disjoint-sets}
+## Case study: Disjoint sets {#trees:disjoint-sets}
 
 ::: TODO
 - Prio 1: update text
 - Prio 2: add use case = Kruskal's algorithm
 :::
 
-[General trees](#general-tree){.term} (@sec:general-trees) are trees
-whose [internal nodes](#internal-node){.term}
-have no fixed number of [children](#child){.term}. Compared to general trees,
+[General trees](#general-tree){.term} are trees whose internal nodes have no fixed number of children.
+Compared to general trees,
 <!-- OPENDSA: START -->
 [binary trees](#binary-tree){.term} are
 relatively easy to implement because each internal node of a binary tree

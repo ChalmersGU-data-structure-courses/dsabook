@@ -1,4 +1,5 @@
-## 2-3 trees and B-trees {#2-3-trees}
+
+## 2-3 trees and B-trees {#search-trees:23-and-B-trees}
 
 ::: TODO
 - Prio 1: move subsection about B+ trees to new online section
@@ -262,7 +263,7 @@ An example 2-3-4 tree -- each node contains up to three keys, and internal nodes
 :::
 
 
-### B-trees
+### B-trees {#search-trees:B-trees}
 
 As we already mentioned, noone actually uses 2-3 trees or 2-3-4 trees
 because they are more complex to implement than variants of BSTs,

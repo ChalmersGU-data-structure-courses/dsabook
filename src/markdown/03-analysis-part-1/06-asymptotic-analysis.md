@@ -1,5 +1,5 @@
 
-## Asymptotic analysis
+## Asymptotic analysis {#analysis-1:asymptotic-analysis}
 
 ::: TODO
 - Prio 1: shorten text?
@@ -126,4 +126,4 @@ Upper bound
 
 The upper bound is by far the most common notion we use,
 but there are also the *lower* and the *tight* bounds.
-They will be discussed later in @sec:lower-and-tight-bounds.
+They will be discussed later in @sec:analysis-2:other-bounds.

@@ -1,5 +1,5 @@
 
-## Traversing graphs: BFS and DFS
+## Traversing graphs: BFS and DFS {#graphs:traversal}
 
 ::: TODO
  - Complexity?
@@ -8,7 +8,7 @@
 
 Many graph algorithms involve *traversing* a graph, starting from a given vertex and visit each reachable vertex once. This is similar to tree traversal, but made more difficult by the presence of cycles. A simple recursive procedure would get stuck in an infinite loop.
 
-Instead we use an iterative procedure, very similar to the ones shown for trees in @sec:tree-dfs, but keeping track of visited vertices to avoid infinite loops. Thus, in each step of the traversal: Select an edge from a visited vertex to an unvisited vertex, and visit that vertex. Stop when there are no edges from visited to unvisited vertices.
+Instead we use an iterative procedure, very similar to the ones shown for trees in @sec:trees:traversal, but keeping track of visited vertices to avoid infinite loops. Thus, in each step of the traversal: Select an edge from a visited vertex to an unvisited vertex, and visit that vertex. Stop when there are no edges from visited to unvisited vertices.
 
 By varying how we select the next edge, and what we do when we visit a vertex, we can implement a wide range of useful algorithms on graphs.
 Most of the algorithms described in thuis chapter use two data structures: an *agenda* and a *visitation set*.
@@ -26,6 +26,9 @@ The result of the traversal is a set of directed edges. Importantly, these edges
 We do not select a vertex adjacent to the previous vertex we visited, but rather skip around to vertices that are adjacent to *some* visited vertex.
 The most apt way to describe the end result is a tree, and as you can see in the lower right of @fig:GraphTraversal1,
 the selected edges form a tree with $A$ as the root.
+
+
+### Depth first traversal {#graphs:DFS}
 
 To turn this high level description of the algorithm into an efficient procedure, we need to decide how to represent the agenda.
 Just as with trees, using a stack for the agenda gives us a depth first traversal:
@@ -80,7 +83,7 @@ Note that we are a bit vague about what result our depth first search algorithm 
 ![Steps of a depth first traversal, starting in $A$, using a stack and assuming `outgoingEdges` are given in alphabetical order of destination vertex. The right part shows the result as a tree. The algorithm can be described as: select the alphabetically last edge from the most recently visited vertex adjacent to an unvisited vertex.](images/Graphs-traversal2.svg){width=90% #fig:GraphTraversal2}
 
 
-### Breadth first traversal
+### Breadth first traversal {#graphs:BFS}
 
 By changing the data type of the agenda from a stack to a FIFO queue, we get an even more useful algorithm.
 You do not have to study this code in detail if you already understood the depth first traversal code, it is exactly identical
@@ -142,7 +145,7 @@ The main disadvantage with mark-and-sweep is that it cannot be run in parallel w
 <!--
 #### Use case: shortest path
 
-If the graph is unweighted, then BFS will visit the vertices in increasing distance from the start -- BFS is a *shortest path* algorithm! (More about this in @sec:shortest-paths-problems.)
+If the graph is unweighted, then BFS will visit the vertices in increasing distance from the start -- BFS is a *shortest path* algorithm! (More about this in @sec:graphs:shortest-path.)
 
 #### Example problem: finding a cycle in a graph
 

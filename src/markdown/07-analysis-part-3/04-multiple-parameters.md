@@ -1,5 +1,5 @@
 
-## Multiple parameters
+## Multiple parameters {#analysis-3:multiple-parameters}
 
 ::: TODO
 - Prio 1: shorten examples
@@ -8,11 +8,15 @@
 - Prio 3: discuss different definitions and how they differ (only in separate online section)
 :::
 
+::: TODO
+This example refers to an online example, @sec:analysis-3:space-complexity
+:::
+
 <!-- OPENDSA: START -->
 Sometimes the proper analysis for an algorithm requires multiple
 parameters to describe the cost. To illustrate the concept,
 <!-- OPENDSA: END -->
-recall the example about friendship links from @sec:space-complexity-of-data-structures.
+recall the example about friendship links from @sec:analysis-3:space-complexity.
 We argued that it was better to store the links as an array of lists,
 than to use an $n\times n$ matrix to store who is friend with who.
 We concluded that if we use the former representation the space usage is linear, $O(n)$,

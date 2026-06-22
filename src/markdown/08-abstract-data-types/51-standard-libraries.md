@@ -1,6 +1,6 @@
 :::::: online
 
-## Comparison with standard libraries
+## Comparison with standard libraries {#ADTs:standard-libraries}
 
 ### The standard Java API
 

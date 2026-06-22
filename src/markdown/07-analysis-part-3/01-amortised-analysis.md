@@ -1,5 +1,5 @@
 
-## Amortised analysis
+## Amortised analysis {#analysis-3:amortisation}
 
 ::: TODO
 - Prio 1: shorten the examples
@@ -19,7 +19,7 @@ looks at the cost of the entire series and "charges" each individual
 operation with a share of the total cost.
 <!-- OPENDSA: END -->
 
-The standard example for amortised analysis is dynamic arrays which were introduced in @sec:dynamic-arrays.
+The standard example for amortised analysis is dynamic arrays which were introduced in @sec:sequences:dynamic-arrays.
 In that section we gave an informal argument why it is important to grow the array in the right way.
 If we do it by doubling the array size, we get *amortised* constant time for all basic operations,
 but if we do it in the wrong way we get linear time operations in the worst case.
@@ -76,7 +76,7 @@ This means that when executing *multipop* many many times, it will behave as it 
 some individual calls might take longer time, but this is balanced out by other calls that are fast.
 
 
-### The accounting method
+### The accounting method {#analysis-3:accounting-method}
 
 In the example we used a very hand-waving, informal argument,
 but the underlying idea is the concept of an *account*.
@@ -111,7 +111,7 @@ Both are constant values, so the amortised cost of both *push* and *multipop* ar
 :::
 
 
-### The potential method
+### The potential method {#analysis-3:potential-method}
 
 The accounting method is simple and intuitive to use,
 in particular if we want to prove that an operation has *constant* amortised complexity.
@@ -182,9 +182,9 @@ because now and then the operation might take too long time.
 In these cases we should choose data structures that are not amortised.
 
 
-### Different types of average analysis
+### Different types of average analysis {#analysis-3:different-average-analysis}
 
-In @sec:best-worst-and-average-cases we discussed *average-case* complexity,
+In @sec:analysis-1:complexity-cases we discussed *average-case* complexity,
 and in this section we discussed *amortised* complexity.
 The two notions are quite different, but have one thing in common:
 they try to reason about how an algorithm behaves *on average*.

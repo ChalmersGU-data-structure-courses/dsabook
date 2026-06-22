@@ -1,5 +1,5 @@
 
-## Practical examples
+## Practical examples {#intro:examples}
 
 ::: TODO
 - Prio 3: add a 4th example

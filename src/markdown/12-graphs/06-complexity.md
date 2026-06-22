@@ -1,4 +1,5 @@
-## Complexity of Graph algorithms
+
+## Complexity analysis {#graphs:analysis}
 
 Graph algorithms have potential to be very inefficient if designed carelessly.
 Consider this naive approach to the shortest path problem from vertex $A$ to $B$:

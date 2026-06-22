@@ -1,5 +1,5 @@
 
-## Case study: Searching in an array {#searching}
+## Case study: Searching in an array {#intro:searching}
 
 ::: TODO
 - Prio 3: (maybe) write the text on "Even faster searching"
@@ -14,7 +14,7 @@ and how to find the data we are interested in.
 One way of storing a collection of objects is to put them in an array.
 So, assuming that we have an array of objects, how can we find a certain object in this array?
 
-### Sequential search
+### Sequential search {#intro:sequential-search}
 
 Assume that you want to search for a particular book in a bookshelf,
 for example you want to find a book by a certain author.
@@ -51,7 +51,7 @@ Note that sequential search is actually the best possible search algorithm
 if the array doesn't have a structure (or if we don't know how it is structured).
 But if the array is sorted, we can do much better.
 
-### Binary search
+### Binary search {#intro:binary-search}
 
 No library puts their books randomly in the shelves, because the sequential search algorithm is too slow.
 Instead the books are sorted in the shelves, for example by author name.

@@ -1,5 +1,5 @@
 
-## Dynamic arrays
+## Dynamic arrays {#sequences:dynamic-arrays}
 
 ::: TODO
 - Prio 1: invariants
@@ -10,7 +10,7 @@ Recall that arrays are *fixed-size*, so we cannot change the size once we have i
 To solve this problem we have to make the internal array *dynamic* --
 meaning that we increase the size of the array when it becomes full.
 (We should also shrink the array to save space whenever it contains too few elements,
-more about that below in @sec:shrinking-the-internal-array.)
+more about that below in @sec:sequences:shrink-array.)
 
 If you are used to programming in Python or Javascript, you might think that their lists
 (or "arrays" as they are called in Javascript) are basic and simple objects, but they are not.
@@ -267,7 +267,7 @@ Here is how the example array could look like in this case after resizing:
 ![](images/CircularQueue5.png)
 
 
-### Shrinking the internal array
+### Shrinking the internal array {#sequences:shrink-array}
 
 But what about the size of the internal array when we pop?
 Assume that we have pushed 1 million elements to the stack, and then popped them all

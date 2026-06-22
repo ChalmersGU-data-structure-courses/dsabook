@@ -1,5 +1,5 @@
 
-## Other kinds of sequences
+## Other kinds of sequences {#sequences:more-sequences}
 
 Stacks and queues are very simple abstract datatypes, and also very commonly used.
 Many many algorithms make use of some kind of "agenda",
@@ -15,7 +15,7 @@ Priority queues
 :   In a priority queue the elements are ordered by their *priority*.
     The basic operations are the same as for stacks and queues, you can *add* and *remove* elements.
     But to make them efficient we have to use more advanced data structures,
-    so they will be discussed later in the book, in [chapter @sec:trees].
+    so they will be discussed later in the book, in [Chapter @sec:trees].
 
 Double-ended queues
 :   A double-ended queue (also known as a *deque*) is both a stack and a queue at the same time.

@@ -1,5 +1,5 @@
 
-## Binary search trees
+## Binary search trees {#search-trees:BSTs}
 
 ::: TODO
 - Prio 2: can we reduce some code clutter?
@@ -17,10 +17,10 @@ For every node with value $v$:
 :::
 
 The only thing that differentiates a BST from a normal binary tree is this invariant.
-As explained in @sec:invariants-preconditions-and-postconditions,
+As explained in @sec:analysis-1:invariants,
 an invariant is a condition that the BST *always* must satisfy.
 
-This means that the example tree from @sec:binary-trees is not a BST, because it violates the invariant,
+This means that the example tree from @sec:trees:binary-trees is not a BST, because it violates the invariant,
 but @fig:BST-example shows two correct BSTs.
 
 ![Two example BSTs, both representing the same set of values.](images/BST-Example.png){#fig:BST-example}
@@ -39,7 +39,7 @@ but it is the responsibility of the programmer to make sure that the invariants 
 
 Note that the BST invariant implies that all values in the tree are distinct from each other,
 which is exactly what we need to implement a *set*.
-Therefore, to implement a set we can reuse the binary tree implementation from @sec:binary-trees:
+Therefore, to implement a set we can reuse the binary tree implementation from @sec:trees:binary-trees:
 
     datatype BST:
         root = null   // Pointer to the root node of the tree
@@ -189,7 +189,7 @@ Here is an exercise on BST insertion.
 ```
 :::
 
-### Deleting from a BST
+### Deleting from a BST {#search-trees:BST-deletion}
 
 Removing a node from a BST is a bit trickier than adding,
 but it is not too hard if we consider the possible cases one by one.
@@ -345,7 +345,7 @@ then it is possible to prove that the final tree will have *expected* logarithmi
 Therefore, the operations will have expected worst-case complexity of $O(\log(n))$.
 And building the final BST with $n$ values will be $O(n\log(n))$.
 
-(This is similar to Quicksort with the simplest pivot, *take-first*, see @sec:quicksort.
+(This is similar to Quicksort with the simplest pivot, *take-first*, see @sec:sorting-2:quicksort.
 Sorting an already sorted array will take quadratic time,
 but if the list is randomly shuffled the complexity will be expected worst-case $O(n\log(n))$.)
 
@@ -363,7 +363,7 @@ traversing a binary tree, we want to make sure that we are visiting the
 required nodes (no more and no less).
 <!-- OPENDSA: END -->
 
-In @sec:traversing-a-binary-tree we saw several tree traversals that visited every node of the tree,
+In @sec:trees:traversal we saw several tree traversals that visited every node of the tree,
 such as depth-first and breadth-first search.
 In this section we have also discussed searching, adding and removing in a BST,
 which each go down a single path of the tree.

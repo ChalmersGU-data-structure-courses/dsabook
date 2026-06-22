@@ -1,5 +1,5 @@
 
-## Lower bounds and tight bounds
+## Lower bounds and tight bounds {#analysis-2:other-bounds}
 
 ::: TODO
 - Prio 1: update Summary of asymptotic notations - make it a Figure instead
@@ -31,7 +31,7 @@ The upper, lower and tight bounds can be described as follows:
 - **Lower bound**: 	$f \in \Omega(g)$  **if and only if**  $f$ grows *at least* as fast as $g$
 - **Tight bound**: 	$f \in \Theta(g)$  **if and only if**  both functions grow at the same rate
 
-The formal definition of the lower bound is the same as for the upper bound (see @sec:upper-bounds),
+The formal definition of the lower bound is the same as for the upper bound (see @sec:analysis-2:upper-bounds),
 but reversing the inequality (using $\geq$ instead of $\leq$).
 The definition of tight bound is that it is both an upper and a lower bound at the same time.
 
@@ -52,7 +52,7 @@ In other words, big-$O$ states a claim about the greatest amount of some resourc
 A similar notation is used to describe the least amount of a resource that an algorithm needs for some class of input.
 Like big-$O$, this is a measure of the algorithm's growth rate.
 And like big-$O$, it works for any resource (usually time), and for some particular class of inputs of size $n$.
-The [lower bound]{.term} for an algorithm (or a problem, as we will discuss in @sec:analysing-problems) is denoted by the symbol $\Omega$, pronounced "big-Omega" or just "Omega".
+The [lower bound]{.term} for an algorithm (or a problem, as we will discuss in ...) is denoted by the symbol $\Omega$, pronounced "big-Omega" or just "Omega".
 The following definition for $\Omega$ is symmetric with the definition of big-$O$.
 
 Lower bound
@@ -127,7 +127,7 @@ not a law of nature. It is merely a powerful modeling tool used to
 describe the behaviour of algorithms.
 -->
 
-### Tight bounds: the $\Theta$ notation {#tight-bounds}
+### Tight bounds: the $\Theta$ notation
 
 The definitions for big-$O$ and $\Omega$ give us ways to describe the upper and lower bounds for an algorithm.
 <!-- OPENDSA: START -->
@@ -139,7 +139,7 @@ An algorithm is said to be in $\Theta(h)$ if it is both in $O(h)$ and in $\Omega
 Almost all algorithms we will discuss in this book have the same tight bound as their upper bound,
 for example, binary search is in $\Theta(\log(n))$,
 sequential search is in $\Theta(n)$, and
-the sorting algorithms in [Chapter @sec:sorting-part-1] are all in $\Theta(n\log(n))$.
+the sorting algorithms in [Chapter @sec:sorting-1] are all in $\Theta(n\log(n))$.
 
 <!-- OPENDSA: START -->
 The analysis for most commonly used algorithms is well understood and

@@ -1,5 +1,5 @@
 
-## Recurrence relations {#recur-relations}
+## Recurrence relations {#analysis-3:recurrences}
 
 ::: TODO
 - Prio 1: move subsection Master theorem to separate online section, and just show the theorem here
@@ -132,7 +132,7 @@ Here is a more complicated example.
 So, is there some kind of general formula for how to solve recurrence relations?
 
 
-### The Master theorem
+### The Master theorem {#analysis-3:master-theorem}
 
 There is a general way to solve so called *divide-and-conquer* recurrence relations.
 These have the form $T(n) = a\cdot T(n/b) + c\cdot n^k$,
@@ -310,13 +310,13 @@ The first who noticed this algorithm was Anatoly Karatsuba in 1960 and therefore
 
 
 <!--
-### Case study: Average-case analysis of Quicksort {#average-analysis-quicksort}
+### Case study: Average-case analysis of Quicksort
 
 ::: TODO
 - Average-case is **not** a good thing - what are we averaging on?
 :::
 
-In @sec:complexity-analysis-1, we determined that the average-case analysis of Quicksort
+In ..., we determined that the average-case analysis of Quicksort
 had the following recurrence:
 
 \begin{align*}

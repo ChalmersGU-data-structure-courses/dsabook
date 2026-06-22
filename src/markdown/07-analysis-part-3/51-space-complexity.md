@@ -1,6 +1,6 @@
 :::::: online
 
-## Space bounds
+## Space complexity {#analysis-3:space-complexity}
 
 ::: TODO
 - Prio 1: Shorten the examples, in particular Friendship links
@@ -115,7 +115,7 @@ When we analyse space usage of algorithms, we are usually only interested in
 the *additional* space that the algorithm allocates during execution.
 
 We say that an algorithm is *in-place* if it only uses constant additional space, $O(1)$.
-For example, all the quadratic sorting algorithms from [Chapter @sec:sorting-part-1] is in-place,
+For example, all the quadratic sorting algorithms from [Chapter @sec:sorting-1] is in-place,
 because they only allocate a constant number of variables.
 The array to sort is not included in this, because it is already allocated when the function is called.
 

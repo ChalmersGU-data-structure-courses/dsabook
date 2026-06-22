@@ -1,6 +1,48 @@
 :::::: online
 
-## Case studies
+## Case studies {#sequences:case-studies}
+
+
+### Sorting a linked list using Mergesort
+
+We introduced Mergesort in @sec:sorting-2:mergesort, and then we showed how to sort an array.
+But Mergesort can also be used to sort linked lists, because it does not require random access to the list elements.
+Thus, Mergesort is the method of choice when the input is in the form of a linked list.
+
+In fact, the only thing we need is to access the front and back of the linked list,
+which means that we can use Mergesort on linked queues.
+So, how do we implement splitting and merging?
+
+Splitting the input list into two equal halves presents some difficulty.
+Since we use a linked list we cannot find the middle easily.
+But we can use a little trick instead: assign elements of the input list alternating between the two sublists.
+The first element is assigned to the first sublist, the second element to the second sublist,
+the third to first sublist, the fourth to the second sublist, and so on.
+In pseudocode we can view it like this:
+
+    split(list):
+        half1, half2 = new empty linked queues
+        for each x in list:
+            enqueue x to half1
+            swap half1 and half2
+        return half1, half2
+
+Merging two sorted linked lists is straightforward,
+because we need only remove items from the front of the input lists and append them to the end of the output list.
+The Mergesort pseudocode in @sec:sorting-2:mergesort can be used with linked lists directly.
+
+    merge(half1, half2):
+        answer = new empty linked queue
+        while half1 and half2 are nonempty:
+            if half1.peek() <= half2.peek():
+                enqueue half1.dequeue() to answer
+            else:
+                enqueue half2.dequeue() to answer
+        enqueue all remaining elements of half1 and half2 to answer
+        return answer
+
+::::::
+
 
 ### Implementing recursion
 
@@ -87,21 +129,21 @@ than the version shown in the example. But it is not always possible to
 replace recursion with iteration. Recursion, or some imitation of it, is
 necessary when implementing algorithms that require multiple branching
 such as in the Towers of Hanoi algorithm, or when
-traversing a binary tree (@sec:traversing-a-binary-tree).
-The [Mergesort] and [Quicksort]
+traversing a tree (@sec:trees:traversal).
+The Mergesort (@sec:sorting-2:mergesort) and Quicksort (@sec:sorting-2:quicksort)
 sorting algorithms also require recursion.
 
 Fortunately, it is always possible to imitate recursion with a stack.
 Recursive algorithms lend themselves to efficient implementation with a
 stack when the amount of information needed to describe a sub-problem is
-small. For example, [Quicksort] can
+small. For example, Quicksort can
 effectively use a stack to replace its recursion since only bounds
 information for the subarray to be processed needs to be saved.
 
 Let us now turn to a non-recursive version of the Towers of Hanoi
 function, which cannot be done iteratively.
 
-### Use case: Towers of Hanoi
+#### Use case: Towers of Hanoi
 
 Here is a recursive implementation for Towers of Hanoi.
 
@@ -157,45 +199,4 @@ and executes the appropriate operation. In the case of a `Towers` operation
 operations executed by the recursive version. However, these operations
 must be placed on the stack in reverse order, so that they will be
 popped off in the correct order.
-
-
-### Sorting a linked list using Mergesort {#mergesort-linked-list}
-
-We introduced Mergesort in @sec:mergesort, and then we showed how to sort an array.
-But Mergesort can also be used to sort linked lists, because it does not require random access to the list elements.
-Thus, Mergesort is the method of choice when the input is in the form of a linked list.
-
-In fact, the only thing we need is to access the front and back of the linked list,
-which means that we can use Mergesort on linked queues.
-So, how do we implement splitting and merging?
-
-Splitting the input list into two equal halves presents some difficulty.
-Since we use a linked list we cannot find the middle easily.
-But we can use a little trick instead: assign elements of the input list alternating between the two sublists.
-The first element is assigned to the first sublist, the second element to the second sublist,
-the third to first sublist, the fourth to the second sublist, and so on.
-In pseudocode we can view it like this:
-
-    split(list):
-        half1, half2 = new empty linked queues
-        for each x in list:
-            enqueue x to half1
-            swap half1 and half2
-        return half1, half2
-
-Merging two sorted linked lists is straightforward,
-because we need only remove items from the front of the input lists and append them to the end of the output list.
-The Mergesort pseudocode in @sec:mergesort can be used with linked lists directly.
-
-    merge(half1, half2):
-        answer = new empty linked queue
-        while half1 and half2 are nonempty:
-            if half1.peek() <= half2.peek():
-                enqueue half1.dequeue() to answer
-            else:
-                enqueue half2.dequeue() to answer
-        enqueue all remaining elements of half1 and half2 to answer
-        return answer
-
-::::::
 

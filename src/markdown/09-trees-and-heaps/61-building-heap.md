@@ -1,6 +1,6 @@
 :::::: online
 
-## Case study: Building a heap
+## Case study: Building a heap {#heaps:heapify}
 
 If all $n$ values are available at the beginning of the building process, we can build the heap faster than just inserting the values into the heap one by one.
 

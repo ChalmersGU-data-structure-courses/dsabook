@@ -1,5 +1,5 @@
 
-## Comparing values
+## Comparing values {#sorting-1:comparing}
 
 ::: TODO
 - Prio 1: Merge with subsection "Comparing algorithms" from previous section

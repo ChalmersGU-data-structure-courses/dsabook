@@ -1,5 +1,5 @@
 
-### Simplification rules
+### Simplification rules {#analysis-1:simplification-rules}
 
 ::: TODO
 - Prio 2: briefly discuss functions and non-atomic statements
@@ -57,7 +57,7 @@ By "easily" we mean that there are some rules of thumb that covers almost all pr
 <!-- OPENDSA: START -->
 Taking the first three rules collectively, you can ignore all constants and
 all lower-order terms to determine the asymptotic growth rate for any cost function.
-The advantages and dangers of ignoring constants were discussed in @sec:asymptotic-analysis.
+The advantages and dangers of ignoring constants were discussed in @sec:analysis-1:asymptotic-analysis.
 
 Ignoring lower-order terms is reasonable when performing an asymptotic analysis.
 The higher-order terms soon overpower the lower-order terms as $n$ becomes larger.
@@ -66,7 +66,7 @@ Thus, if $f(n) = 3 n^4 + 5 n^2$, then $f(n)$ is in $O(n^4)$.
 The $n^2$ term contributes relatively little to the total cost for large $n$.
 
 There are of course some problems with too much simplification.
-For example, the sorting algorithms in [Chapter @sec:sorting-part-1] are all quadratic,
+For example, the sorting algorithms in [Chapter @sec:sorting-1] are all quadratic,
 so one could think that they are all equally good.
 However, in practice Bubble sort is almost always slower than the other algorithms,
 because it has a larger constant factor.
@@ -77,7 +77,7 @@ But regardless of the problems, we will from now on use these simplifying rules
 when discussing the cost for a program or an algorithm.
 
 
-### Complexity classes
+### Complexity classes {#analysis-1:complexity-classes}
 
 We can use the upper bound to define an ordering between complexity classes,
 where we write $O(f)\leq O(g)$ for $f\in O(g)$.
@@ -89,7 +89,7 @@ Note that we have excluded many many classes, for example $O(\log(n)^2)$ and $O(
 You can try to figure out where in the hierarchy they should be placed.
 
 
-### Analysing code fragments
+### Analysing code fragments {#analysis-1:analysing-code-fragments}
 
 When we want to analyse the complexity of code fragments, the following three rules of thumb will get us very far:
 
@@ -129,7 +129,7 @@ so we can treat `if`-statements just as sequences.
 We just have to remember that we also have to look at the boolean test itself
 -- it might call a function that takes some time to run, and then we have to include that too.
 
-For example, AVL trees (@sec:avl-trees) can be used to store sets of elements,
+For example, AVL trees (@sec:search-trees:AVL-trees) can be used to store sets of elements,
 and to search in an AVL tree is logarithmic in the number of elements, $O(\log(n))$.
 If we have an `if`-statement where we test if an AVL tree contains a certain element,
 then the test itself is logarithmic and we must not forget that.
@@ -167,7 +167,7 @@ But it can be more or less difficult to know how many times it will iterate:
 we have to look at the variables that are referred by the loop condition
 and then analyse how these variables change in each iteration.
 
-For example, the pseudocode for Insertion sort (@sec:insertion-sort) contains a `while`-loop
+For example, the pseudocode for Insertion sort (@sec:sorting-1:insertion-sort) contains a `while`-loop
 which says that $j\geq 0$.
 So to know how many times the loop will iterate,
 we have to know how $j$ is initialised and how it changes in each iteration.

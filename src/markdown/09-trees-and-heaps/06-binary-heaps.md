@@ -1,5 +1,5 @@
 
-## Binary heaps
+## Binary heaps {#heaps:binary-heaps}
 
 ::: TODO
 - Prio 1: update figures
@@ -196,7 +196,7 @@ When describing heap operations, we will usually explain them in terms of tree o
 Nevertheless, it is useful to remember that in an actual implementation these operations are carried out using array indices and array updates, rather than explicit tree pointers.
 
 We present an implementation for a minimum heap.
-It uses a dynamic array (see @sec:dynamic-arrays) that will resize automatically when the number of elements change.
+It uses a dynamic array (see @sec:sequences:dynamic-arrays) that will resize automatically when the number of elements change.
 
     datatype MinHeap implements PriorityQueue:
         arr = new DynamicArray()   // The array storing the heap
@@ -228,11 +228,11 @@ The function `isLeaf` determines whether a given position corresponds to a leaf 
         return int((pos - 1) / 2)
 
 We also use an auxiliary function `swap(arr,i,j)` for swapping the values in cells $i$ and $j$ in in array.
-(This is the same function as we used in Quicksort partition, see @sec:quicksort.)
+(This is the same function as we used in Quicksort partition, see @sec:sorting-2:quicksort.)
 
 <!--
 Finally, since we use a dynamic array we have to be able to resize the internal array.
-This is explained in further detail in @sec:dynamic-arrays.
+This is explained in further detail in @sec:sequences:dynamic-arrays.
 
     resize(arr, capacity):
         oldArr = arr

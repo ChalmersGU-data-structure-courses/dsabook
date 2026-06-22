@@ -1,5 +1,5 @@
 
-## Invariants, preconditions, and postconditions
+## Invariants, preconditions, and postconditions {#analysis-1:invariants}
 
 ::: TODO
 - Prio 2: Flatten subsections?
@@ -38,7 +38,7 @@ They could for example be a relation that holds between some internal variables,
 ::: example
 #### Example: Binary search
 
-In @sec:binary-search we introduced binary search. What kind of invariants can be useful to understand the algorithm better?
+In @sec:intro:binary-search we introduced binary search. What kind of invariants can be useful to understand the algorithm better?
 A precondition is of course that the array is sorted, but this is so obvious that we don't have to spell it out.
 
 More interesting is to look into the algorithm itself.
@@ -61,7 +61,7 @@ Knowing these invariants, it becomes much easier to convince ourselves that the 
 For all sorting algorithms, an obvious postcondition is that the resulting array is sorted,
 and that it contains the same elements as it started with.
 But what other invariants can be useful?
-Let's look at the sorting algorithms from [Chapter @sec:sorting-part-1], Bubble, Selection and Insertion sort.
+Let's look at the sorting algorithms from [Chapter @sec:sorting-1], Bubble, Selection and Insertion sort.
 
 All three algorithms have the same invariant:
 The array is divided into an unsorted part and a sorted part,
@@ -71,11 +71,11 @@ We can specify this invariant more formally in terms of the outer loop variable 
 
 Bubble sort
 :   The rightmost subarray `arr[n-i...n]` is always sorted.
-    (@Sec:bubble-sort)
+    (@Sec:sorting-1:bubble-sort)
 
 Selection sort and Insertion sort
 :   The leftmost subarray `arr[0...i]` is always sorted.
-    ([@Sec:selection-sort;@sec:insertion-sort])
+    ([@Sec:sorting-1:selection-sort;@sec:sorting-1:insertion-sort])
 
 An interesting invariant for Bubble and Selection sort (which does not hold for Insertion sort!)
 is that the unsorted and sorted parts are strictly separated, like this:
@@ -87,7 +87,7 @@ Selection sort
 :   Every element in `arr[0...i]` is smaller than or equal to every element in `arr[i...n]`.
 
 Note that these invariants are for the algorithms as we described them in
-[@sec:bubble-sort;@sec:selection-sort;@sec:insertion-sort].
+[@sec:sorting-1:bubble-sort;@sec:sorting-1:selection-sort;@sec:sorting-1:insertion-sort].
 There are other versions of the algorithms,
 for example Selection sort where we start with the largest element and put it last
 (and similar for Bubble and Insertion sort).

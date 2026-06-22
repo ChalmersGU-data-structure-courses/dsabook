@@ -1,5 +1,5 @@
 
-## Best, worst, and average cases
+## Best, worst, and average cases {#analysis-1:complexity-cases}
 
 ::: TODO
 - Prio 2: shorten text on Average case
@@ -20,7 +20,7 @@ The average case can be very useful if we know more about the data. For example,
 
 
 For some algorithms, the running time is always determined by the input size $n$.
-Consider for example Selection sort (@sec:selection-sort):
+Consider for example Selection sort (@sec:sorting-1:selection-sort):
 the total number of times the body of the inner loop will be executed is $n+\cdots+2+1=n(n+1)/2$.
 So the running time only depends on the size $n$, regardless of how the array looks like.
 
@@ -32,7 +32,7 @@ Consider the problem of finding the factorial of $n$.
 :::
 
 For most algorithms however, different inputs of a given size require different amounts of time.
-For example, consider Insertion sort (@sec:insertion-sort):
+For example, consider Insertion sort (@sec:sorting-1:insertion-sort):
 the outer `for`-loop always iterates the same number of times,
 but the inner `while`-loop only runs until it finds the correct place for the element to insert.
 So there is a wide range of possible running times for the algorithm, which is different from Selection sort.
@@ -50,7 +50,7 @@ that every possible array is equally probable, or in other words, that the possi
 More about that below.
 
 ::: dsvis
-Here is an example where we reason about the Sequential search algorithm from @sec:sequential-search.
+Here is an example where we reason about the Sequential search algorithm from @sec:intro:sequential-search.
 
 ``` {.jsav-animation src="AlgAnal/AnalCasesDiffCON.js" links="AlgAnal/AnalCasesCON.css" name="Best, Worst, and Average cases slideshow"}
 ```
@@ -83,7 +83,7 @@ running time. This means that we would like to know the *typical*
 behaviour of the algorithm on inputs of size $n$.
 <!-- OPENDSA: END -->
 
-### The problem with average case
+### The problem with average case {#analysis-1:average-case-problem}
 
 <!-- OPENDSA: START -->
 Unfortunately, average-case analysis is not always possible.

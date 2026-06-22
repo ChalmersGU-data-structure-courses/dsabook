@@ -1,10 +1,10 @@
 
-# Algorithm analysis, part 2 {#analysis-part-2}
+# Algorithm analysis, part 2 {#analysis-2}
 
-In [Chapter @sec:analysis-part-1] we introduced the ideas behind algorithmic analysis,
+In [Chapter @sec:analysis-1] we introduced the ideas behind algorithmic analysis,
 and explained the basics on an abstract level.
 Now that you understand everything about sorting algorithms, we can go into more depth with our analysis tools.
-Recall that we introduced the upper, lower and tight bounds in @sec:orders-of-growth:
+Recall that we introduced the upper, lower and tight bounds in @sec:analysis-1:order-of-growth:
 
 Upper bound
 

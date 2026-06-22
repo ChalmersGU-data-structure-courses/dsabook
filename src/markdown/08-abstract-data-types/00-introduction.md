@@ -1,7 +1,7 @@
 
-# Abstract data types
+# Abstract data types {#ADTs}
 
-In [chapter @sec:sequences] we introduced several *data structures* for
+In [Chapter @sec:sequences] we introduced several *data structures* for
 handling different kinds of sequences, in particular *stacks* and *queues*.
 Interestingly these sequences can be implemented in different ways:
 both stacks and queues can implemented using linked lists or dynamic arrays.
@@ -28,7 +28,7 @@ A classic example is the *stack* ADT, which supports the following operations:
         pop() -> T          // Pops the top element off the stack and returns it
         isEmpty() -> Bool   // Tells if the stack is empty or not
 
-As discussed in [chapter @sec:sequences], a stack can be implemented using either a dynamic array or a linked list.
+As discussed in [Chapter @sec:sequences], a stack can be implemented using either a dynamic array or a linked list.
 Using the terminology from object-oriented programming,
 dynamic arrays and linked lists are two separate *classes* that implements the stack interface.
 
@@ -63,7 +63,7 @@ A _database_ is a structured collection of data that can be easily accessed, man
 Efficiently organising, storing, and searching the records in a database is a key challenge in database design.
 
 Two popular implementations for managing large disk-based database applications are
-*hash tables* ([chapter @sec:hash-tables]) and *B-trees* (@sec:2-3-trees).
+*hash tables* ([Chapter @sec:hash-tables]) and *search trees* ([Chapter @sec:search-trees]).
 Both support efficient insertion and deletion of records, as well as different kinds of queries.
 However, they differ in the types of queries they handle best.
 Hash tables are particularly efficient for exact-match queries, where you are looking for a record with a specific key.
@@ -71,7 +71,7 @@ On the other hand, B-trees are better suited for _range queries_, where you want
 :::
 
 There are many different abstract data types, but most of them can be categorised in just a few generic groups.
-The ones we use in this book were already introduced in @sec:intro-ADTs, but we repeat them here:
+The ones we use in this book were already introduced in @sec:intro:abstract-data-types, but we repeat them here:
 
 Sequences
 :   In a sequence the order between the elements matters.
@@ -86,7 +86,7 @@ Priority queues
     But it is different from other seuences because the order depends on the *priority* of an element.
     The core operations are similar to stacks and queues, but priority queues often have different use cases,
     and they are implemented using completely different data structures.
-    [Chapter @sec:trees-and-heaps] discusses how to implement priority queues using different kinds of *heaps*.
+    [Chapter @sec:heaps] discusses how to implement priority queues using different kinds of *heaps*.
 
 Sets
 :   A set represents an unordered collection of elements.
@@ -94,8 +94,8 @@ Sets
     This means that adding an element sometimes doesn't change the set at all.
     There are many different data structures that can be used to implement sets,
     but they can be divided into two main groups --
-    where search trees are discussed in [chapter @sec:search-trees],
-    and hash tables in [chapter @sec:hash-tables].
+    where search trees are discussed in [Chapter @sec:search-trees],
+    and hash tables in [Chapter @sec:hash-tables].
 
 Maps
 :   A map (or *dictionary*) is similar to a set, but represents a collection of *key-value pairs*.
@@ -111,7 +111,7 @@ Graphs
     and the relations between vertices are represented by *edges*.
     There are many different algorithms on graphs, such as finding the shortest path between two vertices,
     or minimal set of edges that connect all vertices in a graph.
-    Graphs are introduced, together with some of their core algorithms, in [chapter @sec:graphs].
+    Graphs are introduced, together with some of their core algorithms, in [Chapter @sec:graphs].
 
 The rest of this chapter gives a high-level overview of the ADTs covered throughout the course.
 @Fig:adt-overview summarises these ADTs and highlights how they relate to one another.

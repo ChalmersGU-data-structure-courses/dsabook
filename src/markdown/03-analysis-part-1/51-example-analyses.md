@@ -1,6 +1,6 @@
 :::::: online
 
-## Examples of algorithm analysis {#alg-analysis-examples}
+## Examples of algorithm analysis {#analysis-1:examples}
 
 ::: TODO
 - Prio 2: add some "real" examples, i.e., more complex ones
@@ -27,7 +27,7 @@ $O(n)$.
 ::: example
 #### Example: Simple sorting algorithms
 
-The basic sorting algorithms from [Chapter @sec:sorting-part-1], Bubble sort, Selection sort and Insertion sort, all have the same structure. They consist of a nested `for` loop, where the outer loop is iterated $n$ times:
+The basic sorting algorithms from [Chapter @sec:sorting-1], Bubble sort, Selection sort and Insertion sort, all have the same structure. They consist of a nested `for` loop, where the outer loop is iterated $n$ times:
 
         for i in 0 .. n-1:   // Outer loop, repeated n times
             for j in ...:    // Inner loop, repeated up to n times

@@ -1,6 +1,6 @@
 :::::: online
 
-## Better hash functions
+## Better hash functions {#hash-tables:better-hash-functions}
 
 ::: TODO
 - Prio 1: introduction

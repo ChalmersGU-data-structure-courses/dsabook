@@ -1,5 +1,5 @@
 
-# Algorithm analysis, part 1 {#analysis-part-1}
+# Algorithm analysis, part 1 {#analysis-1}
 
 ::: TODO
 - Prio 1: also write about correctness, e.g. invariants

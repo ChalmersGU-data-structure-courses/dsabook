@@ -1,5 +1,5 @@
 
-## Analysing the naive implementations
+## Analysing the naive implementations {#ADTs:naive-analysis}
 
 In previous sections we have showed how to implement priority queues, sets and maps
 as linked lists or dynamic arrays.
@@ -11,7 +11,7 @@ so that all core operations are efficient.
 
 ### Priority queues
 
-In @sec:priority-queues we showed how to implement a priority queue using a sorted list.
+In @sec:ADTs:priority-queues we showed how to implement a priority queue using a sorted list.
 What is the complexity of the core operations?
 
 Removing the minimum element is easy:
@@ -32,7 +32,7 @@ This is because either insertion or removal will take linear time, $O(n)$, in th
 
 ### Sets and maps
 
-In @sec:sets-and-maps we showed how to implement sets and maps using a linked list.
+In @sec:ADTs:sets-and-maps we showed how to implement sets and maps using a linked list.
 This is quite inefficient: all operations take linear time in the size of the list, $O(n)$,
 because in the worst case we have to look at all nodes.
 
@@ -48,7 +48,7 @@ because these can be implemented using binary search.
 Unfortunately, modifying the data structure is still slow.
 If we want to add an item to a sorted array, we have to keep the array sorted --
 and that means we need to *insert* the new item at the right place in the array,
-using the insertion algorithm from Insertion Sort (@sec:insertion-sort).
+using the insertion algorithm from Insertion Sort (@sec:sorting-1:insertion-sort).
 This takes linear time in the worst case.
 Similarly, to remove an item without creating a hole in the array,
 we need to shift a bunch of elements in the array, and this also takes linear time.

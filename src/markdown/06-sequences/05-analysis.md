@@ -1,5 +1,5 @@
 
-## Analysing linked lists and dynamic arrays
+## Analysing linked lists and dynamic arrays {#sequences:analysis}
 
 <!-- OPENDSA: START -->
 Now that you have seen two substantially different implementations for stacks and queues,
@@ -10,14 +10,14 @@ In particular, if you must implement a stack or a queue for some task, which imp
 ### Time complexity
 
 What is the time complexity of adding to and removing from a stack or a queue?
-The analysis is trivial, both if we use a linked list (as in @sec:linked-lists)
-or an internal array of fixed size (as in @sec:array-based-stacks-and-queues):
+The analysis is trivial, both if we use a linked list (as in @sec:sequences:linked-lists)
+or an internal array of fixed size (as in @sec:sequences:array-sequences):
 *push*, *pop*, *enqueue* and *dequeue* only consist of constant time operations,
 and there is no looping or recursion involved.
 Therefore all of them must have constant complexity, $O(1)$.
 
 When we use a *dynamic* internal array the argumentation becomes a little more complicated.
-But as we showed in @sec:dynamic-arrays, if we use the *array-doubling* technique
+But as we showed in @sec:sequences:dynamic-arrays, if we use the *array-doubling* technique
 then the stack and queue operations have *amortised* constant complexity.
 
 Array-based lists are usually slightly faster than linked lists because they can make use of
@@ -25,7 +25,7 @@ the internal memory cache that modern computers have, but it depends on many fac
 -- the programming language, the operating system, the processor, etc.
 
 One disadvantage with array-based lists is that the operations are only *amortised* constant time.
-We will discuss more about amortisation later in @sec:amortised-analysis.
+We will discuss more about amortisation later in @sec:analysis-3:amortisation.
 But what it means in practice is that *push*, *pop*, *enqueue* and *dequeue*
 are only guaranteed to be constant time *on average* if we run many operations.
 Now and then (very rarely) the internal array will be resized, and then the operation might take longer time than usual.

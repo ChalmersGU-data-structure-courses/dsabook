@@ -1,5 +1,5 @@
 
-## Comparing algorithms
+## Comparing algorithms {#analysis-1:comparing-algorithms}
 
 ::: TODO
 - Prio 2: Shorten subsection "What to measure"
@@ -121,7 +121,7 @@ Note that both the input size $n$, as well as the resource usage $T(n)$ and $S(
 ::: example
 #### Example: Sequential search
 
-Recall the sequential search algorithm from @sec:sequential-search,
+Recall the sequential search algorithm from @sec:intro:sequential-search,
 it searches for a given value in an array.
 The size of the input is the size of the array -- let's call it $n$.
 The algorithm looks at each array value in turn, comparing with the given value.
@@ -162,7 +162,7 @@ This is called a *linear* running time
 
 The following is a function that calculates the *median* of the first,
 the middle and the last values in a given array.
-(This is a useful *pivot* selection for Quicksort, which will be discussed in @sec:quicksort.)
+(This is a useful *pivot* selection for Quicksort, which will be discussed in @sec:sorting-2:quicksort.)
 
     function medianOfThree(arr):
         n = arr.size
@@ -187,7 +187,7 @@ This is called a *constant* running time.
 ::: example
 #### Example: Bubble sort
 
-Recall the Bubble sort algorithm from @sec:bubble-sort:
+Recall the Bubble sort algorithm from @sec:sorting-1:bubble-sort:
 
     function bubbleSort(arr):
         n = arr.size

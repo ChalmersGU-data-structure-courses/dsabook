@@ -1,5 +1,5 @@
 
-### Dijkstra's shortest-path algorithm {#dijkstras-algorithm}
+### Dijkstra's shortest-path algorithm {#graphs:dijkstras-algorithm}
 
 ::: TODO
 - Rewrite to go from DFS instead of Prims
@@ -281,7 +281,7 @@ Whenever a vertex $v$ is processed, $\mathbf{D}(X)$ is updated for every
 neighbour $X$ of $V$.
 
 Dijkstra's algorithm is quite similar to [Prim's algorithm]{.term} for finding
-the minimum spanning tree (@sec:prims-algorithm). The primary difference is that we are
+the minimum spanning tree (@sec:graphs:prims-algorithm). The primary difference is that we are
 seeking, not the next vertex which is closest to the MST, but rather the
 the next vertex which is closest to the start vertex.
 Thus the following lines in Prim's algorithm:

@@ -1,5 +1,5 @@
 
-## Terminology and notation
+## Terminology and notation {#sorting-1:terminology}
 
 ::: TODO
 - Prio 1: move subsection "Comparing algorithms" to next section (Comparing values), and reduce it
@@ -18,8 +18,8 @@ The (key-based) *sorting problem* is to arrange the list into any order $s$ such
 
 <!-- OPENDSA: START -->
 When comparing two sorting algorithms, the simplest approach would be to
-program both and measure their running times. This is an example of
-*empirical comparison* (see @sec:empirical-analysis-and-code-tuning).
+program both and measure their running times.
+This is an example of *empirical comparison*.
 However, doing fair empirical comparisons can be tricky
 because the running time for many sorting algorithms depends on
 specifics of the input values. The number of records, the size of the
@@ -81,7 +81,7 @@ Stability
 Adaptivity
 :   An *adaptive* sorting algorithm can take advantage of the existing order in the input.
     In general this means that the algorithm runs faster if the list is almost sorted, compared to if the list is completely random.
-    The classic example of an adaptive sorting algorithm is Insertion sort (see @sec:insertion-sort).
+    The classic example of an adaptive sorting algorithm is Insertion sort (see @sec:sorting-1:insertion-sort).
 
 In-place
 :   When the memory use of the algorithm does not grow (too much) when the array size grows.
@@ -89,5 +89,5 @@ In-place
 :   An *in-place* sorting algorithm modifies the input array directly and does not build a new array for the sorted result.
     Usually one also requires that the algorithm does not allocate too much extra space while operating,
     where "not too much" can mean at most logarithmic extra memory in the size of the array.
-    One sorting algorithm which is *not* in-place is Mergesort (see @sec:mergesort), while most other algorithms are.
+    One sorting algorithm which is *not* in-place is Mergesort (see @sec:sorting-2:mergesort), while most other algorithms are.
 

@@ -1,5 +1,5 @@
 
-### Implementing priority queues using sorted lists {#implementing-PQs-with-lists}
+### Implementing priority queues using sorted lists
 
 How can we implement priority queues?
 The most natural suggestion is to use a linked list or a dynamic array, just as for stacks or queues --
@@ -12,7 +12,7 @@ The operations for adding and removing an element become quite easy to describe:
 Since the list is sorted, removing the smallest element is straightforward.
 Adding a new element is a little more tricky:
 we have to traverse the list until we find the correct position, and then insert the new element there.
-This is similar to how Insertion sort put one element in place (see @sec:insertion-sort).
+This is similar to how Insertion sort put one element in place (see @sec:sorting-1:insertion-sort).
 
 If we decide to use a dynamic array, then it's best to have it *reversely sorted*,
 so that the smallest element is at the back of the array.

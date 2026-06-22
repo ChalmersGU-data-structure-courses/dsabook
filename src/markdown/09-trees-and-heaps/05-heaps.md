@@ -9,6 +9,11 @@ A _heap_ provides a natural and efficient implementation of the priority queue i
 Elements (or jobs) can be inserted into the heap using their priority as the ordering key, and the operation `removeMin` can be used whenever the next highest-priority element should be processed.
 Priority queues, and therefore heaps, are widely used in algorithms, particularly in graph problems such as finding the [shortest path]{.term} and computing a [minimum spanning tree]{.term}.
 
+Trees are also used for prioritising jobs
+(using binary heaps, see @sec:heaps:binary-heaps), and
+organising the information needed to drive
+data compression algorithms (using Huffman coding).
+
 To implement priority queues efficiently, we use a data structure called a heap.
 The central idea is to organize the data so that the element with the highest priority is always located at the root of the structure.
 A heap stores elements in a tree structure, but not every tree qualifies as a heap.
@@ -37,7 +42,7 @@ Examples include leftist heaps, skew heaps, Fibonacci heaps, binomial heaps, and
 Some of these structures are designed to support efficient merging of heaps, which will be discussed later in Section X.
 
 
-### Case study: Heapsort
+### Case study: Heapsort {#heaps:simple-heapsort}
 
 We can use a heap to implement a very simple sorting algorithm:
 

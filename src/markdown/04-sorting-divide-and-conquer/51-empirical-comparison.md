@@ -1,6 +1,6 @@
 :::::: online
 
-## Empirical comparison of sorting algorithms
+## Empirical comparison of sorting algorithms {#sorting-2:empirical-comparison}
 
 ::: TODO
 - Prio 3: redo the tests, better
@@ -42,11 +42,11 @@ Quick (cutoff 20)     0.001     0.007      0.06      0.57       8.0           0.
 [@Tbl:empirical-sorting-python;@tbl:empirical-sorting-java] above show timing
 results for actual implementations of the sorting algorithms presented
 in this chapter. The algorithms compared include
-Insertion sort (@sec:insertion-sort),
-Bubble sort (@sec:bubble-sort),
-Selection sort (@sec:selection-sort),
-Quicksort (@sec:quicksort), and
-Mergesort (@sec:mergesort).
+Insertion sort (@sec:sorting-1:insertion-sort),
+Bubble sort (@sec:sorting-1:bubble-sort),
+Selection sort (@sec:sorting-1:selection-sort),
+Quicksort (@sec:sorting-2:quicksort), and
+Mergesort (@sec:sorting-2:mergesort).
 
 For Quicksort and Mergesort, two versions are compared: the basic implementation,
 and an optimised version that falls back to Insertion sort for sublists of

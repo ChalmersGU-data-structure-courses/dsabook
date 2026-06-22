@@ -27,7 +27,7 @@ implement important list-like structures such as the [stack]{.term} and the [que
 A programmer who needs to use a stack or a queue in the application they are developing,
 should be able to use either of a linked list or a dynamic array.
 This is similar to the problem of sorting, where any of the algorithms we presented in
-[Chapter @sec:sorting-part-1] and [Chapter @sec:sorting-part-2] can be used for sorting an array.
+[Chapter @sec:sorting-1] and [Chapter @sec:sorting-2] can be used for sorting an array.
 And just as for the sorting problem, one might want to choose a specific data structure
 because its performance characteristics fits best with the application one has in mind.
 

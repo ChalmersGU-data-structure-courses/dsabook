@@ -1,7 +1,7 @@
 
 :::::: online
 
-## Empirical analysis and code tuning
+## Empirical analysis and code tuning {#sorting-1:empirical-analysis}
 
 ::: TODO
 - Prio 3: are the other simple optimisations?
@@ -25,7 +25,8 @@ In addition, we implemented one proposed optimisation for each of them.
 
 Each algorithm is run on random integer arrays of sizes 10,000 to 80,000, and the times reported are in seconds.
 This will give an indication of the *average* running time for the algorithms
-(provided that the elements are distributed uniformly -- read more about the problems with average-case analysis, discussed in @sec:the-problem-with-average-case).
+(provided that the elements are distributed uniformly --
+read more about the problems with average-case analysis in @sec:analysis-1:average-case-problem).
 
 Sort                   Python (10k)     Python (20k)     Java (20k)     Java (40k)     Java (80k)
 -------------------- ---------------- ---------------- -------------- -------------- ---------------

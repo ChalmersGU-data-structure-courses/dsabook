@@ -1,5 +1,5 @@
 
-## AVL trees
+## AVL trees {#search-trees:AVL-trees}
 
 ::: TODO
 - Prio 2: are all figures necessary?
@@ -132,7 +132,7 @@ To add a value $x$ to an AVL node:
 Deletion in an AVL tree is similar to AVL insertion:
 first we use the normal BST deletion, and then we rebalance the parent nodes all the way up to the root.
 
-We can start from the pseudocode in @sec:deleting-from-a-bst,
+We can start from the pseudocode in @sec:search-trees:BST-deletion,
 and we just have to rebalance and update the height right before we return the updated tree.
 
 
@@ -176,7 +176,7 @@ And of course there are corresponding operations for *ordered maps* too.
 
 Using AVL trees we can define a very simple but efficient sorting algorithm.
 First we build an AVL tree from all elements, and then we do an *inorder traversal*
-(see @sec:traversing-a-binary-tree) to get the elements in sorted order:
+(see @sec:trees:traversal) to get the elements in sorted order:
 
     avlTreeSort(list):
         tree = new ampty AVL tree

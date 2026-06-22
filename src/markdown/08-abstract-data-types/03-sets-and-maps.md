@@ -1,5 +1,5 @@
 
-## Sets and maps
+## Sets and maps {#ADTs:sets-and-maps}
 
 <!-- NICSMA: START -->
 Many programming tasks involve *finding the right piece of information* in a large dataset.
@@ -40,7 +40,7 @@ Later we will see several different ways of implementing sets and maps.
 Search trees and hash tables are the main ways that sets and maps are implemented in practice.
 Almost every programming language provides sets and maps as a built-in feature, based on one of these technologies.
 
-### Sets
+### Sets {#ADTs:sets}
 
 <!-- NICSMA: START -->
 A *set* represents a collection of items, where we can *add* and *remove* items,
@@ -69,11 +69,11 @@ Then to spell-check a given word, we just call *contains* on the set.
 We could also extend the interface with "bulk" operations,
 for taking the *union* or *intersection* of two sets.
 There are some data structures that can handle operations like that efficiently,
-such as the *disjoint-set* data structure (see @sec:disjoint-sets).
+such as the *disjoint-set* data structure (see @sec:trees:disjoint-sets).
 But it is very difficult to design data structures that can handle bulk operations,
 so we do introduce any interface for them in this introductory text.
 
-### Maps, or dictionaries {#maps}
+### Maps, or dictionaries {#ADTs:maps}
 
 <!-- NICSMA: START -->
 A *map* (or dictionary) represents a set of *keys*, where each key has an associated *value*.
@@ -116,7 +116,7 @@ Now, to put an item `p` in the database we simply call `database.put(p.ean, p)`,
 and to find the item with barcode `code` we call `database.get(code)`.
 :::
 
-### Multimaps
+### Multimaps {#ADTs:multimaps}
 
 <!-- NICSMA: START -->
 Maps have the restriction that each key has only one value.

@@ -1,6 +1,6 @@
 :::::: online
 
-## Splay trees
+## Splay trees {#search-trees:splay-trees}
 
 ::: TODO
 - Prio 1: invariants
@@ -43,9 +43,9 @@ efficiency goal.
 
 The splay tree access functions operate in a manner reminiscent of the
 [move-to-front]{.term} rule for
-[self-organising lists](#self-organising-list){.term} (see @sec:amortised-analysis),
+[self-organising lists](#self-organising-list){.term} (see @sec:analysis-3:amortisation),
 and of the path compression technique for managing a series
-of [Union/Find]{.term} operations (see @sec:disjoint-sets).
+of [Union/Find]{.term} operations (see @sec:trees:disjoint-sets).
 These access functions tend to make the tree more balanced,
 but an individual access will not necessarily result in a more balanced
 tree.
