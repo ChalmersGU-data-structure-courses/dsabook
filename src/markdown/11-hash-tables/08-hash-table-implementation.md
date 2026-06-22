@@ -1,12 +1,13 @@
-## Hash table implementation
 
-While seperate chaining is a bit easier in principle, 
-linear probing is probably easier to implement because 
+## Hash table implementation {#hash-tables:implementation}
+
+While seperate chaining is a bit easier in principle,
+linear probing is probably easier to implement because
 it does not require implementing operations on linked lists.
 
-Below is an implementation of a linear probing hash set 
+Below is an implementation of a linear probing hash set
 (with add and contain).
-It uses a common lookup operation for finding the position a value is in, 
+It uses a common lookup operation for finding the position a value is in,
 or the first empty position after its ideal position if it is absent.
 
     datatype LinearProbingSet of T:
@@ -40,7 +41,7 @@ This implementation leaves out a few details, most notably:
 * A remove operation, either using lazy deletion or by re-hashing values in the relevant cluster.
 * The resize operation that creates a new larger table and re-adds all the values to it.
 * An iterator for values, some way of looping through the values of the set.
-  This could be implemented by converting the hash table to a list. 
+  This could be implemented by converting the hash table to a list.
 
-Implementing a map instead of a set would be nearly identical, 
+Implementing a map instead of a set would be nearly identical,
 only with an additional value for each key.
