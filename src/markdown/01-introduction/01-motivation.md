@@ -2,7 +2,6 @@
 ## Motivation {#intro:motivation}
 
 ::: TODO
-- Prio 1: Merge the two sections into one
 - Prio 2: are the lists actually the ones we want to emphasise?
 - Prio 3: update the 1st paragraph with more up-to-date examples
 - Prio 3: is this a good motivation section?
@@ -13,36 +12,55 @@ How many people in Swedish towns with less than 50,000 people earn less than 50%
 How much more CO~2~ will be emitted if I travel by plane from Gothenburg, Sweden, to Düsseldorf, Germany, compared to if I take the train?
 How can I see if a text contains plagiarism, i.e., if it copied some parts from another existing text?
 
-To answer questions like these, it is not enough to have the necessary information.
-We must also be able to analyse the information efficiently,
-and to do this we have to organise it in a good way.
+Gathering the necessary information is not sufficient to answer questions like these,
+the information must be organised to allow efficient access and analysis.
 To organise our data we use different *data structures*,
-and to update or to analyse our data we use *algorithms* on these data structures.
-Therefore, it is impossible to know data structures without knowing algorithms, and the other way around.
+and to update or analyse our data we use *algorithms* on these data structures.
+The subjects of data structures and algorithms are deeply intertwined:
+Efficient data structures are used when designing and implementing algorithms,
+and algorithms are used to design efficient data structures.
 
-<!-- OPENDSA: START -->
-Representing information is fundamental to computer science.
-The primary purpose of most computer systems is not to perform calculations, but to store, update and retrieve information.
-<!-- OPENDSA: END -->
-Therefore, learning about data structures and algorithms is arguably the most important thing a programmer can do.
-You cannot say that you know how to program until you know at least the most basic data structures and algorithms.
+A university course on data structures and algorithms is essential to anyone
+who intends to do any substantial programming in their line of work.
+Often, chosing the right data structure for a task is half the battle
+of solving it, and conversely using the wrong data structure is an easy way
+to end up with an inefficient or error-prone mess.
+Hopefully, by the time you have read this book you can look back at your earlier
+solutions to programming exercises and realise how much you can improve them
+by using a set instead of a list, or a priority queue instead of a sorted array.
 
-But it is not enough to just know the algorithms, we have to be able to reason about them too.
-There are usually many different algorithms that solve the same problem, so how can we know which one to use?
-Understanding how to analyse algorithms is a fundamental knowledge, and there are several different techniques to do this.
-Similarly, there are usually many different data structures that can be used to store the same information,
-so we also need to be able to analyse the differences and similarities between data structures.
-In this book we will therefore teach you the following four things:
+Apart from using the right data structure for the job, analysing an algorithm is
+another essential skill. If two algorithms solve the same problem, which one is better?
+Will the performance of your program scale to thousands of users?
+Which part of a piece of code is going to use all the processing power
+(and is thus the only part worth optimizing)?
+
+Suppose you have an algorithm for finding someone in a list of names.
+Let us say that it is very fast when searching among 1000 names, for example your social media friends.
+Can you use the same algorithm to search among all 10 million people living in Sweden?
+That problem is 10,000 times larger, is it still feasible to do it using your old laptop or do you need a supercomputer?
+These questions can be answered by algorithm analysis,
+and it is not certain that it takes 10,000 times longer to solve a 10,000 times larger problem --
+it depends on the algorithm.
+(The specific example of searching in a list is discussed in more detail in @sec:intro:binary-search.)
+
+<!-- This should be a new section since its not about motivation anymore. -->
+
+Most subjects in this book fall into one of four categories:
 
 Data structures
 :   A data structure describes how we can *organise* our data so that it can be retrieved and updated efficiently.
-    We explain the fundamental ideas of data structures, and present the most common implementations.
+    We explain the fundamental ideas of various data structures, and present the most common implementations.
 
 Abstract data types
 :   An abstract data type (ADT) decribes the *capabilities* of a data structure.
-    In other words, what kind of operations can we use on a given data structure?
+    In other words, what operations can we use on a given data structure?
     Are there different data structures that have the same capabilities?
-    We use ADTs to categorise the different use cases.
+    We use ADTs to categorise the different use cases. Examples of ADTs that
+    you may be familiar with are *lists*, *sets* and *maps*.
+    Slightly simplified using programming terms: An ADT is an interface, and
+    a datastructure is the full implementation with all the technical details.
+
 
 Algorithms
 :   An algorithm describes how to implement the tasks that we want to perform on data structures,
@@ -54,92 +72,19 @@ Analysis
     We focus on theoretical algorithm analysis, and in particular *asymptotic complexity analysis*,
     where we mathematically can derive how an algorithm behaves when the size of the data grows.
 
-In this book we abstract away from a particular programming language,
-and instead focus on explaining the underlying ideas of a data structure or algorithm.
-This means that we will often describe algorithms in natural language,
-and maybe provide some higher-level pseudocode.
-It is up to you, the reader, to come up with a good implementation in your favourite language.
+We also show how to describe algorithms and data structures to others,
+using well-established technical terms and structure,
+such as pseudo-code and memory diagrams.
+We abstract away from technical details of a particular programming language,
+and focus on explaining the underlying ideas of a data structure or algorithm.
+We aim to provide you, the reader, with the means to code a good implementation in
+your favourite programming language.
 
-The underlying ideas are usually quite easy to understand, sometimes even "elegant".
-But when implementing them we might stumble on corner cases or details
-that depend on the specific programming language, the operating system, the memory layout or other things.
-We will not discuss these details a lot, but focus on the fundamental ideas and "elegant" solutions.
-We believe that if you understand the ideas it becomes easier to make efficient implementations
-that are adapted to available resources, hardware and software constraints.
 
 <!--
-To answer questions like these, it is not enough to have the necessary information. We must organise that information in a way that allows us to find the answers in time to satisfy our needs.
-
-Representing information is fundamental to computer science. The primary
-purpose of most computer programs is not to perform calculations, but to
-store and retrieve information -- usually as fast as possible. For this
-reason, the study of data structures and the algorithms that manipulate
-them is at the heart of computer science. And that is what this book is
-about -- helping you to understand how to structure information to
-support efficient processing.
-
-Any course on data structures and algorithms will try to teach you about
-three things:
-
-1.  It will present a collection of commonly used data structures and
-    algorithms. These form a programmer's basic "toolkit". For many
-    problems, some data structure or algorithm in the toolkit will
-    provide a good solution. We focus on data structures and algorithms
-    that have proven over time to be most useful.
-2.  It will introduce the idea of tradeoffs, and reinforce the concept
-    that there are costs and benefits associated with every data
-    structure or algorithm. This is done by describing, for each data
-    structure, the amount of space and time required for typical
-    operations. For each algorithm, we examine the time required for key
-    input types.
-3.  It will teach you how to measure the effectiveness of a data
-    structure or algorithm. Only through such measurement can you
-    determine which data structure in your toolkit is most appropriate
-    for a new problem. The techniques presented also allow you to judge
-    the merits of new data structures that you or others might invent.
-
-There are often many approaches to solving a problem. How do we choose
-between them? At the heart of computer program design are two (sometimes
-conflicting) goals:
-
-1.  To design an algorithm that is easy to understand, code, and debug.
-2.  To design an algorithm that makes efficient use of the computer's
-    resources.
-
-Ideally, the resulting program is true to both of these goals. We might
-say that such a program is "elegant." While the algorithms and program
-code examples presented here attempt to be elegant in this sense, it is
-not the purpose of this book to explicitly treat issues related to goal
-(1). These are primarily concerns for the discipline of Software
-Engineering. Rather, we mostly focus on issues relating to goal (2).
-
-How do we measure efficiency? Our method for evaluating the efficiency
-of an algorithm or computer program is called
-[asymptotic analysis]{.term}. Asymptotic
-analysis also gives a way to define the inherent difficulty of a
-problem. Throughout the book we use asymptotic analysis techniques to
-estimate the time cost for every algorithm presented. This allows you to
-see how each algorithm compares to other algorithms for solving the same
-problem in terms of its efficiency.
--->
-
 ### The need for efficient data structures and algorithms
 
-Computers are getting more and more powerful every day.
-So why do we care about efficient data structures and algorithms,
-can't we just buy a better computer instead?
 
-Unfortunately no.
-What you will see when starting to analyse algorithms is that many problems cannot be solved
-by just investing in a faster computer.
-Suppose you have an algorithm for finding someone in a list of names.
-Let us say that it is very fast when searching among 1000 names, for example your social media friends.
-Can you use the same algorithm to search in all 10 million people living in Sweden?
-That problem is 10,000 times larger, is it still feasible to do it using your old laptop or do you need a supercomputer?
-These questions can be answered by algorithm analysis,
-and it is not at all certain that it must take 10,000 times longer to solve a 10,000 times larger problem --
-it depends on the algorithm.
-(For the specific example of searching in a list, we will discuss that in more detail in @sec:intro:binary-search.)
 
 A *data structure* is any kind of representation of some data, together with associated operations.
 This can mean almost anything, and even a simple integer or a string is a data structure.
@@ -164,6 +109,7 @@ than searching in an unsorted array.
 But this comes with a cost, because we have to keep the array sorted,
 and it can take quite some time to do this if we want to add or remove elements often.
 In this case it can be more efficient to use another data structure, such as a search tree or a hash table.
+-->
 
 <!--
 You might think that with ever more powerful computers, program
