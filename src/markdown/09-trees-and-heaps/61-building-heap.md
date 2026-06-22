@@ -35,7 +35,7 @@ In this case there are two possibilities.
   The result will be a heap, except that $R$ might still have a lower priority than one or both of its (new) children.
   In this case, we simply continue the process of "pushing down" $R$ until it reaches a level where it has a higher priority than its children, or is a leaf node.
 
-  This process is implemented by the method `siftDown`.
+  This process is implemented by the function `siftDown`.
 
 This approach assumes that the subtrees are already heaps, suggesting
 that a complete algorithm can be obtained by visiting the nodes in some
@@ -57,7 +57,7 @@ Here is a visualisation of the build process for a *max*-heap.
 ```
 :::
 
-The method `buildHeap` implements the building algorithm:
+The function `buildHeap` implements the building algorithm:
 
     datatype MinHeap:
         ...
@@ -68,8 +68,8 @@ The method `buildHeap` implements the building algorithm:
             for i in mid, mid-1 .. 0:   // Iterate the internal nodes backwards.
                 siftDown(i)             // Sift each internal node down.
 
-Note that this method overwrites the existing heap (if there is one).
-Also note that the original array will be modified, so the method is *destructive*!
+Note that this operation overwrites the existing heap.
+Also note that the original array will be modified, so the operation is *destructive*!
 The advantage is that it doesn't allocate any new memory.
 
 ::: dsvis

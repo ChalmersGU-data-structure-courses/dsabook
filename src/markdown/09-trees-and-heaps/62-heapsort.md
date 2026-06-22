@@ -57,11 +57,11 @@ will make it particularly useful for
 used when sorting data sets too large to fit in main memory.
 -->
 
-In @sec:building-a-heap we saw that there is a more efficient way of turning an array into a heap, by using the `buildHeap` method.
+In @sec:building-a-heap we saw that there is a more efficient way of turning an array into a heap, by using the `buildHeap` operation.
 We can use this to implement a faster and in-place version of Heapsort.
 
 The crucial step here is to use a *max*-heap, which might seem counter-intuitive.
-After building the heap we tweak the `removeMax` method a little, so that it *keeps* the removed element, but puts it at the *end* of the array.
+After building the heap we tweak the `removeMax` operation a little, so that it *keeps* the removed element, but puts it at the *end* of the array.
 This is why we need a max-heap -- because the first element we remove will be put at the very end of the array.
 Here is an overview of the idea:
 

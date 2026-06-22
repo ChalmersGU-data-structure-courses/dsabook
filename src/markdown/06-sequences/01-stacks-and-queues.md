@@ -51,7 +51,7 @@ Here are some common names:
 | **Removing** | pop, delete, deleteFirst, remove, removeFirst | dequeue, poll, delete, deleteFirst, remove, removeFirst |
 
 Do not be fooled by different names!
-The important thing is their semantics, and a queue is a queue regardless if the method is called *dequeue*, *poll* or *remove*.
+The important thing is their semantics, and a queue is a queue regardless if the operation is called *dequeue*, *poll* or *remove*.
 
 In this book we will use the names *push* and *pop* for stacks, and *enqueue* and *dequeue* for queues, respectively.
 The reason for this is to reduce ambiguity when talking about the data structures,

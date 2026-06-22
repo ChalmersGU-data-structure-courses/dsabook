@@ -215,7 +215,7 @@ Note that because the heap is stored in an array, we refer to nodes by their log
 In practice, this logical position corresponds directly to the same index in the underlying array, so the node’s position in the heap and its position in the array are identical.
 -->
 
-The data type includes several private auxiliary methods used when inserting and removing elements from the heap.
+The data type includes several private auxiliary functions used when inserting and removing elements from the heap.
 The method `isLeaf` determines whether a given position corresponds to a leaf node in the tree, while `leftChild`, `rightChild`, and `parent` return the positions of the left child, right child, and parent of a given node, respectively.
 
 In addition, we include a convenience method that compares the values of two nodes based on their positions in the heap.
@@ -258,7 +258,7 @@ AG: we don't need to resize, we use a dynamic array.
 
 -->
 
-Finally, we define a method that verifies that the data structure satisfies the heap property.
+Finally, we define a function that verifies that the data structure satisfies the heap property.
 
     datatype MinHeap:
         ...

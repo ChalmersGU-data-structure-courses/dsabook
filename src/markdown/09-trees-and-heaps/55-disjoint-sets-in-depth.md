@@ -93,7 +93,7 @@ Here is an implementation for parent pointer trees and the **Union/Find** proces
 
 The `ParentPointerTree` class has an array where each array position
 corresponds to one object in some collection. Each array element stores
-the array index for its parent. There are two main methods to implement.
+the array index for its parent. There are two main operations to implement.
 **Union** merges two sets together, where each set corresponds to a
 tree. **Find** is used to find the ultimate root for a node.
 
@@ -101,7 +101,7 @@ An application using the **Union/Find** operations should store a set of $n$
 objects, where each object is assigned a unique index in the range 0 to
 $n-1$. The indices refer to the corresponding parent pointers in the
 array. Class `ParentPointerTree` creates and initialises the **Union/Find** array,
-and methods **Union** and **Find** take array indices as inputs.
+and operations **Union** and **Find** take array indices as inputs.
 @Fig:UFfig visualises the parent pointer array.
 
 ::: {.jsav-figure #fig:UFfig}
@@ -180,7 +180,7 @@ equivalence pair is processed by checking to see if both objects of the
 pair are in the same tree by calling **Find** on each of them. If their
 roots are the same, then no change need be made because the objects are
 already in the same equivalence class. Otherwise, the two equivalence
-classes should be merged by the **Union** method.
+classes should be merged by the **Union** operation.
 
 The parent pointer representation places no limit on the number of nodes
 that can share a parent. To make equivalence processing as efficient as

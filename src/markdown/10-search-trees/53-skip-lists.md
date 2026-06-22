@@ -94,7 +94,7 @@ start of the SkipList class follows:
         level = -1
         size  = 0
 
-The `get` method works as follows.
+The `contains` operation works as follows.
 
     datatype SkipList implements Map:
         ...

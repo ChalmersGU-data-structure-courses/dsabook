@@ -36,7 +36,7 @@ Compare these two very simple Python loops:
     for k in range(100_000):           for k in range(100_000):
         list.append(k)                     list.insert(0, k)
 
-The left loop is really fast, because the `append` method adds elements to the end of the list.
+The left loop is really fast, because the `append` operation adds elements to the end of the list.
 On the contrary, the right loop is slow because it inserts elements at the beginning.
 
 
@@ -299,9 +299,9 @@ The only thing that matters is that the minimum load factor (1/3) is *smaller* t
 <!-- NICSMA: END -->
 
 In summary, to get a dynamically shrinking stack (or queue),
-we can test if it is less than 1/3 full right before the end of the *pop* or *dequeue* methods.
+we can test if it is less than 1/3 full right before the end of the *pop* or *dequeue* operations.
 And if it is, we resize the internal array to half its capacity.
-This means that the dynamic *pop* method for stacks will look like this:
+This means that the dynamic *pop* operation for stacks will look like this:
 
     pop(stack):
         stack.size -= 1

@@ -357,7 +357,7 @@ and this is the topic of the next section.
 ### Guided information flow
 
 <!-- OPENDSA: START -->
-When writing a recursive method to solve a problem that requires
+When writing a recursive function to solve a problem that requires
 traversing a binary tree, we want to make sure that we are visiting the
 required nodes (no more and no less).
 <!-- OPENDSA: END -->

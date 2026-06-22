@@ -69,7 +69,7 @@ And the opposite for `removeFirst` and `removeLast`, respectively.
 #### Exercise: Implement a deque using a dynamic array
 
 Implement the class `ArrayDeque` which uses a circular dynamic array,
-together with the methods `addFirst`, `addLast`, `removeFirst` and `removeLast`.
+together with the operations `addFirst`, `addLast`, `removeFirst` and `removeLast`.
 :::
 
 <!-- #### Use case(s) for deques -->
@@ -266,7 +266,7 @@ operations that one naturally expects to perform on lists and serves to
 illustrate the issues relevant to implementing the list data structure.
 As an example of using the list ADT, here is a function to return `true`
 if there is an occurrence of a given element in the list, and `false`
-otherwise. The `find` method needs no knowledge about the specific list
+otherwise. The `find` operation needs no knowledge about the specific list
 implementation, just the list ADT.
 
     // Return true if k is in list L, false otherwise.
@@ -488,7 +488,7 @@ which means that both require $O(1)$ time.
 
 Because the array-based list implementation is defined to store list
 elements in contiguous cells of the array, the `add` and `remove`
-methods must maintain this property.
+operations must maintain this property.
 
 Appending elements at the tail of an array-based list is super-fast.
 

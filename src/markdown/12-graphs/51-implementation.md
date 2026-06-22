@@ -29,9 +29,9 @@ implementation works best if the vertices are integers in the range
 $0\ldots |\mathbf{V}|-1$ where $|\mathbf{V}|$ is the number of vertices.
 
 According to this interface, the size of the graph is the number of vertices, $|\mathbf{V}|$,
-and there is no method that returns the number of edges, $|\mathbf{E}|$.
-A practical implementation would have methods for both of these sizes,
-as well as methods for adding vertices and edges to the graph (and removing too).
+and there is no operation that returns the number of edges, $|\mathbf{E}|$.
+A practical implementation would have operations for both of these sizes,
+as well as operations for adding vertices and edges to the graph (and removing too).
 
 Given an edge, we can use the attributes *start* and
 *end* to know the adjacent vertices, and
@@ -43,7 +43,7 @@ Given an edge, we can use the attributes *start* and
         weight: Float = 1.0   // weight, defaults to 1.0
 
 Nearly every graph algorithm presented in this chapter will require
-visits to all neighbours of a given vertex. The `outgoingEdges` method
+visits to all neighbours of a given vertex. The `outgoingEdges` operation
 returns a collection containing the edges that originate in the given
 vertex. To get the neighbours you can simply call `e.end` for each
 outgoing edge `e`. The following lines appear in many graph algorithms:
@@ -100,10 +100,10 @@ $(i, j)$ is used to indicate that no edge connects vertices $i$ and $j$.
 This means that this simple implementation of an adjacency matrix does
 not work for all kinds of vertex types, but only for integer vertices.
 In addition, the vertices must be numbered $0\ldots |\mathbf{V}|-1$.
-The `vertices` method returns a collection of all vertices, which
+The `vertices` operation returns a collection of all vertices, which
 in this case is just the numbers $0\ldots |\mathbf{V}|-1$.
 
-Given a vertex $v$, the `outgoingEdges` method scans through row `v` of
+Given a vertex $v$, the `outgoingEdges` operation scans through row `v` of
 the matrix to locate the positions of the various neighbours. It creates
 an edge for each neighbour and adds it to a list.
 
@@ -121,13 +121,13 @@ One specific implementation that is particularly suited for an adjacency list
 [separate chaining]{.term} hash map, backed with a set implemented as a
 [linked list]{.term}. In that case, for each vertex we store a linked list
 of all the edges originating from that vertex.
-This makes the method `outgoingEdges` very efficient,
+This makes the operation `outgoingEdges` very efficient,
 because the only thing we have to do is to look up the given vertex in
-the internal map. To make the methods `vertexCount` and `vertices`
+the internal map. To make the operations `vertexCount` and `vertices`
 efficient, we in addition store the vertices separately in the set
 `verticesSet`.
 
-The implementations of the API methods are quite straightforward, as can be seen here:
+The implementations of the API operations are quite straightforward, as can be seen here:
 
     datatype AdjacencyGraph implements Graph:
         edgesMap: Map from V to Edge = new Map()
