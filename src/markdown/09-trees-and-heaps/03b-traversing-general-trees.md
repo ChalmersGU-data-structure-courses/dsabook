@@ -13,7 +13,7 @@ For general trees, preorder and postorder traversals are
 defined with meanings similar to their binary tree counterparts.
 Preorder traversal of a general tree first visits the root of the tree,
 then performs a preorder traversal of each subtree from left to right
-(start to end of the list of children). Postorder is generalized in a
+(start to end of the list of children). Postorder is generalised in a
 similar way, with the processing of a value happening after the
 recursive processing of the children.
 

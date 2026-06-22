@@ -26,7 +26,7 @@ Adjacency matrices are very handy for weighted graphs that are *complete* or nea
 providing a compact and fast implementation.
 The adjacency list is the most common for implementing generic sparse graphs.
 
-There are plenty of optimizations possible for these representations.
+There are plenty of optimisations possible for these representations.
 For instance, storing the source vertex in every edge is a bit redundant.
 For an unweighted graph, a compact adjacency map would just need
 $A \rightarrow {B,C}$ to say vertex $A$ has edges to $B$ and $C$.

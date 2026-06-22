@@ -20,7 +20,7 @@ In @fig:GraphExamples, the right graph is weighted.
 
 A graph is *connected* if there exists at least one *path* (see below) between every pair of vertices.
 
-We can also roughly categorize graphs by the number of expected edges they have:
+We can also roughly categorise graphs by the number of expected edges they have:
 - In a *sparse* graph the number of edges are small, something like $E \in O(V)$, and the average number of edges per vertex is close to constant.
 - In a *dense* graph the number of edges are large, something like $E \in O(V^2)$, and the average degree grows with the size of the graph.
 - The most extreme case of a dese graph is *complete*, with every vertex having a direct edge to all vertices, in which case $O(E) = O(V^2)$.
@@ -95,7 +95,7 @@ This can either be acchieved using hashing with a perfect hash function,
 or by preprocessing the graph to assign each vertex a unique ID-number so they can be used to index arrays:
 
     datatype VertexSet:
-        arr = array of booleans of length |V|, initialized to false
+        arr = array of booleans of length |V|, initialised to false
     add(vertexset, v):
         vertexset.arr[v.id] = true
     contains(vertexset, v):

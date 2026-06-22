@@ -11,7 +11,7 @@
 <!-- START NOTES -->
 
 Breadth-first traversal using a queue lets us find the shortest paths through an unweighted graph, but if we want to do something like finding the
-fastest car route through a city we need to generalize to finding shortest paths in *weighted* graphs.
+fastest car route through a city we need to generalise to finding shortest paths in *weighted* graphs.
 Note that "shortest" doesn't have to mean a distance in kilometers -- if the weights denote travel times, then the problem will be to find the *fastest* route.
 
 There are hundreds of other examples of shortest path problems that one might not even think of as graph in the first place.

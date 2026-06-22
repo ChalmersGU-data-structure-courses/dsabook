@@ -33,7 +33,7 @@ There are two caveats to this claim:
   used for asymptotic complexity, describing what happens when
   the number of elements grows really large. That will never happen here, since
   the map can have at most 100 elements.
-- There is an initalization cost to create the array and fill it with null-values,
+- There is an initalisation cost to create the array and fill it with null-values,
   that is linear in the size of the value range.
   If you have lots of small maps, each containing just a few values, this cost can
   easily dominate the runtime, and lead to exessive memory use.

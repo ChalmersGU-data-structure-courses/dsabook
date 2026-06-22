@@ -49,7 +49,7 @@ There are some things to note here:
 - To get the process rolling, we add a fake edge to the agenda, leading to the starting vertex $A$. This means the first thing the loop does is visit the starting vertex.
 - The agenda does not only contain edges from visited vertices to unvisited ones. Sometimes it will contain edges between two visited vertices, which is why we need to do the visitation check after popping items from it.
 - Its a bit silly to add edges to the agenda when the to-vertex of the edge is already visited, since these will just be ignored after popping them.
-  For instance in the previous example, after selecting the edge $(A,B)$ and visiting $B$, since the graph is undirected the edge $(B,A)$ back to $A$ will immediately be added to the agenda. So an obvious optimization is to add a second check for this in the for-loop, and only push edges that lead to unvisited vertices.
+  For instance in the previous example, after selecting the edge $(A,B)$ and visiting $B$, since the graph is undirected the edge $(B,A)$ back to $A$ will immediately be added to the agenda. So an obvious optimisation is to add a second check for this in the for-loop, and only push edges that lead to unvisited vertices.
   This unfortunately does not let us remove the check in the while loop, as there can still be multiple edges to the same vertex in the agenda.
 
 The edges selected and the order in which vertices are visited depend on the order in which `outgoingEdges(to)` produces edges.
@@ -118,7 +118,7 @@ You may notice the following pattern: The algorithm starts by visiting all verti
 This further means that the tree produced will not only contain a path from $A$ to $C$, but that path is guaranteed to be the shortest possible one.
 In fact, the tree contains shortest paths from $A$ to all other vertices.
 This is supremely useful in a wide range of applications:
-Obviously things like pathfinding in maps or simulations, but also in applications like AI problem solving and most types of optimization problems.
+Obviously things like pathfinding in maps or simulations, but also in applications like AI problem solving and most types of optimisation problems.
 
 
 

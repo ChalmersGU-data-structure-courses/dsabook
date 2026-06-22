@@ -120,7 +120,7 @@ This merge process combines two subtrees of the parent, which might cause it to 
 If the last two children of the root merge together, then the tree loses a level.
 
 The B+ tree requires that all nodes be at least half full (except for the root).
-Thus, the storage utilization must be at least 50%.
+Thus, the storage utilisation must be at least 50%.
 This is satisfactory for many implementations, but note that keeping nodes fuller will result both in less space required (because there is less empty space in the disk file) and in more efficient processing (fewer blocks on average will be read into memory because the amount of information in each block is greater).
 <!--
 Because B-trees have become so popular, many algorithm designers have tried to improve B-tree performance.
@@ -143,7 +143,7 @@ An example of building a B+ tree of degree 5
 
 <!--
 [Click here](http://www.cs.usfca.edu/~galles/visualization/BPlusTree.html)
-for another visualization that will let you construct and interact with a B+ tree.
+for another visualisation that will let you construct and interact with a B+ tree.
 -->
 
 

@@ -8,7 +8,7 @@
 :::
 
 The [binary heap]{.term} is a data structure that can be used to implement an efficient priority queue.
-It is organized as a tree that satisfies the heap property and has an additional invariant: it must also be a [complete binary tree]{.term}.
+It is organised as a tree that satisfies the heap property and has an additional invariant: it must also be a [complete binary tree]{.term}.
 
 Recall that a complete binary tree has all levels completely filled except possibly the last, and the last level is filled from left to right.
 As a result, a complete binary tree with $n$ nodes has exactly one possible shape.

@@ -20,7 +20,7 @@ If the graph is weighted, a *minimum spanning tree* (MST) is a spanning tree who
 The MST is used in many different algorithms, and there are a lot of use cases which rely heavily on finding the MST -- for example, when designing all kinds of networks, such as computer networks, telecommunications networks, transportation networks, water supply networks, and electrical grids.
 
 Note that an MST is different from a Shortest Path Tree (as produced by Dijkstra's algorithm).
-If our graph is a set of islands and the edges represent possible bridges between them, weighted by length of the bridge, then Dijkstra's gives lets us optimize bridges to have as short total distance from a designated starting node.
+If our graph is a set of islands and the edges represent possible bridges between them, weighted by length of the bridge, then Dijkstra's gives lets us optimise bridges to have as short total distance from a designated starting node.
 The MST instead shows the shortest possible total length of bridges required to connect all islands.
 Both these are useful for different applications, and it is important to understand the difference.
 

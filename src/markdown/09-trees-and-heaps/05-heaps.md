@@ -15,7 +15,7 @@ organising the information needed to drive
 data compression algorithms (using Huffman coding).
 
 To implement priority queues efficiently, we use a data structure called a heap.
-The central idea is to organize the data so that the element with the highest priority is always located at the root of the structure.
+The central idea is to organise the data so that the element with the highest priority is always located at the root of the structure.
 A heap stores elements in a tree structure, but not every tree qualifies as a heap.
 The tree must satisfy a specific invariant known as the heap property.
 In general, a [heap]{.term} is a tree that satisfies the following rule:

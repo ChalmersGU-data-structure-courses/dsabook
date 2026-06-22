@@ -3,9 +3,9 @@
 
 In this chapter we have seen many pitfalls that can degrade performance of hash tables.
 If we manage to avoid all of them, we get a data structure where lookups are
-*amortized* *average* $O(1)$ time complexity.
+*amortised* *average* $O(1)$ time complexity.
 
-The amoritization is from the resize operations.
+The amoritisation is from the resize operations.
 Performing a resize of a hash table of size $n$ is $O(n)$.
 With carefully chosen upper and lower thresholds for resizing,
 the computational cost of resizing will be $O(1)$ on average for each modification,

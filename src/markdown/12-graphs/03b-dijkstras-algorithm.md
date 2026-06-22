@@ -16,7 +16,7 @@ Dijkstra's algorithm is perhaps the most well-known graph algorithm of all. It s
 The algorithm follows the same pattern as BFS and DFS: Keep an agenda of edges from visited to unvisited vertices.
 For BFS, the agenda is a stack.
 For DFS, the agenda is a queue.
-For Dijkstra's algorithm, we use a min-priority queue, prioritized by the cost of the path formed from the starting vertex.
+For Dijkstra's algorithm, we use a min-priority queue, prioritised by the cost of the path formed from the starting vertex.
 
 This requires a little extra book-keeping since the agenda does not simply contain edges, it contains edges with priority values.
 Figure @fig:GraphDijkstra1 illustrates this. Note e.g. how in the second step the agenda contains two options for visiting $E$,
@@ -56,7 +56,7 @@ Again, we assume that we only add edges that lead to unvisited vertices, and we 
 
 ### Optimizing Dijkstra's algorithm
 
-There are several optimizations to Dijkstra's, involving keeping the agenda smaller.
+There are several optimisations to Dijkstra's, involving keeping the agenda smaller.
 Consider when we visit $F$ in the example in Figure @fig:GraphDijkstra1.
 We have already found a path of cost $8$ to $C$ (`[A,B,C]`), yet we add an inferior
 path to the agenda (`[A,B,F,C]` at cost $10$). When we eventually process that path,

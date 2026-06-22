@@ -7,7 +7,7 @@
 
 <!-- START NOTES -->
 
-Similar to Dijkstra's algorithm, Prim's uses a priority queue, but instead of prioritizing edges by total cost, they are prioritized only by their weight.
+Similar to Dijkstra's algorithm, Prim's uses a priority queue, but instead of prioritizing edges by total cost, they are prioritised only by their weight.
 This means that an implementation of Dijkstras as we have seen before can be changed into Prim's as easily as changing `cost+weight` to just `weight`!
 
 ![Steps of Prim's algorithm, starting in $A$. In each step, we simply select the cheapest edge from a visited to an unvisited vertex (shown underlined in the image).](images/Graphs-prims1.svg){width=90% #fig:GraphPrim1}

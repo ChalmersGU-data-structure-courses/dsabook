@@ -19,7 +19,7 @@ All our graph traversal algorithms (DFS, BFS, Dijkstra's, Prim's) are on the for
 
     traverse(start: Vertex):
         visited = new empty set of vertices
-        agenda = initalized with starting node
+        agenda = initalised with starting node
         while (agenda is not empty):
             (from, to) = remove an item from the agenda
             if visited.contains(to):
@@ -37,14 +37,14 @@ We can make the following observations:
 In online sources, you often find different answers to the complexity of e.g. Dijkstra's algorithm. This is primarily due to
 
 - Different assumptions about the data structures used for the visited set, the agenda, and for collecting the result.
-- Different optimizaions applied to reduce the size of the agenda.
+- Different optimisations applied to reduce the size of the agenda.
 - Different assumptions about the graph, most notably if it is sparse/dense and connected/unconnected.
 
 If the `visited` set is an efficient Hash set implementation and vertices have perfect hash function
-(each vertex has a unique ID number pre-assigned), then initialization, lookup and adding to the set all take amortized constant time.
+(each vertex has a unique ID number pre-assigned), then initialisation, lookup and adding to the set all take amortised constant time.
 With these assumptions, the set operations can largely be ignored.
 If we assume the set is implemented as an array of booleans, lookups and modifications will be $O(1)$,
-but there is an initialization cost of O(V), even for a graph that has no edges.
+but there is an initialisation cost of O(V), even for a graph that has no edges.
 For this reason, you sometimes see $+V$ in unexpected places in complexity of graph traversal algorithms.
 
 In general, the number of edges $E$ will be somewhere between $0$ and $V^2$.
