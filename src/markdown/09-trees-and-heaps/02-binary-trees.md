@@ -4,12 +4,8 @@
 - Prio 1: update figures
 - Prio 2: update section, here's what should be included:
     - General trees
-    - Binary trees
     - Binary search trees (should it? There's a chapter 11 for that.)
     - Properties
-        - depth, size, branching factor
-        - Perfect trees
-        - Complete trees
         - Balanced trees
 - Prio 2: merge quizzes (files 01q, 01q2), perhaps move to another section?
 :::
@@ -124,19 +120,6 @@ Examples of restricted binary tree shapes:
 (b) is perfect and therefore both full and complete,
 and (c) is complete but not full.
 :::
-
-<!-- OPENDSA: START -->
-::: note
-*Note*: While these definitions for full and complete binary tree are the
-ones most commonly used, they are not universal. Because the common
-meaning of the words "full" and "complete" are quite similar,
-there is little that you can do to distinguish between them other
-than to memorise the definitions. Here is a memory aid that you
-might find useful: "Complete" is a wider word than "full", and
-complete binary trees tend to be wider than full binary trees
-because each level of a complete binary tree is as wide as possible.
-:::
-<!-- OPENDSA: END -->
 
 <!--
 
