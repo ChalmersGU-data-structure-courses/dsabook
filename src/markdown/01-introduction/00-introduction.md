@@ -1,3 +1,7 @@
+::: TODO
+- Prio 2: Add short reflections for all our data structures and algorithms, e.g. who invented it, when, and why
+:::
+
 # Introduction {#intro}
 
 ::: TODO
