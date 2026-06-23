@@ -41,13 +41,15 @@ If the value is not found, it returns the first empty position where it could ha
 Implementing a map instead of a set would be nearly identical,
 only with an additional value for each key.
 
-### Using a dynamic array
+### Resizing the internal array
 
 The code above does not work.
 When the array gets too filled it starts to take very long time to look up a position,
 as already discussed in @sec:hash-tables:resizing.
-To solve this we use a *dynamic array*, which we introduced in @sec:sequences:dynamic-arrays.
-However, contrary to stacks, hashsets and heaps, we cannot wait until the array is completely full --
+To solve this we have to resize it, in a similar way to how *dynamic arrays* work
+(see [@sec:sequences:dynamic-arrays;@sec:heaps:binary-heaps]),
+but there are two important differences:
+First, contrary to stacks, queues and binary heaps, we cannot wait until the array is completely full --
 instead we resize the array when the *load factor* exceeds a threshold:
 
     add(hashset, value):
@@ -58,9 +60,8 @@ instead we resize the array when the *load factor* exceeds a threshold:
         // Continue here like the add function above.
         ...
 
-A common mistake is to use the same resize operation as we did for stacks or heaps
-(see [@sec:sequences:dynamic-arrays;@sec:heaps:binary-heaps]),
-that is, to simply copy over values from the old to the new array.
+Second, we cannot use the same resize operation as normal dynamic arrays,
+that is, to simply copy over values from the old to the same position in the new array.
 But this does not work, because the *compression* function depends on the array size.
 Therefore we have to recalculate the table index before we add them to the new array.
 Easiest is to simply reuse the `add` operation above, like this:
