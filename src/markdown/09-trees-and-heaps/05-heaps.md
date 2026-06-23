@@ -40,34 +40,3 @@ The next question is how to implement heaps in a way that keeps operations effic
 In fact, there are several different heap structures, each with its own advantages and trade-offs.
 Examples include leftist heaps, skew heaps, Fibonacci heaps, binomial heaps, and 2-3 heaps, among others.
 Some of these structures are designed to support efficient merging of heaps, which will be discussed later in Section X.
-
-
-### Case study: Heapsort {#heaps:simple-heapsort}
-
-We can use a heap to implement a very simple sorting algorithm:
-
-1. Insert all elements from the unsorted array into a min-heap.
-2. Remove each element in turn from the heap, putting it in its right place in the original array.
-
-Since the heap returns the smallest elements first, they will be inserted in sorted order into the new array.
-Here is pseudocode:
-
-    naiveHeapsort(arr):
-        heap = new MinHeap()
-        for i in 0 .. arr.size-1:
-            heap.add(arr[i])
-        for i in 0 .. arr.size-1:
-            arr[i] = heap.removeMin()
-
-What is the time complexity of this algorithm?
-
-- We have two very similar for loops, iterating over the range of the array.
-- The body of each loop is logarithmic, so the total loop complexity is $O(n \log(n))$.
-
-So, we have two loops with linearithmic complexity, and therefore the algorithm is linearithmic too, $O(n \log(n))$.
-This means that `naiveHeapsort` is an efficient sorting algorithm.
-However, our algorithm has some disadvantages:
-
-- It is not in-place: we have to allocate $O(n)$ additional space for the heap.
-- Also, we saw in the previous section that we can build the heap both faster and in-place.
-- (That's why we call it `naiveHeapsort`, and now we will find out how to solve both of these problems.)
