@@ -1,9 +1,5 @@
 
-## Case study: Searching in an array {#intro:searching}
-
-::: TODO
-- Prio 3: (maybe) write the text on "Even faster searching"
-:::
+## Case study: Linear and binary search in arrays {#intro:searching}
 
 One of the most fundamental tasks that we use computers for is *searching*.
 We want to find an object that matches some criteria, in a collection of objects.
@@ -14,16 +10,16 @@ and how to find the data we are interested in.
 One way of storing a collection of objects is to put them in an array.
 So, assuming that we have an array of objects, how can we find a certain object in this array?
 
-### Sequential search {#intro:sequential-search}
+### Linear search {#intro:linear-search}
 
-Assume that you want to search for a particular book in a bookshelf,
-for example you want to find a book by a certain author.
-If the shelf is not sorted the only thing you can do is to
-go through each book at the time and see if it's the right one.
-This algorithm is called *sequential search*, because you look at each book in sequence.
-Here is a simple implementation:
+Suppose we are searching for a particular book in a bookshelf.
+If the shelf is not in any particular order, our only option is to
+look at each book and see if it is the one we are looking for.
+This algorithm is called *linear search*, and is the most straightforward
+way to search a collection.
+Here is a simple implementation for an array, written in pseudocode:
 
-    sequentialSearch(arr, key):
+    linearSearch(arr, key):
         for i in 0 .. arr.size - 1:     // For each element in the array:
             if arr[i] == key:           //     If we found the search key:
                 return i                //         return this position
@@ -33,102 +29,118 @@ Now imagine that the bookshelf is actually a whole library
 (the British Library has more than 200 million catalogued items).
 How long time will that take -- do I have to leave the computer running until tomorrow?
 
-<!-- OPENDSA: START -->
-Before we answer this we note that we do not really care exactly
-how long a particular program will run on a particular computer.
-We are more interested in some sort of estimate that will let us compare one approach with another.
-This is the basic idea of [algorithm analysis]{.term}.
+More interesting than the time it takes to search a particular bookshelf on a particular
+computer, is the question of how the time scales when the bookshelf is expanded,
+regardless of how fast the computer is. How does the search time change if we double
+the size of the bookshelf? Particularly, we are interested in the *worst case* time.
+A supremely lucky person may always find their book in the first slot they check
+(in the `linearSearch` function that would correspond to `arr[0] == key` always being true).
+The *worst case* is that we are searching for a book that is not in the shelf at all.
 
-In the case of sequential search, we see that if the value is in position $i$ of the array,
-then sequential search will have to look at $i$ values to find it.
-<!-- OPENDSA: END -->
-If the value is not in the array at all, then we must look at all array values
--- this is the [worst case]{.term} of the algorithm.
-Since the amount of work is proportional to the size of the array,
-we say that the worst case for sequential search has [linear cost](#linear-growth-rate){.term}.
-
-Note that sequential search is actually the best possible search algorithm
-if the array doesn't have a structure (or if we don't know how it is structured).
-But if the array is sorted, we can do much better.
+In the worst case, doubling the size of the bookshelf will double the search time.
+Thus, in linear search there is (suitably) a linear relationship between the size
+of the bookshelf and the search time. We say linear seach is a *linear time* algorithm.
 
 ### Binary search {#intro:binary-search}
 
-No library puts their books randomly in the shelves, because the sequential search algorithm is too slow.
-Instead the books are sorted in the shelves, for example by author name.
-And then we can use a much more effective algorithm, called [binary search]{.term}:
+No library puts their books randomly in shelves, because linear search is too slow.
+Instead, books are sorted in the shelves, for example alphabetically by author name
+then by title.
+Most people can intuitively use this order to search the whole bookshelf
+by looking at only a small fraction of the books. We implicitly make deductions like
+"since there are no books between Orwell and Owen, then there are no books by Osborne"
+and "since this book is by Plato, all books by Homer must be earlier in the shelf".
+The formalized algorithm that operates on these deductions is called [binary search]{.term},
+and it is a very common choice for a first algorithm to teach students, so you may have seen it before.
 
-- We start by looking at the middle book in the shelf, and compare it with what we're looking for:
-    - if the book is smaller, we know that the book we search for is to the left,
-    - if the book is larger, we know that the book we search for is to the right,
-    - or the book could be the right one, and then we're done!
-- So, by just comparing with one single book we can disregard half of the books in the shelf.
-- Now we continue by looking at the middle book of the remaining ones. This will remove half of these books. And so on.
+For the example of a book shelf alphabetically from left to right, binary search would be described as such:
+- Start by comparing the middle book in the shelf to the one we are looking for.
+    - if the middle book is the one we are looking for, our search is done!
+    - if we are searching for an alpabetically earlier book, search the left half of the shelf.
+    - otherwise search in right half.
+- Repeat this procedure for the left or right half, comparing to middle book of that half, and so on.
 
-(What do we mean with "the book is smaller"? It is just short for "the author name of the book comes before the author name we search for, in lexicographic order".)
+This procedure will end in one of two cases: We find the book we are looking for,
+or we end up searching an empty part of the bookshelf, and know that the book is not in the shelf.
 
-Assume now that we are searching in a big bookshelf, so there are 1000s of books in the shelf.
-After some iterations it can be difficult to remember which books are in the "active" interval.
-This can be solved by having two *markers* that we put between the books
--- one for marking the start of the interval, and one for marking the end.
-At every step we look at the middle book in the current interval,
-and depending on if the book is smaller or larger than the search key,
-we move either the start or the end marker to that position.
-This will reduce the size of the interval by half in each step.
+To make the description of this algorithm more precise, introduce the concept of a *search interval*.
+Initially our search interval is the entire bookshelf,
+and with each comparison we reduce the search interval to just the left or right half of the middle
+element.
+For instance we can go from the problem of searching among 51 books to the problem of searching
+25 books, by a single comparison with the middle one of the 51 books and excluding either half from
+the search interval.
+This is further reduced to searching among 12 books with another comparison. At that point we need to decide what
+we mean by the middle of 12 books, but at most we should have to search among 6 books in the next step.
+Ultimately we end up either finding the book we are looking for, or searching among 0 books, and in both
+cases we have the answer we were looking for.
 
-How do we implement this in a computer?
-Instead of a bookshelf and books, we have an array of elements.
-This array can consist of simple things such as numbers or strings,
-but it can also contain complex objects, for example information about books
-(including author, title, translator, publication year, edition, ISBN, number of pages, physical size, etc...).
-An array of complex objects can be sorted by different keys (such as author, title, physical size, ...),
-and we can only search for the same key that it is sorted after.
-So if the array is sorted by author, we cannot use binary search to search for a book title.
+This process of reducing a problem to a smaller instance of the same problem
+is a key concept in algorithm design.
+We can easily generalise the algorithm from searching book cases to searching
+in an ordered array of elements.
 
 ::: algorithm
 #### Algorithm: Binary search
 
-To search for a *key* in a given array,
-you start with an interval matching the who array.
-The repeat the following until *key* has been found, or the interval is empty:
+To find out if a *key* is in a given ordered array,
+start with an interval including the whole array.
+Repeat the following until *key* has been found, or the interval is empty:
 
-1. Compare *key* with the middle element in the interval.
-2. If *key* is equal, return the middle element.
-3. Set the interval to be lower or upper half,
-   depending on if *key* is smaller or larger than the middle element.
+1. Compare *key* with the middle element of the interval.
+2. If *key* is equal, return true, the key is in the array.
+3. Exclude the middle element and all elements before or after it from the interval,
+   depending on if the key is lesser or greater than the middle element.
 
+If the interval ends up empty, return false, the key is not in the array.
 :::
 
-Here is how you can implement the algorithm in pseudocode:
+To turn this algorithm into actual code, we need to decide how to represent the search interval
+in computer memory. The operation of excluding elements from the interval needs to be fast --
+ making a new smaller array is too slow. Instead we define the interval by the lower and
+upper indexes it includes, so $(10,24)$ would represent the interval from
+index 10 to and including index 24 (15 elements). The middle element is $(10+24)/2=17$ (rounding down
+when needed). Searching the lower half just means changeing the interval to $(10,16)$,
+and the upper half $(18,24)$.
+Here is an implementation of binary search that does not only say if the key is in the array,
+but also at which index it resides (or null if it is absent):
+
 
     binarySearch(arr, key):
-        start = 0                      // The marker pointing to the first element in the interval
-        end = arr.size - 1             // The marker pointing to the last element in the interval
+        start = 0                      // The index of the first element in the interval
+        end = arr.size - 1             // The index of the last element in the interval
         while start <= end:            // Continue until the interval is empty:
             mid = (start + end) / 2    //     Find the index of the middle value
             if arr[mid] < key:         //     Compare with the middle value in the interval:
                 start = mid + 1        //         The search key is in the upper half
             else if arr[mid] > key:
                 end = mid - 1          //         The search key is in the lower half
-            else:
+            else: // (here arr[mid]==key)
                 return mid             //         We found the search key!
         return null                    // The value is not in the array.
 
-An important implementation detail is how to implement the markers.
-Remember that we imagined them to be *between* two books -- how do we encode this in an algorithm?
-In the implementation above we decided to have the markers point at the first and last books in the interval
--- so the start marker is the array index of the first book in the interval,
-and the end marker is the index of the last book.
-(Another common option is to let the end marker point to the book *after* the last in the interval.)
+An important technical detail here is that `mid = (start + end) / 2`
+is understood to use integer division, so $(6+11)/2$ is $8$, not $8.5$.
+Consider how this implementation deals with corner cases, for instance when the
+search area has a single element ($start=end$). Or when it has two elements.
+Does it calculate $mid$ correctly and yield correct result in these cases?
 
-*Warning*: one very common error when implementing binary search is to make a copy of the interval you want to search
-(this is called a "slice" in many programming languages).
-For example, in Python if you write `arr[start:end]`, you will make a copy of the interval.
-Imagine that the interval consists of 1 million elements,
-then the computer has to allocate space for a new array with 1 million elements,
-and copy all of them from the original array to the new.
-This takes time and space and is just useless.
-It is similar to moving all the books in the interval to a new bookshelf after each iteration!
+In this particular implementation we use inclusive indexes, both $start$ and $end$ are inside the area.
+Another common option is to have $start$ be inclusive, and $end$ exclusive
+(so the starting interval is $(0,array.length)$).
+Yet another option is to have a start index and a size of the interval.
+Each variation would do slighly different calculations,
+but require the same fundamental building operations:
+Finding the middle element, and excluding the upper/lower half of the interval.
 
+
+
+There are many variations of binary search. If the array had books sorted by number
+of pages, we could use it to find books of a desired length, or even all books in
+a precise range of pages. Consider what would happen if the array was not ordered
+properly, can you construct a small example where the algorithm would go wrong?
+Also consider, could binary search be used to determine if an array
+contains a prime number?
 
 ::: dsvis
 Here is an illustration of the binary search algorithm.
@@ -139,25 +151,50 @@ Here is an illustration of the binary search algorithm.
 
 #### Running time of binary search
 
-How long time does it take to run binary search?
-The algorithm uses one single `while`-loop,
-and the body of the loop consists of a couple of basic calculations plus one `if`-clause.
-The time it takes to execute the loop body does not depend on the array size $n$ at all,
-meaning that it never takes longer that some fixed time to run.
-Therefore, the total running time of binary search is therefore proportional to the number of loop iterations.
+For linear search, in the worst case we have to look at all books in the bookshelf
+(all elements of the array). That means running time grows linearly with the size of the bookshelf.
+What is the corresponding worst case for binary search?
 
-So, how many times will we iterate the `while`-loop, in the worst case?
-We start with an interval of size $n$, and at each iteration we halve its size.
-The worst case is when the element is not in the array, because then we will continue halving the interval until it is empty.
-And since we can only halve the interval $\log_2(n)$ times before we reach the empty interval,
-the total running time of binary search is proportional to $\log_2(n)$.
+We can immediately see that it looks at much fewer books. The first comparison we do,
+looking at a single book, excludes half the bookshelf from the search interval.
+In fact, every comparison, or in the code -- every iteration of the `while`-loop,
+will reduce the size of the search interval by at least $50\%$.
+How many times can we integer divide a number $n$ by 2 before we reach 0?
+For $n=2^x$, the answer is $x+1$, so ignoring some rounding the answer is $x=\log_2(n)$.
 
-How does this compare with sequential search?
-If the array contains 1 million elements, we need to do $\log_2(10^6) \approx 20$ loop iterations
--- sequential search needs around 50,000 times more iterations.
-If the array contains the whole of British Library, 200 million elements,
-binary search needs $\log_2(2\cdot 10^8) \approx 28$ loop iterations
--- sequential search needs more than 7 million more iterations.
+We say that binary search is a *logarithmic time* algorithm, as opposed to
+linear search being linear time.
+For large collections, this difference is staggering. For a bookshelf with a million books,
+binary search requires us to look at 20 books worst case, instead of a million.
+For a staggeringly bookshelf of a billion books, binary search requires less than 30 comparisons,
+making it tens of millions times faster than a linear search.
+
+This example highlights a crucial insight about algorithms:
+Buying a computer that is twice as fast will reduce the time consumption of your task by half.
+Switching programming language to C from Python might yield a similar speedup.
+Both of those are nice, but switching from a linear time algorithm to a logarithmic one
+can reduce runtime by a factor of millions, reducing runtime from years to seconds.
+
+#### How is this related to data structures?
+
+Apart from introducing our first two algorithms (linear search and binary search),
+this section introduces a data structure: The sorted array.
+This data structure differers from from arbitrary arrays in what operations it supports,
+more than just the a ability to search quickly.
+
+Returning to the analogy of the bookshelf: If we have an unordered bookshelf,
+where we only ever do linear searches, we can add a new book by squeezing it in
+wherever there is room.
+We can also switch the order of two books if we please.
+
+If we have an ordered bookshelf, and want to keep using binary search on it,
+adding a new book requires careful consideration.
+There is only a single valid position for the new book to be placed,
+and we cannot swap existing books around.
+
+This touches on the subject of *invariants*, properties that must always hold on a data structure.
+Having an ordering invariant on an array affords us the luxury of efficient search, at the cost
+of having to *maintain* that invariant when performing modifications.
 
 <!--
 #### Variations

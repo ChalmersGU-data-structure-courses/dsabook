@@ -1,86 +1,58 @@
 
 ## Practical examples {#intro:examples}
 
-::: TODO
-- Prio 3: add a 4th example
-:::
-
 Here we list some real-world examples where data structures and algorithms are crucial.
 
-#### Example: Search engines
+#### Example: Searching texts
 
-Search engines like DuckDuckGo, Google and Bing help us search for web pages that match our queries.
-This is not possible to do by just searching through each web page at a turn,
-simply because there are so many web pages on the Internet.
-To be able to find relevant pages quickly, all search engines organise the relevant information using *search indexes*.
+Internet Search engines solve the problem of searching vast quantities of
+text for specified keywords (and then the separate problem of ranking
+these by relevance).
+Directly combing through billions of webpages on the Internet is not a realistic
+procedure for a search that needs to finish in microseconds. Instead, search engines
+employ sophisitcated data structures to efficiently access the information.
 
-Most of us use search engines every day without thinking about the incredible job they do.
-For example, searching for the term "binary search" in DuckDuckGo takes just a fraction of a second,
-and there are 100s of millions of matching web pages.
-
-Now imagine you are designing a search engine that must index billions of web pages.
-Each page has a unique address, called a Uniform Resource Locator (URL), and is associated with a set of keywords.
-When a user submits a search query, the engine must quickly find all the relevant pages.
-A simple list is not an efficient way to store and retrieve this information.
-With billions of pages, it is not practical to check each one in order.
-Even if looking at a single page takes only a millisecond, going through them all would take years.
-To handle this challenge, we need smart ways to store and search through the data.
-
-Let's consider a simpler version of this problem.
-Suppose we want to search for a book by a certain author in a big bookshelf.
-A basic approach would be to go through each book at a time until we find the right author.
-This works, but it becomes very slow as the number of books in the shelf grows larger.
-To improve efficiency, we can instead order the books alphabetically by author.
-Then, instead of scanning from the beginning, we can start by looking at the author of the middle book.
-If the book author is larger, we can exclude the upper half of the bookshelf,
-and if it is smaller we can exclude the lower half.
-In either case we have effectively reduced the search space by half in just one go.
-If our shelf contains one billion books, we would need only about 40 steps to find the right one.
-This search algorithm is called *binary search* and is the topic of the next section.
-
-Note that this is a very simplified model of a search engine.
-In reality, search engines do much more than just match keywords.
-They also rank pages by relevance and take many details into account,
-such as whether letters are uppercase or lowercase, and whether the user is combining terms with "and" or "or".
+A key concept for *search indexes*. Let's consider a simpler version of this problem:
+A collection of songs by different artists, and we want to search it
+either by artist or song title. If the collection is just
+a list, with new songs being added to the end of it, both these searches would be slow.
+Combining songs by the same artist could make searching for artists faster, but would
+not help us search for a title.
+Instead we can create two separate indexes: One with all songs ordered alphabetically by
+artist, and the second ordered by song title. Then anyone who knows the alphabet can quickly
+find any song or artist using a variant of the binary search algorithm (see @intro:searching).
 
 
-#### Example: Railway connections
+#### Example: Travel by train
 
-Europe has a big network of railways, and we would like to have a database that contains all the relevant information.
-This database should contain information about all railway stations, what tracks there are that connect them,
-how long each of these tracks are and if there are several tracks in parallel.
-It also needs to know all the timetables of all trains, including how large each train is,
-the seat numbers of all train carriages, which is first and second class, and which seats are grouped together with a table.
+The railroad is expanding to the frontier cities!
+Engineers want to build as little total rail length as possible, but still connect all cities.
+After the railway is constructed, travellers wants to find the fastest way of getting from
+city A to city B.
 
-The database must be *distributed* because each country has their own rail network,
-there are several different railway companies that operate in different countries,
-and all of them use the same tracks and stations.
-It must also be possible to update the timetable information quickly, for example to show information about delays.
+Both these problems can be modelled as graph problems, using a data structure where vertices (cities)
+are connected by edges (potential railroad tracks or train departures).
+Specifically, finding the smallest rail network is a *minimal spanning tree* problem (see @sec:graphs:MSTs)
+and travell planning is a *shortest path* problem (see @sec:graphs:shortest-path).
 
-Now, say that you want to travel from Paris, France, to Leksand, Sweden,
-and arrive in time to celebrate the traditional Swedish Midsummer festivities.
-To do this you want to search the database to find train connection so that you will arrive
-some time in the morning of Midsummer's eve.
-Finding appropriate train connections is an example of *shortest-path search* in a graph,
-and in addition the database needs to support *range queries* to make sure that we can arrive within a specified time range.
+#### Example: Simulating particles
 
-In this book you will learn the basics of how you can implement a database system like this,
-even though the are many specialised data structures and algorithms that we will not have time to cover.
+Simulating various physical systems is a common software application.
+Suppose we are modelling particles that can collide with other particle or
+with a physical boundary, causing a change of direction and speed, or perhaps
+randomly splitting the particle in two.
+For each particle we can calculate when its next collision will occur.
+
+To simulate the progression of this system, we can use a *priority queue* data structure
+(see @sec:ADTs:priority-queues) to store future collisions, and efficiently access them in
+the order they occur.
+When we calculate the outcome of a collision, we add new future collisions to the
+priority queue.
+
+This generalises into any system with timed events where there is a main loop that
+repeatedly finds the next event and executes it, possibly spawning new future events.
 
 
-#### Example: Job scheduling
-
-An operating system constantly runs many jobs in parallel,
-and it needs to know which jobs are more important and which are more resource intense.
-Every job should get a fair share of the resources, both the processor and the memory,
-and no job should take over from the others.
-But some jobs are more important than others, and they should be prioritised,
-but in the extreme so that all other jobs get stalled.
-Every now and then a job finishes, or a new job is started, and the operating system should handle this too.
-
-To be able to do this, the operating system needs information about each job, what resources it uses, and what is its priority.
-This is stored in a *priority queue*, which decides the next job to dedicate the attention to, when to change to another job,
-and how to update the priorities and other information.
 
 <!--
 

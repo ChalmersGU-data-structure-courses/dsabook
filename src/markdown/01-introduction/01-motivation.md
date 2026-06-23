@@ -46,11 +46,14 @@ it depends on the algorithm.
 
 <!-- This should be a new section since its not about motivation anymore. -->
 
-Most subjects in this book fall into one of four categories:
+## Core concepts
+
+The subjects in this book mostly fall into one of four categories:
 
 Data structures
 :   A data structure describes how we can *organise* our data so that it can be retrieved and updated efficiently.
     We explain the fundamental ideas of various data structures, and present the most common implementations.
+    Examples of data structures are *arrays* and *linked lists*.
 
 Abstract data types
 :   An abstract data type (ADT) decribes the *capabilities* of a data structure.
