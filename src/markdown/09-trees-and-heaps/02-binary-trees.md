@@ -3,10 +3,7 @@
 ::: TODO
 - Prio 1: update figures
 - Prio 2: update section, here's what should be included:
-    - General trees
     - Binary search trees (should it? There's a chapter 11 for that.)
-    - Properties
-        - Balanced trees
 - Prio 2: merge quizzes (files 01q, 01q2), perhaps move to another section?
 :::
 
@@ -28,20 +25,25 @@ This is illustrated below.
 The tree drawn on the left and the tree drawn on the right represent the same binary tree.
 The black dots make the empty subtrees explicit.
 
-![](images/Trees-BinaryTreeWithNulls.svg){width=70%}
+A binary tree is either empty or consists of a root node containing a value together with two ordered children, each of which is itself a binary tree.
+Because the children are ordered, we distinguish between the left child and the right child.
+Binary trees are often described as trees in which each node has at most two children.
+While this is correct, it can obscure an important detail: if a node has only one child, it matters whether that child is on the left or on the right.
+For this reason, it is often clearer to think of every node as having both a left subtree and a right subtree, with either subtree allowed to be empty. This idea is illustrated below.
 
-A node with two empty subtrees is called a *leaf node*.
-Non-leaf nodes are called *internal nodes*, or sometimes *branches*.
-In the illustration above, the nodes containing 5 and 6 are leaf nodes.
+![An example of a binary tree with nodes labeled by letters.](images/Trees-BinaryTreeExampleNulls.svg){width=80% #fig:example_bintree}
 
-![An example of a binary tree with nodes labeled by letters.](images/Trees-BinaryTreeExample.svg){width=60% #fig:example_bintree}
+The two drawings represent the same binary tree.
+In the left-hand drawing, the black dots make the empty subtrees explicit.
 
-@fig:example_bintree shows a binary tree that we will use as a running example.
-Study it and consider these questions:
+A node whose left and right subtrees are both empty is called a _leaf node_.
+Nodes that are not leaves are called _internal nodes_, or sometimes _branches_.
+In the figure above, the nodes containing `D`, `G`, `H`, and `I` are leaf nodes.
+
+We will use the binary tree in @fig:example_bintree as a running example throughout this chapter. Before continuing, take a moment to study it and consider the following questions:
 Which nodes are leaf nodes?
-How many empty subtrees are hidden in the picture?
 What is the path from node `A` to node `H`?
-
+These questions will help you become familiar with the terminology and structure of binary trees.
 
 <!--
 
