@@ -11,28 +11,33 @@ Built in classes like text strings typically have high quality hash functions,
 but user defined types require user defined hash functions.
 There is one required and several desirable properties of these hash functions:
 
-Consistency
-: The absolute requirement that equal values have equal hash codes.
-  Essentially, any pair values that should be considered the same key
+Preserves equality
+: This is the only absolute requirement: that equal values have equal hash codes.
+  Essentially, all values that should be considered the same key
   in our hash tables need to have the same hash code. What this means
-  in practice in languages like Java is that if you modify the equals
-  method of a class, you also need to modify its hash code function.
-  Neglecting to do this will mean that a hash set can contain multiple
+  in practice in languages like Java or Python is that if you modify
+  how to compare objects for equality, you also need to modify their hash functions.
+  Neglecting to do this will mean that a hash table can contain multiple
   copies of logically identical elements.
 
-Distribution
-: The simplest aspect of this is that the probablility of
-  two randomly selected values having the same hash code should be low.
-  Even if this condition is satisfied **TODO**.
+Uniform distribution
+: This means that all possible values should distribute evenly among all possible hash codes.
+  Or in other words, if you take two random values, it should be very very unlikely that they have the same hash code.
+
+Independence
+: This means in essence that it should not be possible to guess the hash code of a value
+  if you know the hash code of a similar value.
+  Or in other words, if the keys $x$ and $y$ are very similar,
+  and you happen to know $h(x)$, then you should not be able to guess $h(y)$.
 
 Efficiency
 : Hashing needs to be fast. Every time a lookup is performed,
   a value gets hashed, and every time a hash table is resized all keys must
   be rehashed as well. The computational cost of hashing can easily
   eclipse the cost of searching the table. One way of mitigating this,
-  especially for resizing, is for objects to cache the result of hashing:
-  The first time $h(x)$ is called the result is stored in $x$
-  and returned directly in subsequent calls on the same object.
+  especially for resizing, is to *cache* the result of hashing:
+  The first time $h(x)$ is called we store the calculated hash code inside $x$,
+  and in subsequent calls we can return the hash code directly without calculating.
 
 Designing good hash functions is hard, and there are many pitfalls where
 two perfectly reasonable-looking hash functions give wildly different
@@ -85,13 +90,16 @@ We can compute this hash code efficiently using Horner's method:
 Note how the multiplication of the old hash value by 31 distributes over the sum, increasing all previous
 exponents by 1. This hash function has several advantages:
 
-* It is fast, performing just a multiplication and an addition for each character.
+* It is quite fast, performing just a multiplication and an addition for each character.
 * It yields large numbers even for short strings. 31 is a five bit number, so
-  repeated multiplication quickly overflows a 32 bit integer. This prevents the
-  problem we saw earlier, where all email adresses hash codes in a small range.
-* A small change in any character of a string will tend to have a drastic impact on the hash code.
+  repeated multiplication quickly overflows a 32 bit integer.
+  Integer overflow is the same as taking modulo $2^32$, which improves *distribution*.
+* A small change in any character of a string will tend to have a drastic impact on the hash code,
+  which is good for *independence*.
 
 Other values for the base (instead of 31) are possible. 37 is another popular choice.
+The important thing is that it is a prime number.
+
 Using 32 on the other hand, would be devastating,
 completely ruining performance of hash tables in many common situations.
 The subtle reason for this is that $32^k \equiv 0 \pmod{2^{32}}$ for every $k \geq 7$.
@@ -104,10 +112,10 @@ Imagine what that would do to our email database,
 where most of the keys end with "ail.com", and thus get the same hash code.
 
 Horner's method is a popular way of hashing most types of compound objects.
-If we have a class with two instance variables $a$ and $b$, then we
-would have $h(x) = h(x.a)\cdot 31 + h(x.b)$.
+If we have a class with three instance variables $a$, $b$ and $c$, then we
+would have $h(x) = (h(x.a)\cdot 31 + h(x.b))\cdot 31 + h(x.c)$.
 
 There is much more to be said about writing hash functions, including technicalities
 of how to do it in various programming languages, but what we have demonstrated here
-is that while hashing is very easy in principle (just chop the value up into a number)
+is that although hashing is very easy in principle (just chop the value up into a number)
 there are plenty of pitfalls to avoid.

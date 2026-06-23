@@ -85,23 +85,18 @@ because an email is a string, not a number.
 We need to first reduce the string to an integer.
 This is exactly what a *hash function* does:
 it reduces an object $x$ (such as a string or a Java-object) to a fixed size number $h(x)$ (such as a 32-bit integer).
-The only absolute requirement is that hashing is *deterministic* and *preserves equality*,
+The only absolute requirement is that hashing *preserves equality*,
 meaning that equal objects must always hash to the same value.
 
 ::: example
 #### Invariant: Hash function
-A hash function $h$ must have the following properties:
-
-Deterministic
-:   $h(x)$ must never change depending on when it is calculated.
-
-Preserves equality
-:   If $x$ and $y$ compare equal, then $h(x)=h(y)$.
+A hash function $h$ must *preserve equality*:
+If $x$ and $y$ compare equal, then $h(x)=h(y)$.
 :::
 
-From these invariants we can already exclude some naive suggestions for hash functions:
+From this simple rule we can already exclude some naive suggestions for hash functions:
 
-- *Returning a random value*: this is not deterministics, because you get a different value every time.
+- *Returning a random value*: this does not preserve equality, because you get a different value every time.
 - *Returning the memory address* of the object: this does not preserve equality,
   because there can be two objects in different memory locations that are equal to each other.
 - *Returning a constant*, for example always returning 0: this is a valid hash function!
